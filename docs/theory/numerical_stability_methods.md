@@ -98,7 +98,7 @@ return state + dt * result.state_derivative
 - Poor accuracy for oscillatory dynamics
 - Prone to instability for fast eigenvalues
 
-#### 1.1.2 Runge-Kutta 4 (Fourth-Order)
+## 1.1.2 Runge-Kutta 4 (Fourth-Order)
 
 RK4 uses a four-stage algorithm for higher accuracy:
 
@@ -553,7 +553,7 @@ sat_sigma = saturate(sigma, eps_dyn, method=self.switch_method)
 u_robust = -self.K * sat_sigma - self.kd * sigma
 ```
 
-#### Gao's Reaching Law
+## Gao's Reaching Law
 
 To improve reaching time and reduce chattering, Gao (1995) proposed:
 
@@ -620,7 +620,7 @@ if abs(L_Minv_B) < self.eq_threshold:
 
 **Key insight:** Earlier versions used `epsilon` as the controllability threshold, conflating chattering reduction with controllability. Current design uses **separate threshold** (`eq_threshold = 0.05 * (k1 + k2)`).
 
-### 4.3 NumPy Validation Results
+## 4.3 NumPy Validation Results
 
 **Test 10: Discrete vs Continuous SMC**
 - Simulated pendulum swing-up with continuous-time SMC (ODE solver) vs discrete Euler
@@ -705,7 +705,7 @@ normalized_ranges = [r / (abs(b_min) + abs(b_max) + EPSILON_DIV)
                      for r, b_min, b_max in zip(ranges, bounds_min, bounds_max)]
 ```
 
-#### Adaptive Bounds Shrinking
+## Adaptive Bounds Shrinking
 
 During optimization, progressively narrow search space around best-known region:
 

@@ -2,40 +2,45 @@
 
 **Phase 1 of Complete Codebase Documentation Project**
 
----
+
 
 ## Executive Summary
 
 ### Overview
+
 Week 1 establishes the automation infrastructure and template system that will enable efficient documentation of all 316 Python source files in the DIP-SMC-PSO project.
 
 ### Timeline
+
 - **Duration**: 5-7 days
 - **Effort**: 8-10 hours
 - **Start Date**: TBD
 - **Target Completion**: Day 7
 
 ### Critical Success Factors
+
 ✅ Automation reduces manual documentation effort by 80%
 ✅ Template system ensures consistency across 450+ documentation pages
 ✅ Sphinx configuration supports embedded source code with line numbers
 ✅ Foundation enables rapid execution of Weeks 2-8
 
----
+
 
 ## Objectives
 
 ### Primary Objectives
+
 1. **Automation**: Create intelligent documentation generator script
 2. **Templates**: Design reusable documentation templates for modules/classes/functions
 3. **Configuration**: Configure Sphinx for advanced code embedding with literalinclude
 
 ### Secondary Objectives
+
 - Establish documentation quality standards
 - Create validation tools for documentation coverage
 - Build navigation structure for 14 modules
 
----
+
 
 ## Task Breakdown
 
@@ -129,6 +134,7 @@ Classical Sliding Mode Control implementation for DIP system.
 ```
 
 #### Implementation Steps
+
 1. [ ] Set up script skeleton with argparse CLI
 2. [ ] Implement AST parsing for Python files
 3. [ ] Create markdown template population logic
@@ -140,6 +146,7 @@ Classical Sliding Mode Control implementation for DIP system.
 9. [ ] Document script usage and examples
 
 #### Acceptance Criteria
+
 - [ ] Script successfully discovers all 316 Python files
 - [ ] Generates valid markdown with literalinclude directives
 - [ ] Creates 14 module index pages with navigation
@@ -148,7 +155,7 @@ Classical Sliding Mode Control implementation for DIP system.
 - [ ] Provides clear error messages for issues
 - [ ] Supports incremental regeneration
 
----
+
 
 ### Task 1.2: Create Documentation Templates
 
@@ -279,7 +286,7 @@ Classical Sliding Mode Control implementation for DIP system.
 {related_functions}
 ```
 
-#### Template Variables
+### Template Variables
 
 **Common Variables**:
 - `{module_name}`, `{class_name}`, `{function_name}`
@@ -293,6 +300,7 @@ Classical Sliding Mode Control implementation for DIP system.
 - `{algorithm_description}` → Semi-automated from comments
 
 #### Implementation Steps
+
 1. [ ] Create templates directory: `scripts/docs/templates/`
 2. [ ] Write module_template.md with all sections
 3. [ ] Write class_template.md with detailed structure
@@ -303,6 +311,7 @@ Classical Sliding Mode Control implementation for DIP system.
 8. [ ] Document template customization guidelines
 
 #### Acceptance Criteria
+
 - [ ] Templates cover all documentation needs
 - [ ] Variable substitution works correctly
 - [ ] Placeholders clearly marked for manual work
@@ -310,7 +319,7 @@ Classical Sliding Mode Control implementation for DIP system.
 - [ ] Example output looks professional
 - [ ] Templates validated with real module
 
----
+
 
 ### Task 1.3: Configure Sphinx for Code Embedding
 
@@ -338,7 +347,7 @@ extensions = [
 ]
 ```
 
-#### Configuration Changes
+## Configuration Changes
 
 **Syntax Highlighting**:
 ```python
@@ -386,7 +395,7 @@ html_context = {
 }
 ```
 
-#### HTML Theme Enhancements
+## HTML Theme Enhancements
 
 **Theme Configuration**:
 ```python
@@ -450,7 +459,8 @@ echo "Testing literalinclude directive..."
 \`\`\`
 ```
 
-#### Implementation Steps
+### Implementation Steps
+
 1. [ ] Update docs/conf.py with new extensions
 2. [ ] Configure Pygments syntax highlighting
 3. [ ] Set up literalinclude default options
@@ -462,6 +472,7 @@ echo "Testing literalinclude directive..."
 9. [ ] Document configuration for future reference
 
 #### Acceptance Criteria
+
 - [ ] All required extensions installed and enabled
 - [ ] Syntax highlighting works (Python code looks good)
 - [ ] Line numbers display correctly
@@ -471,11 +482,12 @@ echo "Testing literalinclude directive..."
 - [ ] No build warnings or errors
 - [ ] Test document renders correctly
 
----
+
 
 ## Dependencies & Prerequisites
 
 ### Software Requirements
+
 - **Python**: 3.9+ (current project requirement)
 - **Sphinx**: ≥5.0 (current version to verify)
 - **Python Packages**:
@@ -490,12 +502,14 @@ echo "Testing literalinclude directive..."
   ```
 
 ### Current Codebase State
+
 - **Total Python Files**: 316 files
 - **Module Count**: 14 modules
 - **Existing Documentation**: Partial (to be augmented)
 - **Current Sphinx Setup**: Operational (requires enhancement)
 
 ### File System Structure
+
 ```
 D:\Projects\main/
 ├── docs/
@@ -511,7 +525,7 @@ D:\Projects\main/
 └── ...
 ```
 
----
+
 
 ## Deliverables
 
@@ -563,11 +577,12 @@ D:\Projects\main/
    - Location: `docs/plans/documentation/progress.md`
    - Content: Completion checklist (0/316 files week 1)
 
----
+
 
 ## Success Criteria
 
 ### Quantitative Metrics
+
 - [ ] **316/316 files** discoverable by generator script
 - [ ] **14/14 module** index pages created
 - [ ] **100% literalinclude paths** validate successfully
@@ -576,6 +591,7 @@ D:\Projects\main/
 - [ ] **80% automation** (manual work reduced from ~160 hours to ~32 hours)
 
 ### Qualitative Metrics
+
 - [ ] Templates produce **consistent, professional** output
 - [ ] Generated docs are **immediately usable** (not just stubs)
 - [ ] Documentation build is **fast and reliable**
@@ -583,6 +599,7 @@ D:\Projects\main/
 - [ ] New developers can **understand and use** the system
 
 ### Validation Tests
+
 ```bash
 # Test 1: Generator discovers all files
 python scripts/docs/generate_code_docs.py --dry-run | grep "Found 316 Python files"
@@ -600,7 +617,7 @@ ls docs/reference/controllers/ | grep -E "index.md|classical|adaptive|sta"
 grep -r "literalinclude" docs/reference/ | wc -l  # Should be > 0
 ```
 
----
+
 
 ## Risk Mitigation
 
@@ -615,11 +632,12 @@ grep -r "literalinclude" docs/reference/ | wc -l  # Should be > 0
 | Generation script too slow | LOW | LOW | Implement caching, parallel processing |
 
 ### Contingency Plans
+
 1. **If AST parsing fails**: Use regex-based extraction as fallback
 2. **If Sphinx build breaks**: Roll back conf.py changes, debug incrementally
 3. **If automation insufficient**: Accept 70% automation, iterate in Week 2
 
----
+
 
 ## Timeline & Milestones
 
@@ -655,17 +673,19 @@ grep -r "literalinclude" docs/reference/ | wc -l  # Should be > 0
 ✅ **M4 (Day 5)**: End-to-end workflow validated
 ✅ **M5 (Day 7)**: Week 1 deliverables complete, Week 2 ready to start
 
----
+
 
 ## Handoff to Week 2
 
 ### Outputs for Week 2
+
 1. **Automation Tools**: Ready-to-use generator script
 2. **Template System**: Proven templates for controllers documentation
 3. **Sphinx Infrastructure**: Code embedding fully functional
 4. **Navigation Structure**: 14 module index pages with toctrees
 
 ### Week 2 Kickoff Checklist
+
 - [ ] Week 1 deliverables reviewed and approved
 - [ ] Generator script tested with controllers module
 - [ ] Template system validated with classical SMC controller
@@ -674,32 +694,36 @@ grep -r "literalinclude" docs/reference/ | wc -l  # Should be > 0
 - [ ] Theory sections identified for manual documentation
 
 ### Estimated Week 2 Effort
+
 - **Duration**: 10-14 days
 - **Effort**: 25-30 hours (reduced from ~40 hours due to automation)
 - **Focus**: Controllers module (highest priority)
 
----
+
 
 ## Notes & Considerations
 
 ### Automation Philosophy
+
 - **80/20 Rule**: Automate structure generation (80%), humans add insights (20%)
 - **Iteration**: Week 1 tools will improve based on Week 2 learnings
 - **Quality over Speed**: Better to have good templates than fast generation
 
 ### Documentation Style
+
 - **Conversational Tone**: Explain "why", not just "what"
 - **Complete Code**: Always show full source, never truncate
 - **Working Examples**: Every example must be runnable
 - **Mathematical Rigor**: Theory sections cite papers, show derivations
 
 ### Future Enhancements (Post-Week 1)
+
 - **AI-Assisted Explanations**: GPT-4 generates initial explanations
 - **Automatic Diagram Generation**: AST → UML class diagrams
 - **Cross-Reference Detection**: Automatic "See Also" sections
 - **Version Tracking**: Detect when code changes, flag stale docs
 
----
+
 
 ## Appendix
 
@@ -722,18 +746,20 @@ find docs/reference -name "*.md" | wc -l
 python scripts/docs/validate_code_docs.py --coverage-report
 ```
 
-### Reference Links
+## Reference Links
+
 - [Sphinx literalinclude directive](https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#directive-literalinclude)
 - [Pygments styles](https://pygments.org/styles/)
 - [MyST Parser (Markdown)](https://myst-parser.readthedocs.io/)
 - [Sphinx copybutton](https://sphinx-copybutton.readthedocs.io/)
 
 ### Contact & Support
+
 - **Project Lead**: See CLAUDE.md
 - **Documentation Issues**: GitHub Issues with `documentation` label
 - **Questions**: Check `docs/plans/documentation/README.md` first
 
----
+
 
 **Document Version**: 1.0
 **Last Updated**: 2025-10-03

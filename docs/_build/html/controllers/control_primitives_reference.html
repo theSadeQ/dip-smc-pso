@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="../">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -19,16 +19,16 @@
     margin-top: 0.5em;
 }
 </style>
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Complete Sliding Mode Control Mathematical Theory" href="../mathematical_foundations/smc_complete_theory.html" /><link rel="prev" title="SMC Controller Factory System Guide" href="factory_system_guide.html" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>Control Primitives Reference - DIP_SMC_PSO Documentation</title>
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Control Primitives Reference Double-Inverted Pendulum Sliding Mode Control - DIP_SMC_PSO Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f5a89ef9" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=8a7e329d" />
     
     
 
@@ -163,14 +163,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -180,8 +176,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -189,8 +184,7 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -198,8 +192,7 @@
         </button>
       </div>
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -207,7 +200,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
-  
   
   <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
   
@@ -219,254 +211,12 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">Theory Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">3. System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plant_model.html">1.x Plant Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
-<ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Controllers Module Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
-<li class="toctree-l2"><a class="reference internal" href="factory_system_guide.html">SMC Controller Factory System Guide</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Control Primitives Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../plant/models_guide.html">Plant Models Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../TESTING.html">Testing Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../test_protocols.html">5.x Test Protocols</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../context.html">2. Application Context</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference Documentation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography &amp; Academic References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../RELEASE_CHECKLIST.html">Release Checklist</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -492,13 +242,12 @@
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/controllers/control_primitives_reference.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/controllers/control_primitives_reference.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
 </div><div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -506,20 +255,17 @@
             </button>
           </div>
           <label class="toc-overlay-icon toc-content-icon" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section class="tex2jax_ignore mathjax_ignore" id="control-primitives-reference">
-<h1>Control Primitives Reference<a class="headerlink" href="#control-primitives-reference" title="Link to this heading">¶</a></h1>
-<p><strong>Double-Inverted Pendulum Sliding Mode Control</strong>
-<strong>Comprehensive Reference for Control Utilities and Primitives</strong></p>
+          <section class="tex2jax_ignore mathjax_ignore" id="control-primitives-reference-double-inverted-pendulum-sliding-mode-control">
+<h1>Control Primitives Reference <strong>Double-Inverted Pendulum Sliding Mode Control</strong><a class="headerlink" href="#control-primitives-reference-double-inverted-pendulum-sliding-mode-control" title="Link to this heading">¶</a></h1>
+<p><strong>Reference for Control Utilities and Primitives</strong></p>
 <hr class="docutils" />
-<section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
-<ol class="arabic simple">
-<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
+<section id="table-of-contents-1-overview">
+<h2>Table of Contents 1. <a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a><a class="headerlink" href="#table-of-contents-1-overview" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple" start="2">
 <li><p><a class="reference internal" href="#saturation-functions"><span class="xref myst">Saturation Functions</span></a></p></li>
 <li><p><a class="reference internal" href="#control-output-structures"><span class="xref myst">Control Output Structures</span></a></p></li>
 <li><p><a class="reference internal" href="#parameter-validation"><span class="xref myst">Parameter Validation</span></a></p></li>
@@ -529,851 +275,323 @@
 </ol>
 </section>
 <hr class="docutils" />
-<section id="overview">
-<h2>1. Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<section id="purpose">
-<h3>1.1 Purpose<a class="headerlink" href="#purpose" title="Link to this heading">¶</a></h3>
-<p>Control primitives provide foundational utilities for implementing robust sliding mode controllers:</p>
+<section id="overview-1-1-purpose-control-primitives-provide-foundational-utilities-for-implementing-robust-sliding-mode-controllers-saturation-functions-continuous-approximations-of-sign-function-for-chattering-reduction">
+<h2>1. Overview ### 1.1 Purpose Control primitives provide foundational utilities for implementing robust sliding mode controllers: - <strong>Saturation Functions</strong>: Continuous approximations of sign function for chattering reduction<a class="headerlink" href="#overview-1-1-purpose-control-primitives-provide-foundational-utilities-for-implementing-robust-sliding-mode-controllers-saturation-functions-continuous-approximations-of-sign-function-for-chattering-reduction" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Saturation Functions</strong>: Continuous approximations of sign function for chattering reduction</p></li>
 <li><p><strong>Control Outputs</strong>: Structured return types for controller interfaces</p></li>
 <li><p><strong>Parameter Validation</strong>: Type-safe parameter checking for stability</p></li>
-<li><p><strong>Numerical Stability</strong>: Safe mathematical operations with epsilon protection</p></li>
+<li><p><strong>Numerical Stability</strong>: Safe mathematical operations with epsilon protection ### 1.2 Module Organization ```
+src/utils/
+├── control/
+│ ├── <a class="reference external" href="http://saturation.py">saturation.py</a> # Saturation and smoothing functions
+│ └── <strong>init</strong>.py
+├── types/
+│ ├── control_outputs.py # Structured output types
+│ └── <strong>init</strong>.py
+├── validation/
+│ ├── parameter_validators.py # Parameter checking
+│ └── <strong>init</strong>.py
+└── numerical_stability/ ├── safe_operations.py # Numerically stable math └── <strong>init</strong>.py</p></li>
 </ul>
-</section>
-<section id="module-organization">
-<h3>1.2 Module Organization<a class="headerlink" href="#module-organization" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span>
-<span class="err">├──</span> <span class="n">control</span><span class="o">/</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">saturation</span><span class="o">.</span><span class="n">py</span>           <span class="c1"># Saturation and smoothing functions</span>
-<span class="err">│</span>   <span class="err">└──</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
-<span class="err">├──</span> <span class="n">types</span><span class="o">/</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">control_outputs</span><span class="o">.</span><span class="n">py</span>      <span class="c1"># Structured output types</span>
-<span class="err">│</span>   <span class="err">└──</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
-<span class="err">├──</span> <span class="n">validation</span><span class="o">/</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">parameter_validators</span><span class="o">.</span><span class="n">py</span> <span class="c1"># Parameter checking</span>
-<span class="err">│</span>   <span class="err">└──</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
-<span class="err">└──</span> <span class="n">numerical_stability</span><span class="o">/</span>
-    <span class="err">├──</span> <span class="n">safe_operations</span><span class="o">.</span><span class="n">py</span>      <span class="c1"># Numerically stable math</span>
-    <span class="err">└──</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
+
+<span class="c1">## 2. Saturation Functions ### 2.1 Core Saturation Function **Location:** `src/utils/control/saturation.py` ```python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false def saturate( sigma: Union[float, np.ndarray], epsilon: float, method: Literal[&quot;tanh&quot;, &quot;linear&quot;] = &quot;tanh&quot;, slope: float = 3.0</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span> <span class="s2">&quot;&quot;&quot;Continuous approximation of sign(sigma) within a boundary layer. Args: sigma: Sliding surface value(s) epsilon: Boundary-layer half-width (must be &gt; 0) method: &quot;tanh&quot; (default) or &quot;linear&quot; slope: Slope parameter for tanh switching (default: 3.0) Returns: Continuous switching signal &quot;&quot;&quot;</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Mathematical</span> <span class="n">Foundation</span><span class="p">:</span><span class="o">**</span> <span class="o">**</span><span class="n">Tanh</span> <span class="n">Method</span> <span class="p">(</span><span class="n">Recommended</span><span class="p">):</span><span class="o">**</span>
+
 </pre></div>
 </div>
+<p>sat(σ) = tanh(σ / (ε · slope)) where:</p>
+<ul class="simple">
+<li><p>ε: Boundary layer width</p></li>
+<li><p>slope: Transition smoothness (lower = smoother)</p></li>
+<li><p>Range: sat(σ) ∈ [-1, 1]</p></li>
+</ul>
+<div class="highlight-**Linear notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>sat(σ) = clip(σ/ε, -1, 1) = { -1 if σ &lt; -ε σ/ε if -ε ≤ σ ≤ ε 1 if σ &gt; ε
+}
+<code class="docutils literal notranslate"><span class="pre">**Usage</span> <span class="pre">Example:**</span></code>python</p>
+<p>from src.utils.control import saturate # Classical SMC control law
+sigma = lambda1 * theta1 + lambda2 * theta2 + k1 * dtheta1 + k2 * dtheta2
+u_switch = -K * saturate(sigma, epsilon=0.01, method=’tanh’, slope=3.0)
+u_damping = -kd * saturate(sigma, epsilon=0.01, method=’tanh’, slope=3.0)
+u = u_switch + u_damping</p>
+<div class="highlight-**Slope notranslate"><div class="highlight"><pre><span></span>|-------------|------------|------------|-------------------|
+| 1.0 - 2.0 | Very smooth | Minimal | Moderate |
+| 3.0 (default) | Balanced | Low | Good |
+| 5.0 - 10.0 | Steep | Higher | | **Design Note (Issue #12 Fix):**
+- Original implementation used implicit steep slope (≈10), behaving like discontinuous sign function
+- Enhanced version uses configurable slope (default: 3.0) for better chattering reduction
+- Lower slope values provide gentler transitions at cost of slightly reduced tracking accuracy ### 2.2 Smooth Sign Function ```python
+def smooth_sign( x: Union[float, np.ndarray], epsilon: float = 0.01
+) -&gt; Union[float, np.ndarray]: &quot;&quot;&quot;Smooth approximation of the sign function using tanh. Convenience wrapper for saturate() with tanh method. &quot;&quot;&quot;
+``` **Mathematical Definition:**
+
+</pre></div>
+</div>
+<p>smooth_sign(x) = tanh(x/ε) Limits:</p>
+<ul class="simple">
+<li><p>smooth_sign(x) → 1 as x → +∞</p></li>
+<li><p>smooth_sign(x) → -1 as x → -∞</p></li>
+<li><p>smooth_sign(0) = 0
+<code class="docutils literal notranslate"><span class="pre">**Usage:**</span></code>python</p></li>
+</ul>
+<p>from src.utils.control import smooth_sign # Continuous sign approximation
+sigma = compute_sliding_surface(state)
+switch_signal = -K * smooth_sign(sigma, epsilon=0.02)
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">2.3</span> <span class="pre">Dead</span> <span class="pre">Zone</span> <span class="pre">Function</span></code>python</p>
 </section>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-metadata">
+<h1>example-metadata:<a class="headerlink" href="#example-metadata" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-def-dead-zone-x-union-float-np-ndarray-threshold-float">
+<h1>runnable: false def dead_zone( x: Union[float, np.ndarray], threshold: float<a class="headerlink" href="#runnable-false-def-dead-zone-x-union-float-np-ndarray-threshold-float" title="Link to this heading">¶</a></h1>
+<p>) -&gt; Union[float, np.ndarray]: “””Apply dead zone to input signal. Args: x: Input signal threshold: Dead zone threshold (must be positive) Returns: Signal with dead zone applied “””</p>
+<div class="highlight-**Mathematical notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>dead_zone(x, τ) = { 0 if |x| ≤ τ x - τ·sign(x) if |x| &gt; τ
+} where τ is the dead zone threshold.</p>
+<div class="highlight-**Purpose:** notranslate"><div class="highlight"><pre><span></span>
+- **Adaptive SMC**: Freeze gain adaptation inside dead zone to prevent drift
+- **Integral Control**: Prevent integral windup near equilibrium
+- **Chattering Reduction**: Disable switching inside small neighborhood **Usage Example (Adaptive SMC):** ```python
+from src.utils.control import dead_zone # Adaptive gain update with dead zone
+sigma = compute_sliding_surface(state) if abs(sigma) &lt;= self.dead_zone: dK = 0.0 # Freeze adaptation
+else: sigma_active = dead_zone(sigma, self.dead_zone) dK = self.gamma * abs(sigma_active) - self.leak_rate * (K - K_init)
+</pre></div>
+</div>
 <hr class="docutils" />
-<section id="saturation-functions">
-<h2>2. Saturation Functions<a class="headerlink" href="#saturation-functions" title="Link to this heading">¶</a></h2>
-<section id="core-saturation-function">
-<h3>2.1 Core Saturation Function<a class="headerlink" href="#core-saturation-function" title="Link to this heading">¶</a></h3>
-<p><strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/control/saturation.py</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">saturate</span><span class="p">(</span>
-    <span class="n">sigma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
-    <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">method</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;tanh&quot;</span><span class="p">,</span> <span class="s2">&quot;linear&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;tanh&quot;</span><span class="p">,</span>
-    <span class="n">slope</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Continuous approximation of sign(sigma) within a boundary layer.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        sigma: Sliding surface value(s)</span>
-<span class="sd">        epsilon: Boundary-layer half-width (must be &gt; 0)</span>
-<span class="sd">        method: &quot;tanh&quot; (default) or &quot;linear&quot;</span>
-<span class="sd">        slope: Slope parameter for tanh switching (default: 3.0)</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Continuous switching signal</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-<p><strong>Mathematical Foundation:</strong></p>
-<p><strong>Tanh Method (Recommended):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sat</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="o">=</span> <span class="n">tanh</span><span class="p">(</span><span class="n">σ</span> <span class="o">/</span> <span class="p">(</span><span class="n">ε</span> <span class="err">·</span> <span class="n">slope</span><span class="p">))</span>
-
-<span class="n">where</span><span class="p">:</span>
-<span class="o">-</span> <span class="n">ε</span><span class="p">:</span> <span class="n">Boundary</span> <span class="n">layer</span> <span class="n">width</span>
-<span class="o">-</span> <span class="n">slope</span><span class="p">:</span> <span class="n">Transition</span> <span class="n">smoothness</span> <span class="p">(</span><span class="n">lower</span> <span class="o">=</span> <span class="n">smoother</span><span class="p">)</span>
-<span class="o">-</span> <span class="n">Range</span><span class="p">:</span> <span class="n">sat</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="err">∈</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-<p><strong>Linear Method (Piecewise):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sat</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="n">σ</span><span class="o">/</span><span class="n">ε</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="o">-</span><span class="mi">1</span>        <span class="k">if</span> <span class="n">σ</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">ε</span>
-    <span class="n">σ</span><span class="o">/</span><span class="n">ε</span>       <span class="k">if</span> <span class="o">-</span><span class="n">ε</span> <span class="err">≤</span> <span class="n">σ</span> <span class="err">≤</span> <span class="n">ε</span>
-    <span class="mi">1</span>         <span class="k">if</span> <span class="n">σ</span> <span class="o">&gt;</span> <span class="n">ε</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><strong>Usage Example:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.control</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>
-
-<span class="c1"># Classical SMC control law</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="n">lambda1</span> <span class="o">*</span> <span class="n">theta1</span> <span class="o">+</span> <span class="n">lambda2</span> <span class="o">*</span> <span class="n">theta2</span> <span class="o">+</span> <span class="n">k1</span> <span class="o">*</span> <span class="n">dtheta1</span> <span class="o">+</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">dtheta2</span>
-<span class="n">u_switch</span> <span class="o">=</span> <span class="o">-</span><span class="n">K</span> <span class="o">*</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
-<span class="n">u_damping</span> <span class="o">=</span> <span class="o">-</span><span class="n">kd</span> <span class="o">*</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
-<span class="n">u</span> <span class="o">=</span> <span class="n">u_switch</span> <span class="o">+</span> <span class="n">u_damping</span>
-</pre></div>
-</div>
-<p><strong>Slope Parameter Tuning:</strong></p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Slope Value</p></th>
-<th class="head"><p>Transition</p></th>
-<th class="head"><p>Chattering</p></th>
-<th class="head"><p>Tracking Accuracy</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>1.0 - 2.0</p></td>
-<td><p>Very smooth</p></td>
-<td><p>Minimal</p></td>
-<td><p>Moderate</p></td>
-</tr>
-<tr class="row-odd"><td><p>3.0 (default)</p></td>
-<td><p>Balanced</p></td>
-<td><p>Low</p></td>
-<td><p>Good</p></td>
-</tr>
-<tr class="row-even"><td><p>5.0 - 10.0</p></td>
-<td><p>Steep</p></td>
-<td><p>Higher</p></td>
-<td><p>Excellent</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>Design Note (Issue #12 Fix):</strong></p>
+<section id="control-output-structures-location-src-utils-types-control-outputs-py-3-1-overview-all-controllers-return-namedtuple-instances-instead-of-bare-tuples-for-type-safety-explicit-attribute-names-prevent-misuse">
+<h2>3. Control Output Structures <strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/types/control_outputs.py</span></code> ### 3.1 Overview All controllers return <strong>NamedTuple</strong> instances instead of bare tuples for: - <strong>Type safety</strong>: Explicit attribute names prevent misuse<a class="headerlink" href="#control-output-structures-location-src-utils-types-control-outputs-py-3-1-overview-all-controllers-return-namedtuple-instances-instead-of-bare-tuples-for-type-safety-explicit-attribute-names-prevent-misuse" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>Original implementation used implicit steep slope (≈10), behaving like discontinuous sign function</p></li>
-<li><p>Enhanced version uses configurable slope (default: 3.0) for better chattering reduction</p></li>
-<li><p>Lower slope values provide gentler transitions at cost of slightly reduced tracking accuracy</p></li>
-</ul>
-</section>
-<section id="smooth-sign-function">
-<h3>2.2 Smooth Sign Function<a class="headerlink" href="#smooth-sign-function" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">smooth_sign</span><span class="p">(</span>
-    <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
-    <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Smooth approximation of the sign function using tanh.</span>
-
-<span class="sd">    Convenience wrapper for saturate() with tanh method.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-<p><strong>Mathematical Definition:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">smooth_sign</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">ε</span><span class="p">)</span>
-
-<span class="n">Limits</span><span class="p">:</span>
-<span class="o">-</span> <span class="n">smooth_sign</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="err">→</span> <span class="mi">1</span> <span class="k">as</span> <span class="n">x</span> <span class="err">→</span> <span class="o">+</span><span class="err">∞</span>
-<span class="o">-</span> <span class="n">smooth_sign</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="err">→</span> <span class="o">-</span><span class="mi">1</span> <span class="k">as</span> <span class="n">x</span> <span class="err">→</span> <span class="o">-</span><span class="err">∞</span>
-<span class="o">-</span> <span class="n">smooth_sign</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span>
-</pre></div>
-</div>
-<p><strong>Usage:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.control</span><span class="w"> </span><span class="kn">import</span> <span class="n">smooth_sign</span>
-
-<span class="c1"># Continuous sign approximation</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-<span class="n">switch_signal</span> <span class="o">=</span> <span class="o">-</span><span class="n">K</span> <span class="o">*</span> <span class="n">smooth_sign</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="dead-zone-function">
-<h3>2.3 Dead Zone Function<a class="headerlink" href="#dead-zone-function" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">dead_zone</span><span class="p">(</span>
-    <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
-    <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply dead zone to input signal.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        x: Input signal</span>
-<span class="sd">        threshold: Dead zone threshold (must be positive)</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Signal with dead zone applied</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-<p><strong>Mathematical Definition:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dead_zone</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">τ</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="mi">0</span>                 <span class="k">if</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="err">≤</span> <span class="n">τ</span>
-    <span class="n">x</span> <span class="o">-</span> <span class="n">τ·sign</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>     <span class="k">if</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="o">&gt;</span> <span class="n">τ</span>
-<span class="p">}</span>
-
-<span class="n">where</span> <span class="n">τ</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">dead</span> <span class="n">zone</span> <span class="n">threshold</span><span class="o">.</span>
-</pre></div>
-</div>
-<p><strong>Purpose:</strong></p>
-<ul class="simple">
-<li><p><strong>Adaptive SMC</strong>: Freeze gain adaptation inside dead zone to prevent drift</p></li>
-<li><p><strong>Integral Control</strong>: Prevent integral windup near equilibrium</p></li>
-<li><p><strong>Chattering Reduction</strong>: Disable switching inside small neighborhood</p></li>
-</ul>
-<p><strong>Usage Example (Adaptive SMC):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.control</span><span class="w"> </span><span class="kn">import</span> <span class="n">dead_zone</span>
-
-<span class="c1"># Adaptive gain update with dead zone</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead_zone</span><span class="p">:</span>
-    <span class="n">dK</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># Freeze adaptation</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">sigma_active</span> <span class="o">=</span> <span class="n">dead_zone</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead_zone</span><span class="p">)</span>
-    <span class="n">dK</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma_active</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">leak_rate</span> <span class="o">*</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="n">K_init</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="control-output-structures">
-<h2>3. Control Output Structures<a class="headerlink" href="#control-output-structures" title="Link to this heading">¶</a></h2>
-<p><strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/types/control_outputs.py</span></code></p>
-<section id="id1">
-<h3>3.1 Overview<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
-<p>All controllers return <strong>NamedTuple</strong> instances instead of bare tuples for:</p>
-<ul class="simple">
-<li><p><strong>Type safety</strong>: Explicit attribute names prevent misuse</p></li>
 <li><p><strong>Backwards compatibility</strong>: NamedTuple inherits from tuple</p></li>
 <li><p><strong>Documentation</strong>: Clear contracts between caller and callee</p></li>
-<li><p><strong>IDE support</strong>: Autocomplete and type checking</p></li>
+<li><p><strong>IDE support</strong>: Autocomplete and type checking ### 3.2 Classical SMC Output ```python</p></li>
 </ul>
 </section>
-<section id="classical-smc-output">
-<h3>3.2 Classical SMC Output<a class="headerlink" href="#classical-smc-output" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMCOutput</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return type for ClassicalSMC.compute_control().</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        u: Saturated control input (N)</span>
-<span class="sd">        state: Internal controller state (empty tuple for stateless)</span>
-<span class="sd">        history: History dictionary for debugging/plotting</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">u</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">state</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
-    <span class="n">history</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
-</pre></div>
-</div>
-<p><strong>Usage:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.classic_smc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicalSMC</span>
-
-<span class="n">controller</span> <span class="o">=</span> <span class="n">ClassicalSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">max_force</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{})</span>
-
-<span class="c1"># Access via attributes</span>
-<span class="n">control_input</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">u</span>
-<span class="n">controller_state</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">state</span>
-<span class="n">debug_info</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">history</span>
-
-<span class="c1"># Backwards-compatible tuple unpacking</span>
-<span class="n">u</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">result</span>
-</pre></div>
-</div>
 </section>
-<section id="adaptive-smc-output">
-<h3>3.3 Adaptive SMC Output<a class="headerlink" href="#adaptive-smc-output" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveSMCOutput</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return type for AdaptiveSMC.compute_control().</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        u: Saturated control input (N)</span>
-<span class="sd">        state: Updated adaptation states (e.g., K_adaptive)</span>
-<span class="sd">        history: History dictionary</span>
-<span class="sd">        sigma: Current sliding surface value</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">u</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">state</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
-    <span class="n">history</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
-    <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span>
-</pre></div>
-</div>
-<p><strong>Key Feature:</strong> Exposes <code class="docutils literal notranslate"><span class="pre">sigma</span></code> to monitor sliding mode convergence without re-computation.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.adaptive_smc</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdaptiveSMC</span>
-
-<span class="n">controller</span> <span class="o">=</span> <span class="n">AdaptiveSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{})</span>
-
-<span class="c1"># Monitor sliding surface convergence</span>
-<span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reached sliding surface&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>example-metadata:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 </section>
-<section id="super-twisting-smc-output">
-<h3>3.4 Super-Twisting SMC Output<a class="headerlink" href="#super-twisting-smc-output" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">STAOutput</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return type for SuperTwistingSMC.compute_control().</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        u: Bounded control input (N)</span>
-<span class="sd">        state: Auxiliary integrator states (z, sigma)</span>
-<span class="sd">        history: History dictionary</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">u</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">state</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
-    <span class="n">history</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
-</pre></div>
-</div>
-<p><strong>State Management:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.sta_smc</span><span class="w"> </span><span class="kn">import</span> <span class="n">SuperTwistingSMC</span>
-
-<span class="n">controller</span> <span class="o">=</span> <span class="n">SuperTwistingSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-
-<span class="c1"># Initialize state</span>
-<span class="n">z_prev</span><span class="p">,</span> <span class="n">sigma_prev</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
-
-<span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">simulation_loop</span><span class="p">:</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">(</span><span class="n">z_prev</span><span class="p">,</span> <span class="n">sigma_prev</span><span class="p">),</span> <span class="p">{})</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">u</span>
-    <span class="n">z_prev</span><span class="p">,</span> <span class="n">sigma_prev</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">state</span>  <span class="c1"># Update auxiliary states</span>
-</pre></div>
-</div>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-class-classicalsmcoutput-namedtuple-return-type-for-classicalsmc-compute-control-attributes-u-saturated-control-input-n-state-internal-controller-state-empty-tuple-for-stateless-history-history-dictionary-for-debugging-plotting-u-float-state-tuple-any-history-dict-str-any">
+<h1>runnable: false class ClassicalSMCOutput(NamedTuple): “””Return type for ClassicalSMC.compute_control(). Attributes: u: Saturated control input (N) state: Internal controller state (empty tuple for stateless) history: History dictionary for debugging/plotting “”” u: float state: Tuple[Any, …] history: Dict[str, Any]<a class="headerlink" href="#runnable-false-class-classicalsmcoutput-namedtuple-return-type-for-classicalsmc-compute-control-attributes-u-saturated-control-input-n-state-internal-controller-state-empty-tuple-for-stateless-history-history-dictionary-for-debugging-plotting-u-float-state-tuple-any-history-dict-str-any" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">**Usage:**</span></code>python</p>
+<p>from src.controllers.classic_smc import ClassicalSMC controller = ClassicalSMC(gains=[10, 8, 15, 12, 50, 5], max_force=100, boundary_layer=0.01)
+result = controller.compute_control(state, (), {}) # Access via attributes
+control_input = result.u
+controller_state = result.state
+debug_info = result.history # Backwards-compatible tuple unpacking
+u, state, history = result
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">3.3</span> <span class="pre">Adaptive</span> <span class="pre">SMC</span> <span class="pre">Output</span></code>python</p>
 </section>
-<section id="hybrid-adaptive-sta-smc-output">
-<h3>3.5 Hybrid Adaptive-STA SMC Output<a class="headerlink" href="#hybrid-adaptive-sta-smc-output" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1>example-metadata:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-class-adaptivesmcoutput-namedtuple-return-type-for-adaptivesmc-compute-control-attributes-u-saturated-control-input-n-state-updated-adaptation-states-e-g-k-adaptive-history-history-dictionary-sigma-current-sliding-surface-value-u-float-state-tuple-float-history-dict-str-any-sigma-float">
+<h1>runnable: false class AdaptiveSMCOutput(NamedTuple): “””Return type for AdaptiveSMC.compute_control(). Attributes: u: Saturated control input (N) state: Updated adaptation states (e.g., K_adaptive) history: History dictionary sigma: Current sliding surface value “”” u: float state: Tuple[float, …] history: Dict[str, Any] sigma: float<a class="headerlink" href="#runnable-false-class-adaptivesmcoutput-namedtuple-return-type-for-adaptivesmc-compute-control-attributes-u-saturated-control-input-n-state-updated-adaptation-states-e-g-k-adaptive-history-history-dictionary-sigma-current-sliding-surface-value-u-float-state-tuple-float-history-dict-str-any-sigma-float" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">**Key</span> <span class="pre">Feature:**</span> <span class="pre">Exposes</span> <span class="pre">`sigma`</span> <span class="pre">to</span> <span class="pre">monitor</span> <span class="pre">sliding</span> <span class="pre">mode</span> <span class="pre">convergence</span> <span class="pre">without</span> <span class="pre">re-computation.</span> <span class="pre">**Usage:**</span></code>python</p>
+<p>from src.controllers.adaptive_smc import AdaptiveSMC controller = AdaptiveSMC(gains=[25, 18, 15, 10, 4], dt=0.01, max_force=100)
+result = controller.compute_control(state, (), {}) # Monitor sliding surface convergence
+if abs(result.sigma) &lt; 0.01: print(“Reached sliding surface”)
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">3.4</span> <span class="pre">Super-Twisting</span> <span class="pre">SMC</span> <span class="pre">Output</span></code>python</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id3">
+<h1>example-metadata:<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-class-staoutput-namedtuple-return-type-for-supertwistingsmc-compute-control-attributes-u-bounded-control-input-n-state-auxiliary-integrator-states-z-sigma-history-history-dictionary-u-float-state-tuple-float-history-dict-str-any">
+<h1>runnable: false class STAOutput(NamedTuple): “””Return type for SuperTwistingSMC.compute_control(). Attributes: u: Bounded control input (N) state: Auxiliary integrator states (z, sigma) history: History dictionary “”” u: float state: Tuple[float, …] history: Dict[str, Any]<a class="headerlink" href="#runnable-false-class-staoutput-namedtuple-return-type-for-supertwistingsmc-compute-control-attributes-u-bounded-control-input-n-state-auxiliary-integrator-states-z-sigma-history-history-dictionary-u-float-state-tuple-float-history-dict-str-any" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">**State</span> <span class="pre">Management:**</span></code>python</p>
+<p>from src.controllers.sta_smc import SuperTwistingSMC controller = SuperTwistingSMC(gains=[25, 15, 20, 12, 8, 6], dt=0.01, max_force=100) # Initialize state
+z_prev, sigma_prev = 0.0, 0.0 for t, state in simulation_loop: result = controller.compute_control(state, (z_prev, sigma_prev), {}) u = result.u z_prev, sigma_prev = result.state # Update auxiliary states
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">3.5</span> <span class="pre">Hybrid</span> <span class="pre">Adaptive-STA</span> <span class="pre">SMC</span> <span class="pre">Output</span></code>python</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id4">
+<h1>example-metadata:<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-class-hybridstaoutput-namedtuple-return-type-for-hybridadaptivestasmc-compute-control-attributes-u-saturated-control-input-n-state-adaptive-gains-and-integral-state-k1-k2-u-int-history-history-dictionary-sigma-current-sliding-surface-value-u-float-state-tuple-float-history-dict-str-any-sigma-float">
+<h1>runnable: false class HybridSTAOutput(NamedTuple): “””Return type for HybridAdaptiveSTASMC.compute_control(). Attributes: u: Saturated control input (N) state: Adaptive gains and integral state (k1, k2, u_int) history: History dictionary sigma: Current sliding surface value “”” u: float state: Tuple[float, …] history: Dict[str, Any] sigma: float<a class="headerlink" href="#runnable-false-class-hybridstaoutput-namedtuple-return-type-for-hybridadaptivestasmc-compute-control-attributes-u-saturated-control-input-n-state-adaptive-gains-and-integral-state-k1-k2-u-int-history-history-dictionary-sigma-current-sliding-surface-value-u-float-state-tuple-float-history-dict-str-any-sigma-float" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">**Usage:**</span></code>python</p>
+<p>from src.controllers.hybrid_adaptive_sta_smc import HybridAdaptiveSTASMC controller = HybridAdaptiveSTASMC( gains=[18, 12, 10, 8], dt=0.01, max_force=100, k1_init=5.0, k2_init=3.0
+) # Initialize adaptive state
+k1, k2, u_int = controller.k1_init, controller.k2_init, 0.0 for t, state in simulation_loop: result = controller.compute_control(state, (k1, k2, u_int), {}) u = result.u k1, k2, u_int = result.state # Update adaptive gains</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">HybridSTAOutput</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return type for HybridAdaptiveSTASMC.compute_control().</span>
+<span class="c1">## 4. Parameter Validation **Location:** `src/utils/validation/parameter_validators.py` ### 4.1 Positive Parameter Validation ```python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false def require_positive( value: Union[float, int, None], name: str, *, allow_zero: bool = False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span> <span class="s2">&quot;&quot;&quot;Validate that a numeric value is positive (or non-negative). Args: value: The numeric quantity to validate name: Parameter name (used in error message) allow_zero: When True, value of exactly zero is allowed Returns: Validated value cast to float Raises: ValueError: If value is None, not finite, or not positive &quot;&quot;&quot;</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Usage</span><span class="p">:</span><span class="o">**</span> <span class="err">```</span><span class="n">python</span>
 
-<span class="sd">    Attributes:</span>
-<span class="sd">        u: Saturated control input (N)</span>
-<span class="sd">        state: Adaptive gains and integral state (k1, k2, u_int)</span>
-<span class="sd">        history: History dictionary</span>
-<span class="sd">        sigma: Current sliding surface value</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">u</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">state</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
-    <span class="n">history</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
-    <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span> <span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMC</span><span class="p">:</span> <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="p">):</span> <span class="c1"># Validate stability-critical parameters self.max_force = require_positive(max_force, &quot;max_force&quot;) self.boundary_layer = require_positive(boundary_layer, &quot;boundary_layer&quot;) # Validate gains for i, gain in enumerate(gains): gains[i] = require_positive(gain, f&quot;gains[{i}]&quot;, allow_zero=False)</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Benefits</span><span class="p">:</span><span class="o">**</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">Early</span> <span class="n">error</span> <span class="n">detection</span><span class="o">**</span><span class="p">:</span> <span class="n">Fail</span> <span class="n">fast</span> <span class="k">with</span> <span class="n">clear</span> <span class="n">messages</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">Stability</span> <span class="n">guarantee</span><span class="o">**</span><span class="p">:</span> <span class="n">Many</span> <span class="n">SMC</span> <span class="n">gains</span> <span class="n">must</span> <span class="n">be</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">stability</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">Type</span> <span class="n">safety</span><span class="o">**</span><span class="p">:</span> <span class="n">Ensures</span> <span class="n">finite</span> <span class="n">numbers</span> <span class="p">(</span><span class="n">rejects</span> <span class="n">NaN</span><span class="p">,</span> <span class="n">Inf</span><span class="p">)</span> <span class="c1">### 4.2 Finite Value Validation ```python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false def require_finite( value: Union[float, int, None], name: str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span> <span class="s2">&quot;&quot;&quot;Validate that a value is finite. Args: value: The numeric quantity to validate name: Parameter name Returns: Validated value cast to float Raises: ValueError: If value is None, infinity, or NaN &quot;&quot;&quot;</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Usage</span><span class="p">:</span><span class="o">**</span> <span class="err">```</span><span class="n">python</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_finite</span> <span class="k">def</span><span class="w"> </span><span class="nf">compute_control_law</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span> <span class="c1"># Validate intermediate computations sigma = compute_sliding_surface(state) sigma = require_finite(sigma, &quot;sliding_surface&quot;) u = -gains[4] * saturate(sigma, epsilon=0.01) u = require_finite(u, &quot;control_input&quot;) return u</span>
 </pre></div>
 </div>
-<p><strong>Usage:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.hybrid_adaptive_sta_smc</span><span class="w"> </span><span class="kn">import</span> <span class="n">HybridAdaptiveSTASMC</span>
-
-<span class="n">controller</span> <span class="o">=</span> <span class="n">HybridAdaptiveSTASMC</span><span class="p">(</span>
-    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
-    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
-    <span class="n">max_force</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-    <span class="n">k1_init</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
-    <span class="n">k2_init</span><span class="o">=</span><span class="mf">3.0</span>
-<span class="p">)</span>
-
-<span class="c1"># Initialize adaptive state</span>
-<span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">u_int</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">k1_init</span><span class="p">,</span> <span class="n">controller</span><span class="o">.</span><span class="n">k2_init</span><span class="p">,</span> <span class="mf">0.0</span>
-
-<span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">simulation_loop</span><span class="p">:</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">u_int</span><span class="p">),</span> <span class="p">{})</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">u</span>
-    <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">u_int</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">state</span>  <span class="c1"># Update adaptive gains</span>
-</pre></div>
-</div>
-</section>
-</section>
 <hr class="docutils" />
-<section id="parameter-validation">
-<h2>4. Parameter Validation<a class="headerlink" href="#parameter-validation" title="Link to this heading">¶</a></h2>
-<p><strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/validation/parameter_validators.py</span></code></p>
-<section id="positive-parameter-validation">
-<h3>4.1 Positive Parameter Validation<a class="headerlink" href="#positive-parameter-validation" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">require_positive</span><span class="p">(</span>
-    <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">allow_zero</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate that a numeric value is positive (or non-negative).</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        value: The numeric quantity to validate</span>
-<span class="sd">        name: Parameter name (used in error message)</span>
-<span class="sd">        allow_zero: When True, value of exactly zero is allowed</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Validated value cast to float</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If value is None, not finite, or not positive</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-<p><strong>Usage:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMC</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="p">):</span>
-        <span class="c1"># Validate stability-critical parameters</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">max_force</span><span class="p">,</span> <span class="s2">&quot;max_force&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="s2">&quot;boundary_layer&quot;</span><span class="p">)</span>
-
-        <span class="c1"># Validate gains</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">gain</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gains</span><span class="p">):</span>
-            <span class="n">gains</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">gain</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;gains[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">allow_zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Benefits:</strong></p>
-<ul class="simple">
-<li><p><strong>Early error detection</strong>: Fail fast with clear messages</p></li>
-<li><p><strong>Stability guarantee</strong>: Many SMC gains must be &gt; 0 for stability</p></li>
-<li><p><strong>Type safety</strong>: Ensures finite numbers (rejects NaN, Inf)</p></li>
-</ul>
-</section>
-<section id="finite-value-validation">
-<h3>4.2 Finite Value Validation<a class="headerlink" href="#finite-value-validation" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">require_finite</span><span class="p">(</span>
-    <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate that a value is finite.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        value: The numeric quantity to validate</span>
-<span class="sd">        name: Parameter name</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Validated value cast to float</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If value is None, infinity, or NaN</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-<p><strong>Usage:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_finite</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_control_law</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
-    <span class="c1"># Validate intermediate computations</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="n">require_finite</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="s2">&quot;sliding_surface&quot;</span><span class="p">)</span>
-
-    <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="n">gains</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">require_finite</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="s2">&quot;control_input&quot;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">u</span>
-</pre></div>
-</div>
+<section id="numerical-stability-location-src-utils-numerical-stability-safe-operations-py-5-1-safe-division-python">
+<h2>5. Numerical Stability <strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/numerical_stability/safe_operations.py</span></code> ### 5.1 Safe Division ```python<a class="headerlink" href="#numerical-stability-location-src-utils-numerical-stability-safe-operations-py-5-1-safe-division-python" title="Link to this heading">¶</a></h2>
 </section>
 </section>
-<hr class="docutils" />
-<section id="numerical-stability">
-<h2>5. Numerical Stability<a class="headerlink" href="#numerical-stability" title="Link to this heading">¶</a></h2>
-<p><strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/numerical_stability/safe_operations.py</span></code></p>
-<section id="safe-division">
-<h3>5.1 Safe Division<a class="headerlink" href="#safe-division" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">safe_divide</span><span class="p">(</span>
-    <span class="n">numerator</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
-    <span class="n">denominator</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
-    <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-12</span><span class="p">,</span>
-    <span class="n">fallback</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-    <span class="n">warn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumericType</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Safe division with epsilon threshold protection against zero division.</span>
-
-<span class="sd">    Mathematical Definition:</span>
-<span class="sd">        safe_divide(a, b) = a / max(|b|, ε) * sign(b)</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        numerator: Dividend (scalar or array)</span>
-<span class="sd">        denominator: Divisor (scalar or array)</span>
-<span class="sd">        epsilon: Minimum safe denominator magnitude (default: 1e-12)</span>
-<span class="sd">        fallback: Value to return if denominator is exactly zero (default: 0.0)</span>
-<span class="sd">        warn: Issue warning when epsilon protection triggers (default: False)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-<p><strong>Usage (Classical SMC with Dynamics Model):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.numerical_stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_divide</span>
-
-<span class="c1"># Compute inertia matrix inverse safely</span>
-<span class="n">det_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-<span class="n">inv_M</span> <span class="o">=</span> <span class="n">safe_divide</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">det_M</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">fallback</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
-
-<span class="c1"># Safe derivative computation</span>
-<span class="n">velocity</span> <span class="o">=</span> <span class="n">safe_divide</span><span class="p">(</span><span class="n">position</span> <span class="o">-</span> <span class="n">prev_position</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
-</pre></div>
-</div>
+<section class="tex2jax_ignore mathjax_ignore" id="id5">
+<h1>example-metadata:<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h1>
 </section>
-<section id="safe-reciprocal">
-<h3>5.2 Safe Reciprocal<a class="headerlink" href="#safe-reciprocal" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safe_reciprocal</span><span class="p">(</span>
-    <span class="n">x</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
-    <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-12</span><span class="p">,</span>
-    <span class="n">fallback</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-    <span class="n">warn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumericType</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Safe reciprocal (1/x) with epsilon protection.</span>
-
-<span class="sd">    Convenience wrapper for safe_divide(1.0, x).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-def-safe-divide-numerator-numerictype-denominator-numerictype-epsilon-float-1e-12-fallback-float-0-0-warn-bool-false">
+<h1>runnable: false def safe_divide( numerator: NumericType, denominator: NumericType, epsilon: float = 1e-12, fallback: float = 0.0, warn: bool = False,<a class="headerlink" href="#runnable-false-def-safe-divide-numerator-numerictype-denominator-numerictype-epsilon-float-1e-12-fallback-float-0-0-warn-bool-false" title="Link to this heading">¶</a></h1>
+<p>) -&gt; NumericType: “””Safe division with epsilon threshold protection against zero division. Mathematical Definition: safe_divide(a, b) = a / max(|b|, ε) * sign(b) Args: numerator: Dividend (scalar or array) denominator: Divisor (scalar or array) epsilon: Minimum safe denominator magnitude (default: 1e-12) fallback: Value to return if denominator is exactly zero (default: 0.0) warn: Issue warning when epsilon protection triggers (default: False) “””
+<code class="docutils literal notranslate"><span class="pre">**Usage</span> <span class="pre">(Classical</span> <span class="pre">SMC</span> <span class="pre">with</span> <span class="pre">Dynamics</span> <span class="pre">Model):**</span></code>python</p>
+<p>from src.utils.numerical_stability import safe_divide # Compute inertia matrix inverse safely
+det_M = np.linalg.det(M)
+inv_M = safe_divide(1.0, det_M, epsilon=1e-12, fallback=0.0) # Safe derivative computation
+velocity = safe_divide(position - prev_position, dt, epsilon=1e-12)
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">5.2</span> <span class="pre">Safe</span> <span class="pre">Reciprocal</span></code>python
+def safe_reciprocal( x: NumericType, epsilon: float = 1e-12, fallback: float = 0.0, warn: bool = False,
+) -&gt; NumericType: “””Safe reciprocal (1/x) with epsilon protection. Convenience wrapper for safe_divide(1.0, x). “””
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">5.3</span> <span class="pre">Safe</span> <span class="pre">Square</span> <span class="pre">Root</span></code>python</p>
 </section>
-<section id="safe-square-root">
-<h3>5.3 Safe Square Root<a class="headerlink" href="#safe-square-root" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">safe_sqrt</span><span class="p">(</span>
-    <span class="n">x</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
-    <span class="n">min_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-15</span><span class="p">,</span>
-    <span class="n">warn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumericType</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Safe square root with negative value protection.</span>
-
-<span class="sd">    Mathematical Definition:</span>
-<span class="sd">        safe_sqrt(x) = √(max(x, min_value))</span>
-
-<span class="sd">    Clips input to [min_value, ∞) before applying sqrt to prevent</span>
-<span class="sd">    domain errors from numerical noise producing negative values.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-<p><strong>Usage (Super-Twisting SMC):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.numerical_stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_sqrt</span>
-
-<span class="c1"># Finite-time STA control law: u = -K1 * sqrt(|σ|) * sign(σ)</span>
-<span class="n">u_proportional</span> <span class="o">=</span> <span class="o">-</span><span class="n">K1</span> <span class="o">*</span> <span class="n">safe_sqrt</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">),</span> <span class="n">min_value</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">)</span> <span class="o">*</span> <span class="n">smooth_sign</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
-</pre></div>
-</div>
+<section class="tex2jax_ignore mathjax_ignore" id="id6">
+<h1>example-metadata:<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h1>
 </section>
-<section id="safe-logarithm">
-<h3>5.4 Safe Logarithm<a class="headerlink" href="#safe-logarithm" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safe_log</span><span class="p">(</span>
-    <span class="n">x</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
-    <span class="n">min_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-15</span><span class="p">,</span>
-    <span class="n">warn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumericType</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Safe natural logarithm with zero/negative protection.</span>
-
-<span class="sd">    Mathematical Definition:</span>
-<span class="sd">        safe_log(x) = ln(max(x, min_value))</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-<p><strong>Usage (Optimization):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.numerical_stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_log</span>
-
-<span class="c1"># PSO cost function with log penalty</span>
-<span class="n">cost</span> <span class="o">=</span> <span class="n">ise</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">safe_log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">instability_penalty</span><span class="p">)</span>
-</pre></div>
-</div>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-def-safe-sqrt-x-numerictype-min-value-float-1e-15-warn-bool-false">
+<h1>runnable: false def safe_sqrt( x: NumericType, min_value: float = 1e-15, warn: bool = False,<a class="headerlink" href="#runnable-false-def-safe-sqrt-x-numerictype-min-value-float-1e-15-warn-bool-false" title="Link to this heading">¶</a></h1>
+<p>) -&gt; NumericType: “””Safe square root with negative value protection. Mathematical Definition: safe_sqrt(x) = √(max(x, min_value)) Clips input to [min_value, ∞) before applying sqrt to prevent domain errors from numerical noise producing negative values. “””
+<code class="docutils literal notranslate"><span class="pre">**Usage</span> <span class="pre">(Super-Twisting</span> <span class="pre">SMC):**</span></code>python
+from src.utils.numerical_stability import safe_sqrt # Finite-time STA control law: u = -K1 * sqrt(|σ|) * sign(σ)
+u_proportional = -K1 * safe_sqrt(abs(sigma), min_value=1e-15) * smooth_sign(sigma)
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">5.4</span> <span class="pre">Safe</span> <span class="pre">Logarithm</span></code>python</p>
+<p>def safe_log( x: NumericType, min_value: float = 1e-15, warn: bool = False,
+) -&gt; NumericType: “””Safe natural logarithm with zero/negative protection. Mathematical Definition: safe_log(x) = ln(max(x, min_value)) “””
+<code class="docutils literal notranslate"><span class="pre">**Usage</span> <span class="pre">(Optimization):**</span></code>python
+from src.utils.numerical_stability import safe_log # PSO cost function with log penalty
+cost = ise + 1000 * safe_log(1 + instability_penalty)
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">5.5</span> <span class="pre">Safe</span> <span class="pre">Exponential</span></code>python</p>
 </section>
-<section id="safe-exponential">
-<h3>5.5 Safe Exponential<a class="headerlink" href="#safe-exponential" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">safe_exp</span><span class="p">(</span>
-    <span class="n">x</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
-    <span class="n">max_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">700.0</span><span class="p">,</span>
-    <span class="n">warn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumericType</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Safe exponential with overflow protection.</span>
-
-<span class="sd">    Mathematical Definition:</span>
-<span class="sd">        safe_exp(x) = exp(min(x, max_value))</span>
-
-<span class="sd">    Clips input to (-∞, max_value] to prevent overflow.</span>
-<span class="sd">    Default max_value=700 is safe for IEEE 754 double precision.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
+<section class="tex2jax_ignore mathjax_ignore" id="id7">
+<h1>example-metadata:<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h1>
 </section>
-<section id="safe-vector-operations">
-<h3>5.6 Safe Vector Operations<a class="headerlink" href="#safe-vector-operations" title="Link to this heading">¶</a></h3>
-<p><strong>Safe Norm:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">safe_norm</span><span class="p">(</span>
-    <span class="n">vector</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-    <span class="nb">ord</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="n">axis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">min_norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-15</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Safe vector/matrix norm with zero-norm protection.</span>
-
-<span class="sd">    Mathematical Definition:</span>
-<span class="sd">        safe_norm(v) = max(||v||_p, min_norm)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-<p><strong>Safe Normalize:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">safe_normalize</span><span class="p">(</span>
-    <span class="n">vector</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-    <span class="nb">ord</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="n">axis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">min_norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-15</span><span class="p">,</span>
-    <span class="n">fallback</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Safe vector normalization with zero-norm protection.</span>
-
-<span class="sd">    Mathematical Definition:</span>
-<span class="sd">        safe_normalize(v) = v / max(||v||, min_norm)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-<p><strong>Usage:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.numerical_stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_norm</span><span class="p">,</span> <span class="n">safe_normalize</span>
-
-<span class="c1"># Gradient descent with safe normalization</span>
-<span class="n">gradient</span> <span class="o">=</span> <span class="n">compute_gradient</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="n">gradient_norm</span> <span class="o">=</span> <span class="n">safe_norm</span><span class="p">(</span><span class="n">gradient</span><span class="p">,</span> <span class="n">min_norm</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
-<span class="n">unit_gradient</span> <span class="o">=</span> <span class="n">safe_normalize</span><span class="p">(</span><span class="n">gradient</span><span class="p">,</span> <span class="n">min_norm</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
-
-<span class="n">params_new</span> <span class="o">=</span> <span class="n">params</span> <span class="o">-</span> <span class="n">step_size</span> <span class="o">*</span> <span class="n">unit_gradient</span>
-</pre></div>
-</div>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-def-safe-exp-x-numerictype-max-value-float-700-0-warn-bool-false">
+<h1>runnable: false def safe_exp( x: NumericType, max_value: float = 700.0, warn: bool = False,<a class="headerlink" href="#runnable-false-def-safe-exp-x-numerictype-max-value-float-700-0-warn-bool-false" title="Link to this heading">¶</a></h1>
+<p>) -&gt; NumericType: “””Safe exponential with overflow protection. Mathematical Definition: safe_exp(x) = exp(min(x, max_value)) Clips input to (-∞, max_value] to prevent overflow. Default max_value=700 is safe for IEEE 754 double precision. “””
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">5.6</span> <span class="pre">Safe</span> <span class="pre">Vector</span> <span class="pre">Operations</span> <span class="pre">**Safe</span> <span class="pre">Norm:**</span></code>python</p>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="id8">
+<h1>example-metadata:<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h1>
 </section>
-<hr class="docutils" />
-<section id="usage-patterns">
-<h2>6. Usage Patterns<a class="headerlink" href="#usage-patterns" title="Link to this heading">¶</a></h2>
-<section id="classical-smc-implementation-pattern">
-<h3>6.1 Classical SMC Implementation Pattern<a class="headerlink" href="#classical-smc-implementation-pattern" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.control</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-def-safe-norm-vector-np-ndarray-ord-optional-union-int-float-str-2-axis-optional-int-none-min-norm-float-1e-15">
+<h1>runnable: false def safe_norm( vector: np.ndarray, ord: Optional[Union[int, float, str]] = 2, axis: Optional[int] = None, min_norm: float = 1e-15,<a class="headerlink" href="#runnable-false-def-safe-norm-vector-np-ndarray-ord-optional-union-int-float-str-2-axis-optional-int-none-min-norm-float-1e-15" title="Link to this heading">¶</a></h1>
+<p>) -&gt; Union[float, np.ndarray]: “””Safe vector/matrix norm with zero-norm protection. Mathematical Definition: safe_norm(v) = max(||v||_p, min_norm) “””
+<code class="docutils literal notranslate"><span class="pre">**Safe</span> <span class="pre">Normalize:**</span></code>python</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id9">
+<h1>example-metadata:<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-def-safe-normalize-vector-np-ndarray-ord-optional-union-int-float-str-2-axis-optional-int-none-min-norm-float-1e-15-fallback-optional-np-ndarray-none">
+<h1>runnable: false def safe_normalize( vector: np.ndarray, ord: Optional[Union[int, float, str]] = 2, axis: Optional[int] = None, min_norm: float = 1e-15, fallback: Optional[np.ndarray] = None,<a class="headerlink" href="#runnable-false-def-safe-normalize-vector-np-ndarray-ord-optional-union-int-float-str-2-axis-optional-int-none-min-norm-float-1e-15-fallback-optional-np-ndarray-none" title="Link to this heading">¶</a></h1>
+<p>) -&gt; np.ndarray: “””Safe vector normalization with zero-norm protection. Mathematical Definition: safe_normalize(v) = v / max(||v||, min_norm) “””
+<code class="docutils literal notranslate"><span class="pre">**Usage:**</span></code>python
+from src.utils.numerical_stability import safe_norm, safe_normalize # Gradient descent with safe normalization
+gradient = compute_gradient(params)
+gradient_norm = safe_norm(gradient, min_norm=1e-10)
+unit_gradient = safe_normalize(gradient, min_norm=1e-10) params_new = params - step_size * unit_gradient</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
+
+<span class="c1">## 6. Usage Patterns ### 6.1 Classical SMC Implementation Pattern ```python</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.control</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicalSMCOutput</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMC</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="p">):</span>
-        <span class="c1"># Parameter validation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="n">require_positive</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;gains[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gains</span><span class="p">)]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">max_force</span><span class="p">,</span> <span class="s2">&quot;max_force&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="s2">&quot;boundary_layer&quot;</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
-        <span class="c1"># Extract state</span>
-        <span class="n">x</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dtheta1</span><span class="p">,</span> <span class="n">dtheta2</span> <span class="o">=</span> <span class="n">state</span>
-
-        <span class="c1"># Compute sliding surface</span>
-        <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">kd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span>
-        <span class="n">sigma</span> <span class="o">=</span> <span class="n">lam1</span> <span class="o">*</span> <span class="n">theta1</span> <span class="o">+</span> <span class="n">lam2</span> <span class="o">*</span> <span class="n">theta2</span> <span class="o">+</span> <span class="n">k1</span> <span class="o">*</span> <span class="n">dtheta1</span> <span class="o">+</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">dtheta2</span>
-
-        <span class="c1"># Continuous control law with saturation</span>
-        <span class="n">u_switch</span> <span class="o">=</span> <span class="o">-</span><span class="n">K</span> <span class="o">*</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
-        <span class="n">u_damping</span> <span class="o">=</span> <span class="o">-</span><span class="n">kd</span> <span class="o">*</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u_switch</span> <span class="o">+</span> <span class="n">u_damping</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">)</span>
-
-        <span class="c1"># Return structured output</span>
-        <span class="k">return</span> <span class="n">ClassicalSMCOutput</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="p">(),</span> <span class="n">history</span><span class="o">=</span><span class="p">{})</span>
-</pre></div>
-</div>
-</section>
-<section id="adaptive-smc-with-dead-zone-pattern">
-<h3>6.2 Adaptive SMC with Dead Zone Pattern<a class="headerlink" href="#adaptive-smc-with-dead-zone-pattern" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.control</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span><span class="p">,</span> <span class="n">dead_zone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_positive</span> <span class="k">class</span><span class="w"> </span><span class="nc">ClassicalSMC</span><span class="p">:</span> <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="p">):</span> <span class="c1"># Parameter validation self.gains = [require_positive(g, f&quot;gains[{i}]&quot;) for i, g in enumerate(gains)] self.max_force = require_positive(max_force, &quot;max_force&quot;) self.boundary_layer = require_positive(boundary_layer, &quot;boundary_layer&quot;) def compute_control(self, state, state_vars, history): # Extract state x, theta1, theta2, dx, dtheta1, dtheta2 = state # Compute sliding surface k1, k2, lam1, lam2, K, kd = self.gains sigma = lam1 * theta1 + lam2 * theta2 + k1 * dtheta1 + k2 * dtheta2 # Continuous control law with saturation u_switch = -K * saturate(sigma, self.boundary_layer, method=&#39;tanh&#39;, slope=3.0) u_damping = -kd * saturate(sigma, self.boundary_layer, method=&#39;tanh&#39;, slope=3.0) u = np.clip(u_switch + u_damping, -self.max_force, self.max_force) # Return structured output return ClassicalSMCOutput(u=u, state=(), history={})</span>
+<span class="err">```</span> <span class="c1">### 6.2 Adaptive SMC with Dead Zone Pattern ```python</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.control</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span><span class="p">,</span> <span class="n">dead_zone</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdaptiveSMCOutput</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.numerical_stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_divide</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.numerical_stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_divide</span> <span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveSMC</span><span class="p">:</span> <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">max_force</span><span class="p">,</span> <span class="n">leak_rate</span><span class="p">,</span> <span class="n">dead_zone_threshold</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span> <span class="o">=</span> <span class="n">gains</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="n">max_force</span> <span class="bp">self</span><span class="o">.</span><span class="n">leak_rate</span> <span class="o">=</span> <span class="n">leak_rate</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead_zone</span> <span class="o">=</span> <span class="n">dead_zone_threshold</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span> <span class="o">=</span> <span class="mf">10.0</span> <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span> <span class="n">K_prev</span> <span class="o">=</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">state_vars</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span> <span class="c1"># Compute sliding surface k1, k2, lam1, lam2, gamma = self.gains x, theta1, theta2, dx, dtheta1, dtheta2 = state sigma = lam1 * theta1 + lam2 * theta2 + k1 * dtheta1 + k2 * dtheta2 # Adaptive gain update with dead zone if abs(sigma) &lt;= self.dead_zone: dK = 0.0 # Freeze inside dead zone else: sigma_active = dead_zone(sigma, self.dead_zone) dK = gamma * abs(sigma_active) - self.leak_rate * (K_prev - self.K_init) K_new = K_prev + dK * self.dt K_new = np.clip(K_new, 0.1, 100.0) # Saturation # Control law u = -K_new * saturate(sigma, epsilon=0.01, method=&#39;tanh&#39;) u = np.clip(u, -self.max_force, self.max_force) return AdaptiveSMCOutput(u=u, state=(K_new,), history={}, sigma=sigma)</span>
+<span class="err">```</span> <span class="c1">### 6.3 Super-Twisting SMC with Safe Operations Pattern ```python</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveSMC</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">max_force</span><span class="p">,</span> <span class="n">leak_rate</span><span class="p">,</span> <span class="n">dead_zone_threshold</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gains</span> <span class="o">=</span> <span class="n">gains</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="n">max_force</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">leak_rate</span> <span class="o">=</span> <span class="n">leak_rate</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dead_zone</span> <span class="o">=</span> <span class="n">dead_zone_threshold</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span> <span class="o">=</span> <span class="mf">10.0</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
-        <span class="n">K_prev</span> <span class="o">=</span> <span class="n">state_vars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">state_vars</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span>
-
-        <span class="c1"># Compute sliding surface</span>
-        <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span>
-        <span class="n">x</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dtheta1</span><span class="p">,</span> <span class="n">dtheta2</span> <span class="o">=</span> <span class="n">state</span>
-        <span class="n">sigma</span> <span class="o">=</span> <span class="n">lam1</span> <span class="o">*</span> <span class="n">theta1</span> <span class="o">+</span> <span class="n">lam2</span> <span class="o">*</span> <span class="n">theta2</span> <span class="o">+</span> <span class="n">k1</span> <span class="o">*</span> <span class="n">dtheta1</span> <span class="o">+</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">dtheta2</span>
-
-        <span class="c1"># Adaptive gain update with dead zone</span>
-        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead_zone</span><span class="p">:</span>
-            <span class="n">dK</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># Freeze inside dead zone</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">sigma_active</span> <span class="o">=</span> <span class="n">dead_zone</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead_zone</span><span class="p">)</span>
-            <span class="n">dK</span> <span class="o">=</span> <span class="n">gamma</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sigma_active</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">leak_rate</span> <span class="o">*</span> <span class="p">(</span><span class="n">K_prev</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_init</span><span class="p">)</span>
-
-        <span class="n">K_new</span> <span class="o">=</span> <span class="n">K_prev</span> <span class="o">+</span> <span class="n">dK</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
-        <span class="n">K_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">K_new</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">)</span>  <span class="c1"># Saturation</span>
-
-        <span class="c1"># Control law</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="n">K_new</span> <span class="o">*</span> <span class="n">saturate</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">)</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">AdaptiveSMCOutput</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="p">(</span><span class="n">K_new</span><span class="p">,),</span> <span class="n">history</span><span class="o">=</span><span class="p">{},</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="super-twisting-smc-with-safe-operations-pattern">
-<h3>6.3 Super-Twisting SMC with Safe Operations Pattern<a class="headerlink" href="#super-twisting-smc-with-safe-operations-pattern" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.control</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span><span class="p">,</span> <span class="n">smooth_sign</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.control</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span><span class="p">,</span> <span class="n">smooth_sign</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">STAOutput</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.numerical_stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_sqrt</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">SuperTwistingSMC</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">max_force</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gains</span> <span class="o">=</span> <span class="n">gains</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="n">max_force</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
-        <span class="n">K1</span><span class="p">,</span> <span class="n">K2</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span>
-        <span class="n">z_prev</span><span class="p">,</span> <span class="n">sigma_prev</span> <span class="o">=</span> <span class="n">state_vars</span> <span class="k">if</span> <span class="n">state_vars</span> <span class="k">else</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-
-        <span class="c1"># Compute sliding surface</span>
-        <span class="n">x</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dtheta1</span><span class="p">,</span> <span class="n">dtheta2</span> <span class="o">=</span> <span class="n">state</span>
-        <span class="n">sigma</span> <span class="o">=</span> <span class="n">lam1</span> <span class="o">*</span> <span class="n">theta1</span> <span class="o">+</span> <span class="n">lam2</span> <span class="o">*</span> <span class="n">theta2</span> <span class="o">+</span> <span class="n">k1</span> <span class="o">*</span> <span class="n">dtheta1</span> <span class="o">+</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">dtheta2</span>
-
-        <span class="c1"># Super-twisting algorithm with safe operations</span>
-        <span class="n">u_proportional</span> <span class="o">=</span> <span class="o">-</span><span class="n">K1</span> <span class="o">*</span> <span class="n">safe_sqrt</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span><span class="p">),</span> <span class="n">min_value</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">)</span> <span class="o">*</span> <span class="n">smooth_sign</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
-        <span class="n">z_new</span> <span class="o">=</span> <span class="n">z_prev</span> <span class="o">-</span> <span class="n">K2</span> <span class="o">*</span> <span class="n">smooth_sign</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="n">u_proportional</span> <span class="o">+</span> <span class="n">z_new</span>
-
-        <span class="c1"># Saturation</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">STAOutput</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="p">(</span><span class="n">z_new</span><span class="p">,</span> <span class="n">sigma</span><span class="p">),</span> <span class="n">history</span><span class="o">=</span><span class="p">{})</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.utils.numerical_stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_sqrt</span> <span class="k">class</span><span class="w"> </span><span class="nc">SuperTwistingSMC</span><span class="p">:</span> <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">max_force</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span> <span class="o">=</span> <span class="n">gains</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="n">max_force</span> <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span> <span class="n">K1</span><span class="p">,</span> <span class="n">K2</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gains</span> <span class="n">z_prev</span><span class="p">,</span> <span class="n">sigma_prev</span> <span class="o">=</span> <span class="n">state_vars</span> <span class="k">if</span> <span class="n">state_vars</span> <span class="k">else</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span> <span class="c1"># Compute sliding surface x, theta1, theta2, dx, dtheta1, dtheta2 = state sigma = lam1 * theta1 + lam2 * theta2 + k1 * dtheta1 + k2 * dtheta2 # Super-twisting algorithm with safe operations u_proportional = -K1 * safe_sqrt(abs(sigma), min_value=1e-15) * smooth_sign(sigma) z_new = z_prev - K2 * smooth_sign(sigma) * self.dt u = u_proportional + z_new # Saturation u = np.clip(u, -self.max_force, self.max_force) return STAOutput(u=u, state=(z_new, sigma), history={})</span>
 </pre></div>
 </div>
-</section>
-</section>
 <hr class="docutils" />
-<section id="best-practices">
-<h2>7. Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
-<section id="saturation-function-selection">
-<h3>7.1 Saturation Function Selection<a class="headerlink" href="#saturation-function-selection" title="Link to this heading">¶</a></h3>
-<p><strong>Use <code class="docutils literal notranslate"><span class="pre">tanh</span></code> method (default) for:</strong></p>
+<section id="best-practices-7-1-saturation-function-selection-use-tanh-method-default-for">
+<h2>7. Best Practices ### 7.1 Saturation Function Selection <strong>Use <code class="docutils literal notranslate"><span class="pre">tanh</span></code> method (default) for:</strong><a class="headerlink" href="#best-practices-7-1-saturation-function-selection-use-tanh-method-default-for" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Production controllers requiring chattering reduction</p></li>
 <li><p>Systems with high-frequency measurement noise</p></li>
-<li><p>Applications where smooth control signals are critical</p></li>
-</ul>
-<p><strong>Use <code class="docutils literal notranslate"><span class="pre">linear</span></code> method only for:</strong></p>
-<ul class="simple">
+<li><p>Applications where smooth control signals are critical <strong>Use <code class="docutils literal notranslate"><span class="pre">linear</span></code> method only for:</strong></p></li>
 <li><p>Legacy code compatibility</p></li>
 <li><p>Theoretical analysis requiring explicit boundary layer</p></li>
-<li><p>Cases where computational efficiency is critical (tanh slightly slower)</p></li>
-</ul>
-<p><strong>Slope Parameter Guidelines:</strong></p>
-<ul class="simple">
+<li><p>Cases where computational efficiency is critical (tanh slightly slower) <strong>Slope Parameter Guidelines:</strong></p></li>
 <li><p><strong>slope = 1.0-2.0</strong>: Maximum smoothness, minimal chattering, reduced tracking accuracy</p></li>
 <li><p><strong>slope = 3.0 (recommended)</strong>: Balanced performance</p></li>
-<li><p><strong>slope = 5.0-10.0</strong>: Steeper transition, better tracking, increased chattering</p></li>
-</ul>
-</section>
-<section id="numerical-stability-guidelines">
-<h3>7.2 Numerical Stability Guidelines<a class="headerlink" href="#numerical-stability-guidelines" title="Link to this heading">¶</a></h3>
-<p><strong>Always use safe operations when:</strong></p>
-<ul class="simple">
+<li><p><strong>slope = 5.0-10.0</strong>: Steeper transition, better tracking, increased chattering ### 7.2 Numerical Stability Guidelines <strong>Always use safe operations when:</strong></p></li>
 <li><p>Dividing by dynamically computed values (e.g., velocities, determinants)</p></li>
 <li><p>Computing square roots of quantities that may become negative due to numerical errors</p></li>
 <li><p>Implementing optimization cost functions with logarithmic penalties</p></li>
-<li><p>Normalizing vectors that may become zero</p></li>
-</ul>
-<p><strong>Choose epsilon values based on:</strong></p>
-<ul class="simple">
+<li><p>Normalizing vectors that may become zero <strong>Choose epsilon values based on:</strong></p></li>
 <li><p><strong>Control derivatives</strong>: <code class="docutils literal notranslate"><span class="pre">epsilon=1e-12</span></code> (stability margin)</p></li>
 <li><p><strong>Square roots/logarithms</strong>: <code class="docutils literal notranslate"><span class="pre">epsilon=1e-15</span></code> (numerical precision)</p></li>
 <li><p><strong>Division</strong>: <code class="docutils literal notranslate"><span class="pre">epsilon=1e-12</span></code> (prevent instability)</p></li>
-<li><p><strong>Optimization</strong>: <code class="docutils literal notranslate"><span class="pre">epsilon=1e-10</span></code> (convergence criteria)</p></li>
+<li><p><strong>Optimization</strong>: <code class="docutils literal notranslate"><span class="pre">epsilon=1e-10</span></code> (convergence criteria) ### 7.3 Parameter Validation Best Practices <strong>Validate at construction time:</strong></p></li>
 </ul>
-</section>
-<section id="parameter-validation-best-practices">
-<h3>7.3 Parameter Validation Best Practices<a class="headerlink" href="#parameter-validation-best-practices" title="Link to this heading">¶</a></h3>
-<p><strong>Validate at construction time:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
-    <span class="c1"># Validate immediately - fail fast</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="n">require_positive</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;gains[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">gains</span><span class="p">)]</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">max_force</span><span class="p">,</span> <span class="s2">&quot;max_force&quot;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">require_positive</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="s2">&quot;dt&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Validate critical intermediate values:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span> <span class="c1"># Validate immediately - fail fast self.gains = [require_positive(g, f&quot;gains[{i}]&quot;) for i, g in enumerate(gains)] self.max_force = require_positive(max_force, &quot;max_force&quot;) self.dt = require_positive(dt, &quot;dt&quot;)</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Validate</span> <span class="n">critical</span> <span class="n">intermediate</span> <span class="n">values</span><span class="p">:</span><span class="o">**</span>
+<span class="err">```</span><span class="n">python</span>
 
-    <span class="c1"># Validate critical quantities in debug builds</span>
-    <span class="k">if</span> <span class="n">__debug__</span><span class="p">:</span>
-        <span class="n">sigma</span> <span class="o">=</span> <span class="n">require_finite</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="s2">&quot;sliding_surface&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="output-structure-best-practices">
-<h3>7.4 Output Structure Best Practices<a class="headerlink" href="#output-structure-best-practices" title="Link to this heading">¶</a></h3>
-<p><strong>Use attribute access for clarity:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clear and self-documenting</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="c1"># Validate critical quantities in debug builds if __debug__: sigma = require_finite(sigma, &quot;sliding_surface&quot;)</span>
+<span class="err">```</span> <span class="c1">### 7.4 Output Structure Best Practices **Use attribute access for clarity:**</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="c1"># Clear and self-documenting</span>
+
 <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
 <span class="n">control_input</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">u</span>
-<span class="n">sliding_surface</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">sigma</span>  <span class="c1"># Adaptive/Hybrid SMC only</span>
-</pre></div>
-</div>
-<p><strong>Use tuple unpacking for backwards compatibility:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Backwards-compatible with legacy code</span>
-<span class="n">u</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Access sigma directly instead of re-computing:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Efficient - no redundant computation</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;On sliding surface&quot;</span><span class="p">)</span>
+<span class="n">sliding_surface</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">sigma</span> <span class="c1"># Adaptive/Hybrid SMC only</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Use</span> <span class="nb">tuple</span> <span class="n">unpacking</span> <span class="k">for</span> <span class="n">backwards</span> <span class="n">compatibility</span><span class="p">:</span><span class="o">**</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="c1"># Backwards-compatible with legacy code</span>
 
-<span class="c1"># Inefficient - re-computes sigma</span>
+<span class="n">u</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Access</span> <span class="n">sigma</span> <span class="n">directly</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">re</span><span class="o">-</span><span class="n">computing</span><span class="p">:</span><span class="o">**</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="c1"># Efficient - no redundant computation</span>
+
 <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="n">recompute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>  <span class="c1"># Redundant!</span>
+<span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;On sliding surface&quot;</span><span class="p">)</span> <span class="c1"># Inefficient - re-computes sigma</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">recompute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="c1"># Redundant!</span>
 </pre></div>
 </div>
-</section>
 </section>
 <hr class="docutils" />
-<section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h2>
-<p>The control primitives provide a robust foundation for implementing production-grade sliding mode controllers. Key takeaways:</p>
+<section id="conclusion-the-control-primitives-provide-a-robust-foundation-for-implementing-production-grade-sliding-mode-controllers-key-takeaways-saturation-functions-use-tanh-method-with-slope-3-0-for-balanced-chattering-reduction">
+<h2>Conclusion The control primitives provide a robust foundation for implementing production-grade sliding mode controllers. Key takeaways: - <strong>Saturation Functions</strong>: Use <code class="docutils literal notranslate"><span class="pre">tanh</span></code> method with <code class="docutils literal notranslate"><span class="pre">slope=3.0</span></code> for balanced chattering reduction<a class="headerlink" href="#conclusion-the-control-primitives-provide-a-robust-foundation-for-implementing-production-grade-sliding-mode-controllers-key-takeaways-saturation-functions-use-tanh-method-with-slope-3-0-for-balanced-chattering-reduction" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Saturation Functions</strong>: Use <code class="docutils literal notranslate"><span class="pre">tanh</span></code> method with <code class="docutils literal notranslate"><span class="pre">slope=3.0</span></code> for balanced chattering reduction</p></li>
 <li><p><strong>Output Structures</strong>: Prefer NamedTuple for type safety and clarity</p></li>
 <li><p><strong>Parameter Validation</strong>: Validate early, fail fast with clear error messages</p></li>
-<li><p><strong>Numerical Stability</strong>: Always use safe operations for division, square roots, and logarithms</p></li>
-</ul>
-<p>For implementation examples, see:</p>
-<ul class="simple">
+<li><p><strong>Numerical Stability</strong>: Always use safe operations for division, square roots, and logarithms For implementation examples, see:</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">src/controllers/classic_smc.py</span></code> - Classical SMC using saturate()</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">src/controllers/adaptive_smc.py</span></code> - Adaptive SMC using dead_zone()</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">src/controllers/sta_smc.py</span></code> - Super-Twisting SMC using safe_sqrt()</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tests/test_utils/</span></code> - Comprehensive test suite for all primitives</p></li>
-</ul>
-<p><strong>Next Steps:</strong></p>
-<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/test_utils/</span></code> - test suite for all primitives <strong>Next Steps:</strong></p></li>
 <li><p>Review <a class="reference internal" href="factory_system_guide.html"><span class="std std-doc">Factory System Guide</span></a> for controller creation patterns</p></li>
 <li><p>Explore <a class="reference internal" href="classical_smc_technical_guide.html"><span class="std std-doc">Classical SMC Technical Guide</span></a> for detailed implementation</p></li>
-<li><p>Study <a class="reference internal" href="#../numerical_stability/safe_operations_reference.md"><span class="xref myst">Numerical Stability Documentation</span></a> for advanced safe operations</p></li>
+<li><p>Study <a class="reference internal" href="../numerical_stability/safe_operations_reference.html"><span class="std std-doc">Numerical Stability Documentation</span></a> for advanced safe operations</p></li>
 </ul>
 <hr class="docutils" />
 <p><strong>Document Version:</strong> 1.0
@@ -1388,26 +606,8 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../mathematical_foundations/smc_complete_theory.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Complete Sliding Mode Control Mathematical Theory</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="factory_system_guide.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">SMC Controller Factory System Guide</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -1418,7 +618,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 08, 2025</div>
+              Last updated on Oct 10, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1439,55 +639,39 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Control Primitives Reference</a><ul>
-<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
-<li><a class="reference internal" href="#overview">1. Overview</a><ul>
-<li><a class="reference internal" href="#purpose">1.1 Purpose</a></li>
-<li><a class="reference internal" href="#module-organization">1.2 Module Organization</a></li>
+<li><a class="reference internal" href="#">Control Primitives Reference <strong>Double-Inverted Pendulum Sliding Mode Control</strong></a><ul>
+<li><a class="reference internal" href="#table-of-contents-1-overview">Table of Contents 1. <span class="xref myst">Overview</span></a></li>
+<li><a class="reference internal" href="#overview-1-1-purpose-control-primitives-provide-foundational-utilities-for-implementing-robust-sliding-mode-controllers-saturation-functions-continuous-approximations-of-sign-function-for-chattering-reduction">1. Overview ### 1.1 Purpose Control primitives provide foundational utilities for implementing robust sliding mode controllers: - <strong>Saturation Functions</strong>: Continuous approximations of sign function for chattering reduction</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#saturation-functions">2. Saturation Functions</a><ul>
-<li><a class="reference internal" href="#core-saturation-function">2.1 Core Saturation Function</a></li>
-<li><a class="reference internal" href="#smooth-sign-function">2.2 Smooth Sign Function</a></li>
-<li><a class="reference internal" href="#dead-zone-function">2.3 Dead Zone Function</a></li>
+<li><a class="reference internal" href="#example-metadata">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false-def-dead-zone-x-union-float-np-ndarray-threshold-float">runnable: false def dead_zone( x: Union[float, np.ndarray], threshold: float</a><ul>
+<li><a class="reference internal" href="#control-output-structures-location-src-utils-types-control-outputs-py-3-1-overview-all-controllers-return-namedtuple-instances-instead-of-bare-tuples-for-type-safety-explicit-attribute-names-prevent-misuse">3. Control Output Structures <strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/types/control_outputs.py</span></code> ### 3.1 Overview All controllers return <strong>NamedTuple</strong> instances instead of bare tuples for: - <strong>Type safety</strong>: Explicit attribute names prevent misuse</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#control-output-structures">3. Control Output Structures</a><ul>
-<li><a class="reference internal" href="#id1">3.1 Overview</a></li>
-<li><a class="reference internal" href="#classical-smc-output">3.2 Classical SMC Output</a></li>
-<li><a class="reference internal" href="#adaptive-smc-output">3.3 Adaptive SMC Output</a></li>
-<li><a class="reference internal" href="#super-twisting-smc-output">3.4 Super-Twisting SMC Output</a></li>
-<li><a class="reference internal" href="#hybrid-adaptive-sta-smc-output">3.5 Hybrid Adaptive-STA SMC Output</a></li>
+<li><a class="reference internal" href="#id1">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false-class-classicalsmcoutput-namedtuple-return-type-for-classicalsmc-compute-control-attributes-u-saturated-control-input-n-state-internal-controller-state-empty-tuple-for-stateless-history-history-dictionary-for-debugging-plotting-u-float-state-tuple-any-history-dict-str-any">runnable: false class ClassicalSMCOutput(NamedTuple): “””Return type for ClassicalSMC.compute_control(). Attributes: u: Saturated control input (N) state: Internal controller state (empty tuple for stateless) history: History dictionary for debugging/plotting “”” u: float state: Tuple[Any, …] history: Dict[str, Any]</a></li>
+<li><a class="reference internal" href="#id2">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false-class-adaptivesmcoutput-namedtuple-return-type-for-adaptivesmc-compute-control-attributes-u-saturated-control-input-n-state-updated-adaptation-states-e-g-k-adaptive-history-history-dictionary-sigma-current-sliding-surface-value-u-float-state-tuple-float-history-dict-str-any-sigma-float">runnable: false class AdaptiveSMCOutput(NamedTuple): “””Return type for AdaptiveSMC.compute_control(). Attributes: u: Saturated control input (N) state: Updated adaptation states (e.g., K_adaptive) history: History dictionary sigma: Current sliding surface value “”” u: float state: Tuple[float, …] history: Dict[str, Any] sigma: float</a></li>
+<li><a class="reference internal" href="#id3">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false-class-staoutput-namedtuple-return-type-for-supertwistingsmc-compute-control-attributes-u-bounded-control-input-n-state-auxiliary-integrator-states-z-sigma-history-history-dictionary-u-float-state-tuple-float-history-dict-str-any">runnable: false class STAOutput(NamedTuple): “””Return type for SuperTwistingSMC.compute_control(). Attributes: u: Bounded control input (N) state: Auxiliary integrator states (z, sigma) history: History dictionary “”” u: float state: Tuple[float, …] history: Dict[str, Any]</a></li>
+<li><a class="reference internal" href="#id4">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false-class-hybridstaoutput-namedtuple-return-type-for-hybridadaptivestasmc-compute-control-attributes-u-saturated-control-input-n-state-adaptive-gains-and-integral-state-k1-k2-u-int-history-history-dictionary-sigma-current-sliding-surface-value-u-float-state-tuple-float-history-dict-str-any-sigma-float">runnable: false class HybridSTAOutput(NamedTuple): “””Return type for HybridAdaptiveSTASMC.compute_control(). Attributes: u: Saturated control input (N) state: Adaptive gains and integral state (k1, k2, u_int) history: History dictionary sigma: Current sliding surface value “”” u: float state: Tuple[float, …] history: Dict[str, Any] sigma: float</a><ul>
+<li><a class="reference internal" href="#numerical-stability-location-src-utils-numerical-stability-safe-operations-py-5-1-safe-division-python">5. Numerical Stability <strong>Location:</strong> <code class="docutils literal notranslate"><span class="pre">src/utils/numerical_stability/safe_operations.py</span></code> ### 5.1 Safe Division ```python</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#parameter-validation">4. Parameter Validation</a><ul>
-<li><a class="reference internal" href="#positive-parameter-validation">4.1 Positive Parameter Validation</a></li>
-<li><a class="reference internal" href="#finite-value-validation">4.2 Finite Value Validation</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#numerical-stability">5. Numerical Stability</a><ul>
-<li><a class="reference internal" href="#safe-division">5.1 Safe Division</a></li>
-<li><a class="reference internal" href="#safe-reciprocal">5.2 Safe Reciprocal</a></li>
-<li><a class="reference internal" href="#safe-square-root">5.3 Safe Square Root</a></li>
-<li><a class="reference internal" href="#safe-logarithm">5.4 Safe Logarithm</a></li>
-<li><a class="reference internal" href="#safe-exponential">5.5 Safe Exponential</a></li>
-<li><a class="reference internal" href="#safe-vector-operations">5.6 Safe Vector Operations</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#usage-patterns">6. Usage Patterns</a><ul>
-<li><a class="reference internal" href="#classical-smc-implementation-pattern">6.1 Classical SMC Implementation Pattern</a></li>
-<li><a class="reference internal" href="#adaptive-smc-with-dead-zone-pattern">6.2 Adaptive SMC with Dead Zone Pattern</a></li>
-<li><a class="reference internal" href="#super-twisting-smc-with-safe-operations-pattern">6.3 Super-Twisting SMC with Safe Operations Pattern</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#best-practices">7. Best Practices</a><ul>
-<li><a class="reference internal" href="#saturation-function-selection">7.1 Saturation Function Selection</a></li>
-<li><a class="reference internal" href="#numerical-stability-guidelines">7.2 Numerical Stability Guidelines</a></li>
-<li><a class="reference internal" href="#parameter-validation-best-practices">7.3 Parameter Validation Best Practices</a></li>
-<li><a class="reference internal" href="#output-structure-best-practices">7.4 Output Structure Best Practices</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li><a class="reference internal" href="#id5">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false-def-safe-divide-numerator-numerictype-denominator-numerictype-epsilon-float-1e-12-fallback-float-0-0-warn-bool-false">runnable: false def safe_divide( numerator: NumericType, denominator: NumericType, epsilon: float = 1e-12, fallback: float = 0.0, warn: bool = False,</a></li>
+<li><a class="reference internal" href="#id6">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false-def-safe-sqrt-x-numerictype-min-value-float-1e-15-warn-bool-false">runnable: false def safe_sqrt( x: NumericType, min_value: float = 1e-15, warn: bool = False,</a></li>
+<li><a class="reference internal" href="#id7">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false-def-safe-exp-x-numerictype-max-value-float-700-0-warn-bool-false">runnable: false def safe_exp( x: NumericType, max_value: float = 700.0, warn: bool = False,</a></li>
+<li><a class="reference internal" href="#id8">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false-def-safe-norm-vector-np-ndarray-ord-optional-union-int-float-str-2-axis-optional-int-none-min-norm-float-1e-15">runnable: false def safe_norm( vector: np.ndarray, ord: Optional[Union[int, float, str]] = 2, axis: Optional[int] = None, min_norm: float = 1e-15,</a></li>
+<li><a class="reference internal" href="#id9">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false-def-safe-normalize-vector-np-ndarray-ord-optional-union-int-float-str-2-axis-optional-int-none-min-norm-float-1e-15-fallback-optional-np-ndarray-none">runnable: false def safe_normalize( vector: np.ndarray, ord: Optional[Union[int, float, str]] = 2, axis: Optional[int] = None, min_norm: float = 1e-15, fallback: Optional[np.ndarray] = None,</a><ul>
+<li><a class="reference internal" href="#best-practices-7-1-saturation-function-selection-use-tanh-method-default-for">7. Best Practices ### 7.1 Saturation Function Selection <strong>Use <code class="docutils literal notranslate"><span class="pre">tanh</span></code> method (default) for:</strong></a></li>
+<li><a class="reference internal" href="#conclusion-the-control-primitives-provide-a-robust-foundation-for-implementing-production-grade-sliding-mode-controllers-key-takeaways-saturation-functions-use-tanh-method-with-slope-3-0-for-balanced-chattering-reduction">Conclusion The control primitives provide a robust foundation for implementing production-grade sliding mode controllers. Key takeaways: - <strong>Saturation Functions</strong>: Use <code class="docutils literal notranslate"><span class="pre">tanh</span></code> method with <code class="docutils literal notranslate"><span class="pre">slope=3.0</span></code> for balanced chattering reduction</a></li>
 </ul>
 </li>
 </ul>
@@ -1500,9 +684,9 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=4ebf8126"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=08e7b316"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>

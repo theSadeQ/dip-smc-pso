@@ -113,7 +113,7 @@ instance = IntegratorsFixedStepEuler()
 result = instance.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Custom configuration
@@ -122,7 +122,7 @@ instance = IntegratorsFixedStepEuler(config)
 result = instance.process(data)
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 ```python
 try:
@@ -155,7 +155,7 @@ result = orchestrator.execute(instance.process(data))
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -193,7 +193,7 @@ Integrate using forward Euler method.
 
 [View full source →](#method-forwardeuler-integrate)
 
----
+
 
 ### `BackwardEuler`
 
@@ -235,7 +235,7 @@ Integrate using backward Euler method.
 
 [View full source →](#method-backwardeuler-integrate)
 
----
+
 
 ### `ModifiedEuler`
 
@@ -271,7 +271,7 @@ Integrate using modified Euler (Heun's) method.
 
 [View full source →](#method-modifiedeuler-integrate)
 
----
+
 
 ## Dependencies
 

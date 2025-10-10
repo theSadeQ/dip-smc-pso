@@ -32,7 +32,7 @@ confidence in published results.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -69,7 +69,7 @@ seed : int
 
 [View full source →](#method-provenancefilter-filter)
 
----
+
 
 ## Functions
 
@@ -93,7 +93,7 @@ produce different identifiers, facilitating provenance tracking.
 :linenos:
 ```
 
----
+
 
 ### `_get_git_commit()`
 
@@ -112,7 +112,7 @@ exceptions are caught and masked to preserve robustness.
 :linenos:
 ```
 
----
+
 
 ### `configure_provenance_logging(config, seed)`
 
@@ -144,7 +144,7 @@ level : int, optional
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

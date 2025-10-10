@@ -164,7 +164,7 @@ bridge.start()
 bridge.stop()
 ```
 
-### Example 2: Protocol Translation
+## Example 2: Protocol Translation
 
 ```python
 from src.interfaces.hil.simulation_bridge import SimulationBridge
@@ -180,7 +180,7 @@ bridge = SimulationBridge(
 bridge.start()
 ```
 
-### Example 3: State Interpolation
+## Example 3: State Interpolation
 
 ```python
 from src.interfaces.hil.simulation_bridge import SimulationBridge
@@ -245,7 +245,7 @@ bridge.set_health_callback(health_callback)
 bridge.start()
 ```
 
-### Example 5: Performance Monitoring
+## Example 5: Performance Monitoring
 
 ```python
 from src.interfaces.hil.simulation_bridge import SimulationBridge
@@ -293,7 +293,7 @@ print(f"Packet loss: {metrics['packet_loss']} packets")
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -311,7 +311,7 @@ Bridge operation mode.
 :linenos:
 ```
 
----
+
 
 ### `ModelType`
 
@@ -327,7 +327,7 @@ Simulation model type.
 :linenos:
 ```
 
----
+
 
 ### `BridgeConfig`
 
@@ -341,7 +341,7 @@ Configuration for simulation bridge.
 :linenos:
 ```
 
----
+
 
 ### `ModelState`
 
@@ -355,7 +355,7 @@ State information for a simulation model.
 :linenos:
 ```
 
----
+
 
 ### `ModelInterface`
 
@@ -427,7 +427,7 @@ Get list of output signal names.
 
 [View full source →](#method-modelinterface-output_names)
 
----
+
 
 ### `PlantModel`
 
@@ -483,7 +483,7 @@ Clean up plant model.
 
 [View full source →](#method-plantmodel-cleanup)
 
----
+
 
 ### `LinearPlantModel`
 
@@ -525,7 +525,7 @@ Execute linear plant simulation step.
 
 [View full source →](#method-linearplantmodel-step)
 
----
+
 
 ### `SignalMapper`
 
@@ -563,7 +563,7 @@ Get all signal mappings.
 
 [View full source →](#method-signalmapper-get_mappings)
 
----
+
 
 ### `SimulationBridge`
 
@@ -684,7 +684,7 @@ Synchronize with real-time execution.
 
 [View full source →](#method-simulationbridge-_synchronize_real_time)
 
----
+
 
 ## Functions
 
@@ -700,7 +700,7 @@ Create linear plant model with state-space matrices.
 :linenos:
 ```
 
----
+
 
 ### `create_simulation_bridge(sample_time, real_time_factor)`
 
@@ -714,7 +714,7 @@ Create simulation bridge with default configuration.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

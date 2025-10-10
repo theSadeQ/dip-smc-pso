@@ -1,0 +1,509 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Citation System - Phase 4: Validation &amp; Quality Assurance Document Version: 1.0.0 - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8a7e329d" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">Theory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/plans/citation_system/05_phase4_validation_quality.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/plans/citation_system/05_phase4_validation_quality.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="citation-system-phase-4-validation-quality-assurance-document-version-1-0-0">
+<h1>Citation System - Phase 4: Validation &amp; Quality Assurance <strong>Document Version:</strong> 1.0.0<a class="headerlink" href="#citation-system-phase-4-validation-quality-assurance-document-version-1-0-0" title="Link to this heading">¶</a></h1>
+<p><strong>Created:</strong> 2025-01-15
+<strong>Status:</strong> Planning Phase
+<strong>Estimated Duration:</strong> Week 8 (10-15 hours)</p>
+<hr class="docutils" />
+<section id="phase-overview-objective-validate-citation-quality-consistency-and-accessibility-input">
+<h2>Phase Overview <strong>Objective:</strong> Validate citation quality, consistency, and accessibility. <strong>Input:</strong><a class="headerlink" href="#phase-overview-objective-validate-citation-quality-consistency-and-accessibility-input" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>500+ cited claims in documentation and code</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/references/enhanced_bibliography.bib</span></code> (150-200 entries) <strong>Output:</strong></p></li>
+<li><p>Zero broken citations</p></li>
+<li><p>100% format consistency</p></li>
+<li><p>Validated DOI accessibility</p></li>
+<li><p>Citation quality report</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="validation-categories-1-link-validation-objective-verify-all-dois-are-accessible-process">
+<h2>Validation Categories ### 1. Link Validation <strong>Objective:</strong> Verify all DOIs are accessible <strong>Process:</strong><a class="headerlink" href="#validation-categories-1-link-validation-objective-verify-all-dois-are-accessible-process" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false class DOIValidator: \&quot;\&quot;\&quot;Validate DOI accessibility.\&quot;\&quot;\&quot; async def validate_doi(self, doi: str) -&gt; bool: \&quot;\&quot;\&quot;Check if DOI resolves successfully.\&quot;\&quot;\&quot; url = f&quot;https://doi.org/{doi}&quot; async with aiohttp.ClientSession() as session: try: async with session.get(url, timeout=10) as response: return response.status == 200 except Exception as e: logging.error(f&quot;DOI {doi} failed: {e}&quot;) return False async def validate_all_dois( self, bibliography: Path ) -&gt; Dict[str, bool]: \&quot;\&quot;\&quot;Validate all DOIs in bibliography.\&quot;\&quot;\&quot; bib = parse_bibtex(bibliography) results = await asyncio.gather(*[ self.validate_doi(entry.get(&#39;doi&#39;)) for entry in bib.values() if &#39;doi&#39; in entry ]) return dict(zip(bib.keys(), results))</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Acceptance</span> <span class="n">Criteria</span><span class="p">:</span><span class="o">**</span>
+
+<span class="o">-</span> <span class="err">≥</span><span class="mi">95</span><span class="o">%</span> <span class="n">DOIs</span> <span class="n">accessible</span> <span class="p">(</span><span class="n">HTTP</span> <span class="mi">200</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Failed</span> <span class="n">DOIs</span> <span class="n">have</span> <span class="n">fallback</span> <span class="n">URLs</span>
+<span class="o">-</span> <span class="n">All</span> <span class="n">inaccessible</span> <span class="n">DOIs</span> <span class="n">documented</span>
+
+<span class="o">---</span>
+
+<span class="c1">## 2. Duplicate Detection **Objective:** Identify and merge duplicate citations **Detection Criteria:**</span>
+
+<span class="mf">1.</span> <span class="o">**</span><span class="n">Exact</span> <span class="n">DOI</span> <span class="n">match</span><span class="o">**</span> <span class="o">-</span> <span class="n">Same</span> <span class="n">DOI</span><span class="p">,</span> <span class="n">different</span> <span class="n">citation</span> <span class="n">key</span>
+<span class="mf">2.</span> <span class="o">**</span><span class="n">Fuzzy</span> <span class="n">title</span> <span class="n">match</span><span class="o">**</span> <span class="o">-</span> <span class="n">Similar</span> <span class="n">titles</span> <span class="p">(</span><span class="n">Levenshtein</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span>
+<span class="mf">3.</span> <span class="o">**</span><span class="n">Author</span><span class="o">-</span><span class="n">year</span> <span class="n">match</span><span class="o">**</span> <span class="o">-</span> <span class="n">Same</span> <span class="n">first</span> <span class="n">author</span> <span class="o">+</span> <span class="n">year</span> <span class="o">**</span><span class="n">Automated</span> <span class="n">Deduplication</span><span class="p">:</span><span class="o">**</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false class DuplicateDetector: \&quot;\&quot;\&quot;Detect duplicate BibTeX entries.\&quot;\&quot;\&quot; def find_duplicates( self, bibliography: Path ) -&gt; List[DuplicateGroup]: \&quot;\&quot;\&quot;Find duplicate entries.\&quot;\&quot;\&quot; bib = parse_bibtex(bibliography) # Group by DOI doi_groups = self.group_by_doi(bib) # Group by fuzzy title match title_groups = self.group_by_title(bib) # Group by author-year author_groups = self.group_by_author_year(bib) # Merge groups duplicates = self.merge_groups( doi_groups, title_groups, author_groups ) return duplicates def resolve_duplicates( self, duplicates: List[DuplicateGroup] ) -&gt; Dict[str, str]: \&quot;\&quot;\&quot;Select canonical citation for each duplicate group.\&quot;\&quot;\&quot; resolution = {} for group in duplicates: # Select most complete entry as canonical canonical = max(group, key=lambda e: self.completeness_score(e)) for entry in group: if entry != canonical: resolution[entry.key] = canonical.key return resolution</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="citation-style-consistency-objective-enforce-ieee-citation-style-ieee-style-requirements">
+<h2>3. Citation Style Consistency <strong>Objective:</strong> Enforce IEEE citation style <strong>IEEE Style Requirements:</strong><a class="headerlink" href="#citation-style-consistency-objective-enforce-ieee-citation-style-ieee-style-requirements" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Author format:</strong> “LastName, F. M.”</p></li>
+<li><p><strong>Title:</strong> Sentence case with quotes</p></li>
+<li><p><strong>Journal:</strong> Italicized abbreviation</p></li>
+<li><p><strong>Year:</strong> Parentheses</p></li>
+<li><p><strong>DOI:</strong> Full URL format <strong>Style Validation:</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false class StyleValidator: \&quot;\&quot;\&quot;Validate IEEE citation style.\&quot;\&quot;\&quot; def validate_entry(self, entry: BibTeXEntry) -&gt; List[StyleError]: \&quot;\&quot;\&quot;Check entry for IEEE style compliance.\&quot;\&quot;\&quot; errors = [] # Author format if not self.is_ieee_author_format(entry.get(&#39;author&#39;)): errors.append(StyleError( field=&#39;author&#39;, expected=&#39;LastName, F. M.&#39;, actual=entry.get(&#39;author&#39;) )) # Title capitalization if not self.is_sentence_case(entry.get(&#39;title&#39;)): errors.append(StyleError( field=&#39;title&#39;, expected=&#39;Sentence case&#39;, actual=entry.get(&#39;title&#39;) )) # Journal abbreviation if &#39;journal&#39; in entry: if not self.is_ieee_journal_abbrev(entry[&#39;journal&#39;]): errors.append(StyleError( field=&#39;journal&#39;, expected=&#39;IEEE abbreviated form&#39;, actual=entry[&#39;journal&#39;] )) return errors def auto_fix_style( self, entry: BibTeXEntry ) -&gt; BibTeXEntry: \&quot;\&quot;\&quot;Automatically fix common style issues.\&quot;\&quot;\&quot; # Convert author names to IEEE format entry[&#39;author&#39;] = self.convert_author_format(entry[&#39;author&#39;]) # Convert title to sentence case entry[&#39;title&#39;] = self.convert_to_sentence_case(entry[&#39;title&#39;]) # Abbreviate journal name if &#39;journal&#39; in entry: entry[&#39;journal&#39;] = self.abbreviate_journal(entry[&#39;journal&#39;]) return entry</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="claim-coverage-validation-objective-ensure-85-of-claims-are-cited-coverage-analysis">
+<h2>4. Claim Coverage Validation <strong>Objective:</strong> Ensure ≥85% of claims are cited <strong>Coverage Analysis:</strong><a class="headerlink" href="#claim-coverage-validation-objective-ensure-85-of-claims-are-cited-coverage-analysis" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false class CoverageAnalyzer: \&quot;\&quot;\&quot;Analyze citation coverage of claims.\&quot;\&quot;\&quot; def analyze_coverage( self, claims_inventory: Path, citation_mapping: Path ) -&gt; CoverageReport: \&quot;\&quot;\&quot;Calculate claim citation coverage.\&quot;\&quot;\&quot; claims = load_json(claims_inventory) mapping = load_json(citation_mapping) total_claims = len(claims) cited_claims = len([ c for c in claims if c[&#39;id&#39;] in mapping and len(mapping[c[&#39;id&#39;]]) &gt; 0 ]) coverage = cited_claims / total_claims * 100 # Breakdown by claim priority critical_claims = [c for c in claims if c[&#39;priority&#39;] == &#39;CRITICAL&#39;] critical_cited = len([ c for c in critical_claims if c[&#39;id&#39;] in mapping and len(mapping[c[&#39;id&#39;]]) &gt; 0 ]) return CoverageReport( total_claims=total_claims, cited_claims=cited_claims, coverage_percentage=coverage, critical_coverage=critical_cited / len(critical_claims) * 100 )</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="validation-tools-1-validation-script-file-scripts-citations-validate-bibliography-py-features">
+<h2>Validation Tools ### 1. Validation Script <strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">scripts/citations/validate_bibliography.py</span></code> <strong>Features:</strong><a class="headerlink" href="#validation-tools-1-validation-script-file-scripts-citations-validate-bibliography-py-features" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>DOI accessibility checks</p></li>
+<li><p>Duplicate detection</p></li>
+<li><p>Style consistency validation</p></li>
+<li><p>Coverage analysis</p></li>
+<li><p>Automated fixing where possible <strong>Usage:</strong></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run all validations</span>
+python<span class="w"> </span>scripts/citations/validate_bibliography.py<span class="w"> </span>--all<span class="w"> </span><span class="c1"># DOI validation only</span>
+python<span class="w"> </span>scripts/citations/validate_bibliography.py<span class="w"> </span>--check-dois<span class="w"> </span><span class="c1"># Style validation with auto-fix</span>
+python<span class="w"> </span>scripts/citations/validate_bibliography.py<span class="w"> </span>--check-style<span class="w"> </span>--auto-fix<span class="w"> </span><span class="c1"># Duplicate detection</span>
+python<span class="w"> </span>scripts/citations/validate_bibliography.py<span class="w"> </span>--find-duplicates
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="citation-quality-report-generator-file-scripts-citations-generate-citation-report-py-output-artifacts-citation-quality-report-html-report-sections">
+<h2>2. Citation Quality Report Generator <strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">scripts/citations/generate_citation_report.py</span></code> <strong>Output:</strong> <code class="docutils literal notranslate"><span class="pre">artifacts/citation_quality_report.html</span></code> <strong>Report Sections:</strong><a class="headerlink" href="#citation-quality-report-generator-file-scripts-citations-generate-citation-report-py-output-artifacts-citation-quality-report-html-report-sections" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Executive Summary</strong> - Total citations: 187 - DOI accessibility: 96.8% - Duplicate count: 3 - Style compliance: 98.5% - Claim coverage: 87.2% 2. <strong>Quality Metrics</strong> - Citation distribution by type (journal, conference, preprint) - Average citation count per reference - Venue quality distribution (top-tier, mid-tier, other) 3. <strong>Validation Results</strong> - DOI validation table (accessible/broken) - Duplicate groups identified - Style errors detected - Uncited claims list 4. <strong>Recommendations</strong> - High-priority fixes - Citation gaps to fill - Quality improvement suggestions</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="deliverables-1-validation-report-file-artifacts-citation-validation-report-json-json">
+<h2>Deliverables ### 1. Validation Report <strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">artifacts/citation_validation_report.json</span></code> ```json<a class="headerlink" href="#deliverables-1-validation-report-file-artifacts-citation-validation-report-json-json" title="Link to this heading">¶</a></h2>
+<p>{ “doi_validation”: { “total_dois”: 187, “accessible”: 181, “broken”: 6, “success_rate”: 96.8 }, “duplicate_detection”: { “duplicate_groups”: 2, “total_duplicates”: 3, “resolution”: { “Utkin1999a”: “Utkin1999”, “Edwards1998b”: “Edwards1998” } }, “style_consistency”: { “total_entries”: 187, “compliant”: 184, “errors”: 3, “compliance_rate”: 98.4 }, “claim_coverage”: { “total_claims”: 512, “cited_claims”: 446, “coverage_percentage”: 87.1, “critical_coverage”: 95.2 }
+}
+``` ### 2. Fixed Bibliography <strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">docs/references/enhanced_bibliography_validated.bib</span></code> - All duplicates merged</p>
+<ul class="simple">
+<li><p>Style errors corrected</p></li>
+<li><p>Broken DOIs replaced with fallback URLs</p></li>
+<li><p>Sorted by citation key ### 3. Broken Links Fallback <strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">artifacts/broken_dois_fallback.json</span></code> ```json
+{ “Moreno2008”: { “doi”: “10.1109/TAC.2008.INVALID”, “status”: “404”, “fallback_url”: “<a class="reference external" href="https://ieeexplore.ieee.org/document/XXXXX">https://ieeexplore.ieee.org/document/XXXXX</a>”, “alternative_sources”: [ “ResearchGate: <a class="reference external" href="https://researchgate.net/">https://researchgate.net/</a>…”, “Author page: https://…” ] }
+}</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
+
+<span class="c1">## Acceptance Criteria | Metric | Target | Actual | Status |</span>
+
+<span class="o">|--------|--------|--------|--------|</span>
+<span class="o">|</span> <span class="o">**</span><span class="n">DOI</span> <span class="n">Accessibility</span><span class="o">**</span> <span class="o">|</span> <span class="err">≥</span><span class="mi">95</span><span class="o">%</span> <span class="o">|</span> <span class="n">TBD</span> <span class="o">|</span> <span class="n">Pending</span> <span class="o">|</span>
+<span class="o">|</span> <span class="o">**</span><span class="n">Duplicate</span> <span class="n">Rate</span><span class="o">**</span> <span class="o">|</span> <span class="o">&lt;</span><span class="mi">2</span><span class="o">%</span> <span class="o">|</span> <span class="n">TBD</span> <span class="o">|</span> <span class="n">Pending</span> <span class="o">|</span>
+<span class="o">|</span> <span class="o">**</span><span class="n">Style</span> <span class="n">Compliance</span><span class="o">**</span> <span class="o">|</span> <span class="mi">100</span><span class="o">%</span> <span class="o">|</span> <span class="n">TBD</span> <span class="o">|</span> <span class="n">Pending</span> <span class="o">|</span>
+<span class="o">|</span> <span class="o">**</span><span class="n">Claim</span> <span class="n">Coverage</span><span class="o">**</span> <span class="o">|</span> <span class="err">≥</span><span class="mi">85</span><span class="o">%</span> <span class="o">|</span> <span class="n">TBD</span> <span class="o">|</span> <span class="n">Pending</span> <span class="o">|</span>
+<span class="o">|</span> <span class="o">**</span><span class="n">Critical</span> <span class="n">Claim</span> <span class="n">Coverage</span><span class="o">**</span> <span class="o">|</span> <span class="err">≥</span><span class="mi">95</span><span class="o">%</span> <span class="o">|</span> <span class="n">TBD</span> <span class="o">|</span> <span class="n">Pending</span> <span class="o">|</span>
+
+<span class="o">---</span>
+
+<span class="c1">## Quality Assurance Tests ### Automated Test Suite **File:** `tests/test_documentation/test_citations.py` ```python</span>
+
+<span class="c1"># example-metadata:</span>
+
+<span class="c1"># runnable: false def test_doi_accessibility(bibliography): \&quot;\&quot;\&quot;Verify all DOIs are accessible.\&quot;\&quot;\&quot; validator = DOIValidator() results = validator.validate_all_dois(bibliography) broken_dois = [doi for doi, accessible in results.items() if not accessible] assert len(broken_dois) / len(results) &lt; 0.05, \ f&quot;Too many broken DOIs: {broken_dois}&quot; def test_no_duplicates(bibliography): \&quot;\&quot;\&quot;Verify no duplicate entries exist.\&quot;\&quot;\&quot; detector = DuplicateDetector() duplicates = detector.find_duplicates(bibliography) assert len(duplicates) == 0, \ f&quot;Found duplicate citation groups: {duplicates}&quot; def test_style_consistency(bibliography): \&quot;\&quot;\&quot;Verify IEEE style compliance.\&quot;\&quot;\&quot; validator = StyleValidator() bib = parse_bibtex(bibliography) errors = [] for key, entry in bib.items(): errors.extend(validator.validate_entry(entry)) assert len(errors) == 0, \ f&quot;Found style errors: {errors}&quot; def test_claim_coverage(claims_inventory, citation_mapping): \&quot;\&quot;\&quot;Verify adequate claim citation coverage.\&quot;\&quot;\&quot; analyzer = CoverageAnalyzer() report = analyzer.analyze_coverage(claims_inventory, citation_mapping) assert report.coverage_percentage &gt;= 85.0, \ f&quot;Coverage {report.coverage_percentage}% &lt; 85%&quot; assert report.critical_coverage &gt;= 95.0, \ f&quot;Critical coverage {report.critical_coverage}% &lt; 95%&quot;</span>
+
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="execution-plan-week-8-validation-quality-10-15-hours-day-1-2-automated-validation-5h">
+<h2>Execution Plan ### Week 8: Validation &amp; Quality (10-15 hours) <strong>Day 1-2: Automated Validation (5h)</strong><a class="headerlink" href="#execution-plan-week-8-validation-quality-10-15-hours-day-1-2-automated-validation-5h" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Implement validation tools</p></li>
+<li><p>Run DOI accessibility checks</p></li>
+<li><p>Detect and resolve duplicates</p></li>
+<li><p>Fix style inconsistencies <strong>Day 3-4: Coverage Analysis (3h)</strong></p></li>
+<li><p>Analyze claim citation coverage</p></li>
+<li><p>Identify uncited critical claims</p></li>
+<li><p>Generate coverage report <strong>Day 5: Manual Review (4h)</strong></p></li>
+<li><p>Review top 50 critical citations</p></li>
+<li><p>Verify technical accuracy</p></li>
+<li><p>Check citation relevance</p></li>
+<li><p>Fix identified issues <strong>Day 6: Final Quality Checks (3h)</strong></p></li>
+<li><p>Run test suite</p></li>
+<li><p>Generate final quality report</p></li>
+<li><p>Create documentation</p></li>
+<li><p>Prepare for Phase 5</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="risk-management-risk-impact-mitigation">
+<h2>Risk Management | Risk | Impact | Mitigation |<a class="headerlink" href="#risk-management-risk-impact-mitigation" title="Link to this heading">¶</a></h2>
+<p>|——|——–|———–|
+| <strong>Many broken DOIs</strong> | MEDIUM | Provide fallback URLs, author pages |
+| <strong>High duplicate rate</strong> | LOW | Automated resolution with manual review |
+| <strong>Style inconsistencies</strong> | LOW | Automated fixing for most cases |
+| <strong>Low coverage</strong> | HIGH | Identify gaps, run additional research (mini Phase 2) |</p>
+</section>
+<hr class="docutils" />
+<section id="dependencies-phase-3-complete-citations-inserted-in-all-documentation-and-code">
+<h2>Dependencies - <strong>Phase 3 Complete:</strong> Citations inserted in all documentation and code<a class="headerlink" href="#dependencies-phase-3-complete-citations-inserted-in-all-documentation-and-code" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Bibliography:</strong> <code class="docutils literal notranslate"><span class="pre">enhanced_bibliography.bib</span></code> with 150-200 entries</p></li>
+<li><p><strong>Python Libraries:</strong> <code class="docutils literal notranslate"><span class="pre">aiohttp</span></code>, <code class="docutils literal notranslate"><span class="pre">bibtexparser</span></code>, <code class="docutils literal notranslate"><span class="pre">fuzzywuzzy</span></code></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="next-phase-phase-5-final-review-publication">
+<h2>Next Phase <strong>Phase 5:</strong> <a class="reference internal" href="06_phase5_final_review.html"><span class="std std-doc">Final Review &amp; Publication</span></a><a class="headerlink" href="#next-phase-phase-5-final-review-publication" title="Link to this heading">¶</a></h2>
+<hr class="docutils" />
+<p><strong>Related Documents:</strong></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="00_master_roadmap.html"><span class="std std-doc">Master Roadmap</span></a></p></li>
+<li><p><a class="reference internal" href="04_phase3_citation_integration.html"><span class="std std-doc">Phase 3: Citation Integration</span></a></p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 10, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Citation System - Phase 4: Validation &amp; Quality Assurance <strong>Document Version:</strong> 1.0.0</a><ul>
+<li><a class="reference internal" href="#phase-overview-objective-validate-citation-quality-consistency-and-accessibility-input">Phase Overview <strong>Objective:</strong> Validate citation quality, consistency, and accessibility. <strong>Input:</strong></a></li>
+<li><a class="reference internal" href="#validation-categories-1-link-validation-objective-verify-all-dois-are-accessible-process">Validation Categories ### 1. Link Validation <strong>Objective:</strong> Verify all DOIs are accessible <strong>Process:</strong></a></li>
+<li><a class="reference internal" href="#citation-style-consistency-objective-enforce-ieee-citation-style-ieee-style-requirements">3. Citation Style Consistency <strong>Objective:</strong> Enforce IEEE citation style <strong>IEEE Style Requirements:</strong></a></li>
+<li><a class="reference internal" href="#claim-coverage-validation-objective-ensure-85-of-claims-are-cited-coverage-analysis">4. Claim Coverage Validation <strong>Objective:</strong> Ensure ≥85% of claims are cited <strong>Coverage Analysis:</strong></a></li>
+<li><a class="reference internal" href="#validation-tools-1-validation-script-file-scripts-citations-validate-bibliography-py-features">Validation Tools ### 1. Validation Script <strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">scripts/citations/validate_bibliography.py</span></code> <strong>Features:</strong></a></li>
+<li><a class="reference internal" href="#citation-quality-report-generator-file-scripts-citations-generate-citation-report-py-output-artifacts-citation-quality-report-html-report-sections">2. Citation Quality Report Generator <strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">scripts/citations/generate_citation_report.py</span></code> <strong>Output:</strong> <code class="docutils literal notranslate"><span class="pre">artifacts/citation_quality_report.html</span></code> <strong>Report Sections:</strong></a></li>
+<li><a class="reference internal" href="#deliverables-1-validation-report-file-artifacts-citation-validation-report-json-json">Deliverables ### 1. Validation Report <strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">artifacts/citation_validation_report.json</span></code> ```json</a></li>
+<li><a class="reference internal" href="#execution-plan-week-8-validation-quality-10-15-hours-day-1-2-automated-validation-5h">Execution Plan ### Week 8: Validation &amp; Quality (10-15 hours) <strong>Day 1-2: Automated Validation (5h)</strong></a></li>
+<li><a class="reference internal" href="#risk-management-risk-impact-mitigation">Risk Management | Risk | Impact | Mitigation |</a></li>
+<li><a class="reference internal" href="#dependencies-phase-3-complete-citations-inserted-in-all-documentation-and-code">Dependencies - <strong>Phase 3 Complete:</strong> Citations inserted in all documentation and code</a></li>
+<li><a class="reference internal" href="#next-phase-phase-5-final-review-publication">Next Phase <strong>Phase 5:</strong> <span class="xref myst">Final Review &amp; Publication</span></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

@@ -16,7 +16,7 @@ applications and monitoring dashboards.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -158,7 +158,7 @@ Parse endpoint string into host and port.
 
 [View full source →](#method-httpinterface-_parse_endpoint)
 
----
+
 
 ### `HTTPServer`
 
@@ -210,7 +210,7 @@ Add DELETE route.
 
 [View full source →](#method-httpserver-add_delete_route)
 
----
+
 
 ### `HTTPClient`
 
@@ -262,7 +262,7 @@ Send DELETE request.
 
 [View full source →](#method-httpclient-delete)
 
----
+
 
 ## Dependencies
 

@@ -478,7 +478,7 @@ Optimized gains saved: optimized_gains_classical_smc.npy
 
 ---
 
-### 8.2 Real-Time Convergence Monitoring **Objective:** Monitor PSO optimization with detailed convergence analysis. ```python
+## 8.2 Real-Time Convergence Monitoring **Objective:** Monitor PSO optimization with detailed convergence analysis. ```python
 
 # example-metadata:
 
@@ -524,7 +524,7 @@ Iter 40 | Status: CONVERGING | Best: 0.098765 | Diversity: 2.4567 | Conv. Veloci
 
 ---
 
-### 8.3 Bounds Validation and Adjustment **Objective:** Validate PSO bounds and automatically adjust if necessary. ```python
+## 8.3 Bounds Validation and Adjustment **Objective:** Validate PSO bounds and automatically adjust if necessary. ```python
 
 # example-metadata:
 
@@ -557,7 +557,7 @@ TEST_BOUNDS_UPPER = [5.0, 5.0, 5.0, 5.0, 1.0] # Too narrow # ===================
 
 ---
 
-### 8.4 Hyperparameter Optimization **Objective:** Meta-optimize PSO hyperparameters for best controller performance. ```python
+## 8.4 Hyperparameter Optimization **Objective:** Meta-optimize PSO hyperparameters for best controller performance. ```python
 # example-metadata:
 # runnable: false #!/usr/bin/env python3
 """
@@ -583,7 +583,7 @@ N_TRIALS_PER_EVAL = 3 # ========================================================
 
 ---
 
-### 8.5 Complete Optimization Pipeline **Objective:** End-to-end workflow from configuration to deployed controller. ```python
+## 8.5 Complete Optimization Pipeline **Objective:** End-to-end workflow from configuration to deployed controller. ```python
 
 # example-metadata:
 

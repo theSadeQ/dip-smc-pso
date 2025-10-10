@@ -25,7 +25,7 @@ PRODUCTION SAFETY: No single points of failure, automatic recovery mechanisms.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -43,7 +43,7 @@ Factory state enumeration.
 :linenos:
 ```
 
----
+
 
 ### `FactoryHealth`
 
@@ -71,7 +71,7 @@ Record error operation.
 
 [View full source →](#method-factoryhealth-update_error)
 
----
+
 
 ### `ResilientSerializerFactory`
 
@@ -160,7 +160,7 @@ Generate cache key for serializer configuration.
 
 [View full source →](#method-resilientserializerfactory-_generate_cache_key)
 
----
+
 
 ### `FactoryRegistry`
 
@@ -219,7 +219,7 @@ Initialize default factory instances.
 
 [View full source →](#method-factoryregistry-_init_default_factories)
 
----
+
 
 ## Functions
 
@@ -235,7 +235,7 @@ Get factory registry (replaceable, not singleton).
 :linenos:
 ```
 
----
+
 
 ### `set_factory_registry(registry)`
 
@@ -249,7 +249,7 @@ Replace factory registry (eliminates singleton dependency).
 :linenos:
 ```
 
----
+
 
 ### `create_serializer_resilient(format_type, compression)`
 
@@ -263,7 +263,7 @@ Create serializer with full resilience and failover.
 :linenos:
 ```
 
----
+
 
 ### `get_system_health()`
 
@@ -277,7 +277,7 @@ Get overall system health status.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

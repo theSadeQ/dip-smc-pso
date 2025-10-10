@@ -15,7 +15,7 @@ for backward compatibility with legacy import paths.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -47,7 +47,7 @@ Create DIPParams from a physics configuration object.
 
 [View full source →](#method-dipparams-from_physics_config)
 
----
+
 
 ## Functions
 
@@ -74,7 +74,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `step_euler_numba(state, u, dt, params)`
 
@@ -99,7 +99,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `step_rk4_numba(state, u, dt, params)`
 
@@ -124,7 +124,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

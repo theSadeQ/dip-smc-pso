@@ -6,7 +6,7 @@
 
 **Purpose**: Mathematical foundations and testing methodologies for verifying Lyapunov stability of sliding mode controllers.
 
----
+
 
 ## 📐 Theoretical Foundations
 
@@ -24,7 +24,7 @@ Then $\mathbf{x} = \mathbf{0}$ is **stable**.
 
 If additionally $\dot{V}(\mathbf{x}) < 0$ for $\mathbf{x} \neq \mathbf{0}$, then **asymptotically stable**.
 
----
+
 
 ### Sliding Mode Control Lyapunov Function
 
@@ -40,7 +40,7 @@ $$\dot{V} = \sigma \dot{\sigma} = \sigma(\mathbf{s}^T \dot{\mathbf{x}})$$
 This ensures $\sigma \to 0$ in finite time:
 $$t_{\text{reach}} = \frac{|\sigma(0)|}{\eta}$$
 
----
+
 
 ## 🧪 Testing Methodologies
 
@@ -62,7 +62,7 @@ def test_lyapunov_positive_definite(state):
         assert V > 0, f"V not positive: V({state}) = {V}"
 ```
 
----
+
 
 ### Test 2: Negative Derivative
 
@@ -87,7 +87,7 @@ def test_lyapunov_decrease(state):
         f"V increased: {V_t} → {V_next} (Δ={V_next - V_t})"
 ```
 
----
+
 
 ### Test 3: Finite-Time Reaching
 
@@ -120,7 +120,7 @@ def test_finite_time_reaching():
         f"Took too long: {t_reach}s > {t_theoretical}s"
 ```
 
----
+
 
 ## 🔬 Advanced Validation
 
@@ -145,7 +145,7 @@ def test_region_of_attraction():
             f"Failed to converge from {initial_state}"
 ```
 
----
+
 
 ### Robustness to Disturbances
 
@@ -174,7 +174,7 @@ def test_ISS_property(state, disturbance):
         f"Not ISS: ||x||={x_norm} vs ||d||={d_norm}"
 ```
 
----
+
 
 ## 📊 Practical Considerations
 
@@ -197,7 +197,7 @@ def test_lyapunov_with_tolerance(state):
         assert V_next <= V_current * (1 + TOLERANCE)
 ```
 
----
+
 
 ### Chattering Effects
 
@@ -227,7 +227,7 @@ def test_lyapunov_averaged_decrease(state):
     assert avg_second_half < avg_first_half
 ```
 
----
+
 
 ## 📚 Related Documentation
 
@@ -235,13 +235,13 @@ def test_lyapunov_averaged_decrease(state):
 - [Property-Based Testing](../guides/property_based_testing.md)
 - [Control Systems Unit Testing](../guides/control_systems_unit_testing.md)
 
----
+
 
 ## 🔗 Navigation
 
 [⬅️ Back to Theory](../theory/) | [🏠 Testing Home](../README.md) | [➡️ SMC Validation Math](smc_validation_mathematics.md)
 
----
+
 
 **Last Updated**: September 30, 2025
 **Mathematical Reviewer**: Control Theory Team

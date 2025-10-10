@@ -16,7 +16,7 @@ to systematically classify instability causes and provide actionable diagnosis.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -34,7 +34,7 @@ Classification of instability root causes.
 :linenos:
 ```
 
----
+
 
 ### `DiagnosticResult`
 
@@ -48,7 +48,7 @@ Result of a diagnostic check.
 :linenos:
 ```
 
----
+
 
 ### `DiagnosticChecklist`
 
@@ -145,7 +145,7 @@ Get summary of diagnostic results.
 
 [View full source →](#method-diagnosticchecklist-get_diagnostic_summary)
 
----
+
 
 ## Dependencies
 
@@ -210,12 +210,13 @@ component = Component(
 
 \`\`\`python
 # Integration example
+
 for k in range(num_steps):
     result = component.process(x)
     x = update(x, result)
 \`\`\`
 
-### Example 4: Performance Optimization
+## Example 4: Performance Optimization
 
 \`\`\`python
 component = Component(enable_caching=True)
@@ -229,4 +230,3 @@ try:
 except ComponentError as e:
     print(f"Error: {e}")
 \`\`\`
-

@@ -44,7 +44,7 @@ u_saturated = np.clip(u_total, -self.config.max_force, self.config.max_force)
 # Lines covered across all controller types
 ```
 
-### 2. Critical Coverage Gaps Requiring Immediate Attention
+## 2. Critical Coverage Gaps Requiring Immediate Attention
 
 **Hybrid Switching Logic** ❌ **19% Coverage - CRITICAL GAP**
 ```python
@@ -255,7 +255,7 @@ def test_stability_properties(state_vectors, controller_gains, disturbances):
         assert_safety_constraints(control_output)
 ```
 
-### Real-Time Performance Testing
+## Real-Time Performance Testing
 
 ```python
 # example-metadata:

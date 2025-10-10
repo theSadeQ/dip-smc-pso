@@ -16,7 +16,7 @@ and performance monitoring for concurrent controller creation.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -34,7 +34,7 @@ Raised when factory lock acquisition times out.
 :linenos:
 ```
 
----
+
 
 ### `FactoryDeadlockError`
 
@@ -50,7 +50,7 @@ Raised when potential deadlock is detected.
 :linenos:
 ```
 
----
+
 
 ### `DeadlockDetector`
 
@@ -88,7 +88,7 @@ Check for potential deadlock conditions.
 
 [View full source →](#method-deadlockdetector-check_for_deadlock)
 
----
+
 
 ## Functions
 
@@ -114,7 +114,7 @@ Raises:
 :linenos:
 ```
 
----
+
 
 ### `factory_lock_context(timeout)`
 
@@ -139,7 +139,7 @@ Raises:
 :linenos:
 ```
 
----
+
 
 ### `get_lock_statistics()`
 
@@ -153,7 +153,7 @@ Get factory lock performance statistics.
 :linenos:
 ```
 
----
+
 
 ### `reset_lock_statistics()`
 
@@ -167,7 +167,7 @@ Reset factory lock performance statistics.
 :linenos:
 ```
 
----
+
 
 ### `enable_deadlock_detection(enabled)`
 
@@ -181,7 +181,7 @@ Enable or disable deadlock detection.
 :linenos:
 ```
 
----
+
 
 ### `check_thread_safety()`
 
@@ -195,7 +195,7 @@ Check current thread safety status.
 :linenos:
 ```
 
----
+
 
 ### `wait_for_lock_release(timeout)`
 
@@ -215,7 +215,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `force_unlock()`
 
@@ -236,7 +236,7 @@ Warning:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

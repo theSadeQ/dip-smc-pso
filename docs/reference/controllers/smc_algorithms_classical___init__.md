@@ -20,7 +20,7 @@ This replaces the monolithic 458-line classical SMC with focused modules.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

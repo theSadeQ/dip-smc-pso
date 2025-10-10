@@ -13,7 +13,7 @@
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -31,7 +31,7 @@ Serial communication protocol enumeration.
 :linenos:
 ```
 
----
+
 
 ### `DataType`
 
@@ -47,7 +47,7 @@ Data type enumeration for serial communication.
 :linenos:
 ```
 
----
+
 
 ### `SerialConfig`
 
@@ -61,7 +61,7 @@ Serial communication configuration.
 :linenos:
 ```
 
----
+
 
 ### `ModbusRegister`
 
@@ -75,7 +75,7 @@ Modbus register configuration.
 :linenos:
 ```
 
----
+
 
 ### `CANMessage`
 
@@ -89,7 +89,7 @@ CAN message structure.
 :linenos:
 ```
 
----
+
 
 ### `SerialDevice`
 
@@ -158,7 +158,7 @@ Continuous receive loop.
 
 [View full source →](#method-serialdevice-_receive_loop)
 
----
+
 
 ### `ModbusDevice`
 
@@ -257,7 +257,7 @@ Encode value to Modbus registers.
 
 [View full source →](#method-modbusdevice-_encode_value)
 
----
+
 
 ### `CANDevice`
 
@@ -344,7 +344,7 @@ Handle received CAN messages.
 
 [View full source →](#method-candevice-_can_message_handler)
 
----
+
 
 ## Dependencies
 

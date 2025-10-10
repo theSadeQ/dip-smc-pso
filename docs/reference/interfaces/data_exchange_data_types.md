@@ -16,7 +16,7 @@ headers, and metadata structures.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -34,7 +34,7 @@ Message type enumeration.
 :linenos:
 ```
 
----
+
 
 ### `Priority`
 
@@ -50,7 +50,7 @@ Message priority levels.
 :linenos:
 ```
 
----
+
 
 ### `CompressionType`
 
@@ -66,7 +66,7 @@ Compression algorithm types.
 :linenos:
 ```
 
----
+
 
 ### `EncodingType`
 
@@ -82,7 +82,7 @@ Data encoding types.
 :linenos:
 ```
 
----
+
 
 ### `MessageHeader`
 
@@ -96,7 +96,7 @@ Message header with metadata.
 :linenos:
 ```
 
----
+
 
 ### `MessageMetadata`
 
@@ -110,7 +110,7 @@ Extended message metadata.
 :linenos:
 ```
 
----
+
 
 ### `SerializableData`
 
@@ -156,7 +156,7 @@ Deserialize data from JSON representation.
 
 [View full source →](#method-serializabledata-_deserialize_data)
 
----
+
 
 ### `DataMessage`
 
@@ -216,7 +216,7 @@ Deserialize payload from transmission format.
 
 [View full source →](#method-datamessage-_deserialize_payload)
 
----
+
 
 ### `DataPacket`
 
@@ -256,7 +256,7 @@ Check if packet is valid.
 
 [View full source →](#method-datapacket-is_valid)
 
----
+
 
 ### `ControlMessage`
 
@@ -278,7 +278,7 @@ Control message for system commands.
 
 [View full source →](#method-controlmessage-__post_init__)
 
----
+
 
 ### `StatusMessage`
 
@@ -306,7 +306,7 @@ Check if this is an error status.
 
 [View full source →](#method-statusmessage-is_error)
 
----
+
 
 ### `TelemetryMessage`
 
@@ -334,7 +334,7 @@ Add a measurement to the telemetry.
 
 [View full source →](#method-telemetrymessage-add_measurement)
 
----
+
 
 ### `ConfigurationMessage`
 
@@ -356,7 +356,7 @@ Configuration message for system settings.
 
 [View full source →](#method-configurationmessage-__post_init__)
 
----
+
 
 ## Dependencies
 

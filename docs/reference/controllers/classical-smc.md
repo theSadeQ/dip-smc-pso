@@ -43,6 +43,7 @@ where $\text{sat}(\cdot)$ is the saturation function used to reduce chattering.
 ## Implementation Details
 
 ### Source Code
+
 - **File**: `src/controllers/classic_smc.py`
 - **Class**: `ClassicalSMCController`
 - **Key Methods**:
@@ -80,11 +81,13 @@ The following parameters have been optimized using PSO:
 ## Performance Characteristics
 
 ### Strengths
+
 - **Robust**: Insensitive to matched uncertainties
 - **Finite-time convergence**: Reaches sliding surface in finite time
 - **Simple design**: Straightforward implementation
 
 ### Limitations
+
 - **Chattering**: High-frequency switching causes control oscillations
 - **Control effort**: May require high control energy
 - **Sensitivity**: Performance depends on boundary layer tuning
@@ -92,11 +95,13 @@ The following parameters have been optimized using PSO:
 ## Simulation Results
 
 ### Tracking Performance
+
 - **RMSE**: 1.76 rad (combined θ₁, θ₂)
 - **Control effort**: 1.55 × 10⁵ J
 - **Chattering index**: 3.2 × 10²
 
 ### Typical Response
+
 The classical SMC quickly drives the pendulum angles to zero but exhibits moderate chattering due to the discontinuous switching term. The PSO-optimized gains balance tracking performance with control effort.
 
 ## Usage Example

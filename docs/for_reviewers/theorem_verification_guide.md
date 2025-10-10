@@ -579,7 +579,7 @@ grep -r "smc_levant_2003" docs/bib/*.bib
 
 
 
-### Issue 2: Code Location Changed
+## Issue 2: Code Location Changed
 
 **Problem:** Line numbers in citation_mapping.json outdated
 
@@ -594,7 +594,7 @@ grep -rn "Super-Twisting" src/controllers/smc/sta_smc.py
 
 
 
-### Issue 3: Mathematical Notation Mismatch
+## Issue 3: Mathematical Notation Mismatch
 
 **Problem:** Documentation uses $\lambda$, code uses `c`
 

@@ -13,7 +13,7 @@ Real-time simulation orchestrator with timing constraints.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -66,7 +66,7 @@ Set real-time scaling factor.
 
 [View full source →](#method-realtimeorchestrator-set_real_time_factor)
 
----
+
 
 ### `HardwareInLoopOrchestrator`
 
@@ -109,7 +109,7 @@ Execute hardware-in-the-loop simulation.
 
 [View full source →](#method-hardwareinlooporchestrator-execute_hil)
 
----
+
 
 ## Dependencies
 
@@ -248,6 +248,7 @@ from src.simulation.orchestrators import RealTimeOrchestrator
 import time
 
 # Create real-time orchestrator (100 Hz)
+
 orchestrator = RealTimeOrchestrator(
     period=0.01,  # 10ms period
     deadline=0.009,  # 9ms deadline (90%)
@@ -255,6 +256,7 @@ orchestrator = RealTimeOrchestrator(
 )
 
 # Real-time simulation
+
 campaign = {
     'controller': controller,
     'dynamics': dynamics,
@@ -270,12 +272,13 @@ print(f"Deadline violations: {orchestrator.stats['violations']}")
 print(f"Max jitter: {orchestrator.stats['max_jitter']:.6f}s")
 \`\`\`
 
-### Example 2: Priority-Based Scheduling
+## Example 2: Priority-Based Scheduling
 
 \`\`\`python
 from src.simulation.orchestrators import RealTimeOrchestrator
 
 # Multiple tasks with different priorities
+
 tasks = [
     {'name': 'critical', 'period': 0.01, 'deadline': 0.009, 'priority': 10},
     {'name': 'normal', 'period': 0.05, 'deadline': 0.045, 'priority': 5},
@@ -293,9 +296,11 @@ for task in tasks:
     )
 
 # Run all tasks with priority scheduling
+
 orchestrator.start()
 
 # Monitor performance
+
 stats = orchestrator.get_statistics()
 for task_name, task_stats in stats.items():
     print(f"{task_name}:")
@@ -304,12 +309,13 @@ for task_name, task_stats in stats.items():
     print(f"  95th percentile: {task_stats['p95_latency']:.6f}s")
 \`\`\`
 
-### Example 3: Deadline Monitoring and Recovery
+## Example 3: Deadline Monitoring and Recovery
 
 \`\`\`python
 from src.simulation.orchestrators import RealTimeOrchestrator
 
 # Real-time with recovery callback
+
 def deadline_violation_handler(task_name, actual_time, deadline):
     print(f"WARNING: {task_name} missed deadline: "
           f"{actual_time:.6f}s > {deadline:.6f}s")
@@ -323,18 +329,20 @@ orchestrator = RealTimeOrchestrator(
 )
 
 # Weakly-hard (1, 10)-firm constraint
+
 orchestrator.set_weakly_hard_constraint(m=1, k=10)
 
 results = orchestrator.run_campaign(campaign)
 
 # Check constraint satisfaction
+
 if orchestrator.check_weakly_hard():
     print("(1, 10)-firm constraint satisfied!")
 else:
     print("Constraint violated - too many deadline misses")
 \`\`\`
 
-### Example 4: Jitter Analysis
+## Example 4: Jitter Analysis
 
 \`\`\`python
 from src.simulation.orchestrators import RealTimeOrchestrator
@@ -343,9 +351,11 @@ import matplotlib.pyplot as plt
 orchestrator = RealTimeOrchestrator(period=0.01, deadline=0.009)
 
 # Run simulation with jitter tracking
+
 results = orchestrator.run_campaign(campaign, track_jitter=True)
 
 # Analyze jitter
+
 jitter_data = orchestrator.get_jitter_data()
 
 print(f"Mean jitter: {jitter_data['mean']:.6f}s")
@@ -353,6 +363,7 @@ print(f"Max jitter: {jitter_data['max']:.6f}s")
 print(f"Std dev jitter: {jitter_data['std']:.6f}s")
 
 # Plot jitter distribution
+
 plt.figure(figsize=(10, 6))
 plt.hist(jitter_data['samples'], bins=50, density=True)
 plt.xlabel('Jitter (s)')
@@ -365,7 +376,7 @@ plt.grid(True)
 plt.show()
 \`\`\`
 
-### Example 5: Schedulability Analysis
+## Example 5: Schedulability Analysis
 
 \`\`\`python
 from src.simulation.orchestrators import RealTimeOrchestrator
@@ -397,6 +408,7 @@ def check_schedulability(tasks):
         return False
 
 # Example task set
+
 tasks = [
     {'period': 0.01, 'wcet': 0.003},  # 30% utilization
     {'period': 0.05, 'wcet': 0.010},  # 20% utilization
@@ -431,46 +443,50 @@ graph TD
 
 \`\`\`python
 # Basic usage example
+
 from src.simulation.orchestrators import Component
 
 component = Component()
 result = component.process(data)
 \`\`\`
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 \`\`\`python
 # Advanced configuration
+
 component = Component(
     option1=value1,
     option2=value2
 )
 \`\`\`
 
-### Example 3: Integration with Framework
+## Example 3: Integration with Framework
 
 \`\`\`python
 # Integration example
+
 from src.simulation import SimulationRunner
 
 runner = SimulationRunner()
 runner.use_component(component)
 \`\`\`
 
-### Example 4: Performance Optimization
+## Example 4: Performance Optimization
 
 \`\`\`python
 # Performance-optimized usage
+
 component = Component(enable_caching=True)
 \`\`\`
 
-### Example 5: Error Handling
+## Example 5: Error Handling
 
 \`\`\`python
 # Error handling
+
 try:
     result = component.process(data)
 except ComponentError as e:
     print(f"Error: {e}")
 \`\`\`
-

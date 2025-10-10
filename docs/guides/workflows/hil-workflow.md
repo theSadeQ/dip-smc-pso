@@ -1,11 +1,12 @@
 # HIL (Hardware-in-the-Loop) Workflow Guide
+
 **MCP-Validated Workflow with Real Network Metrics**
 
 **Version:** 1.0
 **Date:** 2025-10-07
 **Validation Status:** ✅ All examples tested with real HIL execution
 
----
+
 
 ## Executive Summary
 
@@ -21,7 +22,7 @@ This guide provides a complete, validated workflow for Hardware-in-the-Loop (HIL
 - Understanding of UDP networking basics
 - Familiarity with controller concepts
 
----
+
 
 ## Part 1: Quick Start with Real Example
 
@@ -77,7 +78,7 @@ Packet loss:           0% (perfect delivery)
 CRC failures:          0 (no corrupted packets)
 ```
 
----
+
 
 ## Part 2: Understanding the HIL Architecture
 
@@ -144,7 +145,7 @@ crc = zlib.crc32(payload) & 0xFFFFFFFF
 packet = payload + struct.pack("!I", crc)
 ```
 
----
+
 
 ## Part 3: Step-by-Step HIL Workflow
 
@@ -177,7 +178,7 @@ netstat -an | grep -E "9000|9001"
 
 Expected: No output (ports are free)
 
-### Step 2: Run Basic HIL Simulation
+## Step 2: Run Basic HIL Simulation
 
 **Localhost Test (Validated):**
 ```bash
@@ -207,7 +208,7 @@ python simulate.py --run-hil --controller hybrid_adaptive_sta_smc --duration 10.
 Total: ~41.5 seconds for 10-second simulation
 ```
 
-### Step 3: Analyze HIL Results
+## Step 3: Analyze HIL Results
 
 **Load Results File:**
 ```python
@@ -257,7 +258,7 @@ plt.show()
 - [ ] Pendulums stabilize to upright position
 - [ ] Cart position remains bounded
 
-### Step 4: Network Performance Analysis
+## Step 4: Network Performance Analysis
 
 **Check Network Integrity:**
 ```python
@@ -320,7 +321,7 @@ Timing Analysis:
   Timing jitter: 0.00%
 ```
 
----
+
 
 ## Part 4: Advanced HIL Configurations
 
@@ -404,7 +405,7 @@ python src/interfaces/hil/controller_client.py --config config.yaml
 - Latency < 10ms recommended for 100Hz control
 - No packet filtering or NAT between machines
 
----
+
 
 ## Part 5: Troubleshooting HIL Issues
 
@@ -429,7 +430,7 @@ netstat -an | grep 9000       # Linux/Mac
 python -c "import socket; s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM); s.bind(('127.0.0.1', 9000)); print('Port 9000 available'); s.close()"
 ```
 
-### Issue 2: High Packet Loss
+## Issue 2: High Packet Loss
 
 **Symptoms:**
 - Control performance degraded
@@ -450,7 +451,7 @@ recv_timeout_s: float = 5.0  # Increase from 2.0
 # Ensure no VPN or network filtering active
 ```
 
-### Issue 3: Timing Jitter / Loop Overruns
+## Issue 3: Timing Jitter / Loop Overruns
 
 **Symptoms:**
 - Actual dt deviates from target (>1% jitter)
@@ -474,7 +475,7 @@ taskset -c 0 python simulate.py --run-hil --controller classical_smc
 Start-Process python -ArgumentList "simulate.py --run-hil --controller classical_smc" -Priority High
 ```
 
-### Issue 4: CRC Checksum Failures
+## Issue 4: CRC Checksum Failures
 
 **Symptoms:**
 - Packets rejected due to CRC mismatch
@@ -493,7 +494,7 @@ Start-Process python -ArgumentList "simulate.py --run-hil --controller classical
 # Use TCP instead of UDP (not implemented, but possible)
 ```
 
-### Issue 5: ModuleNotFoundError in Client
+## Issue 5: ModuleNotFoundError in Client
 
 **Symptoms:**
 - Error: "No module named 'src'"
@@ -518,7 +519,7 @@ $env:PYTHONPATH="D:\Projects\main"  # Windows PowerShell
 python simulate.py --run-hil --controller classical_smc
 ```
 
----
+
 
 ## Part 6: Performance Benchmarks (Real Data)
 
@@ -583,7 +584,7 @@ Total:                     41.58 seconds
 
 **Conclusion:** Startup overhead (~32s) dominates short simulations. For production, prefer longer runs (>60s) to amortize overhead.
 
----
+
 
 ## Part 7: Production Deployment Checklist
 
@@ -660,26 +661,29 @@ while True:
         pass
 ```
 
----
+
 
 ## Part 8: Next Steps
 
 ### For First-Time HIL Users:
+
 ✅ **Completed**: Basic HIL simulation workflow
 ➡️ **Next**: [Controller Optimization for HIL](pso-hil-tuning.md)
 ➡️ **Next**: [HIL Safety Validation](hil-safety-validation.md)
 
 ### For Advanced Users:
+
 ➡️ **Next**: [Multi-Machine HIL Setup](hil-multi-machine.md)
 ➡️ **Next**: [Real-Time Synchronization](../../reference/interfaces/hil_real_time_sync.md)
 ➡️ **Next**: [Fault Injection Testing](../../reference/interfaces/hil_fault_injection.md)
 
 ### For Production Deployment:
+
 ➡️ **Next**: [HIL Production Checklist](hil-production-checklist.md)
 ➡️ **Next**: [HIL Data Logging & Monitoring](../../reference/interfaces/hil_data_logging.md)
 ➡️ **Next**: [Disaster Recovery](hil-disaster-recovery.md)
 
----
+
 
 ## Appendix A: Complete Command Reference
 
@@ -705,7 +709,7 @@ python -c "import socket; s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM); 
 python -c "import numpy as np; data = np.load('out/hil_results.npz'); print('Duration:', data['t'][-1], 's')"
 ```
 
----
+
 
 ## Appendix B: Network Protocol Specification
 
@@ -739,7 +743,7 @@ struct StatePacket {
 - Final XOR: 0xFFFFFFFF
 - Computed over: sequence + data fields (excluding CRC itself)
 
----
+
 
 **Document Status:** ✅ MCP-Validated
 **Last Updated:** 2025-10-07

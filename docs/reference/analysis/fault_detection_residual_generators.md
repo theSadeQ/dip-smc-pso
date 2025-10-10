@@ -138,7 +138,7 @@ component = Component(config)
 result = component.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Configure with custom parameters
@@ -149,7 +149,7 @@ config = {
 component = Component(config)
 ```
 
-### Example 3: Integration Workflow
+## Example 3: Integration Workflow
 
 ```python
 # Complete analysis workflow
@@ -162,7 +162,7 @@ results = analyze(
 )
 ```
 
-### Example 4: Fault Detection Example
+## Example 4: Fault Detection Example
 
 ```python
 # FDI system usage
@@ -173,7 +173,7 @@ residual = fdi.generate_residual(y, u)
 fault = fdi.detect(residual)
 ```
 
-### Example 5: Visualization Example
+## Example 5: Visualization Example
 
 ```python
 # Generate analysis plots
@@ -183,6 +183,7 @@ plotter = AnalysisPlotter(style='professional')
 fig = plotter.plot_time_series(data)
 fig.savefig('analysis.pdf')
 ```
+
 This module provides various residual generation methods for fault detection
 including observer-based, parity-based, and parameter estimation approaches.
 
@@ -193,7 +194,7 @@ including observer-based, parity-based, and parameter estimation approaches.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -225,7 +226,7 @@ Compute output from state.
 
 [View full source →](#method-systemmodel-observe)
 
----
+
 
 ### `ResidualGeneratorConfig`
 
@@ -239,7 +240,7 @@ Configuration for residual generators.
 :linenos:
 ```
 
----
+
 
 ### `ResidualGenerator`
 
@@ -269,7 +270,7 @@ Reset generator state.
 
 [View full source →](#method-residualgenerator-reset)
 
----
+
 
 ### `ObserverBasedGenerator`
 
@@ -311,7 +312,7 @@ Reset observer state.
 
 [View full source →](#method-observerbasedgenerator-reset)
 
----
+
 
 ### `KalmanFilterGenerator`
 
@@ -347,7 +348,7 @@ Reset Kalman filter state.
 
 [View full source →](#method-kalmanfiltergenerator-reset)
 
----
+
 
 ### `ParitySpaceGenerator`
 
@@ -389,7 +390,7 @@ Reset parity space generator state.
 
 [View full source →](#method-parityspacegenerator-reset)
 
----
+
 
 ### `ParameterEstimationGenerator`
 
@@ -431,7 +432,7 @@ Reset parameter estimation state.
 
 [View full source →](#method-parameterestimationgenerator-reset)
 
----
+
 
 ### `AdaptiveResidualGenerator`
 
@@ -473,7 +474,7 @@ Reset all generators.
 
 [View full source →](#method-adaptiveresidualgenerator-reset)
 
----
+
 
 ### `ResidualGeneratorFactory`
 
@@ -516,7 +517,7 @@ Create Kalman filter generator with default configuration.
 
 [View full source →](#method-residualgeneratorfactory-create_default_kalman)
 
----
+
 
 ## Functions
 
@@ -546,7 +547,7 @@ ResidualGenerator
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

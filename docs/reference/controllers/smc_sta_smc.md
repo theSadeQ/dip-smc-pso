@@ -13,7 +13,7 @@
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -76,7 +76,7 @@
  when any gain is non‑positive.
 
  Returns
- -------
+ # ------- (RST section marker)
  tuple
      A triple ``(u, (z, σ), history)`` containing the saturated control
      signal ``u``, the updated internal state and sliding surface value,
@@ -171,7 +171,7 @@ Compute the model‑based equivalent control ``u_eq`` using Tikhonov regularisat
 
 [View full source →](#method-supertwistingsmc-_compute_equivalent_control)
 
----
+
 
 ## Functions
 
@@ -193,7 +193,7 @@ for robust, finite‑time convergence of the super‑twisting algorithm.
 :linenos:
 ```
 
----
+
 
 ### `_sta_smc_core(z, sigma, sgn_sigma, alg_gain_K1, alg_gain_K2, damping_gain, dt, max_force, u_eq, Kaw)`
 
@@ -214,7 +214,7 @@ control multiplied by ``Kaw``【789743582768797†L224-L249】.  Returns
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

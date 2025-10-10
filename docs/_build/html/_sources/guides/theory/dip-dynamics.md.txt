@@ -4,7 +4,7 @@
 
 This guide derives the mathematical model of the double-inverted pendulum from first principles. You'll learn how Lagrangian mechanics produces the equations of motion, when linearization is valid, and why the system is controllable despite underactuation.
 
----
+
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@ This guide derives the mathematical model of the double-inverted pendulum from f
 - [Linearization for Control](#linearization-for-control)
 - [Controllability Analysis](#controllability-analysis)
 
----
+
 
 ## System Overview
 
@@ -107,7 +107,7 @@ flowchart LR
 
 **Underactuated**: 3 DOF, 1 control input
 - Cannot independently control all coordinates
-- Must exploit dynamic coupling
+- Must use dynamic coupling
 
 **Unstable Equilibrium**: Upright position
 - Small perturbations → pendulums fall
@@ -121,7 +121,7 @@ flowchart LR
 - Cart motion affects both pendulums
 - Second pendulum motion affects first
 
----
+
 
 ## Lagrangian Derivation
 
@@ -253,7 +253,7 @@ L = ½(m₀ + m₁ + m₂)ẋ²
 
 **Note**: This is a complex expression due to coupling terms!
 
----
+
 
 ## Equations of Motion
 
@@ -319,7 +319,7 @@ Q = [1, 0, 0]ᵀ
 - `Ṁ - 2C` is skew-symmetric
 - Important for energy-based control
 
----
+
 
 ## Linearization for Control
 
@@ -381,7 +381,7 @@ A = [0   I  ]    B = [  0      ]
 - Large disturbance scenarios
 - Research publications
 
----
+
 
 ## Controllability Analysis
 
@@ -449,6 +449,7 @@ flowchart TD
 ```
 rank([B  AB  A²B  A³B  A⁴B  A⁵B]) = 6  ✓
 ```
+
 System is **fully controllable** despite underactuation!
 
 ### Observability
@@ -468,7 +469,7 @@ Where `C = [1 0 0 0 0 0; 0 0 1 0 0 0; 0 0 0 0 1 0]` (measure positions)
 
 **Meaning**: Can estimate full state from position measurements
 
----
+
 
 ## Summary
 
@@ -491,13 +492,13 @@ Where `C = [1 0 0 0 0 0; 0 0 1 0 0 0; 0 0 0 0 1 0]` (measure positions)
 - Implement dynamics models: [Plant Models API](../api/plant-models.md)
 - Deep dive: [Dynamics Derivations](../../mathematical_foundations/dynamics_derivations.md)
 
----
+
 
 **Further Reading**:
 - Goldstein, H. (2002). *Classical Mechanics*. Addison-Wesley.
 - Spong, M. W., et al. (2006). *Robot Modeling and Control*. Wiley.
 - Khalil, H. K. (2002). *Nonlinear Systems*. Prentice Hall.
 
----
+
 
 **Last Updated**: October 2025

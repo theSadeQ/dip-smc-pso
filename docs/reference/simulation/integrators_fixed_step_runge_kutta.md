@@ -139,7 +139,7 @@ instance = IntegratorsFixedStepRungeKutta()
 result = instance.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Custom configuration
@@ -148,7 +148,7 @@ instance = IntegratorsFixedStepRungeKutta(config)
 result = instance.process(data)
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 ```python
 try:
@@ -181,7 +181,7 @@ result = orchestrator.execute(instance.process(data))
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -219,7 +219,7 @@ Integrate using second-order Runge-Kutta (midpoint) method.
 
 [View full source →](#method-rungekutta2-integrate)
 
----
+
 
 ### `RungeKutta4`
 
@@ -255,7 +255,7 @@ Integrate using fourth-order Runge-Kutta method.
 
 [View full source →](#method-rungekutta4-integrate)
 
----
+
 
 ### `RungeKutta38`
 
@@ -291,7 +291,7 @@ Integrate using Runge-Kutta 3/8 rule.
 
 [View full source →](#method-rungekutta38-integrate)
 
----
+
 
 ### `ClassicalRungeKutta`
 
@@ -307,7 +307,7 @@ Alias for standard RK4 method for backward compatibility.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

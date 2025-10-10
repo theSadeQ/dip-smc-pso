@@ -25,7 +25,7 @@ git tag -a v1.0.0 -m "Release version 1.0.0"
 git push origin v1.0.0
 ```
 
-### Version Naming
+## Version Naming
 
 | Version | Description | URL |
 |---------|-------------|-----|
@@ -159,7 +159,7 @@ git cherry-pick <commit-hash>
 git push origin v1.0-docs
 ```
 
-### Deprecation Warnings
+## Deprecation Warnings
 
 Add version warnings for deprecated features:
 
@@ -289,7 +289,7 @@ git checkout main
 sphinx-build -b html . _build/html-latest
 ```
 
-### Preview URLs
+## Preview URLs
 
 - Latest: https://dip-smc-pso.readthedocs.io/en/latest/
 - Stable: https://dip-smc-pso.readthedocs.io/en/stable/

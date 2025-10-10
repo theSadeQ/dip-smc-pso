@@ -16,7 +16,7 @@ configuration with validation and type safety.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -54,7 +54,7 @@ Create from dictionary.
 
 [View full source →](#method-physicsconfig-from_dict)
 
----
+
 
 ### `BasePhysicsConfig`
 
@@ -153,7 +153,7 @@ Compute dimensionless parameter groups.
 
 [View full source →](#method-basephysicsconfig-get_dimensionless_parameters)
 
----
+
 
 ### `BaseDIPConfig`
 
@@ -222,7 +222,7 @@ Get characteristic scales for the DIP system.
 
 [View full source →](#method-basedipconfig-get_system_scales)
 
----
+
 
 ### `ConfigurationError`
 
@@ -238,7 +238,7 @@ Raised when configuration validation fails.
 :linenos:
 ```
 
----
+
 
 ### `ConfigurationWarning`
 
@@ -254,7 +254,7 @@ Issued when configuration parameters are unusual but valid.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

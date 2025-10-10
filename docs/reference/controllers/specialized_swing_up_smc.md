@@ -13,7 +13,7 @@
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -29,7 +29,7 @@
 :linenos:
 ```
 
----
+
 
 ### `SwingUpSMC`
 
@@ -101,7 +101,7 @@ Centralized transition logic for both directions with detailed logging.
 
 [View full source →](#method-swingupsmc-switch_time)
 
----
+
 
 ## Dependencies
 

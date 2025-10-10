@@ -1,4 +1,5 @@
 # HIL Safety Validation **Status:** 🚧 Under Construction This document will contain safety validation procedures for Hardware-in-the-Loop controller deployment. ## Planned Content ### Safety Validation Framework
+
 - Formal safety property definitions
 - Reachability analysis for controller states
 - Barrier function verification
@@ -21,5 +22,9 @@
 - Incident response procedures ## Temporary References Until this document is complete, please refer to:
 - [HIL Workflow Guide](hil-workflow.md)
 - [HIL Fault Injection](../../reference/interfaces/hil_fault_injection.md)
-- [HIL Test Automation](../../reference/interfaces/hil_test_automation.md) --- **Last Updated:** 2025-10-07
+- [HIL Test Automation](../../reference/interfaces/hil_test_automation.md)
+
+---
+
+**Last Updated:** 2025-10-07
 **Target Completion:** Phase 7

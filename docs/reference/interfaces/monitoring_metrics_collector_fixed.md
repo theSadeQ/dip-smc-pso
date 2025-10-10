@@ -25,7 +25,7 @@ CRITICAL: This fixes the memory leak that would crash production systems.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -43,7 +43,7 @@ Metric type enumeration.
 :linenos:
 ```
 
----
+
 
 ### `AggregationType`
 
@@ -59,7 +59,7 @@ Metric aggregation type.
 :linenos:
 ```
 
----
+
 
 ### `MemoryProfile`
 
@@ -75,7 +75,7 @@ Memory usage profiles for different environments.
 :linenos:
 ```
 
----
+
 
 ### `MetricValue`
 
@@ -89,7 +89,7 @@ Individual metric value with timestamp.
 :linenos:
 ```
 
----
+
 
 ### `MemoryUsageStats`
 
@@ -103,7 +103,7 @@ Memory usage statistics for monitoring.
 :linenos:
 ```
 
----
+
 
 ### `MetricConfig`
 
@@ -125,7 +125,7 @@ Create configuration for specific memory profile.
 
 [View full source →](#method-metricconfig-for_profile)
 
----
+
 
 ### `Metric`
 
@@ -177,7 +177,7 @@ Emergency cleanup - keep only most recent entries.
 
 [View full source →](#method-metric-force_cleanup)
 
----
+
 
 ### `ProductionSafeMetricsCollector`
 
@@ -251,7 +251,7 @@ Get health status including memory metrics.
 
 [View full source →](#method-productionsafemetricscollector-get_health_status)
 
----
+
 
 ## Functions
 
@@ -267,7 +267,7 @@ Create metrics collector configured for specific environment.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

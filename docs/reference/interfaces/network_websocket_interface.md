@@ -16,7 +16,7 @@ and server modes for interactive control applications.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -146,7 +146,7 @@ Parse endpoint string into host and port.
 
 [View full source →](#method-websocketinterface-_parse_endpoint)
 
----
+
 
 ### `WebSocketServer`
 
@@ -186,7 +186,7 @@ Broadcast message to all connected clients.
 
 [View full source →](#method-websocketserver-broadcast)
 
----
+
 
 ### `WebSocketClient`
 
@@ -214,7 +214,7 @@ Connect to WebSocket server.
 
 [View full source →](#method-websocketclient-connect_to_server)
 
----
+
 
 ## Dependencies
 

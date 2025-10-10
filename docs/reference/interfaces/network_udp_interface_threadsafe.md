@@ -25,7 +25,7 @@ PRODUCTION SAFETY: All race conditions resolved, safe for multi-threaded use.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -180,7 +180,7 @@ Cleanup resources safely.
 
 [View full source →](#method-threadsafeudpinterface-cleanup)
 
----
+
 
 ### `ThreadSafeUDPProtocol`
 
@@ -232,7 +232,7 @@ Called when error is received.
 
 [View full source →](#method-threadsafeudpprotocol-error_received)
 
----
+
 
 ## Functions
 
@@ -248,7 +248,7 @@ Create thread-safe UDP server.
 :linenos:
 ```
 
----
+
 
 ### `create_threadsafe_udp_client(config)`
 
@@ -262,7 +262,7 @@ Create thread-safe UDP client.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

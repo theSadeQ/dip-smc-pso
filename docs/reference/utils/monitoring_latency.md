@@ -16,7 +16,7 @@ deadline violations in real-time systems.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -89,7 +89,7 @@ Get statistics for the most recent n samples.
 
 [View full source →](#method-latencymonitor-get_recent_stats)
 
----
+
 
 ## Dependencies
 
@@ -152,12 +152,13 @@ component = Component(
 
 \`\`\`python
 # Integration example
+
 for k in range(num_steps):
     result = component.process(x)
     x = update(x, result)
 \`\`\`
 
-### Example 4: Performance Optimization
+## Example 4: Performance Optimization
 
 \`\`\`python
 component = Component(enable_caching=True)
@@ -171,4 +172,3 @@ try:
 except ComponentError as e:
     print(f"Error: {e}")
 \`\`\`
-

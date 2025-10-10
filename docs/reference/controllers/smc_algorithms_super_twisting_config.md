@@ -21,7 +21,7 @@ Mathematical Requirements:
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -152,7 +152,7 @@ Create Super-Twisting config from classical SMC gains.
 
 [View full source →](#method-supertwistingsmcconfig-create_from_classical_gains)
 
----
+
 
 ## Dependencies
 

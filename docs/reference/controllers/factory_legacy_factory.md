@@ -13,7 +13,7 @@ Controller factory with Pydantic v2 config alignment and robust error handling.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -31,7 +31,7 @@ Raised when controller configuration or resolution fails.
 :linenos:
 ```
 
----
+
 
 ### `ConfigValueError`
 
@@ -47,7 +47,7 @@ Raised when a config value is out of the accepted range.
 :linenos:
 ```
 
----
+
 
 ### `UnknownConfigKeyError`
 
@@ -63,7 +63,7 @@ Raised when unexpected/unknown keys appear in a controller config block.
 :linenos:
 ```
 
----
+
 
 ## Functions
 
@@ -79,7 +79,7 @@ Try importing ``attr`` from ``primary_mod`` then ``fallback_mod``.
 :linenos:
 ```
 
----
+
 
 ### `normalize_controller_name(name)`
 
@@ -96,7 +96,7 @@ then check alias map.
 :linenos:
 ```
 
----
+
 
 ### `normalize_param_key(key)`
 
@@ -110,7 +110,7 @@ Normalize parameter key: lowercase, replace hyphens/spaces with underscores.
 :linenos:
 ```
 
----
+
 
 ### `apply_deprecation_mapping(controller_name, params, allow_unknown)`
 
@@ -127,7 +127,7 @@ Emits DeprecationWarning for each deprecated key found.
 :linenos:
 ```
 
----
+
 
 ### `redact_value(value)`
 
@@ -141,7 +141,7 @@ Redact sensitive values for logging.
 :linenos:
 ```
 
----
+
 
 ### `register_controller(name)`
 
@@ -157,7 +157,7 @@ Registration is idempotent - re-registering the same name overwrites.
 :linenos:
 ```
 
----
+
 
 ### `_as_dict(obj)`
 
@@ -171,7 +171,7 @@ Robustly convert an arbitrary object into a plain dict.
 :linenos:
 ```
 
----
+
 
 ### `_get_default_gains(controller_name, config, gains_override)`
 
@@ -185,7 +185,7 @@ Get gains from override, defaults, or raise error.
 :linenos:
 ```
 
----
+
 
 ### `_ensure_dynamics_available(use_full)`
 
@@ -199,7 +199,7 @@ Ensure required dynamics model is available.
 :linenos:
 ```
 
----
+
 
 ### `_validate_shared_params(controller_name, dt, max_force)`
 
@@ -213,7 +213,7 @@ Validate common parameters shared by controllers.
 :linenos:
 ```
 
----
+
 
 ### `build_controller(name, cfg)`
 
@@ -250,7 +250,7 @@ FactoryConfigurationError
 :linenos:
 ```
 
----
+
 
 ### `build_all(controllers_cfg)`
 
@@ -284,7 +284,7 @@ FactoryConfigurationError
 :linenos:
 ```
 
----
+
 
 ### `_legacy_create_controller(ctrl_name, ctrl_cfg, config, gains, allow_unknown)`
 
@@ -298,7 +298,7 @@ Legacy controller creation for backward compatibility.
 :linenos:
 ```
 
----
+
 
 ### `_build_classical_smc(key, ctrl_cfg_dict, config, gains, dynamics_model, shared_dt, shared_max_force, allow_unknown)`
 
@@ -310,7 +310,7 @@ Legacy controller creation for backward compatibility.
 :linenos:
 ```
 
----
+
 
 ### `_build_sta_smc(key, ctrl_cfg_dict, config, gains, dynamics_model, shared_dt, shared_max_force, allow_unknown)`
 
@@ -322,7 +322,7 @@ Legacy controller creation for backward compatibility.
 :linenos:
 ```
 
----
+
 
 ### `_build_adaptive_smc(key, ctrl_cfg_dict, config, gains, shared_dt, shared_max_force, allow_unknown)`
 
@@ -334,7 +334,7 @@ Legacy controller creation for backward compatibility.
 :linenos:
 ```
 
----
+
 
 ### `_build_swing_up_smc(key, ctrl_cfg_dict, config, gains, dynamics_model, shared_dt, shared_max_force, allow_unknown)`
 
@@ -346,7 +346,7 @@ Legacy controller creation for backward compatibility.
 :linenos:
 ```
 
----
+
 
 ### `_build_hybrid_adaptive_sta_smc(key, ctrl_cfg_dict, config, gains, dynamics_model, shared_dt, shared_max_force, allow_unknown)`
 
@@ -358,7 +358,7 @@ Legacy controller creation for backward compatibility.
 :linenos:
 ```
 
----
+
 
 ### `_build_mpc_controller(key, ctrl_cfg_dict, config, gains, shared_dt, shared_max_force, allow_unknown)`
 
@@ -370,7 +370,7 @@ Legacy controller creation for backward compatibility.
 :linenos:
 ```
 
----
+
 
 ### `create_controller()`
 
@@ -392,7 +392,7 @@ name : str
 :linenos:
 ```
 
----
+
 
 ### `_canonical(name)`
 
@@ -406,7 +406,7 @@ Legacy/compat alias for tests. Mirrors normalize_controller_name().
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

@@ -68,7 +68,7 @@ def create_controller(ctrl_type: SMCType, ...) -> Controller:
     ...
 ```
 
-### Registry Pattern
+## Registry Pattern
 
 **Dynamic controller registration:**
 
@@ -123,7 +123,7 @@ def create_controller(
 - Flexibility: Change models without factory changes
 - Loose coupling: Factory doesn't depend on concrete dynamics
 
-### Gain Specification Pattern
+## Gain Specification Pattern
 
 **Each controller type specifies gain requirements:**
 
@@ -212,7 +212,7 @@ config = (SMCConfigBuilder()
     .build())
 ```
 
-### Performance Considerations
+## Performance Considerations
 
 **Factory overhead:**
 - Type dispatch: $O(1)$ hash table lookup
@@ -269,7 +269,7 @@ u, state_vars, history = controller.compute_control(state, {}, {})
 print(f"Control output: {u:.2f} N")
 ```
 
-### Example 2: Type-Safe Factory Usage
+## Example 2: Type-Safe Factory Usage
 
 ```python
 from src.controllers.factory import SMCFactory, SMCConfig
@@ -288,7 +288,7 @@ controller = SMCFactory.create_controller(SMCType.CLASSICAL, config)
 # mypy validates this at compile time!
 ```
 
-### Example 3: Gain Specification Query
+## Example 3: Gain Specification Query
 
 ```python
 from src.controllers.factory import SMCFactory, SMCType
@@ -302,7 +302,7 @@ for ctrl_type in SMCType:
     print(f"  Bounds:          {spec.bounds}")
 ```
 
-### Example 4: Dynamic Controller Registry
+## Example 4: Dynamic Controller Registry
 
 ```python
 from src.controllers.factory.core.registry import ControllerRegistry
@@ -323,7 +323,7 @@ def create_custom_smc(config):
 registry.register(SMCType.CUSTOM, create_custom_smc)
 ```
 
-### Example 5: Batch Controller Creation
+## Example 5: Batch Controller Creation
 
 ```python
 from src.controllers.factory import create_all_smc_controllers
@@ -358,7 +358,7 @@ for ctrl_name, controller in controllers.items():
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -376,7 +376,7 @@ Enumeration of the 4 core SMC controller types.
 :linenos:
 ```
 
----
+
 
 ### `SMCProtocol`
 
@@ -418,7 +418,7 @@ Return controller gains.
 
 [View full source →](#method-smcprotocol-gains)
 
----
+
 
 ### `PSOControllerWrapper`
 
@@ -450,7 +450,7 @@ Return controller gains.
 
 [View full source →](#method-psocontrollerwrapper-gains)
 
----
+
 
 ### `SMCConfig`
 
@@ -472,7 +472,7 @@ Validate SMC configuration parameters.
 
 [View full source →](#method-smcconfig-__post_init__)
 
----
+
 
 ### `SMCGainSpec`
 
@@ -494,7 +494,7 @@ Default gain bounds for PSO optimization.
 
 [View full source →](#method-smcgainspec-gain_bounds)
 
----
+
 
 ### `SMCFactory`
 
@@ -563,7 +563,7 @@ Create Hybrid Adaptive-STA SMC with clean parameter mapping.
 
 [View full source →](#method-smcfactory-_create_hybrid_smc)
 
----
+
 
 ## Functions
 
@@ -589,7 +589,7 @@ Usage:
 :linenos:
 ```
 
----
+
 
 ### `get_gain_bounds_for_pso(smc_type)`
 
@@ -603,7 +603,7 @@ Get PSO optimization bounds for SMC controller gains.
 :linenos:
 ```
 
----
+
 
 ### `validate_smc_gains(smc_type, gains)`
 
@@ -617,7 +617,7 @@ Validate that gains are appropriate for the SMC controller type.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

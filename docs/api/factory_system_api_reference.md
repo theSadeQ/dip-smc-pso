@@ -173,7 +173,7 @@ assert type(controller1) == type(controller2) == type(controller3)
 
 ---
 
-### `list_available_controllers()` **Query currently available controller types.** #### Signature ```python
+## `list_available_controllers()` **Query currently available controller types.** #### Signature ```python
 # example-metadata:
 # runnable: false def list_available_controllers() -> list
 ``` #### Return Value Returns sorted list of controller type names that can be instantiated. Excludes controllers with missing optional dependencies. ```python
@@ -198,7 +198,7 @@ print(df.sort_values('cost'))
 
 ---
 
-### `list_all_controllers()` **Get complete list of all registered controller types.** #### Signature ```python
+## `list_all_controllers()` **Get complete list of all registered controller types.** #### Signature ```python
 # example-metadata:
 # runnable: false def list_all_controllers() -> list
 ``` #### Return Value Returns list of all controller types in the registry, including those with missing dependencies. ```python
@@ -212,7 +212,7 @@ print(df.sort_values('cost'))
 
 ---
 
-### `get_default_gains(controller_type)` **Retrieve default gain vector for a controller type.** #### Signature ```python
+## `get_default_gains(controller_type)` **Retrieve default gain vector for a controller type.** #### Signature ```python
 # example-metadata:
 # runnable: false def get_default_gains(controller_type: str) -> list
 ``` #### Parameters | Parameter | Type | Required | Description |

@@ -4,7 +4,7 @@
 **Purpose:** Physics models and parameter configuration for double-inverted pendulum
 **Level:** Intermediate to Advanced
 
----
+
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@
 - [Integration Patterns](#integration-patterns)
 - [Troubleshooting](#troubleshooting)
 
----
+
 
 ## Overview
 
@@ -36,7 +36,7 @@ The Plant Models API provides physics-based models of the double-inverted pendul
 **Theory & Foundations:**
 - [DIP Dynamics Theory](../theory/dip-dynamics.md): Lagrangian derivation, linearization, controllability analysis
 
----
+
 
 ## System Overview
 
@@ -116,7 +116,7 @@ u = Control force
 | Joint 2 friction | b₂ | N⋅m⋅s/rad | 0.01 | Rotational damping |
 | Gravity | g | m/s² | 9.81 | Gravitational acceleration |
 
----
+
 
 ## Model Types
 
@@ -162,7 +162,7 @@ state_dot = dynamics.compute_dynamics(state, control)
 - Small angle stabilization tasks
 - Development and debugging
 
-### Full Nonlinear Dynamics
+## Full Nonlinear Dynamics
 
 **File:** `src/core/dynamics_full.py`
 
@@ -211,7 +211,7 @@ state_dot = dynamics.compute_dynamics(state, control)
 | **Final Validation** | ⚠️ Not sufficient | ✅ Required |
 | **Swing-Up Control** | ❌ Invalid | ✅ Valid |
 
----
+
 
 ## Parameter Configuration
 
@@ -251,7 +251,7 @@ print(f"I1 (auto): {custom_params.I1:.4f} kg⋅m²")
 print(f"I2 (auto): {custom_params.I2:.4f} kg⋅m²")
 ```
 
-### Realistic vs Challenging Parameters
+## Realistic vs Challenging Parameters
 
 **Realistic (baseline):**
 ```yaml
@@ -331,7 +331,7 @@ plt.grid(True)
 plt.show()
 ```
 
----
+
 
 ## Custom Models
 
@@ -349,7 +349,7 @@ class CoulombFrictionDynamics(FullDynamics):
     def __init__(self, params, mu_coulomb=0.2):
         """
         Parameters
-        ----------
+        # ---------- (RST section marker)
         params : DIPParams
             Physics parameters
         mu_coulomb : float
@@ -409,7 +409,7 @@ result = runner.run(controller)
 print(f"ISE with Coulomb friction: {result['metrics']['ise']:.4f}")
 ```
 
-### Validation of Custom Models
+## Validation of Custom Models
 
 ```python
 # example-metadata:
@@ -435,7 +435,7 @@ def validate_custom_dynamics(dynamics):
 validate_custom_dynamics(custom_dynamics)
 ```
 
----
+
 
 ## Integration Patterns
 
@@ -464,7 +464,7 @@ result = runner_full.run(controller)
 print(f"Validation ISE: {result['metrics']['ise']:.4f}")
 ```
 
-### Pattern 2: Model Comparison
+## Pattern 2: Model Comparison
 
 ```python
 # example-metadata:
@@ -487,7 +487,7 @@ for model, result in results_comparison.items():
           f"Settling={result['metrics']['settling_time']:.2f}s")
 ```
 
----
+
 
 ## Troubleshooting
 
@@ -508,7 +508,7 @@ Expected for large angles. Simplified model valid only for |θ| < 15°.
 **Solution:**
 Check friction parameters and numerical integration timestep.
 
----
+
 
 ## Next Steps
 
@@ -517,6 +517,6 @@ Check friction parameters and numerical integration timestep.
 - **Configure parameters:** [Configuration API Guide](configuration.md)
 - **Technical details:** [Dynamics Technical Reference](../../reference/core/__init__.md)
 
----
+
 
 **Last Updated:** October 2025

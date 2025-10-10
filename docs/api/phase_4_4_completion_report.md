@@ -34,7 +34,7 @@
 
 ---
 
-#### 2. **Dynamics Model System** (Section 3, ~500 lines) ✅ **Files:**
+### 2. **Dynamics Model System** (Section 3, ~500 lines) ✅ **Files:**
 
 - `src/plant/models/base/dynamics_interface.py`
 - `src/plant/models/lowrank/dynamics.py`

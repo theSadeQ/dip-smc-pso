@@ -1,4 +1,5 @@
 # PSO Optimization for Adaptive SMC **Status:** 🚧 Under Construction This document will contain guidance on optimizing Adaptive Sliding Mode Controller parameters using Particle Swarm Optimization. ## Planned Content ### Adaptive SMC Parameter Space
+
 - Adaptation law gains (γ parameters)
 - Switching gain bounds
 - Boundary layer thickness
@@ -26,5 +27,9 @@
 - Production deployment guidelines ## Temporary References Until this document is complete, please refer to:
 - [PSO Optimization Workflow](pso-optimization-workflow.md)
 - [Adaptive SMC Technical Guide](../../controllers/adaptive_smc_technical_guide.md)
-- [Controller Comparison Tutorial](../tutorials/tutorial-02-controller-comparison.md) --- **Last Updated:** 2025-10-07
+- [Controller Comparison Tutorial](../tutorials/tutorial-02-controller-comparison.md)
+
+---
+
+**Last Updated:** 2025-10-07
 **Target Completion:** Phase 7

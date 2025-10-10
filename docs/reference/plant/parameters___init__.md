@@ -13,5 +13,4 @@ Physical parameters and configuration for the double inverted pendulum.
 :linenos:
 ```
 
----
 

@@ -1,4 +1,5 @@
 # optimization.__init__ **Source:** `src\optimization\__init__.py` ## Module Overview Professional optimization framework for control engineering applications. This module provides a optimization framework featuring:
+
 - Multiple optimization (see references) algorithms (PSO, DE, GA, CMA-ES, Bayesian)
 - Professional objective functions for control performance metrics
 - Advanced convergence monitoring and analysis
@@ -6,7 +7,11 @@
 - Extensible architecture for research and production use For backward compatibility, legacy interfaces are maintained. ## Complete Source Code ```{literalinclude} ../../../src/optimization/__init__.py
 :language: python
 :linenos:
-``` --- ## Functions ### `create_optimizer(algorithm, parameter_space)` Create an optimizer of specified type. Parameters
+```
+
+---
+
+## Functions ### `create_optimizer(algorithm, parameter_space)` Create an optimizer of specified type. Parameters
 ----------
 algorithm : str Algorithm name ('pso', 'de', 'ga', 'cma_es', 'bayesian', 'nelder_mead')
 parameter_space : ParameterSpace Parameter space to optimize over
@@ -29,7 +34,12 @@ Optimizer Configured optimizer instance Examples
 :language: python
 :pyobject: create_optimizer
 :linenos:
-``` --- ### `create_control_problem(objective_type, controller_factory, simulation_config, parameter_bounds)` Create a control optimization problem. Parameters
+```
+
+---
+
+### `create_control_problem(objective_type, controller_factory, simulation_config, parameter_bounds)` Create a control optimization problem. Parameters
+
 ----------
 objective_type : str Type of objective ('tracking', 'energy', 'settling_time', 'overshoot')
 controller_factory : callable Function to create controller from parameters
@@ -52,7 +62,11 @@ ControlOptimizationProblem Configured optimization problem Examples
 :language: python
 :pyobject: create_control_problem
 :linenos:
-``` --- ### `run_optimization_study(problems, algorithms, n_runs, parallel)` Run optimization study comparing multiple algorithms. Parameters
+```
+
+---
+
+### `run_optimization_study(problems, algorithms, n_runs, parallel)` Run optimization study comparing multiple algorithms. Parameters
 ----------
 problems : list List of optimization problems
 algorithms : list List of algorithm names or configured optimizers
@@ -71,17 +85,31 @@ dict study results with statistical analysis Examples
 :language: python
 :pyobject: run_optimization_study
 :linenos:
-``` --- ### `example_pid_tuning()` Example: PID controller tuning using PSO. This example demonstrates how to optimize PID controller parameters
+```
+
+---
+
+### `example_pid_tuning()` Example: PID controller tuning using PSO. This example demonstrates how to optimize PID controller parameters
+
 for a tracking objective using the new framework. #### Source Code ```{literalinclude} ../../../src/optimization/__init__.py
 :language: python
 :pyobject: example_pid_tuning
 :linenos:
-``` --- ### `example_algorithm_comparison()` Example: Compare multiple optimization algorithms. This example shows how to compare PSO, DE, and GA algorithms
+```
+
+---
+
+### `example_algorithm_comparison()` Example: Compare multiple optimization algorithms. This example shows how to compare PSO, DE, and GA algorithms
 on the same control optimization problem. #### Source Code ```{literalinclude} ../../../src/optimization/__init__.py
 :language: python
 :pyobject: example_algorithm_comparison
 :linenos:
-``` --- ## Dependencies This module imports: - `from .core import Optimizer, ObjectiveFunction, Constraint, OptimizationProblem, OptimizationResult, ParameterSpace, ConvergenceMonitor, OptimizationProblemBuilder, ControlOptimizationProblem, ContinuousParameter, DiscreteParameter, ContinuousParameterSpace, OptimizationContext, optimize`
+```
+
+---
+
+## Dependencies This module imports: - `from .core import Optimizer, ObjectiveFunction, Constraint, OptimizationProblem, OptimizationResult, ParameterSpace, ConvergenceMonitor, OptimizationProblemBuilder, ControlOptimizationProblem, ContinuousParameter, DiscreteParameter, ContinuousParameterSpace, OptimizationContext, optimize`
+
 - `from .algorithms import ParticleSwarmOptimizer, DifferentialEvolution, GeneticAlgorithm, NelderMead, BFGSOptimizer`
 - `from .objectives import TrackingErrorObjective, EnergyConsumptionObjective, StabilityMarginObjective, RobustnessObjective, SettlingTimeObjective, OvershootObjective, SteadyStateErrorObjective, WeightedSumObjective, ParetoObjective, SimulationBasedObjective, AnalyticalObjective, CompositeObjective`
 - `from .algorithms.pso_optimizer import PSOTuner`

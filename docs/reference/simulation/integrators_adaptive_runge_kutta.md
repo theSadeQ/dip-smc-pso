@@ -136,7 +136,7 @@ instance = IntegratorsAdaptiveRungeKutta()
 result = instance.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Custom configuration
@@ -145,7 +145,7 @@ instance = IntegratorsAdaptiveRungeKutta(config)
 result = instance.process(data)
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 ```python
 try:
@@ -178,7 +178,7 @@ result = orchestrator.execute(instance.process(data))
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -222,7 +222,7 @@ Perform one adaptive integration step.
 
 [View full source →](#method-adaptiverungekutta-_adaptive_step)
 
----
+
 
 ### `DormandPrince45`
 
@@ -252,7 +252,7 @@ Perform single Dormand-Prince 4(5) step with error control.
 
 [View full source →](#method-dormandprince45-_adaptive_step)
 
----
+
 
 ## Functions
 
@@ -293,7 +293,7 @@ adaptive_integrator.py implementation.
 :linenos:
 ```
 
----
+
 
 ### `_original_rk45_step(f, t, y, dt, abs_tol, rel_tol)`
 
@@ -307,7 +307,7 @@ Original RK45 implementation for fallback.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

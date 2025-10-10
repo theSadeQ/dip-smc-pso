@@ -17,7 +17,7 @@ configuration systems used throughout the project.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -110,7 +110,7 @@ String representation.
 
 [View full source →](#method-attributedictionary-__repr__)
 
----
+
 
 ### `ConfigCompatibilityMixin`
 
@@ -141,7 +141,7 @@ Ensure configuration is a dictionary.
 
 [View full source →](#method-configcompatibilitymixin-_ensure_config_dict)
 
----
+
 
 ## Functions
 
@@ -167,7 +167,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `ensure_dict_access(config)`
 
@@ -191,7 +191,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `wrap_physics_config(physics_config)`
 
@@ -216,7 +216,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `validate_physics_config(config)`
 
@@ -236,7 +236,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `create_minimal_physics_config()`
 
@@ -253,7 +253,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

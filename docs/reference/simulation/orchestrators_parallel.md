@@ -184,7 +184,7 @@ instance = OrchestratorsParallel()
 result = instance.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Custom configuration
@@ -193,7 +193,7 @@ instance = OrchestratorsParallel(config)
 result = instance.process(data)
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 ```python
 try:
@@ -226,7 +226,7 @@ result = orchestrator.execute(instance.process(data))
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -274,7 +274,7 @@ Run a single simulation using sequential orchestrator.
 
 [View full source →](#method-parallelorchestrator-_run_single_simulation)
 
----
+
 
 ### `WorkerPool`
 
@@ -314,7 +314,7 @@ Map simulation function over parameter list.
 
 [View full source →](#method-workerpool-map_simulations)
 
----
+
 
 ## Functions
 
@@ -342,7 +342,7 @@ list
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

@@ -29,7 +29,7 @@ return self._create_failure_result( "Invalid inputs", state=state, # ✅ No muta
 
 ---
 
-### 2. UNNECESSARY: Stats Dictionary Copies for Read-Only Access **Pattern**: Copying internal stats dicts before returning **Locations**:
+## 2. UNNECESSARY: Stats Dictionary Copies for Read-Only Access **Pattern**: Copying internal stats dicts before returning **Locations**:
 
 - `src/interfaces/data_exchange/factory_resilient.py:171`
 - `src/interfaces/hil/fault_injection.py:153`
@@ -47,7 +47,7 @@ def get_statistics(self) -> Dict[str, Any]: stats = self._stats # ✅ Direct ref
 
 ---
 
-### 3. NECESSARY: Broadcast Views Must Be Copied **Pattern**: `np.broadcast_to()` returns read-only views **Location**: `src/simulation/engines/vector_sim.py:363` **Example**:
+## 3. NECESSARY: Broadcast Views Must Be Copied **Pattern**: `np.broadcast_to()` returns read-only views **Location**: `src/simulation/engines/vector_sim.py:363` **Example**:
 
 ```python
 # CORRECT (already optimized)
@@ -60,7 +60,7 @@ if init.ndim == 1: # broadcast across batch init_b = np.broadcast_to(init, (B, i
 
 ---
 
-### 4. NECESSARY: PSO Personal Best Tracking **Pattern**: Storing particle positions in optimization history **Location**: `src/optimization/algorithms/multi_objective_pso.py:368-369` **Example**:
+## 4. NECESSARY: PSO Personal Best Tracking **Pattern**: Storing particle positions in optimization history **Location**: `src/optimization/algorithms/multi_objective_pso.py:368-369` **Example**:
 
 ```python
 # CORRECT
@@ -72,7 +72,7 @@ if self._dominates(new_objectives[i], self.personal_best_objectives[i]): self.pe
 
 ---
 
-### 5. NECESSARY: Numerical Differentiation Perturbations **Pattern**: Finite-difference gradient computation **Locations**:
+## 5. NECESSARY: Numerical Differentiation Perturbations **Pattern**: Finite-difference gradient computation **Locations**:
 
 - `src/plant/models/simplified/dynamics.py:360,373`
 - `src/optimization/algorithms/gradient_based/bfgs.py:194,202,209-210` **Example**:
@@ -86,7 +86,7 @@ for i in range(n): state_plus = eq_state.copy() # ✅ Required (will mutate) sta
 
 ---
 
-### 6. NECESSARY: Evolutionary Algorithm Crossover **Pattern**: Creating trial vectors in DE/GA algorithms **Location**: `src/optimization/algorithms/evolutionary/differential.py:267` **Example**:
+## 6. NECESSARY: Evolutionary Algorithm Crossover **Pattern**: Creating trial vectors in DE/GA algorithms **Location**: `src/optimization/algorithms/evolutionary/differential.py:267` **Example**:
 
 ```python
 # CORRECT
@@ -98,7 +98,7 @@ def _crossover(self, target: np.ndarray, mutant: np.ndarray) -> np.ndarray: tria
 
 ---
 
-### 7. CONVERTIBLE PATTERN NOT FOUND **Analysis**: No instances of `.copy()` chained with operations that already copy: - ❌ `arr.copy().astype(dtype)` - Would be redundant (`.astype()` creates copy)
+## 7. CONVERTIBLE PATTERN NOT FOUND **Analysis**: No instances of `.copy()` chained with operations that already copy: - ❌ `arr.copy().astype(dtype)` - Would be redundant (`.astype()` creates copy)
 
 - ❌ `arr.copy().reshape(shape)` - Would be inefficient (`.reshape()` returns view)
 - ❌ `arr.copy()[start:end]` - Would be redundant (slicing creates copy) **Conclusion**: Existing codebase already avoids these anti-patterns.

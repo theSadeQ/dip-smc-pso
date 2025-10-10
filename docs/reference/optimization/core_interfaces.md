@@ -25,7 +25,7 @@ class OptimizationAlgorithm(Protocol):
 
 **Duck typing** with compile-time verification (mypy).
 
-### Algorithm Taxonomy
+## Algorithm Taxonomy
 
 **Population-based algorithms:**
 
@@ -119,14 +119,14 @@ config = {'parameter': 'value'}
 instance = Component(config)
 ```
 
-### Example 2: Performance Tuning
+## Example 2: Performance Tuning
 
 ```python
 # Adjust parameters for better performance
 optimized_params = tune_parameters(instance, target_performance)
 ```
 
-### Example 3: Integration with Optimization
+## Example 3: Integration with Optimization
 
 ```python
 # Use in complete optimization loop
@@ -134,7 +134,7 @@ optimizer = create_optimizer(opt_type, config)
 result = optimize(optimizer, problem, max_iter=100)
 ```
 
-### Example 4: Edge Case Handling
+## Example 4: Edge Case Handling
 
 ```python
 try:
@@ -157,7 +157,7 @@ print(f"Best fitness: {metrics.best_fitness:.3f}")
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -175,7 +175,7 @@ Types of optimization problems.
 :linenos:
 ```
 
----
+
 
 ### `ConvergenceStatus`
 
@@ -191,7 +191,7 @@ Convergence status indicators.
 :linenos:
 ```
 
----
+
 
 ### `ParameterSpace`
 
@@ -239,7 +239,7 @@ Lower and upper bounds for each parameter.
 
 [View full source →](#method-parameterspace-bounds)
 
----
+
 
 ### `ObjectiveFunction`
 
@@ -299,7 +299,7 @@ Reset evaluation counter.
 
 [View full source →](#method-objectivefunction-reset_evaluation_count)
 
----
+
 
 ### `Constraint`
 
@@ -335,7 +335,7 @@ Type of constraint ('equality' or 'inequality').
 
 [View full source →](#method-constraint-constraint_type)
 
----
+
 
 ### `OptimizationResult`
 
@@ -363,7 +363,7 @@ Convert result to dictionary.
 
 [View full source →](#method-optimizationresult-to_dict)
 
----
+
 
 ### `OptimizationProblem`
 
@@ -403,7 +403,7 @@ Check all constraints.
 
 [View full source →](#method-optimizationproblem-check_constraints)
 
----
+
 
 ### `Optimizer`
 
@@ -469,7 +469,7 @@ Whether algorithm uses a population of candidates.
 
 [View full source →](#method-optimizer-is_population_based)
 
----
+
 
 ### `ConvergenceMonitor`
 
@@ -511,7 +511,7 @@ Get convergence history data.
 
 [View full source →](#method-convergencemonitor-convergence_history)
 
----
+
 
 ### `PopulationBasedOptimizer`
 
@@ -553,7 +553,7 @@ Update population based on fitness values.
 
 [View full source →](#method-populationbasedoptimizer-update_population)
 
----
+
 
 ## Dependencies
 

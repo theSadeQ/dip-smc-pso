@@ -13,7 +13,7 @@ Professional optimization algorithms for control engineering applications.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

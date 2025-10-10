@@ -181,7 +181,7 @@ u_eq = eq_control.compute(state)
 print(f"Equivalent control: {u_eq:.2f} N")
 ```
 
-### Example 2: Matrix Conditioning Check
+## Example 2: Matrix Conditioning Check
 
 ```python
 # Check matrix conditioning before inversion
@@ -197,7 +197,7 @@ else:
     print("Matrix well-conditioned")
 ```
 
-### Example 3: Regularization Adjustment
+## Example 3: Regularization Adjustment
 
 ```python
 # example-metadata:
@@ -217,7 +217,7 @@ eq_control.set_regularization(alpha=alpha)
 print(f"Using regularization: α={alpha:.2e}")
 ```
 
-### Example 4: Hybrid Control (Equivalent + Switching)
+## Example 4: Hybrid Control (Equivalent + Switching)
 
 ```python
 from src.utils.control.saturation import saturate
@@ -243,7 +243,7 @@ u = np.clip(u_total, -u_max, u_max)
 print(f"u_eq={u_eq:.2f}, u_sw={u_sw:.2f}, u_total={u:.2f}")
 ```
 
-### Example 5: Performance Profiling
+## Example 5: Performance Profiling
 
 ```python
 import time
@@ -269,7 +269,7 @@ print(f"Can achieve ~{1e6 / time_per_call:.0f} Hz control rate")
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -332,7 +332,7 @@ Get information about dynamics matrices at current state.
 
 [View full source →](#method-equivalentcontrol-get_dynamics_info)
 
----
+
 
 ## Dependencies
 

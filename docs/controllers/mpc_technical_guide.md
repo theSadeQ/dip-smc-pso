@@ -331,7 +331,7 @@ def _numeric_linearize_continuous(dyn, x_eq, u_eq, eps=1e-6):
   - O(δ²) accuracy vs O(δ) for forward differences
 - **Lines 124-130**: Input matrix B computed similarly
 
-#### 2.2 Discretization Module
+## 2.2 Discretization Module
 
 **Function**: `_discretize_exact(A_c, B_c, dt)` (default)
 
@@ -370,7 +370,7 @@ def _discretize_exact(A_c, B_c, dt):
 
 **Alternative**: Forward Euler discretization available via `use_exact_discretization=False`
 
-#### 2.3 QP Solver Integration (cvxpy)
+## 2.3 QP Solver Integration (cvxpy)
 
 **Setup Phase**:
 ```python
@@ -434,7 +434,7 @@ else:
 - **INFEASIBLE/UNBOUNDED**: Use fallback controller
 - **SOLVER_ERROR**: Linearization failure or numerical issues
 
-#### 2.4 Fallback Controller Strategy
+## 2.4 Fallback Controller Strategy
 
 When QP fails or cvxpy unavailable:
 
@@ -555,7 +555,7 @@ class MPCController:
         ...
 ```
 
-### 2. Critical Code Sections
+## 2. Critical Code Sections
 
 #### 2.1 Linearization (Lines 72-131)
 
@@ -708,7 +708,7 @@ prob.solve(solver=cp.OSQP, warm_start=True)
 - `cp.abs(U[0, k]) <= max_force` → Box constraint on input
 - `cp.quad_form(e, Q)` → Quadratic form eᵀQe (efficient)
 
-#### 2.4 Solver and Fallback (Lines 407-463)
+## 2.4 Solver and Fallback (Lines 407-463)
 
 ```python
 # example-metadata:
@@ -887,7 +887,7 @@ mpc = MPCController(
 - SMC: [6, 6, 12, 12, 60, 1.5] (conservative)
 - PD: k_p=20, k_d=5
 
-#### 2.3 Slew Rate Limiting
+## 2.3 Slew Rate Limiting
 
 **Parameter**: `max_du` (Optional[float], default=None)
 
@@ -926,7 +926,7 @@ mpc = MPCController(
 )
 ```
 
-#### 3.2 Real-Time Optimized MPC
+## 3.2 Real-Time Optimized MPC
 
 ```python
 # example-metadata:
@@ -948,7 +948,7 @@ mpc = MPCController(
 )
 ```
 
-#### 3.3 Conservative MPC with SMC Fallback
+## 3.3 Conservative MPC with SMC Fallback
 
 ```python
 mpc = MPCController(
@@ -997,7 +997,7 @@ mpc = MPCController(
 )
 ```
 
-#### 1.2 Control Loop Integration
+## 1.2 Control Loop Integration
 
 ```python
 # example-metadata:
@@ -1033,7 +1033,7 @@ mpc.set_reference(reference_trajectory)
 u = mpc.compute_control(t=2.0, x0=x_current)
 ```
 
-### 2. Factory Integration
+## 2. Factory Integration
 
 #### 2.1 Using Controller Factory
 
@@ -1069,7 +1069,7 @@ mpc = MPCController(
 )
 ```
 
-### 3. Simulation Integration
+## 3. Simulation Integration
 
 #### 3.1 With Simulation Runner
 
@@ -1096,7 +1096,7 @@ result = runner.run(
 )
 ```
 
-#### 3.2 With Batch Simulation (Not Recommended)
+## 3.2 With Batch Simulation (Not Recommended)
 
 **Note**: MPC is inherently sequential (each step requires QP solve). Batch/vectorized simulation offers no speedup.
 
@@ -1315,7 +1315,7 @@ if abs(x[1] - np.pi) > 0.4:
     u = mpc._safe_fallback(x)  # Use fallback explicitly
 ```
 
-#### Issue 2: Slow Solve Time
+## Issue 2: Slow Solve Time
 
 **Symptoms**:
 - Solve time >10 ms consistently
@@ -1342,7 +1342,7 @@ prob.solve(solver=cp.OSQP)
 print(f"OSQP: {(time.time()-t0)*1000:.2f} ms")
 ```
 
-#### Issue 3: Chattering in Control Signal
+## Issue 3: Chattering in Control Signal
 
 **Symptoms**:
 - High-frequency oscillations in u
@@ -1366,7 +1366,7 @@ weights = MPCWeights(r_u=0.05)  # Up from 0.01
 prob.solve(solver=cp.OSQP, eps_abs=1e-6, eps_rel=1e-6)
 ```
 
-#### Issue 4: cvxpy Not Available
+## Issue 4: cvxpy Not Available
 
 **Symptoms**:
 - `cp is None`
@@ -1391,7 +1391,7 @@ mpc = MPCController(
 # Will use SMC when cvxpy unavailable
 ```
 
-### 2. Performance Optimization
+## 2. Performance Optimization
 
 #### 2.1 Speed Optimization Checklist
 

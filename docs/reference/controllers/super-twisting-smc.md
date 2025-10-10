@@ -26,6 +26,7 @@ where:
 ## Key Properties
 
 ### Finite-Time Convergence
+
 The super-twisting algorithm ensures finite-time convergence to the sliding surface with the convergence condition:
 
 ```{math}
@@ -35,11 +36,13 @@ k_2 > \sqrt{2k_1} \cdot L
 where $L$ is the Lipschitz constant of the uncertainty.
 
 ### Continuous Control
+
 Unlike classical SMC, the super-twisting algorithm produces a continuous control signal, eliminating chattering while maintaining robustness.
 
 ## Implementation Details
 
 ### Source Code
+
 - **File**: `src/controllers/sta_smc.py`
 - **Class**: `SuperTwistingSMCController`
 - **Key Methods**:
@@ -72,12 +75,14 @@ controllers:
 ## Performance Characteristics
 
 ### Strengths
+
 - **Chattering-free**: Continuous control signal eliminates high-frequency switching
 - **Finite-time convergence**: Guaranteed convergence in finite time
 - **Robust**: Maintains robustness to matched uncertainties
 - **Smooth control**: Better actuator compatibility
 
 ### Limitations
+
 - **Parameter sensitivity**: Requires careful tuning of $k_1$ and $k_2$
 - **Complexity**: More complex than classical SMC
 - **Initialization**: Integral state requires proper initialization
@@ -87,22 +92,26 @@ controllers:
 **⚠️ Note**: Results shown are for **default parameters only** (not PSO-optimized):
 
 ### Performance Metrics
+
 - **RMSE**: 20.61 rad (combined θ₁, θ₂)
 - **Control effort**: 9.53 × 10⁴ J
 - **Chattering index**: 4.38 × 10⁴
 
 ### Analysis
+
 The high RMSE and chattering index with default parameters indicate suboptimal tuning. The algorithm shows potential but requires PSO optimization to achieve competitive performance.
 
 ## Future Work
 
 ### PSO Optimization Required
+
 Complete PSO optimization should be performed with search bounds:
 - $k_1 \in [1.0, 50.0]$
 - $k_2 \in [1.0, 30.0]$
 - $c \in [1.0, 20.0]$ (for each component)
 
 ### Expected Outcomes
+
 - Significant reduction in RMSE
 - Lower chattering index
 - Improved control effort efficiency
@@ -127,6 +136,7 @@ u = controller.compute_control(state, reference, time)
 ## Mathematical Background
 
 ### Lyapunov Analysis
+
 The super-twisting algorithm can be analyzed using the Lyapunov function:
 
 ```{math}
@@ -134,6 +144,7 @@ V = |s| + \frac{1}{2k_1}u_1^2
 ```
 
 ### Convergence Properties
+
 Under proper gain selection, the algorithm achieves:
 1. Finite-time convergence to $s = 0$
 2. Continuous control signal

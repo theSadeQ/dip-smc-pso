@@ -1,4 +1,5 @@
 # Tutorial 05: End-to-End Research Workflow **Level:** Advanced
+
 **Duration:** 120+ minutes (spread across multiple sessions)
 **Prerequisites:**
 - All previous tutorials completed
@@ -8,8 +9,18 @@
 - [ ] Execute benchmarking studies
 - [ ] Analyze results and draw defensible conclusions
 - [ ] Create publication-quality figures and tables
-- [ ] Ensure reproducibility and open science best practices --- ## Case Study: Robustness Comparison **Research Question:**
-*"Does hybrid adaptive STA-SMC provide statistically significant improvements in robustness to mass parameter uncertainty compared to classical SMC?"* --- ## Phase 1: Problem Formulation ### Step 1: Define Research Objectives **Primary Objective:**
+- [ ] Ensure reproducibility and open science best practices
+
+---
+
+## Case Study: Robustness Comparison **Research Question:**
+
+*"Does hybrid adaptive STA-SMC provide statistically significant improvements in robustness to mass parameter uncertainty compared to classical SMC?"*
+
+---
+
+## Phase 1: Problem Formulation ### Step 1: Define Research Objectives **Primary Objective:**
+
 Quantify performance degradation of classical vs hybrid SMC under ±30% cart mass variation **Secondary Objectives:**
 - Compare convergence speed across parameter ranges
 - Analyze control effort trade-offs
@@ -24,8 +35,14 @@ Quantify performance degradation of classical vs hybrid SMC under ±30% cart mas
 - Control Effort: Energy efficiency
 - Robustness Index: Performance variance across parameter range **Hypothesis:**
 H₀: No significant difference in robustness (null hypothesis)
-H₁: Hybrid SMC has lower performance variance under parameter uncertainty (alternative hypothesis) --- ## Phase 2: Experimental Design ### Step 1: Define Test Scenarios Create `experiments/robustness_study/scenarios.yaml`: ```yaml
+H₁: Hybrid SMC has lower performance variance under parameter uncertainty (alternative hypothesis)
+
+---
+
+## Phase 2: Experimental Design ### Step 1: Define Test Scenarios Create `experiments/robustness_study/scenarios.yaml`: ```yaml
+
 # Experimental scenarios for robustness study
+
 scenarios: nominal: name: "Nominal System" parameters: m0: 1.0 # Cart mass (kg) m1: 0.1 m2: 0.1 initial_conditions: [0, 0, 0.1, 0, 0.15, 0] light_cart: name: "Light Cart (-30%)" parameters: m0: 0.7 # 30% lighter m1: 0.1 m2: 0.1 initial_conditions: [0, 0, 0.1, 0, 0.15, 0] heavy_cart: name: "Heavy Cart (+30%)" parameters: m0: 1.3 # 30% heavier m1: 0.1 m2: 0.1 initial_conditions: [0, 0, 0.1, 0, 0.15, 0] light_pendulums: name: "Light Pendulums (-20%)" parameters: m0: 1.0 m1: 0.08 # 20% lighter m2: 0.08 initial_conditions: [0, 0, 0.1, 0, 0.15, 0] heavy_pendulums: name: "Heavy Pendulums (+20%)" parameters: m0: 1.0 m1: 0.12 # 20% heavier m2: 0.12 initial_conditions: [0, 0, 0.1, 0, 0.15, 0]
 ``` ### Step 2: Monte Carlo Experimental Script Create `experiments/robustness_study/run_monte_carlo.py`: ```python
 #!/usr/bin/env python
@@ -54,9 +71,14 @@ print(f"Results saved to: {RESULTS_DIR}/monte_carlo_results.csv")
 print(f"{'='*60}")
 ``` ### Step 3: Run Experiment ```bash
 # Install tqdm for progress bar if needed
+
 pip install tqdm pandas # Run Monte Carlo study (takes ~2-3 hours for 50 trials × 2 controllers × 5 scenarios)
 python experiments/robustness_study/run_monte_carlo.py
-``` --- ## Phase 3: Statistical Analysis ### Step 1: Compute Summary Statistics Create `experiments/robustness_study/analyze_results.py`: ```python
+```
+
+---
+
+## Phase 3: Statistical Analysis ### Step 1: Compute Summary Statistics Create `experiments/robustness_study/analyze_results.py`: ```python
 #!/usr/bin/env python
 """Analyze Monte Carlo results with statistical rigor.""" import pandas as pd
 import numpy as np
@@ -92,12 +114,15 @@ ci_hybrid = stats.t.interval(0.95, len(hybrid_robustness)-1, loc=hybrid_robustne
 print(f" Classical SMC: [{ci_classical[0]:.4f}, {ci_classical[1]:.4f}]")
 print(f" Hybrid SMC: [{ci_hybrid[0]:.4f}, {ci_hybrid[1]:.4f}]")
 ``` **Run analysis:**
+
 ```bash
 python experiments/robustness_study/analyze_results.py
 ``` **Expected Output:**
+
 ```
 Welch's t-test: H₀: No difference in robustness t-statistic: 8.3421 p-value: 0.000003 Significant (α=0.05): YES Effect Size (Cohen's d): 1.24 Interpretation: Large effect 95% Confidence Intervals (Robustness Index): Classical SMC: [0.1234, 0.1567] Hybrid SMC: [0.0523, 0.0712]
 ``` **Interpretation:**
+
 ✅ p < 0.05: Hybrid SMC is statistically significantly more robust
 ✅ Cohen's d = 1.24: Large practical effect size
 ✅ Non-overlapping CIs: Strong evidence for difference ### Step 2: Publication-Quality Visualizations Create `experiments/robustness_study/plot_results.py`: ```python
@@ -142,21 +167,34 @@ plt.savefig('experiments/robustness_study/figures/fig3_robustness_index.pdf', dp
 print("Saved: fig3_robustness_index.pdf") print("\nAll figures saved to: experiments/robustness_study/figures/")
 ``` **Run visualization:**
 ```bash
+
 python experiments/robustness_study/plot_results.py
-``` --- ## Phase 4: Documentation & Reproducibility ### Step 1: Create Experimental Metadata Create `experiments/robustness_study/metadata.yaml`: ```yaml
+```
+
+---
+
+## Phase 4: Documentation & Reproducibility ### Step 1: Create Experimental Metadata Create `experiments/robustness_study/metadata.yaml`: ```yaml
 # Experimental Metadata for Robustness Study
 study: title: "Robustness Comparison of SMC Controllers Under Parameter Uncertainty" authors: ["Your Name"] date: "2025-10-05" version: "1.0" methods: controllers: - name: "Classical SMC" implementation: "src/controllers/smc/classic_smc.py" gains: [10.0, 8.0, 15.0, 12.0, 50.0, 5.0] tuning_method: "PSO optimized" - name: "Hybrid Adaptive STA-SMC" implementation: "src/controllers/smc/hybrid_adaptive_sta_smc.py" gains: [15.0, 12.0, 18.0, 15.0] tuning_method: "PSO optimized with auto-tuned STA gains" scenarios: parameter_variations: - "Cart mass: -30% to +30%" - "Pendulum masses: -20% to +20%" initial_conditions: [0, 0, 0.1, 0, 0.15, 0] monte_carlo: n_trials: 50 seed_generation: "hash(controller, scenario, trial)" metrics: primary: "Robustness Index (ISE std dev across scenarios)" secondary: ["ISE mean", "Settling Time", "Control Effort"] statistical_analysis: hypothesis_test: "Welch's t-test (two-tailed)" significance_level: 0.05 effect_size: "Cohen's d" confidence_intervals: 0.95 reproducibility: framework_version: "1.0.0" python_version: "3.9.7" dependencies: "requirements.txt (SHA256: ...)" random_seed_tracking: true data_availability: "experiments/robustness_study/results/"
 ``` ### Step 2: Generate Research Report Create `experiments/robustness_study/generate_report.py`: ```python
 # example-metadata:
+
 # runnable: false #!/usr/bin/env python
+
 """Generate automated research report.""" import pandas as pd
 import yaml # Load results and metadata
 df = pd.read_csv('experiments/robustness_study/results/monte_carlo_results.csv')
 with open('experiments/robustness_study/metadata.yaml') as f: metadata = yaml.safe_load(f) # Generate markdown report
 report = f"""
 # {metadata['study']['title']} **Authors:** {', '.join(metadata['study']['authors'])}
+
 **Date:** {metadata['study']['date']}
-**Version:** {metadata['study']['version']} --- ## Abstract This study compares the robustness of Classical SMC and Hybrid Adaptive STA-SMC
+**Version:** {metadata['study']['version']}
+
+---
+
+## Abstract This study compares the robustness of Classical SMC and Hybrid Adaptive STA-SMC
+
 controllers under mass parameter uncertainty for a double-inverted pendulum system.
 Monte Carlo simulations (N={metadata['methods']['monte_carlo']['n_trials']}) were
 conducted across 5 parameter variation scenarios. Results indicate Hybrid Adaptive
@@ -172,21 +210,35 @@ All code, data, and configurations are available in `experiments/robustness_stud
 Random seeds logged for each trial. Framework version: {metadata['reproducibility']['framework_version']}. ---
 """ # Fill in results (placeholder for actual computation)
 # ... (run analysis and populate results) # Save report
+
 with open('experiments/robustness_study/REPORT.md', 'w') as f: f.write(report) print("Report generated: experiments/robustness_study/REPORT.md")
-``` --- ## Phase 5: Archiving & Publication ### Step 1: Create Zenodo Archive ```bash
+```
+
+---
+
+## Phase 5: Archiving & Publication ### Step 1: Create Zenodo Archive ```bash
 # Package experiment for archiving
 cd experiments/robustness_study
 tar -czf robustness_study_archive.tar.gz \ scenarios.yaml \ metadata.yaml \ results/ \ figures/ \ REPORT.md \ *.py # Upload to Zenodo.org for DOI and permanent archival
 # (Follow Zenodo web interface)
 ``` ### Step 2: Create GitHub Release ```bash
 # Tag release
+
 git tag -a v1.0-robustness-study -m "Robustness comparison study results"
 git push origin v1.0-robustness-study # Create release on GitHub with:
 # - PDF figures
+
 # - CSV results
+
 # - Metadata YAML
+
 # - README with instructions
-``` --- ## Best Practices Checklist **Before Starting:**
+
+```
+
+---
+
+## Best Practices Checklist **Before Starting:**
 - [ ] Clear research question formulated
 - [ ] Literature review completed (baselines identified)
 - [ ] Success criteria defined (statistical + practical significance)
@@ -206,7 +258,11 @@ git push origin v1.0-robustness-study # Create release on GitHub with:
 - [ ] Dependency versions locked (requirements.txt)
 - [ ] Random seed strategy documented
 - [ ] Data and code publicly archived (Zenodo/GitHub)
-- [ ] Instructions for replication provided --- ## Summary **Complete Research Workflow:** 1. **Formulation:** Define question, hypotheses, success criteria
+- [ ] Instructions for replication provided
+
+---
+
+## Summary **Complete Research Workflow:** 1. **Formulation:** Define question, hypotheses, success criteria
 2. **Design:** Create scenarios, metrics, statistical plan
 3. **Execution:** Run Monte Carlo trials with seed tracking
 4. **Analysis:** Compute statistics, test hypotheses, visualize
@@ -218,7 +274,11 @@ git push origin v1.0-robustness-study # Create release on GitHub with:
 - **Automation:** Script everything for easy replication **When to Use This Workflow:** ✅ Comparing controllers scientifically
 ✅ Publishing research papers
 ✅ Validating novel algorithms
-✅ Industry benchmarking studies --- ## Next Steps **Related Guides:**
+✅ Industry benchmarking studies
+
+---
+
+## Next Steps **Related Guides:**
 - [Result Analysis How-To](../how-to/result-analysis.md): Advanced statistical analysis techniques
 - [Optimization Workflows How-To](../how-to/optimization-workflows.md): PSO tuning for research studies
 - [Testing & Validation How-To](../how-to/testing-validation.md): testing frameworks **Theory & Foundations (Essential for Publications):**

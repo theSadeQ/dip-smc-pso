@@ -4,7 +4,7 @@
 
 **See:** [Control Systems Unit Testing Guide](../../guides/control_systems_unit_testing.md)
 
----
+
 
 ## Quick Links
 
@@ -19,12 +19,14 @@ For control systems unit testing documentation, refer to:
 The control systems unit testing framework provides:
 
 ### Test Categories
+
 - **Unit Tests:** Individual component validation
 - **Integration Tests:** Multi-component interaction
 - **Property-Based Tests:** Invariant validation
 - **Benchmarks:** Performance regression detection
 
 ### Key Testing Patterns
+
 - Controller state validation
 - Lyapunov stability testing
 - Chattering index measurement

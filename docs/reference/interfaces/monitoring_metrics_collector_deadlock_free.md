@@ -24,7 +24,7 @@ PRODUCTION SAFETY: All deadlocks resolved, safe for high-concurrency use.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -42,7 +42,7 @@ Metric type enumeration.
 :linenos:
 ```
 
----
+
 
 ### `AggregationType`
 
@@ -58,7 +58,7 @@ Aggregation type enumeration.
 :linenos:
 ```
 
----
+
 
 ### `MetricValue`
 
@@ -72,7 +72,7 @@ Single metric value with timestamp.
 :linenos:
 ```
 
----
+
 
 ### `AtomicCounter`
 
@@ -104,7 +104,7 @@ Thread-safe atomic counter.
 
 [View full source →](#method-atomiccounter-set)
 
----
+
 
 ### `DeadlockFreeMetric`
 
@@ -161,7 +161,7 @@ Reset metric - single lock.
 
 [View full source →](#method-deadlockfreemetric-reset)
 
----
+
 
 ### `DeadlockFreeMetricsCollector`
 
@@ -256,7 +256,7 @@ Remove callback - separate lock.
 
 [View full source →](#method-deadlockfreemetricscollector-remove_alert_callback)
 
----
+
 
 ## Functions
 
@@ -272,7 +272,7 @@ Get global deadlock-free collector instance.
 :linenos:
 ```
 
----
+
 
 ### `collect_metric_safe(name, value)`
 
@@ -286,7 +286,7 @@ Collect metric using global deadlock-free collector.
 :linenos:
 ```
 
----
+
 
 ### `get_metric_safe(name)`
 
@@ -300,7 +300,7 @@ Get metric value using global deadlock-free collector.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

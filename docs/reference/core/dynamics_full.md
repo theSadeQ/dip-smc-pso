@@ -15,7 +15,7 @@ for backward compatibility with legacy import paths.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -37,7 +37,7 @@ Compatibility class for full DIP parameters.
 
 [View full source →](#method-fulldipparams-__init__)
 
----
+
 
 ## Dependencies
 

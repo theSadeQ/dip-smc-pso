@@ -46,7 +46,7 @@ git commit -m "RESOLVED: Issue #12 - Chattering reduction validated"
 git push origin main
 ```
 
-### Step 3B: If ANY FAIL
+## Step 3B: If ANY FAIL
 
 ```bash
 # Re-optimize with corrected fitness function

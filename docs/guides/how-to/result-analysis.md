@@ -4,7 +4,7 @@
 **Level:** Intermediate
 **Prerequisites:** [How-To: Running Simulations](running-simulations.md)
 
----
+
 
 ## Overview
 
@@ -17,7 +17,7 @@ This guide shows you how to analyze simulation results, compute statistics, crea
 - Create publication-quality plots
 - Export data to other tools
 
----
+
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@ This guide shows you how to analyze simulation results, compute statistics, crea
 - [Visualization Recipes](#visualization-recipes)
 - [Data Export](#data-export)
 
----
+
 
 ## Understanding Metrics
 
@@ -74,7 +74,7 @@ theta2 = state[:, 4]
 dtheta2 = state[:, 5]
 ```
 
-### Metric Interpretation
+## Metric Interpretation
 
 #### ISE (Integral Squared Error)
 
@@ -105,7 +105,7 @@ ise_manual = compute_ise(time, state)
 print(f"ISE (manual): {ise_manual:.4f}")
 ```
 
-#### ITAE (Integral Time-Absolute Error)
+## ITAE (Integral Time-Absolute Error)
 
 **What it measures:** Time-weighted error (penalizes slow convergence)
 
@@ -170,7 +170,7 @@ print(f"Mean Control: {mean_control:.2f} N")
 print(f"RMS Control:  {rms_control:.2f} N")
 ```
 
----
+
 
 ## Statistical Analysis
 
@@ -199,7 +199,7 @@ print(f"Classical SMC: {ise_classical:.4f}")
 print(f"STA-SMC:       {ise_sta:.4f}")
 ```
 
-### Monte Carlo Analysis
+## Monte Carlo Analysis
 
 ```python
 # example-metadata:
@@ -235,7 +235,7 @@ print(f"  Min ISE:  {np.min(ise_sta_trials):.4f}")
 print(f"  Max ISE:  {np.max(ise_sta_trials):.4f}")
 ```
 
-### Hypothesis Testing
+## Hypothesis Testing
 
 #### Welch's t-test (Unequal Variances)
 
@@ -259,7 +259,7 @@ else:
     print("  Result: No statistically significant difference")
 ```
 
-#### Effect Size (Cohen's d)
+## Effect Size (Cohen's d)
 
 ```python
 # example-metadata:
@@ -282,7 +282,7 @@ else:
     print("Large effect")
 ```
 
-### Confidence Intervals
+## Confidence Intervals
 
 ```python
 # example-metadata:
@@ -313,7 +313,7 @@ print(f"  Classical SMC: [{ci_classical[0]:.4f}, {ci_classical[1]:.4f}]")
 print(f"  STA-SMC:       [{ci_sta[0]:.4f}, {ci_sta[1]:.4f}]")
 ```
 
-### Bootstrap Confidence Intervals (Non-Parametric)
+## Bootstrap Confidence Intervals (Non-Parametric)
 
 ```python
 from scipy.stats import bootstrap
@@ -336,7 +336,7 @@ print(f"\nBootstrap 95% CI (Classical): "
       f"{bootstrap_result_classical.confidence_interval.high:.4f}]")
 ```
 
----
+
 
 ## Visualization Recipes
 
@@ -387,7 +387,7 @@ plt.savefig('state_trajectories.pdf')
 plt.show()
 ```
 
-### Comparative Visualization (Multiple Controllers)
+## Comparative Visualization (Multiple Controllers)
 
 ```python
 # example-metadata:
@@ -453,7 +453,7 @@ plt.savefig('phase_portraits.png', dpi=300)
 plt.show()
 ```
 
-### Bar Chart (Metrics Comparison)
+## Bar Chart (Metrics Comparison)
 
 ```python
 import pandas as pd
@@ -498,7 +498,7 @@ plt.savefig('metrics_comparison.png', dpi=300)
 plt.show()
 ```
 
----
+
 
 ## Data Export
 
@@ -528,7 +528,7 @@ df.to_csv('simulation_results.csv', index=False)
 print("Exported to simulation_results.csv")
 ```
 
-### Export to MATLAB
+## Export to MATLAB
 
 ```python
 from scipy.io import savemat
@@ -550,7 +550,7 @@ savemat('simulation_results.mat', matlab_data)
 print("Exported to simulation_results.mat")
 ```
 
-### Generate LaTeX Table
+## Generate LaTeX Table
 
 ```python
 # example-metadata:
@@ -593,7 +593,7 @@ with open('metrics_table.tex', 'w') as f:
     f.write(latex)
 ```
 
----
+
 
 ## Next Steps
 
@@ -602,6 +602,6 @@ with open('metrics_table.tex', 'w') as f:
 - [Tutorial 05: Research Workflow](../tutorials/tutorial-05-research-workflow.md): Publication-ready studies
 - [User Guide](../user-guide.md): Complete reference
 
----
+
 
 **Last Updated:** October 2025

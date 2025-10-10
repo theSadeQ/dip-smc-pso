@@ -6,7 +6,7 @@
 
 **Purpose**: Guide for implementing property-based tests using Hypothesis to validate control system invariants, stability properties, and robustness.
 
----
+
 
 ## 📖 Table of Contents
 
@@ -16,7 +16,7 @@
 4. [Implementation Patterns](#implementation-patterns)
 5. [Real-World Examples](#real-world-examples)
 
----
+
 
 ## 🎯 Introduction
 
@@ -40,7 +40,7 @@ def test_smc_bounded_output(state):
     assert -MAX_TORQUE <= control <= MAX_TORQUE  # For ALL states
 ```
 
----
+
 
 ### Why for Control Systems?
 
@@ -53,7 +53,7 @@ Control systems have **mathematical invariants** that must hold universally:
 
 Property-based testing naturally expresses these invariants.
 
----
+
 
 ## 🔬 Control System Properties
 
@@ -78,7 +78,7 @@ def test_control_never_exceeds_limits(theta1, theta2, velocity):
         f"Control {u} exceeded limits for state {state}"
 ```
 
----
+
 
 ### Category 2: Stability Properties
 
@@ -104,7 +104,7 @@ def test_lyapunov_decrease(state):
         f"Lyapunov increased: {V_current} -> {V_next}"
 ```
 
----
+
 
 ### Category 3: Continuity Properties
 
@@ -131,7 +131,7 @@ def test_control_continuity(state, perturbation):
         f"Discontinuity detected: Δu={u2-u1}, Δx={perturbation}"
 ```
 
----
+
 
 ### Category 4: Robustness Properties
 
@@ -167,7 +167,7 @@ def test_robust_stabilization(mass_error, friction_error, initial_state):
         "Failed to stabilize with parameter errors"
 ```
 
----
+
 
 ## 🎲 Hypothesis Strategies
 
@@ -208,7 +208,7 @@ def valid_states(
     )
 ```
 
----
+
 
 ### Strategy 2: Gain Strategies
 
@@ -238,7 +238,7 @@ def test_smc_with_random_gains(k1, k2, k3):
     ...
 ```
 
----
+
 
 ### Strategy 3: Trajectory Strategies
 
@@ -252,7 +252,7 @@ def trajectories(duration=5.0, dt=0.01):
     )
 ```
 
----
+
 
 ## 💻 Implementation Patterns
 
@@ -277,7 +277,7 @@ def test_invariant_holds(state):
         f"Invariant violated for state={state}, control={u}"
 ```
 
----
+
 
 ### Pattern 2: Metamorphic Testing
 
@@ -296,7 +296,7 @@ def test_control_scaling_property(state, scale):
         "Control does not scale with state"
 ```
 
----
+
 
 ### Pattern 3: Regression Property Testing
 
@@ -319,7 +319,7 @@ def test_no_regression_from_baseline(state):
         f"Performance regression detected: {cost_current} > {cost_baseline}"
 ```
 
----
+
 
 ## 🏗️ Real-World Examples
 
@@ -349,7 +349,7 @@ def test_sliding_surface_attractivity(state):
         f"Sliding surface not attractive: {initial_sigma} -> {final_sigma}"
 ```
 
----
+
 
 ### Example 2: Chattering Bound
 
@@ -379,7 +379,7 @@ def test_chattering_bounded_by_boundary_layer(state, boundary_layer):
         f"Excessive chattering: {sign_changes} switches with ϕ={boundary_layer}"
 ```
 
----
+
 
 ## 🛠️ Best Practices
 
@@ -396,7 +396,7 @@ def test_property(state):
     ...
 ```
 
----
+
 
 ### 2. Shrink Examples Automatically
 
@@ -407,7 +407,7 @@ Falsifying example:
   state = [0.0001, 0.0, 0.0, 0.0]  # Hypothesis shrunk from complex case
 ```
 
----
+
 
 ### 3. Use Composite Strategies
 
@@ -421,7 +421,7 @@ def controller_with_valid_gains(draw):
     return ClassicalSMC(gains=[k1, k2, k3])
 ```
 
----
+
 
 ### 4. Profile with `settings`
 
@@ -441,7 +441,7 @@ def test_critical_property(state):
     ...
 ```
 
----
+
 
 ## 📚 Related Documentation
 
@@ -449,13 +449,13 @@ def test_critical_property(state):
 - [Integration Workflows](integration_workflows.md)
 - [SMC Validation Mathematics](../theory/smc_validation_mathematics.md)
 
----
+
 
 ## 🔗 Navigation
 
 [⬅️ Back to Guides](../guides/) | [🏠 Testing Home](../README.md) | [➡️ Performance Benchmarking](performance_benchmarking.md)
 
----
+
 
 **Last Updated**: September 30, 2025
 **Maintainer**: Testing Infrastructure Team

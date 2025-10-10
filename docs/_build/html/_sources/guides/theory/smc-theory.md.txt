@@ -4,7 +4,7 @@
 
 This guide explains the theoretical foundations of sliding mode control, from basic principles to advanced algorithms. You'll learn why SMC works, how to prove stability, and when to use different SMC variants.
 
----
+
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@ This guide explains the theoretical foundations of sliding mode control, from ba
 - [Super-Twisting Mathematics](#super-twisting-mathematics)
 - [Practical Design Guidelines](#practical-design-guidelines)
 
----
+
 
 ## Sliding Mode Fundamentals
 
@@ -115,7 +115,7 @@ SMC handles this because:
 2. **Reaching law** drives this virtual output to zero
 3. **Equivalent control** maintains sliding mode despite underactuation
 
----
+
 
 ## Lyapunov Stability Theory
 
@@ -207,7 +207,7 @@ Reaching time: T ≤ |s(0)| / K
 - System reaches surface in finite, predictable time
 - Independent of initial error magnitude (for large enough K)
 
----
+
 
 ## Chattering Analysis
 
@@ -306,7 +306,7 @@ Where:
 - High `ṡ` → thicker layer (more chattering reduction)
 - Low `ṡ` → thinner layer (better accuracy)
 
----
+
 
 ## Super-Twisting Mathematics
 
@@ -408,7 +408,7 @@ Where `P` is Lyapunov function matrix
 - But smoother control (no chattering)
 - Overall better practical performance
 
----
+
 
 ## Practical Design Guidelines
 
@@ -539,7 +539,7 @@ Rearranging:
 | **Accuracy** | Good (with small ε) | Excellent (exact convergence) |
 | **Best For** | Known systems, prototyping | Practical systems, research |
 
----
+
 
 ## Summary
 
@@ -556,13 +556,13 @@ Rearranging:
 - Implement custom SMC using [Controllers API](../api/controllers.md)
 - Deep dive into [SMC Complete Theory](../../mathematical_foundations/smc_complete_theory.md)
 
----
+
 
 **Further Reading**:
 - Utkin, V. I. (1992). *Sliding Modes in Control and Optimization*. Springer.
 - Edwards, C., & Spurgeon, S. (1998). *Sliding Mode Control: Theory and Applications*. CRC Press.
 - Shtessel, Y., et al. (2014). *Sliding Mode Control and Observation*. Birkhäuser.
 
----
+
 
 **Last Updated**: October 2025

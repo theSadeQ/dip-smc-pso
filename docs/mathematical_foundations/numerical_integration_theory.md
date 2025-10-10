@@ -275,7 +275,7 @@ def euler_step(x, u, dynamics, dt):
     return x_next
 ```
 
-### Advantages and Disadvantages
+## Advantages and Disadvantages
 
 **Advantages:**
 - ✅ Extremely simple to implement

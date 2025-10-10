@@ -16,7 +16,7 @@ control systems and scientific computing applications.
 :linenos:
 ```
 
----
+
 
 ## Functions
 
@@ -32,7 +32,7 @@ Get information about the available interfaces framework components.
 :linenos:
 ```
 
----
+
 
 ### `create_basic_interfaces_manager()`
 
@@ -46,7 +46,7 @@ Create a basic manager for core interface components.
 :linenos:
 ```
 
----
+
 
 ### `create_hil_system(config)`
 
@@ -60,7 +60,7 @@ Create and configure a HIL system.
 :linenos:
 ```
 
----
+
 
 ### `create_data_serializer(format_type)`
 
@@ -74,7 +74,7 @@ Create a data serializer for the specified format.
 :linenos:
 ```
 
----
+
 
 ### `create_health_monitor()`
 
@@ -88,7 +88,7 @@ Create a system health monitor.
 :linenos:
 ```
 
----
+
 
 ### `create_hardware_manager()`
 
@@ -102,7 +102,7 @@ Create a hardware device manager.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

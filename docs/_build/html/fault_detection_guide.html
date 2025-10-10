@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="./">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -19,16 +19,16 @@
     margin-top: 0.5em;
 }
 </style>
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Research Presentation Materials" href="presentation/index.html" /><link rel="prev" title="2. Application Context" href="context.html" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>Fault Detection &amp; Isolation (FDI) Guide - DIP_SMC_PSO Documentation</title>
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Fault Detection &amp; Isolation (FDI) Guide ## Overview The DIP_SMC_PSO system includes a Fault Detection and Isolation (FDI) module that monitors system health in real-time. The FDI system compares model predictions with actual measurements to detect deviations that may indicate component failures, sensor faults, or unexpected disturbances. ## Architecture The FDI system uses a model-based residual approach: ``` - DIP_SMC_PSO Documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5a89ef9" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=8a7e329d" />
     
     
 
@@ -163,14 +163,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -180,8 +176,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -189,17 +184,15 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -207,7 +200,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
-  
   
   <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
   
@@ -219,254 +211,12 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory_overview.html">Theory Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">3. System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plant_model.html">1.x Plant Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="plant/models_guide.html">Plant Models Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="TESTING.html">Testing Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="test_protocols.html">5.x Test Protocols</a></li>
-<li class="toctree-l1"><a class="reference internal" href="use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="context.html">2. Application Context</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Fault Detection &amp; Isolation (FDI) Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference Documentation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography &amp; Academic References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RELEASE_CHECKLIST.html">Release Checklist</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="CITATIONS.html">Citations &amp; Academic Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -492,544 +242,190 @@
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/fault_detection_guide.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/fault_detection_guide.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
 </div><div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section class="tex2jax_ignore mathjax_ignore" id="fault-detection-isolation-fdi-guide">
-<h1>Fault Detection &amp; Isolation (FDI) Guide<a class="headerlink" href="#fault-detection-isolation-fdi-guide" title="Link to this heading">¶</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p>The DIP_SMC_PSO system includes a comprehensive Fault Detection and Isolation (FDI) module that monitors system health in real-time. The FDI system compares model predictions with actual measurements to detect deviations that may indicate component failures, sensor faults, or unexpected disturbances.</p>
-</section>
-<section id="architecture">
-<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">¶</a></h2>
-<p>The FDI system uses a <strong>model-based residual approach</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">┌─────────────┐</span>    <span class="err">┌─────────────┐</span>
-<span class="err">│</span>   <span class="n">Dynamics</span>  <span class="err">│</span>    <span class="err">│</span> <span class="n">Measurement</span> <span class="err">│</span>
-<span class="err">│</span>    <span class="n">Model</span>    <span class="err">│</span>    <span class="err">│</span>   <span class="p">(</span><span class="n">Actual</span><span class="p">)</span>  <span class="err">│</span>
-<span class="err">│</span>   <span class="n">x̂</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>    <span class="err">│</span>    <span class="err">│</span>    <span class="n">x</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>   <span class="err">│</span>
-<span class="err">└──────┬──────┘</span>    <span class="err">└──────┬──────┘</span>
-       <span class="err">│</span>                  <span class="err">│</span>
-       <span class="err">└────────┬─────────┘</span>
-                <span class="err">│</span>
-        <span class="err">┌───────▼────────┐</span>
-        <span class="err">│</span> <span class="n">Residual</span> <span class="o">=</span> <span class="n">r</span>   <span class="err">│</span>
-        <span class="err">│</span> <span class="o">=</span> <span class="n">x</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">x̂</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="err">│</span>
-        <span class="err">└───────┬────────┘</span>
-                <span class="err">│</span>
-        <span class="err">┌───────▼────────┐</span>
-        <span class="err">│</span> <span class="o">||</span><span class="n">r</span><span class="o">||</span> <span class="o">&gt;</span> <span class="n">threshold</span> <span class="err">│</span>
-        <span class="err">│</span> <span class="o">&amp;</span> <span class="n">persistence</span><span class="err">?</span> <span class="err">│</span>
-        <span class="err">└────────────────┘</span>
+          <section class="tex2jax_ignore mathjax_ignore" id="fault-detection-isolation-fdi-guide-overview-the-dip-smc-pso-system-includes-a-fault-detection-and-isolation-fdi-module-that-monitors-system-health-in-real-time-the-fdi-system-compares-model-predictions-with-actual-measurements-to-detect-deviations-that-may-indicate-component-failures-sensor-faults-or-unexpected-disturbances-architecture-the-fdi-system-uses-a-model-based-residual-approach">
+<h1>Fault Detection &amp; Isolation (FDI) Guide ## Overview The DIP_SMC_PSO system includes a Fault Detection and Isolation (FDI) module that monitors system health in real-time. The FDI system compares model predictions with actual measurements to detect deviations that may indicate component failures, sensor faults, or unexpected disturbances. ## Architecture The FDI system uses a <strong>model-based residual approach</strong>: ```<a class="headerlink" href="#fault-detection-isolation-fdi-guide-overview-the-dip-smc-pso-system-includes-a-fault-detection-and-isolation-fdi-module-that-monitors-system-health-in-real-time-the-fdi-system-compares-model-predictions-with-actual-measurements-to-detect-deviations-that-may-indicate-component-failures-sensor-faults-or-unexpected-disturbances-architecture-the-fdi-system-uses-a-model-based-residual-approach" title="Link to this heading">¶</a></h1>
+<p>┌─────────────┐ ┌─────────────┐
+│ Dynamics │ │ Measurement │
+│ Model │ │ (Actual) │
+│ x̂(k+1) │ │ x(k+1) │
+└──────┬──────┘ └──────┬──────┘ │ │ └────────┬─────────┘ │ ┌───────▼────────┐ │ Residual = r │ │ = x(k+1)-x̂(k+1)│ └───────┬────────┘ │ ┌───────▼────────┐ │ ||r|| &gt; threshold │ │ &amp; persistence? │ └────────────────┘</p>
+<div class="highlight-**Key notranslate"><div class="highlight"><pre><span></span>2. **Threshold Testing**: Monitors residual norm against configurable limits
+3. **Persistence Filter**: Requires sustained violations to avoid false alarms
+4. **Adaptive Thresholds**: Dynamically adjusts limits based on operating conditions
+5. **CUSUM Detection**: Detects slow parameter drifts over time ## Configuration ### Basic Configuration Add FDI configuration to your `config.yaml`: ```yaml
+fdi: enabled: true residual_threshold: 0.150 # Statistically calibrated threshold (Issue #18) persistence_counter: 10 # Consecutive violations required residual_states: [0, 1, 2] # State indices to monitor (x, θ₁, θ₂) residual_weights: null # Optional per-state weights # Hysteresis configuration (prevents oscillation near threshold) hysteresis_enabled: true hysteresis_upper: 0.165 # Upper threshold for fault detection hysteresis_lower: 0.135 # Lower threshold for recovery
+``` **Note**: The default threshold of 0.150 was statistically calibrated based on P99 percentile analysis of 1,167 residual samples. See [FDI Threshold Calibration Methodology](fdi_threshold_calibration_methodology.md) for details. ### Advanced Configuration ```yaml
+
+fdi: enabled: true residual_threshold: 0.150 persistence_counter: 10 residual_states: [0, 1, 2, 3, 4, 5] # Monitor all 6 states residual_weights: [1.0, 2.0, 2.0, 0.5, 1.5, 1.5] # Weight angles more heavily # Hysteresis configuration (Issue #18 resolution) hysteresis_enabled: true hysteresis_upper: 0.165 hysteresis_lower: 0.135 # Adaptive thresholding adaptive: false # Disable when using hysteresis (pick one strategy) window_size: 50 # Samples for threshold estimation threshold_factor: 3.0 # σ multiplier for adaptive threshold # CUSUM drift detection cusum_enabled: false # Disable for basic operation cusum_threshold: 5.0 # Cumulative sum limit
+``` ## Usage Examples ### Basic FDI Monitoring ```bash
+# FDI in config.yaml and run simulation
+python simulate.py --ctrl classical_smc --plot --plot-fdi
+``` ### Programmatic Usage ```python
+
+from src.fault_detection.fdi import FDIsystem
+from src.core.dynamics import DoublePendulum
+import numpy as np # Create FDI system with calibrated threshold and hysteresis
+fdi = FDIsystem( residual_threshold=0.150, # Statistically calibrated (Issue #18) persistence_counter=10, residual_states=[0, 1, 2], # Monitor position and angles hysteresis_enabled=True, # Prevent oscillation near threshold hysteresis_upper=0.165, hysteresis_lower=0.135
+) # Create dynamics model for predictions
+dynamics = DoublePendulum() # Simulation loop with FDI monitoring
+for t in np.arange(0, 10, 0.001): # Get measurement (in practice, from sensors) x_measured = get_sensor_data() # Get control input u = controller.compute_control(x_measured, x_ref, t) # FDI check status, residual_norm = fdi.check( t=t, meas=x_measured, u=u, dt=0.001, dynamics_model=dynamics ) if status == &quot;FAULT&quot;: print(f&quot;FAULT DETECTED at t={t:.3f}s, residual={residual_norm:.3f}&quot;) # Implement safety response break # Continue simulation x_next = dynamics.step(x_measured, u, 0.001)
+``` ## Threshold Configuration Guidelines ### Issue #18 Calibration Reference The default threshold of **0.150** was statistically calibrated based on rigorous analysis:
+- **Sample Size**: 1,167 residual measurements across 100 simulations
+- **Methodology**: P99 percentile approach with bootstrap confidence intervals
+- **False Positive Rate**: Reduced from ~80% to 15.9% (6x improvement)
+- **True Positive Rate**: Maintained at ~100%
+- **Documentation**: See [FDI Threshold Calibration Methodology](fdi_threshold_calibration_methodology.md) **Hysteresis Parameters**:
+- **Upper Threshold**: 0.165 (threshold × 1.1) - triggers fault detection
+- **Lower Threshold**: 0.135 (threshold × 0.9) - recovery threshold
+- **Deadband**: 10% prevents oscillation near boundary ### Static Thresholds **Position Residuals (x):**
+- `threshold = 0.01-0.05` m for high-precision systems
+- `threshold = 0.1-0.2` m for typical laboratory setups (use 0.150 calibrated value)
+- `threshold = 0.5-1.0` m for coarse monitoring **Angular Residuals (θ₁, θ₂):**
+- `threshold = 0.01-0.05` rad (0.6-3°) for precise control
+- `threshold = 0.1-0.2` rad (6-11°) for standard operation
+- `threshold = 0.5` rad (29°) for safety-critical detection **Velocity Residuals (ẋ, θ̇₁, θ̇₂):**
+- Often noisier than position measurements
+- Use 2-5× larger thresholds than position equivalents
+- Consider filtering or excluding from residual calculation **Recommended Practice**: Start with the calibrated threshold (0.150) and adjust based on your system&#39;s noise characteristics. See the calibration methodology document for statistical approaches. ### Adaptive Thresholds When `adaptive = true`, the threshold becomes:
 </pre></div>
 </div>
-<p><strong>Key Components:</strong></p>
-<ol class="arabic simple">
-<li><p><strong>Residual Generation</strong>: Compares one-step predictions with measurements</p></li>
-<li><p><strong>Threshold Testing</strong>: Monitors residual norm against configurable limits</p></li>
-<li><p><strong>Persistence Filter</strong>: Requires sustained violations to avoid false alarms</p></li>
-<li><p><strong>Adaptive Thresholds</strong>: Dynamically adjusts limits based on operating conditions</p></li>
-<li><p><strong>CUSUM Detection</strong>: Detects slow parameter drifts over time</p></li>
-</ol>
-</section>
-<section id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>
-<section id="basic-configuration">
-<h3>Basic Configuration<a class="headerlink" href="#basic-configuration" title="Link to this heading">¶</a></h3>
-<p>Add FDI configuration to your <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">fdi</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">residual_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.150</span><span class="w">    </span><span class="c1"># Statistically calibrated threshold (Issue #18)</span>
-<span class="w">  </span><span class="nt">persistence_counter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">      </span><span class="c1"># Consecutive violations required</span>
-<span class="w">  </span><span class="nt">residual_states</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">]</span><span class="w">   </span><span class="c1"># State indices to monitor (x, θ₁, θ₂)</span>
-<span class="w">  </span><span class="nt">residual_weights</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">       </span><span class="c1"># Optional per-state weights</span>
+<p>threshold(t) = μ + threshold_factor × σ</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Where</span> <span class="n">μ</span> <span class="ow">and</span> <span class="n">σ</span> <span class="n">are</span> <span class="n">estimated</span> <span class="kn">from</span><span class="w"> </span><span class="nn">the</span> <span class="n">last</span> <span class="err">`</span><span class="n">window_size</span><span class="err">`</span> <span class="n">residuals</span><span class="o">.</span> <span class="o">**</span><span class="n">Parameter</span> <span class="n">Guidelines</span><span class="p">:</span><span class="o">**</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">window_size</span> <span class="o">=</span> <span class="mi">50</span><span class="o">-</span><span class="mi">100</span><span class="err">`</span><span class="p">:</span> <span class="n">Balance</span> <span class="n">responsiveness</span> <span class="n">vs</span><span class="o">.</span> <span class="n">stability</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">threshold_factor</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">-</span><span class="mf">4.0</span><span class="err">`</span><span class="p">:</span> <span class="n">Corresponds</span> <span class="n">to</span> <span class="n">confidence</span> <span class="n">levels</span> <span class="o">-</span> <span class="err">`</span><span class="n">factor</span> <span class="o">=</span> <span class="mf">2.0</span><span class="err">`</span><span class="p">:</span> <span class="o">~</span><span class="mi">95</span><span class="o">%</span> <span class="n">confidence</span> <span class="p">(</span><span class="n">more</span> <span class="n">sensitive</span><span class="p">)</span> <span class="o">-</span> <span class="err">`</span><span class="n">factor</span> <span class="o">=</span> <span class="mf">3.0</span><span class="err">`</span><span class="p">:</span> <span class="o">~</span><span class="mf">99.7</span><span class="o">%</span> <span class="n">confidence</span> <span class="p">(</span><span class="n">balanced</span><span class="p">)</span> <span class="o">-</span> <span class="err">`</span><span class="n">factor</span> <span class="o">=</span> <span class="mf">4.0</span><span class="err">`</span><span class="p">:</span> <span class="o">~</span><span class="mf">99.99</span><span class="o">%</span> <span class="n">confidence</span> <span class="p">(</span><span class="n">conservative</span><span class="p">)</span> <span class="c1">## Persistence and False Alarm Management ### Persistence Counter The `persistence_counter` requires sustained threshold violations: ```</span>
+<span class="n">FAULT</span> <span class="n">declared</span> <span class="k">if</span><span class="p">:</span> <span class="n">violation_count</span> <span class="err">≥</span> <span class="n">persistence_counter</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Selection</span> <span class="n">Guidelines</span><span class="p">:</span><span class="o">**</span>
 
-<span class="w">  </span><span class="c1"># Hysteresis configuration (prevents oscillation near threshold)</span>
-<span class="w">  </span><span class="nt">hysteresis_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">hysteresis_upper</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.165</span><span class="w">      </span><span class="c1"># Upper threshold for fault detection</span>
-<span class="w">  </span><span class="nt">hysteresis_lower</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.135</span><span class="w">      </span><span class="c1"># Lower threshold for recovery</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">persistence</span> <span class="o">=</span> <span class="mi">1</span><span class="err">`</span><span class="p">:</span> <span class="n">Immediate</span> <span class="n">detection</span><span class="p">,</span> <span class="n">higher</span> <span class="n">false</span> <span class="n">alarm</span> <span class="n">rate</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">persistence</span> <span class="o">=</span> <span class="mi">5</span><span class="o">-</span><span class="mi">10</span><span class="err">`</span><span class="p">:</span> <span class="n">Balanced</span> <span class="n">detection</span> <span class="n">vs</span><span class="o">.</span> <span class="n">false</span> <span class="n">alarms</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">persistence</span> <span class="o">=</span> <span class="mi">20</span><span class="o">-</span><span class="mi">50</span><span class="err">`</span><span class="p">:</span> <span class="n">Conservative</span><span class="p">,</span> <span class="n">slower</span> <span class="n">detection</span> <span class="o">**</span><span class="n">Time</span><span class="o">-</span><span class="n">based</span> <span class="n">Interpretation</span><span class="p">:</span><span class="o">**</span>
+<span class="o">-</span> <span class="n">At</span> <span class="mi">1000</span> <span class="n">Hz</span> <span class="n">sampling</span><span class="p">:</span> <span class="err">`</span><span class="n">persistence</span> <span class="o">=</span> <span class="mi">10</span><span class="err">`</span> <span class="err">→</span> <span class="mi">10</span><span class="n">ms</span> <span class="n">sustained</span> <span class="n">fault</span>
+<span class="o">-</span> <span class="n">At</span> <span class="mi">100</span> <span class="n">Hz</span> <span class="n">sampling</span><span class="p">:</span> <span class="err">`</span><span class="n">persistence</span> <span class="o">=</span> <span class="mi">10</span><span class="err">`</span> <span class="err">→</span> <span class="mi">100</span><span class="n">ms</span> <span class="n">sustained</span> <span class="n">fault</span> <span class="c1">### State Weighting Use `residual_weights` to emphasize critical states: ```yaml</span>
+<span class="c1"># Example: Emphasize angular states for pendulum stability</span>
+
+<span class="n">residual_states</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="c1"># x, θ₁, θ₂</span>
+<span class="n">residual_weights</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]</span> <span class="c1"># Weight angles 4× more than position</span>
+<span class="err">```</span> <span class="n">The</span> <span class="n">weighted</span> <span class="n">residual</span> <span class="n">norm</span> <span class="n">becomes</span><span class="p">:</span>
 </pre></div>
 </div>
-<p><strong>Note</strong>: The default threshold of 0.150 was statistically calibrated based on P99 percentile analysis of 1,167 residual samples. See <a class="reference internal" href="fdi_threshold_calibration_methodology.html"><span class="std std-doc">FDI Threshold Calibration Methodology</span></a> for details.</p>
-</section>
-<section id="advanced-configuration">
-<h3>Advanced Configuration<a class="headerlink" href="#advanced-configuration" title="Link to this heading">¶</a></h3>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">fdi</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">residual_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.150</span>
-<span class="w">  </span><span class="nt">persistence_counter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<span class="w">  </span><span class="nt">residual_states</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Monitor all 6 states</span>
-<span class="w">  </span><span class="nt">residual_weights</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.5</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Weight angles more heavily</span>
+<p>||r||_weighted = √(w₁r₁² + w₂r₂² + w₃r₃²)
+<code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">CUSUM</span> <span class="pre">Drift</span> <span class="pre">Detection</span> <span class="pre">CUSUM</span> <span class="pre">(Cumulative</span> <span class="pre">Sum)</span> <span class="pre">detection</span> <span class="pre">complements</span> <span class="pre">threshold-based</span> <span class="pre">monitoring</span> <span class="pre">by</span> <span class="pre">accumulating</span> <span class="pre">small</span> <span class="pre">deviations</span> <span class="pre">over</span> <span class="pre">time.</span> <span class="pre">###</span> <span class="pre">Algorithm</span></code>
+S(k) = max(0, S(k-1) + (r(k) - μ))
+FAULT if S(k) &gt; cusum_threshold</p>
+<div class="highlight-Where: notranslate"><div class="highlight"><pre><span></span>
+- `r(k)`: Current residual norm
+- `μ`: Running average of residual norm
+- `S(k)`: Cumulative sum statistic ### Configuration {#cusum-configuration} ```yaml
+fdi: cusum_enabled: true cusum_threshold: 5.0 # Adjust based on expected drift magnitude
+``` **Threshold Selection:**
+- Lower values (1.0-3.0): Detect small parameter changes quickly
+- Higher values (5.0-10.0): Reduce false alarms from noise
+- Monitor CUSUM statistic during normal operation to calibrate ## Fault Types and Signatures ### Sensor Faults **Bias Fault:**
+- Constant offset in measurements
+- **Signature**: Persistent residual in one direction
+- **Detection**: Low threshold with moderate persistence **Drift Fault:**
+- Gradually changing sensor calibration
+- **Signature**: Slowly increasing residual trend
+- **Detection**: CUSUM with moderate threshold **Noise Fault:**
+- Increased measurement noise
+- **Signature**: Higher residual variance
+- **Detection**: Adaptive thresholding automatically adjusts **Stuck Sensor:**
+- Sensor output frozen at constant value
+- **Signature**: Residual tracks true motion
+- **Detection**: Low threshold, immediate persistence ### Actuator Faults **Reduced Effectiveness:**
+- Actuator produces less force than commanded
+- **Signature**: Tracking error increases over time
+- **Detection**: Monitor position states with CUSUM **Actuator Saturation:**
+- Control input clipped beyond model assumptions
+- **Signature**: Residuals during large control demands
+- **Detection**: Condition-based thresholds ### Physical Parameter Changes **Mass Changes:**
+- Load added/removed from system
+- **Signature**: Changes in acceleration response
+- **Detection**: CUSUM on velocity residuals **Friction Changes:**
+- Wear, lubrication loss, contamination
+- **Signature**: Velocity-dependent residual patterns
+- **Detection**: Adaptive thresholding with long window ## Diagnostic Plots and Analysis ### FDI Visualization ```bash
+# Generate FDI plots with simulation
+python simulate.py --ctrl sta_smc --plot --plot-fdi
+``` **Plot Elements:**
 
-<span class="w">  </span><span class="c1"># Hysteresis configuration (Issue #18 resolution)</span>
-<span class="w">  </span><span class="nt">hysteresis_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">hysteresis_upper</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.165</span>
-<span class="w">  </span><span class="nt">hysteresis_lower</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.135</span>
+- **Residual Time Series**: Shows r(t) evolution
+- **Threshold Lines**: Static and adaptive limits
+- **Fault Markers**: Indicates detection times
+- **CUSUM Trace**: Cumulative statistic (if enabled) ### Analysis Code ```python
+# Access FDI history for custom analysis
 
-<span class="w">  </span><span class="c1"># Adaptive thresholding</span>
-<span class="w">  </span><span class="nt">adaptive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">              </span><span class="c1"># Disable when using hysteresis (pick one strategy)</span>
-<span class="w">  </span><span class="nt">window_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span><span class="w">              </span><span class="c1"># Samples for threshold estimation</span>
-<span class="w">  </span><span class="nt">threshold_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span><span class="w">        </span><span class="c1"># σ multiplier for adaptive threshold</span>
+import matplotlib.pyplot as plt # After simulation with FDI enabled
+times = fdi.times
+residuals = fdi.residuals # Plot residual statistics
+plt.figure(figsize=(12, 8)) # Residual time series
+plt.subplot(2, 2, 1)
+plt.plot(times, residuals)
+plt.axhline(fdi.residual_threshold, color=&#39;r&#39;, linestyle=&#39;--&#39;)
+plt.ylabel(&#39;Residual Norm&#39;)
+plt.title(&#39;FDI Residual History&#39;) # Residual histogram
+plt.subplot(2, 2, 2)
+plt.hist(residuals, bins=50, alpha=0.7)
+plt.xlabel(&#39;Residual Norm&#39;)
+plt.ylabel(&#39;Frequency&#39;)
+plt.title(&#39;Residual Distribution&#39;) # Moving statistics
+window = 50
+if len(residuals) &gt; window: moving_mean = np.convolve(residuals, np.ones(window)/window, mode=&#39;valid&#39;) moving_std = [np.std(residuals[i:i+window]) for i in range(len(residuals)-window+1)] plt.subplot(2, 2, 3) plt.plot(times[window-1:], moving_mean, label=&#39;Moving Mean&#39;) plt.plot(times[window-1:], np.array(moving_mean) + 3*np.array(moving_std), &#39;r--&#39;, label=&#39;μ + 3σ&#39;) plt.ylabel(&#39;Residual Statistics&#39;) plt.legend() plt.title(&#39;Adaptive Threshold Evolution&#39;) plt.tight_layout()
+plt.show()
+``` ## Integration with Control System ### Safe State Responses When a fault is detected, implement appropriate safety measures: ```python
+# example-metadata:
+# runnable: false if status == &quot;FAULT&quot;: # Log fault information logging.critical(f&quot;FAULT at t={t:.3f}s: residual={residual_norm:.3f}&quot;) # Safety responses (choose appropriate action) # Option 1: Emergency stop u = 0.0 # Option 2: Switch to safe controller controller = safe_mode_controller # Option 3: Graceful shutdown target_state = safe_equilibrium # Option 4: Reduce performance controller.reduce_gains(factor=0.5)
+``` ### Controller Reconfiguration ```python
+# example-metadata:
 
-<span class="w">  </span><span class="c1"># CUSUM drift detection</span>
-<span class="w">  </span><span class="nt">cusum_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">         </span><span class="c1"># Disable for basic operation</span>
-<span class="w">  </span><span class="nt">cusum_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span><span class="w">         </span><span class="c1"># Cumulative sum limit</span>
+# runnable: false # Fault-tolerant control example
+
+class FaultTolerantController: def __init__(self, primary_controller, backup_controller, fdi_system): self.primary = primary_controller self.backup = backup_controller self.fdi = fdi_system self.active_controller = primary_controller def compute_control(self, x, x_ref, t, u_prev, dt, dynamics): # FDI check status, residual = self.fdi.check(t, x, u_prev, dt, dynamics) # Switch controllers if fault detected if status == &quot;FAULT&quot; and self.active_controller == self.primary: logging.warning(&quot;Switching to backup controller due to fault&quot;) self.active_controller = self.backup return self.active_controller.compute_control(x, x_ref, t)
+``` ## Performance Considerations ### Computational Cost FDI adds minimal overhead:
+- Model prediction: ~10 μs (for simplified dynamics)
+- Residual computation: ~1 μs
+- Threshold checking: ~0.1 μs **Total overhead**: &lt;1% of 1 kHz control loop ### Memory Usage - History storage: `O(simulation_length / dt)` for plotting
+- Adaptive window: `O(window_size)` floating-point values
+- Total memory: Negligible for typical simulations ### Real-time Considerations - Use simplified dynamics model for FDI predictions
+- Limit history storage in embedded implementations
+- Consider downsampling FDI rate if computational resources are constrained ## Troubleshooting ### High False Alarm Rate **Symptoms**: Frequent fault detections during normal operation **Solutions**:
+1. Increase `residual_threshold`
+2. Increase `persistence_counter`
+3. adaptive thresholding
+4. Check model accuracy
+5. Verify sensor noise levels ### Missed Fault Detection **Symptoms**: Known faults not detected by FDI **Solutions**:
+1. Decrease `residual_threshold`
+2. Decrease `persistence_counter`
+3. CUSUM for slow faults
+4. Check `residual_states` selection
+5. Tune `residual_weights` for critical states ### Noisy Residuals **Symptoms**: High-frequency oscillations in residual signal **Solutions**:
+1. Filter measurements before FDI
+2. Use adaptive thresholding
+3. Increase `window_size`
+4. Check integration timestep
+5. Verify model-plant match ## Related Documentation - [System Architecture](architecture.md) - Overall system design
+- [Configuration Reference](api/index.md) - Complete FDI configuration options
+- [Testing Guide](TESTING.md) - How to test FDI functionality
+- [FDI Source Code](../src/fault_detection/fdi.py) - FDI implementation details
 </pre></div>
 </div>
-</section>
-</section>
-<section id="usage-examples">
-<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
-<section id="basic-fdi-monitoring">
-<h3>Basic FDI Monitoring<a class="headerlink" href="#basic-fdi-monitoring" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enable FDI in config.yaml and run simulation</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--ctrl<span class="w"> </span>classical_smc<span class="w"> </span>--plot<span class="w"> </span>--plot-fdi
-</pre></div>
-</div>
-</section>
-<section id="programmatic-usage">
-<h3>Programmatic Usage<a class="headerlink" href="#programmatic-usage" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.fault_detection.fdi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDIsystem</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.core.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="n">DoublePendulum</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="c1"># Create FDI system with calibrated threshold and hysteresis</span>
-<span class="n">fdi</span> <span class="o">=</span> <span class="n">FDIsystem</span><span class="p">(</span>
-    <span class="n">residual_threshold</span><span class="o">=</span><span class="mf">0.150</span><span class="p">,</span>     <span class="c1"># Statistically calibrated (Issue #18)</span>
-    <span class="n">persistence_counter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-    <span class="n">residual_states</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>    <span class="c1"># Monitor position and angles</span>
-    <span class="n">hysteresis_enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>      <span class="c1"># Prevent oscillation near threshold</span>
-    <span class="n">hysteresis_upper</span><span class="o">=</span><span class="mf">0.165</span><span class="p">,</span>
-    <span class="n">hysteresis_lower</span><span class="o">=</span><span class="mf">0.135</span>
-<span class="p">)</span>
-
-<span class="c1"># Create dynamics model for predictions</span>
-<span class="n">dynamics</span> <span class="o">=</span> <span class="n">DoublePendulum</span><span class="p">()</span>
-
-<span class="c1"># Simulation loop with FDI monitoring</span>
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">):</span>
-    <span class="c1"># Get measurement (in practice, from sensors)</span>
-    <span class="n">x_measured</span> <span class="o">=</span> <span class="n">get_sensor_data</span><span class="p">()</span>
-
-    <span class="c1"># Get control input</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">x_measured</span><span class="p">,</span> <span class="n">x_ref</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-
-    <span class="c1"># FDI check</span>
-    <span class="n">status</span><span class="p">,</span> <span class="n">residual_norm</span> <span class="o">=</span> <span class="n">fdi</span><span class="o">.</span><span class="n">check</span><span class="p">(</span>
-        <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
-        <span class="n">meas</span><span class="o">=</span><span class="n">x_measured</span><span class="p">,</span>
-        <span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span>
-        <span class="n">dt</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
-        <span class="n">dynamics_model</span><span class="o">=</span><span class="n">dynamics</span>
-    <span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;FAULT&quot;</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;FAULT DETECTED at t=</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s, residual=</span><span class="si">{</span><span class="n">residual_norm</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="c1"># Implement safety response</span>
-        <span class="k">break</span>
-
-    <span class="c1"># Continue simulation</span>
-    <span class="n">x_next</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">x_measured</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="threshold-configuration-guidelines">
-<h2>Threshold Configuration Guidelines<a class="headerlink" href="#threshold-configuration-guidelines" title="Link to this heading">¶</a></h2>
-<section id="issue-18-calibration-reference">
-<h3>Issue #18 Calibration Reference<a class="headerlink" href="#issue-18-calibration-reference" title="Link to this heading">¶</a></h3>
-<p>The default threshold of <strong>0.150</strong> was statistically calibrated based on rigorous analysis:</p>
-<ul class="simple">
-<li><p><strong>Sample Size</strong>: 1,167 residual measurements across 100 simulations</p></li>
-<li><p><strong>Methodology</strong>: P99 percentile approach with bootstrap confidence intervals</p></li>
-<li><p><strong>False Positive Rate</strong>: Reduced from ~80% to 15.9% (6x improvement)</p></li>
-<li><p><strong>True Positive Rate</strong>: Maintained at ~100%</p></li>
-<li><p><strong>Documentation</strong>: See <a class="reference internal" href="fdi_threshold_calibration_methodology.html"><span class="std std-doc">FDI Threshold Calibration Methodology</span></a></p></li>
-</ul>
-<p><strong>Hysteresis Parameters</strong>:</p>
-<ul class="simple">
-<li><p><strong>Upper Threshold</strong>: 0.165 (threshold × 1.1) - triggers fault detection</p></li>
-<li><p><strong>Lower Threshold</strong>: 0.135 (threshold × 0.9) - recovery threshold</p></li>
-<li><p><strong>Deadband</strong>: 10% prevents oscillation near boundary</p></li>
-</ul>
-</section>
-<section id="static-thresholds">
-<h3>Static Thresholds<a class="headerlink" href="#static-thresholds" title="Link to this heading">¶</a></h3>
-<p><strong>Position Residuals (x):</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">threshold</span> <span class="pre">=</span> <span class="pre">0.01-0.05</span></code> m for high-precision systems</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">threshold</span> <span class="pre">=</span> <span class="pre">0.1-0.2</span></code> m for typical laboratory setups (use 0.150 calibrated value)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">threshold</span> <span class="pre">=</span> <span class="pre">0.5-1.0</span></code> m for coarse monitoring</p></li>
-</ul>
-<p><strong>Angular Residuals (θ₁, θ₂):</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">threshold</span> <span class="pre">=</span> <span class="pre">0.01-0.05</span></code> rad (0.6-3°) for precise control</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">threshold</span> <span class="pre">=</span> <span class="pre">0.1-0.2</span></code> rad (6-11°) for standard operation</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">threshold</span> <span class="pre">=</span> <span class="pre">0.5</span></code> rad (29°) for safety-critical detection</p></li>
-</ul>
-<p><strong>Velocity Residuals (ẋ, θ̇₁, θ̇₂):</strong></p>
-<ul class="simple">
-<li><p>Often noisier than position measurements</p></li>
-<li><p>Use 2-5× larger thresholds than position equivalents</p></li>
-<li><p>Consider filtering or excluding from residual calculation</p></li>
-</ul>
-<p><strong>Recommended Practice</strong>: Start with the calibrated threshold (0.150) and adjust based on your system’s noise characteristics. See the calibration methodology document for statistical approaches.</p>
-</section>
-<section id="adaptive-thresholds">
-<h3>Adaptive Thresholds<a class="headerlink" href="#adaptive-thresholds" title="Link to this heading">¶</a></h3>
-<p>When <code class="docutils literal notranslate"><span class="pre">adaptive</span> <span class="pre">=</span> <span class="pre">true</span></code>, the threshold becomes:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">threshold</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="n">μ</span> <span class="o">+</span> <span class="n">threshold_factor</span> <span class="err">×</span> <span class="n">σ</span>
-</pre></div>
-</div>
-<p>Where μ and σ are estimated from the last <code class="docutils literal notranslate"><span class="pre">window_size</span></code> residuals.</p>
-<p><strong>Parameter Guidelines:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">window_size</span> <span class="pre">=</span> <span class="pre">50-100</span></code>: Balance responsiveness vs. stability</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">threshold_factor</span> <span class="pre">=</span> <span class="pre">2.0-4.0</span></code>: Corresponds to confidence levels</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">factor</span> <span class="pre">=</span> <span class="pre">2.0</span></code>: ~95% confidence (more sensitive)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">factor</span> <span class="pre">=</span> <span class="pre">3.0</span></code>: ~99.7% confidence (balanced)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">factor</span> <span class="pre">=</span> <span class="pre">4.0</span></code>: ~99.99% confidence (conservative)</p></li>
-</ul>
-</li>
-</ul>
-</section>
-</section>
-<section id="persistence-and-false-alarm-management">
-<h2>Persistence and False Alarm Management<a class="headerlink" href="#persistence-and-false-alarm-management" title="Link to this heading">¶</a></h2>
-<section id="persistence-counter">
-<h3>Persistence Counter<a class="headerlink" href="#persistence-counter" title="Link to this heading">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">persistence_counter</span></code> requires sustained threshold violations:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FAULT</span> <span class="n">declared</span> <span class="k">if</span><span class="p">:</span> <span class="n">violation_count</span> <span class="err">≥</span> <span class="n">persistence_counter</span>
-</pre></div>
-</div>
-<p><strong>Selection Guidelines:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">persistence</span> <span class="pre">=</span> <span class="pre">1</span></code>: Immediate detection, higher false alarm rate</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">persistence</span> <span class="pre">=</span> <span class="pre">5-10</span></code>: Balanced detection vs. false alarms</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">persistence</span> <span class="pre">=</span> <span class="pre">20-50</span></code>: Conservative, slower detection</p></li>
-</ul>
-<p><strong>Time-based Interpretation:</strong></p>
-<ul class="simple">
-<li><p>At 1000 Hz sampling: <code class="docutils literal notranslate"><span class="pre">persistence</span> <span class="pre">=</span> <span class="pre">10</span></code> → 10ms sustained fault</p></li>
-<li><p>At 100 Hz sampling: <code class="docutils literal notranslate"><span class="pre">persistence</span> <span class="pre">=</span> <span class="pre">10</span></code> → 100ms sustained fault</p></li>
-</ul>
-</section>
-<section id="state-weighting">
-<h3>State Weighting<a class="headerlink" href="#state-weighting" title="Link to this heading">¶</a></h3>
-<p>Use <code class="docutils literal notranslate"><span class="pre">residual_weights</span></code> to emphasize critical states:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Emphasize angular states for pendulum stability</span>
-<span class="nt">residual_states</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">]</span><span class="w">        </span><span class="c1"># x, θ₁, θ₂</span>
-<span class="nt">residual_weights</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># Weight angles 4× more than position</span>
-</pre></div>
-</div>
-<p>The weighted residual norm becomes:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">||</span><span class="n">r</span><span class="o">||</span><span class="n">_weighted</span> <span class="o">=</span> <span class="err">√</span><span class="p">(</span><span class="n">w</span><span class="err">₁</span><span class="n">r</span><span class="err">₁²</span> <span class="o">+</span> <span class="n">w</span><span class="err">₂</span><span class="n">r</span><span class="err">₂²</span> <span class="o">+</span> <span class="n">w</span><span class="err">₃</span><span class="n">r</span><span class="err">₃²</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="cusum-drift-detection">
-<h2>CUSUM Drift Detection<a class="headerlink" href="#cusum-drift-detection" title="Link to this heading">¶</a></h2>
-<p>CUSUM (Cumulative Sum) detection complements threshold-based monitoring by accumulating small deviations over time.</p>
-<section id="algorithm">
-<h3>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">S</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">S</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">-</span> <span class="n">μ</span><span class="p">))</span>
-<span class="n">FAULT</span> <span class="k">if</span> <span class="n">S</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">cusum_threshold</span>
-</pre></div>
-</div>
-<p>Where:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">r(k)</span></code>: Current residual norm</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">μ</span></code>: Running average of residual norm</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">S(k)</span></code>: Cumulative sum statistic</p></li>
-</ul>
-</section>
-<section id="configuration-cusum-configuration">
-<h3>Configuration {#cusum-configuration}<a class="headerlink" href="#configuration-cusum-configuration" title="Link to this heading">¶</a></h3>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">fdi</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">cusum_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">cusum_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span><span class="w">    </span><span class="c1"># Adjust based on expected drift magnitude</span>
-</pre></div>
-</div>
-<p><strong>Threshold Selection:</strong></p>
-<ul class="simple">
-<li><p>Lower values (1.0-3.0): Detect small parameter changes quickly</p></li>
-<li><p>Higher values (5.0-10.0): Reduce false alarms from noise</p></li>
-<li><p>Monitor CUSUM statistic during normal operation to calibrate</p></li>
-</ul>
-</section>
-</section>
-<section id="fault-types-and-signatures">
-<h2>Fault Types and Signatures<a class="headerlink" href="#fault-types-and-signatures" title="Link to this heading">¶</a></h2>
-<section id="sensor-faults">
-<h3>Sensor Faults<a class="headerlink" href="#sensor-faults" title="Link to this heading">¶</a></h3>
-<p><strong>Bias Fault:</strong></p>
-<ul class="simple">
-<li><p>Constant offset in measurements</p></li>
-<li><p><strong>Signature</strong>: Persistent residual in one direction</p></li>
-<li><p><strong>Detection</strong>: Low threshold with moderate persistence</p></li>
-</ul>
-<p><strong>Drift Fault:</strong></p>
-<ul class="simple">
-<li><p>Gradually changing sensor calibration</p></li>
-<li><p><strong>Signature</strong>: Slowly increasing residual trend</p></li>
-<li><p><strong>Detection</strong>: Enable CUSUM with moderate threshold</p></li>
-</ul>
-<p><strong>Noise Fault:</strong></p>
-<ul class="simple">
-<li><p>Increased measurement noise</p></li>
-<li><p><strong>Signature</strong>: Higher residual variance</p></li>
-<li><p><strong>Detection</strong>: Adaptive thresholding automatically adjusts</p></li>
-</ul>
-<p><strong>Stuck Sensor:</strong></p>
-<ul class="simple">
-<li><p>Sensor output frozen at constant value</p></li>
-<li><p><strong>Signature</strong>: Residual tracks true motion</p></li>
-<li><p><strong>Detection</strong>: Low threshold, immediate persistence</p></li>
-</ul>
-</section>
-<section id="actuator-faults">
-<h3>Actuator Faults<a class="headerlink" href="#actuator-faults" title="Link to this heading">¶</a></h3>
-<p><strong>Reduced Effectiveness:</strong></p>
-<ul class="simple">
-<li><p>Actuator produces less force than commanded</p></li>
-<li><p><strong>Signature</strong>: Tracking error increases over time</p></li>
-<li><p><strong>Detection</strong>: Monitor position states with CUSUM</p></li>
-</ul>
-<p><strong>Actuator Saturation:</strong></p>
-<ul class="simple">
-<li><p>Control input clipped beyond model assumptions</p></li>
-<li><p><strong>Signature</strong>: Residuals during large control demands</p></li>
-<li><p><strong>Detection</strong>: Condition-based thresholds</p></li>
-</ul>
-</section>
-<section id="physical-parameter-changes">
-<h3>Physical Parameter Changes<a class="headerlink" href="#physical-parameter-changes" title="Link to this heading">¶</a></h3>
-<p><strong>Mass Changes:</strong></p>
-<ul class="simple">
-<li><p>Load added/removed from system</p></li>
-<li><p><strong>Signature</strong>: Changes in acceleration response</p></li>
-<li><p><strong>Detection</strong>: CUSUM on velocity residuals</p></li>
-</ul>
-<p><strong>Friction Changes:</strong></p>
-<ul class="simple">
-<li><p>Wear, lubrication loss, contamination</p></li>
-<li><p><strong>Signature</strong>: Velocity-dependent residual patterns</p></li>
-<li><p><strong>Detection</strong>: Adaptive thresholding with long window</p></li>
-</ul>
-</section>
-</section>
-<section id="diagnostic-plots-and-analysis">
-<h2>Diagnostic Plots and Analysis<a class="headerlink" href="#diagnostic-plots-and-analysis" title="Link to this heading">¶</a></h2>
-<section id="fdi-visualization">
-<h3>FDI Visualization<a class="headerlink" href="#fdi-visualization" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate FDI plots with simulation</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--ctrl<span class="w"> </span>sta_smc<span class="w"> </span>--plot<span class="w"> </span>--plot-fdi
-</pre></div>
-</div>
-<p><strong>Plot Elements:</strong></p>
-<ul class="simple">
-<li><p><strong>Residual Time Series</strong>: Shows r(t) evolution</p></li>
-<li><p><strong>Threshold Lines</strong>: Static and adaptive limits</p></li>
-<li><p><strong>Fault Markers</strong>: Indicates detection times</p></li>
-<li><p><strong>CUSUM Trace</strong>: Cumulative statistic (if enabled)</p></li>
-</ul>
-</section>
-<section id="analysis-code">
-<h3>Analysis Code<a class="headerlink" href="#analysis-code" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Access FDI history for custom analysis</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="c1"># After simulation with FDI enabled</span>
-<span class="n">times</span> <span class="o">=</span> <span class="n">fdi</span><span class="o">.</span><span class="n">times</span>
-<span class="n">residuals</span> <span class="o">=</span> <span class="n">fdi</span><span class="o">.</span><span class="n">residuals</span>
-
-<span class="c1"># Plot residual statistics</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-
-<span class="c1"># Residual time series</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">residuals</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">fdi</span><span class="o">.</span><span class="n">residual_threshold</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Residual Norm&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;FDI Residual History&#39;</span><span class="p">)</span>
-
-<span class="c1"># Residual histogram</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Residual Norm&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Residual Distribution&#39;</span><span class="p">)</span>
-
-<span class="c1"># Moving statistics</span>
-<span class="n">window</span> <span class="o">=</span> <span class="mi">50</span>
-<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">window</span><span class="p">:</span>
-    <span class="n">moving_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">window</span><span class="p">)</span><span class="o">/</span><span class="n">window</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
-    <span class="n">moving_std</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">residuals</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">window</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span><span class="o">-</span><span class="n">window</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">window</span><span class="o">-</span><span class="mi">1</span><span class="p">:],</span> <span class="n">moving_mean</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Moving Mean&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">window</span><span class="o">-</span><span class="mi">1</span><span class="p">:],</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">moving_mean</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">moving_std</span><span class="p">),</span>
-             <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;μ + 3σ&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Residual Statistics&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Adaptive Threshold Evolution&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="integration-with-control-system">
-<h2>Integration with Control System<a class="headerlink" href="#integration-with-control-system" title="Link to this heading">¶</a></h2>
-<section id="safe-state-responses">
-<h3>Safe State Responses<a class="headerlink" href="#safe-state-responses" title="Link to this heading">¶</a></h3>
-<p>When a fault is detected, implement appropriate safety measures:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;FAULT&quot;</span><span class="p">:</span>
-    <span class="c1"># Log fault information</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;FAULT at t=</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s: residual=</span><span class="si">{</span><span class="n">residual_norm</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Safety responses (choose appropriate action)</span>
-
-    <span class="c1"># Option 1: Emergency stop</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="mf">0.0</span>
-
-    <span class="c1"># Option 2: Switch to safe controller</span>
-    <span class="n">controller</span> <span class="o">=</span> <span class="n">safe_mode_controller</span>
-
-    <span class="c1"># Option 3: Graceful shutdown</span>
-    <span class="n">target_state</span> <span class="o">=</span> <span class="n">safe_equilibrium</span>
-
-    <span class="c1"># Option 4: Reduce performance</span>
-    <span class="n">controller</span><span class="o">.</span><span class="n">reduce_gains</span><span class="p">(</span><span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="controller-reconfiguration">
-<h3>Controller Reconfiguration<a class="headerlink" href="#controller-reconfiguration" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="c1"># Fault-tolerant control example</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">FaultTolerantController</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">primary_controller</span><span class="p">,</span> <span class="n">backup_controller</span><span class="p">,</span> <span class="n">fdi_system</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">primary</span> <span class="o">=</span> <span class="n">primary_controller</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">backup</span> <span class="o">=</span> <span class="n">backup_controller</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fdi</span> <span class="o">=</span> <span class="n">fdi_system</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">active_controller</span> <span class="o">=</span> <span class="n">primary_controller</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x_ref</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u_prev</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">):</span>
-        <span class="c1"># FDI check</span>
-        <span class="n">status</span><span class="p">,</span> <span class="n">residual</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdi</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u_prev</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">)</span>
-
-        <span class="c1"># Switch controllers if fault detected</span>
-        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;FAULT&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_controller</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">primary</span><span class="p">:</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Switching to backup controller due to fault&quot;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">active_controller</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backup</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_ref</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="performance-considerations">
-<h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">¶</a></h2>
-<section id="computational-cost">
-<h3>Computational Cost<a class="headerlink" href="#computational-cost" title="Link to this heading">¶</a></h3>
-<p>FDI adds minimal overhead:</p>
-<ul class="simple">
-<li><p>Model prediction: ~10 μs (for simplified dynamics)</p></li>
-<li><p>Residual computation: ~1 μs</p></li>
-<li><p>Threshold checking: ~0.1 μs</p></li>
-</ul>
-<p><strong>Total overhead</strong>: &lt;1% of 1 kHz control loop</p>
-</section>
-<section id="memory-usage">
-<h3>Memory Usage<a class="headerlink" href="#memory-usage" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>History storage: <code class="docutils literal notranslate"><span class="pre">O(simulation_length</span> <span class="pre">/</span> <span class="pre">dt)</span></code> for plotting</p></li>
-<li><p>Adaptive window: <code class="docutils literal notranslate"><span class="pre">O(window_size)</span></code> floating-point values</p></li>
-<li><p>Total memory: Negligible for typical simulations</p></li>
-</ul>
-</section>
-<section id="real-time-considerations">
-<h3>Real-time Considerations<a class="headerlink" href="#real-time-considerations" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Use simplified dynamics model for FDI predictions</p></li>
-<li><p>Limit history storage in embedded implementations</p></li>
-<li><p>Consider downsampling FDI rate if computational resources are constrained</p></li>
-</ul>
-</section>
-</section>
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
-<section id="high-false-alarm-rate">
-<h3>High False Alarm Rate<a class="headerlink" href="#high-false-alarm-rate" title="Link to this heading">¶</a></h3>
-<p><strong>Symptoms</strong>: Frequent fault detections during normal operation</p>
-<p><strong>Solutions</strong>:</p>
-<ol class="arabic simple">
-<li><p>Increase <code class="docutils literal notranslate"><span class="pre">residual_threshold</span></code></p></li>
-<li><p>Increase <code class="docutils literal notranslate"><span class="pre">persistence_counter</span></code></p></li>
-<li><p>Enable adaptive thresholding</p></li>
-<li><p>Check model accuracy</p></li>
-<li><p>Verify sensor noise levels</p></li>
-</ol>
-</section>
-<section id="missed-fault-detection">
-<h3>Missed Fault Detection<a class="headerlink" href="#missed-fault-detection" title="Link to this heading">¶</a></h3>
-<p><strong>Symptoms</strong>: Known faults not detected by FDI</p>
-<p><strong>Solutions</strong>:</p>
-<ol class="arabic simple">
-<li><p>Decrease <code class="docutils literal notranslate"><span class="pre">residual_threshold</span></code></p></li>
-<li><p>Decrease <code class="docutils literal notranslate"><span class="pre">persistence_counter</span></code></p></li>
-<li><p>Enable CUSUM for slow faults</p></li>
-<li><p>Check <code class="docutils literal notranslate"><span class="pre">residual_states</span></code> selection</p></li>
-<li><p>Tune <code class="docutils literal notranslate"><span class="pre">residual_weights</span></code> for critical states</p></li>
-</ol>
-</section>
-<section id="noisy-residuals">
-<h3>Noisy Residuals<a class="headerlink" href="#noisy-residuals" title="Link to this heading">¶</a></h3>
-<p><strong>Symptoms</strong>: High-frequency oscillations in residual signal</p>
-<p><strong>Solutions</strong>:</p>
-<ol class="arabic simple">
-<li><p>Filter measurements before FDI</p></li>
-<li><p>Use adaptive thresholding</p></li>
-<li><p>Increase <code class="docutils literal notranslate"><span class="pre">window_size</span></code></p></li>
-<li><p>Check integration timestep</p></li>
-<li><p>Verify model-plant match</p></li>
-</ol>
-</section>
-</section>
-<section id="related-documentation">
-<h2>Related Documentation<a class="headerlink" href="#related-documentation" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="architecture.html"><span class="std std-doc">System Architecture</span></a> - Overall system design</p></li>
-<li><p><a class="reference internal" href="api/index.html"><span class="std std-doc">Configuration Reference</span></a> - Complete FDI configuration options</p></li>
-<li><p><a class="reference internal" href="TESTING.html"><span class="std std-doc">Testing Guide</span></a> - How to test FDI functionality</p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/ba5fa66027334af9615bcd278f83d2a1/fdi.py"><span class="xref download myst">FDI Source Code</span></a> - FDI implementation details</p></li>
-</ul>
-</section>
 </section>
 
         </article>
@@ -1037,26 +433,8 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--ctrl<span cla
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="presentation/index.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Research Presentation Materials</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="context.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">2. Application Context</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -1067,7 +445,7 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--ctrl<span cla
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 08, 2025</div>
+              Last updated on Oct 10, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1076,91 +454,16 @@ python<span class="w"> </span>simulate.py<span class="w"> </span>--ctrl<span cla
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Fault Detection &amp; Isolation (FDI) Guide</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a></li>
-<li><a class="reference internal" href="#architecture">Architecture</a></li>
-<li><a class="reference internal" href="#configuration">Configuration</a><ul>
-<li><a class="reference internal" href="#basic-configuration">Basic Configuration</a></li>
-<li><a class="reference internal" href="#advanced-configuration">Advanced Configuration</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
-<li><a class="reference internal" href="#basic-fdi-monitoring">Basic FDI Monitoring</a></li>
-<li><a class="reference internal" href="#programmatic-usage">Programmatic Usage</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#threshold-configuration-guidelines">Threshold Configuration Guidelines</a><ul>
-<li><a class="reference internal" href="#issue-18-calibration-reference">Issue #18 Calibration Reference</a></li>
-<li><a class="reference internal" href="#static-thresholds">Static Thresholds</a></li>
-<li><a class="reference internal" href="#adaptive-thresholds">Adaptive Thresholds</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#persistence-and-false-alarm-management">Persistence and False Alarm Management</a><ul>
-<li><a class="reference internal" href="#persistence-counter">Persistence Counter</a></li>
-<li><a class="reference internal" href="#state-weighting">State Weighting</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cusum-drift-detection">CUSUM Drift Detection</a><ul>
-<li><a class="reference internal" href="#algorithm">Algorithm</a></li>
-<li><a class="reference internal" href="#configuration-cusum-configuration">Configuration {#cusum-configuration}</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#fault-types-and-signatures">Fault Types and Signatures</a><ul>
-<li><a class="reference internal" href="#sensor-faults">Sensor Faults</a></li>
-<li><a class="reference internal" href="#actuator-faults">Actuator Faults</a></li>
-<li><a class="reference internal" href="#physical-parameter-changes">Physical Parameter Changes</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#diagnostic-plots-and-analysis">Diagnostic Plots and Analysis</a><ul>
-<li><a class="reference internal" href="#fdi-visualization">FDI Visualization</a></li>
-<li><a class="reference internal" href="#analysis-code">Analysis Code</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#integration-with-control-system">Integration with Control System</a><ul>
-<li><a class="reference internal" href="#safe-state-responses">Safe State Responses</a></li>
-<li><a class="reference internal" href="#controller-reconfiguration">Controller Reconfiguration</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#performance-considerations">Performance Considerations</a><ul>
-<li><a class="reference internal" href="#computational-cost">Computational Cost</a></li>
-<li><a class="reference internal" href="#memory-usage">Memory Usage</a></li>
-<li><a class="reference internal" href="#real-time-considerations">Real-time Considerations</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
-<li><a class="reference internal" href="#high-false-alarm-rate">High False Alarm Rate</a></li>
-<li><a class="reference internal" href="#missed-fault-detection">Missed Fault Detection</a></li>
-<li><a class="reference internal" href="#noisy-residuals">Noisy Residuals</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#related-documentation">Related Documentation</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
   </div>
 </div><script src="_static/documentation_options.js?v=4ebf8126"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=08e7b316"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>

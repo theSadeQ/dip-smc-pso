@@ -1,0 +1,803 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Citation System - Phase 3: Citation Integration - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8a7e329d" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">Theory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/plans/citation_system/04_phase3_citation_integration.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/plans/citation_system/04_phase3_citation_integration.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="citation-system-phase-3-citation-integration">
+<h1>Citation System - Phase 3: Citation Integration<a class="headerlink" href="#citation-system-phase-3-citation-integration" title="Link to this heading">¶</a></h1>
+<p><strong>Document Version:</strong> 1.0.0
+<strong>Created:</strong> 2025-01-15
+<strong>Status:</strong> Planning Phase
+<strong>Estimated Duration:</strong> Week 5-7 (15-25 hours)</p>
+<section id="phase-overview">
+<h2>Phase Overview<a class="headerlink" href="#phase-overview" title="Link to this heading">¶</a></h2>
+<p><strong>Objective:</strong> Insert 150-200 verified citations into documentation and code docstrings.</p>
+<p><strong>Input:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">artifacts/citation_mapping.json</span></code> (from Phase 2)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/references/enhanced_bibliography.bib</span></code> (150-200 entries)</p></li>
+</ul>
+<p><strong>Output:</strong></p>
+<ul class="simple">
+<li><p>500+ claims cited in documentation</p></li>
+<li><p>All docstrings updated with proper citations</p></li>
+<li><p>Citation style consistency enforced</p></li>
+</ul>
+</section>
+<section id="citation-integration-strategy">
+<h2>Citation Integration Strategy<a class="headerlink" href="#citation-integration-strategy" title="Link to this heading">¶</a></h2>
+<section id="documentation-files">
+<h3>1. Documentation Files<a class="headerlink" href="#documentation-files" title="Link to this heading">¶</a></h3>
+<p><strong>Target:</strong> Markdown documentation files (<code class="docutils literal notranslate"><span class="pre">.md</span></code>)</p>
+<p><strong>Citation Format:</strong></p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>The super-twisting algorithm eliminates chattering [[Levant2001]](#ref-Levant2001)
+through continuous control approximation [[Moreno2012]](#ref-Moreno2012).
+
+<span class="gu">## References</span>
+
+&lt;a name=&quot;ref-Levant2001&quot;&gt;&lt;/a&gt;
+[Levant2001] Levant, A. (2001). &quot;Super-twisting algorithm for second-order
+sliding mode.&quot; IEEE Transactions on Automatic Control, 46(1), 133-135.
+</pre></div>
+</div>
+</section>
+<section id="python-docstrings">
+<h3>2. Python Docstrings<a class="headerlink" href="#python-docstrings" title="Link to this heading">¶</a></h3>
+<p><strong>Target:</strong> Class and function docstrings</p>
+<p><strong>Citation Format:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">super_twisting_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">gains</span><span class="p">):</span>
+    \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Compute super-twisting sliding mode control.</span>
+
+    <span class="n">Implements</span> <span class="n">the</span> <span class="n">continuous</span> <span class="nb">super</span><span class="o">-</span><span class="n">twisting</span> <span class="n">algorithm</span> <span class="n">which</span> <span class="n">eliminates</span>
+    <span class="n">chattering</span> <span class="n">through</span> <span class="n">second</span><span class="o">-</span><span class="n">order</span> <span class="n">sliding</span> <span class="n">mode</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="n">_</span><span class="o">.</span>
+
+    <span class="n">Parameters</span>
+    <span class="c1"># ---------- (RST section marker)</span>
+    <span class="n">state</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+        <span class="n">System</span> <span class="n">state</span> <span class="n">vector</span>
+    <span class="n">gains</span> <span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+        <span class="n">Controller</span> <span class="n">gains</span> <span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+
+    <span class="n">Returns</span>
+    <span class="c1"># ------- (RST section marker)</span>
+    <span class="nb">float</span>
+        <span class="n">Control</span> <span class="n">signal</span>
+
+    <span class="n">References</span>
+    <span class="c1"># ---------- (RST section marker)</span>
+    <span class="o">..</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">Levant</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span> <span class="p">(</span><span class="mi">2001</span><span class="p">)</span><span class="o">.</span> <span class="s2">&quot;Super-twisting algorithm for second-order</span>
+       <span class="n">sliding</span> <span class="n">mode</span><span class="o">.</span><span class="s2">&quot; IEEE Transactions on Automatic Control, 46(1), 133-135.</span>
+       <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">doi</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="mf">10.1109</span><span class="o">/</span><span class="n">TAC</span><span class="mf">.2001.964620</span>
+
+    <span class="o">..</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">Moreno</span><span class="p">,</span> <span class="n">J</span><span class="o">.</span> <span class="n">A</span><span class="o">.</span><span class="p">,</span> <span class="o">&amp;</span> <span class="n">Osorio</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span> <span class="p">(</span><span class="mi">2012</span><span class="p">)</span><span class="o">.</span> <span class="s2">&quot;Strict Lyapunov functions</span>
+       <span class="k">for</span> <span class="n">the</span> <span class="nb">super</span><span class="o">-</span><span class="n">twisting</span> <span class="n">algorithm</span><span class="o">.</span><span class="s2">&quot; IEEE TAC, 57(4), 1035-1040.</span>
+    \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="tool-development">
+<h2>Tool Development<a class="headerlink" href="#tool-development" title="Link to this heading">¶</a></h2>
+<section id="citation-insertion-tool-scripts-citations-insert-citations-py">
+<h3>1. Citation Insertion Tool (<code class="docutils literal notranslate"><span class="pre">scripts/citations/insert_citations.py</span></code>)<a class="headerlink" href="#citation-insertion-tool-scripts-citations-insert-citations-py" title="Link to this heading">¶</a></h3>
+<p><strong>Estimated Effort:</strong> 350 lines, 12 hours</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CitationInserter</span><span class="p">:</span>
+    \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Insert citations into documentation and code.</span><span class="se">\&quot;\&quot;\&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">citation_mapping</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">bibliography</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">dry_run</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">citation_mapping</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bib</span> <span class="o">=</span> <span class="n">parse_bibtex</span><span class="p">(</span><span class="n">bibliography</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dry_run</span> <span class="o">=</span> <span class="n">dry_run</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">insert_into_markdown</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">file_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">claim_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Insert citations into markdown file.</span><span class="se">\&quot;\&quot;\&quot;</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">file_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">claim_id</span> <span class="ow">in</span> <span class="n">claim_ids</span><span class="p">:</span>
+            <span class="n">citations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">claim_id</span><span class="p">]</span>
+
+            <span class="c1"># Find claim text in content</span>
+            <span class="n">claim_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_claim_text</span><span class="p">(</span><span class="n">claim_id</span><span class="p">)</span>
+
+            <span class="c1"># Insert inline citations</span>
+            <span class="n">cited_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_inline_citations</span><span class="p">(</span>
+                <span class="n">claim_text</span><span class="p">,</span>
+                <span class="n">citations</span>
+            <span class="p">)</span>
+
+            <span class="n">content</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">claim_text</span><span class="p">,</span> <span class="n">cited_text</span><span class="p">)</span>
+
+        <span class="c1"># Add references section</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_references_section</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">citations</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dry_run</span><span class="p">:</span>
+            <span class="n">file_path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">insert_into_docstring</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">file_path</span><span class="p">:</span> <span class="n">Path</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Insert citations into Python docstrings.</span><span class="se">\&quot;\&quot;\&quot;</span>
+        <span class="c1"># AST-based docstring modification</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">file_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+
+        <span class="n">citations_added</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">ast</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">FunctionDef</span><span class="p">,</span> <span class="n">ast</span><span class="o">.</span><span class="n">ClassDef</span><span class="p">)):</span>
+                <span class="n">docstring</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">get_docstring</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">docstring</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_claim</span><span class="p">(</span><span class="n">docstring</span><span class="p">):</span>
+                    <span class="n">new_docstring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_citations_to_docstring</span><span class="p">(</span>
+                        <span class="n">docstring</span><span class="p">,</span>
+                        <span class="n">node</span><span class="o">.</span><span class="n">name</span>
+                    <span class="p">)</span>
+
+                    <span class="c1"># Update AST</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">update_docstring</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">new_docstring</span><span class="p">)</span>
+                    <span class="n">citations_added</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dry_run</span><span class="p">:</span>
+            <span class="c1"># Write modified AST back to file</span>
+            <span class="n">file_path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">unparse</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">citations_added</span>
+</pre></div>
+</div>
+<p><strong>Features:</strong></p>
+<ul class="simple">
+<li><p>AST-based Python file modification (preserves formatting)</p></li>
+<li><p>Markdown citation insertion</p></li>
+<li><p>Dry-run mode for validation</p></li>
+<li><p>Batch processing support</p></li>
+<li><p>Backup creation before modification</p></li>
+</ul>
+</section>
+<section id="citation-validation-tool-scripts-citations-validate-insertions-py">
+<h3>2. Citation Validation Tool (<code class="docutils literal notranslate"><span class="pre">scripts/citations/validate_insertions.py</span></code>)<a class="headerlink" href="#citation-validation-tool-scripts-citations-validate-insertions-py" title="Link to this heading">¶</a></h3>
+<p><strong>Estimated Effort:</strong> 200 lines, 8 hours</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CitationValidator</span><span class="p">:</span>
+    \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Validate inserted citations.</span><span class="se">\&quot;\&quot;\&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_markdown_citations</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">file_path</span><span class="p">:</span> <span class="n">Path</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ValidationError</span><span class="p">]:</span>
+        \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Check markdown citations for correctness.</span><span class="se">\&quot;\&quot;\&quot;</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">content</span> <span class="o">=</span> <span class="n">file_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+
+        <span class="c1"># Extract inline citations [[CitationKey]]</span>
+        <span class="n">inline_citations</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\[\[([^\]]+)\]\]&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+        <span class="c1"># Extract reference section citations</span>
+        <span class="n">ref_citations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_references</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+        <span class="c1"># Validate all inline citations have references</span>
+        <span class="k">for</span> <span class="n">citation</span> <span class="ow">in</span> <span class="n">inline_citations</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">citation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ref_citations</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ValidationError</span><span class="p">(</span>
+                    <span class="n">file</span><span class="o">=</span><span class="n">file_path</span><span class="p">,</span>
+                    <span class="n">citation</span><span class="o">=</span><span class="n">citation</span><span class="p">,</span>
+                    <span class="n">error</span><span class="o">=</span><span class="s2">&quot;Missing reference for inline citation&quot;</span>
+                <span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">errors</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_bibtex_references</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">file_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">bibliography</span><span class="p">:</span> <span class="n">Path</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ValidationError</span><span class="p">]:</span>
+        \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Check that all citations exist in bibliography.</span><span class="se">\&quot;\&quot;\&quot;</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Extract all citation keys from file</span>
+        <span class="n">citations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_all_citations</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+        <span class="c1"># Load bibliography</span>
+        <span class="n">bib</span> <span class="o">=</span> <span class="n">parse_bibtex</span><span class="p">(</span><span class="n">bibliography</span><span class="p">)</span>
+
+        <span class="c1"># Validate existence</span>
+        <span class="k">for</span> <span class="n">citation</span> <span class="ow">in</span> <span class="n">citations</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">citation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">bib</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ValidationError</span><span class="p">(</span>
+                    <span class="n">file</span><span class="o">=</span><span class="n">file_path</span><span class="p">,</span>
+                    <span class="n">citation</span><span class="o">=</span><span class="n">citation</span><span class="p">,</span>
+                    <span class="n">error</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Citation </span><span class="si">{</span><span class="n">citation</span><span class="si">}</span><span class="s2"> not found in bibliography&quot;</span>
+                <span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">errors</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="execution-plan">
+<h2>Execution Plan<a class="headerlink" href="#execution-plan" title="Link to this heading">¶</a></h2>
+<section id="week-5-documentation-file-citations-10-hours">
+<h3>Week 5: Documentation File Citations (10 hours)<a class="headerlink" href="#week-5-documentation-file-citations-10-hours" title="Link to this heading">¶</a></h3>
+<p><strong>Target Files:</strong></p>
+<ol class="arabic simple">
+<li><p>Theory documentation (40 files)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/mathematical_foundations/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/theory/</span></code></p></li>
+</ul>
+</li>
+<li><p>Controller guides (15 files)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/controllers/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/reference/controllers/</span></code></p></li>
+</ul>
+</li>
+<li><p>PSO documentation (10 files)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/optimization/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/factory/pso_*.md</span></code></p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Process:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>scripts/citations/insert_citations.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--target<span class="w"> </span>docs/mathematical_foundations<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--dry-run
+
+python<span class="w"> </span>scripts/citations/insert_citations.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--target<span class="w"> </span>docs/mathematical_foundations<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--apply
+</pre></div>
+</div>
+</section>
+<section id="week-6-code-docstring-citations-8-hours">
+<h3>Week 6: Code Docstring Citations (8 hours)<a class="headerlink" href="#week-6-code-docstring-citations-8-hours" title="Link to this heading">¶</a></h3>
+<p><strong>Target Modules:</strong></p>
+<ol class="arabic simple">
+<li><p>Controllers (<code class="docutils literal notranslate"><span class="pre">src/controllers/</span></code>)</p></li>
+<li><p>Plant models (<code class="docutils literal notranslate"><span class="pre">src/plant/</span></code>)</p></li>
+<li><p>PSO optimizer (<code class="docutils literal notranslate"><span class="pre">src/optimization/</span></code>)</p></li>
+<li><p>Analysis (<code class="docutils literal notranslate"><span class="pre">src/analysis/</span></code>)</p></li>
+</ol>
+<p><strong>Process:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>scripts/citations/insert_citations.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--target<span class="w"> </span>src/controllers<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--type<span class="w"> </span>docstring<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--dry-run
+
+python<span class="w"> </span>scripts/citations/insert_citations.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--target<span class="w"> </span>src/controllers<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--type<span class="w"> </span>docstring<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--apply
+</pre></div>
+</div>
+</section>
+<section id="week-7-validation-quality-assurance-7-hours">
+<h3>Week 7: Validation &amp; Quality Assurance (7 hours)<a class="headerlink" href="#week-7-validation-quality-assurance-7-hours" title="Link to this heading">¶</a></h3>
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Run citation validation</p></li>
+<li><p>Check citation format consistency</p></li>
+<li><p>Verify all citations exist in bibliography</p></li>
+<li><p>Manual review of critical citations</p></li>
+<li><p>Fix validation errors</p></li>
+</ol>
+<p><strong>Commands:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>scripts/citations/validate_insertions.py<span class="w"> </span>--all
+python<span class="w"> </span>scripts/citations/generate_citation_report.py
+</pre></div>
+</div>
+</section>
+</section>
+<section id="deliverables">
+<h2>Deliverables<a class="headerlink" href="#deliverables" title="Link to this heading">¶</a></h2>
+<section id="cited-documentation-files">
+<h3>1. Cited Documentation Files<a class="headerlink" href="#cited-documentation-files" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>500+ citations inserted</p></li>
+<li><p>References sections added</p></li>
+<li><p>Proper citation format</p></li>
+</ul>
+</section>
+<section id="updated-code-docstrings">
+<h3>2. Updated Code Docstrings<a class="headerlink" href="#updated-code-docstrings" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>All claim-bearing docstrings cited</p></li>
+<li><p>NumPy docstring format with References section</p></li>
+<li><p>Consistent citation style</p></li>
+</ul>
+</section>
+<section id="citation-quality-report">
+<h3>3. Citation Quality Report<a class="headerlink" href="#citation-quality-report" title="Link to this heading">¶</a></h3>
+<p><strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">artifacts/citation_integration_report.json</span></code></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;files_processed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">245</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;citations_inserted&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">523</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;documentation_files&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">185</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;code_files&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;validation_errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;format_consistency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100%&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="acceptance-criteria">
+<h2>Acceptance Criteria<a class="headerlink" href="#acceptance-criteria" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metric</p></th>
+<th class="head"><p>Target</p></th>
+<th class="head"><p>Validation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Citations Inserted</strong></p></td>
+<td><p>500+</p></td>
+<td><p>Count citations in files</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Coverage</strong></p></td>
+<td><p>≥85% claims cited</p></td>
+<td><p>Cited claims / total claims</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Format Consistency</strong></p></td>
+<td><p>100%</p></td>
+<td><p>Validation script pass</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Broken References</strong></p></td>
+<td><p>0</p></td>
+<td><p>All citations in bibliography</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Validation Errors</strong></p></td>
+<td><p>0</p></td>
+<td><p>No missing/malformed citations</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="quality-assurance">
+<h2>Quality Assurance<a class="headerlink" href="#quality-assurance" title="Link to this heading">¶</a></h2>
+<section id="automated-tests">
+<h3>Automated Tests<a class="headerlink" href="#automated-tests" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>tests/test_documentation/test_citations.py<span class="w"> </span>-v
+</pre></div>
+</div>
+<p><strong>Test Coverage:</strong></p>
+<ul class="simple">
+<li><p>Citation format validation</p></li>
+<li><p>Bibliography consistency</p></li>
+<li><p>Inline citation completeness</p></li>
+<li><p>Reference section correctness</p></li>
+</ul>
+</section>
+<section id="manual-review">
+<h3>Manual Review<a class="headerlink" href="#manual-review" title="Link to this heading">¶</a></h3>
+<p><strong>Critical Sections (1 hour each):</strong></p>
+<ol class="arabic simple">
+<li><p>SMC theory citations (10 key theorems)</p></li>
+<li><p>PSO algorithm citations (5 key claims)</p></li>
+<li><p>Stability analysis citations (8 proofs)</p></li>
+</ol>
+</section>
+</section>
+<section id="risk-management">
+<h2>Risk Management<a class="headerlink" href="#risk-management" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Risk</p></th>
+<th class="head"><p>Impact</p></th>
+<th class="head"><p>Mitigation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Incorrect citations</strong></p></td>
+<td><p>HIGH</p></td>
+<td><p>Manual review of top 50 critical claims</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Format inconsistency</strong></p></td>
+<td><p>MEDIUM</p></td>
+<td><p>Automated formatting enforcement</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Code breakage</strong></p></td>
+<td><p>HIGH</p></td>
+<td><p>AST-based modification + extensive testing</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Missing citations</strong></p></td>
+<td><p>MEDIUM</p></td>
+<td><p>Validation script detects all gaps</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Phase 2 Complete:</strong> <code class="docutils literal notranslate"><span class="pre">citation_mapping.json</span></code>, <code class="docutils literal notranslate"><span class="pre">enhanced_bibliography.bib</span></code></p></li>
+<li><p><strong>Python Libraries:</strong> <code class="docutils literal notranslate"><span class="pre">bibtexparser</span></code>, <code class="docutils literal notranslate"><span class="pre">ast</span></code>, <code class="docutils literal notranslate"><span class="pre">libcst</span></code></p></li>
+<li><p><strong>Validation Tools:</strong> Custom validation scripts</p></li>
+</ul>
+</section>
+<section id="next-phase">
+<h2>Next Phase<a class="headerlink" href="#next-phase" title="Link to this heading">¶</a></h2>
+<p><strong>Phase 4:</strong> <a class="reference internal" href="05_phase4_validation_quality.html"><span class="std std-doc">Validation &amp; Quality Assurance</span></a></p>
+<p><strong>Related Documents:</strong></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="00_master_roadmap.html"><span class="std std-doc">Master Roadmap</span></a></p></li>
+<li><p><a class="reference internal" href="03_phase2_ai_research.html"><span class="std std-doc">Phase 2: AI Research</span></a></p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 10, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Citation System - Phase 3: Citation Integration</a><ul>
+<li><a class="reference internal" href="#phase-overview">Phase Overview</a></li>
+<li><a class="reference internal" href="#citation-integration-strategy">Citation Integration Strategy</a><ul>
+<li><a class="reference internal" href="#documentation-files">1. Documentation Files</a></li>
+<li><a class="reference internal" href="#python-docstrings">2. Python Docstrings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tool-development">Tool Development</a><ul>
+<li><a class="reference internal" href="#citation-insertion-tool-scripts-citations-insert-citations-py">1. Citation Insertion Tool (<code class="docutils literal notranslate"><span class="pre">scripts/citations/insert_citations.py</span></code>)</a></li>
+<li><a class="reference internal" href="#citation-validation-tool-scripts-citations-validate-insertions-py">2. Citation Validation Tool (<code class="docutils literal notranslate"><span class="pre">scripts/citations/validate_insertions.py</span></code>)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#execution-plan">Execution Plan</a><ul>
+<li><a class="reference internal" href="#week-5-documentation-file-citations-10-hours">Week 5: Documentation File Citations (10 hours)</a></li>
+<li><a class="reference internal" href="#week-6-code-docstring-citations-8-hours">Week 6: Code Docstring Citations (8 hours)</a></li>
+<li><a class="reference internal" href="#week-7-validation-quality-assurance-7-hours">Week 7: Validation &amp; Quality Assurance (7 hours)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#deliverables">Deliverables</a><ul>
+<li><a class="reference internal" href="#cited-documentation-files">1. Cited Documentation Files</a></li>
+<li><a class="reference internal" href="#updated-code-docstrings">2. Updated Code Docstrings</a></li>
+<li><a class="reference internal" href="#citation-quality-report">3. Citation Quality Report</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#acceptance-criteria">Acceptance Criteria</a></li>
+<li><a class="reference internal" href="#quality-assurance">Quality Assurance</a><ul>
+<li><a class="reference internal" href="#automated-tests">Automated Tests</a></li>
+<li><a class="reference internal" href="#manual-review">Manual Review</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#risk-management">Risk Management</a></li>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#next-phase">Next Phase</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

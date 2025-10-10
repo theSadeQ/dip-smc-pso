@@ -16,7 +16,7 @@ streamlit run streamlit_app.py
 # Access at http://localhost:8501
 ```
 
-### Performance Features
+## Performance Features
 
 The app includes several performance optimizations:
 
@@ -83,7 +83,7 @@ docker build -t dip-smc-pso-app .
 docker run -p 8501:8501 dip-smc-pso-app
 ```
 
-### 3. Heroku Deployment
+## 3. Heroku Deployment
 
 1. **Create required files**:
 
@@ -116,7 +116,7 @@ heroku create your-app-name
 git push heroku main
 ```
 
-### 4. AWS EC2 / VPS Deployment
+## 4. AWS EC2 / VPS Deployment
 
 ```bash
 # Install dependencies
@@ -193,7 +193,7 @@ if st.sidebar.button("Health Check"):
     st.info(f"Cache size: {len(st.session_state)} items")
 ```
 
-### Performance Monitoring
+## Performance Monitoring
 
 - **Cache Hit Rates**: Monitor via Streamlit's built-in cache metrics
 - **Memory Usage**: Watch for cache size growth

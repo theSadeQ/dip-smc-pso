@@ -22,7 +22,7 @@ Constraint types:
 :linenos:
 ```
 
----
+
 
 ## Functions
 
@@ -64,7 +64,7 @@ The threshold allows for numerical tolerance or safety margins.
 :linenos:
 ```
 
----
+
 
 ### `compute_violation_severity(u, max_force)`
 
@@ -95,7 +95,7 @@ float
 :linenos:
 ```
 
----
+
 
 ### `compute_violation_percentage(u, max_force)`
 
@@ -124,7 +124,7 @@ float
 :linenos:
 ```
 
----
+
 
 ### `check_state_constraints(x, state_bounds)`
 
@@ -156,7 +156,7 @@ dict
 :linenos:
 ```
 
----
+
 
 ### `compute_constraint_margin(u, max_force)`
 
@@ -188,7 +188,7 @@ float
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

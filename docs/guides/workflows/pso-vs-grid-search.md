@@ -1,4 +1,5 @@
 # PSO vs Grid Search Comparison **Status:** 🚧 Under Construction This document will provide a comparison between Particle Swarm Optimization and traditional grid search methods for controller parameter tuning. ## Planned Content ### Methodology Comparison
+
 - Search space exploration strategies
 - Computational complexity analysis
 - Convergence characteristics
@@ -26,5 +27,9 @@
 - Documentation and reproducibility ## Temporary References Until this document is complete, please refer to:
 - [PSO Optimization Workflow](pso-optimization-workflow.md)
 - [Batch Simulation Workflow](batch-simulation-workflow.md)
-- [Statistical Benchmarks](../../reference/benchmarks/statistical_benchmarks_v2.md) --- **Last Updated:** 2025-10-07
+- [Statistical Benchmarks](../../reference/benchmarks/statistical_benchmarks_v2.md)
+
+---
+
+**Last Updated:** 2025-10-07
 **Target Completion:** Phase 7

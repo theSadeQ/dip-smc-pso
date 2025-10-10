@@ -1,9 +1,10 @@
 # React Bits Integration Guide
+
 ## For "I'm OK - You're OK" Study Dashboard
 
 Step-by-step guide to integrate React Bits components into your Next.js dashboard.
 
----
+
 
 ## 🎯 Your Current Dashboard
 
@@ -20,7 +21,7 @@ Step-by-step guide to integrate React Bits components into your Next.js dashboar
 1. Dashboard (`/`) - Progress visualizations
 2. Transaction Analyzer (`/analyzer`) - PAC diagrams
 
----
+
 
 ## 🚀 Quick Integration Steps
 
@@ -51,7 +52,7 @@ mkdir "D:\Lifestyle\Book\Im OK Youre OK\im-ok-youre-ok-study\study-dashboard\com
 cp component.tsx "D:\Lifestyle\Book\Im OK Youre OK\im-ok-youre-ok-study\study-dashboard\components\react-bits\ShinyText.tsx"
 ```
 
-### Step 3: Install Dependencies (if needed)
+## Step 3: Install Dependencies (if needed)
 
 Most components work with Framer Motion (already installed), but check requirements:
 
@@ -68,7 +69,7 @@ npm install gsap
 npm install @react-spring/web
 ```
 
-### Step 4: Import and Use
+## Step 4: Import and Use
 
 In your dashboard page:
 
@@ -86,7 +87,7 @@ export default function Dashboard() {
 }
 ```
 
----
+
 
 ## 📋 Component Integration Examples
 
@@ -193,13 +194,14 @@ const milestones = [
 <Stepper steps={milestones} />
 ```
 
----
+
 
 ## 🎨 Styling Integration
 
 React Bits components work seamlessly with your Tailwind setup:
 
 ### 1. Use Existing Theme Colors
+
 ```tsx
 // Components automatically use your dashboard's color scheme
 <ShinyText
@@ -209,6 +211,7 @@ React Bits components work seamlessly with your Tailwind setup:
 ```
 
 ### 2. Match Your Gradients
+
 ```tsx
 <GradientText
   text="Progress"
@@ -217,22 +220,25 @@ React Bits components work seamlessly with your Tailwind setup:
 ```
 
 ### 3. Dark Mode Support
+
 React Bits components respect your dark mode:
 ```tsx
 // Already works with your theme toggle!
 <Aurora className="dark:opacity-50" />
 ```
 
----
+
 
 ## 🔧 Component Compatibility
 
 ### ✅ Fully Compatible (No Changes Needed)
+
 - All text animations
 - Most UI components
 - Simple backgrounds
 
 ### ⚙️ Requires Minor Adjustments
+
 - 3D components (need Three.js setup)
 - GSAP-based animations (need GSAP config)
 
@@ -248,7 +254,7 @@ May need to add:
 - GSAP (for GSAP animations)
 - React Spring (for spring animations)
 
----
+
 
 ## 📝 Integration Checklist
 
@@ -265,40 +271,45 @@ For each component you add:
 - [ ] Test in light and dark mode
 - [ ] Verify mobile responsiveness
 
----
+
 
 ## 🚨 Common Issues & Solutions
 
 ### Issue 1: Module Not Found
+
 **Solution**: Make sure you copied to the correct path
 ```bash
 # Should be here:
 study-dashboard/components/react-bits/ComponentName.tsx
 ```
 
-### Issue 2: Missing Dependencies
+## Issue 2: Missing Dependencies
+
 **Solution**: Check component's README and install
 ```bash
 npm install [package-name]
 ```
 
 ### Issue 3: Styling Conflicts
+
 **Solution**: Use Tailwind's utility classes to override
 ```tsx
 <Component className="!bg-transparent !text-current" />
 ```
 
 ### Issue 4: Animation Not Working
+
 **Solution**: Ensure Framer Motion is imported
 ```tsx
 "use client"  // Add this at the top if not present
 ```
 
----
+
 
 ## 🎯 Recommended Component Combinations
 
 ### For Dashboard Landing Page
+
 ```
 Aurora (background) +
 ShinyText (hero title) +
@@ -307,6 +318,7 @@ MagicBento (content grid)
 ```
 
 ### For Transaction Analyzer
+
 ```
 GlitchText (error states) +
 TiltedCard (input cards) +
@@ -314,13 +326,14 @@ FlowingMenu (options menu)
 ```
 
 ### For Progress Visualization
+
 ```
 Stepper (milestone tracker) +
 AnimatedList (completed items) +
 SpotlightCard (highlighted metrics)
 ```
 
----
+
 
 ## 📚 File Organization
 
@@ -341,7 +354,7 @@ study-dashboard/
     └── analyzer/page.tsx
 ```
 
----
+
 
 ## 🔥 Pro Tips
 
@@ -354,7 +367,7 @@ study-dashboard/
    ```
 5. **Customization**: All components accept standard React props
 
----
+
 
 ## 🎨 Visual Enhancement Ideas
 
@@ -385,7 +398,7 @@ study-dashboard/
 + <TiltedCard><Card>...</Card></TiltedCard>
 ```
 
----
+
 
 ## 📖 Next Steps
 
@@ -394,7 +407,7 @@ study-dashboard/
 3. **Explore Examples**: Look at component `demo.tsx` files
 4. **Ask Claude**: Just say "Add [ComponentName] from React Bits"
 
----
+
 
 **Ready to make your dashboard stunning!** ✨
 

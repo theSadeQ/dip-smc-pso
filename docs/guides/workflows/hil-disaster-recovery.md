@@ -1,4 +1,5 @@
 # HIL Disaster Recovery **Status:** 🚧 Under Construction This document will contain disaster recovery procedures for Hardware-in-the-Loop production systems. ## Planned Content ### Disaster Scenarios
+
 - Hardware failure scenarios and responses
 - Network outage recovery procedures
 - Data corruption and recovery
@@ -32,5 +33,9 @@
 - [HIL Workflow Guide](hil-workflow.md)
 - [HIL Production Checklist](hil-production-checklist.md)
 - [HIL Data Logging](../../reference/interfaces/hil_data_logging.md)
-- [HIL Enhanced Features](../../reference/interfaces/hil_enhanced_hil.md) --- **Last Updated:** 2025-10-07
+- [HIL Enhanced Features](../../reference/interfaces/hil_enhanced_hil.md)
+
+---
+
+**Last Updated:** 2025-10-07
 **Target Completion:** Phase 7

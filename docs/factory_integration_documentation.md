@@ -148,7 +148,7 @@ class SMCType(Enum): """SMC Controller types enumeration.""" CLASSICAL = "classi
 ``` #### `SMCConfig` Class ```python
 class SMCConfig: """Configuration class for SMC controllers.""" def __init__(self, gains: List[float], max_force: float = 150.0, dt: float = 0.001, **kwargs: Any) -> None: # Configuration initialization
 ``` ### Legacy Compatibility Functions #### `create_controller_legacy(controller_type, config=None, gains=None)` **Legacy factory function for backward compatibility.** #### `create_classical_smc_controller(config=None, gains=None)`
-#### `create_sta_smc_controller(config=None, gains=None)`
+### `create_sta_smc_controller(config=None, gains=None)`
 
 #### `create_adaptive_smc_controller(config=None, gains=None)` **Type-specific factory functions for backward compatibility.**
 

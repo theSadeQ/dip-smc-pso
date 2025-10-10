@@ -17,7 +17,7 @@ pip install -r requirements.txt # Run verification script
 python scripts/docs/verify_all.py
 ``` **Expected Output:** All checks pass (citations, BibTeX coverage, reproduction tests)
 
-### 2. Key Files for Review | File | Purpose | Priority |
+## 2. Key Files for Review | File | Purpose | Priority |
 |------|---------|----------|
 | `docs/theory/smc_theory_complete.md` | SMC theoretical foundations (22 citations) | **P0** |
 | `docs/theory/pso_optimization_complete.md` | PSO optimization theory (13 citations) | **P1** |
@@ -72,7 +72,7 @@ python run_tests.py --coverage
 - Test 2: Fitness improves over iterations, gains converge
 - Test 3: All tests pass, coverage ≥85% **Reference:** `docs/for_reviewers/reproduction_guide.md`
 
-### Step 4: Attribution Completeness (15 minutes) **Objective:** Verify technical claims have proper attribution ```bash
+## Step 4: Attribution Completeness (15 minutes) **Objective:** Verify technical claims have proper attribution ```bash
 python scripts/docs/check_attribution.py
 ``` **Review:** `.artifacts/attribution_audit_executive_summary.md` **Expected Assessment:**
 - ⚠️ CONDITIONAL PASS (with context)

@@ -13,7 +13,7 @@ Gradient-based optimization algorithms.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

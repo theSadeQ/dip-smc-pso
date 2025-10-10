@@ -17,7 +17,7 @@ dynamics while minimizing computational overhead.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -119,7 +119,7 @@ Validate physics computation results.
 
 [View full source →](#method-lowrankphysicscomputer-validate_computation)
 
----
+
 
 ## Dependencies
 

@@ -249,14 +249,14 @@ grep -r "smc_levant_2003" docs/bib/*.bib
 # Output: docs/bib/smc.bib: title = {Higher-order sliding modes...}
 ```
 
-### By Author ```bash
+## By Author ```bash
 # Find all Levant papers
 grep -l "author.*Levant" docs/bib/*.bib
 # Output: docs/bib/smc.bib # View all Levant entries
 grep -A 10 "author.*Levant" docs/bib/smc.bib
 ```
 
-### By Topic **Topics Mapped to Files:**
+## By Topic **Topics Mapped to Files:**
 - Sliding Mode Control → `docs/bib/smc.bib`
 - PSO Optimization → `docs/bib/pso.bib`
 - Stability Theory → `docs/bib/stability.bib`
@@ -286,7 +286,7 @@ docs/bib/software.bib: 4 entries
 docs/bib/stability.bib: 6 entries
 ```
 
-### Find Uncited BibTeX Entries ```bash
+## Find Uncited BibTeX Entries ```bash
 # Check if any BibTeX entries are unused
 python scripts/docs/check_unused_citations.py
 ``` *(Note: All 94 entries are intentionally included for bibliography)*

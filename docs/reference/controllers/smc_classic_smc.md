@@ -13,7 +13,7 @@
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -175,7 +175,7 @@ Destructor for automatic cleanup.
 
 [View full source →](#method-classicalsmc-__del__)
 
----
+
 
 ## Dependencies
 

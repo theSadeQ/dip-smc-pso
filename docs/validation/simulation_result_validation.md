@@ -42,7 +42,7 @@ analyzer = MonteCarloAnalyzer(config)
 
 ---
 
-#### 1.2.2 Latin Hypercube Sampling (LHS) **Description:** Stratified sampling ensuring uniform coverage of parameter space. **Use Cases:**
+### 1.2.2 Latin Hypercube Sampling (LHS) **Description:** Stratified sampling ensuring uniform coverage of parameter space. **Use Cases:**
 - **Recommended for most control applications**
 - Parameter sensitivity analysis
 - Design space exploration
@@ -801,7 +801,7 @@ Low Performance, High Cost: Poorly designed (avoid!)
 
 ---
 
-#### 4.6.2 Borda Count (Multi-Metric) **Description:** Aggregate rankings across multiple metrics. **Algorithm:** 1. Rank methods for each metric
+## 4.6.2 Borda Count (Multi-Metric) **Description:** Aggregate rankings across multiple metrics. **Algorithm:** 1. Rank methods for each metric
 
 2. Assign points: 1st place = n-1 points, 2nd = n-2, ..., last = 0
 3. Sum points across all metrics
@@ -868,7 +868,7 @@ print(f"95% of scenarios have settling time < {percentile_95:.2f}s")
 
 ---
 
-### 5.4 Risk Analysis for Safety-Critical Systems **Value at Risk (VaR):** ```
+## 5.4 Risk Analysis for Safety-Critical Systems **Value at Risk (VaR):** ```
 VaR_α = inf{x : P(X ≤ x) ≥ α} Example: VaR₀.₀₅ = worst-case performance for bottom 5% of scenarios
 ``` **Conditional Value at Risk (CVaR / Expected Shortfall):** ```
 
@@ -916,7 +916,7 @@ from src.analysis.validation.cross_validation import CrossValidator validator = 
 
 ---
 
-### 6.3 Adaptive Controller Validation **Challenge:** Performance depends on online adaptation - cannot use standard CV. **Time Series Validation Approach:** ```python
+## 6.3 Adaptive Controller Validation **Challenge:** Performance depends on online adaptation - cannot use standard CV. **Time Series Validation Approach:** ```python
 config = CrossValidationConfig( cv_method="time_series", n_splits=5, max_train_size=100, # Limit adaptation window gap=10 # Predict 10 steps ahead
 ) # Each fold:
 # - Controller adapts on [t₀, t₁]
@@ -929,7 +929,7 @@ config = CrossValidationConfig( cv_method="time_series", n_splits=5, max_train_s
 
 ---
 
-### 6.4 Real-Time Control Validation **Timing Validation:** ```python
+## 6.4 Real-Time Control Validation **Timing Validation:** ```python
 
 # example-metadata:
 
@@ -957,7 +957,7 @@ if not result.data['power_analysis']['power_adequate']: print(f"⚠ Need {result
 
 ---
 
-#### Pitfall 2: Multiple Testing Without Correction **Problem:** 20 tests at α=0.05 → expect 1 false positive. **Solution:**
+## Pitfall 2: Multiple Testing Without Correction **Problem:** 20 tests at α=0.05 → expect 1 false positive. **Solution:**
 
 ```python
 config = StatisticalTestConfig( multiple_comparisons_correction="holm" # Use Holm or FDR
@@ -975,7 +975,7 @@ if test['p_value'] < 0.05: effect_size = compute_cohens_d(group1, group2) if abs
 
 ---
 
-#### Pitfall 4: Inappropriate Cross-Validation for Time Series **Problem:** Using standard K-fold on time series leaks future information. **Solution:**
+## Pitfall 4: Inappropriate Cross-Validation for Time Series **Problem:** Using standard K-fold on time series leaks future information. **Solution:**
 
 ```python
 # For time series, ALWAYS use time series CV
@@ -985,7 +985,7 @@ config = CrossValidationConfig( cv_method="time_series" # Not "k_fold"!
 
 ---
 
-#### Pitfall 5: Ignoring Non-Normality **Problem:** Using t-tests on non-normal data → invalid conclusions. **Solution:**
+## Pitfall 5: Ignoring Non-Normality **Problem:** Using t-tests on non-normal data → invalid conclusions. **Solution:**
 
 ```python
 # Check normality first
@@ -994,7 +994,7 @@ normality = suite.validate(data, test_types=['normality_tests']) if normality_re
 
 ---
 
-#### Pitfall 6: Overfitting in Parameter Tuning **Problem:** PSO optimizes perfectly for training scenarios, fails on new ones. **Solution:**
+## Pitfall 6: Overfitting in Parameter Tuning **Problem:** PSO optimizes perfectly for training scenarios, fails on new ones. **Solution:**
 
 ```python
 # Use nested CV for unbiased evaluation
@@ -1004,7 +1004,7 @@ config = CrossValidationConfig( enable_nested_cv=True, n_splits=5, inner_cv_spli
 
 ---
 
-### 7.2 Best Practices #### Practice 1: Pre-Register Analysis Plan **Before collecting data:**
+## 7.2 Best Practices #### Practice 1: Pre-Register Analysis Plan **Before collecting data:**
 
 1. State hypotheses
 2. Choose metrics
@@ -1052,7 +1052,7 @@ stat_result = stat_suite.validate(...) # If all agree → high confidence
 
 ---
 
-#### Practice 5: Document Assumptions **Always state:**
+## Practice 5: Document Assumptions **Always state:**
 - Distributional assumptions (normality, etc.)
 - Independence assumptions
 - Stationarity assumptions

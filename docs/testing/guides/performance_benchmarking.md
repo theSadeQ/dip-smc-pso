@@ -6,7 +6,7 @@
 
 **Purpose**: Systematic approach to measuring, analyzing, and optimizing performance of control systems, simulation engines, and optimization algorithms.
 
----
+
 
 ## 🎯 Quick Start
 
@@ -21,7 +21,7 @@ pytest tests/benchmarks/ --benchmark-compare=baseline --benchmark-compare-fail=m
 pytest tests/benchmarks/test_controllers_bench.py -k classical_smc --benchmark-histogram
 ```
 
----
+
 
 ## 📊 Benchmark Categories
 
@@ -58,7 +58,7 @@ def test_classical_smc_benchmark(benchmark: BenchmarkFixture):
 | STA SMC | <100µs | <200µs | >10k Hz |
 | MPC | <10ms | <20ms | >100 Hz |
 
----
+
 
 ### 2. Dynamics Simulation
 
@@ -83,7 +83,7 @@ def test_full_dynamics_performance(benchmark):
     assert benchmark.stats['mean'] < 1e-6  # <1µs per step
 ```
 
----
+
 
 ### 3. PSO Optimization
 
@@ -116,7 +116,7 @@ def test_pso_optimization_benchmark(benchmark):
     assert result['cost'] < 0.1  # Converges to good solution
 ```
 
----
+
 
 ## 🔬 Measurement Techniques
 
@@ -141,7 +141,7 @@ def test_optimization_comparison(benchmark):
         "Optimized version is slower"
 ```
 
----
+
 
 ### Profiling Integration
 
@@ -164,7 +164,7 @@ def profile_controller_step():
     stats.print_stats(10)  # Top 10 functions
 ```
 
----
+
 
 ## 📈 Regression Detection
 
@@ -180,9 +180,9 @@ pytest tests/benchmarks/ --benchmark-only \
   --benchmark-compare-fail=mean:5%  # Fail if >5% slower
 ```
 
----
 
-### CI Integration
+
+## CI Integration
 
 ```yaml
 # .github/workflows/benchmark.yml
@@ -195,7 +195,7 @@ pytest tests/benchmarks/ --benchmark-only \
       --csv=comparison.csv
 ```
 
----
+
 
 ## 🎯 Optimization Workflow
 
@@ -211,7 +211,7 @@ def slow_function():
         expensive_operation(i)
 ```
 
----
+
 
 ### Step 2: Vectorization
 
@@ -233,7 +233,7 @@ def compute_cost(states):
 
 **Speedup**: 50-100x
 
----
+
 
 ### Step 3: Numba Compilation
 
@@ -251,7 +251,7 @@ def compute_control_numba(state, gains):
 
 **Speedup**: 10-50x for numerical code
 
----
+
 
 ## 📊 Reporting
 
@@ -263,7 +263,7 @@ pytest tests/benchmarks/ --benchmark-only --benchmark-histogram
 
 **Output**: `benchmarks/histogram.svg`, `comparison.html`
 
----
+
 
 ### Custom Metrics
 
@@ -285,7 +285,7 @@ def test_with_custom_metrics(benchmark):
     print(f"Memory: {output['memory_mb']:.2f} MB")
 ```
 
----
+
 
 ## 🛠️ Best Practices
 
@@ -298,7 +298,7 @@ def fresh_controller():
     return ClassicalSMC(gains=[10, 5, 8, 3, 15, 2])
 ```
 
----
+
 
 ### 2. Warm-Up Iterations
 
@@ -313,7 +313,7 @@ def test_with_warmup(benchmark):
     )
 ```
 
----
+
 
 ### 3. Control Interference
 
@@ -330,20 +330,20 @@ def test_precise_benchmark():
     ...
 ```
 
----
+
 
 ## 📚 Related Documentation
 
 - [PSO Convergence Analysis](../reports/2025-09-30/pso_convergence_analysis.md)
 - [Control Systems Unit Testing](control_systems_unit_testing.md)
 
----
+
 
 ## 🔗 Navigation
 
 [⬅️ Back to Guides](../guides/) | [🏠 Testing Home](../README.md) | [➡️ Property-Based Testing](property_based_testing.md)
 
----
+
 
 **Last Updated**: September 30, 2025
 **Maintainer**: Performance Engineering Team

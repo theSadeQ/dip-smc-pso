@@ -561,7 +561,7 @@ controller = create_controller(
 )
 ```
 
-### 2. PSO Optimization Integration
+## 2. PSO Optimization Integration
 
 ```python
 from src.optimizer.pso_optimizer import PSOTuner
@@ -586,7 +586,7 @@ print(f"Optimized gains: {best_gains}")
 print(f"Best cost: {best_cost}")
 ```
 
-### 3. Monitoring Adaptation
+## 3. Monitoring Adaptation
 
 ```python
 # example-metadata:
@@ -949,7 +949,7 @@ def validate_adaptive_parameters(gains, config):
     return True
 ```
 
-### 3. Performance Optimization Tips
+## 3. Performance Optimization Tips
 
 **For Fast Adaptation**:
 1. Start with higher K_init (closer to expected disturbance bound)

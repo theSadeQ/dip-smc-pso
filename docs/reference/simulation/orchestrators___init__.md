@@ -13,7 +13,7 @@ Simulation execution orchestrators for different performance strategies.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -122,9 +122,11 @@ from src.simulation.orchestrators import SequentialOrchestrator
 from src.controllers import create_smc_for_pso, SMCType
 
 # Create orchestrator
+
 orchestrator = SequentialOrchestrator()
 
 # Define simulation campaign
+
 campaign = {
     'controller_type': SMCType.CLASSICAL,
     'gain_sets': [
@@ -137,21 +139,24 @@ campaign = {
 }
 
 # Run campaign sequentially
+
 results = orchestrator.run_campaign(campaign)
 print(f"Completed {len(results)} simulations sequentially")
 \`\`\`
 
-### Example 2: Parallel Orchestration
+## Example 2: Parallel Orchestration
 
 \`\`\`python
 from src.simulation.orchestrators import ParallelOrchestrator
 import multiprocessing
 
 # Create parallel orchestrator
+
 num_workers = multiprocessing.cpu_count()
 orchestrator = ParallelOrchestrator(num_workers=num_workers)
 
 # Large-scale campaign
+
 campaign = {
     'controller_type': SMCType.HYBRID,
     'n_trials': 1000,  # Monte Carlo analysis
@@ -159,23 +164,26 @@ campaign = {
 }
 
 # Run in parallel
+
 results = orchestrator.run_campaign(campaign)
 print(f"Parallel execution with {num_workers} workers")
 print(f"Throughput: {len(results) / orchestrator.elapsed_time:.2f} sims/sec")
 \`\`\`
 
-### Example 3: Real-Time Orchestration
+## Example 3: Real-Time Orchestration
 
 \`\`\`python
 from src.simulation.orchestrators import RealTimeOrchestrator
 
 # Real-time orchestrator with deadline
+
 orchestrator = RealTimeOrchestrator(
     period=0.01,  # 100 Hz update rate
     deadline=0.009  # 90% of period
 )
 
 # Real-time campaign
+
 campaign = {
     'controller': controller,
     'duration': 60.0,  # 1 minute real-time
@@ -183,12 +191,13 @@ campaign = {
 }
 
 # Run with hard deadlines
+
 results = orchestrator.run_campaign(campaign)
 print(f"Deadline violations: {orchestrator.missed_deadlines}")
 print(f"Max jitter: {orchestrator.max_jitter:.6f}s")
 \`\`\`
 
-### Example 4: Performance Comparison
+## Example 4: Performance Comparison
 
 \`\`\`python
 from src.simulation.orchestrators import (
@@ -240,6 +249,7 @@ class AdaptiveOrchestrator(BaseOrchestrator):
             return self.parallel.run_campaign(campaign)
 
 # Use adaptive orchestrator
+
 adaptive = AdaptiveOrchestrator()
 results_small = adaptive.run_campaign({'n_trials': 5})
 results_large = adaptive.run_campaign({'n_trials': 100})
@@ -266,46 +276,50 @@ graph TD
 
 \`\`\`python
 # Basic usage example
+
 from src.simulation.orchestrators import Component
 
 component = Component()
 result = component.process(data)
 \`\`\`
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 \`\`\`python
 # Advanced configuration
+
 component = Component(
     option1=value1,
     option2=value2
 )
 \`\`\`
 
-### Example 3: Integration with Framework
+## Example 3: Integration with Framework
 
 \`\`\`python
 # Integration example
+
 from src.simulation import SimulationRunner
 
 runner = SimulationRunner()
 runner.use_component(component)
 \`\`\`
 
-### Example 4: Performance Optimization
+## Example 4: Performance Optimization
 
 \`\`\`python
 # Performance-optimized usage
+
 component = Component(enable_caching=True)
 \`\`\`
 
-### Example 5: Error Handling
+## Example 5: Error Handling
 
 \`\`\`python
 # Error handling
+
 try:
     result = component.process(data)
 except ComponentError as e:
     print(f"Error: {e}")
 \`\`\`
-

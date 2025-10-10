@@ -17,7 +17,7 @@ serialization, and error handling in control systems.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -35,7 +35,7 @@ Connection state enumeration.
 :linenos:
 ```
 
----
+
 
 ### `MessageType`
 
@@ -51,7 +51,7 @@ Message type enumeration.
 :linenos:
 ```
 
----
+
 
 ### `Priority`
 
@@ -67,7 +67,7 @@ Message priority levels.
 :linenos:
 ```
 
----
+
 
 ### `MessageMetadata`
 
@@ -81,7 +81,7 @@ Message metadata for tracking and routing.
 :linenos:
 ```
 
----
+
 
 ### `CommunicationProtocol`
 
@@ -139,7 +139,7 @@ Get communication statistics.
 
 [View full source →](#method-communicationprotocol-get_statistics)
 
----
+
 
 ### `MessageProtocol`
 
@@ -184,7 +184,7 @@ Route message to specific destination.
 
 [View full source →](#method-messageprotocol-route_message)
 
----
+
 
 ### `ConnectionProtocol`
 
@@ -235,7 +235,7 @@ Check connection health.
 
 [View full source →](#method-connectionprotocol-health_check)
 
----
+
 
 ### `SerializationProtocol`
 
@@ -280,7 +280,7 @@ Check if serializer supports streaming.
 
 [View full source →](#method-serializationprotocol-supports_streaming)
 
----
+
 
 ### `ErrorHandlerProtocol`
 
@@ -325,7 +325,7 @@ Log error with context.
 
 [View full source →](#method-errorhandlerprotocol-log_error)
 
----
+
 
 ### `StreamingProtocol`
 
@@ -376,7 +376,7 @@ Get stream statistics.
 
 [View full source →](#method-streamingprotocol-get_stream_stats)
 
----
+
 
 ### `DeviceProtocol`
 
@@ -433,7 +433,7 @@ Reset device to initial state.
 
 [View full source →](#method-deviceprotocol-reset_device)
 
----
+
 
 ## Dependencies
 

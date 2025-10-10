@@ -1,4 +1,5 @@
 # plant.models.base.dynamics_interface
+
 <!-- Enhanced by Week 8 Phase 2 -->
 
 
@@ -92,7 +93,7 @@ class MockDynamics(DynamicsInterface):
         return np.zeros_like(x)  # Trivial for testing
 ```
 
-### Linearization Theory
+## Linearization Theory
 
 **Jacobian Matrices:**
 
@@ -141,7 +142,7 @@ import numpy as np
 # ... basic usage code ...
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 Configure with custom parameters:
 
@@ -164,7 +165,7 @@ dynamics.set_integration_params(
 )
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 Robust error handling and recovery:
 
@@ -226,7 +227,7 @@ print(f"Processed {N} states in {elapsed*1000:.2f}ms")
 print(f"Throughput: {N/elapsed:.0f} states/sec")
 ```
 
-### Example 5: Integration with Controllers
+## Example 5: Integration with Controllers
 
 Integrate with control systems:
 
@@ -269,7 +270,7 @@ print(f"Control effort: {result.control_effort:.2f}")
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -287,7 +288,7 @@ Available integration methods for dynamics.
 :linenos:
 ```
 
----
+
 
 ### `DynamicsResult`
 
@@ -320,7 +321,7 @@ Create failed dynamics result.
 
 [View full source →](#method-dynamicsresult-failure_result)
 
----
+
 
 ### `DynamicsModel`
 
@@ -371,7 +372,7 @@ Get the dimension of the control input vector.
 
 [View full source →](#method-dynamicsmodel-get_control_dimension)
 
----
+
 
 ### `BaseDynamicsModel`
 
@@ -476,7 +477,7 @@ Helper to create failed dynamics result.
 
 [View full source →](#method-basedynamicsmodel-_create_failure_result)
 
----
+
 
 ### `LinearDynamicsModel`
 
@@ -536,7 +537,7 @@ Validate control input vector.
 
 [View full source →](#method-lineardynamicsmodel-_validate_control_input)
 
----
+
 
 ## Dependencies
 

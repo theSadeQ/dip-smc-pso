@@ -2,7 +2,18 @@
   "permissions": {
     "allow": [
       "Bash(python:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Read(//tmp/**)",
+      "Bash(pip show:*)",
+      "Bash(pip index versions:*)",
+      "Bash(test:*)",
+      "Bash(for:*)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(done)",
+      "Bash(cat:*)",
+      "Bash(make:*)",
+      "Bash(tee:*)",
+      "Bash(awk:*)"
     ],
     "deny": [],
     "ask": [],

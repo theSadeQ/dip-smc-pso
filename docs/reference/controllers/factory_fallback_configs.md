@@ -16,7 +16,7 @@ config classes are not available. These ensure graceful degradation of the facto
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -46,7 +46,7 @@ Get effective controllability threshold.
 
 [View full source →](#method-classicalsmcconfig-get_effective_controllability_threshold)
 
----
+
 
 ### `STASMCConfig`
 
@@ -74,7 +74,7 @@ Get effective anti-windup gain.
 
 [View full source →](#method-stasmcconfig-get_effective_anti_windup_gain)
 
----
+
 
 ### `AdaptiveSMCConfig`
 
@@ -102,7 +102,7 @@ Get adaptation bounds (K_min, K_max).
 
 [View full source →](#method-adaptivesmcconfig-get_adaptation_bounds)
 
----
+
 
 ### `HybridAdaptiveSTASMCConfig`
 
@@ -124,7 +124,7 @@ Get sliding surface gains [k1, k2, λ1, λ2].
 
 [View full source →](#method-hybridadaptivestasmcconfig-get_surface_gains)
 
----
+
 
 ## Dependencies
 

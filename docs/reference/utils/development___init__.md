@@ -16,7 +16,7 @@ notebook integration, documentation generation, and development helpers.
 :linenos:
 ```
 
----
+
 
 
 
@@ -148,7 +148,7 @@ tools.plot_controller_performance(results)
 %timeit controller.compute_control(x, state_vars, history)
 ```
 
-### Example 2: Interactive Debugging
+## Example 2: Interactive Debugging
 
 ```python
 from src.utils.development import DebugTools
@@ -174,7 +174,7 @@ x = np.random.randn(6)
 result = problematic_function(x)  # Stops at breakpoint
 ```
 
-### Example 3: Rich Display Integration
+## Example 3: Rich Display Integration
 
 ```python
 from src.utils.development import RichDisplay
@@ -224,7 +224,7 @@ if not state_mgr.check_consistency():
     print("Warning: Notebook cells executed out of order")
 ```
 
-### Example 5: Interactive Parameter Tuning
+## Example 5: Interactive Parameter Tuning
 
 ```python
 from src.utils.development import InteractiveTuner

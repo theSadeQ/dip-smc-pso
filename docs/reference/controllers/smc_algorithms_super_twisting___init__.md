@@ -21,7 +21,7 @@ through second-order sliding mode dynamics.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

@@ -16,7 +16,7 @@ components must adhere to for type safety and consistency.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -60,7 +60,7 @@ Return maximum force limit.
 
 [View full source →](#method-controllerprotocol-max_force)
 
----
+
 
 ### `ConfigurationProtocol`
 
@@ -96,7 +96,7 @@ Time step.
 
 [View full source →](#method-configurationprotocol-dt)
 
----
+
 
 ### `ControllerFactoryProtocol`
 
@@ -132,7 +132,7 @@ Get default gains for controller type.
 
 [View full source →](#method-controllerfactoryprotocol-get_default_gains)
 
----
+
 
 ### `PSOOptimizableProtocol`
 
@@ -174,7 +174,7 @@ Maximum force limit.
 
 [View full source →](#method-psooptimizableprotocol-max_force)
 
----
+
 
 ### `ValidationProtocol`
 
@@ -204,7 +204,7 @@ Validate configuration object.
 
 [View full source →](#method-validationprotocol-validate_configuration)
 
----
+
 
 ## Dependencies
 

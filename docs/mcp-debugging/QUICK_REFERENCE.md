@@ -108,7 +108,7 @@ filesystem: read_file("config/pso_config.yaml")
 /analyze-logs --filter "parameter.*out of bounds"
 ```
 
-### Scenario 2: Test Failing
+## Scenario 2: Test Failing
 
 ```bash
 # 1. List failures
@@ -124,7 +124,7 @@ filesystem: read_file("tests/test_<name>.py")
 /analyze-logs --pattern "FAILED"
 ```
 
-### Scenario 3: Numerical Error
+## Scenario 3: Numerical Error
 
 ```bash
 # 1. Search for errors
@@ -140,7 +140,7 @@ git-mcp: diff({ files: "src/models/" })
 /test-controller --filter numerical_stability
 ```
 
-### Scenario 4: Dashboard Issue
+## Scenario 4: Dashboard Issue
 
 ```bash
 # 1. Launch dashboard
@@ -240,7 +240,7 @@ LIMIT 5;
 /analyze-logs --pattern "timeout|slow|exceeded limit"
 ```
 
-### Code Search Patterns
+## Code Search Patterns
 
 ```bash
 # Find matrix inversions
@@ -314,7 +314,7 @@ node <server-path> --test
 cat ~/.mcp/logs/<server-name>.log
 ```
 
-### Database Connection Failed
+## Database Connection Failed
 
 ```bash
 # 1. Verify database exists
@@ -331,7 +331,7 @@ mv logs/pso_results.db logs/pso_results.db.bak
 python scripts/create_pso_database.py
 ```
 
-### Import Errors
+## Import Errors
 
 ```bash
 # 1. Check Python path
@@ -380,7 +380,7 @@ which python
 /analyze-logs && /test-controller && /validate-simulation
 ```
 
-### 2. Custom Queries
+## 2. Custom Queries
 
 ```sql
 -- Create view for common queries
@@ -403,7 +403,7 @@ for log in logs/*.log; do
 done
 ```
 
-### 4. Integration with CI/CD
+## 4. Integration with CI/CD
 
 ```bash
 # Add to pytest configuration

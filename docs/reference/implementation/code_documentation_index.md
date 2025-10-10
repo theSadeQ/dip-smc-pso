@@ -1,4 +1,8 @@
-# Implementation Guide - Code Documentation Index **Note:** Code documentation has been integrated into the API reference. **See:** [API Reference Index](../index.md) --- ## Complete Code Documentation For detailed implementation documentation, refer to: - **Controllers:** [reference/controllers/index.md](../controllers/index.md)
+# Implementation Guide - Code Documentation Index **Note:** Code documentation has been integrated into the API reference. **See:** [API Reference Index](../index.md)
+
+---
+
+## Complete Code Documentation For detailed implementation documentation, refer to: - **Controllers:** [reference/controllers/index.md](../controllers/index.md)
 - **Plant Models:** [reference/plant/models_base___init__.md](../plant/models_base___init__.md)
 - **Simulation Engine:** [reference/simulation/core___init__.md](../simulation/core___init__.md)
 - **Optimization:** [reference/optimization/__init__.md](../optimization/__init__.md) ## Implementation Guides ### Controller Implementation

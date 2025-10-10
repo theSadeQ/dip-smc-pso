@@ -204,7 +204,7 @@ d(t) = { 0           if t < start_time
 **Reproducible Results**:
 The dashboard uses deterministic seeding for PSO optimization, ensuring reproducible results when the same parameters are used.
 
-### Custom Parameter Tuning
+## Custom Parameter Tuning
 
 **Manual Parameter Adjustment**:
 While the dashboard doesn't currently support manual gain sliders, you can:
@@ -260,7 +260,7 @@ streamlit cache clear
 # Large simulations may require more RAM
 ```
 
-### Browser Compatibility
+## Browser Compatibility
 
 **Recommended Browsers**:
 - Chrome 90+

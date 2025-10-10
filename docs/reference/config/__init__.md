@@ -13,7 +13,7 @@ Configuration module for the DIP SMC PSO project.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

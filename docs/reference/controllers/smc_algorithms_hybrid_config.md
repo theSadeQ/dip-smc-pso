@@ -21,7 +21,7 @@ Mathematical Requirements:
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -39,7 +39,7 @@ Available hybrid controller modes.
 :linenos:
 ```
 
----
+
 
 ### `SwitchingCriterion`
 
@@ -55,7 +55,7 @@ Switching criteria for hybrid control.
 :linenos:
 ```
 
----
+
 
 ### `HybridSMCConfig`
 
@@ -176,7 +176,7 @@ Create Adaptive-SuperTwisting hybrid configuration.
 
 [View full source →](#method-hybridsmcconfig-create_adaptive_supertwisting_hybrid)
 
----
+
 
 ## Dependencies
 

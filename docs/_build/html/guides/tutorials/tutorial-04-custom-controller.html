@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="../../">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -19,16 +19,16 @@
     margin-top: 0.5em;
 }
 </style>
-<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>Tutorial 04: Custom Controller Development - DIP_SMC_PSO Documentation</title>
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Tutorial 04: Custom Controller Development Level: Advanced - DIP_SMC_PSO Documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=f5a89ef9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8a7e329d" />
     
     
 
@@ -163,14 +163,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -180,8 +176,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -189,8 +184,7 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -198,8 +192,7 @@
         </button>
       </div>
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -207,7 +200,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
-  
   
   <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
   
@@ -219,254 +211,12 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">Theory Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../architecture.html">3. System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../plant_model.html">1.x Plant Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../plant/models_guide.html">Plant Models Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../TESTING.html">Testing Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../test_protocols.html">5.x Test Protocols</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../context.html">2. Application Context</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference Documentation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography &amp; Academic References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../RELEASE_CHECKLIST.html">Release Checklist</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -492,13 +242,12 @@
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/guides/tutorials/tutorial-04-custom-controller.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/guides/tutorials/tutorial-04-custom-controller.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
 </div><div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -506,27 +255,19 @@
             </button>
           </div>
           <label class="toc-overlay-icon toc-content-icon" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section class="tex2jax_ignore mathjax_ignore" id="tutorial-04-custom-controller-development">
-<h1>Tutorial 04: Custom Controller Development<a class="headerlink" href="#tutorial-04-custom-controller-development" title="Link to this heading">¶</a></h1>
-<p><strong>Level:</strong> Advanced
-<strong>Duration:</strong> 90-120 minutes
+          <section class="tex2jax_ignore mathjax_ignore" id="tutorial-04-custom-controller-development-level-advanced">
+<h1>Tutorial 04: Custom Controller Development <strong>Level:</strong> Advanced<a class="headerlink" href="#tutorial-04-custom-controller-development-level-advanced" title="Link to this heading">¶</a></h1>
+<p><strong>Duration:</strong> 90-120 minutes
 <strong>Prerequisites:</strong></p>
-<ul class="simple">
+<ul class="contains-task-list simple">
 <li><p>Completed <a class="reference internal" href="tutorial-01-first-simulation.html"><span class="std std-doc">Tutorial 01: Your First Simulation</span></a></p></li>
 <li><p>Completed <a class="reference internal" href="tutorial-02-controller-comparison.html"><span class="std std-doc">Tutorial 02: Controller Comparison</span></a></p></li>
 <li><p>Python programming experience</p></li>
-<li><p>Understanding of SMC theory (recommended)</p></li>
-</ul>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">¶</a></h2>
-<p>By the end of this tutorial, you will:</p>
-<ul class="contains-task-list simple">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Understand the controller interface and architecture</p></li>
+<li><p>Understanding of SMC theory (recommended) ## Learning Objectives By the end of this tutorial, you will: - [ ] Understand the controller interface and architecture</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Implement a custom SMC variant from scratch</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Add gain validation and error handling</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Integrate your controller with the factory system</p></li>
@@ -534,806 +275,233 @@
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Test and validate your custom controller</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Optimize custom controller gains using PSO</p></li>
 </ul>
-</section>
 <hr class="docutils" />
-<section id="part-1-controller-architecture-overview">
-<h2>Part 1: Controller Architecture Overview<a class="headerlink" href="#part-1-controller-architecture-overview" title="Link to this heading">¶</a></h2>
-<section id="the-controller-interface">
-<h3>The Controller Interface<a class="headerlink" href="#the-controller-interface" title="Link to this heading">¶</a></h3>
-<p>All controllers in this framework implement a <strong>consistent interface</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">MyCustomController</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize controller with gains and parameters.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute control signal for current state.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        state : np.ndarray</span>
-<span class="sd">            State vector [x, dx, θ₁, dθ₁, θ₂, dθ₂]</span>
-<span class="sd">        state_vars : dict</span>
-<span class="sd">            Controller-specific internal state</span>
-<span class="sd">        history : dict</span>
-<span class="sd">            Historical data for multi-step algorithms</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        control : float</span>
-<span class="sd">            Control input (force applied to cart)</span>
-<span class="sd">        state_vars : dict</span>
-<span class="sd">            Updated internal state</span>
-<span class="sd">        history : dict</span>
-<span class="sd">            Updated history</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize history buffer for controller.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{}</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clean up resources (optional).&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-</pre></div>
-</div>
+<section id="part-1-controller-architecture-overview-the-controller-interface-all-controllers-in-this-framework-implement-a-consistent-interface-python">
+<h2>Part 1: Controller Architecture Overview ### The Controller Interface All controllers in this framework implement a <strong>consistent interface</strong>: ```python<a class="headerlink" href="#part-1-controller-architecture-overview-the-controller-interface-all-controllers-in-this-framework-implement-a-consistent-interface-python" title="Link to this heading">¶</a></h2>
 </section>
-<section id="key-components">
-<h3>Key Components<a class="headerlink" href="#key-components" title="Link to this heading">¶</a></h3>
-<p><strong>1. Gains (<code class="docutils literal notranslate"><span class="pre">__init__</span></code>)</strong></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-metadata">
+<h1>example-metadata:<a class="headerlink" href="#example-metadata" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-class-mycustomcontroller-def-init-self-gains-max-force-kwargs-initialize-controller-with-gains-and-parameters-pass-def-compute-control-self-state-state-vars-history-compute-control-signal-for-current-state-parameters-state-np-ndarray-state-vector-x-dx-1-d1-2-d2-state-vars-dict-controller-specific-internal-state-history-dict-historical-data-for-multi-step-algorithms-returns-control-float-control-input-force-applied-to-cart-state-vars-dict-updated-internal-state-history-dict-updated-history-pass-def-initialize-history-self-dict-initialize-history-buffer-for-controller-return-def-cleanup-self-clean-up-resources-optional-pass">
+<h1>runnable: false class MyCustomController: def <strong>init</strong>(self, gains, max_force, **kwargs): “””Initialize controller with gains and parameters.””” pass def compute_control(self, state, state_vars, history): “”” Compute control signal for current state. Parameters ———- state : np.ndarray State vector [x, dx, θ₁, dθ₁, θ₂, dθ₂] state_vars : dict Controller-specific internal state history : dict Historical data for multi-step algorithms Returns ——- control : float Control input (force applied to cart) state_vars : dict Updated internal state history : dict Updated history “”” pass def initialize_history(self) -&gt; dict: “””Initialize history buffer for controller.””” return {} def cleanup(self): “””Clean up resources (optional).””” pass<a class="headerlink" href="#runnable-false-class-mycustomcontroller-def-init-self-gains-max-force-kwargs-initialize-controller-with-gains-and-parameters-pass-def-compute-control-self-state-state-vars-history-compute-control-signal-for-current-state-parameters-state-np-ndarray-state-vector-x-dx-1-d1-2-d2-state-vars-dict-controller-specific-internal-state-history-dict-historical-data-for-multi-step-algorithms-returns-control-float-control-input-force-applied-to-cart-state-vars-dict-updated-internal-state-history-dict-updated-history-pass-def-initialize-history-self-dict-initialize-history-buffer-for-controller-return-def-cleanup-self-clean-up-resources-optional-pass" title="Link to this heading">¶</a></h1>
+<p>``` ### Key Components <strong>1. Gains (<code class="docutils literal notranslate"><span class="pre">__init__</span></code>)</strong></p>
 <ul class="simple">
 <li><p>Controller-specific parameters (surface gains, switching gains, adaptation rates, etc.)</p></li>
-<li><p>Must be validated for physical plausibility</p></li>
-</ul>
-<p><strong>2. State Variables (<code class="docutils literal notranslate"><span class="pre">state_vars</span></code>)</strong></p>
-<ul class="simple">
+<li><p>Must be validated for physical plausibility <strong>2. State Variables (<code class="docutils literal notranslate"><span class="pre">state_vars</span></code>)</strong></p></li>
 <li><p>Controller internal state that persists between timesteps</p></li>
-<li><p>Examples: adaptive gains, integral terms, filter states</p></li>
-</ul>
-<p><strong>3. History (<code class="docutils literal notranslate"><span class="pre">history</span></code>)</strong></p>
-<ul class="simple">
+<li><p>Examples: adaptive gains, integral terms, filter states <strong>3. History (<code class="docutils literal notranslate"><span class="pre">history</span></code>)</strong></p></li>
 <li><p>Multi-step data (previous states, controls)</p></li>
-<li><p>Used for integral control, finite-difference derivatives, etc.</p></li>
-</ul>
-<p><strong>4. Control Computation (<code class="docutils literal notranslate"><span class="pre">compute_control</span></code>)</strong></p>
-<ul class="simple">
+<li><p>Used for integral control, finite-difference derivatives, etc. <strong>4. Control Computation (<code class="docutils literal notranslate"><span class="pre">compute_control</span></code>)</strong></p></li>
 <li><p>Core control law implementation</p></li>
 <li><p>Returns control signal + updated state_vars + updated history</p></li>
 </ul>
-</section>
-</section>
 <hr class="docutils" />
-<section id="part-2-implementing-a-terminal-smc-tsmc">
-<h2>Part 2: Implementing a Terminal SMC (TSMC)<a class="headerlink" href="#part-2-implementing-a-terminal-smc-tsmc" title="Link to this heading">¶</a></h2>
-<section id="what-is-terminal-smc">
-<h3>What is Terminal SMC?<a class="headerlink" href="#what-is-terminal-smc" title="Link to this heading">¶</a></h3>
-<p><strong>Terminal Sliding Mode Control</strong> uses a <strong>nonlinear sliding surface</strong> with fractional powers to achieve <strong>finite-time convergence</strong> (faster than asymptotic).</p>
-<p><strong>Classical SMC Sliding Surface:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">k</span><span class="err">₁·</span><span class="n">θ</span><span class="err">₁</span> <span class="o">+</span> <span class="n">k</span><span class="err">₂·</span><span class="n">dθ</span><span class="err">₁</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₁·</span><span class="n">θ</span><span class="err">₂</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₂·</span><span class="n">dθ</span><span class="err">₂</span>   <span class="p">(</span><span class="n">linear</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">)</span>
+<section id="part-2-implementing-a-terminal-smc-tsmc-what-is-terminal-smc-terminal-sliding-mode-control-uses-a-nonlinear-sliding-surface-with-fractional-powers-to-achieve-finite-time-convergence-faster-than-asymptotic-classical-smc-sliding-surface">
+<h2>Part 2: Implementing a Terminal SMC (TSMC) ### What is Terminal SMC? <strong>Terminal Sliding Mode Control</strong> uses a <strong>nonlinear sliding surface</strong> with fractional powers to achieve <strong>finite-time convergence</strong> (faster than asymptotic). <strong>Classical SMC Sliding Surface:</strong><a class="headerlink" href="#part-2-implementing-a-terminal-smc-tsmc-what-is-terminal-smc-terminal-sliding-mode-control-uses-a-nonlinear-sliding-surface-with-fractional-powers-to-achieve-finite-time-convergence-faster-than-asymptotic-classical-smc-sliding-surface" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">k</span><span class="err">₁·</span><span class="n">θ</span><span class="err">₁</span> <span class="o">+</span> <span class="n">k</span><span class="err">₂·</span><span class="n">dθ</span><span class="err">₁</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₁·</span><span class="n">θ</span><span class="err">₂</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₂·</span><span class="n">dθ</span><span class="err">₂</span> <span class="p">(</span><span class="n">linear</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">)</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Terminal</span> <span class="n">SMC</span> <span class="n">Sliding</span> <span class="n">Surface</span><span class="p">:</span><span class="o">**</span>
 </pre></div>
 </div>
-<p><strong>Terminal SMC Sliding Surface:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">k</span><span class="err">₁·</span><span class="n">θ</span><span class="err">₁</span> <span class="o">+</span> <span class="n">k</span><span class="err">₂·</span><span class="n">sign</span><span class="p">(</span><span class="n">dθ</span><span class="err">₁</span><span class="p">)</span><span class="err">·</span><span class="o">|</span><span class="n">dθ</span><span class="err">₁</span><span class="o">|^</span><span class="n">α</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₁·</span><span class="n">θ</span><span class="err">₂</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₂·</span><span class="n">sign</span><span class="p">(</span><span class="n">dθ</span><span class="err">₂</span><span class="p">)</span><span class="err">·</span><span class="o">|</span><span class="n">dθ</span><span class="err">₂</span><span class="o">|^</span><span class="n">β</span>
-</pre></div>
-</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">α,</span> <span class="pre">β</span> <span class="pre">∈</span> <span class="pre">(0,</span> <span class="pre">1)</span></code> (e.g., 0.5, 0.7) create the terminal attractor.</p>
-<p><strong>Benefits:</strong></p>
+<p>s = k₁·θ₁ + k₂·sign(dθ₁)·|dθ₁|^α + λ₁·θ₂ + λ₂·sign(dθ₂)·|dθ₂|^β
+``` where <code class="docutils literal notranslate"><span class="pre">α,</span> <span class="pre">β</span> <span class="pre">∈</span> <span class="pre">(0,</span> <span class="pre">1)</span></code> (e.g., 0.5, 0.7) create the terminal attractor. <strong>Benefits:</strong></p>
 <ul class="simple">
 <li><p><strong>Finite-time convergence</strong> (reaches equilibrium in finite time, not just asymptotically)</p></li>
-<li><p><strong>Faster response</strong> near equilibrium (stronger control when errors are small)</p></li>
-</ul>
-<p><strong>Challenges:</strong></p>
-<ul class="simple">
+<li><p><strong>Faster response</strong> near equilibrium (stronger control when errors are small) <strong>Challenges:</strong></p></li>
 <li><p><strong>Singularity avoidance</strong> (control can blow up if not handled carefully)</p></li>
-<li><p><strong>More gains to tune</strong> (4 surface gains + 2 exponents)</p></li>
+<li><p><strong>More gains to tune</strong> (4 surface gains + 2 exponents) &gt; <strong>📚 Theory Background:</strong> For SMC foundations before implementing custom controllers:</p></li>
 </ul>
 <blockquote>
-<div><p><strong>📚 Theory Background:</strong> For comprehensive SMC foundations before implementing custom controllers:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="../theory/smc-theory.html"><span class="std std-doc">SMC Theory Guide</span></a> - Lyapunov stability, sliding surfaces, design guidelines</p></li>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="../theory/smc-theory.html"><span class="std std-doc">SMC Theory Guide</span></a> - Lyapunov stability, sliding surfaces, design guidelines ### Step 1: Create the Controller File Create <code class="docutils literal notranslate"><span class="pre">src/controllers/smc/terminal_smc.py</span></code>: ```python</p></li>
 </ul>
 </div></blockquote>
 </section>
-<section id="step-1-create-the-controller-file">
-<h3>Step 1: Create the Controller File<a class="headerlink" href="#step-1-create-the-controller-file" title="Link to this heading">¶</a></h3>
-<p>Create <code class="docutils literal notranslate"><span class="pre">src/controllers/smc/terminal_smc.py</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="c1">#======================================================================================\\\</span>
-<span class="c1">#======================== src/controllers/smc/terminal_smc.py ========================\\\</span>
-<span class="c1">#======================================================================================\\\</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Terminal Sliding Mode Controller for double-inverted pendulum.</span>
-
-<span class="sd">Implements nonlinear terminal sliding surface for finite-time convergence.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">weakref</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Sequence</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">saturate</span><span class="p">,</span> <span class="n">TerminalSMCOutput</span>
-
-<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">...plant.models.dynamics</span><span class="w"> </span><span class="kn">import</span> <span class="n">DoubleInvertedPendulum</span>
-
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-
-
-<span class="k">class</span><span class="w"> </span><span class="nc">TerminalSMC</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Terminal Sliding Mode Controller with finite-time convergence.</span>
-
-<span class="sd">    Uses nonlinear terminal sliding surface with fractional exponents</span>
-<span class="sd">    to achieve faster convergence than classical SMC.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    gains : array-like</span>
-<span class="sd">        [k1, k2, λ1, λ2, K, α, β]</span>
-<span class="sd">        - k1, k2, λ1, λ2: sliding surface gains (positive)</span>
-<span class="sd">        - K: switching gain (positive)</span>
-<span class="sd">        - α, β: terminal exponents in (0, 1) for finite-time convergence</span>
-<span class="sd">    max_force : float</span>
-<span class="sd">        Maximum control force (N)</span>
-<span class="sd">    boundary_layer : float</span>
-<span class="sd">        Boundary layer thickness for chattering reduction</span>
-<span class="sd">    dynamics_model : DoubleInvertedPendulum, optional</span>
-<span class="sd">        Dynamics model for equivalent control (if None, uses robust control only)</span>
-<span class="sd">    singularity_epsilon : float, default=1e-3</span>
-<span class="sd">        Small value to avoid singularity when velocities near zero</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">gains</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
-        <span class="n">max_force</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-        <span class="n">boundary_layer</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-        <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;DoubleInvertedPendulum&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">singularity_epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span>
-        <span class="n">switch_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tanh&quot;</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="c1"># Validate gain count</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">7</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Terminal SMC requires 7 gains [k1,k2,λ1,λ2,K,α,β], got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="p">)</span>
-
-        <span class="c1"># Extract and validate gains</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">k1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">gains</span>
-
-        <span class="c1"># Validate gain constraints</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">k1</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam1</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam2</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Surface gains k1, k2, λ1, λ2 must be positive&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Switching gain K must be positive&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Terminal exponent α must be in (0,1), got </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Terminal exponent β must be in (0,1), got </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="c1"># Store parameters</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="n">max_force</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span> <span class="o">=</span> <span class="n">boundary_layer</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">singularity_epsilon</span> <span class="o">=</span> <span class="n">singularity_epsilon</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">switch_method</span> <span class="o">=</span> <span class="n">switch_method</span>
-
-        <span class="c1"># Store dynamics model reference (weakref to avoid circular reference)</span>
-        <span class="k">if</span> <span class="n">dynamics_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_dynamics_ref</span> <span class="o">=</span> <span class="n">weakref</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="n">dynamics_model</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_dynamics_ref</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="kc">None</span>
-
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Initialized Terminal SMC: gains=</span><span class="si">{</span><span class="n">gains</span><span class="si">}</span><span class="s2">, max_force=</span><span class="si">{</span><span class="n">max_force</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;boundary_layer=</span><span class="si">{</span><span class="n">boundary_layer</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="p">)</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">dyn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access dynamics model via weakref.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dynamics_ref</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dynamics_ref</span><span class="p">()</span>
-        <span class="k">return</span> <span class="kc">None</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">compute_sliding_surface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute terminal sliding surface.</span>
-
-<span class="sd">        s = k₁·θ₁ + k₂·sign(dθ₁)·|dθ₁|^α + λ₁·θ₂ + λ₂·sign(dθ₂)·|dθ₂|^β</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        state : np.ndarray</span>
-<span class="sd">            [x, dx, θ₁, dθ₁, θ₂, dθ₂]</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        s : float</span>
-<span class="sd">            Sliding surface value</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">dtheta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">dtheta2</span> <span class="o">=</span> <span class="n">state</span>
-
-        <span class="c1"># Terminal terms with singularity avoidance</span>
-        <span class="c1"># Add small epsilon to avoid division by zero</span>
-        <span class="n">term1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">dtheta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dtheta1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">singularity_epsilon</span><span class="p">)</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span>
-        <span class="n">term2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">dtheta2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dtheta2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">singularity_epsilon</span><span class="p">)</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span>
-
-        <span class="c1"># Sliding surface</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k1</span> <span class="o">*</span> <span class="n">theta1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">k2</span> <span class="o">*</span> <span class="n">term1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam1</span> <span class="o">*</span> <span class="n">theta2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam2</span> <span class="o">*</span> <span class="n">term2</span>
-
-        <span class="k">return</span> <span class="n">s</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">switching_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Continuous approximation to sign function.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        s : float</span>
-<span class="sd">            Sliding surface value</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        switch : float</span>
-<span class="sd">            Switching function output in [-1, 1]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">switch_method</span> <span class="o">==</span> <span class="s2">&quot;tanh&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">switch_method</span> <span class="o">==</span> <span class="s2">&quot;linear&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">saturate</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown switch method: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">switch_method</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-        <span class="n">state_vars</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">history</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute terminal SMC control law.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        state : np.ndarray</span>
-<span class="sd">            State vector [x, dx, θ₁, dθ₁, θ₂, dθ₂]</span>
-<span class="sd">        state_vars : dict, optional</span>
-<span class="sd">            Controller internal state (unused for terminal SMC)</span>
-<span class="sd">        history : dict, optional</span>
-<span class="sd">            Historical data (unused for terminal SMC)</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        control : float</span>
-<span class="sd">            Control input (force)</span>
-<span class="sd">        state_vars : dict</span>
-<span class="sd">            Updated state variables</span>
-<span class="sd">        history : dict</span>
-<span class="sd">            Updated history</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Initialize if None</span>
-        <span class="k">if</span> <span class="n">state_vars</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">state_vars</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">if</span> <span class="n">history</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">history</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize_history</span><span class="p">()</span>
-
-        <span class="c1"># Compute sliding surface</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-
-        <span class="c1"># Compute switching function</span>
-        <span class="n">switch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">switching_function</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-
-        <span class="c1"># Control law: u = -K·switch(s)</span>
-        <span class="c1"># (Simplified: no equivalent control for tutorial simplicity)</span>
-        <span class="n">control</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="n">switch</span>
-
-        <span class="c1"># Saturate to max force</span>
-        <span class="n">control</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">)</span>
-
-        <span class="c1"># Log for debugging</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Terminal SMC: s=</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, switch=</span><span class="si">{</span><span class="n">switch</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, u=</span><span class="si">{</span><span class="n">control</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">control</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">initialize_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize empty history (terminal SMC is memoryless).&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{}</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clean up resources.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_dynamics_ref</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Terminal SMC cleaned up&quot;</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Destructor for automatic cleanup.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
-</pre></div>
-</div>
 </section>
-<section id="step-2-create-output-dataclass">
-<h3>Step 2: Create Output Dataclass<a class="headerlink" href="#step-2-create-output-dataclass" title="Link to this heading">¶</a></h3>
-<p>Add to <code class="docutils literal notranslate"><span class="pre">src/utils/types/control_types.py</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">TerminalSMCOutput</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Output from Terminal SMC controller.&quot;&quot;&quot;</span>
-
-    <span class="n">control</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">sliding_surface</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">switching_function</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">terminal_term1</span><span class="p">:</span> <span class="nb">float</span>  <span class="c1"># sign(dθ₁)·|dθ₁|^α</span>
-    <span class="n">terminal_term2</span><span class="p">:</span> <span class="nb">float</span>  <span class="c1"># sign(dθ₂)·|dθ₂|^β</span>
-</pre></div>
-</div>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>example-metadata:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 </section>
-</section>
-<hr class="docutils" />
-<section id="part-3-factory-integration">
-<h2>Part 3: Factory Integration<a class="headerlink" href="#part-3-factory-integration" title="Link to this heading">¶</a></h2>
-<section id="step-1-add-to-smc-factory">
-<h3>Step 1: Add to SMC Factory<a class="headerlink" href="#step-1-add-to-smc-factory" title="Link to this heading">¶</a></h3>
-<p>Edit <code class="docutils literal notranslate"><span class="pre">src/controllers/factory/smc_factory.py</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false">
+<h1>runnable: false #======================================================================================\<a class="headerlink" href="#runnable-false" title="Link to this heading">¶</a></h1>
+<p>#======================== src/controllers/smc/terminal_smc.py ========================\<br />
+#======================================================================================\ “””
+Terminal Sliding Mode Controller for double-inverted pendulum. Implements nonlinear terminal sliding surface for finite-time convergence.
+“”” import numpy as np
+import logging
+import weakref
+from typing import TYPE_CHECKING, List, Tuple, Dict, Optional, Union, Sequence from …utils import saturate, TerminalSMCOutput if TYPE_CHECKING: from …plant.models.dynamics import DoubleInvertedPendulum logger = logging.getLogger(<strong>name</strong>) class TerminalSMC: “”” Terminal Sliding Mode Controller with finite-time convergence. Uses nonlinear terminal sliding surface with fractional exponents to achieve faster convergence than classical SMC. Parameters ———- gains : array-like [k1, k2, λ1, λ2, K, α, β] - k1, k2, λ1, λ2: sliding surface gains (positive) - K: switching gain (positive) - α, β: terminal exponents in (0, 1) for finite-time convergence max_force : float Maximum control force (N) boundary_layer : float Boundary layer thickness for chattering reduction dynamics_model : DoubleInvertedPendulum, optional
+Dynamics model for equivalent control (if None, uses robust control only)
+singularity_epsilon : float, default=1e-3
+Small value to avoid singularity when velocities near zero “”” def <strong>init</strong>( self, gains: Union[Sequence[float], np.ndarray], max_force: float, boundary_layer: float, dynamics_model: Optional[“DoubleInvertedPendulum”] = None, singularity_epsilon: float = 1e-3, switch_method: str = “tanh”, ): # Validate gain count if len(gains) != 7: raise ValueError( f”Terminal SMC requires 7 gains [k1,k2,λ1,λ2,K,α,β], got {len(gains)}” ) # Extract and validate gains self.k1, self.k2, self.lam1, self.lam2, self.K, self.alpha, self.beta = gains # Validate gain constraints if self.k1 &lt;= 0 or self.k2 &lt;= 0 or self.lam1 &lt;= 0 or self.lam2 &lt;= 0: raise ValueError(“Surface gains k1, k2, λ1, λ2 must be positive”) if self.K &lt;= 0: raise ValueError(“Switching gain K must be positive”) if not (0 &lt; self.alpha &lt; 1): raise ValueError(f”Terminal exponent α must be in (0,1), got {self.alpha}”) if not (0 &lt; self.beta &lt; 1): raise ValueError(f”Terminal exponent β must be in (0,1), got {self.beta}”) # Store parameters self.max_force = max_force self.boundary_layer = boundary_layer self.singularity_epsilon = singularity_epsilon self.switch_method = switch_method # Store dynamics model reference (weakref to avoid circular reference) if dynamics_model is not None: self._dynamics_ref = weakref.ref(dynamics_model) else: self._dynamics_ref = lambda: None <a class="reference external" href="http://logger.info">logger.info</a>( f”Initialized Terminal SMC: gains={gains}, max_force={max_force}, “ f”boundary_layer={boundary_layer}” ) &#64;property def dyn(self): “””Access dynamics model via weakref.””” if self._dynamics_ref is not None: return self._dynamics_ref() return None def compute_sliding_surface(self, state: np.ndarray) -&gt; float: “”” Compute terminal sliding surface. s = k₁·θ₁ + k₂·sign(dθ₁)·|dθ₁|^α + λ₁·θ₂ + λ₂·sign(dθ₂)·|dθ₂|^β Parameters ———- state : np.ndarray [x, dx, θ₁, dθ₁, θ₂, dθ₂] Returns ——- s : float Sliding surface value “”” _, _, theta1, dtheta1, theta2, dtheta2 = state # Terminal terms with singularity avoidance # Add small epsilon to avoid division by zero term1 = np.sign(dtheta1) * np.abs(dtheta1 + self.singularity_epsilon) ** self.alpha term2 = np.sign(dtheta2) * np.abs(dtheta2 + self.singularity_epsilon) ** self.beta # Sliding surface s = self.k1 * theta1 + self.k2 * term1 + self.lam1 * theta2 + self.lam2 * term2 return s def switching_function(self, s: float) -&gt; float: “”” Continuous approximation to sign function. Parameters ———- s : float Sliding surface value Returns ——- switch : float Switching function output in [-1, 1] “”” if self.switch_method == “tanh”: return np.tanh(s / self.boundary_layer) elif self.switch_method == “linear”: return saturate(s / self.boundary_layer, -1.0, 1.0) else: raise ValueError(f”Unknown switch method: {self.switch_method}”) def compute_control( self, state: np.ndarray, state_vars: Optional[Dict] = None, history: Optional[Dict] = None, ) -&gt; Tuple[float, Dict, Dict]: “”” Compute terminal SMC control law. Parameters ———- state : np.ndarray State vector [x, dx, θ₁, dθ₁, θ₂, dθ₂] state_vars : dict, optional Controller internal state (unused for terminal SMC) history : dict, optional Historical data (unused for terminal SMC) Returns ——- control : float Control input (force) state_vars : dict Updated state variables history : dict Updated history “”” # Initialize if None if state_vars is None: state_vars = {} if history is None: history = self.initialize_history() # Compute sliding surface s = self.compute_sliding_surface(state) # Compute switching function switch = self.switching_function(s) # Control law: u = -K·switch(s) # (Simplified: no equivalent control for tutorial simplicity) control = -self.K * switch # Saturate to max force control = saturate(control, -self.max_force, self.max_force) # Log for debugging logger.debug(f”Terminal SMC: s={s:.4f}, switch={switch:.4f}, u={control:.4f}”) return control, state_vars, history def initialize_history(self) -&gt; Dict: “””Initialize empty history (terminal SMC is memoryless).””” return {} def cleanup(self): “””Clean up resources.””” self._dynamics_ref = None logger.debug(“Terminal SMC cleaned up”) def <strong>del</strong>(self): “””Destructor for automatic cleanup.””” self.cleanup()
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">Step</span> <span class="pre">2:</span> <span class="pre">Create</span> <span class="pre">Output</span> <span class="pre">Dataclass</span> <span class="pre">Add</span> <span class="pre">to</span> <span class="pre">`src/utils/types/control_types.py`:</span></code>python</p>
+<p>&#64;dataclass(frozen=True)
+class TerminalSMCOutput: “””Output from Terminal SMC controller.””” control: float sliding_surface: float switching_function: float terminal_term1: float # sign(dθ₁)·|dθ₁|^α terminal_term2: float # sign(dθ₂)·|dθ₂|^β</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">..smc.terminal_smc</span><span class="w"> </span><span class="kn">import</span> <span class="n">TerminalSMC</span>  <span class="c1"># Add import</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">SMCType</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
-    <span class="n">CLASSICAL</span> <span class="o">=</span> <span class="s2">&quot;classical&quot;</span>
-    <span class="n">ADAPTIVE</span> <span class="o">=</span> <span class="s2">&quot;adaptive&quot;</span>
-    <span class="n">SUPER_TWISTING</span> <span class="o">=</span> <span class="s2">&quot;super_twisting&quot;</span>
-    <span class="n">HYBRID</span> <span class="o">=</span> <span class="s2">&quot;hybrid&quot;</span>
-    <span class="n">TERMINAL</span> <span class="o">=</span> <span class="s2">&quot;terminal&quot;</span>  <span class="c1"># New controller type</span>
-
-<span class="c1"># Update GAIN_SPECIFICATIONS</span>
-<span class="n">GAIN_SPECIFICATIONS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># ... existing specs ...</span>
-    <span class="n">SMCType</span><span class="o">.</span><span class="n">TERMINAL</span><span class="p">:</span> <span class="n">GainSpecification</span><span class="p">(</span>
-        <span class="n">controller_type</span><span class="o">=</span><span class="n">SMCType</span><span class="o">.</span><span class="n">TERMINAL</span><span class="p">,</span>
-        <span class="n">n_gains</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-        <span class="n">gain_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;k1&quot;</span><span class="p">,</span> <span class="s2">&quot;k2&quot;</span><span class="p">,</span> <span class="s2">&quot;lambda1&quot;</span><span class="p">,</span> <span class="s2">&quot;lambda2&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="s2">&quot;beta&quot;</span><span class="p">],</span>
-        <span class="n">bounds</span><span class="o">=</span><span class="p">[(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span>
-                <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">200.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)],</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Terminal SMC with nonlinear sliding surface&quot;</span>
-    <span class="p">),</span>
-<span class="p">}</span>
-
-<span class="c1"># Update create_controller method</span>
+<span class="c1">## Part 3: Factory Integration ### Step 1: Add to SMC Factory Edit `src/controllers/factory/smc_factory.py`: ```python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false from ..smc.terminal_smc import TerminalSMC # Add import class SMCType(str, Enum): CLASSICAL = &quot;classical&quot; ADAPTIVE = &quot;adaptive&quot; SUPER_TWISTING = &quot;super_twisting&quot; HYBRID = &quot;hybrid&quot; TERMINAL = &quot;terminal&quot; # New controller type # Update GAIN_SPECIFICATIONS</span>
+<span class="n">GAIN_SPECIFICATIONS</span> <span class="o">=</span> <span class="p">{</span> <span class="c1"># ... existing specs ... SMCType.TERMINAL: GainSpecification( controller_type=SMCType.TERMINAL, n_gains=7, gain_names=[&quot;k1&quot;, &quot;k2&quot;, &quot;lambda1&quot;, &quot;lambda2&quot;, &quot;K&quot;, &quot;alpha&quot;, &quot;beta&quot;], bounds=[(0.1, 50.0), (0.1, 50.0), (0.1, 50.0), (0.1, 50.0), (1.0, 200.0), (0.1, 0.9), (0.1, 0.9)], description=&quot;Terminal SMC with nonlinear sliding surface&quot; ),</span>
+<span class="p">}</span> <span class="c1"># Update create_controller method</span>
 <span class="nd">@staticmethod</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">create_controller</span><span class="p">(</span>
-    <span class="n">controller_type</span><span class="p">:</span> <span class="n">SMCType</span><span class="p">,</span>
-    <span class="n">config</span><span class="p">:</span> <span class="n">SMCConfig</span><span class="p">,</span>
-    <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create SMC controller instance.&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_controller</span><span class="p">(</span> <span class="n">controller_type</span><span class="p">:</span> <span class="n">SMCType</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">SMCConfig</span><span class="p">,</span> <span class="n">dynamics_model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span> <span class="s2">&quot;&quot;&quot;Create SMC controller instance.&quot;&quot;&quot;</span> <span class="c1"># ... existing code ... elif controller_type == SMCType.TERMINAL: from ..smc.terminal_smc import TerminalSMC return TerminalSMC( gains=config.gains, max_force=config.max_force, boundary_layer=config.boundary_layer, dynamics_model=dynamics_model, singularity_epsilon=getattr(config, &#39;singularity_epsilon&#39;, 1e-3), switch_method=getattr(config, &#39;switch_method&#39;, &#39;tanh&#39;), ) # ... rest of code ...</span>
+<span class="err">```</span> <span class="c1">### Step 2: Add Configuration Support Edit `config.yaml`: ```yaml</span>
 
-    <span class="c1"># ... existing code ...</span>
-
-    <span class="k">elif</span> <span class="n">controller_type</span> <span class="o">==</span> <span class="n">SMCType</span><span class="o">.</span><span class="n">TERMINAL</span><span class="p">:</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">..smc.terminal_smc</span><span class="w"> </span><span class="kn">import</span> <span class="n">TerminalSMC</span>
-        <span class="k">return</span> <span class="n">TerminalSMC</span><span class="p">(</span>
-            <span class="n">gains</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">gains</span><span class="p">,</span>
-            <span class="n">max_force</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span>
-            <span class="n">boundary_layer</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">,</span>
-            <span class="n">dynamics_model</span><span class="o">=</span><span class="n">dynamics_model</span><span class="p">,</span>
-            <span class="n">singularity_epsilon</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="s1">&#39;singularity_epsilon&#39;</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">),</span>
-            <span class="n">switch_method</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="s1">&#39;switch_method&#39;</span><span class="p">,</span> <span class="s1">&#39;tanh&#39;</span><span class="p">),</span>
-        <span class="p">)</span>
-
-    <span class="c1"># ... rest of code ...</span>
+<span class="n">controllers</span><span class="p">:</span> <span class="c1"># ... existing controllers ... terminal_smc: gains: [10.0, 8.0, 15.0, 12.0, 50.0, 0.5, 0.7] # [k1, k2, λ1, λ2, K, α, β] max_force: 100.0 boundary_layer: 0.01 singularity_epsilon: 0.001 # Avoid singularity switch_method: &quot;tanh&quot;</span>
 </pre></div>
 </div>
-</section>
-<section id="step-2-add-configuration-support">
-<h3>Step 2: Add Configuration Support<a class="headerlink" href="#step-2-add-configuration-support" title="Link to this heading">¶</a></h3>
-<p>Edit <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controllers</span><span class="p">:</span>
-<span class="w">  </span><span class="c1"># ... existing controllers ...</span>
-
-<span class="w">  </span><span class="nt">terminal_smc</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">gains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.7</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [k1, k2, λ1, λ2, K, α, β]</span>
-<span class="w">    </span><span class="nt">max_force</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span>
-<span class="w">    </span><span class="nt">boundary_layer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
-<span class="w">    </span><span class="nt">singularity_epsilon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span><span class="w">  </span><span class="c1"># Avoid singularity</span>
-<span class="w">    </span><span class="nt">switch_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;tanh&quot;</span>
-</pre></div>
-</div>
-</section>
-</section>
 <hr class="docutils" />
-<section id="part-4-testing-your-custom-controller">
-<h2>Part 4: Testing Your Custom Controller<a class="headerlink" href="#part-4-testing-your-custom-controller" title="Link to this heading">¶</a></h2>
-<section id="manual-testing">
-<h3>Manual Testing<a class="headerlink" href="#manual-testing" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test terminal SMC with default configuration</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--ctrl<span class="w"> </span>terminal_smc<span class="w"> </span>--plot
-</pre></div>
-</div>
-<p><strong>Expected Output:</strong></p>
-<ul class="simple">
-<li><p>Simulation should complete without errors</p></li>
-<li><p>Plot should show state convergence</p></li>
-<li><p>Control signal should be bounded by max_force</p></li>
-</ul>
-</section>
-<section id="unit-testing">
-<h3>Unit Testing<a class="headerlink" href="#unit-testing" title="Link to this heading">¶</a></h3>
-<p>Create <code class="docutils literal notranslate"><span class="pre">tests/test_controllers/test_terminal_smc.py</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.terminal_smc</span><span class="w"> </span><span class="kn">import</span> <span class="n">TerminalSMC</span>
-
-
-<span class="k">class</span><span class="w"> </span><span class="nc">TestTerminalSMC</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unit tests for Terminal SMC controller.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_initialization_valid_gains</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test controller initializes with valid gains.&quot;&quot;&quot;</span>
-        <span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>
-        <span class="n">controller</span> <span class="o">=</span> <span class="n">TerminalSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
-        <span class="k">assert</span> <span class="n">controller</span><span class="o">.</span><span class="n">k1</span> <span class="o">==</span> <span class="mf">10.0</span>
-        <span class="k">assert</span> <span class="n">controller</span><span class="o">.</span><span class="n">alpha</span> <span class="o">==</span> <span class="mf">0.5</span>
-        <span class="k">assert</span> <span class="n">controller</span><span class="o">.</span><span class="n">beta</span> <span class="o">==</span> <span class="mf">0.7</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_initialization_invalid_gain_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test ValueError raised for wrong number of gains.&quot;&quot;&quot;</span>
-        <span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">]</span>  <span class="c1"># Only 3 gains</span>
-        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;7 gains&quot;</span><span class="p">):</span>
-            <span class="n">TerminalSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_initialization_invalid_exponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test ValueError for invalid terminal exponents.&quot;&quot;&quot;</span>
-        <span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>  <span class="c1"># α &gt; 1</span>
-        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;must be in&quot;</span><span class="p">):</span>
-            <span class="n">TerminalSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_sliding_surface_computation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test sliding surface calculation.&quot;&quot;&quot;</span>
-        <span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>
-        <span class="n">controller</span> <span class="o">=</span> <span class="n">TerminalSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
-        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-
-        <span class="c1"># s = k1·θ1 + k2·0 + λ1·θ2 + λ2·0 = 10*0.1 + 15*0.15 = 3.25</span>
-        <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="mf">3.25</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.01</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_control_computation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test control signal computation.&quot;&quot;&quot;</span>
-        <span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>
-        <span class="n">controller</span> <span class="o">=</span> <span class="n">TerminalSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
-        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
-        <span class="n">control</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{})</span>
-
-        <span class="c1"># Control should be computed and bounded</span>
-        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">))</span>
-        <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">control</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">100.0</span>  <span class="c1"># max_force</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_control_saturation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test control saturation at max_force.&quot;&quot;&quot;</span>
-        <span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">500.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>  <span class="c1"># Very high K</span>
-        <span class="n">controller</span> <span class="o">=</span> <span class="n">TerminalSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
-        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>  <span class="c1"># Large errors</span>
-        <span class="n">control</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{})</span>
-
-        <span class="c1"># Control should saturate at max_force</span>
-        <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">control</span><span class="p">)</span> <span class="o">==</span> <span class="mf">100.0</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test resource cleanup.&quot;&quot;&quot;</span>
-        <span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>
-        <span class="n">controller</span> <span class="o">=</span> <span class="n">TerminalSMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-        <span class="n">controller</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
-
-        <span class="c1"># Dynamics reference should be None after cleanup</span>
-        <span class="k">assert</span> <span class="n">controller</span><span class="o">.</span><span class="n">_dynamics_ref</span> <span class="ow">is</span> <span class="kc">None</span>
-</pre></div>
-</div>
-<p><strong>Run tests:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>tests/test_controllers/test_terminal_smc.py<span class="w"> </span>-v
-</pre></div>
-</div>
+<section id="part-4-testing-your-custom-controller-manual-testing-bash">
+<h2>Part 4: Testing Your Custom Controller ### Manual Testing ```bash<a class="headerlink" href="#part-4-testing-your-custom-controller-manual-testing-bash" title="Link to this heading">¶</a></h2>
 </section>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="test-terminal-smc-with-default-configuration">
+<h1>Test terminal SMC with default configuration<a class="headerlink" href="#test-terminal-smc-with-default-configuration" title="Link to this heading">¶</a></h1>
+<p>python <a class="reference external" href="http://simulate.py">simulate.py</a> –ctrl terminal_smc –plot</p>
+<div class="highlight-**Expected notranslate"><div class="highlight"><pre><span></span>
+- Simulation should complete without errors
+- Plot should show state convergence
+- Control signal should be bounded by max_force ### Unit Testing Create `tests/test_controllers/test_terminal_smc.py`: ```python
+import pytest
+import numpy as np
+from src.controllers.smc.terminal_smc import TerminalSMC class TestTerminalSMC: &quot;&quot;&quot;Unit tests for Terminal SMC controller.&quot;&quot;&quot; def test_initialization_valid_gains(self): &quot;&quot;&quot;Test controller initializes with valid gains.&quot;&quot;&quot; gains = [10.0, 8.0, 15.0, 12.0, 50.0, 0.5, 0.7] controller = TerminalSMC(gains=gains, max_force=100.0, boundary_layer=0.01) assert controller.k1 == 10.0 assert controller.alpha == 0.5 assert controller.beta == 0.7 def test_initialization_invalid_gain_count(self): &quot;&quot;&quot;Test ValueError raised for wrong number of gains.&quot;&quot;&quot; gains = [10.0, 8.0, 15.0] # Only 3 gains with pytest.raises(ValueError, match=&quot;7 gains&quot;): TerminalSMC(gains=gains, max_force=100.0, boundary_layer=0.01) def test_initialization_invalid_exponents(self): &quot;&quot;&quot;Test ValueError for invalid terminal exponents.&quot;&quot;&quot; gains = [10.0, 8.0, 15.0, 12.0, 50.0, 1.5, 0.7] # α &gt; 1 with pytest.raises(ValueError, match=&quot;must be in&quot;): TerminalSMC(gains=gains, max_force=100.0, boundary_layer=0.01) def test_sliding_surface_computation(self): &quot;&quot;&quot;Test sliding surface calculation.&quot;&quot;&quot; gains = [10.0, 8.0, 15.0, 12.0, 50.0, 0.5, 0.7] controller = TerminalSMC(gains=gains, max_force=100.0, boundary_layer=0.01) state = np.array([0.0, 0.0, 0.1, 0.0, 0.15, 0.0]) s = controller.compute_sliding_surface(state) # s = k1·θ1 + k2·0 + λ1·θ2 + λ2·0 = 10*0.1 + 15*0.15 = 3.25 assert abs(s - 3.25) &lt; 0.01 def test_control_computation(self): &quot;&quot;&quot;Test control signal computation.&quot;&quot;&quot; gains = [10.0, 8.0, 15.0, 12.0, 50.0, 0.5, 0.7] controller = TerminalSMC(gains=gains, max_force=100.0, boundary_layer=0.01) state = np.array([0.0, 0.0, 0.1, 0.0, 0.15, 0.0]) control, state_vars, history = controller.compute_control(state, {}, {}) # Control should be computed and bounded assert isinstance(control, (float, np.floating)) assert abs(control) &lt;= 100.0 # max_force def test_control_saturation(self): &quot;&quot;&quot;Test control saturation at max_force.&quot;&quot;&quot; gains = [10.0, 8.0, 15.0, 12.0, 500.0, 0.5, 0.7] # Very high K controller = TerminalSMC(gains=gains, max_force=100.0, boundary_layer=0.01) state = np.array([0.0, 0.0, 0.5, 0.0, 0.6, 0.0]) # Large errors control, _, _ = controller.compute_control(state, {}, {}) # Control should saturate at max_force assert abs(control) == 100.0 def test_cleanup(self): &quot;&quot;&quot;Test resource cleanup.&quot;&quot;&quot; gains = [10.0, 8.0, 15.0, 12.0, 50.0, 0.5, 0.7] controller = TerminalSMC(gains=gains, max_force=100.0, boundary_layer=0.01) controller.cleanup() # Dynamics reference should be None after cleanup assert controller._dynamics_ref is None
+``` **Run tests:**
+```bash
+
+pytest tests/test_controllers/test_terminal_smc.py -v
+</pre></div>
+</div>
 <hr class="docutils" />
-<section id="part-5-pso-optimization-of-custom-controller">
-<h2>Part 5: PSO Optimization of Custom Controller<a class="headerlink" href="#part-5-pso-optimization-of-custom-controller" title="Link to this heading">¶</a></h2>
-<section id="configure-pso-bounds">
-<h3>Configure PSO Bounds<a class="headerlink" href="#configure-pso-bounds" title="Link to this heading">¶</a></h3>
-<p>Edit <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">pso</span><span class="p">:</span>
-<span class="w">  </span><span class="c1"># Terminal SMC specific bounds</span>
-<span class="w">  </span><span class="nt">terminal_smc_bounds</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50.0</span><span class="p p-Indicator">]</span><span class="w">    </span><span class="c1"># k₁</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50.0</span><span class="p p-Indicator">]</span><span class="w">    </span><span class="c1"># k₂</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50.0</span><span class="p p-Indicator">]</span><span class="w">    </span><span class="c1"># λ₁</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50.0</span><span class="p p-Indicator">]</span><span class="w">    </span><span class="c1"># λ₂</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">200.0</span><span class="p p-Indicator">]</span><span class="w">   </span><span class="c1"># K</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.9</span><span class="p p-Indicator">]</span><span class="w">     </span><span class="c1"># α (must be in (0,1))</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.9</span><span class="p p-Indicator">]</span><span class="w">     </span><span class="c1"># β (must be in (0,1))</span>
+<section id="part-5-pso-optimization-of-custom-controller-configure-pso-bounds-edit-config-yaml-yaml">
+<h2>Part 5: PSO Optimization of Custom Controller ### Configure PSO Bounds Edit <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>: ```yaml<a class="headerlink" href="#part-5-pso-optimization-of-custom-controller-configure-pso-bounds-edit-config-yaml-yaml" title="Link to this heading">¶</a></h2>
+<p>pso: # Terminal SMC specific bounds terminal_smc_bounds: - [0.1, 50.0] # k₁ - [0.1, 50.0] # k₂ - [0.1, 50.0] # λ₁ - [0.1, 50.0] # λ₂ - [1.0, 200.0] # K - [0.1, 0.9] # α (must be in (0,1)) - [0.1, 0.9] # β (must be in (0,1))
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">Run</span> <span class="pre">PSO</span> <span class="pre">Optimization</span></code>bash</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="optimize-terminal-smc-gains">
+<h1>Optimize terminal SMC gains<a class="headerlink" href="#optimize-terminal-smc-gains" title="Link to this heading">¶</a></h1>
+<p>python <a class="reference external" href="http://simulate.py">simulate.py</a> –ctrl terminal_smc –run-pso –save gains_terminal_optimized.json
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">Compare</span> <span class="pre">with</span> <span class="pre">Classical</span> <span class="pre">SMC</span></code>bash</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="test-optimized-terminal-smc">
+<h1>Test optimized terminal SMC<a class="headerlink" href="#test-optimized-terminal-smc" title="Link to this heading">¶</a></h1>
+<p>python <a class="reference external" href="http://simulate.py">simulate.py</a> –load gains_terminal_optimized.json –plot –save results_terminal.json # Compare with classical SMC
+python -c “
+import json terminal = json.load(open(‘results_terminal.json’))
+classical = json.load(open(‘results_classical.json’)) # From previous tutorial print(‘Performance Comparison:’)
+print(f’Terminal SMC ISE: {terminal[“metrics”][“ise”]:.4f}’)
+print(f’Classical SMC ISE: {classical[“metrics”][“ise”]:.4f}’)
+print(f’Improvement: {(1 - terminal[“metrics”][“ise”]/classical[“metrics”][“ise”])*100:.1f}%’)
+“</p>
+<div class="highlight-**Expected notranslate"><div class="highlight"><pre><span></span>
+- Terminal SMC should achieve faster convergence near equilibrium
+- May have similar or slightly better ISE than classical SMC
+- Exponents α, β control convergence speed vs smoothness
+
+---
+
+## Part 6: Advanced Customization ### Adding Equivalent Control For better performance, add model-based equivalent control: ```python
+
+# example-metadata:
+
+# runnable: false def compute_equivalent_control(self, state: np.ndarray) -&gt; float: &quot;&quot;&quot; Compute model-based equivalent control. For terminal SMC, this requires computing: u_eq = - (L·M⁻¹·B)⁻¹ · (L·M⁻¹·C + ds/dt) where s is the terminal sliding surface. &quot;&quot;&quot; if self.dyn is None: return 0.0 # No model available # Get system matrices M = self.dyn.mass_matrix(state) C = self.dyn.coriolis_centrifugal(state) B = self.dyn.control_matrix() # Compute L (gradient of sliding surface w.r.t. state) L = self.compute_surface_gradient(state) # Solve for u_eq (requires matrix operations) try: M_inv = np.linalg.inv(M) LMB = L @ M_inv @ B if abs(LMB) &lt; 1e-6: # Singularity check return 0.0 u_eq = -(1 / LMB) * (L @ M_inv @ C) return saturate(u_eq, -self.max_force, self.max_force)
+
+    except np.linalg.LinAlgError:
+        return 0.0  # Fallback to robust control only
 </pre></div>
 </div>
-</section>
-<section id="run-pso-optimization">
-<h3>Run PSO Optimization<a class="headerlink" href="#run-pso-optimization" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optimize terminal SMC gains</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--ctrl<span class="w"> </span>terminal_smc<span class="w"> </span>--run-pso<span class="w"> </span>--save<span class="w"> </span>gains_terminal_optimized.json
-</pre></div>
-</div>
-</section>
-<section id="compare-with-classical-smc">
-<h3>Compare with Classical SMC<a class="headerlink" href="#compare-with-classical-smc" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test optimized terminal SMC</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--load<span class="w"> </span>gains_terminal_optimized.json<span class="w"> </span>--plot<span class="w"> </span>--save<span class="w"> </span>results_terminal.json
-
-<span class="c1"># Compare with classical SMC</span>
-python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
-<span class="s2">import json</span>
-
-<span class="s2">terminal = json.load(open(&#39;results_terminal.json&#39;))</span>
-<span class="s2">classical = json.load(open(&#39;results_classical.json&#39;))  # From previous tutorial</span>
-
-<span class="s2">print(&#39;Performance Comparison:&#39;)</span>
-<span class="s2">print(f&#39;Terminal SMC ISE:   {terminal[\&quot;metrics\&quot;][\&quot;ise\&quot;]:.4f}&#39;)</span>
-<span class="s2">print(f&#39;Classical SMC ISE:  {classical[\&quot;metrics\&quot;][\&quot;ise\&quot;]:.4f}&#39;)</span>
-<span class="s2">print(f&#39;Improvement: {(1 - terminal[\&quot;metrics\&quot;][\&quot;ise\&quot;]/classical[\&quot;metrics\&quot;][\&quot;ise\&quot;])*100:.1f}%&#39;)</span>
-<span class="s2">&quot;</span>
-</pre></div>
-</div>
-<p><strong>Expected Learning:</strong></p>
-<ul class="simple">
-<li><p>Terminal SMC should achieve faster convergence near equilibrium</p></li>
-<li><p>May have similar or slightly better ISE than classical SMC</p></li>
-<li><p>Exponents α, β control convergence speed vs smoothness</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="part-6-advanced-customization">
-<h2>Part 6: Advanced Customization<a class="headerlink" href="#part-6-advanced-customization" title="Link to this heading">¶</a></h2>
-<section id="adding-equivalent-control">
-<h3>Adding Equivalent Control<a class="headerlink" href="#adding-equivalent-control" title="Link to this heading">¶</a></h3>
-<p>For better performance, add model-based equivalent control:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_equivalent_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute model-based equivalent control.</span>
-
-<span class="sd">    For terminal SMC, this requires computing:</span>
-<span class="sd">    u_eq = - (L·M⁻¹·B)⁻¹ · (L·M⁻¹·C + ds/dt)</span>
-
-<span class="sd">    where s is the terminal sliding surface.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mf">0.0</span>  <span class="c1"># No model available</span>
-
-    <span class="c1"># Get system matrices</span>
-    <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyn</span><span class="o">.</span><span class="n">mass_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyn</span><span class="o">.</span><span class="n">coriolis_centrifugal</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="n">B</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyn</span><span class="o">.</span><span class="n">control_matrix</span><span class="p">()</span>
-
-    <span class="c1"># Compute L (gradient of sliding surface w.r.t. state)</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_surface_gradient</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-
-    <span class="c1"># Solve for u_eq (requires matrix operations)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">M_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-        <span class="n">LMB</span> <span class="o">=</span> <span class="n">L</span> <span class="o">@</span> <span class="n">M_inv</span> <span class="o">@</span> <span class="n">B</span>
-        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">LMB</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>  <span class="c1"># Singularity check</span>
-            <span class="k">return</span> <span class="mf">0.0</span>
-
-        <span class="n">u_eq</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">LMB</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">L</span> <span class="o">@</span> <span class="n">M_inv</span> <span class="o">@</span> <span class="n">C</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">saturate</span><span class="p">(</span><span class="n">u_eq</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">)</span>
-
-    <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mf">0.0</span>  <span class="c1"># Fallback to robust control only</span>
-</pre></div>
-</div>
-</section>
 <section id="adding-state-variables-e-g-integral-term">
-<h3>Adding State Variables (e.g., Integral Term)<a class="headerlink" href="#adding-state-variables-e-g-integral-term" title="Link to this heading">¶</a></h3>
+<h2>Adding State Variables (e.g., Integral Term)<a class="headerlink" href="#adding-state-variables-e-g-integral-term" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
 
-<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
-    <span class="c1"># ... existing code ...</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">use_integral</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">k_integral</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># Integral gain</span>
+<span class="c1"># runnable: false def __init__(self, ...): # ... existing code ... self.use_integral = True self.k_integral = 2.0 # Integral gain def compute_control(self, state, state_vars, history): # Initialize integral term if not present if &#39;integral_s&#39; not in state_vars: state_vars[&#39;integral_s&#39;] = 0.0 # Compute sliding surface s = self.compute_sliding_surface(state) # Update integral term dt = 0.01 # Get from config state_vars[&#39;integral_s&#39;] += s * dt # Control law with integral term control = -self.K * self.switching_function(s) - self.k_integral * state_vars[&#39;integral_s&#39;] # Saturate control = saturate(control, -self.max_force, self.max_force) return control, state_vars, history</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
-    <span class="c1"># Initialize integral term if not present</span>
-    <span class="k">if</span> <span class="s1">&#39;integral_s&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">state_vars</span><span class="p">:</span>
-        <span class="n">state_vars</span><span class="p">[</span><span class="s1">&#39;integral_s&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
-
-    <span class="c1"># Compute sliding surface</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-
-    <span class="c1"># Update integral term</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># Get from config</span>
-    <span class="n">state_vars</span><span class="p">[</span><span class="s1">&#39;integral_s&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">dt</span>
-
-    <span class="c1"># Control law with integral term</span>
-    <span class="n">control</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">switching_function</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_integral</span> <span class="o">*</span> <span class="n">state_vars</span><span class="p">[</span><span class="s1">&#39;integral_s&#39;</span><span class="p">]</span>
-
-    <span class="c1"># Saturate</span>
-    <span class="n">control</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">control</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span>
 </pre></div>
 </div>
-</section>
 </section>
 <hr class="docutils" />
-<section id="part-7-best-practices">
-<h2>Part 7: Best Practices<a class="headerlink" href="#part-7-best-practices" title="Link to this heading">¶</a></h2>
-<section id="gain-validation">
-<h3>1. Gain Validation<a class="headerlink" href="#gain-validation" title="Link to this heading">¶</a></h3>
-<p><strong>Always validate gains in <code class="docutils literal notranslate"><span class="pre">__init__</span></code>:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
-    <span class="c1"># Check count</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span> <span class="o">!=</span> <span class="n">expected_count</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected_count</span><span class="si">}</span><span class="s2"> gains, got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Check bounds</span>
-    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">g</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gains</span><span class="p">[:</span><span class="mi">4</span><span class="p">]):</span>  <span class="c1"># Surface gains must be positive</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Surface gains must be non-negative&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Check constraints (e.g., exponents in (0,1))</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">alpha</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exponent α must be in (0,1), got </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="numerical-robustness">
-<h3>2. Numerical Robustness<a class="headerlink" href="#numerical-robustness" title="Link to this heading">¶</a></h3>
-<p><strong>Avoid singularities:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bad: Division by zero</span>
-<span class="n">term</span> <span class="o">=</span> <span class="n">dtheta</span> <span class="o">**</span> <span class="n">alpha</span>
-
-<span class="c1"># Good: Add small epsilon</span>
-<span class="n">term</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">dtheta</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dtheta</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-6</span><span class="p">)</span> <span class="o">**</span> <span class="n">alpha</span>
-</pre></div>
-</div>
-<p><strong>Matrix inversion safety:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">M_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-<span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Singular matrix, using robust control only&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="mf">0.0</span>  <span class="c1"># Fallback</span>
-</pre></div>
-</div>
-</section>
-<section id="logging-and-debugging">
-<h3>3. Logging and Debugging<a class="headerlink" href="#logging-and-debugging" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sliding surface: s=</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="n">control</span> <span class="o">=</span> <span class="o">...</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control output: u=</span><span class="si">{</span><span class="n">control</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">control</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span>
-</pre></div>
-</div>
-</section>
-<section id="memory-management">
-<h3>4. Memory Management<a class="headerlink" href="#memory-management" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Explicit cleanup for long-running processes.&quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_dynamics_ref</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> cleaned up&quot;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Automatic cleanup on garbage collection.&quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
-</pre></div>
-</div>
+<section id="part-7-best-practices-1-gain-validation-always-validate-gains-in-init-python">
+<h2>Part 7: Best Practices ### 1. Gain Validation <strong>Always validate gains in <code class="docutils literal notranslate"><span class="pre">__init__</span></code>:</strong> ```python<a class="headerlink" href="#part-7-best-practices-1-gain-validation-always-validate-gains-in-init-python" title="Link to this heading">¶</a></h2>
 </section>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1>example-metadata:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-def-init-self-gains-check-count-if-len-gains-expected-count-raise-valueerror-f-expected-expected-count-gains-got-len-gains-check-bounds-if-any-g-0-for-g-in-gains-4-surface-gains-must-be-positive-raise-valueerror-surface-gains-must-be-non-negative-check-constraints-e-g-exponents-in-0-1-if-not-0-alpha-1-raise-valueerror-f-exponent-must-be-in-0-1-got-alpha">
+<h1>runnable: false def <strong>init</strong>(self, gains, …): # Check count if len(gains) != expected_count: raise ValueError(f”Expected {expected_count} gains, got {len(gains)}”) # Check bounds if any(g &lt; 0 for g in gains[:4]): # Surface gains must be positive raise ValueError(“Surface gains must be non-negative”) # Check constraints (e.g., exponents in (0,1)) if not (0 &lt; alpha &lt; 1): raise ValueError(f”Exponent α must be in (0,1), got {alpha}”)<a class="headerlink" href="#runnable-false-def-init-self-gains-check-count-if-len-gains-expected-count-raise-valueerror-f-expected-expected-count-gains-got-len-gains-check-bounds-if-any-g-0-for-g-in-gains-4-surface-gains-must-be-positive-raise-valueerror-surface-gains-must-be-non-negative-check-constraints-e-g-exponents-in-0-1-if-not-0-alpha-1-raise-valueerror-f-exponent-must-be-in-0-1-got-alpha" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">2.</span> <span class="pre">Numerical</span> <span class="pre">Robustness</span> <span class="pre">**Avoid</span> <span class="pre">singularities:**</span></code>python</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bad-division-by-zero">
+<h1>Bad: Division by zero<a class="headerlink" href="#bad-division-by-zero" title="Link to this heading">¶</a></h1>
+<p>term = dtheta ** alpha # Good: Add small epsilon
+term = np.sign(dtheta) * (np.abs(dtheta) + 1e-6) ** alpha
+<code class="docutils literal notranslate"><span class="pre">**Matrix</span> <span class="pre">inversion</span> <span class="pre">safety:**</span></code>python
+try: M_inv = np.linalg.inv(M)
+except np.linalg.LinAlgError:
+logger.warning(“Singular matrix, using robust control only”)
+return 0.0  # Fallback</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1">## 3. Logging and Debugging</span>
+
+<span class="err">```</span><span class="n">python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false import logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span> <span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span> <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_sliding_surface</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sliding surface: s=</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="n">control</span> <span class="o">=</span> <span class="o">...</span> <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control output: u=</span><span class="si">{</span><span class="n">control</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">return</span> <span class="n">control</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span>
+<span class="err">```</span> <span class="c1">### 4. Memory Management ```python</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="s2">&quot;&quot;&quot;Explicit cleanup for long-running processes.&quot;&quot;&quot;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dynamics_ref</span> <span class="o">=</span> <span class="kc">None</span> <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> cleaned up&quot;</span><span class="p">)</span> <span class="k">def</span><span class="w"> </span><span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="s2">&quot;&quot;&quot;Automatic cleanup on garbage collection.&quot;&quot;&quot;</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
+</pre></div>
+</div>
 <hr class="docutils" />
-<section id="part-8-exercise-implement-fast-terminal-smc">
-<h2>Part 8: Exercise: Implement Fast Terminal SMC<a class="headerlink" href="#part-8-exercise-implement-fast-terminal-smc" title="Link to this heading">¶</a></h2>
-<p><strong>Challenge:</strong> Implement <strong>Fast Terminal SMC</strong> (FTSMC), which uses a different sliding surface:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">θ</span><span class="err">₁</span> <span class="o">+</span> <span class="n">β</span><span class="err">₁·</span><span class="n">sign</span><span class="p">(</span><span class="n">dθ</span><span class="err">₁</span><span class="p">)</span><span class="err">·</span><span class="o">|</span><span class="n">dθ</span><span class="err">₁</span><span class="o">|^</span><span class="n">α</span> <span class="o">+</span> <span class="n">θ</span><span class="err">₂</span> <span class="o">+</span> <span class="n">β</span><span class="err">₂·</span><span class="n">sign</span><span class="p">(</span><span class="n">dθ</span><span class="err">₂</span><span class="p">)</span><span class="err">·</span><span class="o">|</span><span class="n">dθ</span><span class="err">₂</span><span class="o">|^</span><span class="n">γ</span>
-</pre></div>
-</div>
-<p><strong>Requirements:</strong></p>
-<ol class="arabic simple">
-<li><p>Create <code class="docutils literal notranslate"><span class="pre">src/controllers/smc/fast_terminal_smc.py</span></code></p></li>
-<li><p>Add to factory with type <code class="docutils literal notranslate"><span class="pre">SMCType.FAST_TERMINAL</span></code></p></li>
-<li><p>Add configuration to <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code></p></li>
-<li><p>Write unit tests</p></li>
-<li><p>Run PSO optimization</p></li>
-<li><p>Compare performance with Terminal SMC and Classical SMC</p></li>
-</ol>
-<p><strong>Expected Learning:</strong></p>
-<ul class="simple">
-<li><p>Understand how different sliding surface designs affect performance</p></li>
-<li><p>Practice the full controller development workflow</p></li>
-<li><p>Gain intuition for SMC design choices</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">¶</a></h2>
-<p><strong>Controller Development Workflow:</strong></p>
-<ol class="arabic simple">
-<li><p><strong>Design:</strong> Define control law mathematically</p></li>
-<li><p><strong>Implement:</strong> Create Python class with standard interface</p></li>
-<li><p><strong>Validate:</strong> Add gain checking and error handling</p></li>
-<li><p><strong>Integrate:</strong> Add to factory and configuration</p></li>
-<li><p><strong>Test:</strong> Write unit tests and manual testing</p></li>
-<li><p><strong>Optimize:</strong> Use PSO to tune gains</p></li>
-<li><p><strong>Compare:</strong> Benchmark against existing controllers</p></li>
-</ol>
-<p><strong>Key Takeaways:</strong></p>
-<ul class="simple">
-<li><p>Controllers must implement <code class="docutils literal notranslate"><span class="pre">compute_control(state,</span> <span class="pre">state_vars,</span> <span class="pre">history)</span></code></p></li>
-<li><p>Always validate gains in <code class="docutils literal notranslate"><span class="pre">__init__</span></code> (count, bounds, constraints)</p></li>
-<li><p>Use weakref for dynamics model to avoid circular references</p></li>
-<li><p>Add logging for debugging</p></li>
-<li><p>Write comprehensive unit tests</p></li>
-<li><p>Use PSO for automatic gain tuning</p></li>
-</ul>
-<p><strong>When to Create Custom Controllers:</strong></p>
-<p>✅ Research on novel SMC variants
+<section id="part-8-exercise-implement-fast-terminal-smc-challenge-implement-fast-terminal-smc-ftsmc-which-uses-a-different-sliding-surface">
+<h2>Part 8: Exercise: Implement Fast Terminal SMC <strong>Challenge:</strong> Implement <strong>Fast Terminal SMC</strong> (FTSMC), which uses a different sliding surface: ```<a class="headerlink" href="#part-8-exercise-implement-fast-terminal-smc-challenge-implement-fast-terminal-smc-ftsmc-which-uses-a-different-sliding-surface" title="Link to this heading">¶</a></h2>
+<p>s = θ₁ + β₁·sign(dθ₁)·|dθ₁|^α + θ₂ + β₂·sign(dθ₂)·|dθ₂|^γ</p>
+<div class="highlight-**Requirements:** notranslate"><div class="highlight"><pre><span></span>
+1. Create `src/controllers/smc/fast_terminal_smc.py`
+2. Add to factory with type `SMCType.FAST_TERMINAL`
+3. Add configuration to `config.yaml`
+4. Write unit tests
+5. Run PSO optimization
+6. Compare performance with Terminal SMC and Classical SMC **Expected Learning:**
+- Understand how different sliding surface designs affect performance
+- Practice the full controller development workflow
+- Gain intuition for SMC design choices
+
+---
+
+## Summary **Controller Development Workflow:** 1. **Design:** Define control law mathematically
+
+2. **Implement:** Create Python class with standard interface
+3. **Validate:** Add gain checking and error handling
+4. **Integrate:** Add to factory and configuration
+5. **Test:** Write unit tests and manual testing
+6. **Optimize:** Use PSO to tune gains
+7. **Compare:** Benchmark against existing controllers **Key Takeaways:** - Controllers must implement `compute_control(state, state_vars, history)`
+- Always validate gains in `__init__` (count, bounds, constraints)
+- Use weakref for dynamics model to avoid circular references
+- Add logging for debugging
+- Write unit tests
+- Use PSO for automatic gain tuning **When to Create Custom Controllers:** ✅ Research on novel SMC variants
 ✅ Application-specific requirements (constraints, objectives)
 ✅ Comparing different control strategies
-✅ Educational purposes</p>
-</section>
-<hr class="docutils" />
-<section id="next-steps">
-<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">¶</a></h2>
-<p><strong>Next Tutorial:</strong> <a class="reference internal" href="tutorial-05-research-workflow.html"><span class="std std-doc">Tutorial 05: Research Workflows</span></a> - End-to-end project from theory to publication</p>
-<p><strong>Related Guides:</strong></p>
-<ul class="simple">
-<li><p><a class="reference internal" href="../api/controllers.html"><span class="std std-doc">Controllers API</span></a>: Factory integration and controller interfaces</p></li>
-<li><p><a class="reference internal" href="../how-to/testing-validation.html"><span class="std std-doc">Testing &amp; Validation How-To</span></a>: Comprehensive testing strategies</p></li>
-</ul>
-<p><strong>Theory &amp; Foundations:</strong></p>
-<ul class="simple">
-<li><p><a class="reference internal" href="../theory/smc-theory.html"><span class="std std-doc">SMC Theory Guide</span></a>: Design principles for custom controllers</p>
-<ul>
-<li><p>Practical design guidelines</p></li>
-<li><p>Gain selection via pole placement</p></li>
-<li><p>Robustness analysis</p></li>
-<li><p>Classical vs Super-Twisting comparison</p></li>
-</ul>
-</li>
-</ul>
-<p><strong>Advanced Topics:</strong></p>
-<ul class="simple">
-<li><p>Adaptive laws and parameter estimation</p></li>
-<li><p>Observer design for state estimation</p></li>
-<li><p>Disturbance estimation and rejection</p></li>
-<li><p>Real hardware deployment (coming soon)</p></li>
-</ul>
-<p><strong>Congratulations!</strong> You can now design and implement custom SMC controllers for the DIP system.</p>
+✅ Educational purposes
+
+---
+
+## Next Steps **Next Tutorial:** [Tutorial 05: Research Workflows](tutorial-05-research-workflow.md) - End-to-end project from theory to publication **Related Guides:**
+
+- [Controllers API](../api/controllers.md): Factory integration and controller interfaces
+- [Testing &amp; Validation How-To](../how-to/testing-validation.md): testing strategies **Theory &amp; Foundations:**
+- [SMC Theory Guide](../theory/smc-theory.md): Design principles for custom controllers - Practical design guidelines - Gain selection via pole placement - Robustness analysis - Classical vs Super-Twisting comparison **Advanced Topics:**
+- Adaptive laws and parameter estimation
+- Observer design for state estimation
+- Disturbance estimation and rejection
+- Real hardware deployment (coming soon) **Congratulations!** You can now design and implement custom SMC controllers for the DIP system.
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -1354,7 +522,7 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 08, 2025</div>
+              Last updated on Oct 10, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1375,50 +543,34 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Tutorial 04: Custom Controller Development</a><ul>
-<li><a class="reference internal" href="#learning-objectives">Learning Objectives</a></li>
-<li><a class="reference internal" href="#part-1-controller-architecture-overview">Part 1: Controller Architecture Overview</a><ul>
-<li><a class="reference internal" href="#the-controller-interface">The Controller Interface</a></li>
-<li><a class="reference internal" href="#key-components">Key Components</a></li>
+<li><a class="reference internal" href="#">Tutorial 04: Custom Controller Development <strong>Level:</strong> Advanced</a><ul>
+<li><a class="reference internal" href="#part-1-controller-architecture-overview-the-controller-interface-all-controllers-in-this-framework-implement-a-consistent-interface-python">Part 1: Controller Architecture Overview ### The Controller Interface All controllers in this framework implement a <strong>consistent interface</strong>: ```python</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#part-2-implementing-a-terminal-smc-tsmc">Part 2: Implementing a Terminal SMC (TSMC)</a><ul>
-<li><a class="reference internal" href="#what-is-terminal-smc">What is Terminal SMC?</a></li>
-<li><a class="reference internal" href="#step-1-create-the-controller-file">Step 1: Create the Controller File</a></li>
-<li><a class="reference internal" href="#step-2-create-output-dataclass">Step 2: Create Output Dataclass</a></li>
+<li><a class="reference internal" href="#example-metadata">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false-class-mycustomcontroller-def-init-self-gains-max-force-kwargs-initialize-controller-with-gains-and-parameters-pass-def-compute-control-self-state-state-vars-history-compute-control-signal-for-current-state-parameters-state-np-ndarray-state-vector-x-dx-1-d1-2-d2-state-vars-dict-controller-specific-internal-state-history-dict-historical-data-for-multi-step-algorithms-returns-control-float-control-input-force-applied-to-cart-state-vars-dict-updated-internal-state-history-dict-updated-history-pass-def-initialize-history-self-dict-initialize-history-buffer-for-controller-return-def-cleanup-self-clean-up-resources-optional-pass">runnable: false class MyCustomController: def <strong>init</strong>(self, gains, max_force, **kwargs): “””Initialize controller with gains and parameters.””” pass def compute_control(self, state, state_vars, history): “”” Compute control signal for current state. Parameters ———- state : np.ndarray State vector [x, dx, θ₁, dθ₁, θ₂, dθ₂] state_vars : dict Controller-specific internal state history : dict Historical data for multi-step algorithms Returns ——- control : float Control input (force applied to cart) state_vars : dict Updated internal state history : dict Updated history “”” pass def initialize_history(self) -&gt; dict: “””Initialize history buffer for controller.””” return {} def cleanup(self): “””Clean up resources (optional).””” pass</a><ul>
+<li><a class="reference internal" href="#part-2-implementing-a-terminal-smc-tsmc-what-is-terminal-smc-terminal-sliding-mode-control-uses-a-nonlinear-sliding-surface-with-fractional-powers-to-achieve-finite-time-convergence-faster-than-asymptotic-classical-smc-sliding-surface">Part 2: Implementing a Terminal SMC (TSMC) ### What is Terminal SMC? <strong>Terminal Sliding Mode Control</strong> uses a <strong>nonlinear sliding surface</strong> with fractional powers to achieve <strong>finite-time convergence</strong> (faster than asymptotic). <strong>Classical SMC Sliding Surface:</strong></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#part-3-factory-integration">Part 3: Factory Integration</a><ul>
-<li><a class="reference internal" href="#step-1-add-to-smc-factory">Step 1: Add to SMC Factory</a></li>
-<li><a class="reference internal" href="#step-2-add-configuration-support">Step 2: Add Configuration Support</a></li>
+<li><a class="reference internal" href="#id1">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false">runnable: false #======================================================================================\</a><ul>
+<li><a class="reference internal" href="#part-4-testing-your-custom-controller-manual-testing-bash">Part 4: Testing Your Custom Controller ### Manual Testing ```bash</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#part-4-testing-your-custom-controller">Part 4: Testing Your Custom Controller</a><ul>
-<li><a class="reference internal" href="#manual-testing">Manual Testing</a></li>
-<li><a class="reference internal" href="#unit-testing">Unit Testing</a></li>
+<li><a class="reference internal" href="#test-terminal-smc-with-default-configuration">Test terminal SMC with default configuration</a><ul>
+<li><a class="reference internal" href="#part-5-pso-optimization-of-custom-controller-configure-pso-bounds-edit-config-yaml-yaml">Part 5: PSO Optimization of Custom Controller ### Configure PSO Bounds Edit <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>: ```yaml</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#part-5-pso-optimization-of-custom-controller">Part 5: PSO Optimization of Custom Controller</a><ul>
-<li><a class="reference internal" href="#configure-pso-bounds">Configure PSO Bounds</a></li>
-<li><a class="reference internal" href="#run-pso-optimization">Run PSO Optimization</a></li>
-<li><a class="reference internal" href="#compare-with-classical-smc">Compare with Classical SMC</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#part-6-advanced-customization">Part 6: Advanced Customization</a><ul>
-<li><a class="reference internal" href="#adding-equivalent-control">Adding Equivalent Control</a></li>
+<li><a class="reference internal" href="#optimize-terminal-smc-gains">Optimize terminal SMC gains</a></li>
+<li><a class="reference internal" href="#test-optimized-terminal-smc">Test optimized terminal SMC</a><ul>
 <li><a class="reference internal" href="#adding-state-variables-e-g-integral-term">Adding State Variables (e.g., Integral Term)</a></li>
+<li><a class="reference internal" href="#part-7-best-practices-1-gain-validation-always-validate-gains-in-init-python">Part 7: Best Practices ### 1. Gain Validation <strong>Always validate gains in <code class="docutils literal notranslate"><span class="pre">__init__</span></code>:</strong> ```python</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#part-7-best-practices">Part 7: Best Practices</a><ul>
-<li><a class="reference internal" href="#gain-validation">1. Gain Validation</a></li>
-<li><a class="reference internal" href="#numerical-robustness">2. Numerical Robustness</a></li>
-<li><a class="reference internal" href="#logging-and-debugging">3. Logging and Debugging</a></li>
-<li><a class="reference internal" href="#memory-management">4. Memory Management</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#part-8-exercise-implement-fast-terminal-smc">Part 8: Exercise: Implement Fast Terminal SMC</a></li>
-<li><a class="reference internal" href="#summary">Summary</a></li>
-<li><a class="reference internal" href="#next-steps">Next Steps</a></li>
+<li><a class="reference internal" href="#id2">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false-def-init-self-gains-check-count-if-len-gains-expected-count-raise-valueerror-f-expected-expected-count-gains-got-len-gains-check-bounds-if-any-g-0-for-g-in-gains-4-surface-gains-must-be-positive-raise-valueerror-surface-gains-must-be-non-negative-check-constraints-e-g-exponents-in-0-1-if-not-0-alpha-1-raise-valueerror-f-exponent-must-be-in-0-1-got-alpha">runnable: false def <strong>init</strong>(self, gains, …): # Check count if len(gains) != expected_count: raise ValueError(f”Expected {expected_count} gains, got {len(gains)}”) # Check bounds if any(g &lt; 0 for g in gains[:4]): # Surface gains must be positive raise ValueError(“Surface gains must be non-negative”) # Check constraints (e.g., exponents in (0,1)) if not (0 &lt; alpha &lt; 1): raise ValueError(f”Exponent α must be in (0,1), got {alpha}”)</a></li>
+<li><a class="reference internal" href="#bad-division-by-zero">Bad: Division by zero</a><ul>
+<li><a class="reference internal" href="#part-8-exercise-implement-fast-terminal-smc-challenge-implement-fast-terminal-smc-ftsmc-which-uses-a-different-sliding-surface">Part 8: Exercise: Implement Fast Terminal SMC <strong>Challenge:</strong> Implement <strong>Fast Terminal SMC</strong> (FTSMC), which uses a different sliding surface: ```</a></li>
 </ul>
 </li>
 </ul>
@@ -1431,9 +583,9 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=4ebf8126"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>

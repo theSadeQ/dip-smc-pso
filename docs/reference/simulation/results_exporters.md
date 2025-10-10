@@ -13,7 +13,7 @@ Export simulation results to various formats.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -43,7 +43,7 @@ Export batch simulation results to CSV.
 
 [View full source →](#method-csvexporter-export_batch)
 
----
+
 
 ### `HDF5Exporter`
 
@@ -71,7 +71,7 @@ Export batch simulation results to HDF5.
 
 [View full source →](#method-hdf5exporter-export_batch)
 
----
+
 
 ## Dependencies
 
@@ -133,46 +133,50 @@ graph TD
 
 \`\`\`python
 # Basic usage example
+
 from src.simulation.results import Component
 
 component = Component()
 result = component.process(data)
 \`\`\`
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 \`\`\`python
 # Advanced configuration
+
 component = Component(
     option1=value1,
     option2=value2
 )
 \`\`\`
 
-### Example 3: Integration with Framework
+## Example 3: Integration with Framework
 
 \`\`\`python
 # Integration example
+
 from src.simulation import SimulationRunner
 
 runner = SimulationRunner()
 runner.use_component(component)
 \`\`\`
 
-### Example 4: Performance Optimization
+## Example 4: Performance Optimization
 
 \`\`\`python
 # Performance-optimized usage
+
 component = Component(enable_caching=True)
 \`\`\`
 
-### Example 5: Error Handling
+## Example 5: Error Handling
 
 \`\`\`python
 # Error handling
+
 try:
     result = component.process(data)
 except ComponentError as e:
     print(f"Error: {e}")
 \`\`\`
-

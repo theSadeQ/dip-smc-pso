@@ -13,7 +13,7 @@ Configuration schemas and models for the DIP SMC PSO project.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -29,7 +29,7 @@ Configuration schemas and models for the DIP SMC PSO project.
 :linenos:
 ```
 
----
+
 
 ### `PhysicsConfig`
 
@@ -53,7 +53,7 @@ Configuration schemas and models for the DIP SMC PSO project.
 
 [View full source →](#method-physicsconfig-_validate_com_within_length)
 
----
+
 
 ### `PhysicsUncertaintySchema`
 
@@ -67,7 +67,7 @@ Configuration schemas and models for the DIP SMC PSO project.
 :linenos:
 ```
 
----
+
 
 ### `SimulationConfig`
 
@@ -95,7 +95,7 @@ Configuration schemas and models for the DIP SMC PSO project.
 
 [View full source →](#method-simulationconfig-_initial_state_valid)
 
----
+
 
 ### `_BaseControllerConfig`
 
@@ -115,7 +115,7 @@ Configuration schemas and models for the DIP SMC PSO project.
 
 [View full source →](#method-_basecontrollerconfig-__iter__)
 
----
+
 
 ### `ControllerConfig`
 
@@ -129,7 +129,7 @@ Configuration schemas and models for the DIP SMC PSO project.
 :linenos:
 ```
 
----
+
 
 ### `ClassicalSMCConfig`
 
@@ -145,7 +145,7 @@ Configuration for Classical Sliding Mode Controller.
 :linenos:
 ```
 
----
+
 
 ### `STASMCConfig`
 
@@ -161,7 +161,7 @@ Configuration for Super-Twisting Algorithm Sliding Mode Controller.
 :linenos:
 ```
 
----
+
 
 ### `AdaptiveSMCConfig`
 
@@ -183,7 +183,7 @@ Configuration for Adaptive Sliding Mode Controller.
 
 [View full source →](#method-adaptivesmcconfig-_validate_adaptive_bounds)
 
----
+
 
 ### `SwingUpSMCConfig`
 
@@ -199,7 +199,7 @@ Configuration for Swing-Up Sliding Mode Controller.
 :linenos:
 ```
 
----
+
 
 ### `HybridAdaptiveSTASMCConfig`
 
@@ -221,7 +221,7 @@ Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller.
 
 [View full source →](#method-hybridadaptivestasmcconfig-_validate_hybrid_constraints)
 
----
+
 
 ### `PermissiveControllerConfig`
 
@@ -241,7 +241,7 @@ Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller.
 
 [View full source →](#method-permissivecontrollerconfig-_collect_unknown_params)
 
----
+
 
 ### `ControllersConfig`
 
@@ -273,7 +273,7 @@ Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller.
 
 [View full source →](#method-controllersconfig-__getitem__)
 
----
+
 
 ### `PSOBounds`
 
@@ -287,7 +287,7 @@ Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller.
 :linenos:
 ```
 
----
+
 
 ### `PSOBoundsWithControllers`
 
@@ -301,7 +301,7 @@ Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller.
 :linenos:
 ```
 
----
+
 
 ### `PSOConfig`
 
@@ -315,7 +315,7 @@ Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller.
 :linenos:
 ```
 
----
+
 
 ### `CostFunctionWeights`
 
@@ -329,7 +329,7 @@ Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller.
 :linenos:
 ```
 
----
+
 
 ### `CombineWeights`
 
@@ -343,7 +343,7 @@ Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller.
 :linenos:
 ```
 
----
+
 
 ### `CostFunctionConfig`
 
@@ -357,7 +357,7 @@ Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller.
 :linenos:
 ```
 
----
+
 
 ### `VerificationConfig`
 
@@ -371,7 +371,7 @@ Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller.
 :linenos:
 ```
 
----
+
 
 ### `SensorsConfig`
 
@@ -385,7 +385,7 @@ Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller.
 :linenos:
 ```
 
----
+
 
 ### `HILConfig`
 
@@ -399,7 +399,7 @@ Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller.
 :linenos:
 ```
 
----
+
 
 ### `FDIConfig`
 
@@ -423,7 +423,7 @@ Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller.
 
 [View full source →](#method-fdiconfig-_validate_weights_length)
 
----
+
 
 ### `LDRConfig`
 
@@ -439,7 +439,7 @@ Lyapunov Decrease Ratio monitoring configuration.
 :linenos:
 ```
 
----
+
 
 ### `SaturationConfig`
 
@@ -455,7 +455,7 @@ Saturation monitoring configuration.
 :linenos:
 ```
 
----
+
 
 ### `ConditioningConfig`
 
@@ -471,7 +471,7 @@ Dynamics conditioning monitoring configuration.
 :linenos:
 ```
 
----
+
 
 ### `DiagnosticsConfig`
 
@@ -487,7 +487,7 @@ Diagnostic checklist configuration.
 :linenos:
 ```
 
----
+
 
 ### `StabilityMonitoringConfig`
 
@@ -503,7 +503,7 @@ Stability monitoring configuration for Issue #1 resolution.
 :linenos:
 ```
 
----
+
 
 ### `FaultDetectionConfig`
 
@@ -519,7 +519,7 @@ Fault Detection and Isolation (FDI) configuration - Issue #18 resolution.
 :linenos:
 ```
 
----
+
 
 ## Functions
 
@@ -535,7 +535,7 @@ Redact sensitive values for logging.
 :linenos:
 ```
 
----
+
 
 ### `set_allow_unknown_config(_)`
 
@@ -549,7 +549,7 @@ Deprecated - use load_config(..., allow_unknown=True) instead.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

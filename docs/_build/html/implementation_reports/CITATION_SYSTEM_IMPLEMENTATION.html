@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="../">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -19,16 +19,16 @@
     margin-top: 0.5em;
 }
 </style>
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>Citation System Implementation Plan - DIP_SMC_PSO Documentation</title>
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Citation System Implementation Plan ## Overview Implementation of a citation and bibliography system for the DIP_SMC_PSO documentation, based on ChatGPT’s analysis and the existing strategy in CLAUDE.md. ## Source Analysis Analyzed ChatGPT Implementation: - DIP_SMC_PSO Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f5a89ef9" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=8a7e329d" />
     
     
 
@@ -163,14 +163,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -180,8 +176,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -189,17 +184,15 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -207,7 +200,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
-  
   
   <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
   
@@ -219,254 +211,12 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">Theory Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">3. System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plant_model.html">1.x Plant Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../plant/models_guide.html">Plant Models Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../TESTING.html">Testing Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../test_protocols.html">5.x Test Protocols</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../context.html">2. Application Context</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference Documentation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography &amp; Academic References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../RELEASE_CHECKLIST.html">Release Checklist</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -492,232 +242,112 @@
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/implementation_reports/CITATION_SYSTEM_IMPLEMENTATION.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/implementation_reports/CITATION_SYSTEM_IMPLEMENTATION.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
 </div><div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section class="tex2jax_ignore mathjax_ignore" id="citation-system-implementation-plan">
-<h1>Citation System Implementation Plan<a class="headerlink" href="#citation-system-implementation-plan" title="Link to this heading">¶</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p>Implementation of a comprehensive citation and bibliography system for the DIP_SMC_PSO documentation, based on ChatGPT’s analysis and the existing strategy in <a class="reference external" href="http://CLAUDE.md">CLAUDE.md</a>.</p>
-</section>
-<section id="source-analysis">
-<h2>Source Analysis<a class="headerlink" href="#source-analysis" title="Link to this heading">¶</a></h2>
-<p><strong>Analyzed ChatGPT Implementation:</strong></p>
+          <section class="tex2jax_ignore mathjax_ignore" id="citation-system-implementation-plan-overview-implementation-of-a-citation-and-bibliography-system-for-the-dip-smc-pso-documentation-based-on-chatgpt-s-analysis-and-the-existing-strategy-in-claude-md-source-analysis-analyzed-chatgpt-implementation">
+<h1>Citation System Implementation Plan ## Overview Implementation of a citation and bibliography system for the DIP_SMC_PSO documentation, based on ChatGPT’s analysis and the existing strategy in <a class="reference external" href="http://CLAUDE.md">CLAUDE.md</a>. ## Source Analysis <strong>Analyzed ChatGPT Implementation:</strong><a class="headerlink" href="#citation-system-implementation-plan-overview-implementation-of-a-citation-and-bibliography-system-for-the-dip-smc-pso-documentation-based-on-chatgpt-s-analysis-and-the-existing-strategy-in-claude-md-source-analysis-analyzed-chatgpt-implementation" title="Link to this heading">¶</a></h1>
 <ul class="simple">
 <li><p>Location: <code class="docutils literal notranslate"><span class="pre">D:\Projects\main\chatgpt_analysis_files\task1_citation_bibliography_system\chatgpt</span> <span class="pre">final</span> <span class="pre">task</span> <span class="pre">1\</span></code></p></li>
 <li><p>Complete Sphinx-based citation system with <code class="docutils literal notranslate"><span class="pre">sphinxcontrib-bibtex</span></code></p></li>
 <li><p>Topical bibliography organization (SMC, PSO, DIP, Software)</p></li>
 <li><p>Citation mapping from numbered <code class="docutils literal notranslate"><span class="pre">[1]-[8]</span></code> to semantic keys</p></li>
-<li><p>Example RST documentation with proper citations</p></li>
+<li><p>Example RST documentation with proper citations ## Implementation Strategy ### 1. Bibliography Organization (Hybrid Topical → Alphabetical) <strong>Directory Structure:</strong></p></li>
 </ul>
-</section>
-<section id="implementation-strategy">
-<h2>Implementation Strategy<a class="headerlink" href="#implementation-strategy" title="Link to this heading">¶</a></h2>
-<section id="bibliography-organization-hybrid-topical-alphabetical">
-<h3>1. Bibliography Organization (Hybrid Topical → Alphabetical)<a class="headerlink" href="#bibliography-organization-hybrid-topical-alphabetical" title="Link to this heading">¶</a></h3>
-<p><strong>Directory Structure:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span><span class="o">/</span>
-  <span class="n">bib</span><span class="o">/</span>
-    <span class="n">smc</span><span class="o">.</span><span class="n">bib</span>         <span class="c1"># Sliding-mode control &amp; nonlinear control refs</span>
-    <span class="n">pso</span><span class="o">.</span><span class="n">bib</span>         <span class="c1"># PSO and related optimization refs</span>
-    <span class="n">dip</span><span class="o">.</span><span class="n">bib</span>         <span class="c1"># Inverted-pendulum / system modeling refs</span>
-    <span class="n">software</span><span class="o">.</span><span class="n">bib</span>    <span class="c1"># Packages, toolboxes, datasets</span>
-</pre></div>
-</div>
-</section>
-<section id="key-technologies-configuration">
-<h3>2. Key Technologies &amp; Configuration<a class="headerlink" href="#key-technologies-configuration" title="Link to this heading">¶</a></h3>
-<p><strong>Sphinx Extensions Required:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">sphinxcontrib.bibtex</span></code> for bibliography support</p></li>
-<li><p>Numeric citation style matching existing <code class="docutils literal notranslate"><span class="pre">[1]</span></code> format</p></li>
-<li><p>Multiple .bib file loading capability</p></li>
-</ul>
-<p><strong>Configuration Updates for <code class="docutils literal notranslate"><span class="pre">docs/conf.py</span></code>:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span><span class="o">/</span> <span class="n">bib</span><span class="o">/</span> <span class="n">smc</span><span class="o">.</span><span class="n">bib</span> <span class="c1"># Sliding-mode control &amp; nonlinear control refs pso.bib # PSO and related optimization refs dip.bib # Inverted-pendulum / system modeling refs software.bib # Packages, toolboxes, datasets</span>
+<span class="err">```</span> <span class="c1">### 2. Key Technologies &amp; Configuration **Sphinx Extensions Required:**</span>
 
-<span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="c1"># ... existing extensions</span>
-    <span class="s2">&quot;sphinxcontrib.bibtex&quot;</span><span class="p">,</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">sphinxcontrib</span><span class="o">.</span><span class="n">bibtex</span><span class="err">`</span> <span class="k">for</span> <span class="n">bibliography</span> <span class="n">support</span>
+<span class="o">-</span> <span class="n">Numeric</span> <span class="n">citation</span> <span class="n">style</span> <span class="n">matching</span> <span class="n">existing</span> <span class="err">`</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="err">`</span> <span class="nb">format</span>
+<span class="o">-</span> <span class="n">Multiple</span> <span class="o">.</span><span class="n">bib</span> <span class="n">file</span> <span class="n">loading</span> <span class="n">capability</span> <span class="o">**</span><span class="n">Configuration</span> <span class="n">Updates</span> <span class="k">for</span> <span class="err">`</span><span class="n">docs</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="n">py</span><span class="err">`</span><span class="p">:</span><span class="o">**</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false extensions = [ # ... existing extensions &quot;sphinxcontrib.bibtex&quot;,</span>
+<span class="p">]</span> <span class="n">bibtex_bibfiles</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;bib/smc.bib&quot;</span><span class="p">,</span> <span class="s2">&quot;bib/pso.bib&quot;</span><span class="p">,</span> <span class="s2">&quot;bib/dip.bib&quot;</span><span class="p">,</span> <span class="s2">&quot;bib/software.bib&quot;</span><span class="p">,</span>
 <span class="p">]</span>
-
-<span class="n">bibtex_bibfiles</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;bib/smc.bib&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;bib/pso.bib&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;bib/dip.bib&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;bib/software.bib&quot;</span><span class="p">,</span>
-<span class="p">]</span>
-<span class="n">bibtex_default_style</span> <span class="o">=</span> <span class="s2">&quot;unsrt&quot;</span>          <span class="c1"># stable ordering</span>
-<span class="n">bibtex_reference_style</span> <span class="o">=</span> <span class="s2">&quot;label&quot;</span>        <span class="c1"># renders [1], [2], ...</span>
+<span class="n">bibtex_default_style</span> <span class="o">=</span> <span class="s2">&quot;unsrt&quot;</span> <span class="c1"># stable ordering</span>
+<span class="n">bibtex_reference_style</span> <span class="o">=</span> <span class="s2">&quot;label&quot;</span> <span class="c1"># renders [1], [2], ...</span>
 <span class="n">bibtex_tooltips</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">bibtex_bibliography_header</span> <span class="o">=</span> <span class="s2">&quot;.. rubric:: References&quot;</span>
-</pre></div>
-</div>
-</section>
-<section id="citation-key-naming-convention">
-<h3>3. Citation Key Naming Convention<a class="headerlink" href="#citation-key-naming-convention" title="Link to this heading">¶</a></h3>
-<p><strong>Pattern:</strong> <code class="docutils literal notranslate"><span class="pre">topic_authorYear_shortTitle</span></code> (snake_case, ASCII)</p>
-<p><strong>Topics:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">smc</span></code> - Sliding Mode Control</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pso</span></code> - Particle Swarm Optimization</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dip</span></code> - Double Inverted Pendulum systems</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">soft</span></code> - Software/tooling references</p></li>
-</ul>
-<p><strong>Examples:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">smc_slotine_li_1991_applied_nonlinear_control</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pso_kennedy_1995_particle_swarm_optimization</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dip_khalil_2002_nonlinear_systems</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">soft_numpy_2024_fundamental_package</span></code></p></li>
-</ul>
-</section>
-<section id="citation-mapping-existing-1-8-to-keys">
-<h3>4. Citation Mapping (Existing [1]-[8] to Keys)<a class="headerlink" href="#citation-mapping-existing-1-8-to-keys" title="Link to this heading">¶</a></h3>
-<p><strong>From ChatGPT’s <code class="docutils literal notranslate"><span class="pre">citation_map.json</span></code>:</strong></p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dip_khalil_2002_nonlinear_systems&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dip_khalil_2002_nonlinear_systems&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;3&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;smc_utkin_2013_sliding_mode_control&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;4&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;smc_slotine_li_1991_applied_nonlinear_control&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;smc_slotine_li_1991_applied_nonlinear_control&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;6&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;smc_levant_2003_higher_order_smc&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;7&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;smc_shtessel_2014_sliding_mode_control_and_observation&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;8&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dip_khalil_2002_nonlinear_systems&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="key-bibliography-entries">
-<h3>5. Key Bibliography Entries<a class="headerlink" href="#key-bibliography-entries" title="Link to this heading">¶</a></h3>
-<p><strong>SMC Theory (<code class="docutils literal notranslate"><span class="pre">smc.bib</span></code>):</strong></p>
-<ul class="simple">
-<li><p>Slotine &amp; Li (1991) - Applied Nonlinear Control</p></li>
-<li><p>Utkin et al. (2013) - Sliding Mode Control in Engineering</p></li>
-<li><p>Levant (2003) - Higher-order sliding modes</p></li>
-<li><p>Shtessel et al. (2014) - Sliding Mode Control and Observation</p></li>
-</ul>
-<p><strong>PSO Optimization (<code class="docutils literal notranslate"><span class="pre">pso.bib</span></code>):</strong></p>
-<ul class="simple">
-<li><p>Kennedy &amp; Eberhart (1995) - Original PSO paper</p></li>
-<li><p>Recent PSO reviews and applications</p></li>
-</ul>
-<p><strong>DIP Systems (<code class="docutils literal notranslate"><span class="pre">dip.bib</span></code>):</strong></p>
-<ul class="simple">
-<li><p>Khalil (2002) - Nonlinear Systems textbook</p></li>
-<li><p>DIP-specific control strategy papers</p></li>
-</ul>
-<p><strong>Software (<code class="docutils literal notranslate"><span class="pre">software.bib</span></code>):</strong></p>
-<ul class="simple">
-<li><p>NumPy, SciPy, Matplotlib citations</p></li>
-<li><p>Numerical methods for stiff ODEs</p></li>
-</ul>
-</section>
-<section id="usage-pattern">
-<h3>6. Usage Pattern<a class="headerlink" href="#usage-pattern" title="Link to this heading">¶</a></h3>
-<p><strong>In RST files:</strong></p>
-<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span>Text with citation <span class="na">:cite:</span><span class="nv">`smc_slotine_li_1991_applied_nonlinear_control`</span>.
+<span class="err">```</span> <span class="c1">### 3. Citation Key Naming Convention **Pattern:** `topic_authorYear_shortTitle` (snake_case, ASCII) **Topics:**</span>
 
-<span class="p">..</span> <span class="ow">rubric</span><span class="p">::</span> References
-<span class="p">..</span> <span class="ow">bibliography</span><span class="p">::</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">smc</span><span class="err">`</span> <span class="o">-</span> <span class="n">Sliding</span> <span class="n">Mode</span> <span class="n">Control</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">pso</span><span class="err">`</span> <span class="o">-</span> <span class="n">Particle</span> <span class="n">Swarm</span> <span class="n">Optimization</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">dip</span><span class="err">`</span> <span class="o">-</span> <span class="n">Double</span> <span class="n">Inverted</span> <span class="n">Pendulum</span> <span class="n">systems</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">soft</span><span class="err">`</span> <span class="o">-</span> <span class="n">Software</span><span class="o">/</span><span class="n">tooling</span> <span class="n">references</span> <span class="o">**</span><span class="n">Examples</span><span class="p">:</span><span class="o">**</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">smc_slotine_li_1991_applied_nonlinear_control</span><span class="err">`</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">pso_kennedy_1995_particle_swarm_optimization</span><span class="err">`</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">dip_khalil_2002_nonlinear_systems</span><span class="err">`</span>
+<span class="o">-</span> <span class="err">`</span><span class="n">soft_numpy_2024_fundamental_package</span><span class="err">`</span> <span class="c1">### 4. Citation Mapping (Existing [1]-[8] to Keys) **From ChatGPT&#39;s `citation_map.json`:**</span>
+<span class="err">```</span><span class="n">json</span>
+<span class="p">{</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;dip_khalil_2002_nonlinear_systems&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;dip_khalil_2002_nonlinear_systems&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;smc_utkin_2013_sliding_mode_control&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="s2">&quot;smc_slotine_li_1991_applied_nonlinear_control&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="s2">&quot;smc_slotine_li_1991_applied_nonlinear_control&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">:</span> <span class="s2">&quot;smc_levant_2003_higher_order_smc&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">:</span> <span class="s2">&quot;smc_shtessel_2014_sliding_mode_control_and_observation&quot;</span><span class="p">,</span> <span class="s2">&quot;8&quot;</span><span class="p">:</span> <span class="s2">&quot;dip_khalil_2002_nonlinear_systems&quot;</span>
+<span class="p">}</span>
+<span class="err">```</span> <span class="c1">### 5. Key Bibliography Entries **SMC Theory (`smc.bib`):**</span>
+
+<span class="o">-</span> <span class="n">Slotine</span> <span class="o">&amp;</span> <span class="n">Li</span> <span class="p">(</span><span class="mi">1991</span><span class="p">)</span> <span class="o">-</span> <span class="n">Applied</span> <span class="n">Nonlinear</span> <span class="n">Control</span>
+<span class="o">-</span> <span class="n">Utkin</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span> <span class="p">(</span><span class="mi">2013</span><span class="p">)</span> <span class="o">-</span> <span class="n">Sliding</span> <span class="n">Mode</span> <span class="n">Control</span> <span class="ow">in</span> <span class="n">Engineering</span>
+<span class="o">-</span> <span class="n">Levant</span> <span class="p">(</span><span class="mi">2003</span><span class="p">)</span> <span class="o">-</span> <span class="n">Higher</span><span class="o">-</span><span class="n">order</span> <span class="n">sliding</span> <span class="n">modes</span>
+<span class="o">-</span> <span class="n">Shtessel</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span> <span class="p">(</span><span class="mi">2014</span><span class="p">)</span> <span class="o">-</span> <span class="n">Sliding</span> <span class="n">Mode</span> <span class="n">Control</span> <span class="ow">and</span> <span class="n">Observation</span> <span class="o">**</span><span class="n">PSO</span> <span class="n">Optimization</span> <span class="p">(</span><span class="err">`</span><span class="n">pso</span><span class="o">.</span><span class="n">bib</span><span class="err">`</span><span class="p">):</span><span class="o">**</span>
+<span class="o">-</span> <span class="n">Kennedy</span> <span class="o">&amp;</span> <span class="n">Eberhart</span> <span class="p">(</span><span class="mi">1995</span><span class="p">)</span> <span class="o">-</span> <span class="n">Original</span> <span class="n">PSO</span> <span class="n">paper</span>
+<span class="o">-</span> <span class="n">Recent</span> <span class="n">PSO</span> <span class="n">reviews</span> <span class="ow">and</span> <span class="n">applications</span> <span class="o">**</span><span class="n">DIP</span> <span class="n">Systems</span> <span class="p">(</span><span class="err">`</span><span class="n">dip</span><span class="o">.</span><span class="n">bib</span><span class="err">`</span><span class="p">):</span><span class="o">**</span>
+<span class="o">-</span> <span class="n">Khalil</span> <span class="p">(</span><span class="mi">2002</span><span class="p">)</span> <span class="o">-</span> <span class="n">Nonlinear</span> <span class="n">Systems</span> <span class="n">textbook</span>
+<span class="o">-</span> <span class="n">DIP</span><span class="o">-</span><span class="n">specific</span> <span class="n">control</span> <span class="n">strategy</span> <span class="n">papers</span> <span class="o">**</span><span class="n">Software</span> <span class="p">(</span><span class="err">`</span><span class="n">software</span><span class="o">.</span><span class="n">bib</span><span class="err">`</span><span class="p">):</span><span class="o">**</span>
+<span class="o">-</span> <span class="n">NumPy</span><span class="p">,</span> <span class="n">SciPy</span><span class="p">,</span> <span class="n">Matplotlib</span> <span class="n">citations</span>
+<span class="o">-</span> <span class="n">Numerical</span> <span class="n">methods</span> <span class="k">for</span> <span class="n">stiff</span> <span class="n">ODEs</span> <span class="c1">### 6. Usage Pattern **In RST files:**</span>
+<span class="err">```</span><span class="n">rst</span>
+<span class="n">Text</span> <span class="k">with</span> <span class="n">citation</span> <span class="p">:</span><span class="n">cite</span><span class="p">:</span><span class="err">`</span><span class="n">smc_slotine_li_1991_applied_nonlinear_control</span><span class="err">`</span><span class="o">.</span> <span class="o">..</span> <span class="n">rubric</span><span class="p">::</span> <span class="n">References</span>
+<span class="o">..</span> <span class="n">bibliography</span><span class="p">::</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Replacement</span> <span class="n">Process</span><span class="p">:</span><span class="o">**</span>
+
+<span class="o">-</span> <span class="n">Replace</span> <span class="err">`</span>\<span class="p">[([</span><span class="mi">1</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span>\<span class="n">d</span><span class="o">*</span><span class="p">)</span>\<span class="p">]</span><span class="err">`</span> <span class="k">with</span> <span class="err">`</span><span class="p">:</span><span class="n">cite</span><span class="p">:</span><span class="err">`</span><span class="n">KEY</span><span class="err">``</span> <span class="n">using</span> <span class="n">mapping</span>
+<span class="o">-</span> <span class="n">Add</span> <span class="err">`</span><span class="o">..</span> <span class="n">bibliography</span><span class="p">::</span><span class="err">`</span> <span class="n">sections</span> <span class="n">to</span> <span class="n">pages</span> <span class="k">with</span> <span class="n">citations</span> <span class="c1">## Implementation Tasks ### ✅ Completed</span>
+<span class="mf">1.</span> <span class="n">Examine</span> <span class="n">ChatGPT</span><span class="s1">&#39;s citation system implementation files</span>
+<span class="mf">2.</span> <span class="n">Read</span> <span class="ow">and</span> <span class="n">analyze</span> <span class="n">the</span> <span class="n">bibliography</span> <span class="n">structure</span> <span class="ow">and</span> <span class="n">configuration</span> <span class="c1">### 🔄 In Progress</span>
+<span class="mf">3.</span> <span class="n">Create</span> <span class="n">docs</span><span class="o">/</span><span class="n">bib</span><span class="o">/</span> <span class="n">directory</span> <span class="n">structure</span> <span class="ow">in</span> <span class="n">current</span> <span class="n">project</span> <span class="c1">### ⏳ Pending</span>
+<span class="mf">4.</span> <span class="n">Copy</span> <span class="ow">and</span> <span class="n">adapt</span> <span class="n">bibliography</span> <span class="n">files</span> <span class="p">(</span><span class="n">smc</span><span class="o">.</span><span class="n">bib</span><span class="p">,</span> <span class="n">pso</span><span class="o">.</span><span class="n">bib</span><span class="p">,</span> <span class="n">dip</span><span class="o">.</span><span class="n">bib</span><span class="p">,</span> <span class="n">software</span><span class="o">.</span><span class="n">bib</span><span class="p">)</span>
+<span class="mf">5.</span> <span class="n">Update</span> <span class="n">docs</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="n">py</span> <span class="k">with</span> <span class="n">sphinxcontrib</span><span class="o">-</span><span class="n">bibtex</span> <span class="n">configuration</span>
+<span class="mf">6.</span> <span class="n">Implement</span> <span class="n">citation</span> <span class="n">mapping</span> <span class="n">system</span> <span class="ow">and</span> <span class="n">replace</span> <span class="n">numbered</span> <span class="n">citations</span>
+<span class="mf">7.</span> <span class="n">Add</span> <span class="n">bibliography</span> <span class="n">sections</span> <span class="n">to</span> <span class="n">existing</span> <span class="n">documentation</span> <span class="n">pages</span>
+<span class="mf">8.</span> <span class="n">Test</span> <span class="ow">and</span> <span class="n">validate</span> <span class="n">the</span> <span class="n">citation</span> <span class="n">system</span> <span class="n">builds</span> <span class="n">correctly</span> <span class="c1">## Files to Process **Documentation files with numbered citations:**</span>
+<span class="o">-</span> <span class="n">Check</span> <span class="n">existing</span> <span class="err">`</span><span class="o">.</span><span class="n">rst</span><span class="err">`</span> <span class="n">files</span> <span class="ow">in</span> <span class="err">`</span><span class="n">docs</span><span class="o">/</span><span class="err">`</span> <span class="k">for</span> <span class="err">`</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="err">`</span><span class="o">-</span><span class="err">`</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="err">`</span> <span class="n">patterns</span>
+<span class="o">-</span> <span class="n">Verify</span> <span class="n">current</span> <span class="err">`</span><span class="n">docs</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="n">py</span><span class="err">`</span> <span class="n">configuration</span>
+<span class="o">-</span> <span class="n">Identify</span> <span class="n">pages</span> <span class="n">needing</span> <span class="n">bibliography</span> <span class="n">sections</span> <span class="o">**</span><span class="n">Dependencies</span><span class="p">:</span><span class="o">**</span>
+<span class="o">-</span> <span class="n">Ensure</span> <span class="err">`</span><span class="n">sphinxcontrib</span><span class="o">-</span><span class="n">bibtex</span><span class="err">`</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">requirements</span>
+<span class="o">-</span> <span class="n">Test</span> <span class="n">build</span> <span class="n">system</span> <span class="n">compatibility</span> <span class="c1">## Quality Standards **BibTeX Entry Requirements:**</span>
+<span class="o">-</span> <span class="n">Correct</span> <span class="n">entry</span> <span class="n">types</span> <span class="p">(</span><span class="nd">@book</span><span class="p">,</span> <span class="nd">@article</span><span class="p">,</span> <span class="nd">@inproceedings</span><span class="p">,</span> <span class="nd">@software</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Complete</span> <span class="n">metadata</span> <span class="p">(</span><span class="n">author</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">publisher</span><span class="o">/</span><span class="n">journal</span><span class="p">,</span> <span class="n">DOI</span><span class="o">/</span><span class="n">URL</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Consistent</span> <span class="n">formatting</span> <span class="ow">and</span> <span class="n">normalization</span>
+<span class="o">-</span> <span class="n">ASCII</span><span class="o">-</span><span class="n">safe</span> <span class="n">keys</span> <span class="n">following</span> <span class="n">convention</span> <span class="o">**</span><span class="n">Integration</span> <span class="n">Testing</span><span class="p">:</span><span class="o">**</span>
+<span class="o">-</span> <span class="n">Build</span> <span class="n">docs</span> <span class="k">with</span> <span class="err">`</span><span class="o">-</span><span class="n">W</span><span class="err">`</span> <span class="p">(</span><span class="n">warnings</span> <span class="k">as</span> <span class="n">errors</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Verify</span> <span class="nb">all</span> <span class="n">citations</span> <span class="n">resolve</span> <span class="n">correctly</span>
+<span class="o">-</span> <span class="n">Check</span> <span class="n">bibliography</span> <span class="n">rendering</span> <span class="n">quality</span>
+<span class="o">-</span> <span class="n">Validate</span> <span class="n">cross</span><span class="o">-</span><span class="n">references</span> <span class="ow">and</span> <span class="n">links</span> <span class="c1">## Next Steps 1. **Create directory structure** and copy bibliography files</span>
+<span class="mf">2.</span> <span class="o">**</span><span class="n">Update</span> <span class="n">Sphinx</span> <span class="n">configuration</span><span class="o">**</span> <span class="k">with</span> <span class="n">bibtex</span> <span class="n">settings</span>
+<span class="mf">3.</span> <span class="o">**</span><span class="n">Implement</span> <span class="n">citation</span> <span class="n">replacement</span><span class="o">**</span> <span class="n">using</span> <span class="n">mapping</span> <span class="n">file</span>
+<span class="mf">4.</span> <span class="o">**</span><span class="n">Add</span> <span class="n">bibliography</span> <span class="n">sections</span><span class="o">**</span> <span class="n">to</span> <span class="n">documentation</span> <span class="n">pages</span>
+<span class="mf">5.</span> <span class="o">**</span><span class="n">Test</span> <span class="n">complete</span> <span class="n">build</span> <span class="n">pipeline</span><span class="o">**</span> <span class="ow">and</span> <span class="n">validate</span> <span class="n">output</span>
+
+<span class="o">---</span>
+
+<span class="o">**</span><span class="n">File</span><span class="p">:</span><span class="o">**</span> <span class="err">`</span><span class="n">CITATION_SYSTEM_IMPLEMENTATION</span><span class="o">.</span><span class="n">md</span><span class="err">`</span>
+<span class="o">**</span><span class="n">Created</span><span class="p">:</span><span class="o">**</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">20</span>
+<span class="o">**</span><span class="n">Purpose</span><span class="p">:</span><span class="o">**</span> <span class="n">Implementation</span> <span class="n">roadmap</span> <span class="k">for</span> <span class="n">citation</span> <span class="n">system</span> <span class="n">based</span> <span class="n">on</span> <span class="n">ChatGPT</span> <span class="n">analysis</span>
 </pre></div>
 </div>
-<p><strong>Replacement Process:</strong></p>
-<ul class="simple">
-<li><p>Replace <code class="docutils literal notranslate"><span class="pre">\[([1-9]\d*)\]</span></code> with <code class="docutils literal notranslate"><span class="pre">:cite:</span></code>KEY`` using mapping</p></li>
-<li><p>Add <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">bibliography::</span></code> sections to pages with citations</p></li>
-</ul>
-</section>
-</section>
-<section id="implementation-tasks">
-<h2>Implementation Tasks<a class="headerlink" href="#implementation-tasks" title="Link to this heading">¶</a></h2>
-<section id="completed">
-<h3>✅ Completed<a class="headerlink" href="#completed" title="Link to this heading">¶</a></h3>
-<ol class="arabic simple">
-<li><p>Examine ChatGPT’s citation system implementation files</p></li>
-<li><p>Read and analyze the bibliography structure and configuration</p></li>
-</ol>
-</section>
-<section id="in-progress">
-<h3>🔄 In Progress<a class="headerlink" href="#in-progress" title="Link to this heading">¶</a></h3>
-<ol class="arabic simple" start="3">
-<li><p>Create docs/bib/ directory structure in current project</p></li>
-</ol>
-</section>
-<section id="pending">
-<h3>⏳ Pending<a class="headerlink" href="#pending" title="Link to this heading">¶</a></h3>
-<ol class="arabic simple" start="4">
-<li><p>Copy and adapt bibliography files (smc.bib, pso.bib, dip.bib, software.bib)</p></li>
-<li><p>Update docs/conf.py with sphinxcontrib-bibtex configuration</p></li>
-<li><p>Implement citation mapping system and replace numbered citations</p></li>
-<li><p>Add bibliography sections to existing documentation pages</p></li>
-<li><p>Test and validate the citation system builds correctly</p></li>
-</ol>
-</section>
-</section>
-<section id="files-to-process">
-<h2>Files to Process<a class="headerlink" href="#files-to-process" title="Link to this heading">¶</a></h2>
-<p><strong>Documentation files with numbered citations:</strong></p>
-<ul class="simple">
-<li><p>Check existing <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files in <code class="docutils literal notranslate"><span class="pre">docs/</span></code> for <code class="docutils literal notranslate"><span class="pre">[1]</span></code>-<code class="docutils literal notranslate"><span class="pre">[8]</span></code> patterns</p></li>
-<li><p>Verify current <code class="docutils literal notranslate"><span class="pre">docs/conf.py</span></code> configuration</p></li>
-<li><p>Identify pages needing bibliography sections</p></li>
-</ul>
-<p><strong>Dependencies:</strong></p>
-<ul class="simple">
-<li><p>Ensure <code class="docutils literal notranslate"><span class="pre">sphinxcontrib-bibtex</span></code> is in requirements</p></li>
-<li><p>Test build system compatibility</p></li>
-</ul>
-</section>
-<section id="quality-standards">
-<h2>Quality Standards<a class="headerlink" href="#quality-standards" title="Link to this heading">¶</a></h2>
-<p><strong>BibTeX Entry Requirements:</strong></p>
-<ul class="simple">
-<li><p>Correct entry types (&#64;book, &#64;article, &#64;inproceedings, &#64;software)</p></li>
-<li><p>Complete metadata (author, title, year, publisher/journal, DOI/URL)</p></li>
-<li><p>Consistent formatting and normalization</p></li>
-<li><p>ASCII-safe keys following convention</p></li>
-</ul>
-<p><strong>Integration Testing:</strong></p>
-<ul class="simple">
-<li><p>Build docs with <code class="docutils literal notranslate"><span class="pre">-W</span></code> (warnings as errors)</p></li>
-<li><p>Verify all citations resolve correctly</p></li>
-<li><p>Check bibliography rendering quality</p></li>
-<li><p>Validate cross-references and links</p></li>
-</ul>
-</section>
-<section id="next-steps">
-<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">¶</a></h2>
-<ol class="arabic simple">
-<li><p><strong>Create directory structure</strong> and copy bibliography files</p></li>
-<li><p><strong>Update Sphinx configuration</strong> with bibtex settings</p></li>
-<li><p><strong>Implement citation replacement</strong> using mapping file</p></li>
-<li><p><strong>Add bibliography sections</strong> to documentation pages</p></li>
-<li><p><strong>Test complete build pipeline</strong> and validate output</p></li>
-</ol>
-<hr class="docutils" />
-<p><strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">CITATION_SYSTEM_IMPLEMENTATION.md</span></code>
-<strong>Created:</strong> 2025-09-20
-<strong>Purpose:</strong> Implementation roadmap for comprehensive citation system based on ChatGPT analysis</p>
-</section>
 </section>
 
         </article>
@@ -737,7 +367,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 08, 2025</div>
+              Last updated on Oct 10, 2025</div>
           </div>
           <div class="right-details">
             
@@ -746,54 +376,16 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Citation System Implementation Plan</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a></li>
-<li><a class="reference internal" href="#source-analysis">Source Analysis</a></li>
-<li><a class="reference internal" href="#implementation-strategy">Implementation Strategy</a><ul>
-<li><a class="reference internal" href="#bibliography-organization-hybrid-topical-alphabetical">1. Bibliography Organization (Hybrid Topical → Alphabetical)</a></li>
-<li><a class="reference internal" href="#key-technologies-configuration">2. Key Technologies &amp; Configuration</a></li>
-<li><a class="reference internal" href="#citation-key-naming-convention">3. Citation Key Naming Convention</a></li>
-<li><a class="reference internal" href="#citation-mapping-existing-1-8-to-keys">4. Citation Mapping (Existing [1]-[8] to Keys)</a></li>
-<li><a class="reference internal" href="#key-bibliography-entries">5. Key Bibliography Entries</a></li>
-<li><a class="reference internal" href="#usage-pattern">6. Usage Pattern</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#implementation-tasks">Implementation Tasks</a><ul>
-<li><a class="reference internal" href="#completed">✅ Completed</a></li>
-<li><a class="reference internal" href="#in-progress">🔄 In Progress</a></li>
-<li><a class="reference internal" href="#pending">⏳ Pending</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#files-to-process">Files to Process</a></li>
-<li><a class="reference internal" href="#quality-standards">Quality Standards</a></li>
-<li><a class="reference internal" href="#next-steps">Next Steps</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=4ebf8126"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=08e7b316"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>

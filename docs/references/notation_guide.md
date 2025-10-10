@@ -106,7 +106,7 @@ def sliding_surface_matrix(self, c_params):
     return S
 ```
 
-### Control Law Components
+## Control Law Components
 
 | Mathematical Symbol | Description | Code Variable | Units | Source |
 |---------------------|-------------|---------------|-------|--------|
@@ -198,7 +198,7 @@ velocity = (self.w * velocity +
 position = position + velocity
 ```
 
-### Convergence Parameters
+## Convergence Parameters
 
 | Mathematical Symbol | Description | Code Variable | Typical Value | Source |
 |---------------------|-------------|---------------|---------------|--------|

@@ -194,7 +194,7 @@ sync.synchronize()
 # Plant and controller now running at same rate
 ```
 
-### Example 2: Clock Synchronization
+## Example 2: Clock Synchronization
 
 ```python
 from src.interfaces.hil.real_time_sync import ClockSync
@@ -248,7 +248,7 @@ t1.join()
 t2.join()
 ```
 
-### Example 4: Adaptive Rate Synchronization
+## Example 4: Adaptive Rate Synchronization
 
 ```python
 from src.interfaces.hil.real_time_sync import AdaptiveSync
@@ -311,7 +311,7 @@ print(f"Violation rate: {monitor.violation_rate * 100:.2f}%")
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -329,7 +329,7 @@ Real-time scheduling policy enumeration.
 :linenos:
 ```
 
----
+
 
 ### `TimingViolationType`
 
@@ -345,7 +345,7 @@ Timing violation type enumeration.
 :linenos:
 ```
 
----
+
 
 ### `TimingConstraints`
 
@@ -359,7 +359,7 @@ Real-time timing constraints.
 :linenos:
 ```
 
----
+
 
 ### `TimingEvent`
 
@@ -373,7 +373,7 @@ Timing event record.
 :linenos:
 ```
 
----
+
 
 ### `DeadlineMissHandler`
 
@@ -411,7 +411,7 @@ Get deadline miss statistics.
 
 [View full source →](#method-deadlinemisshandler-get_statistics)
 
----
+
 
 ### `RealTimeScheduler`
 
@@ -514,7 +514,7 @@ Record timing jitter.
 
 [View full source →](#method-realtimescheduler-_record_jitter)
 
----
+
 
 ### `HighResolutionTimer`
 
@@ -558,7 +558,7 @@ Sleep until specific time.
 
 [View full source →](#method-highresolutiontimer-sleep_until)
 
----
+
 
 ### `RTThreadScheduler`
 
@@ -596,7 +596,7 @@ Stop all threads.
 
 [View full source →](#method-rtthreadscheduler-stop_all_threads)
 
----
+
 
 ### `TimingSynchronizer`
 
@@ -634,7 +634,7 @@ Get synchronization statistics.
 
 [View full source →](#method-timingsynchronizer-get_sync_statistics)
 
----
+
 
 ## Dependencies
 

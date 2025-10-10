@@ -16,7 +16,7 @@ pneumatic actuators, and other motion control devices.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -34,7 +34,7 @@ Actuator type enumeration.
 :linenos:
 ```
 
----
+
 
 ### `ActuatorMode`
 
@@ -50,7 +50,7 @@ Actuator control mode enumeration.
 :linenos:
 ```
 
----
+
 
 ### `ActuatorCommand`
 
@@ -64,7 +64,7 @@ Actuator command data structure.
 :linenos:
 ```
 
----
+
 
 ### `ActuatorStatus`
 
@@ -78,7 +78,7 @@ Actuator status data structure.
 :linenos:
 ```
 
----
+
 
 ### `ActuatorLimits`
 
@@ -92,7 +92,7 @@ Actuator operational limits.
 :linenos:
 ```
 
----
+
 
 ### `ActuatorInterface`
 
@@ -222,7 +222,7 @@ Add command to execution queue.
 
 [View full source →](#method-actuatorinterface-_add_command_to_queue)
 
----
+
 
 ### `ServoActuator`
 
@@ -333,7 +333,7 @@ Add servo actuator support.
 
 [View full source →](#method-servoactuator-_add_servo_capabilities)
 
----
+
 
 ### `StepperMotor`
 
@@ -444,7 +444,7 @@ Add stepper motor support.
 
 [View full source →](#method-steppermotor-_add_stepper_capabilities)
 
----
+
 
 ### `PneumaticActuator`
 
@@ -543,7 +543,7 @@ Add pneumatic actuator support.
 
 [View full source →](#method-pneumaticactuator-_add_pneumatic_capabilities)
 
----
+
 
 ## Dependencies
 

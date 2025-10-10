@@ -132,14 +132,14 @@ config = {'parameter': 'value'}
 instance = Component(config)
 ```
 
-### Example 2: Performance Tuning
+## Example 2: Performance Tuning
 
 ```python
 # Adjust parameters for better performance
 optimized_params = tune_parameters(instance, target_performance)
 ```
 
-### Example 3: Integration with Optimization
+## Example 3: Integration with Optimization
 
 ```python
 # Use in complete optimization loop
@@ -147,7 +147,7 @@ optimizer = create_optimizer(opt_type, config)
 result = optimize(optimizer, problem, max_iter=100)
 ```
 
-### Example 4: Edge Case Handling
+## Example 4: Edge Case Handling
 
 ```python
 try:
@@ -170,7 +170,7 @@ print(f"Best fitness: {metrics.best_fitness:.3f}")
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -226,7 +226,7 @@ Simulation-based objectives are not inherently vectorized.
 
 [View full source →](#method-simulationbasedobjective-is_vectorized)
 
----
+
 
 ### `AnalyticalObjective`
 
@@ -274,7 +274,7 @@ Analytical objectives can be vectorized.
 
 [View full source →](#method-analyticalobjective-is_vectorized)
 
----
+
 
 ### `CompositeObjective`
 
@@ -328,7 +328,7 @@ Get individual objective evaluations.
 
 [View full source →](#method-compositeobjective-get_individual_evaluations)
 
----
+
 
 ### `PenaltyObjective`
 
@@ -376,7 +376,7 @@ Penalty objective inherits vectorization from base.
 
 [View full source →](#method-penaltyobjective-is_vectorized)
 
----
+
 
 ## Dependencies
 

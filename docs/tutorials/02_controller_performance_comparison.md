@@ -275,7 +275,7 @@ python simulate.py --ctrl hybrid_adaptive_sta_smc --plot
 python simulate.py --ctrl terminal_smc --plot
 ```
 
-### Exercise 2: Optimize with PSO
+## Exercise 2: Optimize with PSO
 
 ```bash
 # Optimize each controller type
@@ -284,7 +284,7 @@ python simulate.py --ctrl adaptive_smc --run-pso --save gains_adaptive.json
 python simulate.py --ctrl hybrid_adaptive_sta_smc --run-pso --save gains_hybrid.json
 ```
 
-### Exercise 3: Custom Comparison
+## Exercise 3: Custom Comparison
 
 Create your own comparison chart using the `chartjs` directive with your simulation results:
 

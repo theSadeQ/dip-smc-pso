@@ -1,16 +1,19 @@
 # interfaces.hil.__init__ **Source:** `src\interfaces\hil\__init__.py` ## Module Overview Enhanced Hardware-in-the-Loop (HIL) system for control engineering.
+
 This module provides advanced HIL features including real-time simulation,
 hardware integration, fault injection, and testing frameworks
 for control system validation and verification. ## Mathematical Foundation ### HIL Package Architecture The HIL package provides hardware-in-the-loop testing: ```{math}
 \text{HIL System} = (\text{Server}, \text{Client}, \text{Bridge}, \text{Sync}, \text{Logging})
 ``` ### System Integration **Component Interaction:**
 ```{math}
+
 \begin{align}
 \text{Server} &\xrightarrow{\vec{x}(t)} \text{Bridge} \xrightarrow{\vec{x}(t)} \text{Client} \\
 \text{Client} &\xrightarrow{u(t)} \text{Bridge} \xrightarrow{u(t)} \text{Server}
 \end{align}
 ``` ### End-to-End Latency **Total System Latency:**
 ```{math}
+
 T_{\text{e2e}} = T_{\text{server}} + T_{\text{bridge}} + T_{\text{network}} + T_{\text{client}}
 ``` **Latency Budget:**
 - Server: 1 ms (dynamics computation)
@@ -25,9 +28,11 @@ T_{\text{e2e}} = T_{\text{server}} + T_{\text{bridge}} + T_{\text{network}} + T_
 2. **Latency**: Round-trip time
 3. **Jitter**: Variance in latency ### Configuration Management **System Configuration:**
 ```{math}
+
 \mathcal{C}_{\text{system}} = \{C_{\text{server}}, C_{\text{client}}, C_{\text{bridge}}, C_{\text{sync}}\}
 ``` **Validation:**
 ```{math}
+
 \text{Valid}(\mathcal{C}) \Leftrightarrow \bigwedge_{i} \text{Constraint}_i(\mathcal{C})
 ``` ### Usage Patterns **1. Local HIL Testing:**
 - Same machine
@@ -40,6 +45,7 @@ T_{\text{e2e}} = T_{\text{server}} + T_{\text{bridge}} + T_{\text{network}} + T_
 - Mixed latency profiles ## Architecture Diagram ```{mermaid}
 graph TB subgraph HIL System A[Plant Server] <--> B[Simulation Bridge] B <--> C[Controller Client] D[Real-Time Sync] --> A D --> C E[Fault Injection] --> A E --> C F[Data Logging] --> A F --> C G[Test Automation] --> A G --> C H[Enhanced HIL] --> A H --> C end I[Configuration Manager] --> A I --> B I --> C I --> D I --> E I --> F I --> G I --> H J[Results Storage] <-- F J <-- G style A fill:#9cf style C fill:#9cf style B fill:#ff9 style I fill:#f9f
 ``` **System Components:**
+
 - **Core**: Server, Client, Bridge
 - **Timing**: Real-Time Sync
 - **Testing**: Fault Injection, Test Automation
@@ -65,6 +71,7 @@ t2.start()
 t1.join()
 t2.join()
 ``` ### Example 3: HIL with Fault Injection ```python
+
 from src.interfaces import hil # Setup with fault injection
 server = hil.PlantServer(cfg=config, bind_addr=("127.0.0.1", 5555), dt=0.01) # Add fault injector
 injector = hil.FaultInjector()
@@ -80,6 +87,7 @@ logger = hil.DataLogger("hil_results.h5", format="hdf5") # Attach to client
 client.set_logger(logger) # Run with logging
 server.start()
 ``` ### Example 5: Automated HIL Test Suite ```python
+
 from src.interfaces import hil # Create test suite
 suite = hil.TestSuite(name="Controller_Validation") # Add test cases
 suite.add_test( name="stability", initial_state=[0.0, 0.1, -0.05, 0.0, 0.0, 0.0], pass_criteria={"settling_time": 3.0}
@@ -91,7 +99,12 @@ print(f"Tests passed: {results.pass_count}/{results.total_count}")
 ``` ## Complete Source Code ```{literalinclude} ../../../src/interfaces/hil/__init__.py
 :language: python
 :linenos:
-``` --- ## Dependencies This module imports: - `from .enhanced_hil import EnhancedHILSystem, HILConfig, HILMode, TestScenario`
+```
+
+---
+
+## Dependencies This module imports: - `from .enhanced_hil import EnhancedHILSystem, HILConfig, HILMode, TestScenario`
+
 - `from .real_time_sync import RealTimeScheduler, TimingConstraints, DeadlineMissHandler`
 - `from .fault_injection import FaultInjector, FaultType, FaultScenario`
 - `from .test_automation import HILTestFramework, TestSuite, TestCase`

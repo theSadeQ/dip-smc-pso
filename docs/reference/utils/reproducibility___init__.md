@@ -16,7 +16,7 @@ reproducible results across experiments and simulations.
 :linenos:
 ```
 
----
+
 
 ## Functions
 
@@ -32,7 +32,7 @@ Dummy function for backward compatibility.
 :linenos:
 ```
 
----
+
 
 ### `random_seed_context(seed)`
 
@@ -46,7 +46,7 @@ Dummy context manager for backward compatibility.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -188,7 +188,7 @@ assert np.allclose(random_values_1, random_values_2)
 print("✓ Reproducibility verified")
 ```
 
-### Example 2: Monte Carlo with Reproducibility
+## Example 2: Monte Carlo with Reproducibility
 
 ```python
 from src.utils.reproducibility import set_seed
@@ -215,7 +215,7 @@ assert mean1 == mean2 and std1 == std2
 print("✓ Monte Carlo reproducibility confirmed")
 ```
 
-### Example 3: PSO Optimization Reproducibility
+## Example 3: PSO Optimization Reproducibility
 
 ```python
 from src.utils.reproducibility import set_seed
@@ -245,7 +245,7 @@ assert np.allclose(gains_run1, gains_run2)
 print("✓ PSO optimization is reproducible")
 ```
 
-### Example 4: State Capture and Restore
+## Example 4: State Capture and Restore
 
 ```python
 from src.utils.reproducibility import capture_random_state, restore_random_state
@@ -271,7 +271,7 @@ values_after = np.random.randn(5)
 print("State restoration allows sequence continuation")
 ```
 
-### Example 5: Experiment Reproducibility Framework
+## Example 5: Experiment Reproducibility Framework
 
 ```python
 from src.utils.reproducibility import set_seed, capture_random_state

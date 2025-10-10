@@ -35,13 +35,16 @@ tests/
 - **Error handling**: Exception scenarios and error messages **Standards**:
 ```python
 # example-metadata:
+
 # runnable: false def test_classical_smc_control_computation_valid_input(): """Test classical SMC control computation with valid state input.""" # Setup controller = ClassicalSMC(gains=[10, 8, 15, 12, 50, 5], max_force=100.0) state = np.array([0.1, 0.05, 0.02, 0.0, 0.0, 0.0]) # Execute control = controller.compute_control(state, 0.0, {}) # Verify assert isinstance(control, float) assert -100.0 <= control <= 100.0 # Within actuator limits assert not np.isnan(control) and not np.isinf(control) def test_classical_smc_invalid_state_dimension(): """Test classical SMC raises appropriate error for invalid state dimension.""" controller = ClassicalSMC(gains=[10, 8, 15, 12, 50, 5]) invalid_state = np.array([0.1, 0.05]) # Only 2 elements instead of 6 with pytest.raises(ValueError, match="State vector must have 6 elements"): controller.compute_control(invalid_state, 0.0, {})
+
 ``` ### 2. Property-Based Tests **Purpose**: Validate mathematical and control-theoretic properties **Requirements**:
 - **Stability properties**: Lyapunov stability verification
 - **Bound preservation**: Control saturation, state constraints
 - **Conservation laws**: Energy conservation (where applicable)
 - **Convergence properties**: SMC sliding surface convergence **Standards**:
 ```python
+
 from hypothesis import given, strategies as st @given( gains=st.lists(st.floats(min_value=0.1, max_value=100.0), min_size=6, max_size=6), state=st.lists(st.floats(min_value=-10.0, max_value=10.0), min_size=6, max_size=6)
 )
 def test_control_output_bounded_property(gains, state): """Property: Control output must always be within actuator limits.""" controller = ClassicalSMC(gains=gains, max_force=100.0) state_array = np.array(state) control = controller.compute_control(state_array, 0.0, {}) assert -100.0 <= control <= 100.0 assert not np.isnan(control) and not np.isinf(control) @given( initial_state=st.lists(st.floats(min_value=-1.0, max_value=1.0), min_size=6, max_size=6)
@@ -54,13 +57,16 @@ def test_lyapunov_stability_property(initial_state): """Property: Lyapunov funct
 - **Error propagation**: Graceful handling of component failures **Standards**:
 ```python
 # example-metadata:
+
 # runnable: false def test_complete_pso_optimization_workflow(): """Test complete PSO optimization workflow from CLI to results.""" # Setup configuration config = create_test_config( controller_type="classical_smc", pso_iterations=10, # Reduced for testing pso_particles=5 ) # Execute workflow results = run_pso_optimization_workflow(config) # Verify results assert results.optimization_successful assert len(results.optimized_gains) == 6 assert results.final_cost < results.initial_cost assert all(0.1 <= gain <= 100.0 for gain in results.optimized_gains) # Verify simulation with optimized gains controller = create_controller_from_gains(results.optimized_gains) simulation_result = run_simulation(controller, config.simulation) assert simulation_result.successful assert simulation_result.final_state_error < 0.1
+
 ``` ### 4. Performance Tests **Purpose**: Detect performance regressions and validate computational efficiency **Requirements**:
 - **Benchmark critical paths**: Control computation, PSO optimization, simulation
 - **Memory usage monitoring**: Detect memory leaks in long simulations
 - **Scaling validation**: Performance vs. simulation duration/complexity
 - **Regression detection**: Alert on >5% performance degradation **Standards**:
 ```python
+
 import pytest @pytest.mark.benchmark(group="control_computation")
 def test_classical_smc_performance(benchmark): """Benchmark classical SMC control computation performance.""" controller = ClassicalSMC(gains=[10, 8, 15, 12, 50, 5]) state = np.array([0.1, 0.05, 0.02, 0.0, 0.0, 0.0]) result = benchmark(controller.compute_control, state, 0.0, {}) # Performance requirements assert benchmark.stats.mean < 0.001 # Mean execution time < 1ms assert benchmark.stats.stddev < 0.0005 # Low variance @pytest.mark.benchmark(group="batch_simulation")
 def test_batch_simulation_scaling(benchmark): """Benchmark batch simulation scaling with number of trials.""" controller_factory = lambda: ClassicalSMC(gains=[10, 8, 15, 12, 50, 5]) def run_batch(n_trials=100): return run_multiple_trials(controller_factory, create_test_config(), n_trials) result = benchmark(run_batch) # Scaling requirements assert benchmark.stats.mean < 10.0 # 100 trials in < 10 seconds
@@ -71,7 +77,9 @@ def test_batch_simulation_scaling(benchmark): """Benchmark batch simulation scal
 - **Robustness validation**: Performance under parameter variations **Standards**:
 ```python
 # example-metadata:
+
 # runnable: false def test_sliding_surface_design_theory(): """Validate sliding surface design follows control theory principles.""" gains = [10, 8, 15, 12, 50, 5] # k1, k2, λ1, λ2, K, η # Extract gains according to theory k1, k2, λ1, λ2, K, η = gains # Theoretical requirements for stability assert k1 > 0 and k2 > 0, "Position gains must be positive" assert λ1 > 0 and λ2 > 0, "Surface parameters must be positive" assert K > 0, "Switching gain must be positive" assert η >= 0, "Boundary layer must be non-negative" # Pole placement verification characteristic_poly = [1, λ1 + λ2, λ1*λ2 + k1, k2*λ1] roots = np.roots(characteristic_poly) # All poles should have negative real parts for stability assert all(np.real(root) < 0 for root in roots), "System must be stable" def test_energy_conservation_in_simulation(): """Verify energy conservation in frictionless simulation.""" # Setup frictionless configuration config = create_test_config( friction_coefficients=[0.0, 0.0, 0.0], # No friction simulation_duration=5.0 ) controller = ClassicalSMC(gains=[10, 8, 15, 12, 50, 5]) result = run_simulation(controller, config) # Compute total energy throughout simulation potential_energy = compute_potential_energy(result.states, config.physics) kinetic_energy = compute_kinetic_energy(result.states, config.physics) total_energy = potential_energy + kinetic_energy # Energy should be approximately conserved (allowing for numerical errors) energy_variation = np.std(total_energy) / np.mean(total_energy) assert energy_variation < 0.01, "Energy should be conserved in frictionless system"
+
 ``` ## Quality Gates ### Coverage Requirements | Component Type | Minimum Coverage | Critical Coverage |
 |----------------|------------------|-------------------|
 | Controllers | 95% | 100% |
@@ -105,6 +113,7 @@ def test_batch_simulation_scaling(benchmark): """Benchmark batch simulation scal
 def valid_smc_gains(): """Generate valid SMC gain sets for testing.""" return [ [10.0, 8.0, 15.0, 12.0, 50.0, 5.0], # Typical values [5.0, 3.0, 8.0, 6.0, 25.0, 2.0], # Conservative gains [20.0, 15.0, 30.0, 25.0, 100.0, 10.0], # Aggressive gains ] @pytest.fixture
 def test_trajectories(): """Generate test state trajectories for validation.""" # Analytical approaches for linear cases # Numerical approaches for nonlinear cases # Edge cases and boundary conditions pass
 ``` ### Data Validation - **Schema Validation**: Pydantic models for all test data
+
 - **Physical Consistency**: Test data must respect physical laws
 - **Statistical Properties**: Generated data has expected distributions
 - **Reproducibility**: Seeded random generation for consistent tests ## Documentation Standards ### Test Documentation - **Purpose**: Clear description of what is being tested
@@ -113,7 +122,9 @@ def test_trajectories(): """Generate test state trajectories for validation.""" 
 - **Verification**: How results are validated
 - **References**: Link to theoretical sources ### Example Documentation ```python
 # example-metadata:
+
 # runnable: false def test_sliding_surface_convergence(): """Test that states converge to sliding surface under classical SMC. Theory: ------- Classical SMC guarantees finite-time convergence to sliding surface s(x) = 0 when switching gain K > uncertainty bound. Reference: Utkin, V. "Sliding Modes in Control and Optimization" Test Setup: ---------- - Initial state away from equilibrium - Classical SMC with sufficient switching gain - Simulation until convergence or timeout Verification: ------------ - |s(x(t))| → 0 as t increases - Convergence time < theoretical bound - No chattering beyond boundary layer """ # Test implementation here pass
+
 ``` ## Maintenance Guidelines ### Test Lifecycle 1. **Creation**: Tests written before/during feature development
 2. **Evolution**: Tests updated with feature changes
 3. **Optimization**: Performance optimization without functionality loss
@@ -124,4 +135,8 @@ def test_trajectories(): """Generate test state trajectories for validation.""" 
 2. **Determinism**: Tests should produce consistent results
 3. **Speed**: Unit tests should execute quickly
 4. **Clarity**: Tests should be self-documenting
-5. **Maintenance**: Tests should be easy to update --- *These standards ensure consistent, high-quality testing practices across the DIP SMC PSO project, supporting both research rigor and engineering excellence.*
+5. **Maintenance**: Tests should be easy to update
+
+---
+
+*These standards ensure consistent, high-quality testing practices across the DIP SMC PSO project, supporting both research rigor and engineering excellence.*

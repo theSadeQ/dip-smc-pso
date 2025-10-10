@@ -63,4 +63,3 @@ Generated: D:\Projects\main
 - **Target**: Chattering index < 2.0
 - **Convergence Criterion**: Standard deviation < 1.0 over 20-iteration window
 - **PSO Configuration**: 30 particles, 150 iterations, seed=42
-

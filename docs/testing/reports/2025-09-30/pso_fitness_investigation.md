@@ -9,7 +9,7 @@
 **Status**: 🔴 **ROOT CAUSE IDENTIFIED** - Excessive Baseline Normalization
 **Priority**: Critical - Blocks reliable PSO parameter tuning
 
----
+
 
 ## 📋 Executive Summary
 
@@ -25,7 +25,7 @@
 2. Reduce `state_error` weight from 50.0 to 1.0-5.0 range
 3. Add diagnostic logging to track normalization effects
 
----
+
 
 ## 🔍 Investigation Process
 
@@ -53,7 +53,7 @@ cost_function:
 2. **Suspicious Baseline Gains**: Values `[50, 100, 10, 8, 5, 4]` appear arbitrary
 3. **No Normalization Constants**: Missing explicit `norms` section
 
----
+
 
 ### Step 2: Code Analysis
 
@@ -90,9 +90,9 @@ self.norm_sigma = max(sigma_sq_base, 1e-12)
 
 **Problem**: If baseline gains produce **very poor performance**, the normalization denominators become **very large**.
 
----
 
-#### **Cost Computation with Normalization** (Lines 416-438)
+
+## **Cost Computation with Normalization** (Lines 416-438)
 
 ```python
 # example-metadata:
@@ -129,9 +129,9 @@ J = 50.0 * 1e-6 + 0.2 * 1e-6 + 0.1 * 1e-6 + 0.1 * 1e-6 + 0
   ≈ 5e-5  (rounds to 0.0 in log output)
 ```
 
----
 
-### Step 3: Normalization Analysis
+
+## Step 3: Normalization Analysis
 
 #### **Normalization Function** (Lines 450-472)
 
@@ -156,7 +156,7 @@ def _normalise(self, val: np.ndarray, denom: float) -> np.ndarray:
 5. Weighted cost: `50.0 * 0.0005 = 0.025`
 6. Total cost with other terms: `~0.03` (very small, rounds to 0 in logs)
 
----
+
 
 ## 🧪 Validation Experiment
 
@@ -192,7 +192,7 @@ python simulate.py --ctrl classical_smc --run-pso \
 
 **Expected Outcome**: Cost values should be non-zero and show meaningful variation
 
----
+
 
 ## 📊 Evidence from Logs
 
@@ -210,7 +210,7 @@ Final cost: 0.0 (Run 22)
 - Cost function lacks sensitivity
 - Normalization removes distinctions
 
----
+
 
 ### Symptom 2: Low Particle Count Warning
 
@@ -224,7 +224,7 @@ minimum of 10 particles. This may affect the optimization performance.
 - Premature convergence likely
 - Cannot escape local minima
 
----
+
 
 ### Symptom 3: Optimal Gains Consistency
 
@@ -237,7 +237,7 @@ optimal_gains = [77.62, 44.45, 17.31, 14.25, 18.66, 9.76]
 - Balanced gains indicate reasonable control
 - **BUT**: If cost function is broken, these may not be truly optimal
 
----
+
 
 ## 🔧 Recommended Fixes
 
@@ -258,7 +258,7 @@ cost_function:
 
 **Rationale**: Eliminates excessive normalization while maintaining cost sensitivity
 
----
+
 
 ### Fix 2: Use Explicit Normalization Constants (Alternative)
 
@@ -280,7 +280,7 @@ cost_function:
 
 **Rationale**: Controlled normalization with domain-appropriate scales
 
----
+
 
 ### Fix 3: Balance Cost Weights (Essential)
 
@@ -299,7 +299,7 @@ cost_function:
 - Allows PSO to balance multiple objectives
 - Typical control engineering practice: `state_error : control_effort = 10:1`
 
----
+
 
 ### Fix 4: Increase Particle Count (Essential)
 
@@ -315,7 +315,7 @@ pso:
 - Reduces premature convergence
 - Industry standard: 10-50 particles for 6-dimensional problems
 
----
+
 
 ## 🧬 Diagnostic Script
 
@@ -425,7 +425,7 @@ if __name__ == "__main__":
 python scripts/debug_pso_fitness.py
 ```
 
----
+
 
 ## 📈 Prevention Strategy
 
@@ -451,7 +451,7 @@ def validate_cost_function_config(cost_cfg):
         warnings.warn("No explicit normalization constants - using baseline or defaults")
 ```
 
----
+
 
 ### 2. Logging Enhancement
 
@@ -467,9 +467,9 @@ if logger.isEnabledFor(logging.DEBUG):
     logger.debug(f"Total cost: {J.mean():.6e}")
 ```
 
----
 
-### 3. Unit Tests
+
+## 3. Unit Tests
 
 **Create**: `tests/test_optimizer/test_pso_cost_sensitivity.py`
 
@@ -494,7 +494,7 @@ def test_cost_sensitivity():
     assert cost_bad > 1e-3, "Bad controller cost is suspiciously small"
 ```
 
----
+
 
 ## ✅ Success Criteria
 
@@ -505,13 +505,13 @@ def test_cost_sensitivity():
 4. ✅ PSO finds different solutions with different random seeds
 5. ✅ Unit tests pass for cost sensitivity
 
----
+
 
 ## 🔗 Navigation
 
 [🏠 Testing Home](../../README.md) | [📊 PSO Convergence Analysis](pso_convergence_analysis.md)
 
----
+
 
 **Investigation Complete**: September 30, 2025
 **Root Cause**: Excessive baseline normalization + unbalanced weights

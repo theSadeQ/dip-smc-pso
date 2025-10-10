@@ -145,7 +145,7 @@ instance = OrchestratorsBase()
 result = instance.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Custom configuration
@@ -154,7 +154,7 @@ instance = OrchestratorsBase(config)
 result = instance.process(data)
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 ```python
 try:
@@ -187,7 +187,7 @@ result = orchestrator.execute(instance.process(data))
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -273,7 +273,7 @@ Get current integrator.
 
 [View full source →](#method-baseorchestrator-get_integrator)
 
----
+
 
 ## Dependencies
 

@@ -1,0 +1,595 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Citation System - Phase 5: Final Review &amp; Publication Preparation Document Version: 1.0.0 - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8a7e329d" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">Theory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/plans/citation_system/06_phase5_final_review.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/plans/citation_system/06_phase5_final_review.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="citation-system-phase-5-final-review-publication-preparation-document-version-1-0-0">
+<h1>Citation System - Phase 5: Final Review &amp; Publication Preparation <strong>Document Version:</strong> 1.0.0<a class="headerlink" href="#citation-system-phase-5-final-review-publication-preparation-document-version-1-0-0" title="Link to this heading">¶</a></h1>
+<p><strong>Created:</strong> 2025-01-15
+<strong>Status:</strong> Planning Phase
+<strong>Estimated Duration:</strong> Week 9-10 (10-15 hours)</p>
+<hr class="docutils" />
+<section id="phase-overview-objective-prepare-academically-rigorous-documentation-for-peer-review-and-publication-input">
+<h2>Phase Overview <strong>Objective:</strong> Prepare academically rigorous documentation for peer review and publication. <strong>Input:</strong><a class="headerlink" href="#phase-overview-objective-prepare-academically-rigorous-documentation-for-peer-review-and-publication-input" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>500+ cited claims</p></li>
+<li><p>150-200 validated citations</p></li>
+<li><p>Quality validation reports <strong>Output:</strong></p></li>
+<li><p>Publication-ready documentation</p></li>
+<li><p>Academic integrity certification</p></li>
+<li><p>Peer review package</p></li>
+<li><p>Citation system documentation</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="final-review-tasks-1-academic-accuracy-review-5-hours-objective-verify-technical-correctness-of-citations-review-checklist-mathematical-theorems">
+<h2>Final Review Tasks ### 1. Academic Accuracy Review (5 hours) <strong>Objective:</strong> Verify technical correctness of citations <strong>Review Checklist:</strong> #### Mathematical Theorems<a class="headerlink" href="#final-review-tasks-1-academic-accuracy-review-5-hours-objective-verify-technical-correctness-of-citations-review-checklist-mathematical-theorems" title="Link to this heading">¶</a></h2>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Lyapunov stability theorems correctly cited</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Sliding mode control foundations accurate</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> PSO algorithm theory properly attributed</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Convergence proofs cite original sources #### Implementation Claims</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Controller designs cite seminal papers</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Algorithm implementations reference standards</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Performance metrics properly attributed</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Benchmark comparisons cite sources #### Performance Claims</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Experimental results properly qualified</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Comparative statements cite evidence</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Optimization results cite methodology</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Robustness claims supported by theory <strong>Manual Review Process:</strong></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false class AcademicReviewer: \&quot;\&quot;\&quot;Manual review assistant for academic accuracy.\&quot;\&quot;\&quot; def generate_review_checklist( self, claims_inventory: Path ) -&gt; List[ReviewItem]: \&quot;\&quot;\&quot;Generate checklist of claims to review.\&quot;\&quot;\&quot; claims = load_json(claims_inventory) # Prioritize critical claims critical = [c for c in claims if c[&#39;priority&#39;] == &#39;CRITICAL&#39;] review_items = [] for claim in critical: review_items.append(ReviewItem( claim_id=claim[&#39;id&#39;], claim_text=claim[&#39;text&#39;], citations=claim.get(&#39;citations&#39;, []), review_questions=[ &quot;Is the claim technically accurate?&quot;, &quot;Do citations support the claim?&quot;, &quot;Are seminal papers cited?&quot;, &quot;Is attribution complete?&quot; ] )) return review_items</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="citation-completeness-audit-3-hours-objective-ensure-all-critical-claims-are-properly-cited-audit-process-1-identify-uncited-critical-claims-bash-python-scripts-citations-find-uncited-claims-py-priority-critical-2-research-missing-citations-run-targeted-literature-search-identify-appropriate-references-add-to-bibliography-3-insert-missing-citations-bash-python-scripts-citations-insert-citations-py-claims-artifacts-uncited-critical-claims-json-apply-acceptance-100-of-critical-claims-cited">
+<h2>2. Citation Completeness Audit (3 hours) <strong>Objective:</strong> Ensure all critical claims are properly cited <strong>Audit Process:</strong> 1. <strong>Identify Uncited Critical Claims</strong> <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">python</span> <span class="pre">scripts/citations/find_uncited_claims.py</span> <span class="pre">--priority</span> <span class="pre">CRITICAL</span> </code> 2. <strong>Research Missing Citations</strong> - Run targeted literature search - Identify appropriate references - Add to bibliography 3. <strong>Insert Missing Citations</strong> <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">python</span> <span class="pre">scripts/citations/insert_citations.py</span> <span class="pre">\</span> <span class="pre">--claims</span> <span class="pre">artifacts/uncited_critical_claims.json</span> <span class="pre">\</span> <span class="pre">--apply</span> </code> <strong>Acceptance:</strong> 100% of critical claims cited<a class="headerlink" href="#citation-completeness-audit-3-hours-objective-ensure-all-critical-claims-are-properly-cited-audit-process-1-identify-uncited-critical-claims-bash-python-scripts-citations-find-uncited-claims-py-priority-critical-2-research-missing-citations-run-targeted-literature-search-identify-appropriate-references-add-to-bibliography-3-insert-missing-citations-bash-python-scripts-citations-insert-citations-py-claims-artifacts-uncited-critical-claims-json-apply-acceptance-100-of-critical-claims-cited" title="Link to this heading">¶</a></h2>
+<hr class="docutils" />
+<section id="attribution-quality-review-2-hours-objective-verify-proper-attribution-of-ideas-and-implementations-attribution-checklist-seminal-papers-all-foundational-works-cited-utkin-1977-sliding-mode-control-levant-2001-super-twisting-algorithm-kennedy-eberhart-1995-particle-swarm-optimization-implementation-sources-algorithm-implementations-properly-attributed-control-law-derivations-optimization-algorithms-numerical-methods-data-sources-performance-data-properly-attributed-benchmark-datasets-experimental-results-comparative-studies">
+<h3>3. Attribution Quality Review (2 hours) <strong>Objective:</strong> Verify proper attribution of ideas and implementations <strong>Attribution Checklist:</strong> - [ ] <strong>Seminal Papers:</strong> All foundational works cited - Utkin (1977) - Sliding mode control - Levant (2001) - Super-twisting algorithm - Kennedy &amp; Eberhart (1995) - Particle swarm optimization - [ ] <strong>Implementation Sources:</strong> Algorithm implementations properly attributed - Control law derivations - Optimization algorithms - Numerical methods - [ ] <strong>Data Sources:</strong> Performance data properly attributed - Benchmark datasets - Experimental results - Comparative studies<a class="headerlink" href="#attribution-quality-review-2-hours-objective-verify-proper-attribution-of-ideas-and-implementations-attribution-checklist-seminal-papers-all-foundational-works-cited-utkin-1977-sliding-mode-control-levant-2001-super-twisting-algorithm-kennedy-eberhart-1995-particle-swarm-optimization-implementation-sources-algorithm-implementations-properly-attributed-control-law-derivations-optimization-algorithms-numerical-methods-data-sources-performance-data-properly-attributed-benchmark-datasets-experimental-results-comparative-studies" title="Link to this heading">¶</a></h3>
+</section>
+<hr class="docutils" />
+<section id="publication-formatting-3-hours-objective-format-documentation-for-academic-standards-formatting-tasks-1-bibliography-formatting-convert-to-target-style-ieee-acm-apa-ensure-consistent-formatting-verify-all-required-fields-present-2-citation-style-inline-citations-1-author-year-or-author-year-reference-list-alphabetical-or-numerical-doi-url-formatting-3-figure-table-attribution-all-figures-properly-credited-table-data-sources-cited-reproduction-permissions-noted-conversion-tools">
+<h3>4. Publication Formatting (3 hours) <strong>Objective:</strong> Format documentation for academic standards <strong>Formatting Tasks:</strong> 1. <strong>Bibliography Formatting</strong> - Convert to target style (IEEE/ACM/APA) - Ensure consistent formatting - Verify all required fields present 2. <strong>Citation Style</strong> - Inline citations: <code class="docutils literal notranslate"><span class="pre">[1]</span></code>, <code class="docutils literal notranslate"><span class="pre">(Author,</span> <span class="pre">Year)</span></code>, or <code class="docutils literal notranslate"><span class="pre">Author</span> <span class="pre">[Year]</span></code> - Reference list: Alphabetical or numerical - DOI/URL formatting 3. <strong>Figure/Table Attribution</strong> - All figures properly credited - Table data sources cited - Reproduction permissions noted <strong>Conversion Tools:</strong><a class="headerlink" href="#publication-formatting-3-hours-objective-format-documentation-for-academic-standards-formatting-tasks-1-bibliography-formatting-convert-to-target-style-ieee-acm-apa-ensure-consistent-formatting-verify-all-required-fields-present-2-citation-style-inline-citations-1-author-year-or-author-year-reference-list-alphabetical-or-numerical-doi-url-formatting-3-figure-table-attribution-all-figures-properly-credited-table-data-sources-cited-reproduction-permissions-noted-conversion-tools" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert to ACM style</span>
+python<span class="w"> </span>scripts/citations/convert_bibliography.py<span class="w"> </span><span class="se">\ </span>--input<span class="w"> </span>enhanced_bibliography.bib<span class="w"> </span><span class="se">\ </span>--output<span class="w"> </span>acm_bibliography.bib<span class="w"> </span><span class="se">\ </span>--style<span class="w"> </span>acm<span class="w"> </span><span class="c1"># Convert to APA style</span>
+python<span class="w"> </span>scripts/citations/convert_bibliography.py<span class="w"> </span><span class="se">\ </span>--style<span class="w"> </span>apa<span class="w"> </span><span class="se">\ </span>--output<span class="w"> </span>apa_bibliography.bib
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="peer-review-package-preparation-2-hours-objective-prepare-documentation-for-academic-peer-review-package-contents-1-main-documentation">
+<h2>5. Peer Review Package Preparation (2 hours) <strong>Objective:</strong> Prepare documentation for academic peer review <strong>Package Contents:</strong> #### 1. Main Documentation<a class="headerlink" href="#peer-review-package-preparation-2-hours-objective-prepare-documentation-for-academic-peer-review-package-contents-1-main-documentation" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Complete technical documentation</p></li>
+<li><p>All claims properly cited</p></li>
+<li><p>Bibliography included #### 2. Citation Map
+<strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">artifacts/citation_map.json</span></code></p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;total_claims&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;cited_claims&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">487</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;95.1%&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;claim_categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;mathematical_theorems&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;cited&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100%&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;implementation_claims&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">278</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;cited&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">265</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;95.3%&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;performance_claims&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">189</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;cited&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">177</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;93.7%&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="err">```</span><span class="w"> </span><span class="err">####</span><span class="w"> </span><span class="mf">3.</span><span class="w"> </span><span class="err">Quali</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">Me</span><span class="kc">tr</span><span class="err">ics</span>
+
+<span class="err">**File</span><span class="p">:</span><span class="err">**</span><span class="w"> </span><span class="err">`ar</span><span class="kc">t</span><span class="err">i</span><span class="kc">fa</span><span class="err">c</span><span class="kc">ts</span><span class="err">/ci</span><span class="kc">tat</span><span class="err">io</span><span class="kc">n</span><span class="err">_quali</span><span class="kc">t</span><span class="err">y_summary.md`</span><span class="w"> </span><span class="err">```markdow</span><span class="kc">n</span>
+<span class="err">#</span><span class="w"> </span><span class="err">Ci</span><span class="kc">tat</span><span class="err">io</span><span class="kc">n</span><span class="w"> </span><span class="err">Sys</span><span class="kc">te</span><span class="err">m</span><span class="w"> </span><span class="err">Quali</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">Me</span><span class="kc">tr</span><span class="err">ics</span><span class="w"> </span><span class="err">##</span><span class="w"> </span><span class="err">Overall</span><span class="w"> </span><span class="err">S</span><span class="kc">tat</span><span class="err">is</span><span class="kc">t</span><span class="err">ics</span>
+
+<span class="mi">-</span><span class="w"> </span><span class="err">**To</span><span class="kc">tal</span><span class="w"> </span><span class="err">Re</span><span class="kc">feren</span><span class="err">ces</span><span class="p">:</span><span class="err">**</span><span class="w"> </span><span class="mi">187</span>
+<span class="mi">-</span><span class="w"> </span><span class="err">**DOI</span><span class="w"> </span><span class="err">Accessibili</span><span class="kc">t</span><span class="err">y</span><span class="p">:</span><span class="err">**</span><span class="w"> </span><span class="mf">97.3</span><span class="err">%</span>
+<span class="mi">-</span><span class="w"> </span><span class="err">**Average</span><span class="w"> </span><span class="err">Ci</span><span class="kc">tat</span><span class="err">io</span><span class="kc">ns</span><span class="err">/Re</span><span class="kc">feren</span><span class="err">ce</span><span class="p">:</span><span class="err">**</span><span class="w"> </span><span class="mi">128</span>
+<span class="mi">-</span><span class="w"> </span><span class="err">**Top</span><span class="mi">-</span><span class="err">Tier</span><span class="w"> </span><span class="err">Ve</span><span class="kc">nues</span><span class="p">:</span><span class="err">**</span><span class="w"> </span><span class="mi">72</span><span class="err">%</span><span class="w"> </span><span class="err">##</span><span class="w"> </span><span class="err">Coverage</span><span class="w"> </span><span class="err">by</span><span class="w"> </span><span class="err">Ca</span><span class="kc">te</span><span class="err">gory</span>
+<span class="mi">-</span><span class="w"> </span><span class="err">Ma</span><span class="kc">t</span><span class="err">hema</span><span class="kc">t</span><span class="err">ical</span><span class="w"> </span><span class="err">Claims</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="err">%</span><span class="w"> </span><span class="err">(</span><span class="mi">45</span><span class="err">/</span><span class="mi">45</span><span class="err">)</span>
+<span class="mi">-</span><span class="w"> </span><span class="err">Impleme</span><span class="kc">ntat</span><span class="err">io</span><span class="kc">n</span><span class="w"> </span><span class="err">Claims</span><span class="p">:</span><span class="w"> </span><span class="mf">95.3</span><span class="err">%</span><span class="w"> </span><span class="err">(</span><span class="mi">265</span><span class="err">/</span><span class="mi">278</span><span class="err">)</span>
+<span class="mi">-</span><span class="w"> </span><span class="err">Per</span><span class="kc">f</span><span class="err">orma</span><span class="kc">n</span><span class="err">ce</span><span class="w"> </span><span class="err">Claims</span><span class="p">:</span><span class="w"> </span><span class="mf">93.7</span><span class="err">%</span><span class="w"> </span><span class="err">(</span><span class="mi">177</span><span class="err">/</span><span class="mi">189</span><span class="err">)</span><span class="w"> </span><span class="err">##</span><span class="w"> </span><span class="err">Quali</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">I</span><span class="kc">n</span><span class="err">dica</span><span class="kc">t</span><span class="err">ors</span>
+<span class="mi">-</span><span class="w"> </span><span class="err">Semi</span><span class="kc">nal</span><span class="w"> </span><span class="err">papers</span><span class="w"> </span><span class="err">ci</span><span class="kc">te</span><span class="err">d</span><span class="p">:</span><span class="w"> </span><span class="err">✓</span>
+<span class="mi">-</span><span class="w"> </span><span class="err">Origi</span><span class="kc">nal</span><span class="w"> </span><span class="err">sources</span><span class="w"> </span><span class="err">re</span><span class="kc">feren</span><span class="err">ced</span><span class="p">:</span><span class="w"> </span><span class="err">✓</span>
+<span class="mi">-</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">plagiarism</span><span class="w"> </span><span class="err">de</span><span class="kc">te</span><span class="err">c</span><span class="kc">te</span><span class="err">d</span><span class="p">:</span><span class="w"> </span><span class="err">✓</span>
+<span class="mi">-</span><span class="w"> </span><span class="err">Academic</span><span class="w"> </span><span class="err">i</span><span class="kc">nte</span><span class="err">gri</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">veri</span><span class="kc">f</span><span class="err">ied</span><span class="p">:</span><span class="w"> </span><span class="err">✓</span>
+<span class="err">```</span><span class="w"> </span><span class="err">####</span><span class="w"> </span><span class="mf">4.</span><span class="w"> </span><span class="err">Veri</span><span class="kc">f</span><span class="err">ica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="w"> </span><span class="err">Checklis</span><span class="kc">t</span>
+<span class="err">**File</span><span class="p">:</span><span class="err">**</span><span class="w"> </span><span class="err">`ar</span><span class="kc">t</span><span class="err">i</span><span class="kc">fa</span><span class="err">c</span><span class="kc">ts</span><span class="err">/academic_veri</span><span class="kc">f</span><span class="err">ica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">_checklis</span><span class="kc">t</span><span class="err">.md`</span><span class="w"> </span><span class="err">```markdow</span><span class="kc">n</span>
+<span class="err">#</span><span class="w"> </span><span class="err">Academic</span><span class="w"> </span><span class="err">Veri</span><span class="kc">f</span><span class="err">ica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="w"> </span><span class="err">Checklis</span><span class="kc">t</span><span class="w"> </span><span class="err">##</span><span class="w"> </span><span class="err">Tech</span><span class="kc">n</span><span class="err">ical</span><span class="w"> </span><span class="err">Accuracy</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">All</span><span class="w"> </span><span class="err">ma</span><span class="kc">t</span><span class="err">hema</span><span class="kc">t</span><span class="err">ical</span><span class="w"> </span><span class="kc">t</span><span class="err">heorems</span><span class="w"> </span><span class="err">correc</span><span class="kc">tl</span><span class="err">y</span><span class="w"> </span><span class="err">ci</span><span class="kc">te</span><span class="err">d</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">Co</span><span class="kc">ntr</span><span class="err">ol</span><span class="w"> </span><span class="err">algori</span><span class="kc">t</span><span class="err">hms</span><span class="w"> </span><span class="err">properly</span><span class="w"> </span><span class="err">a</span><span class="kc">ttr</span><span class="err">ibu</span><span class="kc">te</span><span class="err">d</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">Per</span><span class="kc">f</span><span class="err">orma</span><span class="kc">n</span><span class="err">ce</span><span class="w"> </span><span class="err">claims</span><span class="w"> </span><span class="err">suppor</span><span class="kc">te</span><span class="err">d</span><span class="w"> </span><span class="err">by</span><span class="w"> </span><span class="err">ci</span><span class="kc">tat</span><span class="err">io</span><span class="kc">ns</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">Experime</span><span class="kc">ntal</span><span class="w"> </span><span class="err">me</span><span class="kc">t</span><span class="err">hodology</span><span class="w"> </span><span class="err">ci</span><span class="kc">te</span><span class="err">d</span><span class="w"> </span><span class="err">##</span><span class="w"> </span><span class="err">A</span><span class="kc">ttr</span><span class="err">ibu</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="w"> </span><span class="err">Comple</span><span class="kc">teness</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">Semi</span><span class="kc">nal</span><span class="w"> </span><span class="err">papers</span><span class="w"> </span><span class="err">ci</span><span class="kc">te</span><span class="err">d</span><span class="w"> </span><span class="err">(U</span><span class="kc">t</span><span class="err">ki</span><span class="kc">n</span><span class="p">,</span><span class="w"> </span><span class="err">Leva</span><span class="kc">nt</span><span class="p">,</span><span class="w"> </span><span class="err">Ke</span><span class="kc">nne</span><span class="err">dy)</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">Rece</span><span class="kc">nt</span><span class="w"> </span><span class="err">adva</span><span class="kc">n</span><span class="err">ces</span><span class="w"> </span><span class="err">re</span><span class="kc">feren</span><span class="err">ced</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">Compara</span><span class="kc">t</span><span class="err">ive</span><span class="w"> </span><span class="err">s</span><span class="kc">tu</span><span class="err">dies</span><span class="w"> </span><span class="err">ci</span><span class="kc">te</span><span class="err">d</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">Al</span><span class="kc">ternat</span><span class="err">ive</span><span class="w"> </span><span class="err">approaches</span><span class="w"> </span><span class="err">ack</span><span class="kc">n</span><span class="err">owledged</span><span class="w"> </span><span class="err">##</span><span class="w"> </span><span class="err">Academic</span><span class="w"> </span><span class="err">I</span><span class="kc">nte</span><span class="err">gri</span><span class="kc">t</span><span class="err">y</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">plagiarism</span><span class="w"> </span><span class="err">de</span><span class="kc">te</span><span class="err">c</span><span class="kc">te</span><span class="err">d</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">Origi</span><span class="kc">nal</span><span class="w"> </span><span class="err">co</span><span class="kc">ntr</span><span class="err">ibu</span><span class="kc">t</span><span class="err">io</span><span class="kc">ns</span><span class="w"> </span><span class="err">clearly</span><span class="w"> </span><span class="err">s</span><span class="kc">tate</span><span class="err">d</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">Prior</span><span class="w"> </span><span class="err">ar</span><span class="kc">t</span><span class="w"> </span><span class="err">properly</span><span class="w"> </span><span class="err">ack</span><span class="kc">n</span><span class="err">owledged</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">Fair</span><span class="w"> </span><span class="err">use</span><span class="w"> </span><span class="err">o</span><span class="kc">f</span><span class="w"> </span><span class="kc">f</span><span class="err">igures/</span><span class="kc">ta</span><span class="err">bles</span><span class="w"> </span><span class="err">veri</span><span class="kc">f</span><span class="err">ied</span><span class="w"> </span><span class="err">##</span><span class="w"> </span><span class="err">Publica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="w"> </span><span class="err">Readi</span><span class="kc">ness</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">Bibliography</span><span class="w"> </span><span class="kc">f</span><span class="err">orma</span><span class="kc">tte</span><span class="err">d</span><span class="w"> </span><span class="err">(IEEE</span><span class="w"> </span><span class="err">s</span><span class="kc">t</span><span class="err">yle)</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">Ci</span><span class="kc">tat</span><span class="err">io</span><span class="kc">ns</span><span class="w"> </span><span class="err">co</span><span class="kc">ns</span><span class="err">is</span><span class="kc">tentl</span><span class="err">y</span><span class="w"> </span><span class="kc">f</span><span class="err">orma</span><span class="kc">tte</span><span class="err">d</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">DOIs</span><span class="w"> </span><span class="err">veri</span><span class="kc">f</span><span class="err">ied</span><span class="w"> </span><span class="err">a</span><span class="kc">n</span><span class="err">d</span><span class="w"> </span><span class="err">accessible</span>
+<span class="mi">-</span><span class="w"> </span><span class="p">[</span><span class="err">x</span><span class="p">]</span><span class="w"> </span><span class="err">Copyrigh</span><span class="kc">t</span><span class="err">/permissio</span><span class="kc">ns</span><span class="w"> </span><span class="err">ob</span><span class="kc">ta</span><span class="err">i</span><span class="kc">ne</span><span class="err">d</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="deliverables-1-publication-ready-documentation-main-files">
+<h2>Deliverables ### 1. Publication-Ready Documentation <strong>Main Files:</strong><a class="headerlink" href="#deliverables-1-publication-ready-documentation-main-files" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/</span></code> - Complete technical documentation with citations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/references/enhanced_bibliography.bib</span></code> - 187 validated references</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/CITATIONS.md</span></code> - Citation system overview ### 2. Academic Integrity Certification <strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">docs/ACADEMIC_INTEGRITY_STATEMENT.md</span></code> ```markdown</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="academic-integrity-statement-this-documentation-system-adheres-to-the-highest-standards-of-academic-integrity-attribution">
+<h1>Academic Integrity Statement This documentation system adheres to the highest standards of academic integrity: ## Attribution<a class="headerlink" href="#academic-integrity-statement-this-documentation-system-adheres-to-the-highest-standards-of-academic-integrity-attribution" title="Link to this heading">¶</a></h1>
+<p>All ideas, algorithms, and theoretical foundations are properly attributed
+to their original sources through citation. ## Citation System</p>
+<ul class="simple">
+<li><p><strong>Total Citations:</strong> 187 peer-reviewed references</p></li>
+<li><p><strong>Coverage:</strong> 95.1% of all claims cited</p></li>
+<li><p><strong>Verification:</strong> All DOIs validated and accessible ## Original Contributions
+This project’s original contributions are clearly delineated:</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>PSO-based SMC gain optimization framework</p></li>
+<li><p>Hybrid Adaptive STA-SMC controller design</p></li>
+<li><p>validation methodology</p></li>
+<li><p>Production-ready control system implementation ## Peer Review
+This documentation has undergone rigorous peer review for:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Technical accuracy</p></li>
+<li><p>Citation completeness</p></li>
+<li><p>Attribution correctness</p></li>
+<li><p>Publication readiness <strong>Certification Date:</strong> [Date]
+<strong>Reviewed By:</strong> [Reviewer Names]
+<strong>Approved For:</strong> Academic publication and open-source distribution
+``` ### 3. Citation System Documentation <strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">docs/CITATION_SYSTEM.md</span></code> Complete documentation of the citation implementation:</p></li>
+<li><p>Citation extraction methodology</p></li>
+<li><p>AI research process</p></li>
+<li><p>Citation integration approach</p></li>
+<li><p>Validation procedures</p></li>
+<li><p>Quality metrics ### 4. Peer Review Report <strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">artifacts/peer_review_report.pdf</span></code> review covering:</p></li>
+<li><p>Technical accuracy assessment</p></li>
+<li><p>Citation quality evaluation</p></li>
+<li><p>Attribution completeness</p></li>
+<li><p>Publication readiness recommendation</p></li>
+</ul>
+<hr class="docutils" />
+<section id="acceptance-criteria-metric-target-status">
+<h2>Acceptance Criteria | Metric | Target | Status |<a class="headerlink" href="#acceptance-criteria-metric-target-status" title="Link to this heading">¶</a></h2>
+<p>|——–|——–|——–|
+| <strong>Critical Claim Coverage</strong> | 100% | Pending |
+| <strong>Academic Accuracy</strong> | 100% peer review pass | Pending |
+| <strong>DOI Accessibility</strong> | ≥95% | Pending |
+| <strong>Attribution Completeness</strong> | All seminal papers cited | Pending |
+| <strong>Format Consistency</strong> | 100% | Pending |
+| <strong>Plagiarism Check</strong> | Zero issues | Pending |</p>
+</section>
+<hr class="docutils" />
+<section id="quality-assurance-academic-review-panel-ideal-reviewers">
+<h2>Quality Assurance ### Academic Review Panel Ideal reviewers:<a class="headerlink" href="#quality-assurance-academic-review-panel-ideal-reviewers" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Control Systems Expert</strong> - Verify SMC theory and implementation</p></li>
+<li><p><strong>Optimization Specialist</strong> - Verify PSO methodology and results</p></li>
+<li><p><strong>Academic Librarian</strong> - Verify citation format and completeness ### Review Process 1. <strong>Technical Review</strong> (1 week) - Verify mathematical correctness - Check algorithmic attribution - Validate performance claims 2. <strong>Citation Review</strong> (3 days) - Verify completeness - Check format consistency - Validate DOI accessibility 3. <strong>Final Approval</strong> (1 day) - Sign-off on academic integrity - Approve for publication - Issue certification</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="publication-pathways-1-academic-publication-suitable-venues">
+<h2>Publication Pathways ### 1. Academic Publication <strong>Suitable Venues:</strong><a class="headerlink" href="#publication-pathways-1-academic-publication-suitable-venues" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>IEEE Transactions on Control Systems Technology</p></li>
+<li><p>Automatica</p></li>
+<li><p>IEEE Control Systems Magazine</p></li>
+<li><p>IFAC-PapersOnLine <strong>Preparation:</strong></p></li>
+<li><p>Extract key results</p></li>
+<li><p>Prepare manuscript</p></li>
+<li><p>Include citations</p></li>
+<li><p>Submit bibliography ### 2. Open-Source Release <strong>Platforms:</strong></p></li>
+<li><p>GitHub (primary repository)</p></li>
+<li><p>ReadTheDocs (documentation hosting)</p></li>
+<li><p>PyPI (Python package)</p></li>
+<li><p>Zenodo (DOI assignment for citation) <strong>Documentation:</strong></p></li>
+<li><p>Complete technical docs with citations</p></li>
+<li><p>CITATION.cff file for proper attribution</p></li>
+<li><p>Academic integrity statement ### 3. Educational Use <strong>Resources:</strong></p></li>
+<li><p>Teaching materials with citations</p></li>
+<li><p>Example code with attribution</p></li>
+<li><p>Laboratory exercises</p></li>
+<li><p>Student project templates</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="risk-management-risk-impact-mitigation">
+<h2>Risk Management | Risk | Impact | Mitigation |<a class="headerlink" href="#risk-management-risk-impact-mitigation" title="Link to this heading">¶</a></h2>
+<p>|——|——–|———–|
+| <strong>Citation errors discovered</strong> | MEDIUM | Quick correction workflow established |
+| <strong>Peer review rejection</strong> | LOW | Multiple expert reviews before submission |
+| <strong>Copyright issues</strong> | MEDIUM | All permissions obtained, fair use verified |
+| <strong>Incomplete attribution</strong> | HIGH | final audit performed |</p>
+</section>
+<hr class="docutils" />
+<section id="timeline-week-9">
+<h2>Timeline ### Week 9<a class="headerlink" href="#timeline-week-9" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Day 1-2:</strong> Academic accuracy review</p></li>
+<li><p><strong>Day 3:</strong> Citation completeness audit</p></li>
+<li><p><strong>Day 4:</strong> Attribution quality review</p></li>
+<li><p><strong>Day 5:</strong> Publication formatting ### Week 10</p></li>
+<li><p><strong>Day 1:</strong> Peer review package preparation</p></li>
+<li><p><strong>Day 2-3:</strong> External peer review</p></li>
+<li><p><strong>Day 4:</strong> Address reviewer feedback</p></li>
+<li><p><strong>Day 5:</strong> Final certification and approval</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="success-metrics-phase-5-success">
+<h2>Success Metrics <strong>Phase 5 Success:</strong><a class="headerlink" href="#success-metrics-phase-5-success" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>✅ 100% critical claims cited</p></li>
+<li><p>✅ Peer review approval obtained</p></li>
+<li><p>✅ Academic integrity certified</p></li>
+<li><p>✅ Publication-ready documentation <strong>Overall Project Success:</strong></p></li>
+<li><p>✅ 500+ claims extracted (Target: 500+)</p></li>
+<li><p>✅ 187 references added (Target: 150-200)</p></li>
+<li><p>✅ 95%+ citation coverage (Target: ≥85%)</p></li>
+<li><p>✅ Academic rigor established</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="conclusion-phase-5-culminates-the-citation-system-implementation-transforming-the-dip-smc-pso-project-from-a-technical-implementation-into-a-academically-rigorous-publication-ready-research-artifact-next-steps">
+<h2>Conclusion Phase 5 culminates the citation system implementation, transforming the DIP-SMC-PSO project from a technical implementation into a academically rigorous, publication-ready research artifact. <strong>Next Steps:</strong><a class="headerlink" href="#conclusion-phase-5-culminates-the-citation-system-implementation-transforming-the-dip-smc-pso-project-from-a-technical-implementation-into-a-academically-rigorous-publication-ready-research-artifact-next-steps" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Complete final review</p></li>
+<li><p>Obtain peer review approval</p></li>
+<li><p>Issue academic integrity certification</p></li>
+<li><p>Prepare for publication or educational use</p></li>
+</ol>
+<hr class="docutils" />
+<p><strong>Related Documents:</strong></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="00_master_roadmap.html"><span class="std std-doc">Master Roadmap</span></a></p></li>
+<li><p><a class="reference internal" href="05_phase4_validation_quality.html"><span class="std std-doc">Phase 4: Validation &amp; Quality</span></a></p></li>
+<li><p><a class="reference internal" href="../../ACADEMIC_INTEGRITY_STATEMENT.html"><span class="std std-doc">Academic Integrity Statement</span></a></p></li>
+<li><p><a class="reference internal" href="../../CITATION_SYSTEM.html"><span class="std std-doc">Citation System Documentation</span></a></p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 10, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Citation System - Phase 5: Final Review &amp; Publication Preparation <strong>Document Version:</strong> 1.0.0</a><ul>
+<li><a class="reference internal" href="#phase-overview-objective-prepare-academically-rigorous-documentation-for-peer-review-and-publication-input">Phase Overview <strong>Objective:</strong> Prepare academically rigorous documentation for peer review and publication. <strong>Input:</strong></a></li>
+<li><a class="reference internal" href="#final-review-tasks-1-academic-accuracy-review-5-hours-objective-verify-technical-correctness-of-citations-review-checklist-mathematical-theorems">Final Review Tasks ### 1. Academic Accuracy Review (5 hours) <strong>Objective:</strong> Verify technical correctness of citations <strong>Review Checklist:</strong> #### Mathematical Theorems</a></li>
+<li><a class="reference internal" href="#citation-completeness-audit-3-hours-objective-ensure-all-critical-claims-are-properly-cited-audit-process-1-identify-uncited-critical-claims-bash-python-scripts-citations-find-uncited-claims-py-priority-critical-2-research-missing-citations-run-targeted-literature-search-identify-appropriate-references-add-to-bibliography-3-insert-missing-citations-bash-python-scripts-citations-insert-citations-py-claims-artifacts-uncited-critical-claims-json-apply-acceptance-100-of-critical-claims-cited">2. Citation Completeness Audit (3 hours) <strong>Objective:</strong> Ensure all critical claims are properly cited <strong>Audit Process:</strong> 1. <strong>Identify Uncited Critical Claims</strong> <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">python</span> <span class="pre">scripts/citations/find_uncited_claims.py</span> <span class="pre">--priority</span> <span class="pre">CRITICAL</span> </code> 2. <strong>Research Missing Citations</strong> - Run targeted literature search - Identify appropriate references - Add to bibliography 3. <strong>Insert Missing Citations</strong> <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">python</span> <span class="pre">scripts/citations/insert_citations.py</span> <span class="pre">\</span> <span class="pre">--claims</span> <span class="pre">artifacts/uncited_critical_claims.json</span> <span class="pre">\</span> <span class="pre">--apply</span> </code> <strong>Acceptance:</strong> 100% of critical claims cited</a><ul>
+<li><a class="reference internal" href="#attribution-quality-review-2-hours-objective-verify-proper-attribution-of-ideas-and-implementations-attribution-checklist-seminal-papers-all-foundational-works-cited-utkin-1977-sliding-mode-control-levant-2001-super-twisting-algorithm-kennedy-eberhart-1995-particle-swarm-optimization-implementation-sources-algorithm-implementations-properly-attributed-control-law-derivations-optimization-algorithms-numerical-methods-data-sources-performance-data-properly-attributed-benchmark-datasets-experimental-results-comparative-studies">3. Attribution Quality Review (2 hours) <strong>Objective:</strong> Verify proper attribution of ideas and implementations <strong>Attribution Checklist:</strong> - [ ] <strong>Seminal Papers:</strong> All foundational works cited - Utkin (1977) - Sliding mode control - Levant (2001) - Super-twisting algorithm - Kennedy &amp; Eberhart (1995) - Particle swarm optimization - [ ] <strong>Implementation Sources:</strong> Algorithm implementations properly attributed - Control law derivations - Optimization algorithms - Numerical methods - [ ] <strong>Data Sources:</strong> Performance data properly attributed - Benchmark datasets - Experimental results - Comparative studies</a></li>
+<li><a class="reference internal" href="#publication-formatting-3-hours-objective-format-documentation-for-academic-standards-formatting-tasks-1-bibliography-formatting-convert-to-target-style-ieee-acm-apa-ensure-consistent-formatting-verify-all-required-fields-present-2-citation-style-inline-citations-1-author-year-or-author-year-reference-list-alphabetical-or-numerical-doi-url-formatting-3-figure-table-attribution-all-figures-properly-credited-table-data-sources-cited-reproduction-permissions-noted-conversion-tools">4. Publication Formatting (3 hours) <strong>Objective:</strong> Format documentation for academic standards <strong>Formatting Tasks:</strong> 1. <strong>Bibliography Formatting</strong> - Convert to target style (IEEE/ACM/APA) - Ensure consistent formatting - Verify all required fields present 2. <strong>Citation Style</strong> - Inline citations: <code class="docutils literal notranslate"><span class="pre">[1]</span></code>, <code class="docutils literal notranslate"><span class="pre">(Author,</span> <span class="pre">Year)</span></code>, or <code class="docutils literal notranslate"><span class="pre">Author</span> <span class="pre">[Year]</span></code> - Reference list: Alphabetical or numerical - DOI/URL formatting 3. <strong>Figure/Table Attribution</strong> - All figures properly credited - Table data sources cited - Reproduction permissions noted <strong>Conversion Tools:</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#peer-review-package-preparation-2-hours-objective-prepare-documentation-for-academic-peer-review-package-contents-1-main-documentation">5. Peer Review Package Preparation (2 hours) <strong>Objective:</strong> Prepare documentation for academic peer review <strong>Package Contents:</strong> #### 1. Main Documentation</a></li>
+<li><a class="reference internal" href="#deliverables-1-publication-ready-documentation-main-files">Deliverables ### 1. Publication-Ready Documentation <strong>Main Files:</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#academic-integrity-statement-this-documentation-system-adheres-to-the-highest-standards-of-academic-integrity-attribution">Academic Integrity Statement This documentation system adheres to the highest standards of academic integrity: ## Attribution</a><ul>
+<li><a class="reference internal" href="#acceptance-criteria-metric-target-status">Acceptance Criteria | Metric | Target | Status |</a></li>
+<li><a class="reference internal" href="#quality-assurance-academic-review-panel-ideal-reviewers">Quality Assurance ### Academic Review Panel Ideal reviewers:</a></li>
+<li><a class="reference internal" href="#publication-pathways-1-academic-publication-suitable-venues">Publication Pathways ### 1. Academic Publication <strong>Suitable Venues:</strong></a></li>
+<li><a class="reference internal" href="#risk-management-risk-impact-mitigation">Risk Management | Risk | Impact | Mitigation |</a></li>
+<li><a class="reference internal" href="#timeline-week-9">Timeline ### Week 9</a></li>
+<li><a class="reference internal" href="#success-metrics-phase-5-success">Success Metrics <strong>Phase 5 Success:</strong></a></li>
+<li><a class="reference internal" href="#conclusion-phase-5-culminates-the-citation-system-implementation-transforming-the-dip-smc-pso-project-from-a-technical-implementation-into-a-academically-rigorous-publication-ready-research-artifact-next-steps">Conclusion Phase 5 culminates the citation system implementation, transforming the DIP-SMC-PSO project from a technical implementation into a academically rigorous, publication-ready research artifact. <strong>Next Steps:</strong></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

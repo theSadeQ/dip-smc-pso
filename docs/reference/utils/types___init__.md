@@ -16,7 +16,7 @@ and other components, ensuring clear interfaces and reducing errors.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -151,7 +151,7 @@ surface = output.state_vars['sliding_surface']
 past_controls = output.history
 ```
 
-### Example 2: Type Checking and Validation
+## Example 2: Type Checking and Validation
 
 ```python
 from src.utils.types import ClassicalSMCOutput, AdaptiveSMCOutput
@@ -175,7 +175,7 @@ classical_output = ClassicalSMCOutput(u, state_vars, history)
 validate_output(classical_output)  # ✓ Pass
 ```
 
-### Example 3: Immutability and Contract Enforcement
+## Example 3: Immutability and Contract Enforcement
 
 ```python
 from src.utils.types import STAOutput
@@ -197,7 +197,7 @@ modified_output = STAOutput(
 )
 ```
 
-### Example 4: Integration with Type Hints
+## Example 4: Integration with Type Hints
 
 ```python
 from src.utils.types import HybridSTAOutput
@@ -220,7 +220,7 @@ def hybrid_controller(
 output: HybridSTAOutput = hybrid_controller(x, state_vars, history)
 ```
 
-### Example 5: Batch Processing with Type Safety
+## Example 5: Batch Processing with Type Safety
 
 ```python
 from src.utils.types import ClassicalSMCOutput

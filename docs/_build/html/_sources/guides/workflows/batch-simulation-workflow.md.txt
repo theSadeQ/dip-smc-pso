@@ -1,15 +1,16 @@
 # Batch Simulation Workflow Guide
+
 **Vectorized Execution for Monte Carlo and Parameter Sweeps**
 
 **Version:** 1.0
 **Date:** 2025-10-07
 **Status:** Architecture documented, performance testing pending module fixes
 
----
+
 
 ## Executive Summary
 
-This guide documents batch simulation capabilities for vectorized execution of multiple controller scenarios simultaneously. Batch simulation is essential for Monte Carlo analysis, parameter sweeps, and robustness validation.
+This guide documents batch simulation features for vectorized execution of multiple controller scenarios simultaneously. Batch simulation is essential for Monte Carlo analysis, parameter sweeps, and robustness validation.
 
 **Target Audience:**
 - Researchers performing Monte Carlo simulations
@@ -21,7 +22,7 @@ This guide documents batch simulation capabilities for vectorized execution of m
 - Understanding of NumPy array operations
 - Familiarity with controller concepts
 
----
+
 
 ## Part 1: Architecture Overview
 
@@ -55,7 +56,7 @@ This guide documents batch simulation capabilities for vectorized execution of m
 **Vectorization Benefits:**
 - ✅ **Performance**: 10-100× faster than sequential loops
 - ✅ **Memory Efficient**: Single allocation for batch
-- ✅ **NumPy Native**: Leverages BLAS/LAPACK
+- ✅ **NumPy Native**: uses BLAS/LAPACK
 - ✅ **Numba Acceleration**: JIT compilation for dynamics
 - ✅ **Safety Guards**: Per-simulation monitoring
 
@@ -65,7 +66,7 @@ This guide documents batch simulation capabilities for vectorized execution of m
 3. **Robustness Analysis**: Evaluate performance under uncertainty
 4. **Sensitivity Studies**: Measure parameter impact
 
----
+
 
 ## Part 2: Basic Batch Simulation
 
@@ -95,7 +96,7 @@ results_batch = simulate(initial_states, controls_batch, dt=0.01, horizon=500)
 # Shape: (10, 501, 6) - batch dimension first
 ```
 
-### 2.2 Batch Orchestrator API
+## 2.2 Batch Orchestrator API
 
 **Location**: `src/simulation/orchestrators/batch.py`
 
@@ -126,7 +127,7 @@ states = result_container.get_states()  # (batch_size, 501, 6)
 times = result_container.get_times()    # (501,)
 ```
 
-### 2.3 Result Container API
+## 2.3 Result Container API
 
 **Location**: `src/simulation/results/containers.py`
 
@@ -147,7 +148,7 @@ all_times = result_container.get_times()     # (501,) - shared across batch
 batch_count = result_container.get_batch_count()  # int
 ```
 
----
+
 
 ## Part 3: Monte Carlo Simulation
 
@@ -200,7 +201,7 @@ print(f"  Final theta2 - Mean: {final_theta2.mean():.4f}, Std: {final_theta2.std
 print(f"  Success rate (|theta| < 0.1): {(np.abs(final_theta1) < 0.1).mean()*100:.1f}%")
 ```
 
-### 3.2 Statistical Analysis
+## 3.2 Statistical Analysis
 
 ```python
 import numpy as np
@@ -248,7 +249,7 @@ plt.tight_layout()
 plt.savefig('monte_carlo_distributions.png', dpi=150)
 ```
 
----
+
 
 ## Part 4: Parameter Sweep Example
 
@@ -310,7 +311,7 @@ plt.title('Controller Gain Sweep: Settling Time')
 plt.savefig('parameter_sweep_heatmap.png', dpi=150)
 ```
 
----
+
 
 ## Part 5: Performance Considerations
 
@@ -374,7 +375,7 @@ Batch size 10000:   457.76 MB
 
 **Recommendation**: Keep batch_size × horizon < 10^7 to avoid memory issues (~500MB limit)
 
----
+
 
 ## Part 6: Troubleshooting
 
@@ -417,7 +418,7 @@ for chunk in range(n_chunks):
 results = np.concatenate(all_results, axis=0)
 ```
 
-### Issue 3: Slow Performance (No Speedup)
+## Issue 3: Slow Performance (No Speedup)
 
 **Symptom**: Vectorized execution not faster than sequential
 
@@ -435,7 +436,7 @@ _ = simulate(np.zeros((10, 6)), np.zeros((10, 100)), 0.01, 100)
 results = simulate(initial_states, controls, dt, horizon)
 ```
 
----
+
 
 ## Part 7: Best Practices
 
@@ -474,7 +475,7 @@ converged = check_convergence(theta1_samples)
 print(f"Convergence: {'✓' if converged else '✗'}")
 ```
 
-### 7.3 Parameter Sweep Efficiency
+## 7.3 Parameter Sweep Efficiency
 
 **Grid Resolution:**
 - **Coarse**: 5-10 points per parameter (fast exploration)
@@ -501,24 +502,27 @@ k2_fine = np.linspace(k2_best-5, k2_best+5, 20)
 # Run fine sweep in refined region...
 ```
 
----
+
 
 ## Part 8: Next Steps
 
 ### For Monte Carlo Users:
+
 ✅ **Completed**: Basic batch simulation structure
 ➡️ **Next**: [Monte Carlo Validation Quickstart](monte-carlo-validation-quickstart.md)
 ➡️ **Next**: [Statistical Benchmarks](../../reference/benchmarks/statistical_benchmarks_v2.md)
 
 ### For Parameter Sweep Users:
+
 ➡️ **Next**: [PSO vs Grid Search Comparison](pso-vs-grid-search.md)
 ➡️ **Next**: [Multi-Objective PSO](../../reference/optimization/algorithms_multi_objective_pso.md)
 
 ### For Advanced Users:
+
 ➡️ **Next**: [Batch Orchestrators](../../reference/simulation/orchestrators_batch.md)
 ➡️ **Next**: [Full Dynamics Model](../../reference/core/dynamics_full.md)
 
----
+
 
 ## Appendix: API Quick Reference
 
@@ -540,7 +544,7 @@ times = container.get_times(batch_index=None)
 count = container.get_batch_count()
 ```
 
----
+
 
 **Document Status:** ⚠️ Architecture Documented, Performance Testing Pending
 **Last Updated:** 2025-10-07

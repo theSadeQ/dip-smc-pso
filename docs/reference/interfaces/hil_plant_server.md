@@ -143,7 +143,7 @@ server.start()
 server.close()
 ```
 
-### Example 2: Custom Dynamics Configuration
+## Example 2: Custom Dynamics Configuration
 
 ```python
 from src.interfaces.hil import PlantServer
@@ -169,7 +169,7 @@ server._dynamics = dynamics
 server.start()
 ```
 
-### Example 3: Multi-Client Testing
+## Example 3: Multi-Client Testing
 
 ```python
 from threading import Thread
@@ -199,7 +199,7 @@ for t in threads:
 print("All parallel tests complete")
 ```
 
-### Example 4: Server with Logging and Monitoring
+## Example 4: Server with Logging and Monitoring
 
 ```python
 # example-metadata:
@@ -237,7 +237,7 @@ finally:
     logger.info("Server shutdown complete")
 ```
 
-### Example 5: Performance Profiling
+## Example 5: Performance Profiling
 
 ```python
 from src.interfaces.hil import PlantServer
@@ -281,7 +281,7 @@ print(f"Mean CPU: {np.mean(metrics['cpu_usage']):.1f}%")
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -313,7 +313,7 @@ print(f"Mean CPU: {np.mean(metrics['cpu_usage']):.1f}%")
 
 [View full source →](#method-plantserver-stop)
 
----
+
 
 ## Functions
 
@@ -327,7 +327,7 @@ print(f"Mean CPU: {np.mean(metrics['cpu_usage']):.1f}%")
 :linenos:
 ```
 
----
+
 
 ### `_get(cfg, dotted, default)`
 
@@ -339,7 +339,7 @@ print(f"Mean CPU: {np.mean(metrics['cpu_usage']):.1f}%")
 :linenos:
 ```
 
----
+
 
 ### `_build_dynamics(cfg)`
 
@@ -353,7 +353,7 @@ Build the dynamics model using the project's light/full models if present.
 :linenos:
 ```
 
----
+
 
 ### `start_server(cfg_path, max_steps)`
 
@@ -365,7 +365,7 @@ Build the dynamics model using the project's light/full models if present.
 :linenos:
 ```
 
----
+
 
 ### `main(argv)`
 
@@ -377,7 +377,7 @@ Build the dynamics model using the project's light/full models if present.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

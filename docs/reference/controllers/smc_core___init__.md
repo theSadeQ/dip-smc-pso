@@ -19,7 +19,7 @@ Provides reusable components that implement fundamental SMC concepts:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

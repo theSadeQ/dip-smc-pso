@@ -13,7 +13,7 @@ Energy consumption objective functions for control optimization.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -66,7 +66,7 @@ Evaluate energy efficiency considering performance trade-offs.
 
 [View full source →](#method-energyconsumptionobjective-evaluate_energy_efficiency)
 
----
+
 
 ### `ControlEffortObjective`
 
@@ -99,7 +99,7 @@ Compute control effort objective with saturation penalties.
 
 [View full source →](#method-controleffortobjective-_compute_objective_from_simulation)
 
----
+
 
 ## Dependencies
 

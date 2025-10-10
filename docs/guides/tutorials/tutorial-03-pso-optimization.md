@@ -1,4 +1,5 @@
 # Tutorial 03: PSO Optimization for Controller Tuning **Level:** Intermediate to Advanced
+
 **Duration:** 60-90 minutes
 **Prerequisites:**
 - Completed [Tutorial 01: Your First Simulation](tutorial-01-first-simulation.md)
@@ -9,7 +10,12 @@
 - [ ] Interpret PSO convergence and results
 - [ ] Validate optimized gains across different scenarios
 - [ ] Customize cost functions for specific objectives
-- [ ] Apply best practices for production-quality tuning --- ## Part 1: Introduction to PSO ### What is Particle Swarm Optimization? **PSO** is a bio-inspired optimization algorithm that simulates the social behavior of bird flocking or fish schooling. It's particularly effective for **continuous, non-convex optimization problems** like controller gain tuning. **Why PSO for Controller Tuning?** 1. **Derivative-free:** No need for gradient information (important for SMC with discontinuities)
+- [ ] Apply best practices for production-quality tuning
+
+---
+
+## Part 1: Introduction to PSO ### What is Particle Swarm Optimization? **PSO** is a bio-inspired optimization algorithm that simulates the social behavior of bird flocking or fish schooling. It's particularly effective for **continuous, non-convex optimization problems** like controller gain tuning. **Why PSO for Controller Tuning?** 1. **Derivative-free:** No need for gradient information (important for SMC with discontinuities)
+
 2. **Global search:** Explores parameter space to avoid local minima
 3. **Parallel evaluation:** Can uses multi-core processors
 4. **Few hyperparameters:** Swarm size and iterations are the main tuning knobs
@@ -28,6 +34,7 @@ Set global best = best position in swarm For each iteration: For each particle: 
 v[i] = w·v[i] + c1·r1·(pbest[i] - x[i]) + c2·r2·(gbest - x[i]) ↑ ↑ ↑ inertia cognitive component social component # Position update
 x[i] = x[i] + v[i]
 ``` **Parameters:**
+
 - `w`: Inertia weight (0.4-0.9, balances exploration vs exploitation)
 - `c1`: Cognitive coefficient (~2.0, attraction to personal best)
 - `c2`: Social coefficient (~2.0, attraction to global best)
@@ -46,6 +53,7 @@ flowchart TD START["🎯 Start PSO Optimization"] --> INIT["📍 Initialize Swar
 - **Hybrid STA** (4 base gains): ~10-15 minutes **Convergence Patterns:** ```mermaid
 graph LR subgraph "Typical PSO Convergence" direction TB EARLY["Iterations 1-20<br/>🔴 Exploration Phase<br/>High cost variance<br/>Global search"] MID["Iterations 21-60<br/>🟡 Exploitation Phase<br/>Decreasing cost<br/>Focusing on best region"] LATE["Iterations 61-100<br/>🟢 Convergence Phase<br/>Minimal cost change<br/>Fine-tuning"] end EARLY --> MID MID --> LATE style EARLY fill:#ffcccc style MID fill:#ffffcc style LATE fill:#ccffcc
 ``` **Convergence Indicators**:
+
 - 🔴 **Early iterations (1-20%)**: High cost variance, global exploration
 - 🟡 **Mid iterations (20-60%)**: Cost decreasing, swarm converging
 - 🟢 **Late iterations (60-100%)**: Minimal improvement, fine-tuning **Good Convergence Signs**:
@@ -56,8 +64,14 @@ graph LR subgraph "Typical PSO Convergence" direction TB EARLY["Iterations 1-20<
 - ❌ Cost plateaus at iteration 10-20 (premature convergence)
 - ❌ High cost variance throughout (not converging)
 - ❌ Oscillating gbest cost (unstable)
-- ❌ Final cost similar to initial (no optimization) --- ## Part 2: PSO Configuration ### Default PSO Settings The framework provides sensible defaults in `config.yaml`: ```yaml
+- ❌ Final cost similar to initial (no optimization)
+
+---
+
+## Part 2: PSO Configuration ### Default PSO Settings The framework provides sensible defaults in `config.yaml`: ```yaml
+
 # config.yaml - pso section
+
 pso: n_particles: 30 # Swarm size iters: 100 # Maximum iterations # Velocity clamping (optional, prevents explosive velocities) options: c1: 2.05 # Cognitive coefficient c2: 2.05 # Social coefficient w: 0.729844 # Inertia weight (linearly decreasing) # Parameter bounds (controller-specific) bounds: - [0.1, 50.0] # k₁ (surface gain 1) - [0.1, 50.0] # k₂ (surface gain 2) - [0.1, 50.0] # λ₁ (surface gain 3) - [0.1, 50.0] # λ₂ (surface gain 4) - [1.0, 200.0] # K (switching gain) - [0.0, 50.0] # ε (boundary layer, classical only) # Cost function weights cost_function: weights: ise: 0.4 # Integral Squared Error itae: 0.3 # Integral Time-Absolute Error control_effort: 0.2 # Energy consumption overshoot: 0.1 # Peak overshoot penalty
 ``` ### Understanding Parameter Bounds **Surface Gains (k₁, k₂, λ₁, λ₂):**
 - **Lower bound (0.1):** Prevents near-zero gains (no control authority)
@@ -73,9 +87,11 @@ pso: n_particles: 30 # Swarm size iters: 100 # Maximum iterations # Velocity cla
 # Narrow bounds for fine-tuning around known good region
 pso: bounds: - [8.0, 15.0] # k₁ near 10 - [6.0, 12.0] # k₂ near 8 - [12.0, 20.0] # λ₁ near 15 - [10.0, 16.0] # λ₂ near 12 - [40.0, 80.0] # K near 60 - [0.005, 0.05] # ε near 0.01
 ``` ### Cost Function Design The **cost function** (also called objective or fitness) quantifies controller performance. Lower cost = better performance. **Default Weighted Sum:**
+
 ```python
 cost = w1·ISE + w2·ITAE + w3·control_effort + w4·overshoot_penalty
 ``` **Component Breakdown:** | Component | Formula | Interpretation | Weight |
+
 |-----------|---------|----------------|--------|
 | **ISE** | ∫‖x‖² dt | Tracking error (quadratic) | 0.4 |
 | **ITAE** | ∫t·‖x‖ dt | Time-weighted error (convergence speed) | 0.3 |
@@ -84,22 +100,31 @@ cost = w1·ISE + w2·ITAE + w3·control_effort + w4·overshoot_penalty
 2. **Convergence:** ITAE (0.3) penalizes slow settling
 3. **Efficiency:** Control effort (0.2) encourages energy-optimal approaches 4. **Constraints:** Overshoot (0.1) enforces safety margins **Customizing Weights:** ```yaml
 # Emphasize fast convergence over energy
+
 cost_function: weights: ise: 0.3 itae: 0.5 # Increased from 0.3 control_effort: 0.1 # Decreased from 0.2 overshoot: 0.1 # Emphasize energy efficiency (battery-powered systems)
 cost_function: weights: ise: 0.2 itae: 0.2 control_effort: 0.5 # Dominant term overshoot: 0.1
-``` --- ## Part 3: Running PSO Optimization ### Basic PSO Workflow **Step 1: Establish baseline**
+```
+
+---
+
+## Part 3: Running PSO Optimization ### Basic PSO Workflow **Step 1: Establish baseline**
 ```bash
 # Run simulation with default gains
+
 python simulate.py --ctrl classical_smc --plot --save baseline_classical.json
 ``` **Step 2: Run PSO optimization**
 ```bash
 # Optimize gains (takes ~8 minutes with default settings)
+
 python simulate.py --ctrl classical_smc --run-pso --save optimized_classical_gains.json
 ``` **Step 3: Test optimized gains**
 ```bash
 # Load and simulate with optimized gains
+
 python simulate.py --load optimized_classical_gains.json --plot --save optimized_classical_results.json
 ``` **Step 4: Compare performance**
 ```python
+
 import json baseline = json.load(open('baseline_classical.json'))
 optimized = json.load(open('optimized_classical_results.json')) print("Performance Improvement:")
 print(f"ISE: {baseline['metrics']['ise']:.4f} → {optimized['metrics']['ise']:.4f} " f"({(1 - optimized['metrics']['ise']/baseline['metrics']['ise'])*100:.1f}% better)")
@@ -107,6 +132,7 @@ print(f"Settling: {baseline['metrics']['settling_time']:.2f}s → {optimized['me
 print(f"Overshoot: {baseline['metrics']['overshoot']:.2f}% → {optimized['metrics']['overshoot']:.2f}%")
 ``` **Expected Output:**
 ```
+
 Performance Improvement:
 ISE: 0.4523 → 0.2847 (37.1% better)
 Settling: 3.18s → 2.65s
@@ -125,10 +151,12 @@ Best Gains: [15.23, 12.87, 22.14, 18.45, 85.32, 4.21]
 Final Cost: 0.4782
 Improvement over default: 61.3% Saving optimized gains to: optimized_classical_gains.json
 ``` **Convergence Indicators:** - **Good convergence:** Cost decreases steadily, flattens after 70-80% of iterations
+
 - **Premature convergence:** Cost plateaus before iteration 50 (may be stuck in local minimum)
 - **Poor convergence:** Cost oscillates wildly, no clear trend
 - **Non-convergence:** Cost increases or stays constant ### Optimizing All 4 Controllers ```bash
 # Classical SMC (6 gains)
+
 python simulate.py --ctrl classical_smc --run-pso --save gains_classical.json # Super-Twisting SMC (6 gains: k1, k2, λ1, λ2, α, β)
 python simulate.py --ctrl sta_smc --run-pso --save gains_sta.json # Adaptive SMC (5 gains: k1, k2, λ1, λ2, γ)
 python simulate.py --ctrl adaptive_smc --run-pso --save gains_adaptive.json # Hybrid Adaptive STA-SMC (4 base gains + auto-computed STA gains)
@@ -138,13 +166,18 @@ python simulate.py --ctrl hybrid_adaptive_sta_smc --run-pso --save gains_hybrid.
 | Classical | 6 | ~5 seconds | ~8 minutes |
 | STA | 6 | ~6 seconds | ~10 minutes |
 | Adaptive | 5 | ~7 seconds | ~12 minutes |
-| Hybrid | 4 | ~8 seconds | ~14 minutes | --- ## Part 4: Interpreting PSO Results ### Analyzing Convergence **Visualizing PSO Convergence:** ```python
+| Hybrid | 4 | ~8 seconds | ~14 minutes |
+
+---
+
+## Part 4: Interpreting PSO Results ### Analyzing Convergence **Visualizing PSO Convergence:** ```python
 import json
 import matplotlib.pyplot as plt
 import numpy as np # Load PSO log (if saved during optimization)
 pso_data = json.load(open('optimized_classical_gains.json')) # Extract cost history
 if 'pso_history' in pso_data: iterations = pso_data['pso_history']['iterations'] best_costs = pso_data['pso_history']['best_costs'] mean_costs = pso_data['pso_history']['mean_costs'] plt.figure(figsize=(10, 6)) plt.plot(iterations, best_costs, 'b-', linewidth=2, label='Global Best') plt.plot(iterations, mean_costs, 'r--', linewidth=1, label='Swarm Mean') plt.xlabel('Iteration') plt.ylabel('Cost') plt.title('PSO Convergence: Classical SMC') plt.legend() plt.grid(True) plt.semilogy() # Log scale for better visibility plt.show()
 ``` **Convergence Patterns:** 1. **Healthy Convergence:** ``` Best Cost: 1.2 → 0.8 → 0.6 → 0.5 → 0.48 → 0.47 → 0.47 (plateau) Mean Cost: 1.8 → 1.2 → 0.9 → 0.7 → 0.65 → 0.60 → 0.58 ``` - Best cost decreases smoothly and plateaus - Mean cost stays above best cost (diversity maintained) - Plateau indicates convergence 2. **Premature Convergence:** ``` Best Cost: 1.2 → 0.9 → 0.85 → 0.84 → 0.84 → 0.84 → 0.84 (stuck at iteration 30) Mean Cost: 1.8 → 1.0 → 0.86 → 0.85 → 0.84 → 0.84 → 0.84 (swarm collapsed) ``` - Best cost plateaus too early - Mean cost converges to best cost (loss of diversity) - **Solution:** Increase swarm size or adjust inertia weight 3. **Oscillatory Convergence:** ``` Best Cost: 1.2 → 0.8 → 1.0 → 0.7 → 0.9 → 0.6 → 0.8 → 0.55 Mean Cost: Highly variable ``` - Best cost jumps around - **Solution:** Reduce cognitive/social coefficients or increase inertia ### Gain Interpretation **Example Optimized Gains (Classical SMC):** ```json
+
 { "controller_type": "classical_smc", "gains": [15.23, 12.87, 22.14, 18.45, 85.32, 4.21], "gain_names": ["k1", "k2", "lambda1", "lambda2", "K", "epsilon"], "pso_cost": 0.4782
 }
 ``` **Comparing to Default:** | Gain | Default | Optimized | Change | Interpretation |
@@ -164,12 +197,15 @@ python simulate.py --load gains_classical.json \ --override "simulation.initial_
 python simulate.py --load gains_classical.json \ --override "simulation.initial_conditions=[0,0.2,0.1,0.5,0.15,0.3]" \ --save test_velocity.json
 ``` **Robustness Check:** ```python
 # example-metadata:
+
 # runnable: false scenarios = ['small', 'large', 'cart', 'velocity']
+
 results = {} for scenario in scenarios: data = json.load(open(f'test_{scenario}.json')) results[scenario] = { 'ise': data['metrics']['ise'], 'settling': data['metrics']['settling_time'], 'stable': data['metrics']['settling_time'] < 10.0 # Stability criterion } # Print summary
 print("Robustness Validation:")
 for scenario, metrics in results.items(): status = "✓" if metrics['stable'] else "✗" print(f"{status} {scenario:10s}: ISE={metrics['ise']:.3f}, Settling={metrics['settling']:.2f}s")
 ``` **Expected Output:**
 ```
+
 Robustness Validation:
 ✓ small : ISE=0.285, Settling=2.65s
 ✓ large : ISE=1.234, Settling=4.82s
@@ -178,15 +214,23 @@ Robustness Validation:
 ``` **Red Flags:**
 - Any scenario marked with ✗ (unstable)
 - Settling time > 10 seconds
-- ISE variance > 5× across scenarios (over-tuned to specific condition) --- ## Part 5: Advanced PSO Techniques ### Custom Cost Functions **Scenario:** You want to minimize settling time as the primary objective. **Step 1: Modify config.yaml**
+- ISE variance > 5× across scenarios (over-tuned to specific condition)
+
+---
+
+## Part 5: Advanced PSO Techniques ### Custom Cost Functions **Scenario:** You want to minimize settling time as the primary objective. **Step 1: Modify config.yaml**
 ```yaml
+
 pso: cost_function: weights: ise: 0.1 # Reduced itae: 0.1 # Reduced settling_time: 0.6 # New dominant term control_effort: 0.1 overshoot: 0.1
 ``` **Step 2: Implement custom cost (if needed for complex objectives)** Create `custom_cost.py`:
 ```python
 # example-metadata:
+
 # runnable: false def custom_cost_function(metrics: dict, config: dict) -> float: """ Custom cost emphasizing settling time with hard constraints. Returns float('inf') if constraints violated. """ # Hard constraints (return infinite cost if violated) if metrics['overshoot'] > 10.0: # Max 10% overshoot return float('inf') if metrics['max_control'] > 100.0: # Actuator limit return float('inf') # Primary objective: settling time cost = 0.6 * metrics['settling_time'] # Secondary objectives cost += 0.2 * metrics['ise'] cost += 0.1 * metrics['control_effort'] / 100.0 # Normalize cost += 0.1 * metrics['overshoot'] / 10.0 # Normalize return cost
+
 ``` **Step 3: Use custom cost in PSO**
 ```python
+
 from src.optimizer.pso_optimizer import PSOTuner
 from custom_cost import custom_cost_function tuner = PSOTuner( controller_factory=controller_factory, config=config, cost_function=custom_cost_function # Custom cost
 ) best_gains, best_cost = tuner.optimize()
@@ -202,12 +246,18 @@ plt.title('Pareto Front: Performance vs Energy Trade-off')
 plt.grid(True)
 plt.show()
 ``` ### Adaptive PSO Parameters **Problem:** Fixed PSO parameters may not be optimal for all problems. **Solution:** Use adaptive inertia weight. ```yaml
+
 pso: options: w: [0.9, 0.4] # Linearly decrease from 0.9 to 0.4 # Early iterations: high inertia (exploration) # Late iterations: low inertia (exploitation)
 ``` **Advanced: Dynamic swarm size** ```python
 # Start with large swarm, reduce over time to save computation
 initial_swarm = 50
 final_swarm = 20 for iter in range(100): current_swarm_size = int(initial_swarm - (initial_swarm - final_swarm) * iter / 100) # Run PSO iteration with current_swarm_size
-``` --- ## Part 6: PSO Best Practices ### Pre-Optimization Checklist Before running PSO, verify: - [ ] **Baseline established:** Understand default performance
+```
+
+---
+
+## Part 6: PSO Best Practices ### Pre-Optimization Checklist Before running PSO, verify: - [ ] **Baseline established:** Understand default performance
+
 - [ ] **Bounds reasonable:** Not too narrow (local search) or too wide (inefficient exploration)
 - [ ] **Cost function tested:** Manually verify cost correlates with actual performance
 - [ ] **Simulation stable:** Default gains don't cause divergence
@@ -216,6 +266,7 @@ final_swarm = 20 for iter in range(100): current_swarm_size = int(initial_swarm 
 - **Save intermediate results:** Checkpoint best gains every 10-20 iterations
 - **Multiple seeds:** Run PSO 3-5 times with different random seeds ```bash
 # Run PSO with different seeds
+
 for seed in 42 123 456 789 1337; do python simulate.py --ctrl classical_smc --run-pso --seed $seed --save "gains_seed_${seed}.json"
 done # Compare results
 python -c "
@@ -232,6 +283,7 @@ print(f'Mean: {sum(costs)/len(costs):.4f}, Std: {(sum((c-sum(costs)/len(costs))*
 # validation
 python validate_optimized_gains.py --gains gains_classical.json \ --scenarios 10 \ --duration 20.0 \ --perturbations mass=0.8:1.2,friction=0:0.1
 ``` ### Common Pitfalls **1. Overfitting to specific initial conditions**
+
 - **Symptom:** performance on optimization IC, poor on others
 - **Solution:** Use diverse initial conditions in fitness evaluation **2. Ignoring actuator constraints**
 - **Symptom:** Optimized gains require >100N force (exceeds hardware limits)
@@ -241,23 +293,40 @@ python validate_optimized_gains.py --gains gains_classical.json \ --scenarios 10
 - **Symptom:** Optimized controller has high-frequency oscillations
 - **Solution:** Add chattering penalty to cost function **5. Unstable gains**
 - **Symptom:** Simulation diverges with optimized gains
-- **Solution:** Add stability margin constraint, reduce upper bounds --- ## Part 7: Hands-On Exercises ### Exercise 1: Quick vs Thorough Optimization **Objective:** Compare PSO convergence with different computational budgets. ```bash
+- **Solution:** Add stability margin constraint, reduce upper bounds
+
+---
+
+## Part 7: Hands-On Exercises ### Exercise 1: Quick vs Thorough Optimization **Objective:** Compare PSO convergence with different computational budgets. ```bash
+
 # Quick optimization (15 particles × 50 iterations = 750 evaluations)
+
 python simulate.py --ctrl classical_smc \ --override "pso.n_particles=15" \ --override "pso.iters=50" \ --run-pso --save gains_quick.json # Standard optimization (30 particles × 100 iterations = 3000 evaluations)
 python simulate.py --ctrl classical_smc --run-pso --save gains_standard.json # Thorough optimization (50 particles × 200 iterations = 10000 evaluations)
 python simulate.py --ctrl classical_smc \ --override "pso.n_particles=50" \ --override "pso.iters=200" \ --run-pso --save gains_thorough.json
 ``` **Analysis:**
 - Compare final costs
 - Compare optimized gains
-- Assess cost vs computation trade-off --- ### Exercise 2: Cost Function Sensitivity **Objective:** Understand how cost weights affect optimized gains. ```bash
+- Assess cost vs computation trade-off
+
+---
+
+## Exercise 2: Cost Function Sensitivity **Objective:** Understand how cost weights affect optimized gains. ```bash
 # Emphasize tracking (high ISE weight)
 python simulate.py --ctrl classical_smc \ --override "pso.cost_function.weights.ise=0.7" \ --override "pso.cost_function.weights.itae=0.2" \ --override "pso.cost_function.weights.control_effort=0.1" \ --run-pso --save gains_tracking.json # Emphasize energy (high control effort weight)
 python simulate.py --ctrl classical_smc \ --override "pso.cost_function.weights.ise=0.2" \ --override "pso.cost_function.weights.itae=0.2" \ --override "pso.cost_function.weights.control_effort=0.6" \ --run-pso --save gains_energy.json
 ``` **Analysis:**
+
 - Compare switching gain K (likely lower in energy-optimized)
 - Compare control effort metric
-- Visualize control signals (tracking vs energy) --- ### Exercise 3: Multi-Controller Comparison **Objective:** Optimize all 4 controllers and compare. ```bash
+- Visualize control signals (tracking vs energy)
+
+---
+
+## Exercise 3: Multi-Controller Comparison **Objective:** Optimize all 4 controllers and compare. ```bash
+
 # Optimize all controllers
+
 for ctrl in classical_smc sta_smc adaptive_smc hybrid_adaptive_sta_smc; do python simulate.py --ctrl $ctrl --run-pso --save "gains_${ctrl}_optimized.json"
 done # Test all on same initial condition
 for ctrl in classical_smc sta_smc adaptive_smc hybrid_adaptive_sta_smc; do python simulate.py --load "gains_${ctrl}_optimized.json" \ --override "simulation.initial_conditions=[0,0,0.2,0,0.25,0]" \ --save "results_${ctrl}_optimized.json"
@@ -266,18 +335,25 @@ python compare_all_optimized.py
 ``` **Expected Learning:**
 - Which controller achieves lowest cost after PSO?
 - How much improvement over default gains?
-- Are rankings consistent with Tutorial 02? --- ## Part 8: Troubleshooting PSO ### PSO Taking Too Long **Problem:** PSO running for hours with no end in sight. **Solutions:**
+- Are rankings consistent with Tutorial 02?
+
+---
+
+## Part 8: Troubleshooting PSO ### PSO Taking Too Long **Problem:** PSO running for hours with no end in sight. **Solutions:**
 1. **Reduce iterations:** `--override "pso.iters=50"`
 2. **Reduce swarm size:** `--override "pso.n_particles=15"`
 3. **Reduce simulation duration:** `--override "simulation.duration=3.0"`
 4. **Use simplified dynamics:** `--override "simulation.use_full_dynamics=false"` **Time Estimation:**
 ```
+
 Total Time ≈ n_particles × iters × (simulation_duration / dt) × 0.001 seconds
 Example: 30 × 100 × (5.0 / 0.01) × 0.001 = 1500 seconds ≈ 25 minutes
 ``` ### PSO Not Improving **Problem:** Cost stays constant or oscillates, no convergence. **Diagnosis:**
 ```python
 # example-metadata:
+
 # runnable: false # Check if any particles are improving
+
 pso_log = json.load(open('optimized_gains.json'))
 if 'pso_history' in pso_log: costs = pso_log['pso_history']['best_costs'] improvement = (costs[0] - costs[-1]) / costs[0] * 100 print(f"Total improvement: {improvement:.1f}%") if improvement < 5: print("WARNING: Minimal improvement. Possible causes:") print("1. Bounds too narrow (local minimum)") print("2. Cost function not sensitive to gain changes") print("3. Default gains already near-optimal")
 ``` **Solutions:**
@@ -286,7 +362,11 @@ if 'pso_history' in pso_log: costs = pso_log['pso_history']['best_costs'] improv
 3. **Try different initialization:** Use `--seed` with different values ### Optimized Gains Cause Instability **Problem:** Simulation diverges with PSO-optimized gains. **Cause:** PSO found gains that work for short simulations but are unstable long-term. **Solutions:**
 1. **Increase simulation duration in PSO:** `--override "simulation.duration=10.0"`
 2. **Add stability constraints to cost:** ```python if max(abs(state)) > 10.0: # Detect divergence return float('inf') # Penalize heavily ```
-3. **Validate on longer horizon:** ```bash python simulate.py --load gains.json --override "simulation.duration=30.0" --plot ``` --- ## Summary **PSO Workflow Recap:** 1. **Baseline:** Run default simulation
+3. **Validate on longer horizon:** ```bash python simulate.py --load gains.json --override "simulation.duration=30.0" --plot ```
+
+---
+
+## Summary **PSO Workflow Recap:** 1. **Baseline:** Run default simulation
 2. **Configure:** Set bounds, cost weights, swarm size
 3. **Optimize:** Run PSO (8-30 minutes)
 4. **Validate:** Test on multiple scenarios
@@ -300,7 +380,11 @@ if 'pso_history' in pso_log: costs = pso_log['pso_history']['best_costs'] improv
 ✅ Want global optimization (avoid local minima) **When NOT to Use PSO:** ❌ >20 parameters (curse of dimensionality)
 ❌ Very expensive simulations (>1 minute per evaluation)
 ❌ Gradient information available (use gradient-based methods)
-❌ Need real-time adaptation (use adaptive control instead) --- ## Next Steps **Next Tutorial:** [Tutorial 04: Custom Controller Development](tutorial-04-custom-controller.md) - Implement your own SMC variant **Related Guides:**
+❌ Need real-time adaptation (use adaptive control instead)
+
+---
+
+## Next Steps **Next Tutorial:** [Tutorial 04: Custom Controller Development](tutorial-04-custom-controller.md) - Implement your own SMC variant **Related Guides:**
 - [Optimization API](../api/optimization.md): PSOTuner technical reference
 - [Optimization Workflows How-To](../how-to/optimization-workflows.md): Advanced PSO strategies and custom cost functions **Theory & Foundations:**
 - [PSO Algorithm Theory](../theory/pso-theory.md): theoretical foundations - Swarm intelligence principles - Convergence guarantees and velocity clamping - Parameter selection guidelines (swarm size, iterations, inertia strategies) - Benchmark comparisons (PSO vs GA vs gradient methods) **Advanced Topics:**

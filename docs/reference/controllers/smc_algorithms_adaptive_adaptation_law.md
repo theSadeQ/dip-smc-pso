@@ -133,14 +133,14 @@ config = {'parameter': 'value'}
 instance = Component(config)
 ```
 
-### Example 2: Performance Tuning
+## Example 2: Performance Tuning
 
 ```python
 # Adjust parameters for better performance
 optimized_params = tune_parameters(instance, target_performance)
 ```
 
-### Example 3: Integration with Controller
+## Example 3: Integration with Controller
 
 ```python
 # Use in complete control loop
@@ -148,7 +148,7 @@ controller = create_controller(ctrl_type, config)
 result = simulate(controller, duration=5.0)
 ```
 
-### Example 4: Edge Case Handling
+## Example 4: Edge Case Handling
 
 ```python
 try:
@@ -172,7 +172,7 @@ print(f"ITAE: {metrics.itae:.3f}")
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -247,7 +247,7 @@ Compute Lyapunov function derivative for stability analysis.
 
 [View full source →](#method-adaptationlaw-get_lyapunov_derivative)
 
----
+
 
 ### `ModifiedAdaptationLaw`
 
@@ -285,7 +285,7 @@ Check if projection operator is currently active.
 
 [View full source →](#method-modifiedadaptationlaw-_is_projection_active)
 
----
+
 
 ## Dependencies
 

@@ -13,7 +13,7 @@
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -174,7 +174,7 @@ Destructor for automatic cleanup.
 
 [View full source →](#method-hybridadaptivestasmc-__del__)
 
----
+
 
 ## Functions
 
@@ -190,7 +190,7 @@ Smooth sign via tanh with width>0; behaves like sign(x) for |x|>>width.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

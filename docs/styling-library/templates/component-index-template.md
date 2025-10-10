@@ -3,6 +3,7 @@
 **Total Components: 115+** | Last Updated: 2025-10-04
 
 ## 📁 Directory Structure
+
 ```
 react-bits-library/
 ├── src/
@@ -13,7 +14,7 @@ react-bits-library/
 │       └── Backgrounds/       (30 components)
 ```
 
----
+
 
 ## 🎬 Animations (25 Components)
 
@@ -45,7 +46,7 @@ Interactive animations and effects for user engagement.
 24. **StickerPeel** - Sticker peel animation
 25. **TargetCursor** - Target-style cursor
 
----
+
 
 ## ✨ Text Animations (24 Components)
 
@@ -76,7 +77,7 @@ Dynamic text effects and typography animations.
 23. **TrueFocus** - Focus text animation
 24. **VariableProximity** - Proximity-based text
 
----
+
 
 ## 🧩 Components (36 Components)
 
@@ -119,7 +120,7 @@ UI components for interfaces and interactions.
 35. **Stepper** - Step indicator component
 36. **TiltedCard** - 3D tilted card effect
 
----
+
 
 ## 🌈 Backgrounds (30 Components)
 
@@ -156,11 +157,12 @@ Animated background effects and patterns.
 29. **Threads** - Thread-like animations
 30. **Waves** - Wave patterns
 
----
+
 
 ## 🔍 Quick Reference
 
 ### By Animation Style
+
 - **Cursor Effects**: BlobCursor, ClickSpark, Crosshair, PixelTrail, SplashCursor, TargetCursor
 - **Text Effects**: BlurText, GlitchText, ScrambledText, ShinyText, TextType
 - **Card Animations**: BounceCards, CardSwap, DecayCard, PixelCard, TiltedCard
@@ -169,13 +171,14 @@ Animated background effects and patterns.
 - **Grid Layouts**: ChromaGrid, MagicBento, Masonry
 
 ### By Use Case
+
 - **Hero Sections**: Aurora, Galaxy, LiquidChrome, Prism, Waves
 - **Interactive Elements**: Magnet, MetaBalls, StickerPeel, ElasticSlider
 - **Loading/Transition**: FadeContent, PixelTransition, GradualBlur
 - **Typography**: ASCIIText, CircularText, GradientText, RotatingText
 - **Data Display**: Counter, CountUp, AnimatedList, InfiniteScroll
 
----
+
 
 ## 📚 Component File Locations
 
@@ -190,24 +193,27 @@ Each component folder typically contains:
 - `README.md` - Component documentation
 - Additional asset files
 
----
+
 
 ## 🚀 Usage in Your Project
 
 ### Method 1: Direct Copy
+
 Navigate to the component folder and copy the `.tsx` files to your project.
 
 ### Method 2: Reference by Name
+
 Simply tell Claude: "Add the **ShimmerButton** from React Bits" and it will know exactly where to find it!
 
 ### Method 3: Import from Library
+
 If you want to use the entire library:
 ```bash
 cd your-project
 npm install react-bits
 ```
 
----
+
 
 ## 🎨 Integration with Your Dashboard
 
@@ -228,7 +234,7 @@ export default function Dashboard() {
 }
 ```
 
----
+
 
 ## 📖 Documentation
 
@@ -236,6 +242,6 @@ export default function Dashboard() {
 - **Official Site**: https://reactbits.dev
 - **License**: MIT + Commons Clause
 
----
+
 
 **Pro Tip**: All components are built with minimal dependencies and support both Framer Motion, GSAP, and React Spring. You can choose your preferred animation library!

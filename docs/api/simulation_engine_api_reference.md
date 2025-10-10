@@ -263,7 +263,7 @@ print(f"Max control: {np.max(np.abs(u)):.2f} N")
 
 ---
 
-### 2.2 `SimulationRunner` Class **File:** `src/simulation/engines/simulation_runner.py:333` Object-oriented wrapper around `run_simulation()` providing state tracking and compatibility with test cases. #### 2.2.1 Class Definition ```python
+## 2.2 `SimulationRunner` Class **File:** `src/simulation/engines/simulation_runner.py:333` Object-oriented wrapper around `run_simulation()` providing state tracking and compatibility with test cases. #### 2.2.1 Class Definition ```python
 class SimulationRunner: """Object-oriented wrapper around run_simulation function.""" def __init__(self, dynamics_model: Any, dt: float = 0.01, max_time: float = 10.0): """Initialize simulation runner."""
 ``` #### 2.2.2 Initialization Parameters | Parameter | Type | Default | Description |
 
@@ -340,7 +340,7 @@ result = DynamicsResult.failure_result( reason="Singular matrix detected", condi
 
 ---
 
-### 3.2 `BaseDynamicsModel` Abstract Class **File:** `src/plant/models/base/dynamics_interface.py:130` Abstract base class providing common functionality for concrete dynamics implementations. #### 3.2.1 Class Definition ```python
+## 3.2 `BaseDynamicsModel` Abstract Class **File:** `src/plant/models/base/dynamics_interface.py:130` Abstract base class providing common functionality for concrete dynamics implementations. #### 3.2.1 Class Definition ```python
 class BaseDynamicsModel(ABC): """Abstract base class for dynamics models.""" def __init__(self, parameters: Any): """Initialize dynamics model.""" self.parameters = parameters self._setup_validation() self._setup_monitoring()
 ``` #### 3.2.2 Abstract Methods (Must Implement) ```python
 # example-metadata:
@@ -372,7 +372,7 @@ def get_state_dimension(self) -> int: """Get state vector dimension (default: 6 
 
 ---
 
-### 3.3 `LowRankDIPDynamics` Implementation **File:** `src/plant/models/lowrank/dynamics.py:27` Simplified double-inverted pendulum dynamics optimized for computational efficiency. #### 3.3.1 Class Definition ```python
+## 3.3 `LowRankDIPDynamics` Implementation **File:** `src/plant/models/lowrank/dynamics.py:27` Simplified double-inverted pendulum dynamics optimized for computational efficiency. #### 3.3.1 Class Definition ```python
 class LowRankDIPDynamics(BaseDynamicsModel): """Low-rank Double Inverted Pendulum Dynamics Model.""" def __init__( self, config: Union[LowRankDIPConfig, Dict[str, Any]], enable_monitoring: bool = False, enable_validation: bool = True ): """Initialize low-rank DIP dynamics."""
 ``` #### 3.3.2 Features - ✅ **Fast computation** with reduced complexity
 
@@ -443,7 +443,7 @@ t, x, u = run_simulation( controller=linear_controller, dynamics_model=linear_dy
 
 ---
 
-### 4.2 `SequentialOrchestrator` **File:** `src/simulation/orchestrators/sequential.py:18` Single-threaded step-by-step execution for standard simulations. #### 4.2.1 Class Definition ```python
+## 4.2 `SequentialOrchestrator` **File:** `src/simulation/orchestrators/sequential.py:18` Single-threaded step-by-step execution for standard simulations. #### 4.2.1 Class Definition ```python
 # example-metadata:
 # runnable: false class SequentialOrchestrator(BaseOrchestrator): """Sequential simulation orchestrator for single-threaded execution.""" def execute( self, initial_state: np.ndarray, control_inputs: np.ndarray, dt: float, horizon: int, **kwargs ) -> ResultContainer: """Execute sequential simulation."""
 ``` #### 4.2.2 Parameters | Parameter | Type | Shape | Description |
@@ -475,7 +475,7 @@ times = result.get_times() # (horizon+1,)
 
 ---
 
-### 4.3 `BatchOrchestrator` **File:** `src/simulation/orchestrators/batch.py:18` Vectorized execution for multiple simultaneous simulations (PSO optimization, Monte Carlo). #### 4.3.1 Class Definition ```python
+## 4.3 `BatchOrchestrator` **File:** `src/simulation/orchestrators/batch.py:18` Vectorized execution for multiple simultaneous simulations (PSO optimization, Monte Carlo). #### 4.3.1 Class Definition ```python
 # example-metadata:
 # runnable: false class BatchOrchestrator(BaseOrchestrator): """Batch simulation orchestrator for vectorized execution.""" def execute( self, initial_state: np.ndarray, control_inputs: np.ndarray, dt: float, horizon: int, **kwargs ) -> ResultContainer: """Execute batch simulation."""
 ``` #### 4.3.2 Parameters | Parameter | Type | Shape | Description |
@@ -510,7 +510,7 @@ result = tuner.optimise()
 
 ---
 
-### 4.4 `ParallelOrchestrator` **File:** `src/simulation/orchestrators/parallel.py` Multi-threaded execution for large-scale parameter studies. #### 4.4.1 Features - ✅ **Thread pool management** (configurable pool size)
+## 4.4 `ParallelOrchestrator` **File:** `src/simulation/orchestrators/parallel.py` Multi-threaded execution for large-scale parameter studies. #### 4.4.1 Features - ✅ **Thread pool management** (configurable pool size)
 - ✅ **Result synchronization** across threads
 - ✅ **Load balancing** for uneven workloads
 - ✅ **Exception handling** per thread #### 4.4.2 Usage Example ```python
@@ -597,7 +597,7 @@ IntegratorFactory.register_integrator('my_custom', MyCustomIntegrator)
 
 ---
 
-### 5.2 Fixed-Step Integrators #### 5.2.1 `ForwardEuler` **File:** `src/simulation/integrators/fixed_step/euler.py` First-order explicit Euler method: `x_{n+1} = x_n + dt * f(x_n, u_n, t_n)` **Properties:**
+## 5.2 Fixed-Step Integrators #### 5.2.1 `ForwardEuler` **File:** `src/simulation/integrators/fixed_step/euler.py` First-order explicit Euler method: `x_{n+1} = x_n + dt * f(x_n, u_n, t_n)` **Properties:**
 
 - Order: 1
 - Stability: Conditionally stable (small dt required)
@@ -733,7 +733,7 @@ Low Accuracy Euler (dt=0.01) └────────────────
 
 ---
 
-### 6.2 `StandardResultContainer` **File:** `src/simulation/results/containers.py:15` Container for single simulation results. #### 6.2.1 Attributes ```python
+## 6.2 `StandardResultContainer` **File:** `src/simulation/results/containers.py:15` Container for single simulation results. #### 6.2.1 Attributes ```python
 self.states: Optional[np.ndarray] # State trajectory (n_steps+1, state_dim)
 self.times: Optional[np.ndarray] # Time vector (n_steps+1,)
 self.controls: Optional[np.ndarray] # Control sequence (n_steps,)
@@ -806,7 +806,7 @@ for i in range(10): states_i = batch_result.get_states(batch_index=i) settling_t
 
 ---
 
-### 6.4 Result Exporters #### 6.4.1 CSV Exporter **File:** `src/simulation/results/exporters.py` Exports results to CSV format (human-readable, spreadsheet-compatible). **Format:**
+## 6.4 Result Exporters #### 6.4.1 CSV Exporter **File:** `src/simulation/results/exporters.py` Exports results to CSV format (human-readable, spreadsheet-compatible). **Format:**
 ```csv
 
 time,x,theta1,theta2,x_dot,theta1_dot,theta2_dot,control
@@ -871,7 +871,7 @@ safety: max_energy: 100.0 # Joules state_bounds: x: [-2.0, 2.0] # Cart position 
 
 ---
 
-### 7.2 Performance Monitoring **File:** `src/simulation/safety/monitors.py` #### 7.2.1 `PerformanceMonitor` Tracks execution time and throughput for orchestrators and integrators. **Methods:**
+## 7.2 Performance Monitoring **File:** `src/simulation/safety/monitors.py` #### 7.2.1 `PerformanceMonitor` Tracks execution time and throughput for orchestrators and integrators. **Methods:**
 ```python
 # example-metadata:
 
@@ -982,7 +982,7 @@ plt.show() print("\nPlot saved to: results/basic_simulation.png")
 
 ---
 
-### 8.2 Example 2: Batch Simulation for PSO **Objective:** Use batch orchestrator for PSO fitness evaluation with vectorized execution. ```python
+## 8.2 Example 2: Batch Simulation for PSO **Objective:** Use batch orchestrator for PSO fitness evaluation with vectorized execution. ```python
 
 """
 Example 2: Batch Simulation for PSO Optimization

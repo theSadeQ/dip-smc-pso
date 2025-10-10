@@ -13,7 +13,7 @@ Result container implementations for simulation data.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -63,7 +63,7 @@ Export results to specified format.
 
 [View full source →](#method-standardresultcontainer-export)
 
----
+
 
 ### `BatchResultContainer`
 
@@ -117,7 +117,7 @@ Get number of batches.
 
 [View full source →](#method-batchresultcontainer-get_batch_count)
 
----
+
 
 ## Dependencies
 
@@ -173,46 +173,50 @@ graph TD
 
 \`\`\`python
 # Basic usage example
+
 from src.simulation.results import Component
 
 component = Component()
 result = component.process(data)
 \`\`\`
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 \`\`\`python
 # Advanced configuration
+
 component = Component(
     option1=value1,
     option2=value2
 )
 \`\`\`
 
-### Example 3: Integration with Framework
+## Example 3: Integration with Framework
 
 \`\`\`python
 # Integration example
+
 from src.simulation import SimulationRunner
 
 runner = SimulationRunner()
 runner.use_component(component)
 \`\`\`
 
-### Example 4: Performance Optimization
+## Example 4: Performance Optimization
 
 \`\`\`python
 # Performance-optimized usage
+
 component = Component(enable_caching=True)
 \`\`\`
 
-### Example 5: Error Handling
+## Example 5: Error Handling
 
 \`\`\`python
 # Error handling
+
 try:
     result = component.process(data)
 except ComponentError as e:
     print(f"Error: {e}")
 \`\`\`
-

@@ -175,7 +175,7 @@ else: await page.goto(file_url, wait_until="networkidle", timeout=30000)
 
 ---
 
-### 🟡 MINOR ISSUE #1: Very Long Pages **Affected Pages:**
+## 🟡 MINOR ISSUE #1: Very Long Pages **Affected Pages:**
 
 - `architecture_controller_system_architecture.html`
 - `presentation_*.html` (slide conversion pages)

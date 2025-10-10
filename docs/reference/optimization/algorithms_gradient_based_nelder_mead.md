@@ -128,14 +128,14 @@ config = {'parameter': 'value'}
 instance = Component(config)
 ```
 
-### Example 2: Performance Tuning
+## Example 2: Performance Tuning
 
 ```python
 # Adjust parameters for better performance
 optimized_params = tune_parameters(instance, target_performance)
 ```
 
-### Example 3: Integration with Optimization
+## Example 3: Integration with Optimization
 
 ```python
 # Use in complete optimization loop
@@ -143,7 +143,7 @@ optimizer = create_optimizer(opt_type, config)
 result = optimize(optimizer, problem, max_iter=100)
 ```
 
-### Example 4: Edge Case Handling
+## Example 4: Edge Case Handling
 
 ```python
 try:
@@ -166,7 +166,7 @@ print(f"Best fitness: {metrics.best_fitness:.3f}")
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -182,7 +182,7 @@ Configuration for Nelder-Mead algorithm.
 :linenos:
 ```
 
----
+
 
 ### `NelderMeadSimplex`
 
@@ -268,7 +268,7 @@ Calculate simplex volume.
 
 [View full source →](#method-neldermeadsimplex-volume)
 
----
+
 
 ### `NelderMead`
 
@@ -400,7 +400,7 @@ Restart simplex with perturbation.
 
 [View full source →](#method-neldermead-restart_simplex)
 
----
+
 
 ## Dependencies
 

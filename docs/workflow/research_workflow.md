@@ -64,7 +64,7 @@ python scripts/docs/validate_citations.py --show-details FORMAL-THEOREM-001
 - `pso_optimization.bib` - PSO algorithms (Kennedy & Eberhart, Trelea)
 - `adaptive_control.bib` - Adaptive control theory (Ioannou & Sun, Åström & Wittenmark)
 
-### 1.3 Hypothesis Formulation
+## 1.3 Hypothesis Formulation
 
 **Example:**
 
@@ -271,7 +271,7 @@ python experiments/adaptive_vs_classical/run_experiment.py --parallel 4
 python experiments/adaptive_vs_classical/run_experiment.py --resume results.csv
 ```
 
-### 3.2 Progress Monitoring
+## 3.2 Progress Monitoring
 
 ```python
 # experiments/adaptive_vs_classical/monitor.py
@@ -293,7 +293,7 @@ while True:
     time.sleep(60)  # Check every minute
 ```
 
-### 3.3 Data Quality Checks
+## 3.3 Data Quality Checks
 
 ```python
 # experiments/adaptive_vs_classical/validate_data.py
@@ -388,7 +388,7 @@ print(f"  Classical: [{classical_ci[0]:.3f}, {classical_ci[1]:.3f}]")
 print(f"  Adaptive:  [{adaptive_ci[0]:.3f}, {adaptive_ci[1]:.3f}]")
 ```
 
-### 4.2 Visualization
+## 4.2 Visualization
 
 ```python
 # Box plot comparison
@@ -472,7 +472,7 @@ for metric in metrics:
         print(f"  ⚠️  Reproducibility issue detected!")
 ```
 
-### 5.2 Sensitivity Analysis
+## 5.2 Sensitivity Analysis
 
 ```python
 # Test sensitivity to hyperparameters
@@ -603,7 +603,7 @@ python scripts/docs/validate_citations.py --check-theorems
 python scripts/docs/export_citations.py --format bibtex
 ```
 
-### 7.2 Supplementary Materials
+## 7.2 Supplementary Materials
 
 **Create supplementary package:**
 
@@ -635,7 +635,7 @@ tar -czf supplementary.tar.gz supplementary/
 # "Supplementary materials available at https://doi.org/10.5281/zenodo.XXXXXXX"
 ```
 
-### 7.3 Preprint
+## 7.3 Preprint
 
 ```bash
 # Generate arXiv-compatible PDF
@@ -645,7 +645,7 @@ python scripts/publication/generate_arxiv_package.py
 # https://arxiv.org/
 ```
 
-### 7.4 Journal Submission
+## 7.4 Journal Submission
 
 **Target journals** (for control systems research):
 - IEEE Transactions on Automatic Control

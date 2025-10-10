@@ -109,7 +109,7 @@ python simulate.py --print-config | grep -A 10 "classical_smc"
 python simulate.py --print-config | findstr /C:"classical_smc" /A:10
 ```
 
-### Creating Custom Configurations
+## Creating Custom Configurations
 
 **Option 1: Modify config.yaml directly**
 ```yaml
@@ -144,7 +144,7 @@ cp config.yaml config_high_performance.yaml
 python simulate.py --config config_high_performance.yaml --ctrl classical_smc --plot
 ```
 
-### Configuration Validation
+## Configuration Validation
 
 The framework automatically validates configurations using Pydantic schemas:
 
@@ -183,7 +183,7 @@ python simulate.py --ctrl classical_smc --plot
 python simulate.py --ctrl sta_smc --plot --save results_sta.json
 ```
 
-### Advanced Simulation Options
+## Advanced Simulation Options
 
 ```bash
 # Custom configuration file
@@ -199,7 +199,7 @@ python simulate.py --load tuned_gains.json --override "max_force=150.0" --plot
 python simulate.py --ctrl classical_smc --seed 42 --plot
 ```
 
-### Initial Conditions
+## Initial Conditions
 
 **Small perturbations (default):**
 ```yaml
@@ -224,7 +224,7 @@ python simulate.py --ctrl classical_smc \
     --plot
 ```
 
-### Simulation Duration and Timestep
+## Simulation Duration and Timestep
 
 **Short duration (quick tests):**
 ```bash
@@ -278,7 +278,7 @@ print(f\"ISE improvement: {(baseline['metrics']['ise'] - optimized['metrics']['i
 "
 ```
 
-### PSO Configuration
+## PSO Configuration
 
 **Quick optimization (prototyping):**
 ```yaml
@@ -445,7 +445,7 @@ plt.grid()
 plt.show()
 ```
 
-### Comparing Multiple Results
+## Comparing Multiple Results
 
 ```python
 # Load multiple results
@@ -521,7 +521,7 @@ python -c "from src.hil.plant_server import run_server; run_server()"
 python -c "from src.hil.controller_client import run_client; run_client()"
 ```
 
-### HIL Configuration
+## HIL Configuration
 
 ```yaml
 # config.yaml - hil section
@@ -543,7 +543,7 @@ hil:
   max_packet_loss: 0.05     # 5% packet loss
 ```
 
-### HIL Latency Analysis
+## HIL Latency Analysis
 
 ```python
 # example-metadata:
@@ -614,7 +614,7 @@ for ctrl in controllers:
     print(f"{ctrl:20s} Average ISE: {avg_ise:.4f}")
 ```
 
-### Parallel Batch Processing
+## Parallel Batch Processing
 
 ```python
 # example-metadata:
@@ -670,7 +670,7 @@ streamlit run streamlit_app.py --server.address 0.0.0.0
 
 **Access in browser:** `http://localhost:8501`
 
-### Dashboard Features
+## Dashboard Features
 
 1. **Controller Selection:** Dropdown menu for all 4 core controllers
 2. **Parameter Tuning:** Interactive sliders for gains, max force, boundary layer
@@ -746,7 +746,7 @@ ls config.yaml
 python simulate.py --config /full/path/to/config.yaml --ctrl classical_smc --plot
 ```
 
-### Performance Issues
+## Performance Issues
 
 **Symptom:** Slow simulation (<10 Hz iteration rate)
 
@@ -766,7 +766,7 @@ print(f"Simulation took {elapsed:.2f} seconds")
 3. Reduce duration: `--override "simulation.duration=3.0"`
 4. Check CPU usage (ensure no background processes)
 
-### Numerical Instability
+## Numerical Instability
 
 **Symptom:** `NumericalInstabilityError: State norm exceeded threshold`
 
@@ -820,7 +820,7 @@ python simulate.py --print-config
 streamlit run streamlit_app.py
 ```
 
-### File Locations
+## File Locations
 
 - **Configuration:** `config.yaml`
 - **Main CLI:** `simulate.py`

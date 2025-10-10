@@ -16,7 +16,7 @@ IMU sensors, and specialized measurement devices.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -34,7 +34,7 @@ Sensor type enumeration.
 :linenos:
 ```
 
----
+
 
 ### `SensorReading`
 
@@ -48,7 +48,7 @@ Sensor reading data structure.
 :linenos:
 ```
 
----
+
 
 ### `SensorCalibration`
 
@@ -62,7 +62,7 @@ Sensor calibration parameters.
 :linenos:
 ```
 
----
+
 
 ### `SensorInterface`
 
@@ -144,7 +144,7 @@ Store reading in history.
 
 [View full source →](#method-sensorinterface-_store_reading)
 
----
+
 
 ### `AnalogSensor`
 
@@ -219,7 +219,7 @@ Add analog sensor support.
 
 [View full source →](#method-analogsensor-_add_analog_capabilities)
 
----
+
 
 ### `DigitalSensor`
 
@@ -306,7 +306,7 @@ Add digital sensor support.
 
 [View full source →](#method-digitalsensor-_add_digital_capabilities)
 
----
+
 
 ### `IMUSensor`
 
@@ -411,7 +411,7 @@ Add IMU sensor support.
 
 [View full source →](#method-imusensor-_add_imu_capabilities)
 
----
+
 
 ## Dependencies
 

@@ -33,7 +33,7 @@ Usage Examples:
 :linenos:
 ```
 
----
+
 
 ## Functions
 
@@ -67,7 +67,7 @@ Example:
 :linenos:
 ```
 
----
+
 
 ### `get_all_gain_bounds()`
 
@@ -81,7 +81,7 @@ Get PSO gain bounds for all SMC controller types.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

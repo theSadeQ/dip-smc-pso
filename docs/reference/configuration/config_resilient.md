@@ -22,7 +22,7 @@ PRODUCTION SAFETY: System can operate even if config.yaml is deleted or corrupte
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -40,7 +40,7 @@ Configuration source types.
 :linenos:
 ```
 
----
+
 
 ### `ConfigState`
 
@@ -56,7 +56,7 @@ Configuration system state.
 :linenos:
 ```
 
----
+
 
 ### `ConfigHealth`
 
@@ -78,7 +78,7 @@ Update status for a configuration source.
 
 [View full source →](#method-confighealth-update_source_status)
 
----
+
 
 ### `ResilientConfigManager`
 
@@ -191,7 +191,7 @@ Save current configuration to backup file.
 
 [View full source →](#method-resilientconfigmanager-_save_to_backup)
 
----
+
 
 ## Functions
 
@@ -207,7 +207,7 @@ Get configuration manager (creates if not exists).
 :linenos:
 ```
 
----
+
 
 ### `set_config_manager(manager)`
 
@@ -221,7 +221,7 @@ Replace configuration manager (eliminates singleton dependency).
 :linenos:
 ```
 
----
+
 
 ### `get_config(key, default)`
 
@@ -235,7 +235,7 @@ Get configuration value using resilient manager.
 :linenos:
 ```
 
----
+
 
 ### `set_config(key, value, persist)`
 
@@ -249,7 +249,7 @@ Set configuration value using resilient manager.
 :linenos:
 ```
 
----
+
 
 ### `reload_config()`
 
@@ -263,7 +263,7 @@ Reload configuration from all sources.
 :linenos:
 ```
 
----
+
 
 ### `get_config_health()`
 
@@ -277,7 +277,7 @@ Get configuration system health.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

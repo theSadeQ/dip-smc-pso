@@ -24,7 +24,7 @@ Statistical Methods:
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -40,7 +40,7 @@ Container for confidence interval analysis results.
 :linenos:
 ```
 
----
+
 
 ## Functions
 
@@ -71,7 +71,7 @@ dict
 :linenos:
 ```
 
----
+
 
 ### `compute_t_confidence_intervals(metrics_list, confidence_level)`
 
@@ -101,7 +101,7 @@ dict
 :linenos:
 ```
 
----
+
 
 ### `compute_bootstrap_confidence_intervals(metrics_list, confidence_level, n_bootstrap, random_seed)`
 
@@ -135,7 +135,7 @@ dict
 :linenos:
 ```
 
----
+
 
 ### `perform_statistical_tests(metrics_list)`
 
@@ -159,7 +159,7 @@ dict
 :linenos:
 ```
 
----
+
 
 ### `compare_metric_distributions(metrics_list_a, metrics_list_b, alpha)`
 
@@ -185,7 +185,7 @@ dict
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

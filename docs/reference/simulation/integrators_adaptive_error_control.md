@@ -170,7 +170,7 @@ instance = IntegratorsAdaptiveErrorControl()
 result = instance.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Custom configuration
@@ -179,7 +179,7 @@ instance = IntegratorsAdaptiveErrorControl(config)
 result = instance.process(data)
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 ```python
 try:
@@ -212,7 +212,7 @@ result = orchestrator.execute(instance.process(data))
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -242,7 +242,7 @@ Update step size based on error estimate.
 
 [View full source →](#method-errorcontroller-update_step_size)
 
----
+
 
 ### `PIController`
 
@@ -278,7 +278,7 @@ Reset controller state.
 
 [View full source →](#method-picontroller-reset)
 
----
+
 
 ### `DeadBeatController`
 
@@ -308,7 +308,7 @@ Update step size using dead-beat control.
 
 [View full source →](#method-deadbeatcontroller-update_step_size)
 
----
+
 
 ## Dependencies
 

@@ -16,7 +16,7 @@ automated alerting, and integration with the CLAUDE.md quality standards.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -40,7 +40,7 @@ Validate coverage metrics after initialization.
 
 [View full source →](#method-coveragemetrics-__post_init__)
 
----
+
 
 ### `CoverageMonitor`
 
@@ -113,7 +113,7 @@ Export coverage metrics to JSON for external analysis.
 
 [View full source →](#method-coveragemonitor-export_metrics_json)
 
----
+
 
 ## Functions
 
@@ -136,7 +136,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

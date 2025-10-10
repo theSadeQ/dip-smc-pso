@@ -7,10 +7,10 @@ This section covers the various control strategies implemented for the double-in
 ```{toctree}
 :maxdepth: 2
 
-classical-smc
-super-twisting-smc
-adaptive-smc
-hybrid-adaptive-smc
+classical_smc_technical_guide
+sta_smc_technical_guide
+adaptive_smc_technical_guide
+hybrid_smc_technical_guide
 ```
 
 Note: This page has moved. See Reference → Controllers.

@@ -13,7 +13,7 @@
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -27,7 +27,7 @@
 :linenos:
 ```
 
----
+
 
 ### `MPCController`
 
@@ -72,7 +72,7 @@ Angle-aware, safe fallback:
 
 [View full source →](#method-mpccontroller-_safe_fallback)
 
----
+
 
 ## Functions
 
@@ -89,7 +89,7 @@ Supports several common method names; last‑resort: finite‑difference via ste
 :linenos:
 ```
 
----
+
 
 ### `_numeric_linearize_continuous(dyn, x_eq, u_eq, eps)`
 
@@ -128,7 +128,7 @@ Tuple[np.ndarray, np.ndarray]
 :linenos:
 ```
 
----
+
 
 ### `_discretize_forward_euler(Ac, Bc, dt)`
 
@@ -142,7 +142,7 @@ Simple forward‑Euler discretization (stable for small dt).
 :linenos:
 ```
 
----
+
 
 ### `_discretize_exact(Ac, Bc, dt)`
 
@@ -156,7 +156,7 @@ Zero‑order hold (exact) discretization using matrix exponential.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

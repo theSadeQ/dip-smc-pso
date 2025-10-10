@@ -269,7 +269,7 @@ def compute_ruggedness(fitness_function, gains, epsilon=0.1, n_samples=100):
 - **High ruggedness:** Fitness evaluations become unreliable
   - **Solution:** Average over multiple simulations or use longer simulation time
 
-### Partial Convexity
+## Partial Convexity
 
 **Definition:**
 
@@ -451,7 +451,7 @@ def compute_fitness(gains):
 - Start with (0.5, 0.3, 0.2) - proven effective for SMC
 - Iterate based on application requirements
 
-### Pareto Frontier
+## Pareto Frontier
 
 **Multi-Objective PSO (MOPSO):**
 
@@ -741,7 +741,7 @@ print("Total indices:", Si['ST'])
 - **Surface gains k₁, k₂:** Moderate importance
 - **Damping k_d:** Weak main effect (but interaction effects exist)
 
-### Interaction Effects
+## Interaction Effects
 
 **Second-Order Sobol Index:**
 
@@ -834,7 +834,7 @@ exploration_bounds = {
 - **First run:** Use exploration bounds (find global structure)
 - **Refinement:** Narrow bounds around best region found
 
-### Algorithm Configuration
+## Algorithm Configuration
 
 **Based on Landscape Characteristics:**
 

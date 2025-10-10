@@ -117,14 +117,14 @@ config = {'parameter': 'value'}
 instance = Component(config)
 ```
 
-### Example 2: Performance Tuning
+## Example 2: Performance Tuning
 
 ```python
 # Adjust parameters for better performance
 optimized_params = tune_parameters(instance, target_performance)
 ```
 
-### Example 3: Integration with Optimization
+## Example 3: Integration with Optimization
 
 ```python
 # Use in complete optimization loop
@@ -132,7 +132,7 @@ optimizer = create_optimizer(opt_type, config)
 result = optimize(optimizer, problem, max_iter=100)
 ```
 
-### Example 4: Edge Case Handling
+## Example 4: Edge Case Handling
 
 ```python
 try:
@@ -259,14 +259,14 @@ config = {'parameter': 'value'}
 instance = Component(config)
 ```
 
-### Example 2: Performance Tuning
+## Example 2: Performance Tuning
 
 ```python
 # Adjust parameters for better performance
 optimized_params = tune_parameters(instance, target_performance)
 ```
 
-### Example 3: Integration with Optimization
+## Example 3: Integration with Optimization
 
 ```python
 # Use in complete optimization loop
@@ -274,7 +274,7 @@ optimizer = create_optimizer(opt_type, config)
 result = optimize(optimizer, problem, max_iter=100)
 ```
 
-### Example 4: Edge Case Handling
+## Example 4: Edge Case Handling
 
 ```python
 try:
@@ -297,7 +297,7 @@ print(f"Best fitness: {metrics.best_fitness:.3f}")
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -347,7 +347,7 @@ Parameter bounds (lower, upper).
 
 [View full source →](#method-parameter-bounds)
 
----
+
 
 ### `ContinuousParameter`
 
@@ -395,7 +395,7 @@ Parameter bounds.
 
 [View full source →](#method-continuousparameter-bounds)
 
----
+
 
 ### `DiscreteParameter`
 
@@ -449,7 +449,7 @@ Bounds for discrete parameter (min and max values).
 
 [View full source →](#method-discreteparameter-bounds)
 
----
+
 
 ### `ContinuousParameterSpace`
 
@@ -509,7 +509,7 @@ Get information about each parameter.
 
 [View full source →](#method-continuousparameterspace-get_parameter_info)
 
----
+
 
 ### `MixedParameterSpace`
 
@@ -563,7 +563,7 @@ Parameter bounds.
 
 [View full source →](#method-mixedparameterspace-bounds)
 
----
+
 
 ### `ParameterBounds`
 
@@ -603,7 +603,7 @@ Scale parameters from unit cube to original bounds.
 
 [View full source →](#method-parameterbounds-scale_from_unit)
 
----
+
 
 ### `ParameterMapping`
 
@@ -637,7 +637,7 @@ Convert parameter dictionary to array.
 
 [View full source →](#method-parametermapping-from_dict)
 
----
+
 
 ### `ParameterValidator`
 
@@ -671,7 +671,7 @@ Validate batch of parameter vectors.
 
 [View full source →](#method-parametervalidator-validate_batch)
 
----
+
 
 ## Dependencies
 

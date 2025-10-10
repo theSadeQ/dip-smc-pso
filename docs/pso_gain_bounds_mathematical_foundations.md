@@ -472,7 +472,7 @@ def transform_gains_from_log(log_gains: np.ndarray) -> np.ndarray:
 | Damping (λ₁, λ₂) | [1.0, 20.0] | [0.0, 1.3] | Better convergence |
 | Switching Gains (K) | [5.0, 150.0] | [0.7, 2.2] | Reduced clustering |
 
-### 7.2 Constraint Handling in PSO
+## 7.2 Constraint Handling in PSO
 
 **Penalty Method for Constraint Violations:**
 ```python
@@ -561,7 +561,7 @@ print(f"Predicted overshoot: {overshoot:.2f}%, Compliant: {compliant}, ζ: {zeta
 # Output: Predicted overshoot: 4.79%, Compliant: True, ζ: 0.780
 ```
 
-### 8.2 PSO Bounds Update for Issue #2 Resolution
+## 8.2 PSO Bounds Update for Issue #2 Resolution
 
 **Updated STA-SMC Bounds (Post Issue #2):**
 ```yaml
