@@ -49,7 +49,7 @@ exclude_patterns = [
     # 'development/**',
     # 'examples/**',
     # 'factory/**',        # Re-included for testing - Step 2 of gradual re-inclusion
-    'for_reviewers/**',  # TEMP: Re-exclude to isolate exact error
+    'for_reviewers/**',  # TEMP: Re-exclude to isolate toctree issue
     # 'guides/**',
     # 'hil/**',
     # 'how-to/**',
