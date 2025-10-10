@@ -5,7 +5,7 @@
 **Last Updated:** 2025-10-09
 **Estimated Time:** 2-3 hours (including test suite)
 
----
+
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@
 - **RAM:** 4GB minimum, 8GB recommended
 - **Disk Space:** 500MB for repository + dependencies
 
----
+
 
 ### Installation
 
@@ -27,7 +27,7 @@ git clone https://github.com/theSadeQ/dip-smc-pso.git
 cd dip-smc-pso
 ```
 
----
+
 
 #### Step 2: Create Virtual Environment
 
@@ -50,7 +50,7 @@ where python  # Windows
 # Output should show path to venv/bin/python or venv\Scripts\python.exe
 ```
 
----
+
 
 #### Step 3: Install Dependencies
 
@@ -70,7 +70,7 @@ python -c "import numpy, scipy, matplotlib; print('Dependencies OK')"
 # Output: Dependencies OK
 ```
 
----
+
 
 ## Quick Smoke Test (5 minutes)
 
@@ -96,7 +96,7 @@ python simulate.py --ctrl classical_smc --duration 2.0
 - Final pendulum angles |θ₁|, |θ₂| < 0.1 rad
 - "System stabilized: True"
 
----
+
 
 ### Test 2: Plot Generation
 
@@ -117,7 +117,7 @@ python simulate.py --ctrl classical_smc --duration 5.0 --plot
 - System converges within 5 seconds
 - No chattering visible in control force
 
----
+
 
 ### Test 3: Run Test Suite
 
@@ -146,7 +146,7 @@ tests/test_optimizer/test_pso_optimizer.py ........                          [ 6
 
 **If tests fail:** Check `.artifacts/test_failure_report.md` for diagnostics
 
----
+
 
 ## Detailed Simulations (30 minutes)
 
@@ -189,7 +189,7 @@ Steady-state error (θ2): 0.004rad
 Peak control force: 87.2N
 ```
 
----
+
 
 ### Simulation 2: STA-SMC - Chattering Comparison
 
@@ -209,7 +209,6 @@ python scripts/analysis/compare_chattering.py results/classical.json results/sta
 **Expected Output:**
 ```
 Chattering Analysis:
--------------------
 Classical SMC:
   - Control switching frequency: 45.2 Hz
   - High-frequency content: 38.7%
@@ -226,7 +225,7 @@ Chattering Reduction: 89.4%
 - High-frequency content reduced by > 80%
 - Tracking performance maintained (settling time similar)
 
----
+
 
 ### Simulation 3: Adaptive SMC - Parameter Uncertainty
 
@@ -258,7 +257,7 @@ python scripts/analysis/plot_adaptive_gains.py results/adaptive_smc.json
 
 **Output:** Plot showing adaptive gains converging over time
 
----
+
 
 ## PSO Optimization (45 minutes)
 
@@ -298,7 +297,7 @@ python simulate.py \
 - Final fitness < 50% of initial fitness
 - Best gains satisfy positivity constraints (all > 0)
 
----
+
 
 ### Optimization 2: Full PSO Run (30 minutes)
 
@@ -346,7 +345,6 @@ python scripts/analysis/compare_pso_results.py \
 **Expected Comparison:**
 ```
 PSO Gain Comparison:
--------------------
 Parameter    | Optimized | Published | Difference
 -------------|-----------|-----------|------------
 c1 (cart)    | 11.8      | 11.5      | +2.6%
@@ -364,7 +362,7 @@ Mean absolute difference: 2.1%
 - Fitness converges before iteration 500
 - Reproducible results with seed=42
 
----
+
 
 ### Optimization 3: PSO Convergence Analysis
 
@@ -377,7 +375,6 @@ python scripts/analysis/analyze_pso_convergence.py results/pso_full.json
 **Expected Output:**
 ```
 PSO Convergence Analysis:
-------------------------
 1. Stability Condition (Theorem 8):
    - w + c1 + c2 = 0.65 + 2.0 + 2.0 = 4.65
    - Stability range: 0 < w + c1 + c2 < 4
@@ -396,7 +393,7 @@ PSO Convergence Analysis:
 Conclusion: PSO converged to local minimum (likely global for this problem)
 ```
 
----
+
 
 ## Test Suite Verification (30 minutes)
 
@@ -424,14 +421,12 @@ tests/test_integration/test_full_simulation.py::test_sta_smc PASSED             
 
 ---------- coverage: 87.2% ----------
 Name                                    Stmts   Miss  Cover
------------------------------------------------------------
 src/controllers/smc/classic_smc.py        120      8   93.3%
 src/controllers/smc/sta_smc.py            135     12   91.1%
 src/controllers/smc/adaptive_smc.py       142     15   89.4%
 src/core/dynamics.py                      210     18   91.4%
 src/optimizer/pso_optimizer.py            185     22   88.1%
 ...
------------------------------------------------------------
 TOTAL                                    2145    275   87.2%
 ```
 
@@ -441,7 +436,7 @@ TOTAL                                    2145    275   87.2%
 - **Critical components ≥ 90%:** Controllers, dynamics, optimizer all > 90% ✅
 - **No warnings:** Check for deprecation warnings
 
----
+
 
 ### Specific Test Categories
 
@@ -473,7 +468,7 @@ pytest tests/test_integration/ -v
 
 **Expected:** 15 tests pass, covering end-to-end simulations
 
----
+
 
 ## Validation Scripts (15 minutes)
 
@@ -491,7 +486,7 @@ python scripts/docs/validate_citations.py
 [PASS] VALIDATION PASSED
 ```
 
----
+
 
 ### Attribution Audit
 
@@ -509,7 +504,7 @@ python scripts/docs/check_attribution.py
 ✅ PASS: See .artifacts/attribution_audit_executive_summary.md for details
 ```
 
----
+
 
 ### Master Validation
 
@@ -546,7 +541,7 @@ Overall Status: ✅ PASS
 Publication Ready: YES (with minor attribution improvements)
 ```
 
----
+
 
 ## Troubleshooting
 
@@ -566,7 +561,7 @@ which python  # Should show venv/bin/python
 pip install -r requirements.txt --force-reinstall
 ```
 
----
+
 
 ### Issue 2: Simulation Divergence
 
@@ -582,7 +577,7 @@ RuntimeWarning: overflow encountered in double_scalars
 - Reduce timestep: `--dt 0.005` (default 0.01)
 - Check for numerical instability in dynamics
 
----
+
 
 ### Issue 3: PSO Not Converging
 
@@ -597,7 +592,7 @@ RuntimeWarning: overflow encountered in double_scalars
 - Check fitness function is well-defined
 - Try different random seed: `--seed 123`
 
----
+
 
 ### Issue 4: Plot Not Displaying
 
@@ -617,7 +612,7 @@ set MPLBACKEND=Agg  # Windows
 python simulate.py --ctrl classical_smc --plot --save-fig results/plot.png
 ```
 
----
+
 
 ## Reproducibility Checklist
 
@@ -660,7 +655,7 @@ Use this checklist to verify full reproducibility:
 - [ ] Theorem-to-code mappings are correct
 - [ ] Mathematical notation matches code variables
 
----
+
 
 ## Expected Timeline
 
@@ -677,7 +672,7 @@ Use this checklist to verify full reproducibility:
 
 **With documentation review:** Add 45 minutes → **3 hours total**
 
----
+
 
 ## Related Documentation
 
@@ -686,7 +681,7 @@ Use this checklist to verify full reproducibility:
 - **Theorem Verification:** `docs/for_reviewers/theorem_verification_guide.md`
 - **Verification Checklist:** `docs/for_reviewers/verification_checklist.md`
 
----
+
 
 **Last Updated:** 2025-10-09
 **Maintained By:** Claude Code
