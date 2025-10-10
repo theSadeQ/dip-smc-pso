@@ -4,7 +4,7 @@
 
 **Print this page for offline reference during review**
 
----
+
 
 ## Quick Start (15 minutes)
 
@@ -16,7 +16,7 @@
 
 **If all checks pass → proceed to detailed verification**
 
----
+
 
 ## Phase 1: Citation System (30 minutes)
 
@@ -42,7 +42,7 @@
 
 **Status:** ☐ PASS ☐ FAIL ☐ NOTES: _______________________
 
----
+
 
 ## Phase 2: Theorem Accuracy (45 minutes)
 
@@ -78,7 +78,7 @@
 
 **Status:** ☐ PASS ☐ FAIL ☐ NOTES: _______________________
 
----
+
 
 ## Phase 3: Code Reproduction (60 minutes)
 
@@ -125,7 +125,7 @@
 
 **Status:** ☐ PASS ☐ FAIL ☐ NOTES: _______________________
 
----
+
 
 ## Phase 4: Attribution Completeness (20 minutes)
 
@@ -151,7 +151,7 @@
 
 **Status:** ☐ PASS ☐ CONDITIONAL_PASS ☐ FAIL ☐ NOTES: _______________________
 
----
+
 
 ## Phase 5: Documentation Quality (15 minutes)
 
@@ -172,7 +172,7 @@
 
 **Status:** ☐ PASS ☐ FAIL ☐ NOTES: _______________________
 
----
+
 
 ## Phase 6: Master Validation (5 minutes)
 
@@ -192,7 +192,7 @@
 
 **Status:** ☐ PASS ☐ FAIL ☐ NOTES: _______________________
 
----
+
 
 ## Final Assessment
 
@@ -221,7 +221,7 @@
 - _____________________________________________
 - _____________________________________________
 
----
+
 
 ## Reviewer Notes
 
@@ -251,7 +251,7 @@
 - _____________________________________________
 - _____________________________________________
 
----
+
 
 ## Quick Reference
 
@@ -288,7 +288,7 @@ python simulate.py --ctrl classical_smc --duration 5.0 --plot
 python simulate.py --ctrl classical_smc --run-pso --iterations 50
 ```
 
----
+
 
 ## Expected Results Summary
 
@@ -304,7 +304,7 @@ python simulate.py --ctrl classical_smc --run-pso --iterations 50
 | STA-SMC | Chattering reduction > 80% | Plot |
 | PSO (50 iter) | Fitness improves > 50% | Terminal output |
 
----
+
 
 **Document Version:** 1.0
 **Last Updated:** 2025-10-09
