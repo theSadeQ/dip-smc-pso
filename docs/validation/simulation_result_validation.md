@@ -70,7 +70,7 @@ analyzer = MonteCarloAnalyzer(config)
 
 ---
 
-#### 1.2.3 Sobol Sequence (Quasi-Monte Carlo) **Description:** Low-discrepancy sequence for deterministic space-filling sampling. **Use Cases:**
+### 1.2.3 Sobol Sequence (Quasi-Monte Carlo) **Description:** Low-discrepancy sequence for deterministic space-filling sampling. **Use Cases:**
 
 - High-dimensional parameter spaces (>10 dimensions)
 - Global sensitivity analysis (Sobol indices)
@@ -818,7 +818,7 @@ final_ranking = ranking['final_ranking']
 
 ---
 
-#### 4.6.3 Weighted Score **Description:** Weight metrics by importance. ```
+### 4.6.3 Weighted Score **Description:** Weight metrics by importance. ```
 
 Score = Σᵢ wᵢ × normalized_metricᵢ where Σᵢ wᵢ = 1
 ``` **Example:** Safety-critical application:
@@ -898,7 +898,7 @@ print(f"Once-in-100-scenarios worst-case: {return_100:.2f}")
 
 ---
 
-### 6.2 PSO Hyperparameter Validation **Challenge:** Ensure PSO-tuned parameters generalize beyond training scenarios. **Validation Approach:** 1. **Training Scenarios:** Nominal operating conditions
+## 6.2 PSO Hyperparameter Validation **Challenge:** Ensure PSO-tuned parameters generalize beyond training scenarios. **Validation Approach:** 1. **Training Scenarios:** Nominal operating conditions
 
 2. **Validation Scenarios:** Hold-out scenarios (10-20% of total)
 3. **Test Scenarios:** Completely new conditions **Cross-Validation for PSO:** ```python
@@ -966,7 +966,7 @@ config = StatisticalTestConfig( multiple_comparisons_correction="holm" # Use Hol
 
 ---
 
-#### Pitfall 3: Confusing Statistical and Practical Significance **Problem:** p < 0.05 doesn't mean the effect is important. **Solution:**
+### Pitfall 3: Confusing Statistical and Practical Significance **Problem:** p < 0.05 doesn't mean the effect is important. **Solution:**
 
 ```python
 # Always report effect size
@@ -1013,7 +1013,7 @@ config = CrossValidationConfig( enable_nested_cv=True, n_splits=5, inner_cv_spli
 
 ---
 
-#### Practice 2: Report Effect Sizes **Always report:**
+### Practice 2: Report Effect Sizes **Always report:**
 
 - Test statistic
 - p-value

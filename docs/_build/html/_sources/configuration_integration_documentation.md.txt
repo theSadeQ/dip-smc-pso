@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #================ docs/configuration_integration_documentation.md ===================\\\
-#==========================================================================================\\\ # Configuration Integration Documentation ## Overview This document provides guidance on integrating the configuration system with the Enterprise Controller Factory. The DIP SMC-PSO project features a sophisticated configuration architecture that supports multiple sources, type safety, validation, and integration with controller creation workflows. ## Table of Contents 1. [Configuration Architecture](#configuration-architecture)
+#==========================================================================================\\\
+
+# Configuration Integration Documentation ## Overview This document provides guidance on integrating the configuration system with the Enterprise Controller Factory. The DIP SMC-PSO project features a sophisticated configuration architecture that supports multiple sources, type safety, validation, and integration with controller creation workflows. ## Table of Contents 1. [Configuration Architecture](#configuration-architecture)
 2. [Configuration Sources and Priority](#configuration-sources-and-priority)
 3. [YAML Configuration Structure](#yaml-configuration-structure)
 4. [Type-Safe Configuration Classes](#type-safe-configuration-classes)

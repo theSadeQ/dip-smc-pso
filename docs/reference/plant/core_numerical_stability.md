@@ -257,7 +257,7 @@ print(f"Failure rate: {stats['failed_count'] / stats['total_inversions'] * 100:.
 
 ---
 
-### Function: fast_condition_estimate **Decorator:** `@njit` ```{literalinclude} ../../../src/plant/core/numerical_stability.py
+## Function: fast_condition_estimate **Decorator:** `@njit` ```{literalinclude} ../../../src/plant/core/numerical_stability.py
 
 :language: python
 :pyobject: fast_condition_estimate

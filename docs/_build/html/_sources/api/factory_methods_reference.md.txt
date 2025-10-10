@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #===================== docs/api/factory_methods_reference.md =========================\\\
-#==========================================================================================\\\ # Factory Methods API Reference ## Overview This document provides API reference documentation for the Enterprise Controller Factory system. The factory provides thread-safe, type-safe controller instantiation with deep PSO integration and robust error handling. ## Table of Contents 1. [Core Factory Functions](#core-factory-functions)
+#==========================================================================================\\\
+
+# Factory Methods API Reference ## Overview This document provides API reference documentation for the Enterprise Controller Factory system. The factory provides thread-safe, type-safe controller instantiation with deep PSO integration and robust error handling. ## Table of Contents 1. [Core Factory Functions](#core-factory-functions)
 2. [PSO Integration Functions](#pso-integration-functions)
 3. [Controller Registry Functions](#controller-registry-functions)
 4. [Configuration Functions](#configuration-functions)

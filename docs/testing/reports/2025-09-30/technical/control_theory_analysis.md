@@ -165,7 +165,7 @@ if κ(J) > condition_threshold:
     J_pinv = V·Σ_reg⁻¹·Uᵀ
 ```
 
-#### **Numerical Safeguards**:
+### **Numerical Safeguards**:
 
 ```python
 # Gain Saturation

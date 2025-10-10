@@ -16,7 +16,7 @@ quality animations and analysis visualizations. ## Complete Source Code ```{lite
 
 ---
 
-### `ProjectMovieGenerator` Complete visualization plan generator for the entire DIP control project. Creates professional-quality movies that document:
+## `ProjectMovieGenerator` Complete visualization plan generator for the entire DIP control project. Creates professional-quality movies that document:
 
 - System dynamics and behavior
 - Control algorithm performance

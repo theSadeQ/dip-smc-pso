@@ -557,7 +557,7 @@ class MPCController:
 
 ## 2. Critical Code Sections
 
-#### 2.1 Linearization (Lines 72-131)
+### 2.1 Linearization (Lines 72-131)
 
 ```python
 # example-metadata:
@@ -1019,7 +1019,7 @@ while t < 10.0:
     t += dt
 ```
 
-#### 1.3 Reference Trajectory Tracking
+### 1.3 Reference Trajectory Tracking
 
 ```python
 def reference_trajectory(t):
@@ -1035,7 +1035,7 @@ u = mpc.compute_control(t=2.0, x0=x_current)
 
 ## 2. Factory Integration
 
-#### 2.1 Using Controller Factory
+### 2.1 Using Controller Factory
 
 ```python
 from src.controllers.factory import create_controller
@@ -1071,7 +1071,7 @@ mpc = MPCController(
 
 ## 3. Simulation Integration
 
-#### 3.1 With Simulation Runner
+### 3.1 With Simulation Runner
 
 ```python
 from src.core.simulation_runner import SimulationRunner
@@ -1393,7 +1393,7 @@ mpc = MPCController(
 
 ## 2. Performance Optimization
 
-#### 2.1 Speed Optimization Checklist
+### 2.1 Speed Optimization Checklist
 
 - [ ] Enable warm start: `warm_start=True`
 - [ ] Use OSQP solver: `solver=cp.OSQP`

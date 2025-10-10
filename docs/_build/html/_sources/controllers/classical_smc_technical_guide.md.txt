@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #==================== docs/controllers/classical_smc_technical_guide.md ==================\\\
-#==========================================================================================\\\ # Classical Sliding Mode Control Technical Guide
+#==========================================================================================\\\
+
+# Classical Sliding Mode Control Technical Guide
 ## Double-Inverted Pendulum Control System **Document Version**: 1.0
 
 **Created**: 2025-10-04

@@ -26,7 +26,7 @@ half_width : float Half‑width of the confidence interval. ``NaN`` when ``n < 2
 
 ---
 
-### `bootstrap_confidence_interval(data, statistic_func, confidence, n_bootstrap)` Compute bootstrap confidence interval for any statistic. Parameters
+## `bootstrap_confidence_interval(data, statistic_func, confidence, n_bootstrap)` Compute bootstrap confidence interval for any statistic. Parameters
 
 ----------
 data : np.ndarray Original sample data.

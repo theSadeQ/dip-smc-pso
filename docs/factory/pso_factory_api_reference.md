@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #================== docs/factory/pso_factory_api_reference.md ================\\\
-#==========================================================================================\\\ # PSO Factory Integration API Reference
+#==========================================================================================\\\
+
+# PSO Factory Integration API Reference
 ## Complete Documentation for PSO-Optimized Controller Factory ### Table of Contents
 
 1. [API Overview](#api-overview)

@@ -15,7 +15,7 @@ analysis methods, controllers, and algorithms in control engineering application
 
 ---
 
-### `BenchmarkSuite` **Inherits from:** `StatisticalValidator` benchmarking and comparison framework. #### Source Code ```{literalinclude} ../../../src/analysis/validation/benchmarking.py
+## `BenchmarkSuite` **Inherits from:** `StatisticalValidator` benchmarking and comparison framework. #### Source Code ```{literalinclude} ../../../src/analysis/validation/benchmarking.py
 
 :language: python
 :pyobject: BenchmarkSuite

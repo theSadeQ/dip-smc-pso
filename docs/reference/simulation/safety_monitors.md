@@ -14,7 +14,7 @@
 
 ---
 
-### `SafetyMonitor` Monitor safety violations and system health. #### Source Code ```{literalinclude} ../../../src/simulation/safety/monitors.py
+## `SafetyMonitor` Monitor safety violations and system health. #### Source Code ```{literalinclude} ../../../src/simulation/safety/monitors.py
 
 :language: python
 :pyobject: SafetyMonitor

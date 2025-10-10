@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #==================== docs/pso_factory_integration_patterns.md ======================\\\
-#==========================================================================================\\\ # PSO-Factory Integration Patterns Documentation ## Overview This document provides guidance on integrating the factory system with Particle Swarm Optimization (PSO) workflows. The DIP SMC-PSO project features native PSO integration patterns that streamline controller optimization while maintaining scientific rigor and performance. ## Table of Contents 1. [PSO Integration Architecture](#pso-integration-architecture)
+#==========================================================================================\\\
+
+# PSO-Factory Integration Patterns Documentation ## Overview This document provides guidance on integrating the factory system with Particle Swarm Optimization (PSO) workflows. The DIP SMC-PSO project features native PSO integration patterns that streamline controller optimization while maintaining scientific rigor and performance. ## Table of Contents 1. [PSO Integration Architecture](#pso-integration-architecture)
 2. [Controller Factory Patterns](#controller-factory-patterns)
 3. [Gain Optimization Workflows](#gain-optimization-workflows)
 4. [Performance Optimization](#performance-optimization)

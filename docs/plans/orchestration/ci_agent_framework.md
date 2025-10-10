@@ -351,7 +351,7 @@ $ErrorActionPreference = 'Stop'
 
 ## **Validation Command Templates**
 
-#### **Template 1: Static Analysis**
+### **Template 1: Static Analysis**
 
 ```powershell
 # Step 1: Type checking

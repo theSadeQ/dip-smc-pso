@@ -98,7 +98,7 @@ print(f"Speedup: ~8x using parallel evaluation")
 
 ---
 
-### `PSOPerformanceMetrics` Performance metrics for PSO controller evaluation. #### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
+## `PSOPerformanceMetrics` Performance metrics for PSO controller evaluation. #### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
 
 :language: python
 :pyobject: PSOPerformanceMetrics

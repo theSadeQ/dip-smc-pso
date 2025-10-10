@@ -15,7 +15,7 @@ phase portraits, time series analysis, and system identification. ## Complete So
 
 ---
 
-### `SystemVisualization` High-level visualization for complete system analysis. #### Source Code ```{literalinclude} ../../../src/utils/visualization/static_plots.py
+## `SystemVisualization` High-level visualization for complete system analysis. #### Source Code ```{literalinclude} ../../../src/utils/visualization/static_plots.py
 
 :language: python
 :pyobject: SystemVisualization

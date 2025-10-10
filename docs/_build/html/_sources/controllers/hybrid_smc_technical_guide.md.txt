@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #================== docs/controllers/hybrid_smc_technical_guide.md ===================\\\
-#==========================================================================================\\\ # Hybrid Adaptive Super-Twisting SMC Technical Guide
+#==========================================================================================\\\
+
+# Hybrid Adaptive Super-Twisting SMC Technical Guide
 ## Double-Inverted Pendulum Control System **Document Version**: 1.0
 
 **Generated**: 2025-09-29

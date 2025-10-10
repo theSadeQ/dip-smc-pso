@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #======================= docs/deployment_validation_checklists.md ======================\\\
-#==========================================================================================\\\ # Deployment Validation Checklists and Quality Gates
+#==========================================================================================\\\
+
+# Deployment Validation Checklists and Quality Gates
 ## Double-Inverted Pendulum SMC-PSO Control Systems **Document Version**: 1.0
 
 **Generated**: 2025-09-28

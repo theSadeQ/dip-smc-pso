@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #===================== docs/configuration_schema_validation.md =======================\\\
-#==========================================================================================\\\ # Configuration Schema Validation Documentation
+#==========================================================================================\\\
+
+# Configuration Schema Validation Documentation
 ## Double-Inverted Pendulum SMC-PSO Control Systems **Document Version**: 1.0
 
 **Generated**: 2025-09-28

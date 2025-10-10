@@ -66,7 +66,7 @@ VALIDATION CONCLUSION:
 
 ---
 
-### Interpretation Guidelines **Stability Rate:**
+## Interpretation Guidelines **Stability Rate:**
 
 - **≥ 99%:** robustness, production-ready
 - **95-99%:** Good robustness, consider safety margins for deployment

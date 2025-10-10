@@ -124,7 +124,7 @@ $$
   - RK4 stable for $h \lesssim 0.005$ seconds
 - **RK4 advantage:** Higher accuracy allows 5-10× longer time steps for fixed error tolerance
 
-#### 1.1.3 Adaptive Step-Size Methods (RK45)
+### 1.1.3 Adaptive Step-Size Methods (RK45)
 
 Adaptive methods use **embedded Runge-Kutta pairs** to estimate local error and adjust step size:
 
@@ -571,7 +571,7 @@ $$
 
 **Convergence rate:** Geometric with ratio $(1 - qh)$ → **finite-time reaching in** $n \approx \frac{\ln(|s_0|/\delta)}{qh}$ **steps**.
 
-#### Numerical Chattering Mitigation
+### Numerical Chattering Mitigation
 
 **Cause:** Discontinuous sign function + finite sampling → high-frequency oscillations
 

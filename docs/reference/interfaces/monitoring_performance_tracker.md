@@ -16,7 +16,7 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 
 ---
 
-### `PerformanceMetric` Individual performance metric measurement. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
+## `PerformanceMetric` Individual performance metric measurement. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
 
 :language: python
 :pyobject: PerformanceMetric

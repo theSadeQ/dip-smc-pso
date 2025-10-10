@@ -1,6 +1,8 @@
 #======================================================================================\\\
 #============== docs/testing/guides/control_systems_unit_testing.md ==================\\\
-#======================================================================================\\\ # Control Systems Unit Testing Guide ## Overview This guide provides testing patterns for sliding mode control (SMC) implementations in the double-inverted pendulum control system. It covers state space validation, controller interface compliance, optimal gains interpretation, and production-ready testing methodologies. ## Table of Contents 1. [SMC Controller Testing Patterns](#smc-controller-testing-patterns)
+#======================================================================================\\\
+
+# Control Systems Unit Testing Guide ## Overview This guide provides testing patterns for sliding mode control (SMC) implementations in the double-inverted pendulum control system. It covers state space validation, controller interface compliance, optimal gains interpretation, and production-ready testing methodologies. ## Table of Contents 1. [SMC Controller Testing Patterns](#smc-controller-testing-patterns)
 2. [State Space Validation](#state-space-validation)
 3. [Lyapunov Function Testing](#lyapunov-function-testing)
 4. [Optimal Gains Interpretation](#optimal-gains-interpretation)

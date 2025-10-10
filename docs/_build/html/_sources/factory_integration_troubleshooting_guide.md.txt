@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #================ docs/factory_integration_troubleshooting_guide.md ==================\\\
-#==========================================================================================\\\ # Factory Integration Troubleshooting Guide ## Overview This troubleshooting guide addresses common issues encountered when using the Enterprise Controller Factory system in the DIP SMC-PSO project. The guide provides systematic diagnostic procedures, root cause analysis, and proven approaches for factory integration problems. ## Table of Contents 1. [Quick Diagnosis](#quick-diagnosis)
+#==========================================================================================\\\
+
+# Factory Integration Troubleshooting Guide ## Overview This troubleshooting guide addresses common issues encountered when using the Enterprise Controller Factory system in the DIP SMC-PSO project. The guide provides systematic diagnostic procedures, root cause analysis, and proven approaches for factory integration problems. ## Table of Contents 1. [Quick Diagnosis](#quick-diagnosis)
 2. [Controller Creation Issues](#controller-creation-issues)
 3. [PSO Integration Problems](#pso-integration-problems)
 4. [Configuration Issues](#configuration-issues)

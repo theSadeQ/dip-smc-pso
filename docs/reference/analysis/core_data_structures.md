@@ -73,7 +73,7 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 
 ---
 
-### `MetricResult` Container for individual metric results. #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
+## `MetricResult` Container for individual metric results. #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
 
 :language: python
 :pyobject: MetricResult

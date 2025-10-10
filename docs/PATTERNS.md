@@ -207,7 +207,7 @@ src/
 
 ---
 
-### 4. Interface Segregation Principle (ISP) **Source:** Martin, R. C. (2003). *Agile Software Development: Principles, Patterns, and Practices.* Prentice Hall. **Usage:** Protocol-based interfaces throughout `src/` #### What It Is Clients should not be forced to depend on interfaces they don't use. Create small, focused interfaces rather than large, general-purpose ones. #### Implementation Example ```python
+## 4. Interface Segregation Principle (ISP) **Source:** Martin, R. C. (2003). *Agile Software Development: Principles, Patterns, and Practices.* Prentice Hall. **Usage:** Protocol-based interfaces throughout `src/` #### What It Is Clients should not be forced to depend on interfaces they don't use. Create small, focused interfaces rather than large, general-purpose ones. #### Implementation Example ```python
 
 # example-metadata:
 
@@ -296,7 +296,7 @@ def compute_sliding_surface_batch(states, k1, k2, lam1, lam2): """JIT-compiled s
 
 ---
 
-### 3. Reproducibility via Seeding **Source:** NumPy reproducibility guidelines + scientific computing best practices **Usage:** All stochastic operations (PSO, Monte Carlo, testing) #### Implementation Example ```python
+## 3. Reproducibility via Seeding **Source:** NumPy reproducibility guidelines + scientific computing best practices **Usage:** All stochastic operations (PSO, Monte Carlo, testing) #### Implementation Example ```python
 
 # src/utils/reproducibility/seeding.py def set_global_seed(seed: int) -> None: """Set seeds for all random number generators.""" import random import numpy as np random.seed(seed) np.random.seed(seed) # Set environment variables for determinism import os os.environ['PYTHONHASHSEED'] = str(seed) # Numba RNG seeding (if applicable) try: import numba numba.core.config.RANDOM_SEED = seed except ImportError: pass # Usage in all experiments
 
@@ -339,7 +339,7 @@ set_global_seed(42) # Ensures reproducible results
 
 ---
 
-### Software Architecture ```bibtex
+## Software Architecture ```bibtex
 
 @book{martin2003agile, title={Agile Software Development: Principles, Patterns, and Practices}, author={Martin, Robert C.}, year={2003}, publisher={Prentice Hall}, isbn={978-0135974445}, note={SOLID principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion}
 }

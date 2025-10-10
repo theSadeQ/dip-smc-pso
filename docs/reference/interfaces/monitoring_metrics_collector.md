@@ -18,7 +18,7 @@ components. ## Complete Source Code ```{literalinclude} ../../../src/interfaces/
 
 ---
 
-### `AggregationType` **Inherits from:** `Enum` Metric aggregation type. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
+## `AggregationType` **Inherits from:** `Enum` Metric aggregation type. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
 
 :language: python
 :pyobject: AggregationType

@@ -76,7 +76,7 @@ optimization workflows and provides result analysis. Features:
 
 ---
 
-### `OptimizationResults` Complete optimization results structure. #### Source Code ```{literalinclude} ../../../src/optimization/core/results_manager.py
+## `OptimizationResults` Complete optimization results structure. #### Source Code ```{literalinclude} ../../../src/optimization/core/results_manager.py
 
 :language: python
 :pyobject: OptimizationResults

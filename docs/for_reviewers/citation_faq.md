@@ -120,7 +120,7 @@ python scripts/docs/export_citations.py --format csl-json --output citations.jso
 DIP-SMC-PSO Contributors. (2025). *Double Inverted Pendulum Control with Sliding Mode Control and PSO Optimization* (Version 1.0) [Software]. https://github.com/theSadeQ/dip-smc-pso **IEEE format:**
 DIP-SMC-PSO Contributors, "Double Inverted Pendulum Control with Sliding Mode Control and PSO Optimization," Version 1.0, 2025. [Online]. Available: https://github.com/theSadeQ/dip-smc-pso
 
-### Q15: Is the citation system compatible with automated tools? **Answer:** **Yes!** The system is designed for automation: **Validation tools:**
+## Q15: Is the citation system compatible with automated tools? **Answer:** **Yes!** The system is designed for automation: **Validation tools:**
 ```bash
 # BibTeX validation
 python scripts/docs/validate_citations.py # Attribution check

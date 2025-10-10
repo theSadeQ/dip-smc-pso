@@ -133,7 +133,7 @@ J = 50.0 * 1e-6 + 0.2 * 1e-6 + 0.1 * 1e-6 + 0.1 * 1e-6 + 0
 
 ## Step 3: Normalization Analysis
 
-#### **Normalization Function** (Lines 450-472)
+### **Normalization Function** (Lines 450-472)
 
 ```python
 def _normalise(self, val: np.ndarray, denom: float) -> np.ndarray:

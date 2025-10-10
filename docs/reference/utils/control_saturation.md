@@ -300,7 +300,7 @@ def pd_control_with_dead_zone(x, x_ref, Kp, Kd, dead_zone_threshold):
     return u
 \`\`\`
 
-### Example 4: Anti-Windup with Saturation
+## Example 4: Anti-Windup with Saturation
 
 \`\`\`python
 from src.utils.control import saturate
@@ -343,7 +343,7 @@ for k in range(100):
     # Integral won't wind up during saturation
 \`\`\`
 
-### Example 5: Saturation Monitoring
+## Example 5: Saturation Monitoring
 
 \`\`\`python
 from src.utils.control import saturate

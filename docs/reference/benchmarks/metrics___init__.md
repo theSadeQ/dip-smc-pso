@@ -26,7 +26,7 @@ dict Dictionary with metric names and values matching original format #### Sourc
 
 ---
 
-### `compute_all_metrics(t, x, u, max_force, angular_indices, state_bounds, include_advanced)` Compute performance metrics. Parameters
+## `compute_all_metrics(t, x, u, max_force, angular_indices, state_bounds, include_advanced)` Compute performance metrics. Parameters
 
 ----------
 t : np.ndarray Time vector of length N+1

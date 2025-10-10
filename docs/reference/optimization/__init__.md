@@ -38,7 +38,7 @@ Optimizer Configured optimizer instance Examples
 
 ---
 
-### `create_control_problem(objective_type, controller_factory, simulation_config, parameter_bounds)` Create a control optimization problem. Parameters
+## `create_control_problem(objective_type, controller_factory, simulation_config, parameter_bounds)` Create a control optimization problem. Parameters
 
 ----------
 objective_type : str Type of objective ('tracking', 'energy', 'settling_time', 'overshoot')

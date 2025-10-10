@@ -16,7 +16,7 @@ and type checking for ensuring data integrity and consistency. ## Complete Sourc
 
 ---
 
-### `ValidationSeverity` **Inherits from:** `Enum` Validation error severity levels. #### Source Code ```{literalinclude} ../../../src/interfaces/data_exchange/schemas.py
+## `ValidationSeverity` **Inherits from:** `Enum` Validation error severity levels. #### Source Code ```{literalinclude} ../../../src/interfaces/data_exchange/schemas.py
 
 :language: python
 :pyobject: ValidationSeverity

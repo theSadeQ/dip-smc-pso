@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #================== docs/pso_algorithm_mathematical_foundations.md ==================\\\
-#==========================================================================================\\\ # PSO Algorithm Mathematical Foundations
+#==========================================================================================\\\
+
+# PSO Algorithm Mathematical Foundations
 **Double-Inverted Pendulum Sliding Mode Control System** ## Executive Summary This document provides mathematical foundations for the Particle Swarm Optimization (PSO) algorithm implementation within the Double-Inverted Pendulum (DIP) Sliding Mode Control system. The mathematical treatment includes theoretical convergence analysis, stability properties, and control engineering specific adaptations with rigorous proofs and implementation considerations. **Mathematical Scope:**
 - Classical PSO algorithm formulation with rigorous mathematical notation
 - Convergence analysis and stability conditions
