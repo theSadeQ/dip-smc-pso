@@ -4,10 +4,8 @@ This page contains the complete bibliography for the DIP_SMC_PSO project, organi
 
 ## Complete Bibliography
 
-```{bibliography}
-
-:all:
-```
+<!-- Complete bibliography section removed to prevent duplicate citations.
+     All citations are shown in their respective categories below. -->
 
 ## Citations by Research Area
 

@@ -1,6 +1,18 @@
 #==========================================================================================\\\
 #===================== docs/testing/standards/testing_standards.md ====================\\\
-#==========================================================================================\\\ # Testing Standards and Guidelines ## Overview This document defines the testing standards for the DIP SMC PSO project, ensuring consistent quality, maintainability, and scientific rigor across all test implementations. ## Test Architecture Standards ### Test Directory Structure ```
+#==========================================================================================\\\
+
+# Testing Standards and Guidelines
+
+## Overview
+
+This document defines the testing standards for the DIP SMC PSO project, ensuring consistent quality, maintainability, and scientific rigor across all test implementations.
+
+## Test Architecture Standards
+
+### Test Directory Structure
+
+```
 tests/
 ├── conftest.py # Global test configuration and fixtures
 ├── test_controllers/ # Controller-specific unit tests
