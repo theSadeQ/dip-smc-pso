@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="../">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -19,16 +19,16 @@
     margin-top: 0.5em;
 }
 </style>
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>Mathematical Test Validation Methodology - DIP_SMC_PSO Documentation</title>
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Mathematical Test Validation Methodology This document describes the methodology for validating mathematical properties and algorithm correctness in the SMC controller implementations. ## 1. Overview The test validation methodology ensures that all mathematical algorithms and fixes in the SMC system are rigorously validated through: - Property-based testing: Verification of mathematical properties - DIP_SMC_PSO Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f5a89ef9" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=8a7e329d" />
     
     
 
@@ -163,14 +163,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -180,8 +176,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -189,17 +184,15 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -207,7 +200,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
-  
   
   <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
   
@@ -219,254 +211,12 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">Theory Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">3. System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plant_model.html">1.x Plant Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../plant/models_guide.html">Plant Models Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../TESTING.html">Testing Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../test_protocols.html">5.x Test Protocols</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../context.html">2. Application Context</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference Documentation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography &amp; Academic References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../RELEASE_CHECKLIST.html">Release Checklist</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -492,792 +242,149 @@
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/mathematical_foundations/test_validation_methodology.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/mathematical_foundations/test_validation_methodology.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
 </div><div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section class="tex2jax_ignore mathjax_ignore" id="mathematical-test-validation-methodology">
-<h1>Mathematical Test Validation Methodology<a class="headerlink" href="#mathematical-test-validation-methodology" title="Link to this heading">¶</a></h1>
-<p>This document describes the comprehensive methodology for validating mathematical properties and algorithm correctness in the SMC controller implementations.</p>
-<section id="overview">
-<h2>1. Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p>The test validation methodology ensures that all mathematical algorithms and fixes in the SMC system are rigorously validated through:</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="mathematical-test-validation-methodology-this-document-describes-the-methodology-for-validating-mathematical-properties-and-algorithm-correctness-in-the-smc-controller-implementations-1-overview-the-test-validation-methodology-ensures-that-all-mathematical-algorithms-and-fixes-in-the-smc-system-are-rigorously-validated-through-property-based-testing-verification-of-mathematical-properties">
+<h1>Mathematical Test Validation Methodology This document describes the methodology for validating mathematical properties and algorithm correctness in the SMC controller implementations. ## 1. Overview The test validation methodology ensures that all mathematical algorithms and fixes in the SMC system are rigorously validated through: - <strong>Property-based testing</strong>: Verification of mathematical properties<a class="headerlink" href="#mathematical-test-validation-methodology-this-document-describes-the-methodology-for-validating-mathematical-properties-and-algorithm-correctness-in-the-smc-controller-implementations-1-overview-the-test-validation-methodology-ensures-that-all-mathematical-algorithms-and-fixes-in-the-smc-system-are-rigorously-validated-through-property-based-testing-verification-of-mathematical-properties" title="Link to this heading">¶</a></h1>
 <ul class="simple">
-<li><p><strong>Property-based testing</strong>: Verification of mathematical properties</p></li>
 <li><p><strong>Numerical validation</strong>: Accuracy and stability testing</p></li>
 <li><p><strong>Algorithm verification</strong>: Correctness of mathematical computations</p></li>
 <li><p><strong>Edge case testing</strong>: Robustness under extreme conditions</p></li>
-<li><p><strong>Integration testing</strong>: System-level mathematical consistency</p></li>
+<li><p><strong>Integration testing</strong>: System-level mathematical consistency ## 2. Test Categories and Structure ### 2.1 Mathematical Property Tests These tests verify that implementations satisfy fundamental mathematical requirements. #### 2.1.1 Sliding Surface Properties <strong>Test Suite:</strong> <code class="docutils literal notranslate"><span class="pre">tests/test_controllers/smc/core/test_sliding_surface.py</span></code> <strong>Mathematical Properties Validated:</strong> 1. <strong>Linearity Property</strong>: ```python</p></li>
 </ul>
-</section>
-<section id="test-categories-and-structure">
-<h2>2. Test Categories and Structure<a class="headerlink" href="#test-categories-and-structure" title="Link to this heading">¶</a></h2>
-<section id="mathematical-property-tests">
-<h3>2.1 Mathematical Property Tests<a class="headerlink" href="#mathematical-property-tests" title="Link to this heading">¶</a></h3>
-<p>These tests verify that implementations satisfy fundamental mathematical requirements.</p>
-<section id="sliding-surface-properties">
-<h4>2.1.1 Sliding Surface Properties<a class="headerlink" href="#sliding-surface-properties" title="Link to this heading">¶</a></h4>
-<p><strong>Test Suite:</strong> <code class="docutils literal notranslate"><span class="pre">tests/test_controllers/smc/core/test_sliding_surface.py</span></code></p>
-<p><strong>Mathematical Properties Validated:</strong></p>
-<ol class="arabic">
-<li><p><strong>Linearity Property</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</li>
-</ol>
-</section>
-</section>
-</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example-metadata">
 <h1>example-metadata:<a class="headerlink" href="#example-metadata" title="Link to this heading">¶</a></h1>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="runnable-false">
-<h1>runnable: false<a class="headerlink" href="#runnable-false" title="Link to this heading">¶</a></h1>
-<p>def test_sliding_surface_linearity():
-“””Test that sliding surface is linear in state.”””
-surface = LinearSlidingSurface(gains=[5, 3, 4, 2])</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   state1 = np.array([0.1, 0.1, 0.1, 0.05, 0.05, 0.05])
-   state2 = np.array([0.2, 0.2, 0.2, 0.1, 0.1, 0.1])
-
-   s1 = surface.compute(state1)
-   s2 = surface.compute(state2)
-   s_combined = surface.compute(state1 + state2)
-
-   # Linearity: s(x1 + x2) = s(x1) + s(x2)
-   assert abs(s_combined - (s1 + s2)) &lt; 1e-10
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="mf">2.</span> <span class="o">**</span><span class="n">Homogeneity</span> <span class="n">Property</span><span class="o">**</span><span class="p">:</span>
-<span class="err">```</span><span class="n">python</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test_sliding_surface_homogeneity</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that sliding surface is homogeneous of degree 1.&quot;&quot;&quot;</span>
-    <span class="n">surface</span> <span class="o">=</span> <span class="n">LinearSlidingSurface</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-
-    <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
-    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">2.5</span>
-
-    <span class="n">s_original</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="n">s_scaled</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">state</span><span class="p">)</span>
-
-    <span class="c1"># Homogeneity: s(α·x) = α·s(x)</span>
-    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s_scaled</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">s_original</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span>
-</pre></div>
-</div>
-<ol class="arabic" start="3">
-<li><p><strong>Gain Sensitivity</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</li>
-</ol>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-def-test-sliding-surface-linearity-test-that-sliding-surface-is-linear-in-state-surface-linearslidingsurface-gains-5-3-4-2-state1-np-array-0-1-0-1-0-1-0-05-0-05-0-05-state2-np-array-0-2-0-2-0-2-0-1-0-1-0-1-s1-surface-compute-state1-s2-surface-compute-state2-s-combined-surface-compute-state1-state2-linearity-s-x1-x2-s-x1-s-x2-assert-abs-s-combined-s1-s2-1e-10-2-homogeneity-property-python-def-test-sliding-surface-homogeneity-test-that-sliding-surface-is-homogeneous-of-degree-1-surface-linearslidingsurface-gains-5-3-4-2-state-np-array-0-1-0-1-0-1-0-05-0-05-0-05-alpha-2-5-s-original-surface-compute-state-s-scaled-surface-compute-alpha-state-homogeneity-s-x-s-x-assert-abs-s-scaled-alpha-s-original-1e-10-3-gain-sensitivity-python">
+<h1>runnable: false def test_sliding_surface_linearity(): “””Test that sliding surface is linear in state.””” surface = LinearSlidingSurface(gains=[5, 3, 4, 2]) state1 = np.array([0.1, 0.1, 0.1, 0.05, 0.05, 0.05]) state2 = np.array([0.2, 0.2, 0.2, 0.1, 0.1, 0.1]) s1 = surface.compute(state1) s2 = surface.compute(state2) s_combined = surface.compute(state1 + state2) # Linearity: s(x1 + x2) = s(x1) + s(x2) assert abs(s_combined - (s1 + s2)) &lt; 1e-10 <code class="docutils literal notranslate"><span class="pre">2.</span> <span class="pre">**Homogeneity</span> <span class="pre">Property**:</span></code>python def test_sliding_surface_homogeneity(): “””Test that sliding surface is homogeneous of degree 1.””” surface = LinearSlidingSurface(gains=[5, 3, 4, 2]) state = np.array([0.1, 0.1, 0.1, 0.05, 0.05, 0.05]) alpha = 2.5 s_original = surface.compute(state) s_scaled = surface.compute(alpha * state) # Homogeneity: s(α·x) = α·s(x) assert abs(s_scaled - alpha * s_original) &lt; 1e-10 <code class="docutils literal notranslate"><span class="pre">3.</span> <span class="pre">**Gain</span> <span class="pre">Sensitivity**:</span></code>python<a class="headerlink" href="#runnable-false-def-test-sliding-surface-linearity-test-that-sliding-surface-is-linear-in-state-surface-linearslidingsurface-gains-5-3-4-2-state1-np-array-0-1-0-1-0-1-0-05-0-05-0-05-state2-np-array-0-2-0-2-0-2-0-1-0-1-0-1-s1-surface-compute-state1-s2-surface-compute-state2-s-combined-surface-compute-state1-state2-linearity-s-x1-x2-s-x1-s-x2-assert-abs-s-combined-s1-s2-1e-10-2-homogeneity-property-python-def-test-sliding-surface-homogeneity-test-that-sliding-surface-is-homogeneous-of-degree-1-surface-linearslidingsurface-gains-5-3-4-2-state-np-array-0-1-0-1-0-1-0-05-0-05-0-05-alpha-2-5-s-original-surface-compute-state-s-scaled-surface-compute-alpha-state-homogeneity-s-x-s-x-assert-abs-s-scaled-alpha-s-original-1e-10-3-gain-sensitivity-python" title="Link to this heading">¶</a></h1>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>example-metadata:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-def-test-sliding-surface-gain-sensitivity-test-that-surface-responds-correctly-to-gain-changes-gains1-5-3-4-2-gains2-10-6-8-4-doubled-gains-surface1-linearslidingsurface-gains1-surface2-linearslidingsurface-gains2-state-np-array-0-1-0-1-0-1-0-05-0-05-0-05-s1-surface1-compute-state-s2-surface2-compute-state-surface-value-should-double-with-doubled-gains-assert-abs-s2-2-s1-1e-10-2-1-2-boundary-layer-properties-test-suite-tests-test-controllers-smc-algorithms-classical-test-boundary-layer-py-mathematical-properties-validated-1-continuity-python">
+<h1>runnable: false def test_sliding_surface_gain_sensitivity(): “””Test that surface responds correctly to gain changes.””” gains1 = [5, 3, 4, 2] gains2 = [10, 6, 8, 4] # Doubled gains surface1 = LinearSlidingSurface(gains1) surface2 = LinearSlidingSurface(gains2) state = np.array([0.1, 0.1, 0.1, 0.05, 0.05, 0.05]) s1 = surface1.compute(state) s2 = surface2.compute(state) # Surface value should double with doubled gains assert abs(s2 - 2 * s1) &lt; 1e-10 <code class="docutils literal notranslate"><span class="pre">####</span> <span class="pre">2.1.2</span> <span class="pre">Boundary</span> <span class="pre">Layer</span> <span class="pre">Properties</span> <span class="pre">**Test</span> <span class="pre">Suite:**</span> <span class="pre">`tests/test_controllers/smc/algorithms/classical/test_boundary_layer.py`</span> <span class="pre">**Mathematical</span> <span class="pre">Properties</span> <span class="pre">Validated:**</span> <span class="pre">1.</span> <span class="pre">**Continuity**:</span></code>python<a class="headerlink" href="#runnable-false-def-test-sliding-surface-gain-sensitivity-test-that-surface-responds-correctly-to-gain-changes-gains1-5-3-4-2-gains2-10-6-8-4-doubled-gains-surface1-linearslidingsurface-gains1-surface2-linearslidingsurface-gains2-state-np-array-0-1-0-1-0-1-0-05-0-05-0-05-s1-surface1-compute-state-s2-surface2-compute-state-surface-value-should-double-with-doubled-gains-assert-abs-s2-2-s1-1e-10-2-1-2-boundary-layer-properties-test-suite-tests-test-controllers-smc-algorithms-classical-test-boundary-layer-py-mathematical-properties-validated-1-continuity-python" title="Link to this heading">¶</a></h1>
+</section>
 <section class="tex2jax_ignore mathjax_ignore" id="id2">
-<h1>runnable: false<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
-<p>def test_sliding_surface_gain_sensitivity():
-“””Test that surface responds correctly to gain changes.”””
-gains1 = [5, 3, 4, 2]
-gains2 = [10, 6, 8, 4]  # Doubled gains</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   surface1 = LinearSlidingSurface(gains1)
-   surface2 = LinearSlidingSurface(gains2)
+<h1>example-metadata:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-def-test-boundary-layer-continuity-test-that-boundary-layer-provides-continuous-switching-boundary-layer-boundarylayer-thickness-0-1-switch-method-tanh-test-continuity-at-surface-s-0-epsilon-1e-8-switch-left-boundary-layer-compute-switching-function-epsilon-switch-right-boundary-layer-compute-switching-function-epsilon-switch-center-boundary-layer-compute-switching-function-0-0-values-should-be-very-close-at-the-boundary-assert-abs-switch-left-switch-center-1e-6-assert-abs-switch-right-switch-center-1e-6-2-monotonicity-python-def-test-boundary-layer-monotonicity-test-that-switching-function-is-monotonic-boundary-layer-boundarylayer-thickness-0-1-switch-method-tanh-s-values-np-linspace-1-1-100-switch-values-boundary-layer-compute-switching-function-s-for-s-in-s-values-switching-function-should-be-strictly-increasing-for-i-in-range-len-switch-values-1-assert-switch-values-i-1-switch-values-i-3-asymptotic-behavior-python-def-test-boundary-layer-asymptotic-behavior-test-asymptotic-limits-of-switching-function-boundary-layer-boundarylayer-thickness-0-1-switch-method-tanh-large-positive-surface-value-switch-pos-boundary-layer-compute-switching-function-10-0-assert-abs-switch-pos-1-0-1e-3-large-negative-surface-value-switch-neg-boundary-layer-compute-switching-function-10-0-assert-abs-switch-neg-1-0-1e-3-2-2-configuration-validation-tests-test-suite-tests-test-controllers-smc-algorithms-classical-test-config-validation-py-2-2-1-parameter-validationpython">
+<h1>runnable: false def test_boundary_layer_continuity(): “””Test that boundary layer provides continuous switching.””” boundary_layer = BoundaryLayer(thickness=0.1, switch_method=”tanh”) # Test continuity at surface (s=0) epsilon = 1e-8 switch_left = boundary_layer.compute_switching_function(-epsilon) switch_right = boundary_layer.compute_switching_function(epsilon) switch_center = boundary_layer.compute_switching_function(0.0) # Values should be very close at the boundary assert abs(switch_left - switch_center) &lt; 1e-6 assert abs(switch_right - switch_center) &lt; 1e-6 <code class="docutils literal notranslate"><span class="pre">2.</span> <span class="pre">**Monotonicity**:</span></code>python def test_boundary_layer_monotonicity(): “””Test that switching function is monotonic.””” boundary_layer = BoundaryLayer(thickness=0.1, switch_method=”tanh”) s_values = np.linspace(-1, 1, 100) switch_values = [boundary_layer.compute_switching_function(s) for s in s_values] # Switching function should be strictly increasing for i in range(len(switch_values) - 1): assert switch_values[i+1] &gt;= switch_values[i] <code class="docutils literal notranslate"><span class="pre">3.</span> <span class="pre">**Asymptotic</span> <span class="pre">Behavior**:</span></code>python def test_boundary_layer_asymptotic_behavior(): “””Test asymptotic limits of switching function.””” boundary_layer = BoundaryLayer(thickness=0.1, switch_method=”tanh”) # Large positive surface value switch_pos = boundary_layer.compute_switching_function(10.0) assert abs(switch_pos - 1.0) &lt; 1e-3 # Large negative surface value switch_neg = boundary_layer.compute_switching_function(-10.0) assert abs(switch_neg - (-1.0)) &lt; 1e-3 <code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">2.2</span> <span class="pre">Configuration</span> <span class="pre">Validation</span> <span class="pre">Tests</span> <span class="pre">**Test</span> <span class="pre">Suite:**</span> <span class="pre">`tests/test_controllers/smc/algorithms/classical/test_config_validation.py`</span> <span class="pre">####</span> <span class="pre">2.2.1</span> <span class="pre">Parameter</span> <span class="pre">Validation</span></code>python<a class="headerlink" href="#runnable-false-def-test-boundary-layer-continuity-test-that-boundary-layer-provides-continuous-switching-boundary-layer-boundarylayer-thickness-0-1-switch-method-tanh-test-continuity-at-surface-s-0-epsilon-1e-8-switch-left-boundary-layer-compute-switching-function-epsilon-switch-right-boundary-layer-compute-switching-function-epsilon-switch-center-boundary-layer-compute-switching-function-0-0-values-should-be-very-close-at-the-boundary-assert-abs-switch-left-switch-center-1e-6-assert-abs-switch-right-switch-center-1e-6-2-monotonicity-python-def-test-boundary-layer-monotonicity-test-that-switching-function-is-monotonic-boundary-layer-boundarylayer-thickness-0-1-switch-method-tanh-s-values-np-linspace-1-1-100-switch-values-boundary-layer-compute-switching-function-s-for-s-in-s-values-switching-function-should-be-strictly-increasing-for-i-in-range-len-switch-values-1-assert-switch-values-i-1-switch-values-i-3-asymptotic-behavior-python-def-test-boundary-layer-asymptotic-behavior-test-asymptotic-limits-of-switching-function-boundary-layer-boundarylayer-thickness-0-1-switch-method-tanh-large-positive-surface-value-switch-pos-boundary-layer-compute-switching-function-10-0-assert-abs-switch-pos-1-0-1e-3-large-negative-surface-value-switch-neg-boundary-layer-compute-switching-function-10-0-assert-abs-switch-neg-1-0-1e-3-2-2-configuration-validation-tests-test-suite-tests-test-controllers-smc-algorithms-classical-test-config-validation-py-2-2-1-parameter-validationpython" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id3">
+<h1>example-metadata:<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-class-testclassicalsmcconfigvalidation-test-configuration-parameter-validation-def-test-positive-gain-requirement-self-test-that-all-surface-gains-must-be-positive-valid-configuration-valid-gains-5-0-3-0-4-0-2-0-10-0-1-0-config-classicalsmcconfig-gains-valid-gains-max-force-100-dt-0-01-boundary-layer-0-01-invalid-zero-gain-with-pytest-raises-valueerror-match-must-be-positive-invalid-gains-0-0-3-0-4-0-2-0-10-0-1-0-classicalsmcconfig-gains-invalid-gains-max-force-100-dt-0-01-boundary-layer-0-01-invalid-negative-gain-with-pytest-raises-valueerror-match-must-be-positive-invalid-gains-5-0-3-0-4-0-2-0-10-0-1-0-classicalsmcconfig-gains-invalid-gains-max-force-100-dt-0-01-boundary-layer-0-01-def-test-switching-gain-validation-self-test-switching-gain-must-be-positive-with-pytest-raises-valueerror-match-switching-gain-k-must-be-positive-invalid-gains-5-0-3-0-4-0-2-0-10-0-1-0-k-0-classicalsmcconfig-gains-invalid-gains-max-force-100-dt-0-01-boundary-layer-0-01-def-test-boundary-layer-validation-self-test-boundary-layer-thickness-validation-valid-boundary-layer-valid-gains-5-0-3-0-4-0-2-0-10-0-1-0-config-classicalsmcconfig-gains-valid-gains-max-force-100-dt-0-01-boundary-layer-0-05-invalid-zero-boundary-layer-with-pytest-raises-valueerror-match-boundary-layer-must-be-positive-classicalsmcconfig-gains-valid-gains-max-force-100-dt-0-01-boundary-layer-0-0-invalid-negative-boundary-layer-with-pytest-raises-valueerror-match-boundary-layer-must-be-positive-classicalsmcconfig-gains-valid-gains-max-force-100-dt-0-01-boundary-layer-0-01">
+<h1>runnable: false class TestClassicalSMCConfigValidation: “””Test configuration parameter validation.””” def test_positive_gain_requirement(self): “””Test that all surface gains must be positive.””” # Valid configuration valid_gains = [5.0, 3.0, 4.0, 2.0, 10.0, 1.0] config = ClassicalSMCConfig(gains=valid_gains, max_force=100, dt=0.01, boundary_layer=0.01) # Invalid: zero gain with pytest.raises(ValueError, match=”must be positive”): invalid_gains = [0.0, 3.0, 4.0, 2.0, 10.0, 1.0] ClassicalSMCConfig(gains=invalid_gains, max_force=100, dt=0.01, boundary_layer=0.01) # Invalid: negative gain with pytest.raises(ValueError, match=”must be positive”): invalid_gains = [5.0, -3.0, 4.0, 2.0, 10.0, 1.0] ClassicalSMCConfig(gains=invalid_gains, max_force=100, dt=0.01, boundary_layer=0.01) def test_switching_gain_validation(self): “””Test switching gain must be positive.””” with pytest.raises(ValueError, match=”Switching gain K must be positive”): invalid_gains = [5.0, 3.0, 4.0, 2.0, -10.0, 1.0] # K &lt; 0 ClassicalSMCConfig(gains=invalid_gains, max_force=100, dt=0.01, boundary_layer=0.01) def test_boundary_layer_validation(self): “””Test boundary layer thickness validation.””” # Valid boundary layer valid_gains = [5.0, 3.0, 4.0, 2.0, 10.0, 1.0] config = ClassicalSMCConfig(gains=valid_gains, max_force=100, dt=0.01, boundary_layer=0.05) # Invalid: zero boundary layer with pytest.raises(ValueError, match=”boundary_layer must be positive”): ClassicalSMCConfig(gains=valid_gains, max_force=100, dt=0.01, boundary_layer=0.0) # Invalid: negative boundary layer with pytest.raises(ValueError, match=”boundary_layer must be positive”): ClassicalSMCConfig(gains=valid_gains, max_force=100, dt=0.01, boundary_layer=-0.01)<a class="headerlink" href="#runnable-false-class-testclassicalsmcconfigvalidation-test-configuration-parameter-validation-def-test-positive-gain-requirement-self-test-that-all-surface-gains-must-be-positive-valid-configuration-valid-gains-5-0-3-0-4-0-2-0-10-0-1-0-config-classicalsmcconfig-gains-valid-gains-max-force-100-dt-0-01-boundary-layer-0-01-invalid-zero-gain-with-pytest-raises-valueerror-match-must-be-positive-invalid-gains-0-0-3-0-4-0-2-0-10-0-1-0-classicalsmcconfig-gains-invalid-gains-max-force-100-dt-0-01-boundary-layer-0-01-invalid-negative-gain-with-pytest-raises-valueerror-match-must-be-positive-invalid-gains-5-0-3-0-4-0-2-0-10-0-1-0-classicalsmcconfig-gains-invalid-gains-max-force-100-dt-0-01-boundary-layer-0-01-def-test-switching-gain-validation-self-test-switching-gain-must-be-positive-with-pytest-raises-valueerror-match-switching-gain-k-must-be-positive-invalid-gains-5-0-3-0-4-0-2-0-10-0-1-0-k-0-classicalsmcconfig-gains-invalid-gains-max-force-100-dt-0-01-boundary-layer-0-01-def-test-boundary-layer-validation-self-test-boundary-layer-thickness-validation-valid-boundary-layer-valid-gains-5-0-3-0-4-0-2-0-10-0-1-0-config-classicalsmcconfig-gains-valid-gains-max-force-100-dt-0-01-boundary-layer-0-05-invalid-zero-boundary-layer-with-pytest-raises-valueerror-match-boundary-layer-must-be-positive-classicalsmcconfig-gains-valid-gains-max-force-100-dt-0-01-boundary-layer-0-0-invalid-negative-boundary-layer-with-pytest-raises-valueerror-match-boundary-layer-must-be-positive-classicalsmcconfig-gains-valid-gains-max-force-100-dt-0-01-boundary-layer-0-01" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">####</span> <span class="pre">2.2.2</span> <span class="pre">Stability</span> <span class="pre">Analysis</span> <span class="pre">Tests</span></code>python</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id4">
+<h1>example-metadata:<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-def-test-hurwitz-stability-check-test-that-gain-combinations-satisfy-hurwitz-stability-def-check-stability-k1-k2-lam1-lam2-check-if-gains-produce-stable-sliding-dynamics-for-each-2x2-subsystem-s2-is-ci-0-stability-requires-i-0-and-ci-0-return-k1-0-and-k2-0-and-lam1-0-and-lam2-0-stable-configuration-stable-gains-5-0-3-0-4-0-2-0-10-0-1-0-config-classicalsmcconfig-gains-stable-gains-max-force-100-dt-0-01-boundary-layer-0-01-assert-check-stability-config-k1-config-k2-config-lam1-config-lam2-check-damping-ratios-zeta1-config-lam1-2-np-sqrt-config-k1-zeta2-config-lam2-2-np-sqrt-config-k2-both-subsystems-should-have-positive-damping-assert-zeta1-0-assert-zeta2-0">
+<h1>runnable: false def test_hurwitz_stability_check(): “””Test that gain combinations satisfy Hurwitz stability.””” def check_stability(k1, k2, lam1, lam2): “””Check if gains produce stable sliding dynamics.””” # For each 2x2 subsystem: s² + λᵢs + cᵢ = 0 # Stability requires λᵢ &gt; 0 and cᵢ &gt; 0 return k1 &gt; 0 and k2 &gt; 0 and lam1 &gt; 0 and lam2 &gt; 0 # Stable configuration stable_gains = [5.0, 3.0, 4.0, 2.0, 10.0, 1.0] config = ClassicalSMCConfig(gains=stable_gains, max_force=100, dt=0.01, boundary_layer=0.01) assert check_stability(config.k1, config.k2, config.lam1, config.lam2) # Check damping ratios zeta1 = config.lam1 / (2 * np.sqrt(config.k1)) zeta2 = config.lam2 / (2 * np.sqrt(config.k2)) # Both subsystems should have positive damping assert zeta1 &gt; 0 assert zeta2 &gt; 0<a class="headerlink" href="#runnable-false-def-test-hurwitz-stability-check-test-that-gain-combinations-satisfy-hurwitz-stability-def-check-stability-k1-k2-lam1-lam2-check-if-gains-produce-stable-sliding-dynamics-for-each-2x2-subsystem-s2-is-ci-0-stability-requires-i-0-and-ci-0-return-k1-0-and-k2-0-and-lam1-0-and-lam2-0-stable-configuration-stable-gains-5-0-3-0-4-0-2-0-10-0-1-0-config-classicalsmcconfig-gains-stable-gains-max-force-100-dt-0-01-boundary-layer-0-01-assert-check-stability-config-k1-config-k2-config-lam1-config-lam2-check-damping-ratios-zeta1-config-lam1-2-np-sqrt-config-k1-zeta2-config-lam2-2-np-sqrt-config-k2-both-subsystems-should-have-positive-damping-assert-zeta1-0-assert-zeta2-0" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">2.3</span> <span class="pre">Numerical</span> <span class="pre">Accuracy</span> <span class="pre">Tests</span> <span class="pre">####</span> <span class="pre">2.3.1</span> <span class="pre">Floating</span> <span class="pre">Point</span> <span class="pre">Precision</span></code>python</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id5">
+<h1>example-metadata:<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-class-testnumericalaccuracy-test-numerical-accuracy-and-precision-def-test-floating-point-consistency-self-test-that-computations-are-consistent-across-repeated-calls-config-classicalsmcconfig-gains-5-0-3-0-4-0-2-0-10-0-1-0-max-force-100-0-dt-0-01-boundary-layer-0-01-controller-modularclassicalsmc-config-config-state-np-array-0-1-0-05-0-08-0-02-0-03-0-01-compute-control-multiple-times-results-for-in-range-100-result-controller-compute-control-state-control-result-get-control-output-result-get-control-result-get-u-if-control-is-not-none-results-append-control-if-results-results-np-array-results-all-results-should-be-identical-deterministic-computation-std-dev-np-std-results-axis-0-assert-np-all-std-dev-1e-15-machine-precision-def-test-numerical-stability-small-values-self-test-numerical-stability-with-very-small-state-values-config-classicalsmcconfig-gains-5-0-3-0-4-0-2-0-10-0-1-0-max-force-100-0-dt-0-01-boundary-layer-0-01-controller-modularclassicalsmc-config-config-very-small-state-values-near-machine-precision-small-state-np-array-1e-15-1e-15-1e-15-1e-15-1e-15-1e-15-result-controller-compute-control-small-state-control-result-get-control-output-result-get-control-result-get-u-if-control-is-not-none-control-should-be-finite-and-small-assert-np-all-np-isfinite-control-assert-np-all-np-abs-control-1-0-def-test-numerical-stability-large-values-self-test-numerical-stability-with-large-state-values-config-classicalsmcconfig-gains-5-0-3-0-4-0-2-0-10-0-1-0-max-force-100-0-dt-0-01-boundary-layer-0-01-controller-modularclassicalsmc-config-config-large-state-values-but-within-reasonable-bounds-large-state-np-array-10-0-5-0-3-0-2-0-2-0-1-0-result-controller-compute-control-large-state-control-result-get-control-output-result-get-control-result-get-u-if-control-is-not-none-control-should-be-finite-and-saturated-assert-np-all-np-isfinite-control-assert-np-all-np-abs-control-config-max-force-1-01-within-saturation">
+<h1>runnable: false class TestNumericalAccuracy: “””Test numerical accuracy and precision.””” def test_floating_point_consistency(self): “””Test that computations are consistent across repeated calls.””” config = ClassicalSMCConfig( gains=[5.0, 3.0, 4.0, 2.0, 10.0, 1.0], max_force=100.0, dt=0.01, boundary_layer=0.01 ) controller = ModularClassicalSMC(config=config) state = np.array([0.1, 0.05, 0.08, 0.02, 0.03, 0.01]) # Compute control multiple times results = [] for _ in range(100): result = controller.compute_control(state, {}, {}) control = result.get(‘control_output’, result.get(‘control’, result.get(‘u’))) if control is not None: results.append(control) if results: results = np.array(results) # All results should be identical (deterministic computation) std_dev = np.std(results, axis=0) assert np.all(std_dev &lt; 1e-15) # Machine precision def test_numerical_stability_small_values(self): “””Test numerical stability with very small state values.””” config = ClassicalSMCConfig( gains=[5.0, 3.0, 4.0, 2.0, 10.0, 1.0], max_force=100.0, dt=0.01, boundary_layer=0.01 ) controller = ModularClassicalSMC(config=config) # Very small state values (near machine precision) small_state = np.array([1e-15, 1e-15, 1e-15, 1e-15, 1e-15, 1e-15]) result = controller.compute_control(small_state, {}, {}) control = result.get(‘control_output’, result.get(‘control’, result.get(‘u’))) if control is not None: # Control should be finite and small assert np.all(np.isfinite(control)) assert np.all(np.abs(control) &lt; 1.0) def test_numerical_stability_large_values(self): “””Test numerical stability with large state values.””” config = ClassicalSMCConfig( gains=[5.0, 3.0, 4.0, 2.0, 10.0, 1.0], max_force=100.0, dt=0.01, boundary_layer=0.01 ) controller = ModularClassicalSMC(config=config) # Large state values (but within reasonable bounds) large_state = np.array([10.0, 5.0, 3.0, 2.0, 2.0, 1.0]) result = controller.compute_control(large_state, {}, {}) control = result.get(‘control_output’, result.get(‘control’, result.get(‘u’))) if control is not None: # Control should be finite and saturated assert np.all(np.isfinite(control)) assert np.all(np.abs(control) &lt;= config.max_force * 1.01) # Within saturation<a class="headerlink" href="#runnable-false-class-testnumericalaccuracy-test-numerical-accuracy-and-precision-def-test-floating-point-consistency-self-test-that-computations-are-consistent-across-repeated-calls-config-classicalsmcconfig-gains-5-0-3-0-4-0-2-0-10-0-1-0-max-force-100-0-dt-0-01-boundary-layer-0-01-controller-modularclassicalsmc-config-config-state-np-array-0-1-0-05-0-08-0-02-0-03-0-01-compute-control-multiple-times-results-for-in-range-100-result-controller-compute-control-state-control-result-get-control-output-result-get-control-result-get-u-if-control-is-not-none-results-append-control-if-results-results-np-array-results-all-results-should-be-identical-deterministic-computation-std-dev-np-std-results-axis-0-assert-np-all-std-dev-1e-15-machine-precision-def-test-numerical-stability-small-values-self-test-numerical-stability-with-very-small-state-values-config-classicalsmcconfig-gains-5-0-3-0-4-0-2-0-10-0-1-0-max-force-100-0-dt-0-01-boundary-layer-0-01-controller-modularclassicalsmc-config-config-very-small-state-values-near-machine-precision-small-state-np-array-1e-15-1e-15-1e-15-1e-15-1e-15-1e-15-result-controller-compute-control-small-state-control-result-get-control-output-result-get-control-result-get-u-if-control-is-not-none-control-should-be-finite-and-small-assert-np-all-np-isfinite-control-assert-np-all-np-abs-control-1-0-def-test-numerical-stability-large-values-self-test-numerical-stability-with-large-state-values-config-classicalsmcconfig-gains-5-0-3-0-4-0-2-0-10-0-1-0-max-force-100-0-dt-0-01-boundary-layer-0-01-controller-modularclassicalsmc-config-config-large-state-values-but-within-reasonable-bounds-large-state-np-array-10-0-5-0-3-0-2-0-2-0-1-0-result-controller-compute-control-large-state-control-result-get-control-output-result-get-control-result-get-u-if-control-is-not-none-control-should-be-finite-and-saturated-assert-np-all-np-isfinite-control-assert-np-all-np-abs-control-config-max-force-1-01-within-saturation" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">2.4</span> <span class="pre">Property-Based</span> <span class="pre">Testing</span> <span class="pre">Using</span> <span class="pre">Hypothesis</span> <span class="pre">for</span> <span class="pre">property</span> <span class="pre">testing:</span></code>python
+from hypothesis import given, strategies as st class TestPropertyBasedSMC: “””Property-based tests using Hypothesis.””” &#64;given( k1=st.floats(min_value=0.1, max_value=50.0), k2=st.floats(min_value=0.1, max_value=50.0), lam1=st.floats(min_value=0.1, max_value=50.0), lam2=st.floats(min_value=0.1, max_value=50.0), K=st.floats(min_value=1.0, max_value=200.0), kd=st.floats(min_value=0.0, max_value=20.0) ) def test_configuration_property_all_positive_gains(self, k1, k2, lam1, lam2, K, kd): “””Test that any positive gain combination creates valid configuration.””” gains = [k1, k2, lam1, lam2, K, kd] # Should not raise any exceptions config = ClassicalSMCConfig( gains=gains, max_force=100.0, dt=0.01, boundary_layer=0.01 ) # All properties should be accessible assert config.k1 == k1 assert config.k2 == k2 assert config.lam1 == lam1 assert config.lam2 == lam2 assert config.K == K assert config.kd == kd &#64;given( state=st.lists( st.floats(min_value=-10.0, max_value=10.0), min_size=6, max_size=6 ) ) def test_sliding_surface_finite_output(self, state): “””Test that sliding surface always produces finite output for finite input.””” gains = [5.0, 3.0, 4.0, 2.0, 10.0, 1.0] surface = LinearSlidingSurface(gains[:4]) state_array = np.array(state) # Sliding surface should always be finite for finite state if np.all(np.isfinite(state_array)): surface_value = surface.compute(state_array) assert np.isfinite(surface_value) &#64;given( boundary_thickness=st.floats(min_value=1e-6, max_value=1.0), surface_value=st.floats(min_value=-100.0, max_value=100.0) ) def test_boundary_layer_bounded_output(self, boundary_thickness, surface_value): “””Test that boundary layer output is always bounded.””” boundary_layer = BoundaryLayer(thickness=boundary_thickness, switch_method=”tanh”) if np.isfinite(surface_value): switch_value = boundary_layer.compute_switching_function(surface_value) # Switching function should be bounded between -1 and 1 assert -1.0 &lt;= switch_value &lt;= 1.0 assert np.isfinite(switch_value)
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">2.5</span> <span class="pre">Integration</span> <span class="pre">and</span> <span class="pre">System-Level</span> <span class="pre">Tests</span></code>python</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id6">
+<h1>example-metadata:<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-class-testsystemlevelmathematics-test-mathematical-consistency-across-system-components-def-test-control-law-decomposition-self-test-that-control-law-components-sum-correctly-config-classicalsmcconfig-gains-5-0-3-0-4-0-2-0-10-0-1-0-max-force-100-0-dt-0-01-boundary-layer-0-01-controller-modularclassicalsmc-config-config-state-np-array-0-1-0-05-0-08-0-02-0-03-0-01-get-overall-control-output-result-controller-compute-control-state-total-control-result-get-control-output-result-get-control-result-get-u-get-individual-components-if-available-in-debug-output-components-result-get-debug-if-u-equivalent-in-components-and-u-switching-in-components-and-u-derivative-in-components-u-eq-components-u-equivalent-u-sw-components-u-switching-u-d-components-u-derivative-before-saturation-should-sum-correctly-u-unsaturated-u-eq-u-sw-u-d-after-saturation-u-saturated-np-clip-u-unsaturated-config-max-force-config-max-force-should-match-total-control-before-any-additional-processing-if-total-control-is-not-none-assert-np-allclose-u-saturated-total-control-rtol-1e-10-def-test-lyapunov-function-properties-self-test-lyapunov-function-properties-for-stability-analysis-config-classicalsmcconfig-gains-5-0-3-0-4-0-2-0-10-0-1-0-max-force-100-0-dt-0-01-boundary-layer-0-01-controller-modularclassicalsmc-config-config-surface-linearslidingsurface-config-get-surface-gains-multiple-test-states-states-np-array-0-1-0-05-0-08-0-02-0-03-0-01-np-array-0-2-0-1-0-15-0-05-0-08-0-03-np-array-0-1-0-05-0-08-0-02-0-03-0-01-for-state-in-states-s-surface-compute-state-lyapunov-function-candidate-v-0-5-s2-v-0-5-s-2-v-should-be-non-negative-assert-v-0-v-0-if-and-only-if-s-0-if-abs-s-1e-10-assert-v-1e-15-else-assert-v-0-def-test-reaching-law-satisfaction-self-test-that-reaching-law-is-satisfied-ss-s-config-classicalsmcconfig-gains-5-0-3-0-4-0-2-0-10-0-1-0-max-force-100-0-dt-0-01-boundary-layer-0-01-surface-linearslidingsurface-config-get-surface-gains-test-state-away-from-surface-state-np-array-0-1-0-05-0-08-0-02-0-03-0-01-s-surface-compute-state-simplified-reaching-law-check-without-full-dynamics-for-switching-control-u-sw-k-sign-s-the-reaching-condition-ss-s-should-be-satisfied-when-k-is-chosen-large-enough-this-is-a-simplified-test-full-test-would-require-dynamics-model-if-abs-s-config-boundary-layer-outside-boundary-layer-should-have-strong-reaching-behavior-expected-reaching-rate-config-k-abs-s-max-abs-s-config-boundary-layer-assert-expected-reaching-rate-0-should-be-moving-toward-surface">
+<h1>runnable: false class TestSystemLevelMathematics: “””Test mathematical consistency across system components.””” def test_control_law_decomposition(self): “””Test that control law components sum correctly.””” config = ClassicalSMCConfig( gains=[5.0, 3.0, 4.0, 2.0, 10.0, 1.0], max_force=100.0, dt=0.01, boundary_layer=0.01 ) controller = ModularClassicalSMC(config=config) state = np.array([0.1, 0.05, 0.08, 0.02, 0.03, 0.01]) # Get overall control output result = controller.compute_control(state, {}, {}) total_control = result.get(‘control_output’, result.get(‘control’, result.get(‘u’))) # Get individual components (if available in debug output) components = result.get(‘debug’, {}) if ‘u_equivalent’ in components and ‘u_switching’ in components and ‘u_derivative’ in components: u_eq = components[‘u_equivalent’] u_sw = components[‘u_switching’] u_d = components[‘u_derivative’] # Before saturation, should sum correctly u_unsaturated = u_eq + u_sw + u_d # After saturation u_saturated = np.clip(u_unsaturated, -config.max_force, config.max_force) # Should match total control (before any additional processing) if total_control is not None: assert np.allclose(u_saturated, total_control, rtol=1e-10) def test_lyapunov_function_properties(self): “””Test Lyapunov function properties for stability analysis.””” config = ClassicalSMCConfig( gains=[5.0, 3.0, 4.0, 2.0, 10.0, 1.0], max_force=100.0, dt=0.01, boundary_layer=0.01 ) controller = ModularClassicalSMC(config=config) surface = LinearSlidingSurface(config.get_surface_gains()) # Multiple test states states = [ np.array([0.1, 0.05, 0.08, 0.02, 0.03, 0.01]), np.array([0.2, 0.1, 0.15, 0.05, 0.08, 0.03]), np.array([-0.1, -0.05, -0.08, -0.02, -0.03, -0.01]) ] for state in states: s = surface.compute(state) # Lyapunov function candidate: V = 0.5 * s² V = 0.5 * s**2 # V should be non-negative assert V &gt;= 0 # V = 0 if and only if s = 0 if abs(s) &lt; 1e-10: assert V &lt; 1e-15 else: assert V &gt; 0 def test_reaching_law_satisfaction(self): “””Test that reaching law is satisfied: s<em>ṡ ≤ -η|s|.””” config = ClassicalSMCConfig( gains=[5.0, 3.0, 4.0, 2.0, 10.0, 1.0], max_force=100.0, dt=0.01, boundary_layer=0.01 ) surface = LinearSlidingSurface(config.get_surface_gains()) # Test state away from surface state = np.array([0.1, 0.05, 0.08, 0.02, 0.03, 0.01]) s = surface.compute(state) # Simplified reaching law check (without full dynamics) # For switching control: u_sw = -K * sign(s) # The reaching condition s</em>ṡ ≤ -η|s| should be satisfied # when K is chosen large enough # This is a simplified test - full test would require dynamics model if abs(s) &gt; config.boundary_layer: # Outside boundary layer, should have strong reaching behavior expected_reaching_rate = -config.K * abs(s) / max(abs(s), config.boundary_layer) assert expected_reaching_rate &lt; 0 # Should be moving toward surface<a class="headerlink" href="#runnable-false-class-testsystemlevelmathematics-test-mathematical-consistency-across-system-components-def-test-control-law-decomposition-self-test-that-control-law-components-sum-correctly-config-classicalsmcconfig-gains-5-0-3-0-4-0-2-0-10-0-1-0-max-force-100-0-dt-0-01-boundary-layer-0-01-controller-modularclassicalsmc-config-config-state-np-array-0-1-0-05-0-08-0-02-0-03-0-01-get-overall-control-output-result-controller-compute-control-state-total-control-result-get-control-output-result-get-control-result-get-u-get-individual-components-if-available-in-debug-output-components-result-get-debug-if-u-equivalent-in-components-and-u-switching-in-components-and-u-derivative-in-components-u-eq-components-u-equivalent-u-sw-components-u-switching-u-d-components-u-derivative-before-saturation-should-sum-correctly-u-unsaturated-u-eq-u-sw-u-d-after-saturation-u-saturated-np-clip-u-unsaturated-config-max-force-config-max-force-should-match-total-control-before-any-additional-processing-if-total-control-is-not-none-assert-np-allclose-u-saturated-total-control-rtol-1e-10-def-test-lyapunov-function-properties-self-test-lyapunov-function-properties-for-stability-analysis-config-classicalsmcconfig-gains-5-0-3-0-4-0-2-0-10-0-1-0-max-force-100-0-dt-0-01-boundary-layer-0-01-controller-modularclassicalsmc-config-config-surface-linearslidingsurface-config-get-surface-gains-multiple-test-states-states-np-array-0-1-0-05-0-08-0-02-0-03-0-01-np-array-0-2-0-1-0-15-0-05-0-08-0-03-np-array-0-1-0-05-0-08-0-02-0-03-0-01-for-state-in-states-s-surface-compute-state-lyapunov-function-candidate-v-0-5-s2-v-0-5-s-2-v-should-be-non-negative-assert-v-0-v-0-if-and-only-if-s-0-if-abs-s-1e-10-assert-v-1e-15-else-assert-v-0-def-test-reaching-law-satisfaction-self-test-that-reaching-law-is-satisfied-ss-s-config-classicalsmcconfig-gains-5-0-3-0-4-0-2-0-10-0-1-0-max-force-100-0-dt-0-01-boundary-layer-0-01-surface-linearslidingsurface-config-get-surface-gains-test-state-away-from-surface-state-np-array-0-1-0-05-0-08-0-02-0-03-0-01-s-surface-compute-state-simplified-reaching-law-check-without-full-dynamics-for-switching-control-u-sw-k-sign-s-the-reaching-condition-ss-s-should-be-satisfied-when-k-is-chosen-large-enough-this-is-a-simplified-test-full-test-would-require-dynamics-model-if-abs-s-config-boundary-layer-outside-boundary-layer-should-have-strong-reaching-behavior-expected-reaching-rate-config-k-abs-s-max-abs-s-config-boundary-layer-assert-expected-reaching-rate-0-should-be-moving-toward-surface" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">3.</span> <span class="pre">Test</span> <span class="pre">Organization</span> <span class="pre">and</span> <span class="pre">Execution</span> <span class="pre">###</span> <span class="pre">3.1</span> <span class="pre">Test</span> <span class="pre">Hierarchy</span></code>
+tests/test_controllers/smc/
+├── algorithms/
+│ ├── classical/
+│ │ ├── test_boundary_layer.py # Boundary layer mathematics
+│ │ ├── test_sliding_surface.py # Surface computation tests
+│ │ ├── test_config_validation.py # Parameter validation
+│ │ └── test_modular_controller.py # Integration tests
+│ ├── adaptive/
+│ │ └── test_modular_adaptive_smc.py # Adaptive algorithm tests
+│ └── super_twisting/
+│ └── test_super_twisting_smc.py # Higher-order SMC tests
+├── core/
+│ ├── test_sliding_surface.py # Core surface mathematics
+│ ├── test_equivalent_control.py # Model-based control
+│ └── test_switching_functions.py # Switching function tests
+└── test_property_based_smc.py # Property-based tests
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">3.2</span> <span class="pre">Test</span> <span class="pre">Execution</span> <span class="pre">Strategy</span> <span class="pre">####</span> <span class="pre">3.2.1</span> <span class="pre">Continuous</span> <span class="pre">Integration</span></code>bash</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="fast-unit-tests-mathematical-properties">
+<h1>Fast unit tests (mathematical properties)<a class="headerlink" href="#fast-unit-tests-mathematical-properties" title="Link to this heading">¶</a></h1>
+<p>pytest tests/test_controllers/smc/core/ -v # Algorithm-specific tests
+pytest tests/test_controllers/smc/algorithms/classical/ -v # Property-based tests (may take longer)
+pytest tests/test_controllers/smc/test_property_based_smc.py -v –hypothesis-profile=ci # Full mathematical validation suite
+pytest tests/test_controllers/smc/ -v -m “not slow”
+<code class="docutils literal notranslate"><span class="pre">####</span> <span class="pre">3.2.2</span> <span class="pre">Validation</span></code>bash</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="extended-property-based-testing">
+<h1>Extended property-based testing<a class="headerlink" href="#extended-property-based-testing" title="Link to this heading">¶</a></h1>
+<p>pytest tests/test_controllers/smc/ -v –hypothesis-profile=thorough # Performance and numerical stability
+pytest tests/test_controllers/smc/ -v -m “numerical_stability” # Integration tests with actual dynamics
+pytest tests/test_integration/ -k “smc” -v</p>
+<div class="highlight-### notranslate"><div class="highlight"><pre><span></span>
+- **Boundary Conditions**: 100% coverage of edge cases
+- **Configuration Validation**: 100% coverage of all validation rules
+- **Numerical Stability**: 95% coverage of numerical corner cases
+- **Integration**: 90% coverage of system-level interactions ## 4. Automated Test Generation ### 4.1 Mathematical Property Templates ```python
+# example-metadata:
 
-   state = np.array([0.1, 0.1, 0.1, 0.05, 0.05, 0.05])
+# runnable: false def generate_linearity_test(component_class, property_name): &quot;&quot;&quot;Generate linearity test for any mathematical component.&quot;&quot;&quot; def test_linearity(self): component = component_class(default_params) x1 = generate_random_input() x2 = generate_random_input() result1 = getattr(component, property_name)(x1) result2 = getattr(component, property_name)(x2) result_combined = getattr(component, property_name)(x1 + x2) assert np.allclose(result_combined, result1 + result2, rtol=1e-10) return test_linearity def generate_monotonicity_test(function, domain): &quot;&quot;&quot;Generate monotonicity test for mathematical functions.&quot;&quot;&quot; def test_monotonicity(self): x_values = np.linspace(domain[0], domain[1], 100) y_values = [function(x) for x in x_values] # Check monotonicity for i in range(len(y_values) - 1): assert y_values[i+1] &gt;= y_values[i] return test_monotonicity
 
-   s1 = surface1.compute(state)
-   s2 = surface2.compute(state)
+``` ### 4.2 Configuration Test Generation ```python
+# example-metadata:
+# runnable: false def generate_validation_tests(config_class, parameter_specs): &quot;&quot;&quot;Generate validation tests for configuration classes.&quot;&quot;&quot; tests = [] for param_name, spec in parameter_specs.items(): if spec.get(&#39;positive_required&#39;, False): def test_positive_validation(): invalid_config = create_invalid_config(param_name, -1.0) with pytest.raises(ValueError): config_class(**invalid_config) tests.append(test_positive_validation) if spec.get(&#39;nonzero_required&#39;, False): def test_nonzero_validation(): invalid_config = create_invalid_config(param_name, 0.0) with pytest.raises(ValueError): config_class(**invalid_config) tests.append(test_nonzero_validation) return tests
+``` ## 5. Error Detection and Reporting ### 5.1 Mathematical Error Classification 1. **Stability Violations**: Configurations that violate stability requirements
 
-   # Surface value should double with doubled gains
-   assert abs(s2 - 2 * s1) &lt; 1e-10
+2. **Numerical Instabilities**: Computations that produce NaN or infinite values
+3. **Mathematical Inconsistencies**: Violations of mathematical properties
+4. **Convergence Failures**: Algorithms that don&#39;t converge as expected
+5. **Precision Losses**: Excessive numerical errors accumulation ### 5.2 Automated Error Reporting ```python
+# example-metadata:
+
+# runnable: false class MathematicalValidationReporter: &quot;&quot;&quot;Automated reporting for mathematical validation results.&quot;&quot;&quot; def __init__(self): self.violations = [] self.warnings = [] self.performance_metrics = {} def report_stability_violation(self, test_name, gains, eigenvalues): &quot;&quot;&quot;Report stability requirement violations.&quot;&quot;&quot; self.violations.append({ &#39;type&#39;: &#39;stability&#39;, &#39;test&#39;: test_name, &#39;gains&#39;: gains, &#39;eigenvalues&#39;: eigenvalues, &#39;severity&#39;: &#39;critical&#39; }) def report_numerical_instability(self, test_name, input_values, output_values): &quot;&quot;&quot;Report numerical computation issues.&quot;&quot;&quot; self.violations.append({ &#39;type&#39;: &#39;numerical&#39;, &#39;test&#39;: test_name, &#39;inputs&#39;: input_values, &#39;outputs&#39;: output_values, &#39;severity&#39;: &#39;high&#39; }) def generate_report(self): &quot;&quot;&quot;Generate validation report.&quot;&quot;&quot; report = { &#39;summary&#39;: { &#39;total_violations&#39;: len(self.violations), &#39;critical_issues&#39;: len([v for v in self.violations if v[&#39;severity&#39;] == &#39;critical&#39;]), &#39;warnings&#39;: len(self.warnings) }, &#39;violations&#39;: self.violations, &#39;warnings&#39;: self.warnings, &#39;performance&#39;: self.performance_metrics } return report
+
+``` ## 6. Continuous Validation ### 6.1 Pre-commit Hooks ```bash
+#!/bin/bash
+# .git/hooks/pre-commit # Run mathematical property tests before each commit
+pytest tests/test_controllers/smc/core/ -q
+if [ $? -ne 0 ]; then echo &quot;Mathematical property tests failed. Commit rejected.&quot; exit 1
+fi # Run configuration validation tests
+pytest tests/test_controllers/smc/algorithms/classical/test_config_validation.py -q
+if [ $? -ne 0 ]; then echo &quot;Configuration validation tests failed. Commit rejected.&quot; exit 1
+fi echo &quot;Mathematical validation passed.&quot;
+``` ### 6.2 Regression Detection ```python
+# example-metadata:
+
+# runnable: false class MathematicalRegressionDetector: &quot;&quot;&quot;Detect regressions in mathematical computations.&quot;&quot;&quot; def __init__(self, baseline_file): self.baseline = self.load_baseline(baseline_file) def check_computation_regression(self, component, test_inputs, tolerance=1e-12): &quot;&quot;&quot;Check if computation results match baseline within tolerance.&quot;&quot;&quot; current_results = [] for input_data in test_inputs: result = component.compute(input_data) current_results.append(result) baseline_key = f&quot;{component.__class__.__name__}_compute&quot; if baseline_key in self.baseline: baseline_results = self.baseline[baseline_key] for current, baseline in zip(current_results, baseline_results): if abs(current - baseline) &gt; tolerance: return False, f&quot;Regression detected: {current} vs {baseline}&quot; return True, &quot;No regression detected&quot; def update_baseline(self, component, test_inputs): &quot;&quot;&quot;Update baseline with current computation results.&quot;&quot;&quot; # Implementation for updating baseline values pass
+
+``` This test validation methodology ensures that all mathematical algorithms and fixes in the SMC system maintain mathematical rigor, numerical stability, and correctness across all operating conditions. ## References 1. Utkin, V. I. (1992). *Sliding Modes in Control and Optimization*. Springer-Verlag. 2. Khalil, H. K. (2002). *Nonlinear Systems*. Prentice Hall. 3. Higham, N. J. (2002). *Accuracy and Stability of Numerical Algorithms*. SIAM. 4. MacKenzie, D. (2004). *Mechanizing Proof: Computing, Risk, and Trust*. MIT Press. 5. Beck, K. (2003). *Test-Driven Development: By Example*. Addison-Wesley.
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="c1">#### 2.1.2 Boundary Layer Properties</span>
-
-<span class="o">**</span><span class="n">Test</span> <span class="n">Suite</span><span class="p">:</span><span class="o">**</span> <span class="err">`</span><span class="n">tests</span><span class="o">/</span><span class="n">test_controllers</span><span class="o">/</span><span class="n">smc</span><span class="o">/</span><span class="n">algorithms</span><span class="o">/</span><span class="n">classical</span><span class="o">/</span><span class="n">test_boundary_layer</span><span class="o">.</span><span class="n">py</span><span class="err">`</span>
-
-<span class="o">**</span><span class="n">Mathematical</span> <span class="n">Properties</span> <span class="n">Validated</span><span class="p">:</span><span class="o">**</span>
-
-<span class="mf">1.</span> <span class="o">**</span><span class="n">Continuity</span><span class="o">**</span><span class="p">:</span>
-<span class="err">```</span><span class="n">python</span>
-<span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_boundary_layer_continuity</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that boundary layer provides continuous switching.&quot;&quot;&quot;</span>
-    <span class="n">boundary_layer</span> <span class="o">=</span> <span class="n">BoundaryLayer</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">switch_method</span><span class="o">=</span><span class="s2">&quot;tanh&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Test continuity at surface (s=0)</span>
-    <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-8</span>
-    <span class="n">switch_left</span> <span class="o">=</span> <span class="n">boundary_layer</span><span class="o">.</span><span class="n">compute_switching_function</span><span class="p">(</span><span class="o">-</span><span class="n">epsilon</span><span class="p">)</span>
-    <span class="n">switch_right</span> <span class="o">=</span> <span class="n">boundary_layer</span><span class="o">.</span><span class="n">compute_switching_function</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span>
-    <span class="n">switch_center</span> <span class="o">=</span> <span class="n">boundary_layer</span><span class="o">.</span><span class="n">compute_switching_function</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
-
-    <span class="c1"># Values should be very close at the boundary</span>
-    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">switch_left</span> <span class="o">-</span> <span class="n">switch_center</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span>
-    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">switch_right</span> <span class="o">-</span> <span class="n">switch_center</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span>
-</pre></div>
-</div>
-<ol class="arabic" start="2">
-<li><p><strong>Monotonicity</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_boundary_layer_monotonicity</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that switching function is monotonic.&quot;&quot;&quot;</span>
-    <span class="n">boundary_layer</span> <span class="o">=</span> <span class="n">BoundaryLayer</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">switch_method</span><span class="o">=</span><span class="s2">&quot;tanh&quot;</span><span class="p">)</span>
-
-    <span class="n">s_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-    <span class="n">switch_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">boundary_layer</span><span class="o">.</span><span class="n">compute_switching_function</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">s_values</span><span class="p">]</span>
-
-    <span class="c1"># Switching function should be strictly increasing</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">switch_values</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">switch_values</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">switch_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Asymptotic Behavior</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_boundary_layer_asymptotic_behavior</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test asymptotic limits of switching function.&quot;&quot;&quot;</span>
-    <span class="n">boundary_layer</span> <span class="o">=</span> <span class="n">BoundaryLayer</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">switch_method</span><span class="o">=</span><span class="s2">&quot;tanh&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Large positive surface value</span>
-    <span class="n">switch_pos</span> <span class="o">=</span> <span class="n">boundary_layer</span><span class="o">.</span><span class="n">compute_switching_function</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">switch_pos</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-3</span>
-
-    <span class="c1"># Large negative surface value</span>
-    <span class="n">switch_neg</span> <span class="o">=</span> <span class="n">boundary_layer</span><span class="o">.</span><span class="n">compute_switching_function</span><span class="p">(</span><span class="o">-</span><span class="mf">10.0</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">switch_neg</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-3</span>
-</pre></div>
-</div>
-</li>
-</ol>
-<section id="configuration-validation-tests">
-<h2>2.2 Configuration Validation Tests<a class="headerlink" href="#configuration-validation-tests" title="Link to this heading">¶</a></h2>
-<p><strong>Test Suite:</strong> <code class="docutils literal notranslate"><span class="pre">tests/test_controllers/smc/algorithms/classical/test_config_validation.py</span></code></p>
-<section id="parameter-validation">
-<h3>2.2.1 Parameter Validation<a class="headerlink" href="#parameter-validation" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">TestClassicalSMCConfigValidation</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test configuration parameter validation.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_positive_gain_requirement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that all surface gains must be positive.&quot;&quot;&quot;</span>
-        <span class="c1"># Valid configuration</span>
-        <span class="n">valid_gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="n">ClassicalSMCConfig</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">valid_gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
-        <span class="c1"># Invalid: zero gain</span>
-        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;must be positive&quot;</span><span class="p">):</span>
-            <span class="n">invalid_gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
-            <span class="n">ClassicalSMCConfig</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">invalid_gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
-        <span class="c1"># Invalid: negative gain</span>
-        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;must be positive&quot;</span><span class="p">):</span>
-            <span class="n">invalid_gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
-            <span class="n">ClassicalSMCConfig</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">invalid_gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_switching_gain_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test switching gain must be positive.&quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;Switching gain K must be positive&quot;</span><span class="p">):</span>
-            <span class="n">invalid_gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>  <span class="c1"># K &lt; 0</span>
-            <span class="n">ClassicalSMCConfig</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">invalid_gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_boundary_layer_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test boundary layer thickness validation.&quot;&quot;&quot;</span>
-        <span class="c1"># Valid boundary layer</span>
-        <span class="n">valid_gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="n">ClassicalSMCConfig</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">valid_gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
-
-        <span class="c1"># Invalid: zero boundary layer</span>
-        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;boundary_layer must be positive&quot;</span><span class="p">):</span>
-            <span class="n">ClassicalSMCConfig</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">valid_gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
-
-        <span class="c1"># Invalid: negative boundary layer</span>
-        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;boundary_layer must be positive&quot;</span><span class="p">):</span>
-            <span class="n">ClassicalSMCConfig</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">valid_gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=-</span><span class="mf">0.01</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="stability-analysis-tests">
-<h3>2.2.2 Stability Analysis Tests<a class="headerlink" href="#stability-analysis-tests" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_hurwitz_stability_check</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that gain combinations satisfy Hurwitz stability.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">check_stability</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if gains produce stable sliding dynamics.&quot;&quot;&quot;</span>
-        <span class="c1"># For each 2x2 subsystem: s² + λᵢs + cᵢ = 0</span>
-        <span class="c1"># Stability requires λᵢ &gt; 0 and cᵢ &gt; 0</span>
-        <span class="k">return</span> <span class="n">k1</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">k2</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">lam1</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">lam2</span> <span class="o">&gt;</span> <span class="mi">0</span>
-
-    <span class="c1"># Stable configuration</span>
-    <span class="n">stable_gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
-    <span class="n">config</span> <span class="o">=</span> <span class="n">ClassicalSMCConfig</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="n">stable_gains</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
-    <span class="k">assert</span> <span class="n">check_stability</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">k1</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">k2</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">lam1</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">lam2</span><span class="p">)</span>
-
-    <span class="c1"># Check damping ratios</span>
-    <span class="n">zeta1</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">lam1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">k1</span><span class="p">))</span>
-    <span class="n">zeta2</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">lam2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">k2</span><span class="p">))</span>
-
-    <span class="c1"># Both subsystems should have positive damping</span>
-    <span class="k">assert</span> <span class="n">zeta1</span> <span class="o">&gt;</span> <span class="mi">0</span>
-    <span class="k">assert</span> <span class="n">zeta2</span> <span class="o">&gt;</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="numerical-accuracy-tests">
-<h2>2.3 Numerical Accuracy Tests<a class="headerlink" href="#numerical-accuracy-tests" title="Link to this heading">¶</a></h2>
-<section id="floating-point-precision">
-<h3>2.3.1 Floating Point Precision<a class="headerlink" href="#floating-point-precision" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">TestNumericalAccuracy</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test numerical accuracy and precision.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_floating_point_consistency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that computations are consistent across repeated calls.&quot;&quot;&quot;</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="n">ClassicalSMCConfig</span><span class="p">(</span>
-            <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
-            <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
-            <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
-            <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
-        <span class="p">)</span>
-        <span class="n">controller</span> <span class="o">=</span> <span class="n">ModularClassicalSMC</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
-
-        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
-
-        <span class="c1"># Compute control multiple times</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{})</span>
-            <span class="n">control</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;control_output&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;control&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)))</span>
-            <span class="k">if</span> <span class="n">control</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">results</span><span class="p">:</span>
-            <span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-
-            <span class="c1"># All results should be identical (deterministic computation)</span>
-            <span class="n">std_dev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">std_dev</span> <span class="o">&lt;</span> <span class="mf">1e-15</span><span class="p">)</span>  <span class="c1"># Machine precision</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_numerical_stability_small_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test numerical stability with very small state values.&quot;&quot;&quot;</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="n">ClassicalSMCConfig</span><span class="p">(</span>
-            <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
-            <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
-            <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
-            <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
-        <span class="p">)</span>
-        <span class="n">controller</span> <span class="o">=</span> <span class="n">ModularClassicalSMC</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
-
-        <span class="c1"># Very small state values (near machine precision)</span>
-        <span class="n">small_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1e-15</span><span class="p">,</span> <span class="mf">1e-15</span><span class="p">,</span> <span class="mf">1e-15</span><span class="p">,</span> <span class="mf">1e-15</span><span class="p">,</span> <span class="mf">1e-15</span><span class="p">,</span> <span class="mf">1e-15</span><span class="p">])</span>
-
-        <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">small_state</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{})</span>
-        <span class="n">control</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;control_output&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;control&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)))</span>
-
-        <span class="k">if</span> <span class="n">control</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># Control should be finite and small</span>
-            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">control</span><span class="p">))</span>
-            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">control</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_numerical_stability_large_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test numerical stability with large state values.&quot;&quot;&quot;</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="n">ClassicalSMCConfig</span><span class="p">(</span>
-            <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
-            <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
-            <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
-            <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
-        <span class="p">)</span>
-        <span class="n">controller</span> <span class="o">=</span> <span class="n">ModularClassicalSMC</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
-
-        <span class="c1"># Large state values (but within reasonable bounds)</span>
-        <span class="n">large_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
-
-        <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">large_state</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{})</span>
-        <span class="n">control</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;control_output&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;control&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)))</span>
-
-        <span class="k">if</span> <span class="n">control</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># Control should be finite and saturated</span>
-            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">control</span><span class="p">))</span>
-            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">control</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">config</span><span class="o">.</span><span class="n">max_force</span> <span class="o">*</span> <span class="mf">1.01</span><span class="p">)</span>  <span class="c1"># Within saturation</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="property-based-testing">
-<h2>2.4 Property-Based Testing<a class="headerlink" href="#property-based-testing" title="Link to this heading">¶</a></h2>
-<p>Using Hypothesis for comprehensive property testing:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hypothesis</span><span class="w"> </span><span class="kn">import</span> <span class="n">given</span><span class="p">,</span> <span class="n">strategies</span> <span class="k">as</span> <span class="n">st</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">TestPropertyBasedSMC</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Property-based tests using Hypothesis.&quot;&quot;&quot;</span>
-
-    <span class="nd">@given</span><span class="p">(</span>
-        <span class="n">k1</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">50.0</span><span class="p">),</span>
-        <span class="n">k2</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">50.0</span><span class="p">),</span>
-        <span class="n">lam1</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">50.0</span><span class="p">),</span>
-        <span class="n">lam2</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">50.0</span><span class="p">),</span>
-        <span class="n">K</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">200.0</span><span class="p">),</span>
-        <span class="n">kd</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">20.0</span><span class="p">)</span>
-    <span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_configuration_property_all_positive_gains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">kd</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that any positive gain combination creates valid configuration.&quot;&quot;&quot;</span>
-        <span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">lam1</span><span class="p">,</span> <span class="n">lam2</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">kd</span><span class="p">]</span>
-
-        <span class="c1"># Should not raise any exceptions</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="n">ClassicalSMCConfig</span><span class="p">(</span>
-            <span class="n">gains</span><span class="o">=</span><span class="n">gains</span><span class="p">,</span>
-            <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
-            <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
-            <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
-        <span class="p">)</span>
-
-        <span class="c1"># All properties should be accessible</span>
-        <span class="k">assert</span> <span class="n">config</span><span class="o">.</span><span class="n">k1</span> <span class="o">==</span> <span class="n">k1</span>
-        <span class="k">assert</span> <span class="n">config</span><span class="o">.</span><span class="n">k2</span> <span class="o">==</span> <span class="n">k2</span>
-        <span class="k">assert</span> <span class="n">config</span><span class="o">.</span><span class="n">lam1</span> <span class="o">==</span> <span class="n">lam1</span>
-        <span class="k">assert</span> <span class="n">config</span><span class="o">.</span><span class="n">lam2</span> <span class="o">==</span> <span class="n">lam2</span>
-        <span class="k">assert</span> <span class="n">config</span><span class="o">.</span><span class="n">K</span> <span class="o">==</span> <span class="n">K</span>
-        <span class="k">assert</span> <span class="n">config</span><span class="o">.</span><span class="n">kd</span> <span class="o">==</span> <span class="n">kd</span>
-
-    <span class="nd">@given</span><span class="p">(</span>
-        <span class="n">state</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">lists</span><span class="p">(</span>
-            <span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">min_value</span><span class="o">=-</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">10.0</span><span class="p">),</span>
-            <span class="n">min_size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
-            <span class="n">max_size</span><span class="o">=</span><span class="mi">6</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_sliding_surface_finite_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that sliding surface always produces finite output for finite input.&quot;&quot;&quot;</span>
-        <span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
-        <span class="n">surface</span> <span class="o">=</span> <span class="n">LinearSlidingSurface</span><span class="p">(</span><span class="n">gains</span><span class="p">[:</span><span class="mi">4</span><span class="p">])</span>
-
-        <span class="n">state_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-
-        <span class="c1"># Sliding surface should always be finite for finite state</span>
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">state_array</span><span class="p">)):</span>
-            <span class="n">surface_value</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state_array</span><span class="p">)</span>
-            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">surface_value</span><span class="p">)</span>
-
-    <span class="nd">@given</span><span class="p">(</span>
-        <span class="n">boundary_thickness</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span>
-        <span class="n">surface_value</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">min_value</span><span class="o">=-</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>
-    <span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_boundary_layer_bounded_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boundary_thickness</span><span class="p">,</span> <span class="n">surface_value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that boundary layer output is always bounded.&quot;&quot;&quot;</span>
-        <span class="n">boundary_layer</span> <span class="o">=</span> <span class="n">BoundaryLayer</span><span class="p">(</span><span class="n">thickness</span><span class="o">=</span><span class="n">boundary_thickness</span><span class="p">,</span> <span class="n">switch_method</span><span class="o">=</span><span class="s2">&quot;tanh&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">surface_value</span><span class="p">):</span>
-            <span class="n">switch_value</span> <span class="o">=</span> <span class="n">boundary_layer</span><span class="o">.</span><span class="n">compute_switching_function</span><span class="p">(</span><span class="n">surface_value</span><span class="p">)</span>
-
-            <span class="c1"># Switching function should be bounded between -1 and 1</span>
-            <span class="k">assert</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">&lt;=</span> <span class="n">switch_value</span> <span class="o">&lt;=</span> <span class="mf">1.0</span>
-            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">switch_value</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="integration-and-system-level-tests">
-<h2>2.5 Integration and System-Level Tests<a class="headerlink" href="#integration-and-system-level-tests" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">TestSystemLevelMathematics</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test mathematical consistency across system components.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_control_law_decomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that control law components sum correctly.&quot;&quot;&quot;</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="n">ClassicalSMCConfig</span><span class="p">(</span>
-            <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
-            <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
-            <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
-            <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
-        <span class="p">)</span>
-        <span class="n">controller</span> <span class="o">=</span> <span class="n">ModularClassicalSMC</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
-
-        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
-
-        <span class="c1"># Get overall control output</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{})</span>
-        <span class="n">total_control</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;control_output&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;control&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)))</span>
-
-        <span class="c1"># Get individual components (if available in debug output)</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="p">{})</span>
-
-        <span class="k">if</span> <span class="s1">&#39;u_equivalent&#39;</span> <span class="ow">in</span> <span class="n">components</span> <span class="ow">and</span> <span class="s1">&#39;u_switching&#39;</span> <span class="ow">in</span> <span class="n">components</span> <span class="ow">and</span> <span class="s1">&#39;u_derivative&#39;</span> <span class="ow">in</span> <span class="n">components</span><span class="p">:</span>
-            <span class="n">u_eq</span> <span class="o">=</span> <span class="n">components</span><span class="p">[</span><span class="s1">&#39;u_equivalent&#39;</span><span class="p">]</span>
-            <span class="n">u_sw</span> <span class="o">=</span> <span class="n">components</span><span class="p">[</span><span class="s1">&#39;u_switching&#39;</span><span class="p">]</span>
-            <span class="n">u_d</span> <span class="o">=</span> <span class="n">components</span><span class="p">[</span><span class="s1">&#39;u_derivative&#39;</span><span class="p">]</span>
-
-            <span class="c1"># Before saturation, should sum correctly</span>
-            <span class="n">u_unsaturated</span> <span class="o">=</span> <span class="n">u_eq</span> <span class="o">+</span> <span class="n">u_sw</span> <span class="o">+</span> <span class="n">u_d</span>
-
-            <span class="c1"># After saturation</span>
-            <span class="n">u_saturated</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u_unsaturated</span><span class="p">,</span> <span class="o">-</span><span class="n">config</span><span class="o">.</span><span class="n">max_force</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">max_force</span><span class="p">)</span>
-
-            <span class="c1"># Should match total control (before any additional processing)</span>
-            <span class="k">if</span> <span class="n">total_control</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">u_saturated</span><span class="p">,</span> <span class="n">total_control</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_lyapunov_function_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test Lyapunov function properties for stability analysis.&quot;&quot;&quot;</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="n">ClassicalSMCConfig</span><span class="p">(</span>
-            <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
-            <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
-            <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
-            <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
-        <span class="p">)</span>
-        <span class="n">controller</span> <span class="o">=</span> <span class="n">ModularClassicalSMC</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
-
-        <span class="n">surface</span> <span class="o">=</span> <span class="n">LinearSlidingSurface</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get_surface_gains</span><span class="p">())</span>
-
-        <span class="c1"># Multiple test states</span>
-        <span class="n">states</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]),</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">]),</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.03</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">])</span>
-        <span class="p">]</span>
-
-        <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-
-            <span class="c1"># Lyapunov function candidate: V = 0.5 * s²</span>
-            <span class="n">V</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">s</span><span class="o">**</span><span class="mi">2</span>
-
-            <span class="c1"># V should be non-negative</span>
-            <span class="k">assert</span> <span class="n">V</span> <span class="o">&gt;=</span> <span class="mi">0</span>
-
-            <span class="c1"># V = 0 if and only if s = 0</span>
-            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">:</span>
-                <span class="k">assert</span> <span class="n">V</span> <span class="o">&lt;</span> <span class="mf">1e-15</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">assert</span> <span class="n">V</span> <span class="o">&gt;</span> <span class="mi">0</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_reaching_law_satisfaction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that reaching law is satisfied: s*ṡ ≤ -η|s|.&quot;&quot;&quot;</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="n">ClassicalSMCConfig</span><span class="p">(</span>
-            <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
-            <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
-            <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
-            <span class="n">boundary_layer</span><span class="o">=</span><span class="mf">0.01</span>
-        <span class="p">)</span>
-
-        <span class="n">surface</span> <span class="o">=</span> <span class="n">LinearSlidingSurface</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get_surface_gains</span><span class="p">())</span>
-
-        <span class="c1"># Test state away from surface</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-
-        <span class="c1"># Simplified reaching law check (without full dynamics)</span>
-        <span class="c1"># For switching control: u_sw = -K * sign(s)</span>
-        <span class="c1"># The reaching condition s*ṡ ≤ -η|s| should be satisfied</span>
-        <span class="c1"># when K is chosen large enough</span>
-
-        <span class="c1"># This is a simplified test - full test would require dynamics model</span>
-        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">config</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">:</span>
-            <span class="c1"># Outside boundary layer, should have strong reaching behavior</span>
-            <span class="n">expected_reaching_rate</span> <span class="o">=</span> <span class="o">-</span><span class="n">config</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">config</span><span class="o">.</span><span class="n">boundary_layer</span><span class="p">)</span>
-            <span class="k">assert</span> <span class="n">expected_reaching_rate</span> <span class="o">&lt;</span> <span class="mi">0</span>  <span class="c1"># Should be moving toward surface</span>
-</pre></div>
-</div>
-</section>
-<section id="test-organization-and-execution">
-<h2>3. Test Organization and Execution<a class="headerlink" href="#test-organization-and-execution" title="Link to this heading">¶</a></h2>
-<section id="test-hierarchy">
-<h3>3.1 Test Hierarchy<a class="headerlink" href="#test-hierarchy" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tests</span><span class="o">/</span><span class="n">test_controllers</span><span class="o">/</span><span class="n">smc</span><span class="o">/</span>
-<span class="err">├──</span> <span class="n">algorithms</span><span class="o">/</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">classical</span><span class="o">/</span>
-<span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">test_boundary_layer</span><span class="o">.</span><span class="n">py</span>           <span class="c1"># Boundary layer mathematics</span>
-<span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">test_sliding_surface</span><span class="o">.</span><span class="n">py</span>          <span class="c1"># Surface computation tests</span>
-<span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">test_config_validation</span><span class="o">.</span><span class="n">py</span>        <span class="c1"># Parameter validation</span>
-<span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">test_modular_controller</span><span class="o">.</span><span class="n">py</span>       <span class="c1"># Integration tests</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">adaptive</span><span class="o">/</span>
-<span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">test_modular_adaptive_smc</span><span class="o">.</span><span class="n">py</span>     <span class="c1"># Adaptive algorithm tests</span>
-<span class="err">│</span>   <span class="err">└──</span> <span class="n">super_twisting</span><span class="o">/</span>
-<span class="err">│</span>       <span class="err">└──</span> <span class="n">test_super_twisting_smc</span><span class="o">.</span><span class="n">py</span>       <span class="c1"># Higher-order SMC tests</span>
-<span class="err">├──</span> <span class="n">core</span><span class="o">/</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">test_sliding_surface</span><span class="o">.</span><span class="n">py</span>              <span class="c1"># Core surface mathematics</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">test_equivalent_control</span><span class="o">.</span><span class="n">py</span>           <span class="c1"># Model-based control</span>
-<span class="err">│</span>   <span class="err">└──</span> <span class="n">test_switching_functions</span><span class="o">.</span><span class="n">py</span>          <span class="c1"># Switching function tests</span>
-<span class="err">└──</span> <span class="n">test_property_based_smc</span><span class="o">.</span><span class="n">py</span>               <span class="c1"># Property-based tests</span>
-</pre></div>
-</div>
-</section>
-<section id="test-execution-strategy">
-<h3>3.2 Test Execution Strategy<a class="headerlink" href="#test-execution-strategy" title="Link to this heading">¶</a></h3>
-<section id="continuous-integration">
-<h4>3.2.1 Continuous Integration<a class="headerlink" href="#continuous-integration" title="Link to this heading">¶</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fast unit tests (mathematical properties)</span>
-pytest<span class="w"> </span>tests/test_controllers/smc/core/<span class="w"> </span>-v
-
-<span class="c1"># Algorithm-specific tests</span>
-pytest<span class="w"> </span>tests/test_controllers/smc/algorithms/classical/<span class="w"> </span>-v
-
-<span class="c1"># Property-based tests (may take longer)</span>
-pytest<span class="w"> </span>tests/test_controllers/smc/test_property_based_smc.py<span class="w"> </span>-v<span class="w"> </span>--hypothesis-profile<span class="o">=</span>ci
-
-<span class="c1"># Full mathematical validation suite</span>
-pytest<span class="w"> </span>tests/test_controllers/smc/<span class="w"> </span>-v<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;not slow&quot;</span>
-</pre></div>
-</div>
-</section>
-<section id="comprehensive-validation">
-<h4>3.2.2 Comprehensive Validation<a class="headerlink" href="#comprehensive-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extended property-based testing</span>
-pytest<span class="w"> </span>tests/test_controllers/smc/<span class="w"> </span>-v<span class="w"> </span>--hypothesis-profile<span class="o">=</span>thorough
-
-<span class="c1"># Performance and numerical stability</span>
-pytest<span class="w"> </span>tests/test_controllers/smc/<span class="w"> </span>-v<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;numerical_stability&quot;</span>
-
-<span class="c1"># Integration tests with actual dynamics</span>
-pytest<span class="w"> </span>tests/test_integration/<span class="w"> </span>-k<span class="w"> </span><span class="s2">&quot;smc&quot;</span><span class="w"> </span>-v
-</pre></div>
-</div>
-</section>
-</section>
-<section id="coverage-requirements">
-<h3>3.3 Coverage Requirements<a class="headerlink" href="#coverage-requirements" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Mathematical Properties</strong>: 100% coverage of all mathematical formulas</p></li>
-<li><p><strong>Boundary Conditions</strong>: 100% coverage of edge cases</p></li>
-<li><p><strong>Configuration Validation</strong>: 100% coverage of all validation rules</p></li>
-<li><p><strong>Numerical Stability</strong>: 95% coverage of numerical corner cases</p></li>
-<li><p><strong>Integration</strong>: 90% coverage of system-level interactions</p></li>
-</ul>
-</section>
-</section>
-<section id="automated-test-generation">
-<h2>4. Automated Test Generation<a class="headerlink" href="#automated-test-generation" title="Link to this heading">¶</a></h2>
-<section id="mathematical-property-templates">
-<h3>4.1 Mathematical Property Templates<a class="headerlink" href="#mathematical-property-templates" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">generate_linearity_test</span><span class="p">(</span><span class="n">component_class</span><span class="p">,</span> <span class="n">property_name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate linearity test for any mathematical component.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_linearity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">component</span> <span class="o">=</span> <span class="n">component_class</span><span class="p">(</span><span class="n">default_params</span><span class="p">)</span>
-
-        <span class="n">x1</span> <span class="o">=</span> <span class="n">generate_random_input</span><span class="p">()</span>
-        <span class="n">x2</span> <span class="o">=</span> <span class="n">generate_random_input</span><span class="p">()</span>
-
-        <span class="n">result1</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">component</span><span class="p">,</span> <span class="n">property_name</span><span class="p">)(</span><span class="n">x1</span><span class="p">)</span>
-        <span class="n">result2</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">component</span><span class="p">,</span> <span class="n">property_name</span><span class="p">)(</span><span class="n">x2</span><span class="p">)</span>
-        <span class="n">result_combined</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">component</span><span class="p">,</span> <span class="n">property_name</span><span class="p">)(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">)</span>
-
-        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result_combined</span><span class="p">,</span> <span class="n">result1</span> <span class="o">+</span> <span class="n">result2</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">test_linearity</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">generate_monotonicity_test</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate monotonicity test for mathematical functions.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_monotonicity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">domain</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">domain</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">100</span><span class="p">)</span>
-        <span class="n">y_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_values</span><span class="p">]</span>
-
-        <span class="c1"># Check monotonicity</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_values</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="n">y_values</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">y_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="n">test_monotonicity</span>
-</pre></div>
-</div>
-</section>
-<section id="configuration-test-generation">
-<h3>4.2 Configuration Test Generation<a class="headerlink" href="#configuration-test-generation" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">generate_validation_tests</span><span class="p">(</span><span class="n">config_class</span><span class="p">,</span> <span class="n">parameter_specs</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate comprehensive validation tests for configuration classes.&quot;&quot;&quot;</span>
-
-    <span class="n">tests</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">parameter_specs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;positive_required&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-            <span class="k">def</span><span class="w"> </span><span class="nf">test_positive_validation</span><span class="p">():</span>
-                <span class="n">invalid_config</span> <span class="o">=</span> <span class="n">create_invalid_config</span><span class="p">(</span><span class="n">param_name</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
-                <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-                    <span class="n">config_class</span><span class="p">(</span><span class="o">**</span><span class="n">invalid_config</span><span class="p">)</span>
-
-            <span class="n">tests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_positive_validation</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nonzero_required&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-            <span class="k">def</span><span class="w"> </span><span class="nf">test_nonzero_validation</span><span class="p">():</span>
-                <span class="n">invalid_config</span> <span class="o">=</span> <span class="n">create_invalid_config</span><span class="p">(</span><span class="n">param_name</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-                <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-                    <span class="n">config_class</span><span class="p">(</span><span class="o">**</span><span class="n">invalid_config</span><span class="p">)</span>
-
-            <span class="n">tests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_nonzero_validation</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">tests</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="error-detection-and-reporting">
-<h2>5. Error Detection and Reporting<a class="headerlink" href="#error-detection-and-reporting" title="Link to this heading">¶</a></h2>
-<section id="mathematical-error-classification">
-<h3>5.1 Mathematical Error Classification<a class="headerlink" href="#mathematical-error-classification" title="Link to this heading">¶</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Stability Violations</strong>: Configurations that violate stability requirements</p></li>
-<li><p><strong>Numerical Instabilities</strong>: Computations that produce NaN or infinite values</p></li>
-<li><p><strong>Mathematical Inconsistencies</strong>: Violations of mathematical properties</p></li>
-<li><p><strong>Convergence Failures</strong>: Algorithms that don’t converge as expected</p></li>
-<li><p><strong>Precision Losses</strong>: Excessive numerical errors accumulation</p></li>
-</ol>
-</section>
-<section id="automated-error-reporting">
-<h3>5.2 Automated Error Reporting<a class="headerlink" href="#automated-error-reporting" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">MathematicalValidationReporter</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Automated reporting for mathematical validation results.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">violations</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">warnings</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">performance_metrics</span> <span class="o">=</span> <span class="p">{}</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">report_stability_violation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_name</span><span class="p">,</span> <span class="n">gains</span><span class="p">,</span> <span class="n">eigenvalues</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Report stability requirement violations.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;stability&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="n">test_name</span><span class="p">,</span>
-            <span class="s1">&#39;gains&#39;</span><span class="p">:</span> <span class="n">gains</span><span class="p">,</span>
-            <span class="s1">&#39;eigenvalues&#39;</span><span class="p">:</span> <span class="n">eigenvalues</span><span class="p">,</span>
-            <span class="s1">&#39;severity&#39;</span><span class="p">:</span> <span class="s1">&#39;critical&#39;</span>
-        <span class="p">})</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">report_numerical_instability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_name</span><span class="p">,</span> <span class="n">input_values</span><span class="p">,</span> <span class="n">output_values</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Report numerical computation issues.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;numerical&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="n">test_name</span><span class="p">,</span>
-            <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="n">input_values</span><span class="p">,</span>
-            <span class="s1">&#39;outputs&#39;</span><span class="p">:</span> <span class="n">output_values</span><span class="p">,</span>
-            <span class="s1">&#39;severity&#39;</span><span class="p">:</span> <span class="s1">&#39;high&#39;</span>
-        <span class="p">})</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">generate_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate comprehensive validation report.&quot;&quot;&quot;</span>
-        <span class="n">report</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;summary&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;total_violations&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">violations</span><span class="p">),</span>
-                <span class="s1">&#39;critical_issues&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">violations</span> <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;severity&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;critical&#39;</span><span class="p">]),</span>
-                <span class="s1">&#39;warnings&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">warnings</span><span class="p">)</span>
-            <span class="p">},</span>
-            <span class="s1">&#39;violations&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">violations</span><span class="p">,</span>
-            <span class="s1">&#39;warnings&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">warnings</span><span class="p">,</span>
-            <span class="s1">&#39;performance&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">performance_metrics</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">report</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="continuous-validation">
-<h2>6. Continuous Validation<a class="headerlink" href="#continuous-validation" title="Link to this heading">¶</a></h2>
-<section id="pre-commit-hooks">
-<h3>6.1 Pre-commit Hooks<a class="headerlink" href="#pre-commit-hooks" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1"># .git/hooks/pre-commit</span>
-
-<span class="c1"># Run mathematical property tests before each commit</span>
-pytest<span class="w"> </span>tests/test_controllers/smc/core/<span class="w"> </span>-q
-<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$?</span><span class="w"> </span>-ne<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Mathematical property tests failed. Commit rejected.&quot;</span>
-<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<span class="k">fi</span>
-
-<span class="c1"># Run configuration validation tests</span>
-pytest<span class="w"> </span>tests/test_controllers/smc/algorithms/classical/test_config_validation.py<span class="w"> </span>-q
-<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$?</span><span class="w"> </span>-ne<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Configuration validation tests failed. Commit rejected.&quot;</span>
-<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<span class="k">fi</span>
-
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Mathematical validation passed.&quot;</span>
-</pre></div>
-</div>
-</section>
-<section id="regression-detection">
-<h3>6.2 Regression Detection<a class="headerlink" href="#regression-detection" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">MathematicalRegressionDetector</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect regressions in mathematical computations.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline_file</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_baseline</span><span class="p">(</span><span class="n">baseline_file</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">check_computation_regression</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component</span><span class="p">,</span> <span class="n">test_inputs</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if computation results match baseline within tolerance.&quot;&quot;&quot;</span>
-
-        <span class="n">current_results</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">input_data</span> <span class="ow">in</span> <span class="n">test_inputs</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">input_data</span><span class="p">)</span>
-            <span class="n">current_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-
-        <span class="n">baseline_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">component</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">_compute&quot;</span>
-        <span class="k">if</span> <span class="n">baseline_key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span><span class="p">:</span>
-            <span class="n">baseline_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span><span class="p">[</span><span class="n">baseline_key</span><span class="p">]</span>
-
-            <span class="k">for</span> <span class="n">current</span><span class="p">,</span> <span class="n">baseline</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">current_results</span><span class="p">,</span> <span class="n">baseline_results</span><span class="p">):</span>
-                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">current</span> <span class="o">-</span> <span class="n">baseline</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Regression detected: </span><span class="si">{</span><span class="n">current</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">baseline</span><span class="si">}</span><span class="s2">&quot;</span>
-
-        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;No regression detected&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">update_baseline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component</span><span class="p">,</span> <span class="n">test_inputs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update baseline with current computation results.&quot;&quot;&quot;</span>
-        <span class="c1"># Implementation for updating baseline values</span>
-        <span class="k">pass</span>
-</pre></div>
-</div>
-<p>This comprehensive test validation methodology ensures that all mathematical algorithms and fixes in the SMC system maintain mathematical rigor, numerical stability, and correctness across all operating conditions.</p>
-</section>
-</section>
-<section id="references">
-<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
-<ol class="arabic simple">
-<li><p>Utkin, V. I. (1992). <em>Sliding Modes in Control and Optimization</em>. Springer-Verlag.</p></li>
-<li><p>Khalil, H. K. (2002). <em>Nonlinear Systems</em>. Prentice Hall.</p></li>
-<li><p>Higham, N. J. (2002). <em>Accuracy and Stability of Numerical Algorithms</em>. SIAM.</p></li>
-<li><p>MacKenzie, D. (2004). <em>Mechanizing Proof: Computing, Risk, and Trust</em>. MIT Press.</p></li>
-<li><p>Beck, K. (2003). <em>Test-Driven Development: By Example</em>. Addison-Wesley.</p></li>
-</ol>
-</section>
 </section>
 
         </article>
@@ -1297,7 +404,7 @@ pytest<span class="w"> </span>tests/test_controllers/smc/algorithms/classical/te
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 08, 2025</div>
+              Last updated on Oct 10, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1306,85 +413,16 @@ pytest<span class="w"> </span>tests/test_controllers/smc/algorithms/classical/te
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Mathematical Test Validation Methodology</a><ul>
-<li><a class="reference internal" href="#overview">1. Overview</a></li>
-<li><a class="reference internal" href="#test-categories-and-structure">2. Test Categories and Structure</a><ul>
-<li><a class="reference internal" href="#mathematical-property-tests">2.1 Mathematical Property Tests</a><ul>
-<li><a class="reference internal" href="#sliding-surface-properties">2.1.1 Sliding Surface Properties</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#example-metadata">example-metadata:</a></li>
-<li><a class="reference internal" href="#runnable-false">runnable: false</a></li>
-<li><a class="reference internal" href="#id1">example-metadata:</a></li>
-<li><a class="reference internal" href="#id2">runnable: false</a><ul>
-<li><a class="reference internal" href="#configuration-validation-tests">2.2 Configuration Validation Tests</a><ul>
-<li><a class="reference internal" href="#parameter-validation">2.2.1 Parameter Validation</a></li>
-<li><a class="reference internal" href="#stability-analysis-tests">2.2.2 Stability Analysis Tests</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#numerical-accuracy-tests">2.3 Numerical Accuracy Tests</a><ul>
-<li><a class="reference internal" href="#floating-point-precision">2.3.1 Floating Point Precision</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#property-based-testing">2.4 Property-Based Testing</a></li>
-<li><a class="reference internal" href="#integration-and-system-level-tests">2.5 Integration and System-Level Tests</a></li>
-<li><a class="reference internal" href="#test-organization-and-execution">3. Test Organization and Execution</a><ul>
-<li><a class="reference internal" href="#test-hierarchy">3.1 Test Hierarchy</a></li>
-<li><a class="reference internal" href="#test-execution-strategy">3.2 Test Execution Strategy</a><ul>
-<li><a class="reference internal" href="#continuous-integration">3.2.1 Continuous Integration</a></li>
-<li><a class="reference internal" href="#comprehensive-validation">3.2.2 Comprehensive Validation</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#coverage-requirements">3.3 Coverage Requirements</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#automated-test-generation">4. Automated Test Generation</a><ul>
-<li><a class="reference internal" href="#mathematical-property-templates">4.1 Mathematical Property Templates</a></li>
-<li><a class="reference internal" href="#configuration-test-generation">4.2 Configuration Test Generation</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#error-detection-and-reporting">5. Error Detection and Reporting</a><ul>
-<li><a class="reference internal" href="#mathematical-error-classification">5.1 Mathematical Error Classification</a></li>
-<li><a class="reference internal" href="#automated-error-reporting">5.2 Automated Error Reporting</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#continuous-validation">6. Continuous Validation</a><ul>
-<li><a class="reference internal" href="#pre-commit-hooks">6.1 Pre-commit Hooks</a></li>
-<li><a class="reference internal" href="#regression-detection">6.2 Regression Detection</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#references">References</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=4ebf8126"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=08e7b316"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>

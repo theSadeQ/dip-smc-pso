@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="../">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -19,16 +19,16 @@
     margin-top: 0.5em;
 }
 </style>
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="SMC Controller Comparison Theory" href="controller_comparison_theory.html" /><link rel="prev" title="Control Primitives Reference" href="../controllers/control_primitives_reference.html" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
         <title>Complete Sliding Mode Control Mathematical Theory - DIP_SMC_PSO Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f5a89ef9" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=8a7e329d" />
     
     
 
@@ -163,14 +163,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -180,8 +176,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -189,8 +184,7 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -198,8 +192,7 @@
         </button>
       </div>
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -207,7 +200,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
-  
   
   <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
   
@@ -219,254 +211,12 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">Theory Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">3. System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plant_model.html">1.x Plant Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
-<ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../controllers/index.html">Controllers Module Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Mathematical Foundations</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../plant/models_guide.html">Plant Models Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../TESTING.html">Testing Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../test_protocols.html">5.x Test Protocols</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../context.html">2. Application Context</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference Documentation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography &amp; Academic References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../RELEASE_CHECKLIST.html">Release Checklist</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -492,13 +242,12 @@
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/mathematical_foundations/smc_complete_theory.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/mathematical_foundations/smc_complete_theory.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
 </div><div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -506,932 +255,352 @@
             </button>
           </div>
           <label class="toc-overlay-icon toc-content-icon" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="complete-sliding-mode-control-mathematical-theory">
 <h1>Complete Sliding Mode Control Mathematical Theory<a class="headerlink" href="#complete-sliding-mode-control-mathematical-theory" title="Link to this heading">¶</a></h1>
-<p><strong>Double-Inverted Pendulum Control System</strong></p>
-<p><strong>Document Version</strong>: 1.0
+<p><strong>Double-Inverted Pendulum Control System</strong> <strong>Document Version</strong>: 1.0
 <strong>Created</strong>: 2025-10-04
-<strong>Status</strong>: Research-Grade Reference</p>
-<p><strong>Purpose</strong>: Unified mathematical foundation for all SMC variants in the DIP-SMC-PSO system, including rigorous Lyapunov stability proofs, convergence analysis, finite-time convergence theory, and implementation considerations.</p>
+<strong>Status</strong>: Research-Grade Reference <strong>Purpose</strong>: Unified mathematical foundation for all SMC variants in the DIP-SMC-PSO system, including rigorous Lyapunov stability proofs, convergence analysis, finite-time convergence theory, and implementation considerations.</p>
 <hr class="docutils" />
-<section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
-<ol class="arabic simple">
-<li><p><a class="reference internal" href="#introduction-and-fundamentals">Introduction and Fundamentals</a></p></li>
-<li><p><a class="reference internal" href="#classical-smc-theory">Classical SMC Theory</a></p></li>
-<li><p><a class="reference internal" href="#super-twisting-smc-theory">Super-Twisting SMC Theory</a></p></li>
-<li><p><a class="reference internal" href="#adaptive-smc-theory">Adaptive SMC Theory</a></p></li>
-<li><p><a class="reference internal" href="#hybrid-adaptive-sta-smc-theory">Hybrid Adaptive STA-SMC Theory</a></p></li>
-<li><p><a class="reference internal" href="#convergence-analysis-comparison">Convergence Analysis Comparison</a></p></li>
-<li><p><a class="reference internal" href="#numerical-considerations">Numerical Considerations</a></p></li>
-<li><p><a class="reference internal" href="#references">References</a></p></li>
+<section id="table-of-contents-1-introduction-and-fundamentals">
+<h2>Table of Contents 1. <a class="reference internal" href="#1-introduction-and-fundamentals"><span class="xref myst">Introduction and Fundamentals</span></a><a class="headerlink" href="#table-of-contents-1-introduction-and-fundamentals" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple" start="2">
+<li><p><a class="reference internal" href="#2-classical-smc-theory"><span class="xref myst">Classical SMC Theory</span></a></p></li>
+<li><p><a class="reference internal" href="#3-super-twisting-smc-theory"><span class="xref myst">Super-Twisting SMC Theory</span></a></p></li>
+<li><p><a class="reference internal" href="#4-adaptive-smc-theory"><span class="xref myst">Adaptive SMC Theory</span></a></p></li>
+<li><p><a class="reference internal" href="#5-hybrid-adaptive-sta-smc-theory"><span class="xref myst">Hybrid Adaptive STA-SMC Theory</span></a></p></li>
+<li><p><a class="reference internal" href="#6-convergence-analysis-comparison"><span class="xref myst">Convergence Analysis Comparison</span></a></p></li>
+<li><p><a class="reference internal" href="#7-numerical-considerations"><span class="xref myst">Numerical Considerations</span></a></p></li>
+<li><p><a class="reference internal" href="#8-references"><span class="xref myst">References</span></a></p></li>
 </ol>
 </section>
 <hr class="docutils" />
-<section id="introduction-and-fundamentals">
-<h2>1. Introduction and Fundamentals<a class="headerlink" href="#introduction-and-fundamentals" title="Link to this heading">¶</a></h2>
-<section id="overview">
-<h3>1.1 Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h3>
-<p>The double-inverted pendulum (DIP) is a canonical benchmark for nonlinear, underactuated control systems. With two pendula attached in series to a horizontally moving cart, the system has fewer actuators than degrees of freedom, making it both <strong>underactuated</strong> and <strong>strongly nonlinear</strong>. Conventional linear controllers struggle with large deflections, parameter variations, and model uncertainty.</p>
-<p>Sliding Mode Control (SMC) addresses these challenges by forcing the system state onto a pre-defined <strong>sliding manifold</strong>. When the state reaches this manifold, the resulting closed-loop dynamics become insensitive to matched disturbances and uncertainties. The control law compensates modeling errors through the control input channel, causing the plant to behave according to the reduced-order dynamics on the manifold. This robustness and finite-time convergence (for higher-order SMC) make SMC attractive for underactuated systems.</p>
-<p>However, the discontinuous switching law of classical SMC induces <strong>chattering</strong>, a high-frequency oscillation caused by rapid control switching when the state crosses the sliding surface. Chattering increases control effort, excites unmodeled high-frequency modes, and can cause wear in actuators. Introducing a boundary layer around the sliding surface alleviates chattering but enlarges the tracking error.</p>
-<p>This document presents the unified mathematical theory for four SMC variants implemented in this project:</p>
+<section id="introduction-and-fundamentals-1-1-overview-the-double-inverted-pendulum-dip-is-a-canonical-benchmark-for-nonlinear-underactuated-control-systems-with-two-pendula-attached-in-series-to-a-horizontally-moving-cart-the-system-has-fewer-actuators-than-degrees-of-freedom-making-it-both-underactuated-and-strongly-nonlinear-conventional-linear-controllers-struggle-with-large-deflections-parameter-variations-and-model-uncertainty-sliding-mode-control-smc-addresses-these-challenges-by-forcing-the-system-state-onto-a-pre-defined-sliding-manifold-when-the-state-reaches-this-manifold-the-resulting-closed-loop-dynamics-become-insensitive-to-matched-disturbances-and-uncertainties-the-control-law-compensates-modeling-errors-through-the-control-input-channel-causing-the-plant-to-behave-according-to-the-reduced-order-dynamics-on-the-manifold-this-robustness-and-finite-time-convergence-for-higher-order-smc-make-smc-attractive-for-underactuated-systems-however-the-discontinuous-switching-law-of-classical-smc-induces-chattering-a-high-frequency-oscillation-caused-by-rapid-control-switching-when-the-state-crosses-the-sliding-surface-chattering-increases-control-effort-excites-unmodeled-high-frequency-modes-and-can-cause-wear-in-actuators-introducing-a-boundary-layer-around-the-sliding-surface-alleviates-chattering-but-enlarges-the-tracking-error-this-document-presents-the-unified-mathematical-theory-for-four-smc-variants-implemented-in-this-project">
+<h2>1. Introduction and Fundamentals ### 1.1 Overview The double-inverted pendulum (DIP) is a canonical benchmark for nonlinear, underactuated control systems. With two pendula attached in series to a horizontally moving cart, the system has fewer actuators than degrees of freedom, making it both <strong>underactuated</strong> and <strong>strongly nonlinear</strong>. Conventional linear controllers struggle with large deflections, parameter variations, and model uncertainty. Sliding Mode Control (SMC) addresses these challenges by forcing the system state onto a pre-defined <strong>sliding manifold</strong>. When the state reaches this manifold, the resulting closed-loop dynamics become insensitive to matched disturbances and uncertainties. The control law compensates modeling errors through the control input channel, causing the plant to behave according to the reduced-order dynamics on the manifold. This robustness and finite-time convergence (for higher-order SMC) make SMC attractive for underactuated systems. However, the discontinuous switching law of classical SMC induces <strong>chattering</strong>, a high-frequency oscillation caused by rapid control switching when the state crosses the sliding surface. Chattering increases control effort, excites unmodeled high-frequency modes, and can cause wear in actuators. Introducing a boundary layer around the sliding surface alleviates chattering but enlarges the tracking error. This document presents the unified mathematical theory for four SMC variants implemented in this project:<a class="headerlink" href="#introduction-and-fundamentals-1-1-overview-the-double-inverted-pendulum-dip-is-a-canonical-benchmark-for-nonlinear-underactuated-control-systems-with-two-pendula-attached-in-series-to-a-horizontally-moving-cart-the-system-has-fewer-actuators-than-degrees-of-freedom-making-it-both-underactuated-and-strongly-nonlinear-conventional-linear-controllers-struggle-with-large-deflections-parameter-variations-and-model-uncertainty-sliding-mode-control-smc-addresses-these-challenges-by-forcing-the-system-state-onto-a-pre-defined-sliding-manifold-when-the-state-reaches-this-manifold-the-resulting-closed-loop-dynamics-become-insensitive-to-matched-disturbances-and-uncertainties-the-control-law-compensates-modeling-errors-through-the-control-input-channel-causing-the-plant-to-behave-according-to-the-reduced-order-dynamics-on-the-manifold-this-robustness-and-finite-time-convergence-for-higher-order-smc-make-smc-attractive-for-underactuated-systems-however-the-discontinuous-switching-law-of-classical-smc-induces-chattering-a-high-frequency-oscillation-caused-by-rapid-control-switching-when-the-state-crosses-the-sliding-surface-chattering-increases-control-effort-excites-unmodeled-high-frequency-modes-and-can-cause-wear-in-actuators-introducing-a-boundary-layer-around-the-sliding-surface-alleviates-chattering-but-enlarges-the-tracking-error-this-document-presents-the-unified-mathematical-theory-for-four-smc-variants-implemented-in-this-project" title="Link to this heading">¶</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Classical SMC</strong>: First-order sliding mode with boundary layer</p></li>
 <li><p><strong>Super-Twisting SMC (STA)</strong>: Second-order sliding mode for continuous control</p></li>
 <li><p><strong>Adaptive SMC</strong>: Online gain adaptation for unknown disturbances</p></li>
-<li><p><strong>Hybrid Adaptive STA-SMC</strong>: Combined adaptive and super-twisting algorithms</p></li>
+<li><p><strong>Hybrid Adaptive STA-SMC</strong>: Combined adaptive and super-twisting algorithms ### 1.2 State Space Formulation The dynamics of the double-inverted pendulum are described by the Euler-Lagrange equations: ```
+M(q)q̈ + C(q,q̇)q̇ + G(q) = Bu</p></li>
 </ol>
-</section>
-<section id="state-space-formulation">
-<h3>1.2 State Space Formulation<a class="headerlink" href="#state-space-formulation" title="Link to this heading">¶</a></h3>
-<p>The dynamics of the double-inverted pendulum are described by the Euler-Lagrange equations:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="n">q̈</span> <span class="o">+</span> <span class="n">C</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">q̇</span><span class="p">)</span><span class="n">q̇</span> <span class="o">+</span> <span class="n">G</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">=</span> <span class="n">Bu</span>
+<div class="highlight-where: notranslate"><div class="highlight"><pre><span></span>- **q** = [x, θ₁, θ₂]ᵀ is the generalized coordinate vector (cart position, pendulum angles)
+- **M(q)** ∈ ℝ³ˣ³ is the inertia matrix (configuration-dependent)
+- **C(q,q̇)q̇** represents Coriolis and centrifugal forces
+- **G(q)** is the gravitational force vector
+- **B** = [1, 0, 0]ᵀ is the input distribution matrix
+- **u** ∈ ℝ is the control force applied to the cart **State vector**: x = [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂]ᵀ ∈ ℝ⁶ **Key Properties**:
+- **Underactuated**: rank(B) = 1 &lt; 3 (fewer actuators than degrees of freedom)
+- **Matched disturbances**: Disturbances d entering through the same channel as control input
+- **Controllability**: The system is locally controllable around the upright equilibrium ### 1.3 Sliding Mode Fundamentals **Sliding Surface**: A hypersurface σ(x) = 0 in the state space, designed such that the system exhibits desired behavior when constrained to this surface. **Reachability Condition**: The fundamental condition ensuring the system state reaches the sliding surface: ```
+σσ̇ &lt; 0 whenever σ ≠ 0
+``` This condition guarantees that σ acts as a Lyapunov function, driving the system toward the surface. **Invariance Property**: Once on the sliding surface (σ = 0), the system remains on it under ideal conditions (no disturbances, perfect control implementation). **Equivalent Control Method**: The equivalent control u_eq is the control required to maintain σ̇ = 0, derived by setting: ```
+
+σ̇ = (∂σ/∂x)ẋ = (∂σ/∂x)f(x, u_eq) = 0
+``` Solving for u_eq gives the **ideal** control that keeps the system on the sliding surface, assuming perfect knowledge of the dynamics. ### 1.4 Matched vs Unmatched Disturbances **Matched Disturbances**: Disturbances that enter through the same channel as the control input: ```
+M(q)q̈ + C(q,q̇)q̇ + G(q) = B(u + d)
+``` SMC can **completely reject** matched disturbances by choosing switching gain K &gt; ||d||∞. **Unmatched Disturbances**: Disturbances entering through different channels. Classical SMC provides limited robustness against unmatched disturbances. Advanced techniques (integral SMC, higher-order SMC) can handle certain classes of unmatched disturbances.
+
+---
+
+## 2. Classical SMC Theory ### 2.1 Sliding Surface Design The sliding surface for the DIP system is defined as: ```
+
+σ = λ₁θ₁ + λ₂θ₂ + k₁θ̇₁ + k₂θ̇₂
+``` where:
+- **θ₁, θ₂**: pendulum angles
+- **θ̇₁, θ̇₂**: pendulum angular velocities
+- **λ₁, λ₂ &gt; 0**: sliding surface slope parameters (must be strictly positive)
+- **k₁, k₂ &gt; 0**: velocity feedback gains (must be strictly positive) **Mathematical Properties**: 1. **Hurwitz Stability Requirement**: The characteristic polynomial of the sliding dynamics must have all roots in the left half-plane: ``` s² + k₁s + λ₁ = 0 (for pendulum 1) s² + k₂s + λ₂ = 0 (for pendulum 2) ``` 2. **Positivity Constraints**: For asymptotic stability: ``` λ₁, λ₂ &gt; 0 (slope parameters ensure stable surface) k₁, k₂ &gt; 0 (damping parameters) ``` 3. **Pole Placement Interpretation**: The sliding surface parameters define the poles of the reduced-order dynamics: - **Critically damped**: k²ᵢ = 4λᵢ → poles at s = -kᵢ/2 (repeated real poles) - **Underdamped**: k²ᵢ &lt; 4λᵢ → complex conjugate poles (faster, oscillatory) - **Overdamped**: k²ᵢ &gt; 4λᵢ → distinct real poles (slower, smooth) **Design Guidelines**:
+- Start with critically damped case: kᵢ = 2√λᵢ
+- Increase kᵢ for more damping (slower convergence, smoother response)
+- Decrease kᵢ for less damping (faster convergence, more oscillation) ### 2.2 Control Law Decomposition The control input u is decomposed into **equivalent control** and **robust switching**: ```
+u = u_eq - K·sat(σ/ε) - k_d·σ
+``` **Components**: 1. **Equivalent Control (u_eq)**: Cancels the nominal dynamics. Derived from σ̇ = 0: ``` σ̇ = L(M⁻¹(Bu + d) - M⁻¹(C(q,q̇)q̇ + G(q))) = 0 ``` where L = [λ₁, λ₂, k₁, k₂, 0, 0] is the sliding surface gradient. Solving for u: ``` u_eq = (LM⁻¹B)⁻¹ · L(M⁻¹(C(q,q̇)q̇ + G(q)) - [k₁λ₁θ̇₁ + k₂λ₂θ̇₂]) ``` 2. **Switching Term (-K·sat(σ/ε))**: Provides robustness against disturbances. The gain K must satisfy: ``` K &gt; ||d||∞ ``` 3. **Damping Term (-k_d·σ)**: Improves transient response, reduces overshoot. ### 2.3 Boundary Layer Theory The discontinuous sign function is approximated within a boundary layer of width ε &gt; 0 to reduce chattering: **Linear Saturation**:
+
 </pre></div>
 </div>
-<p>where:</p>
-<ul class="simple">
-<li><p><strong>q</strong> = [x, θ₁, θ₂]ᵀ is the generalized coordinate vector (cart position, pendulum angles)</p></li>
-<li><p><strong>M(q)</strong> ∈ ℝ³ˣ³ is the inertia matrix (configuration-dependent)</p></li>
-<li><p><strong>C(q,q̇)q̇</strong> represents Coriolis and centrifugal forces</p></li>
-<li><p><strong>G(q)</strong> is the gravitational force vector</p></li>
-<li><p><strong>B</strong> = [1, 0, 0]ᵀ is the input distribution matrix</p></li>
-<li><p><strong>u</strong> ∈ ℝ is the control force applied to the cart</p></li>
-</ul>
-<p><strong>State vector</strong>: x = [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂]ᵀ ∈ ℝ⁶</p>
-<p><strong>Key Properties</strong>:</p>
-<ul class="simple">
-<li><p><strong>Underactuated</strong>: rank(B) = 1 &lt; 3 (fewer actuators than degrees of freedom)</p></li>
-<li><p><strong>Matched disturbances</strong>: Disturbances d entering through the same channel as control input</p></li>
-<li><p><strong>Controllability</strong>: The system is locally controllable around the upright equilibrium</p></li>
-</ul>
-</section>
-<section id="sliding-mode-fundamentals">
-<h3>1.3 Sliding Mode Fundamentals<a class="headerlink" href="#sliding-mode-fundamentals" title="Link to this heading">¶</a></h3>
-<p><strong>Sliding Surface</strong>: A hypersurface σ(x) = 0 in the state space, designed such that the system exhibits desired behavior when constrained to this surface.</p>
-<p><strong>Reachability Condition</strong>: The fundamental condition ensuring the system state reaches the sliding surface:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">σσ̇</span> <span class="o">&lt;</span> <span class="mi">0</span>  <span class="n">whenever</span> <span class="n">σ</span> <span class="err">≠</span> <span class="mi">0</span>
+<p>sat(σ/ε) = { σ/ε, if |σ| ≤ ε sign(σ), if |σ| &gt; ε
+}</p>
+<div class="highlight-**Hyperbolic notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<p>This condition guarantees that σ acts as a Lyapunov function, driving the system toward the surface.</p>
-<p><strong>Invariance Property</strong>: Once on the sliding surface (σ = 0), the system remains on it under ideal conditions (no disturbances, perfect control implementation).</p>
-<p><strong>Equivalent Control Method</strong>: The equivalent control u_eq is the control required to maintain σ̇ = 0, derived by setting:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">σ̇</span> <span class="o">=</span> <span class="p">(</span><span class="err">∂</span><span class="n">σ</span><span class="o">/</span><span class="err">∂</span><span class="n">x</span><span class="p">)</span><span class="n">ẋ</span> <span class="o">=</span> <span class="p">(</span><span class="err">∂</span><span class="n">σ</span><span class="o">/</span><span class="err">∂</span><span class="n">x</span><span class="p">)</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u_eq</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span>
+<p>sat(σ/ε) = tanh(σ/ε)</p>
+<div class="highlight-**Properties**: notranslate"><div class="highlight"><pre><span></span>
+- **Continuity**: Linear saturation is continuous at σ = ±ε
+- **Smoothness**: tanh is C∞ everywhere
+- **Approximation Error**: Bounded by ε **Trade-offs**:
+- **Smaller ε** → Better tracking, more chattering
+- **Larger ε** → Smoother control, larger steady-state error
+- **Adaptive boundary layer**: ε = ε₀ + ε₁||σ|| adjusts based on sliding surface magnitude ### 2.4 Lyapunov Stability Analysis **Lyapunov Function**:
 </pre></div>
 </div>
-<p>Solving for u_eq gives the <strong>ideal</strong> control that keeps the system on the sliding surface, assuming perfect knowledge of the dynamics.</p>
-</section>
-<section id="matched-vs-unmatched-disturbances">
-<h3>1.4 Matched vs Unmatched Disturbances<a class="headerlink" href="#matched-vs-unmatched-disturbances" title="Link to this heading">¶</a></h3>
-<p><strong>Matched Disturbances</strong>: Disturbances that enter through the same channel as the control input:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="n">q̈</span> <span class="o">+</span> <span class="n">C</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">q̇</span><span class="p">)</span><span class="n">q̇</span> <span class="o">+</span> <span class="n">G</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">=</span> <span class="n">B</span><span class="p">(</span><span class="n">u</span> <span class="o">+</span> <span class="n">d</span><span class="p">)</span>
+<p>V = ½σ²
+<code class="docutils literal notranslate"><span class="pre">**Proof</span> <span class="pre">of</span> <span class="pre">Stability**:</span> <span class="pre">1.</span> <span class="pre">**Positive</span> <span class="pre">Definiteness**:</span> <span class="pre">V</span> <span class="pre">&gt;</span> <span class="pre">0</span> <span class="pre">for</span> <span class="pre">σ</span> <span class="pre">≠</span> <span class="pre">0,</span> <span class="pre">V(0)</span> <span class="pre">=</span> <span class="pre">0</span> <span class="pre">✓</span> <span class="pre">2.</span> <span class="pre">**Time</span> <span class="pre">Derivative**:</span></code> V̇ = σσ̇ = σ[λ₁θ̇₁ + λ₂θ̇₂ + k₁θ̈₁ + k₂θ̈₂] <code class="docutils literal notranslate"><span class="pre">3.</span> <span class="pre">**Substitute</span> <span class="pre">Dynamics**:</span> <span class="pre">M(q)q̈</span> <span class="pre">=</span> <span class="pre">Bu</span> <span class="pre">-</span> <span class="pre">C(q,q̇)q̇</span> <span class="pre">-</span> <span class="pre">G(q)</span> <span class="pre">+</span> <span class="pre">d</span> <span class="pre">Solving</span> <span class="pre">for</span> <span class="pre">q̈</span> <span class="pre">and</span> <span class="pre">substituting:</span></code> V̇ = σ · L · M⁻¹ · (B(u_eq - K·sign(σ) - k_d·σ + d) - C(q,q̇)q̇ - G(q)) <code class="docutils literal notranslate"><span class="pre">4.</span> <span class="pre">**Simplification</span> <span class="pre">using</span> <span class="pre">σ̇</span> <span class="pre">=</span> <span class="pre">0</span> <span class="pre">for</span> <span class="pre">u_eq**:</span> <span class="pre">The</span> <span class="pre">equivalent</span> <span class="pre">control</span> <span class="pre">u_eq</span> <span class="pre">is</span> <span class="pre">designed</span> <span class="pre">such</span> <span class="pre">that</span> <span class="pre">σ̇</span> <span class="pre">=</span> <span class="pre">0</span> <span class="pre">when</span> <span class="pre">d</span> <span class="pre">=</span> <span class="pre">0.</span> <span class="pre">Therefore:</span></code> V̇ = σ · L · M⁻¹ · B · (-K·sign(σ) + d - k_d·σ) <code class="docutils literal notranslate"><span class="pre">Let</span> <span class="pre">η_c</span> <span class="pre">=</span> <span class="pre">L·M⁻¹·B</span> <span class="pre">(controllability</span> <span class="pre">measure).</span> <span class="pre">Then:</span></code> V̇ = η_c · σ · (-K·sign(σ) + d - k_d·σ) = η_c · (-K|σ| + σd - k_d·σ²) ≤ η_c · (-K|σ| + |d|·|σ| - k_d·σ²) = η_c · (-(K - ||d||∞)|σ| - k_d·σ²) <code class="docutils literal notranslate"><span class="pre">5.</span> <span class="pre">**Negative</span> <span class="pre">Definiteness**:</span> <span class="pre">If</span> <span class="pre">K</span> <span class="pre">&gt;</span> <span class="pre">||d||∞,</span> <span class="pre">then:</span></code> V̇ ≤ -η_c·η|σ| where η = K - ||d||∞ &gt; 0 <code class="docutils literal notranslate"><span class="pre">Since</span> <span class="pre">η_c</span> <span class="pre">&gt;</span> <span class="pre">0</span> <span class="pre">(controllability</span> <span class="pre">condition)</span> <span class="pre">and</span> <span class="pre">η</span> <span class="pre">&gt;</span> <span class="pre">0,</span> <span class="pre">we</span> <span class="pre">have</span> <span class="pre">V̇</span> <span class="pre">&lt;</span> <span class="pre">0</span> <span class="pre">for</span> <span class="pre">all</span> <span class="pre">σ</span> <span class="pre">≠</span> <span class="pre">0.</span> <span class="pre">6.</span> <span class="pre">**Conclusion**:</span> <span class="pre">By</span> <span class="pre">Lyapunov's</span> <span class="pre">theorem,</span> <span class="pre">σ</span> <span class="pre">→</span> <span class="pre">0</span> <span class="pre">asymptotically.</span> <span class="pre">###</span> <span class="pre">2.5</span> <span class="pre">Convergence</span> <span class="pre">Rate</span> <span class="pre">Analysis</span> <span class="pre">**Exponential</span> <span class="pre">Convergence**:</span> <span class="pre">From</span> <span class="pre">V̇</span> <span class="pre">≤</span> <span class="pre">-η_c·η|σ|,</span> <span class="pre">we</span> <span class="pre">can</span> <span class="pre">derive:</span></code></p>
+<p>|σ(t)| ≤ |σ(0)|e^(-ηt)
+<code class="docutils literal notranslate"><span class="pre">**Time</span> <span class="pre">Constants**:</span> <span class="pre">On</span> <span class="pre">the</span> <span class="pre">sliding</span> <span class="pre">surface</span> <span class="pre">(σ</span> <span class="pre">=</span> <span class="pre">0),</span> <span class="pre">the</span> <span class="pre">reduced-order</span> <span class="pre">dynamics</span> <span class="pre">are:</span></code>
+λ₁θ₁ + λ₂θ₂ + k₁θ̇₁ + k₂θ̇₂ = 0
+<code class="docutils literal notranslate"><span class="pre">For</span> <span class="pre">the</span> <span class="pre">critically</span> <span class="pre">damped</span> <span class="pre">case</span> <span class="pre">(k²ᵢ</span> <span class="pre">=</span> <span class="pre">4λᵢ):</span></code></p>
+<p>τᵢ = 2/kᵢ (time constant for pendulum i)</p>
+<div class="highlight-**Practical notranslate"><div class="highlight"><pre><span></span>- Classical SMC achieves **exponential convergence** (not finite-time)
+- Convergence rate determined by gains k₁, k₂
+- Larger kᵢ → Faster convergence but potentially more oscillation
+
+---
+
+## 3. Super-Twisting SMC Theory ### 3.1 Second-Order Sliding Mode Concept The **super-twisting algorithm** (STA) is a second-order sliding mode technique that suppresses chattering by applying the discontinuity on the **derivative** of the control signal rather than on the control itself. **Key Innovation**: Move discontinuity to u̇ instead of u:
+- **Classical SMC**: u contains sign(σ) → discontinuous control
+- **STA SMC**: u̇ contains sign(σ) → continuous control, discontinuous derivative **Result**:
+- u is continuous
+- Both σ and σ̇ converge to zero in **finite time** **Sliding Variable** (for STA):
 </pre></div>
 </div>
-<p>SMC can <strong>completely reject</strong> matched disturbances by choosing switching gain K &gt; ||d||∞.</p>
-<p><strong>Unmatched Disturbances</strong>: Disturbances entering through different channels. Classical SMC provides limited robustness against unmatched disturbances. Advanced techniques (integral SMC, higher-order SMC) can handle certain classes of unmatched disturbances.</p>
-</section>
-</section>
-<hr class="docutils" />
-<section id="classical-smc-theory">
-<h2>2. Classical SMC Theory<a class="headerlink" href="#classical-smc-theory" title="Link to this heading">¶</a></h2>
-<section id="sliding-surface-design">
-<h3>2.1 Sliding Surface Design<a class="headerlink" href="#sliding-surface-design" title="Link to this heading">¶</a></h3>
-<p>The sliding surface for the DIP system is defined as:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">σ</span> <span class="o">=</span> <span class="n">λ</span><span class="err">₁</span><span class="n">θ</span><span class="err">₁</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₂</span><span class="n">θ</span><span class="err">₂</span> <span class="o">+</span> <span class="n">k</span><span class="err">₁</span><span class="n">θ̇</span><span class="err">₁</span> <span class="o">+</span> <span class="n">k</span><span class="err">₂</span><span class="n">θ̇</span><span class="err">₂</span>
+<p>σ = k₁(θ̇₁ + λ₁θ₁) + k₂(θ̇₂ + λ₂θ₂)
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">3.2</span> <span class="pre">Super-Twisting</span> <span class="pre">Algorithm</span> <span class="pre">The</span> <span class="pre">STA</span> <span class="pre">control</span> <span class="pre">law</span> <span class="pre">consists</span> <span class="pre">of</span> <span class="pre">two</span> <span class="pre">components:</span></code>
+u = u_c + u_i + u_eq</p>
+<div class="highlight-**1. notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<p>where:</p>
-<ul class="simple">
-<li><p><strong>θ₁, θ₂</strong>: pendulum angles</p></li>
-<li><p><strong>θ̇₁, θ̇₂</strong>: pendulum angular velocities</p></li>
-<li><p><strong>λ₁, λ₂ &gt; 0</strong>: sliding surface slope parameters (must be strictly positive)</p></li>
-<li><p><strong>k₁, k₂ &gt; 0</strong>: velocity feedback gains (must be strictly positive)</p></li>
-</ul>
-<p><strong>Mathematical Properties</strong>:</p>
-<ol class="arabic">
-<li><p><strong>Hurwitz Stability Requirement</strong>: The characteristic polynomial of the sliding dynamics must have all roots in the left half-plane:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="err">²</span> <span class="o">+</span> <span class="n">k</span><span class="err">₁</span><span class="n">s</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₁</span> <span class="o">=</span> <span class="mi">0</span>  <span class="p">(</span><span class="k">for</span> <span class="n">pendulum</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">s</span><span class="err">²</span> <span class="o">+</span> <span class="n">k</span><span class="err">₂</span><span class="n">s</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₂</span> <span class="o">=</span> <span class="mi">0</span>  <span class="p">(</span><span class="k">for</span> <span class="n">pendulum</span> <span class="mi">2</span><span class="p">)</span>
+<p>u_c = -K₁√|σ|·sign(σ)</p>
+<div class="highlight-- notranslate"><div class="highlight"><pre><span></span>
+- Continuous but non-smooth at σ = 0
+- Acts as nonlinear damping proportional to √|σ| **2. Integral Term**:
 </pre></div>
 </div>
-</li>
-<li><p><strong>Positivity Constraints</strong>: For asymptotic stability:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">λ</span><span class="err">₁</span><span class="p">,</span> <span class="n">λ</span><span class="err">₂</span> <span class="o">&gt;</span> <span class="mi">0</span>  <span class="p">(</span><span class="n">slope</span> <span class="n">parameters</span> <span class="n">ensure</span> <span class="n">stable</span> <span class="n">surface</span><span class="p">)</span>
-<span class="n">k</span><span class="err">₁</span><span class="p">,</span> <span class="n">k</span><span class="err">₂</span> <span class="o">&gt;</span> <span class="mi">0</span>  <span class="p">(</span><span class="n">damping</span> <span class="n">parameters</span><span class="p">)</span>
+<p>u̇_i = -K₂·sign(σ)</p>
+<div class="highlight-- notranslate"><div class="highlight"><pre><span></span>
+- Integrated to produce continuous u_i **Discrete Implementation**:
 </pre></div>
 </div>
-</li>
-<li><p><strong>Pole Placement Interpretation</strong>: The sliding surface parameters define the poles of the reduced-order dynamics:</p>
-<ul class="simple">
-<li><p><strong>Critically damped</strong>: k²ᵢ = 4λᵢ → poles at s = -kᵢ/2 (repeated real poles)</p></li>
-<li><p><strong>Underdamped</strong>: k²ᵢ &lt; 4λᵢ → complex conjugate poles (faster, oscillatory)</p></li>
-<li><p><strong>Overdamped</strong>: k²ᵢ &gt; 4λᵢ → distinct real poles (slower, smooth)</p></li>
-</ul>
-</li>
-</ol>
-<p><strong>Design Guidelines</strong>:</p>
-<ul class="simple">
-<li><p>Start with critically damped case: kᵢ = 2√λᵢ</p></li>
-<li><p>Increase kᵢ for more damping (slower convergence, smoother response)</p></li>
-<li><p>Decrease kᵢ for less damping (faster convergence, more oscillation)</p></li>
-</ul>
-</section>
-<section id="control-law-decomposition">
-<h3>2.2 Control Law Decomposition<a class="headerlink" href="#control-law-decomposition" title="Link to this heading">¶</a></h3>
-<p>The control input u is decomposed into <strong>equivalent control</strong> and <strong>robust switching</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">u_eq</span> <span class="o">-</span> <span class="n">K·sat</span><span class="p">(</span><span class="n">σ</span><span class="o">/</span><span class="n">ε</span><span class="p">)</span> <span class="o">-</span> <span class="n">k_d·σ</span>
-</pre></div>
-</div>
-<p><strong>Components</strong>:</p>
-<ol class="arabic">
-<li><p><strong>Equivalent Control (u_eq)</strong>: Cancels the nominal dynamics. Derived from σ̇ = 0:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">σ̇</span> <span class="o">=</span> <span class="n">L</span><span class="p">(</span><span class="n">M</span><span class="err">⁻¹</span><span class="p">(</span><span class="n">Bu</span> <span class="o">+</span> <span class="n">d</span><span class="p">)</span> <span class="o">-</span> <span class="n">M</span><span class="err">⁻¹</span><span class="p">(</span><span class="n">C</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">q̇</span><span class="p">)</span><span class="n">q̇</span> <span class="o">+</span> <span class="n">G</span><span class="p">(</span><span class="n">q</span><span class="p">)))</span> <span class="o">=</span> <span class="mi">0</span>
-</pre></div>
-</div>
-<p>where L = [λ₁, λ₂, k₁, k₂, 0, 0] is the sliding surface gradient.</p>
-<p>Solving for u:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u_eq</span> <span class="o">=</span> <span class="p">(</span><span class="n">LM</span><span class="err">⁻¹</span><span class="n">B</span><span class="p">)</span><span class="err">⁻¹</span> <span class="err">·</span> <span class="n">L</span><span class="p">(</span><span class="n">M</span><span class="err">⁻¹</span><span class="p">(</span><span class="n">C</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">q̇</span><span class="p">)</span><span class="n">q̇</span> <span class="o">+</span> <span class="n">G</span><span class="p">(</span><span class="n">q</span><span class="p">))</span> <span class="o">-</span> <span class="p">[</span><span class="n">k</span><span class="err">₁</span><span class="n">λ</span><span class="err">₁</span><span class="n">θ̇</span><span class="err">₁</span> <span class="o">+</span> <span class="n">k</span><span class="err">₂</span><span class="n">λ</span><span class="err">₂</span><span class="n">θ̇</span><span class="err">₂</span><span class="p">])</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Switching Term (-K·sat(σ/ε))</strong>: Provides robustness against disturbances. The gain K must satisfy:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">&gt;</span> <span class="o">||</span><span class="n">d</span><span class="o">||</span><span class="err">∞</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Damping Term (-k_d·σ)</strong>: Improves transient response, reduces overshoot.</p></li>
-</ol>
-</section>
-<section id="boundary-layer-theory">
-<h3>2.3 Boundary Layer Theory<a class="headerlink" href="#boundary-layer-theory" title="Link to this heading">¶</a></h3>
-<p>The discontinuous sign function is approximated within a boundary layer of width ε &gt; 0 to reduce chattering:</p>
-<p><strong>Linear Saturation</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sat</span><span class="p">(</span><span class="n">σ</span><span class="o">/</span><span class="n">ε</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="n">σ</span><span class="o">/</span><span class="n">ε</span><span class="p">,</span>     <span class="k">if</span> <span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="err">≤</span> <span class="n">ε</span>
-  <span class="n">sign</span><span class="p">(</span><span class="n">σ</span><span class="p">),</span> <span class="k">if</span> <span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">&gt;</span> <span class="n">ε</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><strong>Hyperbolic Tangent Approximation</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sat</span><span class="p">(</span><span class="n">σ</span><span class="o">/</span><span class="n">ε</span><span class="p">)</span> <span class="o">=</span> <span class="n">tanh</span><span class="p">(</span><span class="n">σ</span><span class="o">/</span><span class="n">ε</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Properties</strong>:</p>
-<ul class="simple">
-<li><p><strong>Continuity</strong>: Linear saturation is continuous at σ = ±ε</p></li>
-<li><p><strong>Smoothness</strong>: tanh is C∞ everywhere</p></li>
-<li><p><strong>Approximation Error</strong>: Bounded by ε</p></li>
-</ul>
-<p><strong>Trade-offs</strong>:</p>
-<ul class="simple">
-<li><p><strong>Smaller ε</strong> → Better tracking, more chattering</p></li>
-<li><p><strong>Larger ε</strong> → Smoother control, larger steady-state error</p></li>
-<li><p><strong>Adaptive boundary layer</strong>: ε = ε₀ + ε₁||σ|| adjusts based on sliding surface magnitude</p></li>
-</ul>
-</section>
-<section id="lyapunov-stability-analysis">
-<h3>2.4 Lyapunov Stability Analysis<a class="headerlink" href="#lyapunov-stability-analysis" title="Link to this heading">¶</a></h3>
-<p><strong>Lyapunov Function</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="err">½</span><span class="n">σ</span><span class="err">²</span>
-</pre></div>
-</div>
-<p><strong>Proof of Stability</strong>:</p>
-<ol class="arabic">
-<li><p><strong>Positive Definiteness</strong>: V &gt; 0 for σ ≠ 0, V(0) = 0 ✓</p></li>
-<li><p><strong>Time Derivative</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="o">=</span> <span class="n">σσ̇</span> <span class="o">=</span> <span class="n">σ</span><span class="p">[</span><span class="n">λ</span><span class="err">₁</span><span class="n">θ̇</span><span class="err">₁</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₂</span><span class="n">θ̇</span><span class="err">₂</span> <span class="o">+</span> <span class="n">k</span><span class="err">₁</span><span class="n">θ̈</span><span class="err">₁</span> <span class="o">+</span> <span class="n">k</span><span class="err">₂</span><span class="n">θ̈</span><span class="err">₂</span><span class="p">]</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Substitute Dynamics</strong>: M(q)q̈ = Bu - C(q,q̇)q̇ - G(q) + d</p>
-<p>Solving for q̈ and substituting:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="o">=</span> <span class="n">σ</span> <span class="err">·</span> <span class="n">L</span> <span class="err">·</span> <span class="n">M</span><span class="err">⁻¹</span> <span class="err">·</span> <span class="p">(</span><span class="n">B</span><span class="p">(</span><span class="n">u_eq</span> <span class="o">-</span> <span class="n">K·sign</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="o">-</span> <span class="n">k_d·σ</span> <span class="o">+</span> <span class="n">d</span><span class="p">)</span> <span class="o">-</span> <span class="n">C</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">q̇</span><span class="p">)</span><span class="n">q̇</span> <span class="o">-</span> <span class="n">G</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Simplification using σ̇ = 0 for u_eq</strong>:</p>
-<p>The equivalent control u_eq is designed such that σ̇ = 0 when d = 0. Therefore:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="o">=</span> <span class="n">σ</span> <span class="err">·</span> <span class="n">L</span> <span class="err">·</span> <span class="n">M</span><span class="err">⁻¹</span> <span class="err">·</span> <span class="n">B</span> <span class="err">·</span> <span class="p">(</span><span class="o">-</span><span class="n">K·sign</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="o">+</span> <span class="n">d</span> <span class="o">-</span> <span class="n">k_d·σ</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Let η_c = L·M⁻¹·B (controllability measure). Then:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="o">=</span> <span class="n">η_c</span> <span class="err">·</span> <span class="n">σ</span> <span class="err">·</span> <span class="p">(</span><span class="o">-</span><span class="n">K·sign</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="o">+</span> <span class="n">d</span> <span class="o">-</span> <span class="n">k_d·σ</span><span class="p">)</span>
-   <span class="o">=</span> <span class="n">η_c</span> <span class="err">·</span> <span class="p">(</span><span class="o">-</span><span class="n">K</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">+</span> <span class="n">σd</span> <span class="o">-</span> <span class="n">k_d·σ</span><span class="err">²</span><span class="p">)</span>
-   <span class="err">≤</span> <span class="n">η_c</span> <span class="err">·</span> <span class="p">(</span><span class="o">-</span><span class="n">K</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">+</span> <span class="o">|</span><span class="n">d</span><span class="o">|</span><span class="err">·</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">-</span> <span class="n">k_d·σ</span><span class="err">²</span><span class="p">)</span>
-   <span class="o">=</span> <span class="n">η_c</span> <span class="err">·</span> <span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="o">||</span><span class="n">d</span><span class="o">||</span><span class="err">∞</span><span class="p">)</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">-</span> <span class="n">k_d·σ</span><span class="err">²</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Negative Definiteness</strong>: If K &gt; ||d||∞, then:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="err">≤</span> <span class="o">-</span><span class="n">η_c·η</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span>  <span class="n">where</span> <span class="n">η</span> <span class="o">=</span> <span class="n">K</span> <span class="o">-</span> <span class="o">||</span><span class="n">d</span><span class="o">||</span><span class="err">∞</span> <span class="o">&gt;</span> <span class="mi">0</span>
-</pre></div>
-</div>
-<p>Since η_c &gt; 0 (controllability condition) and η &gt; 0, we have V̇ &lt; 0 for all σ ≠ 0.</p>
-</li>
-<li><p><strong>Conclusion</strong>: By Lyapunov’s theorem, σ → 0 asymptotically.</p></li>
-</ol>
-</section>
-<section id="convergence-rate-analysis">
-<h3>2.5 Convergence Rate Analysis<a class="headerlink" href="#convergence-rate-analysis" title="Link to this heading">¶</a></h3>
-<p><strong>Exponential Convergence</strong>: From V̇ ≤ -η_c·η|σ|, we can derive:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">|</span><span class="n">σ</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">|</span> <span class="err">≤</span> <span class="o">|</span><span class="n">σ</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">|</span><span class="n">e</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="n">ηt</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Time Constants</strong>: On the sliding surface (σ = 0), the reduced-order dynamics are:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">λ</span><span class="err">₁</span><span class="n">θ</span><span class="err">₁</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₂</span><span class="n">θ</span><span class="err">₂</span> <span class="o">+</span> <span class="n">k</span><span class="err">₁</span><span class="n">θ̇</span><span class="err">₁</span> <span class="o">+</span> <span class="n">k</span><span class="err">₂</span><span class="n">θ̇</span><span class="err">₂</span> <span class="o">=</span> <span class="mi">0</span>
-</pre></div>
-</div>
-<p>For the critically damped case (k²ᵢ = 4λᵢ):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">τᵢ</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="n">kᵢ</span>  <span class="p">(</span><span class="n">time</span> <span class="n">constant</span> <span class="k">for</span> <span class="n">pendulum</span> <span class="n">i</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Practical Implications</strong>:</p>
-<ul class="simple">
-<li><p>Classical SMC achieves <strong>exponential convergence</strong> (not finite-time)</p></li>
-<li><p>Convergence rate determined by gains k₁, k₂</p></li>
-<li><p>Larger kᵢ → Faster convergence but potentially more oscillation</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="super-twisting-smc-theory">
-<h2>3. Super-Twisting SMC Theory<a class="headerlink" href="#super-twisting-smc-theory" title="Link to this heading">¶</a></h2>
-<section id="second-order-sliding-mode-concept">
-<h3>3.1 Second-Order Sliding Mode Concept<a class="headerlink" href="#second-order-sliding-mode-concept" title="Link to this heading">¶</a></h3>
-<p>The <strong>super-twisting algorithm</strong> (STA) is a second-order sliding mode technique that suppresses chattering by applying the discontinuity on the <strong>derivative</strong> of the control signal rather than on the control itself.</p>
-<p><strong>Key Innovation</strong>: Move discontinuity to u̇ instead of u:</p>
-<ul class="simple">
-<li><p><strong>Classical SMC</strong>: u contains sign(σ) → discontinuous control</p></li>
-<li><p><strong>STA SMC</strong>: u̇ contains sign(σ) → continuous control, discontinuous derivative</p></li>
-</ul>
-<p><strong>Result</strong>:</p>
-<ul class="simple">
-<li><p>u is continuous</p></li>
-<li><p>Both σ and σ̇ converge to zero in <strong>finite time</strong></p></li>
-</ul>
-<p><strong>Sliding Variable</strong> (for STA):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">σ</span> <span class="o">=</span> <span class="n">k</span><span class="err">₁</span><span class="p">(</span><span class="n">θ̇</span><span class="err">₁</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₁</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span> <span class="o">+</span> <span class="n">k</span><span class="err">₂</span><span class="p">(</span><span class="n">θ̇</span><span class="err">₂</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₂</span><span class="n">θ</span><span class="err">₂</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="super-twisting-algorithm">
-<h3>3.2 Super-Twisting Algorithm<a class="headerlink" href="#super-twisting-algorithm" title="Link to this heading">¶</a></h3>
-<p>The STA control law consists of two components:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">u_c</span> <span class="o">+</span> <span class="n">u_i</span> <span class="o">+</span> <span class="n">u_eq</span>
-</pre></div>
-</div>
-<p><strong>1. Continuous Term</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u_c</span> <span class="o">=</span> <span class="o">-</span><span class="n">K</span><span class="err">₁√</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span><span class="err">·</span><span class="n">sign</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Square-root law provides finite-time convergence</p></li>
-<li><p>Continuous but non-smooth at σ = 0</p></li>
-<li><p>Acts as nonlinear damping proportional to √|σ|</p></li>
-</ul>
-<p><strong>2. Integral Term</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u̇_i</span> <span class="o">=</span> <span class="o">-</span><span class="n">K</span><span class="err">₂·</span><span class="n">sign</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Discontinuity applied to derivative</p></li>
-<li><p>Integrated to produce continuous u_i</p></li>
-</ul>
-<p><strong>Discrete Implementation</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u_i</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">dt</span><span class="p">)</span> <span class="o">=</span> <span class="n">u_i</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">K</span><span class="err">₂·</span><span class="n">sign</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span><span class="err">·</span><span class="n">dt</span>
-</pre></div>
-</div>
-<p><strong>3. Equivalent Control</strong>: Model-based feedforward (same as classical SMC)</p>
-</section>
-<section id="lyapunov-function-for-sta">
-<h3>3.3 Lyapunov Function for STA<a class="headerlink" href="#lyapunov-function-for-sta" title="Link to this heading">¶</a></h3>
-<p><strong>Candidate Lyapunov Function</strong> (Moreno &amp; Osorio, 2012):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">k</span><span class="err">₁</span><span class="o">|</span><span class="n">σ</span><span class="o">|^</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="err">½</span><span class="n">z</span><span class="err">²</span>
-</pre></div>
-</div>
-<p>where z is an auxiliary variable related to σ̇.</p>
-<p><strong>Finite-Time Convergence Proof (Sketch)</strong>:</p>
-<ol class="arabic">
-<li><p><strong>Positive Definiteness</strong>: V &gt; 0 for (σ, z) ≠ (0, 0) ✓</p></li>
-<li><p><strong>Time Derivative</strong> (using homogeneity argument):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="n">k</span><span class="err">₁</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">|</span><span class="n">σ</span><span class="o">|^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="err">·</span><span class="n">σ̇·sign</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="o">+</span> <span class="n">z·ż</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Substitute STA Dynamics</strong>:</p>
-<ul class="simple">
-<li><p>σ̇ is related to z through system dynamics</p></li>
-<li><p>ż = -K₂·sign(σ) from control law</p></li>
-</ul>
-</li>
-<li><p><strong>Gain Conditions</strong>:</p>
-<ul class="simple">
-<li><p>K₁ &gt; L (L = Lipschitz constant of disturbance derivative)</p></li>
-<li><p>K₂ &gt; K₁·C (C depends on system parameters)</p></li>
-</ul>
-</li>
-<li><p><strong>Result</strong>: Under these conditions:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="err">≤</span> <span class="o">-</span><span class="n">β·V</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="k">for</span> <span class="n">some</span> <span class="n">β</span> <span class="o">&gt;</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Finite-Time Convergence</strong>: Integrating V̇ ≤ -β·V^(1/2) gives:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span>  <span class="k">for</span> <span class="nb">all</span> <span class="n">t</span> <span class="err">≥</span> <span class="n">T_reach</span>
-</pre></div>
-</div>
-<p>where:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T_reach</span> <span class="err">≤</span> <span class="mi">2</span><span class="n">V</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">β</span> <span class="err">≤</span> <span class="mi">2</span><span class="o">|</span><span class="n">σ</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">|^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">K</span><span class="err">₁</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
-</pre></div>
-</div>
-</li>
-</ol>
-<p><strong>Key Takeaway</strong>: Both σ and σ̇ reach zero in finite time, unlike classical SMC which only achieves exponential convergence.</p>
-</section>
-<section id="gain-selection-guidelines">
-<h3>3.4 Gain Selection Guidelines<a class="headerlink" href="#gain-selection-guidelines" title="Link to this heading">¶</a></h3>
-<p><strong>K₁ Selection</strong>:</p>
+<p>u_i(t+dt) = u_i(t) - K₂·sign(σ)·dt
+<code class="docutils literal notranslate"><span class="pre">**3.</span> <span class="pre">Equivalent</span> <span class="pre">Control**:</span> <span class="pre">Model-based</span> <span class="pre">feedforward</span> <span class="pre">(same</span> <span class="pre">as</span> <span class="pre">classical</span> <span class="pre">SMC)</span> <span class="pre">###</span> <span class="pre">3.3</span> <span class="pre">Lyapunov</span> <span class="pre">Function</span> <span class="pre">for</span> <span class="pre">STA</span> <span class="pre">**Candidate</span> <span class="pre">Lyapunov</span> <span class="pre">Function**</span> <span class="pre">(Moreno</span> <span class="pre">&amp;</span> <span class="pre">Osorio,</span> <span class="pre">2012):</span></code></p>
+<p>V = k₁|σ|^(3/2) + ½z²
+<code class="docutils literal notranslate"><span class="pre">where</span> <span class="pre">z</span> <span class="pre">is</span> <span class="pre">an</span> <span class="pre">auxiliary</span> <span class="pre">variable</span> <span class="pre">related</span> <span class="pre">to</span> <span class="pre">σ̇.</span> <span class="pre">**Finite-Time</span> <span class="pre">Convergence</span> <span class="pre">Proof</span> <span class="pre">(Sketch)**:</span> <span class="pre">1.</span> <span class="pre">**Positive</span> <span class="pre">Definiteness**:</span> <span class="pre">V</span> <span class="pre">&gt;</span> <span class="pre">0</span> <span class="pre">for</span> <span class="pre">(σ,</span> <span class="pre">z)</span> <span class="pre">≠</span> <span class="pre">(0,</span> <span class="pre">0)</span> <span class="pre">✓</span> <span class="pre">2.</span> <span class="pre">**Time</span> <span class="pre">Derivative**</span> <span class="pre">(using</span> <span class="pre">homogeneity</span> <span class="pre">argument):</span></code> V̇ = (3k₁/2)|σ|^(1/2)·σ̇·sign(σ) + z·ż <code class="docutils literal notranslate"><span class="pre">3.</span> <span class="pre">**Substitute</span> <span class="pre">STA</span> <span class="pre">Dynamics**:</span> <span class="pre">-</span> <span class="pre">σ̇</span> <span class="pre">is</span> <span class="pre">related</span> <span class="pre">to</span> <span class="pre">z</span> <span class="pre">through</span> <span class="pre">system</span> <span class="pre">dynamics</span> <span class="pre">-</span> <span class="pre">ż</span> <span class="pre">=</span> <span class="pre">-K₂·sign(σ)</span> <span class="pre">from</span> <span class="pre">control</span> <span class="pre">law</span> <span class="pre">4.</span> <span class="pre">**Gain</span> <span class="pre">Conditions**:</span> <span class="pre">-</span> <span class="pre">K₁</span> <span class="pre">&gt;</span> <span class="pre">L</span> <span class="pre">(L</span> <span class="pre">=</span> <span class="pre">Lipschitz</span> <span class="pre">constant</span> <span class="pre">of</span> <span class="pre">disturbance</span> <span class="pre">derivative)</span> <span class="pre">-</span> <span class="pre">K₂</span> <span class="pre">&gt;</span> <span class="pre">K₁·C</span> <span class="pre">(C</span> <span class="pre">depends</span> <span class="pre">on</span> <span class="pre">system</span> <span class="pre">parameters)</span> <span class="pre">5.</span> <span class="pre">**Result**:</span> <span class="pre">Under</span> <span class="pre">these</span> <span class="pre">conditions:</span></code> V̇ ≤ -β·V^(1/2) for some β &gt; 0 <code class="docutils literal notranslate"><span class="pre">6.</span> <span class="pre">**Finite-Time</span> <span class="pre">Convergence**:</span> <span class="pre">Integrating</span> <span class="pre">V̇</span> <span class="pre">≤</span> <span class="pre">-β·V^(1/2)</span> <span class="pre">gives:</span></code> V(t) = 0 for all t ≥ T_reach <code class="docutils literal notranslate"><span class="pre">where:</span></code> T_reach ≤ 2V(0)^(1/2)/β ≤ 2|σ(0)|^(1/2)/(K₁^(1/2)) ``` <strong>Key Takeaway</strong>: Both σ and σ̇ reach zero in finite time, unlike classical SMC which only achieves exponential convergence. ### 3.4 Gain Selection Guidelines <strong>K₁ Selection</strong>:</p>
 <ul class="simple">
 <li><p>Must exceed max disturbance derivative: K₁ &gt; L</p></li>
 <li><p>Larger K₁ → Faster convergence, higher control effort</p></li>
-<li><p>Typical range: K₁ ∈ [1, 50]</p></li>
-</ul>
-<p><strong>K₂ Selection</strong>:</p>
-<ul class="simple">
+<li><p>Typical range: K₁ ∈ [1, 50] <strong>K₂ Selection</strong>:</p></li>
 <li><p>Sufficient condition: K₂ ≥ K₁·C (C depends on system)</p></li>
 <li><p>Practical guideline: K₂ ≈ K₁ balances proportional/integral action</p></li>
-<li><p>Too large K₂ → Oscillations, potential instability</p></li>
+<li><p>Too large K₂ → Oscillations, potential instability <strong>Tuning Strategy</strong>:</p></li>
 </ul>
-<p><strong>Tuning Strategy</strong>:</p>
 <ol class="arabic simple">
 <li><p>Start with K₁ = 5, K₂ = 5</p></li>
 <li><p>Increase K₁ if convergence is too slow</p></li>
 <li><p>Adjust K₂ to balance integral action (typically K₂ ≈ K₁)</p></li>
-<li><p>Use PSO optimization for fine-tuning</p></li>
+<li><p>Use PSO optimization for fine-tuning <strong>Advantages</strong>:</p></li>
 </ol>
-<p><strong>Advantages</strong>:</p>
 <ul class="simple">
 <li><p>Finite-time convergence</p></li>
 <li><p>Continuous control (reduced chattering)</p></li>
-<li><p>Robustness against matched uncertainties</p></li>
-</ul>
-<p><strong>Disadvantages</strong>:</p>
-<ul class="simple">
+<li><p>Robustness against matched uncertainties <strong>Disadvantages</strong>:</p></li>
 <li><p>More complex tuning (2 gains vs 1 for classical)</p></li>
 <li><p>Higher computational cost (square root, integration)</p></li>
 </ul>
 </section>
-</section>
 <hr class="docutils" />
-<section id="adaptive-smc-theory">
-<h2>4. Adaptive SMC Theory<a class="headerlink" href="#adaptive-smc-theory" title="Link to this heading">¶</a></h2>
-<section id="motivation-and-problem-statement">
-<h3>4.1 Motivation and Problem Statement<a class="headerlink" href="#motivation-and-problem-statement" title="Link to this heading">¶</a></h3>
-<p><strong>Challenge</strong>: Classical SMC requires prior knowledge of disturbance bounds (K &gt; ||d||∞). In practice:</p>
+<section id="adaptive-smc-theory-4-1-motivation-and-problem-statement-challenge-classical-smc-requires-prior-knowledge-of-disturbance-bounds-k-d-in-practice">
+<h2>4. Adaptive SMC Theory ### 4.1 Motivation and Problem Statement <strong>Challenge</strong>: Classical SMC requires prior knowledge of disturbance bounds (K &gt; ||d||∞). In practice:<a class="headerlink" href="#adaptive-smc-theory-4-1-motivation-and-problem-statement-challenge-classical-smc-requires-prior-knowledge-of-disturbance-bounds-k-d-in-practice" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Disturbance bounds may be unknown</p></li>
 <li><p>Conservative estimates lead to excessive control effort</p></li>
-<li><p>Time-varying disturbances require adaptive response</p></li>
-</ul>
-<p><strong>Solution</strong>: Adaptive SMC adjusts the switching gain K(t) online based on observed sliding surface magnitude.</p>
-<p><strong>Advantages</strong>:</p>
-<ul class="simple">
+<li><p>Time-varying disturbances require adaptive response <strong>Solution</strong>: Adaptive SMC adjusts the switching gain K(t) online based on observed sliding surface magnitude. <strong>Advantages</strong>:</p></li>
 <li><p>No need for disturbance bound knowledge a priori</p></li>
 <li><p>Avoids overly conservative gains</p></li>
-<li><p>Maintains robustness to unknown disturbances</p></li>
+<li><p>Maintains robustness to unknown disturbances ### 4.2 Adaptation Law <strong>Piecewise Adaptation with Dead Zone</strong>: ```
+K̇(t) = { γ|σ|, if |σ| &gt; δ (outside dead zone - adaptation active) -αK, if |σ| ≤ δ (inside dead zone - leak prevents windup)
+}</p></li>
 </ul>
-</section>
-<section id="adaptation-law">
-<h3>4.2 Adaptation Law<a class="headerlink" href="#adaptation-law" title="Link to this heading">¶</a></h3>
-<p><strong>Piecewise Adaptation with Dead Zone</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">K̇</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="n">γ</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span><span class="p">,</span>  <span class="k">if</span> <span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">&gt;</span> <span class="n">δ</span> <span class="p">(</span><span class="n">outside</span> <span class="n">dead</span> <span class="n">zone</span> <span class="o">-</span> <span class="n">adaptation</span> <span class="n">active</span><span class="p">)</span>
-  <span class="o">-</span><span class="n">αK</span><span class="p">,</span>   <span class="k">if</span> <span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="err">≤</span> <span class="n">δ</span> <span class="p">(</span><span class="n">inside</span> <span class="n">dead</span> <span class="n">zone</span> <span class="o">-</span> <span class="n">leak</span> <span class="n">prevents</span> <span class="n">windup</span><span class="p">)</span>
-<span class="p">}</span>
+<div class="highlight-**Parameters**: notranslate"><div class="highlight"><pre><span></span>
+- **γ &gt; 0**: Adaptation rate (how fast K grows)
+- **δ &gt; 0**: Dead zone width (noise tolerance threshold)
+- **α ≥ 0**: Leak rate (prevents unbounded growth) **Bounded Adaptation**:
 </pre></div>
 </div>
-<p><strong>Parameters</strong>:</p>
-<ul class="simple">
-<li><p><strong>γ &gt; 0</strong>: Adaptation rate (how fast K grows)</p></li>
-<li><p><strong>δ &gt; 0</strong>: Dead zone width (noise tolerance threshold)</p></li>
-<li><p><strong>α ≥ 0</strong>: Leak rate (prevents unbounded growth)</p></li>
-</ul>
-<p><strong>Bounded Adaptation</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">K_min</span> <span class="err">≤</span> <span class="n">K</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="err">≤</span> <span class="n">K_max</span>
+<p>K_min ≤ K(t) ≤ K_max</p>
+<div class="highlight-**Rate notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<p><strong>Rate Limiting</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">|</span><span class="n">K̇</span><span class="o">|</span> <span class="err">≤</span> <span class="n">Γ_max</span>
+<p>|K̇| ≤ Γ_max</p>
+<div class="highlight-**Rationale**: notranslate"><div class="highlight"><pre><span></span>
+- **Outside dead zone** (|σ| &gt; δ): System is far from sliding surface → increase gain to dominate disturbances
+- **Inside dead zone** (|σ| ≤ δ): Near sliding surface → hold or decay gain to prevent noise-induced windup
+- **Leak term** (-αK): Prevents indefinite growth, allows gain to decrease when disturbances subside
+- **Bounds**: Safety constraints prevent numerical issues and actuator saturation ### 4.3 Lyapunov Stability with Adaptation **Extended Lyapunov Function**: ```
+V = ½σ² + 1/(2γ)(K - K*)²
+``` where K* is the ideal (unknown) switching gain that would perfectly dominate disturbances. **Proof of Bounded Adaptation and Convergence**: 1. **Positive Definiteness**: V ≥ 0 for all (σ, K) ✓ 2. **Time Derivative**: ``` V̇ = σσ̇ + 1/γ·(K - K*)·K̇ ``` 3. **Substitute Control Law**: u = u_eq - K·sat(σ/ε) ``` σσ̇ = σ(L·M⁻¹·B·(-K·sat(σ/ε) + d)) ``` Assuming |σ| &gt; ε (outside boundary layer): ``` σσ̇ = σ(-K·sign(σ) + d) = -K|σ| + σd ``` 4. **Substitute Adaptation Law**: K̇ = γ|σ| when |σ| &gt; δ ``` V̇ = (-K|σ| + σd) + (K - K*)|σ| = -K|σ| + σd + K|σ| - K*|σ| = σd - K*|σ| ``` 5. **Bound Using Disturbance Magnitude**: ``` V̇ ≤ ||d||∞|σ| - K*|σ| = (||d||∞ - K*)|σ| ``` 6. **Negative Definiteness**: Since K* &gt; ||d||∞ by definition: ``` V̇ ≤ -η|σ| where η = K* - ||d||∞ &gt; 0 ``` 7. **Conclusion**: - V̇ &lt; 0 whenever |σ| &gt; δ → σ converges to dead zone - (K - K*)² remains bounded → K remains bounded - Inside dead zone: leak term prevents unbounded growth **Key Result**: Both σ → 0 and K remains bounded, ensuring stable adaptation without prior knowledge of ||d||∞. ### 4.4 Dead Zone Trade-offs **Benefits**:
+- Prevents chattering from sensor noise
+- Avoids gain windup in steady state
+- Reduces control effort when near equilibrium
+- Allows adaptation to focus on significant errors **Drawbacks**:
+- Introduces small steady-state error (|σ| ≤ δ)
+- Slows convergence near sliding surface
+- Requires tuning of δ **Optimal Sizing**: δ ≈ 2-3× sensor noise magnitude **Leak Rate Selection**:
+- **Small α** (α ≈ 10⁻³): Slow decay, maintains gain for persistent disturbances
+- **Large α** (α ≈ 10⁻¹): Fast decay, quickly forgets past disturbances **Practical Guidelines**:
+- Start with δ = 0.01, α = 0.001
+- Increase δ if chattering persists despite adaptation
+- Increase α if gain grows excessively during transients
+
+---
+
+## 5. Hybrid Adaptive STA-SMC Theory ### 5.1 Unified Sliding Surface The hybrid controller combines the adaptive law with the super-twisting algorithm using a **single sliding surface** that captures both pendulum dynamics and cart recentering. **Absolute Formulation** (default): ```
+σ = c₁(θ̇₁ + λ₁θ₁) + c₂(θ̇₂ + λ₂θ₂) + k_c(ẋ + λ_c x)
+``` **Relative Formulation** (optional, `use_relative_surface=True`): ```
+
+σ = c₁(θ̇₁ + λ₁θ₁) + c₂((θ̇₂-θ̇₁) + λ₂(θ₂-θ₁)) + k_c(ẋ + λ_c x)
+``` **Design Principles**:
+- **Positive Coefficients**: cᵢ, λᵢ, k_c, λ_c &gt; 0 (Hurwitz stability requirement)
+- **Cart Recentering**: k_c, λ_c terms encourage cart to return to center
+- **Relative Formulation**: Improves decoupling between pendulums but complicates analysis **Stability Condition**: All coefficients must be positive to ensure the sliding manifold is attractive and defines a stable reduced-order error surface. ### 5.2 Combined Super-Twisting with Adaptive Gains **Control Law**: ```
+u = -k₁(t)√|σ|·sat(σ) + u_int - k_d·σ + u_eq
+``` where:
+
+- **k₁(t), k₂(t)**: Adaptive gains (time-varying)
+- **u_int**: Integral term satisfying u̇_int = -k₂(t)·sat(σ)
+- **k_d**: Damping gain (fixed)
+- **u_eq**: Equivalent control (model-based feedforward) **Adaptive Law for Both Gains**: ```
+k̇ᵢ(t) = { γᵢ|σ|·τ(σ), if |σ| &gt; δ -leak, otherwise
+}
+``` **Self-Tapering Function**: ```
+τ(σ) = |σ|/(|σ| + ε_taper)
+``` **Properties**:
+
+- τ(σ) → 1 as |σ| → ∞ (full adaptation when far from surface)
+- τ(σ) → 0 as |σ| → 0 (adaptation slows near surface)
+- Prevents overshoot and oscillation as σ → 0 **Bounded Adaptation**:
 </pre></div>
 </div>
-<p><strong>Rationale</strong>:</p>
-<ul class="simple">
-<li><p><strong>Outside dead zone</strong> (|σ| &gt; δ): System is far from sliding surface → increase gain to dominate disturbances</p></li>
-<li><p><strong>Inside dead zone</strong> (|σ| ≤ δ): Near sliding surface → hold or decay gain to prevent noise-induced windup</p></li>
-<li><p><strong>Leak term</strong> (-αK): Prevents indefinite growth, allows gain to decrease when disturbances subside</p></li>
-<li><p><strong>Bounds</strong>: Safety constraints prevent numerical issues and actuator saturation</p></li>
-</ul>
-</section>
-<section id="lyapunov-stability-with-adaptation">
-<h3>4.3 Lyapunov Stability with Adaptation<a class="headerlink" href="#lyapunov-stability-with-adaptation" title="Link to this heading">¶</a></h3>
-<p><strong>Extended Lyapunov Function</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="err">½</span><span class="n">σ</span><span class="err">²</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="n">γ</span><span class="p">)(</span><span class="n">K</span> <span class="o">-</span> <span class="n">K</span><span class="o">*</span><span class="p">)</span><span class="err">²</span>
-</pre></div>
-</div>
-<p>where K* is the ideal (unknown) switching gain that would perfectly dominate disturbances.</p>
-<p><strong>Proof of Bounded Adaptation and Convergence</strong>:</p>
-<ol class="arabic">
-<li><p><strong>Positive Definiteness</strong>: V ≥ 0 for all (σ, K) ✓</p></li>
-<li><p><strong>Time Derivative</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="o">=</span> <span class="n">σσ̇</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">γ·</span><span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="n">K</span><span class="o">*</span><span class="p">)</span><span class="err">·</span><span class="n">K̇</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Substitute Control Law</strong>: u = u_eq - K·sat(σ/ε)</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">σσ̇</span> <span class="o">=</span> <span class="n">σ</span><span class="p">(</span><span class="n">L·M</span><span class="err">⁻¹·</span><span class="n">B·</span><span class="p">(</span><span class="o">-</span><span class="n">K·sat</span><span class="p">(</span><span class="n">σ</span><span class="o">/</span><span class="n">ε</span><span class="p">)</span> <span class="o">+</span> <span class="n">d</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>Assuming |σ| &gt; ε (outside boundary layer):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">σσ̇</span> <span class="o">=</span> <span class="n">σ</span><span class="p">(</span><span class="o">-</span><span class="n">K·sign</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="o">+</span> <span class="n">d</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="n">K</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">+</span> <span class="n">σd</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Substitute Adaptation Law</strong>: K̇ = γ|σ| when |σ| &gt; δ</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">K</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">+</span> <span class="n">σd</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="n">K</span><span class="o">*</span><span class="p">)</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span>
-   <span class="o">=</span> <span class="o">-</span><span class="n">K</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">+</span> <span class="n">σd</span> <span class="o">+</span> <span class="n">K</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">-</span> <span class="n">K</span><span class="o">*|</span><span class="n">σ</span><span class="o">|</span>
-   <span class="o">=</span> <span class="n">σd</span> <span class="o">-</span> <span class="n">K</span><span class="o">*|</span><span class="n">σ</span><span class="o">|</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Bound Using Disturbance Magnitude</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="err">≤</span> <span class="o">||</span><span class="n">d</span><span class="o">||</span><span class="err">∞</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">-</span> <span class="n">K</span><span class="o">*|</span><span class="n">σ</span><span class="o">|</span> <span class="o">=</span> <span class="p">(</span><span class="o">||</span><span class="n">d</span><span class="o">||</span><span class="err">∞</span> <span class="o">-</span> <span class="n">K</span><span class="o">*</span><span class="p">)</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Negative Definiteness</strong>: Since K* &gt; ||d||∞ by definition:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="err">≤</span> <span class="o">-</span><span class="n">η</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span>  <span class="n">where</span> <span class="n">η</span> <span class="o">=</span> <span class="n">K</span><span class="o">*</span> <span class="o">-</span> <span class="o">||</span><span class="n">d</span><span class="o">||</span><span class="err">∞</span> <span class="o">&gt;</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Conclusion</strong>:</p>
-<ul class="simple">
-<li><p>V̇ &lt; 0 whenever |σ| &gt; δ → σ converges to dead zone</p></li>
-<li><p>(K - K*)² remains bounded → K remains bounded</p></li>
-<li><p>Inside dead zone: leak term prevents unbounded growth</p></li>
-</ul>
-</li>
-</ol>
-<p><strong>Key Result</strong>: Both σ → 0 and K remains bounded, ensuring stable adaptation without prior knowledge of ||d||∞.</p>
-</section>
-<section id="dead-zone-trade-offs">
-<h3>4.4 Dead Zone Trade-offs<a class="headerlink" href="#dead-zone-trade-offs" title="Link to this heading">¶</a></h3>
-<p><strong>Benefits</strong>:</p>
-<ul class="simple">
-<li><p>Prevents chattering from sensor noise</p></li>
-<li><p>Avoids gain windup in steady state</p></li>
-<li><p>Reduces control effort when near equilibrium</p></li>
-<li><p>Allows adaptation to focus on significant errors</p></li>
-</ul>
-<p><strong>Drawbacks</strong>:</p>
-<ul class="simple">
-<li><p>Introduces small steady-state error (|σ| ≤ δ)</p></li>
-<li><p>Slows convergence near sliding surface</p></li>
-<li><p>Requires tuning of δ</p></li>
-</ul>
-<p><strong>Optimal Sizing</strong>: δ ≈ 2-3× sensor noise magnitude</p>
-<p><strong>Leak Rate Selection</strong>:</p>
-<ul class="simple">
-<li><p><strong>Small α</strong> (α ≈ 10⁻³): Slow decay, maintains gain for persistent disturbances</p></li>
-<li><p><strong>Large α</strong> (α ≈ 10⁻¹): Fast decay, quickly forgets past disturbances</p></li>
-</ul>
-<p><strong>Practical Guidelines</strong>:</p>
-<ul class="simple">
-<li><p>Start with δ = 0.01, α = 0.001</p></li>
-<li><p>Increase δ if chattering persists despite adaptation</p></li>
-<li><p>Increase α if gain grows excessively during transients</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="hybrid-adaptive-sta-smc-theory">
-<h2>5. Hybrid Adaptive STA-SMC Theory<a class="headerlink" href="#hybrid-adaptive-sta-smc-theory" title="Link to this heading">¶</a></h2>
-<section id="unified-sliding-surface">
-<h3>5.1 Unified Sliding Surface<a class="headerlink" href="#unified-sliding-surface" title="Link to this heading">¶</a></h3>
-<p>The hybrid controller combines the adaptive law with the super-twisting algorithm using a <strong>single sliding surface</strong> that captures both pendulum dynamics and cart recentering.</p>
-<p><strong>Absolute Formulation</strong> (default):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">σ</span> <span class="o">=</span> <span class="n">c</span><span class="err">₁</span><span class="p">(</span><span class="n">θ̇</span><span class="err">₁</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₁</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span><span class="err">₂</span><span class="p">(</span><span class="n">θ̇</span><span class="err">₂</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₂</span><span class="n">θ</span><span class="err">₂</span><span class="p">)</span> <span class="o">+</span> <span class="n">k_c</span><span class="p">(</span><span class="n">ẋ</span> <span class="o">+</span> <span class="n">λ_c</span> <span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Relative Formulation</strong> (optional, <code class="docutils literal notranslate"><span class="pre">use_relative_surface=True</span></code>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">σ</span> <span class="o">=</span> <span class="n">c</span><span class="err">₁</span><span class="p">(</span><span class="n">θ̇</span><span class="err">₁</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₁</span><span class="n">θ</span><span class="err">₁</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span><span class="err">₂</span><span class="p">((</span><span class="n">θ̇</span><span class="err">₂</span><span class="o">-</span><span class="n">θ̇</span><span class="err">₁</span><span class="p">)</span> <span class="o">+</span> <span class="n">λ</span><span class="err">₂</span><span class="p">(</span><span class="n">θ</span><span class="err">₂</span><span class="o">-</span><span class="n">θ</span><span class="err">₁</span><span class="p">))</span> <span class="o">+</span> <span class="n">k_c</span><span class="p">(</span><span class="n">ẋ</span> <span class="o">+</span> <span class="n">λ_c</span> <span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Design Principles</strong>:</p>
-<ul class="simple">
-<li><p><strong>Positive Coefficients</strong>: cᵢ, λᵢ, k_c, λ_c &gt; 0 (Hurwitz stability requirement)</p></li>
-<li><p><strong>Cart Recentering</strong>: k_c, λ_c terms encourage cart to return to center</p></li>
-<li><p><strong>Relative Formulation</strong>: Improves decoupling between pendulums but complicates analysis</p></li>
-</ul>
-<p><strong>Stability Condition</strong>: All coefficients must be positive to ensure the sliding manifold is attractive and defines a stable reduced-order error surface.</p>
-</section>
-<section id="combined-super-twisting-with-adaptive-gains">
-<h3>5.2 Combined Super-Twisting with Adaptive Gains<a class="headerlink" href="#combined-super-twisting-with-adaptive-gains" title="Link to this heading">¶</a></h3>
-<p><strong>Control Law</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span><span class="err">₁</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="err">√</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span><span class="err">·</span><span class="n">sat</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="o">+</span> <span class="n">u_int</span> <span class="o">-</span> <span class="n">k_d·σ</span> <span class="o">+</span> <span class="n">u_eq</span>
-</pre></div>
-</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><strong>k₁(t), k₂(t)</strong>: Adaptive gains (time-varying)</p></li>
-<li><p><strong>u_int</strong>: Integral term satisfying u̇_int = -k₂(t)·sat(σ)</p></li>
-<li><p><strong>k_d</strong>: Damping gain (fixed)</p></li>
-<li><p><strong>u_eq</strong>: Equivalent control (model-based feedforward)</p></li>
-</ul>
-<p><strong>Adaptive Law for Both Gains</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">k̇ᵢ</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="n">γᵢ</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span><span class="err">·</span><span class="n">τ</span><span class="p">(</span><span class="n">σ</span><span class="p">),</span>  <span class="k">if</span> <span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">&gt;</span> <span class="n">δ</span>
-  <span class="o">-</span><span class="n">leak</span><span class="p">,</span>       <span class="n">otherwise</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><strong>Self-Tapering Function</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">τ</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="o">=</span> <span class="o">|</span><span class="n">σ</span><span class="o">|/</span><span class="p">(</span><span class="o">|</span><span class="n">σ</span><span class="o">|</span> <span class="o">+</span> <span class="n">ε_taper</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Properties</strong>:</p>
-<ul class="simple">
-<li><p>τ(σ) → 1 as |σ| → ∞ (full adaptation when far from surface)</p></li>
-<li><p>τ(σ) → 0 as |σ| → 0 (adaptation slows near surface)</p></li>
-<li><p>Prevents overshoot and oscillation as σ → 0</p></li>
-</ul>
-<p><strong>Bounded Adaptation</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="err">≤</span> <span class="n">k</span><span class="err">₁</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="err">≤</span> <span class="n">k</span><span class="err">₁</span><span class="n">_max</span>
-<span class="mi">0</span> <span class="err">≤</span> <span class="n">k</span><span class="err">₂</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="err">≤</span> <span class="n">k</span><span class="err">₂</span><span class="n">_max</span>
-<span class="o">|</span><span class="n">u_int</span><span class="o">|</span> <span class="err">≤</span> <span class="n">u_int_max</span>
-</pre></div>
-</div>
-<p>Separating integral windup limit from actuator saturation ensures adaptation can proceed even when actuator saturates.</p>
-</section>
-<section id="lyapunov-analysis">
-<h3>5.3 Lyapunov Analysis<a class="headerlink" href="#lyapunov-analysis" title="Link to this heading">¶</a></h3>
-<p><strong>Composite Lyapunov Function</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">k</span><span class="err">₁</span><span class="o">|</span><span class="n">σ</span><span class="o">|^</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="err">½</span><span class="n">z</span><span class="err">²</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="n">γ</span><span class="err">₁</span><span class="p">)(</span><span class="n">k</span><span class="err">₁</span> <span class="o">-</span> <span class="n">k</span><span class="err">₁</span><span class="o">*</span><span class="p">)</span><span class="err">²</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="n">γ</span><span class="err">₂</span><span class="p">)(</span><span class="n">k</span><span class="err">₂</span> <span class="o">-</span> <span class="n">k</span><span class="err">₂</span><span class="o">*</span><span class="p">)</span><span class="err">²</span>
-</pre></div>
-</div>
-<p><strong>Proof Sketch</strong>:</p>
-<ol class="arabic">
-<li><p><strong>Combines STA and Adaptive Terms</strong>:</p>
-<ul class="simple">
-<li><p>First two terms: STA Lyapunov function (finite-time convergence)</p></li>
-<li><p>Last two terms: Adaptive parameter error (bounded adaptation)</p></li>
-</ul>
-</li>
-<li><p><strong>Time Derivative Analysis</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="o">=</span> <span class="p">(</span><span class="err">∂</span><span class="n">V</span><span class="o">/</span><span class="err">∂</span><span class="n">σ</span><span class="p">)</span><span class="n">σ̇</span> <span class="o">+</span> <span class="p">(</span><span class="err">∂</span><span class="n">V</span><span class="o">/</span><span class="err">∂</span><span class="n">z</span><span class="p">)</span><span class="n">ż</span> <span class="o">+</span> <span class="p">(</span><span class="err">∂</span><span class="n">V</span><span class="o">/</span><span class="err">∂</span><span class="n">k</span><span class="err">₁</span><span class="p">)</span><span class="n">k̇</span><span class="err">₁</span> <span class="o">+</span> <span class="p">(</span><span class="err">∂</span><span class="n">V</span><span class="o">/</span><span class="err">∂</span><span class="n">k</span><span class="err">₂</span><span class="p">)</span><span class="n">k̇</span><span class="err">₂</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Substitute Dynamics</strong>:</p>
-<ul class="simple">
-<li><p>σ̇ from STA control law with adaptive gains</p></li>
-<li><p>ż = -k₂(t)·sign(σ)</p></li>
-<li><p>k̇₁, k̇₂ from adaptation law with self-tapering</p></li>
-</ul>
-</li>
-<li><p><strong>Negative Definiteness</strong>: Under appropriate gain conditions (k₁ &gt; L, k₂ &gt; k₁·C):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V̇</span> <span class="err">≤</span> <span class="o">-</span><span class="n">β·V</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="k">for</span> <span class="n">some</span> <span class="n">β</span> <span class="o">&gt;</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Key Results</strong>:</p>
-<ul class="simple">
-<li><p><strong>Finite-time convergence</strong>: σ → 0 in finite time T ≤ 2V(0)^(1/2)/β</p></li>
-<li><p><strong>Bounded gains</strong>: k₁(t), k₂(t) remain in [0, k_max]</p></li>
-<li><p><strong>Unknown disturbances</strong>: No prior knowledge of ||d||∞ required</p></li>
-</ul>
-</li>
-</ol>
-</section>
-<section id="advantages-and-complexity">
-<h3>5.4 Advantages and Complexity<a class="headerlink" href="#advantages-and-complexity" title="Link to this heading">¶</a></h3>
-<p><strong>Advantages</strong>:</p>
+<p>0 ≤ k₁(t) ≤ k₁_max
+0 ≤ k₂(t) ≤ k₂_max
+|u_int| ≤ u_int_max
+<code class="docutils literal notranslate"><span class="pre">Separating</span> <span class="pre">integral</span> <span class="pre">windup</span> <span class="pre">limit</span> <span class="pre">from</span> <span class="pre">actuator</span> <span class="pre">saturation</span> <span class="pre">ensures</span> <span class="pre">adaptation</span> <span class="pre">can</span> <span class="pre">proceed</span> <span class="pre">even</span> <span class="pre">when</span> <span class="pre">actuator</span> <span class="pre">saturates.</span> <span class="pre">###</span> <span class="pre">5.3</span> <span class="pre">Lyapunov</span> <span class="pre">Analysis</span> <span class="pre">**Composite</span> <span class="pre">Lyapunov</span> <span class="pre">Function**:</span></code></p>
+<p>V = k₁|σ|^(3/2) + ½z² + 1/(2γ₁)(k₁ - k₁*)² + 1/(2γ₂)(k₂ - k₂*)²
+<code class="docutils literal notranslate"><span class="pre">**Proof</span> <span class="pre">Sketch**:</span> <span class="pre">1.</span> <span class="pre">**Combines</span> <span class="pre">STA</span> <span class="pre">and</span> <span class="pre">Adaptive</span> <span class="pre">Terms**:</span> <span class="pre">-</span> <span class="pre">First</span> <span class="pre">two</span> <span class="pre">terms:</span> <span class="pre">STA</span> <span class="pre">Lyapunov</span> <span class="pre">function</span> <span class="pre">(finite-time</span> <span class="pre">convergence)</span> <span class="pre">-</span> <span class="pre">Last</span> <span class="pre">two</span> <span class="pre">terms:</span> <span class="pre">Adaptive</span> <span class="pre">parameter</span> <span class="pre">error</span> <span class="pre">(bounded</span> <span class="pre">adaptation)</span> <span class="pre">2.</span> <span class="pre">**Time</span> <span class="pre">Derivative</span> <span class="pre">Analysis**:</span></code> V̇ = (∂V/∂σ)σ̇ + (∂V/∂z)ż + (∂V/∂k₁)k̇₁ + (∂V/∂k₂)k̇₂ <code class="docutils literal notranslate"><span class="pre">3.</span> <span class="pre">**Substitute</span> <span class="pre">Dynamics**:</span> <span class="pre">-</span> <span class="pre">σ̇</span> <span class="pre">from</span> <span class="pre">STA</span> <span class="pre">control</span> <span class="pre">law</span> <span class="pre">with</span> <span class="pre">adaptive</span> <span class="pre">gains</span> <span class="pre">-</span> <span class="pre">ż</span> <span class="pre">=</span> <span class="pre">-k₂(t)·sign(σ)</span> <span class="pre">-</span> <span class="pre">k̇₁,</span> <span class="pre">k̇₂</span> <span class="pre">from</span> <span class="pre">adaptation</span> <span class="pre">law</span> <span class="pre">with</span> <span class="pre">self-tapering</span> <span class="pre">4.</span> <span class="pre">**Negative</span> <span class="pre">Definiteness**:</span> <span class="pre">Under</span> <span class="pre">appropriate</span> <span class="pre">gain</span> <span class="pre">conditions</span> <span class="pre">(k₁</span> <span class="pre">&gt;</span> <span class="pre">L,</span> <span class="pre">k₂</span> <span class="pre">&gt;</span> <span class="pre">k₁·C):</span></code> V̇ ≤ -β·V^(1/2) for some β &gt; 0 ``` 5. <strong>Key Results</strong>: - <strong>Finite-time convergence</strong>: σ → 0 in finite time T ≤ 2V(0)^(1/2)/β - <strong>Bounded gains</strong>: k₁(t), k₂(t) remain in [0, k_max] - <strong>Unknown disturbances</strong>: No prior knowledge of ||d||∞ required ### 5.4 Advantages and Complexity <strong>Advantages</strong>:</p>
 <ul class="simple">
 <li><p><strong>Finite-time convergence</strong> (from STA)</p></li>
 <li><p><strong>Continuous control</strong> (low chattering from STA)</p></li>
 <li><p><strong>Adaptive to unknown disturbances</strong> (from adaptation)</p></li>
 <li><p><strong>Single sliding surface</strong> (simpler than dual-surface designs)</p></li>
-<li><p><strong>Cart recentering</strong> (unified treatment of cart and pendulum dynamics)</p></li>
-</ul>
-<p><strong>Complexity</strong>:</p>
-<ul class="simple">
+<li><p><strong>Cart recentering</strong> (unified treatment of cart and pendulum dynamics) <strong>Complexity</strong>:</p></li>
 <li><p><strong>More parameters to tune</strong>: c₁, λ₁, c₂, λ₂, k_c, λ_c, γ₁, γ₂, δ, ε_taper, k_d, …</p></li>
 <li><p><strong>Higher computational cost</strong>: Square root, integral update, adaptation law</p></li>
-<li><p><strong>Careful tuning required</strong>: PSO optimization recommended</p></li>
-</ul>
-<p><strong>Recommended Use Cases</strong>:</p>
-<ul class="simple">
+<li><p><strong>Careful tuning required</strong>: PSO optimization recommended <strong>Recommended Use Cases</strong>:</p></li>
 <li><p>Complex, highly coupled systems (✓ double-inverted pendulum)</p></li>
 <li><p>High uncertainty environments</p></li>
 <li><p>Research applications requiring maximum performance</p></li>
 <li><p>Systems needing finite-time convergence with minimal chattering</p></li>
 </ul>
 </section>
-</section>
 <hr class="docutils" />
-<section id="convergence-analysis-comparison">
-<h2>6. Convergence Analysis Comparison<a class="headerlink" href="#convergence-analysis-comparison" title="Link to this heading">¶</a></h2>
-<section id="convergence-rate-summary">
-<h3>6.1 Convergence Rate Summary<a class="headerlink" href="#convergence-rate-summary" title="Link to this heading">¶</a></h3>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Controller</p></th>
-<th class="head"><p>Convergence Type</p></th>
-<th class="head"><p>Rate</p></th>
-<th class="head"><p>Time to Surface</p></th>
-<th class="head"><p>Steady-State Error</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Classical SMC</strong></p></td>
-<td><p>Asymptotic</p></td>
-<td><p>Exponential: O(e^(-ηt))</p></td>
-<td><p>Infinite (theoretically)</p></td>
-<td><p>Bounded by ε (boundary layer)</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Adaptive SMC</strong></p></td>
-<td><p>Asymptotic</p></td>
-<td><p>Exponential: O(e^(-ηt))</p></td>
-<td><p>Infinite (theoretically)</p></td>
-<td><p>Zero (if no dead zone) or bounded by δ</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>STA SMC</strong></p></td>
-<td><p>Finite-time</p></td>
-<td><p>O(t^(1/2))</p></td>
-<td><p>T ≤ 2|σ₀|^(1/2)/K₁^(1/2)</p></td>
-<td><p>Zero (exact convergence)</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Hybrid SMC</strong></p></td>
-<td><p>Finite-time</p></td>
-<td><p>O(t^(1/2))</p></td>
-<td><p>T ≤ 2|σ₀|^(1/2)/k₁(0)^(1/2)</p></td>
-<td><p>Zero (exact convergence)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="mathematical-definitions">
-<h3>6.2 Mathematical Definitions<a class="headerlink" href="#mathematical-definitions" title="Link to this heading">¶</a></h3>
-<p><strong>Exponential Convergence</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">|</span><span class="n">σ</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">|</span> <span class="err">≤</span> <span class="n">Ce</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="n">ηt</span><span class="p">)</span><span class="o">|</span><span class="n">σ</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">|</span>
+<section id="convergence-analysis-comparison-6-1-convergence-rate-summary-controller-convergence-type-rate-time-to-surface-steady-state-error">
+<h2>6. Convergence Analysis Comparison ### 6.1 Convergence Rate Summary | Controller | Convergence Type | Rate | Time to Surface | Steady-State Error |<a class="headerlink" href="#convergence-analysis-comparison-6-1-convergence-rate-summary-controller-convergence-type-rate-time-to-surface-steady-state-error" title="Link to this heading">¶</a></h2>
+<p>|———–|——————|——|—————–|——————-|
+| <strong>Classical SMC</strong> | Asymptotic | Exponential: O(e^(-ηt)) | Infinite (theoretically) | Bounded by ε (boundary layer) |
+| <strong>Adaptive SMC</strong> | Asymptotic | Exponential: O(e^(-ηt)) | Infinite (theoretically) | Zero (if no dead zone) or bounded by δ |
+| <strong>STA SMC</strong> | Finite-time | O(t^(1/2)) | T ≤ 2|σ₀|^(1/2)/K₁^(1/2) | Zero (exact convergence) |
+| <strong>Hybrid SMC</strong> | Finite-time | O(t^(1/2)) | T ≤ 2|σ₀|^(1/2)/k₁(0)^(1/2) | Zero (exact convergence) | ### 6.2 Mathematical Definitions <strong>Exponential Convergence</strong>: ```
+|σ(t)| ≤ Ce^(-ηt)|σ(0)|</p>
+<div class="highlight-- notranslate"><div class="highlight"><pre><span></span>
+- **Practical convergence**: Reaches ε-neighborhood quickly
+- **Advantage**: Simple analysis, well-understood
+- **Disadvantage**: Technically never achieves perfect tracking **Finite-Time Convergence**: ```
+∃ T &lt; ∞ : σ(t) = 0 for all t ≥ T
+``` - **Exact convergence** in finite time T
+- **Requires higher-order sliding modes** (e.g., STA)
+- **Advantage**: Exact tracking after convergence time
+- **Disadvantage**: More complex control law, higher computational cost ### 6.3 Convergence Time Bounds **Classical SMC** (95% settling time): ```
+t_95% ≈ 3/η where η = K - ||d||∞
+``` **STA SMC**: ```
+
+T_reach ≤ 2|σ(0)|^(1/2)/(K₁^(1/2))
+``` For typical initial condition |σ(0)| = 1.0 and K₁ = 25:
 </pre></div>
 </div>
-<ul class="simple">
-<li><p><strong>Never reaches exactly zero</strong> in finite time</p></li>
-<li><p><strong>Practical convergence</strong>: Reaches ε-neighborhood quickly</p></li>
-<li><p><strong>Advantage</strong>: Simple analysis, well-understood</p></li>
-<li><p><strong>Disadvantage</strong>: Technically never achieves perfect tracking</p></li>
-</ul>
-<p><strong>Finite-Time Convergence</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">∃</span> <span class="n">T</span> <span class="o">&lt;</span> <span class="err">∞</span> <span class="p">:</span> <span class="n">σ</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">for</span> <span class="nb">all</span> <span class="n">t</span> <span class="err">≥</span> <span class="n">T</span>
+<p>T_reach ≤ 2·1.0^(1/2)/25^(1/2) = 2/5 = 0.4 seconds</p>
+<div class="highlight-**Practical notranslate"><div class="highlight"><pre><span></span>- **STA converges faster** for large initial errors
+- **Classical SMC** can be competitive with well-tuned gains
+- **Adaptive SMC** convergence time depends on adaptation rate ### 6.4 Phase Portrait Analysis **Classical SMC**:
+- Spiral approach to σ = 0 line in (σ, σ̇) plane
+- Exponential decay of both σ and σ̇
+- Never reaches origin exactly **STA SMC**:
+- Direct finite-time reach to origin in (σ, σ̇) plane
+- Both σ and σ̇ reach zero simultaneously
+- Twisting motion around origin during convergence **Adaptive SMC**:
+- Spiral approach with varying damping (due to adaptive gain)
+- Convergence rate changes as K(t) evolves
+- Dead zone creates limit cycle around origin **Hybrid SMC**:
+- Direct finite-time reach with adaptive rate
+- Combines advantages of STA (finite-time) and adaptive (robustness)
+- Self-tapering prevents overshoot near origin
+
+---
+
+## 7. Numerical Considerations ### 7.1 Matrix Regularization **Problem**: The inertia matrix M(q) can become ill-conditioned near singular configurations, leading to large rounding errors in inversion. **Tikhonov Regularization**: ```
+M_reg = M(q) + αI, α &gt; 0
+``` **Benefits**:
+
+- Prevents singularity when det(M) ≈ 0
+- Shifts eigenvalues: λᵢ → λᵢ + α (all eigenvalues become ≥ α)
+- Converts nearly-singular matrix to well-conditioned **Trade-off**: Introduces small approximation error in equivalent control **Typical Value**: α = 10⁻⁸ to 10⁻⁶ **Mathematical Justification**: Adding a positive constant to the diagonal of a symmetric matrix shifts all eigenvalues upward, converting an indefinite or singular matrix into a positive-definite one. ### 7.2 Condition Number Monitoring **Definition**: ```
+κ(M) = ||M|| · ||M⁻¹||
+``` **Thresholds**:
+- **κ &lt; 10³**: Well-conditioned (safe for direct inversion)
+- **10³ &lt; κ &lt; 10⁶**: Moderate conditioning (use with caution)
+- **κ &gt; 10⁶**: Ill-conditioned → **use pseudo-inverse** **Pseudo-Inverse**: ```
+M⁺ = (MᵀM + αI)⁻¹Mᵀ (Moore-Penrose pseudo-inverse)
+``` - Provides least-squares solution
+
+- Minimizes effect of noise
+- More robust than direct inversion for ill-conditioned systems **Implementation**:
+```python
+if np.linalg.cond(M) &gt; 1e6: M_inv = np.linalg.pinv(M) # Use pseudo-inverse
+else: M_inv = np.linalg.inv(M) # Direct inversion safe
+``` ### 7.3 Discrete-Time Implementation **Euler Integration** (for adaptive gains and STA integral): ```
+
+u_int(k+1) = u_int(k) - K₂·sign(σ(k))·dt
+K(k+1) = K(k) + γ|σ(k)|·dt
+``` **Sampling Effects**:
+- **dt too large** → Discrete chattering (control jumps between bounds)
+- **dt too small** → Computational cost increases, numerical precision issues
+- **Recommended**: dt ≤ 0.01s for DIP system **Discrete Chattering**: When dt is large relative to system dynamics, the control oscillates between saturation limits even though σ ≈ 0. Solution: Reduce dt or increase boundary layer ε. ### 7.4 Numerical Stability Checks **Implementation Safeguards**: 1. **Finite Value Checking**: ```python if not np.isfinite(u): u = 0.0 # Emergency fallback log_error(&quot;Non-finite control value detected&quot;) ``` 2. **Controllability Check**: ```python controllability = abs(L @ M_inv @ B) if controllability &lt; ε_threshold: # System near uncontrollable configuration u_eq = 0.0 # Disable equivalent control ``` Typical threshold: ε_threshold = 10⁻⁴ 3. **Actuator Saturation**: ```python u_sat = np.clip(u, -max_force, max_force) ``` 4. **Emergency Reset**: ```python if state_norm &gt; 10.0 or velocity_norm &gt; 50.0: # System diverging - reset controller state u_int = 0.0 K = K_init ``` **Robustness Best Practices**:
+- Always validate outputs before applying control
+- Monitor condition numbers of matrix operations
+- Implement fallback strategies for edge cases
+- Log warnings for numerical issues without crashing
+
+---
+
+## 8. References ### Primary SMC References [1] **Utkin, V.I.** (1992). &quot;Sliding Modes in Control and Optimization&quot;. Springer-Verlag, Berlin. doi: 10.1007/978-3-642-84379-2
+*Foundational text on SMC theory, sliding mode equations, and exponential stability.* [2] **Edwards, C. and Spurgeon, S.K.** (1998). &quot;Sliding Mode Control: Theory and Applications&quot;. CRC Press, Boca Raton, FL. ISBN: 978-0748406012
+*Chapter 3: Sliding Surface Design - pole placement via surface parameters.* [3] **Slotine, J.-J.E. and Li, W.** (1991). &quot;Applied Nonlinear Control&quot;. Prentice Hall, Englewood Cliffs, NJ. ISBN: 0-13-040890-5
+*Practical implementation of SMC for nonlinear systems.* ### Higher-Order SMC References [4] **Levant, A.** (2003). &quot;Higher-order sliding modes, differentiation and output-feedback control&quot;. International Journal of Control, 76(9-10):924-941. doi: 10.1080/0020717031000099029
+*Foundations of higher-order sliding modes and super-twisting algorithms.* [5] **Levant, A.** (2007). &quot;Principles of 2-sliding mode design&quot;. Automatica, 43(4):576-586. doi: 10.1016/j.automatica.2006.10.008
+*Systematic design methodology for second-order sliding modes.* [6] **Moreno, J.A. and Osorio, M.** (2012). &quot;Strict Lyapunov Functions for the Super-Twisting Algorithm&quot;. IEEE Transactions on Automatic Control, 57(4):1035-1040.
+*Rigorous Lyapunov analysis proving finite-time convergence of STA.* ### Adaptive SMC References [7] **Yang, Y., Meng, M.Q.-H., and Tan, K.K.** (2007). &quot;Adaptive sliding mode control for uncertain systems&quot;. Automatica, 43(2):201-207.
+*Online gain adaptation for unknown disturbance bounds.* [8] **Huang, J., Yao, B., and Tao, G.** (2008). &quot;Adaptive second-order sliding-mode control of nonlinear systems&quot;. IEEE Transactions on Automatic Control, 53(11):2689-2694.
+*Combines adaptation with second-order sliding modes.* ### Chattering Reduction References [9] **Burton, J.A. and Zinober, A.S.I.** (1986). &quot;Continuous approximation of variable structure control&quot;. International Journal of Systems Science, 17(6):875-885. doi: 10.1080/00207728608926853
+*Boundary layer theory for chattering reduction.* [10] **Utkin, V.I., Guldner, J., and Shi, J.** (2009). &quot;Sliding Mode Control in Electro-Mechanical Systems&quot; (2nd ed.). CRC Press, Boca Raton, FL. doi: 10.1201/9781420065619
+*Practical techniques for chattering mitigation.* ### Control Theory Fundamentals [11] **Utkin, V.I.** (1977). &quot;Variable structure systems with sliding modes&quot;. IEEE Transactions on Automatic Control, 22(2):212-222.
+*Seminal paper establishing sliding mode control theory.* [12] **Slotine, J.-J. and Sastry, S.** (1983). &quot;Tracking control of nonlinear systems using sliding surfaces&quot;. International Journal of Control, 38(2):465-492.
+*Application of SMC to tracking problems.* [13] **Young, K.D., Utkin, V.I., and Özgüner, Ü.** (1999). &quot;A control engineer&#39;s guide to sliding mode control&quot;. IEEE Transactions on Control Systems Technology, 7(3):328-342. doi: 10.1109/87.761053
+*Practical guide for implementing SMC in engineering applications.* ### Recent Advances [14] **Shtessel, Y., Edwards, C., Fridman, L., and Levant, A.** (2014). &quot;Sliding Mode Control and Observation&quot;. Birkhäuser, New York, NY. doi: 10.1007/978-0-8176-4893-0
+*modern treatment of SMC and observation techniques.* [15] **Levant, A.** (1993). &quot;Sliding order and sliding accuracy in sliding mode control&quot;. International Journal of Control, 58(6):1247-1263. doi: 10.1080/00207179308923053
+*Analysis of sliding accuracy and convergence properties.* ### Optimization and Tuning [16] **Messina, A., Lanzafame, R., and Tomarchio, S.** (2013). &quot;Multi-objective optimal tuning of sliding mode controllers by evolutionary algorithms&quot;. IEEE/ASME Transactions on Mechatronics, 18(5):1446-1454.
+*PSO and evolutionary algorithms for SMC gain tuning.* ### Underactuated Systems [17] **Utkin, V.I.** (1993). &quot;Sliding mode control design principles and applications to electric drives&quot;. IEEE Transactions on Industrial Electronics, 40(1):23-36. doi: 10.1109/41.184818
+*Application of SMC to underactuated mechanical systems.* [18] **Gong, Z., Ba, Y., Zhang, M., and Guo, Y.** (2022). &quot;Robust sliding mode control of the permanent magnet synchronous motor with an improved power reaching law&quot;. Energies, 15(5):1935.
+*Modern applications of adaptive reaching laws.*
+
+---
+
+**Document Classification**: Research-Grade Mathematical Theory
+**Maintenance**: Update when new SMC variants are added
+**Next Review**: 2025-11-04
+**Version History**: v1.0 (2025-10-04) - Initial theory document
 </pre></div>
 </div>
-<ul class="simple">
-<li><p><strong>Exact convergence</strong> in finite time T</p></li>
-<li><p><strong>Requires higher-order sliding modes</strong> (e.g., STA)</p></li>
-<li><p><strong>Advantage</strong>: Exact tracking after convergence time</p></li>
-<li><p><strong>Disadvantage</strong>: More complex control law, higher computational cost</p></li>
-</ul>
-</section>
-<section id="convergence-time-bounds">
-<h3>6.3 Convergence Time Bounds<a class="headerlink" href="#convergence-time-bounds" title="Link to this heading">¶</a></h3>
-<p><strong>Classical SMC</strong> (95% settling time):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t_95</span><span class="o">%</span> <span class="err">≈</span> <span class="mi">3</span><span class="o">/</span><span class="n">η</span>  <span class="n">where</span> <span class="n">η</span> <span class="o">=</span> <span class="n">K</span> <span class="o">-</span> <span class="o">||</span><span class="n">d</span><span class="o">||</span><span class="err">∞</span>
-</pre></div>
-</div>
-<p><strong>STA SMC</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T_reach</span> <span class="err">≤</span> <span class="mi">2</span><span class="o">|</span><span class="n">σ</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">|^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">K</span><span class="err">₁</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>For typical initial condition |σ(0)| = 1.0 and K₁ = 25:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T_reach</span> <span class="err">≤</span> <span class="mi">2</span><span class="err">·</span><span class="mf">1.0</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">25</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="mi">5</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="n">seconds</span>
-</pre></div>
-</div>
-<p><strong>Practical Implications</strong>:</p>
-<ul class="simple">
-<li><p><strong>STA converges faster</strong> for large initial errors</p></li>
-<li><p><strong>Classical SMC</strong> can be competitive with well-tuned gains</p></li>
-<li><p><strong>Adaptive SMC</strong> convergence time depends on adaptation rate</p></li>
-</ul>
-</section>
-<section id="phase-portrait-analysis">
-<h3>6.4 Phase Portrait Analysis<a class="headerlink" href="#phase-portrait-analysis" title="Link to this heading">¶</a></h3>
-<p><strong>Classical SMC</strong>:</p>
-<ul class="simple">
-<li><p>Spiral approach to σ = 0 line in (σ, σ̇) plane</p></li>
-<li><p>Exponential decay of both σ and σ̇</p></li>
-<li><p>Never reaches origin exactly</p></li>
-</ul>
-<p><strong>STA SMC</strong>:</p>
-<ul class="simple">
-<li><p>Direct finite-time reach to origin in (σ, σ̇) plane</p></li>
-<li><p>Both σ and σ̇ reach zero simultaneously</p></li>
-<li><p>Twisting motion around origin during convergence</p></li>
-</ul>
-<p><strong>Adaptive SMC</strong>:</p>
-<ul class="simple">
-<li><p>Spiral approach with varying damping (due to adaptive gain)</p></li>
-<li><p>Convergence rate changes as K(t) evolves</p></li>
-<li><p>Dead zone creates limit cycle around origin</p></li>
-</ul>
-<p><strong>Hybrid SMC</strong>:</p>
-<ul class="simple">
-<li><p>Direct finite-time reach with adaptive rate</p></li>
-<li><p>Combines advantages of STA (finite-time) and adaptive (robustness)</p></li>
-<li><p>Self-tapering prevents overshoot near origin</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="numerical-considerations">
-<h2>7. Numerical Considerations<a class="headerlink" href="#numerical-considerations" title="Link to this heading">¶</a></h2>
-<section id="matrix-regularization">
-<h3>7.1 Matrix Regularization<a class="headerlink" href="#matrix-regularization" title="Link to this heading">¶</a></h3>
-<p><strong>Problem</strong>: The inertia matrix M(q) can become ill-conditioned near singular configurations, leading to large rounding errors in inversion.</p>
-<p><strong>Tikhonov Regularization</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M_reg</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">+</span> <span class="n">αI</span><span class="p">,</span>  <span class="n">α</span> <span class="o">&gt;</span> <span class="mi">0</span>
-</pre></div>
-</div>
-<p><strong>Benefits</strong>:</p>
-<ul class="simple">
-<li><p>Prevents singularity when det(M) ≈ 0</p></li>
-<li><p>Shifts eigenvalues: λᵢ → λᵢ + α (all eigenvalues become ≥ α)</p></li>
-<li><p>Converts nearly-singular matrix to well-conditioned</p></li>
-</ul>
-<p><strong>Trade-off</strong>: Introduces small approximation error in equivalent control</p>
-<p><strong>Typical Value</strong>: α = 10⁻⁸ to 10⁻⁶</p>
-<p><strong>Mathematical Justification</strong>: Adding a positive constant to the diagonal of a symmetric matrix shifts all eigenvalues upward, converting an indefinite or singular matrix into a positive-definite one.</p>
-</section>
-<section id="condition-number-monitoring">
-<h3>7.2 Condition Number Monitoring<a class="headerlink" href="#condition-number-monitoring" title="Link to this heading">¶</a></h3>
-<p><strong>Definition</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">κ</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">=</span> <span class="o">||</span><span class="n">M</span><span class="o">||</span> <span class="err">·</span> <span class="o">||</span><span class="n">M</span><span class="err">⁻¹</span><span class="o">||</span>
-</pre></div>
-</div>
-<p><strong>Thresholds</strong>:</p>
-<ul class="simple">
-<li><p><strong>κ &lt; 10³</strong>: Well-conditioned (safe for direct inversion)</p></li>
-<li><p><strong>10³ &lt; κ &lt; 10⁶</strong>: Moderate conditioning (use with caution)</p></li>
-<li><p><strong>κ &gt; 10⁶</strong>: Ill-conditioned → <strong>use pseudo-inverse</strong></p></li>
-</ul>
-<p><strong>Pseudo-Inverse</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="err">⁺</span> <span class="o">=</span> <span class="p">(</span><span class="n">MᵀM</span> <span class="o">+</span> <span class="n">αI</span><span class="p">)</span><span class="err">⁻¹</span><span class="n">Mᵀ</span>  <span class="p">(</span><span class="n">Moore</span><span class="o">-</span><span class="n">Penrose</span> <span class="n">pseudo</span><span class="o">-</span><span class="n">inverse</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Provides least-squares solution</p></li>
-<li><p>Minimizes effect of noise</p></li>
-<li><p>More robust than direct inversion for ill-conditioned systems</p></li>
-</ul>
-<p><strong>Implementation</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e6</span><span class="p">:</span>
-    <span class="n">M_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>  <span class="c1"># Use pseudo-inverse</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">M_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>   <span class="c1"># Direct inversion safe</span>
-</pre></div>
-</div>
-</section>
-<section id="discrete-time-implementation">
-<h3>7.3 Discrete-Time Implementation<a class="headerlink" href="#discrete-time-implementation" title="Link to this heading">¶</a></h3>
-<p><strong>Euler Integration</strong> (for adaptive gains and STA integral):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u_int</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">u_int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">-</span> <span class="n">K</span><span class="err">₂·</span><span class="n">sign</span><span class="p">(</span><span class="n">σ</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="err">·</span><span class="n">dt</span>
-<span class="n">K</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">K</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">γ</span><span class="o">|</span><span class="n">σ</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">|</span><span class="err">·</span><span class="n">dt</span>
-</pre></div>
-</div>
-<p><strong>Sampling Effects</strong>:</p>
-<ul class="simple">
-<li><p><strong>dt too large</strong> → Discrete chattering (control jumps between bounds)</p></li>
-<li><p><strong>dt too small</strong> → Computational cost increases, numerical precision issues</p></li>
-<li><p><strong>Recommended</strong>: dt ≤ 0.01s for DIP system</p></li>
-</ul>
-<p><strong>Discrete Chattering</strong>: When dt is large relative to system dynamics, the control oscillates between saturation limits even though σ ≈ 0. Solution: Reduce dt or increase boundary layer ε.</p>
-</section>
-<section id="numerical-stability-checks">
-<h3>7.4 Numerical Stability Checks<a class="headerlink" href="#numerical-stability-checks" title="Link to this heading">¶</a></h3>
-<p><strong>Implementation Safeguards</strong>:</p>
-<ol class="arabic">
-<li><p><strong>Finite Value Checking</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># Emergency fallback</span>
-    <span class="n">log_error</span><span class="p">(</span><span class="s2">&quot;Non-finite control value detected&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Controllability Check</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">controllability</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">L</span> <span class="o">@</span> <span class="n">M_inv</span> <span class="o">@</span> <span class="n">B</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">controllability</span> <span class="o">&lt;</span> <span class="n">ε_threshold</span><span class="p">:</span>
-    <span class="c1"># System near uncontrollable configuration</span>
-    <span class="n">u_eq</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># Disable equivalent control</span>
-</pre></div>
-</div>
-<p>Typical threshold: ε_threshold = 10⁻⁴</p>
-</li>
-<li><p><strong>Actuator Saturation</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u_sat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="n">max_force</span><span class="p">,</span> <span class="n">max_force</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Emergency Reset</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">state_norm</span> <span class="o">&gt;</span> <span class="mf">10.0</span> <span class="ow">or</span> <span class="n">velocity_norm</span> <span class="o">&gt;</span> <span class="mf">50.0</span><span class="p">:</span>
-    <span class="c1"># System diverging - reset controller state</span>
-    <span class="n">u_int</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="n">K</span> <span class="o">=</span> <span class="n">K_init</span>
-</pre></div>
-</div>
-</li>
-</ol>
-<p><strong>Robustness Best Practices</strong>:</p>
-<ul class="simple">
-<li><p>Always validate outputs before applying control</p></li>
-<li><p>Monitor condition numbers of matrix operations</p></li>
-<li><p>Implement fallback strategies for edge cases</p></li>
-<li><p>Log warnings for numerical issues without crashing</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="references">
-<h2>8. References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
-<section id="primary-smc-references">
-<h3>Primary SMC References<a class="headerlink" href="#primary-smc-references" title="Link to this heading">¶</a></h3>
-<p>[1] <strong>Utkin, V.I.</strong> (1992). “Sliding Modes in Control and Optimization”. Springer-Verlag, Berlin. doi: 10.1007/978-3-642-84379-2
-<em>Foundational text on SMC theory, sliding mode equations, and exponential stability.</em></p>
-<p>[2] <strong>Edwards, C. and Spurgeon, S.K.</strong> (1998). “Sliding Mode Control: Theory and Applications”. CRC Press, Boca Raton, FL. ISBN: 978-0748406012
-<em>Chapter 3: Sliding Surface Design - pole placement via surface parameters.</em></p>
-<p>[3] <strong>Slotine, J.-J.E. and Li, W.</strong> (1991). “Applied Nonlinear Control”. Prentice Hall, Englewood Cliffs, NJ. ISBN: 0-13-040890-5
-<em>Practical implementation of SMC for nonlinear systems.</em></p>
-</section>
-<section id="higher-order-smc-references">
-<h3>Higher-Order SMC References<a class="headerlink" href="#higher-order-smc-references" title="Link to this heading">¶</a></h3>
-<p>[4] <strong>Levant, A.</strong> (2003). “Higher-order sliding modes, differentiation and output-feedback control”. International Journal of Control, 76(9-10):924-941. doi: 10.1080/0020717031000099029
-<em>Foundations of higher-order sliding modes and super-twisting algorithms.</em></p>
-<p>[5] <strong>Levant, A.</strong> (2007). “Principles of 2-sliding mode design”. Automatica, 43(4):576-586. doi: 10.1016/j.automatica.2006.10.008
-<em>Systematic design methodology for second-order sliding modes.</em></p>
-<p>[6] <strong>Moreno, J.A. and Osorio, M.</strong> (2012). “Strict Lyapunov Functions for the Super-Twisting Algorithm”. IEEE Transactions on Automatic Control, 57(4):1035-1040.
-<em>Rigorous Lyapunov analysis proving finite-time convergence of STA.</em></p>
-</section>
-<section id="adaptive-smc-references">
-<h3>Adaptive SMC References<a class="headerlink" href="#adaptive-smc-references" title="Link to this heading">¶</a></h3>
-<p>[7] <strong>Yang, Y., Meng, M.Q.-H., and Tan, K.K.</strong> (2007). “Adaptive sliding mode control for uncertain systems”. Automatica, 43(2):201-207.
-<em>Online gain adaptation for unknown disturbance bounds.</em></p>
-<p>[8] <strong>Huang, J., Yao, B., and Tao, G.</strong> (2008). “Adaptive second-order sliding-mode control of nonlinear systems”. IEEE Transactions on Automatic Control, 53(11):2689-2694.
-<em>Combines adaptation with second-order sliding modes.</em></p>
-</section>
-<section id="chattering-reduction-references">
-<h3>Chattering Reduction References<a class="headerlink" href="#chattering-reduction-references" title="Link to this heading">¶</a></h3>
-<p>[9] <strong>Burton, J.A. and Zinober, A.S.I.</strong> (1986). “Continuous approximation of variable structure control”. International Journal of Systems Science, 17(6):875-885. doi: 10.1080/00207728608926853
-<em>Boundary layer theory for chattering reduction.</em></p>
-<p>[10] <strong>Utkin, V.I., Guldner, J., and Shi, J.</strong> (2009). “Sliding Mode Control in Electro-Mechanical Systems” (2nd ed.). CRC Press, Boca Raton, FL. doi: 10.1201/9781420065619
-<em>Practical techniques for chattering mitigation.</em></p>
-</section>
-<section id="control-theory-fundamentals">
-<h3>Control Theory Fundamentals<a class="headerlink" href="#control-theory-fundamentals" title="Link to this heading">¶</a></h3>
-<p>[11] <strong>Utkin, V.I.</strong> (1977). “Variable structure systems with sliding modes”. IEEE Transactions on Automatic Control, 22(2):212-222.
-<em>Seminal paper establishing sliding mode control theory.</em></p>
-<p>[12] <strong>Slotine, J.-J. and Sastry, S.</strong> (1983). “Tracking control of nonlinear systems using sliding surfaces”. International Journal of Control, 38(2):465-492.
-<em>Application of SMC to tracking problems.</em></p>
-<p>[13] <strong>Young, K.D., Utkin, V.I., and Özgüner, Ü.</strong> (1999). “A control engineer’s guide to sliding mode control”. IEEE Transactions on Control Systems Technology, 7(3):328-342. doi: 10.1109/87.761053
-<em>Practical guide for implementing SMC in engineering applications.</em></p>
-</section>
-<section id="recent-advances">
-<h3>Recent Advances<a class="headerlink" href="#recent-advances" title="Link to this heading">¶</a></h3>
-<p>[14] <strong>Shtessel, Y., Edwards, C., Fridman, L., and Levant, A.</strong> (2014). “Sliding Mode Control and Observation”. Birkhäuser, New York, NY. doi: 10.1007/978-0-8176-4893-0
-<em>Comprehensive modern treatment of SMC and observation techniques.</em></p>
-<p>[15] <strong>Levant, A.</strong> (1993). “Sliding order and sliding accuracy in sliding mode control”. International Journal of Control, 58(6):1247-1263. doi: 10.1080/00207179308923053
-<em>Analysis of sliding accuracy and convergence properties.</em></p>
-</section>
-<section id="optimization-and-tuning">
-<h3>Optimization and Tuning<a class="headerlink" href="#optimization-and-tuning" title="Link to this heading">¶</a></h3>
-<p>[16] <strong>Messina, A., Lanzafame, R., and Tomarchio, S.</strong> (2013). “Multi-objective optimal tuning of sliding mode controllers by evolutionary algorithms”. IEEE/ASME Transactions on Mechatronics, 18(5):1446-1454.
-<em>PSO and evolutionary algorithms for SMC gain tuning.</em></p>
-</section>
-<section id="underactuated-systems">
-<h3>Underactuated Systems<a class="headerlink" href="#underactuated-systems" title="Link to this heading">¶</a></h3>
-<p>[17] <strong>Utkin, V.I.</strong> (1993). “Sliding mode control design principles and applications to electric drives”. IEEE Transactions on Industrial Electronics, 40(1):23-36. doi: 10.1109/41.184818
-<em>Application of SMC to underactuated mechanical systems.</em></p>
-<p>[18] <strong>Gong, Z., Ba, Y., Zhang, M., and Guo, Y.</strong> (2022). “Robust sliding mode control of the permanent magnet synchronous motor with an improved power reaching law”. Energies, 15(5):1935.
-<em>Modern applications of adaptive reaching laws.</em></p>
-<hr class="docutils" />
-<p><strong>Document Classification</strong>: Research-Grade Mathematical Theory
-<strong>Maintenance</strong>: Update when new SMC variants are added
-<strong>Next Review</strong>: 2025-11-04
-<strong>Version History</strong>: v1.0 (2025-10-04) - Initial comprehensive theory document</p>
-</section>
 </section>
 </section>
 
@@ -1440,26 +609,8 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="controller_comparison_theory.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">SMC Controller Comparison Theory</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="../controllers/control_primitives_reference.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">Control Primitives Reference</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -1470,7 +621,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 08, 2025</div>
+              Last updated on Oct 10, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1492,68 +643,10 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Complete Sliding Mode Control Mathematical Theory</a><ul>
-<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
-<li><a class="reference internal" href="#introduction-and-fundamentals">1. Introduction and Fundamentals</a><ul>
-<li><a class="reference internal" href="#overview">1.1 Overview</a></li>
-<li><a class="reference internal" href="#state-space-formulation">1.2 State Space Formulation</a></li>
-<li><a class="reference internal" href="#sliding-mode-fundamentals">1.3 Sliding Mode Fundamentals</a></li>
-<li><a class="reference internal" href="#matched-vs-unmatched-disturbances">1.4 Matched vs Unmatched Disturbances</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#classical-smc-theory">2. Classical SMC Theory</a><ul>
-<li><a class="reference internal" href="#sliding-surface-design">2.1 Sliding Surface Design</a></li>
-<li><a class="reference internal" href="#control-law-decomposition">2.2 Control Law Decomposition</a></li>
-<li><a class="reference internal" href="#boundary-layer-theory">2.3 Boundary Layer Theory</a></li>
-<li><a class="reference internal" href="#lyapunov-stability-analysis">2.4 Lyapunov Stability Analysis</a></li>
-<li><a class="reference internal" href="#convergence-rate-analysis">2.5 Convergence Rate Analysis</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#super-twisting-smc-theory">3. Super-Twisting SMC Theory</a><ul>
-<li><a class="reference internal" href="#second-order-sliding-mode-concept">3.1 Second-Order Sliding Mode Concept</a></li>
-<li><a class="reference internal" href="#super-twisting-algorithm">3.2 Super-Twisting Algorithm</a></li>
-<li><a class="reference internal" href="#lyapunov-function-for-sta">3.3 Lyapunov Function for STA</a></li>
-<li><a class="reference internal" href="#gain-selection-guidelines">3.4 Gain Selection Guidelines</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#adaptive-smc-theory">4. Adaptive SMC Theory</a><ul>
-<li><a class="reference internal" href="#motivation-and-problem-statement">4.1 Motivation and Problem Statement</a></li>
-<li><a class="reference internal" href="#adaptation-law">4.2 Adaptation Law</a></li>
-<li><a class="reference internal" href="#lyapunov-stability-with-adaptation">4.3 Lyapunov Stability with Adaptation</a></li>
-<li><a class="reference internal" href="#dead-zone-trade-offs">4.4 Dead Zone Trade-offs</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#hybrid-adaptive-sta-smc-theory">5. Hybrid Adaptive STA-SMC Theory</a><ul>
-<li><a class="reference internal" href="#unified-sliding-surface">5.1 Unified Sliding Surface</a></li>
-<li><a class="reference internal" href="#combined-super-twisting-with-adaptive-gains">5.2 Combined Super-Twisting with Adaptive Gains</a></li>
-<li><a class="reference internal" href="#lyapunov-analysis">5.3 Lyapunov Analysis</a></li>
-<li><a class="reference internal" href="#advantages-and-complexity">5.4 Advantages and Complexity</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#convergence-analysis-comparison">6. Convergence Analysis Comparison</a><ul>
-<li><a class="reference internal" href="#convergence-rate-summary">6.1 Convergence Rate Summary</a></li>
-<li><a class="reference internal" href="#mathematical-definitions">6.2 Mathematical Definitions</a></li>
-<li><a class="reference internal" href="#convergence-time-bounds">6.3 Convergence Time Bounds</a></li>
-<li><a class="reference internal" href="#phase-portrait-analysis">6.4 Phase Portrait Analysis</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#numerical-considerations">7. Numerical Considerations</a><ul>
-<li><a class="reference internal" href="#matrix-regularization">7.1 Matrix Regularization</a></li>
-<li><a class="reference internal" href="#condition-number-monitoring">7.2 Condition Number Monitoring</a></li>
-<li><a class="reference internal" href="#discrete-time-implementation">7.3 Discrete-Time Implementation</a></li>
-<li><a class="reference internal" href="#numerical-stability-checks">7.4 Numerical Stability Checks</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#references">8. References</a><ul>
-<li><a class="reference internal" href="#primary-smc-references">Primary SMC References</a></li>
-<li><a class="reference internal" href="#higher-order-smc-references">Higher-Order SMC References</a></li>
-<li><a class="reference internal" href="#adaptive-smc-references">Adaptive SMC References</a></li>
-<li><a class="reference internal" href="#chattering-reduction-references">Chattering Reduction References</a></li>
-<li><a class="reference internal" href="#control-theory-fundamentals">Control Theory Fundamentals</a></li>
-<li><a class="reference internal" href="#recent-advances">Recent Advances</a></li>
-<li><a class="reference internal" href="#optimization-and-tuning">Optimization and Tuning</a></li>
-<li><a class="reference internal" href="#underactuated-systems">Underactuated Systems</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#table-of-contents-1-introduction-and-fundamentals">Table of Contents 1. <span class="xref myst">Introduction and Fundamentals</span></a></li>
+<li><a class="reference internal" href="#introduction-and-fundamentals-1-1-overview-the-double-inverted-pendulum-dip-is-a-canonical-benchmark-for-nonlinear-underactuated-control-systems-with-two-pendula-attached-in-series-to-a-horizontally-moving-cart-the-system-has-fewer-actuators-than-degrees-of-freedom-making-it-both-underactuated-and-strongly-nonlinear-conventional-linear-controllers-struggle-with-large-deflections-parameter-variations-and-model-uncertainty-sliding-mode-control-smc-addresses-these-challenges-by-forcing-the-system-state-onto-a-pre-defined-sliding-manifold-when-the-state-reaches-this-manifold-the-resulting-closed-loop-dynamics-become-insensitive-to-matched-disturbances-and-uncertainties-the-control-law-compensates-modeling-errors-through-the-control-input-channel-causing-the-plant-to-behave-according-to-the-reduced-order-dynamics-on-the-manifold-this-robustness-and-finite-time-convergence-for-higher-order-smc-make-smc-attractive-for-underactuated-systems-however-the-discontinuous-switching-law-of-classical-smc-induces-chattering-a-high-frequency-oscillation-caused-by-rapid-control-switching-when-the-state-crosses-the-sliding-surface-chattering-increases-control-effort-excites-unmodeled-high-frequency-modes-and-can-cause-wear-in-actuators-introducing-a-boundary-layer-around-the-sliding-surface-alleviates-chattering-but-enlarges-the-tracking-error-this-document-presents-the-unified-mathematical-theory-for-four-smc-variants-implemented-in-this-project">1. Introduction and Fundamentals ### 1.1 Overview The double-inverted pendulum (DIP) is a canonical benchmark for nonlinear, underactuated control systems. With two pendula attached in series to a horizontally moving cart, the system has fewer actuators than degrees of freedom, making it both <strong>underactuated</strong> and <strong>strongly nonlinear</strong>. Conventional linear controllers struggle with large deflections, parameter variations, and model uncertainty. Sliding Mode Control (SMC) addresses these challenges by forcing the system state onto a pre-defined <strong>sliding manifold</strong>. When the state reaches this manifold, the resulting closed-loop dynamics become insensitive to matched disturbances and uncertainties. The control law compensates modeling errors through the control input channel, causing the plant to behave according to the reduced-order dynamics on the manifold. This robustness and finite-time convergence (for higher-order SMC) make SMC attractive for underactuated systems. However, the discontinuous switching law of classical SMC induces <strong>chattering</strong>, a high-frequency oscillation caused by rapid control switching when the state crosses the sliding surface. Chattering increases control effort, excites unmodeled high-frequency modes, and can cause wear in actuators. Introducing a boundary layer around the sliding surface alleviates chattering but enlarges the tracking error. This document presents the unified mathematical theory for four SMC variants implemented in this project:</a></li>
+<li><a class="reference internal" href="#adaptive-smc-theory-4-1-motivation-and-problem-statement-challenge-classical-smc-requires-prior-knowledge-of-disturbance-bounds-k-d-in-practice">4. Adaptive SMC Theory ### 4.1 Motivation and Problem Statement <strong>Challenge</strong>: Classical SMC requires prior knowledge of disturbance bounds (K &gt; ||d||∞). In practice:</a></li>
+<li><a class="reference internal" href="#convergence-analysis-comparison-6-1-convergence-rate-summary-controller-convergence-type-rate-time-to-surface-steady-state-error">6. Convergence Analysis Comparison ### 6.1 Convergence Rate Summary | Controller | Convergence Type | Rate | Time to Surface | Steady-State Error |</a></li>
 </ul>
 </li>
 </ul>
@@ -1566,9 +659,9 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=4ebf8126"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=08e7b316"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>

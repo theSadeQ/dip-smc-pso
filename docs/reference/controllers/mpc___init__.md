@@ -13,7 +13,7 @@ Model Predictive Controllers for the double inverted pendulum system.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

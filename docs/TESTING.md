@@ -34,7 +34,7 @@ python -m pytest tests/config_validation/ tests/test_core/test_config.py -v
 python -m pytest --tb=short --disable-warnings
 ```
 
-#### Development Tips
+## Development Tips
 
 - **Test a specific module**: `python -m pytest tests/test_controllers/test_classical_smc.py -v`
 - **Test with coverage**: `python -m pytest --cov=src --cov-report=html`
@@ -144,7 +144,7 @@ GLOBAL_SEED=42
 SIMULATION_DURATION=1.0
 ```
 
-### Troubleshooting
+## Troubleshooting
 
 #### Tests Pass Locally but Fail in CI
 

@@ -2,7 +2,7 @@
 
 One-page reference for the most useful components. 📋
 
----
+
 
 ## 🔥 Top 20 Most Useful Components
 
@@ -46,11 +46,12 @@ One-page reference for the most useful components. 📋
 | **FadeContent** | Fade transitions | `children`, `duration` |
 | **PixelTransition** | Pixel effects | `from`, `to`, `speed` |
 
----
+
 
 ## 🎯 By Use Case
 
 ### Dashboard Hero Section
+
 ```tsx
 import Aurora from '@/components/react-bits/Aurora'
 import ShinyText from '@/components/react-bits/ShinyText'
@@ -62,6 +63,7 @@ import ShinyText from '@/components/react-bits/ShinyText'
 ```
 
 ### Animated Statistics
+
 ```tsx
 import CountUp from '@/components/react-bits/CountUp'
 
@@ -69,6 +71,7 @@ import CountUp from '@/components/react-bits/CountUp'
 ```
 
 ### Interactive Cards
+
 ```tsx
 import TiltedCard from '@/components/react-bits/TiltedCard'
 import MagicBento from '@/components/react-bits/MagicBento'
@@ -79,6 +82,7 @@ import MagicBento from '@/components/react-bits/MagicBento'
 ```
 
 ### Navigation Menu
+
 ```tsx
 import Dock from '@/components/react-bits/Dock'
 
@@ -89,6 +93,7 @@ import Dock from '@/components/react-bits/Dock'
 ```
 
 ### Progress Tracking
+
 ```tsx
 import Stepper from '@/components/react-bits/Stepper'
 
@@ -98,11 +103,12 @@ import Stepper from '@/components/react-bits/Stepper'
 ]} />
 ```
 
----
+
 
 ## 📦 Quick Copy Commands
 
 ### Copy Popular Components
+
 ```bash
 cd "D:\Lifestyle\Book\Im OK Youre OK\im-ok-youre-ok-study\react-bits-library"
 
@@ -122,11 +128,12 @@ cp src/content/Backgrounds/Galaxy/component.tsx ../study-dashboard/components/re
 cp src/content/Backgrounds/Particles/component.tsx ../study-dashboard/components/react-bits/Particles.tsx
 ```
 
----
+
 
 ## 🎨 Common Props Patterns
 
 ### Text Components
+
 ```tsx
 // Standard pattern
 <Component
@@ -138,6 +145,7 @@ cp src/content/Backgrounds/Particles/component.tsx ../study-dashboard/components
 ```
 
 ### Background Components
+
 ```tsx
 // Standard pattern
 <Component
@@ -149,6 +157,7 @@ cp src/content/Backgrounds/Particles/component.tsx ../study-dashboard/components
 ```
 
 ### Card/UI Components
+
 ```tsx
 // Standard pattern
 <Component
@@ -159,11 +168,12 @@ cp src/content/Backgrounds/Particles/component.tsx ../study-dashboard/components
 />
 ```
 
----
+
 
 ## 🚀 One-Liner Integrations
 
 ### Replace Text
+
 ```tsx
 // Before
 <h1>I'm OK - You're OK</h1>
@@ -173,6 +183,7 @@ cp src/content/Backgrounds/Particles/component.tsx ../study-dashboard/components
 ```
 
 ### Add Background
+
 ```tsx
 // Before
 <div className="min-h-screen">
@@ -184,6 +195,7 @@ cp src/content/Backgrounds/Particles/component.tsx ../study-dashboard/components
 ```
 
 ### Animate Numbers
+
 ```tsx
 // Before
 <span>{stats.count}</span>
@@ -193,6 +205,7 @@ cp src/content/Backgrounds/Particles/component.tsx ../study-dashboard/components
 ```
 
 ### Wrap Cards
+
 ```tsx
 // Before
 <Card>...</Card>
@@ -201,16 +214,18 @@ cp src/content/Backgrounds/Particles/component.tsx ../study-dashboard/components
 <TiltedCard><Card>...</Card></TiltedCard>
 ```
 
----
+
 
 ## 🔧 Required Dependencies
 
 ### Minimal Setup (Works Immediately)
+
 - ✅ Framer Motion - Already in your dashboard
 - ✅ React - Already installed
 - ✅ Tailwind CSS - Already configured
 
 ### Optional (For Advanced Components)
+
 ```bash
 # 3D effects
 npm install three @react-three/fiber @react-three/drei
@@ -222,7 +237,7 @@ npm install gsap
 npm install @react-spring/web
 ```
 
----
+
 
 ## 📂 Component Locations
 
@@ -251,7 +266,7 @@ src/content/
     └── ...
 ```
 
----
+
 
 ## 💡 Pro Tips
 
@@ -284,7 +299,7 @@ src/content/
    <Component className="dark:opacity-50 dark:text-white" />
    ```
 
----
+
 
 ## 🎯 Just Ask Claude!
 
@@ -300,7 +315,7 @@ Instead of manually copying, simply say:
 
 Claude will automatically find and integrate the component! 🚀
 
----
+
 
 ## 📚 Full Documentation
 
@@ -309,6 +324,6 @@ Claude will automatically find and integrate the component! 🚀
 - **Integration Guide**: [`INTEGRATION_GUIDE.md`](./INTEGRATION_GUIDE.md) - Dashboard integration
 - **Official Docs**: [reactbits.dev](https://reactbits.dev)
 
----
+
 
 **Save this cheat sheet for quick reference!** 📌

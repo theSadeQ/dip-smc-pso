@@ -39,7 +39,7 @@ References
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -68,7 +68,7 @@ history : Dict[str, Any]
 :linenos:
 ```
 
----
+
 
 ### `AdaptiveSMCOutput`
 
@@ -100,7 +100,7 @@ sigma : float
 :linenos:
 ```
 
----
+
 
 ### `STAOutput`
 
@@ -127,7 +127,7 @@ history : Dict[str, Any]
 :linenos:
 ```
 
----
+
 
 ### `HybridSTAOutput`
 
@@ -156,7 +156,7 @@ sigma : float
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -192,7 +192,7 @@ component = Component()
 result = component.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Advanced configuration
@@ -202,7 +202,7 @@ component = Component(
 )
 ```
 
-### Example 3: Integration with Framework
+## Example 3: Integration with Framework
 
 ```python
 # Integration example
@@ -212,14 +212,14 @@ runner = SimulationRunner()
 runner.use_component(component)
 ```
 
-### Example 4: Performance Optimization
+## Example 4: Performance Optimization
 
 ```python
 # Performance-optimized usage
 component = Component(enable_caching=True)
 ```
 
-### Example 5: Error Handling
+## Example 5: Error Handling
 
 ```python
 # Error handling

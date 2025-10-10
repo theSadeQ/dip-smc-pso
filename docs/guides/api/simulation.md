@@ -4,7 +4,7 @@
 **Purpose:** Simulation engine, dynamics models, and execution frameworks
 **Level:** Intermediate to Advanced
 
----
+
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@
 - [Performance Optimization](#performance-optimization)
 - [Troubleshooting](#troubleshooting)
 
----
+
 
 ## Overview
 
@@ -36,7 +36,7 @@ The Simulation API provides the core engine for running double-inverted pendulum
 - [Controllers API](controllers.md)
 - [Technical Reference](../../reference/core/__init__.md)
 
----
+
 
 ## SimulationRunner
 
@@ -99,7 +99,7 @@ print(f"ISE: {result['metrics']['ise']:.4f}")
 print(f"Final state: {result['state'][-1]}")
 ```
 
-### Result Structure
+## Result Structure
 
 ```python
 # example-metadata:
@@ -159,7 +159,7 @@ def progress_callback(t, state, control):
 result = runner.run(controller, callback=progress_callback)
 ```
 
-### Error Handling
+## Error Handling
 
 ```python
 from src.core.exceptions import NumericalInstabilityError, ControlSaturationError
@@ -176,7 +176,7 @@ except ControlSaturationError as e:
     # Reduce gains or increase max_force
 ```
 
----
+
 
 ## Dynamics Models
 
@@ -223,7 +223,7 @@ control = 50.0
 state_dot = dynamics.compute_dynamics(state, control)
 ```
 
-### Full Nonlinear Dynamics
+## Full Nonlinear Dynamics
 
 **File:** `src/core/dynamics_full.py`
 
@@ -258,7 +258,7 @@ state_dot = dynamics.compute_dynamics(state, control)
 # - Nonlinear inertia matrix
 ```
 
-### State Representation
+## State Representation
 
 Both models use the same state vector:
 
@@ -293,14 +293,14 @@ class FrictionEnhancedDynamics(BaseDynamics):
         Compute state derivatives with enhanced friction.
 
         Parameters
-        ----------
+        # ---------- (RST section marker)
         state : np.ndarray, shape (6,)
             Current state [x, dx, θ₁, dθ₁, θ₂, dθ₂]
         control : float
             Control force (N)
 
         Returns
-        -------
+        # ------- (RST section marker)
         state_dot : np.ndarray, shape (6,)
             State derivatives
         """
@@ -345,7 +345,7 @@ runner = SimulationRunner(config, dynamics_model=custom_dynamics)
 result = runner.run(controller)
 ```
 
----
+
 
 ## Simulation Context
 
@@ -370,7 +370,7 @@ context = SimulationContext(
 # - Error recovery
 ```
 
-### Safety Guards
+## Safety Guards
 
 **Numerical stability monitoring:**
 ```python
@@ -391,7 +391,7 @@ stats = context.get_saturation_stats()
 print(f"Saturated {stats['count']} times ({stats['percentage']:.1f}%)")
 ```
 
-### Logging and Monitoring
+## Logging and Monitoring
 
 ```python
 # Enable detailed logging
@@ -406,7 +406,7 @@ print(f"Execution time: {perf_stats['total_time']:.3f}s")
 print(f"Average timestep: {perf_stats['avg_step_time']:.6f}s")
 ```
 
----
+
 
 ## Batch Simulation
 
@@ -442,7 +442,7 @@ batch_results = run_batch_simulation(
 print(f"Batch results shape: {batch_results.shape}")
 ```
 
-### Monte Carlo Analysis
+## Monte Carlo Analysis
 
 ```python
 # example-metadata:
@@ -469,7 +469,7 @@ print(f"ISE: {mean_ise:.4f} ± {std_ise:.4f}")
 print(f"95th percentile: {percentile_95:.4f}")
 ```
 
-### PSO Integration
+## PSO Integration
 
 ```python
 # Batch evaluation for PSO fitness function
@@ -503,7 +503,7 @@ tuner = PSOTuner(
 best_gains, best_cost = tuner.optimize()
 ```
 
-### Performance Tips
+## Performance Tips
 
 **Numba compilation:**
 ```python
@@ -532,7 +532,7 @@ run_batch_simulation(..., n_trials=100)  # Good
 run_batch_simulation(..., n_trials=10000)  # May run out of RAM
 ```
 
----
+
 
 ## Integration Patterns
 
@@ -566,7 +566,7 @@ print(f"  Settling Time: {result['metrics']['settling_time']:.2f}s")
 print(f"  Max θ₁: {result['metrics']['max_theta1']:.3f} rad")
 ```
 
-### Pattern 2: Controller Comparison
+## Pattern 2: Controller Comparison
 
 ```python
 # Compare multiple controllers
@@ -587,7 +587,7 @@ comparison = compare_controllers(results)
 print(comparison.summary())
 ```
 
-### Pattern 3: Parameter Sensitivity Analysis
+## Pattern 3: Parameter Sensitivity Analysis
 
 ```python
 # Test sensitivity to initial conditions
@@ -608,7 +608,7 @@ plt.title('Controller Sensitivity to Initial Conditions')
 plt.show()
 ```
 
----
+
 
 ## Performance Optimization
 
@@ -631,7 +631,7 @@ controller = create_smc_for_pso(SMCType.CLASSICAL, best_gains)
 final_result = runner.run(controller)  # Accurate validation
 ```
 
-### 2. Timestep Selection
+## 2. Timestep Selection
 
 ```python
 # Coarse timestep for prototyping (faster)
@@ -646,7 +646,7 @@ runner_accurate = SimulationRunner(config)
 # runner = SimulationRunner(config, adaptive_dt=True, dt_min=0.0001, dt_max=0.01)
 ```
 
-### 3. Batch Processing
+## 3. Batch Processing
 
 ```python
 # Sequential (slow)
@@ -659,7 +659,7 @@ for ic in initial_conditions:
 batch_results = run_batch_simulation(controller, dynamics, initial_conditions, sim_params)
 ```
 
----
+
 
 ## Troubleshooting
 
@@ -701,12 +701,13 @@ batch_results = run_batch_simulation(controller, dynamics, initial_conditions, s
 3. **Use batch processing for multiple runs:**
    ```python
 # example-metadata:
+
 # runnable: false
 
    batch_results = run_batch_simulation(...)  # Numba acceleration
    ```
 
-### Problem: Results don't match expectations
+## Problem: Results don't match expectations
 
 **Cause:** Model mismatch or incorrect configuration
 
@@ -735,6 +736,7 @@ batch_results = run_batch_simulation(controller, dynamics, initial_conditions, s
 1. **Reduce batch size:**
    ```python
 # example-metadata:
+
 # runnable: false
 
    # Instead of 10000 trials
@@ -747,7 +749,7 @@ batch_results = run_batch_simulation(controller, dynamics, initial_conditions, s
    initial_conditions = initial_conditions.astype(np.float64)
    ```
 
----
+
 
 ## Next Steps
 
@@ -756,6 +758,6 @@ batch_results = run_batch_simulation(controller, dynamics, initial_conditions, s
 - **Configure physics:** [Plant Models API Guide](plant-models.md)
 - **Technical details:** [Core Technical Reference](../../reference/core/__init__.md)
 
----
+
 
 **Last Updated:** October 2025

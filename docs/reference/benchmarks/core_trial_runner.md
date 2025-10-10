@@ -24,7 +24,7 @@ a normal distribution. By default, 30 trials are executed.
 :linenos:
 ```
 
----
+
 
 ## Functions
 
@@ -65,7 +65,7 @@ RuntimeError
 :linenos:
 ```
 
----
+
 
 ### `run_multiple_trials(controller_factory, cfg, n_trials, seed, randomise_physics, noise_std, progress_callback)`
 
@@ -113,7 +113,7 @@ robustness against parameter uncertainties.
 :linenos:
 ```
 
----
+
 
 ### `validate_trial_configuration(controller_factory, cfg, n_trials)`
 
@@ -141,7 +141,7 @@ ValueError
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

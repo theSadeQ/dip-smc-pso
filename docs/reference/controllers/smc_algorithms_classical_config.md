@@ -16,7 +16,7 @@ Replaces parameter validation scattered throughout the original 458-line control
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -123,7 +123,7 @@ Create configuration with sensible defaults.
 
 [View full source →](#method-classicalsmcconfig-create_default)
 
----
+
 
 ## Dependencies
 

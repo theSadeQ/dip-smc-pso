@@ -39,7 +39,7 @@ Example:
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -121,7 +121,7 @@ String representation of pool state.
 
 [View full source →](#method-memorypool-__repr__)
 
----
+
 
 ## Dependencies
 

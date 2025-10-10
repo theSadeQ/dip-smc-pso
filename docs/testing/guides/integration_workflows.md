@@ -6,7 +6,7 @@
 
 **Purpose**: End-to-end integration testing patterns for control systems, covering controller-dynamics integration, PSO tuning workflows, and HIL validation.
 
----
+
 
 ## 🎯 Integration Test Categories
 
@@ -40,7 +40,7 @@ def test_closed_loop_integration():
     assert all(is_valid_state(s) for s in trajectory), "Invalid states generated"
 ```
 
----
+
 
 ### 2. PSO-Controller Integration
 
@@ -72,7 +72,7 @@ def test_pso_tuning_workflow():
     assert performance < 0.5, "Optimized controller underperforms"
 ```
 
----
+
 
 ### 3. Configuration Loading Integration
 
@@ -107,7 +107,7 @@ def test_config_to_simulation_workflow():
     assert results['settling_time'] < 3.0, "Took too long to settle"
 ```
 
----
+
 
 ## 🏗️ Workflow Patterns
 
@@ -134,9 +134,9 @@ def test_with_integrated_system(integrated_system):
     assert results['tracking_error'] < 0.01
 ```
 
----
 
-### Pattern 2: Multi-Stage Validation
+
+## Pattern 2: Multi-Stage Validation
 
 ```python
 # example-metadata:
@@ -164,7 +164,7 @@ def test_multi_stage_integration():
     assert metrics['settling_time'] < 2.0
 ```
 
----
+
 
 ## 📊 Integration Test Scenarios
 
@@ -189,9 +189,9 @@ def test_nominal_stabilization():
         assert final_error < 0.05, f"Failed for initial state {state}"
 ```
 
----
 
-### Scenario 2: Disturbance Rejection
+
+## Scenario 2: Disturbance Rejection
 
 ```python
 # example-metadata:
@@ -214,7 +214,7 @@ def test_disturbance_rejection_integration():
     assert np.linalg.norm(state) < 0.1, "Failed to reject disturbance"
 ```
 
----
+
 
 ### Scenario 3: Parameter Variation
 
@@ -231,7 +231,7 @@ def test_robust_integration(mass_error):
     assert np.linalg.norm(trajectory[-1]) < 0.1
 ```
 
----
+
 
 ## 🔧 CI/CD Integration
 
@@ -263,7 +263,7 @@ jobs:
         run: pytest tests/integration/ --html=integration_report.html
 ```
 
----
+
 
 ## 📚 Related Documentation
 
@@ -271,13 +271,13 @@ jobs:
 - [Property-Based Testing](property_based_testing.md)
 - [Performance Benchmarking](performance_benchmarking.md)
 
----
+
 
 ## 🔗 Navigation
 
 [⬅️ Back to Guides](../guides/) | [🏠 Testing Home](../README.md) | [➡️ Testing Standards](../standards/testing_standards.md)
 
----
+
 
 **Last Updated**: September 30, 2025
 **Maintainer**: Integration Testing Team

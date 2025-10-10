@@ -17,7 +17,7 @@ integration features.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -120,7 +120,7 @@ Create configuration from dictionary with parameter mapping.
 
 [View full source →](#method-fulldipconfig-from_dict)
 
----
+
 
 ## Dependencies
 

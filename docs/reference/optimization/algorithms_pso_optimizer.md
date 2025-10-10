@@ -139,14 +139,14 @@ config = {'parameter': 'value'}
 instance = Component(config)
 ```
 
-### Example 2: Performance Tuning
+## Example 2: Performance Tuning
 
 ```python
 # Adjust parameters for better performance
 optimized_params = tune_parameters(instance, target_performance)
 ```
 
-### Example 3: Integration with Optimization
+## Example 3: Integration with Optimization
 
 ```python
 # Use in complete optimization loop
@@ -154,7 +154,7 @@ optimizer = create_optimizer(opt_type, config)
 result = optimize(optimizer, problem, max_iter=100)
 ```
 
-### Example 4: Edge Case Handling
+## Example 4: Edge Case Handling
 
 ```python
 try:
@@ -170,6 +170,7 @@ except ValueError as e:
 metrics = compute_metrics(result)
 print(f"Best fitness: {metrics.best_fitness:.3f}")
 ```
+
 This module defines the high-throughput, vectorised `PSOTuner` class that wraps
 a particle swarm optimisation algorithm around the vectorised simulation of a
 double inverted pendulum (DIP) system.  It incorporates improvements from
@@ -253,7 +254,7 @@ Proper parameter selection ensures:
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -319,7 +320,7 @@ Run particle swarm optimisation with optional overrides.
 
 [View full source →](#method-psotuner-optimise)
 
----
+
 
 ## Functions
 
@@ -351,7 +352,7 @@ np.ndarray
 :linenos:
 ```
 
----
+
 
 ### `_seeded_global_numpy(seed)`
 
@@ -371,7 +372,7 @@ saves and restores the global RNG state.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -424,7 +425,7 @@ best_gains, best_cost = pso.optimize()
 print(f"Optimal gains: {best_gains}, Cost: {best_cost:.4f}")
 ```
 
-### Convergence Monitoring & Analysis
+## Convergence Monitoring & Analysis
 
 ```python
 import matplotlib.pyplot as plt
@@ -453,7 +454,7 @@ plt.grid(True)
 plt.show()
 ```
 
-### Robustness-Focused Optimization
+## Robustness-Focused Optimization
 
 ```python
 # example-metadata:
@@ -485,4 +486,3 @@ robust_gains, worst_case_cost = pso.optimize()
 ```
 
 **See:** {doc}`../../../optimization_workflows/advanced_pso_strategies`
-

@@ -39,17 +39,21 @@ where both super-twisting gains adapt online based on sliding surface magnitude.
 ## Key Innovations
 
 ### Continuous Adaptive Control
+
 Unlike classical adaptive SMC, the hybrid approach maintains continuous control through the super-twisting mechanism while adapting parameters online.
 
 ### Dual-Rate Adaptation
+
 The adaptation rates for $k_1$ and $k_2$ are designed with different scaling factors to match the super-twisting algorithm structure.
 
 ### Model-Based Equivalent Control
+
 Incorporates model knowledge through the equivalent control term while maintaining robustness through adaptive super-twisting.
 
 ## Implementation Details
 
 ### Source Code
+
 - **File**: `src/controllers/hybrid_adaptive_sta_smc.py`
 - **Class**: `HybridAdaptiveSTASMCController`
 - **Key Methods**:
@@ -75,6 +79,7 @@ controllers:
 ## Performance Characteristics
 
 ### Strengths
+
 - **Chattering-free**: Inherits super-twisting continuous control
 - **Self-tuning**: Adapts to system uncertainties automatically
 - **Fast convergence**: Combines finite-time convergence with adaptation
@@ -82,6 +87,7 @@ controllers:
 - **Smooth control**: actuator compatibility
 
 ### Limitations
+
 - **Complexity**: Most complex controller in the suite
 - **Parameter tuning**: Multiple adaptation parameters to configure
 - **Computational cost**: Higher computational requirements
@@ -92,11 +98,13 @@ controllers:
 **⚠️ Note**: Results shown are for **default parameters only** (not PSO-optimized):
 
 ### Exceptional Performance with Defaults
+
 - **RMSE**: 0.0083 rad (combined θ₁, θ₂)
 - **Control effort**: 2.83 J
 - **Chattering index**: 3.42 × 10³
 
 ### Analysis
+
 Remarkably, this controller achieves performance even with default parameters:
 - **Lowest RMSE**: By far the best tracking performance
 - **Minimal control effort**: Only 2.83 J compared to 10⁵ J for other controllers
@@ -110,6 +118,7 @@ This exceptional performance with default parameters suggests the controller is 
 ## Adaptation Dynamics
 
 ### Dual-Gain Evolution
+
 The controller adapts two gains simultaneously:
 
 **k₁ Adaptation:**
@@ -123,6 +132,7 @@ The controller adapts two gains simultaneously:
 - Ensures finite-time convergence properties
 
 ### Convergence Properties
+
 The hybrid approach maintains the finite-time convergence of super-twisting while achieving:
 - Automatic gain adjustment
 - Uncertainty compensation
@@ -131,6 +141,7 @@ The hybrid approach maintains the finite-time convergence of super-twisting whil
 ## Future Work
 
 ### PSO Optimization Potential
+
 Despite good default performance, PSO optimization could further improve:
 
 **Optimization Parameters:**
@@ -169,6 +180,7 @@ for t, state in simulation:
 ## Theoretical Foundation
 
 ### Lyapunov Stability
+
 The hybrid controller uses the Lyapunov function:
 
 ```{math}
@@ -178,6 +190,7 @@ V = V_{sta} + \frac{1}{2\gamma_1}\tilde{k_1}^2 + \frac{1}{2\gamma_2}\tilde{k_2}^
 where $V_{sta}$ is the super-twisting Lyapunov function.
 
 ### Convergence Analysis
+
 The controller ensures:
 1. Finite-time convergence to sliding surface
 2. Bounded adaptive gain evolution

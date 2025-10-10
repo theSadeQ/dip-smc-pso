@@ -31,7 +31,7 @@ Actual: Python 3.12.6 ✓
 
 ---
 
-#### ✅ Step 2: Repository Structure **Status:** PASS
+### ✅ Step 2: Repository Structure **Status:** PASS
 
 **Documentation Reference:** Lines 66-84
 **Validation Result:**
@@ -94,7 +94,7 @@ The `--help` command hangs/times out when run via subprocess (>10 seconds). Dire
 
 ---
 
-### Phase 2: First Simulation Validation #### ❌ Expected Terminal Output Mismatch **Status:** FAIL (Documentation Error)
+## Phase 2: First Simulation Validation #### ❌ Expected Terminal Output Mismatch **Status:** FAIL (Documentation Error)
 
 **Documentation Reference:** Lines 191-205 **Expected Output (from documentation):**
 ```

@@ -16,7 +16,7 @@ which is critical for control system stability and performance.
 :linenos:
 ```
 
----
+
 
 ## Functions
 
@@ -63,7 +63,7 @@ whereas adaptation gains must lie within finite bounds to ensure stability.
 :linenos:
 ```
 
----
+
 
 ### `require_probability(value, name)`
 
@@ -94,7 +94,7 @@ ValueError
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -131,7 +131,7 @@ component = Component()
 result = component.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Advanced configuration
@@ -141,7 +141,7 @@ component = Component(
 )
 ```
 
-### Example 3: Integration with Framework
+## Example 3: Integration with Framework
 
 ```python
 # Integration example
@@ -151,14 +151,14 @@ runner = SimulationRunner()
 runner.use_component(component)
 ```
 
-### Example 4: Performance Optimization
+## Example 4: Performance Optimization
 
 ```python
 # Performance-optimized usage
 component = Component(enable_caching=True)
 ```
 
-### Example 5: Error Handling
+## Example 5: Error Handling
 
 ```python
 # Error handling

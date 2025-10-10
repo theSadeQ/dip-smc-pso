@@ -13,7 +13,7 @@ Settling time objective functions for control optimization.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -87,7 +87,7 @@ Get the settling criteria used by this objective.
 
 [View full source →](#method-settlingtimeobjective-get_settling_criteria)
 
----
+
 
 ### `RiseTimeObjective`
 
@@ -120,7 +120,7 @@ Compute rise time (10%-90%) instead of settling time.
 
 [View full source →](#method-risetimeobjective-_compute_single_output_settling_time)
 
----
+
 
 ## Dependencies
 

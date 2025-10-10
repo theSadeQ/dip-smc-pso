@@ -5,7 +5,7 @@
 **Duration:** Week 1-2 (15-20 hours)
 **Status:** Ready for Implementation
 
----
+
 
 ## Table of Contents
 
@@ -16,11 +16,12 @@
 5. [Validation Strategy](#validation-strategy)
 6. [Timeline & Milestones](#timeline--milestones)
 
----
+
 
 ## Phase Overview
 
 ### **Objective**
+
 Build automated claim extraction system to identify and categorize 500+ scientific/technical claims requiring citations.
 
 ### **Why Specialized Extractors?**
@@ -55,7 +56,7 @@ class CodeClaimExtractor:      # ✅ Specialized, 180 lines, 85% precision
 class ClaimDatabaseMerger:     # ✅ Integration, 100 lines, conflict resolution
 ```
 
----
+
 
 ## Tool 1: Formal Mathematical Claim Extractor
 
@@ -162,7 +163,7 @@ def _calculate_confidence(match, has_cite, has_proof, has_math):
     return min(max(score, 0.0), 1.0)
 ```
 
-### **Data Model**
+## **Data Model**
 
 ```python
 # example-metadata:
@@ -264,7 +265,7 @@ def test_citation_detection():
     assert claims[0].confidence >= 0.9
 ```
 
----
+
 
 ## Tool 2: Code Implementation Claim Extractor
 
@@ -350,7 +351,7 @@ PATTERNS = {
 - "DOI: 10.1109/TAC.2012.2186179" ✅
 - "(Moreno et al. 2012)" ✅
 
-### **Data Model**
+## **Data Model**
 
 ```python
 # example-metadata:
@@ -371,7 +372,7 @@ class CodeClaim:
     confidence: float
 ```
 
-### **Expected Output**
+## **Expected Output**
 
 **File:** `artifacts/code_claims.json`
 
@@ -403,7 +404,7 @@ class CodeClaim:
 }
 ```
 
----
+
 
 ## Tool 3: Claims Database Merger
 
@@ -457,7 +458,7 @@ HIGH: 136 claims (27.2%)     → Research second
 MEDIUM: 335 claims (67.0%)   → Research last
 ```
 
-#### **3. Deduplication with Fuzzy Matching**
+## **3. Deduplication with Fuzzy Matching**
 
 ```python
 # example-metadata:
@@ -544,7 +545,7 @@ def _calculate_similarity(claim1: Dict, claim2: Dict) -> float:
 }
 ```
 
----
+
 
 ## Validation Strategy
 
@@ -596,7 +597,7 @@ python .dev_tools/claim_extraction/merge_claims.py
 - ✅ ≥90% precision overall (36/40 correct)
 - ✅ ≥95% recall on ground truth files
 
----
+
 
 ## Timeline & Milestones
 
@@ -624,7 +625,7 @@ python .dev_tools/claim_extraction/merge_claims.py
 
 **Grand Total:** 22 hours (within 15-20 hour estimate + 2-hour buffer)
 
----
+
 
 ## Success Criteria (Acceptance Gates)
 
@@ -643,7 +644,7 @@ python .dev_tools/claim_extraction/merge_claims.py
 - ✅ **Deduplication**: <5% duplicate claims removed
 - ✅ **Coverage**: 100% of markdown and Python files analyzed
 
----
+
 
 ## Artifacts Delivered to Phase 2
 
@@ -665,7 +666,7 @@ Interface to Phase 2:
     └── Expected: 29 CRITICAL claims researched first
 ```
 
----
+
 
 **Related Documents:**
 - [00_master_roadmap.md](00_master_roadmap.md) - Complete 5-phase plan

@@ -82,7 +82,7 @@ result = tuner.optimise(iters_override=10, n_particles_override=8)
 | **Adaptive Control** | Adaptive SMC | Good balance of speed and performance |
 | **Robust Control** | Hybrid SMC | Multi-mode operation capability |
 
-### 2. PSO Configuration Recommendations **For Production Systems:**
+## 2. PSO Configuration Recommendations **For Production Systems:**
 ```yaml
 
 pso: n_particles: 8-12 # Optimal balance of exploration vs speed iters: 10-15 # Sufficient for convergence w: 0.7 # Balanced exploration/exploitation c1: 2.0 # Cognitive parameter c2: 2.0 # Social parameter

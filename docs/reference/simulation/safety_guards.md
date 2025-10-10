@@ -167,7 +167,7 @@ instance = SafetyGuards()
 result = instance.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Custom configuration
@@ -176,7 +176,7 @@ instance = SafetyGuards(config)
 result = instance.process(data)
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 ```python
 try:
@@ -209,7 +209,7 @@ result = orchestrator.execute(instance.process(data))
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -235,7 +235,7 @@ Initialize safety violation error.
 
 [View full source →](#method-safetyviolationerror-__init__)
 
----
+
 
 ### `NaNGuard`
 
@@ -265,7 +265,7 @@ Get violation message.
 
 [View full source →](#method-nanguard-get_violation_message)
 
----
+
 
 ### `EnergyGuard`
 
@@ -301,7 +301,7 @@ Get violation message.
 
 [View full source →](#method-energyguard-get_violation_message)
 
----
+
 
 ### `BoundsGuard`
 
@@ -337,7 +337,7 @@ Get violation message.
 
 [View full source →](#method-boundsguard-get_violation_message)
 
----
+
 
 ### `SafetyGuardManager`
 
@@ -377,7 +377,7 @@ Clear all safety guards.
 
 [View full source →](#method-safetyguardmanager-clear_guards)
 
----
+
 
 ## Functions
 
@@ -405,7 +405,7 @@ SafetyViolationError
 :linenos:
 ```
 
----
+
 
 ### `guard_energy(state, limits)`
 
@@ -431,7 +431,7 @@ SafetyViolationError
 :linenos:
 ```
 
----
+
 
 ### `guard_bounds(state, bounds, t)`
 
@@ -459,7 +459,7 @@ SafetyViolationError
 :linenos:
 ```
 
----
+
 
 ### `apply_safety_guards(state, step_idx, config)`
 
@@ -487,7 +487,7 @@ SafetyViolationError
 :linenos:
 ```
 
----
+
 
 ### `create_default_guards(config)`
 
@@ -511,7 +511,7 @@ SafetyGuardManager
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

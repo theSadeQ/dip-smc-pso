@@ -1,8 +1,13 @@
 # utils.validation.__init__ **Source:** `src\utils\validation\__init__.py` ## Module Overview Parameter validation utilities for control engineering. This package provides validation functions for control system
+
 parameters, ensuring stability and proper behavior. ## Complete Source Code ```{literalinclude} ../../../src/utils/validation/__init__.py
 :language: python
 :linenos:
-``` --- ## Dependencies This module imports: - `from .parameter_validators import require_positive, require_finite`
+```
+
+---
+
+## Dependencies This module imports: - `from .parameter_validators import require_positive, require_finite`
 - `from .range_validators import require_in_range, require_probability` ## Advanced Mathematical Theory ### Parameter Validation Theory Parameter validation ensures control system stability through mathematical constraint checking. #### Range Validation **Closed interval check:**
 $$
 x \in [x_{\min}, x_{\max}] \Leftrightarrow x_{\min} \leq x \leq x_{\max}
@@ -39,6 +44,7 @@ V(x) = \sum_{i=1}^m \max(0, g_i(x))^2 + \sum_{j=1}^p h_j(x)^2
 $$ Feasible if $V(x) = 0$. ## Architecture Diagram ```{mermaid}
 graph TD A[Validation System] --> B[Range Validators] A --> C[Parameter Validators] A --> D[Constraint Validators] B --> E{Check Range} E -->|x ∈ _a,b_| F[Valid] E -->|x ∉ _a,b_| G[ValueError] C --> H{Check Positivity} H -->|x > 0| I[Valid] H -->|x ≤ 0| J[ValueError] D --> K{Check Constraints} K -->|g_i_x_ ≤ 0| L[Feasible] K -->|g_i_x_ > 0| M[Infeasible] F --> N[Return Value] I --> N L --> N G --> O[Raise Exception] J --> O M --> O style E fill:#fff4e1 style H fill:#fff4e1 style K fill:#fff4e1 style N fill:#e8f5e9 style O fill:#ffebee
 ``` ## Usage Examples ### Example 1: Basic Range Validation ```python
+
 from src.utils.validation import require_in_range def set_control_gain(gain: float): # Validate gain is in acceptable range validated_gain = require_in_range( gain, min_val=0.1, max_val=100.0, name="control_gain" ) return validated_gain # Valid gain
 k = set_control_gain(10.0) # ✓ Returns 10.0 # Invalid gain
 try: k = set_control_gain(150.0) # ValueError: out of range
@@ -49,6 +55,7 @@ I = configure_pendulum(1.0, 0.5) # ✓ Returns 0.25 # Invalid parameters
 try: I = configure_pendulum(-1.0, 0.5) # ValueError: must be positive
 except ValueError as e: print(f"Invalid mass: {e}")
 ``` ### Example 3: Probability Validation ```python
+
 from src.utils.validation import require_probability def set_confidence_level(alpha: float): # Validate probability constraint validated_alpha = require_probability( alpha, name="confidence_level" ) return validated_alpha # Valid probability
 alpha = set_confidence_level(0.95) # ✓ Returns 0.95 # Invalid probability
 try: alpha = set_confidence_level(1.5) # ValueError: not in [0,1]
@@ -60,6 +67,7 @@ params = { 'k1': 10.0, 'k2': 8.0, 'k3': 15.0, 'max_force': 100.0, 'boundary_laye
 }
 valid_params = validate_controller_parameters(params) # ✓ All pass
 ``` ### Example 5: Batch Parameter Validation ```python
+
 from src.utils.validation import require_positive, require_in_range
 import numpy as np def validate_gains_array(gains: np.ndarray): \"\"\"Validate array of controller gains.\"\"\" # Check array dimensions if gains.shape[0] != 6: raise ValueError(f"Expected 6 gains, got {gains.shape[0]}") # Validate each gain individually for i, gain in enumerate(gains): if i < 5: # First 5 gains must be positive require_positive(gain, name=f"gain[{i}]") else: # Last gain can be zero or positive require_in_range(gain, min_val=0.0, max_val=100.0, name=f"gain[{i}]") return gains # Valid gains
 gains = np.array([10.0, 8.0, 15.0, 12.0, 50.0, 5.0])

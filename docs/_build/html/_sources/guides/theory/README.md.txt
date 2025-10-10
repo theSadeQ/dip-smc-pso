@@ -4,11 +4,12 @@
 
 Welcome to the Theory & Explanation section—the bridge between practical tutorials and deep mathematical foundations. These guides explain the theoretical principles that make the framework work.
 
----
+
 
 ## 📚 Theory Guides
 
 ### [Sliding Mode Control Theory](smc-theory.md)
+
 **Understand the mathematics and principles of SMC**
 
 - Sliding mode fundamentals
@@ -20,9 +21,10 @@ Welcome to the Theory & Explanation section—the bridge between practical tutor
 
 **Leads to**: [Controllers API](../api/controllers.md), [Mathematical Foundations](../../mathematical_foundations/smc_complete_theory.md)
 
----
+
 
 ### [PSO Algorithm Theory](pso-theory.md)
+
 **Understand swarm intelligence and optimization principles**
 
 - Swarm intelligence fundamentals
@@ -34,9 +36,10 @@ Welcome to the Theory & Explanation section—the bridge between practical tutor
 
 **Leads to**: [Optimization API](../api/optimization.md), [PSO Mathematical Theory](../../mathematical_foundations/pso_algorithm_theory.md)
 
----
+
 
 ### [Double-Inverted Pendulum Dynamics](dip-dynamics.md)
+
 **Understand the physics and mathematics of the DIP system**
 
 - Lagrangian derivation
@@ -48,9 +51,10 @@ Welcome to the Theory & Explanation section—the bridge between practical tutor
 
 **Leads to**: [Plant Models API](../api/plant-models.md), [Dynamics Derivations](../../mathematical_foundations/dynamics_derivations.md)
 
----
+
 
 ### [Numerical Stability Methods](../../theory/numerical_stability_methods.md)
+
 **Advanced numerical techniques for robust control systems**
 
 - Condition number analysis
@@ -62,9 +66,10 @@ Welcome to the Theory & Explanation section—the bridge between practical tutor
 
 **Leads to**: [Numerical Stability Reference](../../reference/utils/numerical_stability_safe_operations.md), Advanced controller implementation
 
----
+
 
 ### [Lyapunov Stability Analysis](../../theory/lyapunov_stability_analysis.md)
+
 **Rigorous mathematical stability proofs for control systems**
 
 - Lyapunov function design
@@ -76,7 +81,7 @@ Welcome to the Theory & Explanation section—the bridge between practical tutor
 
 **Leads to**: [Lyapunov Testing](../../testing/theory/lyapunov_stability_testing.md), Research-level controller validation
 
----
+
 
 ## 🎯 Learning Path
 
@@ -107,29 +112,32 @@ Mathematical Foundations (Deep research)
 2. [DIP Dynamics](dip-dynamics.md) → Build physical intuition
 3. [SMC Theory](smc-theory.md) → Understand control mathematics
 
----
+
 
 ## 🔬 What You'll Learn
 
 ### Sliding Mode Control Theory
+
 - **Why** sliding surfaces create stable systems
 - **How** Lyapunov theory proves convergence
 - **When** to use boundary layers vs super-twisting
 - **What** causes chattering and how to eliminate it
 
 ### PSO Algorithm Theory
+
 - **Why** swarm intelligence finds global optima
 - **How** particles balance exploration vs exploitation
 - **When** PSO outperforms gradient methods
 - **What** parameters control convergence
 
 ### DIP Dynamics Theory
+
 - **Why** the system is underactuated and unstable
 - **How** Lagrangian mechanics derive equations
 - **When** linearization is valid for control
 - **What** makes the system controllable
 
----
+
 
 ## 🧮 Mathematical Prerequisites
 
@@ -141,7 +149,7 @@ Mathematical Foundations (Deep research)
 
 **Don't worry**: These guides provide intuitive explanations alongside mathematical rigor.
 
----
+
 
 ## 📖 Notation Conventions
 
@@ -156,7 +164,7 @@ These symbols appear throughout the theory guides:
 | `q = [x, θ₁, θ₂]ᵀ` | Generalized coordinates | Lagrangian mechanics |
 | `ẋᵢ(t)` | Particle velocity | PSO algorithm |
 
----
+
 
 ## Next Steps
 
@@ -166,6 +174,6 @@ After mastering theory:
 - Deep dive into [Mathematical Foundations](../../mathematical_foundations/)
 - Explore research in [Bibliography](../../bibliography.md)
 
----
+
 
 **Last Updated**: October 2025

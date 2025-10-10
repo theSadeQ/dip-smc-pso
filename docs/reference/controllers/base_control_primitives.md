@@ -206,7 +206,7 @@ u_array = saturate(u_raw_array, u_max)
 print(f"Saturated controls: {u_array}")  # [100, 50, -100, 30]
 ```
 
-### Example 2: Rate Limiter
+## Example 2: Rate Limiter
 
 ```python
 from src.controllers.base.control_primitives import rate_limit
@@ -226,7 +226,7 @@ u_limited = rate_limit(u_current, u_previous, u_dot_max, dt)
 print(f"Rate-limited control: {u_limited:.1f} N")  # 50.0 N
 ```
 
-### Example 3: Anti-Windup
+## Example 3: Anti-Windup
 
 ```python
 from src.controllers.base.control_primitives import anti_windup_back_calculation
@@ -248,7 +248,7 @@ print(f"Integral before: {integral:.3f}")
 print(f"Integral after:  {integral_new:.3f}")  # Reduced
 ```
 
-### Example 4: Low-Pass Filter
+## Example 4: Low-Pass Filter
 
 ```python
 from src.controllers.base.control_primitives import low_pass_filter
@@ -269,7 +269,7 @@ print(f"Noisy control:    {u_noisy:.2f} N")
 print(f"Filtered control: {u_filtered:.2f} N")
 ```
 
-### Example 5: Complete Control Pipeline
+## Example 5: Complete Control Pipeline
 
 ```python
 from src.controllers.base.control_primitives import (
@@ -325,7 +325,7 @@ print(f"Final control: {u_final:.2f} N")
 :linenos:
 ```
 
----
+
 
 ## Functions
 
@@ -371,7 +371,7 @@ this helper ensures consistent error messages and thresholds.
 :linenos:
 ```
 
----
+
 
 ### `require_in_range(value, name)`
 
@@ -419,7 +419,7 @@ error messages.
 :linenos:
 ```
 
----
+
 
 ### `saturate(sigma, epsilon, method)`
 
@@ -453,7 +453,7 @@ Raises:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

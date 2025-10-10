@@ -1,4 +1,9 @@
-# Results and Discussion **Note:** Results analysis has been integrated into the validation and analysis documentation. **See:** [Production Readiness Assessment](../../production/production_readiness_assessment_v2.md) --- ## Results Documentation For detailed results and analysis, refer to: - **Production Readiness:** [production_readiness_final.md](../../production_readiness_final.md)
+# Results and Discussion **Note:** Results analysis has been integrated into the validation and analysis documentation. **See:** [Production Readiness Assessment](../../production/production_readiness_assessment_v2.md)
+
+---
+
+## Results Documentation For detailed results and analysis, refer to: - **Production Readiness:** [production_readiness_final.md](../../production_readiness_final.md)
+
 - **Controller Comparison:** [analysis/COMPLETE_CONTROLLER_COMPARISON_MATRIX.md](../../analysis/COMPLETE_CONTROLLER_COMPARISON_MATRIX.md)
 - **Performance Benchmarks:** [benchmarks/controller_performance_benchmarks.md](../../benchmarks/controller_performance_benchmarks.md)
 - **PSO Optimization Results:** [issue_12_pso_optimization_report.md](../../issue_12_pso_optimization_report.md) ## Key Results ### Controller Performance **Classical SMC:**

@@ -113,7 +113,7 @@ python scripts/docs/export_citations.py --format csl-json --output citations.jso
 - **Zotero:** File → Import → (select citations.json)
 - **Mendeley:** File → Add Files → (select citations.ris) **Note:** Export scripts generate files in `.artifacts/exports/`
 
-### Q14: How do I cite this project in my own work? **Answer:** **BibTeX entry for this project:** ```bibtex
+## Q14: How do I cite this project in my own work? **Answer:** **BibTeX entry for this project:** ```bibtex
 @software{dip_smc_pso_2025, author = {{DIP-SMC-PSO Contributors}}, title = {Double Inverted Pendulum Control with Sliding Mode Control and PSO Optimization}, year = {2025}, url = {https://github.com/theSadeQ/dip-smc-pso}, version = {1.0}, note = {Research implementation of SMC controllers with PSO parameter tuning for underactuated systems}
 }
 ``` **APA format:**

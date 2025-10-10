@@ -4,7 +4,7 @@
 **Purpose:** Configuration loading, validation, and management
 **Level:** Intermediate
 
----
+
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@
 - [Integration Patterns](#integration-patterns)
 - [Troubleshooting](#troubleshooting)
 
----
+
 
 ## Overview
 
@@ -34,7 +34,7 @@ The Configuration API provides type-safe, validated configuration management for
 - [How-To: Running Simulations](../how-to/running-simulations.md)
 - [Technical Reference](../../reference/config/__init__.md)
 
----
+
 
 ## Loading Configuration
 
@@ -53,7 +53,7 @@ simulation = config.simulation
 pso = config.pso
 ```
 
-### Configuration Validation
+## Configuration Validation
 
 **Automatic validation on load:**
 ```python
@@ -70,7 +70,7 @@ except ValueError as e:
 config = load_config('config.yaml', allow_unknown=False)
 ```
 
-### Multiple Configuration Files
+## Multiple Configuration Files
 
 ```python
 # Load different configs for different scenarios
@@ -85,7 +85,7 @@ elif scenario == 'challenging':
     runner = SimulationRunner(config_challenging)
 ```
 
-### Partial Configuration Loading
+## Partial Configuration Loading
 
 ```python
 import yaml
@@ -100,7 +100,7 @@ physics = DIPParams(**config_dict['dip_params'])
 sim_settings = SimulationConfig(**config_dict['simulation'])
 ```
 
----
+
 
 ## Configuration Schema
 
@@ -212,7 +212,7 @@ hil:
   sensor_noise_std: 0.01     # Sensor noise standard deviation
 ```
 
-### Configuration Domains
+## Configuration Domains
 
 **1. Physics Parameters (dip_params)**
 ```python
@@ -277,7 +277,7 @@ class SimulationConfig:
     use_full_dynamics: bool = False
 ```
 
----
+
 
 ## Programmatic Configuration
 
@@ -318,7 +318,7 @@ full_config = Config(
 )
 ```
 
-### Overriding Parameters
+## Overriding Parameters
 
 ```python
 # Load base config
@@ -333,7 +333,7 @@ base_config.dip_params.m1 = 0.75  # Increase first pendulum mass
 runner = SimulationRunner(base_config)
 ```
 
-### Configuration Merging
+## Configuration Merging
 
 ```python
 def merge_configs(base_config, override_config):
@@ -361,7 +361,7 @@ override = load_config('config_override.yaml')
 final_config = merge_configs(base, override)
 ```
 
-### Environment-Based Configuration
+## Environment-Based Configuration
 
 ```python
 import os
@@ -379,7 +379,7 @@ if os.getenv('DIP_DURATION'):
     config.simulation.duration = float(os.getenv('DIP_DURATION'))
 ```
 
----
+
 
 ## Best Practices
 
@@ -403,7 +403,7 @@ class ConfigMetadata:
     author: str
 ```
 
-### 2. Default Values
+## 2. Default Values
 
 **Provide sensible defaults:**
 ```python
@@ -427,7 +427,7 @@ class PSOConfig:
             raise ValueError("Too few iterations (min 20)")
 ```
 
-### 3. Parameter Bounds Validation
+## 3. Parameter Bounds Validation
 
 ```python
 # example-metadata:
@@ -477,7 +477,7 @@ dip_params:
   b2: 0.01     # Second pendulum friction (N⋅m⋅s/rad)
 ```
 
----
+
 
 ## Integration Patterns
 
@@ -517,7 +517,7 @@ config_file = f'config_{env}.yaml'
 config = load_config(config_file)
 ```
 
-### Pattern 2: Scenario-Based Configuration
+## Pattern 2: Scenario-Based Configuration
 
 ```python
 # example-metadata:
@@ -550,7 +550,7 @@ for scenario in scenarios:
     results[scenario] = runner.run(controller)
 ```
 
----
+
 
 ## Troubleshooting
 
@@ -585,7 +585,7 @@ controllers:
     gains: [10, 8, 15, 12, 0.5]     # ✅ Correct
 ```
 
-### Problem: Unknown fields in config
+## Problem: Unknown fields in config
 
 **Cause:** Typo or deprecated field
 
@@ -596,7 +596,7 @@ config = load_config('config.yaml', allow_unknown=False)
 # Will raise error if unknown fields present
 ```
 
----
+
 
 ## Next Steps
 
@@ -605,6 +605,6 @@ config = load_config('config.yaml', allow_unknown=False)
 - **Configure controllers:** [Controllers API Guide](controllers.md)
 - **Technical details:** [Config Technical Reference](../../reference/config/__init__.md)
 
----
+
 
 **Last Updated:** October 2025

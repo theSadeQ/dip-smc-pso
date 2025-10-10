@@ -59,7 +59,7 @@ cd D:\Projects\main
 powershell -NoProfile -ExecutionPolicy Bypass -File .\.dev_tools\claude-backup.ps1 -Checkpoint
 ```
 
-### Scheduled Automatic Backups
+## Scheduled Automatic Backups
 
 The Task Scheduler job `ClaudeCode-AutoBackup` runs **every 1 minute** automatically.
 
@@ -125,7 +125,7 @@ The backup script requires Git authentication to push to GitHub. Configure crede
 git config --global credential.helper manager-core
 ```
 
-#### Option 2: Personal Access Token (PAT)
+## Option 2: Personal Access Token (PAT)
 
 ```bash
 # Generate PAT at: https://github.com/settings/tokens
@@ -136,7 +136,7 @@ git config --global credential.helper store
 git push  # Enter PAT when prompted
 ```
 
-#### Verify Authentication
+## Verify Authentication
 
 ```bash
 # Test push without changes
@@ -189,7 +189,7 @@ $env:CLAUDE_TOKENS_LEFT = 1500
 .\claude-backup.ps1  # Will force backup
 ```
 
-### Log File Inspection
+## Log File Inspection
 
 All backup operations are logged to `.dev_tools/backup/backup.log`:
 
@@ -222,14 +222,14 @@ git config --global credential.helper manager-core
 git push  # Authenticate when prompted
 ```
 
-#### "index.lock exists"
+## "index.lock exists"
 
 ```bash
 # Solution: Remove stale lock file
 rm .git/index.lock
 ```
 
-#### "Not a git repository"
+## "Not a git repository"
 
 ```powershell
 # Solution: Verify you're in the correct directory
@@ -237,7 +237,7 @@ cd D:\Projects\main
 git rev-parse --show-toplevel  # Should output repository root
 ```
 
-#### "Remote URL mismatch"
+## "Remote URL mismatch"
 
 ```bash
 # Solution: Script auto-corrects, but you can verify manually
@@ -245,7 +245,7 @@ git remote -v
 # Should show: origin  https://github.com/theSadeQ/dip-smc-pso.git
 ```
 
-### Validation Test
+## Validation Test
 
 To smoke-test the backup system:
 

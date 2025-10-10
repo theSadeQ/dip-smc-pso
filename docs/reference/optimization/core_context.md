@@ -13,7 +13,7 @@ Optimization context and configuration management.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -91,7 +91,7 @@ Get list of available optimization algorithms.
 
 [View full source →](#method-optimizationcontext-get_available_algorithms)
 
----
+
 
 ## Functions
 
@@ -123,7 +123,7 @@ OptimizationResult
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

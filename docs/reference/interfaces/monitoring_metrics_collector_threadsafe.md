@@ -26,7 +26,7 @@ Memory usage bounded and monitored.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -44,7 +44,7 @@ Metric type enumeration.
 :linenos:
 ```
 
----
+
 
 ### `AggregationType`
 
@@ -60,7 +60,7 @@ Aggregation type enumeration.
 :linenos:
 ```
 
----
+
 
 ### `MetricValue`
 
@@ -74,7 +74,7 @@ Individual metric value with metadata.
 :linenos:
 ```
 
----
+
 
 ### `ThreadSafeMetric`
 
@@ -150,7 +150,7 @@ Estimate memory usage of stored values.
 
 [View full source →](#method-threadsafemetric-_estimate_memory_usage)
 
----
+
 
 ### `ThreadSafeMetricsCollector`
 
@@ -257,7 +257,7 @@ Cleanup resources.
 
 [View full source →](#method-threadsafemetricscollector-cleanup)
 
----
+
 
 ## Functions
 
@@ -273,7 +273,7 @@ Get global thread-safe metrics collector (singleton pattern).
 :linenos:
 ```
 
----
+
 
 ### `reset_global_threadsafe_collector()`
 
@@ -287,7 +287,7 @@ Reset global thread-safe collector.
 :linenos:
 ```
 
----
+
 
 ### `collect_metric(metric_name, value, tags, metadata)`
 
@@ -301,7 +301,7 @@ Collect metric using global thread-safe collector.
 :linenos:
 ```
 
----
+
 
 ### `register_metric(name, metric_type, max_values, retention_window)`
 
@@ -315,7 +315,7 @@ Register metric using global thread-safe collector.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

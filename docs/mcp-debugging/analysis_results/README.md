@@ -1,4 +1,5 @@
 # Code Quality Analysis Results This directory contains code quality analysis results from the **mcp-analyzer** MCP server. ## 📁 Directory Structure ```
+
 analysis_results/
 ├── README.md (this file)
 ├── RUFF_FINDINGS_{timestamp}.md # RUFF linting results
@@ -49,6 +50,7 @@ python scripts/mcp_validation/run_complete_code_quality_analysis.py --resume # S
 python scripts/mcp_validation/run_complete_code_quality_analysis.py --phase 1 # Dry run (file discovery only)
 python scripts/mcp_validation/run_complete_code_quality_analysis.py --dry-run
 ``` ## 📋 Report Usage Guidelines ### For Developers
+
 1. Review RUFF findings for your modified files before committing
 2. Address high-priority issues (E9xx, F82x critical errors)
 3. Run auto-fix for safe fixable issues
@@ -61,6 +63,7 @@ python scripts/mcp_validation/run_complete_code_quality_analysis.py --dry-run
 3. Track trends over time (compare timestamps)
 4. Generate quality badges from metrics ## 🗂️ Historical Comparison To compare two analysis runs: ```bash
 # Example: Compare before/after cleanup
+
 python scripts/mcp_validation/compare_analysis.py \ docs/mcp-debugging/analysis_results/SUMMARY_REPORT_20251006_100000.json \ docs/mcp-debugging/analysis_results/SUMMARY_REPORT_20251006_150000.json
 ``` *(Comparison script to be created if needed)* ## 📚 Related Documentation - **Execution Plan**: `docs/mcp-debugging/workflows/CODE_QUALITY_ANALYSIS_PLAN.md`
 - **Validation Workflow**: `docs/mcp-debugging/workflows/VALIDATION_WORKFLOW.md`
@@ -68,6 +71,7 @@ python scripts/mcp_validation/compare_analysis.py \ docs/mcp-debugging/analysis_
 - **Automation Script**: `scripts/mcp_validation/run_complete_code_quality_analysis.py` ## 🚀 Quick Start **First-time analysis**:
 ```bash
 # 1. Read the execution plan
+
 cat docs/mcp-debugging/workflows/CODE_QUALITY_ANALYSIS_PLAN.md # 2. Run full analysis (7-12 hours)
 python scripts/mcp_validation/run_complete_code_quality_analysis.py # 3. Review reports in this directory
 ls docs/mcp-debugging/analysis_results/
@@ -78,5 +82,9 @@ ls docs/mcp-debugging/analysis_results/
 1. Review RUFF_FINDINGS for auto-fix opportunities
 2. Review VULTURE_FINDINGS for dead code removal
 3. Execute safe auto-fixes if approved
-4. Create follow-up issues for manual review items --- **Last Updated**: 2025-10-06
+4. Create follow-up issues for manual review items
+
+---
+
+**Last Updated**: 2025-10-06
 **Status**: Awaiting first analysis run

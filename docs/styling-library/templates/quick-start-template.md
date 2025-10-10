@@ -13,18 +13,21 @@ Get started with React Bits components in 3 minutes! ⚡
 ## 🚀 3 Ways to Use Components
 
 ### Method 1: Browse & Copy (Recommended)
+
 1. Open the index: [`COMPONENTS_INDEX.md`](./COMPONENTS_INDEX.md)
 2. Find a component you like (e.g., "ShinyText")
 3. Navigate to: `src/content/TextAnimations/ShinyText/`
 4. Copy the component files to your project
 
 ### Method 2: Just Ask Claude
+
 Simply say:
 > "Add the **MagicBento** component from React Bits"
 
 Claude will automatically find and integrate it!
 
 ### Method 3: Install the Package
+
 ```bash
 npm install react-bits
 ```
@@ -32,6 +35,7 @@ npm install react-bits
 ## 🎯 Popular Components for Your Dashboard
 
 ### Best for Hero Sections
+
 ```
 ✨ Aurora - Aurora borealis background
 🌟 GradientText - Animated gradient text
@@ -40,6 +44,7 @@ npm install react-bits
 ```
 
 ### Best for Cards & Lists
+
 ```
 🎴 BounceCards - Bouncing card effects
 📊 MagicBento - Bento grid layout
@@ -48,6 +53,7 @@ npm install react-bits
 ```
 
 ### Best for Navigation
+
 ```
 🔘 Dock - macOS-style dock
 💊 PillNav - Pill navigation
@@ -56,6 +62,7 @@ npm install react-bits
 ```
 
 ### Best for Text Effects
+
 ```
 ⚡ GlitchText - Glitch animation
 🎯 ScrambledText - Scramble effect
@@ -64,6 +71,7 @@ npm install react-bits
 ```
 
 ### Best for Backgrounds
+
 ```
 🌌 Galaxy - Space effect
 ⚡ Lightning - Electric effects
@@ -84,6 +92,7 @@ ComponentName/
 ## 💡 Quick Examples
 
 ### Example 1: Add ShinyText to Dashboard
+
 ```tsx
 // 1. Copy from: src/content/TextAnimations/ShinyText/component.tsx
 // 2. Paste to: your-project/components/ShinyText.tsx
@@ -101,6 +110,7 @@ export default function Dashboard() {
 ```
 
 ### Example 2: Add Aurora Background
+
 ```tsx
 // 1. Copy from: src/content/Backgrounds/Aurora/component.tsx
 // 2. Paste to: your-project/components/Aurora.tsx
@@ -121,6 +131,7 @@ export default function Page() {
 ```
 
 ### Example 3: Add MagicBento Grid
+
 ```tsx
 // 1. Copy from: src/content/Components/MagicBento/component.tsx
 // 2. Paste to: your-project/components/MagicBento.tsx
@@ -143,21 +154,25 @@ export default function Dashboard() {
 Most components work with minimal dependencies. Common requirements:
 
 ### Framer Motion Components
+
 ```bash
 npm install framer-motion
 ```
 
 ### GSAP Components
+
 ```bash
 npm install gsap
 ```
 
 ### React Spring Components
+
 ```bash
 npm install @react-spring/web
 ```
 
 ### Three.js Components (3D effects)
+
 ```bash
 npm install three @react-three/fiber @react-three/drei
 ```
@@ -175,9 +190,11 @@ Your dashboard already uses Tailwind, so you're good to go!
 ## 📚 Finding Components
 
 ### By Name
+
 Use the alphabetical index in `COMPONENTS_INDEX.md`
 
 ### By Category
+
 Browse directories:
 - `src/content/Animations/`
 - `src/content/TextAnimations/`
@@ -185,6 +202,7 @@ Browse directories:
 - `src/content/Backgrounds/`
 
 ### By Use Case
+
 Check the "By Use Case" section in the index
 
 ## 🎯 Integration Checklist
@@ -240,7 +258,7 @@ export default function Dashboard() {
 }
 ```
 
----
+
 
 **Ready to build stunning UIs!** 🚀
 

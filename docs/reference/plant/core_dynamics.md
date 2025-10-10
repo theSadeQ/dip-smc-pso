@@ -1,4 +1,5 @@
 # plant.core.dynamics
+
 <!-- Enhanced by Week 8 Phase 2 --> **Source:** `src\plant\core\dynamics.py` ## Module Overview Plant core dynamics compatibility module. This module provides backward compatibility for test modules that expect
 plant dynamics components at src.plant.core.dynamics. All functionality
 is re-exported from the actual implementation locations. ## Architecture Diagram ```{mermaid}
@@ -51,6 +52,7 @@ control = np.array([5.0]) # Force in Newtons
 state_dot = dynamics.step(state, control, t=0.0)
 print(f"State derivative: {state_dot}")
 ``` ### Example 2: Advanced Configuration Configure with custom parameters: ```python
+
 from src.plant.models.simplified import SimplifiedDIPDynamics # numerical stability features
 dynamics = SimplifiedDIPDynamics( config=config, enable_energy_monitoring=True, numerical_tolerance=1e-8, use_numba=True # JIT compilation for performance
 ) # Configure integration parameters
@@ -60,6 +62,7 @@ dynamics.set_integration_params( method='rk45', atol=1e-8, rtol=1e-6
 from src.plant.exceptions import ( NumericalInstabilityError, StateValidationError, ConfigurationError
 ) try: # Risky operation state_dot = dynamics.step(state, control, t) except NumericalInstabilityError as e: print(f"Numerical instability detected: {e}") # Fallback: reduce timestep, increase regularization dynamics.reset_numerical_params(stronger_regularization=True) except StateValidationError as e: print(f"Invalid state: {e}") # Fallback: clip state to valid bounds state = validator.clip_to_valid(state) except ConfigurationError as e: print(f"Configuration error: {e}") # Fallback: use default configuration config = get_default_config()
 ``` ### Example 4: Performance Optimization Optimize for computational efficiency: ```python
+
 import time
 from numba import njit # Numba JIT compilation for hot loops
 @njit
@@ -82,8 +85,13 @@ runner = SimulationRunner( controller=controller, dynamics=dynamics, duration=5.
 print(f"Settling time: {result.settling_time:.2f}s")
 print(f"Control effort: {result.control_effort:.2f}")
 ``` ## Complete Source Code ```{literalinclude} ../../../src/plant/core/dynamics.py
+
 :language: python
 :linenos:
-``` --- ## Dependencies This module imports: - `from ...core.dynamics import *`
+```
+
+---
+
+## Dependencies This module imports: - `from ...core.dynamics import *`
 - `from ..models.dynamics import *`
 - `from ...core.dynamics import DIPDynamics, DoubleInvertedPendulum, DIPParams`

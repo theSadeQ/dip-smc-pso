@@ -1,12 +1,23 @@
 # Complete Codebase Documentation Plan **Project**: Double Inverted Pendulum Sliding Mode Control with PSO Optimization
+
 **Total Duration**: 6-8 Weeks (1-2 Months)
 **Estimated Effort**: 160-200 hours
-**Target**: World-class, research-grade documentation with embedded source code --- ## Overview This documentation initiative will transform the DIP-SMC-PSO codebase into A, publication-ready knowledge base by: ✅ **Embedding all 316 Python source files** into Sphinx documentation
+**Target**: World-class, research-grade documentation with embedded source code
+
+---
+
+## Overview This documentation initiative will transform the DIP-SMC-PSO codebase into A, publication-ready knowledge base by: ✅ **Embedding all 316 Python source files** into Sphinx documentation
+
 ✅ **Providing line-by-line explanations** for critical algorithms
 ✅ **Documenting mathematical foundations** with LaTeX equations and proofs
 ✅ **Creating 50+ working code examples** and 18 tutorials
 ✅ **Generating 40+ architecture diagrams** with Mermaid
-✅ **Establishing automated documentation workflows** for maintenance --- ## Documentation Goals ### Quantitative Targets
+✅ **Establishing automated documentation workflows** for maintenance
+
+---
+
+## Documentation Goals ### Quantitative Targets
+
 - **316** Python files documented with embedded source code
 - **450+** new documentation pages created
 - **80,000-100,000** lines of markdown content
@@ -17,14 +28,24 @@
 - **Research-grade**: Suitable for academic publication and citation
 - **Onboarding-optimized**: New developers productive in days, not weeks
 - **Self-contained**: Complete reference for every component
-- **Educational**: Teach control theory and PSO from first principles --- ## Weekly Breakdown ### [Week 1: Foundation & Automation](week_1_foundation_automation.md) ✅ READY **Duration**: 5-7 days | **Effort**: 8-10 hours **Objectives**:
+- **Educational**: Teach control theory and PSO from first principles
+
+---
+
+## Weekly Breakdown ### [Week 1: Foundation & Automation](week_1_foundation_automation.md) ✅ READY **Duration**: 5-7 days | **Effort**: 8-10 hours **Objectives**:
+
 - Create automated documentation generator script
 - Design reusable templates (module/class/function)
 - Configure Sphinx for code embedding with literalinclude **Deliverables**:
 - `scripts/docs/generate_code_docs.py` (automation tool)
 - 3 documentation templates (module/class/function)
 - 14 module index pages with navigation
-- Enhanced Sphinx configuration **Impact**: 80% reduction in manual documentation effort --- ### [Week 2: Controllers Module](week_2_controllers_module.md) ✅ COMPLETE **Duration**: 10-14 days | **Effort**: 25-30 hours **Priority**: HIGHEST (core functionality) **Coverage**:
+- Enhanced Sphinx configuration **Impact**: 80% reduction in manual documentation effort
+
+---
+
+### [Week 2: Controllers Module](week_2_controllers_module.md) ✅ COMPLETE **Duration**: 10-14 days | **Effort**: 25-30 hours **Priority**: HIGHEST (core functionality) **Coverage**:
+
 - SMC variants (classical, adaptive, super-twisting, hybrid)
 - Controller factory and PSO integration
 - Base interfaces and control primitives
@@ -33,7 +54,12 @@
 - Control law mathematical foundations
 - Lyapunov stability analysis
 - Usage examples and benchmarks **Status**: ✅ COMPLETE (7,450+ lines delivered)
-**Document**: `week_2_controllers_module.md` | **Summary**: `week_2_completion_summary.md` --- ### [Week 3: Optimization & Simulation](week_3_optimization_simulation.md) ✅ PLANNED **Duration**: 10-14 days | **Effort**: 25-30 hours **Coverage**:
+**Document**: `week_2_controllers_module.md` | **Summary**: `week_2_completion_summary.md`
+
+---
+
+### [Week 3: Optimization & Simulation](week_3_optimization_simulation.md) ✅ PLANNED **Duration**: 10-14 days | **Effort**: 25-30 hours **Coverage**:
+
 - PSO optimization module (~60 files)
 - Simulation engine and dynamics (~42 files)
 - Batch simulation and Numba vectorization
@@ -43,19 +69,34 @@
 - Performance optimization techniques
 - Numerical integration accuracy analysis
 - 9+ tutorials, 30+ code examples **Status**: 📋 PLANNED (estimated ~14,680 lines)
-**Document**: ✅ `week_3_optimization_simulation.md` (plan complete) --- ### Week 4: Supporting Modules (79 files) **Duration**: 7 days | **Effort**: 20-25 hours **Coverage**:
+**Document**: ✅ `week_3_optimization_simulation.md` (plan complete)
+
+---
+
+### Week 4: Supporting Modules (79 files) **Duration**: 7 days | **Effort**: 20-25 hours **Coverage**:
+
 - Plant models (27 files) - physical equations
 - Interfaces (46 files) - protocols and types
 - Configuration (6 files) - Pydantic schemas **Deliverables**:
 - Physical system derivations
 - Type annotations and validation
-- Configuration schema documentation **Document**: `week_4_supporting_modules.md` (to be created) --- ### Week 5: Analysis & Utilities (73 files) **Duration**: 7 days | **Effort**: 20-25 hours **Coverage**:
+- Configuration schema documentation **Document**: `week_4_supporting_modules.md` (to be created)
+
+---
+
+### Week 5: Analysis & Utilities (73 files) **Duration**: 7 days | **Effort**: 20-25 hours **Coverage**:
+
 - Analysis module (30 files) - metrics, stability, fault detection
 - Utils module (32 files) - validation, monitoring, reproducibility
 - Benchmarks (11 files) - performance testing **Deliverables**:
 - Performance metrics formulas (ISE, ITAE, RMSE)
 - Stability analysis methods (Lyapunov, eigenvalue)
-- Monitoring and visualization code **Document**: `week_5_analysis_utilities.md` (to be created) --- ### Week 6: Tutorials & Examples (68 items) **Duration**: 7 days | **Effort**: 25-30 hours **Coverage**:
+- Monitoring and visualization code **Document**: `week_5_analysis_utilities.md` (to be created)
+
+---
+
+### Week 6: Tutorials & Examples (68 items) **Duration**: 7 days | **Effort**: 25-30 hours **Coverage**:
+
 - Getting Started (5 tutorials)
 - Advanced Topics (8 tutorials)
 - Developer Guides (5 tutorials)
@@ -63,7 +104,12 @@
 - Beginner to advanced learning path
 - Standalone executable examples
 - Developer contribution guides
-- Best practices and patterns **Document**: `week_6_tutorials_examples.md` (to be created) --- ### Week 7: Architecture & Diagrams (40+ diagrams) **Duration**: 7 days | **Effort**: 15-20 hours **Coverage**:
+- Best practices and patterns **Document**: `week_6_tutorials_examples.md` (to be created)
+
+---
+
+### Week 7: Architecture & Diagrams (40+ diagrams) **Duration**: 7 days | **Effort**: 15-20 hours **Coverage**:
+
 - System architecture diagrams
 - Module-level class hierarchies
 - Sequence diagrams (key workflows)
@@ -72,7 +118,12 @@
 - Visual documentation system
 - Mermaid diagram integration
 - Interactive architecture explorer
-- Design pattern documentation **Document**: `week_7_architecture_diagrams.md` (to be created) --- ### Week 8: Mathematical Foundations & Polish (30 docs) **Duration**: 7 days | **Effort**: 20-25 hours **Coverage**:
+- Design pattern documentation **Document**: `week_7_architecture_diagrams.md` (to be created)
+
+---
+
+### Week 8: Mathematical Foundations & Polish (30 docs) **Duration**: 7 days | **Effort**: 20-25 hours **Coverage**:
+
 - Control theory foundations (Lyapunov, sliding surfaces)
 - PSO convergence proofs
 - Numerical methods analysis
@@ -81,7 +132,12 @@
 - Mathematical theory documents with LaTeX
 - Cross-referenced documentation
 - index and glossary
-- Final validation and polish **Document**: `week_8_foundations_polish.md` (to be created) --- ## Progress Tracking ### Overall Status | Week | Status | Files | Effort | Start Date | End Date |
+- Final validation and polish **Document**: `week_8_foundations_polish.md` (to be created)
+
+---
+
+## Progress Tracking ### Overall Status | Week | Status | Files | Effort | Start Date | End Date |
+
 |------|--------|-------|--------|------------|----------|
 | 1 | ✅ COMPLETE | N/A | 8-10h | 2025-09-27 | 2025-10-01 |
 | 2 | ✅ COMPLETE | 55 | 25-30h | 2025-10-01 | 2025-10-04 |
@@ -97,7 +153,11 @@ Diagram Progress: 0% (0/40+ diagrams)
 Theory Documents: 13% (4/30 documents) - Week 2 foundations
 Overall Progress: 25% (Weeks 1-2 complete, Week 3 planned) Week 2 Achievement: 7,450+ lines delivered (164% of 4,550 target)
 Week 3 Estimated: 14,680+ lines planned
-``` **Updated**: 2025-10-04 (Week 3 plan created, Week 2 complete) --- ## Success Criteria ### Phase 1 (Weeks 1-4): Foundation & Core
+``` **Updated**: 2025-10-04 (Week 3 plan created, Week 2 complete)
+
+---
+
+## Success Criteria ### Phase 1 (Weeks 1-4): Foundation & Core
 ✅ 100% automation infrastructure operational
 ✅ Controllers module fully documented (highest priority)
 ✅ Core functionality (optimization, simulation) documented
@@ -114,7 +174,11 @@ Week 3 Estimated: 14,680+ lines planned
 ✅ All code examples tested and working
 ✅ Sphinx builds with 0 warnings
 ✅ Documentation search fully functional
-✅ Mobile-responsive design --- ## Automation Strategy ### Week 1 Foundation
+✅ Mobile-responsive design
+
+---
+
+## Automation Strategy ### Week 1 Foundation
 - **Documentation Generator**: AST-based automation for structure
 - **Template System**: Consistent formatting across all pages
 - **Validation Tools**: Continuous quality checks ### Ongoing Automation
@@ -124,7 +188,11 @@ Week 3 Estimated: 14,680+ lines planned
 - **Code Sync**: Flag outdated documentation ### Maintenance
 - **Pre-commit Hooks**: Enforce documentation for new files
 - **Monthly Audits**: Auto-scan for missing docs
-- **Version Control**: Track documentation changes with code --- ## Risk Management ### Critical Risks | Risk | Impact | Mitigation |
+- **Version Control**: Track documentation changes with code
+
+---
+
+## Risk Management ### Critical Risks | Risk | Impact | Mitigation |
 |------|--------|------------|
 | Automation complexity | Timeline delay | Start simple, iterate in Week 2 |
 | Scope creep (too detailed) | Burnout | Prioritize controllers/optimization |
@@ -133,7 +201,11 @@ Week 3 Estimated: 14,680+ lines planned
 - **Buffer Time**: 20% buffer in each week
 - **Checkpoints**: Review at weeks 2, 4, 6, 8
 - **Flexibility**: Can extend to 10 weeks if needed
-- **MVP**: Weeks 1-4 create usable documentation --- ## Documentation Standards ### Code Embedding Rules
+- **MVP**: Weeks 1-4 create usable documentation
+
+---
+
+## Documentation Standards ### Code Embedding Rules
 1. **Always embed full source code** using literalinclude
 2. **Add line numbers** for reference
 3. **Emphasize key lines** (algorithms, control laws)
@@ -149,9 +221,14 @@ Week 3 Estimated: 14,680+ lines planned
 1. **Conversational tone**: Informal, educational
 2. **Active voice**: "The controller computes..." not "Is computed..."
 3. **Complete thoughts**: Don't assume prior knowledge
-4. **Cross-reference liberally**: Link related concepts --- ## Tools & Infrastructure ### Required Software
+4. **Cross-reference liberally**: Link related concepts
+
+---
+
+## Tools & Infrastructure ### Required Software
 ```bash
 # Documentation tools
+
 sphinx>=5.0
 sphinx-copybutton>=0.5.0
 sphinx-togglebutton>=0.3.0
@@ -163,6 +240,7 @@ linkchecker # Check for broken links
 pytest>=7.0 # Test code examples
 ``` ### Scripts Location
 ```
+
 scripts/docs/
 ├── generate_code_docs.py # Week 1: Main generator
 ├── validate_code_docs.py # Week 1: Validation
@@ -173,25 +251,34 @@ scripts/docs/
 ``` ### CI/CD Integration
 ```yaml
 # .github/workflows/docs.yml (to be created)
+
 name: Documentation CI
 on: [push, pull_request]
 jobs: build-docs: runs-on: ubuntu-latest steps: - name: Build Sphinx docs - name: Validate links - name: Test code examples - name: Check coverage
-``` --- ## Getting Started ### For Documentation Contributors **1. Set up environment**:
+```
+
+---
+
+## Getting Started ### For Documentation Contributors **1. Set up environment**:
 ```bash
+
 cd D:\Projects\main
 pip install -r docs/requirements.txt
 ``` **2. Start with Week 1**:
 ```bash
 # Read the plan
+
 cat docs/plans/documentation/week_1_foundation_automation.md # Create the generator script
 python scripts/docs/generate_code_docs.py --help
 ``` **3. Generate documentation**:
 ```bash
 # For a single module
+
 python scripts/docs/generate_code_docs.py --module controllers # For all modules
 python scripts/docs/generate_code_docs.py --all
 ``` **4. Build and preview**:
 ```bash
+
 cd docs/
 make html
 open _build/html/index.html
@@ -203,11 +290,19 @@ open _build/html/index.html
 - [ ] Ensure visual quality and formatting **Feedback locations**:
 - GitHub Issues: Use `documentation` label
 - Pull Requests: Review generated docs
-- Discussion: See project communication channels --- ## Milestones & Celebrations ### Week 1 🎯
+- Discussion: See project communication channels
+
+---
+
+## Milestones & Celebrations ### Week 1 🎯
 🎉 **Automation working!** - Foundation for 80% efficiency gain ### Week 4 🏆
 🎉 **Core docs complete!** - Controllers, optimization, simulation documented ### Week 6 🚀
 🎉 **All code documented!** - 316 files embedded with explanations ### Week 8 🏅
-🎉 **World-class docs!** - Publication-ready, research-grade documentation --- ## Resources ### Documentation References
+🎉 **World-class docs!** - Publication-ready, research-grade documentation
+
+---
+
+## Resources ### Documentation References
 - [Sphinx Documentation](https://www.sphinx-doc.org/)
 - [MyST Parser](https://myst-parser.readthedocs.io/)
 - [Mermaid Diagrams](https://mermaid.js.org/)
@@ -217,10 +312,18 @@ open _build/html/index.html
 - [DOCUMENTATION_SYSTEM.md](../../DOCUMENTATION_SYSTEM.md) - Current docs ### Control Theory References
 - Sliding Mode Control: Utkin et al. (2009)
 - PSO: Kennedy & Eberhart (1995)
-- Inverted Pendulum: Åström & Furuta (2000) --- ## Contact & Support **Project Repository**: https://github.com/theSadeQ/dip-smc-pso.git **Documentation Questions**:
+- Inverted Pendulum: Åström & Furuta (2000)
+
+---
+
+## Contact & Support **Project Repository**: https://github.com/theSadeQ/dip-smc-pso.git **Documentation Questions**:
 - Create GitHub issue with `documentation` label
 - Check existing plans in `docs/plans/documentation/`
-- Review `CLAUDE.md` for project conventions **Contribution Guide**: See `docs/CONTRIBUTING.md` --- ## Appendix: File Inventory ### Module Breakdown (316 files) | Module | Files | Priority | Week |
+- Review `CLAUDE.md` for project conventions **Contribution Guide**: See `docs/CONTRIBUTING.md`
+
+---
+
+## Appendix: File Inventory ### Module Breakdown (316 files) | Module | Files | Priority | Week |
 |--------|-------|----------|------|
 | controllers | 55 | CRITICAL | 2 |
 | optimization | 50 | HIGH | 3 |
@@ -238,7 +341,11 @@ open _build/html/index.html
 - Tutorials: 18 pages
 - Examples: 50+ pages
 - Architecture: 40+ pages
-- **Total**: **450+ pages** --- **Plan Version**: 1.0
+- **Total**: **450+ pages**
+
+---
+
+**Plan Version**: 1.0
 **Created**: 2025-10-03
 **Last Updated**: 2025-10-03
 **Status**: Week 1 ready for execution

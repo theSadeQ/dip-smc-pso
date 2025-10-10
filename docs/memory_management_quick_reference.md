@@ -28,7 +28,7 @@ result = simulate(controller, duration=5.0)
 # Done - automatic cleanup
 ```
 
-### Pattern 2: Server Deployment (Production)
+## Pattern 2: Server Deployment (Production)
 
 ```python
 from src.controllers.smc import HybridAdaptiveSTASMC
@@ -186,7 +186,7 @@ if iteration % 1000 == 999:
     history = controller.initialize_history()
 ```
 
-### Issue: PSO optimization OOM
+## Issue: PSO optimization OOM
 
 **Solution:** Cleanup every 100 evaluations
 ```python

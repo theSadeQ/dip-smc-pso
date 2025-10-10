@@ -132,7 +132,7 @@ def compute_control(self, state: np.ndarray):
     x, theta1, theta2 = state[0], state[1], state[2]  # Views
 ```
 
-### ❌ Pattern B: Intermediate Array Copies (NOT PRESENT)
+## ❌ Pattern B: Intermediate Array Copies (NOT PRESENT)
 
 ```python
 # ❌ ANTI-PATTERN (not found in our controllers)
@@ -167,7 +167,7 @@ def _compute_equivalent_control(self, state: np.ndarray):
 # All controllers use the FASTER view-based approach
 ```
 
-### Control Loop Performance
+## Control Loop Performance
 
 | Controller               | Compute Time | Memory Pattern      | Status  |
 |--------------------------|--------------|---------------------|---------|
@@ -196,7 +196,7 @@ positions = state[:3]   # View
 velocities = state[3:].copy()  # Only if mutating!
 ```
 
-### Rule 2: Only Copy When Mutating
+## Rule 2: Only Copy When Mutating
 
 ```python
 # ✅ GOOD: Copy only if modifying
@@ -207,7 +207,7 @@ state_modified[0] = new_value
 state[3:] += acceleration * dt  # Safe mutation via view
 ```
 
-### Rule 3: Prefer Direct Indexing for Scalars
+## Rule 3: Prefer Direct Indexing for Scalars
 
 ```python
 # ✅ GOOD: Scalar extraction
@@ -218,7 +218,7 @@ theta1 = state[1]
 x = state[0:1]  # Returns array, not scalar
 ```
 
-### Rule 4: Use Numba for Performance-Critical Paths
+## Rule 4: Use Numba for Performance-Critical Paths
 
 ```python
 # ✅ EXCELLENT: Numba-compiled core
@@ -244,7 +244,7 @@ $ grep -r "state\[" src/controllers/smc/*.py
 # Result: 12 matches - all direct indexing (views)
 ```
 
-### Test Suite
+## Test Suite
 
 ```bash
 # All controller tests pass
@@ -252,7 +252,7 @@ $ pytest tests/test_controllers/ -v
 # Result: 495 passed, 0 failed
 ```
 
-### Memory Profiling
+## Memory Profiling
 
 ```python
 # example-metadata:

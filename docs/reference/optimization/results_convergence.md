@@ -13,7 +13,7 @@ Convergence monitoring and analysis for optimization algorithms.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -63,7 +63,7 @@ Get convergence history data.
 
 [View full source →](#method-convergencemonitor-convergence_history)
 
----
+
 
 ### `ConvergenceAnalyzer`
 
@@ -121,7 +121,7 @@ Compare multiple convergence curves.
 
 [View full source →](#method-convergenceanalyzer-compare_convergence_curves)
 
----
+
 
 ## Dependencies
 

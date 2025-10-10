@@ -19,7 +19,7 @@ Provides optimizations for:
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -59,7 +59,7 @@ Pre-compile default configuration for a controller type.
 
 [View full source →](#method-controllerprecompiler-_precompile_default_config)
 
----
+
 
 ### `ControllerInstanceCache`
 
@@ -103,7 +103,7 @@ Clear all cached instances.
 
 [View full source →](#method-controllerinstancecache-clear)
 
----
+
 
 ### `FactoryOptimizer`
 
@@ -171,7 +171,7 @@ Precompile all controller configurations.
 
 [View full source →](#method-factoryoptimizer-precompile_configurations)
 
----
+
 
 ## Functions
 
@@ -187,7 +187,7 @@ Get the global factory optimizer instance.
 :linenos:
 ```
 
----
+
 
 ### `optimize_controller_creation(func)`
 
@@ -201,7 +201,7 @@ Decorator to optimize controller creation functions.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

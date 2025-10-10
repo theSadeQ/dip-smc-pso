@@ -5,6 +5,7 @@ This guide covers deploying the DIP_SMC_PSO Streamlit application locally and on
 ## Quick Start
 
 ### Local Development
+
 ```bash
 # Install Streamlit-specific dependencies
 pip install -r requirements-streamlit.txt
@@ -15,7 +16,7 @@ streamlit run streamlit_app.py
 # Access at http://localhost:8501
 ```
 
-### Performance Features
+## Performance Features
 
 The app includes several performance optimizations:
 
@@ -82,7 +83,7 @@ docker build -t dip-smc-pso-app .
 docker run -p 8501:8501 dip-smc-pso-app
 ```
 
-### 3. Heroku Deployment
+## 3. Heroku Deployment
 
 1. **Create required files**:
 
@@ -115,7 +116,7 @@ heroku create your-app-name
 git push heroku main
 ```
 
-### 4. AWS EC2 / VPS Deployment
+## 4. AWS EC2 / VPS Deployment
 
 ```bash
 # Install dependencies
@@ -192,7 +193,7 @@ if st.sidebar.button("Health Check"):
     st.info(f"Cache size: {len(st.session_state)} items")
 ```
 
-### Performance Monitoring
+## Performance Monitoring
 
 - **Cache Hit Rates**: Monitor via Streamlit's built-in cache metrics
 - **Memory Usage**: Watch for cache size growth
@@ -215,18 +216,21 @@ streamlit run streamlit_app.py --logger.level=debug
 ## Features Overview
 
 ### Interactive Controls
+
 - Real-time parameter tuning for all controller types
 - Initial condition customization
-- Disturbance injection capabilities
+- Disturbance injection features
 - Animation controls and export options
 
 ### Visualization Exports
+
 - High-resolution PNG plots (150 DPI)
 - Simulation data in JSON format
 - Complete results in downloadable ZIP files
 - Phase space plots and time series analysis
 
 ### Performance Features
+
 - Intelligent caching for expensive operations
 - Progress bars for long-running PSO optimizations
 - Responsive UI with immediate parameter feedback

@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="../">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -19,16 +19,16 @@
     margin-top: 0.5em;
 }
 </style>
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Model Predictive Control Technical Guide" href="mpc_technical_guide.html" /><link rel="prev" title="Super-Twisting Sliding Mode Control Technical Guide" href="sta_smc_technical_guide.html" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>Hybrid Adaptive Super-Twisting SMC Technical Guide - DIP_SMC_PSO Documentation</title>
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Double-Inverted Pendulum Control System Document Version: 1.0 - DIP_SMC_PSO Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f5a89ef9" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=8a7e329d" />
     
     
 
@@ -163,14 +163,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -180,8 +176,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -189,17 +184,15 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -207,7 +200,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
-  
   
   <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
   
@@ -219,254 +211,12 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">Theory Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture.html">3. System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plant_model.html">1.x Plant Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
-<ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Controllers Module Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
-<li class="toctree-l2"><a class="reference internal" href="factory_system_guide.html">SMC Controller Factory System Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="control_primitives_reference.html">Control Primitives Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../plant/models_guide.html">Plant Models Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../TESTING.html">Testing Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../test_protocols.html">5.x Test Protocols</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../context.html">2. Application Context</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../presentation/results-discussion.html#references">References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference Documentation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography &amp; Academic References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../RELEASE_CHECKLIST.html">Release Checklist</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../symbols.html">Symbols &amp; Units</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../results_readme.html">Results &amp; Plots</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -492,1153 +242,357 @@
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/controllers/hybrid_smc_technical_guide.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/controllers/hybrid_smc_technical_guide.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
 </div><div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
           <p>#==========================================================================================\<br />
 #================== docs/controllers/hybrid_smc_technical_guide.md ===================\<br />
-#==========================================================================================\</p>
-<section class="tex2jax_ignore mathjax_ignore" id="hybrid-adaptive-super-twisting-smc-technical-guide">
-<h1>Hybrid Adaptive Super-Twisting SMC Technical Guide<a class="headerlink" href="#hybrid-adaptive-super-twisting-smc-technical-guide" title="Link to this heading">¶</a></h1>
-<section id="double-inverted-pendulum-control-system">
-<h2>Double-Inverted Pendulum Control System<a class="headerlink" href="#double-inverted-pendulum-control-system" title="Link to this heading">¶</a></h2>
-<p><strong>Document Version</strong>: 1.0
-<strong>Generated</strong>: 2025-09-29
+#==========================================================================================\ # Hybrid Adaptive Super-Twisting SMC Technical Guide</p>
+<section id="double-inverted-pendulum-control-system-document-version-1-0">
+<h1>Double-Inverted Pendulum Control System <strong>Document Version</strong>: 1.0<a class="headerlink" href="#double-inverted-pendulum-control-system-document-version-1-0" title="Link to this heading">¶</a></h1>
+<p><strong>Generated</strong>: 2025-09-29
 <strong>Classification</strong>: Technical Implementation Guide
 <strong>Controller Type</strong>: HybridAdaptiveSTASMC</p>
-</section>
 <hr class="docutils" />
-<section id="executive-summary">
-<h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading">¶</a></h2>
-<p>The Hybrid Adaptive Super-Twisting Sliding Mode Controller represents the most sophisticated control algorithm in the DIP-SMC-PSO framework, combining adaptive parameter estimation with second-order sliding mode control for superior performance on highly nonlinear, coupled systems like the double-inverted pendulum.</p>
-<p><strong>Performance Summary</strong>:</p>
+</section>
+<section id="executive-summary-the-hybrid-adaptive-super-twisting-sliding-mode-controller-represents-the-most-sophisticated-control-algorithm-in-the-dip-smc-pso-framework-combining-adaptive-parameter-estimation-with-second-order-sliding-mode-control-for-improved-performance-on-highly-nonlinear-coupled-systems-like-the-double-inverted-pendulum-performance-summary">
+<h1>Executive Summary The Hybrid Adaptive Super-Twisting Sliding Mode Controller represents the most sophisticated control algorithm in the DIP-SMC-PSO framework, combining adaptive parameter estimation with second-order sliding mode control for improved performance on highly nonlinear, coupled systems like the double-inverted pendulum. <strong>Performance Summary</strong>:<a class="headerlink" href="#executive-summary-the-hybrid-adaptive-super-twisting-sliding-mode-controller-represents-the-most-sophisticated-control-algorithm-in-the-dip-smc-pso-framework-combining-adaptive-parameter-estimation-with-second-order-sliding-mode-control-for-improved-performance-on-highly-nonlinear-coupled-systems-like-the-double-inverted-pendulum-performance-summary" title="Link to this heading">¶</a></h1>
 <ul class="simple">
 <li><p><strong>PSO Optimization Cost</strong>: 0.000000 (perfect optimization convergence)</p></li>
 <li><p><strong>Parameter Count</strong>: 4 primary gains [c1, λ1, c2, λ2]</p></li>
 <li><p><strong>Stability Guarantee</strong>: Finite-time convergence with adaptive robustness</p></li>
 <li><p><strong>Runtime Status</strong>: ✅ <strong>OPERATIONAL</strong> (runtime fix implemented)</p></li>
 </ul>
-</section>
 <hr class="docutils" />
-<section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
-<ol class="arabic simple">
-<li><p><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a></p></li>
-<li><p><a class="reference internal" href="#algorithm-architecture">Algorithm Architecture</a></p></li>
-<li><p><a class="reference internal" href="#implementation-details">Implementation Details</a></p></li>
-<li><p><a class="reference internal" href="#runtime-fix-analysis">Runtime Fix Analysis</a></p></li>
-<li><p><a class="reference internal" href="#parameter-configuration">Parameter Configuration</a></p></li>
-<li><p><a class="reference internal" href="#integration-guide">Integration Guide</a></p></li>
-<li><p><a class="reference internal" href="#performance-characteristics">Performance Characteristics</a></p></li>
-<li><p><a class="reference internal" href="#troubleshooting">Troubleshooting</a></p></li>
+</section>
+<section id="table-of-contents-1-mathematical-foundation">
+<h1>Table of Contents 1. <a class="reference internal" href="#mathematical-foundation"><span class="xref myst">Mathematical Foundation</span></a><a class="headerlink" href="#table-of-contents-1-mathematical-foundation" title="Link to this heading">¶</a></h1>
+<ol class="arabic simple" start="2">
+<li><p><a class="reference internal" href="#algorithm-architecture"><span class="xref myst">Algorithm Architecture</span></a></p></li>
+<li><p><a class="reference internal" href="#implementation-details"><span class="xref myst">Implementation Details</span></a></p></li>
+<li><p><a class="reference internal" href="#runtime-fix-analysis"><span class="xref myst">Runtime Fix Analysis</span></a></p></li>
+<li><p><a class="reference internal" href="#parameter-configuration"><span class="xref myst">Parameter Configuration</span></a></p></li>
+<li><p><a class="reference internal" href="#integration-guide"><span class="xref myst">Integration Guide</span></a></p></li>
+<li><p><a class="reference internal" href="#performance-characteristics"><span class="xref myst">Performance Characteristics</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting"><span class="xref myst">Troubleshooting</span></a></p></li>
 </ol>
-</section>
 <hr class="docutils" />
-<section id="mathematical-foundation">
-<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h2>
-<section id="sliding-surface-design">
-<h3>1. Sliding Surface Design<a class="headerlink" href="#sliding-surface-design" title="Link to this heading">¶</a></h3>
-<p>The hybrid controller employs a unified sliding surface that combines both pendulum joints with optional cart recentering:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>s = c<span class="nb">_</span>1(<span class="k">\dot</span><span class="nb">{</span><span class="k">\theta</span><span class="nb">}_</span>1 + <span class="k">\lambda_</span>1 <span class="k">\theta_</span>1) + c<span class="nb">_</span>2(<span class="k">\dot</span><span class="nb">{</span><span class="k">\theta</span><span class="nb">}_</span>2 + <span class="k">\lambda_</span>2 <span class="k">\theta_</span>2) + k<span class="nb">_</span>c(<span class="k">\dot</span><span class="nb">{</span>x<span class="nb">}</span> + <span class="k">\lambda_c</span> x)
-</pre></div>
-</div>
-<p><strong>Key Properties</strong>:</p>
-<ul class="simple">
-<li><p><strong>Linear Combination</strong>: Weighted sum of position and velocity errors</p></li>
-<li><p><strong>Stability Requirement</strong>: All coefficients c₁, c₂, λ₁, λ₂ &gt; 0</p></li>
-<li><p><strong>Dual Formulation</strong>: Supports both absolute and relative coordinate systems</p></li>
-</ul>
-<section id="absolute-vs-relative-coordinates">
-<h4>1.1 Absolute vs. Relative Coordinates<a class="headerlink" href="#absolute-vs-relative-coordinates" title="Link to this heading">¶</a></h4>
-<p><strong>Absolute Formulation (Default)</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>s<span class="nb">_{</span>abs<span class="nb">}</span> = c<span class="nb">_</span>1(<span class="k">\dot</span><span class="nb">{</span><span class="k">\theta</span><span class="nb">}_</span>1 + <span class="k">\lambda_</span>1 <span class="k">\theta_</span>1) + c<span class="nb">_</span>2(<span class="k">\dot</span><span class="nb">{</span><span class="k">\theta</span><span class="nb">}_</span>2 + <span class="k">\lambda_</span>2 <span class="k">\theta_</span>2)
-</pre></div>
-</div>
-<p><strong>Relative Formulation</strong> (<code class="docutils literal notranslate"><span class="pre">use_relative_surface=True</span></code>):</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>s<span class="nb">_{</span>rel<span class="nb">}</span> = c<span class="nb">_</span>1(<span class="k">\dot</span><span class="nb">{</span><span class="k">\theta</span><span class="nb">}_</span>1 + <span class="k">\lambda_</span>1 <span class="k">\theta_</span>1) + c<span class="nb">_</span>2((<span class="k">\dot</span><span class="nb">{</span><span class="k">\theta</span><span class="nb">}_</span>2-<span class="k">\dot</span><span class="nb">{</span><span class="k">\theta</span><span class="nb">}_</span>1) + <span class="k">\lambda_</span>2 (<span class="k">\theta_</span>2-<span class="k">\theta_</span>1))
-</pre></div>
-</div>
-<p>The relative formulation can improve decoupling between pendulums but may complicate stability analysis.</p>
 </section>
-</section>
-<section id="super-twisting-algorithm">
-<h3>2. Super-Twisting Algorithm<a class="headerlink" href="#super-twisting-algorithm" title="Link to this heading">¶</a></h3>
-<p>The hybrid controller implements a second-order sliding mode algorithm:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>align<span class="nb">}</span>
-u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\sqrt</span><span class="nb">{</span>|s|<span class="nb">}</span> <span class="k">\cdot</span> <span class="k">\text</span><span class="nb">{</span>sat<span class="nb">}</span>(s) + u<span class="nb">_{</span>int<span class="nb">}</span> - k<span class="nb">_</span>d s + u<span class="nb">_{</span>eq<span class="nb">}</span> <span class="k">\\</span>
-<span class="k">\dot</span><span class="nb">{</span>u<span class="nb">}_{</span>int<span class="nb">}</span> <span class="nb">&amp;</span>= -k<span class="nb">_</span>2 <span class="k">\cdot</span> <span class="k">\text</span><span class="nb">{</span>sat<span class="nb">}</span>(s)
-<span class="k">\end</span><span class="nb">{</span>align<span class="nb">}</span>
+<section id="mathematical-foundation-1-sliding-surface-design-the-hybrid-controller-employs-a-unified-sliding-surface-that-combines-both-pendulum-joints-with-optional-cart-recentering-latex">
+<h1>Mathematical Foundation ### 1. Sliding Surface Design The hybrid controller employs a unified sliding surface that combines both pendulum joints with optional cart recentering: ```latex<a class="headerlink" href="#mathematical-foundation-1-sliding-surface-design-the-hybrid-controller-employs-a-unified-sliding-surface-that-combines-both-pendulum-joints-with-optional-cart-recentering-latex" title="Link to this heading">¶</a></h1>
+<p>s = c_1(\dot{\theta}_1 + \lambda_1 \theta_1) + c_2(\dot{\theta}_2 + \lambda_2 \theta_2) + k_c(\dot{x} + \lambda_c x)</p>
+<div class="highlight-**Key notranslate"><div class="highlight"><pre><span></span>- **Linear Combination**: Weighted sum of position and velocity errors
+- **Stability Requirement**: All coefficients c₁, c₂, λ₁, λ₂ &gt; 0
+- **Dual Formulation**: Supports both absolute and relative coordinate systems #### 1.1 Absolute vs. Relative Coordinates **Absolute Formulation (Default)**:
+```latex
+
+s_{abs} = c_1(\dot{\theta}_1 + \lambda_1 \theta_1) + c_2(\dot{\theta}_2 + \lambda_2 \theta_2)
+``` **Relative Formulation** (`use_relative_surface=True`):
+```latex
+
+s_{rel} = c_1(\dot{\theta}_1 + \lambda_1 \theta_1) + c_2((\dot{\theta}_2-\dot{\theta}_1) + \lambda_2 (\theta_2-\theta_1))
+``` The relative formulation can improve decoupling between pendulums but may complicate stability analysis. ### 2. Super-Twisting Algorithm The hybrid controller implements a second-order sliding mode algorithm: ```latex
+\begin{align}
+u &amp;= -k_1 \sqrt{|s|} \cdot \text{sat}(s) + u_{int} - k_d s + u_{eq} \\
+\dot{u}_{int} &amp;= -k_2 \cdot \text{sat}(s)
+\end{align}
+``` **Component Analysis**:
+
+- **√|s| Term**: Provides finite-time convergence
+- **Integral Term**: Eliminates steady-state error
+- **Damping Term**: Improves transient response
+- **Equivalent Control**: Model-based feedforward compensation #### 2.1 Finite-Time Convergence **Convergence Time Bound**:
+```latex
+T_{reach} \leq \frac{2|s(0)|^{1/2}}{\alpha_1^{1/2}}
+``` where α₁ depends on the adaptive gains k₁ and system parameters. ### 3. Adaptive Gain Laws The controller implements state-dependent adaptive laws with anti-windup: ```latex
+
+\begin{align}
+\dot{k}_1 &amp;= \gamma_1 |s| \cdot \tau(|s|) \quad \text{if } |s| &gt; \text{dead\_zone} \\
+\dot{k}_2 &amp;= \gamma_2 |s| \cdot \tau(|s|) \quad \text{if } |s| &gt; \text{dead\_zone} \\
+\dot{k}_i &amp;= -\text{leak\_rate} \quad \text{otherwise}
+\end{align}
+``` **Self-Tapering Function**:
+```latex
+
+\tau(|s|) = \frac{|s|}{|s| + \epsilon_{taper}}
+``` This ensures adaptation slows as the system approaches the sliding surface. ### 4. Lyapunov Stability Analysis **Candidate Lyapunov Function**:
+```latex
+
+V = \frac{1}{2}s^2 + \frac{1}{2\gamma_1}(k_1 - k_1^*)^2 + \frac{1}{2\gamma_2}(k_2 - k_2^*)^2
+``` **Stability Condition**:
+```latex
+
+\dot{V} \leq -\eta |s| + \sigma
+``` where η &gt; 0 ensures convergence and σ represents bounded disturbances.
+
+---
+
+## Algorithm Architecture ### 1. Modular Controller Structure ```python
+# example-metadata:
+# runnable: false class HybridAdaptiveSTASMC: &quot;&quot;&quot; Modular hybrid controller with clear separation of concerns: Components: - Sliding surface computation (absolute/relative modes) - Adaptive gain management (with anti-windup) - Super-twisting control law (finite-time convergent) - Equivalent control (model-based feedforward) - Cart recentering (with hysteresis) &quot;&quot;&quot;
+``` #### 1.1 Key Methods | Method | Purpose | Mathematical Basis |
+
+|--------|---------|-------------------|
+| `_compute_sliding_surface()` | Calculate s(x) | Linear combination of states |
+| `_compute_equivalent_control()` | Model-based ueq | Dynamics inversion |
+| `_compute_taper_factor()` | Adaptive modulation | Self-tapering function |
+| `compute_control()` | Main control loop | Complete STA algorithm | ### 2. Control Flow Architecture ```mermaid
+graph TD A[State Input] --&gt; B[Sliding Surface] B --&gt; C[Dead Zone Check] C --&gt; D[Adaptive Gains] C --&gt; E[Super-Twisting Law] D --&gt; F[Rate Limiting] E --&gt; G[Equivalent Control] F --&gt; H[Anti-Windup] G --&gt; I[Cart Recentering] H --&gt; J[Control Output] I --&gt; J J --&gt; K[Saturation] K --&gt; L[Emergency Reset]
+``` ### 3. Safety and Numerical Stability #### 3.1 Emergency Reset Conditions ```python
+emergency_reset = ( not np.isfinite(u_sat) or abs(u_sat) &gt; max_force * 2 or not np.isfinite(k1_new) or k1_new &gt; k1_max * 0.9 or not np.isfinite(k2_new) or k2_new &gt; k2_max * 0.9 or state_norm &gt; 10.0 or velocity_norm &gt; 50.0
+)
+``` #### 3.2 Numerical Stability Features - **Matrix Regularization**: M_reg = M + ε·I for inertia matrix inversion
+
+- **Finite Value Checking**: All outputs validated for NaN/infinity
+- **Bounded Adaptation**: Gains clipped to [0, k_max]
+- **Rate Limiting**: Prevents sudden gain changes
+
+---
+
+## Implementation Details ### 1. Core Algorithm Implementation #### 1.1 Sliding Surface Computation ```python
+
+# example-metadata:
+
+# runnable: false def _compute_sliding_surface(self, state: np.ndarray) -&gt; float: &quot;&quot;&quot;Compute unified sliding surface with dual formulation support. Mathematical Implementation: s = c1*(θ̇₁ + λ₁*θ₁) + c2*(θ̇₂ + λ₂*θ₂) + cart_term or (relative mode): s = c1*(θ̇₁ + λ₁*θ₁) + c2*((θ̇₂-θ̇₁) + λ₂*(θ₂-θ₁)) + cart_term &quot;&quot;&quot; x, th1, th2, xdot, th1dot, th2dot = state if self.use_relative_surface: rel_dot = th2dot - th1dot rel_ang = th2 - th1 pendulum_term = self.c1 * (th1dot + self.lambda1 * th1) + \ self.c2 * (rel_dot + self.lambda2 * rel_ang) else: pendulum_term = self.c1 * (th1dot + self.lambda1 * th1) + \ self.c2 * (th2dot + self.lambda2 * th2) cart_term = self.cart_gain * (xdot + self.cart_lambda * x) return float(-(pendulum_term - cart_term))
+
+``` #### 1.2 Adaptive Gain Update ```python
+# example-metadata:
+# runnable: false def _update_adaptive_gains(self, abs_s: float, k1_prev: float, k2_prev: float): &quot;&quot;&quot;Update adaptive gains with self-tapering and anti-windup. Implements: - State-based adaptation: γ|s| - Self-tapering: τ(|s|) = |s|/(|s| + ε) - Rate limiting: |k̇| ≤ rate_limit - Anti-windup: Freeze when saturated + near equilibrium &quot;&quot;&quot; if abs_s &lt;= self.dead_zone: # In dead zone: gentle leak to prevent ratcheting k1_dot = -self.gain_leak k2_dot = -self.gain_leak else: # Normal adaptation with self-tapering taper_factor = self._compute_taper_factor(abs_s) k1_raw = self.gamma1 * abs_s * taper_factor k2_raw = self.gamma2 * abs_s * taper_factor # Rate limiting for stability k1_dot = min(k1_raw, self.adapt_rate_limit) k2_dot = min(k2_raw, self.adapt_rate_limit) return k1_dot, k2_dot
+``` ### 2. PSO Integration Optimization #### 2.1 Gain Parameter Structure ```python
+# Primary PSO parameters [c1, λ1, c2, λ2]
+
+gains = [77.6216, 44.449, 17.3134, 14.25] # Optimal PSO result # Fixed internal parameters (not PSO-tuned)
+k1_init = 2.0 # Initial adaptive gain 1
+k2_init = 1.0 # Initial adaptive gain 2
+gamma1 = 0.5 # Adaptation rate 1
+gamma2 = 0.3 # Adaptation rate 2
+dead_zone = 0.01 # Adaptation dead zone
+``` #### 2.2 PSO Fitness Function Integration ```python
+# example-metadata:
+# runnable: false def fitness_function(gains_array): &quot;&quot;&quot;PSO fitness evaluation for hybrid controller. The hybrid controller&#39;s complexity requires careful fitness design: - Control effort weighted heavily (prevents aggressive adaptation) - Tracking error with time-varying weights - Stability margins included in cost &quot;&quot;&quot; controller = create_hybrid_controller(gains_array) # Multi-objective fitness components tracking_error = compute_tracking_metrics(controller) control_effort = compute_control_energy(controller) stability_margin = compute_stability_measures(controller) return w1*tracking_error + w2*control_effort + w3*stability_margin
 </pre></div>
 </div>
-<p><strong>Component Analysis</strong>:</p>
-<ul class="simple">
-<li><p><strong>√|s| Term</strong>: Provides finite-time convergence</p></li>
-<li><p><strong>Integral Term</strong>: Eliminates steady-state error</p></li>
-<li><p><strong>Damping Term</strong>: Improves transient response</p></li>
-<li><p><strong>Equivalent Control</strong>: Model-based feedforward compensation</p></li>
-</ul>
-<section id="finite-time-convergence">
-<h4>2.1 Finite-Time Convergence<a class="headerlink" href="#finite-time-convergence" title="Link to this heading">¶</a></h4>
-<p><strong>Convergence Time Bound</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>T<span class="nb">_{</span>reach<span class="nb">}</span> <span class="k">\leq</span> <span class="k">\frac</span><span class="nb">{</span>2|s(0)|<span class="nb">^{</span>1/2<span class="nb">}}{</span><span class="k">\alpha_</span>1<span class="nb">^{</span>1/2<span class="nb">}}</span>
-</pre></div>
-</div>
-<p>where α₁ depends on the adaptive gains k₁ and system parameters.</p>
-</section>
-</section>
-<section id="adaptive-gain-laws">
-<h3>3. Adaptive Gain Laws<a class="headerlink" href="#adaptive-gain-laws" title="Link to this heading">¶</a></h3>
-<p>The controller implements state-dependent adaptive laws with anti-windup:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>align<span class="nb">}</span>
-<span class="k">\dot</span><span class="nb">{</span>k<span class="nb">}_</span>1 <span class="nb">&amp;</span>= <span class="k">\gamma_</span>1 |s| <span class="k">\cdot</span> <span class="k">\tau</span>(|s|) <span class="k">\quad</span> <span class="k">\text</span><span class="nb">{</span>if <span class="nb">}</span> |s| &gt; <span class="k">\text</span><span class="nb">{</span>dead<span class="k">\_zone</span><span class="nb">}</span> <span class="k">\\</span>
-<span class="k">\dot</span><span class="nb">{</span>k<span class="nb">}_</span>2 <span class="nb">&amp;</span>= <span class="k">\gamma_</span>2 |s| <span class="k">\cdot</span> <span class="k">\tau</span>(|s|) <span class="k">\quad</span> <span class="k">\text</span><span class="nb">{</span>if <span class="nb">}</span> |s| &gt; <span class="k">\text</span><span class="nb">{</span>dead<span class="k">\_zone</span><span class="nb">}</span> <span class="k">\\</span>
-<span class="k">\dot</span><span class="nb">{</span>k<span class="nb">}_</span>i <span class="nb">&amp;</span>= -<span class="k">\text</span><span class="nb">{</span>leak<span class="k">\_rate</span><span class="nb">}</span> <span class="k">\quad</span> <span class="k">\text</span><span class="nb">{</span>otherwise<span class="nb">}</span>
-<span class="k">\end</span><span class="nb">{</span>align<span class="nb">}</span>
-</pre></div>
-</div>
-<p><strong>Self-Tapering Function</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\tau</span>(|s|) = <span class="k">\frac</span><span class="nb">{</span>|s|<span class="nb">}{</span>|s| + <span class="k">\epsilon_</span><span class="nb">{</span>taper<span class="nb">}}</span>
-</pre></div>
-</div>
-<p>This ensures adaptation slows as the system approaches the sliding surface.</p>
-</section>
-<section id="lyapunov-stability-analysis">
-<h3>4. Lyapunov Stability Analysis<a class="headerlink" href="#lyapunov-stability-analysis" title="Link to this heading">¶</a></h3>
-<p><strong>Candidate Lyapunov Function</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>V = <span class="k">\frac</span><span class="nb">{</span>1<span class="nb">}{</span>2<span class="nb">}</span>s<span class="nb">^</span>2 + <span class="k">\frac</span><span class="nb">{</span>1<span class="nb">}{</span>2<span class="k">\gamma_</span>1<span class="nb">}</span>(k<span class="nb">_</span>1 - k<span class="nb">_</span>1<span class="nb">^</span>*)<span class="nb">^</span>2 + <span class="k">\frac</span><span class="nb">{</span>1<span class="nb">}{</span>2<span class="k">\gamma_</span>2<span class="nb">}</span>(k<span class="nb">_</span>2 - k<span class="nb">_</span>2<span class="nb">^</span>*)<span class="nb">^</span>2
-</pre></div>
-</div>
-<p><strong>Stability Condition</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\dot</span><span class="nb">{</span>V<span class="nb">}</span> <span class="k">\leq</span> -<span class="k">\eta</span> |s| + <span class="k">\sigma</span>
-</pre></div>
-</div>
-<p>where η &gt; 0 ensures convergence and σ represents bounded disturbances.</p>
-</section>
-</section>
 <hr class="docutils" />
-<section id="algorithm-architecture">
-<h2>Algorithm Architecture<a class="headerlink" href="#algorithm-architecture" title="Link to this heading">¶</a></h2>
-<section id="modular-controller-structure">
-<h3>1. Modular Controller Structure<a class="headerlink" href="#modular-controller-structure" title="Link to this heading">¶</a></h3>
+</section>
+<section id="runtime-fix-analysis-1-root-cause-analysis-problem-numpy-ndarray-object-has-no-attribute-get-root-cause-missing-return-statement-in-compute-control-method-the-return-statement-was-incorrectly-placed-inside-the-reset-method-causing-the-main-method-to-return-none-instead-of-the-expected-hybridstaoutput-tuple-1-1-code-analysis-before-fix">
+<h1>Runtime Fix Analysis ### 1. Root Cause Analysis <strong>Problem</strong>: <code class="docutils literal notranslate"><span class="pre">'numpy.ndarray'</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">attribute</span> <span class="pre">'get'</span></code> <strong>Root Cause</strong>: Missing <code class="docutils literal notranslate"><span class="pre">return</span></code> statement in <code class="docutils literal notranslate"><span class="pre">compute_control()</span></code> method. The return statement was incorrectly placed inside the <code class="docutils literal notranslate"><span class="pre">reset()</span></code> method, causing the main method to return <code class="docutils literal notranslate"><span class="pre">None</span></code> instead of the expected <code class="docutils literal notranslate"><span class="pre">HybridSTAOutput</span></code> tuple. #### 1.1 Code Analysis <strong>Before Fix</strong>:<a class="headerlink" href="#runtime-fix-analysis-1-root-cause-analysis-problem-numpy-ndarray-object-has-no-attribute-get-root-cause-missing-return-statement-in-compute-control-method-the-return-statement-was-incorrectly-placed-inside-the-reset-method-causing-the-main-method-to-return-none-instead-of-the-expected-hybridstaoutput-tuple-1-1-code-analysis-before-fix" title="Link to this heading">¶</a></h1>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
+<span class="c1"># runnable: false def compute_control(self, state, state_vars, history): # ... 674 lines of controller logic ... # Missing return statement here! def reset(self) -&gt; None: # ... reset logic ... return HybridSTAOutput(u_sat, (k1_new, k2_new, u_int_new), history, float(s)) # ^^^^ Variables not in scope! ^^^^</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">After</span> <span class="n">Fix</span><span class="o">**</span><span class="p">:</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">HybridAdaptiveSTASMC</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Modular hybrid controller with clear separation of concerns:</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false def compute_control(self, state, state_vars, history): # ... 674 lines of controller logic ... return HybridSTAOutput(u_sat, (k1_new, k2_new, u_int_new), history, float(s)) def reset(self) -&gt; None: # ... reset logic only ... pass</span>
+<span class="err">```</span> <span class="c1">### 2. Error Propagation Analysis The missing return statement caused: 1. **`compute_control()` returns `None`**</span>
 
-<span class="sd">    Components:</span>
-<span class="sd">    - Sliding surface computation (absolute/relative modes)</span>
-<span class="sd">    - Adaptive gain management (with anti-windup)</span>
-<span class="sd">    - Super-twisting control law (finite-time convergent)</span>
-<span class="sd">    - Equivalent control (model-based feedforward)</span>
-<span class="sd">    - Cart recentering (with hysteresis)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-</div>
-<section id="key-methods">
-<h4>1.1 Key Methods<a class="headerlink" href="#key-methods" title="Link to this heading">¶</a></h4>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Method</p></th>
-<th class="head"><p>Purpose</p></th>
-<th class="head"><p>Mathematical Basis</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">_compute_sliding_surface()</span></code></p></td>
-<td><p>Calculate s(x)</p></td>
-<td><p>Linear combination of states</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">_compute_equivalent_control()</span></code></p></td>
-<td><p>Model-based ueq</p></td>
-<td><p>Dynamics inversion</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">_compute_taper_factor()</span></code></p></td>
-<td><p>Adaptive modulation</p></td>
-<td><p>Self-tapering function</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">compute_control()</span></code></p></td>
-<td><p>Main control loop</p></td>
-<td><p>Complete STA algorithm</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-</section>
-<section id="control-flow-architecture">
-<h3>2. Control Flow Architecture<a class="headerlink" href="#control-flow-architecture" title="Link to this heading">¶</a></h3>
-<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>graph TD
-    A[State Input] --&gt; B[Sliding Surface]
-    B --&gt; C[Dead Zone Check]
-    C --&gt; D[Adaptive Gains]
-    C --&gt; E[Super-Twisting Law]
-    D --&gt; F[Rate Limiting]
-    E --&gt; G[Equivalent Control]
-    F --&gt; H[Anti-Windup]
-    G --&gt; I[Cart Recentering]
-    H --&gt; J[Control Output]
-    I --&gt; J
-    J --&gt; K[Saturation]
-    K --&gt; L[Emergency Reset]
-</pre></div>
-</div>
-</section>
-<section id="safety-and-numerical-stability">
-<h3>3. Safety and Numerical Stability<a class="headerlink" href="#safety-and-numerical-stability" title="Link to this heading">¶</a></h3>
-<section id="emergency-reset-conditions">
-<h4>3.1 Emergency Reset Conditions<a class="headerlink" href="#emergency-reset-conditions" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">emergency_reset</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">u_sat</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u_sat</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_force</span> <span class="o">*</span> <span class="mi">2</span> <span class="ow">or</span>
-    <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">k1_new</span><span class="p">)</span> <span class="ow">or</span> <span class="n">k1_new</span> <span class="o">&gt;</span> <span class="n">k1_max</span> <span class="o">*</span> <span class="mf">0.9</span> <span class="ow">or</span>
-    <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">k2_new</span><span class="p">)</span> <span class="ow">or</span> <span class="n">k2_new</span> <span class="o">&gt;</span> <span class="n">k2_max</span> <span class="o">*</span> <span class="mf">0.9</span> <span class="ow">or</span>
-    <span class="n">state_norm</span> <span class="o">&gt;</span> <span class="mf">10.0</span> <span class="ow">or</span> <span class="n">velocity_norm</span> <span class="o">&gt;</span> <span class="mf">50.0</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="numerical-stability-features">
-<h4>3.2 Numerical Stability Features<a class="headerlink" href="#numerical-stability-features" title="Link to this heading">¶</a></h4>
-<ul class="simple">
-<li><p><strong>Matrix Regularization</strong>: M_reg = M + ε·I for inertia matrix inversion</p></li>
-<li><p><strong>Finite Value Checking</strong>: All outputs validated for NaN/infinity</p></li>
-<li><p><strong>Bounded Adaptation</strong>: Gains clipped to [0, k_max]</p></li>
-<li><p><strong>Rate Limiting</strong>: Prevents sudden gain changes</p></li>
-</ul>
-</section>
-</section>
-</section>
-<hr class="docutils" />
-<section id="implementation-details">
-<h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Link to this heading">¶</a></h2>
-<section id="core-algorithm-implementation">
-<h3>1. Core Algorithm Implementation<a class="headerlink" href="#core-algorithm-implementation" title="Link to this heading">¶</a></h3>
-<section id="sliding-surface-computation">
-<h4>1.1 Sliding Surface Computation<a class="headerlink" href="#sliding-surface-computation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
+<span class="mf">2.</span> <span class="o">**</span><span class="n">Simulation</span> <span class="n">attempts</span> <span class="n">to</span> <span class="n">unpack</span> <span class="err">`</span><span class="kc">None</span><span class="err">`</span><span class="o">**</span>
+<span class="mf">3.</span> <span class="o">**</span><span class="n">Factory</span> <span class="n">catches</span> <span class="n">exception</span> <span class="ow">and</span> <span class="n">returns</span> <span class="n">error</span> <span class="n">message</span><span class="o">**</span>
+<span class="mf">4.</span> <span class="o">**</span><span class="n">PSO</span> <span class="n">fitness</span> <span class="n">function</span> <span class="n">receives</span> <span class="n">error</span> <span class="n">string</span><span class="o">**</span>
+<span class="mf">5.</span> <span class="o">**</span><span class="n">String</span> <span class="n">interpreted</span> <span class="k">as</span> <span class="n">fitness</span> <span class="n">value</span> <span class="n">of</span> <span class="mf">0.0</span> <span class="p">(</span><span class="n">perfect</span><span class="p">)</span><span class="o">**</span> <span class="n">This</span> <span class="n">explains</span> <span class="n">why</span> <span class="n">PSO</span> <span class="n">achieved</span> <span class="mf">0.000000</span> <span class="n">cost</span> <span class="n">despite</span> <span class="n">runtime</span> <span class="n">errors</span><span class="o">.</span> <span class="c1">### 3. Prevention Measures #### 3.1 Static Analysis Integration ```python</span>
+<span class="c1"># example-metadata:</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_compute_sliding_surface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute unified sliding surface with dual formulation support.</span>
+<span class="c1"># runnable: false # Add to pre-commit hooks:</span>
 
-<span class="sd">    Mathematical Implementation:</span>
-<span class="sd">    s = c1*(θ̇₁ + λ₁*θ₁) + c2*(θ̇₂ + λ₂*θ₂) + cart_term</span>
-
-<span class="sd">    or (relative mode):</span>
-<span class="sd">    s = c1*(θ̇₁ + λ₁*θ₁) + c2*((θ̇₂-θ̇₁) + λ₂*(θ₂-θ₁)) + cart_term</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">x</span><span class="p">,</span> <span class="n">th1</span><span class="p">,</span> <span class="n">th2</span><span class="p">,</span> <span class="n">xdot</span><span class="p">,</span> <span class="n">th1dot</span><span class="p">,</span> <span class="n">th2dot</span> <span class="o">=</span> <span class="n">state</span>
-
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_relative_surface</span><span class="p">:</span>
-        <span class="n">rel_dot</span> <span class="o">=</span> <span class="n">th2dot</span> <span class="o">-</span> <span class="n">th1dot</span>
-        <span class="n">rel_ang</span> <span class="o">=</span> <span class="n">th2</span> <span class="o">-</span> <span class="n">th1</span>
-        <span class="n">pendulum_term</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">*</span> <span class="p">(</span><span class="n">th1dot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lambda1</span> <span class="o">*</span> <span class="n">th1</span><span class="p">)</span> <span class="o">+</span> \
-                       <span class="bp">self</span><span class="o">.</span><span class="n">c2</span> <span class="o">*</span> <span class="p">(</span><span class="n">rel_dot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lambda2</span> <span class="o">*</span> <span class="n">rel_ang</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">pendulum_term</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">*</span> <span class="p">(</span><span class="n">th1dot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lambda1</span> <span class="o">*</span> <span class="n">th1</span><span class="p">)</span> <span class="o">+</span> \
-                       <span class="bp">self</span><span class="o">.</span><span class="n">c2</span> <span class="o">*</span> <span class="p">(</span><span class="n">th2dot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lambda2</span> <span class="o">*</span> <span class="n">th2</span><span class="p">)</span>
-
-    <span class="n">cart_term</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cart_gain</span> <span class="o">*</span> <span class="p">(</span><span class="n">xdot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cart_lambda</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">pendulum_term</span> <span class="o">-</span> <span class="n">cart_term</span><span class="p">))</span>
-</pre></div>
-</div>
-</section>
-<section id="adaptive-gain-update">
-<h4>1.2 Adaptive Gain Update<a class="headerlink" href="#adaptive-gain-update" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">_update_adaptive_gains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">abs_s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k1_prev</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k2_prev</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update adaptive gains with self-tapering and anti-windup.</span>
-
-<span class="sd">    Implements:</span>
-<span class="sd">    - State-based adaptation: γ|s|</span>
-<span class="sd">    - Self-tapering: τ(|s|) = |s|/(|s| + ε)</span>
-<span class="sd">    - Rate limiting: |k̇| ≤ rate_limit</span>
-<span class="sd">    - Anti-windup: Freeze when saturated + near equilibrium</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">abs_s</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dead_zone</span><span class="p">:</span>
-        <span class="c1"># In dead zone: gentle leak to prevent ratcheting</span>
-        <span class="n">k1_dot</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">gain_leak</span>
-        <span class="n">k2_dot</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">gain_leak</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># Normal adaptation with self-tapering</span>
-        <span class="n">taper_factor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_taper_factor</span><span class="p">(</span><span class="n">abs_s</span><span class="p">)</span>
-        <span class="n">k1_raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma1</span> <span class="o">*</span> <span class="n">abs_s</span> <span class="o">*</span> <span class="n">taper_factor</span>
-        <span class="n">k2_raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma2</span> <span class="o">*</span> <span class="n">abs_s</span> <span class="o">*</span> <span class="n">taper_factor</span>
-
-        <span class="c1"># Rate limiting for stability</span>
-        <span class="n">k1_dot</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">k1_raw</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">adapt_rate_limit</span><span class="p">)</span>
-        <span class="n">k2_dot</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">k2_raw</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">adapt_rate_limit</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">k1_dot</span><span class="p">,</span> <span class="n">k2_dot</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="pso-integration-optimization">
-<h3>2. PSO Integration Optimization<a class="headerlink" href="#pso-integration-optimization" title="Link to this heading">¶</a></h3>
-<section id="gain-parameter-structure">
-<h4>2.1 Gain Parameter Structure<a class="headerlink" href="#gain-parameter-structure" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Primary PSO parameters [c1, λ1, c2, λ2]</span>
-<span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">77.6216</span><span class="p">,</span> <span class="mf">44.449</span><span class="p">,</span> <span class="mf">17.3134</span><span class="p">,</span> <span class="mf">14.25</span><span class="p">]</span>  <span class="c1"># Optimal PSO result</span>
-
-<span class="c1"># Fixed internal parameters (not PSO-tuned)</span>
-<span class="n">k1_init</span> <span class="o">=</span> <span class="mf">2.0</span>      <span class="c1"># Initial adaptive gain 1</span>
-<span class="n">k2_init</span> <span class="o">=</span> <span class="mf">1.0</span>      <span class="c1"># Initial adaptive gain 2</span>
-<span class="n">gamma1</span> <span class="o">=</span> <span class="mf">0.5</span>       <span class="c1"># Adaptation rate 1</span>
-<span class="n">gamma2</span> <span class="o">=</span> <span class="mf">0.3</span>       <span class="c1"># Adaptation rate 2</span>
-<span class="n">dead_zone</span> <span class="o">=</span> <span class="mf">0.01</span>   <span class="c1"># Adaptation dead zone</span>
-</pre></div>
-</div>
-</section>
-<section id="pso-fitness-function-integration">
-<h4>2.2 PSO Fitness Function Integration<a class="headerlink" href="#pso-fitness-function-integration" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">fitness_function</span><span class="p">(</span><span class="n">gains_array</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;PSO fitness evaluation for hybrid controller.</span>
-
-<span class="sd">    The hybrid controller&#39;s complexity requires careful fitness design:</span>
-<span class="sd">    - Control effort weighted heavily (prevents aggressive adaptation)</span>
-<span class="sd">    - Tracking error with time-varying weights</span>
-<span class="sd">    - Stability margins included in cost</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">controller</span> <span class="o">=</span> <span class="n">create_hybrid_controller</span><span class="p">(</span><span class="n">gains_array</span><span class="p">)</span>
-
-    <span class="c1"># Multi-objective fitness components</span>
-    <span class="n">tracking_error</span> <span class="o">=</span> <span class="n">compute_tracking_metrics</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
-    <span class="n">control_effort</span> <span class="o">=</span> <span class="n">compute_control_energy</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
-    <span class="n">stability_margin</span> <span class="o">=</span> <span class="n">compute_stability_measures</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">w1</span><span class="o">*</span><span class="n">tracking_error</span> <span class="o">+</span> <span class="n">w2</span><span class="o">*</span><span class="n">control_effort</span> <span class="o">+</span> <span class="n">w3</span><span class="o">*</span><span class="n">stability_margin</span>
-</pre></div>
-</div>
-</section>
-</section>
-</section>
-<hr class="docutils" />
-<section id="runtime-fix-analysis">
-<h2>Runtime Fix Analysis<a class="headerlink" href="#runtime-fix-analysis" title="Link to this heading">¶</a></h2>
-<section id="root-cause-analysis">
-<h3>1. Root Cause Analysis<a class="headerlink" href="#root-cause-analysis" title="Link to this heading">¶</a></h3>
-<p><strong>Problem</strong>: <code class="docutils literal notranslate"><span class="pre">'numpy.ndarray'</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">attribute</span> <span class="pre">'get'</span></code></p>
-<p><strong>Root Cause</strong>: Missing <code class="docutils literal notranslate"><span class="pre">return</span></code> statement in <code class="docutils literal notranslate"><span class="pre">compute_control()</span></code> method. The return statement was incorrectly placed inside the <code class="docutils literal notranslate"><span class="pre">reset()</span></code> method, causing the main method to return <code class="docutils literal notranslate"><span class="pre">None</span></code> instead of the expected <code class="docutils literal notranslate"><span class="pre">HybridSTAOutput</span></code> tuple.</p>
-<section id="code-analysis">
-<h4>1.1 Code Analysis<a class="headerlink" href="#code-analysis" title="Link to this heading">¶</a></h4>
-<p><strong>Before Fix</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
-    <span class="c1"># ... 674 lines of controller logic ...</span>
-
-    <span class="c1"># Missing return statement here!</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="c1"># ... reset logic ...</span>
-    <span class="k">return</span> <span class="n">HybridSTAOutput</span><span class="p">(</span><span class="n">u_sat</span><span class="p">,</span> <span class="p">(</span><span class="n">k1_new</span><span class="p">,</span> <span class="n">k2_new</span><span class="p">,</span> <span class="n">u_int_new</span><span class="p">),</span> <span class="n">history</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-    <span class="c1"># ^^^^ Variables not in scope! ^^^^</span>
-</pre></div>
-</div>
-<p><strong>After Fix</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">):</span>
-    <span class="c1"># ... 674 lines of controller logic ...</span>
-
-    <span class="k">return</span> <span class="n">HybridSTAOutput</span><span class="p">(</span><span class="n">u_sat</span><span class="p">,</span> <span class="p">(</span><span class="n">k1_new</span><span class="p">,</span> <span class="n">k2_new</span><span class="p">,</span> <span class="n">u_int_new</span><span class="p">),</span> <span class="n">history</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="c1"># ... reset logic only ...</span>
-    <span class="k">pass</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="error-propagation-analysis">
-<h3>2. Error Propagation Analysis<a class="headerlink" href="#error-propagation-analysis" title="Link to this heading">¶</a></h3>
-<p>The missing return statement caused:</p>
-<ol class="arabic simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">compute_control()</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code></strong></p></li>
-<li><p><strong>Simulation attempts to unpack <code class="docutils literal notranslate"><span class="pre">None</span></code></strong></p></li>
-<li><p><strong>Factory catches exception and returns error message</strong></p></li>
-<li><p><strong>PSO fitness function receives error string</strong></p></li>
-<li><p><strong>String interpreted as fitness value of 0.0 (perfect)</strong></p></li>
-</ol>
-<p>This explains why PSO achieved 0.000000 cost despite runtime errors.</p>
-</section>
-<section id="prevention-measures">
-<h3>3. Prevention Measures<a class="headerlink" href="#prevention-measures" title="Link to this heading">¶</a></h3>
-<section id="static-analysis-integration">
-<h4>3.1 Static Analysis Integration<a class="headerlink" href="#static-analysis-integration" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="c1"># Add to pre-commit hooks:</span>
 <span class="c1"># mypy type checking for return type consistency</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">check_return_types</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify all controller methods return expected types.&quot;&quot;&quot;</span>
-    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> <span class="n">HybridSTAOutput</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check_return_types</span><span class="p">():</span> <span class="s2">&quot;&quot;&quot;Verify all controller methods return expected types.&quot;&quot;&quot;</span> <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> <span class="n">HybridSTAOutput</span><span class="p">)</span>
+<span class="err">```</span> <span class="c1">#### 3.2 Code Review Checklist - [ ] **Return Statement Present**: Every method with declared return type has return</span>
+<span class="o">-</span> <span class="p">[</span> <span class="p">]</span> <span class="o">**</span><span class="n">Variable</span> <span class="n">Scope</span><span class="o">**</span><span class="p">:</span> <span class="n">Return</span> <span class="n">statements</span> <span class="n">access</span> <span class="n">only</span> <span class="ow">in</span><span class="o">-</span><span class="n">scope</span> <span class="n">variables</span>
+<span class="o">-</span> <span class="p">[</span> <span class="p">]</span> <span class="o">**</span><span class="n">Type</span> <span class="n">Consistency</span><span class="o">**</span><span class="p">:</span> <span class="n">Return</span> <span class="n">values</span> <span class="n">match</span> <span class="n">declared</span> <span class="n">types</span>
+<span class="o">-</span> <span class="p">[</span> <span class="p">]</span> <span class="o">**</span><span class="ne">Exception</span> <span class="n">Handling</span><span class="o">**</span><span class="p">:</span> <span class="n">Error</span> <span class="n">paths</span> <span class="k">return</span> <span class="n">appropriate</span> <span class="n">values</span> <span class="c1">#### 3.3 Testing Validation ```python</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_hybrid_controller_return_type</span><span class="p">():</span> <span class="s2">&quot;&quot;&quot;Validate hybrid controller returns proper types.&quot;&quot;&quot;</span> <span class="n">controller</span> <span class="o">=</span> <span class="n">HybridAdaptiveSTASMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">HybridSTAOutput</span><span class="p">)</span> <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="c1"># (k1, k2, u_int) assert isinstance(result.control, float)</span>
 </pre></div>
 </div>
-</section>
-<section id="code-review-checklist">
-<h4>3.2 Code Review Checklist<a class="headerlink" href="#code-review-checklist" title="Link to this heading">¶</a></h4>
-<ul class="contains-task-list simple">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Return Statement Present</strong>: Every method with declared return type has return</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Variable Scope</strong>: Return statements access only in-scope variables</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Type Consistency</strong>: Return values match declared types</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>Exception Handling</strong>: Error paths return appropriate values</p></li>
-</ul>
-</section>
-<section id="testing-validation">
-<h4>3.3 Testing Validation<a class="headerlink" href="#testing-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_hybrid_controller_return_type</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate hybrid controller returns proper types.&quot;&quot;&quot;</span>
-    <span class="n">controller</span> <span class="o">=</span> <span class="n">HybridAdaptiveSTASMC</span><span class="p">(</span><span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-
-    <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-
-    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">HybridSTAOutput</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">state_vars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>  <span class="c1"># (k1, k2, u_int)</span>
-    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">control</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-</section>
 <hr class="docutils" />
-<section id="parameter-configuration">
-<h2>Parameter Configuration<a class="headerlink" href="#parameter-configuration" title="Link to this heading">¶</a></h2>
-<section id="primary-parameters-pso-tunable">
-<h3>1. Primary Parameters (PSO-Tunable)<a class="headerlink" href="#primary-parameters-pso-tunable" title="Link to this heading">¶</a></h3>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Parameter</p></th>
-<th class="head"><p>Symbol</p></th>
-<th class="head"><p>Range</p></th>
-<th class="head"><p>Optimal</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>c1</strong></p></td>
-<td><p>c₁</p></td>
-<td><p>[1, 100]</p></td>
-<td><p>77.62</p></td>
-<td><p>First pendulum surface weight</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>lambda1</strong></p></td>
-<td><p>λ₁</p></td>
-<td><p>[1, 100]</p></td>
-<td><p>44.45</p></td>
-<td><p>First pendulum damping</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>c2</strong></p></td>
-<td><p>c₂</p></td>
-<td><p>[1, 20]</p></td>
-<td><p>17.31</p></td>
-<td><p>Second pendulum surface weight</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>lambda2</strong></p></td>
-<td><p>λ₂</p></td>
-<td><p>[1, 20]</p></td>
-<td><p>14.25</p></td>
-<td><p>Second pendulum damping</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 </section>
-<section id="internal-parameters-fixed">
-<h3>2. Internal Parameters (Fixed)<a class="headerlink" href="#internal-parameters-fixed" title="Link to this heading">¶</a></h3>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Parameter</p></th>
-<th class="head"><p>Value</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>k1_init</strong></p></td>
-<td><p>2.0</p></td>
-<td><p>Initial adaptive gain 1</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>k2_init</strong></p></td>
-<td><p>1.0</p></td>
-<td><p>Initial adaptive gain 2</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>gamma1</strong></p></td>
-<td><p>0.5</p></td>
-<td><p>Adaptation rate 1</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>gamma2</strong></p></td>
-<td><p>0.3</p></td>
-<td><p>Adaptation rate 2</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>dead_zone</strong></p></td>
-<td><p>0.01</p></td>
-<td><p>Adaptation dead zone</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>damping_gain</strong></p></td>
-<td><p>3.0</p></td>
-<td><p>Linear damping coefficient</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>sat_soft_width</strong></p></td>
-<td><p>0.03</p></td>
-<td><p>Smooth saturation boundary</p></td>
-</tr>
-</tbody>
-</table>
-</div>
+<section id="parameter-configuration-1-primary-parameters-pso-tunable-parameter-symbol-range-optimal-description">
+<h1>Parameter Configuration ### 1. Primary Parameters (PSO-Tunable) | Parameter | Symbol | Range | Optimal | Description |<a class="headerlink" href="#parameter-configuration-1-primary-parameters-pso-tunable-parameter-symbol-range-optimal-description" title="Link to this heading">¶</a></h1>
+<p>|———–|——–|——-|———|————-|
+| <strong>c1</strong> | c₁ | [1, 100] | 77.62 | First pendulum surface weight |
+| <strong>lambda1</strong> | λ₁ | [1, 100] | 44.45 | First pendulum damping |
+| <strong>c2</strong> | c₂ | [1, 20] | 17.31 | Second pendulum surface weight |
+| <strong>lambda2</strong> | λ₂ | [1, 20] | 14.25 | Second pendulum damping | ### 2. Internal Parameters (Fixed) | Parameter | Value | Description |
+|———–|——-|————-|
+| <strong>k1_init</strong> | 2.0 | Initial adaptive gain 1 |
+| <strong>k2_init</strong> | 1.0 | Initial adaptive gain 2 |
+| <strong>gamma1</strong> | 0.5 | Adaptation rate 1 |
+| <strong>gamma2</strong> | 0.3 | Adaptation rate 2 |
+| <strong>dead_zone</strong> | 0.01 | Adaptation dead zone |
+| <strong>damping_gain</strong> | 3.0 | Linear damping coefficient |
+| <strong>sat_soft_width</strong> | 0.03 | Smooth saturation boundary | ### 3. Safety Parameters | Parameter | Value | Purpose |
+|———–|——-|———|
+| <strong>k1_max</strong> | 50.0 | Maximum adaptive gain 1 |
+| <strong>k2_max</strong> | 50.0 | Maximum adaptive gain 2 |
+| <strong>u_int_max</strong> | 50.0 | Integral windup limit |
+| <strong>adapt_rate_limit</strong> | 5.0 | Maximum gain change rate |
+| <strong>gain_leak</strong> | 1e-3 | Gain decay rate | ### 4. Configuration Example ```yaml</p>
 </section>
-<section id="safety-parameters">
-<h3>3. Safety Parameters<a class="headerlink" href="#safety-parameters" title="Link to this heading">¶</a></h3>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Parameter</p></th>
-<th class="head"><p>Value</p></th>
-<th class="head"><p>Purpose</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>k1_max</strong></p></td>
-<td><p>50.0</p></td>
-<td><p>Maximum adaptive gain 1</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>k2_max</strong></p></td>
-<td><p>50.0</p></td>
-<td><p>Maximum adaptive gain 2</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>u_int_max</strong></p></td>
-<td><p>50.0</p></td>
-<td><p>Integral windup limit</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>adapt_rate_limit</strong></p></td>
-<td><p>5.0</p></td>
-<td><p>Maximum gain change rate</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>gain_leak</strong></p></td>
-<td><p>1e-3</p></td>
-<td><p>Gain decay rate</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="configuration-example">
-<h3>4. Configuration Example<a class="headerlink" href="#configuration-example" title="Link to this heading">¶</a></h3>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml entry for hybrid controller</span>
-<span class="nt">controllers</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">hybrid_adaptive_sta_smc</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">gains</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">77.6216</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">44.449</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">17.3134</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.25</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">max_force</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span>
-<span class="w">    </span><span class="nt">dt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<section class="tex2jax_ignore mathjax_ignore" id="config-yaml-entry-for-hybrid-controller">
+<h1>config.yaml entry for hybrid controller<a class="headerlink" href="#config-yaml-entry-for-hybrid-controller" title="Link to this heading">¶</a></h1>
+<p>controllers: hybrid_adaptive_sta_smc: gains: [77.6216, 44.449, 17.3134, 14.25] max_force: 100.0 dt: 0.01 # Adaptive parameters k1_init: 2.0 k2_init: 1.0 gamma1: 0.5 gamma2: 0.3 dead_zone: 0.01 # Advanced options use_relative_surface: false enable_equivalent: true damping_gain: 3.0 adapt_rate_limit: 5.0 # Safety limits k1_max: 50.0 k2_max: 50.0 u_int_max: 50.0</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
 
-<span class="w">    </span><span class="c1"># Adaptive parameters</span>
-<span class="w">    </span><span class="nt">k1_init</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
-<span class="w">    </span><span class="nt">k2_init</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
-<span class="w">    </span><span class="nt">gamma1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
-<span class="w">    </span><span class="nt">gamma2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span>
-<span class="w">    </span><span class="nt">dead_zone</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
-
-<span class="w">    </span><span class="c1"># Advanced options</span>
-<span class="w">    </span><span class="nt">use_relative_surface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">    </span><span class="nt">enable_equivalent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">damping_gain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span>
-<span class="w">    </span><span class="nt">adapt_rate_limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
-
-<span class="w">    </span><span class="c1"># Safety limits</span>
-<span class="w">    </span><span class="nt">k1_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50.0</span>
-<span class="w">    </span><span class="nt">k2_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50.0</span>
-<span class="w">    </span><span class="nt">u_int_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50.0</span>
-</pre></div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="integration-guide">
-<h2>Integration Guide<a class="headerlink" href="#integration-guide" title="Link to this heading">¶</a></h2>
-<section id="basic-usage">
-<h3>1. Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">¶</a></h3>
-<section id="direct-instantiation">
-<h4>1.1 Direct Instantiation<a class="headerlink" href="#direct-instantiation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc</span><span class="w"> </span><span class="kn">import</span> <span class="n">HybridAdaptiveSTASMC</span>
-
-<span class="c1"># Create controller with optimized gains</span>
-<span class="n">controller</span> <span class="o">=</span> <span class="n">HybridAdaptiveSTASMC</span><span class="p">(</span>
-    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">77.6216</span><span class="p">,</span> <span class="mf">44.449</span><span class="p">,</span> <span class="mf">17.3134</span><span class="p">,</span> <span class="mf">14.25</span><span class="p">],</span>
-    <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
-    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
-    <span class="n">k1_init</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
-    <span class="n">k2_init</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">gamma1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">gamma2</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-    <span class="n">dead_zone</span><span class="o">=</span><span class="mf">0.01</span>
-<span class="p">)</span>
-
-<span class="c1"># Initialize controller state</span>
+<span class="c1">## Integration Guide ### 1. Basic Usage #### 1.1 Direct Instantiation ```python</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc</span><span class="w"> </span><span class="kn">import</span> <span class="n">HybridAdaptiveSTASMC</span> <span class="c1"># Create controller with optimized gains</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">HybridAdaptiveSTASMC</span><span class="p">(</span> <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">77.6216</span><span class="p">,</span> <span class="mf">44.449</span><span class="p">,</span> <span class="mf">17.3134</span><span class="p">,</span> <span class="mf">14.25</span><span class="p">],</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">k1_init</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">k2_init</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">gamma1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">gamma2</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">dead_zone</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span> <span class="c1"># Initialize controller state</span>
 <span class="n">state_vars</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">initialize_state</span><span class="p">()</span>
-<span class="n">history</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">initialize_history</span><span class="p">()</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">initialize_history</span><span class="p">()</span> <span class="c1"># Main control loop</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">simulation_time</span><span class="p">:</span> <span class="n">state</span> <span class="o">=</span> <span class="n">get_system_state</span><span class="p">()</span> <span class="c1"># [x, θ1, θ2, ẋ, θ̇1, θ̇2] result = controller.compute_control(state, state_vars, history) # Extract results control_force = result.control state_vars = result.state_vars # (k1, k2, u_int) history = result.history sliding_surface = result.sliding_surface # Apply control to system apply_control(control_force)</span>
+<span class="err">```</span> <span class="c1">#### 1.2 Factory Integration ```python</span>
 
-<span class="c1"># Main control loop</span>
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">simulation_time</span><span class="p">:</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">get_system_state</span><span class="p">()</span>  <span class="c1"># [x, θ1, θ2, ẋ, θ̇1, θ̇2]</span>
-
-    <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">compute_control</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_vars</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
-
-    <span class="c1"># Extract results</span>
-    <span class="n">control_force</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">control</span>
-    <span class="n">state_vars</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">state_vars</span>  <span class="c1"># (k1, k2, u_int)</span>
-    <span class="n">history</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">history</span>
-    <span class="n">sliding_surface</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">sliding_surface</span>
-
-    <span class="c1"># Apply control to system</span>
-    <span class="n">apply_control</span><span class="p">(</span><span class="n">control_force</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="factory-integration">
-<h4>1.2 Factory Integration<a class="headerlink" href="#factory-integration" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_controller</span>
-
-<span class="c1"># Create via factory (recommended)</span>
-<span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span>
-    <span class="s1">&#39;hybrid_adaptive_sta_smc&#39;</span><span class="p">,</span>
-    <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">77.6216</span><span class="p">,</span> <span class="mf">44.449</span><span class="p">,</span> <span class="mf">17.3134</span><span class="p">,</span> <span class="mf">14.25</span><span class="p">],</span>
-    <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_controller</span> <span class="c1"># Create via factory (recommended)</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span> <span class="s1">&#39;hybrid_adaptive_sta_smc&#39;</span><span class="p">,</span> <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">77.6216</span><span class="p">,</span> <span class="mf">44.449</span><span class="p">,</span> <span class="mf">17.3134</span><span class="p">,</span> <span class="mf">14.25</span><span class="p">],</span> <span class="n">max_force</span><span class="o">=</span><span class="mf">100.0</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="pso-optimization-integration">
-<h3>2. PSO Optimization Integration<a class="headerlink" href="#pso-optimization-integration" title="Link to this heading">¶</a></h3>
-<section id="gain-bounds-definition">
-<h4>2.1 Gain Bounds Definition<a class="headerlink" href="#gain-bounds-definition" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.optimizer.pso_optimizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">PSOTuner</span>
-
-<span class="c1"># Define PSO search space for hybrid controller</span>
-<span class="n">pso_bounds</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span>   <span class="c1"># c1: First pendulum weight</span>
-    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span>   <span class="c1"># λ1: First pendulum damping</span>
-    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">),</span>    <span class="c1"># c2: Second pendulum weight</span>
-    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">),</span>    <span class="c1"># λ2: Second pendulum damping</span>
-<span class="p">]</span>
-
-<span class="c1"># Run PSO optimization</span>
+<span class="err">```</span> <span class="c1">### 2. PSO Optimization Integration #### 2.1 Gain Bounds Definition ```python</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.optimizer.pso_optimizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">PSOTuner</span> <span class="c1"># Define PSO search space for hybrid controller</span>
+<span class="n">pso_bounds</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span> <span class="c1"># c1: First pendulum weight (1.0, 100.0), # λ1: First pendulum damping (1.0, 20.0), # c2: Second pendulum weight (1.0, 20.0), # λ2: Second pendulum damping</span>
+<span class="p">]</span> <span class="c1"># Run PSO optimization</span>
 <span class="n">tuner</span> <span class="o">=</span> <span class="n">PSOTuner</span><span class="p">(</span><span class="n">bounds</span><span class="o">=</span><span class="n">pso_bounds</span><span class="p">,</span> <span class="n">n_particles</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">best_gains</span><span class="p">,</span> <span class="n">best_cost</span> <span class="o">=</span> <span class="n">tuner</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
-    <span class="n">controller_type</span><span class="o">=</span><span class="s1">&#39;hybrid_adaptive_sta_smc&#39;</span><span class="p">,</span>
-    <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics_model</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimized gains: </span><span class="si">{</span><span class="n">best_gains</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">best_gains</span><span class="p">,</span> <span class="n">best_cost</span> <span class="o">=</span> <span class="n">tuner</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span> <span class="n">controller_type</span><span class="o">=</span><span class="s1">&#39;hybrid_adaptive_sta_smc&#39;</span><span class="p">,</span> <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics_model</span>
+<span class="p">)</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimized gains: </span><span class="si">{</span><span class="n">best_gains</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best cost: </span><span class="si">{</span><span class="n">best_cost</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="err">```</span> <span class="c1">#### 2.2 Simulation Workflow ```python</span>
+<span class="c1"># example-metadata:</span>
+
+<span class="c1"># runnable: false # Complete simulation with PSO-optimized hybrid controller</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_hybrid_simulation</span><span class="p">():</span> <span class="c1"># Load configuration config = load_config(&#39;config.yaml&#39;) # Create optimized controller controller = create_controller( &#39;hybrid_adaptive_sta_smc&#39;, gains=[77.6216, 44.449, 17.3134, 14.25], # PSO result **config.controllers.hybrid_adaptive_sta_smc ) # Run simulation results = run_simulation( controller=controller, dynamics=dynamics_model, duration=10.0, dt=0.01 ) return results</span>
+<span class="err">```</span> <span class="c1">### 3. Monitoring and Diagnostics #### 3.1 Real-Time Monitoring ```python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false def monitor_hybrid_controller(controller, state, result): &quot;&quot;&quot;Monitor hybrid controller performance indicators.&quot;&quot;&quot; # Extract monitoring data k1, k2, u_int = result.state_vars s = result.sliding_surface # Performance indicators adaptation_rate = (k1 + k2) / (controller.k1_max + controller.k2_max) surface_distance = abs(s) integral_usage = abs(u_int) / controller.u_int_max # Warning conditions if adaptation_rate &gt; 0.8: print(f&quot;WARNING: High adaptation rate: {adaptation_rate:.3f}&quot;) if surface_distance &gt; 1.0: print(f&quot;WARNING: Large sliding surface: {surface_distance:.3f}&quot;) if integral_usage &gt; 0.9: print(f&quot;WARNING: Integral near saturation: {integral_usage:.3f}&quot;) return { &#39;adaptation_rate&#39;: adaptation_rate, &#39;surface_distance&#39;: surface_distance, &#39;integral_usage&#39;: integral_usage }</span>
+<span class="err">```</span> <span class="c1">#### 3.2 Performance Analysis ```python</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_hybrid_performance</span><span class="p">(</span><span class="n">history</span><span class="p">):</span> <span class="s2">&quot;&quot;&quot;Analyze hybrid controller historical performance.&quot;&quot;&quot;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span> <span class="c1"># Extract time series k1_history = np.array(history[&#39;k1&#39;]) k2_history = np.array(history[&#39;k2&#39;]) s_history = np.array(history[&#39;s&#39;]) u_int_history = np.array(history[&#39;u_int&#39;]) # Create performance plots fig, axes = plt.subplots(2, 2, figsize=(12, 8)) # Adaptive gains evolution axes[0,0].plot(k1_history, label=&#39;k1&#39;) axes[0,0].plot(k2_history, label=&#39;k2&#39;) axes[0,0].set_title(&#39;Adaptive Gains Evolution&#39;) axes[0,0].legend() # Sliding surface axes[0,1].plot(s_history) axes[0,1].set_title(&#39;Sliding Surface&#39;) axes[0,1].axhline(y=0, color=&#39;r&#39;, linestyle=&#39;--&#39;) # Integral term axes[1,0].plot(u_int_history) axes[1,0].set_title(&#39;Integral Control Term&#39;) # Phase portrait (s vs ṡ) s_dot = np.gradient(s_history) axes[1,1].plot(s_history, s_dot) axes[1,1].set_title(&#39;Sliding Surface Phase Portrait&#39;) axes[1,1].set_xlabel(&#39;s&#39;) axes[1,1].set_ylabel(&#39;ṡ&#39;) plt.tight_layout() return fig</span>
 </pre></div>
 </div>
-</section>
-<section id="simulation-workflow">
-<h4>2.2 Simulation Workflow<a class="headerlink" href="#simulation-workflow" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
+<hr class="docutils" />
+<section id="performance-characteristics-1-benchmark-results-1-1-pso-optimization-performance">
+<h2>Performance Characteristics ### 1. Benchmark Results #### 1.1 PSO Optimization Performance ```<a class="headerlink" href="#performance-characteristics-1-benchmark-results-1-1-pso-optimization-performance" title="Link to this heading">¶</a></h2>
+<p>Controller: hybrid_adaptive_sta_smc
+Best Cost: 0.000000 (perfect convergence)
+Best Gains: [77.6216, 44.449, 17.3134, 14.25]
+Optimization Time: ~2 minutes (200 iterations)
+Convergence: Achieved in &lt; 50 iterations</p>
+<div class="highlight-#### notranslate"><div class="highlight"><pre><span></span>
+|--------|-------|------|------------|
+| **Settling Time** | 3.2 | seconds | Best of 4 controllers |
+| **Overshoot** | 2.1 | % | Moderate |
+| **Steady-State Error** | 0.001 | degrees | |
+| **Control Effort (RMS)** | 15.3 | N | Efficient |
+| **Chattering Index** | 0.02 | - | Very low | #### 1.3 Robustness Analysis ```python
+# Uncertainty handling performance
 
-<span class="c1"># Complete simulation with PSO-optimized hybrid controller</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">run_hybrid_simulation</span><span class="p">():</span>
-    <span class="c1"># Load configuration</span>
-    <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="s1">&#39;config.yaml&#39;</span><span class="p">)</span>
+uncertainties = { &#39;mass_variation&#39;: ±20%, # Result: Stable &#39;length_variation&#39;: ±15%, # Result: Stable &#39;friction_variation&#39;: ±50%, # Result: Stable &#39;sensor_noise&#39;: 0.1° RMS, # Result: Robust &#39;actuator_delay&#39;: 5ms, # Result: Acceptable
+}
+``` ### 2. Comparative Analysis #### 2.1 Controller Comparison Matrix | Aspect | Classical | Adaptive | STA | **Hybrid** |
+|--------|-----------|----------|-----|------------|
+| **Convergence** | Exponential | Exponential | Finite-time | **Finite-time** |
+| **Robustness** | Good | | | **Superior** |
+| **Chattering** | Moderate | Low | Very Low | **Minimal** |
+| **Complexity** | Low | Medium | Medium | **High** |
+| **Tuning** | 6 params | 5 params | 6 params | **4 params** |
+| **PSO Cost** | 0.000000 | 0.000000 | 0.000000 | **0.000000** | #### 2.2 Use Case Recommendations **Hybrid Controller Best For**:
+- Complex, highly coupled systems (✓ Double-inverted pendulum)
+- High uncertainty environments
+- Research applications requiring advanced control
+- Systems needing finite-time convergence with minimal chattering **Alternative Controllers For**:
+- **Classical SMC**: Simple systems, rapid prototyping
+- **Adaptive SMC**: Unknown parameters, slow variations
+- **STA SMC**: High precision, moderate complexity ### 3. Computational Performance #### 3.1 Runtime Analysis ```python
+# example-metadata:
+# runnable: false # Performance profiling results
+computation_times = { &#39;sliding_surface&#39;: &#39;12.3 μs&#39;, # Fast &#39;adaptive_gains&#39;: &#39;18.7 μs&#39;, # Moderate &#39;equivalent_control&#39;: &#39;45.2 μs&#39;, # Expensive (matrix ops) &#39;total_per_step&#39;: &#39;89.4 μs&#39;, # Real-time capable at 1kHz
+} # Memory usage
+memory_footprint = { &#39;controller_object&#39;: &#39;2.1 KB&#39;, &#39;history_storage&#39;: &#39;15.6 KB/minute&#39;, &#39;peak_simulation&#39;: &#39;156 MB&#39;, # Including visualization
+}
+``` #### 3.2 Scaling Characteristics - **Real-time Performance**: Supports up to 2kHz control frequency
 
-    <span class="c1"># Create optimized controller</span>
-    <span class="n">controller</span> <span class="o">=</span> <span class="n">create_controller</span><span class="p">(</span>
-        <span class="s1">&#39;hybrid_adaptive_sta_smc&#39;</span><span class="p">,</span>
-        <span class="n">gains</span><span class="o">=</span><span class="p">[</span><span class="mf">77.6216</span><span class="p">,</span> <span class="mf">44.449</span><span class="p">,</span> <span class="mf">17.3134</span><span class="p">,</span> <span class="mf">14.25</span><span class="p">],</span>  <span class="c1"># PSO result</span>
-        <span class="o">**</span><span class="n">config</span><span class="o">.</span><span class="n">controllers</span><span class="o">.</span><span class="n">hybrid_adaptive_sta_smc</span>
-    <span class="p">)</span>
+- **Parallel Capability**: Thread-safe for multi-controller scenarios
+- **Memory Efficiency**: O(1) space complexity for core algorithm
 
-    <span class="c1"># Run simulation</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span>
-        <span class="n">controller</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span>
-        <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics_model</span><span class="p">,</span>
-        <span class="n">duration</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
-        <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span>
-    <span class="p">)</span>
+---
 
-    <span class="k">return</span> <span class="n">results</span>
+## Troubleshooting ### 1. Common Issues #### 1.1 Oscillatory Behavior **Symptoms**:
+
+- High-frequency oscillations in control signal
+- Large adaptive gains (k1, k2 &gt; 30)
+- Sliding surface value |s| &gt; 1.0 **Solutions**:
+```python
+# Increase damping
+damping_gain = 5.0 # From default 3.0 # Reduce adaptation rates
+gamma1 = 0.3 # From default 0.5
+gamma2 = 0.2 # From default 0.3 # Widen dead zone
+dead_zone = 0.02 # From default 0.01
+``` #### 1.2 Slow Convergence **Symptoms**:
+
+- Long settling time (&gt; 5 seconds)
+- Low adaptive gains (k1, k2 &lt; 5)
+- Large steady-state error **Solutions**:
+```python
+# Increase surface weights
+gains = [100, 60, 20, 18] # Higher c1, λ1 # Increase adaptation rates
+gamma1 = 0.8
+gamma2 = 0.5 # equivalent control
+enable_equivalent = True
+``` #### 1.3 Numerical Instability **Symptoms**:
+
+- NaN or infinite values in control output
+- Emergency reset frequently triggered
+- Matrix inversion failures **Solutions**:
+```python
+# Increase regularization
+matrix_regularization = 1e-8 # In equivalent control # Reduce adaptation rate limits
+adapt_rate_limit = 2.0 # From default 5.0 # Check system conditioning
+condition_number = np.linalg.cond(inertia_matrix)
+if condition_number &gt; 1e12: print(&quot;WARNING: Ill-conditioned system&quot;)
+``` ### 2. Diagnostic Tools #### 2.1 State Monitoring ```python
+# example-metadata:
+
+# runnable: false def diagnose_hybrid_controller(controller, state, result): &quot;&quot;&quot;controller diagnostics.&quot;&quot;&quot; diagnostics = {} # Extract current values k1, k2, u_int = result.state_vars s = result.sliding_surface # Check adaptation health diagnostics[&#39;adaptation_active&#39;] = abs(s) &gt; controller.dead_zone diagnostics[&#39;gains_saturated&#39;] = (k1 &gt;= controller.k1_max * 0.9 or k2 &gt;= controller.k2_max * 0.9) # Check numerical health diagnostics[&#39;values_finite&#39;] = all(np.isfinite([k1, k2, u_int, s])) diagnostics[&#39;within_bounds&#39;] = abs(result.control) &lt;= controller.max_force # Performance indicators diagnostics[&#39;surface_distance&#39;] = abs(s) diagnostics[&#39;adaptation_ratio&#39;] = (k1 + k2) / (controller.k1_max + controller.k2_max) return diagnostics
+
+``` #### 2.2 Parameter Validation ```python
+# example-metadata:
+# runnable: false def validate_hybrid_parameters(gains, config): &quot;&quot;&quot;Validate hybrid controller parameters for stability.&quot;&quot;&quot; c1, lambda1, c2, lambda2 = gains checks = { &#39;positive_gains&#39;: all(g &gt; 0 for g in [c1, lambda1, c2, lambda2]), &#39;reasonable_ratios&#39;: c1/lambda1 &gt; 0.5 and c2/lambda2 &gt; 0.5, &#39;adaptation_bounds&#39;: config.k1_max &gt; config.k1_init * 5, &#39;dead_zone_valid&#39;: config.dead_zone &lt;= config.sat_soft_width, } if not all(checks.values()): failed = [k for k, v in checks.items() if not v] raise ValueError(f&quot;Parameter validation failed: {failed}&quot;) return True
+``` ### 3. Performance Optimization #### 3.1 Computational Optimization ```python
+# Pre-compile frequent calculations
+
+@functools.lru_cache(maxsize=128)
+def cached_matrix_operations(state_tuple): &quot;&quot;&quot;Cache expensive matrix operations.&quot;&quot;&quot; return compute_physics_matrices(np.array(state_tuple)) # Vectorized operations where possible
+def vectorized_adaptation(s_values, gamma_values): &quot;&quot;&quot;Batch adaptive gain updates.&quot;&quot;&quot; return gamma_values * np.abs(s_values)
+``` #### 3.2 Memory Optimization ```python
+# Limit history storage
+max_history_length = 1000 # Keep only recent samples # Use circular buffers for real-time applications
+from collections import deque
+history = { &#39;k1&#39;: deque(maxlen=max_history_length), &#39;k2&#39;: deque(maxlen=max_history_length), &#39;s&#39;: deque(maxlen=max_history_length),
+}
 </pre></div>
 </div>
-</section>
-</section>
-<section id="monitoring-and-diagnostics">
-<h3>3. Monitoring and Diagnostics<a class="headerlink" href="#monitoring-and-diagnostics" title="Link to this heading">¶</a></h3>
-<section id="real-time-monitoring">
-<h4>3.1 Real-Time Monitoring<a class="headerlink" href="#real-time-monitoring" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">monitor_hybrid_controller</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Monitor hybrid controller performance indicators.&quot;&quot;&quot;</span>
-
-    <span class="c1"># Extract monitoring data</span>
-    <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">u_int</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">state_vars</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">sliding_surface</span>
-
-    <span class="c1"># Performance indicators</span>
-    <span class="n">adaptation_rate</span> <span class="o">=</span> <span class="p">(</span><span class="n">k1</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">controller</span><span class="o">.</span><span class="n">k1_max</span> <span class="o">+</span> <span class="n">controller</span><span class="o">.</span><span class="n">k2_max</span><span class="p">)</span>
-    <span class="n">surface_distance</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-    <span class="n">integral_usage</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u_int</span><span class="p">)</span> <span class="o">/</span> <span class="n">controller</span><span class="o">.</span><span class="n">u_int_max</span>
-
-    <span class="c1"># Warning conditions</span>
-    <span class="k">if</span> <span class="n">adaptation_rate</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: High adaptation rate: </span><span class="si">{</span><span class="n">adaptation_rate</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">surface_distance</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Large sliding surface: </span><span class="si">{</span><span class="n">surface_distance</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">integral_usage</span> <span class="o">&gt;</span> <span class="mf">0.9</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: Integral near saturation: </span><span class="si">{</span><span class="n">integral_usage</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;adaptation_rate&#39;</span><span class="p">:</span> <span class="n">adaptation_rate</span><span class="p">,</span>
-        <span class="s1">&#39;surface_distance&#39;</span><span class="p">:</span> <span class="n">surface_distance</span><span class="p">,</span>
-        <span class="s1">&#39;integral_usage&#39;</span><span class="p">:</span> <span class="n">integral_usage</span>
-    <span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="performance-analysis">
-<h4>3.2 Performance Analysis<a class="headerlink" href="#performance-analysis" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analyze_hybrid_performance</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze hybrid controller historical performance.&quot;&quot;&quot;</span>
-
-    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-    <span class="c1"># Extract time series</span>
-    <span class="n">k1_history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;k1&#39;</span><span class="p">])</span>
-    <span class="n">k2_history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;k2&#39;</span><span class="p">])</span>
-    <span class="n">s_history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">])</span>
-    <span class="n">u_int_history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;u_int&#39;</span><span class="p">])</span>
-
-    <span class="c1"># Create performance plots</span>
-    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-
-    <span class="c1"># Adaptive gains evolution</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k1_history</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;k1&#39;</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k2_history</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;k2&#39;</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Adaptive Gains Evolution&#39;</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-    <span class="c1"># Sliding surface</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s_history</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Sliding Surface&#39;</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-
-    <span class="c1"># Integral term</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u_int_history</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Integral Control Term&#39;</span><span class="p">)</span>
-
-    <span class="c1"># Phase portrait (s vs ṡ)</span>
-    <span class="n">s_dot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">s_history</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s_history</span><span class="p">,</span> <span class="n">s_dot</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Sliding Surface Phase Portrait&#39;</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;ṡ&#39;</span><span class="p">)</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">fig</span>
-</pre></div>
-</div>
-</section>
-</section>
 </section>
 <hr class="docutils" />
-<section id="performance-characteristics">
-<h2>Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Link to this heading">¶</a></h2>
-<section id="benchmark-results">
-<h3>1. Benchmark Results<a class="headerlink" href="#benchmark-results" title="Link to this heading">¶</a></h3>
-<section id="pso-optimization-performance">
-<h4>1.1 PSO Optimization Performance<a class="headerlink" href="#pso-optimization-performance" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Controller</span><span class="p">:</span> <span class="n">hybrid_adaptive_sta_smc</span>
-<span class="n">Best</span> <span class="n">Cost</span><span class="p">:</span> <span class="mf">0.000000</span> <span class="p">(</span><span class="n">perfect</span> <span class="n">convergence</span><span class="p">)</span>
-<span class="n">Best</span> <span class="n">Gains</span><span class="p">:</span> <span class="p">[</span><span class="mf">77.6216</span><span class="p">,</span> <span class="mf">44.449</span><span class="p">,</span> <span class="mf">17.3134</span><span class="p">,</span> <span class="mf">14.25</span><span class="p">]</span>
-<span class="n">Optimization</span> <span class="n">Time</span><span class="p">:</span> <span class="o">~</span><span class="mi">2</span> <span class="n">minutes</span> <span class="p">(</span><span class="mi">200</span> <span class="n">iterations</span><span class="p">)</span>
-<span class="n">Convergence</span><span class="p">:</span> <span class="n">Achieved</span> <span class="ow">in</span> <span class="o">&lt;</span> <span class="mi">50</span> <span class="n">iterations</span>
-</pre></div>
-</div>
-</section>
-<section id="control-performance-metrics">
-<h4>1.2 Control Performance Metrics<a class="headerlink" href="#control-performance-metrics" title="Link to this heading">¶</a></h4>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Metric</p></th>
-<th class="head"><p>Value</p></th>
-<th class="head"><p>Unit</p></th>
-<th class="head"><p>Comparison</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Settling Time</strong></p></td>
-<td><p>3.2</p></td>
-<td><p>seconds</p></td>
-<td><p>Best of 4 controllers</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Overshoot</strong></p></td>
-<td><p>2.1</p></td>
-<td><p>%</p></td>
-<td><p>Moderate</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Steady-State Error</strong></p></td>
-<td><p>0.001</p></td>
-<td><p>degrees</p></td>
-<td><p>Excellent</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Control Effort (RMS)</strong></p></td>
-<td><p>15.3</p></td>
-<td><p>N</p></td>
-<td><p>Efficient</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Chattering Index</strong></p></td>
-<td><p>0.02</p></td>
-<td><p>-</p></td>
-<td><p>Very low</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="robustness-analysis">
-<h4>1.3 Robustness Analysis<a class="headerlink" href="#robustness-analysis" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncertainty handling performance</span>
-<span class="n">uncertainties</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;mass_variation&#39;</span><span class="p">:</span> <span class="err">±</span><span class="mi">20</span><span class="o">%</span><span class="p">,</span>      <span class="c1"># Result: Stable</span>
-    <span class="s1">&#39;length_variation&#39;</span><span class="p">:</span> <span class="err">±</span><span class="mi">15</span><span class="o">%</span><span class="p">,</span>    <span class="c1"># Result: Stable</span>
-    <span class="s1">&#39;friction_variation&#39;</span><span class="p">:</span> <span class="err">±</span><span class="mi">50</span><span class="o">%</span><span class="p">,</span>  <span class="c1"># Result: Stable</span>
-    <span class="s1">&#39;sensor_noise&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="err">°</span> <span class="n">RMS</span><span class="p">,</span>    <span class="c1"># Result: Robust</span>
-    <span class="s1">&#39;actuator_delay&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="n">ms</span><span class="p">,</span>       <span class="c1"># Result: Acceptable</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="comparative-analysis">
-<h3>2. Comparative Analysis<a class="headerlink" href="#comparative-analysis" title="Link to this heading">¶</a></h3>
-<section id="controller-comparison-matrix">
-<h4>2.1 Controller Comparison Matrix<a class="headerlink" href="#controller-comparison-matrix" title="Link to this heading">¶</a></h4>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Aspect</p></th>
-<th class="head"><p>Classical</p></th>
-<th class="head"><p>Adaptive</p></th>
-<th class="head"><p>STA</p></th>
-<th class="head"><p><strong>Hybrid</strong></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Convergence</strong></p></td>
-<td><p>Exponential</p></td>
-<td><p>Exponential</p></td>
-<td><p>Finite-time</p></td>
-<td><p><strong>Finite-time</strong></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Robustness</strong></p></td>
-<td><p>Good</p></td>
-<td><p>Excellent</p></td>
-<td><p>Excellent</p></td>
-<td><p><strong>Superior</strong></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Chattering</strong></p></td>
-<td><p>Moderate</p></td>
-<td><p>Low</p></td>
-<td><p>Very Low</p></td>
-<td><p><strong>Minimal</strong></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Complexity</strong></p></td>
-<td><p>Low</p></td>
-<td><p>Medium</p></td>
-<td><p>Medium</p></td>
-<td><p><strong>High</strong></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Tuning</strong></p></td>
-<td><p>6 params</p></td>
-<td><p>5 params</p></td>
-<td><p>6 params</p></td>
-<td><p><strong>4 params</strong></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>PSO Cost</strong></p></td>
-<td><p>0.000000</p></td>
-<td><p>0.000000</p></td>
-<td><p>0.000000</p></td>
-<td><p><strong>0.000000</strong></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="use-case-recommendations">
-<h4>2.2 Use Case Recommendations<a class="headerlink" href="#use-case-recommendations" title="Link to this heading">¶</a></h4>
-<p><strong>Hybrid Controller Best For</strong>:</p>
-<ul class="simple">
-<li><p>Complex, highly coupled systems (✓ Double-inverted pendulum)</p></li>
-<li><p>High uncertainty environments</p></li>
-<li><p>Research applications requiring advanced control</p></li>
-<li><p>Systems needing finite-time convergence with minimal chattering</p></li>
-</ul>
-<p><strong>Alternative Controllers For</strong>:</p>
-<ul class="simple">
-<li><p><strong>Classical SMC</strong>: Simple systems, rapid prototyping</p></li>
-<li><p><strong>Adaptive SMC</strong>: Unknown parameters, slow variations</p></li>
-<li><p><strong>STA SMC</strong>: High precision, moderate complexity</p></li>
-</ul>
-</section>
-</section>
-<section id="computational-performance">
-<h3>3. Computational Performance<a class="headerlink" href="#computational-performance" title="Link to this heading">¶</a></h3>
-<section id="runtime-analysis">
-<h4>3.1 Runtime Analysis<a class="headerlink" href="#runtime-analysis" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="c1"># Performance profiling results</span>
-<span class="n">computation_times</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;sliding_surface&#39;</span><span class="p">:</span> <span class="s1">&#39;12.3 μs&#39;</span><span class="p">,</span>      <span class="c1"># Fast</span>
-    <span class="s1">&#39;adaptive_gains&#39;</span><span class="p">:</span> <span class="s1">&#39;18.7 μs&#39;</span><span class="p">,</span>       <span class="c1"># Moderate</span>
-    <span class="s1">&#39;equivalent_control&#39;</span><span class="p">:</span> <span class="s1">&#39;45.2 μs&#39;</span><span class="p">,</span>   <span class="c1"># Expensive (matrix ops)</span>
-    <span class="s1">&#39;total_per_step&#39;</span><span class="p">:</span> <span class="s1">&#39;89.4 μs&#39;</span><span class="p">,</span>      <span class="c1"># Real-time capable at 1kHz</span>
-<span class="p">}</span>
-
-<span class="c1"># Memory usage</span>
-<span class="n">memory_footprint</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;controller_object&#39;</span><span class="p">:</span> <span class="s1">&#39;2.1 KB&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;history_storage&#39;</span><span class="p">:</span> <span class="s1">&#39;15.6 KB/minute&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;peak_simulation&#39;</span><span class="p">:</span> <span class="s1">&#39;156 MB&#39;</span><span class="p">,</span>       <span class="c1"># Including visualization</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="scaling-characteristics">
-<h4>3.2 Scaling Characteristics<a class="headerlink" href="#scaling-characteristics" title="Link to this heading">¶</a></h4>
-<ul class="simple">
-<li><p><strong>Real-time Performance</strong>: Supports up to 2kHz control frequency</p></li>
-<li><p><strong>Parallel Capability</strong>: Thread-safe for multi-controller scenarios</p></li>
-<li><p><strong>Memory Efficiency</strong>: O(1) space complexity for core algorithm</p></li>
-</ul>
-</section>
-</section>
-</section>
-<hr class="docutils" />
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
-<section id="common-issues">
-<h3>1. Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">¶</a></h3>
-<section id="oscillatory-behavior">
-<h4>1.1 Oscillatory Behavior<a class="headerlink" href="#oscillatory-behavior" title="Link to this heading">¶</a></h4>
-<p><strong>Symptoms</strong>:</p>
-<ul class="simple">
-<li><p>High-frequency oscillations in control signal</p></li>
-<li><p>Large adaptive gains (k1, k2 &gt; 30)</p></li>
-<li><p>Sliding surface value |s| &gt; 1.0</p></li>
-</ul>
-<p><strong>Solutions</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase damping</span>
-<span class="n">damping_gain</span> <span class="o">=</span> <span class="mf">5.0</span>  <span class="c1"># From default 3.0</span>
-
-<span class="c1"># Reduce adaptation rates</span>
-<span class="n">gamma1</span> <span class="o">=</span> <span class="mf">0.3</span>  <span class="c1"># From default 0.5</span>
-<span class="n">gamma2</span> <span class="o">=</span> <span class="mf">0.2</span>  <span class="c1"># From default 0.3</span>
-
-<span class="c1"># Widen dead zone</span>
-<span class="n">dead_zone</span> <span class="o">=</span> <span class="mf">0.02</span>  <span class="c1"># From default 0.01</span>
-</pre></div>
-</div>
-</section>
-<section id="slow-convergence">
-<h4>1.2 Slow Convergence<a class="headerlink" href="#slow-convergence" title="Link to this heading">¶</a></h4>
-<p><strong>Symptoms</strong>:</p>
-<ul class="simple">
-<li><p>Long settling time (&gt; 5 seconds)</p></li>
-<li><p>Low adaptive gains (k1, k2 &lt; 5)</p></li>
-<li><p>Large steady-state error</p></li>
-</ul>
-<p><strong>Solutions</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase surface weights</span>
-<span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>  <span class="c1"># Higher c1, λ1</span>
-
-<span class="c1"># Increase adaptation rates</span>
-<span class="n">gamma1</span> <span class="o">=</span> <span class="mf">0.8</span>
-<span class="n">gamma2</span> <span class="o">=</span> <span class="mf">0.5</span>
-
-<span class="c1"># Enable equivalent control</span>
-<span class="n">enable_equivalent</span> <span class="o">=</span> <span class="kc">True</span>
-</pre></div>
-</div>
-</section>
-<section id="numerical-instability">
-<h4>1.3 Numerical Instability<a class="headerlink" href="#numerical-instability" title="Link to this heading">¶</a></h4>
-<p><strong>Symptoms</strong>:</p>
-<ul class="simple">
-<li><p>NaN or infinite values in control output</p></li>
-<li><p>Emergency reset frequently triggered</p></li>
-<li><p>Matrix inversion failures</p></li>
-</ul>
-<p><strong>Solutions</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase regularization</span>
-<span class="n">matrix_regularization</span> <span class="o">=</span> <span class="mf">1e-8</span>  <span class="c1"># In equivalent control</span>
-
-<span class="c1"># Reduce adaptation rate limits</span>
-<span class="n">adapt_rate_limit</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># From default 5.0</span>
-
-<span class="c1"># Check system conditioning</span>
-<span class="n">condition_number</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">inertia_matrix</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">condition_number</span> <span class="o">&gt;</span> <span class="mf">1e12</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: Ill-conditioned system&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="diagnostic-tools">
-<h3>2. Diagnostic Tools<a class="headerlink" href="#diagnostic-tools" title="Link to this heading">¶</a></h3>
-<section id="state-monitoring">
-<h4>2.1 State Monitoring<a class="headerlink" href="#state-monitoring" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">diagnose_hybrid_controller</span><span class="p">(</span><span class="n">controller</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive controller diagnostics.&quot;&quot;&quot;</span>
-
-    <span class="n">diagnostics</span> <span class="o">=</span> <span class="p">{}</span>
-
-    <span class="c1"># Extract current values</span>
-    <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">u_int</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">state_vars</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">sliding_surface</span>
-
-    <span class="c1"># Check adaptation health</span>
-    <span class="n">diagnostics</span><span class="p">[</span><span class="s1">&#39;adaptation_active&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">controller</span><span class="o">.</span><span class="n">dead_zone</span>
-    <span class="n">diagnostics</span><span class="p">[</span><span class="s1">&#39;gains_saturated&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">k1</span> <span class="o">&gt;=</span> <span class="n">controller</span><span class="o">.</span><span class="n">k1_max</span> <span class="o">*</span> <span class="mf">0.9</span> <span class="ow">or</span>
-                                    <span class="n">k2</span> <span class="o">&gt;=</span> <span class="n">controller</span><span class="o">.</span><span class="n">k2_max</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">)</span>
-
-    <span class="c1"># Check numerical health</span>
-    <span class="n">diagnostics</span><span class="p">[</span><span class="s1">&#39;values_finite&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">([</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">u_int</span><span class="p">,</span> <span class="n">s</span><span class="p">]))</span>
-    <span class="n">diagnostics</span><span class="p">[</span><span class="s1">&#39;within_bounds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">control</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">controller</span><span class="o">.</span><span class="n">max_force</span>
-
-    <span class="c1"># Performance indicators</span>
-    <span class="n">diagnostics</span><span class="p">[</span><span class="s1">&#39;surface_distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-    <span class="n">diagnostics</span><span class="p">[</span><span class="s1">&#39;adaptation_ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">k1</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">controller</span><span class="o">.</span><span class="n">k1_max</span> <span class="o">+</span> <span class="n">controller</span><span class="o">.</span><span class="n">k2_max</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">diagnostics</span>
-</pre></div>
-</div>
-</section>
-<section id="parameter-validation">
-<h4>2.2 Parameter Validation<a class="headerlink" href="#parameter-validation" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">validate_hybrid_parameters</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate hybrid controller parameters for stability.&quot;&quot;&quot;</span>
-
-    <span class="n">c1</span><span class="p">,</span> <span class="n">lambda1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">lambda2</span> <span class="o">=</span> <span class="n">gains</span>
-
-    <span class="n">checks</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;positive_gains&#39;</span><span class="p">:</span> <span class="nb">all</span><span class="p">(</span><span class="n">g</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span><span class="n">c1</span><span class="p">,</span> <span class="n">lambda1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">lambda2</span><span class="p">]),</span>
-        <span class="s1">&#39;reasonable_ratios&#39;</span><span class="p">:</span> <span class="n">c1</span><span class="o">/</span><span class="n">lambda1</span> <span class="o">&gt;</span> <span class="mf">0.5</span> <span class="ow">and</span> <span class="n">c2</span><span class="o">/</span><span class="n">lambda2</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">,</span>
-        <span class="s1">&#39;adaptation_bounds&#39;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">k1_max</span> <span class="o">&gt;</span> <span class="n">config</span><span class="o">.</span><span class="n">k1_init</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="s1">&#39;dead_zone_valid&#39;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">dead_zone</span> <span class="o">&lt;=</span> <span class="n">config</span><span class="o">.</span><span class="n">sat_soft_width</span><span class="p">,</span>
-    <span class="p">}</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">checks</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
-        <span class="n">failed</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">checks</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span><span class="p">]</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parameter validation failed: </span><span class="si">{</span><span class="n">failed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="kc">True</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="performance-optimization">
-<h3>3. Performance Optimization<a class="headerlink" href="#performance-optimization" title="Link to this heading">¶</a></h3>
-<section id="computational-optimization">
-<h4>3.1 Computational Optimization<a class="headerlink" href="#computational-optimization" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pre-compile frequent calculations</span>
-<span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">cached_matrix_operations</span><span class="p">(</span><span class="n">state_tuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cache expensive matrix operations.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">compute_physics_matrices</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state_tuple</span><span class="p">))</span>
-
-<span class="c1"># Vectorized operations where possible</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">vectorized_adaptation</span><span class="p">(</span><span class="n">s_values</span><span class="p">,</span> <span class="n">gamma_values</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Batch adaptive gain updates.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">gamma_values</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s_values</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="memory-optimization">
-<h4>3.2 Memory Optimization<a class="headerlink" href="#memory-optimization" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Limit history storage</span>
-<span class="n">max_history_length</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Keep only recent samples</span>
-
-<span class="c1"># Use circular buffers for real-time applications</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
-<span class="n">history</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;k1&#39;</span><span class="p">:</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">max_history_length</span><span class="p">),</span>
-    <span class="s1">&#39;k2&#39;</span><span class="p">:</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">max_history_length</span><span class="p">),</span>
-    <span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">max_history_length</span><span class="p">),</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-</section>
-</section>
-<hr class="docutils" />
-<section id="references-and-further-reading">
-<h2>References and Further Reading<a class="headerlink" href="#references-and-further-reading" title="Link to this heading">¶</a></h2>
-<section id="control-theory-references">
-<h3>1. Control Theory References<a class="headerlink" href="#control-theory-references" title="Link to this heading">¶</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Utkin, V.</strong> (1992). “Sliding Modes in Control and Optimization”. Springer-Verlag.</p></li>
+<section id="references-and-further-reading-1-control-theory-references-1-utkin-v-1992-sliding-modes-in-control-and-optimization-springer-verlag">
+<h2>References and Further Reading ### 1. Control Theory References 1. <strong>Utkin, V.</strong> (1992). “Sliding Modes in Control and Optimization”. Springer-Verlag.<a class="headerlink" href="#references-and-further-reading-1-control-theory-references-1-utkin-v-1992-sliding-modes-in-control-and-optimization-springer-verlag" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple" start="2">
 <li><p><strong>Edwards, C. &amp; Spurgeon, S.</strong> (1998). “Sliding Mode Control: Theory and Applications”. Taylor &amp; Francis.</p></li>
 <li><p><strong>Moreno, J.A. &amp; Osorio, M.</strong> (2008). “A Lyapunov approach to second-order sliding mode controllers and observers”. IEEE CDC.</p></li>
-<li><p><strong>Levant, A.</strong> (1993). “Sliding order and sliding accuracy in sliding mode control”. International Journal of Control.</p></li>
-</ol>
-</section>
-<section id="adaptive-control-references">
-<h3>2. Adaptive Control References<a class="headerlink" href="#adaptive-control-references" title="Link to this heading">¶</a></h3>
-<ol class="arabic simple" start="5">
-<li><p><strong>Sastry, S. &amp; Bodson, M.</strong> (1989). “Adaptive Control: Stability, Convergence, and Robustness”. Prentice Hall.</p></li>
+<li><p><strong>Levant, A.</strong> (1993). “Sliding order and sliding accuracy in sliding mode control”. International Journal of Control. ### 2. Adaptive Control References 5. <strong>Sastry, S. &amp; Bodson, M.</strong> (1989). “Adaptive Control: Stability, Convergence, and Robustness”. Prentice Hall.</p></li>
 <li><p><strong>Ioannou, P.A. &amp; Sun, J.</strong> (1996). “Robust Adaptive Control”. Prentice Hall.</p></li>
-<li><p><strong>Tao, G.</strong> (2003). “Adaptive Control Design and Analysis”. John Wiley &amp; Sons.</p></li>
-</ol>
-</section>
-<section id="implementation-references">
-<h3>3. Implementation References<a class="headerlink" href="#implementation-references" title="Link to this heading">¶</a></h3>
-<ol class="arabic simple" start="8">
-<li><p><strong>Khalil, H.K.</strong> (2002). “Nonlinear Systems” (3rd Edition). Prentice Hall.</p></li>
+<li><p><strong>Tao, G.</strong> (2003). “Adaptive Control Design and Analysis”. John Wiley &amp; Sons. ### 3. Implementation References 8. <strong>Khalil, H.K.</strong> (2002). “Nonlinear Systems” (3rd Edition). Prentice Hall.</p></li>
 <li><p><strong>Isidori, A.</strong> (1995). “Nonlinear Control Systems” (3rd Edition). Springer-Verlag.</p></li>
 <li><p><strong>Slotine, J.J. &amp; Li, W.</strong> (1991). “Applied Nonlinear Control”. Prentice Hall.</p></li>
 </ol>
@@ -1650,10 +604,8 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
 <li><p><strong>Implementation Validation</strong>: PSO Optimization Engineer</p></li>
 <li><p><strong>Final Approval</strong>: Ultimate Orchestrator</p></li>
 <li><p><strong>Version Control</strong>: Managed via Git repository</p></li>
-<li><p><strong>Next Review</strong>: 2025-10-29</p></li>
+<li><p><strong>Next Review</strong>: 2025-10-29 <strong>Classification</strong>: Technical Implementation Guide - Distribution Controlled</p></li>
 </ul>
-<p><strong>Classification</strong>: Technical Implementation Guide - Distribution Controlled</p>
-</section>
 </section>
 </section>
 
@@ -1662,26 +614,8 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="mpc_technical_guide.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Model Predictive Control Technical Guide</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="sta_smc_technical_guide.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">Super-Twisting Sliding Mode Control Technical Guide</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -1692,7 +626,7 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 08, 2025</div>
+              Last updated on Oct 10, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1701,159 +635,16 @@ u <span class="nb">&amp;</span>= -k<span class="nb">_</span>1 <span class="k">\s
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Hybrid Adaptive Super-Twisting SMC Technical Guide</a><ul>
-<li><a class="reference internal" href="#double-inverted-pendulum-control-system">Double-Inverted Pendulum Control System</a></li>
-<li><a class="reference internal" href="#executive-summary">Executive Summary</a></li>
-<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
-<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a><ul>
-<li><a class="reference internal" href="#sliding-surface-design">1. Sliding Surface Design</a><ul>
-<li><a class="reference internal" href="#absolute-vs-relative-coordinates">1.1 Absolute vs. Relative Coordinates</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#super-twisting-algorithm">2. Super-Twisting Algorithm</a><ul>
-<li><a class="reference internal" href="#finite-time-convergence">2.1 Finite-Time Convergence</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#adaptive-gain-laws">3. Adaptive Gain Laws</a></li>
-<li><a class="reference internal" href="#lyapunov-stability-analysis">4. Lyapunov Stability Analysis</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#algorithm-architecture">Algorithm Architecture</a><ul>
-<li><a class="reference internal" href="#modular-controller-structure">1. Modular Controller Structure</a><ul>
-<li><a class="reference internal" href="#key-methods">1.1 Key Methods</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#control-flow-architecture">2. Control Flow Architecture</a></li>
-<li><a class="reference internal" href="#safety-and-numerical-stability">3. Safety and Numerical Stability</a><ul>
-<li><a class="reference internal" href="#emergency-reset-conditions">3.1 Emergency Reset Conditions</a></li>
-<li><a class="reference internal" href="#numerical-stability-features">3.2 Numerical Stability Features</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#implementation-details">Implementation Details</a><ul>
-<li><a class="reference internal" href="#core-algorithm-implementation">1. Core Algorithm Implementation</a><ul>
-<li><a class="reference internal" href="#sliding-surface-computation">1.1 Sliding Surface Computation</a></li>
-<li><a class="reference internal" href="#adaptive-gain-update">1.2 Adaptive Gain Update</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#pso-integration-optimization">2. PSO Integration Optimization</a><ul>
-<li><a class="reference internal" href="#gain-parameter-structure">2.1 Gain Parameter Structure</a></li>
-<li><a class="reference internal" href="#pso-fitness-function-integration">2.2 PSO Fitness Function Integration</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#runtime-fix-analysis">Runtime Fix Analysis</a><ul>
-<li><a class="reference internal" href="#root-cause-analysis">1. Root Cause Analysis</a><ul>
-<li><a class="reference internal" href="#code-analysis">1.1 Code Analysis</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#error-propagation-analysis">2. Error Propagation Analysis</a></li>
-<li><a class="reference internal" href="#prevention-measures">3. Prevention Measures</a><ul>
-<li><a class="reference internal" href="#static-analysis-integration">3.1 Static Analysis Integration</a></li>
-<li><a class="reference internal" href="#code-review-checklist">3.2 Code Review Checklist</a></li>
-<li><a class="reference internal" href="#testing-validation">3.3 Testing Validation</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#parameter-configuration">Parameter Configuration</a><ul>
-<li><a class="reference internal" href="#primary-parameters-pso-tunable">1. Primary Parameters (PSO-Tunable)</a></li>
-<li><a class="reference internal" href="#internal-parameters-fixed">2. Internal Parameters (Fixed)</a></li>
-<li><a class="reference internal" href="#safety-parameters">3. Safety Parameters</a></li>
-<li><a class="reference internal" href="#configuration-example">4. Configuration Example</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#integration-guide">Integration Guide</a><ul>
-<li><a class="reference internal" href="#basic-usage">1. Basic Usage</a><ul>
-<li><a class="reference internal" href="#direct-instantiation">1.1 Direct Instantiation</a></li>
-<li><a class="reference internal" href="#factory-integration">1.2 Factory Integration</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#pso-optimization-integration">2. PSO Optimization Integration</a><ul>
-<li><a class="reference internal" href="#gain-bounds-definition">2.1 Gain Bounds Definition</a></li>
-<li><a class="reference internal" href="#simulation-workflow">2.2 Simulation Workflow</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#monitoring-and-diagnostics">3. Monitoring and Diagnostics</a><ul>
-<li><a class="reference internal" href="#real-time-monitoring">3.1 Real-Time Monitoring</a></li>
-<li><a class="reference internal" href="#performance-analysis">3.2 Performance Analysis</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#performance-characteristics">Performance Characteristics</a><ul>
-<li><a class="reference internal" href="#benchmark-results">1. Benchmark Results</a><ul>
-<li><a class="reference internal" href="#pso-optimization-performance">1.1 PSO Optimization Performance</a></li>
-<li><a class="reference internal" href="#control-performance-metrics">1.2 Control Performance Metrics</a></li>
-<li><a class="reference internal" href="#robustness-analysis">1.3 Robustness Analysis</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#comparative-analysis">2. Comparative Analysis</a><ul>
-<li><a class="reference internal" href="#controller-comparison-matrix">2.1 Controller Comparison Matrix</a></li>
-<li><a class="reference internal" href="#use-case-recommendations">2.2 Use Case Recommendations</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#computational-performance">3. Computational Performance</a><ul>
-<li><a class="reference internal" href="#runtime-analysis">3.1 Runtime Analysis</a></li>
-<li><a class="reference internal" href="#scaling-characteristics">3.2 Scaling Characteristics</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
-<li><a class="reference internal" href="#common-issues">1. Common Issues</a><ul>
-<li><a class="reference internal" href="#oscillatory-behavior">1.1 Oscillatory Behavior</a></li>
-<li><a class="reference internal" href="#slow-convergence">1.2 Slow Convergence</a></li>
-<li><a class="reference internal" href="#numerical-instability">1.3 Numerical Instability</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#diagnostic-tools">2. Diagnostic Tools</a><ul>
-<li><a class="reference internal" href="#state-monitoring">2.1 State Monitoring</a></li>
-<li><a class="reference internal" href="#parameter-validation">2.2 Parameter Validation</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#performance-optimization">3. Performance Optimization</a><ul>
-<li><a class="reference internal" href="#computational-optimization">3.1 Computational Optimization</a></li>
-<li><a class="reference internal" href="#memory-optimization">3.2 Memory Optimization</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#references-and-further-reading">References and Further Reading</a><ul>
-<li><a class="reference internal" href="#control-theory-references">1. Control Theory References</a></li>
-<li><a class="reference internal" href="#adaptive-control-references">2. Adaptive Control References</a></li>
-<li><a class="reference internal" href="#implementation-references">3. Implementation References</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=4ebf8126"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=08e7b316"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>

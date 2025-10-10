@@ -43,6 +43,7 @@ where $\tilde{K} = K - K^*$ is the gain estimation error.
 ## Implementation Details
 
 ### Source Code
+
 - **File**: `src/controllers/adaptive_smc.py`
 - **Class**: `AdaptiveSMCController`
 - **Key Methods**:
@@ -77,6 +78,7 @@ controllers:
 ## Adaptive Mechanism
 
 ### Online Gain Adjustment
+
 The switching gain $K(t)$ adapts according to:
 
 1. **Increase**: When $|s|$ is large (far from sliding surface)
@@ -84,6 +86,7 @@ The switching gain $K(t)$ adapts according to:
 3. **Equilibrium**: Balances adaptation and leakage
 
 ### Chattering Reduction
+
 - Boundary layer approach: $\text{sat}(s/\phi)$ instead of $\text{sign}(s)$
 - Proportional damping: $\alpha s$ term for smooth control
 - Adaptive gain prevents excessive switching
@@ -91,12 +94,14 @@ The switching gain $K(t)$ adapts according to:
 ## Performance Characteristics
 
 ### Strengths
+
 - **Self-tuning**: Automatically adjusts to uncertainties
 - **No prior knowledge**: Doesn't require uncertainty bounds
 - **Chattering reduction**: Adaptive nature reduces switching amplitude
 - **Stability**: Lyapunov-based design ensures stability
 
 ### Limitations
+
 - **Complexity**: More complex than classical SMC
 - **Parameter sensitivity**: Multiple parameters to tune
 - **Convergence time**: May require longer settling time
@@ -107,21 +112,25 @@ The switching gain $K(t)$ adapts according to:
 **⚠️ Note**: Results shown are for **default parameters only** (not PSO-optimized):
 
 ### Performance Metrics
+
 - **RMSE**: 24.30 rad (combined θ₁, θ₂)
 - **Control effort**: 2.07 × 10⁵ J
 - **Chattering index**: 1.63 × 10³
 
 ### Analysis
+
 The high RMSE with default parameters suggests the adaptation mechanism is not properly tuned. The moderate chattering index indicates some improvement over classical SMC, but overall performance is poor without optimization.
 
 ## Adaptation Dynamics
 
 ### Typical Behavior
+
 1. **Initial phase**: High adaptation rate due to large sliding surface error
 2. **Convergence phase**: Gain stabilizes as system approaches sliding surface
 3. **Steady state**: Small oscillations around optimal gain value
 
 ### Gain Evolution
+
 The adaptive gain typically exhibits:
 - Rapid increase when disturbances occur
 - Gradual decrease through leakage when system is stable
@@ -130,6 +139,7 @@ The adaptive gain typically exhibits:
 ## Future Work
 
 ### PSO Optimization Required
+
 Complete PSO optimization should be performed with search bounds:
 - $\gamma \in [0.1, 10.0]$: Adaptation rate
 - $\sigma \in [0.01, 1.0]$: Leakage coefficient
@@ -138,6 +148,7 @@ Complete PSO optimization should be performed with search bounds:
 - $c \in [1.0, 20.0]$: Sliding surface coefficients
 
 ### Expected Improvements
+
 - Dramatic reduction in RMSE through proper parameter tuning
 - Better balance between adaptation and stability
 - Improved transient response
@@ -167,6 +178,7 @@ for t, state in simulation:
 ## Theoretical Analysis
 
 ### Stability Proof
+
 The Lyapunov function derivative is:
 
 ```{math}
@@ -176,6 +188,7 @@ The Lyapunov function derivative is:
 ensuring finite-time convergence to the sliding surface.
 
 ### Adaptation Convergence
+
 Under persistent excitation conditions, the adaptive gain converges to the optimal value that minimizes the sliding surface error.
 
 ## References

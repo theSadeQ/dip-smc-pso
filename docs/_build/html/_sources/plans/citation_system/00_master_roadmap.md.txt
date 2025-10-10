@@ -5,20 +5,21 @@
 **Status:** Planning Phase
 **Estimated Duration:** 8-10 weeks (75-110 hours)
 
----
+
 
 ## Executive Summary
 
 Transform the DIP-SMC-PSO codebase from **39 references** to **150-200 scientifically verified citations** across **500+ claims** through a systematic 5-phase automated approach combining AI-powered research, citation extraction, and quality validation.
 
 ### Key Metrics
+
 - **Current State:** 39 references, ~15% citation coverage
 - **Target State:** 150-200 references, ≥85% citation coverage
 - **Claims to Process:** 500+ (formal theorems + code implementations + performance)
 - **Timeline:** 8-10 weeks at 8 hours/week
 - **Automation:** 80% automated extraction/research, 20% manual validation
 
----
+
 
 ## Table of Contents
 
@@ -30,7 +31,7 @@ Transform the DIP-SMC-PSO codebase from **39 references** to **150-200 scientifi
 6. [Timeline](#timeline)
 7. [Related Documents](#related-documents)
 
----
+
 
 ## Phase Overview
 
@@ -67,7 +68,7 @@ Transform the DIP-SMC-PSO codebase from **39 references** to **150-200 scientifi
 
 **→ Detailed Plan:** [02_phase1_claim_extraction.md](02_phase1_claim_extraction.md)
 
----
+
 
 ### **Phase 2: AI Research Automation** (Week 3-4, 25-35 hrs)
 
@@ -105,7 +106,7 @@ Transform the DIP-SMC-PSO codebase from **39 references** to **150-200 scientifi
 
 **→ Detailed Plan:** `03_phase2_ai_research.md` *(to be created)*
 
----
+
 
 ### **Phase 3: Citation Integration** (Week 5-6, 20-25 hrs)
 
@@ -141,7 +142,7 @@ Transform the DIP-SMC-PSO codebase from **39 references** to **150-200 scientifi
 
 **→ Detailed Plan:** `04_phase3_integration.md` *(to be created)*
 
----
+
 
 ### **Phase 4: Validation & Quality Assurance** (Week 7-8, 10-15 hrs)
 
@@ -178,7 +179,7 @@ Transform the DIP-SMC-PSO codebase from **39 references** to **150-200 scientifi
 
 **→ Detailed Plan:** `05_phase4_validation.md` *(to be created)*
 
----
+
 
 ### **Phase 5: Documentation & Maintenance** (Week 9-10, 5-10 hrs)
 
@@ -204,11 +205,12 @@ Transform the DIP-SMC-PSO codebase from **39 references** to **150-200 scientifi
 
 **→ Detailed Plan:** `06_phase5_documentation.md` *(to be created)*
 
----
+
 
 ## Technology Stack
 
 ### **Core Languages & Libraries**
+
 - **Python 3.11+** (async/await for API parallelization)
 - **aiohttp** (async HTTP for API clients)
 - **ast** (Python code parsing via Abstract Syntax Tree)
@@ -216,6 +218,7 @@ Transform the DIP-SMC-PSO codebase from **39 references** to **150-200 scientifi
 - **dataclasses** (structured data models)
 
 ### **Academic Research APIs**
+
 - **Semantic Scholar API** (free tier, 100 requests/5min)
 - **ArXiv API** (free, 3 requests/sec)
 - **CrossRef API** (free, DOI metadata)
@@ -223,26 +226,30 @@ Transform the DIP-SMC-PSO codebase from **39 references** to **150-200 scientifi
 - **OpenAlex** (open-access research)
 
 ### **Citation Management**
+
 - **Sphinx/MyST** (markdown + reStructuredText for documentation)
 - **BibTeX** (bibliography management, IEEE format)
 - **sphinxcontrib-bibtex** (Sphinx extension for citations)
 
 ### **Quality Assurance**
+
 - **pytest** (unit and integration testing)
 - **mypy** (type checking)
 - **GitHub Actions** (CI/CD for citation validation)
 
 ### **Data Formats**
+
 - **JSON** (claim databases, research results)
 - **Markdown** (documentation with citations)
 - **BibTeX** (bibliography entries)
 - **Unified Diff** (patches for code review)
 
----
+
 
 ## Deliverables Summary
 
 ### **Code Artifacts**
+
 ```
 .dev_tools/
 ├── claim_extraction/
@@ -264,6 +271,7 @@ Transform the DIP-SMC-PSO codebase from **39 references** to **150-200 scientifi
 ```
 
 ### **Data Artifacts**
+
 ```
 artifacts/
 ├── claims_inventory.json         # Phase 1: 500+ claims
@@ -274,6 +282,7 @@ artifacts/
 ```
 
 ### **Documentation Artifacts**
+
 ```
 docs/
 ├── references/
@@ -286,12 +295,13 @@ docs/
 ```
 
 ### **CI/CD Artifacts**
+
 ```
 .github/workflows/
 └── citation_validation.yml       # Phase 4: Automated enforcement
 ```
 
----
+
 
 ## Success Metrics
 
@@ -324,7 +334,7 @@ docs/
 - **False Negative Rate**: <5% (validated against ground truth)
 - **CI Build Time Impact**: <30 seconds additional overhead
 
----
+
 
 ## Risk Management
 
@@ -380,7 +390,7 @@ finalize_session("Phase 2: 300/500 claims researched")
 # Next session: Auto-resume from checkpoint
 ```
 
----
+
 
 ## Timeline
 
@@ -428,11 +438,12 @@ Phase 5 (Week 9-10) ← Final polish
 
 **Total Buffer:** 22 hours (20% of 110-hour estimate)
 
----
+
 
 ## Related Documents
 
 ### **Planning Documentation**
+
 - [01_initial_analysis.md](01_initial_analysis.md) - Ultra-deep problem analysis
 - [02_phase1_claim_extraction.md](02_phase1_claim_extraction.md) - Detailed Phase 1 plan
 - `03_phase2_ai_research.md` - Phase 2 research automation *(to be created)*
@@ -441,14 +452,16 @@ Phase 5 (Week 9-10) ← Final polish
 - `06_phase5_documentation.md` - Phase 5 final docs *(to be created)*
 
 ### **Orchestration Framework**
+
 - [../orchestration/ci_agent_framework.md](../orchestration/ci_agent_framework.md) - Multi-agent CI system
 
 ### **Project Documentation**
+
 - [../../CLAUDE.md](../../CLAUDE.md) - Project conventions and standards
 - [../../README.md](../../README.md) - Project overview
 - [../../CHANGELOG.md](../../CHANGELOG.md) - Version history
 
----
+
 
 ## Approval & Sign-Off
 
@@ -457,7 +470,7 @@ Phase 5 (Week 9-10) ← Final polish
 **Next Milestone:** Phase 1 - Tool Development (Week 1)
 **Status:** ✅ **READY FOR IMPLEMENTATION**
 
----
+
 
 **Document Revision History:**
 

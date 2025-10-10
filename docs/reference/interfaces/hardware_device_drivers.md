@@ -16,7 +16,7 @@ error handling, and standardized communication patterns.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -34,7 +34,7 @@ Device operational state enumeration.
 :linenos:
 ```
 
----
+
 
 ### `DeviceError`
 
@@ -56,7 +56,7 @@ Base exception for device-related errors.
 
 [View full source →](#method-deviceerror-__init__)
 
----
+
 
 ### `DeviceCapability`
 
@@ -70,7 +70,7 @@ Device capability description.
 :linenos:
 ```
 
----
+
 
 ### `DeviceConfig`
 
@@ -84,7 +84,7 @@ Device configuration structure.
 :linenos:
 ```
 
----
+
 
 ### `DeviceStatus`
 
@@ -118,7 +118,7 @@ Add an alert message.
 
 [View full source →](#method-devicestatus-add_alert)
 
----
+
 
 ### `DeviceDriver`
 
@@ -295,7 +295,7 @@ Notify status change callbacks.
 
 [View full source →](#method-devicedriver-_notify_status_change)
 
----
+
 
 ### `BaseDevice`
 
@@ -358,7 +358,7 @@ Update internal data cache.
 
 [View full source →](#method-basedevice-_update_data_cache)
 
----
+
 
 ### `DeviceManager`
 
@@ -444,7 +444,7 @@ Perform health check on all devices.
 
 [View full source →](#method-devicemanager-health_check_all)
 
----
+
 
 ## Dependencies
 

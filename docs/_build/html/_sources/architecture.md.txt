@@ -1,6 +1,7 @@
 # 3. System Architecture
 
 ## 3.1 Loop topology
+
 The controller architecture uses a **sliding‑mode control** law with optional
 feedforward compensation and state estimation.  A simplified loop comprises:
 
@@ -19,9 +20,11 @@ feedforward compensation and state estimation.  A simplified loop comprises:
   tuned gains to JSON files for subsequent use. [CIT-070]
 
 ## 3.2 Interface contracts
+
 See `io_contracts.csv` for authoritative signal names, units, rates, and ranges.
 
 ## 3.3 Timing, latency, and fallback
+
  - **Sampling:** the simulation and control operate at a base period $T_s=10\,\text{ms}$ (0.01 s), matching the `simulation.dt` parameter (0.01) in `config.yaml` [CIT-043].  Individual controller implementations may integrate internally at 1 ms, but the baseline configuration and logging use a 10 ms sample period.
  - **Quantization:** sensor measurements are quantised according to the step
    sizes configured in `config.yaml`.  By default the angle sensors are
@@ -38,6 +41,7 @@ See `io_contracts.csv` for authoritative signal names, units, rates, and ranges.
  - **Fallback modes:** if numerical instabilities, actuator saturation or communication timeouts occur, the simulation raises an exception or clips the control input.  The current implementation **does not** automatically command a safe state; it simply saturates the force to the allowed limits and logs the fault.  External supervisory logic is responsible for deciding whether to zero the force and allow the pendulums to swing down before resuming operation.
 
 ## 3.4 Main block diagram
+
 ```mermaid
 flowchart LR
   R[Reference r(t)] --> E[Σ]

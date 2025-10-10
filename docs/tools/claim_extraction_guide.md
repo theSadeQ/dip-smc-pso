@@ -436,7 +436,7 @@ json.dump(citations, open("artifacts/citations_validated.json", "w"), indent=2)
 
 ---
 
-### 10.2 Technical Questions **Q: How do I add new citation formats?** A: Add regex pattern to `CITATION_PATTERNS` in `code_extractor.py`: ```python
+## 10.2 Technical Questions **Q: How do I add new citation formats?** A: Add regex pattern to `CITATION_PATTERNS` in `code_extractor.py`: ```python
 
 # example-metadata:
 
@@ -468,7 +468,7 @@ from langdetect import detect if detect(docstring) != 'en': docstring = translat
 
 ---
 
-### 10.3 Workflow Questions **Q: Should I run extraction incrementally or in batch?** A: **Batch for initial extraction**, incremental for updates: ```bash
+## 10.3 Workflow Questions **Q: Should I run extraction incrementally or in batch?** A: **Batch for initial extraction**, incremental for updates: ```bash
 
 # Initial: Full extraction
 

@@ -4,7 +4,7 @@
 
 This guide explains the theoretical foundations of Particle Swarm Optimization (PSO), from bio-inspired origins to convergence guarantees. You'll learn why PSO works, how to tune parameters, and when to use PSO vs other optimizers.
 
----
+
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@ This guide explains the theoretical foundations of Particle Swarm Optimization (
 - [Parameter Selection Guidelines](#parameter-selection-guidelines)
 - [Benchmark Comparisons](#benchmark-comparisons)
 
----
+
 
 ## Swarm Intelligence Principles
 
@@ -158,7 +158,7 @@ PSO finds **global optimum** because:
 - Swarm loses diversity → stuck
 - **Solution**: Maintain diversity (inertia decay, topology variants)
 
----
+
 
 ## PSO Convergence Theory
 
@@ -237,7 +237,7 @@ if std(positions) < threshold:
 2. **Repulsion**: Add repulsive forces between particles
 3. **Topology**: Use local best instead of global (preserve diversity)
 
----
+
 
 ## Parameter Selection Guidelines
 
@@ -249,6 +249,7 @@ if std(positions) < threshold:
 ```
 N = 10 + 2√D
 ```
+
 Where `D` = problem dimensionality
 
 **For Controller Tuning**:
@@ -289,6 +290,7 @@ Thorough: 200+ iterations
 ```
 w(t) = w_max - (w_max - w_min) · t/T
 ```
+
 - `w_max = 0.9` (initial exploration)
 - `w_min = 0.4` (final exploitation)
 - `T` = max iterations
@@ -320,7 +322,7 @@ c₂ = 1.49618  (social)
 w = 0.7298    (inertia)
 ```
 
----
+
 
 ## Benchmark Comparisons
 
@@ -420,7 +422,7 @@ PSO: O(N·log N) samples (empirical)
 - PSO overhead dominates
 - Consider: Gradient methods (if differentiable)
 
----
+
 
 ## Summary
 
@@ -445,13 +447,13 @@ c1 = c2 = 1.49618          # Balanced cognitive/social
 - Tune controllers using [Optimization API](../api/optimization.md)
 - Deep dive into [PSO Mathematical Theory](../../mathematical_foundations/pso_algorithm_theory.md)
 
----
+
 
 **Further Reading**:
 - Kennedy, J., & Eberhart, R. (1995). *Particle swarm optimization*. Proc. IEEE ICNN.
 - Clerc, M., & Kennedy, J. (2002). *The particle swarm-explosion, stability, and convergence in a multidimensional complex space*. IEEE Trans. Evol. Comput.
 - Poli, R., et al. (2007). *Particle swarm optimization: An overview*. Swarm Intelligence.
 
----
+
 
 **Last Updated**: October 2025

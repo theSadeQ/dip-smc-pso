@@ -100,7 +100,7 @@ crc = zlib.crc32(payload) & 0xFFFFFFFF
 packet = payload + struct.pack("!I", crc)
 ```
 
-### Sample Rate
+## Sample Rate
 
 - Default simulation timestep: 0.001s (1000 Hz)
 - Network update rate: Matches simulation timestep
@@ -150,7 +150,7 @@ telnet 127.0.0.1 9000
 - Check for sequence number gaps indicating lost packets
 - Verify network byte order on different architectures
 
-### Debug Mode
+## Debug Mode
 
 Enable detailed logging:
 
@@ -268,7 +268,7 @@ plant_server = PlantServer(config, fault_detector=fdi)
 # - Control signal saturation and discontinuities
 ```
 
-### Automated Safety Responses
+## Automated Safety Responses
 
 When faults are detected, the HIL system can:
 

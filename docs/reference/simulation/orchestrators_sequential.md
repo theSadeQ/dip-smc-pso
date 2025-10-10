@@ -133,7 +133,7 @@ instance = OrchestratorsSequential()
 result = instance.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Custom configuration
@@ -142,7 +142,7 @@ instance = OrchestratorsSequential(config)
 result = instance.process(data)
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 ```python
 try:
@@ -175,7 +175,7 @@ result = orchestrator.execute(instance.process(data))
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -204,7 +204,7 @@ Execute sequential simulation.
 
 [View full source →](#method-sequentialorchestrator-execute)
 
----
+
 
 ## Functions
 
@@ -225,7 +225,7 @@ callable
 :linenos:
 ```
 
----
+
 
 ### `_load_full_step()`
 
@@ -239,7 +239,7 @@ Load full dynamics step function.
 :linenos:
 ```
 
----
+
 
 ### `_load_lowrank_step()`
 
@@ -253,7 +253,7 @@ Load low-rank dynamics step function.
 :linenos:
 ```
 
----
+
 
 ### `step(x, u, dt)`
 
@@ -281,7 +281,7 @@ array-like
 :linenos:
 ```
 
----
+
 
 ### `run_simulation()`
 
@@ -328,7 +328,7 @@ tuple
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

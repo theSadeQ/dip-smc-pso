@@ -17,7 +17,7 @@ fast prototyping, educational purposes, and real-time applications.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -146,7 +146,7 @@ Compatibility method for legacy code expecting _rhs_core.
 
 [View full source →](#method-lowrankdipdynamics-_rhs_core)
 
----
+
 
 ## Dependencies
 

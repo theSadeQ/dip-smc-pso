@@ -54,7 +54,7 @@ np.random.seed(RANDOM_SEED) def simulate_stability_check(params: dict, **kwargs)
 
 ---
 
-### Expected Output ```
+## Expected Output ```
 ======================================================================
 Monte Carlo Stability Validation
 ====================================================================== 1. Running Monte Carlo simulations... Sampling method: latin_hypercube Number of samples: 500 Parameter ranges: - Mass: {'type': 'uniform', 'low': 0.9, 'high': 1.1} - Length: {'type': 'uniform', 'low': 0.95, 'high': 1.05} - Friction: {'type': 'uniform', 'low': 0.05, 'high': 0.15} 2. Results:
@@ -120,7 +120,7 @@ np.random.seed(RANDOM_SEED) def optimize_controller_with_pso(pso_config: Dict[st
 
 ---
 
-### Expected Output ```
+## Expected Output ```
 
 ======================================================================
 PSO Hyperparameter Selection via Cross-Validation
@@ -170,7 +170,7 @@ np.random.seed(RANDOM_SEED) def simulate_controller_trials(controller_type: str,
 
 ---
 
-### Expected Output ```
+## Expected Output ```
 
 ======================================================================
 Statistical Comparison of Controller Performance
@@ -232,7 +232,7 @@ np.random.seed(RANDOM_SEED) def generate_settling_time_data(n_samples: int = 200
 
 ---
 
-### Expected Output ```
+## Expected Output ```
 
 ======================================================================
 Uncertainty Quantification for Settling Time

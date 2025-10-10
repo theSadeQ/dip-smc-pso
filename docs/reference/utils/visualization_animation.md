@@ -16,7 +16,7 @@ inverted pendulum and control system visualization.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -70,7 +70,7 @@ Save animation to file.
 
 [View full source →](#method-dipanimator-save_animation)
 
----
+
 
 ### `MultiSystemAnimator`
 
@@ -98,7 +98,7 @@ Create comparison animation for multiple systems.
 
 [View full source →](#method-multisystemanimator-create_comparison_animation)
 
----
+
 
 ## Dependencies
 
@@ -138,7 +138,7 @@ component = Component()
 result = component.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Advanced configuration
@@ -148,7 +148,7 @@ component = Component(
 )
 ```
 
-### Example 3: Integration with Framework
+## Example 3: Integration with Framework
 
 ```python
 # Integration example
@@ -158,14 +158,14 @@ runner = SimulationRunner()
 runner.use_component(component)
 ```
 
-### Example 4: Performance Optimization
+## Example 4: Performance Optimization
 
 ```python
 # Performance-optimized usage
 component = Component(enable_caching=True)
 ```
 
-### Example 5: Error Handling
+## Example 5: Error Handling
 
 ```python
 # Error handling

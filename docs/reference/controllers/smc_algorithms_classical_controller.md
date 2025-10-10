@@ -108,14 +108,14 @@ config = {'parameter': 'value'}
 instance = Component(config)
 ```
 
-### Example 2: Performance Tuning
+## Example 2: Performance Tuning
 
 ```python
 # Adjust parameters for better performance
 optimized_params = tune_parameters(instance, target_performance)
 ```
 
-### Example 3: Integration with Controller
+## Example 3: Integration with Controller
 
 ```python
 # Use in complete control loop
@@ -123,7 +123,7 @@ controller = create_controller(ctrl_type, config)
 result = simulate(controller, duration=5.0)
 ```
 
-### Example 4: Edge Case Handling
+## Example 4: Edge Case Handling
 
 ```python
 try:
@@ -235,7 +235,7 @@ s/\epsilon & |s| \leq \epsilon \\
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -312,7 +312,7 @@ Analyze controller performance.
 
 [View full source →](#method-modularclassicalsmc-analyze_performance)
 
----
+
 
 ### `ClassicalSMC`
 
@@ -358,7 +358,7 @@ Get controller parameters.
 
 [View full source →](#method-classicalsmc-get_parameters)
 
----
+
 
 ## Dependencies
 
@@ -394,7 +394,7 @@ config = ClassicalSMCConfig(
 controller = ClassicalSMC(config)
 ```
 
-### Integration with Simulation
+## Integration with Simulation
 
 ```python
 from src.core.simulation_runner import SimulationRunner
@@ -416,7 +416,7 @@ print(f"Settling time: {result.metrics.settling_time:.2f}s")
 print(f"Overshoot: {result.metrics.overshoot:.1f}%")
 ```
 
-### PSO Optimization Workflow
+## PSO Optimization Workflow
 
 ```python
 from src.controllers.factory import create_smc_for_pso, get_gain_bounds_for_pso
@@ -444,7 +444,7 @@ print(f"Optimized gains: {best_gains}")
 print(f"Best fitness: {best_cost:.4f}")
 ```
 
-### Advanced: Custom Boundary Layer
+## Advanced: Custom Boundary Layer
 
 ```python
 from src.controllers.smc.algorithms.classical.boundary_layer import BoundaryLayer
@@ -468,7 +468,7 @@ config = ClassicalSMCConfig(
 controller = ClassicalSMC(config)
 ```
 
-### Performance Monitoring
+## Performance Monitoring
 
 ```python
 from src.utils.monitoring.latency import LatencyMonitor
@@ -487,4 +487,3 @@ if missed_deadlines > 0:
 **Related Examples:**
 - {doc}`../../../examples/optimization_workflows/pso_classical_smc`
 - {doc}`../../../examples/simulation_patterns/basic_smc_simulation`
-

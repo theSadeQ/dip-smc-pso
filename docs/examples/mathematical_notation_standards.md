@@ -49,7 +49,7 @@ has roots in the left half-plane.
 """
 ```
 
-### 2.2 Lyapunov Function Documentation
+## 2.2 Lyapunov Function Documentation
 
 ```python
 """
@@ -116,7 +116,7 @@ Convergence requires: w < 1 and c₁ + c₂ < 4(1 + w)
 """
 ```
 
-### 3.2 Cost Function Definition
+## 3.2 Cost Function Definition
 
 ```python
 # example-metadata:
@@ -191,7 +191,7 @@ where t_{N-1,α/2} is the (1-α/2) quantile of the t-distribution with N-1 degre
 """
 ```
 
-### 5.2 Hypothesis Testing
+## 5.2 Hypothesis Testing
 
 ```python
 # example-metadata:

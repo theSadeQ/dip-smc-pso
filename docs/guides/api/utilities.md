@@ -4,7 +4,7 @@
 **Purpose:** Helper utilities for validation, control, monitoring, and analysis
 **Level:** Intermediate
 
----
+
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@
 - [Visualization](#visualization)
 - [Integration Patterns](#integration-patterns)
 
----
+
 
 ## Overview
 
@@ -35,7 +35,7 @@ The Utilities API provides helper functions and tools for validation, control si
 - [User Guide: Best Practices](../user-guide.md#best-practices)
 - [Technical Reference](../../reference/utils/__init__.md)
 
----
+
 
 ## Validation
 
@@ -76,7 +76,7 @@ if not health['is_bounded']:
     print("State values unreasonably large!")
 ```
 
-### Parameter Validation
+## Parameter Validation
 
 **Validate physics parameters:**
 ```python
@@ -113,7 +113,7 @@ is_valid = validate_controller_gains(gains, controller_type)
 # - Gains within reasonable bounds
 ```
 
-### Input Sanitization
+## Input Sanitization
 
 ```python
 from src.utils.validation import sanitize_input
@@ -125,7 +125,7 @@ gains = sanitize_input(user_input, expected_length=6)
 # Returns: [10.5, 8.0, 15.2, 12.1, 50.0, 5.5]
 ```
 
----
+
 
 ## Control Primitives
 
@@ -152,7 +152,7 @@ soft_sat = soft_saturate(control, max_force, smoothness=0.1)
 # Smooth transition near limits
 ```
 
-### Deadzone
+## Deadzone
 
 **Apply deadzone to reduce noise:**
 ```python
@@ -175,7 +175,7 @@ from src.utils.control import smooth_deadzone
 output = smooth_deadzone(control, deadzone_threshold, smoothness=0.5)
 ```
 
-### Sign Functions
+## Sign Functions
 
 **Smooth sign function:**
 ```python
@@ -198,7 +198,7 @@ linear_output = linear_sign(s, epsilon)
 # Returns: s/epsilon if |s| < epsilon, else sign(s)
 ```
 
-### Filtering
+## Filtering
 
 **Low-pass filter for control smoothing:**
 ```python
@@ -227,7 +227,7 @@ for control in control_sequence:
     smoothed = maf.update(control)
 ```
 
----
+
 
 ## Monitoring
 
@@ -257,7 +257,7 @@ print(f"Max theta: {stats['max_theta']:.3f} rad")
 print(f"Settling time: {stats['settling_time']:.2f} s")
 ```
 
-### Resource Monitoring
+## Resource Monitoring
 
 **Monitor memory usage:**
 ```python
@@ -300,7 +300,7 @@ print(f"Average latency: {stats['avg_latency']:.4f} s")
 print(f"Deadline misses: {stats['miss_count']}/{n_steps}")
 ```
 
-### Saturation Monitoring
+## Saturation Monitoring
 
 **Track control saturation events:**
 ```python
@@ -317,7 +317,7 @@ print(f"Saturation percentage: {stats['saturation_percentage']:.1f}%")
 print(f"Total saturated steps: {stats['saturated_count']}")
 ```
 
----
+
 
 ## Analysis Tools
 
@@ -356,7 +356,7 @@ settling = compute_settling_time(t, state[:, 2], threshold=0.02)
 energy = compute_control_effort(t, control)
 ```
 
-### Statistical Analysis
+## Statistical Analysis
 
 **Confidence intervals:**
 ```python
@@ -394,7 +394,7 @@ if comparison['p_value'] < 0.05:
     print("Statistically significant difference")
 ```
 
-### Performance Profiling
+## Performance Profiling
 
 **Profile simulation performance:**
 ```python
@@ -411,7 +411,7 @@ print(f"Min time: {profile['min_time']:.4f} s")
 print(f"Max time: {profile['max_time']:.4f} s")
 ```
 
----
+
 
 ## Visualization
 
@@ -460,7 +460,7 @@ if 'sliding_surface' in result:
     fig4 = plot_sliding_surface(result['t'], result['sliding_surface'])
 ```
 
-### Animation
+## Animation
 
 **Create animation of pendulum motion:**
 ```python
@@ -477,7 +477,7 @@ anim = animator.animate(
 )
 ```
 
-### Comparison Plots
+## Comparison Plots
 
 **Compare multiple controllers:**
 ```python
@@ -496,7 +496,7 @@ fig = plot_controller_comparison(
 plt.savefig('controller_comparison.png')
 ```
 
----
+
 
 ## Integration Patterns
 
@@ -523,7 +523,7 @@ except ValueError as e:
 result = runner.run(controller)
 ```
 
-### Pattern 2: Monitoring & Analysis Pipeline
+## Pattern 2: Monitoring & Analysis Pipeline
 
 ```python
 from src.utils.monitoring import PerformanceMonitor
@@ -550,7 +550,7 @@ print(f"  Settling Time: {metrics['settling_time']:.2f} s")
 print(f"  Saturation: {monitor_stats['saturation_percentage']:.1f}%")
 ```
 
-### Pattern 3: Statistical Validation
+## Pattern 3: Statistical Validation
 
 ```python
 from src.utils.analysis import (
@@ -580,7 +580,7 @@ if baseline_results:
     print(f"p-value: {comparison['p_value']:.4f}")
 ```
 
----
+
 
 ## Next Steps
 
@@ -589,6 +589,6 @@ if baseline_results:
 - **Best practices:** [User Guide: Best Practices](../user-guide.md#best-practices)
 - **Technical details:** [Utils Technical Reference](../../reference/utils/__init__.md)
 
----
+
 
 **Last Updated:** October 2025

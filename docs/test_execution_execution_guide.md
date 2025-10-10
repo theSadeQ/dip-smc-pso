@@ -35,7 +35,7 @@ pytest tests/test_integration/ -v
 pytest tests/test_benchmarks/ --benchmark-only
 ```
 
-### Coverage Analysis
+## Coverage Analysis
 
 ```bash
 pytest tests/ --cov=src --cov-report=html

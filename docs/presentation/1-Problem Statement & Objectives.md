@@ -1,3 +1,5 @@
+# 1 Problem Statement & Objectives
+
 ## Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO ### 1 Background and Challenges The double‑inverted pendulum (DIP) mounted on a cart is a benchmark under‑actuated mechanical system with three degrees of freedom (the cart position and the angles of two pendulums) but only one control input. The system’s nonlinear equations of motion include significant coupling between the pendulums and the cart, and the upper “inverted” configuration is naturally unstable. Recent literature emphasises that nonlinear, unstable or under‑actuated systems are very difficult to control; they are primarily studied to test control algorithms rather than for practical utility ``` math
 
 1

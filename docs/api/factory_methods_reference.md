@@ -66,7 +66,7 @@ controller = create_controller('mpc_controller') # Uses defaults
 
 ---
 
-### `list_available_controllers()` **Get list of currently available controller types.** ```python
+## `list_available_controllers()` **Get list of currently available controller types.** ```python
 
 # example-metadata:
 
@@ -81,7 +81,7 @@ print("Available controllers:", available)
 
 ---
 
-### `list_all_controllers()` **Get list of all registered controller types, including unavailable ones.** ```python
+## `list_all_controllers()` **Get list of all registered controller types, including unavailable ones.** ```python
 
 # example-metadata:
 
@@ -95,7 +95,7 @@ if unavailable: print(f"Unavailable controllers: {unavailable}") print("Check de
 
 ---
 
-### `get_default_gains()` **Get default gains for a specific controller type.** ```python
+## `get_default_gains()` **Get default gains for a specific controller type.** ```python
 
 # example-metadata:
 
@@ -134,7 +134,7 @@ print(f"Particle validity: {validity}")
 
 ---
 
-### `create_pso_controller_factory()` **Create a PSO-optimized controller factory function.** ```python
+## `create_pso_controller_factory()` **Create a PSO-optimized controller factory function.** ```python
 
 def create_pso_controller_factory( smc_type: SMCType, plant_config: Optional[Any] = None, **kwargs: Any
 ) -> Callable[[Union[list, np.ndarray]], PSOControllerWrapper]
@@ -159,7 +159,7 @@ best_gains, best_fitness = tuner.optimize()
 
 ---
 
-### `get_gain_bounds_for_pso()` **Get PSO optimization bounds for controller gains.** ```python
+## `get_gain_bounds_for_pso()` **Get PSO optimization bounds for controller gains.** ```python
 
 # example-metadata:
 
@@ -203,7 +203,7 @@ assert all(l < u for l, u in zip(lower_bounds, upper_bounds))
 
 ---
 
-### `validate_smc_gains()` **Validate gains for a specific controller type.** ```python
+## `validate_smc_gains()` **Validate gains for a specific controller type.** ```python
 
 # example-metadata:
 

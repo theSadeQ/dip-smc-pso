@@ -183,7 +183,7 @@ class SuperTwistingSMC:
     """
 ```
 
-#### 1.1 Key Methods
+## 1.1 Key Methods
 
 | Method | Purpose | Lines | Complexity | Accelerated |
 |--------|---------|-------|-----------|-------------|
@@ -547,7 +547,7 @@ for t in simulation_time:
     apply_control(control_force)
 ```
 
-### 2. Monitoring STA-Specific Metrics
+## 2. Monitoring STA-Specific Metrics
 
 ```python
 # example-metadata:

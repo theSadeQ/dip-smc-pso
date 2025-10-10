@@ -16,7 +16,7 @@ Replaces parameter validation from the original 427-line monolithic controller.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -147,7 +147,7 @@ Create configuration with sensible defaults.
 
 [View full source →](#method-adaptivesmcconfig-create_default)
 
----
+
 
 ## Dependencies
 

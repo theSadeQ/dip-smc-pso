@@ -26,7 +26,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from typing import List, Tuple
+from typing import List
 
 # ANSI color codes
 class Colors:
@@ -236,20 +236,20 @@ class CommonIssueFixer:
         if self.dry_run:
             print(f"Mode: {Colors.YELLOW}DRY RUN{Colors.END} (no changes applied)")
             print(f"Potential fixes: {self.fixes_applied}")
-            print(f"\nRun without --dry-run to apply these fixes.")
+            print("\nRun without --dry-run to apply these fixes.")
         else:
             print(f"Fixes applied: {Colors.GREEN}{self.fixes_applied}{Colors.END}")
             print(f"Files modified: {len(self.files_modified)}")
 
             if self.files_modified:
-                print(f"\nModified files:")
+                print("\nModified files:")
                 for file_path in sorted(self.files_modified)[:10]:
                     print(f"  • {file_path.relative_to(self.project_root)}")
                 if len(self.files_modified) > 10:
                     print(f"  ... and {len(self.files_modified) - 10} more")
 
             print(f"\n{Colors.GREEN}✓ Auto-fix complete!{Colors.END}")
-            print(f"Run quality checks to verify: python scripts/validation/run_quality_checks.py")
+            print("Run quality checks to verify: python scripts/validation/run_quality_checks.py")
 
         print(f"{Colors.BLUE}{'═' * 60}{Colors.END}\n")
 

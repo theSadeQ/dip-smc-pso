@@ -41,7 +41,7 @@ Example:
 :linenos:
 ```
 
----
+
 
 ## Functions
 
@@ -94,7 +94,7 @@ Notes:
 :linenos:
 ```
 
----
+
 
 ### `safe_reciprocal(x, epsilon, fallback, warn)`
 
@@ -130,7 +130,7 @@ Example:
 :linenos:
 ```
 
----
+
 
 ### `safe_sqrt(x, min_value, warn)`
 
@@ -174,7 +174,7 @@ Notes:
 :linenos:
 ```
 
----
+
 
 ### `safe_log(x, min_value, warn)`
 
@@ -217,7 +217,7 @@ Notes:
 :linenos:
 ```
 
----
+
 
 ### `safe_exp(x, max_value, warn)`
 
@@ -257,7 +257,7 @@ Notes:
 :linenos:
 ```
 
----
+
 
 ### `safe_power(base, exponent, epsilon, max_exp, warn)`
 
@@ -304,7 +304,7 @@ Notes:
 :linenos:
 ```
 
----
+
 
 ### `safe_norm(vector, ord, axis, min_norm)`
 
@@ -351,7 +351,7 @@ Notes:
 :linenos:
 ```
 
----
+
 
 ### `safe_normalize(vector, ord, axis, min_norm, fallback)`
 
@@ -394,7 +394,7 @@ Notes:
 :linenos:
 ```
 
----
+
 
 ### `is_safe_denominator(denominator, epsilon)`
 
@@ -423,7 +423,7 @@ Example:
 :linenos:
 ```
 
----
+
 
 ### `clip_to_safe_range(x, min_value, max_value, warn)`
 
@@ -452,7 +452,7 @@ Example:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -514,12 +514,13 @@ component = Component(
 
 \`\`\`python
 # Integration example
+
 for k in range(num_steps):
     result = component.process(x)
     x = update(x, result)
 \`\`\`
 
-### Example 4: Performance Optimization
+## Example 4: Performance Optimization
 
 \`\`\`python
 component = Component(enable_caching=True)
@@ -533,4 +534,3 @@ try:
 except ComponentError as e:
     print(f"Error: {e}")
 \`\`\`
-

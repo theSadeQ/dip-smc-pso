@@ -16,7 +16,7 @@ and memory-efficient handling of continuous data flows.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -34,7 +34,7 @@ Stream processing modes.
 :linenos:
 ```
 
----
+
 
 ### `StreamState`
 
@@ -50,7 +50,7 @@ Stream state enumeration.
 :linenos:
 ```
 
----
+
 
 ### `BackpressureStrategy`
 
@@ -66,7 +66,7 @@ Backpressure handling strategies.
 :linenos:
 ```
 
----
+
 
 ### `StreamConfig`
 
@@ -80,7 +80,7 @@ Configuration for streaming operations.
 :linenos:
 ```
 
----
+
 
 ### `StreamMetrics`
 
@@ -102,7 +102,7 @@ Update metrics with new data.
 
 [View full source →](#method-streammetrics-update)
 
----
+
 
 ### `StreamBuffer`
 
@@ -164,7 +164,7 @@ Wait for space in buffer.
 
 [View full source →](#method-streambuffer-_wait_for_space)
 
----
+
 
 ### `DataStream`
 
@@ -230,7 +230,7 @@ Handle stream error.
 
 [View full source →](#method-datastream-_handle_error)
 
----
+
 
 ### `StreamingSerializer`
 
@@ -292,7 +292,7 @@ Get streaming metrics.
 
 [View full source →](#method-streamingserializer-get_metrics)
 
----
+
 
 ### `StreamingDeserializer`
 
@@ -354,7 +354,7 @@ Get streaming metrics.
 
 [View full source →](#method-streamingdeserializer-get_metrics)
 
----
+
 
 ### `MessageStream`
 
@@ -424,7 +424,7 @@ Get metrics for all stream components.
 
 [View full source →](#method-messagestream-get_stream_metrics)
 
----
+
 
 ### `FileStreamProcessor`
 
@@ -450,7 +450,7 @@ Process file stream with optional transformation.
 
 [View full source →](#method-filestreamprocessor-process_file_stream)
 
----
+
 
 ## Functions
 
@@ -466,7 +466,7 @@ Create streaming serializer.
 :linenos:
 ```
 
----
+
 
 ### `create_streaming_deserializer(serializer, config)`
 
@@ -480,7 +480,7 @@ Create streaming deserializer.
 :linenos:
 ```
 
----
+
 
 ### `create_message_stream(serializer, config)`
 
@@ -494,7 +494,7 @@ Create message stream.
 :linenos:
 ```
 
----
+
 
 ### `create_stream_config(buffer_size, batch_size, flush_interval, backpressure_strategy)`
 
@@ -508,7 +508,7 @@ Create stream configuration.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

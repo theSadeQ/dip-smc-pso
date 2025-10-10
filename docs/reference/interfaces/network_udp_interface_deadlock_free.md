@@ -24,7 +24,7 @@ PRODUCTION SAFETY: All deadlocks eliminated, safe for high-concurrency use.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -62,7 +62,7 @@ Thread-safe atomic integer.
 
 [View full source →](#method-atomicinteger-add)
 
----
+
 
 ### `AtomicFloat`
 
@@ -90,7 +90,7 @@ Thread-safe atomic float.
 
 [View full source →](#method-atomicfloat-set)
 
----
+
 
 ### `DeadlockFreeUDPInterface`
 
@@ -191,7 +191,7 @@ Close interface and cleanup - single lock.
 
 [View full source →](#method-deadlockfreeudpinterface-close)
 
----
+
 
 ## Functions
 
@@ -207,7 +207,7 @@ Create a deadlock-free UDP interface.
 :linenos:
 ```
 
----
+
 
 ### `get_global_udp_interface()`
 
@@ -221,7 +221,7 @@ Get global UDP interface instance.
 :linenos:
 ```
 
----
+
 
 ### `set_global_udp_interface(interface)`
 
@@ -235,7 +235,7 @@ Set global UDP interface instance.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

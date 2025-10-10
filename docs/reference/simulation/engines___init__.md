@@ -13,7 +13,7 @@ Simulation engines and numerical integration methods.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -69,7 +69,7 @@ x = results.states
 u = results.controls
 ```
 
-### Example 2: Adaptive Integration
+## Example 2: Adaptive Integration
 
 ```python
 from src.simulation.integrators.adaptive import AdaptiveRK45Integrator
@@ -94,7 +94,7 @@ print(f"Steps taken: {len(results.time)}")
 print(f"Average dt: {np.mean(np.diff(results.time)):.6f}")
 ```
 
-### Example 3: Batch Simulation (Numba)
+## Example 3: Batch Simulation (Numba)
 
 ```python
 from src.simulation.engines import run_batch_simulation
@@ -116,7 +116,7 @@ mean_trajectory = np.mean(results_batch.states, axis=0)
 std_trajectory = np.std(results_batch.states, axis=0)
 ```
 
-### Example 4: Safety Guards
+## Example 4: Safety Guards
 
 ```python
 from src.simulation.context import SimulationContext

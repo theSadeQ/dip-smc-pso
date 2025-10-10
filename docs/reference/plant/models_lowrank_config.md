@@ -16,7 +16,7 @@ efficiency while maintaining essential system characteristics.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -112,7 +112,7 @@ Create configuration for educational purposes.
 
 [View full source →](#method-lowrankdipconfig-create_educational)
 
----
+
 
 ## Dependencies
 

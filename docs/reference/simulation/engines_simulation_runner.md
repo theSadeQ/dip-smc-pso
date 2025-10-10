@@ -117,7 +117,7 @@ The simulation follows a unified execution model:
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -150,7 +150,7 @@ Run simulation using the functional API.
 
 [View full source →](#method-simulationrunner-run_simulation)
 
----
+
 
 ## Functions
 
@@ -176,7 +176,7 @@ RuntimeError
 :linenos:
 ```
 
----
+
 
 ### `_load_lowrank_step()`
 
@@ -195,7 +195,7 @@ callable
 :linenos:
 ```
 
----
+
 
 ### `get_step_fn()`
 
@@ -214,7 +214,7 @@ callable
 :linenos:
 ```
 
----
+
 
 ### `step(x, u, dt)`
 
@@ -242,7 +242,7 @@ array-like
 :linenos:
 ```
 
----
+
 
 ### `run_simulation()`
 
@@ -325,7 +325,7 @@ u_arr : numpy.ndarray
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -368,7 +368,7 @@ result = run_simulation(
 print(f"Final tracking error: {np.linalg.norm(result.states[-1, :2]):.4f}")
 ```
 
-### Batch Simulation for Parameter Sweeps
+## Batch Simulation for Parameter Sweeps
 
 ```python
 # example-metadata:
@@ -399,7 +399,7 @@ settling_times = [compute_settling_time(r.states) for r in results]
 print(f"Mean settling time: {np.mean(settling_times):.2f}s")
 ```
 
-### Numba JIT Acceleration Pattern
+## Numba JIT Acceleration Pattern
 
 ```python
 # example-metadata:
@@ -432,7 +432,7 @@ print(f"Simulation completed in {result.computation_time:.2f}s")
 print(f"Average step time: {result.computation_time / len(result.time):.6f}s")
 ```
 
-### Integration Method Comparison
+## Integration Method Comparison
 
 ```python
 from src.simulation.engines.simulation_runner import run_simulation
@@ -458,4 +458,3 @@ for method in methods:
 ```
 
 **See:** {doc}`../../../simulation_workflows/performance_optimization`
-

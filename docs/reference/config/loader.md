@@ -13,7 +13,7 @@ Configuration loading and validation logic.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -31,7 +31,7 @@ Raised when configuration validation fails with aggregated error messages.
 :linenos:
 ```
 
----
+
 
 ### `FileSettingsSource`
 
@@ -71,7 +71,7 @@ Return mapping of settings from file source.
 
 [View full source →](#method-filesettingssource-__call__)
 
----
+
 
 ### `ConfigSchema`
 
@@ -93,7 +93,7 @@ Precedence (highest to lowest): ENV > .env > FILE > defaults
 
 [View full source →](#method-configschema-settings_customise_sources)
 
----
+
 
 ## Functions
 
@@ -125,7 +125,7 @@ InvalidConfigurationError
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

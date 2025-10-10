@@ -4,7 +4,7 @@
 **Purpose:** Sliding mode controller creation, configuration, and customization
 **Level:** Intermediate to Advanced
 
----
+
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@
 - [Integration Patterns](#integration-patterns)
 - [Troubleshooting](#troubleshooting)
 
----
+
 
 ## Overview
 
@@ -37,7 +37,7 @@ The Controllers API provides a clean, type-safe factory system for creating and 
 **Theory & Foundations:**
 - [SMC Theory Guide](../theory/smc-theory.md): Mathematical foundations and design principles
 
----
+
 
 ## Architecture
 
@@ -58,7 +58,7 @@ BaseController (Abstract)
 3. **Stateless Computation:** `compute_control()` is pure function
 4. **Type Safety:** Enums for controller selection, dataclasses for config
 
----
+
 
 ## Factory System
 
@@ -81,7 +81,7 @@ controller = create_smc_for_pso(
 )
 ```
 
-### When to Use Each
+## When to Use Each
 
 | Function | Use Case | Input | Configuration |
 |----------|----------|-------|---------------|
@@ -100,7 +100,7 @@ SMCType.ADAPTIVE            # Adaptive SMC with online gain tuning
 SMCType.HYBRID              # Hybrid Adaptive STA-SMC
 ```
 
-### Complete Example: create_controller()
+## Complete Example: create_controller()
 
 ```python
 from src.config import load_config
@@ -128,7 +128,7 @@ controller = create_controller(
 )
 ```
 
-### Complete Example: create_smc_for_pso()
+## Complete Example: create_smc_for_pso()
 
 ```python
 from src.controllers import create_smc_for_pso, SMCType
@@ -148,7 +148,7 @@ def fitness_function(gains_array):
     return result['cost']
 ```
 
-### Gain Bounds Helper
+## Gain Bounds Helper
 
 ```python
 from src.controllers import get_gain_bounds_for_pso
@@ -171,7 +171,7 @@ tuner = PSOTuner(
 )
 ```
 
-### Gain Validation
+## Gain Validation
 
 ```python
 from src.controllers import validate_smc_gains
@@ -189,7 +189,7 @@ if not is_valid:
 # - Gains within physical bounds
 ```
 
----
+
 
 ## Controller Types
 
@@ -253,9 +253,9 @@ control, state_vars, history = controller.compute_control(state, state_vars, his
 print(f"Control force: {control:.2f} N")
 ```
 
----
 
-### 2. Super-Twisting SMC (STA-SMC)
+
+## 2. Super-Twisting SMC (STA-SMC)
 
 **Purpose:** Second-order sliding mode for continuous control and finite-time convergence
 
@@ -316,9 +316,9 @@ control1, state_vars, history = controller.compute_control(state, state_vars, hi
 control2, state_vars, history = controller.compute_control(state, state_vars, history)
 ```
 
----
 
-### 3. Adaptive SMC
+
+## 3. Adaptive SMC
 
 **Purpose:** Online gain adaptation for uncertain systems
 
@@ -386,7 +386,7 @@ for i in range(1000):
         print(f"Step {i}: Adapted gains = {state_vars['adapted_gains']}")
 ```
 
----
+
 
 ### 4. Hybrid Adaptive STA-SMC
 
@@ -453,9 +453,9 @@ print(f"STA state: {state_vars.get('sta_integrator_state', 'N/A')}")
 print(f"Adapted gains: {state_vars.get('adapted_gains', 'N/A')}")
 ```
 
----
 
-### Controller Comparison
+
+## Controller Comparison
 
 | Controller | Gains | Chattering | Speed | Adaptation | Complexity | Best Use Case |
 |------------|-------|------------|-------|------------|------------|---------------|
@@ -464,7 +464,7 @@ print(f"Adapted gains: {state_vars.get('adapted_gains', 'N/A')}")
 | **Adaptive** | 5 | Moderate | Slower | Yes | Medium | Uncertain systems |
 | **Hybrid** | 4 | None | Fast | Yes | High | Maximum performance |
 
----
+
 
 ## Custom Controllers
 
@@ -483,7 +483,7 @@ class TerminalSMC(BaseController):
     def __init__(self, gains, max_force=100.0, alpha=0.5):
         """
         Parameters
-        ----------
+        # ---------- (RST section marker)
         gains : list[float]
             [k1, k2, λ1, λ2, K, p, q] where p/q < 1
         max_force : float
@@ -606,7 +606,7 @@ def test_saturation():
 
 See [Tutorial 04: Custom Controller](../tutorials/tutorial-04-custom-controller.md) for complete walkthrough.
 
----
+
 
 ## Integration Patterns
 
@@ -658,7 +658,7 @@ controller = create_smc_for_pso(SMCType.CLASSICAL, best_gains)
 result = runner.run(controller)
 ```
 
----
+
 
 ## Troubleshooting
 
@@ -678,7 +678,7 @@ controller = create_smc_for_pso(SMCType.ADAPTIVE, [10, 8, 15, 12, 0.5])
 controller = create_smc_for_pso(SMCType.HYBRID, [15, 12, 18, 15])
 ```
 
-### Problem: Control saturates immediately
+## Problem: Control saturates immediately
 
 **Cause:** Gains too large or initial conditions too extreme
 
@@ -695,7 +695,7 @@ controller = create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 500, 5], max_
 controller = create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5], max_force=100)
 ```
 
-### Problem: Excessive chattering
+## Problem: Excessive chattering
 
 **Cause:** Boundary layer too small or classical SMC with sharp switching
 
@@ -711,7 +711,7 @@ controller = create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 10])  # �
 controller = create_smc_for_pso(SMCType.SUPER_TWISTING, [25, 10, 15, 12, 20, 15], dt=0.01)
 ```
 
-### Problem: STA-SMC requires dt parameter
+## Problem: STA-SMC requires dt parameter
 
 **Cause:** Super-twisting algorithm needs timestep for integration
 
@@ -722,7 +722,7 @@ controller = create_smc_for_pso(SMCType.SUPER_TWISTING, gains, dt=0.01)
 controller = create_smc_for_pso(SMCType.HYBRID, gains, dt=0.01)
 ```
 
----
+
 
 ## Next Steps
 
@@ -731,6 +731,6 @@ controller = create_smc_for_pso(SMCType.HYBRID, gains, dt=0.01)
 - **Optimize gains:** [Optimization API Guide](optimization.md)
 - **Technical details:** [Controllers Technical Reference](../../reference/controllers/__init__.md)
 
----
+
 
 **Last Updated:** October 2025

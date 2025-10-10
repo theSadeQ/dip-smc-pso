@@ -161,7 +161,7 @@ s = surface.compute(state)
 print(f"Sliding surface value: {s:.4f}")
 ```
 
-### Example 2: Surface Derivative Computation
+## Example 2: Surface Derivative Computation
 
 ```python
 # Compute surface derivative ds/dt
@@ -174,7 +174,7 @@ if abs(s) < 0.01 and s * s_dot < 0:
     print("Sliding mode reached and maintained")
 ```
 
-### Example 3: Gain Validation
+## Example 3: Gain Validation
 
 ```python
 from src.controllers.smc.core.sliding_surface import validate_sliding_surface_gains
@@ -192,7 +192,7 @@ except ValueError as e:
     print(f"Validation error: {e}")
 ```
 
-### Example 4: Frequency Analysis
+## Example 4: Frequency Analysis
 
 ```python
 # example-metadata:
@@ -212,7 +212,7 @@ if omega_n1 < omega_s / 5 and omega_n2 < omega_s / 5:
     print("Frequencies safe for 100 Hz sampling")
 ```
 
-### Example 5: Higher-Order Surface (Super-Twisting)
+## Example 5: Higher-Order Surface (Super-Twisting)
 
 ```python
 from src.controllers.smc.core.sliding_surface import HigherOrderSlidingSurface
@@ -235,7 +235,7 @@ print(f"Higher-order surface: s={s_ho:.4f}, ṡ={s_dot_ho:.4f}")
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -277,7 +277,7 @@ Compute sliding surface derivative ds/dt.
 
 [View full source →](#method-slidingsurface-compute_derivative)
 
----
+
 
 ### `LinearSlidingSurface`
 
@@ -339,7 +339,7 @@ Return surface coefficients for analysis.
 
 [View full source →](#method-linearslidingsurface-get_coefficients)
 
----
+
 
 ### `HigherOrderSlidingSurface`
 
@@ -384,7 +384,7 @@ Compute higher-order surface derivative.
 
 [View full source →](#method-higherorderslidingsurface-compute_derivative)
 
----
+
 
 ## Functions
 
@@ -407,7 +407,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

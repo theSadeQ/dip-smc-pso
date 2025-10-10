@@ -21,7 +21,7 @@ This replaces the monolithic 427-line adaptive SMC with focused modules.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

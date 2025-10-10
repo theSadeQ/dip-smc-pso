@@ -1,0 +1,1030 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.chartjs-container {
+    margin: 1.5em auto;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.chart-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+</style>
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Docker Deployment Guide - DIP_SMC_PSO Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=8a7e329d" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">DIP_SMC_PSO Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory_overview.html">Theory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">3. System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plant_model.html">1.x Plant Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/blob/main/docs/deployment/docker.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/deployment/docker.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="docker-deployment-guide">
+<h1>Docker Deployment Guide<a class="headerlink" href="#docker-deployment-guide" title="Link to this heading">¶</a></h1>
+<p><strong>Complete guide to containerizing and deploying the DIP-SMC-PSO framework using Docker.</strong></p>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#quick-start">Quick Start</a></p></li>
+<li><p><a class="reference internal" href="#building-images">Building Images</a></p></li>
+<li><p><a class="reference internal" href="#multi-stage-builds">Multi-Stage Builds</a></p></li>
+<li><p><a class="reference internal" href="#docker-compose">Docker Compose</a></p></li>
+<li><p><a class="reference internal" href="#volume-mounting">Volume Mounting</a></p></li>
+<li><p><a class="reference internal" href="#gpu-support">GPU Support</a></p></li>
+<li><p><a class="reference internal" href="#production-deployment">Production Deployment</a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting">Troubleshooting</a></p></li>
+</ul>
+</section>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Docker 20.10+ installed (<a class="reference external" href="https://docs.docker.com/get-docker/">Install Docker</a>)</p></li>
+<li><p>4GB+ RAM available</p></li>
+<li><p>2GB+ disk space</p></li>
+</ul>
+</section>
+<section id="pull-and-run-pre-built-image">
+<h3>Pull and Run Pre-Built Image<a class="headerlink" href="#pull-and-run-pre-built-image" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pull latest image from Docker Hub</span>
+docker<span class="w"> </span>pull<span class="w"> </span>thesadeq/dip-smc-pso:latest
+
+<span class="c1"># Run Streamlit UI (web interface)</span>
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8501</span>:8501<span class="w"> </span>--name<span class="w"> </span>dip-smc-pso<span class="w"> </span>thesadeq/dip-smc-pso:latest
+
+<span class="c1"># Access UI at http://localhost:8501</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="run-cli-simulation">
+<h2>Run CLI Simulation<a class="headerlink" href="#run-cli-simulation" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run single simulation</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>thesadeq/dip-smc-pso:latest<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--duration<span class="w"> </span><span class="m">5</span>.0
+
+<span class="c1"># Run with custom config</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/custom_config.yaml:/app/config.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>thesadeq/dip-smc-pso:latest<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>simulate.py<span class="w"> </span>--config<span class="w"> </span>/app/config.yaml
+</pre></div>
+</div>
+</section>
+<section id="interactive-shell">
+<h2>Interactive Shell<a class="headerlink" href="#interactive-shell" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Launch interactive shell inside container</span>
+docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>thesadeq/dip-smc-pso:latest<span class="w"> </span>/bin/bash
+
+<span class="c1"># Inside container:</span>
+root@container:/app#<span class="w"> </span>python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>sta_smc<span class="w"> </span>--plot
+root@container:/app#<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>-v
+</pre></div>
+</div>
+</section>
+<section id="building-images">
+<h2>Building Images<a class="headerlink" href="#building-images" title="Link to this heading">¶</a></h2>
+<section id="basic-build">
+<h3>Basic Build<a class="headerlink" href="#basic-build" title="Link to this heading">¶</a></h3>
+<p>Create <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> in project root:</p>
+<div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span><span class="c"># Dockerfile</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.9-slim</span>
+
+<span class="c"># Set working directory</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># Install system dependencies</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>build-essential<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+
+<span class="c"># Copy requirements and install Python dependencies</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c"># Copy project files</span>
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+
+<span class="c"># Expose Streamlit port</span>
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8501</span>
+
+<span class="c"># Default command: run Streamlit UI</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;streamlit&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;streamlit_app.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--server.port=8501&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--server.address=0.0.0.0&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Build:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>dip-smc-pso:dev<span class="w"> </span>.
+</pre></div>
+</div>
+<p><strong>Run:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">8501</span>:8501<span class="w"> </span>dip-smc-pso:dev
+</pre></div>
+</div>
+</section>
+</section>
+<section id="multi-stage-builds">
+<h2>Multi-Stage Builds<a class="headerlink" href="#multi-stage-builds" title="Link to this heading">¶</a></h2>
+<p><strong>Optimize image size and build time with multi-stage Dockerfile:</strong></p>
+<div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span><span class="c"># ==========================================</span>
+<span class="c"># Stage 1: Builder - Compile dependencies</span>
+<span class="c"># ==========================================</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.9-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/build</span>
+
+<span class="c"># Install build dependencies</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>build-essential<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gcc<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>g++<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gfortran<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libopenblas-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>liblapack-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+
+<span class="c"># Install Python dependencies with wheels</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>wheel<span class="w"> </span>--no-cache-dir<span class="w"> </span>--wheel-dir<span class="w"> </span>/build/wheels<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c"># ==========================================</span>
+<span class="c"># Stage 2: Runtime - Minimal production image</span>
+<span class="c"># ==========================================</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.9-slim</span>
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># Install only runtime dependencies (no compilers)</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libopenblas0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libgomp1<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+
+<span class="c"># Copy pre-built wheels from builder stage</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/build/wheels<span class="w"> </span>/tmp/wheels
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>--no-index<span class="w"> </span>--find-links<span class="o">=</span>/tmp/wheels<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/tmp/wheels
+
+<span class="c"># Copy project source code</span>
+<span class="k">COPY</span><span class="w"> </span>src/<span class="w"> </span>./src/
+<span class="k">COPY</span><span class="w"> </span>config.yaml<span class="w"> </span>simulate.py<span class="w"> </span>streamlit_app.py<span class="w"> </span>./
+
+<span class="c"># Create non-root user for security</span>
+<span class="k">RUN</span><span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>-u<span class="w"> </span><span class="m">1000</span><span class="w"> </span>dip<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>dip:dip<span class="w"> </span>/app
+<span class="k">USER</span><span class="w"> </span><span class="s">dip</span>
+
+<span class="c"># Expose ports</span>
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8501</span>
+
+<span class="c"># Health check</span>
+<span class="k">HEALTHCHECK</span><span class="w"> </span>--interval<span class="o">=</span>30s<span class="w"> </span>--timeout<span class="o">=</span>10s<span class="w"> </span>--start-period<span class="o">=</span>5s<span class="w"> </span>--retries<span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>CMD<span class="w"> </span>curl<span class="w"> </span>-f<span class="w"> </span>http://localhost:8501/_stcore/health<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+
+<span class="c"># Default command</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;streamlit&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;streamlit_app.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--server.port=8501&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--server.address=0.0.0.0&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Benefits:</strong></p>
+<ul class="simple">
+<li><p><strong>Image size</strong>: ~2GB → ~400MB (5x smaller)</p></li>
+<li><p><strong>Build time</strong>: Cached wheels speed up rebuilds</p></li>
+<li><p><strong>Security</strong>: No build tools in production image</p></li>
+<li><p><strong>Non-root</strong>: Runs as unprivileged user</p></li>
+</ul>
+<p><strong>Build:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>Dockerfile.multistage<span class="w"> </span>-t<span class="w"> </span>dip-smc-pso:optimized<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="docker-compose">
+<h2>Docker Compose<a class="headerlink" href="#docker-compose" title="Link to this heading">¶</a></h2>
+<p><strong>For multi-service deployments (HIL simulation, separate controller/plant):</strong></p>
+<p>Create <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.8&#39;</span>
+
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Plant Server (Hardware-in-the-Loop)</span>
+<span class="w">  </span><span class="nt">plant-server</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dockerfile.multistage</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-plant-server</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python -m src.hil.plant_server</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;5555:5555&quot;</span><span class="w">  </span><span class="c1"># ZMQ server port</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLANT_PORT=5555</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LOG_LEVEL=INFO</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-network</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+
+<span class="w">  </span><span class="c1"># Controller Client</span>
+<span class="w">  </span><span class="nt">controller-client</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dockerfile.multistage</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-controller-client</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python -m src.hil.controller_client --server plant-server:5555</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plant-server</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CONTROLLER_TYPE=classical_smc</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LOG_LEVEL=INFO</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-network</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+
+<span class="w">  </span><span class="c1"># Streamlit UI</span>
+<span class="w">  </span><span class="nt">streamlit-ui</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dockerfile.multistage</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-streamlit-ui</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8501:8501&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./results:/app/results</span><span class="w">  </span><span class="c1"># Persist results</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./config.yaml:/app/config.yaml</span><span class="w">  </span><span class="c1"># Custom config</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-network</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+
+<span class="w">  </span><span class="c1"># PSO Optimization Worker</span>
+<span class="w">  </span><span class="nt">pso-worker</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dockerfile.multistage</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-pso-worker</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python simulate.py --controller classical_smc --run-pso --save /app/results/optimized_gains.json</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./results:/app/results</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-network</span>
+<span class="w">    </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">limits</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">cpus</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;4&#39;</span>
+<span class="w">          </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4G</span>
+
+<span class="nt">networks</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">dip-network</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bridge</span>
+</pre></div>
+</div>
+<p><strong>Usage:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start all services</span>
+docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+
+<span class="c1"># View logs</span>
+docker-compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>streamlit-ui
+
+<span class="c1"># Scale PSO workers (parallel optimization)</span>
+docker-compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--scale<span class="w"> </span>pso-worker<span class="o">=</span><span class="m">4</span>
+
+<span class="c1"># Stop all services</span>
+docker-compose<span class="w"> </span>down
+
+<span class="c1"># Rebuild and restart</span>
+docker-compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--build
+</pre></div>
+</div>
+</section>
+<section id="volume-mounting">
+<h2>Volume Mounting<a class="headerlink" href="#volume-mounting" title="Link to this heading">¶</a></h2>
+<p><strong>Persist results, configs, and logs outside containers:</strong></p>
+<section id="configuration-files">
+<h3>Configuration Files<a class="headerlink" href="#configuration-files" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mount custom config</span>
+docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/custom_config.yaml:/app/config.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dip-smc-pso:latest<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>simulate.py<span class="w"> </span>--config<span class="w"> </span>/app/config.yaml
+</pre></div>
+</div>
+</section>
+</section>
+<section id="results-and-logs">
+<h2>Results and Logs<a class="headerlink" href="#results-and-logs" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mount results directory</span>
+docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/results:/app/results<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dip-smc-pso:latest<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>sta_smc<span class="w"> </span>--save<span class="w"> </span>/app/results/simulation.json
+
+<span class="c1"># Results saved to ./results/simulation.json on host</span>
+</pre></div>
+</div>
+</section>
+<section id="development-mode-live-code-reload">
+<h2>Development Mode (Live Code Reload)<a class="headerlink" href="#development-mode-live-code-reload" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mount source code for development</span>
+docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">8501</span>:8501<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/src:/app/src<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/config.yaml:/app/config.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dip-smc-pso:dev
+
+<span class="c1"># Changes to src/ reflected immediately in container</span>
+</pre></div>
+</div>
+</section>
+<section id="notebook-directory">
+<h2>Notebook Directory<a class="headerlink" href="#notebook-directory" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mount notebooks for Jupyter</span>
+docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span>:8888<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/notebooks:/app/notebooks<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dip-smc-pso:latest<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>jupyter<span class="w"> </span>notebook<span class="w"> </span>--ip<span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span>--port<span class="o">=</span><span class="m">8888</span><span class="w"> </span>--no-browser<span class="w"> </span>--allow-root
+</pre></div>
+</div>
+</section>
+<section id="gpu-support">
+<h2>GPU Support<a class="headerlink" href="#gpu-support" title="Link to this heading">¶</a></h2>
+<p><strong>Accelerate PSO optimization and simulations with GPU:</strong></p>
+<section id="id1">
+<h3>Prerequisites<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>NVIDIA GPU with CUDA support</p></li>
+<li><p><a class="reference external" href="https://github.com/NVIDIA/nvidia-docker">NVIDIA Docker runtime</a> installed</p></li>
+</ol>
+</section>
+<section id="gpu-enabled-dockerfile">
+<h3>GPU-Enabled Dockerfile<a class="headerlink" href="#gpu-enabled-dockerfile" title="Link to this heading">¶</a></h3>
+<div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span><span class="c"># Dockerfile.gpu</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04</span>
+
+<span class="c"># Install Python</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>python3.9<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>python3-pip<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+
+<span class="c"># Install PyTorch with CUDA support (if using neural network controllers)</span>
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>torch<span class="w"> </span>torchvision<span class="w"> </span>torchaudio<span class="w"> </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cu118
+
+<span class="c"># Install project dependencies</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c"># Copy project</span>
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>/app
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;simulate.py&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-with-gpu">
+<h2>Running with GPU<a class="headerlink" href="#running-with-gpu" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build GPU image</span>
+docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>Dockerfile.gpu<span class="w"> </span>-t<span class="w"> </span>dip-smc-pso:gpu<span class="w"> </span>.
+
+<span class="c1"># Run with GPU access</span>
+docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>dip-smc-pso:gpu<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>adaptive_smc<span class="w"> </span>--run-pso<span class="w"> </span>--iterations<span class="w"> </span><span class="m">1000</span>
+
+<span class="c1"># Check GPU usage inside container</span>
+docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>dip-smc-pso:gpu<span class="w"> </span>nvidia-smi
+</pre></div>
+</div>
+</section>
+<section id="docker-compose-with-gpu">
+<h2>Docker Compose with GPU<a class="headerlink" href="#docker-compose-with-gpu" title="Link to this heading">¶</a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.8&#39;</span>
+
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pso-gpu-worker</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-smc-pso:gpu</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-pso-gpu</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python simulate.py --run-pso --use-gpu</span>
+<span class="w">    </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">reservations</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">devices</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nvidia</span>
+<span class="w">              </span><span class="nt">count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">              </span><span class="nt">capabilities</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">gpu</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</section>
+<section id="production-deployment">
+<h2>Production Deployment<a class="headerlink" href="#production-deployment" title="Link to this heading">¶</a></h2>
+<section id="cloud-platforms">
+<h3>Cloud Platforms<a class="headerlink" href="#cloud-platforms" title="Link to this heading">¶</a></h3>
+<section id="aws-ecs-elastic-container-service">
+<h4>AWS ECS (Elastic Container Service)<a class="headerlink" href="#aws-ecs-elastic-container-service" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tag for AWS ECR</span>
+docker<span class="w"> </span>tag<span class="w"> </span>dip-smc-pso:latest<span class="w"> </span><span class="m">123456789012</span>.dkr.ecr.us-east-1.amazonaws.com/dip-smc-pso:latest
+
+<span class="c1"># Push to ECR</span>
+aws<span class="w"> </span>ecr<span class="w"> </span>get-login-password<span class="w"> </span>--region<span class="w"> </span>us-east-1<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>AWS<span class="w"> </span>--password-stdin<span class="w"> </span><span class="m">123456789012</span>.dkr.ecr.us-east-1.amazonaws.com
+docker<span class="w"> </span>push<span class="w"> </span><span class="m">123456789012</span>.dkr.ecr.us-east-1.amazonaws.com/dip-smc-pso:latest
+
+<span class="c1"># Deploy to ECS (using task definition)</span>
+aws<span class="w"> </span>ecs<span class="w"> </span>update-service<span class="w"> </span>--cluster<span class="w"> </span>dip-cluster<span class="w"> </span>--service<span class="w"> </span>dip-smc-pso<span class="w"> </span>--force-new-deployment
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="google-cloud-run">
+<h2>Google Cloud Run<a class="headerlink" href="#google-cloud-run" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build and push to Google Container Registry</span>
+gcloud<span class="w"> </span>builds<span class="w"> </span>submit<span class="w"> </span>--tag<span class="w"> </span>gcr.io/my-project/dip-smc-pso
+
+<span class="c1"># Deploy to Cloud Run</span>
+gcloud<span class="w"> </span>run<span class="w"> </span>deploy<span class="w"> </span>dip-smc-pso<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--image<span class="w"> </span>gcr.io/my-project/dip-smc-pso<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--platform<span class="w"> </span>managed<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span>us-central1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--allow-unauthenticated<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--port<span class="w"> </span><span class="m">8501</span>
+</pre></div>
+</div>
+</section>
+<section id="azure-container-instances">
+<h2>Azure Container Instances<a class="headerlink" href="#azure-container-instances" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Push to Azure Container Registry</span>
+az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span>--registry<span class="w"> </span>myregistry<span class="w"> </span>--image<span class="w"> </span>dip-smc-pso:latest<span class="w"> </span>.
+
+<span class="c1"># Deploy to ACI</span>
+az<span class="w"> </span>container<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--resource-group<span class="w"> </span>myResourceGroup<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>dip-smc-pso<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--image<span class="w"> </span>myregistry.azurecr.io/dip-smc-pso:latest<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--dns-name-label<span class="w"> </span>dip-smc-pso<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--ports<span class="w"> </span><span class="m">8501</span>
+</pre></div>
+</div>
+</section>
+<section id="kubernetes">
+<h2>Kubernetes<a class="headerlink" href="#kubernetes" title="Link to this heading">¶</a></h2>
+<p><strong>Deploy at scale with Kubernetes:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">deployment.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-smc-pso</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-smc-pso</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-smc-pso</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-smc-pso</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-smc-pso:latest</span>
+<span class="w">        </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8501</span>
+<span class="w">        </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">requests</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2Gi&quot;</span>
+<span class="w">            </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1&quot;</span>
+<span class="w">          </span><span class="nt">limits</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4Gi&quot;</span>
+<span class="w">            </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2&quot;</span>
+
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-smc-pso-service</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dip-smc-pso</span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8501</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LoadBalancer</span>
+</pre></div>
+</div>
+<p><strong>Deploy:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>deployment.yaml
+kubectl<span class="w"> </span>get<span class="w"> </span>services<span class="w">  </span><span class="c1"># Get external IP</span>
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">¶</a></h3>
+<section id="port-already-in-use">
+<h4>1. Port Already in Use<a class="headerlink" href="#port-already-in-use" title="Link to this heading">¶</a></h4>
+<p><strong>Error:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="n">starting</span> <span class="n">userland</span> <span class="n">proxy</span><span class="p">:</span> <span class="n">listen</span> <span class="n">tcp4</span> <span class="mf">0.0.0.0</span><span class="p">:</span><span class="mi">8501</span><span class="p">:</span> <span class="n">bind</span><span class="p">:</span> <span class="n">address</span> <span class="n">already</span> <span class="ow">in</span> <span class="n">use</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find process using port 8501</span>
+lsof<span class="w"> </span>-i<span class="w"> </span>:8501<span class="w">  </span><span class="c1"># On Mac/Linux</span>
+netstat<span class="w"> </span>-ano<span class="w"> </span><span class="p">|</span><span class="w"> </span>findstr<span class="w"> </span>:8501<span class="w">  </span><span class="c1"># On Windows</span>
+
+<span class="c1"># Kill process or use different port</span>
+docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">8502</span>:8501<span class="w"> </span>dip-smc-pso:latest
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="out-of-memory">
+<h2>2. Out of Memory<a class="headerlink" href="#out-of-memory" title="Link to this heading">¶</a></h2>
+<p><strong>Error:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ne">MemoryError</span><span class="p">:</span> <span class="n">Unable</span> <span class="n">to</span> <span class="n">allocate</span> <span class="n">array</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase Docker memory limit (Docker Desktop → Preferences → Resources)</span>
+<span class="c1"># Or limit container memory explicitly</span>
+docker<span class="w"> </span>run<span class="w"> </span>-m<span class="w"> </span>4g<span class="w"> </span>dip-smc-pso:latest
+</pre></div>
+</div>
+</section>
+<section id="permission-denied-volume-mounts">
+<h2>3. Permission Denied (Volume Mounts)<a class="headerlink" href="#permission-denied-volume-mounts" title="Link to this heading">¶</a></h2>
+<p><strong>Error:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Permission</span> <span class="n">denied</span><span class="p">:</span> <span class="s1">&#39;/app/results/output.json&#39;</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run as current user (not root)</span>
+docker<span class="w"> </span>run<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/results:/app/results<span class="w"> </span>dip-smc-pso:latest
+
+<span class="c1"># Or fix permissions on host</span>
+chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>./results
+</pre></div>
+</div>
+</section>
+<section id="cuda-gpu-not-found">
+<h2>4. CUDA/GPU Not Found<a class="headerlink" href="#cuda-gpu-not-found" title="Link to this heading">¶</a></h2>
+<p><strong>Error:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ne">RuntimeError</span><span class="p">:</span> <span class="n">CUDA</span> <span class="n">driver</span> <span class="n">version</span> <span class="ow">is</span> <span class="n">insufficient</span> <span class="k">for</span> <span class="n">CUDA</span> <span class="n">runtime</span> <span class="n">version</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update NVIDIA drivers on host</span>
+<span class="c1"># Verify nvidia-docker runtime installed</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>nvidia/cuda:11.8.0-base-ubuntu22.04<span class="w"> </span>nvidia-smi
+
+<span class="c1"># Check Docker daemon.json includes nvidia runtime</span>
+cat<span class="w"> </span>/etc/docker/daemon.json
+<span class="c1"># Should have: &quot;runtimes&quot;: {&quot;nvidia&quot;: {&quot;path&quot;: &quot;nvidia-container-runtime&quot;}}</span>
+</pre></div>
+</div>
+</section>
+<section id="slow-build-times">
+<h2>5. Slow Build Times<a class="headerlink" href="#slow-build-times" title="Link to this heading">¶</a></h2>
+<p><strong>Solution:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use BuildKit for parallel builds</span>
+<span class="nv">DOCKER_BUILDKIT</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>dip-smc-pso:fast<span class="w"> </span>.
+
+<span class="c1"># Cache pip packages</span>
+docker<span class="w"> </span>build<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">BUILDKIT_INLINE_CACHE</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>-t<span class="w"> </span>dip-smc-pso:cached<span class="w"> </span>.
+
+<span class="c1"># Use multi-stage build (see above)</span>
+</pre></div>
+</div>
+</section>
+<section id="debug-mode">
+<h2>Debug Mode<a class="headerlink" href="#debug-mode" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run container with verbose logging</span>
+docker<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span><span class="nv">LOG_LEVEL</span><span class="o">=</span>DEBUG<span class="w"> </span>dip-smc-pso:latest
+
+<span class="c1"># Inspect running container</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container_id&gt;<span class="w"> </span>/bin/bash
+
+<span class="c1"># View logs</span>
+docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>&lt;container_id&gt;
+
+<span class="c1"># Inspect image layers</span>
+docker<span class="w"> </span><span class="nb">history</span><span class="w"> </span>dip-smc-pso:latest
+</pre></div>
+</div>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
+<section id="security">
+<h3>Security<a class="headerlink" href="#security" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Use multi-stage builds</strong> - Remove build tools from production images</p></li>
+<li><p><strong>Run as non-root user</strong> - Use <code class="docutils literal notranslate"><span class="pre">USER</span></code> directive in Dockerfile</p></li>
+<li><p><strong>Scan for vulnerabilities</strong> - <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">scan</span> <span class="pre">dip-smc-pso:latest</span></code></p></li>
+<li><p><strong>Pin base image versions</strong> - Use <code class="docutils literal notranslate"><span class="pre">python:3.9.18-slim</span></code> not <code class="docutils literal notranslate"><span class="pre">python:3.9-slim</span></code></p></li>
+<li><p><strong>Minimize attack surface</strong> - Only install necessary packages</p></li>
+</ol>
+</section>
+<section id="performance">
+<h3>Performance<a class="headerlink" href="#performance" title="Link to this heading">¶</a></h3>
+<ol class="arabic">
+<li><p><strong>Use <code class="docutils literal notranslate"><span class="pre">.dockerignore</span></code></strong> - Exclude unnecessary files from build context:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">git</span>
+<span class="o">.</span><span class="n">pytest_cache</span>
+<span class="n">__pycache__</span>
+<span class="o">*.</span><span class="n">pyc</span>
+<span class="n">tests</span><span class="o">/</span>
+<span class="n">docs</span><span class="o">/</span>
+<span class="n">notebooks</span><span class="o">/</span>
+<span class="o">.</span><span class="n">archive</span><span class="o">/</span>
+<span class="n">results</span><span class="o">/</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Layer caching</strong> - Order Dockerfile commands from least to most frequently changed:</p>
+<div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span><span class="c"># Changes rarely → early layers</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c"># Changes often → late layers</span>
+<span class="k">COPY</span><span class="w"> </span>src/<span class="w"> </span>./src/
+</pre></div>
+</div>
+</li>
+<li><p><strong>Multi-stage builds</strong> - Reduce final image size by 5-10x</p></li>
+</ol>
+</section>
+<section id="reproducibility">
+<h3>Reproducibility<a class="headerlink" href="#reproducibility" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Pin all versions</strong> - In <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> use <code class="docutils literal notranslate"><span class="pre">numpy==1.24.3</span></code> not <code class="docutils literal notranslate"><span class="pre">numpy&gt;=1.24</span></code></p></li>
+<li><p><strong>Use fixed base image tags</strong> - <code class="docutils literal notranslate"><span class="pre">python:3.9.18-slim</span></code> not <code class="docutils literal notranslate"><span class="pre">python:latest</span></code></p></li>
+<li><p><strong>Document build process</strong> - Include <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> and <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> in repo</p></li>
+<li><p><strong>Tag images with git commit</strong> - <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span> <span class="pre">-t</span> <span class="pre">dip-smc-pso:$(git</span> <span class="pre">rev-parse</span> <span class="pre">--short</span> <span class="pre">HEAD)</span> <span class="pre">.</span></code></p></li>
+</ol>
+</section>
+</section>
+<section id="additional-resources">
+<h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.docker.com/">Docker Documentation</a></p></li>
+<li><p><a class="reference external" href="https://docs.docker.com/compose/">Docker Compose Documentation</a></p></li>
+<li><p><a class="reference external" href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">Dockerfile Best Practices</a></p></li>
+<li><p><a class="reference external" href="https://github.com/NVIDIA/nvidia-docker">NVIDIA Docker</a></p></li>
+<li><p><a class="reference external" href="https://kubernetes.io/docs/">Kubernetes Documentation</a></p></li>
+</ul>
+<p><strong>Last Updated:</strong> 2025-10-09
+<strong>Maintainer:</strong> DIP-SMC-PSO Team</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Research Team
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on Oct 10, 2025</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Docker Deployment Guide</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#quick-start">Quick Start</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#pull-and-run-pre-built-image">Pull and Run Pre-Built Image</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#run-cli-simulation">Run CLI Simulation</a></li>
+<li><a class="reference internal" href="#interactive-shell">Interactive Shell</a></li>
+<li><a class="reference internal" href="#building-images">Building Images</a><ul>
+<li><a class="reference internal" href="#basic-build">Basic Build</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multi-stage-builds">Multi-Stage Builds</a></li>
+<li><a class="reference internal" href="#docker-compose">Docker Compose</a></li>
+<li><a class="reference internal" href="#volume-mounting">Volume Mounting</a><ul>
+<li><a class="reference internal" href="#configuration-files">Configuration Files</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#results-and-logs">Results and Logs</a></li>
+<li><a class="reference internal" href="#development-mode-live-code-reload">Development Mode (Live Code Reload)</a></li>
+<li><a class="reference internal" href="#notebook-directory">Notebook Directory</a></li>
+<li><a class="reference internal" href="#gpu-support">GPU Support</a><ul>
+<li><a class="reference internal" href="#id1">Prerequisites</a></li>
+<li><a class="reference internal" href="#gpu-enabled-dockerfile">GPU-Enabled Dockerfile</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-with-gpu">Running with GPU</a></li>
+<li><a class="reference internal" href="#docker-compose-with-gpu">Docker Compose with GPU</a></li>
+<li><a class="reference internal" href="#production-deployment">Production Deployment</a><ul>
+<li><a class="reference internal" href="#cloud-platforms">Cloud Platforms</a><ul>
+<li><a class="reference internal" href="#aws-ecs-elastic-container-service">AWS ECS (Elastic Container Service)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#google-cloud-run">Google Cloud Run</a></li>
+<li><a class="reference internal" href="#azure-container-instances">Azure Container Instances</a></li>
+<li><a class="reference internal" href="#kubernetes">Kubernetes</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#common-issues">Common Issues</a><ul>
+<li><a class="reference internal" href="#port-already-in-use">1. Port Already in Use</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#out-of-memory">2. Out of Memory</a></li>
+<li><a class="reference internal" href="#permission-denied-volume-mounts">3. Permission Denied (Volume Mounts)</a></li>
+<li><a class="reference internal" href="#cuda-gpu-not-found">4. CUDA/GPU Not Found</a></li>
+<li><a class="reference internal" href="#slow-build-times">5. Slow Build Times</a></li>
+<li><a class="reference internal" href="#debug-mode">Debug Mode</a></li>
+<li><a class="reference internal" href="#best-practices">Best Practices</a><ul>
+<li><a class="reference internal" href="#security">Security</a></li>
+<li><a class="reference internal" href="#performance">Performance</a></li>
+<li><a class="reference internal" href="#reproducibility">Reproducibility</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=4ebf8126"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=08e7b316"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/back-to-top.js?v=840797bb"></script>
+    <script src="../_static/lazy-load.js?v=dc25293c"></script>
+    <script src="../_static/dark-mode.js?v=bf328970"></script>
+    </body>
+</html>

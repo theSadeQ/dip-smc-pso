@@ -16,7 +16,7 @@ applications requiring reliable message delivery.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -140,7 +140,7 @@ Deserialize message data and metadata.
 
 [View full source →](#method-tcpinterface-_deserialize_message)
 
----
+
 
 ### `TCPServer`
 
@@ -180,7 +180,7 @@ Send message to specific client.
 
 [View full source →](#method-tcpserver-send_to_client)
 
----
+
 
 ### `TCPClient`
 
@@ -208,7 +208,7 @@ Connect to TCP server.
 
 [View full source →](#method-tcpclient-connect_to_server)
 
----
+
 
 ## Dependencies
 

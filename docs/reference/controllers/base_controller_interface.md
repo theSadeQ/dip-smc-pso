@@ -38,7 +38,7 @@ class ControllerProtocol(Protocol):
         ...
 ```
 
-### Liskov Substitution Principle
+## Liskov Substitution Principle
 
 **LSP:** Subclasses must be substitutable for base class without breaking program.
 
@@ -79,7 +79,7 @@ class Controller(ABC):
         ...
 ```
 
-### Abstract Base Class Pattern
+## Abstract Base Class Pattern
 
 ```python
 class Controller(ABC):
@@ -112,7 +112,7 @@ def simulate(controller: ControllerProtocol):
     u = controller.compute_control(state, {}, {})  # Type-safe!
 ```
 
-### State Variable Pattern
+## State Variable Pattern
 
 **Problem:** Controllers need internal state (e.g., integral error, adaptation gains).
 
@@ -256,7 +256,7 @@ result_classical = simulate(classical, duration=5.0)
 result_adaptive = simulate(adaptive, duration=5.0)
 ```
 
-### Example 2: Duck Typing vs Explicit Protocol
+## Example 2: Duck Typing vs Explicit Protocol
 
 ```python
 # example-metadata:
@@ -277,7 +277,7 @@ def simulate_protocol(controller: ControllerProtocol):
 # simulate_protocol("foo")  # Error: str doesn't implement ControllerProtocol
 ```
 
-### Example 3: Liskov Substitution Principle
+## Example 3: Liskov Substitution Principle
 
 ```python
 # Base class behavior
@@ -298,7 +298,7 @@ history_adaptive = reset_controller(adaptive)    # Works
 # Substitutability guaranteed by LSP
 ```
 
-### Example 4: State Variable Pattern
+## Example 4: State Variable Pattern
 
 ```python
 # example-metadata:
@@ -370,7 +370,7 @@ result = simulate(custom_controller, duration=5.0)  # Works!
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -435,7 +435,7 @@ String representation of the controller.
 
 [View full source →](#method-controllerinterface-__repr__)
 
----
+
 
 ## Dependencies
 

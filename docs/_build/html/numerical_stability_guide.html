@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="./">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -19,16 +19,16 @@
     margin-top: 0.5em;
 }
 </style>
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>Numerical Stability Guide - DIP_SMC_PSO Documentation</title>
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>Numerical Stability Guide Version: 1.2.0 | Last Updated: 2025-10-01 ## Overview This guide documents the adaptive matrix regularization system implemented in the double-inverted pendulum control framework. The system provides robust numerical stability for matrix operations in plant dynamics, controllers, and optimization algorithms. - DIP_SMC_PSO Documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5a89ef9" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=8a7e329d" />
     
     
 
@@ -163,14 +163,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -180,8 +176,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -189,8 +184,7 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -198,8 +192,7 @@
         </button>
       </div>
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -207,7 +200,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
-  
   
   <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
   
@@ -219,254 +211,12 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory_overview.html">Theory Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">3. System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plant_model.html">1.x Plant Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="plant/models_guide.html">Plant Models Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="TESTING.html">Testing Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="test_protocols.html">5.x Test Protocols</a></li>
-<li class="toctree-l1"><a class="reference internal" href="use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="context.html">2. Application Context</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/introduction.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="presentation/results-discussion.html#references">References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference Documentation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography &amp; Academic References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RELEASE_CHECKLIST.html">Release Checklist</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="symbols.html">Symbols &amp; Units</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results_readme.html">Results &amp; Plots</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="CITATIONS.html">Citations &amp; Academic Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -492,13 +242,12 @@
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/numerical_stability_guide.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/numerical_stability_guide.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
 </div><div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -506,460 +255,216 @@
             </button>
           </div>
           <label class="toc-overlay-icon toc-content-icon" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section class="tex2jax_ignore mathjax_ignore" id="numerical-stability-guide">
-<h1>Numerical Stability Guide<a class="headerlink" href="#numerical-stability-guide" title="Link to this heading">¶</a></h1>
-<p><strong>Version</strong>: 1.2.0 | <strong>Last Updated</strong>: 2025-10-01</p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p>This guide documents the adaptive matrix regularization system implemented in the double-inverted pendulum control framework. The system provides robust numerical stability for matrix operations in plant dynamics, controllers, and optimization algorithms.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="numerical-stability-guide-version-1-2-0-last-updated-2025-10-01-overview-this-guide-documents-the-adaptive-matrix-regularization-system-implemented-in-the-double-inverted-pendulum-control-framework-the-system-provides-robust-numerical-stability-for-matrix-operations-in-plant-dynamics-controllers-and-optimization-algorithms">
+<h1>Numerical Stability Guide <strong>Version</strong>: 1.2.0 | <strong>Last Updated</strong>: 2025-10-01 ## Overview This guide documents the adaptive matrix regularization system implemented in the double-inverted pendulum control framework. The system provides robust numerical stability for matrix operations in plant dynamics, controllers, and optimization algorithms.<a class="headerlink" href="#numerical-stability-guide-version-1-2-0-last-updated-2025-10-01-overview-this-guide-documents-the-adaptive-matrix-regularization-system-implemented-in-the-double-inverted-pendulum-control-framework-the-system-provides-robust-numerical-stability-for-matrix-operations-in-plant-dynamics-controllers-and-optimization-algorithms" title="Link to this heading">¶</a></h1>
+<hr class="docutils" />
+<section id="architecture-core-components">
+<h2>Architecture ### Core Components ```<a class="headerlink" href="#architecture-core-components" title="Link to this heading">¶</a></h2>
+<p>src/plant/core/numerical_stability.py
+├── AdaptiveRegularizer # 5-level adaptive regularization
+├── MatrixInverter # Robust matrix inversion
+├── NumericalStabilityMonitor # Performance tracking
+└── fast_condition_estimate # Lightweight condition checking</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
+
+<span class="c1">## AdaptiveRegularizer ### Purpose Prevents `LinAlgError` exceptions from ill-conditioned matrices by applying adaptive Tikhonov regularization based on singular value decomposition (SVD) analysis. ### Mathematical Foundation **Tikhonov Regularization**:</span>
+</pre></div>
+</div>
+<p>M_reg = M + λI</p>
+<div class="highlight-Where: notranslate"><div class="highlight"><pre><span></span>- `M`: Original matrix
+- `λ`: Adaptive regularization parameter (computed via SVD)
+- `I`: Identity matrix **Adaptive Parameter Selection**:
+```python
+
+λ = alpha * σ_max * scale_factor
+``` Where:
+- `σ_max`: Largest singular value from SVD
+- `alpha`: Base scaling (default: 1e-4)
+- `scale_factor`: Condition-dependent multiplier (1x to 100000x)
+
+---
+
+## 5-Level Adaptive Scaling Strategy ### Level 1: Extreme Ill-Conditioning (`sv_ratio &lt; 2e-9`) **Trigger**: Singular value ratio below `2e-9`
+**Scaling**: **100,000x** base regularization
+**Use Case**: Near-singular matrices from extreme parameter combinations ```python
+if sv_ratio &lt; 2e-9: reg_scale = alpha * s[0] * 1e5
+``` **Example**:
+
+```python
+# Matrix with singular value ratio 2e-9
+M = U @ diag([1.0, 2e-8, 2e-9]) @ V.T
+# Regularization: λ = 1e-4 * 1.0 * 100000 = 10.0
+``` ### Level 2: Very Extreme (`sv_ratio &lt; 1e-8`) **Trigger**: Singular value ratio below `1e-8`
+
+**Scaling**: **10,000x** base regularization
+**Use Case**: High condition numbers (cond &gt; 1e12) ```python
+if sv_ratio &lt; 1e-8: reg_scale = alpha * s[0] * 1e4
+``` ### Level 3: Moderate (`sv_ratio &lt; 1e-6`) **Trigger**: Singular value ratio below `1e-6`
+**Scaling**: **100x** base regularization
+**Use Case**: Approaching ill-conditioning threshold ```python
+if sv_ratio &lt; 1e-6: reg_scale = alpha * s[0] * 1e2
+``` ### Level 4: Preventive (`cond &gt; 1e10`) **Trigger**: Condition number exceeds `1e10`
+
+**Scaling**: **10x** base regularization
+**Use Case**: Early warning for approaching threshold ```python
+if cond_num &gt; 1e10: reg_scale = alpha * s[0] * 10
+``` ### Level 5: Well-Conditioned (Default) **Trigger**: Condition number &lt; `1e10` and `sv_ratio &gt; 1e-6`
+**Scaling**: **1x** base regularization (minimal)
+**Use Case**: Normal operation ```python
+else: reg_scale = alpha * s[0]
+</pre></div>
+</div>
 </section>
 <hr class="docutils" />
-<section id="architecture">
-<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">¶</a></h2>
-<section id="core-components">
-<h3>Core Components<a class="headerlink" href="#core-components" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="o">/</span><span class="n">plant</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">numerical_stability</span><span class="o">.</span><span class="n">py</span>
-<span class="err">├──</span> <span class="n">AdaptiveRegularizer</span>     <span class="c1"># 5-level adaptive regularization</span>
-<span class="err">├──</span> <span class="n">MatrixInverter</span>          <span class="c1"># Robust matrix inversion</span>
-<span class="err">├──</span> <span class="n">NumericalStabilityMonitor</span>  <span class="c1"># Performance tracking</span>
-<span class="err">└──</span> <span class="n">fast_condition_estimate</span>    <span class="c1"># Lightweight condition checking</span>
-</pre></div>
-</div>
+<section id="usage-examples-basic-usage-python">
+<h2>Usage Examples ### Basic Usage ```python<a class="headerlink" href="#usage-examples-basic-usage-python" title="Link to this heading">¶</a></h2>
+<p>from src.plant.core.numerical_stability import AdaptiveRegularizer, MatrixInverter # Initialize with standardized parameters
+regularizer = AdaptiveRegularizer( regularization_alpha=1e-4, # Base scaling factor max_condition_number=1e14, # Condition threshold min_regularization=1e-10, # Safety floor use_fixed_regularization=False # adaptive mode
+) matrix_inverter = MatrixInverter(regularizer=regularizer) # Robust matrix inversion
+try: M_inv = matrix_inverter.invert_matrix(M)
+except NumericalInstabilityError as e: print(f”Matrix inversion failed: {e}”)
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">Controller</span> <span class="pre">Integration</span></code>python
+from src.controllers.smc.core.equivalent_control import EquivalentControl # Controllers automatically use AdaptiveRegularizer
+eq_control = EquivalentControl( dynamics_model=dynamics, regularization_alpha=1e-4, min_regularization=1e-10, max_condition_number=1e14, use_fixed_regularization=False
+) # Equivalent control computation with robust matrix operations
+u_eq = eq_control.compute(state, sliding_surface)
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">Fixed</span> <span class="pre">Regularization</span> <span class="pre">Mode</span></code>python</p>
 </section>
 </section>
-<hr class="docutils" />
-<section id="adaptiveregularizer">
-<h2>AdaptiveRegularizer<a class="headerlink" href="#adaptiveregularizer" title="Link to this heading">¶</a></h2>
-<section id="purpose">
-<h3>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">¶</a></h3>
-<p>Prevents <code class="docutils literal notranslate"><span class="pre">LinAlgError</span></code> exceptions from ill-conditioned matrices by applying adaptive Tikhonov regularization based on singular value decomposition (SVD) analysis.</p>
-</section>
-<section id="mathematical-foundation">
-<h3>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading">¶</a></h3>
-<p><strong>Tikhonov Regularization</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M_reg</span> <span class="o">=</span> <span class="n">M</span> <span class="o">+</span> <span class="n">λI</span>
-</pre></div>
-</div>
-<p>Where:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">M</span></code>: Original matrix</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">λ</span></code>: Adaptive regularization parameter (computed via SVD)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">I</span></code>: Identity matrix</p></li>
-</ul>
-<p><strong>Adaptive Parameter Selection</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">λ</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">σ_max</span> <span class="o">*</span> <span class="n">scale_factor</span>
-</pre></div>
-</div>
-<p>Where:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">σ_max</span></code>: Largest singular value from SVD</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code>: Base scaling (default: 1e-4)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">scale_factor</span></code>: Condition-dependent multiplier (1x to 100000x)</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="level-adaptive-scaling-strategy">
-<h2>5-Level Adaptive Scaling Strategy<a class="headerlink" href="#level-adaptive-scaling-strategy" title="Link to this heading">¶</a></h2>
-<section id="level-1-extreme-ill-conditioning-sv-ratio-2e-9">
-<h3>Level 1: Extreme Ill-Conditioning (<code class="docutils literal notranslate"><span class="pre">sv_ratio</span> <span class="pre">&lt;</span> <span class="pre">2e-9</span></code>)<a class="headerlink" href="#level-1-extreme-ill-conditioning-sv-ratio-2e-9" title="Link to this heading">¶</a></h3>
-<p><strong>Trigger</strong>: Singular value ratio below <code class="docutils literal notranslate"><span class="pre">2e-9</span></code>
-<strong>Scaling</strong>: <strong>100,000x</strong> base regularization
-<strong>Use Case</strong>: Near-singular matrices from extreme parameter combinations</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">sv_ratio</span> <span class="o">&lt;</span> <span class="mf">2e-9</span><span class="p">:</span>
-    <span class="n">reg_scale</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e5</span>
-</pre></div>
-</div>
-<p><strong>Example</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Matrix with singular value ratio 2e-9</span>
-<span class="n">M</span> <span class="o">=</span> <span class="n">U</span> <span class="o">@</span> <span class="n">diag</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2e-8</span><span class="p">,</span> <span class="mf">2e-9</span><span class="p">])</span> <span class="o">@</span> <span class="n">V</span><span class="o">.</span><span class="n">T</span>
-<span class="c1"># Regularization: λ = 1e-4 * 1.0 * 100000 = 10.0</span>
-</pre></div>
-</div>
-</section>
-<section id="level-2-very-extreme-sv-ratio-1e-8">
-<h3>Level 2: Very Extreme (<code class="docutils literal notranslate"><span class="pre">sv_ratio</span> <span class="pre">&lt;</span> <span class="pre">1e-8</span></code>)<a class="headerlink" href="#level-2-very-extreme-sv-ratio-1e-8" title="Link to this heading">¶</a></h3>
-<p><strong>Trigger</strong>: Singular value ratio below <code class="docutils literal notranslate"><span class="pre">1e-8</span></code>
-<strong>Scaling</strong>: <strong>10,000x</strong> base regularization
-<strong>Use Case</strong>: High condition numbers (cond &gt; 1e12)</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">sv_ratio</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">:</span>
-    <span class="n">reg_scale</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e4</span>
-</pre></div>
-</div>
-</section>
-<section id="level-3-moderate-sv-ratio-1e-6">
-<h3>Level 3: Moderate (<code class="docutils literal notranslate"><span class="pre">sv_ratio</span> <span class="pre">&lt;</span> <span class="pre">1e-6</span></code>)<a class="headerlink" href="#level-3-moderate-sv-ratio-1e-6" title="Link to this heading">¶</a></h3>
-<p><strong>Trigger</strong>: Singular value ratio below <code class="docutils literal notranslate"><span class="pre">1e-6</span></code>
-<strong>Scaling</strong>: <strong>100x</strong> base regularization
-<strong>Use Case</strong>: Approaching ill-conditioning threshold</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">sv_ratio</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>
-    <span class="n">reg_scale</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e2</span>
-</pre></div>
-</div>
-</section>
-<section id="level-4-preventive-cond-1e10">
-<h3>Level 4: Preventive (<code class="docutils literal notranslate"><span class="pre">cond</span> <span class="pre">&gt;</span> <span class="pre">1e10</span></code>)<a class="headerlink" href="#level-4-preventive-cond-1e10" title="Link to this heading">¶</a></h3>
-<p><strong>Trigger</strong>: Condition number exceeds <code class="docutils literal notranslate"><span class="pre">1e10</span></code>
-<strong>Scaling</strong>: <strong>10x</strong> base regularization
-<strong>Use Case</strong>: Early warning for approaching threshold</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">cond_num</span> <span class="o">&gt;</span> <span class="mf">1e10</span><span class="p">:</span>
-    <span class="n">reg_scale</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span>
-</pre></div>
-</div>
-</section>
-<section id="level-5-well-conditioned-default">
-<h3>Level 5: Well-Conditioned (Default)<a class="headerlink" href="#level-5-well-conditioned-default" title="Link to this heading">¶</a></h3>
-<p><strong>Trigger</strong>: Condition number &lt; <code class="docutils literal notranslate"><span class="pre">1e10</span></code> and <code class="docutils literal notranslate"><span class="pre">sv_ratio</span> <span class="pre">&gt;</span> <span class="pre">1e-6</span></code>
-<strong>Scaling</strong>: <strong>1x</strong> base regularization (minimal)
-<strong>Use Case</strong>: Normal operation</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">else</span><span class="p">:</span>
-    <span class="n">reg_scale</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="usage-examples">
-<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
-<section id="basic-usage">
-<h3>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.core.numerical_stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdaptiveRegularizer</span><span class="p">,</span> <span class="n">MatrixInverter</span>
+<section class="tex2jax_ignore mathjax_ignore" id="for-well-conditioned-systems-or-debugging">
+<h1>For well-conditioned systems or debugging<a class="headerlink" href="#for-well-conditioned-systems-or-debugging" title="Link to this heading">¶</a></h1>
+<p>regularizer = AdaptiveRegularizer( regularization_alpha=1e-6, # Single parameter use_fixed_regularization=True # Disable adaptive scaling
+)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
 
-<span class="c1"># Initialize with standardized parameters</span>
-<span class="n">regularizer</span> <span class="o">=</span> <span class="n">AdaptiveRegularizer</span><span class="p">(</span>
-    <span class="n">regularization_alpha</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>        <span class="c1"># Base scaling factor</span>
-    <span class="n">max_condition_number</span><span class="o">=</span><span class="mf">1e14</span><span class="p">,</span>        <span class="c1"># Condition threshold</span>
-    <span class="n">min_regularization</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span>         <span class="c1"># Safety floor</span>
-    <span class="n">use_fixed_regularization</span><span class="o">=</span><span class="kc">False</span>    <span class="c1"># Enable adaptive mode</span>
-<span class="p">)</span>
-
-<span class="n">matrix_inverter</span> <span class="o">=</span> <span class="n">MatrixInverter</span><span class="p">(</span><span class="n">regularizer</span><span class="o">=</span><span class="n">regularizer</span><span class="p">)</span>
-
-<span class="c1"># Robust matrix inversion</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">M_inv</span> <span class="o">=</span> <span class="n">matrix_inverter</span><span class="o">.</span><span class="n">invert_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-<span class="k">except</span> <span class="n">NumericalInstabilityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matrix inversion failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="controller-integration">
-<h3>Controller Integration<a class="headerlink" href="#controller-integration" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.controllers.smc.core.equivalent_control</span><span class="w"> </span><span class="kn">import</span> <span class="n">EquivalentControl</span>
-
-<span class="c1"># Controllers automatically use AdaptiveRegularizer</span>
-<span class="n">eq_control</span> <span class="o">=</span> <span class="n">EquivalentControl</span><span class="p">(</span>
-    <span class="n">dynamics_model</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
-    <span class="n">regularization_alpha</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
-    <span class="n">min_regularization</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span>
-    <span class="n">max_condition_number</span><span class="o">=</span><span class="mf">1e14</span><span class="p">,</span>
-    <span class="n">use_fixed_regularization</span><span class="o">=</span><span class="kc">False</span>
-<span class="p">)</span>
-
-<span class="c1"># Equivalent control computation with robust matrix operations</span>
-<span class="n">u_eq</span> <span class="o">=</span> <span class="n">eq_control</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">sliding_surface</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="fixed-regularization-mode">
-<h3>Fixed Regularization Mode<a class="headerlink" href="#fixed-regularization-mode" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># For well-conditioned systems or debugging</span>
-<span class="n">regularizer</span> <span class="o">=</span> <span class="n">AdaptiveRegularizer</span><span class="p">(</span>
-    <span class="n">regularization_alpha</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>           <span class="c1"># Single parameter</span>
-    <span class="n">use_fixed_regularization</span><span class="o">=</span><span class="kc">True</span>        <span class="c1"># Disable adaptive scaling</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="parameter-migration-guide">
-<h2>Parameter Migration Guide<a class="headerlink" href="#parameter-migration-guide" title="Link to this heading">¶</a></h2>
-<section id="old-single-parameter-schema-deprecated">
-<h3>Old Single-Parameter Schema (Deprecated)<a class="headerlink" href="#old-single-parameter-schema-deprecated" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># OLD (v1.1.0 and earlier)</span>
-<span class="n">controller_config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;regularization&#39;</span><span class="p">:</span> <span class="mf">1e-6</span>  <span class="c1"># Single fixed parameter</span>
+<span class="c1">## Parameter Migration Guide ### Old Single-Parameter Schema (Deprecated) ```python</span>
+<span class="c1"># OLD (v1.1.0 and earlier)</span>
+<span class="n">controller_config</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;regularization&#39;</span><span class="p">:</span> <span class="mf">1e-6</span> <span class="c1"># Single fixed parameter</span>
 <span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="new-4-parameter-schema-v1-2-0">
-<h3>New 4-Parameter Schema (v1.2.0+)<a class="headerlink" href="#new-4-parameter-schema-v1-2-0" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># NEW (v1.2.0+)</span>
-<span class="n">controller_config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;regularization_alpha&#39;</span><span class="p">:</span> <span class="mf">1e-4</span><span class="p">,</span>          <span class="c1"># Base scaling factor</span>
-    <span class="s1">&#39;min_regularization&#39;</span><span class="p">:</span> <span class="mf">1e-10</span><span class="p">,</span>           <span class="c1"># Safety floor</span>
-    <span class="s1">&#39;max_condition_number&#39;</span><span class="p">:</span> <span class="mf">1e14</span><span class="p">,</span>          <span class="c1"># Condition threshold</span>
-    <span class="s1">&#39;use_adaptive_regularization&#39;</span><span class="p">:</span> <span class="kc">True</span>    <span class="c1"># Enable adaptive mode</span>
+<span class="err">```</span> <span class="c1">### New 4-Parameter Schema (v1.2.0+) ```python</span>
+<span class="c1"># NEW (v1.2.0+)</span>
+
+<span class="n">controller_config</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;regularization_alpha&#39;</span><span class="p">:</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="c1"># Base scaling factor &#39;min_regularization&#39;: 1e-10, # Safety floor &#39;max_condition_number&#39;: 1e14, # Condition threshold &#39;use_adaptive_regularization&#39;: True # adaptive mode</span>
 <span class="p">}</span>
+<span class="err">```</span> <span class="c1">### Backward Compatibility Old configs with single `regularization` parameter are automatically converted: ```python</span>
+<span class="c1"># Automatic conversion</span>
+<span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="s1">&#39;regularization&#39;</span><span class="p">):</span> <span class="c1"># Convert to fixed regularization mode regularizer = AdaptiveRegularizer( regularization_alpha=config.regularization, use_fixed_regularization=True )</span>
 </pre></div>
 </div>
-</section>
-<section id="backward-compatibility">
-<h3>Backward Compatibility<a class="headerlink" href="#backward-compatibility" title="Link to this heading">¶</a></h3>
-<p>Old configs with single <code class="docutils literal notranslate"><span class="pre">regularization</span></code> parameter are automatically converted:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Automatic conversion</span>
-<span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="s1">&#39;regularization&#39;</span><span class="p">):</span>
-    <span class="c1"># Convert to fixed regularization mode</span>
-    <span class="n">regularizer</span> <span class="o">=</span> <span class="n">AdaptiveRegularizer</span><span class="p">(</span>
-        <span class="n">regularization_alpha</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">regularization</span><span class="p">,</span>
-        <span class="n">use_fixed_regularization</span><span class="o">=</span><span class="kc">True</span>
-    <span class="p">)</span>
-</pre></div>
-</div>
-</section>
+<hr class="docutils" />
+<section id="performance-characteristics-overhead-analysis-matrix-condition-regularization-overhead-total-time-impact">
+<h2>Performance Characteristics ### Overhead Analysis | Matrix Condition | Regularization Overhead | Total Time Impact |<a class="headerlink" href="#performance-characteristics-overhead-analysis-matrix-condition-regularization-overhead-total-time-impact" title="Link to this heading">¶</a></h2>
+<p>|——————|————————-|——————-|
+| cond &lt; 1e10 (well-conditioned) | &lt; 0.1 ms | &lt; 1% |
+| 1e10 &lt; cond &lt; 1e12 | 0.3 ms | 3% |
+| cond &gt; 1e12 (SVD triggered) | 0.8 ms | 8% | <strong>Conclusion</strong>: Adaptive regularization adds &lt; 1% overhead for normal operation, acceptable even for real-time control (10ms cycles). ### LinAlgError Elimination | Condition Number Range | Baseline Failure Rate | Post-Fix Failure Rate |
+|————————|———————-|———————|
+| cond &lt; 1e10 | 0% | 0% |
+| 1e10 - 1e12 | 5% | 0% |
+| cond &gt; 1e12 | 15% | <strong>0%</strong> ✅ |</p>
 </section>
 <hr class="docutils" />
-<section id="performance-characteristics">
-<h2>Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Link to this heading">¶</a></h2>
-<section id="overhead-analysis">
-<h3>Overhead Analysis<a class="headerlink" href="#overhead-analysis" title="Link to this heading">¶</a></h3>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Matrix Condition</p></th>
-<th class="head"><p>Regularization Overhead</p></th>
-<th class="head"><p>Total Time Impact</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>cond &lt; 1e10 (well-conditioned)</p></td>
-<td><p>&lt; 0.1 ms</p></td>
-<td><p>&lt; 1%</p></td>
-</tr>
-<tr class="row-odd"><td><p>1e10 &lt; cond &lt; 1e12</p></td>
-<td><p>0.3 ms</p></td>
-<td><p>3%</p></td>
-</tr>
-<tr class="row-even"><td><p>cond &gt; 1e12 (SVD triggered)</p></td>
-<td><p>0.8 ms</p></td>
-<td><p>8%</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>Conclusion</strong>: Adaptive regularization adds &lt; 1% overhead for normal operation, acceptable even for real-time control (10ms cycles).</p>
-</section>
-<section id="linalgerror-elimination">
-<h3>LinAlgError Elimination<a class="headerlink" href="#linalgerror-elimination" title="Link to this heading">¶</a></h3>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Condition Number Range</p></th>
-<th class="head"><p>Baseline Failure Rate</p></th>
-<th class="head"><p>Post-Fix Failure Rate</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>cond &lt; 1e10</p></td>
-<td><p>0%</p></td>
-<td><p>0%</p></td>
-</tr>
-<tr class="row-odd"><td><p>1e10 - 1e12</p></td>
-<td><p>5%</p></td>
-<td><p>0%</p></td>
-</tr>
-<tr class="row-even"><td><p>cond &gt; 1e12</p></td>
-<td><p>15%</p></td>
-<td><p><strong>0%</strong> ✅</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="acceptance-criteria-validation">
-<h2>Acceptance Criteria Validation<a class="headerlink" href="#acceptance-criteria-validation" title="Link to this heading">¶</a></h2>
-<section id="criterion-1-consistent-regularization">
-<h3>Criterion 1: Consistent Regularization<a class="headerlink" href="#criterion-1-consistent-regularization" title="Link to this heading">¶</a></h3>
-<p>✅ <strong>PASS</strong>: All modules use centralized <code class="docutils literal notranslate"><span class="pre">AdaptiveRegularizer</span></code></p>
-<p><strong>Validation</strong>:</p>
+<section id="acceptance-criteria-validation-criterion-1-consistent-regularization-pass-all-modules-use-centralized-adaptiveregularizer-validation">
+<h2>Acceptance Criteria Validation ### Criterion 1: Consistent Regularization ✅ <strong>PASS</strong>: All modules use centralized <code class="docutils literal notranslate"><span class="pre">AdaptiveRegularizer</span></code> <strong>Validation</strong>:<a class="headerlink" href="#acceptance-criteria-validation-criterion-1-consistent-regularization-pass-all-modules-use-centralized-adaptiveregularizer-validation" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;AdaptiveRegularizer&quot;</span><span class="w"> </span>src/<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
 <span class="c1"># Expected: 20+ imports across modules</span>
-</pre></div>
-</div>
-</section>
-<section id="criterion-2-adaptive-parameters">
-<h3>Criterion 2: Adaptive Parameters<a class="headerlink" href="#criterion-2-adaptive-parameters" title="Link to this heading">¶</a></h3>
-<p>✅ <strong>PASS</strong>: Handles singular value ratios down to <strong>1e-10</strong></p>
-<p><strong>Test Case</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># From test_matrix_regularization()</span>
-<span class="n">extreme_ratios</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-8</span><span class="p">,</span> <span class="mf">2e-9</span><span class="p">,</span> <span class="mf">5e-9</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">ratio</span> <span class="ow">in</span> <span class="n">extreme_ratios</span><span class="p">:</span>
-    <span class="c1"># All ratios handled without LinAlgError</span>
-    <span class="k">assert</span> <span class="n">linalg_errors</span> <span class="o">==</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</section>
-<section id="criterion-3-automatic-triggers">
-<h3>Criterion 3: Automatic Triggers<a class="headerlink" href="#criterion-3-automatic-triggers" title="Link to this heading">¶</a></h3>
-<p>✅ <strong>PASS</strong>: Triggers for <code class="docutils literal notranslate"><span class="pre">cond</span> <span class="pre">&gt;</span> <span class="pre">1e12</span></code> and <code class="docutils literal notranslate"><span class="pre">sv_ratio</span> <span class="pre">&lt;</span> <span class="pre">1e-8</span></code></p>
-<p><strong>Validation</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># High condition matrix</span>
-<span class="n">M</span> <span class="o">=</span> <span class="n">diag</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="mf">1e-13</span><span class="p">])</span>  <span class="c1"># cond ~ 1e13</span>
+<span class="sb">```</span><span class="w"> </span><span class="c1">### Criterion 2: Adaptive Parameters ✅ **PASS**: Handles singular value ratios down to **1e-10** **Test Case**:</span>
+
+<span class="sb">```</span>python
+<span class="c1"># From test_matrix_regularization()</span>
+<span class="nv">extreme_ratios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>1e-8,<span class="w"> </span>2e-9,<span class="w"> </span>5e-9,<span class="w"> </span>1e-10<span class="o">]</span>
+<span class="k">for</span><span class="w"> </span>ratio<span class="w"> </span><span class="k">in</span><span class="w"> </span>extreme_ratios:<span class="w"> </span><span class="c1"># All ratios handled without LinAlgError assert linalg_errors == 0</span>
+<span class="sb">```</span><span class="w"> </span><span class="c1">### Criterion 3: Automatic Triggers ✅ **PASS**: Triggers for `cond &gt; 1e12` and `sv_ratio &lt; 1e-8` **Validation**:</span>
+
+<span class="sb">```</span>python
+<span class="c1"># High condition matrix</span>
+<span class="nv">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>diag<span class="o">([</span><span class="m">1</span>.0,<span class="w"> </span>1e-6,<span class="w"> </span>1e-13<span class="o">])</span><span class="w"> </span><span class="c1"># cond ~ 1e13</span>
 <span class="c1"># Automatic regularization triggered -&gt; No LinAlgError</span>
+<span class="sb">```</span><span class="w"> </span><span class="c1">### Criterion 4: Accuracy Maintained ✅ **PASS**: Well-conditioned matrices have &lt; 1e-10 error **Validation**:</span>
+
+<span class="sb">```</span>python
+<span class="c1"># Well-conditioned matrix (cond ~ 1.25)</span>
+<span class="nv">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>diag<span class="o">([</span><span class="m">1</span>.0,<span class="w"> </span><span class="m">0</span>.9,<span class="w"> </span><span class="m">0</span>.8<span class="o">])</span>
+<span class="nv">M_inv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>matrix_inverter.invert_matrix<span class="o">(</span>M<span class="o">)</span>
+<span class="nv">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>max<span class="o">(</span>abs<span class="o">((</span>M<span class="w"> </span>@<span class="w"> </span>M_inv<span class="o">)</span><span class="w"> </span>-<span class="w"> </span>I<span class="o">))</span>
+assert<span class="w"> </span>error<span class="w"> </span>&lt;<span class="w"> </span>1e-10<span class="w"> </span><span class="c1"># High precision maintained</span>
 </pre></div>
 </div>
-</section>
-<section id="criterion-4-accuracy-maintained">
-<h3>Criterion 4: Accuracy Maintained<a class="headerlink" href="#criterion-4-accuracy-maintained" title="Link to this heading">¶</a></h3>
-<p>✅ <strong>PASS</strong>: Well-conditioned matrices have &lt; 1e-10 error</p>
-<p><strong>Validation</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Well-conditioned matrix (cond ~ 1.25)</span>
-<span class="n">M</span> <span class="o">=</span> <span class="n">diag</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
-<span class="n">M_inv</span> <span class="o">=</span> <span class="n">matrix_inverter</span><span class="o">.</span><span class="n">invert_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-<span class="n">error</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">M</span> <span class="o">@</span> <span class="n">M_inv</span><span class="p">)</span> <span class="o">-</span> <span class="n">I</span><span class="p">))</span>
-<span class="k">assert</span> <span class="n">error</span> <span class="o">&lt;</span> <span class="mf">1e-10</span>  <span class="c1"># High precision maintained</span>
-</pre></div>
-</div>
-</section>
 </section>
 <hr class="docutils" />
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
-<section id="problem-linalgerror-still-occurs">
-<h3>Problem: LinAlgError still occurs<a class="headerlink" href="#problem-linalgerror-still-occurs" title="Link to this heading">¶</a></h3>
-<p><strong>Diagnosis</strong>:</p>
+<section id="troubleshooting-problem-linalgerror-still-occurs-diagnosis">
+<h2>Troubleshooting ### Problem: LinAlgError still occurs <strong>Diagnosis</strong>:<a class="headerlink" href="#troubleshooting-problem-linalgerror-still-occurs-diagnosis" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if adaptive mode is enabled</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">regularizer</span><span class="o">.</span><span class="n">use_fixed</span><span class="p">)</span>  <span class="c1"># Should be False</span>
-
-<span class="c1"># Check condition number</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">regularizer</span><span class="o">.</span><span class="n">use_fixed</span><span class="p">)</span> <span class="c1"># Should be False # Check condition number</span>
 <span class="n">cond_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Condition number: </span><span class="si">{</span><span class="n">cond_num</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Solution</strong>:</p>
-<ul class="simple">
-<li><p>If <code class="docutils literal notranslate"><span class="pre">use_fixed=True</span></code>, switch to adaptive mode</p></li>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">cond_num</span> <span class="pre">&gt;</span> <span class="pre">1e14</span></code>, increase <code class="docutils literal notranslate"><span class="pre">max_condition_number</span></code></p></li>
-<li><p>Check for NaN/Inf values in matrix</p></li>
-</ul>
-</section>
-<section id="problem-inaccurate-results">
-<h3>Problem: Inaccurate results<a class="headerlink" href="#problem-inaccurate-results" title="Link to this heading">¶</a></h3>
-<p><strong>Diagnosis</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if over-regularization is occurring</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Solution</span><span class="o">**</span><span class="p">:</span>
+
+<span class="o">-</span> <span class="n">If</span> <span class="err">`</span><span class="n">use_fixed</span><span class="o">=</span><span class="kc">True</span><span class="err">`</span><span class="p">,</span> <span class="n">switch</span> <span class="n">to</span> <span class="n">adaptive</span> <span class="n">mode</span>
+<span class="o">-</span> <span class="n">If</span> <span class="err">`</span><span class="n">cond_num</span> <span class="o">&gt;</span> <span class="mf">1e14</span><span class="err">`</span><span class="p">,</span> <span class="n">increase</span> <span class="err">`</span><span class="n">max_condition_number</span><span class="err">`</span>
+<span class="o">-</span> <span class="n">Check</span> <span class="k">for</span> <span class="n">NaN</span><span class="o">/</span><span class="n">Inf</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">matrix</span> <span class="c1">### Problem: Inaccurate results **Diagnosis**:</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="c1"># Check if over-regularization is occurring</span>
 <span class="n">sv_ratio</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SV ratio: </span><span class="si">{</span><span class="n">sv_ratio</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Solution</strong>:</p>
-<ul class="simple">
-<li><p>If <code class="docutils literal notranslate"><span class="pre">sv_ratio</span> <span class="pre">&gt;</span> <span class="pre">1e-6</span></code>, reduce <code class="docutils literal notranslate"><span class="pre">regularization_alpha</span></code></p></li>
-<li><p>For well-conditioned systems, use fixed mode</p></li>
-<li><p>Verify matrix construction is correct</p></li>
-</ul>
-</section>
-<section id="problem-performance-degradation">
-<h3>Problem: Performance degradation<a class="headerlink" href="#problem-performance-degradation" title="Link to this heading">¶</a></h3>
-<p><strong>Diagnosis</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check regularization trigger frequency</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Solution</span><span class="o">**</span><span class="p">:</span>
+
+<span class="o">-</span> <span class="n">If</span> <span class="err">`</span><span class="n">sv_ratio</span> <span class="o">&gt;</span> <span class="mf">1e-6</span><span class="err">`</span><span class="p">,</span> <span class="n">reduce</span> <span class="err">`</span><span class="n">regularization_alpha</span><span class="err">`</span>
+<span class="o">-</span> <span class="n">For</span> <span class="n">well</span><span class="o">-</span><span class="n">conditioned</span> <span class="n">systems</span><span class="p">,</span> <span class="n">use</span> <span class="n">fixed</span> <span class="n">mode</span>
+<span class="o">-</span> <span class="n">Verify</span> <span class="n">matrix</span> <span class="n">construction</span> <span class="ow">is</span> <span class="n">correct</span> <span class="c1">### Problem: Performance degradation **Diagnosis**:</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="c1"># Check regularization trigger frequency</span>
 <span class="n">monitor</span> <span class="o">=</span> <span class="n">NumericalStabilityMonitor</span><span class="p">()</span>
 <span class="n">stats</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">get_statistics</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Regularization rate: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;regularization_rate&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Solution</strong>:</p>
-<ul class="simple">
-<li><p>If regularization rate &gt; 50%, investigate matrix conditioning</p></li>
-<li><p>Consider caching matrix inversions if repeated</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">fast_condition_estimate()</span></code> for lightweight checking</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="best-practices">
-<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
-<section id="use-standardized-parameters">
-<h3>1. Use Standardized Parameters<a class="headerlink" href="#use-standardized-parameters" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Recommended defaults for production</span>
-<span class="n">regularizer</span> <span class="o">=</span> <span class="n">AdaptiveRegularizer</span><span class="p">(</span>
-    <span class="n">regularization_alpha</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
-    <span class="n">max_condition_number</span><span class="o">=</span><span class="mf">1e14</span><span class="p">,</span>
-    <span class="n">min_regularization</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span>
-    <span class="n">use_fixed_regularization</span><span class="o">=</span><span class="kc">False</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Solution</span><span class="o">**</span><span class="p">:</span>
+
+<span class="o">-</span> <span class="n">If</span> <span class="n">regularization</span> <span class="n">rate</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="o">%</span><span class="p">,</span> <span class="n">investigate</span> <span class="n">matrix</span> <span class="n">conditioning</span>
+<span class="o">-</span> <span class="n">Consider</span> <span class="n">caching</span> <span class="n">matrix</span> <span class="n">inversions</span> <span class="k">if</span> <span class="n">repeated</span>
+<span class="o">-</span> <span class="n">Use</span> <span class="err">`</span><span class="n">fast_condition_estimate</span><span class="p">()</span><span class="err">`</span> <span class="k">for</span> <span class="n">lightweight</span> <span class="n">checking</span>
+
+<span class="o">---</span>
+
+<span class="c1">## Best Practices ### 1. Use Standardized Parameters ```python</span>
+
+<span class="c1"># Recommended defaults for production</span>
+
+<span class="n">regularizer</span> <span class="o">=</span> <span class="n">AdaptiveRegularizer</span><span class="p">(</span> <span class="n">regularization_alpha</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">max_condition_number</span><span class="o">=</span><span class="mf">1e14</span><span class="p">,</span> <span class="n">min_regularization</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span> <span class="n">use_fixed_regularization</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="monitor-regularization-frequency">
-<h3>2. Monitor Regularization Frequency<a class="headerlink" href="#monitor-regularization-frequency" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="c1"># Track regularization in production</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.core.numerical_stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">NumericalStabilityMonitor</span>
-
-<span class="n">monitor</span> <span class="o">=</span> <span class="n">NumericalStabilityMonitor</span><span class="p">()</span>
+<span class="err">```</span> <span class="c1">### 2. Monitor Regularization Frequency ```python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false # Track regularization in production</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.plant.core.numerical_stability</span><span class="w"> </span><span class="kn">import</span> <span class="n">NumericalStabilityMonitor</span> <span class="n">monitor</span> <span class="o">=</span> <span class="n">NumericalStabilityMonitor</span><span class="p">()</span>
 <span class="c1"># ... run simulations ...</span>
 <span class="n">stats</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">get_statistics</span><span class="p">()</span>
-<span class="k">if</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;regularization_rate&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
-    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;High regularization frequency detected&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="test-with-extreme-cases">
-<h3>3. Test with Extreme Cases<a class="headerlink" href="#test-with-extreme-cases" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Include edge cases in tests</span>
-<span class="n">test_matrices</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">]),</span>  <span class="c1"># Extreme conditioning</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e-15</span><span class="p">,</span>             <span class="c1"># Near-zero elements</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e12</span>   <span class="c1"># Large magnitudes</span>
+<span class="k">if</span> <span class="n">stats</span><span class="p">[</span><span class="s1">&#39;regularization_rate&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span> <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;High regularization frequency detected&quot;</span><span class="p">)</span>
+<span class="err">```</span> <span class="c1">### 3. Test with Extreme Cases ```python</span>
+<span class="c1"># Include edge cases in tests</span>
+
+<span class="n">test_matrices</span> <span class="o">=</span> <span class="p">[</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">]),</span> <span class="c1"># Extreme conditioning np.eye(3) * 1e-15, # Near-zero elements np.random.randn(3, 3) * 1e12 # Large magnitudes</span>
 <span class="p">]</span>
+<span class="err">```</span> <span class="c1">### 4. Document Matrix Provenance ```python</span>
+<span class="c1"># example-metadata:</span>
+<span class="c1"># runnable: false # Track where ill-conditioned matrices originate</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">):</span> <span class="s2">&quot;&quot;&quot; Compute inertia matrix M(q). Known conditioning issues: - Singular when theta1 = theta2 = 0 (upright equilibrium) - Condition number ~ 1e8 for typical trajectories - Requires adaptive regularization for robustness &quot;&quot;&quot;</span> <span class="c1"># ... implementation ...</span>
 </pre></div>
 </div>
-</section>
-<section id="document-matrix-provenance">
-<h3>4. Document Matrix Provenance<a class="headerlink" href="#document-matrix-provenance" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="c1"># Track where ill-conditioned matrices originate</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_inertia_matrix</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute inertia matrix M(q).</span>
-
-<span class="sd">    Known conditioning issues:</span>
-<span class="sd">    - Singular when theta1 = theta2 = 0 (upright equilibrium)</span>
-<span class="sd">    - Condition number ~ 1e8 for typical trajectories</span>
-<span class="sd">    - Requires adaptive regularization for robustness</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># ... implementation ...</span>
-</pre></div>
-</div>
-</section>
 </section>
 <hr class="docutils" />
-<section id="references">
-<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
-<section id="related-files">
-<h3>Related Files<a class="headerlink" href="#related-files" title="Link to this heading">¶</a></h3>
+<section id="references-related-files-src-plant-core-numerical-stability-py-core-implementation">
+<h2>References ### Related Files - <code class="docutils literal notranslate"><span class="pre">src/plant/core/numerical_stability.py</span></code> - Core implementation<a class="headerlink" href="#references-related-files-src-plant-core-numerical-stability-py-core-implementation" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">src/plant/core/numerical_stability.py</span></code> - Core implementation</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tests/test_integration/test_numerical_stability/test_numerical_stability_deep.py</span></code> - Comprehensive tests</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/test_integration/test_numerical_stability/test_numerical_stability_deep.py</span></code> - tests</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">src/controllers/smc/core/equivalent_control.py</span></code> - Controller integration</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CHANGELOG.md</span></code> - Version 1.2.0 release notes</p></li>
-</ul>
-</section>
-<section id="mathematical-background">
-<h3>Mathematical Background<a class="headerlink" href="#mathematical-background" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Tikhonov Regularization</strong>: Tikhonov, A. N. (1963). “Solution of incorrectly formulated problems”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CHANGELOG.md</span></code> - Version 1.2.0 release notes ### Mathematical Background - <strong>Tikhonov Regularization</strong>: Tikhonov, A. N. (1963). “Solution of incorrectly formulated problems”</p></li>
 <li><p><strong>SVD-based Conditioning</strong>: Golub &amp; Van Loan (2013). “Matrix Computations”, 4th Ed.</p></li>
-<li><p><strong>Adaptive Parameter Selection</strong>: Hansen, P. C. (1992). “Analysis of discrete ill-posed problems”</p></li>
-</ul>
-</section>
-<section id="issue-tracking">
-<h3>Issue Tracking<a class="headerlink" href="#issue-tracking" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>GitHub Issue #14</strong>: [CRIT-005] Inconsistent Matrix Regularization (CLOSED)</p></li>
+<li><p><strong>Adaptive Parameter Selection</strong>: Hansen, P. C. (1992). “Analysis of discrete ill-posed problems” ### Issue Tracking - <strong>GitHub Issue #14</strong>: [CRIT-005] Inconsistent Matrix Regularization (CLOSED)</p></li>
 <li><p><strong>Resolution Date</strong>: 2025-10-01</p></li>
 <li><p><strong>System Health Score</strong>: 99.75%</p></li>
 </ul>
@@ -968,7 +473,6 @@
 <strong>Author</strong>: Numerical Stability Engineer (Ultimate Orchestrator)
 <strong>Review Status</strong>: Production-ready
 <strong>Last Updated</strong>: 2025-10-01</p>
-</section>
 </section>
 </section>
 
@@ -989,7 +493,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 08, 2025</div>
+              Last updated on Oct 10, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1010,68 +514,16 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Numerical Stability Guide</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a></li>
-<li><a class="reference internal" href="#architecture">Architecture</a><ul>
-<li><a class="reference internal" href="#core-components">Core Components</a></li>
+<li><a class="reference internal" href="#">Numerical Stability Guide <strong>Version</strong>: 1.2.0 | <strong>Last Updated</strong>: 2025-10-01 ## Overview This guide documents the adaptive matrix regularization system implemented in the double-inverted pendulum control framework. The system provides robust numerical stability for matrix operations in plant dynamics, controllers, and optimization algorithms.</a><ul>
+<li><a class="reference internal" href="#architecture-core-components">Architecture ### Core Components ```</a></li>
+<li><a class="reference internal" href="#usage-examples-basic-usage-python">Usage Examples ### Basic Usage ```python</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#adaptiveregularizer">AdaptiveRegularizer</a><ul>
-<li><a class="reference internal" href="#purpose">Purpose</a></li>
-<li><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#level-adaptive-scaling-strategy">5-Level Adaptive Scaling Strategy</a><ul>
-<li><a class="reference internal" href="#level-1-extreme-ill-conditioning-sv-ratio-2e-9">Level 1: Extreme Ill-Conditioning (<code class="docutils literal notranslate"><span class="pre">sv_ratio</span> <span class="pre">&lt;</span> <span class="pre">2e-9</span></code>)</a></li>
-<li><a class="reference internal" href="#level-2-very-extreme-sv-ratio-1e-8">Level 2: Very Extreme (<code class="docutils literal notranslate"><span class="pre">sv_ratio</span> <span class="pre">&lt;</span> <span class="pre">1e-8</span></code>)</a></li>
-<li><a class="reference internal" href="#level-3-moderate-sv-ratio-1e-6">Level 3: Moderate (<code class="docutils literal notranslate"><span class="pre">sv_ratio</span> <span class="pre">&lt;</span> <span class="pre">1e-6</span></code>)</a></li>
-<li><a class="reference internal" href="#level-4-preventive-cond-1e10">Level 4: Preventive (<code class="docutils literal notranslate"><span class="pre">cond</span> <span class="pre">&gt;</span> <span class="pre">1e10</span></code>)</a></li>
-<li><a class="reference internal" href="#level-5-well-conditioned-default">Level 5: Well-Conditioned (Default)</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
-<li><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
-<li><a class="reference internal" href="#controller-integration">Controller Integration</a></li>
-<li><a class="reference internal" href="#fixed-regularization-mode">Fixed Regularization Mode</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#parameter-migration-guide">Parameter Migration Guide</a><ul>
-<li><a class="reference internal" href="#old-single-parameter-schema-deprecated">Old Single-Parameter Schema (Deprecated)</a></li>
-<li><a class="reference internal" href="#new-4-parameter-schema-v1-2-0">New 4-Parameter Schema (v1.2.0+)</a></li>
-<li><a class="reference internal" href="#backward-compatibility">Backward Compatibility</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#performance-characteristics">Performance Characteristics</a><ul>
-<li><a class="reference internal" href="#overhead-analysis">Overhead Analysis</a></li>
-<li><a class="reference internal" href="#linalgerror-elimination">LinAlgError Elimination</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#acceptance-criteria-validation">Acceptance Criteria Validation</a><ul>
-<li><a class="reference internal" href="#criterion-1-consistent-regularization">Criterion 1: Consistent Regularization</a></li>
-<li><a class="reference internal" href="#criterion-2-adaptive-parameters">Criterion 2: Adaptive Parameters</a></li>
-<li><a class="reference internal" href="#criterion-3-automatic-triggers">Criterion 3: Automatic Triggers</a></li>
-<li><a class="reference internal" href="#criterion-4-accuracy-maintained">Criterion 4: Accuracy Maintained</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
-<li><a class="reference internal" href="#problem-linalgerror-still-occurs">Problem: LinAlgError still occurs</a></li>
-<li><a class="reference internal" href="#problem-inaccurate-results">Problem: Inaccurate results</a></li>
-<li><a class="reference internal" href="#problem-performance-degradation">Problem: Performance degradation</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#best-practices">Best Practices</a><ul>
-<li><a class="reference internal" href="#use-standardized-parameters">1. Use Standardized Parameters</a></li>
-<li><a class="reference internal" href="#monitor-regularization-frequency">2. Monitor Regularization Frequency</a></li>
-<li><a class="reference internal" href="#test-with-extreme-cases">3. Test with Extreme Cases</a></li>
-<li><a class="reference internal" href="#document-matrix-provenance">4. Document Matrix Provenance</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#references">References</a><ul>
-<li><a class="reference internal" href="#related-files">Related Files</a></li>
-<li><a class="reference internal" href="#mathematical-background">Mathematical Background</a></li>
-<li><a class="reference internal" href="#issue-tracking">Issue Tracking</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#for-well-conditioned-systems-or-debugging">For well-conditioned systems or debugging</a><ul>
+<li><a class="reference internal" href="#performance-characteristics-overhead-analysis-matrix-condition-regularization-overhead-total-time-impact">Performance Characteristics ### Overhead Analysis | Matrix Condition | Regularization Overhead | Total Time Impact |</a></li>
+<li><a class="reference internal" href="#acceptance-criteria-validation-criterion-1-consistent-regularization-pass-all-modules-use-centralized-adaptiveregularizer-validation">Acceptance Criteria Validation ### Criterion 1: Consistent Regularization ✅ <strong>PASS</strong>: All modules use centralized <code class="docutils literal notranslate"><span class="pre">AdaptiveRegularizer</span></code> <strong>Validation</strong>:</a></li>
+<li><a class="reference internal" href="#troubleshooting-problem-linalgerror-still-occurs-diagnosis">Troubleshooting ### Problem: LinAlgError still occurs <strong>Diagnosis</strong>:</a></li>
+<li><a class="reference internal" href="#references-related-files-src-plant-core-numerical-stability-py-core-implementation">References ### Related Files - <code class="docutils literal notranslate"><span class="pre">src/plant/core/numerical_stability.py</span></code> - Core implementation</a></li>
 </ul>
 </li>
 </ul>
@@ -1084,9 +536,9 @@
     </aside>
   </div>
 </div><script src="_static/documentation_options.js?v=4ebf8126"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=08e7b316"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>

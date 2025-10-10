@@ -1,4 +1,5 @@
 # Test Infrastructure Guide ## Overview This document provides guidance for the DIP SMC PSO test infrastructure, including pytest configuration, test execution procedures, and troubleshooting guidelines. ## Pytest Configuration ### Test Markers The project uses an extensive set of pytest markers for test categorization: #### Core Test Categories
+
 - `unit`: Unit tests for individual components
 - `integration`: Integration tests for component interactions
 - `benchmark`: Performance benchmarks
@@ -29,6 +30,7 @@ python -m pytest tests/ --cov=src --cov-report=html # Run benchmarks only
 python -m pytest tests/ -m benchmark --benchmark-only
 ``` ### Advanced Test Execution ```bash
 # Parallel execution (if pytest-xdist installed)
+
 python -m pytest tests/ -n auto # Verbose output with detailed reporting
 python -m pytest tests/ -v --tb=long # Stop on first failure
 python -m pytest tests/ -x # Run specific test files

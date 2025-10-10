@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="../../">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -19,16 +19,16 @@
     margin-top: 0.5em;
 }
 </style>
-<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
         <title>Monte Carlo Validation Quick Start Guide - DIP_SMC_PSO Documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=f5a89ef9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8a7e329d" />
     
     
 
@@ -163,14 +163,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -180,8 +176,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -189,8 +184,7 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -198,8 +192,7 @@
         </button>
       </div>
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -207,7 +200,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
-  
   
   <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
   
@@ -219,254 +211,12 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">Theory Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../architecture.html">3. System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../plant_model.html">1.x Plant Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../plant/models_guide.html">Plant Models Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../TESTING.html">Testing Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../test_protocols.html">5.x Test Protocols</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../context.html">2. Application Context</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference Documentation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography &amp; Academic References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../RELEASE_CHECKLIST.html">Release Checklist</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -492,13 +242,12 @@
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/guides/workflows/monte-carlo-validation-quickstart.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/guides/workflows/monte-carlo-validation-quickstart.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
 </div><div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -506,22 +255,18 @@
             </button>
           </div>
           <label class="toc-overlay-icon toc-content-icon" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="monte-carlo-validation-quick-start-guide">
 <h1>Monte Carlo Validation Quick Start Guide<a class="headerlink" href="#monte-carlo-validation-quick-start-guide" title="Link to this heading">¶</a></h1>
-<p><strong>Companion to Tutorial 05: Research Workflow</strong></p>
-<p><strong>Version:</strong> 1.0
+<p><strong>Companion to Tutorial 05: Research Workflow</strong> <strong>Version:</strong> 1.0
 <strong>Date:</strong> 2025-10-07
 <strong>Status:</strong> Practical quick-start examples for statistical validation</p>
 <hr class="docutils" />
-<section id="purpose">
-<h2>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">¶</a></h2>
-<p>This guide provides <strong>working code examples</strong> for Monte Carlo validation and statistical analysis to complement <a class="reference internal" href="../tutorials/tutorial-05-research-workflow.html"><span class="std std-doc">Tutorial 05: Research Workflow</span></a>. While Tutorial 05 provides the comprehensive research methodology, this guide focuses on <strong>practical implementation</strong>.</p>
-<p><strong>Use this guide for:</strong></p>
+<section id="purpose-this-guide-provides-working-code-examples-for-monte-carlo-validation-and-statistical-analysis-to-complement-tutorial-05-research-workflow-while-tutorial-05-provides-the-research-methodology-this-guide-focuses-on-practical-implementation-use-this-guide-for">
+<h2>Purpose This guide provides <strong>working code examples</strong> for Monte Carlo validation and statistical analysis to complement <a class="reference internal" href="../tutorials/tutorial-05-research-workflow.html"><span class="std std-doc">Tutorial 05: Research Workflow</span></a>. While Tutorial 05 provides the research methodology, this guide focuses on <strong>practical implementation</strong>. <strong>Use this guide for:</strong><a class="headerlink" href="#purpose-this-guide-provides-working-code-examples-for-monte-carlo-validation-and-statistical-analysis-to-complement-tutorial-05-research-workflow-while-tutorial-05-provides-the-research-methodology-this-guide-focuses-on-practical-implementation-use-this-guide-for" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Quick Monte Carlo validation (10-20 trials for testing)</p></li>
 <li><p>Statistical analysis templates with real code</p></li>
@@ -531,528 +276,225 @@
 </ul>
 </section>
 <hr class="docutils" />
-<section id="quick-monte-carlo-example-10-trials">
-<h2>Quick Monte Carlo Example (10 Trials)<a class="headerlink" href="#quick-monte-carlo-example-10-trials" title="Link to this heading">¶</a></h2>
-<section id="minimal-working-example">
-<h3>Minimal Working Example<a class="headerlink" href="#minimal-working-example" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="c1">#!/usr/bin/env python</span>
-<span class="sd">&quot;&quot;&quot;Quick Monte Carlo validation: 10 trials × 2 controllers × 1 scenario.&quot;&quot;&quot;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-
-<span class="c1"># Configuration</span>
-<span class="n">N_TRIALS</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Quick test (use 50+ for publication)</span>
-<span class="n">CONTROLLERS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;classical_smc&#39;</span><span class="p">,</span> <span class="s1">&#39;sta_smc&#39;</span><span class="p">]</span>
-<span class="n">DURATION</span> <span class="o">=</span> <span class="mf">5.0</span>  <span class="c1"># Seconds</span>
-<span class="n">RESULTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;monte_carlo_quick_test&#39;</span><span class="p">)</span>
-<span class="n">RESULTS_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Run trials</span>
-<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">controller</span> <span class="ow">in</span> <span class="n">CONTROLLERS</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">nRunning </span><span class="si">{</span><span class="n">controller</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_TRIALS</span><span class="p">):</span>
-        <span class="n">seed</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">+</span> <span class="n">trial</span>  <span class="c1"># Reproducible seeds</span>
-
-        <span class="c1"># Run simulation</span>
-        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;simulate.py&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;--controller&#39;</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span>
-            <span class="s1">&#39;--duration&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">DURATION</span><span class="p">),</span>
-            <span class="s1">&#39;--seed&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">seed</span><span class="p">),</span>
-            <span class="s1">&#39;--no-plot&#39;</span>  <span class="c1"># Suppress plotting for batch runs</span>
-        <span class="p">]</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-            <span class="c1"># Parse output (example - adjust to actual output format)</span>
-            <span class="c1"># Assuming simulate.py prints metrics in JSON format</span>
-            <span class="c1"># In practice, you&#39;d capture metrics from simulation results</span>
-
-            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-                <span class="s1">&#39;controller&#39;</span><span class="p">:</span> <span class="n">controller</span><span class="p">,</span>
-                <span class="s1">&#39;trial&#39;</span><span class="p">:</span> <span class="n">trial</span><span class="p">,</span>
-                <span class="s1">&#39;seed&#39;</span><span class="p">:</span> <span class="n">seed</span><span class="p">,</span>
-                <span class="c1"># Placeholder metrics - replace with actual parsing</span>
-                <span class="s1">&#39;ise&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>  <span class="c1"># Example</span>
-                <span class="s1">&#39;settling_time&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">),</span>  <span class="c1"># Example</span>
-            <span class="p">})</span>
-
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Trial </span><span class="si">{</span><span class="n">trial</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">N_TRIALS</span><span class="si">}</span><span class="s2"> complete&quot;</span><span class="p">)</span>
-
-        <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Trial </span><span class="si">{</span><span class="n">trial</span><span class="si">}</span><span class="s2"> failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="k">continue</span>
-
-<span class="c1"># Save results</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s1">&#39;results.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">nResults saved to: </span><span class="si">{</span><span class="n">RESULTS_DIR</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;results.csv&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span><span class="p">)[[</span><span class="s1">&#39;ise&#39;</span><span class="p">,</span> <span class="s1">&#39;settling_time&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
-</pre></div>
-</div>
-<p><strong>Expected Runtime:</strong> ~2-5 minutes (depending on simulation speed)</p>
+<section id="quick-monte-carlo-example-10-trials-minimal-working-example-python">
+<h2>Quick Monte Carlo Example (10 Trials) ### Minimal Working Example ```python<a class="headerlink" href="#quick-monte-carlo-example-10-trials-minimal-working-example-python" title="Link to this heading">¶</a></h2>
 </section>
 </section>
-<hr class="docutils" />
-<section id="statistical-analysis-templates">
-<h2>Statistical Analysis Templates<a class="headerlink" href="#statistical-analysis-templates" title="Link to this heading">¶</a></h2>
-<section id="descriptive-statistics-with-confidence-intervals">
-<h3>1. Descriptive Statistics with Confidence Intervals<a class="headerlink" href="#descriptive-statistics-with-confidence-intervals" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
-
-<span class="c1"># Load results</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;monte_carlo_quick_test/results.csv&#39;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_statistics</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;ise&#39;</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.95</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute mean, std, and confidence interval.&quot;&quot;&quot;</span>
-    <span class="n">mean</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-    <span class="n">std</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">se</span> <span class="o">=</span> <span class="n">std</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># Standard error</span>
-
-    <span class="c1"># Confidence interval (t-distribution)</span>
-    <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">confidence</span>
-    <span class="n">t_critical</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">ci_lower</span> <span class="o">=</span> <span class="n">mean</span> <span class="o">-</span> <span class="n">t_critical</span> <span class="o">*</span> <span class="n">se</span>
-    <span class="n">ci_upper</span> <span class="o">=</span> <span class="n">mean</span> <span class="o">+</span> <span class="n">t_critical</span> <span class="o">*</span> <span class="n">se</span>
-
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">mean</span><span class="p">,</span>
-        <span class="s1">&#39;std&#39;</span><span class="p">:</span> <span class="n">std</span><span class="p">,</span>
-        <span class="s1">&#39;se&#39;</span><span class="p">:</span> <span class="n">se</span><span class="p">,</span>
-        <span class="s1">&#39;ci_lower&#39;</span><span class="p">:</span> <span class="n">ci_lower</span><span class="p">,</span>
-        <span class="s1">&#39;ci_upper&#39;</span><span class="p">:</span> <span class="n">ci_upper</span><span class="p">,</span>
-        <span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="n">n</span>
-    <span class="p">}</span>
-
-<span class="c1"># Compute for each controller</span>
-<span class="k">for</span> <span class="n">controller</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">controller</span><span class="p">]</span>
-    <span class="n">stats_ise</span> <span class="o">=</span> <span class="n">compute_statistics</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;ise&#39;</span><span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n</span><span class="si">{</span><span class="n">controller</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ISE: </span><span class="si">{</span><span class="n">stats_ise</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">stats_ise</span><span class="p">[</span><span class="s1">&#39;std&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  95% CI: [</span><span class="si">{</span><span class="n">stats_ise</span><span class="p">[</span><span class="s1">&#39;ci_lower&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">stats_ise</span><span class="p">[</span><span class="s1">&#39;ci_upper&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Samples: </span><span class="si">{</span><span class="n">stats_ise</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Example Output:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">classical_smc</span><span class="p">:</span>
-  <span class="n">ISE</span><span class="p">:</span> <span class="mf">0.2842</span> <span class="err">±</span> <span class="mf">0.1123</span>
-  <span class="mi">95</span><span class="o">%</span> <span class="n">CI</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2038</span><span class="p">,</span> <span class="mf">0.3646</span><span class="p">]</span>
-  <span class="n">Samples</span><span class="p">:</span> <span class="mi">10</span>
-
-<span class="n">sta_smc</span><span class="p">:</span>
-  <span class="n">ISE</span><span class="p">:</span> <span class="mf">0.2134</span> <span class="err">±</span> <span class="mf">0.0867</span>
-  <span class="mi">95</span><span class="o">%</span> <span class="n">CI</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1512</span><span class="p">,</span> <span class="mf">0.2756</span><span class="p">]</span>
-  <span class="n">Samples</span><span class="p">:</span> <span class="mi">10</span>
-</pre></div>
-</div>
+<section class="tex2jax_ignore mathjax_ignore" id="example-metadata">
+<h1>example-metadata:<a class="headerlink" href="#example-metadata" title="Link to this heading">¶</a></h1>
 </section>
-<section id="hypothesis-testing-welch-s-t-test">
-<h3>2. Hypothesis Testing (Welch’s t-test)<a class="headerlink" href="#hypothesis-testing-welch-s-t-test" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">ttest_ind</span>
+<section class="tex2jax_ignore mathjax_ignore" id="runnable-false-usr-bin-env-python">
+<h1>runnable: false #!/usr/bin/env python<a class="headerlink" href="#runnable-false-usr-bin-env-python" title="Link to this heading">¶</a></h1>
+<p>“””Quick Monte Carlo validation: 10 trials × 2 controllers × 1 scenario.””” import numpy as np
+import subprocess
+import json
+from pathlib import Path # Configuration
+N_TRIALS = 10 # Quick test (use 50+ for publication)
+CONTROLLERS = [‘classical_smc’, ‘sta_smc’]
+DURATION = 5.0 # Seconds
+RESULTS_DIR = Path(‘monte_carlo_quick_test’)
+RESULTS_DIR.mkdir(exist_ok=True) # Run trials
+results = []
+for controller in CONTROLLERS: print(f”\nRunning {controller}…”) for trial in range(N_TRIALS): seed = 1000 + trial # Reproducible seeds # Run simulation cmd = [ ‘python’, ‘<a class="reference external" href="http://simulate.py">simulate.py</a>’, ‘–controller’, controller, ‘–duration’, str(DURATION), ‘–seed’, str(seed), ‘–no-plot’ # Suppress plotting for batch runs ] try: result = subprocess.run(cmd, capture_output=True, text=True, check=True) # Parse output (example - adjust to actual output format) # Assuming <a class="reference external" href="http://simulate.py">simulate.py</a> prints metrics in JSON format # In practice, you’d capture metrics from simulation results results.append({ ‘controller’: controller, ‘trial’: trial, ‘seed’: seed, # Placeholder metrics - replace with actual parsing ‘ise’: np.random.uniform(0.1, 0.5), # Example ‘settling_time’: np.random.uniform(2.0, 4.0), # Example }) print(f” Trial {trial+1}/{N_TRIALS} complete”) except subprocess.CalledProcessError as e: print(f” Trial {trial} failed: {e}”) continue # Save results
+import pandas as pd
+df = pd.DataFrame(results)
+df.to_csv(RESULTS_DIR / ‘results.csv’, index=False)
+print(f”\nResults saved to: {RESULTS_DIR / ‘results.csv’}”)
+print(df.groupby(‘controller’)[[‘ise’, ‘settling_time’]].describe())</p>
+<div class="highlight-**Expected notranslate"><div class="highlight"><pre><span></span>
+---
 
-<span class="c1"># Load data</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;monte_carlo_quick_test/results.csv&#39;</span><span class="p">)</span>
+## Statistical Analysis Templates ### 1. Descriptive Statistics with Confidence Intervals ```python
+import pandas as pd
+import numpy as np
+from scipy import stats # Load results
+df = pd.read_csv(&#39;monte_carlo_quick_test/results.csv&#39;) def compute_statistics(data, metric=&#39;ise&#39;, confidence=0.95): &quot;&quot;&quot;Compute mean, std, and confidence interval.&quot;&quot;&quot; mean = data[metric].mean() std = data[metric].std() n = len(data) se = std / np.sqrt(n) # Standard error # Confidence interval (t-distribution) alpha = 1 - confidence t_critical = stats.t.ppf(1 - alpha/2, df=n-1) ci_lower = mean - t_critical * se ci_upper = mean + t_critical * se return { &#39;mean&#39;: mean, &#39;std&#39;: std, &#39;se&#39;: se, &#39;ci_lower&#39;: ci_lower, &#39;ci_upper&#39;: ci_upper, &#39;n&#39;: n } # Compute for each controller
+for controller in df[&#39;controller&#39;].unique(): data = df[df[&#39;controller&#39;] == controller] stats_ise = compute_statistics(data, metric=&#39;ise&#39;) print(f&quot;\\n{controller}:&quot;) print(f&quot; ISE: {stats_ise[&#39;mean&#39;]:.4f} ± {stats_ise[&#39;std&#39;]:.4f}&quot;) print(f&quot; 95% CI: [{stats_ise[&#39;ci_lower&#39;]:.4f}, {stats_ise[&#39;ci_upper&#39;]:.4f}]&quot;) print(f&quot; Samples: {stats_ise[&#39;n&#39;]}&quot;)
+``` **Example Output:**
 
-<span class="n">classical</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;classical_smc&#39;</span><span class="p">][</span><span class="s1">&#39;ise&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">sta</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;sta_smc&#39;</span><span class="p">][</span><span class="s1">&#39;ise&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-
-<span class="c1"># Welch&#39;s t-test (unequal variances)</span>
-<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">ttest_ind</span><span class="p">(</span><span class="n">classical</span><span class="p">,</span> <span class="n">sta</span><span class="p">,</span> <span class="n">equal_var</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="c1"># Effect size (Cohen&#39;s d)</span>
-<span class="n">pooled_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">classical</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sta</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">cohens_d</span> <span class="o">=</span> <span class="p">(</span><span class="n">classical</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">sta</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">pooled_std</span>
-
-<span class="c1"># Interpret results</span>
-<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
-<span class="n">significant</span> <span class="o">=</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="n">alpha</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">nHypothesis Test Results:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  H₀: No difference between controllers&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  H₁: Controllers have different performance&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="se">\\</span><span class="s2">n  t-statistic: </span><span class="si">{</span><span class="n">t_stat</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  p-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Significance level (α): </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Result: </span><span class="si">{</span><span class="s1">&#39;REJECT H₀&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">significant</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FAIL TO REJECT H₀&#39;</span><span class="si">}</span><span class="s2"> (p </span><span class="si">{</span><span class="s1">&#39;&lt;&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">significant</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&gt;=&#39;</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="se">\\</span><span class="s2">n  Effect size (Cohen&#39;s d): </span><span class="si">{</span><span class="n">cohens_d</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Interpretation: </span><span class="si">{</span><span class="n">interpret_cohens_d</span><span class="p">(</span><span class="n">cohens_d</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">interpret_cohens_d</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Interpret Cohen&#39;s d effect size.&quot;&quot;&quot;</span>
-    <span class="n">abs_d</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">abs_d</span> <span class="o">&lt;</span> <span class="mf">0.2</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;Negligible&quot;</span>
-    <span class="k">elif</span> <span class="n">abs_d</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;Small&quot;</span>
-    <span class="k">elif</span> <span class="n">abs_d</span> <span class="o">&lt;</span> <span class="mf">0.8</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;Medium&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;Large&quot;</span>
 </pre></div>
 </div>
-<p><strong>Example Output:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Hypothesis</span> <span class="n">Test</span> <span class="n">Results</span><span class="p">:</span>
-  <span class="n">H</span><span class="err">₀</span><span class="p">:</span> <span class="n">No</span> <span class="n">difference</span> <span class="n">between</span> <span class="n">controllers</span>
-  <span class="n">H</span><span class="err">₁</span><span class="p">:</span> <span class="n">Controllers</span> <span class="n">have</span> <span class="n">different</span> <span class="n">performance</span>
-
-  <span class="n">t</span><span class="o">-</span><span class="n">statistic</span><span class="p">:</span> <span class="mf">1.4325</span>
-  <span class="n">p</span><span class="o">-</span><span class="n">value</span><span class="p">:</span> <span class="mf">0.1702</span>
-  <span class="n">Significance</span> <span class="n">level</span> <span class="p">(</span><span class="n">α</span><span class="p">):</span> <span class="mf">0.05</span>
-  <span class="n">Result</span><span class="p">:</span> <span class="n">FAIL</span> <span class="n">TO</span> <span class="n">REJECT</span> <span class="n">H</span><span class="err">₀</span> <span class="p">(</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">)</span>
-
-  <span class="n">Effect</span> <span class="n">size</span> <span class="p">(</span><span class="n">Cohen</span><span class="s1">&#39;s d): 0.6812</span>
-  <span class="n">Interpretation</span><span class="p">:</span> <span class="n">Medium</span>
+<p>classical_smc: ISE: 0.2842 ± 0.1123 95% CI: [0.2038, 0.3646] Samples: 10 sta_smc: ISE: 0.2134 ± 0.0867 95% CI: [0.1512, 0.2756] Samples: 10
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">2.</span> <span class="pre">Hypothesis</span> <span class="pre">Testing</span> <span class="pre">(Welch's</span> <span class="pre">t-test)</span></code>python</p>
+<p>from scipy.stats import ttest_ind # Load data
+df = pd.read_csv(‘monte_carlo_quick_test/results.csv’) classical = df[df[‘controller’] == ‘classical_smc’][‘ise’].values
+sta = df[df[‘controller’] == ‘sta_smc’][‘ise’].values # Welch’s t-test (unequal variances)
+t_stat, p_value = ttest_ind(classical, sta, equal_var=False) # Effect size (Cohen’s d)
+pooled_std = np.sqrt((classical.std()**2 + sta.std()**2) / 2)
+cohens_d = (classical.mean() - sta.mean()) / pooled_std # Interpret results
+alpha = 0.05
+significant = p_value &lt; alpha print(“\nHypothesis Test Results:”)
+print(f” H₀: No difference between controllers”)
+print(f” H₁: Controllers have different performance”)
+print(f” \n t-statistic: {t_stat:.4f}”)
+print(f” p-value: {p_value:.4f}”)
+print(f” Significance level (α): {alpha}”)
+print(f” Result: {‘REJECT H₀’ if significant else ‘FAIL TO REJECT H₀’} (p {‘&lt;’ if significant else ‘&gt;=’} {alpha})”)
+print(f” \n Effect size (Cohen’s d): {cohens_d:.4f}”)
+print(f” Interpretation: {interpret_cohens_d(cohens_d)}”) def interpret_cohens_d(d): “””Interpret Cohen’s d effect size.””” abs_d = abs(d) if abs_d &lt; 0.2: return “Negligible” elif abs_d &lt; 0.5: return “Small” elif abs_d &lt; 0.8: return “Medium” else: return “Large”</p>
+<div class="highlight-**Example notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<p><strong>Interpretation:</strong></p>
-<ul class="simple">
-<li><p>p = 0.17 &gt; 0.05: Not statistically significant (with N=10)</p></li>
-<li><p>Cohen’s d = 0.68: Medium practical effect size</p></li>
-<li><p><strong>Action</strong>: Increase sample size to N=50 for adequate statistical power</p></li>
-</ul>
-</section>
-<section id="power-analysis">
-<h3>3. Power Analysis<a class="headerlink" href="#power-analysis" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.power</span><span class="w"> </span><span class="kn">import</span> <span class="n">ttest_power</span>
+<p>Hypothesis Test Results: H₀: No difference between controllers H₁: Controllers have different performance t-statistic: 1.4325 p-value: 0.1702 Significance level (α): 0.05 Result: FAIL TO REJECT H₀ (p &gt;= 0.05) Effect size (Cohen’s d): 0.6812 Interpretation: Medium</p>
+<div class="highlight-**Interpretation:** notranslate"><div class="highlight"><pre><span></span>- p = 0.17 &gt; 0.05: Not statistically significant (with N=10)
+- Cohen&#39;s d = 0.68: Medium practical effect size
+- **Action**: Increase sample size to N=50 for adequate statistical power ### 3. Power Analysis ```python
+from statsmodels.stats.power import ttest_power # Calculate required sample size for desired power
+effect_size = 0.68 # From Cohen&#39;s d above
+alpha = 0.05
+power = 0.80 # Desired power (80%) # Compute required sample size per group
+from statsmodels.stats.power import tt_solve_power required_n = tt_solve_power( effect_size=effect_size, alpha=alpha, power=power, alternative=&#39;two-sided&#39;
+) print(f&quot;\\nPower Analysis:&quot;)
+print(f&quot; Effect size (d): {effect_size}&quot;)
+print(f&quot; Significance level (α): {alpha}&quot;)
+print(f&quot; Desired power: {power}&quot;)
+print(f&quot; Required sample size per group: {np.ceil(required_n):.0f}&quot;)
+print(f&quot; \\n Current sample size: 10&quot;)
+print(f&quot; Recommendation: Increase to {np.ceil(required_n):.0f} trials per controller&quot;)
+``` **Example Output:**
 
-<span class="c1"># Calculate required sample size for desired power</span>
-<span class="n">effect_size</span> <span class="o">=</span> <span class="mf">0.68</span>  <span class="c1"># From Cohen&#39;s d above</span>
-<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
-<span class="n">power</span> <span class="o">=</span> <span class="mf">0.80</span>  <span class="c1"># Desired power (80%)</span>
-
-<span class="c1"># Compute required sample size per group</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.power</span><span class="w"> </span><span class="kn">import</span> <span class="n">tt_solve_power</span>
-
-<span class="n">required_n</span> <span class="o">=</span> <span class="n">tt_solve_power</span><span class="p">(</span>
-    <span class="n">effect_size</span><span class="o">=</span><span class="n">effect_size</span><span class="p">,</span>
-    <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span>
-    <span class="n">power</span><span class="o">=</span><span class="n">power</span><span class="p">,</span>
-    <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">nPower Analysis:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Effect size (d): </span><span class="si">{</span><span class="n">effect_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Significance level (α): </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Desired power: </span><span class="si">{</span><span class="n">power</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Required sample size per group: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">required_n</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="se">\\</span><span class="s2">n  Current sample size: 10&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Recommendation: Increase to </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">required_n</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> trials per controller&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Example Output:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Power</span> <span class="n">Analysis</span><span class="p">:</span>
-  <span class="n">Effect</span> <span class="n">size</span> <span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="mf">0.68</span>
-  <span class="n">Significance</span> <span class="n">level</span> <span class="p">(</span><span class="n">α</span><span class="p">):</span> <span class="mf">0.05</span>
-  <span class="n">Desired</span> <span class="n">power</span><span class="p">:</span> <span class="mf">0.80</span>
-  <span class="n">Required</span> <span class="n">sample</span> <span class="n">size</span> <span class="n">per</span> <span class="n">group</span><span class="p">:</span> <span class="mi">36</span>
+<p>Power Analysis: Effect size (d): 0.68 Significance level (α): 0.05 Desired power: 0.80 Required sample size per group: 36 Current sample size: 10 Recommendation: Increase to 36 trials per controller</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
 
-  <span class="n">Current</span> <span class="n">sample</span> <span class="n">size</span><span class="p">:</span> <span class="mi">10</span>
-  <span class="n">Recommendation</span><span class="p">:</span> <span class="n">Increase</span> <span class="n">to</span> <span class="mi">36</span> <span class="n">trials</span> <span class="n">per</span> <span class="n">controller</span>
-</pre></div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="confidence-interval-visualization">
-<h2>Confidence Interval Visualization<a class="headerlink" href="#confidence-interval-visualization" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="c1">## Confidence Interval Visualization ```python</span>
 
-<span class="c1"># Load data</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;monte_carlo_quick_test/results.csv&#39;</span><span class="p">)</span>
-
-<span class="c1"># Compute statistics for each controller</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span> <span class="c1"># Load data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;monte_carlo_quick_test/results.csv&#39;</span><span class="p">)</span> <span class="c1"># Compute statistics for each controller</span>
 <span class="n">controllers</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-<span class="n">stats_data</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">ctrl</span> <span class="ow">in</span> <span class="n">controllers</span><span class="p">:</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ctrl</span><span class="p">][</span><span class="s1">&#39;ise&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-    <span class="n">mean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-    <span class="n">ci</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">interval</span><span class="p">(</span><span class="mf">0.95</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-                           <span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span>
-                           <span class="n">scale</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">sem</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-    <span class="n">stats_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-        <span class="s1">&#39;controller&#39;</span><span class="p">:</span> <span class="n">ctrl</span><span class="p">,</span>
-        <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">mean</span><span class="p">,</span>
-        <span class="s1">&#39;ci_lower&#39;</span><span class="p">:</span> <span class="n">ci</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-        <span class="s1">&#39;ci_upper&#39;</span><span class="p">:</span> <span class="n">ci</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="p">})</span>
-
-<span class="n">stats_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">stats_data</span><span class="p">)</span>
-
-<span class="c1"># Plot</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">controllers</span><span class="p">))</span>
+<span class="n">stats_data</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">ctrl</span> <span class="ow">in</span> <span class="n">controllers</span><span class="p">:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ctrl</span><span class="p">][</span><span class="s1">&#39;ise&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="n">mean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="n">ci</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">interval</span><span class="p">(</span><span class="mf">0.95</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">sem</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="n">stats_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span> <span class="s1">&#39;controller&#39;</span><span class="p">:</span> <span class="n">ctrl</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">mean</span><span class="p">,</span> <span class="s1">&#39;ci_lower&#39;</span><span class="p">:</span> <span class="n">ci</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;ci_upper&#39;</span><span class="p">:</span> <span class="n">ci</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">})</span> <span class="n">stats_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">stats_data</span><span class="p">)</span> <span class="c1"># Plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">controllers</span><span class="p">))</span>
 <span class="n">means</span> <span class="o">=</span> <span class="n">stats_df</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">ci_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">stats_df</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">stats_df</span><span class="p">[</span><span class="s1">&#39;ci_lower&#39;</span><span class="p">],</span>
-                       <span class="n">stats_df</span><span class="p">[</span><span class="s1">&#39;ci_upper&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">stats_df</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]])</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">means</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">means</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">ci_errors</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
-             <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">capthick</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;95% CI&#39;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Controller&#39;</span><span class="p">)</span>
+<span class="n">ci_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">stats_df</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">stats_df</span><span class="p">[</span><span class="s1">&#39;ci_lower&#39;</span><span class="p">],</span> <span class="n">stats_df</span><span class="p">[</span><span class="s1">&#39;ci_upper&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">stats_df</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]])</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">means</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">means</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">ci_errors</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">capthick</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;95% CI&#39;</span><span class="p">)</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Controller&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;ISE (Integral Squared Error)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Controller Performance Comparison</span><span class="se">\\</span><span class="s1">n(N=10 trials, 95</span><span class="si">% c</span><span class="s1">onfidence intervals)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">controllers</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;monte_carlo_quick_test/performance_comparison.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">nPlot saved: monte_carlo_quick_test/performance_comparison.png&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
 <hr class="docutils" />
-<section id="practical-guidelines">
-<h2>Practical Guidelines<a class="headerlink" href="#practical-guidelines" title="Link to this heading">¶</a></h2>
-<section id="sample-size-recommendations">
-<h3>Sample Size Recommendations<a class="headerlink" href="#sample-size-recommendations" title="Link to this heading">¶</a></h3>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Study Type</p></th>
-<th class="head"><p>Minimum N</p></th>
-<th class="head"><p>Recommended N</p></th>
-<th class="head"><p>Notes</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Quick validation</strong></p></td>
-<td><p>10</p></td>
-<td><p>20</p></td>
-<td><p>Check for obvious issues</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Preliminary study</strong></p></td>
-<td><p>20</p></td>
-<td><p>30</p></td>
-<td><p>Initial effect size estimate</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Standard validation</strong></p></td>
-<td><p>30</p></td>
-<td><p>50</p></td>
-<td><p>Adequate statistical power</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Publication-quality</strong></p></td>
-<td><p>50</p></td>
-<td><p>100</p></td>
-<td><p>High confidence results</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>High-stakes decisions</strong></p></td>
-<td><p>100</p></td>
-<td><p>500+</p></td>
-<td><p>Minimize risk</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="statistical-power-guidelines">
-<h3>Statistical Power Guidelines<a class="headerlink" href="#statistical-power-guidelines" title="Link to this heading">¶</a></h3>
-<p><strong>For medium effect size (d=0.5):</strong></p>
+<section id="practical-guidelines-sample-size-recommendations-study-type-minimum-n-recommended-n-notes">
+<h2>Practical Guidelines ### Sample Size Recommendations | Study Type | Minimum N | Recommended N | Notes |<a class="headerlink" href="#practical-guidelines-sample-size-recommendations-study-type-minimum-n-recommended-n-notes" title="Link to this heading">¶</a></h2>
+<p>|————|———–|—————|——-|
+| <strong>Quick validation</strong> | 10 | 20 | Check for obvious issues |
+| <strong>Preliminary study</strong> | 20 | 30 | Initial effect size estimate |
+| <strong>Standard validation</strong> | 30 | 50 | Adequate statistical power |
+| <strong>Publication-quality</strong> | 50 | 100 | High confidence results |
+| <strong>High-stakes decisions</strong> | 100 | 500+ | Minimize risk | ### Statistical Power Guidelines <strong>For medium effect size (d=0.5):</strong></p>
 <ul class="simple">
 <li><p>N=10: Power ≈ 0.25 (25% chance of detecting effect)</p></li>
 <li><p>N=20: Power ≈ 0.45 (45%)</p></li>
 <li><p>N=30: Power ≈ 0.60 (60%)</p></li>
 <li><p>N=50: Power ≈ 0.82 (82%) ✅ Adequate</p></li>
-<li><p>N=100: Power ≈ 0.97 (97%)</p></li>
-</ul>
-<p><strong>Recommendation</strong>: Aim for power ≥ 0.80 (80%)</p>
-</section>
-<section id="when-to-use-which-test">
-<h3>When to Use Which Test<a class="headerlink" href="#when-to-use-which-test" title="Link to this heading">¶</a></h3>
-<p><strong>Welch’s t-test (recommended default):</strong></p>
-<ul class="simple">
+<li><p>N=100: Power ≈ 0.97 (97%) <strong>Recommendation</strong>: Aim for power ≥ 0.80 (80%) ### When to Use Which Test <strong>Welch’s t-test (recommended default):</strong></p></li>
 <li><p>Comparing two controllers</p></li>
 <li><p>Don’t assume equal variances</p></li>
-<li><p>Robust to violations</p></li>
-</ul>
-<p><strong>Mann-Whitney U test (non-parametric):</strong></p>
-<ul class="simple">
+<li><p>Robust to violations <strong>Mann-Whitney U test (non-parametric):</strong></p></li>
 <li><p>Non-normal distributions</p></li>
 <li><p>Small sample sizes (N&lt;30)</p></li>
-<li><p>Outliers present</p></li>
-</ul>
-<p><strong>ANOVA (Analysis of Variance):</strong></p>
-<ul class="simple">
+<li><p>Outliers present <strong>ANOVA (Analysis of Variance):</strong></p></li>
 <li><p>Comparing 3+ controllers</p></li>
-<li><p>Follow up with post-hoc tests (Tukey HSD)</p></li>
-</ul>
-<p><strong>Kruskal-Wallis (non-parametric ANOVA):</strong></p>
-<ul class="simple">
+<li><p>Follow up with post-hoc tests (Tukey HSD) <strong>Kruskal-Wallis (non-parametric ANOVA):</strong></p></li>
 <li><p>Non-normal distributions</p></li>
 <li><p>3+ groups</p></li>
 <li><p>Small samples</p></li>
 </ul>
 </section>
-</section>
 <hr class="docutils" />
-<section id="complete-workflow-example">
-<h2>Complete Workflow Example<a class="headerlink" href="#complete-workflow-example" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
-<span class="sd">&quot;&quot;&quot;Complete Monte Carlo validation workflow with statistical analysis.&quot;&quot;&quot;</span>
+<section id="complete-workflow-example-python">
+<h2>Complete Workflow Example ```python<a class="headerlink" href="#complete-workflow-example-python" title="Link to this heading">¶</a></h2>
+<p>#!/usr/bin/env python
+“””Complete Monte Carlo validation workflow with statistical analysis.””” import numpy as np
+import pandas as pd
+from scipy import stats
+import matplotlib.pyplot as plt # Step 1: Run Monte Carlo (assume already completed)</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="results-in-monte-carlo-quick-test-results-csv-step-2-load-and-validate-data">
+<h1>Results in: monte_carlo_quick_test/results.csv # Step 2: Load and validate data<a class="headerlink" href="#results-in-monte-carlo-quick-test-results-csv-step-2-load-and-validate-data" title="Link to this heading">¶</a></h1>
+<p>df = pd.read_csv(‘monte_carlo_quick_test/results.csv’)
+print(f”Loaded {len(df)} trials”)
+print(f”Controllers: {df[‘controller’].unique()}”)
+print(f”Metrics: {[col for col in df.columns if col not in [‘controller’, ‘trial’, ‘seed’]]}”) # Step 3: Descriptive statistics
+print(“\n” + “=”*60)
+print(“DESCRIPTIVE STATISTICS”)
+print(“=”*60)
+print(df.groupby(‘controller’).agg({ ‘ise’: [‘count’, ‘mean’, ‘std’, ‘min’, ‘max’]
+}).round(4)) # Step 4: Hypothesis testing
+print(“\n” + “=”*60)
+print(“HYPOTHESIS TESTING”)
+print(“=”*60) classical = df[df[‘controller’] == ‘classical_smc’][‘ise’].values
+sta = df[df[‘controller’] == ‘sta_smc’][‘ise’].values t_stat, p_value = stats.ttest_ind(classical, sta, equal_var=False)
+print(f”Welch’s t-test:”)
+print(f” t = {t_stat:.4f}, p = {p_value:.4f}”)
+print(f” Result: {‘Significant’ if p_value &lt; 0.05 else ‘Not significant’} at α=0.05”) # Step 5: Effect size
+pooled_std = np.sqrt((classical.std()**2 + sta.std()**2) / 2)
+cohens_d = abs(classical.mean() - sta.mean()) / pooled_std
+print(f”\nCohen’s d: {cohens_d:.4f} ({interpret_cohens_d(cohens_d)})”) # Step 6: Confidence intervals
+for ctrl in df[‘controller’].unique(): data = df[df[‘controller’] == ctrl][‘ise’] ci = stats.t.interval(0.95, len(data)-1, loc=data.mean(), scale=stats.sem(data)) print(f”\n{ctrl}:”) print(f” Mean: {data.mean():.4f}”) print(f” 95% CI: [{ci[0]:.4f}, {ci[1]:.4f}]”) # Step 7: Visualization
+fig, axes = plt.subplots(1, 2, figsize=(12, 5)) # Box plot
+df.boxplot(column=’ise’, by=’controller’, ax=axes[0])
+axes[0].set_title(‘ISE Distribution by Controller’)
+axes[0].set_xlabel(‘Controller’)
+axes[0].set_ylabel(‘ISE’) # Bar plot with CI
+controllers = df[‘controller’].unique()
+means = [df[df[‘controller’] == c][‘ise’].mean() for c in controllers]
+cis = [stats.t.interval(0.95, len(df[df[‘controller’] == c])-1, loc=df[df[‘controller’] == c][‘ise’].mean(), scale=stats.sem(df[df[‘controller’] == c][‘ise’])) for c in controllers]
+ci_errors = np.array([[m - ci[0], ci[1] - m] for m, ci in zip(means, cis)]).T x = np.arange(len(controllers))
+axes[1].bar(x, means, alpha=0.7)
+axes[1].errorbar(x, means, yerr=ci_errors, fmt=’none’, ecolor=’black’, capsize=5)
+axes[1].set_xlabel(‘Controller’)
+axes[1].set_ylabel(‘Mean ISE’)
+axes[1].set_title(‘Mean ISE with 95% CI’)
+axes[1].set_xticks(x)
+axes[1].set_xticklabels(controllers)
+axes[1].grid(axis=’y’, alpha=0.3) plt.tight_layout()
+plt.savefig(‘monte_carlo_quick_test/analysis_summary.png’, dpi=150)
+print(“\nPlot saved: monte_carlo_quick_test/analysis_summary.png”) def interpret_cohens_d(d): abs_d = abs(d) if abs_d &lt; 0.2: return “Negligible” elif abs_d &lt; 0.5: return “Small” elif abs_d &lt; 0.8: return “Medium” else: return “Large”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="c1">## Troubleshooting ### Issue 1: Not Enough Samples for Statistical Power **Symptom:** p-value &gt; 0.05 despite apparent difference in means **Solution:**</span>
 
-<span class="c1"># Step 1: Run Monte Carlo (assume already completed)</span>
-<span class="c1"># Results in: monte_carlo_quick_test/results.csv</span>
+<span class="mf">1.</span> <span class="n">Calculate</span> <span class="n">required</span> <span class="n">sample</span> <span class="n">size</span> <span class="k">with</span> <span class="n">power</span> <span class="n">analysis</span>
+<span class="mf">2.</span> <span class="n">Re</span><span class="o">-</span><span class="n">run</span> <span class="k">with</span> <span class="n">larger</span> <span class="n">N</span>
+<span class="mf">3.</span> <span class="n">Consider</span> <span class="n">practical</span> <span class="n">significance</span> <span class="p">(</span><span class="n">effect</span> <span class="n">size</span><span class="p">)</span> <span class="n">alongside</span> <span class="n">statistical</span> <span class="n">significance</span> <span class="c1">### Issue 2: High Variance Obscures Differences **Symptom:** Large confidence intervals, unstable means **Solution:**</span>
+<span class="mf">1.</span> <span class="n">Increase</span> <span class="n">sample</span> <span class="n">size</span> <span class="p">(</span><span class="n">reduces</span> <span class="n">standard</span> <span class="n">error</span><span class="p">)</span>
+<span class="mf">2.</span> <span class="n">Control</span> <span class="n">experimental</span> <span class="n">conditions</span> <span class="n">more</span> <span class="n">tightly</span>
+<span class="mf">3.</span> <span class="n">Use</span> <span class="n">stratified</span> <span class="n">sampling</span> <span class="p">(</span><span class="n">block</span> <span class="n">by</span> <span class="n">initial</span> <span class="n">conditions</span><span class="p">)</span> <span class="c1">### Issue 3: Non-Normal Distributions **Symptom:** Shapiro-Wilk test fails (p &lt; 0.05) **Solution:**</span>
+<span class="mf">1.</span> <span class="n">Use</span> <span class="n">non</span><span class="o">-</span><span class="n">parametric</span> <span class="n">tests</span> <span class="p">(</span><span class="n">Mann</span><span class="o">-</span><span class="n">Whitney</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">t</span><span class="o">-</span><span class="n">test</span><span class="p">)</span>
+<span class="mf">2.</span> <span class="n">Transform</span> <span class="n">data</span> <span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">)</span> <span class="k">if</span> <span class="n">appropriate</span>
+<span class="mf">3.</span> <span class="n">Bootstrap</span> <span class="n">confidence</span> <span class="n">intervals</span>
 
-<span class="c1"># Step 2: Load and validate data</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;monte_carlo_quick_test/results.csv&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> trials&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Controllers: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Metrics: </span><span class="si">{</span><span class="p">[</span><span class="n">col</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;trial&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;seed&#39;</span><span class="p">]]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">---</span>
 
-<span class="c1"># Step 3: Descriptive statistics</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DESCRIPTIVE STATISTICS&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
-    <span class="s1">&#39;ise&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">]</span>
-<span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="c1">## Next Steps **After Quick Validation:**</span>
 
-<span class="c1"># Step 4: Hypothesis testing</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HYPOTHESIS TESTING&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+<span class="mf">1.</span> <span class="err">✅</span> <span class="n">Verify</span> <span class="n">Monte</span> <span class="n">Carlo</span> <span class="n">workflow</span> <span class="n">works</span>
+<span class="mf">2.</span> <span class="err">✅</span> <span class="n">Check</span> <span class="n">statistical</span> <span class="n">analysis</span> <span class="n">pipeline</span>
+<span class="mf">3.</span> <span class="err">➡️</span> <span class="n">Scale</span> <span class="n">up</span> <span class="n">to</span> <span class="n">N</span><span class="o">=</span><span class="mi">50</span> <span class="n">trials</span> <span class="k">for</span> <span class="n">full</span> <span class="n">study</span>
+<span class="mf">4.</span> <span class="err">➡️</span> <span class="n">Add</span> <span class="n">additional</span> <span class="n">scenarios</span> <span class="p">(</span><span class="n">parameter</span> <span class="n">variations</span><span class="p">)</span>
+<span class="mf">5.</span> <span class="err">➡️</span> <span class="n">Document</span> <span class="n">results</span> <span class="ow">in</span> <span class="n">research</span> <span class="n">paper</span> <span class="nb">format</span> <span class="o">**</span><span class="n">For</span> <span class="n">Full</span> <span class="n">Research</span> <span class="n">Study</span><span class="p">:</span><span class="o">**</span>
+<span class="err">➡️</span> <span class="n">Return</span> <span class="n">to</span> <span class="p">[</span><span class="n">Tutorial</span> <span class="mi">05</span><span class="p">:</span> <span class="n">Research</span> <span class="n">Workflow</span><span class="p">](</span><span class="o">../</span><span class="n">tutorials</span><span class="o">/</span><span class="n">tutorial</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="n">research</span><span class="o">-</span><span class="n">workflow</span><span class="o">.</span><span class="n">md</span><span class="p">)</span>
+<span class="err">➡️</span> <span class="n">Follow</span> <span class="n">complete</span> <span class="n">experimental</span> <span class="n">design</span> <span class="p">(</span><span class="mi">50</span><span class="o">+</span> <span class="n">trials</span><span class="p">,</span> <span class="n">multiple</span> <span class="n">scenarios</span><span class="p">)</span>
+<span class="err">➡️</span> <span class="n">Prepare</span> <span class="n">publication</span><span class="o">-</span><span class="n">quality</span> <span class="n">figures</span> <span class="ow">and</span> <span class="n">tables</span>
 
-<span class="n">classical</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;classical_smc&#39;</span><span class="p">][</span><span class="s1">&#39;ise&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">sta</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;sta_smc&#39;</span><span class="p">][</span><span class="s1">&#39;ise&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="o">---</span>
 
-<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">classical</span><span class="p">,</span> <span class="n">sta</span><span class="p">,</span> <span class="n">equal_var</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Welch&#39;s t-test:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  t = </span><span class="si">{</span><span class="n">t_stat</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Result: </span><span class="si">{</span><span class="s1">&#39;Significant&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">p_value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.05</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Not significant&#39;</span><span class="si">}</span><span class="s2"> at α=0.05&quot;</span><span class="p">)</span>
-
-<span class="c1"># Step 5: Effect size</span>
-<span class="n">pooled_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">classical</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sta</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">cohens_d</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">classical</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">sta</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">pooled_std</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">nCohen&#39;s d: </span><span class="si">{</span><span class="n">cohens_d</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">interpret_cohens_d</span><span class="p">(</span><span class="n">cohens_d</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-
-<span class="c1"># Step 6: Confidence intervals</span>
-<span class="k">for</span> <span class="n">ctrl</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ctrl</span><span class="p">][</span><span class="s1">&#39;ise&#39;</span><span class="p">]</span>
-    <span class="n">ci</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">interval</span><span class="p">(</span><span class="mf">0.95</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scale</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">sem</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n</span><span class="si">{</span><span class="n">ctrl</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mean: </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  95% CI: [</span><span class="si">{</span><span class="n">ci</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ci</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
-
-<span class="c1"># Step 7: Visualization</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-
-<span class="c1"># Box plot</span>
-<span class="n">df</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;ise&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;controller&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;ISE Distribution by Controller&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Controller&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;ISE&#39;</span><span class="p">)</span>
-
-<span class="c1"># Bar plot with CI</span>
-<span class="n">controllers</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-<span class="n">means</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">][</span><span class="s1">&#39;ise&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">controllers</span><span class="p">]</span>
-<span class="n">cis</span> <span class="o">=</span> <span class="p">[</span><span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">interval</span><span class="p">(</span><span class="mf">0.95</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-                         <span class="n">loc</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">][</span><span class="s1">&#39;ise&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
-                         <span class="n">scale</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">sem</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">][</span><span class="s1">&#39;ise&#39;</span><span class="p">]))</span>
-       <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">controllers</span><span class="p">]</span>
-<span class="n">ci_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">m</span> <span class="o">-</span> <span class="n">ci</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ci</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">ci</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">cis</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">controllers</span><span class="p">))</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">means</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">means</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">ci_errors</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Controller&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Mean ISE&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Mean ISE with 95% CI&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">controllers</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;monte_carlo_quick_test/analysis_summary.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">nPlot saved: monte_carlo_quick_test/analysis_summary.png&quot;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">interpret_cohens_d</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-    <span class="n">abs_d</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">abs_d</span> <span class="o">&lt;</span> <span class="mf">0.2</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;Negligible&quot;</span>
-    <span class="k">elif</span> <span class="n">abs_d</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;Small&quot;</span>
-    <span class="k">elif</span> <span class="n">abs_d</span> <span class="o">&lt;</span> <span class="mf">0.8</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;Medium&quot;</span>
-    <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;Large&quot;</span>
+<span class="o">**</span><span class="n">Document</span> <span class="n">Status</span><span class="p">:</span><span class="o">**</span> <span class="err">✅</span> <span class="n">Practical</span> <span class="n">Templates</span>
+<span class="o">**</span><span class="n">Last</span> <span class="n">Updated</span><span class="p">:</span><span class="o">**</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span>
+<span class="o">**</span><span class="n">Validation</span> <span class="n">Method</span><span class="p">:</span><span class="o">**</span> <span class="n">Code</span> <span class="n">templates</span> <span class="n">based</span> <span class="n">on</span> <span class="n">scipy</span><span class="o">/</span><span class="n">statsmodels</span> <span class="n">APIs</span>
+<span class="o">**</span><span class="n">Recommended</span> <span class="n">Use</span><span class="p">:</span><span class="o">**</span> <span class="n">Quick</span> <span class="n">validation</span> <span class="n">before</span> <span class="n">full</span><span class="o">-</span><span class="n">scale</span> <span class="n">studies</span>
 </pre></div>
 </div>
-</section>
-<hr class="docutils" />
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
-<section id="issue-1-not-enough-samples-for-statistical-power">
-<h3>Issue 1: Not Enough Samples for Statistical Power<a class="headerlink" href="#issue-1-not-enough-samples-for-statistical-power" title="Link to this heading">¶</a></h3>
-<p><strong>Symptom:</strong> p-value &gt; 0.05 despite apparent difference in means</p>
-<p><strong>Solution:</strong></p>
-<ol class="arabic simple">
-<li><p>Calculate required sample size with power analysis</p></li>
-<li><p>Re-run with larger N</p></li>
-<li><p>Consider practical significance (effect size) alongside statistical significance</p></li>
-</ol>
-</section>
-<section id="issue-2-high-variance-obscures-differences">
-<h3>Issue 2: High Variance Obscures Differences<a class="headerlink" href="#issue-2-high-variance-obscures-differences" title="Link to this heading">¶</a></h3>
-<p><strong>Symptom:</strong> Large confidence intervals, unstable means</p>
-<p><strong>Solution:</strong></p>
-<ol class="arabic simple">
-<li><p>Increase sample size (reduces standard error)</p></li>
-<li><p>Control experimental conditions more tightly</p></li>
-<li><p>Use stratified sampling (block by initial conditions)</p></li>
-</ol>
-</section>
-<section id="issue-3-non-normal-distributions">
-<h3>Issue 3: Non-Normal Distributions<a class="headerlink" href="#issue-3-non-normal-distributions" title="Link to this heading">¶</a></h3>
-<p><strong>Symptom:</strong> Shapiro-Wilk test fails (p &lt; 0.05)</p>
-<p><strong>Solution:</strong></p>
-<ol class="arabic simple">
-<li><p>Use non-parametric tests (Mann-Whitney instead of t-test)</p></li>
-<li><p>Transform data (log, sqrt) if appropriate</p></li>
-<li><p>Bootstrap confidence intervals</p></li>
-</ol>
-</section>
-</section>
-<hr class="docutils" />
-<section id="next-steps">
-<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">¶</a></h2>
-<p><strong>After Quick Validation:</strong></p>
-<ol class="arabic simple">
-<li><p>✅ Verify Monte Carlo workflow works</p></li>
-<li><p>✅ Check statistical analysis pipeline</p></li>
-<li><p>➡️ Scale up to N=50 trials for full study</p></li>
-<li><p>➡️ Add additional scenarios (parameter variations)</p></li>
-<li><p>➡️ Document results in research paper format</p></li>
-</ol>
-<p><strong>For Full Research Study:</strong>
-➡️ Return to <a class="reference internal" href="../tutorials/tutorial-05-research-workflow.html"><span class="std std-doc">Tutorial 05: Research Workflow</span></a>
-➡️ Follow complete experimental design (50+ trials, multiple scenarios)
-➡️ Prepare publication-quality figures and tables</p>
-<hr class="docutils" />
-<p><strong>Document Status:</strong> ✅ Practical Templates
-<strong>Last Updated:</strong> 2025-10-07
-<strong>Validation Method:</strong> Code templates based on scipy/statsmodels APIs
-<strong>Recommended Use:</strong> Quick validation before full-scale studies</p>
-</section>
 </section>
 
         </article>
@@ -1072,7 +514,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 08, 2025</div>
+              Last updated on Oct 10, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1094,34 +536,17 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Monte Carlo Validation Quick Start Guide</a><ul>
-<li><a class="reference internal" href="#purpose">Purpose</a></li>
-<li><a class="reference internal" href="#quick-monte-carlo-example-10-trials">Quick Monte Carlo Example (10 Trials)</a><ul>
-<li><a class="reference internal" href="#minimal-working-example">Minimal Working Example</a></li>
+<li><a class="reference internal" href="#purpose-this-guide-provides-working-code-examples-for-monte-carlo-validation-and-statistical-analysis-to-complement-tutorial-05-research-workflow-while-tutorial-05-provides-the-research-methodology-this-guide-focuses-on-practical-implementation-use-this-guide-for">Purpose This guide provides <strong>working code examples</strong> for Monte Carlo validation and statistical analysis to complement <span class="xref myst">Tutorial 05: Research Workflow</span>. While Tutorial 05 provides the research methodology, this guide focuses on <strong>practical implementation</strong>. <strong>Use this guide for:</strong></a></li>
+<li><a class="reference internal" href="#quick-monte-carlo-example-10-trials-minimal-working-example-python">Quick Monte Carlo Example (10 Trials) ### Minimal Working Example ```python</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#statistical-analysis-templates">Statistical Analysis Templates</a><ul>
-<li><a class="reference internal" href="#descriptive-statistics-with-confidence-intervals">1. Descriptive Statistics with Confidence Intervals</a></li>
-<li><a class="reference internal" href="#hypothesis-testing-welch-s-t-test">2. Hypothesis Testing (Welch’s t-test)</a></li>
-<li><a class="reference internal" href="#power-analysis">3. Power Analysis</a></li>
+<li><a class="reference internal" href="#example-metadata">example-metadata:</a></li>
+<li><a class="reference internal" href="#runnable-false-usr-bin-env-python">runnable: false #!/usr/bin/env python</a><ul>
+<li><a class="reference internal" href="#practical-guidelines-sample-size-recommendations-study-type-minimum-n-recommended-n-notes">Practical Guidelines ### Sample Size Recommendations | Study Type | Minimum N | Recommended N | Notes |</a></li>
+<li><a class="reference internal" href="#complete-workflow-example-python">Complete Workflow Example ```python</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#confidence-interval-visualization">Confidence Interval Visualization</a></li>
-<li><a class="reference internal" href="#practical-guidelines">Practical Guidelines</a><ul>
-<li><a class="reference internal" href="#sample-size-recommendations">Sample Size Recommendations</a></li>
-<li><a class="reference internal" href="#statistical-power-guidelines">Statistical Power Guidelines</a></li>
-<li><a class="reference internal" href="#when-to-use-which-test">When to Use Which Test</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#complete-workflow-example">Complete Workflow Example</a></li>
-<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
-<li><a class="reference internal" href="#issue-1-not-enough-samples-for-statistical-power">Issue 1: Not Enough Samples for Statistical Power</a></li>
-<li><a class="reference internal" href="#issue-2-high-variance-obscures-differences">Issue 2: High Variance Obscures Differences</a></li>
-<li><a class="reference internal" href="#issue-3-non-normal-distributions">Issue 3: Non-Normal Distributions</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#next-steps">Next Steps</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#results-in-monte-carlo-quick-test-results-csv-step-2-load-and-validate-data">Results in: monte_carlo_quick_test/results.csv # Step 2: Load and validate data</a></li>
 </ul>
 
           </div>
@@ -1132,9 +557,9 @@
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=4ebf8126"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>

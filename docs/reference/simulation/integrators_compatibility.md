@@ -18,7 +18,7 @@ and fixed-step integrators with the simulation framework.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -58,7 +58,7 @@ Reset the internal time counter.
 
 [View full source →](#method-dynamicscompatibilitywrapper-reset_time)
 
----
+
 
 ### `LegacyDynamicsWrapper`
 
@@ -91,7 +91,7 @@ Convert legacy step to derivative function.
 
 [View full source →](#method-legacydynamicswrapper-__call__)
 
----
+
 
 ### `IntegratorSafetyWrapper`
 
@@ -131,7 +131,7 @@ Reset the safety wrapper state.
 
 [View full source →](#method-integratorsafetywrapper-reset)
 
----
+
 
 ## Functions
 
@@ -171,7 +171,7 @@ Examples
 :linenos:
 ```
 
----
+
 
 ### `create_safe_integrator(integrator_type)`
 
@@ -197,7 +197,7 @@ IntegratorSafetyWrapper
 :linenos:
 ```
 
----
+
 
 ### `create_robust_euler_dynamics(dynamics_fn)`
 
@@ -211,7 +211,7 @@ Create robust Euler-integrated dynamics.
 :linenos:
 ```
 
----
+
 
 ### `create_robust_rk4_dynamics(dynamics_fn)`
 
@@ -225,7 +225,7 @@ Create robust RK4-integrated dynamics.
 :linenos:
 ```
 
----
+
 
 ### `create_robust_adaptive_dynamics(dynamics_fn, rtol, atol)`
 
@@ -239,7 +239,7 @@ Create robust adaptive-integrated dynamics.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -328,7 +328,7 @@ integrator = create_integrator('rk4', dt=0.01)
 x_next = integrator.integrate(dynamics_fn, x, u, dt)
 ```
 
-### Example 2: Zero-Order Hold Discretization
+## Example 2: Zero-Order Hold Discretization
 
 ```python
 from src.simulation.integrators.discrete import ZeroOrderHold
@@ -348,7 +348,7 @@ A_d = zoh.A_d
 B_d = zoh.B_d
 ```
 
-### Example 3: Real-Time Monitoring
+## Example 3: Real-Time Monitoring
 
 ```python
 from src.simulation.safety import SimulationPerformanceMonitor
@@ -374,7 +374,7 @@ print(f"Mean: {stats['mean']:.4f}s")
 print(f"95th percentile: {stats['p95']:.4f}s")
 ```
 
-### Example 4: Monte Carlo Simulation
+## Example 4: Monte Carlo Simulation
 
 ```python
 from src.simulation.strategies import MonteCarloStrategy
@@ -400,7 +400,7 @@ print(f"95% CI: [{results['metrics']['ise']['ci_lower']:.4f}, "
       f"{results['metrics']['ise']['ci_upper']:.4f}]")
 ```
 
-### Example 5: Safety Recovery
+## Example 5: Safety Recovery
 
 ```python
 from src.simulation.safety import SafetyRecovery

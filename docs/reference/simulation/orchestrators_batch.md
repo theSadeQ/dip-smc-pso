@@ -51,7 +51,7 @@ x_new = x_batch + dt * f(x_batch, u_batch)  # Element-wise operations
 \text{Speedup}_{\text{vectorized}} = 10-100\times \text{ vs naive Python loops}
 ```
 
-### Numba JIT Compilation
+## Numba JIT Compilation
 
 **Just-In-Time compilation:**
 - Compiles Python → LLVM → machine code
@@ -108,7 +108,7 @@ theta1 = [θ1_1, θ1_2, ..., θ1_B]  # Contiguous memory
 
 SoA: $\eta_{\text{cache}} \approx 100\%$ vs AoS: $\eta_{\text{cache}} \approx 16.7\%$ (for $n=6$ DIP)
 
-### Load Balancing
+## Load Balancing
 
 **Dynamic batch sizing:**
 ```{math}
@@ -172,7 +172,7 @@ instance = OrchestratorsBatch()
 result = instance.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Custom configuration
@@ -181,7 +181,7 @@ instance = OrchestratorsBatch(config)
 result = instance.process(data)
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 ```python
 try:
@@ -214,7 +214,7 @@ result = orchestrator.execute(instance.process(data))
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -250,7 +250,7 @@ Normalize control inputs to consistent batch format.
 
 [View full source →](#method-batchorchestrator-_normalize_control_inputs)
 
----
+
 
 ## Functions
 
@@ -295,7 +295,7 @@ np.ndarray
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

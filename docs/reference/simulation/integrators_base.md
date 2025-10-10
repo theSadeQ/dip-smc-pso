@@ -135,7 +135,7 @@ instance = IntegratorsBase()
 result = instance.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Custom configuration
@@ -144,7 +144,7 @@ instance = IntegratorsBase(config)
 result = instance.process(data)
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 ```python
 try:
@@ -177,7 +177,7 @@ result = orchestrator.execute(instance.process(data))
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -257,7 +257,7 @@ Compute error norm for adaptive integration.
 
 [View full source →](#method-baseintegrator-_compute_error_norm)
 
----
+
 
 ### `IntegrationResult`
 
@@ -279,7 +279,7 @@ Initialize integration result.
 
 [View full source →](#method-integrationresult-__init__)
 
----
+
 
 ## Dependencies
 

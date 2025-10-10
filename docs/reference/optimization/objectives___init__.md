@@ -13,7 +13,7 @@ Optimization objective functions for control engineering applications.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

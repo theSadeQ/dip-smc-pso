@@ -1,4 +1,5 @@
 # benchmarks.metrics.control_metrics **Source:** `src\benchmarks\metrics\control_metrics.py` ## Module Overview Control performance metrics for dynamic systems. This module computes fundamental control engineering metrics that measure
+
 the quality of tracking performance and control effort. These metrics are
 derived from classical control theory and provide quantitative measures
 of system performance. Metrics implemented:
@@ -7,7 +8,11 @@ of system performance. Metrics implemented:
 * **RMS Control Effort**: Measures actuator usage and energy consumption ## Complete Source Code ```{literalinclude} ../../../src/benchmarks/metrics/control_metrics.py
 :language: python
 :linenos:
-``` --- ## Functions ### `compute_ise(t, x)` Compute Integral of Squared Error (ISE) for all state variables. The ISE metric integrates the squared state deviations over time:
+```
+
+---
+
+## Functions ### `compute_ise(t, x)` Compute Integral of Squared Error (ISE) for all state variables. The ISE metric integrates the squared state deviations over time:
 ISE = ∫₀ᵀ ||x(t)||² dt This metric penalizes large deviations heavily and provides a measure
 of overall tracking performance. Lower values indicate better control. Parameters
 ----------
@@ -18,7 +23,12 @@ float ISE value averaged across batch dimension #### Source Code ```{literalincl
 :language: python
 :pyobject: compute_ise
 :linenos:
-``` --- ### `compute_itae(t, x)` Compute Integral of Time-weighted Absolute Error (ITAE). The ITAE metric emphasizes errors that occur later in the trajectory:
+```
+
+---
+
+### `compute_itae(t, x)` Compute Integral of Time-weighted Absolute Error (ITAE). The ITAE metric emphasizes errors that occur later in the trajectory:
+
 ITAE = ∫₀ᵀ t·||x(t)||₁ dt This metric is particularly useful for evaluating settling behavior
 and penalizes persistent steady-state errors more heavily than
 transient errors early in the response. Parameters
@@ -30,7 +40,11 @@ float ITAE value averaged across batch dimension #### Source Code ```{literalinc
 :language: python
 :pyobject: compute_itae
 :linenos:
-``` --- ### `compute_rms_control_effort(u)` Compute Root Mean Square (RMS) control effort. The RMS control effort measures the average magnitude of control inputs:
+```
+
+---
+
+### `compute_rms_control_effort(u)` Compute Root Mean Square (RMS) control effort. The RMS control effort measures the average magnitude of control inputs:
 RMS = √(⟨u²(t)⟩) This metric quantifies actuator usage and energy consumption. Lower
 values indicate more efficient control that requires less actuation. Parameters
 ----------
@@ -40,7 +54,12 @@ float RMS control effort averaged across batch dimension #### Source Code ```{li
 :language: python
 :pyobject: compute_rms_control_effort
 :linenos:
-``` --- ### `calculate_control_metrics(t, x, u)` Calculate control performance metrics. This function computes all available control performance metrics in one call,
+```
+
+---
+
+### `calculate_control_metrics(t, x, u)` Calculate control performance metrics. This function computes all available control performance metrics in one call,
+
 providing a assessment of control system performance. Parameters
 ----------
 t : np.ndarray Time vector of shape (N+1,)
@@ -56,5 +75,9 @@ dict Dictionary containing all computed metrics: - 'ise': Integral of Squared Er
 :language: python
 :pyobject: calculate_control_metrics
 :linenos:
-``` --- ## Dependencies This module imports: - `from __future__ import annotations`
+```
+
+---
+
+## Dependencies This module imports: - `from __future__ import annotations`
 - `import numpy as np`

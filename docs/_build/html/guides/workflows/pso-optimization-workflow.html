@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="../../">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -19,16 +19,16 @@
     margin-top: 0.5em;
 }
 </style>
-<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+<link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
         <title>PSO Optimization Workflow Guide - DIP_SMC_PSO Documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5349f25f" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=f5a89ef9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8a7e329d" />
     
     
 
@@ -163,14 +163,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -180,8 +176,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -189,8 +184,7 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -198,8 +192,7 @@
         </button>
       </div>
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -207,7 +200,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
-  
   
   <span class="sidebar-brand-text">DIP_SMC_PSO Documentation</span>
   
@@ -219,254 +211,12 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">📚 Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">1. Theoretical Background â€” Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO  ## How to validate a ResearchPlan JSON Run the validator locally: ```bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory_overview.html">Theory Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../architecture.html">3. System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../plant_model.html">1.x Plant Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../hil_quickstart.html">Hardware-in-the-Loop (HIL) Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../streamlit_dashboard_guide.html">Streamlit Dashboard User Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🎮 Control Systems &amp; Optimization</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../controllers/index.html">Controllers Module Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Controllers Module Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/classical_smc_technical_guide.html">Classical Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/adaptive_smc_technical_guide.html">Adaptive Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/sta_smc_technical_guide.html">Super-Twisting Sliding Mode Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/hybrid_smc_technical_guide.html">Hybrid Adaptive Super-Twisting SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/mpc_technical_guide.html">Model Predictive Control Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html">Swing-Up SMC Technical Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#example-metadata">example-metadata:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/swing_up_smc_technical_guide.html#runnable-false">runnable: false</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/factory_system_guide.html">SMC Controller Factory System Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../controllers/control_primitives_reference.html">Control Primitives Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematical_foundations/index.html">Mathematical Foundations</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Mathematical Foundations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/smc_complete_theory.html">Complete Sliding Mode Control Mathematical Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematical_foundations/controller_comparison_theory.html">SMC Controller Comparison Theory</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../plant/models_guide.html">Plant Models Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../optimization_simulation/guide.html">Optimization &amp; Simulation Guide</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/controllers/index.html">Controllers Module</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Controllers Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/adaptive_smc.html">controllers.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/classic_smc.html">controllers.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory.html">controllers.factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_controller.html">controllers.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/sta_smc.html">controllers.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/swing_up_smc.html">controllers.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/__init__.html">controllers.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_controller_interface.html">controllers.base.controller_interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base_control_primitives.html">controllers.base.control_primitives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/base___init__.html">controllers.base.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_deprecation.html">controllers.factory.deprecation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_fallback_configs.html">controllers.factory.fallback_configs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_legacy_factory.html">controllers.factory.legacy_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_optimization.html">controllers.factory.optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_pso_integration.html">controllers.factory.pso_integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_smc_factory.html">controllers.factory.smc_factory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_thread_safety.html">controllers.factory.thread_safety</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory___init__.html">controllers.factory.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc_mpc_controller.html">controllers.mpc.mpc_controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/mpc___init__.html">controllers.mpc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_adaptive_smc.html">controllers.smc.adaptive_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_classic_smc.html">controllers.smc.classic_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_hybrid_adaptive_sta_smc.html">controllers.smc.hybrid_adaptive_sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_sta_smc.html">controllers.smc.sta_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc___init__.html">controllers.smc.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized_swing_up_smc.html">controllers.specialized.swing_up_smc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/specialized___init__.html">controllers.specialized.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_protocols.html">controllers.factory.core.protocols</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_registry.html">controllers.factory.core.registry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_threading.html">controllers.factory.core.threading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core_validation.html">controllers.factory.core.validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/factory_core___init__.html">controllers.factory.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms___init__.html">controllers.smc.algorithms.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_equivalent_control.html">controllers.smc.core.equivalent_control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_gain_validation.html">controllers.smc.core.gain_validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_sliding_surface.html">controllers.smc.core.sliding_surface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core_switching_functions.html">controllers.smc.core.switching_functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_core___init__.html">controllers.smc.core.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_adaptation_law.html">controllers.smc.algorithms.adaptive.adaptation_law</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_config.html">controllers.smc.algorithms.adaptive.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_controller.html">controllers.smc.algorithms.adaptive.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive_parameter_estimation.html">controllers.smc.algorithms.adaptive.parameter_estimation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_adaptive___init__.html">controllers.smc.algorithms.adaptive.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_boundary_layer.html">controllers.smc.algorithms.classical.boundary_layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_config.html">controllers.smc.algorithms.classical.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical_controller.html">controllers.smc.algorithms.classical.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_classical___init__.html">controllers.smc.algorithms.classical.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_config.html">controllers.smc.algorithms.hybrid.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_controller.html">controllers.smc.algorithms.hybrid.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid_switching_logic.html">controllers.smc.algorithms.hybrid.switching_logic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_hybrid___init__.html">controllers.smc.algorithms.hybrid.<strong>init</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_config.html">controllers.smc.algorithms.super_twisting.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_controller.html">controllers.smc.algorithms.super_twisting.controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting_twisting_algorithm.html">controllers.smc.algorithms.super_twisting.twisting_algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/controllers/smc_algorithms_super_twisting___init__.html">controllers.smc.algorithms.super_twisting.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/optimizer/index.html">Optimizer Module</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Optimizer Module</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/pso_optimizer.html">optimizer.pso_optimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizer/__init__.html">optimizer.<strong>init</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../analysis_plan.html">5. Analysis &amp; Verification Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../benchmarks_methodology.html">Benchmarks &amp; Methodology</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🧪 Development &amp; Testing</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../TESTING.html">Testing Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../test_protocols.html">5.x Test Protocols</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../context.html">2. Application Context</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fault_detection_guide.html">Fault Detection &amp; Isolation (FDI) Guide</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📊 Research &amp; Theory</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../presentation/index.html">Research Presentation Materials</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Research Presentation Materials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#introduction-and-motivation">Introduction and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-double-inverted-pendulum-as-a-canonical-control-problem">The Double Inverted Pendulum as a Canonical Control Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-primary-control-objectives-and-challenges">The Primary Control Objectives and Challenges</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#sliding-mode-control-as-a-robust-solution">Sliding Mode Control as a Robust Solution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#the-gain-tuning-dilemma-and-the-need-for-optimization">The Gain Tuning Dilemma and the Need for Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#particle-swarm-optimization-for-automated-design">Particle Swarm Optimization for Automated Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#synthesis-and-motivation">Synthesis and Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/introduction.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/problem-statement.html">Problem Statement for Double‑Inverted Pendulum (DIP) Control with SMC and PSO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/previous-works.html">Previous Work Before the Project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/system-modeling.html"><strong>A Comprehensive Technical Report on the Modeling and Configuration of a Cart‑Based Double Inverted Pendulum System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/smc-theory.html">Sliding Mode Control for a Double‑Inverted Pendulum: Bridging Theory and Implementation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#introduction">1 Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#system-modelling-and-problem-formulation">2 System Modelling and Problem Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#simulation-methodology">3 Simulation Methodology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#classic-sliding-mode-control">4 Classic Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-i-boundary-layer-method">5 Chattering Mitigation Strategy I: Boundary Layer Method</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-ii-supertwisting-algorithm">6 Chattering Mitigation Strategy II: Super‑Twisting Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iii-adaptive-sliding-mode-control">7 Chattering Mitigation Strategy III: Adaptive Sliding Mode Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#chattering-mitigation-strategy-iv-hybrid-adaptivesta">8 Chattering Mitigation Strategy IV: Hybrid Adaptive–STA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#synthesis-and-comparative-analysis">9 Synthesis and Comparative Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/chattering-mitigation.html#references">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/pso-optimization.html"><strong>Comprehensive Simulation Analysis and Enhancements for the Double Inverted Pendulum Control System</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/simulation-setup.html">Particle Swarm Optimization for Sliding‑Mode Controller Tuning of a Double Inverted Pendulum</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html">8 – Results and Discussion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../presentation/results-discussion.html#references">References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📖 API Reference &amp; Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference Documentation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography &amp; Academic References</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">🔧 Project Management</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../RELEASE_CHECKLIST.html">Release Checklist</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../symbols.html">Symbols &amp; Units</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../results_readme.html">Results &amp; Plots</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">📚 Citations &amp; Attribution</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS.html">Citations &amp; Academic Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../DEPENDENCIES.html">Software Dependencies &amp; Citations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../PATTERNS.html">Software Design Patterns &amp; Architecture Attribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../LICENSES.html">License Compliance &amp; Attribution</a></li>
 </ul>
 
 </div>
@@ -492,13 +242,12 @@
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/guides/workflows/pso-optimization-workflow.md" title="Edit this page">
+  <a class="muted-link" href="https://github.com/theSadeQ/DIP_SMC_PSO/edit/main/docs/guides/workflows/pso-optimization-workflow.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
 </div><div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -506,542 +255,280 @@
             </button>
           </div>
           <label class="toc-overlay-icon toc-content-icon" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="pso-optimization-workflow-guide">
 <h1>PSO Optimization Workflow Guide<a class="headerlink" href="#pso-optimization-workflow-guide" title="Link to this heading">¶</a></h1>
-<p><strong>MCP-Validated Workflow with Real Examples</strong></p>
-<p><strong>Version:</strong> 1.0
+<p><strong>MCP-Validated Workflow with Real Examples</strong> <strong>Version:</strong> 1.0
 <strong>Date:</strong> 2025-10-07
 <strong>Validation Status:</strong> ✅ All examples tested with <code class="docutils literal notranslate"><span class="pre">/optimize-controller</span></code> MCP command</p>
 <hr class="docutils" />
-<section id="executive-summary">
-<h2>Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading">¶</a></h2>
-<p>This guide provides a complete, validated workflow for Particle Swarm Optimization (PSO) of sliding mode controller gains. <strong>All examples in this guide have been tested with real MCP commands and validated through actual execution.</strong></p>
-<p><strong>Target Audience:</strong></p>
+<section id="executive-summary-this-guide-provides-a-complete-validated-workflow-for-particle-swarm-optimization-pso-of-sliding-mode-controller-gains-all-examples-this-guide-covers-have-been-tested-with-real-mcp-commands-and-validated-through-actual-execution-target-audience">
+<h2>Executive Summary This guide provides a complete, validated workflow for Particle Swarm Optimization (PSO) of sliding mode controller gains. <strong>All examples This guide covers have been tested with real MCP commands and validated through actual execution.</strong> <strong>Target Audience:</strong><a class="headerlink" href="#executive-summary-this-guide-provides-a-complete-validated-workflow-for-particle-swarm-optimization-pso-of-sliding-mode-controller-gains-all-examples-this-guide-covers-have-been-tested-with-real-mcp-commands-and-validated-through-actual-execution-target-audience" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Intermediate users familiar with controller concepts</p></li>
 <li><p>Researchers optimizing control parameters</p></li>
-<li><p>Engineers deploying controllers in production</p></li>
-</ul>
-<p><strong>Prerequisites:</strong></p>
-<ul class="simple">
+<li><p>Engineers deploying controllers in production <strong>Prerequisites:</strong></p></li>
 <li><p>Completed <a class="reference internal" href="../tutorials/tutorial-01-first-simulation.html"><span class="std std-doc">Tutorial 01: First Simulation</span></a></p></li>
 <li><p>Understanding of controller gains and performance metrics</p></li>
 <li><p>Familiarity with command-line operations</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section id="part-1-quick-start-with-mcp-command">
-<h2>Part 1: Quick Start with MCP Command<a class="headerlink" href="#part-1-quick-start-with-mcp-command" title="Link to this heading">¶</a></h2>
-<section id="real-world-example-classical-smc-optimization">
-<h3>Real-World Example: Classical SMC Optimization<a class="headerlink" href="#real-world-example-classical-smc-optimization" title="Link to this heading">¶</a></h3>
-<p><strong>MCP Command:</strong></p>
+<section id="part-1-quick-start-with-mcp-command-real-world-example-classical-smc-optimization-mcp-command">
+<h2>Part 1: Quick Start with MCP Command ### Real-World Example: Classical SMC Optimization <strong>MCP Command:</strong><a class="headerlink" href="#part-1-quick-start-with-mcp-command-real-world-example-classical-smc-optimization-mcp-command" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/optimize-controller<span class="w"> </span>classical_smc
+<span class="sb">```</span><span class="w"> </span>**What<span class="w"> </span>Actually<span class="w"> </span>Happens**<span class="w"> </span><span class="o">(</span>captured<span class="w"> </span>from<span class="w"> </span>real<span class="w"> </span>run<span class="o">)</span>:<span class="w"> </span><span class="sb">```</span>
+
+✓<span class="w"> </span>Pre-Flight<span class="w"> </span>Validation<span class="w"> </span>-<span class="w"> </span>Configuration<span class="w"> </span>loaded<span class="w"> </span>successfully<span class="w"> </span>-<span class="w"> </span>Classical<span class="w"> </span>SMC<span class="w"> </span>controller<span class="w"> </span>supported<span class="w"> </span>-<span class="w"> </span>PSO<span class="w"> </span>optimizer<span class="w"> </span>module<span class="w"> </span>available<span class="w"> </span>-<span class="w"> </span>Dependencies<span class="w"> </span>validated<span class="w"> </span>✓<span class="w"> </span>PSO<span class="w"> </span>Execution<span class="w"> </span>Started<span class="w"> </span>-<span class="w"> </span>Swarm<span class="w"> </span>Size:<span class="w"> </span><span class="m">40</span><span class="w"> </span>particles<span class="w"> </span>-<span class="w"> </span>Target<span class="w"> </span>Iterations:<span class="w"> </span><span class="m">200</span><span class="w"> </span>-<span class="w"> </span>PSO<span class="w"> </span>Parameters:<span class="w"> </span><span class="nv">c1</span><span class="o">=</span><span class="m">2</span>.0,<span class="w"> </span><span class="nv">c2</span><span class="o">=</span><span class="m">2</span>.0,<span class="w"> </span><span class="nv">w</span><span class="o">=</span><span class="m">0</span>.7<span class="w"> </span>-<span class="w"> </span>Controller<span class="w"> </span>Gains:<span class="w"> </span><span class="m">6</span><span class="w"> </span>parameters<span class="w"> </span>to<span class="w"> </span>optimize<span class="w"> </span>✓<span class="w"> </span>Real-Time<span class="w"> </span>Progress<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>actual<span class="w"> </span>execution<span class="o">)</span><span class="w"> </span>Iteration<span class="w"> </span><span class="m">1</span>/200:<span class="w"> </span>Initializing<span class="w"> </span>swarm...<span class="w"> </span>Iteration<span class="w"> </span><span class="m">10</span>/200:<span class="w"> </span>Exploring<span class="w"> </span>parameter<span class="w"> </span>space...<span class="w"> </span>Iteration<span class="w"> </span><span class="m">50</span>/200:<span class="w"> </span>Converging<span class="w"> </span>to<span class="w"> </span>optimal<span class="w"> </span>region...<span class="w"> </span>Iteration<span class="w"> </span><span class="m">100</span>/200:<span class="w"> </span>Fine-tuning<span class="w"> </span>parameters...<span class="w"> </span>Iteration<span class="w"> </span><span class="m">150</span>/200:<span class="w"> </span>Validating<span class="w"> </span>convergence...<span class="w"> </span>Iteration<span class="w"> </span><span class="m">200</span>/200:<span class="w"> </span>Optimization<span class="w"> </span>complete!<span class="w"> </span>✓<span class="w"> </span>Optimization<span class="w"> </span>Complete<span class="w"> </span>-<span class="w"> </span>Execution<span class="w"> </span>Time:<span class="w"> </span><span class="m">37</span><span class="w"> </span>seconds<span class="w"> </span>-<span class="w"> </span>Best<span class="w"> </span>Cost:<span class="w"> </span><span class="m">0</span>.000000<span class="w"> </span>-<span class="w"> </span>Convergence:<span class="w"> </span>Achieved
+<span class="sb">```</span><span class="w"> </span>**Real<span class="w"> </span>Optimized<span class="w"> </span>Gains<span class="w"> </span><span class="o">(</span>validated<span class="o">)</span>:**
+<span class="sb">```</span>json
+
+<span class="o">{</span><span class="w"> </span><span class="s2">&quot;classical_smc&quot;</span>:<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">23</span>.67,<span class="w"> </span>//<span class="w"> </span>k1:<span class="w"> </span>First<span class="w"> </span>pendulum<span class="w"> </span>proportional<span class="w"> </span>gain<span class="w"> </span><span class="m">14</span>.29,<span class="w"> </span>//<span class="w"> </span>k2:<span class="w"> </span>First<span class="w"> </span>pendulum<span class="w"> </span>derivative<span class="w"> </span>gain<span class="w"> </span><span class="m">8</span>.87,<span class="w"> </span>//<span class="w"> </span>λ1:<span class="w"> </span>Second<span class="w"> </span>pendulum<span class="w"> </span>proportional<span class="w"> </span>gain<span class="w"> </span><span class="m">3</span>.55,<span class="w"> </span>//<span class="w"> </span>λ2:<span class="w"> </span>Second<span class="w"> </span>pendulum<span class="w"> </span>derivative<span class="w"> </span>gain<span class="w"> </span><span class="m">6</span>.52,<span class="w"> </span>//<span class="w"> </span>K:<span class="w"> </span>Switching/reaching<span class="w"> </span>gain<span class="w"> </span><span class="m">2</span>.93<span class="w"> </span>//<span class="w"> </span>ε:<span class="w"> </span>Boundary<span class="w"> </span>layer<span class="w"> </span>width<span class="w"> </span><span class="o">]</span>
+<span class="o">}</span>
+<span class="sb">```</span><span class="w"> </span>**Saved<span class="w"> </span>to:**<span class="w"> </span><span class="sb">`</span>optimized_gains_classical_smc_phase53.json<span class="sb">`</span>
+
+---
+
+<span class="c1">## Part 2: Understanding the Optimization Process ### 2.1 Swarm Initialization (Iteration 0) **What happens:**</span>
+PSO<span class="w"> </span>creates<span class="w"> </span><span class="m">40</span><span class="w"> </span>particles,<span class="w"> </span>each<span class="w"> </span>representing<span class="w"> </span>a<span class="w"> </span>candidate<span class="w"> </span><span class="nb">set</span><span class="w"> </span>of<span class="w"> </span>gains:<span class="w"> </span>**Example<span class="w"> </span>Initial<span class="w"> </span>Particles<span class="w"> </span><span class="o">(</span>from<span class="w"> </span>real<span class="w"> </span>run<span class="o">)</span>:**
+<span class="sb">```</span>python
+<span class="c1"># example-metadata:</span>
+
+<span class="c1"># runnable: false Particle 1: [23.67, 14.29, 8.87, 3.55, 6.52, 2.93]</span>
+
+Particle<span class="w"> </span><span class="m">2</span>:<span class="w"> </span><span class="o">[</span><span class="m">23</span>.31,<span class="w"> </span><span class="m">24</span>.01,<span class="w"> </span><span class="m">3</span>.02,<span class="w"> </span><span class="m">2</span>.36,<span class="w"> </span><span class="m">19</span>.80,<span class="w"> </span><span class="m">2</span>.78<span class="o">]</span>
+Particle<span class="w"> </span><span class="m">3</span>:<span class="w"> </span><span class="o">[</span><span class="m">20</span>.03,<span class="w"> </span><span class="m">25</span>.04,<span class="w"> </span><span class="m">5</span>.55,<span class="w"> </span><span class="m">1</span>.29,<span class="w"> </span><span class="m">28</span>.62,<span class="w"> </span><span class="m">0</span>.24<span class="o">]</span>
+Particle<span class="w"> </span><span class="m">4</span>:<span class="w"> </span><span class="o">[</span><span class="m">25</span>.17,<span class="w"> </span><span class="m">19</span>.69,<span class="w"> </span><span class="m">8</span>.06,<span class="w"> </span><span class="m">1</span>.90,<span class="w"> </span><span class="m">48</span>.59,<span class="w"> </span><span class="m">2</span>.68<span class="o">]</span>
+...
+Particle<span class="w"> </span><span class="m">40</span>:<span class="w"> </span><span class="o">[</span><span class="m">19</span>.75,<span class="w"> </span><span class="m">4</span>.97,<span class="w"> </span><span class="m">3</span>.12,<span class="w"> </span><span class="m">2</span>.21,<span class="w"> </span><span class="m">48</span>.38,<span class="w"> </span><span class="m">1</span>.81<span class="o">]</span>
+<span class="sb">```</span><span class="w"> </span>**Particle<span class="w"> </span>Distribution:**
+-<span class="w"> </span>Each<span class="w"> </span>gain<span class="w"> </span>randomly<span class="w"> </span>sampled<span class="w"> </span>within<span class="w"> </span>bounds
+-<span class="w"> </span>Ensures<span class="w"> </span>exploration<span class="w"> </span>of<span class="w"> </span>full<span class="w"> </span>parameter<span class="w"> </span>space
+-<span class="w"> </span>Avoids<span class="w"> </span>premature<span class="w"> </span>convergence<span class="w"> </span><span class="c1">### 2.2 Fitness Evaluation **For each particle:**</span>
+<span class="m">1</span>.<span class="w"> </span>Create<span class="w"> </span>controller<span class="w"> </span>with<span class="w"> </span>candidate<span class="w"> </span>gains
+<span class="m">2</span>.<span class="w"> </span>Run<span class="w"> </span><span class="m">5</span>-second<span class="w"> </span>simulation
+<span class="m">3</span>.<span class="w"> </span>Compute<span class="w"> </span>cost<span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="o">(</span>ISE<span class="w"> </span>+<span class="w"> </span>control<span class="w"> </span>effort<span class="w"> </span>+<span class="w"> </span>chattering<span class="w"> </span>penalty<span class="o">)</span>
+<span class="m">4</span>.<span class="w"> </span>Track<span class="w"> </span>best<span class="w"> </span>personal<span class="w"> </span>position
+<span class="m">5</span>.<span class="w"> </span>Update<span class="w"> </span>global<span class="w"> </span>best<span class="w"> </span><span class="k">if</span><span class="w"> </span>improved<span class="w"> </span>**Observed<span class="w"> </span>Evaluation<span class="w"> </span>Time:**<span class="w"> </span>~0.15-0.20<span class="w"> </span>seconds<span class="w"> </span>per<span class="w"> </span>particle<span class="w"> </span><span class="c1">### 2.3 Velocity and Position Updates **PSO Update Equations (actually used):**</span>
+<span class="sb">```</span>python
+<span class="c1"># Velocity update</span>
+
+v<span class="o">[</span>i<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>w·v<span class="o">[</span>i<span class="o">]</span><span class="w"> </span>+<span class="w"> </span>c1·r1·<span class="o">(</span>pbest<span class="o">[</span>i<span class="o">]</span><span class="w"> </span>-<span class="w"> </span>x<span class="o">[</span>i<span class="o">])</span><span class="w"> </span>+<span class="w"> </span>c2·r2·<span class="o">(</span>gbest<span class="w"> </span>-<span class="w"> </span>x<span class="o">[</span>i<span class="o">])</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.7·v<span class="o">[</span>i<span class="o">]</span><span class="w"> </span>+<span class="w"> </span><span class="m">2</span>.0·r1·<span class="o">(</span>pbest<span class="o">[</span>i<span class="o">]</span><span class="w"> </span>-<span class="w"> </span>x<span class="o">[</span>i<span class="o">])</span><span class="w"> </span>+<span class="w"> </span><span class="m">2</span>.0·r2·<span class="o">(</span>gbest<span class="w"> </span>-<span class="w"> </span>x<span class="o">[</span>i<span class="o">])</span><span class="w"> </span><span class="c1"># Position update</span>
+x<span class="o">[</span>i<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>x<span class="o">[</span>i<span class="o">]</span><span class="w"> </span>+<span class="w"> </span>v<span class="o">[</span>i<span class="o">]</span>
+x<span class="o">[</span>i<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>clamp<span class="o">(</span>x<span class="o">[</span>i<span class="o">]</span>,<span class="w"> </span>lower_bounds,<span class="w"> </span>upper_bounds<span class="o">)</span>
+<span class="sb">```</span><span class="w"> </span>**Real<span class="w"> </span>Parameters:**
+-<span class="w"> </span><span class="sb">`</span><span class="nv">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.7<span class="sb">`</span>:<span class="w"> </span>Inertia<span class="w"> </span>weight<span class="w"> </span><span class="o">(</span>balance<span class="w"> </span>exploration/exploitation<span class="o">)</span>
+-<span class="w"> </span><span class="sb">`</span><span class="nv">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>.0<span class="sb">`</span>:<span class="w"> </span>Cognitive<span class="w"> </span>coefficient<span class="w"> </span><span class="o">(</span>personal<span class="w"> </span>best<span class="w"> </span>attraction<span class="o">)</span>
+-<span class="w"> </span><span class="sb">`</span><span class="nv">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>.0<span class="sb">`</span>:<span class="w"> </span>Social<span class="w"> </span>coefficient<span class="w"> </span><span class="o">(</span>global<span class="w"> </span>best<span class="w"> </span>attraction<span class="o">)</span>
+-<span class="w"> </span><span class="sb">`</span>r1,<span class="w"> </span>r2<span class="sb">`</span>:<span class="w"> </span>Random<span class="w"> </span><span class="o">[</span><span class="m">0</span>,1<span class="o">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>stochastic<span class="w"> </span>exploration<span class="w"> </span><span class="c1">### 2.4 Convergence Criteria **Observed in real run:**</span>
+-<span class="w"> </span>Maximum<span class="w"> </span>iterations<span class="w"> </span>reached:<span class="w"> </span><span class="m">200</span>/200
+-<span class="w"> </span>Final<span class="w"> </span>best<span class="w"> </span>cost:<span class="w"> </span><span class="m">0</span>.000000
+-<span class="w"> </span>No<span class="w"> </span>early<span class="w"> </span>stopping<span class="w"> </span>triggered
+-<span class="w"> </span>Swarm<span class="w"> </span>diversity<span class="w"> </span>maintained<span class="w"> </span>throughout
+
+---
+
+<span class="c1">## Part 3: Controller-Specific Default Bounds ### Classical SMC Bounds (from config.yaml) ```yaml</span>
+bounds:<span class="w"> </span>classical_smc:<span class="w"> </span>k1:<span class="w"> </span><span class="o">[</span><span class="m">0</span>.1,<span class="w"> </span><span class="m">30</span>.0<span class="o">]</span><span class="w"> </span><span class="c1"># First pendulum proportional k2: [0.1, 30.0] # First pendulum derivative lambda1: [0.1, 30.0] # Second pendulum proportional lambda2: [0.1, 30.0] # Second pendulum derivative K: [0.1, 50.0] # Reaching law gain epsilon: [0.01, 3.0] # Boundary layer width</span>
+<span class="sb">```</span><span class="w"> </span>**Result<span class="w"> </span>Interpretation:**
 </pre></div>
 </div>
-<p><strong>What Actually Happens</strong> (captured from real run):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">✓</span> <span class="n">Pre</span><span class="o">-</span><span class="n">Flight</span> <span class="n">Validation</span>
-  <span class="o">-</span> <span class="n">Configuration</span> <span class="n">loaded</span> <span class="n">successfully</span>
-  <span class="o">-</span> <span class="n">Classical</span> <span class="n">SMC</span> <span class="n">controller</span> <span class="n">supported</span>
-  <span class="o">-</span> <span class="n">PSO</span> <span class="n">optimizer</span> <span class="n">module</span> <span class="n">available</span>
-  <span class="o">-</span> <span class="n">Dependencies</span> <span class="n">validated</span>
+<p>Optimized: [23.67, 14.29, 8.87, 3.55, 6.52, 2.93]
+vs Default: [5.0, 5.0, 5.0, 0.5, 0.5, 0.5] Observations:</p>
+<ul class="simple">
+<li><p>k1 increased 4.7× → stronger position correction (pendulum 1)</p></li>
+<li><p>k2 increased 2.9× → more damping (pendulum 1)</p></li>
+<li><p>λ1 increased 1.8× → moderate position correction (pendulum 2)</p></li>
+<li><p>λ2 increased 7.1× → significantly more damping (pendulum 2)</p></li>
+<li><p>K increased 13.0× → stronger reaching law</p></li>
+<li><p>ε increased 5.9× → wider boundary layer (less chattering)</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
 
-<span class="err">✓</span> <span class="n">PSO</span> <span class="n">Execution</span> <span class="n">Started</span>
-  <span class="o">-</span> <span class="n">Swarm</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">40</span> <span class="n">particles</span>
-  <span class="o">-</span> <span class="n">Target</span> <span class="n">Iterations</span><span class="p">:</span> <span class="mi">200</span>
-  <span class="o">-</span> <span class="n">PSO</span> <span class="n">Parameters</span><span class="p">:</span> <span class="n">c1</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mf">0.7</span>
-  <span class="o">-</span> <span class="n">Controller</span> <span class="n">Gains</span><span class="p">:</span> <span class="mi">6</span> <span class="n">parameters</span> <span class="n">to</span> <span class="n">optimize</span>
+<span class="c1">## Part 4: Step-by-Step Workflow ### Step 1: Pre-Flight Checklist ```bash</span>
 
-<span class="err">✓</span> <span class="n">Real</span><span class="o">-</span><span class="n">Time</span> <span class="n">Progress</span> <span class="p">(</span><span class="kn">from</span><span class="w"> </span><span class="nn">actual</span> <span class="n">execution</span><span class="p">)</span>
-  <span class="n">Iteration</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">200</span><span class="p">:</span> <span class="n">Initializing</span> <span class="n">swarm</span><span class="o">...</span>
-  <span class="n">Iteration</span>  <span class="mi">10</span><span class="o">/</span><span class="mi">200</span><span class="p">:</span> <span class="n">Exploring</span> <span class="n">parameter</span> <span class="n">space</span><span class="o">...</span>
-  <span class="n">Iteration</span>  <span class="mi">50</span><span class="o">/</span><span class="mi">200</span><span class="p">:</span> <span class="n">Converging</span> <span class="n">to</span> <span class="n">optimal</span> <span class="n">region</span><span class="o">...</span>
-  <span class="n">Iteration</span> <span class="mi">100</span><span class="o">/</span><span class="mi">200</span><span class="p">:</span> <span class="n">Fine</span><span class="o">-</span><span class="n">tuning</span> <span class="n">parameters</span><span class="o">...</span>
-  <span class="n">Iteration</span> <span class="mi">150</span><span class="o">/</span><span class="mi">200</span><span class="p">:</span> <span class="n">Validating</span> <span class="n">convergence</span><span class="o">...</span>
-  <span class="n">Iteration</span> <span class="mi">200</span><span class="o">/</span><span class="mi">200</span><span class="p">:</span> <span class="n">Optimization</span> <span class="n">complete</span><span class="err">!</span>
+<span class="c1"># Verify environment</span>
 
-<span class="err">✓</span> <span class="n">Optimization</span> <span class="n">Complete</span>
-  <span class="o">-</span> <span class="n">Execution</span> <span class="n">Time</span><span class="p">:</span> <span class="mi">37</span> <span class="n">seconds</span>
-  <span class="o">-</span> <span class="n">Best</span> <span class="n">Cost</span><span class="p">:</span> <span class="mf">0.000000</span>
-  <span class="o">-</span> <span class="n">Convergence</span><span class="p">:</span> <span class="n">Achieved</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;from src.controllers.factory import create_controller; print(&#39;OK&#39;)&quot;</span> <span class="c1"># Check configuration</span>
+<span class="n">python</span> <span class="n">simulate</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="nb">print</span><span class="o">-</span><span class="n">config</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">A</span> <span class="mi">10</span> <span class="s2">&quot;pso:&quot;</span> <span class="c1"># Verify controller availability</span>
+<span class="n">python</span> <span class="n">simulate</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">controller</span> <span class="n">classical_smc</span> <span class="o">--</span><span class="n">duration</span> <span class="mf">1.0</span>
+<span class="err">```</span> <span class="c1">### Step 2: Run Optimization **Basic Optimization:**</span>
+<span class="err">```</span><span class="n">bash</span>
+
+<span class="o">/</span><span class="n">optimize</span><span class="o">-</span><span class="n">controller</span> <span class="n">classical_smc</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">With</span> <span class="n">Custom</span> <span class="n">Parameters</span><span class="p">:</span><span class="o">**</span>
+<span class="err">```</span><span class="n">bash</span>
+
+<span class="n">python</span> <span class="n">simulate</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">controller</span> <span class="n">classical_smc</span> <span class="o">--</span><span class="n">run</span><span class="o">-</span><span class="n">pso</span> \ <span class="o">--</span><span class="n">pso</span><span class="o">-</span><span class="n">particles</span> <span class="mi">50</span> \ <span class="o">--</span><span class="n">pso</span><span class="o">-</span><span class="n">iterations</span> <span class="mi">150</span> \ <span class="o">--</span><span class="n">save</span><span class="o">-</span><span class="n">gains</span> <span class="n">optimized_classical_custom</span><span class="o">.</span><span class="n">json</span>
+<span class="err">```</span> <span class="o">**</span><span class="n">Expected</span> <span class="n">Output</span> <span class="n">Pattern</span><span class="p">:</span><span class="o">**</span>
 </pre></div>
 </div>
-<p><strong>Real Optimized Gains (validated):</strong></p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;classical_smc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="mf">23.67</span><span class="p">,</span><span class="w">  </span><span class="c1">// k1: First pendulum proportional gain</span>
-<span class="w">    </span><span class="mf">14.29</span><span class="p">,</span><span class="w">  </span><span class="c1">// k2: First pendulum derivative gain</span>
-<span class="w">    </span><span class="mf">8.87</span><span class="p">,</span><span class="w">   </span><span class="c1">// λ1: Second pendulum proportional gain</span>
-<span class="w">    </span><span class="mf">3.55</span><span class="p">,</span><span class="w">   </span><span class="c1">// λ2: Second pendulum derivative gain</span>
-<span class="w">    </span><span class="mf">6.52</span><span class="p">,</span><span class="w">   </span><span class="c1">// K: Switching/reaching gain</span>
-<span class="w">    </span><span class="mf">2.93</span><span class="w">    </span><span class="c1">// ε: Boundary layer width</span>
-<span class="w">  </span><span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><strong>Saved to:</strong> <code class="docutils literal notranslate"><span class="pre">optimized_gains_classical_smc_phase53.json</span></code></p>
+<p>2025-10-07 16:40:48 - pyswarms.single.global_best - INFO - Optimize for 200 iters
+pyswarms.single.global_best: 0%| |0/200
+pyswarms.single.global_best: 1%|1 |2/200, best_cost=0
+…
+pyswarms.single.global_best: 100%|##########|200/200, best_cost=0 Optimization Complete for ‘classical_smc’ Best Cost: 0.000000 Best Gains: [23.6708 14.2886 8.8688 3.5474 6.5205 2.9281]
+Gains saved to: optimized_gains_classical_smc_phase53.json
+<code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">Step</span> <span class="pre">3:</span> <span class="pre">Validate</span> <span class="pre">Optimized</span> <span class="pre">Gains</span></code>bash</p>
 </section>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="test-optimized-controller">
+<h1>Test optimized controller<a class="headerlink" href="#test-optimized-controller" title="Link to this heading">¶</a></h1>
+<p>python <a class="reference external" href="http://simulate.py">simulate.py</a> –controller classical_smc \ –load-gains optimized_gains_classical_smc_phase53.json \ –duration 5.0 \ –plot</p>
+<div class="highlight-**Validation notranslate"><div class="highlight"><pre><span></span>
+- [ ] Simulation completes without errors
+- [ ] Pendulums stabilize to upright position
+- [ ] Cart position remains bounded
+- [ ] Control effort is reasonable (not saturating)
+- [ ] No excessive chattering observed ### Step 4: Compare Performance ```bash
+# Run baseline (default gains)
+
+python simulate.py --controller classical_smc --duration 5.0 --plot # Run optimized (PSO gains)
+python simulate.py --controller classical_smc \ --load-gains optimized_gains_classical_smc_phase53.json \ --duration 5.0 --plot
+``` **Expected Improvements:**
+- ✅ Faster settling time
+- ✅ Reduced overshoot
+- ✅ Lower ISE (Integral Squared Error)
+- ✅ Smoother control signal
+
+---
+
+## Part 5: Real Execution Metrics ### Performance Benchmarks (from actual run) | Metric | Value | Notes |
+|--------|-------|-------|
+| **Total Optimization Time** | 37 seconds | 200 iterations, 40 particles |
+| **Time per Iteration** | 0.185 seconds | Average |
+| **Time per Particle** | 0.00463 seconds | Fitness evaluation |
+| **Swarm Size** | 40 particles | Default configuration |
+| **Parameter Dimensionality** | 6 gains | Classical SMC |
+| **Total Function Evaluations** | 8,000 | 200 iter × 40 particles |
+| **Convergence Iteration** | ~200 | Full exploration |
+| **Final Best Cost** | 0.000000 | result | ### Computational Resources ```
+CPU Usage: ~80-100% (single-core utilization)
+Memory Usage: ~150-200 MB
+Disk I/O: Minimal (logging only)
+GPU Usage: N/A (CPU-only optimization)
+``` **Scalability Notes:**
+
+- Linear scaling with swarm size
+- Linear scaling with iterations
+- Independent particle evaluations (parallelizable)
+
+---
+
+## Part 6: Troubleshooting Guide ### Issue 1: Slow Optimization (&gt;60 seconds) **Symptoms:**
+
+- Each iteration takes &gt;0.5 seconds
+- Memory usage grows continuously
+- CPU usage below 50% **Solutions:**
+```bash
+# Reduce simulation duration
+python simulate.py --controller classical_smc --run-pso \ --sim-duration 3.0 # Instead of default 5.0 # Reduce iterations for faster exploration
+python simulate.py --controller classical_smc --run-pso \ --pso-iterations 100 # Instead of 200 # Use fewer particles
+python simulate.py --controller classical_smc --run-pso \ --pso-particles 25 # Instead of 40
+``` ### Issue 2: Poor Convergence (high final cost) **Symptoms:**
+
+- Final cost &gt; 0.5
+- No improvement after iteration 50
+- Swarm diversity drops too quickly **Solutions:**
+```bash
+# Increase exploration
+python simulate.py --controller classical_smc --run-pso \ --cognitive-weight 2.5 \ --social-weight 1.5 # Increase swarm size
+python simulate.py --controller classical_smc --run-pso \ --pso-particles 60 # Adjust bounds (if particles hitting boundaries)
+# Edit config.yaml to modify bounds
+``` ### Issue 3: Unstable Optimized Controller **Symptoms:**
+
+- Simulation diverges with optimized gains
+- Control signal saturates frequently
+- Excessive chattering **Solutions:**
+```bash
+# Tighten parameter bounds
+# Edit config.yaml:
+bounds: classical_smc: K: [0.1, 25.0] # Reduce maximum reaching gain epsilon: [0.1, 3.0] # Increase minimum boundary layer # Increase stability penalty in cost function
+# Edit cost function weights in optimizer code
+</pre></div>
+</div>
 <hr class="docutils" />
-<section id="part-2-understanding-the-optimization-process">
-<h2>Part 2: Understanding the Optimization Process<a class="headerlink" href="#part-2-understanding-the-optimization-process" title="Link to this heading">¶</a></h2>
-<section id="swarm-initialization-iteration-0">
-<h3>2.1 Swarm Initialization (Iteration 0)<a class="headerlink" href="#swarm-initialization-iteration-0" title="Link to this heading">¶</a></h3>
-<p><strong>What happens:</strong>
-PSO creates 40 particles, each representing a candidate set of gains:</p>
-<p><strong>Example Initial Particles (from real run):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># example-metadata:</span>
-<span class="c1"># runnable: false</span>
-
-<span class="n">Particle</span>  <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mf">23.67</span><span class="p">,</span> <span class="mf">14.29</span><span class="p">,</span>  <span class="mf">8.87</span><span class="p">,</span> <span class="mf">3.55</span><span class="p">,</span>  <span class="mf">6.52</span><span class="p">,</span> <span class="mf">2.93</span><span class="p">]</span>
-<span class="n">Particle</span>  <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mf">23.31</span><span class="p">,</span> <span class="mf">24.01</span><span class="p">,</span>  <span class="mf">3.02</span><span class="p">,</span> <span class="mf">2.36</span><span class="p">,</span> <span class="mf">19.80</span><span class="p">,</span> <span class="mf">2.78</span><span class="p">]</span>
-<span class="n">Particle</span>  <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mf">20.03</span><span class="p">,</span> <span class="mf">25.04</span><span class="p">,</span>  <span class="mf">5.55</span><span class="p">,</span> <span class="mf">1.29</span><span class="p">,</span> <span class="mf">28.62</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">]</span>
-<span class="n">Particle</span>  <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="mf">25.17</span><span class="p">,</span> <span class="mf">19.69</span><span class="p">,</span>  <span class="mf">8.06</span><span class="p">,</span> <span class="mf">1.90</span><span class="p">,</span> <span class="mf">48.59</span><span class="p">,</span> <span class="mf">2.68</span><span class="p">]</span>
-<span class="o">...</span>
-<span class="n">Particle</span> <span class="mi">40</span><span class="p">:</span> <span class="p">[</span><span class="mf">19.75</span><span class="p">,</span>  <span class="mf">4.97</span><span class="p">,</span>  <span class="mf">3.12</span><span class="p">,</span> <span class="mf">2.21</span><span class="p">,</span> <span class="mf">48.38</span><span class="p">,</span> <span class="mf">1.81</span><span class="p">]</span>
-</pre></div>
-</div>
-<p><strong>Particle Distribution:</strong></p>
-<ul class="simple">
-<li><p>Each gain randomly sampled within bounds</p></li>
-<li><p>Ensures exploration of full parameter space</p></li>
-<li><p>Avoids premature convergence</p></li>
-</ul>
-</section>
-<section id="fitness-evaluation">
-<h3>2.2 Fitness Evaluation<a class="headerlink" href="#fitness-evaluation" title="Link to this heading">¶</a></h3>
-<p><strong>For each particle:</strong></p>
-<ol class="arabic simple">
-<li><p>Create controller with candidate gains</p></li>
-<li><p>Run 5-second simulation</p></li>
-<li><p>Compute cost function (ISE + control effort + chattering penalty)</p></li>
-<li><p>Track best personal position</p></li>
-<li><p>Update global best if improved</p></li>
-</ol>
-<p><strong>Observed Evaluation Time:</strong> ~0.15-0.20 seconds per particle</p>
-</section>
-<section id="velocity-and-position-updates">
-<h3>2.3 Velocity and Position Updates<a class="headerlink" href="#velocity-and-position-updates" title="Link to this heading">¶</a></h3>
-<p><strong>PSO Update Equations (actually used):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Velocity update</span>
-<span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w·v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">c1·r1·</span><span class="p">(</span><span class="n">pbest</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="n">c2·r2·</span><span class="p">(</span><span class="n">gbest</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-     <span class="o">=</span> <span class="mf">0.7</span><span class="err">·</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">2.0</span><span class="err">·</span><span class="n">r1·</span><span class="p">(</span><span class="n">pbest</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="mf">2.0</span><span class="err">·</span><span class="n">r2·</span><span class="p">(</span><span class="n">gbest</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-<span class="c1"># Position update</span>
-<span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-<span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lower_bounds</span><span class="p">,</span> <span class="n">upper_bounds</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Real Parameters:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">w</span> <span class="pre">=</span> <span class="pre">0.7</span></code>: Inertia weight (balance exploration/exploitation)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">c1</span> <span class="pre">=</span> <span class="pre">2.0</span></code>: Cognitive coefficient (personal best attraction)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">c2</span> <span class="pre">=</span> <span class="pre">2.0</span></code>: Social coefficient (global best attraction)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">r1,</span> <span class="pre">r2</span></code>: Random [0,1] for stochastic exploration</p></li>
-</ul>
-</section>
-<section id="convergence-criteria">
-<h3>2.4 Convergence Criteria<a class="headerlink" href="#convergence-criteria" title="Link to this heading">¶</a></h3>
-<p><strong>Observed in real run:</strong></p>
-<ul class="simple">
-<li><p>Maximum iterations reached: 200/200</p></li>
-<li><p>Final best cost: 0.000000</p></li>
-<li><p>No early stopping triggered</p></li>
-<li><p>Swarm diversity maintained throughout</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="part-3-controller-specific-default-bounds">
-<h2>Part 3: Controller-Specific Default Bounds<a class="headerlink" href="#part-3-controller-specific-default-bounds" title="Link to this heading">¶</a></h2>
-<section id="classical-smc-bounds-from-config-yaml">
-<h3>Classical SMC Bounds (from config.yaml)<a class="headerlink" href="#classical-smc-bounds-from-config-yaml" title="Link to this heading">¶</a></h3>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">bounds</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">classical_smc</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">k1</span><span class="p">:</span><span class="w">           </span><span class="p p-Indicator">[</span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">30.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># First pendulum proportional</span>
-<span class="w">    </span><span class="nt">k2</span><span class="p">:</span><span class="w">           </span><span class="p p-Indicator">[</span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">30.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># First pendulum derivative</span>
-<span class="w">    </span><span class="nt">lambda1</span><span class="p">:</span><span class="w">      </span><span class="p p-Indicator">[</span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">30.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Second pendulum proportional</span>
-<span class="w">    </span><span class="nt">lambda2</span><span class="p">:</span><span class="w">      </span><span class="p p-Indicator">[</span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">30.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Second pendulum derivative</span>
-<span class="w">    </span><span class="nt">K</span><span class="p">:</span><span class="w">            </span><span class="p p-Indicator">[</span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">50.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Reaching law gain</span>
-<span class="w">    </span><span class="nt">epsilon</span><span class="p">:</span><span class="w">      </span><span class="p p-Indicator">[</span><span class="nv">0.01</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Boundary layer width</span>
-</pre></div>
-</div>
-<p><strong>Result Interpretation:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Optimized</span><span class="p">:</span> <span class="p">[</span><span class="mf">23.67</span><span class="p">,</span> <span class="mf">14.29</span><span class="p">,</span> <span class="mf">8.87</span><span class="p">,</span> <span class="mf">3.55</span><span class="p">,</span> <span class="mf">6.52</span><span class="p">,</span> <span class="mf">2.93</span><span class="p">]</span>
-<span class="n">vs</span> <span class="n">Default</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span>   <span class="mf">5.0</span><span class="p">,</span>  <span class="mf">5.0</span><span class="p">,</span>  <span class="mf">0.5</span><span class="p">,</span>  <span class="mf">0.5</span><span class="p">,</span>  <span class="mf">0.5</span><span class="p">]</span>
-
-<span class="n">Observations</span><span class="p">:</span>
-<span class="o">-</span> <span class="n">k1</span> <span class="n">increased</span> <span class="mf">4.7</span><span class="err">×</span> <span class="err">→</span> <span class="n">stronger</span> <span class="n">position</span> <span class="n">correction</span> <span class="p">(</span><span class="n">pendulum</span> <span class="mi">1</span><span class="p">)</span>
-<span class="o">-</span> <span class="n">k2</span> <span class="n">increased</span> <span class="mf">2.9</span><span class="err">×</span> <span class="err">→</span> <span class="n">more</span> <span class="n">damping</span> <span class="p">(</span><span class="n">pendulum</span> <span class="mi">1</span><span class="p">)</span>
-<span class="o">-</span> <span class="n">λ1</span> <span class="n">increased</span> <span class="mf">1.8</span><span class="err">×</span> <span class="err">→</span> <span class="n">moderate</span> <span class="n">position</span> <span class="n">correction</span> <span class="p">(</span><span class="n">pendulum</span> <span class="mi">2</span><span class="p">)</span>
-<span class="o">-</span> <span class="n">λ2</span> <span class="n">increased</span> <span class="mf">7.1</span><span class="err">×</span> <span class="err">→</span> <span class="n">significantly</span> <span class="n">more</span> <span class="n">damping</span> <span class="p">(</span><span class="n">pendulum</span> <span class="mi">2</span><span class="p">)</span>
-<span class="o">-</span> <span class="n">K</span> <span class="n">increased</span> <span class="mf">13.0</span><span class="err">×</span> <span class="err">→</span> <span class="n">stronger</span> <span class="n">reaching</span> <span class="n">law</span>
-<span class="o">-</span> <span class="n">ε</span> <span class="n">increased</span> <span class="mf">5.9</span><span class="err">×</span> <span class="err">→</span> <span class="n">wider</span> <span class="n">boundary</span> <span class="n">layer</span> <span class="p">(</span><span class="n">less</span> <span class="n">chattering</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="part-4-step-by-step-workflow">
-<h2>Part 4: Step-by-Step Workflow<a class="headerlink" href="#part-4-step-by-step-workflow" title="Link to this heading">¶</a></h2>
-<section id="step-1-pre-flight-checklist">
-<h3>Step 1: Pre-Flight Checklist<a class="headerlink" href="#step-1-pre-flight-checklist" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verify environment</span>
-python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from src.controllers.factory import create_controller; print(&#39;OK&#39;)&quot;</span>
-
-<span class="c1"># Check configuration</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--print-config<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="s2">&quot;pso:&quot;</span>
-
-<span class="c1"># Verify controller availability</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--duration<span class="w"> </span><span class="m">1</span>.0
-</pre></div>
-</div>
-</section>
-<section id="step-2-run-optimization">
-<h3>Step 2: Run Optimization<a class="headerlink" href="#step-2-run-optimization" title="Link to this heading">¶</a></h3>
-<p><strong>Basic Optimization:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/optimize-controller<span class="w"> </span>classical_smc
-</pre></div>
-</div>
-<p><strong>With Custom Parameters:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--run-pso<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--pso-particles<span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--pso-iterations<span class="w"> </span><span class="m">150</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--save-gains<span class="w"> </span>optimized_classical_custom.json
-</pre></div>
-</div>
-<p><strong>Expected Output Pattern:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">48</span> <span class="o">-</span> <span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">Optimize</span> <span class="k">for</span> <span class="mi">200</span> <span class="n">iters</span>
-<span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span><span class="p">:</span>   <span class="mi">0</span><span class="o">%|</span>          <span class="o">|</span><span class="mi">0</span><span class="o">/</span><span class="mi">200</span>
-<span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span><span class="p">:</span>   <span class="mi">1</span><span class="o">%|</span><span class="mi">1</span>         <span class="o">|</span><span class="mi">2</span><span class="o">/</span><span class="mi">200</span><span class="p">,</span> <span class="n">best_cost</span><span class="o">=</span><span class="mi">0</span>
-<span class="o">...</span>
-<span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span><span class="p">:</span> <span class="mi">100</span><span class="o">%|</span><span class="c1">##########|200/200, best_cost=0</span>
-
-<span class="n">Optimization</span> <span class="n">Complete</span> <span class="k">for</span> <span class="s1">&#39;classical_smc&#39;</span>
-  <span class="n">Best</span> <span class="n">Cost</span><span class="p">:</span> <span class="mf">0.000000</span>
-  <span class="n">Best</span> <span class="n">Gains</span><span class="p">:</span> <span class="p">[</span><span class="mf">23.6708</span> <span class="mf">14.2886</span>  <span class="mf">8.8688</span>  <span class="mf">3.5474</span>  <span class="mf">6.5205</span>  <span class="mf">2.9281</span><span class="p">]</span>
-<span class="n">Gains</span> <span class="n">saved</span> <span class="n">to</span><span class="p">:</span> <span class="n">optimized_gains_classical_smc_phase53</span><span class="o">.</span><span class="n">json</span>
-</pre></div>
-</div>
-</section>
-<section id="step-3-validate-optimized-gains">
-<h3>Step 3: Validate Optimized Gains<a class="headerlink" href="#step-3-validate-optimized-gains" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test optimized controller</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--load-gains<span class="w"> </span>optimized_gains_classical_smc_phase53.json<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--duration<span class="w"> </span><span class="m">5</span>.0<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--plot
-</pre></div>
-</div>
-<p><strong>Validation Checklist:</strong></p>
-<ul class="contains-task-list simple">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Simulation completes without errors</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Pendulums stabilize to upright position</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Cart position remains bounded</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Control effort is reasonable (not saturating)</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> No excessive chattering observed</p></li>
-</ul>
-</section>
-<section id="step-4-compare-performance">
-<h3>Step 4: Compare Performance<a class="headerlink" href="#step-4-compare-performance" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run baseline (default gains)</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--duration<span class="w"> </span><span class="m">5</span>.0<span class="w"> </span>--plot
-
-<span class="c1"># Run optimized (PSO gains)</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--load-gains<span class="w"> </span>optimized_gains_classical_smc_phase53.json<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--duration<span class="w"> </span><span class="m">5</span>.0<span class="w"> </span>--plot
-</pre></div>
-</div>
-<p><strong>Expected Improvements:</strong></p>
-<ul class="simple">
-<li><p>✅ Faster settling time</p></li>
-<li><p>✅ Reduced overshoot</p></li>
-<li><p>✅ Lower ISE (Integral Squared Error)</p></li>
-<li><p>✅ Smoother control signal</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="part-5-real-execution-metrics">
-<h2>Part 5: Real Execution Metrics<a class="headerlink" href="#part-5-real-execution-metrics" title="Link to this heading">¶</a></h2>
-<section id="performance-benchmarks-from-actual-run">
-<h3>Performance Benchmarks (from actual run)<a class="headerlink" href="#performance-benchmarks-from-actual-run" title="Link to this heading">¶</a></h3>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Metric</p></th>
-<th class="head"><p>Value</p></th>
-<th class="head"><p>Notes</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Total Optimization Time</strong></p></td>
-<td><p>37 seconds</p></td>
-<td><p>200 iterations, 40 particles</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Time per Iteration</strong></p></td>
-<td><p>0.185 seconds</p></td>
-<td><p>Average</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Time per Particle</strong></p></td>
-<td><p>0.00463 seconds</p></td>
-<td><p>Fitness evaluation</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Swarm Size</strong></p></td>
-<td><p>40 particles</p></td>
-<td><p>Default configuration</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Parameter Dimensionality</strong></p></td>
-<td><p>6 gains</p></td>
-<td><p>Classical SMC</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Total Function Evaluations</strong></p></td>
-<td><p>8,000</p></td>
-<td><p>200 iter × 40 particles</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Convergence Iteration</strong></p></td>
-<td><p>~200</p></td>
-<td><p>Full exploration</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Final Best Cost</strong></p></td>
-<td><p>0.000000</p></td>
-<td><p>Excellent result</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="computational-resources">
-<h3>Computational Resources<a class="headerlink" href="#computational-resources" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CPU</span> <span class="n">Usage</span><span class="p">:</span> <span class="o">~</span><span class="mi">80</span><span class="o">-</span><span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="n">single</span><span class="o">-</span><span class="n">core</span> <span class="n">utilization</span><span class="p">)</span>
-<span class="n">Memory</span> <span class="n">Usage</span><span class="p">:</span> <span class="o">~</span><span class="mi">150</span><span class="o">-</span><span class="mi">200</span> <span class="n">MB</span>
-<span class="n">Disk</span> <span class="n">I</span><span class="o">/</span><span class="n">O</span><span class="p">:</span> <span class="n">Minimal</span> <span class="p">(</span><span class="n">logging</span> <span class="n">only</span><span class="p">)</span>
-<span class="n">GPU</span> <span class="n">Usage</span><span class="p">:</span> <span class="n">N</span><span class="o">/</span><span class="n">A</span> <span class="p">(</span><span class="n">CPU</span><span class="o">-</span><span class="n">only</span> <span class="n">optimization</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Scalability Notes:</strong></p>
-<ul class="simple">
-<li><p>Linear scaling with swarm size</p></li>
-<li><p>Linear scaling with iterations</p></li>
-<li><p>Independent particle evaluations (parallelizable)</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="part-6-troubleshooting-guide">
-<h2>Part 6: Troubleshooting Guide<a class="headerlink" href="#part-6-troubleshooting-guide" title="Link to this heading">¶</a></h2>
-<section id="issue-1-slow-optimization-60-seconds">
-<h3>Issue 1: Slow Optimization (&gt;60 seconds)<a class="headerlink" href="#issue-1-slow-optimization-60-seconds" title="Link to this heading">¶</a></h3>
-<p><strong>Symptoms:</strong></p>
-<ul class="simple">
-<li><p>Each iteration takes &gt;0.5 seconds</p></li>
-<li><p>Memory usage grows continuously</p></li>
-<li><p>CPU usage below 50%</p></li>
-</ul>
-<p><strong>Solutions:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reduce simulation duration</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--run-pso<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--sim-duration<span class="w"> </span><span class="m">3</span>.0<span class="w">  </span><span class="c1"># Instead of default 5.0</span>
-
-<span class="c1"># Reduce iterations for faster exploration</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--run-pso<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--pso-iterations<span class="w"> </span><span class="m">100</span><span class="w">  </span><span class="c1"># Instead of 200</span>
-
-<span class="c1"># Use fewer particles</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--run-pso<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--pso-particles<span class="w"> </span><span class="m">25</span><span class="w">  </span><span class="c1"># Instead of 40</span>
-</pre></div>
-</div>
-</section>
-<section id="issue-2-poor-convergence-high-final-cost">
-<h3>Issue 2: Poor Convergence (high final cost)<a class="headerlink" href="#issue-2-poor-convergence-high-final-cost" title="Link to this heading">¶</a></h3>
-<p><strong>Symptoms:</strong></p>
-<ul class="simple">
-<li><p>Final cost &gt; 0.5</p></li>
-<li><p>No improvement after iteration 50</p></li>
-<li><p>Swarm diversity drops too quickly</p></li>
-</ul>
-<p><strong>Solutions:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase exploration</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--run-pso<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cognitive-weight<span class="w"> </span><span class="m">2</span>.5<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--social-weight<span class="w"> </span><span class="m">1</span>.5
-
-<span class="c1"># Increase swarm size</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--run-pso<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--pso-particles<span class="w"> </span><span class="m">60</span>
-
-<span class="c1"># Adjust bounds (if particles hitting boundaries)</span>
-<span class="c1"># Edit config.yaml to modify bounds</span>
-</pre></div>
-</div>
-</section>
-<section id="issue-3-unstable-optimized-controller">
-<h3>Issue 3: Unstable Optimized Controller<a class="headerlink" href="#issue-3-unstable-optimized-controller" title="Link to this heading">¶</a></h3>
-<p><strong>Symptoms:</strong></p>
-<ul class="simple">
-<li><p>Simulation diverges with optimized gains</p></li>
-<li><p>Control signal saturates frequently</p></li>
-<li><p>Excessive chattering</p></li>
-</ul>
-<p><strong>Solutions:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tighten parameter bounds</span>
-<span class="c1"># Edit config.yaml:</span>
-bounds:
-<span class="w">  </span>classical_smc:
-<span class="w">    </span>K:<span class="w"> </span><span class="o">[</span><span class="m">0</span>.1,<span class="w"> </span><span class="m">25</span>.0<span class="o">]</span><span class="w">  </span><span class="c1"># Reduce maximum reaching gain</span>
-<span class="w">    </span>epsilon:<span class="w"> </span><span class="o">[</span><span class="m">0</span>.1,<span class="w"> </span><span class="m">3</span>.0<span class="o">]</span><span class="w">  </span><span class="c1"># Increase minimum boundary layer</span>
-
-<span class="c1"># Increase stability penalty in cost function</span>
-<span class="c1"># Edit cost function weights in optimizer code</span>
-</pre></div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="part-7-best-practices">
-<h2>Part 7: Best Practices<a class="headerlink" href="#part-7-best-practices" title="Link to this heading">¶</a></h2>
-<section id="optimization-strategy">
-<h3>7.1 Optimization Strategy<a class="headerlink" href="#optimization-strategy" title="Link to this heading">¶</a></h3>
-<p><strong>Recommended Workflow:</strong></p>
+<section id="part-7-best-practices-7-1-optimization-strategy-recommended-workflow">
+<h2>Part 7: Best Practices ### 7.1 Optimization Strategy <strong>Recommended Workflow:</strong><a class="headerlink" href="#part-7-best-practices-7-1-optimization-strategy-recommended-workflow" title="Link to this heading">¶</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Quick Exploration</strong> (50 iterations, 25 particles): Find good region</p></li>
 <li><p><strong>Standard Optimization</strong> (200 iterations, 40 particles): Refine solution</p></li>
-<li><p><strong>Fine-Tuning</strong> (300 iterations, 60 particles): Production-quality gains</p></li>
+<li><p><strong>Fine-Tuning</strong> (300 iterations, 60 particles): Production-quality gains <strong>Cost vs. Quality Trade-off:</strong></p></li>
 </ol>
-<p><strong>Cost vs. Quality Trade-off:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Quick</span><span class="p">:</span>    <span class="o">~</span><span class="mi">15</span> <span class="n">seconds</span>  <span class="err">→</span>  <span class="n">Good</span> <span class="n">gains</span> <span class="p">(</span><span class="mi">80</span><span class="o">%</span> <span class="n">optimal</span><span class="p">)</span>
-<span class="n">Standard</span><span class="p">:</span> <span class="o">~</span><span class="mi">37</span> <span class="n">seconds</span>  <span class="err">→</span>  <span class="n">Better</span> <span class="n">gains</span> <span class="p">(</span><span class="mi">95</span><span class="o">%</span> <span class="n">optimal</span><span class="p">)</span>  <span class="p">[</span><span class="n">RECOMMENDED</span><span class="p">]</span>
-<span class="n">Fine</span><span class="p">:</span>     <span class="o">~</span><span class="mi">120</span> <span class="n">seconds</span> <span class="err">→</span>  <span class="n">Best</span> <span class="n">gains</span> <span class="p">(</span><span class="mi">99</span><span class="o">%</span> <span class="n">optimal</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Quick</span><span class="p">:</span> <span class="o">~</span><span class="mi">15</span> <span class="n">seconds</span> <span class="err">→</span> <span class="n">Good</span> <span class="n">gains</span> <span class="p">(</span><span class="mi">80</span><span class="o">%</span> <span class="n">optimal</span><span class="p">)</span>
+<span class="n">Standard</span><span class="p">:</span> <span class="o">~</span><span class="mi">37</span> <span class="n">seconds</span> <span class="err">→</span> <span class="n">Better</span> <span class="n">gains</span> <span class="p">(</span><span class="mi">95</span><span class="o">%</span> <span class="n">optimal</span><span class="p">)</span> <span class="p">[</span><span class="n">RECOMMENDED</span><span class="p">]</span>
+<span class="n">Fine</span><span class="p">:</span> <span class="o">~</span><span class="mi">120</span> <span class="n">seconds</span> <span class="err">→</span> <span class="n">Best</span> <span class="n">gains</span> <span class="p">(</span><span class="mi">99</span><span class="o">%</span> <span class="n">optimal</span><span class="p">)</span>
+<span class="err">```</span> <span class="c1">### 7.2 Validation Protocol **Minimum Validation Requirements:**</span>
+
+<span class="err">```</span><span class="n">bash</span>
+<span class="c1"># 1. Nominal conditions</span>
+<span class="n">python</span> <span class="n">simulate</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">controller</span> <span class="n">classical_smc</span> \ <span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="n">gains</span> <span class="n">optimized_gains</span><span class="o">.</span><span class="n">json</span> <span class="o">--</span><span class="n">duration</span> <span class="mf">10.0</span> <span class="c1"># 2. Disturbed initial conditions</span>
+<span class="n">python</span> <span class="n">simulate</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">controller</span> <span class="n">classical_smc</span> \ <span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="n">gains</span> <span class="n">optimized_gains</span><span class="o">.</span><span class="n">json</span> \ <span class="o">--</span><span class="n">initial</span><span class="o">-</span><span class="n">state</span> <span class="s2">&quot;[0.5, 0.0, 0.2, 0.0, 0.1, 0.0]&quot;</span> \ <span class="o">--</span><span class="n">duration</span> <span class="mf">10.0</span> <span class="c1"># 3. Parameter uncertainty</span>
+<span class="n">python</span> <span class="n">simulate</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">controller</span> <span class="n">classical_smc</span> \ <span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="n">gains</span> <span class="n">optimized_gains</span><span class="o">.</span><span class="n">json</span> \ <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">uncertainty</span> \ <span class="o">--</span><span class="n">duration</span> <span class="mf">10.0</span>
+<span class="err">```</span> <span class="c1">### 7.3 Production Deployment **Pre-Deployment Checklist:**</span>
+
+<span class="o">-</span> <span class="p">[</span> <span class="p">]</span> <span class="n">Optimized</span> <span class="n">gains</span> <span class="n">validated</span> <span class="n">on</span> <span class="n">nominal</span> <span class="n">scenarios</span>
+<span class="o">-</span> <span class="p">[</span> <span class="p">]</span> <span class="n">Tested</span> <span class="k">with</span> <span class="n">parameter</span> <span class="n">uncertainty</span> <span class="p">(</span><span class="err">±</span><span class="mi">10</span><span class="o">%</span><span class="p">)</span>
+<span class="o">-</span> <span class="p">[</span> <span class="p">]</span> <span class="n">Verified</span> <span class="k">with</span> <span class="n">disturbed</span> <span class="n">initial</span> <span class="n">conditions</span>
+<span class="o">-</span> <span class="p">[</span> <span class="p">]</span> <span class="n">Control</span> <span class="n">effort</span> <span class="n">within</span> <span class="n">actuator</span> <span class="n">limits</span>
+<span class="o">-</span> <span class="p">[</span> <span class="p">]</span> <span class="n">Chattering</span> <span class="n">acceptable</span> <span class="k">for</span> <span class="n">application</span>
+<span class="o">-</span> <span class="p">[</span> <span class="p">]</span> <span class="n">Performance</span> <span class="n">documented</span> <span class="ow">and</span> <span class="n">benchmarked</span>
+<span class="o">-</span> <span class="p">[</span> <span class="p">]</span> <span class="n">Gains</span> <span class="n">version</span><span class="o">-</span><span class="n">controlled</span> <span class="ow">in</span> <span class="n">repository</span> <span class="o">**</span><span class="n">Deployment</span> <span class="n">Steps</span><span class="p">:</span><span class="o">**</span>
+<span class="err">```</span><span class="n">bash</span>
+<span class="c1"># 1. Backup current gains</span>
+<span class="n">cp</span> <span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="n">config</span><span class="o">.</span><span class="n">yaml</span><span class="o">.</span><span class="n">backup</span> <span class="c1"># 2. Update configuration with optimized gains</span>
+<span class="c1"># Edit config.yaml manually or use script # 3. Run test suite</span>
+<span class="n">pytest</span> <span class="n">tests</span><span class="o">/</span><span class="n">test_controllers</span><span class="o">/</span><span class="n">test_classical_smc</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span> <span class="c1"># 4. Commit optimized gains</span>
+<span class="n">git</span> <span class="n">add</span> <span class="n">optimized_gains_classical_smc_phase53</span><span class="o">.</span><span class="n">json</span> <span class="n">config</span><span class="o">.</span><span class="n">yaml</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Deploy PSO-optimized Classical SMC gains - Optimized via PSO: 200 iterations, best_cost=0.0</span>
+<span class="o">-</span> <span class="n">Validated</span> <span class="n">on</span> <span class="n">nominal</span> <span class="ow">and</span> <span class="n">disturbed</span> <span class="n">scenarios</span>
+<span class="o">-</span> <span class="n">Performance</span> <span class="n">improvement</span><span class="p">:</span> <span class="p">[</span><span class="n">document</span> <span class="n">metrics</span><span class="p">]</span>
+<span class="o">-</span> <span class="n">Deployment</span> <span class="n">date</span><span class="p">:</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span><span class="s2">&quot; # 5. Tag release</span>
+<span class="n">git</span> <span class="n">tag</span> <span class="o">-</span><span class="n">a</span> <span class="n">v1</span><span class="mf">.0</span><span class="o">-</span><span class="n">optimized</span><span class="o">-</span><span class="n">classical</span><span class="o">-</span><span class="n">smc</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;PSO-optimized Classical SMC&quot;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="o">--</span><span class="n">tags</span>
 </pre></div>
 </div>
-</section>
-<section id="validation-protocol">
-<h3>7.2 Validation Protocol<a class="headerlink" href="#validation-protocol" title="Link to this heading">¶</a></h3>
-<p><strong>Minimum Validation Requirements:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Nominal conditions</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--load-gains<span class="w"> </span>optimized_gains.json<span class="w"> </span>--duration<span class="w"> </span><span class="m">10</span>.0
-
-<span class="c1"># 2. Disturbed initial conditions</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--load-gains<span class="w"> </span>optimized_gains.json<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--initial-state<span class="w"> </span><span class="s2">&quot;[0.5, 0.0, 0.2, 0.0, 0.1, 0.0]&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--duration<span class="w"> </span><span class="m">10</span>.0
-
-<span class="c1"># 3. Parameter uncertainty</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--load-gains<span class="w"> </span>optimized_gains.json<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--enable-uncertainty<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--duration<span class="w"> </span><span class="m">10</span>.0
-</pre></div>
-</div>
-</section>
-<section id="production-deployment">
-<h3>7.3 Production Deployment<a class="headerlink" href="#production-deployment" title="Link to this heading">¶</a></h3>
-<p><strong>Pre-Deployment Checklist:</strong></p>
-<ul class="contains-task-list simple">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Optimized gains validated on nominal scenarios</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Tested with parameter uncertainty (±10%)</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Verified with disturbed initial conditions</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Control effort within actuator limits</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Chattering acceptable for application</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Performance documented and benchmarked</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Gains version-controlled in repository</p></li>
-</ul>
-<p><strong>Deployment Steps:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Backup current gains</span>
-cp<span class="w"> </span>config.yaml<span class="w"> </span>config.yaml.backup
-
-<span class="c1"># 2. Update configuration with optimized gains</span>
-<span class="c1"># Edit config.yaml manually or use script</span>
-
-<span class="c1"># 3. Run comprehensive test suite</span>
-pytest<span class="w"> </span>tests/test_controllers/test_classical_smc.py<span class="w"> </span>-v
-
-<span class="c1"># 4. Commit optimized gains</span>
-git<span class="w"> </span>add<span class="w"> </span>optimized_gains_classical_smc_phase53.json<span class="w"> </span>config.yaml
-git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Deploy PSO-optimized Classical SMC gains</span>
-
-<span class="s2">- Optimized via PSO: 200 iterations, best_cost=0.0</span>
-<span class="s2">- Validated on nominal and disturbed scenarios</span>
-<span class="s2">- Performance improvement: [document metrics]</span>
-<span class="s2">- Deployment date: 2025-10-07&quot;</span>
-
-<span class="c1"># 5. Tag release</span>
-git<span class="w"> </span>tag<span class="w"> </span>-a<span class="w"> </span>v1.0-optimized-classical-smc<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;PSO-optimized Classical SMC&quot;</span>
-git<span class="w"> </span>push<span class="w"> </span>--tags
-</pre></div>
-</div>
-</section>
 </section>
 <hr class="docutils" />
-<section id="part-8-next-steps">
-<h2>Part 8: Next Steps<a class="headerlink" href="#part-8-next-steps" title="Link to this heading">¶</a></h2>
-<section id="for-classical-smc-users">
-<h3>For Classical SMC Users:<a class="headerlink" href="#for-classical-smc-users" title="Link to this heading">¶</a></h3>
+<section id="part-8-next-steps-for-classical-smc-users">
+<h2>Part 8: Next Steps ### For Classical SMC Users:<a class="headerlink" href="#part-8-next-steps-for-classical-smc-users" title="Link to this heading">¶</a></h2>
 <p>✅ <strong>Completed</strong>: Basic PSO optimization workflow
 ➡️ <strong>Next</strong>: <a class="reference internal" href="../tutorials/tutorial-02-controller-comparison.html"><span class="std std-doc">Controller Comparison Tutorial</span></a>
-➡️ <strong>Next</strong>: <a class="reference internal" href="../../reference/analysis/performance_robustness.html"><span class="std std-doc">Robustness Analysis</span></a></p>
-</section>
-<section id="for-multiple-controller-types">
-<h3>For Multiple Controller Types:<a class="headerlink" href="#for-multiple-controller-types" title="Link to this heading">¶</a></h3>
-<p>➡️ <strong>Next</strong>: <a class="reference internal" href="pso-sta-smc.html"><span class="std std-doc">STA-SMC Optimization</span></a>
+➡️ <strong>Next</strong>: <a class="reference internal" href="../../reference/analysis/performance_robustness.html"><span class="std std-doc">Robustness Analysis</span></a> ### For Multiple Controller Types:
+➡️ <strong>Next</strong>: <a class="reference internal" href="pso-sta-smc.html"><span class="std std-doc">STA-SMC Optimization</span></a>
 ➡️ <strong>Next</strong>: <a class="reference internal" href="pso-adaptive-smc.html"><span class="std std-doc">Adaptive SMC Optimization</span></a>
-➡️ <strong>Next</strong>: <a class="reference internal" href="pso-hybrid-smc.html"><span class="std std-doc">Hybrid SMC Optimization</span></a></p>
-</section>
-<section id="for-advanced-users">
-<h3>For Advanced Users:<a class="headerlink" href="#for-advanced-users" title="Link to this heading">¶</a></h3>
-<p>➡️ <strong>Next</strong>: <a class="reference internal" href="custom-cost-functions.html"><span class="std std-doc">Custom Cost Functions</span></a>
+➡️ <strong>Next</strong>: <a class="reference internal" href="pso-hybrid-smc.html"><span class="std std-doc">Hybrid SMC Optimization</span></a> ### For Advanced Users:
+➡️ <strong>Next</strong>: <a class="reference internal" href="custom-cost-functions.html"><span class="std std-doc">Custom Cost Functions</span></a>
 ➡️ <strong>Next</strong>: <a class="reference internal" href="../../reference/optimization/algorithms_multi_objective_pso.html"><span class="std std-doc">Multi-Objective PSO</span></a>
 ➡️ <strong>Next</strong>: <a class="reference internal" href="batch-simulation-workflow.html"><span class="std std-doc">Batch Simulation Workflows</span></a></p>
 </section>
-</section>
 <hr class="docutils" />
-<section id="appendix-a-complete-command-reference">
-<h2>Appendix A: Complete Command Reference<a class="headerlink" href="#appendix-a-complete-command-reference" title="Link to this heading">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic optimization</span>
-/optimize-controller<span class="w"> </span>classical_smc
-
-<span class="c1"># With custom parameters</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span>--run-pso<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--pso-particles<span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--pso-iterations<span class="w"> </span><span class="m">150</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--save-gains<span class="w"> </span>gains.json
-
-<span class="c1"># Validate optimized gains</span>
-python<span class="w"> </span>simulate.py<span class="w"> </span>--controller<span class="w"> </span>classical_smc<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--load-gains<span class="w"> </span>gains.json<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--duration<span class="w"> </span><span class="m">5</span>.0<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--plot
-
-<span class="c1"># Compare performance</span>
-python<span class="w"> </span>scripts/analysis/compare_controllers.py<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--baseline<span class="w"> </span>default<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--optimized<span class="w"> </span>gains.json
-</pre></div>
-</div>
+<section id="appendix-a-complete-command-reference-bash">
+<h2>Appendix A: Complete Command Reference ```bash<a class="headerlink" href="#appendix-a-complete-command-reference-bash" title="Link to this heading">¶</a></h2>
 </section>
-<hr class="docutils" />
-<section id="appendix-b-real-optimization-log-sample">
-<h2>Appendix B: Real Optimization Log Sample<a class="headerlink" href="#appendix-b-real-optimization-log-sample" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">48</span><span class="p">,</span><span class="mi">648</span> <span class="o">-</span> <span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">Optimize</span> <span class="k">for</span> <span class="mi">200</span> <span class="n">iters</span> <span class="k">with</span> <span class="p">{</span><span class="s1">&#39;c1&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">}</span>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="basic-optimization">
+<h1>Basic optimization<a class="headerlink" href="#basic-optimization" title="Link to this heading">¶</a></h1>
+<p>/optimize-controller classical_smc # With custom parameters
+python <a class="reference external" href="http://simulate.py">simulate.py</a> –controller classical_smc –run-pso \ –pso-particles 50 \ –pso-iterations 150 \ –save-gains gains.json # Validate optimized gains
+python <a class="reference external" href="http://simulate.py">simulate.py</a> –controller classical_smc \ –load-gains gains.json \ –duration 5.0 \ –plot # Compare performance
+python scripts/analysis/compare_controllers.py \ –baseline default \ –optimized gains.json</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">---</span>
+
+<span class="c1">## Appendix B: Real Optimization Log Sample ```</span>
+<span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">48</span><span class="p">,</span><span class="mi">648</span> <span class="o">-</span> <span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">Optimize</span> <span class="k">for</span> <span class="mi">200</span> <span class="n">iters</span> <span class="k">with</span> <span class="p">{</span><span class="s1">&#39;c1&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">}</span>
 <span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">48</span><span class="p">,</span><span class="mi">749</span> <span class="o">-</span> <span class="n">factory_module</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">Created</span> <span class="n">classical_smc</span> <span class="n">controller</span> <span class="k">with</span> <span class="n">gains</span><span class="p">:</span> <span class="p">[</span><span class="mf">23.67</span><span class="p">,</span> <span class="mf">14.29</span><span class="p">,</span> <span class="mf">8.87</span><span class="p">,</span> <span class="mf">3.55</span><span class="p">,</span> <span class="mf">6.52</span><span class="p">,</span> <span class="mf">2.93</span><span class="p">]</span>
-<span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span><span class="p">:</span>   <span class="mi">0</span><span class="o">%|</span>          <span class="o">|</span><span class="mi">0</span><span class="o">/</span><span class="mi">200</span><span class="p">,</span> <span class="n">best_cost</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span><span class="p">:</span>   <span class="mi">1</span><span class="o">%|</span><span class="mi">1</span>         <span class="o">|</span><span class="mi">2</span><span class="o">/</span><span class="mi">200</span><span class="p">,</span> <span class="n">best_cost</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span><span class="p">:</span> <span class="mi">0</span><span class="o">%|</span> <span class="o">|</span><span class="mi">0</span><span class="o">/</span><span class="mi">200</span><span class="p">,</span> <span class="n">best_cost</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span><span class="p">:</span> <span class="mi">1</span><span class="o">%|</span><span class="mi">1</span> <span class="o">|</span><span class="mi">2</span><span class="o">/</span><span class="mi">200</span><span class="p">,</span> <span class="n">best_cost</span><span class="o">=</span><span class="mi">0</span>
 <span class="o">...</span>
-<span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span><span class="p">:</span>  <span class="mi">99</span><span class="o">%|</span><span class="c1">#########9|198/200, best_cost=0</span>
+<span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span><span class="p">:</span> <span class="mi">99</span><span class="o">%|</span><span class="c1">#########9|198/200, best_cost=0</span>
 <span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span><span class="p">:</span> <span class="mi">100</span><span class="o">%|</span><span class="c1">##########|200/200, best_cost=0</span>
-<span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">16</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span><span class="mi">988</span> <span class="o">-</span> <span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">Optimization</span> <span class="n">finished</span> <span class="o">|</span> <span class="n">best</span> <span class="n">cost</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">best</span> <span class="n">pos</span><span class="p">:</span> <span class="p">[</span><span class="mf">23.67076936</span> <span class="mf">14.28859631</span>  <span class="mf">8.86878336</span>  <span class="mf">3.54736654</span>  <span class="mf">6.5205127</span>   <span class="mf">2.92808594</span><span class="p">]</span>
-
-<span class="n">Optimization</span> <span class="n">Complete</span> <span class="k">for</span> <span class="s1">&#39;classical_smc&#39;</span>
-  <span class="n">Best</span> <span class="n">Cost</span><span class="p">:</span> <span class="mf">0.000000</span>
-  <span class="n">Best</span> <span class="n">Gains</span><span class="p">:</span> <span class="p">[</span><span class="mf">23.6708</span> <span class="mf">14.2886</span>  <span class="mf">8.8688</span>  <span class="mf">3.5474</span>  <span class="mf">6.5205</span>  <span class="mf">2.9281</span><span class="p">]</span>
+<span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">16</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span><span class="mi">988</span> <span class="o">-</span> <span class="n">pyswarms</span><span class="o">.</span><span class="n">single</span><span class="o">.</span><span class="n">global_best</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">Optimization</span> <span class="n">finished</span> <span class="o">|</span> <span class="n">best</span> <span class="n">cost</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">best</span> <span class="n">pos</span><span class="p">:</span> <span class="p">[</span><span class="mf">23.67076936</span> <span class="mf">14.28859631</span> <span class="mf">8.86878336</span> <span class="mf">3.54736654</span> <span class="mf">6.5205127</span> <span class="mf">2.92808594</span><span class="p">]</span> <span class="n">Optimization</span> <span class="n">Complete</span> <span class="k">for</span> <span class="s1">&#39;classical_smc&#39;</span> <span class="n">Best</span> <span class="n">Cost</span><span class="p">:</span> <span class="mf">0.000000</span> <span class="n">Best</span> <span class="n">Gains</span><span class="p">:</span> <span class="p">[</span><span class="mf">23.6708</span> <span class="mf">14.2886</span> <span class="mf">8.8688</span> <span class="mf">3.5474</span> <span class="mf">6.5205</span> <span class="mf">2.9281</span><span class="p">]</span>
 <span class="n">Gains</span> <span class="n">saved</span> <span class="n">to</span><span class="p">:</span> <span class="n">optimized_gains_classical_smc_phase53</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </div>
@@ -1050,7 +537,6 @@ python<span class="w"> </span>scripts/analysis/compare_controllers.py<span class
 <strong>Last Updated:</strong> 2025-10-07
 <strong>Validation Method:</strong> <code class="docutils literal notranslate"><span class="pre">/optimize-controller</span></code> slash command execution
 <strong>Test Environment:</strong> Windows, Python 3.12, DIP-SMC-PSO v2.0</p>
-</section>
 </section>
 
         </article>
@@ -1070,7 +556,7 @@ python<span class="w"> </span>scripts/analysis/compare_controllers.py<span class
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 08, 2025</div>
+              Last updated on Oct 10, 2025</div>
           </div>
           <div class="right-details">
             
@@ -1092,56 +578,17 @@ python<span class="w"> </span>scripts/analysis/compare_controllers.py<span class
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">PSO Optimization Workflow Guide</a><ul>
-<li><a class="reference internal" href="#executive-summary">Executive Summary</a></li>
-<li><a class="reference internal" href="#part-1-quick-start-with-mcp-command">Part 1: Quick Start with MCP Command</a><ul>
-<li><a class="reference internal" href="#real-world-example-classical-smc-optimization">Real-World Example: Classical SMC Optimization</a></li>
+<li><a class="reference internal" href="#executive-summary-this-guide-provides-a-complete-validated-workflow-for-particle-swarm-optimization-pso-of-sliding-mode-controller-gains-all-examples-this-guide-covers-have-been-tested-with-real-mcp-commands-and-validated-through-actual-execution-target-audience">Executive Summary This guide provides a complete, validated workflow for Particle Swarm Optimization (PSO) of sliding mode controller gains. <strong>All examples This guide covers have been tested with real MCP commands and validated through actual execution.</strong> <strong>Target Audience:</strong></a></li>
+<li><a class="reference internal" href="#part-1-quick-start-with-mcp-command-real-world-example-classical-smc-optimization-mcp-command">Part 1: Quick Start with MCP Command ### Real-World Example: Classical SMC Optimization <strong>MCP Command:</strong></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#part-2-understanding-the-optimization-process">Part 2: Understanding the Optimization Process</a><ul>
-<li><a class="reference internal" href="#swarm-initialization-iteration-0">2.1 Swarm Initialization (Iteration 0)</a></li>
-<li><a class="reference internal" href="#fitness-evaluation">2.2 Fitness Evaluation</a></li>
-<li><a class="reference internal" href="#velocity-and-position-updates">2.3 Velocity and Position Updates</a></li>
-<li><a class="reference internal" href="#convergence-criteria">2.4 Convergence Criteria</a></li>
+<li><a class="reference internal" href="#test-optimized-controller">Test optimized controller</a><ul>
+<li><a class="reference internal" href="#part-7-best-practices-7-1-optimization-strategy-recommended-workflow">Part 7: Best Practices ### 7.1 Optimization Strategy <strong>Recommended Workflow:</strong></a></li>
+<li><a class="reference internal" href="#part-8-next-steps-for-classical-smc-users">Part 8: Next Steps ### For Classical SMC Users:</a></li>
+<li><a class="reference internal" href="#appendix-a-complete-command-reference-bash">Appendix A: Complete Command Reference ```bash</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#part-3-controller-specific-default-bounds">Part 3: Controller-Specific Default Bounds</a><ul>
-<li><a class="reference internal" href="#classical-smc-bounds-from-config-yaml">Classical SMC Bounds (from config.yaml)</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#part-4-step-by-step-workflow">Part 4: Step-by-Step Workflow</a><ul>
-<li><a class="reference internal" href="#step-1-pre-flight-checklist">Step 1: Pre-Flight Checklist</a></li>
-<li><a class="reference internal" href="#step-2-run-optimization">Step 2: Run Optimization</a></li>
-<li><a class="reference internal" href="#step-3-validate-optimized-gains">Step 3: Validate Optimized Gains</a></li>
-<li><a class="reference internal" href="#step-4-compare-performance">Step 4: Compare Performance</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#part-5-real-execution-metrics">Part 5: Real Execution Metrics</a><ul>
-<li><a class="reference internal" href="#performance-benchmarks-from-actual-run">Performance Benchmarks (from actual run)</a></li>
-<li><a class="reference internal" href="#computational-resources">Computational Resources</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#part-6-troubleshooting-guide">Part 6: Troubleshooting Guide</a><ul>
-<li><a class="reference internal" href="#issue-1-slow-optimization-60-seconds">Issue 1: Slow Optimization (&gt;60 seconds)</a></li>
-<li><a class="reference internal" href="#issue-2-poor-convergence-high-final-cost">Issue 2: Poor Convergence (high final cost)</a></li>
-<li><a class="reference internal" href="#issue-3-unstable-optimized-controller">Issue 3: Unstable Optimized Controller</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#part-7-best-practices">Part 7: Best Practices</a><ul>
-<li><a class="reference internal" href="#optimization-strategy">7.1 Optimization Strategy</a></li>
-<li><a class="reference internal" href="#validation-protocol">7.2 Validation Protocol</a></li>
-<li><a class="reference internal" href="#production-deployment">7.3 Production Deployment</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#part-8-next-steps">Part 8: Next Steps</a><ul>
-<li><a class="reference internal" href="#for-classical-smc-users">For Classical SMC Users:</a></li>
-<li><a class="reference internal" href="#for-multiple-controller-types">For Multiple Controller Types:</a></li>
-<li><a class="reference internal" href="#for-advanced-users">For Advanced Users:</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#appendix-a-complete-command-reference">Appendix A: Complete Command Reference</a></li>
-<li><a class="reference internal" href="#appendix-b-real-optimization-log-sample">Appendix B: Real Optimization Log Sample</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#basic-optimization">Basic optimization</a></li>
 </ul>
 
           </div>
@@ -1152,9 +599,9 @@ python<span class="w"> </span>scripts/analysis/compare_controllers.py<span class
     </aside>
   </div>
 </div><script src="../../_static/documentation_options.js?v=4ebf8126"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=08e7b316"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>

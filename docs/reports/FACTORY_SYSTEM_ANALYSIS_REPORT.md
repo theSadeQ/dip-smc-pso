@@ -87,7 +87,7 @@ control_output = pso_controller.compute_control(state) # Returns np.array
 
 ---
 
-### 🛠️ Integration Quality Assessment #### Simulation Runner Compatibility
+## 🛠️ Integration Quality Assessment #### Simulation Runner Compatibility
 
 - **Interface**: All controllers implement `compute_control(state, last_u, history)`
 - **Output Format**: Structured dictionaries with `'u'` field

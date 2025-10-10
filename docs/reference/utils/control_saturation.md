@@ -16,7 +16,7 @@ in sliding mode controllers.
 :linenos:
 ```
 
----
+
 
 ## Functions
 
@@ -60,7 +60,7 @@ Raises:
 :linenos:
 ```
 
----
+
 
 ### `smooth_sign(x, epsilon)`
 
@@ -81,7 +81,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `dead_zone(x, threshold)`
 
@@ -102,7 +102,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -225,23 +225,26 @@ graph TD
 from src.utils.control import saturate
 
 # Scalar saturation
+
 u = 150.0  # Exceeds limit
 u_sat = saturate(u, u_min=-100.0, u_max=100.0)
 print(f"Saturated: {u} -> {u_sat}")  # 150.0 -> 100.0
 
 # Vector saturation
+
 u_vec = np.array([50, -120, 80])
 u_sat_vec = saturate(u_vec, u_min=-100.0, u_max=100.0)
 print(f"Vector saturation: {u_sat_vec}")  # [50, -100, 80]
 \`\`\`
 
-### Example 2: Smooth Saturation for Chattering Reduction
+## Example 2: Smooth Saturation for Chattering Reduction
 
 \`\`\`python
 from src.utils.control import smooth_sign
 import numpy as np
 
 # SMC with smooth saturation
+
 def smc_with_smooth_saturation(x, sliding_surface, K, epsilon=0.1):
     """SMC using smooth sign function (tanh)."""
     s = sliding_surface(x)
@@ -252,11 +255,13 @@ def smc_with_smooth_saturation(x, sliding_surface, K, epsilon=0.1):
     return u
 
 # Comparison: hard vs smooth
+
 s_values = np.linspace(-1, 1, 100)
 hard_sign = np.sign(s_values)
 smooth = np.array([smooth_sign(s, 0.1) for s in s_values])
 
 # Plot to show smoothness
+
 import matplotlib.pyplot as plt
 plt.plot(s_values, hard_sign, label='Hard sign', linestyle='--')
 plt.plot(s_values, smooth, label='Smooth sign (tanh)')
@@ -267,12 +272,13 @@ plt.grid(True)
 plt.show()
 \`\`\`
 
-### Example 3: Dead Zone for Noise Filtering
+## Example 3: Dead Zone for Noise Filtering
 
 \`\`\`python
 from src.utils.control import dead_zone
 
 # Filter small control signals
+
 u_noisy = np.array([0.05, -0.02, 5.0, -3.0, 0.08])
 threshold = 0.1
 
@@ -281,6 +287,7 @@ print(f"Filtered: {u_filtered}")
 # Result: [0, 0, 4.9, -2.9, 0] (small signals removed)
 
 # Application: PD controller with dead zone
+
 def pd_control_with_dead_zone(x, x_ref, Kp, Kd, dead_zone_threshold):
     error = x_ref - x
     error_dot = -np.gradient(x)  # Simplified
@@ -327,6 +334,7 @@ class PIControllerWithAntiWindup:
         return u_sat
 
 # Use PI with anti-windup
+
 controller = PIControllerWithAntiWindup(Kp=10, Ki=5, u_min=-100, u_max=100)
 
 for k in range(100):
@@ -362,6 +370,7 @@ def monitor_saturation(u_desired, u_min, u_max):
     }
 
 # Track saturation during simulation
+
 saturation_count = 0
 saturation_ratios = []
 
@@ -422,12 +431,13 @@ component = Component(
 
 \`\`\`python
 # Integration example
+
 for k in range(num_steps):
     result = component.process(x)
     x = update(x, result)
 \`\`\`
 
-### Example 4: Performance Optimization
+## Example 4: Performance Optimization
 
 \`\`\`python
 component = Component(enable_caching=True)
@@ -441,4 +451,3 @@ try:
 except ComponentError as e:
     print(f"Error: {e}")
 \`\`\`
-

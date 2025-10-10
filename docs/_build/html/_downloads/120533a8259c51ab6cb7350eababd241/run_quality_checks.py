@@ -68,7 +68,7 @@ class QualityChecker:
             )
             return result.returncode == 0, result.stdout + result.stderr
         except subprocess.TimeoutExpired:
-            return False, f"Command timed out after 60 seconds"
+            return False, "Command timed out after 60 seconds"
         except FileNotFoundError:
             return False, f"Command not found: {cmd[0]}"
         except Exception as e:
@@ -252,7 +252,7 @@ class QualityChecker:
 
         if not blocking and not advisory:
             print(f"{Colors.GREEN}✓ All quality checks passed!{Colors.END}")
-            print(f"\nYou're good to push! 🚀")
+            print("\nYou're good to push! 🚀")
         else:
             if blocking:
                 print(f"{Colors.RED}Blocking Issues ({len(blocking)}):{Colors.END}")

@@ -50,7 +50,7 @@ CONTROLLER_REGISTRY = { 'classical_smc': { 'class': ClassicalSMC, 'config_class'
 
 ---
 
-### 2. Strategy Pattern **Usage:** 13 files
+## 2. Strategy Pattern **Usage:** 13 files
 
 **Core Implementation:** `src/simulation/strategies/monte_carlo.py` #### What It Is The Strategy Pattern defines a family of interchangeable algorithms, encapsulates each one, and makes them interchangeable at runtime. #### Why We Use It Simulation and analysis require different strategies (Monte Carlo, parameter sweep, sensitivity analysis) that share a common interface but implement different algorithms. #### Implementation Example ```python
 # src/simulation/strategies/monte_carlo.py (lines 16-71) from ..core.interfaces import SimulationStrategy class MonteCarloStrategy(SimulationStrategy): """Monte Carlo simulation strategy for statistical analysis.""" def __init__(self, n_samples: int = 1000, parallel: bool = True): self.n_samples = n_samples self.parallel = parallel def analyze(self, simulation_fn: Callable, parameters: Dict[str, Any], **kwargs) -> Dict[str, Any]: """Perform Monte Carlo analysis with parameter distributions.""" param_distributions = parameters.get('distributions', {}) samples = self._generate_samples(param_distributions) if self.parallel: results = self._run_parallel_simulations(simulation_fn, samples) else: results = self._run_sequential_simulations(simulation_fn, samples) return self._analyze_results(results, samples)
@@ -73,7 +73,7 @@ results = strategy.analyze(simulation_fn, parameters)
 
 ---
 
-### 3. Observer Pattern **Usage:** 4 files
+## 3. Observer Pattern **Usage:** 4 files
 **Core Implementation:** `src/interfaces/monitoring/health_monitor.py` #### What It Is The Observer Pattern defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically. #### Why We Use It Real-time monitoring requires decoupled notification of system health changes to multiple observers (loggers, alerting systems, dashboards) without tight coupling. #### Implementation Example ```python
 # example-metadata:
 # runnable: false # src/interfaces/monitoring/health_monitor.py (lines 85-100) @dataclass
@@ -95,7 +95,7 @@ component.update_status(HealthStatus.CRITICAL) # All observers notified
 
 ---
 
-### 4. Adapter Pattern **Usage:** 2 files
+## 4. Adapter Pattern **Usage:** 2 files
 
 **Core Implementation:** `src/analysis/fault_detection/threshold_adapters.py` #### What It Is The Adapter Pattern converts the interface of a class into another interface clients expect, allowing incompatible interfaces to work together. #### Why We Use It Legacy controller interfaces need to work with modern PSO optimization and simulation frameworks without modifying original code. #### Implementation Example ```python
 # example-metadata:
@@ -117,7 +117,7 @@ optimizer.optimize(pso_compatible.compute_control)
 
 ---
 
-### 5. Singleton Pattern **Usage:** 0 files (deliberately avoided) #### Why Not Used While common in many codebases, the Singleton pattern is **deliberately avoided** in this project due to:
+## 5. Singleton Pattern **Usage:** 0 files (deliberately avoided) #### Why Not Used While common in many codebases, the Singleton pattern is **deliberately avoided** in this project due to:
 - ❌ **Testing difficulties:** Global state hinders unit testing
 - ❌ **Thread safety concerns:** Singleton introduces concurrency challenges
 - ❌ **Tight coupling:** Global access creates hidden dependencies **Alternative Approaches:**
@@ -154,7 +154,7 @@ src/controllers/smc/
 
 ---
 
-### 2. Dependency Injection **Source:** *Dependency Injection in .NET* (Seemann, 2011) + Python community practices **Usage:** Throughout codebase, especially controller-dynamics coupling #### What It Is Dependencies are provided to objects from external sources rather than created internally, enabling loose coupling and testability. #### Why We Use It Controllers need plant dynamics models, but hardcoding this coupling would:
+## 2. Dependency Injection **Source:** *Dependency Injection in .NET* (Seemann, 2011) + Python community practices **Usage:** Throughout codebase, especially controller-dynamics coupling #### What It Is Dependencies are provided to objects from external sources rather than created internally, enabling loose coupling and testability. #### Why We Use It Controllers need plant dynamics models, but hardcoding this coupling would:
 
 - ❌ Prevent testing with mock dynamics
 - ❌ Prevent using different dynamics models
@@ -182,7 +182,7 @@ class ClassicalSMC: def __init__(self, gains, dynamics_model=None): # ✅ Inject
 
 ---
 
-### 3. Separation of Concerns **Source:** Dijkstra, E. W. (1982). "On the role of scientific thought." *Selected Writings on Computing: A Personal Perspective.* **Usage:** Clean module boundaries throughout `src/` #### What It Is Different concerns (controller logic, simulation, optimization, analysis) are separated into distinct modules with minimal overlap. #### Directory Structure ```
+## 3. Separation of Concerns **Source:** Dijkstra, E. W. (1982). "On the role of scientific thought." *Selected Writings on Computing: A Personal Perspective.* **Usage:** Clean module boundaries throughout `src/` #### What It Is Different concerns (controller logic, simulation, optimization, analysis) are separated into distinct modules with minimal overlap. #### Directory Structure ```
 src/
 ├── controllers/ # Control algorithms ONLY
 │ ├── smc/ # Sliding mode control
@@ -238,7 +238,7 @@ with memory_tracking(threshold_mb=100.0) as process: # Run memory-intensive oper
 
 ---
 
-### 2. Decorators **Source:** PEP 318 - "Decorators for Functions and Methods" **Usage:** Validation, timing, caching throughout codebase #### Implementation Examples ```python
+## 2. Decorators **Source:** PEP 318 - "Decorators for Functions and Methods" **Usage:** Validation, timing, caching throughout codebase #### Implementation Examples ```python
 
 # example-metadata:
 
@@ -254,7 +254,7 @@ class ClassicalSMC: @validate_gains(n_expected=6) def __init__(self, gains): sel
 
 ---
 
-### 3. Type Hints (PEP 484) **Source:** PEP 484 - "Type Hints" + PEP 526 - "Syntax for Variable Annotations" **Usage:** 95%+ type hint coverage across codebase #### Implementation Example ```python
+## 3. Type Hints (PEP 484) **Source:** PEP 484 - "Type Hints" + PEP 526 - "Syntax for Variable Annotations" **Usage:** 95%+ type hint coverage across codebase #### Implementation Example ```python
 # example-metadata:
 # runnable: false # src/controllers/factory.py (lines 95-102) from typing import Any, Callable, Dict, List, Optional, Union, Protocol
 from numpy.typing import NDArray
@@ -285,7 +285,7 @@ ConfigDict = Dict[str, Any] def create_controller(controller_type: str, config: 
 
 ---
 
-### 2. JIT Compilation (Numba) **Source:** Lam, S. K., Pitrou, A., & Seibert, S. (2015). Numba: A LLVM-based Python JIT compiler. *Proceedings of the Second Workshop on the LLVM Compiler Infrastructure in HPC.* **Usage:** Performance-critical numerical kernels #### Implementation Example ```python
+## 2. JIT Compilation (Numba) **Source:** Lam, S. K., Pitrou, A., & Seibert, S. (2015). Numba: A LLVM-based Python JIT compiler. *Proceedings of the Second Workshop on the LLVM Compiler Infrastructure in HPC.* **Usage:** Performance-critical numerical kernels #### Implementation Example ```python
 from numba import jit @jit(nopython=True, cache=True)
 def compute_sliding_surface_batch(states, k1, k2, lam1, lam2): """JIT-compiled sliding surface computation (1000× faster).""" n = states.shape[0] surfaces = np.zeros(n) for i in range(n): x, x_dot, theta1, theta1_dot, theta2, theta2_dot = states[i] surfaces[i] = (k1 * x + lam1 * x_dot + k2 * theta1 + lam2 * theta1_dot) return surfaces
 ``` **Performance:**

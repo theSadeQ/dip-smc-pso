@@ -13,7 +13,7 @@ Overshoot objective functions for control optimization.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -81,7 +81,7 @@ Get overshoot characteristics for a single output.
 
 [View full source →](#method-overshootobjective-get_overshoot_characteristics)
 
----
+
 
 ### `UndershootObjective`
 
@@ -113,7 +113,7 @@ Compute undershoot instead of overshoot.
 
 [View full source →](#method-undershootobjective-_compute_single_output_overshoot)
 
----
+
 
 ## Dependencies
 

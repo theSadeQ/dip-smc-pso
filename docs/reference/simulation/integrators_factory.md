@@ -99,7 +99,7 @@ class IntegratorFactory:
         return cls._registry[method_name](config)
 ```
 
-### Extensibility
+## Extensibility
 
 **Adding custom integrators:**
 
@@ -146,7 +146,7 @@ instance = IntegratorsFactory()
 result = instance.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Custom configuration
@@ -155,7 +155,7 @@ instance = IntegratorsFactory(config)
 result = instance.process(data)
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 ```python
 try:
@@ -188,7 +188,7 @@ result = orchestrator.execute(instance.process(data))
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -239,7 +239,7 @@ Create a default integrator instance.
 
 [View full source →](#method-integratorfactory-create_default_integrator)
 
----
+
 
 ## Functions
 
@@ -255,7 +255,7 @@ Create integrator instance (convenience function).
 :linenos:
 ```
 
----
+
 
 ### `get_available_integrators()`
 
@@ -269,7 +269,7 @@ Get available integrator types (convenience function).
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

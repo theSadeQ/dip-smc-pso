@@ -1,4 +1,5 @@
 # PSO Optimization for Hybrid Adaptive STA-SMC **Status:** 🚧 Under Construction This document will contain guidance on optimizing Hybrid Adaptive Super-Twisting SMC parameters using Particle Swarm Optimization. ## Planned Content ### Hybrid Adaptive STA-SMC Parameter Space
+
 - Super-twisting gains (k1, k2)
 - Adaptive law parameters (γ₁, γ₂)
 - Boundary layer thickness
@@ -33,5 +34,9 @@
 - [PSO Optimization Workflow](pso-optimization-workflow.md)
 - [Hybrid Adaptive STA-SMC Technical Guide](../../controllers/hybrid_smc_technical_guide.md)
 - [Controller Comparison Tutorial](../tutorials/tutorial-02-controller-comparison.md)
-- [Multi-Objective PSO](../../reference/optimization/algorithms_multi_objective_pso.md) --- **Last Updated:** 2025-10-07
+- [Multi-Objective PSO](../../reference/optimization/algorithms_multi_objective_pso.md)
+
+---
+
+**Last Updated:** 2025-10-07
 **Target Completion:** Phase 7

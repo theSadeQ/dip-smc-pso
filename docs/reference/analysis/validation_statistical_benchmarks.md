@@ -1,26 +1,32 @@
 # analysis.validation.statistical_benchmarks **Source:** `src\analysis\validation\statistical_benchmarks.py` ## Module Overview Statistical benchmarking utilities for the Double Inverted Pendulum project. ## Advanced Mathematical Theory ### Statistical Benchmarking **Sample mean estimator:** ```{math}
+
 \bar{x} = \frac{1}{n}\sum_{i=1}^n x_i
 ``` **Sample variance:** ```{math}
 s^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2
 ``` ### Confidence Intervals **t-distribution CI** (unknown variance): ```{math}
+
 \text{CI}_{1-\alpha} = \bar{x} \pm t_{\alpha/2, n-1} \frac{s}{\sqrt{n}}
 ``` **Normal CI** (known variance): ```{math}
 \text{CI}_{1-\alpha} = \bar{x} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}}
 ``` ### Bootstrap Confidence Intervals **Bootstrap resampling:** 1. Draw $B$ bootstrap samples: $\{x_1^*, \ldots, x_n^*\}_b, b=1,\ldots,B$
+
 2. Compute statistic: $\theta_b^* = g(x_1^*, \ldots, x_n^*)$
 3. CI from quantiles of $\{\theta_b^*\}$ **Percentile method:** ```{math}
 \text{CI}_{1-\alpha} = [\theta_{(\alpha/2)}^*, \theta_{(1-\alpha/2)}^*]
 ``` ### Hypothesis Testing **t-test statistic:** ```{math}
 t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}} \sim t_{n-1}
 ``` **Decision rule:** ```{math}
+
 \text{Reject } H_0 \text{ if } |t| > t_{\alpha/2, n-1}
 ``` ### Welch's t-test **For unequal variances:** ```{math}
 t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
 ``` **Degrees of freedom (Welch-Satterthwaite):** ```{math}
+
 \nu = \frac{\left(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}\right)^2}{\frac{(s_1^2/n_1)^2}{n_1-1} + \frac{(s_2^2/n_2)^2}{n_2-1}}
 ``` ### ANOVA F-test **F-statistic:** ```{math}
 F = \frac{\text{MSB}}{\text{MSW}} = \frac{\sum n_i(\bar{x}_i - \bar{x})^2/(k-1)}{\sum\sum(x_{ij} - \bar{x}_i)^2/(N-k)}
 ``` Where $k$ is number of groups, $N$ is total sample size. ## Architecture Diagram ```{mermaid}
+
 graph TD A[N Trials] --> B[Simulation Loop] B --> C[Compute Metrics] C --> D[ISE, ITAE, etc] D --> E[Statistical Analysis] E --> F[Sample Mean] E --> G[Sample Variance] F --> H{Distribution Known?} G --> H H -->|Yes| I[t-Confidence Interval] H -->|No| J[Bootstrap CI] J --> K[B Bootstrap Samples] K --> L[Empirical Distribution] L --> M[Percentile CI] I --> N[Hypothesis Testing] M --> N N --> O[t-test] N --> P[ANOVA] O --> Q{p < α?} P --> Q Q -->|Yes| R[Significant Difference] Q -->|No| S[No Evidence] style E fill:#ff9 style J fill:#9cf style Q fill:#fcf
 ``` ## Usage Examples ### Example 1: Basic Analysis ```python
 from src.analysis import Analyzer # Initialize analyzer
@@ -28,6 +34,7 @@ analyzer = Analyzer(config)
 result = analyzer.analyze(data)
 ``` ### Example 2: Statistical Validation ```python
 # Compute confidence intervals
+
 from src.analysis.validation import compute_confidence_interval ci = compute_confidence_interval(samples, confidence=0.95)
 print(f"95% CI: [{ci.lower:.3f}, {ci.upper:.3f}]")
 ``` ### Example 3: Performance Metrics ```python
@@ -37,6 +44,7 @@ from src.analysis.performance import compute_all_metrics metrics = compute_all_m
 print(f"ISE: {metrics.ise:.2f}, ITAE: {metrics.itae:.2f}")
 ``` ### Example 4: Batch Analysis ```python
 # Analyze multiple trials
+
 results = []
 for trial in range(n_trials): result = run_simulation(trial_seed=trial) results.append(analyzer.analyze(result)) # Aggregate statistics
 mean_performance = np.mean([r.performance for r in results])
@@ -46,6 +54,7 @@ from src.analysis.performance import sensitivity_analysis sensitivity = sensitiv
 )
 print(f"Most sensitive: {sensitivity.most_sensitive_param}")
 ```
+
 This is the refactored version using modular architecture while maintaining
 full backward compatibility with the original statistical_benchmarks.py. The module now delegates to specialized submodules:
 - **metrics/**: Performance metric calculations
@@ -68,6 +77,7 @@ graph TD A[Controller Factory] --> B[Multi-Trial Execution] B --> C{For Each Tri
 - **Statistics Engine**: CI computation, t-tests, ANOVA
 - **Report Generator**: LaTeX/Markdown output ## Mathematical Foundation ### Statistical Performance Evaluation Statistical benchmarking provides rigorous quantification of controller performance across multiple trials with uncertainty quantification. #### Confidence Intervals For a performance metric $m$ measured across $n$ trials, the $(1-\alpha)$ confidence interval estimates the true population mean $\mu_m$: **t-Distribution (Parametric)**:
 ```{math}
+
 CI_{1-\alpha} = \bar{m} \pm t_{\alpha/2, n-1} \frac{s_m}{\sqrt{n}}
 ``` Where:
 - $\bar{m}$: Sample mean
@@ -75,6 +85,7 @@ CI_{1-\alpha} = \bar{m} \pm t_{\alpha/2, n-1} \frac{s_m}{\sqrt{n}}
 - $t_{\alpha/2, n-1}$: Critical t-value
 - Assumes: Normal distribution of metrics **Bootstrap (Non-Parametric)**:
 ```{math}
+
 CI_{1-\alpha} = \left[m_{\alpha/2}^*, m_{1-\alpha/2}^*\right]
 ``` Computed via $B$ bootstrap resamples:
 1. Draw $n$ samples with replacement from original data
@@ -82,25 +93,38 @@ CI_{1-\alpha} = \left[m_{\alpha/2}^*, m_{1-\alpha/2}^*\right]
 3. Use empirical quantiles for interval bounds **No assumptions** about underlying distribution. #### Hypothesis Testing **Welch's t-test** for comparing two controller means: ```{math}
 t = \frac{\bar{m}_1 - \bar{m}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
 ``` - **Null Hypothesis**: $H_0: \mu_1 = \mu_2$
+
 - **Alternative**: $H_1: \mu_1 \neq \mu_2$
 - **Degrees of Freedom**: Welch-Satterthwaite approximation (unequal variances) **Interpretation**: Reject $H_0$ if $p < 0.05$ → significant performance difference. ### Performance Metrics **Integral Squared Error (ISE)**:
 ```{math}
 ISE = \int_0^T ||\vec{x}(t)||^2 dt \approx \sum_{k=0}^{N} ||\vec{x}_k||^2 \Delta t
 ``` **Settling Time** ($t_s$): Time until $||\vec{x}(t)|| < 0.02$ permanently. **Control Effort**:
+
 ```{math}
 RMS_u = \sqrt{\frac{1}{T} \int_0^T u^2(t) dt}
 ``` **Chattering Index**:
+
 ```{math}
 CI = \frac{1}{N-1} \sum_{k=1}^{N} |u_k - u_{k-1}|
 ``` **See:** {doc}`../../../mathematical_foundations/statistical_analysis` ## Complete Source Code ```{literalinclude} ../../../src/analysis/validation/statistical_benchmarks.py
+
 :language: python
 :linenos:
-``` --- ## Classes ### `StatisticalBenchmarks` Statistical benchmarking utilities for control system analysis. This class provides a unified interface for running statistical benchmarks,
+```
+
+---
+
+## Classes ### `StatisticalBenchmarks` Statistical benchmarking utilities for control system analysis. This class provides a unified interface for running statistical benchmarks,
 comparing controller performance, and analyzing experimental results. #### Source Code ```{literalinclude} ../../../src/analysis/validation/statistical_benchmarks.py
 :language: python
 :pyobject: StatisticalBenchmarks
 :linenos:
-``` #### Methods (3) ##### `__init__(self, random_seed)` Initialize statistical benchmarks. [View full source →](#method-statisticalbenchmarks-__init__) ##### `run_benchmark(self, benchmark_function, configurations, repetitions)` Run benchmark across multiple configurations. [View full source →](#method-statisticalbenchmarks-run_benchmark) ##### `compare_configurations(self, results, metric_name)` Compare multiple configuration results for a specific metric. [View full source →](#method-statisticalbenchmarks-compare_configurations) --- ## Functions ### `compute_metrics(t, x, u, sigma, max_force)` Compute performance metrics for a batch of trajectories. This function maintains exact compatibility with the original
+``` #### Methods (3) ##### `__init__(self, random_seed)` Initialize statistical benchmarks. [View full source →](#method-statisticalbenchmarks-__init__) ##### `run_benchmark(self, benchmark_function, configurations, repetitions)` Run benchmark across multiple configurations. [View full source →](#method-statisticalbenchmarks-run_benchmark) ##### `compare_configurations(self, results, metric_name)` Compare multiple configuration results for a specific metric. [View full source →](#method-statisticalbenchmarks-compare_configurations)
+
+---
+
+## Functions ### `compute_metrics(t, x, u, sigma, max_force)` Compute performance metrics for a batch of trajectories. This function maintains exact compatibility with the original
+
 implementation while delegating to the new modular structure. Parameters
 ----------
 t : np.ndarray One‑dimensional array of time stamps of length ``N+1``.
@@ -113,7 +137,11 @@ dict Mapping of metric names to scalar values. Each metric is averaged across th
 :language: python
 :pyobject: compute_metrics
 :linenos:
-``` --- ### `run_trials(controller_factory, cfg, n_trials, seed, randomise_physics, noise_std)` Run multiple simulations and return per‑trial metrics with confidence intervals. This function maintains exact compatibility with the original implementation
+```
+
+---
+
+### `run_trials(controller_factory, cfg, n_trials, seed, randomise_physics, noise_std)` Run multiple simulations and return per‑trial metrics with confidence intervals. This function maintains exact compatibility with the original implementation
 while using the new modular architecture under the hood. The function executes ``n_trials`` independent simulations of the
 double inverted pendulum under the supplied controller factory and
 configuration. For each trial it collects performance metrics and
@@ -132,7 +160,12 @@ list of dict, dict A list containing the raw metrics for each trial and a dictio
 :language: python
 :pyobject: run_trials
 :linenos:
-``` --- ### `run_trials_with_advanced_statistics(controller_factory, cfg, n_trials, seed, confidence_level, use_bootstrap)` Run trials with advanced statistical analysis. This function extends the original capability with additional
+```
+
+---
+
+### `run_trials_with_advanced_statistics(controller_factory, cfg, n_trials, seed, confidence_level, use_bootstrap)` Run trials with advanced statistical analysis. This function extends the original capability with additional
+
 statistical analysis options. Parameters
 ----------
 controller_factory, cfg, n_trials, seed : Same as run_trials()
@@ -144,7 +177,11 @@ list of dict, dict Metrics list and statistical analysis results #### Source Cod
 :language: python
 :pyobject: run_trials_with_advanced_statistics
 :linenos:
-``` --- ### `compare_controllers(controller_factory_a, controller_factory_b, cfg, n_trials, seed)` Compare two controllers using statistical analysis. Parameters
+```
+
+---
+
+### `compare_controllers(controller_factory_a, controller_factory_b, cfg, n_trials, seed)` Compare two controllers using statistical analysis. Parameters
 ----------
 controller_factory_a, controller_factory_b : Callable Controller factories to compare
 cfg : Any Configuration object
@@ -156,7 +193,12 @@ dict comparison results #### Source Code ```{literalinclude} ../../../src/analys
 :language: python
 :pyobject: compare_controllers
 :linenos:
-``` --- ## Dependencies This module imports: - `from __future__ import annotations`
+```
+
+---
+
+## Dependencies This module imports: - `from __future__ import annotations`
+
 - `from typing import Callable, Dict, Any, List, Tuple, Optional`
 - `import numpy as np`
 - `from .metrics import compute_basic_metrics`
@@ -179,6 +221,7 @@ metrics_list, analysis = run_trials_with_advanced_statistics( controller_factory
 print(f"Bootstrap 99% CI for settling time:")
 print(f" [{analysis['settling_time']['bootstrap_ci'][0]:.3f}, " f"{analysis['settling_time']['bootstrap_ci'][1]:.3f}]")
 ``` ### Controller Comparison with Hypothesis Testing ```python
+
 from src.benchmarks.statistical_benchmarks_v2 import compare_controllers # Define two controllers
 def classical_factory(): return create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5]) def adaptive_factory(): return create_smc_for_pso(SMCType.ADAPTIVE, [10, 8, 15, 12, 0.5]) # Statistical comparison
 comparison = compare_controllers( controller_a_factory=classical_factory, controller_b_factory=adaptive_factory, config=config, n_trials=40

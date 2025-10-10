@@ -533,7 +533,7 @@ converges to the origin in finite time $T \leq \frac{2V(x_0)^{1/2}}{\alpha}$ und
 
 
 
-### Test Case 2: Minimal Lemma
+## Test Case 2: Minimal Lemma
 
 **Input:**
 ```markdown
@@ -563,7 +563,7 @@ converges to the origin in finite time $T \leq \frac{2V(x_0)^{1/2}}{\alpha}$ und
 
 
 
-### Test Case 3: Corollary with Proof (No Citation)
+## Test Case 3: Corollary with Proof (No Citation)
 
 **Input:**
 ```markdown
@@ -597,7 +597,7 @@ converges to the origin in finite time $T \leq \frac{2V(x_0)^{1/2}}{\alpha}$ und
 
 
 
-### Test Case 4: False Positive Detection
+## Test Case 4: False Positive Detection
 
 **Input:**
 ```markdown

@@ -13,7 +13,7 @@ Fixed step-size integration methods.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -60,7 +60,7 @@ integrator = create_integrator('rk4', dt=0.01)
 x_next = integrator.integrate(dynamics_fn, x, u, dt)
 ```
 
-### Example 2: Zero-Order Hold Discretization
+## Example 2: Zero-Order Hold Discretization
 
 ```python
 from src.simulation.integrators.discrete import ZeroOrderHold
@@ -80,7 +80,7 @@ A_d = zoh.A_d
 B_d = zoh.B_d
 ```
 
-### Example 3: Real-Time Monitoring
+## Example 3: Real-Time Monitoring
 
 ```python
 from src.simulation.safety import SimulationPerformanceMonitor
@@ -106,7 +106,7 @@ print(f"Mean: {stats['mean']:.4f}s")
 print(f"95th percentile: {stats['p95']:.4f}s")
 ```
 
-### Example 4: Monte Carlo Simulation
+## Example 4: Monte Carlo Simulation
 
 ```python
 from src.simulation.strategies import MonteCarloStrategy
@@ -132,7 +132,7 @@ print(f"95% CI: [{results['metrics']['ise']['ci_lower']:.4f}, "
       f"{results['metrics']['ise']['ci_upper']:.4f}]")
 ```
 
-### Example 5: Safety Recovery
+## Example 5: Safety Recovery
 
 ```python
 from src.simulation.safety import SafetyRecovery

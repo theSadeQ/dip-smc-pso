@@ -13,7 +13,7 @@ Abstract base classes defining simulation framework interfaces.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -39,7 +39,7 @@ Execute a single simulation step.
 
 [View full source →](#method-simulationengine-step)
 
----
+
 
 ### `Integrator`
 
@@ -75,7 +75,7 @@ Whether integrator supports adaptive step size.
 
 [View full source →](#method-integrator-adaptive)
 
----
+
 
 ### `Orchestrator`
 
@@ -99,7 +99,7 @@ Execute simulation with specified strategy.
 
 [View full source →](#method-orchestrator-execute)
 
----
+
 
 ### `SimulationStrategy`
 
@@ -123,7 +123,7 @@ Perform strategy-specific analysis.
 
 [View full source →](#method-simulationstrategy-analyze)
 
----
+
 
 ### `SafetyGuard`
 
@@ -153,7 +153,7 @@ Get description of last safety violation.
 
 [View full source →](#method-safetyguard-get_violation_message)
 
----
+
 
 ### `ResultContainer`
 
@@ -195,7 +195,7 @@ Export results to specified format.
 
 [View full source →](#method-resultcontainer-export)
 
----
+
 
 ### `DataLogger`
 
@@ -225,7 +225,7 @@ Finalize logging and cleanup resources.
 
 [View full source →](#method-datalogger-finalize)
 
----
+
 
 ### `PerformanceMonitor`
 
@@ -261,7 +261,7 @@ Get performance statistics.
 
 [View full source →](#method-performancemonitor-get_statistics)
 
----
+
 
 ## Dependencies
 
@@ -390,7 +390,7 @@ x = results.states
 u = results.controls
 ```
 
-### Example 2: Adaptive Integration
+## Example 2: Adaptive Integration
 
 ```python
 from src.simulation.integrators.adaptive import AdaptiveRK45Integrator
@@ -415,7 +415,7 @@ print(f"Steps taken: {len(results.time)}")
 print(f"Average dt: {np.mean(np.diff(results.time)):.6f}")
 ```
 
-### Example 3: Batch Simulation (Numba)
+## Example 3: Batch Simulation (Numba)
 
 ```python
 from src.simulation.engines import run_batch_simulation
@@ -437,7 +437,7 @@ mean_trajectory = np.mean(results_batch.states, axis=0)
 std_trajectory = np.std(results_batch.states, axis=0)
 ```
 
-### Example 4: Safety Guards
+## Example 4: Safety Guards
 
 ```python
 from src.simulation.context import SimulationContext

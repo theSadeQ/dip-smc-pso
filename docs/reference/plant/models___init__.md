@@ -16,7 +16,7 @@ organized in a modular architecture for clarity and maintainability.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

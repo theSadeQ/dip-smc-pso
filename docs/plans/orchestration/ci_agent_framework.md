@@ -4,7 +4,7 @@
 **Created:** 2025-01-15
 **Purpose:** Multi-agent CI orchestration system for Windows PowerShell environments
 
----
+
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@
 4. [Windows PowerShell Integration](#windows-powershell-integration)
 5. [Usage Examples](#usage-examples)
 
----
+
 
 ## Architecture Overview
 
@@ -67,7 +67,7 @@
    - Path handling (`\` separators)
    - Environment-specific validation
 
----
+
 
 ## Agent Selection Decision Tree
 
@@ -181,7 +181,7 @@ issue_requirements = {
 }
 ```
 
----
+
 
 ## Artifact Schema Design
 
@@ -333,7 +333,7 @@ def integrate_artifacts(agent_outputs: List[Dict]) -> Dict:
 }
 ```
 
----
+
 
 ## Windows PowerShell Integration
 
@@ -349,7 +349,7 @@ $env:GIT_PATH = "git"
 $ErrorActionPreference = 'Stop'
 ```
 
-### **Validation Command Templates**
+## **Validation Command Templates**
 
 #### **Template 1: Static Analysis**
 
@@ -368,7 +368,7 @@ python -c "import src; print('Imports OK')"
 if ($LASTEXITCODE -ne 0) { throw "Import check failed" }
 ```
 
-#### **Template 2: Unit Tests**
+## **Template 2: Unit Tests**
 
 ```powershell
 # Fast unit tests (controllers only)
@@ -380,7 +380,7 @@ python -m pytest tests\test_controllers\ `
 if ($LASTEXITCODE -ne 0) { throw "Unit tests failed" }
 ```
 
-#### **Template 3: Integration Tests**
+## **Template 3: Integration Tests**
 
 ```powershell
 # Slower integration tests
@@ -392,7 +392,7 @@ python -m pytest tests\test_integration\ `
 if ($LASTEXITCODE -ne 0) { throw "Integration tests failed" }
 ```
 
-#### **Template 4: Coverage Gates**
+## **Template 4: Coverage Gates**
 
 ```powershell
 # Coverage enforcement
@@ -407,7 +407,7 @@ if ($LASTEXITCODE -ne 0) { throw "Coverage below 85%" }
 start htmlcov\index.html
 ```
 
-#### **Template 5: Performance Benchmarks**
+## **Template 5: Performance Benchmarks**
 
 ```powershell
 # Performance regression detection
@@ -418,7 +418,7 @@ python -m pytest tests\test_benchmarks\ `
 if ($LASTEXITCODE -ne 0) { throw "Performance regression >5%" }
 ```
 
-### **Complete Validation Pipeline**
+## **Complete Validation Pipeline**
 
 ```powershell
 # File: .dev_tools\validation\run_ci_validation.ps1
@@ -477,7 +477,7 @@ Write-Host "`n===== All Gates Passed =====" -ForegroundColor Green
 .\\.dev_tools\\validation\\run_ci_validation.ps1 -SkipBenchmarks
 ```
 
----
+
 
 ## Usage Examples
 
@@ -646,7 +646,7 @@ Write-Host "`n===== All Gates Passed =====" -ForegroundColor Green
 }
 ```
 
----
+
 
 ## Best Practices
 
@@ -686,14 +686,14 @@ Write-Host "`n===== All Gates Passed =====" -ForegroundColor Green
 - Assume Unix-style paths (`/` separators)
 - Ignore exit codes (`$LASTEXITCODE`)
 
----
+
 
 ## Related Documents
 
 - [../citation_system/00_master_roadmap.md](../citation_system/00_master_roadmap.md) - Citation system implementation
 - [../../CLAUDE.md](../../CLAUDE.md) - Project conventions and agent pool
 
----
+
 
 **Document Revision History:**
 

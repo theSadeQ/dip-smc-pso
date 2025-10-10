@@ -24,7 +24,7 @@ Recommended Usage:
 :linenos:
 ```
 
----
+
 
 ## Functions
 
@@ -51,7 +51,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `_as_dict(obj)`
 
@@ -74,7 +74,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

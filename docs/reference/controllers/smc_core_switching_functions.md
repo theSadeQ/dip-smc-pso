@@ -201,7 +201,7 @@ print(f"Switching control: {u_sw:.4f}")
 # For |s| < epsilon, smooth transition
 ```
 
-### Example 2: Chattering Comparison
+## Example 2: Chattering Comparison
 
 ```python
 import matplotlib.pyplot as plt
@@ -225,7 +225,7 @@ print(f"Chattering index (sat):   {chat_sat:.1f}")
 print(f"Chattering index (tanh):  {chat_tanh:.1f}")  # Lowest
 ```
 
-### Example 3: Slope Parameter Tuning
+## Example 3: Slope Parameter Tuning
 
 ```python
 # Test different slope parameters
@@ -263,7 +263,7 @@ u_sw = dead_zone_switching(s, epsilon, delta, K)
 print(f"Switching with dead zone: {u_sw:.2f} N")
 ```
 
-### Example 5: Frequency Response
+## Example 5: Frequency Response
 
 ```python
 from scipy import signal
@@ -297,7 +297,7 @@ plt.show()
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -315,7 +315,7 @@ Available switching function methods.
 :linenos:
 ```
 
----
+
 
 ### `SwitchingFunction`
 
@@ -382,7 +382,7 @@ Compute derivative of switching function.
 
 [View full source →](#method-switchingfunction-get_derivative)
 
----
+
 
 ## Functions
 
@@ -411,7 +411,7 @@ Note:
 :linenos:
 ```
 
----
+
 
 ### `linear_switching(s, epsilon)`
 
@@ -432,7 +432,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `sign_switching(s, epsilon)`
 
@@ -459,7 +459,7 @@ Deprecated:
 :linenos:
 ```
 
----
+
 
 ### `adaptive_boundary_layer(surface_value, surface_derivative, base_epsilon, adaptation_gain)`
 
@@ -485,7 +485,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `power_rate_reaching_law(surface_value, K, alpha, epsilon)`
 
@@ -510,7 +510,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

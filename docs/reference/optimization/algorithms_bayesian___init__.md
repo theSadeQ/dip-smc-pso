@@ -15,5 +15,4 @@ optimization for efficient hyperparameter tuning with limited function evaluatio
 :linenos:
 ```
 
----
 

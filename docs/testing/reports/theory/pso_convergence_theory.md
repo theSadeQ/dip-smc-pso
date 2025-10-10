@@ -4,7 +4,7 @@
 
 **See:** [PSO Optimization Complete Theory](../../../theory/pso_optimization_complete.md)
 
----
+
 
 ## Quick Links
 
@@ -19,16 +19,19 @@ For PSO convergence theory, refer to:
 PSO convergence theory covers:
 
 ### 1. Theoretical Guarantees
+
 - Global convergence under specific conditions
 - Particle velocity convergence
 - Swarm stability analysis
 
 ### 2. Convergence Criteria
+
 - **Fitness-based:** Minimal improvement threshold
 - **Position-based:** Particle position stability
 - **Velocity-based:** Velocity magnitude decay
 
 ### 3. Empirical Analysis
+
 - Convergence rates for different problems
 - Parameter influence (ω, c1, c2)
 - Early stopping mechanisms

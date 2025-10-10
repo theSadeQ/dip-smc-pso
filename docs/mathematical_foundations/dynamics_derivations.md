@@ -794,7 +794,7 @@ physics_params = {
 }
 ```
 
-### Next Steps
+## Next Steps
 
 - {doc}`numerical_integration_theory` - Solving equations of motion
 - {doc}`../simulation/dynamics_models_guide` - Implementation details

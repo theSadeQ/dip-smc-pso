@@ -1,4 +1,5 @@
 # plant.core.state_validation
+
 <!-- Enhanced by Week 8 Phase 2 --> **Source:** `src\plant\core\state_validation.py` ## Module Overview State Vector Validation for Plant Dynamics. Provides validation and sanitization of system states:
 - State vector format validation
 - Physical bounds checking
@@ -29,6 +30,7 @@ $$ **Common Causes in DIP:** 1. Matrix inversion with near-singular $M(q)$
 $$ where $\square$ is the "always" temporal operator. **Monitor Implementation:** ```python
 def runtime_monitor(x, t): if not is_valid(x): raise StateValidationError(f"State violation at t={t}") if energy_drift(x) > threshold: warn(f"Energy drift detected: {energy_drift(x):.2%}")
 ``` ### Constraint Violation Handling **Violation Severity:** $$
+
 \text{severity}(x) = \max_i \left(\frac{|h_i(x)|}{h_{i,\text{max}}}\right)
 $$ **Response Strategy:** 1. **Minor (severity < 0.1):** Log warning, continue
 2. **Moderate (0.1 ≤ severity < 0.5):** Clip state to bounds
@@ -42,6 +44,7 @@ $$ ### References 1. **Betts** (2010). *Practical Methods for Optimal Control*. 
 from src.plant.core.state_validation import *
 import numpy as np # Basic initialization
 # Validate state and detect violations
+
 from src.plant.core.state_validation import StateValidator, ValidationResult validator = StateValidator()
 state = np.array([0.0, 0.1, 0.05, 0.0, 0.5, 0.3]) result: ValidationResult = validator.validate(state)
 if result.is_valid: print("State is physically valid")
@@ -51,6 +54,7 @@ from src.plant.core.state_validation import ValidationConfig # Custom validation
 validation_config = ValidationConfig( max_position=2.0, # ±2m cart position max_angle=np.pi/2, # ±90° joint angles max_velocity=5.0, # 5 m/s cart velocity max_angular_velocity=10.0, # 10 rad/s joint velocities energy_conservation_tol=0.05 # 5% energy drift tolerance
 ) validator = StateValidator(validation_config)
 ``` ### Example 3: Error Handling Robust error handling and recovery: ```python
+
 from src.plant.exceptions import ( NumericalInstabilityError, StateValidationError, ConfigurationError
 ) try: # Risky operation state_dot = dynamics.step(state, control, t) except NumericalInstabilityError as e: print(f"Numerical instability detected: {e}") # Fallback: reduce timestep, increase regularization dynamics.reset_numerical_params(stronger_regularization=True) except StateValidationError as e: print(f"Invalid state: {e}") # Fallback: clip state to valid bounds state = validator.clip_to_valid(state) except ConfigurationError as e: print(f"Configuration error: {e}") # Fallback: use default configuration config = get_default_config()
 ``` ### Example 4: Performance Optimization Optimize for computational efficiency: ```python
@@ -64,6 +68,7 @@ stats = pstats.Stats(profiler)
 stats.sort_stats('cumulative')
 stats.print_stats(10) # Top 10 time consumers
 ``` ### Example 5: Integration with Controllers Integrate with control systems: ```python
+
 from src.controllers import ClassicalSMC
 from src.core.simulation_runner import SimulationRunner # Create dynamics model
 dynamics = SimplifiedDIPDynamics(config) # Create controller
@@ -77,15 +82,29 @@ print(f"Control effort: {result.control_effort:.2f}")
 ``` ## Complete Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
 :language: python
 :linenos:
-``` --- ## Classes ### `StateValidationError` **Inherits from:** `ValueError` Raised when state vector validation fails. #### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
+```
+
+---
+
+## Classes ### `StateValidationError` **Inherits from:** `ValueError` Raised when state vector validation fails. #### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
+
 :language: python
 :pyobject: StateValidationError
 :linenos:
-``` --- ### `StateValidator` **Inherits from:** `Protocol` Protocol for state validation strategies. #### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
+```
+
+---
+
+### `StateValidator` **Inherits from:** `Protocol` Protocol for state validation strategies. #### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
 :language: python
 :pyobject: StateValidator
 :linenos:
-``` #### Methods (2) ##### `validate_state(self, state)` Validate state vector. [View full source →](#method-statevalidator-validate_state) ##### `sanitize_state(self, state)` Sanitize and correct state vector if possible. [View full source →](#method-statevalidator-sanitize_state) --- ### `DIPStateValidator` Double Inverted Pendulum state vector validation. Validates state vectors for the DIP system ensuring:
+``` #### Methods (2) ##### `validate_state(self, state)` Validate state vector. [View full source →](#method-statevalidator-validate_state) ##### `sanitize_state(self, state)` Sanitize and correct state vector if possible. [View full source →](#method-statevalidator-sanitize_state)
+
+---
+
+### `DIPStateValidator` Double Inverted Pendulum state vector validation. Validates state vectors for the DIP system ensuring:
+
 - Correct dimensionality (6-element vectors)
 - Physical bounds on positions and velocities
 - Numerical validity (no NaN/inf values)
@@ -93,11 +112,20 @@ print(f"Control effort: {result.control_effort:.2f}")
 :language: python
 :pyobject: DIPStateValidator
 :linenos:
-``` #### Methods (14) ##### `__init__(self, position_bounds, angle_bounds, velocity_bounds, angular_velocity_bounds, wrap_angles, strict_validation)` Initialize DIP state validator. [View full source →](#method-dipstatevalidator-__init__) ##### `validate_state(self, state)` Validate complete state vector. [View full source →](#method-dipstatevalidator-validate_state) ##### `sanitize_state(self, state)` Sanitize state vector to ensure validity. [View full source →](#method-dipstatevalidator-sanitize_state) ##### `get_state_info(self, state)` Get detailed information about state vector. [View full source →](#method-dipstatevalidator-get_state_info) ##### `reset_statistics(self)` Reset validation statistics. [View full source →](#method-dipstatevalidator-reset_statistics) ##### `get_statistics(self)` Get validation statistics. [View full source →](#method-dipstatevalidator-get_statistics) ##### `_check_state_structure(self, state)` Check if state has correct structure. [View full source →](#method-dipstatevalidator-_check_state_structure) ##### `_check_numerical_validity(self, state)` Check if state contains valid numerical values. [View full source →](#method-dipstatevalidator-_check_numerical_validity) ##### `_check_physical_bounds(self, state)` Check if state is within physical bounds. [View full source →](#method-dipstatevalidator-_check_physical_bounds) ##### `_fix_numerical_issues(self, state)` Fix numerical issues in state vector. [View full source →](#method-dipstatevalidator-_fix_numerical_issues) ##### `_apply_physical_bounds(self, state)` Apply physical bounds to state vector. [View full source →](#method-dipstatevalidator-_apply_physical_bounds) ##### `_wrap_angles(self, angles)` Wrap angles to [-π, π] range. [View full source →](#method-dipstatevalidator-_wrap_angles) ##### `_estimate_energy(self, state)` Estimate total system energy (rough approximation). [View full source →](#method-dipstatevalidator-_estimate_energy) ##### `_estimate_angular_momentum(self, state)` Estimate total angular momentum (rough approximation). [View full source →](#method-dipstatevalidator-_estimate_angular_momentum) --- ### `MinimalStateValidator` Minimal state validator for performance-critical applications. Provides only essential validation with minimal overhead. #### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
+``` #### Methods (14) ##### `__init__(self, position_bounds, angle_bounds, velocity_bounds, angular_velocity_bounds, wrap_angles, strict_validation)` Initialize DIP state validator. [View full source →](#method-dipstatevalidator-__init__) ##### `validate_state(self, state)` Validate complete state vector. [View full source →](#method-dipstatevalidator-validate_state) ##### `sanitize_state(self, state)` Sanitize state vector to ensure validity. [View full source →](#method-dipstatevalidator-sanitize_state) ##### `get_state_info(self, state)` Get detailed information about state vector. [View full source →](#method-dipstatevalidator-get_state_info) ##### `reset_statistics(self)` Reset validation statistics. [View full source →](#method-dipstatevalidator-reset_statistics) ##### `get_statistics(self)` Get validation statistics. [View full source →](#method-dipstatevalidator-get_statistics) ##### `_check_state_structure(self, state)` Check if state has correct structure. [View full source →](#method-dipstatevalidator-_check_state_structure) ##### `_check_numerical_validity(self, state)` Check if state contains valid numerical values. [View full source →](#method-dipstatevalidator-_check_numerical_validity) ##### `_check_physical_bounds(self, state)` Check if state is within physical bounds. [View full source →](#method-dipstatevalidator-_check_physical_bounds) ##### `_fix_numerical_issues(self, state)` Fix numerical issues in state vector. [View full source →](#method-dipstatevalidator-_fix_numerical_issues) ##### `_apply_physical_bounds(self, state)` Apply physical bounds to state vector. [View full source →](#method-dipstatevalidator-_apply_physical_bounds) ##### `_wrap_angles(self, angles)` Wrap angles to [-π, π] range. [View full source →](#method-dipstatevalidator-_wrap_angles) ##### `_estimate_energy(self, state)` Estimate total system energy (rough approximation). [View full source →](#method-dipstatevalidator-_estimate_energy) ##### `_estimate_angular_momentum(self, state)` Estimate total angular momentum (rough approximation). [View full source →](#method-dipstatevalidator-_estimate_angular_momentum)
+
+---
+
+### `MinimalStateValidator` Minimal state validator for performance-critical applications. Provides only essential validation with minimal overhead. #### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
 :language: python
 :pyobject: MinimalStateValidator
 :linenos:
-``` #### Methods (2) ##### `validate_state(self, state)` Fast basic validation. [View full source →](#method-minimalstatevalidator-validate_state) ##### `sanitize_state(self, state)` Minimal sanitization. [View full source →](#method-minimalstatevalidator-sanitize_state) --- ## Dependencies This module imports: - `from __future__ import annotations`
+``` #### Methods (2) ##### `validate_state(self, state)` Fast basic validation. [View full source →](#method-minimalstatevalidator-validate_state) ##### `sanitize_state(self, state)` Minimal sanitization. [View full source →](#method-minimalstatevalidator-sanitize_state)
+
+---
+
+## Dependencies This module imports: - `from __future__ import annotations`
+
 - `from typing import Tuple, Optional, Protocol, Dict, Any`
 - `import numpy as np`
 - `import warnings`

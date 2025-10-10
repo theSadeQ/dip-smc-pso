@@ -43,14 +43,14 @@ npm list -g | grep mcp
 # @modelcontextprotocol/server-puppeteer
 ```
 
-### 2. Test MCP Inspector
+## 2. Test MCP Inspector
 
 ```bash
 /inspect-server
 # Launches MCP Inspector UI at localhost:6274
 ```
 
-### 3. Run Debugging Command
+## 3. Run Debugging Command
 
 ```bash
 /debug-with-mcp

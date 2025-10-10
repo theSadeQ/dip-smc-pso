@@ -23,7 +23,7 @@ src/core/dynamics_full.py (0% → 95%)
 - [ ] `mypy src/core/dynamics_full.py --strict` passes with 0 errors
 - [ ] Type hint coverage ≥95% for both files **Effort:** 8 hours (4h per file)
 
-### Task 1.2: P0 Class Documentation (4h) **Target:** 15 undocumented P0 classes (30 min each) **Template (NumPy-style):**
+## Task 1.2: P0 Class Documentation (4h) **Target:** 15 undocumented P0 classes (30 min each) **Template (NumPy-style):**
 
 ```python
 # example-metadata:
@@ -53,7 +53,7 @@ src/core/dynamics_full.py (0% → 95%)
 
 ---
 
-### Task 1.3: P0 Method Documentation (2h) **Target:** 14 undocumented P0 controller methods **Template:**
+## Task 1.3: P0 Method Documentation (2h) **Target:** 14 undocumented P0 controller methods **Template:**
 
 ```python
 # example-metadata:
@@ -201,7 +201,7 @@ monkeytype apply module_name
 
 ---
 
-### Task 3.2: P3 Class Documentation (15h) **Target:** 30 P3 classes **Config Schemas (20 classes, 10h):**
+## Task 3.2: P3 Class Documentation (15h) **Target:** 30 P3 classes **Config Schemas (20 classes, 10h):**
 
 - Batch documentation using template generator
 - Focus on parameter descriptions

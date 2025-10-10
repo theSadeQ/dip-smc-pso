@@ -321,7 +321,7 @@ CODE_FENCE_PATTERN = re.compile(r'^```')
 old_safe = old.rstrip().encode('ascii', 'backslashreplace').decode('ascii')
 ```
 
-### CLI Interface
+## CLI Interface
 
 ```bash
 # Single file
@@ -390,7 +390,7 @@ myst_enable_extensions = [
 
 **Issue:** MyST Parser strictly requires proper document structure with blank lines after heading elements
 
-### Excluded Directories
+## Excluded Directories
 
 ```python
 exclude_patterns = [

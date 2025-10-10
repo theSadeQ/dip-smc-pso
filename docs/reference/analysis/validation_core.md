@@ -16,7 +16,7 @@ managing experimental configurations, and coordinating statistical benchmarks.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -44,7 +44,7 @@ Initialize trial configuration.
 
 [View full source →](#method-trialconfiguration-__repr__)
 
----
+
 
 ### `TrialResult`
 
@@ -70,7 +70,7 @@ Initialize trial result.
 
 [View full source →](#method-trialresult-__repr__)
 
----
+
 
 ### `TrialBatch`
 
@@ -126,7 +126,7 @@ Get summary statistics for a metric.
 
 [View full source →](#method-trialbatch-__repr__)
 
----
+
 
 ## Functions
 
@@ -148,7 +148,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `run_single_trial(trial_function, trial_id, parameters, timeout, random_seed)`
 
@@ -172,7 +172,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `run_multiple_trials(trial_function, configuration, progress_callback)`
 
@@ -194,7 +194,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `compare_trial_batches(batch1, batch2, metric_name)`
 
@@ -216,7 +216,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `create_standard_trial_configurations()`
 
@@ -233,7 +233,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `mock_trial_function()`
 
@@ -253,7 +253,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

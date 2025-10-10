@@ -141,7 +141,7 @@ def simulate(
 ) -> np.ndarray
 ```
 
-#### Shape Conventions
+## Shape Conventions
 
 | Mode | Initial State | Control Inputs | Output States |
 |------|--------------|----------------|---------------|
@@ -206,7 +206,7 @@ states = simulate(x0, u, dt, stop_fn=stop_condition)
 print(f"Simulation stopped at step {len(states)-1}")  # May be < 1000
 ```
 
-### Safety Guards Integration
+## Safety Guards Integration
 
 The vector engine integrates three safety guards automatically:
 
@@ -286,7 +286,7 @@ x_next_full = full_step_fn(x, u, dt)
 x_next_lr = lowrank_step_fn(x, u, dt)
 ```
 
-### run_simulation() Function
+## run_simulation() Function
 
 High-level trajectory generation with controller integration.
 
@@ -312,7 +312,7 @@ def run_simulation(
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]
 ```
 
-#### Features
+## Features
 
 1. **Controller State Management:** Calls `initialize_state()` and `initialize_history()` if available
 2. **Control Saturation:** Respects `u_max` or `controller.max_force`
@@ -470,7 +470,7 @@ print(f"Successful runs: {result.success_count}")
 print(f"Execution time: {result.execution_time:.3f}s")
 ```
 
-### Performance Comparison
+## Performance Comparison
 
 **Benchmark:** 30 simulations, 1000 timesteps each
 
@@ -533,7 +533,7 @@ states = simulate(
 )
 ```
 
-### Custom Safety Guards
+## Custom Safety Guards
 
 ```python
 from src.simulation.context.safety_guards import _guard_no_nan
@@ -606,7 +606,7 @@ u_batch = np.broadcast_to(control_input, (n_particles,))  # Efficient view
 u_batch = np.array([control_input[0] for _ in range(n_particles)])
 ```
 
-### Computational Optimization
+## Computational Optimization
 
 **Numba JIT Compilation:**
 
@@ -628,7 +628,7 @@ def fast_dynamics_step(state, control, dt, params):
 # Subsequent calls: ~0.1 ms (compiled code)
 ```
 
-### Profiling Guidelines
+## Profiling Guidelines
 
 ```python
 import time
@@ -673,7 +673,7 @@ profiler.print_stats(sort='cumtime')
 # HIL testing → RealTimeOrchestrator
 ```
 
-### 2. Validate Inputs Early
+## 2. Validate Inputs Early
 
 ```python
 from src.simulation.engines.vector_sim import simulate
@@ -686,7 +686,7 @@ assert dt > 0, "Time step must be positive"
 states = simulate(x0, u, dt, horizon=horizon)
 ```
 
-### 3. Use Safety Guards in Production
+## 3. Use Safety Guards in Production
 
 ```python
 # example-metadata:
@@ -706,7 +706,7 @@ states_prod = simulate(
 )
 ```
 
-### 4. Handle Early Stopping Gracefully
+## 4. Handle Early Stopping Gracefully
 
 ```python
 # example-metadata:
@@ -730,7 +730,7 @@ states = simulate(x0, u, dt, stop_fn=soft_stop)
 # states.shape[0] may be < horizon + 1
 ```
 
-### 5. uses Vectorization
+## 5. uses Vectorization
 
 ```python
 # example-metadata:

@@ -1,11 +1,12 @@
 # PSO Optimization Guide: Super-Twisting SMC
+
 **MCP-Validated Workflow**
 
 **Controller Type:** Super-Twisting Sliding Mode Control (STA-SMC)
 **Validation Date:** 2025-10-07
 **Test Command:** `/optimize-controller sta_smc`
 
----
+
 
 ## Overview
 
@@ -28,7 +29,7 @@ Super-Twisting SMC is a **second-order sliding mode** controller that provides:
 - Chattering acceptable
 - Fast implementation priority
 
----
+
 
 ## Mathematical Background
 
@@ -62,7 +63,7 @@ Where:
 - `ρ`: Upper bound on perturbations
 - `L`: Lipschitz constant of perturbations
 
----
+
 
 ## PSO Optimization: Real Validated Example
 
@@ -113,7 +114,7 @@ optimized_gains = [
 # Best Cost: 0.000000
 ```
 
-### Gain Interpretation
+## Gain Interpretation
 
 **K1 & K2 (Super-Twisting Gains):**
 - K1 increased 2.96× → Faster convergence to surface
@@ -128,7 +129,7 @@ optimized_gains = [
 - λ1 increased 34% → Better position tracking (pendulum 2)
 - λ2 decreased 15% → Smoother velocity response
 
----
+
 
 ## Step-by-Step Optimization Workflow
 
@@ -144,7 +145,7 @@ python simulate.py --controller sta_smc --duration 5.0 --plot
 - Overshoot: <10%
 - Chattering: Minimal (inherent to STA)
 
-### Step 2: Run PSO Optimization
+## Step 2: Run PSO Optimization
 
 **Basic Command:**
 ```bash
@@ -195,7 +196,7 @@ python simulate.py --controller sta_smc \
 - [ ] K2/K1 ratio satisfies stability condition
 - [ ] Control effort within actuator limits
 
-### Step 4: Performance Comparison
+## Step 4: Performance Comparison
 
 ```bash
 # Compare baseline vs optimized
@@ -211,7 +212,7 @@ python scripts/analysis/compare_controllers.py \
 - ✅ Smoother control signal
 - ✅ Better disturbance rejection
 
----
+
 
 ## Parameter Bounds and Tuning Guidelines
 
@@ -288,7 +289,7 @@ K2/K1 = 0.561
 ✅ Stability condition satisfied (K2 > 0.5·K1)
 ```
 
----
+
 
 ## Troubleshooting STA-SMC Optimization
 
@@ -312,7 +313,7 @@ bounds:
 /optimize-controller sta_smc
 ```
 
-### Issue 2: Slow Convergence
+## Issue 2: Slow Convergence
 
 **Symptoms:**
 - Takes >5 seconds to stabilize
@@ -329,7 +330,7 @@ bounds:
     k2: [5.0, 20.0]
 ```
 
-### Issue 3: Excessive Control Effort
+## Issue 3: Excessive Control Effort
 
 **Symptoms:**
 - Control saturates frequently
@@ -346,7 +347,7 @@ bounds:
     K2: [3.0, 10.0]
 ```
 
-### Issue 4: Stability Condition Violated
+## Issue 4: Stability Condition Violated
 
 **Symptoms:**
 - K2/K1 < 0.5
@@ -362,7 +363,7 @@ if K2 < 0.5 * K1:
     K2 = 0.55 * K1  # Add 10% safety margin
 ```
 
----
+
 
 ## Comparison: STA-SMC vs Classical SMC
 
@@ -392,7 +393,7 @@ if K2 < 0.5 * K1:
 - Maximum simplicity needed
 - Educational/research purpose
 
----
+
 
 ## Advanced: Multi-Objective PSO for STA-SMC
 
@@ -446,7 +447,7 @@ python scripts/optimization/multi_objective_pso.py \
   --weights 0.7,0.2,0.1
 ```
 
----
+
 
 ## Production Deployment Checklist
 
@@ -482,24 +483,27 @@ Validation: ✅ Passed all tests"
 git push --tags
 ```
 
----
+
 
 ## Next Steps
 
 ### Further Optimization:
+
 ➡️ [Adaptive SMC Optimization](pso-adaptive-smc.md) - Online adaptation
 ➡️ [Hybrid STA-SMC Optimization](pso-hybrid-smc.md) - Combined approach
 
 ### Advanced Topics:
+
 ➡️ [Custom Cost Functions](custom-cost-functions.md)
 ➡️ [Multi-Objective PSO](../../reference/optimization/algorithms_multi_objective_pso.md)
 ➡️ [Robustness Objectives](../../reference/optimization/objectives_control_robustness.md)
 
 ### Performance Analysis:
+
 ➡️ [Controller Comparison Tutorial](../tutorials/tutorial-02-controller-comparison.md)
 ➡️ [Performance Benchmarks](../../benchmarks/controller_performance_benchmarks.md)
 
----
+
 
 **Document Status:** ✅ MCP-Validated
 **Last Updated:** 2025-10-07

@@ -16,5 +16,4 @@ problems with differentiable objective functions.
 :linenos:
 ```
 
----
 

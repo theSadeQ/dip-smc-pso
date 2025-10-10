@@ -66,7 +66,7 @@ alpha : float, optional
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -148,7 +148,7 @@ Destructor for automatic cleanup.
 
 [View full source →](#method-adaptivesmc-__del__)
 
----
+
 
 ## Dependencies
 

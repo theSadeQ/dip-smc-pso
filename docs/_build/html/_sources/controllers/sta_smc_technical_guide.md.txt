@@ -3,6 +3,7 @@
 #==========================================================================================\\\
 
 # Super-Twisting Sliding Mode Control Technical Guide
+
 ## Double-Inverted Pendulum Control System
 
 **Document Version**: 1.0
@@ -10,7 +11,7 @@
 **Classification**: Technical Implementation Guide
 **Controller Type**: SuperTwistingSMC (STA-SMC)
 
----
+
 
 ## Executive Summary
 
@@ -27,9 +28,9 @@ The Super-Twisting Sliding Mode Controller implements a second-order sliding mod
 - High-precision tracking applications
 - Systems requiring low chattering and actuator wear
 - Applications where finite-time convergence is critical
-- Moderate complexity acceptable for superior performance
+- Moderate complexity acceptable for good performance
 
----
+
 
 ## Table of Contents
 
@@ -42,7 +43,7 @@ The Super-Twisting Sliding Mode Controller implements a second-order sliding mod
 7. [Troubleshooting](#troubleshooting)
 8. [References](#references)
 
----
+
 
 ## Mathematical Foundation
 
@@ -159,7 +160,7 @@ T_reach ≤ 2·1.0^(1/2) / 25^(1/2) = 0.4 seconds
 - Classical SMC: 100-500 Hz switching
 - STA SMC: 10-50 Hz (10× reduction)
 
----
+
 
 ## Algorithm Architecture
 
@@ -182,7 +183,7 @@ class SuperTwistingSMC:
     """
 ```
 
-#### 1.1 Key Methods
+## 1.1 Key Methods
 
 | Method | Purpose | Lines | Complexity | Accelerated |
 |--------|---------|-------|-----------|-------------|
@@ -277,7 +278,7 @@ def _sta_smc_core(...):
 
 **Performance**: ~2.5× faster than pure Python for tight loops
 
----
+
 
 ## Implementation Details
 
@@ -400,7 +401,7 @@ new_z = z - K₂·sgn_sigma·dt + Kaw·(u_sat - u_raw)·dt
 - **Kaw = 0**: No anti-windup (default, simpler)
 - **Kaw > 0**: Active anti-windup (prevents integrator growth during saturation)
 
----
+
 
 ## Parameter Configuration
 
@@ -504,7 +505,7 @@ def validate_sta_gains(gains):
     return True
 ```
 
----
+
 
 ## Integration Guide
 
@@ -546,7 +547,7 @@ for t in simulation_time:
     apply_control(control_force)
 ```
 
-### 2. Monitoring STA-Specific Metrics
+## 2. Monitoring STA-Specific Metrics
 
 ```python
 # example-metadata:
@@ -581,7 +582,7 @@ def monitor_sta_performance(controller, result, history):
     return metrics
 ```
 
----
+
 
 ## Performance Characteristics
 
@@ -625,7 +626,7 @@ def monitor_sta_performance(controller, result, history):
 
 **Interpretation**: STA achieves 10× frequency reduction vs Classical
 
----
+
 
 ## Troubleshooting
 
@@ -732,7 +733,7 @@ def diagnose_sta_health(controller, history):
     return diagnostics
 ```
 
----
+
 
 ## References
 
@@ -752,7 +753,7 @@ def diagnose_sta_health(controller, history):
 
 [7] Source Code: `src/controllers/smc/sta_smc.py`
 
----
+
 
 **Document Control**:
 - **Author**: Documentation Expert Agent

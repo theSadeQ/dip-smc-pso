@@ -4,7 +4,7 @@
 **Purpose:** PSO-based controller gain tuning and optimization workflows
 **Level:** Intermediate to Advanced
 
----
+
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@
 - [Performance Tips](#performance-tips)
 - [Troubleshooting](#troubleshooting)
 
----
+
 
 ## Overview
 
@@ -38,7 +38,7 @@ The Optimization API provides Particle Swarm Optimization (PSO) for automated co
 **Theory & Foundations:**
 - [PSO Algorithm Theory](../theory/pso-theory.md): Swarm intelligence, convergence theory, parameter selection
 
----
+
 
 ## PSOTuner
 
@@ -63,7 +63,7 @@ tuner = PSOTuner(
 )
 ```
 
-### Parameters
+## Parameters
 
 **Required:**
 - `controller_type`: SMCType enum (CLASSICAL, ADAPTIVE, SUPER_TWISTING, HYBRID)
@@ -103,7 +103,7 @@ optimized_controller = create_smc_for_pso(
 )
 ```
 
-### With Convergence Monitoring
+## With Convergence Monitoring
 
 ```python
 # Enable convergence tracking
@@ -124,7 +124,7 @@ plt.grid(True)
 plt.show()
 ```
 
-### Saving and Loading Results
+## Saving and Loading Results
 
 ```python
 import json
@@ -155,7 +155,7 @@ controller = create_smc_for_pso(
 )
 ```
 
----
+
 
 ## Cost Functions
 
@@ -232,7 +232,7 @@ tuner = PSOTuner(
 )
 ```
 
-### Constraint Handling
+## Constraint Handling
 
 **Hard constraints (invalid gains → infinite cost):**
 ```python
@@ -310,7 +310,7 @@ def robust_cost(gains):
     # return np.mean(costs)
 ```
 
----
+
 
 ## Gain Bounds
 
@@ -337,7 +337,7 @@ bounds_hybrid = get_gain_bounds_for_pso(SMCType.HYBRID)
 #           k1      k2      λ1      λ2
 ```
 
-### Custom Bounds
+## Custom Bounds
 
 **Narrower bounds for faster convergence:**
 ```python
@@ -373,7 +373,7 @@ physics_constrained_bounds = [
 ]
 ```
 
-### Bounds Validation
+## Bounds Validation
 
 ```python
 from src.controllers import validate_smc_gains
@@ -407,7 +407,7 @@ def validate_bounds(bounds, controller_type):
     return True
 ```
 
----
+
 
 ## Advanced Features
 
@@ -440,7 +440,7 @@ for ctrl_type, gains, cost in results:
     print(f"{ctrl_type}: Cost={cost:.4f}, Gains={gains}")
 ```
 
-### Hyperparameter Tuning
+## Hyperparameter Tuning
 
 **Optimize PSO hyperparameters:**
 ```python
@@ -528,7 +528,7 @@ if diag['early_plateau']:
     print("  - Widen search bounds")
 ```
 
-### Multi-Objective Optimization
+## Multi-Objective Optimization
 
 **Pareto frontier approach:**
 ```python
@@ -582,7 +582,7 @@ plt.title('Pareto Front: Multi-Objective Optimization')
 plt.show()
 ```
 
----
+
 
 ## Integration Patterns
 
@@ -611,7 +611,7 @@ print(f"Optimized Cost: {best_cost:.4f}")
 print(f"Validation ISE: {result['metrics']['ise']:.4f}")
 ```
 
-### Pattern 2: Iterative Refinement
+## Pattern 2: Iterative Refinement
 
 ```python
 # example-metadata:
@@ -632,7 +632,7 @@ print(f"Fine gains: {fine_gains}")
 print(f"Final cost: {fine_cost:.4f}")
 ```
 
-### Pattern 3: Robustness Optimization
+## Pattern 3: Robustness Optimization
 
 ```python
 # example-metadata:
@@ -655,7 +655,7 @@ tuner = PSOTuner(SMCType.CLASSICAL, bounds, cost_function=robust_cost)
 robust_gains, _ = tuner.optimize()
 ```
 
----
+
 
 ## Performance Tips
 
@@ -673,7 +673,7 @@ else:
     n_particles = 50  # Complex problems
 ```
 
-### 2. Set Iteration Budget Wisely
+## 2. Set Iteration Budget Wisely
 
 ```python
 # example-metadata:
@@ -685,7 +685,7 @@ tuner_standard = PSOTuner(..., iters=100)  # Standard optimization
 tuner_thorough = PSOTuner(..., iters=200)  # Publication-quality
 ```
 
-### 3. Use Batch Evaluation
+## 3. Use Batch Evaluation
 
 ```python
 # example-metadata:
@@ -704,7 +704,7 @@ def fast_cost(gains):
     return ...
 ```
 
----
+
 
 ## Troubleshooting
 
@@ -734,7 +734,7 @@ def fast_cost(gains):
 3. Reduce simulation duration for fitness evaluation
 4. Use batch simulation for robustness testing
 
----
+
 
 ## Next Steps
 
@@ -743,6 +743,6 @@ def fast_cost(gains):
 - **Run simulations:** [Simulation API Guide](simulation.md)
 - **Technical details:** [Optimizer Technical Reference](../../reference/optimizer/__init__.md)
 
----
+
 
 **Last Updated:** October 2025

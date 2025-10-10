@@ -17,7 +17,7 @@ alerts when thresholds are exceeded.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -33,7 +33,7 @@ Memory alert data structure.
 :linenos:
 ```
 
----
+
 
 ### `ProductionMemoryMonitor`
 
@@ -92,7 +92,7 @@ Default alert handler.
 
 [View full source →](#method-productionmemorymonitor-_default_alert)
 
----
+
 
 ### `ControllerMemoryTracker`
 
@@ -143,7 +143,7 @@ Check if any controller type exceeds leak threshold.
 
 [View full source →](#method-controllermemorytracker-check_leak_threshold)
 
----
+
 
 ## Functions
 
@@ -168,7 +168,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -233,12 +233,13 @@ component = Component(
 
 \`\`\`python
 # Integration example
+
 for k in range(num_steps):
     result = component.process(x)
     x = update(x, result)
 \`\`\`
 
-### Example 4: Performance Optimization
+## Example 4: Performance Optimization
 
 \`\`\`python
 component = Component(enable_caching=True)
@@ -252,4 +253,3 @@ try:
 except ComponentError as e:
     print(f"Error: {e}")
 \`\`\`
-

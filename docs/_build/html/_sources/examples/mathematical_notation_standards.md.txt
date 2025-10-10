@@ -5,16 +5,19 @@ This document provides standards and examples for mathematical notation in the D
 ## 1. Unicode Mathematical Symbols
 
 ### 1.1 Greek Letters (Preferred)
+
 - Use Unicode Greek letters: `θ₁, θ₂, λ₁, λ₂, ω, φ`
 - Not ASCII approximations: `theta1, theta2, lambda1, lambda2`
 
 ### 1.2 Mathematical Operators
+
 - Integral: `∫₀ᵀ` (not `integral from 0 to T`)
 - Partial derivative: `∂f/∂x` (not `df/dx`)
 - Nabla operator: `∇f` (not `grad f`)
 - Summation: `∑ᵢ₌₁ⁿ` (not `sum from i=1 to n`)
 
 ### 1.3 Subscripts and Superscripts
+
 - Position subscripts: `x₁, x₂, x₃`
 - Time derivatives: `θ̇₁, θ̈₁` (preferred) or `θ₁_dot, θ₁_ddot`
 - Powers: `x²` (preferred) or `x^2`
@@ -22,6 +25,7 @@ This document provides standards and examples for mathematical notation in the D
 ## 2. Control Theory Notation Standards
 
 ### 2.1 Sliding Mode Control
+
 ```python
 # example-metadata:
 # runnable: false
@@ -45,7 +49,8 @@ has roots in the left half-plane.
 """
 ```
 
-### 2.2 Lyapunov Function Documentation
+## 2.2 Lyapunov Function Documentation
+
 ```python
 """
 Lyapunov stability analysis for SMC reaching condition:
@@ -63,6 +68,7 @@ where f_eq is the equivalent control and δ > 0 accounts for uncertainties.
 ```
 
 ### 2.3 Super-Twisting Algorithm
+
 ```python
 # example-metadata:
 # runnable: false
@@ -86,6 +92,7 @@ where L is the Lipschitz constant of the uncertainty.
 ## 3. Optimization Theory Notation
 
 ### 3.1 PSO Dynamics
+
 ```python
 # example-metadata:
 # runnable: false
@@ -109,7 +116,8 @@ Convergence requires: w < 1 and c₁ + c₂ < 4(1 + w)
 """
 ```
 
-### 3.2 Cost Function Definition
+## 3.2 Cost Function Definition
+
 ```python
 # example-metadata:
 # runnable: false
@@ -131,6 +139,7 @@ where:
 ## 4. Performance Metrics Notation
 
 ### 4.1 Standard Control Metrics
+
 ```python
 # example-metadata:
 # runnable: false
@@ -161,6 +170,7 @@ Performance Metrics for Control Systems:
 ## 5. Statistical Analysis Notation
 
 ### 5.1 Monte Carlo Validation
+
 ```python
 # example-metadata:
 # runnable: false
@@ -181,7 +191,8 @@ where t_{N-1,α/2} is the (1-α/2) quantile of the t-distribution with N-1 degre
 """
 ```
 
-### 5.2 Hypothesis Testing
+## 5.2 Hypothesis Testing
+
 ```python
 # example-metadata:
 # runnable: false
@@ -205,6 +216,7 @@ Reject H₀ if |t| > t_{ν,α/2} where α is the significance level.
 ## 6. LaTeX Integration Guidelines
 
 ### 6.1 Sphinx Documentation
+
 For Sphinx-generated documentation, use LaTeX math blocks:
 
 ```rst
@@ -215,6 +227,7 @@ For Sphinx-generated documentation, use LaTeX math blocks:
 ```
 
 ### 6.2 Jupyter Notebooks
+
 For interactive documentation in notebooks:
 
 ```python
@@ -226,6 +239,7 @@ display(Math(r's = \lambda_1 e_1 + \lambda_2 e_2 + \dot{e}_1 + \dot{e}_2'))
 ## 7. Docstring Examples
 
 ### 7.1 Function Documentation with Math
+
 ```python
 # example-metadata:
 # runnable: false
@@ -247,25 +261,26 @@ def compute_sliding_surface(self, state: np.ndarray, target: np.ndarray) -> floa
     to the desired equilibrium point in finite time.
 
     Parameters
-    ----------
+    # ---------- (RST section marker)
     state : np.ndarray, shape (6,)
         Current system state [θ₁, θ₂, x, θ̇₁, θ̇₂, ẋ]
     target : np.ndarray, shape (6,)
         Target state (typically upright equilibrium [0, 0, 0, 0, 0, 0])
 
     Returns
-    -------
+    # ------- (RST section marker)
     float
         Sliding surface value. System is on sliding surface when s = 0.
 
     References
-    ----------
+    # ---------- (RST section marker)
     .. [1] Utkin, V. "Sliding Modes in Control and Optimization", 1992
     .. [2] Edwards, C. "Sliding Mode Control: Theory and Applications", 1998
     """
 ```
 
 ### 7.2 Class Documentation with Theory
+
 ```python
 # example-metadata:
 # runnable: false
@@ -290,7 +305,7 @@ class ClassicalSMC:
     polynomial s² + λ₂s + λ₁ = 0 has stable roots.
 
     Parameters
-    ----------
+    # ---------- (RST section marker)
     gains : List[float]
         Controller gains [k₁, k₂, λ₁, λ₂, K, k_d] where:
         - k₁, k₂: Position feedback gains
@@ -303,12 +318,12 @@ class ClassicalSMC:
         Boundary layer thickness for chattering reduction
 
     Attributes
-    ----------
+    # ---------- (RST section marker)
     n_gains : int
         Number of controller gains (6 for classical SMC)
 
     Examples
-    --------
+    # -------- (RST section marker)
     >>> controller = ClassicalSMC(
     ...     gains=[10.0, 5.0, 8.0, 3.0, 15.0, 2.0],
     ...     max_force=100.0,
@@ -323,6 +338,7 @@ class ClassicalSMC:
 ## 8. Validation and Quality Assurance
 
 ### 8.1 Mathematical Accuracy Checklist
+
 - [ ] All Greek letters use Unicode symbols
 - [ ] Subscripts and superscripts properly formatted
 - [ ] Mathematical operators use standard Unicode symbols
@@ -332,6 +348,7 @@ class ClassicalSMC:
 - [ ] References to literature are accurate
 
 ### 8.2 Documentation Review Process
+
 1. **Technical Review**: Verify mathematical accuracy
 2. **Consistency Check**: Ensure notation consistency across modules
 3. **Literature Validation**: Verify references and citations

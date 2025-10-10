@@ -16,7 +16,7 @@ including sensors, actuators, DAQ systems, and communication devices.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -110,7 +110,7 @@ Build device configuration from type and overrides.
 
 [View full source →](#method-hardwareinterfacefactory-_build_device_config)
 
----
+
 
 ## Functions
 
@@ -142,7 +142,7 @@ List[SensorInterface]
 :linenos:
 ```
 
----
+
 
 ### `create_actuator_array(actuator_type, count, base_id)`
 
@@ -172,7 +172,7 @@ List[ActuatorInterface]
 :linenos:
 ```
 
----
+
 
 ### `create_multi_axis_system(axes, sensors_per_axis, actuators_per_axis)`
 
@@ -200,7 +200,7 @@ Dict[str, List[DeviceDriver]]
 :linenos:
 ```
 
----
+
 
 ### `create_distributed_io_system(modbus_devices, can_devices)`
 
@@ -226,7 +226,7 @@ Dict[str, DeviceDriver]
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

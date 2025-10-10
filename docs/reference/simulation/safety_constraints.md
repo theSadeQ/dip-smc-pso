@@ -156,7 +156,7 @@ instance = SafetyConstraints()
 result = instance.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Custom configuration
@@ -165,7 +165,7 @@ instance = SafetyConstraints(config)
 result = instance.process(data)
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 ```python
 try:
@@ -198,7 +198,7 @@ result = orchestrator.execute(instance.process(data))
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -230,7 +230,7 @@ Get constraint violation message.
 
 [View full source →](#method-constraint-get_violation_message)
 
----
+
 
 ### `StateConstraints`
 
@@ -258,7 +258,7 @@ Check all state constraints.
 
 [View full source →](#method-stateconstraints-check_all)
 
----
+
 
 ### `ControlConstraints`
 
@@ -286,7 +286,7 @@ Check all control constraints.
 
 [View full source →](#method-controlconstraints-check_all)
 
----
+
 
 ### `EnergyConstraints`
 
@@ -314,7 +314,7 @@ Check energy constraints.
 
 [View full source →](#method-energyconstraints-check_all)
 
----
+
 
 ### `ConstraintChecker`
 
@@ -354,7 +354,7 @@ Check energy constraints.
 
 [View full source →](#method-constraintchecker-check_energy)
 
----
+
 
 ## Dependencies
 

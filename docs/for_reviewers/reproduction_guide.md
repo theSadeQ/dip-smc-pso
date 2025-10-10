@@ -52,7 +52,7 @@ where python  # Windows
 
 
 
-#### Step 3: Install Dependencies
+## Step 3: Install Dependencies
 
 ```bash
 pip install --upgrade pip
@@ -227,7 +227,7 @@ Chattering Reduction: 89.4%
 
 
 
-### Simulation 3: Adaptive SMC - Parameter Uncertainty
+## Simulation 3: Adaptive SMC - Parameter Uncertainty
 
 **Objective:** Verify adaptive gains handle parameter variations
 
@@ -364,7 +364,7 @@ Mean absolute difference: 2.1%
 
 
 
-### Optimization 3: PSO Convergence Analysis
+## Optimization 3: PSO Convergence Analysis
 
 **Objective:** Verify PSO convergence properties (Theorem 10)
 
@@ -563,7 +563,7 @@ pip install -r requirements.txt --force-reinstall
 
 
 
-### Issue 2: Simulation Divergence
+## Issue 2: Simulation Divergence
 
 **Problem:**
 ```

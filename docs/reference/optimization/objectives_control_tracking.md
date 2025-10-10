@@ -13,7 +13,7 @@ Tracking performance objective functions for control optimization.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -55,7 +55,7 @@ Compute specific error metric.
 
 [View full source →](#method-trackingerrorobjective-_compute_error_metric)
 
----
+
 
 ### `StepResponseObjective`
 
@@ -103,7 +103,7 @@ Compute steady-state error.
 
 [View full source →](#method-stepresponseobjective-_compute_steady_state_error)
 
----
+
 
 ### `FrequencyResponseObjective`
 
@@ -139,7 +139,7 @@ Estimate bandwidth from time-domain response.
 
 [View full source →](#method-frequencyresponseobjective-_estimate_bandwidth_from_time_domain)
 
----
+
 
 ## Dependencies
 

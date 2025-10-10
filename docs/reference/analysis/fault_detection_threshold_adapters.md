@@ -146,7 +146,7 @@ component = Component(config)
 result = component.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Configure with custom parameters
@@ -157,7 +157,7 @@ config = {
 component = Component(config)
 ```
 
-### Example 3: Integration Workflow
+## Example 3: Integration Workflow
 
 ```python
 # Complete analysis workflow
@@ -170,7 +170,7 @@ results = analyze(
 )
 ```
 
-### Example 4: Fault Detection Example
+## Example 4: Fault Detection Example
 
 ```python
 # FDI system usage
@@ -181,7 +181,7 @@ residual = fdi.generate_residual(y, u)
 fault = fdi.detect(residual)
 ```
 
-### Example 5: Visualization Example
+## Example 5: Visualization Example
 
 ```python
 # Generate analysis plots
@@ -191,6 +191,7 @@ plotter = AnalysisPlotter(style='professional')
 fig = plotter.plot_time_series(data)
 fig.savefig('analysis.pdf')
 ```
+
 This module provides various adaptive thresholding techniques to improve
 fault detection performance under varying operating conditions and
 system uncertainties.
@@ -202,7 +203,7 @@ system uncertainties.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -218,7 +219,7 @@ Configuration for threshold adapters.
 :linenos:
 ```
 
----
+
 
 ### `ThresholdAdapter`
 
@@ -254,7 +255,7 @@ Current threshold value.
 
 [View full source →](#method-thresholdadapter-current_threshold)
 
----
+
 
 ### `StatisticalThresholdAdapter`
 
@@ -332,7 +333,7 @@ Current threshold value.
 
 [View full source →](#method-statisticalthresholdadapter-current_threshold)
 
----
+
 
 ### `EWMAThresholdAdapter`
 
@@ -374,7 +375,7 @@ Current threshold value.
 
 [View full source →](#method-ewmathresholdadapter-current_threshold)
 
----
+
 
 ### `ChangeDetectionThresholdAdapter`
 
@@ -434,7 +435,7 @@ Current threshold value.
 
 [View full source →](#method-changedetectionthresholdadapter-current_threshold)
 
----
+
 
 ### `MultivariatethresholdAdapter`
 
@@ -482,7 +483,7 @@ Current threshold value.
 
 [View full source →](#method-multivariatethresholdadapter-current_threshold)
 
----
+
 
 ### `AdaptiveThresholdManager`
 
@@ -546,7 +547,7 @@ Current consensus threshold.
 
 [View full source →](#method-adaptivethresholdmanager-current_threshold)
 
----
+
 
 ### `ThresholdAdapterFactory`
 
@@ -595,7 +596,7 @@ Create EWMA threshold adapter with default configuration.
 
 [View full source →](#method-thresholdadapterfactory-create_default_ewma)
 
----
+
 
 ## Functions
 
@@ -625,7 +626,7 @@ ThresholdAdapter
 :linenos:
 ```
 
----
+
 
 ### `create_adaptive_threshold_manager(methods, config)`
 
@@ -651,7 +652,7 @@ AdaptiveThresholdManager
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

@@ -2,7 +2,7 @@
 
 **High-Performance Simulation System: Vector Engine, Safety Guards & Orchestration**
 
----
+
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@
 8. [Performance Optimization](#performance-optimization)
 9. [Best Practices](#best-practices)
 
----
+
 
 ## Introduction
 
@@ -39,7 +39,7 @@ The DIP-SMC-PSO simulation architecture provides a high-performance, production-
 - **Orchestration Strategies:** Batch, sequential, parallel, real-time
 - **Memory Efficient:** View-based operations, zero-copy when possible
 
----
+
 
 ## Architecture Overview
 
@@ -112,7 +112,7 @@ Initial state (D,) → simulate() → Safety guards → states (H+1, D)
 Initial states (B, D) → simulate() → Vectorized dynamics → states (B, H+1, D)
 ```
 
----
+
 
 ## Vector Simulation Engine
 
@@ -141,7 +141,7 @@ def simulate(
 ) -> np.ndarray
 ```
 
-#### Shape Conventions
+## Shape Conventions
 
 | Mode | Initial State | Control Inputs | Output States |
 |------|--------------|----------------|---------------|
@@ -206,7 +206,7 @@ states = simulate(x0, u, dt, stop_fn=stop_condition)
 print(f"Simulation stopped at step {len(states)-1}")  # May be < 1000
 ```
 
-### Safety Guards Integration
+## Safety Guards Integration
 
 The vector engine integrates three safety guards automatically:
 
@@ -258,7 +258,7 @@ states = simulate(
 )
 ```
 
----
+
 
 ## Simulation Runner
 
@@ -286,7 +286,7 @@ x_next_full = full_step_fn(x, u, dt)
 x_next_lr = lowrank_step_fn(x, u, dt)
 ```
 
-### run_simulation() Function
+## run_simulation() Function
 
 High-level trajectory generation with controller integration.
 
@@ -312,7 +312,7 @@ def run_simulation(
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]
 ```
 
-#### Features
+## Features
 
 1. **Controller State Management:** Calls `initialize_state()` and `initialize_history()` if available
 2. **Control Saturation:** Respects `u_max` or `controller.max_force`
@@ -346,7 +346,7 @@ print(f"States shape: {states.shape}")  # (1001, 6)
 print(f"Controls shape: {controls.shape}")  # (1000,)
 ```
 
----
+
 
 ## Simulation Context
 
@@ -414,7 +414,7 @@ t, states, controls = run_simulation(
 )
 ```
 
----
+
 
 ## Orchestrators
 
@@ -470,7 +470,7 @@ print(f"Successful runs: {result.success_count}")
 print(f"Execution time: {result.execution_time:.3f}s")
 ```
 
-### Performance Comparison
+## Performance Comparison
 
 **Benchmark:** 30 simulations, 1000 timesteps each
 
@@ -482,7 +482,7 @@ print(f"Execution time: {result.execution_time:.3f}s")
 
 **Conclusion:** Batch orchestration is optimal for homogeneous workloads (PSO, parameter sweeps)
 
----
+
 
 ## Safety System
 
@@ -533,7 +533,7 @@ states = simulate(
 )
 ```
 
-### Custom Safety Guards
+## Custom Safety Guards
 
 ```python
 from src.simulation.context.safety_guards import _guard_no_nan
@@ -558,7 +558,7 @@ for i in range(horizon):
     t += dt
 ```
 
----
+
 
 ## Performance Optimization
 
@@ -606,7 +606,7 @@ u_batch = np.broadcast_to(control_input, (n_particles,))  # Efficient view
 u_batch = np.array([control_input[0] for _ in range(n_particles)])
 ```
 
-### Computational Optimization
+## Computational Optimization
 
 **Numba JIT Compilation:**
 
@@ -628,7 +628,7 @@ def fast_dynamics_step(state, control, dt, params):
 # Subsequent calls: ~0.1 ms (compiled code)
 ```
 
-### Profiling Guidelines
+## Profiling Guidelines
 
 ```python
 import time
@@ -657,7 +657,7 @@ profiler.print_stats(sort='cumtime')
 # 4. array operations (10-20%)
 ```
 
----
+
 
 ## Best Practices
 
@@ -673,7 +673,7 @@ profiler.print_stats(sort='cumtime')
 # HIL testing → RealTimeOrchestrator
 ```
 
-### 2. Validate Inputs Early
+## 2. Validate Inputs Early
 
 ```python
 from src.simulation.engines.vector_sim import simulate
@@ -686,7 +686,7 @@ assert dt > 0, "Time step must be positive"
 states = simulate(x0, u, dt, horizon=horizon)
 ```
 
-### 3. Use Safety Guards in Production
+## 3. Use Safety Guards in Production
 
 ```python
 # example-metadata:
@@ -706,7 +706,7 @@ states_prod = simulate(
 )
 ```
 
-### 4. Handle Early Stopping Gracefully
+## 4. Handle Early Stopping Gracefully
 
 ```python
 # example-metadata:
@@ -730,7 +730,7 @@ states = simulate(x0, u, dt, stop_fn=soft_stop)
 # states.shape[0] may be < horizon + 1
 ```
 
-### 5. Leverage Vectorization
+## 5. uses Vectorization
 
 ```python
 # example-metadata:
@@ -763,7 +763,7 @@ def fitness_vectorized(particles):
     return costs
 ```
 
----
+
 
 ## References
 
@@ -773,7 +773,7 @@ def fitness_vectorized(particles):
 4. **Batch Orchestrator:** `src/simulation/orchestrators/batch.py`
 5. **Safety Guards:** `src/simulation/context/safety_guards.py`
 
----
+
 
 **File Location:** `docs/mathematical_foundations/simulation_architecture_guide.md`
 **Lines:** 647

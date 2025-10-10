@@ -16,7 +16,7 @@ Provides reduced-order dynamics while maintaining essential system behavior.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

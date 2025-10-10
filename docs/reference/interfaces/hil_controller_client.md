@@ -171,7 +171,7 @@ client.run()
 print("HIL simulation complete, results saved to hil_results.json")
 ```
 
-### Example 2: Custom Controller Integration
+## Example 2: Custom Controller Integration
 
 ```python
 from src.interfaces.hil import HILControllerClient
@@ -200,7 +200,7 @@ client._controller = controller
 client.run()
 ```
 
-### Example 3: Fallback Controller Testing
+## Example 3: Fallback Controller Testing
 
 ```python
 from src.interfaces.hil import HILControllerClient
@@ -263,7 +263,7 @@ print(f"P95 latency: {np.percentile(latencies, 95):.2f} ms")
 print(f"P99 latency: {np.percentile(latencies, 99):.2f} ms")
 ```
 
-### Example 5: Robust Client with Retry Logic
+## Example 5: Robust Client with Retry Logic
 
 ```python
 # example-metadata:
@@ -304,7 +304,7 @@ run_client_with_retry()
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -336,7 +336,7 @@ run_client_with_retry()
 
 [View full source →](#method-_fallbackpdcontroller-compute_control)
 
----
+
 
 ### `HILControllerClient`
 
@@ -358,7 +358,7 @@ run_client_with_retry()
 
 [View full source →](#method-hilcontrollerclient-run)
 
----
+
 
 ## Functions
 
@@ -374,7 +374,7 @@ Prefer validated loading; fallback to YAML only if project loader unavailable.
 :linenos:
 ```
 
----
+
 
 ### `_get(cfg, dotted, default)`
 
@@ -386,7 +386,7 @@ Prefer validated loading; fallback to YAML only if project loader unavailable.
 :linenos:
 ```
 
----
+
 
 ### `_build_controller(cfg)`
 
@@ -408,7 +408,7 @@ unintended controller.
 :linenos:
 ```
 
----
+
 
 ### `run_client(cfg_path, steps, results_path)`
 
@@ -420,7 +420,7 @@ unintended controller.
 :linenos:
 ```
 
----
+
 
 ### `main(argv)`
 
@@ -432,7 +432,7 @@ unintended controller.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

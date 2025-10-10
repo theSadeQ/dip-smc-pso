@@ -1,14 +1,31 @@
 # How-To: Running Simulations **Type:** Task-Oriented Guide
+
 **Level:** Beginner to Advanced
-**Prerequisites:** [Getting Started Guide](../getting-started.md) --- ## Overview This guide provides practical recipes for running simulations in the DIP SMC PSO framework. Choose the approach that best fits your needs: - **Quick simulation:** CLI with default settings
+**Prerequisites:** [Getting Started Guide](../getting-started.md)
+
+---
+
+## Overview This guide provides practical recipes for running simulations in the DIP SMC PSO framework. Choose the approach that best fits your needs: - **Quick simulation:** CLI with default settings
+
 - **Custom parameters:** CLI with overrides
 - **Interactive tuning:** Streamlit dashboard
 - **Batch processing:** Python API for Monte Carlo studies
-- **Notebooks:** Jupyter integration for exploration --- ## Table of Contents - [CLI Usage](#cli-usage)
+- **Notebooks:** Jupyter integration for exploration
+
+---
+
+## Table of Contents - [CLI Usage](#cli-usage)
+
 - [Programmatic Usage](#programmatic-usage)
 - [Streamlit Dashboard](#streamlit-dashboard)
-- [Advanced Patterns](#advanced-patterns) --- ## CLI Usage ### Basic Commands ```bash
+- [Advanced Patterns](#advanced-patterns)
+
+---
+
+## CLI Usage ### Basic Commands ```bash
+
 # Minimal simulation (default controller, no plots)
+
 python simulate.py # Classical SMC with plots
 python simulate.py --ctrl classical_smc --plot # Save results to file
 python simulate.py --ctrl classical_smc --plot --save results.json
@@ -22,12 +39,15 @@ python simulate.py --ctrl classical_smc --run-pso --save gains.json # Run Hardwa
 python simulate.py --run-hil --plot # Set random seed for reproducibility
 python simulate.py --ctrl classical_smc --seed 42 --plot
 ``` ### Parameter Overrides **Override single parameter:**
+
 ```bash
 python simulate.py --ctrl classical_smc \ --override "max_force=150.0" \ --plot
 ``` **Override multiple parameters:**
+
 ```bash
 python simulate.py --ctrl classical_smc \ --override "gains=[12,9,18,14,60,6]" \ --override "max_force=120.0" \ --override "boundary_layer=0.05" \ --plot
 ``` **Override nested configuration:**
+
 ```bash
 # Change simulation duration
 python simulate.py --ctrl classical_smc \ --override "simulation.duration=10.0" \ --plot # Change timestep
@@ -35,12 +55,15 @@ python simulate.py --ctrl classical_smc \ --override "simulation.dt=0.005" \ --p
 python simulate.py --ctrl classical_smc \ --override "simulation.initial_conditions=[0,0,0.2,0,0.3,0]" \ --plot # Change physics parameters
 python simulate.py --ctrl classical_smc \ --override "dip_params.m0=1.5" \ --plot
 ``` **Combine multiple overrides:**
+
 ```bash
 python simulate.py --ctrl classical_smc \ --override "simulation.duration=8.0" \ --override "simulation.dt=0.005" \ --override "dip_params.m0=1.2" \ --override "max_force=120.0" \ --plot \ --save robustness_test.json
 ``` ### Working with Saved Results **Save simulation:**
+
 ```bash
 python simulate.py --ctrl classical_smc --plot --save baseline.json
 ``` **Load and inspect results (Python):**
+
 ```python
 import json # Load results
 with open('baseline.json') as f: data = json.load(f) # Access metrics
@@ -49,12 +72,14 @@ print(f"Settling Time: {data['metrics']['settling_time']:.2f}s") # Access contro
 print(f"Controller: {data['controller_type']}") # Access gains used
 print(f"Gains: {data['gains']}")
 ``` **Load and compare results (bash):**
+
 ```bash
 # Quick comparison using jq (if installed)
 jq '.metrics' baseline.json
 jq '.metrics' optimized.json # Or using Python one-liner
 python -c "import json; print(json.load(open('baseline.json'))['metrics'])"
 ``` ### Reproducibility **Set seed for deterministic results:**
+
 ```bash
 # Same seed = same PSO initialization + same random noise (if any)
 python simulate.py --ctrl classical_smc --run-pso --seed 42 --save run1.json
@@ -65,7 +90,12 @@ r1 = json.load(open('run1.json'))
 r2 = json.load(open('run2.json'))
 print('Identical:', r1['pso_cost'] == r2['pso_cost'])
 "
-``` --- ## Programmatic Usage ### Basic Python API ```python
+```
+
+---
+
+## Programmatic Usage ### Basic Python API ```python
+
 from src.controllers.factory import create_controller
 from src.core.simulation_runner import SimulationRunner
 from src.config import load_config # Load configuration
@@ -104,6 +134,7 @@ time_array = np.array(time_log)
 state_array = np.array(state_log)
 control_array = np.array(control_log) print(f"Final state: {state_array[-1]}")
 ``` ### Batch Simulations ```python
+
 import multiprocessing as mp
 from functools import partial def run_single_simulation(ic, controller_gains): """Run simulation with specific initial condition.""" config = load_config('config.yaml') config.simulation.initial_conditions = ic controller = create_controller( 'classical_smc', config=config.controllers.classical_smc, gains=controller_gains ) runner = SimulationRunner(config) result = runner.run(controller) return result['metrics']['ise'] # Define initial conditions
 initial_conditions = [ [0, 0, 0.1, 0, 0.15, 0], [0, 0, 0.2, 0, 0.25, 0], [0, 0, 0.3, 0, 0.35, 0],
@@ -142,8 +173,14 @@ axes[2].grid() plt.tight_layout()
 plt.show() # Display metrics
 print(f"ISE: {result['metrics']['ise']:.4f}")
 print(f"Settling Time: {result['metrics']['settling_time']:.2f}s")
-``` --- ## Streamlit Dashboard ### Launching the Dashboard ```bash
+```
+
+---
+
+## Streamlit Dashboard ### Launching the Dashboard ```bash
+
 # Basic launch
+
 streamlit run streamlit_app.py # Custom port
 streamlit run streamlit_app.py --server.port 8080 # Network accessible (other devices on LAN)
 streamlit run streamlit_app.py --server.address 0.0.0.0
@@ -186,13 +223,19 @@ streamlit run streamlit_app.py --server.address 0.0.0.0
 - Use PSO button for automatic optimization **Comparison:**
 - Run multiple controllers sequentially
 - Take screenshots for comparison
-- Export metrics to CSV for analysis --- ## Advanced Patterns ### Long-Duration Simulations ```bash
+- Export metrics to CSV for analysis
+
+---
+
+## Advanced Patterns ### Long-Duration Simulations ```bash
 # 60-second simulation with fine timestep
 python simulate.py --ctrl classical_smc \ --override "simulation.duration=60.0" \ --override "simulation.dt=0.001" \ --plot \ --save long_run.json # Monitor memory usage (Linux/Mac)
 /usr/bin/time -v python simulate.py --ctrl classical_smc \ --override "simulation.duration=60.0" \ --plot
 ``` **Memory management tip:**
+
 For very long simulations, consider downsampling stored data: ```python
 # In custom loop
+
 if i % 10 == 0: # Store every 10th sample time_log.append(i * dt) state_log.append(state.copy()) control_log.append(u)
 ``` ### Parallel Simulations (Multiprocessing) ```python
 import multiprocessing as mp
@@ -204,19 +247,26 @@ experiments = [ (ctrl, i, ic) for ctrl in controllers for i, ic in enumerate(ini
 ] # Run in parallel (4 processes)
 with mp.Pool(4) as pool: result_files = pool.map(run_simulation, experiments) print(f"Generated {len(result_files)} result files")
 ``` ### Custom Integration Methods ```python
+
 from scipy.integrate import solve_ivp def dip_dynamics(t, state, controller, state_vars, history): """Dynamics function for scipy ODE solver.""" u, state_vars, history = controller.compute_control(state, state_vars, history) # Compute state derivatives (use your dynamics model) dstate = dynamics.compute_derivatives(state, u) return dstate # Solve using RK45 (adaptive)
 solution = solve_ivp( lambda t, s: dip_dynamics(t, s, controller, state_vars, history), t_span=(0, 5.0), y0=initial_state, method='RK45', rtol=1e-6, atol=1e-9
 ) time = solution.t
 state = solution.y.T
-``` --- ## Troubleshooting ### Simulation Diverges **Symptoms:** State values grow unbounded, NaN errors **Solutions:**
+```
+
+---
+
+## Troubleshooting ### Simulation Diverges **Symptoms:** State values grow unbounded, NaN errors **Solutions:**
 ```bash
 # Reduce timestep
+
 python simulate.py --ctrl classical_smc --override "simulation.dt=0.005" --plot # Reduce initial perturbation
 python simulate.py --ctrl classical_smc \ --override "simulation.initial_conditions=[0,0,0.05,0,0.08,0]" \ --plot # Increase max force limit
 python simulate.py --ctrl classical_smc --override "max_force=150.0" --plot
 ``` ### Slow Performance **Solutions:**
 ```bash
 # Use simplified dynamics
+
 python simulate.py --ctrl classical_smc \ --override "simulation.use_full_dynamics=false" \ --plot # Reduce duration
 python simulate.py --ctrl classical_smc --override "simulation.duration=3.0" --plot # Increase timestep (check stability)
 python simulate.py --ctrl classical_smc --override "simulation.dt=0.02" --plot
@@ -225,7 +275,16 @@ python simulate.py --ctrl classical_smc --override "simulation.dt=0.02" --plot
 pwd # Should be project root # Check Python path
 python -c "import sys; print('\n'.join(sys.path))" # Reinstall dependencies
 pip install -r requirements.txt
-``` --- ## Next Steps - [How-To: Result Analysis](result-analysis.md): Interpret simulation outputs
+```
+
+---
+
+## Next Steps - [How-To: Result Analysis](result-analysis.md): Interpret simulation outputs
+
 - [How-To: Optimization Workflows](optimization-workflows.md): Tune gains with PSO
 - [Tutorial 01](../tutorials/tutorial-01-first-simulation.md): walkthrough
-- [User Guide](../user-guide.md): Complete reference --- **Last Updated:** October 2025
+- [User Guide](../user-guide.md): Complete reference
+
+---
+
+**Last Updated:** October 2025

@@ -13,7 +13,7 @@ Result processing and management for simulation framework.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 
@@ -121,15 +121,18 @@ graph TD
 from src.simulation.results import StandardResultContainer
 
 # Create result container
+
 result = StandardResultContainer()
 
 # Store simulation data
+
 result.set_time_series('state', t, x)
 result.set_time_series('control', t, u)
 result.set_metadata('controller_type', 'classical_smc')
 result.set_metadata('gains', [10, 8, 15, 12, 50, 5])
 
 # Access data
+
 state_data = result.get_time_series('state')
 metadata = result.get_metadata()
 
@@ -137,21 +140,24 @@ print(f"Simulation duration: {result.duration}s")
 print(f"Number of steps: {result.num_steps}")
 \`\`\`
 
-### Example 2: Batch Result Aggregation
+## Example 2: Batch Result Aggregation
 
 \`\`\`python
 from src.simulation.results import BatchResultContainer
 from src.simulation.results import ResultProcessor
 
 # Create batch container
+
 batch = BatchResultContainer()
 
 # Add multiple trial results
+
 for i in range(100):
     trial_result = run_single_simulation(seed=i)
     batch.add_result(trial_result)
 
 # Aggregate results
+
 processor = ResultProcessor()
 aggregated = processor.aggregate_batch(batch)
 
@@ -160,12 +166,13 @@ print(f"95% CI: [{aggregated['ise']['ci_lower']:.4f}, {aggregated['ise']['ci_upp
 print(f"Min/Max: [{aggregated['ise']['min']:.4f}, {aggregated['ise']['max']:.4f}]")
 \`\`\`
 
-### Example 3: Result Validation
+## Example 3: Result Validation
 
 \`\`\`python
 from src.simulation.results import ResultValidator
 
 # Create validator
+
 validator = ResultValidator(
     required_fields=['time', 'state', 'control'],
     state_bounds=(-10.0, 10.0),
@@ -173,6 +180,7 @@ validator = ResultValidator(
 )
 
 # Validate result
+
 is_valid, errors = validator.validate(result)
 
 if not is_valid:
@@ -183,27 +191,30 @@ else:
     print("✓ Result is valid")
 \`\`\`
 
-### Example 4: Export to Multiple Formats
+## Example 4: Export to Multiple Formats
 
 \`\`\`python
 from src.simulation.results import CSVExporter, HDF5Exporter, JSONExporter
 
 # Export to CSV
+
 csv_exporter = CSVExporter()
 csv_exporter.export(result, 'simulation_result.csv')
 
 # Export to HDF5 (with compression)
+
 hdf5_exporter = HDF5Exporter(compression='gzip', compression_opts=9)
 hdf5_exporter.export(result, 'simulation_result.h5')
 
 # Export to JSON
+
 json_exporter = JSONExporter(indent=2)
 json_exporter.export(result, 'simulation_result.json')
 
 print("Results exported to 3 formats")
 \`\`\`
 
-### Example 5: Result Processing Pipeline
+## Example 5: Result Processing Pipeline
 
 \`\`\`python
 from src.simulation.results import (
@@ -213,6 +224,7 @@ from src.simulation.results import (
 )
 
 # Define processing pipeline
+
 def process_results_pipeline(raw_results, output_path):
     # 1. Validate
     validator = ResultValidator()
@@ -237,6 +249,7 @@ def process_results_pipeline(raw_results, output_path):
     return processed
 
 # Run pipeline
+
 results_batch = [run_simulation(i) for i in range(100)]
 processed = process_results_pipeline(results_batch, 'output/batch_results.csv')
 \`\`\`
@@ -262,46 +275,50 @@ graph TD
 
 \`\`\`python
 # Basic usage example
+
 from src.simulation.results import Component
 
 component = Component()
 result = component.process(data)
 \`\`\`
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 \`\`\`python
 # Advanced configuration
+
 component = Component(
     option1=value1,
     option2=value2
 )
 \`\`\`
 
-### Example 3: Integration with Framework
+## Example 3: Integration with Framework
 
 \`\`\`python
 # Integration example
+
 from src.simulation import SimulationRunner
 
 runner = SimulationRunner()
 runner.use_component(component)
 \`\`\`
 
-### Example 4: Performance Optimization
+## Example 4: Performance Optimization
 
 \`\`\`python
 # Performance-optimized usage
+
 component = Component(enable_caching=True)
 \`\`\`
 
-### Example 5: Error Handling
+## Example 5: Error Handling
 
 \`\`\`python
 # Error handling
+
 try:
     result = component.process(data)
 except ComponentError as e:
     print(f"Error: {e}")
 \`\`\`
-

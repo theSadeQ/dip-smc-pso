@@ -1,3 +1,5 @@
+# 5 Chattering & Mitigation
+
 **An Analysis of Chattering Phenomena and Mitigation Strategies in a Sliding Mode Control Implementation for a Double Inverted Pendulum**
 
 ## Abstract

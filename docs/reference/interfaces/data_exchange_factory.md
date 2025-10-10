@@ -16,7 +16,7 @@ with automatic configuration and optimization.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -34,7 +34,7 @@ Predefined serializer configurations.
 :linenos:
 ```
 
----
+
 
 ### `OptimizationMode`
 
@@ -50,7 +50,7 @@ Optimization modes for serializer selection.
 :linenos:
 ```
 
----
+
 
 ### `SerializerFactory`
 
@@ -166,7 +166,7 @@ Generate cache key for serializer configuration.
 
 [View full source →](#method-serializerfactory-_generate_cache_key)
 
----
+
 
 ## Functions
 
@@ -182,7 +182,7 @@ Create serializer using global factory.
 :linenos:
 ```
 
----
+
 
 ### `create_from_preset(preset)`
 
@@ -196,7 +196,7 @@ Create serializer from preset using global factory.
 :linenos:
 ```
 
----
+
 
 ### `auto_select_serializer(sample_data, requirements)`
 
@@ -210,7 +210,7 @@ Auto-select optimal serializer using global factory.
 :linenos:
 ```
 
----
+
 
 ### `benchmark_serializers(test_data, formats)`
 
@@ -224,7 +224,7 @@ Benchmark serializers using global factory.
 :linenos:
 ```
 
----
+
 
 ### `get_recommended_serializer(use_case)`
 
@@ -238,7 +238,7 @@ Get recommended serializer for common use cases.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

@@ -17,7 +17,7 @@ double inverted pendulum system.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -120,7 +120,7 @@ JIT-compiled full Coriolis matrix computation.
 
 [View full source →](#method-fullfidelityphysicscomputer-_compute_full_coriolis_matrix_numba)
 
----
+
 
 ## Dependencies
 

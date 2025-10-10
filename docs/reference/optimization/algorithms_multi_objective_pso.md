@@ -117,14 +117,14 @@ config = {'parameter': 'value'}
 instance = Component(config)
 ```
 
-### Example 2: Performance Tuning
+## Example 2: Performance Tuning
 
 ```python
 # Adjust parameters for better performance
 optimized_params = tune_parameters(instance, target_performance)
 ```
 
-### Example 3: Integration with Optimization
+## Example 3: Integration with Optimization
 
 ```python
 # Use in complete optimization loop
@@ -132,7 +132,7 @@ optimizer = create_optimizer(opt_type, config)
 result = optimize(optimizer, problem, max_iter=100)
 ```
 
-### Example 4: Edge Case Handling
+## Example 4: Edge Case Handling
 
 ```python
 try:
@@ -148,6 +148,7 @@ except ValueError as e:
 metrics = compute_metrics(result)
 print(f"Best fitness: {metrics.best_fitness:.3f}")
 ```
+
 This module implements a production-ready multi-objective PSO algorithm specifically
 designed for control system parameter optimization. It provides Pareto front discovery,
 convergence analysis, and advanced optimization features.
@@ -173,7 +174,7 @@ References:
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -189,7 +190,7 @@ Multi-Objective PSO Configuration.
 :linenos:
 ```
 
----
+
 
 ### `ParetoArchive`
 
@@ -239,7 +240,7 @@ Get the current Pareto front.
 
 [View full source →](#method-paretoarchive-get_pareto_front)
 
----
+
 
 ### `MultiObjectivePSO`
 
@@ -316,7 +317,7 @@ Monte Carlo approximation of hypervolume.
 
 [View full source →](#method-multiobjectivepso-_hypervolume_monte_carlo)
 
----
+
 
 ## Functions
 
@@ -342,7 +343,7 @@ List[Callable]
 :linenos:
 ```
 
----
+
 
 ### `run_multi_objective_pso(controller_factory, config, seed)`
 
@@ -370,7 +371,7 @@ Dict[str, Any]
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

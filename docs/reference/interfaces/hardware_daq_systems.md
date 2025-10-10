@@ -16,7 +16,7 @@ data acquisition hardware commonly used in control applications.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -34,7 +34,7 @@ DAQ operation mode enumeration.
 :linenos:
 ```
 
----
+
 
 ### `ChannelType`
 
@@ -50,7 +50,7 @@ DAQ channel type enumeration.
 :linenos:
 ```
 
----
+
 
 ### `ChannelConfig`
 
@@ -64,7 +64,7 @@ DAQ channel configuration.
 :linenos:
 ```
 
----
+
 
 ### `DAQSample`
 
@@ -78,7 +78,7 @@ DAQ sample data structure.
 :linenos:
 ```
 
----
+
 
 ### `DAQBuffer`
 
@@ -112,7 +112,7 @@ Clear buffer.
 
 [View full source →](#method-daqbuffer-clear)
 
----
+
 
 ### `DAQInterface`
 
@@ -230,7 +230,7 @@ Store sample in buffer.
 
 [View full source →](#method-daqinterface-_store_sample)
 
----
+
 
 ### `NIDAQInterface`
 
@@ -323,7 +323,7 @@ Continuous acquisition loop.
 
 [View full source →](#method-nidaqinterface-_acquisition_loop)
 
----
+
 
 ### `AdcInterface`
 
@@ -428,7 +428,7 @@ Initialize default ADC channels.
 
 [View full source →](#method-adcinterface-_init_adc_channels)
 
----
+
 
 ## Dependencies
 

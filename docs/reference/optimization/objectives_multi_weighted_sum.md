@@ -13,7 +13,7 @@ Weighted sum multi-objective optimization.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -89,7 +89,7 @@ Analyze weight sensitivity results.
 
 [View full source →](#method-weightedsumobjective-_analyze_weight_sensitivity)
 
----
+
 
 ### `AdaptiveWeightedSumObjective`
 
@@ -136,7 +136,7 @@ Get information about weight adaptation.
 
 [View full source →](#method-adaptiveweightedsumobjective-get_adaptation_info)
 
----
+
 
 ## Dependencies
 

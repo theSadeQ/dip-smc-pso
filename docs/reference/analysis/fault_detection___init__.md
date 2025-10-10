@@ -98,7 +98,7 @@ component = Component(config)
 result = component.process(data)
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 ```python
 # Configure with custom parameters
@@ -109,7 +109,7 @@ config = {
 component = Component(config)
 ```
 
-### Example 3: Integration Workflow
+## Example 3: Integration Workflow
 
 ```python
 # Complete analysis workflow
@@ -122,7 +122,7 @@ results = analyze(
 )
 ```
 
-### Example 4: Fault Detection Example
+## Example 4: Fault Detection Example
 
 ```python
 # FDI system usage
@@ -133,7 +133,7 @@ residual = fdi.generate_residual(y, u)
 fault = fdi.detect(residual)
 ```
 
-### Example 5: Visualization Example
+## Example 5: Visualization Example
 
 ```python
 # Generate analysis plots
@@ -150,7 +150,7 @@ fig.savefig('analysis.pdf')
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

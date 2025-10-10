@@ -16,7 +16,7 @@ with compression and performance optimization features.
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -34,7 +34,7 @@ Supported serialization formats.
 :linenos:
 ```
 
----
+
 
 ### `SerializationError`
 
@@ -56,7 +56,7 @@ Exception raised during serialization/deserialization.
 
 [View full source →](#method-serializationerror-__init__)
 
----
+
 
 ### `SerializerInterface`
 
@@ -104,7 +104,7 @@ Calculate compression ratio.
 
 [View full source →](#method-serializerinterface-get_compression_ratio)
 
----
+
 
 ### `JSONSerializer`
 
@@ -164,7 +164,7 @@ Restore data from JSON representation.
 
 [View full source →](#method-jsonserializer-_restore_from_json)
 
----
+
 
 ### `MessagePackSerializer`
 
@@ -206,7 +206,7 @@ Deserialize MessagePack bytes to data.
 
 [View full source →](#method-messagepackserializer-deserialize)
 
----
+
 
 ### `PickleSerializer`
 
@@ -248,7 +248,7 @@ Deserialize pickle bytes to data.
 
 [View full source →](#method-pickleserializer-deserialize)
 
----
+
 
 ### `BinarySerializer`
 
@@ -290,7 +290,7 @@ Deserialize binary data.
 
 [View full source →](#method-binaryserializer-deserialize)
 
----
+
 
 ### `CompressionSerializer`
 
@@ -338,7 +338,7 @@ Get compression statistics.
 
 [View full source →](#method-compressionserializer-get_compression_stats)
 
----
+
 
 ## Functions
 
@@ -354,7 +354,7 @@ Create JSON serializer with common settings.
 :linenos:
 ```
 
----
+
 
 ### `create_msgpack_serializer()`
 
@@ -368,7 +368,7 @@ Create MessagePack serializer.
 :linenos:
 ```
 
----
+
 
 ### `create_compressed_serializer(base_format, compression_type, compression_level)`
 
@@ -382,7 +382,7 @@ Create compressed serializer.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

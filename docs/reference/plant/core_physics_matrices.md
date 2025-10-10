@@ -1,4 +1,5 @@
 # plant.core.physics_matrices
+
 <!-- Enhanced by Week 8 Phase 2 -->
 
 
@@ -8,7 +9,7 @@
 **Complexity:** Advanced
 **Prerequisites:** Lagrangian mechanics, linear algebra, classical mechanics
 
----
+
 
 ## Table of Contents
 
@@ -17,7 +18,7 @@
 :depth: 3
 ```
 
----
+
 
 ## Module Overview
 
@@ -36,7 +37,7 @@ This module provides the mathematical foundation for computing the three fundame
 3. **Testability**: Pure mathematical functions for rigorous validation
 4. **Reusability**: Common interface for simplified and full dynamics models
 
----
+
 
 ## Mathematical Foundation
 
@@ -203,7 +204,7 @@ $$
 
 This linear approximation is used in **LQR control design** and **simplified dynamics models**.
 
----
+
 
 
 ## Architecture Diagram
@@ -276,7 +277,7 @@ def _compute_inertia_matrix_numba(theta1, theta2, m0, m1, m2, ...):
 - Limited debugging (use `debug=True` during development)
 - First call incurs compilation overhead (~1 second)
 
----
+
 
 ## Complete Source Code
 
@@ -285,7 +286,7 @@ def _compute_inertia_matrix_numba(theta1, theta2, m0, m1, m2, ...):
 :linenos:
 ```
 
----
+
 
 ## API Reference
 
@@ -337,7 +338,7 @@ $$
 
 **Returns:** 3×1 vector
 
----
+
 
 ### Class: DIPPhysicsMatrices
 
@@ -411,7 +412,7 @@ eigenvalues = np.linalg.eigvals(M)
 assert np.all(eigenvalues > 0)
 ```
 
-##### `compute_coriolis_matrix(self, state: np.ndarray) -> np.ndarray`
+## `compute_coriolis_matrix(self, state: np.ndarray) -> np.ndarray`
 
 Compute the Coriolis matrix C(q,q̇) for the DIP system.
 
@@ -441,7 +442,7 @@ assert C[0, 0] == config.cart_friction
 assert C[1, 1] >= config.joint1_friction  # May include velocity terms
 ```
 
-##### `compute_gravity_vector(self, state: np.ndarray) -> np.ndarray`
+## `compute_gravity_vector(self, state: np.ndarray) -> np.ndarray`
 
 Compute the gravity vector G(q) for the DIP system.
 
@@ -471,7 +472,7 @@ assert G_perturbed[1] < 0  # Restoring torque on link 1
 assert G_perturbed[2] < 0  # Restoring torque on link 2
 ```
 
-##### `compute_all_matrices(self, state: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]`
+## `compute_all_matrices(self, state: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]`
 
 Compute all physics matrices in a single call for efficiency.
 
@@ -495,7 +496,7 @@ q_dot = state[3:]
 q_ddot = np.linalg.solve(M, tau - C @ q_dot - G)
 ```
 
-#### Static Methods (Numba-Optimized)
+## Static Methods (Numba-Optimized)
 
 ##### `_compute_inertia_matrix_numba(...) -> np.ndarray`
 
@@ -513,7 +514,7 @@ JIT-compiled Coriolis matrix computation.
 
 JIT-compiled gravity vector computation.
 
----
+
 
 ### Class: SimplifiedDIPPhysicsMatrices
 
@@ -572,7 +573,7 @@ relative_error = np.linalg.norm(M_simp - M_full) / np.linalg.norm(M_full)
 print(f"Inertia matrix error: {relative_error * 100:.2f}%")  # Typically 2-5%
 ```
 
----
+
 
 ## Usage Examples
 
@@ -600,7 +601,7 @@ print(f"\nCoriolis Matrix C:\n{C}")
 print(f"\nGravity Vector G:\n{G}")
 ```
 
-### Integration with Dynamics Model
+## Integration with Dynamics Model
 
 ```python
 from src.plant.models.full import FullDIPDynamics
@@ -644,7 +645,7 @@ print(f"Simplified physics: {simplified_time:.4f}s")
 print(f"Speedup: {full_time / simplified_time:.2f}×")
 ```
 
-### Matrix Property Verification
+## Matrix Property Verification
 
 ```python
 # example-metadata:
@@ -703,7 +704,7 @@ E_total = T + V
 print(f"Total energy: {E_total:.4f} J")
 ```
 
----
+
 
 ## Performance Considerations
 
@@ -739,7 +740,7 @@ def warmup_physics_computer(physics):
     physics.compute_gravity_vector(dummy_state)
 ```
 
-### Batch Computation
+## Batch Computation
 
 For **vectorized simulation** over multiple trajectories:
 
@@ -756,7 +757,7 @@ def compute_inertia_batch(physics, states):
 # More efficient: Use Numba parallel loops (future enhancement)
 ```
 
-### Memory Efficiency
+## Memory Efficiency
 
 **Avoid repeated allocations:**
 
@@ -771,7 +772,7 @@ for i in range(10000):
     M[:] = physics.compute_inertia_matrix(state)  # In-place update
 ```
 
----
+
 
 ## Scientific References
 
@@ -785,7 +786,7 @@ for i in range(10000):
 
 5. **Goldstein, H., Poole, C., Safko, J.** (2002). *Classical Mechanics* (3rd ed.). Addison-Wesley. Chapter 1: Lagrangian and Hamiltonian Mechanics.
 
----
+
 
 ## Related Documentation
 
@@ -794,7 +795,7 @@ for i in range(10000):
 - **Full Dynamics Model**: [models_full_physics.md](models_full_physics.md)
 - **Simplified Dynamics**: [models_simplified_physics.md](models_simplified_physics.md)
 
----
+
 
 ## Dependencies
 

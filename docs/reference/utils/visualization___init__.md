@@ -1,4 +1,5 @@
 # utils.visualization.__init__ **Source:** `src\utils\visualization\__init__.py` ## Module Overview visualization package for control engineering. This package provides complete visualization features including:
+
 - Real-time and recorded animations
 - Static analysis plots
 - Controller comparison visualizations
@@ -6,7 +7,11 @@
 - Professional presentation materials ## Complete Source Code ```{literalinclude} ../../../src/utils/visualization/__init__.py
 :language: python
 :linenos:
-``` --- ## Dependencies This module imports: - `from .animation import DIPAnimator, MultiSystemAnimator`
+```
+
+---
+
+## Dependencies This module imports: - `from .animation import DIPAnimator, MultiSystemAnimator`
 - `from .static_plots import ControlPlotter, SystemVisualization`
 - `from .movie_generator import ProjectMovieGenerator, MovieScene`
 - `from .legacy_visualizer import Visualizer` ## Advanced Mathematical Theory ### Visualization Theory Scientific visualization transforms numerical data into perceptual representations using mathematical principles. #### Frame Interpolation **Linear interpolation** for smooth animation:
@@ -45,6 +50,7 @@ $$
 $$ ## Architecture Diagram ```{mermaid}
 graph TD A[Visualization System] --> B[Animation] A --> C[Static Plots] A --> D[Movie Generator] B --> E[Frame Interpolation] E --> F{Interpolation Method} F -->|Linear| G[Fast, C⁰] F -->|Spline| H[Smooth, C²] C --> I[Plot Composition] I --> J{Layout} J -->|Single| K[Full Figure] J -->|Grid| L[Subplots] D --> M[Scene Management] M --> N[Intro Scene] M --> O[Animation Scenes] M --> P[Comparison Scene] N --> Q[Video Encoder] O --> Q P --> Q Q --> R[Output MP4/GIF] style F fill:#fff4e1 style J fill:#fff4e1 style R fill:#e8f5e9
 ``` ## Usage Examples ### Example 1: Real-Time Animation ```python
+
 from src.utils.visualization import DIPAnimator
 import numpy as np # Create animator
 animator = DIPAnimator( L1=0.3, L2=0.25, # Pendulum lengths fps=30, # 30 frames per second trail_length=50 # Show last 50 positions
@@ -61,6 +67,7 @@ fig, axes = plotter.plot_comprehensive( t=t, x=x, u=u, reference=np.zeros_like(x
 plotter.set_style('seaborn-v0_8-paper')
 plotter.add_grid(axes, alpha=0.3) plt.savefig('performance.png', dpi=300, bbox_inches='tight')
 ``` ### Example 3: Multi-System Comparison ```python
+
 from src.utils.visualization import MultiSystemAnimator # Create comparison animator
 animator = MultiSystemAnimator( systems=['Classical SMC', 'Adaptive SMC', 'STA SMC'], L1=0.3, L2=0.25, layout='horizontal' # Side-by-side comparison
 ) # Animate multiple controllers
@@ -74,6 +81,7 @@ scenes = [ MovieScene('intro', duration=5.0, content="Title and overview"), Movi
 ] # Generate complete movie
 generator.create_movie(scenes)
 ``` ### Example 5: Custom Color Schemes ```python
+
 from src.utils.visualization import ControlPlotter
 import numpy as np # Define perceptually uniform color scheme
 colors = { 'state': '#1f77b4', # Blue 'control': '#ff7f0e', # Orange 'reference': '#2ca02c', # Green 'error': '#d62728' # Red

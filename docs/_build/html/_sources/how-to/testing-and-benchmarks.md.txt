@@ -29,4 +29,3 @@ See `docs/benchmarks_methodology.md` and run:
 ```bash
 pytest tests/test_analysis/performance/ --benchmark-only
 ```
-

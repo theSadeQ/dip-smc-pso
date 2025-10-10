@@ -13,7 +13,7 @@ Swarm intelligence optimization algorithms.
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

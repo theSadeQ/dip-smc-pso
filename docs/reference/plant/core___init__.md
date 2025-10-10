@@ -1,4 +1,5 @@
 # plant.core.__init__
+
 <!-- Enhanced by Week 8 Phase 2 -->
 
 
@@ -156,7 +157,7 @@ import numpy as np
 # ... basic usage code ...
 ```
 
-### Example 2: Advanced Configuration
+## Example 2: Advanced Configuration
 
 Configure with custom parameters:
 
@@ -168,7 +169,7 @@ Configure with custom parameters:
 # ... custom parameters ...
 ```
 
-### Example 3: Error Handling
+## Example 3: Error Handling
 
 Robust error handling and recovery:
 
@@ -223,7 +224,7 @@ stats.sort_stats('cumulative')
 stats.print_stats(10)  # Top 10 time consumers
 ```
 
-### Example 5: Integration with Controllers
+## Example 5: Integration with Controllers
 
 Integrate with control systems:
 
@@ -266,7 +267,7 @@ print(f"Control effort: {result.control_effort:.2f}")
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

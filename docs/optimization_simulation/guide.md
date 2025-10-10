@@ -179,7 +179,7 @@ Vectorized batch simulation enables efficient parallel evaluation of multiple co
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]: """ Returns: ------- t : np.ndarray, shape (N+1,) Time vector x_b : np.ndarray, shape (B, N+1, D) State trajectories for B particles u_b : np.ndarray, shape (B, N) Control sequences sigma_b : np.ndarray, shape (B, N) Sliding surface values """
 ```
 
-### Batch Simulation Example
+## Batch Simulation Example
 
 ```python
 
@@ -446,7 +446,7 @@ x_curr = x0 # No copy needed, immediately overwritten
 
 **Benefit:** Eliminates 423 unnecessary copies in a typical 5-second simulation.
 
-#### 2. Broadcast Instead of Copy
+## 2. Broadcast Instead of Copy
 
 ```python
 # MEMORY OPTIMIZATION: broadcast_to returns view
@@ -457,7 +457,7 @@ init_b = init_b.copy()
 
 **Benefit:** Reduces memory footprint for batch simulations with identical initial conditions.
 
-### Computational Performance
+## Computational Performance
 
 #### 1. Numba JIT Compilation
 
@@ -486,7 +486,7 @@ t, x_batch, u_batch, sigma_batch = simulate_system_batch( controller_factory=fac
 for i, gains in enumerate(gain_array): controller = factory(gains) t, x, u = run_simulation(controller, dynamics, 5.0, 0.01, x0)
 ```
 
-#### 3. Early Convergence Stopping
+## 3. Early Convergence Stopping
 
 convergence detection to reduce PSO computational cost:
 
@@ -513,7 +513,7 @@ t, x_batch, u_batch, sigma_batch = simulate_system_batch( controller_factory=fac
 
 ```
 
-### run_simulation
+## run_simulation
 
 **Location:** [`src/simulation/engines/simulation_runner.py`](../../src/simulation/engines/simulation_runner.py)
 
@@ -523,7 +523,7 @@ t, x_batch, u_batch, sigma_batch = simulate_system_batch( controller_factory=fac
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]: """ Simulate single controller trajectory using Euler integration. Parameters ---------- controller : Any Controller object (compute_control or __call__ interface) dynamics_model : Any Dynamics model with step(state, u, dt) method sim_time : float Total simulation duration (seconds) dt : float Integration timestep (seconds), must be > 0 initial_state : array-like Initial state vector u_max : float, optional Control saturation limit fallback_controller : callable, optional Fallback controller for deadline misses Returns ------- t_arr : np.ndarray, shape (N+1,) Time vector x_arr : np.ndarray, shape (N+1, D) State trajectory u_arr : np.ndarray, shape (N,) Control sequence """
 ```
 
-### simulate_system_batch
+## simulate_system_batch
 
 **Location:** [`src/simulation/engines/vector_sim.py`](../../src/simulation/engines/vector_sim.py)
 
@@ -536,7 +536,7 @@ t, x_batch, u_batch, sigma_batch = simulate_system_batch( controller_factory=fac
 ]: """ Vectorized batch simulation of multiple controllers. Parameters ---------- controller_factory : callable Factory function: controller = factory(gains) particles : np.ndarray, shape (B, G) Gain vectors for B particles sim_time : float Total simulation duration dt : float Integration timestep u_max : float, optional Control saturation limit params_list : list, optional List of physics parameter objects for uncertainty evaluation convergence_tol : float, optional Early stopping threshold for max(|σ|) grace_period : float Duration before convergence checking begins Returns ------- If params_list is None: (t, x_batch, u_batch, sigma_batch) If params_list is provided: List of (t, x_batch, u_batch, sigma_batch) tuples Notes ----- - t: shape (N+1,) - x_batch: shape (B, N+1, D) - u_batch: shape (B, N) - sigma_batch: shape (B, N) """
 ```
 
-### SimulationContext
+## SimulationContext
 
 **Location:** [`src/simulation/core/simulation_context.py`](../../src/simulation/core/simulation_context.py)
 

@@ -198,7 +198,7 @@ else:
     print("Warning: Gains violate Hurwitz criterion")
 ```
 
-### Example 2: Control Authority Check
+## Example 2: Control Authority Check
 
 ```python
 from src.controllers.smc.core.gain_validation import check_control_authority
@@ -224,7 +224,7 @@ if margin < 0.1 * u_max:
     print("Warning: Insufficient control authority margin")
 ```
 
-### Example 3: Frequency Bounds Validation
+## Example 3: Frequency Bounds Validation
 
 ```python
 # example-metadata:
@@ -251,7 +251,7 @@ else:
     print("✗ Frequencies too low, drift risk")
 ```
 
-### Example 4: Robustness Margin
+## Example 4: Robustness Margin
 
 ```python
 # example-metadata:
@@ -273,7 +273,7 @@ if margin_percent < 20:
     print(f"Recommended K:         {K_recommended:.1f} N")
 ```
 
-### Example 5: Complete Validation Suite
+## Example 5: Complete Validation Suite
 
 ```python
 from src.controllers.smc.core.gain_validation import validate_all_criteria
@@ -308,7 +308,7 @@ else:
 :linenos:
 ```
 
----
+
 
 ## Classes
 
@@ -326,7 +326,7 @@ SMC controller types with different gain requirements.
 :linenos:
 ```
 
----
+
 
 ### `GainBounds`
 
@@ -348,7 +348,7 @@ Check if value is within bounds.
 
 [View full source →](#method-gainbounds-validate)
 
----
+
 
 ### `SMCGainValidator`
 
@@ -402,7 +402,7 @@ Update gain bounds for specific controller and gain.
 
 [View full source →](#method-smcgainvalidator-update_bounds)
 
----
+
 
 ## Functions
 
@@ -425,7 +425,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `check_stability_conditions(gains, controller_type)`
 
@@ -446,7 +446,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ### `get_gain_bounds_for_controller(controller_type)`
 
@@ -466,7 +466,7 @@ Returns:
 :linenos:
 ```
 
----
+
 
 ## Dependencies
 

@@ -57,7 +57,7 @@ The pre-commit hook runs automatically before each commit:
 git commit --no-verify
 ```
 
-### Check
+## Check
 
 Run full quality validation before pushing:
 
@@ -79,7 +79,7 @@ python scripts/validation/run_quality_checks.py --check links
 - `markdown` - Markdown linting (advisory)
 - `spell` - Spell checking (advisory)
 
-### Auto-Fix Common Issues
+## Auto-Fix Common Issues
 
 Automatically fix common quality issues:
 
@@ -283,7 +283,7 @@ python scripts/validation/run_quality_checks.py
 git commit -m "Your commit message"
 ```
 
-### Before Pushing
+## Before Pushing
 
 ```bash
 # Run validation
@@ -293,7 +293,7 @@ python scripts/validation/run_quality_checks.py
 git push origin <branch>
 ```
 
-### When Adding New Code
+## When Adding New Code
 
 1. **Write docstrings** for all public functions/classes
 2. **Add type hints** to all function signatures
