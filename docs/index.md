@@ -218,10 +218,24 @@ For the complete bibliography, see the {doc}`bibliography` page.
 
 ```{toctree}
 :maxdepth: 2
+:caption: 📚 User Guides & Tutorials
+
+guides/index
+```
+
+```{toctree}
+:maxdepth: 2
 :caption: 📊 Analysis & Reports
 
 analysis/COMPLETE_CONTROLLER_COMPARISON_MATRIX
 reports/index
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: 🗺️ Project Planning & Roadmaps
+
+plans/index
 ```
 
 ```{toctree}
@@ -257,10 +271,17 @@ controllers/index
 
 ```{toctree}
 :maxdepth: 2
-:caption: 📚 Testing & Validation
+:caption: 🧪 Testing & Quality Assurance
 
-testing/guides/coverage_quality_gates_runbook
+testing/index
 TESTING
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: 🔧 MCP Debugging & Code Quality
+
+mcp-debugging/index
 ```
 
 ```{toctree}

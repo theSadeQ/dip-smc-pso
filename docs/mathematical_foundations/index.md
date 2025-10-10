@@ -6,10 +6,22 @@
 
 ---
 
-## Complete SMC Theory ```{toctree}
+## SMC Control Theory
 
-:maxdepth: 2 smc_complete_theory
-``` **Unified Mathematical Theory for All SMC Variants** ### Topics Covered: #### 1. Classical Sliding Mode Control
+Comprehensive mathematical foundations for all sliding mode control variants.
+
+```{toctree}
+:maxdepth: 2
+:caption: SMC Theory
+
+README
+smc_complete_theory
+smc_theory
+sliding_surface_analysis
+boundary_layer_derivations
+```
+
+**Unified Mathematical Theory for All SMC Variants** ### Topics Covered: #### 1. Classical Sliding Mode Control
 - Linear sliding surface design: $s = \lambda_1 \theta_1 + \lambda_2 \theta_2 + k_1 \dot{\theta}_1 + k_2 \dot{\theta}_2$
 - Lyapunov function: $V = \frac{1}{2}s^2$
 - Exponential convergence: $\dot{V} \leq -\eta|s|$ where $\eta = K - ||d||_\infty > 0$
@@ -33,9 +45,18 @@
 
 ---
 
-## Controller Comparison ```{toctree}
-:maxdepth: 2 controller_comparison_theory
-``` **Systematic Comparison of All 4 SMC Controllers** ### Comparison Criteria: #### Performance Metrics:
+## Controller Comparison & Analysis
+
+```{toctree}
+:maxdepth: 2
+:caption: Controller Analysis
+
+controller_comparison_theory
+advanced_algorithms_guide
+algorithm_fixes_summary
+```
+
+**Systematic Comparison of All 4 SMC Controllers** ### Comparison Criteria: #### Performance Metrics:
 
 - **Convergence Time**: $T_{settle}$ from initial condition to $||e|| < \epsilon$
 - **Chattering Index**: $CI = \frac{1}{T}\int_0^T |\dot{u}(t)| dt$
@@ -54,6 +75,50 @@
 | Adaptive SMC | ★★★★☆ | ★★★☆☆ | 3.5/5 |
 | Super-Twisting SMC | ★★★★☆ | ★★★★☆ | 4.5/5 |
 | Hybrid Adaptive-STA | ★★★★★ | ★★☆☆☆ | 4.0/5 |
+
+---
+
+## PSO Optimization Theory
+
+Particle Swarm Optimization mathematical foundations and convergence analysis.
+
+```{toctree}
+:maxdepth: 2
+:caption: PSO Theory
+
+pso_algorithm_theory
+optimization_landscape_analysis
+```
+
+---
+
+## System Dynamics & Numerical Methods
+
+Double inverted pendulum dynamics and numerical integration theory.
+
+```{toctree}
+:maxdepth: 2
+:caption: Dynamics & Numerics
+
+dynamics_derivations
+numerical_integration_theory
+simulation_architecture_guide
+config_validation_specification
+```
+
+---
+
+## Validation & Testing Methodology
+
+Mathematical validation frameworks and testing standards.
+
+```{toctree}
+:maxdepth: 2
+:caption: Validation Methodology
+
+test_validation_methodology
+validation_framework_guide
+```
 
 ---
 
