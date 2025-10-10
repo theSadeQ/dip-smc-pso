@@ -51,6 +51,63 @@ hil_quickstart.md
 streamlit_dashboard_guide.md
 ```
 
+```{toctree}
+:maxdepth: 2
+:caption: 📋 Project Documentation
+
+CHANGELOG
+CONTRIBUTING
+DEPENDENCIES
+PATTERNS
+context
+ACADEMIC_INTEGRITY_STATEMENT
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: 📊 API & Technical Reference
+
+api/index
+CONTROLLER_FACTORY
+controller_pso_interface_api_documentation
+factory_integration_documentation
+factory_integration_troubleshooting_guide
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: ✅ Testing & Validation Standards
+
+TESTING
+QUICKSTART_VALIDATION
+EXAMPLE_VALIDATION_REPORT
+control_law_testing_standards
+deployment_validation_checklists
+benchmarks_methodology
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: 📚 Documentation System
+
+DOCUMENTATION_SYSTEM
+DOCUMENTATION_IMPLEMENTATION_PLAN
+DOCUMENTATION_STYLE_GUIDE
+DOCUMENTATION_COVERAGE_MATRIX
+DOCUMENTATION_INVENTORY_SUMMARY
+CROSS_REFERENCE_AUDIT_REPORT
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: 🔬 Configuration & Integration
+
+configuration_integration_documentation
+configuration_schema_validation
+coverage_analysis_methodology
+fault_detection_guide
+```
+
 ## Mathematical Foundation
 
 The double-inverted pendulum system is described by the nonlinear dynamics:
