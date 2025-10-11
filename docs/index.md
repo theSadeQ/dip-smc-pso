@@ -73,35 +73,18 @@ cd docs && sphinx-build -b html . _build/html
 python -m http.server 8000 --directory docs/_build/html
 ```
 
-## Documentation Navigation
-
 ```{toctree}
-:maxdepth: 2
-:caption: Getting Started
+:maxdepth: 3
+:hidden:
 
 README
 guides/getting-started
 guides/getting-started-validation-report
 streamlit_dashboard_guide
 hil_quickstart
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: User Guides & Tutorials
 
 guides/index
-guides/how-to/running-simulations
-guides/how-to/optimization-workflows
-guides/how-to/testing-validation
-guides/interactive_configuration_guide
-guides/interactive_visualizations
 workflows/index
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: API Reference
 
 api/index
 reference/controllers/index
@@ -111,11 +94,6 @@ reference/plant/index
 reference/analysis/index
 reference/utils/index
 reference/interfaces/index
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: Theory & Mathematics
 
 theory/index
 theory/pso_algorithm_foundations
@@ -123,11 +101,6 @@ mathematical_foundations/index
 plant_model
 architecture
 theory_overview
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: Testing & Validation
 
 TESTING
 testing/index
@@ -136,21 +109,11 @@ validation/index
 test_infrastructure_validation_report
 test_execution_guide
 QUICKSTART_VALIDATION
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: Deployment & Production
 
 deployment/DEPLOYMENT_GUIDE
 deployment/docker
 deployment/STREAMLIT_DEPLOYMENT
 production/index
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: Project Documentation
 
 CHANGELOG
 CONTRIBUTING
