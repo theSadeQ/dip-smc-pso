@@ -68,7 +68,7 @@ pytest tests/test_linkcode.py -v
 3. Add mathematical notation: `$x$` or `$$x$$`
 4. Reference other docs: `[text](other-page.md)` ### **Add Citations:**
 1. Add entries to `docs/refs.bib`
-2. Use in documentation: `{cite}`slotine1991applied``
+2. Use in documentation: `{cite}`smc_slotine_li_1991_applied_nonlinear_control``
 3. Add bibliography: ```markdown ```{bibliography} :filter: docname in docnames :style: author_year ``` ### **API Documentation:**
 The system auto-generates API docs from your Python code docstrings. ## 🚨 Troubleshooting ### **Build Failures:**
 - Check GitHub Actions logs

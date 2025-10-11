@@ -28,8 +28,8 @@ utkin2016discussion
 
 **Key Contributions:**
 - {cite}`utkin1999sliding` established the foundational theory for sliding mode control
-- {cite}`levant2003higher` introduced higher-order sliding mode algorithms including super-twisting
-- {cite}`moreno2012strict` provided strict Lyapunov functions for super-twisting convergence analysis
+- {cite}`smc_levant_2003_higher_order_smc` introduced higher-order sliding mode algorithms including super-twisting
+- {cite}`smc_moreno_2012_strict_lyapunov` provided strict Lyapunov functions for super-twisting convergence analysis
 
 ### Adaptive and Nonlinear Control
 
@@ -47,8 +47,8 @@ chen2019adaptive
 ```
 
 **Key Contributions:**
-- {cite}`slotine1991applied` provides the fundamental framework for adaptive sliding mode control
-- {cite}`khalil2002nonlinear` establishes the Lyapunov stability theory used throughout our analysis
+- {cite}`smc_slotine_li_1991_applied_nonlinear_control` provides the fundamental framework for adaptive sliding mode control
+- {cite}`dip_khalil_2002_nonlinear_systems` establishes the Lyapunov stability theory used throughout our analysis
 - {cite}`chen2019adaptive` extends adaptive SMC to systems with arbitrary relative degree
 
 ### Particle Swarm Optimization
@@ -70,10 +70,10 @@ wolpert1997no
 ```
 
 **Key Contributions:**
-- {cite}`kennedy1995particle` introduced the original PSO algorithm
+- {cite}`pso_kennedy_1995_particle_swarm_optimization` introduced the original PSO algorithm
 - {cite}`clerc2002particle` provided the constriction factor for guaranteed convergence
-- {cite}`coello2007evolutionary` established multi-objective optimization frameworks
-- {cite}`wolpert1997no` provides the theoretical foundation for understanding optimization algorithm limitations
+- {cite}`pso_coello_2007_evolutionary_algorithms` established multi-objective optimization frameworks
+- {cite}`pso_wolpert_1997_no_free_lunch` provides the theoretical foundation for understanding optimization algorithm limitations
 
 ### Inverted Pendulum Systems
 
@@ -111,8 +111,8 @@ filippov1988differential
 ```
 
 **Key Contributions:**
-- {cite}`goldstein2002classical` provides the Lagrangian mechanics foundation for system derivation
-- {cite}`spong2006robot` establishes the framework for robotic system modeling and control
+- {cite}`dip_goldstein_2002_classical_mechanics` provides the Lagrangian mechanics foundation for system derivation
+- {cite}`dip_spong_2006_robot_modeling_control` establishes the framework for robotic system modeling and control
 - {cite}`hairer1993solving` provides numerical methods for ODE integration
 
 ### Software and Implementation
@@ -141,17 +141,17 @@ The documentation uses the following citation formats:
 The classical sliding mode control approach {cite}`utkin1999sliding` provides...
 
 **Multiple References:**
-Several studies {cite}`levant2003higher,moreno2012strict,davila2005second` have demonstrated...
+Several studies {cite}`levant2003higher,davila2005second` have demonstrated...
 
 **Equation References with Citations:**
-The super-twisting algorithm {cite}`levant2003higher` as implemented in {eq}`eq:supertwisting_control` ensures...
+The super-twisting algorithm {cite}`smc_levant_2003_higher_order_smc` as implemented in {eq}`eq:supertwisting_control` ensures...
 
 ### Equation-Citation Integration
 
 Mathematical results are directly linked to their theoretical sources:
 
 ```markdown
-The Lyapunov stability condition from {cite}`moreno2012strict`:
+The Lyapunov stability condition from {cite}`smc_moreno_2012_strict_lyapunov`:
 
 ```{math}
 
@@ -159,7 +159,7 @@ The Lyapunov stability condition from {cite}`moreno2012strict`:
 \dot{V}(\vec{x}) \leq -\alpha \|\vec{x}\|^{1/2}
 ```
 
-This result guarantees finite-time convergence as proven in {cite}`moreno2012strict`.
+This result guarantees finite-time convergence as proven in {cite}`smc_moreno_2012_strict_lyapunov`.
 ```
 
 ### Code-Citation Integration
@@ -169,9 +169,9 @@ Implementation details reference theoretical sources:
 ```python
 def super_twisting_control(self, s: float) -> float:
     """
-    Implements super-twisting algorithm from {cite}`levant2003higher`.
+    Implements super-twisting algorithm from {cite}`smc_levant_2003_higher_order_smc`.
 
-    Based on the theoretical development in {cite}`moreno2012strict`
+    Based on the theoretical development in {cite}`smc_moreno_2012_strict_lyapunov`
     with Lyapunov analysis ensuring finite-time convergence.
     """
     return -self.alpha * np.abs(s)**0.5 * np.sign(s) - self.beta * np.sign(s)
@@ -185,7 +185,7 @@ The field of sliding mode control has evolved significantly:
 
 1. **1950s-1970s**: Foundation work by Emelyanov and Utkin in the Soviet Union
 2. **1980s-1990s**: Introduction to Western control community, theoretical refinements
-3. **2000s-2010s**: Higher-order sliding modes, chattering mitigation {cite}`levant2003higher`
+3. **2000s-2010s**: Higher-order sliding modes, chattering mitigation {cite}`smc_levant_2003_higher_order_smc`
 4. **2010s-Present**: Adaptive methods, real-time implementation, industrial applications
 
 ### Current Research Trends
@@ -251,9 +251,9 @@ All references include:
 
 Selected high-impact references:
 - {cite}`utkin1999sliding`: 5000+ citations, foundational SMC text
-- {cite}`levant2003higher`: 2000+ citations, seminal higher-order SMC work
-- {cite}`kennedy1995particle`: 8000+ citations, original PSO algorithm
-- {cite}`khalil2002nonlinear`: 10000+ citations, standard nonlinear control text
+- {cite}`smc_levant_2003_higher_order_smc`: 2000+ citations, seminal higher-order SMC work
+- {cite}`pso_kennedy_1995_particle_swarm_optimization`: 8000+ citations, original PSO algorithm
+- {cite}`dip_khalil_2002_nonlinear_systems`: 10000+ citations, standard nonlinear control text
 
 ## Bibliography Maintenance
 

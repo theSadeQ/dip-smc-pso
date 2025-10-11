@@ -255,7 +255,7 @@ def test_extract_numbered_theorem():
 
 def test_citation_detection():
     text = """
-    **Theorem 2** {cite}`levant2003higher`
+    **Theorem 2** {cite}`smc_levant_2003_higher_order_smc`
 
     Super-twisting guarantees convergence.
     """

@@ -86,7 +86,7 @@ $$
 
 **Input:**
 ```markdown
-**Theorem 1** (Surface Stability) {cite}`levant2003higher`
+**Theorem 1** (Surface Stability) {cite}`smc_levant_2003_higher_order_smc`
 
 The sliding surface $s(x) = c_1\theta_1 + c_2\dot{\theta}_1 + c_3\theta_2 + c_4\dot{\theta}_2$
 is asymptotically stable if all $c_i > 0$.
@@ -492,7 +492,7 @@ class FormalClaimExtractor:
 
 **Input:**
 ```markdown
-**Theorem 1** (Convergence Under Perturbations) {cite}`levant2003higher`
+**Theorem 1** (Convergence Under Perturbations) {cite}`smc_levant_2003_higher_order_smc`
 
 For all initial conditions $x_0 \in \mathbb{R}^6$ satisfying $\|x_0\| < R$, the closed-loop system:
 
@@ -639,7 +639,7 @@ To maximize extraction accuracy and confidence scores, follow these documentatio
 
 **✅ Recommended:**
 ```markdown
-**Lemma 3** {cite}`slotine1991applied`
+**Lemma 3** {cite}`smc_slotine_li_1991_applied_nonlinear_control`
 ```
 
 **❌ Avoid:**
@@ -698,7 +698,7 @@ ensures stability.
 ```markdown
 ## Super-Twisting Algorithm
 
-**Theorem 1** (Finite-Time Convergence) {cite}`levant2003higher`
+**Theorem 1** (Finite-Time Convergence) {cite}`smc_levant_2003_higher_order_smc`
 ```
 
 **❌ Avoid:**
@@ -715,7 +715,7 @@ ensures stability.
 ````markdown
 ## Lyapunov Stability Analysis
 
-**Theorem 1** (Global Asymptotic Stability) {cite}`khalil2002nonlinear`
+**Theorem 1** (Global Asymptotic Stability) {cite}`dip_khalil_2002_nonlinear_systems`
 
 Consider the closed-loop system with Lyapunov function:
 

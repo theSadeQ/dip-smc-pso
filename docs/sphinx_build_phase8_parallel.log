@@ -1,0 +1,274 @@
+[01mRunning Sphinx v8.2.3[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\sphinxcontrib\autoclassdiag.py:3: RemovedInSphinx90Warning: The alias 'sphinx.util.ExtensionError' is deprecated, use 'sphinx.errors.ExtensionError' instead. Check CHANGES for Sphinx API modifications.
+  from sphinx.util import ExtensionError, import_object
+[01mloading pickled environment... [39;49;00mchecking bibtex cache... up to date
+The configuration has changed (6 options: 'html_css_files', 'html_js_files', 'html_static_path', 'linkcode_resolve', 'mathjax3_config', ...)
+done
+[01mmyst v4.0.1:[39;49;00m MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions={'amsmath', 'linkify', 'fieldlist', 'deflist', 'colon_fence', 'tasklist', 'dollarmath'}, disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=3, heading_slug_func=None, html_meta={}, footnote_sort=True, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 518 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 1 changed, 0 removed
+[2K[01mreading sources... [39;49;00m[100%] [35mapi/index[39;49;00m
+[91mWARNING: autodoc: failed to import module 'core.dynamics' from module 'src'; the following exception was raised:
+['Traceback (most recent call last):\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\sphinx\\ext\\autodoc\\importer.py", line 175, in import_module\n    module = importlib.import_module(modname)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "C:\\Program Files\\Python312\\Lib\\importlib\\__init__.py", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import\n', '  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load\n', '  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked\n', '  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked\n', '  File "<frozen importlib._bootstrap_external>", line 995, in exec_module\n', '  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed\n', '  File "D:\\Projects\\main\\src\\core\\__init__.py", line 18, in <module>\n    from ..simulation.core.simulation_context import SimulationContext\n', '  File "D:\\Projects\\main\\src\\simulation\\__init__.py", line 22, in <module>\n    from .core import (\n', '  File "D:\\Projects\\main\\src\\simulation\\core\\__init__.py", line 15, in <module>\n    from .simulation_context import SimulationContext\n', '  File "D:\\Projects\\main\\src\\simulation\\core\\simulation_context.py", line 13, in <module>\n    from src.config import load_config, ConfigSchema\n', '  File "D:\\Projects\\main\\src\\config\\__init__.py", line 8, in <module>\n    from .loader import load_config, InvalidConfigurationError, ConfigSchema\n', '  File "D:\\Projects\\main\\src\\config\\loader.py", line 17, in <module>\n    from pydantic_settings import BaseSettings, PydanticBaseSettingsSource, SettingsConfigDict\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\pydantic_settings\\__init__.py", line 2, in <module>\n    from .main import BaseSettings, CliApp, SettingsConfigDict\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\pydantic_settings\\main.py", line 37, in <module>\n    class SettingsConfigDict(ConfigDict, total=False):\n', 'TypeError: SettingsConfigDict.__init_subclass__() takes no keyword arguments\n', '\nThe above exception was the direct cause of the following exception:\n\n', 'Traceback (most recent call last):\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\sphinx\\ext\\autodoc\\importer.py", line 269, in import_object\n    module = import_module(modname, try_reload=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\sphinx\\ext\\autodoc\\importer.py", line 187, in import_module\n    raise ImportError(exc, traceback.format_exc()) from exc\n', 'ImportError: (TypeError(\'SettingsConfigDict.__init_subclass__() takes no keyword arguments\'), \'Traceback (most recent call last):\\n  File "C:\\\\Users\\\\sadeg\\\\AppData\\\\Roaming\\\\Python\\\\Python312\\\\site-packages\\\\sphinx\\\\ext\\\\autodoc\\\\importer.py", line 175, in import_module\\n    module = importlib.import_module(modname)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File "C:\\\\Program Files\\\\Python312\\\\Lib\\\\importlib\\\\__init__.py", line 90, in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import\\n  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load\\n  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked\\n  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked\\n  File "<frozen importlib._bootstrap_external>", line 995, in exec_module\\n  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed\\n  File "D:\\\\Projects\\\\main\\\\src\\\\core\\\\__init__.py", line 18, in <module>\\n    from ..simulation.core.simulation_context import SimulationContext\\n  File "D:\\\\Projects\\\\main\\\\src\\\\simulation\\\\__init__.py", line 22, in <module>\\n    from .core import (\\n  File "D:\\\\Projects\\\\main\\\\src\\\\simulation\\\\core\\\\__init__.py", line 15, in <module>\\n    from .simulation_context import SimulationContext\\n  File "D:\\\\Projects\\\\main\\\\src\\\\simulation\\\\core\\\\simulation_context.py", line 13, in <module>\\n    from src.config import load_config, ConfigSchema\\n  File "D:\\\\Projects\\\\main\\\\src\\\\config\\\\__init__.py", line 8, in <module>\\n    from .loader import load_config, InvalidConfigurationError, ConfigSchema\\n  File "D:\\\\Projects\\\\main\\\\src\\\\config\\\\loader.py", line 17, in <module>\\n    from pydantic_settings import BaseSettings, PydanticBaseSettingsSource, SettingsConfigDict\\n  File "C:\\\\Users\\\\sadeg\\\\AppData\\\\Roaming\\\\Python\\\\Python312\\\\site-packages\\\\pydantic_settings\\\\__init__.py", line 2, in <module>\\n    from .main import BaseSettings, CliApp, SettingsConfigDict\\n  File "C:\\\\Users\\\\sadeg\\\\AppData\\\\Roaming\\\\Python\\\\Python312\\\\site-packages\\\\pydantic_settings\\\\main.py", line 37, in <module>\\n    class SettingsConfigDict(ConfigDict, total=False):\\nTypeError: SettingsConfigDict.__init_subclass__() takes no keyword arguments\\n\')\n'] [autodoc.import_object][39;49;00m
+[91mWARNING: autodoc: failed to import module 'controllers.factory' from module 'src'; the following exception was raised:
+['Traceback (most recent call last):\n', '  File "D:\\Projects\\main\\src\\controllers\\factory\\legacy_factory.py", line 172, in _try_import\n    mod = __import__(primary_mod, fromlist=[attr])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "D:\\Projects\\main\\src\\config\\__init__.py", line 8, in <module>\n    from .loader import load_config, InvalidConfigurationError, ConfigSchema\n', '  File "D:\\Projects\\main\\src\\config\\loader.py", line 17, in <module>\n    from pydantic_settings import BaseSettings, PydanticBaseSettingsSource, SettingsConfigDict\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\pydantic_settings\\__init__.py", line 2, in <module>\n    from .main import BaseSettings, CliApp, SettingsConfigDict\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\pydantic_settings\\main.py", line 37, in <module>\n    class SettingsConfigDict(ConfigDict, total=False):\n', 'TypeError: SettingsConfigDict.__init_subclass__() takes no keyword arguments\n', '\nDuring handling of the above exception, another exception occurred:\n\n', 'Traceback (most recent call last):\n', '  File "D:\\Projects\\main\\src\\controllers\\factory\\legacy_factory.py", line 176, in _try_import\n    mod = __import__(fallback_mod, fromlist=[attr])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "D:\\Projects\\main\\src\\config\\__init__.py", line 8, in <module>\n    from .loader import load_config, InvalidConfigurationError, ConfigSchema\n', '  File "D:\\Projects\\main\\src\\config\\loader.py", line 17, in <module>\n    from pydantic_settings import BaseSettings, PydanticBaseSettingsSource, SettingsConfigDict\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\pydantic_settings\\__init__.py", line 2, in <module>\n    from .main import BaseSettings, CliApp, SettingsConfigDict\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\pydantic_settings\\main.py", line 37, in <module>\n    class SettingsConfigDict(ConfigDict, total=False):\n', 'TypeError: SettingsConfigDict.__init_subclass__() takes no keyword arguments\n', '\nDuring handling of the above exception, another exception occurred:\n\n', 'Traceback (most recent call last):\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\sphinx\\ext\\autodoc\\importer.py", line 269, in import_object\n    module = import_module(modname, try_reload=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\sphinx\\ext\\autodoc\\importer.py", line 175, in import_module\n    module = importlib.import_module(modname)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "C:\\Program Files\\Python312\\Lib\\importlib\\__init__.py", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import\n', '  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load\n', '  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked\n', '  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked\n', '  File "<frozen importlib._bootstrap_external>", line 995, in exec_module\n', '  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed\n', '  File "D:\\Projects\\main\\src\\controllers\\__init__.py", line 34, in <module>\n    from .factory import (\n', '  File "D:\\Projects\\main\\src\\controllers\\factory\\__init__.py", line 43, in <module>\n    from .legacy_factory import create_controller as create_controller_legacy\n', '  File "D:\\Projects\\main\\src\\controllers\\factory\\legacy_factory.py", line 195, in <module>\n    ConfigSchema = _try_import("config", "src.config", "ConfigSchema")\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "D:\\Projects\\main\\src\\controllers\\factory\\legacy_factory.py", line 179, in _try_import\n    raise ImportError(\n', "ImportError: Could not import ConfigSchema from either 'config' or 'src.config': SettingsConfigDict.__init_subclass__() takes no keyword arguments\n"] [autodoc.import_object][39;49;00m
+[91mWARNING: autodoc: failed to import module 'optimizer.pso_optimizer' from module 'src'; the following exception was raised:
+['Traceback (most recent call last):\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\sphinx\\ext\\autodoc\\importer.py", line 175, in import_module\n    module = importlib.import_module(modname)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "C:\\Program Files\\Python312\\Lib\\importlib\\__init__.py", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import\n', '  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load\n', '  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked\n', '  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked\n', '  File "<frozen importlib._bootstrap_external>", line 995, in exec_module\n', '  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed\n', '  File "D:\\Projects\\main\\src\\optimizer\\__init__.py", line 12, in <module>\n    from ..optimization.algorithms.pso_optimizer import PSOTuner\n', '  File "D:\\Projects\\main\\src\\optimization\\__init__.py", line 33, in <module>\n    from .algorithms import (\n', '  File "D:\\Projects\\main\\src\\optimization\\algorithms\\__init__.py", line 9, in <module>\n    from .pso_optimizer import PSOTuner  # High-performance legacy PSO tuner\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "D:\\Projects\\main\\src\\optimization\\algorithms\\pso_optimizer.py", line 32, in <module>\n    from src.config import ConfigSchema, load_config\n', '  File "D:\\Projects\\main\\src\\config\\__init__.py", line 8, in <module>\n    from .loader import load_config, InvalidConfigurationError, ConfigSchema\n', '  File "D:\\Projects\\main\\src\\config\\loader.py", line 17, in <module>\n    from pydantic_settings import BaseSettings, PydanticBaseSettingsSource, SettingsConfigDict\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\pydantic_settings\\__init__.py", line 2, in <module>\n    from .main import BaseSettings, CliApp, SettingsConfigDict\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\pydantic_settings\\main.py", line 37, in <module>\n    class SettingsConfigDict(ConfigDict, total=False):\n', 'TypeError: SettingsConfigDict.__init_subclass__() takes no keyword arguments\n', '\nThe above exception was the direct cause of the following exception:\n\n', 'Traceback (most recent call last):\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\sphinx\\ext\\autodoc\\importer.py", line 269, in import_object\n    module = import_module(modname, try_reload=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "C:\\Users\\sadeg\\AppData\\Roaming\\Python\\Python312\\site-packages\\sphinx\\ext\\autodoc\\importer.py", line 187, in import_module\n    raise ImportError(exc, traceback.format_exc()) from exc\n', 'ImportError: (TypeError(\'SettingsConfigDict.__init_subclass__() takes no keyword arguments\'), \'Traceback (most recent call last):\\n  File "C:\\\\Users\\\\sadeg\\\\AppData\\\\Roaming\\\\Python\\\\Python312\\\\site-packages\\\\sphinx\\\\ext\\\\autodoc\\\\importer.py", line 175, in import_module\\n    module = importlib.import_module(modname)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File "C:\\\\Program Files\\\\Python312\\\\Lib\\\\importlib\\\\__init__.py", line 90, in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import\\n  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load\\n  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked\\n  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked\\n  File "<frozen importlib._bootstrap_external>", line 995, in exec_module\\n  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed\\n  File "D:\\\\Projects\\\\main\\\\src\\\\optimizer\\\\__init__.py", line 12, in <module>\\n    from ..optimization.algorithms.pso_optimizer import PSOTuner\\n  File "D:\\\\Projects\\\\main\\\\src\\\\optimization\\\\__init__.py", line 33, in <module>\\n    from .algorithms import (\\n  File "D:\\\\Projects\\\\main\\\\src\\\\optimization\\\\algorithms\\\\__init__.py", line 9, in <module>\\n    from .pso_optimizer import PSOTuner  # High-performance legacy PSO tuner\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File "D:\\\\Projects\\\\main\\\\src\\\\optimization\\\\algorithms\\\\pso_optimizer.py", line 32, in <module>\\n    from src.config import ConfigSchema, load_config\\n  File "D:\\\\Projects\\\\main\\\\src\\\\config\\\\__init__.py", line 8, in <module>\\n    from .loader import load_config, InvalidConfigurationError, ConfigSchema\\n  File "D:\\\\Projects\\\\main\\\\src\\\\config\\\\loader.py", line 17, in <module>\\n    from pydantic_settings import BaseSettings, PydanticBaseSettingsSource, SettingsConfigDict\\n  File "C:\\\\Users\\\\sadeg\\\\AppData\\\\Roaming\\\\Python\\\\Python312\\\\site-packages\\\\pydantic_settings\\\\__init__.py", line 2, in <module>\\n    from .main import BaseSettings, CliApp, SettingsConfigDict\\n  File "C:\\\\Users\\\\sadeg\\\\AppData\\\\Roaming\\\\Python\\\\Python312\\\\site-packages\\\\pydantic_settings\\\\main.py", line 37, in <module>\\n    class SettingsConfigDict(ConfigDict, total=False):\\nTypeError: SettingsConfigDict.__init_subclass__() takes no keyword arguments\\n\')\n'] [autodoc.import_object][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_bucak_2020_analysis_robotics" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_burton_1986_continuous" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "pso_clerc_2002_particle_swarm" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_edwards_spurgeon_1998_sliding_mode_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_farrell_2006_adaptive_approximation" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "dip_goldstein_2002_classical_mechanics" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "pso_gopal_2019_stability_analysis" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "pso_kennedy_1995_particle_swarm_optimization" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "kennedy1995particle" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_khalil_lecture32_sliding_mode" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_khalil_lecture33_sliding_mode" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "khalil2002nonlinear" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "dip_khalil_2002_nonlinear_systems" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_levant_2003_higher_order_smc" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "levant2003higher" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_levant_2003_higher_order_introduction" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "moreno2012strict" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_moreno_2008_lyapunov_sta" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_plestan_2010_adaptive_methodologies" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_roy_2020_adaptive_unbounded" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_seeber_2017_sta_parameter_setting" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "slotine1991applied" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_slotine_li_1991_applied_nonlinear_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "dip_spong_2006_robot_modeling_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "pso_trelea_2003_convergence" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_utkin_2013_sliding_mode_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_utkin_1992_sliding_modes" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "smc_utkin_1999_sliding_mode_foundations" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:38: WARNING: duplicate citation for key "pso_van_den_bergh_2001_analysis" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_bucak_2020_analysis_robotics" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_burton_1986_continuous" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "pso_clerc_2002_particle_swarm" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_edwards_spurgeon_1998_sliding_mode_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_farrell_2006_adaptive_approximation" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "dip_goldstein_2002_classical_mechanics" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "pso_gopal_2019_stability_analysis" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "pso_kennedy_1995_particle_swarm_optimization" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "kennedy1995particle" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_khalil_lecture32_sliding_mode" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_khalil_lecture33_sliding_mode" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "khalil2002nonlinear" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "dip_khalil_2002_nonlinear_systems" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_levant_2003_higher_order_smc" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "levant2003higher" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_levant_2003_higher_order_introduction" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "moreno2012strict" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_moreno_2008_lyapunov_sta" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_plestan_2010_adaptive_methodologies" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_roy_2020_adaptive_unbounded" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_seeber_2017_sta_parameter_setting" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "slotine1991applied" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_slotine_li_1991_applied_nonlinear_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "dip_spong_2006_robot_modeling_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "pso_trelea_2003_convergence" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_utkin_2013_sliding_mode_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_utkin_1992_sliding_modes" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "smc_utkin_1999_sliding_mode_foundations" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:58: WARNING: duplicate citation for key "pso_van_den_bergh_2001_analysis" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_bucak_2020_analysis_robotics" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_burton_1986_continuous" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "pso_clerc_2002_particle_swarm" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_edwards_spurgeon_1998_sliding_mode_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_farrell_2006_adaptive_approximation" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "dip_goldstein_2002_classical_mechanics" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "pso_gopal_2019_stability_analysis" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "pso_kennedy_1995_particle_swarm_optimization" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "kennedy1995particle" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_khalil_lecture32_sliding_mode" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_khalil_lecture33_sliding_mode" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "khalil2002nonlinear" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "dip_khalil_2002_nonlinear_systems" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_levant_2003_higher_order_smc" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "levant2003higher" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_levant_2003_higher_order_introduction" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "moreno2012strict" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_moreno_2008_lyapunov_sta" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_plestan_2010_adaptive_methodologies" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_roy_2020_adaptive_unbounded" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_seeber_2017_sta_parameter_setting" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "slotine1991applied" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_slotine_li_1991_applied_nonlinear_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "dip_spong_2006_robot_modeling_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "pso_trelea_2003_convergence" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_utkin_2013_sliding_mode_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_utkin_1992_sliding_modes" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "smc_utkin_1999_sliding_mode_foundations" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:82: WARNING: duplicate citation for key "pso_van_den_bergh_2001_analysis" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_bucak_2020_analysis_robotics" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_burton_1986_continuous" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "pso_clerc_2002_particle_swarm" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_edwards_spurgeon_1998_sliding_mode_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_farrell_2006_adaptive_approximation" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "dip_goldstein_2002_classical_mechanics" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "pso_gopal_2019_stability_analysis" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "pso_kennedy_1995_particle_swarm_optimization" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "kennedy1995particle" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_khalil_lecture32_sliding_mode" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_khalil_lecture33_sliding_mode" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "khalil2002nonlinear" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "dip_khalil_2002_nonlinear_systems" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_levant_2003_higher_order_smc" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "levant2003higher" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_levant_2003_higher_order_introduction" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "moreno2012strict" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_moreno_2008_lyapunov_sta" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_plestan_2010_adaptive_methodologies" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_roy_2020_adaptive_unbounded" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_seeber_2017_sta_parameter_setting" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "slotine1991applied" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_slotine_li_1991_applied_nonlinear_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "dip_spong_2006_robot_modeling_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "pso_trelea_2003_convergence" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_utkin_2013_sliding_mode_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_utkin_1992_sliding_modes" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "smc_utkin_1999_sliding_mode_foundations" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:102: WARNING: duplicate citation for key "pso_van_den_bergh_2001_analysis" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_bucak_2020_analysis_robotics" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_burton_1986_continuous" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "pso_clerc_2002_particle_swarm" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_edwards_spurgeon_1998_sliding_mode_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_farrell_2006_adaptive_approximation" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "dip_goldstein_2002_classical_mechanics" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "pso_gopal_2019_stability_analysis" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "pso_kennedy_1995_particle_swarm_optimization" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "kennedy1995particle" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_khalil_lecture32_sliding_mode" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_khalil_lecture33_sliding_mode" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "khalil2002nonlinear" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "dip_khalil_2002_nonlinear_systems" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_levant_2003_higher_order_smc" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "levant2003higher" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_levant_2003_higher_order_introduction" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "moreno2012strict" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_moreno_2008_lyapunov_sta" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_plestan_2010_adaptive_methodologies" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_roy_2020_adaptive_unbounded" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_seeber_2017_sta_parameter_setting" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "slotine1991applied" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_slotine_li_1991_applied_nonlinear_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "dip_spong_2006_robot_modeling_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "pso_trelea_2003_convergence" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_utkin_2013_sliding_mode_control" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_utkin_1992_sliding_modes" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "smc_utkin_1999_sliding_mode_foundations" [bibtex.duplicate_citation][39;49;00m
+[91mD:\Projects\main\docs\references\bibliography.md:122: WARNING: duplicate citation for key "pso_van_den_bergh_2001_analysis" [bibtex.duplicate_citation][39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mD:\Projects\main\docs\TESTING.md: document is referenced in multiple toctrees: ['index', 'index'], selecting: index <- TESTING
+D:\Projects\main\docs\testing\benchmarking_framework_technical_guide.md: document is referenced in multiple toctrees: ['testing/index', 'testing/index'], selecting: testing/index <- testing/benchmarking_framework_technical_guide
+D:\Projects\main\docs\testing\guides\integration_workflows.md: document is referenced in multiple toctrees: ['testing/index', 'testing/index'], selecting: testing/index <- testing/guides/integration_workflows
+D:\Projects\main\docs\testing\guides\performance_benchmarking.md: document is referenced in multiple toctrees: ['testing/index', 'testing/index'], selecting: testing/index <- testing/guides/performance_benchmarking
+D:\Projects\main\docs\testing\validation_methodology_guide.md: document is referenced in multiple toctrees: ['testing/index', 'testing/index'], selecting: testing/index <- testing/validation_methodology_guide
+done
+[01mpreparing documents... [39;49;00m[91mWARNING: search index couldn't be loaded, but not all documents will be built: the index will be incomplete.[39;49;00m
+done
+[01mcopying assets... [39;49;00m
+[2K[01mcopying downloadable files... [39;49;00m[  9%] [33m../config.yaml[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 18%] [33m../.github/workflows/docs-quality.yml[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 27%] [33m../scripts/validation/run_quality_checks.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 36%] [33m../scripts/validation/fix_common_issues.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 45%] [33m../.git/hooks/pre-commit[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 55%] [33m../notebooks/01_getting_started.ipynb[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 64%] [33m../src/plant/models/simplified/config.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 73%] [33m../src/plant/models/simplified/physics.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 82%] [33mtesting/templates/test_template.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 91%] [33m../src/plant/core/numerical_stability.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[100%] [33m../src/optimization/validation/pso_bounds_validator.py[39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to D:\Projects\main\docs\_build\html\_static\basic.css
+Writing evaluated template result to D:\Projects\main\docs\_build\html\_static\documentation_options.js
+Writing evaluated template result to D:\Projects\main\docs\_build\html\_static\language_data.js
+Writing evaluated template result to D:\Projects\main\docs\_build\html\_static\copybutton.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[2K[01mwriting output... [39;49;00m[  0%] [32mapi/index[39;49;00m[2K[01mwriting output... [39;49;00m[  0%] [32mindex[39;49;00m[2K[01mwriting output... [39;49;00m[  1%] [32mplant/models_guide[39;49;00m[91mD:\Projects\main\docs\index.md:269: WARNING: 'myst' cross-reference target not found: '../CONTRIBUTING.md' [myst.xref_missing][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:5: WARNING: 'myst' cross-reference target not found: 'overview' [myst.xref_missing][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:7: WARNING: 'myst' cross-reference target not found: 'physical-system-description' [myst.xref_missing][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:8: WARNING: 'myst' cross-reference target not found: 'model-architecture' [myst.xref_missing][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:9: WARNING: 'myst' cross-reference target not found: 'model-types' [myst.xref_missing][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:10: WARNING: 'myst' cross-reference target not found: 'configuration-system' [myst.xref_missing][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:11: WARNING: 'myst' cross-reference target not found: 'physics-computation' [myst.xref_missing][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:12: WARNING: 'myst' cross-reference target not found: 'numerical-stability' [myst.xref_missing][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:13: WARNING: 'myst' cross-reference target not found: 'mathematical-foundations' [myst.xref_missing][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:14: WARNING: 'myst' cross-reference target not found: 'usage-examples' [myst.xref_missing][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:15: WARNING: 'myst' cross-reference target not found: 'performance-optimization' [myst.xref_missing][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:16: WARNING: 'myst' cross-reference target not found: 'api-reference' [myst.xref_missing][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:83: WARNING: Pygments lexer name 'This' is not known [misc.highlighting_failure][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:145: WARNING: Pygments lexer name '###' is not known [misc.highlighting_failure][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:180: WARNING: Pygments lexer name '###' is not known [misc.highlighting_failure][39;49;00m
+[91mD:\Projects\main\docs\plant\models_guide.md:301: WARNING: Lexing literal_block '\n---\n\n## Performance Optimization ### Numba JIT Compilation fast mode for **10-100× speedup** in repeated evaluations: ```python\n\ndynamics = SimplifiedDIPDynamics( config, enable_fast_mode=True, # Use Numba JIT compilation enable_monitoring=False # Disable monitoring for maximum speed\n)\n``` **When to use**:\n- PSO optimization (thousands of dynamics evaluations)\n- Monte Carlo validation (large batch simulations)\n- Real-time applications (strict timing constraints) **Trade-offs**:\n- First call has compilation overhead (~1 second)\n- Reduced diagnostic information\n- No monitoring statistics ### Matrix Caching matrix caching for repeated evaluations at similar states: ```python\nphysics = dynamics.physics\nphysics.enable_matrix_caching(True)\n``` **Benefit**: Avoids recomputing $M$, $C$, $G$ for identical positions. **When to use**:\n\n- Fixed-point iterations\n- Trajectory optimization with line search\n- Iterative control algorithms **Memory cost**: $O(n)$ where $n$ is number of unique position vectors. ### Simplified Inertia Matrix Use simplified inertia computation: ```python\nphysics.set_simplified_inertia(True)\n``` **Trade-off**: 2-5% accuracy reduction for 30-50% speed improvement. **Recommended for**:\n- Initial controller prototyping\n- Preliminary PSO parameter tuning\n- Educational demonstrations\n\n---\n\n## API Reference ### SimplifiedDIPDynamics **Location:** [`src/plant/models/simplified/dynamics.py`](../../src/plant/models/simplified/dynamics.py) ```python\n# example-metadata:\n# runnable: false class SimplifiedDIPDynamics(BaseDynamicsModel): """Simplified DIP dynamics with balanced speed and accuracy.""" def __init__( self, config: Union[SimplifiedDIPConfig, Dict[str, Any]], enable_fast_mode: bool = False, enable_monitoring: bool = True ): """ Initialize simplified DIP dynamics. Args: config: Configuration or dictionary enable_fast_mode: Use Numba JIT compilation enable_monitoring: performance monitoring """ def compute_dynamics( self, state: np.ndarray, control_input: np.ndarray, time: float = 0.0, **kwargs ) -> DynamicsResult: """Compute simplified DIP dynamics.""" def get_physics_matrices( self, state: np.ndarray ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]: """Get M, C, G matrices.""" def compute_total_energy(self, state: np.ndarray) -> float: """Compute total system energy.""" def compute_linearization( self, equilibrium_state: np.ndarray, equilibrium_input: np.ndarray ) -> Tuple[np.ndarray, np.ndarray]: """Compute linearization matrices A, B."""\n``` ### FullDIPDynamics **Location:** [`src/plant/models/full/dynamics.py`](../../src/plant/models/full/dynamics.py) ```python\n# example-metadata:\n\n# runnable: false class FullDIPDynamics(BaseDynamicsModel): """Full-fidelity DIP dynamics with physics.""" def __init__( self, config: Union[FullDIPConfig, Dict[str, Any]], enable_monitoring: bool = True, enable_validation: bool = True ): """Initialize full-fidelity dynamics.""" def compute_energy_analysis( self, state: np.ndarray ) -> Dict[str, float]: """Compute energy breakdown.""" def compute_stability_metrics( self, state: np.ndarray ) -> Dict[str, float]: """Compute stability and conditioning metrics.""" def set_wind_model(self, wind_function): """Set custom wind velocity function.""" def get_integration_statistics(self) -> Dict[str, Any]: """Get integration performance statistics."""\n\n``` ### LowRankDIPDynamics **Location:** [`src/plant/models/lowrank/dynamics.py`](../../src/plant/models/lowrank/dynamics.py) ```python\n# example-metadata:\n# runnable: false class LowRankDIPDynamics(BaseDynamicsModel): """Low-rank DIP dynamics for fast prototyping.""" def __init__( self, config: Union[LowRankDIPConfig, Dict[str, Any]], enable_monitoring: bool = False, enable_validation: bool = True ): """Initialize low-rank dynamics.""" def get_linearized_system( self, equilibrium_point: str = "upright", force_recompute: bool = False ) -> Tuple[np.ndarray, np.ndarray]: """Get linearized system matrices.""" def compute_linearized_dynamics( self, state: np.ndarray, control_input: np.ndarray, equilibrium_point: str = "upright" ) -> np.ndarray: """Compute dynamics using linearized model.""" def step( self, state: np.ndarray, control_input: np.ndarray, dt: float ) -> np.ndarray: """Simple Euler integration step."""\n' as "python" resulted in an error at token: '`'. Retrying in relaxed mode. [misc.highlighting_failure][39;49;00m
+
+====================== slowest reading durations =======================
+1.547 api/index
+
+
+Versions
+========
+
+* Platform:         win32; (Windows-11-10.0.26100-SP0)
+* Python version:   3.12.6 (CPython)
+* Sphinx version:   8.2.3
+* Docutils version: 0.20.1
+* Jinja2 version:   3.1.6
+* Pygments version: 2.19.2
+
+Last Messages
+=============
+
+    writing output... [  0%]
+    index
+
+
+    writing output... [  1%]
+    plant/models_guide
+
+
+    ====================== slowest reading durations =======================
+    1.547 api/index
+
+Loaded Extensions
+=================
+
+* sphinx.ext.mathjax (8.2.3)
+* alabaster (0.7.16)
+* sphinxcontrib.applehelp (2.0.0)
+* sphinxcontrib.devhelp (2.0.0)
+* sphinxcontrib.htmlhelp (2.1.0)
+* sphinxcontrib.serializinghtml (2.0.0)
+* sphinxcontrib.qthelp (2.0.0)
+* sphinx.ext.autodoc.preserve_defaults (8.2.3)
+* sphinx.ext.autodoc.type_comment (8.2.3)
+* sphinx.ext.autodoc.typehints (8.2.3)
+* sphinx.ext.autodoc (8.2.3)
+* sphinx.ext.napoleon (8.2.3)
+* sphinx.ext.viewcode (8.2.3)
+* sphinx.ext.linkcode (8.2.3)
+* sphinx.ext.githubpages (8.2.3)
+* sphinx.ext.intersphinx (8.2.3)
+* myst_parser (4.0.1)
+* sphinxcontrib.bibtex (2.6.5)
+* sphinx_copybutton (0.5.2)
+* sphinx_design (0.6.1)
+* sphinxcontrib.mermaid (8.2.3)
+* sphinx.ext.doctest (8.2.3)
+* sphinx.ext.duration (8.2.3)
+* chartjs_extension (0.1.0)
+* furo (2025.09.25)
+* sphinx_basic_ng (1.0.0.beta2)
+
+Traceback
+=========
+
+      File "C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\docutils\nodes.py", line 617, in __getitem__
+        return self.attributes[key]
+               ~~~~~~~~~~~~~~~^^^^^
+    KeyError: 'anchorname'
+
+
+The full traceback has been saved in:
+C:\Users\sadeg\AppData\Local\Temp\sphinx-err-kh6eyzvs.log
+
+To report this error to the developers, please open an issue at <https://github.com/sphinx-doc/sphinx/issues/>. Thanks!
+Please also report this if it was a user error, so that a better error message can be provided next time.

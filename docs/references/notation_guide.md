@@ -82,7 +82,7 @@ OMEGA2 = 5     # Second pendulum angular velocity θ̇₂
 
 | Mathematical Symbol | Description | Code Variable | Source |
 |---------------------|-------------|---------------|--------|
-| $s$ | Sliding surface variable (scalar) | `s` | {cite}`smc_utkin_1999_sliding_mode_foundations` |
+| $s$ | Sliding surface variable (scalar) | `s` | {cite}`smc_utkin_1993_sliding_mode_control_design` |
 | $\vec{s}$ | Sliding surface vector | `s_vec` | - |
 | $\mat{S}$ | Sliding surface matrix | `S_matrix` | {cite}`smc_edwards_spurgeon_1998_sliding_mode_control` |
 | $\vec{c} = [c_x, c_{\theta_1}, c_{\theta_2}]^T$ | Sliding surface parameters | `c_params` | {cite}`smc_farrell_2006_adaptive_approximation` |
@@ -217,7 +217,7 @@ position = position + velocity
 
 | Mathematical Symbol | Description | Code Variable | Source |
 |---------------------|-------------|---------------|--------|
-| $V(\vec{x})$ | Lyapunov function | `V` | {cite}`khalil2002nonlinear` |
+| $V(\vec{x})$ | Lyapunov function | `V` | {cite}`dip_khalil_2002_nonlinear_systems` |
 | $\dot{V}(\vec{x})$ | Lyapunov derivative | `V_dot` | - |
 | $\lambda_{\min}(\mat{P})$ | Minimum eigenvalue of matrix $\mat{P}$ | `lambda_min` | - |
 | $\lambda_{\max}(\mat{P})$ | Maximum eigenvalue of matrix $\mat{P}$ | `lambda_max` | - |
@@ -264,7 +264,7 @@ position = position + velocity
 **Papers Use:**
 - {cite}`smc_khalil_lecture33_sliding_mode`: $k$ for switching gain
 - {cite}`smc_slotine_li_1991_applied_nonlinear_control`: $\eta$ for switching gain
-- {cite}`smc_utkin_1999_sliding_mode_foundations`: $K$ for switching gain
+- {cite}`smc_utkin_1993_sliding_mode_control_design`: $K$ for switching gain
 
 **Our Choice:** $\eta$ (Slotine & Li 1991)
 
@@ -353,7 +353,7 @@ Primary sources for notation conventions:
 - SMC: {cite}`smc_slotine_li_1991_applied_nonlinear_control`, {cite}`smc_edwards_spurgeon_1998_sliding_mode_control`
 - PSO: {cite}`pso_trelea_2003_convergence`, {cite}`pso_clerc_2002_particle_swarm`
 - Dynamics: {cite}`dip_goldstein_2002_classical_mechanics`, {cite}`dip_spong_2006_robot_modeling_control`
-- Stability: {cite}`khalil2002nonlinear`
+- Stability: {cite}`dip_khalil_2002_nonlinear_systems`
 
 
 
