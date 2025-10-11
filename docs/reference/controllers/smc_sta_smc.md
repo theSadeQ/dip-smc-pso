@@ -75,13 +75,12 @@
  validates all gains using ``require_positive`` and raises a ``ValueError``
  when any gain is non‑positive.
 
- Returns
- # ------- (RST section marker)
- tuple
-     A triple ``(u, (z, σ), history)`` containing the saturated control
-     signal ``u``, the updated internal state and sliding surface value,
-     and a history dictionary (empty for this controller).
- 
+ **Returns:**
+
+ A triple ``(u, (z, σ), history)`` containing the saturated control
+ signal ``u``, the updated internal state and sliding surface value,
+ and a history dictionary (empty for this controller).
+
 
 #### Source Code
 
