@@ -93,9 +93,9 @@ pytest -m "benchmark" --benchmark-save=new_baseline
 | Matplotlib backend errors | Set `export MPLBACKEND=Agg` |
 | Slow test performance | Use `pytest -m "not slow"` for development |
 
----
+## 📚 Detailed Documentation References
 
-## 📚 Detailed Documentation References For testing information, see: - **[📖 Complete Test Execution Guide](../test_execution_guide.md)** - 733-line guide covering: - Scientific validation testing (convergence, stability, robustness) - Advanced execution patterns and CI/CD integration - Performance benchmarking and regression detection - Troubleshooting guide and best practices - **[📋 Basic Testing Guide](../TESTING.md)** - Golden-path testing workflow and architecture - **[🔧 Coverage Documentation](../testing/)** - Coverage analysis and quality gates - **[🚀 Integration Workflows](./complete_integration_guide.md)** - End-to-end system workflows
+For testing information, see: - **[📖 Complete Test Execution Guide](../test_execution_guide.md)** - 733-line guide covering: - Scientific validation testing (convergence, stability, robustness) - Advanced execution patterns and CI/CD integration - Performance benchmarking and regression detection - Troubleshooting guide and best practices - **[📋 Basic Testing Guide](../TESTING.md)** - Golden-path testing workflow and architecture - **[🔧 Coverage Documentation](../testing/)** - Coverage analysis and quality gates - **[🚀 Integration Workflows](./complete_integration_guide.md)** - End-to-end system workflows
 
 ---
 
