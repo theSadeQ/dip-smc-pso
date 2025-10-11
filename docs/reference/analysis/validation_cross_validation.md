@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\validation\cross_validation.py`
 
-## Module Overview Cross-validation methods for analysis validation and model selection
+## Module Overview Cross-validation
+
+methods for analysis validation and model selection
 
 .
 
@@ -81,7 +83,9 @@ in control engineering applications. ## Complete Source Code ```{literalinclude}
 
 ### `KFold`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/cross_validation.py
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/cross_validation.py
 
 :language: python
 :pyobject: KFold
@@ -90,7 +94,9 @@ in control engineering applications. ## Complete Source Code ```{literalinclude}
 
 ### `StratifiedKFold`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/cross_validation.py
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/cross_validation.py
 :language: python
 :pyobject: StratifiedKFold
 :linenos:
@@ -98,7 +104,9 @@ in control engineering applications. ## Complete Source Code ```{literalinclude}
 
 ### `TimeSeriesSplit`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/cross_validation.py
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/cross_validation.py
 
 :language: python
 :pyobject: TimeSeriesSplit
@@ -107,24 +115,34 @@ in control engineering applications. ## Complete Source Code ```{literalinclude}
 
 ### `LeaveOneOut`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/cross_validation.py
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/cross_validation.py
 :language: python
 :pyobject: LeaveOneOut
 :linenos:
 ``` #### Methods (1) ##### `split(self, X)` [View full source →](#method-leaveoneout-split)
 
-### `CrossValidationConfig` Configuration for cross-validation methods.
+### `CrossValidationConfig`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/cross_validation.py
+Configuration for cross-validation methods.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/cross_validation.py
 
 :language: python
 :pyobject: CrossValidationConfig
 :linenos:
 ```
 
-### `CrossValidator` **Inherits from:** `StatisticalValidator` cross-validation framework.
+### `CrossValidator`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/cross_validation.py
+**Inherits from:** `StatisticalValidator` cross-validation framework.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/cross_validation.py
 :language: python
 :pyobject: CrossValidator
 :linenos:
@@ -134,24 +152,34 @@ in control engineering applications. ## Complete Source Code ```{literalinclude}
 
 ## Functions
 
-### `mean_squared_error(y_true, y_pred)` Compute mean squared error.
+### `mean_squared_error(y_true, y_pred)`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/cross_validation.py
+Compute mean squared error.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/cross_validation.py
 
 :language: python
 :pyobject: mean_squared_error
 :linenos:
 ```
 
-### `mean_absolute_error(y_true, y_pred)` Compute mean absolute error.
+### `mean_absolute_error(y_true, y_pred)`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/cross_validation.py
+Compute mean absolute error.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/cross_validation.py
 :language: python
 :pyobject: mean_absolute_error
 :linenos:
 ```
 
-### `create_cross_validator(config)` Factory function to create cross-validator. Parameters
+### `create_cross_validator(config)`
+
+Factory function to create cross-validator. Parameters
 
 config : Dict[str, Any], optional Configuration parameters Returns
 -------

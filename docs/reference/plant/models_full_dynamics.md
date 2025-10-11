@@ -2,7 +2,9 @@
 
 **Source:** `src\plant\models\full\dynamics.py`
 
-## Module Overview Full Fidelity DIP Dynamics Model
+## Module Overview Full
+
+Fidelity DIP Dynamics Model
 
 . Complete high-fidelity implementation of the double inverted pendulum
 
@@ -17,7 +19,9 @@ physics modeling. ## Complete Source Code ```{literalinclude} ../../../src/plant
 
 ## Classes
 
-### `FullDIPDynamics` **Inherits from:** `BaseDynamicsModel` Full Fidelity Double Inverted Pendulum Dynamics Model. High-fidelity implementation featuring:
+### `FullDIPDynamics`
+
+**Inherits from:** `BaseDynamicsModel` Full Fidelity Double Inverted Pendulum Dynamics Model. High-fidelity implementation featuring:
 - Complete nonlinear dynamics with all coupling effects
 - Advanced friction models (viscous + Coulomb)
 - Aerodynamic forces and wind effects

@@ -139,7 +139,9 @@ server = PlantServer(
 # Start server (blocks until client connects)
 server.start()
 
-# Server runs until client disconnects or max_steps reached
+# Server runs until
+
+client disconnects or max_steps reached
 server.close()
 ```
 
@@ -199,7 +201,9 @@ for t in threads:
 print("All parallel tests complete")
 ```
 
-## Example 4: Server with Logging and Monitoring
+## Example 4: Server
+
+with Logging and Monitoring
 
 ```python
 # example-metadata:

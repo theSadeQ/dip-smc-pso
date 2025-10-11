@@ -217,7 +217,9 @@ eq_control.set_regularization(alpha=alpha)
 print(f"Using regularization: α={alpha:.2e}")
 ```
 
-## Example 4: Hybrid Control (Equivalent + Switching)
+## Example 4: Hybrid
+
+Control (Equivalent + Switching)
 
 ```python
 from src.utils.control.saturation import saturate

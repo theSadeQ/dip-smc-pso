@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\visualization\__init__.py`
 
-## Module Overview Visualization module for control system analysis
+## Module Overview Visualization
+
+module for control system analysis
 
 .
 
@@ -19,7 +21,9 @@ default_style < user_style < local_override
 ``` Where $\Delta E$ is perceptual color difference (CIELAB). ### Component Integration **Unified plotting interface:** ```python
 # example-metadata:
 
-# runnable: false class Visualizer: def plot_time_series(data) -> Figure def plot_phase_portrait(states) -> Figure def plot_statistics(metrics) -> Figure
+# runnable: false class
+
+Visualizer: def plot_time_series(data) -> Figure def plot_phase_portrait(states) -> Figure def plot_statistics(metrics) -> Figure
 
 ``` ## Architecture Diagram ```{mermaid}
 graph TD A[Visualization Framework] --> B[Style System] A --> C[Color Palettes] A --> D[Plot Types] B --> E[Matplotlib Config] C --> F[Perceptual Uniformity] D --> G[Component Library] E --> H[Unified Interface] F --> H G --> H H --> I[Visualizer] I --> J[Figure Generation] style H fill:#9cf style J fill:#9f9

@@ -2,7 +2,9 @@
 
 **Source:** `src\controllers\factory\deprecation.py`
 
-## Module Overview Controller Factory Deprecation Warning System
+## Module Overview Controller
+
+Factory Deprecation Warning System
 
 . Provides systematic deprecation warnings for controller configuration changes,
 
@@ -16,9 +18,13 @@ parameter renames, and interface modifications to ensure smooth migration paths.
 
 ## Classes
 
-### `DeprecationLevel` **Inherits from:** `Enum` Levels of deprecation severity.
+### `DeprecationLevel`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/deprecation.py
+**Inherits from:** `Enum` Levels of deprecation severity.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/deprecation.py
 :language: python
 :pyobject: DeprecationLevel
 :linenos:
@@ -26,16 +32,22 @@ parameter renames, and interface modifications to ensure smooth migration paths.
 
 ---
 
-## `DeprecationMapping` Configuration for a deprecated parameter or feature.
+## `DeprecationMapping`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/deprecation.py
+Configuration for a deprecated parameter or feature.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/deprecation.py
 
 :language: python
 :pyobject: DeprecationMapping
 :linenos:
 ```
 
-### `ControllerDeprecationWarner` Systematic deprecation warning system for controller configurations. Tracks deprecated parameters, provides migration guidance, and ensures
+### `ControllerDeprecationWarner`
+
+Systematic deprecation warning system for controller configurations. Tracks deprecated parameters, provides migration guidance, and ensures
 backward compatibility during transition periods. #### Source Code ```{literalinclude} ../../../src/controllers/factory/deprecation.py
 :language: python
 :pyobject: ControllerDeprecationWarner
@@ -46,26 +58,38 @@ backward compatibility during transition periods. #### Source Code ```{literalin
 
 ## Functions
 
-### `check_deprecated_config(controller_type, config_params)` Convenience function to check and migrate deprecated configuration parameters. Args: controller_type: Type of controller config_params: Configuration parameters Returns: Updated configuration with deprecated parameters migrated
+### `check_deprecated_config(controller_type, config_params)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/deprecation.py
+Convenience function to check and migrate deprecated configuration parameters. Args: controller_type: Type of controller config_params: Configuration parameters Returns: Updated configuration with deprecated parameters migrated
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/deprecation.py
 
 :language: python
 :pyobject: check_deprecated_config
 :linenos:
 ```
 
-### `get_controller_migration_guide(controller_type)` Get migration guide for a specific controller type. Args: controller_type: Type of controller Returns: List of migration guidance strings
+### `get_controller_migration_guide(controller_type)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/deprecation.py
+Get migration guide for a specific controller type. Args: controller_type: Type of controller Returns: List of migration guidance strings
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/deprecation.py
 :language: python
 :pyobject: get_controller_migration_guide
 :linenos:
 ```
 
-### `validate_config_compatibility(controller_type, config_params)` Validate configuration compatibility for a controller type. Args: controller_type: Type of controller config_params: Configuration parameters to validate Returns: Dictionary of compatibility issues
+### `validate_config_compatibility(controller_type, config_params)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/deprecation.py
+Validate configuration compatibility for a controller type. Args: controller_type: Type of controller config_params: Configuration parameters to validate Returns: Dictionary of compatibility issues
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/deprecation.py
 
 :language: python
 :pyobject: validate_config_compatibility

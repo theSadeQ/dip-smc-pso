@@ -293,7 +293,9 @@ controller = SMCFactory.create_controller(SMCType.CLASSICAL, config)
 ```python
 from src.controllers.factory import SMCFactory, SMCType
 
-# Get gain requirements for each controller type
+# Get gain requirements
+
+for each controller type
 for ctrl_type in SMCType:
     spec = SMCFactory.get_gain_specification(ctrl_type)
     print(f"\n{ctrl_type.value}:")

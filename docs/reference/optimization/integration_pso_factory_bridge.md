@@ -17,7 +17,9 @@
 \end{align}
 ``` **Mapping:** PSO particles $\vec{x}_i \leftrightarrow$ Controller gains $\vec{\theta}_i$ ### Factory Pattern Integration **Controller creation from PSO particle:** ```python
 # example-metadata:
-# runnable: false def particle_to_controller(particle: np.ndarray) -> Controller: gains = { 'k1': particle[0], 'k2': particle[1], # ... } return ControllerFactory.create(gains)
+# runnable: false def
+
+particle_to_controller(particle: np.ndarray) -> Controller: gains = { 'k1': particle[0], 'k2': particle[1], # ... } return ControllerFactory.create(gains)
 ``` ### Parameter Mapping Strategies **Direct mapping:** ```{math}
 
 \theta_i = x_i, \quad \theta_i \in [\theta_{min,i}, \theta_{max,i}]
@@ -84,26 +86,38 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 
 ## Classes
 
-### `ControllerType` **Inherits from:** `Enum` Controller types for PSO optimization.
+### `ControllerType`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+**Inherits from:** `Enum` Controller types for PSO optimization.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 
 :language: python
 :pyobject: ControllerType
 :linenos:
 ```
 
-### `PSOFactoryConfig` Configuration for PSO-Factory integration.
+### `PSOFactoryConfig`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+Configuration for PSO-Factory integration.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 :language: python
 :pyobject: PSOFactoryConfig
 :linenos:
 ```
 
-### `EnhancedPSOFactory` Enhanced PSO-Factory integration with advanced optimization capabilities.
+### `EnhancedPSOFactory`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+Enhanced PSO-Factory integration with advanced optimization capabilities.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 
 :language: python
 :pyobject: EnhancedPSOFactory
@@ -114,34 +128,50 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 
 ## Functions
 
-### `create_optimized_controller_factory(controller_type, optimization_config)` Create an optimized controller factory using PSO with results.
+### `create_optimized_controller_factory(controller_type, optimization_config)`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+Create an optimized controller factory using PSO with results.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 :language: python
 :pyobject: create_optimized_controller_factory
 :linenos:
 ```
 
-### `optimize_classical_smc()` Optimize Classical SMC controller using PSO.
+### `optimize_classical_smc()`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+Optimize Classical SMC controller using PSO.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 
 :language: python
 :pyobject: optimize_classical_smc
 :linenos:
 ```
 
-### `optimize_adaptive_smc()` Optimize Adaptive SMC controller using PSO.
+### `optimize_adaptive_smc()`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+Optimize Adaptive SMC controller using PSO.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 :language: python
 :pyobject: optimize_adaptive_smc
 :linenos:
 ```
 
-### `optimize_sta_smc()` Optimize Super-Twisting SMC controller using PSO.
+### `optimize_sta_smc()`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+Optimize Super-Twisting SMC controller using PSO.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 
 :language: python
 :pyobject: optimize_sta_smc

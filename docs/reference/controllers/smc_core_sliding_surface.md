@@ -206,7 +206,9 @@ omega_n2 = np.sqrt(c2 / lambda2)  # rad/s
 print(f"Natural frequency 1: {omega_n1:.2f} rad/s")
 print(f"Natural frequency 2: {omega_n2:.2f} rad/s")
 
-# Check Nyquist criterion (sampling frequency 100 Hz)
+# Check Nyquist criterion
+
+(sampling frequency 100 Hz)
 omega_s = 2 * np.pi * 100  # rad/s
 if omega_n1 < omega_s / 5 and omega_n2 < omega_s / 5:
     print("Frequencies safe for 100 Hz sampling")
@@ -217,7 +219,9 @@ if omega_n1 < omega_s / 5 and omega_n2 < omega_s / 5:
 ```python
 from src.controllers.smc.core.sliding_surface import HigherOrderSlidingSurface
 
-# Define 6 gains for 2nd order surface
+# Define 6 gains
+
+for 2nd order surface
 gains_ho = [25.0, 10.0, 15.0, 12.0, 20.0, 15.0]
 surface_ho = HigherOrderSlidingSurface(gains_ho)
 

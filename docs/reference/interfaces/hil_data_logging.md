@@ -2,7 +2,9 @@
 
 **Source:** `src\interfaces\hil\data_logging.py`
 
-## Module Overview Data logging system for HIL applications
+## Module Overview Data
+
+logging system for HIL applications
 
 .
 
@@ -132,41 +134,59 @@ replay = Replay("original.csv") for entry in replay: t = entry["time"] state = e
 
 ## Classes
 
-### `LogFormat` **Inherits from:** `Enum` Data logging format enumeration.
+### `LogFormat`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
+**Inherits from:** `Enum` Data logging format enumeration.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/hil/data_logging.py
 
 :language: python
 :pyobject: LogFormat
 :linenos:
 ```
 
-### `CompressionType` **Inherits from:** `Enum` Data compression type enumeration.
+### `CompressionType`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
+**Inherits from:** `Enum` Data compression type enumeration.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/hil/data_logging.py
 :language: python
 :pyobject: CompressionType
 :linenos:
 ```
 
-### `LoggingConfig` HIL data logging configuration.
+### `LoggingConfig`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
+HIL data logging configuration.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/hil/data_logging.py
 
 :language: python
 :pyobject: LoggingConfig
 :linenos:
 ```
 
-### `LogEntry` Individual log entry.
+### `LogEntry`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
+Individual log entry.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/hil/data_logging.py
 :language: python
 :pyobject: LogEntry
 :linenos:
 ```
 
-### `HILDataLogger` High-performance data logger for HIL systems. Provides efficient data collection, buffering, and storage
+### `HILDataLogger`
+
+High-performance data logger for HIL systems. Provides efficient data collection, buffering, and storage
 
 with support for multiple formats and real-time compression. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
 :language: python
@@ -178,17 +198,25 @@ with support for multiple formats and real-time compression. #### Source Code ``
 
 ## Functions
 
-### `load_hdf5_data(filepath, channels, start_time, end_time)` Load data from HDF5 log file.
+### `load_hdf5_data(filepath, channels, start_time, end_time)`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
+Load data from HDF5 log file.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/hil/data_logging.py
 :language: python
 :pyobject: load_hdf5_data
 :linenos:
 ```
 
-### `analyze_log_performance(log_stats)` Analyze logging performance.
+### `analyze_log_performance(log_stats)`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
+Analyze logging performance.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/hil/data_logging.py
 
 :language: python
 :pyobject: analyze_log_performance

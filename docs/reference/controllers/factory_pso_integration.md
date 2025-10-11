@@ -2,7 +2,9 @@
 
 **Source:** `src\controllers\factory\pso_integration.py`
 
-## Module Overview Advanced PSO Integration Module for SMC Controllers
+## Module Overview Advanced
+
+PSO Integration Module for SMC Controllers
 
 . This module provides optimized integration between SMC controllers and PSO optimization,
 
@@ -30,7 +32,9 @@ J(\vec{g}) = w_1 \text{ITAE}(\vec{g}) + w_2 \text{RMS}_u(\vec{g}) + w_3 \text{CH
 | $K$ | Switching | 1.0 | 200.0 | N |
 | $\epsilon$ | Boundary | 0.0 | 50.0 | rad | ### Factory-PSO Integration Pattern **Closure-based fitness function:** ```python
 # example-metadata:
-# runnable: false def create_fitness_function( ctrl_type: SMCType, config: Config
+# runnable: false def
+
+create_fitness_function( ctrl_type: SMCType, config: Config
 ) -> Callable[[np.ndarray], float]: """Returns fitness function for PSO.""" def fitness(gains: np.ndarray) -> float: # Create controller with candidate gains controller = create_smc_for_pso(ctrl_type, gains) # Simulate result = simulate(controller, config) # Compute cost return compute_cost(result) return fitness
 ``` **Benefits:**
 
@@ -75,7 +79,9 @@ def multi_objective_fitness(gains): controller = create_smc_for_pso(SMCType.CLAS
 ) best_gains, best_cost = pso.optimize(max_iterations=100)
 ``` ### Example 3: Convergence Monitoring ```python
 # example-metadata:
-# runnable: false # PSO with convergence callback
+# runnable: false #
+
+PSO with convergence callback
 def convergence_callback(iteration, best_fitness, diversity): print(f"Iteration {iteration:3d}: " f"Fitness={best_fitness:.4f}, " f"Diversity={diversity:.4f}") # Early stopping if fitness stagnant if iteration > 20: fitness_history = pso.get_fitness_history() improvement = abs(fitness_history[-1] - fitness_history[-10]) / fitness_history[-10] if improvement < 1e-4: print("Early stopping: convergence detected") return True # Stop optimization return False pso = PSOTuner( n_particles=30, bounds=bounds, fitness_function=fitness_function, convergence_callback=convergence_callback
 ) best_gains, _ = pso.optimize(max_iterations=200)
 ``` ### Example 4: Constraint Handling ```python
@@ -99,9 +105,13 @@ print(f"Speedup: ~8x using parallel evaluation")
 
 ## Classes
 
-### `PSOOptimizable` **Inherits from:** `Protocol` Protocol for PSO-optimizable controllers.
+### `PSOOptimizable`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
+**Inherits from:** `Protocol` Protocol for PSO-optimizable controllers.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/pso_integration.py
 :language: python
 :pyobject: PSOOptimizable
 :linenos:
@@ -109,16 +119,22 @@ print(f"Speedup: ~8x using parallel evaluation")
 
 ---
 
-## `PSOPerformanceMetrics` Performance metrics for PSO controller evaluation.
+## `PSOPerformanceMetrics`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
+Performance metrics for PSO controller evaluation.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/pso_integration.py
 
 :language: python
 :pyobject: PSOPerformanceMetrics
 :linenos:
 ```
 
-### `EnhancedPSOControllerWrapper` Enhanced PSO-compatible controller wrapper with advanced features. Features:
+### `EnhancedPSOControllerWrapper`
+
+Enhanced PSO-compatible controller wrapper with advanced features. Features:
 - Thread-safe operation
 - Performance monitoring
 - Automatic saturation handling
@@ -133,35 +149,51 @@ print(f"Speedup: ~8x using parallel evaluation")
 
 ## Functions
 
-### `create_enhanced_pso_controller(smc_type, gains, plant_config, max_force, dt, enable_monitoring)` Create enhanced PSO-compatible controller with advanced features. Args: smc_type: SMC controller type gains: Controller gains plant_config: Plant configuration (optional) max_force: Maximum control force dt: Control timestep enable_monitoring: performance monitoring **kwargs: Additional controller parameters Returns: Enhanced PSO controller wrapper Raises: ValueError: If parameters are invalid
+### `create_enhanced_pso_controller(smc_type, gains, plant_config, max_force, dt, enable_monitoring)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
+Create enhanced PSO-compatible controller with advanced features. Args: smc_type: SMC controller type gains: Controller gains plant_config: Plant configuration (optional) max_force: Maximum control force dt: Control timestep enable_monitoring: performance monitoring **kwargs: Additional controller parameters Returns: Enhanced PSO controller wrapper Raises: ValueError: If parameters are invalid
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/pso_integration.py
 
 :language: python
 :pyobject: create_enhanced_pso_controller
 :linenos:
 ```
 
-### `create_optimized_pso_factory(smc_type, plant_config, max_force, enable_monitoring)` Create optimized PSO factory function for controller creation. Args: smc_type: SMC controller type plant_config: Plant configuration (optional) max_force: Maximum control force enable_monitoring: performance monitoring **kwargs: Additional factory parameters Returns: Factory function that creates PSO controllers from gains
+### `create_optimized_pso_factory(smc_type, plant_config, max_force, enable_monitoring)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
+Create optimized PSO factory function for controller creation. Args: smc_type: SMC controller type plant_config: Plant configuration (optional) max_force: Maximum control force enable_monitoring: performance monitoring **kwargs: Additional factory parameters Returns: Factory function that creates PSO controllers from gains
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/pso_integration.py
 :language: python
 :pyobject: create_optimized_pso_factory
 :linenos:
 ```
 
-### `get_optimized_pso_bounds(smc_type, performance_target)` Get optimized PSO bounds based on performance targets. Args: smc_type: Controller type performance_target: 'aggressive', 'balanced', or 'conservative' Returns: Tuple of (lower_bounds, upper_bounds)
+### `get_optimized_pso_bounds(smc_type, performance_target)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
+Get optimized PSO bounds based on performance targets. Args: smc_type: Controller type performance_target: 'aggressive', 'balanced', or 'conservative' Returns: Tuple of (lower_bounds, upper_bounds)
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/pso_integration.py
 
 :language: python
 :pyobject: get_optimized_pso_bounds
 :linenos:
 ```
 
-### `validate_pso_gains_advanced(smc_type, gains, check_stability)` Advanced validation of PSO gains with stability analysis. Args: smc_type: Controller type gains: Gains to validate check_stability: Perform stability checks Returns: Dictionary with validation results
+### `validate_pso_gains_advanced(smc_type, gains, check_stability)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
+Advanced validation of PSO gains with stability analysis. Args: smc_type: Controller type gains: Gains to validate check_stability: Perform stability checks Returns: Dictionary with validation results
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/pso_integration.py
 :language: python
 :pyobject: validate_pso_gains_advanced
 :linenos:

@@ -2,7 +2,9 @@
 
 **Source:** `src\utils\numerical_stability\__init__.py`
 
-## Module Overview Numerical stability utilities for robust mathematical operations
+## Module Overview Numerical
+
+stability utilities for robust mathematical operations
 
 . This module provides safe mathematical operations that protect against:
 
@@ -22,7 +24,9 @@ stability and optimization algorithm convergence. Example: >>> from src.utils.nu
 
 ## Advanced Mathematical Theory
 
-### Numerical Stability for Robust Computation Numerical stability utilities protect against common numerical errors in control systems and optimization algorithms.
+### Numerical Stability for
+
+Robust Computation Numerical stability utilities protect against common numerical errors in control systems and optimization algorithms.
 
 #### Division by Zero Protection **Safe division:**
 $$
@@ -71,7 +75,9 @@ from src.utils.numerical_stability import safe_divide # Protect against divide-b
 a = 1.0
 b = 1e-15 # Near-zero denominator result = safe_divide(a, b, epsilon=1e-10)
 print(f"Safe division: {a}/{b} = {result}")
-# Uses epsilon instead of b, returns bounded result # Vector safe division
+# Uses epsilon instead
+
+of b, returns bounded result # Vector safe division
 numerators = np.array([1.0, 2.0, 3.0])
 denominators = np.array([0.5, 1e-16, 2.0]) results = safe_divide(numerators, denominators)
 print(f"Vector safe division: {results}")

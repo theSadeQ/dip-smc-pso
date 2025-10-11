@@ -65,7 +65,9 @@ from src.analysis.visualization import AnalysisPlotter plotter = AnalysisPlotter
 fig = plotter.plot_time_series(data)
 fig.savefig('analysis.pdf')
 ```
-## Complete Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi.py
+## Complete Source Code ```
+
+{literalinclude} ../../../src/analysis/fault_detection/fdi.py
 
 :language: python
 :linenos:
@@ -75,14 +77,18 @@ fig.savefig('analysis.pdf')
 
 ## Classes
 
-### `DynamicsProtocol` **Inherits from:** `Protocol` Protocol defining the expected interface for dynamics models. This protocol ensures type safety and compatibility across different
+### `DynamicsProtocol`
+
+**Inherits from:** `Protocol` Protocol defining the expected interface for dynamics models. This protocol ensures type safety and compatibility across different
 dynamics model implementations used in fault detection. #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi.py
 :language: python
 :pyobject: DynamicsProtocol
 :linenos:
 ``` #### Methods (1) ##### `step(self, state, u, dt)` Advance the system dynamics by one timestep. [View full source →](#method-dynamicsprotocol-step)
 
-### `FDIsystem` Lightweight, modular Fault Detection and Isolation (FDI) system with
+### `FDIsystem`
+
+Lightweight, modular Fault Detection and Isolation (FDI) system with
 
 optional adaptive thresholds and CUSUM drift detection. A residual is formed by comparing the one‑step state prediction from a
 dynamics model with the actual measurement. If an extended Kalman
@@ -122,7 +128,9 @@ hysteresis_lower : float Lower threshold for potential fault recovery (future us
 
 ---
 
-### `FaultDetectionInterface` **Inherits from:** `Protocol` Protocol defining the interface for fault detection systems. This interface ensures compatibility across different fault detection
+### `FaultDetectionInterface`
+
+**Inherits from:** `Protocol` Protocol defining the interface for fault detection systems. This interface ensures compatibility across different fault detection
 implementations and provides a standard API for testing and usage. #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi.py
 :language: python
 :pyobject: FaultDetectionInterface
@@ -133,9 +141,13 @@ implementations and provides a standard API for testing and usage. #### Source C
 
 ## Functions
 
-### `_verify_interface()` Verify that FDIsystem correctly implements FaultDetectionInterface.
+### `_verify_interface()`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi.py
+Verify that FDIsystem correctly implements FaultDetectionInterface.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/fault_detection/fdi.py
 
 :language: python
 :pyobject: _verify_interface

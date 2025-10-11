@@ -2,7 +2,9 @@
 
 **Source:** `src\optimization\__init__.py`
 
-## Module Overview Professional optimization framework for control engineering applications
+## Module Overview Professional
+
+optimization framework for control engineering applications
 
 . This module provides a optimization framework featuring:
 
@@ -20,7 +22,9 @@
 
 ## Functions
 
-### `create_optimizer(algorithm, parameter_space)` Create an optimizer of specified type. Parameters
+### `create_optimizer(algorithm, parameter_space)`
+
+Create an optimizer of specified type. Parameters
 ----------
 algorithm : str Algorithm name ('pso', 'de', 'ga', 'cma_es', 'bayesian', 'nelder_mead')
 parameter_space : ParameterSpace Parameter space to optimize over
@@ -47,7 +51,9 @@ Optimizer Configured optimizer instance Examples
 
 ---
 
-## `create_control_problem(objective_type, controller_factory, simulation_config, parameter_bounds)` Create a control optimization problem. Parameters
+## `create_control_problem(objective_type, controller_factory, simulation_config, parameter_bounds)`
+
+Create a control optimization problem. Parameters
 
 objective_type : str Type of objective ('tracking', 'energy', 'settling_time', 'overshoot')
 controller_factory : callable Function to create controller from parameters
@@ -74,7 +80,9 @@ ControlOptimizationProblem Configured optimization problem Examples
 
 ---
 
-### `run_optimization_study(problems, algorithms, n_runs, parallel)` Run optimization study comparing multiple algorithms. Parameters
+### `run_optimization_study(problems, algorithms, n_runs, parallel)`
+
+Run optimization study comparing multiple algorithms. Parameters
 ----------
 problems : list List of optimization problems
 algorithms : list List of algorithm names or configured optimizers
@@ -97,7 +105,9 @@ dict study results with statistical analysis Examples
 
 ---
 
-### `example_pid_tuning()` Example: PID controller tuning using PSO. This example demonstrates how to optimize PID controller parameters
+### `example_pid_tuning()`
+
+Example: PID controller tuning using PSO. This example demonstrates how to optimize PID controller parameters
 
 for a tracking objective using the new framework. #### Source Code ```{literalinclude} ../../../src/optimization/__init__.py
 :language: python
@@ -105,7 +115,9 @@ for a tracking objective using the new framework. #### Source Code ```{literalin
 :linenos:
 ```
 
-### `example_algorithm_comparison()` Example: Compare multiple optimization algorithms. This example shows how to compare PSO, DE, and GA algorithms
+### `example_algorithm_comparison()`
+
+Example: Compare multiple optimization algorithms. This example shows how to compare PSO, DE, and GA algorithms
 on the same control optimization problem. #### Source Code ```{literalinclude} ../../../src/optimization/__init__.py
 :language: python
 :pyobject: example_algorithm_comparison

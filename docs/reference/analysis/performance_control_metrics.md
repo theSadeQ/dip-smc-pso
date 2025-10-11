@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\performance\control_metrics.py`
 
-## Module Overview Enhanced control performance metrics and analysis
+## Module Overview Enhanced
+
+control performance metrics and analysis
 
 .
 
@@ -80,9 +82,13 @@ evaluation of controller performance. ## Complete Source Code ```{literalinclude
 
 ## Classes
 
-### `AdvancedControlMetrics` **Inherits from:** `PerformanceAnalyzer` Advanced control performance analyzer with frequency domain capabilities.
+### `AdvancedControlMetrics`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/performance/control_metrics.py
+**Inherits from:** `PerformanceAnalyzer` Advanced control performance analyzer with frequency domain capabilities.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/performance/control_metrics.py
 :language: python
 :pyobject: AdvancedControlMetrics
 :linenos:
@@ -92,7 +98,9 @@ evaluation of controller performance. ## Complete Source Code ```{literalinclude
 
 ## Functions
 
-### `compute_ise(t, x)` Compute Integral of Squared Error (ISE) for all state variables. The ISE metric integrates the squared state deviations over time:
+### `compute_ise(t, x)`
+
+Compute Integral of Squared Error (ISE) for all state variables. The ISE metric integrates the squared state deviations over time:
 
 ISE = ∫₀ᵀ ||x(t)||² dt This metric penalizes large deviations heavily and provides a measure
 of overall tracking performance. Lower values indicate better control. Parameters
@@ -107,7 +115,9 @@ float ISE value averaged across batch dimension #### Source Code ```{literalincl
 
 ---
 
-### `compute_itae(t, x)` Compute Integral of Time-weighted Absolute Error (ITAE). The ITAE metric emphasizes errors that occur later in the trajectory:
+### `compute_itae(t, x)`
+
+Compute Integral of Time-weighted Absolute Error (ITAE). The ITAE metric emphasizes errors that occur later in the trajectory:
 ITAE = ∫₀ᵀ t·||x(t)||₁ dt This metric is particularly useful for evaluating settling behavior
 and penalizes persistent steady-state errors more heavily than
 transient errors early in the response. Parameters
@@ -122,7 +132,9 @@ float ITAE value averaged across batch dimension #### Source Code ```{literalinc
 
 ---
 
-### `compute_rms_control_effort(u)` Compute Root Mean Square (RMS) control effort. The RMS control effort measures the average magnitude of control inputs:
+### `compute_rms_control_effort(u)`
+
+Compute Root Mean Square (RMS) control effort. The RMS control effort measures the average magnitude of control inputs:
 
 RMS = √(⟨u²(t)⟩) This metric quantifies actuator usage and energy consumption. Lower
 values indicate more efficient control that requires less actuation. Parameters

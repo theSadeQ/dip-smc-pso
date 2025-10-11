@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\__init__.py`
 
-## Module Overview Professional analysis framework for control system evaluation and validation
+## Module Overview Professional
+
+analysis framework for control system evaluation and validation
 
 .
 
@@ -66,7 +68,9 @@ legacy compatibility and modern enhanced capabilities. ## Complete Source Code `
 
 ## Functions
 
-### `create_performance_analyzer(analyzer_type)` Create performance analyzer instance. Parameters
+### `create_performance_analyzer(analyzer_type)`
+
+Create performance analyzer instance. Parameters
 
 analyzer_type : str Type of analyzer ('advanced', 'stability', 'robustness')
 **kwargs Additional configuration parameters Returns
@@ -78,7 +82,9 @@ PerformanceAnalyzer Configured performance analyzer #### Source Code ```{literal
 
 ---
 
-### `create_fault_detector(detector_type)` Create fault detector instance. Parameters
+### `create_fault_detector(detector_type)`
+
+Create fault detector instance. Parameters
 ----------
 detector_type : str Type of detector ('enhanced', 'legacy')
 **kwargs Additional configuration parameters Returns
@@ -90,26 +96,38 @@ FaultDetector Configured fault detector #### Source Code ```{literalinclude} ../
 
 ---
 
-### `create_statistical_validator()` Create statistical validator instance.
+### `create_statistical_validator()`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/__init__.py
+Create statistical validator instance.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/__init__.py
 
 :language: python
 :pyobject: create_statistical_validator
 :linenos:
 ```
 
-### `create_monte_carlo_analyzer()` Create Monte Carlo analyzer instance.
+### `create_monte_carlo_analyzer()`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/__init__.py
+Create Monte Carlo analyzer instance.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/__init__.py
 :language: python
 :pyobject: create_monte_carlo_analyzer
 :linenos:
 ```
 
-### `create_visualization_suite()` Create complete visualization suite.
+### `create_visualization_suite()`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/__init__.py
+Create complete visualization suite.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/__init__.py
 
 :language: python
 :pyobject: create_visualization_suite

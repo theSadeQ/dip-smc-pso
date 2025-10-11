@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\core\interfaces.py`
 
-## Module Overview Core interfaces for the analysis framework
+## Module Overview Core
+
+interfaces for the analysis framework
 
 .
 
@@ -15,7 +17,9 @@
 
 # example-metadata:
 
-# runnable: false class Analyzer(Protocol): def analyze(self, data: Data) -> Result: ...
+# runnable: false class
+
+Analyzer(Protocol): def analyze(self, data: Data) -> Result: ...
 
 ``` **Subtype relation:** ```{math}
 \text{ConcreteAnalyzer} <: \text{Analyzer}
@@ -78,111 +82,163 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ## Classes
 
-### `AnalysisStatus` **Inherits from:** `Enum` Status of analysis operations.
+### `AnalysisStatus`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+**Inherits from:** `Enum` Status of analysis operations.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: AnalysisStatus
 :linenos:
 ```
 
-### `AnalysisResult` Base class for analysis results.
+### `AnalysisResult`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+Base class for analysis results.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/core/interfaces.py
 :language: python
 :pyobject: AnalysisResult
 :linenos:
 ``` #### Methods (3) ##### `is_success(self)` Check if analysis was successful. [View full source →](#method-analysisresult-is_success) ##### `has_warnings(self)` Check if analysis has warnings. [View full source →](#method-analysisresult-has_warnings) ##### `has_errors(self)` Check if analysis has errors. [View full source →](#method-analysisresult-has_errors)
 
-### `DataProtocol` **Inherits from:** `Protocol` Protocol for simulation data.
+### `DataProtocol`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+**Inherits from:** `Protocol` Protocol for simulation data.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: DataProtocol
 :linenos:
 ``` #### Methods (2) ##### `get_time_range(self)` Get time range of the data. [View full source →](#method-dataprotocol-get_time_range) ##### `get_sampling_rate(self)` Get average sampling rate. [View full source →](#method-dataprotocol-get_sampling_rate)
 
-### `MetricCalculator` **Inherits from:** `ABC` Abstract base class for metric calculators.
+### `MetricCalculator`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+**Inherits from:** `ABC` Abstract base class for metric calculators.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/core/interfaces.py
 :language: python
 :pyobject: MetricCalculator
 :linenos:
 ``` #### Methods (3) ##### `compute(self, data)` Compute metrics from simulation data. [View full source →](#method-metriccalculator-compute) ##### `supported_metrics(self)` List of metrics supported by this calculator. [View full source →](#method-metriccalculator-supported_metrics) ##### `validate_data(self, data)` Validate input data for metric calculation. [View full source →](#method-metriccalculator-validate_data)
 
-### `PerformanceAnalyzer` **Inherits from:** `ABC` Abstract base class for performance analyzers.
+### `PerformanceAnalyzer`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+**Inherits from:** `ABC` Abstract base class for performance analyzers.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: PerformanceAnalyzer
 :linenos:
 ``` #### Methods (3) ##### `analyze(self, data)` Perform performance analysis. [View full source →](#method-performanceanalyzer-analyze) ##### `analyzer_name(self)` Name of the analyzer. [View full source →](#method-performanceanalyzer-analyzer_name) ##### `required_data_fields(self)` List of required data fields for analysis. [View full source →](#method-performanceanalyzer-required_data_fields)
 
-### `FaultDetector` **Inherits from:** `ABC` Abstract base class for fault detection systems.
+### `FaultDetector`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+**Inherits from:** `ABC` Abstract base class for fault detection systems.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/core/interfaces.py
 :language: python
 :pyobject: FaultDetector
 :linenos:
 ``` #### Methods (3) ##### `detect(self, data)` Detect faults in the system. [View full source →](#method-faultdetector-detect) ##### `reset(self)` Reset detector state for new analysis. [View full source →](#method-faultdetector-reset) ##### `detector_type(self)` Type of fault detector. [View full source →](#method-faultdetector-detector_type)
 
-### `StatisticalValidator` **Inherits from:** `ABC` Abstract base class for statistical validation.
+### `StatisticalValidator`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+**Inherits from:** `ABC` Abstract base class for statistical validation.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: StatisticalValidator
 :linenos:
 ``` #### Methods (2) ##### `validate(self, data)` Perform statistical validation. [View full source →](#method-statisticalvalidator-validate) ##### `validation_methods(self)` List of validation methods supported. [View full source →](#method-statisticalvalidator-validation_methods)
 
-### `VisualizationGenerator` **Inherits from:** `ABC` Abstract base class for visualization generators.
+### `VisualizationGenerator`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+**Inherits from:** `ABC` Abstract base class for visualization generators.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/core/interfaces.py
 :language: python
 :pyobject: VisualizationGenerator
 :linenos:
 ``` #### Methods (2) ##### `generate(self, analysis_result)` Generate visualization from analysis results. [View full source →](#method-visualizationgenerator-generate) ##### `supported_formats(self)` List of supported output formats. [View full source →](#method-visualizationgenerator-supported_formats)
 
-### `ReportGenerator` **Inherits from:** `ABC` Abstract base class for report generators.
+### `ReportGenerator`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+**Inherits from:** `ABC` Abstract base class for report generators.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: ReportGenerator
 :linenos:
 ``` #### Methods (2) ##### `generate_report(self, analysis_results)` Generate analysis report. [View full source →](#method-reportgenerator-generate_report) ##### `report_formats(self)` List of supported report formats. [View full source →](#method-reportgenerator-report_formats)
 
-### `AnalyzerFactory` **Inherits from:** `Protocol` Protocol for analyzer factories.
+### `AnalyzerFactory`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+**Inherits from:** `Protocol` Protocol for analyzer factories.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/core/interfaces.py
 :language: python
 :pyobject: AnalyzerFactory
 :linenos:
 ``` #### Methods (4) ##### `create_metric_calculator(self, calculator_type)` Create a metric calculator of specified type. [View full source →](#method-analyzerfactory-create_metric_calculator) ##### `create_performance_analyzer(self, analyzer_type)` Create a performance analyzer of specified type. [View full source →](#method-analyzerfactory-create_performance_analyzer) ##### `create_fault_detector(self, detector_type)` Create a fault detector of specified type. [View full source →](#method-analyzerfactory-create_fault_detector) ##### `create_statistical_validator(self, validator_type)` Create a statistical validator of specified type. [View full source →](#method-analyzerfactory-create_statistical_validator)
 
-### `AnalysisConfiguration` **Inherits from:** `Protocol` Protocol for analysis configuration.
+### `AnalysisConfiguration`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+**Inherits from:** `Protocol` Protocol for analysis configuration.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: AnalysisConfiguration
 :linenos:
 ``` #### Methods (1) ##### `validate(self)` Validate configuration parameters. [View full source →](#method-analysisconfiguration-validate)
 
-### `AnalysisPipeline` **Inherits from:** `ABC` Abstract base class for analysis pipelines.
+### `AnalysisPipeline`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+**Inherits from:** `ABC` Abstract base class for analysis pipelines.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/core/interfaces.py
 :language: python
 :pyobject: AnalysisPipeline
 :linenos:
 ``` #### Methods (4) ##### `add_analyzer(self, analyzer)` Add an analyzer to the pipeline. [View full source →](#method-analysispipeline-add_analyzer) ##### `run_pipeline(self, data)` Run the complete analysis pipeline. [View full source →](#method-analysispipeline-run_pipeline) ##### `get_summary(self)` Get summary of pipeline results. [View full source →](#method-analysispipeline-get_summary) ##### `pipeline_name(self)` Name of the analysis pipeline. [View full source →](#method-analysispipeline-pipeline_name)
 
-### `AnalysisSession` **Inherits from:** `ABC` Abstract base class for analysis sessions.
+### `AnalysisSession`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+**Inherits from:** `ABC` Abstract base class for analysis sessions.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: AnalysisSession

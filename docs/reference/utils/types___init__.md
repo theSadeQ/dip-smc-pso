@@ -183,7 +183,9 @@ from src.utils.types import STAOutput
 # Create immutable output
 sta_output = STAOutput(u, state_vars, history)
 
-# Attempt modification (will fail - NamedTuple is frozen)
+# Attempt modification (will
+
+fail - NamedTuple is frozen)
 try:
     sta_output.u = np.array([20.0])  # AttributeError
 except AttributeError:
@@ -220,7 +222,9 @@ def hybrid_controller(
 output: HybridSTAOutput = hybrid_controller(x, state_vars, history)
 ```
 
-## Example 5: Batch Processing with Type Safety
+## Example 5: Batch
+
+Processing with Type Safety
 
 ```python
 from src.utils.types import ClassicalSMCOutput

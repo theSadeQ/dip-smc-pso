@@ -2,7 +2,9 @@
 
 **Source:** `src\interfaces\hil\fault_injection.py`
 
-## Module Overview Fault injection system for HIL testing and validation
+## Module Overview Fault
+
+injection system for HIL testing and validation
 
 .
 
@@ -157,50 +159,72 @@ print(f"False positives: {false_positives}")
 
 ## Classes
 
-### `FaultType` **Inherits from:** `Enum` Fault type enumeration.
+### `FaultType`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+**Inherits from:** `Enum` Fault type enumeration.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 
 :language: python
 :pyobject: FaultType
 :linenos:
 ```
 
-### `FaultSeverity` **Inherits from:** `Enum` Fault severity enumeration.
+### `FaultSeverity`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+**Inherits from:** `Enum` Fault severity enumeration.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 :language: python
 :pyobject: FaultSeverity
 :linenos:
 ```
 
-### `FaultProfile` Fault injection profile configuration.
+### `FaultProfile`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+Fault injection profile configuration.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 
 :language: python
 :pyobject: FaultProfile
 :linenos:
 ```
 
-### `FaultScenario` Complete fault scenario with multiple fault profiles.
+### `FaultScenario`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+Complete fault scenario with multiple fault profiles.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 :language: python
 :pyobject: FaultScenario
 :linenos:
 ```
 
-### `FaultEvent` Fault event record.
+### `FaultEvent`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+Fault event record.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 
 :language: python
 :pyobject: FaultEvent
 :linenos:
 ```
 
-### `FaultInjector` fault injection system for HIL testing. Provides systematic fault injection features for sensors,
+### `FaultInjector`
+
+fault injection system for HIL testing. Provides systematic fault injection features for sensors,
 actuators, communication, and system-level components to validate
 control system robustness and fault tolerance. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 :language: python
@@ -212,18 +236,26 @@ control system robustness and fault tolerance. #### Source Code ```{literalinclu
 
 ## Functions
 
-### `create_sensor_fault_scenario(sensor_name, fault_types, duration)` Create common sensor fault scenario.
+### `create_sensor_fault_scenario(sensor_name, fault_types, duration)`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+Create common sensor fault scenario.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 
 :language: python
 :pyobject: create_sensor_fault_scenario
 :linenos:
 ```
 
-### `create_actuator_fault_scenario(actuator_name, severity)` Create common actuator fault scenario.
+### `create_actuator_fault_scenario(actuator_name, severity)`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+Create common actuator fault scenario.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 :language: python
 :pyobject: create_actuator_fault_scenario
 :linenos:

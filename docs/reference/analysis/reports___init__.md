@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\reports\__init__.py`
 
-## Module Overview Report generation for analysis results
+## Module Overview Report
+
+generation for analysis results
 
 .
 
@@ -45,10 +47,10 @@ from src.analysis.visualization import AnalysisPlotter plotter = AnalysisPlotter
 fig = plotter.plot_time_series(data)
 fig.savefig('analysis.pdf')
 ```
-## Complete Source Code ```{literalinclude} ../../../src/analysis/reports/__init__.py
+## Complete Source Code ```
+
+{literalinclude} ../../../src/analysis/reports/__init__.py
 :language: python
 :linenos:
 ```
-
----
 

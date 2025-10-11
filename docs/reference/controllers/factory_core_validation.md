@@ -2,7 +2,9 @@
 
 **Source:** `src\controllers\factory\core\validation.py`
 
-## Module Overview Validation Framework for Controller Factory Provides enterprise-grade validation for controller gains, configurations, and parameters
+## Module Overview Validation
+
+Framework for Controller Factory Provides enterprise-grade validation for controller gains, configurations, and parameters
 
 
 with detailed error reporting and recovery mechanisms. ## Complete Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
@@ -14,9 +16,13 @@ with detailed error reporting and recovery mechanisms. ## Complete Source Code `
 
 ## Classes
 
-### `ValidationResult` Container for validation results with detailed feedback.
+### `ValidationResult`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
+Container for validation results with detailed feedback.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/core/validation.py
 :language: python
 :pyobject: ValidationResult
 :linenos:
@@ -26,69 +32,101 @@ with detailed error reporting and recovery mechanisms. ## Complete Source Code `
 
 ## Functions
 
-### `validate_controller_gains(gains, controller_type, check_bounds, check_stability)` Validate controller gains with checks. Args: gains: Controller gains to validate controller_type: Type of controller check_bounds: Perform bounds checking check_stability: Perform stability analysis Returns: Detailed validation results
+### `validate_controller_gains(gains, controller_type, check_bounds, check_stability)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
+Validate controller gains with checks. Args: gains: Controller gains to validate controller_type: Type of controller check_bounds: Perform bounds checking check_stability: Perform stability analysis Returns: Detailed validation results
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/core/validation.py
 
 :language: python
 :pyobject: validate_controller_gains
 :linenos:
 ```
 
-### `validate_configuration(config, controller_type, check_completeness)` Validate controller configuration object. Args: config: Configuration object to validate controller_type: Type of controller check_completeness: Check for all required parameters Returns: Detailed validation results
+### `validate_configuration(config, controller_type, check_completeness)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
+Validate controller configuration object. Args: config: Configuration object to validate controller_type: Type of controller check_completeness: Check for all required parameters Returns: Detailed validation results
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/core/validation.py
 :language: python
 :pyobject: validate_configuration
 :linenos:
 ```
 
-### `_validate_classical_smc_gains(gains, result, check_stability)` Validate Classical SMC specific gain constraints.
+### `_validate_classical_smc_gains(gains, result, check_stability)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
+Validate Classical SMC specific gain constraints.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/core/validation.py
 
 :language: python
 :pyobject: _validate_classical_smc_gains
 :linenos:
 ```
 
-### `_validate_adaptive_smc_gains(gains, result, check_stability)` Validate Adaptive SMC specific gain constraints.
+### `_validate_adaptive_smc_gains(gains, result, check_stability)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
+Validate Adaptive SMC specific gain constraints.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/core/validation.py
 :language: python
 :pyobject: _validate_adaptive_smc_gains
 :linenos:
 ```
 
-### `_validate_sta_smc_gains(gains, result, check_stability)` Validate Super-Twisting SMC specific gain constraints.
+### `_validate_sta_smc_gains(gains, result, check_stability)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
+Validate Super-Twisting SMC specific gain constraints.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/core/validation.py
 
 :language: python
 :pyobject: _validate_sta_smc_gains
 :linenos:
 ```
 
-### `_validate_hybrid_smc_gains(gains, result, check_stability)` Validate Hybrid SMC specific gain constraints.
+### `_validate_hybrid_smc_gains(gains, result, check_stability)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
+Validate Hybrid SMC specific gain constraints.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/core/validation.py
 :language: python
 :pyobject: _validate_hybrid_smc_gains
 :linenos:
 ```
 
-### `validate_state_vector(state)` Validate system state vector.
+### `validate_state_vector(state)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
+Validate system state vector.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/core/validation.py
 
 :language: python
 :pyobject: validate_state_vector
 :linenos:
 ```
 
-### `validate_control_output(control, max_force)` Validate control output value.
+### `validate_control_output(control, max_force)`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
+Validate control output value.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/factory/core/validation.py
 :language: python
 :pyobject: validate_control_output
 :linenos:

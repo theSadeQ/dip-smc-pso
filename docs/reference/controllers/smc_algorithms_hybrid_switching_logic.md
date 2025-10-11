@@ -2,7 +2,9 @@
 
 **Source:** `src\controllers\smc\algorithms\hybrid\switching_logic.py`
 
-## Module Overview Hybrid Switching Logic for Multi-Controller SMC
+## Module Overview Hybrid
+
+Switching Logic for Multi-Controller SMC
 
 . Implements intelligent switching between multiple SMC controllers based on:
 
@@ -67,24 +69,34 @@ print(f"ITAE: {metrics.itae:.3f}")
 
 ## Classes
 
-### `ControllerState` **Inherits from:** `Enum` Current active controller state.
+### `ControllerState`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/switching_logic.py
+**Inherits from:** `Enum` Current active controller state.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/switching_logic.py
 
 :language: python
 :pyobject: ControllerState
 :linenos:
 ```
 
-### `SwitchingDecision` Represents a switching decision with reasoning.
+### `SwitchingDecision`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/switching_logic.py
+Represents a switching decision with reasoning.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/switching_logic.py
 :language: python
 :pyobject: SwitchingDecision
 :linenos:
 ``` #### Methods (1) ##### `__init__(self, target_controller, reason, confidence, metrics)` [View full source →](#method-switchingdecision-__init__)
 
-### `HybridSwitchingLogic` Intelligent switching logic for hybrid SMC controllers. Manages controller selection based on system performance,
+### `HybridSwitchingLogic`
+
+Intelligent switching logic for hybrid SMC controllers. Manages controller selection based on system performance,
 
 operating conditions, and learned preferences. #### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/switching_logic.py
 :language: python

@@ -2,7 +2,9 @@
 
 **Source:** `src\optimization\core\results_manager.py`
 
-## Module Overview PSO Optimization Results Management and Serialization
+## Module Overview PSO
+
+Optimization Results Management and Serialization
 
 .
 
@@ -81,9 +83,13 @@ optimization workflows and provides result analysis. Features:
 
 ## Classes
 
-### `OptimizationMetadata` metadata for optimization results.
+### `OptimizationMetadata`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/core/results_manager.py
+metadata for optimization results.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/core/results_manager.py
 :language: python
 :pyobject: OptimizationMetadata
 :linenos:
@@ -91,16 +97,22 @@ optimization workflows and provides result analysis. Features:
 
 ---
 
-## `OptimizationResults` Complete optimization results structure.
+## `OptimizationResults`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/core/results_manager.py
+Complete optimization results structure.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/core/results_manager.py
 
 :language: python
 :pyobject: OptimizationResults
 :linenos:
 ```
 
-### `OptimizationResultsManager` Advanced management system for PSO optimization results. This class provides functionality for storing, loading, analyzing,
+### `OptimizationResultsManager`
+
+Advanced management system for PSO optimization results. This class provides functionality for storing, loading, analyzing,
 and comparing optimization results with full provenance tracking. #### Source Code ```{literalinclude} ../../../src/optimization/core/results_manager.py
 :language: python
 :pyobject: OptimizationResultsManager
@@ -111,7 +123,9 @@ and comparing optimization results with full provenance tracking. #### Source Co
 
 ## Functions
 
-### `create_optimization_metadata(controller_type, config, seed)` Create optimization metadata from configuration. Parameters
+### `create_optimization_metadata(controller_type, config, seed)`
+
+Create optimization metadata from configuration. Parameters
 
 controller_type : str Type of controller being optimized
 config : Dict[str, Any] Configuration dictionary

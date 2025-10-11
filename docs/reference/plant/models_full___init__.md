@@ -2,7 +2,9 @@
 
 **Source:** `src\plant\models\full\__init__.py`
 
-## Module Overview Full Fidelity Double Inverted Pendulum Model
+## Module Overview Full
+
+Fidelity Double Inverted Pendulum Model
 
 . High-fidelity implementation with complete nonlinear dynamics,
 

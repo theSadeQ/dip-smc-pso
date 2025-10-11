@@ -2,7 +2,9 @@
 
 **Source:** `src\controllers\smc\algorithms\classical\boundary_layer.py`
 
-## Module Overview Boundary Layer Implementation for Classical SMC
+## Module Overview Boundary
+
+Layer Implementation for Classical SMC
 
 . Implements boundary layer method for chattering reduction in sliding mode control.
 
@@ -62,7 +64,9 @@ print(f"ITAE: {metrics.itae:.3f}")
 
 ## Classes
 
-### `BoundaryLayer` Boundary layer implementation for chattering reduction. Provides continuous approximation to discontinuous switching within
+### `BoundaryLayer`
+
+Boundary layer implementation for chattering reduction. Provides continuous approximation to discontinuous switching within
 
 a thin layer around the sliding surface. #### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/classical/boundary_layer.py
 :language: python

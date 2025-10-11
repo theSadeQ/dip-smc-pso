@@ -252,5 +252,7 @@ def tune_controller(k1, k2, k3):
     return result
 
 # Interactive tuning in Jupyter
-# Sliders appear, live updates as you adjust
+# Sliders appear, live
+
+updates as you adjust
 ```

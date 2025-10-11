@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\performance\robustness.py`
 
-## Module Overview Robustness analysis tools for control systems
+## Module Overview Robustness
+
+analysis tools for control systems
 
 .
 
@@ -41,7 +43,9 @@ G(s) = G_0(s)[1 + \Delta(s)W(s)]
 
 Where $M(s)$ is closed-loop transfer matrix.
 
-### Sensitivity to Parameter Variations **Sensitivity function:** ```{math}
+### Sensitivity to Parameter Variations **Sensitivity function:** ```
+
+{math}
 S_p^y = \frac{\partial y/y}{\partial p/p} = \frac{p}{y}\frac{\partial y}{\partial p}
 ``` **Total sensitivity:** ```{math}
 
@@ -104,26 +108,38 @@ sensitivity analysis, uncertainty quantification, and robust performance metrics
 
 ## Classes
 
-### `RobustnessAnalysisConfig` Configuration for robustness analysis.
+### `RobustnessAnalysisConfig`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/performance/robustness.py
+Configuration for robustness analysis.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/performance/robustness.py
 
 :language: python
 :pyobject: RobustnessAnalysisConfig
 :linenos:
 ```
 
-### `UncertaintyModel` Model for system uncertainties.
+### `UncertaintyModel`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/performance/robustness.py
+Model for system uncertainties.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/performance/robustness.py
 :language: python
 :pyobject: UncertaintyModel
 :linenos:
 ```
 
-### `RobustnessAnalyzer` **Inherits from:** `PerformanceAnalyzer` robustness analysis for control systems.
+### `RobustnessAnalyzer`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/performance/robustness.py
+**Inherits from:** `PerformanceAnalyzer` robustness analysis for control systems.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/performance/robustness.py
 
 :language: python
 :pyobject: RobustnessAnalyzer
@@ -134,7 +150,9 @@ sensitivity analysis, uncertainty quantification, and robust performance metrics
 
 ## Functions
 
-### `create_robustness_analyzer(config)` Factory function to create robustness analyzer. Parameters
+### `create_robustness_analyzer(config)`
+
+Factory function to create robustness analyzer. Parameters
 ----------
 config : Dict[str, Any], optional Configuration parameters Returns
 RobustnessAnalyzer Configured robustness analyzer #### Source Code ```{literalinclude} ../../../src/analysis/performance/robustness.py
@@ -143,7 +161,9 @@ RobustnessAnalyzer Configured robustness analyzer #### Source Code ```{literalin
 :linenos:
 ```
 
-### `create_uncertainty_model(name, uncertainty_type, distribution)` Factory function to create uncertainty models. Parameters
+### `create_uncertainty_model(name, uncertainty_type, distribution)`
+
+Factory function to create uncertainty models. Parameters
 
 name : str Name of the uncertainty
 uncertainty_type : str Type of uncertainty ('parametric', 'additive', 'multiplicative', 'structured')

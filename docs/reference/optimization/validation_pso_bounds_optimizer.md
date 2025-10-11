@@ -2,7 +2,9 @@
 
 **Source:** `src\optimization\validation\pso_bounds_optimizer.py`
 
-## Module Overview Advanced PSO Parameter Bounds Optimization for Controller Factory Integration
+## Module Overview Advanced
+
+PSO Parameter Bounds Optimization for Controller Factory Integration
 
 . This module provides optimized parameter bounds validation and dynamic adjustment
 
@@ -22,9 +24,13 @@ factory integration requirements. Features:
 
 ## Classes
 
-### `BoundsOptimizationStrategy` **Inherits from:** `Enum` Strategy for optimizing parameter bounds.
+### `BoundsOptimizationStrategy`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
+**Inherits from:** `Enum` Strategy for optimizing parameter bounds.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
 :language: python
 :pyobject: BoundsOptimizationStrategy
 :linenos:
@@ -32,24 +38,34 @@ factory integration requirements. Features:
 
 ---
 
-## `ControllerBoundsSpec` Specification for controller parameter bounds.
+## `ControllerBoundsSpec`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
+Specification for controller parameter bounds.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
 
 :language: python
 :pyobject: ControllerBoundsSpec
 :linenos:
 ```
 
-### `BoundsValidationResult` Result of bounds validation analysis.
+### `BoundsValidationResult`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
+Result of bounds validation analysis.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
 :language: python
 :pyobject: BoundsValidationResult
 :linenos:
 ```
 
-### `PSOBoundsOptimizer` Advanced PSO parameter bounds optimizer for controller factory integration. Optimizes PSO parameter bounds for maximum convergence efficiency and
+### `PSOBoundsOptimizer`
+
+Advanced PSO parameter bounds optimizer for controller factory integration. Optimizes PSO parameter bounds for maximum convergence efficiency and
 
 control performance across all SMC controller types. #### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
 :language: python
@@ -61,9 +77,13 @@ control performance across all SMC controller types. #### Source Code ```{litera
 
 ## Functions
 
-### `run_pso_bounds_optimization()` Run complete PSO bounds optimization workflow.
+### `run_pso_bounds_optimization()`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
+Run complete PSO bounds optimization workflow.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
 :language: python
 :pyobject: run_pso_bounds_optimization
 :linenos:

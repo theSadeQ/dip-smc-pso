@@ -1,4 +1,6 @@
-# API Reference - Complete Source Code Documentation
+# API Reference -
+
+Complete Source Code Documentation
 
 This section provides **complete source code documentation** for all Python modules in the DIP_SMC_PSO project.
 

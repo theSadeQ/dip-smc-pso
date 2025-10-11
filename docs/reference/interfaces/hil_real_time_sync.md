@@ -191,7 +191,9 @@ sync = RealTimeSync(
 # Synchronize processes
 sync.synchronize()
 
-# Plant and controller now running at same rate
+# Plant and controller
+
+now running at same rate
 ```
 
 ## Example 2: Clock Synchronization

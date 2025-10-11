@@ -2,7 +2,9 @@
 
 **Source:** `src\utils\development\jupyter_tools.py`
 
-## Module Overview Export utilities for Jupyter notebooks
+## Module Overview Export
+
+utilities for Jupyter notebooks
 
 . This module provides convenient functions for exporting simulation results,
 
@@ -16,7 +18,9 @@ plots, and data from Jupyter notebooks in various formats. ## Complete Source Co
 
 ## Classes
 
-### `NotebookExporter` Utility class for exporting data and plots from Jupyter notebooks. Provides methods to save simulation results, plots, and metadata
+### `NotebookExporter`
+
+Utility class for exporting data and plots from Jupyter notebooks. Provides methods to save simulation results, plots, and metadata
 in various formats with automatic timestamping and organization. #### Source Code ```{literalinclude} ../../../src/utils/development/jupyter_tools.py
 :language: python
 :pyobject: NotebookExporter
@@ -27,26 +31,38 @@ in various formats with automatic timestamping and organization. #### Source Cod
 
 ## Functions
 
-### `quick_export_simulation(time, states, controls)` Quick simulation data export with default settings.
+### `quick_export_simulation(time, states, controls)`
 
-#### Source Code ```{literalinclude} ../../../src/utils/development/jupyter_tools.py
+Quick simulation data export with default settings.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/utils/development/jupyter_tools.py
 
 :language: python
 :pyobject: quick_export_simulation
 :linenos:
 ```
 
-### `quick_export_plots()` Quick plot export with default settings.
+### `quick_export_plots()`
 
-#### Source Code ```{literalinclude} ../../../src/utils/development/jupyter_tools.py
+Quick plot export with default settings.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/utils/development/jupyter_tools.py
 :language: python
 :pyobject: quick_export_plots
 :linenos:
 ```
 
-### `quick_analysis_report(time, states, controls)` Quick analysis report generation.
+### `quick_analysis_report(time, states, controls)`
 
-#### Source Code ```{literalinclude} ../../../src/utils/development/jupyter_tools.py
+Quick analysis report generation.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/utils/development/jupyter_tools.py
 
 :language: python
 :pyobject: quick_analysis_report

@@ -220,8 +220,12 @@ u_dot_max = 1000.0  # N/s
 # Apply rate limiting
 u_limited = rate_limit(u_current, u_previous, u_dot_max, dt)
 
-# Maximum allowed change: 1000 * 0.01 = 10 N
-# Requested change: 80 - 40 = 40 N
+# Maximum allowed change:
+
+1000 * 0.01 = 10 N
+# Requested change: 80
+
+- 40 = 40 N
 # Limited change: 10 N
 print(f"Rate-limited control: {u_limited:.1f} N")  # 50.0 N
 ```

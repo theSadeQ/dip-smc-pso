@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\validation\statistical_tests.py`
 
-## Module Overview Statistical testing framework for analysis validation
+## Module Overview Statistical
+
+testing framework for analysis validation
 
 .
 
@@ -79,35 +81,51 @@ rigor in control engineering applications. ## Complete Source Code ```{literalin
 
 ## Classes
 
-### `TestType` **Inherits from:** `Enum` Types of statistical tests.
+### `TestType`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/statistical_tests.py
+**Inherits from:** `Enum` Types of statistical tests.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/statistical_tests.py
 
 :language: python
 :pyobject: TestType
 :linenos:
 ```
 
-### `AlternativeHypothesis` **Inherits from:** `Enum` Alternative hypothesis types.
+### `AlternativeHypothesis`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/statistical_tests.py
+**Inherits from:** `Enum` Alternative hypothesis types.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/statistical_tests.py
 :language: python
 :pyobject: AlternativeHypothesis
 :linenos:
 ```
 
-### `StatisticalTestConfig` Configuration for statistical tests.
+### `StatisticalTestConfig`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/statistical_tests.py
+Configuration for statistical tests.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/statistical_tests.py
 
 :language: python
 :pyobject: StatisticalTestConfig
 :linenos:
 ```
 
-### `StatisticalTestSuite` **Inherits from:** `StatisticalValidator` statistical testing suite.
+### `StatisticalTestSuite`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/statistical_tests.py
+**Inherits from:** `StatisticalValidator` statistical testing suite.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/statistical_tests.py
 :language: python
 :pyobject: StatisticalTestSuite
 :linenos:
@@ -117,7 +135,9 @@ rigor in control engineering applications. ## Complete Source Code ```{literalin
 
 ## Functions
 
-### `create_statistical_test_suite(config)` Factory function to create statistical test suite. Parameters
+### `create_statistical_test_suite(config)`
+
+Factory function to create statistical test suite. Parameters
 
 config : Dict[str, Any], optional Configuration parameters Returns
 -------

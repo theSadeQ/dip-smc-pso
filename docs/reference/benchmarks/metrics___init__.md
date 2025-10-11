@@ -2,7 +2,9 @@
 
 **Source:** `src\benchmarks\metrics\__init__.py`
 
-## Module Overview Performance metrics package for control system evaluation
+## Module Overview Performance
+
+metrics package for control system evaluation
 
 . This package provides metrics for evaluating control system
 
@@ -18,7 +20,9 @@ performance across multiple dimensions: - **Control Metrics**: ISE, ITAE, RMS ef
 
 ## Functions
 
-### `compute_basic_metrics(t, x, u, max_force, angular_indices)` Compute the basic metrics from original statistical_benchmarks.py. This function maintains compatibility with the original implementation
+### `compute_basic_metrics(t, x, u, max_force, angular_indices)`
+
+Compute the basic metrics from original statistical_benchmarks.py. This function maintains compatibility with the original implementation
 while using the new modular structure. Parameters
 ----------
 t : np.ndarray Time vector of length N+1
@@ -35,7 +39,9 @@ dict Dictionary with metric names and values matching original format #### Sourc
 
 ---
 
-## `compute_all_metrics(t, x, u, max_force, angular_indices, state_bounds, include_advanced)` Compute performance metrics. Parameters
+## `compute_all_metrics(t, x, u, max_force, angular_indices, state_bounds, include_advanced)`
+
+Compute performance metrics. Parameters
 
 t : np.ndarray Time vector of length N+1
 x : np.ndarray State trajectories of shape (B, N+1, S)

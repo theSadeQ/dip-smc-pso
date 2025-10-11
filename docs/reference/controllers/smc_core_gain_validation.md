@@ -210,7 +210,9 @@ u_max = 100.0  # Maximum actuator force (N)
 # Estimate peak equivalent control (worst case)
 u_eq_max = 80.0  # From dynamics analysis
 
-# Check if total control fits within limits
+# Check if total
+
+control fits within limits
 u_total_max = u_eq_max + K
 margin = u_max - u_total_max
 

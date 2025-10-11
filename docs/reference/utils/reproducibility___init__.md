@@ -207,7 +207,9 @@ def monte_carlo_simulation(n_trials: int, seed: int):
 
     return np.mean(results), np.std(results)
 
-# Run twice with same seed - get identical results
+# Run twice with
+
+same seed - get identical results
 mean1, std1 = monte_carlo_simulation(1000, seed=42)
 mean2, std2 = monte_carlo_simulation(1000, seed=42)
 
@@ -312,7 +314,9 @@ class ReproducibleExperiment:
 exp = ReproducibleExperiment("controller_comparison", seed=42)
 results = exp.run()
 
-# Re-run with same seed - identical results guaranteed
+# Re-run with same
+
+seed - identical results guaranteed
 exp2 = ReproducibleExperiment("controller_comparison", seed=42)
 results2 = exp2.run()
 

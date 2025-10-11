@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\visualization\analysis_plots.py`
 
-## Module Overview Analysis visualization tools for control engineering applications
+## Module Overview Analysis
+
+visualization tools for control engineering applications
 
 .
 
@@ -73,9 +75,13 @@ including performance plots, comparison charts, and interactive visualizations. 
 
 ## Classes
 
-### `AnalysisPlotter` **Inherits from:** `VisualizationGenerator` Professional analysis plotting framework.
+### `AnalysisPlotter`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/visualization/analysis_plots.py
+**Inherits from:** `VisualizationGenerator` Professional analysis plotting framework.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/visualization/analysis_plots.py
 :language: python
 :pyobject: AnalysisPlotter
 :linenos:
@@ -85,7 +91,9 @@ including performance plots, comparison charts, and interactive visualizations. 
 
 ## Functions
 
-### `create_analysis_plotter(style)` Factory function to create analysis plotter. Parameters
+### `create_analysis_plotter(style)`
+
+Factory function to create analysis plotter. Parameters
 
 style : str, optional Plot style
 **kwargs Additional configuration parameters Returns

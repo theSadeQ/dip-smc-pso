@@ -2,7 +2,9 @@
 
 **Source:** `src\optimization\tuning\pso_hyperparameter_optimizer.py`
 
-## Module Overview Advanced PSO Hyperparameter Optimization for Factory-Generated Controllers
+## Module Overview Advanced
+
+PSO Hyperparameter Optimization for Factory-Generated Controllers
 
 . This module provides sophisticated hyperparameter optimization for PSO algorithms
 
@@ -23,9 +25,13 @@ parameter adjustment, multi-objective optimization, and controller-specific tuni
 
 ## Classes
 
-### `OptimizationObjective` **Inherits from:** `Enum` PSO optimization objectives.
+### `OptimizationObjective`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
+**Inherits from:** `Enum` PSO optimization objectives.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
 :language: python
 :pyobject: OptimizationObjective
 :linenos:
@@ -33,33 +39,47 @@ parameter adjustment, multi-objective optimization, and controller-specific tuni
 
 ---
 
-## `PSOParameterType` **Inherits from:** `Enum` Types of PSO parameters to optimize.
+## `PSOParameterType`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
+**Inherits from:** `Enum` Types of PSO parameters to optimize.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
 
 :language: python
 :pyobject: PSOParameterType
 :linenos:
 ```
 
-### `PSOHyperparameters` PSO hyperparameter configuration.
+### `PSOHyperparameters`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
+PSO hyperparameter configuration.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
 :language: python
 :pyobject: PSOHyperparameters
 :linenos:
 ```
 
-### `OptimizationResult` Result of hyperparameter optimization.
+### `OptimizationResult`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
+Result of hyperparameter optimization.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
 
 :language: python
 :pyobject: OptimizationResult
 :linenos:
 ```
 
-### `PSOHyperparameterOptimizer` Advanced PSO hyperparameter optimizer for factory-generated controllers. Optimizes PSO hyperparameters specifically for each controller type to maximize
+### `PSOHyperparameterOptimizer`
+
+Advanced PSO hyperparameter optimizer for factory-generated controllers. Optimizes PSO hyperparameters specifically for each controller type to maximize
 convergence efficiency and solution quality in the factory integration context. #### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
 :language: python
 :pyobject: PSOHyperparameterOptimizer
@@ -70,9 +90,13 @@ convergence efficiency and solution quality in the factory integration context. 
 
 ## Functions
 
-### `run_pso_hyperparameter_optimization()` Run complete PSO hyperparameter optimization workflow.
+### `run_pso_hyperparameter_optimization()`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
+Run complete PSO hyperparameter optimization workflow.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
 
 :language: python
 :pyobject: run_pso_hyperparameter_optimization

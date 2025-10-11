@@ -85,7 +85,9 @@ K_1 > 0, \quad K_2 > \frac{L}{2}
 
 ## Classes
 
-### `ModularSuperTwistingSMC` Modular Super-Twisting SMC using composition of focused components. Super-Twisting control law:
+### `ModularSuperTwistingSMC`
+
+Modular Super-Twisting SMC using composition of focused components. Super-Twisting control law:
 u = u₁ + u₂
 u₁ = -K₁|s|^α sign(s)
 u₂ = -K₂ ∫sign(s)dt Provides finite-time convergence when K₁ > K₂ > 0. #### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/super_twisting/controller.py
@@ -96,9 +98,13 @@ u₂ = -K₂ ∫sign(s)dt Provides finite-time convergence when K₁ > K₂ > 0.
 
 ---
 
-## `SuperTwistingSMC` Backward-compatible facade for the modular Super-Twisting SMC.
+## `SuperTwistingSMC`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/super_twisting/controller.py
+Backward-compatible facade for the modular Super-Twisting SMC.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/smc/algorithms/super_twisting/controller.py
 
 :language: python
 :pyobject: SuperTwistingSMC
@@ -129,7 +135,9 @@ chattering = runner.compute_chattering_index(result.control_history)
 print(f"Chattering index: {chattering:.4f} (lower is better)")
 ``` ### PSO Optimization for Finite-Time Convergence ```python
 from src.controllers.factory import create_smc_for_pso, SMCType # STA requires 6 gains: [k1, k2, λ1, λ2, K₁, K₂]
-# STA stability: K₁ > K₂ for finite-time convergence
+# STA stability: K₁
+
+> K₂ for finite-time convergence
 bounds = [ (1.0, 50.0), # k1 (1.0, 50.0), # k2 (1.0, 50.0), # λ1 (1.0, 50.0), # λ2 (10.0, 100.0), # K₁ (proportional) (5.0, 50.0), # K₂ (integral)
 ] def controller_factory(gains): return create_smc_for_pso(SMCType.SUPER_TWISTING, gains, max_force=100.0) # Optimize for convergence time
 tuner = PSOTuner(bounds, controller_factory, metric='convergence_time')

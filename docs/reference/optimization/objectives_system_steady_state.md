@@ -2,11 +2,15 @@
 
 **Source:** `src\optimization\objectives\system\steady_state.py`
 
-## Module Overview Steady-state error objective functions for control optimization
+## Module Overview Steady-state
+
+error objective functions for control optimization
 
 .
 
-## Complete Source Code ```{literalinclude}
+## Complete Source Code ```
+
+{literalinclude}
 
 ../../../src/optimization/objectives/system/steady_state.py
 
@@ -19,7 +23,9 @@
 
 ## Classes
 
-### `SteadyStateErrorObjective` **Inherits from:** `SimulationBasedObjective` Objective function for minimizing steady-state tracking error. This objective computes various steady-state error metrics:
+### `SteadyStateErrorObjective`
+
+**Inherits from:** `SimulationBasedObjective` Objective function for minimizing steady-state tracking error. This objective computes various steady-state error metrics:
 - Absolute steady-state error
 - Percentage steady-state error
 - RMS steady-state error

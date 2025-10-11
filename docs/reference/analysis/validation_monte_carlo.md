@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\validation\monte_carlo.py`
 
-## Module Overview Monte Carlo analysis tools for validation and uncertainty quantification
+## Module Overview Monte
+
+Carlo analysis tools for validation and uncertainty quantification
 
 .
 
@@ -116,18 +118,26 @@ CI_{95\%} = \bar{J} \pm 1.96 \frac{s_J}{\sqrt{N}}
 
 ## Classes
 
-### `MonteCarloConfig` Configuration for Monte Carlo analysis.
+### `MonteCarloConfig`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/monte_carlo.py
+Configuration for Monte Carlo analysis.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/monte_carlo.py
 
 :language: python
 :pyobject: MonteCarloConfig
 :linenos:
 ```
 
-### `MonteCarloAnalyzer` **Inherits from:** `StatisticalValidator` Monte Carlo analyzer for uncertainty quantification and validation.
+### `MonteCarloAnalyzer`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/monte_carlo.py
+**Inherits from:** `StatisticalValidator` Monte Carlo analyzer for uncertainty quantification and validation.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/monte_carlo.py
 :language: python
 :pyobject: MonteCarloAnalyzer
 :linenos:
@@ -137,7 +147,9 @@ CI_{95\%} = \bar{J} \pm 1.96 \frac{s_J}{\sqrt{N}}
 
 ## Functions
 
-### `create_monte_carlo_analyzer(config)` Factory function to create Monte Carlo analyzer. Parameters
+### `create_monte_carlo_analyzer(config)`
+
+Factory function to create Monte Carlo analyzer. Parameters
 
 config : Dict[str, Any], optional Configuration parameters Returns
 -------
@@ -207,7 +219,9 @@ print(f" Pole1 length range in failures: [{failure_params[:, 3].min():.3f}, {fai
 ``` ### Robustness Comparison Across Controllers ```python
 # example-metadata:
 
-# runnable: false controllers = { 'Classical': lambda: create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5]), 'Adaptive': lambda: create_smc_for_pso(SMCType.ADAPTIVE, [10, 8, 15, 12, 0.5]),
+# runnable: false controllers
+
+= { 'Classical': lambda: create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5]), 'Adaptive': lambda: create_smc_for_pso(SMCType.ADAPTIVE, [10, 8, 15, 12, 0.5]),
 
 } uncertainty = { 'cart_mass': {'type': 'uniform', 'range': (-0.3, 0.3)}, # Aggressive uncertainty 'pole1_mass': {'type': 'uniform', 'range': (-0.3, 0.3)},
 } robustness_results = {}

@@ -2,7 +2,9 @@
 
 **Source:** `src\plant\configurations\unified_config.py`
 
-## Module Overview Unified Configuration System for DIP Models
+## Module Overview Unified
+
+Configuration System for DIP Models
 
 . Provides a centralized configuration management system that supports
 
@@ -17,9 +19,13 @@ and automatic configuration selection. ## Complete Source Code ```{literalinclud
 
 ## Classes
 
-### `DIPModelType` **Inherits from:** `Enum` Available DIP model types.
+### `DIPModelType`
 
-#### Source Code ```{literalinclude} ../../../src/plant/configurations/unified_config.py
+**Inherits from:** `Enum` Available DIP model types.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/plant/configurations/unified_config.py
 :language: python
 :pyobject: DIPModelType
 :linenos:
@@ -27,7 +33,9 @@ and automatic configuration selection. ## Complete Source Code ```{literalinclud
 
 ---
 
-## `ConfigurationFactory` Factory for creating DIP configurations. Provides centralized creation and management of configurations
+## `ConfigurationFactory`
+
+Factory for creating DIP configurations. Provides centralized creation and management of configurations
 
 for different DIP model types with validation and consistency checking. #### Source Code ```{literalinclude} ../../../src/plant/configurations/unified_config.py
 :language: python
@@ -37,7 +45,9 @@ for different DIP model types with validation and consistency checking. #### Sou
 
 ---
 
-### `UnifiedConfiguration` Unified configuration management for all DIP models. Provides a single interface for configuration management across
+### `UnifiedConfiguration`
+
+Unified configuration management for all DIP models. Provides a single interface for configuration management across
 different model types with automatic model selection and validation. #### Source Code ```{literalinclude} ../../../src/plant/configurations/unified_config.py
 :language: python
 :pyobject: UnifiedConfiguration

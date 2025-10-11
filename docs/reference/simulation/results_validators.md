@@ -2,11 +2,15 @@
 
 **Source:** `src\simulation\results\validators.py`
 
-## Module Overview Result validation and sanity checking
+## Module Overview Result
+
+validation and sanity checking
 
 .
 
-## Complete Source Code ```{literalinclude}
+## Complete Source Code ```
+
+{literalinclude}
 
 ../../../src/simulation/results/validators.py
 
@@ -19,9 +23,13 @@
 
 ## Classes
 
-### `ResultValidator` Validate simulation results for correctness and sanity.
+### `ResultValidator`
 
-#### Source Code ```{literalinclude} ../../../src/simulation/results/validators.py
+Validate simulation results for correctness and sanity.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/simulation/results/validators.py
 :language: python
 :pyobject: ResultValidator
 :linenos:
