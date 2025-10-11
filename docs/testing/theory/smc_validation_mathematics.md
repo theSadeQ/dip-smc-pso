@@ -6,8 +6,6 @@
 
 ## Overview Mathematical validation of sliding mode controllers requires rigorous theoretical foundations combined with empirical verification. This document covers the mathematical principles underlying SMC validation. **See Also:** [Lyapunov Stability Testing](./lyapunov_stability_testing.md)
 
----
-
 ## Theoretical Foundations ### 1. Lyapunov Stability Theory For a sliding mode controller, stability is proven through a Lyapunov candidate function. **Lyapunov Function:**
 
 ```

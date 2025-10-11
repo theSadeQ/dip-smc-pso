@@ -154,8 +154,6 @@ class SMCConfig: """Configuration class for SMC controllers.""" def __init__(sel
 
 #### `create_adaptive_smc_controller(config=None, gains=None)` **Type-specific factory functions for backward compatibility.**
 
----
-
 ## Integration Points ### Simulation Engine Integration The factory system integrates seamlessly with the simulation engine: ```python
 
 from src.controllers.factory import create_controller

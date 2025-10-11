@@ -1,7 +1,5 @@
 # User Guides & Tutorials Welcome to the DIP SMC PSO framework documentation! This guide covers help you navigate the documentation and find what you need.
 
----
-
 ## Quick Navigation ### 🚀 Getting Started
 
 **Start here if you're new to the framework** - [**Getting Started Guide**](getting-started.md) Complete setup and first simulation in 10 minutes ### 📘 User Guide

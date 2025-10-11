@@ -1,7 +1,5 @@
 # Validation Framework Guide **System Reliability Foundation: Robust Parameter Validation & Scientific Verification**
 
----
-
 ## Table of Contents 1. [Introduction](#introduction)
 
 2. [Parameter Validators](#parameter-validators)

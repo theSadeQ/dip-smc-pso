@@ -160,8 +160,6 @@ config = SimulationConfig( duration=5.0, dt=0.01, initial_conditions=[0, 0, 0.1,
 
 ## Common Questions **Q: What's the difference between these API guides and the Technical Reference?** A: **API Guides** are user-friendly, example-driven introductions to each module with common patterns. **Technical Reference** (`docs/reference/`) is auto-generated, API documentation with all classes, methods, and parameters. **Q: Should I use create_controller() or create_smc_for_pso()?** A: Use `create_controller()` for general usage with full configuration. Use `create_smc_for_pso()` for PSO optimization workflows where you only need to pass gain arrays. See [Controllers API](controllers.md#factory-system). **Q: When should I use simplified vs full dynamics?** A: Use **simplified dynamics** for rapid iteration and PSO optimization (10x faster). Use **full nonlinear dynamics** for high-fidelity simulation and final validation. See [Simulation API](simulation.md#dynamics-models). **Q: How do I create custom cost functions?** A: Implement a function with signature `(metrics: dict, config: dict) -> float`. See [Optimization API](optimization.md#custom-cost-functions) for examples.
 
----
-
 ## Next Steps - **Start Learning:** [Tutorial 01: First Simulation](../tutorials/tutorial-01-first-simulation.md)
 
 - **Task Recipes:** [How-To Guides](../how-to/)

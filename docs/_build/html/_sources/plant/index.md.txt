@@ -1,10 +1,6 @@
 # Plant Models Documentation **Double Inverted Pendulum Dynamics Models**
 
----
-
 ## Overview This section provides documentation for the double inverted pendulum (DIP) plant models, including simplified, full-fidelity, and low-rank dynamics implementations.
-
----
 
 ## Technical Guides ```{toctree}
 
