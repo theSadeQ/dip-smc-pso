@@ -34,7 +34,7 @@ Get controller information from registry with validation. Args: controller_type:
 
 Normalize and alias controller type names. Args: name: Controller type name to normalize Returns: Canonical controller type name Raises: ValueError: If name is not a string or is empty
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/controllers/factory/core/registry.py
 

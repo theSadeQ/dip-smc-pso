@@ -99,7 +99,7 @@ Where K(t) adapts online: K̇ = γ|s| - σK #### Source Code ```{literalinclude}
 
 Backward-compatible facade for the modular Adaptive SMC.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/controllers/smc/algorithms/adaptive/controller.py
 

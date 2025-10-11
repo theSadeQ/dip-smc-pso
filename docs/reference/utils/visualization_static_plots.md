@@ -36,7 +36,7 @@ Static plotting utilities for control system analysis.
 
 High-level visualization for complete system analysis.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/utils/visualization/static_plots.py
 

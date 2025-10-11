@@ -101,7 +101,7 @@ metadata for optimization results.
 
 Complete optimization results structure.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/optimization/core/results_manager.py
 

@@ -37,7 +37,7 @@ and type checking for ensuring data integrity and consistency. ## Complete Sourc
 
 **Inherits from:** `Enum` Validation error severity levels.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/interfaces/data_exchange/schemas.py
 

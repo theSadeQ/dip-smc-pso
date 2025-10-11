@@ -39,7 +39,7 @@ Lock-free controller registry using immutable data structures.
 
 Manages minimal, efficient locking strategies.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/controllers/factory/thread_safety.py
 

@@ -143,7 +143,7 @@ Compute basic statistical metrics for data analysis. Args: data: Input data arra
 
 Compute performance metrics comparing actual vs reference data. Args: reference: Reference/target data actual: Actual measured data Returns: Dictionary containing performance metrics
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/analysis/validation/metrics.py
 

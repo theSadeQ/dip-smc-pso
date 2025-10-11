@@ -95,7 +95,7 @@ detection methods, and statistical analysis. ## Complete Source Code ```{literal
 
 **Inherits from:** `Enum` Enumeration of detection methods.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
 

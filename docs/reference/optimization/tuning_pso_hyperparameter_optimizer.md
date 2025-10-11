@@ -43,7 +43,7 @@ parameter adjustment, multi-objective optimization, and controller-specific tuni
 
 **Inherits from:** `Enum` Types of PSO parameters to optimize.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
 

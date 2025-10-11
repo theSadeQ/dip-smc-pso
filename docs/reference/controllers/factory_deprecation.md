@@ -36,7 +36,7 @@ parameter renames, and interface modifications to ensure smooth migration paths.
 
 Configuration for a deprecated parameter or feature.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/controllers/factory/deprecation.py
 

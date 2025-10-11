@@ -36,7 +36,7 @@ Compute basic confidence intervals for data. Args: data: Input data array confid
 
 Compute bootstrap confidence intervals. Args: data: Input data array statistic_func: Function to compute statistic (default: mean) confidence_level: Confidence level n_bootstrap: Number of bootstrap samples random_seed: Optional random seed Returns: Dictionary containing bootstrap confidence interval
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/analysis/validation/statistics.py
 
