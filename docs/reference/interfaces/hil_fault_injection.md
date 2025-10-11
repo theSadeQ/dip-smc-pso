@@ -166,8 +166,6 @@ print(f"False positives: {false_positives}")
 :linenos:
 ```
 
----
-
 ### `FaultSeverity` **Inherits from:** `Enum` Fault severity enumeration.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
@@ -175,8 +173,6 @@ print(f"False positives: {false_positives}")
 :pyobject: FaultSeverity
 :linenos:
 ```
-
----
 
 ### `FaultProfile` Fault injection profile configuration.
 
@@ -187,8 +183,6 @@ print(f"False positives: {false_positives}")
 :linenos:
 ```
 
----
-
 ### `FaultScenario` Complete fault scenario with multiple fault profiles.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
@@ -196,8 +190,6 @@ print(f"False positives: {false_positives}")
 :pyobject: FaultScenario
 :linenos:
 ```
-
----
 
 ### `FaultEvent` Fault event record.
 
@@ -207,8 +199,6 @@ print(f"False positives: {false_positives}")
 :pyobject: FaultEvent
 :linenos:
 ```
-
----
 
 ### `FaultInjector` fault injection system for HIL testing. Provides systematic fault injection features for sensors,
 actuators, communication, and system-level components to validate
@@ -230,8 +220,6 @@ control system robustness and fault tolerance. #### Source Code ```{literalinclu
 :pyobject: create_sensor_fault_scenario
 :linenos:
 ```
-
----
 
 ### `create_actuator_fault_scenario(actuator_name, severity)` Create common actuator fault scenario.
 

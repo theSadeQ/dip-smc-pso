@@ -88,8 +88,6 @@ rigor in control engineering applications. ## Complete Source Code ```{literalin
 :linenos:
 ```
 
----
-
 ### `AlternativeHypothesis` **Inherits from:** `Enum` Alternative hypothesis types.
 
 #### Source Code ```{literalinclude} ../../../src/analysis/validation/statistical_tests.py
@@ -97,8 +95,6 @@ rigor in control engineering applications. ## Complete Source Code ```{literalin
 :pyobject: AlternativeHypothesis
 :linenos:
 ```
-
----
 
 ### `StatisticalTestConfig` Configuration for statistical tests.
 
@@ -108,8 +104,6 @@ rigor in control engineering applications. ## Complete Source Code ```{literalin
 :pyobject: StatisticalTestConfig
 :linenos:
 ```
-
----
 
 ### `StatisticalTestSuite` **Inherits from:** `StatisticalValidator` statistical testing suite.
 

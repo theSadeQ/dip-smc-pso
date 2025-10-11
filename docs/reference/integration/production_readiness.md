@@ -36,8 +36,6 @@ into a unified scoring framework aligned with CLAUDE.md quality standards. ## Co
 :linenos:
 ```
 
----
-
 ### `QualityGate` Represents a production quality gate with threshold and current value.
 
 #### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
@@ -45,8 +43,6 @@ into a unified scoring framework aligned with CLAUDE.md quality standards. ## Co
 :pyobject: QualityGate
 :linenos:
 ```
-
----
 
 ### `ReadinessAssessment` production readiness assessment results.
 
@@ -56,8 +52,6 @@ into a unified scoring framework aligned with CLAUDE.md quality standards. ## Co
 :pyobject: ReadinessAssessment
 :linenos:
 ```
-
----
 
 ### `ProductionReadinessScorer` production readiness scoring system with pytest integration. This class integrates pytest results, coverage monitoring, compatibility analysis,
 and system health metrics to provide authoritative production readiness scoring

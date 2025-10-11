@@ -38,8 +38,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :linenos:
 ```
 
----
-
 ### `NotificationChannel` **Inherits from:** `Enum` Available notification channels.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
@@ -47,8 +45,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :pyobject: NotificationChannel
 :linenos:
 ```
-
----
 
 ### `Alert` Alert message with metadata.
 
@@ -59,8 +55,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :linenos:
 ```
 
----
-
 ### `AlertRule` Rule for triggering alerts.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
@@ -68,8 +62,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :pyobject: AlertRule
 :linenos:
 ```
-
----
 
 ### `NotificationConfig` Configuration for notification channels.
 
@@ -80,8 +72,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :linenos:
 ```
 
----
-
 ### `AlertCondition` **Inherits from:** `ABC` Base class for alert conditions.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
@@ -89,8 +79,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :pyobject: AlertCondition
 :linenos:
 ``` #### Methods (1) ##### `evaluate(self, metrics)` Evaluate condition against metrics. [View full source →](#method-alertcondition-evaluate)
-
----
 
 ### `ThresholdCondition` **Inherits from:** `AlertCondition` Simple threshold-based condition.
 
@@ -101,8 +89,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :linenos:
 ``` #### Methods (2) ##### `__init__(self, metric_name, threshold, operator)` [View full source →](#method-thresholdcondition-__init__) ##### `evaluate(self, metrics)` [View full source →](#method-thresholdcondition-evaluate)
 
----
-
 ### `CompositeCondition` **Inherits from:** `AlertCondition` Composite condition combining multiple conditions.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
@@ -110,8 +96,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :pyobject: CompositeCondition
 :linenos:
 ``` #### Methods (2) ##### `__init__(self, conditions, operator)` [View full source →](#method-compositecondition-__init__) ##### `evaluate(self, metrics)` [View full source →](#method-compositecondition-evaluate)
-
----
 
 ### `TrendCondition` **Inherits from:** `AlertCondition` Trend-based condition for detecting patterns.
 
@@ -122,8 +106,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :linenos:
 ``` #### Methods (2) ##### `__init__(self, metric_name, window_size, trend_threshold)` [View full source →](#method-trendcondition-__init__) ##### `evaluate(self, metrics)` [View full source →](#method-trendcondition-evaluate)
 
----
-
 ### `NotificationHandler` **Inherits from:** `ABC` Base class for notification handlers.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
@@ -131,8 +113,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :pyobject: NotificationHandler
 :linenos:
 ``` #### Methods (4) ##### `__init__(self, config)` [View full source →](#method-notificationhandler-__init__) ##### `can_send(self, alert)` Check if notification can be sent (rate limiting). [View full source →](#method-notificationhandler-can_send) ##### `send_notification(self, alert)` Send notification for alert. [View full source →](#method-notificationhandler-send_notification) ##### `record_notification(self, alert)` Record that notification was sent. [View full source →](#method-notificationhandler-record_notification)
-
----
 
 ### `EmailNotificationHandler` **Inherits from:** `NotificationHandler` Email notification handler.
 
@@ -143,8 +123,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :linenos:
 ``` #### Methods (1) ##### `send_notification(self, alert)` [View full source →](#method-emailnotificationhandler-send_notification)
 
----
-
 ### `WebhookNotificationHandler` **Inherits from:** `NotificationHandler` Webhook notification handler.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
@@ -152,8 +130,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :pyobject: WebhookNotificationHandler
 :linenos:
 ``` #### Methods (1) ##### `send_notification(self, alert)` [View full source →](#method-webhooknotificationhandler-send_notification)
-
----
 
 ### `LogNotificationHandler` **Inherits from:** `NotificationHandler` Log-based notification handler.
 
@@ -163,8 +139,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :pyobject: LogNotificationHandler
 :linenos:
 ``` #### Methods (1) ##### `send_notification(self, alert)` [View full source →](#method-lognotificationhandler-send_notification)
-
----
 
 ### `AlertManager` Main alert management system.
 
@@ -187,8 +161,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :linenos:
 ```
 
----
-
 ### `create_composite_rule(name, conditions, level, logic, channels)` Create a composite alert rule with multiple conditions.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
@@ -196,8 +168,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :pyobject: create_composite_rule
 :linenos:
 ```
-
----
 
 ### `setup_default_alerts()` Set up default system alerts.
 
@@ -208,8 +178,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :linenos:
 ```
 
----
-
 ### `configure_email_notifications(smtp_server, smtp_port, username, password, from_address, to_addresses)` Configure email notification handler.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
@@ -217,8 +185,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :pyobject: configure_email_notifications
 :linenos:
 ```
-
----
 
 ### `configure_webhook_notifications(url, headers)` Configure webhook notification handler.
 
@@ -228,8 +194,6 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 :pyobject: configure_webhook_notifications
 :linenos:
 ```
-
----
 
 ### `configure_log_notifications(log_level, logger_name)` Configure log notification handler.
 

@@ -43,8 +43,6 @@ including LDR monitoring, saturation tracking, and dynamics conditioning. ## Com
 :linenos:
 ``` #### Methods (3) ##### `__init__(self, condition_threshold, spike_threshold, fallback_threshold, window_size_ms, dt)` Initialize conditioning monitor. [View full source →](#method-dynamicsconditioningmonitor-__init__) ##### `update(self, mass_matrix, used_fallback)` Update monitor with dynamics matrix info. [View full source →](#method-dynamicsconditioningmonitor-update) ##### `reset(self)` Reset monitoring state. [View full source →](#method-dynamicsconditioningmonitor-reset)
 
----
-
 ### `StabilityMonitoringSystem` Integrated stability monitoring system for Issue #1 resolution. Combines LDR, saturation, and conditioning monitors for stability assessment as specified in the resolution plan.
 
 #### Source Code ```{literalinclude} ../../../src/utils/monitoring/stability.py

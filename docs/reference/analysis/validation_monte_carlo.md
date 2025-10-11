@@ -125,8 +125,6 @@ CI_{95\%} = \bar{J} \pm 1.96 \frac{s_J}{\sqrt{N}}
 :linenos:
 ```
 
----
-
 ### `MonteCarloAnalyzer` **Inherits from:** `StatisticalValidator` Monte Carlo analyzer for uncertainty quantification and validation.
 
 #### Source Code ```{literalinclude} ../../../src/analysis/validation/monte_carlo.py

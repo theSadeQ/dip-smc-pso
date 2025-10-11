@@ -82,8 +82,6 @@ dynamics model implementations used in fault detection. #### Source Code ```{lit
 :linenos:
 ``` #### Methods (1) ##### `step(self, state, u, dt)` Advance the system dynamics by one timestep. [View full source →](#method-dynamicsprotocol-step)
 
----
-
 ### `FDIsystem` Lightweight, modular Fault Detection and Isolation (FDI) system with
 
 optional adaptive thresholds and CUSUM drift detection. A residual is formed by comparing the one‑step state prediction from a

@@ -36,8 +36,6 @@ in various formats with automatic timestamping and organization. #### Source Cod
 :linenos:
 ```
 
----
-
 ### `quick_export_plots()` Quick plot export with default settings.
 
 #### Source Code ```{literalinclude} ../../../src/utils/development/jupyter_tools.py
@@ -45,8 +43,6 @@ in various formats with automatic timestamping and organization. #### Source Cod
 :pyobject: quick_export_plots
 :linenos:
 ```
-
----
 
 ### `quick_analysis_report(time, states, controls)` Quick analysis report generation.
 

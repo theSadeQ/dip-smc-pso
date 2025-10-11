@@ -42,8 +42,6 @@ parameter adjustment, multi-objective optimization, and controller-specific tuni
 :linenos:
 ```
 
----
-
 ### `PSOHyperparameters` PSO hyperparameter configuration.
 
 #### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
@@ -51,8 +49,6 @@ parameter adjustment, multi-objective optimization, and controller-specific tuni
 :pyobject: PSOHyperparameters
 :linenos:
 ```
-
----
 
 ### `OptimizationResult` Result of hyperparameter optimization.
 
@@ -62,8 +58,6 @@ parameter adjustment, multi-objective optimization, and controller-specific tuni
 :pyobject: OptimizationResult
 :linenos:
 ```
-
----
 
 ### `PSOHyperparameterOptimizer` Advanced PSO hyperparameter optimizer for factory-generated controllers. Optimizes PSO hyperparameters specifically for each controller type to maximize
 convergence efficiency and solution quality in the factory integration context. #### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py

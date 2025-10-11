@@ -159,7 +159,6 @@ Run simulation using the functional API.
 Attempt to load the full dynamics ``step`` function.
 
 Returns
--------
 callable
     The ``step(x, u, dt)`` function from the full dynamics module.
 
@@ -183,7 +182,6 @@ RuntimeError
 Load the low‑rank dynamics ``step`` function.
 
 Returns
--------
 callable
     The low‑rank ``step(x, u, dt)`` function.
 
@@ -202,7 +200,6 @@ callable
 Return the appropriate step function based on the configuration flag.
 
 Returns
--------
 callable
     Either ``src.plant.models.dip_full.step`` or ``src.plant.models.dip_lowrank.step``.
 

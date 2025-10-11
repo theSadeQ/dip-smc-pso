@@ -37,8 +37,6 @@ production systems. ## Complete Source Code ```{literalinclude} ../../../src/int
 :linenos:
 ```
 
----
-
 ### `CompatibilityIssue` Represents a compatibility issue between system components.
 
 #### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
@@ -46,8 +44,6 @@ production systems. ## Complete Source Code ```{literalinclude} ../../../src/int
 :pyobject: CompatibilityIssue
 :linenos:
 ```
-
----
 
 ### `IntegrationPoint` Represents an integration point between domains.
 
@@ -58,8 +54,6 @@ production systems. ## Complete Source Code ```{literalinclude} ../../../src/int
 :linenos:
 ```
 
----
-
 ### `DomainHealth` Health status of a specific domain.
 
 #### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
@@ -67,8 +61,6 @@ production systems. ## Complete Source Code ```{literalinclude} ../../../src/int
 :pyobject: DomainHealth
 :linenos:
 ```
-
----
 
 ### `CompatibilityMatrix` compatibility validation matrix for cross-domain integration. This class provides sophisticated analysis of compatibility between all project
 
@@ -90,8 +82,6 @@ recommendations for resolution. #### Source Code ```{literalinclude} ../../../sr
 :pyobject: asdict
 :linenos:
 ```
-
----
 
 ### `main()` Main entry point for compatibility matrix analysis.
 

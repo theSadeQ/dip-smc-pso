@@ -326,7 +326,6 @@ Monte Carlo approximation of hypervolume.
 Create multiple objective functions for control system optimization.
 
 Parameters
-----------
 pso_tuner : PSOTuner
     Single-objective PSO tuner to extract fitness components
 

@@ -113,8 +113,6 @@ sensitivity analysis, uncertainty quantification, and robust performance metrics
 :linenos:
 ```
 
----
-
 ### `UncertaintyModel` Model for system uncertainties.
 
 #### Source Code ```{literalinclude} ../../../src/analysis/performance/robustness.py
@@ -122,8 +120,6 @@ sensitivity analysis, uncertainty quantification, and robust performance metrics
 :pyobject: UncertaintyModel
 :linenos:
 ```
-
----
 
 ### `RobustnessAnalyzer` **Inherits from:** `PerformanceAnalyzer` robustness analysis for control systems.
 
@@ -141,7 +137,6 @@ sensitivity analysis, uncertainty quantification, and robust performance metrics
 ### `create_robustness_analyzer(config)` Factory function to create robustness analyzer. Parameters
 ----------
 config : Dict[str, Any], optional Configuration parameters Returns
--------
 RobustnessAnalyzer Configured robustness analyzer #### Source Code ```{literalinclude} ../../../src/analysis/performance/robustness.py
 :language: python
 :pyobject: create_robustness_analyzer

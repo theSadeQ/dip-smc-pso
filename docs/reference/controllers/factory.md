@@ -45,8 +45,6 @@ quality standards. Architecture:
 :linenos:
 ``` #### Methods (3) ##### `compute_control(self, state, last_control, history)` Compute control output for given state. [View full source →](#method-controllerprotocol-compute_control) ##### `reset(self)` Reset controller internal state. [View full source →](#method-controllerprotocol-reset) ##### `gains(self)` Return controller gains. [View full source →](#method-controllerprotocol-gains)
 
----
-
 ### `SMCType` **Inherits from:** `Enum` SMC Controller types enumeration.
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory.py
@@ -54,8 +52,6 @@ quality standards. Architecture:
 :pyobject: SMCType
 :linenos:
 ```
-
----
 
 ### `SMCConfig` Configuration class for SMC controllers.
 
@@ -66,8 +62,6 @@ quality standards. Architecture:
 :linenos:
 ``` #### Methods (1) ##### `__init__(self, gains, max_force, dt)` [View full source →](#method-smcconfig-__init__)
 
----
-
 ### `SMCFactory` Factory class for creating SMC controllers.
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory.py
@@ -75,8 +69,6 @@ quality standards. Architecture:
 :pyobject: SMCFactory
 :linenos:
 ``` #### Methods (1) ##### `create_controller(smc_type, config)` Create controller using SMCType enum. [View full source →](#method-smcfactory-create_controller)
-
----
 
 ### `PSOControllerWrapper` Wrapper for SMC controllers to provide PSO-compatible interface.
 
@@ -86,8 +78,6 @@ quality standards. Architecture:
 :pyobject: PSOControllerWrapper
 :linenos:
 ``` #### Methods (4) ##### `__init__(self, controller, n_gains, controller_type)` [View full source →](#method-psocontrollerwrapper-__init__) ##### `_add_step_method_to_dynamics(self)` Add step method to dynamics model for simulation compatibility. [View full source →](#method-psocontrollerwrapper-_add_step_method_to_dynamics) ##### `validate_gains(self, particles)` Validate gain particles for PSO optimization. [View full source →](#method-psocontrollerwrapper-validate_gains) ##### `compute_control(self, state)` PSO-compatible control computation interface. [View full source →](#method-psocontrollerwrapper-compute_control)
-
----
 
 ### `SMCGainSpec` SMC gain specification with expected interface.
 
@@ -110,8 +100,6 @@ quality standards. Architecture:
 :linenos:
 ```
 
----
-
 ### `_get_controller_info(controller_type)` Get controller information from registry with validation. Args: controller_type: Canonical controller type name Returns: Controller registry information Raises: ValueError: If controller type is not recognized ImportError: If controller type is recognized but unavailable due to missing dependencies
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory.py
@@ -119,8 +107,6 @@ quality standards. Architecture:
 :pyobject: _get_controller_info
 :linenos:
 ```
-
----
 
 ### `_resolve_controller_gains(gains, config, controller_type, controller_info)` Resolve controller gains from multiple sources. Args: gains: Explicitly provided gains config: Configuration object controller_type: Controller type name controller_info: Controller registry information Returns: Resolved gains list
 
@@ -131,8 +117,6 @@ quality standards. Architecture:
 :linenos:
 ```
 
----
-
 ### `_validate_controller_gains(gains, controller_info, controller_type)` Validate controller gains with controller-specific rules. Args: gains: Controller gains to validate controller_info: Controller registry information controller_type: Type of controller for specific validation Raises: ValueError: If gains are invalid
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory.py
@@ -140,8 +124,6 @@ quality standards. Architecture:
 :pyobject: _validate_controller_gains
 :linenos:
 ```
-
----
 
 ### `_create_dynamics_model(config)` Create dynamics model from configuration. Args: config: Configuration object Returns: Dynamics model instance or None
 
@@ -152,8 +134,6 @@ quality standards. Architecture:
 :linenos:
 ```
 
----
-
 ### `_extract_controller_parameters(config, controller_type, controller_info)` Extract controller-specific parameters from configuration. Args: config: Configuration object controller_type: Controller type name controller_info: Controller registry information Returns: Dictionary of controller parameters
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory.py
@@ -161,8 +141,6 @@ quality standards. Architecture:
 :pyobject: _extract_controller_parameters
 :linenos:
 ```
-
----
 
 ### `_validate_mpc_parameters(config_params, controller_params)` Validate MPC controller parameters. Args: config_params: Main configuration parameters controller_params: Controller-specific parameters Raises: ConfigValueError: If any parameter is invalid
 
@@ -173,8 +151,6 @@ quality standards. Architecture:
 :linenos:
 ```
 
----
-
 ### `create_controller(controller_type, config, gains)` Create a controller instance of the specified type. This function is thread-safe and can be called concurrently from multiple threads. Args: controller_type: Type of controller ('classical_smc', 'sta_smc', etc.) config: Configuration object (optional) gains: Controller gains array (optional) Returns: Configured controller instance Raises: ValueError: If controller_type is not recognized ImportError: If required dependencies are missing
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory.py
@@ -182,8 +158,6 @@ quality standards. Architecture:
 :pyobject: create_controller
 :linenos:
 ```
-
----
 
 ### `list_available_controllers()` Get list of available controller types. Returns: List of controller type names that can actually be instantiated
 
@@ -194,8 +168,6 @@ quality standards. Architecture:
 :linenos:
 ```
 
----
-
 ### `list_all_controllers()` Get list of all registered controller types, including unavailable ones. Returns: List of all controller type names in the registry
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory.py
@@ -203,8 +175,6 @@ quality standards. Architecture:
 :pyobject: list_all_controllers
 :linenos:
 ```
-
----
 
 ### `get_default_gains(controller_type)` Get default gains for a controller type. Args: controller_type: Type of controller Returns: Default gains list Raises: ValueError: If controller_type is not recognized
 
@@ -215,8 +185,6 @@ quality standards. Architecture:
 :linenos:
 ```
 
----
-
 ### `create_classical_smc_controller(config, gains)` Create classical SMC controller (backwards compatibility).
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory.py
@@ -224,8 +192,6 @@ quality standards. Architecture:
 :pyobject: create_classical_smc_controller
 :linenos:
 ```
-
----
 
 ### `create_sta_smc_controller(config, gains)` Create super-twisting SMC controller (backwards compatibility).
 
@@ -236,8 +202,6 @@ quality standards. Architecture:
 :linenos:
 ```
 
----
-
 ### `create_adaptive_smc_controller(config, gains)` Create adaptive SMC controller (backwards compatibility).
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory.py
@@ -245,8 +209,6 @@ quality standards. Architecture:
 :pyobject: create_adaptive_smc_controller
 :linenos:
 ```
-
----
 
 ### `create_controller_legacy(controller_type, config, gains)` Legacy factory function (backwards compatibility).
 
@@ -257,8 +219,6 @@ quality standards. Architecture:
 :linenos:
 ```
 
----
-
 ### `create_smc_for_pso(smc_type, gains, plant_config_or_model)` Create SMC controller optimized for PSO usage.
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory.py
@@ -266,8 +226,6 @@ quality standards. Architecture:
 :pyobject: create_smc_for_pso
 :linenos:
 ```
-
----
 
 ### `create_pso_controller_factory(smc_type, plant_config)` Create a PSO-optimized controller factory function with required attributes.
 
@@ -278,8 +236,6 @@ quality standards. Architecture:
 :linenos:
 ```
 
----
-
 ### `get_expected_gain_count(smc_type)` Get expected number of gains for a controller type.
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory.py
@@ -287,8 +243,6 @@ quality standards. Architecture:
 :pyobject: get_expected_gain_count
 :linenos:
 ```
-
----
 
 ### `get_gain_bounds_for_pso(smc_type)` Get PSO gain bounds for a controller type. Returns: Tuple of (lower_bounds, upper_bounds) lists
 
@@ -298,8 +252,6 @@ quality standards. Architecture:
 :pyobject: get_gain_bounds_for_pso
 :linenos:
 ```
-
----
 
 ### `validate_smc_gains(smc_type, gains)` Validate gains for a controller type.
 

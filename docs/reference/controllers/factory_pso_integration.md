@@ -118,8 +118,6 @@ print(f"Speedup: ~8x using parallel evaluation")
 :linenos:
 ```
 
----
-
 ### `EnhancedPSOControllerWrapper` Enhanced PSO-compatible controller wrapper with advanced features. Features:
 - Thread-safe operation
 - Performance monitoring
@@ -144,8 +142,6 @@ print(f"Speedup: ~8x using parallel evaluation")
 :linenos:
 ```
 
----
-
 ### `create_optimized_pso_factory(smc_type, plant_config, max_force, enable_monitoring)` Create optimized PSO factory function for controller creation. Args: smc_type: SMC controller type plant_config: Plant configuration (optional) max_force: Maximum control force enable_monitoring: performance monitoring **kwargs: Additional factory parameters Returns: Factory function that creates PSO controllers from gains
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
@@ -153,8 +149,6 @@ print(f"Speedup: ~8x using parallel evaluation")
 :pyobject: create_optimized_pso_factory
 :linenos:
 ```
-
----
 
 ### `get_optimized_pso_bounds(smc_type, performance_target)` Get optimized PSO bounds based on performance targets. Args: smc_type: Controller type performance_target: 'aggressive', 'balanced', or 'conservative' Returns: Tuple of (lower_bounds, upper_bounds)
 
@@ -164,8 +158,6 @@ print(f"Speedup: ~8x using parallel evaluation")
 :pyobject: get_optimized_pso_bounds
 :linenos:
 ```
-
----
 
 ### `validate_pso_gains_advanced(smc_type, gains, check_stability)` Advanced validation of PSO gains with stability analysis. Args: smc_type: Controller type gains: Gains to validate check_stability: Perform stability checks Returns: Dictionary with validation results
 

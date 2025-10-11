@@ -213,7 +213,6 @@ Execute sequential simulation.
 Legacy function for backward compatibility.
 
 Returns
--------
 callable
     Step function that dispatches to appropriate dynamics model
 

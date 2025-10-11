@@ -33,8 +33,6 @@ validation rules, and type-safe access patterns. ## Complete Source Code ```{lit
 :linenos:
 ```
 
----
-
 ### `list_available_controllers()` Get list of available controller types. Returns: Sorted list of controller type names
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory/core/registry.py
@@ -42,8 +40,6 @@ validation rules, and type-safe access patterns. ## Complete Source Code ```{lit
 :pyobject: list_available_controllers
 :linenos:
 ```
-
----
 
 ### `get_controllers_by_category(category)` Get controllers by category. Args: category: Controller category ('classical', 'adaptive', 'advanced', 'hybrid', 'predictive') Returns: List of controller names in the category
 
@@ -54,8 +50,6 @@ validation rules, and type-safe access patterns. ## Complete Source Code ```{lit
 :linenos:
 ```
 
----
-
 ### `get_controllers_by_complexity(complexity)` Get controllers by complexity level. Args: complexity: Complexity level ('low', 'medium', 'high', 'very_high') Returns: List of controller names with the specified complexity
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory/core/registry.py
@@ -63,8 +57,6 @@ validation rules, and type-safe access patterns. ## Complete Source Code ```{lit
 :pyobject: get_controllers_by_complexity
 :linenos:
 ```
-
----
 
 ### `get_default_gains(controller_type)` Get default gains for a controller type. Args: controller_type: Type of controller Returns: Copy of default gains list Raises: ValueError: If controller_type is not recognized
 
@@ -75,8 +67,6 @@ validation rules, and type-safe access patterns. ## Complete Source Code ```{lit
 :linenos:
 ```
 
----
-
 ### `get_gain_bounds(controller_type)` Get gain bounds for a controller type. Args: controller_type: Type of controller Returns: List of (lower, upper) bound tuples Raises: ValueError: If controller_type is not recognized
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory/core/registry.py
@@ -84,8 +74,6 @@ validation rules, and type-safe access patterns. ## Complete Source Code ```{lit
 :pyobject: get_gain_bounds
 :linenos:
 ```
-
----
 
 ### `validate_controller_type(controller_type)` Check if a controller type is valid. Args: controller_type: Controller type to validate Returns: True if valid, False otherwise
 

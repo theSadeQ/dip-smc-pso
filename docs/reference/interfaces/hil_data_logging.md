@@ -141,8 +141,6 @@ replay = Replay("original.csv") for entry in replay: t = entry["time"] state = e
 :linenos:
 ```
 
----
-
 ### `CompressionType` **Inherits from:** `Enum` Data compression type enumeration.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
@@ -150,8 +148,6 @@ replay = Replay("original.csv") for entry in replay: t = entry["time"] state = e
 :pyobject: CompressionType
 :linenos:
 ```
-
----
 
 ### `LoggingConfig` HIL data logging configuration.
 
@@ -162,8 +158,6 @@ replay = Replay("original.csv") for entry in replay: t = entry["time"] state = e
 :linenos:
 ```
 
----
-
 ### `LogEntry` Individual log entry.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
@@ -171,8 +165,6 @@ replay = Replay("original.csv") for entry in replay: t = entry["time"] state = e
 :pyobject: LogEntry
 :linenos:
 ```
-
----
 
 ### `HILDataLogger` High-performance data logger for HIL systems. Provides efficient data collection, buffering, and storage
 
@@ -193,8 +185,6 @@ with support for multiple formats and real-time compression. #### Source Code ``
 :pyobject: load_hdf5_data
 :linenos:
 ```
-
----
 
 ### `analyze_log_performance(log_stats)` Analyze logging performance.
 

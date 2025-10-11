@@ -115,7 +115,6 @@ controller_factory, cfg, n_trials, seed : Same as run_trials()
 confidence_level : float, optional Confidence level for intervals (default 0.95)
 use_bootstrap : bool, optional Whether to use bootstrap confidence intervals
 **kwargs : Additional arguments passed to trial runner Returns
--------
 list of dict, dict Metrics list and statistical analysis results #### Source Code ```{literalinclude} ../../../src/benchmarks/statistical_benchmarks_v2.py
 :language: python
 :pyobject: run_trials_with_advanced_statistics

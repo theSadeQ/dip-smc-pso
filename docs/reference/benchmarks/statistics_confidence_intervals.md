@@ -142,7 +142,6 @@ dict
 Perform statistical tests on collected metrics.
 
 Parameters
-----------
 metrics_list : list of dict
     List of metric dictionaries from individual trials
 

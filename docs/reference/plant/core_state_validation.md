@@ -97,8 +97,6 @@ print(f"Control effort: {result.control_effort:.2f}")
 :linenos:
 ```
 
----
-
 ### `StateValidator` **Inherits from:** `Protocol` Protocol for state validation strategies.
 
 #### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
@@ -106,8 +104,6 @@ print(f"Control effort: {result.control_effort:.2f}")
 :pyobject: StateValidator
 :linenos:
 ``` #### Methods (2) ##### `validate_state(self, state)` Validate state vector. [View full source →](#method-statevalidator-validate_state) ##### `sanitize_state(self, state)` Sanitize and correct state vector if possible. [View full source →](#method-statevalidator-sanitize_state)
-
----
 
 ### `DIPStateValidator` Double Inverted Pendulum state vector validation. Validates state vectors for the DIP system ensuring:
 

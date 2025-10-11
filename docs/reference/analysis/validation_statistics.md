@@ -35,8 +35,6 @@ computing confidence intervals, and performing hypothesis testing. ## Complete S
 :linenos:
 ```
 
----
-
 ### `compare_groups_ttest(group1, group2, equal_var)` Compare two groups using t-test. Args: group1: First group data group2: Second group data equal_var: Assume equal variances Returns: Dictionary containing t-test results
 
 #### Source Code ```{literalinclude} ../../../src/analysis/validation/statistics.py
@@ -44,8 +42,6 @@ computing confidence intervals, and performing hypothesis testing. ## Complete S
 :pyobject: compare_groups_ttest
 :linenos:
 ```
-
----
 
 ### `anova_one_way()` Perform one-way ANOVA on multiple groups. Args: *groups: Variable number of group arrays Returns: Dictionary containing ANOVA results
 
@@ -56,8 +52,6 @@ computing confidence intervals, and performing hypothesis testing. ## Complete S
 :linenos:
 ```
 
----
-
 ### `correlation_analysis(x, y, method)` Compute correlation between two variables. Args: x: First variable y: Second variable method: Correlation method ('pearson', 'spearman', 'kendall') Returns: Dictionary containing correlation results
 
 #### Source Code ```{literalinclude} ../../../src/analysis/validation/statistics.py
@@ -65,8 +59,6 @@ computing confidence intervals, and performing hypothesis testing. ## Complete S
 :pyobject: correlation_analysis
 :linenos:
 ```
-
----
 
 ### `normality_test(data)` Test for normality using multiple methods. Args: data: Data to test Returns: Dictionary containing normality test results
 
@@ -77,8 +69,6 @@ computing confidence intervals, and performing hypothesis testing. ## Complete S
 :linenos:
 ```
 
----
-
 ### `outlier_detection(data, method, threshold)` Detect outliers in data. Args: data: Input data method: Detection method ('iqr', 'zscore') threshold: Threshold for outlier detection Returns: Dictionary containing outlier information
 
 #### Source Code ```{literalinclude} ../../../src/analysis/validation/statistics.py
@@ -86,8 +76,6 @@ computing confidence intervals, and performing hypothesis testing. ## Complete S
 :pyobject: outlier_detection
 :linenos:
 ```
-
----
 
 ### `statistical_summary(data)` Compute statistical summary. Args: data: Input data Returns: Dictionary containing statistics
 

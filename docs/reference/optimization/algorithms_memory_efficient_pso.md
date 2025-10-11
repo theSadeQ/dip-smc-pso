@@ -78,8 +78,6 @@ real-time memory monitoring for production deployment. Key Features:
 :linenos:
 ```
 
----
-
 ### `MemoryTracker` Real-time memory usage tracker for PSO optimization.
 
 #### Source Code ```{literalinclude} ../../../src/optimization/algorithms/memory_efficient_pso.py
@@ -87,8 +85,6 @@ real-time memory monitoring for production deployment. Key Features:
 :pyobject: MemoryTracker
 :linenos:
 ``` #### Methods (7) ##### `__init__(self, pid)` [View full source →](#method-memorytracker-__init__) ##### `get_current_memory_mb(self)` Get current memory usage in MB. [View full source →](#method-memorytracker-get_current_memory_mb) ##### `get_memory_growth_mb(self)` Get memory growth since initialization. [View full source →](#method-memorytracker-get_memory_growth_mb) ##### `get_memory_growth_since_gc_mb(self)` Get memory growth since last garbage collection. [View full source →](#method-memorytracker-get_memory_growth_since_gc_mb) ##### `record_gc_event(self)` Record garbage collection event. [View full source →](#method-memorytracker-record_gc_event) ##### `get_memory_trend(self, window_seconds)` Analyze memory usage trend over time window. [View full source →](#method-memorytracker-get_memory_trend) ##### `get_summary(self)` Get memory usage summary. [View full source →](#method-memorytracker-get_summary)
-
----
 
 ### `BoundedHistory` Bounded history collection with automatic size management.
 
@@ -98,8 +94,6 @@ real-time memory monitoring for production deployment. Key Features:
 :pyobject: BoundedHistory
 :linenos:
 ``` #### Methods (8) ##### `__init__(self, maxlen, compression_enabled)` [View full source →](#method-boundedhistory-__init__) ##### `append(self, item)` Add item to history with automatic compression. [View full source →](#method-boundedhistory-append) ##### `_compress_oldest(self)` Compress oldest data to free up space. [View full source →](#method-boundedhistory-_compress_oldest) ##### `get_recent(self, n)` Get recent items from history. [View full source →](#method-boundedhistory-get_recent) ##### `get_all(self)` Get all items including compressed data. [View full source →](#method-boundedhistory-get_all) ##### `clear(self)` Clear all history data. [View full source →](#method-boundedhistory-clear) ##### `__len__(self)` [View full source →](#method-boundedhistory-__len__) ##### `get_memory_estimate_mb(self)` Estimate memory usage of stored data. [View full source →](#method-boundedhistory-get_memory_estimate_mb)
-
----
 
 ### `MemoryEfficientPSOTuner` **Inherits from:** `PSOTuner` Memory-optimized PSO tuner for production use. This class extends the base PSOTuner with memory management
 features to prevent memory leaks and handle large-scale optimization

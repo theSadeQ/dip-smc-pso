@@ -76,8 +76,6 @@ print(f"ITAE: {metrics.itae:.3f}")
 :linenos:
 ```
 
----
-
 ### `SwitchingDecision` Represents a switching decision with reasoning.
 
 #### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/switching_logic.py
@@ -85,8 +83,6 @@ print(f"ITAE: {metrics.itae:.3f}")
 :pyobject: SwitchingDecision
 :linenos:
 ``` #### Methods (1) ##### `__init__(self, target_controller, reason, confidence, metrics)` [View full source →](#method-switchingdecision-__init__)
-
----
 
 ### `HybridSwitchingLogic` Intelligent switching logic for hybrid SMC controllers. Manages controller selection based on system performance,
 

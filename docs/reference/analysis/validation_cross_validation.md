@@ -88,8 +88,6 @@ in control engineering applications. ## Complete Source Code ```{literalinclude}
 :linenos:
 ``` #### Methods (2) ##### `__init__(self, n_splits, shuffle, random_state)` [View full source →](#method-kfold-__init__) ##### `split(self, X)` [View full source →](#method-kfold-split)
 
----
-
 ### `StratifiedKFold`
 
 #### Source Code ```{literalinclude} ../../../src/analysis/validation/cross_validation.py
@@ -97,8 +95,6 @@ in control engineering applications. ## Complete Source Code ```{literalinclude}
 :pyobject: StratifiedKFold
 :linenos:
 ``` #### Methods (2) ##### `__init__(self, n_splits, shuffle, random_state)` [View full source →](#method-stratifiedkfold-__init__) ##### `split(self, X, y)` [View full source →](#method-stratifiedkfold-split)
-
----
 
 ### `TimeSeriesSplit`
 
@@ -109,8 +105,6 @@ in control engineering applications. ## Complete Source Code ```{literalinclude}
 :linenos:
 ``` #### Methods (2) ##### `__init__(self, n_splits)` [View full source →](#method-timeseriessplit-__init__) ##### `split(self, X)` [View full source →](#method-timeseriessplit-split)
 
----
-
 ### `LeaveOneOut`
 
 #### Source Code ```{literalinclude} ../../../src/analysis/validation/cross_validation.py
@@ -118,8 +112,6 @@ in control engineering applications. ## Complete Source Code ```{literalinclude}
 :pyobject: LeaveOneOut
 :linenos:
 ``` #### Methods (1) ##### `split(self, X)` [View full source →](#method-leaveoneout-split)
-
----
 
 ### `CrossValidationConfig` Configuration for cross-validation methods.
 
@@ -129,8 +121,6 @@ in control engineering applications. ## Complete Source Code ```{literalinclude}
 :pyobject: CrossValidationConfig
 :linenos:
 ```
-
----
 
 ### `CrossValidator` **Inherits from:** `StatisticalValidator` cross-validation framework.
 
@@ -153,8 +143,6 @@ in control engineering applications. ## Complete Source Code ```{literalinclude}
 :linenos:
 ```
 
----
-
 ### `mean_absolute_error(y_true, y_pred)` Compute mean absolute error.
 
 #### Source Code ```{literalinclude} ../../../src/analysis/validation/cross_validation.py
@@ -162,8 +150,6 @@ in control engineering applications. ## Complete Source Code ```{literalinclude}
 :pyobject: mean_absolute_error
 :linenos:
 ```
-
----
 
 ### `create_cross_validator(config)` Factory function to create cross-validator. Parameters
 
