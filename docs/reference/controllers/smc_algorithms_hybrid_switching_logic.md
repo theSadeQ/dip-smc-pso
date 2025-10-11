@@ -44,20 +44,36 @@ graph TD A[Performance Metrics] --> B[Compute J_adaptive] A --> C[Compute J_STA]
 from src.controllers.smc.algorithms.hybrid import * # Initialize with configuration
 config = {'parameter': 'value'}
 instance = Component(config)
-``` ### Example 2: Performance Tuning ```python
-# Adjust parameters for better performance
-optimized_params = tune_parameters(instance, target_performance)
-``` ### Example 3: Integration with Controller ```python
-# Use in complete control loop
+```
 
+### Example 2: Performance Tuning
+
+```python
+## Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Controller
+
+```python
+## Use in complete control loop
 controller = create_controller(ctrl_type, config)
 result = simulate(controller, duration=5.0)
-``` ### Example 4: Edge Case Handling ```python
-try: output = instance.compute(state)
-except ValueError as e: handle_edge_case(e)
-``` ### Example 5: Performance Analysis ```python
-# Analyze metrics
+```
 
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(state)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+## Analyze metrics
 metrics = compute_metrics(result)
 print(f"ITAE: {metrics.itae:.3f}")
 ``` ## Complete Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/switching_logic.py

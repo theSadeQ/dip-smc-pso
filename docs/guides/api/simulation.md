@@ -67,7 +67,7 @@ dip_params:
   m2: 0.75                   # Second pendulum mass (kg)
   l1: 0.5                    # First pendulum length (m)
   l2: 0.75                   # Second pendulum length (m)
-  # ... other physics parameters
+  ## ... other physics parameters
 
 initial_conditions:
   x0: 0.0
@@ -84,17 +84,17 @@ initial_conditions:
 ```python
 from src.controllers import create_smc_for_pso, SMCType
 
-# Create controller
+## Create controller
 controller = create_smc_for_pso(
     SMCType.CLASSICAL,
     gains=[10, 8, 15, 12, 50, 5],
     max_force=100.0
 )
 
-# Run simulation
+## Run simulation
 result = runner.run(controller)
 
-# Access results
+## Access results
 print(f"ISE: {result['metrics']['ise']:.4f}")
 print(f"Final state: {result['state'][-1]}")
 ```
@@ -102,13 +102,13 @@ print(f"Final state: {result['state'][-1]}")
 ## Result Structure
 
 ```python
-# example-metadata:
-# runnable: false
+## example-metadata:
+## runnable: false
 
 result = {
     't': np.ndarray,          # Time vector, shape (N+1,)
     'state': np.ndarray,      # State trajectories, shape (N+1, 6)
-                              # [x, dx, θ₁, dθ₁, θ₂, dθ₂] at each timestep
+                              ## [x, dx, θ₁, dθ₁, θ₂, dθ₂] at each timestep
     'control': np.ndarray,    # Control inputs, shape (N+1,)
     'metrics': {
         'ise': float,         # Integral of Squared Error
@@ -131,7 +131,7 @@ result = {
 ```python
 import numpy as np
 
-# Override initial conditions
+## Override initial conditions
 custom_ic = np.array([
     0.0,    # x (cart position)
     0.0,    # dx (cart velocity)
@@ -146,7 +146,7 @@ result = runner.run(controller, initial_state=custom_ic)
 
 **Custom simulation duration:**
 ```python
-# Run for 10 seconds instead of config value
+## Run for 10 seconds instead of config value
 result = runner.run(controller, duration=10.0)
 ```
 
@@ -168,12 +168,12 @@ try:
     result = runner.run(controller)
 except NumericalInstabilityError as e:
     print(f"Simulation became unstable: {e}")
-    # Try smaller timestep
+    ## Try smaller timestep
     runner.dt = 0.005
     result = runner.run(controller)
 except ControlSaturationError as e:
     print(f"Control saturated: {e}")
-    # Reduce gains or increase max_force
+    ## Reduce gains or increase max_force
 ```
 
 
@@ -217,7 +217,7 @@ from src.config import load_config
 config = load_config('config.yaml')
 dynamics = SimplifiedDynamics(config.dip_params)
 
-# Compute derivatives
+## Compute derivatives
 state = np.array([0, 0, 0.1, 0, 0.15, 0])
 control = 50.0
 state_dot = dynamics.compute_dynamics(state, control)
@@ -252,10 +252,10 @@ from src.core.dynamics_full import FullDynamics
 dynamics = FullDynamics(config.dip_params)
 state_dot = dynamics.compute_dynamics(state, control)
 
-# Full dynamics includes:
-# - Exact sin(θ), cos(θ)
-# - Full Coriolis and centrifugal terms
-# - Nonlinear inertia matrix
+## Full dynamics includes:
+## - Exact sin(θ), cos(θ)
+## - Full Coriolis and centrifugal terms
+## - Nonlinear inertia matrix
 ```
 
 ## State Representation
@@ -293,20 +293,20 @@ class FrictionEnhancedDynamics(BaseDynamics):
         Compute state derivatives with enhanced friction.
 
         Parameters
-        # ---------- (RST section marker)
+        ## ---------- (RST section marker)
         state : np.ndarray, shape (6,)
             Current state [x, dx, θ₁, dθ₁, θ₂, dθ₂]
         control : float
             Control force (N)
 
         Returns
-        # ------- (RST section marker)
+        ## ------- (RST section marker)
         state_dot : np.ndarray, shape (6,)
             State derivatives
         """
         x, dx, theta1, dtheta1, theta2, dtheta2 = state
 
-        # Apply friction model
+        ## Apply friction model
         if self.friction_model == 'coulomb':
             friction = self._coulomb_friction(dx)
         elif self.friction_model == 'viscous':
@@ -314,10 +314,10 @@ class FrictionEnhancedDynamics(BaseDynamics):
         else:
             friction = 0.0
 
-        # Base dynamics computation
+        ## Base dynamics computation
         base_dynamics = super().compute_dynamics(state, control)
 
-        # Add friction effects
+        ## Add friction effects
         state_dot = base_dynamics.copy()
         state_dot[1] -= friction  # Apply friction to cart velocity
 
@@ -337,10 +337,10 @@ class FrictionEnhancedDynamics(BaseDynamics):
 **Step 2: Integrate with SimulationRunner**
 
 ```python
-# Create custom dynamics
+## Create custom dynamics
 custom_dynamics = FrictionEnhancedDynamics(config.dip_params, friction_model='coulomb')
 
-# Use with simulation runner
+## Use with simulation runner
 runner = SimulationRunner(config, dynamics_model=custom_dynamics)
 result = runner.run(controller)
 ```
@@ -363,18 +363,18 @@ context = SimulationContext(
     initial_state=np.array([0, 0, 0.1, 0, 0.15, 0])
 )
 
-# Context provides:
-# - Consistent logging
-# - Safety guards
-# - Performance monitoring
-# - Error recovery
+## Context provides:
+## - Consistent logging
+## - Safety guards
+## - Performance monitoring
+## - Error recovery
 ```
 
 ## Safety Guards
 
 **Numerical stability monitoring:**
 ```python
-# Automatic instability detection
+## Automatic instability detection
 if context.is_numerically_unstable(state):
     print("Warning: Numerical instability detected")
     context.attempt_recovery()
@@ -382,11 +382,11 @@ if context.is_numerically_unstable(state):
 
 **Control saturation tracking:**
 ```python
-# Track saturation events
+## Track saturation events
 if context.is_saturated(control, max_force=100.0):
     context.log_saturation_event(time=t, control=control)
 
-# Get saturation statistics
+## Get saturation statistics
 stats = context.get_saturation_stats()
 print(f"Saturated {stats['count']} times ({stats['percentage']:.1f}%)")
 ```
@@ -394,10 +394,10 @@ print(f"Saturated {stats['count']} times ({stats['percentage']:.1f}%)")
 ## Logging and Monitoring
 
 ```python
-# Enable detailed logging
+## Enable detailed logging
 context.enable_logging(level='DEBUG', log_file='simulation.log')
 
-# Monitor performance
+## Monitor performance
 context.start_performance_monitor()
 result = runner.run(controller)
 perf_stats = context.get_performance_stats()
@@ -418,7 +418,7 @@ High-performance parallel simulations using Numba acceleration.
 from src.core.vector_sim import run_batch_simulation
 import numpy as np
 
-# Define multiple initial conditions
+## Define multiple initial conditions
 n_trials = 100
 initial_conditions = np.random.uniform(
     low=[-0.1, 0, -0.2, 0, -0.25, 0],
@@ -426,7 +426,7 @@ initial_conditions = np.random.uniform(
     size=(n_trials, 6)
 )
 
-# Run batch simulation (Numba-accelerated)
+## Run batch simulation (Numba-accelerated)
 batch_results = run_batch_simulation(
     controller=controller,
     dynamics=dynamics,
@@ -438,28 +438,28 @@ batch_results = run_batch_simulation(
     }
 )
 
-# Results shape: (n_trials, n_timesteps, n_states)
+## Results shape: (n_trials, n_timesteps, n_states)
 print(f"Batch results shape: {batch_results.shape}")
 ```
 
 ## Monte Carlo Analysis
 
 ```python
-# example-metadata:
-# runnable: false
+## example-metadata:
+## runnable: false
 
-# Monte Carlo simulation for statistical analysis
+## Monte Carlo simulation for statistical analysis
 n_samples = 1000
 
-# Sample initial conditions from distribution
+## Sample initial conditions from distribution
 ic_mean = np.array([0, 0, 0.1, 0, 0.15, 0])
 ic_std = np.array([0.05, 0, 0.05, 0, 0.05, 0])
 initial_conditions = np.random.normal(ic_mean, ic_std, size=(n_samples, 6))
 
-# Run batch
+## Run batch
 batch_results = run_batch_simulation(controller, dynamics, initial_conditions, sim_params)
 
-# Compute statistics
+## Compute statistics
 ise_values = np.sum(batch_results[:, :, 2:4]**2, axis=(1, 2))  # ISE for θ₁, θ₂
 mean_ise = np.mean(ise_values)
 std_ise = np.std(ise_values)
@@ -472,12 +472,12 @@ print(f"95th percentile: {percentile_95:.4f}")
 ## PSO Integration
 
 ```python
-# Batch evaluation for PSO fitness function
+## Batch evaluation for PSO fitness function
 def batch_fitness_function(gains_array):
     """Evaluate controller on multiple scenarios."""
     controller = create_smc_for_pso(SMCType.CLASSICAL, gains_array)
 
-    # Test scenarios
+    ## Test scenarios
     scenarios = [
         np.array([0, 0, 0.1, 0, 0.15, 0]),   # Nominal
         np.array([0, 0, 0.2, 0, 0.25, 0]),   # Large angles
@@ -485,14 +485,14 @@ def batch_fitness_function(gains_array):
     ]
     initial_conditions = np.array(scenarios)
 
-    # Run batch
+    ## Run batch
     results = run_batch_simulation(controller, dynamics, initial_conditions, sim_params)
 
-    # Compute average performance
+    ## Compute average performance
     ise = np.mean(np.sum(results[:, :, 2:4]**2, axis=(1, 2)))
     return ise
 
-# Use with PSO
+## Use with PSO
 from src.optimizer import PSOTuner
 
 tuner = PSOTuner(
@@ -507,28 +507,28 @@ best_gains, best_cost = tuner.optimize()
 
 **Numba compilation:**
 ```python
-# example-metadata:
-# runnable: false
+## example-metadata:
+## runnable: false
 
-# First call compiles the function (slow)
+## First call compiles the function (slow)
 batch_results = run_batch_simulation(...)  # ~2 seconds
 
-# Subsequent calls use compiled code (fast)
+## Subsequent calls use compiled code (fast)
 batch_results = run_batch_simulation(...)  # ~0.1 seconds
 ```
 
 **Batch size optimization:**
 ```python
-# example-metadata:
-# runnable: false
+## example-metadata:
+## runnable: false
 
-# Too small: Compilation overhead dominates
+## Too small: Compilation overhead dominates
 run_batch_simulation(..., n_trials=10)  # Not efficient
 
-# Optimal: Amortize compilation cost
+## Optimal: Amortize compilation cost
 run_batch_simulation(..., n_trials=100)  # Good
 
-# Too large: Memory issues
+## Too large: Memory issues
 run_batch_simulation(..., n_trials=10000)  # May run out of RAM
 ```
 
@@ -544,22 +544,22 @@ from src.controllers import create_controller
 from src.core import SimulationRunner
 from src.utils.visualization import plot_results
 
-# Load configuration
+## Load configuration
 config = load_config('config.yaml')
 
-# Create controller
+## Create controller
 controller = create_controller('classical_smc', config=config.controllers.classical_smc)
 
-# Initialize simulation
+## Initialize simulation
 runner = SimulationRunner(config)
 
-# Run simulation
+## Run simulation
 result = runner.run(controller)
 
-# Visualize
+## Visualize
 plot_results(result)
 
-# Analyze
+## Analyze
 print(f"Performance Metrics:")
 print(f"  ISE: {result['metrics']['ise']:.4f}")
 print(f"  Settling Time: {result['metrics']['settling_time']:.2f}s")
@@ -569,7 +569,7 @@ print(f"  Max θ₁: {result['metrics']['max_theta1']:.3f} rad")
 ## Pattern 2: Controller Comparison
 
 ```python
-# Compare multiple controllers
+## Compare multiple controllers
 controllers = {
     'Classical': create_smc_for_pso(SMCType.CLASSICAL, [10, 8, 15, 12, 50, 5]),
     'STA': create_smc_for_pso(SMCType.SUPER_TWISTING, [25, 10, 15, 12, 20, 15], dt=0.01),
@@ -581,7 +581,7 @@ for name, ctrl in controllers.items():
     results[name] = runner.run(ctrl)
     print(f"{name}: ISE={results[name]['metrics']['ise']:.4f}")
 
-# Statistical comparison
+## Statistical comparison
 from src.utils.analysis import compare_controllers
 comparison = compare_controllers(results)
 print(comparison.summary())
@@ -590,7 +590,7 @@ print(comparison.summary())
 ## Pattern 3: Parameter Sensitivity Analysis
 
 ```python
-# Test sensitivity to initial conditions
+## Test sensitivity to initial conditions
 theta1_values = np.linspace(0.05, 0.3, 20)
 ise_results = []
 
@@ -599,7 +599,7 @@ for theta1 in theta1_values:
     result = runner.run(controller, initial_state=ic)
     ise_results.append(result['metrics']['ise'])
 
-# Plot sensitivity
+## Plot sensitivity
 import matplotlib.pyplot as plt
 plt.plot(np.degrees(theta1_values), ise_results)
 plt.xlabel('Initial θ₁ (degrees)')
@@ -615,16 +615,16 @@ plt.show()
 ### 1. Choosing the Right Dynamics Model
 
 ```python
-# example-metadata:
-# runnable: false
+## example-metadata:
+## runnable: false
 
-# PSO optimization: Use simplified dynamics for speed
+## PSO optimization: Use simplified dynamics for speed
 config.simulation.use_full_dynamics = False
 runner = SimulationRunner(config)
 tuner = PSOTuner(..., simulation_runner=runner)
 best_gains = tuner.optimize()  # Fast iterations
 
-# Final validation: Use full dynamics for accuracy
+## Final validation: Use full dynamics for accuracy
 config.simulation.use_full_dynamics = True
 runner = SimulationRunner(config)
 controller = create_smc_for_pso(SMCType.CLASSICAL, best_gains)
@@ -634,28 +634,28 @@ final_result = runner.run(controller)  # Accurate validation
 ## 2. Timestep Selection
 
 ```python
-# Coarse timestep for prototyping (faster)
+## Coarse timestep for prototyping (faster)
 config.simulation.dt = 0.01  # 10ms
 runner = SimulationRunner(config)
 
-# Fine timestep for accuracy (slower)
+## Fine timestep for accuracy (slower)
 config.simulation.dt = 0.001  # 1ms
 runner_accurate = SimulationRunner(config)
 
-# Adaptive timestep (future feature)
-# runner = SimulationRunner(config, adaptive_dt=True, dt_min=0.0001, dt_max=0.01)
+## Adaptive timestep (future feature)
+## runner = SimulationRunner(config, adaptive_dt=True, dt_min=0.0001, dt_max=0.01)
 ```
 
 ## 3. Batch Processing
 
 ```python
-# Sequential (slow)
+## Sequential (slow)
 results = []
 for ic in initial_conditions:
     result = runner.run(controller, initial_state=ic)
     results.append(result)
 
-# Batch (fast, Numba-accelerated)
+## Batch (fast, Numba-accelerated)
 batch_results = run_batch_simulation(controller, dynamics, initial_conditions, sim_params)
 ```
 
@@ -700,9 +700,9 @@ batch_results = run_batch_simulation(controller, dynamics, initial_conditions, s
 
 3. **Use batch processing for multiple runs:**
    ```python
-# example-metadata:
+## example-metadata:
 
-# runnable: false
+## runnable: false
 
    batch_results = run_batch_simulation(...)  # Numba acceleration
    ```
@@ -735,11 +735,11 @@ batch_results = run_batch_simulation(controller, dynamics, initial_conditions, s
 **Solutions:**
 1. **Reduce batch size:**
    ```python
-# example-metadata:
+## example-metadata:
 
-# runnable: false
+## runnable: false
 
-   # Instead of 10000 trials
+   ## Instead of 10000 trials
    batch_size = 1000
    results = run_batch_simulation(..., initial_conditions=ic[:batch_size])
    ```

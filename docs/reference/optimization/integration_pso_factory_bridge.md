@@ -15,11 +15,23 @@
 \min_{\vec{\theta} \in \Theta} \quad & J(\vec{\theta}) \\
 \text{where} \quad & J(\vec{\theta}) = \int_0^T L(\vec{x}(t; \vec{\theta}), u(t; \vec{\theta})) \, dt
 \end{align}
-``` **Mapping:** PSO particles $\vec{x}_i \leftrightarrow$ Controller gains $\vec{\theta}_i$ ### Factory Pattern Integration **Controller creation from PSO particle:** ```python
-# example-metadata:
-# runnable: false def
+``` **Mapping:** PSO particles $\vec{x}_i \leftrightarrow$ Controller gains $\vec{\theta}_i$
 
-particle_to_controller(particle: np.ndarray) -> Controller: gains = { 'k1': particle[0], 'k2': particle[1], # ... } return ControllerFactory.create(gains)
+### Factory Pattern Integration
+
+**Controller creation from PSO particle:**
+
+```python
+## example-metadata:
+## runnable: false
+
+def particle_to_controller(particle: np.ndarray) -> Controller:
+    gains = {
+        'k1': particle[0],
+        'k2': particle[1],
+        ## ...
+    }
+    return ControllerFactory.create(gains)
 ``` ### Parameter Mapping Strategies **Direct mapping:** ```{math}
 
 \theta_i = x_i, \quad \theta_i \in [\theta_{min,i}, \theta_{max,i}]
@@ -59,20 +71,36 @@ graph TD A[PSO Particle] --> B[Parameter Mapping] B --> C{Mapping Type} C -->|Di
 from src.optimization.core import * # Initialize with configuration
 config = {'parameter': 'value'}
 instance = Component(config)
-``` ### Example 2: Performance Tuning ```python
-# Adjust parameters for better performance
-optimized_params = tune_parameters(instance, target_performance)
-``` ### Example 3: Integration with Optimization ```python
-# Use in complete optimization loop
+```
 
+### Example 2: Performance Tuning
+
+```python
+## Adjust parameters for better performance
+optimized_params = tune_parameters(instance, target_performance)
+```
+
+### Example 3: Integration with Optimization
+
+```python
+## Use in complete optimization loop
 optimizer = create_optimizer(opt_type, config)
 result = optimize(optimizer, problem, max_iter=100)
-``` ### Example 4: Edge Case Handling ```python
-try: output = instance.compute(parameters)
-except ValueError as e: handle_edge_case(e)
-``` ### Example 5: Performance Analysis ```python
-# Analyze metrics
+```
 
+### Example 4: Edge Case Handling
+
+```python
+try:
+    output = instance.compute(parameters)
+except ValueError as e:
+    handle_edge_case(e)
+```
+
+### Example 5: Performance Analysis
+
+```python
+## Analyze metrics
 metrics = compute_metrics(result)
 print(f"Best fitness: {metrics.best_fitness:.3f}")
 ```
