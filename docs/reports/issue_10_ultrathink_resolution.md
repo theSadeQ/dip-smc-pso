@@ -138,9 +138,9 @@ Multi-Agent: 100 / (40K × 35) = 0.000071 Single agent is 9.4x more efficient
 
 ## Lessons Learned ### ✅ What Worked 1. **Codebase reconnaissance first** - Searched for existing `np.linalg.inv()` usage - Found robust infrastructure already existed - Identified integration gap 2. **Minimal viable fix** - Didn't create new modules - Leveraged existing infrastructure - Focused integration over creation 3. **Realistic testing** - Removed micro-benchmark overhead - Focused on critical metric (zero LinAlgError) - Adaptive tolerance based on conditioning 4. **Single-agent strategy** - No coordination overhead - Focused domain expertise - Clear task boundaries ### ❌ What to Avoid 1. **Multi-agent overkill** - Don't deploy 6 agents for 2-file changes - Avoid coordination overhead for focused tasks 2. **Micro-benchmark obsession** - Original test timed out on performance benchmarks - Critical metric: reliability, not nanoseconds - Acceptable overhead: 10x for zero crashes 3. **Creating when integrating** - Don't build new modules when robust ones exist - Search before creating
 
----
+## Decision Framework: When to Use Single Agent
 
-## Decision Framework: When to Use Single Agent ### Use Single Control Systems Specialist When:
+### Use Single Control Systems Specialist When:
 ✅ Task scope: 1-3 files
 ✅ Single domain (control systems only)
 ✅ Clear dependencies (use existing module)
