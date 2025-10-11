@@ -191,7 +191,7 @@ html_static_path = ['_static']
 html_theme_options = {
     'sidebar_hide_name': False,
     'navigation_with_keys': True,
-    'top_of_page_button': 'edit',
+    # Removed 'top_of_page_button' - deprecated in Furo, uses built-in back-to-top automatically
     'source_repository': 'https://github.com/theSadeQ/DIP_SMC_PSO/',
     'source_branch': 'main',
     'source_directory': 'docs/',
@@ -203,7 +203,7 @@ html_css_files = [
 ]
 
 html_js_files = [
-    'back-to-top.js',
+    # 'back-to-top.js',  # Disabled - using Furo's built-in back-to-top button
     'lazy-load.js',
     'dark-mode.js',
 ]
