@@ -1,7 +1,5 @@
 # Plant Models Guide **Double Inverted Pendulum Dynamics Models** > guide to the physics models, mathematical foundations, and implementation architecture for the double inverted pendulum plant system.
 
----
-
 ## Table of Contents 1. [Overview](#overview)
 
 2. [Physical System Description](#physical-system-description)

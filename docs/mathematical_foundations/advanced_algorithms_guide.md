@@ -1,7 +1,5 @@
 # Advanced Algorithms Guide **Technical Reference for Optimization, Numerical Stability, and Algorithm Comparison**
 
----
-
 ## Table of Contents 1. [Introduction](#introduction)
 
 2. [Particle Swarm Optimization](#particle-swarm-optimization)
@@ -393,8 +391,6 @@ if np.std(result['history']['cost'][-20:]) < 1e-6: print("Warning: PSO may have 
 ---
 
 ## References 1. **PSO Theory:** - Kennedy & Eberhart (1995). "Particle Swarm Optimization" - Clerc & Kennedy (2002). "The particle swarm - explosion, stability, and convergence in a multidimensional complex space" 2. **Super-Twisting Algorithm:** - Levant (1993). "Sliding order and sliding accuracy in sliding mode control" - Moreno & Osorio (2008). "A Lyapunov approach to second-order sliding mode controllers and observers" 3. **Numerical Algorithms:** - Golub & Van Loan (2013). "Matrix Computations", 4th edition - Higham (2002). "Accuracy and Stability of Numerical Algorithms", 2nd edition 4. **Algorithm Comparison:** - Derrac et al. (2011). "A practical tutorial on the use of nonparametric statistical tests" - García et al. (2009). "A study on the use of non-parametric tests for analyzing the evolutionary algorithms' behaviour"
-
----
 
 **File Location:** `docs/mathematical_foundations/advanced_algorithms_guide.md`
 **Lines:** 721

@@ -203,5 +203,3 @@ The results reveal that chattering originates from the discontinuous switching t
 \[8\] S. Mobayen, “Adaptive global sliding mode control of underactuated systems using a super‑twisting scheme: an experimental study,” *Journal of Vibration and Control*, vol. 25, no. 12, pp. 2215–2224, 2019.
 
 \[9\] Y. Huang and Z. Zhang, “Neural adaptive H∞ sliding‑mode control for uncertain nonlinear systems with disturbances using adaptive dynamic programming,” *Entropy*, vol. 25, no. 12, p. 1570, 2023.
-
-------------------------------------------------------------------------

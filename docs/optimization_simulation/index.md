@@ -1,10 +1,6 @@
 # Optimization & Simulation Documentation **PSO Optimization and Simulation Infrastructure**
 
----
-
 ## Overview This section provides documentation for the optimization algorithms (PSO) and simulation infrastructure used for controller gain tuning and performance evaluation.
-
----
 
 ## Technical Guides ```{toctree}
 

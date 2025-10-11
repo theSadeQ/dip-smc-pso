@@ -1,7 +1,5 @@
 # Documentation Styling Library This directory contains documentation styling templates and patterns inspired by the **react-bits-library** project, adapted for the DIP-SMC-PSO control systems framework.
 
----
-
 ## 📁 Directory Structure ```
 
 docs/styling-library/

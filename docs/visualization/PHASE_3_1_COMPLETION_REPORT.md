@@ -153,8 +153,6 @@ pso: n_particles: 30 iters: 150 cognitive_coeff: 2.0 # c1 social_coeff: 2.0 # c2
 
 ## Next Steps (Phase 3.2 Recommendations) ### Immediate Actions 1. **Create Interactive HTML Dashboard** Generate standalone HTML file with embedded Chart.js visualizations for web browser viewing. 2. **Document Hybrid Controller Failure** Investigate why Hybrid Adaptive STA-SMC failed to converge (all gains → penalty value). 3. **Generate Full Documentation** Create `pso_convergence_charts.md` (600+ lines) with: - Embedded Chart.js visualizations - Detailed convergence analysis per controller - Parameter evolution charts - Convergence diagnostics - Recommendations for PSO hyperparameter tuning ### Extended Analysis (Phase 3.2+) 4. **Parameter Evolution Visualization** Parse gain trajectories from logs and create 6-dimensional parameter evolution charts. 5. **Convergence Rate Comparison** Statistical analysis (t-tests, ANOVA) to compare convergence speeds. 6. **Diversity Evolution Analysis** Track swarm diversity over iterations to identify exploration vs exploitation phases. 7. **Hyperparameter Sensitivity Study** Vary PSO parameters (c1, c2, w, n_particles) and re-run optimizations.
 
----
-
 ## Quality Metrics ### Code Quality - **Parser script:** 474 lines, fully type-hinted, docstrings
 
 - **Test coverage:** N/A (visualization tool, manual validation via output inspection)
@@ -194,8 +192,6 @@ D:/Projects/main/logs/
 ---
 
 ## Lessons Learned ### Technical Insights 1. **Regex for Unstructured Logs** Multi-match patterns (`re.finditer()`) essential for PSO logs with concatenated progress updates. 2. **Pandas for Time Series** DataFrame.shift() and time delta calculations simplified convergence analysis. 3. **Chart.js Data Format** Simple JSON structure ({labels, datasets}) enables rapid web visualization without heavy frameworks. 4. **Stagnation Metrics** 97-99% of iterations show stagnation (<1% improvement) - suggests potential for early stopping. ### Process Improvements 1. **Automated Parsing Workflow** End-to-end script eliminates manual CSV export and reduces error risk. 2. **Reproducible Analysis** Version-controlled parser ensures consistent results across team members. 3. **Modular Design** Parser methods (parse_log_file, calculate_metrics, generate_chartjs_data) reusable for future analyses. ### Project-Specific Findings 1. **Hybrid Controller Requires Investigation** Complete optimization failure indicates fundamental issue (fitness function mismatch or invalid bounds). 2. **STA-SMC Fast Convergence** 8 iterations to 90% improvement suggests this controller variant is well-suited for rapid prototyping. 3. **Classical SMC Best Absolute Performance** Lowest final cost (533.44) makes it the current production candidate.
-
----
 
 ## Conclusion Phase 3.1 successfully delivered a complete PSO convergence visualization pipeline with:
 
