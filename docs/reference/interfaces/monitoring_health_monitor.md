@@ -38,7 +38,7 @@ devices, and system services. ## Complete Source Code ```{literalinclude} ../../
 
 **Inherits from:** `Enum` Health check result enumeration.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/interfaces/monitoring/health_monitor.py
 

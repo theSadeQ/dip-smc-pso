@@ -123,7 +123,7 @@ print(f"Speedup: ~8x using parallel evaluation")
 
 Performance metrics for PSO controller evaluation.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/controllers/factory/pso_integration.py
 

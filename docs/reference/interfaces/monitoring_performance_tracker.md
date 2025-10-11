@@ -37,7 +37,7 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 
 Individual performance metric measurement.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
 

@@ -39,7 +39,7 @@ components. ## Complete Source Code ```{literalinclude} ../../../src/interfaces/
 
 **Inherits from:** `Enum` Metric aggregation type.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
 

@@ -41,7 +41,7 @@ and safety monitoring for simulation execution
 
 Monitor safety violations and system health.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/simulation/safety/monitors.py
 

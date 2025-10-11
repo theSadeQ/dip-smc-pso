@@ -39,7 +39,7 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 **Inherits from:** `Enum` Alert lifecycle status.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/interfaces/monitoring/alerting.py
 

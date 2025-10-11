@@ -37,7 +37,7 @@ for configuration, monitoring, and data exchange. ## Complete Source Code ```{li
 
 **Inherits from:** `Enum` Transport layer type.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/interfaces/core/data_types.py
 

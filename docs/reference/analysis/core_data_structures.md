@@ -98,7 +98,7 @@ Standard container for simulation data.
 
 Container for individual metric results.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/analysis/core/data_structures.py
 

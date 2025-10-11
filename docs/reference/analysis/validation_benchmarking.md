@@ -38,7 +38,7 @@ Configuration for benchmarking.
 
 Advanced benchmarking and comparison framework.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/analysis/validation/benchmarking.py
 

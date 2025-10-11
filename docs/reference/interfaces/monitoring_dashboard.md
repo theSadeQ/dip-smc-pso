@@ -39,7 +39,7 @@ Time series data for a metric.
 
 Configuration for dashboard charts.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/interfaces/monitoring/dashboard.py
 

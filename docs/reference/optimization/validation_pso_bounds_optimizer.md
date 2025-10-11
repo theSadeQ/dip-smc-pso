@@ -42,7 +42,7 @@ factory integration requirements. Features:
 
 Specification for controller parameter bounds.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
 

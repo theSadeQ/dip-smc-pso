@@ -46,7 +46,7 @@ Advanced PSO bounds validator for control system optimization.
 
 This class provides validation and optimization of PSO parameter bounds to ensure effective controller tuning.
 
-#### Source Code
+### Source Code
 
 ```{literalinclude} ../../../src/optimization/validation/pso_bounds_validator.py
 :language: python

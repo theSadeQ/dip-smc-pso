@@ -38,7 +38,7 @@ production systems. ## Complete Source Code ```{literalinclude} ../../../src/int
 
 **Inherits from:** `Enum` Project domain types for compatibility analysis.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/integration/compatibility_matrix.py
 

@@ -102,7 +102,7 @@ u₂ = -K₂ ∫sign(s)dt Provides finite-time convergence when K₁ > K₂ > 0.
 
 Backward-compatible facade for the modular Super-Twisting SMC.
 
-#### Source Code ```
+### Source Code ```
 
 {literalinclude} ../../../src/controllers/smc/algorithms/super_twisting/controller.py
 
