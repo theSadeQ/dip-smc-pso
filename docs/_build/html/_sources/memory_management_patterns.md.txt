@@ -7,8 +7,6 @@
 
 ## Executive Summary This document provides memory management guidelines for DIP-SMC-PSO controllers to prevent memory leaks in long-running operations. Following Issue #15 resolution, all controllers now implement explicit cleanup methods and break circular references using weakref patterns.
 
----
-
 ## Problem Background ### Original Memory Leak Issues Controllers exhibited ~15MB memory growth per instantiation due to:
 
 1. **Circular References**: Controller ↔ Dynamics model prevented garbage collection

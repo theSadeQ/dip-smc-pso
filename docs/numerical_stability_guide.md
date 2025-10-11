@@ -1,7 +1,5 @@
 # Numerical Stability Guide **Version**: 1.2.0 | **Last Updated**: 2025-10-01 ## Overview This guide documents the adaptive matrix regularization system implemented in the double-inverted pendulum control framework. The system provides robust numerical stability for matrix operations in plant dynamics, controllers, and optimization algorithms.
 
----
-
 ## Architecture ### Core Components ```
 
 src/plant/core/numerical_stability.py

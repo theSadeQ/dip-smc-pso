@@ -218,8 +218,6 @@ for claim in no_cites[:10]: # Show first 10 print(f\" - {claim['claim_id']}: {cl
 
 ## Next Steps After Completion Once Phase 2 is complete: 1. **Archive batch artifacts:** ```bash mkdir -p .archive/phase2_batches mv .artifacts/batch_*.json .archive/phase2_batches/ ``` 2. **Update master roadmap:** - Mark Phase 2 as ✅ COMPLETE - Update total citation count - Note any lessons learned 3. **Begin Phase 3: Manual Curation & Quality Review** - Review top 50 most-cited claims - Curate references for accuracy - Add missing citations manually if needed
 
----
-
 ## Related Documents - [00_master_roadmap.md](00_master_roadmap.md) - Complete 5-phase plan
 
 - [02_phase1_claim_extraction.md](02_phase1_claim_extraction.md) - Phase 1 completion

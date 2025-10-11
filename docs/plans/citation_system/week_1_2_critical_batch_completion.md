@@ -63,8 +63,6 @@
 
 ## CRITICAL Claims Researched All 11 CRITICAL theorems from `claims_inventory.json` successfully researched: 1. **FORMAL-THEOREM-001:** Hysteresis with deadband prevents oscillation *Source:* `docs/fdi_threshold_calibration_methodology.md:261` 2. **FORMAL-THEOREM-004:** PSO-optimized gains ensure global asymptotic stability *Source:* `docs/pso_gain_bounds_mathematical_foundations.md:733` 3. **FORMAL-THEOREM-005:** PSO-optimized gains maintain Lyapunov stability *Source:* `docs/pso_integration_technical_specification.md:875` 4. **FORMAL-THEOREM-008:** Particle converges to stable trajectory *Source:* `docs/theory/pso_optimization_complete.md:86` 5. **FORMAL-THEOREM-010:** PSO converges to global optimum with probability 1 *Source:* `docs/theory/pso_optimization_complete.md:115` 6. **FORMAL-THEOREM-016:** Sliding surface dynamics exponentially stable *Source:* `docs/theory/smc_theory_complete.md:71` 7. **FORMAL-THEOREM-019:** System reaches sliding surface in finite time *Source:* `docs/theory/smc_theory_complete.md:132` 8. **FORMAL-THEOREM-020:** Classical SMC ensures global finite-time convergence *Source:* `docs/theory/smc_theory_complete.md:160` 9. **FORMAL-THEOREM-021:** Super-twisting algorithm ensures finite-time convergence *Source:* `docs/theory/smc_theory_complete.md` (specific line TBD) 10. **FORMAL-THEOREM-022:** Adaptive control law ensures stability properties *Source:* `docs/theory/smc_theory_complete.md:270` 11. **FORMAL-THEOREM-023:** Boundary layer method ultimate bound on tracking error *Source:* `docs/theory/smc_theory_complete.md:322`
 
----
-
 ## Quality Analysis ### Citation Relevance **Sample High-Quality Citations:** - **Huang et al. (2022)** - "On the Global Convergence of Particle Swarm Optimization Methods" *Applied Mathematics and Optimization*, 47 citations *Relevance:* Directly addresses PSO convergence guarantees (THEOREM-004, THEOREM-010) - **Zhang et al. (2025)** - "Improved Adaptive Finite-Time Super-Twisting Sliding Mode Algorithm" *IEICE Transactions*, 1 citation *Relevance:* Recent super-twisting finite-time convergence proof (THEOREM-021) - **Nguyen et al. (2022)** - "Continuous Nonsingular Terminal Sliding-Mode Control" *IEEE TAES*, 52 citations *Relevance:* Sliding surface stability analysis (THEOREM-016) ### Domain Coverage - **Sliding Mode Control (SMC):** 6 claims → 12 citations
 
 - **PSO Optimization:** 4 claims → 8 citations
@@ -81,8 +79,6 @@
 ---
 
 ## Next Steps (Week 3-4) ### HIGH Batch Execution Strategy **Target:** 459 HIGH priority claims (implementation references) **Proposed Approach:** 1. **Batch Grouping (Domain-Based)** - Group 1: SMC implementations (~150 claims) - Group 2: PSO/optimization (~100 claims) - Group 3: Numerical methods (~80 claims) - Group 4: Plant models/dynamics (~70 claims) - Group 5: Miscellaneous (~59 claims) 2. **Incremental Execution** - Process 50-100 claims per session - Monitor API rate limits (expect 3x-5x longer processing times) - Use checkpoint recovery for interrupted sessions 3. **Quality Targets (Adjusted)** - Citation coverage: ≥75% (vs 85% for CRITICAL) - Average citations/claim: ≥1.5 (vs 2.0 for CRITICAL) - DOI accessibility: ≥90% (vs 95% for CRITICAL) **Estimated Timeline:** 2-3 weeks (20-30 hours total)
-
----
 
 ## Success Criteria Review ### Phase 2 Acceptance Criteria | Criterion | Target | Achieved | Status |
 

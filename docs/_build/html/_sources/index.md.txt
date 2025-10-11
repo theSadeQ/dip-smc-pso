@@ -215,7 +215,7 @@ This project builds upon decades of control theory research. Core references inc
 {cite}`pso_kennedy_1995_particle_swarm_optimization,pso_clerc_2002_particle_swarm`
 
 **Stability Theory:**
-{cite}`khalil2002nonlinear`
+{cite}`dip_khalil_2002_nonlinear_systems`
 
 For the complete bibliography, see the {doc}`bibliography` page.
 

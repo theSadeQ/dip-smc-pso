@@ -1,7 +1,5 @@
 # Quick Reference Guide Essential commands, patterns, and workflows for the DIP SMC PSO framework.
 
----
-
 ## Command Quick Reference ### Basic Simulation ```bash
 
 # Minimal simulation (default controller, no plots)

@@ -138,8 +138,6 @@ diagnose_controller_stability([5.0, 3.0, 7.0, 2.0, 25.0, 1.0], 'classical_smc')
 
 # runnable: false def validate_gain_ratios(particles, controller_type): """Enhanced gain validation with ratio constraints.""" valid = np.ones(particles.shape[0], dtype=bool) if controller_type == 'classical_smc': c1, lambda1, c2, lambda2, K, kd = particles.T # Ratio constraints valid &= (lambda1 / lambda2 > 0.5) & (lambda1 / lambda2 < 2.0) valid &= (K / lambda1 > 5) & (K / lambda1 < 50) valid &= (kd / K > 0.01) & (kd / K < 0.5) return valid ``` 2. **Conservative Bounds:** ```yaml # More conservative parameter bounds pso: bounds: classical_smc: lower: [1.0, 1.0, 1.0, 1.0, 5.0, 0.5] upper: [15.0, 15.0, 15.0, 15.0, 75.0, 8.0] ``` 3. **Stability-Focused Cost Function:** ```yaml cost_function: weights: state_error: 1.0 control_effort: 0.01 control_rate: 0.001 stability: 100.0 # Heavily penalize instability ```
 
----
-
 ## 3. Performance Optimization ### 3.1 PSO Algorithm Tuning **Convergence Speed Optimization:** ```python
 
 # example-metadata:

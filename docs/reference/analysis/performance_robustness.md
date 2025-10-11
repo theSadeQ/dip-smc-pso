@@ -143,8 +143,6 @@ RobustnessAnalyzer Configured robustness analyzer #### Source Code ```{literalin
 :linenos:
 ```
 
----
-
 ### `create_uncertainty_model(name, uncertainty_type, distribution)` Factory function to create uncertainty models. Parameters
 
 name : str Name of the uncertainty

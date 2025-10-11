@@ -41,11 +41,7 @@
 
 ## 2. Citation Completeness Audit (3 hours) **Objective:** Ensure all critical claims are properly cited **Audit Process:** 1. **Identify Uncited Critical Claims** ```bash python scripts/citations/find_uncited_claims.py --priority CRITICAL ``` 2. **Research Missing Citations** - Run targeted literature search - Identify appropriate references - Add to bibliography 3. **Insert Missing Citations** ```bash python scripts/citations/insert_citations.py \ --claims artifacts/uncited_critical_claims.json \ --apply ``` **Acceptance:** 100% of critical claims cited
 
----
-
 ### 3. Attribution Quality Review (2 hours) **Objective:** Verify proper attribution of ideas and implementations **Attribution Checklist:** - [ ] **Seminal Papers:** All foundational works cited - Utkin (1977) - Sliding mode control - Levant (2001) - Super-twisting algorithm - Kennedy & Eberhart (1995) - Particle swarm optimization - [ ] **Implementation Sources:** Algorithm implementations properly attributed - Control law derivations - Optimization algorithms - Numerical methods - [ ] **Data Sources:** Performance data properly attributed - Benchmark datasets - Experimental results - Comparative studies
-
----
 
 ### 4. Publication Formatting (3 hours) **Objective:** Format documentation for academic standards **Formatting Tasks:** 1. **Bibliography Formatting** - Convert to target style (IEEE/ACM/APA) - Ensure consistent formatting - Verify all required fields present 2. **Citation Style** - Inline citations: `[1]`, `(Author, Year)`, or `Author [Year]` - Reference list: Alphabetical or numerical - DOI/URL formatting 3. **Figure/Table Attribution** - All figures properly credited - Table data sources cited - Reproduction permissions noted **Conversion Tools:**
 
