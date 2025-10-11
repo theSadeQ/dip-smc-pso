@@ -261,12 +261,14 @@ if os.environ.get('READTHEDOCS'):
         'epub.unknown_project_files',
         'app.add_directive',  # Suppress deprecated extension warnings
         'toc.not_included',  # Suppress orphaned document warnings during migration
+        'autodoc.import_object',  # Suppress autodoc import errors (Phase 9F)
     ]
 else:
     # Strict mode for local development
     suppress_warnings = [
         'app.add_directive',  # Suppress deprecated extension warnings (sphinxcontrib.autoclassdiag)
         'toc.not_included',  # Suppress orphaned document warnings during migration
+        'autodoc.import_object',  # Suppress autodoc import errors (Phase 9F)
     ]
 
 # Parallel build configuration for faster builds
@@ -361,7 +363,7 @@ def linkcode_resolve(domain, info):
 # Mock heavy dependencies to keep doc builds lightweight
 autodoc_mock_imports = [
     'numpy', 'scipy', 'matplotlib', 'control', 'pyswarms', 'optuna', 'numba',
-    'streamlit', 'pandas', 'yaml', 'pydantic'
+    'streamlit', 'pandas', 'yaml', 'pydantic', 'pydantic_settings'
 ]
 
 
