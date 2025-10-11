@@ -1,4 +1,11 @@
-# controllers.smc.algorithms.super_twisting.controller **Source:** `src\controllers\smc\algorithms\super_twisting\controller.py` ## Module Overview Modular Super-Twisting SMC Controller. Implements Super-Twisting Sliding Mode Control using composed components:
+# controllers.smc.algorithms.super_twisting.controller
+
+**Source:** `src\controllers\smc\algorithms\super_twisting\controller.py`
+
+## Module Overview Modular Super-Twisting SMC Controller
+
+. Implements Super-Twisting Sliding Mode Control using composed components:
+
 
 - LinearSlidingSurface: Surface computation
 - SuperTwistingAlgorithm: Second-order sliding mode control

@@ -1,4 +1,15 @@
-# optimization.algorithms.memory_efficient_pso **Source:** `src\optimization\algorithms\memory_efficient_pso.py` ## Module Overview Memory-efficient PSO optimizer with production-grade memory management. ## Advanced Mathematical Theory ### Memory-Efficient PSO Design **Memory complexity** for standard PSO: ```{math}
+# optimization.algorithms.memory_efficient_pso
+
+**Source:** `src\optimization\algorithms\memory_efficient_pso.py`
+
+## Module Overview Memory-efficient PSO optimizer with production-grade memory management
+
+.
+
+## Advanced Mathematical Theory
+
+### Memory-Efficient PSO Design
+
 
 M_{total} = M_{particles} + M_{history} + M_{best} = O(N \cdot d) + O(T \cdot N \cdot d) + O(d)
 ``` Where $N$ is population size, $d$ is dimensions, $T$ is iterations. **Problem:** Unbounded history growth $O(T \cdot N \cdot d)$ causes memory leaks. ### Bounded Collection Strategy **Circular buffer** for history with max size $H$: ```{math}

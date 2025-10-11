@@ -1,4 +1,11 @@
-# interfaces.monitoring.metrics_collector **Source:** `src\interfaces\monitoring\metrics_collector.py` ## Module Overview metrics collection system for interface monitoring.
+# interfaces.monitoring.metrics_collector
+
+**Source:** `src\interfaces\monitoring\metrics_collector.py`
+
+## Module Overview metrics collection system for interface monitoring
+
+.
+
 
 This module provides efficient collection, aggregation, and storage
 of various metrics including performance counters, resource usage,

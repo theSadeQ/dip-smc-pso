@@ -1,4 +1,11 @@
-# utils.development.jupyter_tools **Source:** `src\utils\development\jupyter_tools.py` ## Module Overview Export utilities for Jupyter notebooks. This module provides convenient functions for exporting simulation results,
+# utils.development.jupyter_tools
+
+**Source:** `src\utils\development\jupyter_tools.py`
+
+## Module Overview Export utilities for Jupyter notebooks
+
+. This module provides convenient functions for exporting simulation results,
+
 
 plots, and data from Jupyter notebooks in various formats. ## Complete Source Code ```{literalinclude} ../../../src/utils/development/jupyter_tools.py
 :language: python

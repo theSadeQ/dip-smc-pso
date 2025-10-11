@@ -1,4 +1,11 @@
-# interfaces.hil.fault_injection **Source:** `src\interfaces\hil\fault_injection.py` ## Module Overview Fault injection system for HIL testing and validation.
+# interfaces.hil.fault_injection
+
+**Source:** `src\interfaces\hil\fault_injection.py`
+
+## Module Overview Fault injection system for HIL testing and validation
+
+.
+
 
 This module provides fault injection features including
 sensor faults, actuator faults, communication failures, and system-level

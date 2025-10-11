@@ -1,4 +1,15 @@
-# analysis.performance.control_analysis **Source:** `src\analysis\performance\control_analysis.py` ## Module Overview Linearisation and controllability/observability analysis utilities. ## Advanced Mathematical Theory ### Control System Performance **Closed-loop transfer function:** ```{math}
+# analysis.performance.control_analysis
+
+**Source:** `src\analysis\performance\control_analysis.py`
+
+## Module Overview Linearisation and controllability/observability analysis utilities
+
+.
+
+## Advanced Mathematical Theory
+
+### Control System Performance
+
 
 T(s) = \frac{G(s)C(s)}{1 + G(s)C(s)}
 ``` Where $G(s)$ is plant, $C(s)$ is controller. ### Frequency Response Analysis **Bode plot analysis:** ```{math}
@@ -80,7 +91,6 @@ functions including linearization, controllability, and observability analysis. 
 
 ## Functions ### `linearize_dip(dyn, x_eq, u_eq)` Linearise the nonlinear dynamics around an equilibrium point. Parameters
 
-----------
 dyn : callable A function implementing the continuous‑time dynamics ``f(x, u)``.
 x_eq : np.ndarray Equilibrium state vector at which to linearise.
 u_eq : float Equilibrium control input. Returns

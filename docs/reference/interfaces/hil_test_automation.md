@@ -1,4 +1,11 @@
-# interfaces.hil.test_automation **Source:** `src\interfaces\hil\test_automation.py` ## Module Overview Automated testing framework for HIL systems.
+# interfaces.hil.test_automation
+
+**Source:** `src\interfaces\hil\test_automation.py`
+
+## Module Overview Automated testing framework for HIL systems
+
+.
+
 
 This module provides test automation features including
 test case management, assertion validation, performance testing, and

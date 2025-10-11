@@ -1,4 +1,11 @@
-# utils.analysis.__init__ **Source:** `src\utils\analysis\__init__.py` ## Module Overview Statistical analysis package for control system performance evaluation. This package provides statistical tools for rigorous
+# utils.analysis.__init__
+
+**Source:** `src\utils\analysis\__init__.py`
+
+## Module Overview Statistical analysis package for control system performance evaluation
+
+. This package provides statistical tools for rigorous
+
 
 analysis of control system performance, including confidence intervals,
 hypothesis testing, and Monte Carlo validation. ## Complete Source Code ```{literalinclude} ../../../src/utils/analysis/__init__.py

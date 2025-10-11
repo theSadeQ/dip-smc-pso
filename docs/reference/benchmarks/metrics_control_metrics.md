@@ -1,4 +1,11 @@
-# benchmarks.metrics.control_metrics **Source:** `src\benchmarks\metrics\control_metrics.py` ## Module Overview Control performance metrics for dynamic systems. This module computes fundamental control engineering metrics that measure
+# benchmarks.metrics.control_metrics
+
+**Source:** `src\benchmarks\metrics\control_metrics.py`
+
+## Module Overview Control performance metrics for dynamic systems
+
+. This module computes fundamental control engineering metrics that measure
+
 
 the quality of tracking performance and control effort. These metrics are
 derived from classical control theory and provide quantitative measures

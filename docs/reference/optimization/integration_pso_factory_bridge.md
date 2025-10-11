@@ -1,4 +1,15 @@
-# optimization.integration.pso_factory_bridge **Source:** `src\optimization\integration\pso_factory_bridge.py` ## Module Overview Advanced PSO-Factory Integration Bridge. ## Advanced Mathematical Theory ### Controller-PSO Integration **Controller parameter optimization:** ```{math}
+# optimization.integration.pso_factory_bridge
+
+**Source:** `src\optimization\integration\pso_factory_bridge.py`
+
+## Module Overview Advanced PSO-Factory Integration Bridge
+
+.
+
+## Advanced Mathematical Theory
+
+### Controller-PSO Integration
+
 
 \begin{align}
 \min_{\vec{\theta} \in \Theta} \quad & J(\vec{\theta}) \\

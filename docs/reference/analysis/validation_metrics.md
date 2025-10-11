@@ -1,4 +1,15 @@
-# analysis.validation.metrics **Source:** `src\analysis\validation\metrics.py` ## Module Overview Statistical and validation metrics for analysis systems. ## Advanced Mathematical Theory ### Validation Metrics **Mean Squared Error (MSE):** ```{math}
+# analysis.validation.metrics
+
+**Source:** `src\analysis\validation\metrics.py`
+
+## Module Overview Statistical and validation metrics for analysis systems
+
+.
+
+## Advanced Mathematical Theory
+
+### Validation Metrics
+
 
 \text{MSE} = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_i)^2
 ``` **Root Mean Squared Error (RMSE):** ```{math}

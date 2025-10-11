@@ -1,4 +1,11 @@
-# analysis.reports.__init__ **Source:** `src\analysis\reports\__init__.py` ## Module Overview Report generation for analysis results.
+# analysis.reports.__init__
+
+**Source:** `src\analysis\reports\__init__.py`
+
+## Module Overview Report generation for analysis results
+
+.
+
 
 This module provides automated report generation features for
 control system analysis including performance reports, benchmark summaries,

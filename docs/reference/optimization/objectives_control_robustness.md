@@ -1,4 +1,15 @@
-# optimization.objectives.control.robustness **Source:** `src\optimization\objectives\control\robustness.py` ## Module Overview Robustness objective functions for control optimization. ## Complete Source Code ```{literalinclude} ../../../src/optimization/objectives/control/robustness.py
+# optimization.objectives.control.robustness
+
+**Source:** `src\optimization\objectives\control\robustness.py`
+
+## Module Overview Robustness objective functions for control optimization
+
+.
+
+## Complete Source Code ```{literalinclude}
+
+../../../src/optimization/objectives/control/robustness.py
+
 
 :language: python
 :linenos:

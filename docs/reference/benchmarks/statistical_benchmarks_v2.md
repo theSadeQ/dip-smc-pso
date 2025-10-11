@@ -1,4 +1,11 @@
-# benchmarks.statistical_benchmarks_v2 **Source:** `src\benchmarks\statistical_benchmarks_v2.py` ## Module Overview Statistical benchmarking utilities for the Double Inverted Pendulum project. This is the refactored version using modular architecture while maintaining
+# benchmarks.statistical_benchmarks_v2
+
+**Source:** `src\benchmarks\statistical_benchmarks_v2.py`
+
+## Module Overview Statistical benchmarking utilities for the Double Inverted Pendulum project
+
+. This is the refactored version using modular architecture while maintaining
+
 
 full backward compatibility with the original statistical_benchmarks.py. The module now delegates to specialized submodules:
 - **metrics/**: Performance metric calculations
@@ -117,7 +124,6 @@ list of dict, dict Metrics list and statistical analysis results #### Source Cod
 
 ### `compare_controllers(controller_factory_a, controller_factory_b, cfg, n_trials, seed)` Compare two controllers using statistical analysis. Parameters
 
-----------
 controller_factory_a, controller_factory_b : Callable Controller factories to compare
 cfg : Any Configuration object
 n_trials : int, optional Number of trials per controller

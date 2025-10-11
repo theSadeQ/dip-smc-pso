@@ -1,4 +1,11 @@
-# utils.visualization.movie_generator **Source:** `src\utils\visualization\movie_generator.py` ## Module Overview Complete visualization plan for the entire DIP control project. Provides movie generation features for documenting
+# utils.visualization.movie_generator
+
+**Source:** `src\utils\visualization\movie_generator.py`
+
+## Module Overview Complete visualization plan for the entire DIP control project
+
+. Provides movie generation features for documenting
+
 
 and presenting the complete control engineering project with professional
 quality animations and analysis visualizations. ## Complete Source Code ```{literalinclude} ../../../src/utils/visualization/movie_generator.py

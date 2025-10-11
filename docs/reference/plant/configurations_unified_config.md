@@ -1,4 +1,11 @@
-# plant.configurations.unified_config **Source:** `src\plant\configurations\unified_config.py` ## Module Overview Unified Configuration System for DIP Models. Provides a centralized configuration management system that supports
+# plant.configurations.unified_config
+
+**Source:** `src\plant\configurations\unified_config.py`
+
+## Module Overview Unified Configuration System for DIP Models
+
+. Provides a centralized configuration management system that supports
+
 
 all DIP model types (simplified, full, low-rank) with factory patterns
 and automatic configuration selection. ## Complete Source Code ```{literalinclude} ../../../src/plant/configurations/unified_config.py

@@ -1,4 +1,15 @@
-# simulation.safety.monitors **Source:** `src\simulation\safety\monitors.py` ## Module Overview Performance and safety monitoring for simulation execution. ## Complete Source Code ```{literalinclude} ../../../src/simulation/safety/monitors.py
+# simulation.safety.monitors
+
+**Source:** `src\simulation\safety\monitors.py`
+
+## Module Overview Performance and safety monitoring for simulation execution
+
+.
+
+## Complete Source Code ```{literalinclude}
+
+../../../src/simulation/safety/monitors.py
+
 
 :language: python
 :linenos:

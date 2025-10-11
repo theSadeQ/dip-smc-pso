@@ -1,4 +1,11 @@
-# optimization.validation.pso_bounds_validator **Source:** `src\optimization\validation\pso_bounds_validator.py` ## Module Overview PSO Bounds Validation and Optimization Module. This module provides validation and optimization of PSO parameter bounds
+# optimization.validation.pso_bounds_validator
+
+**Source:** `src\optimization\validation\pso_bounds_validator.py`
+
+## Module Overview PSO Bounds Validation and Optimization Module
+
+. This module provides validation and optimization of PSO parameter bounds
+
 
 for control system optimization. It ensures bounds are appropriate for each controller
 type and provides intelligent bounds adjustment based on system characteristics. Features:

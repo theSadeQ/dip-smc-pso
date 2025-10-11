@@ -1,4 +1,11 @@
-# utils.monitoring.stability **Source:** `src\utils\monitoring\stability.py` ## Module Overview Lyapunov Decrease Ratio (LDR) and stability monitoring for control systems. Implements the stability monitoring solution from Issue #1 resolution plan,
+# utils.monitoring.stability
+
+**Source:** `src\utils\monitoring\stability.py`
+
+## Module Overview Lyapunov Decrease Ratio (LDR) and stability monitoring for control systems
+
+. Implements the stability monitoring solution from Issue #1 resolution plan,
+
 
 including LDR monitoring, saturation tracking, and dynamics conditioning. ## Complete Source Code ```{literalinclude} ../../../src/utils/monitoring/stability.py
 :language: python

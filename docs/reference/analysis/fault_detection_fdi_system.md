@@ -1,4 +1,15 @@
-# analysis.fault_detection.fdi_system **Source:** `src\analysis\fault_detection\fdi_system.py` ## Module Overview Enhanced fault detection and isolation system. ## Advanced Mathematical Theory ### Enhanced FDI System Design **Multi-method fusion:** ```{math}
+# analysis.fault_detection.fdi_system
+
+**Source:** `src\analysis\fault_detection\fdi_system.py`
+
+## Module Overview Enhanced fault detection and isolation system
+
+.
+
+## Advanced Mathematical Theory
+
+### Enhanced FDI System Design
+
 
 \text{Decision} = \text{Fusion}(r_1, r_2, \ldots, r_m)
 ``` Where $r_i$ from different methods (observer, parity, Kalman). ### Detection Methods **Observer-based:** ```{math}
@@ -126,7 +137,6 @@ analysis framework. #### Source Code ```{literalinclude} ../../../src/analysis/f
 
 ## Functions ### `create_enhanced_fault_detector(config)` Factory function to create enhanced fault detector. Parameters
 
-----------
 config : Dict[str, Any], optional Configuration parameters Returns
 -------
 EnhancedFaultDetector Configured enhanced fault detector #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py

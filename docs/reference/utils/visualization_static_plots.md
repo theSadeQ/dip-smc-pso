@@ -1,4 +1,11 @@
-# utils.visualization.static_plots **Source:** `src\utils\visualization\static_plots.py` ## Module Overview Static plotting utilities for control system analysis. Provides plotting functions for control system performance,
+# utils.visualization.static_plots
+
+**Source:** `src\utils\visualization\static_plots.py`
+
+## Module Overview Static plotting utilities for control system analysis
+
+. Provides plotting functions for control system performance,
+
 
 phase portraits, time series analysis, and system identification. ## Complete Source Code ```{literalinclude} ../../../src/utils/visualization/static_plots.py
 :language: python

@@ -1,4 +1,11 @@
-# controllers.smc.algorithms.__init__ **Source:** `src\controllers\smc\algorithms\__init__.py` ## Module Overview SMC Algorithms Package. collection of Sliding Mode Control algorithms implemented
+# controllers.smc.algorithms.__init__
+
+**Source:** `src\controllers\smc\algorithms\__init__.py`
+
+## Module Overview SMC Algorithms Package
+
+. collection of Sliding Mode Control algorithms implemented
+
 
 with modular architecture for clarity and best practices: - Classical SMC: Traditional sliding mode control with boundary layer
 - Adaptive SMC: Online gain adaptation for unknown uncertainties

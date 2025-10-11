@@ -1,4 +1,11 @@
-# integration.production_readiness **Source:** `src\integration\production_readiness.py` ## Module Overview Production readiness scoring system with integrated pytest results and system health monitoring. This module provides production readiness assessment by integrating
+# integration.production_readiness
+
+**Source:** `src\integration\production_readiness.py`
+
+## Module Overview Production readiness scoring system with integrated pytest results and system health monitoring
+
+. This module provides production readiness assessment by integrating
+
 
 pytest results, coverage monitoring, compatibility analysis, and system health metrics
 into a unified scoring framework aligned with CLAUDE.md quality standards. ## Complete Source Code ```{literalinclude} ../../../src/integration/production_readiness.py

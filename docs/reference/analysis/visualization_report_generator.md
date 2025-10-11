@@ -1,4 +1,15 @@
-# analysis.visualization.report_generator **Source:** `src\analysis\visualization\report_generator.py` ## Module Overview Report generation module for control system analysis. ## Advanced Mathematical Theory ### Report Generation Framework **Template system:** ```{math}
+# analysis.visualization.report_generator
+
+**Source:** `src\analysis\visualization\report_generator.py`
+
+## Module Overview Report generation module for control system analysis
+
+.
+
+## Advanced Mathematical Theory
+
+### Report Generation Framework
+
 
 \text{Report} = \text{Template} \oplus \text{Data} \oplus \text{Style}
 ``` ### LaTeX Generation **Mathematical content:** ```latex

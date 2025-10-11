@@ -1,4 +1,11 @@
-# controllers.smc.algorithms.adaptive.controller **Source:** `src\controllers\smc\algorithms\adaptive\controller.py` ## Module Overview Modular Adaptive SMC Controller. Implements Adaptive Sliding Mode Control using composed components:
+# controllers.smc.algorithms.adaptive.controller
+
+**Source:** `src\controllers\smc\algorithms\adaptive\controller.py`
+
+## Module Overview Modular Adaptive SMC Controller
+
+. Implements Adaptive Sliding Mode Control using composed components:
+
 
 - LinearSlidingSurface: Surface computation
 - AdaptationLaw: Online gain adjustment

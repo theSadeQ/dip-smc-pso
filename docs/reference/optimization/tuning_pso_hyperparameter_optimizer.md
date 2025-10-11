@@ -1,4 +1,11 @@
-# optimization.tuning.pso_hyperparameter_optimizer **Source:** `src\optimization\tuning\pso_hyperparameter_optimizer.py` ## Module Overview Advanced PSO Hyperparameter Optimization for Factory-Generated Controllers. This module provides sophisticated hyperparameter optimization for PSO algorithms
+# optimization.tuning.pso_hyperparameter_optimizer
+
+**Source:** `src\optimization\tuning\pso_hyperparameter_optimizer.py`
+
+## Module Overview Advanced PSO Hyperparameter Optimization for Factory-Generated Controllers
+
+. This module provides sophisticated hyperparameter optimization for PSO algorithms
+
 
 specifically tuned for factory-generated SMC controllers. Features include adaptive
 parameter adjustment, multi-objective optimization, and controller-specific tuning. Key Features:

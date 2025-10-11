@@ -1,4 +1,11 @@
-# interfaces.monitoring.alerting **Source:** `src\interfaces\monitoring\alerting.py` ## Module Overview Intelligent alerting system for interface monitoring.
+# interfaces.monitoring.alerting
+
+**Source:** `src\interfaces\monitoring\alerting.py`
+
+## Module Overview Intelligent alerting system for interface monitoring
+
+.
+
 
 This module provides alerting features including
 rule-based alerts, adaptive thresholds, notification channels,

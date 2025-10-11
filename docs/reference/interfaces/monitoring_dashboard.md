@@ -1,4 +1,11 @@
-# interfaces.monitoring.dashboard **Source:** `src\interfaces\monitoring\dashboard.py` ## Module Overview Real-time monitoring dashboard for interface systems.
+# interfaces.monitoring.dashboard
+
+**Source:** `src\interfaces\monitoring\dashboard.py`
+
+## Module Overview Real-time monitoring dashboard for interface systems
+
+.
+
 
 This module provides dashboard features including
 real-time metrics visualization, interactive charts, system status

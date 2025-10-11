@@ -1,4 +1,15 @@
-# analysis.core.data_structures **Source:** `src\analysis\core\data_structures.py` ## Module Overview Data structures for analysis framework. ## Advanced Mathematical Theory ### Time Series Data Structures **Discrete-time signal:** ```{math}
+# analysis.core.data_structures
+
+**Source:** `src\analysis\core\data_structures.py`
+
+## Module Overview Data structures for analysis framework
+
+.
+
+## Advanced Mathematical Theory
+
+### Time Series Data Structures
+
 
 x[n] \in \mathbb{R}^d, \quad n = 0, 1, \ldots, N-1
 ``` **Sampling theorem:** ```{math}

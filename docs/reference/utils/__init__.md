@@ -1,6 +1,12 @@
-# utils.__init__ **Source:** `src\utils\__init__.py` ## Module Overview utilities package for control engineering. This package provides a complete suite of utilities organized into focused modules: Packages:
+# utils.__init__
 
----------
+**Source:** `src\utils\__init__.py`
+
+## Module Overview utilities package for control engineering
+
+. This package provides a complete suite of utilities organized into focused modules: Packages:
+
+
 validation : Parameter validation and range checking
 control : Control primitives and saturation functions
 monitoring : Real-time performance and latency monitoring

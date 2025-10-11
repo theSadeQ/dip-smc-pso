@@ -1,4 +1,11 @@
-# controllers.smc.algorithms.adaptive.parameter_estimation **Source:** `src\controllers\smc\algorithms\adaptive\parameter_estimation.py` ## Module Overview Parameter and Uncertainty Estimation for Adaptive SMC. Implements online estimation of system uncertainties and disturbance bounds
+# controllers.smc.algorithms.adaptive.parameter_estimation
+
+**Source:** `src\controllers\smc\algorithms\adaptive\parameter_estimation.py`
+
+## Module Overview Parameter and Uncertainty Estimation for Adaptive SMC
+
+. Implements online estimation of system uncertainties and disturbance bounds
+
 
 to improve adaptive gain selection and overall controller performance. Mathematical Background:
 - Uncertainty bound estimation: η̂ = max{|disturbance|, model_error}

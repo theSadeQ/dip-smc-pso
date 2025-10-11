@@ -1,4 +1,11 @@
-# benchmarks.metrics.stability_metrics **Source:** `src\benchmarks\metrics\stability_metrics.py` ## Module Overview Stability and transient response metrics for control systems. This module implements metrics that characterize the stability and
+# benchmarks.metrics.stability_metrics
+
+**Source:** `src\benchmarks\metrics\stability_metrics.py`
+
+## Module Overview Stability and transient response metrics for control systems
+
+. This module implements metrics that characterize the stability and
+
 
 transient behavior of controlled systems. These metrics are essential
 for evaluating controller robustness and dynamic performance. Metrics implemented:

@@ -1,4 +1,15 @@
-# analysis.performance.robustness **Source:** `src\analysis\performance\robustness.py` ## Module Overview Robustness analysis tools for control systems. ## Advanced Mathematical Theory ### Robustness Analysis **Multiplicative uncertainty model:** ```{math}
+# analysis.performance.robustness
+
+**Source:** `src\analysis\performance\robustness.py`
+
+## Module Overview Robustness analysis tools for control systems
+
+.
+
+## Advanced Mathematical Theory
+
+### Robustness Analysis
+
 
 G(s) = G_0(s)[1 + \Delta(s)W(s)]
 ``` Where $G_0$ is nominal model, $|\Delta(j\omega)| \leq 1$, $W(s)$ is weight.
@@ -131,7 +142,6 @@ RobustnessAnalyzer Configured robustness analyzer #### Source Code ```{literalin
 
 ### `create_uncertainty_model(name, uncertainty_type, distribution)` Factory function to create uncertainty models. Parameters
 
-----------
 name : str Name of the uncertainty
 uncertainty_type : str Type of uncertainty ('parametric', 'additive', 'multiplicative', 'structured')
 distribution : str Distribution type ('normal', 'uniform', 'beta', 'custom')

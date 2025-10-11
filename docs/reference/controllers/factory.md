@@ -1,4 +1,9 @@
-# controllers.factory **Source:** `src\controllers\factory.py` ## Module Overview Enterprise Controller Factory - Production-Ready Controller Instantiation This module provides a factory pattern for instantiating different types
+# controllers.factory
+
+**Source:** `src\controllers\factory.py`
+
+## Module Overview Enterprise Controller Factory - Production-Ready Controller Instantiation This module provides a factory pattern for instantiating different types
+
 
 of controllers with proper configuration, parameter management, and enterprise-grade
 quality standards. Architecture:

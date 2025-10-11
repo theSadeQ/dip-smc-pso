@@ -1,4 +1,15 @@
-# analysis.visualization.analysis_plots **Source:** `src\analysis\visualization\analysis_plots.py` ## Module Overview Analysis visualization tools for control engineering applications. ## Advanced Mathematical Theory ### Visualization Theory **Human visual perception:** Weber-Fechner law ```{math}
+# analysis.visualization.analysis_plots
+
+**Source:** `src\analysis\visualization\analysis_plots.py`
+
+## Module Overview Analysis visualization tools for control engineering applications
+
+.
+
+## Advanced Mathematical Theory
+
+### Visualization Theory
+
 
 S = k \ln(I/I_0)
 ``` Sensation $S$ proportional to log of intensity $I$. ### Color Theory (CIELAB) **Perceptually uniform color space:** ```{math}
@@ -70,7 +81,6 @@ including performance plots, comparison charts, and interactive visualizations. 
 
 ## Functions ### `create_analysis_plotter(style)` Factory function to create analysis plotter. Parameters
 
-----------
 style : str, optional Plot style
 **kwargs Additional configuration parameters Returns
 -------

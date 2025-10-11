@@ -1,4 +1,11 @@
-# optimization.validation.pso_bounds_optimizer **Source:** `src\optimization\validation\pso_bounds_optimizer.py` ## Module Overview Advanced PSO Parameter Bounds Optimization for Controller Factory Integration. This module provides optimized parameter bounds validation and dynamic adjustment
+# optimization.validation.pso_bounds_optimizer
+
+**Source:** `src\optimization\validation\pso_bounds_optimizer.py`
+
+## Module Overview Advanced PSO Parameter Bounds Optimization for Controller Factory Integration
+
+. This module provides optimized parameter bounds validation and dynamic adjustment
+
 
 for PSO optimization across all SMC controller types, addressing GitHub Issue #6
 factory integration requirements. Features:

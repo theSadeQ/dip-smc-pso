@@ -1,4 +1,11 @@
-# analysis.validation.statistics **Source:** `src\analysis\validation\statistics.py` ## Module Overview Statistical analysis utilities for validation and benchmarking. This module provides statistical functions for analyzing experimental results,
+# analysis.validation.statistics
+
+**Source:** `src\analysis\validation\statistics.py`
+
+## Module Overview Statistical analysis utilities for validation and benchmarking
+
+. This module provides statistical functions for analyzing experimental results,
+
 
 computing confidence intervals, and performing hypothesis testing. ## Complete Source Code ```{literalinclude} ../../../src/analysis/validation/statistics.py
 :language: python

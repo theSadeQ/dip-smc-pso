@@ -1,4 +1,15 @@
-# analysis.performance.control_metrics **Source:** `src\analysis\performance\control_metrics.py` ## Module Overview Enhanced control performance metrics and analysis. ## Advanced Mathematical Theory ### Integral Performance Indices **Integral of Squared Error (ISE):** ```{math}
+# analysis.performance.control_metrics
+
+**Source:** `src\analysis\performance\control_metrics.py`
+
+## Module Overview Enhanced control performance metrics and analysis
+
+.
+
+## Advanced Mathematical Theory
+
+### Integral Performance Indices
+
 
 \text{ISE} = \int_0^\infty e^2(t) dt
 ``` Penalizes large errors, emphasizes transient response. **Integral of Absolute Error (IAE):** ```{math}

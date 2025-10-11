@@ -1,4 +1,11 @@
-# optimization.__init__ **Source:** `src\optimization\__init__.py` ## Module Overview Professional optimization framework for control engineering applications. This module provides a optimization framework featuring:
+# optimization.__init__
+
+**Source:** `src\optimization\__init__.py`
+
+## Module Overview Professional optimization framework for control engineering applications
+
+. This module provides a optimization framework featuring:
+
 
 - Multiple optimization (see references) algorithms (PSO, DE, GA, CMA-ES, Bayesian)
 - Professional objective functions for control performance metrics
@@ -40,7 +47,6 @@ Optimizer Configured optimizer instance Examples
 
 ## `create_control_problem(objective_type, controller_factory, simulation_config, parameter_bounds)` Create a control optimization problem. Parameters
 
-----------
 objective_type : str Type of objective ('tracking', 'energy', 'settling_time', 'overshoot')
 controller_factory : callable Function to create controller from parameters
 simulation_config : dict Simulation configuration
