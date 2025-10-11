@@ -1,4 +1,15 @@
-# analysis.visualization.diagnostic_plots **Source:** `src\analysis\visualization\diagnostic_plots.py` ## Module Overview Diagnostic visualization module for control system analysis. ## Advanced Mathematical Theory ### Diagnostic Visualization **Residual plots:** ```{math}
+# analysis.visualization.diagnostic_plots
+
+**Source:** `src\analysis\visualization\diagnostic_plots.py`
+
+## Module Overview Diagnostic visualization module for control system analysis
+
+.
+
+## Advanced Mathematical Theory
+
+### Diagnostic Visualization
+
 
 r_i(t) = y_i(t) - \hat{y}_i(t)
 ``` **Autocorrelation function:** ```{math}

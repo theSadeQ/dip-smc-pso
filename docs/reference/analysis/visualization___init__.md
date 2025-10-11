@@ -1,4 +1,15 @@
-# analysis.visualization.__init__ **Source:** `src\analysis\visualization\__init__.py` ## Module Overview Visualization module for control system analysis. ## Advanced Mathematical Theory ### Visualization Framework **Design principles:** 1. **Perceptual uniformity:** Equal visual differences = equal data differences
+# analysis.visualization.__init__
+
+**Source:** `src\analysis\visualization\__init__.py`
+
+## Module Overview Visualization module for control system analysis
+
+.
+
+## Advanced Mathematical Theory
+
+### Visualization Framework
+
 
 2. **Clarity:** Maximize data-ink ratio
 3. **Accessibility:** Color-blind safe palettes ### Style System **Matplotlib style hierarchy:** ```python

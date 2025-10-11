@@ -1,4 +1,11 @@
-# controllers.smc.algorithms.hybrid.switching_logic **Source:** `src\controllers\smc\algorithms\hybrid\switching_logic.py` ## Module Overview Hybrid Switching Logic for Multi-Controller SMC. Implements intelligent switching between multiple SMC controllers based on:
+# controllers.smc.algorithms.hybrid.switching_logic
+
+**Source:** `src\controllers\smc\algorithms\hybrid\switching_logic.py`
+
+## Module Overview Hybrid Switching Logic for Multi-Controller SMC
+
+. Implements intelligent switching between multiple SMC controllers based on:
+
 
 - System performance metrics
 - Operating conditions

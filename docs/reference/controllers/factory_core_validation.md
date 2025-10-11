@@ -1,4 +1,9 @@
-# controllers.factory.core.validation **Source:** `src\controllers\factory\core\validation.py` ## Module Overview Validation Framework for Controller Factory Provides enterprise-grade validation for controller gains, configurations, and parameters
+# controllers.factory.core.validation
+
+**Source:** `src\controllers\factory\core\validation.py`
+
+## Module Overview Validation Framework for Controller Factory Provides enterprise-grade validation for controller gains, configurations, and parameters
+
 
 with detailed error reporting and recovery mechanisms. ## Complete Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
 :language: python

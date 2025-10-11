@@ -1,4 +1,15 @@
-# optimization.core.results_manager **Source:** `src\optimization\core\results_manager.py` ## Module Overview PSO Optimization Results Management and Serialization. ## Advanced Mathematical Theory ### Results Aggregation **Statistical summary** across $M$ optimization runs: ```{math}
+# optimization.core.results_manager
+
+**Source:** `src\optimization\core\results_manager.py`
+
+## Module Overview PSO Optimization Results Management and Serialization
+
+.
+
+## Advanced Mathematical Theory
+
+### Results Aggregation
+
 
 \begin{align}
 \mu_f &= \frac{1}{M} \sum_{i=1}^{M} f_i^* \\
@@ -96,7 +107,6 @@ and comparing optimization results with full provenance tracking. #### Source Co
 
 ## Functions ### `create_optimization_metadata(controller_type, config, seed)` Create optimization metadata from configuration. Parameters
 
-----------
 controller_type : str Type of controller being optimized
 config : Dict[str, Any] Configuration dictionary
 seed : int, optional Random seed used Returns

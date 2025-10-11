@@ -1,4 +1,11 @@
-# analysis.validation.benchmarking **Source:** `src\analysis\validation\benchmarking.py` ## Module Overview Benchmarking and comparison tools for analysis validation. This module provides benchmarking features for comparing
+# analysis.validation.benchmarking
+
+**Source:** `src\analysis\validation\benchmarking.py`
+
+## Module Overview Benchmarking and comparison tools for analysis validation
+
+. This module provides benchmarking features for comparing
+
 
 analysis methods, controllers, and algorithms in control engineering applications. ## Complete Source Code ```{literalinclude} ../../../src/analysis/validation/benchmarking.py
 :language: python

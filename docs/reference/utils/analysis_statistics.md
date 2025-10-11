@@ -1,4 +1,11 @@
-# utils.analysis.statistics **Source:** `src\utils\analysis\statistics.py` ## Module Overview Statistical analysis utilities for control system performance evaluation. Provides statistical tools for analyzing control system
+# utils.analysis.statistics
+
+**Source:** `src\utils\analysis\statistics.py`
+
+## Module Overview Statistical analysis utilities for control system performance evaluation
+
+. Provides statistical tools for analyzing control system
+
 
 performance, including confidence intervals, hypothesis testing, and
 Monte Carlo analysis validation. ## Complete Source Code ```{literalinclude} ../../../src/utils/analysis/statistics.py
@@ -28,7 +35,6 @@ half_width : float Half‑width of the confidence interval. ``NaN`` when ``n < 2
 
 ## `bootstrap_confidence_interval(data, statistic_func, confidence, n_bootstrap)` Compute bootstrap confidence interval for any statistic. Parameters
 
-----------
 data : np.ndarray Original sample data.
 statistic_func : callable Function to compute the statistic of interest.
 confidence : float Confidence level (default: 0.95).
@@ -58,7 +64,6 @@ results : dict Dictionary containing test statistic, p-value, degrees of freedom
 
 ### `one_way_anova(groups, alpha)` Perform one-way ANOVA. Parameters
 
-----------
 groups : list of np.ndarray List of independent groups to compare.
 alpha : float Significance level. Returns
 -------
@@ -87,7 +92,6 @@ results : dict Monte Carlo analysis results including statistics and confidence 
 
 ### `performance_comparison_summary(controller_results, metric_name, confidence_level)` Generate comparison summary for multiple controllers. Parameters
 
-----------
 controller_results : dict Dictionary mapping controller names to performance arrays.
 metric_name : str Name of the performance metric being compared.
 confidence_level : float Confidence level for intervals. Returns

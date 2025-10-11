@@ -1,4 +1,11 @@
-# controllers.factory.deprecation **Source:** `src\controllers\factory\deprecation.py` ## Module Overview Controller Factory Deprecation Warning System. Provides systematic deprecation warnings for controller configuration changes,
+# controllers.factory.deprecation
+
+**Source:** `src\controllers\factory\deprecation.py`
+
+## Module Overview Controller Factory Deprecation Warning System
+
+. Provides systematic deprecation warnings for controller configuration changes,
+
 
 parameter renames, and interface modifications to ensure smooth migration paths. ## Complete Source Code ```{literalinclude} ../../../src/controllers/factory/deprecation.py
 :language: python

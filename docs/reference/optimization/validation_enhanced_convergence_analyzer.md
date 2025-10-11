@@ -1,4 +1,15 @@
-# optimization.validation.enhanced_convergence_analyzer **Source:** `src\optimization\validation\enhanced_convergence_analyzer.py` ## Module Overview Enhanced PSO Convergence Criteria and Validation Algorithms. ## Advanced Mathematical Theory ### Convergence Detection **Diversity metric:** ```{math}
+# optimization.validation.enhanced_convergence_analyzer
+
+**Source:** `src\optimization\validation\enhanced_convergence_analyzer.py`
+
+## Module Overview Enhanced PSO Convergence Criteria and Validation Algorithms
+
+.
+
+## Advanced Mathematical Theory
+
+### Convergence Detection
+
 
 D(\mathcal{P}) = \frac{1}{N} \sum_{i=1}^{N} \|\vec{x}_i - \bar{\vec{x}}\|
 ``` **Convergence criterion:** ```{math}

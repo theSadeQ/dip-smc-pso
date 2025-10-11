@@ -1,4 +1,15 @@
-# analysis.validation.monte_carlo **Source:** `src\analysis\validation\monte_carlo.py` ## Module Overview Monte Carlo analysis tools for validation and uncertainty quantification. ## Advanced Mathematical Theory ### Monte Carlo Methods **Monte Carlo estimator:** ```{math}
+# analysis.validation.monte_carlo
+
+**Source:** `src\analysis\validation\monte_carlo.py`
+
+## Module Overview Monte Carlo analysis tools for validation and uncertainty quantification
+
+.
+
+## Advanced Mathematical Theory
+
+### Monte Carlo Methods
+
 
 \hat{\theta}_N = \frac{1}{N}\sum_{i=1}^N g(X_i), \quad X_i \sim p(x)
 ``` **Expectation:** ```{math}
@@ -122,7 +133,6 @@ CI_{95\%} = \bar{J} \pm 1.96 \frac{s_J}{\sqrt{N}}
 
 ## Functions ### `create_monte_carlo_analyzer(config)` Factory function to create Monte Carlo analyzer. Parameters
 
-----------
 config : Dict[str, Any], optional Configuration parameters Returns
 -------
 MonteCarloAnalyzer Configured Monte Carlo analyzer #### Source Code ```{literalinclude} ../../../src/analysis/validation/monte_carlo.py

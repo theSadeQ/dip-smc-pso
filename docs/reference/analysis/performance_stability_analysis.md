@@ -1,4 +1,15 @@
-# analysis.performance.stability_analysis **Source:** `src\analysis\performance\stability_analysis.py` ## Module Overview Stability analysis tools for control systems. ## Advanced Mathematical Theory ### Lyapunov Stability Theory **Lyapunov function** for stability analysis: ```{math}
+# analysis.performance.stability_analysis
+
+**Source:** `src\analysis\performance\stability_analysis.py`
+
+## Module Overview Stability analysis tools for control systems
+
+.
+
+## Advanced Mathematical Theory
+
+### Lyapunov Stability Theory
+
 
 V: \mathbb{R}^n \to \mathbb{R}, \quad V(\vec{0}) = 0, \quad V(\vec{x}) > 0 \, \forall \vec{x} \neq \vec{0}
 ``` **Stability criterion:** ```{math}
@@ -87,7 +98,6 @@ Compute robustness margins (simplified).
 
 ## Functions ### `create_stability_analyzer(config)` Factory function to create stability analyzer. Parameters
 
-----------
 config : Dict[str, Any], optional Configuration parameters Returns
 -------
 StabilityAnalyzer Configured stability analyzer #### Source Code ```{literalinclude} ../../../src/analysis/performance/stability_analysis.py

@@ -1,4 +1,11 @@
-# interfaces.hardware.__init__ **Source:** `src\interfaces\hardware\__init__.py` ## Module Overview Hardware abstraction and device driver framework for control systems.
+# interfaces.hardware.__init__
+
+**Source:** `src\interfaces\hardware\__init__.py`
+
+## Module Overview Hardware abstraction and device driver framework for control systems
+
+.
+
 
 This module provides hardware interface features including
 device drivers, sensor/actuator interfaces, data acquisition systems, and

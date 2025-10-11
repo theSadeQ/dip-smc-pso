@@ -1,4 +1,15 @@
-# analysis.__init__ **Source:** `src\analysis\__init__.py` ## Module Overview Professional analysis framework for control system evaluation and validation. ## Advanced Mathematical Theory ### Analysis Framework Architecture **Modular design:** ```{math}
+# analysis.__init__
+
+**Source:** `src\analysis\__init__.py`
+
+## Module Overview Professional analysis framework for control system evaluation and validation
+
+.
+
+## Advanced Mathematical Theory
+
+### Analysis Framework Architecture
+
 
 \text{Framework} = \text{Performance} \cup \text{Validation} \cup \text{FDI} \cup \text{Visualization}
 ``` ### Module Dependencies **Dependency graph:** ```{math}
@@ -55,7 +66,6 @@ legacy compatibility and modern enhanced capabilities. ## Complete Source Code `
 
 ## Functions ### `create_performance_analyzer(analyzer_type)` Create performance analyzer instance. Parameters
 
-----------
 analyzer_type : str Type of analyzer ('advanced', 'stability', 'robustness')
 **kwargs Additional configuration parameters Returns
 -------

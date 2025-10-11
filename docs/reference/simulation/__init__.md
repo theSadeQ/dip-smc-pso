@@ -1,4 +1,11 @@
-# simulation.__init__ **Source:** `src\simulation\__init__.py` ## Module Overview Professional simulation framework for control engineering applications. This module provides a simulation framework with:
+# simulation.__init__
+
+**Source:** `src\simulation\__init__.py`
+
+## Module Overview Professional simulation framework for control engineering applications
+
+. This module provides a simulation framework with:
+
 
 - Multiple execution strategies (sequential, batch, parallel, real-time)
 - Advanced numerical integration methods (adaptive and fixed-step)
@@ -26,7 +33,6 @@ SimulationEngine Configured simulation engine #### Source Code ```{literalinclud
 
 ## `run_monte_carlo_analysis(simulation_fn, n_samples)` Run Monte Carlo analysis on simulation function. Parameters
 
-----------
 simulation_fn : callable Simulation function to analyze
 n_samples : int, optional Number of Monte Carlo samples
 **kwargs Additional parameters for analysis Returns

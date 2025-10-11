@@ -1,4 +1,11 @@
-# controllers.smc.algorithms.classical.boundary_layer **Source:** `src\controllers\smc\algorithms\classical\boundary_layer.py` ## Module Overview Boundary Layer Implementation for Classical SMC. Implements boundary layer method for chattering reduction in sliding mode control.
+# controllers.smc.algorithms.classical.boundary_layer
+
+**Source:** `src\controllers\smc\algorithms\classical\boundary_layer.py`
+
+## Module Overview Boundary Layer Implementation for Classical SMC
+
+. Implements boundary layer method for chattering reduction in sliding mode control.
+
 
 Extracted from the original monolithic controller to provide focused, reusable
 boundary layer logic. Mathematical Background:

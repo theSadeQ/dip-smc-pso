@@ -1,4 +1,15 @@
-# analysis.fault_detection.fdi **Source:** `src\analysis\fault_detection\fdi.py` ## Module Overview *No module docstring available.* ## Advanced Mathematical Theory ### Fault Detection & Isolation (FDI) **Fault detection problem:** Detect deviation from nominal behavior. **System model:** ```{math}
+# analysis.fault_detection.fdi
+
+**Source:** `src\analysis\fault_detection\fdi.py`
+
+## Module Overview *No module docstring available
+
+.*
+
+## Advanced Mathematical Theory
+
+### Fault Detection & Isolation (FDI)
+
 
 \begin{align}
 \dot{\vec{x}} &= A\vec{x} + B\vec{u} + E\vec{f} \\

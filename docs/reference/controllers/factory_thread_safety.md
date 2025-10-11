@@ -1,4 +1,11 @@
-# controllers.factory.thread_safety **Source:** `src\controllers\factory\thread_safety.py` ## Module Overview Thread Safety Enhancement Module for Controller Factory. Provides:
+# controllers.factory.thread_safety
+
+**Source:** `src\controllers\factory\thread_safety.py`
+
+## Module Overview Thread Safety Enhancement Module for Controller Factory
+
+. Provides:
+
 
 - Lock-free operations where possible
 - Minimal critical sections

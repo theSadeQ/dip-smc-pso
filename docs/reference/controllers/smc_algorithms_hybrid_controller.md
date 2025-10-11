@@ -1,4 +1,11 @@
-# controllers.smc.algorithms.hybrid.controller **Source:** `src\controllers\smc\algorithms\hybrid\controller.py` ## Module Overview Modular Hybrid SMC Controller. Implements Hybrid Sliding Mode Control that intelligently switches between
+# controllers.smc.algorithms.hybrid.controller
+
+**Source:** `src\controllers\smc\algorithms\hybrid\controller.py`
+
+## Module Overview Modular Hybrid SMC Controller
+
+. Implements Hybrid Sliding Mode Control that intelligently switches between
+
 
 multiple SMC algorithms based on system conditions and performance metrics. Orchestrates:
 - Multiple SMC controllers (Classical, Adaptive, Super-Twisting)

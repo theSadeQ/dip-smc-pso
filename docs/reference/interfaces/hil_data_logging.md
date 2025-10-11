@@ -1,4 +1,11 @@
-# interfaces.hil.data_logging **Source:** `src\interfaces\hil\data_logging.py` ## Module Overview Data logging system for HIL applications.
+# interfaces.hil.data_logging
+
+**Source:** `src\interfaces\hil\data_logging.py`
+
+## Module Overview Data logging system for HIL applications
+
+.
+
 
 This module provides data logging features including
 high-frequency data collection, buffering, compression, and export

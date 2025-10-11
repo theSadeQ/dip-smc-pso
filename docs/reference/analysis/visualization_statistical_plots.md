@@ -1,4 +1,15 @@
-# analysis.visualization.statistical_plots **Source:** `src\analysis\visualization\statistical_plots.py` ## Module Overview Statistical visualization module for control system analysis. ## Advanced Mathematical Theory ### Statistical Visualization **Box plot components:** ```{math}
+# analysis.visualization.statistical_plots
+
+**Source:** `src\analysis\visualization\statistical_plots.py`
+
+## Module Overview Statistical visualization module for control system analysis
+
+.
+
+## Advanced Mathematical Theory
+
+### Statistical Visualization
+
 
 \begin{align}
 Q_1 &= \text{25th percentile} \\

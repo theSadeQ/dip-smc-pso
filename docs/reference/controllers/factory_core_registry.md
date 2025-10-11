@@ -1,4 +1,9 @@
-# controllers.factory.core.registry **Source:** `src\controllers\factory\core\registry.py` ## Module Overview Controller Registry Management - Centralized Controller Metadata Manages the central registry of available controllers with metadata,
+# controllers.factory.core.registry
+
+**Source:** `src\controllers\factory\core\registry.py`
+
+## Module Overview Controller Registry Management - Centralized Controller Metadata Manages the central registry of available controllers with metadata,
+
 
 validation rules, and type-safe access patterns. ## Complete Source Code ```{literalinclude} ../../../src/controllers/factory/core/registry.py
 :language: python

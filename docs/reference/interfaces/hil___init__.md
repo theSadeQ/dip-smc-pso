@@ -1,4 +1,11 @@
-# interfaces.hil.__init__ **Source:** `src\interfaces\hil\__init__.py` ## Module Overview Enhanced Hardware-in-the-Loop (HIL) system for control engineering.
+# interfaces.hil.__init__
+
+**Source:** `src\interfaces\hil\__init__.py`
+
+## Module Overview Enhanced Hardware-in-the-Loop (HIL) system for control engineering
+
+.
+
 
 This module provides advanced HIL features including real-time simulation,
 hardware integration, fault injection, and testing frameworks

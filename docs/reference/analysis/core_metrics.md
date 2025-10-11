@@ -1,4 +1,15 @@
-# analysis.core.metrics **Source:** `src\analysis\core\metrics.py` ## Module Overview Core metric computation framework. ## Advanced Mathematical Theory ### Core Performance Metrics **Weighted performance index:** ```{math}
+# analysis.core.metrics
+
+**Source:** `src\analysis\core\metrics.py`
+
+## Module Overview Core metric computation framework
+
+.
+
+## Advanced Mathematical Theory
+
+### Core Performance Metrics
+
 
 J = \sum_{i=1}^n w_i m_i
 ``` Where $w_i$ are weights, $m_i$ are individual metrics. ### Metric Normalization **Min-max normalization:** ```{math}
@@ -100,7 +111,6 @@ applications and statistical rigor. ## Complete Source Code ```{literalinclude} 
 
 ## Functions ### `create_comprehensive_metrics(data, reference, include_stability, include_robustness)` Create performance metrics from simulation data. Parameters
 
-----------
 data : DataProtocol Simulation data
 reference : np.ndarray, optional Reference trajectory for tracking metrics
 include_stability : bool, optional Whether to include stability metrics

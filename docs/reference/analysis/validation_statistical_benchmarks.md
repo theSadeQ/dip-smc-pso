@@ -1,4 +1,15 @@
-# analysis.validation.statistical_benchmarks **Source:** `src\analysis\validation\statistical_benchmarks.py` ## Module Overview Statistical benchmarking utilities for the Double Inverted Pendulum project. ## Advanced Mathematical Theory ### Statistical Benchmarking **Sample mean estimator:** ```{math}
+# analysis.validation.statistical_benchmarks
+
+**Source:** `src\analysis\validation\statistical_benchmarks.py`
+
+## Module Overview Statistical benchmarking utilities for the Double Inverted Pendulum project
+
+.
+
+## Advanced Mathematical Theory
+
+### Statistical Benchmarking
+
 
 \bar{x} = \frac{1}{n}\sum_{i=1}^n x_i
 ``` **Sample variance:** ```{math}

@@ -1,4 +1,15 @@
-# optimization.objectives.system.steady_state **Source:** `src\optimization\objectives\system\steady_state.py` ## Module Overview Steady-state error objective functions for control optimization. ## Complete Source Code ```{literalinclude} ../../../src/optimization/objectives/system/steady_state.py
+# optimization.objectives.system.steady_state
+
+**Source:** `src\optimization\objectives\system\steady_state.py`
+
+## Module Overview Steady-state error objective functions for control optimization
+
+.
+
+## Complete Source Code ```{literalinclude}
+
+../../../src/optimization/objectives/system/steady_state.py
+
 
 :language: python
 :linenos:

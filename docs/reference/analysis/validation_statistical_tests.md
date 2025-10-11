@@ -1,4 +1,15 @@
-# analysis.validation.statistical_tests **Source:** `src\analysis\validation\statistical_tests.py` ## Module Overview Statistical testing framework for analysis validation. ## Advanced Mathematical Theory ### Hypothesis Testing Framework **Null hypothesis:** $H_0: \theta = \theta_0$
+# analysis.validation.statistical_tests
+
+**Source:** `src\analysis\validation\statistical_tests.py`
+
+## Module Overview Statistical testing framework for analysis validation
+
+.
+
+## Advanced Mathematical Theory
+
+### Hypothesis Testing Framework
+
 
 **Alternative:** $H_1: \theta \neq \theta_0$ (two-sided) **Type I error:** $\alpha = P(\text{Reject } H_0 | H_0 \text{ true})$
 **Type II error:** $\beta = P(\text{Fail to reject } H_0 | H_1 \text{ true})$ **Power:** $1 - \beta = P(\text{Reject } H_0 | H_1 \text{ true})$ ### t-test **One-sample t-test:** ```{math}
@@ -102,7 +113,6 @@ rigor in control engineering applications. ## Complete Source Code ```{literalin
 
 ## Functions ### `create_statistical_test_suite(config)` Factory function to create statistical test suite. Parameters
 
-----------
 config : Dict[str, Any], optional Configuration parameters Returns
 -------
 StatisticalTestSuite Configured statistical test suite #### Source Code ```{literalinclude} ../../../src/analysis/validation/statistical_tests.py

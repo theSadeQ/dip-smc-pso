@@ -1,4 +1,11 @@
-# controllers.factory.pso_integration **Source:** `src\controllers\factory\pso_integration.py` ## Module Overview Advanced PSO Integration Module for SMC Controllers. This module provides optimized integration between SMC controllers and PSO optimization,
+# controllers.factory.pso_integration
+
+**Source:** `src\controllers\factory\pso_integration.py`
+
+## Module Overview Advanced PSO Integration Module for SMC Controllers
+
+. This module provides optimized integration between SMC controllers and PSO optimization,
+
 
 featuring thread-safe operations, performance monitoring, and error handling. ## Mathematical Foundation ### PSO-Controller Integration Architecture **Problem:** Particle Swarm Optimization (PSO) searches high-dimensional gain space for optimal controller performance. ```{math}
 \min_{\vec{g} \in \mathcal{G}} J(\vec{g})

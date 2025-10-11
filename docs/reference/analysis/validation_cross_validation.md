@@ -1,4 +1,15 @@
-# analysis.validation.cross_validation **Source:** `src\analysis\validation\cross_validation.py` ## Module Overview Cross-validation methods for analysis validation and model selection. ## Advanced Mathematical Theory ### Cross-Validation **k-fold cross-validation:** 1. Split data into $k$ folds: $D_1, \ldots, D_k$
+# analysis.validation.cross_validation
+
+**Source:** `src\analysis\validation\cross_validation.py`
+
+## Module Overview Cross-validation methods for analysis validation and model selection
+
+.
+
+## Advanced Mathematical Theory
+
+### Cross-Validation
+
 
 2. For fold $i$: Train on $D \setminus D_i$, test on $D_i$
 3. Compute error: $\text{CV}(k) = \frac{1}{k}\sum_{i=1}^k \text{Err}_i$ **Leave-One-Out (LOO):** ```{math}
@@ -136,7 +147,6 @@ in control engineering applications. ## Complete Source Code ```{literalinclude}
 
 ### `create_cross_validator(config)` Factory function to create cross-validator. Parameters
 
-----------
 config : Dict[str, Any], optional Configuration parameters Returns
 -------
 CrossValidator Configured cross-validator #### Source Code ```{literalinclude} ../../../src/analysis/validation/cross_validation.py

@@ -1,4 +1,15 @@
-# optimization.objectives.control.stability **Source:** `src\optimization\objectives\control\stability.py` ## Module Overview Stability margin objective functions for control optimization. ## Complete Source Code ```{literalinclude} ../../../src/optimization/objectives/control/stability.py
+# optimization.objectives.control.stability
+
+**Source:** `src\optimization\objectives\control\stability.py`
+
+## Module Overview Stability margin objective functions for control optimization
+
+.
+
+## Complete Source Code ```{literalinclude}
+
+../../../src/optimization/objectives/control/stability.py
+
 
 :language: python
 :linenos:

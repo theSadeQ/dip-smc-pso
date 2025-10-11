@@ -1,4 +1,11 @@
-# utils.numerical_stability.__init__ **Source:** `src\utils\numerical_stability\__init__.py` ## Module Overview Numerical stability utilities for robust mathematical operations. This module provides safe mathematical operations that protect against:
+# utils.numerical_stability.__init__
+
+**Source:** `src\utils\numerical_stability\__init__.py`
+
+## Module Overview Numerical stability utilities for robust mathematical operations
+
+. This module provides safe mathematical operations that protect against:
+
 
 - Division by zero and near-zero denominators
 - Negative arguments to sqrt and log
