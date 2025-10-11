@@ -4,27 +4,15 @@ This page contains the complete bibliography for the DIP_SMC_PSO project, organi
 
 ## Complete Bibliography
 
-<!-- Complete bibliography section removed to prevent duplicate citations.
-     All citations are shown in their respective categories below. -->
+```{bibliography}
+:all:
+```
 
 ## Citations by Research Area
 
 ### Sliding Mode Control Theory
 
 The theoretical foundations of sliding mode control draw from several seminal works:
-
-```{bibliography}
-
-:filter: keywords % "sliding mode control" or keywords % "higher-order sliding mode" or keywords % "super-twisting"
-
-utkin1999sliding
-edwards1998sliding
-shtessel2014sliding
-levant2003higher
-moreno2012strict
-davila2005second
-utkin2016discussion
-```
 
 **Key Contributions:**
 - {cite}`utkin1999sliding` established the foundational theory for sliding mode control
@@ -35,17 +23,6 @@ utkin2016discussion
 
 The adaptive control components build upon classical nonlinear control theory:
 
-```{bibliography}
-
-:filter: keywords % "adaptive control" or keywords % "nonlinear control" or keywords % "Lyapunov"
-
-slotine1991applied
-krstic1995nonlinear
-narendra2012stable
-khalil2002nonlinear
-chen2019adaptive
-```
-
 **Key Contributions:**
 - {cite}`smc_slotine_li_1991_applied_nonlinear_control` provides the fundamental framework for adaptive sliding mode control
 - {cite}`dip_khalil_2002_nonlinear_systems` establishes the Lyapunov stability theory used throughout our analysis
@@ -54,20 +31,6 @@ chen2019adaptive
 ### Particle Swarm Optimization
 
 The parameter optimization methodology is based on PSO theory and multi-objective optimization:
-
-```{bibliography}
-
-:filter: keywords % "particle swarm optimization" or keywords % "evolutionary" or keywords % "multi-objective"
-
-kennedy1995particle
-clerc2002particle
-zhang2015comprehensive
-coello2007evolutionary
-deb2001multi
-jiang2007stochastic
-van2006analysis
-wolpert1997no
-```
 
 **Key Contributions:**
 - {cite}`pso_kennedy_1995_particle_swarm_optimization` introduced the original PSO algorithm
@@ -79,17 +42,6 @@ wolpert1997no
 
 The specific application to inverted pendulum control systems:
 
-```{bibliography}
-
-:filter: keywords % "inverted pendulum" or keywords % "benchmark" or keywords % "experimental"
-
-furuta2003swing
-boubaker2013double
-prasad2014double
-mills2009control
-wang2011experimental
-```
-
 **Key Contributions:**
 - {cite}`furuta2003swing` developed energy-based swing-up control methods
 - {cite}`boubaker2013double` established the inverted pendulum as a fundamental control benchmark
@@ -99,17 +51,6 @@ wang2011experimental
 
 The underlying mathematical theory for system modeling and analysis:
 
-```{bibliography}
-
-:filter: keywords % "classical mechanics" or keywords % "numerical methods" or keywords % "differential equations"
-
-goldstein2002classical
-spong2006robot
-hairer1993solving
-ascher1998computer
-filippov1988differential
-```
-
 **Key Contributions:**
 - {cite}`dip_goldstein_2002_classical_mechanics` provides the Lagrangian mechanics foundation for system derivation
 - {cite}`dip_spong_2006_robot_modeling_control` establishes the framework for robotic system modeling and control
@@ -118,14 +59,6 @@ filippov1988differential
 ### Software and Implementation
 
 The computational tools and scientific computing frameworks:
-
-```{bibliography}
-
-:filter: keywords % "scientific computing" or keywords % "software" or keywords % "MATLAB"
-
-scipy2020
-matlab2023control
-```
 
 **Key Contributions:**
 - {cite}`scipy2020` provides the scientific computing foundation for Python implementation
