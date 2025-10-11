@@ -2,7 +2,9 @@
 
 **Source:** `src\benchmarks\metrics\stability_metrics.py`
 
-## Module Overview Stability and transient response metrics for control systems
+## Module Overview Stability
+
+and transient response metrics for control systems
 
 . This module implements metrics that characterize the stability and
 
@@ -20,7 +22,9 @@ for evaluating controller robustness and dynamic performance. Metrics implemente
 
 ## Classes
 
-### `StabilityMetrics` Stability analysis metrics for control system performance assessment. This class provides a convenient interface to stability-related metrics
+### `StabilityMetrics`
+
+Stability analysis metrics for control system performance assessment. This class provides a convenient interface to stability-related metrics
 including overshoot, peak time, and damping ratio estimation. #### Source Code ```{literalinclude} ../../../src/benchmarks/metrics/stability_metrics.py
 :language: python
 :pyobject: StabilityMetrics
@@ -31,7 +35,9 @@ including overshoot, peak time, and damping ratio estimation. #### Source Code `
 
 ## Functions
 
-### `compute_overshoot(x, angular_indices)` Compute maximum overshoot across specified state variables. For control systems, overshoot measures the maximum deviation from
+### `compute_overshoot(x, angular_indices)`
+
+Compute maximum overshoot across specified state variables. For control systems, overshoot measures the maximum deviation from
 
 the desired trajectory. For pendulum systems, this typically focuses
 on angular states where overshoot can lead to instability. Mathematical Definition:
@@ -54,7 +60,9 @@ lead to:
 
 ---
 
-### `compute_peak_time(t, x, state_index)` Compute time to reach maximum overshoot for specified state. Parameters
+### `compute_peak_time(t, x, state_index)`
+
+Compute time to reach maximum overshoot for specified state. Parameters
 ----------
 t : np.ndarray Time vector of length N+1
 x : np.ndarray State trajectories of shape (B, N+1, S)
@@ -67,7 +75,9 @@ float Peak time averaged across batch dimension #### Source Code ```{literalincl
 
 ---
 
-### `compute_damping_ratio_estimate(x, state_index)` Estimate damping ratio from overshoot characteristics. For second-order systems, the damping ratio ζ can be estimated from
+### `compute_damping_ratio_estimate(x, state_index)`
+
+Estimate damping ratio from overshoot characteristics. For second-order systems, the damping ratio ζ can be estimated from
 
 the overshoot using: ζ ≈ -ln(OS/100) / √(π² + ln²(OS/100)) Parameters
 ----------

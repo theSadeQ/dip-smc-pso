@@ -2,7 +2,9 @@
 
 **Source:** `src\plant\configurations\validation.py`
 
-## Module Overview Parameter Validation for Plant Configurations
+## Module Overview Parameter
+
+Validation for Plant Configurations
 
 . validation utilities for physics parameters ensuring
 
@@ -16,9 +18,13 @@ mathematical correctness, physical realizability, and numerical stability. ## Co
 
 ## Classes
 
-### `ParameterValidator` **Inherits from:** `Protocol` Protocol for parameter validation strategies.
+### `ParameterValidator`
 
-#### Source Code ```{literalinclude} ../../../src/plant/configurations/validation.py
+**Inherits from:** `Protocol` Protocol for parameter validation strategies.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/plant/configurations/validation.py
 :language: python
 :pyobject: ParameterValidator
 :linenos:
@@ -26,7 +32,9 @@ mathematical correctness, physical realizability, and numerical stability. ## Co
 
 ---
 
-## `PhysicsParameterValidator` validator for physics parameters. Provides validation for common physics parameter types with
+## `PhysicsParameterValidator`
+
+validator for physics parameters. Provides validation for common physics parameter types with
 
 appropriate bounds checking and consistency verification. #### Source Code ```{literalinclude} ../../../src/plant/configurations/validation.py
 :language: python
@@ -38,9 +46,13 @@ appropriate bounds checking and consistency verification. #### Source Code ```{l
 
 ## Functions
 
-### `validate_physics_parameters(params, strict_mode)` Convenience function for physics parameter validation. Args: params: Dictionary of parameters to validate strict_mode: Raise exceptions for warnings if True Returns: Tuple of (is_valid, error_messages)
+### `validate_physics_parameters(params, strict_mode)`
 
-#### Source Code ```{literalinclude} ../../../src/plant/configurations/validation.py
+Convenience function for physics parameter validation. Args: params: Dictionary of parameters to validate strict_mode: Raise exceptions for warnings if True Returns: Tuple of (is_valid, error_messages)
+
+#### Source Code ```
+
+{literalinclude} ../../../src/plant/configurations/validation.py
 :language: python
 :pyobject: validate_physics_parameters
 :linenos:

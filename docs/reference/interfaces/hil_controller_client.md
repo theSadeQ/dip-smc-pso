@@ -263,7 +263,9 @@ print(f"P95 latency: {np.percentile(latencies, 95):.2f} ms")
 print(f"P99 latency: {np.percentile(latencies, 99):.2f} ms")
 ```
 
-## Example 5: Robust Client with Retry Logic
+## Example 5: Robust
+
+Client with Retry Logic
 
 ```python
 # example-metadata:

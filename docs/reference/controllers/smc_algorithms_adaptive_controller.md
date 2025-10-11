@@ -84,7 +84,9 @@ V(s, \tilde{K}) = \frac{1}{2}s^2 + \frac{1}{2\gamma}\tilde{K}^2
 
 ## Classes
 
-### `ModularAdaptiveSMC` Modular Adaptive SMC using composition of focused components. Adaptive SMC law: u = -K(t) * sign(s)
+### `ModularAdaptiveSMC`
+
+Modular Adaptive SMC using composition of focused components. Adaptive SMC law: u = -K(t) * sign(s)
 Where K(t) adapts online: K̇ = γ|s| - σK #### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/adaptive/controller.py
 :language: python
 :pyobject: ModularAdaptiveSMC
@@ -93,9 +95,13 @@ Where K(t) adapts online: K̇ = γ|s| - σK #### Source Code ```{literalinclude}
 
 ---
 
-## `AdaptiveSMC` Backward-compatible facade for the modular Adaptive SMC.
+## `AdaptiveSMC`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/adaptive/controller.py
+Backward-compatible facade for the modular Adaptive SMC.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/smc/algorithms/adaptive/controller.py
 
 :language: python
 :pyobject: AdaptiveSMC

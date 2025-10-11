@@ -2,7 +2,9 @@
 
 **Source:** `src\optimization\results\visualization\__init__.py`
 
-## Module Overview Visualization tools for optimization results and analysis
+## Module Overview Visualization
+
+tools for optimization results and analysis
 
 .
 

@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\performance\stability_analysis.py`
 
-## Module Overview Stability analysis tools for control systems
+## Module Overview Stability
+
+analysis tools for control systems
 
 .
 
@@ -75,18 +77,26 @@ Lyapunov analysis, eigenvalue analysis, and stability margin computation. ## Com
 
 ## Classes
 
-### `StabilityAnalysisConfig` Configuration for stability analysis.
+### `StabilityAnalysisConfig`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/performance/stability_analysis.py
+Configuration for stability analysis.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/performance/stability_analysis.py
 
 :language: python
 :pyobject: StabilityAnalysisConfig
 :linenos:
 ```
 
-### `StabilityAnalyzer` **Inherits from:** `PerformanceAnalyzer` stability analysis for linear and nonlinear systems.
+### `StabilityAnalyzer`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/performance/stability_analysis.py
+**Inherits from:** `PerformanceAnalyzer` stability analysis for linear and nonlinear systems.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/performance/stability_analysis.py
 :language: python
 :pyobject: StabilityAnalyzer
 :linenos:
@@ -102,7 +112,9 @@ Compute robustness margins (simplified).
 
 ## Functions
 
-### `create_stability_analyzer(config)` Factory function to create stability analyzer. Parameters
+### `create_stability_analyzer(config)`
+
+Factory function to create stability analyzer. Parameters
 
 config : Dict[str, Any], optional Configuration parameters Returns
 -------

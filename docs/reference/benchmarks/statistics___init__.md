@@ -2,7 +2,9 @@
 
 **Source:** `src\benchmarks\statistics\__init__.py`
 
-## Module Overview Statistical analysis package for control system benchmarking
+## Module Overview Statistical
+
+analysis package for control system benchmarking
 
 . This package provides statistical tools for analyzing
 

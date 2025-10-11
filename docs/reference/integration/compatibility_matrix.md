@@ -2,7 +2,9 @@
 
 **Source:** `src\integration\compatibility_matrix.py`
 
-## Module Overview Cross-domain compatibility validation matrix for system integration
+## Module Overview Cross-domain
+
+compatibility validation matrix for system integration
 
 . This module provides sophisticated compatibility validation across all project domains
 
@@ -18,9 +20,13 @@ production systems. ## Complete Source Code ```{literalinclude} ../../../src/int
 
 ## Classes
 
-### `CompatibilityLevel` **Inherits from:** `Enum` Compatibility assessment levels with increasing strictness.
+### `CompatibilityLevel`
 
-#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+**Inherits from:** `Enum` Compatibility assessment levels with increasing strictness.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/integration/compatibility_matrix.py
 :language: python
 :pyobject: CompatibilityLevel
 :linenos:
@@ -28,41 +34,59 @@ production systems. ## Complete Source Code ```{literalinclude} ../../../src/int
 
 ---
 
-## `DomainType` **Inherits from:** `Enum` Project domain types for compatibility analysis.
+## `DomainType`
 
-#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+**Inherits from:** `Enum` Project domain types for compatibility analysis.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/integration/compatibility_matrix.py
 
 :language: python
 :pyobject: DomainType
 :linenos:
 ```
 
-### `CompatibilityIssue` Represents a compatibility issue between system components.
+### `CompatibilityIssue`
 
-#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+Represents a compatibility issue between system components.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/integration/compatibility_matrix.py
 :language: python
 :pyobject: CompatibilityIssue
 :linenos:
 ```
 
-### `IntegrationPoint` Represents an integration point between domains.
+### `IntegrationPoint`
 
-#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+Represents an integration point between domains.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/integration/compatibility_matrix.py
 
 :language: python
 :pyobject: IntegrationPoint
 :linenos:
 ```
 
-### `DomainHealth` Health status of a specific domain.
+### `DomainHealth`
 
-#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+Health status of a specific domain.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/integration/compatibility_matrix.py
 :language: python
 :pyobject: DomainHealth
 :linenos:
 ```
 
-### `CompatibilityMatrix` compatibility validation matrix for cross-domain integration. This class provides sophisticated analysis of compatibility between all project
+### `CompatibilityMatrix`
+
+compatibility validation matrix for cross-domain integration. This class provides sophisticated analysis of compatibility between all project
 
 domains, identifying potential integration issues and providing actionable
 recommendations for resolution. #### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
@@ -75,17 +99,25 @@ recommendations for resolution. #### Source Code ```{literalinclude} ../../../sr
 
 ## Functions
 
-### `asdict(obj)` Convert dataclass to dictionary (simplified implementation).
+### `asdict(obj)`
 
-#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+Convert dataclass to dictionary (simplified implementation).
+
+#### Source Code ```
+
+{literalinclude} ../../../src/integration/compatibility_matrix.py
 :language: python
 :pyobject: asdict
 :linenos:
 ```
 
-### `main()` Main entry point for compatibility matrix analysis.
+### `main()`
 
-#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+Main entry point for compatibility matrix analysis.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/integration/compatibility_matrix.py
 
 :language: python
 :pyobject: main

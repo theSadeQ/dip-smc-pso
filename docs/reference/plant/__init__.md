@@ -2,7 +2,9 @@
 
 **Source:** `src\plant\__init__.py`
 
-## Module Overview Plant Dynamics and Physical Models for the Double Inverted Pendulum System
+## Module Overview Plant
+
+Dynamics and Physical Models for the Double Inverted Pendulum System
 
 . This package provides a modular architecture for DIP dynamics with three implementations: Modular Architecture:
 

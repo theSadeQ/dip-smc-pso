@@ -2,11 +2,15 @@
 
 **Source:** `src\optimization\objectives\control\stability.py`
 
-## Module Overview Stability margin objective functions for control optimization
+## Module Overview Stability
+
+margin objective functions for control optimization
 
 .
 
-## Complete Source Code ```{literalinclude}
+## Complete Source Code ```
+
+{literalinclude}
 
 ../../../src/optimization/objectives/control/stability.py
 
@@ -19,7 +23,9 @@
 
 ## Classes
 
-### `StabilityMarginObjective` **Inherits from:** `SimulationBasedObjective` Objective function for optimizing stability margins. This objective computes various stability metrics including:
+### `StabilityMarginObjective`
+
+**Inherits from:** `SimulationBasedObjective` Objective function for optimizing stability margins. This objective computes various stability metrics including:
 - Lyapunov stability analysis
 - Phase and gain margins (if linearized model available)
 - Settling time and damping characteristics

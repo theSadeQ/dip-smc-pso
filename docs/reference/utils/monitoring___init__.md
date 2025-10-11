@@ -2,7 +2,9 @@
 
 **Source:** `src\utils\monitoring\__init__.py`
 
-## Module Overview Real-time monitoring utilities for control systems
+## Module Overview Real-time
+
+monitoring utilities for control systems
 
 . This package provides tools for monitoring control loop performance,
 

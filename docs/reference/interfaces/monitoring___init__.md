@@ -2,7 +2,9 @@
 
 **Source:** `src\interfaces\monitoring\__init__.py`
 
-## Module Overview monitoring and diagnostics system for the interfaces framework
+## Module Overview monitoring
+
+and diagnostics system for the interfaces framework
 
 .
 

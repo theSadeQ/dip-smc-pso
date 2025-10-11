@@ -2,7 +2,9 @@
 
 **Source:** `src\interfaces\monitoring\alerting.py`
 
-## Module Overview Intelligent alerting system for interface monitoring
+## Module Overview Intelligent
+
+alerting system for interface monitoring
 
 .
 
@@ -19,9 +21,13 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ## Classes
 
-### `AlertLevel` **Inherits from:** `Enum` Alert severity levels.
+### `AlertLevel`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+**Inherits from:** `Enum` Alert severity levels.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: AlertLevel
 :linenos:
@@ -29,120 +35,176 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-## `AlertStatus` **Inherits from:** `Enum` Alert lifecycle status.
+## `AlertStatus`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+**Inherits from:** `Enum` Alert lifecycle status.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: AlertStatus
 :linenos:
 ```
 
-### `NotificationChannel` **Inherits from:** `Enum` Available notification channels.
+### `NotificationChannel`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+**Inherits from:** `Enum` Available notification channels.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: NotificationChannel
 :linenos:
 ```
 
-### `Alert` Alert message with metadata.
+### `Alert`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+Alert message with metadata.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: Alert
 :linenos:
 ```
 
-### `AlertRule` Rule for triggering alerts.
+### `AlertRule`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+Rule for triggering alerts.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: AlertRule
 :linenos:
 ```
 
-### `NotificationConfig` Configuration for notification channels.
+### `NotificationConfig`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+Configuration for notification channels.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: NotificationConfig
 :linenos:
 ```
 
-### `AlertCondition` **Inherits from:** `ABC` Base class for alert conditions.
+### `AlertCondition`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+**Inherits from:** `ABC` Base class for alert conditions.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: AlertCondition
 :linenos:
 ``` #### Methods (1) ##### `evaluate(self, metrics)` Evaluate condition against metrics. [View full source →](#method-alertcondition-evaluate)
 
-### `ThresholdCondition` **Inherits from:** `AlertCondition` Simple threshold-based condition.
+### `ThresholdCondition`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+**Inherits from:** `AlertCondition` Simple threshold-based condition.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: ThresholdCondition
 :linenos:
 ``` #### Methods (2) ##### `__init__(self, metric_name, threshold, operator)` [View full source →](#method-thresholdcondition-__init__) ##### `evaluate(self, metrics)` [View full source →](#method-thresholdcondition-evaluate)
 
-### `CompositeCondition` **Inherits from:** `AlertCondition` Composite condition combining multiple conditions.
+### `CompositeCondition`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+**Inherits from:** `AlertCondition` Composite condition combining multiple conditions.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: CompositeCondition
 :linenos:
 ``` #### Methods (2) ##### `__init__(self, conditions, operator)` [View full source →](#method-compositecondition-__init__) ##### `evaluate(self, metrics)` [View full source →](#method-compositecondition-evaluate)
 
-### `TrendCondition` **Inherits from:** `AlertCondition` Trend-based condition for detecting patterns.
+### `TrendCondition`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+**Inherits from:** `AlertCondition` Trend-based condition for detecting patterns.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: TrendCondition
 :linenos:
 ``` #### Methods (2) ##### `__init__(self, metric_name, window_size, trend_threshold)` [View full source →](#method-trendcondition-__init__) ##### `evaluate(self, metrics)` [View full source →](#method-trendcondition-evaluate)
 
-### `NotificationHandler` **Inherits from:** `ABC` Base class for notification handlers.
+### `NotificationHandler`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+**Inherits from:** `ABC` Base class for notification handlers.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: NotificationHandler
 :linenos:
 ``` #### Methods (4) ##### `__init__(self, config)` [View full source →](#method-notificationhandler-__init__) ##### `can_send(self, alert)` Check if notification can be sent (rate limiting). [View full source →](#method-notificationhandler-can_send) ##### `send_notification(self, alert)` Send notification for alert. [View full source →](#method-notificationhandler-send_notification) ##### `record_notification(self, alert)` Record that notification was sent. [View full source →](#method-notificationhandler-record_notification)
 
-### `EmailNotificationHandler` **Inherits from:** `NotificationHandler` Email notification handler.
+### `EmailNotificationHandler`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+**Inherits from:** `NotificationHandler` Email notification handler.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: EmailNotificationHandler
 :linenos:
 ``` #### Methods (1) ##### `send_notification(self, alert)` [View full source →](#method-emailnotificationhandler-send_notification)
 
-### `WebhookNotificationHandler` **Inherits from:** `NotificationHandler` Webhook notification handler.
+### `WebhookNotificationHandler`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+**Inherits from:** `NotificationHandler` Webhook notification handler.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: WebhookNotificationHandler
 :linenos:
 ``` #### Methods (1) ##### `send_notification(self, alert)` [View full source →](#method-webhooknotificationhandler-send_notification)
 
-### `LogNotificationHandler` **Inherits from:** `NotificationHandler` Log-based notification handler.
+### `LogNotificationHandler`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+**Inherits from:** `NotificationHandler` Log-based notification handler.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: LogNotificationHandler
 :linenos:
 ``` #### Methods (1) ##### `send_notification(self, alert)` [View full source →](#method-lognotificationhandler-send_notification)
 
-### `AlertManager` Main alert management system.
+### `AlertManager`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+Main alert management system.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: AlertManager
 :linenos:
@@ -152,52 +214,76 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ## Functions
 
-### `create_threshold_rule(name, metric_name, threshold, level, operator, channels)` Create a simple threshold-based alert rule.
+### `create_threshold_rule(name, metric_name, threshold, level, operator, channels)`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+Create a simple threshold-based alert rule.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: create_threshold_rule
 :linenos:
 ```
 
-### `create_composite_rule(name, conditions, level, logic, channels)` Create a composite alert rule with multiple conditions.
+### `create_composite_rule(name, conditions, level, logic, channels)`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+Create a composite alert rule with multiple conditions.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: create_composite_rule
 :linenos:
 ```
 
-### `setup_default_alerts()` Set up default system alerts.
+### `setup_default_alerts()`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+Set up default system alerts.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: setup_default_alerts
 :linenos:
 ```
 
-### `configure_email_notifications(smtp_server, smtp_port, username, password, from_address, to_addresses)` Configure email notification handler.
+### `configure_email_notifications(smtp_server, smtp_port, username, password, from_address, to_addresses)`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+Configure email notification handler.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: configure_email_notifications
 :linenos:
 ```
 
-### `configure_webhook_notifications(url, headers)` Configure webhook notification handler.
+### `configure_webhook_notifications(url, headers)`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+Configure webhook notification handler.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: configure_webhook_notifications
 :linenos:
 ```
 
-### `configure_log_notifications(log_level, logger_name)` Configure log notification handler.
+### `configure_log_notifications(log_level, logger_name)`
 
-#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+Configure log notification handler.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: configure_log_notifications
 :linenos:

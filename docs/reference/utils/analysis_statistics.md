@@ -2,7 +2,9 @@
 
 **Source:** `src\utils\analysis\statistics.py`
 
-## Module Overview Statistical analysis utilities for control system performance evaluation
+## Module Overview Statistical
+
+analysis utilities for control system performance evaluation
 
 . Provides statistical tools for analyzing control system
 
@@ -17,7 +19,9 @@ Monte Carlo analysis validation. ## Complete Source Code ```{literalinclude} ../
 
 ## Functions
 
-### `confidence_interval(data, confidence)` Return the mean and half‑width of a Student‑t confidence interval. Given an array of samples, compute the sample mean and the half‑width
+### `confidence_interval(data, confidence)`
+
+Return the mean and half‑width of a Student‑t confidence interval. Given an array of samples, compute the sample mean and the half‑width
 of the two‑sided confidence interval at the specified confidence
 level. The half‑width is ``tcrit * s / sqrt(n)``, where ``tcrit`` is
 the t‑distribution critical value, ``s`` is the sample standard
@@ -35,7 +39,9 @@ half_width : float Half‑width of the confidence interval. ``NaN`` when ``n < 2
 
 ---
 
-## `bootstrap_confidence_interval(data, statistic_func, confidence, n_bootstrap)` Compute bootstrap confidence interval for any statistic. Parameters
+## `bootstrap_confidence_interval(data, statistic_func, confidence, n_bootstrap)`
+
+Compute bootstrap confidence interval for any statistic. Parameters
 
 data : np.ndarray Original sample data.
 statistic_func : callable Function to compute the statistic of interest.
@@ -51,7 +57,9 @@ ci : tuple (lower_bound, upper_bound) of confidence interval. #### Source Code `
 
 ---
 
-### `welch_t_test(group1, group2, alpha)` Perform Welch's t-test for unequal variances. Parameters
+### `welch_t_test(group1, group2, alpha)`
+
+Perform Welch's t-test for unequal variances. Parameters
 ----------
 group1, group2 : np.ndarray Two independent samples to compare.
 alpha : float Significance level (default: 0.05). Returns
@@ -63,7 +71,9 @@ results : dict Dictionary containing test statistic, p-value, degrees of freedom
 
 ---
 
-### `one_way_anova(groups, alpha)` Perform one-way ANOVA. Parameters
+### `one_way_anova(groups, alpha)`
+
+Perform one-way ANOVA. Parameters
 
 groups : list of np.ndarray List of independent groups to compare.
 alpha : float Significance level. Returns
@@ -75,7 +85,9 @@ results : dict ANOVA results including F-statistic, p-value, and effect size. ##
 
 ---
 
-### `monte_carlo_analysis(simulation_func, parameter_distributions, n_trials, confidence_level)` Perform Monte Carlo analysis of system performance. Parameters
+### `monte_carlo_analysis(simulation_func, parameter_distributions, n_trials, confidence_level)`
+
+Perform Monte Carlo analysis of system performance. Parameters
 ----------
 simulation_func : callable Function that takes parameters and returns performance metrics.
 parameter_distributions : dict Dictionary mapping parameter names to random sampling functions.
@@ -89,7 +101,9 @@ results : dict Monte Carlo analysis results including statistics and confidence 
 
 ---
 
-### `performance_comparison_summary(controller_results, metric_name, confidence_level)` Generate comparison summary for multiple controllers. Parameters
+### `performance_comparison_summary(controller_results, metric_name, confidence_level)`
+
+Generate comparison summary for multiple controllers. Parameters
 
 controller_results : dict Dictionary mapping controller names to performance arrays.
 metric_name : str Name of the performance metric being compared.
@@ -102,7 +116,9 @@ summary : dict comparison summary with statistics and tests. #### Source Code ``
 
 ---
 
-### `sample_size_calculation(effect_size, power, alpha, test_type)` Calculate required sample size for statistical tests. Parameters
+### `sample_size_calculation(effect_size, power, alpha, test_type)`
+
+Calculate required sample size for statistical tests. Parameters
 ----------
 effect_size : float Expected effect size (Cohen's d for t-test).
 power : float Desired statistical power (1 - beta).

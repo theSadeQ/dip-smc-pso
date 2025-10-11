@@ -2,7 +2,9 @@
 
 **Source:** `src\utils\validation\__init__.py`
 
-## Module Overview Parameter validation utilities for control engineering
+## Module Overview Parameter
+
+validation utilities for control engineering
 
 . This package provides validation functions for control system
 

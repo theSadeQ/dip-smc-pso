@@ -2,11 +2,15 @@
 
 **Source:** `src\simulation\results\processors.py`
 
-## Module Overview Result processing and analysis tools
+## Module Overview Result
+
+processing and analysis tools
 
 .
 
-## Complete Source Code ```{literalinclude}
+## Complete Source Code ```
+
+{literalinclude}
 
 ../../../src/simulation/results/processors.py
 
@@ -19,9 +23,13 @@
 
 ## Classes
 
-### `ResultProcessor` Process and analyze simulation results.
+### `ResultProcessor`
 
-#### Source Code ```{literalinclude} ../../../src/simulation/results/processors.py
+Process and analyze simulation results.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/simulation/results/processors.py
 :language: python
 :pyobject: ResultProcessor
 :linenos:

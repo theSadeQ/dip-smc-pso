@@ -2,7 +2,9 @@
 
 **Source:** `src\utils\visualization\__init__.py`
 
-## Module Overview visualization package for control engineering
+## Module Overview visualization
+
+package for control engineering
 
 . This package provides complete visualization features including:
 

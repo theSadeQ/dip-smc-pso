@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\performance\control_analysis.py`
 
-## Module Overview Linearisation and controllability/observability analysis utilities
+## Module Overview Linearisation
+
+and controllability/observability analysis utilities
 
 .
 
@@ -82,7 +84,9 @@ control or estimation design. ## Complete Source Code ```{literalinclude} ../../
 
 ## Classes
 
-### `ControlAnalyzer` Control analysis utilities for linearization and controllability assessment. This class provides a convenient interface to control-theoretic analysis
+### `ControlAnalyzer`
+
+Control analysis utilities for linearization and controllability assessment. This class provides a convenient interface to control-theoretic analysis
 functions including linearization, controllability, and observability analysis. #### Source Code ```{literalinclude} ../../../src/analysis/performance/control_analysis.py
 :language: python
 :pyobject: ControlAnalyzer
@@ -93,7 +97,9 @@ functions including linearization, controllability, and observability analysis. 
 
 ## Functions
 
-### `linearize_dip(dyn, x_eq, u_eq)` Linearise the nonlinear dynamics around an equilibrium point. Parameters
+### `linearize_dip(dyn, x_eq, u_eq)`
+
+Linearise the nonlinear dynamics around an equilibrium point. Parameters
 
 dyn : callable A function implementing the continuous‑time dynamics ``f(x, u)``.
 x_eq : np.ndarray Equilibrium state vector at which to linearise.
@@ -120,7 +126,9 @@ np.ndarray The controllability matrix of shape ``(n, n*m)``. #### Source Code ``
 
 ---
 
-### `observability_matrix(A, C)` Construct the observability matrix of an LTI system. Given output matrix ``C`` of shape ``(p, n)``, the observability
+### `observability_matrix(A, C)` Construct the observability matrix of an LTI system. Given output matrix ``C`` of shape ``(p, n)``
+
+, the observability
 
 matrix is ``[C; CA; CA^2; …; CA^{n-1}]``. The system is observable
 when this matrix has full column rank equal to ``n``【920100172589331†L79-L84】. Parameters
@@ -135,7 +143,9 @@ np.ndarray Observability matrix of shape ``(p*n, n)``. #### Source Code ```{lite
 
 ---
 
-### `check_controllability_observability(A, B, C)` Check controllability and observability of an LTI system. Parameters
+### `check_controllability_observability(A, B, C)`
+
+Check controllability and observability of an LTI system. Parameters
 ----------
 A : np.ndarray State transition matrix ``(n, n)``.
 B : np.ndarray Input matrix ``(n, m)``.

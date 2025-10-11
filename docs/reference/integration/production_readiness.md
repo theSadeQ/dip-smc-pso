@@ -2,7 +2,9 @@
 
 **Source:** `src\integration\production_readiness.py`
 
-## Module Overview Production readiness scoring system with integrated pytest results and system health monitoring
+## Module Overview Production
+
+readiness scoring system with integrated pytest results and system health monitoring
 
 . This module provides production readiness assessment by integrating
 
@@ -17,9 +19,13 @@ into a unified scoring framework aligned with CLAUDE.md quality standards. ## Co
 
 ## Classes
 
-### `ReadinessLevel` **Inherits from:** `Enum` Production readiness levels with deployment recommendations.
+### `ReadinessLevel`
 
-#### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
+**Inherits from:** `Enum` Production readiness levels with deployment recommendations.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/integration/production_readiness.py
 :language: python
 :pyobject: ReadinessLevel
 :linenos:
@@ -27,33 +33,47 @@ into a unified scoring framework aligned with CLAUDE.md quality standards. ## Co
 
 ---
 
-## `ComponentType` **Inherits from:** `Enum` System component types for targeted assessment.
+## `ComponentType`
 
-#### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
+**Inherits from:** `Enum` System component types for targeted assessment.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/integration/production_readiness.py
 
 :language: python
 :pyobject: ComponentType
 :linenos:
 ```
 
-### `QualityGate` Represents a production quality gate with threshold and current value.
+### `QualityGate`
 
-#### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
+Represents a production quality gate with threshold and current value.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/integration/production_readiness.py
 :language: python
 :pyobject: QualityGate
 :linenos:
 ```
 
-### `ReadinessAssessment` production readiness assessment results.
+### `ReadinessAssessment`
 
-#### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
+production readiness assessment results.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/integration/production_readiness.py
 
 :language: python
 :pyobject: ReadinessAssessment
 :linenos:
 ```
 
-### `ProductionReadinessScorer` production readiness scoring system with pytest integration. This class integrates pytest results, coverage monitoring, compatibility analysis,
+### `ProductionReadinessScorer`
+
+production readiness scoring system with pytest integration. This class integrates pytest results, coverage monitoring, compatibility analysis,
 and system health metrics to provide authoritative production readiness scoring
 aligned with CLAUDE.md quality standards and research-grade requirements. #### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
 :language: python
@@ -65,9 +85,13 @@ aligned with CLAUDE.md quality standards and research-grade requirements. #### S
 
 ## Functions
 
-### `main()` Main entry point for production readiness assessment.
+### `main()`
 
-#### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
+Main entry point for production readiness assessment.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/integration/production_readiness.py
 
 :language: python
 :pyobject: main

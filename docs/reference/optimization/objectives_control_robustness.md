@@ -2,11 +2,15 @@
 
 **Source:** `src\optimization\objectives\control\robustness.py`
 
-## Module Overview Robustness objective functions for control optimization
+## Module Overview Robustness
+
+objective functions for control optimization
 
 .
 
-## Complete Source Code ```{literalinclude}
+## Complete Source Code ```
+
+{literalinclude}
 
 ../../../src/optimization/objectives/control/robustness.py
 
@@ -19,7 +23,9 @@
 
 ## Classes
 
-### `RobustnessObjective` **Inherits from:** `SimulationBasedObjective` Objective function for optimizing control robustness. This objective evaluates controller performance under various
+### `RobustnessObjective`
+
+**Inherits from:** `SimulationBasedObjective` Objective function for optimizing control robustness. This objective evaluates controller performance under various
 uncertainties and disturbances including:
 - Parameter variations (mass, length, damping)
 - Measurement noise

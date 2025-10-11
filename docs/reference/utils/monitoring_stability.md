@@ -2,7 +2,9 @@
 
 **Source:** `src\utils\monitoring\stability.py`
 
-## Module Overview Lyapunov Decrease Ratio (LDR) and stability monitoring for control systems
+## Module Overview Lyapunov
+
+Decrease Ratio (LDR) and stability monitoring for control systems
 
 . Implements the stability monitoring solution from Issue #1 resolution plan,
 
@@ -16,7 +18,9 @@ including LDR monitoring, saturation tracking, and dynamics conditioning. ## Com
 
 ## Classes
 
-### `LyapunovDecreaseMonitor` Monitor Lyapunov Decrease Ratio for stability assessment. Implements LDR monitoring as specified in Issue #1 resolution:
+### `LyapunovDecreaseMonitor`
+
+Monitor Lyapunov Decrease Ratio for stability assessment. Implements LDR monitoring as specified in Issue #1 resolution:
 - Alert when LDR < 95% over 200-500ms rolling window (post-transient)
 - Track sigma*sigma_dot for sliding surface analysis #### Source Code ```{literalinclude} ../../../src/utils/monitoring/stability.py
 :language: python
@@ -26,7 +30,9 @@ including LDR monitoring, saturation tracking, and dynamics conditioning. ## Com
 
 ---
 
-## `SaturationMonitor` Monitor actuator saturation duty and rate-limit violations. Implements saturation monitoring as specified in Issue #1 resolution:
+## `SaturationMonitor`
+
+Monitor actuator saturation duty and rate-limit violations. Implements saturation monitoring as specified in Issue #1 resolution:
 
 - Alert when duty > 20-30% or rate hits > 1% beyond transient #### Source Code ```{literalinclude} ../../../src/utils/monitoring/stability.py
 :language: python
@@ -36,16 +42,22 @@ including LDR monitoring, saturation tracking, and dynamics conditioning. ## Com
 
 ---
 
-### `DynamicsConditioningMonitor` Monitor dynamics matrix conditioning and inversion health. Implements conditioning monitoring as specified in Issue #1 resolution:
+### `DynamicsConditioningMonitor`
+
+Monitor dynamics matrix conditioning and inversion health. Implements conditioning monitoring as specified in Issue #1 resolution:
 - Alert on sustained κ(M(q)) above threshold or spike in fallback inversions #### Source Code ```{literalinclude} ../../../src/utils/monitoring/stability.py
 :language: python
 :pyobject: DynamicsConditioningMonitor
 :linenos:
 ``` #### Methods (3) ##### `__init__(self, condition_threshold, spike_threshold, fallback_threshold, window_size_ms, dt)` Initialize conditioning monitor. [View full source →](#method-dynamicsconditioningmonitor-__init__) ##### `update(self, mass_matrix, used_fallback)` Update monitor with dynamics matrix info. [View full source →](#method-dynamicsconditioningmonitor-update) ##### `reset(self)` Reset monitoring state. [View full source →](#method-dynamicsconditioningmonitor-reset)
 
-### `StabilityMonitoringSystem` Integrated stability monitoring system for Issue #1 resolution. Combines LDR, saturation, and conditioning monitors for stability assessment as specified in the resolution plan.
+### `StabilityMonitoringSystem`
 
-#### Source Code ```{literalinclude} ../../../src/utils/monitoring/stability.py
+Integrated stability monitoring system for Issue #1 resolution. Combines LDR, saturation, and conditioning monitors for stability assessment as specified in the resolution plan.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/utils/monitoring/stability.py
 
 :language: python
 :pyobject: StabilityMonitoringSystem

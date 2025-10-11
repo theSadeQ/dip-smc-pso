@@ -2,7 +2,9 @@
 
 **Source:** `src\optimization\validation\pso_bounds_validator.py`
 
-## Module Overview PSO Bounds Validation and Optimization Module
+## Module Overview PSO
+
+Bounds Validation and Optimization Module
 
 . This module provides validation and optimization of PSO parameter bounds
 
@@ -24,9 +26,13 @@ type and provides intelligent bounds adjustment based on system characteristics.
 
 ## Classes
 
-### `BoundsValidationResult` Result of bounds validation analysis.
+### `BoundsValidationResult`
 
-#### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_validator.py
+Result of bounds validation analysis.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/optimization/validation/pso_bounds_validator.py
 :language: python
 :pyobject: BoundsValidationResult
 :linenos:
@@ -34,7 +40,9 @@ type and provides intelligent bounds adjustment based on system characteristics.
 
 ---
 
-## `PSOBoundsValidator` Advanced PSO bounds validator for control system optimization. This class provides validation and optimization of PSO parameter
+## `PSOBoundsValidator`
+
+Advanced PSO bounds validator for control system optimization. This class provides validation and optimization of PSO parameter
 
 bounds to ensure effective controller tuning. #### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_validator.py
 :language: python
@@ -46,7 +54,9 @@ bounds to ensure effective controller tuning. #### Source Code ```{literalinclud
 
 ## Functions
 
-### `validate_pso_configuration(config)` Validate complete PSO configuration for all controllers. Parameters
+### `validate_pso_configuration(config)`
+
+Validate complete PSO configuration for all controllers. Parameters
 ----------
 config : ConfigSchema Complete system configuration Returns
 -------

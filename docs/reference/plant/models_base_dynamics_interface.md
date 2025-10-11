@@ -204,7 +204,9 @@ Optimize for computational efficiency:
 import time
 from numba import njit
 
-# Enable Numba JIT compilation for hot loops
+# Enable Numba JIT
+
+compilation for hot loops
 @njit
 def batch_dynamics_step(states, controls, params):
     """Vectorized dynamics computation."""

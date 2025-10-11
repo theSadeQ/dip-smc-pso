@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\validation\metrics.py`
 
-## Module Overview Statistical and validation metrics for analysis systems
+## Module Overview Statistical
+
+and validation metrics for analysis systems
 
 .
 
@@ -123,9 +125,13 @@ PV = \max_{t \in [0,T]} (|u(t)| - u_{\max})
 
 ## Functions
 
-### `compute_basic_metrics(data)` Compute basic statistical metrics for data analysis. Args: data: Input data array Returns: Dictionary containing basic statistical metrics
+### `compute_basic_metrics(data)`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+Compute basic statistical metrics for data analysis. Args: data: Input data array Returns: Dictionary containing basic statistical metrics
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/metrics.py
 :language: python
 :pyobject: compute_basic_metrics
 :linenos:
@@ -133,60 +139,88 @@ PV = \max_{t \in [0,T]} (|u(t)| - u_{\max})
 
 ---
 
-## `compute_performance_metrics(reference, actual)` Compute performance metrics comparing actual vs reference data. Args: reference: Reference/target data actual: Actual measured data Returns: Dictionary containing performance metrics
+## `compute_performance_metrics(reference, actual)`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+Compute performance metrics comparing actual vs reference data. Args: reference: Reference/target data actual: Actual measured data Returns: Dictionary containing performance metrics
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/metrics.py
 
 :language: python
 :pyobject: compute_performance_metrics
 :linenos:
 ```
 
-### `compute_control_metrics(control_signals, time_vector)` Compute control-specific performance metrics. Args: control_signals: Control input signals over time time_vector: Optional time vector for time-based metrics Returns: Dictionary containing control metrics
+### `compute_control_metrics(control_signals, time_vector)`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+Compute control-specific performance metrics. Args: control_signals: Control input signals over time time_vector: Optional time vector for time-based metrics Returns: Dictionary containing control metrics
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/metrics.py
 :language: python
 :pyobject: compute_control_metrics
 :linenos:
 ```
 
-### `compute_stability_metrics(states, reference_state)` Compute stability-related metrics for state trajectories. Args: states: State trajectory matrix (time x state_dim) reference_state: Optional reference state for deviation metrics Returns: Dictionary containing stability metrics
+### `compute_stability_metrics(states, reference_state)`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+Compute stability-related metrics for state trajectories. Args: states: State trajectory matrix (time x state_dim) reference_state: Optional reference state for deviation metrics Returns: Dictionary containing stability metrics
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/metrics.py
 
 :language: python
 :pyobject: compute_stability_metrics
 :linenos:
 ```
 
-### `compute_frequency_metrics(signal, sampling_rate, frequency_bands)` Compute frequency domain metrics for signal analysis. Args: signal: Input signal sampling_rate: Sampling rate in Hz frequency_bands: Optional list of (low, high) frequency bands Returns: Dictionary containing frequency domain metrics
+### `compute_frequency_metrics(signal, sampling_rate, frequency_bands)`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+Compute frequency domain metrics for signal analysis. Args: signal: Input signal sampling_rate: Sampling rate in Hz frequency_bands: Optional list of (low, high) frequency bands Returns: Dictionary containing frequency domain metrics
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/metrics.py
 :language: python
 :pyobject: compute_frequency_metrics
 :linenos:
 ```
 
-### `compute_statistical_significance(data1, data2, test_type)` Compute statistical significance between two data sets. Args: data1: First data set data2: Second data set test_type: Type of statistical test ('ttest', 'mannwhitney', 'ks') Returns: Dictionary containing test statistics and p-value
+### `compute_statistical_significance(data1, data2, test_type)`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+Compute statistical significance between two data sets. Args: data1: First data set data2: Second data set test_type: Type of statistical test ('ttest', 'mannwhitney', 'ks') Returns: Dictionary containing test statistics and p-value
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/metrics.py
 
 :language: python
 :pyobject: compute_statistical_significance
 :linenos:
 ```
 
-### `compute_robustness_metrics(nominal_performance, perturbed_performances, metric_names)` Compute robustness metrics comparing nominal vs perturbed performance. Args: nominal_performance: Performance metrics for nominal conditions perturbed_performances: List of performance metrics under perturbations metric_names: Optional list of metric names to analyze Returns: Dictionary of robustness metrics for each performance metric
+### `compute_robustness_metrics(nominal_performance, perturbed_performances, metric_names)`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+Compute robustness metrics comparing nominal vs perturbed performance. Args: nominal_performance: Performance metrics for nominal conditions perturbed_performances: List of performance metrics under perturbations metric_names: Optional list of metric names to analyze Returns: Dictionary of robustness metrics for each performance metric
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/metrics.py
 :language: python
 :pyobject: compute_robustness_metrics
 :linenos:
 ```
 
-### `compute_comprehensive_metrics(states, controls, time_vector, reference_states, reference_controls)` Compute metrics for control system analysis. Args: states: State trajectory matrix controls: Control signal vector time_vector: Time vector reference_states: Optional reference state trajectory reference_controls: Optional reference control signals Returns: Dictionary containing metrics
+### `compute_comprehensive_metrics(states, controls, time_vector, reference_states, reference_controls)`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+Compute metrics for control system analysis. Args: states: State trajectory matrix controls: Control signal vector time_vector: Time vector reference_states: Optional reference state trajectory reference_controls: Optional reference control signals Returns: Dictionary containing metrics
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/validation/metrics.py
 
 :language: python
 :pyobject: compute_comprehensive_metrics
@@ -240,7 +274,9 @@ for name, ctrl in controllers.items(): result = run_simulation(ctrl, dynamics, [
 ``` ### Energy-Based Metrics ```python
 # example-metadata:
 
-# runnable: false # Track energy conservation (for unforced natural dynamics)
+# runnable: false #
+
+Track energy conservation (for unforced natural dynamics)
 
 def compute_energy_drift(result, dynamics): """Measure energy drift as validation check.""" energies = [dynamics.compute_total_energy(x) for x in result.states] initial_energy = energies[0] drift = np.abs(np.array(energies) - initial_energy) / initial_energy * 100 max_drift = np.max(drift) mean_drift = np.mean(drift) return {'max_drift_%': max_drift, 'mean_drift_%': mean_drift} energy_metrics = compute_energy_drift(result, dynamics)
 print(f"Energy drift: {energy_metrics['max_drift_%']:.3f}% (max), " f"{energy_metrics['mean_drift_%']:.3f}% (mean)")

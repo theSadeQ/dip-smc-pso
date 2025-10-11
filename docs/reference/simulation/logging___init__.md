@@ -2,7 +2,9 @@
 
 **Source:** `src\simulation\logging\__init__.py`
 
-## Module Overview Data logging and recording for simulation framework
+## Module Overview Data
+
+logging and recording for simulation framework
 
 .
 
@@ -17,7 +19,9 @@ performance metrics, and real-time recording for analysis and debugging. ## Comp
 
 ## Advanced Mathematical Theory
 
-### Structured Logging Theory Structured logging provides data recording for simulation analysis and debugging.
+### Structured Logging Theory
+
+Structured logging provides data recording for simulation analysis and debugging.
 
 #### Log Level Hierarchy $$
 \text{Level} = \{\text{DEBUG} < \text{INFO} < \text{WARNING} < \text{ERROR} < \text{CRITICAL}\}

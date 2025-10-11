@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\validation\statistical_benchmarks.py`
 
-## Module Overview Statistical benchmarking utilities for the Double Inverted Pendulum project
+## Module Overview Statistical
+
+benchmarking utilities for the Double Inverted Pendulum project
 
 .
 
@@ -127,7 +129,9 @@ CI = \frac{1}{N-1} \sum_{k=1}^{N} |u_k - u_{k-1}|
 
 ## Classes
 
-### `StatisticalBenchmarks` Statistical benchmarking utilities for control system analysis. This class provides a unified interface for running statistical benchmarks,
+### `StatisticalBenchmarks`
+
+Statistical benchmarking utilities for control system analysis. This class provides a unified interface for running statistical benchmarks,
 comparing controller performance, and analyzing experimental results. #### Source Code ```{literalinclude} ../../../src/analysis/validation/statistical_benchmarks.py
 :language: python
 :pyobject: StatisticalBenchmarks
@@ -138,7 +142,9 @@ comparing controller performance, and analyzing experimental results. #### Sourc
 
 ## Functions
 
-### `compute_metrics(t, x, u, sigma, max_force)` Compute performance metrics for a batch of trajectories. This function maintains exact compatibility with the original
+### `compute_metrics(t, x, u, sigma, max_force)`
+
+Compute performance metrics for a batch of trajectories. This function maintains exact compatibility with the original
 
 implementation while delegating to the new modular structure. Parameters
 ----------
@@ -155,7 +161,9 @@ dict Mapping of metric names to scalar values. Each metric is averaged across th
 
 ---
 
-### `run_trials(controller_factory, cfg, n_trials, seed, randomise_physics, noise_std)` Run multiple simulations and return per‑trial metrics with confidence intervals. This function maintains exact compatibility with the original implementation
+### `run_trials(controller_factory, cfg, n_trials, seed, randomise_physics, noise_std)`
+
+Run multiple simulations and return per‑trial metrics with confidence intervals. This function maintains exact compatibility with the original implementation
 while using the new modular architecture under the hood. The function executes ``n_trials`` independent simulations of the
 double inverted pendulum under the supplied controller factory and
 configuration. For each trial it collects performance metrics and
@@ -178,7 +186,9 @@ list of dict, dict A list containing the raw metrics for each trial and a dictio
 
 ---
 
-### `run_trials_with_advanced_statistics(controller_factory, cfg, n_trials, seed, confidence_level, use_bootstrap)` Run trials with advanced statistical analysis. This function extends the original capability with additional
+### `run_trials_with_advanced_statistics(controller_factory, cfg, n_trials, seed, confidence_level, use_bootstrap)`
+
+Run trials with advanced statistical analysis. This function extends the original capability with additional
 
 statistical analysis options. Parameters
 ----------
@@ -194,7 +204,9 @@ list of dict, dict Metrics list and statistical analysis results #### Source Cod
 
 ---
 
-### `compare_controllers(controller_factory_a, controller_factory_b, cfg, n_trials, seed)` Compare two controllers using statistical analysis. Parameters
+### `compare_controllers(controller_factory_a, controller_factory_b, cfg, n_trials, seed)`
+
+Compare two controllers using statistical analysis. Parameters
 ----------
 controller_factory_a, controller_factory_b : Callable Controller factories to compare
 cfg : Any Configuration object

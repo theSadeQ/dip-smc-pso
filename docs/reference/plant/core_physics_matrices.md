@@ -490,7 +490,9 @@ Compute all physics matrices in a single call for efficiency.
 state = np.array([0.1, 0.05, -0.03, 0.2, 0.1, -0.05])
 M, C, G = physics.compute_all_matrices(state)
 
-# Verify dynamics equation: M⁻¹(τ - C·q̇ - G) = q̈
+# Verify dynamics equation:
+
+M⁻¹(τ - C·q̇ - G) = q̈
 tau = np.array([10.0, 0.0, 0.0])  # Control force
 q_dot = state[3:]
 q_ddot = np.linalg.solve(M, tau - C @ q_dot - G)
@@ -588,7 +590,9 @@ from src.plant.configurations import UnifiedDIPConfig
 config = UnifiedDIPConfig()
 physics = DIPPhysicsMatrices(config)
 
-# Define state: [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂]
+# Define state: [x,
+
+θ₁, θ₂, ẋ, θ̇₁, θ̇₂]
 state = np.array([0.0, 0.1, -0.05, 0.0, 0.2, -0.1])
 
 # Compute physics matrices
@@ -606,7 +610,9 @@ print(f"\nGravity Vector G:\n{G}")
 ```python
 from src.plant.models.full import FullDIPDynamics
 
-# Create full dynamics model (uses DIPPhysicsMatrices internally)
+# Create full dynamics
+
+model (uses DIPPhysicsMatrices internally)
 dynamics = FullDIPDynamics(config)
 
 # Simulate one timestep
@@ -754,7 +760,9 @@ def compute_inertia_batch(physics, states):
         M_batch[i] = physics.compute_inertia_matrix(states[i])
     return M_batch
 
-# More efficient: Use Numba parallel loops (future enhancement)
+# More efficient: Use
+
+Numba parallel loops (future enhancement)
 ```
 
 ## Memory Efficiency

@@ -2,7 +2,9 @@
 
 **Source:** `src\interfaces\hardware\__init__.py`
 
-## Module Overview Hardware abstraction and device driver framework for control systems
+## Module Overview Hardware
+
+abstraction and device driver framework for control systems
 
 .
 

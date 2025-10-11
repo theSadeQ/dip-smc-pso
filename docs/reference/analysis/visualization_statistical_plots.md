@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\visualization\statistical_plots.py`
 
-## Module Overview Statistical visualization module for control system analysis
+## Module Overview Statistical
+
+visualization module for control system analysis
 
 .
 
@@ -71,9 +73,13 @@ and Monte Carlo simulation visualizations. ## Complete Source Code ```{literalin
 
 ## Classes
 
-### `StatisticalPlotter` Advanced statistical plotting for control system analysis.
+### `StatisticalPlotter`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/visualization/statistical_plots.py
+Advanced statistical plotting for control system analysis.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/visualization/statistical_plots.py
 :language: python
 :pyobject: StatisticalPlotter
 :linenos:

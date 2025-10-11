@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\visualization\diagnostic_plots.py`
 
-## Module Overview Diagnostic visualization module for control system analysis
+## Module Overview Diagnostic
+
+visualization module for control system analysis
 
 .
 
@@ -65,9 +67,13 @@ and control performance visualization. ## Complete Source Code ```{literalinclud
 
 ## Classes
 
-### `DiagnosticPlotter` Specialized diagnostic plotting for control systems.
+### `DiagnosticPlotter`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/visualization/diagnostic_plots.py
+Specialized diagnostic plotting for control systems.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/visualization/diagnostic_plots.py
 :language: python
 :pyobject: DiagnosticPlotter
 :linenos:

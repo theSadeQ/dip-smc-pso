@@ -196,8 +196,12 @@ beta = 3.0  # Slope parameter
 u_sw = saturate(s, epsilon, method='tanh', slope=beta)
 print(f"Switching control: {u_sw:.4f}")
 
-# For s >> epsilon, u_sw → 1.0
-# For s << -epsilon, u_sw → -1.0
+# For s >>
+
+epsilon, u_sw → 1.0
+# For s <<
+
+-epsilon, u_sw → -1.0
 # For |s| < epsilon, smooth transition
 ```
 

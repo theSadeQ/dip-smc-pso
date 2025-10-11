@@ -92,9 +92,13 @@ u = u_{eq} + u_{sta}
 
 ## Classes
 
-### `TransitionFilter` Smoothing filter for control transitions between controllers.
+### `TransitionFilter`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/controller.py
+Smoothing filter for control transitions between controllers.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/controller.py
 :language: python
 :pyobject: TransitionFilter
 :linenos:
@@ -102,7 +106,9 @@ u = u_{eq} + u_{sta}
 
 ---
 
-## `ModularHybridSMC` Modular Hybrid SMC using intelligent switching between multiple controllers. Provides optimal performance by selecting the most appropriate SMC algorithm
+## `ModularHybridSMC`
+
+Modular Hybrid SMC using intelligent switching between multiple controllers. Provides optimal performance by selecting the most appropriate SMC algorithm
 
 based on current system conditions and performance metrics. #### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/controller.py
 :language: python
@@ -112,9 +118,13 @@ based on current system conditions and performance metrics. #### Source Code ```
 
 ---
 
-### `HybridSMC` Backward-compatible facade for the modular Hybrid SMC.
+### `HybridSMC`
 
-#### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/controller.py
+Backward-compatible facade for the modular Hybrid SMC.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/controller.py
 :language: python
 :pyobject: HybridSMC
 :linenos:

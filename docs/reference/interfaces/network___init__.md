@@ -2,7 +2,9 @@
 
 **Source:** `src\interfaces\network\__init__.py`
 
-## Module Overview Network communication module for control system interfaces
+## Module Overview Network
+
+communication module for control system interfaces
 
 .
 

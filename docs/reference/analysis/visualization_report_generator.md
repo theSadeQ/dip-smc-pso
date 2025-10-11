@@ -2,7 +2,9 @@
 
 **Source:** `src\analysis\visualization\report_generator.py`
 
-## Module Overview Report generation module for control system analysis
+## Module Overview Report
+
+generation module for control system analysis
 
 .
 
@@ -73,9 +75,13 @@ analysis results, visualizations, and statistical summaries into professional re
 
 ## Classes
 
-### `ReportGenerator` report generation for control system analysis.
+### `ReportGenerator`
 
-#### Source Code ```{literalinclude} ../../../src/analysis/visualization/report_generator.py
+report generation for control system analysis.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/analysis/visualization/report_generator.py
 :language: python
 :pyobject: ReportGenerator
 :linenos:

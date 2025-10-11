@@ -2,7 +2,9 @@
 
 **Source:** `src\utils\analysis\__init__.py`
 
-## Module Overview Statistical analysis package for control system performance evaluation
+## Module Overview Statistical
+
+analysis package for control system performance evaluation
 
 . This package provides statistical tools for rigorous
 
@@ -19,7 +21,9 @@ hypothesis testing, and Monte Carlo validation. ## Complete Source Code ```{lite
 
 ## Advanced Mathematical Theory
 
-### Analysis Utilities Theory (Detailed mathematical theory for analysis utilities to be added...) **Key concepts:**
+### Analysis Utilities Theory
+
+(Detailed mathematical theory for analysis utilities to be added...) **Key concepts:**
 - Mathematical foundations
 - Algorithmic principles
 - Performance characteristics

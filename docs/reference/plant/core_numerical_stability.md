@@ -6,7 +6,9 @@
 
 ---
 
-## Table of Contents ```{contents}
+## Table of Contents ```
+
+{contents}
 
 :local:
 :depth: 3
@@ -14,7 +16,9 @@
 
 ---
 
-## Module Overview Numerical Stability Utilities for Plant Dynamics. This module provides robust numerical methods essential for reliable dynamics computation in the presence of **ill-conditioned matrices**. When computing M(q)q̈ = τ - C(q,q̇)q̇ - G(q), the inertia matrix M(q) can become nearly singular for certain configurations, leading to catastrophic numerical errors. **Core Capabilities:** - **Matrix Conditioning Analysis**: Compute condition numbers and singular value ratios
+## Module Overview Numerical
+
+Stability Utilities for Plant Dynamics. This module provides robust numerical methods essential for reliable dynamics computation in the presence of **ill-conditioned matrices**. When computing M(q)q̈ = τ - C(q,q̇)q̇ - G(q), the inertia matrix M(q) can become nearly singular for certain configurations, leading to catastrophic numerical errors. **Core Capabilities:** - **Matrix Conditioning Analysis**: Compute condition numbers and singular value ratios
 - **Adaptive Tikhonov Regularization**: Stabilize ill-conditioned systems without sacrificing accuracy
 - **Robust Matrix Inversion**: Multiple fallback strategies for reliable computation
 - **Numerical Instability Detection**: Automatic monitoring and error reporting
@@ -24,7 +28,9 @@
 
 ## Mathematical Foundation
 
-### Matrix Conditioning **Definition:** The **condition number** of a matrix A measures the sensitivity of the solution x to perturbations in the right-hand side b when solving Ax = b: $$
+### Matrix Conditioning **Definition:**
+
+The **condition number** of a matrix A measures the sensitivity of the solution x to perturbations in the right-hand side b when solving Ax = b: $$
 \kappa(A) = \|A\| \cdot \|A^{-1}\|
 $$ For symmetric positive-definite matrices (like M(q)), using the 2-norm: $$
 \kappa_2(A) = \frac{\sigma_{\text{max}}(A)}{\sigma_{\text{min}}(A)}
@@ -71,7 +77,9 @@ $$ where:
 
 ---
 
-## Architecture Diagram ```{mermaid}
+## Architecture Diagram ```
+
+{mermaid}
 graph TD A[Matrix M_q_] --> B[Compute SVD: M = UΣVᵀ] B --> C[σ_max_ = max_Σ_] B --> D[σ_min_ = min_Σ_] C --> E[κ_M_ = σ_max_ / σ_min_] E --> F{κ_M_ < 10¹⁰?} F -->|Yes| G[Direct Inversion: M⁻¹] F -->|No| H{κ_M_ < 10¹⁴?} H -->|Yes| I[Tikhonov: _M + λI_⁻¹] H -->|No| J[SVD Pseudo-Inverse: M†] I --> K[Select λ adaptively] K --> L[λ = λ_base_ · _κ/κ_thresh__α] J --> M[Σ†_ii_ = σ_i_⁻¹ if σ_i_ > ε] G --> N[Return M⁻¹] L --> N M --> N N --> O[Log Regularization Stats] style F fill:#ff9 style H fill:#ff9 style K fill:#9cf style M fill:#fcf
 ``` ## Implementation Architecture ### Class Hierarchy ```
 
@@ -92,7 +100,9 @@ except NumericalInstabilityError as e: logger.error(f"Dynamics computation faile
 
 ---
 
-## Complete Source Code ```{literalinclude} ../../../src/plant/core/numerical_stability.py
+## Complete Source Code ```
+
+{literalinclude} ../../../src/plant/core/numerical_stability.py
 :language: python
 :linenos:
 ```
@@ -101,7 +111,9 @@ except NumericalInstabilityError as e: logger.error(f"Dynamics computation faile
 
 ## API Reference
 
-### Exception: NumericalInstabilityError **Inherits:** `RuntimeError` ```{literalinclude} ../../../src/plant/core/numerical_stability.py
+### Exception: NumericalInstabilityError **Inherits:** `RuntimeError` ```
+
+{literalinclude} ../../../src/plant/core/numerical_stability.py
 
 :language: python
 :pyobject: NumericalInstabilityError
@@ -117,7 +129,9 @@ except NumericalInstabilityError as e: print(f"Matrix inversion failed: {e}") # 
 
 ---
 
-### Protocol: MatrixRegularizer ```{literalinclude} ../../../src/plant/core/numerical_stability.py
+### Protocol: MatrixRegularizer ```
+
+{literalinclude} ../../../src/plant/core/numerical_stability.py
 
 :language: python
 :pyobject: MatrixRegularizer
@@ -126,7 +140,9 @@ except NumericalInstabilityError as e: print(f"Matrix inversion failed: {e}") # 
 A_{\text{reg}} = A + \lambda I, \quad \lambda > 0
 $$ **Returns:** Regularized matrix with improved conditioning ##### `check_conditioning(matrix: np.ndarray) -> bool` Check if matrix conditioning is acceptable. **Threshold:** Typically κ(A) < 1e12 **Returns:** True if matrix is well-conditioned, False otherwise
 
-### Class: AdaptiveRegularizer ```{literalinclude} ../../../src/plant/core/numerical_stability.py
+### Class: AdaptiveRegularizer ```
+
+{literalinclude} ../../../src/plant/core/numerical_stability.py
 :language: python
 :pyobject: AdaptiveRegularizer
 :linenos:
@@ -181,7 +197,9 @@ $$ **Use Case:** Real-time systems where SVD cost is prohibitive. ##### `_apply_
 
 ---
 
-### Class: MatrixInverter ```{literalinclude} ../../../src/plant/core/numerical_stability.py
+### Class: MatrixInverter ```
+
+{literalinclude} ../../../src/plant/core/numerical_stability.py
 :language: python
 :pyobject: MatrixInverter
 :linenos:
@@ -213,7 +231,9 @@ except NumericalInstabilityError: print("Matrix inversion failed - using approxi
 - `b`: Right-hand side vector **Returns:**
 - Solution vector x **Raises:**
 - `NumericalInstabilityError`: If system cannot be solved **Example:** ```python
-# Dynamics computation: M(q)q̈ = τ - C·q̇ - G
+# Dynamics computation: M(q)q̈
+
+= τ - C·q̇ - G
 
 M = physics.compute_inertia_matrix(state)
 forcing = tau - C @ q_dot - G # Solve for accelerations (preferred method)
@@ -226,7 +246,9 @@ q_ddot = inverter.solve_linear_system(M, forcing) # Equivalent but slower:
 
 ---
 
-## Class: NumericalStabilityMonitor ```{literalinclude} ../../../src/plant/core/numerical_stability.py
+## Class: NumericalStabilityMonitor ```
+
+{literalinclude} ../../../src/plant/core/numerical_stability.py
 :language: python
 :pyobject: NumericalStabilityMonitor
 :linenos:
@@ -259,7 +281,9 @@ print(f"Failure rate: {stats['failed_count'] / stats['total_inversions'] * 100:.
 
 ---
 
-## Function: fast_condition_estimate **Decorator:** `@njit` ```{literalinclude} ../../../src/plant/core/numerical_stability.py
+## Function: fast_condition_estimate **Decorator:** `@njit` ```
+
+{literalinclude} ../../../src/plant/core/numerical_stability.py
 
 :language: python
 :pyobject: fast_condition_estimate
@@ -285,7 +309,9 @@ print(f"Relative error: {abs(exact_cond - approx_cond) / exact_cond * 100:.1f}%"
 
 ## Usage Examples
 
-### Basic Regularization ```python
+### Basic Regularization ```
+
+python
 
 import numpy as np
 from src.plant.core import AdaptiveRegularizer # Create ill-conditioned matrix
@@ -337,7 +363,9 @@ print(f"Fixed κ: {np.linalg.cond(M_fixed):.2e}")
 
 ## Performance Considerations
 
-### SVD Computational Cost **Full SVD**: O(n³) for n×n matrix For 3×3 matrices (DIP dynamics):
+### SVD Computational Cost
+
+**Full SVD**: O(n³) for n×n matrix For 3×3 matrices (DIP dynamics):
 - **Typical time**: 5-10 μs (modern CPU)
 - **Acceptable** for real-time control at 1 kHz For larger systems (10×10):
 - **Typical time**: 100-200 μs
@@ -354,7 +382,9 @@ print(f"Fixed κ: {np.linalg.cond(M_fixed):.2e}")
 
 ---
 
-## Scientific References 1. **Golub, G.H., Van Loan, C.F.** (2013). *Matrix Computations* (4th ed.). Johns Hopkins University Press. Chapter 2: Matrix Analysis; Chapter 5: Eigenvalue Problems. 2. **Higham, N.J.** (2002). *Accuracy and Stability of Numerical Algorithms* (2nd ed.). SIAM. Chapter 7: Matrix Inversion; Chapter 15: Condition Number Estimation. 3. **Tikhonov, A.N., Arsenin, V.Y.** (1977). *approaches of Ill-Posed Problems*. Winston & Sons. Chapter 1: Regularization Methods. 4. **Trefethen, L.N., Bau, D.** (1997). *Numerical Linear Algebra*. SIAM. Lecture 12: Conditioning and Condition Numbers; Lecture 15: SVD and Pseudo-inverse. 5. **Horn, R.A., Johnson, C.R.** (2012). *Matrix Analysis* (2nd ed.). Cambridge University Press. Section 5.6: Condition Number and Matrix Norms.
+## Scientific References 1.
+
+**Golub, G.H., Van Loan, C.F.** (2013). *Matrix Computations* (4th ed.). Johns Hopkins University Press. Chapter 2: Matrix Analysis; Chapter 5: Eigenvalue Problems. 2. **Higham, N.J.** (2002). *Accuracy and Stability of Numerical Algorithms* (2nd ed.). SIAM. Chapter 7: Matrix Inversion; Chapter 15: Condition Number Estimation. 3. **Tikhonov, A.N., Arsenin, V.Y.** (1977). *approaches of Ill-Posed Problems*. Winston & Sons. Chapter 1: Regularization Methods. 4. **Trefethen, L.N., Bau, D.** (1997). *Numerical Linear Algebra*. SIAM. Lecture 12: Conditioning and Condition Numbers; Lecture 15: SVD and Pseudo-inverse. 5. **Horn, R.A., Johnson, C.R.** (2012). *Matrix Analysis* (2nd ed.). Cambridge University Press. Section 5.6: Condition Number and Matrix Norms.
 
 ---
 

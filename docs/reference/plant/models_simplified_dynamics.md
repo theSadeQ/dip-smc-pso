@@ -26,7 +26,9 @@ graph TD A[State x, Control u] --> B[Mass Matrix M_q_] A --> C[Coriolis Matrix C
 
 ## Classes
 
-### `SimplifiedDIPDynamics` **Inherits from:** `BaseDynamicsModel` Simplified Double Inverted Pendulum Dynamics Model. Modular implementation of simplified DIP dynamics featuring:
+### `SimplifiedDIPDynamics`
+
+**Inherits from:** `BaseDynamicsModel` Simplified Double Inverted Pendulum Dynamics Model. Modular implementation of simplified DIP dynamics featuring:
 - Type-safe configuration with validation
 - Numerical stability monitoring and recovery
 - Performance optimizations with JIT compilation
@@ -74,7 +76,9 @@ print(f"Energy drift: {energy_drift:.2f}%")
 ``` ### Linearization at Equilibrium ```python
 # example-metadata:
 
-# runnable: false # Linearize around upright equilibrium
+# runnable: false #
+
+Linearize around upright equilibrium
 
 equilibrium_state = [0, 0, 0, 0, 0, 0] # Upright, stationary
 equilibrium_control = 0.0 A, B = dynamics.compute_linearization(equilibrium_state, equilibrium_control) print("A matrix (state dynamics):")

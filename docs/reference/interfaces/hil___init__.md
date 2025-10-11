@@ -2,7 +2,9 @@
 
 **Source:** `src\interfaces\hil\__init__.py`
 
-## Module Overview Enhanced Hardware-in-the-Loop (HIL) system for control engineering
+## Module Overview Enhanced
+
+Hardware-in-the-Loop (HIL) system for control engineering
 
 .
 

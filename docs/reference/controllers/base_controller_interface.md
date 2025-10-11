@@ -100,7 +100,9 @@ class Controller(ABC):
 **Duck Typing:** "If it walks like a duck and quacks like a duck, it's a duck."
 
 ```python
-# No type checking - relies on runtime behavior
+# No type checking
+
+- relies on runtime behavior
 def simulate(controller):
     u = controller.compute_control(state, {}, {})  # Hope it works!
 ```
@@ -184,7 +186,9 @@ Python uses **C3 linearization** for multiple inheritance:
 class HybridAdaptiveSMC(AdaptiveSMC, SuperTwistingSMC):
     pass
 
-# MRO: HybridAdaptiveSMC → AdaptiveSMC → SuperTwistingSMC → Controller → ABC
+# MRO: HybridAdaptiveSMC →
+
+AdaptiveSMC → SuperTwistingSMC → Controller → ABC
 ```
 
 **Diamond problem:** C3 ensures consistent method resolution.
@@ -256,7 +260,9 @@ result_classical = simulate(classical, duration=5.0)
 result_adaptive = simulate(adaptive, duration=5.0)
 ```
 
-## Example 2: Duck Typing vs Explicit Protocol
+## Example 2: Duck
+
+Typing vs Explicit Protocol
 
 ```python
 # example-metadata:
@@ -273,8 +279,12 @@ def simulate_protocol(controller: ControllerProtocol):
     return u
 
 # mypy catches errors at compile time:
-# simulate_protocol(None)  # Error: None doesn't implement ControllerProtocol
-# simulate_protocol("foo")  # Error: str doesn't implement ControllerProtocol
+# simulate_protocol(None) # Error:
+
+None doesn't implement ControllerProtocol
+# simulate_protocol("foo") # Error:
+
+str doesn't implement ControllerProtocol
 ```
 
 ## Example 3: Liskov Substitution Principle
@@ -358,7 +368,9 @@ class MyCustomSMC(Controller):
     def initialize_history(self):
         return {'states': [], 'times': []}
 
-# Use custom controller with existing simulation infrastructure
+# Use custom controller
+
+with existing simulation infrastructure
 custom_controller = MyCustomSMC(gains=[10.0, 5.0, 50.0], max_force=100.0)
 result = simulate(custom_controller, duration=5.0)  # Works!
 ```

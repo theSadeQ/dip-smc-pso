@@ -88,24 +88,34 @@ print(f"Control effort: {result.control_effort:.2f}")
 
 ## Classes
 
-### `StateValidationError` **Inherits from:** `ValueError` Raised when state vector validation fails.
+### `StateValidationError`
 
-#### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
+**Inherits from:** `ValueError` Raised when state vector validation fails.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/plant/core/state_validation.py
 
 :language: python
 :pyobject: StateValidationError
 :linenos:
 ```
 
-### `StateValidator` **Inherits from:** `Protocol` Protocol for state validation strategies.
+### `StateValidator`
 
-#### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
+**Inherits from:** `Protocol` Protocol for state validation strategies.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/plant/core/state_validation.py
 :language: python
 :pyobject: StateValidator
 :linenos:
 ``` #### Methods (2) ##### `validate_state(self, state)` Validate state vector. [View full source →](#method-statevalidator-validate_state) ##### `sanitize_state(self, state)` Sanitize and correct state vector if possible. [View full source →](#method-statevalidator-sanitize_state)
 
-### `DIPStateValidator` Double Inverted Pendulum state vector validation. Validates state vectors for the DIP system ensuring:
+### `DIPStateValidator`
+
+Double Inverted Pendulum state vector validation. Validates state vectors for the DIP system ensuring:
 
 - Correct dimensionality (6-element vectors)
 - Physical bounds on positions and velocities
@@ -118,9 +128,13 @@ print(f"Control effort: {result.control_effort:.2f}")
 
 ---
 
-### `MinimalStateValidator` Minimal state validator for performance-critical applications. Provides only essential validation with minimal overhead.
+### `MinimalStateValidator`
 
-#### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
+Minimal state validator for performance-critical applications. Provides only essential validation with minimal overhead.
+
+#### Source Code ```
+
+{literalinclude} ../../../src/plant/core/state_validation.py
 :language: python
 :pyobject: MinimalStateValidator
 :linenos:

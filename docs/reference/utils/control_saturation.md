@@ -237,7 +237,9 @@ u_sat_vec = saturate(u_vec, u_min=-100.0, u_max=100.0)
 print(f"Vector saturation: {u_sat_vec}")  # [50, -100, 80]
 \`\`\`
 
-## Example 2: Smooth Saturation for Chattering Reduction
+## Example 2: Smooth
+
+Saturation for Chattering Reduction
 
 \`\`\`python
 from src.utils.control import smooth_sign
@@ -272,7 +274,9 @@ plt.grid(True)
 plt.show()
 \`\`\`
 
-## Example 3: Dead Zone for Noise Filtering
+## Example 3: Dead
+
+Zone for Noise Filtering
 
 \`\`\`python
 from src.utils.control import dead_zone
@@ -284,7 +288,9 @@ threshold = 0.1
 
 u_filtered = dead_zone(u_noisy, threshold)
 print(f"Filtered: {u_filtered}")
-# Result: [0, 0, 4.9, -2.9, 0] (small signals removed)
+# Result: [0, 0,
+
+4.9, -2.9, 0] (small signals removed)
 
 # Application: PD controller with dead zone
 
