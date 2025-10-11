@@ -419,8 +419,6 @@ json.dump(citations, open("artifacts/citations_validated.json", "w"), indent=2)
 
 ## 10. FAQ ### 10.1 General Questions **Q: Why are confidence scores important if we're researching all claims anyway?** A: Confidence scores prioritize manual review effort. Low-confidence CRITICAL claims get human validation before AI research to avoid wasting compute on false positives.
 
----
-
 **Q: Can I customize priority assignments?** A: Yes. Edit `assign_priority()` function in `.dev_tools/claim_extraction/merge_claims.py`: ```python
 # example-metadata:
 

@@ -1,7 +1,5 @@
 # PSO Convergence Analysis **Note:** PSO convergence analysis has been integrated into the PSO theory documentation. **See:** [PSO Optimization Complete Theory](./pso_optimization_complete.md)
 
----
-
 ## Convergence Analysis Topics For detailed PSO convergence analysis, refer to: - **Primary Documentation:** [theory/pso_optimization_complete.md](./pso_optimization_complete.md)
 
 - **Mathematical Foundations:** [mathematical_foundations/pso_algorithm_theory.md](../mathematical_foundations/pso_algorithm_theory.md)

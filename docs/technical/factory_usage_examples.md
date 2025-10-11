@@ -1,7 +1,5 @@
 # Factory Usage Examples - Guide ## Advanced Controller Factory Usage Patterns This document provides practical examples for using the enhanced controller factory system after the GitHub Issue #6 resolution.
 
----
-
 ## Table of Contents 1. [Basic Usage Examples](#basic-usage-examples)
 
 2. [Advanced Configuration Examples](#advanced-configuration-examples)
@@ -113,8 +111,6 @@ test_gains = [15.0, 12.0, 8.0, 6.0, 25.0, 4.0]
 is_valid = validate_smc_gains(SMCType.CLASSICAL, test_gains) if is_valid: print("Gains are valid for Classical SMC") # Use gains in optimization or controller creation
 else: print("Invalid gains - adjustment needed")
 ```
-
-
 
 ## Error Handling Examples
 

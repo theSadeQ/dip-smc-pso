@@ -212,8 +212,6 @@ python simulate.py --controller classical_smc --load-gains tuned_gains.json --pl
 
 ## Recommended Documentation Updates ### Priority: HIGH (Breaking Changes) 1. **Global find-replace in getting-started.md:** - `--ctrl` → `--controller` - `--save ` → `--save-gains ` - `--load ` → `--load-gains ` 2. **Update expected help output** (lines 151-167) - Show actual `--controller` syntax - Add new parameters: `--duration`, `--dt`, `--seed` - Remove controller enum from usage line (implementation doesn't show it) 3. **Update expected simulation output** (lines 192-205) - Show actual minimal output - Document expected warnings - Explain silent execution (results visible only with --plot) ### Priority: MEDIUM (User Experience) 4. **Add troubleshooting entry for state sanitization warning** - Explain this is normal behavior - Reassure users simulation is working correctly 5. **Document adaptation rate warning for hybrid controller** - Note this is advisory only - Confirm default configuration is stable 6. **Add note about simulation performance** - Document expected simulation duration (10-15s for 2s simulation) - Explain performance characteristics ### Priority: LOW (Future Enhancements) 7. **Consider enhancing simulate.py verbose output** - Match documented user experience - Add performance metrics computation and display - Provide learning-friendly progress logging
 
----
-
 ## Automated Validation Suite A automated validation suite has been created: **Location:** `scripts/validation/validate_getting_started.py` **Features:**
 
 - Python version validation

@@ -567,8 +567,6 @@ print(f"Conclusion: {adf['conclusion']}")
 
 ### 3.4 Hypothesis Testing **Purpose:** Quantify evidence for/against research claims. **Framework:** 1. State hypotheses: - H₀ (null): No effect / No difference - H₁ (alternative): Effect exists 2. Choose test statistic and significance level α (typically 0.05) 3. Compute p-value: P(observe data or more extreme | H₀ true) 4. Decision: - p < α: Reject H₀ (statistically significant) - p ≥ α: Cannot reject H₀ (not significant)
 
----
-
 #### 3.4.1 One-Sample Tests **Purpose:** Test if population mean equals hypothesized value. **t-Test:** ```
 
 H₀: μ = μ₀

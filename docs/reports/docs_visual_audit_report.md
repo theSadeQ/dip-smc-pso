@@ -251,8 +251,6 @@ else: await page.goto(file_url, wait_until="networkidle", timeout=30000)
 
 ## 🔧 Recommended Action Items ### Immediate (Priority: HIGH) 1. **Fix page timeout issues:** ```bash # Update screenshot_docs.py with timeout fix # Option: Use "domcontentloaded" instead of "networkidle" ``` 2. **Re-capture failed pages:** ```bash python scripts/analysis/screenshot_docs.py --retry-failed ``` 3. **Verify genindex.html manually:** ```bash # Open in browser to confirm it's accessible start file:///D:/Projects/main/docs/_build/html/genindex.html ``` ### Short-term (Priority: MEDIUM) 4. **Add "Back to Top" buttons for long pages** - Implement in Sphinx theme customization - Target pages > 5000px height 5. **Optimize screenshot file sizes** - Consider using JPEG for screenshots instead of PNG - Implement WebP format for modern browsers 6. **Add mobile viewport testing** ```python # Add to screenshot script viewport={"width": 375, "height": 812} # Mobile ``` ### Long-term (Priority: LOW) 7. **Improve presentation slide rendering** - Custom CSS for slide-derived content - Add download links to original slides 8. **Performance optimization** - Lazy-load images in long documents - Implement infinite scroll for very long pages 9. **Accessibility audit** - Check color contrast ratios - Verify screen reader compatibility - Test keyboard navigation
 
----
-
 ## 📈 Quality Metrics | Category | Score | Notes |
 
 |----------|-------|-------|
@@ -298,8 +296,6 @@ else: await page.goto(file_url, wait_until="networkidle", timeout=30000)
 ---
 
 ## ✅ Sign-off **Visual Audit Status:** ✅ PASSED (with minor improvements recommended) **Confidence Level:** HIGH (280/282 pages visually verified) **Deployment Recommendation:** ✅ APPROVED for production The documentation system is **publication-ready** with only 2 minor timeout issues to resolve. All critical rendering components (math, diagrams, code, citations) are functioning perfectly.
-
----
 
 **Generated:** 2025-10-03 by Claude Code Documentation Visual Auditor
 **Tool:** Playwright 1.55.0 + Chromium 140.0.7339.16
