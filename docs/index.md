@@ -83,6 +83,11 @@ guides/getting-started-validation-report
 streamlit_dashboard_guide
 hil_quickstart
 
+sitemap_interactive
+sitemap_cards
+sitemap_visual
+documentation_structure
+
 guides/index
 workflows/index
 
@@ -121,11 +126,45 @@ DEPENDENCIES
 PATTERNS
 CITATIONS
 bibliography
-documentation_structure
 context
 ```
 
-For a complete sitemap, see {doc}`documentation_structure`
+## Visual Navigation
+
+**Explore the documentation your way:**
+
+::::{grid} 1 2 3 3
+:gutter: 3
+
+:::{grid-item-card} 🎯 Interactive Graph
+:link: sitemap_interactive
+:link-type: doc
+
+Click, drag, and zoom through an interactive force-directed visualization
+:::
+
+:::{grid-item-card} 🎨 Card View
+:link: sitemap_cards
+:link-type: doc
+
+Beautiful card-based navigation with icons and descriptions
+:::
+
+:::{grid-item-card} 🗺️ Mindmap
+:link: sitemap_visual
+:link-type: doc
+
+Mermaid mindmap and flowchart visualizations
+:::
+
+:::{grid-item-card} 📜 Text Sitemap
+:link: documentation_structure
+:link-type: doc
+
+Traditional hierarchical text-based sitemap
+:::
+
+::::
 
 ## Quick Start
 

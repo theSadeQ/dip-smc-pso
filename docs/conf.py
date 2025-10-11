@@ -200,12 +200,14 @@ html_theme_options = {
 # Custom CSS and JavaScript files
 html_css_files = [
     'custom.css',
+    'visual-tree.css',
 ]
 
 html_js_files = [
     # 'back-to-top.js',  # Disabled - using Furo's built-in back-to-top button
     'lazy-load.js',
     'dark-mode.js',
+    'visual-sitemap.js',
 ]
 
 # HTML output options
