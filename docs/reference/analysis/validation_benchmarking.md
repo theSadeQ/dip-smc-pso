@@ -34,7 +34,9 @@ Configuration for benchmarking.
 
 ## `BenchmarkSuite`
 
-**Inherits from:** `StatisticalValidator` benchmarking and comparison framework.
+**Inherits from:** `StatisticalValidator`
+
+Advanced benchmarking and comparison framework.
 
 #### Source Code ```
 
