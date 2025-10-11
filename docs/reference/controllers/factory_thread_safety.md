@@ -18,7 +18,7 @@
 
 ---
 
-### `MinimalLockManager` Manages minimal, efficient locking strategies. #### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
+## `MinimalLockManager` Manages minimal, efficient locking strategies. #### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
 
 :language: python
 :pyobject: MinimalLockManager
