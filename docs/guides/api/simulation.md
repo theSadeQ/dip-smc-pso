@@ -707,7 +707,7 @@ batch_results = run_batch_simulation(controller, dynamics, initial_conditions, s
    batch_results = run_batch_simulation(...)  # Numba acceleration
    ```
 
-## Problem: Results don't match expectations
+### Problem: Results don't match expectations
 
 **Cause:** Model mismatch or incorrect configuration
 
