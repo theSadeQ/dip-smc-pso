@@ -100,8 +100,6 @@ optimization workflows and provides result analysis. Features:
 :linenos:
 ```
 
----
-
 ### `OptimizationResultsManager` Advanced management system for PSO optimization results. This class provides functionality for storing, loading, analyzing,
 and comparing optimization results with full provenance tracking. #### Source Code ```{literalinclude} ../../../src/optimization/core/results_manager.py
 :language: python

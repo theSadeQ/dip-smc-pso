@@ -98,7 +98,6 @@ functions including linearization, controllability, and observability analysis. 
 dyn : callable A function implementing the continuous‑time dynamics ``f(x, u)``.
 x_eq : np.ndarray Equilibrium state vector at which to linearise.
 u_eq : float Equilibrium control input. Returns
--------
 (A, B) : tuple of np.ndarray Continuous‑time state matrix ``A`` and input matrix ``B`` obtained via numerical differentiation of the dynamics. #### Source Code ```{literalinclude} ../../../src/analysis/performance/control_analysis.py
 :language: python
 :pyobject: linearize_dip
@@ -113,7 +112,6 @@ The system is controllable if this matrix has full row rank equal to ``n``【920
 ----------
 A : np.ndarray State transition matrix of shape ``(n, n)``.
 B : np.ndarray Input matrix of shape ``(n, m)``. Returns
--------
 np.ndarray The controllability matrix of shape ``(n, n*m)``. #### Source Code ```{literalinclude} ../../../src/analysis/performance/control_analysis.py
 :language: python
 :pyobject: controllability_matrix
@@ -129,7 +127,6 @@ when this matrix has full column rank equal to ``n``【920100172589331†L79-L84
 ----------
 A : np.ndarray State transition matrix of shape ``(n, n)``.
 C : np.ndarray Output matrix of shape ``(p, n)``. Returns
--------
 np.ndarray Observability matrix of shape ``(p*n, n)``. #### Source Code ```{literalinclude} ../../../src/analysis/performance/control_analysis.py
 :language: python
 :pyobject: observability_matrix

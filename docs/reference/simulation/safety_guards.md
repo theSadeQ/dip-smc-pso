@@ -494,7 +494,6 @@ SafetyViolationError
 Create default safety guards from configuration.
 
 Parameters
-----------
 config : Any
     Configuration object
 

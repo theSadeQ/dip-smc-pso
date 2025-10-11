@@ -25,7 +25,6 @@ deadline violations in real-time systems.
 Measure and analyse loop latency.
 
 Parameters
-----------
 dt : float
     Nominal control period (seconds).
 margin : float, optional

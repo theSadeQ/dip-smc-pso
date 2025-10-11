@@ -147,7 +147,6 @@ x : np.ndarray Array of shape ``(B, N+1, S)`` containing the state trajectories 
 u : np.ndarray Array of shape ``(B, N)`` containing the control inputs.
 sigma : np.ndarray Array of shape ``(B, N)`` containing sliding variables or auxiliary outputs. (Not used in basic metrics but preserved for compatibility)
 max_force : float Maximum allowable magnitude of the control input. Used to count constraint violations. Returns
--------
 dict Mapping of metric names to scalar values. Each metric is averaged across the batch dimension. #### Source Code ```{literalinclude} ../../../src/analysis/validation/statistical_benchmarks.py
 :language: python
 :pyobject: compute_metrics
@@ -187,7 +186,6 @@ controller_factory, cfg, n_trials, seed : Same as run_trials()
 confidence_level : float, optional Confidence level for intervals (default 0.95)
 use_bootstrap : bool, optional Whether to use bootstrap confidence intervals
 **kwargs : Additional arguments passed to trial runner Returns
--------
 list of dict, dict Metrics list and statistical analysis results #### Source Code ```{literalinclude} ../../../src/analysis/validation/statistical_benchmarks.py
 :language: python
 :pyobject: run_trials_with_advanced_statistics

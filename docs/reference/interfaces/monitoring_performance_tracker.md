@@ -36,8 +36,6 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 :linenos:
 ```
 
----
-
 ### `SerializationMetrics` serialization performance metrics.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
@@ -45,8 +43,6 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 :pyobject: SerializationMetrics
 :linenos:
 ``` #### Methods (2) ##### `update_statistics(self)` Update computed statistics from raw data. [View full source →](#method-serializationmetrics-update_statistics) ##### `get_summary(self)` Get metrics summary. [View full source →](#method-serializationmetrics-get_summary)
-
----
 
 ### `PerformanceMonitor` Real-time performance monitoring for serialization operations.
 
@@ -57,8 +53,6 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 :linenos:
 ``` #### Methods (9) ##### `__init__(self, window_size, enable_detailed_logging)` [View full source →](#method-performancemonitor-__init__) ##### `record_operation(self, serializer_id, operation_type, duration, data_size, success, error_type)` Record a serialization operation. [View full source →](#method-performancemonitor-record_operation) ##### `get_metrics(self, serializer_id)` Get metrics for a specific serializer or all serializers. [View full source →](#method-performancemonitor-get_metrics) ##### `get_summary(self, serializer_id)` Get performance summary. [View full source →](#method-performancemonitor-get_summary) ##### `reset_metrics(self, serializer_id)` Reset metrics for specific serializer or all serializers. [View full source →](#method-performancemonitor-reset_metrics) ##### `set_performance_threshold(self, metric_name, threshold)` Set performance threshold for alerting. [View full source →](#method-performancemonitor-set_performance_threshold) ##### `add_alert_handler(self, handler)` Add performance alert handler. [View full source →](#method-performancemonitor-add_alert_handler) ##### `_check_performance_alerts(self, serializer_id, metrics)` Check for performance threshold violations. [View full source →](#method-performancemonitor-_check_performance_alerts) ##### `get_recent_metrics(self, serializer_id, count)` Get recent metrics for a serializer. [View full source →](#method-performancemonitor-get_recent_metrics)
 
----
-
 ### `PerformanceSerializer` **Inherits from:** `SerializerInterface` Performance-aware serializer wrapper with monitoring and adaptive optimization.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
@@ -66,8 +60,6 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 :pyobject: PerformanceSerializer
 :linenos:
 ``` #### Methods (11) ##### `__init__(self, base_serializer, monitor, enable_adaptive_optimization)` [View full source →](#method-performanceserializer-__init__) ##### `format_type(self)` [View full source →](#method-performanceserializer-format_type) ##### `content_type(self)` [View full source →](#method-performanceserializer-content_type) ##### `serialize(self, data)` Serialize data with performance monitoring. [View full source →](#method-performanceserializer-serialize) ##### `deserialize(self, data, target_type)` Deserialize data with performance monitoring. [View full source →](#method-performanceserializer-deserialize) ##### `get_performance_metrics(self)` Get performance metrics for this serializer. [View full source →](#method-performanceserializer-get_performance_metrics) ##### `get_performance_summary(self)` Get performance summary for this serializer. [View full source →](#method-performanceserializer-get_performance_summary) ##### `reset_performance_metrics(self)` Reset performance metrics for this serializer. [View full source →](#method-performanceserializer-reset_performance_metrics) ##### `set_performance_threshold(self, metric_name, threshold)` Set performance threshold for this serializer. [View full source →](#method-performanceserializer-set_performance_threshold) ##### `_check_adaptive_optimization(self)` Check if adaptive optimization should be triggered. [View full source →](#method-performanceserializer-_check_adaptive_optimization) ##### `_suggest_optimizations(self, metrics)` Suggest performance optimizations. [View full source →](#method-performanceserializer-_suggest_optimizations)
-
----
 
 ### `BatchSerializer` High-performance batch serialization for multiple data items.
 
@@ -90,8 +82,6 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 :linenos:
 ```
 
----
-
 ### `create_performance_serializer(base_serializer, monitor)` Create performance-aware serializer wrapper.
 
 #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
@@ -100,8 +90,6 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 :pyobject: create_performance_serializer
 :linenos:
 ```
-
----
 
 ### `get_performance_summary()` Get performance summary for all monitored serializers.
 

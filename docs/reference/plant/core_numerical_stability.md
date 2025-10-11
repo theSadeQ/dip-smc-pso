@@ -126,8 +126,6 @@ except NumericalInstabilityError as e: print(f"Matrix inversion failed: {e}") # 
 A_{\text{reg}} = A + \lambda I, \quad \lambda > 0
 $$ **Returns:** Regularized matrix with improved conditioning ##### `check_conditioning(matrix: np.ndarray) -> bool` Check if matrix conditioning is acceptable. **Threshold:** Typically κ(A) < 1e12 **Returns:** True if matrix is well-conditioned, False otherwise
 
----
-
 ### Class: AdaptiveRegularizer ```{literalinclude} ../../../src/plant/core/numerical_stability.py
 :language: python
 :pyobject: AdaptiveRegularizer

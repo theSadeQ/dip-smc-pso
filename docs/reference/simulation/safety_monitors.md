@@ -38,8 +38,6 @@
 :linenos:
 ``` #### Methods (5) ##### `__init__(self)` Initialize safety monitor. [View full source →](#method-safetymonitor-__init__) ##### `record_violation(self, violation_type, message, step)` Record a safety violation. [View full source →](#method-safetymonitor-record_violation) ##### `record_warning(self, warning_type, message, step)` Record a safety warning. [View full source →](#method-safetymonitor-record_warning) ##### `get_safety_report(self)` Get safety report. [View full source →](#method-safetymonitor-get_safety_report) ##### `_compute_safety_score(self)` Compute overall safety score (0-1, higher is better). [View full source →](#method-safetymonitor-_compute_safety_score)
 
----
-
 ### `SystemHealthMonitor` Monitor overall system health and performance.
 
 #### Source Code ```{literalinclude} ../../../src/simulation/safety/monitors.py

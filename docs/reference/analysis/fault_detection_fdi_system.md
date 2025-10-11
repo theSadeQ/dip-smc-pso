@@ -94,8 +94,6 @@ detection methods, and statistical analysis. ## Complete Source Code ```{literal
 :linenos:
 ```
 
----
-
 ### `FaultDetectionConfig` Configuration for enhanced fault detection system.
 
 #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
@@ -103,8 +101,6 @@ detection methods, and statistical analysis. ## Complete Source Code ```{literal
 :pyobject: FaultDetectionConfig
 :linenos:
 ```
-
----
 
 ### `FaultSignature` Signature for fault identification.
 
@@ -115,8 +111,6 @@ detection methods, and statistical analysis. ## Complete Source Code ```{literal
 :linenos:
 ```
 
----
-
 ### `EnhancedFaultDetector` **Inherits from:** `FaultDetector` Enhanced fault detection and isolation system.
 
 #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
@@ -124,8 +118,6 @@ detection methods, and statistical analysis. ## Complete Source Code ```{literal
 :pyobject: EnhancedFaultDetector
 :linenos:
 ``` #### Methods (35) ##### `__init__(self, config)` Initialize enhanced fault detector. [View full source →](#method-enhancedfaultdetector-__init__) ##### `detector_type(self)` Type of fault detector. [View full source →](#method-enhancedfaultdetector-detector_type) ##### `detect(self, data)` Detect faults in the system. [View full source →](#method-enhancedfaultdetector-detect) ##### `reset(self)` Reset detector state for new analysis. [View full source →](#method-enhancedfaultdetector-reset) ##### `_perform_residual_based_detection(self, data)` Perform residual-based fault detection. [View full source →](#method-enhancedfaultdetector-_perform_residual_based_detection) ##### `_model_free_residual_detection(self, data)` Model-free residual detection using statistical properties. [View full source →](#method-enhancedfaultdetector-_model_free_residual_detection) ##### `_model_based_residual_detection(self, data, dynamics_model)` Model-based residual detection using dynamics prediction. [View full source →](#method-enhancedfaultdetector-_model_based_residual_detection) ##### `_perform_statistical_detection(self, data)` Perform statistical fault detection. [View full source →](#method-enhancedfaultdetector-_perform_statistical_detection) ##### `_perform_signal_based_detection(self, data)` Perform signal-based fault detection using frequency analysis. [View full source →](#method-enhancedfaultdetector-_perform_signal_based_detection) ##### `_perform_change_point_detection(self, data)` Perform change point detection. [View full source →](#method-enhancedfaultdetector-_perform_change_point_detection) ##### `_perform_fault_classification(self, detection_results)` Classify detected faults. [View full source →](#method-enhancedfaultdetector-_perform_fault_classification) ##### `_assess_fault_severity(self, detection_results)` Assess fault severity. [View full source →](#method-enhancedfaultdetector-_assess_fault_severity) ##### `_perform_fault_isolation(self, data, detection_results)` Perform fault isolation to identify fault location. [View full source →](#method-enhancedfaultdetector-_perform_fault_isolation) ##### `_apply_persistence_filter(self, violations)` Apply persistence filter to reduce false alarms. [View full source →](#method-enhancedfaultdetector-_apply_persistence_filter) ##### `_test_normality(self, data)` Test for normality using Shapiro-Wilk test. [View full source →](#method-enhancedfaultdetector-_test_normality) ##### `_test_stationarity(self, data)` Test for stationarity using simple variance-based test. [View full source →](#method-enhancedfaultdetector-_test_stationarity) ##### `_detect_outliers(self, data)` Detect outliers using statistical methods. [View full source →](#method-enhancedfaultdetector-_detect_outliers) ##### `_detect_change_points_statistical(self, data)` Detect change points using statistical methods. [View full source →](#method-enhancedfaultdetector-_detect_change_points_statistical) ##### `_analyze_frequency_bands(self, freqs, psd)` Analyze power in different frequency bands. [View full source →](#method-enhancedfaultdetector-_analyze_frequency_bands) ##### `_detect_spectral_anomalies(self, freqs, psd)` Detect spectral anomalies. [View full source →](#method-enhancedfaultdetector-_detect_spectral_anomalies) ##### `_analyze_harmonics(self, signal_data, fs)` Analyze harmonic content of signal. [View full source →](#method-enhancedfaultdetector-_analyze_harmonics) ##### `_compute_thd(self, fundamental_magnitude, harmonics)` Compute total harmonic distortion. [View full source →](#method-enhancedfaultdetector-_compute_thd) ##### `_cusum_change_point_detection(self, data)` CUSUM-based change point detection. [View full source →](#method-enhancedfaultdetector-_cusum_change_point_detection) ##### `_variance_change_detection(self, data)` Detect changes in variance. [View full source →](#method-enhancedfaultdetector-_variance_change_detection) ##### `_mean_change_detection(self, data)` Detect changes in mean. [View full source →](#method-enhancedfaultdetector-_mean_change_detection) ##### `_extract_fault_features(self, detection_results)` Extract features for fault classification. [View full source →](#method-enhancedfaultdetector-_extract_fault_features) ##### `_classify_with_signatures(self, features, fault_signatures)` Classify fault using known signatures. [View full source →](#method-enhancedfaultdetector-_classify_with_signatures) ##### `_classify_heuristic(self, features)` Heuristic fault classification based on features. [View full source →](#method-enhancedfaultdetector-_classify_heuristic) ##### `_compute_signature_similarity(self, features1, features2)` Compute similarity between feature sets. [View full source →](#method-enhancedfaultdetector-_compute_signature_similarity) ##### `_compute_statistical_severity(self, statistical_results)` Compute severity based on statistical anomalies. [View full source →](#method-enhancedfaultdetector-_compute_statistical_severity) ##### `_categorize_severity(self, severity_score)` Categorize severity score into levels. [View full source →](#method-enhancedfaultdetector-_categorize_severity) ##### `_compute_state_anomaly_score(self, state_data, detection_results)` Compute anomaly score for a specific state. [View full source →](#method-enhancedfaultdetector-_compute_state_anomaly_score) ##### `_compute_isolation_confidence(self, isolation_results)` Compute confidence in fault isolation. [View full source →](#method-enhancedfaultdetector-_compute_isolation_confidence) ##### `_determine_overall_status(self, results)` Determine overall fault detection status. [View full source →](#method-enhancedfaultdetector-_determine_overall_status) ##### `_generate_diagnostic_summary(self, results)` Generate diagnostic summary. [View full source →](#method-enhancedfaultdetector-_generate_diagnostic_summary)
-
----
 
 ### `DynamicsProtocol` **Inherits from:** `TypingProtocol` Protocol defining the expected interface for dynamics models.
 
@@ -135,8 +127,6 @@ detection methods, and statistical analysis. ## Complete Source Code ```{literal
 :pyobject: DynamicsProtocol
 :linenos:
 ``` #### Methods (1) ##### `step(self, state, u, dt)` Advance the system dynamics by one timestep. [View full source →](#method-dynamicsprotocol-step)
-
----
 
 ### `FDIsystem` Legacy fault detection and isolation system for backward compatibility. This is the original FDI system that provides basic fault detection
 capabilities. For new applications, consider using EnhancedFaultDetector

@@ -58,7 +58,6 @@ RMS = √(⟨u²(t)⟩) This metric quantifies actuator usage and energy consump
 values indicate more efficient control that requires less actuation. Parameters
 ----------
 u : np.ndarray Control input trajectories of shape (B, N) Returns
--------
 float RMS control effort averaged across batch dimension #### Source Code ```{literalinclude} ../../../src/benchmarks/metrics/control_metrics.py
 :language: python
 :pyobject: compute_rms_control_effort

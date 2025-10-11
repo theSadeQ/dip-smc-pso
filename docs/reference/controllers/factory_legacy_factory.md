@@ -378,7 +378,6 @@ Backwards-compatible convenience wrapper used by tests and the CLI.
 Delegates to build_controller() so mapping/validation stays centralized.
 
 Parameters
-----------
 name : str
     Controller name (aliases allowed).
 **kwargs :

@@ -43,7 +43,6 @@ confidence in published results.
 Inject commit, configuration hash and seed into log records.
 
 Parameters
-----------
 commit_sha : str
     Short Git commit SHA (or "unknown" if unavailable).
 config_hash : str

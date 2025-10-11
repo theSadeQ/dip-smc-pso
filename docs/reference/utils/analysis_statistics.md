@@ -55,7 +55,6 @@ ci : tuple (lower_bound, upper_bound) of confidence interval. #### Source Code `
 ----------
 group1, group2 : np.ndarray Two independent samples to compare.
 alpha : float Significance level (default: 0.05). Returns
--------
 results : dict Dictionary containing test statistic, p-value, degrees of freedom, and decision about null hypothesis. #### Source Code ```{literalinclude} ../../../src/utils/analysis/statistics.py
 :language: python
 :pyobject: welch_t_test
@@ -68,7 +67,6 @@ results : dict Dictionary containing test statistic, p-value, degrees of freedom
 
 groups : list of np.ndarray List of independent groups to compare.
 alpha : float Significance level. Returns
--------
 results : dict ANOVA results including F-statistic, p-value, and effect size. #### Source Code ```{literalinclude} ../../../src/utils/analysis/statistics.py
 :language: python
 :pyobject: one_way_anova
@@ -83,7 +81,6 @@ simulation_func : callable Function that takes parameters and returns performanc
 parameter_distributions : dict Dictionary mapping parameter names to random sampling functions.
 n_trials : int Number of Monte Carlo trials.
 confidence_level : float Confidence level for intervals. Returns
--------
 results : dict Monte Carlo analysis results including statistics and confidence intervals. #### Source Code ```{literalinclude} ../../../src/utils/analysis/statistics.py
 :language: python
 :pyobject: monte_carlo_analysis
@@ -97,7 +94,6 @@ results : dict Monte Carlo analysis results including statistics and confidence 
 controller_results : dict Dictionary mapping controller names to performance arrays.
 metric_name : str Name of the performance metric being compared.
 confidence_level : float Confidence level for intervals. Returns
--------
 summary : dict comparison summary with statistics and tests. #### Source Code ```{literalinclude} ../../../src/utils/analysis/statistics.py
 :language: python
 :pyobject: performance_comparison_summary

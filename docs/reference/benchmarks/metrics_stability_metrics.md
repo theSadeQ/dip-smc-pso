@@ -59,7 +59,6 @@ lead to:
 t : np.ndarray Time vector of length N+1
 x : np.ndarray State trajectories of shape (B, N+1, S)
 state_index : int Index of state variable to analyze Returns
--------
 float Peak time averaged across batch dimension #### Source Code ```{literalinclude} ../../../src/benchmarks/metrics/stability_metrics.py
 :language: python
 :pyobject: compute_peak_time

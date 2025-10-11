@@ -84,8 +84,6 @@ Lyapunov analysis, eigenvalue analysis, and stability margin computation. ## Com
 :linenos:
 ```
 
----
-
 ### `StabilityAnalyzer` **Inherits from:** `PerformanceAnalyzer` stability analysis for linear and nonlinear systems.
 
 #### Source Code ```{literalinclude} ../../../src/analysis/performance/stability_analysis.py

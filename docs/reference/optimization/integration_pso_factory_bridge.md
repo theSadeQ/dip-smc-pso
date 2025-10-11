@@ -93,8 +93,6 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 :linenos:
 ```
 
----
-
 ### `PSOFactoryConfig` Configuration for PSO-Factory integration.
 
 #### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
@@ -102,8 +100,6 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 :pyobject: PSOFactoryConfig
 :linenos:
 ```
-
----
 
 ### `EnhancedPSOFactory` Enhanced PSO-Factory integration with advanced optimization capabilities.
 
@@ -126,8 +122,6 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 :linenos:
 ```
 
----
-
 ### `optimize_classical_smc()` Optimize Classical SMC controller using PSO.
 
 #### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
@@ -137,8 +131,6 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 :linenos:
 ```
 
----
-
 ### `optimize_adaptive_smc()` Optimize Adaptive SMC controller using PSO.
 
 #### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
@@ -146,8 +138,6 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 :pyobject: optimize_adaptive_smc
 :linenos:
 ```
-
----
 
 ### `optimize_sta_smc()` Optimize Super-Twisting SMC controller using PSO.
 

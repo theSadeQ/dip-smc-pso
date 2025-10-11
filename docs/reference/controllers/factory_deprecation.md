@@ -35,8 +35,6 @@ parameter renames, and interface modifications to ensure smooth migration paths.
 :linenos:
 ```
 
----
-
 ### `ControllerDeprecationWarner` Systematic deprecation warning system for controller configurations. Tracks deprecated parameters, provides migration guidance, and ensures
 backward compatibility during transition periods. #### Source Code ```{literalinclude} ../../../src/controllers/factory/deprecation.py
 :language: python
@@ -57,8 +55,6 @@ backward compatibility during transition periods. #### Source Code ```{literalin
 :linenos:
 ```
 
----
-
 ### `get_controller_migration_guide(controller_type)` Get migration guide for a specific controller type. Args: controller_type: Type of controller Returns: List of migration guidance strings
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory/deprecation.py
@@ -66,8 +62,6 @@ backward compatibility during transition periods. #### Source Code ```{literalin
 :pyobject: get_controller_migration_guide
 :linenos:
 ```
-
----
 
 ### `validate_config_compatibility(controller_type, config_params)` Validate configuration compatibility for a controller type. Args: controller_type: Type of controller config_params: Configuration parameters to validate Returns: Dictionary of compatibility issues
 

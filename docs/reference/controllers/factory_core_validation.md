@@ -35,8 +35,6 @@ with detailed error reporting and recovery mechanisms. ## Complete Source Code `
 :linenos:
 ```
 
----
-
 ### `validate_configuration(config, controller_type, check_completeness)` Validate controller configuration object. Args: config: Configuration object to validate controller_type: Type of controller check_completeness: Check for all required parameters Returns: Detailed validation results
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
@@ -44,8 +42,6 @@ with detailed error reporting and recovery mechanisms. ## Complete Source Code `
 :pyobject: validate_configuration
 :linenos:
 ```
-
----
 
 ### `_validate_classical_smc_gains(gains, result, check_stability)` Validate Classical SMC specific gain constraints.
 
@@ -56,8 +52,6 @@ with detailed error reporting and recovery mechanisms. ## Complete Source Code `
 :linenos:
 ```
 
----
-
 ### `_validate_adaptive_smc_gains(gains, result, check_stability)` Validate Adaptive SMC specific gain constraints.
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
@@ -65,8 +59,6 @@ with detailed error reporting and recovery mechanisms. ## Complete Source Code `
 :pyobject: _validate_adaptive_smc_gains
 :linenos:
 ```
-
----
 
 ### `_validate_sta_smc_gains(gains, result, check_stability)` Validate Super-Twisting SMC specific gain constraints.
 
@@ -77,8 +69,6 @@ with detailed error reporting and recovery mechanisms. ## Complete Source Code `
 :linenos:
 ```
 
----
-
 ### `_validate_hybrid_smc_gains(gains, result, check_stability)` Validate Hybrid SMC specific gain constraints.
 
 #### Source Code ```{literalinclude} ../../../src/controllers/factory/core/validation.py
@@ -86,8 +76,6 @@ with detailed error reporting and recovery mechanisms. ## Complete Source Code `
 :pyobject: _validate_hybrid_smc_gains
 :linenos:
 ```
-
----
 
 ### `validate_state_vector(state)` Validate system state vector.
 
@@ -97,8 +85,6 @@ with detailed error reporting and recovery mechanisms. ## Complete Source Code `
 :pyobject: validate_state_vector
 :linenos:
 ```
-
----
 
 ### `validate_control_output(control, max_force)` Validate control output value.
 

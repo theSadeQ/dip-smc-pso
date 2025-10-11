@@ -41,8 +41,6 @@ factory integration requirements. Features:
 :linenos:
 ```
 
----
-
 ### `BoundsValidationResult` Result of bounds validation analysis.
 
 #### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
@@ -50,8 +48,6 @@ factory integration requirements. Features:
 :pyobject: BoundsValidationResult
 :linenos:
 ```
-
----
 
 ### `PSOBoundsOptimizer` Advanced PSO parameter bounds optimizer for controller factory integration. Optimizes PSO parameter bounds for maximum convergence efficiency and
 

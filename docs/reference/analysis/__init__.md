@@ -70,7 +70,6 @@ legacy compatibility and modern enhanced capabilities. ## Complete Source Code `
 
 analyzer_type : str Type of analyzer ('advanced', 'stability', 'robustness')
 **kwargs Additional configuration parameters Returns
--------
 PerformanceAnalyzer Configured performance analyzer #### Source Code ```{literalinclude} ../../../src/analysis/__init__.py
 :language: python
 :pyobject: create_performance_analyzer
@@ -83,7 +82,6 @@ PerformanceAnalyzer Configured performance analyzer #### Source Code ```{literal
 ----------
 detector_type : str Type of detector ('enhanced', 'legacy')
 **kwargs Additional configuration parameters Returns
--------
 FaultDetector Configured fault detector #### Source Code ```{literalinclude} ../../../src/analysis/__init__.py
 :language: python
 :pyobject: create_fault_detector
@@ -101,8 +99,6 @@ FaultDetector Configured fault detector #### Source Code ```{literalinclude} ../
 :linenos:
 ```
 
----
-
 ### `create_monte_carlo_analyzer()` Create Monte Carlo analyzer instance.
 
 #### Source Code ```{literalinclude} ../../../src/analysis/__init__.py
@@ -110,8 +106,6 @@ FaultDetector Configured fault detector #### Source Code ```{literalinclude} ../
 :pyobject: create_monte_carlo_analyzer
 :linenos:
 ```
-
----
 
 ### `create_visualization_suite()` Create complete visualization suite.
 

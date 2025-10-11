@@ -97,8 +97,6 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 :linenos:
 ``` #### Methods (1) ##### `__str__(self)` String representation of the metric. [View full source →](#method-metricresult-__str__)
 
----
-
 ### `PerformanceMetrics` Container for performance metrics.
 
 #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
@@ -106,8 +104,6 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 :pyobject: PerformanceMetrics
 :linenos:
 ``` #### Methods (5) ##### `add_metric(self, metric)` Add a metric to the collection. [View full source →](#method-performancemetrics-add_metric) ##### `get_metric(self, name)` Get a metric by name. [View full source →](#method-performancemetrics-get_metric) ##### `get_metric_value(self, name)` Get a metric value by name. [View full source →](#method-performancemetrics-get_metric_value) ##### `to_dict(self)` Convert metrics to dictionary for compatibility. [View full source →](#method-performancemetrics-to_dict) ##### `summary_statistics(self)` Compute summary statistics of all metrics. [View full source →](#method-performancemetrics-summary_statistics)
-
----
 
 ### `FaultDetectionResult` Container for fault detection results.
 
@@ -118,8 +114,6 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 :linenos:
 ``` #### Methods (2) ##### `is_fault_detected(self)` Check if a fault was detected. [View full source →](#method-faultdetectionresult-is_fault_detected) ##### `has_warnings(self)` Check if there are warnings. [View full source →](#method-faultdetectionresult-has_warnings)
 
----
-
 ### `StatisticalTestResult` Container for statistical test results.
 
 #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
@@ -127,8 +121,6 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 :pyobject: StatisticalTestResult
 :linenos:
 ``` #### Methods (2) ##### `is_significant(self, alpha)` Check if result is statistically significant. [View full source →](#method-statisticaltestresult-is_significant) ##### `__str__(self)` String representation of test result. [View full source →](#method-statisticaltestresult-__str__)
-
----
 
 ### `ConfidenceInterval` Container for confidence intervals.
 
@@ -139,8 +131,6 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 :linenos:
 ``` #### Methods (4) ##### `width(self)` Width of the confidence interval. [View full source →](#method-confidenceinterval-width) ##### `center(self)` Center of the confidence interval. [View full source →](#method-confidenceinterval-center) ##### `contains(self, value)` Check if value is within the confidence interval. [View full source →](#method-confidenceinterval-contains) ##### `__str__(self)` String representation of confidence interval. [View full source →](#method-confidenceinterval-__str__)
 
----
-
 ### `ComparisonResult` Container for comparison analysis results.
 
 #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
@@ -148,8 +138,6 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 :pyobject: ComparisonResult
 :linenos:
 ``` #### Methods (1) ##### `get_winner(self, metric, lower_is_better)` Determine the winning method for a specific metric. [View full source →](#method-comparisonresult-get_winner)
-
----
 
 ### `AnalysisConfiguration` Configuration for analysis operations.
 
@@ -171,8 +159,6 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 :pyobject: create_simulation_data_from_arrays
 :linenos:
 ```
-
----
 
 ### `create_analysis_result(status, message, data)` Factory function for creating AnalysisResult.
 

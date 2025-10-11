@@ -105,8 +105,6 @@ for a tracking objective using the new framework. #### Source Code ```{literalin
 :linenos:
 ```
 
----
-
 ### `example_algorithm_comparison()` Example: Compare multiple optimization algorithms. This example shows how to compare PSO, DE, and GA algorithms
 on the same control optimization problem. #### Source Code ```{literalinclude} ../../../src/optimization/__init__.py
 :language: python

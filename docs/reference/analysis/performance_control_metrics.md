@@ -99,7 +99,6 @@ of overall tracking performance. Lower values indicate better control. Parameter
 ----------
 t : np.ndarray Time vector of length N+1
 x : np.ndarray State trajectories of shape (B, N+1, S) for B batches, S states Returns
--------
 float ISE value averaged across batch dimension #### Source Code ```{literalinclude} ../../../src/analysis/performance/control_metrics.py
 :language: python
 :pyobject: compute_ise
@@ -115,7 +114,6 @@ transient errors early in the response. Parameters
 ----------
 t : np.ndarray Time vector of length N+1
 x : np.ndarray State trajectories of shape (B, N+1, S) Returns
--------
 float ITAE value averaged across batch dimension #### Source Code ```{literalinclude} ../../../src/analysis/performance/control_metrics.py
 :language: python
 :pyobject: compute_itae
