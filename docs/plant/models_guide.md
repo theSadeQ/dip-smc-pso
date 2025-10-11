@@ -15,7 +15,9 @@
 
 ---
 
-## Overview The plant module provides three dynamics models for the double inverted pendulum (DIP) system, each optimized for different use cases: | Model Type | Fidelity | Speed | Use Case |
+## Overview {#overview}
+
+The plant module provides three dynamics models for the double inverted pendulum (DIP) system, each optimized for different use cases: | Model Type | Fidelity | Speed | Use Case |
 
 |------------|----------|-------|----------|
 | **Simplified** | Medium | Fast | Controller development, PSO optimization |
@@ -29,7 +31,9 @@
 
 ---
 
-## Physical System Description The double inverted pendulum consists of: 1. **Cart** (mass $m_0$): Moves horizontally on a track with position $x$
+## Physical System Description {#physical-system-description}
+
+The double inverted pendulum consists of: 1. **Cart** (mass $m_0$): Moves horizontally on a track with position $x$
 
 2. **Pendulum 1** (mass $m_1$, length $L_1$): Attached to cart at angle $\theta_1$
 3. **Pendulum 2** (mass $m_2$, length $L_2$): Attached to pendulum 1 at angle $\theta_2$ ### State Vector The system state is represented by a 6-dimensional vector: $$
@@ -53,7 +57,9 @@ $$ Where:
 
 ---
 
-## Model Architecture The plant module uses a layered architecture with clear separation of concerns: ```
+## Model Architecture {#model-architecture}
+
+The plant module uses a layered architecture with clear separation of concerns: ```
 
 src/plant/models/
 ├── base/ # Abstract interfaces
@@ -78,14 +84,18 @@ import numpy as np class DynamicsModel(Protocol): """Protocol for plant dynamics
 ``` **Implementation:** [`src/plant/models/base/dynamics_interface.py:65-128`](../../src/plant/models/base/dynamics_interface.py#L65-L128) ### DynamicsResult Structure Dynamics computations return a structured result: ```python
 
 from typing import NamedTuple, Dict, Any class DynamicsResult(NamedTuple): """Result of dynamics computation.""" state_derivative: np.ndarray # dx/dt vector success: bool # Computation succeeded info: Dict[str, Any] # Diagnostics and metadata
-``` This provides:
+```
+
+This provides:
 - **Type Safety**: Named fields prevent field ordering errors
 - **Diagnostics**: Rich metadata for debugging and analysis
 - **Error Handling**: Explicit success/failure indication
 
 ---
 
-## Model Types ### Simplified DIP Dynamics **Purpose**: Balanced speed and accuracy for controller development and PSO optimization. **Features**:
+## Model Types {#model-types}
+
+### Simplified DIP Dynamics **Purpose**: Balanced speed and accuracy for controller development and PSO optimization. **Features**:
 - Moderate computational complexity
 - Essential nonlinear dynamics captured
 - Optional Numba JIT compilation for speed
@@ -136,11 +146,17 @@ next_state = dynamics.step(state, control, dt=0.01)
 
 ---
 
-## Configuration System Each model uses a type-safe dataclass-based configuration with validation. ### SimplifiedDIPConfig **Source:** [`src/plant/models/simplified/config.py`](../../src/plant/models/simplified/config.py) ```python
+## Configuration System {#configuration-system}
+
+Each model uses a type-safe dataclass-based configuration with validation. ### SimplifiedDIPConfig **Source:** [`src/plant/models/simplified/config.py`](../../src/plant/models/simplified/config.py) ```python
 # example-metadata:
 # runnable: false @dataclass(frozen=True)
 class SimplifiedDIPConfig: """Type-safe configuration for simplified DIP.""" # Physical parameters - masses (kg) cart_mass: float pendulum1_mass: float pendulum2_mass: float # Lengths (m) pendulum1_length: float pendulum2_length: float pendulum1_com: float # Center of mass distance pendulum2_com: float # Inertias (kg⋅m²) pendulum1_inertia: float pendulum2_inertia: float # Environmental gravity: float = 9.81 # Friction (N⋅s/m or N⋅m⋅s/rad) cart_friction: float = 0.1 joint1_friction: float = 0.01 joint2_friction: float = 0.01 # Numerical stability regularization_alpha: float = 1e-4 max_condition_number: float = 1e14 min_regularization: float = 1e-10
-``` ### Physical Constraint Validation The configuration enforces physical laws: 1. **Mass Positivity**: All masses must be $> 0$ (conservation of mass)
+```
+
+### Physical Constraint Validation
+
+The configuration enforces physical laws: 1. **Mass Positivity**: All masses must be $> 0$ (conservation of mass)
 
 2. **Length Positivity**: All lengths must be $> 0$ (geometric requirement)
 3. **Inertia Bounds**: Inertias constrained by parallel axis theorem
@@ -169,13 +185,18 @@ omega_n = config.estimate_natural_frequency() # 1/T_char
 
 ---
 
-## Physics Computation Physics computation is delegated to specialized classes for modularity and testability. ### Simplified Physics Computer **Source:** [`src/plant/models/simplified/physics.py`](../../src/plant/models/simplified/physics.py) The simplified physics computer handles matrix computation with numerical stability: ```python
+## Physics Computation {#physics-computation}
+
+Physics computation is delegated to specialized classes for modularity and testability. ### Simplified Physics Computer **Source:** [`src/plant/models/simplified/physics.py`](../../src/plant/models/simplified/physics.py) The simplified physics computer handles matrix computation with numerical stability: ```python
 
 # example-metadata:
 
 # runnable: false class SimplifiedPhysicsComputer: """Simplified physics computation for DIP.""" def __init__(self, config: SimplifiedDIPConfig): self.config = config # Physics matrix computers self.full_matrices = DIPPhysicsMatrices(config) self.simplified_matrices = SimplifiedDIPPhysicsMatrices(config) # Numerical stability self.regularizer = AdaptiveRegularizer(config) self.matrix_inverter = MatrixInverter(self.regularizer) # Performance flags self.use_simplified_inertia = True self.cache_matrices = False
+```
 
-``` ### Matrix Computation Pipeline The dynamics equation solution involves: 1. **Matrix Computation**: $M(\mathbf{q})$, $C(\mathbf{q}, \dot{\mathbf{q}})$, $G(\mathbf{q})$
+### Matrix Computation Pipeline
+
+The dynamics equation solution involves: 1. **Matrix Computation**: $M(\mathbf{q})$, $C(\mathbf{q}, \dot{\mathbf{q}})$, $G(\mathbf{q})$
 2. **Forcing Term**: $\mathbf{f} = \mathbf{u} - C \dot{\mathbf{q}} - G$
 3. **Linear System Solution**: $M \ddot{\mathbf{q}} = \mathbf{f}$
 4. **State Derivative**: $\frac{d\mathbf{q}}{dt} = [\dot{\mathbf{q}}, \ddot{\mathbf{q}}]^T$ **Implementation:** ```python
@@ -193,7 +214,9 @@ def compute_simplified_dynamics_numba( state, u, m0, m1, m2, # Masses L1, L2, Lc
 
 ---
 
-## Numerical Stability Numerical stability is critical for robust simulation of the DIP system, which can exhibit singular configurations. ### Adaptive Regularization The system uses adaptive Tikhonov regularization: $$
+## Numerical Stability {#numerical-stability}
+
+Numerical stability is critical for robust simulation of the DIP system, which can exhibit singular configurations. ### Adaptive Regularization The system uses adaptive Tikhonov regularization: $$
 M_{\text{reg}} = M + \alpha_{\text{adaptive}} \cdot I
 $$ Where $\alpha_{\text{adaptive}}$ is computed based on matrix conditioning: ```python
 # example-metadata:
@@ -216,7 +239,9 @@ print(f"Failure rate: {stats['failure_rate']:.2%}")
 
 ---
 
-## Mathematical Foundations ### Lagrangian Mechanics The DIP system is derived using Lagrangian mechanics. The Lagrangian $\mathcal{L} = T - V$ where: **Kinetic Energy** ($T$): $$
+## Mathematical Foundations {#mathematical-foundations}
+
+### Lagrangian Mechanics The DIP system is derived using Lagrangian mechanics. The Lagrangian $\mathcal{L} = T - V$ where: **Kinetic Energy** ($T$): $$
 T = \frac{1}{2} m_0 \dot{x}^2 + \frac{1}{2} m_1 (\dot{x}_1^2 + \dot{y}_1^2) + \frac{1}{2} I_1 \dot{\theta}_1^2 + \frac{1}{2} m_2 (\dot{x}_2^2 + \dot{y}_2^2) + \frac{1}{2} I_2 \dot{\theta}_2^2
 $$ Where pendulum tip positions are: $$
 \begin{aligned}
@@ -250,7 +275,9 @@ assert energy_drift < tolerance, f"Energy drift: {energy_drift:.2%}"
 
 ---
 
-## Usage Examples ### Example 1: Basic Simulation ```python
+## Usage Examples {#usage-examples}
+
+### Example 1: Basic Simulation ```python
 
 import numpy as np
 from src.plant.models.simplified import SimplifiedDIPDynamics, SimplifiedDIPConfig # Setup
@@ -300,7 +327,11 @@ models = [('Simplified', simplified), ('Full', full), ('Low-Rank', lowrank)] for
 
 ---
 
-## Performance Optimization ### Numba JIT Compilation fast mode for **10-100× speedup** in repeated evaluations: ```python
+## Performance Optimization {#performance-optimization}
+
+### Numba JIT Compilation
+
+Fast mode for **10-100× speedup** in repeated evaluations: ```python
 
 dynamics = SimplifiedDIPDynamics( config, enable_fast_mode=True, # Use Numba JIT compilation enable_monitoring=False # Disable monitoring for maximum speed
 )
@@ -326,7 +357,9 @@ physics.set_simplified_inertia(True)
 
 ---
 
-## API Reference ### SimplifiedDIPDynamics **Location:** [`src/plant/models/simplified/dynamics.py`](../../src/plant/models/simplified/dynamics.py) ```python
+## API Reference {#api-reference}
+
+### SimplifiedDIPDynamics **Location:** [`src/plant/models/simplified/dynamics.py`](../../src/plant/models/simplified/dynamics.py) ```python
 # example-metadata:
 # runnable: false class SimplifiedDIPDynamics(BaseDynamicsModel): """Simplified DIP dynamics with balanced speed and accuracy.""" def __init__( self, config: Union[SimplifiedDIPConfig, Dict[str, Any]], enable_fast_mode: bool = False, enable_monitoring: bool = True ): """ Initialize simplified DIP dynamics. Args: config: Configuration or dictionary enable_fast_mode: Use Numba JIT compilation enable_monitoring: performance monitoring """ def compute_dynamics( self, state: np.ndarray, control_input: np.ndarray, time: float = 0.0, **kwargs ) -> DynamicsResult: """Compute simplified DIP dynamics.""" def get_physics_matrices( self, state: np.ndarray ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]: """Get M, C, G matrices.""" def compute_total_energy(self, state: np.ndarray) -> float: """Compute total system energy.""" def compute_linearization( self, equilibrium_state: np.ndarray, equilibrium_input: np.ndarray ) -> Tuple[np.ndarray, np.ndarray]: """Compute linearization matrices A, B."""
 ``` ### FullDIPDynamics **Location:** [`src/plant/models/full/dynamics.py`](../../src/plant/models/full/dynamics.py) ```python
