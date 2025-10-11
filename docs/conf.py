@@ -49,8 +49,8 @@ exclude_patterns = [
     # 'development/**',
     # 'examples/**',
     # 'factory/**',        # Re-included for testing - Step 2 of gradual re-inclusion
-    'for_reviewers/**',  # TEMP: Re-exclude to isolate toctree issue
-    'optimization_simulation/**',  # TEMP: TOC generation issue
+    # 'for_reviewers/**',  # Re-included - Phase 1.1: Content completeness
+    # 'optimization_simulation/**',  # Re-included - Phase 1.2: Content completeness
     # 'guides/**',
     # 'hil/**',
     # 'how-to/**',
