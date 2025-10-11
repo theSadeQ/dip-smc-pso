@@ -17,7 +17,9 @@
 
 ---
 
-## Classes ### `StabilityMarginObjective` **Inherits from:** `SimulationBasedObjective` Objective function for optimizing stability margins. This objective computes various stability metrics including:
+## Classes
+
+### `StabilityMarginObjective` **Inherits from:** `SimulationBasedObjective` Objective function for optimizing stability margins. This objective computes various stability metrics including:
 - Lyapunov stability analysis
 - Phase and gain margins (if linearized model available)
 - Settling time and damping characteristics

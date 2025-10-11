@@ -71,7 +71,11 @@ analysis results, visualizations, and statistical summaries into professional re
 
 ---
 
-## Classes ### `ReportGenerator` report generation for control system analysis. #### Source Code ```{literalinclude} ../../../src/analysis/visualization/report_generator.py
+## Classes
+
+### `ReportGenerator` report generation for control system analysis.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/visualization/report_generator.py
 :language: python
 :pyobject: ReportGenerator
 :linenos:

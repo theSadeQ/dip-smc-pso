@@ -17,7 +17,11 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-## Classes ### `AlertLevel` **Inherits from:** `Enum` Alert severity levels. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+## Classes
+
+### `AlertLevel` **Inherits from:** `Enum` Alert severity levels.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: AlertLevel
 :linenos:
@@ -25,7 +29,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-## `AlertStatus` **Inherits from:** `Enum` Alert lifecycle status. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+## `AlertStatus` **Inherits from:** `Enum` Alert lifecycle status.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: AlertStatus
@@ -34,7 +40,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `NotificationChannel` **Inherits from:** `Enum` Available notification channels. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `NotificationChannel` **Inherits from:** `Enum` Available notification channels.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: NotificationChannel
 :linenos:
@@ -42,7 +50,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `Alert` Alert message with metadata. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `Alert` Alert message with metadata.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: Alert
@@ -51,7 +61,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `AlertRule` Rule for triggering alerts. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `AlertRule` Rule for triggering alerts.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: AlertRule
 :linenos:
@@ -59,7 +71,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `NotificationConfig` Configuration for notification channels. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `NotificationConfig` Configuration for notification channels.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: NotificationConfig
@@ -68,7 +82,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `AlertCondition` **Inherits from:** `ABC` Base class for alert conditions. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `AlertCondition` **Inherits from:** `ABC` Base class for alert conditions.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: AlertCondition
 :linenos:
@@ -76,7 +92,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `ThresholdCondition` **Inherits from:** `AlertCondition` Simple threshold-based condition. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `ThresholdCondition` **Inherits from:** `AlertCondition` Simple threshold-based condition.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: ThresholdCondition
@@ -85,7 +103,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `CompositeCondition` **Inherits from:** `AlertCondition` Composite condition combining multiple conditions. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `CompositeCondition` **Inherits from:** `AlertCondition` Composite condition combining multiple conditions.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: CompositeCondition
 :linenos:
@@ -93,7 +113,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `TrendCondition` **Inherits from:** `AlertCondition` Trend-based condition for detecting patterns. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `TrendCondition` **Inherits from:** `AlertCondition` Trend-based condition for detecting patterns.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: TrendCondition
@@ -102,7 +124,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `NotificationHandler` **Inherits from:** `ABC` Base class for notification handlers. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `NotificationHandler` **Inherits from:** `ABC` Base class for notification handlers.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: NotificationHandler
 :linenos:
@@ -110,7 +134,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `EmailNotificationHandler` **Inherits from:** `NotificationHandler` Email notification handler. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `EmailNotificationHandler` **Inherits from:** `NotificationHandler` Email notification handler.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: EmailNotificationHandler
@@ -119,7 +145,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `WebhookNotificationHandler` **Inherits from:** `NotificationHandler` Webhook notification handler. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `WebhookNotificationHandler` **Inherits from:** `NotificationHandler` Webhook notification handler.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: WebhookNotificationHandler
 :linenos:
@@ -127,7 +155,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `LogNotificationHandler` **Inherits from:** `NotificationHandler` Log-based notification handler. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `LogNotificationHandler` **Inherits from:** `NotificationHandler` Log-based notification handler.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: LogNotificationHandler
@@ -136,7 +166,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `AlertManager` Main alert management system. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `AlertManager` Main alert management system.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: AlertManager
 :linenos:
@@ -144,7 +176,11 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-## Functions ### `create_threshold_rule(name, metric_name, threshold, level, operator, channels)` Create a simple threshold-based alert rule. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+## Functions
+
+### `create_threshold_rule(name, metric_name, threshold, level, operator, channels)` Create a simple threshold-based alert rule.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: create_threshold_rule
@@ -153,7 +189,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `create_composite_rule(name, conditions, level, logic, channels)` Create a composite alert rule with multiple conditions. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `create_composite_rule(name, conditions, level, logic, channels)` Create a composite alert rule with multiple conditions.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: create_composite_rule
 :linenos:
@@ -161,7 +199,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `setup_default_alerts()` Set up default system alerts. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `setup_default_alerts()` Set up default system alerts.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: setup_default_alerts
@@ -170,7 +210,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `configure_email_notifications(smtp_server, smtp_port, username, password, from_address, to_addresses)` Configure email notification handler. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `configure_email_notifications(smtp_server, smtp_port, username, password, from_address, to_addresses)` Configure email notification handler.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: configure_email_notifications
 :linenos:
@@ -178,7 +220,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `configure_webhook_notifications(url, headers)` Configure webhook notification handler. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `configure_webhook_notifications(url, headers)` Configure webhook notification handler.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 
 :language: python
 :pyobject: configure_webhook_notifications
@@ -187,7 +231,9 @@ monitoring of all interface components. ## Complete Source Code ```{literalinclu
 
 ---
 
-### `configure_log_notifications(log_level, logger_name)` Configure log notification handler. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
+### `configure_log_notifications(log_level, logger_name)` Configure log notification handler.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/alerting.py
 :language: python
 :pyobject: configure_log_notifications
 :linenos:

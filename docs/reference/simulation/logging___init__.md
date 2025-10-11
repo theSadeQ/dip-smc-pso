@@ -15,7 +15,11 @@ performance metrics, and real-time recording for analysis and debugging. ## Comp
 
 ---
 
-## Advanced Mathematical Theory ### Structured Logging Theory Structured logging provides data recording for simulation analysis and debugging. #### Log Level Hierarchy $$
+## Advanced Mathematical Theory
+
+### Structured Logging Theory Structured logging provides data recording for simulation analysis and debugging.
+
+#### Log Level Hierarchy $$
 \text{Level} = \{\text{DEBUG} < \text{INFO} < \text{WARNING} < \text{ERROR} < \text{CRITICAL}\}
 $$ **Filtering rule:**
 $$

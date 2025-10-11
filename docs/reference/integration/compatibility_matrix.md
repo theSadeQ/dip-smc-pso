@@ -16,7 +16,11 @@ production systems. ## Complete Source Code ```{literalinclude} ../../../src/int
 
 ---
 
-## Classes ### `CompatibilityLevel` **Inherits from:** `Enum` Compatibility assessment levels with increasing strictness. #### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+## Classes
+
+### `CompatibilityLevel` **Inherits from:** `Enum` Compatibility assessment levels with increasing strictness.
+
+#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
 :language: python
 :pyobject: CompatibilityLevel
 :linenos:
@@ -24,7 +28,9 @@ production systems. ## Complete Source Code ```{literalinclude} ../../../src/int
 
 ---
 
-## `DomainType` **Inherits from:** `Enum` Project domain types for compatibility analysis. #### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+## `DomainType` **Inherits from:** `Enum` Project domain types for compatibility analysis.
+
+#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
 
 :language: python
 :pyobject: DomainType
@@ -33,7 +39,9 @@ production systems. ## Complete Source Code ```{literalinclude} ../../../src/int
 
 ---
 
-### `CompatibilityIssue` Represents a compatibility issue between system components. #### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+### `CompatibilityIssue` Represents a compatibility issue between system components.
+
+#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
 :language: python
 :pyobject: CompatibilityIssue
 :linenos:
@@ -41,7 +49,9 @@ production systems. ## Complete Source Code ```{literalinclude} ../../../src/int
 
 ---
 
-### `IntegrationPoint` Represents an integration point between domains. #### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+### `IntegrationPoint` Represents an integration point between domains.
+
+#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
 
 :language: python
 :pyobject: IntegrationPoint
@@ -50,7 +60,9 @@ production systems. ## Complete Source Code ```{literalinclude} ../../../src/int
 
 ---
 
-### `DomainHealth` Health status of a specific domain. #### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+### `DomainHealth` Health status of a specific domain.
+
+#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
 :language: python
 :pyobject: DomainHealth
 :linenos:
@@ -69,7 +81,11 @@ recommendations for resolution. #### Source Code ```{literalinclude} ../../../sr
 
 ---
 
-## Functions ### `asdict(obj)` Convert dataclass to dictionary (simplified implementation). #### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+## Functions
+
+### `asdict(obj)` Convert dataclass to dictionary (simplified implementation).
+
+#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
 :language: python
 :pyobject: asdict
 :linenos:
@@ -77,7 +93,9 @@ recommendations for resolution. #### Source Code ```{literalinclude} ../../../sr
 
 ---
 
-### `main()` Main entry point for compatibility matrix analysis. #### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
+### `main()` Main entry point for compatibility matrix analysis.
+
+#### Source Code ```{literalinclude} ../../../src/integration/compatibility_matrix.py
 
 :language: python
 :pyobject: main

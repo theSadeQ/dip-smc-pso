@@ -17,7 +17,9 @@
 
 ---
 
-## Classes ### `SteadyStateErrorObjective` **Inherits from:** `SimulationBasedObjective` Objective function for minimizing steady-state tracking error. This objective computes various steady-state error metrics:
+## Classes
+
+### `SteadyStateErrorObjective` **Inherits from:** `SimulationBasedObjective` Objective function for minimizing steady-state tracking error. This objective computes various steady-state error metrics:
 - Absolute steady-state error
 - Percentage steady-state error
 - RMS steady-state error

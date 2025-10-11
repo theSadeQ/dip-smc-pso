@@ -18,7 +18,9 @@
 
 ---
 
-## Functions ### `create_simulation_engine(engine_type, config_path)` Create a simulation engine of specified type. Parameters
+## Functions
+
+### `create_simulation_engine(engine_type, config_path)` Create a simulation engine of specified type. Parameters
 ----------
 engine_type : str, optional Type of engine: 'sequential', 'batch', 'parallel', 'real_time'
 config_path : str, optional Path to configuration file Returns

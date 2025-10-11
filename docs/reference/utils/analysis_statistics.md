@@ -15,7 +15,9 @@ Monte Carlo analysis validation. ## Complete Source Code ```{literalinclude} ../
 
 ---
 
-## Functions ### `confidence_interval(data, confidence)` Return the mean and half‑width of a Student‑t confidence interval. Given an array of samples, compute the sample mean and the half‑width
+## Functions
+
+### `confidence_interval(data, confidence)` Return the mean and half‑width of a Student‑t confidence interval. Given an array of samples, compute the sample mean and the half‑width
 of the two‑sided confidence interval at the specified confidence
 level. The half‑width is ``tcrit * s / sqrt(n)``, where ``tcrit`` is
 the t‑distribution critical value, ``s`` is the sample standard

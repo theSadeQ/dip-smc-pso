@@ -15,7 +15,11 @@ quality animations and analysis visualizations. ## Complete Source Code ```{lite
 
 ---
 
-## Classes ### `MovieScene` Configuration for a movie scene. #### Source Code ```{literalinclude} ../../../src/utils/visualization/movie_generator.py
+## Classes
+
+### `MovieScene` Configuration for a movie scene.
+
+#### Source Code ```{literalinclude} ../../../src/utils/visualization/movie_generator.py
 :language: python
 :pyobject: MovieScene
 :linenos:

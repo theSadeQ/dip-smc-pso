@@ -18,7 +18,9 @@
 
 ---
 
-## Functions ### `create_optimizer(algorithm, parameter_space)` Create an optimizer of specified type. Parameters
+## Functions
+
+### `create_optimizer(algorithm, parameter_space)` Create an optimizer of specified type. Parameters
 ----------
 algorithm : str Algorithm name ('pso', 'de', 'ga', 'cma_es', 'bayesian', 'nelder_mead')
 parameter_space : ParameterSpace Parameter space to optimize over

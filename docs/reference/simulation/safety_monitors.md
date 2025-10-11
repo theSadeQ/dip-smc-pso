@@ -17,7 +17,11 @@
 
 ---
 
-## Classes ### `SimulationPerformanceMonitor` **Inherits from:** `PerformanceMonitor` Monitor simulation execution performance. #### Source Code ```{literalinclude} ../../../src/simulation/safety/monitors.py
+## Classes
+
+### `SimulationPerformanceMonitor` **Inherits from:** `PerformanceMonitor` Monitor simulation execution performance.
+
+#### Source Code ```{literalinclude} ../../../src/simulation/safety/monitors.py
 :language: python
 :pyobject: SimulationPerformanceMonitor
 :linenos:
@@ -25,7 +29,9 @@
 
 ---
 
-## `SafetyMonitor` Monitor safety violations and system health. #### Source Code ```{literalinclude} ../../../src/simulation/safety/monitors.py
+## `SafetyMonitor` Monitor safety violations and system health.
+
+#### Source Code ```{literalinclude} ../../../src/simulation/safety/monitors.py
 
 :language: python
 :pyobject: SafetyMonitor
@@ -34,7 +40,9 @@
 
 ---
 
-### `SystemHealthMonitor` Monitor overall system health and performance. #### Source Code ```{literalinclude} ../../../src/simulation/safety/monitors.py
+### `SystemHealthMonitor` Monitor overall system health and performance.
+
+#### Source Code ```{literalinclude} ../../../src/simulation/safety/monitors.py
 :language: python
 :pyobject: SystemHealthMonitor
 :linenos:

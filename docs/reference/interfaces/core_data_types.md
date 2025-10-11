@@ -15,7 +15,11 @@ for configuration, monitoring, and data exchange. ## Complete Source Code ```{li
 
 ---
 
-## Classes ### `InterfaceType` **Inherits from:** `Enum` Interface type enumeration. #### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
+## Classes
+
+### `InterfaceType` **Inherits from:** `Enum` Interface type enumeration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
 :language: python
 :pyobject: InterfaceType
 :linenos:
@@ -23,7 +27,9 @@ for configuration, monitoring, and data exchange. ## Complete Source Code ```{li
 
 ---
 
-## `TransportType` **Inherits from:** `Enum` Transport layer type. #### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
+## `TransportType` **Inherits from:** `Enum` Transport layer type.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
 
 :language: python
 :pyobject: TransportType
@@ -32,7 +38,9 @@ for configuration, monitoring, and data exchange. ## Complete Source Code ```{li
 
 ---
 
-### `SecurityLevel` **Inherits from:** `Enum` Security level enumeration. #### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
+### `SecurityLevel` **Inherits from:** `Enum` Security level enumeration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
 :language: python
 :pyobject: SecurityLevel
 :linenos:
@@ -40,7 +48,9 @@ for configuration, monitoring, and data exchange. ## Complete Source Code ```{li
 
 ---
 
-### `Message` Standard message structure for all communications. #### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
+### `Message` Standard message structure for all communications.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
 
 :language: python
 :pyobject: Message
@@ -49,7 +59,9 @@ for configuration, monitoring, and data exchange. ## Complete Source Code ```{li
 
 ---
 
-### `ConnectionInfo` Connection information and status. #### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
+### `ConnectionInfo` Connection information and status.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
 :language: python
 :pyobject: ConnectionInfo
 :linenos:
@@ -57,7 +69,9 @@ for configuration, monitoring, and data exchange. ## Complete Source Code ```{li
 
 ---
 
-### `InterfaceConfig` Configuration for communication interfaces. #### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
+### `InterfaceConfig` Configuration for communication interfaces.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
 
 :language: python
 :pyobject: InterfaceConfig
@@ -66,7 +80,9 @@ for configuration, monitoring, and data exchange. ## Complete Source Code ```{li
 
 ---
 
-### `ErrorInfo` Error information for diagnostics. #### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
+### `ErrorInfo` Error information for diagnostics.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
 :language: python
 :pyobject: ErrorInfo
 :linenos:
@@ -74,7 +90,9 @@ for configuration, monitoring, and data exchange. ## Complete Source Code ```{li
 
 ---
 
-### `PerformanceMetrics` Performance metrics for interfaces. #### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
+### `PerformanceMetrics` Performance metrics for interfaces.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
 
 :language: python
 :pyobject: PerformanceMetrics
@@ -83,7 +101,9 @@ for configuration, monitoring, and data exchange. ## Complete Source Code ```{li
 
 ---
 
-### `CommunicationStats` communication statistics. #### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
+### `CommunicationStats` communication statistics.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
 :language: python
 :pyobject: CommunicationStats
 :linenos:
@@ -91,7 +111,9 @@ for configuration, monitoring, and data exchange. ## Complete Source Code ```{li
 
 ---
 
-### `QueueConfig` Configuration for message queues. #### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
+### `QueueConfig` Configuration for message queues.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
 
 :language: python
 :pyobject: QueueConfig
@@ -100,7 +122,9 @@ for configuration, monitoring, and data exchange. ## Complete Source Code ```{li
 
 ---
 
-### `DeviceInfo` Device information structure. #### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
+### `DeviceInfo` Device information structure.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/core/data_types.py
 :language: python
 :pyobject: DeviceInfo
 :linenos:

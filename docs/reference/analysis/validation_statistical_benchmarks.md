@@ -125,7 +125,9 @@ CI = \frac{1}{N-1} \sum_{k=1}^{N} |u_k - u_{k-1}|
 
 ---
 
-## Classes ### `StatisticalBenchmarks` Statistical benchmarking utilities for control system analysis. This class provides a unified interface for running statistical benchmarks,
+## Classes
+
+### `StatisticalBenchmarks` Statistical benchmarking utilities for control system analysis. This class provides a unified interface for running statistical benchmarks,
 comparing controller performance, and analyzing experimental results. #### Source Code ```{literalinclude} ../../../src/analysis/validation/statistical_benchmarks.py
 :language: python
 :pyobject: StatisticalBenchmarks
@@ -134,7 +136,9 @@ comparing controller performance, and analyzing experimental results. #### Sourc
 
 ---
 
-## Functions ### `compute_metrics(t, x, u, sigma, max_force)` Compute performance metrics for a batch of trajectories. This function maintains exact compatibility with the original
+## Functions
+
+### `compute_metrics(t, x, u, sigma, max_force)` Compute performance metrics for a batch of trajectories. This function maintains exact compatibility with the original
 
 implementation while delegating to the new modular structure. Parameters
 ----------

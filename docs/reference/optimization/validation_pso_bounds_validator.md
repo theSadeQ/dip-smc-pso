@@ -22,7 +22,11 @@ type and provides intelligent bounds adjustment based on system characteristics.
 
 ---
 
-## Classes ### `BoundsValidationResult` Result of bounds validation analysis. #### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_validator.py
+## Classes
+
+### `BoundsValidationResult` Result of bounds validation analysis.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_validator.py
 :language: python
 :pyobject: BoundsValidationResult
 :linenos:
@@ -40,7 +44,9 @@ bounds to ensure effective controller tuning. #### Source Code ```{literalinclud
 
 ---
 
-## Functions ### `validate_pso_configuration(config)` Validate complete PSO configuration for all controllers. Parameters
+## Functions
+
+### `validate_pso_configuration(config)` Validate complete PSO configuration for all controllers. Parameters
 ----------
 config : ConfigSchema Complete system configuration Returns
 -------

@@ -114,7 +114,11 @@ CI_{95\%} = \bar{J} \pm 1.96 \frac{s_J}{\sqrt{N}}
 
 ---
 
-## Classes ### `MonteCarloConfig` Configuration for Monte Carlo analysis. #### Source Code ```{literalinclude} ../../../src/analysis/validation/monte_carlo.py
+## Classes
+
+### `MonteCarloConfig` Configuration for Monte Carlo analysis.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/validation/monte_carlo.py
 
 :language: python
 :pyobject: MonteCarloConfig
@@ -123,7 +127,9 @@ CI_{95\%} = \bar{J} \pm 1.96 \frac{s_J}{\sqrt{N}}
 
 ---
 
-### `MonteCarloAnalyzer` **Inherits from:** `StatisticalValidator` Monte Carlo analyzer for uncertainty quantification and validation. #### Source Code ```{literalinclude} ../../../src/analysis/validation/monte_carlo.py
+### `MonteCarloAnalyzer` **Inherits from:** `StatisticalValidator` Monte Carlo analyzer for uncertainty quantification and validation.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/validation/monte_carlo.py
 :language: python
 :pyobject: MonteCarloAnalyzer
 :linenos:
@@ -131,7 +137,9 @@ CI_{95\%} = \bar{J} \pm 1.96 \frac{s_J}{\sqrt{N}}
 
 ---
 
-## Functions ### `create_monte_carlo_analyzer(config)` Factory function to create Monte Carlo analyzer. Parameters
+## Functions
+
+### `create_monte_carlo_analyzer(config)` Factory function to create Monte Carlo analyzer. Parameters
 
 config : Dict[str, Any], optional Configuration parameters Returns
 -------

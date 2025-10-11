@@ -73,7 +73,9 @@ fig.savefig('analysis.pdf')
 
 ---
 
-## Classes ### `DynamicsProtocol` **Inherits from:** `Protocol` Protocol defining the expected interface for dynamics models. This protocol ensures type safety and compatibility across different
+## Classes
+
+### `DynamicsProtocol` **Inherits from:** `Protocol` Protocol defining the expected interface for dynamics models. This protocol ensures type safety and compatibility across different
 dynamics model implementations used in fault detection. #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi.py
 :language: python
 :pyobject: DynamicsProtocol
@@ -131,7 +133,11 @@ implementations and provides a standard API for testing and usage. #### Source C
 
 ---
 
-## Functions ### `_verify_interface()` Verify that FDIsystem correctly implements FaultDetectionInterface. #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi.py
+## Functions
+
+### `_verify_interface()` Verify that FDIsystem correctly implements FaultDetectionInterface.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi.py
 
 :language: python
 :pyobject: _verify_interface

@@ -130,7 +130,11 @@ replay = Replay("original.csv") for entry in replay: t = entry["time"] state = e
 
 ---
 
-## Classes ### `LogFormat` **Inherits from:** `Enum` Data logging format enumeration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
+## Classes
+
+### `LogFormat` **Inherits from:** `Enum` Data logging format enumeration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
 
 :language: python
 :pyobject: LogFormat
@@ -139,7 +143,9 @@ replay = Replay("original.csv") for entry in replay: t = entry["time"] state = e
 
 ---
 
-### `CompressionType` **Inherits from:** `Enum` Data compression type enumeration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
+### `CompressionType` **Inherits from:** `Enum` Data compression type enumeration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
 :language: python
 :pyobject: CompressionType
 :linenos:
@@ -147,7 +153,9 @@ replay = Replay("original.csv") for entry in replay: t = entry["time"] state = e
 
 ---
 
-### `LoggingConfig` HIL data logging configuration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
+### `LoggingConfig` HIL data logging configuration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
 
 :language: python
 :pyobject: LoggingConfig
@@ -156,7 +164,9 @@ replay = Replay("original.csv") for entry in replay: t = entry["time"] state = e
 
 ---
 
-### `LogEntry` Individual log entry. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
+### `LogEntry` Individual log entry.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
 :language: python
 :pyobject: LogEntry
 :linenos:
@@ -174,7 +184,11 @@ with support for multiple formats and real-time compression. #### Source Code ``
 
 ---
 
-## Functions ### `load_hdf5_data(filepath, channels, start_time, end_time)` Load data from HDF5 log file. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
+## Functions
+
+### `load_hdf5_data(filepath, channels, start_time, end_time)` Load data from HDF5 log file.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
 :language: python
 :pyobject: load_hdf5_data
 :linenos:
@@ -182,7 +196,9 @@ with support for multiple formats and real-time compression. #### Source Code ``
 
 ---
 
-### `analyze_log_performance(log_stats)` Analyze logging performance. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
+### `analyze_log_performance(log_stats)` Analyze logging performance.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/data_logging.py
 
 :language: python
 :pyobject: analyze_log_performance

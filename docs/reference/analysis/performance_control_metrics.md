@@ -78,7 +78,11 @@ evaluation of controller performance. ## Complete Source Code ```{literalinclude
 
 ---
 
-## Classes ### `AdvancedControlMetrics` **Inherits from:** `PerformanceAnalyzer` Advanced control performance analyzer with frequency domain capabilities. #### Source Code ```{literalinclude} ../../../src/analysis/performance/control_metrics.py
+## Classes
+
+### `AdvancedControlMetrics` **Inherits from:** `PerformanceAnalyzer` Advanced control performance analyzer with frequency domain capabilities.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/performance/control_metrics.py
 :language: python
 :pyobject: AdvancedControlMetrics
 :linenos:
@@ -86,7 +90,9 @@ evaluation of controller performance. ## Complete Source Code ```{literalinclude
 
 ---
 
-## Functions ### `compute_ise(t, x)` Compute Integral of Squared Error (ISE) for all state variables. The ISE metric integrates the squared state deviations over time:
+## Functions
+
+### `compute_ise(t, x)` Compute Integral of Squared Error (ISE) for all state variables. The ISE metric integrates the squared state deviations over time:
 
 ISE = ∫₀ᵀ ||x(t)||² dt This metric penalizes large deviations heavily and provides a measure
 of overall tracking performance. Lower values indicate better control. Parameters

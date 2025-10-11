@@ -14,7 +14,9 @@ including LDR monitoring, saturation tracking, and dynamics conditioning. ## Com
 
 ---
 
-## Classes ### `LyapunovDecreaseMonitor` Monitor Lyapunov Decrease Ratio for stability assessment. Implements LDR monitoring as specified in Issue #1 resolution:
+## Classes
+
+### `LyapunovDecreaseMonitor` Monitor Lyapunov Decrease Ratio for stability assessment. Implements LDR monitoring as specified in Issue #1 resolution:
 - Alert when LDR < 95% over 200-500ms rolling window (post-transient)
 - Track sigma*sigma_dot for sliding surface analysis #### Source Code ```{literalinclude} ../../../src/utils/monitoring/stability.py
 :language: python
@@ -43,7 +45,9 @@ including LDR monitoring, saturation tracking, and dynamics conditioning. ## Com
 
 ---
 
-### `StabilityMonitoringSystem` Integrated stability monitoring system for Issue #1 resolution. Combines LDR, saturation, and conditioning monitors for stability assessment as specified in the resolution plan. #### Source Code ```{literalinclude} ../../../src/utils/monitoring/stability.py
+### `StabilityMonitoringSystem` Integrated stability monitoring system for Issue #1 resolution. Combines LDR, saturation, and conditioning monitors for stability assessment as specified in the resolution plan.
+
+#### Source Code ```{literalinclude} ../../../src/utils/monitoring/stability.py
 
 :language: python
 :pyobject: StabilityMonitoringSystem

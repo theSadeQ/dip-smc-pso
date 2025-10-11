@@ -80,7 +80,9 @@ control or estimation design. ## Complete Source Code ```{literalinclude} ../../
 
 ---
 
-## Classes ### `ControlAnalyzer` Control analysis utilities for linearization and controllability assessment. This class provides a convenient interface to control-theoretic analysis
+## Classes
+
+### `ControlAnalyzer` Control analysis utilities for linearization and controllability assessment. This class provides a convenient interface to control-theoretic analysis
 functions including linearization, controllability, and observability analysis. #### Source Code ```{literalinclude} ../../../src/analysis/performance/control_analysis.py
 :language: python
 :pyobject: ControlAnalyzer
@@ -89,7 +91,9 @@ functions including linearization, controllability, and observability analysis. 
 
 ---
 
-## Functions ### `linearize_dip(dyn, x_eq, u_eq)` Linearise the nonlinear dynamics around an equilibrium point. Parameters
+## Functions
+
+### `linearize_dip(dyn, x_eq, u_eq)` Linearise the nonlinear dynamics around an equilibrium point. Parameters
 
 dyn : callable A function implementing the continuous‑time dynamics ``f(x, u)``.
 x_eq : np.ndarray Equilibrium state vector at which to linearise.

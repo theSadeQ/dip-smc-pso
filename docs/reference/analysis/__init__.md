@@ -64,7 +64,9 @@ legacy compatibility and modern enhanced capabilities. ## Complete Source Code `
 
 ---
 
-## Functions ### `create_performance_analyzer(analyzer_type)` Create performance analyzer instance. Parameters
+## Functions
+
+### `create_performance_analyzer(analyzer_type)` Create performance analyzer instance. Parameters
 
 analyzer_type : str Type of analyzer ('advanced', 'stability', 'robustness')
 **kwargs Additional configuration parameters Returns
@@ -90,7 +92,9 @@ FaultDetector Configured fault detector #### Source Code ```{literalinclude} ../
 
 ---
 
-### `create_statistical_validator()` Create statistical validator instance. #### Source Code ```{literalinclude} ../../../src/analysis/__init__.py
+### `create_statistical_validator()` Create statistical validator instance.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/__init__.py
 
 :language: python
 :pyobject: create_statistical_validator
@@ -99,7 +103,9 @@ FaultDetector Configured fault detector #### Source Code ```{literalinclude} ../
 
 ---
 
-### `create_monte_carlo_analyzer()` Create Monte Carlo analyzer instance. #### Source Code ```{literalinclude} ../../../src/analysis/__init__.py
+### `create_monte_carlo_analyzer()` Create Monte Carlo analyzer instance.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/__init__.py
 :language: python
 :pyobject: create_monte_carlo_analyzer
 :linenos:
@@ -107,7 +113,9 @@ FaultDetector Configured fault detector #### Source Code ```{literalinclude} ../
 
 ---
 
-### `create_visualization_suite()` Create complete visualization suite. #### Source Code ```{literalinclude} ../../../src/analysis/__init__.py
+### `create_visualization_suite()` Create complete visualization suite.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/__init__.py
 
 :language: python
 :pyobject: create_visualization_suite

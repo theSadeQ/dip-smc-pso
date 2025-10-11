@@ -83,7 +83,9 @@ K_1 > 0, \quad K_2 > \frac{L}{2}
 
 ---
 
-## Classes ### `ModularSuperTwistingSMC` Modular Super-Twisting SMC using composition of focused components. Super-Twisting control law:
+## Classes
+
+### `ModularSuperTwistingSMC` Modular Super-Twisting SMC using composition of focused components. Super-Twisting control law:
 u = u₁ + u₂
 u₁ = -K₁|s|^α sign(s)
 u₂ = -K₂ ∫sign(s)dt Provides finite-time convergence when K₁ > K₂ > 0. #### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/super_twisting/controller.py
@@ -94,7 +96,9 @@ u₂ = -K₂ ∫sign(s)dt Provides finite-time convergence when K₁ > K₂ > 0.
 
 ---
 
-## `SuperTwistingSMC` Backward-compatible facade for the modular Super-Twisting SMC. #### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/super_twisting/controller.py
+## `SuperTwistingSMC` Backward-compatible facade for the modular Super-Twisting SMC.
+
+#### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/super_twisting/controller.py
 
 :language: python
 :pyobject: SuperTwistingSMC

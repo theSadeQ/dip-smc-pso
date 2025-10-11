@@ -72,7 +72,11 @@ real-time convergence monitoring. Key Features:
 
 ---
 
-## Classes ### `ConvergenceStatus` **Inherits from:** `Enum` Enhanced convergence status indicators. #### Source Code ```{literalinclude} ../../../src/optimization/validation/enhanced_convergence_analyzer.py
+## Classes
+
+### `ConvergenceStatus` **Inherits from:** `Enum` Enhanced convergence status indicators.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/validation/enhanced_convergence_analyzer.py
 
 :language: python
 :pyobject: ConvergenceStatus
@@ -81,7 +85,9 @@ real-time convergence monitoring. Key Features:
 
 ---
 
-### `ConvergenceCriterion` **Inherits from:** `Enum` Types of convergence criteria. #### Source Code ```{literalinclude} ../../../src/optimization/validation/enhanced_convergence_analyzer.py
+### `ConvergenceCriterion` **Inherits from:** `Enum` Types of convergence criteria.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/validation/enhanced_convergence_analyzer.py
 :language: python
 :pyobject: ConvergenceCriterion
 :linenos:
@@ -89,7 +95,9 @@ real-time convergence monitoring. Key Features:
 
 ---
 
-### `ConvergenceMetrics` convergence metrics. #### Source Code ```{literalinclude} ../../../src/optimization/validation/enhanced_convergence_analyzer.py
+### `ConvergenceMetrics` convergence metrics.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/validation/enhanced_convergence_analyzer.py
 
 :language: python
 :pyobject: ConvergenceMetrics
@@ -98,7 +106,9 @@ real-time convergence monitoring. Key Features:
 
 ---
 
-### `ConvergenceCriteria` Adaptive convergence criteria configuration. #### Source Code ```{literalinclude} ../../../src/optimization/validation/enhanced_convergence_analyzer.py
+### `ConvergenceCriteria` Adaptive convergence criteria configuration.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/validation/enhanced_convergence_analyzer.py
 :language: python
 :pyobject: ConvergenceCriteria
 :linenos:
@@ -126,7 +136,11 @@ optimization scenarios and controller types. #### Source Code ```{literalinclude
 
 ---
 
-## Functions ### `run_enhanced_convergence_validation()` Run PSO convergence validation. #### Source Code ```{literalinclude} ../../../src/optimization/validation/enhanced_convergence_analyzer.py
+## Functions
+
+### `run_enhanced_convergence_validation()` Run PSO convergence validation.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/validation/enhanced_convergence_analyzer.py
 
 :language: python
 :pyobject: run_enhanced_convergence_validation

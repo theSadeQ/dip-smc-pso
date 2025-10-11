@@ -86,7 +86,11 @@ print(f"Control effort: {result.control_effort:.2f}")
 
 ---
 
-## Classes ### `StateValidationError` **Inherits from:** `ValueError` Raised when state vector validation fails. #### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
+## Classes
+
+### `StateValidationError` **Inherits from:** `ValueError` Raised when state vector validation fails.
+
+#### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
 
 :language: python
 :pyobject: StateValidationError
@@ -95,7 +99,9 @@ print(f"Control effort: {result.control_effort:.2f}")
 
 ---
 
-### `StateValidator` **Inherits from:** `Protocol` Protocol for state validation strategies. #### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
+### `StateValidator` **Inherits from:** `Protocol` Protocol for state validation strategies.
+
+#### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
 :language: python
 :pyobject: StateValidator
 :linenos:
@@ -116,7 +122,9 @@ print(f"Control effort: {result.control_effort:.2f}")
 
 ---
 
-### `MinimalStateValidator` Minimal state validator for performance-critical applications. Provides only essential validation with minimal overhead. #### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
+### `MinimalStateValidator` Minimal state validator for performance-critical applications. Provides only essential validation with minimal overhead.
+
+#### Source Code ```{literalinclude} ../../../src/plant/core/state_validation.py
 :language: python
 :pyobject: MinimalStateValidator
 :linenos:

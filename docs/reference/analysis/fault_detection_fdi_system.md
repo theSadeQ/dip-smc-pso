@@ -73,7 +73,11 @@ detection methods, and statistical analysis. ## Complete Source Code ```{literal
 
 ---
 
-## Classes ### `FaultType` **Inherits from:** `Enum` Enumeration of fault types. #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
+## Classes
+
+### `FaultType` **Inherits from:** `Enum` Enumeration of fault types.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
 :language: python
 :pyobject: FaultType
 :linenos:
@@ -81,7 +85,9 @@ detection methods, and statistical analysis. ## Complete Source Code ```{literal
 
 ---
 
-## `DetectionMethod` **Inherits from:** `Enum` Enumeration of detection methods. #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
+## `DetectionMethod` **Inherits from:** `Enum` Enumeration of detection methods.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
 
 :language: python
 :pyobject: DetectionMethod
@@ -90,7 +96,9 @@ detection methods, and statistical analysis. ## Complete Source Code ```{literal
 
 ---
 
-### `FaultDetectionConfig` Configuration for enhanced fault detection system. #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
+### `FaultDetectionConfig` Configuration for enhanced fault detection system.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
 :language: python
 :pyobject: FaultDetectionConfig
 :linenos:
@@ -98,7 +106,9 @@ detection methods, and statistical analysis. ## Complete Source Code ```{literal
 
 ---
 
-### `FaultSignature` Signature for fault identification. #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
+### `FaultSignature` Signature for fault identification.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
 
 :language: python
 :pyobject: FaultSignature
@@ -107,7 +117,9 @@ detection methods, and statistical analysis. ## Complete Source Code ```{literal
 
 ---
 
-### `EnhancedFaultDetector` **Inherits from:** `FaultDetector` Enhanced fault detection and isolation system. #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
+### `EnhancedFaultDetector` **Inherits from:** `FaultDetector` Enhanced fault detection and isolation system.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
 :language: python
 :pyobject: EnhancedFaultDetector
 :linenos:
@@ -115,7 +127,9 @@ detection methods, and statistical analysis. ## Complete Source Code ```{literal
 
 ---
 
-### `DynamicsProtocol` **Inherits from:** `TypingProtocol` Protocol defining the expected interface for dynamics models. #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
+### `DynamicsProtocol` **Inherits from:** `TypingProtocol` Protocol defining the expected interface for dynamics models.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
 
 :language: python
 :pyobject: DynamicsProtocol
@@ -135,7 +149,9 @@ analysis framework. #### Source Code ```{literalinclude} ../../../src/analysis/f
 
 ---
 
-## Functions ### `create_enhanced_fault_detector(config)` Factory function to create enhanced fault detector. Parameters
+## Functions
+
+### `create_enhanced_fault_detector(config)` Factory function to create enhanced fault detector. Parameters
 
 config : Dict[str, Any], optional Configuration parameters Returns
 -------

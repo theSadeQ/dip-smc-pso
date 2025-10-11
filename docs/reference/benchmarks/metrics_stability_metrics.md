@@ -18,7 +18,9 @@ for evaluating controller robustness and dynamic performance. Metrics implemente
 
 ---
 
-## Classes ### `StabilityMetrics` Stability analysis metrics for control system performance assessment. This class provides a convenient interface to stability-related metrics
+## Classes
+
+### `StabilityMetrics` Stability analysis metrics for control system performance assessment. This class provides a convenient interface to stability-related metrics
 including overshoot, peak time, and damping ratio estimation. #### Source Code ```{literalinclude} ../../../src/benchmarks/metrics/stability_metrics.py
 :language: python
 :pyobject: StabilityMetrics
@@ -27,7 +29,9 @@ including overshoot, peak time, and damping ratio estimation. #### Source Code `
 
 ---
 
-## Functions ### `compute_overshoot(x, angular_indices)` Compute maximum overshoot across specified state variables. For control systems, overshoot measures the maximum deviation from
+## Functions
+
+### `compute_overshoot(x, angular_indices)` Compute maximum overshoot across specified state variables. For control systems, overshoot measures the maximum deviation from
 
 the desired trajectory. For pendulum systems, this typically focuses
 on angular states where overshoot can lead to instability. Mathematical Definition:

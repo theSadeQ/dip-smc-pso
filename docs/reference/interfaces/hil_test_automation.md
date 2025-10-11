@@ -134,7 +134,11 @@ print(f"Final difficulty: {tester.current_difficulty:.2f}")
 
 ---
 
-## Classes ### `TestStatus` **Inherits from:** `Enum` Test execution status enumeration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
+## Classes
+
+### `TestStatus` **Inherits from:** `Enum` Test execution status enumeration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
 
 :language: python
 :pyobject: TestStatus
@@ -143,7 +147,9 @@ print(f"Final difficulty: {tester.current_difficulty:.2f}")
 
 ---
 
-### `AssertionType` **Inherits from:** `Enum` Test assertion type enumeration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
+### `AssertionType` **Inherits from:** `Enum` Test assertion type enumeration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
 :language: python
 :pyobject: AssertionType
 :linenos:
@@ -151,7 +157,9 @@ print(f"Final difficulty: {tester.current_difficulty:.2f}")
 
 ---
 
-### `TestAssertion` Test assertion configuration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
+### `TestAssertion` Test assertion configuration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
 
 :language: python
 :pyobject: TestAssertion
@@ -160,7 +168,9 @@ print(f"Final difficulty: {tester.current_difficulty:.2f}")
 
 ---
 
-### `TestCase` Individual test case configuration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
+### `TestCase` Individual test case configuration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
 :language: python
 :pyobject: TestCase
 :linenos:
@@ -168,7 +178,9 @@ print(f"Final difficulty: {tester.current_difficulty:.2f}")
 
 ---
 
-### `TestSuite` Test suite containing multiple test cases. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
+### `TestSuite` Test suite containing multiple test cases.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
 
 :language: python
 :pyobject: TestSuite
@@ -177,7 +189,9 @@ print(f"Final difficulty: {tester.current_difficulty:.2f}")
 
 ---
 
-### `TestResult` Test execution result. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
+### `TestResult` Test execution result.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
 :language: python
 :pyobject: TestResult
 :linenos:
@@ -195,7 +209,9 @@ performance testing, and report generation features. #### Source Code ```{litera
 
 ---
 
-### `TestReportGenerator` Generate test reports. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
+### `TestReportGenerator` Generate test reports.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/test_automation.py
 :language: python
 :pyobject: TestReportGenerator
 :linenos:

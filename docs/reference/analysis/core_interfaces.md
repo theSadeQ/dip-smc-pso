@@ -76,7 +76,11 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ---
 
-## Classes ### `AnalysisStatus` **Inherits from:** `Enum` Status of analysis operations. #### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+## Classes
+
+### `AnalysisStatus` **Inherits from:** `Enum` Status of analysis operations.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: AnalysisStatus
@@ -85,7 +89,9 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ---
 
-### `AnalysisResult` Base class for analysis results. #### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+### `AnalysisResult` Base class for analysis results.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
 :language: python
 :pyobject: AnalysisResult
 :linenos:
@@ -93,7 +99,9 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ---
 
-### `DataProtocol` **Inherits from:** `Protocol` Protocol for simulation data. #### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+### `DataProtocol` **Inherits from:** `Protocol` Protocol for simulation data.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: DataProtocol
@@ -102,7 +110,9 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ---
 
-### `MetricCalculator` **Inherits from:** `ABC` Abstract base class for metric calculators. #### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+### `MetricCalculator` **Inherits from:** `ABC` Abstract base class for metric calculators.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
 :language: python
 :pyobject: MetricCalculator
 :linenos:
@@ -110,7 +120,9 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ---
 
-### `PerformanceAnalyzer` **Inherits from:** `ABC` Abstract base class for performance analyzers. #### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+### `PerformanceAnalyzer` **Inherits from:** `ABC` Abstract base class for performance analyzers.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: PerformanceAnalyzer
@@ -119,7 +131,9 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ---
 
-### `FaultDetector` **Inherits from:** `ABC` Abstract base class for fault detection systems. #### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+### `FaultDetector` **Inherits from:** `ABC` Abstract base class for fault detection systems.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
 :language: python
 :pyobject: FaultDetector
 :linenos:
@@ -127,7 +141,9 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ---
 
-### `StatisticalValidator` **Inherits from:** `ABC` Abstract base class for statistical validation. #### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+### `StatisticalValidator` **Inherits from:** `ABC` Abstract base class for statistical validation.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: StatisticalValidator
@@ -136,7 +152,9 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ---
 
-### `VisualizationGenerator` **Inherits from:** `ABC` Abstract base class for visualization generators. #### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+### `VisualizationGenerator` **Inherits from:** `ABC` Abstract base class for visualization generators.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
 :language: python
 :pyobject: VisualizationGenerator
 :linenos:
@@ -144,7 +162,9 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ---
 
-### `ReportGenerator` **Inherits from:** `ABC` Abstract base class for report generators. #### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+### `ReportGenerator` **Inherits from:** `ABC` Abstract base class for report generators.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: ReportGenerator
@@ -153,7 +173,9 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ---
 
-### `AnalyzerFactory` **Inherits from:** `Protocol` Protocol for analyzer factories. #### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+### `AnalyzerFactory` **Inherits from:** `Protocol` Protocol for analyzer factories.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
 :language: python
 :pyobject: AnalyzerFactory
 :linenos:
@@ -161,7 +183,9 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ---
 
-### `AnalysisConfiguration` **Inherits from:** `Protocol` Protocol for analysis configuration. #### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+### `AnalysisConfiguration` **Inherits from:** `Protocol` Protocol for analysis configuration.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: AnalysisConfiguration
@@ -170,7 +194,9 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ---
 
-### `AnalysisPipeline` **Inherits from:** `ABC` Abstract base class for analysis pipelines. #### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+### `AnalysisPipeline` **Inherits from:** `ABC` Abstract base class for analysis pipelines.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
 :language: python
 :pyobject: AnalysisPipeline
 :linenos:
@@ -178,7 +204,9 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 
 ---
 
-### `AnalysisSession` **Inherits from:** `ABC` Abstract base class for analysis sessions. #### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
+### `AnalysisSession` **Inherits from:** `ABC` Abstract base class for analysis sessions.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/interfaces.py
 
 :language: python
 :pyobject: AnalysisSession

@@ -15,7 +15,11 @@ and automatic configuration selection. ## Complete Source Code ```{literalinclud
 
 ---
 
-## Classes ### `DIPModelType` **Inherits from:** `Enum` Available DIP model types. #### Source Code ```{literalinclude} ../../../src/plant/configurations/unified_config.py
+## Classes
+
+### `DIPModelType` **Inherits from:** `Enum` Available DIP model types.
+
+#### Source Code ```{literalinclude} ../../../src/plant/configurations/unified_config.py
 :language: python
 :pyobject: DIPModelType
 :linenos:

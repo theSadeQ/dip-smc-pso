@@ -63,7 +63,9 @@ print(f"ITAE: {metrics.itae:.3f}")
 
 ---
 
-## Classes ### `UncertaintyEstimator` Online uncertainty estimation for adaptive SMC. Estimates bounds on system uncertainties and disturbances
+## Classes
+
+### `UncertaintyEstimator` Online uncertainty estimation for adaptive SMC. Estimates bounds on system uncertainties and disturbances
 
 to improve adaptive gain selection. #### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/adaptive/parameter_estimation.py
 :language: python

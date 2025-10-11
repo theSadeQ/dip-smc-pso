@@ -17,7 +17,9 @@
 
 ---
 
-## Classes ### `RobustnessObjective` **Inherits from:** `SimulationBasedObjective` Objective function for optimizing control robustness. This objective evaluates controller performance under various
+## Classes
+
+### `RobustnessObjective` **Inherits from:** `SimulationBasedObjective` Objective function for optimizing control robustness. This objective evaluates controller performance under various
 uncertainties and disturbances including:
 - Parameter variations (mass, length, damping)
 - Measurement noise

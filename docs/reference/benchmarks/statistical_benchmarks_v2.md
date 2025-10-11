@@ -65,7 +65,9 @@ CI = \frac{1}{N-1} \sum_{k=1}^{N} |u_k - u_{k-1}|
 
 ---
 
-## Functions ### `compute_metrics(t, x, u, sigma, max_force)` Compute performance metrics for a batch of trajectories. This function maintains exact compatibility with the original
+## Functions
+
+### `compute_metrics(t, x, u, sigma, max_force)` Compute performance metrics for a batch of trajectories. This function maintains exact compatibility with the original
 implementation while delegating to the new modular structure. Parameters
 ----------
 t : np.ndarray One‑dimensional array of time stamps of length ``N+1``.

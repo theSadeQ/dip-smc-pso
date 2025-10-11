@@ -15,7 +15,11 @@ into a unified scoring framework aligned with CLAUDE.md quality standards. ## Co
 
 ---
 
-## Classes ### `ReadinessLevel` **Inherits from:** `Enum` Production readiness levels with deployment recommendations. #### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
+## Classes
+
+### `ReadinessLevel` **Inherits from:** `Enum` Production readiness levels with deployment recommendations.
+
+#### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
 :language: python
 :pyobject: ReadinessLevel
 :linenos:
@@ -23,7 +27,9 @@ into a unified scoring framework aligned with CLAUDE.md quality standards. ## Co
 
 ---
 
-## `ComponentType` **Inherits from:** `Enum` System component types for targeted assessment. #### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
+## `ComponentType` **Inherits from:** `Enum` System component types for targeted assessment.
+
+#### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
 
 :language: python
 :pyobject: ComponentType
@@ -32,7 +38,9 @@ into a unified scoring framework aligned with CLAUDE.md quality standards. ## Co
 
 ---
 
-### `QualityGate` Represents a production quality gate with threshold and current value. #### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
+### `QualityGate` Represents a production quality gate with threshold and current value.
+
+#### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
 :language: python
 :pyobject: QualityGate
 :linenos:
@@ -40,7 +48,9 @@ into a unified scoring framework aligned with CLAUDE.md quality standards. ## Co
 
 ---
 
-### `ReadinessAssessment` production readiness assessment results. #### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
+### `ReadinessAssessment` production readiness assessment results.
+
+#### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
 
 :language: python
 :pyobject: ReadinessAssessment
@@ -59,7 +69,11 @@ aligned with CLAUDE.md quality standards and research-grade requirements. #### S
 
 ---
 
-## Functions ### `main()` Main entry point for production readiness assessment. #### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
+## Functions
+
+### `main()` Main entry point for production readiness assessment.
+
+#### Source Code ```{literalinclude} ../../../src/integration/production_readiness.py
 
 :language: python
 :pyobject: main

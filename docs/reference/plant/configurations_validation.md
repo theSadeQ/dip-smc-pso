@@ -14,7 +14,11 @@ mathematical correctness, physical realizability, and numerical stability. ## Co
 
 ---
 
-## Classes ### `ParameterValidator` **Inherits from:** `Protocol` Protocol for parameter validation strategies. #### Source Code ```{literalinclude} ../../../src/plant/configurations/validation.py
+## Classes
+
+### `ParameterValidator` **Inherits from:** `Protocol` Protocol for parameter validation strategies.
+
+#### Source Code ```{literalinclude} ../../../src/plant/configurations/validation.py
 :language: python
 :pyobject: ParameterValidator
 :linenos:
@@ -32,7 +36,11 @@ appropriate bounds checking and consistency verification. #### Source Code ```{l
 
 ---
 
-## Functions ### `validate_physics_parameters(params, strict_mode)` Convenience function for physics parameter validation. Args: params: Dictionary of parameters to validate strict_mode: Raise exceptions for warnings if True Returns: Tuple of (is_valid, error_messages) #### Source Code ```{literalinclude} ../../../src/plant/configurations/validation.py
+## Functions
+
+### `validate_physics_parameters(params, strict_mode)` Convenience function for physics parameter validation. Args: params: Dictionary of parameters to validate strict_mode: Raise exceptions for warnings if True Returns: Tuple of (is_valid, error_messages)
+
+#### Source Code ```{literalinclude} ../../../src/plant/configurations/validation.py
 :language: python
 :pyobject: validate_physics_parameters
 :linenos:

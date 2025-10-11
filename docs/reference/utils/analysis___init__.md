@@ -15,7 +15,11 @@ hypothesis testing, and Monte Carlo validation. ## Complete Source Code ```{lite
 
 ---
 
-## Dependencies This module imports: - `from .statistics import confidence_interval, bootstrap_confidence_interval, welch_t_test, one_way_anova, monte_carlo_analysis, performance_comparison_summary, sample_size_calculation` ## Advanced Mathematical Theory ### Analysis Utilities Theory (Detailed mathematical theory for analysis utilities to be added...) **Key concepts:**
+## Dependencies This module imports: - `from .statistics import confidence_interval, bootstrap_confidence_interval, welch_t_test, one_way_anova, monte_carlo_analysis, performance_comparison_summary, sample_size_calculation`
+
+## Advanced Mathematical Theory
+
+### Analysis Utilities Theory (Detailed mathematical theory for analysis utilities to be added...) **Key concepts:**
 - Mathematical foundations
 - Algorithmic principles
 - Performance characteristics

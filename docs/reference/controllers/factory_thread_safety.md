@@ -17,7 +17,11 @@
 
 ---
 
-## Classes ### `LockFreeRegistry` Lock-free controller registry using immutable data structures. #### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
+## Classes
+
+### `LockFreeRegistry` Lock-free controller registry using immutable data structures.
+
+#### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
 :language: python
 :pyobject: LockFreeRegistry
 :linenos:
@@ -25,7 +29,9 @@
 
 ---
 
-## `MinimalLockManager` Manages minimal, efficient locking strategies. #### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
+## `MinimalLockManager` Manages minimal, efficient locking strategies.
+
+#### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
 
 :language: python
 :pyobject: MinimalLockManager
@@ -34,7 +40,9 @@
 
 ---
 
-### `ThreadSafeFactoryEnhancement` Thread safety enhancement for controller factory operations. #### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
+### `ThreadSafeFactoryEnhancement` Thread safety enhancement for controller factory operations.
+
+#### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
 :language: python
 :pyobject: ThreadSafeFactoryEnhancement
 :linenos:
@@ -42,7 +50,9 @@
 
 ---
 
-### `ThreadPerformanceMonitor` Monitor thread performance for factory operations. #### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
+### `ThreadPerformanceMonitor` Monitor thread performance for factory operations.
+
+#### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
 
 :language: python
 :pyobject: ThreadPerformanceMonitor
@@ -51,7 +61,11 @@
 
 ---
 
-## Functions ### `get_thread_safety_enhancement()` Get the global thread safety enhancement instance. #### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
+## Functions
+
+### `get_thread_safety_enhancement()` Get the global thread safety enhancement instance.
+
+#### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
 :language: python
 :pyobject: get_thread_safety_enhancement
 :linenos:
@@ -59,7 +73,9 @@
 
 ---
 
-### `initialize_thread_safe_factory(registry)` Initialize thread-safe factory with registry. #### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
+### `initialize_thread_safe_factory(registry)` Initialize thread-safe factory with registry.
+
+#### Source Code ```{literalinclude} ../../../src/controllers/factory/thread_safety.py
 
 :language: python
 :pyobject: initialize_thread_safe_factory

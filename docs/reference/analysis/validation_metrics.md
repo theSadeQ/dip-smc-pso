@@ -121,7 +121,11 @@ PV = \max_{t \in [0,T]} (|u(t)| - u_{\max})
 
 ---
 
-## Functions ### `compute_basic_metrics(data)` Compute basic statistical metrics for data analysis. Args: data: Input data array Returns: Dictionary containing basic statistical metrics #### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+## Functions
+
+### `compute_basic_metrics(data)` Compute basic statistical metrics for data analysis. Args: data: Input data array Returns: Dictionary containing basic statistical metrics
+
+#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
 :language: python
 :pyobject: compute_basic_metrics
 :linenos:
@@ -129,7 +133,9 @@ PV = \max_{t \in [0,T]} (|u(t)| - u_{\max})
 
 ---
 
-## `compute_performance_metrics(reference, actual)` Compute performance metrics comparing actual vs reference data. Args: reference: Reference/target data actual: Actual measured data Returns: Dictionary containing performance metrics #### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+## `compute_performance_metrics(reference, actual)` Compute performance metrics comparing actual vs reference data. Args: reference: Reference/target data actual: Actual measured data Returns: Dictionary containing performance metrics
+
+#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
 
 :language: python
 :pyobject: compute_performance_metrics
@@ -138,7 +144,9 @@ PV = \max_{t \in [0,T]} (|u(t)| - u_{\max})
 
 ---
 
-### `compute_control_metrics(control_signals, time_vector)` Compute control-specific performance metrics. Args: control_signals: Control input signals over time time_vector: Optional time vector for time-based metrics Returns: Dictionary containing control metrics #### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+### `compute_control_metrics(control_signals, time_vector)` Compute control-specific performance metrics. Args: control_signals: Control input signals over time time_vector: Optional time vector for time-based metrics Returns: Dictionary containing control metrics
+
+#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
 :language: python
 :pyobject: compute_control_metrics
 :linenos:
@@ -146,7 +154,9 @@ PV = \max_{t \in [0,T]} (|u(t)| - u_{\max})
 
 ---
 
-### `compute_stability_metrics(states, reference_state)` Compute stability-related metrics for state trajectories. Args: states: State trajectory matrix (time x state_dim) reference_state: Optional reference state for deviation metrics Returns: Dictionary containing stability metrics #### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+### `compute_stability_metrics(states, reference_state)` Compute stability-related metrics for state trajectories. Args: states: State trajectory matrix (time x state_dim) reference_state: Optional reference state for deviation metrics Returns: Dictionary containing stability metrics
+
+#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
 
 :language: python
 :pyobject: compute_stability_metrics
@@ -155,7 +165,9 @@ PV = \max_{t \in [0,T]} (|u(t)| - u_{\max})
 
 ---
 
-### `compute_frequency_metrics(signal, sampling_rate, frequency_bands)` Compute frequency domain metrics for signal analysis. Args: signal: Input signal sampling_rate: Sampling rate in Hz frequency_bands: Optional list of (low, high) frequency bands Returns: Dictionary containing frequency domain metrics #### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+### `compute_frequency_metrics(signal, sampling_rate, frequency_bands)` Compute frequency domain metrics for signal analysis. Args: signal: Input signal sampling_rate: Sampling rate in Hz frequency_bands: Optional list of (low, high) frequency bands Returns: Dictionary containing frequency domain metrics
+
+#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
 :language: python
 :pyobject: compute_frequency_metrics
 :linenos:
@@ -163,7 +175,9 @@ PV = \max_{t \in [0,T]} (|u(t)| - u_{\max})
 
 ---
 
-### `compute_statistical_significance(data1, data2, test_type)` Compute statistical significance between two data sets. Args: data1: First data set data2: Second data set test_type: Type of statistical test ('ttest', 'mannwhitney', 'ks') Returns: Dictionary containing test statistics and p-value #### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+### `compute_statistical_significance(data1, data2, test_type)` Compute statistical significance between two data sets. Args: data1: First data set data2: Second data set test_type: Type of statistical test ('ttest', 'mannwhitney', 'ks') Returns: Dictionary containing test statistics and p-value
+
+#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
 
 :language: python
 :pyobject: compute_statistical_significance
@@ -172,7 +186,9 @@ PV = \max_{t \in [0,T]} (|u(t)| - u_{\max})
 
 ---
 
-### `compute_robustness_metrics(nominal_performance, perturbed_performances, metric_names)` Compute robustness metrics comparing nominal vs perturbed performance. Args: nominal_performance: Performance metrics for nominal conditions perturbed_performances: List of performance metrics under perturbations metric_names: Optional list of metric names to analyze Returns: Dictionary of robustness metrics for each performance metric #### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+### `compute_robustness_metrics(nominal_performance, perturbed_performances, metric_names)` Compute robustness metrics comparing nominal vs perturbed performance. Args: nominal_performance: Performance metrics for nominal conditions perturbed_performances: List of performance metrics under perturbations metric_names: Optional list of metric names to analyze Returns: Dictionary of robustness metrics for each performance metric
+
+#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
 :language: python
 :pyobject: compute_robustness_metrics
 :linenos:
@@ -180,7 +196,9 @@ PV = \max_{t \in [0,T]} (|u(t)| - u_{\max})
 
 ---
 
-### `compute_comprehensive_metrics(states, controls, time_vector, reference_states, reference_controls)` Compute metrics for control system analysis. Args: states: State trajectory matrix controls: Control signal vector time_vector: Time vector reference_states: Optional reference state trajectory reference_controls: Optional reference control signals Returns: Dictionary containing metrics #### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
+### `compute_comprehensive_metrics(states, controls, time_vector, reference_states, reference_controls)` Compute metrics for control system analysis. Args: states: State trajectory matrix controls: Control signal vector time_vector: Time vector reference_states: Optional reference state trajectory reference_controls: Optional reference control signals Returns: Dictionary containing metrics
+
+#### Source Code ```{literalinclude} ../../../src/analysis/validation/metrics.py
 
 :language: python
 :pyobject: compute_comprehensive_metrics
