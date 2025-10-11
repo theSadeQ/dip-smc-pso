@@ -69,33 +69,27 @@ utkin2013sliding → smc_utkin_1992_sliding_modes
 - Eliminated all duplicate warnings while preserving organization
 
 **Before**:
-```markdown
+```text
 ### Sliding Mode Control Theory
-```{bibliography}
-:filter: keywords % "sliding mode control"
+(bibliography directive with filter: keywords % "sliding mode control")
 utkin1999sliding
 ...
-```
 
 ### Adaptive Control
-```{bibliography}
-:filter: keywords % "adaptive control"
+(bibliography directive with filter: keywords % "adaptive control")
 slotine1991applied
 ...
 ```
-```
 
 **After**:
-```markdown
+```text
 ## Complete Bibliography
-```{bibliography}
-:all:
-```
+(single bibliography directive with :all: option)
 
 ## Citations by Research Area
 ### Sliding Mode Control Theory
 **Key Contributions:**
-- {cite}`utkin1999sliding` established...
+- Inline citations like {cite}`utkin1999sliding` established...
 ```
 
 ---
