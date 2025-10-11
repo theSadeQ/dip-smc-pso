@@ -286,7 +286,8 @@ def main():
     best_params = np.array(cfg.controller_defaults[controller_sel]["gains"], dtype=float)
     if st.sidebar.button(t.get("run_button", "Run PSO")):
         with st.spinner(t.get("spinner_msg", "Optimizing...")):
-            controller_factory = lambda gains: create_controller(controller_sel, config=cfg, gains=gains)
+            def controller_factory(gains):
+                return create_controller(controller_sel, config=cfg, gains=gains)
             tuner = PSOTuner(controller_factory, config=cfg, seed=getattr(cfg, "global_seed", None))
             res = tuner.optimise(x0=np.asarray(best_params, dtype=float))
             if np.isfinite(res.get("best_cost", np.inf)):
@@ -357,11 +358,167 @@ def main():
             return dist_mag if dist_start <= t < dist_start + dist_duration else 0.0
 
     # ───────── Main area
-    st.title(t.get("title", "Pendulum Control Dashboard"))
-    st.write(t.get("intro", "Real‑time PSO‑tuned controllers for double‑inverted pendulum control."))
+    st.title("🎯 Pendulum Control Dashboard")
+    st.markdown("""
+    **Welcome to your control systems playground!** This interactive simulator lets you experiment with
+    advanced sliding mode controllers for a double-inverted pendulum. Whether you're learning control theory,
+    optimizing algorithms, or conducting research, you're in the right place.
+    """)
 
-    # ───────── Interactive Documentation Integration (Task 3 Feature)
-    with st.expander("🚀 Interactive Documentation & Advanced Analysis"):
+    # ───────── Getting Started Guide (comprehensive intro)
+    with st.expander("📖 Getting Started - Click here if this is your first time!", expanded=False):
+        st.markdown("""
+        ### What Is This?
+
+        Imagine balancing a broomstick on your hand — now imagine balancing **two broomsticks**,
+        one stacked on top of the other, while the base (your hand) can slide left and right.
+        That's a **double-inverted pendulum**, and it's one of the most challenging problems in control engineering!
+
+        This dashboard lets you:
+        - **Simulate** the pendulum physics in real-time
+        - **Control** it using advanced algorithms (Sliding Mode Control)
+        - **Optimize** controller parameters automatically (PSO - Particle Swarm Optimization)
+        - **Visualize** how everything works with live animations
+        - **Export** your results for further analysis
+
+        ---
+
+        ### Key Features
+        """)
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.markdown("""
+            **🎮 Interactive Control**
+            - Real-time simulation
+            - 4 different controller types
+            - Adjustable parameters
+            - Live pendulum animation
+            - Performance metrics
+            """)
+
+        with col2:
+            st.markdown("""
+            **🧠 Intelligent Optimization**
+            - One-click PSO optimization
+            - Automatic gain tuning
+            - Watch convergence happen
+            - Compare before/after
+            - Save optimized gains
+            """)
+
+        with col3:
+            st.markdown("""
+            **📊 Analysis & Export**
+            - Performance metrics
+            - Time-series plots
+            - Disturbance testing
+            - CSV data export
+            - Publication-ready plots
+            """)
+
+        st.markdown("""
+        ---
+
+        ### Quick Start Guide
+
+        Ready to get started? Follow these 5 simple steps:
+
+        **Step 1: Choose Your Controller** 👈 *(Look at the sidebar on the left)*
+        - **Classical SMC**: The foundation — reliable and proven
+        - **Super-Twisting SMC**: Smoother control, less "chattering"
+        - **Adaptive SMC**: Adapts to changes automatically
+        - **Hybrid Adaptive STA**: The best of both worlds
+
+        > 💡 **First time?** Start with **Classical SMC** using default settings.
+
+        **Step 2: (Optional) Run PSO Optimization**
+        - Click the "Run PSO" button in the sidebar
+        - Wait 30-60 seconds while the swarm finds optimal gains
+        - See the "Best Cost" improve in real-time
+
+        > ⚡ **Skip this** if you just want to see how it works with default settings.
+
+        **Step 3: Adjust Simulation Settings**
+        - Duration: How long to run (default 10 seconds is good)
+        - Time step: Leave at 0.01s for smooth animation
+        - Initial state: Starting angles for the pendulums
+
+        > 🎯 **Tip**: Try small initial angles like [0, 0.05, -0.03, 0, 0, 0] for stable starts.
+
+        **Step 4: (Optional) Add a Disturbance**
+        - Check "Add Disturbance" to test robustness
+        - This simulates a push or external force
+        - Watch how the controller recovers
+
+        **Step 5: Watch It Run!**
+        - Scroll down to see the live animation
+        - Check the time-series plots (expandable)
+        - Review performance metrics
+        - Download results as ZIP file
+
+        ---
+
+        ### Common Workflows
+
+        **"I want to see how SMC works"**
+        1. Select "classical_smc" from the sidebar
+        2. Leave everything at defaults
+        3. Scroll down and watch the animation
+        4. Expand "Time-Series" to see detailed plots
+
+        **"I want optimal performance"**
+        1. Select any controller
+        2. Click "Run PSO" button
+        3. Wait for optimization to finish
+        4. Scroll down to see the improved performance
+        5. Compare metrics with default gains
+
+        **"I want to test robustness"**
+        1. Select any controller
+        2. Check "Add Disturbance"
+        3. Adjust magnitude (try 2-5 N)
+        4. Set start time (around 1-2 seconds)
+        5. Watch how the controller recovers
+
+        **"I want to compare controllers"**
+        1. Run simulation with Classical SMC, note metrics
+        2. Change to Super-Twisting SMC, run again
+        3. Compare settling time, control effort, peak angles
+        4. Try with and without PSO optimization
+
+        ---
+
+        ### Understanding the Interface
+
+        **Left Sidebar (Controls):**
+        - **Dynamics Model**: Choose simple or full physics
+        - **Controller**: Pick your control algorithm
+        - **Optimization**: Run PSO to find best gains
+        - **Simulation Settings**: Duration, time step, initial state
+        - **Disturbance**: Add external forces to test robustness
+
+        **Main Area (Results):**
+        - **Animation**: Live visualization of the pendulum
+        - **Time-Series Plots**: Cart position, angles, velocities, control input
+        - **Performance Metrics**: Key numbers (settling time, RMS control, peak values)
+        - **Download**: Export everything as ZIP file
+
+        ---
+
+        ### Need Help?
+
+        - 📚 **Documentation**: Full guides available in `docs/` directory
+        - 🐛 **Issues**: Report bugs on GitHub
+        - 💬 **Questions**: Check README.md for more examples
+        - 🔬 **Research**: See CITATIONS.md for academic references
+
+        **Ready?** Close this guide and start experimenting! 🚀
+        """)
+
+    # ───────── Advanced Documentation (renamed from previous expander)
+    with st.expander("🚀 Advanced Features & Documentation"):
         st.markdown("""
         **🌟 Enhanced Interactive Research Tools Available!**
 
