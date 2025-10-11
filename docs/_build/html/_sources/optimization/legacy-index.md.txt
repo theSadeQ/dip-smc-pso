@@ -7,13 +7,13 @@ This section covers the Particle Swarm Optimization implementation used for auto
 ```{toctree}
 :maxdepth: 2
 
-pso-theory
-implementation
-tuning-strategies
-performance-analysis
+pso_core_algorithm_guide
 ```
 
-Note: This page has moved. See Reference → Optimizer.
+**Note**: This page has moved. For complete PSO documentation see:
+- [PSO Optimization Module API Reference](../api/optimization_module_api_reference.md)
+- [Reference → Optimizer](../reference/optimizer/index.md)
+- [Mathematical Foundations → PSO Theory](../mathematical_foundations/pso_algorithm_theory.md)
 
 ## Overview
 

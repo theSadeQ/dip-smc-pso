@@ -84,7 +84,6 @@ docs_visual_audit_report
 :caption: PSO Optimization
 
 PSO_OPTIMIZATION_ENGINEER_COMPREHENSIVE_ANALYSIS_REPORT
-PSO_VALIDATION_FINAL_REPORT
 ```
 
 ### Production Readiness

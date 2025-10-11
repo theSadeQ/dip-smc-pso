@@ -76,7 +76,7 @@ dtheta2 = state[:, 5]
 
 ## Metric Interpretation
 
-#### ISE (Integral Squared Error)
+### ISE (Integral Squared Error)
 
 **What it measures:** Total squared deviation from equilibrium
 
@@ -133,7 +133,7 @@ itae_manual = compute_itae(time, state)
 print(f"ITAE (manual): {itae_manual:.4f}")
 ```
 
-#### Settling Time
+### Settling Time
 
 **What it measures:** Time to reach and stay within ±5% of setpoint
 
@@ -237,7 +237,7 @@ print(f"  Max ISE:  {np.max(ise_sta_trials):.4f}")
 
 ## Hypothesis Testing
 
-#### Welch's t-test (Unequal Variances)
+### Welch's t-test (Unequal Variances)
 
 ```python
 from scipy import stats

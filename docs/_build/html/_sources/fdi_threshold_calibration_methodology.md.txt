@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #================== docs/fdi_threshold_calibration_methodology.md ======================\\\
-#==========================================================================================\\\ # FDI Threshold Calibration Methodology **Issue**: #18 - FDI Threshold Too Sensitive - False Positives
+#==========================================================================================\\\
+
+# FDI Threshold Calibration Methodology **Issue**: #18 - FDI Threshold Too Sensitive - False Positives
 **Resolution Date**: 2025-10-01
 **Status**: Complete
 
