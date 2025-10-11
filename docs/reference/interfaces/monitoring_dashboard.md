@@ -17,7 +17,11 @@ views for all interface components. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-## Classes ### `MetricSeries` Time series data for a metric. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
+## Classes
+
+### `MetricSeries` Time series data for a metric.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
 :language: python
 :pyobject: MetricSeries
 :linenos:
@@ -25,7 +29,9 @@ views for all interface components. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-## `ChartConfig` Configuration for dashboard charts. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
+## `ChartConfig` Configuration for dashboard charts.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
 
 :language: python
 :pyobject: ChartConfig
@@ -34,7 +40,9 @@ views for all interface components. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-### `DashboardLayout` Dashboard layout configuration. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
+### `DashboardLayout` Dashboard layout configuration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
 :language: python
 :pyobject: DashboardLayout
 :linenos:
@@ -42,7 +50,9 @@ views for all interface components. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-### `DashboardServer` Web-based dashboard server. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
+### `DashboardServer` Web-based dashboard server.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
 
 :language: python
 :pyobject: DashboardServer
@@ -51,7 +61,9 @@ views for all interface components. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-### `DashboardManager` Manager for multiple dashboard instances. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
+### `DashboardManager` Manager for multiple dashboard instances.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
 :language: python
 :pyobject: DashboardManager
 :linenos:
@@ -59,7 +71,11 @@ views for all interface components. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-## Functions ### `create_system_dashboard()` Create default system monitoring dashboard. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
+## Functions
+
+### `create_system_dashboard()` Create default system monitoring dashboard.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
 
 :language: python
 :pyobject: create_system_dashboard
@@ -68,7 +84,9 @@ views for all interface components. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-### `create_performance_dashboard()` Create performance monitoring dashboard. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
+### `create_performance_dashboard()` Create performance monitoring dashboard.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
 :language: python
 :pyobject: create_performance_dashboard
 :linenos:
@@ -76,7 +94,9 @@ views for all interface components. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-### `start_monitoring_dashboards()` Start all monitoring dashboards. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
+### `start_monitoring_dashboards()` Start all monitoring dashboards.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/dashboard.py
 
 :language: python
 :pyobject: start_monitoring_dashboards

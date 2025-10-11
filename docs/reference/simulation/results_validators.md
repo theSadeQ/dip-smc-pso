@@ -17,7 +17,11 @@
 
 ---
 
-## Classes ### `ResultValidator` Validate simulation results for correctness and sanity. #### Source Code ```{literalinclude} ../../../src/simulation/results/validators.py
+## Classes
+
+### `ResultValidator` Validate simulation results for correctness and sanity.
+
+#### Source Code ```{literalinclude} ../../../src/simulation/results/validators.py
 :language: python
 :pyobject: ResultValidator
 :linenos:

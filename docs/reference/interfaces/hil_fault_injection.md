@@ -155,7 +155,11 @@ print(f"False positives: {false_positives}")
 
 ---
 
-## Classes ### `FaultType` **Inherits from:** `Enum` Fault type enumeration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+## Classes
+
+### `FaultType` **Inherits from:** `Enum` Fault type enumeration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 
 :language: python
 :pyobject: FaultType
@@ -164,7 +168,9 @@ print(f"False positives: {false_positives}")
 
 ---
 
-### `FaultSeverity` **Inherits from:** `Enum` Fault severity enumeration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+### `FaultSeverity` **Inherits from:** `Enum` Fault severity enumeration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 :language: python
 :pyobject: FaultSeverity
 :linenos:
@@ -172,7 +178,9 @@ print(f"False positives: {false_positives}")
 
 ---
 
-### `FaultProfile` Fault injection profile configuration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+### `FaultProfile` Fault injection profile configuration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 
 :language: python
 :pyobject: FaultProfile
@@ -181,7 +189,9 @@ print(f"False positives: {false_positives}")
 
 ---
 
-### `FaultScenario` Complete fault scenario with multiple fault profiles. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+### `FaultScenario` Complete fault scenario with multiple fault profiles.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 :language: python
 :pyobject: FaultScenario
 :linenos:
@@ -189,7 +199,9 @@ print(f"False positives: {false_positives}")
 
 ---
 
-### `FaultEvent` Fault event record. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+### `FaultEvent` Fault event record.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 
 :language: python
 :pyobject: FaultEvent
@@ -208,7 +220,11 @@ control system robustness and fault tolerance. #### Source Code ```{literalinclu
 
 ---
 
-## Functions ### `create_sensor_fault_scenario(sensor_name, fault_types, duration)` Create common sensor fault scenario. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+## Functions
+
+### `create_sensor_fault_scenario(sensor_name, fault_types, duration)` Create common sensor fault scenario.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 
 :language: python
 :pyobject: create_sensor_fault_scenario
@@ -217,7 +233,9 @@ control system robustness and fault tolerance. #### Source Code ```{literalinclu
 
 ---
 
-### `create_actuator_fault_scenario(actuator_name, severity)` Create common actuator fault scenario. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
+### `create_actuator_fault_scenario(actuator_name, severity)` Create common actuator fault scenario.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/fault_injection.py
 :language: python
 :pyobject: create_actuator_fault_scenario
 :linenos:

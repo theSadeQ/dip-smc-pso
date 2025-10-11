@@ -21,7 +21,11 @@ parameter adjustment, multi-objective optimization, and controller-specific tuni
 
 ---
 
-## Classes ### `OptimizationObjective` **Inherits from:** `Enum` PSO optimization objectives. #### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
+## Classes
+
+### `OptimizationObjective` **Inherits from:** `Enum` PSO optimization objectives.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
 :language: python
 :pyobject: OptimizationObjective
 :linenos:
@@ -29,7 +33,9 @@ parameter adjustment, multi-objective optimization, and controller-specific tuni
 
 ---
 
-## `PSOParameterType` **Inherits from:** `Enum` Types of PSO parameters to optimize. #### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
+## `PSOParameterType` **Inherits from:** `Enum` Types of PSO parameters to optimize.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
 
 :language: python
 :pyobject: PSOParameterType
@@ -38,7 +44,9 @@ parameter adjustment, multi-objective optimization, and controller-specific tuni
 
 ---
 
-### `PSOHyperparameters` PSO hyperparameter configuration. #### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
+### `PSOHyperparameters` PSO hyperparameter configuration.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
 :language: python
 :pyobject: PSOHyperparameters
 :linenos:
@@ -46,7 +54,9 @@ parameter adjustment, multi-objective optimization, and controller-specific tuni
 
 ---
 
-### `OptimizationResult` Result of hyperparameter optimization. #### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
+### `OptimizationResult` Result of hyperparameter optimization.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
 
 :language: python
 :pyobject: OptimizationResult
@@ -64,7 +74,11 @@ convergence efficiency and solution quality in the factory integration context. 
 
 ---
 
-## Functions ### `run_pso_hyperparameter_optimization()` Run complete PSO hyperparameter optimization workflow. #### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
+## Functions
+
+### `run_pso_hyperparameter_optimization()` Run complete PSO hyperparameter optimization workflow.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/tuning/pso_hyperparameter_optimizer.py
 
 :language: python
 :pyobject: run_pso_hyperparameter_optimization

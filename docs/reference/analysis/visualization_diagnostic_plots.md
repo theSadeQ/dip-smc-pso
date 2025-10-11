@@ -63,7 +63,11 @@ and control performance visualization. ## Complete Source Code ```{literalinclud
 
 ---
 
-## Classes ### `DiagnosticPlotter` Specialized diagnostic plotting for control systems. #### Source Code ```{literalinclude} ../../../src/analysis/visualization/diagnostic_plots.py
+## Classes
+
+### `DiagnosticPlotter` Specialized diagnostic plotting for control systems.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/visualization/diagnostic_plots.py
 :language: python
 :pyobject: DiagnosticPlotter
 :linenos:

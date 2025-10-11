@@ -82,7 +82,11 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 
 ---
 
-## Classes ### `ControllerType` **Inherits from:** `Enum` Controller types for PSO optimization. #### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+## Classes
+
+### `ControllerType` **Inherits from:** `Enum` Controller types for PSO optimization.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 
 :language: python
 :pyobject: ControllerType
@@ -91,7 +95,9 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 
 ---
 
-### `PSOFactoryConfig` Configuration for PSO-Factory integration. #### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+### `PSOFactoryConfig` Configuration for PSO-Factory integration.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 :language: python
 :pyobject: PSOFactoryConfig
 :linenos:
@@ -99,7 +105,9 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 
 ---
 
-### `EnhancedPSOFactory` Enhanced PSO-Factory integration with advanced optimization capabilities. #### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+### `EnhancedPSOFactory` Enhanced PSO-Factory integration with advanced optimization capabilities.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 
 :language: python
 :pyobject: EnhancedPSOFactory
@@ -108,7 +116,11 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 
 ---
 
-## Functions ### `create_optimized_controller_factory(controller_type, optimization_config)` Create an optimized controller factory using PSO with results. #### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+## Functions
+
+### `create_optimized_controller_factory(controller_type, optimization_config)` Create an optimized controller factory using PSO with results.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 :language: python
 :pyobject: create_optimized_controller_factory
 :linenos:
@@ -116,7 +128,9 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 
 ---
 
-### `optimize_classical_smc()` Optimize Classical SMC controller using PSO. #### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+### `optimize_classical_smc()` Optimize Classical SMC controller using PSO.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 
 :language: python
 :pyobject: optimize_classical_smc
@@ -125,7 +139,9 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 
 ---
 
-### `optimize_adaptive_smc()` Optimize Adaptive SMC controller using PSO. #### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+### `optimize_adaptive_smc()` Optimize Adaptive SMC controller using PSO.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 :language: python
 :pyobject: optimize_adaptive_smc
 :linenos:
@@ -133,7 +149,9 @@ pattern, addressing fitness evaluation issues, parameter validation, and converg
 
 ---
 
-### `optimize_sta_smc()` Optimize Super-Twisting SMC controller using PSO. #### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
+### `optimize_sta_smc()` Optimize Super-Twisting SMC controller using PSO.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/integration/pso_factory_bridge.py
 
 :language: python
 :pyobject: optimize_sta_smc

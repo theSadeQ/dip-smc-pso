@@ -18,7 +18,13 @@ stability and optimization algorithm convergence. Example: >>> from src.utils.nu
 
 ---
 
-## Dependencies This module imports: - `from src.utils.numerical_stability.safe_operations import safe_divide, safe_reciprocal, safe_sqrt, safe_log, safe_exp, safe_power, safe_norm, safe_normalize, EPSILON_DIV, EPSILON_SQRT, EPSILON_LOG, EPSILON_EXP, is_safe_denominator, clip_to_safe_range` ## Advanced Mathematical Theory ### Numerical Stability for Robust Computation Numerical stability utilities protect against common numerical errors in control systems and optimization algorithms. #### Division by Zero Protection **Safe division:**
+## Dependencies This module imports: - `from src.utils.numerical_stability.safe_operations import safe_divide, safe_reciprocal, safe_sqrt, safe_log, safe_exp, safe_power, safe_norm, safe_normalize, EPSILON_DIV, EPSILON_SQRT, EPSILON_LOG, EPSILON_EXP, is_safe_denominator, clip_to_safe_range`
+
+## Advanced Mathematical Theory
+
+### Numerical Stability for Robust Computation Numerical stability utilities protect against common numerical errors in control systems and optimization algorithms.
+
+#### Division by Zero Protection **Safe division:**
 $$
 \text{safe\_div}(a, b, \epsilon) = \frac{a}{\max(|b|, \epsilon)} \cdot \text{sign}(b)
 $$ where $\epsilon = 10^{-10}$ (default, configurable). **Reciprocal:**

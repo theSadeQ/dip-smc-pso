@@ -17,7 +17,11 @@
 
 ---
 
-## Classes ### `ResultProcessor` Process and analyze simulation results. #### Source Code ```{literalinclude} ../../../src/simulation/results/processors.py
+## Classes
+
+### `ResultProcessor` Process and analyze simulation results.
+
+#### Source Code ```{literalinclude} ../../../src/simulation/results/processors.py
 :language: python
 :pyobject: ResultProcessor
 :linenos:

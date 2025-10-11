@@ -79,7 +79,11 @@ optimization workflows and provides result analysis. Features:
 
 ---
 
-## Classes ### `OptimizationMetadata` metadata for optimization results. #### Source Code ```{literalinclude} ../../../src/optimization/core/results_manager.py
+## Classes
+
+### `OptimizationMetadata` metadata for optimization results.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/core/results_manager.py
 :language: python
 :pyobject: OptimizationMetadata
 :linenos:
@@ -87,7 +91,9 @@ optimization workflows and provides result analysis. Features:
 
 ---
 
-## `OptimizationResults` Complete optimization results structure. #### Source Code ```{literalinclude} ../../../src/optimization/core/results_manager.py
+## `OptimizationResults` Complete optimization results structure.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/core/results_manager.py
 
 :language: python
 :pyobject: OptimizationResults
@@ -105,7 +111,9 @@ and comparing optimization results with full provenance tracking. #### Source Co
 
 ---
 
-## Functions ### `create_optimization_metadata(controller_type, config, seed)` Create optimization metadata from configuration. Parameters
+## Functions
+
+### `create_optimization_metadata(controller_type, config, seed)` Create optimization metadata from configuration. Parameters
 
 controller_type : str Type of controller being optimized
 config : Dict[str, Any] Configuration dictionary

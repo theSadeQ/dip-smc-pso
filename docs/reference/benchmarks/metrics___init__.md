@@ -16,7 +16,9 @@ performance across multiple dimensions: - **Control Metrics**: ISE, ITAE, RMS ef
 
 ---
 
-## Functions ### `compute_basic_metrics(t, x, u, max_force, angular_indices)` Compute the basic metrics from original statistical_benchmarks.py. This function maintains compatibility with the original implementation
+## Functions
+
+### `compute_basic_metrics(t, x, u, max_force, angular_indices)` Compute the basic metrics from original statistical_benchmarks.py. This function maintains compatibility with the original implementation
 while using the new modular structure. Parameters
 ----------
 t : np.ndarray Time vector of length N+1

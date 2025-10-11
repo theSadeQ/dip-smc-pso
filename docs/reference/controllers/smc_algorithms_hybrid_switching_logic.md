@@ -65,7 +65,11 @@ print(f"ITAE: {metrics.itae:.3f}")
 
 ---
 
-## Classes ### `ControllerState` **Inherits from:** `Enum` Current active controller state. #### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/switching_logic.py
+## Classes
+
+### `ControllerState` **Inherits from:** `Enum` Current active controller state.
+
+#### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/switching_logic.py
 
 :language: python
 :pyobject: ControllerState
@@ -74,7 +78,9 @@ print(f"ITAE: {metrics.itae:.3f}")
 
 ---
 
-### `SwitchingDecision` Represents a switching decision with reasoning. #### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/switching_logic.py
+### `SwitchingDecision` Represents a switching decision with reasoning.
+
+#### Source Code ```{literalinclude} ../../../src/controllers/smc/algorithms/hybrid/switching_logic.py
 :language: python
 :pyobject: SwitchingDecision
 :linenos:

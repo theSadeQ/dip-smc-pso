@@ -75,7 +75,11 @@ applications and statistical rigor. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-## Classes ### `BaseMetricCalculator` **Inherits from:** `MetricCalculator` Base implementation of metric calculator with common functionality. #### Source Code ```{literalinclude} ../../../src/analysis/core/metrics.py
+## Classes
+
+### `BaseMetricCalculator` **Inherits from:** `MetricCalculator` Base implementation of metric calculator with common functionality.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/metrics.py
 
 :language: python
 :pyobject: BaseMetricCalculator
@@ -84,7 +88,9 @@ applications and statistical rigor. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-### `ControlPerformanceMetrics` **Inherits from:** `BaseMetricCalculator` Calculator for control performance metrics. #### Source Code ```{literalinclude} ../../../src/analysis/core/metrics.py
+### `ControlPerformanceMetrics` **Inherits from:** `BaseMetricCalculator` Calculator for control performance metrics.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/metrics.py
 :language: python
 :pyobject: ControlPerformanceMetrics
 :linenos:
@@ -92,7 +98,9 @@ applications and statistical rigor. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-### `StabilityMetrics` **Inherits from:** `BaseMetricCalculator` Calculator for stability-related metrics. #### Source Code ```{literalinclude} ../../../src/analysis/core/metrics.py
+### `StabilityMetrics` **Inherits from:** `BaseMetricCalculator` Calculator for stability-related metrics.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/metrics.py
 
 :language: python
 :pyobject: StabilityMetrics
@@ -101,7 +109,9 @@ applications and statistical rigor. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-### `RobustnessMetrics` **Inherits from:** `BaseMetricCalculator` Calculator for robustness metrics. #### Source Code ```{literalinclude} ../../../src/analysis/core/metrics.py
+### `RobustnessMetrics` **Inherits from:** `BaseMetricCalculator` Calculator for robustness metrics.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/metrics.py
 :language: python
 :pyobject: RobustnessMetrics
 :linenos:
@@ -109,7 +119,9 @@ applications and statistical rigor. ## Complete Source Code ```{literalinclude} 
 
 ---
 
-## Functions ### `create_comprehensive_metrics(data, reference, include_stability, include_robustness)` Create performance metrics from simulation data. Parameters
+## Functions
+
+### `create_comprehensive_metrics(data, reference, include_stability, include_robustness)` Create performance metrics from simulation data. Parameters
 
 data : DataProtocol Simulation data
 reference : np.ndarray, optional Reference trajectory for tracking metrics
@@ -125,7 +137,9 @@ PerformanceMetrics collection of performance metrics #### Source Code ```{litera
 
 ---
 
-### `_get_metric_unit(metric_name)` Get appropriate unit for a metric. #### Source Code ```{literalinclude} ../../../src/analysis/core/metrics.py
+### `_get_metric_unit(metric_name)` Get appropriate unit for a metric.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/metrics.py
 :language: python
 :pyobject: _get_metric_unit
 :linenos:

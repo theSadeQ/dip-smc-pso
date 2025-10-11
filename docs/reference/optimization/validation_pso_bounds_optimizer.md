@@ -20,7 +20,11 @@ factory integration requirements. Features:
 
 ---
 
-## Classes ### `BoundsOptimizationStrategy` **Inherits from:** `Enum` Strategy for optimizing parameter bounds. #### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
+## Classes
+
+### `BoundsOptimizationStrategy` **Inherits from:** `Enum` Strategy for optimizing parameter bounds.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
 :language: python
 :pyobject: BoundsOptimizationStrategy
 :linenos:
@@ -28,7 +32,9 @@ factory integration requirements. Features:
 
 ---
 
-## `ControllerBoundsSpec` Specification for controller parameter bounds. #### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
+## `ControllerBoundsSpec` Specification for controller parameter bounds.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
 
 :language: python
 :pyobject: ControllerBoundsSpec
@@ -37,7 +43,9 @@ factory integration requirements. Features:
 
 ---
 
-### `BoundsValidationResult` Result of bounds validation analysis. #### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
+### `BoundsValidationResult` Result of bounds validation analysis.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
 :language: python
 :pyobject: BoundsValidationResult
 :linenos:
@@ -55,7 +63,11 @@ control performance across all SMC controller types. #### Source Code ```{litera
 
 ---
 
-## Functions ### `run_pso_bounds_optimization()` Run complete PSO bounds optimization workflow. #### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
+## Functions
+
+### `run_pso_bounds_optimization()` Run complete PSO bounds optimization workflow.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_optimizer.py
 :language: python
 :pyobject: run_pso_bounds_optimization
 :linenos:

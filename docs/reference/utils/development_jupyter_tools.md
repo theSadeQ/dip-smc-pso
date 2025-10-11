@@ -14,7 +14,9 @@ plots, and data from Jupyter notebooks in various formats. ## Complete Source Co
 
 ---
 
-## Classes ### `NotebookExporter` Utility class for exporting data and plots from Jupyter notebooks. Provides methods to save simulation results, plots, and metadata
+## Classes
+
+### `NotebookExporter` Utility class for exporting data and plots from Jupyter notebooks. Provides methods to save simulation results, plots, and metadata
 in various formats with automatic timestamping and organization. #### Source Code ```{literalinclude} ../../../src/utils/development/jupyter_tools.py
 :language: python
 :pyobject: NotebookExporter
@@ -23,7 +25,11 @@ in various formats with automatic timestamping and organization. #### Source Cod
 
 ---
 
-## Functions ### `quick_export_simulation(time, states, controls)` Quick simulation data export with default settings. #### Source Code ```{literalinclude} ../../../src/utils/development/jupyter_tools.py
+## Functions
+
+### `quick_export_simulation(time, states, controls)` Quick simulation data export with default settings.
+
+#### Source Code ```{literalinclude} ../../../src/utils/development/jupyter_tools.py
 
 :language: python
 :pyobject: quick_export_simulation
@@ -32,7 +38,9 @@ in various formats with automatic timestamping and organization. #### Source Cod
 
 ---
 
-### `quick_export_plots()` Quick plot export with default settings. #### Source Code ```{literalinclude} ../../../src/utils/development/jupyter_tools.py
+### `quick_export_plots()` Quick plot export with default settings.
+
+#### Source Code ```{literalinclude} ../../../src/utils/development/jupyter_tools.py
 :language: python
 :pyobject: quick_export_plots
 :linenos:
@@ -40,7 +48,9 @@ in various formats with automatic timestamping and organization. #### Source Cod
 
 ---
 
-### `quick_analysis_report(time, states, controls)` Quick analysis report generation. #### Source Code ```{literalinclude} ../../../src/utils/development/jupyter_tools.py
+### `quick_analysis_report(time, states, controls)` Quick analysis report generation.
+
+#### Source Code ```{literalinclude} ../../../src/utils/development/jupyter_tools.py
 
 :language: python
 :pyobject: quick_analysis_report

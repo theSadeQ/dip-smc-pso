@@ -71,7 +71,11 @@ including performance plots, comparison charts, and interactive visualizations. 
 
 ---
 
-## Classes ### `AnalysisPlotter` **Inherits from:** `VisualizationGenerator` Professional analysis plotting framework. #### Source Code ```{literalinclude} ../../../src/analysis/visualization/analysis_plots.py
+## Classes
+
+### `AnalysisPlotter` **Inherits from:** `VisualizationGenerator` Professional analysis plotting framework.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/visualization/analysis_plots.py
 :language: python
 :pyobject: AnalysisPlotter
 :linenos:
@@ -79,7 +83,9 @@ including performance plots, comparison charts, and interactive visualizations. 
 
 ---
 
-## Functions ### `create_analysis_plotter(style)` Factory function to create analysis plotter. Parameters
+## Functions
+
+### `create_analysis_plotter(style)` Factory function to create analysis plotter. Parameters
 
 style : str, optional Plot style
 **kwargs Additional configuration parameters Returns

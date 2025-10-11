@@ -15,7 +15,9 @@ physics modeling. ## Complete Source Code ```{literalinclude} ../../../src/plant
 
 ---
 
-## Classes ### `FullDIPDynamics` **Inherits from:** `BaseDynamicsModel` Full Fidelity Double Inverted Pendulum Dynamics Model. High-fidelity implementation featuring:
+## Classes
+
+### `FullDIPDynamics` **Inherits from:** `BaseDynamicsModel` Full Fidelity Double Inverted Pendulum Dynamics Model. High-fidelity implementation featuring:
 - Complete nonlinear dynamics with all coupling effects
 - Advanced friction models (viscous + Coulomb)
 - Aerodynamic forces and wind effects

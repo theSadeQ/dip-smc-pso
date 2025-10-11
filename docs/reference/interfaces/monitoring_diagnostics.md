@@ -17,7 +17,11 @@ recommendations for all interface components. ## Complete Source Code ```{litera
 
 ---
 
-## Classes ### `DiagnosticLevel` **Inherits from:** `Enum` Diagnostic severity levels. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
+## Classes
+
+### `DiagnosticLevel` **Inherits from:** `Enum` Diagnostic severity levels.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
 :language: python
 :pyobject: DiagnosticLevel
 :linenos:
@@ -25,7 +29,9 @@ recommendations for all interface components. ## Complete Source Code ```{litera
 
 ---
 
-## `DiagnosticCategory` **Inherits from:** `Enum` Categories of diagnostic checks. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
+## `DiagnosticCategory` **Inherits from:** `Enum` Categories of diagnostic checks.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
 
 :language: python
 :pyobject: DiagnosticCategory
@@ -34,7 +40,9 @@ recommendations for all interface components. ## Complete Source Code ```{litera
 
 ---
 
-### `DiagnosticResult` Result of a diagnostic check. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
+### `DiagnosticResult` Result of a diagnostic check.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
 :language: python
 :pyobject: DiagnosticResult
 :linenos:
@@ -42,7 +50,9 @@ recommendations for all interface components. ## Complete Source Code ```{litera
 
 ---
 
-### `SystemProfile` system profiling data. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
+### `SystemProfile` system profiling data.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
 
 :language: python
 :pyobject: SystemProfile
@@ -51,7 +61,9 @@ recommendations for all interface components. ## Complete Source Code ```{litera
 
 ---
 
-### `DiagnosticCheck` **Inherits from:** `ABC` Base class for diagnostic checks. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
+### `DiagnosticCheck` **Inherits from:** `ABC` Base class for diagnostic checks.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
 :language: python
 :pyobject: DiagnosticCheck
 :linenos:
@@ -59,7 +71,9 @@ recommendations for all interface components. ## Complete Source Code ```{litera
 
 ---
 
-### `SystemResourceCheck` **Inherits from:** `DiagnosticCheck` Check system resource utilization. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
+### `SystemResourceCheck` **Inherits from:** `DiagnosticCheck` Check system resource utilization.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
 
 :language: python
 :pyobject: SystemResourceCheck
@@ -68,7 +82,9 @@ recommendations for all interface components. ## Complete Source Code ```{litera
 
 ---
 
-### `NetworkDiagnosticCheck` **Inherits from:** `DiagnosticCheck` Check network connectivity and performance. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
+### `NetworkDiagnosticCheck` **Inherits from:** `DiagnosticCheck` Check network connectivity and performance.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
 :language: python
 :pyobject: NetworkDiagnosticCheck
 :linenos:
@@ -76,7 +92,9 @@ recommendations for all interface components. ## Complete Source Code ```{litera
 
 ---
 
-### `PerformanceDiagnosticCheck` **Inherits from:** `DiagnosticCheck` Check system performance metrics. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
+### `PerformanceDiagnosticCheck` **Inherits from:** `DiagnosticCheck` Check system performance metrics.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
 
 :language: python
 :pyobject: PerformanceDiagnosticCheck
@@ -85,7 +103,9 @@ recommendations for all interface components. ## Complete Source Code ```{litera
 
 ---
 
-### `DiagnosticEngine` Main diagnostic engine that coordinates all checks. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
+### `DiagnosticEngine` Main diagnostic engine that coordinates all checks.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
 :language: python
 :pyobject: DiagnosticEngine
 :linenos:
@@ -93,7 +113,9 @@ recommendations for all interface components. ## Complete Source Code ```{litera
 
 ---
 
-### `TroubleshootingAssistant` AI-powered troubleshooting assistant. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
+### `TroubleshootingAssistant` AI-powered troubleshooting assistant.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
 
 :language: python
 :pyobject: TroubleshootingAssistant
@@ -102,7 +124,11 @@ recommendations for all interface components. ## Complete Source Code ```{litera
 
 ---
 
-## Functions ### `run_comprehensive_diagnostics()` Run system diagnostics. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
+## Functions
+
+### `run_comprehensive_diagnostics()` Run system diagnostics.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
 :language: python
 :pyobject: run_comprehensive_diagnostics
 :linenos:
@@ -110,7 +136,9 @@ recommendations for all interface components. ## Complete Source Code ```{litera
 
 ---
 
-### `configure_diagnostics(cpu_threshold, memory_threshold, disk_threshold, check_interval)` Configure diagnostic thresholds and parameters. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
+### `configure_diagnostics(cpu_threshold, memory_threshold, disk_threshold, check_interval)` Configure diagnostic thresholds and parameters.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/diagnostics.py
 
 :language: python
 :pyobject: configure_diagnostics

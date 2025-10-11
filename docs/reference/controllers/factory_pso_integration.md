@@ -97,7 +97,11 @@ print(f"Speedup: ~8x using parallel evaluation")
 
 ---
 
-## Classes ### `PSOOptimizable` **Inherits from:** `Protocol` Protocol for PSO-optimizable controllers. #### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
+## Classes
+
+### `PSOOptimizable` **Inherits from:** `Protocol` Protocol for PSO-optimizable controllers.
+
+#### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
 :language: python
 :pyobject: PSOOptimizable
 :linenos:
@@ -105,7 +109,9 @@ print(f"Speedup: ~8x using parallel evaluation")
 
 ---
 
-## `PSOPerformanceMetrics` Performance metrics for PSO controller evaluation. #### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
+## `PSOPerformanceMetrics` Performance metrics for PSO controller evaluation.
+
+#### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
 
 :language: python
 :pyobject: PSOPerformanceMetrics
@@ -127,7 +133,11 @@ print(f"Speedup: ~8x using parallel evaluation")
 
 ---
 
-## Functions ### `create_enhanced_pso_controller(smc_type, gains, plant_config, max_force, dt, enable_monitoring)` Create enhanced PSO-compatible controller with advanced features. Args: smc_type: SMC controller type gains: Controller gains plant_config: Plant configuration (optional) max_force: Maximum control force dt: Control timestep enable_monitoring: performance monitoring **kwargs: Additional controller parameters Returns: Enhanced PSO controller wrapper Raises: ValueError: If parameters are invalid #### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
+## Functions
+
+### `create_enhanced_pso_controller(smc_type, gains, plant_config, max_force, dt, enable_monitoring)` Create enhanced PSO-compatible controller with advanced features. Args: smc_type: SMC controller type gains: Controller gains plant_config: Plant configuration (optional) max_force: Maximum control force dt: Control timestep enable_monitoring: performance monitoring **kwargs: Additional controller parameters Returns: Enhanced PSO controller wrapper Raises: ValueError: If parameters are invalid
+
+#### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
 
 :language: python
 :pyobject: create_enhanced_pso_controller
@@ -136,7 +146,9 @@ print(f"Speedup: ~8x using parallel evaluation")
 
 ---
 
-### `create_optimized_pso_factory(smc_type, plant_config, max_force, enable_monitoring)` Create optimized PSO factory function for controller creation. Args: smc_type: SMC controller type plant_config: Plant configuration (optional) max_force: Maximum control force enable_monitoring: performance monitoring **kwargs: Additional factory parameters Returns: Factory function that creates PSO controllers from gains #### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
+### `create_optimized_pso_factory(smc_type, plant_config, max_force, enable_monitoring)` Create optimized PSO factory function for controller creation. Args: smc_type: SMC controller type plant_config: Plant configuration (optional) max_force: Maximum control force enable_monitoring: performance monitoring **kwargs: Additional factory parameters Returns: Factory function that creates PSO controllers from gains
+
+#### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
 :language: python
 :pyobject: create_optimized_pso_factory
 :linenos:
@@ -144,7 +156,9 @@ print(f"Speedup: ~8x using parallel evaluation")
 
 ---
 
-### `get_optimized_pso_bounds(smc_type, performance_target)` Get optimized PSO bounds based on performance targets. Args: smc_type: Controller type performance_target: 'aggressive', 'balanced', or 'conservative' Returns: Tuple of (lower_bounds, upper_bounds) #### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
+### `get_optimized_pso_bounds(smc_type, performance_target)` Get optimized PSO bounds based on performance targets. Args: smc_type: Controller type performance_target: 'aggressive', 'balanced', or 'conservative' Returns: Tuple of (lower_bounds, upper_bounds)
+
+#### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
 
 :language: python
 :pyobject: get_optimized_pso_bounds
@@ -153,7 +167,9 @@ print(f"Speedup: ~8x using parallel evaluation")
 
 ---
 
-### `validate_pso_gains_advanced(smc_type, gains, check_stability)` Advanced validation of PSO gains with stability analysis. Args: smc_type: Controller type gains: Gains to validate check_stability: Perform stability checks Returns: Dictionary with validation results #### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
+### `validate_pso_gains_advanced(smc_type, gains, check_stability)` Advanced validation of PSO gains with stability analysis. Args: smc_type: Controller type gains: Gains to validate check_stability: Perform stability checks Returns: Dictionary with validation results
+
+#### Source Code ```{literalinclude} ../../../src/controllers/factory/pso_integration.py
 :language: python
 :pyobject: validate_pso_gains_advanced
 :linenos:

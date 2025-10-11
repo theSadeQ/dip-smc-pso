@@ -14,7 +14,11 @@ analysis methods, controllers, and algorithms in control engineering application
 
 ---
 
-## Classes ### `BenchmarkConfig` Configuration for benchmarking. #### Source Code ```{literalinclude} ../../../src/analysis/validation/benchmarking.py
+## Classes
+
+### `BenchmarkConfig` Configuration for benchmarking.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/validation/benchmarking.py
 :language: python
 :pyobject: BenchmarkConfig
 :linenos:
@@ -22,7 +26,9 @@ analysis methods, controllers, and algorithms in control engineering application
 
 ---
 
-## `BenchmarkSuite` **Inherits from:** `StatisticalValidator` benchmarking and comparison framework. #### Source Code ```{literalinclude} ../../../src/analysis/validation/benchmarking.py
+## `BenchmarkSuite` **Inherits from:** `StatisticalValidator` benchmarking and comparison framework.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/validation/benchmarking.py
 
 :language: python
 :pyobject: BenchmarkSuite
@@ -31,7 +37,9 @@ analysis methods, controllers, and algorithms in control engineering application
 
 ---
 
-## Functions ### `create_benchmark_suite(config)` Factory function to create benchmark suite. Parameters
+## Functions
+
+### `create_benchmark_suite(config)` Factory function to create benchmark suite. Parameters
 ----------
 config : Dict[str, Any], optional Configuration parameters Returns
 -------

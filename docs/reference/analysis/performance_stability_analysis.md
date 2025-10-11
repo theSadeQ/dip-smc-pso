@@ -73,7 +73,11 @@ Lyapunov analysis, eigenvalue analysis, and stability margin computation. ## Com
 
 ---
 
-## Classes ### `StabilityAnalysisConfig` Configuration for stability analysis. #### Source Code ```{literalinclude} ../../../src/analysis/performance/stability_analysis.py
+## Classes
+
+### `StabilityAnalysisConfig` Configuration for stability analysis.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/performance/stability_analysis.py
 
 :language: python
 :pyobject: StabilityAnalysisConfig
@@ -82,7 +86,9 @@ Lyapunov analysis, eigenvalue analysis, and stability margin computation. ## Com
 
 ---
 
-### `StabilityAnalyzer` **Inherits from:** `PerformanceAnalyzer` stability analysis for linear and nonlinear systems. #### Source Code ```{literalinclude} ../../../src/analysis/performance/stability_analysis.py
+### `StabilityAnalyzer` **Inherits from:** `PerformanceAnalyzer` stability analysis for linear and nonlinear systems.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/performance/stability_analysis.py
 :language: python
 :pyobject: StabilityAnalyzer
 :linenos:
@@ -96,7 +102,9 @@ Compute robustness margins (simplified).
 
 ---
 
-## Functions ### `create_stability_analyzer(config)` Factory function to create stability analyzer. Parameters
+## Functions
+
+### `create_stability_analyzer(config)` Factory function to create stability analyzer. Parameters
 
 config : Dict[str, Any], optional Configuration parameters Returns
 -------

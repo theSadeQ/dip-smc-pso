@@ -22,7 +22,9 @@
 
 ---
 
-## Mathematical Foundation ### Matrix Conditioning **Definition:** The **condition number** of a matrix A measures the sensitivity of the solution x to perturbations in the right-hand side b when solving Ax = b: $$
+## Mathematical Foundation
+
+### Matrix Conditioning **Definition:** The **condition number** of a matrix A measures the sensitivity of the solution x to perturbations in the right-hand side b when solving Ax = b: $$
 \kappa(A) = \|A\| \cdot \|A^{-1}\|
 $$ For symmetric positive-definite matrices (like M(q)), using the 2-norm: $$
 \kappa_2(A) = \frac{\sigma_{\text{max}}(A)}{\sigma_{\text{min}}(A)}
@@ -97,7 +99,9 @@ except NumericalInstabilityError as e: logger.error(f"Dynamics computation faile
 
 ---
 
-## API Reference ### Exception: NumericalInstabilityError **Inherits:** `RuntimeError` ```{literalinclude} ../../../src/plant/core/numerical_stability.py
+## API Reference
+
+### Exception: NumericalInstabilityError **Inherits:** `RuntimeError` ```{literalinclude} ../../../src/plant/core/numerical_stability.py
 
 :language: python
 :pyobject: NumericalInstabilityError
@@ -281,7 +285,9 @@ print(f"Relative error: {abs(exact_cond - approx_cond) / exact_cond * 100:.1f}%"
 
 ---
 
-## Usage Examples ### Basic Regularization ```python
+## Usage Examples
+
+### Basic Regularization ```python
 
 import numpy as np
 from src.plant.core import AdaptiveRegularizer # Create ill-conditioned matrix
@@ -331,7 +337,9 @@ print(f"Fixed κ: {np.linalg.cond(M_fixed):.2e}")
 
 ---
 
-## Performance Considerations ### SVD Computational Cost **Full SVD**: O(n³) for n×n matrix For 3×3 matrices (DIP dynamics):
+## Performance Considerations
+
+### SVD Computational Cost **Full SVD**: O(n³) for n×n matrix For 3×3 matrices (DIP dynamics):
 - **Typical time**: 5-10 μs (modern CPU)
 - **Acceptable** for real-time control at 1 kHz For larger systems (10×10):
 - **Typical time**: 100-200 μs

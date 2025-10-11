@@ -14,7 +14,11 @@ phase portraits, time series analysis, and system identification. ## Complete So
 
 ---
 
-## Classes ### `ControlPlotter` Static plotting utilities for control system analysis. #### Source Code ```{literalinclude} ../../../src/utils/visualization/static_plots.py
+## Classes
+
+### `ControlPlotter` Static plotting utilities for control system analysis.
+
+#### Source Code ```{literalinclude} ../../../src/utils/visualization/static_plots.py
 :language: python
 :pyobject: ControlPlotter
 :linenos:
@@ -22,7 +26,9 @@ phase portraits, time series analysis, and system identification. ## Complete So
 
 ---
 
-## `SystemVisualization` High-level visualization for complete system analysis. #### Source Code ```{literalinclude} ../../../src/utils/visualization/static_plots.py
+## `SystemVisualization` High-level visualization for complete system analysis.
+
+#### Source Code ```{literalinclude} ../../../src/utils/visualization/static_plots.py
 
 :language: python
 :pyobject: SystemVisualization

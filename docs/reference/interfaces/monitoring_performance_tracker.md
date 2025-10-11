@@ -15,7 +15,11 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 
 ---
 
-## Classes ### `MetricType` **Inherits from:** `Enum` Performance metric types. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
+## Classes
+
+### `MetricType` **Inherits from:** `Enum` Performance metric types.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
 :language: python
 :pyobject: MetricType
 :linenos:
@@ -23,7 +27,9 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 
 ---
 
-## `PerformanceMetric` Individual performance metric measurement. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
+## `PerformanceMetric` Individual performance metric measurement.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
 
 :language: python
 :pyobject: PerformanceMetric
@@ -32,7 +38,9 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 
 ---
 
-### `SerializationMetrics` serialization performance metrics. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
+### `SerializationMetrics` serialization performance metrics.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
 :language: python
 :pyobject: SerializationMetrics
 :linenos:
@@ -40,7 +48,9 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 
 ---
 
-### `PerformanceMonitor` Real-time performance monitoring for serialization operations. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
+### `PerformanceMonitor` Real-time performance monitoring for serialization operations.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
 
 :language: python
 :pyobject: PerformanceMonitor
@@ -49,7 +59,9 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 
 ---
 
-### `PerformanceSerializer` **Inherits from:** `SerializerInterface` Performance-aware serializer wrapper with monitoring and adaptive optimization. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
+### `PerformanceSerializer` **Inherits from:** `SerializerInterface` Performance-aware serializer wrapper with monitoring and adaptive optimization.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
 :language: python
 :pyobject: PerformanceSerializer
 :linenos:
@@ -57,7 +69,9 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 
 ---
 
-### `BatchSerializer` High-performance batch serialization for multiple data items. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
+### `BatchSerializer` High-performance batch serialization for multiple data items.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
 
 :language: python
 :pyobject: BatchSerializer
@@ -66,7 +80,11 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 
 ---
 
-## Functions ### `get_global_monitor()` Get global performance monitor instance. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
+## Functions
+
+### `get_global_monitor()` Get global performance monitor instance.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
 :language: python
 :pyobject: get_global_monitor
 :linenos:
@@ -74,7 +92,9 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 
 ---
 
-### `create_performance_serializer(base_serializer, monitor)` Create performance-aware serializer wrapper. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
+### `create_performance_serializer(base_serializer, monitor)` Create performance-aware serializer wrapper.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
 
 :language: python
 :pyobject: create_performance_serializer
@@ -83,7 +103,9 @@ and adaptive optimization based on runtime characteristics. ## Complete Source C
 
 ---
 
-### `get_performance_summary()` Get performance summary for all monitored serializers. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
+### `get_performance_summary()` Get performance summary for all monitored serializers.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/performance_tracker.py
 :language: python
 :pyobject: get_performance_summary
 :linenos:

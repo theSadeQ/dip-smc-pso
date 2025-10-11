@@ -76,7 +76,11 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 
 ---
 
-## Classes ### `SimulationData` Standard container for simulation data. #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
+## Classes
+
+### `SimulationData` Standard container for simulation data.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
 :language: python
 :pyobject: SimulationData
 :linenos:
@@ -84,7 +88,9 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 
 ---
 
-## `MetricResult` Container for individual metric results. #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
+## `MetricResult` Container for individual metric results.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
 
 :language: python
 :pyobject: MetricResult
@@ -93,7 +99,9 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 
 ---
 
-### `PerformanceMetrics` Container for performance metrics. #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
+### `PerformanceMetrics` Container for performance metrics.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
 :language: python
 :pyobject: PerformanceMetrics
 :linenos:
@@ -101,7 +109,9 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 
 ---
 
-### `FaultDetectionResult` Container for fault detection results. #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
+### `FaultDetectionResult` Container for fault detection results.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
 
 :language: python
 :pyobject: FaultDetectionResult
@@ -110,7 +120,9 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 
 ---
 
-### `StatisticalTestResult` Container for statistical test results. #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
+### `StatisticalTestResult` Container for statistical test results.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
 :language: python
 :pyobject: StatisticalTestResult
 :linenos:
@@ -118,7 +130,9 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 
 ---
 
-### `ConfidenceInterval` Container for confidence intervals. #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
+### `ConfidenceInterval` Container for confidence intervals.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
 
 :language: python
 :pyobject: ConfidenceInterval
@@ -127,7 +141,9 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 
 ---
 
-### `ComparisonResult` Container for comparison analysis results. #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
+### `ComparisonResult` Container for comparison analysis results.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
 :language: python
 :pyobject: ComparisonResult
 :linenos:
@@ -135,7 +151,9 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 
 ---
 
-### `AnalysisConfiguration` Configuration for analysis operations. #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
+### `AnalysisConfiguration` Configuration for analysis operations.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
 
 :language: python
 :pyobject: AnalysisConfiguration
@@ -144,7 +162,11 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 
 ---
 
-## Functions ### `create_simulation_data_from_arrays(times, states, controls)` Factory function for creating SimulationData. #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
+## Functions
+
+### `create_simulation_data_from_arrays(times, states, controls)` Factory function for creating SimulationData.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
 :language: python
 :pyobject: create_simulation_data_from_arrays
 :linenos:
@@ -152,7 +174,9 @@ simulation data, analysis results, and configuration parameters. ## Complete Sou
 
 ---
 
-### `create_analysis_result(status, message, data)` Factory function for creating AnalysisResult. #### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
+### `create_analysis_result(status, message, data)` Factory function for creating AnalysisResult.
+
+#### Source Code ```{literalinclude} ../../../src/analysis/core/data_structures.py
 
 :language: python
 :pyobject: create_analysis_result

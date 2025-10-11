@@ -67,7 +67,11 @@ real-time memory monitoring for production deployment. Key Features:
 
 ---
 
-## Classes ### `MemoryConfig` Memory management configuration for PSO optimization. #### Source Code ```{literalinclude} ../../../src/optimization/algorithms/memory_efficient_pso.py
+## Classes
+
+### `MemoryConfig` Memory management configuration for PSO optimization.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/algorithms/memory_efficient_pso.py
 
 :language: python
 :pyobject: MemoryConfig
@@ -76,7 +80,9 @@ real-time memory monitoring for production deployment. Key Features:
 
 ---
 
-### `MemoryTracker` Real-time memory usage tracker for PSO optimization. #### Source Code ```{literalinclude} ../../../src/optimization/algorithms/memory_efficient_pso.py
+### `MemoryTracker` Real-time memory usage tracker for PSO optimization.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/algorithms/memory_efficient_pso.py
 :language: python
 :pyobject: MemoryTracker
 :linenos:
@@ -84,7 +90,9 @@ real-time memory monitoring for production deployment. Key Features:
 
 ---
 
-### `BoundedHistory` Bounded history collection with automatic size management. #### Source Code ```{literalinclude} ../../../src/optimization/algorithms/memory_efficient_pso.py
+### `BoundedHistory` Bounded history collection with automatic size management.
+
+#### Source Code ```{literalinclude} ../../../src/optimization/algorithms/memory_efficient_pso.py
 
 :language: python
 :pyobject: BoundedHistory

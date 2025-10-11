@@ -19,7 +19,9 @@ of system performance. Metrics implemented:
 
 ---
 
-## Functions ### `compute_ise(t, x)` Compute Integral of Squared Error (ISE) for all state variables. The ISE metric integrates the squared state deviations over time:
+## Functions
+
+### `compute_ise(t, x)` Compute Integral of Squared Error (ISE) for all state variables. The ISE metric integrates the squared state deviations over time:
 ISE = ∫₀ᵀ ||x(t)||² dt This metric penalizes large deviations heavily and provides a measure
 of overall tracking performance. Lower values indicate better control. Parameters
 ----------

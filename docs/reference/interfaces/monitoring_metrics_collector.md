@@ -17,7 +17,11 @@ components. ## Complete Source Code ```{literalinclude} ../../../src/interfaces/
 
 ---
 
-## Classes ### `MetricType` **Inherits from:** `Enum` Metric type enumeration. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
+## Classes
+
+### `MetricType` **Inherits from:** `Enum` Metric type enumeration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
 :language: python
 :pyobject: MetricType
 :linenos:
@@ -25,7 +29,9 @@ components. ## Complete Source Code ```{literalinclude} ../../../src/interfaces/
 
 ---
 
-## `AggregationType` **Inherits from:** `Enum` Metric aggregation type. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
+## `AggregationType` **Inherits from:** `Enum` Metric aggregation type.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
 
 :language: python
 :pyobject: AggregationType
@@ -34,7 +40,9 @@ components. ## Complete Source Code ```{literalinclude} ../../../src/interfaces/
 
 ---
 
-### `MetricValue` Individual metric value with timestamp. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
+### `MetricValue` Individual metric value with timestamp.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
 :language: python
 :pyobject: MetricValue
 :linenos:
@@ -42,7 +50,9 @@ components. ## Complete Source Code ```{literalinclude} ../../../src/interfaces/
 
 ---
 
-### `Metric` Metric definition and storage. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
+### `Metric` Metric definition and storage.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
 
 :language: python
 :pyobject: Metric
@@ -51,7 +61,9 @@ components. ## Complete Source Code ```{literalinclude} ../../../src/interfaces/
 
 ---
 
-### `MetricsCollector` Main metrics collection and management system. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
+### `MetricsCollector` Main metrics collection and management system.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
 :language: python
 :pyobject: MetricsCollector
 :linenos:
@@ -59,7 +71,9 @@ components. ## Complete Source Code ```{literalinclude} ../../../src/interfaces/
 
 ---
 
-### `SystemMetricsCollector` System-level metrics collector for system resources. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
+### `SystemMetricsCollector` System-level metrics collector for system resources.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
 
 :language: python
 :pyobject: SystemMetricsCollector
@@ -68,7 +82,9 @@ components. ## Complete Source Code ```{literalinclude} ../../../src/interfaces/
 
 ---
 
-### `TimerContext` Context manager for timing operations. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
+### `TimerContext` Context manager for timing operations.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
 :language: python
 :pyobject: TimerContext
 :linenos:
@@ -76,7 +92,11 @@ components. ## Complete Source Code ```{literalinclude} ../../../src/interfaces/
 
 ---
 
-## Functions ### `create_metric(name, metric_type, description, unit, tags)` Create a metric instance. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
+## Functions
+
+### `create_metric(name, metric_type, description, unit, tags)` Create a metric instance.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
 
 :language: python
 :pyobject: create_metric
@@ -85,7 +105,9 @@ components. ## Complete Source Code ```{literalinclude} ../../../src/interfaces/
 
 ---
 
-### `timer(collector, metric_name, tags)` Create timer context manager. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
+### `timer(collector, metric_name, tags)` Create timer context manager.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
 :language: python
 :pyobject: timer
 :linenos:
@@ -93,7 +115,9 @@ components. ## Complete Source Code ```{literalinclude} ../../../src/interfaces/
 
 ---
 
-### `timed_function(collector, metric_name, tags)` Decorator to time function execution. #### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
+### `timed_function(collector, metric_name, tags)` Decorator to time function execution.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/monitoring/metrics_collector.py
 
 :language: python
 :pyobject: timed_function

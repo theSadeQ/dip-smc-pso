@@ -124,7 +124,11 @@ for section, time in report.sorted_sections(): print(f"{section}: {time:.2f} ms 
 
 ---
 
-## Classes ### `HILMode` **Inherits from:** `Enum` HIL operation mode enumeration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
+## Classes
+
+### `HILMode` **Inherits from:** `Enum` HIL operation mode enumeration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
 
 :language: python
 :pyobject: HILMode
@@ -133,7 +137,9 @@ for section, time in report.sorted_sections(): print(f"{section}: {time:.2f} ms 
 
 ---
 
-### `HILState` **Inherits from:** `Enum` HIL system state enumeration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
+### `HILState` **Inherits from:** `Enum` HIL system state enumeration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
 :language: python
 :pyobject: HILState
 :linenos:
@@ -141,7 +147,9 @@ for section, time in report.sorted_sections(): print(f"{section}: {time:.2f} ms 
 
 ---
 
-### `TimingConfig` HIL timing configuration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
+### `TimingConfig` HIL timing configuration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
 
 :language: python
 :pyobject: TimingConfig
@@ -150,7 +158,9 @@ for section, time in report.sorted_sections(): print(f"{section}: {time:.2f} ms 
 
 ---
 
-### `TestScenario` HIL test scenario configuration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
+### `TestScenario` HIL test scenario configuration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
 :language: python
 :pyobject: TestScenario
 :linenos:
@@ -158,7 +168,9 @@ for section, time in report.sorted_sections(): print(f"{section}: {time:.2f} ms 
 
 ---
 
-### `HILConfig` HIL system configuration. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
+### `HILConfig` HIL system configuration.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
 
 :language: python
 :pyobject: HILConfig
@@ -177,7 +189,9 @@ and automated testing for professional control system validation. #### Source Co
 
 ---
 
-### `TimingMonitor` Monitor timing performance of HIL system. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
+### `TimingMonitor` Monitor timing performance of HIL system.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
 
 :language: python
 :pyobject: TimingMonitor
@@ -186,7 +200,9 @@ and automated testing for professional control system validation. #### Source Co
 
 ---
 
-### `HILPerformanceMetrics` Performance metrics for HIL system. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
+### `HILPerformanceMetrics` Performance metrics for HIL system.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
 :language: python
 :pyobject: HILPerformanceMetrics
 :linenos:
@@ -194,7 +210,9 @@ and automated testing for professional control system validation. #### Source Co
 
 ---
 
-### `SafetyMonitor` Safety monitoring for HIL system. #### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
+### `SafetyMonitor` Safety monitoring for HIL system.
+
+#### Source Code ```{literalinclude} ../../../src/interfaces/hil/enhanced_hil.py
 
 :language: python
 :pyobject: SafetyMonitor
