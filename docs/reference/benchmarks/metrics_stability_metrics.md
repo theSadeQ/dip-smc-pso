@@ -24,8 +24,13 @@ for evaluating controller robustness and dynamic performance. Metrics implemente
 
 ### `StabilityMetrics`
 
-Stability analysis metrics for control system performance assessment. This class provides a convenient interface to stability-related metrics
-including overshoot, peak time, and damping ratio estimation. #### Source Code ```{literalinclude} ../../../src/benchmarks/metrics/stability_metrics.py
+Stability analysis metrics for control system performance assessment.
+
+This class provides a convenient interface to stability-related metrics including overshoot, peak time, and damping ratio estimation.
+
+#### Source Code
+
+```{literalinclude} ../../../src/benchmarks/metrics/stability_metrics.py
 :language: python
 :pyobject: StabilityMetrics
 :linenos:

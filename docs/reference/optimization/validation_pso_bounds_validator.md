@@ -42,9 +42,13 @@ Result of bounds validation analysis.
 
 ## `PSOBoundsValidator`
 
-Advanced PSO bounds validator for control system optimization. This class provides validation and optimization of PSO parameter
+Advanced PSO bounds validator for control system optimization.
 
-bounds to ensure effective controller tuning. #### Source Code ```{literalinclude} ../../../src/optimization/validation/pso_bounds_validator.py
+This class provides validation and optimization of PSO parameter bounds to ensure effective controller tuning.
+
+#### Source Code
+
+```{literalinclude} ../../../src/optimization/validation/pso_bounds_validator.py
 :language: python
 :pyobject: PSOBoundsValidator
 :linenos:

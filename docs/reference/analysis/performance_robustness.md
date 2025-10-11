@@ -135,7 +135,9 @@ Model for system uncertainties.
 
 ### `RobustnessAnalyzer`
 
-**Inherits from:** `PerformanceAnalyzer` robustness analysis for control systems.
+**Inherits from:** `PerformanceAnalyzer`
+
+Advanced robustness analysis for control systems.
 
 #### Source Code ```
 
