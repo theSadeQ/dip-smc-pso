@@ -87,7 +87,7 @@ extensions = [
     'sphinx.ext.githubpages',     # Emit .nojekyll for GitHub Pages
     'sphinx.ext.mathjax',
     'sphinx.ext.intersphinx',
-    # 'sphinx.ext.autosectionlabel',  # TEMPORARILY DISABLED - may cause MyST issues
+    'sphinx.ext.autosectionlabel',  # Re-enabled Phase 2.2: Provides stable cross-references
 
     # External extensions
     'myst_parser',
