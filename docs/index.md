@@ -266,7 +266,7 @@ For the complete bibliography, see the {doc}`bibliography` page.
 
 ### Contributing
 
-- **[📝 Contributing Guide](../CONTRIBUTING.md)** (UPDATED)
+- **{doc}`📝 Contributing Guide <CONTRIBUTING>`** (UPDATED)
   - Development workflow with branch strategy
   - Code standards (PEP 8, type hints ≥95%)
   - Conventional commits format

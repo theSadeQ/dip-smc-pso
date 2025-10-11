@@ -52,7 +52,73 @@ This class provides validation and optimization of PSO parameter bounds to ensur
 :language: python
 :pyobject: PSOBoundsValidator
 :linenos:
-``` #### Methods (11) ##### `__init__(self, config)` [View full source →](#method-psoboundsvalidator-__init__) ##### `validate_bounds(self, controller_type, bounds_min, bounds_max)` validation of PSO bounds for a specific controller. [View full source →](#method-psoboundsvalidator-validate_bounds) ##### `_classical_smc_constraints(self, bounds_min, bounds_max)` Stability constraints for classical SMC. [View full source →](#method-psoboundsvalidator-_classical_smc_constraints) ##### `_sta_smc_constraints(self, bounds_min, bounds_max)` Stability constraints for super-twisting SMC. [View full source →](#method-psoboundsvalidator-_sta_smc_constraints) ##### `_adaptive_smc_constraints(self, bounds_min, bounds_max)` Stability constraints for adaptive SMC. [View full source →](#method-psoboundsvalidator-_adaptive_smc_constraints) ##### `_hybrid_constraints(self, bounds_min, bounds_max)` Stability constraints for hybrid adaptive-STA SMC. [View full source →](#method-psoboundsvalidator-_hybrid_constraints) ##### `_analyze_stability_constraints(self, controller_type, bounds_min, bounds_max)` Analyze stability constraints for given bounds. [View full source →](#method-psoboundsvalidator-_analyze_stability_constraints) ##### `_estimate_convergence_difficulty(self, bounds_min, bounds_max)` Estimate convergence difficulty based on bounds width. [View full source →](#method-psoboundsvalidator-_estimate_convergence_difficulty) ##### `_generate_improved_bounds(self, controller_type)` Generate improved bounds based on theoretical analysis. [View full source →](#method-psoboundsvalidator-_generate_improved_bounds) ##### `optimize_bounds_for_convergence(self, controller_type, initial_bounds, target_convergence_time)` Optimize bounds to achieve target convergence time. [View full source →](#method-psoboundsvalidator-optimize_bounds_for_convergence) ##### `generate_bounds_report(self, controller_type)` Generate a bounds analysis report. [View full source →](#method-psoboundsvalidator-generate_bounds_report)
+```
+
+#### Methods (11)
+
+##### `__init__(self, config)`
+
+[View full source →](#method-psoboundsvalidator-__init__)
+
+##### `validate_bounds(self, controller_type, bounds_min, bounds_max)`
+
+Validation of PSO bounds for a specific controller.
+
+[View full source →](#method-psoboundsvalidator-validate_bounds)
+
+##### `_classical_smc_constraints(self, bounds_min, bounds_max)`
+
+Stability constraints for classical SMC.
+
+[View full source →](#method-psoboundsvalidator-_classical_smc_constraints)
+
+##### `_sta_smc_constraints(self, bounds_min, bounds_max)`
+
+Stability constraints for super-twisting SMC.
+
+[View full source →](#method-psoboundsvalidator-_sta_smc_constraints)
+
+##### `_adaptive_smc_constraints(self, bounds_min, bounds_max)`
+
+Stability constraints for adaptive SMC.
+
+[View full source →](#method-psoboundsvalidator-_adaptive_smc_constraints)
+
+##### `_hybrid_constraints(self, bounds_min, bounds_max)`
+
+Stability constraints for hybrid adaptive-STA SMC.
+
+[View full source →](#method-psoboundsvalidator-_hybrid_constraints)
+
+##### `_analyze_stability_constraints(self, controller_type, bounds_min, bounds_max)`
+
+Analyze stability constraints for given bounds.
+
+[View full source →](#method-psoboundsvalidator-_analyze_stability_constraints)
+
+##### `_estimate_convergence_difficulty(self, bounds_min, bounds_max)`
+
+Estimate convergence difficulty based on bounds width.
+
+[View full source →](#method-psoboundsvalidator-_estimate_convergence_difficulty)
+
+##### `_generate_improved_bounds(self, controller_type)`
+
+Generate improved bounds based on theoretical analysis.
+
+[View full source →](#method-psoboundsvalidator-_generate_improved_bounds)
+
+##### `optimize_bounds_for_convergence(self, controller_type, initial_bounds, target_convergence_time)`
+
+Optimize bounds to achieve target convergence time.
+
+[View full source →](#method-psoboundsvalidator-optimize_bounds_for_convergence)
+
+##### `generate_bounds_report(self, controller_type)`
+
+Generate a bounds analysis report.
+
+[View full source →](#method-psoboundsvalidator-generate_bounds_report)
 
 ---
 
