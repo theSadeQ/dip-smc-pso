@@ -169,11 +169,11 @@ The following documentation is automatically generated from Python docstrings us
 - **src.controllers.adaptive_smc** - Adaptive sliding mode control
 - **src.controllers.hybrid_adaptive_sta_smc** - Hybrid adaptive STA-SMC
 
-### Optimization
+### Optimization Modules
 - **src.optimizer.pso_optimizer** - PSO tuning algorithms
 - **src.optimizer.cost_functions** - Cost function definitions
 
-### Configuration
+### Configuration Modules
 - **src.config.loader** - Configuration loading and validation
 - **src.config.schemas** - Pydantic configuration schemas
 

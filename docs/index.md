@@ -24,93 +24,45 @@ The controllers are automatically tuned using **Particle Swarm Optimization (PSO
 - 🌐 **Dual Interface**: Command-line and Streamlit web interfaces
 - 🧪 **Hardware-in-the-Loop**: Real-time simulation features
 
-## Quick Start
+## Main Commands
 
 ```bash
-# Basic simulation with classical controller
+# Run simulation with specific controller
 python simulate.py --ctrl classical_smc --plot
+python simulate.py --ctrl sta_smc --plot
+python simulate.py --ctrl adaptive_smc --plot
+python simulate.py --ctrl hybrid_adaptive_sta_smc --plot
 
-# Optimize and save controller gains
-python simulate.py --ctrl sta_smc --run-pso --save tuned_gains.json
+# Optimize controller gains with PSO
+python simulate.py --ctrl classical_smc --run-pso --save gains_classical.json
+python simulate.py --ctrl sta_smc --run-pso --save gains_sta.json
 
-# Launch web interface
+# Load optimized gains and run
+python simulate.py --load tuned_gains.json --plot
+
+# Launch interactive web dashboard
 streamlit run streamlit_app.py
+
+# Run hardware-in-the-loop simulation
+python simulate.py --run-hil --plot
+
+# Run test suite
+pytest tests/ -v
+pytest tests/test_controllers/ --benchmark-only
+
+# Build documentation
+cd docs && sphinx-build -b html . _build/html
+python -m http.server 8000 --directory docs/_build/html
 ```
 
-## Documentation Structure
+## Documentation Navigation
 
-```{toctree}
-:maxdepth: 2
-:caption: 📚 Getting Started
+For a complete overview of all documentation sections, see:
 
-README.md
-theory_overview.md
-architecture.md
-plant_model.md
-hil_quickstart.md
-streamlit_dashboard_guide.md
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 📋 Project Documentation
-
-CHANGELOG
-CONTRIBUTING
-DEPENDENCIES
-PATTERNS
-context
-ACADEMIC_INTEGRITY_STATEMENT
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 📊 API & Technical Reference
-
-api/index
-technical/index
-CONTROLLER_FACTORY
-controller_pso_interface_api_documentation
-factory_integration_documentation
-factory_integration_troubleshooting_guide
-troubleshooting/index
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: ✅ Testing & Validation Standards
-
-TESTING
-validation/index
-benchmarks/index
-QUICKSTART_VALIDATION
-EXAMPLE_VALIDATION_REPORT
-control_law_testing_standards
-deployment_validation_checklists
-benchmarks_methodology
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 📚 Documentation System
-
-DOCUMENTATION_SYSTEM
-DOCUMENTATION_IMPLEMENTATION_PLAN
-DOCUMENTATION_STYLE_GUIDE
-DOCUMENTATION_COVERAGE_MATRIX
-DOCUMENTATION_INVENTORY_SUMMARY
-CROSS_REFERENCE_AUDIT_REPORT
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 🔬 Configuration & Integration
-
-configuration_integration_documentation
-configuration_schema_validation
-coverage_analysis_methodology
-fault_detection_guide
-```
+- **{doc}`documentation_structure`** - Complete sitemap and documentation structure
+- **{doc}`guides/getting-started`** - Comprehensive installation and first simulation guide
+- **{doc}`api/index`** - API reference and technical documentation
+- **{doc}`CONTRIBUTING`** - Development guidelines and workflow
 
 ## Mathematical Foundation
 
@@ -199,10 +151,10 @@ This optimization process is implemented in {py:obj}`src.optimizer.pso_optimizer
 For complete academic citations and attribution, see:
 
 - **{doc}`bibliography`** - Complete BibTeX bibliography with all academic references
-- **{doc}`../CITATIONS_ACADEMIC`** - Detailed academic theory citations with exact page numbers
-- **{doc}`../DEPENDENCIES`** - Software dependencies and licenses
-- **{doc}`../PATTERNS`** - Design patterns and architectural decisions
-- **{doc}`../CITATIONS`** - Master citation index and quick reference
+- **{doc}`CITATIONS_ACADEMIC`** - Detailed academic theory citations with exact page numbers
+- **{doc}`DEPENDENCIES`** - Software dependencies and licenses
+- **{doc}`PATTERNS`** - Design patterns and architectural decisions
+- **{doc}`CITATIONS`** - Master citation index and quick reference
 
 ### Key References
 
@@ -272,88 +224,3 @@ For the complete bibliography, see the {doc}`bibliography` page.
   - Conventional commits format
   - Pull request templates
   - Quality gates and testing requirements
-
----
-
-## Complete Documentation Structure
-
-```{toctree}
-:maxdepth: 2
-:caption: 📚 User Guides & Tutorials
-
-guides/index
-tutorials/index
-workflows/index
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 📊 Analysis & Reports
-
-analysis/index
-reports/index
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 🗺️ Project Planning & Roadmaps
-
-plans/index
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 🚀 Production & Deployment
-
-production/index
-deployment/DEPLOYMENT_GUIDE
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 📽️ Presentation Materials
-
-presentation/index
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 🔬 Mathematical Foundations
-
-mathematical_foundations/index
-theory/index
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 🏭 Controller Factory & Integration
-
-factory/README
-controllers/index
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 🧪 Testing & Quality Assurance
-
-testing/index
-TESTING
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 🔧 MCP Debugging & Code Quality
-
-mcp-debugging/index
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 📖 References & Bibliography
-
-bibliography
-references/index
-CITATIONS
-CITATIONS_ACADEMIC
-```
-

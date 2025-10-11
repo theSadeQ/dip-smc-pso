@@ -14,7 +14,10 @@
       "Bash(make:*)",
       "Bash(tee:*)",
       "Bash(awk:*)",
-      "Bash(do echo -n \"$dir: \")"
+      "Bash(do echo -n \"$dir: \")",
+      "Bash(Select-String -Pattern \"WARNING:|ERROR:\")",
+      "Bash(Measure-Object -Line)",
+      "Bash(Select-Object -ExpandProperty Lines)"
     ],
     "deny": [],
     "ask": [],

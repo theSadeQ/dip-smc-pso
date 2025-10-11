@@ -113,8 +113,6 @@ across the framework. ## Complete Source Code ```{literalinclude} ../../../src/a
 :linenos:
 ```
 
----
-
 ## Classes
 
 ### `AnalysisStatus`
@@ -279,8 +277,6 @@ Base class for analysis results.
 :pyobject: AnalysisSession
 :linenos:
 ``` #### Methods (5) ##### `__enter__(self)` Enter analysis session context. [View full source →](#method-analysissession-__enter__) ##### `__exit__(self, exc_type, exc_val, exc_tb)` Exit analysis session context. [View full source →](#method-analysissession-__exit__) ##### `add_data(self, name, data)` Add data to the session. [View full source →](#method-analysissession-add_data) ##### `run_analysis(self, analysis_type)` Run analysis on session data. [View full source →](#method-analysissession-run_analysis) ##### `export_results(self, format)` Export session results. [View full source →](#method-analysissession-export_results)
-
----
 
 ## Dependencies This module imports: - `from __future__ import annotations`
 - `from abc import ABC, abstractmethod`

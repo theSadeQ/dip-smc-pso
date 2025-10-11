@@ -25,16 +25,15 @@ Usage:
 """
 
 import json
-import os
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, List, Optional, Any
+from typing import Dict, Optional, Any
 
 
 # Configuration
 SESSION_FILE = Path(__file__).parent / "session_state.json"
 AUTO_LOAD_THRESHOLD_HOURS = 24
-SESSION_AUTO_SAVE_ENABLED = False  # Set to True to enable auto-save session functionality
+SESSION_AUTO_SAVE_ENABLED = True  # Set to True to enable auto-save session functionality
 
 
 def load_session() -> Optional[Dict[str, Any]]:
@@ -177,7 +176,7 @@ Pending: {len(todos.get('pending', []))} items"""
         # Add next actions if present
         next_actions = state.get('next_actions', [])
         if next_actions:
-            summary += f"\n\nNext actions:\n"
+            summary += "\n\nNext actions:\n"
             for i, action in enumerate(next_actions[:3], 1):
                 summary += f"{i}. {action}\n"
 
