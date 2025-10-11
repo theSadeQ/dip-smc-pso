@@ -1,8 +1,10 @@
-# Mathematical Foundations **Rigorous control theory and stability analysis for sliding mode controllers**
+# Mathematical Foundations
 
----
+**Rigorous control theory and stability analysis for sliding mode controllers**
 
-## Overview This section provides mathematical foundations for the sliding mode control strategies implemented in the DIP_SMC_PSO project. All proofs follow standard control theory literature with rigorous Lyapunov stability analysis.
+## Overview
+
+This section provides mathematical foundations for the sliding mode control strategies implemented in the DIP_SMC_PSO project. All proofs follow standard control theory literature with rigorous Lyapunov stability analysis.
 
 ---
 

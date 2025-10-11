@@ -410,7 +410,7 @@ html_theme_options = {
 }
 ```
 
-#### Testing Configuration
+### Testing Configuration
 
 **Validation Checklist**:
 ```bash

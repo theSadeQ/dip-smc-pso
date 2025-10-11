@@ -2,95 +2,86 @@
 
 Complete academic citations for all control theory, optimization theory, and mathematical foundations used in this project.
 
-## Complete Bibliography
+## Master Bibliography
 
-All references organized by category, automatically generated from BibTeX files.
+**Note**: This page provides a category-organized view of the project bibliography. For the complete authoritative bibliography with full research context, impact metrics, and citation guidelines, see {doc}`references/bibliography`.
 
-<!-- Complete bibliography section removed to prevent duplicate citations.
-     All citations are shown in their respective categories below. -->
+**Quick Category Navigation:**
 
-## References by Category
+- {ref}`sliding-mode-control-theory` - SMC foundations
+- {ref}`pso-optimization-theory` - PSO algorithms
+- {ref}`stability-theory-refs` - Lyapunov stability
+- {ref}`adaptive-control-theory` - Adaptive systems
+- {ref}`fault-detection-refs` - FDI methods
+- {ref}`numerical-methods-refs` - ODE integration
+- {ref}`software-tools-refs` - Python libraries
 
-### Sliding Mode Control Theory
+---
+
+(sliding-mode-control-theory)=
+## Sliding Mode Control Theory
 
 Foundational and advanced SMC techniques including classical, super-twisting, adaptive, and hybrid controllers.
 
-```{bibliography}
-:filter: key % "smc_"
-```
+**See**: {doc}`references/bibliography` for complete SMC references with research context
 
-
-
-### PSO Optimization Theory
+(pso-optimization-theory)=
+## PSO Optimization Theory
 
 Particle swarm optimization theory, convergence analysis, and parameter tuning methods.
 
-```{bibliography}
-:filter: key % "pso_"
-```
+**See**: {doc}`references/bibliography` for complete PSO references with convergence analysis
 
-
-
-### Stability Theory
+(stability-theory-refs)=
+## Stability Theory
 
 Lyapunov stability, finite-time stability, and fixed-time stability analysis.
 
-```{bibliography}
-:filter: key % "khalil" or key % "lyapunov" or key % "bhat" or key % "moulay" or key % "polyakov" or key % "vidyasagar"
-```
+**See**: {doc}`references/bibliography` for complete stability theory references
 
-
-
-### Adaptive Control Theory
+(adaptive-control-theory)=
+## Adaptive Control Theory
 
 Model reference adaptive systems, robust adaptive laws, and parameter estimation.
 
-```{bibliography}
-:filter: key % "astrom" or key % "ioannou" or key % "narendra" or key % "slotine_1986" or key % "plestan" or key % "pomet"
-```
+**See**: {doc}`references/bibliography` for complete adaptive control references
 
-
-
-### Fault Detection & Isolation
+(fault-detection-refs)=
+## Fault Detection & Isolation
 
 Threshold selection, hysteresis methods, and robust fault diagnosis techniques.
 
-```{bibliography}
-:filter: key % "gertler" or key % "chen_1999" or key % "isermann" or key % "ding"
-```
+**See**: {doc}`references/bibliography` for complete FDI references
 
-
-
-### Numerical Methods
+(numerical-methods-refs)=
+## Numerical Methods
 
 Runge-Kutta integration, stiff ODE solvers, and numerical stability analysis.
 
-```{bibliography}
-:filter: key % "press" or key % "hairer" or key % "butcher" or key % "ascher"
-```
+**See**: {doc}`references/bibliography` for complete numerical methods references
 
-
-
-### Software & Tools
+(software-tools-refs)=
+## Software & Tools
 
 Python scientific computing libraries and numerical computation frameworks.
 
-```{bibliography}
-:filter: key % "soft_" or key % "numpy" or key % "scipy"
-```
+**See**: {doc}`references/bibliography` for complete software references
 
+---
 
+## Complete Bibliography
 
-## See Also
+**For the full bibliography with citations, see**: {doc}`references/bibliography`
 
-For detailed attribution with exact page numbers and theorem references:
+The master bibliography includes:
+- Complete BibTeX entries for all references
+- Research area categorization
+- Citation quality metrics
+- Impact factors and citation counts
+- Keyword-based filtering
+- Citation style guidelines
 
-- {doc}`../CITATIONS_ACADEMIC` - Academic theory citations linked to exact locations in codebase
-- {doc}`../DEPENDENCIES` - Software library citations and licenses
-- {doc}`../PATTERNS` - Design pattern attribution and architectural decisions
-- {doc}`../CITATIONS` - Master citation index and quick reference guide
-
-
+---
 
 ## Citation Usage in Documentation
 
@@ -106,7 +97,19 @@ Multiple citations: {cite}`pso_kennedy_1995_particle_swarm_optimization,pso_cler
 
 See {cite}`smc_utkin_1992_sliding_modes` for the original sliding mode formulation.
 
+---
 
+## See Also
+
+For detailed attribution with exact page numbers and theorem references:
+
+- {doc}`references/bibliography` - **Master Bibliography** with full research context
+- {doc}`CITATIONS_ACADEMIC` - Academic theory citations linked to exact locations in codebase
+- {doc}`DEPENDENCIES` - Software library citations and licenses
+- {doc}`PATTERNS` - Design pattern attribution and architectural decisions
+- {doc}`CITATIONS` - Master citation index and quick reference guide
+
+---
 
 ## BibTeX Source Files
 

@@ -1,6 +1,8 @@
 #==========================================================================================\\\
 #======================= docs/mathematical_algorithm_validation.md =====================\\\
-#==========================================================================================\\\ # Mathematical Algorithm Validation Documentation
+#==========================================================================================\\\
+
+# Mathematical Algorithm Validation Documentation
 ## Double-Inverted Pendulum SMC-PSO Control Systems **Document Version**: 1.0
 
 **Generated**: 2025-09-28

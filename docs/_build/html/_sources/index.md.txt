@@ -68,10 +68,12 @@ ACADEMIC_INTEGRITY_STATEMENT
 :caption: 📊 API & Technical Reference
 
 api/index
+technical/index
 CONTROLLER_FACTORY
 controller_pso_interface_api_documentation
 factory_integration_documentation
 factory_integration_troubleshooting_guide
+troubleshooting/index
 ```
 
 ```{toctree}
@@ -79,6 +81,8 @@ factory_integration_troubleshooting_guide
 :caption: ✅ Testing & Validation Standards
 
 TESTING
+validation/index
+benchmarks/index
 QUICKSTART_VALIDATION
 EXAMPLE_VALIDATION_REPORT
 control_law_testing_standards
@@ -278,13 +282,15 @@ For the complete bibliography, see the {doc}`bibliography` page.
 :caption: 📚 User Guides & Tutorials
 
 guides/index
+tutorials/index
+workflows/index
 ```
 
 ```{toctree}
 :maxdepth: 2
 :caption: 📊 Analysis & Reports
 
-analysis/COMPLETE_CONTROLLER_COMPARISON_MATRIX
+analysis/index
 reports/index
 ```
 
