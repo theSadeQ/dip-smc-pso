@@ -1,6 +1,17 @@
 # Changelog All notable changes to the ResearchPlan validation system will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). ## [1.1.0] - Unreleased ### Added {#changelog-110-added}
+- **3D Interactive Pendulum Visualization (v1.0.0 - 2025-10-12)**: Revolutionary documentation feature
+  - Real-time physics simulation with Three.js WebGL rendering (60 FPS)
+  - Interactive parameter controls (controller gains K₁-K₆, initial angles θ₁, θ₂)
+  - Orbit camera controls (zoom, pan, rotate) for 360° viewing
+  - GPU-accelerated rendering with PBR materials and shadow mapping
+  - Visual trail showing pendulum tip trajectory (500-point buffer)
+  - Simplified dynamics for browser performance (full dynamics in Python)
+  - Classical SMC control law with adjustable gains
+  - Zero installation required - runs entirely in browser
+  - Responsive design with mobile support
+  - World's first 3D physics simulation embedded in technical documentation
 - **Collapsible Code Blocks Feature (v1.0.0 - 2025-10-12)**: Interactive documentation feature
   - Collapse/expand code blocks with smooth GPU-accelerated animations (60 FPS)
   - Master controls ("Collapse All" / "Expand All") with keyboard shortcuts

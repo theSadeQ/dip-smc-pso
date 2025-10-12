@@ -1,5 +1,25 @@
 # User Guides & Tutorials Welcome to the DIP SMC PSO framework documentation! This guide covers help you navigate the documentation and find what you need.
 
+## 🎮 NEW: Interactive 3D Visualization
+
+**Revolutionary Feature: World's First 3D Pendulum in Technical Documentation**
+
+Experience real-time physics simulation with WebGL rendering, directly in your browser:
+
+- [**🎮 3D Interactive Pendulum Demo**](interactive/3d-pendulum-demo.md) - Adjust controller gains, set initial conditions, watch physics unfold in real-time with cinematic 3D graphics
+
+**Features:**
+- GPU-accelerated WebGL rendering with Three.js
+- Real-time physics at 60 FPS
+- Interactive parameter sliders (controller gains K₁-K₆, initial angles θ₁, θ₂)
+- Orbit camera controls (zoom, pan, rotate)
+- Visual trail showing pendulum tip path
+- Realistic materials with shadows and lighting
+
+**Zero installation required** - runs entirely in your browser!
+
+---
+
 ## Quick Navigation ### 🚀 Getting Started
 
 **Start here if you're new to the framework** - [**Getting Started Guide**](getting-started.md) Complete setup and first simulation in 10 minutes ### 📘 User Guide
@@ -7,7 +27,8 @@
 **Step-by-step learning path** 1. [**Tutorial 01: Your First Simulation**](tutorials/tutorial-01-first-simulation.md) Learn DIP system, run classical SMC, interpret results (30-45 min) 2. [**Tutorial 02: Controller Comparison**](tutorials/tutorial-02-controller-comparison.md) Compare 4 core SMC controllers, understand tradeoffs, select optimal controller (45-60 min) 3. [**Tutorial 03: PSO Optimization**](tutorials/tutorial-03-pso-optimization.md) Automatic gain tuning, convergence analysis, custom cost functions (60-90 min) 4. [**Tutorial 04: Custom Controller Development**](tutorials/tutorial-04-custom-controller.md) Implement Terminal SMC from scratch, factory integration, testing (90-120 min) 5. [**Tutorial 05: Research Workflow**](tutorials/tutorial-05-research-workflow.md) End-to-end research project, statistical analysis, publication workflow (120+ min) ### 🔧 How-To Guides
 **Task-oriented recipes for specific workflows** - [**Running Simulations**](how-to/running-simulations.md) CLI usage, Streamlit dashboard, programmatic API, batch processing - [**Result Analysis**](how-to/result-analysis.md) Metrics interpretation, statistical analysis, visualization, data export - [**Optimization Workflows**](how-to/optimization-workflows.md) PSO tuning, custom cost functions, convergence diagnostics, parallel execution - [**Testing & Validation**](how-to/testing-validation.md) Test suite, unit testing, performance benchmarking, coverage analysis ### 📖 API Reference Guides
 **Module-by-module technical reference with examples** - [**API Index**](api/README.md) Overview and navigation for all API guides - [**Controllers API**](api/controllers.md) Factory system, SMC types, gain bounds, custom controllers (726 lines) - [**Simulation API**](api/simulation.md) SimulationRunner, dynamics models, batch processing, performance (517 lines) - [**Optimization API**](api/optimization.md) PSOTuner, cost functions, gain bounds, convergence monitoring (543 lines) - [**Configuration API**](api/configuration.md) Loading config, validation, programmatic configuration (438 lines) - [**Plant Models API**](api/plant-models.md) Physics models, parameter configuration, custom dynamics (424 lines) - [**Utilities API**](api/utilities.md) Validation, control primitives, monitoring, analysis tools (434 lines) ### 📐 Theory & Explanation
-**Understanding-oriented guides that explain the "why" behind the framework** - [**Theory Index**](theory/README.md) Overview and navigation for all theory guides - [**Sliding Mode Control Theory**](theory/smc-theory.md) SMC fundamentals, Lyapunov stability, chattering analysis, super-twisting mathematics (619 lines) - [**PSO Algorithm Theory**](theory/pso-theory.md) Swarm intelligence principles, convergence theory, parameter selection, benchmarks (438 lines) - [**Double-Inverted Pendulum Dynamics**](theory/dip-dynamics.md) Lagrangian derivation, equations of motion, linearization, controllability (501 lines)
+**Understanding-oriented guides that explain the "why" behind the framework** - [**Theory Index**](theory/README.md) Overview and navigation for all theory guides - [**Sliding Mode Control Theory**](theory/smc-theory.md) SMC fundamentals, Lyapunov stability, chattering analysis, super-twisting mathematics (619 lines) - [**PSO Algorithm Theory**](theory/pso-theory.md) Swarm intelligence principles, convergence theory, parameter selection, benchmarks (438 lines) - [**Double-Inverted Pendulum Dynamics**](theory/dip-dynamics.md) Lagrangian derivation, equations of motion, linearization, controllability (501 lines) ### ✨ Documentation Features
+**Special features built into this documentation site** - [**Features Index**](features/README.md) Overview of all documentation features - [**Collapsible Code Blocks**](features/code-collapse/user-guide.md) Collapse/expand code examples with state persistence (v1.0.0)
 
 ---
 
@@ -36,6 +57,16 @@ docs/guides/
 │ ├── smc-theory.md (619 lines)
 │ ├── pso-theory.md (438 lines)
 │ └── dip-dynamics.md (501 lines)
+├── features/ # Documentation features
+│ ├── README.md (overview)
+│ └── code-collapse/ # Collapsible code blocks
+│ ├── user-guide.md
+│ ├── integration-guide.md
+│ ├── configuration-reference.md
+│ ├── troubleshooting.md
+│ ├── technical-reference.md
+│ ├── maintenance-guide.md
+│ └── changelog.md
 └── tutorials/ # Tutorial series ├── tutorial-01-first-simulation.md (600 lines) ├── tutorial-02-controller-comparison.md (797 lines) ├── tutorial-03-pso-optimization.md (865 lines) ├── tutorial-04-custom-controller.md (784 lines) └── tutorial-05-research-workflow.md (640 lines)
 ``` **Total: 12,525 lines of user documentation** (up from 10,863 after adding theory guides)
 
