@@ -208,6 +208,7 @@ html_js_files = [
     'lazy-load.js',
     'dark-mode.js',
     'visual-sitemap.js',
+    'control-room.js',
 ]
 
 # HTML output options

@@ -83,6 +83,7 @@ guides/getting-started-validation-report
 streamlit_dashboard_guide
 hil_quickstart
 
+architecture_control_room
 sitemap_interactive
 sitemap_cards
 sitemap_visual
@@ -135,6 +136,13 @@ context
 
 ::::{grid} 1 2 3 3
 :gutter: 3
+
+:::{grid-item-card} 🎛️ Control Room
+:link: architecture_control_room
+:link-type: doc
+
+Isometric 3D system architecture with interactive components
+:::
 
 :::{grid-item-card} 🎯 Interactive Graph
 :link: sitemap_interactive
