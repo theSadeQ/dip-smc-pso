@@ -1,6 +1,18 @@
 /**
  * Collapsible Code Blocks with Curtain Animation
  * Adds minimize/expand functionality to all code blocks
+ *
+ * SELECTOR COVERAGE:
+ * - Language blocks: highlight-python, highlight-bash, etc. (40+ types)
+ * - Edge cases: highlight-##, highlight-**, highlight-- (markdown artifacts)
+ * - Literal blocks: div.literal-block, pre.literal-block
+ * - Doctest blocks: div.doctest
+ *
+ * EXCLUSIONS:
+ * - Math blocks: .amsmath, .math, .nohighlight (LaTeX equations)
+ * - Very short blocks: <10 characters (likely not code)
+ *
+ * DEBUG: Check console for coverage report on page load
  */
 
 (function() {
@@ -9,7 +21,8 @@
     // Configuration
     const CONFIG = {
         storageKey: 'code-block-states',
-        animationDuration: 300, // milliseconds
+        animationDuration: 350, // milliseconds (350ms feels smoother than 300ms)
+        easing: 'cubic-bezier(0.4, 0.0, 0.2, 1)', // Material Design standard easing
         expandedIcon: '▼',
         collapsedIcon: '▲',
         buttonTitle: 'Toggle code block'
@@ -29,14 +42,51 @@
         // Sphinx generates nested structure: <div class="highlight-{lang} notranslate"><div class="highlight"><pre>
         // We target the OUTER div (with notranslate) to avoid adding buttons to both layers
         const selectors = [
-            'div.notranslate[class*="highlight-"]',  // All language-specific code blocks (27+ types)
-            'div.literal-block',                      // Literal blocks
-            'div.code-block',                         // Code-block directive
-            'div.doctest',                            // Doctest blocks
-            'pre.literal-block'                       // Pre-formatted literal blocks
+            'div.notranslate[class*="highlight-"]',           // Primary: Language blocks with notranslate
+            'div[class*="highlight-"]:not(.nohighlight)',     // Catch-all: Edge cases (##, **, --)
+            'div.doctest',                                     // Doctest blocks
+            'div.literal-block',                               // Literal blocks
+            'div.code-block',                                  // Code-block directive
+            'pre.literal-block'                                // Pre-formatted literal blocks
         ];
 
-        const codeBlocks = document.querySelectorAll(selectors.join(', '));
+        const rawMatches = document.querySelectorAll(selectors.join(', '));
+
+        // Deduplicate using Set (maintains DOM order)
+        const codeBlocks = Array.from(new Set(rawMatches));
+
+        // === DEBUG LOGGING SYSTEM ===
+        console.log(`[CodeCollapse] Found ${codeBlocks.length} code blocks (${rawMatches.length} raw matches)`);
+
+        // Find all <pre> elements in the document
+        const allPreElements = document.querySelectorAll('pre');
+        console.log(`[CodeCollapse] Total <pre> elements: ${allPreElements.length}`);
+
+        // Identify unmatched <pre> elements
+        const unmatchedPre = Array.from(allPreElements).filter(pre => {
+            // Check if this <pre> is inside any matched code block
+            return !codeBlocks.some(block => block.contains(pre));
+        });
+
+        if (unmatchedPre.length > 0) {
+            console.warn(`[CodeCollapse] ⚠️ ${unmatchedPre.length} unmatched <pre> elements found:`);
+            unmatchedPre.forEach((pre, idx) => {
+                const parent = pre.parentElement;
+                const classes = parent ? parent.className : 'NO PARENT';
+                console.warn(`  [${idx + 1}] Parent classes: "${classes}"`);
+                console.warn(`      Content preview: "${pre.textContent.substring(0, 50)}..."`);
+            });
+        } else {
+            console.log('[CodeCollapse] ✅ 100% coverage - all <pre> elements matched');
+        }
+
+        // Log selector performance
+        const selectorStats = {};
+        selectors.forEach(selector => {
+            const count = document.querySelectorAll(selector).length;
+            selectorStats[selector] = count;
+        });
+        console.table(selectorStats);
 
         if (codeBlocks.length === 0) {
             return; // No code blocks on this page
@@ -58,11 +108,37 @@
     }
 
     /**
+     * Check if block should be skipped (math, invalid, etc.)
+     */
+    function shouldSkipBlock(element) {
+        // Skip math blocks (LaTeX, MathJax, KaTeX)
+        if (element.classList.contains('nohighlight')) return true;
+        if (element.classList.contains('amsmath')) return true;
+        if (element.classList.contains('math')) return true;
+
+        // Skip if no actual code content
+        const preElement = element.querySelector('pre');
+        if (!preElement) return true;
+
+        // Skip very short blocks (likely not code)
+        const content = preElement.textContent.trim();
+        if (content.length < 10) return true;
+
+        return false;
+    }
+
+    /**
      * Process individual code block
      */
     function processCodeBlock(codeBlock, index) {
         // Skip if already processed
         if (codeBlock.classList.contains('collapsible-processed')) {
+            return;
+        }
+
+        // Skip math/invalid blocks
+        if (shouldSkipBlock(codeBlock)) {
+            console.log(`[CodeCollapse] Skipped block ${index}: ${codeBlock.className}`);
             return;
         }
 
@@ -77,19 +153,43 @@
         // Create collapse button
         const collapseBtn = createCollapseButton(index);
 
-        // Insert button after any existing buttons (like copy button)
-        const existingButtons = codeBlock.querySelector('.copybtn, button');
-        if (existingButtons) {
-            existingButtons.parentNode.insertBefore(collapseBtn, existingButtons.nextSibling);
-        } else {
-            codeBlock.insertBefore(collapseBtn, codeBlock.firstChild);
+        // Find INNER highlight container where copy button lives
+        const innerHighlight = codeBlock.querySelector('div.highlight');
+        if (!innerHighlight) {
+            console.warn('[CodeCollapse] No inner highlight container found', codeBlock);
+            return;
         }
 
-        // Apply saved state
-        const savedState = codeBlockStates[index];
-        if (savedState === 'collapsed') {
-            collapseCodeBlock(codeBlock, false); // No animation on page load
-        }
+        // Wait for copybutton.js to add the copy button, then insert collapse button as sibling
+        const insertCollapseButton = (attempt = 0) => {
+            const copyBtn = innerHighlight.querySelector('.copybtn');
+
+            if (copyBtn) {
+                // SUCCESS: Copy button exists, insert collapse button as SIBLING
+                copyBtn.parentNode.insertBefore(collapseBtn, copyBtn.nextSibling);
+
+                // Apply saved state
+                const savedState = codeBlockStates[index];
+                if (savedState === 'collapsed') {
+                    collapseCodeBlock(codeBlock, false); // No animation on page load
+                }
+            } else if (attempt < 5) {
+                // RETRY: Copy button not ready yet, wait and try again
+                setTimeout(() => insertCollapseButton(attempt + 1), 50);
+            } else {
+                // FALLBACK: No copy button after 250ms, insert at end of inner container
+                innerHighlight.appendChild(collapseBtn);
+
+                // Apply saved state
+                const savedState = codeBlockStates[index];
+                if (savedState === 'collapsed') {
+                    collapseCodeBlock(codeBlock, false);
+                }
+            }
+        };
+
+        // Start insertion process
+        insertCollapseButton();
     }
 
     /**
@@ -141,20 +241,28 @@
             preElement.style.maxHeight = '0';
             preElement.style.overflow = 'hidden';
         } else {
-            // Measure current height
+            // Add transitioning state
+            codeBlock.classList.add('code-collapsing');
+
+            // Measure current height (before transition)
             const currentHeight = preElement.scrollHeight;
             preElement.style.maxHeight = currentHeight + 'px';
 
-            // Force reflow
-            void preElement.offsetHeight;
+            // Double requestAnimationFrame for smooth start
+            requestAnimationFrame(() => {
+                // Set up transition
+                preElement.style.transition = `max-height ${CONFIG.animationDuration}ms ${CONFIG.easing}, opacity ${CONFIG.animationDuration}ms ${CONFIG.easing}`;
 
-            // Start animation
-            preElement.style.transition = `max-height ${CONFIG.animationDuration}ms ease-out, opacity ${CONFIG.animationDuration}ms ease-out`;
-            preElement.style.maxHeight = '0';
-            preElement.style.opacity = '0';
+                // Trigger animation in next frame
+                requestAnimationFrame(() => {
+                    preElement.style.maxHeight = '0';
+                    preElement.style.opacity = '0';
+                });
+            });
 
-            // Update classes after animation
+            // Cleanup after animation
             setTimeout(() => {
+                codeBlock.classList.remove('code-collapsing');
                 codeBlock.classList.add('code-collapsed');
                 preElement.style.overflow = 'hidden';
             }, CONFIG.animationDuration);
@@ -179,7 +287,7 @@
         const icon = button.querySelector('.collapse-icon');
         const index = codeBlock.getAttribute('data-code-index');
 
-        // Remove collapsed class
+        // Remove collapsed class immediately
         codeBlock.classList.remove('code-collapsed');
         preElement.style.overflow = 'hidden';
 
@@ -187,21 +295,29 @@
             preElement.style.maxHeight = 'none';
             preElement.style.opacity = '1';
         } else {
-            // Measure target height
+            // Add transitioning state
+            codeBlock.classList.add('code-collapsing');
+
+            // Measure target height (temporarily set to auto to measure)
             preElement.style.maxHeight = 'none';
             const targetHeight = preElement.scrollHeight;
             preElement.style.maxHeight = '0';
 
-            // Force reflow
-            void preElement.offsetHeight;
+            // Double requestAnimationFrame for smooth start
+            requestAnimationFrame(() => {
+                // Set up transition
+                preElement.style.transition = `max-height ${CONFIG.animationDuration}ms ${CONFIG.easing}, opacity ${CONFIG.animationDuration}ms ${CONFIG.easing}`;
 
-            // Start animation
-            preElement.style.transition = `max-height ${CONFIG.animationDuration}ms ease-out, opacity ${CONFIG.animationDuration}ms ease-out`;
-            preElement.style.maxHeight = targetHeight + 'px';
-            preElement.style.opacity = '1';
+                // Trigger animation in next frame
+                requestAnimationFrame(() => {
+                    preElement.style.maxHeight = targetHeight + 'px';
+                    preElement.style.opacity = '1';
+                });
+            });
 
-            // Remove max-height after animation
+            // Cleanup after animation
             setTimeout(() => {
+                codeBlock.classList.remove('code-collapsing');
                 preElement.style.maxHeight = 'none';
                 preElement.style.overflow = 'visible';
             }, CONFIG.animationDuration);
@@ -266,9 +382,10 @@
     function collapseAll() {
         const selectors = [
             'div.notranslate[class*="highlight-"]',
+            'div[class*="highlight-"]:not(.nohighlight)',
+            'div.doctest',
             'div.literal-block',
             'div.code-block',
-            'div.doctest',
             'pre.literal-block'
         ];
         const codeBlocks = document.querySelectorAll(selectors.join(', '));
@@ -285,9 +402,10 @@
     function expandAll() {
         const selectors = [
             'div.notranslate[class*="highlight-"]',
+            'div[class*="highlight-"]:not(.nohighlight)',
+            'div.doctest',
             'div.literal-block',
             'div.code-block',
-            'div.doctest',
             'pre.literal-block'
         ];
         const codeBlocks = document.querySelectorAll(selectors.join(', '));
@@ -353,10 +471,11 @@
                     // Check if the added node is a code block or contains code blocks
                     if (node.nodeType === 1) { // Element node
                         const selectors = [
-                            'div.notranslate[class*="highlight-"]',  // All language-specific code blocks
+                            'div.notranslate[class*="highlight-"]',
+                            'div[class*="highlight-"]:not(.nohighlight)',
+                            'div.doctest',
                             'div.literal-block',
                             'div.code-block',
-                            'div.doctest',
                             'pre.literal-block'
                         ];
 
