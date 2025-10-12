@@ -198,7 +198,7 @@ class PlaywrightHelper:
 
     def collapse_all(self, wait_for_animation: bool = True) -> None:
         """Collapse all code blocks using master control."""
-        collapse_all_btn = self.page.query_selector("button.master-btn:has-text('Collapse All')")
+        collapse_all_btn = self.page.query_selector("button.code-control-btn:has-text('Collapse All')")
         if not collapse_all_btn:
             raise RuntimeError("Collapse All button not found")
 
@@ -209,7 +209,7 @@ class PlaywrightHelper:
 
     def expand_all(self, wait_for_animation: bool = True) -> None:
         """Expand all code blocks using master control."""
-        expand_all_btn = self.page.query_selector("button.master-btn:has-text('Expand All')")
+        expand_all_btn = self.page.query_selector("button.code-control-btn:has-text('Expand All')")
         if not expand_all_btn:
             raise RuntimeError("Expand All button not found")
 
