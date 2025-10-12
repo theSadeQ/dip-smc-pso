@@ -67,42 +67,37 @@
     top: 8px;
     right: 50px; /* Position after copy button */
     z-index: 100;
-    padding: 6px 10px;
-    background: rgba(30, 41, 59, 0.9);
-    border: 2px solid rgba(59, 130, 246, 0.4);
-    border-radius: 6px;
-    color: #3b82f6;
-    font-size: 0.9rem;
-    font-weight: 700;
+    padding: 4px 8px; /* Match copybutton size */
+    background: transparent; /* Minimal like copybutton */
+    border: none; /* No border like copybutton */
+    border-radius: 4px;
+    color: inherit; /* Inherit text color */
+    font-size: 1rem; /* Match icon size */
+    font-weight: 400; /* Normal weight */
     cursor: pointer;
     transition: all 0.2s ease;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0.3; /* Subtle like copybutton */
 }
 
 .code-collapse-btn:hover {
-    background: rgba(59, 130, 246, 0.2);
-    border-color: #3b82f6;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    background: rgba(128, 128, 128, 0.1); /* Subtle background on hover */
+    opacity: 1; /* Full visibility on hover */
+    transform: none; /* No transform like copybutton */
 }
 
 .code-collapse-btn:active {
-    transform: translateY(0);
+    opacity: 0.5;
 }
 
 .code-collapse-btn:focus {
-    outline: 3px solid rgba(59, 130, 246, 0.5);
+    outline: 2px solid rgba(59, 130, 246, 0.5);
     outline-offset: 2px;
 }
 
 .collapse-icon {
     display: inline-block;
-    transition: transform 0.2s ease;
-}
-
-.code-collapse-btn:hover .collapse-icon {
-    transform: scale(1.2);
+    font-size: 0.9rem; /* Slightly smaller icon */
+    line-height: 1;
 }
 
 /* ============================================================================
@@ -160,14 +155,14 @@ div[class*="highlight"].code-collapsed::after {
 }
 
 [data-theme="dark"] .code-collapse-btn {
-    background: rgba(15, 23, 42, 0.95);
-    border-color: rgba(59, 130, 246, 0.5);
-    color: #60a5fa;
+    background: transparent;
+    color: inherit;
+    opacity: 0.3;
 }
 
 [data-theme="dark"] .code-collapse-btn:hover {
-    background: rgba(59, 130, 246, 0.25);
-    border-color: #60a5fa;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 1;
 }
 
 [data-theme="dark"] div[class*="highlight"].code-collapsed::after {
@@ -215,13 +210,17 @@ div[class*="highlight"].code-collapsed::after {
 
     .code-collapse-btn {
         right: 10px;
-        padding: 4px 8px;
-        font-size: 0.85rem;
+        padding: 3px 6px;
+        font-size: 0.9rem;
     }
 
     /* Adjust if copy button exists */
     .highlight .copybtn ~ .code-collapse-btn {
-        right: 60px;
+        right: 50px;
+    }
+
+    .collapse-icon {
+        font-size: 0.85rem;
     }
 
     /* Collapsed message smaller on mobile */
