@@ -25,21 +25,15 @@
         // Load saved states
         loadStates();
 
-        // Find all code blocks - comprehensive selectors for all Sphinx code block types
+        // Find all code blocks - target only outer containers to avoid duplicates
+        // Sphinx generates nested structure: <div class="highlight-{lang} notranslate"><div class="highlight"><pre>
+        // We target the OUTER div (with notranslate) to avoid adding buttons to both layers
         const selectors = [
-            'div[class*="highlight"]',      // Standard highlighted code blocks
-            'div.literal-block',             // Literal blocks
-            'div.code-block',                // Code-block directive
-            'div.doctest',                   // Doctest blocks
-            'pre.literal-block',             // Pre-formatted literal blocks
-            '.highlight-python',             // Language-specific highlights
-            '.highlight-bash',
-            '.highlight-javascript',
-            '.highlight-yaml',
-            '.highlight-json',
-            '.highlight-text',
-            '.highlight-console',
-            '.highlight-default',
+            'div.notranslate[class*="highlight-"]',  // All language-specific code blocks (27+ types)
+            'div.literal-block',                      // Literal blocks
+            'div.code-block',                         // Code-block directive
+            'div.doctest',                            // Doctest blocks
+            'pre.literal-block'                       // Pre-formatted literal blocks
         ];
 
         const codeBlocks = document.querySelectorAll(selectors.join(', '));
@@ -112,7 +106,8 @@
         // Click handler
         button.addEventListener('click', (e) => {
             e.preventDefault();
-            const codeBlock = button.closest('div[class*="highlight"]');
+            // Find the code block container (works for all block types)
+            const codeBlock = button.closest('div.notranslate[class*="highlight-"], div.literal-block, div.code-block, div.doctest, pre.literal-block');
             toggleCodeBlock(codeBlock);
         });
 
@@ -269,7 +264,14 @@
      * Collapse all code blocks
      */
     function collapseAll() {
-        const codeBlocks = document.querySelectorAll('div[class*="highlight"]');
+        const selectors = [
+            'div.notranslate[class*="highlight-"]',
+            'div.literal-block',
+            'div.code-block',
+            'div.doctest',
+            'pre.literal-block'
+        ];
+        const codeBlocks = document.querySelectorAll(selectors.join(', '));
         codeBlocks.forEach(codeBlock => {
             if (!codeBlock.classList.contains('code-collapsed')) {
                 collapseCodeBlock(codeBlock, true);
@@ -281,7 +283,14 @@
      * Expand all code blocks
      */
     function expandAll() {
-        const codeBlocks = document.querySelectorAll('div[class*="highlight"]');
+        const selectors = [
+            'div.notranslate[class*="highlight-"]',
+            'div.literal-block',
+            'div.code-block',
+            'div.doctest',
+            'pre.literal-block'
+        ];
+        const codeBlocks = document.querySelectorAll(selectors.join(', '));
         codeBlocks.forEach(codeBlock => {
             if (codeBlock.classList.contains('code-collapsed')) {
                 expandCodeBlock(codeBlock, true);
@@ -344,19 +353,11 @@
                     // Check if the added node is a code block or contains code blocks
                     if (node.nodeType === 1) { // Element node
                         const selectors = [
-                            'div[class*="highlight"]',
+                            'div.notranslate[class*="highlight-"]',  // All language-specific code blocks
                             'div.literal-block',
                             'div.code-block',
                             'div.doctest',
-                            'pre.literal-block',
-                            '.highlight-python',
-                            '.highlight-bash',
-                            '.highlight-javascript',
-                            '.highlight-yaml',
-                            '.highlight-json',
-                            '.highlight-text',
-                            '.highlight-console',
-                            '.highlight-default',
+                            'pre.literal-block'
                         ];
 
                         // Check if the node itself is a code block
