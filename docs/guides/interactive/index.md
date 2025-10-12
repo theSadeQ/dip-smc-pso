@@ -22,6 +22,21 @@ This section showcases cutting-edge interactive documentation features that tran
 
 ---
 
+### Plotly Interactive Charts
+
+**Professional data visualization** with zoom, pan, and interactive exploration. Transform static plots into dynamic, explorable visualizations.
+
+**Features:**
+- Multiple chart types (line, scatter, bar, heatmap, radar)
+- Controller performance comparison matrices
+- PSO convergence animations with particle tracking
+- Parameter space exploration (scatter matrices)
+- Export charts as high-resolution images
+
+**[Explore Charts →](plotly-charts-demo.md)**
+
+---
+
 ### 3D Interactive Pendulum Visualization
 
 **Immersive 3D simulation** with Three.js WebGL rendering. Rotate, zoom, and watch the double inverted pendulum in real-time.
@@ -164,4 +179,5 @@ Found a bug or have suggestions? [Open an issue on GitHub](https://github.com/th
 ---
 
 **[AI] Generated with Claude Code**
-**Phase 2**: Live Python Code Execution (Revolutionary Interactive Documentation)
+**Phase 2**: Live Python Code Execution
+**Phase 3**: Plotly Interactive Charts
