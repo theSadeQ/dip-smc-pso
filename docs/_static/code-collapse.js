@@ -25,8 +25,24 @@
         // Load saved states
         loadStates();
 
-        // Find all code blocks
-        const codeBlocks = document.querySelectorAll('div[class*="highlight"]');
+        // Find all code blocks - comprehensive selectors for all Sphinx code block types
+        const selectors = [
+            'div[class*="highlight"]',      // Standard highlighted code blocks
+            'div.literal-block',             // Literal blocks
+            'div.code-block',                // Code-block directive
+            'div.doctest',                   // Doctest blocks
+            'pre.literal-block',             // Pre-formatted literal blocks
+            '.highlight-python',             // Language-specific highlights
+            '.highlight-bash',
+            '.highlight-javascript',
+            '.highlight-yaml',
+            '.highlight-json',
+            '.highlight-text',
+            '.highlight-console',
+            '.highlight-default',
+        ];
+
+        const codeBlocks = document.querySelectorAll(selectors.join(', '));
 
         if (codeBlocks.length === 0) {
             return; // No code blocks on this page
@@ -42,6 +58,9 @@
 
         // Setup keyboard shortcuts
         setupKeyboardShortcuts();
+
+        // Watch for dynamically added code blocks
+        setupMutationObserver();
     }
 
     /**
@@ -312,6 +331,74 @@
             console.warn('Failed to load code block states:', e);
             codeBlockStates = {};
         }
+    }
+
+    /**
+     * Setup MutationObserver to watch for dynamically added code blocks
+     */
+    function setupMutationObserver() {
+        // Create observer to watch for new code blocks
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    // Check if the added node is a code block or contains code blocks
+                    if (node.nodeType === 1) { // Element node
+                        const selectors = [
+                            'div[class*="highlight"]',
+                            'div.literal-block',
+                            'div.code-block',
+                            'div.doctest',
+                            'pre.literal-block',
+                            '.highlight-python',
+                            '.highlight-bash',
+                            '.highlight-javascript',
+                            '.highlight-yaml',
+                            '.highlight-json',
+                            '.highlight-text',
+                            '.highlight-console',
+                            '.highlight-default',
+                        ];
+
+                        // Check if the node itself is a code block
+                        const isCodeBlock = selectors.some(selector => {
+                            try {
+                                return node.matches && node.matches(selector);
+                            } catch (e) {
+                                return false;
+                            }
+                        });
+
+                        if (isCodeBlock && !node.classList.contains('collapsible-processed')) {
+                            const allBlocks = document.querySelectorAll(selectors.join(', '));
+                            const index = Array.from(allBlocks).indexOf(node);
+                            if (index !== -1) {
+                                processCodeBlock(node, index);
+                            }
+                        }
+
+                        // Check if the node contains code blocks
+                        if (node.querySelectorAll) {
+                            const codeBlocks = node.querySelectorAll(selectors.join(', '));
+                            codeBlocks.forEach((codeBlock) => {
+                                if (!codeBlock.classList.contains('collapsible-processed')) {
+                                    const allBlocks = document.querySelectorAll(selectors.join(', '));
+                                    const index = Array.from(allBlocks).indexOf(codeBlock);
+                                    if (index !== -1) {
+                                        processCodeBlock(codeBlock, index);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        });
+
+        // Start observing the document body for changes
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+        });
     }
 
     /**
