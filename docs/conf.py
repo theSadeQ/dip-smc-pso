@@ -104,6 +104,7 @@ extensions = [
     # Custom extensions
     'chartjs_extension',          # Chart.js interactive visualizations
     'pyodide_extension',          # Pyodide live Python code execution (Phase 2)
+    'plotly_extension',           # Plotly interactive charts (Phase 3)
 ]
 
 # MyST Parser configuration - quality-of-life features
@@ -205,6 +206,7 @@ html_css_files = [
     'code-collapse.css',
     'threejs-pendulum.css',  # 3D pendulum visualization styles
     'code-runner.css',  # Pyodide live code execution styles (Phase 2)
+    'plotly-charts.css',  # Plotly interactive charts styles (Phase 3)
 ]
 
 html_js_files = [
@@ -222,6 +224,9 @@ html_js_files = [
     'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js',
     'pyodide-worker.js',  # Web Worker for async Python execution
     'pyodide-runner.js',  # Main UI controller for code execution
+    # Plotly interactive charts (Phase 3 visual enhancement)
+    'https://cdn.plot.ly/plotly-2.27.0.min.js',  # Plotly.js for interactive charts
+    'plotly-integration.js',  # Chart renderer and controller
 ]
 
 # HTML output options
