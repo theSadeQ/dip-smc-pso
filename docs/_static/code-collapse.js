@@ -1,0 +1,336 @@
+/**
+ * Collapsible Code Blocks with Curtain Animation
+ * Adds minimize/expand functionality to all code blocks
+ */
+
+(function() {
+    'use strict';
+
+    // Configuration
+    const CONFIG = {
+        storageKey: 'code-block-states',
+        animationDuration: 300, // milliseconds
+        expandedIcon: '▼',
+        collapsedIcon: '▲',
+        buttonTitle: 'Toggle code block'
+    };
+
+    // State management
+    let codeBlockStates = {};
+
+    /**
+     * Initialize collapsible code blocks
+     */
+    function initCollapsibleCode() {
+        // Load saved states
+        loadStates();
+
+        // Find all code blocks
+        const codeBlocks = document.querySelectorAll('div[class*="highlight"]');
+
+        if (codeBlocks.length === 0) {
+            return; // No code blocks on this page
+        }
+
+        // Add master controls
+        addMasterControls(codeBlocks.length);
+
+        // Process each code block
+        codeBlocks.forEach((codeBlock, index) => {
+            processCodeBlock(codeBlock, index);
+        });
+
+        // Setup keyboard shortcuts
+        setupKeyboardShortcuts();
+    }
+
+    /**
+     * Process individual code block
+     */
+    function processCodeBlock(codeBlock, index) {
+        // Skip if already processed
+        if (codeBlock.classList.contains('collapsible-processed')) {
+            return;
+        }
+
+        // Mark as processed
+        codeBlock.classList.add('collapsible-processed');
+        codeBlock.setAttribute('data-code-index', index);
+
+        // Get the pre element (actual code content)
+        const preElement = codeBlock.querySelector('pre');
+        if (!preElement) return;
+
+        // Create collapse button
+        const collapseBtn = createCollapseButton(index);
+
+        // Insert button after any existing buttons (like copy button)
+        const existingButtons = codeBlock.querySelector('.copybtn, button');
+        if (existingButtons) {
+            existingButtons.parentNode.insertBefore(collapseBtn, existingButtons.nextSibling);
+        } else {
+            codeBlock.insertBefore(collapseBtn, codeBlock.firstChild);
+        }
+
+        // Apply saved state
+        const savedState = codeBlockStates[index];
+        if (savedState === 'collapsed') {
+            collapseCodeBlock(codeBlock, false); // No animation on page load
+        }
+    }
+
+    /**
+     * Create collapse button
+     */
+    function createCollapseButton(index) {
+        const button = document.createElement('button');
+        button.className = 'code-collapse-btn';
+        button.innerHTML = `<span class="collapse-icon">${CONFIG.expandedIcon}</span>`;
+        button.title = CONFIG.buttonTitle;
+        button.setAttribute('aria-label', 'Toggle code block visibility');
+        button.setAttribute('aria-expanded', 'true');
+
+        // Click handler
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const codeBlock = button.closest('div[class*="highlight"]');
+            toggleCodeBlock(codeBlock);
+        });
+
+        return button;
+    }
+
+    /**
+     * Toggle code block state
+     */
+    function toggleCodeBlock(codeBlock) {
+        const isCollapsed = codeBlock.classList.contains('code-collapsed');
+
+        if (isCollapsed) {
+            expandCodeBlock(codeBlock);
+        } else {
+            collapseCodeBlock(codeBlock);
+        }
+    }
+
+    /**
+     * Collapse code block with curtain animation
+     */
+    function collapseCodeBlock(codeBlock, animate = true) {
+        const preElement = codeBlock.querySelector('pre');
+        const button = codeBlock.querySelector('.code-collapse-btn');
+        const icon = button.querySelector('.collapse-icon');
+        const index = codeBlock.getAttribute('data-code-index');
+
+        if (!animate) {
+            codeBlock.classList.add('code-collapsed');
+            preElement.style.maxHeight = '0';
+            preElement.style.overflow = 'hidden';
+        } else {
+            // Measure current height
+            const currentHeight = preElement.scrollHeight;
+            preElement.style.maxHeight = currentHeight + 'px';
+
+            // Force reflow
+            void preElement.offsetHeight;
+
+            // Start animation
+            preElement.style.transition = `max-height ${CONFIG.animationDuration}ms ease-out, opacity ${CONFIG.animationDuration}ms ease-out`;
+            preElement.style.maxHeight = '0';
+            preElement.style.opacity = '0';
+
+            // Update classes after animation
+            setTimeout(() => {
+                codeBlock.classList.add('code-collapsed');
+                preElement.style.overflow = 'hidden';
+            }, CONFIG.animationDuration);
+        }
+
+        // Update button
+        icon.textContent = CONFIG.collapsedIcon;
+        button.setAttribute('aria-expanded', 'false');
+        button.title = 'Expand code block';
+
+        // Save state
+        codeBlockStates[index] = 'collapsed';
+        saveStates();
+    }
+
+    /**
+     * Expand code block with curtain animation
+     */
+    function expandCodeBlock(codeBlock, animate = true) {
+        const preElement = codeBlock.querySelector('pre');
+        const button = codeBlock.querySelector('.code-collapse-btn');
+        const icon = button.querySelector('.collapse-icon');
+        const index = codeBlock.getAttribute('data-code-index');
+
+        // Remove collapsed class
+        codeBlock.classList.remove('code-collapsed');
+        preElement.style.overflow = 'hidden';
+
+        if (!animate) {
+            preElement.style.maxHeight = 'none';
+            preElement.style.opacity = '1';
+        } else {
+            // Measure target height
+            preElement.style.maxHeight = 'none';
+            const targetHeight = preElement.scrollHeight;
+            preElement.style.maxHeight = '0';
+
+            // Force reflow
+            void preElement.offsetHeight;
+
+            // Start animation
+            preElement.style.transition = `max-height ${CONFIG.animationDuration}ms ease-out, opacity ${CONFIG.animationDuration}ms ease-out`;
+            preElement.style.maxHeight = targetHeight + 'px';
+            preElement.style.opacity = '1';
+
+            // Remove max-height after animation
+            setTimeout(() => {
+                preElement.style.maxHeight = 'none';
+                preElement.style.overflow = 'visible';
+            }, CONFIG.animationDuration);
+        }
+
+        // Update button
+        icon.textContent = CONFIG.expandedIcon;
+        button.setAttribute('aria-expanded', 'true');
+        button.title = 'Collapse code block';
+
+        // Save state
+        codeBlockStates[index] = 'expanded';
+        saveStates();
+
+        // Scroll to code block if it was off-screen
+        if (animate) {
+            setTimeout(() => {
+                const rect = codeBlock.getBoundingClientRect();
+                if (rect.top < 0 || rect.top > window.innerHeight) {
+                    codeBlock.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, CONFIG.animationDuration);
+        }
+    }
+
+    /**
+     * Add master controls (Collapse All / Expand All)
+     */
+    function addMasterControls(count) {
+        // Find a good place to insert controls (e.g., after first heading)
+        const mainContent = document.querySelector('.document, article, main');
+        if (!mainContent) return;
+
+        const controlsContainer = document.createElement('div');
+        controlsContainer.className = 'code-controls-master';
+        controlsContainer.innerHTML = `
+            <span class="code-controls-label">${count} code blocks:</span>
+            <button class="code-control-btn" id="collapse-all-btn" title="Collapse all code blocks (Ctrl+Shift+C)">
+                <span>▲</span> Collapse All
+            </button>
+            <button class="code-control-btn" id="expand-all-btn" title="Expand all code blocks (Ctrl+Shift+E)">
+                <span>▼</span> Expand All
+            </button>
+        `;
+
+        // Insert at the top of content
+        const firstHeading = mainContent.querySelector('h1, h2');
+        if (firstHeading) {
+            firstHeading.parentNode.insertBefore(controlsContainer, firstHeading.nextSibling);
+        } else {
+            mainContent.insertBefore(controlsContainer, mainContent.firstChild);
+        }
+
+        // Add event listeners
+        document.getElementById('collapse-all-btn').addEventListener('click', collapseAll);
+        document.getElementById('expand-all-btn').addEventListener('click', expandAll);
+    }
+
+    /**
+     * Collapse all code blocks
+     */
+    function collapseAll() {
+        const codeBlocks = document.querySelectorAll('div[class*="highlight"]');
+        codeBlocks.forEach(codeBlock => {
+            if (!codeBlock.classList.contains('code-collapsed')) {
+                collapseCodeBlock(codeBlock, true);
+            }
+        });
+    }
+
+    /**
+     * Expand all code blocks
+     */
+    function expandAll() {
+        const codeBlocks = document.querySelectorAll('div[class*="highlight"]');
+        codeBlocks.forEach(codeBlock => {
+            if (codeBlock.classList.contains('code-collapsed')) {
+                expandCodeBlock(codeBlock, true);
+            }
+        });
+    }
+
+    /**
+     * Setup keyboard shortcuts
+     */
+    function setupKeyboardShortcuts() {
+        document.addEventListener('keydown', (e) => {
+            // Ctrl+Shift+C - Collapse All
+            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
+                collapseAll();
+            }
+            // Ctrl+Shift+E - Expand All
+            else if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+                e.preventDefault();
+                expandAll();
+            }
+        });
+    }
+
+    /**
+     * Save states to localStorage
+     */
+    function saveStates() {
+        try {
+            localStorage.setItem(CONFIG.storageKey, JSON.stringify(codeBlockStates));
+        } catch (e) {
+            console.warn('Failed to save code block states:', e);
+        }
+    }
+
+    /**
+     * Load states from localStorage
+     */
+    function loadStates() {
+        try {
+            const saved = localStorage.getItem(CONFIG.storageKey);
+            if (saved) {
+                codeBlockStates = JSON.parse(saved);
+            }
+        } catch (e) {
+            console.warn('Failed to load code block states:', e);
+            codeBlockStates = {};
+        }
+    }
+
+    /**
+     * Clear saved states (for debugging)
+     */
+    window.clearCodeBlockStates = function() {
+        localStorage.removeItem(CONFIG.storageKey);
+        codeBlockStates = {};
+        console.log('Code block states cleared');
+    };
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCollapsibleCode);
+    } else {
+        initCollapsibleCode();
+    }
+
+    // Re-initialize on page navigation (for SPAs)
+    window.addEventListener('load', initCollapsibleCode);
+
+})();

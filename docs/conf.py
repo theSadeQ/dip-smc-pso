@@ -201,6 +201,7 @@ html_theme_options = {
 html_css_files = [
     'custom.css',
     'visual-tree.css',
+    'code-collapse.css',
 ]
 
 html_js_files = [
@@ -209,6 +210,7 @@ html_js_files = [
     'dark-mode.js',
     'visual-sitemap.js',
     'control-room.js',
+    'code-collapse.js',
 ]
 
 # HTML output options
