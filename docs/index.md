@@ -42,6 +42,13 @@ This framework implements state-of-the-art sliding mode control strategies with 
 - Streamlit interactive dashboard for real-time visualization
 - Docker deployment with GPU support for cloud platforms
 
+**Documentation Features**
+- **NEW: 3D Interactive Pendulum** - Real-time WebGL physics simulation with adjustable parameters (world's first in technical docs!)
+- Collapsible code blocks with state persistence for improved readability
+- Interactive visualizations and performance dashboards
+- GPU-accelerated smooth animations (60 FPS)
+- Full accessibility support with keyboard navigation
+
 ## Main Commands
 
 ```bash
@@ -136,6 +143,13 @@ context
 
 ::::{grid} 1 2 3 3
 :gutter: 3
+
+:::{grid-item-card} 🎮 3D Interactive Pendulum (NEW!)
+:link: guides/interactive/3d-pendulum-demo
+:link-type: doc
+
+Real-time physics simulation with WebGL rendering - adjust gains, set angles, watch dynamics unfold in cinematic 3D
+:::
 
 :::{grid-item-card} 🎛️ Control Room
 :link: architecture_control_room

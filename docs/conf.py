@@ -202,6 +202,7 @@ html_css_files = [
     'custom.css',
     'visual-tree.css',
     'code-collapse.css',
+    'threejs-pendulum.css',  # 3D pendulum visualization styles
 ]
 
 html_js_files = [
@@ -211,6 +212,10 @@ html_js_files = [
     'visual-sitemap.js',
     'control-room.js',
     'code-collapse.js',
+    # Three.js 3D visualization (Phase 1 visual enhancement)
+    'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js',
+    'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/controls/OrbitControls.js',
+    'threejs-pendulum.js',  # 3D interactive pendulum simulator
 ]
 
 # HTML output options
