@@ -105,6 +105,8 @@ extensions = [
     'chartjs_extension',          # Chart.js interactive visualizations
     'pyodide_extension',          # Pyodide live Python code execution (Phase 2)
     'plotly_extension',           # Plotly interactive charts (Phase 3)
+    'nbsphinx',                   # Jupyter notebook integration (Phase 4 - base)
+    'jupyter_extension',          # Custom Jupyter directives (Phase 4 - custom)
 ]
 
 # MyST Parser configuration - quality-of-life features
@@ -118,6 +120,16 @@ myst_enable_extensions = [
     'linkify',         # auto-link URLs
 ]
 myst_heading_anchors = 3
+
+# nbsphinx configuration - Jupyter notebook integration (Phase 4)
+nbsphinx_execute = 'auto'  # Execute notebooks during build (cached with jupyter-cache)
+nbsphinx_allow_errors = False  # Fail build on notebook errors for quality control
+nbsphinx_timeout = 180  # 3 minutes maximum per cell execution
+nbsphinx_kernel_name = 'python3'  # Use Python 3 kernel
+nbsphinx_execute_arguments = [
+    '--InlineBackend.figure_formats={"svg", "pdf"}',
+    '--InlineBackend.rc={"figure.dpi": 96}',
+]
 
 # MathJax configuration - globally numbered equations
 mathjax3_config = {

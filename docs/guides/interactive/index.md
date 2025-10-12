@@ -37,6 +37,21 @@ This section showcases cutting-edge interactive documentation features that tran
 
 ---
 
+### Jupyter Notebooks Integration
+
+**Execute complete Jupyter notebooks** directly in documentation with full Python environment, interactive widgets, and execution caching.
+
+**Features:**
+- Full notebook embedding with selective cell display
+- Inline code cells for quick demonstrations
+- Interactive widgets (sliders, dropdowns, buttons, checkboxes)
+- Execution caching for instant rebuilds
+- Native Python performance (100% speed)
+
+**[Try Notebooks →](jupyter-notebooks-demo.md)**
+
+---
+
 ### 3D Interactive Pendulum Visualization
 
 **Immersive 3D simulation** with Three.js WebGL rendering. Rotate, zoom, and watch the double inverted pendulum in real-time.
@@ -181,3 +196,4 @@ Found a bug or have suggestions? [Open an issue on GitHub](https://github.com/th
 **[AI] Generated with Claude Code**
 **Phase 2**: Live Python Code Execution
 **Phase 3**: Plotly Interactive Charts
+**Phase 4**: Jupyter Notebooks Integration

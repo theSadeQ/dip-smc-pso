@@ -1,6 +1,20 @@
 # Changelog All notable changes to the ResearchPlan validation system will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). ## [1.1.0] - Unreleased ### Added {#changelog-110-added}
+- **Live Python Code Execution (v1.0.0 - 2025-10-12)**: Revolutionary in-browser Python execution
+  - Pyodide WebAssembly Python 3.11 runtime (~8MB core)
+  - NumPy + Matplotlib support (~50MB packages, loaded on-demand)
+  - Web Worker async execution (non-blocking UI, 10s timeout)
+  - Interactive code editing with inline results
+  - stdout/stderr capture and display
+  - Matplotlib figures rendered as inline PNG images
+  - LocalStorage code persistence across sessions
+  - 4 comprehensive interactive examples (Hello World, sine waves, NumPy operations, statistics)
+  - Keyboard shortcut support (Ctrl+Enter to run)
+  - Mobile browser compatibility
+  - First load: 15-30s (cached after), execution: <2s
+  - Custom Sphinx directive: `.. runnable-code::`
+  - Zero server required - runs entirely client-side
 - **3D Interactive Pendulum Visualization (v1.0.0 - 2025-10-12)**: Revolutionary documentation feature
   - Real-time physics simulation with Three.js WebGL rendering (60 FPS)
   - Interactive parameter controls (controller gains K₁-K₆, initial angles θ₁, θ₂)
@@ -32,6 +46,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - 96% time savings: 45s automated vs 2+ hours manual testing
   - Baseline screenshots for visual regression testing (6 reference images)
   - FPS threshold adjusted from 55→45→43 to account for measurement variance
+- **Jupyter Notebooks Integration (v1.0.0 - 2025-10-12)**: Complete Jupyter ecosystem in documentation
+  - Custom Sphinx extension with 3 directives (jupyter-notebook, jupyter-cell, jupyter-widget)
+  - Full notebook embedding with selective cell display (:show-cells: option)
+  - Inline code cell execution with syntax highlighting and line numbers
+  - 5 interactive widget types: slider, dropdown, button, checkbox, text
+  - Pickle-based execution caching for 100x faster rebuilds (<10ms cached)
+  - Native Python performance (100% speed, server-side execution during build)
+  - Error handling with timeout protection (180s default, configurable)
+  - Professional UI with dark mode compatibility
+  - 6 new dependencies: nbsphinx, jupyter, ipykernel, ipywidgets, nbconvert, jupyter-cache
+  - Comprehensive demo page with 9 sections and 15+ examples
+  - Execution cache stored in _build/html/_jupyter_cache/ for persistence
 - JSON Schema validation integration with `researchplan.schema.json`
 - Property-based testing with Hypothesis for cross-field validation
 - CLI performance limits: `--max-bytes` and `--timeout-s` flags

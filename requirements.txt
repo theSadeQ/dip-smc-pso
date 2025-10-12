@@ -58,6 +58,14 @@ myst-parser>=1.0.0,<3.0.0            # Allows Sphinx to parse Markdown files (.m
 # Scientific Documentation
 sympy>=1.11.0,<2.0.0             # Symbolic mathematics library for equations in documentation.
 
+# Interactive Documentation (Jupyter Integration)
+nbsphinx>=0.9.0,<1.0.0           # Integrates Jupyter notebooks into Sphinx documentation.
+jupyter>=1.0.0,<2.0.0            # Metapackage for Jupyter ecosystem.
+ipykernel>=6.20.0,<7.0.0         # IPython kernel for Jupyter notebooks.
+ipywidgets>=8.0.0,<9.0.0         # Interactive widgets for Jupyter notebooks (sliders, dropdowns).
+nbconvert>=7.0.0,<8.0.0          # Converts notebooks to various formats (HTML, LaTeX, etc.).
+jupyter-cache>=0.6.0,<1.0.0      # Caches notebook execution results for faster Sphinx rebuilds.
+
 # Code Quality Tools
 pygments>=2.14.0,<3.0.0          # Provides syntax highlighting for code blocks.
 black>=23.0.0,<25.0.0            # Uncompromising Python code formatter for consistency.
