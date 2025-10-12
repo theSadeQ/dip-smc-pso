@@ -279,8 +279,9 @@ class PlaywrightHelper:
         if not copy_box or not collapse_box:
             raise RuntimeError("Could not get button bounding boxes")
 
-        # Gap = left edge of collapse button - right edge of copy button
-        gap = collapse_box["x"] - (copy_box["x"] + copy_box["width"])
+        # Layout: [Collapse Button] [Gap] [Copy Button]
+        # Gap = left edge of copy button - right edge of collapse button
+        gap = copy_box["x"] - (collapse_box["x"] + collapse_box["width"])
 
         return gap
 
