@@ -43,7 +43,9 @@ This framework implements state-of-the-art sliding mode control strategies with 
 - Docker deployment with GPU support for cloud platforms
 
 **Documentation Features**
+- **NEW: Progressive Web App** - Install as native app, full offline documentation access, automatic updates, works without internet
 - **NEW: 3D Interactive Pendulum** - Real-time WebGL physics simulation with adjustable parameters (world's first in technical docs!)
+- **NEW: Live Python Code Execution** - Run Python+NumPy+Matplotlib directly in browser, edit and execute examples instantly, zero installation required
 - Collapsible code blocks with state persistence for improved readability
 - Interactive visualizations and performance dashboards
 - GPU-accelerated smooth animations (60 FPS)
@@ -149,6 +151,20 @@ context
 :link-type: doc
 
 Real-time physics simulation with WebGL rendering - adjust gains, set angles, watch dynamics unfold in cinematic 3D
+:::
+
+:::{grid-item-card} 🐍 Live Python Code (NEW!)
+:link: guides/interactive/live-python-demo
+:link-type: doc
+
+Run Python code in browser with NumPy, Matplotlib - edit examples, see results instantly, zero installation
+:::
+
+:::{grid-item-card} 📱 Install as App (NEW!)
+:link: SPHINX_PHASE6_COMPLETION_REPORT
+:link-type: doc
+
+Progressive Web App - Install on mobile/desktop, work offline, automatic updates, native app experience
 :::
 
 :::{grid-item-card} 🎛️ Control Room
