@@ -1,6 +1,25 @@
 # Changelog All notable changes to the ResearchPlan validation system will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). ## [1.1.0] - Unreleased ### Added {#changelog-110-added}
+- **Mathematical Visualization Library (v1.0.0 - 2025-10-13)**: Interactive control theory visualizations
+  - 6 custom Sphinx directives for mathematical plots (phase-portrait, lyapunov-surface, stability-region, sliding-surface, control-signal, parameter-sweep)
+  - Plotly.js integration for interactive 2D/3D visualizations
+  - Phase portraits with vector field overlays and trajectory tracking
+  - 3D Lyapunov energy surfaces with rotation and 2D contour views
+  - Parameter space stability heatmaps with metric selection
+  - Sliding mode surfaces with adjustable boundary layers
+  - Control signal time-series with switching function overlays
+  - Multi-parameter sweep optimization visualizations
+  - Interactive controls: sliders, dropdowns, toggles for real-time updates
+  - Dark mode support with automatic theme detection
+  - Mobile responsive design with touch-friendly controls
+  - Export functionality (PNG, SVG, JSON)
+  - Comprehensive demo page with 18 examples
+  - Enhanced smc-theory.md with 4 interactive visualizations
+  - Full accessibility support (ARIA, keyboard navigation, high contrast)
+  - Custom Sphinx extension (650 lines) + JavaScript controller (1,100 lines) + CSS (450 lines)
+  - Browser compatibility: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+  - Total implementation: ~2,920 lines of code
 - **Live Python Code Execution (v1.0.0 - 2025-10-12)**: Revolutionary in-browser Python execution
   - Pyodide WebAssembly Python 3.11 runtime (~8MB core)
   - NumPy + Matplotlib support (~50MB packages, loaded on-demand)

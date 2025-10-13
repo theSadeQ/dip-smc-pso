@@ -52,6 +52,22 @@ This section showcases cutting-edge interactive documentation features that tran
 
 ---
 
+### Mathematical Visualizations
+
+**Interactive control theory visualizations** with 6 custom directives for exploring phase portraits, Lyapunov functions, stability regions, and sliding surfaces.
+
+**Features:**
+- Phase portraits with vector fields and trajectory tracking
+- 3D Lyapunov energy surfaces with rotation/zoom controls
+- Parameter space stability heatmaps with metric selection
+- Sliding mode surfaces with adjustable boundary layers
+- Control signal time-series with switching function overlays
+- Multi-parameter sweep optimization visualizations
+
+**[Explore Visualizations →](mathematical-visualizations-demo.md)**
+
+---
+
 ### 3D Interactive Pendulum Visualization
 
 **Immersive 3D simulation** with Three.js WebGL rendering. Rotate, zoom, and watch the double inverted pendulum in real-time.
@@ -197,3 +213,4 @@ Found a bug or have suggestions? [Open an issue on GitHub](https://github.com/th
 **Phase 2**: Live Python Code Execution
 **Phase 3**: Plotly Interactive Charts
 **Phase 4**: Jupyter Notebooks Integration
+**Phase 5**: Mathematical Visualizations
