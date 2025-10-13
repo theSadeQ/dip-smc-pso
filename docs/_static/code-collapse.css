@@ -154,19 +154,23 @@ div[class*="highlight"].code-collapsing pre {
     user-select: none; /* Prevent text selection during animation */
 }
 
-/* Lock button position during animation */
+/* Keep button clickable during animation - remove pointer-events block from button itself */
 div[class*="highlight"].code-collapsing .code-collapse-btn,
 div[class*="highlight"].code-collapsed .code-collapse-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    transform: none !important; /* Prevent any movement */
+    pointer-events: auto; /* Override parent's pointer-events: none */
+    z-index: 150; /* Higher than default 100 to stay above ::after pseudo-element */
 }
 
 /* Keep the header bar visible when collapsed */
 div[class*="highlight"].code-collapsed {
     min-height: 40px;
     margin-bottom: 1rem;
+}
+
+/* CRITICAL FIX: Keep inner highlight container tall enough to show button */
+div[class*="highlight-"].code-collapsed > div.highlight {
+    min-height: 44px; /* Taller than outer to ensure button parent stays visible */
+    position: relative; /* Ensure button positioning works */
 }
 
 /* Visual indicator for collapsed state */
@@ -178,6 +182,18 @@ div[class*="highlight"].code-collapsed::after {
     font-size: 0.85rem;
     font-style: italic;
     text-align: center;
+    z-index: 1; /* Stay below button (button has z-index: 150) */
+}
+
+/* Visual debugging - subtle background for collapsed button visibility */
+div[class*="highlight"].code-collapsed .code-collapse-btn {
+    background: rgba(59, 130, 246, 0.08); /* Very subtle blue tint */
+    opacity: 0.7; /* More visible when collapsed */
+}
+
+div[class*="highlight"].code-collapsed .code-collapse-btn:hover {
+    background: rgba(59, 130, 246, 0.15);
+    opacity: 1;
 }
 
 /* ============================================================================

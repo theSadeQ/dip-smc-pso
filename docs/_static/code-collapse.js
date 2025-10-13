@@ -31,10 +31,20 @@
     // State management
     let codeBlockStates = {};
 
+    // Initialization guard - prevent duplicate execution
+    let initialized = false;
+
     /**
      * Initialize collapsible code blocks
      */
     function initCollapsibleCode() {
+        // Prevent duplicate initialization
+        if (initialized) {
+            console.log('[CodeCollapse] Already initialized, skipping');
+            return;
+        }
+        initialized = true;
+
         // Load saved states
         loadStates();
 
@@ -248,6 +258,20 @@
             const currentHeight = preElement.scrollHeight;
             preElement.style.maxHeight = currentHeight + 'px';
 
+            // Cleanup handler using transitionend for robustness
+            const cleanupCollapse = () => {
+                codeBlock.classList.remove('code-collapsing');
+                codeBlock.classList.add('code-collapsed');
+                preElement.style.overflow = 'hidden';
+                preElement.removeEventListener('transitionend', cleanupCollapse);
+            };
+
+            // Listen for animation completion
+            preElement.addEventListener('transitionend', cleanupCollapse, { once: true });
+
+            // Fallback timeout in case transitionend doesn't fire
+            const fallbackTimeout = setTimeout(cleanupCollapse, CONFIG.animationDuration + 50);
+
             // Double requestAnimationFrame for smooth start
             requestAnimationFrame(() => {
                 // Set up transition
@@ -259,13 +283,6 @@
                     preElement.style.opacity = '0';
                 });
             });
-
-            // Cleanup after animation
-            setTimeout(() => {
-                codeBlock.classList.remove('code-collapsing');
-                codeBlock.classList.add('code-collapsed');
-                preElement.style.overflow = 'hidden';
-            }, CONFIG.animationDuration);
         }
 
         // Update button
@@ -303,6 +320,20 @@
             const targetHeight = preElement.scrollHeight;
             preElement.style.maxHeight = '0';
 
+            // Cleanup handler using transitionend for robustness
+            const cleanupExpand = () => {
+                codeBlock.classList.remove('code-collapsing');
+                preElement.style.maxHeight = 'none';
+                preElement.style.overflow = 'visible';
+                preElement.removeEventListener('transitionend', cleanupExpand);
+            };
+
+            // Listen for animation completion
+            preElement.addEventListener('transitionend', cleanupExpand, { once: true });
+
+            // Fallback timeout in case transitionend doesn't fire
+            const fallbackTimeout = setTimeout(cleanupExpand, CONFIG.animationDuration + 50);
+
             // Double requestAnimationFrame for smooth start
             requestAnimationFrame(() => {
                 // Set up transition
@@ -314,13 +345,6 @@
                     preElement.style.opacity = '1';
                 });
             });
-
-            // Cleanup after animation
-            setTimeout(() => {
-                codeBlock.classList.remove('code-collapsing');
-                preElement.style.maxHeight = 'none';
-                preElement.style.overflow = 'visible';
-            }, CONFIG.animationDuration);
         }
 
         // Update button
