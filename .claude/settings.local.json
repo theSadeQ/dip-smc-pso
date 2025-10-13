@@ -17,12 +17,17 @@
       "Bash(do echo -n \"$dir: \")",
       "Bash(Select-String -Pattern \"WARNING:|ERROR:\")",
       "Bash(Measure-Object -Line)",
-      "Bash(Select-Object -ExpandProperty Lines)"
+      "Bash(Select-Object -ExpandProperty Lines)",
+      "Bash(sphinx-build:*)",
+      "Bash(/dev/null)",
+      "Bash(findstr:*)",
+      "Read(//c/Users/sadeg/OneDrive/Desktop/**)"
     ],
     "deny": [],
     "ask": [],
     "additionalDirectories": [
       "D:\\Projects"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true
 }
