@@ -349,7 +349,14 @@ missed = monitor.end(start)
 
 ### 19.1 Automatic MCP Usage Rules
 
-**MANDATORY**: Claude MUST automatically use MCP servers when these conditions are detected:
+**FOR CLAUDE**: These rules are instructions for AI behavior, NOT requirements for user prompts.
+
+**USER NOTE**: You DON'T need to use exact keywords or craft special prompts. Just ask naturally!
+- "Where's the adaptive SMC?" → Claude uses context7 + filesystem automatically
+- "Is this data good?" → Claude uses pandas-mcp + numpy-mcp automatically
+- "Test the dashboard" → Claude uses puppeteer automatically
+
+**MANDATORY FOR CLAUDE**: Claude MUST automatically use MCP servers when these conditions are detected:
 
 #### Pandas MCP - Auto-trigger when:
 - Analyzing CSV/JSON data files (PSO results, simulation logs)
@@ -515,14 +522,54 @@ Claude: context7 (find file) → filesystem (read code) →
         numpy-mcp (compute statistics) → Complete answer in one response
 ```
 
-**Mandatory Orchestration Rules:**
+**Mandatory Orchestration Rules (FOR CLAUDE):**
 1. If user mentions 2+ domains (docs + data + testing), use 2+ MCPs
 2. For "complete analysis" tasks, use full pipeline (3-5 MCPs minimum)
 3. For debugging tasks, always combine sequential-thinking + domain-specific MCPs
 4. For research workflows, always: context7 → filesystem → relevant analysis MCPs
 5. Never ask user "should I also analyze X?" - just do it with appropriate MCP
+6. **Understand intent, not keywords**: "where is" = search, "check" = analyze, "test" = validate
+7. **Be proactive**: If task implies data analysis, use pandas even if not explicitly requested
+8. **Chain automatically**: Don't wait for user to ask for next step, complete the full workflow
 
-### 19.8 Troubleshooting
+### 19.8 Natural Language Flexibility (For Users)
+
+**You can ask in ANY of these ways - all work the same:**
+
+| Your Natural Request | What Claude Understands | MCPs Used |
+|---------------------|------------------------|-----------|
+| "Where's the code for X?" | Search + Read | context7 → filesystem |
+| "Show me X" | Search + Read | context7 → filesystem |
+| "Find X implementation" | Search + Read | context7 → filesystem |
+| "I need to see X" | Search + Read | context7 → filesystem |
+| **All trigger same MCPs** | ↑ | ↑ |
+|  |  |  |
+| "Is this CSV any good?" | Load + Analyze | pandas-mcp → numpy-mcp |
+| "Check this data file" | Load + Analyze | pandas-mcp → numpy-mcp |
+| "What's in this optimization result?" | Load + Analyze | pandas-mcp → numpy-mcp |
+| "Analyze these numbers" | Load + Analyze | pandas-mcp → numpy-mcp |
+| **All trigger same MCPs** | ↑ | ↑ |
+|  |  |  |
+| "Does the UI work?" | Test Interface | puppeteer |
+| "Test the dashboard" | Test Interface | puppeteer |
+| "Check if page loads" | Test Interface | puppeteer |
+| "Screenshot the app" | Test Interface | puppeteer |
+| **All trigger same MCPs** | ↑ | ↑ |
+
+**The Point**: Speak naturally! Claude figures out intent → picks right MCPs → chains them intelligently.
+
+**DON'T STRESS ABOUT:**
+- Exact keywords ("analyze" vs "check" vs "look at")
+- MCP names (never say "use pandas-mcp")
+- Prompt structure (questions, commands, descriptions all work)
+- Triggering tools (Claude does this automatically)
+
+**JUST ASK NATURALLY:**
+- "What's wrong with this controller?" (triggers: filesystem → pytest-mcp → sequential-thinking)
+- "Check that optimization run" (triggers: pandas-mcp → numpy-mcp)
+- "Find docs about PSO and show me the code" (triggers: context7 → filesystem)
+
+### 19.9 Troubleshooting
 
 **Server won't start:**
 ```bash
