@@ -96,6 +96,13 @@
       "args": ["D:\\Projects\\main\\.mcp_servers\\pandas-mcp-server\\server.py"],
       "env": {},
       "description": "Pandas data analysis and visualization for PSO results"
+    },
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@context7/mcp"],
+      "env": {},
+      "description": "Intelligent context search and semantic retrieval across documentation and codebase"
     }
   },
   "project": {
@@ -112,7 +119,8 @@
       "sqlite-mcp": "PSO optimization results querying, convergence analysis",
       "mcp-analyzer": "Code quality checks with RUFF linter and VULTURE dead code detection",
       "numpy-mcp": "Numerical computations, matrix operations, statistical analysis for control systems",
-      "pandas-mcp": "Advanced data analysis and visualization of PSO convergence and simulation results"
+      "pandas-mcp": "Advanced data analysis and visualization of PSO convergence and simulation results",
+      "context7": "Semantic search across documentation, intelligent context retrieval, cross-reference validation"
     }
   }
 }

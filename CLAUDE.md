@@ -343,12 +343,144 @@ missed = monitor.end(start)
 
 ------
 
-## 18) Success Criteria
+## 19) Model Context Protocol (MCP) Auto-Triggers
+
+**See:** `docs/mcp-debugging/README.md` for complete workflows | `.mcp.json` for server configuration
+
+### 19.1 Automatic MCP Usage Rules
+
+**MANDATORY**: Claude MUST automatically use MCP servers when these conditions are detected:
+
+#### Pandas MCP - Auto-trigger when:
+- Analyzing CSV/JSON data files (PSO results, simulation logs)
+- Computing statistics (mean, std, confidence intervals)
+- Plotting convergence curves or performance metrics
+- Keywords: "analyze data", "plot results", "statistical analysis", "convergence"
+
+#### Context7 MCP - Auto-trigger when:
+- Searching documentation for specific topics
+- Finding related code/docs across the project
+- Validating cross-references between files
+- Keywords: "find", "search docs", "where is", "related to", "references"
+
+#### Puppeteer MCP - Auto-trigger when:
+- Testing Streamlit dashboard functionality
+- Validating UI elements or layouts
+- Taking screenshots of dashboard views
+- Keywords: "test dashboard", "streamlit UI", "screenshot", "validate interface"
+
+#### NumPy MCP - Auto-trigger when:
+- Matrix operations (inversion, decomposition, eigenvalues)
+- Numerical computations for control theory
+- Linear algebra validations
+- Keywords: "matrix", "eigenvalue", "numerical", "compute"
+
+#### Git MCP - Auto-trigger when:
+- Analyzing commit history beyond basic `git log`
+- Complex branch operations
+- Commit statistics or contributor analysis
+- Keywords: "commit history", "branch analysis", "git stats"
+
+#### SQLite MCP - Auto-trigger when:
+- Querying PSO optimization results database
+- Analyzing historical optimization runs
+- Generating reports from stored results
+- Keywords: "query results", "optimization history", "database"
+
+#### Pytest MCP - Auto-trigger when:
+- Debugging test failures with detailed traces
+- Analyzing test patterns or flaky tests
+- Keywords: "test failure", "pytest debug", "why test failed"
+
+### 19.2 Configuration
+
+**All servers enabled:** `.claude/settings.local.json` sets `"enableAllProjectMcpServers": true`
+
+**Server definitions:** `.mcp.json` (11 configured servers)
+
+### 19.3 Usage Workflow
+
+```bash
+# Example: Analyzing PSO results (auto-triggers pandas-mcp + sqlite-mcp)
+"Analyze the PSO convergence from optimization_results/pso_run_20250113.csv"
+
+# Example: Finding documentation (auto-triggers context7)
+"Find all documentation related to adaptive SMC controller"
+
+# Example: Testing dashboard (auto-triggers puppeteer)
+"Test the Streamlit dashboard controller comparison page"
+
+# Example: Matrix operations (auto-triggers numpy-mcp)
+"Compute eigenvalues of the system dynamics matrix"
+```
+
+### 19.4 Custom Slash Commands with MCP
+
+- `/analyze-logs` → Pandas MCP + SQLite MCP for log analysis
+- `/debug-with-mcp` → Multi-server integrated debugging
+- `/inspect-server` → MCP Inspector for server testing
+- `/analyze-dashboard` → Puppeteer MCP for UI validation
+- `/test-browser` → Playwright/Puppeteer for dashboard testing
+
+### 19.5 Development Guidelines
+
+**Adding New MCP Servers:**
+1. Add server config to `.mcp.json` with clear description
+2. Add to `mcp_usage` section with specific use cases
+3. Define auto-trigger keywords in this section
+4. Document in `docs/mcp-debugging/`
+5. Test with relevant workflows
+
+**Auto-trigger Requirements:**
+- Clear keyword matching (e.g., "analyze data" → pandas-mcp)
+- Multiple servers can activate simultaneously
+- No user confirmation needed (auto-approved)
+- Fallback to manual tools if MCP unavailable
+
+### 19.6 Available MCP Servers (11 Total)
+
+| Server | Auto-Trigger Keywords | Primary Use Cases |
+|--------|----------------------|-------------------|
+| **pandas-mcp** | analyze, plot, statistics, convergence | Data analysis, PSO results |
+| **context7** | find, search, where, related | Doc search, cross-refs |
+| **puppeteer** | test, screenshot, UI, dashboard | Streamlit testing |
+| **numpy-mcp** | matrix, eigenvalue, numerical | Linear algebra ops |
+| **filesystem** | inspect, read, analyze files | Code/log analysis |
+| **github** | issue, PR, commit | Issue tracking |
+| **sequential-thinking** | debug, systematic, multi-step | Complex debugging |
+| **git-mcp** | git history, branch, stats | Advanced Git ops |
+| **sqlite-mcp** | query, database, results | PSO results DB |
+| **pytest-mcp** | test failure, pytest, debug | Test debugging |
+| **mcp-analyzer** | lint, ruff, vulture, quality | Code quality checks |
+
+### 19.7 Troubleshooting
+
+**Server won't start:**
+```bash
+# Verify configuration
+cat .mcp.json | grep -A5 "server-name"
+
+# Check if npx/node available
+npx --version
+
+# Check Python servers
+python -m pip list | grep mcp
+```
+
+**See Also:**
+- `docs/mcp-debugging/QUICK_REFERENCE.md` - Quick troubleshooting
+- `docs/mcp-debugging/workflows/` - Complete workflows
+- `.mcp.json` - Full server configuration
+
+------
+
+## 20) Success Criteria
 
 - Clean root (≤ 12 visible entries), caches removed, backups archived.
 - Test coverage gates met (85% overall / 95% critical / 100% safety‑critical).
 - Single‑threaded operation stable; no dependency conflicts; memory bounded.
 - Clear, validated configuration; reproducible experiments.
+- MCP servers auto-trigger for appropriate tasks; all 11 servers operational.
 
 ------
 
