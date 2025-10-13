@@ -398,20 +398,43 @@ missed = monitor.end(start)
 
 **Server definitions:** `.mcp.json` (11 configured servers)
 
-### 19.3 Usage Workflow
+### 19.3 Multi-MCP Collaboration Examples
 
+**Single-MCP Tasks:**
 ```bash
-# Example: Analyzing PSO results (auto-triggers pandas-mcp + sqlite-mcp)
-"Analyze the PSO convergence from optimization_results/pso_run_20250113.csv"
+# Context7 only
+"Find documentation about sliding mode control"
 
-# Example: Finding documentation (auto-triggers context7)
-"Find all documentation related to adaptive SMC controller"
+# Pandas only
+"Load and describe optimization_results/latest.csv"
+```
 
-# Example: Testing dashboard (auto-triggers puppeteer)
-"Test the Streamlit dashboard controller comparison page"
+**Multi-MCP Workflows (ENCOURAGED):**
+```bash
+# 3-MCP Pipeline: Research → Analysis → Computation
+"Search documentation for PSO theory, then analyze convergence data from
+optimization_results/pso_run_20250113.csv and compute statistical significance"
+→ Triggers: context7 → pandas-mcp → numpy-mcp
 
-# Example: Matrix operations (auto-triggers numpy-mcp)
-"Compute eigenvalues of the system dynamics matrix"
+# 4-MCP Pipeline: Search → Read → Test → Analyze
+"Find the adaptive SMC controller code, inspect its implementation,
+test it on the dashboard, and analyze its performance metrics"
+→ Triggers: context7 → filesystem → puppeteer → pandas-mcp
+
+# 5-MCP Pipeline: Quality → Lint → History → Fix → Test
+"Analyze code quality issues in controllers, trace when they were introduced,
+suggest fixes, and validate with pytest"
+→ Triggers: mcp-analyzer → git-mcp → filesystem → pytest-mcp → sequential-thinking
+
+# Database + Analysis Pipeline
+"Query all PSO runs from the database where convergence < 0.01,
+load the corresponding CSV files, and compute confidence intervals"
+→ Triggers: sqlite-mcp → filesystem → pandas-mcp → numpy-mcp
+
+# Complete Documentation Pipeline
+"Search for all references to chattering mitigation, read the related files,
+analyze git blame for authorship, and generate a cross-reference report"
+→ Triggers: context7 → filesystem → git-mcp → pandas-mcp
 ```
 
 ### 19.4 Custom Slash Commands with MCP
@@ -433,9 +456,17 @@ missed = monitor.end(start)
 
 **Auto-trigger Requirements:**
 - Clear keyword matching (e.g., "analyze data" → pandas-mcp)
-- Multiple servers can activate simultaneously
+- **Multiple servers SHOULD activate simultaneously for complex tasks**
 - No user confirmation needed (auto-approved)
 - Fallback to manual tools if MCP unavailable
+
+**MCP Collaboration Patterns (MANDATORY):**
+- **Data Analysis Pipeline**: filesystem → pandas-mcp → numpy-mcp → sqlite-mcp
+- **Documentation Workflow**: context7 → filesystem → git-mcp (find → read → trace history)
+- **Testing Pipeline**: pytest-mcp → puppeteer → pandas-mcp (debug → UI test → analyze results)
+- **Code Quality**: mcp-analyzer → filesystem → git-mcp (lint → inspect → commit analysis)
+- **Research Workflow**: context7 → pandas-mcp → numpy-mcp (search theory → load data → compute)
+- **Debugging Session**: sequential-thinking → pytest-mcp → filesystem (systematic → test trace → code inspection)
 
 ### 19.6 Available MCP Servers (11 Total)
 
@@ -453,7 +484,45 @@ missed = monitor.end(start)
 | **pytest-mcp** | test failure, pytest, debug | Test debugging |
 | **mcp-analyzer** | lint, ruff, vulture, quality | Code quality checks |
 
-### 19.7 Troubleshooting
+### 19.7 MCP Orchestration Philosophy
+
+**Why Multi-MCP is Superior:**
+- **Single-MCP**: Limited to one domain (e.g., pandas can only analyze data)
+- **Multi-MCP**: Complete workflows across domains (search → read → analyze → test → validate)
+- **Efficiency**: One complex request > multiple simple requests
+- **Context preservation**: MCPs share results within the same Claude response
+
+**How Claude Should Think:**
+1. **Identify task domains**: "Search docs" = context7, "analyze data" = pandas, "test UI" = puppeteer
+2. **Chain dependencies**: What output from MCP A feeds into MCP B?
+3. **Parallel vs Sequential**: Independent tasks → parallel; dependent tasks → sequential
+4. **Always prefer more MCPs**: If 3 MCPs can solve it better than 1, use all 3
+
+**Examples of Orchestration Thinking:**
+
+❌ **Bad (Single-MCP thinking):**
+```
+User: "Find the controller and analyze its test results"
+Claude: Uses context7 to find controller → stops
+         User asks again → uses pandas to analyze → stops
+```
+
+✅ **Good (Multi-MCP orchestration):**
+```
+User: "Find the controller and analyze its test results"
+Claude: context7 (find file) → filesystem (read code) →
+        pytest-mcp (get test results) → pandas-mcp (analyze metrics) →
+        numpy-mcp (compute statistics) → Complete answer in one response
+```
+
+**Mandatory Orchestration Rules:**
+1. If user mentions 2+ domains (docs + data + testing), use 2+ MCPs
+2. For "complete analysis" tasks, use full pipeline (3-5 MCPs minimum)
+3. For debugging tasks, always combine sequential-thinking + domain-specific MCPs
+4. For research workflows, always: context7 → filesystem → relevant analysis MCPs
+5. Never ask user "should I also analyze X?" - just do it with appropriate MCP
+
+### 19.8 Troubleshooting
 
 **Server won't start:**
 ```bash
