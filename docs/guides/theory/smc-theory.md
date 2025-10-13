@@ -66,6 +66,22 @@ graph TD
 - 🟢 Green: On sliding surface (`s = 0`) - Desired dynamics
 - 🔵 Blue: Equilibrium point - Control objective
 
+**Interactive Phase Portrait - Explore System Dynamics:**
+
+```{phase-portrait}
+:system: classical_smc
+:initial-state: 0.3, 0.2, 0.15, 0.05
+:time-range: 0, 10, 0.01
+:vector-field: true
+:plot-id: smc-theory-phase-portrait
+
+2D phase portrait showing classical SMC trajectory converging to origin. Toggle vector field to see the flow dynamics. Drag to zoom, double-click to reset view.
+```
+
+:::{tip}
+**Try This**: Click "Toggle Vector Field" to visualize how the control law creates a flow toward the sliding surface!
+:::
+
 ### Two Phases of SMC
 
 **Phase 1: Reaching Phase**
@@ -147,6 +163,24 @@ graph TD
 
 **Key Insight**: Control ensures `V̇ < 0` everywhere except equilibrium, guaranteeing convergence.
 
+**Interactive 3D Lyapunov Energy Surface:**
+
+```{lyapunov-surface}
+:function: quadratic
+:trajectory: true
+:level-curves: true
+:plot-id: smc-theory-lyapunov-3d
+
+3D visualization of Lyapunov function V(x) = x₁² + x₂² as an energy bowl. System trajectory (green) descends toward minimum at origin. Drag to rotate, scroll to zoom, click "2D Contour" for top-down view.
+```
+
+:::{tip}
+**Explore**:
+- **Rotate** the 3D view to see the energy bowl shape
+- **Toggle "2D Contour"** to see level curves (constant energy lines)
+- **Watch** the green trajectory descend like a ball rolling downhill!
+:::
+
 ### Lyapunov Function for SMC
 
 For sliding mode control, we use:
@@ -206,6 +240,102 @@ Reaching time: T ≤ |s(0)| / K
 - Larger `K` → faster convergence
 - System reaches surface in finite, predictable time
 - Independent of initial error magnitude (for large enough K)
+
+**Try it yourself - Interactive Lyapunov Function Visualization:**
+
+```{eval-rst}
+.. runnable-code::
+   :language: python
+   :caption: Interactive Example 1 - Lyapunov Function as Energy Bowl
+   :preload: numpy,matplotlib
+
+   import numpy as np
+   import matplotlib.pyplot as plt
+   from mpl_toolkits.mplot3d import Axes3D
+
+   # Create sliding surface values (2D state space)
+   s = np.linspace(-3, 3, 100)
+   s_dot = np.linspace(-3, 3, 100)
+   S, S_DOT = np.meshgrid(s, s_dot)
+
+   # Lyapunov function V = ½s²
+   V = 0.5 * S**2
+
+   # Lyapunov derivative V̇ = s·ṡ (with SMC: V̇ = -K|s|)
+   K = 2.0  # Switching gain
+   V_dot = -K * np.abs(S)
+
+   # Simulate trajectory approaching surface
+   t = np.linspace(0, 5, 200)
+   s_traj = 2.5 * np.exp(-0.8*t) * np.cos(3*t)
+   s_dot_traj = np.gradient(s_traj, t)
+   V_traj = 0.5 * s_traj**2
+
+   # Create figure with subplots
+   fig = plt.figure(figsize=(15, 5))
+
+   # Plot 1: 3D Lyapunov surface
+   ax1 = fig.add_subplot(131, projection='3d')
+   surf = ax1.plot_surface(S, S_DOT, V, cmap='coolwarm', alpha=0.8, edgecolor='none')
+   ax1.plot(s_traj, s_dot_traj, V_traj, 'g-', linewidth=3, label='System Trajectory')
+   ax1.scatter([0], [0], [0], color='red', s=100, label='Equilibrium (V=0)')
+   ax1.set_xlabel('Sliding Surface s', fontsize=10)
+   ax1.set_ylabel('s_dot', fontsize=10)
+   ax1.set_zlabel('V = ½s²', fontsize=10)
+   ax1.set_title('Lyapunov "Energy Bowl"', fontsize=12, fontweight='bold')
+   ax1.view_init(elev=20, azim=45)
+   ax1.legend(fontsize=8)
+
+   # Plot 2: V(s) - Energy function
+   ax2 = fig.add_subplot(132)
+   ax2.plot(s, 0.5*s**2, 'b-', linewidth=3, label='V(s) = ½s²')
+   ax2.plot(s_traj, V_traj, 'g-', linewidth=2, label='System Trajectory')
+   ax2.scatter([0], [0], color='red', s=100, zorder=5, label='Equilibrium')
+   ax2.axhline(y=0, color='k', linestyle='--', alpha=0.3)
+   ax2.axvline(x=0, color='k', linestyle='--', alpha=0.3)
+   ax2.set_xlabel('Sliding Surface s', fontsize=11)
+   ax2.set_ylabel('Lyapunov Function V', fontsize=11)
+   ax2.set_title('V(s) = ½s² (Always ≥ 0)', fontsize=12, fontweight='bold')
+   ax2.legend(loc='best')
+   ax2.grid(True, alpha=0.3)
+
+   # Plot 3: V̇(s) - Lyapunov derivative
+   ax3 = fig.add_subplot(133)
+   ax3.plot(s, -K*np.abs(s), 'r-', linewidth=3, label='V̇(s) = -K|s|')
+   ax3.fill_between(s, 0, -K*np.abs(s), alpha=0.2, color='red', label='Always ≤ 0')
+   ax3.axhline(y=0, color='k', linestyle='--', alpha=0.3)
+   ax3.axvline(x=0, color='k', linestyle='--', alpha=0.3)
+   ax3.set_xlabel('Sliding Surface s', fontsize=11)
+   ax3.set_ylabel('Lyapunov Derivative V̇', fontsize=11)
+   ax3.set_title('V̇ < 0 (Energy Decreases)', fontsize=12, fontweight='bold')
+   ax3.legend(loc='best')
+   ax3.grid(True, alpha=0.3)
+
+   plt.tight_layout()
+   plt.show()
+
+   # Analysis
+   print("=" * 60)
+   print("LYAPUNOV STABILITY ANALYSIS")
+   print("=" * 60)
+   print(f"\n1. Lyapunov Function: V(s) = ½s²")
+   print(f"   → Always non-negative: V ≥ 0")
+   print(f"   → Zero only at equilibrium: V = 0 ⟺ s = 0")
+   print(f"\n2. Lyapunov Derivative: V̇ = s·ṡ = -K|s|")
+   print(f"   → Always negative except at equilibrium: V̇ < 0 for s ≠ 0")
+   print(f"   → Energy decreases monotonically")
+   print(f"\n3. Convergence Time (Finite-Time):")
+   print(f"   → T ≤ |s(0)| / K")
+   print(f"   → Initial s = {s_traj[0]:.2f}, K = {K}")
+   print(f"   → Max time: T ≤ {abs(s_traj[0])/K:.2f} seconds")
+   print(f"\n4. Actual Convergence:")
+   print(f"   → Initial V = {V_traj[0]:.3f}")
+   print(f"   → Final V = {V_traj[-1]:.6f}")
+   print(f"   → Reduction: {(1-V_traj[-1]/V_traj[0])*100:.1f}%")
+   print("=" * 60)
+   print("\nKEY INSIGHT: Ball rolls downhill (V̇ < 0) until reaching")
+   print("             bottom of bowl (s = 0), proving stability!")
+```
 
 
 
@@ -269,6 +399,25 @@ graph LR
 - 🟡 Yellow (`|s| ≤ ε`): Boundary layer (smooth approximation)
 - 🟢 Green: Continuous control, no chattering
 
+**Interactive Sliding Surface with Boundary Layer:**
+
+```{sliding-surface}
+:surface-gains: 1.0, 1.0
+:reaching-law: constant
+:boundary-layer: 0.1
+:plot-id: smc-theory-sliding-surface
+
+Sliding surface visualization showing s = x₁ + x₂ = 0 with adjustable boundary layer. Use slider to change Φ (boundary layer thickness) and observe the chattering-accuracy tradeoff. System trajectory shows reaching and sliding phases.
+```
+
+:::{tip}
+**Interactive Exploration**:
+- **Slide Φ** from 0.01 to 0.5 to see the tradeoff:
+  - Small Φ → Thin layer → Better accuracy, more chattering
+  - Large Φ → Thick layer → Less chattering, reduced accuracy
+- **Change Reaching Law** to compare constant, exponential, and power laws
+:::
+
 **Mathematical Properties**:
 - **Outside boundary layer** (`|s| > ε`): Behaves like `sign(s)`
 - **Inside boundary layer** (`|s| ≤ ε`): Smooth transition
@@ -305,6 +454,141 @@ Where:
 **Advantage**: Automatically adjusts to system dynamics
 - High `ṡ` → thicker layer (more chattering reduction)
 - Low `ṡ` → thinner layer (better accuracy)
+
+**Try it yourself - Interactive Switching Functions Comparison:**
+
+```{eval-rst}
+.. runnable-code::
+   :language: python
+   :caption: Interactive Example 2 - Compare Switching Functions (sign, sat, tanh)
+   :preload: numpy,matplotlib
+
+   import numpy as np
+   import matplotlib.pyplot as plt
+
+   # Sliding surface values
+   s = np.linspace(-2, 2, 1000)
+
+   # Boundary layer width
+   eps = 0.3
+
+   # Define switching functions
+   def sign_func(s):
+       return np.sign(s)
+
+   def sat_func(s, eps):
+       return np.clip(s / eps, -1, 1)
+
+   def tanh_func(s, eps):
+       return np.tanh(s / eps)
+
+   # Compute all three functions
+   u_sign = sign_func(s)
+   u_sat = sat_func(s, eps)
+   u_tanh = tanh_func(s, eps)
+
+   # Create comprehensive figure
+   fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(14, 10))
+
+   # Plot 1: All three functions together
+   ax1.plot(s, u_sign, 'r-', linewidth=2.5, label='sign(s) - Discontinuous', alpha=0.7)
+   ax1.plot(s, u_sat, 'b-', linewidth=2.5, label='sat(s/ε) - Piecewise linear')
+   ax1.plot(s, u_tanh, 'g-', linewidth=2.5, label='tanh(s/ε) - Smooth')
+   ax1.axhline(y=0, color='k', linestyle='--', alpha=0.3)
+   ax1.axvline(x=0, color='k', linestyle='--', alpha=0.3)
+   ax1.axvspan(-eps, eps, alpha=0.1, color='yellow', label=f'Boundary Layer (ε={eps})')
+   ax1.set_xlabel('Sliding Surface s', fontsize=11)
+   ax1.set_ylabel('Switching Function Output', fontsize=11)
+   ax1.set_title('Switching Functions Comparison', fontsize=13, fontweight='bold')
+   ax1.legend(loc='best')
+   ax1.grid(True, alpha=0.3)
+   ax1.set_ylim([-1.2, 1.2])
+
+   # Plot 2: Zoomed view near s=0
+   s_zoom = np.linspace(-0.5, 0.5, 1000)
+   ax2.plot(s_zoom, sat_func(s_zoom, eps), 'b-', linewidth=3, label='sat(s/ε)')
+   ax2.plot(s_zoom, tanh_func(s_zoom, eps), 'g-', linewidth=3, label='tanh(s/ε)')
+   ax2.axhline(y=0, color='k', linestyle='--', alpha=0.3)
+   ax2.axvline(x=0, color='k', linestyle='--', alpha=0.3)
+   ax2.axvspan(-eps, eps, alpha=0.2, color='yellow')
+   ax2.set_xlabel('Sliding Surface s', fontsize=11)
+   ax2.set_ylabel('Switching Function', fontsize=11)
+   ax2.set_title('Zoomed View: Boundary Layer Detail', fontsize=13, fontweight='bold')
+   ax2.legend(loc='best')
+   ax2.grid(True, alpha=0.3)
+
+   # Plot 3: Derivative (smoothness indicator)
+   ds = s[1] - s[0]
+   du_sat_ds = np.gradient(u_sat, ds)
+   du_tanh_ds = np.gradient(u_tanh, ds)
+   ax3.plot(s, du_sat_ds, 'b-', linewidth=2, label="sat'(s/ε) - Discontinuous at ±ε")
+   ax3.plot(s, du_tanh_ds, 'g-', linewidth=2, label="tanh'(s/ε) - Continuous everywhere")
+   ax3.axvline(x=-eps, color='r', linestyle=':', alpha=0.5, label='Boundary Layer edges')
+   ax3.axvline(x=eps, color='r', linestyle=':', alpha=0.5)
+   ax3.set_xlabel('Sliding Surface s', fontsize=11)
+   ax3.set_ylabel('Derivative (Smoothness)', fontsize=11)
+   ax3.set_title('First Derivative: Smoothness Analysis', fontsize=13, fontweight='bold')
+   ax3.legend(loc='best', fontsize=9)
+   ax3.grid(True, alpha=0.3)
+   ax3.set_ylim([0, 5])
+
+   # Plot 4: Control effort for example trajectory
+   t = np.linspace(0, 3, 300)
+   s_traj = np.exp(-t) * np.sin(5*t)
+   K = 50  # Switching gain
+   u_sign_traj = -K * sign_func(s_traj)
+   u_sat_traj = -K * sat_func(s_traj, eps)
+   u_tanh_traj = -K * tanh_func(s_traj, eps)
+
+   ax4.plot(t, u_sign_traj, 'r-', linewidth=1.5, alpha=0.7, label='sign: Chattering')
+   ax4.plot(t, u_sat_traj, 'b-', linewidth=2, label='sat: Reduced chattering')
+   ax4.plot(t, u_tanh_traj, 'g-', linewidth=2, label='tanh: Smooth control')
+   ax4.set_xlabel('Time (s)', fontsize=11)
+   ax4.set_ylabel('Control Input u (N)', fontsize=11)
+   ax4.set_title('Control Signals for Example Trajectory', fontsize=13, fontweight='bold')
+   ax4.legend(loc='best')
+   ax4.grid(True, alpha=0.3)
+
+   plt.tight_layout()
+   plt.show()
+
+   # Analysis
+   print("=" * 70)
+   print("SWITCHING FUNCTIONS COMPARISON")
+   print("=" * 70)
+   print("\n1. sign(s) - Discontinuous:")
+   print("   → Value: +1 or -1 (instant switching)")
+   print("   → Derivative: Infinite at s=0 (discontinuity)")
+   print("   → Chattering: HIGH (rapid switching)")
+   print("   → Use case: Theoretical analysis only")
+
+   print("\n2. sat(s/ε) - Piecewise Linear:")
+   print("   → Value: Linear in [-ε, ε], ±1 outside")
+   print("   → Derivative: Constant in boundary layer, 0 outside")
+   print(f"   → Boundary layer width: ε = {eps}")
+   print("   → Chattering: MEDIUM (discontinuous derivative)")
+   print("   → Use case: Simple implementation, moderate performance")
+
+   print("\n3. tanh(s/ε) - Smooth (Hyperbolic Tangent):")
+   print("   → Value: Smooth curve, asymptotes to ±1")
+   print("   → Derivative: Continuous everywhere")
+   print("   → Chattering: LOW (smooth transition)")
+   print("   → Use case: Best for practical systems, smooth control")
+
+   print("\n4. Chattering Severity:")
+   rms_sign = np.sqrt(np.mean(u_sign_traj**2))
+   rms_sat = np.sqrt(np.mean(u_sat_traj**2))
+   rms_tanh = np.sqrt(np.mean(u_tanh_traj**2))
+   print(f"   → sign RMS: {rms_sign:.2f} N (100%)")
+   print(f"   → sat RMS:  {rms_sat:.2f} N ({rms_sat/rms_sign*100:.1f}%)")
+   print(f"   → tanh RMS: {rms_tanh:.2f} N ({rms_tanh/rms_sign*100:.1f}%)")
+
+   print("\n5. Recommendation:")
+   print("   → For simulations: tanh(s/ε) - smoothest control")
+   print("   → For real hardware: tanh(s/ε) - minimizes actuator wear")
+   print("   → Avoid sign(s) - causes excessive chattering")
+   print("=" * 70)
+```
 
 
 
@@ -538,6 +822,28 @@ Rearranging:
 | **Tuning** | Easier | Needs disturbance estimate |
 | **Accuracy** | Good (with small ε) | Excellent (exact convergence) |
 | **Best For** | Known systems, prototyping | Practical systems, research |
+
+**Interactive Control Signal Comparison:**
+
+```{control-signal}
+:controller-type: classical_smc
+:scenario: stabilization
+:time-window: 0, 10, 0.01
+:plot-id: smc-theory-control-comparison
+
+Control signal time-series showing chattering behavior in classical SMC. Switch controller type to "sta_smc" (Super-Twisting) to see the dramatic reduction in chattering while maintaining performance. Dual y-axes show control u(t) and switching function s(t).
+```
+
+:::{tip}
+**Compare Controllers**:
+- **Classical SMC**: High-frequency switching (chattering) visible in control signal
+- **Super-Twisting**: Smooth, continuous control with comparable performance
+- **Toggle Switching Function**: Show/hide s(t) to see how close system stays to surface
+:::
+
+:::{note}
+Notice how STA achieves similar convergence speed with much smoother control effort - this is why it's preferred for real hardware implementations!
+:::
 
 
 

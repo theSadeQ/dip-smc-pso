@@ -107,6 +107,7 @@ extensions = [
     'plotly_extension',           # Plotly interactive charts (Phase 3)
     'nbsphinx',                   # Jupyter notebook integration (Phase 4 - base)
     'jupyter_extension',          # Custom Jupyter directives (Phase 4 - custom)
+    'mathviz_extension',          # Mathematical visualization library (Phase 5)
 ]
 
 # MyST Parser configuration - quality-of-life features
@@ -219,6 +220,7 @@ html_css_files = [
     'threejs-pendulum.css',  # 3D pendulum visualization styles
     'code-runner.css',  # Pyodide live code execution styles (Phase 2)
     'plotly-charts.css',  # Plotly interactive charts styles (Phase 3)
+    'mathviz.css',  # Mathematical visualization library styles (Phase 5)
 ]
 
 html_js_files = [
@@ -239,6 +241,8 @@ html_js_files = [
     # Plotly interactive charts (Phase 3 visual enhancement)
     'https://cdn.plot.ly/plotly-2.27.0.min.js',  # Plotly.js for interactive charts
     'plotly-integration.js',  # Chart renderer and controller
+    # Mathematical visualization library (Phase 5 visual enhancement)
+    'mathviz-interactive.js',  # Control theory visualizations (Plotly-based)
 ]
 
 # HTML output options
