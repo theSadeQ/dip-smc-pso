@@ -212,6 +212,37 @@ html_theme_options = {
     'source_directory': 'docs/',
 }
 
+# PWA Manifest and meta tags (Phase 6)
+def add_pwa_tags(app, pagename, templatename, context, doctree):
+    """Add PWA meta tags, manifest link, and Apple touch icon to HTML head."""
+    pwa_tags = '''
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#667eea">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="DIP SMC">
+<meta name="application-name" content="DIP SMC Documentation">
+<meta name="msapplication-TileColor" content="#667eea">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/_static/icons/icon-192x192.png">
+'''
+
+    # Inject via head_extra context variable
+    if 'head_extra' not in context:
+        context['head_extra'] = ''
+    context['head_extra'] += pwa_tags
+
+def setup(app):
+    """Sphinx extension setup - Add PWA support."""
+    # Add PWA tags to every page
+    app.connect('html-page-context', add_pwa_tags)
+
+    return {
+        'version': '0.1',
+        'parallel_read_safe': True,
+        'parallel_write_safe': True,
+    }
+
 # Custom CSS and JavaScript files
 html_css_files = [
     'custom.css',
@@ -221,6 +252,7 @@ html_css_files = [
     'code-runner.css',  # Pyodide live code execution styles (Phase 2)
     'plotly-charts.css',  # Plotly interactive charts styles (Phase 3)
     'mathviz.css',  # Mathematical visualization library styles (Phase 5)
+    'pwa.css',  # Progressive Web App UI styles (Phase 6)
 ]
 
 html_js_files = [
@@ -243,6 +275,8 @@ html_js_files = [
     'plotly-integration.js',  # Chart renderer and controller
     # Mathematical visualization library (Phase 5 visual enhancement)
     'mathviz-interactive.js',  # Control theory visualizations (Plotly-based)
+    # Progressive Web App (Phase 6 - offline documentation)
+    'pwa-register.js',  # Service worker registration and PWA management
 ]
 
 # HTML output options
