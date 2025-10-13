@@ -1,4 +1,14 @@
-# Getting Started Welcome to the DIP SMC PSO framework! This guide covers help you get up and running with your first simulation in under 10 minutes. ## What is the DIP SMC PSO Framework? This framework provides a complete research and development environment for: - **Controlling a Double-Inverted Pendulum (DIP):** A challenging control problem with two pendulums stacked on a cart
+# Getting Started
+
+Welcome to the DIP SMC PSO framework!
+
+This guide covers help you get up and running with your first simulation in under 10 minutes.
+
+## What is the DIP SMC PSO Framework?
+
+This framework provides a complete research and development environment for:
+
+- **Controlling a Double-Inverted Pendulum (DIP):** A challenging control problem with two pendulums stacked on a cart
 
 - **Sliding Mode Control (SMC):** Advanced nonlinear control techniques with 4 controller variants
 - **Particle Swarm Optimization (PSO):** Automated gain tuning for optimal performance
@@ -77,9 +87,17 @@ usage: simulate.py [-h] [--config CONFIG] [--controller CONTROLLER] [--save-gain
 
 ---
 
-## Your First Simulation ### Run the Classical SMC Controller Execute your first simulation with the classical sliding mode controller: ```bash
+## Your First Simulation
+
+### Run the Classical SMC Controller
+
+Execute your first simulation with the classical sliding mode controller:
+
+```bash
 python simulate.py --controller classical_smc --plot
-``` **What happens:**
+```
+
+**What happens:**
 
 1. Framework loads configuration from `config.yaml`
 2. Creates a classical SMC controller with default gains
@@ -174,7 +192,14 @@ python simulate.py --controller hybrid_adaptive_sta_smc --plot
 
 ---
 
-## Troubleshooting Common Issues ### Simulation Runs But No Plots Appear **Cause:** Matplotlib backend issue **Solution:**
+## Troubleshooting Common Issues
+
+### Simulation Runs But No Plots Appear
+
+**Cause:** Matplotlib backend issue
+
+**Solution:**
+
 ```bash
 # Linux: Install Tkinter
 
