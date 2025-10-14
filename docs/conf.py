@@ -87,7 +87,7 @@ extensions = [
     'sphinx.ext.githubpages',     # Emit .nojekyll for GitHub Pages
     'sphinx.ext.mathjax',
     'sphinx.ext.intersphinx',
-    'sphinx.ext.autosectionlabel',  # Re-enabled Phase 2.2: Provides stable cross-references
+    # 'sphinx.ext.autosectionlabel',  # DISABLED Phase 1 Day 3: Causes O(n²) slowdown with 788 files
 
     # External extensions
     'myst_parser',
@@ -172,8 +172,8 @@ bibtex_bibfiles = [
 ]
 bibtex_default_style = 'alpha'  # Built-in alphabetic style
 
-# Auto-section labeling for stable cross-references
-autosectionlabel_prefix_document = True
+# Auto-section labeling for stable cross-references (DISABLED Phase 1 Day 3)
+# autosectionlabel_prefix_document = True
 
 # Autodoc configuration - generates API docs from source code
 autodoc_default_options = {
@@ -342,8 +342,8 @@ else:
         'autodoc.import_object',  # Suppress autodoc import errors (Phase 9F)
     ]
 
-# Parallel build configuration for faster builds
-parallel_jobs = 4  # Use 4 CPU cores for building (adjust based on your system)
+# Parallel build configuration for faster builds (OPTIMIZED Phase 1 Day 3)
+parallel_jobs = 8  # Increased from 4 to 8 for faster source reading
 
 # Redirects for moved pages (disabled while sphinx_reredirects extension is unavailable)
 # redirects = {
