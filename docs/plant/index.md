@@ -51,7 +51,7 @@ $$
 
 ### Basic Dynamics Evaluation
 
-```pythonfrom src.plant.models.simplified import SimplifiedDIPDynamics, SimplifiedDIPConfig # Create configuration
+```python src.plant.models.simplified import SimplifiedDIPDynamics, SimplifiedDIPConfig # Create configuration
 config = SimplifiedDIPConfig.create_default() # Initialize dynamics
 dynamics = SimplifiedDIPDynamics( config, enable_fast_mode=True, enable_monitoring=True
 ) # Compute dynamics

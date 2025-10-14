@@ -70,3 +70,9 @@ classical_smc: # Sliding surface gain - typical range from {cite}`utkin1999slidi
 - {doc}`bibliography` - Complete reference list
 - {doc}`citation_index` - Topical organization
 - [BibTeX Source](refs.bib) - Raw bibliography data
+
+```{toctree}
+:hidden:
+
+notation_guide
+```

@@ -46,3 +46,9 @@ flowchart TB subgraph "User Interfaces" CLI[Command Line<br/>simulate.py] Web[We
 - {doc}`block_diagrams` - Control system diagrams
 - {doc}`algorithm_flowcharts` - Algorithm implementations
 - {doc}`results_visualization` - Plotting and analysis tools
+
+```{toctree}
+:hidden:
+
+system_diagrams
+```

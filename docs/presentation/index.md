@@ -24,15 +24,24 @@ This section contains the complete research presentation organized into chapters
 ```{toctree}
 :maxdepth: 2
 
-introduction
-problem-statement
-previous-works
-system-modeling
-smc-theory
+0-Introduction & Motivation
+1-Problem Statement & Objectives
+2-Previous Works
+3-System Modling
+4-0-SMC
+5-Chattering & Mitigation
+6-PSO
+7-Simulation Setup
+8-Results and Discussion
 chattering-mitigation
+introduction
+previous-works
+problem-statement
 pso-optimization
-simulation-setup
 results-discussion
+simulation-setup
+smc-theory
+system-modeling
 ```
 
 ## Overview

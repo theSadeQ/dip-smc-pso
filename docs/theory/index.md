@@ -42,3 +42,9 @@ numerical_stability_methods
 - Lyapunov-based stability proof for finite-time convergence in {eq}`eq:lyapunov_stability`
 - Chattering-free control via super-twisting algorithms in {eq}`eq:supertwisting_law`
 - Optimal gain selection through constrained PSO optimization in {eq}`eq:pso_objective` For implementation details, see {doc}`../implementation/index`.
+
+```{toctree}
+:hidden:
+
+notation_and_conventions
+```
