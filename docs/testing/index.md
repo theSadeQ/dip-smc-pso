@@ -29,10 +29,15 @@ Core testing infrastructure and technical guides.
 :maxdepth: 2
 :caption: Testing Framework
 
+BROWSER_TESTING_CHECKLIST
+PHASE5_SETUP_COMPLETE
+PHASE6_TEST_EXECUTION_REPORT
 README
+TESTING_PROCEDURES
+benchmarking_framework_technical_guide
+code_collapse_validation_report
 testing_framework_technical_guide
 testing_workflows_best_practices
-benchmarking_framework_technical_guide
 validation_methodology_guide
 ```
 
