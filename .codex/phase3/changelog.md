@@ -49,19 +49,26 @@
 
 | Date | Issue | Summary | Owner | Evidence |
 |------|-------|---------|-------|----------|
-| TBD | UI-002 | Updated muted text contrast (#6c7280, 4.52:1 ratio) | TBD | Before/after contrast report, `docs/_static/custom.css` diff |
-| TBD | UI-003 | Fixed collapsed code notice contrast (dark bg, 12.4:1) | TBD | axe report, `docs/_static/code-collapse.css` diff |
-| TBD | UI-004 | Refactored collapsed notice DOM with ARIA live region | TBD | NVDA test recording, Sphinx template update |
-| TBD | UI-001 | Improved code collapse button opacity (0.3 -> 0.6) | TBD | Percy visual diff, interaction GIF |
-| TBD | UI-013 | Applied reduced-motion overrides for animations | TBD | Safari reduced-motion test, CSS update |
-| TBD | N/A | Merged token updates from design_tokens_v2.json | TBD | `docs/_static/custom.css` full diff |
+| 2025-10-15 | FOUNDATION-01 | Merged design_tokens_v2.json into docs/_static/custom.css | Claude Code | Git diff custom.css:15-104 (90 lines); verification: `curl localhost:9000/_static/custom.css \| grep color-text-muted` |
+| 2025-10-15 | UI-002 | Updated muted text contrast (#6c7280, 4.52:1 WCAG AA) | Claude Code | `docs/_static/custom.css:578-610` (33 lines); applied to .caption, .copyright, .last-updated, .metadata |
+| 2025-10-15 | UI-003 | Fixed collapsed code notice contrast (dark bg, 12.4:1 WCAG AAA) | Claude Code | `docs/_static/code-collapse.css:176-256` (81 lines); var(--color-code-notice-bg/text) tokens |
+| 2025-10-15 | UI-004 | Refactored collapsed notice with ARIA live region + aria-controls | Claude Code | `docs/_static/code-collapse.js:159-343` (184 lines); real DOM element replaces ::after pseudo-element |
+| 2025-10-15 | N/A | Rebuilt Sphinx documentation (build succeeded, 117 warnings) | Claude Code | Sphinx build output; static files copied to docs/_build/html/_static/ |
+
+**Wave 1 Implementation Summary:**
+- **FOUNDATION-01 (Blocker)**: Token merge enables all subsequent fixes; 90 lines of CSS variables including spacing, typography, breakpoints, shadows
+- **UI-002 (Critical)**: Muted text color changed from #9ca3af (3.7:1, FAILS) to #6c7280 (4.52:1, PASSES WCAG AA)
+- **UI-003 (High)**: Collapsed notice background #1b2433 + text #f8fbff = 12.4:1 contrast (PASSES WCAG AAA)
+- **UI-004 (High)**: Added `aria-live="polite"`, `aria-controls`, `role="region"`, unique IDs for screen reader accessibility
 
 **Wave 1 Exit Criteria:**
-- [ ] All Critical/High accessibility issues (UI-002/003/004) resolved
-- [ ] axe-core: 0 critical violations
-- [ ] Lighthouse Accessibility: >=95
-- [ ] NVDA/JAWS screen reader validation passed
-- [ ] Wave 1 checkpoint: Git tag `phase3-wave1-complete`
+- [x] All Critical/High accessibility issues (UI-002/003/004) resolved
+- [x] design_tokens_v2.json fully merged into production CSS
+- [x] Sphinx build succeeded with all static assets deployed
+- [ ] axe-core: 0 critical violations (validation pending - requires browser setup)
+- [ ] Lighthouse Accessibility: >=95 (validation pending - requires Chrome)
+- [ ] NVDA/JAWS screen reader validation (manual test recommended)
+- [ ] Wave 1 checkpoint: Git tag `phase3-wave1-complete` (pending commit)
 
 ---
 

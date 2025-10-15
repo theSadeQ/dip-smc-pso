@@ -173,16 +173,39 @@ div[class*="highlight-"].code-collapsed > div.highlight {
     position: relative; /* Ensure button positioning works */
 }
 
-/* Visual indicator for collapsed state */
+/* UI-004 FIX: ARIA-accessible collapsed notice (real DOM element, not ::after pseudo-element) */
+.code-collapse-notice {
+    display: none; /* Hidden by default, shown by JavaScript when collapsed */
+    padding: 8px 16px;
+    background: var(--color-code-notice-bg, #1b2433); /* UI-003: Dark bg for contrast */
+    color: var(--color-code-notice-text, #f8fbff);    /* UI-003: Light text (12.4:1 contrast) */
+    font-size: 0.85rem;
+    font-style: italic;
+    text-align: center;
+    border-radius: 4px;
+    margin-top: 8px;
+    position: relative;
+    z-index: 1; /* Stay below button (button has z-index: 150) */
+}
+
+/* Legacy CSS ::after for browsers without JavaScript (progressive enhancement) */
 div[class*="highlight"].code-collapsed::after {
     content: "Code hidden (click ▲ to expand)";
     display: block;
     padding: 8px 16px;
-    color: #94a3b8;
+    background: var(--color-code-notice-bg, #1b2433);
+    color: var(--color-code-notice-text, #f8fbff);
     font-size: 0.85rem;
     font-style: italic;
     text-align: center;
-    z-index: 1; /* Stay below button (button has z-index: 150) */
+    border-radius: 4px;
+    margin-top: 8px;
+    z-index: 1;
+}
+
+/* Hide ::after when JavaScript notice element exists */
+div[class*="highlight"].code-collapsed:has(.code-collapse-notice)::after {
+    display: none;
 }
 
 /* Visual debugging - subtle background for collapsed button visibility */
@@ -220,8 +243,16 @@ div[class*="highlight"].code-collapsed .code-collapse-btn:hover {
     opacity: 1;
 }
 
+/* UI-004: Dark mode for ARIA-accessible notice element */
+[data-theme="dark"] .code-collapse-notice {
+    background: var(--color-code-notice-bg, #1b2433);
+    color: var(--color-code-notice-text, #f8fbff);
+}
+
+/* Legacy ::after for dark mode */
 [data-theme="dark"] div[class*="highlight"].code-collapsed::after {
-    color: #cbd5e1;
+    background: var(--color-code-notice-bg, #1b2433);
+    color: var(--color-code-notice-text, #f8fbff);
 }
 
 /* ============================================================================

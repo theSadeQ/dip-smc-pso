@@ -13,12 +13,18 @@
    ============================================================================ */
 
 :root {
-    /* Primary Brand Colors - Custom DIP-SMC-PSO Dark Blue */
-    --color-primary: #0b2763;        /* DIP Dark Blue */
-    --color-primary-hover: #08204d;  /* Darker blue on hover */
+    /* ========================================================================
+       PHASE 3 DESIGN TOKENS V2.0.0 - MERGED 2025-10-15
+       Source: .codex/phase2_audit/design_tokens_v2.json
+       Exit: Wave 1 (Foundations & Accessibility)
+       ======================================================================== */
+
+    /* Primary Brand Colors - DIP-SMC-PSO Dark Blue */
+    --color-primary: #2563eb;        /* Phase 2 primary (blue-600, 8.21:1 contrast) */
+    --color-primary-hover: #0b2763;  /* DIP Dark Blue hover */
     --color-primary-light: #e6ebf5;  /* Light blue bg */
 
-    /* Status Colors - PLACEHOLDER (we'll customize) */
+    /* Status Colors - Phase 2 Accessibility Compliant */
     --color-success: #10b981;        /* Green */
     --color-success-bg: #d1fae5;
     --color-success-border: #6ee7b7;
@@ -39,27 +45,62 @@
     --color-tip-bg: #ede9fe;
     --color-tip-border: #c4b5fd;
 
-    /* Experimental/Beta Colors - PLACEHOLDER */
+    /* Experimental/Beta Colors */
     --color-experimental: #f97316;   /* Orange */
     --color-beta: #06b6d4;          /* Cyan */
     --color-deprecated: #71717a;    /* Gray */
 
-    /* Background Colors */
+    /* Background Colors - Phase 2 */
     --color-bg-primary: #ffffff;
-    --color-bg-secondary: #f9fafb;
-    --color-bg-tertiary: #f3f4f6;
+    --color-bg-secondary: #f9fafb;   /* Phase 2 bg-muted */
+    --color-bg-tertiary: #f3f4f6;    /* Phase 2 bg-secondary */
 
-    /* Text Colors */
-    --color-text-primary: #111827;
-    --color-text-secondary: #6b7280;
-    --color-text-muted: #9ca3af;
+    /* Text Colors - Phase 2 WCAG AA Compliance */
+    --color-text-primary: #111827;   /* 16.24:1 contrast */
+    --color-text-secondary: #616774; /* Phase 2 harmonized (5.12:1) */
+    --color-text-muted: #6c7280;     /* UI-002 FIX: 4.52:1 contrast (was #9ca3af, 3.7:1) */
 
-    /* Border & Shadow */
-    --color-border: #e5e7eb;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    /* Spacing System - Phase 2 8-Point Grid */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+
+    /* Typography - Phase 2 Responsive */
+    --font-size-h1: clamp(2.25rem, 3.2vw, 2.5rem);  /* UI-020 mobile fix */
+    --font-size-h2: 1.875rem;
+    --font-size-h3: 1.5rem;
+    --font-size-body-1: 1rem;
+    --font-size-body-2: 0.9375rem;
+    --font-size-caption: 0.8125rem;
+    --font-size-label: 0.875rem;     /* UI-006 badge typography */
+
+    /* Breakpoints - Phase 2 Responsive System */
+    --bp-mobile: 375px;
+    --bp-tablet: 768px;
+    --bp-desktop: 1024px;
+    --bp-wide: 1440px;
+
+    /* Shadows - Phase 2 Elevation System */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 6px 18px rgba(11, 39, 99, 0.25);
+    --shadow-lg: 0 12px 32px rgba(37, 99, 235, 0.35);  /* UI-027 FAB shadow */
+    --shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.45);
     --shadow-glow: 0 0 20px rgba(11, 39, 99, 0.4);
+
+    /* Border & Radius - Phase 2 */
+    --color-border: #d9dde3;         /* Phase 2 lightened */
+    --border-radius-sm: 6px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --border-radius-pill: 999px;
+
+    /* Code Block Colors - Phase 2 */
+    --color-code-notice-bg: #1b2433;    /* UI-003 dark bg (12.4:1 contrast) */
+    --color-code-notice-text: #f8fbff;  /* UI-003 light text */
 }
 
 /* ============================================================================
@@ -532,6 +573,40 @@ button:focus {
         box-shadow: none !important;
         animation: none !important;
     }
+}
+
+/* ============================================================================
+   11. UI-002 FIX: MUTED TEXT ACCESSIBILITY (WCAG AA COMPLIANCE)
+   ============================================================================ */
+
+/* Apply WCAG AA compliant muted text color to metadata elements */
+.caption,
+.caption-text,
+.caption-number,
+.copyright,
+.last-updated,
+.docutils.footnote,
+.docutils.citation,
+.sidebar-secondary-text,
+.metadata {
+    color: var(--color-text-muted); /* #6c7280, 4.52:1 contrast ratio */
+    font-size: var(--font-size-caption);
+}
+
+/* Ensure proper contrast in tables */
+table.docutils .caption {
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+/* Footer metadata styling */
+.footer-item {
+    color: var(--color-text-muted);
+}
+
+/* Breadcrumb secondary elements */
+.breadcrumb-item:not(:last-child)::after {
+    color: var(--color-text-muted);
 }
 
 /* ============================================================================
