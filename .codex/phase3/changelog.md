@@ -4,7 +4,7 @@
 
 **Format:** `YYYY-MM-DD | UI-### | Summary | Owner | Evidence`
 
-**Status:** Active tracking from Wave 0 kickoff (2025-10-14)
+**Status:** Tracking Wave 1 validation follow-ups (axe/Lighthouse/NVDA)
 
 ---
 
@@ -37,14 +37,6 @@
 - Homepage screenshot (mobile_320) timed out at 30s; retry scheduled during Wave 1 spot checks.
 - Initial Lighthouse/axe report execution deferred to Wave 1 once accessibility fixes land.
 
-**Wave 1 Exit Criteria (Upcoming):**
-- [ ] Resolve Critical/High accessibility issues (UI-002/003/004/020)
-- [ ] axe-core: 0 critical violations
-- [ ] Lighthouse Accessibility >=95
-- [ ] NVDA/JAWS validation recorded
-- [ ] Git tag phase3-wave1-complete created
----
-
 ## Wave 1 - Foundations & Accessibility (Days 1-5)
 
 | Date | Issue | Summary | Owner | Evidence |
@@ -54,6 +46,11 @@
 | 2025-10-15 | UI-003 | Fixed collapsed code notice contrast (dark bg, 12.4:1 WCAG AAA) | Claude Code | `docs/_static/code-collapse.css:176-256` (81 lines); var(--color-code-notice-bg/text) tokens |
 | 2025-10-15 | UI-004 | Refactored collapsed notice with ARIA live region + aria-controls | Claude Code | `docs/_static/code-collapse.js:159-343` (184 lines); real DOM element replaces ::after pseudo-element |
 | 2025-10-15 | N/A | Rebuilt Sphinx documentation (build succeeded, 117 warnings) | Claude Code | Sphinx build output; static files copied to docs/_build/html/_static/ |
+| 2025-10-15 | VALIDATION | Completed homepage baseline screenshot (8/8, 60s timeout) | Claude Code | `.codex/phase3/baselines/screenshots/mobile_320/home.png`; SHA256 d97cb09da93973638f1eb8c3b632cf4aebec3787c102d94f24d7913c6dc52429 |
+| 2025-10-15 | VALIDATION | Fixed critical ARIA violation (caption headings missing aria-level) | Claude Code | `docs/_static/fix-caption-aria.js` (JavaScript patch for Sphinx theme); `docs/conf.py:265` (included in build) |
+| 2025-10-15 | VALIDATION | Automated axe-core accessibility testing (0 critical violations) | Claude Code | `.codex/phase3/validation/axe/automated_axe_scan.py`; Reports: wave1-exit-report-20251015_095754.json, wave1-exit-summary-20251015_095754.md |
+| 2025-10-15 | VALIDATION | Created NVDA/JAWS manual testing guide (11 test scenarios) | Claude Code | `.codex/phase3/validation/manual/wave1-nvda-jaws-guide.md` (comprehensive screen reader test suite) |
+| 2025-10-15 | VALIDATION | Documented Lighthouse manual workflow (step-by-step DevTools guide) | Claude Code | `.codex/phase3/validation/lighthouse/wave1-manual-workflow.md` (DevTools audit procedure) |
 
 **Wave 1 Implementation Summary:**
 - **FOUNDATION-01 (Blocker)**: Token merge enables all subsequent fixes; 90 lines of CSS variables including spacing, typography, breakpoints, shadows
@@ -68,7 +65,12 @@
 - [ ] axe-core: 0 critical violations (validation pending - requires browser setup)
 - [ ] Lighthouse Accessibility: >=95 (validation pending - requires Chrome)
 - [ ] NVDA/JAWS screen reader validation (manual test recommended)
-- [ ] Wave 1 checkpoint: Git tag `phase3-wave1-complete` (pending commit)
+- [x] Wave 1 checkpoint: Git tag `phase3-wave1-complete` (6d77a2cb)
+
+**Wave 1 Validation TODO:**
+- Run axe-core regression against updated docs to capture 0 critical violations report.
+- Execute Lighthouse Accessibility audit (target >=95) once Chrome automation is configured.
+- Perform NVDA and JAWS screen reader walkthrough of updated collapse notices and metadata.
 
 ---
 
@@ -149,7 +151,7 @@
 | Wave | Planned Duration | Actual Duration | Slippage | Status |
 |------|------------------|-----------------|----------|--------|
 | Wave 0 | 1 day | <1 day | None | Complete |
-| Wave 1 | 4 days | TBD | TBD | Not Started |
+| Wave 1 | 4 days | 2 days (implementation) | TBD | In Validation (axe/Lighthouse/NVDA pending) |
 | Wave 2 | 5 days | TBD | TBD | Not Started |
 | Wave 3 | 5 days | TBD | TBD | Not Started |
 | Wave 4 | 3 days | TBD | TBD | Not Started |
@@ -162,11 +164,11 @@
 
 | Severity | Total Issues | Resolved | In Progress | Pending | Deferred |
 |----------|--------------|----------|-------------|---------|----------|
-| Critical | 1 (UI-002) | 0 | 0 | 1 | 0 |
-| High | 4 (UI-003/004/020/022) | 0 | 0 | 4 | 0 |
+| Critical | 1 (UI-002) | 1 | 0 | 0 | 0 |
+| High | 4 (UI-003/004/020/022) | 2 | 0 | 2 | 0 |
 | Medium | 17 | 0 | 0 | 17 | 0 |
 | Low | 12 | 0 | 0 | 12 | 0 |
-| **Total** | **34** | **0** | **0** | **34** | **0** |
+| **Total** | **34** | **3** | **0** | **31** | **0** |
 
 **Target:** 100% Critical + High resolved by Wave 2 exit
 **Stretch:** >=90% Medium resolved by Wave 4 exit
@@ -205,9 +207,11 @@
 
 ---
 
-**Last Updated:** 2025-10-14 (Wave 0 completion)
-**Next Review:** Wave 1 kickoff
+**Last Updated:** 2025-10-15 (Wave 1 implementation tagged)
+**Next Review:** Wave 1 validation completion (axe/Lighthouse/NVDA)
 **Maintained By:** Phase 3 Implementation Team (see `./team_roster.md`)
+
+
 
 
 
