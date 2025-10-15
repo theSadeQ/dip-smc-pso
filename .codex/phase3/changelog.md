@@ -12,24 +12,37 @@
 
 | Date | Issue | Summary | Owner | Evidence |
 |------|-------|---------|-------|----------|
-| 2025-10-14 | N/A | Created design_tokens_v2.json from Phase 2 specs | Claude Code | `.codex/phase2_audit/design_tokens_v2.json` (7.3 KB) |
-| 2025-10-14 | N/A | Initialized Phase 3 changelog tracking system | Claude Code | This file |
-| 2025-10-14 | N/A | Set up Lighthouse accessibility validation (≥95 target) | Claude Code | `.lighthouse/lighthouserc.json` |
-| 2025-10-14 | N/A | Set up axe-core WCAG AA validation (0 critical violations) | Claude Code | `.axe/axe.config.json` |
-| 2025-10-14 | N/A | Configured Percy visual regression (4 viewports) | Claude Code | `package.json` Percy config |
-| 2025-10-14 | N/A | Created baseline screenshot capture script (Playwright) | Claude Code | `.codex/phase3/baselines/capture_baseline_screenshots.py` |
-| 2025-10-14 | N/A | Created token validation script with checksum verification | Claude Code | `.codex/phase3/baselines/tokens/validate_tokens.py` |
-| 2025-10-14 | N/A | Validated design_tokens_v2.json integrity (v2.0.0) | Claude Code | `.codex/phase3/baselines/tokens/checksums.json` |
-| 2025-10-14 | N/A | Extracted critical token values for UI fixes | Claude Code | `.codex/phase3/baselines/tokens/token_values_critical.json` |
-| 2025-10-14 | N/A | Documented 24 breaking changes (v1→v2 migration) | Claude Code | `.codex/phase3/baselines/tokens/token_comparison_v1_v2.md` |
-| 2025-10-14 | N/A | Verified all Phase 2 reference docs integrity (10/10 docs) | Claude Code | `.codex/phase3/artifact_verification.md` |
-| 2025-10-14 | N/A | Documented comprehensive rollback procedures (5 scenarios) | Claude Code | `.codex/phase3/rollback_procedures.md` |
-| 2025-10-14 | N/A | Created validation evidence directory structure | Claude Code | `.codex/phase3/validation/{lighthouse,axe,percy,manual}/` |
-| 2025-10-14 | N/A | Created validation report templates (3 templates) | Claude Code | `.codex/phase3/validation/*/TEMPLATE.md` |
-| 2025-10-14 | N/A | Validated Sphinx server operational (localhost:9000) | Claude Code | curl test successful |
-| 2025-10-14 | N/A | Validated Node.js environment (v22.19.0) | Claude Code | `.codex/phase3/baselines/tooling_validation.md` |
-| 2025-10-14 | N/A | Captured baseline screenshots (7 pages, mobile_320 viewport) | Claude Code | `.codex/phase3/baselines/screenshots/mobile_320/` (7 PNG files, ~17 MB) |
+| 2025-10-14 | N/A | Validated design_tokens_v2.json integrity (MD5 d48a8fe56eee4515461a027e1298105f) | Claude Code | phase2_audit/design_tokens_v2.json; phase3/design_token_validation.md |
+| 2025-10-14 | N/A | Extracted critical tokens for UI-002/003/004/020-027 remediation | Claude Code | phase3/baselines/tokens/token_values_critical.json |
+| 2025-10-14 | N/A | Documented v1->v2 comparison (24 breaking changes) | Claude Code | phase3/baselines/tokens/token_comparison_v1_v2.md |
+| 2025-10-14 | N/A | Built Playwright baseline harness (mobile_320) | Claude Code | phase3/baselines/playwright_capture.py |
+| 2025-10-14 | N/A | Captured baseline screenshots (7/8 pages, SHA256 verified) | Claude Code | phase3/baselines/INDEX.md; phase3/baselines/mobile_320_hashes.json |
+| 2025-10-14 | N/A | Established validation scaffolding (lighthouse/axe/percy/manual) | Claude Code | phase3/validation/README.md |
+| 2025-10-14 | N/A | Logged tooling readiness (Sphinx, Node.js, Lighthouse, axe, Percy) | Claude Code | phase3/tooling_validation.md |
+| 2025-10-14 | N/A | Verified Phase 2 references (10/10) | Claude Code | phase3/artifact_verification.md |
+| 2025-10-14 | N/A | Documented rollback procedures (five scenarios) | Claude Code | phase3/rollback_procedures.md |
+| 2025-10-14 | N/A | Tagged milestone and pushed branch | Claude Code | Git tag phase3-wave0-complete (commit 1c00df75) |
 
+**Wave 0 Exit Criteria:**
+- [x] Sphinx server operational (localhost:9000)
+- [x] Node.js/Playwright environment validated (v22.19.0)
+- [x] Lighthouse, axe-core, Percy configs confirmed (95 A11y target, 0 critical violations, 4 viewports)
+- [x] design_tokens_v2 integrity confirmed with checksum & diff
+- [x] Phase 2 artifact audit complete (10/10)
+- [x] Baseline screenshots captured (7/8 pages; homepage retry queued)
+- [x] Rollback procedures documented
+- [x] Git tag phase3-wave0-complete pushed to remote
+
+**Known Issues (Non-Blocking):**
+- Homepage screenshot (mobile_320) timed out at 30s; retry scheduled during Wave 1 spot checks.
+- Initial Lighthouse/axe report execution deferred to Wave 1 once accessibility fixes land.
+
+**Wave 1 Exit Criteria (Upcoming):**
+- [ ] Resolve Critical/High accessibility issues (UI-002/003/004/020)
+- [ ] axe-core: 0 critical violations
+- [ ] Lighthouse Accessibility >=95
+- [ ] NVDA/JAWS validation recorded
+- [ ] Git tag phase3-wave1-complete created
 ---
 
 ## Wave 1 - Foundations & Accessibility (Days 1-5)
@@ -39,14 +52,14 @@
 | TBD | UI-002 | Updated muted text contrast (#6c7280, 4.52:1 ratio) | TBD | Before/after contrast report, `docs/_static/custom.css` diff |
 | TBD | UI-003 | Fixed collapsed code notice contrast (dark bg, 12.4:1) | TBD | axe report, `docs/_static/code-collapse.css` diff |
 | TBD | UI-004 | Refactored collapsed notice DOM with ARIA live region | TBD | NVDA test recording, Sphinx template update |
-| TBD | UI-001 | Improved code collapse button opacity (0.3 → 0.6) | TBD | Percy visual diff, interaction GIF |
+| TBD | UI-001 | Improved code collapse button opacity (0.3 -> 0.6) | TBD | Percy visual diff, interaction GIF |
 | TBD | UI-013 | Applied reduced-motion overrides for animations | TBD | Safari reduced-motion test, CSS update |
 | TBD | N/A | Merged token updates from design_tokens_v2.json | TBD | `docs/_static/custom.css` full diff |
 
 **Wave 1 Exit Criteria:**
 - [ ] All Critical/High accessibility issues (UI-002/003/004) resolved
 - [ ] axe-core: 0 critical violations
-- [ ] Lighthouse Accessibility: ≥95
+- [ ] Lighthouse Accessibility: >=95
 - [ ] NVDA/JAWS screen reader validation passed
 - [ ] Wave 1 checkpoint: Git tag `phase3-wave1-complete`
 
@@ -57,16 +70,16 @@
 | Date | Issue | Summary | Owner | Evidence |
 |------|-------|---------|-------|----------|
 | TBD | UI-005 | Removed duplicate code control bars (48px dead space) | TBD | Layout screenshot before/after |
-| TBD | UI-007 | Applied spacing utilities to project info links (4px → 8px) | TBD | Spacing matrix validation |
-| TBD | UI-008 | Increased visual nav card spacing (12px → 24px) | TBD | Hero section Percy diff |
+| TBD | UI-007 | Applied spacing utilities to project info links (4px -> 8px) | TBD | Spacing matrix validation |
+| TBD | UI-008 | Increased visual nav card spacing (12px -> 24px) | TBD | Hero section Percy diff |
 | TBD | UI-009 | Refactored quick navigation with column gutters | TBD | `reference/controllers/index.html` update |
 | TBD | UI-020 | Fixed mobile H1 word-break (320px viewport) | TBD | BrowserStack iPhone 13 screenshot |
-| TBD | UI-022 | Responsive visual nav grid (2-col @ 320px → 1-col) | TBD | Mobile responsive matrix |
+| TBD | UI-022 | Responsive visual nav grid (2-col @ 320px -> 1-col) | TBD | Mobile responsive matrix |
 | TBD | UI-023 | Improved mobile footer metadata spacing | TBD | Mobile layout diff |
 | TBD | UI-024 | Adjusted tablet nav grid from 3-col to 2-col @ 768px | TBD | Tablet screenshot (iPad Mini) |
 | TBD | UI-025 | Scaled down tablet anchor rail font size | TBD | Tablet typography validation |
-| TBD | UI-006 | Updated status badge typography (0.75rem → 0.875rem) | TBD | Type scale specimen |
-| TBD | UI-011 | Increased coverage matrix table font (11px → 15px) | TBD | Table readability test |
+| TBD | UI-006 | Updated status badge typography (0.75rem -> 0.875rem) | TBD | Type scale specimen |
+| TBD | UI-011 | Increased coverage matrix table font (11px -> 15px) | TBD | Table readability test |
 | TBD | UI-028 | Enhanced quick reference card heading contrast | TBD | Typography hierarchy diff |
 | TBD | UI-032 | Shortened breadcrumb link text to prevent wrapping | TBD | Footer navigation update |
 | TBD | UI-034 | Refined hero feature bullet typography | TBD | Hero section type scale |
@@ -107,7 +120,7 @@
 |------|-------|---------|-------|----------|
 | TBD | N/A | Finalized Sphinx theme documentation updates | TBD | `docs/SPHINX_THEME_NOTES.md` |
 | TBD | N/A | Completed Streamlit theme README | TBD | `streamlit_theme/README.md` |
-| TBD | N/A | Published token changelog (v1 → v2 migration) | TBD | `.codex/TOKEN_CHANGELOG.md` |
+| TBD | N/A | Published token changelog (v1 -> v2 migration) | TBD | `.codex/TOKEN_CHANGELOG.md` |
 | TBD | N/A | Captured before/after screenshot sets (34 issues) | TBD | `./validation/` |
 | TBD | N/A | Generated contrast reports for Phase 4 verification | TBD | `.codex/contrast_reports/` |
 | TBD | N/A | Updated `.codex/README.md` with Phase 3 changes | TBD | `.codex/README.md` diff |
@@ -149,7 +162,7 @@
 | **Total** | **34** | **0** | **0** | **34** | **0** |
 
 **Target:** 100% Critical + High resolved by Wave 2 exit
-**Stretch:** ≥90% Medium resolved by Wave 4 exit
+**Stretch:** >=90% Medium resolved by Wave 4 exit
 
 ---
 
@@ -158,10 +171,10 @@
 | Checkpoint | Date | Lighthouse (A11y) | axe Violations | Percy Diffs | Status |
 |------------|------|-------------------|----------------|-------------|--------|
 | Baseline (pre-Phase 3) | 2025-10-14 | Deferred to Wave 1 | Deferred to Wave 1 | N/A | Complete (infrastructure ready) |
-| Wave 1 Exit | TBD | ≥95 target | 0 critical | TBD | Pending |
-| Wave 2 Exit | TBD | ≥95 target | 0 critical | TBD | Pending |
-| Wave 3 Exit | TBD | ≥95 target | 0 critical | TBD | Pending |
-| Wave 4 Exit | TBD | ≥95 target | 0 critical | TBD | Pending |
+| Wave 1 Exit | TBD | >=95 target | 0 critical | TBD | Pending |
+| Wave 2 Exit | TBD | >=95 target | 0 critical | TBD | Pending |
+| Wave 3 Exit | TBD | >=95 target | 0 critical | TBD | Pending |
+| Wave 4 Exit | TBD | >=95 target | 0 critical | TBD | Pending |
 
 ---
 
@@ -188,3 +201,11 @@
 **Last Updated:** 2025-10-14 (Wave 0 completion)
 **Next Review:** Wave 1 kickoff
 **Maintained By:** Phase 3 Implementation Team (see `./team_roster.md`)
+
+
+
+
+
+
+
+
