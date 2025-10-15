@@ -262,6 +262,7 @@ html_js_files = [
     'visual-sitemap.js',
     'control-room.js',
     'code-collapse.js',
+    'fix-caption-aria.js',  # Wave 1 validation fix: aria-level for caption headings
     # Three.js 3D visualization (Phase 1 visual enhancement)
     'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js',
     'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/controls/OrbitControls.js',
