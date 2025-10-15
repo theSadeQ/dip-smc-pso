@@ -403,8 +403,16 @@
 
     /**
      * Add master controls (Collapse All / Expand All)
+     * UI-005 FIX: Prevent duplicate control bars from appearing
      */
     function addMasterControls(count) {
+        // UI-005 FIX: Check if controls already exist before adding new ones
+        const existingControls = document.querySelector('.code-controls-master');
+        if (existingControls) {
+            console.log('[CodeCollapse] Master controls already exist, skipping duplicate');
+            return;
+        }
+
         // Find a good place to insert controls (e.g., after first heading)
         const mainContent = document.querySelector('.document, article, main');
         if (!mainContent) return;
