@@ -156,6 +156,12 @@
         codeBlock.classList.add('collapsible-processed');
         codeBlock.setAttribute('data-code-index', index);
 
+        // UI-004 FIX: Add unique ID and ARIA attributes for accessibility
+        const codeBlockId = `code-block-${index}`;
+        codeBlock.id = codeBlockId;
+        codeBlock.setAttribute('role', 'region');
+        codeBlock.setAttribute('aria-label', `Code block ${index + 1}`);
+
         // Get the pre element (actual code content)
         const preElement = codeBlock.querySelector('pre');
         if (!preElement) return;
@@ -163,12 +169,25 @@
         // Create collapse button
         const collapseBtn = createCollapseButton(index);
 
+        // UI-004 FIX: Create ARIA live region for collapsed notice (screen reader accessible)
+        const noticeId = `code-notice-${index}`;
+        const noticeElement = document.createElement('div');
+        noticeElement.id = noticeId;
+        noticeElement.className = 'code-collapse-notice';
+        noticeElement.setAttribute('aria-live', 'polite');
+        noticeElement.setAttribute('aria-atomic', 'true');
+        noticeElement.style.display = 'none'; // Hidden by default
+        noticeElement.textContent = 'Code hidden (click ▲ to expand)';
+
         // Find INNER highlight container where copy button lives
         const innerHighlight = codeBlock.querySelector('div.highlight');
         if (!innerHighlight) {
             console.warn('[CodeCollapse] No inner highlight container found', codeBlock);
             return;
         }
+
+        // Insert notice element after the inner highlight
+        codeBlock.appendChild(noticeElement);
 
         // Wait for copybutton.js to add the copy button, then insert collapse button as sibling
         const insertCollapseButton = (attempt = 0) => {
@@ -204,14 +223,19 @@
 
     /**
      * Create collapse button
+     * UI-004 FIX: Enhanced with aria-controls for screen reader navigation
      */
     function createCollapseButton(index) {
         const button = document.createElement('button');
+        const codeBlockId = `code-block-${index}`;
+        const noticeId = `code-notice-${index}`;
+
         button.className = 'code-collapse-btn';
         button.innerHTML = `<span class="collapse-icon">${CONFIG.expandedIcon}</span>`;
         button.title = CONFIG.buttonTitle;
-        button.setAttribute('aria-label', 'Toggle code block visibility');
+        button.setAttribute('aria-label', `Toggle code block ${index + 1} visibility`);
         button.setAttribute('aria-expanded', 'true');
+        button.setAttribute('aria-controls', `${codeBlockId} ${noticeId}`); // Controls both block and notice
 
         // Click handler
         button.addEventListener('click', (e) => {
@@ -239,17 +263,21 @@
 
     /**
      * Collapse code block with curtain animation
+     * UI-004 FIX: Show ARIA live region notice for screen reader announcement
      */
     function collapseCodeBlock(codeBlock, animate = true) {
         const preElement = codeBlock.querySelector('pre');
         const button = codeBlock.querySelector('.code-collapse-btn');
         const icon = button.querySelector('.collapse-icon');
         const index = codeBlock.getAttribute('data-code-index');
+        const noticeElement = codeBlock.querySelector('.code-collapse-notice');
 
         if (!animate) {
             codeBlock.classList.add('code-collapsed');
             preElement.style.maxHeight = '0';
             preElement.style.overflow = 'hidden';
+            // Show notice for screen readers
+            if (noticeElement) noticeElement.style.display = 'block';
         } else {
             // Add transitioning state
             codeBlock.classList.add('code-collapsing');
@@ -263,6 +291,8 @@
                 codeBlock.classList.remove('code-collapsing');
                 codeBlock.classList.add('code-collapsed');
                 preElement.style.overflow = 'hidden';
+                // Show notice for screen readers (after animation completes)
+                if (noticeElement) noticeElement.style.display = 'block';
                 preElement.removeEventListener('transitionend', cleanupCollapse);
             };
 
@@ -297,16 +327,20 @@
 
     /**
      * Expand code block with curtain animation
+     * UI-004 FIX: Hide ARIA live region notice when expanded
      */
     function expandCodeBlock(codeBlock, animate = true) {
         const preElement = codeBlock.querySelector('pre');
         const button = codeBlock.querySelector('.code-collapse-btn');
         const icon = button.querySelector('.collapse-icon');
         const index = codeBlock.getAttribute('data-code-index');
+        const noticeElement = codeBlock.querySelector('.code-collapse-notice');
 
         // Remove collapsed class immediately
         codeBlock.classList.remove('code-collapsed');
         preElement.style.overflow = 'hidden';
+        // Hide notice immediately when expanding
+        if (noticeElement) noticeElement.style.display = 'none';
 
         if (!animate) {
             preElement.style.maxHeight = 'none';
