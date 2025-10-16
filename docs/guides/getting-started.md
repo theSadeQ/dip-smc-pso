@@ -15,12 +15,12 @@ This framework provides a complete research and development environment for:
 - **Scientific Computing:** High-fidelity simulations, analysis, and visualization ## Who Should Use This Framework? This framework is designed for: - **Control Systems Researchers:** Testing advanced SMC algorithms and optimization techniques
 - **Graduate Students:** Learning control theory through hands-on experimentation
 - **Engineers:** Prototyping control systems for underactuated mechanical systems
-- **Educators:** Teaching nonlinear control and optimization concepts ## Prerequisites Before you begin, ensure you have: - ✅ **Python 3.9 or newer** (Python 3.11 recommended)
-- ✅ **pip** package manager
-- ✅ **Git** for cloning the repository
-- ✅ **10 GB free disk space** (for virtual environment and dependencies)
-- ✅ **Basic Python knowledge** (variables, functions, imports)
-- ⬜ **Optional:** CUDA-capable GPU for accelerated batch simulations ## What You'll Learn By the end of this guide, you will be able to: 1. Install and verify the framework
+- **Educators:** Teaching nonlinear control and optimization concepts ## Prerequisites Before you begin, ensure you have: - ![check](../_static/icons/status/check.svg) **Python 3.9 or newer** (Python 3.11 recommended)
+- ![check](../_static/icons/status/check.svg) **pip** package manager
+- ![check](../_static/icons/status/check.svg) **Git** for cloning the repository
+- ![check](../_static/icons/status/check.svg) **10 GB free disk space** (for virtual environment and dependencies)
+- ![check](../_static/icons/status/check.svg) **Basic Python knowledge** (variables, functions, imports)
+- ![info](../_static/icons/status/info.svg) **Optional:** CUDA-capable GPU for accelerated batch simulations ## What You'll Learn By the end of this guide, you will be able to: 1. Install and verify the framework
 2. Run your first simulation with a classical SMC controller
 3. Understand simulation outputs and visualizations
 4. Explore different controller types
@@ -83,7 +83,7 @@ python simulate.py --help
 ```
 
 usage: simulate.py [-h] [--config CONFIG] [--controller CONTROLLER] [--save-gains PATH] [--load-gains PATH] [--duration DURATION] [--dt DT] [--plot] [--print-config] [--plot-fdi] [--run-hil] [--run-pso] [--seed SEED] CLI for PSO-tuned Sliding-Mode Control and HIL for a double-inverted pendulum. options: -h, --help show this help message and exit --config CONFIG Path to config file (default: config.yaml) --controller CONTROLLER Controller type to use (classical_smc, sta_smc, adaptive_smc, hybrid_adaptive_sta_smc) --save-gains PATH Save gains to JSON file --load-gains PATH Load gains from JSON file --duration DURATION Override simulation duration (s) --dt DT Override simulation timestep (s) --plot Display plots after simulation --print-config Print current configuration and exit --plot-fdi Show FDI residual plots (requires FDI enabled) --run-hil Run hardware-in-the-loop simulation --run-pso Run PSO optimization for controller gains --seed SEED Random seed for reproducibility
-``` **✅ Installation Complete!** You're now ready to run your first simulation.
+``` **Installation Complete!** You're now ready to run your first simulation.
 
 ---
 
