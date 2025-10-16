@@ -16,7 +16,7 @@
 
 ## 2) Automatic Repository Management
 
-**See:** `.claude/repository_management.md` for complete details.
+**See:** `.ai/config/repository_management.md` for complete details.
 
 **Quick Reference:**
 - MANDATORY: Auto-commit and push after ANY repository changes
@@ -27,7 +27,7 @@
 
 ## 3) Session Continuity System
 
-**See:** `.claude/session_continuity.md` for complete details.
+**See:** `.ai/config/session_continuity.md` for complete details.
 
 **Quick Reference:**
 - Zero-effort account switching via `.dev_tools/session_state.json`
@@ -207,7 +207,7 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ## 10) Testing & Coverage Standards
 
-**See:** `.claude/testing_standards.md` for complete details.
+**See:** `.ai/config/testing_standards.md` for complete details.
 
 **Quick Reference:**
 - Overall: ≥85% | Critical components: ≥95% | Safety‑critical: 100%
@@ -275,14 +275,14 @@ python scripts/cleanup/workspace_cleanup.py --verbose
 - NEVER create files in root except: simulate.py, streamlit_app.py, config.yaml, requirements.txt, README.md, CHANGELOG.md, CLAUDE.md
 
 **Full Details:**
-- Comprehensive guide: `.claude/workspace_organization.md`
-- Oct 2025 cleanup lessons (370MB recovered): `.claude/WORKSPACE_CLEANUP_2025-10-09.md`
+- Comprehensive guide: `.ai/config/workspace_organization.md`
+- Oct 2025 cleanup lessons (370MB recovered): `.ai/config/WORKSPACE_CLEANUP_2025-10-09.md`
 
 ------
 
 ## 14) Controller Memory Management
 
-**See:** `.claude/controller_memory.md` for complete details.
+**See:** `.ai/config/controller_memory.md` for complete details.
 
 **Quick Reference:**
 - All controllers use weakref patterns to prevent circular references
@@ -320,7 +320,7 @@ missed = monitor.end(start)
 
 ## 16) Multi-Agent Orchestration System
 
-**See:** `.claude/agent_orchestration.md` for complete details.
+**See:** `.ai/config/agent_orchestration.md` for complete details.
 
 **Quick Reference:**
 - 6-agent parallel orchestration workflow (Ultimate Orchestrator pattern)
@@ -332,7 +332,7 @@ missed = monitor.end(start)
 
 ## 17) Documentation Quality Standards
 
-**See:** `.claude/documentation_quality.md` for complete details.
+**See:** `.ai/config/documentation_quality.md` for complete details.
 
 **Quick Reference:**
 - Direct, not conversational (avoid "Let's explore...")
@@ -481,7 +481,7 @@ stat docs/guides/getting-started.md docs/_build/html/guides/getting-started.html
 
 ### 19.2 Configuration
 
-**All servers enabled:** `.claude/settings.local.json` sets `"enableAllProjectMcpServers": true`
+**All servers enabled:** `.ai/config/settings.local.json` sets `"enableAllProjectMcpServers": true`
 
 **Server definitions:** `.mcp.json` (11 configured servers)
 

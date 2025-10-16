@@ -1,0 +1,207 @@
+{
+  "$schema": "https://github.com/dequelabs/axe-core/blob/develop/doc/axe.config.schema.json",
+  "projectName": "DIP SMC PSO Documentation - Phase 3 Accessibility Validation",
+  "version": "1.0.0",
+  "wcagLevel": "AA",
+  "reporter": "v2",
+  "standards": {
+    "wcag2a": true,
+    "wcag2aa": true,
+    "wcag21a": true,
+    "wcag21aa": true,
+    "best-practice": true,
+    "section508": true
+  },
+  "rules": {
+    "color-contrast": {
+      "enabled": true,
+      "impact": "critical",
+      "tags": ["wcag2aa", "wcag143"]
+    },
+    "color-contrast-enhanced": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "document-title": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "html-has-lang": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "html-lang-valid": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "valid-lang": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "landmark-one-main": {
+      "enabled": true,
+      "impact": "moderate"
+    },
+    "landmark-complementary-is-top-level": {
+      "enabled": true,
+      "impact": "moderate"
+    },
+    "region": {
+      "enabled": true,
+      "impact": "moderate"
+    },
+    "aria-allowed-attr": {
+      "enabled": true,
+      "impact": "critical"
+    },
+    "aria-allowed-role": {
+      "enabled": true,
+      "impact": "minor"
+    },
+    "aria-hidden-focus": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "aria-required-attr": {
+      "enabled": true,
+      "impact": "critical"
+    },
+    "aria-required-children": {
+      "enabled": true,
+      "impact": "critical"
+    },
+    "aria-required-parent": {
+      "enabled": true,
+      "impact": "critical"
+    },
+    "aria-valid-attr": {
+      "enabled": true,
+      "impact": "critical"
+    },
+    "aria-valid-attr-value": {
+      "enabled": true,
+      "impact": "critical"
+    },
+    "button-name": {
+      "enabled": true,
+      "impact": "critical"
+    },
+    "link-name": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "image-alt": {
+      "enabled": true,
+      "impact": "critical"
+    },
+    "input-image-alt": {
+      "enabled": true,
+      "impact": "critical"
+    },
+    "label": {
+      "enabled": true,
+      "impact": "critical"
+    },
+    "frame-title": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "list": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "listitem": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "definition-list": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "dlitem": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "meta-viewport": {
+      "enabled": true,
+      "impact": "critical"
+    },
+    "duplicate-id": {
+      "enabled": true,
+      "impact": "minor"
+    },
+    "duplicate-id-active": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "duplicate-id-aria": {
+      "enabled": true,
+      "impact": "critical"
+    },
+    "heading-order": {
+      "enabled": true,
+      "impact": "moderate"
+    },
+    "tabindex": {
+      "enabled": true,
+      "impact": "serious"
+    },
+    "focus-order-semantics": {
+      "enabled": true,
+      "impact": "minor"
+    }
+  },
+  "disableOtherRules": false,
+  "runOnly": {
+    "type": "tag",
+    "values": ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"]
+  },
+  "resultTypes": ["violations", "incomplete"],
+  "reporter": "v2",
+  "checks": [
+    {
+      "id": "color-contrast",
+      "options": {
+        "noScroll": false,
+        "contrastRatio": {
+          "normal": {
+            "expected": 4.5
+          },
+          "large": {
+            "expected": 3
+          }
+        }
+      }
+    }
+  ],
+  "locale": {
+    "lang": "en",
+    "dir": "ltr"
+  },
+  "branding": {
+    "application": "DIP-SMC-PSO Phase 3 Accessibility Validation"
+  },
+  "outputFormat": "json",
+  "outputDir": ".axe/reports",
+  "ignoreUrls": [],
+  "skipFailures": false,
+  "threshold": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 5,
+    "minor": 10
+  },
+  "notes": {
+    "purpose": "Phase 3 WCAG AA compliance validation for UI issues UI-002, UI-003, UI-004, UI-013, UI-015",
+    "wave_0_target": "Establish baseline metrics (current state)",
+    "wave_1_target": "0 critical violations after accessibility fixes",
+    "exit_criteria": "All Critical/Serious violations = 0, Moderate ≤ 5, Minor ≤ 10",
+    "test_urls": [
+      "http://localhost:9000/index.html",
+      "http://localhost:9000/guides/getting-started.html",
+      "http://localhost:9000/reference/controllers/index.html",
+      "http://localhost:9000/DOCUMENTATION_COVERAGE_MATRIX.html",
+      "http://localhost:9000/guides/tutorials/tutorial-01-first-simulation.html"
+    ]
+  }
+}

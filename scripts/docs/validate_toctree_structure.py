@@ -21,7 +21,7 @@ import re
 import json
 import argparse
 from pathlib import Path
-from typing import Dict, List, Tuple, Set
+from typing import Dict, List, Set
 from collections import defaultdict
 
 
@@ -48,7 +48,6 @@ def extract_toctree_blocks(content: str, filepath: Path) -> List[Dict]:
             start_line = i
             options_lines = []
             content_lines = []
-            in_options = True
 
             # Find closing fence
             i += 1
@@ -58,7 +57,6 @@ def extract_toctree_blocks(content: str, filepath: Path) -> List[Dict]:
                     options_lines.append(lines[i].strip())
                 elif lines[i].strip():
                     # Non-empty line that doesn't start with ':' is content
-                    in_options = False
                     content_lines.append(lines[i].strip())
                 i += 1
 

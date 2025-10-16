@@ -214,7 +214,6 @@ testing-and-benchmarks
 testing/index
 theorem_verification_guide
 theory/index
-theory/pso_algorithm_foundations
 theory_overview
 use_cases
 validation/index

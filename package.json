@@ -18,8 +18,8 @@
   "author": "DIP-SMC-PSO Team",
   "license": "MIT",
   "devDependencies": {
-    "@modelcontextprotocol/server-playwright": "^0.6.2",
-    "playwright": "^1.49.0"
+    "playwright": "^1.49.0",
+    "puppeteer": "^24.25.0"
   },
   "engines": {
     "node": ">=18.0.0",
@@ -28,5 +28,36 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/theSadeQ/dip-smc-pso.git"
+  },
+  "percy": {
+    "version": 2,
+    "snapshot": {
+      "widths": [
+        320,
+        768,
+        1024,
+        1440
+      ],
+      "minHeight": 1024,
+      "percyCSS": "",
+      "enableJavaScript": true
+    },
+    "discovery": {
+      "allowedHostnames": [
+        "localhost"
+      ],
+      "networkIdleTimeout": 750
+    },
+    "staticSnapshots": {
+      "baseUrl": "http://localhost:9000",
+      "snapshotFiles": "**/*.html",
+      "ignore": [
+        "**/node_modules/**",
+        "**/.git/**"
+      ]
+    },
+    "defer": {
+      "enabled": false
+    }
   }
 }

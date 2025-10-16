@@ -34,10 +34,8 @@
 import re
 import json
 import argparse
-import shutil
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
-from collections import defaultdict
+from typing import Dict, List
 from datetime import datetime
 
 
@@ -364,7 +362,7 @@ def fix_toctree_in_file(
 
     if not blocks:
         if verbose:
-            print(f"  No toctree blocks found")
+            print("  No toctree blocks found")
         return {
             "filepath": str(filepath),
             "success": True,
