@@ -403,3 +403,12 @@ stability_monitoring:
     store_history: true
     # Maximum history entries to keep
     max_history: 1000
+
+# PHASE 3 WAVE 3: Streamlit Theme Parity (DIP Documentation Design Tokens)
+# Enable design token-driven theme injection for visual consistency with docs
+# Token source: .codex/phase2_audit/design_tokens_v2.json (WCAG AA compliant)
+streamlit:
+  # Feature flag to enable/disable theme injection
+  enable_dip_theme: true
+  # Design tokens version (v2.0.0: Phase 2 accessibility remediation)
+  theme_version: "2.0.0"
