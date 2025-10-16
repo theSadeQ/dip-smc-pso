@@ -99,10 +99,17 @@
     },
     "context7": {
       "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@context7/mcp"],
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@context7/mcp"],
       "env": {},
       "description": "Intelligent context search and semantic retrieval across documentation and codebase"
+    },
+    "lighthouse-mcp": {
+      "type": "stdio",
+      "command": "lighthouse-mcp",
+      "args": [],
+      "env": {},
+      "description": "Automated Lighthouse accessibility and performance audits"
     }
   },
   "project": {
@@ -120,7 +127,8 @@
       "mcp-analyzer": "Code quality checks with RUFF linter and VULTURE dead code detection",
       "numpy-mcp": "Numerical computations, matrix operations, statistical analysis for control systems",
       "pandas-mcp": "Advanced data analysis and visualization of PSO convergence and simulation results",
-      "context7": "Semantic search across documentation, intelligent context retrieval, cross-reference validation"
+      "context7": "Semantic search across documentation, intelligent context retrieval, cross-reference validation",
+      "lighthouse-mcp": "Automated Lighthouse audits for accessibility, performance, SEO, and best practices"
     }
   }
 }
