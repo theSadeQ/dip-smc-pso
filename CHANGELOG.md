@@ -194,6 +194,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Phase 3.4: Comparison analysis (pandas-mcp) - Token mapping validation
 - Phase 4: Documentation - Integration guide, completion summary
 
+### Documentation
+- **Strategic Roadmap**: Created `.codex/STRATEGIC_ROADMAP.md` (comprehensive vision for Phases 3-6)
+  - Executive summary: Current state (production score 6.1/10) → Version 2.0 (score 9.0/10, 3-6 months)
+  - Phase 3 completion plan (4 days): Wave 3 finale + Wave 4 consolidation
+  - Phase 4 strategic options: Production Readiness Sprint (recommended), Performance Optimization, UI Polish, Feature Development
+  - Recommended path: Thread safety fixes (2-3 weeks) → Production deployment → Score 6.1 → 8.0
+  - Phase 5-6 vision: Conditional branches + academic publication + cloud deployment + community adoption
+  - Decision framework: When to execute each option, success metrics, risk mitigation
+- Updated `.codex/README.md`: Added strategic planning section with roadmap links
+- Updated `.codex/phase3/plan.md`: Added strategic roadmap reference for long-term context
+
 ## [1.1.0] - Unreleased
 
 ### Added
