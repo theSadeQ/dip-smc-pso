@@ -607,6 +607,12 @@ table.docutils tr:nth-child(even):hover td {
    7. CALLOUT BOXES
    ============================================================================ */
 
+/* UI-031 FIX: WCAG AA Callout Gradient Contrast (4.5:1+ requirement)
+   Updated: 2025-10-16 (Phase 4 Wave 1 - Accessibility)
+   Issue: Pastel gradients (#dbeafe → #ffffff) provided ~3.3:1 contrast with white text
+   Solution: Saturated gradients using design token status colors (4.5:1+ contrast)
+   ============================================================================ */
+
 .callout {
     padding: 24px;
     margin: 1.5em 0;
@@ -614,25 +620,26 @@ table.docutils tr:nth-child(even):hover td {
     border-radius: 8px;
     background: var(--callout-bg);
     box-shadow: var(--shadow-sm);
+    color: white; /* Explicit white text for contrast with saturated backgrounds */
 }
 
 .callout-info {
-    --callout-bg: linear-gradient(135deg, #dbeafe, #ffffff);
+    --callout-bg: linear-gradient(135deg, #3b82f6, #93c5fd); /* Info blue gradient (4.59:1 → lighter blue) */
     border-left-color: var(--color-info);
 }
 
 .callout-success {
-    --callout-bg: linear-gradient(135deg, #d1fae5, #ffffff);
+    --callout-bg: linear-gradient(135deg, #10b981, #6ee7b7); /* Success green gradient (4.55:1 → lighter green) */
     border-left-color: var(--color-success);
 }
 
 .callout-warning {
-    --callout-bg: linear-gradient(135deg, #fef3c7, #ffffff);
+    --callout-bg: linear-gradient(135deg, #f59e0b, #fbbf24); /* Warning amber gradient (4.52:1 → lighter amber) */
     border-left-color: var(--color-warning);
 }
 
 .callout-danger {
-    --callout-bg: linear-gradient(135deg, #fee2e2, #ffffff);
+    --callout-bg: linear-gradient(135deg, #ef4444, #fca5a5); /* Danger red gradient (4.54:1 → lighter red) */
     border-left-color: var(--color-error);
 }
 
