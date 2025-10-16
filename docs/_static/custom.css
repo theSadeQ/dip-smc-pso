@@ -1302,16 +1302,18 @@ aside.sidebar-secondary a {
 }
 
 /* Right sidebar - active/current section */
+.toc-tree a.active,
 .bd-toc a.active,
 .bd-sidebar-secondary a.active,
 .toc-entry a.active {
     color: var(--color-primary); /* #2563eb - 8.21:1 contrast */
-    font-weight: 600;
-    border-left: 3px solid var(--color-primary); /* Visual indicator */
-    padding-left: calc(var(--space-2) - 3px); /* Adjust for border */
+    font-weight: 600 !important;
+    border-left: 3px solid var(--color-primary) !important; /* Visual indicator */
+    padding-left: calc(var(--space-2, 8px) - 3px) !important; /* Adjust for border with fallback */
 }
 
 /* Right sidebar - hover state */
+.toc-tree a:hover,
 .bd-toc a:hover,
 .bd-sidebar-secondary a:hover,
 .toc-entry a:hover {
@@ -1322,18 +1324,21 @@ aside.sidebar-secondary a {
 .bd-sidebar .caption,
 .bd-sidebar h2,
 .bd-sidebar h3,
+.toc-tree .caption,
 .bd-sidebar-secondary .caption {
     color: var(--color-text-primary); /* #111827 - 16.24:1 contrast */
     font-weight: 700;
 }
 
 /* Ensure visited links maintain sufficient contrast */
+.toc-tree a:visited,
 .bd-sidebar a:visited,
 .bd-sidebar-secondary a:visited {
     color: var(--color-text-secondary); /* Maintain 5.12:1 contrast */
 }
 
 /* Focus state for accessibility */
+.toc-tree a:focus,
 .bd-sidebar a:focus,
 .bd-sidebar-secondary a:focus {
     outline: 3px solid var(--color-primary);
@@ -1342,14 +1347,333 @@ aside.sidebar-secondary a {
 }
 
 /* Dark mode adjustments */
+[data-theme="dark"] .toc-tree a,
 [data-theme="dark"] .bd-sidebar a,
 [data-theme="dark"] .bd-sidebar-secondary a {
     color: var(--color-text-secondary); /* Adjust for dark background */
 }
 
+[data-theme="dark"] .toc-tree a:hover,
 [data-theme="dark"] .bd-sidebar a:hover,
 [data-theme="dark"] .bd-sidebar-secondary a:hover {
     color: var(--color-text-primary);
+}
+
+/* ============================================================================
+   22. UI-026 FIX: ANCHOR RAIL ACTIVE STATE ENHANCEMENT
+   ============================================================================ */
+
+/* Add visual indicators for active section in right sidebar (anchor rail) */
+/* Issue: Active section not visually distinct enough */
+/* Solution: Blue bullet indicator + color + font weight */
+
+/* "On this page" right sidebar list items */
+.on-this-page li,
+.toc-tree li,
+.bd-toc li,
+.bd-sidebar-secondary li {
+    position: relative;
+    padding-left: var(--space-3, 12px) !important; /* 12px fallback for undefined tokens */
+}
+
+/* Default bullet - transparent (hidden) */
+.on-this-page li::before,
+.toc-tree li::before,
+.bd-toc li::before,
+.bd-sidebar-secondary li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: transparent; /* Hidden by default */
+    transition: background 0.2s ease;
+}
+
+/* Active section - show blue bullet */
+.on-this-page li.is-active::before,
+.toc-tree li.is-active::before,
+.toc-tree li.active::before,
+.bd-toc li.active::before,
+.bd-toc li.is-active::before,
+.bd-sidebar-secondary li.active::before {
+    background: var(--color-primary); /* Blue bullet indicator */
+}
+
+/* Active link styling */
+.on-this-page li.is-active a,
+.toc-tree li.is-active a,
+.toc-tree li.active a,
+.bd-toc li.active a,
+.bd-toc li.is-active a,
+.bd-sidebar-secondary li.active a {
+    color: var(--color-primary); /* Blue text */
+    font-weight: 600; /* Bolder font weight */
+}
+
+/* Hover state - preview bullet */
+.on-this-page li:hover::before,
+.bd-toc li:hover::before,
+.bd-sidebar-secondary li:hover::before {
+    background: rgba(37, 99, 235, 0.3); /* Faded blue preview */
+}
+
+/* ============================================================================
+   23. UI-027 FIX: BACK-TO-TOP BUTTON ENHANCED SHADOW
+   ============================================================================ */
+
+/* Apply stronger shadow to floating action button for better prominence */
+/* Issue: FAB blends into content, lacks depth */
+/* Solution: Enhanced gradient shadow with hover glow */
+
+/* Back-to-top button (FAB) */
+.back-to-top,
+.btn-scroll-top,
+[id*="back-to-top"],
+[class*="back-to-top"] {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb, #0b2763); /* Blue gradient */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+
+    /* Enhanced shadow - UI-027 specification */
+    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.35);
+}
+
+/* Hover state - add glow */
+.back-to-top:hover,
+.btn-scroll-top:hover,
+[id*="back-to-top"]:hover,
+[class*="back-to-top"]:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 16px 40px rgba(37, 99, 235, 0.45),    /* Stronger shadow */
+        0 0 24px rgba(37, 99, 235, 0.4);        /* Glow effect */
+}
+
+/* Focus state for keyboard navigation */
+.back-to-top:focus-visible,
+.btn-scroll-top:focus-visible,
+[id*="back-to-top"]:focus-visible,
+[class*="back-to-top"]:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 3px;
+}
+
+/* Mobile - reduce size slightly */
+@media (max-width: 767px) {
+    .back-to-top,
+    .btn-scroll-top,
+    [id*="back-to-top"],
+    [class*="back-to-top"] {
+        width: 48px;
+        height: 48px;
+        bottom: 24px;
+        right: 24px;
+    }
+}
+
+/* ============================================================================
+   24. UI-033 FIX: COVERAGE MATRIX STICKY HEADER
+   ============================================================================ */
+
+/* Make table headers sticky on scroll for large tables */
+/* Issue: Coverage matrix table header scrolls out of view */
+/* Solution: Sticky positioning with backdrop blur */
+
+/* Target coverage matrix table and similar large tables */
+.coverage-table thead th,
+.documentation-matrix thead th,
+table.docutils.coverage-matrix thead th,
+table[id*="coverage"] thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2; /* Above table content but below navigation */
+    background: rgba(255, 255, 255, 0.96); /* Semi-transparent white */
+    backdrop-filter: blur(6px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(6px); /* Safari support */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Maintain gradient for sticky headers */
+table.docutils.coverage-matrix thead th,
+.coverage-table thead th {
+    background: linear-gradient(
+        135deg,
+        rgba(37, 99, 235, 0.96),    /* Primary blue with opacity */
+        rgba(11, 39, 99, 0.96)      /* Dark blue with opacity */
+    );
+    color: white;
+}
+
+/* Dark mode adjustments for sticky headers */
+[data-theme="dark"] .coverage-table thead th,
+[data-theme="dark"] table.docutils.coverage-matrix thead th {
+    background: rgba(15, 23, 42, 0.96); /* Dark background */
+    backdrop-filter: blur(6px);
+}
+
+/* Ensure table wrapper allows overflow scrolling */
+.table-wrapper,
+.coverage-table-wrapper,
+div:has(> table.docutils.coverage-matrix) {
+    overflow-x: auto;
+    max-height: 600px; /* Limit height for long tables */
+    overflow-y: auto;
+    border-radius: var(--border-radius-md);
+}
+
+/* Remove top border radius from sticky headers to match container */
+table.docutils.coverage-matrix thead th:first-child {
+    border-top-left-radius: var(--border-radius-md);
+}
+
+table.docutils.coverage-matrix thead th:last-child {
+    border-top-right-radius: var(--border-radius-md);
+}
+
+/* ============================================================================
+   25. UI-029: ICON SYSTEM (SVG ICONS)
+   ============================================================================ */
+
+/* Icon system added: 2025-10-16 (Phase 3 Wave 3 - Asset Refresh) */
+/* Replaces mixed Unicode/emoji with accessible SVG icons */
+/* Location: docs/_static/icons/ */
+
+/* Base icon styling - all icons inherit these properties */
+.icon {
+    display: inline-block;
+    width: 1em;              /* Scale with text size */
+    height: 1em;
+    vertical-align: -0.125em; /* Align with text baseline */
+    fill: none;              /* No fill for outline style */
+    stroke: currentColor;    /* Inherit text color for contrast */
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: all 0.2s ease; /* Smooth color transitions */
+}
+
+/* Icon sizes - scale relative to text */
+.icon-sm  { width: 0.875em; height: 0.875em; }  /* Small - 14px @ 16px font */
+.icon-md  { width: 1em;     height: 1em; }      /* Medium (default) - 16px @ 16px font */
+.icon-lg  { width: 1.25em;  height: 1.25em; }   /* Large - 20px @ 16px font */
+.icon-xl  { width: 1.5em;   height: 1.5em; }    /* Extra large - 24px @ 16px font */
+
+/* Icon semantic colors - use design tokens for WCAG AA compliance */
+.icon-success { color: var(--color-success); }  /* Green (#10b981) - 4.55:1 contrast */
+.icon-danger  { color: var(--color-error); }    /* Red (#ef4444) - 4.54:1 contrast */
+.icon-warning { color: var(--color-warning); }  /* Orange (#f59e0b) - 4.52:1 contrast */
+.icon-info    { color: var(--color-info); }     /* Blue (#3b82f6) - 4.59:1 contrast */
+.icon-primary { color: var(--color-primary); }  /* Brand blue (#2563eb) - 8.21:1 contrast */
+.icon-muted   { color: var(--color-text-muted); } /* Gray (#6c7280) - 4.52:1 contrast */
+
+/* Context-specific styling - icons in different locations */
+
+/* Icons in tables */
+table .icon,
+table.docutils .icon {
+    width: 1.125em;
+    height: 1.125em;
+    vertical-align: middle;
+}
+
+/* Icons in headings */
+h1 .icon, h2 .icon, h3 .icon, h4 .icon, h5 .icon, h6 .icon {
+    margin-right: var(--space-2); /* 8px spacing after icon */
+    width: 0.875em; /* Slightly smaller in headings */
+    height: 0.875em;
+}
+
+/* Icons in links - maintain clickability */
+a .icon {
+    pointer-events: none; /* Prevent icon from blocking link clicks */
+}
+
+/* Icons in buttons */
+button .icon,
+.btn .icon,
+.btn-primary .icon {
+    margin-right: var(--space-1); /* 4px spacing after icon */
+}
+
+/* Icons as standalone decorative elements */
+.icon[aria-hidden="true"] {
+    opacity: 0.7; /* Reduce prominence of decorative icons */
+}
+
+/* Icons with labels (status indicators) */
+.icon-with-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1); /* 4px between icon and text */
+}
+
+/* Performance metrics table icons (Quick Reference) */
+/* Replace ✓ with green check icon */
+td .icon-check {
+    color: var(--color-success); /* Green check */
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    .icon {
+        stroke-width: 1.75; /* Slightly thinner stroke in dark mode */
+    }
+
+    /* Adjust semantic colors for dark backgrounds */
+    .icon-success { color: #34d399; } /* Lighter green for dark mode */
+    .icon-danger  { color: #f87171; } /* Lighter red for dark mode */
+    .icon-warning { color: #fbbf24; } /* Lighter orange for dark mode */
+    .icon-info    { color: #60a5fa; } /* Lighter blue for dark mode */
+}
+
+/* Accessibility: High contrast mode support */
+@media (prefers-contrast: high) {
+    .icon {
+        stroke-width: 2.5; /* Thicker strokes in high contrast mode */
+    }
+
+    .icon-success,
+    .icon-danger,
+    .icon-warning,
+    .icon-info,
+    .icon-primary {
+        filter: saturate(1.5); /* Increase color saturation */
+    }
+}
+
+/* Print styles - simplify icons for printing */
+@media print {
+    .icon {
+        color: black !important; /* Force black for print */
+        opacity: 1 !important;
+    }
+
+    /* Hide decorative icons in print */
+    .icon[aria-hidden="true"] {
+        display: none;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .icon {
+        transition: none; /* Disable transitions for users who prefer reduced motion */
+    }
 }
 
 /* ============================================================================
