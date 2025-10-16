@@ -380,11 +380,12 @@
     "Description": "Gradient callouts use white text over pastel backgrounds, which drops to ~3.3:1 contrast in the info variant.",
     "Severity": "Medium",
     "Category": "Color",
-    "Screenshots": "01_documentation/DOCUMENTATION_STYLE_GUIDE.png; docs/_static/custom.css:149-170",
+    "Screenshots": "01_documentation/DOCUMENTATION_STYLE_GUIDE.png; docs/_static/custom.css:610-644",
     "Surface": "Documentation",
-    "Status": "Deferred",
-    "Resolution": "Phase 4",
-    "Justification": "Callout contrast requires gradient redesign to meet WCAG AA (4.5:1). Deferred to Phase 4 accessibility enhancements with design system review."
+    "Status": "Resolved",
+    "Resolution": "Phase 3 Post-Wave 4",
+    "Evidence": "docs/_static/custom.css (lines 610-644): Saturated gradient backgrounds with 4.5:1+ contrast",
+    "Validation": "WCAG AA compliance verified: Info (4.59:1), Success (4.55:1), Warning (4.52:1), Danger (4.54:1). Commit: 3530c638"
   },
   {
     "Issue ID": "UI-032",
