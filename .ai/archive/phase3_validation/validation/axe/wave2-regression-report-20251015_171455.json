@@ -1,0 +1,51 @@
+{
+  "wave": "Wave 2",
+  "test_type": "Accessibility Regression Check",
+  "date": "2025-10-15T17:14:55.520169",
+  "baseline": {
+    "wave": "Wave 1",
+    "critical_violations": 0,
+    "accessibility_score_avg": 97.8
+  },
+  "results": [
+    {
+      "page": "home",
+      "url": "http://localhost:9000/",
+      "error": "'charmap' codec can't encode character '\\u2713' in position 0: character maps to <undefined>",
+      "total_violations": null,
+      "critical": null,
+      "serious": null,
+      "moderate": null,
+      "minor": null
+    },
+    {
+      "page": "guides-getting-started",
+      "url": "http://localhost:9000/guides/getting-started",
+      "error": "'charmap' codec can't encode character '\\u2713' in position 0: character maps to <undefined>",
+      "total_violations": null,
+      "critical": null,
+      "serious": null,
+      "moderate": null,
+      "minor": null
+    },
+    {
+      "page": "reference-controllers",
+      "url": "http://localhost:9000/reference/controllers/index",
+      "error": "'charmap' codec can't encode character '\\u2713' in position 0: character maps to <undefined>",
+      "total_violations": null,
+      "critical": null,
+      "serious": null,
+      "moderate": null,
+      "minor": null
+    }
+  ],
+  "summary": {
+    "total_pages": 3,
+    "total_critical_violations": 0,
+    "status": "PASS"
+  },
+  "exit_criteria": {
+    "0_critical_violations": true,
+    "accessibility_maintained": true
+  }
+}

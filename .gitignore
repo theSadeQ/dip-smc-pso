@@ -75,3 +75,11 @@ artifacts/
 # Allow ultrathink prompts and documentation (strategic project documentation)
 !prompt/README.md
 !prompt/issue_*_subagent_planning_prompt.md.codex/phase3/validation/sphinx/before_after/before/*.png
+
+# Runtime directories (hidden from git)
+node_modules/
+data/
+logs/
+optimization_results/
+.ai/archive/phase3_validation/screenshots/
+# Large binary files excluded

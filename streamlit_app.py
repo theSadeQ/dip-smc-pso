@@ -43,6 +43,7 @@ from src.core.dynamics import DIPDynamics
 from src.core.dynamics_full import FullDIPDynamics
 from src.core.simulation_runner import run_simulation
 from src.optimizer.pso_optimizer import PSOTuner
+from src.utils.streamlit_theme import inject_theme
 
 # Performance caching decorators
 @st.cache_data
@@ -231,6 +232,7 @@ def main():
 
     st.set_page_config(page_title="Pendulum Control Simulator", layout="wide")
     load_css("src/assets/style.css")
+    inject_theme(enable=True)  # Phase 3 Wave 3: DIP docs theme parity
 
     # Workaround for older/newer Streamlit versions: ``st.session_state`` may
     # behave like a dictionary without a ``get`` method.  Define a helper

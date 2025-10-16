@@ -1,0 +1,119 @@
+==========================================================================
+WAVE 1 LIGHTHOUSE AUDIT - QUICK CHECKLIST
+==========================================================================
+
+Server: http://localhost:9000 (VERIFY IT'S RUNNING!)
+Target: Accessibility Score >= 95 on all 5 pages
+Time: ~30-45 minutes total (~5-9 min per page)
+
+==========================================================================
+AUDIT WORKFLOW (REPEAT FOR EACH PAGE)
+==========================================================================
+
+1. Open URL in Chrome
+2. Press F12 (open DevTools)
+3. Click "Lighthouse" tab (or >> menu -> Lighthouse)
+4. Select ONLY "Accessibility" checkbox (uncheck Performance, Best Practices, SEO, PWA)
+5. Choose "Desktop" mode
+6. Click blue "Analyze page load" button
+7. Wait 30-60 seconds
+8. Record score in RESULTS_TRACKING.md
+9. Export: Click gear icon -> "Save as HTML" -> save to wave1_exit/
+10. Screenshot: Press PrtScn, save to wave1_exit/
+
+==========================================================================
+PAGES TO TEST (5 TOTAL)
+==========================================================================
+
+[ ] 1. HOMEPAGE
+    URL: http://localhost:9000/
+    Save as: wave1-homepage-report.html
+              wave1-homepage-screenshot.png
+    Score: ___/100
+
+[ ] 2. GETTING STARTED
+    URL: http://localhost:9000/guides/getting-started.html
+    Save as: wave1-getting-started-report.html
+              wave1-getting-started-screenshot.png
+    Score: ___/100
+
+[ ] 3. CONTROLLER API
+    URL: http://localhost:9000/reference/controllers/index.html
+    Save as: wave1-controller-api-report.html
+              wave1-controller-api-screenshot.png
+    Score: ___/100
+
+[ ] 4. SMC THEORY
+    URL: http://localhost:9000/guides/theory/smc-theory.html
+    Save as: wave1-smc-theory-report.html
+              wave1-smc-theory-screenshot.png
+    Score: ___/100
+
+[ ] 5. BENCHMARKS
+    URL: http://localhost:9000/benchmarks/index.html
+    Save as: wave1-benchmarks-report.html
+              wave1-benchmarks-screenshot.png
+    Score: ___/100
+
+==========================================================================
+WAVE 1 FIX VALIDATION (CHECK WHILE AUDITING)
+==========================================================================
+
+UI-002 (Muted Text Contrast):
+  [ ] "Color contrast" audit shows PASS (no failures on captions/metadata)
+
+UI-003 (Collapsed Notice Contrast):
+  [ ] Code collapse notice has high contrast (no failures)
+
+UI-004 (ARIA Accessibility):
+  [ ] "ARIA attributes valid" audit shows PASS
+  [ ] "Buttons have accessible names" audit shows PASS
+
+==========================================================================
+SUCCESS CRITERIA
+==========================================================================
+
+[ ] All 5 pages scored >= 95 accessibility
+[ ] All 10 files saved (5 HTML reports + 5 screenshots)
+[ ] RESULTS_TRACKING.md filled out with scores
+[ ] No critical failures related to UI-002/003/004
+
+==========================================================================
+FILE LOCATIONS
+==========================================================================
+
+Save ALL files to:
+  D:\Projects\main\.codex\phase3\validation\lighthouse\wave1_exit\
+
+Report results in:
+  D:\Projects\main\.codex\phase3\validation\lighthouse\wave1_exit\RESULTS_TRACKING.md
+
+==========================================================================
+TROUBLESHOOTING
+==========================================================================
+
+Issue: Lighthouse tab not visible
+-> Update Chrome (Help -> About Google Chrome)
+-> Close/reopen DevTools (F12 twice)
+-> Try Incognito mode (Ctrl+Shift+N)
+
+Issue: Score fluctuates between runs
+-> Run audit 2-3 times, take average
+-> Close other tabs to reduce CPU load
+-> Use "No throttling" option
+
+Issue: Server not responding
+-> Verify: curl http://localhost:9000
+-> Restart documentation server
+
+==========================================================================
+NEXT STEPS AFTER COMPLETION
+==========================================================================
+
+1. Fill out RESULTS_TRACKING.md with all scores
+2. Let Claude know you're done (it will process results)
+3. Proceed to NVDA/JAWS screen reader testing
+4. Update changelog with validation results
+5. Commit and push evidence files
+
+==========================================================================

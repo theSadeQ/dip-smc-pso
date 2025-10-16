@@ -85,8 +85,8 @@ extensions = [
     'sphinx.ext.viewcode',        # Add source code links
     'sphinx.ext.linkcode',        # Permalinks to GitHub
     'sphinx.ext.githubpages',     # Emit .nojekyll for GitHub Pages
-    'sphinx.ext.mathjax',
-    'sphinx.ext.intersphinx',
+    # 'sphinx.ext.mathjax',       # DISABLED (Wave 2 LCP): Loads MathJax on ALL pages
+    'sphinx.ext.intersphinx',     # Replaced with mathjax_extension (conditional loading)
     # 'sphinx.ext.autosectionlabel',  # DISABLED Phase 1 Day 3: Causes O(n²) slowdown with 788 files
 
     # External extensions
@@ -108,6 +108,7 @@ extensions = [
     'nbsphinx',                   # Jupyter notebook integration (Phase 4 - base)
     'jupyter_extension',          # Custom Jupyter directives (Phase 4 - custom)
     'mathviz_extension',          # Mathematical visualization library (Phase 5)
+    'mathjax_extension',          # Conditional MathJax loading (Wave 2 LCP optimization)
 ]
 
 # MyST Parser configuration - quality-of-life features
@@ -121,6 +122,8 @@ myst_enable_extensions = [
     'linkify',         # auto-link URLs
 ]
 myst_heading_anchors = 3
+myst_update_mathjax = False  # CRITICAL (Wave 2 LCP): Disable MyST's automatic MathJax injection
+                             # Our mathjax_extension handles conditional loading instead
 
 # nbsphinx configuration - Jupyter notebook integration (Phase 4)
 nbsphinx_execute = 'auto'  # Execute notebooks during build (cached with jupyter-cache)
@@ -246,16 +249,21 @@ def setup(app):
 # Custom CSS and JavaScript files
 html_css_files = [
     'custom.css',
-    'visual-tree.css',
     'code-collapse.css',
-    'threejs-pendulum.css',  # 3D pendulum visualization styles
     'code-runner.css',  # Pyodide live code execution styles (Phase 2)
-    'plotly-charts.css',  # Plotly interactive charts styles (Phase 3)
     'mathviz.css',  # Mathematical visualization library styles (Phase 5)
-    'pwa.css',  # Progressive Web App UI styles (Phase 6)
+
+    # REMOVED FROM GLOBAL LOADING (Wave 2 LCP optimization - CSS files):
+    # These CSS files are 100% unused on homepage, now load conditionally via extensions:
+    # - 'visual-tree.css' (0% used on homepage) → loads only on pages with visual-tree directive
+    # - 'threejs-pendulum.css' (0% used) → loads only on pages with threejs-pendulum directive
+    # - 'plotly-charts.css' (0% used) → loads only on pages with plotly-chart directive
+    # - 'pwa.css' (0% used) → loads only when PWA features enabled
+    # Total savings: 36 KB transfer size, 988ms CSS blocking time
 ]
 
 html_js_files = [
+    # Core lightweight utilities (load on all pages)
     # 'back-to-top.js',  # Disabled - using Furo's built-in back-to-top button
     'lazy-load.js',
     'dark-mode.js',
@@ -263,21 +271,22 @@ html_js_files = [
     'control-room.js',
     'code-collapse.js',
     'fix-caption-aria.js',  # Wave 1 validation fix: aria-level for caption headings
-    # Three.js 3D visualization (Phase 1 visual enhancement)
-    'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js',
-    'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/controls/OrbitControls.js',
-    'threejs-pendulum.js',  # 3D interactive pendulum simulator
-    # Pyodide live Python code execution (Phase 2 visual enhancement)
-    'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js',
-    'pyodide-worker.js',  # Web Worker for async Python execution
-    'pyodide-runner.js',  # Main UI controller for code execution
-    # Plotly interactive charts (Phase 3 visual enhancement)
-    'https://cdn.plot.ly/plotly-2.27.0.min.js',  # Plotly.js for interactive charts
-    'plotly-integration.js',  # Chart renderer and controller
-    # Mathematical visualization library (Phase 5 visual enhancement)
-    'mathviz-interactive.js',  # Control theory visualizations (Plotly-based)
-    # Progressive Web App (Phase 6 - offline documentation)
-    'pwa-register.js',  # Service worker registration and PWA management
+
+    # REMOVED FROM GLOBAL LOADING (Wave 2 LCP optimization):
+    # Heavyweight visualization libraries now load ONLY on pages that use them
+    # via custom Sphinx extensions (pyodide_extension, plotly_extension, etc.)
+    #
+    # Previously loaded globally (causing 18.4s JS bootup, 7.6s LCP regression):
+    # - Pyodide (16.5s execution): pyodide.js, pyodide-worker.js, pyodide-runner.js
+    # - Plotly (1066 KB): plotly-2.27.0.min.js, plotly-integration.js
+    # - Three.js (158 KB): three.min.js, OrbitControls.js, threejs-pendulum.js
+    # - MathViz (45 KB): mathviz-interactive.js
+    # - PWA (15 KB): pwa-register.js
+    #
+    # Wave 2 Fix: Extensions inject these scripts only when directive is used:
+    # - .. pyodide:: directive -> loads Pyodide on that page only
+    # - .. plotly-chart:: directive -> loads Plotly on that page only
+    # - .. threejs-pendulum:: directive -> loads Three.js on that page only
 ]
 
 # HTML output options

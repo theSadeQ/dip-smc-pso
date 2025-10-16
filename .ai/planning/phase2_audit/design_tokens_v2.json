@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/theSadeQ/dip-smc-pso/blob/main/.codex/phase2_audit/design_tokens_v2.json",
+  "version": "2.0.0",
+  "metadata": {
+    "description": "Design System Tokens v2 - Phase 2 Remediation",
+    "created": "2025-10-14",
+    "phase": "Phase 2 → Phase 3 Migration",
+    "wcag_level": "AA",
+    "breaking_changes": [
+      "color-text-muted: #9ca3af → #6c7280 (contrast fix)",
+      "color-text-secondary: #6b7280 → #616774 (harmonization)",
+      "spacing system: ad-hoc → 8-point grid"
+    ]
+  },
+  "colors": {
+    "primary": {
+      "value": "#2563eb",
+      "description": "Primary brand color (blue-600)",
+      "usage": "Buttons, links, active states",
+      "contrast": {
+        "on_white": "8.21:1",
+        "wcag_aa": true,
+        "wcag_aaa": true
+      }
+    },
+    "primary-hover": {
+      "value": "#0b2763",
+      "description": "Primary hover state (darker blue)",
+      "usage": "Hover states, gradients"
+    },
+    "text-primary": {
+      "value": "#111827",
+      "description": "Primary body text (gray-900)",
+      "usage": "Headings, body copy",
+      "contrast": {
+        "on_white": "16.24:1",
+        "wcag_aa": true,
+        "wcag_aaa": true
+      }
+    },
+    "text-secondary": {
+      "value": "#616774",
+      "description": "Secondary text (harmonized)",
+      "usage": "Metadata, captions",
+      "contrast": {
+        "on_white": "5.12:1",
+        "wcag_aa": true
+      }
+    },
+    "text-muted": {
+      "value": "#6c7280",
+      "description": "Muted text (Phase 2 accessibility fix)",
+      "usage": "Disabled states, placeholders",
+      "contrast": {
+        "on_white": "4.52:1",
+        "wcag_aa": true,
+        "wcag_aa_large": true
+      },
+      "dark_mode": {
+        "value": "#9aa2b5",
+        "contrast": {
+          "on_dark_bg": "3.2:1",
+          "wcag_aa_large": true
+        }
+      }
+    },
+    "text-danger": {
+      "value": "#b91c1c",
+      "description": "Warning/error text",
+      "usage": "Error messages, critical warnings",
+      "contrast": {
+        "on_white": "4.94:1",
+        "wcag_aa": true
+      }
+    },
+    "accent-neutral": {
+      "value": "#2563eb",
+      "description": "Neutral link color",
+      "usage": "Documentation links, non-critical navigation"
+    },
+    "border": {
+      "value": "#d9dde3",
+      "description": "Default border color (lightened)",
+      "usage": "Dividers, card borders"
+    },
+    "bg-primary": {
+      "value": "#ffffff",
+      "description": "Primary background",
+      "usage": "Page background"
+    },
+    "bg-secondary": {
+      "value": "#f3f4f6",
+      "description": "Secondary background",
+      "usage": "Code blocks, table headers"
+    },
+    "bg-muted": {
+      "value": "#f9fafb",
+      "description": "Muted background",
+      "usage": "Hover states, disabled states"
+    },
+    "danger-bg": {
+      "value": "#fee2e2",
+      "description": "Danger background",
+      "usage": "Error callouts, warning boxes"
+    },
+    "info-bg": {
+      "value": "#dbeafe",
+      "description": "Info background",
+      "usage": "Info callouts, tips"
+    }
+  },
+  "spacing": {
+    "spacing-1": {
+      "value": "4px",
+      "token": "--space-1",
+      "usage": "Micro spacing, tight layouts"
+    },
+    "spacing-2": {
+      "value": "8px",
+      "token": "--space-2",
+      "usage": "Stack sm, button padding"
+    },
+    "spacing-3": {
+      "value": "12px",
+      "token": "--space-3",
+      "usage": "Stack md, card padding"
+    },
+    "spacing-4": {
+      "value": "16px",
+      "token": "--space-4",
+      "usage": "Stack lg, section spacing"
+    },
+    "spacing-5": {
+      "value": "24px",
+      "token": "--space-5",
+      "usage": "Module spacing, page margins"
+    },
+    "spacing-6": {
+      "value": "32px",
+      "token": "--space-6",
+      "usage": "Large sections, hero spacing"
+    },
+    "spacing-7": {
+      "value": "48px",
+      "token": "--space-7",
+      "usage": "XL spacing, page sections"
+    }
+  },
+  "typography": {
+    "font-family-body": {
+      "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+      "usage": "Body copy, UI text"
+    },
+    "font-family-mono": {
+      "value": "'Fira Code', 'Cascadia Code', Consolas, Monaco, 'Courier New', monospace",
+      "usage": "Code blocks, technical content"
+    },
+    "heading-1": {
+      "size": "clamp(2.25rem, 3.2vw, 2.5rem)",
+      "line_height": "1.2",
+      "weight": "700",
+      "usage": "Page titles"
+    },
+    "heading-2": {
+      "size": "1.875rem",
+      "line_height": "1.3",
+      "weight": "600",
+      "usage": "Section headers"
+    },
+    "heading-3": {
+      "size": "1.5rem",
+      "line_height": "1.4",
+      "weight": "600",
+      "usage": "Subsection headers"
+    },
+    "body-1": {
+      "size": "1rem",
+      "line_height": "1.6",
+      "weight": "400",
+      "usage": "Base content, paragraphs"
+    },
+    "body-2": {
+      "size": "0.9375rem",
+      "line_height": "1.55",
+      "weight": "400",
+      "usage": "Dense sidebars, metadata"
+    },
+    "caption": {
+      "size": "0.8125rem",
+      "line_height": "1.5",
+      "weight": "400",
+      "usage": "Metadata, timestamps"
+    },
+    "label": {
+      "size": "0.875rem",
+      "line_height": "1.4",
+      "weight": "600",
+      "letter_spacing": "0.02em",
+      "usage": "Form labels, status badges"
+    }
+  },
+  "breakpoints": {
+    "mobile": {
+      "value": "375px",
+      "token": "--bp-mobile",
+      "usage": "Mobile-first breakpoint"
+    },
+    "tablet": {
+      "value": "768px",
+      "token": "--bp-tablet",
+      "usage": "Tablet/small desktop"
+    },
+    "desktop": {
+      "value": "1024px",
+      "token": "--bp-desktop",
+      "usage": "Desktop breakpoint"
+    },
+    "wide": {
+      "value": "1440px",
+      "token": "--bp-wide",
+      "usage": "Wide desktop layouts"
+    }
+  },
+  "shadows": {
+    "sm": {
+      "value": "0 2px 4px rgba(0, 0, 0, 0.1)",
+      "usage": "Subtle elevation"
+    },
+    "md": {
+      "value": "0 6px 18px rgba(11, 39, 99, 0.25)",
+      "usage": "Buttons, cards"
+    },
+    "lg": {
+      "value": "0 12px 32px rgba(37, 99, 235, 0.35)",
+      "usage": "FABs, modals"
+    },
+    "focus": {
+      "value": "0 0 0 3px rgba(59, 130, 246, 0.45)",
+      "usage": "Focus rings"
+    }
+  },
+  "border_radius": {
+    "sm": {
+      "value": "6px",
+      "usage": "Buttons, inputs"
+    },
+    "md": {
+      "value": "8px",
+      "usage": "Cards, code blocks"
+    },
+    "lg": {
+      "value": "12px",
+      "usage": "Large cards, modals"
+    },
+    "pill": {
+      "value": "999px",
+      "usage": "Pill buttons, badges"
+    }
+  },
+  "migration_notes": {
+    "from_v1": "Token values aligned with WCAG AA compliance",
+    "breaking_changes": "Muted text color darkened from 2.54:1 to 4.52:1 contrast",
+    "rollback": "v1 alias maintained at .codex/phase1_audit/phase1_design_tokens.json",
+    "css_variables": "All tokens exported as CSS custom properties (--token-name)",
+    "streamlit_integration": "JSON consumed by streamlit_app.py via pathlib.Path"
+  }
+}

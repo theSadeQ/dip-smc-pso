@@ -32,7 +32,7 @@ import re
 import json
 import argparse
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 from datetime import datetime
 
 
@@ -77,7 +77,6 @@ def fix_lexers_in_file(
             "fixes_applied": 0
         }
 
-    original_content = content
     total_fixes = 0
     fixes_by_lexer = {}
 
