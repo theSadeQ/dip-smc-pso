@@ -670,7 +670,64 @@ python -m pip list | grep mcp
 
 ------
 
-## 20) Success Criteria
+## 20) Phase 3 UI/UX Status & Maintenance Mode
+
+**Phase 3 Completion**: ✅ **COMPLETE** (October 9-16, 2025)
+**Status**: Merged to main | UI work in maintenance mode
+**Handoff Document**: `.codex/phase3/HANDOFF.md`
+
+### What Was Accomplished
+
+**UI Issues Resolved**: 17/34 (50% | All Critical/High severity complete)
+- WCAG 2.1 Level AA compliant (97.8/100 Lighthouse accessibility)
+- Design tokens consolidated (18 core tokens, 94% stability)
+- Responsive validated (4 breakpoints: 375px, 768px, 1024px, 1920px)
+- Cross-platform parity (Sphinx + Streamlit, 100% token reuse)
+- Performance optimized (<3KB gzipped CSS budget met)
+
+**Browser Support**:
+- ✅ Chromium (Chrome/Edge): Validated across all UI features
+- ⏸️ Firefox/Safari: Deferred (research audience <5%, standard CSS)
+
+### UI Maintenance Mode (Current Policy)
+
+**DO**:
+- Fix Critical/High severity bugs if users report issues
+- Update docs when adding new controllers/features
+- Maintain WCAG AA compliance for new UI elements
+
+**DON'T**:
+- Proactively work on 17 deferred Medium/Low issues
+- Spend time on Firefox validation
+- Implement "nice-to-have" UI polish
+
+### 17 Deferred Issues
+
+**Medium Severity (7)**: UI-006, UI-009, UI-010, UI-011, UI-015, UI-017, UI-018
+**Low Severity (10)**: UI-012, UI-013, UI-014, UI-016, UI-019, UI-028, UI-030, UI-032, UI-034
+
+**Rationale for Deferral**:
+- All Critical/High resolved (no user blockers)
+- Diminishing returns (2-3 weeks for <10% improvement)
+- Research focus prioritized over UI perfectionism
+
+### Phase 4 Decision
+
+**Skip Phase 4 Production Hardening** if:
+- Research-only use case (local/academic environment)
+- Single-user operation
+- No cloud deployment planned
+
+**Execute Phase 4** only if:
+- Planning production deployment (cloud, multi-user)
+- Industrial applications requiring stability
+- Multi-threaded operation needed
+
+**Current Recommendation**: Skip Phase 4, focus on research (controllers, PSO, SMC theory)
+
+------
+
+## 21) Success Criteria
 
 - Clean root (≤ 12 visible entries), caches removed, backups archived.
 - Test coverage gates met (85% overall / 95% critical / 100% safety‑critical).
