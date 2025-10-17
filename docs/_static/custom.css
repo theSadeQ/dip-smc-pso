@@ -1339,6 +1339,20 @@ ol.instructions li,
 }
 
 /* ============================================================================
+   UI-017 FIX: Controllers index bullet wrapping
+   Issue: Long controller names wrapped under the bullet glyph, reducing clarity
+   Solution: Outdent bullets while keeping copy aligned to an 16px grid
+   ============================================================================ */
+.controller-index ul {
+    list-style-position: outside;
+}
+
+.controller-index ul li {
+    padding-left: var(--space-4);
+    text-indent: calc(-1 * var(--space-4));
+}
+
+/* ============================================================================
    21. SIDEBAR-CONTRAST FIX: SPHINX SIDEBAR NAVIGATION CONTRAST (WCAG AA)
    ============================================================================ */
 
