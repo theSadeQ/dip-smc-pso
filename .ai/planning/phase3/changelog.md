@@ -128,6 +128,7 @@
 | 2025-10-17 | UI-013 | Added prefers-reduced-motion override for admonition/status animations | Codex | docs/_static/custom.css:296 |
 | 2025-10-17 | UI-030 | Realigned footer pager arrows with 8px icon/text gap | Codex | docs/_static/custom.css:1222 |
 | 2025-10-17 | UI-019 | Added module overview spacing rhythm using 16px token | Codex | docs/_static/custom.css:1287 |
+| 2025-10-17 | UI-014 | Increased admonition padding using spacing tokens for breathing room | Codex | docs/_static/custom.css:258 |
 | TBD | UI-026 | Enhanced anchor rail active states (color + indicator) | TBD | Right-rail navigation GIF |
 | TBD | UI-027 | Improved back-to-top FAB shadow/contrast | TBD | Hover state validation |
 | TBD | UI-033 | Added sticky header to coverage matrix table | TBD | Scroll interaction test |
