@@ -125,6 +125,7 @@
 
 | Date | Issue | Summary | Owner | Evidence |
 |------|-------|---------|-------|----------|
+| 2025-10-17 | UI-013 | Added prefers-reduced-motion override for admonition/status animations | Codex | docs/_static/custom.css:296 |
 | TBD | UI-026 | Enhanced anchor rail active states (color + indicator) | TBD | Right-rail navigation GIF |
 | TBD | UI-027 | Improved back-to-top FAB shadow/contrast | TBD | Hover state validation |
 | TBD | UI-033 | Added sticky header to coverage matrix table | TBD | Scroll interaction test |
