@@ -529,6 +529,28 @@ stat docs/guides/getting-started.md docs/_build/html/guides/getting-started.html
 - Analyzing test patterns or flaky tests
 - Keywords: "test failure", "pytest debug", "why test failed"
 
+#### Sequential-Thinking MCP - Auto-trigger when:
+- **Planning complex multi-step projects** (CRITICAL - often missed!)
+- Debugging complex issues requiring systematic investigation
+- Analyzing unclear situations needing step-by-step reasoning
+- Cross-referencing multiple files to verify information
+- Making decisions with multiple competing factors
+- Keywords: "plan", "figure out", "investigate", "verify", "analyze situation", "debug", "systematic", "multi-step"
+
+**Planning Examples** (MUST trigger sequential-thinking):
+- "Plan how to complete 17 deferred issues" → systematic breakdown needed
+- "Figure out which issues are actually done" → investigation required
+- "Verify what remains to be completed" → cross-reference analysis
+- "Create execution strategy for Phase X" → multi-factor decision-making
+- "Analyze project status and recommend next steps" → systematic evaluation
+
+**Red Flags** (trigger sequential-thinking immediately):
+- ❗ "Need to figure out..." → Investigation required
+- ❗ "Cross-reference X with Y" → Multi-file systematic analysis
+- ❗ "Verify whether..." → Evidence-based reasoning
+- ❗ "Plan to..." → Multi-step planning
+- ❗ "Unclear status of..." → Systematic investigation needed
+
 ### 20.2 Configuration
 
 **All servers enabled:** `.ai/config/settings.local.json` sets `"enableAllProjectMcpServers": true`
@@ -615,7 +637,7 @@ analyze git blame for authorship, and generate a cross-reference report"
 | **numpy-mcp** | matrix, eigenvalue, numerical | Linear algebra ops |
 | **filesystem** | inspect, read, analyze files | Code/log analysis |
 | **github** | issue, PR, commit | Issue tracking |
-| **sequential-thinking** | debug, systematic, multi-step | Complex debugging |
+| **sequential-thinking** | **plan**, debug, investigate, verify, figure out, analyze situation | **Planning**, debugging, systematic analysis |
 | **git-mcp** | git history, branch, stats | Advanced Git ops |
 | **sqlite-mcp** | query, database, results | PSO results DB |
 | **pytest-mcp** | test failure, pytest, debug | Test debugging |
@@ -656,11 +678,12 @@ Claude: context7 (find file) → filesystem (read code) →
 1. If user mentions 2+ domains (docs + data + testing), use 2+ MCPs
 2. For "complete analysis" tasks, use full pipeline (3-5 MCPs minimum)
 3. For debugging tasks, always combine sequential-thinking + domain-specific MCPs
-4. For research workflows, always: context7 → filesystem → relevant analysis MCPs
-5. Never ask user "should I also analyze X?" - just do it with appropriate MCP
-6. **Understand intent, not keywords**: "where is" = search, "check" = analyze, "test" = validate
-7. **Be proactive**: If task implies data analysis, use pandas even if not explicitly requested
-8. **Chain automatically**: Don't wait for user to ask for next step, complete the full workflow
+4. **For PLANNING tasks, ALWAYS use sequential-thinking first** (most commonly missed!)
+5. For research workflows, always: context7 → filesystem → relevant analysis MCPs
+6. Never ask user "should I also analyze X?" - just do it with appropriate MCP
+7. **Understand intent, not keywords**: "where is" = search, "check" = analyze, "test" = validate, **"plan" = systematic thinking**
+8. **Be proactive**: If task implies data analysis, use pandas even if not explicitly requested
+9. **Chain automatically**: Don't wait for user to ask for next step, complete the full workflow
 
 ### 20.8 Natural Language Flexibility (For Users)
 
