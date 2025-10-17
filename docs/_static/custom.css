@@ -1068,7 +1068,9 @@ article .sd-container-fluid {
 #quick-navigation ~ h4 + ul {
     column-count: 2;           /* 2 columns for better readability */
     column-gap: var(--space-5); /* 24px gutter between columns */
+    column-width: calc(var(--space-4) * 12); /* Target ~192px column width */
     margin-bottom: var(--space-4); /* 16px spacing after each list group */
+    max-width: calc(var(--space-4) * 25); /* Cap list width at 400px for scannability */
 }
 
 /* Prevent list items from breaking across columns */
@@ -1114,6 +1116,8 @@ article .sd-container-fluid {
     #quick-navigation ~ h4 + ul {
         column-count: 1;           /* Single column on mobile */
         column-gap: 0;
+        column-width: 100%;
+        max-width: 100%;
     }
 }
 
@@ -1123,6 +1127,8 @@ article .sd-container-fluid {
     #quick-navigation ~ h4 + ul {
         column-count: 3;           /* 3 columns on wide screens */
         column-gap: var(--space-5); /* Maintain 24px gutter */
+        column-width: calc(var(--space-4) * 12);
+        max-width: calc(var(--space-4) * 45); /* Allow up to 720px width on desktop */
     }
 }
 
