@@ -1285,6 +1285,16 @@ article > ul li strong:first-child {
 }
 
 /* ============================================================================
+   UI-019 FIX: Module overview spacing rhythm
+   Issue: Dense module overview stacks lacked vertical separation
+   Solution: Apply 16px token spacing to module overview sections and followers
+   ============================================================================ */
+.module-overview,
+#module-overview ~ * {
+    margin-bottom: var(--space-4);
+}
+
+/* ============================================================================
    21. SIDEBAR-CONTRAST FIX: SPHINX SIDEBAR NAVIGATION CONTRAST (WCAG AA)
    ============================================================================ */
 
