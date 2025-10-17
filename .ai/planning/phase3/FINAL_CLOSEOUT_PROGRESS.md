@@ -9,4 +9,4 @@
 - [x] UI-010: Quick navigation link color semantics
 - [x] UI-017: Controllers index bullet wrapping
 - [x] UI-018: Quick navigation column width refinement
-- [ ] UI-015: Warning admonition color-blind patterns
+- [x] UI-015: Warning admonition color-blind patterns
