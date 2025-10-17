@@ -1080,6 +1080,34 @@ article .sd-container-fluid {
     margin-bottom: var(--space-2); /* 8px spacing between links */
 }
 
+/* ============================================================================
+   UI-010 FIX: Quick navigation link color semantics
+   Issue: Utility links inherited error red, implying destructive action
+   Solution: Use primary palette with clear hover/focus affordances
+   ============================================================================ */
+#quick-navigation ~ h3 + ul li a,
+#quick-navigation ~ h4 + ul li a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+#quick-navigation ~ h3 + ul li a:visited,
+#quick-navigation ~ h4 + ul li a:visited {
+    color: var(--color-primary);
+}
+
+#quick-navigation ~ h3 + ul li a:hover,
+#quick-navigation ~ h4 + ul li a:hover,
+#quick-navigation ~ h3 + ul li a:focus-visible,
+#quick-navigation ~ h4 + ul li a:focus-visible {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: var(--space-1);
+}
+
 /* Responsive: Single column on mobile */
 @media (max-width: 767px) {
     #quick-navigation ~ h3 + ul,
