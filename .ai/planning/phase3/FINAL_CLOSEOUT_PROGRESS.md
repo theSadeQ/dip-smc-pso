@@ -3,7 +3,7 @@
 - [x] UI-013: Admonition animations respect reduced-motion preferences
 - [x] UI-030: Footer pager spacing
 - [x] UI-019: Module overview spacing
-- [ ] UI-014: Admonition layout padding
+- [x] UI-014: Admonition layout padding
 - [ ] UI-016: Enumerated instruction typography
 - [ ] UI-012: Coverage matrix header zebra striping
 - [ ] UI-010: Quick navigation link color semantics
