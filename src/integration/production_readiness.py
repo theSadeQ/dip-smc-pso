@@ -487,7 +487,7 @@ class ProductionReadinessScorer:
     def _get_gate_recommendations(self, gate_name: str, current_value: float, threshold: float) -> List[str]:
         """Get recommendations for improving a specific quality gate."""
         if current_value >= threshold:
-            return ["✅ Quality gate passed"]
+            return ["[OK] Quality gate passed"]
 
         gap = threshold - current_value
         recommendations = []
@@ -574,28 +574,28 @@ class ProductionReadinessScorer:
 
         # Add level-specific recommendations
         if readiness_level == ReadinessLevel.BLOCKED:
-            recommendations.append("🚨 BLOCKED: Address critical quality gate failures before deployment")
+            recommendations.append("[CRITICAL] BLOCKED: Address critical quality gate failures before deployment")
         elif readiness_level == ReadinessLevel.NOT_READY:
-            recommendations.append("⛔ NOT READY: Significant improvements required across multiple areas")
+            recommendations.append("[BLOCKED] NOT READY: Significant improvements required across multiple areas")
         elif readiness_level == ReadinessLevel.NEEDS_IMPROVEMENT:
-            recommendations.append("⚠️ IMPROVEMENT NEEDED: Address quality gaps before production")
+            recommendations.append("[WARN] IMPROVEMENT NEEDED: Address quality gaps before production")
         elif readiness_level == ReadinessLevel.CONDITIONAL_READY:
-            recommendations.append("✅ CONDITIONALLY READY: Deploy with enhanced monitoring")
+            recommendations.append("[OK] CONDITIONALLY READY: Deploy with enhanced monitoring")
         else:
-            recommendations.append("🚀 PRODUCTION READY: System meets all quality requirements")
+            recommendations.append("[READY] PRODUCTION READY: System meets all quality requirements")
 
         # Add gate-specific recommendations
         failed_gates = [gate for gate in quality_gates if not gate.passed]
         if failed_gates:
-            recommendations.append(f"📋 Address {len(failed_gates)} quality gate failures:")
+            recommendations.append(f"[TODO] Address {len(failed_gates)} quality gate failures:")
             for gate in failed_gates[:5]:  # Top 5 failures
                 recommendations.extend([f"   - {rec}" for rec in gate.recommendations[:2]])
 
         # Add general recommendations
         recommendations.extend([
-            "🧪 Run comprehensive integration tests before deployment",
-            "📊 Monitor production readiness trends and address regressions",
-            "🔍 Validate cross-domain compatibility regularly"
+            "[TEST] Run comprehensive integration tests before deployment",
+            "[DATA] Monitor production readiness trends and address regressions",
+            "[SCAN] Validate cross-domain compatibility regularly"
         ])
 
         return recommendations
@@ -709,7 +709,7 @@ def main():
 
     scorer = ProductionReadinessScorer()
 
-    print("🔍 Starting production readiness assessment...")
+    print("[SCAN] Starting production readiness assessment...")
     assessment = scorer.assess_production_readiness(
         run_tests=not args.no_tests,
         include_benchmarks=args.benchmarks,
@@ -725,7 +725,7 @@ def main():
     print(f"Deployment Approved: {'YES' if assessment.deployment_approved else 'NO'}")
     print(f"Confidence: {assessment.confidence_level}")
 
-    print("\n📊 COMPONENT SCORES:")
+    print("\n[DATA] COMPONENT SCORES:")
     print(f"  Testing: {assessment.testing_score:.1f}/100")
     print(f"  Coverage: {assessment.coverage_score:.1f}/100")
     print(f"  Compatibility: {assessment.compatibility_score:.1f}/100")
@@ -734,11 +734,11 @@ def main():
     print(f"  Documentation: {assessment.documentation_score:.1f}/100")
 
     if assessment.blocking_issues:
-        print("\n🚨 BLOCKING ISSUES:")
+        print("\n[CRITICAL] BLOCKING ISSUES:")
         for issue in assessment.blocking_issues:
             print(f"  - {issue}")
 
-    print("\n💡 RECOMMENDATIONS:")
+    print("\n[TIP] RECOMMENDATIONS:")
     for rec in assessment.recommendations[:5]:  # Top 5 recommendations
         print(f"  {rec}")
 
@@ -747,7 +747,7 @@ def main():
         export_path = Path(args.export)
         with open(export_path, 'w') as f:
             json.dump(asdict(assessment), f, indent=2, default=str)
-        print(f"\n📄 Results exported to: {export_path}")
+        print(f"\n[FILE] Results exported to: {export_path}")
 
 if __name__ == "__main__":
     main()
