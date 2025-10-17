@@ -86,6 +86,42 @@ Claude: [Triggers sequential-thinking MCP automatically]
 - Output: Text updates, status tracking, coordination docs
 - Validation: Markdown lint, link checks, accuracy verification
 
+### What About Non-UI Implementation Work?
+
+**Examples of non-UI implementation:**
+- Python controller code (src/controllers/*.py)
+- Backend logic (simulation engine, optimization algorithms)
+- Test implementation (tests/*.py)
+- Configuration schema changes (config.yaml, validation)
+- CLI/API endpoints (simulate.py, streamlit_app.py)
+
+**Who handles non-UI implementation?**
+
+**Option 1: Codex (No Context Required)**
+- Straightforward algorithm fixes
+- Test writing from specifications
+- Refactoring with clear requirements
+- Checklist-driven implementation
+
+**Option 2: Claude (Context Required)**
+- Fixes requiring project history knowledge
+- Cross-file refactoring (changes across multiple modules)
+- Architecture decisions (affects multiple components)
+- Debugging complex issues (needs sequential-thinking MCP)
+
+**Key Principle**: Separate **implementation** (any code) from **coordination** (planning, tracking, documentation), not just "UI vs non-UI".
+
+**Example Scenarios:**
+
+| Task | Agent | Reason |
+|------|-------|--------|
+| Fix 10 controller unit tests | Codex | Checklist-driven, isolated files |
+| Refactor PSO optimizer (affects 5 modules) | Claude | Cross-file, needs context |
+| Add new controller type (template provided) | Codex | Follows template, isolated |
+| Debug memory leak (unknown root cause) | Claude | Needs systematic investigation (sequential-thinking MCP) |
+| Implement 15 small CSS fixes | Codex | Isolated, checklist-driven |
+| Write integration tests for factory system | Either | Codex (if specs clear) or Claude (if needs context) |
+
 ---
 
 ## Role Division
@@ -120,18 +156,27 @@ CLAUDE.md (Section 21)
 
 ### Codex's Responsibilities
 
-**Implementation & Execution**:
+**Implementation & Execution** (UI or non-UI):
 - Fix UI issues (CSS, HTML, theme)
+- Implement Python code from specifications (controllers, tests, utilities)
+- Execute checklist-driven tasks (10+ small fixes)
+- Refactor isolated modules (single-file changes)
 - Update implementation tracking (changelog.md, FINAL_CLOSEOUT_PROGRESS.md)
 - Run builds and verify changes
 - Commit work with proper messages
-- Test visual changes
 
-**Why Codex handles UI**:
-- Excellent at CSS/HTML manipulation
-- Can quickly iterate on visual fixes
-- Good at following explicit checklists
-- Works independently without context
+**When Codex is the right choice**:
+- Task is checklist-driven (clear list of 5+ items)
+- No project context needed (works from specifications)
+- Isolated file changes (minimal cross-file dependencies)
+- Template-based work (following existing patterns)
+- Straightforward implementation (no architectural decisions)
+
+**When Codex is NOT the right choice**:
+- Needs project history understanding
+- Requires cross-file refactoring (5+ files affected)
+- Debugging unknown issues (use Claude + sequential-thinking MCP)
+- Architectural decisions needed
 
 **Files Codex Modifies** (Phase 3 example):
 ```
@@ -604,11 +649,19 @@ docs/_static/custom.css (+108 lines)
 
 ## Summary
 
-**Key Principle**: Plan UI separately, use sequential-thinking MCP, define clear file boundaries.
+**Key Principle**: Separate **implementation** from **coordination**, use sequential-thinking MCP, define clear file boundaries.
 
-**Claude's Role**: Planning, coordination, administrative tasks, markdown docs
+**Claude's Role**:
+- Planning & coordination (uses sequential-thinking MCP)
+- Administrative tasks (tracking, tags, session state)
+- Context-dependent implementation (cross-file refactoring, debugging)
+- Documentation (markdown, planning files)
 
-**Codex's Role**: Implementation, UI fixes, execution, following checklists
+**Codex's Role**:
+- Checklist-driven implementation (UI or non-UI)
+- Isolated module fixes (Python, CSS, tests)
+- Template-based development (following specs)
+- Execution without context needs
 
 **Success Formula**:
 ```
