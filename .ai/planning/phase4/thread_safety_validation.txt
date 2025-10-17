@@ -1,0 +1,35 @@
+C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\pytest_asyncio\plugin.py:252: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts =============================
+platform win32 -- Python 3.12.6, pytest-8.3.5, pluggy-1.6.0 -- C:\Program Files\Python312\python.exe
+cachedir: .pytest_cache
+hypothesis profile 'default'
+benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+metadata: {'Python': '3.12.6', 'Platform': 'Windows-11-10.0.26100-SP0', 'Packages': {'pytest': '8.3.5', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.10.0', 'hypothesis': '6.139.2', 'asyncio': '1.2.0', 'base-url': '2.1.0', 'benchmark': '4.0.0', 'cov': '7.0.0', 'html': '4.1.1', 'metadata': '3.1.1', 'playwright': '0.7.1'}, 'Base URL': ''}
+rootdir: D:\Projects\main
+configfile: .pytest.ini
+plugins: anyio-4.10.0, hypothesis-6.139.2, asyncio-1.2.0, base-url-2.1.0, benchmark-4.0.0, cov-7.0.0, html-4.1.1, metadata-3.1.1, playwright-0.7.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 11 items
+
+tests/test_integration/test_thread_safety/test_production_thread_safety.py::TestProductionThreadSafety::test_concurrent_classical_smc_creation_100 PASSED [  9%]
+tests/test_integration/test_thread_safety/test_production_thread_safety.py::TestProductionThreadSafety::test_concurrent_mixed_controller_types PASSED [ 18%]
+tests/test_integration/test_thread_safety/test_production_thread_safety.py::TestProductionThreadSafety::test_concurrent_create_destroy_cycles PASSED [ 27%]
+tests/test_integration/test_thread_safety/test_production_thread_safety.py::TestProductionThreadSafety::test_pso_concurrent_fitness_evaluations PASSED [ 36%]
+tests/test_integration/test_thread_safety/test_production_thread_safety.py::TestProductionThreadSafety::test_pso_particle_isolation PASSED [ 45%]
+tests/test_integration/test_thread_safety/test_production_thread_safety.py::TestProductionThreadSafety::test_factory_registry_concurrent_reads_1000 PASSED [ 54%]
+tests/test_integration/test_thread_safety/test_production_thread_safety.py::TestProductionThreadSafety::test_factory_registry_mixed_read_write PASSED [ 63%]
+tests/test_integration/test_thread_safety/test_production_thread_safety.py::TestProductionThreadSafety::test_no_deadlock_creation_and_pso PASSED [ 72%]
+tests/test_integration/test_thread_safety/test_production_thread_safety.py::TestProductionThreadSafety::test_no_deadlock_multiple_factory_operations PASSED [ 81%]
+tests/test_integration/test_thread_safety/test_production_thread_safety.py::TestProductionThreadSafety::test_memory_safety_1000_creation_cycles PASSED [ 90%]
+tests/test_integration/test_thread_safety/test_production_thread_safety.py::TestProductionThreadSafety::test_weakref_cleanup_concurrent PASSED [100%]
+
+============================== warnings summary ===============================
+tests/test_integration/test_thread_safety/test_production_thread_safety.py::TestProductionThreadSafety::test_concurrent_mixed_controller_types
+  D:\Projects\main\src\controllers\smc\algorithms\adaptive\config.py:83: UserWarning: Large adaptation rate may cause instability
+    warnings.warn("Large adaptation rate may cause instability", UserWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 11 passed, 1 warning in 16.60s ========================
