@@ -7,6 +7,8 @@ Lyapunov Decrease Ratio (LDR) and stability monitoring for control systems.
 
 Implements the stability monitoring solution from Issue #1 resolution plan,
 including LDR monitoring, saturation tracking, and dynamics conditioning.
+
+Thread Safety: All counters use AtomicCounter for race-free increments.
 """
 
 from __future__ import annotations
@@ -14,6 +16,8 @@ import time
 from typing import List, Dict, Any, Optional
 import numpy as np
 from collections import deque
+
+from src.utils.thread_safety import AtomicCounter
 
 
 class LyapunovDecreaseMonitor:
@@ -55,9 +59,9 @@ class LyapunovDecreaseMonitor:
         # Lyapunov function history (V = 0.5 * sigma^2)
         self.lyapunov_history: deque = deque(maxlen=self.window_samples)
 
-        # Monitoring state
-        self.sample_count = 0
-        self.alert_count = 0
+        # Monitoring state (thread-safe atomic counters)
+        self.sample_count = AtomicCounter(0)
+        self.alert_count = AtomicCounter(0)
         self.last_ldr = 1.0
         self.alert_active = False
 
@@ -74,7 +78,7 @@ class LyapunovDecreaseMonitor:
         dict
             Monitoring results with LDR, alert status, and metrics
         """
-        self.sample_count += 1
+        current_count = self.sample_count.increment()
 
         # Store sigma values
         self.sigma_history.append(sigma.copy())
@@ -90,12 +94,12 @@ class LyapunovDecreaseMonitor:
             self.lyapunov_history.append(lyapunov_val)
 
         # Skip analysis during transient period
-        if self.sample_count <= self.transient_samples:
+        if current_count <= self.transient_samples:
             return {
                 'ldr': 1.0,
                 'alert': False,
                 'status': 'transient',
-                'sample_count': self.sample_count,
+                'sample_count': current_count,
                 'sigma_dot_sigma': 0.0
             }
 
@@ -106,7 +110,7 @@ class LyapunovDecreaseMonitor:
             # Check for alert condition
             self.alert_active = self.last_ldr < self.ldr_threshold
             if self.alert_active:
-                self.alert_count += 1
+                self.alert_count.increment()
 
         # Compute sigma*sigma_dot for reachability analysis
         sigma_dot_sigma = 0.0
@@ -118,8 +122,8 @@ class LyapunovDecreaseMonitor:
             'ldr': self.last_ldr,
             'alert': self.alert_active,
             'status': 'monitoring',
-            'sample_count': self.sample_count,
-            'alert_count': self.alert_count,
+            'sample_count': self.sample_count.get(),
+            'alert_count': self.alert_count.get(),
             'sigma_dot_sigma': sigma_dot_sigma,
             'lyapunov_value': self.lyapunov_history[-1] if self.lyapunov_history else 0.0
         }
@@ -143,8 +147,8 @@ class LyapunovDecreaseMonitor:
         self.sigma_history.clear()
         self.sigma_dot_history.clear()
         self.lyapunov_history.clear()
-        self.sample_count = 0
-        self.alert_count = 0
+        self.sample_count.reset()
+        self.alert_count.reset()
         self.last_ldr = 1.0
         self.alert_active = False
 
@@ -189,10 +193,10 @@ class SaturationMonitor:
         self.force_history: deque = deque(maxlen=self.window_samples)
         self.rate_history: deque = deque(maxlen=self.window_samples)
 
-        # Monitoring state
-        self.sample_count = 0
-        self.saturation_count = 0
-        self.rate_hit_count = 0
+        # Monitoring state (thread-safe atomic counters)
+        self.sample_count = AtomicCounter(0)
+        self.saturation_count = AtomicCounter(0)
+        self.rate_hit_count = AtomicCounter(0)
         self.continuous_saturation_time = 0.0
         self.max_continuous_saturation = 0.0
         self.last_force = 0.0
@@ -210,14 +214,14 @@ class SaturationMonitor:
         dict
             Saturation monitoring results
         """
-        self.sample_count += 1
+        current_count = self.sample_count.increment()
 
         # Store force
         self.force_history.append(force)
 
         # Compute rate if we have previous sample
         rate = 0.0
-        if self.sample_count > 1:
+        if current_count > 1:
             rate = abs(force - self.last_force) / self.dt
             self.rate_history.append(rate)
 
@@ -226,7 +230,7 @@ class SaturationMonitor:
         # Check saturation
         is_saturated = abs(force) >= self.max_force * 0.99  # 99% of max
         if is_saturated:
-            self.saturation_count += 1
+            self.saturation_count.increment()
             self.continuous_saturation_time += self.dt
         else:
             if self.continuous_saturation_time > self.max_continuous_saturation:
@@ -237,10 +241,10 @@ class SaturationMonitor:
         max_rate = self.max_force / self.dt
         is_rate_limited = rate >= max_rate * 0.99
         if is_rate_limited:
-            self.rate_hit_count += 1
+            self.rate_hit_count.increment()
 
         # Skip analysis during transient
-        if self.sample_count <= self.transient_samples:
+        if current_count <= self.transient_samples:
             return {
                 'duty': 0.0,
                 'rate_hit_rate': 0.0,
@@ -290,9 +294,9 @@ class SaturationMonitor:
         """Reset monitoring state."""
         self.force_history.clear()
         self.rate_history.clear()
-        self.sample_count = 0
-        self.saturation_count = 0
-        self.rate_hit_count = 0
+        self.sample_count.reset()
+        self.saturation_count.reset()
+        self.rate_hit_count.reset()
         self.continuous_saturation_time = 0.0
         self.max_continuous_saturation = 0.0
         self.last_force = 0.0
@@ -331,8 +335,8 @@ class DynamicsConditioningMonitor:
 
         # Condition number and fallback history
         self.condition_history: deque = deque(maxlen=self.window_samples)
-        self.fallback_count = 0
-        self.sample_count = 0
+        self.fallback_count = AtomicCounter(0)
+        self.sample_count = AtomicCounter(0)
 
     def update(self, mass_matrix: np.ndarray, used_fallback: bool = False) -> Dict[str, Any]:
         """Update monitor with dynamics matrix info.
@@ -349,7 +353,7 @@ class DynamicsConditioningMonitor:
         dict
             Conditioning monitoring results
         """
-        self.sample_count += 1
+        self.sample_count.increment()
 
         # Compute condition number
         try:
@@ -364,7 +368,7 @@ class DynamicsConditioningMonitor:
 
         # Track fallback usage
         if used_fallback:
-            self.fallback_count += 1
+            self.fallback_count.increment()
 
         # Analyze conditioning
         if len(self.condition_history) == 0:
@@ -375,9 +379,10 @@ class DynamicsConditioningMonitor:
         p99_cond = np.percentile(conditions, 99)
 
         # Alert conditions
+        fallback_count_val = self.fallback_count.get()
         median_alert = median_cond > self.condition_threshold
         spike_alert = p99_cond > self.spike_threshold
-        fallback_alert = self.fallback_count > self.fallback_threshold
+        fallback_alert = fallback_count_val > self.fallback_threshold
 
         alert = median_alert or spike_alert or fallback_alert
 
@@ -386,7 +391,7 @@ class DynamicsConditioningMonitor:
             'status': 'monitoring',
             'median_condition': median_cond,
             'p99_condition': p99_cond,
-            'fallback_count': self.fallback_count,
+            'fallback_count': fallback_count_val,
             'current_condition': conditions[-1],
             'median_alert': median_alert,
             'spike_alert': spike_alert,
@@ -396,8 +401,8 @@ class DynamicsConditioningMonitor:
     def reset(self) -> None:
         """Reset monitoring state."""
         self.condition_history.clear()
-        self.fallback_count = 0
-        self.sample_count = 0
+        self.fallback_count.reset()
+        self.sample_count.reset()
 
 
 class StabilityMonitoringSystem:
@@ -445,8 +450,8 @@ class StabilityMonitoringSystem:
             dt=dt
         )
 
-        # System-wide monitoring state
-        self.episode_count = 0
+        # System-wide monitoring state (thread-safe atomic counter)
+        self.episode_count = AtomicCounter(0)
         self.violation_history: List[Dict[str, Any]] = []
 
     def update(self, sigma: np.ndarray, control_force: float,
@@ -498,7 +503,7 @@ class StabilityMonitoringSystem:
             'saturation': sat_result,
             'conditioning': cond_result,
             'violation_count': len(self.violation_history),
-            'episode': self.episode_count
+            'episode': self.episode_count.get()
         }
 
         return result
@@ -509,19 +514,19 @@ class StabilityMonitoringSystem:
 
         # Compute stability metrics
         total_samples = max(
-            self.ldr_monitor.sample_count,
-            self.saturation_monitor.sample_count,
-            self.conditioning_monitor.sample_count
+            self.ldr_monitor.sample_count.get(),
+            self.saturation_monitor.sample_count.get(),
+            self.conditioning_monitor.sample_count.get()
         )
 
         violation_rate = len(self.violation_history) / max(1, total_samples)
 
         return {
-            'episode_count': self.episode_count,
+            'episode_count': self.episode_count.get(),
             'total_violations': len(self.violation_history),
             'violation_rate': violation_rate,
             'recent_violations': recent_violations,
-            'ldr_alert_count': self.ldr_monitor.alert_count,
+            'ldr_alert_count': self.ldr_monitor.alert_count.get(),
             'saturation_violations': len([v for v in self.violation_history if v['saturation_alert']]),
             'conditioning_violations': len([v for v in self.violation_history if v['conditioning_alert']]),
             'stability_score': max(0.0, 1.0 - violation_rate * 10)  # 0-1 scale
@@ -529,7 +534,7 @@ class StabilityMonitoringSystem:
 
     def start_new_episode(self) -> None:
         """Start monitoring a new episode."""
-        self.episode_count += 1
+        self.episode_count.increment()
         # Don't reset monitors - keep cumulative data for analysis
 
     def reset(self) -> None:
@@ -537,5 +542,5 @@ class StabilityMonitoringSystem:
         self.ldr_monitor.reset()
         self.saturation_monitor.reset()
         self.conditioning_monitor.reset()
-        self.episode_count = 0
+        self.episode_count.reset()
         self.violation_history.clear()

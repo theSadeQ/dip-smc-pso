@@ -487,7 +487,7 @@ class ProductionReadinessScorer:
     def _get_gate_recommendations(self, gate_name: str, current_value: float, threshold: float) -> List[str]:
         """Get recommendations for improving a specific quality gate."""
         if current_value >= threshold:
-            return ["✅ Quality gate passed"]
+            return ["[OK] Quality gate passed"]
 
         gap = threshold - current_value
         recommendations = []
@@ -574,28 +574,28 @@ class ProductionReadinessScorer:
 
         # Add level-specific recommendations
         if readiness_level == ReadinessLevel.BLOCKED:
-            recommendations.append("🚨 BLOCKED: Address critical quality gate failures before deployment")
+            recommendations.append("[CRITICAL] BLOCKED: Address critical quality gate failures before deployment")
         elif readiness_level == ReadinessLevel.NOT_READY:
-            recommendations.append("⛔ NOT READY: Significant improvements required across multiple areas")
+            recommendations.append("[BLOCKED] NOT READY: Significant improvements required across multiple areas")
         elif readiness_level == ReadinessLevel.NEEDS_IMPROVEMENT:
-            recommendations.append("⚠️ IMPROVEMENT NEEDED: Address quality gaps before production")
+            recommendations.append("[WARN] IMPROVEMENT NEEDED: Address quality gaps before production")
         elif readiness_level == ReadinessLevel.CONDITIONAL_READY:
-            recommendations.append("✅ CONDITIONALLY READY: Deploy with enhanced monitoring")
+            recommendations.append("[OK] CONDITIONALLY READY: Deploy with enhanced monitoring")
         else:
-            recommendations.append("🚀 PRODUCTION READY: System meets all quality requirements")
+            recommendations.append("[READY] PRODUCTION READY: System meets all quality requirements")
 
         # Add gate-specific recommendations
         failed_gates = [gate for gate in quality_gates if not gate.passed]
         if failed_gates:
-            recommendations.append(f"📋 Address {len(failed_gates)} quality gate failures:")
+            recommendations.append(f"[TODO] Address {len(failed_gates)} quality gate failures:")
             for gate in failed_gates[:5]:  # Top 5 failures
                 recommendations.extend([f"   - {rec}" for rec in gate.recommendations[:2]])
 
         # Add general recommendations
         recommendations.extend([
-            "🧪 Run comprehensive integration tests before deployment",
-            "📊 Monitor production readiness trends and address regressions",
-            "🔍 Validate cross-domain compatibility regularly"
+            "[TEST] Run comprehensive integration tests before deployment",
+            "[DATA] Monitor production readiness trends and address regressions",
+            "[SCAN] Validate cross-domain compatibility regularly"
         ])
 
         return recommendations
@@ -666,6 +666,111 @@ class ProductionReadinessScorer:
         except Exception:
             return {}
 
+    def _serialize_assessment(self, assessment: ReadinessAssessment) -> dict:
+        """Serialize assessment to JSON-compatible dict, handling special types."""
+        try:
+            # Manually build dict to avoid asdict() issues with nested dataclasses
+            data = {
+                'timestamp': assessment.timestamp,
+                'overall_score': assessment.overall_score,
+                'readiness_level': assessment.readiness_level.value if isinstance(assessment.readiness_level, Enum) else str(assessment.readiness_level),
+                'testing_score': assessment.testing_score,
+                'coverage_score': assessment.coverage_score,
+                'compatibility_score': assessment.compatibility_score,
+                'performance_score': assessment.performance_score,
+                'safety_score': assessment.safety_score,
+                'documentation_score': assessment.documentation_score,
+                'deployment_approved': assessment.deployment_approved,
+                'confidence_level': assessment.confidence_level,
+                'improvement_trend': assessment.improvement_trend,
+                'blocking_issues': assessment.blocking_issues,
+                'recommendations': assessment.recommendations,
+            }
+
+            # Handle quality gates manually
+            if assessment.quality_gates:
+                data['quality_gates'] = [
+                    {
+                        'name': gate.name,
+                        'category': gate.category.value if isinstance(gate.category, Enum) else str(gate.category),
+                        'threshold': gate.threshold,
+                        'current_value': gate.current_value,
+                        'weight': gate.weight,
+                        'passed': gate.passed,
+                        'critical': gate.critical,
+                        'description': gate.description,
+                        'recommendations': gate.recommendations
+                    }
+                    for gate in assessment.quality_gates
+                ]
+
+            # Handle optional nested dicts (skip dataclasses)
+            if assessment.pytest_results and isinstance(assessment.pytest_results, dict):
+                data['pytest_results'] = assessment.pytest_results
+            elif assessment.pytest_results:
+                # If it's a dataclass, convert only basic fields
+                data['pytest_results'] = {
+                    'timestamp': getattr(assessment.pytest_results, 'timestamp', None),
+                    'duration_seconds': getattr(assessment.pytest_results, 'duration_seconds', 0.0),
+                    'total_tests': getattr(assessment.pytest_results, 'total_tests', 0),
+                    'passed_tests': getattr(assessment.pytest_results, 'passed_tests', 0),
+                    'failed_tests': getattr(assessment.pytest_results, 'failed_tests', 0),
+                }
+
+            if assessment.coverage_metrics:
+                data['coverage_metrics'] = assessment.coverage_metrics
+
+            if assessment.compatibility_analysis:
+                data['compatibility_analysis'] = assessment.compatibility_analysis
+
+            if assessment.historical_comparison:
+                data['historical_comparison'] = assessment.historical_comparison
+
+            # Recursively ensure all values are JSON-compatible
+            return self._convert_to_json_compatible(data)
+
+        except Exception as e:
+            logger.warning(f"Failed to serialize assessment: {e}")
+            # Fallback: return minimal safe dict
+            return {
+                'timestamp': assessment.timestamp,
+                'overall_score': assessment.overall_score,
+                'readiness_level': assessment.readiness_level.value if isinstance(assessment.readiness_level, Enum) else str(assessment.readiness_level),
+                'error': str(e)
+            }
+
+    def _convert_to_json_compatible(self, obj: Any) -> Any:
+        """Recursively convert objects to JSON-compatible types."""
+        # Skip callable objects (methods, functions)
+        if callable(obj):
+            return None
+
+        if isinstance(obj, Enum):
+            return obj.value
+        elif isinstance(obj, dict):
+            # Filter out non-serializable dict values
+            return {
+                k: self._convert_to_json_compatible(v)
+                for k, v in obj.items()
+                if not callable(v) and not k.startswith('_')
+            }
+        elif isinstance(obj, (list, tuple)):
+            # Filter out non-serializable list items
+            return [
+                self._convert_to_json_compatible(item)
+                for item in obj
+                if not callable(item)
+            ]
+        elif hasattr(obj, '__dict__') and not isinstance(obj, type) and not callable(obj):
+            # Handle objects with __dict__ (non-primitive types)
+            return str(obj)
+        elif isinstance(obj, (str, int, float, bool, type(None))):
+            # Primitive types pass through
+            return obj
+        else:
+            # Convert unknown types to string
+            return str(obj)
+
     def _store_assessment(self, assessment: ReadinessAssessment):
         """Store assessment in database for historical tracking."""
         try:
@@ -690,7 +795,7 @@ class ProductionReadinessScorer:
                     assessment.deployment_approved,
                     assessment.confidence_level,
                     assessment.improvement_trend,
-                    json.dumps(asdict(assessment))
+                    json.dumps(self._serialize_assessment(assessment))
                 ))
         except Exception as e:
             logger.warning(f"Failed to store assessment: {e}")
@@ -709,7 +814,7 @@ def main():
 
     scorer = ProductionReadinessScorer()
 
-    print("🔍 Starting production readiness assessment...")
+    print("[SCAN] Starting production readiness assessment...")
     assessment = scorer.assess_production_readiness(
         run_tests=not args.no_tests,
         include_benchmarks=args.benchmarks,
@@ -725,7 +830,7 @@ def main():
     print(f"Deployment Approved: {'YES' if assessment.deployment_approved else 'NO'}")
     print(f"Confidence: {assessment.confidence_level}")
 
-    print("\n📊 COMPONENT SCORES:")
+    print("\n[DATA] COMPONENT SCORES:")
     print(f"  Testing: {assessment.testing_score:.1f}/100")
     print(f"  Coverage: {assessment.coverage_score:.1f}/100")
     print(f"  Compatibility: {assessment.compatibility_score:.1f}/100")
@@ -734,11 +839,11 @@ def main():
     print(f"  Documentation: {assessment.documentation_score:.1f}/100")
 
     if assessment.blocking_issues:
-        print("\n🚨 BLOCKING ISSUES:")
+        print("\n[CRITICAL] BLOCKING ISSUES:")
         for issue in assessment.blocking_issues:
             print(f"  - {issue}")
 
-    print("\n💡 RECOMMENDATIONS:")
+    print("\n[TIP] RECOMMENDATIONS:")
     for rec in assessment.recommendations[:5]:  # Top 5 recommendations
         print(f"  {rec}")
 
@@ -746,8 +851,8 @@ def main():
     if args.export:
         export_path = Path(args.export)
         with open(export_path, 'w') as f:
-            json.dump(asdict(assessment), f, indent=2, default=str)
-        print(f"\n📄 Results exported to: {export_path}")
+            json.dump(scorer._serialize_assessment(assessment), f, indent=2)
+        print(f"\n[FILE] Results exported to: {export_path}")
 
 if __name__ == "__main__":
     main()
