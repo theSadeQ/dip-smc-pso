@@ -579,12 +579,16 @@ table.docutils tr:last-child td {
 }
 
 /* Striped rows */
-table.docutils tr:nth-child(even) td {
-    background: var(--color-bg-tertiary);
+table.docutils tr:nth-child(even) td,
+table.docutils tr:nth-child(even) th {
+    background: var(--color-primary-light); /* Fallback tint */
+    background: color-mix(in srgb, var(--color-primary) 12%, var(--color-bg-primary) 88%);
 }
 
-table.docutils tr:nth-child(even):hover td {
-    background: #e0e7ff;
+table.docutils tr:nth-child(even):hover td,
+table.docutils tr:nth-child(even):hover th {
+    background: var(--color-primary-light);
+    background: color-mix(in srgb, var(--color-primary) 20%, var(--color-bg-primary) 80%);
 }
 
 /* ============================================================================
