@@ -110,7 +110,57 @@ README.md, CHANGELOG.md
 
 ------
 
-## 6) Key Technologies
+## 6) Educational Materials (.ai/edu)
+
+**Purpose**: Learning roadmaps for users at all skill levels, separate from project-specific documentation.
+
+**Directory**: `.ai/edu/` (Educational content, managed by Claude Code)
+
+### 6.1 Available Resources
+
+**Beginner Roadmap** (`.ai/edu/beginner-roadmap.md`):
+- **Target**: Complete beginners with ZERO coding/control theory background
+- **Duration**: 125-150 hours over 4-6 months
+- **Coverage**: Phase 1 (Computing, Python, Physics, Math) → Phase 2 (Control theory, SMC) → Phases 3-5 (Hands-on to mastery)
+- **Status**: Phases 1-2 complete (~2,000 lines), Phases 3-5 planned (~1,500-2,000 more lines)
+
+### 6.2 Integration with Main Documentation
+
+**Learning Path Progression**:
+```
+Path 0: Complete Beginner (NEW)
+  .ai/edu/beginner-roadmap.md (125-150 hours) →
+
+Path 1: Quick Start (EXISTING)
+  docs/guides/getting-started.md → Tutorial 01 (1-2 hours) →
+
+Paths 2-4: Advanced (EXISTING)
+  Tutorials 02-05, Theory, Research workflows
+```
+
+**Audience Segmentation**:
+- `.ai/edu/` → Prerequisites for absolute beginners (Path 0)
+- `docs/guides/` → Project-specific documentation (Paths 1-4)
+
+**Cross-References**:
+- Phase 5 of beginner roadmap connects to Tutorial 01
+- Getting started guide links to beginner roadmap for prerequisites
+- INDEX.md includes Path 0 reference
+
+### 6.3 Future Educational Content
+
+**Planned**:
+- Intermediate roadmap (advanced control theory, Python)
+- Quick reference cheatsheets (Python, Git, CLI)
+- Video curriculum (curated YouTube playlists)
+- Exercise solutions (worked examples)
+- FAQ for beginners
+
+**See**: `.ai/edu/README.md` for complete details
+
+------
+
+## 7) Key Technologies
 
 - Python 3.9+
 - NumPy, SciPy, Matplotlib
@@ -122,9 +172,9 @@ README.md, CHANGELOG.md
 
 ------
 
-## 7) Usage & Essential Commands
+## 8) Usage & Essential Commands
 
-### 7.1 Simulations
+### 8.1 Simulations
 
 ```bash
 python simulate.py --ctrl classical_smc --plot
@@ -133,7 +183,7 @@ python simulate.py --load tuned_gains.json --plot
 python simulate.py --print-config
 ```
 
-### 7.2 PSO Optimization
+### 8.2 PSO Optimization
 
 ```bash
 python simulate.py --ctrl classical_smc --run-pso --save gains_classical.json
@@ -141,14 +191,14 @@ python simulate.py --ctrl adaptive_smc --run-pso --seed 42 --save gains_adaptive
 python simulate.py --ctrl hybrid_adaptive_sta_smc --run-pso --save gains_hybrid.json
 ```
 
-### 7.3 HIL
+### 8.3 HIL
 
 ```bash
 python simulate.py --run-hil --plot
 python simulate.py --config custom_config.yaml --run-hil
 ```
 
-### 7.4 Testing
+### 8.4 Testing
 
 ```bash
 python run_tests.py
@@ -157,7 +207,7 @@ python -m pytest tests/test_benchmarks/ --benchmark-only
 python -m pytest tests/ --cov=src --cov-report=html
 ```
 
-### 7.5 Web Interface
+### 8.5 Web Interface
 
 ```bash
 streamlit run streamlit_app.py
@@ -165,7 +215,7 @@ streamlit run streamlit_app.py
 
 ------
 
-## 8) Configuration System
+## 9) Configuration System
 
 - Central `config.yaml` with strict validation.
 - Domains: physics params, controller settings, PSO parameters, simulation settings, HIL config.
@@ -173,30 +223,30 @@ streamlit run streamlit_app.py
 
 ------
 
-## 9) Development Guidelines
+## 10) Development Guidelines
 
-### 9.1 Code Style
+### 10.1 Code Style
 
 - Type hints everywhere; clear, example‑rich docstrings.
 - ASCII header format for Python files (≈90 chars width).
 - Explicit error types; avoid broad excepts.
 - Use informal, conversational comments that explain the "why" behind the code, similar to the style in `requirements.txt`.
 
-### 9.2 Adding New Controllers
+### 10.2 Adding New Controllers
 
 1. Implement in `src/controllers/`.
 2. Add to `src/controllers/factory.py`.
 3. Extend `config.yaml`.
 4. Add tests under `tests/test_controllers/`.
 
-### 9.3 Batch Simulation
+### 10.3 Batch Simulation
 
 ```python
 from src.core.vector_sim import run_batch_simulation
 results = run_batch_simulation(controller, dynamics, initial_conditions, sim_params)
 ```
 
-### 9.4 Configuration Loading
+### 10.4 Configuration Loading
 
 ```python
 from src.config import load_config
@@ -205,7 +255,7 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ------
 
-## 10) Testing & Coverage Standards
+## 11) Testing & Coverage Standards
 
 **See:** `.ai/config/testing_standards.md` for complete details.
 
@@ -216,7 +266,7 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ------
 
-## 11) Visualization & Analysis Toolkit
+## 12) Visualization & Analysis Toolkit
 
 - Real‑time animations (DIPAnimator), static performance plots, project movie generator.
 - Statistical analysis: confidence intervals, bootstrap, Welch's t‑test, ANOVA, Monte Carlo.
@@ -224,7 +274,7 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ------
 
-## 12) Production Safety & Readiness (Snapshot)
+## 13) Production Safety & Readiness (Snapshot)
 
 **Production Readiness Score: 6.1/10** (recently improved)
 
@@ -250,7 +300,7 @@ python scripts/test_thread_safety_fixes.py  # currently failing
 
 ------
 
-## 13) Workspace Organization & Hygiene
+## 14) Workspace Organization & Hygiene
 
 **Target:** ≤15 visible root items (currently: 15) ✓
 
@@ -280,7 +330,7 @@ python scripts/cleanup/workspace_cleanup.py --verbose
 
 ------
 
-## 14) Controller Memory Management
+## 15) Controller Memory Management
 
 **See:** `.ai/config/controller_memory.md` for complete details.
 
@@ -292,7 +342,7 @@ python scripts/cleanup/workspace_cleanup.py --verbose
 
 ------
 
-## 15) Controller Factory & Example Snippets
+## 16) Controller Factory & Example Snippets
 
 ```python
 # example-metadata:
@@ -318,7 +368,7 @@ missed = monitor.end(start)
 
 ------
 
-## 16) Multi-Agent Orchestration System
+## 17) Multi-Agent Orchestration System
 
 **See:** `.ai/config/agent_orchestration.md` for complete details.
 
@@ -330,7 +380,7 @@ missed = monitor.end(start)
 
 ------
 
-## 17) Documentation Quality Standards
+## 18) Documentation Quality Standards
 
 **See:** `.ai/config/documentation_quality.md` for complete details.
 
@@ -343,11 +393,11 @@ missed = monitor.end(start)
 
 ------
 
-## 18) Documentation Build System
+## 19) Documentation Build System
 
 **MANDATORY FOR CLAUDE**: After ANY changes to documentation source files or static assets, you MUST rebuild the HTML documentation and verify changes are live.
 
-### 18.1 Auto-Rebuild Triggers
+### 19.1 Auto-Rebuild Triggers
 
 **Rebuild Required When Modifying:**
 - Sphinx source files: `docs/*.md`, `docs/**/*.rst`
@@ -355,7 +405,7 @@ missed = monitor.end(start)
 - Configuration: `docs/conf.py`, `docs/_templates/*`
 - Navigation: `docs/index.rst`, any `toctree` directives
 
-### 18.2 Mandatory Rebuild Workflow
+### 19.2 Mandatory Rebuild Workflow
 
 ```bash
 # 1. Make changes to docs
@@ -372,7 +422,7 @@ md5sum docs/_static/your-file.css docs/_build/html/_static/your-file.css
 curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 ```
 
-### 18.3 Browser Cache Handling
+### 19.3 Browser Cache Handling
 
 **CRITICAL**: Browsers cache static assets. After rebuild:
 
@@ -385,7 +435,7 @@ curl -s "http://localhost:9000/_static/code-collapse.css" | grep "YOUR_UNIQUE_CO
 - Chrome/Edge: Ctrl+Shift+R (Win) / Cmd+Shift+R (Mac)
 - Firefox: Ctrl+F5 (Win) / Cmd+Shift+R (Mac)
 
-### 18.4 Common Pitfalls
+### 19.4 Common Pitfalls
 
 ❌ **Don't assume changes are live** - always verify with `curl` or `stat`
 ❌ **Don't skip rebuild** - Sphinx doesn't auto-rebuild static files
@@ -395,7 +445,7 @@ curl -s "http://localhost:9000/_static/code-collapse.css" | grep "YOUR_UNIQUE_CO
 ✅ **Do check MD5 sums** - ensure files actually copied
 ✅ **Do test with curl** - verify localhost serves new content
 
-### 18.5 Example: CSS/JS Changes
+### 19.5 Example: CSS/JS Changes
 
 ```bash
 # After editing docs/_static/code-collapse.css:
@@ -411,7 +461,7 @@ curl -s "http://localhost:9000/_static/code-collapse.css" | grep "CRITICAL FIX"
 # Tell user: "Hard refresh browser (Ctrl+Shift+R) to clear cache"
 ```
 
-### 18.6 Example: Markdown/RST Changes
+### 19.6 Example: Markdown/RST Changes
 
 ```bash
 # After editing docs/guides/getting-started.md:
@@ -423,11 +473,11 @@ stat docs/guides/getting-started.md docs/_build/html/guides/getting-started.html
 
 ------
 
-## 19) Model Context Protocol (MCP) Auto-Triggers
+## 20) Model Context Protocol (MCP) Auto-Triggers
 
 **See:** `docs/mcp-debugging/README.md` for complete workflows | `.mcp.json` for server configuration
 
-### 19.1 Automatic MCP Usage Rules
+### 20.1 Automatic MCP Usage Rules
 
 **FOR CLAUDE**: These rules are instructions for AI behavior, NOT requirements for user prompts.
 
@@ -479,13 +529,13 @@ stat docs/guides/getting-started.md docs/_build/html/guides/getting-started.html
 - Analyzing test patterns or flaky tests
 - Keywords: "test failure", "pytest debug", "why test failed"
 
-### 19.2 Configuration
+### 20.2 Configuration
 
 **All servers enabled:** `.ai/config/settings.local.json` sets `"enableAllProjectMcpServers": true`
 
 **Server definitions:** `.mcp.json` (11 configured servers)
 
-### 19.3 Multi-MCP Collaboration Examples
+### 20.3 Multi-MCP Collaboration Examples
 
 **Single-MCP Tasks:**
 ```bash
@@ -524,7 +574,7 @@ analyze git blame for authorship, and generate a cross-reference report"
 → Triggers: context7 → filesystem → git-mcp → pandas-mcp
 ```
 
-### 19.4 Custom Slash Commands with MCP
+### 20.4 Custom Slash Commands with MCP
 
 - `/analyze-logs` → Pandas MCP + SQLite MCP for log analysis
 - `/debug-with-mcp` → Multi-server integrated debugging
@@ -532,7 +582,7 @@ analyze git blame for authorship, and generate a cross-reference report"
 - `/analyze-dashboard` → Puppeteer MCP for UI validation
 - `/test-browser` → Playwright/Puppeteer for dashboard testing
 
-### 19.5 Development Guidelines
+### 20.5 Development Guidelines
 
 **Adding New MCP Servers:**
 1. Add server config to `.mcp.json` with clear description
@@ -555,7 +605,7 @@ analyze git blame for authorship, and generate a cross-reference report"
 - **Research Workflow**: context7 → pandas-mcp → numpy-mcp (search theory → load data → compute)
 - **Debugging Session**: sequential-thinking → pytest-mcp → filesystem (systematic → test trace → code inspection)
 
-### 19.6 Available MCP Servers (11 Total)
+### 20.6 Available MCP Servers (11 Total)
 
 | Server | Auto-Trigger Keywords | Primary Use Cases |
 |--------|----------------------|-------------------|
@@ -571,7 +621,7 @@ analyze git blame for authorship, and generate a cross-reference report"
 | **pytest-mcp** | test failure, pytest, debug | Test debugging |
 | **mcp-analyzer** | lint, ruff, vulture, quality | Code quality checks |
 
-### 19.7 MCP Orchestration Philosophy
+### 20.7 MCP Orchestration Philosophy
 
 **Why Multi-MCP is Superior:**
 - **Single-MCP**: Limited to one domain (e.g., pandas can only analyze data)
@@ -612,7 +662,7 @@ Claude: context7 (find file) → filesystem (read code) →
 7. **Be proactive**: If task implies data analysis, use pandas even if not explicitly requested
 8. **Chain automatically**: Don't wait for user to ask for next step, complete the full workflow
 
-### 19.8 Natural Language Flexibility (For Users)
+### 20.8 Natural Language Flexibility (For Users)
 
 **You can ask in ANY of these ways - all work the same:**
 
@@ -649,7 +699,7 @@ Claude: context7 (find file) → filesystem (read code) →
 - "Check that optimization run" (triggers: pandas-mcp → numpy-mcp)
 - "Find docs about PSO and show me the code" (triggers: context7 → filesystem)
 
-### 19.9 Troubleshooting
+### 20.9 Troubleshooting
 
 **Server won't start:**
 ```bash
@@ -670,46 +720,49 @@ python -m pip list | grep mcp
 
 ------
 
-## 20) Phase 3 UI/UX Status & Maintenance Mode
+## 21) Phase 3 UI/UX Status & Final Closeout
 
-**Phase 3 Completion**: ✅ **COMPLETE** (October 9-16, 2025)
-**Status**: Merged to main | UI work in maintenance mode
-**Handoff Document**: `.codex/phase3/HANDOFF.md`
+**Phase 3 Status**: ⏳ **IN PROGRESS** - Final Closeout (October 9-17, 2025)
+**Current State**: 24/34 resolved (71%), 10 remaining in progress
+**Branch**: `phase3/final-ui-closeout` (parallel work with administrative tasks)
+**Handoff Document**: `.ai/planning/phase3/HANDOFF.md`
 
-### What Was Accomplished
+### What Was Accomplished (24/34 Issues - 71%)
 
-**UI Issues Resolved**: 17/34 (50% | All Critical/High severity complete)
+**UI Issues Resolved**: 24/34 (71% | All Critical/High + 8 Medium/Low complete)
 - WCAG 2.1 Level AA compliant (97.8/100 Lighthouse accessibility)
 - Design tokens consolidated (18 core tokens, 94% stability)
 - Responsive validated (4 breakpoints: 375px, 768px, 1024px, 1920px)
 - Cross-platform parity (Sphinx + Streamlit, 100% token reuse)
 - Performance optimized (<3KB gzipped CSS budget met)
 
+**Resolved Issues** (Complete list):
+- Critical/High (5): UI-002, UI-003, UI-004, UI-020, UI-022
+- Medium/Low (19): UI-005, UI-006, UI-007, UI-008, UI-009, UI-011, UI-013, UI-021, UI-023, UI-024, UI-025, UI-026, UI-027, UI-028, UI-029, UI-031, UI-032, UI-033, UI-034
+
 **Browser Support**:
 - ✅ Chromium (Chrome/Edge): Validated across all UI features
 - ⏸️ Firefox/Safari: Deferred (research audience <5%, standard CSS)
 
-### UI Maintenance Mode (Current Policy)
+### Final Closeout - 10 Remaining Issues (In Progress)
 
-**DO**:
-- Fix Critical/High severity bugs if users report issues
-- Update docs when adding new controllers/features
+**Status**: ⏳ Being completed by Codex on branch `phase3/final-ui-closeout`
+**Timeline**: 8-12 hours (1-1.5 days estimated)
+**Coordination**: Claude handles administrative tasks, Codex handles UI work (no file conflicts)
+
+**Remaining Issues**:
+- **Medium Severity (4)**: UI-010, UI-015, UI-017, UI-018
+- **Low Severity (6)**: UI-012, UI-014, UI-016, UI-019, UI-030
+
+**Strategy Change**: Previous "defer indefinitely" decision was based on incorrect count (17 remaining). With only 10 actually remaining and 8-12 hour effort, completing all issues provides high ROI (79% completion).
+
+### Post-Closeout Policy
+
+**After 10 issues complete**:
+- Enter maintenance mode (reactive only)
+- Fix bugs only if users report issues
 - Maintain WCAG AA compliance for new UI elements
-
-**DON'T**:
-- Proactively work on 17 deferred Medium/Low issues
-- Spend time on Firefox validation
-- Implement "nice-to-have" UI polish
-
-### 17 Deferred Issues
-
-**Medium Severity (7)**: UI-006, UI-009, UI-010, UI-011, UI-015, UI-017, UI-018
-**Low Severity (10)**: UI-012, UI-013, UI-014, UI-016, UI-019, UI-028, UI-030, UI-032, UI-034
-
-**Rationale for Deferral**:
-- All Critical/High resolved (no user blockers)
-- Diminishing returns (2-3 weeks for <10% improvement)
-- Research focus prioritized over UI perfectionism
+- Focus 80-90% time on research (controllers, PSO, SMC theory)
 
 ### Phase 4 Decision
 
@@ -727,7 +780,7 @@ python -m pip list | grep mcp
 
 ------
 
-## 21) Success Criteria
+## 22) Success Criteria
 
 - Clean root (≤ 12 visible entries), caches removed, backups archived.
 - Test coverage gates met (85% overall / 95% critical / 100% safety‑critical).

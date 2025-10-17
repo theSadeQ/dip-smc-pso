@@ -8,7 +8,7 @@
 
 ## What Was Accomplished
 
-### UI/UX Improvements (17/34 Issues Resolved)
+### UI/UX Improvements (24/34 Issues Resolved → 10 Remaining)
 
 **Critical/High Severity (5/5 Complete)**:
 - ✅ UI-002: Muted text contrast (WCAG AA 4.52:1)
@@ -17,13 +17,20 @@
 - ✅ UI-020: Mobile H1 word-break fix
 - ✅ UI-022: Mobile visual navigation grid
 
-**Medium/Low Severity (12/29 Resolved)**:
+**Medium/Low Severity (19/29 Resolved)**:
 - ✅ UI-005/007/008: Spacing improvements
+- ✅ UI-006: Status badge typography (custom.css:388)
+- ✅ UI-009: Quick navigation restructuring (custom.css:1026)
+- ✅ UI-011: Coverage matrix table typography (custom.css:547)
+- ✅ UI-013: Admonition animation reduced-motion (custom.css:296) ← **Fixed 2025-10-17**
 - ✅ UI-021/023/024/025: Responsive layout fixes
 - ✅ UI-026/027: Interactive elements (anchor rail, back-to-top)
+- ✅ UI-028: Quick reference card headings (custom.css:1154)
 - ✅ UI-029: Icon system deployment (SVG)
-- ✅ UI-031: Callout gradient contrast (WCAG AA 4.5:1+) ← **Completed today**
+- ✅ UI-031: Callout gradient contrast (WCAG AA 4.5:1+)
+- ✅ UI-032: Breadcrumb text wrapping (custom.css:1186)
 - ✅ UI-033: Sticky headers
+- ✅ UI-034: Hero feature bullet typography (custom.css:1228)
 
 ###Design System Consolidation
 
@@ -42,37 +49,35 @@
 
 ---
 
-## What Remains (17 Deferred Issues)
+## What Remains (10 Issues → In Progress on Separate Branch)
 
-### Medium Severity (7 issues)
-- UI-006: Status badge typography
-- UI-009: Quick navigation restructuring (60+ links)
-- UI-010: Quick navigation link color semantics
-- UI-011: Coverage matrix table typography
-- UI-015: Warning emphasis color-blind safe patterns
-- UI-017: Controllers index bullet wrapping
-- UI-018: Controllers quick navigation column width
+**Status**: ⏳ **IN PROGRESS** by Codex on branch `phase3/final-ui-closeout`
+**Timeline**: 8-12 hours (estimated 1-1.5 days)
+**Coordination**: Parallel work with Claude (administrative tasks on main branch)
 
-### Low Severity (10 issues)
-- UI-012: Coverage matrix header zebra striping
-- UI-013: Admonition animation reduced-motion
-- UI-014: Admonition layout padding
-- UI-016: Enumerated instruction typography
-- UI-019: Module overview spacing
-- UI-028: Quick reference card headings
-- UI-030: Footer pager spacing
-- UI-032: Breadcrumb text wrapping
-- UI-034: Hero feature bullet typography
+### Medium Severity (4 issues)
+- ⏳ UI-010: Quick navigation link color semantics (1-2 hours)
+- ⏳ UI-015: Warning emphasis color-blind safe patterns (2-3 hours, accessibility)
+- ⏳ UI-017: Controllers index bullet wrapping (1-2 hours)
+- ⏳ UI-018: Controllers quick navigation column width (1-2 hours)
 
-### Strategic Decision: **DEFER INDEFINITELY**
+### Low Severity (6 issues)
+- ⏳ UI-012: Coverage matrix header zebra striping (30 min)
+- ⏳ UI-014: Admonition layout padding (20 min)
+- ⏳ UI-016: Enumerated instruction typography (30 min)
+- ⏳ UI-019: Module overview spacing (15 min)
+- ⏳ UI-030: Footer pager spacing (10 min)
 
-**Rationale**:
-1. **All Critical/High resolved** - No blockers for users
-2. **Functional UI** - Documentation fully usable and accessible
-3. **Diminishing returns** - 2-3 weeks for <10% improvement
-4. **Opportunity cost** - Time better spent on controllers/PSO research
+### Strategic Decision: **COMPLETE ALL REMAINING ISSUES**
 
-**Recommendation**: Monitor reactively. Only fix if users explicitly report issues.
+**Rationale Change** (from "defer indefinitely" to "complete now"):
+1. **7 issues verified complete**: Previous "17 deferred" was incorrect; only 10 remain
+2. **Minimal effort**: 8-12 hours total (not 2-3 weeks as previously estimated)
+3. **High ROI**: 79% completion (24/34) vs 50% (17/34) - clean closeout
+4. **Accessibility**: UI-015 addresses color-blindness (8% of male population)
+5. **Parallel execution**: No impact on research timeline (separate team/branch)
+
+**Execution**: Codex handles UI work in parallel while Claude focuses on research preparation.
 
 ---
 
@@ -154,11 +159,11 @@
 
 ## Success Metrics
 
-### Phase 3 Targets (All Met)
+### Phase 3 Targets (All Met + Exceeded)
 | Metric | Target | Achieved | Status |
 |--------|--------|----------|--------|
 | Critical/High issues | 5/5 (100%) | 5/5 | ✅ |
-| Overall resolution | ≥50% | 50% (17/34) | ✅ |
+| Overall resolution | ≥50% | 71% (24/34, +10 in progress) | ✅ EXCEEDED |
 | WCAG AA compliance | ≥95 score | 97.8 avg | ✅ |
 | Design token stability | ≥90% | 94% | ✅ |
 | Cross-platform parity | 100% | 100% | ✅ |
@@ -200,7 +205,10 @@
 ## Questions?
 
 **"Should I do more UI work?"**
-→ No. 17 deferred issues are all cosmetic. Focus on research.
+→ In progress! 10 remaining issues being completed by Codex in parallel branch. Expected completion: 24-48 hours.
+
+**"What about the '17 deferred issues'?"**
+→ Tracking error corrected. 7 issues were already complete but incorrectly marked as deferred. Only 10 actually remained.
 
 **"What about Firefox support?"**
 → Skip. Research audience uses Chrome/Edge (>90%). Monitor reactively.
@@ -208,14 +216,11 @@
 **"Should I do Phase 4 production hardening?"**
 → Only if planning cloud deployment or multi-user production. For research-only use, skip.
 
-**"Can I merge to main now?"**
-→ Yes! After Day 3 git tag creation and dry run, merge on Day 4.
-
-**"What if users report UI issues?"**
-→ Fix reactively. Prioritize critical/high severity. Defer medium/low indefinitely.
+**"When will Phase 3 be fully complete?"**
+→ Administrative tasks complete now. UI work finishes when Codex completes 10 remaining issues (8-12 hours). Then merge coordination.
 
 ---
 
-**Document Version**: 1.0
-**Last Updated**: 2025-10-16
-**Status**: Phase 3 Complete | Ready for Merge | Research Focus Next
+**Document Version**: 1.1
+**Last Updated**: 2025-10-17
+**Status**: Phase 3 Administrative Complete | UI Work In Progress (10 issues) | Research Preparation Phase
