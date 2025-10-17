@@ -1295,6 +1295,18 @@ article > ul li strong:first-child {
 }
 
 /* ============================================================================
+   UI-016 FIX: Enumerated instruction typography
+   Issue: Numbered instructions felt cramped and used inconsistent sizing
+   Solution: Align list typography with body text scale and 12px rhythm
+   ============================================================================ */
+ol.instructions li,
+.step-by-step ol li {
+    font-size: var(--font-size-body-1);
+    line-height: 1.7;
+    margin-bottom: var(--space-3);
+}
+
+/* ============================================================================
    21. SIDEBAR-CONTRAST FIX: SPHINX SIDEBAR NAVIGATION CONTRAST (WCAG AA)
    ============================================================================ */
 
