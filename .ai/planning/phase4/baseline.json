@@ -1,0 +1,154 @@
+{
+  "timestamp": "2025-10-17T14:06:50.080982",
+  "overall_score": 23.918128654970758,
+  "readiness_level": "ReadinessLevel.BLOCKED",
+  "quality_gates": [
+    {
+      "name": "overall_test_coverage",
+      "category": "ComponentType.TESTING",
+      "threshold": 85.0,
+      "current_value": 0,
+      "weight": 0.15,
+      "passed": false,
+      "critical": false,
+      "description": "Overall system test coverage must meet 85% threshold",
+      "recommendations": [
+        "Increase test coverage by 85.0 percentage points",
+        "Focus on untested modules and edge cases",
+        "Add integration tests for complex workflows"
+      ]
+    },
+    {
+      "name": "critical_component_coverage",
+      "category": "ComponentType.SAFETY_CRITICAL",
+      "threshold": 95.0,
+      "current_value": 0,
+      "weight": 0.2,
+      "passed": false,
+      "critical": true,
+      "description": "Critical components (controllers, plant models) must have \u226595% coverage",
+      "recommendations": [
+        "Increase critical component coverage by 95.0 percentage points",
+        "Prioritize controllers and plant models testing",
+        "Add property-based tests for stability verification"
+      ]
+    },
+    {
+      "name": "safety_critical_coverage",
+      "category": "ComponentType.SAFETY_CRITICAL",
+      "threshold": 100.0,
+      "current_value": 0,
+      "weight": 0.15,
+      "passed": false,
+      "critical": true,
+      "description": "Safety-critical mechanisms must have 100% test coverage",
+      "recommendations": [
+        "Improve safety_critical_coverage by 100.0 points"
+      ]
+    },
+    {
+      "name": "test_pass_rate",
+      "category": "ComponentType.TESTING",
+      "threshold": 95.0,
+      "current_value": 0,
+      "weight": 0.1,
+      "passed": false,
+      "critical": true,
+      "description": "Test pass rate must be \u226595% for production deployment",
+      "recommendations": [
+        "Fix failing tests to improve pass rate by 95.0 percentage points",
+        "Investigate and resolve test failures",
+        "Consider test environment stability issues"
+      ]
+    },
+    {
+      "name": "system_compatibility",
+      "category": "ComponentType.INTEGRATION",
+      "threshold": 85.0,
+      "current_value": 0,
+      "weight": 0.15,
+      "passed": false,
+      "critical": false,
+      "description": "Cross-domain compatibility score must be \u226585%",
+      "recommendations": [
+        "Improve system compatibility score by 85.0 points",
+        "Address cross-domain integration issues",
+        "Validate interface compatibility"
+      ]
+    },
+    {
+      "name": "performance_benchmarks",
+      "category": "ComponentType.PERFORMANCE",
+      "threshold": 90.0,
+      "current_value": 85.0,
+      "weight": 0.1,
+      "passed": false,
+      "critical": false,
+      "description": "Performance benchmarks must pass regression detection",
+      "recommendations": [
+        "Improve performance_benchmarks by 5.0 points"
+      ]
+    },
+    {
+      "name": "numerical_stability",
+      "category": "ComponentType.CONTROLLERS",
+      "threshold": 95.0,
+      "current_value": 90.0,
+      "weight": 0.1,
+      "passed": false,
+      "critical": true,
+      "description": "Controllers must demonstrate numerical stability under test conditions",
+      "recommendations": [
+        "Improve numerical_stability by 5.0 points"
+      ]
+    },
+    {
+      "name": "documentation_completeness",
+      "category": "ComponentType.DOCUMENTATION",
+      "threshold": 90.0,
+      "current_value": 100.0,
+      "weight": 0.05,
+      "passed": true,
+      "critical": false,
+      "description": "API documentation and usage guides must be comprehensive",
+      "recommendations": [
+        "[OK] Quality gate passed"
+      ]
+    }
+  ],
+  "testing_score": 50.0,
+  "coverage_score": 50.0,
+  "compatibility_score": 75.0,
+  "performance_score": 80.0,
+  "safety_score": 60.0,
+  "documentation_score": 100.0,
+  "pytest_results": null,
+  "coverage_metrics": null,
+  "compatibility_analysis": null,
+  "deployment_approved": false,
+  "blocking_issues": [
+    "CRITICAL: critical_component_coverage at 0.0%, needs 95.0% improvement to reach 95.0% threshold",
+    "CRITICAL: safety_critical_coverage at 0.0%, needs 100.0% improvement to reach 100.0% threshold",
+    "CRITICAL: test_pass_rate at 0.0%, needs 95.0% improvement to reach 95.0% threshold",
+    "CRITICAL: numerical_stability at 90.0%, needs 5.0% improvement to reach 95.0% threshold"
+  ],
+  "recommendations": [
+    "[CRITICAL] BLOCKED: Address critical quality gate failures before deployment",
+    "[TODO] Address 7 quality gate failures:",
+    "   - Increase test coverage by 85.0 percentage points",
+    "   - Focus on untested modules and edge cases",
+    "   - Increase critical component coverage by 95.0 percentage points",
+    "   - Prioritize controllers and plant models testing",
+    "   - Improve safety_critical_coverage by 100.0 points",
+    "   - Fix failing tests to improve pass rate by 95.0 percentage points",
+    "   - Investigate and resolve test failures",
+    "   - Improve system compatibility score by 85.0 points",
+    "   - Address cross-domain integration issues",
+    "[TEST] Run comprehensive integration tests before deployment",
+    "[DATA] Monitor production readiness trends and address regressions",
+    "[SCAN] Validate cross-domain compatibility regularly"
+  ],
+  "confidence_level": "low",
+  "improvement_trend": "insufficient_data",
+  "historical_comparison": {}
+}

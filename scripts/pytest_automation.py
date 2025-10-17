@@ -153,7 +153,8 @@ class PytestIntegrationCoordinator:
     def _build_pytest_command(self, quick_mode: bool, domain_filter: Optional[str],
                              generate_reports: bool) -> List[str]:
         """Build pytest command with appropriate flags and filters."""
-        cmd = ['pytest']
+        # Use python -m pytest for cross-platform compatibility (Windows/Linux/Mac)
+        cmd = [sys.executable, '-m', 'pytest']
 
         # Basic configuration
         cmd.extend(['-v', '--tb=short'])
@@ -486,6 +487,10 @@ class PytestIntegrationCoordinator:
 
     def _generate_markdown_report(self, result: TestExecutionResult, output_path: Path):
         """Generate markdown report for documentation integration."""
+        # Calculate pass rate with zero-check guard
+        pass_rate = (result.passed_tests / result.total_tests * 100) if result.total_tests > 0 else 0.0
+        pass_rate_status = '✅' if (result.total_tests > 0 and result.passed_tests / result.total_tests >= 0.95) else '❌'
+
         report = f"""# Test Execution Report
 
 **Generated**: {result.timestamp}
@@ -500,7 +505,7 @@ class PytestIntegrationCoordinator:
 | Passed | {result.passed_tests} | {'✅' if result.failed_tests == 0 else '⚠️'} |
 | Failed | {result.failed_tests} | {'✅' if result.failed_tests == 0 else '❌'} |
 | Skipped | {result.skipped_tests} | - |
-| Pass Rate | {(result.passed_tests/result.total_tests*100):.1f}% | {'✅' if result.passed_tests/result.total_tests >= 0.95 else '❌'} |
+| Pass Rate | {pass_rate:.1f}% | {pass_rate_status} |
 
 ## Coverage Summary
 

@@ -69,10 +69,29 @@ class MinimalLockManager:
 
     @contextmanager
     def acquire_minimal_lock(self, resource_id: str, timeout: float = 5.0) -> ContextManager[bool]:
-        """Acquire lock with minimal hold time and performance tracking."""
+        """Acquire lock with minimal hold time and performance tracking.
+
+        Uses double-checked locking (DCL) pattern for lazy lock creation:
+        - First check (unlocked): Fast path if lock already exists
+        - Acquire lock: Only if lock doesn't exist
+        - Second check (locked): Prevent race condition if multiple threads
+          pass first check simultaneously
+
+        This pattern is safe in Python because:
+        1. GIL ensures atomic dictionary operations
+        2. Lock protects critical section (lock creation)
+        3. Second check prevents duplicate lock creation
+
+        Performance: ~90x faster than always acquiring lock.
+        See: .ai/planning/phase4/double_checked_locking_analysis.md
+        """
+        # DCL Pattern: First check (unlocked, fast path)
         if resource_id not in self._locks:
+            # Acquire lock for thread-safe creation
             with self._stats_lock:
+                # DCL Pattern: Second check (locked, prevent race condition)
                 if resource_id not in self._locks:
+                    # Create resource-specific lock (thread-safe under _stats_lock)
                     self._locks[resource_id] = threading.RLock()
 
         lock = self._locks[resource_id]
