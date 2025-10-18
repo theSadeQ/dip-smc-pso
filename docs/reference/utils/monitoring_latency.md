@@ -129,45 +129,91 @@ graph TD
 
 ## Usage Examples
 
-### Example 1: Basic Usage
+### Example 1: Basic Deadline Monitoring
+
+Monitor control loop execution time and detect deadline violations:
 
 \`\`\`python
-from src.utils.monitoring_latency import Component
+from src.utils.monitoring.latency import LatencyMonitor
 
-component = Component()
-result = component.process(data)
+# Create monitor for 10ms control loop (dt=0.01s)
+monitor = LatencyMonitor(dt=0.01, margin=0.9)
+
+for step in range(1000):
+    # Start timing
+    start = monitor.start()
+
+    # ... control computation (should finish in <10ms) ...
+    control_output = controller.compute_control(state)
+
+    # End timing and check for deadline miss
+    missed = monitor.end(start)
+
+    if missed:
+        print(f"WARNING: Deadline missed at step {step}")
+
+# Get performance statistics
+median_latency, p95_latency = monitor.stats()
+miss_rate = monitor.missed_rate()
+
+print(f"Median latency: {median_latency*1000:.2f}ms")
+print(f"95th percentile: {p95_latency*1000:.2f}ms")
+print(f"Miss rate: {miss_rate*100:.1f}%")
 \`\`\`
 
-### Example 2: Advanced Configuration
+### Example 2: Weakly-Hard Real-Time Constraints
+
+Enforce (m,k) weakly-hard constraints - allow at most (k-m) deadline misses in any k consecutive samples:
 
 \`\`\`python
-component = Component(
-    option1=value1,
-    option2=value2
-)
+from src.utils.monitoring.latency import LatencyMonitor
+
+monitor = LatencyMonitor(dt=0.01)
+
+for step in range(1000):
+    start = monitor.start()
+    # ... control loop ...
+    monitor.end(start)
+
+    # Check (m,k) = (950, 1000): allow ≤50 misses in 1000 steps
+    if step >= 1000 and not monitor.enforce(m=950, k=1000):
+        raise RuntimeError(
+            f"CRITICAL: Weakly-hard constraint violated! "
+            f"More than 50 deadline misses in last 1000 steps"
+        )
+
+print("Weakly-hard constraint satisfied throughout simulation")
 \`\`\`
 
-### Example 3: Integration with Simulation
+### Example 3: Adaptive Monitoring with Reset
+
+Monitor different phases of simulation with periodic reset:
 
 \`\`\`python
-# Integration example
+from src.utils.monitoring.latency import LatencyMonitor
 
-for k in range(num_steps):
-    result = component.process(x)
-    x = update(x, result)
-\`\`\`
+monitor = LatencyMonitor(dt=0.01)
 
-## Example 4: Performance Optimization
+# Phase 1: Transient response (0-5s)
+for step in range(500):
+    start = monitor.start()
+    # ... control loop ...
+    monitor.end(start)
 
-\`\`\`python
-component = Component(enable_caching=True)
-\`\`\`
+# Analyze transient phase
+transient_stats = monitor.get_recent_stats(n=500)
+print(f"Transient phase median latency: {transient_stats['median']*1000:.2f}ms")
 
-### Example 5: Error Handling
+# Reset for steady-state monitoring
+monitor.reset()
 
-\`\`\`python
-try:
-    result = component.process(data)
-except ComponentError as e:
-    print(f"Error: {e}")
+# Phase 2: Steady-state (5-10s)
+for step in range(500):
+    start = monitor.start()
+    # ... control loop ...
+    monitor.end(start)
+
+# Compare steady-state performance
+steady_stats = monitor.get_recent_stats(n=500)
+print(f"Steady-state median latency: {steady_stats['median']*1000:.2f}ms")
 \`\`\`
