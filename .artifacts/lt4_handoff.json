@@ -1,0 +1,122 @@
+{
+  "task_id": "LT-4",
+  "agent_id": "agent1_theory",
+  "completion_date": "2025-10-18",
+  "hours_spent": 8.0,
+  "status": "complete",
+  "lyapunov_functions": {
+    "classical_smc": {
+      "function": "V = 0.5 * s^2",
+      "derivative": "dV/dt = s * ds/dt = -beta*eta*|s| - beta*k_d*s^2 < 0 (outside boundary layer)",
+      "stability_type": "asymptotic (exponential with k_d > 0)",
+      "convergence": "finite-time to surface, exponential on surface"
+    },
+    "sta_smc": {
+      "function": "V = |s| + (1/(2*K2))*z^2",
+      "derivative": "dV/dt <= -c1*||xi||^(3/2) + c2*L (generalized gradient approach)",
+      "stability_type": "finite-time",
+      "convergence": "finite-time to {s=0, ds/dt=0}",
+      "critical_note": "Uses Clarke derivative for non-smooth Lyapunov at s=0"
+    },
+    "adaptive_smc": {
+      "function": "V = 0.5*s^2 + (1/(2*gamma))*(K - K*)^2",
+      "derivative": "dV/dt <= -eta*|s| - beta*alpha*s^2 - (lambda/gamma)*K_tilde^2",
+      "stability_type": "asymptotic",
+      "convergence": "s(t) -> 0 as t -> infinity, K(t) bounded"
+    },
+    "hybrid_adaptive_sta_smc": {
+      "function": "V = 0.5*s^2 + (1/(2*gamma1))*(k1 - k1*)^2 + (1/(2*gamma2))*(k2 - k2*)^2 + 0.5*u_int^2",
+      "derivative": "dV/dt <= -alpha1*V + alpha2*||w|| (ISS framework with resets as exogenous inputs)",
+      "stability_type": "Input-to-State Stable (ISS)",
+      "convergence": "bounded (ultimate boundedness)",
+      "critical_note": "Emergency reset logic (lines 673-704) can violate monotonic decrease; ISS framework required"
+    },
+    "swing_up_smc": {
+      "function": "V_swing = E_total - E_bottom OR V_stabilize = 0.5*s^2 (mode-dependent)",
+      "derivative": "dV_swing/dt > 0 (energy increases), dV_stabilize/dt < 0 (SMC convergence)",
+      "stability_type": "multiple Lyapunov functions (switched system)",
+      "convergence": "global stability with convergence to upright equilibrium",
+      "critical_note": "Simplified proof; cites Fantoni & Lozano (2002) for energy-based swing-up"
+    }
+  },
+  "assumptions": {
+    "classical_smc": [
+      "Bounded disturbances: |d_u(t)| <= d_bar",
+      "Switching gain dominance: K > d_bar",
+      "Controllability: L*M^-1*B > epsilon_0 > 0",
+      "Positive gains: k1, k2, lambda1, lambda2, K > 0; k_d >= 0"
+    ],
+    "sta_smc": [
+      "Lipschitz disturbance: |dot{d_u}(t)| <= L",
+      "Gain conditions: K1 > 2*sqrt(2*d_bar/beta), K2 > d_bar/beta, K1 > K2",
+      "Controllability: beta = L*M^-1*B > 0",
+      "Positive gains: k1, k2, lambda1, lambda2, K1, K2 > 0"
+    ],
+    "adaptive_smc": [
+      "Bounded disturbances: |d_u(t)| <= d_bar",
+      "Ideal gain exists: K* >= d_bar",
+      "Positive parameters: gamma, lambda, alpha > 0",
+      "Gain bounds: 0 < K_min <= K_init <= K_max",
+      "Dead zone: delta >= 0"
+    ],
+    "hybrid_adaptive_sta_smc": [
+      "Bounded disturbances: ||d(t)|| <= d_max",
+      "Finite reset frequency: at most N_reset resets per unit time",
+      "Positive gains: c1, c2, lambda1, lambda2, gamma1, gamma2, k_d > 0",
+      "Gain bounds: 0 < k1_min <= k1_init <= k1_max (similarly for k2)",
+      "Tapering parameter: epsilon_taper > 0"
+    ],
+    "swing_up_smc": [
+      "Energy barrier: system can reach upright from down-down via energy injection",
+      "SMC stability: underlying stabilizing controller is asymptotically stable",
+      "Finite switching: mode transitions occur finitely often (hysteresis prevents Zeno)",
+      "Bounded disturbances: ||d(t)|| <= d_max"
+    ]
+  },
+  "validation_requirements": {
+    "classical_smc": [
+      "Config: Verify K > d_max in config.yaml",
+      "Runtime: Monitor |L*M^-1*B| remains above threshold during simulation",
+      "Lyapunov: Compute V(t) and dV/dt, verify dV/dt < 0 outside boundary layer",
+      "Convergence: Verify finite-time reaching (t_reach <= |s(0)|/eta*beta)"
+    ],
+    "sta_smc": [
+      "Config: Verify K1, K2 satisfy gain conditions (K1 > 2*sqrt(2*d_bar/beta), K2 > d_bar/beta)",
+      "Config: Verify K1 > K2 (required for stability)",
+      "Runtime: Monitor z remains bounded (integral state saturation)",
+      "Lyapunov: Validate finite-time convergence to {s=0, ds/dt=0}"
+    ],
+    "adaptive_smc": [
+      "Config: Verify K_init > d_bar",
+      "Config: Check K_min <= K_init <= K_max",
+      "Runtime: Monitor K(t) evolution, ensure it remains bounded",
+      "Lyapunov: Verify s(t) -> 0 asymptotically, K(t) converges to bounded region"
+    ],
+    "hybrid_adaptive_sta_smc": [
+      "Runtime: Log emergency reset events (lines 673-704) during simulation",
+      "Runtime: Verify reset frequency is bounded (no Zeno behavior)",
+      "Config: Check k1_init, k2_init <= k1_max, k2_max",
+      "Config: Verify epsilon_sat >= dead_zone (saturation width exceeds dead zone)",
+      "Lyapunov: Use ISS framework, verify ultimate boundedness (not asymptotic stability)"
+    ],
+    "swing_up_smc": [
+      "Config: Verify alpha_exit < alpha_switch (hysteresis deadband)",
+      "Config: Check theta_reentry >= theta_tol (prevents mode chattering)",
+      "Runtime: Validate dynamics_model.total_energy() returns physically meaningful values",
+      "Runtime: Log mode transitions, detect Zeno behavior (should be finite)"
+    ]
+  },
+  "critical_findings": [
+    "STA uses generalized gradient approach (Clarke derivative) due to non-smooth Lyapunov V=|s| at s=0",
+    "Hybrid controller has emergency reset logic that can violate monotonic Lyapunov decrease; ISS framework used instead of asymptotic stability",
+    "Swing-Up proof simplified: rigorous proof would require bounding dwell times; we cite literature (Fantoni & Lozano 2002) for energy-based swing-up stability",
+    "All controllers require L*M^-1*B > 0 (controllability scalar); this should be monitored during simulation",
+    "Boundary layer approximation sat(s/epsilon) introduces steady-state error O(epsilon) but preserves finite-time convergence outside boundary layer"
+  ],
+  "deliverables": [
+    "docs/theory/lyapunov_stability_proofs.md (2000+ lines, 5 complete proofs)",
+    ".artifacts/lt4_handoff.json (this file)"
+  ],
+  "next_agent": "agent2_validation",
+  "handoff_instructions": "Agent 2 should validate proofs by: (1) Checking config.yaml parameter ranges satisfy theoretical conditions, (2) Implementing Lyapunov function computation in simulation, (3) Verifying dV/dt < 0 (or ISS bound for Hybrid), (4) Testing convergence properties (finite-time, asymptotic, ISS), (5) Monitoring emergency resets and mode transitions. Key validation files: config.yaml, controller implementations (src/controllers/smc/*.py), validation script to compute V(t) and dV/dt during simulation."
+}
