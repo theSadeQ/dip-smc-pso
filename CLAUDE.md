@@ -68,11 +68,23 @@ python .dev_tools/project_state_manager.py init
 # 30-second recovery after gap
 bash .dev_tools/recover_project.sh
 
-# Mark task complete
+# Manual task completion (OPTIONAL - git hooks auto-detect!)
 python .dev_tools/project_state_manager.py complete MT-5 --deliverables MT5_COMPLETE_ANALYSIS.md
 
 # Check roadmap progress
 python .dev_tools/roadmap_tracker.py
+```
+
+**AUTOMATED Tracking (Zero Manual Updates!):**
+```bash
+# Just commit with task ID in message - state auto-updates!
+git add benchmarks/MT6_RESULTS.md
+git commit -m "feat(MT-6): Complete boundary layer optimization"
+# ↑ Pre-commit hook auto-detects MT-6 + deliverable + updates state
+
+# Optional: Auto-recovery on terminal startup
+# Add to ~/.bashrc: source ~/Projects/main/.dev_tools/shell_init.sh
+# Terminal will prompt for recovery when new commits detected
 ```
 
 **Recovery Reliability:**

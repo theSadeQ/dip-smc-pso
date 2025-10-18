@@ -18,7 +18,8 @@
 **After Recovery System:**
 - Token limit → 30-second recovery with full project context
 - Multi-month gap → Instant context restoration (phase, roadmap, last commit, next tasks)
-- Automated tracking → No manual updates required
+- **Automated tracking** → Git hooks + shell initialization (zero manual updates!)
+- **Auto-commit detection** → Task completion triggers state updates automatically
 
 ---
 
@@ -190,7 +191,103 @@ LT-4: Lyapunov Stability Proofs - Existing Controllers (18h)
 
 ---
 
-### 3. Roadmap Tracker
+### 3. Automated Git Hooks
+
+**Purpose:** Automatic state tracking on every commit (zero manual updates!)
+
+#### 3.1 Pre-Commit Hook
+
+**File:** `.git/hooks/pre-commit` (enhanced existing hook)
+
+**Features:**
+- Automatic task completion detection from commit messages
+- Detects task IDs: `feat(QW-5)`, `feat(MT-6)`, `feat(LT-4)`
+- Auto-detects deliverables from staged files (benchmarks, docs, controllers)
+- Updates `project_state.json` atomically with commit
+- Re-stages state file for automatic inclusion in commit
+
+**Example:**
+```bash
+# Write code, create deliverable
+echo "# Results" > benchmarks/MT6_RESULTS.md
+git add benchmarks/MT6_RESULTS.md
+
+# Commit with task ID in message
+git commit -m "feat(MT-6): Complete boundary layer optimization"
+# ↑ Pre-commit hook auto-detects MT-6, adds deliverable, updates state
+```
+
+**What Gets Auto-Detected:**
+- Task ID: `(QW|MT|LT)-[0-9]+` in commit message
+- Deliverables: New files in `benchmarks/`, `docs/theory/`, `src/controllers/`, `optimization_results/`
+
+#### 3.2 Post-Commit Hook
+
+**File:** `.git/hooks/post-commit`
+
+**Features:**
+- Updates `last_commit` metadata in `project_state.json`
+- Tracks commit hash, timestamp, message
+- Silent execution (no user-visible output)
+- Non-blocking (never breaks git operations)
+
+**Auto-Updated State:**
+```json
+{
+  "last_commit": {
+    "hash": "abc123...",
+    "timestamp": 1760772000,
+    "message": "feat(MT-6): Complete boundary layer optimization"
+  }
+}
+```
+
+#### 3.3 Shell Initialization
+
+**Files:**
+- `.dev_tools/shell_init.sh` (Bash/Zsh)
+- `.dev_tools/shell_init.ps1` (PowerShell)
+
+**Features:**
+- Detects new commits since last recovery
+- Prompts for recovery on terminal startup (if in project directory)
+- Optional auto-recovery (disabled by default - see file to enable)
+
+**Setup (Optional - for automatic recovery prompts):**
+
+**Bash/Zsh (~/.bashrc or ~/.zshrc):**
+```bash
+if [ -f "$HOME/Projects/main/.dev_tools/shell_init.sh" ]; then
+    source "$HOME/Projects/main/.dev_tools/shell_init.sh"
+fi
+```
+
+**PowerShell ($PROFILE):**
+```powershell
+if (Test-Path "D:\Projects\main\.dev_tools\shell_init.ps1") {
+    . "D:\Projects\main\.dev_tools\shell_init.ps1"
+}
+```
+
+**Behavior:**
+- When you open terminal in project directory, you'll see:
+  ```
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  [INFO] New commits detected - recovery available
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Run: bash .dev_tools/recover_project.sh
+        (30-second context restoration)
+  ```
+
+**Optional Auto-Recovery:**
+- Edit `shell_init.sh` or `shell_init.ps1`
+- Uncomment the auto-recovery lines
+- Terminal will auto-recover on every startup (no manual command needed)
+
+---
+
+### 4. Roadmap Tracker
 
 **File:** `roadmap_tracker.py`
 
