@@ -98,7 +98,7 @@ checkpoint_files=$(find . -maxdepth 1 -type f \( \
     -name "*_benchmark*.csv" -o \
     -name "*_ANALYSIS.md" -o \
     -name "*_SUMMARY.md" \
-) -mtime -7 2>/dev/null || true)
+\) -mtime -7 2>/dev/null || true)
 
 if [ -n "$checkpoint_files" ]; then
     echo "$checkpoint_files" | while read -r file; do
@@ -115,10 +115,70 @@ fi
 echo ""
 
 # =============================================================================
-# 5. Recommended Next Actions
+# 5. Incomplete Agent Work
 # =============================================================================
 
-echo -e "${GREEN}[5] RECOMMENDED NEXT ACTIONS${NC}"
+echo -e "${GREEN}[5] INCOMPLETE AGENT WORK${NC}"
+echo -e "${CYAN}------------------------------------------------------------------------------${NC}"
+
+# Detect incomplete multi-agent orchestrations
+incomplete_agents=$(python -c "
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath('.')))
+try:
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('agent_checkpoint', '.dev_tools/agent_checkpoint.py')
+    agent_checkpoint = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(agent_checkpoint)
+
+    agents = agent_checkpoint.get_incomplete_agents()
+    if agents:
+        for agent in agents:
+            print(f\"{agent['task_id']}|{agent['agent_id']}|{agent['role']}|{agent['launched_timestamp']}\")
+            if agent.get('last_progress'):
+                print(f\"  PROGRESS|{agent['last_progress'].get('current_phase', 'Unknown')}\")
+except Exception as e:
+    import traceback
+    traceback.print_exc()
+" 2>/dev/null)
+
+if [ -n "$incomplete_agents" ]; then
+    echo -e "${YELLOW}⚠️  INCOMPLETE AGENT WORK DETECTED${NC}"
+    echo ""
+
+    current_task=""
+    while IFS='|' read -r task agent role timestamp rest; do
+        if [ "$task" = "  PROGRESS" ]; then
+            echo -e "    ${CYAN}Last progress: $agent${NC}"
+        else
+            if [ "$task" != "$current_task" ]; then
+                [ -n "$current_task" ] && echo ""
+                echo -e "${YELLOW}Task: $task${NC}"
+                current_task="$task"
+            fi
+            echo -e "  Agent: ${YELLOW}$agent${NC}"
+            echo -e "    Role: $role"
+            echo -e "    Launched: $timestamp"
+        fi
+    done <<< "$incomplete_agents"
+
+    echo ""
+    echo -e "${CYAN}RECOMMENDATION:${NC}"
+    echo "  One or more agents were interrupted before completion."
+    echo "  Check .artifacts/*_launched.json for details."
+    echo "  Resume work by re-launching the incomplete agent."
+else
+    echo -e "${GREEN}✓ No incomplete agent work detected${NC}"
+fi
+
+echo ""
+
+# =============================================================================
+# 6. Recommended Next Actions
+# =============================================================================
+
+echo -e "${GREEN}[6] RECOMMENDED NEXT ACTIONS${NC}"
 echo -e "${CYAN}------------------------------------------------------------------------------${NC}"
 
 if [ -f ".ai/config/project_state.json" ]; then
@@ -131,10 +191,10 @@ fi
 echo ""
 
 # =============================================================================
-# 6. Quick Start Commands
+# 7. Quick Start Commands
 # =============================================================================
 
-echo -e "${GREEN}[6] QUICK START COMMANDS${NC}"
+echo -e "${GREEN}[7] QUICK START COMMANDS${NC}"
 echo -e "${CYAN}------------------------------------------------------------------------------${NC}"
 echo ""
 echo "Initialize project state:"
