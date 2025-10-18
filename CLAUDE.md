@@ -25,15 +25,73 @@
 
 ------
 
-## 3) Session Continuity System
+## 3) Session Continuity & Project-Wide Recovery System
 
-**See:** `.ai/config/session_continuity.md` for complete details.
+### 3.1 Legacy Session Continuity (Deprecated)
 
-**Quick Reference:**
-- Zero-effort account switching via `.dev_tools/session_state.json`
-- Auto-detect and resume from previous session if <24h old
-- Maintain session state throughout every session
-- Update todos, decisions, and next actions continuously
+**See:** `.ai/config/session_continuity.md` for historical reference.
+
+**Status:** Deprecated in favor of project-wide recovery system (see 3.2)
+
+**Old Approach:**
+- Manual `.dev_tools/session_state.json` updates (2/10 reliability)
+- Required discipline to maintain
+- Task-specific only (no project-wide context)
+
+### 3.2 Project-Wide Recovery System (Current)
+
+**Purpose:** 30-second recovery from token limits or multi-month gaps
+
+**Status:** ✅ Operational (Oct 2025)
+
+**Tools:**
+1. **Project State Manager** (`.dev_tools/project_state_manager.py`)
+   - Tracks macro project state (current phase, roadmap progress, completed phases)
+   - Commands: `init`, `status`, `complete <task-id>`, `recommend-next`
+   - State file: `.ai/config/project_state.json` (auto-updated)
+
+2. **Git Recovery Script** (`.dev_tools/recover_project.sh`)
+   - 30-second recovery workflow
+   - Shows: phase, progress, last 5 commits, uncommitted changes, next actions
+   - Usage: `bash .dev_tools/recover_project.sh`
+
+3. **Roadmap Tracker** (`.dev_tools/roadmap_tracker.py`)
+   - Parses `ROADMAP_EXISTING_PROJECT.md`
+   - Tracks 60-70 hour research roadmap (50 tasks: QW, MT, LT)
+   - Usage: `python .dev_tools/roadmap_tracker.py [-v]`
+
+**Quick Start:**
+```bash
+# Initialize project state (one-time)
+python .dev_tools/project_state_manager.py init
+
+# 30-second recovery after gap
+bash .dev_tools/recover_project.sh
+
+# Mark task complete
+python .dev_tools/project_state_manager.py complete MT-5 --deliverables MT5_COMPLETE_ANALYSIS.md
+
+# Check roadmap progress
+python .dev_tools/roadmap_tracker.py
+```
+
+**Recovery Reliability:**
+- Git commits: 10/10 (permanent, distributed, timestamped)
+- Project state tracker: 9/10 (auto-updated, validated)
+- Checkpoint files: 8/10 (survives token limits, manual cleanup)
+
+**What Survives Token Limits:**
+- ✅ Git commits (permanent)
+- ✅ Project state file (`.ai/config/project_state.json`)
+- ✅ Checkpoint files (`.tsmc_results.json`, benchmark CSVs, etc.)
+- ❌ Background bash processes (SIGTERM on session end)
+- ❌ In-memory agent state (lost on context limit)
+
+**Project Structure Tracking:**
+- **Current Phase:** Research (ROADMAP_EXISTING_PROJECT.md)
+- **Completed Phases:** Phase 3 (UI - 34/34 issues), Phase 4 (Production - 4.1+4.2)
+- **Progress:** Tracked automatically (e.g., 5/50 tasks = 10%)
+- **Next Actions:** Auto-recommended based on task dependencies
 
 ------
 
