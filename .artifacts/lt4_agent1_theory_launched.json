@@ -1,0 +1,17 @@
+{
+  "task_id": "LT-4",
+  "agent_id": "agent1_theory",
+  "role": "Theory Specialist - Derive rigorous Lyapunov stability proofs from control theory first principles",
+  "status": "RUNNING",
+  "estimated_hours": 12.0,
+  "launched_timestamp": "2025-10-18T18:43:28.036107",
+  "dependencies": [
+    "docs/theory/smc_theory_complete.md",
+    "src/controllers/classic_smc.py",
+    "src/controllers/sta_smc.py",
+    "src/controllers/adaptive_smc.py",
+    "src/controllers/hybrid_adaptive_sta_smc.py",
+    "src/controllers/swing_up_smc.py"
+  ],
+  "_checkpoint_timestamp": "2025-10-18T18:43:28.036107"
+}

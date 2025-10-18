@@ -1,0 +1,40 @@
+{
+  "task_id": "LT-4",
+  "status": "APPROVED",
+  "plan_summary": "Lyapunov stability proofs for 5 controllers (Classical, STA, Adaptive, Hybrid, Swing-Up)",
+  "estimated_hours": 18.0,
+  "agents": [
+    {
+      "id": "agent1_theory",
+      "role": "Theory Specialist - Derive mathematical proofs",
+      "hours": 12
+    },
+    {
+      "id": "agent2_validation",
+      "role": "Implementation Validator - Verify code-proof correspondence",
+      "hours": 8
+    }
+  ],
+  "expected_deliverables": [
+    "docs/theory/lyapunov_stability_proofs.md",
+    ".artifacts/lt4_handoff.json",
+    ".artifacts/lt4_validation_report.md",
+    "scripts/validate_stability_margins.py"
+  ],
+  "approved_timestamp": "2025-10-18T18:43:00.336459",
+  "metadata": {
+    "controllers": [
+      "Classical SMC",
+      "STA SMC",
+      "Adaptive SMC",
+      "Hybrid Adaptive STA-SMC",
+      "Swing-Up SMC"
+    ],
+    "risk_level": "HIGH",
+    "critical_proofs": [
+      "STA (non-smooth Lyapunov)",
+      "Hybrid (ISS framework)"
+    ]
+  },
+  "_checkpoint_timestamp": "2025-10-18T18:43:00.336459"
+}
