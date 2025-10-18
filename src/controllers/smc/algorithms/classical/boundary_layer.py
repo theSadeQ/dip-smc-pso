@@ -149,53 +149,183 @@ class BoundaryLayer:
         return abs(surface_value) <= effective_epsilon
 
     def get_chattering_index(self, control_history: Union[list, np.ndarray],
-                           dt: float = 0.01) -> float:
+                           dt: float = 0.01,
+                           method: str = "frequency",
+                           cutoff_hz: float = 20.0) -> float:
         """
-        Compute chattering index from control signal history using FFT-based spectral analysis.
+        Compute chattering index from control signal history.
 
-        Measures high-frequency oscillations in the control signal.
-        Higher values indicate more chattering. Enhanced with frequency-domain
-        analysis to better capture chattering phenomena.
+        **IMPORTANT:** Default method changed from "combined" to "frequency" (Oct 2025).
+        The old "combined" method (RMS(du/dt) + frequency) is BIASED against adaptive
+        boundary layers because it penalizes time-varying ε(t) from adaptation, NOT
+        true high-frequency chattering. See MT-6 analysis for details.
+
+        Measures high-frequency oscillations in the control signal using unbiased
+        frequency-domain analysis. Higher values indicate more chattering.
 
         Args:
             control_history: Time series of control signal values
-            dt: Sampling time
+            dt: Sampling time (seconds)
+            method: Chattering detection method:
+                - "frequency" (default, RECOMMENDED): Frequency-domain only, unbiased
+                - "zero_crossing": Count sign changes per second
+                - "combined_legacy": Old biased method (DEPRECATED, use for comparison only)
+            cutoff_hz: High-frequency cutoff in Hz (default: 20.0, adjusted from 10.0)
 
         Returns:
-            Chattering index (RMS of high-frequency derivative + spectral power)
+            Chattering index (dimensionless for frequency/combined, Hz for zero_crossing)
+
+        Notes:
+            - **Frequency method:** Measures fraction of power above cutoff_hz
+              * Unbiased for adaptive boundary layers
+              * Typical range: [0, 0.01] for well-tuned SMC
+              * RECOMMENDED for all chattering analysis
+
+            - **Zero-crossing method:** Counts switching frequency
+              * Unbiased, direct measure of oscillations
+              * Typical range: [0, 10] Hz for DIP systems
+              * Good for qualitative comparison
+
+            - **Combined_legacy method:** RMS(du/dt) + frequency (DEPRECATED)
+              * BIASED against adaptive boundary layers
+              * Inflates chattering index by 300-400% for adaptive controllers
+              * Only use for backward compatibility testing
+
+        References:
+            - MT-6 Chattering Metric Bias Analysis (Oct 2025)
+            - benchmarks/MT6_PHASE2_FINAL_REPORT.md
         """
         if len(control_history) < 3:
             return 0.0
 
         control_array = np.asarray(control_history)
 
-        # Compute control derivative approximation (Total Variation)
-        control_derivative = np.gradient(control_array, dt)
+        if method == "frequency":
+            # RECOMMENDED: Frequency-domain only (unbiased)
+            return self._chattering_frequency_domain(control_array, dt, cutoff_hz)
 
-        # Time-domain component: RMS of derivative (measures switching rate)
+        elif method == "zero_crossing":
+            # Alternative: Zero-crossing rate (unbiased)
+            return self._chattering_zero_crossing(control_array, dt)
+
+        elif method == "combined_legacy":
+            # DEPRECATED: Old biased method (kept for backward compatibility)
+            import warnings
+            warnings.warn(
+                "The 'combined_legacy' chattering metric is BIASED against adaptive "
+                "boundary layers. Use method='frequency' (default) instead. "
+                "See MT-6 analysis for details.",
+                DeprecationWarning,
+                stacklevel=2
+            )
+            return self._chattering_combined_legacy(control_array, dt, cutoff_hz=10.0)
+
+        else:
+            raise ValueError(f"Unknown chattering method: {method}. "
+                           f"Choose from: 'frequency', 'zero_crossing', 'combined_legacy'")
+
+    def _chattering_frequency_domain(self, control_array: np.ndarray,
+                                    dt: float,
+                                    cutoff_hz: float) -> float:
+        """
+        Frequency-domain chattering index (UNBIASED).
+
+        Computes fraction of power above cutoff frequency using FFT.
+        Unbiased for adaptive boundary layers because ε(t) variations are
+        low-frequency (<1 Hz) and filtered out.
+
+        Args:
+            control_array: Control signal array
+            dt: Sampling time
+            cutoff_hz: High-frequency cutoff (Hz)
+
+        Returns:
+            High-frequency power ratio [0, 1]
+        """
+        if len(control_array) < 10:
+            return 0.0
+
+        from scipy.fft import fft, fftfreq
+
+        # Compute FFT
+        spectrum = np.abs(fft(control_array))
+        freqs = fftfreq(len(control_array), d=dt)
+
+        # High-frequency mask
+        hf_mask = np.abs(freqs) > cutoff_hz
+        if not np.any(hf_mask):
+            return 0.0
+
+        # Power ratio
+        hf_power = np.sum(spectrum[hf_mask]**2)
+        total_power = np.sum(spectrum**2) + 1e-12
+
+        return float(hf_power / total_power)
+
+    def _chattering_zero_crossing(self, control_array: np.ndarray,
+                                  dt: float) -> float:
+        """
+        Zero-crossing rate chattering index (UNBIASED).
+
+        Counts sign changes per second. Unbiased for adaptive boundary layers
+        because sign changes are independent of ε(t) magnitude variations.
+
+        Args:
+            control_array: Control signal array
+            dt: Sampling time
+
+        Returns:
+            Zero-crossing rate (Hz)
+        """
+        if len(control_array) < 2:
+            return 0.0
+
+        # Count sign changes
+        sign_changes = np.sum(np.diff(np.sign(control_array)) != 0)
+        total_time = len(control_array) * dt
+
+        return float(sign_changes / total_time)
+
+    def _chattering_combined_legacy(self, control_array: np.ndarray,
+                                    dt: float,
+                                    cutoff_hz: float = 10.0) -> float:
+        """
+        Combined time+frequency chattering index (BIASED - DEPRECATED).
+
+        Uses 70% RMS(du/dt) + 30% frequency-domain. BIASED against adaptive
+        boundary layers because du/dt includes dε/dt component from time-varying
+        boundary layer thickness.
+
+        DO NOT USE for comparing fixed vs adaptive boundary layers.
+
+        Args:
+            control_array: Control signal array
+            dt: Sampling time
+            cutoff_hz: High-frequency cutoff (Hz)
+
+        Returns:
+            Combined chattering index (BIASED)
+        """
+        # Time-domain component: RMS of derivative (BIASED)
+        control_derivative = np.gradient(control_array, dt)
         time_domain_index = np.sqrt(np.mean(control_derivative**2))
 
-        # Frequency-domain component: FFT-based spectral analysis
+        # Frequency-domain component
         if len(control_array) > 10:
-            # Compute FFT to identify high-frequency content
             from scipy.fft import fft, fftfreq
             spectrum = np.abs(fft(control_array))
             freqs = fftfreq(len(control_array), d=dt)
 
-            # High-frequency power (above 10 Hz)
-            hf_mask = np.abs(freqs) > 10.0
+            hf_mask = np.abs(freqs) > cutoff_hz
             hf_power = np.sum(spectrum[hf_mask]) if np.any(hf_mask) else 0.0
-            total_power = np.sum(spectrum)
+            total_power = np.sum(spectrum) + 1e-12
 
-            # Normalize by total power to get high-frequency ratio
-            freq_domain_index = hf_power / (total_power + 1e-12)
+            freq_domain_index = hf_power / total_power
         else:
             freq_domain_index = 0.0
 
-        # Combined chattering index (weighted sum)
-        chattering_index = 0.7 * time_domain_index + 0.3 * freq_domain_index
-
-        return float(chattering_index)
+        # Combined (BIASED weighting)
+        return float(0.7 * time_domain_index + 0.3 * freq_domain_index)
 
     def update_thickness(self, new_thickness: float) -> None:
         """
@@ -256,8 +386,8 @@ class BoundaryLayer:
         if len(surface_array) < 2 or len(control_array) < 2:
             return {'error': 'Insufficient data for analysis'}
 
-        # Chattering metrics (using control signal)
-        chattering_index = self.get_chattering_index(control_array, dt)
+        # Chattering metrics (using unbiased frequency-domain method)
+        chattering_index = self.get_chattering_index(control_array, dt, method="frequency")
 
         # Control smoothness index (Total Variation Diminishing metric)
         total_variation = np.sum(np.abs(np.diff(control_array)))
