@@ -1,0 +1,32 @@
+{
+  "best_parameters": {
+    "epsilon_min": 0.013457980736924537,
+    "alpha": 0.17122530116768758
+  },
+  "validation_statistics": {
+    "n_runs": 100,
+    "chattering_index": {
+      "mean": 28.825116756280558,
+      "std": 7.169331457602742,
+      "ci_95": 1.4051889656901373
+    },
+    "settling_time": {
+      "mean": 10.0,
+      "std": 0.0,
+      "ci_95": 0.0
+    },
+    "overshoot": {
+      "mean": 6.9387633336052446,
+      "std": 1.466120198464251,
+      "ci_95": 0.2873595588989932
+    },
+    "control_energy": {
+      "mean": 7090.381608198921,
+      "std": 6630.702611169986
+    }
+  },
+  "comparison_with_baseline": {
+    "baseline_chattering": 6.37,
+    "adaptive_chattering": 28.825116756280558,
+    "chattering_reduction_percent": -352.51360684898833,
+    "target_achieved": 
