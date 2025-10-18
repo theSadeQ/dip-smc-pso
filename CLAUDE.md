@@ -87,10 +87,28 @@ git commit -m "feat(MT-6): Complete boundary layer optimization"
 # Terminal will prompt for recovery when new commits detected
 ```
 
+**ONE-COMMAND Recovery (New!):**
+```bash
+# In NEW Claude session after token limit, just type:
+/recover
+
+# Claude automatically:
+# 1. Runs bash .dev_tools/recover_project.sh
+# 2. Shows project status, recent commits, uncommitted changes
+# 3. Recommends next actions
+# Recovery time: ~5 seconds | Manual steps: ZERO
+```
+
 **Recovery Reliability:**
 - Git commits: 10/10 (permanent, distributed, timestamped)
+- Automated state tracking: 10/10 (Git hooks, 11/11 tests passed)
 - Project state tracker: 9/10 (auto-updated, validated)
-- Checkpoint files: 8/10 (survives token limits, manual cleanup)
+- Checkpoint files: 8/10 (survives token limits)
+
+**Test Coverage:**
+- Comprehensive test suite: `.dev_tools/test_automation_simple.sh`
+- Test results: `.dev_tools/TEST_RESULTS.md`
+- Success rate: 11/11 tests (100%)
 
 **What Survives Token Limits:**
 - ✅ Git commits (permanent)
