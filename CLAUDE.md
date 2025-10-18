@@ -60,6 +60,12 @@
    - Tracks 60-70 hour research roadmap (50 tasks: QW, MT, LT)
    - Usage: `python .dev_tools/roadmap_tracker.py [-v]`
 
+4. **Agent Checkpoint System** (`.dev_tools/agent_checkpoint.py`) - **NEW (Oct 2025)**
+   - Tracks multi-agent orchestration state (plan approval, agent launch, progress, completion)
+   - Enables recovery from interrupted agent work (token limits, crashes)
+   - Checkpoint files: `.artifacts/{task}_{agent}_*.json`
+   - See: `.ai/config/agent_checkpoint_system.md` for complete documentation
+
 **Quick Start:**
 ```bash
 # Initialize project state (one-time)
@@ -103,7 +109,8 @@ git commit -m "feat(MT-6): Complete boundary layer optimization"
 - Git commits: 10/10 (permanent, distributed, timestamped)
 - Automated state tracking: 10/10 (Git hooks, 11/11 tests passed)
 - Project state tracker: 9/10 (auto-updated, validated)
-- Checkpoint files: 8/10 (survives token limits)
+- Agent checkpoint system: 9/10 (detects interrupted multi-agent work)
+- Data checkpoint files: 8/10 (benchmark CSVs, results JSON)
 
 **Test Coverage:**
 - Comprehensive test suite: `.dev_tools/test_automation_simple.sh`
@@ -113,9 +120,10 @@ git commit -m "feat(MT-6): Complete boundary layer optimization"
 **What Survives Token Limits:**
 - ✅ Git commits (permanent)
 - ✅ Project state file (`.ai/config/project_state.json`)
-- ✅ Checkpoint files (`.tsmc_results.json`, benchmark CSVs, etc.)
+- ✅ Agent checkpoint files (`.artifacts/{task}_{agent}_*.json`)
+- ✅ Data checkpoint files (`.tsmc_results.json`, benchmark CSVs, etc.)
 - ❌ Background bash processes (SIGTERM on session end)
-- ❌ In-memory agent state (lost on context limit)
+- ❌ In-memory agent state (lost on context limit - BUT checkpoints preserve progress)
 
 **Project Structure Tracking:**
 - **Current Phase:** Research (ROADMAP_EXISTING_PROJECT.md)
@@ -519,6 +527,28 @@ missed = monitor.end(start)
 - Automatic coordination for complex multi-domain tasks
 - Subordinate agents: Integration, Control Systems, PSO, Documentation, Code Beautification
 - Quality gates: ≥95% coverage critical, ≥85% overall, ≥7/8 system health
+
+**Checkpoint System Integration (NEW - Oct 2025):**
+- All multi-agent tasks MUST use checkpoint system
+- Checkpoints prevent loss of work on token limits/crashes
+- Recovery script automatically detects incomplete agent work
+- See: `.ai/config/agent_checkpoint_system.md` for usage guide
+
+**Mandatory Checkpoint Calls:**
+```python
+# When user approves plan
+checkpoint_plan_approved(task_id, plan_summary, hours, agents, deliverables)
+
+# When launching each agent
+checkpoint_agent_launched(task_id, agent_id, role, hours)
+
+# Every 5-10 minutes during agent execution
+checkpoint_agent_progress(task_id, agent_id, hours_completed, deliverables, current_phase)
+
+# When agent completes or fails
+checkpoint_agent_complete(task_id, agent_id, hours, deliverables, summary)
+checkpoint_agent_failed(task_id, agent_id, hours, reason, recovery_recommendation)
+```
 
 ------
 
