@@ -1,0 +1,591 @@
+% ============================================================================
+% BILINGUAL MASTER'S THESIS - ENGLISH VERSION
+% PSO-Optimized Adaptive Boundary Layer Sliding Mode Control
+% for Double Inverted Pendulum Systems
+% ============================================================================
+%
+% Compilation Instructions:
+%   xelatex thesis_main.tex
+%   bibtex thesis_main
+%   xelatex thesis_main.tex
+%   xelatex thesis_main.tex
+%
+% For Persian version: Use thesis_persian.tex
+% ============================================================================
+
+\documentclass[12pt,a4paper,oneside]{report}
+
+% ============================================================================
+% PACKAGES - Basic
+% ============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tocloft}
+
+% ============================================================================
+% PAGE LAYOUT - Iranian Standard
+% ============================================================================
+\geometry{
+    a4paper,
+    left=3.5cm,    % Wider left margin for binding
+    right=2.5cm,
+    top=3cm,
+    bottom=3cm
+}
+
+\onehalfspacing  % 1.5 line spacing
+\usepackage{xcolor}
+
+% ============================================================================
+% PERSIAN SUPPORT (Comment out if not using Persian)
+% ============================================================================
+% For Persian text, you'll need XeLaTeX compilation
+% Uncomment the following lines when compiling with XeLaTeX:
+% \usepackage{xepersian}
+% \settextfont{XB Niloofar} % Or another Persian font installed on your system
+% \setlatintextfont{Times New Roman}
+
+% ============================================================================
+% THEOREM ENVIRONMENTS
+% ============================================================================
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}{Assumption}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+
+% ============================================================================
+% CUSTOM COMMANDS
+% ============================================================================
+\newcommand{\eeff}{\epsilon_{\text{eff}}}
+\newcommand{\emin}{\epsilon_{\min}}
+\newcommand{\ueq}{u_{\text{eq}}}
+\newcommand{\usw}{u_{\text{sw}}}
+\newcommand{\treach}{t_{\text{reach}}}
+\newcommand{\dbar}{\bar{d}}
+\newcommand{\Ts}{T_s}
+\newcommand{\vect}[1]{\mathbf{#1}}
+
+% ============================================================================
+% HEADERS AND FOOTERS
+% ============================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\leftmark}
+\fancyhead[RO]{\rightmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Chapter and Section formatting
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-20pt}{40pt}
+
+% Line spacing
+\onehalfspacing
+
+% ============================================================================
+% DOCUMENT INFORMATION
+% ============================================================================
+\title{PSO-Optimized Adaptive Boundary Layer Sliding Mode Control \\
+for Double Inverted Pendulum Systems}
+\author{[Your Name]}
+\date{\today}
+
+% ============================================================================
+% BEGIN DOCUMENT
+% ============================================================================
+\begin{document}
+
+% ============================================================================
+% FRONT MATTER
+% ============================================================================
+\pagenumbering{roman}
+
+% ----------------------------------------------------------------------------
+% Title Page
+% ----------------------------------------------------------------------------
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+{\LARGE \textbf{[Your University Name]}}\\[0.5cm]
+{\large [Your Faculty/Department]}\\[2cm]
+
+{\Huge \textbf{PSO-Optimized Adaptive Boundary Layer \\ Sliding Mode Control for \\ Double Inverted Pendulum Systems}}\\[1.5cm]
+
+{\Large Bilingual Master's Thesis}\\[0.5cm]
+{\large (English with Persian Abstract)}\\[3cm]
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft}
+\textbf{Presented by:}\\
+[Your Full Name]\\
+Student ID: [Your ID]
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright}
+\textbf{Supervisor:}\\
+[Supervisor Name]\\
+[Supervisor Title]
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+{\large \today}
+
+\end{titlepage}
+
+% ----------------------------------------------------------------------------
+% Persian Abstract (چکیده فارسی)
+% ----------------------------------------------------------------------------
+\chapter*{چکیده}
+\addcontentsline{toc}{chapter}{چکیده فارسی (Persian Abstract)}
+
+% NOTE: For proper Persian rendering, compile with XeLaTeX and uncomment xepersian package
+% For now, this is a placeholder. You'll need to add Persian text here.
+
+\textbf{[Persian abstract text to be added]}
+
+این پایان‌نامه یک روش لایه مرزی تطبیقی بهینه‌شده با الگوریتم بهینه‌سازی ازدحام ذرات (PSO) را برای کاهش چترینگ در کنترل مد لغزشی سیستم آونگ معکوس دوگانه ارائه می‌دهد.
+
+\textbf{کلمات کلیدی:} کنترل مد لغزشی، کاهش چترینگ، بهینه‌سازی ازدحام ذرات، لایه مرزی تطبیقی، آونگ معکوس، بهینه‌سازی مقاوم، اعتبارسنجی
+
+% ----------------------------------------------------------------------------
+% Abstract (English)
+% ----------------------------------------------------------------------------
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+Sliding mode control (SMC) offers robust control for nonlinear systems but suffers from chattering—high-frequency oscillations degrading actuator lifespan and precision. This thesis presents a PSO-optimized adaptive boundary layer approach for chattering mitigation in double inverted pendulum (DIP) systems.
+
+We introduce an adaptive boundary layer mechanism $\eeff = \emin + \alpha|\dot{s}|$ where parameters $(\emin, \alpha)$ are optimized via Particle Swarm Optimization with a chattering-weighted fitness function (70-15-15 weighting). Monte Carlo validation over 100 trials demonstrates \textbf{66.5\% chattering reduction} (6.37 $\rightarrow$ 2.14, $p < 0.001$, Cohen's $d = 5.29$) with \textbf{zero energy penalty} compared to fixed boundary layers.
+
+Rigorous Lyapunov analysis proves finite-time convergence to the sliding surface under standard assumptions, with reaching time bounded by $\treach \leq \sqrt{2}|s(0)|/(\beta\eta)$ where $\eta = K - \dbar$. This addresses the theoretical gap in existing adaptive boundary layer literature.
+
+However, systematic stress testing reveals critical limitations: PSO parameters optimized for $\pm$0.05 rad initial conditions exhibit \textbf{50.4$\times$ chattering degradation} (2.14 $\rightarrow$ 107.61) and \textbf{90.2\% failure rate} (49/500 successful trials) when tested under $\pm$0.3 rad conditions, exposing severe single-scenario overfitting. Additionally, all controllers achieve \textbf{0\% convergence} under external disturbances (10 N step, 30 N$\cdot$s impulse, 8 N sinusoidal), demonstrating brittleness when fitness optimization ignores robustness scenarios.
+
+These findings motivate multi-scenario robust PSO with disturbance-aware fitness functions and establish rigorous validation best practices for the SMC community. The thesis contributes: (1) PSO-optimized adaptive boundary layer achieving dramatic chattering reduction, (2) rigorous Lyapunov stability analysis preserving finite-time convergence guarantees, and (3) honest reporting of generalization failures and disturbance rejection limitations, providing actionable insights for future robust controller optimization research.
+
+\textbf{Keywords:} Sliding mode control, chattering mitigation, particle swarm optimization, adaptive boundary layer, inverted pendulum, robust optimization, validation
+
+% ----------------------------------------------------------------------------
+% Declaration
+% ----------------------------------------------------------------------------
+\chapter*{Declaration}
+\addcontentsline{toc}{chapter}{Declaration}
+
+I hereby declare that this thesis is my original work and has been written by me in its entirety. I have duly acknowledged all the sources of information which have been used in the thesis.
+
+This thesis has also not been submitted for any degree in any university previously.
+
+\vspace{2cm}
+
+\noindent
+\rule{5cm}{0.4pt}\\
+[Your Name]\\
+\today
+
+% ----------------------------------------------------------------------------
+% Acknowledgments
+% ----------------------------------------------------------------------------
+\chapter*{Acknowledgments}
+\addcontentsline{toc}{chapter}{Acknowledgments}
+
+I would like to express my sincere gratitude to my supervisor, [Supervisor Name], for their invaluable guidance, support, and encouragement throughout this research.
+
+I am also grateful to [Department/University Name] for providing the computational resources and research facilities necessary to complete this work.
+
+Special thanks to my family and friends for their continuous support and understanding during my master's studies.
+
+% [Add more acknowledgments as appropriate]
+
+% ----------------------------------------------------------------------------
+% Table of Contents
+% ----------------------------------------------------------------------------
+\tableofcontents
+
+% ----------------------------------------------------------------------------
+% List of Figures
+% ----------------------------------------------------------------------------
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+
+% ----------------------------------------------------------------------------
+% List of Tables
+% ----------------------------------------------------------------------------
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+
+% ----------------------------------------------------------------------------
+% List of Abbreviations
+% ----------------------------------------------------------------------------
+\chapter*{List of Abbreviations}
+\addcontentsline{toc}{chapter}{List of Abbreviations}
+
+\begin{description}[leftmargin=3cm, style=nextline]
+\item[SMC] Sliding Mode Control
+\item[DIP] Double Inverted Pendulum
+\item[PSO] Particle Swarm Optimization
+\item[STA] Super-Twisting Algorithm
+\item[HOSMC] Higher-Order Sliding Mode Control
+\item[RK4] 4th-order Runge-Kutta
+\item[FFT] Fast Fourier Transform
+\item[CI] Confidence Interval
+\item[LQR] Linear Quadratic Regulator
+\item[PID] Proportional-Integral-Derivative
+\item[ESO] Extended State Observer
+\item[ISMC] Integral Sliding Mode Control
+\item[LHS] Latin Hypercube Sampling
+\end{description}
+
+% ----------------------------------------------------------------------------
+% List of Symbols
+% ----------------------------------------------------------------------------
+\chapter*{List of Symbols}
+\addcontentsline{toc}{chapter}{List of Symbols}
+
+\begin{description}[leftmargin=3cm, style=nextline]
+\item[$\vect{q}$] Generalized coordinates vector
+\item[$\theta_1, \theta_2$] Pendulum link angles from vertical [rad]
+\item[$x$] Cart position [m]
+\item[$u$] Control input (horizontal force) [N]
+\item[$s$] Sliding surface variable
+\item[$\epsilon$] Boundary layer thickness
+\item[$\eeff$] Adaptive boundary layer thickness
+\item[$\emin$] Minimum boundary layer parameter
+\item[$\alpha$] Adaptation rate parameter
+\item[$K$] Switching gain
+\item[$k_d$] Derivative gain
+\item[$\vect{M}(\vect{q})$] Inertia matrix
+\item[$\vect{C}(\vect{q}, \dot{\vect{q}})$] Coriolis/centripetal matrix
+\item[$\vect{G}(\vect{q})$] Gravity vector
+\item[$\vect{d}(t)$] External disturbance vector
+\item[$\beta$] Controllability scalar
+\item[$\eta$] Stability margin ($K - \dbar$)
+\item[$C$] Chattering index
+\item[$\Ts$] Settling time [s]
+\item[$O$] Overshoot
+\item[$E$] Control energy [N$^2$$\cdot$s]
+\end{description}
+
+% ============================================================================
+% MAIN MATTER
+% ============================================================================
+\cleardoublepage
+\pagenumbering{arabic}
+
+% ----------------------------------------------------------------------------
+% CHAPTER 1: INTRODUCTION
+% ----------------------------------------------------------------------------
+\chapter{Introduction}
+\label{ch:introduction}
+
+\section{Background and Motivation}
+
+Sliding mode control (SMC) has emerged as a powerful robust control technique for nonlinear systems due to its insensitivity to matched disturbances and model uncertainties~\cite{utkin1977variable, slotine1991applied}. The fundamental principle of SMC is to design a switching control law that drives system trajectories onto a predefined sliding surface, where desirable dynamics are guaranteed through appropriate sliding surface design. Once the system reaches the sliding manifold, it exhibits robustness to matched uncertainties and disturbances, making SMC particularly attractive for controlling underactuated mechanical systems subject to external perturbations.
+
+However, a fundamental barrier to industrial adoption of classical SMC is \emph{chattering}: high-frequency oscillations in the control signal caused by imperfect switching in discrete-time implementations~\cite{bartolini1998chattering}. In practical control systems with finite sampling rates, the discontinuous signum function in the switching control law cannot achieve ideal infinite-frequency switching. Instead, the control signal oscillates at the sampling frequency or its harmonics, producing undesirable effects:
+
+\begin{itemize}
+\item \textbf{Actuator wear and reduced lifespan}: High-frequency mechanical switching stresses bearings, gears, hydraulic valves, and electric motors, leading to premature failure
+\item \textbf{Degraded control precision}: Oscillations prevent the system from settling to the exact equilibrium point, maintaining persistent tracking errors
+\item \textbf{Energy waste}: Continuous high-frequency control variations consume actuator energy without contributing to system stabilization
+\item \textbf{Excitation of unmodeled dynamics}: Chattering frequencies may coincide with flexible mode natural frequencies, destabilizing the overall system
+\end{itemize}
+
+These practical limitations have motivated extensive research into chattering mitigation strategies over the past four decades.
+
+\subsection{The Double Inverted Pendulum Benchmark}
+
+The double inverted pendulum (DIP) represents a challenging benchmark system for control systems research, exhibiting several characteristics that make it an ideal testbed for evaluating robust control approaches:
+
+\textbf{Underactuation:} The DIP has three degrees of freedom (cart position, two pendulum angles) but only one control input (horizontal force on cart). With underactuation degree 2, the controller must coordinate multiple unactuated states through dynamic coupling, requiring sophisticated control strategies.
+
+\textbf{Nonlinearity:} The system dynamics are inherently nonlinear, with trigonometric functions in the equations of motion. Unlike the single inverted pendulum, the DIP cannot be adequately controlled using linearized approximations over large operating ranges.
+
+\textbf{Instability:} The upright equilibrium (both pendulums vertical) is unstable in open-loop. Small perturbations grow exponentially with time constants $\tau \approx 0.45$ s, requiring active feedback control with sufficient bandwidth ($> 10$ Hz) to maintain stability.
+
+\textbf{Strong coupling:} The two pendulum angles are dynamically coupled through inertia matrix off-diagonal terms and Coriolis effects. This coupling is maximal when the pendulums are aligned and minimal when orthogonal, creating state-dependent control authority.
+
+While linear controllers (LQR, PID) can stabilize the DIP near the equilibrium point, they lack robustness to disturbances and parameter variations. Sliding mode control provides an attractive alternative through its inherent robustness properties derived from Lyapunov stability theory. However, the chattering problem must be addressed before SMC can be practically deployed on physical DIP hardware.
+
+\subsection{Classical Chattering Mitigation Approaches}
+
+Researchers have proposed three main categories of chattering reduction techniques:
+
+\textbf{1. Boundary Layer Methods:} Replace the discontinuous signum function $\text{sign}(s)$ with a continuous approximation within a boundary layer of thickness $\epsilon$~\cite{slotine1991applied}:
+\begin{equation}
+\text{sat}(s/\epsilon) = \begin{cases}
+s/\epsilon & |s| \leq \epsilon \\
+\text{sign}(s) & |s| > \epsilon
+\end{cases}
+\end{equation}
+
+This approach trades reduced chattering for increased steady-state error $\mathcal{O}(\epsilon)$. The boundary layer width $\epsilon$ presents a fundamental tradeoff: larger $\epsilon$ reduces chattering but degrades tracking accuracy, while smaller $\epsilon$ improves precision but exacerbates chattering. Fixed boundary layer selection thus represents a compromise that may be suboptimal across different operating regions of the state space.
+
+\textbf{2. Higher-Order Sliding Modes:} Achieve continuous control through integral action by designing control laws that drive higher-order derivatives of the sliding variable to zero~\cite{levant2007principles}. The super-twisting algorithm (STA) is a popular second-order sliding mode controller:
+\begin{equation}
+\begin{aligned}
+u &= -k_1 |s|^{1/2} \text{sign}(s) + u_1 \\
+\dot{u}_1 &= -k_2 \text{sign}(s)
+\end{aligned}
+\end{equation}
+
+While HOSMC eliminates chattering by producing continuous control signals, this comes at the cost of increased complexity (additional state variables, observers for derivative estimation) and computational burden.
+
+\textbf{3. Adaptive Gain Tuning:} Adjust switching gains online based on sliding surface magnitude or estimates of disturbance bounds~\cite{bartolini1998chattering}. This approach requires careful stability analysis to prevent parameter drift and ensure convergence.
+
+Despite four decades of research, a practical question remains: \textbf{How can we minimize chattering while maintaining control precision and energy efficiency across varying operating conditions?}
+
+\section{Research Gap}
+
+Existing SMC chattering mitigation techniques exhibit three key limitations that motivate the research presented in this thesis:
+
+\subsection{Fixed Boundary Layers}
+
+Classical boundary layer methods use constant $\epsilon$ regardless of system state, failing to exploit the natural variation in control requirements during different operating phases:
+
+\begin{itemize}
+\item \textbf{Reaching phase} (far from sliding surface): System has large tracking errors and sliding surface derivative magnitude $|\dot{s}|$ is large. A wider boundary layer could reduce chattering during this transient without significantly affecting convergence speed.
+
+\item \textbf{Sliding phase} (near sliding surface): System maintains small tracking errors with $|\dot{s}| \approx 0$. A narrow boundary layer is desirable to minimize steady-state error and maximize tracking precision.
+\end{itemize}
+
+Fixed boundary layers force a single compromise value that may be suboptimal for both phases. Recent work has explored adaptive boundary layers that vary $\epsilon$ based on system state~\cite{ieee2018selfreg}, but these approaches lack principled parameter selection methodologies beyond heuristic tuning.
+
+\subsection{Manual Parameter Tuning}
+
+Both fixed and adaptive boundary layer approaches typically rely on trial-and-error or conservative design rules (e.g., $\epsilon > 0.1$) for parameter selection. This manual tuning process:
+
+\begin{itemize}
+\item Misses opportunities for systematic optimization tailored to specific performance objectives (chattering reduction vs. transient response vs. energy efficiency)
+\item Produces suboptimal results compared to metaheuristic optimization algorithms
+\item Requires expert knowledge and iterative experimentation, limiting accessibility
+\item May not discover the global optimum in high-dimensional parameter spaces
+\end{itemize}
+
+Particle Swarm Optimization (PSO) has been successfully applied to SMC gain tuning~\cite{ayinalem2025pso, hepso2025manipulator}, but no prior work systematically optimizes adaptive boundary layer parameters using PSO with chattering-weighted fitness functions.
+
+\subsection{Single-Scenario Validation}
+
+A critical gap in the SMC optimization literature is the ubiquitous practice of validating controllers \emph{only on the same operating conditions used during optimization}. Reviewing recent PSO-SMC studies~\cite{ayinalem2025pso, hepso2025manipulator, mdpi2025quadcopter}:
+
+\begin{itemize}
+\item All optimize controller parameters using specific initial condition distributions (typically small perturbations near equilibrium)
+\item All validate performance using \emph{the same distribution}, providing optimistically biased performance estimates
+\item \textbf{None} test robustness beyond the optimization conditions (e.g., 2-10$\times$ larger initial conditions, external disturbances)
+\item Generalization failures and brittleness outside the training distribution go unreported
+\end{itemize}
+
+This validation gap obscures a fundamental question: \textbf{Do PSO-optimized controllers generalize beyond their training conditions, or do they overfit to narrow operating ranges?}
+
+\section{Research Objectives}
+
+The primary objective of this thesis is to develop and rigorously evaluate a PSO-optimized adaptive boundary layer sliding mode control approach for chattering mitigation in double inverted pendulum systems, with honest reporting of both successes and limitations.
+
+\subsection{Specific Objectives}
+
+\begin{enumerate}
+\item \textbf{Design an adaptive boundary layer mechanism} that dynamically adjusts based on sliding surface derivative magnitude, exploiting the natural variation in control requirements across operating phases.
+
+\item \textbf{Develop a PSO-based optimization framework} with chattering-weighted multi-objective fitness function to systematically tune adaptive boundary layer parameters.
+
+\item \textbf{Establish Lyapunov stability guarantees} proving that the adaptive boundary layer preserves finite-time convergence to the sliding surface under standard assumptions.
+
+\item \textbf{Conduct rigorous Monte Carlo validation} demonstrating statistically significant chattering reduction with quantified effect sizes and confidence intervals.
+
+\item \textbf{Perform systematic stress testing} to identify generalization failures and disturbance rejection limitations beyond the training distribution.
+
+\item \textbf{Propose solutions for robust controller design} addressing the identified limitations through multi-scenario PSO and disturbance-aware fitness functions.
+\end{enumerate}
+
+\section{Research Questions}
+
+This thesis addresses the following research questions:
+
+\begin{enumerate}
+\item \textbf{RQ1:} Can PSO systematically optimize adaptive boundary layer parameters to achieve significant chattering reduction compared to fixed boundary layers?
+
+\item \textbf{RQ2:} Does the adaptive boundary layer mechanism preserve finite-time convergence guarantees established by Lyapunov stability theory?
+
+\item \textbf{RQ3:} What is the statistical significance and practical effect size of chattering reduction achieved through PSO-optimized adaptive boundary layers?
+
+\item \textbf{RQ4:} Do PSO-optimized parameters generalize beyond the training distribution, or do they exhibit overfitting to narrow operating ranges?
+
+\item \textbf{RQ5:} How robust is the optimized controller to external disturbances not included in the fitness function?
+
+\item \textbf{RQ6:} What multi-scenario optimization strategies can address generalization failures and improve robustness?
+\end{enumerate}
+
+\section{Significance and Contributions}
+
+This thesis makes three primary contributions to the sliding mode control literature:
+
+\subsection{PSO-Optimized Adaptive Boundary Layer}
+
+We propose an adaptive boundary layer mechanism $\eeff = \emin + \alpha|\dot{s}|$ that dynamically adjusts based on sliding surface derivative magnitude, with parameters $(\emin, \alpha)$ optimized via PSO using a novel chattering-weighted fitness function:
+\begin{equation}
+F = 0.70 \cdot C + 0.15 \cdot \Ts + 0.15 \cdot O
+\end{equation}
+where $C$ is chattering index (FFT-based), $\Ts$ is settling time, and $O$ is overshoot. The 70\% chattering weight explicitly prioritizes the industrial deployment barrier.
+
+Experimental validation over 100 Monte Carlo trials demonstrates \textbf{66.5\% chattering reduction} (6.37 $\rightarrow$ 2.14, $p < 0.001$, Cohen's $d = 5.29$) with \textbf{zero energy penalty} compared to fixed boundary layers. This very large effect size ($d = 5.29$, exceptional in controls research) indicates the reduction is not only statistically significant but also profoundly meaningful in practice.
+
+\subsection{Lyapunov Stability Analysis for Time-Varying Boundary Layer}
+
+We provide rigorous theoretical guarantees via Lyapunov's direct method, proving finite-time convergence to the sliding surface under standard assumptions (matched disturbances, switching gain dominance $K > \dbar$, controllability, positive gains). The key theoretical contribution is \textbf{Theorem 1}, establishing reaching time:
+\begin{equation}
+\treach \leq \frac{\sqrt{2}|s(0)|}{\beta\eta}
+\end{equation}
+where $\eta = K - \dbar > 0$ and $\beta = \vect{L}\vect{M}^{-1}\vect{B}$ is the controllability scalar. Critically, this bound is independent of the time-varying $\eeff(t)$, demonstrating that adaptive adjustment does not compromise fundamental stability requirements.
+
+This addresses a theoretical gap in existing adaptive boundary layer literature~\cite{ieee2018selfreg, frontiers2024fuzzy}, which often lacks Lyapunov proofs for dynamic boundary thickness.
+
+\subsection{Honest Reporting of Generalization Failures and Robustness Limitations}
+
+Through systematic stress testing beyond the training distribution, we identify and quantify critical limitations rarely reported in the SMC literature:
+
+\textbf{Generalization Failure (MT-7):} PSO parameters optimized for initial conditions within $\pm$0.05 rad (training distribution) exhibit:
+\begin{itemize}
+\item \textbf{50.4$\times$ chattering degradation} (2.14 $\rightarrow$ 107.61) when tested under $\pm$0.3 rad conditions
+\item \textbf{90.2\% failure rate} (only 49/500 trials converged)
+\item Consistent failure across 10 independent random seeds (mean chattering: 102.69-111.36)
+\end{itemize}
+
+This reveals severe single-scenario overfitting: the narrow training distribution ($\pm$0.05 rad) represents only ~17\% of the $\pm$0.3 rad operating range tested.
+
+\textbf{Disturbance Rejection Failure (MT-8):} All controllers (Classical SMC, STA-SMC, Adaptive SMC) achieve \textbf{0\% convergence} under external disturbances (10 N step, 30 N$\cdot$s impulse, 8 N sinusoidal), with maximum overshoots $>230°$ indicating complete destabilization.
+
+These negative results provide crucial insights:
+\begin{itemize}
+\item Single-scenario PSO produces brittle controllers that fail catastrophically outside training conditions
+\item Multi-scenario robust PSO with diverse operating conditions is essential
+\item Fitness functions must explicitly include disturbance rejection scenarios
+\item Validation must extend significantly beyond training distributions
+\end{itemize}
+
+\textbf{Broader Impact:} By honestly reporting failures alongside successes, this thesis establishes rigorous validation best practices and motivates future research on robust multi-scenario optimization for the SMC community.
+
+\section{Scope and Limitations}
+
+This thesis focuses on simulation-based controller design and validation for the double inverted pendulum system. The scope includes:
+
+\textbf{Included:}
+\begin{itemize}
+\item Full nonlinear DIP model without small-angle approximations
+\item PSO optimization of adaptive boundary layer parameters
+\item Lyapunov stability analysis under standard assumptions
+\item Comprehensive Monte Carlo validation (100-500 trials per experiment)
+\item Statistical significance testing (Welch's t-test, Cohen's d, bootstrap CI)
+\item Stress testing beyond training distribution (6$\times$ larger initial conditions)
+\item Disturbance rejection analysis under step/impulse/sinusoidal perturbations
+\end{itemize}
+
+\textbf{Limitations:}
+\begin{itemize}
+\item \textbf{Simulation-only}: No hardware validation on physical DIP system. Real actuators exhibit friction, backlash, flexible modes, and sensor noise not captured in simulation.
+\item \textbf{Single-scenario PSO}: Optimization performed exclusively on $\pm$0.05 rad initial conditions without disturbance scenarios during fitness evaluation.
+\item \textbf{Classical SMC structure}: No integral sliding surface, preventing constant disturbance rejection.
+\item \textbf{Fixed sliding surface gains}: Only adaptive boundary layer parameters $(\emin, \alpha)$ optimized; sliding surface gains $(k_1, k_2, \lambda_1, \lambda_2)$ and switching gain $K$ manually selected.
+\item \textbf{System-specific parameters}: Optimized values $\emin^* = 0.0025$, $\alpha^* = 1.21$ tailored to specific DIP configuration (cart 1 kg, links 0.1 kg, lengths 0.5 m).
+\end{itemize}
+
+\section{Thesis Organization}
+
+The remainder of this thesis is organized as follows:
+
+\textbf{Chapter 2 (Literature Review)} surveys recent advances in SMC chattering mitigation, PSO-based controller tuning, and adaptive boundary layer techniques, identifying four research gaps addressed by this work.
+
+\textbf{Chapter 3 (Mathematical Modeling)} presents the double inverted pendulum system model, including Lagrangian derivation, equations of motion, state-space representation, and physical parameters.
+
+\textbf{Chapter 4 (Controller Design)} develops the sliding mode control framework with adaptive boundary layer mechanism and provides Lyapunov stability analysis proving finite-time convergence.
+
+\textbf{Chapter 5 (PSO-Based Optimization)} describes the particle swarm optimization methodology, chattering-weighted fitness function design, parameter space exploration, and convergence analysis.
+
+\textbf{Chapter 6 (Experimental Setup and Methodology)} details the simulation environment, Monte Carlo validation procedures, performance metrics, and statistical analysis framework.
+
+\textbf{Chapter 7 (Results and Analysis)} presents comprehensive experimental results: baseline controller comparison, adaptive boundary layer validation, generalization failure analysis, disturbance rejection evaluation, and statistical validation.
+
+\textbf{Chapter 8 (Discussion)} interprets the results, compares findings to literature, analyzes failure mechanisms, proposes solutions (multi-scenario robust PSO, disturbance-aware fitness, integral SMC), and discusses broader implications for the SMC community.
+
+\textbf{Chapter 9 (Conclusions and Future Work)} summarizes contributions, acknowledges limitations, and outlines future research directions including hardware validation and multi-scenario robust optimization.
+
+% ============================================================================
+% NOTE: Remaining chapters follow similar structure
+% Due to length, only Chapter 1 is fully shown here as template
+% Chapters 2-9 will be created in separate files and included
+% ============================================================================
+
+% Include remaining chapters
+% \include{chapters/chapter2_literature_review}
+% \include{chapters/chapter3_mathematical_modeling}
+% \include{chapters/chapter4_controller_design}
+% \include{chapters/chapter5_pso_optimization}
+% \include{chapters/chapter6_experimental_setup}
+% \include{chapters/chapter7_results_analysis}
+% \include{chapters/chapter8_discussion}
+% \include{chapters/chapter9_conclusions}
+
+% ============================================================================
+% BACK MATTER
+% ============================================================================
+
+% ----------------------------------------------------------------------------
+% References
+% ----------------------------------------------------------------------------
+\bibliographystyle{IEEEtran}
+\bibliography{../references}
+
+% ----------------------------------------------------------------------------
+% Appendices
+% ----------------------------------------------------------------------------
+\begin{appendices}
+
+\chapter{Complete Lyapunov Stability Proofs}
+\label{app:lyapunov_proofs}
+
+% Appendix A content here
+
+\chapter{PSO Algorithm Implementation}
+\label{app:pso_implementation}
+
+% Appendix B content here
+
+\chapter{DIP System Parameters and Configuration Files}
+\label{app:dip_parameters}
+
+% Appendix C content here
+
+\chapter{Statistical Test Procedures}
+\label{app:statistical_procedures}
+
+% Appendix D content here
+
+\chapter{Additional Experimental Results}
+\label{app:additional_results}
+
+% Appendix E content here
+
+\end{appendices}
+
+\end{document}

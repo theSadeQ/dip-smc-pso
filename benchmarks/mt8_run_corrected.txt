@@ -1,0 +1,241 @@
+2025-10-18 16:20:15,142 - INFO - ================================================================================
+2025-10-18 16:20:15,142 - INFO - MT-8: Disturbance Rejection Analysis
+2025-10-18 16:20:15,142 - INFO - ================================================================================
+2025-10-18 16:20:15,193 - INFO - Configuration loaded from sources: ENV > .env > config.yaml
+2025-10-18 16:20:15,193 - INFO - Configuration loaded
+2025-10-18 16:20:15,193 - INFO - Dynamics model initialized
+2025-10-18 16:20:15,193 - INFO - 
+Testing 3 controllers:
+2025-10-18 16:20:15,193 - INFO -   - classical_smc
+2025-10-18 16:20:15,193 - INFO -   - sta_smc
+2025-10-18 16:20:15,193 - INFO -   - adaptive_smc
+2025-10-18 16:20:15,193 - INFO - 
+================================================================================
+2025-10-18 16:20:15,195 - INFO - Testing: classical_smc
+2025-10-18 16:20:15,195 - INFO - ================================================================================
+2025-10-18 16:20:15,195 - INFO -   Running nominal simulation (no disturbance)...
+2025-10-18 16:20:15,197 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+D:\Projects\main\src\plant\core\state_validation.py:171: UserWarning: State vector was modified during sanitization
+  warnings.warn("State vector was modified during sanitization", UserWarning)
+2025-10-18 16:20:17,042 - INFO -     Nominal control effort RMS: 149.89 N
+2025-10-18 16:20:17,043 - INFO - 
+  Scenario: step
+2025-10-18 16:20:17,043 - INFO -   ------------------------------------------------------------------------------
+2025-10-18 16:20:17,043 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:17,234 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:17,337 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:17,445 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:17,615 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:17,709 - INFO -     Trials: 5
+2025-10-18 16:20:17,709 - INFO -     Settling time: 10.00s
+2025-10-18 16:20:17,709 - INFO -     Max overshoot: 241.63°
+2025-10-18 16:20:17,710 - INFO -     Recovery time: 10.00s
+2025-10-18 16:20:17,710 - INFO -     Control effort increase: -5.3%
+2025-10-18 16:20:17,710 - INFO -     Robustness index: 1.000
+2025-10-18 16:20:17,710 - INFO -     Converged: False
+2025-10-18 16:20:17,710 - INFO - 
+  Scenario: impulse
+2025-10-18 16:20:17,710 - INFO -   ------------------------------------------------------------------------------
+2025-10-18 16:20:17,710 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:17,817 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:17,908 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:18,048 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:18,158 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:18,262 - INFO -     Trials: 5
+2025-10-18 16:20:18,263 - INFO -     Settling time: 10.00s
+2025-10-18 16:20:18,263 - INFO -     Max overshoot: 241.63°
+2025-10-18 16:20:18,263 - INFO -     Recovery time: 10.00s
+2025-10-18 16:20:18,263 - INFO -     Control effort increase: -0.2%
+2025-10-18 16:20:18,263 - INFO -     Robustness index: 1.000
+2025-10-18 16:20:18,263 - INFO -     Converged: False
+2025-10-18 16:20:18,263 - INFO - 
+  Scenario: sinusoidal
+2025-10-18 16:20:18,264 - INFO -   ------------------------------------------------------------------------------
+2025-10-18 16:20:18,264 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:18,361 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:18,452 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:18,552 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:18,656 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:18,768 - INFO -     Trials: 5
+2025-10-18 16:20:18,769 - INFO -     Settling time: 10.00s
+2025-10-18 16:20:18,769 - INFO -     Max overshoot: 236.87°
+2025-10-18 16:20:18,769 - INFO -     Recovery time: 10.00s
+2025-10-18 16:20:18,769 - INFO -     Control effort increase: -1.7%
+2025-10-18 16:20:18,769 - INFO -     Robustness index: 1.000
+2025-10-18 16:20:18,769 - INFO -     Converged: False
+2025-10-18 16:20:18,769 - INFO - 
+  Scenario: random
+2025-10-18 16:20:18,769 - INFO -   ------------------------------------------------------------------------------
+2025-10-18 16:20:18,769 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:18,879 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:18,976 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:19,089 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:19,184 - INFO - Created classical_smc controller with gains: [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
+2025-10-18 16:20:19,282 - INFO -     Trials: 5
+2025-10-18 16:20:19,283 - INFO -     Settling time: 10.00s
+2025-10-18 16:20:19,283 - INFO -     Max overshoot: 241.64°
+2025-10-18 16:20:19,283 - INFO -     Recovery time: 10.00s
+2025-10-18 16:20:19,283 - INFO -     Control effort increase: -0.8%
+2025-10-18 16:20:19,283 - INFO -     Robustness index: 1.000
+2025-10-18 16:20:19,283 - INFO -     Converged: False
+2025-10-18 16:20:19,283 - INFO - 
+================================================================================
+2025-10-18 16:20:19,283 - INFO - Testing: sta_smc
+2025-10-18 16:20:19,283 - INFO - ================================================================================
+2025-10-18 16:20:19,283 - INFO -   Running nominal simulation (no disturbance)...
+2025-10-18 16:20:19,284 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:19,392 - INFO -     Nominal control effort RMS: 149.97 N
+2025-10-18 16:20:19,392 - INFO - 
+  Scenario: step
+2025-10-18 16:20:19,392 - INFO -   ------------------------------------------------------------------------------
+2025-10-18 16:20:19,392 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:19,467 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:19,549 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:19,622 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:19,700 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:19,777 - INFO -     Trials: 5
+2025-10-18 16:20:19,777 - INFO -     Settling time: 10.00s
+2025-10-18 16:20:19,778 - INFO -     Max overshoot: 241.80°
+2025-10-18 16:20:19,778 - INFO -     Recovery time: 10.00s
+2025-10-18 16:20:19,778 - INFO -     Control effort increase: -5.3%
+2025-10-18 16:20:19,778 - INFO -     Robustness index: 1.000
+2025-10-18 16:20:19,778 - INFO -     Converged: False
+2025-10-18 16:20:19,778 - INFO - 
+  Scenario: impulse
+2025-10-18 16:20:19,778 - INFO -   ------------------------------------------------------------------------------
+2025-10-18 16:20:19,779 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:19,866 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:20,017 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:20,222 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:20,303 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:20,373 - INFO -     Trials: 5
+2025-10-18 16:20:20,373 - INFO -     Settling time: 10.00s
+2025-10-18 16:20:20,373 - INFO -     Max overshoot: 241.80°
+2025-10-18 16:20:20,373 - INFO -     Recovery time: 10.00s
+2025-10-18 16:20:20,373 - INFO -     Control effort increase: -0.2%
+2025-10-18 16:20:20,373 - INFO -     Robustness index: 1.000
+2025-10-18 16:20:20,373 - INFO -     Converged: False
+2025-10-18 16:20:20,375 - INFO - 
+  Scenario: sinusoidal
+2025-10-18 16:20:20,375 - INFO -   ------------------------------------------------------------------------------
+2025-10-18 16:20:20,375 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:20,462 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:20,549 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:20,634 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:20,720 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:20,800 - INFO -     Trials: 5
+2025-10-18 16:20:20,800 - INFO -     Settling time: 10.00s
+2025-10-18 16:20:20,800 - INFO -     Max overshoot: 237.05°
+2025-10-18 16:20:20,800 - INFO -     Recovery time: 10.00s
+2025-10-18 16:20:20,800 - INFO -     Control effort increase: -1.7%
+2025-10-18 16:20:20,800 - INFO -     Robustness index: 1.000
+2025-10-18 16:20:20,800 - INFO -     Converged: False
+2025-10-18 16:20:20,800 - INFO - 
+  Scenario: random
+2025-10-18 16:20:20,801 - INFO -   ------------------------------------------------------------------------------
+2025-10-18 16:20:20,801 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:20,892 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:20,986 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:21,099 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:21,239 - INFO - Created sta_smc controller with gains: [25.0, 15.0, 20.0, 12.0, 8.0, 6.0]
+2025-10-18 16:20:21,346 - INFO -     Trials: 5
+2025-10-18 16:20:21,346 - INFO -     Settling time: 10.00s
+2025-10-18 16:20:21,346 - INFO -     Max overshoot: 241.79°
+2025-10-18 16:20:21,346 - INFO -     Recovery time: 10.00s
+2025-10-18 16:20:21,346 - INFO -     Control effort increase: -0.8%
+2025-10-18 16:20:21,346 - INFO -     Robustness index: 1.000
+2025-10-18 16:20:21,346 - INFO -     Converged: False
+2025-10-18 16:20:21,347 - INFO - 
+================================================================================
+2025-10-18 16:20:21,347 - INFO - Testing: adaptive_smc
+2025-10-18 16:20:21,347 - INFO - ================================================================================
+2025-10-18 16:20:21,347 - INFO -   Running nominal simulation (no disturbance)...
+D:\Projects\main\src\controllers\smc\algorithms\adaptive\config.py:83: UserWarning: Large adaptation rate may cause instability
+  warnings.warn("Large adaptation rate may cause instability", UserWarning)
+2025-10-18 16:20:21,349 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:21,444 - INFO -     Nominal control effort RMS: 149.51 N
+2025-10-18 16:20:21,445 - INFO - 
+  Scenario: step
+2025-10-18 16:20:21,445 - INFO -   ------------------------------------------------------------------------------
+2025-10-18 16:20:21,445 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:21,558 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:21,654 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:21,769 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:21,877 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:21,981 - INFO -     Trials: 5
+2025-10-18 16:20:21,981 - INFO -     Settling time: 10.00s
+2025-10-18 16:20:21,981 - INFO -     Max overshoot: 237.86°
+2025-10-18 16:20:21,981 - INFO -     Recovery time: 10.00s
+2025-10-18 16:20:21,981 - INFO -     Control effort increase: -5.3%
+2025-10-18 16:20:21,981 - INFO -     Robustness index: 1.000
+2025-10-18 16:20:21,981 - INFO -     Converged: False
+2025-10-18 16:20:21,981 - INFO - 
+  Scenario: impulse
+2025-10-18 16:20:21,982 - INFO -   ------------------------------------------------------------------------------
+2025-10-18 16:20:21,982 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:22,086 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:22,212 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:22,330 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:22,438 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:22,532 - INFO -     Trials: 5
+2025-10-18 16:20:22,533 - INFO -     Settling time: 10.00s
+2025-10-18 16:20:22,533 - INFO -     Max overshoot: 237.86°
+2025-10-18 16:20:22,533 - INFO -     Recovery time: 10.00s
+2025-10-18 16:20:22,533 - INFO -     Control effort increase: -0.2%
+2025-10-18 16:20:22,533 - INFO -     Robustness index: 1.000
+2025-10-18 16:20:22,534 - INFO -     Converged: False
+2025-10-18 16:20:22,534 - INFO - 
+  Scenario: sinusoidal
+2025-10-18 16:20:22,534 - INFO -   ------------------------------------------------------------------------------
+2025-10-18 16:20:22,534 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:22,633 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:22,736 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:22,844 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:22,949 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:23,051 - INFO -     Trials: 5
+2025-10-18 16:20:23,051 - INFO -     Settling time: 10.00s
+2025-10-18 16:20:23,051 - INFO -     Max overshoot: 233.52°
+2025-10-18 16:20:23,051 - INFO -     Recovery time: 10.00s
+2025-10-18 16:20:23,051 - INFO -     Control effort increase: -1.7%
+2025-10-18 16:20:23,051 - INFO -     Robustness index: 1.000
+2025-10-18 16:20:23,051 - INFO -     Converged: False
+2025-10-18 16:20:23,052 - INFO - 
+  Scenario: random
+2025-10-18 16:20:23,052 - INFO -   ------------------------------------------------------------------------------
+2025-10-18 16:20:23,052 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:23,154 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:23,310 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:23,436 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:23,556 - INFO - Created adaptive_smc controller with gains: [25.0, 18.0, 15.0, 10.0, 4.0]
+2025-10-18 16:20:23,681 - INFO -     Trials: 5
+2025-10-18 16:20:23,681 - INFO -     Settling time: 10.00s
+2025-10-18 16:20:23,681 - INFO -     Max overshoot: 238.01°
+2025-10-18 16:20:23,681 - INFO -     Recovery time: 10.00s
+2025-10-18 16:20:23,682 - INFO -     Control effort increase: -0.8%
+2025-10-18 16:20:23,682 - INFO -     Robustness index: 1.000
+2025-10-18 16:20:23,682 - INFO -     Converged: False
+2025-10-18 16:20:23,682 - INFO - 
+================================================================================
+2025-10-18 16:20:23,682 - INFO - Saving results...
+2025-10-18 16:20:23,682 - INFO - ================================================================================
+2025-10-18 16:20:23,687 - INFO - OK: Saved CSV: benchmarks\MT8_disturbance_rejection.csv
+2025-10-18 16:20:23,689 - INFO - OK: Saved JSON: benchmarks\MT8_disturbance_rejection.json
+2025-10-18 16:20:23,689 - INFO - 
+================================================================================
+2025-10-18 16:20:23,689 - INFO - SUMMARY: Robustness Ranking (Average across all scenarios)
+2025-10-18 16:20:23,689 - INFO - ================================================================================
+2025-10-18 16:20:23,692 - INFO - 
+Rank   Controller                     Robustness      Overshoot    Recovery     Converged
+2025-10-18 16:20:23,693 - INFO - --------------------------------------------------------------------------------
+2025-10-18 16:20:23,693 - INFO - 1      adaptive_smc                   1.000           236.8°        10.00s       0%
+2025-10-18 16:20:23,693 - INFO - 2      classical_smc                  1.000           240.4°        10.00s       0%
+2025-10-18 16:20:23,694 - INFO - 3      sta_smc                        1.000           240.6°        10.00s       0%
+2025-10-18 16:20:23,694 - INFO - 
+================================================================================
+2025-10-18 16:20:23,694 - INFO - MT-8 COMPLETE!
+2025-10-18 16:20:23,694 - INFO - ================================================================================
+2025-10-18 16:20:23,694 - INFO - Results saved to:
+2025-10-18 16:20:23,694 - INFO -   - benchmarks\MT8_disturbance_rejection.csv
+2025-10-18 16:20:23,694 - INFO -   - benchmarks\MT8_disturbance_rejection.json
+2025-10-18 16:20:23,694 - INFO - 
+Next: Generate visualization plots (mt8_visualize_results.py)
