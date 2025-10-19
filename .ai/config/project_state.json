@@ -45,11 +45,28 @@
       "scripts/lt6_model_uncertainty.py"
     ]
   },
-  "last_updated": "2025-10-18T20:09:17.618128",
-  "notes": [],
+  "last_updated": "2025-10-19T11:55:09.000000",
+  "notes": [
+    {
+      "date": "2025-10-19",
+      "type": "ad-hoc-validation",
+      "task": "MT-7",
+      "title": "Robust PSO Validation (Ad-Hoc)",
+      "description": "Validated MT-6 parameters under challenging conditions (±0.3 rad). Result: 50.4x chattering degradation, 90% failure rate. MT-6 parameters do NOT generalize.",
+      "deliverables": [
+        "benchmarks/MT7_COMPLETE_REPORT.md",
+        "benchmarks/MT7_statistical_comparison.json",
+        "benchmarks/figures/MT7_robustness_*.png (4 figures)",
+        "scripts/mt7_*.py (4 scripts)",
+        "tests/test_scripts/test_mt7_*.py (65 tests)"
+      ],
+      "pr": "#22",
+      "commit": "f279e72c"
+    }
+  ],
   "last_commit": {
-    "hash": "b30f84fbd3c2225ca9ab7ba67bf34d9d03c6922b",
-    "timestamp": 1760804857,
-    "message": "feat(LT-6): Complete model uncertainty analysis"
+    "hash": "f279e72c",
+    "timestamp": 1760876109,
+    "message": "feat(MT-7): Robust PSO validation - MT-6 parameters do NOT generalize to challenging conditions (#22)"
   }
 }
