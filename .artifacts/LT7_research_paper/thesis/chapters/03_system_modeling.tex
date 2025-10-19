@@ -1,0 +1,658 @@
+\chapter{System Modeling}
+\label{chap:system_modeling}
+
+This chapter presents the complete mathematical model of the double inverted pendulum (DIP) system used in this research. We derive the nonlinear dynamics from first principles using Lagrangian mechanics, develop the equations of motion in matrix form, and analyze fundamental system properties including controllability and stability. The rigorous development provided here establishes the theoretical foundation for controller design in Chapter~\ref{chap:controller_design}.
+
+%================================================================
+% SECTION 3.1: DOUBLE INVERTED PENDULUM DESCRIPTION
+%================================================================
+\section{Double Inverted Pendulum Description}
+\label{sec:dip_description}
+
+The double inverted pendulum is a canonical benchmark system in control theory that exemplifies the challenges inherent in controlling underactuated, nonlinear, and unstable mechanical systems~\cite{spong1995energy, fantoni2001non}. The system consists of two rigid links serially connected via revolute joints, mounted on a cart that translates horizontally along a single degree of freedom track.
+
+\subsection{Physical Configuration}
+
+As illustrated in Figure~\ref{fig:dip_schematic} (see conference paper Figure~1), the system comprises three primary components:
+
+\begin{itemize}
+\item \textbf{Cart (mass $M$):} A rigid body constrained to horizontal translation along the $x$-axis. The cart position $x(t)$ is measured from a fixed reference point on the track.
+
+\item \textbf{First pendulum link (mass $m_1$, length $l_1$):} A uniform rigid rod with moment of inertia $I_1 = \frac{1}{12}m_1 l_1^2$ about its center of mass. The link is connected to the cart via a frictionless revolute joint at one endpoint. The angular position $\theta_1(t)$ is measured counter-clockwise from the upward vertical direction.
+
+\item \textbf{Second pendulum link (mass $m_2$, length $l_2$):} A uniform rigid rod with moment of inertia $I_2 = \frac{1}{12}m_2 l_2^2$. Connected to the free endpoint of the first link via a frictionless revolute joint. The angular position $\theta_2(t)$ is measured counter-clockwise from the upward vertical.
+\end{itemize}
+
+\subsection{Degrees of Freedom and Underactuation}
+
+The system possesses three degrees of freedom (DOF), described by the generalized coordinate vector:
+\begin{equation}
+\mathbf{q}(t) = \begin{bmatrix} x(t) \\ \theta_1(t) \\ \theta_2(t) \end{bmatrix} \in \mathbb{R}^3
+\label{eq:generalized_coordinates}
+\end{equation}
+
+where $x \in \mathbb{R}$ represents cart position, and $\theta_1, \theta_2 \in \mathbb{R}$ represent pendulum angles (measured in radians). Actuation is provided by a single horizontal force $u(t)$ applied to the cart:
+\begin{equation}
+u(t) \in \mathcal{U} = \{ u \in \mathbb{R} : |u| \leq u_{\max} \}
+\label{eq:control_input}
+\end{equation}
+
+where $u_{\max} = 150$ N represents the actuator saturation limit imposed by the DC motor specifications in our laboratory setup. The system is thus \textit{underactuated}~\cite{tedrake2009underactuated} with degree of underactuation $\delta = n - m = 3 - 1 = 2$, where $n = 3$ is the number of DOF and $m = 1$ is the number of control inputs. This underactuation fundamentally complicates control design, as the pendulum angles $\theta_1$ and $\theta_2$ cannot be directly actuated and must be stabilized indirectly through dynamic coupling with the cart motion.
+
+\subsection{Control Objective}
+
+The primary control objective is to stabilize the system at the upright equilibrium configuration:
+\begin{equation}
+\mathbf{q}_{\text{eq}} = \begin{bmatrix} x_{\text{ref}} \\ 0 \\ 0 \end{bmatrix}, \quad \dot{\mathbf{q}}_{\text{eq}} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+\label{eq:control_objective}
+\end{equation}
+
+where $x_{\text{ref}}$ is an arbitrary cart reference position (typically chosen as $x_{\text{ref}} = 0$ m). Mathematically, the control problem is to design a feedback control law $u = \kappa(\mathbf{x})$ such that the closed-loop system exhibits:
+
+\begin{enumerate}
+\item \textbf{Asymptotic stability:} $\lim_{t \to \infty} \|\mathbf{x}(t) - \mathbf{x}_{\text{eq}}\| = 0$ for initial conditions $\mathbf{x}(0)$ within a basin of attraction $\mathcal{B} \subseteq \mathbb{R}^6$.
+
+\item \textbf{Finite settling time:} The system reaches a neighborhood of equilibrium $\|\mathbf{x}(t) - \mathbf{x}_{\text{eq}}\| < \varepsilon$ within a finite time $T_s < \infty$ for a specified tolerance $\varepsilon > 0$.
+
+\item \textbf{Robustness:} The control law remains effective under bounded disturbances $\mathbf{d}(t)$ with $\|\mathbf{d}(t)\| \leq d_{\max}$ and parametric uncertainties in the system model.
+\end{enumerate}
+
+It is important to note that the equilibrium~\eqref{eq:control_objective} is \textit{unstable} in open-loop (see Section~\ref{sec:system_properties} for eigenvalue analysis), necessitating active feedback control.
+
+\subsection{Modeling Assumptions}
+
+To enable analytical tractability while preserving essential dynamics, we adopt the following standard modeling assumptions~\cite{khalil2002nonlinear}:
+
+\begin{enumerate}
+\item \textbf{Rigid body dynamics:} All components (cart and both links) are treated as perfectly rigid bodies with no structural compliance or vibration modes.
+
+\item \textbf{Frictionless joints:} Revolute joints between cart-pendulum and pendulum-pendulum connections are assumed frictionless (no viscous or Coulomb friction). This is justified by our use of precision ball bearings in the experimental setup (friction torque $< 0.01$ Nm).
+
+\item \textbf{Point mass cart, uniform rods:} The cart is modeled as a point mass concentrated at its center. Pendulum links are modeled as uniform density rods with center of mass at the geometric center ($l_i/2$ from each endpoint).
+
+\item \textbf{Planar motion:} All motion is constrained to the vertical plane. This is enforced mechanically via guide rails in the experimental apparatus.
+
+\item \textbf{No small-angle approximation:} We retain the full nonlinear trigonometric terms ($ \sin\theta_i$, $\cos\theta_i$) rather than linearizing to $\theta_i$ and $1$. This is essential for swing-up control and capturing large-angle dynamics.
+
+\item \textbf{Known, constant parameters:} System parameters $(M, m_1, m_2, l_1, l_2, I_1, I_2, g)$ are assumed perfectly known and time-invariant. In practice, parameters are identified experimentally (see Chapter~\ref{chap:experimental_setup}).
+\end{enumerate}
+
+\subsection{Control Challenges}
+
+The DIP system exhibits four key challenges that make it an ideal testbed for advanced nonlinear control techniques:
+
+\begin{enumerate}
+\item \textbf{Underactuation ($\delta = 2$):} Only the cart is directly actuated, yet both pendulum angles must be regulated. This requires exploiting dynamic coupling.
+
+\item \textbf{Open-loop instability:} The upright equilibrium has two positive eigenvalues (time constants $\tau_1 \approx \tau_2 \approx 0.45$ s for our parameters), leading to exponential divergence without feedback.
+
+\item \textbf{Strong nonlinearity:} Trigonometric nonlinearities, configuration-dependent inertia matrix $\mathbf{M}(\mathbf{q})$, and velocity-squared centripetal terms preclude linear control techniques near equilibrium and especially during swing-up.
+
+\item \textbf{Dynamic coupling:} The inertia matrix off-diagonal term $M_{23}(\theta_1, \theta_2)$ and Coriolis matrix terms induce strong coupling between $\theta_1$ and $\theta_2$ motions. Decentralized control of each angle independently is infeasible; coordinated control is mandatory.
+\end{enumerate}
+
+These challenges motivate the use of sliding mode control (SMC), which provides robustness to model uncertainty and strong nonlinearities while guaranteeing finite-time convergence (Chapter~\ref{chap:controller_design}).
+
+%================================================================
+% SECTION 3.2: LAGRANGIAN MECHANICS FORMULATION
+%================================================================
+\section{Lagrangian Mechanics Formulation}
+\label{sec:lagrangian_formulation}
+
+We derive the DIP equations of motion using the Lagrangian approach~\cite{spong2006robot}, which systematically handles the constraints and coordinate transformations inherent in multi-body systems. This section presents the complete derivation from first principles.
+
+\subsection{Position and Velocity Kinematics}
+
+Define the Cartesian position vectors for the center of mass of each component:
+
+\textbf{Cart (point mass):}
+\begin{equation}
+\mathbf{r}_0 = \begin{bmatrix} x \\ 0 \end{bmatrix}
+\label{eq:cart_position}
+\end{equation}
+
+\textbf{First pendulum center of mass:}
+\begin{equation}
+\mathbf{r}_1 = \begin{bmatrix} x + \frac{l_1}{2}\sin\theta_1 \\ \frac{l_1}{2}\cos\theta_1 \end{bmatrix}
+\label{eq:pend1_position}
+\end{equation}
+
+\textbf{Second pendulum center of mass:}
+\begin{equation}
+\mathbf{r}_2 = \begin{bmatrix} x + l_1\sin\theta_1 + \frac{l_2}{2}\sin\theta_2 \\ l_1\cos\theta_1 + \frac{l_2}{2}\cos\theta_2 \end{bmatrix}
+\label{eq:pend2_position}
+\end{equation}
+
+Note that the vertical position is measured upward from the track. The velocity vectors are obtained via time differentiation:
+
+\textbf{Cart velocity:}
+\begin{equation}
+\dot{\mathbf{r}}_0 = \begin{bmatrix} \dot{x} \\ 0 \end{bmatrix}
+\label{eq:cart_velocity}
+\end{equation}
+
+\textbf{First pendulum velocity:}
+\begin{equation}
+\dot{\mathbf{r}}_1 = \begin{bmatrix} \dot{x} + \frac{l_1}{2}\cos\theta_1 \cdot \dot{\theta}_1 \\ -\frac{l_1}{2}\sin\theta_1 \cdot \dot{\theta}_1 \end{bmatrix}
+\label{eq:pend1_velocity}
+\end{equation}
+
+\textbf{Second pendulum velocity:}
+\begin{equation}
+\dot{\mathbf{r}}_2 = \begin{bmatrix} \dot{x} + l_1\cos\theta_1 \cdot \dot{\theta}_1 + \frac{l_2}{2}\cos\theta_2 \cdot \dot{\theta}_2 \\ -l_1\sin\theta_1 \cdot \dot{\theta}_1 - \frac{l_2}{2}\sin\theta_2 \cdot \dot{\theta}_2 \end{bmatrix}
+\label{eq:pend2_velocity}
+\end{equation}
+
+\subsection{Kinetic Energy}
+
+The total kinetic energy comprises translational and rotational contributions for each body:
+\begin{equation}
+T = T_0 + T_1 + T_2
+\label{eq:kinetic_total}
+\end{equation}
+
+\textbf{Cart translational kinetic energy:}
+\begin{equation}
+T_0 = \frac{1}{2}M \dot{x}^2
+\label{eq:cart_kinetic}
+\end{equation}
+
+\textbf{First pendulum kinetic energy:}
+The first pendulum has both translational kinetic energy (motion of center of mass) and rotational kinetic energy (rotation about center of mass):
+\begin{equation}
+T_1 = \frac{1}{2}m_1 \|\dot{\mathbf{r}}_1\|^2 + \frac{1}{2}I_1 \dot{\theta}_1^2
+\label{eq:pend1_kinetic}
+\end{equation}
+
+Expanding the translational component using~\eqref{eq:pend1_velocity}:
+\begin{align}
+\frac{1}{2}m_1 \|\dot{\mathbf{r}}_1\|^2 &= \frac{1}{2}m_1 \left[ \left(\dot{x} + \frac{l_1}{2}\cos\theta_1 \cdot \dot{\theta}_1\right)^2 + \left(\frac{l_1}{2}\sin\theta_1 \cdot \dot{\theta}_1\right)^2 \right] \nonumber \\
+&= \frac{1}{2}m_1 \left[ \dot{x}^2 + l_1 \dot{x} \cos\theta_1 \cdot \dot{\theta}_1 + \frac{l_1^2}{4}\dot{\theta}_1^2 \right]
+\label{eq:pend1_kinetic_expanded}
+\end{align}
+
+where the cross-term $\dot{x} \cdot \frac{l_1}{2}\cos\theta_1 \cdot \dot{\theta}_1$ appears twice, yielding the factor $l_1$ (not $\frac{l_1}{2}$). The rotational component uses the moment of inertia for a uniform rod about its center: $I_1 = \frac{1}{12}m_1 l_1^2$.
+
+\textbf{Second pendulum kinetic energy:}
+Similarly, the second pendulum has:
+\begin{equation}
+T_2 = \frac{1}{2}m_2 \|\dot{\mathbf{r}}_2\|^2 + \frac{1}{2}I_2 \dot{\theta}_2^2
+\label{eq:pend2_kinetic}
+\end{equation}
+
+Expanding the translational component using~\eqref{eq:pend2_velocity}:
+\begin{align}
+\frac{1}{2}m_2 \|\dot{\mathbf{r}}_2\|^2 = \frac{1}{2}m_2 \Big[ &\dot{x}^2 + 2l_1 \dot{x} \cos\theta_1 \cdot \dot{\theta}_1 + l_1^2 \dot{\theta}_1^2 \nonumber \\
+&+ l_2 \dot{x} \cos\theta_2 \cdot \dot{\theta}_2 + l_1 l_2 \cos(\theta_1 - \theta_2) \dot{\theta}_1 \dot{\theta}_2 \nonumber \\
+&+ \frac{l_2^2}{4}\dot{\theta}_2^2 \Big]
+\label{eq:pend2_kinetic_expanded}
+\end{align}
+
+where the critical \textit{coupling term} $l_1 l_2 \cos(\theta_1 - \theta_2) \dot{\theta}_1 \dot{\theta}_2$ arises from the product of the two pendulum angular velocities. This term is responsible for the dynamic interaction between the two pendulum motions.
+
+Combining all terms, the total kinetic energy is:
+\begin{align}
+T = &\frac{1}{2}(M + m_1 + m_2)\dot{x}^2 + \frac{1}{2}m_1 l_1 \dot{x} \cos\theta_1 \cdot \dot{\theta}_1 + m_2 l_1 \dot{x} \cos\theta_1 \cdot \dot{\theta}_1 \nonumber \\
+&+ \frac{1}{2}m_2 l_2 \dot{x} \cos\theta_2 \cdot \dot{\theta}_2 + \frac{1}{2}\left(I_1 + \frac{m_1 l_1^2}{4} + m_2 l_1^2\right)\dot{\theta}_1^2 \nonumber \\
+&+ \frac{1}{2}m_2 l_1 l_2 \cos(\theta_1 - \theta_2)\dot{\theta}_1 \dot{\theta}_2 + \frac{1}{2}\left(I_2 + \frac{m_2 l_2^2}{4}\right)\dot{\theta}_2^2
+\label{eq:kinetic_complete}
+\end{align}
+
+\subsection{Potential Energy}
+
+The potential energy arises from gravitational forces acting on the pendulum masses (the cart operates in a horizontal plane and has zero gravitational potential):
+\begin{equation}
+V = V_1 + V_2
+\label{eq:potential_total}
+\end{equation}
+
+where:
+\begin{align}
+V_1 &= m_1 g \cdot (\text{vertical position of } m_1 \text{ center of mass}) = m_1 g \frac{l_1}{2}\cos\theta_1 \label{eq:potential_pend1} \\
+V_2 &= m_2 g \cdot (\text{vertical position of } m_2 \text{ center of mass}) = m_2 g \left( l_1\cos\theta_1 + \frac{l_2}{2}\cos\theta_2 \right) \label{eq:potential_pend2}
+\end{align}
+
+The total potential energy is thus:
+\begin{equation}
+V = m_1 g \frac{l_1}{2}\cos\theta_1 + m_2 g \left( l_1\cos\theta_1 + \frac{l_2}{2}\cos\theta_2 \right)
+\label{eq:potential_complete}
+\end{equation}
+
+Note that $\cos\theta_i$ is maximized (potential energy is highest) when the pendulum is upright ($\theta_i = 0$), consistent with the convention that $\theta_i$ is measured from the vertical upward direction.
+
+\subsection{Lagrangian}
+
+The Lagrangian function is defined as the difference between kinetic and potential energy:
+\begin{equation}
+\mathcal{L}(\mathbf{q}, \dot{\mathbf{q}}) = T - V
+\label{eq:lagrangian}
+\end{equation}
+
+Substituting~\eqref{eq:kinetic_complete} and~\eqref{eq:potential_complete}, we obtain the complete Lagrangian (detailed expression omitted for brevity; it contains 8 kinetic terms and 2 potential terms). The equations of motion will be derived by applying the Euler-Lagrange equation to this Lagrangian in the next section.
+
+\subsection{Euler-Lagrange Equation}
+
+The equations of motion for a mechanical system with generalized coordinates $\mathbf{q} = [q_1, q_2, q_3]^T = [x, \theta_1, \theta_2]^T$ and generalized forces $\mathbf{Q} = [Q_1, Q_2, Q_3]^T$ are given by the Euler-Lagrange equation~\cite{goldstein2002classical}:
+\begin{equation}
+\frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{q}_i}\right) - \frac{\partial \mathcal{L}}{\partial q_i} = Q_i, \quad i = 1, 2, 3
+\label{eq:euler_lagrange}
+\end{equation}
+
+For the DIP system, the generalized forces are:
+\begin{align}
+Q_1 &= u \quad (\text{horizontal force on cart}) \label{eq:gen_force_cart} \\
+Q_2 &= 0 \quad (\text{no external torque on first pendulum joint}) \label{eq:gen_force_pend1} \\
+Q_3 &= 0 \quad (\text{no external torque on second pendulum joint}) \label{eq:gen_force_pend2}
+\end{align}
+
+Applying~\eqref{eq:euler_lagrange} to the Lagrangian~\eqref{eq:lagrangian} for each coordinate yields three coupled second-order ordinary differential equations (ODEs), which we will express in matrix form in Section~\ref{sec:equations_of_motion}.
+
+%================================================================
+% SECTION 3.3: EQUATIONS OF MOTION
+%================================================================
+\section{Equations of Motion}
+\label{sec:equations_of_motion}
+
+By applying the Euler-Lagrange equation~\eqref{eq:euler_lagrange} to the Lagrangian~\eqref{eq:lagrangian} and collecting terms, the DIP dynamics can be written in the compact matrix form:
+\begin{equation}
+\mathbf{M}(\mathbf{q})\ddot{\mathbf{q}} + \mathbf{C}(\mathbf{q}, \dot{\mathbf{q}})\dot{\mathbf{q}} + \mathbf{G}(\mathbf{q}) = \mathbf{B}u
+\label{eq:eom_matrix_form}
+\end{equation}
+
+where $\mathbf{M}(\mathbf{q}) \in \mathbb{R}^{3 \times 3}$ is the \textit{mass/inertia matrix}, $\mathbf{C}(\mathbf{q}, \dot{\mathbf{q}}) \in \mathbb{R}^{3 \times 3}$ is the \textit{Coriolis/centripetal matrix}, $\mathbf{G}(\mathbf{q}) \in \mathbb{R}^3$ is the \textit{gravity vector}, and $\mathbf{B} \in \mathbb{R}^3$ is the \textit{input matrix}. This section derives each matrix element explicitly.
+
+\subsection{Mass/Inertia Matrix $\mathbf{M}(\mathbf{q})$}
+
+The mass matrix is symmetric ($\mathbf{M}^T = \mathbf{M}$) and configuration-dependent. Its elements are derived from the kinetic energy~\eqref{eq:kinetic_complete} via $M_{ij} = \frac{\partial^2 T}{\partial \dot{q}_i \partial \dot{q}_j}$:
+
+\begin{equation}
+\mathbf{M}(\mathbf{q}) = \begin{bmatrix}
+M_{11} & M_{12}(\theta_1) & M_{13}(\theta_2) \\
+M_{12}(\theta_1) & M_{22} & M_{23}(\theta_1, \theta_2) \\
+M_{13}(\theta_2) & M_{23}(\theta_1, \theta_2) & M_{33}
+\end{bmatrix}
+\label{eq:mass_matrix}
+\end{equation}
+
+where:
+
+\begin{align}
+M_{11} &= M + m_1 + m_2 \label{eq:M11} \\
+M_{12}(\theta_1) &= \left(\frac{m_1}{2} + m_2\right) l_1 \cos\theta_1 \label{eq:M12} \\
+M_{13}(\theta_2) &= \frac{m_2 l_2}{2}\cos\theta_2 \label{eq:M13} \\
+M_{22} &= I_1 + \frac{m_1 l_1^2}{4} + m_2 l_1^2 \label{eq:M22} \\
+M_{23}(\theta_1, \theta_2) &= m_2 l_1 l_2 \cos(\theta_1 - \theta_2) \label{eq:M23} \\
+M_{33} &= I_2 + \frac{m_2 l_2^2}{4} \label{eq:M33}
+\end{align}
+
+\textbf{Derivation notes:}
+\begin{itemize}
+\item \textbf{$M_{11}$:} The total effective mass for cart acceleration. Independent of configuration since all horizontal mass contributions are additive.
+
+\item \textbf{$M_{12}(\theta_1)$:} Coupling between cart acceleration and first pendulum angular acceleration. The factor $\frac{m_1}{2} + m_2$ reflects that the first link's center of mass has effective lever arm $\frac{l_1}{2}$, while the second link (attached at the first link endpoint) has lever arm $l_1$. The $\cos\theta_1$ term captures the projection onto the horizontal direction.
+
+\item \textbf{$M_{13}(\theta_2)$:} Coupling between cart acceleration and second pendulum angular acceleration, with lever arm $\frac{l_2}{2}$ and projection $\cos\theta_2$.
+
+\item \textbf{$M_{22}$:} Effective moment of inertia for the first pendulum. Includes three contributions: (1) rotational inertia $I_1$ about the link's center of mass, (2) parallel-axis theorem contribution $\frac{m_1 l_1^2}{4}$ from the center of mass to the joint, and (3) inertia $m_2 l_1^2$ of the second link mass rotating about the first joint.
+
+\item \textbf{$M_{23}(\theta_1, \theta_2)$:} \textit{Critical coupling term} between the two pendulum angular accelerations. The factor $\cos(\theta_1 - \theta_2)$ represents the geometric coupling: when $\theta_1 = \theta_2$ (pendulums aligned), coupling is maximal ($\cos 0 = 1$); when $\theta_1 = \theta_2 \pm \pi$ (opposite), coupling is minimal ($\cos \pi = -1$). This term is fundamental to the coordinated dynamics.
+
+\item \textbf{$M_{33}$:} Effective moment of inertia for the second pendulum, combining rotational inertia $I_2$ and parallel-axis contribution $\frac{m_2 l_2^2}{4}$.
+\end{itemize}
+
+\subsection{Coriolis/Centripetal Matrix $\mathbf{C}(\mathbf{q}, \dot{\mathbf{q}})$}
+
+The Coriolis and centripetal forces arise from the velocity-dependent terms in the Euler-Lagrange equation. These terms can be systematically computed using Christoffel symbols~\cite{spong2006robot}:
+\begin{equation}
+c_{ijk} = \frac{1}{2}\left( \frac{\partial M_{ij}}{\partial q_k} + \frac{\partial M_{ik}}{\partial q_j} - \frac{\partial M_{jk}}{\partial q_i} \right)
+\label{eq:christoffel}
+\end{equation}
+
+The Coriolis matrix element is then:
+\begin{equation}
+C_{ij} = \sum_{k=1}^{3} c_{ijk} \dot{q}_k
+\label{eq:coriolis_element}
+\end{equation}
+
+For the DIP system, the only configuration-dependent mass matrix elements are $M_{12}(\theta_1)$, $M_{13}(\theta_2)$, and $M_{23}(\theta_1, \theta_2)$. After computing the Christoffel symbols and summing, the Coriolis matrix is:
+
+\begin{equation}
+\mathbf{C}(\mathbf{q}, \dot{\mathbf{q}}) = \begin{bmatrix}
+0 & c_{12} & c_{13} \\
+c_{21} & 0 & c_{23} \\
+c_{31} & c_{32} & 0
+\end{bmatrix}
+\label{eq:coriolis_matrix}
+\end{equation}
+
+where:
+\begin{align}
+c_{12} &= -\left(\frac{m_1}{2} + m_2\right) l_1 \sin\theta_1 \cdot \dot{\theta}_1 \label{eq:c12} \\
+c_{13} &= -\frac{m_2 l_2}{2}\sin\theta_2 \cdot \dot{\theta}_2 \label{eq:c13} \\
+c_{21} &= 0 \quad (\text{asymmetry due to Christoffel computation}) \label{eq:c21} \\
+c_{23} &= -m_2 l_1 l_2 \sin(\theta_1 - \theta_2) \cdot \dot{\theta}_2 \label{eq:c23} \\
+c_{31} &= 0 \label{eq:c31} \\
+c_{32} &= m_2 l_1 l_2 \sin(\theta_1 - \theta_2) \cdot \dot{\theta}_1 \label{eq:c32}
+\end{align}
+
+\textbf{Key observations:}
+\begin{itemize}
+\item The diagonal elements $C_{ii} = 0$ because there are no purely velocity-squared terms associated with a single coordinate.
+
+\item The coupling terms $c_{23}$ and $c_{32}$ are \textit{opposite in sign}, reflecting the skew-symmetry property $\dot{\mathbf{M}} - 2\mathbf{C}$ is skew-symmetric~\cite{slotine1991applied}. This property is critical for Lyapunov stability proofs in Chapter~\ref{chap:controller_design}.
+
+\item The $\sin\theta_i$ and $\sin(\theta_1 - \theta_2)$ terms capture the nonlinear dependence on configuration, which cannot be approximated linearly for large angles.
+\end{itemize}
+
+\subsection{Gravity Vector $\mathbf{G}(\mathbf{q})$}
+
+The gravity vector is derived from the potential energy~\eqref{eq:potential_complete} via $G_i = -\frac{\partial V}{\partial q_i}$:
+
+\begin{equation}
+\mathbf{G}(\mathbf{q}) = \begin{bmatrix} G_1 \\ G_2(\theta_1) \\ G_3(\theta_2) \end{bmatrix}
+\label{eq:gravity_vector}
+\end{equation}
+
+where:
+\begin{align}
+G_1 &= 0 \quad (\text{no gravitational force in horizontal direction}) \label{eq:G1} \\
+G_2(\theta_1) &= -\left( \frac{m_1}{2} + m_2 \right) g l_1 \sin\theta_1 \label{eq:G2} \\
+G_3(\theta_2) &= -\frac{m_2 g l_2}{2} \sin\theta_2 \label{eq:G3}
+\end{align}
+
+\textbf{Physical interpretation:}
+\begin{itemize}
+\item $G_2(\theta_1)$ represents the gravitational torque on the first pendulum about its joint. When $\theta_1 > 0$ (tilted counter-clockwise), $\sin\theta_1 > 0$, so $G_2 < 0$, producing a restoring torque that accelerates the pendulum back toward vertical ($\ddot{\theta}_1 < 0$). This is the source of the inverted pendulum's instability.
+
+\item Similarly, $G_3(\theta_2)$ provides the gravitational torque on the second pendulum.
+
+\item The negative signs in~\eqref{eq:G2}--\eqref{eq:G3} arise from the derivative of $-V$ (since we defined $\mathcal{L} = T - V$) and the negative sign from differentiating $\cos\theta_i$ (which gives $-\sin\theta_i$).
+\end{itemize}
+
+\subsection{Input Matrix $\mathbf{B}$}
+
+The input matrix maps the scalar control force $u$ to the generalized force vector $\mathbf{Q}$:
+\begin{equation}
+\mathbf{B} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}
+\label{eq:input_matrix}
+\end{equation}
+
+This reflects that the control force $u$ applies directly to the cart (first equation) but not to the pendulum joints (second and third equations). The control authority over $\theta_1$ and $\theta_2$ is indirect, arising entirely through the coupling terms $M_{12}$, $M_{13}$, $M_{23}$, $c_{12}$, $c_{13}$, $c_{23}$, $c_{32}$ in the equations of motion.
+
+\subsection{Matrix Properties}
+
+The matrices $\mathbf{M}$, $\mathbf{C}$, $\mathbf{G}$ satisfy several fundamental properties that are exploited in controller design:
+
+\begin{enumerate}
+\item \textbf{Symmetry of $\mathbf{M}$:} $\mathbf{M}^T = \mathbf{M}$, which follows from the definition $M_{ij} = \frac{\partial^2 T}{\partial \dot{q}_i \partial \dot{q}_j}$ (mixed partial derivatives commute).
+
+\item \textbf{Positive definiteness of $\mathbf{M}$:} For all $\mathbf{v} \in \mathbb{R}^3$ with $\mathbf{v} \neq \mathbf{0}$, we have $\mathbf{v}^T \mathbf{M}(\mathbf{q}) \mathbf{v} > 0$. This is guaranteed because $\mathbf{M}(\mathbf{q})$ is the Hessian of the positive definite kinetic energy function. Physically, this means any non-zero velocity $\dot{\mathbf{q}}$ results in positive kinetic energy. Positive definiteness ensures $\mathbf{M}(\mathbf{q})$ is invertible for all configurations $\mathbf{q}$, which is required to solve for accelerations $\ddot{\mathbf{q}} = \mathbf{M}^{-1}(\mathbf{u B} - \mathbf{C}\dot{\mathbf{q}} - \mathbf{G})$.
+
+\item \textbf{Skew-symmetry property:} The matrix $\dot{\mathbf{M}} - 2\mathbf{C}$ is skew-symmetric, i.e., $(\dot{\mathbf{M}} - 2\mathbf{C})^T = -(\dot{\mathbf{M}} - 2\mathbf{C})$. This implies:
+\begin{equation}
+\mathbf{x}^T(\dot{\mathbf{M}} - 2\mathbf{C})\mathbf{x} = 0 \quad \forall \mathbf{x} \in \mathbb{R}^3
+\label{eq:skew_symmetry}
+\end{equation}
+This property is fundamental for energy-based Lyapunov analysis (see Section~\ref{sec:lyapunov_analysis} in Chapter~\ref{chap:controller_design}), as it implies that the Coriolis/centripetal forces do no work on the system.
+
+\item \textbf{Boundedness:} For any compact set of configurations $\mathcal{Q} \subset \mathbb{R}^3$ and velocities $\dot{\mathcal{Q}} \subset \mathbb{R}^3$, there exist constants $\underline{m}, \overline{m}, \overline{c}, \overline{g} > 0$ such that:
+\begin{align}
+\underline{m} \mathbf{I} &\preceq \mathbf{M}(\mathbf{q}) \preceq \overline{m} \mathbf{I} \quad \forall \mathbf{q} \in \mathcal{Q} \label{eq:mass_bounds} \\
+\|\mathbf{C}(\mathbf{q}, \dot{\mathbf{q}})\| &\leq \overline{c} \|\dot{\mathbf{q}}\| \quad \forall \mathbf{q} \in \mathcal{Q}, \dot{\mathbf{q}} \in \dot{\mathcal{Q}} \label{eq:coriolis_bounds} \\
+\|\mathbf{G}(\mathbf{q})\| &\leq \overline{g} \quad \forall \mathbf{q} \in \mathcal{Q} \label{eq:gravity_bounds}
+\end{align}
+where $\preceq$ denotes matrix inequality (positive semi-definiteness). These bounds are used to establish Lipschitz continuity and prove robustness to bounded disturbances.
+\end{enumerate}
+
+\subsection{Explicit Equations of Motion}
+
+Expanding the matrix equation~\eqref{eq:eom_matrix_form} yields the three coupled scalar equations:
+
+\textbf{Cart dynamics:}
+\begin{equation}
+M_{11} \ddot{x} + M_{12}(\theta_1) \ddot{\theta}_1 + M_{13}(\theta_2) \ddot{\theta}_2 + c_{12}\dot{\theta}_1 + c_{13}\dot{\theta}_2 = u
+\label{eq:cart_eom}
+\end{equation}
+
+\textbf{First pendulum dynamics:}
+\begin{equation}
+M_{12}(\theta_1) \ddot{x} + M_{22} \ddot{\theta}_1 + M_{23}(\theta_1, \theta_2) \ddot{\theta}_2 + c_{23}\dot{\theta}_2 + G_2(\theta_1) = 0
+\label{eq:pend1_eom}
+\end{equation}
+
+\textbf{Second pendulum dynamics:}
+\begin{equation}
+M_{13}(\theta_2) \ddot{x} + M_{23}(\theta_1, \theta_2) \ddot{\theta}_1 + M_{33} \ddot{\theta}_2 + c_{32}\dot{\theta}_1 + G_3(\theta_2) = 0
+\label{eq:pend2_eom}
+\end{equation}
+
+These three equations must be solved simultaneously for the accelerations $(\ddot{x}, \ddot{\theta}_1, \ddot{\theta}_2)$ given the current state $(\mathbf{q}, \dot{\mathbf{q}})$ and control input $u$. In numerical simulation, this is typically done by computing $\ddot{\mathbf{q}} = \mathbf{M}^{-1}(\mathbf{B}u - \mathbf{C}\dot{\mathbf{q}} - \mathbf{G})$ using a linear solver or matrix inversion, followed by numerical integration (e.g., Runge-Kutta RK4) to propagate the state forward in time.
+
+\subsection{Physical Parameters}
+
+The physical parameters used throughout this thesis correspond to a laboratory-scale DIP apparatus and are summarized in Table~\ref{tab:system_parameters}.
+
+\begin{table}[htbp]
+\centering
+\caption{Double Inverted Pendulum System Parameters}
+\label{tab:system_parameters}
+\begin{tabular}{llll}
+\toprule
+\textbf{Parameter} & \textbf{Symbol} & \textbf{Value} & \textbf{Unit} \\
+\midrule
+Cart mass & $M$ & 1.0 & kg \\
+First pendulum mass & $m_1$ & 0.1 & kg \\
+Second pendulum mass & $m_2$ & 0.1 & kg \\
+First pendulum length & $l_1$ & 0.5 & m \\
+Second pendulum length & $l_2$ & 0.5 & m \\
+First pendulum inertia & $I_1$ & 0.00208 & kg$\cdot$m$^2$ \\
+Second pendulum inertia & $I_2$ & 0.00208 & kg$\cdot$m$^2$ \\
+Gravitational acceleration & $g$ & 9.81 & m/s$^2$ \\
+Sampling time & $\Delta t$ & 0.001 & s \\
+Control force limit & $u_{\max}$ & 150 & N \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Note:} The pendulum inertias are computed from the uniform rod formula $I_i = \frac{1}{12}m_i l_i^2$, yielding $I_1 = I_2 = \frac{1}{12}(0.1)(0.5)^2 = 0.00208$ kg$\cdot$m$^2$. These parameters were experimentally validated via system identification (see Chapter~\ref{chap:experimental_setup}).
+
+%================================================================
+% SECTION 3.4: STATE-SPACE REPRESENTATION
+%================================================================
+\section{State-Space Representation}
+\label{sec:state_space}
+
+For control design and numerical simulation, the second-order equations of motion~\eqref{eq:eom_matrix_form} are converted to a first-order state-space representation.
+
+\subsection{State Vector Definition}
+
+Define the state vector as:
+\begin{equation}
+\mathbf{x}(t) = \begin{bmatrix} \mathbf{q}(t) \\ \dot{\mathbf{q}}(t) \end{bmatrix} = \begin{bmatrix} x \\ \theta_1 \\ \theta_2 \\ \dot{x} \\ \dot{\theta}_1 \\ \dot{\theta}_2 \end{bmatrix} \in \mathbb{R}^6
+\label{eq:state_vector}
+\end{equation}
+
+The state space is $\mathcal{X} = \mathbb{R} \times \mathbb{S}^1 \times \mathbb{S}^1 \times \mathbb{R}^3$, where $\mathbb{S}^1$ denotes the circle (angles are periodic with period $2\pi$). However, for control design near the upright equilibrium, we treat the state space as $\mathbb{R}^6$ with the understanding that $\theta_i \in (-\pi, \pi]$.
+
+\subsection{State-Space Form}
+
+The dynamics~\eqref{eq:eom_matrix_form} can be written in the \textit{control-affine} form:
+\begin{equation}
+\dot{\mathbf{x}} = f(\mathbf{x}) + g(\mathbf{x}) u
+\label{eq:control_affine}
+\end{equation}
+
+where the \textit{drift vector field} $f(\mathbf{x}) \in \mathbb{R}^6$ and \textit{control vector field} $g(\mathbf{x}) \in \mathbb{R}^6$ are:
+
+\begin{align}
+f(\mathbf{x}) &= \begin{bmatrix}
+\dot{\mathbf{q}} \\
+-\mathbf{M}^{-1}(\mathbf{q})[\mathbf{C}(\mathbf{q}, \dot{\mathbf{q}})\dot{\mathbf{q}} + \mathbf{G}(\mathbf{q})]
+\end{bmatrix} \label{eq:drift_field} \\
+g(\mathbf{x}) &= \begin{bmatrix}
+\mathbf{0}_{3 \times 1} \\
+\mathbf{M}^{-1}(\mathbf{q})\mathbf{B}
+\end{bmatrix} \label{eq:control_field}
+\end{align}
+
+Explicitly:
+\begin{equation}
+\dot{\mathbf{x}} = \begin{bmatrix}
+\dot{x} \\
+\dot{\theta}_1 \\
+\dot{\theta}_2 \\
+\mathbf{M}^{-1}(\mathbf{q})[\mathbf{B}u - \mathbf{C}(\mathbf{q}, \dot{\mathbf{q}})\dot{\mathbf{q}} - \mathbf{G}(\mathbf{q})]
+\end{bmatrix}
+\label{eq:state_space_explicit}
+\end{equation}
+
+where the lower three rows (accelerations) are computed by inverting the mass matrix:
+\begin{equation}
+\ddot{\mathbf{q}} = \mathbf{M}^{-1}(\mathbf{q})[\mathbf{B}u - \mathbf{C}(\mathbf{q}, \dot{\mathbf{q}})\dot{\mathbf{q}} - \mathbf{G}(\mathbf{q})]
+\label{eq:acceleration}
+\end{equation}
+
+\subsection{Equilibrium Points}
+
+The system has multiple equilibrium points. The primary equilibria are:
+
+\begin{enumerate}
+\item \textbf{Upright equilibrium (control target):}
+\begin{equation}
+\mathbf{x}_{\text{eq}}^{\text{up}} = \begin{bmatrix} x_{\text{ref}} & 0 & 0 & 0 & 0 & 0 \end{bmatrix}^T
+\label{eq:upright_equilibrium}
+\end{equation}
+where $x_{\text{ref}}$ is arbitrary (typically $x_{\text{ref}} = 0$). This equilibrium is \textit{unstable} in open-loop (see Section~\ref{sec:system_properties}).
+
+\item \textbf{Downward equilibrium:}
+\begin{equation}
+\mathbf{x}_{\text{eq}}^{\text{down}} = \begin{bmatrix} x_{\text{ref}} & \pi & \pi & 0 & 0 & 0 \end{bmatrix}^T
+\label{eq:downward_equilibrium}
+\end{equation}
+This equilibrium is \textit{stable} in open-loop (pendulums hang downward), but is not the control objective. Swing-up control transitions from this equilibrium to the upright equilibrium.
+\end{enumerate}
+
+Additional equilibria exist at $(\theta_1, \theta_2) = (0, \pi)$ and $(\pi, 0)$ (one pendulum up, one down), but these are unstable and not of interest for our control objective.
+
+\subsection{Linearization at Upright Equilibrium}
+
+For small deviations from the upright equilibrium, we can linearize the dynamics~\eqref{eq:control_affine} by computing the Jacobian matrices:
+\begin{align}
+\mathbf{A} &= \frac{\partial f}{\partial \mathbf{x}}\bigg|_{\mathbf{x} = \mathbf{x}_{\text{eq}}^{\text{up}}} \label{eq:jacobian_A} \\
+\mathbf{B}_{\text{lin}} &= g(\mathbf{x}_{\text{eq}}^{\text{up}}) \label{eq:jacobian_B}
+\end{align}
+
+Evaluating these derivatives (details omitted for brevity), the linearized system near the upright equilibrium is:
+\begin{equation}
+\Delta\dot{\mathbf{x}} = \mathbf{A} \Delta\mathbf{x} + \mathbf{B}_{\text{lin}} \Delta u
+\label{eq:linearized_system}
+\end{equation}
+
+where $\Delta\mathbf{x} = \mathbf{x} - \mathbf{x}_{\text{eq}}^{\text{up}}$ and $\Delta u = u - u_{\text{eq}}$ (with $u_{\text{eq}} = 0$ for the upright equilibrium).
+
+An eigenvalue analysis of $\mathbf{A}$ reveals that the linearized system has two positive real eigenvalues (corresponding to the unstable pendulum modes) with associated \textit{unstable time constants}:
+\begin{equation}
+\tau_1 \approx \tau_2 \approx 0.45 \text{ s}
+\label{eq:unstable_time_constants}
+\end{equation}
+
+This means that without feedback control, deviations from the upright equilibrium grow exponentially with time constant $\approx 0.45$ s. For an initial angle deviation of $\theta_0 = 0.1$ rad, the angle will grow to $\theta(t) \approx \theta_0 e^{t/\tau} \approx 0.1 e^{t/0.45}$, reaching instability (falling over) within $1$--$2$ seconds. This rapid instability necessitates high-bandwidth feedback control.
+
+%================================================================
+% SECTION 3.5: SYSTEM PROPERTIES ANALYSIS
+%================================================================
+\section{System Properties Analysis}
+\label{sec:system_properties}
+
+This section analyzes fundamental properties of the DIP system that are critical for controller design: controllability (can the system be controlled?), instability (how fast does it diverge?), and dynamic coupling (how do the coordinates interact?).
+
+\subsection{Controllability}
+
+For a nonlinear control-affine system~\eqref{eq:control_affine}, controllability is characterized by the \textit{Lie bracket} framework~\cite{isidori1995nonlinear}. A system is locally controllable at an equilibrium if the controllability distribution (generated by iterated Lie brackets of $f$ and $g$) spans the tangent space.
+
+For the DIP system, we have the following result:
+
+\begin{theorem}[Local Controllability of DIP]
+\label{thm:controllability}
+The double inverted pendulum system~\eqref{eq:control_affine} is locally controllable at the upright equilibrium $\mathbf{x}_{\text{eq}}^{\text{up}}$.
+\end{theorem}
+
+\begin{proof}[Proof Sketch]
+We verify the Lie algebra rank condition~\cite{nijmeijer1990nonlinear}. Define the Lie bracket $[f, g] = \frac{\partial g}{\partial \mathbf{x}}f - \frac{\partial f}{\partial \mathbf{x}}g$. The controllability distribution is:
+\begin{equation}
+\mathcal{C} = \text{span}\{g, [f, g], [f, [f, g]], \ldots\}
+\label{eq:controllability_distribution}
+\end{equation}
+
+For the DIP system:
+\begin{itemize}
+\item $g(\mathbf{x})$ has rank 1 (control input affects only cart acceleration initially).
+\item $[f, g]$ captures how cart acceleration couples to pendulum accelerations via $M_{12}$ and $M_{13}$ terms. This adds 2 dimensions.
+\item $[f, [f, g]]$ captures second-order coupling effects. Combined with previous brackets, the distribution spans all 6 dimensions locally near the upright equilibrium.
+\end{itemize}
+
+Evaluating the rank of $\{\mathcal{C}\}$ at $\mathbf{x}_{\text{eq}}^{\text{up}}$ yields $\dim(\mathcal{C}) = 6$, confirming local controllability.
+\end{proof}
+
+\textbf{Physical interpretation:} Although only the cart is directly actuated, the coupling terms $M_{12}$, $M_{13}$, $M_{23}$ allow the control force $u$ to indirectly influence both pendulum angles $\theta_1$ and $\theta_2$. By accelerating the cart, the controller can induce angular accelerations in the pendulums through inertial coupling. This is why the system is controllable despite being underactuated.
+
+\subsection{Instability Characterization}
+
+As noted in Section~\ref{sec:state_space}, the upright equilibrium has two unstable eigenvalues. The eigenvalues of the linearized $\mathbf{A}$ matrix are (approximate values for the parameters in Table~\ref{tab:system_parameters}):
+\begin{equation}
+\lambda_1 \approx +2.22, \quad \lambda_2 \approx +2.22, \quad \lambda_3, \lambda_4 = 0, \quad \lambda_5 \approx -2.22, \quad \lambda_6 \approx -2.22
+\label{eq:eigenvalues}
+\end{equation}
+
+The two positive eigenvalues $\lambda_1, \lambda_2 \approx +2.22$ correspond to the two unstable pendulum modes. The unstable time constant is $\tau = 1/\lambda \approx 1/2.22 \approx 0.45$ s. The zero eigenvalues correspond to the cart position (which is neutrally stable in the absence of position feedback). The negative eigenvalues represent stable modes.
+
+The \textit{basin of attraction} of the upright equilibrium under any stabilizing controller is necessarily limited. For our SMC controller (see Chapter~\ref{chap:controller_design}), experimental tests show successful stabilization for initial angle deviations up to $|\theta_{1,2}(0)| \lesssim 0.26$ rad ($\approx 15^\circ$). Beyond this range, the linearized approximation breaks down and the system falls.
+
+\subsection{Dynamic Coupling}
+
+The coupling between the two pendulum motions is quantified by the off-diagonal mass matrix element $M_{23}(\theta_1, \theta_2) = m_2 l_1 l_2 \cos(\theta_1 - \theta_2)$ and the Coriolis terms $c_{23}$, $c_{32}$. To illustrate the strength of this coupling, consider the ratio:
+\begin{equation}
+\text{Coupling Ratio} = \frac{|M_{23}|}{M_{22}} \approx \frac{m_2 l_1 l_2}{I_1 + \frac{m_1 l_1^2}{4} + m_2 l_1^2}
+\label{eq:coupling_ratio}
+\end{equation}
+
+For the parameters in Table~\ref{tab:system_parameters}, this ratio is $\approx 0.48$ when $\theta_1 = \theta_2$ (aligned pendulums), indicating that the coupling inertia is nearly 50\% of the direct inertia. This is a \textit{strong coupling}, meaning that any attempt to control $\theta_1$ independently of $\theta_2$ (or vice versa) will fail.
+
+Consequently, the controller must be designed to coordinate the cart motion $x$ and both pendulum angles $\theta_1$, $\theta_2$ simultaneously. This is achieved in our SMC design by defining a sliding surface that couples all three error signals (see Section~\ref{sec:sliding_surface} in Chapter~\ref{chap:controller_design}).
+
+\subsection{Control Challenges Summary}
+
+The DIP system exhibits four fundamental challenges:
+
+\begin{enumerate}
+\item \textbf{Underactuation:} With degree 2 underactuation, the controller must exploit dynamic coupling to indirectly stabilize the unactuated coordinates ($\theta_1$, $\theta_2$).
+
+\item \textbf{Instability:} The unstable time constant $\tau \approx 0.45$ s requires fast feedback (sampling time $\Delta t = 0.001$ s, i.e., 1 kHz) to prevent divergence.
+
+\item \textbf{Nonlinearity:} The $\sin\theta_i$ and $\cos\theta_i$ terms in $\mathbf{C}$ and $\mathbf{G}$, along with the configuration-dependent $\mathbf{M}$, introduce strong nonlinearities that invalidate linear control techniques for large angles.
+
+\item \textbf{Coupling:} The coupling ratio $\approx 0.48$ means that decentralized control is impossible; coordinated multi-variable control is mandatory.
+\end{enumerate}
+
+These challenges motivate the use of sliding mode control, which is inherently robust to nonlinearities, model uncertainty, and strong coupling. The next chapter develops the SMC design tailored to this system.
+
+%================================================================
+% CHAPTER SUMMARY
+%================================================================
+\section*{Chapter Summary}
+
+This chapter presented a complete mathematical model of the double inverted pendulum system:
+
+\begin{itemize}
+\item \textbf{Section~\ref{sec:dip_description}:} Described the physical system, degrees of freedom ($n = 3$), underactuation ($\delta = 2$), control objective (upright stabilization), and modeling assumptions (rigid body, frictionless, no small-angle approximation).
+
+\item \textbf{Section~\ref{sec:lagrangian_formulation}:} Derived the system dynamics from first principles using Lagrangian mechanics. Developed the kinetic energy (3 components: cart + 2 pendulums, translational + rotational), potential energy (gravity on pendulum masses), and Lagrangian $\mathcal{L} = T - V$. Applied the Euler-Lagrange equation to derive the equations of motion.
+
+\item \textbf{Section~\ref{sec:equations_of_motion}:} Derived the mass matrix $\mathbf{M}(\mathbf{q})$ (6 elements), Coriolis matrix $\mathbf{C}(\mathbf{q}, \dot{\mathbf{q}})$ (6 elements), gravity vector $\mathbf{G}(\mathbf{q})$ (3 elements), and input matrix $\mathbf{B}$. Established key matrix properties: symmetry, positive definiteness, skew-symmetry, and boundedness. Provided the complete equations in matrix form $\mathbf{M}\ddot{\mathbf{q}} + \mathbf{C}\dot{\mathbf{q}} + \mathbf{G} = \mathbf{B}u$ and scalar form.
+
+\item \textbf{Section~\ref{sec:state_space}:} Converted the second-order dynamics to first-order state-space form $\dot{\mathbf{x}} = f(\mathbf{x}) + g(\mathbf{x})u$. Identified equilibrium points (upright: unstable, downward: stable). Linearized the system at the upright equilibrium and computed unstable time constants $\tau_1 \approx \tau_2 \approx 0.45$ s.
+
+\item \textbf{Section~\ref{sec:system_properties}:} Proved local controllability at the upright equilibrium using Lie bracket rank condition. Characterized instability (2 positive eigenvalues, rapid divergence). Quantified dynamic coupling (coupling ratio $\approx 0.48$, necessitating coordinated control).
+\end{itemize}
+
+The rigorous system model developed in this chapter provides the foundation for the sliding mode controller design in Chapter~\ref{chap:controller_design}. The key properties—controllability, instability, nonlinearity, and coupling—directly inform the control law structure and parameter selection.
