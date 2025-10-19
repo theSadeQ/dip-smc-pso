@@ -19,6 +19,12 @@
 ║ - Non-math pages: 0 KB, 0ms overhead                                      ║
 ║ - Math pages: 257 KB (deferred, non-blocking)                             ║
 ║                                                                            ║
+║ CRITICAL SAFETY NOTE (2025-10-19):                                        ║
+║ - context['script_files'] can contain None entries from Sphinx/MyST       ║
+║ - ALWAYS check `script is not None` before .lower() or string methods     ║
+║ - Without guard: AttributeError crashes entire build (806 pages)          ║
+║ - See Line 92: if script is not None and 'mathjax' not in script.lower()  ║
+║                                                                            ║
 ║ CONFIGURATION:                                                             ║
 ║ 1. conf.py extensions: [..., 'mathjax_extension']  (load AFTER myst)      ║
 ║ 2. conf.py: myst_update_mathjax = False                                   ║
@@ -78,13 +84,18 @@ def inject_mathjax_if_needed(
     # STEP 1: Remove MyST's MathJax injection from context
     # MyST Parser auto-injects MathJax when dollarmath extension is enabled,
     # even with myst_update_mathjax=False. We need to actively remove it.
+    #
+    # CRITICAL SAFETY NOTE (2025-10-19):
+    # context['script_files'] can contain None entries from Sphinx/MyST Parser.
+    # ALWAYS check `script is not None` before calling .lower() or other string methods.
+    # Without this guard, AttributeError crashes the entire Sphinx build (806 pages).
 
     if 'script_files' in context:
         # Filter out MathJax CDN scripts that MyST may have added
         original_count = len(context['script_files'])
         context['script_files'] = [
             script for script in context['script_files']
-            if 'mathjax' not in script.lower()
+            if script is not None and 'mathjax' not in script.lower()
         ]
         filtered_count = original_count - len(context['script_files'])
         if filtered_count > 0:
