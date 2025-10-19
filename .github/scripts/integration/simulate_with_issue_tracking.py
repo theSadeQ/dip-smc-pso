@@ -27,9 +27,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional, Dict, Any
 
-# Add the DIP_SMC_PSO directory to path for imports
+# Add the repository root to path for imports
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
-DIP_PROJECT = REPO_ROOT / "DIP_SMC_PSO"
+DIP_PROJECT = REPO_ROOT
 sys.path.insert(0, str(DIP_PROJECT))
 
 try:

@@ -29,9 +29,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional, Dict, Any, Tuple
 
-# Add the DIP_SMC_PSO directory to path for imports
+# Add the repository root to path for imports
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
-DIP_PROJECT = REPO_ROOT / "DIP_SMC_PSO"
+DIP_PROJECT = REPO_ROOT
 sys.path.insert(0, str(DIP_PROJECT))
 
 @dataclass
@@ -69,7 +69,7 @@ class TestMonitor:
 
     def run_tests_with_monitoring(self, args: List[str]) -> int:
         """Run pytest with monitoring and issue detection."""
-        # Ensure we're in the DIP_SMC_PSO directory
+        # Ensure we're in the repository root directory
         original_cwd = Path.cwd()
         os.chdir(DIP_PROJECT)
 
