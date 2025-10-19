@@ -10,11 +10,15 @@ Baseline: Fixed boundary layer chattering_index = 6.37 (Agent A)
 Target: ≥30% reduction (chattering < 4.46)
 
 PSO Parameters:
-- Parameter 1: ε_min (base thickness) ∈ [0.005, 0.03]
-- Parameter 2: α (slope for adaptation) ∈ [0.0, 1.0]
+- Parameter 1: ε_min (base thickness) ∈ [0.015, 0.05] (adjusted bounds, Oct 18)
+- Parameter 2: α (slope for adaptation) ∈ [0.0, 2.0] (expanded for stronger adaptation)
 - Swarm: 15 particles, 20 iterations
 - Fitness: 70% chattering + 15% settling + 15% overshoot
 - Controller gains: Default [5.0, 5.0, 5.0, 0.5, 0.5, 0.5] (matching Agent A baseline)
+
+Note: Initial run with bounds [0.005, 0.03] × [0.0, 1.0] resulted in 352% WORSE
+chattering (28.83 vs 6.37). Adjusted bounds to explore larger ε_min values
+near the fixed baseline (0.02) and allow stronger adaptive slopes.
 """
 
 import json
@@ -78,8 +82,10 @@ class AdaptiveBoundaryLayerPSO:
         self.seed = seed
 
         # PSO parameter bounds: [ε_min, α]
-        self.bounds_min = np.array([0.005, 0.0])    # Minimum values
-        self.bounds_max = np.array([0.03, 1.0])     # Maximum values
+        # ADJUSTED BOUNDS (Oct 18): Previous bounds [0.005, 0.03] were too restrictive
+        # New range includes fixed baseline ε=0.02 and allows stronger adaptation
+        self.bounds_min = np.array([0.015, 0.0])    # Minimum values (raised from 0.005)
+        self.bounds_max = np.array([0.05, 2.0])     # Maximum values (expanded from 0.03, 1.0)
 
         # PSO hyperparameters (standard values)
         self.w = 0.7    # Inertia weight
@@ -105,7 +111,8 @@ class AdaptiveBoundaryLayerPSO:
 
         logger.info(f"Initialized AdaptiveBoundaryLayerPSO:")
         logger.info(f"  Swarm: {n_particles} particles, {n_iterations} iterations")
-        logger.info(f"  Bounds: eps_min in [0.005, 0.03], alpha in [0.0, 1.0]")
+        logger.info(f"  Bounds: eps_min in [{self.bounds_min[0]:.3f}, {self.bounds_max[0]:.3f}], "
+                   f"alpha in [{self.bounds_min[1]:.1f}, {self.bounds_max[1]:.1f}]")
         logger.info(f"  Baseline chattering: {baseline_chattering:.2f}")
         logger.info(f"  Optimized gains: {optimized_gains}")
 
