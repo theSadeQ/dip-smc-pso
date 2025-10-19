@@ -32,7 +32,7 @@ on:
           - 'benchmarks'
 
 env:
-  PYTHONPATH: ./DIP_SMC_PSO
+  PYTHONPATH: .
   ISSUE_TRACKING_ENABLED: ${{ github.event.inputs.issue_mode != 'disabled' }}
 
 jobs:
@@ -60,7 +60,6 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd DIP_SMC_PSO
         pip install -r requirements.txt
 
     - name: Configure Git for issue creation
@@ -71,11 +70,10 @@ jobs:
     - name: Run simulation with issue tracking
       id: simulation
       run: |
-        cd DIP_SMC_PSO
         echo "Running simulation for controller: ${{ matrix.controller }}"
 
         # Run simulation with monitoring
-        python ../.github/scripts/integration/simulate_with_issue_tracking.py \
+        python .github/scripts/integration/simulate_with_issue_tracking.py \
           --ctrl ${{ matrix.controller }} \
           --config config.yaml \
           ${{ github.event.inputs.issue_mode == 'disabled' && '--no-issue-tracking' || '' }}
@@ -90,8 +88,8 @@ jobs:
       with:
         name: simulation-results-${{ matrix.controller }}
         path: |
-          DIP_SMC_PSO/.reports/
-          DIP_SMC_PSO/.logs/
+          .reports/
+          .logs/
         retention-days: 7
 
   test-health-check:
@@ -123,14 +121,12 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd DIP_SMC_PSO
         pip install -r requirements.txt
         pip install pytest pytest-cov pytest-json-report pytest-benchmark
 
     - name: Run tests with issue tracking
       id: testing
       run: |
-        cd DIP_SMC_PSO
         echo "Running test suite: ${{ matrix.test-suite.name }}"
 
         # Skip if test scope doesn't match
@@ -140,7 +136,7 @@ jobs:
         fi
 
         # Run tests with monitoring
-        python ../.github/scripts/integration/test_with_issue_tracking.py \
+        python .github/scripts/integration/test_with_issue_tracking.py \
           ${{ matrix.test-suite.path }} \
           -v \
           --tb=short \
@@ -161,8 +157,8 @@ jobs:
       with:
         name: test-results-${{ matrix.test-suite.name }}
         path: |
-          DIP_SMC_PSO/.reports/
-          DIP_SMC_PSO/coverage.xml
+          .reports/
+          coverage.xml
         retention-days: 7
 
     - name: Create critical failure issue
@@ -188,7 +184,6 @@ jobs:
 
           **Reproduction Steps:**
           \`\`\`bash
-          cd DIP_SMC_PSO
           pytest ${{ matrix.test-suite.path }} -v
           \`\`\`
 
@@ -223,17 +218,15 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd DIP_SMC_PSO
         pip install -r requirements.txt
         pip install pytest pytest-benchmark
 
     - name: Run benchmark tests
       id: benchmark
       run: |
-        cd DIP_SMC_PSO
         echo "Running performance benchmarks..."
 
-        python ../.github/scripts/integration/test_with_issue_tracking.py \
+        python .github/scripts/integration/test_with_issue_tracking.py \
           tests/test_benchmarks/ \
           --benchmark-only \
           --benchmark-json=.reports/benchmark_results.json \
@@ -249,7 +242,7 @@ jobs:
       with:
         name: benchmark-results
         path: |
-          DIP_SMC_PSO/.reports/benchmark_results.json
+          .reports/benchmark_results.json
         retention-days: 30
 
   pso-optimization-check:
@@ -276,16 +269,14 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd DIP_SMC_PSO
         pip install -r requirements.txt
 
     - name: Run PSO optimization with monitoring
       id: pso
       run: |
-        cd DIP_SMC_PSO
         echo "Running PSO optimization for controller: ${{ matrix.controller }}"
 
-        python ../.github/scripts/integration/simulate_with_issue_tracking.py \
+        python .github/scripts/integration/simulate_with_issue_tracking.py \
           --ctrl ${{ matrix.controller }} \
           --run-pso \
           --seed 42 \
@@ -303,8 +294,8 @@ jobs:
       with:
         name: pso-results-${{ matrix.controller }}
         path: |
-          DIP_SMC_PSO/.reports/
-          DIP_SMC_PSO/pso_*.json
+          .reports/
+          pso_*.json
         retention-days: 7
 
   issue-summary:
