@@ -1,0 +1,605 @@
+\chapter{Literature Review}
+\label{chap:literature_review}
+
+This chapter presents a comprehensive review of the state-of-the-art in sliding mode control for underactuated systems, with particular emphasis on chattering mitigation techniques, optimization-based parameter tuning, and adaptive boundary layer methods. The review is organized into six main sections: Section~\ref{sec:smc_fundamentals} provides theoretical foundations of sliding mode control; Section~\ref{sec:chattering_mitigation} surveys chattering problem and mitigation approaches; Section~\ref{sec:pso_optimization} reviews particle swarm optimization applications to control systems; Section~\ref{sec:dip_control} examines double inverted pendulum control literature; Section~\ref{sec:research_gap} synthesizes identified research gaps; and Section~\ref{sec:positioning} positions this work within the existing body of knowledge.
+
+%================================================================
+% 2.1 SLIDING MODE CONTROL FUNDAMENTALS
+%================================================================
+\section{Sliding Mode Control Fundamentals}
+\label{sec:smc_fundamentals}
+
+Sliding mode control (SMC) emerged in the 1950s as a robust control technique for nonlinear systems subject to parameter uncertainties and external disturbances \cite{utkin1977variable,utkin1992sliding}. This section presents the theoretical foundations necessary for understanding modern SMC developments.
+
+\subsection{Variable Structure Systems Theory}
+
+SMC belongs to the class of \emph{variable structure systems} (VSS), characterized by switching control laws that drive system trajectories to a prescribed sliding surface in finite time \cite{utkin1977variable}. Consider a general nonlinear system:
+\begin{equation}
+\dot{\mathbf{x}} = \mathbf{f}(\mathbf{x}, t) + \mathbf{g}(\mathbf{x}, t) u + \mathbf{d}(t)
+\label{eq:general_nonlinear_system}
+\end{equation}
+where $\mathbf{x} \in \mathbb{R}^n$ is the state vector, $u \in \mathbb{R}$ is the scalar control input, $\mathbf{f}(\mathbf{x}, t)$ represents nominal dynamics, $\mathbf{g}(\mathbf{x}, t)$ is the input gain vector, and $\mathbf{d}(t) \in \mathbb{R}^n$ represents matched disturbances satisfying $\mathbf{d}(t) = \mathbf{g}(\mathbf{x}, t) d_u(t)$ with bounded uncertainty $|d_u(t)| \leq \bar{d}$.
+
+A sliding surface is defined as:
+\begin{equation}
+s = s(\mathbf{x}, t) = \mathbf{c}^T \mathbf{x}
+\label{eq:sliding_surface_linear}
+\end{equation}
+where $\mathbf{c} = [c_1, c_2, \ldots, c_n]^T$ are design parameters chosen to ensure desirable closed-loop dynamics on the surface $s = 0$. For trajectory tracking, the sliding surface typically incorporates error dynamics:
+\begin{equation}
+s = \dot{e} + \lambda e
+\label{eq:sliding_surface_tracking}
+\end{equation}
+where $e = \mathbf{x} - \mathbf{x}_d$ is the tracking error, $\mathbf{x}_d$ is the desired trajectory, and $\lambda > 0$ determines the error convergence rate.
+
+\subsection{Two-Phase SMC Design}
+
+Classical SMC design proceeds in two phases \cite{slotine1991applied,edwards1998sliding}:
+
+\textbf{Phase 1: Sliding Surface Design.} Select $s(\mathbf{x}, t)$ such that the reduced-order dynamics on $s = 0$ exhibit desired stability and performance properties. For an $n$-th order system, the sliding surface reduces the effective system order to $n-1$, with one degree of freedom consumed by maintaining $s = 0$.
+
+\textbf{Phase 2: Reaching Law Design.} Design control law $u$ to drive $s$ to zero in finite time and maintain $s = 0$ thereafter. A typical reaching law ensures:
+\begin{equation}
+\dot{s} = -\eta \, \text{sgn}(s) - k s
+\label{eq:reaching_law}
+\end{equation}
+where $\eta > 0$ (reaching rate) and $k \geq 0$ (proportional term). This leads to the classic SMC control law:
+\begin{equation}
+u = u_{\text{eq}} + u_{\text{sw}}
+\label{eq:smc_control_law}
+\end{equation}
+where $u_{\text{eq}}$ (equivalent control) maintains $\dot{s} = 0$ on the sliding surface:
+\begin{equation}
+u_{\text{eq}} = -(\mathbf{c}^T \mathbf{g})^{-1} (\mathbf{c}^T \mathbf{f})
+\label{eq:equivalent_control}
+\end{equation}
+and $u_{\text{sw}}$ (switching control) provides robustness:
+\begin{equation}
+u_{\text{sw}} = -K \, \text{sgn}(s)
+\label{eq:switching_control}
+\end{equation}
+with switching gain $K > \bar{d}$ to dominate disturbances.
+
+\subsection{Lyapunov Stability Analysis}
+
+The reaching condition ensuring convergence to $s = 0$ is typically established via Lyapunov's direct method \cite{khalil2002nonlinear}. Define the Lyapunov function:
+\begin{equation}
+V(s) = \frac{1}{2} s^2
+\label{eq:lyapunov_function}
+\end{equation}
+which is positive definite and radially unbounded. The time derivative along system trajectories is:
+\begin{align}
+\dot{V} &= s \dot{s} \nonumber \\
+&= s [\mathbf{c}^T (\mathbf{f} + \mathbf{g} u + \mathbf{d})] \nonumber \\
+&= s [\mathbf{c}^T \mathbf{g}] [u_{\text{eq}} + u_{\text{sw}} + d_u] \nonumber \\
+&= (\mathbf{c}^T \mathbf{g}) s [-K \, \text{sgn}(s) + d_u] \label{eq:lyapunov_derivative}
+\end{align}
+
+Assuming $\mathbf{c}^T \mathbf{g} > 0$ (controllability) and $K > \bar{d}$ (switching gain dominance), we obtain:
+\begin{equation}
+\dot{V} \leq -(\mathbf{c}^T \mathbf{g})(K - \bar{d}) |s| = -\beta \eta |s|
+\label{eq:reaching_condition}
+\end{equation}
+where $\beta = \mathbf{c}^T \mathbf{g} > 0$ and $\eta = K - \bar{d} > 0$. This inequality ensures $\dot{V} < 0$ for all $s \neq 0$, proving asymptotic convergence to the sliding surface.
+
+\textbf{Finite-Time Convergence:} The reaching condition \eqref{eq:reaching_condition} can be rewritten as:
+\begin{equation}
+\dot{V} \leq -\beta \eta \sqrt{2V}
+\label{eq:finite_time_inequality}
+\end{equation}
+This is a differential inequality of the form $\dot{V} \leq -c \sqrt{V}$ with $c = \beta \eta \sqrt{2}$, which admits the solution:
+\begin{equation}
+\sqrt{V(t)} \leq \sqrt{V(0)} - \frac{c}{2} t
+\label{eq:finite_time_solution}
+\end{equation}
+Setting $V(t) = 0$ yields the finite reaching time:
+\begin{equation}
+t_{\text{reach}} \leq \frac{2\sqrt{V(0)}}{c} = \frac{\sqrt{2} |s(0)|}{\beta \eta}
+\label{eq:reaching_time}
+\end{equation}
+
+This result demonstrates a fundamental SMC property: trajectories converge to the sliding surface in \emph{finite time} (not merely asymptotically), with reaching time bounded by initial conditions and control gains.
+
+\subsection{Robustness Properties}
+
+Once on the sliding surface ($s = 0$), the system exhibits \emph{invariance} to matched disturbances \cite{utkin1992sliding}. From \eqref{eq:sliding_surface_tracking}, the tracking error satisfies:
+\begin{equation}
+\dot{e} + \lambda e = 0 \quad \Rightarrow \quad e(t) = e(0) e^{-\lambda t}
+\label{eq:error_dynamics_sliding}
+\end{equation}
+This exponential convergence is independent of $\mathbf{d}(t)$, provided the matching condition $\mathbf{d} = \mathbf{g} d_u$ holds. This robustness property distinguishes SMC from linear controllers (LQR, PID), which cannot reject matched disturbances without integral action or high gains.
+
+\textbf{Limitations:} SMC robustness applies only to \emph{matched} disturbances aligned with the control input direction. Unmatched disturbances violate this assumption and degrade performance. Additionally, practical implementation in discrete time introduces the \emph{chattering phenomenon}, discussed extensively in Section~\ref{sec:chattering_mitigation}.
+
+%================================================================
+% 2.2 CHATTERING PROBLEM AND MITIGATION APPROACHES
+%================================================================
+\section{Chattering Problem and Mitigation}
+\label{sec:chattering_mitigation}
+
+Chattering—high-frequency oscillations in the control signal—represents the primary barrier to widespread SMC adoption in industrial mechatronic systems \cite{young1999survey,bartolini1998chattering}. This section examines the chattering problem and surveys mitigation techniques developed over the past three decades.
+
+\subsection{Origins and Consequences of Chattering}
+
+\textbf{Theoretical Ideal:} In continuous-time SMC theory, the discontinuous control law \eqref{eq:switching_control} switches infinitely fast across the sliding surface, maintaining $s = 0$ exactly despite disturbances. This infinite-frequency switching is realizable in continuous time and causes no physical issues.
+
+\textbf{Discrete-Time Reality:} Practical digital controllers sample states at finite frequency $f_s$ (typically 100-1000 Hz). The discontinuous signum function $\text{sgn}(s)$ switches at the sampling rate, causing $u$ to alternate between $+K$ and $-K$ near $s = 0$. This creates a \emph{limit cycle} with frequency determined by sampling rate and system dynamics \cite{bartolini1998chattering}.
+
+\textbf{Physical Consequences:} Chattering degrades system performance in four critical ways:
+
+\begin{enumerate}
+\item \textbf{Actuator Wear:} High-frequency reversals accelerate mechanical wear in DC motors, hydraulic valves, and pneumatic actuators. A 2019 industrial survey found chattering reduced actuator lifespan by 40-60\% in robotics applications \cite{wu2019industrial}.
+
+\item \textbf{Energy Waste:} Oscillating control signals consume energy without contributing to tracking performance. For battery-powered systems (e.g., quadcopters, mobile robots), this reduces operational time.
+
+\item \textbf{Precision Degradation:} Chattering introduces steady-state error proportional to switching amplitude. Medical robots and precision manufacturing require submicron accuracy incompatible with chattering \cite{shtessel2014survey}.
+
+\item \textbf{Acoustic Noise:} Audible chattering (300-5000 Hz) is unacceptable in consumer electronics, automotive systems, and human-robot collaboration environments.
+\end{enumerate}
+
+\subsection{Boundary Layer Method}
+
+The classical solution replaces the discontinuous $\text{sgn}(s)$ with a continuous \emph{saturation function} within a boundary layer of thickness $\epsilon > 0$ \cite{slotine1991applied}:
+\begin{equation}
+\text{sat}(s/\epsilon) = \begin{cases}
+s/\epsilon & \text{if } |s| \leq \epsilon \\
+\text{sgn}(s) & \text{if } |s| > \epsilon
+\end{cases}
+\label{eq:saturation_function}
+\end{equation}
+
+\textbf{Modified Control Law:}
+\begin{equation}
+u_{\text{sw}} = -K \, \text{sat}(s/\epsilon)
+\label{eq:boundary_layer_control}
+\end{equation}
+
+\textbf{Chattering Reduction Mechanism:} Inside $|s| \leq \epsilon$, the control becomes continuous ($u_{\text{sw}} = -(K/\epsilon) s$), eliminating switching and thus chattering. Outside the boundary layer, standard SMC applies.
+
+\textbf{Tradeoff:} Boundary layers introduce steady-state error. Inside $|s| \leq \epsilon$, the closed-loop dynamics become:
+\begin{equation}
+\dot{s} = -\beta \frac{K}{\epsilon} s + \beta d_u(t)
+\label{eq:boundary_layer_dynamics}
+\end{equation}
+Steady-state error satisfies:
+\begin{equation}
+|s_{\infty}| \leq \frac{\bar{d} \epsilon}{K}
+\label{eq:steady_state_error}
+\end{equation}
+
+This creates a fundamental dilemma: \emph{larger $\epsilon$ reduces chattering but increases steady-state error; smaller $\epsilon$ improves precision but exacerbates chattering}. Manual selection of $\epsilon$ involves trial-and-error compromise, motivating adaptive approaches.
+
+\subsection{Higher-Order Sliding Mode Control (HOSMC)}
+
+Higher-order sliding modes drive higher derivatives of $s$ to zero, achieving continuous control without boundary layers \cite{levant2003higher,shtessel2014sliding}. The most popular is Levant's \emph{super-twisting algorithm} (STA):
+\begin{align}
+\dot{u} &= -W \, \text{sgn}(s) \label{eq:sta_control_derivative} \\
+u &= -\lambda |s|^{1/2} \text{sgn}(s) + \int_{0}^{t} \dot{u}(\tau) \, d\tau \label{eq:sta_control}
+\end{align}
+where $W, \lambda > 0$ are tuning parameters.
+
+\textbf{Recent Applications:} Ayinalem et al. (2025) applied PSO-tuned STA-SMC to articulated robot trajectory tracking, demonstrating improved chattering reduction compared to first-order SMC \cite{ayinalem2025pso}. A hybrid enhanced PSO (HEPSO-SMC) for manipulators optimized STA parameters $(c_1, c_2, \epsilon, k)$, outperforming standard PSO-SMC \cite{hepso2025manipulator}.
+
+\textbf{Advantages:} Continuous control eliminates chattering while preserving finite-time convergence and robustness.
+
+\textbf{Limitations:} HOSMC requires (1) additional state measurements (second derivatives of outputs) or observers, (2) more complex stability analysis, and (3) higher computational cost. For cost-sensitive embedded systems, first-order SMC with effective chattering mitigation remains preferable.
+
+\subsection{Fuzzy-Adaptive Techniques}
+
+Fuzzy logic provides smooth interpolation between control modes, naturally reducing chattering \cite{palm1992fuzzy}. Recent work combines fuzzy adaptation with SMC:
+
+\textbf{Fuzzy Adaptive Second-Order SMC:} A 2024 study optimized second-order SMC for inverted pendulum using fuzzy adaptive technology, reporting significant chattering suppression and improved robustness \cite{frontiers2024fuzzy}. The fuzzy rules adjusted boundary layer thickness based on tracking error magnitude.
+
+\textbf{Self-Regulating Fuzzy-Adaptive SMC (SFA-SMC):} Applied to rotary inverted pendulum with EKF-based state estimation, this approach achieved enhanced disturbance rejection while reducing chattering content \cite{sfa2024rotary}. However, fuzzy rule design remained heuristic without systematic optimization.
+
+\textbf{Advantages:} Smooth fuzzy inference naturally mitigates chattering. Online adaptation can handle time-varying uncertainties.
+
+\textbf{Limitations:} (1) Fuzzy rule design requires extensive domain expertise and trial-and-error. (2) Stability analysis is nontrivial; classical Lyapunov methods do not directly apply to fuzzy systems. (3) Computational burden increases with rule base size. (4) Generalizability to different systems is limited due to system-specific rule tuning.
+
+\subsection{Observer-Based Approaches}
+
+Disturbance observers estimate and compensate uncertainties, enabling lower switching gains without sacrificing robustness \cite{chen2000disturbance}.
+
+\textbf{Extended State Observer (ESO):} ESO treats total disturbance (model uncertainties + external perturbations) as an extended state, estimated via high-gain observer:
+\begin{equation}
+\dot{\hat{\mathbf{x}}} = \mathbf{f}(\hat{\mathbf{x}}) + \mathbf{g}(\hat{\mathbf{x}}) u + \mathbf{L}(\mathbf{y} - \hat{\mathbf{y}})
+\label{eq:eso}
+\end{equation}
+where $\mathbf{L}$ is observer gain and $\mathbf{y}$ is measured output.
+
+A 2023 study on rotary inverted pendulum stabilization used ESO-based SMC to achieve better performance with chattering alleviation \cite{observer2023rotary}. The compensated control law becomes:
+\begin{equation}
+u = u_{\text{nom}} - \hat{d}
+\label{eq:observer_compensation}
+\end{equation}
+where $\hat{d}$ is the disturbance estimate.
+
+\textbf{Advantages:} Lower switching gain $K$ reduces chattering while maintaining robustness through feedforward compensation.
+
+\textbf{Limitations:} (1) Observer design introduces additional dynamics that may affect transient response. (2) High observer gains (required for fast convergence) amplify measurement noise. (3) Observers assume sufficient observability; partial state feedback systems require careful design.
+
+\subsection{Hybrid Control Frameworks}
+
+Recent work combines multiple techniques to leverage complementary strengths:
+
+\textbf{Optimized Fuzzy Logic + SMC:} A December 2024 study combined optimized fuzzy logic controllers with SMC for rotary inverted pendulum, achieving stability and disturbance rejection \cite{scirep2024fuzzy}. Genetic algorithm (GA) optimized fuzzy membership functions.
+
+\textbf{Adaptive Complementary SMC:} Applied to ship course control with dynamic boundary layer adjustment, this approach realized robust tracking with chattering mitigation \cite{ship2024adaptive}. The adaptation law adjusted $\epsilon$ based on sea state conditions.
+
+\textbf{Advantages:} Synergy between techniques (e.g., fuzzy smoothness + SMC robustness) can exceed individual performance.
+
+\textbf{Limitations:} (1) Increased complexity: hybrid controllers require tuning multiple subsystems. (2) Lack of generalizability: system-specific hybrid designs do not transfer well. (3) Analytical stability proofs become intractable for complex hybrids.
+
+\subsection{Summary of Chattering Mitigation Approaches}
+
+Table~\ref{tab:chattering_approaches} summarizes chattering mitigation techniques reviewed in this section.
+
+\begin{table}[t]
+\centering
+\caption{Comparison of Chattering Mitigation Approaches}
+\label{tab:chattering_approaches}
+\begin{tabular}{llll}
+\toprule
+\textbf{Approach} & \textbf{Mechanism} & \textbf{Advantages} & \textbf{Limitations} \\
+\midrule
+Boundary Layer & Continuous saturation & Simple, proven & Steady-state error \\
+HOSMC (STA) & Higher derivatives & Continuous, robust & Complex, needs observers \\
+Fuzzy-Adaptive & Smooth interpolation & Natural smoothness & Heuristic rules \\
+Observer-Based & Disturbance estimation & Lower switching gain & Additional dynamics \\
+Hybrid & Combined techniques & Synergistic benefits & High complexity \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Identified Gap:} All surveyed approaches rely on \emph{heuristic parameter selection} (manual tuning, trial-and-error, or designer intuition). None employ systematic optimization algorithms (e.g., PSO) to minimize chattering while balancing control performance. This gap motivates the research presented in subsequent chapters.
+
+%================================================================
+% 2.3 PARTICLE SWARM OPTIMIZATION
+%================================================================
+\section{Particle Swarm Optimization}
+\label{sec:pso_optimization}
+
+Particle Swarm Optimization (PSO), introduced by Kennedy and Eberhart in 1995, has emerged as an effective metaheuristic for control system parameter optimization due to its derivative-free nature and global search capabilities \cite{kennedy1995pso}. This section reviews PSO fundamentals and its applications to sliding mode control.
+
+\subsection{PSO Algorithm Foundations}
+
+PSO is a population-based stochastic optimization algorithm inspired by social behavior of bird flocking and fish schooling \cite{kennedy1995pso,eberhart1995new}. The swarm consists of $N$ particles, each representing a candidate solution in the search space $\Omega \subset \mathbb{R}^d$.
+
+\textbf{Particle $i$ State:} Characterized by:
+\begin{itemize}
+\item Position: $\mathbf{x}_i(t) \in \mathbb{R}^d$ (candidate solution at iteration $t$)
+\item Velocity: $\mathbf{v}_i(t) \in \mathbb{R}^d$ (search direction and magnitude)
+\item Personal best: $\mathbf{p}_i$ (best position particle $i$ has visited)
+\item Global best: $\mathbf{g}$ (best position discovered by entire swarm)
+\end{itemize}
+
+\textbf{Update Equations:} At each iteration $t$, velocities and positions update according to:
+\begin{align}
+\mathbf{v}_i(t+1) &= \omega \mathbf{v}_i(t) + c_1 \mathbf{r}_1 \odot (\mathbf{p}_i - \mathbf{x}_i(t)) \nonumber \\
+&\quad + c_2 \mathbf{r}_2 \odot (\mathbf{g} - \mathbf{x}_i(t)) \label{eq:pso_velocity} \\
+\mathbf{x}_i(t+1) &= \mathbf{x}_i(t) + \mathbf{v}_i(t+1) \label{eq:pso_position}
+\end{align}
+where:
+\begin{itemize}
+\item $\omega \in (0,1)$: inertia weight (balances exploration vs. exploitation)
+\item $c_1, c_2 > 0$: cognitive and social acceleration coefficients
+\item $\mathbf{r}_1, \mathbf{r}_2 \sim \mathcal{U}(0,1)^d$: random vectors (element-wise uniform)
+\item $\odot$: Hadamard (element-wise) product
+\end{itemize}
+
+\textbf{Physical Interpretation:} Equation \eqref{eq:pso_velocity} consists of three terms:
+\begin{enumerate}
+\item \textbf{Inertia term} $\omega \mathbf{v}_i(t)$: Maintains current search direction (exploration)
+\item \textbf{Cognitive term} $c_1 \mathbf{r}_1 \odot (\mathbf{p}_i - \mathbf{x}_i(t))$: Attracts particle toward its personal best (exploitation of personal experience)
+\item \textbf{Social term} $c_2 \mathbf{r}_2 \odot (\mathbf{g} - \mathbf{x}_i(t))$: Attracts particle toward global best (exploitation of swarm knowledge)
+\end{enumerate}
+
+This balance between personal and social learning enables PSO to escape local optima while converging toward global optimum.
+
+\subsection{PSO Variants and Convergence Analysis}
+
+\textbf{Constriction Factor PSO:} Clerc and Kennedy (2002) introduced a constriction coefficient ensuring convergence \cite{clerc2002constriction}:
+\begin{equation}
+\mathbf{v}_i(t+1) = \chi [\mathbf{v}_i(t) + \phi_1 (\mathbf{p}_i - \mathbf{x}_i(t)) + \phi_2 (\mathbf{g} - \mathbf{x}_i(t))]
+\label{eq:constriction_pso}
+\end{equation}
+where $\chi = 2 / |2 - \phi - \sqrt{\phi^2 - 4\phi}|$ with $\phi = \phi_1 + \phi_2 > 4$. Setting $\phi_1 = \phi_2 = 2.05$ yields $\chi \approx 0.7298$, widely used as a stable default.
+
+\textbf{Linearly Decreasing Inertia Weight:} Shi and Eberhart (1998) proposed time-varying $\omega$ to balance exploration (early iterations) and exploitation (late iterations) \cite{shi1998modified}:
+\begin{equation}
+\omega(t) = \omega_{\max} - \frac{\omega_{\max} - \omega_{\min}}{T_{\max}} t
+\label{eq:ldw_pso}
+\end{equation}
+Typical values: $\omega_{\max} = 0.9$, $\omega_{\min} = 0.4$, $T_{\max} = $ maximum iterations.
+
+\textbf{Convergence Guarantees:} Under mild assumptions (bounded search space, Lipschitz continuous objective), PSO with constriction factor converges almost surely to a local optimum \cite{clerc2002constriction,vandenbergh2006study}. However, global optimum guarantees require additional conditions (e.g., sufficient particles, iterations).
+
+\subsection{PSO for Sliding Mode Control Parameter Tuning}
+
+PSO's derivative-free nature makes it ideal for SMC optimization, where analytical gradients of chattering metrics with respect to control gains are intractable.
+
+\textbf{Comprehensive Review (2024):} A Springer review synthesized PSO-SMC integration strategies for autonomous vehicles, highlighting super-twisting SMC optimization and trajectory tracking applications \cite{springer2024pso}.
+
+\textbf{Recent Applications (2023-2025):}
+
+\begin{itemize}
+\item \textbf{Articulated Robots:} Ayinalem et al. (2025) applied PSO to tune STA-SMC for trajectory tracking, optimizing gains to ensure consistency, stability, and robustness \cite{ayinalem2025pso}. Fitness function minimized integral of squared tracking error.
+
+\item \textbf{Manipulators:} HEPSO-SMC combined genetic algorithm (GA) with PSO to optimize parameters $(c_1, c_2, \epsilon, k)$ for manipulator control, outperforming standard PSO-SMC and improved PSO variants \cite{hepso2025manipulator}. Fitness weighted tracking error (60\%) and control energy (40\%).
+
+\item \textbf{Quadcopters:} Third-order SMC for quadcopter trajectory tracking employed PSO for fine-tuning gain values, demonstrating faster convergence than manual tuning \cite{mdpi2025quadcopter}. Multi-objective fitness balanced settling time, overshoot, and steady-state error.
+
+\item \textbf{General Parameter Selection:} IEEE studies demonstrated PSO effectiveness for sliding mode controller parameter selection across various systems \cite{ieee2020pso,ieee2020design}.
+\end{itemize}
+
+\textbf{Advantages Over Manual Tuning:}
+\begin{enumerate}
+\item \textbf{Systematic Exploration:} PSO explores high-dimensional parameter spaces ($d = 5-10$ typical for SMC) more efficiently than grid search.
+\item \textbf{Non-Convex Handling:} Control performance landscapes often exhibit multiple local minima; PSO's stochastic nature helps escape local traps.
+\item \textbf{No Gradient Requirement:} Chattering metrics (e.g., FFT-based indices) lack analytical derivatives; PSO operates purely on function evaluations.
+\item \textbf{Parallelization:} Swarm evaluations are embarrassingly parallel, enabling GPU acceleration or distributed computing.
+\end{enumerate}
+
+\textbf{Identified Gap in PSO-SMC Literature:} All reviewed studies optimize single objectives (e.g., tracking error minimization) or use ad-hoc weighted sums without justification. For example, HEPSO-SMC weighted tracking error and energy 60-40 without explaining the rationale \cite{hepso2025manipulator}. Critically, \emph{no prior work employs chattering-prioritized fitness functions} explicitly weighting chattering reduction as the primary objective. Additionally, all studies validate controllers \emph{only under training conditions}, never testing robustness beyond the optimization domain—a validation gap exposed by our work (Chapters 7-8).
+
+%================================================================
+% 2.4 DOUBLE INVERTED PENDULUM CONTROL
+%================================================================
+\section{Double Inverted Pendulum Control Literature}
+\label{sec:dip_control}
+
+The double inverted pendulum (DIP) on a cart serves as a canonical benchmark for nonlinear control due to its underactuation (one control input, three degrees of freedom), instability at upright equilibrium, and complex nonlinear dynamics. This section reviews control strategies developed for DIP systems.
+
+\subsection{Classical Control Approaches}
+
+\textbf{Linear Quadratic Regulator (LQR):} Linearizing DIP dynamics about the upright equilibrium yields a linear time-invariant (LTI) system amenable to LQR design \cite{anderson1971optimal}. LQR minimizes quadratic cost:
+\begin{equation}
+J = \int_0^\infty (\mathbf{x}^T \mathbf{Q} \mathbf{x} + u^T R u) \, dt
+\label{eq:lqr_cost}
+\end{equation}
+where $\mathbf{Q} \geq 0$ penalizes state deviations and $R > 0$ penalizes control effort.
+
+\textbf{Performance:} LQR achieves excellent local stabilization near equilibrium with guaranteed stability margins (gain margin $\geq$ 6 dB, phase margin $\geq$ 60°). However, LQR linearization limits the basin of attraction to small initial angles ($\pm 5°$ typical). Large disturbances or swing-up scenarios exceed the linear regime.
+
+\textbf{PID Control:} Proportional-Integral-Derivative controllers stabilize DIP via cascade loops (inner loop for pendulum angles, outer loop for cart position). A 2022 study compared PID variants, finding that well-tuned PID achieves comparable performance to LQR for small perturbations \cite{pid2022dip}. However, PID tuning requires expertise and lacks disturbance rejection guarantees.
+
+\subsection{Advanced Nonlinear Control}
+
+\textbf{Feedback Linearization:} Exact feedback linearization transforms DIP nonlinear dynamics into linear controllable form via nonlinear coordinate transformation \cite{isidori1995nonlinear}. A 2018 study demonstrated global asymptotic stabilization using input-output linearization \cite{feedback2018dip}.
+
+\textbf{Advantages:} Handles full nonlinear regime; no small-angle approximation required.
+
+\textbf{Limitations:} Sensitive to model uncertainties; requires exact cancellation of nonlinear terms. Unmodeled dynamics or parameter errors degrade performance.
+
+\textbf{Model Predictive Control (MPC):} MPC solves online optimization at each time step:
+\begin{equation}
+\min_{\mathbf{u}} \sum_{k=0}^{N-1} [||\mathbf{x}(k) - \mathbf{x}_{\text{ref}}||_{\mathbf{Q}}^2 + ||u(k)||_R^2]
+\label{eq:mpc_cost}
+\end{equation}
+subject to dynamics constraints and input limits.
+
+A 2020 study applied nonlinear MPC to DIP swing-up and stabilization, achieving robust performance with constraints satisfaction \cite{mpc2020dip}. However, computational burden limits MPC to systems with sufficient onboard processing (embedded GPUs, FPGA).
+
+\subsection{Sliding Mode Control for DIP}
+
+SMC's robustness properties make it attractive for underactuated systems subject to model uncertainties.
+
+\textbf{Hierarchical SMC (2023):} Wiley published a hierarchical SMC approach: outer loop generates virtual control for inner loop SMC, achieving global asymptotic stability \cite{wiley2023hierarchical}. Lyapunov analysis proved stability under matched disturbances.
+
+\textbf{Terminal SMC (TSMC):} A 2021 study applied TSMC to DIP, achieving finite-time stabilization with faster convergence than classical SMC \cite{tsmc2021dip}. Terminal sliding surface:
+\begin{equation}
+s = \dot{e} + \beta |e|^\alpha \text{sgn}(e), \quad 0 < \alpha < 1
+\label{eq:tsmc_surface}
+\end{equation}
+ensures finite-time convergence to equilibrium.
+
+\textbf{Adaptive SMC:} A 2019 study combined SMC with adaptive laws estimating uncertain parameters (link masses, friction coefficients), improving robustness to modeling errors \cite{adaptive2019dip}.
+
+\textbf{Chattering Challenge:} Despite these advances, chattering remains problematic in DIP SMC implementations. A 2022 experimental study reported excessive chattering (>100 Hz oscillations) degrading cart motor lifespan \cite{experiment2022chattering}. Boundary layer thickness $\epsilon = 0.05$ rad reduced chattering but introduced steady-state error exceeding $\pm 2°$—unacceptable for precise balancing.
+
+\subsection{Summary of DIP Control Literature}
+
+Table~\ref{tab:dip_control} summarizes control techniques applied to double inverted pendulum systems.
+
+\begin{table}[t]
+\centering
+\caption{Summary of Double Inverted Pendulum Control Approaches}
+\label{tab:dip_control}
+\begin{tabular}{llll}
+\toprule
+\textbf{Method} & \textbf{Basin of Attraction} & \textbf{Robustness} & \textbf{Limitations} \\
+\midrule
+LQR & Small ($\pm 5°$) & Limited & Linearization \\
+PID & Small ($\pm 10°$) & Moderate & Manual tuning \\
+Feedback Linearization & Large & Sensitive & Model dependency \\
+MPC & Large & High & Computational cost \\
+SMC & Large & High & Chattering \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Identified Gap:} While SMC provides superior robustness for DIP control, chattering mitigation remains unresolved. Existing boundary layer methods sacrifice precision; HOSMC increases complexity. No prior work applies PSO to optimize adaptive boundary layers specifically for DIP systems, balancing chattering reduction against control performance.
+
+%================================================================
+% 2.5 RESEARCH GAP SUMMARY
+%================================================================
+\section{Research Gap Summary}
+\label{sec:research_gap}
+
+This section synthesizes identified research gaps from the preceding literature review (Sections \ref{sec:smc_fundamentals}-\ref{sec:dip_control}).
+
+\subsection{Gap 1: Systematic Optimization of Adaptive Boundary Layers}
+
+\textbf{Current State:} Adaptive boundary layer methods dynamically adjust thickness $\epsilon$ based on system state (Section \ref{sec:chattering_mitigation}). However, all existing approaches use heuristic adaptation laws without systematic optimization:
+\begin{itemize}
+\item Self-regulated SMC \cite{ieee2018selfreg}: $\epsilon$ adjusted via manually designed adaptive law lacking stability guarantees
+\item Fuzzy boundary layer tuning \cite{fuzzy2023excavator}: Fuzzy rules require expert knowledge and trial-and-error
+\item Ship course control \cite{ship2024adaptive}: Adaptation gains selected via simulation tuning
+\end{itemize}
+
+\textbf{Gap:} No prior work applies metaheuristic optimization (PSO, GA, etc.) to systematically tune adaptive boundary layer parameters ($\epsilon_{\min}, \alpha$) minimizing chattering while maintaining control performance.
+
+\subsection{Gap 2: Chattering-Prioritized Fitness Functions}
+
+\textbf{Current State:} PSO-SMC studies (Section \ref{sec:pso_optimization}) optimize single objectives (tracking error) or use ad-hoc multi-objective weights:
+\begin{itemize}
+\item HEPSO-SMC \cite{hepso2025manipulator}: 60\% tracking error + 40\% energy, no weight justification
+\item Quadcopter TSMC \cite{mdpi2025quadcopter}: Equal weights for settling time, overshoot, steady-state error
+\item Articulated robot STA-SMC \cite{ayinalem2025pso}: Minimizes tracking error only
+\end{itemize}
+
+\textbf{Gap:} No prior work employs fitness functions explicitly prioritizing chattering reduction as the primary objective, reflecting industrial deployment barriers (actuator wear, acoustic noise, precision degradation).
+
+\subsection{Gap 3: Lyapunov Stability for Time-Varying Boundary Layers}
+
+\textbf{Current State:} Classical SMC Lyapunov analysis assumes fixed boundary layer thickness $\epsilon$ (Section \ref{sec:smc_fundamentals}). Adaptive boundary layer methods (Section \ref{sec:chattering_mitigation}) introduce time-varying $\epsilon_{\text{eff}}(t)$ but lack rigorous stability proofs:
+\begin{itemize}
+\item IEEE self-regulated SMC \cite{ieee2018selfreg}: Simulation validation only, no Lyapunov analysis
+\item Fuzzy adaptive SMC \cite{frontiers2024fuzzy}: Fuzzy rules lack formal stability guarantees
+\end{itemize}
+
+\textbf{Gap:} Existing adaptive boundary layer literature does not provide Lyapunov stability analysis proving finite-time convergence is preserved with $\epsilon_{\text{eff}}(t) = \epsilon_{\min} + \alpha |\dot{s}(t)|$.
+
+\subsection{Gap 4: Multi-Scenario Validation and Honest Failure Reporting}
+
+\textbf{Current State:} All reviewed PSO-SMC studies (Section \ref{sec:pso_optimization}) validate controllers \emph{only under training conditions}:
+\begin{itemize}
+\item Ayinalem et al. \cite{ayinalem2025pso}: PSO on nominal trajectory → validation on same trajectory
+\item HEPSO-SMC \cite{hepso2025manipulator}: Optimization on $\pm 10°$ angles → testing on $\pm 10°$ angles
+\item Quadcopter TSMC \cite{mdpi2025quadcopter}: PSO for hover → validation at hover setpoint
+\end{itemize}
+
+\textbf{Gap:} No prior work systematically tests robustness beyond the optimization domain (e.g., initial conditions 2-10$\times$ larger than training), nor do studies report generalization failures or disturbance rejection limitations.
+
+\textbf{Honest Reporting Gap:} The SMC literature exhibits publication bias toward positive results. Controllers failing under challenging conditions are rarely reported, preventing the community from learning what \emph{doesn't} work.
+
+\subsection{Summary of Research Gaps}
+
+Table~\ref{tab:research_gaps} summarizes the four identified research gaps addressed by this thesis.
+
+\begin{table}[t]
+\centering
+\caption{Summary of Research Gaps}
+\label{tab:research_gaps}
+\begin{tabular}{p{3cm}p{5cm}p{5cm}}
+\toprule
+\textbf{Gap} & \textbf{Current Practice} & \textbf{This Work Addresses} \\
+\midrule
+Gap 1 & Heuristic adaptive laws & PSO optimization of $\epsilon_{\min}, \alpha$ \\
+Gap 2 & Ad-hoc fitness weights & Chattering-weighted fitness (70-15-15) \\
+Gap 3 & No stability proof for $\epsilon_{\text{eff}}(t)$ & Lyapunov analysis (Theorems 4.1-4.2) \\
+Gap 4 & Single-scenario validation & Multi-scenario testing (±0.05, ±0.3 rad) + honest failure reporting \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%================================================================
+% 2.6 POSITIONING OF THIS WORK
+%================================================================
+\section{Positioning of This Work}
+\label{sec:positioning}
+
+This section positions the contributions of this thesis within the existing body of knowledge reviewed in Sections \ref{sec:smc_fundamentals}-\ref{sec:research_gap}.
+
+\subsection{Comparison with State-of-the-Art}
+
+Table~\ref{tab:sota_comparison} compares this work with representative recent studies, highlighting key distinctions.
+
+\begin{table}[t]
+\centering
+\caption{Comparison with State-of-the-Art SMC Approaches}
+\label{tab:sota_comparison}
+\footnotesize
+\begin{tabular}{p{2.2cm}p{0.6cm}p{1.8cm}p{2cm}p{1.8cm}p{1.8cm}p{2cm}}
+\toprule
+\textbf{Reference} & \textbf{Year} & \textbf{System} & \textbf{Technique} & \textbf{Chattering Mitigation} & \textbf{Parameter Tuning} & \textbf{Validation Scope} \\
+\midrule
+Ayinalem et al. \cite{ayinalem2025pso} & 2025 & Robot manipulator & PSO-tuned STA-SMC & Higher-order SMC & PSO (tracking error) & Single scenario \\
+HEPSO-SMC \cite{hepso2025manipulator} & 2025 & Manipulator & Hybrid enhanced PSO-SMC & Gain optimization & HEPSO ($c_1, c_2, \epsilon, k$) & Training distribution only \\
+Frontiers 2024 \cite{frontiers2024fuzzy} & 2024 & Inverted pendulum & Fuzzy adaptive 2nd-order SMC & Fuzzy + higher-order & Manual fuzzy rules & Nominal conditions \\
+SFA-SMC \cite{sfa2024rotary} & 2024 & Rotary pendulum & Self-regulating fuzzy-adaptive & Fuzzy interpolation & Trial-and-error & Small perturbations \\
+Sci Reports \cite{scirep2024fuzzy} & 2024 & Rotary pendulum & Optimized FLC + SMC hybrid & Fuzzy optimization & GA (fuzzy params) & Single operating point \\
+IEEE Self-Reg \cite{ieee2018selfreg} & 2018 & Generic nonlinear & Self-regulated boundary layer & Adaptive boundary & Heuristic adaptive law & Simulation only \\
+\midrule
+\textbf{This Work} & \textbf{2025} & \textbf{Double inverted pendulum} & \textbf{PSO-optimized adaptive boundary layer} & \textbf{Dynamic $\epsilon$ adjustment} & \textbf{PSO (chattering-weighted)} & \textbf{Multi-scenario (±0.05, ±0.3 rad) + failure reporting} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Novel Contributions}
+
+This thesis advances the state-of-the-art through four primary contributions:
+
+\textbf{Contribution 1: PSO-Optimized Adaptive Boundary Layer}
+
+First application of Particle Swarm Optimization to systematically tune adaptive boundary layer parameters ($\epsilon_{\min}, \alpha$) for the formula:
+\begin{equation}
+\epsilon_{\text{eff}}(t) = \epsilon_{\min} + \alpha |\dot{s}(t)|
+\label{eq:adaptive_boundary_formula}
+\end{equation}
+Unlike heuristic adaptive laws in prior work \cite{ieee2018selfreg,ship2024adaptive}, our PSO approach explores the parameter space systematically, discovering $\epsilon_{\min}^* = 0.00250336$, $\alpha^* = 1.21441504$ achieving 66.5\% chattering reduction (Chapter 7).
+
+\textbf{Contribution 2: Chattering-Weighted Fitness Function}
+
+Novel fitness function explicitly prioritizing chattering reduction:
+\begin{equation}
+F = 0.70 \cdot C + 0.15 \cdot T_s + 0.15 \cdot O
+\label{eq:chattering_weighted_fitness}
+\end{equation}
+where $C$ (chattering index via FFT), $T_s$ (settling time), $O$ (overshoot). The 70\% chattering weight reflects industrial deployment barriers (actuator wear, acoustic noise, precision degradation). Prior PSO-SMC studies either optimize single objectives \cite{ayinalem2025pso} or use unjustified ad-hoc weights \cite{hepso2025manipulator}.
+
+\textbf{Contribution 3: Lyapunov Stability for Time-Varying Boundary Layer}
+
+Rigorous Lyapunov analysis proving finite-time convergence is preserved with adaptive boundary layer $\epsilon_{\text{eff}}(t)$ (Chapter 4, Theorems 4.1-4.2). Key result:
+\begin{equation}
+t_{\text{reach}} \leq \frac{\sqrt{2} |s(0)|}{\beta \eta}, \quad \eta = K - \bar{d}
+\label{eq:reaching_time_adaptive}
+\end{equation}
+independent of $\epsilon_{\text{eff}}$ value. This addresses the theoretical gap in adaptive boundary layer literature \cite{ieee2018selfreg,frontiers2024fuzzy}, which lack stability proofs.
+
+\textbf{Contribution 4: Multi-Scenario Validation and Honest Failure Reporting}
+
+Systematic robustness testing beyond training distribution:
+\begin{itemize}
+\item \textbf{Training:} $\pm 0.05$ rad initial conditions (PSO optimization domain)
+\item \textbf{Stress testing:} $\pm 0.3$ rad initial conditions (6$\times$ larger) + external disturbances (step, impulse, sinusoidal)
+\item \textbf{Honest reporting:} Quantify failures (50.4$\times$ chattering degradation, 90.2\% failure rate, 0\% disturbance rejection) rarely disclosed in prior literature
+\end{itemize}
+
+This multi-scenario approach exposes generalization failures concealed by single-scenario validation ubiquitous in PSO-SMC literature \cite{ayinalem2025pso,hepso2025manipulator,mdpi2025quadcopter}.
+
+\subsection{Methodological Distinctions}
+
+Beyond technical contributions, this work establishes methodological best practices:
+
+\textbf{1. Rigorous Statistical Validation:} All performance claims supported by statistical tests (Welch's t-test, Cohen's d effect size, bootstrap 95\% confidence intervals) over 100-500 Monte Carlo trials. Prior work often reports single-run results or averages without significance testing.
+
+\textbf{2. Reproducible Research:} Fixed random seeds, public repository (upon acceptance), detailed hyperparameter documentation enable exact replication.
+
+\textbf{3. Negative Result Transparency:} Explicit reporting of failures (Chapters 7-8) provides actionable insights for future robust optimization research. Most SMC papers omit failure modes.
+
+\subsection{Chapter Summary}
+
+This chapter reviewed four key areas:
+
+\begin{enumerate}
+\item \textbf{SMC Fundamentals} (Section~\ref{sec:smc_fundamentals}): Variable structure systems, two-phase design, Lyapunov stability, robustness properties
+
+\item \textbf{Chattering Mitigation} (Section~\ref{sec:chattering_mitigation}): Boundary layers, HOSMC, fuzzy-adaptive, observers, hybrids—all with heuristic tuning
+
+\item \textbf{PSO Optimization} (Section~\ref{sec:pso_optimization}): Algorithm foundations, convergence analysis, SMC applications—lacks chattering-focused fitness and multi-scenario validation
+
+\item \textbf{DIP Control} (Section~\ref{sec:dip_control}): Classical (LQR, PID), advanced nonlinear (feedback linearization, MPC), SMC approaches—chattering remains unresolved
+\end{enumerate}
+
+\textbf{Four Research Gaps Identified:}
+\begin{enumerate}
+\item No systematic optimization of adaptive boundary layer parameters
+\item No chattering-prioritized fitness functions in PSO-SMC literature
+\item No Lyapunov stability proofs for time-varying boundary layers
+\item Ubiquitous single-scenario validation; failure reporting absent
+\end{enumerate}
+
+\textbf{Positioning:} This work uniquely combines PSO-optimized adaptive boundary layers, chattering-weighted fitness functions, rigorous Lyapunov analysis, and multi-scenario validation with honest failure reporting—addressing all four gaps simultaneously.
+
+\textbf{Next:} Chapter 3 presents the double inverted pendulum system model used for controller design and validation.
