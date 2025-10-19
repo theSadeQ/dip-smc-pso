@@ -1,0 +1,42 @@
+% ============================================================================
+% ABSTRACT - ENGLISH
+% ============================================================================
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\noindent
+\textbf{Background:}
+Sliding mode control (SMC) provides robust stabilization for nonlinear underactuated systems, but suffers from chattering—high-frequency oscillations that degrade performance and limit industrial adoption. While adaptive boundary layers can mitigate chattering, optimal parameter tuning remains challenging and typically requires time-consuming manual adjustment or relies on fixed boundary widths that compromise either tracking precision or chattering amplitude.
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{Objective:}
+This thesis develops a particle swarm optimization (PSO) framework to systematically tune adaptive boundary layer parameters for a double inverted pendulum (DIP) system, minimizing chattering while preserving control performance. We provide Lyapunov-based stability analysis for the time-varying boundary layer and rigorously validate the approach across multiple experimental scenarios.
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{Methods:}
+We design an adaptive boundary layer mechanism where the effective width $\epsilon_{\text{eff}}(t) = \epsilon_{\min} + \alpha|\dot{s}(t)|$ dynamically adjusts based on sliding surface velocity. PSO optimizes three parameters ($\epsilon_{\min}$, $\alpha$, $\lambda$) using a chattering-weighted multi-objective fitness function (70\% chattering index, 15\% energy, 15\% tracking error). Validation employs Monte Carlo simulations (100--500 trials per scenario) across four experiments: (MT-5) baseline controller comparison, (MT-6) nominal performance validation, (MT-7) robustness stress testing ($\pm0.3$ rad initial conditions), and (MT-8) disturbance rejection analysis (step/impulse/sinusoidal disturbances). Statistical significance is assessed via Welch's $t$-test, effect sizes (Cohen's $d$), and bootstrap confidence intervals.
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{Results:}
+Under nominal conditions ($\pm0.05$ rad, MT-6), PSO-optimized adaptive boundary layer SMC achieved 66.5\% chattering reduction (mean index: 0.077 vs. 0.230, $p<0.001$, $d=5.29$) with zero energy penalty relative to classical SMC. However, generalization to challenging initial conditions ($\pm0.3$ rad, MT-7) exhibited 50.4$\times$ chattering degradation (mean: 3.88 vs. 0.077) and 90.2\% failure rate, indicating severe overfitting to the training distribution. Disturbance rejection tests (MT-8) revealed 0\% success rate across all disturbance types for both classical and adaptive SMC, attributing to lack of integral action and single-scenario PSO training.
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{Conclusions:}
+PSO successfully optimizes adaptive boundary layers for nominal chattering mitigation, validated through rigorous Lyapunov stability proofs. However, single-scenario optimization fundamentally limits robustness. Proposed solutions include multi-scenario robust PSO (minimax fitness across initial condition distributions), disturbance-aware fitness functions, and integral sliding mode designs. This work establishes methodological best practices for SMC validation, emphasizing multi-scenario testing and honest reporting of negative results.
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{Keywords:}
+Sliding mode control, chattering mitigation, particle swarm optimization, adaptive boundary layer, double inverted pendulum, robust control, Lyapunov stability, multi-objective optimization
+
+\clearpage
