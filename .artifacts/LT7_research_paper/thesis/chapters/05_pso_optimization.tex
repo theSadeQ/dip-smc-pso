@@ -254,6 +254,13 @@ This section presents the PSO optimization results, including convergence behavi
 \subsection{Convergence Phases and Fitness Improvement}
 \label{subsec:convergence_behavior}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\textwidth]{../figures/fig4_pso_convergence.pdf}
+\caption{PSO convergence analysis: (a) Single run (seed=42) showing three distinct phases—rapid exploration (iterations 1--2, 38\% fitness improvement), refinement (iterations 3--15), and plateau (iterations 16--30); (b) 10-run ensemble demonstrating reproducibility (narrow spread, mean fitness = 15.39 $\pm$ 0.11).}
+\label{fig:pso_convergence}
+\end{figure}
+
 Figure~\ref{fig:pso_convergence}(a) illustrates the PSO convergence trajectory for a representative run (seed=42). The optimization exhibits three distinct phases characteristic of PSO dynamics~\cite{eberhart2001swarm}:
 
 \textbf{Phase I (Iterations 1--2): Rapid Exploration.} The swarm undergoes aggressive exploration as particles sample diverse regions of the parameter space. Initial fitness values span $[24.8, 25.3]$, reflecting the wide variation in chattering behavior across different $(\emin, \alpha)$ combinations. By iteration 2, the global best fitness has improved from 25.0 to 15.54, corresponding to a 38.4\% reduction achieved through social information sharing (particles attracted toward the global best via Equation~\ref{eq:pso_velocity}).
