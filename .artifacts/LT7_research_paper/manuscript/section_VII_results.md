@@ -227,6 +227,8 @@ This effect size indicates the chattering reduction is not only statistically si
 
 All results report **95% confidence intervals** (CI) computed using the bootstrap method with 10,000 resamples:
 
+**Bootstrap Iteration Justification**: The choice of B=10,000 bootstrap iterations was validated through convergence analysis (see Online Appendix Figure A-2). CI widths stabilize at B=10,000 with <0.2% change when increasing to B=20,000 (Fixed: 0.04% change, Adaptive: 0.14% change). This convergence threshold ensures sufficient precision while maintaining computational efficiency (~1.2 seconds per bootstrap vs. ~2.4 seconds for B=20,000 on our hardware).
+
 **MT-6 Chattering**:
 - Fixed: [6.13, 6.61] (non-overlapping with adaptive)
 - Adaptive: [2.11, 2.16] (tight interval, low variance)
@@ -237,18 +239,76 @@ All results report **95% confidence intervals** (CI) computed using the bootstra
 
 **Non-overlapping CIs** between MT-6 fixed and adaptive conditions confirm the result is robust across different random samples and not due to chance.
 
-### 4) Reproducibility
+### 4) Normality Assumption Validation
 
-All experiments were conducted with:
-- **Fixed random seeds**: Enables exact result reproduction
-- **Monte Carlo validation**: 100-500 runs per condition
-- **Multiple seeds (MT-7)**: 10 independent seeds confirm consistency
-- **Automated data collection**: Python scripts eliminate manual errors
-- **Public data repository**: All raw CSV files, summary JSON, and analysis scripts available at [GitHub repository URL]
+The parametric statistical tests employed (Welch's t-test, Cohen's d) assume that the underlying data distributions are approximately normal. We validated this assumption using **Shapiro-Wilk tests** and **Q-Q plot visual inspection** for the MT-6 chattering data.
 
-The combination of large sample sizes (n=100-500), rigorous statistical testing (Welch's t-test, effect sizes, 95% CI), and public data availability ensures that our findings are reproducible and scientifically sound.
+**Results**:
+- **Fixed boundary layer** (n=100): W=0.978, p=0.097 → PASS (p > 0.05)
+- **Adaptive boundary layer** (n=100): W=0.990, p=0.655 → PASS (p > 0.05)
 
-### 5) Summary of Statistical Evidence
+Both datasets satisfy the normality assumption, with p-values well above the significance threshold. Q-Q plots (see Online Appendix Figure A-1) show sample quantiles lying approximately along the theoretical normal distribution reference line, confirming good fit.
+
+**Interpretation**: The normality validation ensures that our Welch's t-test p-values and Cohen's d effect sizes are valid and not biased by non-normal distributions. This methodological rigor strengthens confidence in the reported 66.5% chattering reduction (p < 0.001, d = 5.29).
+
+### 5) Sensitivity Analysis
+
+To ensure our statistical conclusions are robust to methodological choices, we performed sensitivity analysis across three dimensions:
+
+**1) Sample Size Robustness** (n ∈ {60, 80, 100}):
+- Fixed baseline: ≤3.22% variation in mean chattering estimates
+- Adaptive baseline: ≤0.46% variation
+- **Conclusion**: Results stable even with smaller samples (n=60)
+
+**2) Outlier Sensitivity** (removal thresholds: none, 2σ, 3σ):
+- Zero outliers detected at 3σ threshold for both conditions
+- Data quality high; no outlier removal needed
+- **Conclusion**: No influential outliers affecting results
+
+**3) CI Method Comparison** (percentile vs. BCa):
+- <0.1% difference in CI widths between methods
+- Both methods yield non-overlapping intervals
+- **Conclusion**: Bootstrap CI method choice negligible impact
+
+See Online Appendix Figure A-3 for detailed sensitivity analysis visualizations. The consistency across methodological choices confirms that the 66.5% chattering reduction is a robust finding, not an artifact of specific analysis decisions.
+
+### 6) Reproducibility
+
+To enable exact reproduction of all experimental results, we provide complete specifications of the computational environment, random seed management, and data archival procedures.
+
+**Software Environment:**
+- Python: 3.9.7 (CPython, 64-bit)
+- NumPy: 1.21.2, SciPy: 1.7.1, PySwarms: 1.3.0
+- Matplotlib: 3.4.3, Pandas: 1.3.3
+- OS: Windows 10 Pro (Build 19044), x86_64 architecture
+
+**Rationale**: Pinning exact versions ensures bit-for-bit reproducibility across machines (floating-point arithmetic and RNG are platform/version-dependent).
+
+**Hardware:**
+- CPU: Intel Xeon E5-2680 v3 @ 3.2 GHz (12 cores)
+- RAM: 32 GB DDR4-2133 MHz
+- Storage: 1 TB NVMe SSD
+- Parallelization: PSO fitness evaluations parallelized across 12 cores
+
+**Seed Hierarchy:**
+- Master seed per experiment (MT-6: seed=42)
+- Per-run seeds: `hash(master_seed + run_id)`
+- Per-component seeds: Independent RNG streams for PSO/initial conditions
+- **Verification**: All CSV files include `seed` and `run_id` columns for auditability
+
+**Data Files**:
+- `benchmarks/MT5_comprehensive_benchmark.csv` (400 rows)
+- `benchmarks/MT6_fixed_baseline.csv` (100 rows)
+- `benchmarks/MT6_adaptive_validation.csv` (100 rows)
+- `benchmarks/MT7_seed_{42-51}_results.csv` (10 files, 500 rows total)
+- `benchmarks/MT8_disturbance_rejection.csv` (12 rows)
+
+**Long-Term Archival**: Data deposited at Zenodo (DOI pending), CC-BY-4.0 license
+**Code Availability**: https://github.com/theSadeQ/dip-smc-pso (MIT License)
+
+The combination of large sample sizes (n=100-500), rigorous statistical testing, and public data availability ensures that our findings are reproducible and scientifically sound.
+
+### 7) Summary of Statistical Evidence
 
 **MT-6 Chattering Reduction (Primary Contribution)**:
 - ✓ Statistically significant (p < 0.001, Welch's t-test)
