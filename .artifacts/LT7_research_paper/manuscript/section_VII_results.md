@@ -62,14 +62,14 @@ Table II presents the comparative performance between fixed and adaptive boundar
 | **Chattering Index** | **6.37 ± 1.20** | **2.14 ± 0.13** | **66.5%** | **<0.001*** | **5.29** |
 | Overshoot θ₁ [rad] | 5.36 ± 0.32 | 4.61 ± 0.47 | 13.9% | <0.001*** | 1.90 |
 | Overshoot θ₂ [rad] | 9.87 ± 3.05 | 4.61 ± 0.46 | 53.3% | <0.001*** | 2.49 |
-| Control Energy [N²·s] | 5,232 ± 2,888 | 5,232 ± 2,888 | 0.0% | 0.339 (n.s.) | -0.14 |
+| Control Energy [N²·s] | 5,232 ± 2,888 | 5,540 ± 2,553 | +5.9% | 0.424 (n.s.) | 0.11 |
 | Settling Time [s] | 10.0 ± 0.0 | 10.0 ± 0.0 | No change | N/A | N/A |
 
 _Statistical significance: *** p < 0.001; n.s. = not significant (α = 0.05)_
 
 **Main Result**: The adaptive boundary layer achieved a **66.5% reduction in chattering** (6.37 → 2.14, p < 0.001) with an extremely large effect size (Cohen's d = 5.29). This result is highly statistically significant and practically meaningful.
 
-**Critical Finding**: The chattering reduction was achieved with **zero energy penalty** (p = 0.339, not significant). Both configurations exhibited identical mean control energy (5,232 N²·s), confirming that the adaptive approach does not increase actuator effort.
+**Critical Finding**: The chattering reduction was achieved with a **negligible energy penalty** (+5.9%, p = 0.424, not significant). While the adaptive configuration exhibited slightly higher mean control energy (5,540 N²·s vs. 5,232 N²·s), this 308 N²·s difference is statistically indistinguishable from zero given the large variances (σ ≈ 2,550-2,890 N²·s) and represents a negligible practical effect (Cohen's d = 0.11).
 
 **Additional Benefits**: The adaptive boundary layer also reduced overshoot for both pendulum angles (13.9% for θ₁, 53.3% for θ₂), indicating improved transient response beyond the primary chattering objective.
 
@@ -83,7 +83,7 @@ The 66.5% chattering reduction represents a substantial advancement in SMC pract
 - **Improved control precision**: Reduced oscillations enable tighter trajectory tracking
 - **Enhanced energy efficiency**: Lower chattering amplitude reduces energy waste in oscillations
 
-The zero energy penalty is particularly significant, as it demonstrates that chattering mitigation does not compromise the Classical SMC's energy advantage established in Section VII-A (20× better than STA/Adaptive SMC).
+The negligible energy penalty (+5.9%, not statistically significant) is particularly important, as it demonstrates that chattering mitigation does not substantially compromise the Classical SMC's energy advantage established in Section VII-A (20× better than STA/Adaptive SMC).
 
 ## C. Robustness Analysis: Generalization Failure (MT-7)
 
@@ -274,7 +274,7 @@ The combination of large sample sizes (n=100-500), rigorous statistical testing 
 Section VII presented comprehensive experimental validation of PSO-optimized adaptive boundary layer SMC for double inverted pendulum control:
 
 **Key Achievements**:
-1. **66.5% chattering reduction** (6.37 → 2.14, p<0.001, d=5.29) with zero energy penalty
+1. **66.5% chattering reduction** (6.37 → 2.14, p<0.001, d=5.29) with negligible energy penalty (+5.9%, n.s.)
 2. **20× energy efficiency advantage** of Classical SMC over STA/Adaptive SMC
 3. **Statistical rigor**: Welch's t-test, Cohen's d, 95% CI, 100-500 runs per condition
 
