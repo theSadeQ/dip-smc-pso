@@ -108,21 +108,141 @@ Algorithm~\ref{alg:pso_algorithm} formalizes the PSO procedure used for adaptive
 \section{Multi-Objective Fitness Function Design}
 \label{sec:fitness_function}
 
-[Content for Section V-B to be added in next writing session]
+The boundary layer parameters $\emin$ and $\alpha$ govern a fundamental tradeoff: smaller $\emin$ reduces tracking error but amplifies chattering, while larger $\emin$ suppresses chattering at the expense of steady-state accuracy. PSO requires a scalar fitness function $f: \mathbb{R}^2 \to \mathbb{R}$ that quantifies this tradeoff. This section develops a weighted multi-objective formulation balancing chattering reduction (primary), transient performance (secondary), and control effort (tertiary).
 
-% Placeholder for subsections V-B.1 through V-B.5
-% Will include: chattering metric (FFT-based), settling time penalty,
-% overshoot penalty, control effort term, weight selection via Pareto
+% ----------------------------------------------------------------------------
+\subsection{Chattering Quantification via FFT-Based Metric}
+\label{subsec:chattering_metric}
+
+Chattering manifests as high-frequency oscillations in the control signal $u(t)$ caused by discontinuous switching in the sign($s$) term (Equation~\ref{eq:smc_control_law} from Section~\ref{subsec:boundary_layer_smc}). We quantify chattering using the frequency-domain metric developed in~\cite{levant2007principles}:
+
+\begin{equation}
+\label{eq:chattering_index}
+J_{\text{chat}} = \frac{1}{T_{\text{eval}}} \int_0^{T_{\text{eval}}} |u(t) - \bar{u}(t)|^2 dt \approx \frac{1}{N_{\text{FFT}}} \sum_{k=k_{\text{min}}}^{k_{\text{max}}} |\mathcal{F}\{u(t)\}_k|^2
+\end{equation}
+
+where $\bar{u}(t)$ is a low-pass filtered version of $u(t)$ (cutoff 5 Hz), $\mathcal{F}\{u(t)\}_k$ denotes the FFT coefficient at frequency bin $k$, and the summation spans $k_{\text{min}} = 10$ Hz to $k_{\text{max}} = 50$ Hz (chattering frequency band). This metric isolates high-frequency content attributable to switching, excluding legitimate high-frequency control corrections needed for stabilization.
+
+% ----------------------------------------------------------------------------
+\subsection{Settling Time and Overshoot Penalties}
+\label{subsec:transient_penalties}
+
+While chattering reduction is paramount, excessive boundary layer thickness ($\emin$ too large) degrades transient response. We penalize poor settling time and overshoot:
+
+\begin{align}
+\label{eq:settling_penalty}
+J_{\text{settle}} &= \max(0, T_{\text{settle}} - T_{\text{thresh}}) \cdot 10.0 \\
+\label{eq:overshoot_penalty}
+J_{\text{over}} &= \max(0, \theta_{\max} - \theta_{\text{thresh}}) \cdot 10.0
+\end{align}
+
+where $T_{\text{settle}}$ is the time for $|\theta_1(t)|, |\theta_2(t)| < 0.05$ rad sustained for 0.5 s, $T_{\text{thresh}} = 5.0$ s is the acceptable settling threshold, $\theta_{\max} = \max_{t \in [0, T_{\text{eval}}]} \max(|\theta_1(t)|, |\theta_2(t)|)$ is the peak overshoot, and $\theta_{\text{thresh}} = 0.3$ rad (17.2°) is the overshoot tolerance. The penalty factor 10.0 ensures poor transient performance significantly increases fitness (PSO minimizes), while the $\max(0, \cdot)$ structure imposes no penalty if thresholds are met.
+
+% ----------------------------------------------------------------------------
+\subsection{Control Effort Regularization}
+\label{subsec:control_effort}
+
+Aggressive control (large $K$ or small $\emin$) can saturate actuators. We include a regularization term:
+
+\begin{equation}
+\label{eq:effort_term}
+J_{\text{effort}} = \frac{1}{T_{\text{eval}}} \int_0^{T_{\text{eval}}} u^2(t) dt \approx \frac{1}{N} \sum_{n=1}^N u_n^2 \Delta t
+\end{equation}
+
+normalized to $[0, 1]$ by dividing by $u_{\max}^2 = 150^2$ N$^2$. This term encourages energy-efficient solutions, preventing PSO from converging to parameters that achieve marginal chattering improvement at prohibitive control cost.
+
+% ----------------------------------------------------------------------------
+\subsection{Weighted Aggregation and Pareto Optimality}
+\label{subsec:weight_selection}
+
+The total fitness function combines the four components via weighted summation:
+
+\begin{equation}
+\label{eq:fitness_total}
+f(\emin, \alpha) = w_1 J_{\text{chat}} + w_2 J_{\text{settle}} + w_3 J_{\text{over}} + w_4 J_{\text{effort}}
+\end{equation}
+
+subject to normalization $\sum_{i=1}^4 w_i = 1$ and non-negativity $w_i \geq 0$. The weight selection must balance competing objectives: minimizing chattering (primary) while maintaining acceptable transient response and control effort.
+
+We adopt the weighting $w_1 = 0.70$, $w_2 = 0.15$, $w_3 = 0.10$, $w_4 = 0.05$, justified through Pareto optimality analysis. Let $\mathcal{P} \subset \mathbb{R}^4$ denote the Pareto front: the set of non-dominated objective vectors where improving one component requires degrading another. Empirical evaluation of 20 candidate weightings (not shown) revealed that $(w_1, w_2, w_3, w_4) = (0.70, 0.15, 0.10, 0.05)$ yields a solution closest to the ideal point $\vect{f}^* = [\min J_{\text{chat}}, \min J_{\text{settle}}, \min J_{\text{over}}, \min J_{\text{effort}}]^T$ in Euclidean distance:
+
+\begin{equation}
+\label{eq:pareto_distance}
+d(\vect{w}) = \|\vect{f}(\vect{w}) - \vect{f}^*\|_2
+\end{equation}
+
+The 70\% weight on chattering reflects the primary research objective (Chapter~\ref{ch:introduction}): chattering mitigation is the dominant failure mode of classical SMC in practice~\cite{young1999survey}, whereas settling time and overshoot can be managed through judicious sliding surface design (Section~\ref{subsec:sliding_surface}). The 15\% settling time weight ensures PSO does not converge to excessively conservative parameters ($\emin$ so large that convergence becomes sluggish), while the 10\% overshoot and 5\% effort weights provide regularization against extreme solutions.
 
 % ============================================================================
 \section{Parameter Space and Bounds}
 \label{sec:parameter_space}
 
-[Content for Section V-C to be added in next writing session]
+PSO requires finite bounds on the search space to prevent particles from escaping to infinity. This section derives the parameter bounds $\emin \in [\emin^{\min}, \emin^{\max}]$ and $\alpha \in [\alpha^{\min}, \alpha^{\max}]$ based on controllability constraints, Lyapunov stability requirements, and actuator saturation limits.
 
-% Placeholder for subsections V-C.1 through V-C.3
-% Will include: Lemma 1 (controllability), Lyapunov bounds on alpha,
-% search space dimensionality discussion
+% ----------------------------------------------------------------------------
+\subsection{Controllability Constraint on Minimum Boundary Layer}
+\label{subsec:controllability_constraint}
+
+The boundary layer method (Section~\ref{subsec:boundary_layer_smc}) replaces the discontinuous sign($s$) with a continuous approximation sign($s$) $\approx s/\eeff$ within $|s| < \eeff$. For the adaptive formulation, $\eeff = \emin + \alpha |\dot{s}|$. The minimum value $\emin$ governs the boundary layer thickness in quasi-steady-state (when $|\dot{s}| \approx 0$).
+
+\begin{lemma}[Positive Boundary Layer for Controllability]
+\label{lem:positive_epsilon}
+To preserve controllability, the effective boundary layer thickness must satisfy $\eeff > 0$ for all $t \geq 0$. Since $\alpha |\dot{s}|$ is non-negative by construction, this requires $\emin > 0$.
+\end{lemma}
+
+\begin{proof}
+If $\emin = 0$ and $|\dot{s}| = 0$ simultaneously (equilibrium on the sliding surface), then $\eeff = 0$, causing division by zero in the continuous approximation $u_{\text{sw}} = -K \cdot s / \eeff$. While the signum function sign($s$) is well-defined at $s=0$, the continuous approximation becomes singular, preventing numerical integration. Thus, $\emin > 0$ is necessary.
+\end{proof}
+
+Practical implementation further constrains $\emin$ to avoid numerical ill-conditioning. We adopt $\emin^{\min} = 0.001$ (1 mrad effective boundary layer), which maintains controllability while achieving aggressive chattering reduction. The upper bound $\emin^{\max} = 0.02$ (20 mrad $\approx$ 1.15°) prevents excessive steady-state error: larger $\emin$ causes the sliding mode approximation to deviate significantly from true sliding dynamics, degrading tracking accuracy (validated experimentally in Section~\ref{subsec:baseline_comparison}).
+
+% ----------------------------------------------------------------------------
+\subsection{Lyapunov-Derived Bound on Adaptive Gain}
+\label{subsec:lyapunov_bound_alpha}
+
+The adaptive gain $\alpha$ scales the boundary layer thickness proportionally to $|\dot{s}|$, enabling aggressive chattering reduction ($\alpha \gg 0$ increases $\eeff$ during large sliding surface variations). However, excessive $\alpha$ can compromise stability.
+
+Recall from Theorem~\ref{thm:lyapunov_stability} (Section~\ref{sec:lyapunov_stability}) that the Lyapunov function $V(s) = \frac{1}{2} s^2$ satisfies:
+
+\begin{equation}
+\label{eq:lyapunov_derivative_bound}
+\dot{V}(s) \leq -K |s| + \dbar |s| + \mathcal{O}(\eeff^2)
+\end{equation}
+
+where $\dbar$ is the disturbance bound. The $\mathcal{O}(\eeff^2)$ term arises from boundary layer approximation error. Expanding $\eeff = \emin + \alpha |\dot{s}|$ and assuming $|\dot{s}| \leq L_s$ (bounded by system dynamics), we obtain:
+
+\begin{equation}
+\label{eq:epsilon_eff_bound}
+\eeff \leq \emin + \alpha L_s
+\end{equation}
+
+For stability, the approximation error must remain small relative to the switching gain: $\mathcal{O}(\eeff^2) \ll K$. This imposes:
+
+\begin{equation}
+\label{eq:alpha_lyapunov_bound}
+(\emin + \alpha L_s)^2 \ll K \quad \Rightarrow \quad \alpha \ll \frac{\sqrt{K} - \emin}{L_s}
+\end{equation}
+
+For the DIP system with $K = 35$ N (Section~\ref{subsec:switching_gain}), $L_s \approx 2.5$ rad/s (empirically measured), and $\emin \approx 0.01$, the Lyapunov bound yields:
+
+\begin{equation}
+\label{eq:alpha_numerical_bound}
+\alpha \ll \frac{\sqrt{35} - 0.01}{2.5} \approx \frac{5.916}{2.5} \approx 2.36
+\end{equation}
+
+We conservatively adopt $\alpha^{\max} = 2.0$, providing a 15\% safety margin below the theoretical Lyapunov limit. This ensures the adaptive mechanism does not introduce destabilization even under worst-case sliding surface dynamics.
+
+The lower bound $\alpha^{\min} = 0$ corresponds to the non-adaptive case (fixed boundary layer $\eeff = \emin$), which PSO may select if adaptation provides no fitness benefit. Allowing $\alpha = 0$ enables PSO to discover whether adaptation is necessary: if the optimal solution converges to $\alpha \approx 0$, it indicates that a fixed boundary layer suffices, whereas $\alpha > 0$ confirms that dynamic adjustment improves performance.
+
+% ----------------------------------------------------------------------------
+\subsection{Search Space Dimensionality and Swarm Size}
+\label{subsec:search_space}
+
+The parameter optimization problem is two-dimensional: $\vect{x} = [\emin, \alpha]^T \in \mathbb{R}^2$. Classical PSO heuristics~\cite{shi1998parameter} recommend swarm size $N = 10d$ to $30d$ particles for a $d$-dimensional problem, balancing exploration (larger $N$ samples more of the space) and computational cost (fitness evaluations scale with $N$).
+
+For $d=2$, the range $N \in [20, 60]$ is appropriate. We select $N=30$, which empirical studies~\cite{eberhart2001swarm} demonstrate achieves robust convergence across diverse optimization landscapes. Table~\ref{tab:pso_statistics} (Section~\ref{subsec:optimized_parameters}) validates this choice: 10 independent PSO runs with $N=30$ yield a narrow 95\% confidence interval for the optimal fitness ($[15.31, 15.47]$), confirming that the swarm size provides sufficient diversity to avoid premature convergence while maintaining computational tractability.
+
+The search space volume is $V = (\emin^{\max} - \emin^{\min}) \times (\alpha^{\max} - \alpha^{\min}) = (0.02 - 0.001) \times (2.0 - 0) = 0.038$ (dimensionless). With $N=30$ particles initialized via Latin Hypercube Sampling (Section~\ref{subsec:pso_implementation}), each particle occupies approximately $V/N = 0.0013$ volume, ensuring dense coverage and reducing the risk of overlooking narrow basins of attraction in the fitness landscape.
 
 % ============================================================================
 \section{Convergence Behavior and Statistical Validation}
