@@ -321,5 +321,5 @@ Want to contribute to project planning?
 
 **Planning Resources:**
 - Initiative Roadmaps: [Citation System](citation_system/00_master_roadmap.md), [Documentation](documentation/README.md)
-- Weekly Reports: [Documentation Weekly Summaries](documentation/)
+- Weekly Reports: [Documentation Weekly Summaries](documentation/README.md)
 - Process Framework: [CI Agent Framework](orchestration/ci_agent_framework.md)

@@ -1,10 +1,34 @@
-# Citation System Documentation **Status:** To be completed in Phase B (Citation System Implementation)
+# Citation System Documentation
 
-**Est. Completion:** Week 10 of Phase B
+**Status:** Phase B Deferred (Research phase prioritized)
+
+**Current State:** Planning complete, implementation deferred pending research completion
 
 ---
 
-## Overview This document will provide documentation of the citation system implementation, covering the automated extraction, research, integration, and validation processes. ## Planned Content ### 1. System Architecture
+## Overview
+
+This project includes comprehensive planning for an automated citation system that will add 150-200 academic references to the documentation. While full implementation is deferred, the planning infrastructure is complete and ready for execution when research priorities allow.
+
+### How to Cite This Project
+
+If you use this Double Inverted Pendulum SMC/PSO framework in your research, please cite:
+
+```bibtex
+@software{dip_smc_pso_2024,
+  title = {DIP\_SMC\_PSO: Double Inverted Pendulum Sliding Mode Control with PSO Optimization},
+  author = {Research Team},
+  year = {2024},
+  url = {https://github.com/theSadeQ/dip-smc-pso},
+  version = {1.0.0}
+}
+```
+
+### Existing Citation Resources
+
+- **[CITATIONS.md](CITATIONS.md)** - Manual citations and references
+- **[CITATIONS_ACADEMIC.md](CITATIONS_ACADEMIC.md)** - Academic integrity statement
+- **[Bibliography](bibliography.md)** - BibTeX references (Sphinx integration) ## Planned Content ### 1. System Architecture
 
 - Citation extraction pipeline
 - AI-powered research automation

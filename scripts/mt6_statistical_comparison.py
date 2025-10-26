@@ -1,27 +1,9 @@
-"""
-================================================================================
-MT-6 Statistical Comparison Module
-================================================================================
+"""Utilities for comparing MT-6 fixed and adaptive boundary layer results.
 
-Performs rigorous statistical comparison between fixed and adaptive boundary
-layer approaches for Classical SMC.
-
-Compares:
-- Chattering index (primary metric)
-- Settling time (secondary)
-- Overshoot (tertiary)
-- Control efficiency metrics
-
-Statistical tests:
-- Welch's t-test (unequal variances)
-- Cohen's d (effect size)
-- 95% confidence intervals
-
-Task: MT-6 Statistical Analysis
-Reference: ROADMAP_EXISTING_PROJECT.md
-
-Author: MT-6 Orchestrator
-Created: October 19, 2025
+This module loads summary statistics produced by the MT-6 experiments and
+derives interpretable comparisons between the fixed and adaptive boundary layer
+configurations. It computes percent improvement, effect size, Welch's t-test,
+and confidence intervals for the metrics that drive the MT-6 analysis.
 """
 
 import json
@@ -40,7 +22,26 @@ from src.utils.analysis.statistics import welch_t_test, confidence_interval
 
 @dataclass
 class ComparisonResult:
-    """Statistical comparison result for a single metric."""
+    """Aggregate statistics describing a metric comparison.
+
+    Attributes:
+        metric_name: Name of the metric being compared.
+        fixed_mean: Mean value recorded for the fixed baseline.
+        fixed_std: Standard deviation for the fixed baseline.
+        fixed_ci_lower: Lower bound of the fixed baseline confidence interval.
+        fixed_ci_upper: Upper bound of the fixed baseline confidence interval.
+        adaptive_mean: Mean value recorded for the adaptive controller.
+        adaptive_std: Standard deviation for the adaptive controller.
+        adaptive_ci_lower: Lower bound of the adaptive confidence interval.
+        adaptive_ci_upper: Upper bound of the adaptive confidence interval.
+        improvement_percent: Percent change from fixed to adaptive (positive is an improvement).
+        improvement_absolute: Absolute change from fixed to adaptive (positive is an improvement).
+        t_statistic: Welch's t statistic for the comparison.
+        p_value: Two-tailed p-value associated with the t statistic.
+        cohens_d: Cohen's d effect size for the comparison.
+        significant: True when the null hypothesis was rejected at alpha=0.05.
+        interpretation: Human-readable interpretation of the comparison results.
+    """
     metric_name: str
     fixed_mean: float
     fixed_std: float
@@ -60,24 +61,36 @@ class ComparisonResult:
 
 
 def load_summary_data(json_path: Path) -> Dict:
-    """Load summary JSON file."""
+    """Read a MT-6 summary JSON file from disk.
+
+    Args:
+        json_path (Path): Location of the JSON file that stores summary metrics.
+
+    Returns:
+        Dict: Parsed JSON payload containing summary statistics.
+    """
     with open(json_path, 'r') as f:
         return json.load(f)
 
 
 def compute_improvement(fixed_val: float, adaptive_val: float,
                        lower_is_better: bool = True) -> Tuple[float, float]:
-    """
-    Compute improvement percentage and absolute difference.
+    """Compute the percent and absolute change between two metric values.
 
     Args:
-        fixed_val: Fixed boundary layer metric value
-        adaptive_val: Adaptive boundary layer metric value
-        lower_is_better: If True, reduction is improvement (chattering, settling)
-                        If False, increase is improvement
+        fixed_val (float): Metric value measured for the fixed configuration.
+        adaptive_val (float): Metric value measured for the adaptive configuration.
+        lower_is_better (bool, optional): When True an absolute reduction is treated
+            as an improvement; otherwise an absolute increase is considered an
+            improvement. Defaults to True.
 
     Returns:
-        (improvement_percent, improvement_absolute)
+        Tuple[float, float]: Pair containing the percent improvement and the
+        absolute change (fixed minus adaptive).
+
+    Example:
+        >>> compute_improvement(10.0, 7.0)
+        (30.0, 3.0)
     """
     diff = fixed_val - adaptive_val
 
@@ -93,7 +106,17 @@ def compute_improvement(fixed_val: float, adaptive_val: float,
 
 def interpret_comparison(metric_name: str, improvement_pct: float,
                         p_value: float, cohens_d: float) -> str:
-    """Generate human-readable interpretation of comparison."""
+    """Generate a short, human-readable interpretation for a comparison.
+
+    Args:
+        metric_name (str): Name of the metric being described.
+        improvement_pct (float): Percent improvement achieved by the adaptive configuration.
+        p_value (float): Two-tailed p-value from Welch's t-test.
+        cohens_d (float): Cohen's d effect size.
+
+    Returns:
+        str: Narrative explanation of significance, effect size, and direction.
+    """
 
     # Statistical significance
     if p_value < 0.001:
@@ -129,17 +152,18 @@ def interpret_comparison(metric_name: str, improvement_pct: float,
 
 def compare_metric(metric_name: str, fixed_stats: Dict, adaptive_stats: Dict,
                   lower_is_better: bool = True) -> ComparisonResult:
-    """
-    Compare a single metric between fixed and adaptive approaches.
+    """Compare a single metric between fixed and adaptive approaches.
 
     Args:
-        metric_name: Name of metric (e.g., "chattering_index")
-        fixed_stats: Statistics dict from fixed baseline summary
-        adaptive_stats: Statistics dict from adaptive summary
-        lower_is_better: Whether lower values are better
+        metric_name (str): Name of the metric to analyse (for example ``"chattering_index"``).
+        fixed_stats (Dict): Statistic fields sourced from the fixed baseline summary.
+        adaptive_stats (Dict): Statistic fields sourced from the adaptive summary.
+        lower_is_better (bool, optional): Whether a lower value represents improvement.
+            Defaults to True.
 
     Returns:
-        ComparisonResult with complete statistical analysis
+        ComparisonResult: Dataclass capturing descriptive and inferential statistics
+        for the requested metric.
     """
 
     # Extract statistics (using actual data from summaries)
@@ -262,8 +286,8 @@ def main():
 
         # Print summary
         print(f"  {metric_name}:")
-        print(f"    Fixed:    {result.fixed_mean:.4f} ± {result.fixed_std:.4f}")
-        print(f"    Adaptive: {result.adaptive_mean:.4f} ± {result.adaptive_std:.4f}")
+        print(f"    Fixed:    {result.fixed_mean:.4f} +/- {result.fixed_std:.4f}")
+        print(f"    Adaptive: {result.adaptive_mean:.4f} +/- {result.adaptive_std:.4f}")
         print(f"    Improvement: {result.improvement_percent:+.1f}%")
         print(f"    p-value: {result.p_value:.6f} {'***' if result.p_value < 0.001 else '**' if result.p_value < 0.01 else '*' if result.p_value < 0.05 else 'ns'}")
         print(f"    Cohen's d: {result.cohens_d:.3f}")
@@ -280,7 +304,14 @@ def main():
 
     # Convert numpy types to native Python types for JSON serialization
     def convert_numpy_types(obj):
-        """Recursively convert numpy types to native Python types."""
+        """Recursively convert NumPy scalar types to native Python equivalents.
+
+        Args:
+            obj: Arbitrary nested structure of dictionaries, lists, and NumPy objects.
+
+        Returns:
+            Any: Structure matching the input, but with built-in Python scalars and lists.
+        """
         if isinstance(obj, dict):
             return {k: convert_numpy_types(v) for k, v in obj.items()}
         elif isinstance(obj, list):

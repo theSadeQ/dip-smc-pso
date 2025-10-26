@@ -271,7 +271,7 @@
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6803fcd2" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=84d0d889" />
     <link rel="stylesheet" type="text/css" href="_static/code-collapse.css?v=f6d90a45" />
     <link rel="stylesheet" type="text/css" href="_static/code-runner.css?v=bc684ae2" />
     <link rel="stylesheet" type="text/css" href="_static/mathviz.css?v=d1238736" />
@@ -460,7 +460,7 @@
 <li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog All notable changes to the ResearchPlan validation system will be documented in this file. The format is based on Keep a Changelog,</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CITATIONS.html">Citations &amp; Academic Attribution <strong>Project:</strong> Double Inverted Pendulum - Sliding Mode Control with PSO Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CITATIONS_ACADEMIC.html">Academic Theory Citations &amp; References <strong>Project:</strong> Double Inverted Pendulum - Sliding Mode Control with PSO Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CITATION_SYSTEM.html">Citation System Documentation <strong>Status:</strong> To be completed in Phase B (Citation System Implementation)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CITATION_SYSTEM.html">Citation System Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing – ResearchPlanSpec Validation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CONTROLLER_FACTORY.html">Controller Factory Documentation &gt; <strong>Note:</strong> This document has been consolidated into the Factory System Guide. ## Quick Links - <strong><span class="xref myst">Factory System Guide</span></strong> - Complete controller factory documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CROSS_REFERENCE_AUDIT_REPORT.html">Documentation Cross-Reference Audit Report <strong>Report Date:</strong> 2025-10-07</a></li>
@@ -1264,7 +1264,13 @@ Running PSO optimization with real-time convergence monitoring…</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_diagnostics.html">utils.monitoring.diagnostics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_diagnostics.html#integration-example">Integration example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_latency.html">utils.monitoring.latency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_latency.html#integration-example">Integration example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_latency.html#create-monitor-for-10ms-control-loop-dt-0-01s">Create monitor for 10ms control loop (dt=0.01s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_latency.html#get-performance-statistics">Get performance statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_latency.html#phase-1-transient-response-0-5s">Phase 1: Transient response (0-5s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_latency.html#analyze-transient-phase">Analyze transient phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_latency.html#reset-for-steady-state-monitoring">Reset for steady-state monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_latency.html#phase-2-steady-state-5-10s">Phase 2: Steady-state (5-10s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_latency.html#compare-steady-state-performance">Compare steady-state performance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_memory_monitor.html">utils.monitoring.memory_monitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_memory_monitor.html#integration-example">Integration example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/utils/monitoring_stability.html">utils.monitoring.stability</a></li>
@@ -1417,7 +1423,7 @@ Running PSO optimization with real-time convergence monitoring…</a></li>
 <li class="toctree-l1"><a class="reference internal" href="use_cases.html">4. Use Cases &amp; Operating Modes</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="validation/index.html">Validation &amp; Verification</a><input aria-label="Toggle navigation of Validation &amp; Verification" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="validation/validation_workflow.html">Validation Workflow Guide &gt; <strong>Coming Soon:</strong> validation workflow documentation. ## Current Resources For validation guidance, see: - <strong><span class="xref myst">Validation Examples</span></strong> - Practical validation examples and patterns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="validation/simulation_validation_guide.html">Simulation Validation Guide &gt; <strong>Note:</strong> Simulation validation is covered in multiple guides. ## Quick Links - <strong><span class="xref myst">Validation Examples</span></strong> - Practical validation patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation/simulation_validation_guide.html">Simulation Validation Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation/simulation_result_validation.html">Simulation Result Validation Methodology <strong>Document Status:</strong> Phase 3.3 Completion - Monte Carlo and Statistical Testing Framework</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation/simulation_result_validation.html#controller-adapts-on-t0-t1">- Controller adapts on [t₀, t₁]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation/simulation_result_validation.html#performance-evaluated-on-t1-gap-t2">- Performance evaluated on [t₁+gap, t₂]</a></li>
@@ -2048,7 +2054,7 @@ A: Currently, optimization cannot be resumed. Use checkpointing:</p></li>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Oct 16, 2025</div>
+              Last updated on Oct 19, 2025</div>
           </div>
           <div class="right-details">
             

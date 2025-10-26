@@ -1,359 +1,350 @@
-# DIP_SMC_PSO: World-Class Technical Documentation
+# DIP SMC PSO Documentation
 
-**Double-Inverted Pendulum Sliding Mode Control with PSO Optimization**
+**Advanced Control System for Double-Inverted Pendulum**
 
-A Python simulation environment for designing, tuning, and analyzing advanced sliding mode controllers for a double-inverted pendulum system. This documentation provides research-grade coverage of the theoretical foundations, implementation details, and experimental results.
+Welcome to the documentation for the DIP SMC PSO framework - a research-grade Python environment for designing, tuning, and analyzing sliding mode controllers for highly unstable nonlinear systems.
 
 ## Overview
 
-This project implements multiple sliding mode control strategies for stabilizing a double-inverted pendulum system:
+This framework implements state-of-the-art sliding mode control strategies with automated parameter tuning through Particle Swarm Optimization. The system targets the double-inverted pendulum (DIP) - a benchmark problem in nonlinear control theory requiring simultaneous stabilization of two coupled pendulums on a movable cart.
 
-- **Classical Sliding Mode Control (SMC)** with boundary layer
-- **Super-Twisting SMC** for chattering-free control
-- **Adaptive SMC** for uncertainty handling
-- **Hybrid Adaptive STA-SMC** combining model-based and robust control
-
-The controllers are automatically tuned using **Particle Swarm Optimization (PSO)** and validated through simulation and analysis.
+**Key Capabilities:**
+- **Research-Grade Implementation**: Validated against published control theory with complete mathematical derivations
+- **Multiple Controller Architectures**: Classical SMC, Super-Twisting Algorithm, Adaptive SMC, and Hybrid Adaptive STA-SMC
+- **Intelligent Optimization**: Automated controller gain tuning using PSO with convergence guarantees
+- **Production-Ready Deployment**: Docker containers, CI/CD pipelines, and comprehensive test coverage (>85%)
+- **Hardware-in-the-Loop Support**: Real-time simulation interface for physical system integration
+- **Extensible Architecture**: Plugin-based controller factory with type-safe parameter interfaces
 
 ## Features
 
-- 🎯 **Multiple Controller Types**: Classical, Super-Twisting, Adaptive, and Hybrid controllers
-- 🔧 **Automated Tuning**: PSO-based gain optimization for optimal performance
-- 📊 **Analysis**: Lyapunov stability verification and performance metrics
-- 🚀 **High Performance**: Numba-accelerated batch simulations
-- 🌐 **Dual Interface**: Command-line and Streamlit web interfaces
-- 🧪 **Hardware-in-the-Loop**: Real-time simulation features
+**Control Algorithms**
+- Classical Sliding Mode Control with boundary layer for chattering reduction
+- Super-Twisting Algorithm for finite-time convergence without chattering
+- Adaptive SMC with online uncertainty estimation
+- Hybrid Adaptive STA-SMC combining model-based and robust control
 
-## Quick Start
+**Optimization & Tuning**
+- Particle Swarm Optimization with configurable swarm dynamics
+- Multi-objective cost functions (stability, performance, robustness)
+- Convergence analysis and parameter sensitivity tools
+- Automated bounds validation and constraint handling
+
+**Analysis & Validation**
+- Lyapunov stability verification with numerical certificates
+- Statistical benchmarking with confidence intervals
+- Monte Carlo robustness analysis
+- Fault detection and isolation framework
+
+**Development & Deployment**
+- Type-safe configuration with Pydantic schemas
+- Numba-accelerated batch simulations for parameter sweeps
+- Streamlit interactive dashboard for real-time visualization
+- Docker deployment with GPU support for cloud platforms
+
+**Documentation Features**
+- **NEW: Progressive Web App** - Install as native app, full offline documentation access, automatic updates, works without internet
+- **NEW: 3D Interactive Pendulum** - Real-time WebGL physics simulation with adjustable parameters (world's first in technical docs!)
+- **NEW: Live Python Code Execution** - Run Python+NumPy+Matplotlib directly in browser, edit and execute examples instantly, zero installation required
+- Collapsible code blocks with state persistence for improved readability
+- Interactive visualizations and performance dashboards
+- GPU-accelerated smooth animations (60 FPS)
+- Full accessibility support with keyboard navigation
+
+## Main Commands
 
 ```bash
-# Basic simulation with classical controller
+# Run simulation with specific controller
 python simulate.py --ctrl classical_smc --plot
+python simulate.py --ctrl sta_smc --plot
+python simulate.py --ctrl adaptive_smc --plot
+python simulate.py --ctrl hybrid_adaptive_sta_smc --plot
 
-# Optimize and save controller gains
-python simulate.py --ctrl sta_smc --run-pso --save tuned_gains.json
+# Optimize controller gains with PSO
+python simulate.py --ctrl classical_smc --run-pso --save gains_classical.json
+python simulate.py --ctrl sta_smc --run-pso --save gains_sta.json
 
-# Launch web interface
+# Load optimized gains and run
+python simulate.py --load tuned_gains.json --plot
+
+# Launch interactive web dashboard
 streamlit run streamlit_app.py
-```
 
-## Documentation Structure
+# Run hardware-in-the-loop simulation
+python simulate.py --run-hil --plot
 
-```{toctree}
-:maxdepth: 2
-:caption: 📚 Getting Started
+# Run test suite
+pytest tests/ -v
+pytest tests/test_controllers/ --benchmark-only
 
-README.md
-theory_overview.md
-architecture.md
-plant_model.md
-hil_quickstart.md
-streamlit_dashboard_guide.md
+# Build documentation
+cd docs && sphinx-build -b html . _build/html
+python -m http.server 8000 --directory docs/_build/html
 ```
 
 ```{toctree}
-:maxdepth: 2
-:caption: 📋 Project Documentation
+:maxdepth: 3
+:hidden:
 
-CHANGELOG
-CONTRIBUTING
-DEPENDENCIES
-PATTERNS
-context
 ACADEMIC_INTEGRITY_STATEMENT
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 📊 API & Technical Reference
-
-api/index
-technical/index
+CHANGELOG
+CITATIONS
+CITATIONS_ACADEMIC
+CITATION_SYSTEM
+CITATION_SYSTEM_IMPLEMENTATION
+CODE_BEAUTIFICATION_SPECIALIST_COMPREHENSIVE_ASSESSMENT
+CONTRIBUTING
 CONTROLLER_FACTORY
-controller_pso_interface_api_documentation
-factory_integration_documentation
-factory_integration_troubleshooting_guide
-troubleshooting/index
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: ✅ Testing & Validation Standards
-
-TESTING
-validation/index
-benchmarks/index
-QUICKSTART_VALIDATION
-EXAMPLE_VALIDATION_REPORT
-control_law_testing_standards
-deployment_validation_checklists
-benchmarks_methodology
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 📚 Documentation System
-
-DOCUMENTATION_SYSTEM
-DOCUMENTATION_IMPLEMENTATION_PLAN
-DOCUMENTATION_STYLE_GUIDE
-DOCUMENTATION_COVERAGE_MATRIX
-DOCUMENTATION_INVENTORY_SUMMARY
 CROSS_REFERENCE_AUDIT_REPORT
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 🔬 Configuration & Integration
-
+DEPENDENCIES
+DOCUMENTATION_COVERAGE_MATRIX
+DOCUMENTATION_IMPLEMENTATION_PLAN
+DOCUMENTATION_INVENTORY_SUMMARY
+DOCUMENTATION_STYLE_GUIDE
+DOCUMENTATION_SYSTEM
+EXAMPLE_VALIDATION_REPORT
+GITHUB_ISSUE_9_ULTIMATE_ORCHESTRATOR_STRATEGIC_PLAN
+IMPLEMENTATION_REPORT
+LICENSES
+PACKAGE_CONTENTS
+PATTERNS
+PHASE6_COMPLETION_SUMMARY
+PHASE_3_1_COMPLETION_REPORT
+PLANT_CONFIGURATION
+PSO_Documentation_Validation_Report
+PSO_INTEGRATION_GUIDE
+QUICKSTART_VALIDATION
+README
+RELEASE_CHECKLIST
+SPHINX_100_PERCENT_COMPLETION_REPORT
+SPHINX_PHASE10_COMPLETION_REPORT
+SPHINX_PHASE11_COMPLETION_REPORT
+SPHINX_PHASE2_COMPLETION_REPORT
+SPHINX_PHASE3_COMPLETION_REPORT
+SPHINX_PHASE4_COMPLETION_REPORT
+SPHINX_PHASE5_COMPLETION_REPORT
+SPHINX_PHASE6_COMPLETION_REPORT
+SPHINX_PHASE8_SUMMARY
+SPHINX_PHASE9_PROGRESS_REPORT
+TESTING
+ULTIMATE_ORCHESTRATOR_EXECUTIVE_DEPLOYMENT_SUMMARY
+analysis_plan
+api/index
+architecture
+architecture_control_room
+ast_traversal_patterns
+benchmarks/index
+benchmarks_methodology
+bibliography
+changelog
+cheat-sheet-template
+citation_faq
+citation_quick_reference
+claim_extraction_guide
+claude-backup
+component-index-template
+configuration-reference
 configuration_integration_documentation
 configuration_schema_validation
+context
+control_law_testing_standards
+controller_pso_interface_api_documentation
 coverage_analysis_methodology
+deployment/DEPLOYMENT_GUIDE
+deployment/STREAMLIT_DEPLOYMENT
+deployment/docker
+deployment_validation_checklists
+documentation_structure
+executive_summary_template
 fault_detection_guide
-```
-
-## Mathematical Foundation
-
-The double-inverted pendulum system is described by the nonlinear dynamics:
-
-```{math}
-:label: eq:dip_dynamics
-
-\vec{M}(\vec{q})\ddot{\vec{q}} + \vec{C}(\vec{q},\dot{\vec{q}})\dot{\vec{q}} + \vec{G}(\vec{q}) = \vec{B}\vec{u}
-```
-
-where $\vec{q} = [x, \theta_1, \theta_2]^T$ represents the cart position and pendulum angles.
-
-The sliding mode controller ensures finite-time convergence through the switching surface:
-
-```{math}
-:label: eq:sliding_surface
-
-s(\vec{x}) = \vec{S}\vec{x} = \vec{0}
-```
-
-For detailed mathematical derivations, see [System Dynamics](theory/system_dynamics_complete.md). The control implementation can be found in the {py:obj}`src.controllers` module.
-
-## Controller Performance Comparison
-
-```{list-table} Controller Performance Summary
-:header-rows: 1
-:name: table:controller_comparison
-
-* - Controller Type
-  - Settling Time (s)
-  - Overshoot (%)
-  - Chattering Level
-  - Robustness
-* - Classical SMC
-  - 2.1
-  - 8.5
-  - High
-  - Good
-* - Super-Twisting SMC
-  - 1.8
-  - 5.2
-  - Low
-  - Very Good
-* - Adaptive SMC
-  - 1.6
-  - 4.1
-  - Medium
-  - Excellent
-* - Hybrid Adaptive STA
-  - 1.4
-  - 3.8
-  - Very Low
-  - Excellent
-```
-
-## PSO Optimization Workflow
-
-The Particle Swarm Optimization process for controller tuning follows this systematic approach:
-
-```{mermaid}
-flowchart LR
-    Init[Initialize Swarm] --> Eval[Evaluate Fitness J(theta)]
-    Eval --> Update[Update p_best & g_best]
-    Update --> Velocity[Update Velocity v_i]
-    Velocity --> Position[Update Position x_i]
-    Position --> Converged{Converged?}
-    Converged -- No --> Eval
-    Converged -- Yes --> Output[Output theta*]
-
-    subgraph "Fitness Evaluation"
-        Eval --> Sim[Run Simulation]
-        Sim --> Cost[Calculate Cost Function]
-        Cost --> Stability[Check Stability Margins]
-    end
-
-    style Init fill:#e1f5fe
-    style Output fill:#c8e6c9
-    style Converged fill:#fff3e0
-```
-
-This optimization process is implemented in {py:obj}`src.optimizer.pso_optimizer.PSOOptimizer` and integrates with all controller types described in {numref}`table:controller_comparison`.
-
-## Bibliography & References
-
-For complete academic citations and attribution, see:
-
-- **{doc}`bibliography`** - Complete BibTeX bibliography with all academic references
-- **{doc}`../CITATIONS_ACADEMIC`** - Detailed academic theory citations with exact page numbers
-- **{doc}`../DEPENDENCIES`** - Software dependencies and licenses
-- **{doc}`../PATTERNS`** - Design patterns and architectural decisions
-- **{doc}`../CITATIONS`** - Master citation index and quick reference
-
-### Key References
-
-This project builds upon decades of control theory research. Core references include:
-
-**Sliding Mode Control:**
-{cite}`smc_utkin_1992_sliding_modes,smc_slotine_li_1991_applied_nonlinear_control,smc_levant_2003_higher_order_smc`
-
-**PSO Optimization:**
-{cite}`pso_kennedy_1995_particle_swarm_optimization,pso_clerc_2002_particle_swarm`
-
-**Stability Theory:**
-{cite}`dip_khalil_2002_nonlinear_systems`
-
-For the complete bibliography, see the {doc}`bibliography` page.
-
-## Project Links
-
-- **GitHub Repository**: [github.com/theSadeQ/dip-smc-pso](https://github.com/theSadeQ/dip-smc-pso)
-- **Issue Tracker**: [GitHub Issues](https://github.com/theSadeQ/dip-smc-pso/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/theSadeQ/dip-smc-pso/discussions)
-
----
-
-## New Documentation (Phase 6+)
-
-### Getting Started & Tutorials
-
-- **[📘 Interactive Jupyter Notebook](../notebooks/01_getting_started.ipynb)** (NEW)
-  - 30-45 minute interactive tutorial
-  - All 4 controllers with comparisons
-  - PSO optimization walkthrough
-  - Phase portraits and energy analysis
-
-### Deployment & Production
-
-- **[🐳 Docker Deployment Guide](deployment/docker.md)** (NEW)
-  - Quick start with pre-built images
-  - Multi-stage build optimization (2GB → 400MB)
-  - Docker Compose for HIL
-  - GPU support and cloud deployment (AWS/GCP/Azure/K8s)
-  - Troubleshooting
-
-### Advanced Topics
-
-- **[🔬 Numerical Stability Guide](advanced/numerical_stability.md)** (NEW)
-  - Matrix conditioning and regularization
-  - Adaptive parameter tuning
-  - Error analysis (truncation, round-off, Lyapunov)
-  - Implementation patterns and testing
-  - Essential for production deployments
-
-### Research & Workflow
-
-- **[📊 Research Workflow Guide](workflow/research_workflow.md)** (NEW)
-  - Complete lifecycle: hypothesis → publication
-  - 7-phase workflow with examples
-  - Statistical analysis and visualization
-  - Reproducibility checklist
-  - Publication preparation
-
-### Contributing
-
-- **[📝 Contributing Guide](../CONTRIBUTING.md)** (UPDATED)
-  - Development workflow with branch strategy
-  - Code standards (PEP 8, type hints ≥95%)
-  - Conventional commits format
-  - Pull request templates
-  - Quality gates and testing requirements
-
----
-
-## Complete Documentation Structure
-
-```{toctree}
-:maxdepth: 2
-:caption: 📚 User Guides & Tutorials
-
+fault_detection_system_documentation
+fdi_threshold_calibration_methodology
+guides/getting-started
+guides/getting-started-validation-report
 guides/index
-tutorials/index
+hil_quickstart
+integration-guide
+integration-guide-template
+maintenance-guide
+mathematical_algorithm_validation
+mathematical_foundations/index
+mathematical_validation_procedures
+memory_management_patterns
+memory_management_quick_reference
+module-readme-template
+numerical_stability_guide
+plant_model
+production/index
+pso_configuration_schema_documentation
+pso_convergence_plots
+pso_convergence_theory
+pso_factory_integration_patterns
+pso_integration_technical_specification
+pso_optimization_workflow_specifications
+pso_optimization_workflow_user_guide
+pso_troubleshooting_maintenance_manual
+quality_gate_independence_framework
+quality_gates
+quick-start-template
+reference/analysis/index
+reference/controllers/index
+reference/interfaces/index
+reference/optimization/index
+reference/plant/index
+reference/simulation/index
+reference/utils/index
+regex_pattern_reference
+reproduction_guide
+research_workflow
+results_readme
+safe_operations_reference
+safety_system_validation_protocols
+sitemap_cards
+sitemap_interactive
+sitemap_visual
+streamlit_dashboard_guide
+symbols
+technical-reference
+test_execution_execution_guide
+test_execution_guide
+test_infrastructure_documentation
+test_infrastructure_validation_report
+test_protocols
+testing-and-benchmarks
+testing/index
+theorem_verification_guide
+theory/index
+theory_overview
+use_cases
+validation/index
+verification_checklist
+versioning_guide
 workflows/index
 ```
 
-```{toctree}
-:maxdepth: 2
-:caption: 📊 Analysis & Reports
+## Visual Navigation
 
-analysis/index
-reports/index
+**Explore the documentation your way:**
+
+::::{grid} 1 2 3 3
+:gutter: 3
+
+:::{grid-item-card} 🎮 3D Interactive Pendulum (NEW!)
+:link: guides/interactive/3d-pendulum-demo
+:link-type: doc
+
+Real-time physics simulation with WebGL rendering - adjust gains, set angles, watch dynamics unfold in cinematic 3D
+:::
+
+:::{grid-item-card} 🐍 Live Python Code (NEW!)
+:link: guides/interactive/live-python-demo
+:link-type: doc
+
+Run Python code in browser with NumPy, Matplotlib - edit examples, see results instantly, zero installation
+:::
+
+:::{grid-item-card} 📱 Install as App (NEW!)
+:link: SPHINX_PHASE6_COMPLETION_REPORT
+:link-type: doc
+
+Progressive Web App - Install on mobile/desktop, work offline, automatic updates, native app experience
+:::
+
+:::{grid-item-card} 🎛️ Control Room
+:link: architecture_control_room
+:link-type: doc
+
+Isometric 3D system architecture with interactive components
+:::
+
+:::{grid-item-card} 🎯 Interactive Graph
+:link: sitemap_interactive
+:link-type: doc
+
+Click, drag, and zoom through an interactive force-directed visualization
+:::
+
+:::{grid-item-card} 🎨 Card View
+:link: sitemap_cards
+:link-type: doc
+
+Beautiful card-based navigation with icons and descriptions
+:::
+
+:::{grid-item-card} 🗺️ Mindmap
+:link: sitemap_visual
+:link-type: doc
+
+Mermaid mindmap and flowchart visualizations
+:::
+
+:::{grid-item-card} 📜 Text Sitemap
+:link: documentation_structure
+:link-type: doc
+
+Traditional hierarchical text-based sitemap
+:::
+
+::::
+
+## Quick Start
+
+### First Simulation (5 minutes)
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run your first simulation
+python simulate.py --ctrl classical_smc --plot
+
+# Launch interactive dashboard
+streamlit run streamlit_app.py
 ```
 
-```{toctree}
-:maxdepth: 2
-:caption: 🗺️ Project Planning & Roadmaps
+### Optimize Controller Gains (15 minutes)
 
-plans/index
+```bash
+# Run PSO optimization
+python simulate.py --ctrl adaptive_smc --run-pso --save gains_adaptive.json
+
+# Test optimized controller
+python simulate.py --load gains_adaptive.json --plot
 ```
 
-```{toctree}
-:maxdepth: 2
-:caption: 🚀 Production & Deployment
+### Run Test Suite
 
-production/index
-deployment/DEPLOYMENT_GUIDE
+```bash
+pytest tests/ -v
+pytest tests/test_controllers/ --benchmark-only
 ```
 
-```{toctree}
-:maxdepth: 2
-:caption: 📽️ Presentation Materials
+## Key Documentation Pages
 
-presentation/index
-```
+**New Users**
+- {doc}`guides/getting-started` - Complete installation and first simulation guide
+- {doc}`streamlit_dashboard_guide` - Interactive web dashboard tutorial
+- {doc}`guides/how-to/running-simulations` - Simulation workflows and best practices
 
-```{toctree}
-:maxdepth: 2
-:caption: 🔬 Mathematical Foundations
+**Developers**
+- {doc}`api/index` - Complete API reference
+- {doc}`CONTRIBUTING` - Development guidelines and PR workflow
+- {doc}`TESTING` - Test execution and coverage standards
 
-mathematical_foundations/index
-theory/index
-```
+**Researchers**
+- {doc}`theory/pso_algorithm_foundations` - Mathematical foundations of PSO
+- {doc}`benchmarks/index` - Controller performance benchmarks
+- {doc}`bibliography` - Academic references and citations
 
-```{toctree}
-:maxdepth: 2
-:caption: 🏭 Controller Factory & Integration
+## Project Information
 
-factory/README
-controllers/index
-```
+- **GitHub**: [github.com/theSadeQ/dip-smc-pso](https://github.com/theSadeQ/dip-smc-pso)
+- **Issues**: [github.com/theSadeQ/dip-smc-pso/issues](https://github.com/theSadeQ/dip-smc-pso/issues)
+- **License**: See {doc}`DEPENDENCIES` for software licenses and attributions
+- **Citations**: See {doc}`CITATIONS` for academic references and {doc}`bibliography` for complete BibTeX
 
-```{toctree}
-:maxdepth: 2
-:caption: 🧪 Testing & Quality Assurance
+---
 
-testing/index
-TESTING
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 🔧 MCP Debugging & Code Quality
-
-mcp-debugging/index
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 📖 References & Bibliography
-
-bibliography
-references/index
-CITATIONS
-CITATIONS_ACADEMIC
-```
-
+**Last Updated**: October 2025
+**Version**: 1.0.0
+**Status**: Production Ready
