@@ -452,13 +452,13 @@ python scripts/test_spof_fixes.py  # SPOF removal ✅
 
 ## 14) Workspace Organization & Hygiene
 
-**Target:** ≤15 visible root items (currently: ~15) ✓ | ≤5 hidden config dirs (currently: 5) ✓
+**Target:** ≤19 visible root items (8 dirs + 9 files + 2 runtime dirs) | ≤7 hidden dirs (.git, .github, .project, .artifacts, .cache, .vscode, .pytest_cache)
 
 **Weekly Health Check:**
 ```bash
 # Root organization
-ls | wc -l                                          # ≤15 visible items
-find . -maxdepth 1 -type d -name ".*" | wc -l      # ≤5 hidden dirs
+ls | wc -l                                          # ≤19 visible items (17 tracked + 2 runtime gitignored)
+find . -maxdepth 1 -type d -name ".*" | wc -l      # ≤7 hidden dirs
 
 # Cache/temp sizes
 du -sh .cache/                                      # <50MB
@@ -512,13 +512,16 @@ python scripts/cleanup/workspace_cleanup.py --verbose 2>/dev/null || echo "Skipp
   - `benchmarks/` - Benchmark code and results
   - `optimization_results/` - PSO outputs
 
-- **Root files**: 7 ONLY
-  - `README.md`, `CHANGELOG.md`, `CLAUDE.md`
-  - `config.yaml`, `requirements.txt`
-  - `simulate.py`, `streamlit_app.py`
+- **Root files**: 9 core + 2 MCP development files
+  - Core documentation (3): `README.md`, `CHANGELOG.md`, `CLAUDE.md`
+  - Core configuration (2): `config.yaml`, `requirements.txt`
+  - Core entry points (2): `simulate.py`, `streamlit_app.py`
+  - MCP development (2): `package.json`, `package-lock.json` (Node.js dependencies for MCP debugging tools: Playwright, Puppeteer)
+  - Note: `node_modules/` (62MB) and `logs/` are gitignored but visible at runtime
 
 **NEVER**:
-- Create files in root except the 7 listed above
+- Create files in root except the 9 core files listed above (or 2 MCP files if using Node.js tools)
+- Create `.dev_tools/` (use `.project/dev_tools/` instead)
 - Use `artifacts/` (use `.artifacts/`)
 - Use `notebooks/` as hidden `.notebooks/`
 - Commit `docs/_build/` (generated HTML)
