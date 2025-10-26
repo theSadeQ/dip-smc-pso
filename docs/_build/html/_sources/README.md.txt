@@ -1,4 +1,10 @@
-# Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO [![Validate ResearchPlanSpec](https://github.com/theSadeQ/DIP_SMC_PSO/actions/workflows/validate.yml/badge.svg)](https://github.com/theSadeQ/DIP_SMC_PSO/actions/workflows/validate.yml) ## How to validate a ResearchPlan JSON Run the validator locally: ```bash
+# Optimal Sliding Mode Control for a Double-Inverted Pendulum via PSO [![Validate ResearchPlanSpec](https://github.com/theSadeQ/DIP_SMC_PSO/actions/workflows/validate.yml/badge.svg)](https://github.com/theSadeQ/DIP_SMC_PSO/actions/workflows/validate.yml)
+
+## How to validate a ResearchPlan JSON
+
+Run the validator locally:
+
+```bash
 
 python repo_validate.py plans/my_plan.json
 ``` **Exit codes:** 0 = no errors; 1 = validation errors present. **Output:** machine-readable JSON report with `errors[]` and `warnings[]`. ### Schema version policy Plans should include a schema version marker: ```json

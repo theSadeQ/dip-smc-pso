@@ -1,515 +1,614 @@
-# Claude Code Multi-Account System Guide
+# Claude Code Multi-Account System - User Guide
 
-**Status:** Production Ready
-**Created:** 2025-10-11
-**Safety Level:** Maximum (Zero auth sharing)
+**Last Updated:** October 22, 2025
+**Status:** ✅ Operational (Fixed authentication persistence and VSCode integration)
+**Platform:** Linux (bash)
 
 ---
 
 ## Overview
 
-The Claude Code Multi-Account System allows you to seamlessly switch between up to 35 separate Claude Code accounts with complete authentication isolation and session continuity.
+This system allows you to manage multiple Claude Code accounts on a single machine with:
+- **Isolated authentication** - Each account has its own credentials
+- **Persistent sessions** - Authentication state survives across terminal sessions
+- **CLI support** - Switch accounts for `claude` command-line usage
+- **VSCode integration** - Launch VSCode with specific accounts
+- **Easy switching** - Simple commands like `c 2` to switch accounts
 
-**Key Features:**
-- [OK] Isolated authentication per account (no credential sharing)
-- [OK] Quick switching with simple aliases (c1, c2, c3...)
-- [OK] Session state tracking across account switches
-- [OK] Safety validation to prevent auth file junctions
-- [OK] Automatic backup and restore utilities
-- [OK] Zero risk to primary .claude configuration
+---
+
+## Installation
+
+### 1. Verify Installation
+
+The system should already be set up if you see this message when opening a terminal:
+
+```bash
+[OK] Claude Code multi-account switcher loaded
+     Type 'claude-help' for usage instructions
+```
+
+### 2. Manual Installation (if needed)
+
+If not installed, add this line to your `~/.bashrc`:
+
+```bash
+source /media/sadeq/asus1/Projects/main/.dev_tools/claude-profile.sh
+```
+
+Then reload your shell:
+
+```bash
+source ~/.bashrc
+```
 
 ---
 
 ## Quick Start
 
-### Installation
+### Switching Accounts (CLI)
 
-1. **Add to PowerShell Profile**
+```bash
+# Switch to account 2 and launch Claude Code CLI
+c 2
 
-   Open your PowerShell profile:
-   ```powershell
-   notepad $PROFILE
-   ```
+# Switch to account 15 and launch
+c 15
 
-   Add this line at the end:
-   ```powershell
-   . D:\Projects\main\.dev_tools\claude-profile.ps1
-   ```
+# Switch without launching (just set environment)
+c 2 --no-launch
 
-   Save and reload:
-   ```powershell
-   . $PROFILE
-   ```
-
-2. **Verify Installation**
-
-   ```powershell
-   claude-help
-   ```
-
-   You should see the help menu with available commands.
-
-3. **Create First Backup (Recommended)**
-
-   ```powershell
-   .\D:\Projects\main\.dev_tools\Backup-ClaudeConfig.ps1
-   ```
-
----
-
-## Usage
-
-### Basic Account Switching
-
-**Switch to any account (1-35):**
-```powershell
-c5    # Switch to account 5
-c15   # Switch to account 15
-c30   # Switch to account 30
-```
-
-**Return to primary account:**
-```powershell
+# Switch back to primary account
 claude-primary
 ```
 
-**Check account status:**
-```powershell
-claude-status
+### Launching VSCode with Specific Account
+
+```bash
+# Open current directory with account 2
+code-c 2 .
+
+# Open specific project with account 5
+code-c 5 /path/to/project
+
+# Open with primary account
+code-primary .
 ```
 
-### First Time Using an Account
+### Checking Current Account
 
-When you switch to a new account for the first time:
+```bash
+# Show which account is currently active
+claude-whoami
 
-1. The system creates `~\.claude{N}` directory
-2. Claude Code launches
-3. You'll be prompted to log in
-4. After login, account is authenticated
-5. Future switches to this account will be instant
+# Example output:
+# Current account: 2
+# Location: /home/sadeq/.claude2
+# Auth status: ✓ Authenticated
+```
 
-**Example:**
-```powershell
-PS> c12
-[OK] Set CLAUDE_CONFIG_DIR: C:\Users\you\.claude12
-[WARN] Account 12 needs authentication
+### Viewing All Accounts
+
+```bash
+# Show status of all accounts
+claude-status
+
+# Example output:
+# Currently active: Account 2
+#
+# Account 1: [✓ Auth] | Dirs: [✓] | Files: 3 [✓]
+# Account 2: [✓ Auth] | Dirs: [✓] | Files: 5 [✓]
+```
+
+---
+
+## Complete Command Reference
+
+### Account Switching
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `c <number>` | Switch to account and launch Claude CLI | `c 2` |
+| `c <number> --no-launch` | Switch account without launching | `c 5 --no-launch` |
+| `claude-primary` | Switch back to primary account | `claude-primary` |
+| `claude-primary --no-launch` | Switch to primary without launching | `claude-primary --no-launch` |
+
+### Information & Diagnostics
+
+| Command | Description | Output |
+|---------|-------------|--------|
+| `claude-whoami` | Show current active account | Account number, location, auth status |
+| `claude-status` | Show all accounts and their status | List of all accounts with auth/dir status |
+| `claude-help` | Show help message | Full command reference |
+
+### VSCode Integration
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `code-c <number> [path]` | Open VSCode with specific account | `code-c 2 .` |
+| `code-primary [path]` | Open VSCode with primary account | `code-primary /path/to/project` |
+
+---
+
+## How It Works
+
+### Directory Structure
+
+Each account has its own isolated directory:
+
+```
+~/.claude          # Primary account (default)
+~/.claude1         # Account 1
+~/.claude2         # Account 2
+~/.claude3         # Account 3
+...
+~/.claude5000      # Account 5000 (max)
+```
+
+### Required Subdirectories
+
+Each account directory contains:
+
+```
+.claude{N}/
+├── ide/               # IDE-specific files (lock files, state)
+├── projects/          # Project-specific data
+├── session-env/       # Session environment data
+├── shell-snapshots/   # Shell state snapshots
+├── statsig/           # Analytics/stats data
+├── todos/             # Todo list data
+├── debug/             # Debug logs
+├── downloads/         # Downloaded files
+└── .credentials.json  # Authentication credentials (created after login)
+```
+
+**Note:** These directories are automatically created when you first switch to an account.
+
+### Environment Variable
+
+The system uses the `CLAUDE_CONFIG_DIR` environment variable to tell Claude Code which account to use:
+
+```bash
+# Primary account (default)
+CLAUDE_CONFIG_DIR is not set → uses ~/.claude
+
+# Account 2
+CLAUDE_CONFIG_DIR=~/.claude2 → uses ~/.claude2
+```
+
+**Key Fix:** The environment variable is now set in your **current shell** (not a subprocess), so it persists across commands.
+
+---
+
+## First-Time Account Setup
+
+### Step 1: Switch to Account
+
+```bash
+c 2
+```
+
+**Expected output:**
+
+```
+[INFO] Switching to Claude Code Account 2...
+[OK] Primary .claude directory exists
+[INFO] Account directory exists: /home/sadeq/.claude2
+[INFO] Initializing account directory structure...
+[OK] Account structure initialized (8 directories)
+[OK] Set CLAUDE_CONFIG_DIR: /home/sadeq/.claude2
+[WARN] Account 2 needs authentication
 [INFO] Claude Code will prompt for login on first use
-[OK] Successfully switched to Account 12
+[OK] Successfully switched to Account 2
+[OK] Environment updated: CLAUDE_CONFIG_DIR=/home/sadeq/.claude2
 [INFO] Launching Claude Code...
 ```
 
+### Step 2: Authenticate
+
+Claude Code will prompt you to log in (first time only):
+
+1. Browser will open for OAuth authentication
+2. Sign in with your Claude account credentials
+3. Authorize the application
+4. Return to terminal
+
+### Step 3: Verify
+
+```bash
+claude-whoami
+```
+
+**Expected output:**
+
+```
+Current account: 2
+Location: /home/sadeq/.claude2
+Auth status: ✓ Authenticated
+```
+
+### Step 4: Test Persistence
+
+**Exit Claude Code** and run again:
+
+```bash
+c 2
+```
+
+**You should NOT be prompted to authenticate again!** The credentials are saved in `~/.claude2/.credentials.json`.
+
 ---
 
-## Commands Reference
+## Common Workflows
 
-### Quick Aliases
+### Development Workflow (CLI + VSCode)
 
-| Command | Description |
-|---------|-------------|
-| `c1` - `c35` | Switch to account 1-35 |
-| `claude-primary` | Switch back to primary .claude |
-| `claude-status` | Show all accounts and auth status |
-| `claude-help` | Show help menu |
+```bash
+# Morning: Start working on project with account 2
+c 2 --no-launch        # Switch account without launching CLI yet
+code-c 2 .             # Open VSCode with account 2
+# (Work in VSCode using Claude Code extension)
 
-### Advanced Commands
+# Later: Need to use CLI for batch operations
+c 2                    # Launch Claude CLI (already authenticated)
+# (Use Claude Code CLI)
 
-**Switch without launching:**
-```powershell
-Switch-ClaudeAccount -AccountNum 5 -NoLaunch
+# End of day: Switch back to primary
+claude-primary --no-launch
 ```
 
-**Validate account safety:**
-```powershell
-.\D:\Projects\main\.dev_tools\Validate-ClaudeAccounts.ps1
+### Testing Multiple Accounts
+
+```bash
+# Test with account 1
+c 1
+# (Run some tests)
+
+# Test with account 2
+c 2
+# (Run same tests with different account)
+
+# Compare results
+claude-status
 ```
 
-**Create backup:**
-```powershell
-.\D:\Projects\main\.dev_tools\Backup-ClaudeConfig.ps1
-```
+### Clean Account Setup
 
-**Restore from backup:**
-```powershell
-.\D:\Projects\main\.dev_tools\Restore-ClaudeConfig.ps1
-```
+```bash
+# Create new account (first time)
+c 3
 
----
+# Verify directory structure
+claude-status
+# Should show:
+# Account 3: [! Login] | Dirs: [✓] | Files: 0 [✓]
 
-## Safety Guarantees
+# Authenticate
+# (Claude Code will prompt for login)
 
-### What's Isolated Per Account
-
-Each account has its own:
-- ✅ Authentication credentials (`.credentials.json`)
-- ✅ Session history (`history.jsonl`)
-- ✅ Cached data (`.claude.json`)
-- ✅ User settings (`settings.json`)
-
-### What's Shared (Safe to Share)
-
-- ✅ Project-level `.claude/` configs (MCP servers, commands, agents)
-- ✅ Git repository data
-- ✅ Your code files
-
-### Safety Checks
-
-The system prevents:
-- ❌ Auth file junctions (automatic detection)
-- ❌ Credential sharing between accounts
-- ❌ Accidental primary .claude modifications
-
-**Validation command:**
-```powershell
-.\D:\Projects\main\.dev_tools\Validate-ClaudeAccounts.ps1
-```
-
-**Example output:**
-```
-Account 1: [Authenticated] (10 files) [SAFE]
-Account 5: [Needs login] (8 files) [SAFE]
-Account 9: [Authenticated] (11 files) [SAFE]
-
-Total accounts found: 34
-  Authenticated:      12
-  Needs login:        22
-
-Safety checks:
-  Auth junctions:     0
-  Errors:             0
-  Warnings:           0
-
-[OK] All safety checks passed!
+# Verify authentication persisted
+claude-whoami
+# Should show:
+# Current account: 3
+# Location: /home/sadeq/.claude3
+# Auth status: ✓ Authenticated
 ```
 
 ---
 
 ## Troubleshooting
 
-### Account Appears Logged Out
+### Issue: "Claude Code still prompts for login every time"
 
-**Symptom:** Switching to an account shows "Needs login"
+**Diagnosis:**
 
-**Solution:** This is normal for first-time use. Just log in once and the account will stay authenticated.
-
-```powershell
-c5  # Will prompt for login
-# After logging in, subsequent switches are instant
-```
-
-### Lost Track of Current Account
-
-**Check which account you're using:**
-```powershell
-echo $env:CLAUDE_CONFIG_DIR
-# Output: C:\Users\you\.claude5 (Account 5)
-# Output: (empty) = Primary account
-```
-
-Or use:
-```powershell
-claude-status
-```
-
-### Want to Start Fresh on an Account
-
-**Option 1:** Just delete the account directory:
-```powershell
-Remove-Item "$env:USERPROFILE\.claude12" -Recurse -Force
-```
-
-**Option 2:** Return to primary and clear override:
-```powershell
-claude-primary
-```
-
-### Accidentally Broke Primary .claude
-
-**Restore from backup:**
-```powershell
-.\D:\Projects\main\.dev_tools\Restore-ClaudeConfig.ps1
-```
-
-The script will:
-1. Show available backups
-2. Let you select which one to restore
-3. Create safety backup of current state
-4. Restore selected backup
-5. Reset to primary account
-
----
-
-## Session Continuity Integration
-
-The multi-account system integrates with `.dev_tools/session_state.json` for seamless context handoff.
-
-### How It Works
-
-1. **During Work:**
-   - PowerShell switcher updates `session_state.json` with current account
-   - Session state tracks: active account, last commit, todos, decisions
-
-2. **When Switching Accounts:**
-   - New Claude instance reads `session_state.json`
-   - Auto-detects previous session (if <24h old)
-   - Resumes work automatically with full context
-
-3. **Cross-Account Continuity:**
-   ```powershell
-   # Account 5 running out of tokens
-   c15  # Switch to account 15
-   # Account 15 auto-loads session state
-   # Continues exactly where account 5 left off
-   ```
-
-### Python Integration
-
-From Python scripts:
-```python
-from session_manager import track_account, get_active_account, list_accounts
-
-# Track account switch
-track_account(5)  # Account 5 is now active
-
-# Get current account
-account = get_active_account()  # Returns: "account_5"
-
-# List all accounts
-accounts = list_accounts()
-# Returns: {
-#   'active_account': 'account_5',
-#   'primary_exists': True,
-#   'numbered_accounts': [
-#     {'number': 1, 'path': '...', 'authenticated': True},
-#     {'number': 5, 'path': '...', 'authenticated': True},
-#     ...
-#   ]
-# }
-```
-
----
-
-## Best Practices
-
-### Token Limit Management
-
-**Recommended workflow:**
-1. Use primary account for normal work
-2. When approaching token limit, create session state snapshot
-3. Switch to next available account
-4. Continue work with automatic context loading
-5. Rotate through accounts as needed
-
-**Example rotation:**
-```powershell
-# Week 1: Use accounts 1-5
-c1  # Monday
-c2  # Tuesday
-c3  # Wednesday
-# ... etc
-
-# Week 2: Use accounts 6-10
-c6  # Monday
-c7  # Tuesday
-# ... etc
-```
-
-### Account Organization
-
-**Suggestion: Themed accounts**
-- Accounts 1-5: Main development work
-- Accounts 6-10: Testing and experimentation
-- Accounts 11-15: Documentation work
-- Accounts 16-20: Code review and analysis
-- Accounts 21-35: Reserve/overflow
-
-### Backup Strategy
-
-**Create backup before major changes:**
-```powershell
-# Before switching to multi-account system
-.\D:\Projects\main\.dev_tools\Backup-ClaudeConfig.ps1
-
-# Periodic backups (weekly)
-.\D:\Projects\main\.dev_tools\Backup-ClaudeConfig.ps1
-```
-
-Backups are stored in: `D:\Projects\main\.artifacts\claude_backups\`
-
----
-
-## Technical Details
-
-### Directory Structure
-
-```
-C:\Users\{you}\
-├─ .claude\              # Primary account (default)
-├─ .claude1\             # Account 1
-├─ .claude2\             # Account 2
-├─ .claude3\             # Account 3
-├─ ...
-└─ .claude35\            # Account 35
-```
-
-### Environment Variable
-
-The system uses `CLAUDE_CONFIG_DIR` to control which account is active:
-
-```powershell
-# Primary account (default)
-$env:CLAUDE_CONFIG_DIR = $null
-
-# Account 5
-$env:CLAUDE_CONFIG_DIR = "C:\Users\you\.claude5"
-```
-
-### Files Created
-
-| File | Location | Purpose |
-|------|----------|---------|
-| `Switch-ClaudeAccount.ps1` | `.dev_tools\` | Core switcher logic |
-| `claude-profile.ps1` | `.dev_tools\` | PowerShell profile integration |
-| `Validate-ClaudeAccounts.ps1` | `.dev_tools\` | Safety validation |
-| `Backup-ClaudeConfig.ps1` | `.dev_tools\` | Backup utility |
-| `Restore-ClaudeConfig.ps1` | `.dev_tools\` | Restore utility |
-| `session_manager.py` | `.dev_tools\` | Python session tracking (enhanced) |
-
----
-
-## Security Considerations
-
-### Auth Token Isolation
-
-Each account maintains separate authentication:
-- ✅ No shared credentials between accounts
-- ✅ Each account requires separate login
-- ✅ Token revocation affects only that account
-- ✅ Lost token doesn't impact other accounts
-
-### What This System Does NOT Do
-
-- ❌ Bypass rate limits (each account has separate limits)
-- ❌ Share authentication automatically (each needs login)
-- ❌ Merge session histories between accounts
-- ❌ Synchronize settings across accounts
-
-### Compliance
-
-This system is designed for:
-- ✅ Legitimate multi-account usage
-- ✅ Token limit management
-- ✅ Development workflow optimization
-- ✅ Session continuity across accounts
-
-**Use responsibly and within Claude Code's terms of service.**
-
----
-
-## Uninstallation
-
-To remove the multi-account system:
-
-1. **Return to primary:**
-   ```powershell
-   claude-primary
-   ```
-
-2. **Remove account directories (optional):**
-   ```powershell
-   1..35 | ForEach-Object {
-       Remove-Item "$env:USERPROFILE\.claude$_" -Recurse -Force -ErrorAction SilentlyContinue
-   }
-   ```
-
-3. **Remove from PowerShell profile:**
-   Edit `$PROFILE` and remove the line:
-   ```powershell
-   . D:\Projects\main\.dev_tools\claude-profile.ps1
-   ```
-
-4. **Reload profile:**
-   ```powershell
-   . $PROFILE
-   ```
-
-Your primary `.claude` directory remains untouched.
-
----
-
-## Support & Maintenance
-
-### Status Check
-
-Run this to check system health:
-```powershell
-.\D:\Projects\main\.dev_tools\Validate-ClaudeAccounts.ps1
-```
-
-### Log Issues
-
-If you encounter issues:
-1. Run validation script
-2. Check `session_state.json` for corruption
-3. Verify `CLAUDE_CONFIG_DIR` is set correctly
-4. Check backup availability
-
-### Updates
-
-This system is version-controlled in the project repository. Check git history for updates:
 ```bash
-git log --oneline -- .dev_tools/Switch-ClaudeAccount.ps1
+# Check if credentials file exists
+ls -la ~/.claude2/.credentials.json
+
+# If file doesn't exist, authentication isn't persisting
+```
+
+**Solution 1: Verify environment variable is set**
+
+```bash
+# After running `c 2`, check:
+echo $CLAUDE_CONFIG_DIR
+# Should output: /home/sadeq/.claude2
+
+# If empty, reload profile:
+source ~/.bashrc
+```
+
+**Solution 2: Verify directory structure**
+
+```bash
+# Check if all required directories exist
+claude-status
+# Look for: Dirs: [✓]
+# If you see: Dirs: [✗ N missing], run:
+
+c 2 --no-launch  # This will auto-initialize directories
+```
+
+**Solution 3: Check file permissions**
+
+```bash
+# Credentials file should be private
+chmod 600 ~/.claude2/.credentials.json
+
+# Account directory should be accessible
+chmod 755 ~/.claude2
+```
+
+### Issue: "VSCode not recognizing the account"
+
+**Diagnosis:**
+
+```bash
+# Check if VSCode was launched with environment variable
+# After running `code-c 2 .`, in VSCode terminal:
+echo $CLAUDE_CONFIG_DIR
+# Should output: /home/sadeq/.claude2
+```
+
+**Solution 1: Use `code-c` command**
+
+```bash
+# DON'T do this:
+c 2 --no-launch
+code .              # ❌ Won't inherit CLAUDE_CONFIG_DIR
+
+# DO this:
+code-c 2 .          # ✅ Launches VSCode with correct environment
+```
+
+**Solution 2: Restart VSCode**
+
+```bash
+# If VSCode was already open when you switched accounts:
+# 1. Close all VSCode windows
+# 2. Run: code-c 2 .
+```
+
+### Issue: "Environment variable doesn't persist across terminal sessions"
+
+**Diagnosis:**
+
+```bash
+# In terminal 1:
+c 2
+echo $CLAUDE_CONFIG_DIR  # Shows /home/sadeq/.claude2
+
+# Close terminal, open new terminal 2:
+echo $CLAUDE_CONFIG_DIR  # Empty!
+```
+
+**This is EXPECTED behavior.** The environment variable is session-specific.
+
+**Solution: Just run `c 2` again in the new terminal**
+
+```bash
+# New terminal session:
+c 2 --no-launch  # Sets environment variable
+echo $CLAUDE_CONFIG_DIR  # Now shows /home/sadeq/.claude2
+
+# Authentication will still be there (credentials file persists)
+```
+
+### Issue: "Account shows [✗ N missing] directories"
+
+**Diagnosis:**
+
+```bash
+claude-status
+# Shows: Account 2: [! Login] | Dirs: [✗ 8 missing] | Files: 0 [✓]
+```
+
+**Solution: Switch to the account to auto-initialize**
+
+```bash
+c 2 --no-launch
+# This will auto-create all 8 required directories
+
+# Verify:
+claude-status
+# Should now show: Account 2: [! Login] | Dirs: [✓] | Files: 0 [✓]
+```
+
+### Issue: "Command `c` not found"
+
+**Diagnosis:**
+
+```bash
+# Check if profile script is sourced:
+type c
+# If output is "c: command not found", profile isn't loaded
+```
+
+**Solution: Source the profile script**
+
+```bash
+# Temporary (current session only):
+source /media/sadeq/asus1/Projects/main/.dev_tools/claude-profile.sh
+
+# Permanent (add to ~/.bashrc):
+echo 'source /media/sadeq/asus1/Projects/main/.dev_tools/claude-profile.sh' >> ~/.bashrc
+source ~/.bashrc
+```
+
+---
+
+## Advanced Usage
+
+### Validation and Testing
+
+```bash
+# Run comprehensive validation
+bash /media/sadeq/asus1/Projects/main/.dev_tools/validate-claude-accounts.sh --verbose
+
+# Check for safety violations (symlinks)
+bash /media/sadeq/asus1/Projects/main/.dev_tools/validate-claude-accounts.sh
+
+# Auto-fix issues
+bash /media/sadeq/asus1/Projects/main/.dev_tools/validate-claude-accounts.sh --fix-issues
+```
+
+### Direct Script Usage
+
+```bash
+# Switch using script directly (for automation)
+bash /media/sadeq/asus1/Projects/main/.dev_tools/switch-claude-account.sh 2 --no-launch
+
+# Show help
+bash /media/sadeq/asus1/Projects/main/.dev_tools/switch-claude-account.sh --help
+```
+
+### Session State Integration
+
+The system automatically updates session state in:
+
+```
+/media/sadeq/asus1/Projects/main/.ai/config/session_state.json
+```
+
+This tracks:
+- Current account number
+- Last update timestamp
+- (Used by other project recovery tools)
+
+---
+
+## Safety & Security
+
+### Authentication Isolation
+
+✅ **Each account has its own credentials file**
+- `~/.claude/.credentials.json` (primary)
+- `~/.claude2/.credentials.json` (account 2)
+- etc.
+
+❌ **No symlinks allowed** - The system prevents auth file sharing via symlinks.
+
+### Validation Checks
+
+The system performs automatic safety checks:
+
+1. **No auth symlinks** - Ensures `.credentials.json` is a real file, not a symlink
+2. **Directory structure** - Validates all required subdirectories exist
+3. **File permissions** - Checks credentials files are private (600)
+
+Run validation anytime:
+
+```bash
+claude-status  # Quick check
+bash /media/sadeq/asus1/Projects/main/.dev_tools/validate-claude-accounts.sh  # Full validation
 ```
 
 ---
 
 ## FAQ
 
-**Q: How many accounts can I use?**
-A: Up to 35 numbered accounts (1-35) plus the primary account.
+### Q: How many accounts can I have?
 
-**Q: Do I need to log in every time I switch?**
-A: No, only the first time you use each account. After that, credentials persist.
+**A:** Up to 5000 accounts (1-5000). Practically, most users need 2-5 accounts.
 
-**Q: Can I use accounts on different machines?**
-A: Each machine needs separate authentication per account.
+### Q: Can I use the same Claude account credentials for multiple local accounts?
 
-**Q: What happens if I delete an account directory?**
-A: The system will recreate it next time you switch to that account. You'll need to log in again.
+**A:** Yes! You can authenticate with the same Claude.ai credentials on multiple local accounts (e.g., `.claude1`, `.claude2`). Each will maintain separate session state and project data.
 
-**Q: Can I rename account directories?**
-A: Not recommended. The system expects specific naming (`.claude1`, `.claude2`, etc.).
+### Q: What happens if I delete `~/.claude2/`?
 
-**Q: How do I know which account is active?**
-A: Use `claude-status` or check `$env:CLAUDE_CONFIG_DIR`.
+**A:** The account is deleted. Next time you run `c 2`, a fresh account will be created (requires re-authentication).
 
-**Q: Can I share accounts between users?**
-A: No, account directories are user-specific (tied to `%USERPROFILE%`).
+### Q: Can I backup my accounts?
 
-**Q: What if I exceed 35 accounts?**
-A: The system is designed for 35. If you need more, modify `$MaxAccounts` in the scripts.
+**A:** Yes! Just backup the directories:
 
----
+```bash
+# Backup account 2
+tar -czf claude2-backup.tar.gz ~/.claude2/
 
-## Changelog
+# Restore later
+tar -xzf claude2-backup.tar.gz -C ~/
+```
 
-### 2025-10-11 - Initial Release
-- [NEW] Dynamic account switcher with safety protocol
-- [NEW] PowerShell profile integration (c1-c35 aliases)
-- [NEW] Session state tracking integration
-- [NEW] Safety validation script
-- [NEW] Backup and restore utilities
-- [NEW] Comprehensive documentation
+### Q: Does this work with the Claude Code VSCode extension?
 
----
+**A:** Yes! Use `code-c <number> [path]` to launch VSCode with a specific account.
 
-## Credits
+### Q: Will my primary account be affected?
 
-**System:** Claude Code Multi-Account Manager
-**Repository:** https://github.com/theSadeQ/dip-smc-pso.git
-**Documentation:** D:\Projects\main\.dev_tools\MULTI_ACCOUNT_GUIDE.md
+**A:** No. The primary `~/.claude` directory is never modified by the multi-account system. You can always return to it with `claude-primary`.
 
-**For questions or improvements, submit issues to the project repository.**
+### Q: Can I use this on Windows or macOS?
+
+**A:** The current version is **Linux-only**. Windows/macOS support would require porting the shell scripts.
 
 ---
 
-**[OK] You're ready to use the multi-account system safely!**
+## What Changed (October 2025 Fix)
+
+### ❌ Old Behavior (Broken)
+
+1. **Re-authentication on every launch**
+   - Credentials weren't saving to account directories
+   - Empty directories didn't have required structure
+
+2. **Environment variable didn't persist**
+   - Running `c 2` in a script set variable in subprocess only
+   - Parent shell didn't inherit the variable
+
+3. **VSCode couldn't use accounts**
+   - No way to launch VSCode with specific account
+   - Extension always used primary account
+
+### ✅ New Behavior (Fixed)
+
+1. **Persistent authentication**
+   - Credentials save correctly to `~/.claude{N}/.credentials.json`
+   - Directory structure auto-initializes (8 required subdirectories)
+   - Authentication survives terminal restarts
+
+2. **Environment variable persists in shell**
+   - `c` function sets variable in **current shell**, not subprocess
+   - Variable stays set for all subsequent commands in that terminal
+
+3. **Full VSCode integration**
+   - `code-c <number> [path]` launches VSCode with specific account
+   - Extension recognizes and uses account credentials
+   - `code-primary [path]` returns to primary account
+
+---
+
+## Support
+
+### Issues or Questions?
+
+1. **Check status first:**
+   ```bash
+   claude-status
+   claude-whoami
+   ```
+
+2. **Run validation:**
+   ```bash
+   bash /media/sadeq/asus1/Projects/main/.dev_tools/validate-claude-accounts.sh --verbose
+   ```
+
+3. **Review this guide's troubleshooting section**
+
+4. **Check script logs** (if available in your session)
+
+### Related Files
+
+- **Profile script:** `/media/sadeq/asus1/Projects/main/.dev_tools/claude-profile.sh`
+- **Switch script:** `/media/sadeq/asus1/Projects/main/.dev_tools/switch-claude-account.sh`
+- **Validation script:** `/media/sadeq/asus1/Projects/main/.dev_tools/validate-claude-accounts.sh`
+- **This guide:** `/media/sadeq/asus1/Projects/main/.dev_tools/MULTI_ACCOUNT_GUIDE.md`
+
+---
+
+**Version:** 2.0 (Fixed for Linux)
+**Date:** October 22, 2025
+**Tested:** Linux (bash)

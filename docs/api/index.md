@@ -151,6 +151,31 @@ The following documentation is automatically generated from Python docstrings us
    :members:
    :undoc-members:
    :show-inheritance:
+
+.. automodule:: mt6_statistical_comparison
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: mt6_visualize_pso_convergence
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: mt6_visualize_performance_comparison_simple
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: mt6_generate_report
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: optimize_adaptive_boundary
+   :members:
+   :undoc-members:
+   :show-inheritance:
 ```
 
 ---
@@ -172,6 +197,13 @@ The following documentation is automatically generated from Python docstrings us
 ### Optimization Modules
 - **src.optimizer.pso_optimizer** - PSO tuning algorithms
 - **src.optimizer.cost_functions** - Cost function definitions
+
+### MT-6 Analysis Scripts
+- **mt6_statistical_comparison** - Welch t-tests and effect size calculations for MT-6 metrics
+- **mt6_visualize_pso_convergence** - Publication-ready PSO convergence plots
+- **mt6_visualize_performance_comparison_simple** - Summary-based performance comparisons
+- **mt6_generate_report** - Markdown report generation pipeline for MT-6
+- **optimize_adaptive_boundary** - PSO driver for adaptive boundary-layer tuning
 
 ### Configuration Modules
 - **src.config.loader** - Configuration loading and validation

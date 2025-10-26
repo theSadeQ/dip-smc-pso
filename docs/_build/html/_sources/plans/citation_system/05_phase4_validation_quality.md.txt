@@ -159,8 +159,6 @@ python scripts/citations/validate_bibliography.py --find-duplicates
 
 ## Next Phase **Phase 5:** [Final Review & Publication](./06_phase5_final_review.md)
 
----
-
 **Related Documents:**
 - [Master Roadmap](./00_master_roadmap.md)
 - [Phase 3: Citation Integration](./04_phase3_citation_integration.md)

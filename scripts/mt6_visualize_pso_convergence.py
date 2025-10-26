@@ -1,21 +1,7 @@
-"""
-================================================================================
-MT-6 PSO Convergence Visualization
-================================================================================
+"""Visualisations for MT-6 particle swarm optimisation convergence data.
 
-Generates publication-quality plots showing PSO optimization convergence for
-adaptive boundary layer parameter search.
-
-Plots include:
-- Fitness convergence over iterations
-- Best parameter evolution (epsilon_min, alpha)
-- Annotated optimal configuration
-
-Task: MT-6 Visualization
-Reference: ROADMAP_EXISTING_PROJECT.md
-
-Author: MT-6 Orchestrator
-Created: October 19, 2025
+This script produces publication-friendly convergence plots that highlight how
+the adaptive boundary layer parameters evolve during the PSO search.
 """
 
 import numpy as np
@@ -33,16 +19,15 @@ from src.utils.visualization.pso_plots import plot_convergence
 
 
 def load_pso_history(csv_path: Path) -> pd.DataFrame:
-    """
-    Load PSO optimization history from CSV.
+    """Load MT-6 PSO optimisation history from a CSV file.
 
-    Expected columns:
-    - iteration
-    - epsilon_min (best)
-    - alpha (best)
-    - best_fitness
-    - mean_fitness (optional)
-    - std_fitness (optional)
+    Args:
+        csv_path (Path): Location of the CSV file containing PSO iterations.
+
+    Returns:
+        pd.DataFrame: DataFrame with at least the columns ``iteration``,
+        ``epsilon_min``, ``alpha``, and ``best_fitness``. Optional columns such
+        as ``mean_fitness`` or ``std_fitness`` are preserved when present.
     """
     df = pd.read_csv(csv_path)
     return df
@@ -53,17 +38,18 @@ def plot_mt6_pso_convergence(
     save_path: Optional[Path] = None,
     show: bool = True
 ) -> None:
-    """
-    Create comprehensive PSO convergence plot for MT-6.
-
-    Creates a 2x1 subplot layout:
-    - Top: Fitness convergence with annotations
-    - Bottom: Parameter evolution (epsilon_min, alpha)
+    """Create a two-panel PSO convergence plot for MT-6 experiments.
 
     Args:
-        pso_history: DataFrame with PSO iteration history
-        save_path: Path to save figure (PNG)
-        show: Whether to display plot interactively
+        pso_history (pd.DataFrame): PSO iteration history containing convergence
+            metrics.
+        save_path (Path | None, optional): Location to write the PNG artifact.
+            When None the figure is not written to disk.
+        show (bool, optional): When True display the figure interactively;
+            otherwise the figure is closed after saving. Defaults to True.
+
+    Example:
+        >>> plot_mt6_pso_convergence(history_df, Path("mt6.png"), show=False)
     """
 
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10), dpi=300)
@@ -89,7 +75,7 @@ def plot_mt6_pso_convergence(
 
     # Annotate best point
     annotation_text = (
-        f"Best: ε={best_eps:.4f}, α={best_alpha:.2f}\n"
+        f"Best: epsilon={best_eps:.4f}, alpha={best_alpha:.2f}\n"
         f"Fitness={best_fit:.4f}"
     )
     ax1.annotate(
@@ -120,12 +106,12 @@ def plot_mt6_pso_convergence(
     # Plot epsilon_min on left y-axis
     line1 = ax2.plot(iterations, epsilon_min, 'b-', linewidth=2,
                      marker='o', markersize=4, markevery=max(1, len(iterations)//10),
-                     label='ε_min (Boundary Layer Base)')
+                     label='epsilon_min (Boundary Layer Base)')
 
     # Plot alpha on right y-axis
     line2 = ax2_twin.plot(iterations, alpha, 'r-', linewidth=2,
                           marker='s', markersize=4, markevery=max(1, len(iterations)//10),
-                          label='α (Adaptive Slope)')
+                          label='alpha (Adaptive Slope)')
 
     # Highlight best parameters
     ax2.scatter([best_iter], [best_eps], c='blue', s=150, zorder=5,
@@ -135,9 +121,9 @@ def plot_mt6_pso_convergence(
 
     # Labels and formatting
     ax2.set_xlabel('Iteration', fontsize=12, fontweight='bold')
-    ax2.set_ylabel('ε_min (Boundary Layer Base)', fontsize=11,
+    ax2.set_ylabel('epsilon_min (Boundary Layer Base)', fontsize=11,
                    fontweight='bold', color='blue')
-    ax2_twin.set_ylabel('α (Adaptive Slope)', fontsize=11,
+    ax2_twin.set_ylabel('alpha (Adaptive Slope)', fontsize=11,
                         fontweight='bold', color='red')
     ax2.set_title('Best Parameter Evolution Over PSO Iterations',
                   fontsize=12, fontweight='bold', pad=10)
@@ -167,7 +153,11 @@ def plot_mt6_pso_convergence(
 
 
 def main():
-    """Generate MT-6 PSO convergence visualization."""
+    """Generate the MT-6 PSO convergence visualisation from disk artifacts.
+
+    Returns:
+        int: Zero on success, non-zero when required inputs are missing.
+    """
 
     print("="*80)
     print("MT-6 PSO Convergence Visualization")

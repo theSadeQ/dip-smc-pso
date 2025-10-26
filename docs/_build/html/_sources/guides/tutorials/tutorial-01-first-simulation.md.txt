@@ -120,7 +120,133 @@ D:\Projects\main\src\plant\core\state_validation.py:171: UserWarning: State vect
 - Utilization: 30% of available control authority **Chattering:**
 - Visible as high-frequency oscillation (~50-100 Hz)
 - Magnitude: ~±2 N in steady state
-- Mitigation: Boundary layer (ε=0.3) smooths control law #### Performance Metrics Deep Dive **Settling Time: 2.45 seconds** *Definition:* Time until all state variables remain within 2% of their final values. *Computation:*
+- Mitigation: Boundary layer (ε=0.3) smooths control law
+
+#### Performance Metrics Deep Dive
+
+**Try it yourself - Interactive Performance Metrics Calculator:**
+
+```{eval-rst}
+.. runnable-code::
+   :language: python
+   :caption: Interactive Example 3 - Calculate Key Performance Metrics
+   :preload: numpy,matplotlib
+   :timeout: 15000
+
+   import numpy as np
+   import matplotlib.pyplot as plt
+
+   # Simulate typical controller response
+   t = np.linspace(0, 5, 5000)
+   dt = t[1] - t[0]
+
+   # Cart position (displaced, then regulated)
+   x = 0.1 * (1 - np.exp(-0.6*t)) + 0.02*np.exp(-0.8*t)*np.sin(4*t)
+
+   # First pendulum angle (stabilized from small perturbation)
+   theta1 = 0.05 * np.exp(-1.2*t) * np.cos(5*t)
+
+   # Control input (damped oscillating force)
+   u = 40 * np.exp(-0.7*t) * np.cos(3*t) - 5*np.exp(-0.3*t)*np.sin(8*t)
+
+   # --- Metric 1: Settling Time (2% criterion) ---
+   target_value = x[-1]
+   threshold = 0.02 * abs(target_value)
+   settled_idx = np.where(np.abs(x - target_value) <= threshold)[0]
+   settling_time = t[settled_idx[0]] if len(settled_idx) > 0 else t[-1]
+
+   # --- Metric 2: Max Overshoot ---
+   peak_value = np.max(np.abs(theta1))
+   final_value = np.abs(theta1[-1])
+   overshoot_pct = ((peak_value - final_value) / peak_value * 100) if peak_value > 0 else 0
+
+   # --- Metric 3: Steady-State Error ---
+   steady_state_region = theta1[int(0.8*len(theta1)):]
+   steady_state_error = np.mean(np.abs(steady_state_region))
+
+   # --- Metric 4: RMS Control Effort ---
+   rms_control = np.sqrt(np.mean(u**2))
+
+   # --- Metric 5: Peak Control ---
+   peak_control = np.max(np.abs(u))
+
+   # Plot results
+   fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(14, 10))
+
+   # Plot 1: Cart position with settling time
+   ax1.plot(t, x, 'b-', linewidth=2, label='Cart Position x(t)')
+   ax1.axhline(y=target_value, color='g', linestyle='--', alpha=0.7, label='Target')
+   ax1.axhline(y=target_value+threshold, color='r', linestyle=':', alpha=0.5, label='±2% Band')
+   ax1.axhline(y=target_value-threshold, color='r', linestyle=':', alpha=0.5)
+   ax1.axvline(x=settling_time, color='orange', linestyle='--', linewidth=2,
+               label=f'Settling Time: {settling_time:.2f}s')
+   ax1.set_xlabel('Time (s)', fontsize=11)
+   ax1.set_ylabel('Position (m)', fontsize=11)
+   ax1.set_title('Settling Time Analysis', fontsize=13, fontweight='bold')
+   ax1.legend(loc='best', fontsize=9)
+   ax1.grid(True, alpha=0.3)
+
+   # Plot 2: Pendulum angle with overshoot
+   ax2.plot(t, theta1, 'b-', linewidth=2, label='θ₁(t)')
+   peak_idx = np.argmax(np.abs(theta1))
+   ax2.plot(t[peak_idx], theta1[peak_idx], 'ro', markersize=10, label=f'Peak: {peak_value:.4f} rad')
+   ax2.axhline(y=0, color='g', linestyle='--', alpha=0.7, label='Target (0 rad)')
+   ax2.set_xlabel('Time (s)', fontsize=11)
+   ax2.set_ylabel('Angle (rad)', fontsize=11)
+   ax2.set_title(f'Overshoot Analysis: {overshoot_pct:.1f}%', fontsize=13, fontweight='bold')
+   ax2.legend(loc='best', fontsize=9)
+   ax2.grid(True, alpha=0.3)
+
+   # Plot 3: Steady-state error region
+   t_steady = t[int(0.8*len(t)):]
+   theta1_steady = theta1[int(0.8*len(theta1)):]
+   ax3.plot(t_steady, theta1_steady, 'b-', linewidth=2, label='Steady-State Region')
+   ax3.axhline(y=steady_state_error, color='r', linestyle='--', linewidth=2,
+               label=f'Mean |Error|: {steady_state_error:.4f} rad')
+   ax3.axhline(y=-steady_state_error, color='r', linestyle='--', linewidth=2)
+   ax3.fill_between(t_steady, -steady_state_error, steady_state_error, alpha=0.2, color='red')
+   ax3.set_xlabel('Time (s)', fontsize=11)
+   ax3.set_ylabel('θ₁ (rad)', fontsize=11)
+   ax3.set_title('Steady-State Error Analysis', fontsize=13, fontweight='bold')
+   ax3.legend(loc='best', fontsize=9)
+   ax3.grid(True, alpha=0.3)
+
+   # Plot 4: Control effort with RMS
+   ax4.plot(t, u, 'b-', linewidth=1.5, label='Control Input u(t)')
+   ax4.axhline(y=rms_control, color='r', linestyle='--', linewidth=2,
+               label=f'RMS: {rms_control:.2f} N')
+   ax4.axhline(y=-rms_control, color='r', linestyle='--', linewidth=2)
+   ax4.fill_between(t, -rms_control, rms_control, alpha=0.2, color='red')
+   ax4.plot(t[np.argmax(np.abs(u))], u[np.argmax(np.abs(u))], 'ro',
+            markersize=10, label=f'Peak: {peak_control:.2f} N')
+   ax4.set_xlabel('Time (s)', fontsize=11)
+   ax4.set_ylabel('Force (N)', fontsize=11)
+   ax4.set_title('Control Effort Analysis', fontsize=13, fontweight='bold')
+   ax4.legend(loc='best', fontsize=9)
+   ax4.grid(True, alpha=0.3)
+
+   plt.tight_layout()
+   plt.show()
+
+   # Print comprehensive summary
+   print("=" * 60)
+   print("PERFORMANCE METRICS SUMMARY")
+   print("=" * 60)
+   print(f"\n1. Settling Time (2% criterion): {settling_time:.3f} seconds")
+   print(f"   → Time until state within ±2% of final value")
+   print(f"\n2. Max Overshoot: {overshoot_pct:.2f}%")
+   print(f"   → Peak deviation: {peak_value:.4f} rad")
+   print(f"\n3. Steady-State Error: {steady_state_error:.4f} rad ({steady_state_error*180/np.pi:.2f}°)")
+   print(f"   → Average error in final 20% of simulation")
+   print(f"\n4. RMS Control Effort: {rms_control:.2f} N")
+   print(f"   → Energy-efficient control indicator")
+   print(f"\n5. Peak Control: {peak_control:.2f} N")
+   print(f"   → Maximum force required")
+   print(f"\n6. Saturation Check: {(peak_control/150)*100:.1f}% of limit (150 N)")
+   print("=" * 60)
+```
+
+**Settling Time: 2.45 seconds** *Definition:* Time until all state variables remain within 2% of their final values. *Computation:*
 ```python
 # For each state variable:
 final_value = x[-1]
@@ -189,17 +315,71 @@ s = k₁·θ₁ + k₂·dθ₁ + λ₁·θ₂ + λ₂·dθ₂
 ``` With default gains: `k₁=5, k₂=5, λ₁=5, λ₂=0.5` **What does this mean?** - When `s = 0`, the system is on the sliding surface
 
 - Controller drives system to make `s → 0`
-- Once on surface, pendulum angles converge to zero **Visualize the sliding surface:**
-```python
-# Compute sliding surface value
-s = 5.0*theta1 + 5.0*dtheta1 + 5.0*theta2 + 0.5*dtheta2 # Plot sliding surface over time
-plt.plot(t, s)
-plt.xlabel('Time (s)')
-plt.ylabel('Sliding Surface s')
-plt.title('Sliding Surface Evolution')
-plt.grid(True)
-plt.show()
-``` **Expected behavior:**
+- Once on surface, pendulum angles converge to zero
+
+**Try it yourself - Interactive Sliding Surface Calculator:**
+
+```{eval-rst}
+.. runnable-code::
+   :language: python
+   :caption: Interactive Example 1 - Compute and Visualize Sliding Surface
+   :preload: numpy,matplotlib
+
+   import numpy as np
+   import matplotlib.pyplot as plt
+
+   # Define SMC gains (default configuration)
+   k1 = 5.0  # First pendulum proportional gain
+   k2 = 5.0  # First pendulum derivative gain
+   lambda1 = 5.0  # Second pendulum proportional gain
+   lambda2 = 0.5  # Second pendulum derivative gain
+
+   # Simulate pendulum angles over time (example transient)
+   t = np.linspace(0, 5, 500)
+   theta1 = 0.1 * np.exp(-0.8*t) * np.cos(3*t)  # Damped oscillation
+   dtheta1 = np.gradient(theta1, t)
+   theta2 = 0.08 * np.exp(-0.9*t) * np.cos(4*t)
+   dtheta2 = np.gradient(theta2, t)
+
+   # Compute sliding surface
+   s = k1*theta1 + k2*dtheta1 + lambda1*theta2 + lambda2*dtheta2
+
+   # Plot sliding surface evolution
+   fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
+
+   # Plot sliding surface
+   ax1.plot(t, s, 'b-', linewidth=2, label='Sliding Surface s(t)')
+   ax1.axhline(y=0, color='r', linestyle='--', label='s = 0 (target)')
+   ax1.fill_between(t, -0.1, 0.1, alpha=0.2, color='green', label='Sliding Region |s| < 0.1')
+   ax1.set_xlabel('Time (s)', fontsize=12)
+   ax1.set_ylabel('Sliding Surface Value s', fontsize=12)
+   ax1.set_title('Sliding Surface Evolution', fontsize=14, fontweight='bold')
+   ax1.legend(loc='best')
+   ax1.grid(True, alpha=0.3)
+
+   # Plot pendulum angles
+   ax2.plot(t, theta1, 'b-', linewidth=2, label='θ₁ (first pendulum)')
+   ax2.plot(t, theta2, 'r-', linewidth=2, label='θ₂ (second pendulum)')
+   ax2.axhline(y=0, color='k', linestyle='--', alpha=0.3)
+   ax2.set_xlabel('Time (s)', fontsize=12)
+   ax2.set_ylabel('Angle (rad)', fontsize=12)
+   ax2.set_title('Pendulum Angles vs Time', fontsize=14, fontweight='bold')
+   ax2.legend(loc='best')
+   ax2.grid(True, alpha=0.3)
+
+   plt.tight_layout()
+   plt.show()
+
+   # Print analysis
+   print("=== Sliding Surface Analysis ===")
+   print(f"Initial sliding surface value: {s[0]:.4f}")
+   print(f"Final sliding surface value: {s[-1]:.4f}")
+   print(f"Peak |s| value: {np.max(np.abs(s)):.4f}")
+   print(f"Time to reach |s| < 0.1: {t[np.where(np.abs(s) < 0.1)[0][0]]:.2f} seconds")
+   print(f"Reduction: {(1 - abs(s[-1])/abs(s[0]))*100:.1f}%")
+```
+
+**Expected behavior:**
 
 - Initial spike: |s| ~ 2-3 (far from surface)
 - Reaching phase: Exponential decay toward zero (0-1 s)
@@ -222,6 +402,82 @@ u = -K · tanh(s / ε) # Smooth transition (reduces chattering)
 - When |s| < ε: Control proportional to s (smooth transition)
 - Larger ε: Less chattering, but more tracking error
 - Smaller ε: Better tracking, but more chattering
+
+**Try it yourself - Interactive Boundary Layer Comparison:**
+
+```{eval-rst}
+.. runnable-code::
+   :language: python
+   :caption: Interactive Example 2 - Boundary Layer Effects on Control Law
+   :preload: numpy,matplotlib
+
+   import numpy as np
+   import matplotlib.pyplot as plt
+
+   # Sliding surface values (ranging from -2 to 2)
+   s = np.linspace(-2, 2, 1000)
+
+   # Switching gain
+   K = 50.0
+
+   # Different boundary layer widths
+   epsilon_values = [0.01, 0.1, 0.3, 1.0]
+
+   # Compute control for different boundary layers
+   fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
+
+   # Plot 1: Control law comparison
+   for eps in epsilon_values:
+       u = -K * np.tanh(s / eps)
+       ax1.plot(s, u, linewidth=2, label=f'ε = {eps}')
+
+   # Add discontinuous sign function for reference
+   u_sign = -K * np.sign(s)
+   ax1.plot(s, u_sign, 'k--', linewidth=1.5, alpha=0.7, label='sign(s) (no boundary layer)')
+
+   ax1.axhline(y=0, color='gray', linestyle='--', alpha=0.5)
+   ax1.axvline(x=0, color='gray', linestyle='--', alpha=0.5)
+   ax1.set_xlabel('Sliding Surface s', fontsize=12)
+   ax1.set_ylabel('Control Input u (N)', fontsize=12)
+   ax1.set_title('Control Law: u = -K·tanh(s/ε)', fontsize=14, fontweight='bold')
+   ax1.legend(loc='best')
+   ax1.grid(True, alpha=0.3)
+   ax1.set_xlim([-2, 2])
+   ax1.set_ylim([-60, 60])
+
+   # Plot 2: Zoomed view near s=0 (boundary layer detail)
+   s_zoom = np.linspace(-0.5, 0.5, 1000)
+   for eps in epsilon_values:
+       u_zoom = -K * np.tanh(s_zoom / eps)
+       ax2.plot(s_zoom, u_zoom, linewidth=2, label=f'ε = {eps}')
+
+   # Highlight boundary layers
+   for eps in epsilon_values:
+       ax2.axvspan(-eps, eps, alpha=0.1, label=f'BL: ε = {eps}')
+
+   ax2.axhline(y=0, color='gray', linestyle='--', alpha=0.5)
+   ax2.axvline(x=0, color='gray', linestyle='--', alpha=0.5)
+   ax2.set_xlabel('Sliding Surface s', fontsize=12)
+   ax2.set_ylabel('Control Input u (N)', fontsize=12)
+   ax2.set_title('Zoomed View: Boundary Layer Detail', fontsize=14, fontweight='bold')
+   ax2.legend(loc='best', fontsize=8)
+   ax2.grid(True, alpha=0.3)
+   ax2.set_xlim([-0.5, 0.5])
+
+   plt.tight_layout()
+   plt.show()
+
+   # Analysis
+   print("=== Boundary Layer Analysis ===")
+   print("\nKey Observations:")
+   print("1. Larger ε → Smoother transition near s=0 → Less chattering")
+   print("2. Smaller ε → Sharper transition near s=0 → More chattering")
+   print("3. sign(s) has discontinuity at s=0 → Maximum chattering")
+   print("\nControl Values at s=0.1:")
+   for eps in epsilon_values:
+       u_at_s = -K * np.tanh(0.1 / eps)
+       print(f"  ε={eps:4.2f}: u = {u_at_s:6.2f} N ({abs(u_at_s/K)*100:.1f}% of max)")
+```
 
 ---
 

@@ -1,16 +1,8 @@
-"""
-================================================================================
-MT-6 Performance Comparison Visualization (Simplified)
-================================================================================
+"""Simplified MT-6 performance comparison visualisations.
 
-Generates publication-quality comparison using summary JSON statistics
-instead of raw CSV data (which has limited columns).
-
-Task: MT-6 Visualization
-Reference: ROADMAP_EXISTING_PROJECT.md
-
-Author: MT-6 Orchestrator
-Created: October 19, 2025
+These plots operate purely on the JSON summary statistics produced by the
+MT-6 analysis pipeline, making it possible to produce consistent visuals
+without the raw Monte Carlo traces.
 """
 
 import numpy as np
@@ -20,13 +12,29 @@ import json
 
 
 def load_json_summary(json_path: Path) -> dict:
-    """Load summary statistics from JSON."""
+    """Load MT-6 summary statistics from a JSON file.
+
+    Args:
+        json_path (Path): Path to the JSON artifact produced by MT-6.
+
+    Returns:
+        dict: Parsed summary statistics.
+    """
     with open(json_path, 'r') as f:
         return json.load(f)
 
 
 def add_significance_annotation(ax, x1, x2, y, p_value, improvement_pct):
-    """Add significance stars and improvement percentage."""
+    """Draw a bracket annotation with significance stars and improvement text.
+
+    Args:
+        ax (matplotlib.axes.Axes): Target axis that receives the annotation.
+        x1 (float): X-coordinate of the first bar in the pair.
+        x2 (float): X-coordinate of the second bar in the pair.
+        y (float): Baseline height for the bracket.
+        p_value (float): P-value associated with the comparison.
+        improvement_pct (float): Percent improvement to display alongside the stars.
+    """
     # Determine significance level
     if p_value < 0.001:
         sig_text = '***'
@@ -52,11 +60,12 @@ def plot_comparison_from_summary(
     output_path: Path,
     show: bool = False
 ):
-    """
-    Generate performance comparison plot from summary statistics.
+    """Render a bar-chart comparison using MT-6 summary statistics.
 
-    Uses bar plots with error bars (CI) instead of box plots,
-    since we only have summary statistics, not raw data.
+    Args:
+        statistical_json_path (Path): Path to the statistical comparison JSON artifact.
+        output_path (Path): Destination path for the rendered PNG figure.
+        show (bool, optional): Display the figure interactively when True. Defaults to False.
     """
 
     # Load statistical comparison
@@ -79,9 +88,9 @@ def plot_comparison_from_summary(
     # Metrics to plot
     metrics = [
         ('chattering_index', 'Chattering Index', 'Chattering Mitigation'),
-        ('overshoot_theta1', 'Overshoot θ1 [rad]', 'Transient Overshoot'),
-        ('overshoot_theta2', 'Overshoot θ2 [rad]', 'Second Link Overshoot'),
-        ('control_energy', 'Control Energy [N²·s]', 'Control Efficiency')
+        ('overshoot_theta1', 'Overshoot theta1 [rad]', 'Transient Overshoot'),
+        ('overshoot_theta2', 'Overshoot theta2 [rad]', 'Second Link Overshoot'),
+        ('control_energy', 'Control Energy [N^2*s]', 'Control Efficiency')
     ]
 
     for idx, (metric_key, ylabel, title) in enumerate(metrics):
@@ -165,7 +174,11 @@ def plot_comparison_from_summary(
 
 
 def main():
-    """Main execution."""
+    """Generate the simplified MT-6 performance comparison figure from summaries.
+
+    Returns:
+        int: Zero on success, non-zero when prerequisites are missing.
+    """
     print("=" * 80)
     print("MT-6 Performance Comparison Visualization (Simplified)")
     print("=" * 80)
