@@ -487,13 +487,14 @@ python scripts/cleanup/workspace_cleanup.py --verbose 2>/dev/null || echo "Skipp
   - `.project/config/` - Linting, commit rules, pytest configs
   - `.project/dev_tools/` - Development scripts, automation
   - `.project/mcp_servers/` - MCP server configurations
-  - `.project/archive_temp/` - Temporary archive storage
+  - `.project/archive/` - Archived experiments and old artifacts
 
 - **Runtime artifacts**: Use `.artifacts/` NOT `artifacts/`
   - `.artifacts/` - Runtime outputs, research papers, scripts
   - `.artifacts/testing/` - Test artifacts (production_readiness.db, etc.)
   - `.artifacts/scripts/` - One-off scripts with timestamps
-  - `.artifacts/LT7_research_paper/` - Research paper deliverables
+  - `.artifacts/masters_research_paper/` - Master's thesis research paper deliverables
+  - `.artifacts/control_theory_workspace/` - Control theory notes and scratch work
 
 - **Runtime caches**: Use `.cache/` for ephemeral data
   - `.cache/pytest/` - Pytest cache
