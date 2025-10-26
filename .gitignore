@@ -5,7 +5,8 @@
 *.pyc
 *.pyo
 
-# Cache directories
+# Cache directories (consolidated in .cache/)
+.cache/
 .benchmarks/
 .numba_cache/
 .pytest_cache/
@@ -65,7 +66,7 @@ DIP_SMC_PSO/
 .validation_reports/
 problem-tracking/
 prompt/
-artifacts/
+.artifacts/
 
 # Keep only essentials for GitHub issues setup
 !.github/
@@ -81,10 +82,11 @@ node_modules/
 data/
 logs/
 optimization_results/
+docs/_build/
 
 # Claude Code specific (DO NOT COMMIT)
-.ai/
-.mcp_servers/
+.project/ai/archive/
+.project/archive_temp/
 .mcp.json
 .clinerules
 settings.local.json

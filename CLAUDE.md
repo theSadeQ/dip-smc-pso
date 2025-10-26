@@ -452,31 +452,81 @@ python scripts/test_spof_fixes.py  # SPOF removal ✅
 
 ## 14) Workspace Organization & Hygiene
 
-**Target:** ≤15 visible root items (currently: 15) ✓
+**Target:** ≤15 visible root items (currently: ~15) ✓ | ≤5 hidden config dirs (currently: 5) ✓
 
 **Weekly Health Check:**
 ```bash
-ls | wc -l                          # ≤15
-du -sh .test_artifacts/             # <10MB
-du -sh .dev_validation/             # <5MB
-du -sh logs/                        # <20MB
-find . -name "*.log.*" | wc -l      # 0
+# Root organization
+ls | wc -l                                          # ≤15 visible items
+find . -maxdepth 1 -type d -name ".*" | wc -l      # ≤5 hidden dirs
+
+# Cache/temp sizes
+du -sh .cache/                                      # <50MB
+du -sh .artifacts/                                  # <100MB (excluding research paper)
+du -sh logs/                                        # <20MB
+find . -name "*.log.*" | wc -l                      # 0
+
+# Project structure sizes
+du -sh .project/ai/                                 # <10MB (archive cleaned)
+du -sh docs/_build/                                 # 0 (should be gitignored)
 ```
 
 **Before Every Commit:**
 ```bash
-python scripts/cleanup/workspace_cleanup.py --verbose
+# Verify clean structure
+git status | grep -E "artifacts/|\.benchmarks/|docs/_build/"  # Should be empty
+
+# Optional: Run workspace cleanup (if available)
+python scripts/cleanup/workspace_cleanup.py --verbose 2>/dev/null || echo "Skipped"
 ```
 
 **Directory Rules (Single Source of Truth):**
-- Use `.artifacts/` NOT `artifacts/`
-- Use `notebooks/` NOT `.notebooks/`
-- Use `optimization_results/` NOT `.optimization_results/`
-- NEVER create files in root except: simulate.py, streamlit_app.py, config.yaml, requirements.txt, README.md, CHANGELOG.md, CLAUDE.md
+- **Config consolidation**: Use `.project/` for ALL AI/dev configs (NOT `.ai/`, `.claude/`, `.config/`, `.dev_tools/`, `.mcp_servers/`)
+  - `.project/ai/` - AI planning, education, collaboration docs
+  - `.project/claude/` - Claude Code settings
+  - `.project/config/` - Linting, commit rules, pytest configs
+  - `.project/dev_tools/` - Development scripts, automation
+  - `.project/mcp_servers/` - MCP server configurations
+  - `.project/archive_temp/` - Temporary archive storage
+
+- **Runtime artifacts**: Use `.artifacts/` NOT `artifacts/`
+  - `.artifacts/` - Runtime outputs, research papers, scripts
+  - `.artifacts/testing/` - Test artifacts (production_readiness.db, etc.)
+  - `.artifacts/scripts/` - One-off scripts with timestamps
+  - `.artifacts/LT7_research_paper/` - Research paper deliverables
+
+- **Runtime caches**: Use `.cache/` for ephemeral data
+  - `.cache/pytest/` - Pytest cache
+  - `.cache/hypothesis/` - Hypothesis test cache
+  - `.cache/htmlcov/` - HTML coverage reports
+  - `.cache/benchmarks/` - Pytest-benchmark cache
+
+- **Visible directories**: 8 core directories ONLY
+  - `src/` - Source code
+  - `tests/` - Test suite
+  - `docs/` - Documentation (source only, NOT `docs/_build/`)
+  - `scripts/` - Utility scripts
+  - `notebooks/` - Jupyter notebooks
+  - `data/` - Input data
+  - `benchmarks/` - Benchmark code and results
+  - `optimization_results/` - PSO outputs
+
+- **Root files**: 7 ONLY
+  - `README.md`, `CHANGELOG.md`, `CLAUDE.md`
+  - `config.yaml`, `requirements.txt`
+  - `simulate.py`, `streamlit_app.py`
+
+**NEVER**:
+- Create files in root except the 7 listed above
+- Use `artifacts/` (use `.artifacts/`)
+- Use `notebooks/` as hidden `.notebooks/`
+- Commit `docs/_build/` (generated HTML)
+- Commit `.cache/` (runtime ephemeral data)
 
 **Full Details:**
-- Comprehensive guide: `.ai/config/workspace_organization.md`
-- Oct 2025 cleanup lessons (370MB recovered): `.ai/config/WORKSPACE_CLEANUP_2025-10-09.md`
+- Restructuring plan: `.project/dev_tools/RESTRUCTURING_PLAN_2025-10-26.md`
+- AI config guide: `.project/ai/config/workspace_organization.md`
+- Oct 2025 cleanup lessons (1.8GB recovered): `.project/ai/config/WORKSPACE_CLEANUP_2025-10-26.md`
 
 ------
 
