@@ -6,6 +6,7 @@
 c5u-mpl enforcement: headless Matplotlib tests with Agg backend and show-ban.
 This file MUST be imported before any test that imports matplotlib.pyplot.
 """
+import io
 import os
 import sys
 import warnings
@@ -16,6 +17,26 @@ warnings.filterwarnings("ignore", message=".*The NumPy module was reloaded.*", c
 
 # Import matplotlib only after warning filters are set
 import matplotlib  # noqa: E402 - must import after warnings.filterwarnings
+
+# Enforce UTF-8 encoding on Windows to avoid cp1252 codec errors in pytest output
+if os.name == "nt":
+    os.environ.setdefault("PYTHONUTF8", "1")
+    os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+
+    def _force_utf8(stream_name: str):
+        """Ensure stdio streams use UTF-8 text wrappers on Windows."""
+        stream = getattr(sys, stream_name, None)
+        if stream is None:
+            return
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")  # type: ignore[attr-defined]
+        elif hasattr(stream, "buffer"):
+            buffer = stream.buffer  # type: ignore[attr-defined]
+            wrapper = io.TextIOWrapper(buffer, encoding="utf-8", errors="replace")
+            setattr(sys, stream_name, wrapper)
+
+    for _name in ("stdin", "stdout", "stderr"):
+        _force_utf8(_name)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS_DIR = PROJECT_ROOT / "scripts"

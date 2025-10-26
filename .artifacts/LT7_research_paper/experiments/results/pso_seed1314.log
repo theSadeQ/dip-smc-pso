@@ -1,0 +1,958 @@
+2025-10-20 08:08:05,356 - __main__ - INFO - ================================================================================
+2025-10-20 08:08:05,357 - __main__ - INFO - PSO Optimization (Seed: 1314)
+2025-10-20 08:08:05,357 - __main__ - INFO - ================================================================================
+2025-10-20 08:08:05,357 - __main__ - INFO - 
+Running PSO optimization...
+2025-10-20 08:08:05,358 - __main__ - INFO -   Swarm size: 30
+2025-10-20 08:08:05,358 - __main__ - INFO -   Max iterations: 30
+2025-10-20 08:08:05,358 - __main__ - INFO -   Random seed: 1314
+2025-10-20 08:08:05,358 - optimize_adaptive_boundary - INFO - Starting PSO optimization for adaptive boundary layer...
+2025-10-20 08:08:05,358 - optimize_adaptive_boundary - INFO - Swarm size: 30, Iterations: 30, Seed: 1314
+2025-10-20 08:08:05,375 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+pyswarms.single.global_best:   0%|          |0/30D:\Projects\main\src\plant\core\state_validation.py:171: UserWarning: State vector was modified during sanitization
+  warnings.warn("State vector was modified during sanitization", UserWarning)
+2025-10-20 08:08:36,656 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0152, alpha=0.82 -> chattering=2.1916, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 08:08:42,825 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0092, alpha=1.88 -> chattering=2.1910, settling=infs, overshoot=4.658rad, fitness=15.5714
+2025-10-20 08:08:47,000 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0169, alpha=1.76 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5720
+2025-10-20 08:09:00,218 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0181, alpha=1.30 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 08:09:11,689 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0167, alpha=1.56 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 08:09:15,304 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0031, alpha=1.25 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 08:09:22,021 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0146, alpha=1.88 -> chattering=2.1910, settling=infs, overshoot=4.658rad, fitness=15.5713
+2025-10-20 08:09:31,715 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0030, alpha=0.80 -> chattering=2.1917, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 08:09:42,376 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0112, alpha=0.80 -> chattering=2.1917, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 08:09:45,595 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0141, alpha=0.21 -> chattering=2.1935, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:09:48,665 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0046, alpha=0.95 -> chattering=2.1913, settling=infs, overshoot=4.656rad, fitness=15.5680
+2025-10-20 08:09:52,555 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0166, alpha=1.32 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 08:09:56,746 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0085, alpha=0.42 -> chattering=2.1927, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:09:58,453 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0100, alpha=1.55 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 08:10:00,051 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0110, alpha=0.95 -> chattering=2.1913, settling=infs, overshoot=4.656rad, fitness=15.5680
+2025-10-20 08:10:01,592 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0143, alpha=1.91 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5712
+2025-10-20 08:10:03,300 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0129, alpha=1.59 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 08:10:06,083 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0029, alpha=0.98 -> chattering=2.1913, settling=infs, overshoot=4.656rad, fitness=15.5680
+2025-10-20 08:10:07,691 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0030, alpha=0.41 -> chattering=2.1927, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:10:09,178 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0019, alpha=1.35 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 08:10:10,743 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0019, alpha=1.68 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5724
+2025-10-20 08:10:12,314 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0060, alpha=0.77 -> chattering=2.1918, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 08:10:13,859 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0153, alpha=1.64 -> chattering=2.1906, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 08:10:15,404 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0091, alpha=0.08 -> chattering=2.1947, settling=infs, overshoot=4.656rad, fitness=15.5696
+2025-10-20 08:10:18,838 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0064, alpha=1.71 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5723
+2025-10-20 08:10:22,362 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0182, alpha=1.18 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 08:10:25,468 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0185, alpha=0.87 -> chattering=2.1915, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 08:10:28,948 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0072, alpha=1.13 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 08:10:32,675 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0094, alpha=0.66 -> chattering=2.1921, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:10:37,348 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0175, alpha=0.30 -> chattering=2.1931, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:10:37,348 - optimize_adaptive_boundary - INFO - Iteration 1/30: best_fitness=15.5668, best_params=[0.0019, 1.35]
+pyswarms.single.global_best:   0%|          |0/30, best_cost=15.6pyswarms.single.global_best:   3%|3         |1/30, best_cost=15.62025-10-20 08:10:41,664 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0112, alpha=1.00 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 08:10:43,426 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0107, alpha=1.80 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5718
+2025-10-20 08:10:44,985 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0197, alpha=0.44 -> chattering=2.1926, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:10:47,889 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0142, alpha=1.99 -> chattering=2.1914, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 08:10:51,083 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0157, alpha=1.91 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5712
+2025-10-20 08:10:54,220 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0081, alpha=1.85 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5715
+2025-10-20 08:10:55,845 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0030, alpha=0.64 -> chattering=2.1921, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:10:59,468 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0183, alpha=1.47 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 08:11:02,650 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0164, alpha=1.59 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 08:11:04,419 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0165, alpha=0.47 -> chattering=2.1926, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:11:06,048 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0037, alpha=1.89 -> chattering=2.1910, settling=infs, overshoot=4.658rad, fitness=15.5713
+2025-10-20 08:11:07,647 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0197, alpha=1.74 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5721
+2025-10-20 08:11:09,233 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0049, alpha=1.46 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 08:11:12,154 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0086, alpha=1.83 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5716
+2025-10-20 08:11:13,815 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0087, alpha=1.32 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 08:11:15,452 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0118, alpha=0.16 -> chattering=2.1938, settling=infs, overshoot=4.656rad, fitness=15.5692
+2025-10-20 08:11:18,600 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0079, alpha=0.18 -> chattering=2.1937, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:11:21,048 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0135, alpha=1.12 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5676
+2025-10-20 08:11:22,546 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0037, alpha=0.83 -> chattering=2.1916, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 08:11:24,147 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0162, alpha=1.45 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 08:11:25,776 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0168, alpha=0.31 -> chattering=2.1931, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:11:27,758 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0030, alpha=1.54 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 08:11:29,430 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0036, alpha=1.63 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 08:11:31,093 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0174, alpha=1.18 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 08:11:32,728 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0175, alpha=1.66 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:11:34,327 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0137, alpha=1.98 -> chattering=2.1913, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 08:11:35,909 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0120, alpha=1.13 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 08:11:39,044 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0023, alpha=1.19 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 08:11:42,364 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0095, alpha=1.26 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 08:11:45,540 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0106, alpha=0.67 -> chattering=2.1920, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:11:45,540 - optimize_adaptive_boundary - INFO - Iteration 2/30: best_fitness=15.5669, best_params=[0.0087, 1.32]
+pyswarms.single.global_best:   3%|3         |1/30, best_cost=15.6pyswarms.single.global_best:   7%|6         |2/30, best_cost=15.62025-10-20 08:11:48,932 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0145, alpha=1.20 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 08:11:52,473 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0075, alpha=1.64 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:11:54,448 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0013, alpha=1.14 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 08:11:56,521 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0074, alpha=0.27 -> chattering=2.1932, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 08:11:59,795 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0088, alpha=0.09 -> chattering=2.1946, settling=infs, overshoot=4.656rad, fitness=15.5695
+2025-10-20 08:12:03,541 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0174, alpha=0.09 -> chattering=2.1946, settling=infs, overshoot=4.656rad, fitness=15.5695
+2025-10-20 08:12:05,321 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0171, alpha=1.40 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 08:12:08,305 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0086, alpha=1.95 -> chattering=2.1912, settling=infs, overshoot=4.658rad, fitness=15.5710
+2025-10-20 08:12:11,183 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0185, alpha=0.19 -> chattering=2.1936, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:12:14,143 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0015, alpha=0.82 -> chattering=2.1917, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 08:12:16,944 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0065, alpha=0.54 -> chattering=2.1924, settling=infs, overshoot=4.656rad, fitness=15.5687
+2025-10-20 08:12:18,451 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0019, alpha=0.04 -> chattering=2.1955, settling=infs, overshoot=4.655rad, fitness=15.5700
+2025-10-20 08:12:19,933 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0076, alpha=1.98 -> chattering=2.1913, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 08:12:21,425 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0038, alpha=0.06 -> chattering=2.1951, settling=infs, overshoot=4.655rad, fitness=15.5698
+2025-10-20 08:12:22,942 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0018, alpha=1.65 -> chattering=2.1905, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:12:24,437 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0068, alpha=0.45 -> chattering=2.1926, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:12:25,990 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0025, alpha=0.85 -> chattering=2.1916, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 08:12:28,052 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0091, alpha=1.32 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 08:12:29,526 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0060, alpha=1.31 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 08:12:31,017 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0098, alpha=1.53 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 08:12:32,558 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0184, alpha=0.98 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 08:12:34,054 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0182, alpha=1.86 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5715
+2025-10-20 08:12:35,533 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0076, alpha=1.56 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 08:12:37,844 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0101, alpha=0.20 -> chattering=2.1936, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:12:40,690 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0094, alpha=1.54 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 08:12:43,719 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0025, alpha=0.38 -> chattering=2.1928, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:12:46,607 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0195, alpha=1.38 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 08:12:48,755 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0036, alpha=1.28 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:12:50,274 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0167, alpha=1.80 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5718
+2025-10-20 08:12:51,820 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0115, alpha=1.03 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5678
+2025-10-20 08:12:51,820 - optimize_adaptive_boundary - INFO - Iteration 3/30: best_fitness=15.5666, best_params=[0.0171, 1.40]
+pyswarms.single.global_best:   7%|6         |2/30, best_cost=15.6pyswarms.single.global_best:  10%|#         |3/30, best_cost=15.62025-10-20 08:12:53,309 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0103, alpha=1.40 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 08:12:55,924 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0039, alpha=1.45 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 08:12:58,887 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0052, alpha=1.78 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5719
+2025-10-20 08:13:02,071 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0077, alpha=0.74 -> chattering=2.1918, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 08:13:05,184 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0027, alpha=0.25 -> chattering=2.1933, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 08:13:08,330 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0180, alpha=1.06 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 08:13:11,667 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0089, alpha=0.08 -> chattering=2.1948, settling=infs, overshoot=4.656rad, fitness=15.5696
+2025-10-20 08:13:14,535 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0169, alpha=0.13 -> chattering=2.1941, settling=infs, overshoot=4.656rad, fitness=15.5693
+2025-10-20 08:13:17,490 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0190, alpha=1.04 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5678
+2025-10-20 08:13:20,671 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0141, alpha=1.14 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 08:13:23,896 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0179, alpha=1.28 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:13:27,035 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0183, alpha=0.66 -> chattering=2.1921, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:13:30,221 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0022, alpha=0.02 -> chattering=2.1957, settling=infs, overshoot=4.655rad, fitness=15.5701
+2025-10-20 08:13:33,221 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0171, alpha=0.33 -> chattering=2.1930, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:13:35,996 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0129, alpha=1.80 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5718
+2025-10-20 08:13:37,896 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0028, alpha=1.00 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 08:13:39,377 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0057, alpha=1.51 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 08:13:40,883 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0183, alpha=1.50 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 08:13:42,408 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0182, alpha=1.75 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5720
+2025-10-20 08:13:43,933 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0124, alpha=1.53 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 08:13:45,548 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0120, alpha=1.66 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5725
+2025-10-20 08:13:47,212 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0127, alpha=1.53 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 08:13:48,715 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0068, alpha=1.52 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 08:13:50,264 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0172, alpha=1.33 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 08:13:51,768 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0115, alpha=1.40 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:13:53,714 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0189, alpha=1.12 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5676
+2025-10-20 08:13:56,697 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0107, alpha=1.60 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5728
+2025-10-20 08:13:59,717 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0184, alpha=1.38 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 08:14:03,067 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0156, alpha=0.06 -> chattering=2.1950, settling=infs, overshoot=4.655rad, fitness=15.5697
+2025-10-20 08:14:05,853 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0132, alpha=1.37 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 08:14:05,853 - optimize_adaptive_boundary - INFO - Iteration 4/30: best_fitness=15.5665, best_params=[0.0115, 1.40]
+pyswarms.single.global_best:  10%|#         |3/30, best_cost=15.6pyswarms.single.global_best:  13%|#3        |4/30, best_cost=15.62025-10-20 08:14:07,771 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0179, alpha=1.58 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 08:14:09,226 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0184, alpha=1.49 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 08:14:10,697 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0139, alpha=0.17 -> chattering=2.1938, settling=infs, overshoot=4.656rad, fitness=15.5692
+2025-10-20 08:14:12,177 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0196, alpha=1.57 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 08:14:13,691 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0185, alpha=0.63 -> chattering=2.1922, settling=infs, overshoot=4.656rad, fitness=15.5686
+2025-10-20 08:14:15,268 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0038, alpha=1.98 -> chattering=2.1913, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 08:14:16,817 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0075, alpha=1.58 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 08:14:20,018 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0022, alpha=0.43 -> chattering=2.1927, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:14:22,896 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0024, alpha=1.81 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5717
+2025-10-20 08:14:24,390 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0137, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 08:14:26,035 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0011, alpha=1.96 -> chattering=2.1912, settling=infs, overshoot=4.658rad, fitness=15.5709
+2025-10-20 08:14:28,047 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0055, alpha=1.57 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 08:14:29,598 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0122, alpha=0.39 -> chattering=2.1928, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:14:31,069 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0090, alpha=0.71 -> chattering=2.1919, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:14:32,548 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0189, alpha=1.59 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 08:14:34,110 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0174, alpha=1.52 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 08:14:35,653 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0160, alpha=1.90 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5712
+2025-10-20 08:14:37,529 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0035, alpha=1.63 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 08:14:40,549 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0045, alpha=1.88 -> chattering=2.1910, settling=infs, overshoot=4.658rad, fitness=15.5713
+2025-10-20 08:14:43,532 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0058, alpha=1.43 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5664
+2025-10-20 08:14:46,380 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0197, alpha=1.95 -> chattering=2.1912, settling=infs, overshoot=4.658rad, fitness=15.5710
+2025-10-20 08:14:49,355 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0071, alpha=0.87 -> chattering=2.1915, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 08:14:52,213 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0054, alpha=1.47 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 08:14:55,365 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0054, alpha=0.36 -> chattering=2.1929, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:14:56,985 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0038, alpha=1.28 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:15:00,217 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0065, alpha=1.81 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5717
+2025-10-20 08:15:01,728 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0139, alpha=1.71 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5723
+2025-10-20 08:15:03,397 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0138, alpha=1.48 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 08:15:04,918 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0094, alpha=0.54 -> chattering=2.1924, settling=infs, overshoot=4.656rad, fitness=15.5687
+2025-10-20 08:15:06,376 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0032, alpha=1.68 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5724
+2025-10-20 08:15:06,376 - optimize_adaptive_boundary - INFO - Iteration 5/30: best_fitness=15.5664, best_params=[0.0058, 1.43]
+pyswarms.single.global_best:  13%|#3        |4/30, best_cost=15.6pyswarms.single.global_best:  17%|#6        |5/30, best_cost=15.62025-10-20 08:15:08,799 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0166, alpha=1.65 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:15:11,649 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0093, alpha=1.69 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5724
+2025-10-20 08:15:14,512 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0014, alpha=0.89 -> chattering=2.1915, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 08:15:17,403 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0042, alpha=0.17 -> chattering=2.1938, settling=infs, overshoot=4.656rad, fitness=15.5692
+2025-10-20 08:15:20,325 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0018, alpha=1.10 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5676
+2025-10-20 08:15:23,226 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0027, alpha=0.50 -> chattering=2.1925, settling=infs, overshoot=4.656rad, fitness=15.5687
+2025-10-20 08:15:26,133 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0187, alpha=0.91 -> chattering=2.1914, settling=infs, overshoot=4.656rad, fitness=15.5681
+2025-10-20 08:15:28,492 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0070, alpha=0.83 -> chattering=2.1916, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 08:15:29,973 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0173, alpha=0.06 -> chattering=2.1951, settling=infs, overshoot=4.655rad, fitness=15.5698
+2025-10-20 08:15:31,440 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0197, alpha=1.68 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5724
+2025-10-20 08:15:33,345 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0039, alpha=0.32 -> chattering=2.1930, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:15:36,308 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0093, alpha=0.30 -> chattering=2.1931, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:15:38,459 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0161, alpha=0.84 -> chattering=2.1916, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 08:15:39,956 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0187, alpha=1.19 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 08:15:41,434 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0198, alpha=1.37 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 08:15:43,035 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0082, alpha=1.91 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5712
+2025-10-20 08:15:44,518 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0134, alpha=0.06 -> chattering=2.1950, settling=infs, overshoot=4.655rad, fitness=15.5697
+2025-10-20 08:15:46,009 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0153, alpha=1.57 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 08:15:47,854 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0135, alpha=1.75 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5720
+2025-10-20 08:15:49,614 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0171, alpha=1.34 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 08:15:51,079 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0019, alpha=1.78 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5719
+2025-10-20 08:15:52,539 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0058, alpha=0.41 -> chattering=2.1927, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:15:54,092 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0033, alpha=1.48 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 08:15:55,600 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0060, alpha=1.80 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5718
+2025-10-20 08:15:57,111 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0091, alpha=1.18 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 08:16:00,032 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0129, alpha=0.29 -> chattering=2.1931, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:16:03,663 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0108, alpha=1.75 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5720
+2025-10-20 08:16:06,505 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0155, alpha=1.51 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 08:16:08,651 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0055, alpha=1.42 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:16:10,135 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0115, alpha=1.94 -> chattering=2.1912, settling=infs, overshoot=4.658rad, fitness=15.5710
+2025-10-20 08:16:10,135 - optimize_adaptive_boundary - INFO - Iteration 6/30: best_fitness=15.5665, best_params=[0.0055, 1.42]
+pyswarms.single.global_best:  17%|#6        |5/30, best_cost=15.6pyswarms.single.global_best:  20%|##        |6/30, best_cost=15.62025-10-20 08:16:11,682 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0064, alpha=1.55 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 08:16:13,207 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0177, alpha=1.90 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5713
+2025-10-20 08:16:14,717 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0149, alpha=1.68 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5724
+2025-10-20 08:16:16,268 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0109, alpha=0.93 -> chattering=2.1914, settling=infs, overshoot=4.656rad, fitness=15.5681
+2025-10-20 08:16:18,293 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0142, alpha=1.57 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 08:16:21,064 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0027, alpha=1.17 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 08:16:24,063 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0092, alpha=0.45 -> chattering=2.1926, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:16:26,939 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0111, alpha=1.25 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 08:16:29,861 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0189, alpha=0.82 -> chattering=2.1916, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 08:16:32,688 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0108, alpha=1.65 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:16:35,634 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0044, alpha=0.95 -> chattering=2.1913, settling=infs, overshoot=4.656rad, fitness=15.5680
+2025-10-20 08:16:38,861 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0144, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5737
+2025-10-20 08:16:41,913 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0165, alpha=1.43 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5664
+2025-10-20 08:16:46,176 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0055, alpha=1.65 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:16:49,805 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0185, alpha=1.19 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 08:16:53,076 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0146, alpha=0.08 -> chattering=2.1946, settling=infs, overshoot=4.656rad, fitness=15.5695
+2025-10-20 08:16:56,297 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0179, alpha=0.54 -> chattering=2.1924, settling=infs, overshoot=4.656rad, fitness=15.5687
+2025-10-20 08:17:03,552 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0139, alpha=1.42 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:17:07,694 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0089, alpha=1.50 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 08:17:12,976 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0049, alpha=1.32 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 08:17:18,108 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0095, alpha=1.23 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 08:17:30,176 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0103, alpha=0.26 -> chattering=2.1933, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 08:17:38,713 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0018, alpha=1.55 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 08:17:46,624 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0013, alpha=0.94 -> chattering=2.1913, settling=infs, overshoot=4.656rad, fitness=15.5680
+2025-10-20 08:17:55,107 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0065, alpha=1.17 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 08:18:03,300 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0024, alpha=0.81 -> chattering=2.1917, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 08:18:06,820 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0091, alpha=1.64 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:18:10,837 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0089, alpha=1.51 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 08:18:14,697 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0079, alpha=0.20 -> chattering=2.1936, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:18:19,156 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0199, alpha=1.87 -> chattering=2.1910, settling=infs, overshoot=4.658rad, fitness=15.5714
+2025-10-20 08:18:19,157 - optimize_adaptive_boundary - INFO - Iteration 7/30: best_fitness=15.5664, best_params=[0.0165, 1.43]
+pyswarms.single.global_best:  20%|##        |6/30, best_cost=15.6pyswarms.single.global_best:  23%|##3       |7/30, best_cost=15.62025-10-20 08:18:28,358 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0109, alpha=1.42 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:18:37,144 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0062, alpha=1.99 -> chattering=2.1913, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 08:18:41,317 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0099, alpha=0.13 -> chattering=2.1941, settling=infs, overshoot=4.656rad, fitness=15.5693
+2025-10-20 08:18:45,155 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0021, alpha=1.82 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5717
+2025-10-20 08:18:49,459 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0132, alpha=1.89 -> chattering=2.1910, settling=infs, overshoot=4.658rad, fitness=15.5713
+2025-10-20 08:18:52,975 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0088, alpha=1.83 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5716
+2025-10-20 08:18:56,385 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0058, alpha=0.11 -> chattering=2.1943, settling=infs, overshoot=4.656rad, fitness=15.5694
+2025-10-20 08:19:02,938 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0147, alpha=1.65 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:19:11,907 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0076, alpha=1.55 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 08:19:21,418 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0114, alpha=1.37 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 08:19:30,051 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0091, alpha=1.81 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5717
+2025-10-20 08:19:33,968 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0027, alpha=0.44 -> chattering=2.1927, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:19:37,359 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0152, alpha=1.95 -> chattering=2.1912, settling=infs, overshoot=4.658rad, fitness=15.5710
+2025-10-20 08:19:44,801 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0158, alpha=1.90 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5712
+2025-10-20 08:19:50,298 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0159, alpha=1.07 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 08:19:55,714 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0150, alpha=0.75 -> chattering=2.1918, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 08:20:00,116 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0119, alpha=1.10 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5676
+2025-10-20 08:20:03,518 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0077, alpha=1.28 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:20:06,992 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0172, alpha=1.23 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 08:20:11,436 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0192, alpha=1.34 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 08:20:15,057 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0182, alpha=0.78 -> chattering=2.1918, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 08:20:19,963 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0200, alpha=0.51 -> chattering=2.1925, settling=infs, overshoot=4.656rad, fitness=15.5687
+2025-10-20 08:20:29,477 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0073, alpha=1.61 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5728
+2025-10-20 08:20:32,661 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0181, alpha=0.14 -> chattering=2.1940, settling=infs, overshoot=4.656rad, fitness=15.5693
+2025-10-20 08:20:36,017 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0167, alpha=1.24 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 08:20:42,016 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0027, alpha=1.59 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 08:20:50,200 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0124, alpha=1.41 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:20:55,321 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0195, alpha=1.47 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 08:21:00,816 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0192, alpha=1.39 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 08:21:05,620 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0128, alpha=1.60 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 08:21:05,622 - optimize_adaptive_boundary - INFO - Iteration 8/30: best_fitness=15.5665, best_params=[0.0109, 1.42]
+pyswarms.single.global_best:  23%|##3       |7/30, best_cost=15.6pyswarms.single.global_best:  27%|##6       |8/30, best_cost=15.62025-10-20 08:21:09,396 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0106, alpha=1.30 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:21:12,714 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0128, alpha=0.04 -> chattering=2.1955, settling=infs, overshoot=4.655rad, fitness=15.5700
+2025-10-20 08:21:17,997 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0129, alpha=1.01 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 08:21:23,813 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0016, alpha=0.45 -> chattering=2.1926, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:21:32,625 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0040, alpha=0.03 -> chattering=2.1957, settling=infs, overshoot=4.655rad, fitness=15.5701
+2025-10-20 08:21:43,317 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0050, alpha=0.26 -> chattering=2.1933, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 08:21:52,739 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0138, alpha=0.11 -> chattering=2.1942, settling=infs, overshoot=4.656rad, fitness=15.5694
+2025-10-20 08:21:57,354 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0150, alpha=1.92 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5711
+2025-10-20 08:22:05,288 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0091, alpha=0.04 -> chattering=2.1955, settling=infs, overshoot=4.655rad, fitness=15.5700
+2025-10-20 08:22:09,219 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0028, alpha=1.14 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 08:22:13,024 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0137, alpha=0.36 -> chattering=2.1929, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:22:16,587 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0031, alpha=1.94 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5711
+2025-10-20 08:22:22,775 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0142, alpha=0.18 -> chattering=2.1937, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:22:32,480 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0056, alpha=1.92 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5711
+2025-10-20 08:22:42,064 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0123, alpha=1.19 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 08:22:47,773 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0098, alpha=1.51 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 08:22:53,391 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0053, alpha=1.66 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5725
+2025-10-20 08:23:03,873 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0032, alpha=1.17 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 08:23:13,734 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0186, alpha=1.02 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 08:23:21,550 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0181, alpha=1.40 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 08:23:26,688 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0073, alpha=0.69 -> chattering=2.1920, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:23:32,349 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0151, alpha=0.99 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 08:23:38,317 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0162, alpha=1.65 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:23:50,133 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0137, alpha=1.60 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 08:24:01,323 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0168, alpha=1.33 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 08:24:09,921 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0018, alpha=0.20 -> chattering=2.1936, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:24:18,827 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0012, alpha=1.20 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 08:24:25,314 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0077, alpha=1.42 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:24:29,698 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0150, alpha=0.47 -> chattering=2.1926, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:24:36,642 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0166, alpha=1.34 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 08:24:36,644 - optimize_adaptive_boundary - INFO - Iteration 9/30: best_fitness=15.5665, best_params=[0.0077, 1.42]
+pyswarms.single.global_best:  27%|##6       |8/30, best_cost=15.6pyswarms.single.global_best:  30%|###       |9/30, best_cost=15.62025-10-20 08:24:41,292 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0060, alpha=1.24 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 08:24:44,716 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0173, alpha=0.26 -> chattering=2.1933, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 08:24:49,009 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0197, alpha=1.94 -> chattering=2.1912, settling=infs, overshoot=4.658rad, fitness=15.5710
+2025-10-20 08:24:55,775 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0122, alpha=1.43 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5664
+2025-10-20 08:24:59,032 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0126, alpha=0.29 -> chattering=2.1932, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 08:25:05,514 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0162, alpha=1.10 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5676
+2025-10-20 08:25:09,067 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0168, alpha=0.26 -> chattering=2.1933, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 08:25:13,016 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0138, alpha=1.78 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5719
+2025-10-20 08:25:16,629 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0038, alpha=0.98 -> chattering=2.1913, settling=infs, overshoot=4.656rad, fitness=15.5680
+2025-10-20 08:25:21,092 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0083, alpha=1.03 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5678
+2025-10-20 08:25:27,214 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0011, alpha=1.33 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 08:25:34,928 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0156, alpha=1.20 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 08:25:44,773 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0158, alpha=1.29 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:25:50,406 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0150, alpha=1.68 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5724
+2025-10-20 08:25:53,616 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0092, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5737
+2025-10-20 08:25:56,898 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0036, alpha=1.99 -> chattering=2.1913, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 08:26:00,956 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0025, alpha=1.94 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5711
+2025-10-20 08:26:04,581 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0055, alpha=1.16 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 08:26:08,086 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0166, alpha=0.87 -> chattering=2.1915, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 08:26:11,868 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0044, alpha=1.47 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 08:26:15,167 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0018, alpha=0.74 -> chattering=2.1919, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 08:26:19,316 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0193, alpha=1.50 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 08:26:26,757 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0106, alpha=1.68 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5724
+2025-10-20 08:26:34,432 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0132, alpha=0.79 -> chattering=2.1917, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 08:26:40,644 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0090, alpha=1.45 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 08:26:48,092 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0016, alpha=1.13 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 08:26:53,733 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0017, alpha=1.12 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5676
+2025-10-20 08:26:56,709 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0194, alpha=1.38 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 08:27:03,414 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0063, alpha=1.94 -> chattering=2.1912, settling=infs, overshoot=4.658rad, fitness=15.5710
+2025-10-20 08:27:11,603 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0170, alpha=1.12 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5676
+2025-10-20 08:27:11,603 - optimize_adaptive_boundary - INFO - Iteration 10/30: best_fitness=15.5664, best_params=[0.0122, 1.43]
+pyswarms.single.global_best:  30%|###       |9/30, best_cost=15.6pyswarms.single.global_best:  33%|###3      |10/30, best_cost=15.62025-10-20 08:27:17,693 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0173, alpha=1.30 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:27:22,227 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0013, alpha=0.77 -> chattering=2.1918, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 08:27:30,412 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0173, alpha=0.55 -> chattering=2.1923, settling=infs, overshoot=4.656rad, fitness=15.5687
+2025-10-20 08:27:36,153 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0141, alpha=0.31 -> chattering=2.1930, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:27:41,939 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0169, alpha=0.92 -> chattering=2.1914, settling=infs, overshoot=4.656rad, fitness=15.5681
+2025-10-20 08:27:45,481 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0054, alpha=1.96 -> chattering=2.1912, settling=infs, overshoot=4.658rad, fitness=15.5709
+2025-10-20 08:27:48,670 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0186, alpha=0.81 -> chattering=2.1917, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 08:27:56,260 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0113, alpha=1.46 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 08:28:06,478 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0162, alpha=1.90 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5712
+2025-10-20 08:28:13,667 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0098, alpha=1.09 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 08:28:17,012 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0133, alpha=0.23 -> chattering=2.1934, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 08:28:20,081 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0015, alpha=0.37 -> chattering=2.1929, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:28:23,074 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0036, alpha=0.37 -> chattering=2.1929, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:28:26,186 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0046, alpha=1.29 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:28:29,466 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0095, alpha=1.65 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:28:35,654 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0186, alpha=1.85 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5715
+2025-10-20 08:28:39,405 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0066, alpha=0.10 -> chattering=2.1944, settling=infs, overshoot=4.656rad, fitness=15.5695
+2025-10-20 08:28:43,694 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0184, alpha=1.28 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:28:46,664 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0021, alpha=1.00 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 08:28:49,957 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0096, alpha=1.53 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 08:28:53,906 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0056, alpha=1.01 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 08:28:56,962 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0136, alpha=1.87 -> chattering=2.1910, settling=infs, overshoot=4.658rad, fitness=15.5714
+2025-10-20 08:29:00,183 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0114, alpha=1.66 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5725
+2025-10-20 08:29:03,652 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0032, alpha=0.05 -> chattering=2.1953, settling=infs, overshoot=4.655rad, fitness=15.5699
+2025-10-20 08:29:11,283 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0162, alpha=1.54 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 08:29:14,745 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0084, alpha=0.02 -> chattering=2.1957, settling=infs, overshoot=4.655rad, fitness=15.5701
+2025-10-20 08:29:18,084 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0016, alpha=1.07 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 08:29:25,168 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0166, alpha=1.36 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 08:29:31,295 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0171, alpha=1.15 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 08:29:38,476 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0169, alpha=1.07 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 08:29:38,476 - optimize_adaptive_boundary - INFO - Iteration 11/30: best_fitness=15.5667, best_params=[0.0166, 1.36]
+pyswarms.single.global_best:  33%|###3      |10/30, best_cost=15.6pyswarms.single.global_best:  37%|###6      |11/30, best_cost=15.62025-10-20 08:29:47,359 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0052, alpha=1.39 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 08:29:52,504 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0071, alpha=1.31 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 08:29:55,552 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0039, alpha=1.38 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 08:29:58,691 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0087, alpha=1.29 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:30:04,997 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0036, alpha=1.65 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:30:12,144 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0185, alpha=0.65 -> chattering=2.1921, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:30:15,562 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0031, alpha=1.52 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 08:30:19,372 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0091, alpha=1.11 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5676
+2025-10-20 08:30:25,528 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0012, alpha=0.55 -> chattering=2.1924, settling=infs, overshoot=4.656rad, fitness=15.5687
+2025-10-20 08:30:28,612 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0059, alpha=1.34 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 08:30:32,272 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0070, alpha=1.21 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 08:30:35,737 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0069, alpha=1.74 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5721
+2025-10-20 08:30:39,185 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0011, alpha=1.72 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5722
+2025-10-20 08:30:46,693 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0142, alpha=0.96 -> chattering=2.1913, settling=infs, overshoot=4.656rad, fitness=15.5680
+2025-10-20 08:30:52,852 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0125, alpha=1.80 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5718
+2025-10-20 08:30:56,293 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0069, alpha=1.60 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5728
+2025-10-20 08:31:07,234 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0197, alpha=0.46 -> chattering=2.1926, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:31:10,702 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0197, alpha=1.40 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 08:31:19,174 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0023, alpha=1.22 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 08:31:24,093 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0133, alpha=1.55 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 08:31:27,233 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0193, alpha=1.40 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:31:30,393 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0012, alpha=1.86 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5714
+2025-10-20 08:31:39,303 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0196, alpha=1.64 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:31:43,583 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0077, alpha=1.32 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 08:31:46,533 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0171, alpha=1.61 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5728
+2025-10-20 08:31:49,563 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0062, alpha=0.88 -> chattering=2.1915, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 08:31:53,038 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0024, alpha=1.23 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 08:31:56,426 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0038, alpha=1.38 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5666
+2025-10-20 08:32:03,551 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0088, alpha=0.40 -> chattering=2.1928, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:32:11,230 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0018, alpha=1.05 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5678
+2025-10-20 08:32:11,231 - optimize_adaptive_boundary - INFO - Iteration 12/30: best_fitness=15.5665, best_params=[0.0193, 1.40]
+pyswarms.single.global_best:  37%|###6      |11/30, best_cost=15.6pyswarms.single.global_best:  40%|####      |12/30, best_cost=15.62025-10-20 08:32:14,323 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0123, alpha=1.49 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 08:32:20,671 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0134, alpha=1.80 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5718
+2025-10-20 08:32:26,905 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0059, alpha=0.13 -> chattering=2.1941, settling=infs, overshoot=4.656rad, fitness=15.5693
+2025-10-20 08:32:30,962 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0019, alpha=0.27 -> chattering=2.1932, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 08:32:38,265 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0137, alpha=0.08 -> chattering=2.1948, settling=infs, overshoot=4.656rad, fitness=15.5696
+2025-10-20 08:32:47,132 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0151, alpha=1.35 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 08:32:55,903 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0151, alpha=1.87 -> chattering=2.1910, settling=infs, overshoot=4.658rad, fitness=15.5714
+2025-10-20 08:33:03,233 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0081, alpha=0.85 -> chattering=2.1916, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 08:33:08,811 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0043, alpha=1.20 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 08:33:15,246 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0168, alpha=1.62 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5728
+2025-10-20 08:33:18,751 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0078, alpha=0.19 -> chattering=2.1936, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:33:24,373 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0113, alpha=0.81 -> chattering=2.1917, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 08:33:31,778 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0100, alpha=0.77 -> chattering=2.1918, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 08:33:40,084 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0024, alpha=0.72 -> chattering=2.1919, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 08:33:47,103 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0137, alpha=1.63 -> chattering=2.1906, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 08:33:55,712 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0160, alpha=1.08 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 08:33:59,472 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0180, alpha=1.00 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 08:34:08,475 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0129, alpha=1.52 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 08:34:13,194 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0183, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 08:34:16,873 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0179, alpha=1.54 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 08:34:20,733 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0016, alpha=1.77 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5720
+2025-10-20 08:34:31,316 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0067, alpha=1.42 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:34:35,434 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0128, alpha=1.58 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 08:34:44,671 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0074, alpha=0.47 -> chattering=2.1926, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:34:51,047 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0118, alpha=1.61 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5728
+2025-10-20 08:34:59,793 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0142, alpha=1.81 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5717
+2025-10-20 08:35:12,422 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0024, alpha=1.40 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 08:35:17,033 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0093, alpha=1.42 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:35:44,646 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0036, alpha=1.64 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 08:35:47,894 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0164, alpha=1.26 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 08:35:47,894 - optimize_adaptive_boundary - INFO - Iteration 13/30: best_fitness=15.5665, best_params=[0.0093, 1.42]
+pyswarms.single.global_best:  40%|####      |12/30, best_cost=15.6pyswarms.single.global_best:  43%|####3     |13/30, best_cost=15.62025-10-20 08:35:51,763 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0162, alpha=1.54 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 08:35:59,054 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0189, alpha=0.10 -> chattering=2.1944, settling=infs, overshoot=4.656rad, fitness=15.5694
+2025-10-20 08:36:12,011 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0048, alpha=1.53 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 08:36:31,039 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0163, alpha=1.75 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5720
+2025-10-20 08:36:35,947 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0076, alpha=1.19 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 08:36:57,501 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0038, alpha=1.98 -> chattering=2.1913, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 08:37:13,033 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0182, alpha=1.75 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5721
+2025-10-20 08:37:21,296 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0077, alpha=0.95 -> chattering=2.1913, settling=infs, overshoot=4.656rad, fitness=15.5680
+2025-10-20 08:37:31,694 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0016, alpha=1.85 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5715
+2025-10-20 08:37:50,268 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0029, alpha=1.74 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5721
+2025-10-20 08:37:56,224 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0136, alpha=1.40 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:38:03,407 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0180, alpha=1.79 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5719
+2025-10-20 08:38:17,184 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0120, alpha=2.00 -> chattering=2.1914, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 08:38:26,935 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0104, alpha=0.98 -> chattering=2.1913, settling=infs, overshoot=4.656rad, fitness=15.5680
+2025-10-20 08:38:38,183 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0135, alpha=1.32 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 08:38:52,868 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0064, alpha=0.66 -> chattering=2.1921, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:39:21,152 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0039, alpha=1.63 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 08:39:41,491 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0033, alpha=1.56 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 08:39:57,752 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0074, alpha=1.62 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 08:40:14,231 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0185, alpha=1.50 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 08:40:27,188 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0159, alpha=0.05 -> chattering=2.1953, settling=infs, overshoot=4.655rad, fitness=15.5698
+2025-10-20 08:40:40,016 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0064, alpha=1.02 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 08:40:52,831 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0151, alpha=1.57 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 08:41:04,761 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0083, alpha=1.85 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5715
+2025-10-20 08:41:34,543 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0031, alpha=1.50 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 08:41:49,864 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0147, alpha=0.58 -> chattering=2.1923, settling=infs, overshoot=4.656rad, fitness=15.5686
+2025-10-20 08:42:08,207 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0078, alpha=1.56 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 08:42:15,423 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0122, alpha=1.45 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 08:42:25,205 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0050, alpha=0.71 -> chattering=2.1919, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:42:39,347 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0027, alpha=1.50 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 08:42:39,348 - optimize_adaptive_boundary - INFO - Iteration 14/30: best_fitness=15.5665, best_params=[0.0136, 1.40]
+pyswarms.single.global_best:  43%|####3     |13/30, best_cost=15.6pyswarms.single.global_best:  47%|####6     |14/30, best_cost=15.62025-10-20 08:42:52,255 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0163, alpha=1.54 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 08:43:07,497 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0191, alpha=0.68 -> chattering=2.1920, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:43:24,854 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0014, alpha=0.74 -> chattering=2.1918, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 08:43:42,838 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0096, alpha=0.98 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 08:44:01,013 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0098, alpha=0.22 -> chattering=2.1934, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:44:11,364 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0111, alpha=0.17 -> chattering=2.1938, settling=infs, overshoot=4.656rad, fitness=15.5692
+2025-10-20 08:44:18,653 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0146, alpha=1.29 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:44:27,984 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0087, alpha=1.17 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 08:44:34,394 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0138, alpha=0.36 -> chattering=2.1929, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:44:45,267 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0072, alpha=1.73 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5722
+2025-10-20 08:44:49,736 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0091, alpha=0.49 -> chattering=2.1925, settling=infs, overshoot=4.656rad, fitness=15.5687
+2025-10-20 08:45:02,623 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0062, alpha=0.44 -> chattering=2.1927, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:45:11,747 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0047, alpha=0.93 -> chattering=2.1914, settling=infs, overshoot=4.656rad, fitness=15.5681
+2025-10-20 08:45:23,465 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0159, alpha=1.38 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5666
+2025-10-20 08:45:34,023 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0115, alpha=1.08 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 08:45:43,570 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0179, alpha=0.67 -> chattering=2.1920, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:45:53,522 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0027, alpha=1.99 -> chattering=2.1913, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 08:46:03,337 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0152, alpha=1.56 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 08:46:20,265 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0143, alpha=1.65 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:46:30,343 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0041, alpha=1.42 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:46:37,832 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0025, alpha=0.35 -> chattering=2.1929, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:46:43,415 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0022, alpha=0.85 -> chattering=2.1916, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 08:46:49,434 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0076, alpha=1.55 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 08:47:00,151 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0091, alpha=0.85 -> chattering=2.1916, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 08:47:09,290 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0152, alpha=1.36 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 08:47:22,521 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0091, alpha=1.52 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 08:47:37,926 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0137, alpha=1.65 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:47:52,183 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0134, alpha=1.47 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 08:48:02,826 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0130, alpha=0.10 -> chattering=2.1944, settling=infs, overshoot=4.656rad, fitness=15.5694
+2025-10-20 08:48:23,705 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0070, alpha=1.64 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:48:23,723 - optimize_adaptive_boundary - INFO - Iteration 15/30: best_fitness=15.5665, best_params=[0.0041, 1.42]
+pyswarms.single.global_best:  47%|####6     |14/30, best_cost=15.6pyswarms.single.global_best:  50%|#####     |15/30, best_cost=15.62025-10-20 08:48:39,829 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0117, alpha=1.54 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 08:48:51,833 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0155, alpha=1.39 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 08:49:02,855 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0176, alpha=1.98 -> chattering=2.1913, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 08:49:19,614 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0073, alpha=0.33 -> chattering=2.1930, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:49:33,816 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0023, alpha=1.40 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:49:39,373 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0166, alpha=0.54 -> chattering=2.1924, settling=infs, overshoot=4.656rad, fitness=15.5687
+2025-10-20 08:49:52,892 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0071, alpha=0.72 -> chattering=2.1919, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 08:50:02,656 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0098, alpha=1.39 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 08:50:18,636 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0187, alpha=1.22 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 08:50:28,510 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0076, alpha=1.51 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 08:50:39,546 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0164, alpha=1.93 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5711
+2025-10-20 08:50:53,186 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0012, alpha=1.70 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5723
+2025-10-20 08:51:02,012 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0115, alpha=1.90 -> chattering=2.1910, settling=infs, overshoot=4.658rad, fitness=15.5712
+2025-10-20 08:51:26,561 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0014, alpha=1.75 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5720
+2025-10-20 08:51:40,009 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0117, alpha=0.99 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 08:51:51,165 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0095, alpha=0.87 -> chattering=2.1915, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 08:52:03,969 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0150, alpha=1.77 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5719
+2025-10-20 08:52:22,252 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0085, alpha=1.51 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 08:52:29,695 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0182, alpha=1.59 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 08:52:39,586 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0183, alpha=1.36 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 08:52:52,227 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0021, alpha=1.28 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:52:57,256 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0153, alpha=0.92 -> chattering=2.1914, settling=infs, overshoot=4.656rad, fitness=15.5681
+2025-10-20 08:53:00,473 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0146, alpha=1.57 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 08:53:02,556 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0139, alpha=0.05 -> chattering=2.1953, settling=infs, overshoot=4.655rad, fitness=15.5699
+2025-10-20 08:53:06,768 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0045, alpha=1.24 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 08:53:08,458 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0038, alpha=0.20 -> chattering=2.1936, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:53:12,432 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0014, alpha=1.67 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5725
+2025-10-20 08:53:15,836 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0135, alpha=1.48 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 08:53:20,510 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0060, alpha=0.34 -> chattering=2.1930, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 08:53:22,182 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0133, alpha=1.70 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5723
+2025-10-20 08:53:22,182 - optimize_adaptive_boundary - INFO - Iteration 16/30: best_fitness=15.5665, best_params=[0.0023, 1.40]
+pyswarms.single.global_best:  50%|#####     |15/30, best_cost=15.6pyswarms.single.global_best:  53%|#####3    |16/30, best_cost=15.62025-10-20 08:53:27,556 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0056, alpha=1.50 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 08:53:30,451 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0116, alpha=0.03 -> chattering=2.1956, settling=infs, overshoot=4.655rad, fitness=15.5700
+2025-10-20 08:53:34,619 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0051, alpha=0.73 -> chattering=2.1919, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 08:53:39,391 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0108, alpha=0.18 -> chattering=2.1937, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:53:41,454 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0054, alpha=0.47 -> chattering=2.1926, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:53:43,886 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0018, alpha=1.42 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:53:47,522 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0036, alpha=0.17 -> chattering=2.1937, settling=infs, overshoot=4.656rad, fitness=15.5692
+2025-10-20 08:53:50,217 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0114, alpha=1.59 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 08:53:51,679 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0164, alpha=0.05 -> chattering=2.1954, settling=infs, overshoot=4.655rad, fitness=15.5699
+2025-10-20 08:53:53,294 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0067, alpha=1.24 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 08:53:54,873 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0132, alpha=1.07 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 08:53:58,653 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0033, alpha=0.77 -> chattering=2.1918, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 08:54:03,606 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0117, alpha=0.59 -> chattering=2.1923, settling=infs, overshoot=4.656rad, fitness=15.5686
+2025-10-20 08:54:08,564 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0117, alpha=0.04 -> chattering=2.1954, settling=infs, overshoot=4.655rad, fitness=15.5699
+2025-10-20 08:54:12,899 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0134, alpha=1.14 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 08:54:17,205 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0047, alpha=1.20 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 08:54:20,792 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0175, alpha=1.40 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 08:54:23,808 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0065, alpha=1.41 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:54:25,962 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0011, alpha=1.49 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 08:54:29,794 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0148, alpha=1.33 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 08:54:33,977 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0026, alpha=0.19 -> chattering=2.1936, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:54:37,011 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0195, alpha=1.18 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 08:54:38,555 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0147, alpha=1.62 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 08:54:40,066 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0015, alpha=1.46 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 08:54:41,572 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0142, alpha=1.20 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 08:54:43,208 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0032, alpha=1.35 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 08:54:44,720 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0137, alpha=1.58 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 08:54:47,812 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0166, alpha=1.46 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 08:54:51,414 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0085, alpha=1.07 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 08:54:55,162 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0186, alpha=1.72 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5722
+2025-10-20 08:54:55,165 - optimize_adaptive_boundary - INFO - Iteration 17/30: best_fitness=15.5665, best_params=[0.0018, 1.42]
+pyswarms.single.global_best:  53%|#####3    |16/30, best_cost=15.6pyswarms.single.global_best:  57%|#####6    |17/30, best_cost=15.62025-10-20 08:54:57,443 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0181, alpha=1.43 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5737
+2025-10-20 08:54:58,947 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0094, alpha=1.26 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 08:55:00,544 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0093, alpha=1.65 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:55:02,268 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0013, alpha=0.67 -> chattering=2.1920, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:55:03,842 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0198, alpha=1.52 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 08:55:05,475 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0094, alpha=0.22 -> chattering=2.1934, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:55:07,181 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0051, alpha=1.99 -> chattering=2.1913, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 08:55:08,832 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0128, alpha=1.67 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5725
+2025-10-20 08:55:10,429 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0087, alpha=1.28 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:55:12,412 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0029, alpha=1.09 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 08:55:14,247 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0028, alpha=0.14 -> chattering=2.1940, settling=infs, overshoot=4.656rad, fitness=15.5692
+2025-10-20 08:55:16,329 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0123, alpha=1.88 -> chattering=2.1910, settling=infs, overshoot=4.658rad, fitness=15.5714
+2025-10-20 08:55:17,993 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0049, alpha=1.47 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 08:55:19,677 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0022, alpha=0.73 -> chattering=2.1919, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 08:55:22,222 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0138, alpha=1.36 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 08:55:26,501 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0013, alpha=1.56 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 08:55:29,980 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0108, alpha=1.06 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 08:55:33,306 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0089, alpha=1.33 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 08:55:36,457 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0118, alpha=1.36 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 08:55:39,327 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0171, alpha=1.33 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 08:55:42,443 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0055, alpha=1.47 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 08:55:44,351 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0168, alpha=1.48 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 08:55:46,253 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0070, alpha=1.64 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 08:55:49,860 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0168, alpha=0.71 -> chattering=2.1919, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:55:52,928 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0011, alpha=1.25 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 08:55:55,737 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0029, alpha=0.41 -> chattering=2.1927, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:55:57,821 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0106, alpha=1.42 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 08:55:59,410 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0017, alpha=1.43 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5664
+2025-10-20 08:56:00,921 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0016, alpha=1.65 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:56:02,758 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0038, alpha=1.63 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 08:56:02,759 - optimize_adaptive_boundary - INFO - Iteration 18/30: best_fitness=15.5664, best_params=[0.0017, 1.43]
+pyswarms.single.global_best:  57%|#####6    |17/30, best_cost=15.6pyswarms.single.global_best:  60%|######    |18/30, best_cost=15.62025-10-20 08:56:04,548 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0078, alpha=1.37 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 08:56:07,846 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0088, alpha=0.44 -> chattering=2.1927, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:56:10,987 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0093, alpha=0.42 -> chattering=2.1927, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:56:12,686 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0048, alpha=1.19 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 08:56:14,235 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0058, alpha=0.45 -> chattering=2.1926, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:56:15,823 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0198, alpha=1.88 -> chattering=2.1910, settling=infs, overshoot=4.658rad, fitness=15.5713
+2025-10-20 08:56:17,592 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0154, alpha=1.56 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 08:56:19,096 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0125, alpha=1.59 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 08:56:20,642 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0155, alpha=0.43 -> chattering=2.1927, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 08:56:22,321 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0199, alpha=1.09 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 08:56:23,907 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0113, alpha=1.75 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5720
+2025-10-20 08:56:27,804 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0105, alpha=0.71 -> chattering=2.1919, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 08:56:32,703 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0165, alpha=0.25 -> chattering=2.1933, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 08:56:38,804 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0176, alpha=1.78 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5719
+2025-10-20 08:56:49,192 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0135, alpha=1.56 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 08:57:06,147 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0016, alpha=1.77 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5719
+2025-10-20 08:57:26,224 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0178, alpha=0.91 -> chattering=2.1914, settling=infs, overshoot=4.656rad, fitness=15.5681
+2025-10-20 08:57:42,246 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0190, alpha=1.30 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 08:57:51,052 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0102, alpha=1.27 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 08:57:56,670 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0062, alpha=1.37 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 08:58:02,601 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0058, alpha=0.60 -> chattering=2.1922, settling=infs, overshoot=4.656rad, fitness=15.5686
+2025-10-20 08:58:23,854 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0097, alpha=1.73 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5722
+2025-10-20 08:58:29,620 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0154, alpha=1.65 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 08:58:37,025 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0169, alpha=0.20 -> chattering=2.1936, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 08:58:47,377 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0081, alpha=1.34 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 08:58:57,244 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0069, alpha=1.66 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5725
+2025-10-20 08:59:06,360 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0139, alpha=1.28 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 08:59:24,000 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0130, alpha=1.40 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 08:59:37,077 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0084, alpha=1.83 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5716
+2025-10-20 08:59:51,046 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0136, alpha=1.45 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 08:59:51,058 - optimize_adaptive_boundary - INFO - Iteration 19/30: best_fitness=15.5666, best_params=[0.0130, 1.40]
+pyswarms.single.global_best:  60%|######    |18/30, best_cost=15.6pyswarms.single.global_best:  63%|######3   |19/30, best_cost=15.62025-10-20 08:59:59,551 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0176, alpha=1.32 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 09:00:03,849 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0104, alpha=1.80 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5718
+2025-10-20 09:00:12,278 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0052, alpha=1.77 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5719
+2025-10-20 09:00:21,849 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0185, alpha=1.52 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 09:00:27,749 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0045, alpha=1.98 -> chattering=2.1913, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 09:00:32,220 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0063, alpha=1.12 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5676
+2025-10-20 09:00:45,005 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0091, alpha=0.91 -> chattering=2.1914, settling=infs, overshoot=4.656rad, fitness=15.5681
+2025-10-20 09:00:51,092 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0109, alpha=1.46 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:00:59,674 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0171, alpha=1.95 -> chattering=2.1912, settling=infs, overshoot=4.658rad, fitness=15.5710
+2025-10-20 09:01:08,124 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0092, alpha=1.13 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 09:01:12,192 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0142, alpha=1.04 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5678
+2025-10-20 09:01:17,826 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0173, alpha=1.64 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 09:01:28,835 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0012, alpha=1.75 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5720
+2025-10-20 09:01:33,232 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0116, alpha=0.60 -> chattering=2.1922, settling=infs, overshoot=4.656rad, fitness=15.5686
+2025-10-20 09:01:44,394 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0133, alpha=1.66 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5725
+2025-10-20 09:01:52,475 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0040, alpha=1.92 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5711
+2025-10-20 09:01:59,412 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0182, alpha=0.91 -> chattering=2.1914, settling=infs, overshoot=4.656rad, fitness=15.5681
+2025-10-20 09:02:10,157 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0156, alpha=1.31 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 09:02:16,664 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0171, alpha=1.23 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 09:02:21,701 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0086, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:02:26,606 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0042, alpha=2.00 -> chattering=2.1914, settling=infs, overshoot=4.658rad, fitness=15.5707
+2025-10-20 09:02:33,337 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0187, alpha=1.82 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5717
+2025-10-20 09:02:37,113 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0176, alpha=1.64 -> chattering=2.1906, settling=infs, overshoot=4.660rad, fitness=15.5726
+2025-10-20 09:02:41,274 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0027, alpha=1.85 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5715
+2025-10-20 09:02:44,877 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0142, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:02:48,687 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0142, alpha=0.63 -> chattering=2.1921, settling=infs, overshoot=4.656rad, fitness=15.5686
+2025-10-20 09:02:54,212 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0035, alpha=1.23 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 09:02:58,322 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0104, alpha=1.39 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:03:11,322 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0074, alpha=1.72 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5722
+2025-10-20 09:03:24,294 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0089, alpha=1.26 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 09:03:24,299 - optimize_adaptive_boundary - INFO - Iteration 20/30: best_fitness=15.5666, best_params=[0.0104, 1.39]
+pyswarms.single.global_best:  63%|######3   |19/30, best_cost=15.6pyswarms.single.global_best:  67%|######6   |20/30, best_cost=15.62025-10-20 09:03:34,832 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0045, alpha=1.31 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 09:03:40,402 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0145, alpha=0.85 -> chattering=2.1916, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 09:03:44,264 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0011, alpha=0.88 -> chattering=2.1915, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 09:03:47,745 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0195, alpha=1.58 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 09:03:51,561 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0183, alpha=1.06 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 09:03:55,288 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0186, alpha=0.42 -> chattering=2.1927, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 09:03:59,136 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0087, alpha=0.23 -> chattering=2.1934, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 09:04:04,461 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0090, alpha=1.33 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 09:04:16,519 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0110, alpha=1.06 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5678
+2025-10-20 09:04:20,883 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0154, alpha=1.23 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 09:04:24,483 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0108, alpha=0.29 -> chattering=2.1931, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 09:04:29,105 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0130, alpha=0.42 -> chattering=2.1927, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 09:04:33,524 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0014, alpha=0.90 -> chattering=2.1914, settling=infs, overshoot=4.656rad, fitness=15.5681
+2025-10-20 09:04:37,098 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0048, alpha=1.74 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5721
+2025-10-20 09:04:46,385 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0114, alpha=1.66 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5725
+2025-10-20 09:04:51,381 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0082, alpha=1.76 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5720
+2025-10-20 09:04:54,755 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0128, alpha=1.06 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 09:04:59,785 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0191, alpha=1.36 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 09:05:03,573 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0118, alpha=1.27 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 09:05:13,391 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0050, alpha=1.50 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 09:05:17,098 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0194, alpha=1.11 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5676
+2025-10-20 09:05:30,075 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0194, alpha=1.80 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5718
+2025-10-20 09:05:37,169 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0120, alpha=1.62 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5728
+2025-10-20 09:05:44,328 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0179, alpha=1.25 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 09:05:48,431 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0171, alpha=1.53 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 09:05:51,907 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0022, alpha=1.79 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5718
+2025-10-20 09:05:59,480 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0062, alpha=1.25 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 09:06:04,537 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0168, alpha=1.40 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:06:11,077 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0184, alpha=1.28 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 09:06:23,354 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0114, alpha=1.17 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 09:06:23,355 - optimize_adaptive_boundary - INFO - Iteration 21/30: best_fitness=15.5666, best_params=[0.0168, 1.40]
+pyswarms.single.global_best:  67%|######6   |20/30, best_cost=15.6pyswarms.single.global_best:  70%|#######   |21/30, best_cost=15.62025-10-20 09:06:27,119 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0120, alpha=1.33 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 09:06:31,118 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0181, alpha=1.95 -> chattering=2.1912, settling=infs, overshoot=4.658rad, fitness=15.5710
+2025-10-20 09:06:35,068 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0182, alpha=0.16 -> chattering=2.1938, settling=infs, overshoot=4.656rad, fitness=15.5692
+2025-10-20 09:06:40,379 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0089, alpha=1.39 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:06:50,087 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0018, alpha=0.16 -> chattering=2.1938, settling=infs, overshoot=4.656rad, fitness=15.5692
+2025-10-20 09:06:59,608 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0190, alpha=1.65 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5726
+2025-10-20 09:07:04,179 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0160, alpha=1.95 -> chattering=2.1912, settling=infs, overshoot=4.658rad, fitness=15.5710
+2025-10-20 09:07:08,757 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0080, alpha=1.25 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 09:07:12,339 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0013, alpha=0.08 -> chattering=2.1947, settling=infs, overshoot=4.656rad, fitness=15.5696
+2025-10-20 09:07:16,192 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0171, alpha=1.37 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 09:07:19,995 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0029, alpha=1.63 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 09:07:23,884 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0193, alpha=1.38 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:07:27,548 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0061, alpha=0.05 -> chattering=2.1952, settling=infs, overshoot=4.655rad, fitness=15.5698
+2025-10-20 09:07:38,089 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0021, alpha=0.67 -> chattering=2.1921, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 09:07:47,173 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0085, alpha=1.50 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 09:07:52,778 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0108, alpha=1.38 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:07:56,222 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0035, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:08:06,119 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0082, alpha=1.41 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 09:08:14,857 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0167, alpha=1.36 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 09:08:21,348 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0162, alpha=1.53 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 09:08:28,505 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0082, alpha=0.28 -> chattering=2.1932, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 09:08:35,087 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0113, alpha=1.66 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5725
+2025-10-20 09:08:39,578 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0027, alpha=1.55 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 09:08:44,798 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0020, alpha=0.54 -> chattering=2.1924, settling=infs, overshoot=4.656rad, fitness=15.5687
+2025-10-20 09:08:49,487 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0150, alpha=1.58 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 09:08:58,545 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0191, alpha=0.68 -> chattering=2.1920, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 09:09:03,181 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0016, alpha=1.33 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 09:09:07,820 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0096, alpha=1.42 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 09:09:17,777 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0174, alpha=0.76 -> chattering=2.1918, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 09:09:23,943 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0026, alpha=1.17 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 09:09:23,945 - optimize_adaptive_boundary - INFO - Iteration 22/30: best_fitness=15.5665, best_params=[0.0096, 1.42]
+pyswarms.single.global_best:  70%|#######   |21/30, best_cost=15.6pyswarms.single.global_best:  73%|#######3  |22/30, best_cost=15.62025-10-20 09:09:30,124 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0185, alpha=1.37 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 09:09:38,152 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0192, alpha=0.64 -> chattering=2.1921, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 09:09:46,775 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0088, alpha=2.00 -> chattering=2.1914, settling=infs, overshoot=4.658rad, fitness=15.5707
+2025-10-20 09:09:56,819 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0099, alpha=1.05 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5678
+2025-10-20 09:10:02,744 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0016, alpha=1.54 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 09:10:09,200 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0090, alpha=0.62 -> chattering=2.1922, settling=infs, overshoot=4.656rad, fitness=15.5686
+2025-10-20 09:10:20,453 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0104, alpha=1.31 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 09:10:25,212 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0087, alpha=1.22 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 09:10:29,057 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0124, alpha=1.63 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 09:10:32,504 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0140, alpha=1.51 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 09:10:38,021 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0129, alpha=0.72 -> chattering=2.1919, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 09:10:47,225 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0163, alpha=0.26 -> chattering=2.1933, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 09:10:51,584 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0107, alpha=1.25 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 09:10:55,764 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0047, alpha=1.59 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 09:11:03,008 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0078, alpha=1.32 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 09:11:09,475 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0133, alpha=1.04 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5678
+2025-10-20 09:11:13,392 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0111, alpha=1.77 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5719
+2025-10-20 09:11:16,959 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0094, alpha=1.45 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:11:24,392 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0116, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5737
+2025-10-20 09:11:28,179 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0178, alpha=1.51 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 09:11:31,994 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0147, alpha=1.69 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5724
+2025-10-20 09:11:35,597 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0196, alpha=1.47 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 09:11:39,198 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0128, alpha=1.48 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 09:11:45,485 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0178, alpha=1.98 -> chattering=2.1913, settling=infs, overshoot=4.658rad, fitness=15.5709
+2025-10-20 09:11:53,458 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0089, alpha=1.57 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 09:11:57,564 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0042, alpha=1.79 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5718
+2025-10-20 09:12:02,082 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0123, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:12:11,645 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0136, alpha=1.45 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:12:16,384 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0068, alpha=0.35 -> chattering=2.1929, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 09:12:20,125 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0053, alpha=1.34 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 09:12:20,127 - optimize_adaptive_boundary - INFO - Iteration 23/30: best_fitness=15.5667, best_params=[0.0185, 1.37]
+pyswarms.single.global_best:  73%|#######3  |22/30, best_cost=15.6pyswarms.single.global_best:  77%|#######6  |23/30, best_cost=15.62025-10-20 09:12:24,802 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0037, alpha=1.42 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 09:12:30,550 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0179, alpha=1.37 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 09:12:36,385 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0172, alpha=1.33 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 09:12:42,015 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0047, alpha=0.68 -> chattering=2.1920, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 09:12:48,907 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0188, alpha=0.70 -> chattering=2.1920, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 09:12:55,290 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0077, alpha=1.77 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5719
+2025-10-20 09:13:03,493 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0152, alpha=0.60 -> chattering=2.1922, settling=infs, overshoot=4.656rad, fitness=15.5686
+2025-10-20 09:13:09,343 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0101, alpha=1.22 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 09:13:16,312 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0014, alpha=1.00 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 09:13:22,984 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0092, alpha=1.57 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 09:13:27,253 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0181, alpha=1.93 -> chattering=2.1912, settling=infs, overshoot=4.658rad, fitness=15.5711
+2025-10-20 09:13:36,174 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0065, alpha=1.09 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 09:13:46,302 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0106, alpha=0.36 -> chattering=2.1929, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 09:13:53,836 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0085, alpha=0.33 -> chattering=2.1930, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 09:13:58,939 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0096, alpha=1.17 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 09:14:04,532 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0141, alpha=1.00 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 09:14:15,151 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0158, alpha=1.83 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5716
+2025-10-20 09:14:20,053 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0037, alpha=1.48 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 09:14:26,670 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0185, alpha=1.48 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 09:14:34,127 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0120, alpha=1.48 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 09:14:40,080 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0166, alpha=0.82 -> chattering=2.1917, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 09:14:46,191 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0012, alpha=1.27 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 09:14:51,908 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0191, alpha=1.47 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 09:14:59,313 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0041, alpha=0.90 -> chattering=2.1914, settling=infs, overshoot=4.656rad, fitness=15.5681
+2025-10-20 09:15:05,992 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0019, alpha=1.53 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 09:15:13,733 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0176, alpha=0.72 -> chattering=2.1919, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 09:15:20,227 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0143, alpha=1.54 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 09:15:26,394 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0076, alpha=1.47 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 09:15:32,341 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0116, alpha=0.32 -> chattering=2.1930, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 09:15:38,899 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0187, alpha=1.52 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 09:15:38,901 - optimize_adaptive_boundary - INFO - Iteration 24/30: best_fitness=15.5665, best_params=[0.0037, 1.42]
+pyswarms.single.global_best:  77%|#######6  |23/30, best_cost=15.6pyswarms.single.global_best:  80%|########  |24/30, best_cost=15.62025-10-20 09:15:47,353 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0078, alpha=1.47 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 09:15:54,330 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0149, alpha=0.04 -> chattering=2.1955, settling=infs, overshoot=4.655rad, fitness=15.5700
+2025-10-20 09:16:01,254 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0181, alpha=0.57 -> chattering=2.1923, settling=infs, overshoot=4.656rad, fitness=15.5686
+2025-10-20 09:16:05,613 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0134, alpha=0.22 -> chattering=2.1934, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 09:16:15,632 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0100, alpha=0.02 -> chattering=2.1957, settling=infs, overshoot=4.655rad, fitness=15.5701
+2025-10-20 09:16:23,979 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0183, alpha=0.75 -> chattering=2.1918, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 09:16:27,672 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0102, alpha=0.13 -> chattering=2.1941, settling=infs, overshoot=4.656rad, fitness=15.5693
+2025-10-20 09:16:31,494 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0115, alpha=1.29 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 09:16:39,900 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0101, alpha=0.36 -> chattering=2.1929, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 09:16:43,921 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0047, alpha=1.59 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 09:16:47,503 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0164, alpha=0.84 -> chattering=2.1916, settling=infs, overshoot=4.656rad, fitness=15.5682
+2025-10-20 09:16:52,789 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0116, alpha=0.04 -> chattering=2.1955, settling=infs, overshoot=4.655rad, fitness=15.5700
+2025-10-20 09:16:56,579 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0049, alpha=1.72 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5722
+2025-10-20 09:17:02,971 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0110, alpha=1.23 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 09:17:14,587 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0109, alpha=1.18 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 09:17:22,410 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0136, alpha=1.09 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 09:17:26,294 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0165, alpha=1.86 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5715
+2025-10-20 09:17:34,124 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0126, alpha=1.49 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 09:17:43,282 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0161, alpha=1.50 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 09:17:53,559 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0017, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5737
+2025-10-20 09:18:02,891 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0126, alpha=0.03 -> chattering=2.1957, settling=infs, overshoot=4.655rad, fitness=15.5700
+2025-10-20 09:18:08,108 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0052, alpha=1.20 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 09:18:14,081 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0172, alpha=1.52 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 09:18:20,965 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0037, alpha=1.91 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5712
+2025-10-20 09:18:25,847 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0187, alpha=1.45 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:18:30,272 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0192, alpha=1.78 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5719
+2025-10-20 09:18:40,211 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0067, alpha=1.61 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5728
+2025-10-20 09:18:44,554 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0146, alpha=1.46 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:18:51,726 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0117, alpha=0.55 -> chattering=2.1924, settling=infs, overshoot=4.656rad, fitness=15.5687
+2025-10-20 09:19:00,297 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0040, alpha=1.62 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 09:19:00,306 - optimize_adaptive_boundary - INFO - Iteration 25/30: best_fitness=15.5670, best_params=[0.0115, 1.29]
+pyswarms.single.global_best:  80%|########  |24/30, best_cost=15.6pyswarms.single.global_best:  83%|########3 |25/30, best_cost=15.62025-10-20 09:19:08,912 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0117, alpha=1.49 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 09:19:15,846 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0118, alpha=1.24 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 09:19:20,102 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0124, alpha=1.90 -> chattering=2.1911, settling=infs, overshoot=4.658rad, fitness=15.5712
+2025-10-20 09:19:29,092 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0151, alpha=1.99 -> chattering=2.1914, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 09:19:39,257 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0142, alpha=1.47 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 09:19:49,728 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0188, alpha=1.73 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5722
+2025-10-20 09:19:56,466 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0170, alpha=0.10 -> chattering=2.1944, settling=infs, overshoot=4.656rad, fitness=15.5694
+2025-10-20 09:20:02,492 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0124, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5737
+2025-10-20 09:20:16,216 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0163, alpha=0.08 -> chattering=2.1947, settling=infs, overshoot=4.656rad, fitness=15.5696
+2025-10-20 09:20:22,363 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0196, alpha=1.50 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 09:20:29,389 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0090, alpha=1.85 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5715
+2025-10-20 09:20:32,984 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0140, alpha=1.06 -> chattering=2.1911, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 09:20:38,725 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0192, alpha=0.91 -> chattering=2.1914, settling=infs, overshoot=4.656rad, fitness=15.5681
+2025-10-20 09:20:45,225 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0126, alpha=0.07 -> chattering=2.1949, settling=infs, overshoot=4.655rad, fitness=15.5697
+2025-10-20 09:20:50,432 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0114, alpha=1.31 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 09:20:55,542 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0125, alpha=1.32 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 09:20:59,169 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0129, alpha=1.69 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5723
+2025-10-20 09:21:03,179 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0155, alpha=1.48 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 09:21:10,433 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0069, alpha=1.51 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 09:21:15,073 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0121, alpha=1.40 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:21:21,004 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0060, alpha=1.77 -> chattering=2.1907, settling=infs, overshoot=4.659rad, fitness=15.5720
+2025-10-20 09:21:25,144 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0101, alpha=1.28 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 09:21:31,004 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0096, alpha=1.62 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5727
+2025-10-20 09:21:42,579 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0188, alpha=0.69 -> chattering=2.1920, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 09:21:47,844 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0113, alpha=1.38 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:21:53,562 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0077, alpha=0.49 -> chattering=2.1925, settling=infs, overshoot=4.656rad, fitness=15.5687
+2025-10-20 09:21:58,706 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0120, alpha=1.57 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 09:22:05,368 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0117, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5737
+2025-10-20 09:22:16,013 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0060, alpha=0.80 -> chattering=2.1917, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 09:22:20,803 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0023, alpha=1.53 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 09:22:20,805 - optimize_adaptive_boundary - INFO - Iteration 26/30: best_fitness=15.5666, best_params=[0.0121, 1.40]
+pyswarms.single.global_best:  83%|########3 |25/30, best_cost=15.6pyswarms.single.global_best:  87%|########6 |26/30, best_cost=15.62025-10-20 09:22:27,253 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0149, alpha=1.48 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 09:22:32,895 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0094, alpha=0.35 -> chattering=2.1929, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 09:22:38,027 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0039, alpha=0.94 -> chattering=2.1913, settling=infs, overshoot=4.656rad, fitness=15.5680
+2025-10-20 09:22:43,229 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0088, alpha=1.35 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 09:22:47,675 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0148, alpha=0.75 -> chattering=2.1918, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 09:22:53,676 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0047, alpha=0.58 -> chattering=2.1923, settling=infs, overshoot=4.656rad, fitness=15.5686
+2025-10-20 09:22:58,669 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0142, alpha=0.58 -> chattering=2.1923, settling=infs, overshoot=4.656rad, fitness=15.5686
+2025-10-20 09:23:02,735 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0123, alpha=1.54 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 09:23:04,906 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0170, alpha=0.07 -> chattering=2.1948, settling=infs, overshoot=4.656rad, fitness=15.5696
+2025-10-20 09:23:08,421 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0108, alpha=1.36 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 09:23:10,260 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0180, alpha=0.59 -> chattering=2.1922, settling=infs, overshoot=4.656rad, fitness=15.5686
+2025-10-20 09:23:14,951 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0128, alpha=0.17 -> chattering=2.1938, settling=infs, overshoot=4.656rad, fitness=15.5692
+2025-10-20 09:23:16,781 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0078, alpha=0.25 -> chattering=2.1933, settling=infs, overshoot=4.656rad, fitness=15.5690
+2025-10-20 09:23:19,614 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0125, alpha=1.43 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5737
+2025-10-20 09:23:21,758 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0103, alpha=1.45 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:23:23,551 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0114, alpha=1.57 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 09:23:25,778 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0062, alpha=1.46 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:23:27,498 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0115, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5737
+2025-10-20 09:23:30,896 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0143, alpha=1.50 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 09:23:36,210 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0187, alpha=1.38 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:23:39,231 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0173, alpha=1.19 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 09:23:41,772 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0144, alpha=1.39 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:23:43,855 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0016, alpha=1.70 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5723
+2025-10-20 09:23:45,877 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0068, alpha=1.67 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5725
+2025-10-20 09:23:47,709 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0028, alpha=1.34 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 09:23:49,336 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0092, alpha=1.15 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 09:23:51,224 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0110, alpha=1.46 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5735
+2025-10-20 09:23:52,892 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0047, alpha=1.41 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 09:23:54,396 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0171, alpha=1.14 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 09:23:56,068 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0184, alpha=1.39 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:23:56,068 - optimize_adaptive_boundary - INFO - Iteration 27/30: best_fitness=15.5665, best_params=[0.0047, 1.41]
+pyswarms.single.global_best:  87%|########6 |26/30, best_cost=15.6pyswarms.single.global_best:  90%|######### |27/30, best_cost=15.62025-10-20 09:23:57,775 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0146, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:23:59,352 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0093, alpha=1.70 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5723
+2025-10-20 09:24:01,515 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0165, alpha=0.06 -> chattering=2.1951, settling=infs, overshoot=4.655rad, fitness=15.5698
+2025-10-20 09:24:03,236 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0174, alpha=0.61 -> chattering=2.1922, settling=infs, overshoot=4.656rad, fitness=15.5686
+2025-10-20 09:24:04,910 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0133, alpha=0.17 -> chattering=2.1937, settling=infs, overshoot=4.656rad, fitness=15.5692
+2025-10-20 09:24:07,884 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0053, alpha=1.57 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 09:24:09,718 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0037, alpha=1.19 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5673
+2025-10-20 09:24:12,019 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0110, alpha=1.56 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 09:24:13,698 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0142, alpha=0.11 -> chattering=2.1942, settling=infs, overshoot=4.656rad, fitness=15.5694
+2025-10-20 09:24:15,315 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0013, alpha=1.25 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 09:24:17,383 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0031, alpha=1.80 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5718
+2025-10-20 09:24:19,600 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0062, alpha=1.72 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5722
+2025-10-20 09:24:21,676 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0115, alpha=0.03 -> chattering=2.1957, settling=infs, overshoot=4.655rad, fitness=15.5701
+2025-10-20 09:24:24,436 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0105, alpha=0.65 -> chattering=2.1921, settling=infs, overshoot=4.656rad, fitness=15.5685
+2025-10-20 09:24:26,765 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0119, alpha=1.54 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 09:24:29,667 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0104, alpha=1.68 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5724
+2025-10-20 09:24:32,201 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0169, alpha=1.23 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5672
+2025-10-20 09:24:33,787 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0034, alpha=1.39 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:24:35,455 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0167, alpha=1.45 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:24:37,076 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0013, alpha=1.38 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:24:38,688 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0041, alpha=0.53 -> chattering=2.1924, settling=infs, overshoot=4.656rad, fitness=15.5687
+2025-10-20 09:24:41,018 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0171, alpha=1.50 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5734
+2025-10-20 09:24:43,754 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0128, alpha=1.70 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5723
+2025-10-20 09:24:46,553 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0096, alpha=0.40 -> chattering=2.1928, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 09:24:49,376 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0147, alpha=1.35 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 09:24:51,940 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0038, alpha=1.82 -> chattering=2.1908, settling=infs, overshoot=4.659rad, fitness=15.5716
+2025-10-20 09:24:54,173 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0044, alpha=1.35 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5668
+2025-10-20 09:24:56,229 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0146, alpha=1.40 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:24:58,474 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0024, alpha=1.39 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:25:01,913 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0079, alpha=1.25 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 09:25:01,914 - optimize_adaptive_boundary - INFO - Iteration 28/30: best_fitness=15.5666, best_params=[0.0146, 1.40]
+pyswarms.single.global_best:  90%|######### |27/30, best_cost=15.6pyswarms.single.global_best:  93%|#########3|28/30, best_cost=15.62025-10-20 09:25:03,888 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0100, alpha=1.41 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 09:25:06,476 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0125, alpha=0.80 -> chattering=2.1917, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 09:25:09,770 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0059, alpha=1.51 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 09:25:12,843 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0015, alpha=2.00 -> chattering=2.1914, settling=infs, overshoot=4.658rad, fitness=15.5707
+2025-10-20 09:25:16,352 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0087, alpha=0.03 -> chattering=2.1956, settling=infs, overshoot=4.655rad, fitness=15.5700
+2025-10-20 09:25:18,419 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0038, alpha=0.42 -> chattering=2.1927, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 09:25:22,193 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0113, alpha=1.58 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 09:25:25,283 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0097, alpha=1.55 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 09:25:27,918 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0080, alpha=0.32 -> chattering=2.1930, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 09:25:30,169 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0160, alpha=1.15 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 09:25:32,168 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0076, alpha=0.78 -> chattering=2.1918, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 09:25:35,580 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0149, alpha=0.96 -> chattering=2.1913, settling=infs, overshoot=4.656rad, fitness=15.5680
+2025-10-20 09:25:37,255 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0136, alpha=0.46 -> chattering=2.1926, settling=infs, overshoot=4.656rad, fitness=15.5688
+2025-10-20 09:25:39,279 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0078, alpha=1.97 -> chattering=2.1912, settling=infs, overshoot=4.658rad, fitness=15.5709
+2025-10-20 09:25:41,161 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0127, alpha=1.52 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5732
+2025-10-20 09:25:42,826 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0100, alpha=1.57 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 09:25:44,829 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0053, alpha=1.14 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 09:25:46,686 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0141, alpha=1.36 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 09:25:48,740 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0146, alpha=1.37 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 09:25:50,535 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0046, alpha=1.40 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 09:25:52,335 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0085, alpha=1.99 -> chattering=2.1913, settling=infs, overshoot=4.658rad, fitness=15.5708
+2025-10-20 09:25:54,216 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0161, alpha=1.57 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5730
+2025-10-20 09:25:55,913 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0036, alpha=1.68 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5724
+2025-10-20 09:25:57,660 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0082, alpha=1.72 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5722
+2025-10-20 09:26:00,183 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0059, alpha=1.40 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:26:03,911 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0138, alpha=0.34 -> chattering=2.1930, settling=infs, overshoot=4.656rad, fitness=15.5689
+2025-10-20 09:26:08,539 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0147, alpha=1.29 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 09:26:13,090 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0148, alpha=1.39 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:26:15,745 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0061, alpha=1.43 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5664
+2025-10-20 09:26:18,933 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0121, alpha=1.18 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 09:26:18,933 - optimize_adaptive_boundary - INFO - Iteration 29/30: best_fitness=15.5664, best_params=[0.0061, 1.43]
+pyswarms.single.global_best:  93%|#########3|28/30, best_cost=15.6pyswarms.single.global_best:  97%|#########6|29/30, best_cost=15.62025-10-20 09:26:21,167 - optimize_adaptive_boundary - INFO - Particle 0: epsilon=0.0048, alpha=1.39 -> chattering=2.1906, settling=infs, overshoot=4.655rad, fitness=15.5666
+2025-10-20 09:26:22,987 - optimize_adaptive_boundary - INFO - Particle 1: epsilon=0.0156, alpha=0.18 -> chattering=2.1937, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 09:26:25,206 - optimize_adaptive_boundary - INFO - Particle 2: epsilon=0.0147, alpha=0.79 -> chattering=2.1917, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 09:26:27,682 - optimize_adaptive_boundary - INFO - Particle 3: epsilon=0.0014, alpha=1.09 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 09:26:29,405 - optimize_adaptive_boundary - INFO - Particle 4: epsilon=0.0183, alpha=0.10 -> chattering=2.1944, settling=infs, overshoot=4.656rad, fitness=15.5694
+2025-10-20 09:26:31,961 - optimize_adaptive_boundary - INFO - Particle 5: epsilon=0.0178, alpha=1.82 -> chattering=2.1909, settling=infs, overshoot=4.659rad, fitness=15.5717
+2025-10-20 09:26:34,011 - optimize_adaptive_boundary - INFO - Particle 6: epsilon=0.0121, alpha=1.68 -> chattering=2.1906, settling=infs, overshoot=4.659rad, fitness=15.5724
+2025-10-20 09:26:36,019 - optimize_adaptive_boundary - INFO - Particle 7: epsilon=0.0083, alpha=1.51 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5733
+2025-10-20 09:26:39,177 - optimize_adaptive_boundary - INFO - Particle 8: epsilon=0.0195, alpha=0.73 -> chattering=2.1919, settling=infs, overshoot=4.656rad, fitness=15.5684
+2025-10-20 09:26:41,548 - optimize_adaptive_boundary - INFO - Particle 9: epsilon=0.0079, alpha=1.18 -> chattering=2.1908, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 09:26:43,589 - optimize_adaptive_boundary - INFO - Particle 10: epsilon=0.0116, alpha=0.06 -> chattering=2.1951, settling=infs, overshoot=4.655rad, fitness=15.5698
+2025-10-20 09:26:45,415 - optimize_adaptive_boundary - INFO - Particle 11: epsilon=0.0014, alpha=0.21 -> chattering=2.1935, settling=infs, overshoot=4.656rad, fitness=15.5691
+2025-10-20 09:26:47,799 - optimize_adaptive_boundary - INFO - Particle 12: epsilon=0.0121, alpha=0.94 -> chattering=2.1914, settling=infs, overshoot=4.656rad, fitness=15.5680
+2025-10-20 09:26:49,620 - optimize_adaptive_boundary - INFO - Particle 13: epsilon=0.0039, alpha=0.82 -> chattering=2.1916, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 09:26:52,270 - optimize_adaptive_boundary - INFO - Particle 14: epsilon=0.0122, alpha=1.45 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:26:54,653 - optimize_adaptive_boundary - INFO - Particle 15: epsilon=0.0096, alpha=1.44 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:26:57,575 - optimize_adaptive_boundary - INFO - Particle 16: epsilon=0.0142, alpha=1.15 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5675
+2025-10-20 09:26:59,350 - optimize_adaptive_boundary - INFO - Particle 17: epsilon=0.0195, alpha=1.37 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5667
+2025-10-20 09:27:00,991 - optimize_adaptive_boundary - INFO - Particle 18: epsilon=0.0072, alpha=1.31 -> chattering=2.1906, settling=infs, overshoot=4.656rad, fitness=15.5669
+2025-10-20 09:27:02,842 - optimize_adaptive_boundary - INFO - Particle 19: epsilon=0.0061, alpha=1.43 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5664
+2025-10-20 09:27:04,561 - optimize_adaptive_boundary - INFO - Particle 20: epsilon=0.0128, alpha=0.99 -> chattering=2.1912, settling=infs, overshoot=4.656rad, fitness=15.5679
+2025-10-20 09:27:06,272 - optimize_adaptive_boundary - INFO - Particle 21: epsilon=0.0098, alpha=1.55 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5731
+2025-10-20 09:27:08,083 - optimize_adaptive_boundary - INFO - Particle 22: epsilon=0.0170, alpha=1.59 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5729
+2025-10-20 09:27:09,742 - optimize_adaptive_boundary - INFO - Particle 23: epsilon=0.0014, alpha=0.84 -> chattering=2.1916, settling=infs, overshoot=4.656rad, fitness=15.5683
+2025-10-20 09:27:11,692 - optimize_adaptive_boundary - INFO - Particle 24: epsilon=0.0165, alpha=1.45 -> chattering=2.1905, settling=infs, overshoot=4.660rad, fitness=15.5736
+2025-10-20 09:27:13,324 - optimize_adaptive_boundary - INFO - Particle 25: epsilon=0.0139, alpha=1.09 -> chattering=2.1910, settling=infs, overshoot=4.656rad, fitness=15.5677
+2025-10-20 09:27:15,033 - optimize_adaptive_boundary - INFO - Particle 26: epsilon=0.0176, alpha=1.28 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5670
+2025-10-20 09:27:16,722 - optimize_adaptive_boundary - INFO - Particle 27: epsilon=0.0085, alpha=1.41 -> chattering=2.1905, settling=infs, overshoot=4.655rad, fitness=15.5665
+2025-10-20 09:27:19,983 - optimize_adaptive_boundary - INFO - Particle 28: epsilon=0.0075, alpha=1.27 -> chattering=2.1907, settling=infs, overshoot=4.656rad, fitness=15.5671
+2025-10-20 09:27:25,633 - optimize_adaptive_boundary - INFO - Particle 29: epsilon=0.0114, alpha=1.17 -> chattering=2.1909, settling=infs, overshoot=4.656rad, fitness=15.5674
+2025-10-20 09:27:25,633 - optimize_adaptive_boundary - INFO - Iteration 30/30: best_fitness=15.5664, best_params=[0.0061, 1.43]
+pyswarms.single.global_best:  97%|#########6|29/30, best_cost=15.6pyswarms.single.global_best: 100%|##########|30/30, best_cost=15.6pyswarms.single.global_best: 100%|##########|30/30, best_cost=15.6
+2025-10-20 09:27:25,643 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 15.566420259688366, best pos: [0.00608059 1.4325387 ]
+2025-10-20 09:27:25,643 - optimize_adaptive_boundary - INFO - Optimization complete!
+2025-10-20 09:27:25,643 - optimize_adaptive_boundary - INFO - Best parameters: epsilon_min=0.0061, alpha=1.43
+2025-10-20 09:27:25,643 - optimize_adaptive_boundary - INFO - Best fitness: 15.5664
+2025-10-20 09:27:25,643 - optimize_adaptive_boundary - INFO - Fitness improvement: 0.0003
+2025-10-20 09:27:25,643 - optimize_adaptive_boundary - INFO - Convergence iteration: 2/30
+2025-10-20 09:27:25,651 - __main__ - INFO - 
+Saving results to: D:/Projects/main/.artifacts/LT7_research_paper/experiments/results/results_seed1314.json
+2025-10-20 09:27:25,672 - __main__ - INFO - ================================================================================
+2025-10-20 09:27:25,674 - __main__ - INFO - COMPLETE
+2025-10-20 09:27:25,674 - __main__ - INFO - Best fitness: 15.5664
+2025-10-20 09:27:25,674 - __main__ - INFO - Best params: eps_min=0.006081, alpha=1.4325
+2025-10-20 09:27:25,674 - __main__ - INFO - Converged at iteration: 2
+2025-10-20 09:27:25,674 - __main__ - INFO - ================================================================================

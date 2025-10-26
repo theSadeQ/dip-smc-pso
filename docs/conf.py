@@ -14,9 +14,11 @@ from urllib.parse import quote
 # Ensure repository root and `src` are importable for autodoc/linkcode
 REPO_ROOT = Path(__file__).parent.parent.resolve()
 SRC_PATH = REPO_ROOT / "src"
+SCRIPTS_PATH = REPO_ROOT / "scripts"
 EXT_PATH = Path(__file__).parent / "_ext"
 sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(SRC_PATH))
+sys.path.insert(0, str(SCRIPTS_PATH))
 sys.path.insert(0, str(EXT_PATH))
 
 # Project information

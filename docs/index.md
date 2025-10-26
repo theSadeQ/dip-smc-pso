@@ -290,6 +290,7 @@ Traditional hierarchical text-based sitemap
 ## Quick Start
 
 ### First Simulation (5 minutes)
+
 ```bash
 # Install dependencies
 pip install -r requirements.txt
@@ -302,6 +303,7 @@ streamlit run streamlit_app.py
 ```
 
 ### Optimize Controller Gains (15 minutes)
+
 ```bash
 # Run PSO optimization
 python simulate.py --ctrl adaptive_smc --run-pso --save gains_adaptive.json
@@ -311,6 +313,7 @@ python simulate.py --load gains_adaptive.json --plot
 ```
 
 ### Run Test Suite
+
 ```bash
 pytest tests/ -v
 pytest tests/test_controllers/ --benchmark-only

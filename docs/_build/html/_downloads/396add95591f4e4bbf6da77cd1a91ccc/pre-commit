@@ -102,6 +102,60 @@ else
     echo "  ${YELLOW}Skipped${NC} (ruff not installed)"
 fi
 
+# 6. AUTOMATIC PROJECT STATE TRACKING
+echo "\n${YELLOW}[6/6]${NC} Auto-updating project state..."
+
+# Detect Python interpreter
+if command -v python3 &> /dev/null; then
+    PYTHON_CMD=python3
+elif command -v python &> /dev/null; then
+    PYTHON_CMD=python
+else
+    PYTHON_CMD=""
+fi
+
+PROJECT_ROOT=$(git rev-parse --show-toplevel)
+STATE_MANAGER="$PROJECT_ROOT/.dev_tools/project_state_manager.py"
+STATE_FILE="$PROJECT_ROOT/.ai/config/project_state.json"
+
+if [ -n "$PYTHON_CMD" ] && [ -f "$STATE_MANAGER" ]; then
+    # Initialize state if missing
+    if [ ! -f "$STATE_FILE" ]; then
+        "$PYTHON_CMD" "$STATE_MANAGER" init >/dev/null 2>&1 || true
+    fi
+
+    # Get commit message from editor or -m flag
+    COMMIT_MSG_FILE="$(git rev-parse --git-dir)/COMMIT_EDITMSG"
+    COMMIT_MSG=""
+    if [ -f "$COMMIT_MSG_FILE" ]; then
+        COMMIT_MSG=$(cat "$COMMIT_MSG_FILE" 2>/dev/null || echo "")
+    fi
+
+    # Detect task ID from commit message (e.g., "feat(MT-6): ...")
+    TASK_ID=$(echo "$COMMIT_MSG" | grep -oE '(QW|MT|LT)-[0-9]+' | head -n1 || echo "")
+
+    # Detect deliverables from staged files
+    DELIVERABLES=""
+    for file in $(git diff --cached --name-only --diff-filter=A); do
+        case "$file" in
+            benchmarks/*.md|docs/theory/*.md|src/controllers/*.py|optimization_results/*.json)
+                DELIVERABLES="$DELIVERABLES --deliverables $(basename "$file")"
+                ;;
+        esac
+    done
+
+    # Auto-complete task if detected
+    if [ -n "$TASK_ID" ] && [ -n "$DELIVERABLES" ]; then
+        eval "$PYTHON_CMD" "$STATE_MANAGER" complete "$TASK_ID" "$DELIVERABLES" >/dev/null 2>&1 || true
+        git add "$STATE_FILE" >/dev/null 2>&1 || true
+        print_status 0 "Auto-completed task $TASK_ID"
+    else
+        echo "  No task completion detected (normal for most commits)"
+    fi
+else
+    echo "  ${YELLOW}Skipped${NC} (state manager not found or Python unavailable)"
+fi
+
 # Summary
 echo "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 

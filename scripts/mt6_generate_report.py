@@ -1,23 +1,8 @@
-"""
-================================================================================
-MT-6 Report Auto-Generator
-================================================================================
+"""Generate MT-6 analysis reports from precomputed artifacts.
 
-Automatically generates complete MT-6 report by filling template with actual
-data from JSON summaries, CSV files, and statistical comparisons.
-
-Workflow:
-1. Load all data sources (JSON summaries, statistical comparison)
-2. Extract relevant metrics and statistics
-3. Generate interpretations and conclusions
-4. Fill report template
-5. Save as MT6_COMPLETE_REPORT.md
-
-Task: MT-6 Report Generation
-Reference: ROADMAP_EXISTING_PROJECT.md
-
-Author: MT-6 Orchestrator
-Created: October 19, 2025
+The script combines statistical summaries, PSO optimisation history, and a
+markdown template to produce the MT-6 deliverable that documents the adaptive
+boundary layer study.
 """
 
 import json
@@ -33,20 +18,44 @@ sys.path.insert(0, str(project_root))
 
 
 def load_json_data(json_path: Path) -> Dict:
-    """Load JSON data file."""
+    """Load a JSON artifact from disk.
+
+    Args:
+        json_path (Path): Location of the JSON file to read.
+
+    Returns:
+        Dict: Parsed JSON content.
+    """
     with open(json_path, 'r') as f:
         return json.load(f)
 
 
 def format_number(value: float, decimals: int = 2, nan_str: str = "N/A") -> str:
-    """Format number with specified decimals, handle NaN/None."""
+    """Format numeric values with safe fallbacks for missing data.
+
+    Args:
+        value (float): Value to format.
+        decimals (int, optional): Number of decimal places to include. Defaults to 2.
+        nan_str (str, optional): String to return when the value is ``None``, ``NaN``,
+            or infinite. Defaults to ``"N/A"``.
+
+    Returns:
+        str: Human-readable representation of the input value.
+    """
     if value is None or value != value or value == float('inf') or value == float('-inf'):  # None, NaN or inf
         return nan_str
     return f"{value:.{decimals}f}"
 
 
 def get_significance_stars(p_value: float) -> str:
-    """Get significance stars for p-value."""
+    """Map a p-value to a conventional significance star string.
+
+    Args:
+        p_value (float): P-value from a statistical test.
+
+    Returns:
+        str: Significance indicator (``***``, ``**``, ``*``, or ``ns``).
+    """
     if p_value < 0.001:
         return "***"
     elif p_value < 0.01:
@@ -58,7 +67,14 @@ def get_significance_stars(p_value: float) -> str:
 
 
 def get_effect_magnitude(cohens_d: float) -> str:
-    """Interpret Cohen's d effect size."""
+    """Translate Cohen's d into a human-readable qualitative label.
+
+    Args:
+        cohens_d (float): Cohen's d effect size.
+
+    Returns:
+        str: Qualitative magnitude description (for example ``"large"``).
+    """
     abs_d = abs(cohens_d)
     if abs_d > 1.2:
         return "very large"
@@ -73,7 +89,14 @@ def get_effect_magnitude(cohens_d: float) -> str:
 
 
 def get_significance_level(p_value: float) -> str:
-    """Get significance level description."""
+    """Generate descriptive text for a p-value significance level.
+
+    Args:
+        p_value (float): P-value produced by a statistical test.
+
+    Returns:
+        str: Phrase describing the strength of evidence.
+    """
     if p_value < 0.001:
         return "highly significant (p<0.001)"
     elif p_value < 0.01:
@@ -85,7 +108,14 @@ def get_significance_level(p_value: float) -> str:
 
 
 def generate_conclusions(comparison_data: Dict) -> Dict[str, str]:
-    """Generate conclusion sections based on statistical results."""
+    """Build markdown-ready conclusion sections from comparison results.
+
+    Args:
+        comparison_data (Dict): Parsed JSON content from the statistical comparison step.
+
+    Returns:
+        Dict[str, str]: Mapping of placeholder names to rich-text conclusions.
+    """
 
     chat_comp = comparison_data['comparisons'].get('chattering_index', {})
     improvement = chat_comp.get('improvement_percent', 0)
@@ -98,7 +128,7 @@ def generate_conclusions(comparison_data: Dict) -> Dict[str, str]:
 
 2. **Statistical Significance:** The improvement is {get_significance_level(p_value)}, with a {get_effect_magnitude(cohens_d)} effect size.
 
-3. **Optimal Parameters:** PSO identified ε_min={chat_comp.get('adaptive_mean', 0):.4f} and α={chat_comp.get('adaptive_mean', 0):.2f} as optimal adaptive boundary layer configuration.
+3. **Optimal Parameters:** PSO identified epsilon_min={chat_comp.get('adaptive_mean', 0):.4f} and alpha={chat_comp.get('adaptive_mean', 0):.2f} as optimal adaptive boundary layer configuration.
 
 4. **Robustness:** Results validated across 100 Monte Carlo runs with diverse initial conditions, demonstrating consistent performance improvement.
 """
@@ -110,7 +140,7 @@ def generate_conclusions(comparison_data: Dict) -> Dict[str, str]:
 
 2. **Energy Efficiency:** Reduced chattering correlates with smoother control signals, potentially extending actuator lifespan and reducing energy consumption.
 
-3. **Adaptive Strategy Validated:** The adaptive boundary layer approach (ε_eff = ε_min + α|ṡ|) successfully balances chattering suppression with control performance.
+3. **Adaptive Strategy Validated:** The adaptive boundary layer approach (epsilon_eff = epsilon_min + alpha|s_dot|) successfully balances chattering suppression with control performance.
 
 4. **PSO-Based Tuning:** Automated PSO optimization eliminates manual tuning, enabling rapid deployment across different system configurations.
 """
@@ -158,16 +188,21 @@ def generate_conclusions(comparison_data: Dict) -> Dict[str, str]:
 def generate_report(template_path: Path, output_path: Path,
                    fixed_summary: Dict, adaptive_summary: Dict,
                    comparison: Dict, pso_csv: pd.DataFrame) -> None:
-    """
-    Generate complete report by filling template with data.
+    """Populate the MT-6 markdown template with analysis results.
 
     Args:
-        template_path: Path to markdown template
-        output_path: Path to save generated report
-        fixed_summary: Fixed baseline JSON summary
-        adaptive_summary: Adaptive validation JSON summary
-        comparison: Statistical comparison JSON
-        pso_csv: PSO optimization history DataFrame
+        template_path (Path): Path to the markdown template that contains placeholders.
+        output_path (Path): Destination for the generated report.
+        fixed_summary (Dict): Parsed JSON describing fixed-baseline statistics.
+        adaptive_summary (Dict): Parsed JSON describing adaptive statistics.
+        comparison (Dict): Parsed JSON produced by the statistical comparison step.
+        pso_csv (pd.DataFrame): PSO optimisation history with convergence metrics.
+
+    Example:
+        >>> generate_report(Path("template.md"), Path("report.md"), fixed, adaptive, comparison, history_df)
+
+    Returns:
+        None
     """
 
     # Load template
@@ -230,7 +265,7 @@ def generate_report(template_path: Path, output_path: Path,
         "fixed_rms_ci_lower": format_number(fixed_stats['rms_control']['ci_lower'], 2),
         "fixed_rms_ci_upper": format_number(fixed_stats['rms_control']['ci_upper'], 2),
         "fixed_n_runs": str(fixed_summary['configuration']['n_runs']),
-        "fixed_observations": "High chattering observed with fixed boundary layer (ε=0.02), poor settling performance, moderate control effort.",
+        "fixed_observations": "High chattering observed with fixed boundary layer (epsilon=0.02), poor settling performance, moderate control effort.",
 
         # PSO optimization
         "best_fitness": format_number(best_fitness, 4),
@@ -300,7 +335,11 @@ def generate_report(template_path: Path, output_path: Path,
 
 
 def main():
-    """Generate MT-6 complete report."""
+    """Generate the MT-6 report artifact from existing analysis outputs.
+
+    Returns:
+        int: Zero on success, non-zero when required files are missing.
+    """
 
     print("="*80)
     print("MT-6 Report Auto-Generator")

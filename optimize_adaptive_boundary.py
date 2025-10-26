@@ -1,31 +1,9 @@
+"""Optimise MT-6 adaptive boundary layer parameters with particle swarm.
+
+This script orchestrates the PSO search, Monte Carlo validation, and report serialisation for the MT-6 study.
 """
-================================================================================
-MT-6 Adaptive Boundary Layer PSO Optimization Script
-================================================================================
 
-Optimize adaptive boundary layer parameters (ε_min, α) using PSO to minimize
-chattering while maintaining control performance.
 
-Goal: Find optimal (ε_min, α) where:
-  - ε_min: Base boundary layer thickness ∈ [0.001, 0.02]
-  - α: Adaptive slope coefficient ∈ [0.0, 2.0]
-  - Effective thickness: ε_eff = ε_min + α|ṡ|
-
-Fitness Function:
-  - Primary: chattering_index (70% weight)
-  - Constraint: settling_time penalty if >5s (15% weight)
-  - Constraint: overshoot penalty if >0.3 rad (15% weight)
-
-PSO Configuration:
-  - Swarm size: 20 particles
-  - Iterations: 30
-  - Fitness evaluation: average over 10 Monte Carlo runs
-  - Random seed: 42 (reproducibility)
-
-Author: Agent B (Multi-Agent Orchestration)
-Created: October 2025 (Week 2, Task MT-6)
-Reference: ROADMAP_EXISTING_PROJECT.md
-"""
 
 import json
 import csv
@@ -56,7 +34,16 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class OptimizationResult:
-    """Results from PSO optimization."""
+    """Container for PSO optimisation outputs.
+
+    Attributes:
+        best_epsilon_min: Best epsilon_min discovered during optimisation.
+        best_alpha: Best alpha discovered during optimisation.
+        best_fitness: Objective value associated with the best parameters.
+        convergence_iterations: Iteration index where the best fitness was recorded.
+        fitness_improvement: Percent improvement achieved across the search.
+        optimization_history: History entries captured after each PSO iteration.
+    """
     best_epsilon_min: float
     best_alpha: float
     best_fitness: float
@@ -66,25 +53,30 @@ class OptimizationResult:
 
 
 def generate_initial_conditions(n_samples: int, seed: int = 42) -> np.ndarray:
-    """
-    Generate random initial conditions for Monte Carlo simulation.
+    """Generate random initial conditions for Monte Carlo simulation.
 
-    State vector: [x, theta1, theta2, x_dot, theta1_dot, theta2_dot]
+    The returned state vector has the form ``[x, theta1, theta2, x_dot,
+    theta1_dot, theta2_dot]``.
 
     Args:
-        n_samples: Number of initial condition samples
-        seed: Random seed for reproducibility
+        n_samples (int): Number of initial condition samples to draw.
+        seed (int, optional): Seed used for reproducible draws. Defaults to 42.
 
     Returns:
-        Array of shape (n_samples, 6) with random initial conditions
+        np.ndarray: Array shaped ``(n_samples, 6)`` containing random initial
+        conditions.
+
+    Example:
+        >>> generate_initial_conditions(3, seed=0).shape
+        (3, 6)
     """
     rng = np.random.default_rng(seed)
 
     # Random initial angles and velocities
-    theta1 = rng.uniform(-0.3, 0.3, n_samples)  # ±0.3 rad
-    theta2 = rng.uniform(-0.3, 0.3, n_samples)  # ±0.3 rad
-    theta1_dot = rng.uniform(-0.5, 0.5, n_samples)  # ±0.5 rad/s
-    theta2_dot = rng.uniform(-0.5, 0.5, n_samples)  # ±0.5 rad/s
+    theta1 = rng.uniform(-0.3, 0.3, n_samples)  # +/-0.3 rad
+    theta2 = rng.uniform(-0.3, 0.3, n_samples)  # +/-0.3 rad
+    theta1_dot = rng.uniform(-0.5, 0.5, n_samples)  # +/-0.5 rad/s
+    theta2_dot = rng.uniform(-0.5, 0.5, n_samples)  # +/-0.5 rad/s
 
     # Cart position and velocity (start at origin, small velocity)
     x = np.zeros(n_samples)
@@ -97,22 +89,23 @@ def generate_initial_conditions(n_samples: int, seed: int = 42) -> np.ndarray:
 
 def compute_settling_time(state_history: np.ndarray, dt: float = 0.01,
                          tolerance: float = 0.02) -> float:
-    """
-    Compute settling time (time to reach within 2% of final value).
+    """Compute the time required for the pendulum angles to settle.
 
     Args:
-        state_history: State trajectory (T, 6)
-        dt: Time step
-        tolerance: Settling tolerance (2% of final value)
+        state_history (np.ndarray): State trajectory with shape ``(T, 6)``.
+        dt (float, optional): Simulation time step. Defaults to 0.01 seconds.
+        tolerance (float, optional): Allowable deviation from the target angle.
+            Defaults to 0.02 radians.
 
     Returns:
-        Settling time in seconds (inf if not settled)
+        float: Settling time in seconds, or ``float('inf')`` when the trajectory
+        never settles within the tolerance band.
     """
     # Check pendulum angles (indices 1, 2)
     theta1 = state_history[:, 1]
     theta2 = state_history[:, 2]
 
-    # Upright position is θ = 0
+    # Upright position is theta = 0
     target = 0.0
     abs_error = np.maximum(np.abs(theta1 - target), np.abs(theta2 - target))
 
@@ -131,14 +124,13 @@ def compute_settling_time(state_history: np.ndarray, dt: float = 0.01,
 
 
 def compute_overshoot(state_history: np.ndarray) -> float:
-    """
-    Compute maximum overshoot in pendulum angles.
+    """Compute the maximum angular overshoot across both pendulums.
 
     Args:
-        state_history: State trajectory (T, 6)
+        state_history (np.ndarray): State trajectory with shape ``(T, 6)``.
 
     Returns:
-        Maximum overshoot in radians
+        float: Maximum absolute angle observed, measured in radians.
     """
     theta1 = state_history[:, 1]
     theta2 = state_history[:, 2]
@@ -154,20 +146,20 @@ def evaluate_single_run(epsilon_min: float, alpha: float,
                        initial_condition: np.ndarray,
                        config: Any, dynamics_params: DIPParams,
                        dt: float = 0.01, T: float = 10.0) -> Dict[str, float]:
-    """
-    Evaluate adaptive boundary layer for a single initial condition.
+    """Evaluate a single trajectory with the adaptive boundary layer controller.
 
     Args:
-        epsilon_min: Base boundary layer thickness
-        alpha: Adaptive slope coefficient
-        initial_condition: Initial state (6,)
-        config: Configuration object (unused, kept for interface compatibility)
-        dynamics_params: Physics parameters
-        dt: Time step
-        T: Simulation duration
+        epsilon_min (float): Base boundary layer thickness.
+        alpha (float): Adaptive slope coefficient applied to the sliding surface.
+        initial_condition (np.ndarray): Initial state vector of length 6.
+        config (Any): Configuration object (unused; preserved for API compatibility).
+        dynamics_params (DIPParams): Physical parameters of the DIP system.
+        dt (float, optional): Simulation time step. Defaults to 0.01 seconds.
+        T (float, optional): Simulation duration in seconds. Defaults to 10.0.
 
     Returns:
-        Dictionary with metrics: chattering_index, settling_time, overshoot
+        Dict[str, float]: Metrics including ``chattering_index``, ``settling_time``,
+        and ``overshoot``.
     """
     # Create classical SMC config with adaptive boundary layer
     # Use PSO-optimized gains from gain optimization (Oct 19, 2025)
@@ -251,7 +243,7 @@ def evaluate_single_run(epsilon_min: float, alpha: float,
         }
 
     except Exception as e:
-        logger.warning(f"Simulation failed for ε={epsilon_min:.4f}, α={alpha:.4f}: {e}")
+        logger.warning(f"Simulation failed for epsilon={epsilon_min:.4f}, alpha={alpha:.4f}: {e}")
         return {
             'chattering_index': 1e6,
             'settling_time': 1e6,
@@ -262,17 +254,19 @@ def evaluate_single_run(epsilon_min: float, alpha: float,
 
 def fitness_function(params: np.ndarray, mc_samples: int = 10, seed: int = 42,
                     dynamics_params: DIPParams = None) -> np.ndarray:
-    """
-    PSO fitness function: minimize chattering with performance constraints.
+    """Evaluate the PSO objective for a batch of epsilon/alpha pairs.
 
     Args:
-        params: Parameter array (n_particles, 2) where each row is [epsilon_min, alpha]
-        mc_samples: Number of Monte Carlo samples per evaluation
-        seed: Random seed
-        dynamics_params: Pre-loaded dynamics parameters (to avoid re-loading config)
+        params (np.ndarray): Particle matrix shaped ``(n_particles, 2)`` where each
+            row stores ``[epsilon_min, alpha]``.
+        mc_samples (int, optional): Number of Monte Carlo rollouts per particle.
+            Defaults to 10.
+        seed (int, optional): Random seed for Monte Carlo sampling. Defaults to 42.
+        dynamics_params (DIPParams | None, optional): Pre-instantiated dynamics
+            parameters, provided to avoid repeated construction. Defaults to None.
 
     Returns:
-        Fitness values (n_particles,) - lower is better
+        np.ndarray: Fitness values of shape ``(n_particles,)`` where lower is better.
     """
     n_particles = params.shape[0]
     fitness_values = np.zeros(n_particles)
@@ -346,7 +340,7 @@ def fitness_function(params: np.ndarray, mc_samples: int = 10, seed: int = 42,
 
         fitness_values[i] = fitness
 
-        logger.info(f"Particle {i}: ε={epsilon_min:.4f}, α={alpha:.2f} → "
+        logger.info(f"Particle {i}: epsilon={epsilon_min:.4f}, alpha={alpha:.2f} -> "
                    f"chattering={avg_chattering:.4f}, settling={avg_settling:.2f}s, "
                    f"overshoot={avg_overshoot:.3f}rad, fitness={fitness:.4f}")
 
@@ -355,16 +349,18 @@ def fitness_function(params: np.ndarray, mc_samples: int = 10, seed: int = 42,
 
 def run_pso_optimization(n_particles: int = 20, n_iterations: int = 30,
                         seed: int = 42) -> OptimizationResult:
-    """
-    Run PSO optimization to find best adaptive boundary layer parameters.
+    """Execute PSO to identify the best adaptive boundary layer parameters.
 
     Args:
-        n_particles: Swarm size
-        n_iterations: Number of iterations
-        seed: Random seed
+        n_particles (int, optional): Size of the PSO swarm. Defaults to 20.
+        n_iterations (int, optional): Number of iterations to run. Defaults to 30.
+        seed (int, optional): Random seed used for PSO reproducibility. Defaults to 42.
+
+    Example:
+        >>> result = run_pso_optimization(n_particles=10, n_iterations=5)
 
     Returns:
-        OptimizationResult with best parameters and convergence info
+        OptimizationResult: Dataclass containing the best parameters and history.
     """
     logger.info("Starting PSO optimization for adaptive boundary layer...")
     logger.info(f"Swarm size: {n_particles}, Iterations: {n_iterations}, Seed: {seed}")
@@ -439,7 +435,7 @@ def run_pso_optimization(n_particles: int = 20, n_iterations: int = 30,
             break
 
     logger.info(f"Optimization complete!")
-    logger.info(f"Best parameters: ε_min={best_epsilon_min:.4f}, α={best_alpha:.2f}")
+    logger.info(f"Best parameters: epsilon_min={best_epsilon_min:.4f}, alpha={best_alpha:.2f}")
     logger.info(f"Best fitness: {best_cost:.4f}")
     logger.info(f"Fitness improvement: {fitness_improvement:.4f}")
     logger.info(f"Convergence iteration: {convergence_iter}/{n_iterations}")
@@ -456,17 +452,16 @@ def run_pso_optimization(n_particles: int = 20, n_iterations: int = 30,
 
 def validate_best_parameters(epsilon_min: float, alpha: float,
                             n_runs: int = 100, seed: int = 42) -> Dict[str, Any]:
-    """
-    Validate best parameters with 100 Monte Carlo runs.
+    """Validate the best parameters using repeated Monte Carlo simulations.
 
     Args:
-        epsilon_min: Best base boundary layer thickness
-        alpha: Best adaptive slope coefficient
-        n_runs: Number of validation runs
-        seed: Random seed
+        epsilon_min (float): Base boundary layer thickness to validate.
+        alpha (float): Adaptive slope coefficient to validate.
+        n_runs (int, optional): Number of Monte Carlo simulations to run. Defaults to 100.
+        seed (int, optional): Random seed for reproducibility. Defaults to 42.
 
     Returns:
-        Dictionary with validation statistics
+        Dict[str, Any]: Aggregated validation statistics and success rates.
     """
     logger.info(f"Validating best parameters with {n_runs} Monte Carlo runs...")
 
@@ -536,22 +531,21 @@ def validate_best_parameters(epsilon_min: float, alpha: float,
 
     logger.info(f"Validation complete!")
     logger.info(f"Success rate: {validation_stats['success_rate']*100:.1f}%")
-    logger.info(f"Chattering: {chat_mean:.4f} ± {chat_std:.4f} (95% CI: [{chat_ci[0]:.4f}, {chat_ci[1]:.4f}])")
-    logger.info(f"Settling: {settle_mean:.2f} ± {settle_std:.2f}s (95% CI: [{settle_ci[0]:.2f}, {settle_ci[1]:.2f}])")
-    logger.info(f"Overshoot: {over_mean:.3f} ± {over_std:.3f}rad (95% CI: [{over_ci[0]:.3f}, {over_ci[1]:.3f}])")
+    logger.info(f"Chattering: {chat_mean:.4f} +/- {chat_std:.4f} (95% CI: [{chat_ci[0]:.4f}, {chat_ci[1]:.4f}])")
+    logger.info(f"Settling: {settle_mean:.2f} +/- {settle_std:.2f}s (95% CI: [{settle_ci[0]:.2f}, {settle_ci[1]:.2f}])")
+    logger.info(f"Overshoot: {over_mean:.3f} +/- {over_std:.3f}rad (95% CI: [{over_ci[0]:.3f}, {over_ci[1]:.3f}])")
 
     return validation_stats
 
 
 def save_results(opt_result: OptimizationResult, validation_stats: Dict[str, Any],
                 output_csv: Path):
-    """
-    Save optimization results to CSV file.
+    """Persist optimisation history and validation statistics to disk.
 
     Args:
-        opt_result: PSO optimization results
-        validation_stats: Validation statistics
-        output_csv: Output CSV path
+        opt_result (OptimizationResult): Results returned by the PSO optimisation.
+        validation_stats (Dict[str, Any]): Aggregated validation metrics.
+        output_csv (Path): Destination path for the CSV export.
     """
     logger.info(f"Saving results to {output_csv}...")
 
@@ -598,7 +592,11 @@ def save_results(opt_result: OptimizationResult, validation_stats: Dict[str, Any
 
 
 def main():
-    """Main optimization workflow."""
+    """Run the MT-6 PSO workflow end-to-end from optimisation to reporting.
+
+    Returns:
+        None
+    """
     logger.info("=" * 80)
     logger.info("MT-6 Adaptive Boundary Layer PSO Optimization")
     logger.info("=" * 80)
@@ -639,16 +637,16 @@ def main():
     logger.info("OPTIMIZATION COMPLETE")
     logger.info("=" * 80)
     logger.info(f"Best Parameters:")
-    logger.info(f"  ε_min = {opt_result.best_epsilon_min:.6f}")
-    logger.info(f"  α = {opt_result.best_alpha:.6f}")
+    logger.info(f"  epsilon_min = {opt_result.best_epsilon_min:.6f}")
+    logger.info(f"  alpha = {opt_result.best_alpha:.6f}")
     logger.info(f"\nOptimization Summary:")
     logger.info(f"  Best Fitness: {opt_result.best_fitness:.6f}")
     logger.info(f"  Convergence: {opt_result.convergence_iterations}/{N_ITERATIONS} iterations")
     logger.info(f"  Improvement: {opt_result.fitness_improvement:.6f}")
     logger.info(f"\nValidation Results (100 runs):")
-    logger.info(f"  Chattering: {validation_stats['chattering_index_mean']:.4f} ± {validation_stats['chattering_index_std']:.4f}")
-    logger.info(f"  Settling: {validation_stats['settling_time_mean']:.2f} ± {validation_stats['settling_time_std']:.2f}s")
-    logger.info(f"  Overshoot: {validation_stats['overshoot_mean']:.3f} ± {validation_stats['overshoot_std']:.3f}rad")
+    logger.info(f"  Chattering: {validation_stats['chattering_index_mean']:.4f} +/- {validation_stats['chattering_index_std']:.4f}")
+    logger.info(f"  Settling: {validation_stats['settling_time_mean']:.2f} +/- {validation_stats['settling_time_std']:.2f}s")
+    logger.info(f"  Overshoot: {validation_stats['overshoot_mean']:.3f} +/- {validation_stats['overshoot_std']:.3f}rad")
     logger.info(f"\nResults saved to: {OUTPUT_CSV}")
     logger.info("=" * 80)
 

@@ -11,3 +11,10 @@ auto_examples/index
 ``` -->
 
 <!-- See the full gallery: {ref}`auto_examples/index` -->
+
+
+```{toctree}
+:hidden:
+
+mathematical_notation_standards
+```

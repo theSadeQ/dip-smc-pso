@@ -103,13 +103,36 @@ function Initialize-AccountDirectory {
     param([int]$AccNum)
 
     $accountDir = "$env:USERPROFILE\.claude$AccNum"
+    $needsInit = $false
 
     if (-not (Test-Path $accountDir)) {
         Write-Info "Creating account directory: $accountDir"
         New-Item -ItemType Directory -Path $accountDir -Force | Out-Null
+        $needsInit = $true
         Write-Success "Account directory created"
     } else {
         Write-Info "Account directory exists: $accountDir"
+        # Check if subdirectories exist
+        if (-not (Test-Path "$accountDir\ide") -or -not (Test-Path "$accountDir\projects")) {
+            $needsInit = $true
+        }
+    }
+
+    # Initialize required subdirectories
+    if ($needsInit) {
+        Write-Info "Initializing account directory structure..."
+
+        # Required subdirectories for Claude Code
+        $requiredDirs = @("ide", "projects", "session-env", "shell-snapshots", "statsig", "todos", "debug", "downloads")
+
+        foreach ($dir in $requiredDirs) {
+            $targetDir = Join-Path $accountDir $dir
+            if (-not (Test-Path $targetDir)) {
+                New-Item -ItemType Directory -Path $targetDir -Force | Out-Null
+            }
+        }
+
+        Write-Success "Account structure initialized ($($requiredDirs.Count) directories)"
     }
 
     # Validate no auth junctions
@@ -160,6 +183,7 @@ function Get-AccountStatus {
             Exists = $false
             Authenticated = $false
             FileCount = 0
+            DirsInitialized = $false
         }
     }
 
@@ -167,10 +191,14 @@ function Get-AccountStatus {
     $authenticated = Test-Path $credFile
     $fileCount = (Get-ChildItem $accountDir -Force -ErrorAction SilentlyContinue).Count
 
+    # Check if directories are initialized
+    $dirsInitialized = (Test-Path "$accountDir\ide") -and (Test-Path "$accountDir\projects")
+
     return @{
         Exists = $true
         Authenticated = $authenticated
         FileCount = $fileCount
+        DirsInitialized = $dirsInitialized
     }
 }
 
@@ -192,16 +220,30 @@ if ($Validate) {
     1..$MaxAccounts | ForEach-Object {
         $status = Get-AccountStatus $_
         if ($status.Exists) {
-            $authStatus = if ($status.Authenticated) { "[OK] Authenticated" } else { "[!] Needs login" }
-            $results += "Account $_`: $authStatus ($($status.FileCount) files)"
+            Write-Host "  Account $_`: " -NoNewline -ForegroundColor White
+
+            if ($status.Authenticated) {
+                Write-Host "[OK] Authenticated" -NoNewline -ForegroundColor Green
+            } else {
+                Write-Host "[!] Needs login" -NoNewline -ForegroundColor Yellow
+            }
+
+            Write-Host " | Dirs: " -NoNewline
+            if ($status.DirsInitialized) {
+                Write-Host "[OK]" -NoNewline -ForegroundColor Green
+            } else {
+                Write-Host "[X]" -NoNewline -ForegroundColor Red
+            }
+
+            Write-Host " | Files: $($status.FileCount)" -ForegroundColor Gray
+            $results += $_
         }
     }
 
     if ($results.Count -eq 0) {
         Write-Info "No account directories found. Run switcher to create accounts."
     } else {
-        Write-Success "Found $($results.Count) account(s):"
-        $results | ForEach-Object { Write-Host "  $_" -ForegroundColor White }
+        Write-Success "Found $($results.Count) account(s)"
     }
 
     exit 0
