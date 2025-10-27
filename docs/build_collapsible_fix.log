@@ -1,53 +1,0 @@
-[01mRunning Sphinx v8.2.3[39;49;00m
-[01mloading translations [en]... [39;49;00mdone
-C:\Users\sadeg\AppData\Roaming\Python\Python312\site-packages\sphinxcontrib\autoclassdiag.py:3: RemovedInSphinx90Warning: The alias 'sphinx.util.ExtensionError' is deprecated, use 'sphinx.errors.ExtensionError' instead. Check CHANGES for Sphinx API modifications.
-  from sphinx.util import ExtensionError, import_object
-[01mloading pickled environment... [39;49;00mchecking bibtex cache... up to date
-The configuration has changed (6 options: 'html_css_files', 'html_js_files', 'html_static_path', 'linkcode_resolve', 'mathjax3_config', ...)
-done
-[01mmyst v4.0.1:[39;49;00m MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions={'colon_fence', 'dollarmath', 'amsmath', 'tasklist', 'linkify', 'deflist', 'fieldlist'}, disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=3, heading_slug_func=None, html_meta={}, footnote_sort=True, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
-[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
-[01mwriting output... [39;49;00m
-[01mbuilding [html]: [39;49;00mtargets for 0 source files that are out of date
-[01mupdating environment: [39;49;00m0 added, 1 changed, 0 removed
-[2K[01mreading sources... [39;49;00m[100%] [35mapi/index[39;49;00m
-[01mlooking for now-outdated files... [39;49;00mnone found
-[01mpickling environment... [39;49;00mdone
-[01mchecking consistency... [39;49;00mD:\Projects\main\docs\guides\getting-started.md: document is referenced in multiple toctrees: ['guides/index', 'index'], selecting: index <- guides/getting-started
-D:\Projects\main\docs\guides\getting-started-validation-report.md: document is referenced in multiple toctrees: ['guides/index', 'index'], selecting: index <- guides/getting-started-validation-report
-D:\Projects\main\docs\reference\analysis\index.md: document is referenced in multiple toctrees: ['reference/index', 'index'], selecting: reference/index <- reference/analysis/index
-D:\Projects\main\docs\reference\controllers\index.md: document is referenced in multiple toctrees: ['reference/index', 'index'], selecting: reference/index <- reference/controllers/index
-D:\Projects\main\docs\reference\interfaces\index.md: document is referenced in multiple toctrees: ['reference/index', 'index'], selecting: reference/index <- reference/interfaces/index
-D:\Projects\main\docs\reference\optimization\index.md: document is referenced in multiple toctrees: ['reference/index', 'index'], selecting: reference/index <- reference/optimization/index
-D:\Projects\main\docs\reference\plant\index.md: document is referenced in multiple toctrees: ['reference/index', 'index'], selecting: reference/index <- reference/plant/index
-D:\Projects\main\docs\reference\simulation\index.md: document is referenced in multiple toctrees: ['reference/index', 'index'], selecting: reference/index <- reference/simulation/index
-D:\Projects\main\docs\reference\utils\index.md: document is referenced in multiple toctrees: ['reference/index', 'index'], selecting: reference/index <- reference/utils/index
-D:\Projects\main\docs\testing\benchmarking_framework_technical_guide.md: document is referenced in multiple toctrees: ['testing/index', 'testing/index'], selecting: testing/index <- testing/benchmarking_framework_technical_guide
-D:\Projects\main\docs\testing\guides\integration_workflows.md: document is referenced in multiple toctrees: ['testing/index', 'testing/index'], selecting: testing/index <- testing/guides/integration_workflows
-D:\Projects\main\docs\testing\guides\performance_benchmarking.md: document is referenced in multiple toctrees: ['testing/index', 'testing/index'], selecting: testing/index <- testing/guides/performance_benchmarking
-D:\Projects\main\docs\testing\validation_methodology_guide.md: document is referenced in multiple toctrees: ['testing/index', 'testing/index'], selecting: testing/index <- testing/validation_methodology_guide
-done
-[01mpreparing documents... [39;49;00mdone
-[01mcopying assets... [39;49;00m
-[2K[01mcopying downloadable files... [39;49;00m[  7%] [33m../config.yaml[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 14%] [33m../.github/workflows/docs-quality.yml[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 21%] [33m../scripts/validation/run_quality_checks.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 29%] [33m../scripts/validation/fix_common_issues.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 36%] [33m../.git/hooks/pre-commit[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 43%] [33m../src/optimization/algorithms/pso_optimizer.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 50%] [33m../src/simulation/engines/simulation_runner.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 57%] [33m../src/simulation/engines/vector_sim.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 64%] [33m../src/simulation/core/simulation_context.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 71%] [33m../src/plant/models/simplified/config.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 79%] [33m../src/plant/models/simplified/physics.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 86%] [33mtesting/templates/test_template.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[ 93%] [33m../src/plant/core/numerical_stability.py[39;49;00m[2K[01mcopying downloadable files... [39;49;00m[100%] [33m../src/optimization/validation/pso_bounds_validator.py[39;49;00m
-[01mcopying static files... [39;49;00m
-Writing evaluated template result to D:\Projects\main\docs\_build\html\_static\basic.css
-Writing evaluated template result to D:\Projects\main\docs\_build\html\_static\documentation_options.js
-Writing evaluated template result to D:\Projects\main\docs\_build\html\_static\language_data.js
-Writing evaluated template result to D:\Projects\main\docs\_build\html\_static\copybutton.js
-[01mcopying static files: [39;49;00mdone
-[01mcopying extra files... [39;49;00m
-[01mcopying extra files: [39;49;00mdone
-[01mcopying assets: [39;49;00mdone
-[2K[01mwriting output... [39;49;00m[ 50%] [32mapi/index[39;49;00m[2K[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
-[01mgenerating indices... [39;49;00mgenindex py-modindex done
-[2K[01mhighlighting module code... [39;49;00m[ 20%] [94mfactory_module[39;49;00m[2K[01mhighlighting module code... [39;49;00m[ 40%] [94msrc.controllers.factory[39;49;00m[2K[01mhighlighting module code... [39;49;00m[ 60%] [94msrc.controllers.factory.legacy_factory[39;49;00m[2K[01mhighlighting module code... [39;49;00m[ 80%] [94msrc.controllers.factory.smc_factory[39;49;00m[2K[01mhighlighting module code... [39;49;00m[100%] [94mtyping[39;49;00m
-[01mwriting additional pages... [39;49;00msearch done
-[01mdumping search index in English (code: en)... [39;49;00mdone
-[01mdumping object inventory... [39;49;00mdone
-
-====================== slowest reading durations =======================
-6.875 api/index
-[01mbuild succeeded.[39;49;00m
-
-The HTML pages are in _build\html.
