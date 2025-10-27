@@ -537,11 +537,13 @@ python scripts/cleanup/workspace_cleanup.py --verbose 2>/dev/null || echo "Skipp
 **CRITICAL**: The following files are PERMANENT and must NEVER be deleted during workspace cleanup:
 
 **Multi-Account System**:
-- `.project/dev_tools/Switch-ClaudeAccount.ps1` - Multi-account switcher with auth isolation
+- `.project/dev_tools/Switch-ClaudeAccount.ps1` - Multi-account switcher with auth isolation (CANONICAL VERSION)
   - Purpose: Safe switching between up to 50,000 Claude Code accounts
   - Features: Isolated auth, session state tracking, account validation
   - Usage: `Switch-ClaudeAccount -AccountNum 5` or `Switch-ClaudeAccount -Primary`
   - Status: OPERATIONAL (Created 2025-10-11, Recovered 2025-10-27)
+  - **Backward Compatibility**: Copy also exists at `.dev_tools/Switch-ClaudeAccount.ps1` (gitignored) for external tools
+  - **Important**: Only edit the canonical version in `.project/dev_tools/`, then copy to `.dev_tools/` if needed
 
 **Why Protected**:
 - User-critical workflow tools
