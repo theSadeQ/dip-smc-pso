@@ -67,14 +67,14 @@ def page(context):
 @pytest.fixture(scope="function")
 def helper(page):
     """Create PlaywrightHelper instance."""
-    artifacts_path = Path("tests/browser_automation/artifacts")
+    artifacts_path = Path(".cache/browser_automation/artifacts")
     return PlaywrightHelper(page, base_path=artifacts_path)
 
 
 @pytest.fixture(scope="function")
 def screenshot_manager():
     """Create ScreenshotManager instance."""
-    artifacts_path = Path("tests/browser_automation/artifacts")
+    artifacts_path = Path(".cache/browser_automation/artifacts")
     return ScreenshotManager(artifacts_path)
 
 
