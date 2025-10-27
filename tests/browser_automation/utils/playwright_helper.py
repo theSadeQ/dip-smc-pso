@@ -29,7 +29,7 @@ class PlaywrightHelper:
             base_path: Base path for artifacts (screenshots, logs)
         """
         self.page = page
-        self.base_path = base_path or Path("tests/browser_automation/artifacts")
+        self.base_path = base_path or Path(".cache/browser_automation/artifacts")
         self.console_logs: List[Dict[str, Any]] = []
         self.errors: List[Dict[str, Any]] = []
 
