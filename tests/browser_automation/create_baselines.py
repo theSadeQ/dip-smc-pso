@@ -21,7 +21,7 @@ from utils.screenshot_manager import ScreenshotManager
 def create_baselines():
     """Create baseline screenshots for visual regression testing."""
 
-    artifacts_path = Path("tests/browser_automation/artifacts")
+    artifacts_path = Path(".cache/browser_automation/artifacts")
     screenshot_manager = ScreenshotManager(artifacts_path)
 
     with sync_playwright() as p:

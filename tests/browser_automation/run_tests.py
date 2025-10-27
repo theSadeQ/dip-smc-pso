@@ -47,7 +47,7 @@ def _run_single_browser(browser, test_category, headed, timestamp):
         f"--browser={browser}",
         "-v",
         "--tb=short",
-        f"--html=tests/browser_automation/artifacts/reports/report_{browser}_{timestamp}.html",
+        f"--html=.cache/browser_automation/artifacts/reports/report_{browser}_{timestamp}.html",
         "--self-contained-html"
     ]
 
