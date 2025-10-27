@@ -532,6 +532,27 @@ python scripts/cleanup/workspace_cleanup.py --verbose 2>/dev/null || echo "Skipp
 - AI config guide: `.project/ai/config/workspace_organization.md`
 - Oct 2025 cleanup lessons (1.8GB recovered): `.project/ai/config/WORKSPACE_CLEANUP_2025-10-26.md`
 
+### 14.1 Protected Files (NEVER DELETE)
+
+**CRITICAL**: The following files are PERMANENT and must NEVER be deleted during workspace cleanup:
+
+**Multi-Account System**:
+- `.project/dev_tools/Switch-ClaudeAccount.ps1` - Multi-account switcher with auth isolation
+  - Purpose: Safe switching between up to 50,000 Claude Code accounts
+  - Features: Isolated auth, session state tracking, account validation
+  - Usage: `Switch-ClaudeAccount -AccountNum 5` or `Switch-ClaudeAccount -Primary`
+  - Status: OPERATIONAL (Created 2025-10-11, Recovered 2025-10-27)
+
+**Why Protected**:
+- User-critical workflow tools
+- Complex configuration that's hard to recreate
+- Historical data and state tracking
+
+**Before Cleanup Operations**:
+1. VERIFY these files exist
+2. DO NOT include in cleanup scripts
+3. If accidentally deleted, recover from git: `git show 8757cb6b:.project/dev_tools/Switch-ClaudeAccount.ps1`
+
 ------
 
 ## 15) Controller Memory Management
