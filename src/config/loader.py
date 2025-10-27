@@ -21,7 +21,7 @@ from .schemas import (
     ControllersConfig, PhysicsConfig, PhysicsUncertaintySchema, SimulationConfig,
     VerificationConfig, CostFunctionConfig, SensorsConfig, HILConfig, FDIConfig,
     PermissiveControllerConfig, redact_value, PSOConfig, StabilityMonitoringConfig,
-    FaultDetectionConfig
+    FaultDetectionConfig, StreamlitConfig
 )
 from src.utils import set_global_seed
 
@@ -92,6 +92,7 @@ class ConfigSchema(BaseSettings):
     fdi: FDIConfig | None = None
     stability_monitoring: StabilityMonitoringConfig | None = None
     fault_detection: FaultDetectionConfig | None = None
+    streamlit: StreamlitConfig | None = None
 
     model_config = SettingsConfigDict(
         env_file=".env",

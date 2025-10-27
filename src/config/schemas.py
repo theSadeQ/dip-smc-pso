@@ -505,3 +505,17 @@ class FaultDetectionConfig(StrictModel):
         ge=0.0,
         description="N-sigma rule for adaptive mode"
     )
+
+# ------------------------------------------------------------------------------
+# Streamlit UI Configuration (Phase 3 Wave 3: Theme Parity)
+# ------------------------------------------------------------------------------
+class StreamlitConfig(StrictModel):
+    """Streamlit UI configuration for theme injection and UI features."""
+    enable_dip_theme: bool = Field(
+        default=True,
+        description="Enable design token-driven theme injection for visual consistency"
+    )
+    theme_version: str = Field(
+        default="2.0.0",
+        description="Design tokens version (v2.0.0: Phase 2 accessibility remediation)"
+    )
