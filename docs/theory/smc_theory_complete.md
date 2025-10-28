@@ -164,7 +164,309 @@ u_{sw}[k] &= -\eta \text{sat}(s[k]/\epsilon)
 - **Parametric uncertainties** (with appropriate adaptation)
 - **Unmodeled dynamics** (within sliding mode bandwidth) ### Design Trade-offs ```{mermaid}
 flowchart TD Performance[Performance Requirements] Performance --> FastResponse[Fast Response] Performance --> LowChattering[Low Chattering] Performance --> Robustness[High Robustness] FastResponse --> ClassicalSMC[Classical SMC<br/>High gains] LowChattering --> SuperTwisting[Super-Twisting SMC<br/>Continuous control] Robustness --> AdaptiveSMC[Adaptive SMC<br/>Parameter estimation] ClassicalSMC --> TradeOff[Design Trade-offs] SuperTwisting --> TradeOff AdaptiveSMC --> TradeOff TradeOff --> OptimalDesign[Optimal Design<br/>Multi-objective optimization]
-``` ## Conclusions This analysis of sliding mode control theory provides the mathematical foundation for the controller implementations in the DIP_SMC_PSO project. The theoretical results guarantee: 1. **Finite-time convergence** for classical and super-twisting algorithms
+```
+
+## Hybrid Adaptive STA-SMC
+
+### Modular Design Approach
+
+The Hybrid Adaptive STA-SMC combines the benefits of adaptive control (parameter estimation) with the chattering reduction of super-twisting algorithm through a modular switching strategy {cite}`src.controllers.smc.algorithms.hybrid.controller`.
+
+### Switching Logic
+
+The hybrid controller switches between two modes based on the sliding variable magnitude:
+
+```{math}
+:label: eq:hybrid_switching
+u(t) = \begin{cases}
+u_{classical}(t) & \text{if } |s| > \delta \\
+u_{sta}(t) & \text{if } |s| \leq \delta
+\end{cases}
+```
+
+where $\delta > 0$ is the switching threshold.
+
+### Control Laws
+
+**Classical Mode** (large errors, $|s| > \delta$):
+```{math}
+:label: eq:hybrid_classical
+u_{classical} = -K \cdot \text{tanh}(s/\epsilon)
+```
+
+**STA Mode** (near sliding surface, $|s| \leq \delta$):
+```{math}
+:label: eq:hybrid_sta
+\begin{aligned}
+u_{sta} &= u_1 + u_2 \\
+\dot{u_1} &= -\alpha |s|^{1/2} \text{sign}(s) \\
+u_2 &= -\beta \text{sign}(s)
+\end{aligned}
+```
+
+### Gain Configuration
+
+**Gains**: `[k1, k2, λ, K_adaptive]` (4 parameters)
+- `k1, k2`: Sliding surface gains for $\theta_1, \theta_2$
+- `λ`: Coupling gain
+- `K_adaptive`: Adaptive switching gain
+
+### Performance Characteristics
+
+- **Large errors**: Classical SMC provides strong control authority
+- **Near convergence**: STA reduces chattering with continuous control
+- **Computational cost**: Moderate (2 matrix inversions per control cycle)
+
+## Swing-Up Control
+
+### Energy-Based Control for Large Angles
+
+For large pendulum angles ($|\theta| > \pi/4$), swing-up control uses energy shaping to pump energy into the system until the upright configuration is reachable by SMC stabilization.
+
+### Total Energy Definition
+
+```{math}
+:label: eq:swing_up_energy
+E_{total} = E_{kinetic} + E_{potential}
+```
+
+where:
+- $E_{kinetic} = \frac{1}{2}m_1\dot{\theta}_1^2 + \frac{1}{2}m_2\dot{\theta}_2^2$
+- $E_{potential} = m_1 g h_1(\theta_1) + m_2 g h_2(\theta_1, \theta_2)$
+
+### Energy Error
+
+```{math}
+:label: eq:energy_error
+E_{err} = E_{total} - E_{desired}
+```
+
+where $E_{desired}$ is the energy at the upright equilibrium.
+
+### Control Law
+
+```{math}
+:label: eq:swing_up_control
+u(t) = \begin{cases}
+k_{energy} \cdot E_{err} \cdot \text{sign}(\dot{\theta}_1) + u_{balance} & \text{if } |\theta| > \pi/4 \\
+u_{smc} & \text{if } |\theta| \leq \pi/4
+\end{cases}
+```
+
+where:
+- `k_energy`: Energy pumping gain
+- `u_balance`: Balancing control for cart position
+- `u_smc`: SMC stabilization control (classical or STA)
+
+### Implementation Notes
+
+```{note}
+**Implementation**: The swing-up controller is implemented in {py:obj}`src.controllers.swing_up_smc.SwingUpSMC` and automatically switches to SMC stabilization when the pendulum enters the basin of attraction.
+```
+
+## [PLAN] Terminal Sliding Mode Control
+
+**Status**: Planned for Week 2 implementation (Task MT-1)
+
+### Motivation
+
+Terminal SMC provides **finite-time convergence** that is faster than the asymptotic convergence of classical SMC. The key innovation is a **nonlinear sliding surface** that accelerates convergence near the equilibrium.
+
+### Nonlinear Sliding Surface
+
+```{math}
+:label: eq:tsmc_surface
+s = e + \beta \cdot \text{sign}(e) |e|^{\alpha}
+```
+
+where:
+- $e$: Tracking error vector
+- $\alpha \in (0, 1)$: Convergence exponent (typically 0.5-0.9)
+- $\beta > 0$: Terminal gain parameter
+
+**Key property**: As $|e| \rightarrow 0$, the term $|e|^{\alpha}$ grows slower than $e$, creating a "terminal attractor" effect.
+
+### Control Law
+
+```{math}
+:label: eq:tsmc_control
+u = -K \cdot \text{sign}(s)
+```
+
+### Finite-Time Convergence
+
+**Theorem** (Terminal SMC Convergence {cite}`Feng2002,YuMan1998`): Under the terminal sliding surface {eq}`eq:tsmc_surface`, the system reaches the origin in finite time:
+
+```{math}
+:label: eq:tsmc_convergence_time
+t_{reach} \leq \frac{|s(0)|^{1-\alpha}}{\beta(1-\alpha)}
+```
+
+### Expected Performance
+
+- **Convergence time**: 30-50% faster than classical SMC
+- **Overshoot**: Reduced due to nonlinear damping
+- **Chattering**: Similar to classical SMC (requires boundary layer)
+
+### Gains
+
+**7 parameters**: `[k1, k2, λ1, λ2, α, β, K]`
+- `k1, k2`: Position error gains
+- `λ1, λ2`: Velocity error gains
+- `α`: Convergence exponent (0 < α < 1)
+- `β`: Terminal gain
+- `K`: Switching gain
+
+### References
+
+- Feng et al. (2002): "Terminal sliding mode control of MIMO linear systems"
+- Yu & Man (1998): "Fast terminal sliding-mode control design for nonlinear dynamical systems"
+
+## [PLAN] Integral Sliding Mode Control
+
+**Status**: Planned for Week 2 implementation (Task MT-2)
+
+### Motivation
+
+Integral SMC **eliminates the reaching phase** by constructing a sliding surface that passes through the initial condition. This provides:
+1. Sliding mode from $t=0$ (no reaching phase)
+2. Better disturbance rejection (integral action)
+3. Reduced sensitivity to matched uncertainties
+
+### Integral Sliding Surface
+
+```{math}
+:label: eq:ismc_surface
+s(t) = \sigma(t) - \sigma(0) + \int_0^t \sigma(\tau) d\tau
+```
+
+where $\sigma(t)$ is a conventional sliding variable.
+
+For the DIP system:
+
+```{math}
+:label: eq:ismc_surface_dip
+s = (k_1 \theta_1 + k_2 \dot{\theta}_1) + (λ_1 \theta_2 + λ_2 \dot{\theta}_2) + \int_0^t \sigma(\tau) d\tau
+```
+
+### Control Law
+
+```{math}
+:label: eq:ismc_control
+u = u_{eq} + u_{sw} + u_{int}
+```
+
+where:
+- $u_{eq}$: Equivalent control (continuous)
+- $u_{sw} = -K \cdot \text{sign}(s)$: Switching control
+- $u_{int} = -k_i \int_0^t s(\tau) d\tau$: Integral compensation
+
+### Reaching Phase Elimination
+
+**Theorem** (ISMC Initial Condition {cite}`UtkinShi1996`): The integral sliding surface {eq}`eq:ismc_surface` satisfies $s(0) = 0$ by construction, ensuring sliding mode from the initial time.
+
+*Proof*: By definition,
+```{math}
+s(0) = \sigma(0) - \sigma(0) + \int_0^0 \sigma(\tau) d\tau = 0
+```
+
+### Disturbance Rejection
+
+The integral term provides **asymptotic disturbance rejection**:
+
+```{math}
+:label: eq:ismc_disturbance
+\lim_{t \rightarrow \infty} e(t) = 0 \quad \text{even with constant disturbances}
+```
+
+### Expected Performance
+
+- **No reaching phase**: Sliding mode from $t=0$
+- **Disturbance rejection**: 40-60% better than classical SMC
+- **Overshoot**: Slightly higher due to integral windup (requires anti-windup)
+
+### Gains
+
+**7 parameters**: `[k1, k2, λ1, λ2, K, kd, ki]`
+- `k1, k2`: Position error gains
+- `λ1, λ2`: Velocity error gains
+- `K`: Switching gain
+- `kd`: Derivative gain (damping)
+- `ki`: Integral gain
+
+### References
+
+- Utkin & Shi (1996): "Integral sliding mode in systems operating under uncertainty conditions"
+
+## [PLAN] Higher-Order Sliding Mode Control
+
+**Status**: Planned for Month 2 implementation (Task LT-1)
+
+### Motivation
+
+Higher-Order SMC (HOSM) generalizes the super-twisting algorithm (order 2) to arbitrary order $r \geq 3$, providing:
+1. Smoother control signals (higher-order continuity)
+2. Reduced chattering (no discontinuities in $u^{(r-1)}$)
+3. Robustness to higher-order uncertainties
+
+### r-Sliding Mode
+
+**Definition** (r-Sliding Mode {cite}`Levant2003,Levant2005`): A trajectory is in r-sliding mode if:
+
+```{math}
+:label: eq:hosm_definition
+s = \dot{s} = \ddot{s} = \cdots = s^{(r-1)} = 0
+```
+
+### Arbitrary-Order Differentiator
+
+HOSM requires estimation of higher-order derivatives of the sliding variable:
+
+```{math}
+:label: eq:hosm_differentiator
+\begin{aligned}
+\dot{z}_0 &= v_0 = -\lambda_r |z_0 - s|^{r/(r+1)} \text{sign}(z_0 - s) + z_1 \\
+\dot{z}_1 &= v_1 = -\lambda_{r-1} |z_1 - v_0|^{(r-1)/r} \text{sign}(z_1 - v_0) + z_2 \\
+&\vdots \\
+\dot{z}_{r-1} &= -\lambda_1 \text{sign}(z_{r-1} - v_{r-2})
+\end{aligned}
+```
+
+where $z_0, z_1, \ldots, z_{r-1}$ are estimates of $s, \dot{s}, \ldots, s^{(r-1)}$.
+
+### Twisting Algorithm (Order 3)
+
+For third-order sliding mode:
+
+```{math}
+:label: eq:twisting_control
+u = \begin{cases}
+-\alpha \cdot \text{sign}(s) & \text{if } s \cdot \dot{s} > 0 \\
+-\beta \cdot \text{sign}(s) & \text{if } s \cdot \dot{s} \leq 0
+\end{cases}
+```
+
+with $\alpha > \beta > 0$.
+
+### Expected Performance
+
+- **Smoothness**: Control signal $u(t)$ is continuous
+- **Chattering**: Minimal (discontinuity only in $u^{(r-1)}$)
+- **Computational cost**: High (requires real-time differentiation)
+
+### Gains
+
+**Variable** (8-10 parameters depending on order $r$):
+- $\lambda_1, \ldots, \lambda_r$: Differentiator gains
+- $\alpha, \beta$: Control gains
+- Additional gains for each order
+
+### References
+
+- Levant (2003): "Higher-order sliding modes, differentiation and output-feedback control"
+- Levant (2005): "Homogeneity approach to high-order sliding mode design"
+
+## Conclusions This analysis of sliding mode control theory provides the mathematical foundation for the controller implementations in the DIP_SMC_PSO project. The theoretical results guarantee: 1. **Finite-time convergence** for classical and super-twisting algorithms
 2. **Robust performance** under uncertainties and disturbances
 3. **Adaptive capabilities** for unknown system parameters
 4. **Practical implementability** with bounded control signals The next step is to apply these theoretical results to automated parameter optimization using PSO techniques, covered in {doc}`pso_optimization_complete`. ## References The theoretical development follows {cite}`smc_utkin_1993_sliding_mode_control_design`, {cite}`smc_edwards_spurgeon_1998_sliding_mode_control`, and {cite}`smc_shtessel_2014_sliding_mode_control_and_observation`, with super-twisting analysis from {cite}`smc_levant_2003_higher_order_smc` and {cite}`smc_moreno_2012_strict_lyapunov`. Adaptive extensions are based on {cite}`smc_slotine_li_1991_applied_nonlinear_control` and {cite}`smc_krstic_1995_nonlinear_adaptive`.
