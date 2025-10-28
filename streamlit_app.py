@@ -42,7 +42,7 @@ from src.controllers.factory import create_controller
 from src.core.dynamics import DIPDynamics
 from src.core.dynamics_full import FullDIPDynamics
 from src.core.simulation_runner import run_simulation
-from src.optimizer.pso_optimizer import PSOTuner
+from src.optimization.algorithms.pso_optimizer import PSOTuner
 from src.utils.streamlit_theme import inject_theme
 
 # Performance caching decorators
