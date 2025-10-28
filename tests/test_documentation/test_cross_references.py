@@ -26,7 +26,7 @@ STATS_FILE = ARTIFACTS_DIR / 'statistics.json'
 def load_cross_reference_data():
     """Load cross-reference analysis data."""
     if not DB_FILE.exists():
-        pytest.skip(f"Cross-reference database not found: {DB_FILE}")
+        pytest.skip(f"Cross-reference database not found: {DB_FILE}", allow_module_level=True)
 
     with open(DB_FILE, 'r', encoding='utf-8') as f:
         db = json.load(f)

@@ -13,10 +13,17 @@ _browser_automation_dir = Path(__file__).parent
 sys.path.insert(0, str(_browser_automation_dir))
 
 import pytest
-from playwright.sync_api import sync_playwright
-from utils.playwright_helper import PlaywrightHelper
-from utils.screenshot_manager import ScreenshotManager
-from utils.performance_analyzer import PerformanceAnalyzer
+
+# Check if playwright is available (optional dependency)
+try:
+    from playwright.sync_api import sync_playwright
+    from utils.playwright_helper import PlaywrightHelper
+    from utils.screenshot_manager import ScreenshotManager
+    from utils.performance_analyzer import PerformanceAnalyzer
+    PLAYWRIGHT_AVAILABLE = True
+except ImportError:
+    PLAYWRIGHT_AVAILABLE = False
+    pytest.skip("Playwright not installed (optional dependency)", allow_module_level=True)
 
 
 @pytest.fixture(scope="session")
