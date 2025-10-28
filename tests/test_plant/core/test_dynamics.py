@@ -126,7 +126,7 @@ def test_step_returns_nan_on_singular_params():
     assert np.any(np.isnan(x_next))
 
 def test_pso_fitness_penalises_nan(monkeypatch):
-    import src.optimizer.pso_optimizer as pso_mod
+    import src.optimization.pso_optimizer as pso_mod
     
     def fake_simulate_system_batch(controller_factory, particles, sim_time, u_max=None):
         """

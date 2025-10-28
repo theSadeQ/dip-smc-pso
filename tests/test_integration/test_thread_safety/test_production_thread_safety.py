@@ -35,7 +35,7 @@ import yaml
 from src.config import ConfigSchema, load_config
 from src.controllers.factory import create_controller, list_available_controllers
 from src.controllers.factory.thread_safety import get_thread_safety_enhancement
-from src.optimizer.pso_optimizer import PSOTuner
+from src.optimization.algorithms.pso_optimizer import PSOTuner
 
 
 def _sanitise_config_payload(path: str | Path = "config.yaml") -> Dict[str, Any]:
