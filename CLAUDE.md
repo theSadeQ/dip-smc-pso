@@ -489,6 +489,17 @@ python scripts/cleanup/workspace_cleanup.py --verbose 2>/dev/null || echo "Skipp
   - `.project/mcp_servers/` - MCP server configurations
   - `.project/archive/` - Archived experiments and old artifacts
 
+**EXCEPTION - Tool-Expected Configs:**
+Some tools conventionally expect configs at repository root. These are ALLOWED at root ONLY if the tool's official documentation requires it:
+- `.pytest.ini` - Pytest expects root-level config
+- `.coveragerc` - Coverage.py expects root-level config
+- `.pre-commit-config.yaml` - Pre-commit expects root-level config
+- `.gitignore` - Git requires root-level config (cannot be moved)
+- `.gitattributes` - Git requires root-level config (cannot be moved)
+- `.readthedocs.yaml` - ReadTheDocs expects root-level config
+
+**RULE**: If a tool's official documentation REQUIRES root-level config, it's allowed. All other configs → `.project/config/`
+
 - **Runtime artifacts**: Use `.artifacts/` NOT `artifacts/`
   - `.artifacts/` - Runtime outputs, research papers, scripts
   - `.artifacts/testing/` - Test artifacts (production_readiness.db, etc.)
