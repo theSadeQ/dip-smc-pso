@@ -1,40 +1,27 @@
 #======================================================================================\\
-#============================= src/controllers/factory.py =============================\\
+#============================== src/controllers/factory/__init__.py ====================\\
 #======================================================================================\\
 
 """
-Backward compatibility wrapper for refactored controller factory.
+Controller factory - refactored modular architecture.
 
-DEPRECATED: Import from src.controllers.factory (subpackage) instead.
+Refactored from monolithic factory.py (1,435 lines) into focused modules:
+- core.py: Main factory logic and controller creation
 
-This file maintained for backward compatibility with existing code that imports:
-    from src.controllers.factory import create_controller
-    from src.controllers.factory import SMCType, SMCConfig
+Public API (backward compatible):
+- create_controller()
+- list_available_controllers()
+- list_all_controllers()
+- get_default_gains()
+- SMCType, SMCConfig, SMCFactory
+- Various support functions
 
-New code should import directly from the subpackage:
-    from src.controllers.factory import create_controller
-
-The factory has been refactored from a monolithic 1,435-line file into a modular
-subpackage with focused modules:
-- factory/core.py: Main factory logic
-- factory/__init__.py: Public API re-exports
-
-All public APIs remain unchanged. This wrapper ensures zero breaking changes.
+All imports from this package are backward compatible with the legacy
+single-file factory.py approach.
 """
 
-import warnings
-
-# Issue deprecation warning for direct imports of this file
-warnings.warn(
-    "Importing from src.controllers.factory (single file) is deprecated. "
-    "Import from src.controllers.factory subpackage instead. "
-    "Public API remains unchanged.",
-    DeprecationWarning,
-    stacklevel=2
-)
-
-# Re-export everything from the factory subpackage for backward compatibility
-from src.controllers.factory import (  # noqa: F401
+# Re-export all public API from core module
+from .core import (
     # Main factory functions
     create_controller,
     list_available_controllers,
@@ -45,7 +32,6 @@ from src.controllers.factory import (  # noqa: F401
     SMCType,
     SMCConfig,
     SMCFactory,
-    PSOControllerWrapper,
 
     # Support functions
     create_smc_for_pso,
@@ -53,9 +39,8 @@ from src.controllers.factory import (  # noqa: F401
     get_expected_gain_count,
     get_gain_bounds_for_pso,
     validate_smc_gains,
-    SMCGainSpec,
 
-    # Backwards compatibility functions
+    # Backwards compatibility
     create_classical_smc_controller,
     create_sta_smc_controller,
     create_adaptive_smc_controller,
@@ -81,7 +66,6 @@ __all__ = [
     "SMCType",
     "SMCConfig",
     "SMCFactory",
-    "PSOControllerWrapper",
 
     # Support functions
     "create_smc_for_pso",
@@ -89,7 +73,6 @@ __all__ = [
     "get_expected_gain_count",
     "get_gain_bounds_for_pso",
     "validate_smc_gains",
-    "SMCGainSpec",
 
     # Backwards compatibility
     "create_classical_smc_controller",
