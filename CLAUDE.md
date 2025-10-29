@@ -481,13 +481,29 @@ python scripts/cleanup/workspace_cleanup.py --verbose 2>/dev/null || echo "Skipp
 ```
 
 **Directory Rules (Single Source of Truth):**
-- **Config consolidation**: Use `.project/` for ALL AI/dev configs (NOT `.ai/`, `.claude/`, `.config/`, `.dev_tools/`, `.mcp_servers/`)
-  - `.project/ai/` - AI planning, education, collaboration docs
-  - `.project/claude/` - Claude Code settings
-  - `.project/config/` - Linting, commit rules, pytest configs
-  - `.project/dev_tools/` - Development scripts, automation
-  - `.project/mcp_servers/` - MCP server configurations
-  - `.project/archive/` - Archived experiments and old artifacts
+
+**Config Consolidation Hierarchy** (Use `.project/` for ALL AI/dev configs):
+```
+.project/                          # CANONICAL CONFIG ROOT
+├─ ai/                            # AI planning, education, collaboration docs
+│  ├─ planning/                   # Project roadmaps, phase plans
+│  ├─ education/                  # Learning materials, tutorials
+│  └─ config/                     # Technical AI configurations
+├─ claude/                        # Claude Code settings
+├─ config/                        # Linting, commit rules, pytest configs
+├─ dev_tools/                     # Development scripts, automation (CANONICAL)
+├─ mcp_servers/                   # MCP server configurations
+└─ archive/                       # Archived experiments and old artifacts
+```
+
+**DO NOT USE** (these are deprecated aliases):
+- ❌ `.ai/` (use `.project/ai/`)
+- ❌ `.claude/` (use `.project/claude/`)
+- ❌ `.config/` (use `.project/config/`)
+- ❌ `.dev_tools/` at root (use `.project/dev_tools/` as canonical source)
+- ❌ `.mcp_servers/` at root (use `.project/mcp_servers/`)
+
+**Backward Compatibility**: Copies of files (e.g., `.dev_tools/Switch-ClaudeAccount.ps1`) may exist for external tools, but the CANONICAL version is always in `.project/dev_tools/`.
 
 **EXCEPTION - Tool-Expected Configs:**
 Some tools conventionally expect configs at repository root. These are ALLOWED at root ONLY if the tool's official documentation requires it:
