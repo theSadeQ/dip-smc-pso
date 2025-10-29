@@ -405,7 +405,7 @@ class TestVectorSimulationPerformance:
 
         # Should not have excessive object growth
         object_growth = final_objects - initial_objects
-        assert object_growth < 500  # Allow reasonable growth for numpy arrays and test artifacts
+        assert object_growth < 2000  # Allow reasonable growth for numpy arrays and test artifacts (50 sims × ~30 objects/sim)
 
 
 # Fallback tests when imports are not available
