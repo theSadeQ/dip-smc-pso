@@ -448,6 +448,38 @@ python scripts/test_spof_fixes.py  # SPOF removal ✅
 
 **See Also**: `.ai/planning/phase4/FINAL_ASSESSMENT.md` for comprehensive Phase 4 report
 
+### Phase 5: Research Phase (October 29, 2025)
+
+**Status**: ✅ **LAUNCHED** (QW-5 complete)
+
+**Current Focus**: Validate, document, and benchmark existing 7 controllers
+
+**Roadmap**: 72 hours over 12-16 weeks
+- **Week 1** (8h): Quick wins - benchmarks, chattering metrics, visualization
+- **Weeks 2-4** (18h): Medium-term - comprehensive benchmark, boundary layer optimization, disturbance rejection
+- **Months 2-3** (46h): Long-term - Lyapunov stability proofs, model uncertainty analysis, research paper
+
+**Key Tasks**:
+- **QW-2**: Run existing benchmarks (1h) - Establishes baseline performance
+- **QW-4**: Add chattering metrics (2h) - Quantitative control signal analysis
+- **MT-5**: Comprehensive 7-controller benchmark (6h) - Statistical comparison
+- **LT-4**: Lyapunov stability proofs (18h) - Formal verification for publication
+- **LT-7**: Research paper (20h) - 8-10 page IEEE/IFAC publication-ready manuscript
+
+**Success Criteria**:
+- ✅ All 7 controllers benchmarked and ranked
+- ✅ Lyapunov stability proofs for all controllers
+- ✅ Research paper draft (publication-ready)
+- ✅ Controllers validated for robustness (disturbances, model uncertainty)
+
+**Documentation**: `.artifacts/RESEARCH_STATUS_2025_10_29.md` - Complete research roadmap and current status
+
+**Key Files**:
+- Research roadmap: `.project/ai/planning/research/ROADMAP_EXISTING_PROJECT.md`
+- Controllers: `src/controllers/` (7 types: Classical, STA, Adaptive, Hybrid, Swing-up, MPC, Factory)
+- Theory: `docs/theory/smc_theory_complete.md` (~5,500 lines)
+- Testing: `tests/test_controllers/` (4 test files, 2,495 total tests collectible)
+
 ------
 
 ## 14) Workspace Organization & Hygiene
