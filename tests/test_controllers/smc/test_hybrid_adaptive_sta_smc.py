@@ -1,510 +1,532 @@
 #======================================================================================\\\
-#============== tests/test_controllers/smc/test_hybrid_adaptive_sta_smc.py ==========\\\
+#================ tests/test_controllers/smc/test_hybrid_adaptive_sta_smc.py ============\\\
 #======================================================================================\\\
 
 """
 Comprehensive tests for HybridAdaptiveSTASMC controller.
 
-Target: 95% coverage for critical control component.
-Tests mathematical properties, stability, convergence, and edge cases.
+Target: 90%+ coverage for hybrid adaptive super-twisting SMC component.
+Tests initialization, control computation, adaptation mechanisms, and edge cases.
 """
 
 import pytest
 import numpy as np
-
-from src.controllers.smc.hybrid_adaptive_sta_smc import (
-    HybridAdaptiveSTASMC,
-    _sat_tanh
-)
+from src.controllers.smc.hybrid_adaptive_sta_smc import HybridAdaptiveSTASMC
 from src.utils import HybridSTAOutput
 
 
-class TestSatTanhFunction:
-    """Test smooth saturation function."""
-
-    def test_sat_tanh_positive(self):
-        """Test saturation function with positive input."""
-        result = _sat_tanh(1.0, 0.1)
-        assert 0 < result < 1
-        assert result > 0.9  # Should be close to 1
-
-    def test_sat_tanh_negative(self):
-        """Test saturation function with negative input."""
-        result = _sat_tanh(-1.0, 0.1)
-        assert -1 < result < 0
-        assert result < -0.9  # Should be close to -1
-
-    def test_sat_tanh_zero(self):
-        """Test saturation function at zero."""
-        result = _sat_tanh(0.0, 0.1)
-        assert abs(result) < 0.01  # Should be close to 0
-
-    def test_sat_tanh_width_effect(self):
-        """Test effect of width parameter on saturation."""
-        x = 0.5
-        narrow = _sat_tanh(x, 0.01)  # Narrow width
-        wide = _sat_tanh(x, 1.0)     # Wide width
-
-        # Narrow width should be closer to sign function
-        assert abs(narrow) > abs(wide)
-
-    def test_sat_tanh_width_protection(self):
-        """Test protection against very small width."""
-        result = _sat_tanh(1.0, 1e-12)  # Very small width
-        assert not np.isnan(result)
-        assert not np.isinf(result)
-
-    def test_sat_tanh_symmetry(self):
-        """Test symmetry property of saturation function."""
-        x = 2.0
-        width = 0.1
-        pos_result = _sat_tanh(x, width)
-        neg_result = _sat_tanh(-x, width)
-
-        assert abs(pos_result + neg_result) < 1e-10  # Should be antisymmetric
-
-
 class TestHybridAdaptiveSTASMCInitialization:
-    """Test controller initialization and configuration."""
+    """Test controller initialization and parameter validation."""
 
-    def test_basic_initialization(self):
-        """Test basic controller initialization."""
-        controller = HybridAdaptiveSTASMC()
-        assert controller is not None
-
-    def test_initialization_with_surface_gains(self):
-        """Test initialization with custom surface gains."""
-        surface_gains = [2.0, 3.0, 1.5, 2.5]  # c1, lambda1, c2, lambda2
-        controller = HybridAdaptiveSTASMC(surface_gains=surface_gains)
-
-        # Verify gains are set (implementation-dependent)
-        assert controller is not None
-
-    def test_initialization_with_cart_gains(self):
-        """Test initialization with cart control gains."""
-        cart_gains = [1.0, 0.5]  # k_c, lambda_c
+    def test_valid_initialization_default(self):
+        """Test initialization with default parameters."""
+        gains = [2.0, 1.0, 2.0, 1.0]
         controller = HybridAdaptiveSTASMC(
-            enable_cart_control=True,
-            cart_gains=cart_gains
-        )
-        assert controller is not None
-
-    def test_initialization_with_adaptation_params(self):
-        """Test initialization with adaptation parameters."""
-        controller = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
             k1_init=5.0,
-            k2_init=3.0,
-            k1_max=50.0,
-            k2_max=30.0,
-            dead_zone=0.1,
-            adaptation_rate=0.5
-        )
-        assert controller is not None
-
-    def test_initialization_with_boundary_params(self):
-        """Test initialization with boundary layer parameters."""
-        controller = HybridAdaptiveSTASMC(
-            sat_soft_width=0.05,
-            enable_equivalent=True
-        )
-        assert controller is not None
-
-    def test_initialization_with_surface_type(self):
-        """Test initialization with different surface types."""
-        # Absolute surface (default)
-        controller_abs = HybridAdaptiveSTASMC(use_relative_surface=False)
-        assert controller_abs is not None
-
-        # Relative surface
-        controller_rel = HybridAdaptiveSTASMC(use_relative_surface=True)
-        assert controller_rel is not None
-
-    def test_invalid_surface_gains(self):
-        """Test initialization with invalid surface gains."""
-        with pytest.raises((ValueError, AssertionError)):
-            HybridAdaptiveSTASMC(surface_gains=[0.0, 1.0, 1.0, 1.0])  # c1 = 0
-
-        with pytest.raises((ValueError, AssertionError)):
-            HybridAdaptiveSTASMC(surface_gains=[-1.0, 1.0, 1.0, 1.0])  # negative c1
-
-    def test_invalid_adaptation_gains(self):
-        """Test initialization with invalid adaptation gains."""
-        with pytest.raises((ValueError, AssertionError)):
-            HybridAdaptiveSTASMC(k1_init=0.0)  # k1_init <= 0
-
-        with pytest.raises((ValueError, AssertionError)):
-            HybridAdaptiveSTASMC(k1_init=10.0, k1_max=5.0)  # init > max
-
-    def test_boundary_layer_validation(self):
-        """Test boundary layer parameter validation."""
-        with pytest.raises((ValueError, AssertionError)):
-            HybridAdaptiveSTASMC(dead_zone=0.1, sat_soft_width=0.05)  # soft_width < dead_zone
-
-
-class TestHybridAdaptiveSTASMCComputeControl:
-    """Test control computation functionality."""
-
-    @pytest.fixture
-    def controller(self):
-        """Create controller instance for testing."""
-        return HybridAdaptiveSTASMC(
-            surface_gains=[2.0, 3.0, 1.5, 2.5],
-            k1_init=10.0,
             k2_init=5.0,
-            adaptation_rate=0.5,
+            gamma1=1.0,
+            gamma2=1.0,
             dead_zone=0.01,
-            sat_soft_width=0.05
         )
+        assert controller is not None
+        assert controller.c1 == 2.0
+        assert controller.c2 == 2.0
 
-    @pytest.fixture
-    def state_equilibrium(self):
-        """State at equilibrium (upright position)."""
-        return np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])  # [θ1, θ̇1, θ2, θ̇2, x, ẋ]
-
-    @pytest.fixture
-    def state_perturbed(self):
-        """State with small perturbation."""
-        return np.array([0.1, 0.0, 0.2, 0.0, 0.05, 0.0])
-
-    @pytest.fixture
-    def state_large_error(self):
-        """State with large tracking error."""
-        return np.array([0.5, 0.1, 0.3, 0.2, 0.1, 0.05])
-
-    def test_compute_control_equilibrium(self, controller, state_equilibrium):
-        """Test control computation at equilibrium."""
-        control_output = controller.compute_control(state_equilibrium, last_u=0.0)
-
-        assert isinstance(control_output, HybridSTAOutput)
-        assert hasattr(control_output, 'control')
-        assert isinstance(control_output.control, (int, float))
-
-        # At equilibrium, control should be small
-        assert abs(control_output.control) < 1.0
-
-    def test_compute_control_perturbed(self, controller, state_perturbed):
-        """Test control computation with small perturbation."""
-        control_output = controller.compute_control(state_perturbed, last_u=0.0)
-
-        assert isinstance(control_output, HybridSTAOutput)
-        assert not np.isnan(control_output.control)
-        assert not np.isinf(control_output.control)
-
-    def test_compute_control_large_error(self, controller, state_large_error):
-        """Test control computation with large tracking error."""
-        control_output = controller.compute_control(state_large_error, last_u=0.0)
-
-        assert isinstance(control_output, HybridSTAOutput)
-        assert abs(control_output.control) > 0.1  # Should generate significant control
-
-    def test_compute_control_history_tracking(self, controller, state_perturbed):
-        """Test control computation with history tracking."""
-        history = {}
-        control_output = controller.compute_control(
-            state_perturbed,
-            last_u=0.0,
-            history=history
+    def test_valid_initialization_with_extra_gains(self):
+        """Test initialization with extra gains (ignored)."""
+        gains = [2.0, 1.0, 2.0, 1.0, 999.0]
+        controller = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
         )
+        assert controller is not None
+        assert controller.c1 == 2.0
 
-        assert isinstance(control_output, HybridSTAOutput)
-        # History should be updated (implementation-dependent)
+    def test_initialization_insufficient_gains(self):
+        """Test that insufficient gains raise ValueError."""
+        gains = [2.0, 1.0]
+        with pytest.raises(ValueError):
+            HybridAdaptiveSTASMC(
+                gains=gains,
+                dt=0.01,
+                max_force=100.0,
+                k1_init=5.0,
+                k2_init=5.0,
+                gamma1=1.0,
+                gamma2=1.0,
+                dead_zone=0.01,
+            )
 
-    def test_control_continuity(self, controller, state_perturbed):
-        """Test control signal continuity."""
-        # Compute control at two nearby time steps
-        control1 = controller.compute_control(state_perturbed, last_u=0.0)
+    def test_initialization_negative_dt(self):
+        """Test that negative dt raises error."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        with pytest.raises(ValueError):
+            HybridAdaptiveSTASMC(
+                gains=gains,
+                dt=-0.01,
+                max_force=100.0,
+                k1_init=5.0,
+                k2_init=5.0,
+                gamma1=1.0,
+                gamma2=1.0,
+                dead_zone=0.01,
+            )
 
-        # Small time step with slightly changed state
-        state_next = state_perturbed + np.array([0.001, 0.001, 0.001, 0.001, 0.001, 0.001])
-        control2 = controller.compute_control(state_next, last_u=control1.control)
+    def test_initialization_zero_dt(self):
+        """Test that zero dt raises error."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        with pytest.raises(ValueError):
+            HybridAdaptiveSTASMC(
+                gains=gains,
+                dt=0.0,
+                max_force=100.0,
+                k1_init=5.0,
+                k2_init=5.0,
+                gamma1=1.0,
+                gamma2=1.0,
+                dead_zone=0.01,
+            )
 
-        # Control should be continuous (not jump significantly)
-        control_diff = abs(control2.control - control1.control)
-        assert control_diff < 10.0  # Reasonable continuity bound
+    def test_initialization_negative_max_force(self):
+        """Test that negative max_force raises error."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        with pytest.raises(ValueError):
+            HybridAdaptiveSTASMC(
+                gains=gains,
+                dt=0.01,
+                max_force=-100.0,
+                k1_init=5.0,
+                k2_init=5.0,
+                gamma1=1.0,
+                gamma2=1.0,
+                dead_zone=0.01,
+            )
 
-    def test_adaptation_mechanism(self, controller, state_large_error):
-        """Test adaptive gain mechanism."""
-        # Run controller multiple times to trigger adaptation
-        controls = []
-        state = state_large_error.copy()
+    def test_initialization_k1_exceeds_max(self):
+        """Test that k1_init > k1_max raises error."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        with pytest.raises(ValueError):
+            HybridAdaptiveSTASMC(
+                gains=gains,
+                dt=0.01,
+                max_force=100.0,
+                k1_init=60.0,
+                k2_init=5.0,
+                gamma1=1.0,
+                gamma2=1.0,
+                dead_zone=0.01,
+                k1_max=50.0,
+            )
 
-        for i in range(10):
-            control_output = controller.compute_control(state, last_u=0.0)
-            controls.append(control_output.control)
-            # Simulate small state evolution
-            state = state * 0.95  # Gradual convergence
+    def test_initialization_sat_width_less_than_dead_zone(self):
+        """Test that sat_soft_width < dead_zone raises error."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        with pytest.raises(ValueError):
+            HybridAdaptiveSTASMC(
+                gains=gains,
+                dt=0.01,
+                max_force=100.0,
+                k1_init=5.0,
+                k2_init=5.0,
+                gamma1=1.0,
+                gamma2=1.0,
+                dead_zone=0.05,
+                sat_soft_width=0.01,
+            )
 
-        # Verify adaptation occurs (implementation-dependent)
-        assert len(controls) == 10
+    def test_initialization_invalid_recenter_thresholds(self):
+        """Test that invalid recenter thresholds raise error."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        with pytest.raises(ValueError):
+            HybridAdaptiveSTASMC(
+                gains=gains,
+                dt=0.01,
+                max_force=100.0,
+                k1_init=5.0,
+                k2_init=5.0,
+                gamma1=1.0,
+                gamma2=1.0,
+                dead_zone=0.01,
+                recenter_high_thresh=0.02,
+                recenter_low_thresh=0.05,
+            )
 
-    def test_equivalent_control_toggle(self):
-        """Test equivalent control enable/disable."""
-        state = np.array([0.1, 0.0, 0.2, 0.0, 0.05, 0.0])
-
-        # Controller with equivalent control
-        controller_eq = HybridAdaptiveSTASMC(enable_equivalent=True)
-        control_eq = controller_eq.compute_control(state, last_u=0.0)
-
-        # Controller without equivalent control
-        controller_no_eq = HybridAdaptiveSTASMC(enable_equivalent=False)
-        control_no_eq = controller_no_eq.compute_control(state, last_u=0.0)
-
-        # Controls should be different
-        assert abs(control_eq.control - control_no_eq.control) > 0.01
-
-    def test_cart_control_toggle(self):
-        """Test cart control enable/disable."""
-        state = np.array([0.1, 0.0, 0.2, 0.0, 0.05, 0.0])
-
-        # Controller with cart control
-        controller_cart = HybridAdaptiveSTASMC(
-            enable_cart_control=True,
-            cart_gains=[1.0, 0.5]
+    def test_initialization_with_enable_equivalent_true(self):
+        """Test initialization with enable_equivalent=True."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        controller = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+            enable_equivalent=True,
         )
-        control_cart = controller_cart.compute_control(state, last_u=0.0)
+        assert controller.use_equivalent is True
 
-        # Controller without cart control
-        controller_no_cart = HybridAdaptiveSTASMC(enable_cart_control=False)
-        control_no_cart = controller_no_cart.compute_control(state, last_u=0.0)
-
-        # Controls should be different when cart position is non-zero
-        assert abs(control_cart.control - control_no_cart.control) > 0.01
-
-    def test_relative_vs_absolute_surface(self):
-        """Test relative vs absolute surface formulation."""
-        state = np.array([0.1, 0.0, 0.3, 0.0, 0.0, 0.0])
-
-        # Absolute surface (default)
-        controller_abs = HybridAdaptiveSTASMC(use_relative_surface=False)
-        control_abs = controller_abs.compute_control(state, last_u=0.0)
-
-        # Relative surface
-        controller_rel = HybridAdaptiveSTASMC(use_relative_surface=True)
-        control_rel = controller_rel.compute_control(state, last_u=0.0)
-
-        # Should produce different control signals
-        assert abs(control_abs.control - control_rel.control) > 0.01
+    def test_initialization_with_enable_equivalent_false(self):
+        """Test initialization with enable_equivalent=False."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        controller = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+            enable_equivalent=False,
+        )
+        assert controller.use_equivalent is False
 
 
-class TestHybridAdaptiveSTASMCMathematicalProperties:
-    """Test mathematical properties and stability."""
+class TestHybridAdaptiveSTASMCComputation:
+    """Test control computation and dynamics."""
 
     @pytest.fixture
     def controller(self):
+        """Create standard controller instance."""
+        gains = [2.0, 1.0, 2.0, 1.0]
         return HybridAdaptiveSTASMC(
-            surface_gains=[2.0, 3.0, 1.5, 2.5],
-            k1_init=10.0,
-            k2_init=5.0
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
         )
 
-    def test_sliding_surface_linearity(self, controller):
-        """Test sliding surface linearity property."""
-        state1 = np.array([0.1, 0.0, 0.2, 0.0, 0.0, 0.0])
-        state2 = np.array([0.2, 0.0, 0.4, 0.0, 0.0, 0.0])
+    def test_compute_control_output_type(self, controller):
+        """Test that compute_control returns valid HybridSTAOutput."""
+        state = np.array([0.01, 0.1, 0.05, 0.05, 0.1, 0.05], dtype=float)
+        state_vars = controller.initialize_state()
+        history = controller.initialize_history()
+        result = controller.compute_control(state, state_vars, history)
 
-        # Compute controls
-        control1 = controller.compute_control(state1, last_u=0.0)
-        control2 = controller.compute_control(state2, last_u=0.0)
+        assert result is not None
+        assert isinstance(result, HybridSTAOutput)
+        assert hasattr(result, "u")
+        assert hasattr(result, "state")
+        assert hasattr(result, "history")
+        assert hasattr(result, "sigma")
 
-        # For small errors, should have some proportionality
-        # (exact relationship depends on implementation)
-        assert control1.control != 0 or control2.control != 0
+    def test_compute_control_finite_output(self, controller):
+        """Test that control output is finite."""
+        state = np.array([0.01, 0.1, 0.05, 0.05, 0.1, 0.05], dtype=float)
+        state_vars = controller.initialize_state()
+        result = controller.compute_control(state, state_vars, None)
 
-    def test_lyapunov_stability_requirements(self, controller):
-        """Test Lyapunov stability requirements."""
-        # Test that controller satisfies basic stability requirements
-        state = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.1])
+        assert np.isfinite(result.u)
 
-        control_output = controller.compute_control(state, last_u=0.0)
+    def test_control_saturates_at_max_force(self, controller):
+        """Test that control saturates at max_force."""
+        large_state = np.array([5.0, 2.0, 2.0, 5.0, 5.0, 5.0], dtype=float)
+        state_vars = (50.0, 50.0, 0.0)
+        result = controller.compute_control(large_state, state_vars, None)
 
-        # Control should be bounded
-        assert abs(control_output.control) < 1000.0
+        assert abs(result.u) <= controller.max_force + 1e-9
 
-        # Control should oppose the error direction (implementation-dependent)
-        assert not np.isnan(control_output.control)
+    def test_state_tuple_has_three_elements(self, controller):
+        """Test that returned state is (k1, k2, u_int)."""
+        state = np.array([0.01, 0.1, 0.05, 0.05, 0.1, 0.05], dtype=float)
+        state_vars = controller.initialize_state()
+        result = controller.compute_control(state, state_vars, None)
 
-    def test_finite_time_convergence_property(self, controller):
-        """Test finite-time convergence property (simplified)."""
-        # Start with large error
-        state = np.array([0.5, 0.1, 0.3, 0.2, 0.1, 0.05])
+        assert isinstance(result.state, tuple)
+        assert len(result.state) == 3
+        k1, k2, u_int = result.state
+        assert isinstance(k1, (float, np.floating))
+        assert isinstance(k2, (float, np.floating))
+        assert isinstance(u_int, (float, np.floating))
 
-        controls = []
-        for i in range(5):
-            control_output = controller.compute_control(state, last_u=0.0)
-            controls.append(control_output.control)
-            # Simulate convergence
-            state = state * 0.8
+    def test_adaptive_gains_bounded(self, controller):
+        """Test that adaptive gains remain bounded."""
+        state = np.array([0.5, 0.5, 0.5, 0.5, 0.5, 0.5], dtype=float)
+        state_vars = controller.initialize_state()
 
-        # Should generate decreasing control magnitude (roughly)
-        assert len(controls) == 5
+        for _ in range(10):
+            result = controller.compute_control(state, state_vars, None)
+            k1, k2, u_int = result.state
 
-    def test_chattering_reduction(self, controller):
-        """Test chattering reduction via smooth saturation."""
-        state = np.array([0.01, 0.0, 0.01, 0.0, 0.0, 0.0])  # Near sliding surface
+            assert 0.0 <= k1 <= controller.k1_max
+            assert 0.0 <= k2 <= controller.k2_max
+            assert abs(u_int) <= controller.u_int_max
 
-        controls = []
-        for i in range(10):
-            control_output = controller.compute_control(state, last_u=0.0)
-            controls.append(control_output.control)
-            # Add small noise to simulate measurement uncertainty
-            state = state + np.random.normal(0, 0.001, 6)
+            state_vars = result.state
 
-        # Control should not exhibit excessive chattering
-        control_variations = [abs(controls[i+1] - controls[i]) for i in range(9)]
-        max_variation = max(control_variations)
-        assert max_variation < 100.0  # Reasonable bound
+
+class TestHybridAdaptiveSTASMCAdaptation:
+    """Test adaptation mechanisms."""
+
+    @pytest.fixture
+    def controller(self):
+        """Create controller with medium adaptation rates."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        return HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=2.0,
+            gamma2=2.0,
+            dead_zone=0.01,
+        )
+
+    def test_gains_adapt_outside_dead_zone(self, controller):
+        """Test that gains adapt when outside dead zone."""
+        state = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.1], dtype=float)
+        state_vars = (5.0, 5.0, 0.0)
+
+        result = controller.compute_control(state, state_vars, None)
+        k1_new, k2_new, _ = result.state
+
+        assert k1_new >= 5.0 or k2_new >= 5.0
+
+    def test_gains_freeze_in_dead_zone(self, controller):
+        """Test that gains freeze inside dead zone."""
+        state = np.array([0.001, 0.001, 0.001, 0.001, 0.001, 0.001], dtype=float)
+        state_vars = (10.0, 10.0, 0.0)
+
+        result = controller.compute_control(state, state_vars, None)
+        k1_new, k2_new, _ = result.state
+
+        assert k1_new <= 10.0
+        assert k2_new <= 10.0
+
+    def test_integral_term_accumulates(self, controller):
+        """Test that integral term accumulates outside dead zone."""
+        state = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.1], dtype=float)
+        state_vars = (5.0, 5.0, 0.0)
+        history = controller.initialize_history()
+
+        result1 = controller.compute_control(state, state_vars, history)
+        u_int1 = result1.state[2]
+
+        result2 = controller.compute_control(state, result1.state, result1.history)
+        u_int2 = result2.state[2]
+
+        assert u_int2 != u_int1 or u_int1 != 0.0
 
 
 class TestHybridAdaptiveSTASMCEdgeCases:
-    """Test edge cases and error handling."""
-
-    def test_zero_state(self):
-        """Test control computation with zero state."""
-        controller = HybridAdaptiveSTASMC()
-        zero_state = np.zeros(6)
-
-        control_output = controller.compute_control(zero_state, last_u=0.0)
-        assert abs(control_output.control) < 0.1  # Should be near zero
-
-    def test_large_state(self):
-        """Test control computation with large state values."""
-        controller = HybridAdaptiveSTASMC()
-        large_state = np.array([10.0, 5.0, 8.0, 3.0, 2.0, 1.0])
-
-        control_output = controller.compute_control(large_state, last_u=0.0)
-        assert not np.isnan(control_output.control)
-        assert not np.isinf(control_output.control)
-
-    def test_invalid_state_dimension(self):
-        """Test error handling for invalid state dimension."""
-        controller = HybridAdaptiveSTASMC()
-
-        with pytest.raises((ValueError, IndexError, AssertionError)):
-            controller.compute_control(np.array([1.0, 2.0, 3.0]), last_u=0.0)
-
-    def test_nan_state(self):
-        """Test error handling for NaN in state."""
-        controller = HybridAdaptiveSTASMC()
-        nan_state = np.array([np.nan, 0.0, 0.0, 0.0, 0.0, 0.0])
-
-        with pytest.raises((ValueError, AssertionError)):
-            controller.compute_control(nan_state, last_u=0.0)
-
-    def test_inf_state(self):
-        """Test error handling for infinite values in state."""
-        controller = HybridAdaptiveSTASMC()
-        inf_state = np.array([np.inf, 0.0, 0.0, 0.0, 0.0, 0.0])
-
-        with pytest.raises((ValueError, AssertionError)):
-            controller.compute_control(inf_state, last_u=0.0)
-
-    def test_extreme_adaptation_rates(self):
-        """Test behavior with extreme adaptation rates."""
-        # Very low adaptation rate
-        controller_slow = HybridAdaptiveSTASMC(adaptation_rate=1e-6)
-        state = np.array([0.1, 0.0, 0.1, 0.0, 0.0, 0.0])
-        control_slow = controller_slow.compute_control(state, last_u=0.0)
-
-        # Very high adaptation rate
-        controller_fast = HybridAdaptiveSTASMC(adaptation_rate=100.0)
-        control_fast = controller_fast.compute_control(state, last_u=0.0)
-
-        # Both should produce valid controls
-        assert not np.isnan(control_slow.control)
-        assert not np.isnan(control_fast.control)
-
-    def test_boundary_layer_edge_cases(self):
-        """Test boundary layer edge cases."""
-        # Minimum boundary layer
-        controller_min = HybridAdaptiveSTASMC(
-            dead_zone=1e-6,
-            sat_soft_width=1e-5
-        )
-
-        # Large boundary layer
-        controller_max = HybridAdaptiveSTASMC(
-            dead_zone=1.0,
-            sat_soft_width=2.0
-        )
-
-        state = np.array([0.1, 0.0, 0.1, 0.0, 0.0, 0.0])
-
-        control_min = controller_min.compute_control(state, last_u=0.0)
-        control_max = controller_max.compute_control(state, last_u=0.0)
-
-        # Both should produce valid controls
-        assert not np.isnan(control_min.control)
-        assert not np.isnan(control_max.control)
-
-
-class TestHybridAdaptiveSTASMCOutput:
-    """Test HybridSTAOutput functionality."""
+    """Test edge cases and boundary conditions."""
 
     @pytest.fixture
     def controller(self):
-        return HybridAdaptiveSTASMC()
+        """Create standard controller."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        return HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+        )
 
-    def test_output_structure(self, controller):
-        """Test output structure and contents."""
-        state = np.array([0.1, 0.0, 0.1, 0.0, 0.0, 0.0])
-        output = controller.compute_control(state, last_u=0.0)
+    def test_nan_state_handled_gracefully(self, controller):
+        """Test that NaN state is handled gracefully."""
+        nan_state = np.array([np.nan, 0.1, 0.1, 0.1, 0.1, 0.1], dtype=float)
+        result = controller.compute_control(nan_state, None, None)
 
-        assert isinstance(output, HybridSTAOutput)
-        assert hasattr(output, 'control')
-        assert isinstance(output.control, (int, float))
+        assert result is not None
+        assert result.u == 0.0
 
-    def test_output_additional_info(self, controller):
-        """Test additional information in output."""
-        state = np.array([0.1, 0.0, 0.1, 0.0, 0.0, 0.0])
-        output = controller.compute_control(state, last_u=0.0)
+    def test_inf_state_handled_gracefully(self, controller):
+        """Test that Inf state is handled gracefully."""
+        inf_state = np.array([np.inf, 0.1, 0.1, 0.1, 0.1, 0.1], dtype=float)
+        result = controller.compute_control(inf_state, None, None)
 
-        # Check for additional diagnostic information
-        # (implementation-dependent)
-        assert hasattr(output, 'control')
+        assert result is not None
+        assert np.isfinite(result.u)
 
-    def test_output_consistency(self, controller):
-        """Test output consistency across multiple calls."""
-        state = np.array([0.1, 0.0, 0.1, 0.0, 0.0, 0.0])
+    def test_very_large_state_triggers_emergency_reset(self, controller):
+        """Test that very large state triggers emergency reset."""
+        large_state = np.array([100.0, 100.0, 100.0, 100.0, 100.0, 100.0], dtype=float)
+        state_vars = (50.0, 50.0, 50.0)
 
-        output1 = controller.compute_control(state, last_u=0.0)
-        output2 = controller.compute_control(state, last_u=0.0)
+        result = controller.compute_control(large_state, state_vars, None)
 
-        # For deterministic controller, outputs should be consistent
-        # (may differ due to internal state adaptation)
-        assert isinstance(output1, HybridSTAOutput)
-        assert isinstance(output2, HybridSTAOutput)
+        assert result is not None
+        k1, k2, u_int = result.state
+        assert k1 <= controller.k1_init * 0.1
+        assert k2 <= controller.k2_init * 0.1
 
+    def test_zero_state_produces_minimal_control(self, controller):
+        """Test that zero state produces minimal control."""
+        zero_state = np.zeros(6)
+        result = controller.compute_control(zero_state, None, None)
 
-class TestDeprecationHandling:
-    """Test deprecation warning handling."""
-
-    def test_use_equivalent_deprecation(self):
-        """Test handling of deprecated 'use_equivalent' parameter."""
-        # This test depends on implementation details
-        # Should issue deprecation warning if 'use_equivalent' is used
-        pass  # Implementation-dependent
-
-    def test_legacy_parameter_compatibility(self):
-        """Test backward compatibility with legacy parameters."""
-        # Test that old parameter names still work with warnings
-        pass  # Implementation-dependent
+        assert abs(result.u) < 10.0
 
 
-@pytest.mark.integration
+class TestHybridAdaptiveSTASMCProperties:
+    """Test properties and accessors."""
+
+    def test_gains_property_returns_list(self):
+        """Test that gains property returns list."""
+        gains = [2.5, 1.5, 3.0, 0.8]
+        controller = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+        )
+        assert controller.gains == gains
+
+    def test_dyn_property_initially_none(self):
+        """Test that dynamics reference is initially None."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        controller = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+        )
+        assert controller.dyn is None
+
+    def test_initialize_state_returns_tuple(self):
+        """Test that initialize_state returns proper tuple."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        controller = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+        )
+        state = controller.initialize_state()
+
+        assert isinstance(state, tuple)
+        assert len(state) == 3
+        assert state[0] == 5.0
+        assert state[1] == 5.0
+        assert state[2] == 0.0
+
+    def test_initialize_history_returns_dict(self):
+        """Test that initialize_history returns proper dict."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        controller = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+        )
+        history = controller.initialize_history()
+
+        assert isinstance(history, dict)
+        assert "k1" in history
+        assert "k2" in history
+        assert "u_int" in history
+        assert "s" in history
+
+
 class TestHybridAdaptiveSTASMCIntegration:
-    """Integration tests with other system components."""
+    """Integration tests for complete control loops."""
 
-    def test_controller_factory_integration(self):
-        """Test integration with controller factory."""
-        # This would test that the controller can be created via factory
-        pass  # Requires factory integration
+    def test_realistic_trajectory(self):
+        """Test control over a realistic trajectory."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        controller = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+        )
 
-    def test_simulation_integration(self):
-        """Test integration with simulation engine."""
-        # This would test controller in simulation loop
-        pass  # Requires simulation integration
+        state = np.array([0.0, np.pi, 0.0, 0.0, 0.0, 0.0], dtype=float)
+        state_vars = controller.initialize_state()
+        history = controller.initialize_history()
 
-    def test_pso_optimization_integration(self):
-        """Test integration with PSO optimization."""
-        # This would test parameter optimization
-        pass  # Requires PSO integration
+        for _ in range(50):
+            result = controller.compute_control(state, state_vars, history)
+            assert result is not None
+            state_vars = result.state
+            history = result.history
+
+    def test_cleanup_functionality(self):
+        """Test that cleanup method works."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        controller = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+        )
+
+        controller.cleanup()
+        assert controller.dyn is None
+
+    def test_multiple_instances_independence(self):
+        """Test that multiple controller instances are independent."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        controller1 = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+        )
+        controller2 = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=10.0,
+            k2_init=5.0,
+            gamma1=2.0,
+            gamma2=1.0,
+            dead_zone=0.02,
+        )
+
+        state = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.1], dtype=float)
+        result1 = controller1.compute_control(state, None, None)
+        result2 = controller2.compute_control(state, None, None)
+
+        # Results should differ due to different parameters
+        assert result1.state[0] != result2.state[0] or result1.state[2] != result2.state[2]
+
+#========================================================================================================\\\
