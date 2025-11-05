@@ -131,7 +131,7 @@ class ProofScreener:
         output_path = self.reports_path / output_file
         os.makedirs(output_path.parent, exist_ok=True)
 
-        with open(output_path, 'w') as f:
+        with open(output_path, 'w', encoding='utf-8') as f:
             f.write("# Lyapunov Proof Screening Report\n\n")
             f.write(f"**Generated**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
             f.write("**[WARNING] SCREENING ONLY - NOT FULL VALIDATION**\n\n")
@@ -143,7 +143,7 @@ class ProofScreener:
                 f.write(f"### {check.proof_name}\n\n")
                 f.write(f"- **Structure Complete**: {'[OK] YES' if check.structure_complete else '[ERROR] NO'}\n")
                 f.write(f"- **V(x) Candidate**: {'[OK] Present' if check.v_candidate_present else '[ERROR] Missing'}\n")
-                f.write(f"- **V̇ < 0 Claim**: {'[OK] Present' if check.v_dot_negative_claimed else '[ERROR] Missing'}\n")
+                f.write(f"- **V_dot < 0 Claim**: {'[OK] Present' if check.v_dot_negative_claimed else '[ERROR] Missing'}\n")
                 f.write(f"- **Theorems Cited**: {', '.join(check.theorems_cited) if check.theorems_cited else 'None'}\n")
 
                 if check.red_flags:
