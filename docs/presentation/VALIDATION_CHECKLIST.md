@@ -213,10 +213,176 @@
 ### Manual Checks to Perform
 
 - [ ] Read Chapter 8 "Critical Limitation" section - verify accuracy
-- [ ] Check that MT-6 boundary layer results can be integrated into Chapter 6
-- [ ] Verify LT-4 Lyapunov proofs can be added to Chapter 4 / Appendix A
+- [x] Check that MT-6 boundary layer results can be integrated into Chapter 6
+- [x] Verify LT-4 Lyapunov proofs can be added to Chapter 4 / Appendix A
 - [ ] Confirm MT-7 multi-scenario validation can be added to Chapter 8
 - [ ] Review previous-works.md for any missing recent citations (2024-2025 papers)
+
+---
+
+## Research Integration Roadmap (Phase 1-3)
+
+**Purpose:** Integrate completed research tasks (LT-4, MT-6, MT-7) into thesis chapters
+
+**Timeline:** 3 weeks (32 hours total)
+**Status:** 1/11 tasks complete (9%)
+**Last Updated:** 2025-11-05
+
+### Phase 1: Research Integration (Week 1, 12h)
+
+**Objective:** Update existing chapters with NEW research findings
+
+#### Task 1.1: Update Chapter 4 with LT-4 Lyapunov Proofs [COMPLETED]
+- **Status:** [OK] COMPLETE (2025-11-05)
+- **Duration:** 2 hours
+- **Deliverables:**
+  - [x] Added MPC stability section (Variant V) with cost-to-go Lyapunov function
+  - [x] Added cross-controller stability summary table (6 controllers)
+  - [x] Added validation requirements matrix (9 checks x 6 controllers)
+  - [x] Updated comparative summary (4 → 6 controllers)
+  - [x] Added Mayne et al. (2000) MPC reference [11]
+- **File:** `docs/presentation/4-0-SMC.md` (+101 lines, now 468 lines)
+- **Source:** `docs/theory/lyapunov_stability_proofs.md` (LT-4 research)
+- **Quality:** Maintains conversational tone, links to implementation code
+- **Note:** Chapter 4 now covers all 6 implemented controllers with rigorous stability proofs
+
+#### Task 1.2: Expand Chapter 6 with MT-6 Boundary Layer Results [PENDING]
+- **Status:** [ ] PENDING
+- **Duration:** 3 hours
+- **Deliverables:**
+  - [ ] Add section on boundary layer optimization methodology
+  - [ ] Present optimal epsilon values for each controller
+  - [ ] Include chattering vs. accuracy trade-off analysis
+  - [ ] Embed boundary layer sweep plots
+- **File:** `docs/presentation/6-PSO.md` (pso-optimization.md)
+- **Source:** `benchmarks/MT6_COMPLETE_REPORT.md` (MT-6 research)
+
+#### Task 1.3: Add MT-7 Multi-Scenario Validation to Chapter 8 [PENDING]
+- **Status:** [ ] PENDING
+- **Duration:** 3 hours
+- **Deliverables:**
+  - [ ] Add robustness testing section (7 scenarios)
+  - [ ] Include failure mode analysis
+  - [ ] Present degradation patterns across controllers
+  - [ ] Update limitations section with new findings
+- **File:** `docs/presentation/results-discussion.md`
+- **Source:** `benchmarks/MT7_COMPLETE_REPORT.md` (MT-7 research)
+
+#### Task 1.4: Polish Chapter 8 Limitations Section [PENDING]
+- **Status:** [ ] PENDING
+- **Duration:** 2 hours
+- **Deliverables:**
+  - [ ] Expand "Critical Limitation" section with MT-7 findings
+  - [ ] Add boundary condition discussion
+  - [ ] Integrate failure mode insights
+  - [ ] Update recommendations based on robustness tests
+- **File:** `docs/presentation/results-discussion.md`
+
+**Phase 1 Progress:** 1/4 tasks complete (25%)
+
+### Phase 2: Missing Content (Week 2, 10h)
+
+#### Task 2.1: Write Chapter 9 - Conclusion [PENDING]
+- **Status:** [ ] PENDING
+- **Duration:** 5 hours
+- **Deliverables:**
+  - [ ] Summary of contributions (1-2 pages)
+  - [ ] Key findings from 6 controller comparison (1 page)
+  - [ ] Limitations discussion (1 page)
+  - [ ] Future work (2 pages): MPC tuning, hardware validation, adaptive improvements
+  - [ ] Closing statement (0.5 pages)
+- **File:** `docs/presentation/conclusion.md` (NEW)
+- **Target:** 8 pages (~2,400 words)
+
+#### Task 2.2: Generate and Embed Figures [PENDING]
+- **Status:** [ ] PENDING
+- **Duration:** 3 hours
+- **Deliverables:**
+  - [ ] Generate 15-20 missing figures from simulation data
+  - [ ] Embed figure files in markdown chapters
+  - [ ] Add descriptive captions
+  - [ ] Verify consistent numbering (Fig X.Y format)
+- **Files:** All chapters (0-9)
+- **Source:** Simulation results, PSO convergence plots, benchmark data
+
+#### Task 2.3: Consolidate References [PENDING]
+- **Status:** [ ] PENDING
+- **Duration:** 2 hours
+- **Deliverables:**
+  - [ ] Extract citations from all 10 chapters
+  - [ ] Create single bibliography (80-100 entries)
+  - [ ] Format consistently (IEEE style)
+  - [ ] Cross-check in-text citations
+- **File:** `docs/presentation/references.md` (NEW)
+
+**Phase 2 Progress:** 0/3 tasks complete (0%)
+
+### Phase 3: Appendices & Assembly (Week 3, 10h)
+
+#### Task 3.1: Write Appendix A - Full Lyapunov Proofs [PENDING]
+- **Status:** [ ] PENDING
+- **Duration:** 3 hours
+- **Deliverables:**
+  - [ ] Format 6 proofs from LT-4 for appendix
+  - [ ] Add theorem/proof structure
+  - [ ] Cross-reference Chapter 4
+- **File:** `docs/presentation/appendix-a-lyapunov.md` (NEW)
+- **Source:** `docs/theory/lyapunov_stability_proofs.md`
+
+#### Task 3.2: Write Appendix B - Controller Code Listings [PENDING]
+- **Status:** [ ] PENDING
+- **Duration:** 2 hours
+- **Deliverables:**
+  - [ ] Extract key controller implementations
+  - [ ] Add explanatory comments
+  - [ ] Format code for readability
+- **File:** `docs/presentation/appendix-b-code.md` (NEW)
+- **Source:** `src/controllers/` directory
+
+#### Task 3.3: Write Appendix C - Configuration Schema [PENDING]
+- **Status:** [ ] PENDING
+- **Duration:** 1 hour
+- **Deliverables:**
+  - [ ] Document config.yaml structure
+  - [ ] Provide parameter descriptions
+  - [ ] Include example configurations
+- **File:** `docs/presentation/appendix-c-config.md` (NEW)
+- **Source:** `config.yaml`, Chapter 4 config tables
+
+#### Task 3.4: Combine Chapters & Final Proofread [PENDING]
+- **Status:** [ ] PENDING
+- **Duration:** 4 hours
+- **Deliverables:**
+  - [ ] Merge 10 chapters + 3 appendices into single document
+  - [ ] Verify cross-references
+  - [ ] Check notation consistency
+  - [ ] Final formatting pass
+  - [ ] Generate PDF/HTML versions
+- **File:** `docs/presentation/THESIS_FINAL.md` (NEW)
+
+**Phase 3 Progress:** 0/4 tasks complete (0%)
+
+### Overall Progress Summary
+
+| Phase | Tasks | Complete | Pending | Hours Spent | Hours Remaining |
+|-------|-------|----------|---------|-------------|-----------------|
+| **Phase 1: Research Integration** | 4 | 1 | 3 | 2 | 10 |
+| **Phase 2: Missing Content** | 3 | 0 | 3 | 0 | 10 |
+| **Phase 3: Appendices & Assembly** | 4 | 0 | 4 | 0 | 10 |
+| **TOTAL** | **11** | **1** | **10** | **2** | **30** |
+
+**Completion:** 9% (1/11 tasks) | **Est. Remaining:** 30 hours (3 weeks at 10h/week)
+
+### Recent Updates
+
+**2025-11-05:**
+- [OK] Completed Task 1.1: Integrated LT-4 Lyapunov proofs into Chapter 4
+  - Added MPC stability section (Variant V)
+  - Added cross-controller summary table (6 controllers)
+  - Added validation requirements matrix
+  - File: `docs/presentation/4-0-SMC.md` (+101 lines)
+
+**Next Up:** Task 1.2 - Expand Chapter 6 with MT-6 boundary layer optimization results (3h)
 
 ---
 
