@@ -1,4 +1,4 @@
-# 9 – Conclusion
+# Conclusion
 
 This thesis has presented a holistic framework for the automated design, tuning and validation of robust nonlinear controllers for underactuated mechanical systems. By synergizing sliding mode control (SMC) with particle swarm optimization (PSO) and applying the methodology to the canonical double inverted pendulum (DIP) benchmark, we have demonstrated a systematic approach that bridges the gap between theoretical controller design and practical deployment. This chapter summarizes the primary contributions of the work, discusses key findings from the comprehensive controller comparison, acknowledges limitations and outlines directions for future research.
 
