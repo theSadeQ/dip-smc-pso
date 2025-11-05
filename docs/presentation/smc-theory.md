@@ -56,6 +56,45 @@ The classic controller includes several robustness enhancements:
 - **Actuator saturation:** The control input is saturated by `max_force` to respect actuator limits.
 These features make the classic SMC implementation stable and safe even when the model parameters deviate from their nominal values.
 
+### Lyapunov Stability Analysis
+
+The stability of classic SMC is rigorously established through Lyapunov theory. We use the simple quadratic Lyapunov function
+
+$$V(s) = \frac{1}{2}s^{2},$$
+
+which is positive definite and radially unbounded. Taking its time derivative along system trajectories yields
+
+$$\dot{V} = s\,\dot{s}.$$
+
+Outside the boundary layer \(|s| > \epsilon\), the saturation function becomes \(\mathrm{sat}(s/\epsilon) = \mathrm{sign}(s)\), and the control reduces to the discontinuous switching law. Assuming the equivalent control perfectly cancels the nominal dynamics and disturbances enter through the control channel (matched disturbances), the closed‑loop sliding‑surface dynamics satisfy
+
+$$\dot{s} = \beta\,[-K\,\mathrm{sign}(s) - k_{d}\,s + d_{u}(t)],$$
+
+where \(\beta = L\,M^{-1}B > 0\) is the controllability scalar and \(d_{u}(t)\) represents matched disturbances bounded by \(\bar{d}\). Substituting into \(\dot{V}\) and using \(s\,\mathrm{sign}(s) = |s|\), we obtain
+
+$$\dot{V} \leq \beta\,[-K|s| + |s|\,\bar{d}] - \beta\,k_{d}\,s^{2}.$$
+
+**Theorem (Classical SMC Asymptotic Stability):** If the switching gain satisfies \(K > \bar{d}\), then the sliding surface \(s\) converges asymptotically to zero. With \(k_{d} > 0\), convergence becomes exponential.
+
+*Proof sketch:* Choosing \(K = \bar{d} + \eta\) for some \(\eta > 0\) ensures
+
+$$\dot{V} \leq -\beta\,\eta\,|s| - \beta\,k_{d}\,s^{2} < 0 \quad \forall\,s \neq 0.$$
+
+This strict negativity guarantees asymptotic stability by Lyapunov's direct method. The term \(-\beta\,\eta\,|s|\) provides a finite‑time reaching phase, driving the state onto the sliding surface in time \(t_{\mathrm{reach}} \leq |s(0)|/(\eta\beta)\). Once on the surface, the reduced‑order dynamics \(\dot{\theta}_{i} + \lambda_{i}\,\theta_{i} = 0\) guarantee exponential convergence of the pendulum angles to zero with rate \(\lambda_{i}\).
+
+Inside the boundary layer \(|s| \leq \epsilon\), the saturation replaces the discontinuity with a continuous approximation, introducing a small steady‑state error. Standard boundary‑layer analysis shows that the ultimate bound satisfies
+
+$$\limsup_{t \to \infty} |s(t)| \leq \frac{\bar{d}\,\epsilon}{K}.$$
+
+Thus, reducing \(\epsilon\) tightens the tracking accuracy at the cost of increased chattering. The detailed proof and validation tests appear in `docs/theory/lyapunov_stability_proofs.md`.
+
+**Key Conditions:**
+- **Switching gain dominance:** \(K > \bar{d}\) ensures robustness to matched disturbances.
+- **Controllability:** \(\beta = L\,M^{-1}B > 0\) must remain bounded away from zero to avoid singularity.
+- **Positive sliding gains:** \(\lambda_{i}, k_{i} > 0\) define an attractive sliding manifold with exponential error dynamics.
+
+These conditions are checked at runtime via the `controllability_threshold` parameter and enforced by gain validation in `config.yaml`.
+
 ------------------------------------------------------------------------
 
 ## Variant II: Super‑Twisting Algorithm (STA) SMC
@@ -86,6 +125,39 @@ Tuning the STA gains \(K_{1}\) and \(K_{2}\) is crucial. In practice:
 
 The configuration file allows setting `K1_init` and `K2_init` for the hybrid controller and similar parameters for the pure STA controller under the `gains` entry. The `dt` parameter controls integration accuracy.
 
+### Formal Stability Guarantees
+
+The STA controller achieves stronger convergence properties than classic SMC by enforcing second‑order sliding mode, which drives both the sliding variable and its derivative to zero in finite time. The stability proof relies on a non‑smooth Lyapunov function that accommodates the square‑root nonlinearity in the control law. We use the generalised Lyapunov candidate
+
+$$V(s,z) = |s| + \frac{1}{2K_{2}}\,z^{2},$$
+
+where \(z\) is the internal integrator state. This function is continuous everywhere but has an undefined classical derivative at \(s=0\); hence we employ Clarke's generalised gradient to analyse its evolution. For \(s \neq 0\), the ordinary derivative exists and satisfies
+
+$$\dot{V} = \mathrm{sign}(s)\,\dot{s} + \frac{z}{K_{2}}\,\dot{z}.$$
+
+Substituting the STA dynamics \(\dot{s} = \beta\,[-K_{1}\sqrt{|s|}\,\mathrm{sign}(s) + z + d_{u}(t)]\) and \(\dot{z} = -K_{2}\,\mathrm{sign}(s)\), and assuming the disturbance derivative satisfies a Lipschitz bound \(|\dot{d}_{u}| \leq L\), one can show that
+
+$$\dot{V} \leq -c_{1}\,\|\xi\|^{3/2} + c_{2}\,L,$$
+
+where \(\xi = [|s|^{1/2}\,\mathrm{sign}(s),\,z]^{T}\) is an augmented state vector and \(c_{1},c_{2}\) are positive constants determined by \(K_{1}\) and \(K_{2}\). This inequality establishes finite‑time convergence to a residual neighbourhood of the origin whose size depends on the disturbance Lipschitz constant.
+
+**Theorem (STA Finite‑Time Convergence):** If the algorithmic gains satisfy the conditions
+
+$$K_{1} > \frac{2\sqrt{2\bar{d}}}{\sqrt{\beta}}, \quad K_{2} > \frac{\bar{d}}{\beta},$$
+
+then the super‑twisting algorithm drives the pair \((s,\dot{s})\) to zero in finite time, achieving exact second‑order sliding mode in the absence of unmatched disturbances.
+
+*Proof sketch:* The gain conditions ensure that the negative term \(-c_{1}\|\xi\|^{3/2}\) dominates the disturbance contribution when the state is far from the origin. The homogeneity property of the STA dynamics guarantees that the settling time is bounded and independent of initial conditions beyond a certain threshold. A detailed proof using strict Lyapunov functions appears in Moreno and Osorio (2012) and is summarised in `docs/theory/lyapunov_stability_proofs.md`.
+
+The boundary‑layer approximation used in the implementation introduces a small neighbourhood around \(s=0\) where the sign function is replaced by a saturation. This regularisation preserves finite‑time convergence outside the boundary layer and ensures continuous control, but it incurs a steady‑state error of order \(\mathcal{O}(\epsilon)\). The numerical test `test_lyapunov_decrease_sta` in `tests/test_core/test_lyapunov.py` verifies that \(V(t_{i+1}) < V(t_{i})\) throughout the simulation, confirming that the implementation adheres to the theoretical stability guarantees.
+
+**Key Conditions:**
+- **Gain dominance:** \(K_{1}\) and \(K_{2}\) must exceed the disturbance bounds scaled by the controllability factor \(\beta\).
+- **Gain ordering:** Typically \(K_{1} \approx K_{2}\) or \(K_{1} > K_{2}\) to balance proportional and integral actions.
+- **Lipschitz disturbances:** The disturbance derivative must be bounded to ensure finite settling time.
+
+These conditions are enforced through parameter validation in `config.yaml` and runtime monitoring of the controllability scalar.
+
 ------------------------------------------------------------------------
 
 ## Variant III: Adaptive SMC
@@ -102,6 +174,38 @@ The gain is confined between `K_min` and `K_max` to prevent unbounded growth. A 
 ### Practical considerations
 
 Adaptive SMC eliminates the need for prior knowledge of disturbance bounds and produces a continuous control signal, reducing chattering. However, it introduces additional parameters (adaptation rate, leak rate, dead zone) that require tuning and may yield slower transient response compared to fixed‑gain SMC if tuned conservatively.
+
+### Lyapunov-Based Stability Proof
+
+The adaptive switching gain \(K(t)\) evolves online to compensate for unknown disturbance bounds, and the stability analysis must account for both the sliding error \(s\) and the parameter estimation error \(\tilde{K} = K(t) - K^{*}\), where \(K^{*}\) is the ideal (but unknown) gain satisfying \(K^{*} \geq \bar{d}\). We employ a composite Lyapunov function that penalises both tracking error and parameter mismatch:
+
+$$V(s,\tilde{K}) = \frac{1}{2}s^{2} + \frac{1}{2\gamma}\,\tilde{K}^{2},$$
+
+where \(\gamma > 0\) is the adaptation rate. The first term measures the distance from the sliding surface, and the second term quantifies the estimation error scaled by the inverse adaptation rate. Taking the time derivative yields
+
+$$\dot{V} = s\,\dot{s} + \frac{1}{\gamma}\,\tilde{K}\,\dot{\tilde{K}}.$$
+
+Outside the dead zone \(|s| > \delta\), the adaptation law updates the gain as \(\dot{K} = \gamma\,|s| - \lambda(K - K_{\mathrm{init}})\), where the leak term \(-\lambda(K - K_{\mathrm{init}})\) prevents unbounded growth. Substituting the closed‑loop dynamics \(\dot{s} = \beta\,[-K(t)\,\mathrm{sign}(s) - \alpha\,s + d_{u}(t)]\) and using \(\tilde{K} = K - K^{*}\), we obtain
+
+$$\dot{V} = -\beta\,K^{*}\,|s| - \beta\,\alpha\,s^{2} + \beta\,s\,d_{u}(t) + \tilde{K}\,|s| - \frac{\lambda}{\gamma}\,\tilde{K}(K - K_{\mathrm{init}}).$$
+
+The cross‑term \(\tilde{K}\,|s|\) arises from the parameter error coupling with the sliding variable; it cancels the corresponding term in \(s\,\dot{s}\), leaving
+
+$$\dot{V} \leq -\beta(K^{*} - \bar{d})\,|s| - \beta\,\alpha\,s^{2} - \frac{\lambda}{\gamma}\,\tilde{K}^{2} + \frac{\lambda}{\gamma}\,|\tilde{K}|\,|K - K_{\mathrm{init}}|.$$
+
+**Theorem (Adaptive SMC Asymptotic Stability):** If an ideal gain \(K^{*} \geq \bar{d}\) exists and the parameters satisfy \(\gamma,\lambda,\alpha > 0\), then all signals \((s,K)\) remain bounded and the sliding variable converges to zero asymptotically: \(\lim_{t \to \infty} s(t) = 0\).
+
+*Proof sketch:* The Lyapunov derivative is negative definite when \((s,\tilde{K})\) are sufficiently large, establishing boundedness by standard Lyapunov arguments. The integral of \(\dot{V}\) over \([0,\infty)\) is finite, so \(V(t)\) converges to a limit. Applying Barbalat's lemma, \(\dot{V} \to 0\) implies \(s(t) \to 0\) as \(t \to \infty\). The parameter \(K(t)\) may not converge to \(K^{*}\) (persistent excitation is absent), but it remains bounded within \([K_{\min}, K_{\max}]\). A detailed proof appears in Roy (2020) and is reproduced in `docs/theory/lyapunov_stability_proofs.md`.
+
+Inside the dead zone \(|s| \leq \delta\), adaptation is frozen (\(\dot{K} = 0\)), and the Lyapunov derivative reduces to \(s\,\dot{s}\), which remains negative as long as \(K(t) > \bar{d}\). This condition is guaranteed by proper initialisation and the adaptation law's monotonic increase when needed.
+
+**Key Conditions:**
+- **Ideal gain existence:** There must exist \(K^{*} \geq \bar{d}\) to ensure the disturbance can be rejected.
+- **Positive adaptation rate:** \(\gamma > 0\) enables the gain to grow in response to large errors.
+- **Leak rate:** \(\lambda > 0\) prevents unbounded growth and pulls \(K\) back toward the nominal value.
+- **Gain bounds:** \(K_{\min} \leq K_{\mathrm{init}} \leq K_{\max}\) confine the adaptation to a safe interval.
+
+These parameters are specified in `config.yaml` and validated at runtime to ensure the stability conditions hold throughout the simulation.
 
 ------------------------------------------------------------------------
 
@@ -126,6 +230,37 @@ The hybrid control input consists of an equivalent part, a **super‑twisting co
 ### Advantages and tuning
 
 The hybrid adaptive–STA controller inherits the robustness of second‑order sliding mode and the flexibility of adaptive gain scheduling while remaining simpler than earlier dual‑surface designs.  Its unified sliding surface ensures consistent dynamics across all modes, and the adaptive gains allow the controller to handle unknown disturbance bounds without a priori tuning.  However, this comes at the expense of additional parameters: the sliding surface weights \(c_{1},c_{2},\lambda_{1},\lambda_{2},k_{c},\lambda_{c}\), the PD recentering gains \(p_{\mathrm{gain}},p_{\lambda}\), adaptation rates and dead‑zone widths.  Careful tuning of these parameters is essential to balance response speed, robustness and chattering.
+
+### Stability Analysis via Input-to-State Framework
+
+The hybrid controller's stability analysis is more involved than the previous variants because of the emergency reset logic implemented in `hybrid_adaptive_sta_smc.py`. When the system detects singularity or actuator saturation, it can reset the control input to zero and drastically reduce the adaptive gains \(k_{1}\) and \(k_{2}\). These resets introduce discontinuities in the Lyapunov function that preclude monotonic decrease, so we adopt an Input‑to‑State Stability (ISS) framework that treats emergency resets as exogenous disturbances.
+
+We define the composite Lyapunov candidate
+
+$$V(s,k_{1},k_{2},u_{\mathrm{int}}) = \frac{1}{2}s^{2} + \frac{1}{2\gamma_{1}}(k_{1} - k_{1}^{*})^{2} + \frac{1}{2\gamma_{2}}(k_{2} - k_{2}^{*})^{2} + \frac{1}{2}u_{\mathrm{int}}^{2},$$
+
+where \(k_{1}^{*}\) and \(k_{2}^{*}\) are ideal super‑twisting gains satisfying the stability conditions from Variant II, and \(u_{\mathrm{int}}\) is the integral term. Between emergency resets, the adaptation laws \(\dot{k}_{1} = \gamma_{1}\,|s|\,\mathrm{taper}(|s|) - \lambda_{\mathrm{leak}}\) and \(\dot{k}_{2} = \gamma_{2}\,|s|\,\mathrm{taper}(|s|) - \lambda_{\mathrm{leak}}\) cause the Lyapunov derivative to satisfy
+
+$$\dot{V} \leq -\alpha_{1}\,V + \alpha_{2}\,\|\mathbf{d}(t)\|,$$
+
+for positive constants \(\alpha_{1},\alpha_{2}\), establishing exponential decay toward a disturbance‑dependent neighbourhood. At reset instants, \(V\) may jump upward by an amount \(\Delta V_{\mathrm{reset}}\) bounded by the initial gain values and integrator state.
+
+**Theorem (Hybrid SMC Input‑to‑State Stability):** If emergency resets occur at most \(N_{\mathrm{reset}}\) times per unit time (finite reset frequency) and the super‑twisting gain conditions hold between resets, then the closed‑loop system is Input‑to‑State Stable and all signals remain bounded.
+
+*Proof sketch:* Using a comparison lemma, the Lyapunov function satisfies
+
+$$V(t) \leq e^{-\alpha_{1}t}\,V(0) + \sum_{i=1}^{N_{\mathrm{reset}}} \Delta V_{\mathrm{reset}}\,e^{-\alpha_{1}(t - t_{i})},$$
+
+where \(t_{i}\) are the reset times. If the reset frequency is bounded, the sum remains finite and \(V(t)\) is uniformly bounded for all \(t \geq 0\). This ISS property is weaker than asymptotic stability but appropriate for systems with safety resets. The key requirement is that resets do not occur infinitely often in finite time (no Zeno behaviour); the hysteresis in the dead‑zone logic and the tapering function \(\mathrm{taper}(|s|) = |s|/(|s| + \epsilon_{\mathrm{taper}})\) prevent rapid oscillations near the origin and ensure finite switching. A complete ISS proof using dwell‑time arguments appears in Khalil (2002) and is adapted to the hybrid controller in `docs/theory/lyapunov_stability_proofs.md`.
+
+In practice, the reset logic is invoked only during transient phases or under severe disturbances; during normal operation the controller behaves like a standard adaptive STA with exponential convergence. Logging emergency reset events during simulation allows verification that the finite‑frequency assumption holds.
+
+**Key Conditions:**
+- **Finite reset frequency:** Resets must not occur infinitely often, ensured by dead‑zone hysteresis and tapering.
+- **Gain dominance:** Between resets, \(k_{1}\) and \(k_{2}\) must satisfy the STA stability conditions.
+- **Positive parameters:** \(c_{1},c_{2},\lambda_{1},\lambda_{2},\gamma_{1},\gamma_{2},k_{d} > 0\) and proper initialisation within \([k_{i,\min}, k_{i,\max}]\).
+
+These conditions are validated through runtime monitoring and parameter checks in `config.yaml`.
 
 ------------------------------------------------------------------------
 

@@ -42,11 +42,11 @@ for the **cart force** \u\ required to satisfy \(\dot{\sigma}=0\). The inertia m
 
 #### Boundary layer and saturation
 
-The switching term uses a **saturation function** to approximate the discontinuous sign function within a small **boundary layer** of width \(\epsilon\). Such smoothing reduces the chattering inherent in the discontinuous sign function, but it comes at a cost: introducing a boundary layer increases the tracking error and slows the response \[4\]. In the code, the `saturate` utility implements two approximations—a hyperbolic tangent (`method='tanh'`) and a linear clipping (`method='linear`)—that smooth the sign function. Figure 1 plots the ideal sign function alongside these saturations. Notice how both approximations approach the discontinuous sign outside the boundary layer and produce smoother transitions inside.
+The switching term uses a **saturation function** to approximate the discontinuous sign function within a small **boundary layer** of width \(\epsilon\). Such smoothing reduces the chattering inherent in the discontinuous sign function, but it comes at a cost: introducing a boundary layer increases the tracking error and slows the response \[4\]. In the code, the `saturate` utility implements two approximations—a hyperbolic tangent (`method='tanh'`) and a linear clipping (`method='linear`)—that smooth the sign function. Figure 4.1 plots the ideal sign function alongside these saturations. Notice how both approximations approach the discontinuous sign outside the boundary layer and produce smoother transitions inside.
 
 Saturation function approximations
 
-*Figure 1 – Approximation of the sign function by the hyperbolic‑tangent and linear saturation methods. The boundary layer width \(\epsilon\) determines where the output transitions between −1 and 1.*
+*Figure 4.1 – Approximation of the sign function by the hyperbolic‑tangent and linear saturation methods. The boundary layer width \(\epsilon\) determines where the output transitions between −1 and 1.*
 
 ### Numerical robustness
 
