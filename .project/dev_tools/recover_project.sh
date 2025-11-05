@@ -175,10 +175,45 @@ fi
 echo ""
 
 # =============================================================================
+
+# =============================================================================
+# 6. Thesis Verification Status (LT-8)
+# =============================================================================
+
+echo -e "${GREEN}[6] THESIS VERIFICATION STATUS${NC}"
+echo -e "${CYAN}------------------------------------------------------------------------------${NC}"
+
+# Check if thesis verification is in progress
+if [ -d ".artifacts/thesis/checkpoints" ] && [ -f ".artifacts/thesis/checkpoints/checkpoint_latest.json" ]; then
+    echo -e "${YELLOW}[THESIS VERIFICATION IN PROGRESS]${NC}"
+    echo ""
+
+    # Use Python checkpoint manager to show status
+    python scripts/thesis/checkpoint_verification.py --status
+
+    echo ""
+    echo -e "${CYAN}RESUME THESIS VERIFICATION:${NC}"
+    echo "  python scripts/thesis/checkpoint_verification.py --resume"
+    echo "  python scripts/thesis/verify_chapter.py --chapter N --comprehensive --save"
+    echo ""
+elif [ -d ".artifacts/thesis" ]; then
+    echo -e "${YELLOW}[INFO] Thesis verification artifacts found but no active checkpoint${NC}"
+    echo "Start thesis verification:"
+    echo "  python scripts/thesis/verify_chapter.py --chapter 0 --comprehensive --save"
+    echo ""
+else
+    echo -e "${GREEN}[OK] No thesis verification in progress${NC}"
+    echo "To start LT-8 thesis verification:"
+    echo "  See: docs/thesis/verification/VERIFICATION_ROADMAP.md"
+    echo "  Run: python scripts/thesis/verify_chapter.py --chapter 0 --comprehensive --save"
+fi
+
+echo ""
+
 # 6. Recommended Next Actions
 # =============================================================================
 
-echo -e "${GREEN}[6] RECOMMENDED NEXT ACTIONS${NC}"
+echo -e "${GREEN}[7] RECOMMENDED NEXT ACTIONS${NC}"
 echo -e "${CYAN}------------------------------------------------------------------------------${NC}"
 
 if [ -f ".ai/config/project_state.json" ]; then
@@ -191,10 +226,10 @@ fi
 echo ""
 
 # =============================================================================
-# 7. Quick Start Commands
+# 8. Quick Start Commands
 # =============================================================================
 
-echo -e "${GREEN}[7] QUICK START COMMANDS${NC}"
+echo -e "${GREEN}[8] QUICK START COMMANDS${NC}"
 echo -e "${CYAN}------------------------------------------------------------------------------${NC}"
 echo ""
 echo "Initialize project state:"
