@@ -44,6 +44,11 @@ try:
 except ModuleNotFoundError:
     yaml = None
 
+try:
+    from src.utils.visualization import pso_plots
+except (ModuleNotFoundError, ImportError):
+    pso_plots = None
+
 from src.core.simulation_context import SimulationContext
 
 # Import provenance logging configuration.  This module attaches
@@ -459,6 +464,28 @@ def _run_pso(args: Args) -> int:
         print(f"  Best Gains: {np.array2string(np.asarray(best_gains), precision=4)}")
     else:
         print(f"  Best Gains: {best_gains}")
+
+    # Generate PSO convergence plot if requested
+    if args.plot and pso_plots is not None:
+        history = result.get("history", {})
+        cost_history = history.get("cost")
+        if cost_history is not None and len(cost_history) > 0:
+            # Save plot to optimization_results directory
+            output_dir = Path("optimization_results")
+            output_dir.mkdir(parents=True, exist_ok=True)
+            plot_path = output_dir / f"{ctrl_name}_convergence.png"
+
+            try:
+                pso_plots.plot_convergence(
+                    cost_history,
+                    save_path=str(plot_path),
+                    show=False,  # CLI mode, don't block execution
+                    title=f"PSO Convergence - {ctrl_name}"
+                )
+                print(f"  Convergence plot saved: {plot_path}")
+            except Exception as e:
+                # Gracefully handle plotting errors
+                logging.warning(f"Failed to generate convergence plot: {e}")
 
     # Optionally persist gains when requested
     if args.save_gains:
