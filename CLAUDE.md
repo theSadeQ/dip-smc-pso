@@ -2,7 +2,12 @@
 
 > This file contains project-specific instructions for Claude Code operations and automatic repository management.
 
-**Note:** This file uses ASCII text markers (e.g., [AI], [OK], [BLUE]) instead of Unicode emojis for Windows terminal compatibility. All documentation and scripts should follow this pattern to ensure proper display on Windows systems with cp1252 encoding.
+**CRITICAL RULE - NO EMOJIS:**
+- **NEVER use Unicode emojis** (🚀, ✅, ❌, etc.) in any code, scripts, output, or documentation
+- **ALWAYS use ASCII text markers** instead: [AI], [OK], [ERROR], [WARNING], [INFO], [BLUE], etc.
+- **Reason:** Windows terminal (cp1252 encoding) cannot display Unicode properly, causing crashes
+- **Applies to:** Python scripts, shell output, markdown docs, commit messages, all user-facing text
+- **Example:** Use "[OK]" not "✅", "[ERROR]" not "❌", "[INFO]" not "ℹ️"
 
 ------
 
