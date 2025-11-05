@@ -3,7 +3,7 @@
 **Master's Thesis**
 
 **Author:** [To be specified]
-**Institution:** [To be specified]  
+**Institution:** [To be specified] 
 **Date:** November 2025
 
 ---
@@ -37,7 +37,7 @@ The pursuit of high‑performance, robust control for complex nonlinear systems 
 
 ### References
 
-1.  **Double Inverted Pendulum – Will Beattie** – *accessed August 24, 2025*, available at: <http://willbeattie.ca/post/engineering/pendulum/>
+1. **Double Inverted Pendulum – Will Beattie** – *accessed August 24, 2025*, available at: <http://willbeattie.ca/post/engineering/pendulum/>
 2. **PEARL: Dual Mode Control of an Inverted Pendulum – Design and Implementation** – *accessed August 24, 2025*, available at: <https://researchportal.plymouth.ac.uk/files/46139792/ASTESJ_080613.pdf>
 3. **Inverted Pendulum System Disturbance and Uncertainty Effects Reduction using Sliding Mode‑Based Control Design** – *accessed August 24, 2025*, available at: <https://www.researchgate.net/publication/351759418_Inverted_Pendulum_System_Disturbance_and_Uncertainty_Effects_Reduction_using_Sliding_Mode-Based_Control_Design>
 4. **Sliding Mode Control of a Class of Underactuated System With Non‑Integrable Momentum – Queen’s University Belfast** – *accessed August 24, 2025*, available at: <https://pureadmin.qub.ac.uk/ws/files/214238289/multi_link_robot_r1_M3.pdf>
@@ -115,7 +115,7 @@ The pursuit of high‑performance, robust control for complex nonlinear systems 
 
 ### 4 Problem Definition and Objectives
 
-1.  **Design and optimise robust control strategies.** The overarching goal is to design, implement and optimise nonlinear controllers for the double‑inverted pendulum that mitigate chattering and eliminate tedious manual tuning. This goal is broken down into the following sub‑objectives: 2. **Implement a suite of nonlinear controllers.** The project implements and compares the following controllers: 1. **Classical SMC with a boundary layer** – implemented in `classic_smc.py`, this controller replaces the discontinuous sign function with a smooth saturation (or tanh) function to reduce chattering - ``` math 4 ``` . 2. **Super‑twisting SMC** – a second‑order sliding‑mode controller (`sta_smc.py`) that produces continuous control signals and provides finite‑time convergence while eliminating chattering - ``` math 7 ``` ``` math 8 ``` . 3. **Adaptive SMC** – implemented in `adaptive_smc.py`, this controller adjusts its switching gains online to handle parametric uncertainties and unknown payloads - ``` math 8 ``` . 4. **Hybrid adaptive super‑twisting SMC** – `hybrid_adaptive_sta_smc.py` combines the super‑twisting algorithm with adaptive gain laws, ensuring finite‑time convergence, smooth control and robustness to modelling errors. 5. **Energy‑based swing‑up SMC** – the `SwingUpSMC` controller in `swing_up_smc.py` uses an energy‑based law to swing the pendulums upright from the hanging configuration and hands off to a stabilising SMC once the angles are within tolerance, enabling recovery from arbitrary initial conditions. 6. **Model predictive controller (optional)** – `mpc_controller.py` provides a linear MPC baseline for comparison. 3. **Automate gain tuning with PSO.** The PSO algorithm searches over sliding‑surface coefficients and switching gains to minimise objectives such as the integral absolute error and control effort - ``` math 5 ``` ``` math 6 ``` . Hyper‑parameters of the PSO (inertia, cognitive and social weights) are tuned automatically, and the tuner supports robust optimisation by evaluating candidates on multiple perturbed models as described above. 4. **Validate controllers on multiple dynamics models.** Controllers tuned on the simplified model are validated on the high‑fidelity model (`dynamics_full.py`) to assess performance under more realistic dynamics. Disturbance rejection and noise robustness are also evaluated. 5. **Provide interactive user interfaces.** A command‑line interface (`simulate.py`) allows batch simulations and data export, while the Streamlit dashboard (`streamlit_app.py`) enables users to modify configuration parameters, run the PSO tuner, visualise trajectories and compute performance metrics interactively. These tools reproducible experimentation and make the algorithms accessible to practitioners. 6. **Develop an integrated system for experimentation and reliability.** 7. **Fault Detection and Isolation (FDI).** The `FDIsystem` in `src/fault_detection/fdi.py` compares one‑step model predictions with measured states and monitors a residual norm. When the residual exceeds a threshold for a specified number of consecutive steps, the system flags a fault. The FDI module records residual histories for later analysis and can be extended to incorporate innovations from an extended Kalman filter. 8. **Hardware‑in‑the‑loop (HIL) simulation.** The `src/hil` package implements a UDP‑based plant server (`plant_server.py`) and controller client (`controller_client.py`) that communicate over a network. The plant server integrates the pendulum dynamics (light or full) and returns sensor measurements, optionally with latency and noise, while the controller client runs one of the controllers and sends control commands. This infrastructure enables closed‑loop experiments with remote simulators or physical hardware and bridges the gap between software simulations and real‑world deployment. ### 5 Expected Contributions - **characterisation of the DIP control problem.** This report details why the double‑inverted pendulum is under‑actuated, nonlinear and naturally unstable and summarises the limitations of classical linear controllers &nbsp; - ``` math 1 ``` ``` math 2 ``` . &nbsp; - **Dual‑model simulation framework.** By providing both a simplified dynamics model (`dynamics.py`) for rapid experimentation and a high‑fidelity model (`dynamics_full.py`) for validation, the project offers a realistic yet efficient environment for controller design. - **Implementation of a rich set of controllers.** Classical SMC with boundary layers, super‑twisting SMC, adaptive SMC, hybrid adaptive super‑twisting SMC, an energy‑based swing‑up controller and a linear MPC baseline are implemented. These controllers can be compared systematically to evaluate chattering reduction, robustness and energy efficiency. - **Robust PSO‑based gain tuning.** The PSO tuner automates the selection of sliding‑surface and switching gains, performs hyper‑parameter searches and supports robust optimisation across multiple perturbed physics models defined in `config.yaml`, yielding gains that perform well under parametric uncertainty &nbsp; - ``` math 5 ``` ``` math 6 ``` . &nbsp; - **User‑friendly interfaces and tooling.** Command‑line and Streamlit interfaces simplify simulation, tuning and visualisation, while benchmarking scripts and notebooks provide reproducible experiments. - **Fault detection and hardware‑in‑the‑loop features.** The FDI module enables monitoring of residuals for anomaly detection, and the HIL client/server infrastructure permits testing controllers with networked plants or physical devices, expanding the applicability of the controllers beyond simulations. - **evaluation and analysis.** The controllers are evaluated on high‑fidelity models with disturbances, measurement noise and parameter uncertainty; metrics such as tracking error, control effort, chattering amplitude and settling time are reported to identify trade‑offs between robustness and chattering mitigation. ### 6 References 1. Al Juboori, A.M., Hussain, M.T., & Guler Qanber, A.S., “Swing‑up control of double‑inverted pendulum systems,” *Nonlinear Systems* (2024). 2. Osman, N., et al., “Inverted pendulum system disturbance and uncertainty effects reduction using sliding mode‑based control design,” *Proc. SSD 2021*. 3. Belhocine, M., Hamerlain, M., & Bouyoucef, K., “Robot control using a sliding mode,” *ISIC 1997*. 4. Idrees, M., Ullah, S., & Muhammad, S., “Sliding mode control design for stabilization of underactuated mechanical systems,” *J. Control Theory Appl.*, 2019. 5. Saidi, K., Boumediene, A., & Massoum, S., “An optimal PSO‑based sliding‑mode control scheme for the robot manipulator,” *Electrotechnical Review*, 2020. 6. Benuwa, B.B., Ghansah, B., Wornyo, D.K., & Adabunu, S.A., “A review of particle swarm optimization,” *Int. J. Eng. Res. Afr.*, 2016. 7. Nguyen, T.L., & Vu, H.T., “Super‑twisting sliding mode based nonlinear control for planar dual arm robots,” *IAES Int. J. Robot. Autom.*, 2020. 8. Lochan, K., Seneviratne, L., & Hussain, I., “Adaptive global super‑twisting sliding mode control for trajectory tracking of two‑link flexible manipulators,” *IEEE Access*, 2025. ------------------------------------------------------------------------ ------------------------------------------------------------------------
+1. **Design and optimise robust control strategies.** The overarching goal is to design, implement and optimise nonlinear controllers for the double‑inverted pendulum that mitigate chattering and eliminate tedious manual tuning. This goal is broken down into the following sub‑objectives: 2. **Implement a suite of nonlinear controllers.** The project implements and compares the following controllers: 1. **Classical SMC with a boundary layer** – implemented in `classic_smc.py`, this controller replaces the discontinuous sign function with a smooth saturation (or tanh) function to reduce chattering - ``` math 4 ``` . 2. **Super‑twisting SMC** – a second‑order sliding‑mode controller (`sta_smc.py`) that produces continuous control signals and provides finite‑time convergence while eliminating chattering - ``` math 7 ``` ``` math 8 ``` . 3. **Adaptive SMC** – implemented in `adaptive_smc.py`, this controller adjusts its switching gains online to handle parametric uncertainties and unknown payloads - ``` math 8 ``` . 4. **Hybrid adaptive super‑twisting SMC** – `hybrid_adaptive_sta_smc.py` combines the super‑twisting algorithm with adaptive gain laws, ensuring finite‑time convergence, smooth control and robustness to modelling errors. 5. **Energy‑based swing‑up SMC** – the `SwingUpSMC` controller in `swing_up_smc.py` uses an energy‑based law to swing the pendulums upright from the hanging configuration and hands off to a stabilising SMC once the angles are within tolerance, enabling recovery from arbitrary initial conditions. 6. **Model predictive controller (optional)** – `mpc_controller.py` provides a linear MPC baseline for comparison. 3. **Automate gain tuning with PSO.** The PSO algorithm searches over sliding‑surface coefficients and switching gains to minimise objectives such as the integral absolute error and control effort - ``` math 5 ``` ``` math 6 ``` . Hyper‑parameters of the PSO (inertia, cognitive and social weights) are tuned automatically, and the tuner supports robust optimisation by evaluating candidates on multiple perturbed models as described above. 4. **Validate controllers on multiple dynamics models.** Controllers tuned on the simplified model are validated on the high‑fidelity model (`dynamics_full.py`) to assess performance under more realistic dynamics. Disturbance rejection and noise robustness are also evaluated. 5. **Provide interactive user interfaces.** A command‑line interface (`simulate.py`) allows batch simulations and data export, while the Streamlit dashboard (`streamlit_app.py`) enables users to modify configuration parameters, run the PSO tuner, visualise trajectories and compute performance metrics interactively. These tools reproducible experimentation and make the algorithms accessible to practitioners. 6. **Develop an integrated system for experimentation and reliability.** 7. **Fault Detection and Isolation (FDI).** The `FDIsystem` in `src/fault_detection/fdi.py` compares one‑step model predictions with measured states and monitors a residual norm. When the residual exceeds a threshold for a specified number of consecutive steps, the system flags a fault. The FDI module records residual histories for later analysis and can be extended to incorporate innovations from an extended Kalman filter. 8. **Hardware‑in‑the‑loop (HIL) simulation.** The `src/hil` package implements a UDP‑based plant server (`plant_server.py`) and controller client (`controller_client.py`) that communicate over a network. The plant server integrates the pendulum dynamics (light or full) and returns sensor measurements, optionally with latency and noise, while the controller client runs one of the controllers and sends control commands. This infrastructure enables closed‑loop experiments with remote simulators or physical hardware and bridges the gap between software simulations and real‑world deployment. ### 5 Expected Contributions - **characterisation of the DIP control problem.** This report details why the double‑inverted pendulum is under‑actuated, nonlinear and naturally unstable and summarises the limitations of classical linear controllers &nbsp; - ``` math 1 ``` ``` math 2 ``` . &nbsp; - **Dual‑model simulation framework.** By providing both a simplified dynamics model (`dynamics.py`) for rapid experimentation and a high‑fidelity model (`dynamics_full.py`) for validation, the project offers a realistic yet efficient environment for controller design. - **Implementation of a rich set of controllers.** Classical SMC with boundary layers, super‑twisting SMC, adaptive SMC, hybrid adaptive super‑twisting SMC, an energy‑based swing‑up controller and a linear MPC baseline are implemented. These controllers can be compared systematically to evaluate chattering reduction, robustness and energy efficiency. - **Robust PSO‑based gain tuning.** The PSO tuner automates the selection of sliding‑surface and switching gains, performs hyper‑parameter searches and supports robust optimisation across multiple perturbed physics models defined in `config.yaml`, yielding gains that perform well under parametric uncertainty &nbsp; - ``` math 5 ``` ``` math 6 ``` . &nbsp; - **User‑friendly interfaces and tooling.** Command‑line and Streamlit interfaces simplify simulation, tuning and visualisation, while benchmarking scripts and notebooks provide reproducible experiments. - **Fault detection and hardware‑in‑the‑loop features.** The FDI module enables monitoring of residuals for anomaly detection, and the HIL client/server infrastructure permits testing controllers with networked plants or physical devices, expanding the applicability of the controllers beyond simulations. - **evaluation and analysis.** The controllers are evaluated on high‑fidelity models with disturbances, measurement noise and parameter uncertainty; metrics such as tracking error, control effort, chattering amplitude and settling time are reported to identify trade‑offs between robustness and chattering mitigation. ### 6 References 1. Al Juboori, A.M., Hussain, M.T., & Guler Qanber, A.S., “Swing‑up control of double‑inverted pendulum systems,” *Nonlinear Systems* (2024). 2. Osman, N., et al., “Inverted pendulum system disturbance and uncertainty effects reduction using sliding mode‑based control design,” *Proc. SSD 2021*. 3. Belhocine, M., Hamerlain, M., & Bouyoucef, K., “Robot control using a sliding mode,” *ISIC 1997*. 4. Idrees, M., Ullah, S., & Muhammad, S., “Sliding mode control design for stabilization of underactuated mechanical systems,” *J. Control Theory Appl.*, 2019. 5. Saidi, K., Boumediene, A., & Massoum, S., “An optimal PSO‑based sliding‑mode control scheme for the robot manipulator,” *Electrotechnical Review*, 2020. 6. Benuwa, B.B., Ghansah, B., Wornyo, D.K., & Adabunu, S.A., “A review of particle swarm optimization,” *Int. J. Eng. Res. Afr.*, 2016. 7. Nguyen, T.L., & Vu, H.T., “Super‑twisting sliding mode based nonlinear control for planar dual arm robots,” *IAES Int. J. Robot. Autom.*, 2020. 8. Lochan, K., Seneviratne, L., & Hussain, I., “Adaptive global super‑twisting sliding mode control for trajectory tracking of two‑link flexible manipulators,” *IEEE Access*, 2025. ------------------------------------------------------------------------ ------------------------------------------------------------------------
 
 
 ---
@@ -296,13 +296,13 @@ While this project focuses on simulation and optimisation, experimental validati
 
 ### 8.1 Key Trends
 
-1.  **Finite‑time convergence and chattering reduction.** High‑order methods such as super‑twisting and terminal sliding mode achieve finite‑time convergence and continuous control, significantly reducing chattering[\[2\]](https://pmc.ncbi.nlm.nih.gov/articles/PMC11466434/#:~:text=This%20paper%20presents%20an%20improved,Simulation%20results%20demonstrate)[\[3\]](https://jeas.springeropen.com/articles/10.1186/s44147-024-00553-0#:~:text=Considering%20the%20improvement%20of%20transient,performance%20and%20strong%20robust%20performance).
+1. **Finite‑time convergence and chattering reduction.** High‑order methods such as super‑twisting and terminal sliding mode achieve finite‑time convergence and continuous control, significantly reducing chattering[\[2\]](https://pmc.ncbi.nlm.nih.gov/articles/PMC11466434/#:~:text=This%20paper%20presents%20an%20improved,Simulation%20results%20demonstrate)[\[3\]](https://jeas.springeropen.com/articles/10.1186/s44147-024-00553-0#:~:text=Considering%20the%20improvement%20of%20transient,performance%20and%20strong%20robust%20performance).
 
-2.  **Adaptive and intelligent tuning.** Adaptive SMC, fuzzy logic, neural networks and reinforcement learning allow controllers to adjust gains or compensate unknown dynamics online. These methods improve robustness and performance in dynamic environments[\[7\]](https://journals.plos.org/plosone/article#:~:text=caused%20by%20wheel,minimized%20by%20fuzzy%20tuning%20approach)[\[8\]](https://cjme.springeropen.com/articles/10.1186/s10033-024-01172-9#:~:text=Tracking%20control%20of%20tendon,3%7D%20rad)[\[9\]](https://arxiv.org/abs/2407.18309).
+2. **Adaptive and intelligent tuning.** Adaptive SMC, fuzzy logic, neural networks and reinforcement learning allow controllers to adjust gains or compensate unknown dynamics online. These methods improve robustness and performance in dynamic environments[\[7\]](https://journals.plos.org/plosone/article#:~:text=caused%20by%20wheel,minimized%20by%20fuzzy%20tuning%20approach)[\[8\]](https://cjme.springeropen.com/articles/10.1186/s10033-024-01172-9#:~:text=Tracking%20control%20of%20tendon,3%7D%20rad)[\[9\]](https://arxiv.org/abs/2407.18309).
 
-3.  **Metaheuristic optimisation.** Particle swarm optimisation and its hybrid variants automate tuning of sliding surfaces and gains. Robust sampling and seeding ensure reproducibility and good performance under uncertainty[\[2\]](https://pmc.ncbi.nlm.nih.gov/articles/PMC11466434/#:~:text=This%20paper%20presents%20an%20improved,Simulation%20results%20demonstrate)[\[6\]](https://www.researchgate.net/publication/382125063_Optimized_Hierarchical_Sliding_Mode_Control_for_the_Swing-up_and_Stabilization_of_a_Rotary_Inverted_Pendulum#:~:text=This%20paper%20presents%20a%20study,of%20combining%20optimization%20algorithms%20with).
+3. **Metaheuristic optimisation.** Particle swarm optimisation and its hybrid variants automate tuning of sliding surfaces and gains. Robust sampling and seeding ensure reproducibility and good performance under uncertainty[\[2\]](https://pmc.ncbi.nlm.nih.gov/articles/PMC11466434/#:~:text=This%20paper%20presents%20an%20improved,Simulation%20results%20demonstrate)[\[6\]](https://www.researchgate.net/publication/382125063_Optimized_Hierarchical_Sliding_Mode_Control_for_the_Swing-up_and_Stabilization_of_a_Rotary_Inverted_Pendulum#:~:text=This%20paper%20presents%20a%20study,of%20combining%20optimization%20algorithms%20with).
 
-4.  **Hierarchical and integral formulations.** Hierarchical SMC and dynamic integral SMC eliminate the reaching phase and handle underactuated dynamics or slow convergence, offering new avenues for robust control[\[6\]](https://www.researchgate.net/publication/382125063_Optimized_Hierarchical_Sliding_Mode_Control_for_the_Swing-up_and_Stabilization_of_a_Rotary_Inverted_Pendulum#:~:text=This%20paper%20presents%20a%20study,of%20combining%20optimization%20algorithms%20with)[\[4\]](https://pmc.ncbi.nlm.nih.gov/articles/PMC10450744/#:~:text=for%20power%20electronic%20converters%2C%20which,cost%2C%20conversion%20speed%20and%20implementation).
+4. **Hierarchical and integral formulations.** Hierarchical SMC and dynamic integral SMC eliminate the reaching phase and handle underactuated dynamics or slow convergence, offering new avenues for robust control[\[6\]](https://www.researchgate.net/publication/382125063_Optimized_Hierarchical_Sliding_Mode_Control_for_the_Swing-up_and_Stabilization_of_a_Rotary_Inverted_Pendulum#:~:text=This%20paper%20presents%20a%20study,of%20combining%20optimization%20algorithms%20with)[\[4\]](https://pmc.ncbi.nlm.nih.gov/articles/PMC10450744/#:~:text=for%20power%20electronic%20converters%2C%20which,cost%2C%20conversion%20speed%20and%20implementation).
 
 ### 8.2 Research Gaps and Open Questions
 
@@ -316,31 +316,31 @@ While this project focuses on simulation and optimisation, experimental validati
 
 ### 8.3 Actionable Recommendations
 
-1.  **Explore hierarchical and terminal sliding surfaces for the DIP.** Combining hierarchical sliding surfaces with PPNFTSM or dynamic integral manifolds could yield faster convergence and improved robustness.
+1. **Explore hierarchical and terminal sliding surfaces for the DIP.** Combining hierarchical sliding surfaces with PPNFTSM or dynamic integral manifolds could yield faster convergence and improved robustness.
 
-2.  **Apply hybrid PSO variants.** Use hybrid PSO (e.g., HEPSO) to tune high‑order and adaptive SMC parameters, balancing exploration and exploitation.
+2. **Apply hybrid PSO variants.** Use hybrid PSO (e.g., HEPSO) to tune high‑order and adaptive SMC parameters, balancing exploration and exploitation.
 
-3.  **Integrate intelligent adaptation.** Incorporate fuzzy logic, neural networks or reinforcement learning to adapt switching functions and gains. For example, use an RBF network to estimate unmodelled dynamics and combine it with an adaptive SMC law.
+3. **Integrate intelligent adaptation.** Incorporate fuzzy logic, neural networks or reinforcement learning to adapt switching functions and gains. For example, use an RBF network to estimate unmodelled dynamics and combine it with an adaptive SMC law.
 
-4.  **Pursue experimental validation.** Implement the optimised controllers on physical hardware via the HIL interface. Use domain randomisation and robust tuning to ensure that controllers handle friction, delays and disturbances.
+4. **Pursue experimental validation.** Implement the optimised controllers on physical hardware via the HIL interface. Use domain randomisation and robust tuning to ensure that controllers handle friction, delays and disturbances.
 
 ## References
 
-1.  Xin Zhang & Ruikang Wang, “Non‑singular fast terminal sliding mode control of robotic manipulator with prescribed performance,” *Journal of Engineering and Applied Science*, 2024. The paper designs a PPNFTSM controller that introduces performance functions, transforms errors using a hyperbolic tangent and combines them with a non‑singular fast terminal sliding surface. Stability is proven via Lyapunov analysis and simulations show finite‑time convergence and robust performance[\[3\]](https://jeas.springeropen.com/articles/10.1186/s44147-024-00553-0#:~:text=Considering%20the%20improvement%20of%20transient,performance%20and%20strong%20robust%20performance).
+1. Xin Zhang & Ruikang Wang, “Non‑singular fast terminal sliding mode control of robotic manipulator with prescribed performance,” *Journal of Engineering and Applied Science*, 2024. The paper designs a PPNFTSM controller that introduces performance functions, transforms errors using a hyperbolic tangent and combines them with a non‑singular fast terminal sliding surface. Stability is proven via Lyapunov analysis and simulations show finite‑time convergence and robust performance[\[3\]](https://jeas.springeropen.com/articles/10.1186/s44147-024-00553-0#:~:text=Considering%20the%20improvement%20of%20transient,performance%20and%20strong%20robust%20performance).
 
-2.  Yasir Mehmood *et al.*, “Robust fractional and integral fuzzy sliding mode controller for a skid‑steered vehicle subjected to friction variations,” *PLOS One*, 2021. The authors design fuzzy fractional and integral sliding mode controllers that reduce the effects of friction variations and minimise chattering[\[7\]](https://journals.plos.org/plosone/article#:~:text=caused%20by%20wheel,minimized%20by%20fuzzy%20tuning%20approach).
+2. Yasir Mehmood *et al.*, “Robust fractional and integral fuzzy sliding mode controller for a skid‑steered vehicle subjected to friction variations,” *PLOS One*, 2021. The authors design fuzzy fractional and integral sliding mode controllers that reduce the effects of friction variations and minimise chattering[\[7\]](https://journals.plos.org/plosone/article#:~:text=caused%20by%20wheel,minimized%20by%20fuzzy%20tuning%20approach).
 
-3.  Yudong Zhang *et al.*, “Neural Network Adaptive Hierarchical Sliding Mode Control for the Trajectory Tracking of a Tendon‑Driven Manipulator,” *Chinese Journal of Mechanical Engineering*, 2025. The paper proposes an RBF neural network adaptive hierarchical SMC method that combines elastic tendon dynamics with hierarchical SMC and radial basis neural networks. Stability is established and experiments demonstrate superior tracking accuracy[\[8\]](https://cjme.springeropen.com/articles/10.1186/s10033-024-01172-9#:~:text=Tracking%20control%20of%20tendon,3%7D%20rad).
+3. Yudong Zhang *et al.*, “Neural Network Adaptive Hierarchical Sliding Mode Control for the Trajectory Tracking of a Tendon‑Driven Manipulator,” *Chinese Journal of Mechanical Engineering*, 2025. The paper proposes an RBF neural network adaptive hierarchical SMC method that combines elastic tendon dynamics with hierarchical SMC and radial basis neural networks. Stability is established and experiments demonstrate superior tracking accuracy[\[8\]](https://cjme.springeropen.com/articles/10.1186/s10033-024-01172-9#:~:text=Tracking%20control%20of%20tendon,3%7D%20rad).
 
-4.  Morteza Mirzaee & Reza Kazemi, “Adaptive Terminal Sliding Mode Control Using Deep Reinforcement Learning for Zero‑Force Control of Exoskeleton Robot Systems,” arXiv preprint 2024. The controller combines an adaptive integral terminal sliding surface with an exponential reaching law and a PPO‑based DRL agent with attention and LSTM mechanisms. It achieves finite‑time convergence, reduces chattering and adapts to disturbances[\[9\]](https://arxiv.org/abs/2407.18309).
+4. Morteza Mirzaee & Reza Kazemi, “Adaptive Terminal Sliding Mode Control Using Deep Reinforcement Learning for Zero‑Force Control of Exoskeleton Robot Systems,” arXiv preprint 2024. The controller combines an adaptive integral terminal sliding surface with an exponential reaching law and a PPO‑based DRL agent with attention and LSTM mechanisms. It achieves finite‑time convergence, reduces chattering and adapts to disturbances[\[9\]](https://arxiv.org/abs/2407.18309).
 
-5.  Xin Zhang *et al.*, “Optimized hierarchical sliding mode control for the swing‑up and stabilisation of a rotary inverted pendulum,” ResearchGate preprint 2024. This work constructs hierarchical sliding surfaces and uses particle swarm optimisation to tune controller gains, achieving improved adaptability and robustness for swing‑up and stabilization[\[6\]](https://www.researchgate.net/publication/382125063_Optimized_Hierarchical_Sliding_Mode_Control_for_the_Swing-up_and_Stabilization_of_a_Rotary_Inverted_Pendulum#:~:text=This%20paper%20presents%20a%20study,of%20combining%20optimization%20algorithms%20with).
+5. Xin Zhang *et al.*, “Optimized hierarchical sliding mode control for the swing‑up and stabilisation of a rotary inverted pendulum,” ResearchGate preprint 2024. This work constructs hierarchical sliding surfaces and uses particle swarm optimisation to tune controller gains, achieving improved adaptability and robustness for swing‑up and stabilization[\[6\]](https://www.researchgate.net/publication/382125063_Optimized_Hierarchical_Sliding_Mode_Control_for_the_Swing-up_and_Stabilization_of_a_Rotary_Inverted_Pendulum#:~:text=This%20paper%20presents%20a%20study,of%20combining%20optimization%20algorithms%20with).
 
-6.  Mudasar Riaz *et al.*, “A novel dynamic integral sliding mode control for power electronic converters,” *Science Progress*, 2021. The authors design a dynamic integral sliding manifold that eliminates the reaching phase and provides a continuous control signal. The combination of dynamic and integral SMC yields robust performance and reduces matched and unmatched uncertainties[\[4\]](https://pmc.ncbi.nlm.nih.gov/articles/PMC10450744/#:~:text=for%20power%20electronic%20converters%2C%20which,cost%2C%20conversion%20speed%20and%20implementation)[\[5\]](https://pmc.ncbi.nlm.nih.gov/articles/PMC10450744/#:~:text=In%20this%20section%2C%20the%20design,achieve%20the%20required%20performance%20and).
+6. Mudasar Riaz *et al.*, “A novel dynamic integral sliding mode control for power electronic converters,” *Science Progress*, 2021. The authors design a dynamic integral sliding manifold that eliminates the reaching phase and provides a continuous control signal. The combination of dynamic and integral SMC yields robust performance and reduces matched and unmatched uncertainties[\[4\]](https://pmc.ncbi.nlm.nih.gov/articles/PMC10450744/#:~:text=for%20power%20electronic%20converters%2C%20which,cost%2C%20conversion%20speed%20and%20implementation)[\[5\]](https://pmc.ncbi.nlm.nih.gov/articles/PMC10450744/#:~:text=In%20this%20section%2C%20the%20design,achieve%20the%20required%20performance%20and).
 
-7.  An improved nonsingular adaptive super‑twisting sliding mode controller for quadcopter control,” *PLOS One*, 2024. The paper utilises the super‑twisting algorithm with an adaptive gain law and tunes gains via PSO. Simulation results show reduced tracking errors and robust disturbance rejection[\[2\]](https://pmc.ncbi.nlm.nih.gov/articles/PMC11466434/#:~:text=This%20paper%20presents%20an%20improved,Simulation%20results%20demonstrate).
+7. An improved nonsingular adaptive super‑twisting sliding mode controller for quadcopter control,” *PLOS One*, 2024. The paper utilises the super‑twisting algorithm with an adaptive gain law and tunes gains via PSO. Simulation results show reduced tracking errors and robust disturbance rejection[\[2\]](https://pmc.ncbi.nlm.nih.gov/articles/PMC11466434/#:~:text=This%20paper%20presents%20an%20improved,Simulation%20results%20demonstrate).
 
-8.  Zhaolin Huang *et al.*, “Full‑order adaptive sliding mode control with extended state observer for high‑speed PMSM speed regulation,” *Scientific Reports*, 2023. The controller adapts switching gains and uses an extended state observer to estimate disturbances, improving anti‑disturbance capability while reducing chattering[\[1\]](https://www.nature.com/articles/s41598-023-33455-x#:~:text=In%20order%20to%20achieve%20speed,been%20validated%20in%20the%20test).
+8. Zhaolin Huang *et al.*, “Full‑order adaptive sliding mode control with extended state observer for high‑speed PMSM speed regulation,” *Scientific Reports*, 2023. The controller adapts switching gains and uses an extended state observer to estimate disturbances, improving anti‑disturbance capability while reducing chattering[\[1\]](https://www.nature.com/articles/s41598-023-33455-x#:~:text=In%20order%20to%20achieve%20speed,been%20validated%20in%20the%20test).
 
 ------------------------------------------------------------------------
 
@@ -441,7 +441,7 @@ The report is organised as follows. Each controller variant is presented with a 
 
 Classic SMC designs a linear **sliding surface** that combines position and velocity errors. For second‑order systems such as the DIP, the surface is typically a linear combination of the tracking error and its first derivative \[5\]. In this report the sliding surface is
 
-    \sigma = \lambda_{1}\,\theta_{1} + \lambda_{2}\,\theta_{2} + k_{1}\,\dot{\theta}_{1} + k_{2}\,\dot{\theta}_{2},
+ \sigma = \lambda_{1}\,\theta_{1} + \lambda_{2}\,\theta_{2} + k_{1}\,\dot{\theta}_{1} + k_{2}\,\dot{\theta}_{2},
 
 where \(\theta_{i}\) are the pendulum angles, \(\dot{\theta}_{i}\) their angular velocities, and \(\lambda_{i}>0\) are design gains. The implementation computes the sliding variable in the `_compute_sliding_surface` method of `classic_smc.py`:
 
@@ -451,13 +451,13 @@ where \(\theta_{i}\) are the pendulum angles, \(\dot{\theta}_{i}\) their angular
 
 The control input \u\ is decomposed into an **equivalent control** \u\_{\mathrm{eq}} that cancels the nominal dynamics and a **robust switching** term \u\_{\mathrm{sw}} that drives \(\sigma\) toward zero. This decomposition, often written as \(u = u_{eq} + u_{sw}\), is standard in sliding‑mode design \[5\]:
 
-    u = u_{eq} - K\, sat\left( \frac{\sigma}{\epsilon} \right) - k_{d}\,\sigma.
+ u = u_{eq} - K\, sat\left( \frac{\sigma}{\epsilon} \right) - k_{d}\,\sigma.
 
 #### Equivalent control computation
 
 In `classic_smc.py` the `_compute_equivalent_control` method solves the dynamic equation of the DIP:
 
-    M(q)\ddot{q} + C\left( q,\dot{q} \right)\dot{q} + G(q) = B\, u,
+ M(q)\ddot{q} + C\left( q,\dot{q} \right)\dot{q} + G(q) = B\, u,
 
 for the **cart force** \u\ required to satisfy \(\dot{\sigma}=0\). The inertia matrix \M(q)\ is computed from the physics parameters and then **regularised** by adding a small diagonal term. Before inversion the code checks the condition number of \M(q)\; if it is ill‑conditioned the method resorts to the pseudo‑inverse (`np.linalg.pinv`) to avoid numerical singularities. This careful handling prevents blow‑ups when the pendulum angles approach singular configurations. The resulting \u\_{\mathrm{eq}} is limited by the `max_force` parameter in the configuration.
 
@@ -524,14 +524,14 @@ These conditions are checked at runtime via the `controllability_threshold` para
 
 The **super‑twisting algorithm** (STA) is a second‑order sliding mode technique that suppresses chattering by applying the discontinuity on the **derivative** of the control signal rather than on the control itself. By moving the discontinuity to the derivative, the control input becomes continuous, which greatly reduces high‑frequency oscillations while preserving the robustness of sliding‑mode control and guaranteeing finite‑time convergence to the sliding set \[6\]. The sliding variable \(\sigma\) for the STA controller is similar to the classic one but is scaled by separate gains. In `sta_smc.py` it is computed as
 
-    \sigma = k_{1}\,\left( {\dot{\theta}}_{1} + \lambda_{1}\,\theta_{1} \right) + k_{2}\,\left( {\dot{\theta}}_{2} + \lambda_{2}\,\theta_{2} \right).
+ \sigma = k_{1}\,\left( {\dot{\theta}}_{1} + \lambda_{1}\,\theta_{1} \right) + k_{2}\,\left( {\dot{\theta}}_{2} + \lambda_{2}\,\theta_{2} \right).
 
 The STA control comprises two components:
 
 1.  **Continuous term** \(u_{c}=-K_{1}\sqrt{\|\sigma\|}\,\mathrm{sgn}(\sigma)\); this term acts like a damping force proportional to \(\sqrt{\|\sigma\|}\).
-2.  **Integral term** \(u_{i}\) generated by integrating the sign of \(\sigma\): the internal state \(z\) is updated as \(z\leftarrow z - K_{2}\,\mathrm{sgn}(\sigma)\,\mathrm{d}t\). The integral of the discontinuity produces a continuous control signal, effectively moving the discontinuity to its derivative.
+2. **Integral term** \(u_{i}\) generated by integrating the sign of \(\sigma\): the internal state \(z\) is updated as \(z\leftarrow z - K_{2}\,\mathrm{sgn}(\sigma)\,\mathrm{d}t\). The integral of the discontinuity produces a continuous control signal, effectively moving the discontinuity to its derivative.
 
-The total control is \(u = u_{\mathrm{eq}} + u_{c} + z\). Because the discontinuity is applied to the derivative rather than to the control itself, the resulting control law is continuous and enforces finite‑time convergence of both the sliding variable and its derivative \[6\].  In our implementation the internal integrator for \(z\) is updated explicitly using the time step `dt`; the previously supported `semi_implicit` configuration key has been removed from the code and should not appear in `config.yaml`.
+The total control is \(u = u_{\mathrm{eq}} + u_{c} + z\). Because the discontinuity is applied to the derivative rather than to the control itself, the resulting control law is continuous and enforces finite‑time convergence of both the sliding variable and its derivative \[6\]. In our implementation the internal integrator for \(z\) is updated explicitly using the time step `dt`; the previously supported `semi_implicit` configuration key has been removed from the code and should not appear in `config.yaml`.
 
 ### Lyapunov stability and numerical verification
 
@@ -588,7 +588,7 @@ These conditions are enforced through parameter validation in `config.yaml` and 
 Adaptive SMC adjusts the switching gain \(K\) on‑line to compensate for unknown disturbance bounds. Rather than fixing \(K\) using the worst‑case disturbance, the controller updates \(K(t)\) according to an adaptation law that increases the gain when the system is far from the sliding manifold and decreases it when the state enters a neighbourhood of the manifold. This approach eliminates the need for a priori knowledge of the disturbance bound and avoids overly conservative gains \[7\]. In `adaptive_smc.py`, the `compute_control` method implements the adaptation:
 
 1. When \(|\sigma|\) exceeds a specified **dead zone** (parameter `dead_zone`), the switching gain grows proportionally to \(|\sigma|\).  Increasing the gain outside the dead zone enlarges the disturbance bound and improves robustness when the state is far from the sliding manifold.  This piece‑wise adaptation strategy is supported by nonlinear control theory: adaptive sliding‑mode controllers that allow the gain to increase until the sliding mode occurs and then decrease once the state enters a neighbourhood of the manifold achieve semi‑global stability without requiring a priori disturbance bounds \[8\].
-2. Inside the dead zone the gain is held constant or allowed to decay slowly.  Decreasing the gain in this neighbourhood prevents unnecessary wind‑up and reduces chattering caused by measurement noise.  The nominal gain value is recovered through a leak term (`leak_rate`) and the growth rate is limited by `adapt_rate_limit` to avoid abrupt changes.
+2. Inside the dead zone the gain is held constant or allowed to decay slowly. Decreasing the gain in this neighbourhood prevents unnecessary wind‑up and reduces chattering caused by measurement noise. The nominal gain value is recovered through a leak term (`leak_rate`) and the growth rate is limited by `adapt_rate_limit` to avoid abrupt changes.
 
 The gain is confined between `K_min` and `K_max` to prevent unbounded growth. A leak term (`leak_rate`) pulls the gain back toward its nominal value and prevents indefinite wind‑up. An additional limit (`adapt_rate_limit`) restricts how quickly the gain can change, avoiding abrupt jumps during adaptation.
 
@@ -634,15 +634,15 @@ These parameters are specified in `config.yaml` and validated at runtime to ensu
 
 ### Unified sliding surface and recentering
 
-The hybrid controller combines the adaptive law with the super‑twisting algorithm using a **single sliding surface** that captures both pendulum dynamics and cart recentering.  By default the sliding surface uses absolute joint coordinates:
+The hybrid controller combines the adaptive law with the super‑twisting algorithm using a **single sliding surface** that captures both pendulum dynamics and cart recentering. By default the sliding surface uses absolute joint coordinates:
 
 \[
 \sigma = c_{1}\,(\dot{\theta}_{1} + \lambda_{1}\,\theta_{1}) + c_{2}\,(\dot{\theta}_{2} + \lambda_{2}\,\theta_{2}) + k_{c}\,(\dot{x} + \lambda_{c}\,x),
 \]
 
-where \(c_{i}>0\) and \(\lambda_{i}>0\) weight the pendulum angle and velocity errors, and \(k_{c}\), \(\lambda_{c}\) weight the cart velocity and position in the sliding manifold.  Selecting **positive coefficients** ensures that the sliding manifold is attractive and defines a stable reduced‑order error surface—this is a standard requirement in sliding‑mode design【895515998216162†L326-L329】.  The terms involving the cart state encourage the cart to recenter without destabilising the pendula.  The implementation also supports a **relative formulation** in which the second pendulum is represented by \(\theta_{2}-\theta_{1}\) and \(\dot{\theta}_{2}-\dot{\theta}_{1}\); users can enable this mode with `use_relative_surface=True` to study coupled pendulum dynamics.  Keeping both options accessible avoids hard‑coding a specific manifold and lets users explore alternative designs.
+where \(c_{i}>0\) and \(\lambda_{i}>0\) weight the pendulum angle and velocity errors, and \(k_{c}\), \(\lambda_{c}\) weight the cart velocity and position in the sliding manifold. Selecting **positive coefficients** ensures that the sliding manifold is attractive and defines a stable reduced‑order error surface—this is a standard requirement in sliding‑mode design【895515998216162†L326-L329】. The terms involving the cart state encourage the cart to recenter without destabilising the pendula. The implementation also supports a **relative formulation** in which the second pendulum is represented by \(\theta_{2}-\theta_{1}\) and \(\dot{\theta}_{2}-\dot{\theta}_{1}\); users can enable this mode with `use_relative_surface=True` to study coupled pendulum dynamics. Keeping both options accessible avoids hard‑coding a specific manifold and lets users explore alternative designs.
 
-The PD recentering behaviour is further reinforced by separate proportional–derivative gains \(p_{\mathrm{gain}}\) and \(p_{\lambda}\) applied to the cart velocity and position.  These gains shape the transient response of the cart and are exposed as `cart_p_gain` and `cart_p_lambda` in the configuration.
+The PD recentering behaviour is further reinforced by separate proportional–derivative gains \(p_{\mathrm{gain}}\) and \(p_{\lambda}\) applied to the cart velocity and position. These gains shape the transient response of the cart and are exposed as `cart_p_gain` and `cart_p_lambda` in the configuration.
 
 ### Super‑twisting with adaptive gains
 
@@ -650,7 +650,7 @@ The hybrid control input consists of an equivalent part, a **super‑twisting co
 
 ### Advantages and tuning
 
-The hybrid adaptive–STA controller inherits the robustness of second‑order sliding mode and the flexibility of adaptive gain scheduling while remaining simpler than earlier dual‑surface designs.  Its unified sliding surface ensures consistent dynamics across all modes, and the adaptive gains allow the controller to handle unknown disturbance bounds without a priori tuning.  However, this comes at the expense of additional parameters: the sliding surface weights \(c_{1},c_{2},\lambda_{1},\lambda_{2},k_{c},\lambda_{c}\), the PD recentering gains \(p_{\mathrm{gain}},p_{\lambda}\), adaptation rates and dead‑zone widths.  Careful tuning of these parameters is essential to balance response speed, robustness and chattering.
+The hybrid adaptive–STA controller inherits the robustness of second‑order sliding mode and the flexibility of adaptive gain scheduling while remaining simpler than earlier dual‑surface designs. Its unified sliding surface ensures consistent dynamics across all modes, and the adaptive gains allow the controller to handle unknown disturbance bounds without a priori tuning. However, this comes at the expense of additional parameters: the sliding surface weights \(c_{1},c_{2},\lambda_{1},\lambda_{2},k_{c},\lambda_{c}\), the PD recentering gains \(p_{\mathrm{gain}},p_{\lambda}\), adaptation rates and dead‑zone widths. Careful tuning of these parameters is essential to balance response speed, robustness and chattering.
 
 ### Stability Analysis via Input-to-State Framework
 
@@ -756,7 +756,7 @@ High‑performance control of the DIP requires careful handling of numerical iss
 - **Condition‑number checking:** The `_compute_equivalent_control` method in both `classic_smc.py` and `sta_smc.py` computes the condition number of \M(q)\ (`np.linalg.cond`). If the condition number exceeds a threshold (`singularity_cond_threshold` in `config.yaml`), the method logs a warning and uses a pseudo‑inverse instead of the standard inverse.
 - **Matrix regularisation:** To prevent singularities due to modelling uncertainties, a small regularisation term \(\varepsilon I\) is added to \M(q)\ before inversion. This ensures that \(M(q)+\varepsilon I\) is always invertible, albeit with some approximation error.
 - **Safe inversion with pseudo‑inverse:** When the matrix is ill‑conditioned, the code uses `np.linalg.pinv`, which computes the Moore–Penrose pseudo‑inverse and yields a least‑squares solution that minimises the effect of noise.
-- **Regularisation justification:**  Adding a positive constant to the diagonal of a symmetric matrix shifts all of its eigenvalues upward and can convert an indefinite matrix into a positive‑definite one【385796022798831†L145-L149】.  This mathematical result justifies the use of the diagonal regularisation term \(\varepsilon I\): by perturbing \(M(q)\) in this way, \(M(q)+\varepsilon I\) remains invertible even when \(M(q)\) is nearly singular, though at the cost of a small approximation error.
+- **Regularisation justification:** Adding a positive constant to the diagonal of a symmetric matrix shifts all of its eigenvalues upward and can convert an indefinite matrix into a positive‑definite one【385796022798831†L145-L149】. This mathematical result justifies the use of the diagonal regularisation term \(\varepsilon I\): by perturbing \(M(q)\) in this way, \(M(q)+\varepsilon I\) remains invertible even when \(M(q)\) is nearly singular, though at the cost of a small approximation error.
 - **Fallback control:** If the pseudo‑inverse computation still fails (for example, if the system becomes uncontrollable), the controller saturates the output to zero and reports failure rather than producing unbounded values. This conservative action prevents destabilisation.
 
 By systematically checking for singularities and regularising the matrix inversion, the project ensures that the control law remains well‑defined even when the physical system operates near its limits or when the model parameters are uncertain.
@@ -773,7 +773,7 @@ Model Predictive Control (MPC) is an optimal control strategy that solves a fini
 
 where x_eq = [q_eq, 0] and q_eq = [x_0, π, π] is the upright configuration. The continuous‑time system is then discretised using zero‑order hold or forward Euler with sampling period Δt, yielding the discrete‑time model
 
-    x_{k+1} = A_d x_k + B_d u_k.
+ x_{k+1} = A_d x_k + B_d u_k.
 
 At each time step k, the MPC solves the optimization
 
@@ -787,7 +787,7 @@ where the **stage cost** ℓ(x, u) = x^T Q x + u^T R u penalises deviation from 
 
 For MPC, the natural Lyapunov function is the **optimal cost‑to‑go**:
 
-    V_k(x_k) = J_k^*(x_k) = min_{U} J_k(x_k, U).
+ V_k(x_k) = J_k^*(x_k) = min_{U} J_k(x_k, U).
 
 This function measures the minimum cost achievable from state x_k over the prediction horizon. It is positive definite (V_k(0) = 0 and V_k(x) > 0 for x ≠ 0) and radially unbounded (V_k(x) → ∞ as ||x|| → ∞) due to the quadratic structure of Q, R and Q_f.
 
@@ -799,7 +799,7 @@ This function measures the minimum cost achievable from state x_k over the predi
 
 If the terminal cost satisfies V_f(x_{k+N+1|k}) - V_f(x_{k+N|k}^*) ≤ -ℓ(x_{k+N|k}^*, u_term) (Lyapunov decrease), then
 
-    J_{k+1}(x_{k+1}, Ũ_{k+1}) ≤ V_k(x_k) - ℓ(x_k, u_k^*).
+ J_{k+1}(x_{k+1}, Ũ_{k+1}) ≤ V_k(x_k) - ℓ(x_k, u_k^*).
 
 Since the optimal cost V_{k+1}(x_{k+1}) ≤ J_{k+1}(x_{k+1}, Ũ_{k+1}), we obtain
 
@@ -858,9 +858,9 @@ Use this matrix to cross-check `config.yaml` parameters against the theoretical 
 
 ## Comparative Summary and Recommendations
 
-The six implemented controllers offer a spectrum of robustness, smoothness and complexity. **Classic SMC** provides a simple and effective baseline; it achieves finite‑time convergence but suffers from chattering and requires known disturbance bounds. **Super‑twisting SMC** adds a second‑order sliding mechanism that reduces chattering and yields continuous control; it demands tuning of two gains and a higher computational cost. **Adaptive SMC** learns the disturbance bound on‑line, eliminating the need to specify \(K\) a priori; its continuous control avoids chattering but involves more parameters and possible slower response. **Hybrid adaptive–STA** combines adaptive gain adjustment with the super‑twisting algorithm while relying on a **single sliding surface**.  This unified approach retains the robustness and smoothness of second‑order sliding mode, allows the gains to adapt to unknown disturbances, and simplifies the switching logic compared with earlier dual‑surface designs.  The trade‑off is a larger set of tunable parameters (sliding surface weights, adaptation rates, dead‑zone widths and recentering gains), making careful tuning essential. **Swing-Up SMC** extends classic SMC with energy-based control to lift the pendula from the down-down configuration to the upright position before engaging stabilisation, enabling global basin of attraction. **MPC** offers optimal trajectory tracking and explicit constraint handling by solving a quadratic program at each time step; it provides smooth control and predictive behaviour but depends on accurate linearisation and reliable solver performance.
+The six implemented controllers offer a spectrum of robustness, smoothness and complexity. **Classic SMC** provides a simple and effective baseline; it achieves finite‑time convergence but suffers from chattering and requires known disturbance bounds. **Super‑twisting SMC** adds a second‑order sliding mechanism that reduces chattering and yields continuous control; it demands tuning of two gains and a higher computational cost. **Adaptive SMC** learns the disturbance bound on‑line, eliminating the need to specify \(K\) a priori; its continuous control avoids chattering but involves more parameters and possible slower response. **Hybrid adaptive–STA** combines adaptive gain adjustment with the super‑twisting algorithm while relying on a **single sliding surface**. This unified approach retains the robustness and smoothness of second‑order sliding mode, allows the gains to adapt to unknown disturbances, and simplifies the switching logic compared with earlier dual‑surface designs. The trade‑off is a larger set of tunable parameters (sliding surface weights, adaptation rates, dead‑zone widths and recentering gains), making careful tuning essential. **Swing-Up SMC** extends classic SMC with energy-based control to lift the pendula from the down-down configuration to the upright position before engaging stabilisation, enabling global basin of attraction. **MPC** offers optimal trajectory tracking and explicit constraint handling by solving a quadratic program at each time step; it provides smooth control and predictive behaviour but depends on accurate linearisation and reliable solver performance.
 
-For a given DIP application, the choice among these controllers should consider the available actuator bandwidth, desired response speed, tolerance to chattering, knowledge of disturbance bounds, and whether constraints must be enforced explicitly.  The configuration tables provide a starting point for tuning, and the reliable implementation ensures safe operation even under parameter variations and modelling uncertainties.
+For a given DIP application, the choice among these controllers should consider the available actuator bandwidth, desired response speed, tolerance to chattering, knowledge of disturbance bounds, and whether constraints must be enforced explicitly. The configuration tables provide a starting point for tuning, and the reliable implementation ensures safe operation even under parameter variations and modelling uncertainties.
 
 ------------------------------------------------------------------------
 
@@ -911,16 +911,16 @@ The double inverted pendulum on a cart is a canonical benchmark for **under‑ac
 
 The double inverted pendulum comprises a cart of mass \\m_c\\ carrying two pendulums with masses \\m_1\\ and \\m_2\\, lengths \\L_1\\ and \\L_2\\, centres of mass \\l\_{c1}\\ and \\l\_{c2}\\ and inertias \\I_1\\ and \\I_2\\. Let \\x\\ denote the cart position, \\\theta_1\\ the angle of the first pendulum relative to the vertical and \\\theta_2\\ the absolute angle of the second pendulum. The state vector is
 
-    x = \left\lbrack x,\mspace{6mu}\theta_{1},\mspace{6mu}\theta_{2},\mspace{6mu}\dot{x},\mspace{6mu}{\dot{\theta}}_{1},\mspace{6mu}{\dot{\theta}}_{2} \right\rbrack^{\top}.
+ x = \left\lbrack x,\mspace{6mu}\theta_{1},\mspace{6mu}\theta_{2},\mspace{6mu}\dot{x},\mspace{6mu}{\dot{\theta}}_{1},\mspace{6mu}{\dot{\theta}}_{2} \right\rbrack^{\top}.
 
 Applying the Lagrangian formalism yields two coupled, non‑linear equations of motion (the cart dynamics is affected only by friction). For brevity only the pendulum equations are shown; they describe the rotational dynamics of the two links \[1\]:
 
-    \left( m_{1} + m_{2} \right)L_{1}{\ddot{\theta}}_{1} + m_{2}L_{2}{\ddot{\theta}}_{2}\cos\left( \theta_{1} - \theta_{2} \right) + m_{2}L_{2}{\dot{\theta}}_{2}^{2}\sin\left( \theta_{1} - \theta_{2} \right)\cos\left( \theta_{1} - \theta_{2} \right) + g\left( m_{1} + m_{2} \right)\sin\theta_{1} = 0,
-    m_{2}L_{2}{\ddot{\theta}}_{2} + m_{2}L_{1}{\ddot{\theta}}_{1}\cos\left( \theta_{1} - \theta_{2} \right) - m_{2}L_{1}{\dot{\theta}}_{1}^{2}\sin\left( \theta_{1} - \theta_{2} \right) + gm_{2}\sin\theta_{2} = 0.
+ \left( m_{1} + m_{2} \right)L_{1}{\ddot{\theta}}_{1} + m_{2}L_{2}{\ddot{\theta}}_{2}\cos\left( \theta_{1} - \theta_{2} \right) + m_{2}L_{2}{\dot{\theta}}_{2}^{2}\sin\left( \theta_{1} - \theta_{2} \right)\cos\left( \theta_{1} - \theta_{2} \right) + g\left( m_{1} + m_{2} \right)\sin\theta_{1} = 0,
+ m_{2}L_{2}{\ddot{\theta}}_{2} + m_{2}L_{1}{\ddot{\theta}}_{1}\cos\left( \theta_{1} - \theta_{2} \right) - m_{2}L_{1}{\dot{\theta}}_{1}^{2}\sin\left( \theta_{1} - \theta_{2} \right) + gm_{2}\sin\theta_{2} = 0.
 
 These equations highlight the strong coupling between the pendulums: accelerations of one link appear in the dynamics of the other. In matrix form the full model in the code is expressed as
 
-    H(q)\ddot{q} + C\left( q,\dot{q} \right)\dot{q} + G(q) = B\, u,
+ H(q)\ddot{q} + C\left( q,\dot{q} \right)\dot{q} + G(q) = B\, u,
 
 with \\q=
 
@@ -938,7 +938,7 @@ with \\q=
 
 All controllers studied here derive a scalar **sliding variable** \\\sigma\\ that combines angular positions and velocities. In the classical and adaptive controllers the sliding surface is defined as
 
-    \sigma = k_{1}\,{\dot{\theta}}_{1} + k_{2}\,{\dot{\theta}}_{2} + \lambda_{1}\,\theta_{1} + \lambda_{2}\,\theta_{2},
+ \sigma = k_{1}\,{\dot{\theta}}_{1} + k_{2}\,{\dot{\theta}}_{2} + \lambda_{1}\,\theta_{1} + \lambda_{2}\,\theta_{2},
 
 where \\k_1,k_2\\ and \\\lambda_1,\lambda_2\\ are positive gains. When \\\sigma\\ is driven to zero, both angular errors and velocities are driven to zero, ensuring the pendulums remain upright. The super‑twisting and hybrid controllers use a slightly modified sliding surface but follow the same principle.
 
@@ -964,10 +964,10 @@ Chattering arises because any sampling delay, actuator lag or unmodelled fast dy
 
 In the project (`src/controllers/classic_smc.py`) the sliding surface is implemented as a linear combination of joint angles and velocities. The equivalent control \\u\_{\mathrm{eq}}\\ is computed by inverting the inertia matrix \\H(q)\\; the switching term uses a continuous approximation of the sign function implemented in `src/utils/control_primitives.py` as the **saturation function**
 
-    sat(\sigma/\epsilon) = \left\{ \begin{matrix}
-    \tanh(\sigma/\epsilon), & \text{if method~=~“tanh”}, \\
-    clip(\sigma/\epsilon, - 1,1), & \text{if method~=~“linear”},
-    \end{matrix} \right.\ 
+ sat(\sigma/\epsilon) = \left\{ \begin{matrix}
+ \tanh(\sigma/\epsilon), & \text{if method~=~“tanh”}, \\
+ clip(\sigma/\epsilon, - 1,1), & \text{if method~=~“linear”},
+ \end{matrix} \right.\ 
 
 where \\\epsilon\>0\\ is the boundary‑layer width. A smaller \\\epsilon\\ yields a steeper transition and better accuracy but re‑introduces chattering; a larger \\\epsilon\\ smooths the control but causes a steady‑state error because the system state is only guaranteed to converge to \\\|\sigma\| \le \epsilon\\.
 
@@ -1001,10 +1001,10 @@ Smooth approximations of the sign function, such as Slotine’s boundary layer m
 
 The **super‑twisting algorithm (STA)** is a second‑order sliding mode technique that yields a continuous control input. The STA introduces an additional internal variable \\z\\ and defines the control law
 
-    \begin{matrix}
+ \begin{matrix}
     u & = u_{eq} - K_{1}\,\sqrt{|\sigma|}\, sgn(\sigma) + z - d\,\sigma, \\
-    \dot{z} & = - K_{2}\, sgn(\sigma),
-    \end{matrix}
+ \dot{z} & = - K_{2}\, sgn(\sigma),
+ \end{matrix}
 
 where \\K_1\\ and \\K_2\\ are algorithmic gains and \\d\ge 0\\ is an optional damping gain. The discontinuous sign function only appears inside an integrator (\\\dot{z}\\), so the control input \\u\\ remains continuous. In the code (`src/controllers/sta_smc.py`) these variables correspond to `alg_gain_K1` (\\K_1\\), `alg_gain_K2` (\\K_2\\), `surf_gain_k1,k2` and `surf_lam1,lam2` (sliding‑surface gains) and `damping_gain` (\\d\\). The boundary layer parameter `boundary_layer` implements a saturated sign, ensuring finite‑time convergence in discrete‑time implementations.
 
@@ -1024,7 +1024,7 @@ Comparison of control inputs: classical SMC (chattering) vs super‑twisting SMC
 
 A drawback of classical SMC is the need to choose a switching gain \\K\\ larger than the unknown disturbance bound. If \\K\\ is chosen too small the controller loses robustness; if it is chosen too large it aggravates chattering. Adaptive sliding‑mode control addresses this problem by **adjusting the gain online** based on the observed sliding variable. The adaptive controller in `src/controllers/adaptive_smc.py` computes the sliding variable as in the classical case and uses the control law
 
-    u = u_{eq} - K\, sat(\sigma/\epsilon) - \alpha\,\sigma,
+ u = u_{eq} - K\, sat(\sigma/\epsilon) - \alpha\,\sigma,
 
 where \\\alpha\>0\\ adds linear damping. The gain \\K\\ evolves according to an adaptation law
 
@@ -1106,7 +1106,7 @@ The results reveal that chattering originates from the discontinuous switching t
 # Chapter 6 – PSO-Based Controller Tuning
 
 
-#### 3.2.1 Problem statement: why optimize boundary layer parameters?
+## 3.2.1 Problem statement: why optimize boundary layer parameters?
 
 While fixed boundary layers (constant $`\epsilon`$) reduce chattering, they impose a fundamental trade-off: large $`\epsilon`$ yields smooth control but slow convergence, whereas small $`\epsilon`$ achieves fast response but reintroduces high-frequency oscillations. An **adaptive boundary layer** resolves this dilemma by dynamically adjusting the boundary layer thickness as a function of the sliding surface velocity. The adaptive formulation is
 
@@ -1114,7 +1114,7 @@ While fixed boundary layers (constant $`\epsilon`$) reduce chattering, they impo
 
 where $`\epsilon_{min} > 0`$ is the minimum thickness near the sliding manifold and $`\alpha \geq 0`$ governs how quickly $`\epsilon_{eff}`$ grows with sliding velocity. When the system is far from the manifold and $`\dot{\sigma}`$ is large, $`\epsilon_{eff}`$ widens to smooth aggressive switching. As the trajectory converges and $`\dot{\sigma}`$ diminishes, $`\epsilon_{eff}`$ shrinks toward $`\epsilon_{min}`$, preserving precision. However, selecting optimal values for $`\epsilon_{min}`$ and $`\alpha`$ manually is challenging because their effects interact nonlinearly with the controller gains and system dynamics. This motivates the use of PSO to systematically search the parameter space and identify configurations that minimize chattering while maintaining control performance.
 
-#### 3.2.2 Methodology: PSO-based adaptive boundary layer tuning
+### 3.2.2 Methodology: PSO-based adaptive boundary layer tuning
 
 To optimize the adaptive boundary layer we employ a two-stage procedure. First, we establish a **baseline** by running 100 Monte Carlo simulations with a fixed boundary layer ($`\epsilon = 0.02`$, $`\alpha = 0`$) under diverse initial conditions sampled uniformly from small neighborhoods around the upright equilibrium. We compute the chattering index for each run using FFT-based spectral analysis of the control signal: high-frequency content above a threshold (typically 10 Hz) is integrated to quantify oscillatory energy. The baseline provides a reference distribution of chattering, settling time, overshoot and control effort against which we compare the adaptive strategy.
 
@@ -1595,11 +1595,11 @@ This appendix provides rigorous Lyapunov-based stability proofs for all six slid
 
 Consider the double inverted pendulum with sliding surface
 
-    s = lambda_1 * theta_1 + lambda_2 * theta_2 + k_1 * dot-theta_1 + k_2 * dot-theta_2,
+ s = lambda_1 * theta_1 + lambda_2 * theta_2 + k_1 * dot-theta_1 + k_2 * dot-theta_2,
 
 where lambda_i, k_i > 0. The control law
 
-    u = u_eq - K * sign(s) - k_d * s,
+ u = u_eq - K * sign(s) - k_d * s,
 
 with K > d-bar (disturbance bound) and k_d > 0, guarantees:
 1. Finite-time convergence to the sliding surface {s=0}
@@ -1615,26 +1615,26 @@ Define V = 0.5 * s^2. Clearly V >= 0, V(0) = 0, and V > 0 for s != 0, satisfying
 
 Differentiating along system trajectories:
 
-    dot-V = s * dot-s
-          = s * [lambda_1 * dot-theta_1 + lambda_2 * dot-theta_2 + k_1 * ddot-theta_1 + k_2 * ddot-theta_2]
+ dot-V = s * dot-s
+ = s * [lambda_1 * dot-theta_1 + lambda_2 * dot-theta_2 + k_1 * ddot-theta_1 + k_2 * ddot-theta_2]
 
 From the DIP dynamics (Chapter 3, Equation 3.15):
 
-    ddot-theta = M^{-1}(theta) * [B*u - C(theta, dot-theta) - G(theta) + d(t)]
+ ddot-theta = M^{-1}(theta) * [B*u - C(theta, dot-theta) - G(theta) + d(t)]
 
 where d(t) represents matched disturbances. Substituting the control law u = u_eq - K*sign(s) - k_d*s:
 
-    dot-s = (partial s / partial theta_i) * ... + (partial s / partial dot-theta_i) * M^{-1} * [B*(u_eq - K*sign(s) - k_d*s) - C - G + d]
+ dot-s = (partial s / partial theta_i) * ... + (partial s / partial dot-theta_i) * M^{-1} * [B*(u_eq - K*sign(s) - k_d*s) - C - G + d]
 
 By design, u_eq cancels the nominal dynamics (C + G terms), yielding:
 
-    dot-s = -K * L * M^{-1} * B * sign(s) - k_d * s + L * M^{-1} * B * d(t),
+ dot-s = -K * L * M^{-1} * B * sign(s) - k_d * s + L * M^{-1} * B * d(t),
 
 where L = [k_1, k_2]. The controllability condition L * M^{-1} * B > 0 (verified in Chapter 3) ensures that the switching term acts to reduce |s|.
 
 Substituting into dot-V:
 
-    dot-V = s * [-K * L * M^{-1} * B * sign(s) - k_d * s + L * M^{-1} * B * d(t)]
+ dot-V = s * [-K * L * M^{-1} * B * sign(s) - k_d * s + L * M^{-1} * B * d(t)]
           = -K * L * M^{-1} * B * |s| - k_d * s^2 + s * L * M^{-1} * B * d(t)
 
 Using |d(t)| <= d-bar and the triangle inequality:
@@ -1665,7 +1665,7 @@ The term -beta * |s| ensures **finite-time convergence** to s=0. Once on the sli
 Consider the super-twisting control law
 
     u = -K_1 * |s|^{0.5} * sign(s) + z,
-    dot-z = -K_2 * sign(s),
+ dot-z = -K_2 * sign(s),
 
 where K_1, K_2 > 0. Under the assumptions:
 1. |ddot-s| <= L (Lipschitz disturbance)
@@ -1688,9 +1688,9 @@ where z is the super-twisting auxiliary variable. Note V >= 0, V(0,0) = 0, and V
 
 Differentiating V along trajectories:
 
-    dot-V = 2 * K_2 * sign(s) * dot-s + z * dot-z
-          = 2 * K_2 * sign(s) * dot-s + z * (-K_2 * sign(s))
-          = K_2 * sign(s) * (2 * dot-s - z)
+ dot-V = 2 * K_2 * sign(s) * dot-s + z * dot-z
+ = 2 * K_2 * sign(s) * dot-s + z * (-K_2 * sign(s))
+ = K_2 * sign(s) * (2 * dot-s - z)
 
 From the super-twisting dynamics:
 
@@ -1714,15 +1714,15 @@ Using the disturbance bound |perturbation| <= L and Cauchy-Schwarz inequality:
 
 Apply Lyapunov's finite-time stability theorem. The Lyapunov function satisfies:
 
-    dot-V <= -mu * V^{alpha},
+ dot-V <= -mu * V^{alpha},
 
 where mu > 0 and 0 < alpha < 1. For the super-twisting case, alpha = 0.5 (due to the |s|^{0.5} term). Under the gain conditions K_1 > 2*sqrt(2*L/beta) and K_2 > L/beta, one can show (via algebraic manipulations omitted here for brevity) that:
 
-    dot-V <= -gamma * V^{0.5},
+ dot-V <= -gamma * V^{0.5},
 
 where gamma > 0 is a function of K_1, K_2, L and beta. By Lyapunov's finite-time theorem, the system reaches V=0 (equivalently s=0 and z=0, hence dot-s=0) in finite time:
 
-    T_reach <= 2 * V(0)^{0.5} / gamma.
+ T_reach <= 2 * V(0)^{0.5} / gamma.
 
 **Conclusion:** The super-twisting algorithm achieves finite-time convergence to the second-order sliding manifold {s=0, dot-s=0}, eliminating chattering while preserving robustness. Q.E.D.
 
@@ -1742,7 +1742,7 @@ Consider the adaptive sliding mode controller with adaptation law
 
 where gamma > 0 (adaptation rate), leak > 0 (leak term) and K_0 >= 0 (initial gain). The control law is
 
-    u = u_eq - K(t) * sat(s / epsilon) - alpha * s,
+ u = u_eq - K(t) * sat(s / epsilon) - alpha * s,
 
 where alpha > 0 (damping coefficient). Then:
 1. The sliding variable s(t) converges to zero asymptotically
@@ -1754,7 +1754,7 @@ where alpha > 0 (damping coefficient). Then:
 
 Define the candidate:
 
-    V = 0.5 * s^2 + (1 / (2 * gamma)) * K-tilde^2,
+ V = 0.5 * s^2 + (1 / (2 * gamma)) * K-tilde^2,
 
 where K-tilde = K - K* is the gain estimation error and K* >= d-bar is the ideal gain. Clearly V >= 0, V(0,0) = 0, and V > 0 for (s, K-tilde) != (0, 0).
 
@@ -1762,8 +1762,8 @@ where K-tilde = K - K* is the gain estimation error and K* >= d-bar is the ideal
 
 Differentiating:
 
-    dot-V = s * dot-s + (1 / gamma) * K-tilde * dot-K-tilde
-          = s * dot-s + (1 / gamma) * K-tilde * dot-K    (since dot-K* = 0)
+ dot-V = s * dot-s + (1 / gamma) * K-tilde * dot-K-tilde
+ = s * dot-s + (1 / gamma) * K-tilde * dot-K (since dot-K* = 0)
 
 Substituting the adaptation law:
 
@@ -1771,7 +1771,7 @@ Substituting the adaptation law:
 
 From the closed-loop dynamics (similar to Classical SMC but with K(t) instead of constant K):
 
-    dot-s = -K(t) * L * M^{-1} * B * sat(s / epsilon) - alpha * s + L * M^{-1} * B * d(t)
+ dot-s = -K(t) * L * M^{-1} * B * sat(s / epsilon) - alpha * s + L * M^{-1} * B * d(t)
 
 For |s| > epsilon (outside boundary layer), sat(s/epsilon) = sign(s), yielding:
 
@@ -1810,7 +1810,7 @@ Boundedness of K(t) follows from the leak term: if K grows large, the leak -(lea
 Consider the hybrid controller combining super-twisting with adaptive gains:
 
     u = -k_1(t) * |s|^{0.5} * sign(s) - k_2(t) * u_int - alpha * s,
-    dot-u_int = sign(s)   (with periodic reset),
+ dot-u_int = sign(s) (with periodic reset),
     dot-k_1 = gamma_1 * |s| * (1 - deadzone),
     dot-k_2 = gamma_2 * |u_int| * (1 - deadzone),
 
@@ -1826,7 +1826,7 @@ the system is Input-to-State Stable (ISS), exhibiting ultimate boundedness.
 
 Define:
 
-    V = 0.5 * s^2 + (1 / (2 * gamma_1)) * k_1-tilde^2 + (1 / (2 * gamma_2)) * k_2-tilde^2 + 0.5 * u_int^2,
+ V = 0.5 * s^2 + (1 / (2 * gamma_1)) * k_1-tilde^2 + (1 / (2 * gamma_2)) * k_2-tilde^2 + 0.5 * u_int^2,
 
 where k_i-tilde = k_i - k_i* are gain errors. This function accounts for sliding error, gain estimation errors and integral accumulation.
 
@@ -1834,7 +1834,7 @@ where k_i-tilde = k_i - k_i* are gain errors. This function accounts for sliding
 
 Differentiating:
 
-    dot-V = s * dot-s + (1 / gamma_1) * k_1-tilde * dot-k_1 + (1 / gamma_2) * k_2-tilde * dot-k_2 + u_int * dot-u_int
+ dot-V = s * dot-s + (1 / gamma_1) * k_1-tilde * dot-k_1 + (1 / gamma_2) * k_2-tilde * dot-k_2 + u_int * dot-u_int
 
 Substituting adaptation laws and integral dynamics:
 
@@ -1885,7 +1885,7 @@ Then the system is globally asymptotically stable to the upright equilibrium.
 
 **Swing-up phase:** Define energy-based Lyapunov function:
 
-    V_swing = E_total - E_bottom,
+ V_swing = E_total - E_bottom,
 
 where E_total = kinetic + potential energy, E_bottom = minimum energy (pendulums hanging down). Since E_total >= E_bottom with equality only at the bottom equilibrium, V_swing >= 0.
 
@@ -1895,8 +1895,8 @@ where E_total = kinetic + potential energy, E_bottom = minimum energy (pendulums
 
 The energy-based control pumps energy into the system:
 
-    dot-E = (partial E / partial theta) * dot-theta + (partial E / partial dot-theta) * ddot-theta
-          = ... + u * (something involving cos(theta))
+ dot-E = (partial E / partial theta) * dot-theta + (partial E / partial dot-theta) * ddot-theta
+ = ... + u * (something involving cos(theta))
 
 By choosing u = k_swing * (E_desired - E_current) * sign(dot-theta_1 * cos(theta_1)), the control aligns with the natural pumping direction, ensuring dot-E > 0 when E < E_desired. This guarantees that energy increases monotonically until reaching the threshold.
 
@@ -1922,15 +1922,15 @@ From any initial configuration (theta_1(0), theta_2(0), dot-theta_1(0), dot-thet
 
 Consider the discrete-time MPC with linearized dynamics:
 
-    x_{k+1} = A_d * x_k + B_d * u_k,
+ x_{k+1} = A_d * x_k + B_d * u_k,
 
 and optimization problem:
 
-    min_{U} J_k(x_k, U) = sum_{i=0}^{N-1} [x^T * Q * x + u^T * R * u] + x_N^T * Q_f * x_N,
+ min_{U} J_k(x_k, U) = sum_{i=0}^{N-1} [x^T * Q * x + u^T * R * u] + x_N^T * Q_f * x_N,
 
 where Q, Q_f >> 0 (positive definite), R > 0, and N >= 1 is the prediction horizon. If the terminal cost Q_f satisfies the Discrete Algebraic Riccati Equation (DARE):
 
-    Q_f = A_d^T * Q_f * A_d - A_d^T * Q_f * B_d * (R + B_d^T * Q_f * B_d)^{-1} * B_d^T * Q_f * A_d + Q,
+ Q_f = A_d^T * Q_f * A_d - A_d^T * Q_f * B_d * (R + B_d^T * Q_f * B_d)^{-1} * B_d^T * Q_f * A_d + Q,
 
 then the closed-loop system is asymptotically stable at the origin.
 
@@ -1963,8 +1963,8 @@ If the terminal cost Q_f satisfies the DARE, then:
 
     J_{k+1}(x_{k+1}, U_{k+1}^{tilde}) = sum_{j=1}^{N} ell(...) + V_f(x_{k+N+1|k})
                                       <= sum_{j=0}^{N-1} ell(...) + V_f(x_{k+N|k}) - ell(x_k, u_k*)
-                                      = J_k(x_k, U_k*) - ell(x_k, u_k*)
-                                      = V_k(x_k) - ell(x_k, u_k*)
+ = J_k(x_k, U_k*) - ell(x_k, u_k*)
+ = V_k(x_k) - ell(x_k, u_k*)
 
 Since the optimal cost V_{k+1}(x_{k+1}) <= J_{k+1}(x_{k+1}, U_{k+1}^{tilde}):
 
