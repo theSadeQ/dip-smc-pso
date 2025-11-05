@@ -117,6 +117,10 @@ python simulate.py --ctrl classical_smc --plot --save baseline_classical.json
 # Optimize gains (takes ~8 minutes with default settings)
 
 python simulate.py --ctrl classical_smc --run-pso --save optimized_classical_gains.json
+
+# NEW (QW-3): Add --plot flag to generate convergence visualization
+python simulate.py --ctrl classical_smc --run-pso --plot --save optimized_classical_gains.json
+# Convergence plot saved to: optimization_results/classical_smc_convergence.png
 ``` **Step 3: Test optimized gains**
 ```bash
 # Load and simulate with optimized gains
