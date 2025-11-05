@@ -9,6 +9,14 @@
 - **Applies to:** Python scripts, shell output, markdown docs, commit messages, all user-facing text
 - **Example:** Use "[OK]" not "✅", "[ERROR]" not "❌", "[INFO]" not "ℹ️"
 
+**CRITICAL RULE - AUTONOMOUS OPERATION:**
+- **ALWAYS continue** with tasks automatically without asking for permission
+- **NEVER ask** "Would you like to proceed?" or "Ready to continue?" or "Should I move to the next task?"
+- **ALWAYS commit and push** changes automatically after completing work
+- **NEVER ask** for commit/push confirmation - do it automatically per repository management rules
+- **Action:** Complete task → Update tracking docs → Commit → Push → Start next task
+- **Exception:** Only ask questions when user input is REQUIRED for implementation decisions
+
 ------
 
 ## 1) Repository Information
