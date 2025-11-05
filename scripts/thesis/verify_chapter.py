@@ -28,7 +28,7 @@ import sys
 
 # Import verification modules
 try:
-    from verify_equations import verify_chapter_equations, extract_references as extract_refs
+    from verify_equations import verify_chapter_equations
     from verify_citations import verify_chapter_citations, extract_references
     from verify_figures import verify_chapter_figures_tables
     from checkpoint_verification import (
@@ -39,7 +39,7 @@ try:
     )
 except ImportError:
     # Handle relative imports for when run as module
-    from scripts.thesis.verify_equations import verify_chapter_equations, extract_references as extract_refs
+    from scripts.thesis.verify_equations import verify_chapter_equations
     from scripts.thesis.verify_citations import verify_chapter_citations, extract_references
     from scripts.thesis.verify_figures import verify_chapter_figures_tables
     from scripts.thesis.checkpoint_verification import (
