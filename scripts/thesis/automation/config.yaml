@@ -16,25 +16,21 @@ api:
 
 # Thesis Structure
 thesis:
-  base_path: "docs/thesis"
+  base_path: "D:/Projects/main/docs/thesis/chapters"
   chapters:
-    - "01_introduction.md"
+    - "00_introduction.md"
+    - "01_problem_statement.md"
     - "02_literature_review.md"
-    - "03_dynamics.md"
-    - "04_smc_fundamentals.md"
-    - "05_adaptive_hybrid_smc.md"
+    - "03_system_modeling.md"
+    - "04_sliding_mode_control.md"
+    - "05_chattering_mitigation.md"
     - "06_pso_optimization.md"
-    - "07_controller_tuning.md"
-    - "08_experimental_validation.md"
-    - "09_hil_demonstrations.md"
-    - "10_performance_analysis.md"
-    - "11_contributions_novelty.md"
-    - "12_conclusions.md"
+    - "07_simulation_setup.md"
+    - "08_results.md"
+    - "09_conclusion.md"
 
   appendices:
-    - "appendix_a_lyapunov_proofs.md"
-    - "appendix_b_statistical_tables.md"
-    - "appendix_c_parameter_tables.md"
+    - "appendix_a_proofs.md"
 
 # Code Structure
 code:
