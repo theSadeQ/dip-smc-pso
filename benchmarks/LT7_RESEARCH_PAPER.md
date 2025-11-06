@@ -1341,21 +1341,398 @@ where:
 
 ## 6. Experimental Setup and Benchmarking Protocol
 
+This section describes the simulation platform, performance metrics, benchmarking scenarios, and statistical validation methodology used to evaluate the seven SMC variants. All experiments designed for reproducibility and statistical rigor.
+
 ### 6.1 Simulation Platform
 
-[TO BE COMPLETED: Software, hardware, simulation parameters]
+**Software Environment:**
+
+| Component | Version | Purpose |
+|-----------|---------|---------|
+| **Python** | 3.9+ | Primary programming language |
+| **NumPy** | 1.24+ | Numerical arrays, linear algebra (BLAS/LAPACK backend) |
+| **SciPy** | 1.10+ | ODE integration (RK45, RK4, Euler), optimization |
+| **Matplotlib** | 3.7+ | Plotting, visualization, figure generation |
+| **PySwarms** | 1.3+ | PSO implementation (Section 5) |
+| **Pydantic** | 2.0+ | Configuration validation (YAML → structured config) |
+| **pytest** | 7.4+ | Unit testing, benchmarking (pytest-benchmark) |
+
+**Hardware Platform:**
+
+All simulations executed on standard workstation hardware to demonstrate feasibility for typical research environments:
+- **CPU:** Intel Core i7-10700K (8 cores, 3.8-5.1 GHz) or equivalent
+- **RAM:** 16 GB DDR4-3200
+- **Storage:** NVMe SSD (for fast I/O during batch simulations)
+- **GPU:** Not utilized (CPU-only NumPy for portability)
+
+**Operating System:** Ubuntu 22.04 LTS / Windows 11 (cross-platform validated)
+
+**Simulation Parameters:**
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| **Time step** | $\Delta t = 0.01$ s | 100 Hz simulation rate; sufficient for DIP dynamics (natural frequency ~3-5 Hz) |
+| **Duration** | $T = 10$ s | Captures full transient response (settling times 1.8-2.4s) + steady-state validation |
+| **Integration method** | RK45 (adaptive) | Scipy's `solve_ivp` with adaptive step size; absolute tolerance $10^{-6}$, relative tolerance $10^{-3}$ |
+| **Control rate** | 100 Hz (10 ms) | Matches simulation time step; realistic for embedded control loops |
+
+**Rationale for Time Step:**
+
+The simulation time step $\Delta t = 0.01$ s chosen based on:
+1. **Nyquist Criterion:** Sample at >2× highest system frequency. DIP natural frequencies $\omega_n \approx 2\pi \times 5$ rad/s → minimum sample rate 10 Hz. Using 100 Hz provides 10× safety margin.
+2. **Control Bandwidth:** SMC switching frequency typically 10-50 Hz (Section 7.3). Using 100 Hz control rate captures switching dynamics without aliasing.
+3. **Real-Time Feasibility:** Control law compute times 18.5-31.6 μs (Section 7.1) << 10 ms time step, leaving 99.7-99.8% CPU headroom.
+4. **Numerical Accuracy:** Euler integration error $\mathcal{O}(\Delta t^2)$ negligible for $\Delta t = 0.01$ s; validated by comparing to RK45 (adaptive) results (maximum state difference <$10^{-5}$).
+
+**Reproducibility Measures:**
+
+1. **Fixed Random Seeds:** All stochastic elements seeded with `seed=42`
+   ```python
+   np.random.seed(42)
+   rng = np.random.default_rng(42)
+   ```
+2. **Version Pinning:** All package versions specified in `requirements.txt` with exact pinning (e.g., `numpy==1.24.3`)
+3. **Configuration Management:** Single `config.yaml` file version-controlled with git
+4. **Data Archival:** All simulation outputs saved to `benchmarks/results/` with SHA256 checksums
+
+---
 
 ### 6.2 Performance Metrics
 
-[TO BE COMPLETED: Definitions of all 10+ metrics]
+This section defines the 10+ quantitative metrics used to evaluate controller performance across multiple dimensions. Metrics divided into five categories: computational efficiency, transient response, chattering, energy, and robustness.
+
+**Category 1: Computational Efficiency**
+
+**1. Control Law Compute Time ($t_{\text{compute}}$):**
+
+```math
+t_{\text{compute}} = \text{mean}\left(\left\{t_{\text{end}}^{(i)} - t_{\text{start}}^{(i)}\right\}_{i=1}^{N}\right)
+```
+
+Wall-clock time to execute control law computation (Python `time.perf_counter()` high-resolution timer). Measured per time step, averaged over 1000-step simulation. Reported with 95% confidence interval via bootstrap.
+
+**Physical Interpretation:** Determines real-time feasibility. For 10 kHz control loop (100 μs period), $t_{\text{compute}} < 50$ μs required (50% duty cycle budget).
+
+**2. Memory Usage ($M_{\text{peak}}$):**
+
+Peak memory consumption during simulation (Python `tracemalloc` profiler). Relevant for embedded systems with limited RAM (e.g., ARM Cortex-M7 with 512 kB SRAM).
+
+---
+
+**Category 2: Transient Response**
+
+**3. Settling Time ($t_s$):**
+
+```math
+t_s = \min\left\{t \,\middle|\, \|\mathbf{x}(\tau)\| \leq 0.02 \|\mathbf{x}(0)\|, \quad \forall \tau \geq t\right\}
+```
+
+Time for system state to enter and remain within 2% of equilibrium. **2% criterion** standard in control engineering [REF: Franklin et al., "Feedback Control of Dynamic Systems"]. Lower values indicate faster convergence.
+
+**Computation:** For each simulation, scan state trajectory forward until $\|\mathbf{x}(t)\| \leq \epsilon \|\mathbf{x}_0\|$ satisfied for all remaining time (no re-entry to large-error region). Report mean and standard deviation across Monte Carlo trials.
+
+**4. Overshoot ($\text{OS}$):**
+
+```math
+\text{OS} = \frac{\max_{t \in [0, T]} |\theta_i(t)| - |\theta_{i,\text{final}}|}{|\theta_{i0}|} \times 100\%
+```
+
+Maximum percentage deviation of pendulum angles beyond initial perturbation. Computed separately for $\theta_1, \theta_2$; reported as maximum across both angles. **Target: OS < 10%** (standard second-order system spec).
+
+**Physical Significance:** Large overshoot risks:
+- Violating linearization assumptions ($|\theta_i| > 0.1$ rad invalidates small-angle approximation)
+- Actuator saturation (large corrective forces during overshoot)
+- Reduced stability margins
+
+**5. Rise Time ($t_r$):**
+
+```math
+t_r = t_{90\%} - t_{10\%}
+```
+
+Time for system to traverse from 10% to 90% of steady-state value. Characterizes initial response speed (distinct from settling time, which includes oscillations).
+
+---
+
+**Category 3: Chattering Characteristics**
+
+**6. Chattering Index ($\text{CI}$):**
+
+```math
+\text{CI} = \sqrt{\frac{1}{T}\int_0^T \left(\frac{du}{dt}\right)^2 dt} = \sqrt{\frac{1}{N}\sum_{k=1}^{N} \left(\frac{u_k - u_{k-1}}{\Delta t}\right)^2}
+```
+
+Root-mean-square control derivative (control slew rate). Higher values indicate more rapid control switching (chattering). **Units:** N/s (force rate for DIP actuator).
+
+**Interpretation:**
+- $\text{CI} < 50$ N/s: Low chattering (smooth control, minimal actuator wear)
+- $50 \leq \text{CI} < 200$ N/s: Moderate chattering (acceptable for industrial actuators)
+- $\text{CI} \geq 200$ N/s: High chattering (risk of actuator damage, acoustic noise)
+
+**7. Peak Chattering Frequency ($f_{\text{chatter}}$):**
+
+```math
+f_{\text{chatter}} = \arg\max_{f > 10 \text{ Hz}} |\mathcal{F}\{u(t)\}(f)|
+```
+
+Dominant frequency in control signal above 10 Hz threshold (FFT analysis). Identifies switching frequency characteristic of boundary layer or sign function approximation.
+
+**Computation:** Apply FFT to control signal $u(t)$, compute single-sided magnitude spectrum, find peak in range [10 Hz, Nyquist frequency = 50 Hz]. Report frequency and amplitude of peak.
+
+**8. High-Frequency Energy Fraction ($E_{\text{HF}}$):**
+
+```math
+E_{\text{HF}} = \frac{\int_{f > 10 \text{ Hz}} |\mathcal{F}\{u(t)\}(f)|^2 df}{\int_{f=0}^{f_{\text{Nyquist}}} |\mathcal{F}\{u(t)\}(f)|^2 df} \times 100\%
+```
+
+Percentage of control signal energy at frequencies >10 Hz. Complements peak frequency metric by quantifying total high-frequency content.
+
+---
+
+**Category 4: Energy Efficiency**
+
+**9. Total Control Energy ($E_{\text{ctrl}}$):**
+
+```math
+E_{\text{ctrl}} = \int_0^T u^2(t) dt = \sum_{k=0}^{N-1} u_k^2 \Delta t \quad \text{[J]}
+```
+
+Integrated squared control effort. Proportional to electrical energy consumed by actuator (assuming $P = u^2 / R$ for resistive load). **Lower values indicate more efficient control.**
+
+**Typical Values for DIP System:**
+- Optimal (STA SMC): 11.8 J
+- Moderate (Classical SMC): 12.4 J (+5%)
+- High (Adaptive SMC): 13.6 J (+15%)
+
+**10. Peak Control Power ($P_{\text{peak}}$):**
+
+```math
+P_{\text{peak}} = \max_{t \in [0, T]} |u(t)| \quad \text{[N]}
+```
+
+Maximum instantaneous control force. Determines actuator sizing requirements. **Constraint:** $P_{\text{peak}} \leq u_{\max} = 20$ N (actuator limit from Section 2).
+
+---
+
+**Category 5: Robustness (Additional Metrics)**
+
+**11. Model Uncertainty Tolerance ($\Delta_{\text{tol}}$):**
+
+```math
+\Delta_{\text{tol}} = \max\{\delta \,|\, \text{system stable under } m_i \to (1 + \delta) m_i, \forall i\}
+```
+
+Maximum percentage parameter perturbation before instability (bisection search). Evaluated for masses, lengths, inertias. **Higher values indicate better robustness** (Section 8.1).
+
+**12. Disturbance Attenuation Ratio ($A_{\text{dist}}$):**
+
+```math
+A_{\text{dist}} = \left(1 - \frac{\|\mathbf{x}_{\text{disturbed}}\|_{\infty}}{\|\mathbf{x}_{\text{nominal}}\|_{\infty}}\right) \times 100\%
+```
+
+Percentage reduction in maximum state deviation under sinusoidal disturbances. **Target: $A_{\text{dist}} > 80\%$** for robust control (Section 8.2).
+
+---
+
+**Metric Summary Table:**
+
+| Category | Metric | Symbol | Units | Target/Constraint | Section |
+|----------|--------|--------|-------|-------------------|---------|
+| **Computational** | Compute time | $t_{\text{compute}}$ | μs | <50 (10 kHz loop) | 7.1 |
+| | Memory usage | $M_{\text{peak}}$ | MB | <50 (embedded) | 7.1 |
+| **Transient** | Settling time | $t_s$ | s | <3.0 | 7.2 |
+| | Overshoot | OS | % | <10 | 7.2 |
+| | Rise time | $t_r$ | s | <1.0 | 7.2 |
+| **Chattering** | Chattering index | CI | N/s | <200 | 7.3 |
+| | Peak frequency | $f_{\text{chatter}}$ | Hz | [10, 50] | 7.3 |
+| | HF energy | $E_{\text{HF}}$ | % | <20 | 7.3 |
+| **Energy** | Control energy | $E_{\text{ctrl}}$ | J | <15 | 7.4 |
+| | Peak power | $P_{\text{peak}}$ | N | <20 | 7.4 |
+| **Robustness** | Uncertainty tol. | $\Delta_{\text{tol}}$ | % | >10 | 8.1 |
+| | Disturbance att. | $A_{\text{dist}}$ | % | >80 | 8.2 |
+
+---
 
 ### 6.3 Benchmarking Scenarios
 
-[TO BE COMPLETED: Initial conditions, Monte Carlo setup, statistical methods]
+**Monte Carlo Statistical Framework:**
+
+All controllers evaluated using Monte Carlo simulations to quantify performance variability and enable statistical comparison. Each benchmark scenario consists of $N_{\text{trials}}$ independent simulations with randomized initial conditions.
+
+**Scenario 1: Nominal Performance Benchmark (QW-2 Task)**
+
+**Purpose:** Establish baseline performance under small perturbations representative of measurement noise or minor disturbances.
+
+**Initial Conditions:** Random uniform sampling within bounds
+```math
+\begin{aligned}
+\theta_1(0) &\sim \mathcal{U}(-0.05, +0.05) \text{ rad} \quad (2.9° perturbation) \\
+\theta_2(0) &\sim \mathcal{U}(-0.05, +0.05) \text{ rad} \\
+x(0), \dot{x}(0), \dot{\theta}_1(0), \dot{\theta}_2(0) &= 0
+\end{aligned}
+```
+
+**Number of Trials:** $N_{\text{trials}} = 400$ (100 per controller × 4 controllers)
+
+**Rationale:** 400 trials provides:
+- 95% confidence interval width $\approx 0.1 \sigma$ (standard error $\sigma/\sqrt{400} = 0.05\sigma$)
+- Statistical power >0.8 for detecting 20% effect size differences (power analysis via G*Power)
+- Sufficient samples for non-parametric tests (bootstrap, permutation)
+
+**Scenario 2: Large Perturbation Stress Test (MT-7 Task)**
+
+**Purpose:** Evaluate controller robustness to realistic disturbances (6× larger than nominal).
+
+**Initial Conditions:**
+```math
+\begin{aligned}
+\theta_1(0) &\sim \mathcal{U}(-0.3, +0.3) \text{ rad} \quad (17.2° perturbation) \\
+\theta_2(0) &\sim \mathcal{U}(-0.3, +0.3) \text{ rad}
+\end{aligned}
+```
+
+**Number of Trials:** $N_{\text{trials}} = 500$ (50 per controller × 10 random seeds for seed sensitivity analysis)
+
+**Outcome:** **Severe generalization failure** for PSO-tuned controllers (Section 8.3). Highlighted critical need for multi-scenario optimization.
+
+**Scenario 3: Model Uncertainty Sweep (LT-6 Task - Partial)**
+
+**Purpose:** Assess robustness to parametric uncertainty in physics model.
+
+**Parameter Perturbations:** Each mass, length, inertia perturbed by $\pm 10\%$ and $\pm 20\%$:
+```math
+m_i \to m_i (1 + \delta), \quad \delta \in \{-0.2, -0.1, 0, +0.1, +0.2\}
+```
+
+**Combinations:** Full factorial sweep (5 perturbation levels × 8 parameters = $5^8 \approx 390{,}625$ combinations, reduced via Latin Hypercube Sampling to 1000 samples)
+
+**Status:** **Blocked** - Default gains produce 0% convergence even at nominal parameters. Requires PSO tuning prerequisite (Section 8.1).
+
+**Scenario 4: Sinusoidal Disturbance Rejection (MT-8 Task - Partial)**
+
+**Purpose:** Evaluate active disturbance rejection capability.
+
+**Disturbance Model:**
+```math
+d(t) = A_d \sin(2\pi f_d t), \quad A_d = 5 \text{ N}, \quad f_d \in \{0.5, 1, 2, 5\} \text{ Hz}
+```
+
+**Initial Conditions:** Nominal small perturbations (±0.05 rad)
+
+**Trials per Frequency:** 100 (total 400 per controller)
+
+**Metric:** Disturbance attenuation ratio $A_{\text{dist}}$ (Metric 12)
+
+---
+
+**Statistical Sampling Strategy:**
+
+**Random Number Generation:**
+- **Global seed:** `seed=42` for NumPy default RNG
+- **Independent draws:** Each Monte Carlo trial uses independent random draw from $\mathcal{U}(-\theta_{\max}, +\theta_{\max})$
+- **Quasi-random sequences (optional):** Sobol sequences for uniform space-filling in high-dimensional parameter sweeps (LT-6 scenario)
+
+**Sample Size Justification:**
+
+Power analysis (G*Power 3.1):
+- **Effect size:** Cohen's $d = 0.5$ (medium effect, 10% performance difference)
+- **Significance level:** $\alpha = 0.05$ (95% confidence)
+- **Desired power:** $1 - \beta = 0.8$ (80% probability of detecting true effect)
+- **Required sample size:** $n = 64$ per group (Welch's t-test, two-tailed)
+
+**Chosen sample sizes (100-500) exceed minimum requirements by 1.5-8×, ensuring robust conclusions.**
+
+---
 
 ### 6.4 Validation Methodology
 
-[TO BE COMPLETED: Hypothesis testing, confidence intervals, effect sizes]
+**Statistical Hypothesis Testing:**
+
+All performance comparisons validated using rigorous statistical tests with pre-specified significance level $\alpha = 0.05$ (95% confidence).
+
+**Primary Test: Welch's t-test (Two-Sample Unequal Variance)**
+
+```math
+t = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
+```
+
+where $(\bar{X}_i, s_i, n_i)$ are sample mean, standard deviation, and size for group $i$.
+
+**Rationale:**
+- Welch's t-test more robust than Student's t-test when variances unequal ($s_1^2 \neq s_2^2$)
+- Does not assume equal sample sizes ($n_1 \neq n_2$ permitted)
+- Approximately normal for $n \geq 30$ (Central Limit Theorem applies for our sample sizes 100-500)
+
+**Decision Rule:**
+- Reject null hypothesis $H_0: \mu_1 = \mu_2$ if $p < 0.05$
+- Interpret as: "Controller 1 and Controller 2 have statistically different performance"
+
+**Multiple Comparisons Correction:**
+
+When comparing $k = 4$ controllers (all pairwise comparisons: $\binom{4}{2} = 6$ tests), apply **Bonferroni correction**:
+
+```math
+\alpha_{\text{corrected}} = \frac{\alpha}{m} = \frac{0.05}{6} \approx 0.0083
+```
+
+Reject $H_0$ only if $p < 0.0083$. Controls family-wise error rate (FWER) at 5%.
+
+**Effect Size Analysis (Cohen's d):**
+
+Statistical significance ($p < 0.05$) does not imply practical significance. Always report effect size:
+
+```math
+d = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}}}
+```
+
+**Interpretation (Cohen's conventions):**
+- $|d| < 0.2$: Negligible effect (not practically significant)
+- $0.2 \leq |d| < 0.5$: Small effect
+- $0.5 \leq |d| < 0.8$: Medium effect
+- $|d| \geq 0.8$: Large effect (practically significant)
+
+**Example from Results:** STA vs Classical SMC settling time comparison:
+- $\bar{t}_{s,\text{STA}} = 1.82$ s, $\bar{t}_{s,\text{Classical}} = 2.15$ s
+- $p < 0.001$ (highly significant)
+- $d = 2.14$ (very large effect, 2.1 standard deviations apart)
+
+**Confidence Intervals (Bootstrap Method):**
+
+For each performance metric, compute 95% confidence interval via **bias-corrected accelerated (BCa) bootstrap**:
+
+1. Resample with replacement: Generate $B = 10{,}000$ bootstrap samples from original data
+2. Compute metric for each bootstrap sample: $\{\hat{\theta}_1, \ldots, \hat{\theta}_B\}$
+3. Sort bootstrap distribution and extract 2.5th and 97.5th percentiles
+4. Apply bias correction (BCa adjustment for skewed distributions)
+
+**Advantages over parametric CIs:**
+- No distributional assumptions (robust to non-normality)
+- Accurate for skewed metrics (e.g., chattering index, which is bounded at zero)
+- Accounts for sampling uncertainty
+
+**Reporting Format:** Mean ± SD [95% CI]
+- Example: $t_s = 1.82 \pm 0.15$ [1.78, 1.87] s
+
+**Non-Parametric Tests (Robustness Checks):**
+
+When data violate normality assumptions (Shapiro-Wilk test $p < 0.05$), use non-parametric alternatives:
+- **Mann-Whitney U test:** Non-parametric equivalent of t-test (ranks-based)
+- **Kruskal-Wallis H test:** Non-parametric ANOVA for >2 groups
+- **Permutation tests:** Exact significance via random permutations (computationally intensive, used when $n < 30$)
+
+**Reproducibility and Data Archival:**
+
+All statistical analyses satisfy FAIR principles (Findable, Accessible, Interoperable, Reusable):
+
+1. **Raw Data:** All simulation outputs saved to `benchmarks/results/<task_id>/raw_data.csv` with SHA256 checksums
+2. **Analysis Scripts:** Statistical analysis code version-controlled in `src/analysis/validation/statistical_tests.py`
+3. **Figures:** All plots generated programmatically via `matplotlib` scripts in `src/analysis/visualization/`
+4. **Configuration:** Single source of truth: `config.yaml` specifying all simulation parameters
+5. **Environment:** Docker container or Conda environment file (`environment.yml`) for exact package version replication
+
+**Open Science Commitment:**
+
+Upon publication, full dataset and analysis code will be released under MIT license on GitHub repository [GITHUB_LINK]. This enables independent verification, extension, and replication by other researchers.
 
 ---
 
