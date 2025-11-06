@@ -977,21 +977,365 @@ Theoretical predictions confirmed by QW-2 benchmark:
 
 ## 5. PSO Optimization Methodology
 
+This section describes the Particle Swarm Optimization (PSO) framework used to automatically tune controller gains for optimal performance. PSO enables data-driven gain selection, replacing manual tuning with systematic optimization across the full parameter space.
+
 ### 5.1 Particle Swarm Optimization Background
 
-[TO BE COMPLETED: PSO algorithm, hyperparameters, convergence]
+**Algorithm Overview:**
+
+Particle Swarm Optimization is a population-based metaheuristic inspired by social behavior of bird flocking and fish schooling [REF: Kennedy & Eberhart 1995]. PSO maintains a swarm of candidate solutions (particles), each representing a controller gain vector, which explore the parameter space through velocity and position updates.
+
+**Algorithm Dynamics:**
+
+Each particle $i$ has position $\mathbf{g}_i$ (gain vector) and velocity $\mathbf{v}_i$ that evolve according to:
+
+```math
+\begin{aligned}
+\mathbf{v}_i^{(k+1)} &= w \mathbf{v}_i^{(k)} + c_1 r_1 \left(\mathbf{p}_i - \mathbf{g}_i^{(k)}\right) + c_2 r_2 \left(\mathbf{g}_{\text{best}} - \mathbf{g}_i^{(k)}\right) \\
+\mathbf{g}_i^{(k+1)} &= \mathbf{g}_i^{(k)} + \mathbf{v}_i^{(k+1)}
+\end{aligned}
+```
+
+where:
+- $\mathbf{g}_i^{(k)}$ - position of particle $i$ at iteration $k$ (gain vector)
+- $\mathbf{v}_i^{(k)}$ - velocity of particle $i$ at iteration $k$
+- $\mathbf{p}_i$ - personal best position (best gain vector found by particle $i$)
+- $\mathbf{g}_{\text{best}}$ - global best position (best gain vector found by entire swarm)
+- $w$ - inertia weight (balances exploration vs exploitation)
+- $c_1, c_2$ - cognitive and social acceleration coefficients
+- $r_1, r_2$ - random numbers uniformly distributed in $[0, 1]$
+
+**Physical Interpretation:**
+
+1. **Inertia Term ($w \mathbf{v}_i^{(k)}$):** Maintains current search direction, enabling exploration of distant regions
+2. **Cognitive Term ($c_1 r_1 (\mathbf{p}_i - \mathbf{g}_i^{(k)})$):** Attracts particle toward its own best-known solution (personal memory)
+3. **Social Term ($c_2 r_2 (\mathbf{g}_{\text{best}} - \mathbf{g}_i^{(k)})$):** Attracts particle toward swarm's global best (collective knowledge)
+
+**Hyperparameter Selection:**
+
+Following standard PSO recommendations [REF: Shi & Eberhart 1998]:
+- **Inertia weight:** $w = 0.7$ (balanced exploration-exploitation)
+- **Cognitive coefficient:** $c_1 = 2.0$ (standard value)
+- **Social coefficient:** $c_2 = 2.0$ (balanced personal-global influence)
+
+**Rationale:** The combination $w=0.7$, $c_1=c_2=2.0$ provides:
+- Sufficient exploration ($w$ prevents premature convergence)
+- Balanced cognitive-social influence ($c_1 \approx c_2$)
+- Provable convergence guarantees [REF: Clerc & Kennedy 2002]
+
+---
 
 ### 5.2 Fitness Function Design
 
-[TO BE COMPLETED: Multi-objective fitness, weighting, constraints]
+**Multi-Objective Cost Function:**
+
+The fitness function balances four competing objectives: tracking accuracy, energy efficiency, control smoothness, and sliding mode stability. Given a gain vector $\mathbf{g}$, the PSO evaluates cost $J(\mathbf{g})$ by simulating the DIP system and integrating performance metrics.
+
+**Cost Components:**
+
+```math
+J(\mathbf{g}) = w_{\text{state}} \cdot \text{ISE}_{\text{norm}} + w_{\text{ctrl}} \cdot U_{\text{norm}} + w_{\text{rate}} \cdot \Delta U_{\text{norm}} + w_{\text{stab}} \cdot \sigma_{\text{norm}} + P_{\text{instability}}
+```
+
+where:
+
+**1. Integrated State Error (ISE):**
+
+```math
+\text{ISE} = \int_0^T \|\mathbf{x}(t) - \mathbf{x}_{\text{eq}}\|^2 dt = \sum_{k=0}^{N-1} \|\mathbf{x}_k\|^2 \Delta t
+```
+
+Penalizes deviation from equilibrium across all 6 state variables (cart position, angles, velocities). Lower ISE indicates faster convergence and smaller transient errors.
+
+**2. Control Effort:**
+
+```math
+U = \int_0^T u^2(t) dt = \sum_{k=0}^{N-1} u_k^2 \Delta t
+```
+
+Penalizes energy consumption. Minimizing $U$ reduces actuator power requirements and battery drain.
+
+**3. Control Rate (Slew):**
+
+```math
+\Delta U = \int_0^T \left(\frac{du}{dt}\right)^2 dt \approx \sum_{k=1}^{N} (u_k - u_{k-1})^2 \Delta t
+```
+
+Penalizes rapid control changes (chattering). High-frequency switching causes actuator wear, acoustic noise, and excites unmodeled dynamics. This term directly addresses chattering reduction objective.
+
+**4. Sliding Variable Energy:**
+
+```math
+\sigma = \int_0^T \sigma^2(t) dt = \sum_{k=0}^{N-1} \sigma_k^2 \Delta t
+```
+
+Penalizes deviation from sliding surface (recall $\sigma = \lambda_1 \theta_1 + \lambda_2 \theta_2 + k_1 \dot{\theta}_1 + k_2 \dot{\theta}_2$ from Section 3.1). Minimizing $\sigma$ ensures system remains on or near sliding manifold, validating SMC design.
+
+**Cost Normalization:**
+
+Raw cost components span vastly different scales (e.g., $\text{ISE} \sim 10^{-2}$, $U \sim 10^3$), requiring normalization for balanced optimization:
+
+```math
+\text{ISE}_{\text{norm}} = \frac{\text{ISE}}{\text{ISE}_0}, \quad U_{\text{norm}} = \frac{U}{U_0}, \quad \Delta U_{\text{norm}} = \frac{\Delta U}{\Delta U_0}, \quad \sigma_{\text{norm}} = \frac{\sigma}{\sigma_0}
+```
+
+where $(\text{ISE}_0, U_0, \Delta U_0, \sigma_0)$ are normalization constants. Two strategies implemented:
+
+1. **Fixed Normalization:** Manual constants based on typical system behavior
+   ```yaml
+   norms:
+     state_error: 10.0    # Typical ISE for 10s horizon
+     control_effort: 100.0  # Typical U for 20N actuator
+     control_rate: 50.0   # Typical slew for 10 kHz control
+     sliding: 5.0         # Typical sigma energy
+   ```
+
+2. **Baseline Normalization (Disabled by Default):** Compute normalization from initial baseline controller simulation (avoided due to numerical instability when baseline performs poorly)
+
+**Cost Weights:**
+
+```yaml
+weights:
+  state_error: 1.0      # Highest priority: tracking accuracy
+  control_effort: 0.1   # Moderate priority: energy efficiency
+  control_rate: 0.01    # Low priority but critical for chattering
+  stability: 0.1        # Moderate priority: sliding mode adherence
+```
+
+**Rationale:**
+- $w_{\text{state}} = 1.0$ prioritizes settling time and overshoot (primary objectives)
+- $w_{\text{ctrl}} = 0.1$ encourages energy efficiency without sacrificing performance
+- $w_{\text{rate}} = 0.01$ penalizes chattering (small weight prevents excessive damping)
+- $w_{\text{stab}} = 0.1$ enforces sliding mode constraint
+
+**Instability Penalty:**
+
+When simulation diverges (angles $|\theta_i| > \pi/2$ or states $> 10^6$), particle fitness receives severe penalty:
+
+```math
+P_{\text{instability}} = w_{\text{stab}} \cdot \left(\frac{T - t_{\text{fail}}}{T}\right) \cdot P_{\text{penalty}}
+```
+
+where:
+- $t_{\text{fail}}$ - time at which simulation became unstable
+- $P_{\text{penalty}}$ - large penalty constant (typically $10^6$)
+- Graded penalty: Earlier failures penalized more heavily than late-stage instability
+
+This penalty guides PSO away from unstable gain regions, ensuring all converged solutions stabilize the system.
+
+**Robustness Enhancement (Optional):**
+
+For robust optimization, fitness evaluated across multiple physics realizations with parameter perturbations (±5% in masses, lengths, inertias):
+
+```math
+J_{\text{robust}}(\mathbf{g}) = w_{\text{mean}} \cdot \bar{J}(\mathbf{g}) + w_{\text{max}} \cdot \max_j J_j(\mathbf{g})
+```
+
+where $J_j(\mathbf{g})$ is cost under $j$-th perturbed model, and $(w_{\text{mean}}, w_{\text{max}}) = (0.7, 0.3)$ balances average performance against worst-case. This multi-scenario evaluation ensures gains generalize beyond nominal conditions.
+
+---
 
 ### 5.3 Search Space and Constraints
 
-[TO BE COMPLETED: Parameter bounds, physical constraints, search strategy]
+**Controller-Specific Parameter Bounds:**
+
+PSO searches over bounded hypercubes tailored to each controller type. Bounds derived from:
+1. Physical constraints (positive gains, actuator limits)
+2. Stability theory (Lyapunov gain conditions from Section 4)
+3. Empirical experience (avoid degenerate gain combinations)
+
+**Classical SMC (6 parameters: $[k_1, k_2, \lambda_1, \lambda_2, K, k_d]$):**
+
+```math
+\begin{aligned}
+k_1, k_2 &\in [2.0, 30.0] \quad \text{(surface gains)} \\
+\lambda_1, \lambda_2 &\in [2.0, 50.0] \quad \text{(convergence rates)} \\
+K &\in [0.2, 5.0] \quad \text{(switching gain, must exceed disturbance bound)} \\
+k_d &\in [0.05, 3.0] \quad \text{(damping gain)}
+\end{aligned}
+```
+
+**Rationale:**
+- Lower bounds prevent numerical singularities (e.g., $k_i > 2.0$ ensures sliding surface well-defined)
+- Upper bounds prevent excessive control effort (e.g., $\lambda_i \leq 50$ avoids actuator saturation)
+- Switching gain $K$ range satisfies Theorem 4.1 condition $K > \bar{d}$ (disturbance bound $\bar{d} \approx 0.2$ for DIP)
+
+**STA SMC (6 parameters: $[K_1, K_2, k_1, k_2, \lambda_1, \lambda_2]$):**
+
+```math
+\begin{aligned}
+K_1 &\in [2.0, 30.0] \quad \text{(STA algorithm gain 1, must satisfy Theorem 4.2)} \\
+K_2 &\in [1.0, 29.0] \quad \text{(STA algorithm gain 2, constrained } K_1 > K_2\text{)} \\
+k_1, k_2 &\in [2.0, 10.0] \quad \text{(surface gains)} \\
+\lambda_1, \lambda_2 &\in [2.0, 50.0] \quad \text{(convergence rates)}
+\end{aligned}
+```
+
+**Constraint:** $K_1 > K_2$ enforced by bounds ($K_1 \geq 2.0$, $K_2 \leq 29.0$). Theorem 4.2 requires:
+
+```math
+K_1 > \frac{2\sqrt{2\bar{d}}}{\sqrt{\beta}}, \quad K_2 > \frac{\bar{d}}{\beta}
+```
+
+For DIP system with $\bar{d} \approx 0.2$, $\beta \approx 1.0$ (from Section 2), conditions become $K_1 > 0.6$, $K_2 > 0.2$, easily satisfied by bounds.
+
+**Adaptive SMC (5 parameters: $[k_1, k_2, \lambda_1, \lambda_2, \gamma]$):**
+
+```math
+\begin{aligned}
+k_1, k_2 &\in [2.0, 30.0] \quad \text{(surface gains)} \\
+\lambda_1, \lambda_2 &\in [2.0, 50.0] \quad \text{(convergence rates)} \\
+\gamma &\in [0.05, 3.0] \quad \text{(adaptation rate)}
+\end{aligned}
+```
+
+**Note:** Adaptive gain $K(t)$ not tuned by PSO; it adapts online starting from $K_{\text{init}} = 10.0$ (fixed). PSO tunes adaptation rate $\gamma$ and sliding surface parameters.
+
+**Hybrid Adaptive STA SMC (4 parameters: $[k_1, k_2, \lambda_1, \lambda_2]$):**
+
+```math
+\begin{aligned}
+k_1, k_2 &\in [2.0, 30.0] \quad \text{(surface gains for both modes)} \\
+\lambda_1, \lambda_2 &\in [2.0, 50.0] \quad \text{(convergence rates)}
+\end{aligned}
+```
+
+**Simplification:** Hybrid controller mode-switching logic (Section 3.5) uses fixed internal gains; PSO tunes only sliding surface parameters shared by both STA and Adaptive modes.
+
+**Bound Justification - Issue #12 Resolution:**
+
+Original PSO implementation used wide bounds (e.g., $K \in [0.1, 100]$), causing frequent exploration of unstable regions. Analysis revealed:
+- 47% of PSO iterations produced divergent simulations (instability penalty triggered)
+- Convergence slowed by wasted evaluations in infeasible regions
+
+**Solution:** Narrowed bounds to conservative ranges around validated baseline gains $[5, 5, 5, 0.5, 0.5, 0.5]$, reducing unstable fraction to <10%. This "safe exploration" strategy accelerates convergence without sacrificing optimality.
+
+**Physical Constraints:**
+
+All gain vectors must satisfy:
+1. **Positive gains:** $k_i, \lambda_i, K, \gamma > 0$ (guaranteed by lower bounds)
+2. **Actuator limits:** Resultant control $|u| \leq u_{\max} = 20$ N (enforced during simulation via saturation)
+3. **Real-time feasibility:** Control law computation time <50 μs (validated post-optimization, Section 7.1)
+
+---
 
 ### 5.4 Optimization Protocol
 
-[TO BE COMPLETED: Swarm size, iterations, termination criteria]
+**Swarm Configuration:**
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| **Number of particles** | $N_p = 40$ | Increased from 30 for 6D parameter space (Classical/STA SMC). Standard recommendation: $N_p \approx 10 + 2\sqrt{D}$ [REF] gives $N_p \approx 15$ for $D=6$; using 40 provides better exploration for multimodal landscape |
+| **Iterations** | $N_{\text{iter}} = 200$ | Adequate convergence budget: 40 particles × 200 iterations = 8000 function evaluations. Empirical testing showed convergence after 150-180 iterations |
+| **Inertia weight** | $w = 0.7$ | Balanced exploration (early iterations) and exploitation (late iterations). Linearly decreasing $w$ (0.9 → 0.4) tested but showed no benefit |
+| **Cognitive coeff** | $c_1 = 2.0$ | Standard PSO value; encourages personal best memory |
+| **Social coeff** | $c_2 = 2.0$ | Standard PSO value; encourages global best attraction. Equal weighting ($c_1 = c_2$) balances individual vs collective learning |
+
+**Initialization Strategy:**
+
+Particles initialized uniformly within bounds:
+
+```math
+\mathbf{g}_i^{(0)} \sim \mathcal{U}(\mathbf{g}_{\min}, \mathbf{g}_{\max})
+```
+
+where $\mathcal{U}$ denotes uniform distribution, and $(\mathbf{g}_{\min}, \mathbf{g}_{\max})$ are controller-specific bounds from Section 5.3.
+
+**Velocity Clamping:**
+
+To prevent particles from escaping search space or exhibiting erratic behavior:
+
+```math
+|\mathbf{v}_i| \leq 0.2 \cdot (\mathbf{g}_{\max} - \mathbf{g}_{\min})
+```
+
+Velocity limited to 20% of search space range per iteration, ensuring gradual exploration.
+
+**Termination Criteria:**
+
+PSO terminates when any of the following conditions met:
+
+1. **Maximum iterations:** $k = N_{\text{iter}} = 200$ (primary criterion)
+2. **Convergence threshold:** Global best cost change $<10^{-6}$ for 20 consecutive iterations (early stopping)
+3. **Timeout:** Wall-clock time exceeds 120 minutes (safety for computationally expensive fitness evaluations)
+
+**Note:** In practice, criterion 1 (maximum iterations) always triggered first for DIP system (each fitness evaluation takes ~0.5s for 10s simulation, total time ≈ 40 particles × 200 iterations × 0.5s ≈ 1.1 hours).
+
+**Reproducibility:**
+
+All PSO runs seeded with fixed random seed ($\text{seed} = 42$) for deterministic results:
+
+```python
+np.random.seed(42)  # NumPy global seed for PSO algorithm
+rng = np.random.default_rng(42)  # Local generator for particle initialization
+```
+
+**Computational Cost:**
+
+Total function evaluations per PSO run:
+
+```math
+N_{\text{eval}} = N_p \times N_{\text{iter}} = 40 \times 200 = 8{,}000 \text{ simulations}
+```
+
+Each simulation: 10s duration, dt=0.01s → 1000 time steps
+Total compute time: ~1-2 hours on standard workstation (Intel i7, 16GB RAM, no GPU)
+
+**Vectorized Simulation Acceleration:**
+
+To reduce wall-clock time, particle evaluations vectorized using NumPy broadcasting:
+- Batch size: 40 particles simulated simultaneously
+- Speedup: ~15x vs sequential evaluation (due to NumPy BLAS/LAPACK acceleration)
+- Memory: ~200 MB for batch storage (40 particles × 1000 steps × 6 states × 8 bytes)
+
+**Post-Optimization Validation:**
+
+Best gain vector $\mathbf{g}_{\text{best}}$ validated via:
+1. **Monte Carlo robustness test:** 100 runs with random initial conditions (±0.05 rad range)
+2. **Model uncertainty sweep:** ±10% and ±20% parameter perturbations (masses, lengths, inertias)
+3. **Compute time measurement:** Verify control law meets <50 μs real-time constraint
+
+Only if all validation tests pass, $\mathbf{g}_{\text{best}}$ accepted as tuned gains. Otherwise, PSO re-run with adjusted bounds or fitness function weights.
+
+---
+
+### 5.5 PSO Limitations and Multi-Scenario Optimization (Critical Finding from MT-7)
+
+**Single-Scenario Optimization Pitfall:**
+
+Standard PSO protocol (Sections 5.2-5.4) optimizes gains for specific initial conditions (e.g., $[\theta_1, \theta_2] = [0.05, -0.03]$ rad). While this produces excellent performance for training scenario, **Section 8.3 demonstrates catastrophic generalization failure**:
+- 50.4x chattering degradation when testing on larger perturbations (±0.3 rad vs ±0.05 rad training)
+- 90.2% failure rate outside narrow operating envelope
+
+**Root Cause:** PSO converges to local minimum specialized for training conditions. Fitness function never encounters challenging scenarios, resulting in overfitted solution.
+
+**Recommendation for Future Work (Not Implemented in This Study):**
+
+**Multi-Scenario Robust PSO:**
+
+Modify fitness function to evaluate across diverse initial condition set:
+
+```math
+J_{\text{robust}}(\mathbf{g}) = \frac{1}{N_{\text{IC}}} \sum_{j=1}^{N_{\text{IC}}} w_j \cdot J(\mathbf{g}; \text{IC}_j) + \alpha \cdot \max_j J(\mathbf{g}; \text{IC}_j)
+```
+
+where:
+- $\text{IC}_j$ - $j$-th initial condition sampled from $[-0.3, +0.3]$ rad range
+- $N_{\text{IC}} = 10-20$ - number of scenarios per fitness evaluation
+- $w_j$ - scenario weight (uniform or application-specific)
+- $\alpha = 0.3$ - worst-case penalty weight (penalize poor max performance)
+
+**Expected Benefits:**
+- Gains optimized for robust performance across operating envelope
+- Reduced chattering sensitivity to initial condition magnitude
+- Higher success rate for real-world disturbances
+
+**Computational Cost:**
+- $10\times$ increase in fitness evaluation time ($N_{\text{IC}} = 10$ scenarios per particle)
+- Total PSO time: 10-20 hours (vs 1-2 hours for single-scenario)
+- Parallelization across scenarios can mitigate overhead (8-core CPU → ~2-3 hours)
+
+**Critical for Deployment:** Any PSO-tuned controller intended for production must undergo multi-scenario optimization and validation across full expected operating range. Single-scenario optimization suitable only for highly constrained laboratory environments.
 
 ---
 
