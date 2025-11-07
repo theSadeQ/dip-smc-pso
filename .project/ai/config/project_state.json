@@ -77,6 +77,20 @@
       ],
       "pr": "#22",
       "commit": "f279e72c"
+    },
+    {
+      "date": "2025-11-07",
+      "type": "validation-correction",
+      "task": "MT-6",
+      "title": "MT-6 Deep Dive Validation - Target Not Achieved",
+      "description": "Deep dive validation (300 Monte Carlo simulations) with unbiased frequency-domain chattering metrics revealed MT-6 achieved only 3.7% chattering reduction vs 30% target. Previous reports claimed 66.5% improvement (COMPLETE_REPORT) or 352% degradation (CORRECTED_ANALYSIS), both due to biased 'combined_legacy' metric that penalizes dε/dt. Conclusion: Fixed boundary layer (ε=0.02) is near-optimal; adaptive adds complexity without significant benefit.",
+      "deliverables": [
+        "benchmarks/MT6_DEEP_DIVE_FINAL_ANALYSIS.md",
+        "benchmarks/MT6_VALIDATION_COMPARISON.json",
+        "scripts/mt6_validate_both_params.py"
+      ],
+      "impact": "Research paper, completion summary, roadmap status corrected",
+      "commit": "7418b770"
     }
   ],
   "last_commit": {

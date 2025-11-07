@@ -1,8 +1,24 @@
-# MT-6 Adaptive Boundary Layer Optimization Report
+# [DEPRECATED - METRIC BIAS] MT-6 Adaptive Boundary Layer Optimization Report
+
+**[WARNING] This report contains INCORRECT results due to biased chattering metric**
+
+**See:** `benchmarks/MT6_DEEP_DIVE_FINAL_ANALYSIS.md` for corrected analysis (November 7, 2025)
+
+**Reality:** Adaptive boundary layer achieves only **3.7% chattering reduction** (not 66.5%)
+
+**Root Cause:** "combined_legacy" chattering metric penalizes dε/dt, artificially inflating the perceived benefit of adaptive boundary layers. Unbiased frequency-domain validation (300 Monte Carlo simulations) revealed marginal improvement only.
+
+**Conclusion:** Fixed boundary layer (ε=0.02) is near-optimal for this DIP system. The adaptive boundary layer optimization (MT-6) did NOT achieve its 30% reduction target.
+
+---
+
+## [ORIGINAL REPORT FOLLOWS - RESULTS INCORRECT]
+
+---
 
 **Task ID:** MT-6
 **Date:** 2025-10-19
-**Status:** COMPLETE
+**Status:** COMPLETE (work done, but target not achieved)
 **Roadmap Reference:** ROADMAP_EXISTING_PROJECT.md
 
 ---
@@ -11,8 +27,8 @@
 
 **Primary Objective:** Optimize adaptive boundary layer parameters (ε_min, α) for Classical SMC to minimize chattering while maintaining control performance.
 
-**Key Results:**
-- **Chattering Reduction:** 66.5% (6.37 → 2.14)
+**Key Results (INCORRECT - BIASED METRIC):**
+- **Chattering Reduction:** 66.5% (6.37 → 2.14) [INCORRECT]
 - **Statistical Significance:** p = 0.0000 (highly significant (p<0.001))
 - **Effect Size:** Cohen's d = 5.29 (very large)
 - **Optimal Parameters:** ε_min = 0.0025, α = 1.21
