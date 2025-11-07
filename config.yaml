@@ -191,6 +191,21 @@ pso:
   # review recommendation to eliminate legacy options (issue #16),
   # these fields have been removed.
   seed: 42
+  # Multi-scenario robust optimization (addresses MT-7 overfitting issue)
+  # When enabled, PSO evaluates gains across diverse initial conditions to prevent
+  # training bias. Disabled by default for backward compatibility.
+  robustness:
+    enabled: false              # Set to true to enable robust PSO
+    n_scenarios: 15             # Number of diverse initial conditions (3-100)
+    worst_case_weight: 0.3      # Weight for worst-case cost (α in J_robust = mean + α*max)
+    scenario_distribution:
+      nominal_fraction: 0.2     # 20% scenarios with small perturbations (±nominal_range)
+      moderate_fraction: 0.3    # 30% scenarios with medium perturbations (±moderate_range)
+      large_fraction: 0.5       # 50% scenarios with large perturbations (±large_range)
+    nominal_range: 0.05         # Small perturbations (rad) - original training range
+    moderate_range: 0.15        # Medium perturbations (rad)
+    large_range: 0.3            # Large perturbations (rad) - realistic conditions
+    seed: null                  # Optional: seed for reproducible scenario generation (null = use pso.seed)
   tune:
     cart_mass:
       min: 1.0
