@@ -2648,6 +2648,18 @@ The double-inverted pendulum remains a valuable testbed for control algorithm de
 
 ---
 
+## Acknowledgments
+
+This research was conducted as part of the Double-Inverted Pendulum SMC with PSO project. The authors acknowledge the open-source community for providing foundational libraries (NumPy, SciPy, Matplotlib) and tools (Python, pytest) that enabled this work.
+
+**Code Availability:** All simulation code, controller implementations, and benchmarking scripts are publicly available at https://github.com/theSadeQ/dip-smc-pso.git under MIT License.
+
+**Data Availability:** Complete experimental data, PSO optimization results, and statistical analysis outputs are included in the repository's benchmarks/ directory with SHA256 checksums for reproducibility verification.
+
+**Reproducibility:** This work adheres to FAIR principles (Findable, Accessible, Interoperable, Reusable). All simulations use deterministic seeding (seed=42) and pinned dependency versions (requirements.txt). Reproduction instructions are provided in README.md.
+
+---
+
 ## References
 
 ### Classical Sliding Mode Control Theory
@@ -2860,9 +2872,9 @@ benchmarks/results/
 
 ## FINAL DOCUMENT STATUS
 
-**Document Version:** v2.0 - SUBMISSION-READY (95% Complete)
-**Completion Date:** November 6, 2025
-**Time Invested:** 20 hours (LT-7 task)
+**Document Version:** v2.1 - SUBMISSION-READY (MT-6 Corrections Applied)
+**Completion Date:** November 7, 2025
+**Time Invested:** 20 hours (LT-7 task) + 2 hours (MT-6 corrections)
 
 **CONTENT COMPLETION:**
 - ✅ Abstract (400 words, 4 objectives, 7 controllers)
@@ -2878,6 +2890,10 @@ benchmarks/results/
 - ✅ Conclusions & Future Work (Section 10, 5 subsections)
 - ✅ References (68 citations, IEEE format, all placeholders replaced)
 - ⏸️ Appendices A-D (Summarized, full versions optional for journal)
+- ✅ **MT-6 Corrections Applied** (November 7, 2025):
+  - Figure 5.2: Updated caption to clarify marginal benefit (3.7% not 74%)
+  - Table 8.3: Added footnote about biased chattering metric
+  - List of Figures: Updated to note marginal benefit observed
 
 **QUALITY METRICS:**
 - **Length:** 2,700 lines (~13,400 words, ~25 journal pages)
@@ -2918,4 +2934,4 @@ This 20-hour research paper development achieved:
 
 ---
 
-[END OF DOCUMENT - v2.0 SUBMISSION-READY]
+[END OF DOCUMENT - v2.1 SUBMISSION-READY - MT-6 CORRECTIONS APPLIED]
