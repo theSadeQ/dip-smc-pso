@@ -127,8 +127,11 @@ def parse_coverage_by_component(coverage_data: Dict) -> List[ComponentCoverage]:
     files = coverage_data.get("files", {})
 
     for file_path, file_data in files.items():
+        # Normalize path separators (Windows backslash to forward slash)
+        file_path_normalized = file_path.replace("\\", "/")
+
         # Skip non-source files
-        if not file_path.startswith("src/"):
+        if not file_path_normalized.startswith("src/"):
             continue
 
         summary = file_data.get("summary", {})
@@ -143,11 +146,11 @@ def parse_coverage_by_component(coverage_data: Dict) -> List[ComponentCoverage]:
         # Get missing lines
         missing_lines = file_data.get("missing_lines", [])
 
-        # Categorize component
-        level = categorize_component(file_path)
+        # Categorize component (use normalized path)
+        level = categorize_component(file_path_normalized)
 
-        # Simplify file path for display
-        display_name = file_path.replace("src/", "")
+        # Simplify file path for display (use normalized path)
+        display_name = file_path_normalized.replace("src/", "")
 
         component = ComponentCoverage(
             name=display_name,
@@ -225,10 +228,10 @@ def print_coverage_summary(components: List[ComponentCoverage], output_json: boo
         print(json.dumps(output, indent=2))
         return
 
-    # Terminal output with colors
-    print(f"\n{CoverageColors.BOLD}{CoverageColors.BLUE}╔══════════════════════════════════════════════════════════════════╗{CoverageColors.RESET}")
-    print(f"{CoverageColors.BOLD}{CoverageColors.BLUE}║          DIP SMC PSO Coverage Analysis Report                   ║{CoverageColors.RESET}")
-    print(f"{CoverageColors.BOLD}{CoverageColors.BLUE}╚══════════════════════════════════════════════════════════════════╝{CoverageColors.RESET}\n")
+    # Terminal output with colors (ASCII-safe for Windows cp1252)
+    print(f"\n{CoverageColors.BOLD}{CoverageColors.BLUE}{'='*70}{CoverageColors.RESET}")
+    print(f"{CoverageColors.BOLD}{CoverageColors.BLUE}     DIP SMC PSO Coverage Analysis Report{CoverageColors.RESET}")
+    print(f"{CoverageColors.BOLD}{CoverageColors.BLUE}{'='*70}{CoverageColors.RESET}\n")
 
     # Overall summary
     overall_pct, overall_covered, overall_total = calculate_aggregate_coverage(components)
@@ -236,7 +239,7 @@ def print_coverage_summary(components: List[ComponentCoverage], output_json: boo
 
     print(f"{CoverageColors.BOLD}Overall Coverage:{CoverageColors.RESET}")
     print(f"  {overall_color}{overall_pct:6.2f}%{CoverageColors.RESET} ({overall_covered}/{overall_total} lines)")
-    print(f"  Target: {CoverageColors.GREEN}≥85%{CoverageColors.RESET}")
+    print(f"  Target: {CoverageColors.GREEN}>=85%{CoverageColors.RESET}")
     print()
 
     # By level summary
@@ -251,10 +254,10 @@ def print_coverage_summary(components: List[ComponentCoverage], output_json: boo
             target = "100%"
         elif level == CoverageLevel.CRITICAL:
             label = "Critical"
-            target = "≥95%"
+            target = ">=95%"
         else:
             label = "General"
-            target = "≥85%"
+            target = ">=85%"
 
         print(f"  {label:20s}: {color}{pct:6.2f}%{CoverageColors.RESET} ({covered}/{total} lines) - Target: {target}")
 

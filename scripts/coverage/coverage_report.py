@@ -58,7 +58,9 @@ class CoverageReportGenerator:
     def run_coverage_tests(self) -> bool:
         """Run pytest with coverage collection."""
         print("Running tests with coverage collection...")
-        print("Command: pytest --cov=src --cov-report=html --cov-report=json --cov-report=term\n")
+        print("Command: pytest --cov=src --cov-report=html --cov-report=json\n")
+        print("[INFO] Terminal output disabled to avoid Windows Unicode issues (cp1252)")
+        print("[INFO] View results in HTML report: .htmlcov/index.html\n")
 
         try:
             result = subprocess.run(
@@ -67,7 +69,7 @@ class CoverageReportGenerator:
                     "--cov=src",
                     "--cov-report=html",
                     "--cov-report=json",
-                    "--cov-report=term",
+                    # Note: --cov-report=term removed to fix Windows cp1252 Unicode issues
                     "-v"
                 ],
                 capture_output=True,
