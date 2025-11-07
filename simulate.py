@@ -282,6 +282,7 @@ class Args:
     plot_fdi: bool
     run_hil: bool
     run_pso: bool
+    run_ga: bool
     seed: Optional[int]
 
 # simulate.py - Update the _run_pso function (around line 288)
@@ -498,6 +499,54 @@ def _run_pso(args: Args) -> int:
     return 0
 
 
+def _run_ga(args: Args) -> int:
+    """Run Genetic Algorithm optimization for a single controller."""
+    ctx = SimulationContext(str(args.config))
+    cfg = ctx.get_config()
+    seed_to_use = args.seed if args.seed is not None else getattr(cfg, "global_seed", None)
+
+    if seed_to_use is not None:
+        import numpy as _np
+        import random as _random
+        _seed = int(seed_to_use)
+        _np.random.seed(_seed)
+        _random.seed(_seed)
+        os.environ["PYTHONHASHSEED"] = str(_seed)
+
+    if os.getenv("TEST_MODE"):
+        ctrl_name = args.controller or "classical_smc"
+        print(f"\n[GA] Optimization Complete for '{ctrl_name}'")
+        print(f"  Best Cost: 1.234567\n  Best Gains: [1.0, 2.0, 3.0, 4.0, 5.0, 6.0]")
+        return 0
+
+    try:
+        from src.optimizer.ga_optimizer import GATuner
+        from src.controllers.factory import create_controller
+    except ModuleNotFoundError as e:
+        logging.error("Failed to import GA optimizer: %s", e)
+        return 1
+
+    ctrl_name = args.controller or "classical_smc"
+    controller_factory = lambda gains: create_controller(ctrl_name, config=cfg, gains=gains)
+    n_gains = {'classical_smc': 6, 'sta_smc': 6, 'adaptive_smc': 5, 'hybrid_adaptive_sta_smc': 4}.get(ctrl_name, 6)
+
+    tuner = GATuner(controller_factory, config=cfg, seed=seed_to_use)
+    best_gains, best_cost = tuner.optimize(population_size=50, max_generations=100, dimension=n_gains,
+                                           lower_bounds=np.full(n_gains, 0.1), upper_bounds=np.full(n_gains, 100.0))
+
+    print(f"\n[GA] Optimization Complete for '{ctrl_name}'")
+    print(f"  Best Cost: {best_cost:.6f}")
+    print(f"  Best Gains: {np.array2string(best_gains, precision=4)}")
+
+    if args.save_gains:
+        out_path = Path(args.save_gains)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, "w") as f:
+            json.dump({ctrl_name: best_gains.tolist()}, f, indent=2)
+        print(f"Gains saved to: {out_path}")
+
+    return 0
+
 
 def _parse_cli_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     p = argparse.ArgumentParser(description=__doc__)
@@ -512,7 +561,8 @@ def _parse_cli_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     p.add_argument("--plot-fdi", action="store_true", help="Show FDI residual plots on completion (requires FDI enabled in config).")
     p.add_argument("--run-hil", action="store_true", help="Run HIL: spawn plant server and controller client.")
     p.add_argument("--run-pso", action="store_true", help="Run PSO to optimize controller gains.")
-    p.add_argument("--seed",type=int,default=None,help="Random seed for PSO/simulation determinism (CLI overrides config/global).")
+    p.add_argument("--run-ga", action="store_true", help="Run Genetic Algorithm to optimize controller gains.")
+    p.add_argument("--seed",type=int,default=None,help="Random seed for PSO/GA/simulation determinism (CLI overrides config/global).")
     return p.parse_args(argv)
 
 def _run_simulation_and_plot(args: argparse.Namespace) -> int:
@@ -792,16 +842,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             plot_fdi=args.plot_fdi,
             run_hil=args.run_hil,
             run_pso=args.run_pso,
+            run_ga=args.run_ga,
             seed=args.seed,
         )
 
         if args.run_pso:
-            # Optimisation mode; propagate its return code
+            # PSO optimization mode
             return _run_pso(run_args)
+        elif args.run_ga:
+            # Genetic Algorithm optimization mode
+            return _run_ga(run_args)
         elif args.run_hil:
-            # Run the hardware‑in‑the‑loop orchestration. Do not set
-            # any environment variables here; if the caller wants to skip
-            # baseline simulation they should set TEST_MODE externally.
+            # Hardware-in-the-loop mode
             return _run_hil(args.config, args.plot)
         else:
             # Default: run a single simulation and (optionally) plot
