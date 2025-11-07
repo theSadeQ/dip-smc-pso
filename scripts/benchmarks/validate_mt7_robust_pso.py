@@ -178,12 +178,10 @@ def run_simulation_batch(
     results = []
 
     for ic in initial_conditions:
-        # Create controller
-        controller = controller_factory(gains)
-
-        # Run simulation
-        t, x_traj, u_traj, _ = simulate_system_batch(
-            controller_factory=lambda g: controller_factory(gains),
+        # Run simulation with IC override
+        # NOTE: Pass controller_factory directly (it will be called internally for each particle)
+        t, x_traj, u_traj, sigma_traj = simulate_system_batch(
+            controller_factory=controller_factory,
             particles=gains.reshape(1, -1),
             sim_time=sim_duration,
             dt=dt,
@@ -194,6 +192,12 @@ def run_simulation_batch(
         # Extract single trajectory (batch size=1)
         x = x_traj[0]  # Shape: (n_steps, 6)
         u = u_traj[0]  # Shape: (n_steps,)
+
+        # Diagnostic check for zero control signal
+        if len(u) < 10:
+            logger.warning(f"[WARNING] Short control trajectory: {len(u)} steps (expected ~{int(sim_duration/dt)})")
+        if np.allclose(u, 0.0):
+            logger.warning(f"[WARNING] Zero control signal for IC: {ic[:3]}")  # Only show positions
 
         # Compute chattering metrics
         chattering_idx = compute_chattering_index(u, dt)
@@ -342,10 +346,27 @@ def validate_mt7_robust_pso(
     robust_nominal = aggregate_results(robust_nominal_results, "Robust PSO - Nominal (±0.05 rad)")
     robust_realistic = aggregate_results(robust_realistic_results, "Robust PSO - Realistic (±0.3 rad)")
 
-    # Compute degradation ratios
-    standard_degradation = std_realistic.mean_chattering / std_nominal.mean_chattering
-    robust_degradation = robust_realistic.mean_chattering / robust_nominal.mean_chattering
-    improvement_factor = standard_degradation / robust_degradation
+    # Compute degradation ratios with zero-division guards
+    if std_nominal.mean_chattering < 1e-9:
+        logger.warning("[WARNING] Standard PSO nominal chattering near zero - using penalty value")
+        standard_degradation = float('inf')
+    else:
+        standard_degradation = std_realistic.mean_chattering / std_nominal.mean_chattering
+
+    if robust_nominal.mean_chattering < 1e-9:
+        logger.warning("[WARNING] Robust PSO nominal chattering near zero - using penalty value")
+        robust_degradation = float('inf')
+    else:
+        robust_degradation = robust_realistic.mean_chattering / robust_nominal.mean_chattering
+
+    # Compute improvement factor with guards
+    if robust_degradation < 1e-9:
+        improvement_factor = float('inf')
+    elif standard_degradation == float('inf'):
+        improvement_factor = float('inf')
+    else:
+        improvement_factor = standard_degradation / robust_degradation
+
     target_met = robust_degradation < 5.0
 
     # Create report
