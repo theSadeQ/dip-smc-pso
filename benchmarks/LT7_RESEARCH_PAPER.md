@@ -107,7 +107,7 @@ The remainder of this paper is organized as follows:
 
 **Figure 5.1:** PSO convergence curves for Classical SMC gain optimization over 200 iterations
 
-**Figure 5.2:** MT-6 PSO convergence comparison (adaptive boundary layer optimization)
+**Figure 5.2:** MT-6 PSO convergence comparison (adaptive boundary layer optimization, marginal benefit observed)
 
 **Figure 7.1:** Computational efficiency comparison across four SMC variants with 95% confidence intervals
 
@@ -1446,7 +1446,7 @@ pso:
 
 ![Figure 5.2: MT-6 PSO Convergence Comparison](./figures/MT6_pso_convergence.png)
 
-**Figure 5.2: MT-6 Adaptive Boundary Layer PSO Convergence Analysis.** Dual-panel visualization comparing optimization trajectories for Classical SMC adaptive boundary layer tuning (MT-6 benchmark). Left panel shows fitness evolution over 200 PSO iterations with multi-start validation: 5 independent PSO runs (different colors) demonstrate algorithm consistency, all converging to similar final cost values (6.2-6.5) despite different initialization, validating global optimum discovery rather than local minimum trapping. Fitness computed via Equation 5.2 multi-objective cost function (state error + control effort + smoothness penalty). Right panel presents particle diversity metric (swarm spread in parameter space) declining from initial uniform distribution (diversity ~0.8) to tight clustering around optimum (diversity ~0.1 by iteration 150), illustrating classic explore-exploit transition characteristic of PSO. Rapid diversity collapse (iterations 50-100) indicates premature convergence risk mitigated by inertia weight scheduling ($w$ linearly decreasing 0.9 → 0.4). Dashed vertical line marks iteration 120 where global best improvement stalls (<10^-6 change for 20 iterations), though termination criterion 2 (early stopping) never triggered, with algorithm running full 200 iterations (criterion 1). Data from MT-6 protocol optimizing two boundary layer parameters ($\epsilon_{\min}, \alpha$) for classical SMC chattering reduction, achieving 74% chattering improvement (index 8.2 → 2.1) after tuning. Demonstrates PSO robustness to initialization and convergence reliability for moderate-dimensional spaces (2-8 parameters typical for SMC gain tuning).
+**Figure 5.2: MT-6 Adaptive Boundary Layer PSO Convergence Analysis.** Dual-panel visualization comparing optimization trajectories for Classical SMC adaptive boundary layer tuning (MT-6 benchmark). Left panel shows fitness evolution over 200 PSO iterations with multi-start validation: 5 independent PSO runs (different colors) demonstrate algorithm consistency, all converging to similar final cost values (6.2-6.5) despite different initialization, validating global optimum discovery rather than local minimum trapping. Fitness computed via Equation 5.2 multi-objective cost function (state error + control effort + smoothness penalty). Right panel presents particle diversity metric (swarm spread in parameter space) declining from initial uniform distribution (diversity ~0.8) to tight clustering around optimum (diversity ~0.1 by iteration 150), illustrating classic explore-exploit transition characteristic of PSO. Rapid diversity collapse (iterations 50-100) indicates premature convergence risk mitigated by inertia weight scheduling ($w$ linearly decreasing 0.9 → 0.4). Dashed vertical line marks iteration 120 where global best improvement stalls (<10^-6 change for 20 iterations), though termination criterion 2 (early stopping) never triggered, with algorithm running full 200 iterations (criterion 1). Data from MT-6 protocol optimizing two boundary layer parameters ($\epsilon_{\min}, \alpha$) for classical SMC chattering reduction. **Note:** Follow-up validation with unbiased frequency-domain metrics revealed that adaptive boundary layer achieves only marginal chattering reduction (3.7%) vs fixed boundary layer, below the 30% target. The fixed boundary layer (ε=0.02) was found to be near-optimal for this DIP system. This figure demonstrates PSO convergence characteristics rather than optimality of the resulting parameters. Demonstrates PSO robustness to initialization and convergence reliability for moderate-dimensional spaces (2-8 parameters typical for SMC gain tuning).
 
 ---
 
@@ -2265,11 +2265,13 @@ Adaptive gain $K(t)$ increases when $|\sigma| > \delta$ (dead-zone), but adaptat
 
 **Table 8.3: PSO Generalization Test (Classical SMC with Adaptive Boundary Layer)**
 
-| Scenario | Chattering Index | Success Rate | Statistical Significance |
+| Scenario | Chattering Index* | Success Rate | Statistical Significance |
 |----------|------------------|--------------|--------------------------|
 | MT-6 Training (±0.05 rad) | 2.14 ± 0.13 | 100% (100/100) | Baseline |
 | MT-7 Test (±0.3 rad) | 107.61 ± 5.48 | 9.8% (49/500) | p < 0.001 |
 | **Degradation** | **50.4x worse** | **-90.2%** | **Very large effect (d=-26.5)** |
+
+*Note: Chattering index measured using combined legacy metric. Follow-up validation revealed this metric is biased against adaptive boundary layers (penalizes dε/dt). Unbiased frequency-domain metrics show adaptive boundary layer provides only 3.7% improvement vs fixed boundary layer, below 30% target.
 
 **Analysis:**
 1. **Overfitting to Narrow Scenario:** PSO optimized parameters (ε_min=0.00250, α=1.21) for ±0.05 rad initial conditions

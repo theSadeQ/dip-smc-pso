@@ -3,7 +3,7 @@
 
 **Completion Date:** November 7, 2025
 **Duration:** October 29 - November 7, 2025 (8 weeks)
-**Status:** ✅ COMPLETE (11/11 tasks, 100%)
+**Status:** ✅ COMPLETE (11/11 tasks done, MT-6 target not achieved)
 
 ---
 
@@ -64,13 +64,16 @@ Successfully completed comprehensive research validation of all 7 existing SMC c
 - **Git Evidence:** Week 1 summary shows completion
 - **Result:** Publication-quality performance matrix, controllers ranked
 
-**MT-6: Boundary Layer Optimization (5 hours)** ✅
+**MT-6: Boundary Layer Optimization (5 hours)** ⚠️
 - **Scope:** Adaptive boundary layer for Classical/STA SMC
 - **Implementation:** Replace fixed ε = 0.02 with `ε(t) = ε_min + k*|s|`
-- **Validation:** Chattering reduction ≥30% achieved
-- **Deliverable:** Improved Classical/STA SMC with adaptive boundary layer
-- **Git Evidence:** Artifact `MT6_CHAPTER6_INTEGRATION_SUMMARY.md`
-- **Result:** Chattering frequency reduced by 30%+ without performance loss
+- **Validation:** Chattering reduction target (≥30%) NOT achieved
+- **Deliverable:** Analysis reports, PSO optimization scripts, validation data
+- **Git Evidence:** Artifacts `MT6_COMPLETE_REPORT.md`, `MT6_DEEP_DIVE_FINAL_ANALYSIS.md`
+- **Result:** Adaptive boundary layer provides only 3.7% chattering reduction (unbiased metric)
+- **Conclusion:** Fixed boundary layer (ε=0.02) is near-optimal for DIP system
+- **Value:** Negative result establishes baseline optimality, prevents future wasted effort
+- **Note:** Initial reports claimed 66.5% improvement, but this was due to biased "combined_legacy" metric that penalizes dε/dt. Deep dive validation (Nov 7, 2025) with unbiased frequency-domain metrics revealed marginal benefit only.
 
 **MT-7: Robust PSO Validation (BONUS TASK) (7 hours estimated)** ✅
 - **Scope:** Scope expansion not in original roadmap
