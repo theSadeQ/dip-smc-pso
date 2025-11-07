@@ -31,7 +31,7 @@
 ### Completed Tasks
 
 - [x] Create branch: `phase4/production-hardening`
-- [x] Create planning directory: `.ai/planning/phase4/`
+- [x] Create planning directory: `.project/ai/planning/phase4/`
 - [x] Run baseline production readiness assessment (score: 23.9/100)
 - [x] Analyze thread safety implementation
 - [x] Identify 4 critical thread safety gaps
@@ -49,12 +49,12 @@
 | Deliverable | Status | Location |
 |-------------|--------|----------|
 | Branch created | ✅ Complete | `phase4/production-hardening` |
-| Baseline assessment run | ✅ Complete | `.ai/planning/phase4/baseline.json` |
-| Baseline analysis report | ✅ Complete | `.ai/planning/phase4/BASELINE_ASSESSMENT.md` |
-| Issue backlog | ✅ Complete | `.ai/planning/phase4/ISSUE_BACKLOG.md` |
-| Coordination status | ⏳ In Progress | `.ai/planning/phase4/COORDINATION_STATUS.md` |
-| Success criteria | ⏸️ Pending | `.ai/planning/phase4/SUCCESS_CRITERIA.md` |
-| Codex handoff | ⏸️ Pending | `.ai/planning/phase4/CODEX_HANDOFF.md` |
+| Baseline assessment run | ✅ Complete | `.project/ai/planning/phase4/baseline.json` |
+| Baseline analysis report | ✅ Complete | `.project/ai/planning/phase4/BASELINE_ASSESSMENT.md` |
+| Issue backlog | ✅ Complete | `.project/ai/planning/phase4/ISSUE_BACKLOG.md` |
+| Coordination status | ⏳ In Progress | `.project/ai/planning/phase4/COORDINATION_STATUS.md` |
+| Success criteria | ⏸️ Pending | `.project/ai/planning/phase4/SUCCESS_CRITERIA.md` |
+| Codex handoff | ⏸️ Pending | `.project/ai/planning/phase4/CODEX_HANDOFF.md` |
 
 ---
 
@@ -87,7 +87,7 @@
 - `src/integration/compatibility_matrix.py` (MEAS-003)
 - `scripts/pytest_automation.py` (MEAS-001)
 - `src/controllers/factory/thread_safety.py` (THREAD-001, THREAD-002, THREAD-005)
-- `.ai/planning/phase4/baseline_v2.json` (MEAS-005 output)
+- `.project/ai/planning/phase4/baseline_v2.json` (MEAS-005 output)
 
 ---
 
@@ -126,8 +126,8 @@
 | `src/controllers/factory/thread_safety.py` | ✅ | ❌ | **None** |
 | `tests/.../test_concurrent_thread_safety_deep.py` | ❌ (read only) | ❌ | **None** |
 | `tests/.../test_production_thread_safety.py` | ❌ | ✅ (creates) | **None** |
-| `.ai/planning/phase4/*.md` | ✅ (updates) | ❌ (read only) | **None** |
-| `.ai/planning/phase4/baseline_v2.json` | ✅ (creates) | ❌ | **None** |
+| `.project/ai/planning/phase4/*.md` | ✅ (updates) | ❌ (read only) | **None** |
+| `.project/ai/planning/phase4/baseline_v2.json` | ✅ (creates) | ❌ | **None** |
 
 **Conflict Risk**: 0/8 files have overlap
 
@@ -184,7 +184,7 @@
 | `tests/test_controllers/test_*_extended.py` | ❌ | ✅ (creates) | **None** |
 | `tests/test_optimizer/test_pso_edge_cases.py` | ❌ | ✅ (creates) | **None** |
 | Coverage configuration files | ✅ | ❌ (read only) | **None** |
-| `.ai/planning/phase4/*.md` | ✅ (updates) | ❌ (read only) | **None** |
+| `.project/ai/planning/phase4/*.md` | ✅ (updates) | ❌ (read only) | **None** |
 
 **Conflict Risk**: 0/5 files have overlap
 
@@ -209,9 +209,9 @@
 
 **Files Modified**:
 - `CLAUDE.md` (Section 13 update)
-- `.ai/planning/phase4/FINAL_ASSESSMENT_REPORT.md` (new)
-- `.ai/planning/phase4/CHANGELOG.md` (new)
-- `.ai/planning/phase4/final_assessment.json` (new)
+- `.project/ai/planning/phase4/FINAL_ASSESSMENT_REPORT.md` (new)
+- `.project/ai/planning/phase4/CHANGELOG.md` (new)
+- `.project/ai/planning/phase4/final_assessment.json` (new)
 
 ---
 

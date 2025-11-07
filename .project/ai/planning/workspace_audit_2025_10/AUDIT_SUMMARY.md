@@ -163,7 +163,7 @@ A comprehensive organizational audit identified **41 issues** across 7 dimension
 **Fix:** Execute Quick Wins (Phase 1, 1h)
 
 ### C4: Triple File Duplication (CRITICAL)
-**Location:** `.dev_tools/.dev_tools/Switch-ClaudeAccount.ps1`
+**Location:** `.project/dev_tools/.project/dev_tools/Switch-ClaudeAccount.ps1`
 **Impact:** Source of truth confusion
 **Fix:** Delete nested duplicate (Phase 1, 10min)
 
@@ -209,7 +209,7 @@ A comprehensive organizational audit identified **41 issues** across 7 dimension
 1. Delete empty `.benchmarks/` (2min)
 2. Remove `delete_ansi.bat` (5min)
 3. Delete `data/data/` duplication (10min)
-4. Delete `.dev_tools/.dev_tools/` nested dir (10min)
+4. Delete `.project/dev_tools/.project/dev_tools/` nested dir (10min)
 5. Fix root `__pycache__` gitignore (5min)
 6. Delete 3 duplicate presentation files (15min)
 7. Move `.claude/settings.local.json` (15min)
@@ -461,7 +461,7 @@ jobs:
 - **Phase 3 Prompt:** `PHASE_3_THIS_MONTH.md`
 - **Quick Reference:** `QUICK_REFERENCE.md`
 - **CLAUDE.md §14:** Workspace organization rules
-- **Testing Standards:** `.ai/config/testing_standards.md`
+- **Testing Standards:** `.project/ai/config/testing_standards.md`
 
 ---
 

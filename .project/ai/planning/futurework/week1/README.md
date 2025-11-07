@@ -1,6 +1,6 @@
 # Week 1 Future Work (Deferred)
 
-**Source**: Split from `.ai/planning/research/week1/` on October 18, 2025
+**Source**: Split from `.project/ai/planning/research/week1/` on October 18, 2025
 **Status**: DEFERRED - Complete ROADMAP_EXISTING_PROJECT.md first
 
 ---
@@ -35,7 +35,7 @@ This is a **new PSO algorithm** (adaptive inertia), which should be implemented 
 3. ✅ Lyapunov proofs for existing controllers complete
 4. ✅ Research paper on existing work drafted
 
-**See**: `.ai/planning/futurework/ROADMAP_FUTURE_RESEARCH.md` for full future work plan
+**See**: `.project/ai/planning/futurework/ROADMAP_FUTURE_RESEARCH.md` for full future work plan
 
 ---
 

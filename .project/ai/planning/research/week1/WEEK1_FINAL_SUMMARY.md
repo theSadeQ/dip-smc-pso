@@ -91,9 +91,9 @@ Week 1 successfully completed all 5 quick-win tasks, establishing the foundation
 **Status**: ⚠️ **PARTIAL** - Baseline complete, adaptive blocked
 
 **Deliverables**:
-- `.ai/planning/research/week1/results/gains_fixed_inertia.json`
-- `.ai/planning/research/week1/results/baseline_pso_log.txt` (1.7MB)
-- `.ai/planning/research/week1/results/pso_adaptive_inertia_comparison.md`
+- `.project/ai/planning/research/week1/results/gains_fixed_inertia.json`
+- `.project/ai/planning/research/week1/results/baseline_pso_log.txt` (1.7MB)
+- `.project/ai/planning/research/week1/results/pso_adaptive_inertia_comparison.md`
 
 **Baseline Results (Fixed Inertia w=0.729)**:
 | Metric | Value |
@@ -215,11 +215,11 @@ plot_pso_summary(fitness_history, position_history, save_path="pso_summary.png",
 ### Documentation
 
 - [x] `docs/theory/smc_theory_complete.md` - Updated (+300 lines)
-- [x] `.ai/planning/research/week1/PLAN.md` - Master plan created
-- [x] `.ai/planning/research/week1/DAILY_LOG.md` - Progress tracker created
-- [x] `.ai/planning/research/week1/COMPLETION_SUMMARY.md` - Template created
-- [x] `.ai/planning/research/week1/tasks/*.md` - 5 task specs created
-- [x] `.ai/planning/research/week1/results/pso_adaptive_inertia_comparison.md` - MT-3 report
+- [x] `.project/ai/planning/research/week1/PLAN.md` - Master plan created
+- [x] `.project/ai/planning/research/week1/DAILY_LOG.md` - Progress tracker created
+- [x] `.project/ai/planning/research/week1/COMPLETION_SUMMARY.md` - Template created
+- [x] `.project/ai/planning/research/week1/tasks/*.md` - 5 task specs created
+- [x] `.project/ai/planning/research/week1/results/pso_adaptive_inertia_comparison.md` - MT-3 report
 
 ### Python Modules
 

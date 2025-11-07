@@ -661,7 +661,7 @@ pytest --cov=src --cov-report=term
 **Claude Owns (read-only for you)**:
 - `src/controllers/factory/thread_safety.py`
 - `src/integration/production_readiness.py`
-- `.ai/planning/phase4/*.md`
+- `.project/ai/planning/phase4/*.md`
 - `tests/test_integration/test_thread_safety/test_concurrent_thread_safety_deep.py`
 
 **Do NOT modify Claude's files!** This prevents merge conflicts.

@@ -140,8 +140,8 @@
 
 ### Completed Work
 - `docs/_static/custom.css`: WCAG AA compliant theme
-- `.codex/phase3/COMPLETION_SUMMARY.md`: Full Phase 3 report
-- `.codex/phase1_audit/phase1_issue_backlog.json`: 17 resolved, 17 deferred
+- `.artifacts/archive/planning/phase3/COMPLETION_SUMMARY.md`: Full Phase 3 report
+- `.project/ai/planning/phase1_audit/phase1_issue_backlog.json`: 17 resolved, 17 deferred
 
 ### Git Commits
 - `c1c18c42`: Wave 4 validation and consolidation
@@ -151,9 +151,9 @@
 - `e2e186a9`: Mark UI-031 resolved in backlog
 
 ### Documentation
-- **Strategic Roadmap**: `.codex/STRATEGIC_ROADMAP.md`
-- **Phase 3 Summary**: `.codex/phase3/COMPLETION_SUMMARY.md`
-- **This Handoff**: `.codex/phase3/HANDOFF.md`
+- **Strategic Roadmap**: `.project/ai/planning/STRATEGIC_ROADMAP.md`
+- **Phase 3 Summary**: `.artifacts/archive/planning/phase3/COMPLETION_SUMMARY.md`
+- **This Handoff**: `.artifacts/archive/planning/phase3/HANDOFF.md`
 
 ---
 

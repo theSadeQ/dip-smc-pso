@@ -18,7 +18,7 @@
 - [ ] Design anti-windup mechanism
 - [ ] Document design decisions
 
-**Deliverable**: .ai/planning/research/week2/tasks/MT-2_DESIGN.md
+**Deliverable**: .project/ai/planning/research/week2/tasks/MT-2_DESIGN.md
 
 ---
 
@@ -71,7 +71,7 @@
 - [ ] Measure disturbance rejection (verify 40-60% better)
 - [ ] Verify no reaching phase (s(0) = 0)
 - [ ] Update docs/theory/smc_theory_complete.md (line 326)
-- [ ] Create .ai/planning/research/week2/tasks/MT-2_COMPLETION.md
+- [ ] Create .project/ai/planning/research/week2/tasks/MT-2_COMPLETION.md
 
 **Deliverable**: Validated controller, updated documentation
 
