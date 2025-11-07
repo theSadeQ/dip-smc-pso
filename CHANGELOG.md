@@ -5,6 +5,22 @@ All notable changes to the ResearchPlan validation system will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- **QW-3: PSO Visualization Integration** (Week 1 research task)
+  - Integrated PSO convergence visualization with CLI (`simulate.py --run-pso --plot`)
+  - Convergence plots automatically saved to `optimization_results/{controller}_convergence.png`
+  - Uses existing `src/utils/visualization/pso_plots.py` module (243 lines)
+  - Graceful fallback if visualization dependencies unavailable
+  - Completes Week 1 research roadmap (5/5 hours, 100%)
+
+### Changed
+- `simulate.py`: Added optional PSO plot generation when `--run-pso --plot` flags combined
+  - Extracts cost history from PSO result dict
+  - Creates `optimization_results/` directory automatically
+  - Generates publication-quality convergence plots (300 DPI, log scale support)
+
 ## [1.2.0] - 2025-10-01
 
 ### Fixed

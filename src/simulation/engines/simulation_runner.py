@@ -387,8 +387,8 @@ class SimulationRunner:
         """
         try:
             # Use the functional run_simulation API
-            sim_time = kwargs.get('sim_time', self.max_time)
-            dt = kwargs.get('dt', self.dt)
+            sim_time = kwargs.pop('sim_time', self.max_time)
+            dt = kwargs.pop('dt', self.dt)
 
             if controller is None:
                 # Create a simple zero controller for testing
