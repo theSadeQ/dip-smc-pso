@@ -125,7 +125,8 @@
 **Progress:** 11/11 tasks complete (100%) ✅
 - Hours: ~72/72 hours used (COMPLETE)
 - Completed: QW-1, QW-2, QW-3, QW-4, QW-5, MT-5, MT-6, MT-7, MT-8, LT-4, LT-6, LT-7
-- Status: LT-7 research paper SUBMISSION-READY (v2.1)
+- **Note:** MT-6 target (≥30% chattering reduction) not achieved; adaptive boundary layer provides only 3.7% benefit
+- Status: LT-7 research paper SUBMISSION-READY (v2.1, MT-6 corrections applied)
 
 **Focus Areas:**
 1. **Documentation:** SMC theory, Lyapunov proofs, research status

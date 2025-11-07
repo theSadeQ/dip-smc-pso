@@ -1,4 +1,19 @@
-# MT-6 Phase 2: Final Report - Bias Hypothesis Validated
+# [SUPERSEDED] MT-6 Phase 2: Final Report - Bias Hypothesis Validated
+
+**[SUPERSEDED BY]** `benchmarks/MT6_DEEP_DIVE_FINAL_ANALYSIS.md` (November 7, 2025)
+
+**Updated Verdict:** MT-6 target (≥30% reduction) NOT achieved. Adaptive boundary layer provides only **3.7% chattering reduction** vs fixed boundary layer (unbiased frequency-domain metric, 300 Monte Carlo simulations).
+
+**Recommendation:** Use fixed boundary layer (ε=0.02) as optimal configuration due to simplicity and near-equivalent performance.
+
+**Original Report Status:** Correctly identified metric bias, but overestimated benefit (14.6% vs actual 3.7%).
+
+---
+
+## [ORIGINAL REPORT FOLLOWS - METRIC BIAS IDENTIFIED BUT BENEFIT OVERESTIMATED]
+
+---
+
 **Date:** October 18, 2025
 **Status:** ✅ **BIAS HYPOTHESIS CONFIRMED**
 **Conclusion:** Adaptive boundary layer **DOES NOT** chatter more. The 351% increase was a **MEASUREMENT ARTIFACT**.
@@ -9,10 +24,10 @@
 
 **FINDING:** The current chattering metric (`RMS(du/dt)`) is **FUNDAMENTALLY BIASED** against adaptive boundary layer controllers.
 
-**PROOF:** Alternative unbiased metrics show adaptive boundary layer performs **BETTER**:
+**PROOF (PARTIALLY CORRECT):** Alternative unbiased metrics show adaptive boundary layer performs **BETTER**:
 - **Steady-state variance:** 4.1% lower (51.4 vs 53.6)
-- **Freq-domain (20 Hz):** 14.6% lower (0.000131 vs 0.000153)
-- **Freq-domain (10 Hz):** 14.5% lower
+- **Freq-domain (20 Hz):** 14.6% lower (0.000131 vs 0.000153) [Overestimated - actual is 3.7%]
+- **Freq-domain (10 Hz):** 14.5% lower [Overestimated]
 - **Zero-crossing rate:** SAME (0.3 Hz both)
 
 **MT-6 STATUS:** ✅ **SUCCESS** (adaptive works, metric doesn't)

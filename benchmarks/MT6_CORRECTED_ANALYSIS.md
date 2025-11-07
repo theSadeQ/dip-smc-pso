@@ -1,4 +1,21 @@
-# MT-6: Corrected Boundary Layer Optimization Analysis
+# [DEPRECATED - METRIC BIAS] MT-6: Corrected Boundary Layer Optimization Analysis
+
+**[WARNING] This report contains INCORRECT results due to biased chattering metric**
+
+**See:** `benchmarks/MT6_DEEP_DIVE_FINAL_ANALYSIS.md` for corrected analysis (November 7, 2025)
+
+**Reality:** Adaptive boundary layer is only **1.3% worse** than fixed baseline (not 352.5% worse)
+
+**Root Cause:** "combined_legacy" chattering metric penalizes dε/dt, artificially inflating the perceived degradation of adaptive boundary layers. Unbiased frequency-domain validation (300 Monte Carlo simulations) revealed minimal difference.
+
+**Conclusion:** Both fixed and adaptive boundary layers perform similarly (~±4%). Fixed boundary layer (ε=0.02) is recommended due to simplicity.
+
+---
+
+## [ORIGINAL REPORT FOLLOWS - RESULTS INCORRECT]
+
+---
+
 **Date:** October 18, 2025
 **Task:** MT-6 - Boundary Layer Optimization (Classical/STA SMC)
 **Status:** Completed with unexpected results
@@ -7,7 +24,7 @@
 
 ## Executive Summary
 
-**CRITICAL FINDING:** Adaptive boundary layer optimization INCREASED chattering by 352.5% compared to fixed baseline (28.83 vs 6.37), opposite of hypothesis.
+**CRITICAL FINDING (INCORRECT - BIASED METRIC):** Adaptive boundary layer optimization INCREASED chattering by 352.5% compared to fixed baseline (28.83 vs 6.37), opposite of hypothesis. [INCORRECT - METRIC BIAS]
 
 **Root Cause of Previous Discrepancy:** Agent A and Agent B used different controller gains, making comparison invalid. This was corrected by using identical default gains `[5.0, 5.0, 5.0, 0.5, 0.5, 0.5]` for both approaches.
 
