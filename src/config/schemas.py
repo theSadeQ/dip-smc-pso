@@ -313,6 +313,51 @@ class PSOBoundsWithControllers(StrictModel):
     adaptive_smc: Optional[PSOBounds] = None
     hybrid_adaptive_sta_smc: Optional[PSOBounds] = None
 
+class ScenarioDistributionConfig(StrictModel):
+    """Distribution of scenario difficulty levels for robust PSO."""
+    nominal_fraction: float = Field(0.2, ge=0.0, le=1.0, description="Fraction of scenarios with small perturbations")
+    moderate_fraction: float = Field(0.3, ge=0.0, le=1.0, description="Fraction of scenarios with medium perturbations")
+    large_fraction: float = Field(0.5, ge=0.0, le=1.0, description="Fraction of scenarios with large perturbations")
+
+    @model_validator(mode='after')
+    def validate_fractions_sum(self) -> 'ScenarioDistributionConfig':
+        """Ensure fractions sum to 1.0."""
+        total = self.nominal_fraction + self.moderate_fraction + self.large_fraction
+        if not (0.99 <= total <= 1.01):  # Allow small floating-point tolerance
+            raise ValueError(f"Scenario fractions must sum to 1.0, got {total}")
+        return self
+
+class RobustnessConfig(StrictModel):
+    """Configuration for multi-scenario robust PSO optimization.
+
+    Addresses MT-7 overfitting issue where gains trained on small perturbations
+    (±0.05 rad) show 50.4x chattering degradation on realistic perturbations (±0.3 rad).
+
+    Robust fitness: J_robust = mean(costs) + α * max(costs)
+    where α = worst_case_weight (default 0.3).
+    """
+    enabled: bool = Field(False, description="Enable robust multi-scenario optimization")
+    n_scenarios: int = Field(15, ge=3, le=100, description="Number of diverse initial conditions to evaluate")
+    worst_case_weight: float = Field(0.3, ge=0.0, le=1.0, description="Weight for worst-case cost (α in robust fitness)")
+    scenario_distribution: ScenarioDistributionConfig = Field(
+        default_factory=ScenarioDistributionConfig,
+        description="Distribution of scenario difficulty levels"
+    )
+    nominal_range: float = Field(0.05, ge=0.0, description="Perturbation range for nominal scenarios (rad)")
+    moderate_range: float = Field(0.15, ge=0.0, description="Perturbation range for moderate scenarios (rad)")
+    large_range: float = Field(0.3, ge=0.0, description="Perturbation range for large scenarios (rad)")
+    seed: Optional[int] = Field(None, description="Random seed for reproducible scenario generation")
+
+    @model_validator(mode='after')
+    def validate_ranges_ordering(self) -> 'RobustnessConfig':
+        """Ensure nominal < moderate < large."""
+        if not (self.nominal_range < self.moderate_range < self.large_range):
+            raise ValueError(
+                f"Ranges must satisfy nominal < moderate < large, got "
+                f"{self.nominal_range} < {self.moderate_range} < {self.large_range}"
+            )
+        return self
+
 class PSOConfig(StrictModel):
     n_particles: int = Field(100, ge=1)
     bounds: PSOBoundsWithControllers
@@ -328,6 +373,10 @@ class PSOConfig(StrictModel):
     study_timeout: Optional[int] = None
     seed: Optional[int] = None
     tune: Dict[str, Dict[str, float]] = Field(default_factory=dict)
+    robustness: Optional[RobustnessConfig] = Field(
+        None,
+        description="Multi-scenario robust optimization settings (addresses MT-7 overfitting)"
+    )
 
 # ------------------------------------------------------------------------------
 # Cost Function

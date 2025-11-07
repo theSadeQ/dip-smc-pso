@@ -285,6 +285,7 @@ class Args:
     run_ga: bool
     run_de: bool
     run_cmaes: bool
+    robust_pso: bool
     seed: Optional[int]
 
 # simulate.py - Update the _run_pso function (around line 288)
@@ -379,6 +380,7 @@ def _run_pso(args: Args) -> int:
 
     try:
         from src.optimizer.pso_optimizer import PSOTuner
+        from src.optimization.algorithms.robust_pso_optimizer import RobustPSOTuner
         from src.controllers.factory import create_controller
     except ModuleNotFoundError as e:
         # In TEST_MODE, provide a deterministic fallback so CLI tests can run
@@ -448,7 +450,24 @@ def _run_pso(args: Args) -> int:
     # provided in ``tests/conftest.py``.
 
     # Instantiate tuner with deterministic seed to ensure reproducibility
-    tuner = PSOTuner(controller_factory, config=cfg, seed=seed_to_use)
+    # Use RobustPSOTuner if --robust-pso flag is set or config enables robustness
+    robust_enabled = args.robust_pso or (
+        hasattr(cfg, 'pso') and
+        hasattr(cfg.pso, 'robustness') and
+        cfg.pso.robustness is not None and
+        cfg.pso.robustness.enabled
+    )
+
+    if robust_enabled:
+        tuner = RobustPSOTuner(
+            controller_factory,
+            config=cfg,
+            seed=seed_to_use,
+            robust_enabled=True
+        )
+        print(f"[INFO] Using Robust PSO with {cfg.pso.robustness.n_scenarios if cfg.pso.robustness else 15} scenarios")
+    else:
+        tuner = PSOTuner(controller_factory, config=cfg, seed=seed_to_use)
 
     # Execute optimisation using configuration settings.  Tests that require
     # reduced workloads should adjust the PSO parameters via monkeypatching or
@@ -667,6 +686,7 @@ def _parse_cli_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     p.add_argument("--run-ga", action="store_true", help="Run Genetic Algorithm to optimize controller gains.")
     p.add_argument("--run-de", action="store_true", help="Run Differential Evolution to optimize controller gains.")
     p.add_argument("--run-cmaes", action="store_true", help="Run CMA-ES to optimize controller gains.")
+    p.add_argument("--robust-pso", action="store_true", help="Enable robust multi-scenario PSO (addresses MT-7 overfitting; requires --run-pso).")
     p.add_argument("--seed",type=int,default=None,help="Random seed for PSO/GA/DE/CMA-ES/simulation determinism (CLI overrides config/global).")
     return p.parse_args(argv)
 
@@ -950,6 +970,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             run_ga=args.run_ga,
             run_de=args.run_de,
             run_cmaes=args.run_cmaes,
+            robust_pso=args.robust_pso,
             seed=args.seed,
         )
 
