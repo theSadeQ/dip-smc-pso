@@ -9,10 +9,10 @@
 
 A comprehensive organizational audit identified **41 issues** across 7 dimensions:
 
-- **15 CRITICAL** issues (nested directories, gitignore violations, root bloat)
+- **5 CRITICAL** issues (nested directories, gitignore violations, root bloat)
 - **12 HIGH** issues (god objects, duplicate modules, config sprawl)
-- **8 MEDIUM** issues (deep nesting, test gaps, stale docs)
-- **6 LOW** issues (naming inconsistencies, minor clutter)
+- **14 MEDIUM** issues (deep nesting, test gaps, stale docs)
+- **10 LOW** issues (naming inconsistencies, minor clutter)
 
 **Total Cleanup Effort:** 38-44 hours over 3 phases
 
@@ -269,8 +269,8 @@ A comprehensive organizational audit identified **41 issues** across 7 dimension
 **By Severity:**
 - Priority 1 (CRITICAL): 5 issues, 4 hours
 - Priority 2 (HIGH): 12 issues, 7-11 hours
-- Priority 3 (MEDIUM): 8 issues, 17-29 hours
-- Priority 4 (LOW): 6 issues, 2 hours
+- Priority 3 (MEDIUM): 14 issues, 17-29 hours
+- Priority 4 (LOW): 10 issues, 2 hours
 
 **By Category:**
 - Directory structure: 12 issues

@@ -257,10 +257,11 @@ if ($Primary) {
         exit 1
     }
 
-    # Clear CLAUDE_CONFIG_DIR
+    # Clear CLAUDE_CONFIG_DIR (both session and persistent)
     if ($env:CLAUDE_CONFIG_DIR) {
         Remove-Item Env:\CLAUDE_CONFIG_DIR
-        Write-Success "Cleared CLAUDE_CONFIG_DIR"
+        [Environment]::SetEnvironmentVariable("CLAUDE_CONFIG_DIR", $null, "User")
+        Write-Success "Cleared CLAUDE_CONFIG_DIR (persistent)"
     }
 
     Update-SessionState -AccNum 0
@@ -304,9 +305,10 @@ if (-not $accountDir) {
     exit 1
 }
 
-# Set environment variable
+# Set environment variable (PERSISTENT across sessions)
 $env:CLAUDE_CONFIG_DIR = $accountDir
-Write-Success "Set CLAUDE_CONFIG_DIR: $accountDir"
+[Environment]::SetEnvironmentVariable("CLAUDE_CONFIG_DIR", $accountDir, "User")
+Write-Success "Set CLAUDE_CONFIG_DIR (persistent): $accountDir"
 
 # Update session state
 Update-SessionState -AccNum $AccountNum
