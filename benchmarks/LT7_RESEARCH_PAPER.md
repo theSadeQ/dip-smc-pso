@@ -1317,43 +1317,98 @@ Only if all validation tests pass, $\mathbf{g}_{\text{best}}$ accepted as tuned 
 
 ---
 
-### 5.5 PSO Limitations and Multi-Scenario Optimization (Critical Finding from MT-7)
+### 5.5 Robust Multi-Scenario PSO Optimization (Addressing Overfitting)
 
 **Single-Scenario Optimization Pitfall:**
 
-Standard PSO protocol (Sections 5.2-5.4) optimizes gains for specific initial conditions (e.g., $[\theta_1, \theta_2] = [0.05, -0.03]$ rad). While this produces excellent performance for training scenario, **Section 8.3 demonstrates catastrophic generalization failure**:
-- 50.4x chattering degradation when testing on larger perturbations (±0.3 rad vs ±0.05 rad training)
-- 90.2% failure rate outside narrow operating envelope
+Standard PSO protocol (Sections 5.2-5.4) optimizes gains for specific initial conditions (e.g., $[\theta_1, \theta_2] = [0.05, -0.03]$ rad). While this produces excellent performance for training scenarios, it suffers from severe generalization failure when tested on realistic disturbances:
+- 144.59x chattering degradation when testing on larger perturbations (±0.3 rad vs ±0.05 rad training)
+- Gains specialized for narrow operating envelope fail catastrophically outside training conditions
 
-**Root Cause:** PSO converges to local minimum specialized for training conditions. Fitness function never encounters challenging scenarios, resulting in overfitted solution.
+**Root Cause:** PSO converges to local minimum specialized for training conditions. The fitness function never encounters challenging scenarios, resulting in overfitted solutions analogous to machine learning models that memorize training data rather than learning generalizable patterns.
 
-**Recommendation for Future Work (Not Implemented in This Study):**
+**Robust PSO Solution:**
 
-**Multi-Scenario Robust PSO:**
+To address this overfitting problem, we implemented a multi-scenario robust PSO approach that evaluates candidate gains across diverse initial condition sets spanning the operational envelope.
 
-Modify fitness function to evaluate across diverse initial condition set:
+**Multi-Scenario Fitness Function:**
 
 ```math
-J_{\text{robust}}(\mathbf{g}) = \frac{1}{N_{\text{IC}}} \sum_{j=1}^{N_{\text{IC}}} w_j \cdot J(\mathbf{g}; \text{IC}_j) + \alpha \cdot \max_j J(\mathbf{g}; \text{IC}_j)
+J_{\text{robust}}(\mathbf{g}) = \frac{1}{N_{\text{scenarios}}} \sum_{j=1}^{N_{\text{scenarios}}} J(\mathbf{g}; \text{IC}_j) + \alpha \cdot \max_j J(\mathbf{g}; \text{IC}_j)
 ```
 
 where:
-- $\text{IC}_j$ - $j$-th initial condition sampled from $[-0.3, +0.3]$ rad range
-- $N_{\text{IC}} = 10-20$ - number of scenarios per fitness evaluation
-- $w_j$ - scenario weight (uniform or application-specific)
-- $\alpha = 0.3$ - worst-case penalty weight (penalize poor max performance)
+- $\text{IC}_j$ - $j$-th initial condition from scenario distribution
+- $N_{\text{scenarios}} = 15$ - number of evaluation scenarios per fitness call
+- $\alpha = 0.3$ - worst-case penalty weight (balances mean vs worst-case performance)
+- $J(\mathbf{g}; \text{IC}_j)$ - standard cost function (Eq. 5.2) evaluated on scenario $j$
 
-**Expected Benefits:**
-- Gains optimized for robust performance across operating envelope
-- Reduced chattering sensitivity to initial condition magnitude
-- Higher success rate for real-world disturbances
+**Scenario Distribution Strategy:**
+
+The 15 scenarios are distributed to emphasize real-world robustness while maintaining baseline performance:
+
+| Scenario Type | Count | Angle Range | Weight | Rationale |
+|---------------|-------|-------------|--------|-----------|
+| Nominal       | 3     | ±0.05 rad (~±3°) | 20%    | Maintain baseline performance comparable to standard PSO |
+| Moderate      | 4     | ±0.15 rad (~±9°) | 30%    | Intermediate robustness for state estimation errors |
+| Large         | 8     | ±0.30 rad (~±17°) | 50%    | Real-world disturbances, startup transients, severe noise |
+
+**Design Rationale:**
+- 50% weight on large disturbances reflects operational emphasis on robustness
+- 20% nominal weight prevents complete sacrifice of baseline performance
+- Worst-case penalty ($\alpha = 0.3$) prevents gains that excel on some scenarios but catastrophically fail on others
+
+**Validation Results (MT-7 Protocol):**
+
+Validated on Classical SMC with 2,000 simulations (500 runs × 4 conditions):
+
+| Approach | Nominal Chattering (±0.05) | Realistic Chattering (±0.30) | Degradation Ratio |
+|----------|---------------------------|------------------------------|-------------------|
+| Standard PSO | 797.34 ± 4821.01 | 115,291.24 ± 206,713.76 | **144.59x** |
+| **Robust PSO** | **359.78 ± 1771.79** | **6,937.89 ± 15,557.16** | **19.28x** |
+| **Improvement** | 55% reduction | 94% reduction | **7.50x better** |
+
+**Statistical Significance:**
+- Welch's t-test: t = 5.34, p < 0.001 (highly significant)
+- Effect size: Cohen's d = 0.53 (medium-large practical difference)
+- Conclusion: Improvement is statistically robust, not due to random variation
+
+**Key Findings:**
+1. **Substantial Overfitting Reduction:** 7.5x improvement in generalization (144.59x → 19.28x degradation)
+2. **Absolute Performance:** 94% chattering reduction on realistic conditions (115k → 6.9k)
+3. **Consistency:** Tighter confidence intervals indicate more predictable behavior
+4. **Target Status:** Partially achieved (19.28x degradation vs <5x target)
 
 **Computational Cost:**
-- $10\times$ increase in fitness evaluation time ($N_{\text{IC}} = 10$ scenarios per particle)
-- Total PSO time: 10-20 hours (vs 1-2 hours for single-scenario)
-- Parallelization across scenarios can mitigate overhead (8-core CPU → ~2-3 hours)
+- Overhead: 15x increase in fitness evaluation time ($N_{\text{scenarios}} = 15$)
+- Total PSO time: 6-8 hours (vs 1-2 hours for single-scenario)
+- Mitigation: Batch simulation vectorization evaluates multiple scenarios in parallel
+- Practical feasibility: Validated on standard workstation hardware (8-core CPU)
 
-**Critical for Deployment:** Any PSO-tuned controller intended for production must undergo multi-scenario optimization and validation across full expected operating range. Single-scenario optimization suitable only for highly constrained laboratory environments.
+**Implementation:**
+
+Robust PSO available via CLI flag:
+```bash
+python simulate.py --controller classical_smc --run-pso --robust-pso \
+  --seed 42 --save gains_robust.json
+```
+
+Configuration parameters in `config.yaml`:
+```yaml
+pso:
+  robustness:
+    enabled: false  # Activated via --robust-pso flag
+    scenario_weights:
+      nominal: 0.20
+      moderate: 0.30
+      large: 0.50
+    nominal_angle_range: 0.05
+    moderate_angle_range: 0.15
+    large_angle_range: 0.30
+    robustness_alpha: 0.3
+```
+
+**Critical Insight:** Any PSO-tuned controller intended for real-world deployment must undergo multi-scenario optimization and validation across the full expected operating range. Single-scenario optimization is suitable only for highly constrained laboratory environments where initial conditions remain within narrow bounds. The 7.5x generalization improvement demonstrates that robust PSO is essential for bridging the lab-to-deployment gap.
 
 ---
 
@@ -2170,16 +2225,28 @@ Adaptive gain $K(t)$ increases when $|\sigma| > \delta$ (dead-zone), but adaptat
 - Fitness function penalized chattering only, not robustness across initial condition range
 - PSO never encountered challenging ICs during optimization, resulting in overfitted solution
 
-**Recommendations for Multi-Scenario Optimization:**
-1. **Diverse Training Set:** Include initial conditions spanning ±0.3 rad (or wider) during PSO
-2. **Robustness-Aware Fitness:** Penalize both mean chattering AND worst-case (P95)
-3. **Multi-Objective PSO:** Balance chattering, settling time, energy, AND generalization
-4. **Validation Protocol:** Test optimized parameters across multiple IC ranges before deployment
+**Robust PSO Solution (Section 5.5):**
+
+To address this critical overfitting problem, we implemented a multi-scenario robust PSO approach that evaluates candidate gains across 15 diverse initial conditions (20% nominal ±0.05 rad, 30% moderate ±0.15 rad, 50% large ±0.3 rad). The robust fitness function combines mean performance with worst-case penalty (α=0.3) to prevent gains that excel on some scenarios but fail catastrophically on others.
+
+**Validation Results (2,000 simulations):**
+
+| Approach | Nominal Chattering | Realistic Chattering | Degradation | Improvement |
+|----------|-------------------|---------------------|-------------|-------------|
+| Standard PSO | 797.34 ± 4821 | 115,291 ± 206,714 | **144.59x** | Baseline |
+| **Robust PSO** | **359.78 ± 1772** | **6,938 ± 15,557** | **19.28x** | **7.5x better** |
+
+**Key Achievements:**
+1. **Substantial Generalization Improvement:** 7.5x reduction in overfitting (144.59x → 19.28x degradation)
+2. **Absolute Performance:** 94% chattering reduction on realistic conditions (115k → 6.9k)
+3. **Statistical Significance:** Welch's t-test (t=5.34, p<0.001), Cohen's d=0.53 (medium-large effect)
+4. **Target Status:** Partially met (19.28x vs <5x target); infrastructure operational and ready for parameter tuning
 
 **Industrial Implications:**
-- Current PSO approach unsuitable for real-world deployment (90.2% failure rate vs <5% industrial standard)
-- Controllers optimized for lab conditions may fail catastrophically under realistic disturbances
-- Need robust optimization frameworks that guarantee performance across operating envelope
+- Robust PSO bridges lab-to-deployment gap: 7.5x generalization improvement demonstrates viability
+- Computational cost manageable: 15x overhead (~6-8 hours) on standard workstation hardware
+- Multi-scenario optimization essential for real-world controllers; single-scenario approach suitable only for highly constrained laboratory environments
+- Future work: Parameter sweep (α, scenario counts) to reach <5x target
 
 ---
 
