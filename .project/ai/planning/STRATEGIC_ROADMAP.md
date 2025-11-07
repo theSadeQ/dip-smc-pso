@@ -53,9 +53,9 @@ Transform from **research prototype** to **production-ready research platform** 
 - Document violations and remediation steps
 
 **Deliverables**:
-- `.codex/phase3/validation/streamlit/screenshots/` (16 images)
-- `.codex/phase3/validation/streamlit/axe_audit.json`
-- `.codex/phase3/validation/streamlit/VALIDATION_SUMMARY.md`
+- `.artifacts/archive/planning/phase3/validation/streamlit/screenshots/` (16 images)
+- `.artifacts/archive/planning/phase3/validation/streamlit/axe_audit.json`
+- `.artifacts/archive/planning/phase3/validation/streamlit/VALIDATION_SUMMARY.md`
 
 #### Day 2: Cross-Browser Testing + Checkpoint
 **Morning (4 hours)**:
@@ -64,7 +64,7 @@ Transform from **research prototype** to **production-ready research platform** 
 - Screenshot capture for browser compatibility matrix
 
 **Afternoon (2 hours)**:
-- Update `.codex/phase3/validation/BROWSER_COMPATIBILITY_REPORT.md`
+- Update `.artifacts/archive/planning/phase3/validation/BROWSER_COMPATIBILITY_REPORT.md`
 - Create git tag `phase3-wave3-complete`
 - Push to remote
 
@@ -107,17 +107,17 @@ Transform from **research prototype** to **production-ready research platform** 
 **Morning (4 hours)**:
 1. **Screenshot Collection**
    - Before/after captures for all 34 UI issues
-   - Organize in `.codex/phase3/validation/screenshots/before_after/`
+   - Organize in `.artifacts/archive/planning/phase3/validation/screenshots/before_after/`
    - Generate comparison HTML report
 
 2. **Contrast Reports**
    - WebAIM contrast analysis for resolved color issues
    - WCAG compliance verification
-   - Export as `.codex/phase3/validation/contrast_reports.json`
+   - Export as `.artifacts/archive/planning/phase3/validation/contrast_reports.json`
 
 **Afternoon (4 hours)**:
 3. **Phase 3 Completion Summary**
-   - Populate `.codex/phase3/completion_summary.md`
+   - Populate `.artifacts/archive/planning/phase3/completion_summary.md`
    - Key achievements, metrics, evidence links
    - Remaining risks and handoff notes for Phase 4
 

@@ -1,6 +1,6 @@
 # Week 2 Future Work (Deferred)
 
-**Source**: Moved from `.ai/planning/research/week2/` on October 18, 2025
+**Source**: Moved from `.project/ai/planning/research/week2/` on October 18, 2025
 **Status**: DEFERRED - Complete ROADMAP_EXISTING_PROJECT.md first
 
 ---
@@ -34,7 +34,7 @@ These are **NEW controllers** that should be implemented AFTER:
 
 **Reason**: Cannot justify new controllers without first validating existing ones. Reviewers will ask "why not improve existing controllers first?"
 
-**See**: `.ai/planning/futurework/ROADMAP_FUTURE_RESEARCH.md`, Section 1 (New Controllers)
+**See**: `.project/ai/planning/futurework/ROADMAP_FUTURE_RESEARCH.md`, Section 1 (New Controllers)
 
 ---
 

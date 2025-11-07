@@ -187,15 +187,15 @@ if getattr(pso_cfg, "w_schedule", None):
 ## Deliverables
 
 ✅ **Baseline Results**:
-- `.ai/planning/research/week1/results/gains_fixed_inertia.json`
-- `.ai/planning/research/week1/results/baseline_pso_log.txt` (1.7MB)
+- `.project/ai/planning/research/week1/results/gains_fixed_inertia.json`
+- `.project/ai/planning/research/week1/results/baseline_pso_log.txt` (1.7MB)
 
 ❌ **Adaptive Results** (Not Generated):
-- `.ai/planning/research/week1/results/gains_adaptive_inertia.json` - MISSING
-- `.ai/planning/research/week1/results/adaptive_pso_log.txt` - ERROR LOG ONLY
+- `.project/ai/planning/research/week1/results/gains_adaptive_inertia.json` - MISSING
+- `.project/ai/planning/research/week1/results/adaptive_pso_log.txt` - ERROR LOG ONLY
 
 ✅ **Documentation**:
-- `.ai/planning/research/week1/results/pso_adaptive_inertia_comparison.md` (this file)
+- `.project/ai/planning/research/week1/results/pso_adaptive_inertia_comparison.md` (this file)
 
 ---
 

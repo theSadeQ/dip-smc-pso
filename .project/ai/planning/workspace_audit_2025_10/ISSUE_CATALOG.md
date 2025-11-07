@@ -40,7 +40,7 @@
 
 ### C4: Triple File Duplication
 - **Category:** Directory Structure
-- **Location:** `.dev_tools/.dev_tools/Switch-ClaudeAccount.ps1`
+- **Location:** `.project/dev_tools/.project/dev_tools/Switch-ClaudeAccount.ps1`
 - **Impact:** Source of truth confusion, 3x nested duplication
 - **Severity:** CRITICAL
 - **Resolution:** Phase 1, Quick Win 4 (10 minutes)

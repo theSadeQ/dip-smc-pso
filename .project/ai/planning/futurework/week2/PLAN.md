@@ -247,7 +247,7 @@ u = u_eq - K·sat(s/ε) - kd·σ - ki·integral_state
 **Time Spent**: 0h / 18h planned
 **Buffer Available**: 4h (from Week 1)
 
-**Daily Updates**: See .ai/planning/research/week2/DAILY_LOG.md
+**Daily Updates**: See .project/ai/planning/research/week2/DAILY_LOG.md
 
 ---
 

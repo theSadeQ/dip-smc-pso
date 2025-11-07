@@ -136,7 +136,7 @@ Created `tests/test_integration/test_thread_safety/test_production_thread_safety
 
 ### Added - Planning Documents
 
-Created comprehensive Phase 4 planning in `.ai/planning/phase4/`:
+Created comprehensive Phase 4 planning in `.project/ai/planning/phase4/`:
 
 1. **BASELINE_ASSESSMENT.md** (382 lines)
    - Initial production readiness analysis

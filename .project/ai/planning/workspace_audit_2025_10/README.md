@@ -315,9 +315,9 @@ See `AUDIT_SUMMARY.md` section "POST-AUDIT MAINTENANCE" for CI example.
 ## RELATED DOCUMENTATION
 
 - **CLAUDE.md §14:** Workspace organization rules
-- **Testing Standards:** `.ai/config/testing_standards.md`
-- **Repository Management:** `.ai/config/repository_management.md`
-- **Agent Orchestration:** `.ai/config/agent_orchestration.md`
+- **Testing Standards:** `.project/ai/config/testing_standards.md`
+- **Repository Management:** `.project/ai/config/repository_management.md`
+- **Agent Orchestration:** `.project/ai/config/agent_orchestration.md`
 
 ---
 

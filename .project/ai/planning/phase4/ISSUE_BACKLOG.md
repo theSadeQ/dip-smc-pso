@@ -506,7 +506,7 @@ def acquire_minimal_lock(self, resource_id: str, timeout: float = 5.0) -> Contex
 
 **Command**:
 ```bash
-python src/integration/production_readiness.py --benchmarks --export .ai/planning/phase4/final_assessment.json
+python src/integration/production_readiness.py --benchmarks --export .project/ai/planning/phase4/final_assessment.json
 ```
 
 **Expected Score**: ≥90.0/100 (9.0/10)
@@ -624,7 +624,7 @@ python tests/test_integration/test_thread_safety/test_concurrent_thread_safety_d
 
 **Task**: Create comprehensive Phase 4 completion report
 
-**File**: `.ai/planning/phase4/FINAL_ASSESSMENT_REPORT.md`
+**File**: `.project/ai/planning/phase4/FINAL_ASSESSMENT_REPORT.md`
 
 **Contents**:
 1. Executive summary (score improvement 2.4/10 → 9.0/10)
@@ -648,7 +648,7 @@ python tests/test_integration/test_thread_safety/test_concurrent_thread_safety_d
 
 **Task**: Document all Phase 4 changes
 
-**File**: `.ai/planning/phase4/CHANGELOG.md`
+**File**: `.project/ai/planning/phase4/CHANGELOG.md`
 
 **Format**:
 ```markdown
