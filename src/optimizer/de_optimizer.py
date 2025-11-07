@@ -41,6 +41,7 @@ from typing import Callable, Optional, Tuple, Any
 from dataclasses import dataclass
 
 from src.optimization.core.interfaces import ParameterSpace
+from src.optimization.core.cost_evaluator import ControllerCostEvaluator
 from src.optimization.algorithms.evolutionary.differential import DifferentialEvolution
 
 
@@ -99,6 +100,13 @@ class DETuner:
 
         # Setup random number generator
         self.rng = np.random.default_rng(seed)
+
+        # Create shared cost evaluator (handles all simulation and cost computation)
+        self.cost_evaluator = ControllerCostEvaluator(
+            controller_factory=controller_factory,
+            config=config,
+            seed=seed
+        )
 
         logger.info("DETuner initialized with strategy=%s, population_size=%d",
                    self.de_config.strategy, self.de_config.population_size)
@@ -168,20 +176,16 @@ class DETuner:
         from src.optimization.core.interfaces import OptimizationProblem
 
         def objective(gains: np.ndarray) -> float:
-            """Cost function: simulates controller and computes performance metric."""
-            try:
-                controller = self.controller_factory(gains)
-                # Simulate and compute cost (placeholder - actual implementation needed)
-                # For now, simple quadratic cost
-                cost = self._evaluate_controller(controller, gains)
-                return cost
-            except Exception as e:
-                logger.warning("Controller evaluation failed: %s", e)
-                return 1e10  # Penalty for invalid gains
+            """Cost function: simulates controller and computes performance metric.
+
+            Uses shared ControllerCostEvaluator for real simulation-based
+            cost computation (same as PSO and GA).
+            """
+            return self.cost_evaluator.evaluate_single(gains)
 
         def batch_objective(population: np.ndarray) -> np.ndarray:
             """Batch evaluation of fitness for entire population."""
-            return np.array([objective(individual) for individual in population])
+            return self.cost_evaluator.evaluate_batch(population)
 
         # Create problem wrapper
         class ControllerOptimizationProblem(OptimizationProblem):
@@ -211,21 +215,6 @@ class DETuner:
                    result.fun, result.nit)
 
         return result.x, result.fun
-
-    def _evaluate_controller(self, controller, gains: np.ndarray) -> float:
-        """Evaluate controller performance via simulation.
-
-        This is a simplified placeholder. In full implementation, this would:
-        1. Run simulation with the controller
-        2. Compute performance metrics (settling time, overshoot, control effort)
-        3. Return weighted cost
-
-        For now, uses quadratic penalty on gains (prevents excessive gains).
-        """
-        # Placeholder: quadratic cost with small random noise
-        base_cost = np.sum(gains**2) * 0.01
-        noise = self.rng.normal(0, 0.1)
-        return base_cost + noise
 
 
 def main():
