@@ -431,25 +431,25 @@ Refs: .project/ai/planning/workspace_audit_2025_10/PHASE_1_IMMEDIATE.md
 [AI]"
 ```
 
-### Quick Win 4: Delete .dev_tools/.dev_tools/ Nested Dir (10 minutes)
+### Quick Win 4: Delete .project/dev_tools/.project/dev_tools/ Nested Dir (10 minutes)
 
 ```bash
 # Verify nested duplication
-ls .dev_tools/.dev_tools/  # Should show Switch-ClaudeAccount.ps1
+ls .project/dev_tools/.project/dev_tools/  # Should show Switch-ClaudeAccount.ps1
 
 # Compare with canonical version
-diff .project/dev_tools/Switch-ClaudeAccount.ps1 .dev_tools/.dev_tools/Switch-ClaudeAccount.ps1
+diff .project/dev_tools/Switch-ClaudeAccount.ps1 .project/dev_tools/.project/dev_tools/Switch-ClaudeAccount.ps1
 
 # If identical, delete nested dir
-if diff .project/dev_tools/Switch-ClaudeAccount.ps1 .dev_tools/.dev_tools/Switch-ClaudeAccount.ps1 > /dev/null; then
-    rm -rf .dev_tools/.dev_tools/
-    echo "[OK] Deleted .dev_tools/.dev_tools/ (duplicate of canonical)"
+if diff .project/dev_tools/Switch-ClaudeAccount.ps1 .project/dev_tools/.project/dev_tools/Switch-ClaudeAccount.ps1 > /dev/null; then
+    rm -rf .project/dev_tools/.project/dev_tools/
+    echo "[OK] Deleted .project/dev_tools/.project/dev_tools/ (duplicate of canonical)"
 else
     echo "[WARNING] Files differ. Manual review needed."
 fi
 
-# Note: .dev_tools/ itself is gitignored (backward compat), so no commit needed
-echo "[INFO] .dev_tools/.dev_tools/ removed (parent .dev_tools/ is gitignored)"
+# Note: .project/dev_tools/ itself is gitignored (backward compat), so no commit needed
+echo "[INFO] .project/dev_tools/.project/dev_tools/ removed (parent .project/dev_tools/ is gitignored)"
 ```
 
 ### Quick Win 5: Fix Root __pycache__ (5 minutes)
@@ -571,7 +571,7 @@ fi
 - [ ] `.benchmarks/` deleted (if empty)
 - [ ] `delete_ansi.bat` removed and committed
 - [ ] `data/data/` deleted and committed
-- [ ] `.dev_tools/.dev_tools/` deleted
+- [ ] `.project/dev_tools/.project/dev_tools/` deleted
 - [ ] `__pycache__/` at root gitignored
 - [ ] 3 duplicate presentation files removed and committed
 - [ ] `.claude/settings.local.json` moved to `.project/claude/`

@@ -632,7 +632,7 @@ Add clarification after the directory rules:
 
 ```markdown
 **Directory Rules (Single Source of Truth):**
-- **Config consolidation**: Use `.project/` for ALL AI/dev configs (NOT `.ai/`, `.claude/`, `.config/`, `.dev_tools/`, `.mcp_servers/`)
+- **Config consolidation**: Use `.project/` for ALL AI/dev configs (NOT `.ai/`, `.claude/`, `.config/`, `.project/dev_tools/`, `.mcp_servers/`)
   - `.project/ai/` - AI planning, education, collaboration docs
   - `.project/claude/` - Claude Code settings
   - `.project/config/` - Linting, commit rules, pytest configs

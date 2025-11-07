@@ -4,7 +4,7 @@
 **Focus**: New controllers and new PSO algorithms (NOT necessary right now)
 **Goal**: Experimental research for novel contributions and advanced optimization
 **Time Horizon**: 12+ weeks (120+ hours total)
-**Priority**: LOW - Defer until existing work complete (see ROADMAP_EXISTING_PROJECT.md)
+**Priority**: LOW - Defer until existing work complete (see ROADMAP_EXISTING_PROJECT.md (archived in .artifacts/archive/planning/))
 
 ---
 
@@ -12,7 +12,7 @@
 
 This roadmap contains **experimental and future research work** that is **NOT necessary for current system validation**. These are novel controllers and advanced optimization algorithms that could be explored AFTER the existing 7 controllers are validated, documented, and benchmarked.
 
-**⚠️ IMPORTANT**: This work should be **DEFERRED** until ROADMAP_EXISTING_PROJECT.md is complete. You cannot publish research on new controllers without first validating the existing ones.
+**⚠️ IMPORTANT**: This work should be **DEFERRED** until ROADMAP_EXISTING_PROJECT.md (archived in .artifacts/archive/planning/) is complete. You cannot publish research on new controllers without first validating the existing ones.
 
 **New Controllers (Experimental)**:
 1. Terminal Sliding Mode Control (TSMC) - Finite-time convergence
@@ -200,7 +200,7 @@ This roadmap contains **experimental and future research work** that is **NOT ne
 - `tests/test_optimizer/test_pso_optimizer.py` (~200 lines NEW)
 - Documentation update in Tutorial 03
 
-**Note**: This should be tested AFTER existing system is validated (ROADMAP_EXISTING_PROJECT.md QW-3 complete).
+**Note**: This should be tested AFTER existing system is validated (ROADMAP_EXISTING_PROJECT.md (archived in .artifacts/archive/planning/) QW-3 complete).
 
 ---
 
@@ -445,7 +445,7 @@ THEORY:
 ### 4.1 Recommendation: DEFER Until Existing Work Complete
 
 **⚠️ DO NOT START THIS WORK UNTIL**:
-- ROADMAP_EXISTING_PROJECT.md is complete
+- ROADMAP_EXISTING_PROJECT.md (archived in .artifacts/archive/planning/) is complete
 - Research paper on existing 7 controllers is drafted
 - Existing controllers validated, benchmarked, Lyapunov proofs complete
 
@@ -607,9 +607,9 @@ THEORY:
 
 ## 8. Integration with Existing Work
 
-### 8.1 Handoff from ROADMAP_EXISTING_PROJECT.md
+### 8.1 Handoff from ROADMAP_EXISTING_PROJECT.md (archived in .artifacts/archive/planning/)
 
-**PREREQUISITE**: ROADMAP_EXISTING_PROJECT.md must be complete BEFORE starting this work.
+**PREREQUISITE**: ROADMAP_EXISTING_PROJECT.md (archived in .artifacts/archive/planning/) must be complete BEFORE starting this work.
 
 **Handoff Checklist**:
 - ✅ Existing 7 controllers validated, benchmarked
@@ -649,7 +649,7 @@ THEORY:
 **⚠️ This work is NOT NECESSARY RIGHT NOW**
 
 **Priority Order**:
-1. **FIRST**: Complete ROADMAP_EXISTING_PROJECT.md (72 hours, 8-10 weeks)
+1. **FIRST**: Complete ROADMAP_EXISTING_PROJECT.md (archived in .artifacts/archive/planning/) (72 hours, 8-10 weeks)
    - Validate, benchmark, document existing 7 controllers
    - Lyapunov proofs, disturbance rejection, model uncertainty
    - Research paper on existing work
@@ -698,11 +698,11 @@ THEORY:
 **Ask yourself**:
 
 1. **Are existing 7 controllers validated?**
-   - ❌ NO → Focus on ROADMAP_EXISTING_PROJECT.md
+   - ❌ NO → Focus on ROADMAP_EXISTING_PROJECT.md (archived in .artifacts/archive/planning/)
    - ✅ YES → Consider new controllers
 
 2. **Is research paper on existing work complete?**
-   - ❌ NO → Focus on ROADMAP_EXISTING_PROJECT.md
+   - ❌ NO → Focus on ROADMAP_EXISTING_PROJECT.md (archived in .artifacts/archive/planning/)
    - ✅ YES → Consider new controllers
 
 3. **Do you need more novelty for publication?**
@@ -717,7 +717,7 @@ THEORY:
    - ❌ NO → Skip MOPSO
    - ✅ YES → Consider Multi-objective PSO (15 hours)
 
-**Most likely answer**: Focus on ROADMAP_EXISTING_PROJECT.md first.
+**Most likely answer**: Focus on ROADMAP_EXISTING_PROJECT.md (archived in .artifacts/archive/planning/) first.
 
 ---
 
@@ -754,4 +754,4 @@ THEORY:
 
 **End of Future Research Roadmap**
 
-**⚠️ REMEMBER**: This work is DEFERRED until ROADMAP_EXISTING_PROJECT.md is complete.
+**⚠️ REMEMBER**: This work is DEFERRED until ROADMAP_EXISTING_PROJECT.md (archived in .artifacts/archive/planning/) is complete.

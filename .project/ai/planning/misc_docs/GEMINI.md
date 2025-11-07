@@ -30,7 +30,7 @@
 **See:** `.gemini/session_continuity.md` for complete details.
 
 **Quick Reference:**
-- Zero-effort account switching via `.dev_tools/session_state.json`
+- Zero-effort account switching via `.project/dev_tools/session_state.json`
 - Auto-detect and resume from previous session if <24h old
 - Maintain session state throughout every session
 - Update todos, decisions, and next actions continuously

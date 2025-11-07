@@ -167,9 +167,9 @@ Refs: .project/ai/planning/workspace_audit_2025_10/PHASE_1_IMMEDIATE.md
 [AI]"
 ```
 
-### QW4: Delete .dev_tools/.dev_tools/
+### QW4: Delete .project/dev_tools/.project/dev_tools/
 ```bash
-rm -rf .dev_tools/.dev_tools/
+rm -rf .project/dev_tools/.project/dev_tools/
 echo "[OK] Deleted nested .dev_tools (gitignored, no commit needed)"
 ```
 
@@ -458,7 +458,7 @@ echo "C3: root bloat"
 [ $(ls | wc -l) -le 19 ] && echo "✅" || echo "❌"
 
 echo "C4: .dev_tools nesting"
-[ ! -d .dev_tools/.dev_tools ] && echo "✅" || echo "❌"
+[ ! -d .project/dev_tools/.dev_tools ] && echo "✅" || echo "❌"
 
 echo "C5: data/data duplication"
 [ ! -d data/data ] && echo "✅" || echo "❌"

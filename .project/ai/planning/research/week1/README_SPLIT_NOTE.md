@@ -11,14 +11,14 @@
 1. QW-2: Run existing benchmarks ✅ **EXISTING** (stays here)
 2. QW-1: Document SMC theory ✅ **EXISTING** (stays here)
 3. QW-4: Chattering metrics ✅ **EXISTING** (stays here)
-4. **MT-3: Adaptive inertia PSO** ❌ **FUTURE** (moved to `.ai/planning/futurework/week1/`)
+4. **MT-3: Adaptive inertia PSO** ❌ **FUTURE** (moved to `.project/ai/planning/futurework/week1/`)
 5. QW-3: Visualize PSO convergence ✅ **EXISTING** (stays here)
 
 ---
 
 ## Files Moved to Futurework
 
-**Moved to** `.ai/planning/futurework/week1/`:
+**Moved to** `.project/ai/planning/futurework/week1/`:
 - `tasks/MT-3.md`
 - `results/adaptive_pso_log.txt`
 - `results/pso_adaptive_inertia_comparison.md`
@@ -51,8 +51,8 @@
 These are **historical planning documents** from the original ROADMAP.md (before split). References to MT-3 should be understood as **deferred to futurework**.
 
 **For current work**, use:
-- `.ai/planning/research/ROADMAP_EXISTING_PROJECT.md` (authoritative for existing work)
-- `.ai/planning/futurework/ROADMAP_FUTURE_RESEARCH.md` (authoritative for future work)
+- `.project/ai/planning/research/ROADMAP_EXISTING_PROJECT.md` (authoritative for existing work)
+- `.project/ai/planning/futurework/ROADMAP_FUTURE_RESEARCH.md` (authoritative for future work)
 
 ---
 
@@ -67,4 +67,4 @@ These are **historical planning documents** from the original ROADMAP.md (before
 - PSO baseline established
 - Research paper on existing work complete
 
-**See**: `.ai/planning/futurework/week1/README.md` for MT-3 integration path
+**See**: `.project/ai/planning/futurework/week1/README.md` for MT-3 integration path

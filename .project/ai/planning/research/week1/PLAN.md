@@ -964,6 +964,6 @@ Week 1 provides **foundational tools** and **quick wins** that enable all subseq
 - simulate.py
 
 **Related Documents**:
-- .ai/planning/research/ROADMAP.md (12-week research plan)
-- .ai/planning/phase3/HANDOFF.md (80-90% research time requirement)
-- .ai/planning/phase4/FINAL_ASSESSMENT.md (23.9/100 production score, research-ready)
+- .project/ai/planning/research/ROADMAP.md (12-week research plan)
+- .project/ai/planning/phase3/HANDOFF.md (80-90% research time requirement)
+- .project/ai/planning/phase4/FINAL_ASSESSMENT.md (23.9/100 production score, research-ready)

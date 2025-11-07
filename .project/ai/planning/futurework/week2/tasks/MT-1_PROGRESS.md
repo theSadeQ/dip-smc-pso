@@ -20,7 +20,7 @@
 - [ ] Define gain bounds and constraints
 - [ ] Document design decisions
 
-**Deliverable**: .ai/planning/research/week2/tasks/MT-1_DESIGN.md
+**Deliverable**: .project/ai/planning/research/week2/tasks/MT-1_DESIGN.md
 
 ---
 
@@ -76,7 +76,7 @@
 - [ ] Measure settling time vs classical SMC
 - [ ] Verify 30-50% speedup (or document actual)
 - [ ] Update docs/theory/smc_theory_complete.md (line 267: [PLAN] → [IMPLEMENTED])
-- [ ] Create .ai/planning/research/week2/tasks/MT-1_COMPLETION.md
+- [ ] Create .project/ai/planning/research/week2/tasks/MT-1_COMPLETION.md
 
 **Deliverable**: Validated controller, updated documentation
 

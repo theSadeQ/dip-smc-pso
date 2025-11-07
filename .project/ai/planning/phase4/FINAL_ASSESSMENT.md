@@ -57,7 +57,7 @@ Phase 4 Production Hardening achieved **partial completion** with Phases 4.1 (me
      - Bounded memory usage
      - Cleanup mechanisms
 
-4. **Planning Documents** (`.ai/planning/phase4/`):
+4. **Planning Documents** (`.project/ai/planning/phase4/`):
    - BASELINE_ASSESSMENT.md (382 lines)
    - ISSUE_BACKLOG.md (759 lines)
    - SUCCESS_CRITERIA.md (763 lines)
@@ -306,12 +306,12 @@ If Phase 4.3 were executed (for future reference):
 1. ✅ **Thread Safety Validation** (VAL-001):
    - Verified: 11/11 production thread safety tests PASSING
    - 100 concurrent controller creation test already complete (from Phase 4.2)
-   - Exported results to `.ai/planning/phase4/thread_safety_validation.txt`
+   - Exported results to `.project/ai/planning/phase4/thread_safety_validation.txt`
 
 2. ✅ **Production Score Snapshot** (VAL-002):
    - Captured: 23.9/100 (BLOCKED status)
    - Quality gates: 1/8 passing
-   - Exported to `.ai/planning/phase4/final_assessment.json`
+   - Exported to `.project/ai/planning/phase4/final_assessment.json`
    - Blocking issues documented (pytest Unicode, recursion depth, coverage)
 
 3. ✅ **Comprehensive Documentation**:

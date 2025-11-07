@@ -42,7 +42,7 @@
 
 **Maintenance Mode:** Critical bugs only, no proactive enhancements
 
-**Reference:** `.ai/planning/phase3/HANDOFF.md`
+**Reference:** `.project/ai/planning/phase3/HANDOFF.md`
 
 ---
 
@@ -70,7 +70,7 @@
 - ✅ Research use: READY (single/multi-threaded operation validated)
 - ❌ Production deployment: NOT READY (quality gates failing)
 
-**Reference:** `.ai/planning/phase4/FINAL_ASSESSMENT.md`
+**Reference:** `.project/ai/planning/phase4/FINAL_ASSESSMENT.md`
 
 ---
 
@@ -108,7 +108,7 @@
 - `b920d837` - test(recovery): Add comprehensive automation test suite
 - `8c75b434` - feat(recovery): Add /recover slash command
 
-**Reference:** `CLAUDE.md` Section 3.2, `.dev_tools/README.md`
+**Reference:** `CLAUDE.md` Section 3.2, `.project/dev_tools/README.md`
 
 ---
 
@@ -116,7 +116,7 @@
 
 **Previous Phase:** Research (COMPLETE)
 
-**Roadmap:** `.ai/planning/research/ROADMAP_EXISTING_PROJECT.md`
+**Roadmap:** `.artifacts/archive/planning/ROADMAP_EXISTING_PROJECT.md` (archived)
 
 **Goal:** Validate, document, and benchmark existing 7 controllers
 
@@ -195,19 +195,19 @@
 **Recommended Next Steps:**
 1. **LT-7 Submission** - Submit research paper to target conference/journal
 2. **Maintenance Mode** - Monitor for critical bugs (UI, controllers, PSO)
-3. **Future Research** - See `.ai/planning/futurework/ROADMAP_FUTURE_RESEARCH.md` for new controller types
+3. **Future Research** - See `.project/ai/planning/futurework/ROADMAP_FUTURE_RESEARCH.md` for new controller types
 4. **Documentation Updates** - Keep theory docs current with any bug fixes
 
 **Tools Available:**
 ```bash
 # Check status
-python .dev_tools/project_state_manager.py status
+python .project/dev_tools/project_state_manager.py status
 
 # Get next task
-python .dev_tools/project_state_manager.py recommend-next
+python .project/dev_tools/project_state_manager.py recommend-next
 
 # View roadmap progress
-python .dev_tools/roadmap_tracker.py
+python .project/dev_tools/roadmap_tracker.py
 
 # Recover from token limit
 /recover  # (in new Claude session)
@@ -237,18 +237,18 @@ python .dev_tools/roadmap_tracker.py
 ## References
 
 **Phase Documentation:**
-- Phase 3: `.ai/planning/phase3/HANDOFF.md`
-- Phase 4: `.ai/planning/phase4/FINAL_ASSESSMENT.md`
+- Phase 3: `.project/ai/planning/phase3/HANDOFF.md`
+- Phase 4: `.project/ai/planning/phase4/FINAL_ASSESSMENT.md`
 
 **Research Roadmaps:**
-- Current: `.ai/planning/research/ROADMAP_EXISTING_PROJECT.md`
-- Future: `.ai/planning/futurework/ROADMAP_FUTURE_RESEARCH.md`
+- Completed: `.artifacts/archive/planning/ROADMAP_EXISTING_PROJECT.md` (archived)
+- Future: `.project/ai/planning/futurework/ROADMAP_FUTURE_RESEARCH.md`
 
 **Recovery System:**
 - CLAUDE.md Section 3.2
-- `.dev_tools/README.md`
-- `.dev_tools/AUTOMATION_GUIDE.md`
-- `.dev_tools/TEST_RESULTS.md`
+- `.project/dev_tools/README.md`
+- `.project/dev_tools/AUTOMATION_GUIDE.md`
+- `.project/dev_tools/TEST_RESULTS.md`
 
 **Project Overview:**
 - `CLAUDE.md` - Team memory & project conventions

@@ -26,7 +26,7 @@ Phase 4 is **COMPLETE** when all **MUST** criteria are met. **SHOULD** criteria 
 
 **Measurement**:
 ```bash
-python src/integration/production_readiness.py --export .ai/planning/phase4/final_assessment.json
+python src/integration/production_readiness.py --export .project/ai/planning/phase4/final_assessment.json
 ```
 
 **Current**: 23.9/100
@@ -36,7 +36,7 @@ python src/integration/production_readiness.py --export .ai/planning/phase4/fina
 **Verification**:
 ```bash
 # Check score in output
-cat .ai/planning/phase4/final_assessment.json | grep "overall_score"
+cat .project/ai/planning/phase4/final_assessment.json | grep "overall_score"
 # Expected: "overall_score": 90.0 or higher
 ```
 
@@ -280,7 +280,7 @@ pytest tests/test_integration/test_thread_safety/test_production_thread_safety.p
 
 **Criteria**: Create 100 controllers concurrently without deadlocks
 
-**Test Script**: `.ai/planning/phase4/concurrent_creation_test.py`
+**Test Script**: `.project/ai/planning/phase4/concurrent_creation_test.py`
 
 **Requirements**:
 - 100 controller instances created simultaneously
@@ -291,7 +291,7 @@ pytest tests/test_integration/test_thread_safety/test_production_thread_safety.p
 
 **Measurement**:
 ```bash
-python .ai/planning/phase4/concurrent_creation_test.py
+python .project/ai/planning/phase4/concurrent_creation_test.py
 # Expected output: "SUCCESS: 100 concurrent controller creations passed"
 ```
 
@@ -388,7 +388,7 @@ grep "Thread safety" CLAUDE.md
 
 **Criteria**: Comprehensive Phase 4 report documenting all improvements
 
-**File**: `.ai/planning/phase4/FINAL_ASSESSMENT_REPORT.md`
+**File**: `.project/ai/planning/phase4/FINAL_ASSESSMENT_REPORT.md`
 
 **Required Sections**:
 1. Executive summary (score improvement 2.4/10 → 9.0/10)
@@ -400,7 +400,7 @@ grep "Thread safety" CLAUDE.md
 
 **Verification**:
 ```bash
-ls -la .ai/planning/phase4/FINAL_ASSESSMENT_REPORT.md
+ls -la .project/ai/planning/phase4/FINAL_ASSESSMENT_REPORT.md
 # File should exist and be >5KB
 ```
 
@@ -412,13 +412,13 @@ ls -la .ai/planning/phase4/FINAL_ASSESSMENT_REPORT.md
 
 **Criteria**: Detailed changelog of all Phase 4 changes
 
-**File**: `.ai/planning/phase4/CHANGELOG.md`
+**File**: `.project/ai/planning/phase4/CHANGELOG.md`
 
 **Format**: Chronological list of all 22 issue resolutions with commit references
 
 **Verification**:
 ```bash
-wc -l .ai/planning/phase4/CHANGELOG.md
+wc -l .project/ai/planning/phase4/CHANGELOG.md
 # Should be >100 lines
 ```
 
@@ -435,16 +435,16 @@ wc -l .ai/planning/phase4/CHANGELOG.md
 **Baseline**:
 ```bash
 # Run tests before Phase 4 changes
-pytest tests/ -v > .ai/planning/phase4/baseline_test_results.txt
+pytest tests/ -v > .project/ai/planning/phase4/baseline_test_results.txt
 ```
 
 **Final Check**:
 ```bash
 # Run tests after Phase 4 changes
-pytest tests/ -v > .ai/planning/phase4/final_test_results.txt
+pytest tests/ -v > .project/ai/planning/phase4/final_test_results.txt
 
 # Compare results
-diff .ai/planning/phase4/baseline_test_results.txt .ai/planning/phase4/final_test_results.txt
+diff .project/ai/planning/phase4/baseline_test_results.txt .project/ai/planning/phase4/final_test_results.txt
 ```
 
 **Pass Condition**: No tests that passed before now fail
@@ -463,7 +463,7 @@ diff .ai/planning/phase4/baseline_test_results.txt .ai/planning/phase4/final_tes
 
 **Measurement**:
 ```bash
-pytest tests/test_benchmarks/ --benchmark-only --benchmark-compare=.ai/planning/phase4/baseline_benchmarks.json
+pytest tests/test_benchmarks/ --benchmark-only --benchmark-compare=.project/ai/planning/phase4/baseline_benchmarks.json
 ```
 
 **Pass Condition**: All benchmarks within 110% of baseline
@@ -491,17 +491,17 @@ git status
 **Criteria**: All Phase 4 planning documents in git history
 
 **Required Files**:
-- `.ai/planning/phase4/BASELINE_ASSESSMENT.md`
-- `.ai/planning/phase4/ISSUE_BACKLOG.md`
-- `.ai/planning/phase4/COORDINATION_STATUS.md`
-- `.ai/planning/phase4/SUCCESS_CRITERIA.md` (this file)
-- `.ai/planning/phase4/CODEX_HANDOFF.md`
-- `.ai/planning/phase4/baseline.json`
-- `.ai/planning/phase4/final_assessment.json`
+- `.project/ai/planning/phase4/BASELINE_ASSESSMENT.md`
+- `.project/ai/planning/phase4/ISSUE_BACKLOG.md`
+- `.project/ai/planning/phase4/COORDINATION_STATUS.md`
+- `.project/ai/planning/phase4/SUCCESS_CRITERIA.md` (this file)
+- `.project/ai/planning/phase4/CODEX_HANDOFF.md`
+- `.project/ai/planning/phase4/baseline.json`
+- `.project/ai/planning/phase4/final_assessment.json`
 
 **Verification**:
 ```bash
-git log --all --oneline --decorate -- .ai/planning/phase4/
+git log --all --oneline --decorate -- .project/ai/planning/phase4/
 # Should show commits for all files
 ```
 
@@ -600,7 +600,7 @@ git branch -a | grep phase4
 
 **Measurement**:
 ```bash
-cat .ai/planning/phase4/final_assessment.json | grep "deployment_approved"
+cat .project/ai/planning/phase4/final_assessment.json | grep "deployment_approved"
 # Expected: "deployment_approved": true
 ```
 
@@ -621,7 +621,7 @@ cat .ai/planning/phase4/final_assessment.json | grep "deployment_approved"
 
 **Measurement**:
 ```bash
-cat .ai/planning/phase4/final_assessment.json | grep "readiness_level"
+cat .project/ai/planning/phase4/final_assessment.json | grep "readiness_level"
 # Expected: "readiness_level": "production_ready" or "conditional_ready"
 ```
 
@@ -638,7 +638,7 @@ cat .ai/planning/phase4/final_assessment.json | grep "readiness_level"
 
 **Measurement**:
 ```bash
-cat .ai/planning/phase4/final_assessment.json | grep "confidence_level"
+cat .project/ai/planning/phase4/final_assessment.json | grep "confidence_level"
 # Expected: "confidence_level": "high" or "very_high"
 ```
 
@@ -652,7 +652,7 @@ cat .ai/planning/phase4/final_assessment.json | grep "confidence_level"
 
 ```bash
 # 1. Production Readiness Score
-python src/integration/production_readiness.py --export .ai/planning/phase4/final_assessment.json
+python src/integration/production_readiness.py --export .project/ai/planning/phase4/final_assessment.json
 # Verify: overall_score >= 90.0
 
 # 2. All Tests Pass
@@ -664,7 +664,7 @@ pytest tests/test_integration/test_thread_safety/ -v
 # Verify: All tests PASSED
 
 # 4. Concurrent Controller Creation
-python .ai/planning/phase4/concurrent_creation_test.py
+python .project/ai/planning/phase4/concurrent_creation_test.py
 # Verify: SUCCESS message
 
 # 5. Coverage Metrics
@@ -688,7 +688,7 @@ git tag -l "phase4-*"
 # Verify: 4 tags present
 
 # 10. Deployment Approved
-cat .ai/planning/phase4/final_assessment.json | grep "deployment_approved"
+cat .project/ai/planning/phase4/final_assessment.json | grep "deployment_approved"
 # Verify: true
 ```
 
