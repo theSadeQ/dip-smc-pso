@@ -34,14 +34,17 @@ except ImportError:
         def run_simulation(self, initial_state, controller=None, reference=None):
             """Mock simulation run."""
             time_steps = int(self.max_time / self.dt) + 1  # +1 to include end time
-            states = np.zeros((time_steps, len(initial_state)))
+            state_dim = len(initial_state)
+            states = np.zeros((time_steps, state_dim))
             controls = np.zeros(time_steps)
             times = np.linspace(0, self.max_time, time_steps)
 
             states[0] = initial_state
-            # Simple mock integration: constant derivative
+            # Simple mock integration: constant derivative (dimension-agnostic)
+            derivative = np.zeros(state_dim)
+            derivative[0] = 1.0  # Unit velocity in first dimension
             for i in range(1, time_steps):
-                states[i] = states[i-1] + np.array([1.0, 0.0, 0.0, 0.0, 0.0, 0.0]) * self.dt
+                states[i] = states[i-1] + derivative * self.dt
 
             return {
                 'success': True,
@@ -308,14 +311,18 @@ class TestSimulationRunnerErrorHandling:
     def test_invalid_initial_state(self):
         """Test handling of invalid initial state."""
         mock_dynamics = Mock()
-        runner = SimulationRunner(mock_dynamics)
+        # Mock step method to handle any state dimension
+        mock_dynamics.step = Mock(side_effect=lambda x, u, dt: np.zeros_like(x))
+        runner = SimulationRunner(mock_dynamics, dt=0.01, max_time=0.1)
 
         # Test with wrong dimensions
-        invalid_state = np.array([1.0, 2.0])  # Too few dimensions
+        invalid_state = np.array([1.0, 2.0])  # Too few dimensions (2 instead of 6)
 
         if hasattr(runner, 'run_simulation'):
-            runner.run_simulation(invalid_state)
-            # Should handle gracefully (implementation dependent)
+            result = runner.run_simulation(invalid_state)
+            # Should handle gracefully - run_simulation adapts to state dimension
+            assert result['success'] is True
+            assert result['states'].shape[1] == 2  # Should preserve input dimension
 
     def test_dynamics_failure_handling(self, simulation_runner_failing):
         """Test handling of dynamics computation failures."""

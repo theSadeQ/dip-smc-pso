@@ -418,17 +418,26 @@ class TestSafetyGuardIntegration:
         self.mock_config.simulation = self.mock_safety_config
         self.mock_safety_config.safety = self.mock_safety_settings
 
+        # Initialize safety settings to None by default (will be set in individual tests)
+        self.mock_safety_settings.energy_limits = None
+        self.mock_safety_settings.state_bounds = None
+
     def test_apply_safety_guards_minimal_config(self):
         """Test apply_safety_guards with minimal configuration."""
         valid_state = np.array([1.0, 2.0, 3.0])
 
+        # Create minimal mock config with no safety settings
+        minimal_config = Mock()
+        minimal_config.simulation = Mock()
+        minimal_config.simulation.safety = None  # No safety config
+
         # Should at least run NaN guard without error
-        apply_safety_guards(valid_state, step_idx=0, config=Mock())
+        apply_safety_guards(valid_state, step_idx=0, config=minimal_config)
 
         # Should fail with NaN state
         nan_state = np.array([1.0, np.nan, 3.0])
         with pytest.raises(SafetyViolationError):
-            apply_safety_guards(nan_state, step_idx=0, config=Mock())
+            apply_safety_guards(nan_state, step_idx=0, config=minimal_config)
 
     def test_apply_safety_guards_with_energy_limits(self):
         """Test apply_safety_guards with energy limits configured."""
@@ -463,6 +472,8 @@ class TestSafetyGuardIntegration:
     def test_create_default_guards_minimal(self):
         """Test create_default_guards with minimal configuration."""
         minimal_config = Mock()
+        minimal_config.simulation = Mock()
+        minimal_config.simulation.safety = None  # No safety settings
         manager = create_default_guards(minimal_config)
 
         # Should have at least NaN guard
@@ -548,7 +559,8 @@ class TestSafetyGuardPerformance:
         upper_bounds = np.full(state_size, 10.0)
         guard = BoundsGuard(lower_bounds, upper_bounds)
 
-        large_state = np.random.randn(state_size) * 5.0  # Within bounds
+        # Generate state well within bounds (std=2.0 ensures ~99.7% values in [-6, 6])
+        large_state = np.clip(np.random.randn(state_size) * 2.0, -9.0, 9.0)
 
         import time
         start_time = time.time()

@@ -1,0 +1,181 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.4.2, pluggy-1.6.0 -- C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\python.exe
+cachedir: .pytest_cache
+hypothesis profile 'default'
+benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: D:\Projects\main
+configfile: .pytest.ini
+plugins: anyio-4.11.0, hypothesis-6.142.4, benchmark-4.0.0, cov-7.0.0
+collecting ... collected 99 items / 1 skipped
+
+tests/test_benchmarks/core/test_benchmark_interfaces.py::TestBenchmarkInterfaceCompatibility::test_all_controller_types_have_compatible_interfaces SKIPPED [  1%]
+tests/test_benchmarks/core/test_benchmark_interfaces.py::TestBenchmarkInterfaceCompatibility::test_realistic_parameter_bounds_validation SKIPPED [  2%]
+tests/test_benchmarks/core/test_benchmark_interfaces.py::TestBenchmarkInterfaceCompatibility::test_cross_component_integration_workflows SKIPPED [  3%]
+tests/test_benchmarks/core/test_benchmark_interfaces.py::TestBenchmarkInterfaceCompatibility::test_performance_baseline_establishment SKIPPED [  4%]
+tests/test_benchmarks/core/test_benchmark_interfaces.py::TestBenchmarkInterfaceCompatibility::test_benchmark_framework_integration SKIPPED [  5%]
+tests/test_benchmarks/core/test_benchmark_interfaces.py::TestBenchmarkInterfaceCompatibility::test_benchmark_success_rate_target SKIPPED [  6%]
+tests/test_benchmarks/core/test_compute_speed.py::test_controller_compute_speed[classical_smc] SKIPPED [  7%]
+tests/test_benchmarks/core/test_compute_speed.py::test_controller_compute_speed[sta_smc] SKIPPED [  8%]
+tests/test_benchmarks/core/test_compute_speed.py::test_controller_compute_speed[adaptive_smc] SKIPPED [  9%]
+tests/test_benchmarks/core/test_compute_speed.py::test_controller_speed_consistency[classical_smc] SKIPPED [ 10%]
+tests/test_benchmarks/core/test_compute_speed.py::test_controller_speed_consistency[sta_smc] SKIPPED [ 11%]
+tests/test_benchmarks/core/test_compute_speed.py::test_controller_speed_consistency[adaptive_smc] SKIPPED [ 12%]
+tests/test_benchmarks/core/test_compute_speed.py::test_compute_time_scaling_with_state_complexity SKIPPED [ 13%]
+tests/test_benchmarks/core/test_compute_speed.py::test_controller_speed_regression[classical_smc] SKIPPED [ 14%]
+tests/test_benchmarks/core/test_compute_speed.py::test_controller_speed_regression[sta_smc] SKIPPED [ 15%]
+tests/test_benchmarks/core/test_compute_speed.py::test_controller_warm_up_effect SKIPPED [ 16%]
+tests/test_benchmarks/core/test_integration_accuracy.py::test_rk4_reduces_euler_drift SKIPPED [ 17%]
+tests/test_benchmarks/core/test_integration_accuracy.py::test_rk45_executes_and_counts_evals SKIPPED [ 18%]
+tests/test_benchmarks/core/test_integration_accuracy.py::test_energy_conservation_bound SKIPPED [ 19%]
+tests/test_benchmarks/core/test_integration_accuracy.py::test_method_accuracy_analysis SKIPPED [ 20%]
+tests/test_benchmarks/core/test_integration_accuracy.py::test_conservation_validation_comprehensive SKIPPED [ 21%]
+tests/test_benchmarks/core/test_integration_accuracy.py::test_integration_method_execution[Euler] SKIPPED [ 22%]
+tests/test_benchmarks/core/test_integration_accuracy.py::test_integration_method_execution[RK4] SKIPPED [ 23%]
+tests/test_benchmarks/core/test_integration_accuracy.py::test_adaptive_method_tolerance SKIPPED [ 24%]
+tests/test_benchmarks/core/test_memory_usage.py::test_controller_memory_allocation_per_call[classical_smc] SKIPPED [ 25%]
+tests/test_benchmarks/core/test_memory_usage.py::test_controller_memory_allocation_per_call[sta_smc] SKIPPED [ 26%]
+tests/test_benchmarks/core/test_memory_usage.py::test_controller_memory_allocation_per_call[adaptive_smc] SKIPPED [ 27%]
+tests/test_benchmarks/core/test_memory_usage.py::test_controller_no_memory_leaks[classical_smc] SKIPPED [ 28%]
+tests/test_benchmarks/core/test_memory_usage.py::test_controller_no_memory_leaks[sta_smc] SKIPPED [ 29%]
+tests/test_benchmarks/core/test_memory_usage.py::test_controller_no_memory_leaks[adaptive_smc] SKIPPED [ 30%]
+tests/test_benchmarks/core/test_memory_usage.py::test_controller_memory_usage_scaling SKIPPED [ 31%]
+tests/test_benchmarks/core/test_memory_usage.py::test_controller_memory_efficiency[classical_smc] SKIPPED [ 32%]
+tests/test_benchmarks/core/test_memory_usage.py::test_controller_memory_efficiency[sta_smc] SKIPPED [ 33%]
+tests/test_benchmarks/core/test_memory_usage.py::test_adaptive_controller_memory_growth SKIPPED [ 34%]
+tests/test_benchmarks/core/test_memory_usage.py::test_controller_history_memory_management SKIPPED [ 35%]
+tests/test_benchmarks/core/test_modular_framework.py::test_comprehensive_method_comparison SKIPPED [ 36%]
+tests/test_benchmarks/core/test_modular_framework.py::test_performance_profiling SKIPPED [ 37%]
+tests/test_benchmarks/core/test_modular_framework.py::test_default_comprehensive_comparison SKIPPED [ 38%]
+tests/test_benchmarks/core/test_modular_framework.py::test_enhanced_analysis_integration SKIPPED [ 39%]
+tests/test_benchmarks/core/test_modular_framework.py::test_conservation_validation_methods SKIPPED [ 40%]
+tests/test_benchmarks/core/test_modular_framework.py::test_custom_scenario_creation[small_angles] SKIPPED [ 41%]
+tests/test_benchmarks/core/test_modular_framework.py::test_custom_scenario_creation[high_energy] SKIPPED [ 42%]
+tests/test_benchmarks/core/test_modular_framework.py::test_modular_component_isolation SKIPPED [ 43%]
+tests/test_benchmarks/core/test_performance.py::test_controller_compute_speed[classical_smc] PASSED [ 44%]
+tests/test_benchmarks/core/test_performance.py::test_controller_compute_speed[sta_smc] PASSED [ 45%]
+tests/test_benchmarks/core/test_performance.py::test_controller_compute_speed[adaptive_smc] FAILED [ 46%]
+tests/test_benchmarks/core/test_performance.py::test_full_simulation_throughput[classical_smc] FAILED [ 47%]
+tests/test_benchmarks/core/test_performance.py::test_full_simulation_throughput[sta_smc] FAILED [ 48%]
+tests/test_benchmarks/core/test_performance.py::test_full_simulation_throughput[adaptive_smc] FAILED [ 49%]
+tests/test_benchmarks/core/test_performance.py::test_classical_smc_convergence FAILED [ 50%]
+tests/test_benchmarks/core/test_performance.py::test_sta_smc_convergence[False] FAILED [ 51%]
+tests/test_benchmarks/core/test_performance.py::test_sta_smc_convergence[True] FAILED [ 52%]
+tests/test_benchmarks/core/test_simulation_throughput.py::test_full_simulation_throughput[classical_smc] SKIPPED [ 53%]
+tests/test_benchmarks/core/test_simulation_throughput.py::test_full_simulation_throughput[sta_smc] SKIPPED [ 54%]
+tests/test_benchmarks/core/test_simulation_throughput.py::test_batch_simulation_scaling[1] SKIPPED [ 55%]
+tests/test_benchmarks/core/test_simulation_throughput.py::test_batch_simulation_scaling[10] SKIPPED [ 56%]
+tests/test_benchmarks/core/test_simulation_throughput.py::test_batch_simulation_scaling[50] SKIPPED [ 57%]
+tests/test_benchmarks/core/test_simulation_throughput.py::test_batch_simulation_scaling[100] SKIPPED [ 58%]
+tests/test_benchmarks/core/test_simulation_throughput.py::TestSimulationEfficiency::test_integration_method_performance SKIPPED [ 59%]
+tests/test_benchmarks/core/test_simulation_throughput.py::TestSimulationEfficiency::test_memory_efficiency_long_simulation SKIPPED [ 60%]
+tests/test_benchmarks/core/test_simulation_throughput.py::TestSimulationEfficiency::test_real_time_factor SKIPPED [ 61%]
+tests/test_benchmarks/core/test_simulation_throughput.py::test_timestep_performance_scaling[0.001] SKIPPED [ 62%]
+tests/test_benchmarks/core/test_simulation_throughput.py::test_timestep_performance_scaling[0.01] SKIPPED [ 63%]
+tests/test_benchmarks/core/test_simulation_throughput.py::test_timestep_performance_scaling[0.1] SKIPPED [ 64%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestControllerPerformance::test_single_control_computation_performance PASSED [ 65%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestControllerPerformance::test_batch_control_computation_performance PASSED [ 66%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestControllerPerformance::test_control_computation_scaling FAILED [ 67%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestControllerPerformance::test_memory_efficiency_batch_processing SKIPPED [ 68%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestSimulationPerformance::test_single_step_simulation_performance PASSED [ 69%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestSimulationPerformance::test_batch_simulation_performance PASSED [ 70%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestSimulationPerformance::test_large_scale_simulation_throughput SKIPPED [ 71%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestSimulationPerformance::test_simulation_memory_profile SKIPPED [ 72%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestNumericalPerformance::test_matrix_operations_performance PASSED [ 73%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestNumericalPerformance::test_trigonometric_functions_performance PASSED [ 74%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestNumericalPerformance::test_optimization_performance PASSED [ 75%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestRealTimePerformance::test_control_loop_timing SKIPPED [ 76%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestRealTimePerformance::test_deadline_miss_rate SKIPPED [ 77%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestScalabilityPerformance::test_state_dimension_scalability FAILED [ 78%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestScalabilityPerformance::test_batch_size_scalability SKIPPED [ 79%]
+tests/test_benchmarks/performance/test_performance_benchmarks_deep.py::TestScalabilityPerformance::test_concurrent_performance_baseline SKIPPED [ 80%]
+tests/test_benchmarks/performance/test_regression_detection.py::TestPerformanceRegressionDetection::test_controller_performance_benchmarking SKIPPED [ 81%]
+tests/test_benchmarks/performance/test_regression_detection.py::TestPerformanceRegressionDetection::test_regression_detection_logic SKIPPED [ 82%]
+tests/test_benchmarks/performance/test_regression_detection.py::TestPerformanceRegressionDetection::test_regression_report_generation SKIPPED [ 83%]
+tests/test_benchmarks/performance/test_regression_detection.py::TestPerformanceRegressionDetection::test_performance_history_management SKIPPED [ 84%]
+tests/test_benchmarks/performance/test_regression_detection.py::TestPerformanceRegressionDetection::test_benchmark_success_rate_improvement SKIPPED [ 85%]
+tests/test_benchmarks/performance/test_regression_detection.py::TestPerformanceRegressionDetection::test_performance_baseline_establishment SKIPPED [ 86%]
+tests/test_benchmarks/performance/test_regression_detection.py::TestPerformanceRegressionDetection::test_ci_cd_integration_readiness SKIPPED [ 87%]
+tests/test_benchmarks/performance/test_regression_detection.py::TestPerformanceRegressionDetection::test_regression_detection_sensitivity SKIPPED [ 88%]
+tests/test_benchmarks/statistics/test_statistical_benchmarks.py::test_statistical_harness_sample_size_and_ci SKIPPED [ 89%]
+tests/test_benchmarks/validation/test_parameter_realism.py::TestParameterRealism::test_parameter_bounds_establishment SKIPPED [ 90%]
+tests/test_benchmarks/validation/test_parameter_realism.py::TestParameterRealism::test_individual_parameter_validation SKIPPED [ 91%]
+tests/test_benchmarks/validation/test_parameter_realism.py::TestParameterRealism::test_physics_consistency_validation SKIPPED [ 92%]
+tests/test_benchmarks/validation/test_parameter_realism.py::TestParameterRealism::test_realistic_scenarios_creation SKIPPED [ 93%]
+tests/test_benchmarks/validation/test_parameter_realism.py::TestParameterRealism::test_control_gain_validation SKIPPED [ 94%]
+tests/test_benchmarks/validation/test_parameter_realism.py::TestParameterRealism::test_scenario_consistency_validation SKIPPED [ 95%]
+tests/test_benchmarks/validation/test_parameter_realism.py::TestParameterRealism::test_parameter_sensitivity_analysis SKIPPED [ 96%]
+tests/test_benchmarks/validation/test_parameter_realism.py::TestParameterRealism::test_hardware_configuration_scenarios SKIPPED [ 97%]
+tests/test_benchmarks/validation/test_parameter_realism.py::TestParameterRealism::test_engineering_validation_levels SKIPPED [ 98%]
+tests/test_benchmarks/validation/test_parameter_realism.py::TestParameterRealism::test_benchmark_parameter_meaningfulness SKIPPED [100%]Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytest\__main__.py", line 9, in <module>
+    raise SystemExit(pytest.console_main())
+                     ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\config\__init__.py", line 201, in console_main
+    code = main()
+           ^^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\config\__init__.py", line 175, in main
+    ret: ExitCode | int = config.hook.pytest_cmdline_main(config=config)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py", line 167, in _multicall
+    raise exception
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\main.py", line 336, in pytest_cmdline_main
+    return wrap_session(config, _main)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\main.py", line 324, in wrap_session
+    config.hook.pytest_sessionfinish(
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py", line 167, in _multicall
+    raise exception
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\logging.py", line 873, in pytest_sessionfinish
+    return (yield)
+            ^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\terminal.py", line 936, in pytest_sessionfinish
+    result = yield
+             ^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py", line 107, in _multicall
+    next(function_gen)  # first yield
+    ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py", line 34, in run_old_style_hookwrapper
+    next(teardown)
+  File "C:\Users\SadeQ\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\plugin.py", line 324, in pytest_sessionfinish
+    session.config._benchmarksession.finish()
+  File "C:\Users\SadeQ\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\session.py", line 207, in finish
+    self.handle_saving()
+  File "C:\Users\SadeQ\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\session.py", line 147, in handle_saving
+    output_json = self.config.hook.pytest_benchmark_generate_json(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py", line 167, in _multicall
+    raise exception
+  File "C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\SadeQ\AppData\Roaming\Python\Python312\site-packages\pytest_benchmark\plugin.py", line 387, in pytest_benchmark_generate_json
+    "datetime": datetime.utcnow().isoformat(),
+                ^^^^^^^^^^^^^^^^^
+DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
