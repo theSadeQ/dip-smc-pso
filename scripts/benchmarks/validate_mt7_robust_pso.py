@@ -298,9 +298,18 @@ def validate_mt7_robust_pso(
     logger.info(f"[INFO] Starting MT-7 validation for {controller_name}")
     logger.info(f"[INFO] Runs per condition: {n_runs} (Total: {n_runs * 4} simulations)")
 
-    # Controller factory
+    # Create dynamics model (required by simulate_system_batch)
+    from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
+    from src.plant.models.simplified.config import SimplifiedDIPConfig
+
+    dip_config = SimplifiedDIPConfig.create_default()
+    dynamics = SimplifiedDIPDynamics(dip_config)
+
+    # Controller factory with dynamics_model attribute
     def controller_factory(gains):
-        return create_controller(controller_name, config=config, gains=gains)
+        controller = create_controller(controller_name, config=config, gains=gains)
+        controller.dynamics_model = dynamics  # Required by simulate_system_batch
+        return controller
 
     # Generate initial conditions
     logger.info("[INFO] Generating initial conditions...")
