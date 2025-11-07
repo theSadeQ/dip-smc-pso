@@ -30,8 +30,7 @@ import numpy as np
 
 from src.config import ConfigSchema, load_config
 from src.utils.seed import create_rng
-from ..plant.models.dynamics import DIPParams
-from ..simulation.engines.vector_sim import simulate_system_batch
+from ..optimization.core.cost_evaluator import ControllerCostEvaluator
 from ..optimization.algorithms.evolutionary.genetic import GeneticAlgorithm, GeneticAlgorithmConfig
 from ..optimization.core.interfaces import OptimizationProblem, ParameterSpace, OptimizationResult
 from ..optimization.core.parameters import ContinuousParameterSpace
@@ -116,52 +115,26 @@ class GATuner:
         else:
             self.cfg = config
 
-        # Store controller factory and config sections
+        # Store controller factory and config
         self.controller_factory = controller_factory
-        self.physics_cfg = self.cfg.physics
-        self.sim_cfg = self.cfg.simulation
-        self.cost_cfg = self.cfg.cost_function
 
         # Local PRNG for reproducibility
         default_seed = seed if seed is not None else getattr(self.cfg, "global_seed", None)
         self.seed: Optional[int] = int(default_seed) if default_seed is not None else None
         self.rng: np.random.Generator = rng or create_rng(self.seed)
 
-        # Extract cost weights
-        self.weights = self.cost_cfg.weights
-
-        # Normalisation constants (same as PSOTuner)
-        norms = getattr(self.cost_cfg, "norms", None)
-        if norms is not None:
-            if isinstance(norms, dict):
-                self.norm_ise = float(norms.get("state_error", 1.0))
-                self.norm_u = float(norms.get("control_effort", 1.0))
-                self.norm_du = float(norms.get("control_rate", 1.0))
-                self.norm_sigma = float(norms.get("sliding", 1.0))
-            else:
-                self.norm_ise = float(getattr(norms, "state_error", 1.0))
-                self.norm_u = float(getattr(norms, "control_effort", 1.0))
-                self.norm_du = float(getattr(norms, "control_rate", 1.0))
-                self.norm_sigma = float(getattr(norms, "sliding", 1.0))
-        else:
-            self.norm_ise = self.norm_u = self.norm_du = self.norm_sigma = 1.0
-
-        # Instability penalty
-        instability_penalty_factor = 100.0
-        explicit_penalty = getattr(self.cost_cfg, "instability_penalty", None)
-        if explicit_penalty is not None:
-            self.instability_penalty: float = float(explicit_penalty)
-        else:
-            denom_sum = self.norm_ise + self.norm_u + self.norm_du + self.norm_sigma
-            if not np.isfinite(denom_sum) or denom_sum <= 0.0:
-                denom_sum = 1.0
-            self.instability_penalty = float(instability_penalty_factor * denom_sum)
-
-        # Combine weights for cost aggregation (mean vs worst-case)
-        self.combine_weights: Tuple[float, float] = (0.7, 0.3)
+        # Create shared cost evaluator (handles all simulation and cost computation)
+        self.cost_evaluator = ControllerCostEvaluator(
+            controller_factory=controller_factory,
+            config=self.cfg,
+            seed=self.seed
+        )
 
     def _evaluate_gains(self, gains: np.ndarray) -> float:
         """Evaluate a single gain vector by simulating the controller.
+
+        Uses the shared ControllerCostEvaluator for real simulation-based
+        cost computation (same as PSO).
 
         Parameters
         ----------
@@ -173,57 +146,7 @@ class GATuner:
         float
             Cost value (lower is better)
         """
-        # Create controller with these gains
-        try:
-            controller = self.controller_factory(gains)
-        except Exception as e:
-            logger.warning(f"Controller creation failed for gains {gains}: {e}")
-            return self.instability_penalty * 10.0  # Heavily penalize invalid gains
-
-        # Run vectorized simulation (single instance for now)
-        try:
-            results = simulate_system_batch(
-                [controller],
-                self.physics_cfg,
-                self.sim_cfg,
-                self.rng
-            )
-
-            # Extract cost metrics
-            if not results or len(results) == 0:
-                return self.instability_penalty * 10.0
-
-            result = results[0]
-
-            # Check for instability
-            if not result.get("converged", False):
-                return self.instability_penalty
-
-            # Compute cost from metrics
-            ise = result.get("ise", 0.0)
-            control_effort = result.get("total_control_effort", 0.0)
-            control_rate = result.get("total_control_rate", 0.0)
-            sliding_norm = result.get("sliding_variable_norm", 0.0)
-
-            # Normalize and weight
-            norm_ise_val = ise / max(self.norm_ise, 1e-12)
-            norm_u_val = control_effort / max(self.norm_u, 1e-12)
-            norm_du_val = control_rate / max(self.norm_du, 1e-12)
-            norm_sigma_val = sliding_norm / max(self.norm_sigma, 1e-12)
-
-            # Weighted sum
-            cost = (
-                self.weights.state_error * norm_ise_val +
-                self.weights.control_effort * norm_u_val +
-                self.weights.control_rate * norm_du_val +
-                self.weights.sliding * norm_sigma_val
-            )
-
-            return float(cost)
-
-        except Exception as e:
-            logger.warning(f"Simulation failed for gains {gains}: {e}")
-            return self.instability_penalty * 10.0
+        return self.cost_evaluator.evaluate_single(gains)
 
     def optimize(
         self,
