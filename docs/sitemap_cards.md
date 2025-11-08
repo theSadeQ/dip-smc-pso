@@ -12,6 +12,20 @@
 
 <div class="tree-branches">
 
+<!-- Navigation Hub (Master) -->
+<div class="tree-branch navigation-hub">
+    <div class="branch-header">
+        <div class="branch-icon">[CORE]</div>
+        <div class="branch-title">Master Navigation Hub</div>
+    </div>
+    <div class="branch-description">
+        Complete documentation mapping across all 985 files and 11 navigation systems
+    </div>
+    <ul class="branch-links">
+        <li><a href="NAVIGATION.html">NAVIGATION.md - Start Here <span class="branch-badge badge-new">NEW!</span></a></li>
+    </ul>
+</div>
+
 <!-- Getting Started Branch -->
 <div class="tree-branch getting-started">
     <div class="branch-header">
