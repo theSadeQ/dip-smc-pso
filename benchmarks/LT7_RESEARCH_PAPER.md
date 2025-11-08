@@ -1847,6 +1847,106 @@ Upon publication, full dataset and analysis code will be released under MIT lice
 
 ---
 
+### 6.5 Disturbance Rejection Protocol
+
+Real-world control systems must maintain performance under external disturbances (e.g., wind gusts, payload variations, sensor noise). This subsection describes the disturbance rejection testing protocol used to evaluate SMC robustness beyond nominal performance.
+
+**Motivation:**
+
+Standard benchmarking (Section 6.3) evaluates controllers under ideal conditions (no external forces). However, practical deployment requires:
+1. **Transient Disturbances:** Step changes, impulses (e.g., collisions, actuator faults)
+2. **Periodic Disturbances:** Sinusoidal forces (e.g., vibration, harmonic excitation)
+3. **Stochastic Disturbances:** Random noise (e.g., sensor errors, environmental uncertainty)
+
+Failure to test under disturbances can lead to catastrophic performance degradation in deployment [69, 70].
+
+**Disturbance Model:**
+
+External disturbances modeled as additive forces to the cart control input:
+
+```math
+u_{\text{total}}(t) = u_{\text{nominal}}(t) + d(t)
+```
+
+where $u_{\text{nominal}}(t)$ is the controller output and $d(t)$ is the external disturbance force (N). This models physical scenarios like:
+- **Wind gusts:** Step or sinusoidal forces
+- **Payload drops:** Impulse forces
+- **Ground vibration:** Random Gaussian noise
+
+**Disturbance Scenarios:**
+
+**Primary Test Set (Robust PSO Optimization):**
+
+Used to optimize controller gains for disturbance rejection via Particle Swarm Optimization (Section 5):
+
+1. **Step Disturbance:** $d(t) = 10.0$ N for $t \geq 2.0$ s (constant force after t=2s)
+2. **Impulse Disturbance:** $d(t) = 30.0$ N for $t \in [2.0, 2.1]$ s (brief spike)
+
+**Robust Fitness Function:**
+
+```math
+J_{\text{robust}} = 0.5 \cdot J_{\text{nominal}} + 0.5 \cdot J_{\text{disturbed}}
+```
+
+where:
+- $J_{\text{nominal}}$: Cost under nominal conditions (no disturbance)
+- $J_{\text{disturbed}}$: Average cost under step and impulse disturbances
+- Cost function: $J = w_1 t_s + w_2 \text{OS} + w_3 E_{\text{control}}$ (Section 6.2)
+
+**Rationale:** Balancing nominal and disturbed performance prevents over-fitting to either scenario. Pure nominal optimization yields controllers that fail under disturbances (Section 8.4).
+
+**Extended Test Set (Generalization Validation):**
+
+To evaluate generalization beyond the PSO fitness function, additional disturbance types tested:
+
+3. **Sinusoidal Low:** $d(t) = 5.0 \sin(2\pi \cdot 0.5 \cdot (t-1))$ N for $t \geq 1.0$ s (0.5 Hz, sub-resonant)
+4. **Sinusoidal Resonant:** $d(t) = 8.0 \sin(2\pi \cdot 2.0 \cdot (t-1))$ N for $t \geq 1.0$ s (2 Hz, near-resonant)
+5. **Sinusoidal High:** $d(t) = 3.0 \sin(2\pi \cdot 5.0 \cdot (t-1))$ N for $t \geq 1.0$ s (5 Hz, super-resonant)
+6. **Random Gaussian (Low):** $d(t) \sim \mathcal{N}(0, 2.0^2)$ N for $t \geq 1.0$ s
+7. **Random Gaussian (Mid):** $d(t) \sim \mathcal{N}(0, 3.0^2)$ N for $t \geq 1.0$ s
+8. **Random Gaussian (High):** $d(t) \sim \mathcal{N}(0, 5.0^2)$ N for $t \geq 1.0$ s
+
+**Critical Observation:** Extended scenarios (3-8) were **NOT included in PSO fitness**. This tests whether robust gains *generalize* to unseen disturbance types.
+
+**Test Protocol:**
+
+1. **Baseline Testing:** Evaluate default gains (Section 5.3) under all 8 disturbance scenarios
+2. **Robust PSO Optimization:** Optimize gains using $J_{\text{robust}}$ fitness (scenarios 1-2 only)
+3. **Validation Testing:** Re-evaluate optimized gains under all 8 scenarios
+4. **Generalization Analysis:** Compare performance on seen (1-2) vs unseen (3-8) scenarios
+
+**Performance Metrics (Disturbance-Specific):**
+
+- **Settling Time ($t_s$):** Time to stabilize after disturbance onset (Section 6.2)
+- **Max Overshoot ($\text{OS}_{\max}$):** Peak angle deviation after disturbance
+- **Convergence Rate ($p_{\text{conv}}$):** Fraction of trials achieving $||\theta|| < 5°$ within 9 seconds
+- **Robustness Score:** $R = p_{\text{conv}} \times (1 - \text{OS}_{\max}/180°)$ (higher is better)
+
+**Statistical Validation:**
+
+- **Monte Carlo Trials:** 50 trials per scenario per controller (random seeds 0-49)
+- **Confidence Intervals:** 95% CI via bootstrap (10,000 resamples)
+- **Significance Testing:** Welch's t-test for pairwise comparisons ($\alpha = 0.01$)
+
+**Implementation:**
+
+All disturbance scenarios implemented using `DisturbanceGenerator` class (`src/utils/disturbances.py`):
+- **Step:** `add_step_disturbance(magnitude=10.0, start_time=2.0)`
+- **Impulse:** `add_impulse_disturbance(magnitude=30.0, start_time=2.0, duration=0.1)`
+- **Sinusoidal:** `add_sinusoidal_disturbance(magnitude=A, frequency=f, start_time=1.0)`
+- **Random:** `add_random_disturbance(std_dev=σ, start_time=1.0)` with seeded RNG
+
+**Scripts:**
+- `scripts/mt8_robust_pso.py` - Robust PSO optimization (4 controllers, ~70 min runtime)
+- `scripts/mt8_extended_validation.py` - Generalization testing (6 scenarios, 50 trials)
+- `benchmarks/MT8_COMPLETE_REPORT.md` - Full analysis and results
+
+**Key Finding (Preview):**
+
+Robust PSO optimization achieved **21.4% improvement** for Hybrid Adaptive STA SMC on step/impulse scenarios, but **0% convergence** on sinusoidal/random scenarios. This demonstrates **limited generalization** and highlights the critical importance of comprehensive disturbance coverage in fitness functions. Detailed results in Section 8.4.
+
+---
+
 ## 7. Performance Comparison Results
 
 ### 7.1 Computational Efficiency
@@ -2250,6 +2350,75 @@ Adaptive gain $K(t)$ increases when $|\sigma| > \delta$ (dead-zone), but adaptat
 - **Noisy measurements:** All controllers acceptable ($\sigma_{\theta} < 0.3°$ under 1N white noise)
 
 **Critical Insight:** STA's 13% advantage over Adaptive (91% vs 78%) demonstrates that **proactive disturbance integration (via integral term $z$) outperforms reactive gain adaptation** for time-varying disturbances. This validates theoretical predictions from Lyapunov analysis (Section 4.2).
+
+---
+
+**Robust PSO Optimization for Disturbance Rejection**
+
+The preceding results used default or nominal-optimized gains. To maximize disturbance rejection, robust PSO optimization conducted using disturbance-aware fitness function (Section 6.5):
+
+**Optimization Protocol:**
+
+- **Fitness Function:** $J_{\text{robust}} = 0.5 J_{\text{nominal}} + 0.5 J_{\text{disturbed}}$
+- **Disturbances in Fitness:** Step (10N @ t=2s) + Impulse (30N pulse @ t=2s, 0.1s duration)
+- **PSO Configuration:** 30 particles × 50 iterations (~4,500 evaluations per controller)
+- **Runtime:** ~70 minutes total (all 4 controllers)
+
+**Table 8.2b: Robust PSO Optimization Results**
+
+| Controller | Default Fitness | Optimized Fitness | Improvement | Step/Impulse Convergence |
+|------------|----------------|-------------------|-------------|-------------------------|
+| **Hybrid Adaptive STA SMC** | 11.489 | 9.031 | **21.4%** | 100% → 100% |
+| **Classical SMC** | 9.145 | 8.948 | **2.15%** | 0% → 100% |
+| **STA SMC** | 9.070 | 8.945 | **1.38%** | 0% → 100% |
+| **Adaptive SMC** | 9.068 | 9.025 | **0.47%** | 0% → 100% |
+
+**Key Findings:**
+
+1. **Hybrid Controller Massive Improvement:** 21.4% fitness reduction (11.489 → 9.031), demonstrating default gains were severely suboptimal for disturbances. This represents the **largest single-controller improvement** in the entire study.
+
+2. **Convergence Transformation:** Default gains yielded **0% convergence** under step/impulse disturbances (187-667° overshoots). Robust PSO achieved **100% convergence** for all controllers.
+
+3. **Gain Adjustments:** PSO made substantial modifications:
+   - Hybrid: Doubled k1 and k2, quintupled k4 (5.0 → 10.149, 0.5 → 2.750)
+   - Classical: Increased k1 by 360%, reduced k6 by 70%
+   - Adaptive/STA: More conservative changes (<80% from defaults)
+
+**Generalization Testing (Extended Scenarios):**
+
+To evaluate whether robust gains generalize beyond step/impulse, tested on UNSEEN disturbances:
+
+**Table 8.2c: Generalization to Continuous Disturbances**
+
+| Scenario | Hybrid (Robust PSO) Convergence | Mean Overshoot |
+|----------|--------------------------------|----------------|
+| **Step/Impulse (Seen)** | 100% | 8-15° |
+| **Sinusoidal (0.5-5 Hz)** | **0%** | 375-722° |
+| **Random Gaussian (σ=2-5N)** | **0%** | 586-627° |
+
+**Critical Finding - Limited Generalization:**
+
+Robust PSO gains optimized for transient disturbances (step, impulse) **completely fail** for continuous periodic and stochastic disturbances:
+
+- **Step/Impulse:** 100% convergence, <15° overshoot
+- **Sinusoidal:** 0% convergence, 375-722° overshoot (48-96× worse!)
+- **Random Noise:** 0% convergence, 586-627° overshoot (39-42× worse!)
+
+**Root Cause Analysis:**
+
+1. **Disturbance Characteristics:** Step/impulse are transient (one-time events), allowing controller to recover. Sinusoidal/random are continuous, requiring sustained rejection.
+2. **Optimization Bias:** PSO fitness included only transient disturbances, leading to gains tuned for "absorb impact and recover" rather than "continuously suppress."
+3. **Control Bandwidth:** Robust gains may have reduced bandwidth to minimize transient overshoot, inadvertently degrading continuous disturbance tracking.
+
+**Implications for Optimization:**
+
+This demonstrates **fitness function must comprehensively cover target operating conditions**. For true robustness, PSO fitness should include:
+- Transient: step, impulse
+- Periodic: sinusoidal (multiple frequencies)
+- Stochastic: random noise (multiple intensities)
+- Combined: multi-disturbance scenarios
+
+**Trade-off:** Expanding fitness complexity increases PSO runtime (~4× for 8 scenarios vs 2) but ensures deployed performance matches optimization performance.
 
 ![Figure 8.2: Disturbance Rejection Performance](./figures/LT7_section_8_2_disturbance_rejection.png)
 
