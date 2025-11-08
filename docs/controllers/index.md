@@ -226,3 +226,6 @@ For guidelines on extending controllers or adding new features, see:
 **Documentation Version:** 2.0 (Week 4 Complete)
 **Last Updated:** 2025-10-04
 **Coverage:** 7 controller guides (3 core + 3 advanced + factory), Plant models, Optimization infrastructure, Mathematical foundations
+---
+
+**Navigation**: Return to [Master Navigation Hub](../NAVIGATION.md) | Browse all [Documentation Categories](../index.md)

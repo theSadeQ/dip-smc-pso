@@ -36,3 +36,6 @@ This directory contains documentation about the documentation itself - style gui
 - **AI/dev configs:** `.project/ai/config/`
 - **Testing standards:** `.project/ai/config/testing_standards.md`
 - **Workspace organization:** `.project/ai/config/workspace_organization.md`
+---
+
+**Navigation**: Return to [Master Navigation Hub](../NAVIGATION.md) | Browse all [Documentation Categories](../index.md)

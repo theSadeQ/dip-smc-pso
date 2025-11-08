@@ -323,3 +323,6 @@ print(df['cost'].min(), df['cost'].mean(), df['cost'].std())
 - Getting Started: [README](README.md)
 - Quick Commands: [Quick Reference](QUICK_REFERENCE.md)
 - Complete Workflow: [Complete Debugging Workflow](workflows/complete-debugging-workflow.md)
+---
+
+**Navigation**: Return to [Master Navigation Hub](../NAVIGATION.md) | Browse all [Documentation Categories](../index.md)
