@@ -311,18 +311,141 @@ class ProductionReadinessScorer:
         return assessment
 
     def _gather_coverage_metrics(self) -> Optional[Dict[str, Any]]:
-        """Gather current coverage metrics from monitoring system."""
-        if not self.coverage_monitor:
-            return None
+        """Gather current coverage metrics from coverage.py data file.
 
+        Reads .coverage file directly using coverage.py API to avoid
+        dependency on CoverageMonitor database which may be empty.
+        """
         try:
-            recent_metrics = self.coverage_monitor.get_recent_metrics(1)
-            if recent_metrics:
-                return asdict(recent_metrics[0])
-        except Exception as e:
-            logger.warning(f"Failed to gather coverage metrics: {e}")
+            # Import coverage.py
+            from coverage import Coverage
+            import os
 
-        return None
+            # Load coverage data from .coverage file
+            # Use os.path.join to ensure proper path handling on Windows
+            cov_file_path = os.path.join(str(PROJECT_ROOT), ".coverage")
+
+            if not os.path.exists(cov_file_path):
+                logger.warning(f"No .coverage file found at {cov_file_path} - run pytest with --cov flag")
+                return None
+
+            cov = Coverage(data_file=cov_file_path)
+            cov.load()
+
+            # Calculate overall coverage
+            # coverage.report() returns overall percentage
+            import io
+            import sys
+
+            # Capture report output to get overall percentage
+            old_stdout = sys.stdout
+            sys.stdout = buffer = io.StringIO()
+            try:
+                cov.report(show_missing=False)
+                report_output = buffer.getvalue()
+            finally:
+                sys.stdout = old_stdout
+
+            # Parse overall coverage from last line (TOTAL row)
+            overall_coverage = 0.0
+            for line in report_output.split('\n'):
+                if line.startswith('TOTAL'):
+                    parts = line.split()
+                    if len(parts) >= 4:
+                        # Format: "TOTAL  statements  missing  coverage"
+                        overall_coverage = float(parts[-1].rstrip('%'))
+                        break
+
+            # Calculate critical component coverage (controllers, dynamics)
+            critical_files = [
+                "src/controllers/*.py",
+                "src/core/dynamics.py",
+                "src/core/dynamics_full.py",
+                "src/plant/models/*/dynamics.py"
+            ]
+
+            # Use coverage.py API to get specific file coverage
+            analysis_data = cov.get_data()
+            critical_total_stmts = 0
+            critical_executed_stmts = 0
+
+            for filepath in analysis_data.measured_files():
+                # Check if file matches critical patterns
+                is_critical = any(
+                    'controllers' in filepath or
+                    'dynamics' in filepath
+                    for pattern in critical_files
+                )
+
+                if is_critical:
+                    analysis = cov.analysis2(filepath)
+                    # analysis = (filename, executed_lines, missing_lines, excluded_lines)
+                    executed = len(analysis[1])  # executed lines
+                    missing = len(analysis[2])   # missing lines
+                    total = executed + missing
+
+                    critical_total_stmts += total
+                    critical_executed_stmts += executed
+
+            critical_coverage = (
+                (critical_executed_stmts / critical_total_stmts * 100)
+                if critical_total_stmts > 0 else 0.0
+            )
+
+            # Calculate safety-critical coverage (saturation, validation)
+            safety_files = [
+                "src/utils/control/saturation.py",
+                "src/plant/core/state_validation.py"
+            ]
+
+            safety_total_stmts = 0
+            safety_executed_stmts = 0
+
+            for filepath in analysis_data.measured_files():
+                is_safety = any(safety_file in filepath for safety_file in safety_files)
+
+                if is_safety:
+                    analysis = cov.analysis2(filepath)
+                    executed = len(analysis[1])
+                    missing = len(analysis[2])
+                    total = executed + missing
+
+                    safety_total_stmts += total
+                    safety_executed_stmts += executed
+
+            safety_coverage = (
+                (safety_executed_stmts / safety_total_stmts * 100)
+                if safety_total_stmts > 0 else 0.0
+            )
+
+            metrics = {
+                'overall_coverage': overall_coverage,
+                'critical_coverage': critical_coverage,
+                'safety_coverage': safety_coverage,
+                'timestamp': datetime.now().isoformat(),
+                'total_files': len(list(analysis_data.measured_files())),
+                'measurement_source': 'coverage.py_direct'
+            }
+
+            logger.info(f"Coverage metrics collected: overall={overall_coverage:.1f}%, "
+                       f"critical={critical_coverage:.1f}%, safety={safety_coverage:.1f}%")
+
+            return metrics
+
+        except ImportError:
+            logger.warning("coverage.py not installed - cannot gather coverage metrics")
+            return None
+        except Exception as e:
+            logger.warning(f"Failed to gather coverage metrics from .coverage file: {e}")
+            # Fallback to CoverageMonitor if available
+            if self.coverage_monitor:
+                try:
+                    recent_metrics = self.coverage_monitor.get_recent_metrics(1)
+                    if recent_metrics:
+                        return asdict(recent_metrics[0])
+                except Exception:
+                    pass
+            return None
 
     def _calculate_testing_score(self, pytest_results: Optional[TestExecutionResult]) -> float:
         """Calculate testing component score based on pytest results."""
