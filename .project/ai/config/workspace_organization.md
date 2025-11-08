@@ -297,6 +297,39 @@ rm -rf __pycache__ out
 4. **Full Automation:** Create end-to-end workflows for reproducibility
 5. **Comprehensive Handoff:** Document state for session continuity
 
+## Cleanup History
+
+### November 8, 2025 - Root Cleanup & Thesis Index
+**Status:** COMPLETE
+
+**Before**: 24 visible items
+**After**: 17 visible items (29% reduction)
+
+**Actions Taken:**
+1. **Created** docs/thesis/index.md for organized subdirectory navigation
+2. **Moved** coverage files:
+   - `coverage.json` → `.cache/coverage/coverage.json`
+   - `coverage_report.txt` → `.cache/coverage/coverage_report.txt`
+3. **Moved** logs:
+   - `report.log` → `.logs/report.log`
+   - `logs/` → `.logs/` (made hidden)
+4. **Moved** scripts:
+   - `run_coverage.py` → `scripts/coverage/run_coverage.py`
+5. **Deleted** ephemeral files:
+   - `nul` (Windows null artifact)
+   - `__pycache__/` (Python cache, regenerates as needed)
+
+**Updates:**
+- Updated `.gitignore` to include `.logs/`
+- Fixed documentation references:
+  - `docs/testing/coverage_baseline.md` - coverage.json path
+  - `docs/presentation/results-discussion.md` - report.log path
+  - `docs/presentation/THESIS_FINAL.md` - report.log path
+  - `docs/testing/guides/control_systems_unit_testing.md` - report.log path
+
+**Result:** ✅ Meets ≤17 target (15 with 2-item buffer)
+**Verification:** All functionality tested (simulate.py, coverage script work)
+
 ## Lessons Learned from Major Cleanups
 
 **Full cleanup analysis (370MB recovery):** `.claude/WORKSPACE_CLEANUP_2025-10-09.md`

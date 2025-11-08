@@ -129,7 +129,7 @@ Errors: TBD Execution Time: TBD seconds
 ## References - **Coverage Configuration:** `.coveragerc`
 
 - **Test Configuration:** `pytest.ini`
-- **Coverage Reports:** - HTML: `.htmlcov/index.html` - JSON: `coverage.json`
+- **Coverage Reports:** - HTML: `.htmlcov/index.html` - JSON: `.cache/coverage/coverage.json`
 - **Monitoring Scripts:** - `scripts/coverage/check_coverage.py` - `scripts/coverage/coverage_report.py` - `scripts/coverage/identify_gaps.py`
 
 ---
