@@ -90,3 +90,6 @@ models_simplified___init__
 #### Parameters
 
 - [plant.parameters.__init__](parameters___init__.md)
+---
+
+**Navigation**: Return to [Master Navigation Hub](../../NAVIGATION.md) | Browse all [Documentation Categories](../../index.md)

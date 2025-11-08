@@ -16,3 +16,6 @@ This section maps to `src/interfaces/hil/` and documents HIL components and work
 python simulate.py --run-hil --plot
 python simulate.py --config custom_config.yaml --run-hil
 ```
+---
+
+**Navigation**: Return to [Master Navigation Hub](../../NAVIGATION.md) | Browse all [Documentation Categories](../../index.md)

@@ -48,3 +48,6 @@ numerical_stability_methods
 
 notation_and_conventions
 ```
+---
+
+**Navigation**: Return to [Master Navigation Hub](../NAVIGATION.md) | Browse all [Documentation Categories](../index.md)

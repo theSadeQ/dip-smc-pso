@@ -76,3 +76,6 @@ classical_smc: # Sliding surface gain - typical range from {cite}`utkin1999slidi
 
 notation_guide
 ```
+---
+
+**Navigation**: Return to [Master Navigation Hub](../NAVIGATION.md) | Browse all [Documentation Categories](../index.md)

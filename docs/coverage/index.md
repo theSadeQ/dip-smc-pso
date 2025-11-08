@@ -29,3 +29,6 @@ python -m pytest tests/ \
 - **JSON Report**: `validation/coverage.json`
 
 For complete documentation, see [Coverage Analysis & Quality Gates](README.md).
+---
+
+**Navigation**: Return to [Master Navigation Hub](../NAVIGATION.md) | Browse all [Documentation Categories](../index.md)

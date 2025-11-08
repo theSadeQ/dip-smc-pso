@@ -98,3 +98,6 @@ flowchart LR subgraph "Classical SMC" ClassicalPerf[Performance: 78%<br/>Robustn
 ---
 
 **Data Availability**: All simulation data and analysis scripts are available in the `results/` directory of the repository. For reproduction instructions, see {doc}`../implementation/examples/reproduction_guide`. **Statistical Software**: Analysis performed using Python (SciPy, NumPy, pandas) with validation in MATLAB Control System Toolbox.
+---
+
+**Navigation**: Return to [Master Navigation Hub](../NAVIGATION.md) | Browse all [Documentation Categories](../index.md)

@@ -90,3 +90,6 @@ __init__.py/index
 ### [controllers](controllers/index.md)
 
 Sliding mode controllers and factory patterns
+---
+
+**Navigation**: Return to [Master Navigation Hub](../NAVIGATION.md) | Browse all [Documentation Categories](../index.md)

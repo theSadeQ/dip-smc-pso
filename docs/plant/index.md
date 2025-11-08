@@ -85,3 +85,6 @@ print(f"Energy drift: {energy_drift:.2%}")
 **Documentation Version:** 1.0 (Week 3 Complete)
 **Last Updated:** 2025-10-04
 **Coverage:** Simplified, Full, and Low-Rank DIP dynamics models
+---
+
+**Navigation**: Return to [Master Navigation Hub](../NAVIGATION.md) | Browse all [Documentation Categories](../index.md)

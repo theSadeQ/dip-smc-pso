@@ -27,3 +27,6 @@ The automatic examples gallery using Sphinx-Gallery is planned but not yet imple
 
 mathematical_notation_standards
 ```
+---
+
+**Navigation**: Return to [Master Navigation Hub](../NAVIGATION.md) | Browse all [Documentation Categories](../index.md)
