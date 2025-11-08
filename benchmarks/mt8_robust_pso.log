@@ -1,0 +1,39 @@
+2025-11-08 08:07:38,350 - INFO - ================================================================================
+2025-11-08 08:07:38,350 - INFO - MT-8: Robust PSO Optimization
+2025-11-08 08:07:38,350 - INFO - Particles: 10, Iterations: 10
+2025-11-08 08:07:38,351 - INFO - ================================================================================
+2025-11-08 08:07:38,395 - INFO - Configuration loaded from sources: ENV > .env > config.yaml
+2025-11-08 08:07:38,395 - INFO - Configuration loaded
+2025-11-08 08:07:38,395 - INFO - Dynamics model initialized
+2025-11-08 08:07:38,395 - INFO - 
+Optimizing 1 controller(s):
+2025-11-08 08:07:38,396 - INFO -   - classical_smc
+2025-11-08 08:07:38,396 - INFO - 
+================================================================================
+2025-11-08 08:07:38,396 - INFO - Optimizing: classical_smc (Robust PSO)
+2025-11-08 08:07:38,396 - INFO - ================================================================================
+2025-11-08 08:07:38,396 - INFO -   Particles: 10, Iterations: 10
+2025-11-08 08:07:38,396 - INFO -   Gain bounds: [2.0, 30.0] (×6)
+2025-11-08 08:07:38,396 - INFO -   Evaluating original gains...
+2025-11-08 08:07:40,666 - INFO -     Original robust fitness: 9.1450
+2025-11-08 08:23:21,947 - INFO - ================================================================================
+2025-11-08 08:23:21,947 - INFO - MT-8: Robust PSO Optimization
+2025-11-08 08:23:21,947 - INFO - Particles: 30, Iterations: 50
+2025-11-08 08:23:21,947 - INFO - ================================================================================
+2025-11-08 08:23:21,980 - INFO - Configuration loaded from sources: ENV > .env > config.yaml
+2025-11-08 08:23:21,982 - INFO - Configuration loaded
+2025-11-08 08:23:21,982 - INFO - Dynamics model initialized
+2025-11-08 08:23:21,982 - INFO - 
+Optimizing 4 controller(s):
+2025-11-08 08:23:21,983 - INFO -   - classical_smc
+2025-11-08 08:23:21,983 - INFO -   - sta_smc
+2025-11-08 08:23:21,983 - INFO -   - adaptive_smc
+2025-11-08 08:23:21,983 - INFO -   - hybrid_adaptive_sta_smc
+2025-11-08 08:23:21,983 - INFO - 
+================================================================================
+2025-11-08 08:23:21,983 - INFO - Optimizing: classical_smc (Robust PSO)
+2025-11-08 08:23:21,983 - INFO - ================================================================================
+2025-11-08 08:23:21,983 - INFO -   Particles: 30, Iterations: 50
+2025-11-08 08:23:21,984 - INFO -   Gain bounds: [2.0, 30.0] (×6)
+2025-11-08 08:23:21,984 - INFO -   Evaluating original gains...
+2025-11-08 08:23:24,148 - INFO -     Original robust fitness: 9.1450

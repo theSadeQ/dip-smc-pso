@@ -273,7 +273,6 @@ def analyze_disturbance_rejection(
 
 def test_controller_disturbance_rejection(
     controller_name: str,
-    controller_config: Dict[str, Any],
     dynamics: DIPDynamics,
     num_trials: int = 5
 ) -> List[DisturbanceRejectionResult]:
@@ -282,7 +281,6 @@ def test_controller_disturbance_rejection(
 
     Args:
         controller_name: Name of controller
-        controller_config: Controller configuration dict
         dynamics: Dynamics model
         num_trials: Number of Monte Carlo trials per scenario
 
@@ -296,8 +294,13 @@ def test_controller_disturbance_rejection(
     # Run nominal simulation (no disturbance) to get baseline
     logger.info("  Running nominal simulation (no disturbance)...")
     nominal_gen = DisturbanceGenerator()
+
+    # Load config to get default gains
+    config = load_config("config.yaml")
+    default_gains = list(getattr(config.controller_defaults, controller_name).gains)
+
     t_nom, x_nom, u_nom = run_simulation_with_disturbance(
-        controller=create_controller(controller_name, controller_config),
+        controller=create_controller(controller_name, gains=default_gains),
         dynamics=dynamics,
         disturbance_gen=nominal_gen,
         sim_time=10.0,
@@ -325,7 +328,7 @@ def test_controller_disturbance_rejection(
         scenario_results = []
         for trial in range(num_trials):
             # Create fresh controller for each trial
-            controller = create_controller(controller_name, controller_config)
+            controller = create_controller(controller_name, gains=default_gains)
 
             # Run simulation with disturbance
             t_arr, x_arr, u_arr = run_simulation_with_disturbance(
@@ -378,8 +381,14 @@ def test_controller_disturbance_rejection(
 
 def main():
     """Main MT-8 execution."""
+    import argparse
+    parser = argparse.ArgumentParser(description='MT-8: Disturbance Rejection Analysis')
+    parser.add_argument('--trials', type=int, default=5, help='Number of Monte Carlo trials per scenario (default: 5)')
+    args = parser.parse_args()
+
     logger.info("="*80)
     logger.info("MT-8: Disturbance Rejection Analysis")
+    logger.info(f"Monte Carlo trials: {args.trials} per scenario")
     logger.info("="*80)
 
     # Load config
@@ -396,13 +405,14 @@ def main():
         "classical_smc": config.controllers.classical_smc,
         "sta_smc": config.controllers.sta_smc,
         "adaptive_smc": config.controllers.adaptive_smc,
-        # "hybrid_adaptive_sta_smc": config.controllers.hybrid_adaptive_sta_smc,  # Skip for now - interface issue
-        # "swing_up_smc": config.controllers.swing_up_smc,  # Not in factory yet
+        "hybrid_adaptive_sta_smc": config.controllers.hybrid_adaptive_sta_smc,  # FIXED: Interface issue resolved
     }
 
-    # Add MPC if available
-    if hasattr(config.controllers, 'mpc'):
-        controllers["mpc"] = config.controllers.mpc
+    # NOTE: Swing-Up SMC and MPC have interface issues - defer to separate debugging
+    # if hasattr(config.controllers, 'swing_up_smc'):
+    #     controllers["swing_up_smc"] = config.controllers.swing_up_smc
+    # if hasattr(config.controllers, 'mpc'):
+    #     controllers["mpc"] = config.controllers.mpc
 
     logger.info(f"\nTesting {len(controllers)} controllers:")
     for name in controllers.keys():
@@ -410,13 +420,12 @@ def main():
 
     # Run tests
     all_results = []
-    for controller_name, controller_config in controllers.items():
+    for controller_name in controllers.keys():
         try:
             results = test_controller_disturbance_rejection(
                 controller_name=controller_name,
-                controller_config=controller_config,
                 dynamics=dynamics,
-                num_trials=5
+                num_trials=args.trials
             )
             all_results.extend(results)
         except Exception as e:
@@ -442,7 +451,7 @@ def main():
     summary = {
         "controllers_tested": list(controllers.keys()),
         "scenarios": ["step", "impulse", "sinusoidal", "random"],
-        "num_trials_per_scenario": 5,
+        "num_trials_per_scenario": args.trials,
         "results": [asdict(r) for r in all_results]
     }
 
