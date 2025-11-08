@@ -1,0 +1,108 @@
+{
+  "classical_smc": {
+    "gains": [
+      23.068200752497802,
+      12.853586891155206,
+      5.514970338688094,
+      3.487196490326416,
+      2.2331074770549435,
+      0.14834799545581934
+    ],
+    "validation": {
+      "fixed_gains": {
+        "ic_0.05": {
+          "settling_time_mean": 10.0,
+          "settling_time_std": 0.0,
+          "overshoot_mean": 341.9978014920788,
+          "overshoot_std": 61.250806450993274,
+          "chattering_mean": 0.0989180635928508,
+          "chattering_std": 0.03973752636583946,
+          "control_effort_mean": 13.422251192444014,
+          "convergence_rate": 0.0,
+          "num_trials": 5
+        },
+        "ic_0.10": {
+          "settling_time_mean": 10.0,
+          "settling_time_std": 0.0,
+          "overshoot_mean": 402.35384930973294,
+          "overshoot_std": 147.94048755979148,
+          "chattering_mean": 0.14105539212126797,
+          "chattering_std": 0.05933567818720337,
+          "control_effort_mean": 12.205658141857697,
+          "convergence_rate": 0.0,
+          "num_trials": 5
+        },
+        "ic_0.20": {
+          "settling_time_mean": 10.0,
+          "settling_time_std": 0.0,
+          "overshoot_mean": 470.08947502339345,
+          "overshoot_std": 131.39557779785218,
+          "chattering_mean": 0.06500203550240294,
+          "chattering_std": 0.051294678761834134,
+          "control_effort_mean": 16.416225868560076,
+          "convergence_rate": 0.0,
+          "num_trials": 5
+        },
+        "ic_0.30": {
+          "settling_time_mean": 10.0,
+          "settling_time_std": 0.0,
+          "overshoot_mean": 424.73320486120167,
+          "overshoot_std": 114.96445138872541,
+          "chattering_mean": 0.0909555517566256,
+          "chattering_std": 0.05619714777723797,
+          "control_effort_mean": 15.06800222823495,
+          "convergence_rate": 0.0,
+          "num_trials": 5
+        }
+      },
+      "adaptive_scheduling": {
+        "ic_0.05": {
+          "settling_time_mean": 10.0,
+          "settling_time_std": 0.0,
+          "overshoot_mean": 406.005952557253,
+          "overshoot_std": 93.81297865773345,
+          "chattering_mean": 0.06802682161783635,
+          "chattering_std": 0.016674094230873758,
+          "control_effort_mean": 4.874267835174861,
+          "convergence_rate": 0.0,
+          "num_trials": 5
+        },
+        "ic_0.10": {
+          "settling_time_mean": 10.0,
+          "settling_time_std": 0.0,
+          "overshoot_mean": 431.0918238742535,
+          "overshoot_std": 150.2298484478864,
+          "chattering_mean": 0.07359464991500987,
+          "chattering_std": 0.029840441549373636,
+          "control_effort_mean": 3.3483720541134887,
+          "convergence_rate": 0.0,
+          "num_trials": 5
+        },
+        "ic_0.20": {
+          "settling_time_mean": 10.0,
+          "settling_time_std": 0.0,
+          "overshoot_mean": 400.20482379765815,
+          "overshoot_std": 103.77919961207334,
+          "chattering_mean": 0.06980877466277882,
+          "chattering_std": 0.03057003544227515,
+          "control_effort_mean": 4.349919090748456,
+          "convergence_rate": 0.0,
+          "num_trials": 5
+        },
+        "ic_0.30": {
+          "settling_time_mean": 10.0,
+          "settling_time_std": 0.0,
+          "overshoot_mean": 552.9381287470669,
+          "overshoot_std": 166.35640619218677,
+          "chattering_mean": 0.06195172961098274,
+          "chattering_std": 0.020018321689430175,
+          "control_effort_mean": 4.27461706510356,
+          "convergence_rate": 0.0,
+          "num_trials": 5
+        }
+      }
+    },
+    "num_trials": 5,
+    "seed": 42
+  }
+}
