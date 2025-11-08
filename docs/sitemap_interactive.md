@@ -2,6 +2,8 @@
 
 Explore the documentation structure visually with an interactive force-directed graph.
 
+**[CORE]** [Master Navigation Hub](NAVIGATION.md) - Complete documentation mapping across all 985 files and 11 navigation systems.
+
 <div id="visual-sitemap-container" style="width: 100%; height: 800px; margin: 2rem 0; border: 2px solid #e5e7eb; border-radius: 12px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);"></div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -26,6 +28,7 @@ Explore the documentation structure visually with an interactive force-directed 
 
 ## Alternative Views
 
+- {doc}`NAVIGATION` - [CORE] Master navigation hub connecting all 985 files and 11 systems
 - {doc}`sitemap_visual` - Mermaid mindmap and flowcharts
 - {doc}`documentation_structure` - Traditional text-based sitemap
 - {doc}`index` - Main landing page with hierarchical navigation

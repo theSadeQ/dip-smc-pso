@@ -216,6 +216,13 @@ meta/index
 ::::{grid} 1 2 3 3
 :gutter: 3
 
+:::{grid-item-card} [CORE] Navigation Hub (NEW!)
+:link: NAVIGATION
+:link-type: doc
+
+Master navigation hub connecting all 985 documentation files across 11 systems - your complete guide to finding anything
+:::
+
 :::{grid-item-card} 🎮 3D Interactive Pendulum (NEW!)
 :link: guides/interactive/3d-pendulum-demo
 :link-type: doc

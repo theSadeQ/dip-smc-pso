@@ -2,11 +2,18 @@
 
 Interactive visual navigation for the DIP_SMC_PSO documentation.
 
+**[CORE]** [Master Navigation Hub](NAVIGATION.md) - Complete documentation mapping across all 985 files and 11 navigation systems.
+
 ## Documentation Structure Mindmap
 
 ```{mermaid}
 mindmap
   root((DIP SMC PSO<br/>Documentation))
+    [CORE] Navigation Hub
+      NAVIGATION.md
+      Master Hub
+      985 Files
+      11 Systems
     Getting Started
       Installation Guide
       Quick Start Tutorial
@@ -61,7 +68,8 @@ mindmap
 
 ```{mermaid}
 flowchart TB
-    Start([User Starts Here]) --> Choice{What do you need?}
+    Start([User Starts Here]) --> Navigation[NAVIGATION.md<br/>Master Hub]
+    Navigation --> Choice{What do you need?}
 
     Choice -->|Learn Basics| GettingStarted[Getting Started Guide]
     Choice -->|Run Simulations| Simulations[User Guides]
