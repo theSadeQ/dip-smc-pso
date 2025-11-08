@@ -67,7 +67,7 @@ def run_single_trial_with_logging(
     controller,
     dynamics: DIPDynamics,
     initial_state: np.ndarray,
-    duration: float = 10.0,
+    duration: float = 5.0,
     dt: float = 0.01
 ) -> Dict:
     """
@@ -145,6 +145,10 @@ def run_single_trial_with_logging(
     # k1/k2 final values
     k1_final = k1_trajectory[-1]
     k2_final = k2_trajectory[-1]
+
+    # Debug: Print some trajectory values (disabled for production runs)
+    # logger.info(f"DEBUG k1: first={k1_trajectory[0]:.6f}, last={k1_trajectory[-1]:.6f}, mean={np.mean(k1_trajectory):.6f}")
+    # logger.info(f"DEBUG k2: first={k2_trajectory[0]:.6f}, last={k2_trajectory[-1]:.6f}, mean={np.mean(k2_trajectory):.6f}")
 
     # Mean |s| during active adaptation phase (first 3 seconds)
     active_phase = int(3.0 / dt)
@@ -248,8 +252,6 @@ def run_monte_carlo(
     logger.info(f"  Gains: c1={gains[0]:.3f}, lambda1={gains[1]:.3f}, c2={gains[2]:.3f}, lambda2={gains[3]:.3f}")
     logger.info(f"  Trials: {num_trials}, IC: +-{ic_magnitude} rad, Seed: {seed}")
 
-    np.random.seed(seed)
-
     # Storage
     results = {
         'chattering': [],
@@ -266,6 +268,9 @@ def run_monte_carlo(
     dynamics = DIPDynamics(config.physics)
 
     for trial in range(num_trials):
+        # Set unique seed for each trial for reproducibility
+        np.random.seed(seed + trial)
+
         # Random IC around +-ic_magnitude
         sign = 1 if np.random.rand() < 0.5 else -1
         theta1_ic = sign * (ic_magnitude + np.random.uniform(-0.01, 0.01))

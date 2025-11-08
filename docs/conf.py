@@ -111,7 +111,12 @@ extensions = [
     'jupyter_extension',          # Custom Jupyter directives (Phase 4 - custom)
     'mathviz_extension',          # Mathematical visualization library (Phase 5)
     'mathjax_extension',          # Conditional MathJax loading (Wave 2 LCP optimization)
+    'sphinxcontrib.lunrsearch',   # Full-text search via Lunr.js (client-side instant search)
 ]
+
+# Lunr.js search configuration
+lunrsearch_highlight = True  # Highlight search terms in results
+lunrsearch_indexing_limit = 1000  # Index up to 1000 files (covers all 821 docs)
 
 # MyST Parser configuration - quality-of-life features
 myst_enable_extensions = [
