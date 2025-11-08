@@ -628,6 +628,56 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 
 ------
 
+## 23) Documentation Navigation System
+
+**See:** `docs/NAVIGATION.md` for master navigation hub.
+
+**Quick Reference:**
+- Total Documentation: 985 files (814 in docs/, 171 in .project/)
+- Navigation Systems: 11 total (NAVIGATION.md is the master hub)
+- Category Indexes: 43 index.md files across all documentation domains
+- Learning Paths: 5 paths (Path 0: 125-150 hrs → Path 4: 12+ hrs)
+
+**Primary Navigation Hub:**
+- [NAVIGATION.md](docs/NAVIGATION.md) - Master hub connecting all 11 navigation systems
+  - "I Want To..." quick navigation (6 intent categories)
+  - Persona-based entry points (4 user types)
+  - Complete category index directory (43 indexes)
+  - Visual navigation tools (6 interactive systems)
+  - Attribution & cross-references (citations, dependencies, patterns)
+
+**Navigation Systems:**
+1. **NAVIGATION.md** - Master unified hub (NEW: Nov 2025)
+2. **docs/index.md** - Sphinx homepage with 11 toctrees
+3. **guides/INDEX.md** - User guides hub (43 files, 12,525 lines)
+4. **README.md** - GitHub entry point with architecture diagrams
+5. **CLAUDE.md** - Team memory & project conventions (this file)
+6. **sitemap_cards.md** - Card-based tree view with icons
+7. **sitemap_interactive.md** - D3.js force-directed graph (985 files)
+8. **sitemap_visual.md** - Mermaid mindmap & flowcharts
+9. **architecture_control_room.md** - 3D isometric system visualization
+10. **3d-pendulum-demo** - Interactive WebGL pendulum simulation
+11. **live-python-demo** - Browser-based Python code execution
+
+**User Journeys:**
+- **Complete Beginners**: NAVIGATION.md → Path 0 (beginner-roadmap.md) → Tutorial 01
+- **Quick Start**: NAVIGATION.md → Getting Started → Tutorial 01 (1-2 hrs)
+- **Researchers**: NAVIGATION.md → Research Workflows → Citations & Theory
+- **Developers**: NAVIGATION.md → API Reference → Architecture → Testing
+- **Integrators**: NAVIGATION.md → HIL Quickstart → Docker Deployment
+
+**Cross-References:**
+- All 43 category indexes link to NAVIGATION.md (standardized footer)
+- All 4 main entry points link bidirectionally to NAVIGATION.md
+- All 4 visual navigation systems include NAVIGATION.md node/card
+
+**Maintenance:**
+- Update NAVIGATION.md when adding new category indexes
+- Run validation script: `python .project/dev_tools/validate_navigation.py`
+- Rebuild Sphinx after changes: `sphinx-build -M html docs docs/_build -W`
+
+------
+
 ### Appendix: Notes
 
 - Keep this file authoritative for style, testing, and operational posture.

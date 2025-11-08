@@ -295,6 +295,8 @@ python simulate.py --validate-config
 
 ## Documentation & Learning
 
+**[CORE]** [Master Navigation Hub](docs/NAVIGATION.md) - Complete documentation mapping across all 985 files and 11 navigation systems. Start here for effortless navigation!
+
 ### Comprehensive Documentation
 
 This project provides **12,500+ lines** of professional documentation organized into four categories:

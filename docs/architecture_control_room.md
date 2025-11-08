@@ -2,6 +2,8 @@
 
 **Interactive 3D Visualization of DIP_SMC_PSO System**
 
+**[CORE]** [Master Navigation Hub](NAVIGATION.md) - Complete documentation mapping across all 985 files and 11 navigation systems.
+
 <link rel="stylesheet" href="_static/control-room.css">
 
 <div class="control-room-container">
