@@ -113,7 +113,7 @@ If you'd like to help complete Tutorial 03:
 1. Review existing PSO documentation (links above)
 2. Identify gaps not covered by existing docs
 3. Create issue on GitHub: "Documentation: Complete Tutorial 03 PSO Deep Dive"
-4. Submit PR with draft content following `docs/DOCUMENTATION_STYLE_GUIDE.md`
+4. Submit PR with draft content following `docs/meta/DOCUMENTATION_STYLE_GUIDE.md`
 
 ---
 

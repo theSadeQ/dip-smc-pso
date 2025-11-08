@@ -106,7 +106,7 @@ For detailed attribution with exact page numbers and theorem references:
 - {doc}`references/bibliography` - **Master Bibliography** with full research context
 - {doc}`CITATIONS_ACADEMIC` - Academic theory citations linked to exact locations in codebase
 - {doc}`DEPENDENCIES` - Software library citations and licenses
-- {doc}`PATTERNS` - Design pattern attribution and architectural decisions
+- {doc}`meta/PATTERNS` - Design pattern attribution and architectural decisions
 - {doc}`CITATIONS` - Master citation index and quick reference guide
 
 ---

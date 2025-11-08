@@ -180,7 +180,7 @@ Project-level documentation including changelog, contributing guidelines, and de
 - {doc}`CHANGELOG` - Version history and release notes
 - {doc}`CONTRIBUTING` - Contributing guidelines and PR workflow
 - {doc}`DEPENDENCIES` - Software dependencies and licenses
-- {doc}`PATTERNS` - Design patterns and architectural decisions
+- {doc}`meta/PATTERNS` - Design patterns and architectural decisions
 - {doc}`context` - Project context and background
 - {doc}`ACADEMIC_INTEGRITY_STATEMENT` - Academic integrity statement
 
