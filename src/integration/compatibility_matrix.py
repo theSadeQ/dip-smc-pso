@@ -270,10 +270,22 @@ class CompatibilityMatrix:
                 module = importlib.import_module(module_name)
                 importable_modules += 1
 
-                # Count components (classes and functions)
-                for name, obj in inspect.getmembers(module):
-                    if inspect.isclass(obj) or inspect.isfunction(obj):
-                        component_count += 1
+                # Count components (classes and functions) - with recursion guard
+                # Use dir() instead of inspect.getmembers() to avoid deep recursion
+                try:
+                    for name in dir(module):
+                        if not name.startswith('_'):  # Skip private members
+                            try:
+                                obj = getattr(module, name, None)
+                                if obj is not None and (inspect.isclass(obj) or inspect.isfunction(obj)):
+                                    # Only count objects defined in this module
+                                    if hasattr(obj, '__module__') and obj.__module__ == module_name:
+                                        component_count += 1
+                            except (AttributeError, RecursionError):
+                                # Skip problematic attributes that cause recursion
+                                continue
+                except RecursionError:
+                    logger.warning(f"Recursion detected while inspecting {module_name}, skipping component count")
 
             except ImportError as e:
                 critical_issues.append(CompatibilityIssue(
@@ -285,6 +297,18 @@ class CompatibilityMatrix:
                     severity=CompatibilityLevel.INCOMPATIBLE,
                     description=f"Failed to import module {module_name}: {e}",
                     recommendation="Fix import dependencies or module structure"
+                ))
+            except RecursionError as e:
+                logger.warning(f"Recursion error while analyzing {module_name}: {e}")
+                critical_issues.append(CompatibilityIssue(
+                    domain_a=domain,
+                    domain_b=domain,
+                    component_a=module_name,
+                    component_b="introspection_system",
+                    issue_type="recursion_error",
+                    severity=CompatibilityLevel.WARNING,
+                    description=f"Circular dependency detected in {module_name}",
+                    recommendation="Review module imports to remove circular dependencies"
                 ))
 
         # Calculate overall health
@@ -605,12 +629,12 @@ class CompatibilityMatrix:
         warning_issues = [issue for issue in issues if issue.severity == CompatibilityLevel.WARNING]
 
         if critical_issues:
-            recommendations.append(f"🚨 CRITICAL: Address {len(critical_issues)} incompatible components before production")
+            recommendations.append(f"[ALERT] CRITICAL: Address {len(critical_issues)} incompatible components before production")
             for issue in critical_issues[:3]:  # Top 3 critical issues
                 recommendations.append(f"   - {issue.recommendation}")
 
         if warning_issues:
-            recommendations.append(f"⚠️ WARNING: Review {len(warning_issues)} compatibility warnings")
+            recommendations.append(f"[WARNING] Review {len(warning_issues)} compatibility warnings")
             for issue in warning_issues[:2]:  # Top 2 warnings
                 recommendations.append(f"   - {issue.recommendation}")
 
@@ -619,19 +643,19 @@ class CompatibilityMatrix:
         warning_violations = [v for v in violations if v.get("severity") == "warning"]
 
         if critical_violations:
-            recommendations.append(f"🔥 URGENT: Resolve {len(critical_violations)} critical rule violations")
+            recommendations.append(f"[CRITICAL] URGENT: Resolve {len(critical_violations)} critical rule violations")
             for violation in critical_violations:
                 recommendations.append(f"   - {violation.get('recommendation', 'Address violation')}")
 
         if warning_violations:
-            recommendations.append(f"📋 REVIEW: Address {len(warning_violations)} rule warnings")
+            recommendations.append(f"[INFO] REVIEW: Address {len(warning_violations)} rule warnings")
 
         # General recommendations
         recommendations.extend([
-            "🧪 Run comprehensive integration tests to validate cross-domain functionality",
-            "📊 Monitor system health scores and address degradation promptly",
-            "🔄 Implement continuous compatibility monitoring in CI/CD pipeline",
-            "📚 Update documentation to reflect integration requirements and constraints"
+            "[TEST] Run comprehensive integration tests to validate cross-domain functionality",
+            "[MONITOR] Monitor system health scores and address degradation promptly",
+            "[CI/CD] Implement continuous compatibility monitoring in CI/CD pipeline",
+            "[DOCS] Update documentation to reflect integration requirements and constraints"
         ])
 
         return recommendations
@@ -671,20 +695,45 @@ class CompatibilityMatrix:
         }
         return recommendations.get(status, "Unknown production status")
 
-def asdict(obj) -> Dict[str, Any]:
-    """Convert dataclass to dictionary (simplified implementation)."""
+def asdict(obj, _seen=None) -> Dict[str, Any]:
+    """Convert dataclass to dictionary with recursion protection.
+
+    Args:
+        obj: Object to convert
+        _seen: Set of object IDs already processed (for recursion protection)
+
+    Returns:
+        Dictionary representation of the object
+    """
+    if _seen is None:
+        _seen = set()
+
+    # Check if we've already processed this object (circular reference protection)
+    obj_id = id(obj)
+    if obj_id in _seen:
+        return f"<circular reference to {type(obj).__name__}>"
+
     if hasattr(obj, '__dict__'):
+        _seen.add(obj_id)
         result = {}
         for key, value in obj.__dict__.items():
-            if isinstance(value, list):
-                result[key] = [asdict(item) if hasattr(item, '__dict__') else item for item in value]
-            elif hasattr(value, '__dict__'):
-                result[key] = asdict(value)
-            elif isinstance(value, Enum):
-                result[key] = value.value
-            else:
-                result[key] = value
+            try:
+                if isinstance(value, list):
+                    result[key] = [
+                        asdict(item, _seen) if hasattr(item, '__dict__') else item
+                        for item in value
+                    ]
+                elif hasattr(value, '__dict__'):
+                    result[key] = asdict(value, _seen)
+                elif isinstance(value, Enum):
+                    result[key] = value.value
+                else:
+                    result[key] = value
+            except RecursionError:
+                result[key] = f"<recursion error on {key}>"
         return result
+    elif isinstance(obj, Enum):
+        return obj.value
     else:
         return str(obj)
 
@@ -702,22 +751,22 @@ def main():
     print(f"Analysis Duration: {results['analysis_duration']:.2f}s")
     print(f"Production Ready: {results['production_readiness']['status']}")
 
-    print("\n🏥 DOMAIN HEALTH:")
+    print("\n[HEALTH] DOMAIN HEALTH:")
     for domain, health in results['domain_health'].items():
-        status_icon = "✅" if health['overall_health'] == "compatible" else "⚠️" if health['overall_health'] == "warning" else "❌"
+        status_icon = "[OK]" if health['overall_health'] == "compatible" else "[WARNING]" if health['overall_health'] == "warning" else "[ERROR]"
         print(f"  {status_icon} {domain}: {health['overall_health']} ({health['component_count']} components)")
 
-    print("\n🔗 INTEGRATION POINTS:")
+    print("\n[INTEGRATION] INTEGRATION POINTS:")
     for point in results['integration_points']:
-        status_icon = "✅" if point['validation_status'] == "compatible" else "⚠️" if point['validation_status'] == "warning" else "❌"
-        print(f"  {status_icon} {point['source_domain']} → {point['target_domain']}: {point['interface_type']}")
+        status_icon = "[OK]" if point['validation_status'] == "compatible" else "[WARNING]" if point['validation_status'] == "warning" else "[ERROR]"
+        print(f"  {status_icon} {point['source_domain']} -> {point['target_domain']}: {point['interface_type']}")
 
     if results['rule_violations']:
-        print("\n🚨 RULE VIOLATIONS:")
+        print("\n[ALERT] RULE VIOLATIONS:")
         for violation in results['rule_violations']:
             print(f"  - {violation['rule']}: {violation['description']}")
 
-    print("\n💡 RECOMMENDATIONS:")
+    print("\n[INFO] RECOMMENDATIONS:")
     for rec in results['recommendations']:
         print(f"  {rec}")
 
