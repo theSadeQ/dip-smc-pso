@@ -27,41 +27,50 @@ fault_detection:
   window_size: 50            # For adaptive mode (if enabled)
   threshold_factor: 3.0      # 3-sigma rule for adaptive mode
 
+# MT-8 ROBUST PSO OPTIMIZATION (November 8, 2025)
+# Problem: Default gains FAIL under disturbances (187-667° overshoots, 0% convergence)
+# Solution: Robust PSO with disturbance-aware fitness (50% nominal + 50% disturbed)
+# Configuration: 30 particles × 50 iterations (~4,500 evaluations per controller)
+# Disturbances: Step (10N @ t=2s), Impulse (30N pulse @ t=2s, 0.1s duration)
+# Result: 6.35% avg improvement | Hybrid controller: 21.4% improvement (best)
+# Validation: benchmarks/MT8_COMPLETE_REPORT.md
+# Technical Details: scripts/mt8_robust_pso.py, optimization_results/mt8_robust_pso_summary.json
 controller_defaults:
   classical_smc:
     gains:
-    - 5.0
-    - 5.0
-    - 5.0
-    - 0.5
-    - 0.5
-    - 0.5
+    - 23.068200752497802   # k1: Optimized from 5.0 (+360% increase)
+    - 12.853586891155206   # k2: Optimized from 5.0 (+157% increase)
+    - 5.514970338688094    # k3: Optimized from 5.0 (+10% increase)
+    - 3.487196490326416    # k4: Optimized from 0.5 (+597% increase)
+    - 2.2331074770549435   # k5: Optimized from 0.5 (+347% increase)
+    - 0.14834799545581934  # k6: Optimized from 0.5 (-70% reduction)
   sta_smc:
     gains:
-    - 8.0    # K1: Algorithmic gain (optimized for Issue #2 resolution)
-    - 4.0    # K2: Algorithmic gain (reduced from 8.0 for Issue #2 resolution)
-    - 12.0   # k1: Surface gain (maintained for proper scaling)
-    - 6.0    # k2: Surface gain (maintained for proper scaling)
-    - 4.85   # λ1: Surface coefficient (optimized for ζ=0.7 target damping)
-    - 3.43   # λ2: Surface coefficient (optimized for ζ=0.7 target damping)
+    - 2.017611719524936    # K1: MT-8 robust optimized (was 8.0, -75% reduction)
+    - 6.672119935276616    # K2: MT-8 robust optimized (was 4.0, +67% increase)
+    - 5.618034769343865    # k1: MT-8 robust optimized (was 12.0, -53% reduction)
+    - 3.7474442752642325   # k2: MT-8 robust optimized (was 6.0, -38% reduction)
+    - 4.355334618057576    # λ1: MT-8 robust optimized (was 4.85, -10% reduction)
+    - 2.054542527244675    # λ2: MT-8 robust optimized (was 3.43, -40% reduction)
   adaptive_smc:
     gains:
-    - 10.0
-    - 8.0
-    - 5.0
-    - 4.0
-    - 1.0
+    - 2.142207994033271    # k1: MT-8 robust optimized (was 10.0, -79% reduction)
+    - 3.355938383745894    # k2: MT-8 robust optimized (was 8.0, -58% reduction)
+    - 7.200505646106438    # k3: MT-8 robust optimized (was 5.0, +44% increase)
+    - 0.3374379808658892   # k4: MT-8 robust optimized (was 4.0, -92% reduction)
+    - 0.2852044368386544   # k5: MT-8 robust optimized (was 1.0, -71% reduction)
 
   # Default sliding surface gains for the hybrid adaptive super‑twisting
   # controller.  These four values correspond to [c1, lambda1, c2, lambda2].
   # They define the dynamics on the sliding surface used to drive the
   # pendulum angles to zero.
+  # MT-8: Best performance (21.4% improvement over baseline)
   hybrid_adaptive_sta_smc:
     gains:
-    - 5.0
-    - 5.0
-    - 5.0
-    - 0.5
+    - 10.148979254143576   # c1: MT-8 robust optimized (was 5.0, +103% increase)
+    - 12.839386550675101   # lambda1: MT-8 robust optimized (was 5.0, +157% increase)
+    - 6.815065802267164    # c2: MT-8 robust optimized (was 5.0, +36% increase)
+    - 2.7500136927843215   # lambda2: MT-8 robust optimized (was 0.5, +450% increase)
 controllers:
   classical_smc:
     max_force: 150.0
