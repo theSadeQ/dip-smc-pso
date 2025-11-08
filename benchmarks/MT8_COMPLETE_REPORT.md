@@ -208,10 +208,13 @@ All controllers FAILED baseline disturbance rejection tests with default gains:
    - Include energy consumption in fitness
    - Chattering minimization objective
 
-3. **Adaptive Gain Scheduling:**
-   - Detect disturbance onset
-   - Switch gains based on disturbance type/magnitude
-   - Learn online with adaptive PSO
+3. **Adaptive Gain Scheduling:** [OK] COMPLETED (Enhancement #3, November 2025)
+   - **Status**: Validated with 320 simulation + 120 HIL trials
+   - **Result**: 11-40.6% chattering reduction for Classical SMC (disturbance-type dependent)
+   - **Critical Finding**: +354% overshoot penalty for step disturbances
+   - **Deployment**: Recommended ONLY for sinusoidal/oscillatory environments
+   - **Documentation**: See `MT8_ADAPTIVE_SCHEDULING_SUMMARY.md` and `MT8_HIL_VALIDATION_SUMMARY.md`
+   - **Future Extensions**: Disturbance-aware scheduling (#3a), asymmetric scheduling (#3b), gradient-based (#3c)
 
 4. **Hardware Validation:**
    - Real disturbance rejection tests
@@ -234,11 +237,20 @@ All controllers FAILED baseline disturbance rejection tests with default gains:
 - `benchmarks/MT8_disturbance_rejection.json` - Baseline test results (JSON)
 - `benchmarks/MT8_robust_validation_summary.json` - Validation summary
 - `benchmarks/MT8_COMPLETE_REPORT.md` - This report
+- `benchmarks/MT8_ADAPTIVE_SCHEDULING_SUMMARY.md` - Enhancement #3 simulation validation (385 lines)
+- `benchmarks/MT8_HIL_VALIDATION_SUMMARY.md` - Enhancement #3 HIL validation (394 lines)
+- `benchmarks/MT8_adaptive_scheduling_results.json` - Enhancement #3 simulation data (320 trials)
+- `benchmarks/MT8_hil_validation_results.json` - Enhancement #3 HIL data (120 trials)
 
 ### Scripts
 - `scripts/mt8_disturbance_rejection.py` - Baseline disturbance testing
 - `scripts/mt8_robust_pso.py` - Robust PSO optimization
 - `scripts/mt8_validate_simple.py` - Simple validation wrapper
+- `scripts/mt8_adaptive_scheduling_validation.py` - Enhancement #3 simulation validation (319 lines)
+- `scripts/mt8_hil_validation.py` - Enhancement #3 HIL validation (348 lines)
+
+### Source Code (Enhancement #3)
+- `src/controllers/adaptive_gain_scheduler.py` - State-magnitude-based gain scheduling (287 lines)
 
 ---
 
@@ -253,7 +265,7 @@ MT-8 Disturbance Rejection Analysis successfully demonstrated that:
 
 The robust gains from this analysis are **ready for hardware-in-the-loop validation** and represent a significant improvement over nominal-only optimization.
 
-**Next Steps:** Update LT-7 paper Section 6 with these results and deploy to HIL testbed.
+**Next Steps:** [OK] COMPLETED - LT-7 paper updated with robust PSO results (Section 8.2) and adaptive scheduling findings (Enhancement #3). HIL validation complete for Classical SMC adaptive scheduling (120 trials).
 
 ---
 
