@@ -32,10 +32,10 @@ Welcome to the master navigation hub! This page connects all 11 documentation sy
 
 #### Prerequisites & Learning Paths
 
-**Path 0**: [Complete Beginner Roadmap](../.project/ai/edu/beginner-roadmap.md) (125-150 hrs)
+**Path 0**: [Complete Beginner Roadmap](../.project/ai/edu/beginner-roadmap.md) (125-175 hrs) ✅ **COMPLETE**
 - Target: ZERO coding/control theory background
-- Coverage: Computing → Python → Physics → Math → Control Theory → SMC
-- Status: Phases 1-2 complete (~2,000 lines), Phases 3-5 planned
+- Coverage: Computing → Python → Physics → Math → Control Theory → SMC → Hands-On → Advanced Skills → Mastery
+- Status: ALL 5 PHASES COMPLETE (~5,250 lines, 150 hours of learning content)
 
 **Path 1**: [Quick Start](guides/INDEX.md#path-1-quick-start) (1-2 hrs)
 - Target: Experienced developers, rapid prototyping
