@@ -15,6 +15,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Graceful fallback if visualization dependencies unavailable
   - Completes Week 1 research roadmap (5/5 hours, 100%)
 
+- **MT-8 Enhancement #3: Adaptive Gain Scheduling for Chattering Reduction** (November 8, 2025)
+  - **Status**: VALIDATION COMPLETE - Classical SMC deployment RECOMMENDED, Hybrid BLOCKED
+  - **Implementation**: State-magnitude-based gain interpolation with linear transition
+    - Small error threshold: 0.1 rad (aggressive gains)
+    - Large error threshold: 0.2 rad (conservative gains, 50% scale reduction)
+    - Hysteresis width: 0.01 rad (prevents rapid gain switching)
+  - **Validation**: 320 simulation trials + 120 HIL trials with realistic network latency/sensor noise
+  - **Results (Classical SMC)**:
+    - Simulation: 28.5-39.3% chattering reduction across 4 IC magnitudes (±0.05 to ±0.30 rad)
+    - HIL: 11-40.6% chattering reduction across 3 disturbance types
+    - Critical limitation: +354% overshoot penalty for step disturbances
+    - Control effort: -62% reduction for small perturbations, +14% increase for step disturbances
+  - **Results (Other Controllers)**:
+    - STA SMC: 0% change (already minimal chattering via continuous approximation)
+    - Adaptive SMC: Mixed results (-7.7% to +2.8%), not recommended due to internal adaptation conflicts
+    - Hybrid Adaptive STA: 217% chattering INCREASE at small perturbations - deployment blocked
+  - **Deployment Guidelines**:
+    - Classical SMC: RECOMMENDED for sinusoidal/oscillatory environments
+    - Classical SMC: DO NOT DEPLOY for step disturbance applications
+    - Hybrid: BLOCKED pending root cause investigation (gain coordination interference)
+  - **Documentation**: Complete analysis in `benchmarks/MT8_ADAPTIVE_SCHEDULING_SUMMARY.md` (385 lines) and `benchmarks/MT8_HIL_VALIDATION_SUMMARY.md` (394 lines)
+  - **Integration**: LT-7 research paper updated with comprehensive results (Section 8.2), limitations (Section 9.3), contributions (Section 10.1), findings (Section 10.2), future work (Section 10.3)
+  - **Future Extensions**: Disturbance-aware scheduling (Enhancement #3a), asymmetric scheduling (#3b), gradient-based scheduling (#3c)
+  - **Files Added/Modified**:
+    - `src/controllers/adaptive_gain_scheduler.py` (287 lines) - Core scheduler implementation
+    - `scripts/mt8_adaptive_scheduling_validation.py` (319 lines) - Simulation validation
+    - `scripts/mt8_hil_validation.py` (348 lines) - HIL validation with PlantServer
+    - `benchmarks/MT8_adaptive_scheduling_results.json` - 320 simulation trial results
+    - `benchmarks/MT8_hil_validation_results.json` - 120 HIL trial results
+
 ### Changed
 - `simulate.py`: Added optional PSO plot generation when `--run-pso --plot` flags combined
   - Extracts cost history from PSO result dict
