@@ -164,3 +164,6 @@ smc_algorithms_super_twisting___init__
 #### Swing_Up_Smc
 
 - [controllers.swing_up_smc](swing_up_smc.md)
+---
+
+**Navigation**: Return to [Master Navigation Hub](../../NAVIGATION.md) | Browse all [Documentation Categories](../../index.md)

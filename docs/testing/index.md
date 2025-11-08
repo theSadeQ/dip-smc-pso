@@ -422,3 +422,6 @@ def test_controller_gains_validation(controller_type, expected_gains_count):
 - New contributors: [Testing README](README.md)
 - Coverage enforcement: [Quality Gates Runbook](guides/coverage_quality_gates_runbook.md)
 - Benchmarking: [Performance Benchmarking Guide](guides/performance_benchmarking.md)
+---
+
+**Navigation**: Return to [Master Navigation Hub](../NAVIGATION.md) | Browse all [Documentation Categories](../index.md)

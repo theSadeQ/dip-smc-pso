@@ -52,3 +52,6 @@ flowchart TB subgraph "User Interfaces" CLI[Command Line<br/>simulate.py] Web[We
 
 system_diagrams
 ```
+---
+
+**Navigation**: Return to [Master Navigation Hub](../NAVIGATION.md) | Browse all [Documentation Categories](../index.md)
