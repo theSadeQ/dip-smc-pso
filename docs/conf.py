@@ -464,3 +464,25 @@ autodoc_mock_imports = [
 #     'min_reported_time': 0,
 #     'remove_config_comments': True,
 # }
+
+
+# ----------------------------- Link Checker -------------------------------
+# Configuration for 'sphinx-build -b linkcheck' builder
+# Validates external URLs and intersphinx references
+
+linkcheck_ignore = [
+    r'http://localhost:\d+',              # Local development servers
+    r'https://github.com/.*/issues/\d+',  # GitHub issues (may be private)
+    r'https://github.com/.*/pull/\d+',    # GitHub PRs (may be private)
+    r'https://.*\.local',                 # Local network resources
+    r'https://example\.com',              # Example URLs in documentation
+]
+
+linkcheck_timeout = 15        # Seconds per URL (default: 10)
+linkcheck_workers = 8         # Parallel workers (match parallel_jobs)
+linkcheck_retries = 2         # Retry failed URLs
+linkcheck_anchors = True      # Validate HTML anchors
+linkcheck_anchors_ignore = [
+    r'^\!',                   # Skip anchors starting with !
+    r'^#$',                   # Skip empty anchors
+]
