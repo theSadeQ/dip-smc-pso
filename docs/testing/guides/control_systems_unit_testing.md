@@ -61,7 +61,7 @@ def test_lyapunov_decrease_ratio_monitoring(): """Test LDR monitoring for stabil
 
 ---
 
-## 4. Optimal Gains Interpretation ### 4.1 Understanding PSO-Optimized Gains From `report.log` line 16, the optimal gains are: `[77.62, 44.45, 17.31, 14.25, 18.66, 9.76]` ```python
+## 4. Optimal Gains Interpretation ### 4.1 Understanding PSO-Optimized Gains From `.logs/report.log` line 16, the optimal gains are: `[77.62, 44.45, 17.31, 14.25, 18.66, 9.76]` ```python
 
 # example-metadata:
 
@@ -124,7 +124,7 @@ def test_compute_control_performance(benchmark): """Benchmark control computatio
 - `tests/test_controllers/smc/classical/test_classical_smc.py`: Test suite
 - `src/utils/monitoring/stability.py`: LDR monitoring
 - `src/utils/validation/parameter_validators.py`: Parameter validation
-- `report.log`: PSO optimization results with optimal gains
+- `.logs/report.log`: PSO optimization results with optimal gains
 
 ---
 
