@@ -489,21 +489,21 @@ class PytestIntegrationCoordinator:
         """Generate markdown report for documentation integration."""
         # Calculate pass rate with zero-check guard
         pass_rate = (result.passed_tests / result.total_tests * 100) if result.total_tests > 0 else 0.0
-        pass_rate_status = '✅' if (result.total_tests > 0 and result.passed_tests / result.total_tests >= 0.95) else '❌'
+        pass_rate_status = '[OK]' if (result.total_tests > 0 and result.passed_tests / result.total_tests >= 0.95) else '[ERROR]'
 
         report = f"""# Test Execution Report
 
 **Generated**: {result.timestamp}
 **Duration**: {result.duration_seconds:.2f} seconds
-**Production Ready**: {'✅ YES' if result.production_ready else '❌ NO'}
+**Production Ready**: {'[OK] YES' if result.production_ready else '[ERROR] NO'}
 
 ## Test Results Summary
 
 | Metric | Value | Status |
 |--------|-------|--------|
 | Total Tests | {result.total_tests} | - |
-| Passed | {result.passed_tests} | {'✅' if result.failed_tests == 0 else '⚠️'} |
-| Failed | {result.failed_tests} | {'✅' if result.failed_tests == 0 else '❌'} |
+| Passed | {result.passed_tests} | {'[OK]' if result.failed_tests == 0 else '[WARNING]'} |
+| Failed | {result.failed_tests} | {'[OK]' if result.failed_tests == 0 else '[ERROR]'} |
 | Skipped | {result.skipped_tests} | - |
 | Pass Rate | {pass_rate:.1f}% | {pass_rate_status} |
 
@@ -511,25 +511,25 @@ class PytestIntegrationCoordinator:
 
 | Component | Coverage | Threshold | Status |
 |-----------|----------|-----------|--------|
-| Overall System | {result.overall_coverage:.1f}% | 85.0% | {'✅' if result.overall_coverage >= 85 else '❌'} |
-| Critical Components | {result.critical_coverage:.1f}% | 95.0% | {'✅' if result.critical_coverage >= 95 else '❌'} |
-| Safety Critical | {result.safety_coverage:.1f}% | 100.0% | {'✅' if result.safety_coverage >= 100 else '❌'} |
-| Branch Coverage | {result.branch_coverage:.1f}% | 80.0% | {'✅' if result.branch_coverage >= 80 else '❌'} |
+| Overall System | {result.overall_coverage:.1f}% | 85.0% | {'[OK]' if result.overall_coverage >= 85 else '[ERROR]'} |
+| Critical Components | {result.critical_coverage:.1f}% | 95.0% | {'[OK]' if result.critical_coverage >= 95 else '[ERROR]'} |
+| Safety Critical | {result.safety_coverage:.1f}% | 100.0% | {'[OK]' if result.safety_coverage >= 100 else '[ERROR]'} |
+| Branch Coverage | {result.branch_coverage:.1f}% | 80.0% | {'[OK]' if result.branch_coverage >= 80 else '[ERROR]'} |
 
 ## Quality Gates
 
-{'✅ All quality gates passed!' if result.quality_gates_passed else '❌ Quality gate violations detected:'}
+{'[OK] All quality gates passed!' if result.quality_gates_passed else '[ERROR] Quality gate violations detected:'}
 
 """
 
         if result.blocking_issues:
             report += "\n### Blocking Issues\n\n"
             for issue in result.blocking_issues:
-                report += f"- ❌ {issue}\n"
+                report += f"- [ERROR] {issue}\n"
 
         report += "\n## Recommendations\n\n"
         for rec in result.recommendations:
-            report += f"- 💡 {rec}\n"
+            report += f"- [INFO] {rec}\n"
 
         report += """
 ## Artifacts Generated
@@ -545,7 +545,7 @@ class PytestIntegrationCoordinator:
 **Repository**: https://github.com/theSadeQ/dip-smc-pso.git
 **Exit Code**: {result.exit_code}
 
-🤖 Generated with [Claude Code](https://claude.ai/code)
+[AI] Generated with Claude Code (https://claude.ai/code)
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 """
