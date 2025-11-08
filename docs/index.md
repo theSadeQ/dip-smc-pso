@@ -83,143 +83,130 @@ python -m http.server 8000 --directory docs/_build/html
 ```
 
 ```{toctree}
-:maxdepth: 3
+:maxdepth: 2
+:caption: Getting Started
 :hidden:
 
-ACADEMIC_INTEGRITY_STATEMENT
-CHANGELOG
-CITATIONS
-CITATIONS_ACADEMIC
-CITATION_SYSTEM
-CITATION_SYSTEM_IMPLEMENTATION
-CODE_BEAUTIFICATION_SPECIALIST_COMPREHENSIVE_ASSESSMENT
-CONTRIBUTING
-CONTROLLER_FACTORY
-CROSS_REFERENCE_AUDIT_REPORT
-DEPENDENCIES
-DOCUMENTATION_COVERAGE_MATRIX
-DOCUMENTATION_IMPLEMENTATION_PLAN
-DOCUMENTATION_INVENTORY_SUMMARY
-DOCUMENTATION_STYLE_GUIDE
-DOCUMENTATION_SYSTEM
-EXAMPLE_VALIDATION_REPORT
-GITHUB_ISSUE_9_ULTIMATE_ORCHESTRATOR_STRATEGIC_PLAN
-IMPLEMENTATION_REPORT
-LICENSES
-PACKAGE_CONTENTS
-PATTERNS
-PHASE6_COMPLETION_SUMMARY
-PHASE_3_1_COMPLETION_REPORT
-PLANT_CONFIGURATION
-PSO_Documentation_Validation_Report
-PSO_INTEGRATION_GUIDE
-QUICKSTART_VALIDATION
 README
-RELEASE_CHECKLIST
-SPHINX_100_PERCENT_COMPLETION_REPORT
-SPHINX_PHASE10_COMPLETION_REPORT
-SPHINX_PHASE11_COMPLETION_REPORT
-SPHINX_PHASE2_COMPLETION_REPORT
-SPHINX_PHASE3_COMPLETION_REPORT
-SPHINX_PHASE4_COMPLETION_REPORT
-SPHINX_PHASE5_COMPLETION_REPORT
-SPHINX_PHASE6_COMPLETION_REPORT
-SPHINX_PHASE8_SUMMARY
-SPHINX_PHASE9_PROGRESS_REPORT
-TESTING
-ULTIMATE_ORCHESTRATOR_EXECUTIVE_DEPLOYMENT_SUMMARY
-analysis_plan
-api/index
-architecture
-architecture_control_room
-ast_traversal_patterns
-benchmarks/index
-benchmarks_methodology
-bibliography
-changelog
-cheat-sheet-template
-citation_faq
-citation_quick_reference
-claim_extraction_guide
-claude-backup
-component-index-template
-configuration-reference
-configuration_integration_documentation
-configuration_schema_validation
-context
-control_law_testing_standards
-controller_pso_interface_api_documentation
-coverage_analysis_methodology
+guides/getting-started
+guides/index
+hil_quickstart
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: User Guides & Tutorials
+:hidden:
+
+tutorials/index
+examples/index
+workflows/index
+streamlit_dashboard_guide
 deployment/DEPLOYMENT_GUIDE
 deployment/STREAMLIT_DEPLOYMENT
 deployment/docker
-deployment_validation_checklists
-documentation_structure
-executive_summary_template
-fault_detection_guide
-fault_detection_system_documentation
-fdi_threshold_calibration_methodology
-guides/getting-started
-guides/getting-started-validation-report
-guides/index
-hil_quickstart
-integration-guide
-integration-guide-template
-maintenance-guide
-mathematical_algorithm_validation
-mathematical_foundations/index
-mathematical_validation_procedures
-memory_management_patterns
-memory_management_quick_reference
-module-readme-template
-numerical_stability_guide
-plant_model
-production/index
-pso_configuration_schema_documentation
-pso_convergence_plots
-pso_convergence_theory
-pso_factory_integration_patterns
-pso_integration_technical_specification
-pso_optimization_workflow_specifications
-pso_optimization_workflow_user_guide
-pso_troubleshooting_maintenance_manual
-quality_gate_independence_framework
-quality_gates
-quick-start-template
-reference/analysis/index
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: API Reference
+:hidden:
+
+api/index
 reference/controllers/index
-reference/interfaces/index
-reference/optimization/index
 reference/plant/index
+reference/optimization/index
 reference/simulation/index
+reference/analysis/index
 reference/utils/index
-regex_pattern_reference
-reproduction_guide
-research_workflow
-results_readme
+reference/interfaces/index
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Theory & Mathematics
+:hidden:
+
+theory/index
+mathematical_foundations/index
+pso_convergence_theory
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Testing & Validation
+:hidden:
+
+testing/index
+benchmarks/index
+coverage/index
+validation/index
+quality_gates
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Configuration & Architecture
+:hidden:
+
+architecture
+architecture_control_room
+configuration-reference
+CONTROLLER_FACTORY
+PLANT_CONFIGURATION
+plant_model
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Advanced Topics
+:hidden:
+
+production/index
+PSO_INTEGRATION_GUIDE
+fault_detection_guide
+memory_management_patterns
+numerical_stability_guide
 safe_operations_reference
-safety_system_validation_protocols
+research_workflow
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Research & Presentation
+:hidden:
+
+presentation/index
+thesis/index
+bibliography
+CITATIONS
+CITATIONS_ACADEMIC
+```
+
+```{toctree}
+:maxdepth: 1
+:caption: Navigation & Reference
+:hidden:
+
+documentation_structure
 sitemap_cards
 sitemap_interactive
 sitemap_visual
-streamlit_dashboard_guide
 symbols
-technical-reference
-test_execution_execution_guide
-test_execution_guide
-test_infrastructure_documentation
-test_infrastructure_validation_report
-test_protocols
-testing-and-benchmarks
-testing/index
-theorem_verification_guide
-theory/index
-theory_overview
-use_cases
-validation/index
-verification_checklist
-versioning_guide
-workflows/index
+```
+
+```{toctree}
+:maxdepth: 1
+:caption: Project Information
+:hidden:
+
+CHANGELOG
+changelog
+CONTRIBUTING
+LICENSES
+DEPENDENCIES
+ACADEMIC_INTEGRITY_STATEMENT
+meta/index
 ```
 
 ## Visual Navigation
@@ -241,13 +228,6 @@ Real-time physics simulation with WebGL rendering - adjust gains, set angles, wa
 :link-type: doc
 
 Run Python code in browser with NumPy, Matplotlib - edit examples, see results instantly, zero installation
-:::
-
-:::{grid-item-card} 📱 Install as App (NEW!)
-:link: SPHINX_PHASE6_COMPLETION_REPORT
-:link-type: doc
-
-Progressive Web App - Install on mobile/desktop, work offline, automatic updates, native app experience
 :::
 
 :::{grid-item-card} 🎛️ Control Room

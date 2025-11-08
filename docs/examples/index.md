@@ -1,16 +1,25 @@
 # Examples
 
-This section provides runnable examples built with Sphinx‑Gallery. In fast mode (DOCS_FAST=1), only lightweight examples run to keep CI quick.
+This section provides example code and usage patterns for the double-inverted pendulum control system.
 
-<!-- TODO: Auto-generate examples gallery with Sphinx-Gallery -->
-<!-- ```{toctree}
-:maxdepth: 1
-:hidden:
+## Status: Sphinx-Gallery Integration
 
-auto_examples/index
-``` -->
+**Current Status:** Deferred (not implemented)
 
-<!-- See the full gallery: {ref}`auto_examples/index` -->
+The automatic examples gallery using Sphinx-Gallery is planned but not yet implemented. This decision was made to prioritize:
+- Research validation (Phase 5, completed November 7, 2025)
+- Controller benchmarking and documentation
+- Research paper preparation
+
+**Alternative:** See existing examples in:
+- `notebooks/` - Jupyter notebooks with interactive examples
+- `scripts/` - Standalone Python scripts demonstrating key features
+- Tutorial documentation with code snippets
+
+**Future Plans:** Sphinx-Gallery integration will be reconsidered based on:
+- User demand for auto-generated example galleries
+- Maintenance overhead vs. benefits
+- Availability of development resources
 
 
 ```{toctree}
