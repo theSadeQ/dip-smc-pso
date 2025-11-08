@@ -161,7 +161,7 @@ Connects simulation to physical hardware for real-world testing. Plant server an
 
 **Architecture & Design:**
 - {doc}`architecture` - System architecture overview
-- {doc}`PATTERNS` - Design patterns and architectural decisions
+- {doc}`meta/PATTERNS` - Design patterns and architectural decisions
 - {doc}`theory/index` - Control theory foundations
 
 **Implementation Guides:**
