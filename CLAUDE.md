@@ -65,6 +65,8 @@ bash .dev_tools/recover_project.sh
 python .dev_tools/roadmap_tracker.py
 ```
 
+## Check Roadmap Progress
+
 ### Key Tools
 1. **Project State Manager** (`.dev_tools/project_state_manager.py`) - Tracks phase, roadmap progress, completed tasks
 2. **Git Recovery Script** (`.dev_tools/recover_project.sh`) - 30-second recovery workflow
@@ -109,7 +111,7 @@ A Python framework for simulating, controlling, and analyzing a double‑inverte
 
 ### 5.2 Representative Layout (merged)
 
-```
+```bash
 src/
 ├─ controllers/
 │  ├─ classic_smc.py
@@ -150,7 +152,7 @@ src/
 
 **Top‑level**
 
-```
+```bash
 simulate.py        # CLI entry
 streamlit_app.py   # Web UI
 config.yaml        # Main configuration
@@ -178,7 +180,7 @@ README.md, CHANGELOG.md
 ### 6.2 Integration with Main Documentation
 
 **Learning Path Progression**:
-```
+```bash
 Path 0: Complete Beginner (NEW)
   .ai/edu/beginner-roadmap.md (125-150 hours) ->
 
@@ -358,6 +360,8 @@ python -c "from src.integration.production_readiness import ProductionReadinessS
            print(f'Score: {result.overall_score:.1f}/100')"
 ```
 
+## Production Readiness Reports
+
 ### Phase 5: Research Phase (october 29 - November 7, 2025)
 
 **Status**: [OK] COMPLETE (11/11 tasks, 100%)
@@ -389,7 +393,7 @@ python -c "from src.integration.production_readiness import ProductionReadinessS
 - Use `.cache/` for ephemeral data
 
 ### Config Consolidation (Use `.project/` as CANONICAL)
-```
+```bash
 .project/                          # CANONICAL CONFIG ROOT
 ├─ ai/config/                     # AI configurations
 ├─ claude/                        # Claude Code settings
@@ -528,6 +532,8 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 # 5. Tell User to Hard Refresh Browser (ctrl+shift+r)
 ```
 
+## Overview
+
 ### Auto-rebuild Triggers
 - Sphinx source files: `docs/*.md`, `docs/**/*.rst`
 - Static assets: `docs/_static/*.css`, `docs/_static/*.js`, `docs/_static/*.png`
@@ -588,6 +594,8 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 # User: "find the Adaptive SMC Controller and Analyze Its Test Results"
 # Claude Triggers: Grep -> Filesystem -> Pytest-mcp -> Mcp-analyzer
 ```
+
+## Overview
 
 ### Orchestration Rules (for Claude)
 
