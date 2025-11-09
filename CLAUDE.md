@@ -546,35 +546,37 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 
 **For Users:** Just ask naturally! No special keywords required.
 
-### Quick Reference: Available MCP Servers (11 Total)
+### Quick Reference: Available MCP Servers (11 Total - VERIFIED INSTALLED)
 
 | Server | Auto-Trigger Keywords | Primary Use Cases |
 |--------|----------------------|-------------------|
-| **pandas-mcp** | analyze, plot, statistics, convergence | Data analysis, PSO results |
-| **context7** | find, search, where, related | Doc search, cross-refs |
-| **puppeteer** | test, screenshot, UI, dashboard | Streamlit testing |
-| **numpy-mcp** | matrix, eigenvalue, numerical | Linear algebra ops |
 | **filesystem** | inspect, read, analyze files | Code/log analysis |
 | **github** | issue, PR, commit | Issue tracking |
 | **sequential-thinking** | **plan**, debug, investigate, verify, figure out | **Planning**, debugging, systematic analysis |
+| **puppeteer** | test, screenshot, UI, dashboard | Streamlit testing |
+| **mcp-debugger** | debug, postman, API | API endpoint testing |
+| **pytest-mcp** | test failure, pytest, debug | Test debugging |
 | **git-mcp** | git history, branch, stats | Advanced Git ops |
 | **sqlite-mcp** | query, database, results | PSO results DB |
-| **pytest-mcp** | test failure, pytest, debug | Test debugging |
 | **mcp-analyzer** | lint, ruff, vulture, quality | Code quality checks |
+| **context7** | find, search, where, related | Doc search, cross-refs |
+| **lighthouse-mcp** | audit, accessibility, performance | Lighthouse audits |
+
+**NOTE:** numpy-mcp and pandas-mcp were removed (local server files not found). Can be reinstalled later if needed.
 
 ### Multi-MCP Collaboration (MANDATORY)
 
 **Chain 3-5 MCPs for complete workflows:**
-- **Data Analysis**: filesystem → pandas-mcp → numpy-mcp → sqlite-mcp
+- **Data Analysis**: filesystem → sqlite-mcp → mcp-analyzer
 - **Documentation**: context7 → filesystem → git-mcp
-- **Testing**: pytest-mcp → puppeteer → pandas-mcp
-- **Research**: context7 → pandas-mcp → numpy-mcp
+- **Testing**: pytest-mcp → puppeteer → mcp-analyzer
+- **Research**: context7 → filesystem → git-mcp
 - **Debugging**: sequential-thinking → pytest-mcp → filesystem
 
 **Example Multi-MCP Workflow:**
 ```bash
 # User: "Find the adaptive SMC controller and analyze its test results"
-# Claude triggers: context7 → filesystem → pytest-mcp → pandas-mcp → numpy-mcp
+# Claude triggers: context7 → filesystem → pytest-mcp → mcp-analyzer
 ```
 
 ### Orchestration Rules (FOR CLAUDE)
@@ -591,8 +593,8 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 
 **Users can ask naturally (all work the same):**
 - "Where's the adaptive SMC?" → context7 + filesystem
-- "Is this CSV good?" → pandas-mcp + numpy-mcp
-- "Test the dashboard" → puppeteer
+- "Check code quality" → mcp-analyzer + filesystem
+- "Test the dashboard" → puppeteer + lighthouse-mcp
 - "What's wrong with this controller?" → filesystem + pytest-mcp + sequential-thinking
 
 **Configuration:** `.mcp.json` (11 servers) | `.ai/config/settings.local.json` (`enableAllProjectMcpServers: true`)
