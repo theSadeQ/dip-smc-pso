@@ -161,12 +161,12 @@ class HybridWithSScheduling(HybridAdaptiveSTASMC):
         """
         Compute control with |s|-based adaptive scheduling.
         """
-        # Compute sliding surface
-        theta1, omega1, theta2, omega2, cart_pos, cart_vel = state
+        # State format: [x, theta1, theta2, xdot, theta1dot, theta2dot]
+        x, theta1, theta2, xdot, theta1dot, theta2dot = state
 
         # Sliding surface for each pendulum
-        s1 = self.c1 * theta1 + omega1
-        s2 = self.c2 * theta2 + omega2
+        s1 = self.c1 * theta1 + theta1dot
+        s2 = self.c2 * theta2 + theta2dot
         s = np.array([s1, s2])
 
         self.s_history.append(np.linalg.norm(s))
@@ -237,14 +237,14 @@ def run_single_trial(s_aggressive: float, s_conservative: float,
         dynamics_model=dynamics
     )
 
-    # Random initial condition
+    # Random initial condition - state format: [x, theta1, theta2, xdot, theta1dot, theta2dot]
     ic = np.array([
+        0.0,  # cart_pos (x)
         np.random.uniform(-IC_RANGE, IC_RANGE),  # theta1
-        0.0,  # omega1
         np.random.uniform(-IC_RANGE, IC_RANGE),  # theta2
-        0.0,  # omega2
-        0.0,  # cart_pos
-        0.0   # cart_vel
+        0.0,  # cart_vel (xdot)
+        0.0,  # theta1dot (omega1)
+        0.0   # theta2dot (omega2)
     ])
 
     # Simulation
@@ -266,13 +266,17 @@ def run_single_trial(s_aggressive: float, s_conservative: float,
 
         # Check if dynamics computation succeeded
         if not result.success or len(result.state_derivative) == 0:
-            print(f"[ERROR] Dynamics computation failed at t={t:.3f}")
-            print(f"  State: {state}")
-            print(f"  Control: {u}")
-            print(f"  Success: {result.success}")
-            print(f"  State derivative shape: {result.state_derivative.shape}")
-            print(f"  Info: {result.info}")
-            raise RuntimeError("Dynamics computation failed")
+            # System became unstable - return high penalty for PSO
+            print(f"[WARN] Simulation failed at t={t:.3f} (state diverged)")
+            return {
+                'chattering': 1e6,  # High penalty
+                'control_effort': 1e6,
+                'tracking_error': 1e6,
+                'final_error': 1e6,  # High error for PSO objective
+                's_magnitude_mean': 1e6,
+                'failed': True,
+                'failure_time': t
+            }
 
         state = state + result.state_derivative * DT
         state_history.append(state.copy())
