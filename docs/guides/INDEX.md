@@ -4,7 +4,7 @@
 
 [BLUE] **Looking for something specific?** See the [Master Navigation Hub](../NAVIGATION.md) for complete documentation mapping across all 985 files and 11 navigation systems.
 
-[GREEN] **Complete Beginner?** Start with [Path 0: Beginner Roadmap](../.project/ai/edu/beginner-roadmap.md) (125-175 hours) - Takes you from ZERO coding/control theory background to running simulations confidently. **NOW COMPLETE** with all 5 phases! ✅
+[GREEN] **Complete Beginner?** Start with [Path 0: Beginner Roadmap](../.project/ai/edu/beginner-roadmap.md) (125-175 hours) - Takes you from ZERO coding/control theory background to running simulations confidently. **NOW COMPLETE** with all 5 phases! [OK]
 
 This is your central navigation hub for all user guides, tutorials, and learning resources. Whether you're a beginner taking your first steps or an experienced researcher implementing novel controllers, you'll find the right resources here.
 
@@ -47,7 +47,7 @@ interactive_visualizations
 - [User Guide](user-guide.md) - Comprehensive daily usage reference (826 lines, 30 min)
 - [Quick Reference](QUICK_REFERENCE.md) - Command syntax cheat sheet (5 min)
 
-**Recommended Start**: Getting Started Guide → Tutorial 01 → User Guide
+**Recommended Start**: Getting Started Guide -> Tutorial 01 -> User Guide
 
 ---
 
@@ -81,7 +81,7 @@ tutorials/tutorial-01-validation-report
 
 ---
 
-## How-To Guides
+## How-to Guides
 
 Task-oriented recipes for accomplishing specific goals quickly.
 
@@ -194,7 +194,7 @@ workflows/pso-hybrid-smc
 workflows/pso-sta-smc
 ```
 
-### Hardware-in-the-Loop (HIL) Workflows
+### Hardware-in-the-loop (hil) Workflows
 
 Real-time simulation and hardware integration procedures.
 
@@ -214,44 +214,44 @@ workflows/pso-hil-tuning
 
 ## Learning Paths
 
-### Path 1: Quick Start (1-2 hours)
+### Path 1: Quick Start (1-2 Hours)
 **Perfect for**: First-time users, rapid prototyping, initial exploration
 
 ```
-Getting Started → Tutorial 01 → How-To: Running Simulations
+Getting Started -> Tutorial 01 -> How-To: Running Simulations
 ```
 
 **Outcome**: Run simulations, modify parameters, interpret basic results
 
 ---
 
-### Path 2: Controller Expert (4-6 hours)
+### Path 2: Controller Expert (4-6 Hours)
 **Perfect for**: Control systems researchers, comparative studies, selecting optimal controller
 
 ```
-Getting Started → Tutorial 01 → Tutorial 02 → Tutorial 03 → SMC Theory → How-To: Optimization Workflows
+Getting Started -> Tutorial 01 -> Tutorial 02 -> Tutorial 03 -> SMC Theory -> How-To: Optimization Workflows
 ```
 
 **Outcome**: Select best controller for your application, optimize gains, understand tradeoffs
 
 ---
 
-### Path 3: Custom Development (8-12 hours)
+### Path 3: Custom Development (8-12 Hours)
 **Perfect for**: Implementing novel SMC algorithms, extending the framework
 
 ```
-Getting Started → Tutorials 01-02 → Controllers API → Tutorial 04 → Tutorial 03 → How-To: Testing & Validation → SMC Theory
+Getting Started -> Tutorials 01-02 -> Controllers API -> Tutorial 04 -> Tutorial 03 -> How-To: Testing & Validation -> SMC Theory
 ```
 
 **Outcome**: Custom SMC ready for research, fully tested, integrated with PSO
 
 ---
 
-### Path 4: Research Publication (12+ hours)
+### Path 4: Research Publication (12+ Hours)
 **Perfect for**: Graduate students, academic researchers, industrial R&D
 
 ```
-Complete Paths 1-2 → Tutorial 05 → How-To: Result Analysis → PSO Theory → DIP Dynamics → User Guide (Batch Processing) → All API Reference
+Complete Paths 1-2 -> Tutorial 05 -> How-To: Result Analysis -> PSO Theory -> DIP Dynamics -> User Guide (Batch Processing) -> All API Reference
 ```
 
 **Outcome**: Publication-ready research with statistical validation, reproducible results
@@ -289,9 +289,9 @@ Complete Paths 1-2 → Tutorial 05 → How-To: Result Analysis → PSO Theory �
 
 | Level | Start Here |
 |-------|------------|
-| **Beginner** | [Getting Started](getting-started.md) → [Tutorial 01](tutorials/tutorial-01-first-simulation.md) |
-| **Intermediate** | [Tutorial 02](tutorials/tutorial-02-controller-comparison.md) → [Tutorial 03](tutorials/tutorial-03-pso-optimization.md) |
-| **Advanced** | [Tutorial 04](tutorials/tutorial-04-custom-controller.md) → [Theory Guides](theory/README.md) |
+| **Beginner** | [Getting Started](getting-started.md) -> [Tutorial 01](tutorials/tutorial-01-first-simulation.md) |
+| **Intermediate** | [Tutorial 02](tutorials/tutorial-02-controller-comparison.md) -> [Tutorial 03](tutorials/tutorial-03-pso-optimization.md) |
+| **Advanced** | [Tutorial 04](tutorials/tutorial-04-custom-controller.md) -> [Theory Guides](theory/README.md) |
 
 ---
 
@@ -299,27 +299,27 @@ Complete Paths 1-2 → Tutorial 05 → How-To: Result Analysis → PSO Theory �
 
 Based on user engagement and typical workflows:
 
-1. **[Getting Started Guide](getting-started.md)** ⭐⭐⭐⭐⭐
+1. **[Getting Started Guide](getting-started.md)** [STAR][STAR][STAR][STAR][STAR]
    - Entry point for 95% of users
    - Installation and first simulation
    - 523 lines, 15 minutes
 
-2. **[Tutorial 01: First Simulation](tutorials/tutorial-01-first-simulation.md)** ⭐⭐⭐⭐⭐
+2. **[Tutorial 01: First Simulation](tutorials/tutorial-01-first-simulation.md)** [STAR][STAR][STAR][STAR][STAR]
    - Hands-on introduction to DIP and Classical SMC
    - Expected results and troubleshooting
    - 600 lines, 45 minutes
 
-3. **[Tutorial 03: PSO Optimization](tutorials/tutorial-03-pso-optimization.md)** ⭐⭐⭐⭐
+3. **[Tutorial 03: PSO Optimization](tutorials/tutorial-03-pso-optimization.md)** [STAR][STAR][STAR][STAR]
    - Automated gain tuning is highly requested
    - Practical convergence analysis
    - 865 lines, 90 minutes
 
-4. **[Controllers API](api/controllers.md)** ⭐⭐⭐⭐
+4. **[Controllers API](api/controllers.md)** [STAR][STAR][STAR][STAR]
    - Essential for programmatic usage
    - Factory patterns and gain bounds
    - 726 lines, 30 minutes
 
-5. **[User Guide](user-guide.md)** ⭐⭐⭐⭐
+5. **[User Guide](user-guide.md)** [STAR][STAR][STAR][STAR]
    - Comprehensive reference
    - Daily usage workflows
    - 826 lines, 30 minutes
