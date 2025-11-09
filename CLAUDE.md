@@ -546,7 +546,7 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 
 **For Users:** Just ask naturally! No special keywords required.
 
-### Quick Reference: Available MCP Servers (13 Total - 12 Operational)
+### Quick Reference: Available MCP Servers (12 Total - All Operational)
 
 | Server | Auto-Trigger Keywords | Primary Use Cases |
 |--------|----------------------|-------------------|
@@ -559,28 +559,27 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 | **git-mcp** | git history, branch, stats | Advanced Git ops |
 | **sqlite-mcp** | query, database, results | PSO results DB |
 | **mcp-analyzer** | lint, ruff, vulture, quality | Code quality checks |
-| **context7** | find, search, where, related | Doc search, cross-refs (requires API key) |
 | **lighthouse-mcp** | audit, accessibility, performance | Lighthouse audits |
 | **pandas-mcp** | data analysis, statistics, plotting | PSO data analysis |
 | **numpy-mcp** | matrix ops, numerical compute | Control theory math |
 
 **NOTES:**
-- **context7** requires API key from context7.com/dashboard (optional, provides higher rate limits)
 - **pandas-mcp** and **numpy-mcp** are local custom servers (configured in `.project/mcp/servers/`)
+- For semantic documentation search, use **filesystem** + **git-mcp** + **Grep** combination
 
 ### Multi-MCP Collaboration (MANDATORY)
 
 **Chain 3-5 MCPs for complete workflows:**
-- **Data Analysis**: filesystem → sqlite-mcp → mcp-analyzer
-- **Documentation**: context7 → filesystem → git-mcp
+- **Data Analysis**: filesystem → sqlite-mcp → pandas-mcp → mcp-analyzer
+- **Documentation**: filesystem → git-mcp → Grep (built-in search)
 - **Testing**: pytest-mcp → puppeteer → mcp-analyzer
-- **Research**: context7 → filesystem → git-mcp
+- **Research**: Grep → filesystem → git-mcp → pandas-mcp
 - **Debugging**: sequential-thinking → pytest-mcp → filesystem
 
 **Example Multi-MCP Workflow:**
 ```bash
 # User: "Find the adaptive SMC controller and analyze its test results"
-# Claude triggers: context7 → filesystem → pytest-mcp → mcp-analyzer
+# Claude triggers: Grep → filesystem → pytest-mcp → mcp-analyzer
 ```
 
 ### Orchestration Rules (FOR CLAUDE)
@@ -589,19 +588,19 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 2. For "complete analysis" tasks, use full pipeline (3-5 MCPs minimum)
 3. For debugging, combine sequential-thinking + domain-specific MCPs
 4. **For PLANNING, ALWAYS use sequential-thinking first** (most commonly missed!)
-5. For research workflows: context7 → filesystem → relevant analysis MCPs
+5. For research workflows: Grep → filesystem → relevant analysis MCPs
 6. **Understand intent, not keywords**: "where is" = search, "check" = analyze, "test" = validate, **"plan" = systematic thinking**
 7. **Chain automatically**: Complete full workflow without asking user for next step
 
 ### Natural Language Examples
 
 **Users can ask naturally (all work the same):**
-- "Where's the adaptive SMC?" → context7 + filesystem
+- "Where's the adaptive SMC?" → Grep + filesystem
 - "Check code quality" → mcp-analyzer + filesystem
 - "Test the dashboard" → puppeteer + lighthouse-mcp
 - "What's wrong with this controller?" → filesystem + pytest-mcp + sequential-thinking
 
-**Configuration:** `.mcp.json` (13 servers) | `.project/ai/config/mcp_usage_guide.md` (auto-trigger guide)
+**Configuration:** `.mcp.json` (12 servers) | `.project/ai/config/mcp_usage_guide.md` (auto-trigger guide)
 
 ------
 
@@ -630,7 +629,7 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 - Test coverage gates met (85% overall / 95% critical / 100% safety‑critical).
 - Single‑threaded operation stable; no dependency conflicts; memory bounded.
 - Clear, validated configuration; reproducible experiments.
-- MCP servers auto-trigger for appropriate tasks; 12/13 servers operational (context7 requires user API key).
+- MCP servers auto-trigger for appropriate tasks; all 12 servers operational.
 
 ------
 

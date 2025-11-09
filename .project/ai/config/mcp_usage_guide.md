@@ -9,7 +9,7 @@
 **FOR CLAUDE**: These rules are instructions for AI behavior, NOT requirements for user prompts.
 
 **USER NOTE**: You DON'T need to use exact keywords or craft special prompts. Just ask naturally!
-- "Where's the adaptive SMC?" → Claude uses context7 + filesystem automatically
+- "Where's the adaptive SMC?" → Claude uses Grep + filesystem automatically
 - "Check code quality" → Claude uses mcp-analyzer + filesystem automatically
 - "Test the dashboard" → Claude uses puppeteer automatically
 
@@ -20,13 +20,6 @@
 - Computing statistics (mean, std, confidence intervals)
 - Plotting convergence curves or performance metrics
 - Keywords: "analyze data", "plot results", "statistical analysis", "convergence"
-
-### Context7 MCP - Auto-trigger when:
-- Searching documentation for specific topics
-- Finding related code/docs across the project
-- Validating cross-references between files
-- Keywords: "find", "search docs", "where is", "related to", "references"
-- **NOTE**: Requires API key from context7.com/dashboard (optional but provides higher rate limits)
 
 ### Puppeteer MCP - Auto-trigger when:
 - Testing Streamlit dashboard functionality
@@ -93,7 +86,7 @@
 
 ### Single-MCP Tasks:
 ```bash
-# Context7 only
+# Grep only
 "Find documentation about sliding mode control"
 
 # Pandas only
@@ -105,12 +98,12 @@
 # 3-MCP Pipeline: Research → Analysis → Computation
 "Search documentation for PSO theory, then analyze convergence data from
 optimization_results/pso_run_20250113.csv and compute statistical significance"
-→ Triggers: context7 → pandas-mcp → numpy-mcp
+→ Triggers: Grep → pandas-mcp → numpy-mcp
 
 # 4-MCP Pipeline: Search → Read → Test → Analyze
 "Find the adaptive SMC controller code, inspect its implementation,
 test it on the dashboard, and analyze its performance metrics"
-→ Triggers: context7 → filesystem → puppeteer → pandas-mcp
+→ Triggers: Grep → filesystem → puppeteer → pandas-mcp
 
 # 5-MCP Pipeline: Quality → Lint → History → Fix → Test
 "Analyze code quality issues in controllers, trace when they were introduced,
@@ -125,7 +118,7 @@ load the corresponding CSV files, and compute confidence intervals"
 # Complete Documentation Pipeline
 "Search for all references to chattering mitigation, read the related files,
 analyze git blame for authorship, and generate a cross-reference report"
-→ Triggers: context7 → filesystem → git-mcp → pandas-mcp
+→ Triggers: Grep → filesystem → git-mcp → pandas-mcp
 ```
 
 ---
@@ -156,16 +149,16 @@ analyze git blame for authorship, and generate a cross-reference report"
 - Fallback to manual tools if MCP unavailable
 
 ### MCP Collaboration Patterns (MANDATORY):
-- **Data Analysis Pipeline**: filesystem → sqlite-mcp → mcp-analyzer
-- **Documentation Workflow**: context7 → filesystem → git-mcp (find → read → trace history)
+- **Data Analysis Pipeline**: filesystem → sqlite-mcp → pandas-mcp → mcp-analyzer
+- **Documentation Workflow**: Grep → filesystem → git-mcp (find → read → trace history)
 - **Testing Pipeline**: pytest-mcp → puppeteer → lighthouse-mcp (debug → UI test → audit)
 - **Code Quality**: mcp-analyzer → filesystem → git-mcp (lint → inspect → commit analysis)
-- **Research Workflow**: context7 → filesystem → git-mcp (search theory → read code → trace history)
+- **Research Workflow**: Grep → filesystem → git-mcp (search theory → read code → trace history)
 - **Debugging Session**: sequential-thinking → pytest-mcp → filesystem (systematic → test trace → code inspection)
 
 ---
 
-## 6) Available MCP Servers (11 Total - VERIFIED INSTALLED)
+## 6) Available MCP Servers (12 Total - All Operational)
 
 | Server | Auto-Trigger Keywords | Primary Use Cases |
 |--------|----------------------|-------------------|
@@ -178,13 +171,14 @@ analyze git blame for authorship, and generate a cross-reference report"
 | **git-mcp** | git history, branch, stats | Advanced Git ops |
 | **sqlite-mcp** | query, database, results | PSO results DB |
 | **mcp-analyzer** | lint, ruff, vulture, quality | Code quality checks |
-| **context7** | find, search, where, related | Doc search, cross-refs |
 | **lighthouse-mcp** | audit, accessibility, performance | Lighthouse audits |
+| **pandas-mcp** | data analysis, statistics, plotting | PSO data analysis |
+| **numpy-mcp** | matrix ops, numerical compute | Control theory math |
 
 **INSTALLATION STATUS (Nov 2025):**
-- ✅ All 11 servers installed and operational
+- ✅ All 12 servers installed and operational
 - ✅ Paths updated to correct npm global location (`C:\Program Files\nodejs\node_modules\`)
-- ❌ numpy-mcp and pandas-mcp removed (local server files not found)
+- ✅ Local custom servers: pandas-mcp and numpy-mcp (`.project/mcp/servers/`)
 
 ---
 
@@ -197,7 +191,7 @@ analyze git blame for authorship, and generate a cross-reference report"
 - **Context preservation**: MCPs share results within the same Claude response
 
 ### How Claude Should Think:
-1. **Identify task domains**: "Search docs" = context7, "analyze data" = pandas, "test UI" = puppeteer
+1. **Identify task domains**: "Search docs" = Grep, "analyze data" = pandas, "test UI" = puppeteer
 2. **Chain dependencies**: What output from MCP A feeds into MCP B?
 3. **Parallel vs Sequential**: Independent tasks → parallel; dependent tasks → sequential
 4. **Always prefer more MCPs**: If 3 MCPs can solve it better than 1, use all 3
@@ -207,14 +201,14 @@ analyze git blame for authorship, and generate a cross-reference report"
 ❌ **Bad (Single-MCP thinking):**
 ```
 User: "Find the controller and analyze its test results"
-Claude: Uses context7 to find controller → stops
+Claude: Uses Grep to find controller → stops
          User asks again → uses pandas to analyze → stops
 ```
 
 ✅ **Good (Multi-MCP orchestration):**
 ```
 User: "Find the controller and analyze its test results"
-Claude: context7 (find file) → filesystem (read code) →
+Claude: Grep (find file) → filesystem (read code) →
         pytest-mcp (get test results) → pandas-mcp (analyze metrics) →
         numpy-mcp (compute statistics) → Complete answer in one response
 ```
@@ -224,7 +218,7 @@ Claude: context7 (find file) → filesystem (read code) →
 2. For "complete analysis" tasks, use full pipeline (3-5 MCPs minimum)
 3. For debugging tasks, always combine sequential-thinking + domain-specific MCPs
 4. **For PLANNING tasks, ALWAYS use sequential-thinking first** (most commonly missed!)
-5. For research workflows, always: context7 → filesystem → relevant analysis MCPs
+5. For research workflows, always: Grep → filesystem → relevant analysis MCPs
 6. Never ask user "should I also analyze X?" - just do it with appropriate MCP
 7. **Understand intent, not keywords**: "where is" = search, "check" = analyze, "test" = validate, **"plan" = systematic thinking**
 8. **Be proactive**: If task implies data analysis, use pandas even if not explicitly requested
@@ -238,10 +232,10 @@ Claude: context7 (find file) → filesystem (read code) →
 
 | Your Natural Request | What Claude Understands | MCPs Used |
 |---------------------|------------------------|-----------|
-| "Where's the code for X?" | Search + Read | context7 → filesystem |
-| "Show me X" | Search + Read | context7 → filesystem |
-| "Find X implementation" | Search + Read | context7 → filesystem |
-| "I need to see X" | Search + Read | context7 → filesystem |
+| "Where's the code for X?" | Search + Read | Grep → filesystem |
+| "Show me X" | Search + Read | Grep → filesystem |
+| "Find X implementation" | Search + Read | Grep → filesystem |
+| "I need to see X" | Search + Read | Grep → filesystem |
 | **All trigger same MCPs** | ↑ | ↑ |
 |  |  |  |
 | "Is this CSV any good?" | Load + Analyze | pandas-mcp → numpy-mcp |
@@ -268,7 +262,7 @@ Speak naturally! Claude figures out intent → picks right MCPs → chains them 
 ### JUST ASK NATURALLY:
 - "What's wrong with this controller?" (triggers: filesystem → pytest-mcp → sequential-thinking)
 - "Check code quality in controllers" (triggers: mcp-analyzer → filesystem)
-- "Find docs about PSO and show me the code" (triggers: context7 → filesystem)
+- "Find docs about PSO and show me the code" (triggers: Grep → filesystem)
 
 ---
 
