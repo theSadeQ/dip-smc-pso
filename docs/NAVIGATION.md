@@ -170,7 +170,7 @@ Isometric 3D system architecture with animated data flow. Click components to na
 :link: sitemap_interactive
 :link-type: doc
 
-Force-directed D3.js visualization. Drag nodes, zoom, and explore 985 files dynamically with relationship highlighting.
+Force-directed D3.js visualization. Drag nodes, zoom, and explore 3,708 files dynamically with relationship highlighting.
 :::
 
 :::{grid-item-card} Card Navigator
@@ -208,12 +208,12 @@ Run Python+NumPy+Matplotlib directly in browser. Edit examples and see results i
 **Comprehensive Indexes**:
 - [Main Index (docs/index.md)](index.md) - Sphinx homepage with 11 toctree sections
 - [User Guides Hub (guides/INDEX.md)](guides/INDEX.md) - 43 files, 12,525 lines, learning paths
-- [Text Sitemap](documentation_structure.md) - Hierarchical list of all 985 files
+- [Text Sitemap](documentation_structure.md) - Hierarchical list of all 3,708 files
 - [Main README](README.md) - GitHub entry point with architecture diagrams
 
 **By Content Type**:
 - [Documentation Structure](documentation_structure.md) - Traditional text-based navigation
-- [Category Index Directory](#category-index-directory) - All 45 index.md files organized by domain
+- [Category Index Directory](#category-index-directory) - All 44 index.md files organized by domain
 
 ---
 
@@ -235,19 +235,19 @@ Run Python+NumPy+Matplotlib directly in browser. Edit examples and see results i
 #### Learning Tracks by Time Investment
 
 **5 Hours - Quick Mastery**:
-```
+```text
 Tutorial 01 (45 min) → Tutorial 02 (60 min) → Tutorial 03 (90 min) → How-To: Running Simulations (20 min) → User Guide (30 min)
 ```
 **Outcome**: Run simulations, compare controllers, optimize gains, interpret results
 
 **10 Hours - Theory + Practice**:
-```
+```text
 Quick Mastery (5h) + SMC Theory (30 min) + PSO Theory (25 min) + DIP Dynamics (25 min) + How-To: Result Analysis (20 min) + Tutorial 05 (120 min)
 ```
 **Outcome**: Understand mathematical foundations, statistical validation, publication workflow
 
 **30+ Hours - Expert Level**:
-```
+```text
 10-Hour Track + Tutorial 04 (120 min) + Complete API Reference (150 min) + Mathematical Foundations + Research Workflow + Custom Controller Development
 ```
 **Outcome**: Implement novel SMC algorithms, extend framework, publish research
@@ -445,9 +445,9 @@ Quick Mastery (5h) + SMC Theory (30 min) + PSO Theory (25 min) + DIP Dynamics (2
 
 ---
 
-## Category Index Directory (45 Indexes)
+## Category Index Directory (44 Indexes)
 
-Complete directory of all 45 index.md files organized by documentation domain.
+Complete directory of all 44 index.md files organized by documentation domain.
 
 ### Documentation Domains
 
@@ -828,7 +828,7 @@ flowchart TD
 | **Theory** | 4 | 1,662 | 1.5 hours |
 | **Tutorials** | 5 | ~3,000 | 10.5 hours |
 | **Workflows** | 14 | ~2,500 | 3-4 hours |
-| **Total Documentation** | 985+ files | ~50,000+ lines | 30+ hours |
+| **Total Documentation** | 3,708 files | ~50,000+ lines | 30+ hours |
 
 ### Navigation Systems (11 Total)
 
@@ -866,7 +866,7 @@ flowchart TD
 ### Update Triggers
 
 This navigation hub should be updated when:
-- New category index.md file added (currently 45)
+- New category index.md file added (currently 44)
 - New visual navigation system created
 - New learning path or persona identified
 - Major documentation restructuring
@@ -887,7 +887,7 @@ sphinx-build -M html docs docs/_build -W --keep-going
 ```
 
 **Manual Validation**:
-- All 45 category indexes linked: [OK]
+- All 44 category indexes linked: [OK]
 - All 4 main entry points bidirectionally linked: [PENDING] (Pending Phase 2)
 - All 4 visual systems linked: [PENDING] (Pending Phase 2)
 - All learning paths accessible: [OK]
@@ -926,4 +926,4 @@ sphinx-build -M html docs docs/_build -W --keep-going
 
 ---
 
-*This navigation hub connects 985 documentation files across 11 navigation systems, providing effortless access to all resources for every user type.*
+*This navigation hub connects 3,708 documentation files across 11 navigation systems, providing effortless access to all resources for every user type.*
