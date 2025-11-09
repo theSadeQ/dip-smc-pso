@@ -164,21 +164,26 @@ analyze git blame for authorship, and generate a cross-reference report"
 
 ---
 
-## 6) Available MCP Servers (11 Total)
+## 6) Available MCP Servers (11 Total - VERIFIED INSTALLED)
 
 | Server | Auto-Trigger Keywords | Primary Use Cases |
 |--------|----------------------|-------------------|
-| **pandas-mcp** | analyze, plot, statistics, convergence | Data analysis, PSO results |
-| **context7** | find, search, where, related | Doc search, cross-refs |
-| **puppeteer** | test, screenshot, UI, dashboard | Streamlit testing |
-| **numpy-mcp** | matrix, eigenvalue, numerical | Linear algebra ops |
 | **filesystem** | inspect, read, analyze files | Code/log analysis |
 | **github** | issue, PR, commit | Issue tracking |
 | **sequential-thinking** | **plan**, debug, investigate, verify, figure out, analyze situation | **Planning**, debugging, systematic analysis |
+| **puppeteer** | test, screenshot, UI, dashboard | Streamlit testing |
+| **mcp-debugger** | debug, postman, API | API endpoint testing |
+| **pytest-mcp** | test failure, pytest, debug | Test debugging |
 | **git-mcp** | git history, branch, stats | Advanced Git ops |
 | **sqlite-mcp** | query, database, results | PSO results DB |
-| **pytest-mcp** | test failure, pytest, debug | Test debugging |
 | **mcp-analyzer** | lint, ruff, vulture, quality | Code quality checks |
+| **context7** | find, search, where, related | Doc search, cross-refs |
+| **lighthouse-mcp** | audit, accessibility, performance | Lighthouse audits |
+
+**INSTALLATION STATUS (Nov 2025):**
+- ✅ All 11 servers installed and operational
+- ✅ Paths updated to correct npm global location (`C:\Program Files\nodejs\node_modules\`)
+- ❌ numpy-mcp and pandas-mcp removed (local server files not found)
 
 ---
 

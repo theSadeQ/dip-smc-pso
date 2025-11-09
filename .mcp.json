@@ -4,7 +4,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-filesystem\\dist\\index.js",
+        "C:\\Program Files\\nodejs\\node_modules\\@modelcontextprotocol\\server-filesystem\\dist\\index.js",
         "D:\\Projects\\main"
       ],
       "env": {},
@@ -14,7 +14,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-github\\dist\\index.js"
+        "C:\\Program Files\\nodejs\\node_modules\\@modelcontextprotocol\\server-github\\dist\\index.js"
       ],
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
@@ -25,7 +25,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-sequential-thinking\\dist\\index.js"
+        "C:\\Program Files\\nodejs\\node_modules\\@modelcontextprotocol\\server-sequential-thinking\\dist\\index.js"
       ],
       "env": {},
       "description": "Methodical problem-solving and debugging workflows"
@@ -34,7 +34,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-puppeteer\\dist\\index.js"
+        "C:\\Program Files\\nodejs\\node_modules\\@modelcontextprotocol\\server-puppeteer\\dist\\index.js"
       ],
       "env": {},
       "description": "Browser automation for Streamlit dashboard testing"
@@ -43,7 +43,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\mcp-debugger\\bin\\mcp-debugger.js"
+        "C:\\Program Files\\nodejs\\node_modules\\mcp-debugger\\bin\\mcp-debugger.js"
       ],
       "env": {},
       "description": "Postman collection debugging and API testing"
@@ -52,7 +52,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\pytest-mcp-server\\dist\\cli.js"
+        "C:\\Program Files\\nodejs\\node_modules\\pytest-mcp-server\\dist\\cli.js"
       ],
       "env": {},
       "description": "Pytest test failure tracking and debugging"
@@ -61,7 +61,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\@cyanheads\\git-mcp-server\\dist\\index.js"
+        "C:\\Program Files\\nodejs\\node_modules\\@cyanheads\\git-mcp-server\\dist\\index.js"
       ],
       "env": {},
       "description": "Comprehensive Git operations and version control"
@@ -70,7 +70,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "C:\\Users\\sadeg\\AppData\\Roaming\\npm\\node_modules\\mcp-sqlite\\mcp-sqlite-server.js",
+        "C:\\Program Files\\nodejs\\node_modules\\mcp-sqlite\\mcp-sqlite-server.js",
         "D:\\Projects\\main\\logs\\pso_results.db"
       ],
       "env": {},
@@ -82,20 +82,6 @@
       "args": ["-m", "mcp_server_analyzer"],
       "env": {},
       "description": "RUFF linting and VULTURE dead code detection"
-    },
-    "numpy-mcp": {
-      "type": "stdio",
-      "command": "python",
-      "args": ["D:\\Projects\\main\\.ai\\mcp\\servers\\numpy-mcp\\server.py"],
-      "env": {},
-      "description": "NumPy numerical computations and linear algebra"
-    },
-    "pandas-mcp": {
-      "type": "stdio",
-      "command": "python",
-      "args": ["D:\\Projects\\main\\.ai\\mcp\\servers\\pandas-mcp-server\\server.py"],
-      "env": {},
-      "description": "Pandas data analysis and visualization for PSO results"
     },
     "context7": {
       "type": "stdio",
@@ -125,10 +111,9 @@
       "git-mcp": "Advanced Git operations, commit analysis, branch management",
       "sqlite-mcp": "PSO optimization results querying, convergence analysis",
       "mcp-analyzer": "Code quality checks with RUFF linter and VULTURE dead code detection",
-      "numpy-mcp": "Numerical computations, matrix operations, statistical analysis for control systems",
-      "pandas-mcp": "Advanced data analysis and visualization of PSO convergence and simulation results",
       "context7": "Semantic search across documentation, intelligent context retrieval, cross-reference validation",
       "lighthouse-mcp": "Automated Lighthouse audits for accessibility, performance, SEO, and best practices"
-    }
+    },
+    "_comment_removed_servers": "numpy-mcp and pandas-mcp removed - local server files do not exist at configured paths. These can be reinstalled later if needed."
   }
 }
