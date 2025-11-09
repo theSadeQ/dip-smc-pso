@@ -1,20 +1,20 @@
-# CLAUDE.md — Team Memory & Project Conventions
+# Claude.md — Team Memory & Project Conventions
 
 > This file contains project-specific instructions for Claude Code operations and automatic repository management.
 
 **CRITICAL RULE - NO EMOJIS:**
-- **NEVER use Unicode emojis** (🚀, ✅, ❌, etc.) in any code, scripts, output, or documentation
+- **NEVER use Unicode emojis** ([LAUNCH], [OK], [ERROR], etc.) in any code, scripts, output, or documentation
 - **ALWAYS use ASCII text markers** instead: [AI], [OK], [ERROR], [WARNING], [INFO], [BLUE], etc.
 - **Reason:** Windows terminal (cp1252 encoding) cannot display Unicode properly, causing crashes
 - **Applies to:** Python scripts, shell output, markdown docs, commit messages, all user-facing text
-- **Example:** Use "[OK]" not "✅", "[ERROR]" not "❌", "[INFO]" not "ℹ️"
+- **Example:** Use "[OK]" not "[OK]", "[ERROR]" not "[ERROR]", "[INFO]" not "[INFO]"
 
 **CRITICAL RULE - AUTONOMOUS OPERATION:**
 - **ALWAYS continue** with tasks automatically without asking for permission
 - **NEVER ask** "Would you like to proceed?" or "Ready to continue?" or "Should I move to the next task?"
 - **ALWAYS commit and push** changes automatically after completing work
 - **NEVER ask** for commit/push confirmation - do it automatically per repository management rules
-- **Action:** Complete task → Update tracking docs → Commit → Push → Start next task
+- **Action:** Complete task -> Update tracking docs -> Commit -> Push -> Start next task
 - **Exception:** Only ask questions when user input is REQUIRED for implementation decisions
 
 **CRITICAL RULE - WINDOWS PLATFORM:**
@@ -22,7 +22,7 @@
 - **ALWAYS use `python`** NOT `python3` (python3 doesn't exist on Windows, causes exit code 49)
 - **ALWAYS use `python -m pytest`** NOT `python3 -m pytest`
 - **ALWAYS use `python simulate.py`** NOT `python3 simulate.py`
-- **Example:** `python --version` works ✓ | `python3 --version` fails with exit code 49 ✗
+- **Example:** `python --version` works [DONE] | `python3 --version` fails with exit code 49 [FAIL]
 
 ------
 
@@ -45,41 +45,41 @@
 
 ------
 
-## 3) Session Continuity & Project-Wide Recovery System
+## 3) Session Continuity & Project-wide Recovery System
 
 **See:** `.project/ai/config/session_continuity.md` for complete details.
 
 **Purpose:** 30-second recovery from token limits or multi-month gaps
 
-**Status:** ✅ Operational (Oct 2025)
+**Status:** [OK] Operational (Oct 2025)
 
-### Quick Recovery:
+### Quick Recovery
 ```bash
-# ONE-COMMAND recovery after token limit
+# One-command Recovery After Token Limit
 /recover
 
-# Or manually:
+# Or Manually
 bash .dev_tools/recover_project.sh
 
-# Check roadmap progress
+# Check Roadmap Progress
 python .dev_tools/roadmap_tracker.py
 ```
 
-### Key Tools:
+### Key Tools
 1. **Project State Manager** (`.dev_tools/project_state_manager.py`) - Tracks phase, roadmap progress, completed tasks
 2. **Git Recovery Script** (`.dev_tools/recover_project.sh`) - 30-second recovery workflow
 3. **Roadmap Tracker** (`.dev_tools/roadmap_tracker.py`) - Parses 72-hour research roadmap (50 tasks)
 4. **Agent Checkpoint System** (`.dev_tools/agent_checkpoint.py`) - Recovers interrupted multi-agent work
 
-### What Survives Token Limits:
-- ✅ Git commits (10/10), project state (9/10), agent checkpoints (9/10), data files (8/10)
-- ❌ Background bash processes, in-memory agent state (BUT checkpoints preserve progress)
+### What Survives Token Limits
+- [OK] Git commits (10/10), project state (9/10), agent checkpoints (9/10), data files (8/10)
+- [ERROR] Background bash processes, in-memory agent state (BUT checkpoints preserve progress)
 
-### Automated Tracking (Zero Manual Updates):
+### Automated Tracking (zero Manual Updates)
 ```bash
-# Just commit with task ID - state auto-updates via Git hooks!
+# Just Commit with Task ID - State Auto-updates via Git Hooks
 git commit -m "feat(MT-6): Complete boundary layer optimization"
-# Pre-commit hook auto-detects MT-6 + updates project state
+# Pre-commit Hook Auto-detects Mt-6 + Updates Project State
 ```
 
 **Recovery Reliability:** Git commits (10/10) | Automated tracking (10/10) | Test coverage (11/11 tests, 100%)
@@ -98,7 +98,7 @@ A Python framework for simulating, controlling, and analyzing a double‑inverte
 
 ## 5) Architecture
 
-### 5.1 High‑Level Modules
+### 5.1 High‑level Modules
 
 - **Controllers**: classical SMC, super‑twisting, adaptive, hybrid adaptive STA‑SMC, swing‑up; experimental MPC.
 - **Dynamics/Plant**: simplified and full nonlinear dynamics (plus low‑rank); shared base interfaces.
@@ -172,7 +172,7 @@ README.md, CHANGELOG.md
 **Beginner Roadmap** (`.ai/edu/beginner-roadmap.md`):
 - **Target**: Complete beginners with ZERO coding/control theory background
 - **Duration**: 125-150 hours over 4-6 months
-- **Coverage**: Phase 1 (Computing, Python, Physics, Math) → Phase 2 (Control theory, SMC) → Phases 3-5 (Hands-on to mastery)
+- **Coverage**: Phase 1 (Computing, Python, Physics, Math) -> Phase 2 (Control theory, SMC) -> Phases 3-5 (Hands-on to mastery)
 - **Status**: Phases 1-2 complete (~2,000 lines), Phases 3-5 planned (~1,500-2,000 more lines)
 
 ### 6.2 Integration with Main Documentation
@@ -180,18 +180,18 @@ README.md, CHANGELOG.md
 **Learning Path Progression**:
 ```
 Path 0: Complete Beginner (NEW)
-  .ai/edu/beginner-roadmap.md (125-150 hours) →
+  .ai/edu/beginner-roadmap.md (125-150 hours) ->
 
 Path 1: Quick Start (EXISTING)
-  docs/guides/getting-started.md → Tutorial 01 (1-2 hours) →
+  docs/guides/getting-started.md -> Tutorial 01 (1-2 hours) ->
 
 Paths 2-4: Advanced (EXISTING)
   Tutorials 02-05, Theory, Research workflows
 ```
 
 **Audience Segmentation**:
-- `.ai/edu/` → Prerequisites for absolute beginners (Path 0)
-- `docs/guides/` → Project-specific documentation (Paths 1-4)
+- `.ai/edu/` -> Prerequisites for absolute beginners (Path 0)
+- `docs/guides/` -> Project-specific documentation (Paths 1-4)
 
 **Cross-References**:
 - Phase 5 of beginner roadmap connects to Tutorial 01
@@ -325,42 +325,42 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ------
 
-## 13) Production Safety & Readiness (Phase 4 Status)
+## 13) Production Safety & Readiness (phase 4 Status)
 
 **See:** `.project/ai/config/phase4_status.md` for complete status.
 
 **Quick Reference:**
 - Production Readiness: 23.9/100 (Phase 4.1+4.2 complete)
 - Thread Safety: 100% (11/11 tests passing)
-- Status: RESEARCH-READY ✅ | NOT production-ready ❌
+- Status: RESEARCH-READY [OK] | NOT production-ready [ERROR]
 
-### Current Status: RESEARCH-READY ✅
+### Current Status: Research-ready [ok]
 
 **Safe for Research/Academic Use:**
-- ✅ Single-threaded & multi-threaded operation validated
-- ✅ Controllers functional and tested
-- ✅ Documentation complete and accurate
+- [OK] Single-threaded & multi-threaded operation validated
+- [OK] Controllers functional and tested
+- [OK] Documentation complete and accurate
 
 **NOT Ready for Production:**
-- ❌ Quality gates: 1/8 passing
-- ❌ Coverage measurement broken (pytest Unicode issue)
-- ❌ Production score: 23.9/100 (BLOCKED)
+- [ERROR] Quality gates: 1/8 passing
+- [ERROR] Coverage measurement broken (pytest Unicode issue)
+- [ERROR] Production score: 23.9/100 (BLOCKED)
 
-### Validation Commands:
+### Validation Commands
 ```bash
-# Thread Safety (WORKS - 11/11 passing)
+# Thread Safety (works - 11/11 Passing)
 python -m pytest tests/test_integration/test_thread_safety/test_production_thread_safety.py -v
 
-# Production Readiness (WORKS - reports 23.9/100)
+# Production Readiness (works - Reports 23.9/100)
 python -c "from src.integration.production_readiness import ProductionReadinessScorer; \
            scorer = ProductionReadinessScorer(); \
            result = scorer.assess_production_readiness(); \
            print(f'Score: {result.overall_score:.1f}/100')"
 ```
 
-### Phase 5: Research Phase (October 29 - November 7, 2025)
+### Phase 5: Research Phase (october 29 - November 7, 2025)
 
-**Status**: ✅ COMPLETE (11/11 tasks, 100%)
+**Status**: [OK] COMPLETE (11/11 tasks, 100%)
 **Focus**: Validate, document, and benchmark 7 controllers
 **Roadmap**: 72 hours over 8 weeks - COMPLETED
 - Week 1 (8h): benchmarks, chattering metrics, visualization - COMPLETE
@@ -388,7 +388,7 @@ python -c "from src.integration.production_readiness import ProductionReadinessS
 - Use `.artifacts/` NOT `artifacts/`
 - Use `.cache/` for ephemeral data
 
-### Config Consolidation (Use `.project/` as CANONICAL):
+### Config Consolidation (Use `.project/` as CANONICAL)
 ```
 .project/                          # CANONICAL CONFIG ROOT
 ├─ ai/config/                     # AI configurations
@@ -397,20 +397,20 @@ python -c "from src.integration.production_readiness import ProductionReadinessS
 └─ archive/                       # Archived artifacts
 ```
 
-### DO NOT USE (deprecated aliases):
-- ❌ `.ai/` → use `.project/ai/`
-- ❌ `.dev_tools/` at root → use `.project/dev_tools/`
+### DO NOT USE (deprecated Aliases)
+- [ERROR] `.ai/` -> use `.project/ai/`
+- [ERROR] `.dev_tools/` at root -> use `.project/dev_tools/`
 
-### Directory Rules:
+### Directory Rules
 - **Runtime artifacts**: `.artifacts/` (outputs, research papers, scripts)
 - **Runtime caches**: `.cache/` (pytest, hypothesis, htmlcov, benchmarks)
 - **Visible directories** (8): `src/`, `tests/`, `docs/`, `scripts/`, `notebooks/`, `data/`, `benchmarks/`, `optimization_results/`
 - **Root files** (9 core + 2 MCP): `README.md`, `CHANGELOG.md`, `CLAUDE.md`, `config.yaml`, `requirements.txt`, `simulate.py`, `streamlit_app.py`, `package.json`, `package-lock.json`
 
-### Protected Files (NEVER DELETE):
+### Protected Files (never Delete)
 - `.project/dev_tools/Switch-ClaudeAccount.ps1` - Multi-account switcher (CANONICAL)
 
-### Weekly Health Check:
+### Weekly Health Check
 ```bash
 ls | wc -l                                          # ≤19 visible items
 find . -maxdepth 1 -type d -name ".*" | wc -l      # ≤7 hidden dirs
@@ -437,8 +437,8 @@ du -sh .artifacts/                                  # <100MB
 ## 16) Controller Factory & Example Snippets
 
 ```python
-# example-metadata:
-# runnable: false
+# Example-metadata
+# Runnable: False
 
 from src.controllers.factory import create_controller
 controller = create_controller(
@@ -447,20 +447,20 @@ controller = create_controller(
   gains=[10.0, 5.0, 8.0, 3.0, 15.0, 2.0]
 )
 control_output = controller.compute_control(state, last_control, history)
-# Optimization (PSO)
+# Optimization (pso)
 from src.optimizer.pso_optimizer import PSOTuner
-# ... initialize bounds, tuner, and run pso.optimize(...)
+# ... Initialize Bounds, Tuner, and Run Pso.optimize(...)
 # Monitoring
 from src.utils.monitoring.latency import LatencyMonitor
 monitor = LatencyMonitor(dt=0.01)
 start = monitor.start()
-# ... loop ...
+# ... Loop
 missed = monitor.end(start)
 ```
 
 ------
 
-## 17) Multi-Agent Orchestration System
+## 17) Multi-agent Orchestration System
 
 **See:** `.ai/config/agent_orchestration.md` for complete details.
 
@@ -478,16 +478,16 @@ missed = monitor.end(start)
 
 **Mandatory Checkpoint Calls:**
 ```python
-# When user approves plan
+# When User Approves Plan
 checkpoint_plan_approved(task_id, plan_summary, hours, agents, deliverables)
 
-# When launching each agent
+# When Launching Each Agent
 checkpoint_agent_launched(task_id, agent_id, role, hours)
 
-# Every 5-10 minutes during agent execution
+# Every 5-10 Minutes During Agent Execution
 checkpoint_agent_progress(task_id, agent_id, hours_completed, deliverables, current_phase)
 
-# When agent completes or fails
+# When Agent Completes or Fails
 checkpoint_agent_complete(task_id, agent_id, hours, deliverables, summary)
 checkpoint_agent_failed(task_id, agent_id, hours, reason, recovery_recommendation)
 ```
@@ -513,39 +513,39 @@ checkpoint_agent_failed(task_id, agent_id, hours, reason, recovery_recommendatio
 
 **MANDATORY FOR CLAUDE**: After ANY documentation changes, rebuild and verify.
 
-### Rebuild Workflow:
+### Rebuild Workflow
 ```bash
-# 1. Make changes to docs
-# 2. ALWAYS rebuild:
+# 1. Make Changes to Docs
+# 2. ALWAYS Rebuild
 sphinx-build -M html docs docs/_build -W --keep-going
 
-# 3. Verify changes copied:
+# 3. Verify Changes Copied
 stat docs/_static/your-file.css docs/_build/html/_static/your-file.css
 
-# 4. Verify localhost serves new version:
+# 4. Verify Localhost Serves New Version
 curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 
-# 5. Tell user to hard refresh browser (Ctrl+Shift+R)
+# 5. Tell User to Hard Refresh Browser (ctrl+shift+r)
 ```
 
-### Auto-Rebuild Triggers:
+### Auto-rebuild Triggers
 - Sphinx source files: `docs/*.md`, `docs/**/*.rst`
 - Static assets: `docs/_static/*.css`, `docs/_static/*.js`, `docs/_static/*.png`
 - Configuration: `docs/conf.py`, `docs/_templates/*`
 - Navigation: `docs/index.rst`, any `toctree` directives
 
-### Common Pitfalls:
-❌ Don't assume changes are live - verify with `curl` or `stat`
-❌ Don't skip rebuild - Sphinx doesn't auto-rebuild static files
-❌ Don't forget browser cache - tell user to hard refresh
+### Common Pitfalls
+[ERROR] Don't assume changes are live - verify with `curl` or `stat`
+[ERROR] Don't skip rebuild - Sphinx doesn't auto-rebuild static files
+[ERROR] Don't forget browser cache - tell user to hard refresh
 
-✅ Do verify timestamps - `stat` both source and build files
-✅ Do check MD5 sums - ensure files actually copied
-✅ Do test with curl - verify localhost serves new content
+[OK] Do verify timestamps - `stat` both source and build files
+[OK] Do check MD5 sums - ensure files actually copied
+[OK] Do test with curl - verify localhost serves new content
 
 ------
 
-## 20) Model Context Protocol (MCP) Auto-Triggers
+## 20) Model Context Protocol (mcp) Auto-triggers
 
 **See:** `.project/ai/config/mcp_usage_guide.md` for complete guide | `docs/mcp-debugging/README.md` for workflows
 
@@ -574,52 +574,52 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 - **pandas-mcp** and **numpy-mcp** are local custom servers (configured in `.project/mcp/servers/`)
 - For semantic documentation search, use **filesystem** + **git-mcp** + **Grep** combination
 
-### Multi-MCP Collaboration (MANDATORY)
+### Multi-mcp Collaboration (mandatory)
 
 **Chain 3-5 MCPs for complete workflows:**
-- **Data Analysis**: filesystem → sqlite-mcp → pandas-mcp → mcp-analyzer
-- **Documentation**: filesystem → git-mcp → Grep (built-in search)
-- **Testing**: pytest-mcp → puppeteer → mcp-analyzer
-- **Research**: Grep → filesystem → git-mcp → pandas-mcp
-- **Debugging**: sequential-thinking → pytest-mcp → filesystem
+- **Data Analysis**: filesystem -> sqlite-mcp -> pandas-mcp -> mcp-analyzer
+- **Documentation**: filesystem -> git-mcp -> Grep (built-in search)
+- **Testing**: pytest-mcp -> puppeteer -> mcp-analyzer
+- **Research**: Grep -> filesystem -> git-mcp -> pandas-mcp
+- **Debugging**: sequential-thinking -> pytest-mcp -> filesystem
 
 **Example Multi-MCP Workflow:**
 ```bash
-# User: "Find the adaptive SMC controller and analyze its test results"
-# Claude triggers: Grep → filesystem → pytest-mcp → mcp-analyzer
+# User: "find the Adaptive SMC Controller and Analyze Its Test Results"
+# Claude Triggers: Grep -> Filesystem -> Pytest-mcp -> Mcp-analyzer
 ```
 
-### Orchestration Rules (FOR CLAUDE)
+### Orchestration Rules (for Claude)
 
 1. If user mentions 2+ domains (docs + data + testing), use 2+ MCPs
 2. For "complete analysis" tasks, use full pipeline (3-5 MCPs minimum)
 3. For debugging, combine sequential-thinking + domain-specific MCPs
 4. **For PLANNING, ALWAYS use sequential-thinking first** (most commonly missed!)
-5. For research workflows: Grep → filesystem → relevant analysis MCPs
+5. For research workflows: Grep -> filesystem -> relevant analysis MCPs
 6. **Understand intent, not keywords**: "where is" = search, "check" = analyze, "test" = validate, **"plan" = systematic thinking**
 7. **Chain automatically**: Complete full workflow without asking user for next step
 
 ### Natural Language Examples
 
 **Users can ask naturally (all work the same):**
-- "Where's the adaptive SMC?" → Grep + filesystem
-- "Check code quality" → mcp-analyzer + filesystem
-- "Test the dashboard" → puppeteer + lighthouse-mcp
-- "What's wrong with this controller?" → filesystem + pytest-mcp + sequential-thinking
+- "Where's the adaptive SMC?" -> Grep + filesystem
+- "Check code quality" -> mcp-analyzer + filesystem
+- "Test the dashboard" -> puppeteer + lighthouse-mcp
+- "What's wrong with this controller?" -> filesystem + pytest-mcp + sequential-thinking
 
 **Configuration:** `.mcp.json` (12 servers) | `.project/ai/config/mcp_usage_guide.md` (auto-trigger guide)
 
 ------
 
-## 21) Phase 3 UI/UX Status & Maintenance Mode
+## 21) Phase 3 Ui/ux Status & Maintenance Mode
 
 **See:** `.project/ai/config/phase3_status.md` for complete status.
 
 **Quick Reference:**
-- Phase 3: ✅ COMPLETE (34/34 issues, October 9-17, 2025)
+- Phase 3: [OK] COMPLETE (34/34 issues, October 9-17, 2025)
 - Status: Merged to main | UI work in MAINTENANCE MODE
 - Achievement: WCAG 2.1 Level AA, 18 design tokens, 4 breakpoints validated
-- Browser: Chromium validated ✅ | Firefox/Safari deferred ⏸️
+- Browser: Chromium validated [OK] | Firefox/Safari deferred [PAUSE]
 
 **UI Maintenance Mode Policy:**
 - **DO**: Fix critical bugs, update docs for new features, maintain WCAG AA
@@ -648,7 +648,7 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 - Total Documentation: 985 files (814 in docs/, 171 in .project/)
 - Navigation Systems: 11 total (NAVIGATION.md is the master hub)
 - Category Indexes: 43 index.md files across all documentation domains
-- Learning Paths: 5 paths (Path 0: 125-150 hrs → Path 4: 12+ hrs)
+- Learning Paths: 5 paths (Path 0: 125-150 hrs -> Path 4: 12+ hrs)
 
 **Primary Navigation Hub:**
 - [NAVIGATION.md](docs/NAVIGATION.md) - Master hub connecting all 11 navigation systems
@@ -672,11 +672,11 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 11. **live-python-demo** - Browser-based Python code execution
 
 **User Journeys:**
-- **Complete Beginners**: NAVIGATION.md → Path 0 (beginner-roadmap.md) → Tutorial 01
-- **Quick Start**: NAVIGATION.md → Getting Started → Tutorial 01 (1-2 hrs)
-- **Researchers**: NAVIGATION.md → Research Workflows → Citations & Theory
-- **Developers**: NAVIGATION.md → API Reference → Architecture → Testing
-- **Integrators**: NAVIGATION.md → HIL Quickstart → Docker Deployment
+- **Complete Beginners**: NAVIGATION.md -> Path 0 (beginner-roadmap.md) -> Tutorial 01
+- **Quick Start**: NAVIGATION.md -> Getting Started -> Tutorial 01 (1-2 hrs)
+- **Researchers**: NAVIGATION.md -> Research Workflows -> Citations & Theory
+- **Developers**: NAVIGATION.md -> API Reference -> Architecture -> Testing
+- **Integrators**: NAVIGATION.md -> HIL Quickstart -> Docker Deployment
 
 **Cross-References:**
 - All 43 category indexes link to NAVIGATION.md (standardized footer)

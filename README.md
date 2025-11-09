@@ -1,4 +1,4 @@
-# Double-Inverted Pendulum Sliding Mode Control with PSO Optimization
+# Double-inverted Pendulum Sliding Mode Control with PSO Optimization
 
 [![Build Status](https://github.com/theSadeQ/dip-smc-pso/workflows/CI/badge.svg)](https://github.com/theSadeQ/dip-smc-pso/actions)
 [![Documentation](https://readthedocs.org/projects/dip-smc-pso/badge/?version=latest)](https://dip-smc-pso.readthedocs.io/)
@@ -27,7 +27,7 @@ A comprehensive Python framework for simulating, controlling, and analyzing a do
 - **Low-Rank Approximation**: Computationally efficient reduced-order model
 - **Numerical Stability**: Robust handling of ill-conditioned dynamics
 
-### High-Performance Simulation
+### High-performance Simulation
 - **Vectorized Batch Simulation**: Numba-accelerated parallel execution
 - **Multiple Integrators**: Adaptive and fixed-step integration schemes
 - **Safety Guards**: Comprehensive constraint monitoring and violation detection
@@ -130,11 +130,11 @@ flowchart TB
 ```
 
 **Component Layers:**
-- 🔵 **User Interfaces**: CLI and web-based interaction
-- 🟡 **Controllers**: SMC algorithms with factory pattern
-- 🟢 **Plant Models**: Dynamics with varying fidelity
-- 🔴 **Core Engine**: Simulation orchestration and execution
-- 🟡 **Optimization**: PSO-based automated tuning
+- [BLUE] **User Interfaces**: CLI and web-based interaction
+- [YELLOW] **Controllers**: SMC algorithms with factory pattern
+- [GREEN] **Plant Models**: Dynamics with varying fidelity
+- [RED] **Core Engine**: Simulation orchestration and execution
+- [YELLOW] **Optimization**: PSO-based automated tuning
 - **Infrastructure**: Configuration, monitoring, HIL support
 
 ### Control Loop Data Flow
@@ -171,7 +171,7 @@ sequenceDiagram
         Note over State: Check convergence<br/>|θ₁|, |θ₂| < tolerance?
     end
 
-    State-->>Controller: ✅ Stabilized
+    State-->>Controller: [OK] Stabilized
 ```
 
 **Control Loop Phases:**
@@ -198,70 +198,70 @@ sequenceDiagram
 ### Installation
 
 ```bash
-# Clone the repository
+# Clone the Repository
 git clone https://github.com/theSadeQ/dip-smc-pso.git
 cd dip-smc-pso
 
-# Install dependencies
+# Install Dependencies
 pip install -r requirements.txt
 
-# Verify installation
+# Verify Installation
 python simulate.py --help
 ```
 
 ### First Simulation
 
 ```bash
-# Run a basic classical SMC simulation
+# Run a Basic Classical SMC Simulation
 python simulate.py --ctrl classical_smc --plot
 
-# Launch the interactive web interface
+# Launch the Interactive Web Interface
 streamlit run streamlit_app.py
 ```
 
 ## Usage Guide
 
-### Command-Line Interface (CLI)
+### Command-line Interface (cli)
 
 #### Basic Simulations
 ```bash
-# Classical SMC with plotting
+# Classical SMC with Plotting
 python simulate.py --ctrl classical_smc --plot
 
-# Super-Twisting SMC with full dynamics
+# Super-twisting SMC with Full Dynamics
 python simulate.py --ctrl sta_smc --dynamics full --plot
 
-# Adaptive SMC with disturbances
+# Adaptive SMC with Disturbances
 python simulate.py --ctrl adaptive_smc --disturbance --plot
 ```
 
 #### PSO Optimization
 ```bash
-# Optimize classical SMC gains
+# Optimize Classical SMC Gains
 python simulate.py --ctrl classical_smc --run-pso --save gains_classical.json
 
-# Optimize with custom parameters
+# Optimize with Custom Parameters
 python simulate.py --ctrl sta_smc --run-pso --particles 50 --generations 100
 
-# Load pre-optimized gains
+# Load Pre-optimized Gains
 python simulate.py --load gains_classical.json --plot
 ```
 
-#### Hardware-in-the-Loop (HIL)
+#### Hardware-in-the-loop (hil)
 ```bash
-# Start HIL plant server
+# Start HIL Plant Server
 python simulate.py --run-hil-server --port 8888
 
-# Run HIL controller client
+# Run HIL Controller Client
 python simulate.py --run-hil --host localhost --port 8888
 ```
 
 #### Batch Analysis
 ```bash
-# Monte Carlo analysis
+# Monte Carlo Analysis
 python simulate.py --ctrl classical_smc --monte-carlo --runs 1000
 
-# Statistical validation
+# Statistical Validation
 python simulate.py --ctrl sta_smc --statistical-analysis
 ```
 
@@ -283,13 +283,13 @@ streamlit run streamlit_app.py
 ### Configuration Management
 
 ```bash
-# Use custom configuration
+# Use Custom Configuration
 python simulate.py --config custom_config.yaml
 
-# Print current configuration
+# Print Current Configuration
 python simulate.py --print-config
 
-# Validate configuration
+# Validate Configuration
 python simulate.py --validate-config
 ```
 
@@ -301,22 +301,22 @@ python simulate.py --validate-config
 
 This project provides **12,500+ lines** of professional documentation organized into four categories:
 
-**📚 Tutorials** - Step-by-step learning paths
+**[DOCS] Tutorials** - Step-by-step learning paths
 - Beginner to advanced progression
 - Hands-on exercises with real code
 - Expected results and troubleshooting
 
-**📖 How-To Guides** - Task-oriented recipes
+**[READ] How-To Guides** - Task-oriented recipes
 - Running simulations and analyzing results
 - PSO optimization workflows
 - Testing and validation procedures
 
-**🔧 API Reference** - Technical documentation
+**[CONFIG] API Reference** - Technical documentation
 - Complete module documentation
 - Code examples and usage patterns
 - Type signatures and parameter details
 
-**📐 Theory & Explanation** - Mathematical foundations
+**[MATH] Theory & Explanation** - Mathematical foundations
 - Sliding mode control theory
 - PSO algorithm principles
 - Double-inverted pendulum dynamics
@@ -327,7 +327,7 @@ Choose your path based on your goals and experience level:
 
 ```mermaid
 flowchart TD
-    START["🎯 Start Here"] --> GOAL{What's your goal?}
+    START["[TARGET] Start Here"] --> GOAL{What's your goal?}
 
     GOAL -->|Quick prototype| PATH1["Path 1: Quick Start<br/>⏱️ 1-2 hours"]
     GOAL -->|Compare controllers| PATH2["Path 2: Controller Expert<br/>⏱️ 4-6 hours"]
@@ -337,27 +337,27 @@ flowchart TD
     PATH1 --> P1_1["Getting Started<br/>Installation & setup"]
     P1_1 --> P1_2["Tutorial 01<br/>First simulation"]
     P1_2 --> P1_3["How-To: Simulations<br/>CLI & Streamlit"]
-    P1_3 --> DONE1["✅ Ready to experiment"]
+    P1_3 --> DONE1["[OK] Ready to experiment"]
 
     PATH2 --> P2_1["Getting Started"]
     P2_1 --> P2_2["Tutorial 01<br/>Basics"]
     P2_2 --> P2_3["Tutorial 02<br/>Controller comparison"]
     P2_3 --> P2_4["Tutorial 03<br/>PSO optimization"]
     P2_4 --> P2_5["How-To: Optimization<br/>Advanced tuning"]
-    P2_5 --> DONE2["✅ Controller expert"]
+    P2_5 --> DONE2["[OK] Controller expert"]
 
     PATH3 --> P3_1["Getting Started"]
     P3_1 --> P3_2["Tutorials 01-02<br/>Framework basics"]
     P3_2 --> P3_3["Tutorial 04<br/>Custom controller"]
     P3_3 --> P3_4["Tutorial 03<br/>Optimize custom"]
     P3_4 --> P3_5["How-To: Testing<br/>Validation"]
-    P3_5 --> DONE3["✅ Custom SMC ready"]
+    P3_5 --> DONE3["[OK] Custom SMC ready"]
 
     PATH4 --> P4_1["Complete Paths 1-2<br/>Learn framework"]
     P4_1 --> P4_2["Tutorial 05<br/>Research workflow"]
     P4_2 --> P4_3["How-To: Analysis<br/>Statistics & plots"]
     P4_3 --> P4_4["Theory Guides<br/>Mathematical foundations"]
-    P4_4 --> DONE4["✅ Publication ready"]
+    P4_4 --> DONE4["[OK] Publication ready"]
 
     style START fill:#ccccff
     style PATH1 fill:#ccffcc
@@ -374,22 +374,22 @@ flowchart TD
 
 | Category | Document | Description | Lines | Time |
 |----------|----------|-------------|-------|------|
-| **🚀 Getting Started** | | | | |
+| **[LAUNCH] Getting Started** | | | | |
 | | [Getting Started](docs/guides/getting-started.md) | Installation, first simulation, web UI | 523 | 15 min |
 | | [User Guide](docs/guides/user-guide.md) | Comprehensive reference manual | 826 | 30 min |
 | | [Quick Reference](docs/guides/QUICK_REFERENCE.md) | Command cheat sheet | - | 5 min |
-| **📚 Tutorials** | | | | |
+| **[DOCS] Tutorials** | | | | |
 | | [Tutorial 01: First Simulation](docs/guides/tutorials/tutorial-01-first-simulation.md) | DIP system, Classical SMC, results | 600 | 45 min |
 | | [Tutorial 02: Controller Comparison](docs/guides/tutorials/tutorial-02-controller-comparison.md) | Compare 4 SMC types, tradeoffs | 797 | 60 min |
 | | [Tutorial 03: PSO Optimization](docs/guides/tutorials/tutorial-03-pso-optimization.md) | Auto gain tuning, convergence | 865 | 90 min |
 | | [Tutorial 04: Custom Controller](docs/guides/tutorials/tutorial-04-custom-controller.md) | Terminal SMC from scratch | 784 | 120 min |
 | | [Tutorial 05: Research Workflow](docs/guides/tutorials/tutorial-05-research-workflow.md) | End-to-end research project | 640 | 120 min |
-| **📖 How-To Guides** | | | | |
+| **[READ] How-To Guides** | | | | |
 | | [Running Simulations](docs/guides/how-to/running-simulations.md) | CLI, Streamlit, batch processing | 619 | 20 min |
 | | [Result Analysis](docs/guides/how-to/result-analysis.md) | Metrics, stats, visualization | 589 | 20 min |
 | | [Optimization Workflows](docs/guides/how-to/optimization-workflows.md) | PSO tuning, custom cost functions | 724 | 25 min |
 | | [Testing & Validation](docs/guides/how-to/testing-validation.md) | Test suite, benchmarks, coverage | 611 | 20 min |
-| **🔧 API Reference** | | | | |
+| **[CONFIG] API Reference** | | | | |
 | | [API Index](docs/guides/api/README.md) | Overview and navigation | 203 | 10 min |
 | | [Controllers API](docs/guides/api/controllers.md) | Factory, SMC types, gain bounds | 726 | 30 min |
 | | [Simulation API](docs/guides/api/simulation.md) | SimulationRunner, dynamics, batch | 517 | 25 min |
@@ -397,7 +397,7 @@ flowchart TD
 | | [Configuration API](docs/guides/api/configuration.md) | YAML loading and validation | 438 | 20 min |
 | | [Plant Models API](docs/guides/api/plant-models.md) | Physics models, parameters | 424 | 20 min |
 | | [Utilities API](docs/guides/api/utilities.md) | Validation, monitoring, analysis | 434 | 20 min |
-| **📐 Theory** | | | | |
+| **[MATH] Theory** | | | | |
 | | [Theory Index](docs/guides/theory/README.md) | Overview and navigation | 104 | 5 min |
 | | [SMC Theory](docs/guides/theory/smc-theory.md) | Lyapunov, chattering, super-twisting | 619 | 30 min |
 | | [PSO Theory](docs/guides/theory/pso-theory.md) | Swarm intelligence, convergence | 438 | 25 min |
@@ -485,18 +485,18 @@ dip-smc-pso/
 ### Running Tests
 
 ```bash
-# Full test suite
+# Full Test Suite
 python -m pytest
 
-# Specific test categories
+# Specific Test Categories
 pytest tests/test_controllers/     # Controller tests
 pytest tests/test_integration/     # Integration tests
 pytest --benchmark-only            # Performance benchmarks
 
-# Coverage analysis
+# Coverage Analysis
 pytest --cov=src --cov-report=html
 
-# Browser automation tests
+# Browser Automation Tests
 python tests/browser_automation/run_tests.py --browser chromium
 ```
 
@@ -505,14 +505,14 @@ python tests/browser_automation/run_tests.py --browser chromium
 **NEW:** Comprehensive browser automation with Playwright + pytest
 
 ```bash
-# Run automated browser tests
+# Run Automated Browser Tests
 python tests/browser_automation/run_tests.py
 
-# Cross-browser testing
+# Cross-browser Testing
 python tests/browser_automation/run_tests.py --all-browsers
 
-# View HTML reports
-# Open: tests/browser_automation/artifacts/reports/report_chromium_*.html
+# View HTML Reports
+# Open: Tests/browser_automation/artifacts/reports/report_chromium_*.html
 ```
 
 **Features:**
@@ -548,10 +548,10 @@ This project includes automated performance tests powered by **pytest-benchmark*
 
 ### Running Benchmarks
 ```bash
-# Run only benchmarks
+# Run Only Benchmarks
 pytest --benchmark-only --benchmark-autosave
 
-# Compare against baseline and fail on regressions
+# Compare Against Baseline and Fail on Regressions
 pytest --benchmark-only --benchmark-compare --benchmark-compare-fail=mean:5%
 ```
 
@@ -566,16 +566,16 @@ pytest --benchmark-only --benchmark-compare --benchmark-compare-fail=mean:5%
 ### Code Quality
 
 ```bash
-# Type checking
+# Type Checking
 mypy src/
 
-# Code formatting
+# Code Formatting
 black src/ tests/
 
 # Linting
 ruff src/ tests/
 
-# Pre-commit hooks
+# Pre-commit Hooks
 pre-commit install
 pre-commit run --all-files
 ```
@@ -583,23 +583,23 @@ pre-commit run --all-files
 ### Documentation
 
 ```bash
-# Build documentation
+# Build Documentation
 sphinx-build -b html docs docs/_build/html
 
-# Serve locally
+# Serve Locally
 python -m http.server -d docs/_build/html
 ```
 
 ### Performance Profiling
 
 ```bash
-# Benchmark specific components
+# Benchmark Specific Components
 pytest tests/test_benchmarks/ --benchmark-only
 
-# Profile memory usage
+# Profile Memory Usage
 python -m memory_profiler simulate.py --ctrl classical_smc
 
-# Generate performance report
+# Generate Performance Report
 python .dev_tools/performance_audit.py
 ```
 
@@ -608,7 +608,7 @@ python .dev_tools/performance_audit.py
 The repository includes an automated Git backup system that creates restore points every 1 minute:
 
 ```powershell
-# Manual checkpoint (Windows)
+# Manual Checkpoint (windows)
 powershell -NoProfile -ExecutionPolicy Bypass -File .\.dev_tools\claude-backup.ps1 -Checkpoint
 ```
 
@@ -632,7 +632,7 @@ schtasks /Create ^
 
 See [docs/claude-backup.md](docs/claude-backup.md) for full documentation.
 
-### Account Switching (Zero-Effort Session Continuity)
+### Account Switching (zero-effort Session Continuity)
 
 Hit token limits? Switch Claude Code accounts effortlessly:
 
@@ -656,7 +656,7 @@ Hit token limits? Switch Claude Code accounts effortlessly:
 The system uses YAML configuration with comprehensive validation:
 
 ```yaml
-# config.yaml
+# Config.yaml
 physics:
   cart_mass: 1.0        # Cart mass (kg)
   pole1_mass: 0.1       # First pole mass (kg)
@@ -751,40 +751,40 @@ MIT License - see LICENSE file for details
 
 This project provides **complete academic and technical attribution** across three domains:
 
-#### 📚 [Academic Theory & Research](CITATIONS_ACADEMIC.md)
+#### [docs] [academic Theory & Research](citations_academic.md)
 **39 academic references** for control theory foundations:
 - **Sliding Mode Control**: Utkin (1992), Slotine & Li (1991), Levant (2003)
 - **PSO Optimization**: Kennedy & Eberhart (1995), Clerc & Kennedy (2002)
 - **Lyapunov Stability**: Khalil (2002), Lyapunov (1992)
 - **Adaptive Control**: Åström & Wittenmark (1995), Ioannou & Sun (1996)
 
-📖 [View complete academic citations →](CITATIONS_ACADEMIC.md)
+[READ] [View complete academic citations ->](CITATIONS_ACADEMIC.md)
 
-#### 🔧 [Software Dependencies](DEPENDENCIES.md)
+#### [config] [software Dependencies](dependencies.md)
 **30+ libraries** with academic attribution:
 - **NumPy** (BSD-3) - Harris et al. (2020)
 - **SciPy** (BSD-3) - Virtanen et al. (2020)
 - **PySwarms** (MIT) - Miranda (2018)
 - **Numba** (BSD-2) - Lam et al. (2015)
 
-📦 [View dependency citations →](DEPENDENCIES.md)
+[PACKAGE] [View dependency citations ->](DEPENDENCIES.md)
 
-#### 🏗️ [Design Patterns & Architecture](PATTERNS.md)
+#### [construction] [design Patterns & Architecture](patterns.md)
 **19 software patterns** documented:
 - **Factory Pattern** - Gamma et al. (1994) - 102 files
 - **Strategy Pattern** - Gamma et al. (1994) - 13 files
 - **SOLID Principles** - Martin (2003)
 
-🔨 [View pattern documentation →](PATTERNS.md)
+[HAMMER] [View pattern documentation ->](PATTERNS.md)
 
-#### 📋 [Master Citation Index](CITATIONS.md)
+#### [clipboard] [master Citation Index](citations.md)
 Quick reference guide for all citations, including:
 - BibTeX entries for academic publications
 - License compliance information
 - Pattern usage statistics
 - Cross-reference guide
 
-📊 [View master index →](CITATIONS.md)
+[CHART] [View master index ->](CITATIONS.md)
 
 ---
 
@@ -809,10 +809,10 @@ Quick reference guide for all citations, including:
 - **PSO Optimization**: Cite Kennedy & Eberhart (1995) + Clerc & Kennedy (2002) + this software
 
 **Citation Quality:**
-- ✅ **50,000+ words** of attribution documentation
-- ✅ **85% primary sources** (foundational papers and books)
-- ✅ **100% license compliance** (all dependencies verified)
-- ✅ **Complete BibTeX database** ready for LaTeX/Sphinx integration
+- [OK] **50,000+ words** of attribution documentation
+- [OK] **85% primary sources** (foundational papers and books)
+- [OK] **100% license compliance** (all dependencies verified)
+- [OK] **Complete BibTeX database** ready for LaTeX/Sphinx integration
 
 ## Contributing
 
