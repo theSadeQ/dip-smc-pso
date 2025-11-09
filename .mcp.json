@@ -83,13 +83,6 @@
       "env": {},
       "description": "RUFF linting and VULTURE dead code detection"
     },
-    "context7": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp", "--api-key", "REQUIRED"],
-      "env": {},
-      "description": "Intelligent context search and semantic retrieval across documentation and codebase (REQUIRES API KEY from context7.com/dashboard - replace REQUIRED with your key)"
-    },
     "lighthouse-mcp": {
       "type": "stdio",
       "command": "lighthouse-mcp",
@@ -125,7 +118,6 @@
       "git-mcp": "Advanced Git operations, commit analysis, branch management",
       "sqlite-mcp": "PSO optimization results querying, convergence analysis",
       "mcp-analyzer": "Code quality checks with RUFF linter and VULTURE dead code detection",
-      "context7": "Semantic search across documentation, intelligent context retrieval, cross-reference validation",
       "lighthouse-mcp": "Automated Lighthouse audits for accessibility, performance, SEO, and best practices",
       "pandas-mcp": "Advanced data analysis and visualization of PSO convergence and simulation results",
       "numpy-mcp": "Numerical computations, matrix operations, statistical analysis for control systems"
