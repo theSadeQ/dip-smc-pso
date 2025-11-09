@@ -54,30 +54,30 @@ This framework implements state-of-the-art sliding mode control strategies with 
 ## Main Commands
 
 ```bash
-# Run simulation with specific controller
+# Run Simulation with Specific Controller
 python simulate.py --ctrl classical_smc --plot
 python simulate.py --ctrl sta_smc --plot
 python simulate.py --ctrl adaptive_smc --plot
 python simulate.py --ctrl hybrid_adaptive_sta_smc --plot
 
-# Optimize controller gains with PSO
+# Optimize Controller Gains with PSO
 python simulate.py --ctrl classical_smc --run-pso --save gains_classical.json
 python simulate.py --ctrl sta_smc --run-pso --save gains_sta.json
 
-# Load optimized gains and run
+# Load Optimized Gains and Run
 python simulate.py --load tuned_gains.json --plot
 
-# Launch interactive web dashboard
+# Launch Interactive Web Dashboard
 streamlit run streamlit_app.py
 
-# Run hardware-in-the-loop simulation
+# Run Hardware-in-the-loop Simulation
 python simulate.py --run-hil --plot
 
-# Run test suite
+# Run Test Suite
 pytest tests/ -v
 pytest tests/test_controllers/ --benchmark-only
 
-# Build documentation
+# Build Documentation
 cd docs && sphinx-build -b html . _build/html
 python -m http.server 8000 --directory docs/_build/html
 ```
@@ -228,49 +228,49 @@ reports/index
 Master navigation hub connecting all 985 documentation files across 11 systems - your complete guide to finding anything
 :::
 
-:::{grid-item-card} 🎮 3D Interactive Pendulum (NEW!)
+:::{grid-item-card} [DEMO] 3D Interactive Pendulum (NEW!)
 :link: guides/interactive/3d-pendulum-demo
 :link-type: doc
 
 Real-time physics simulation with WebGL rendering - adjust gains, set angles, watch dynamics unfold in cinematic 3D
 :::
 
-:::{grid-item-card} 🐍 Live Python Code (NEW!)
+:::{grid-item-card} [PYTHON] Live Python Code (NEW!)
 :link: guides/interactive/live-python-demo
 :link-type: doc
 
 Run Python code in browser with NumPy, Matplotlib - edit examples, see results instantly, zero installation
 :::
 
-:::{grid-item-card} 🎛️ Control Room
+:::{grid-item-card} [CONTROLS] Control Room
 :link: architecture_control_room
 :link-type: doc
 
 Isometric 3D system architecture with interactive components
 :::
 
-:::{grid-item-card} 🎯 Interactive Graph
+:::{grid-item-card} [TARGET] Interactive Graph
 :link: sitemap_interactive
 :link-type: doc
 
 Click, drag, and zoom through an interactive force-directed visualization
 :::
 
-:::{grid-item-card} 🎨 Card View
+:::{grid-item-card} [ART] Card View
 :link: sitemap_cards
 :link-type: doc
 
 Beautiful card-based navigation with icons and descriptions
 :::
 
-:::{grid-item-card} 🗺️ Mindmap
+:::{grid-item-card} [MAP] Mindmap
 :link: sitemap_visual
 :link-type: doc
 
 Mermaid mindmap and flowchart visualizations
 :::
 
-:::{grid-item-card} 📜 Text Sitemap
+:::{grid-item-card} [SCROLL] Text Sitemap
 :link: documentation_structure
 :link-type: doc
 
@@ -281,26 +281,26 @@ Traditional hierarchical text-based sitemap
 
 ## Quick Start
 
-### First Simulation (5 minutes)
+### First Simulation (5 Minutes)
 
 ```bash
-# Install dependencies
+# Install Dependencies
 pip install -r requirements.txt
 
-# Run your first simulation
+# Run Your First Simulation
 python simulate.py --ctrl classical_smc --plot
 
-# Launch interactive dashboard
+# Launch Interactive Dashboard
 streamlit run streamlit_app.py
 ```
 
-### Optimize Controller Gains (15 minutes)
+### Optimize Controller Gains (15 Minutes)
 
 ```bash
-# Run PSO optimization
+# Run PSO Optimization
 python simulate.py --ctrl adaptive_smc --run-pso --save gains_adaptive.json
 
-# Test optimized controller
+# Test Optimized Controller
 python simulate.py --load gains_adaptive.json --plot
 ```
 
