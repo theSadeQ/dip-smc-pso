@@ -217,7 +217,7 @@ workflows/pso-hil-tuning
 ### Path 1: Quick Start (1-2 Hours)
 **Perfect for**: First-time users, rapid prototyping, initial exploration
 
-```
+```bash
 Getting Started -> Tutorial 01 -> How-To: Running Simulations
 ```
 
@@ -228,7 +228,7 @@ Getting Started -> Tutorial 01 -> How-To: Running Simulations
 ### Path 2: Controller Expert (4-6 Hours)
 **Perfect for**: Control systems researchers, comparative studies, selecting optimal controller
 
-```
+```bash
 Getting Started -> Tutorial 01 -> Tutorial 02 -> Tutorial 03 -> SMC Theory -> How-To: Optimization Workflows
 ```
 
@@ -239,7 +239,7 @@ Getting Started -> Tutorial 01 -> Tutorial 02 -> Tutorial 03 -> SMC Theory -> Ho
 ### Path 3: Custom Development (8-12 Hours)
 **Perfect for**: Implementing novel SMC algorithms, extending the framework
 
-```
+```bash
 Getting Started -> Tutorials 01-02 -> Controllers API -> Tutorial 04 -> Tutorial 03 -> How-To: Testing & Validation -> SMC Theory
 ```
 
@@ -250,7 +250,7 @@ Getting Started -> Tutorials 01-02 -> Controllers API -> Tutorial 04 -> Tutorial
 ### Path 4: Research Publication (12+ Hours)
 **Perfect for**: Graduate students, academic researchers, industrial R&D
 
-```
+```bash
 Complete Paths 1-2 -> Tutorial 05 -> How-To: Result Analysis -> PSO Theory -> DIP Dynamics -> User Guide (Batch Processing) -> All API Reference
 ```
 

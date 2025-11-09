@@ -209,6 +209,8 @@ pip install -r requirements.txt
 python simulate.py --help
 ```
 
+## Verify Installation
+
 ### First Simulation
 
 ```bash
@@ -235,6 +237,10 @@ python simulate.py --ctrl sta_smc --dynamics full --plot
 python simulate.py --ctrl adaptive_smc --disturbance --plot
 ```
 
+## Adaptive Disturbances
+
+### Adaptive Disturbances
+
 #### PSO Optimization
 ```bash
 # Optimize Classical SMC Gains
@@ -247,6 +253,10 @@ python simulate.py --ctrl sta_smc --run-pso --particles 50 --generations 100
 python simulate.py --load gains_classical.json --plot
 ```
 
+## Load Pre Gains
+
+### Load Pre Gains
+
 #### Hardware-in-the-loop (hil)
 ```bash
 # Start HIL Plant Server
@@ -256,6 +266,10 @@ python simulate.py --run-hil-server --port 8888
 python simulate.py --run-hil --host localhost --port 8888
 ```
 
+## Run Controller Client
+
+### Run Controller Client
+
 #### Batch Analysis
 ```bash
 # Monte Carlo Analysis
@@ -264,6 +278,8 @@ python simulate.py --ctrl classical_smc --monte-carlo --runs 1000
 # Statistical Validation
 python simulate.py --ctrl sta_smc --statistical-analysis
 ```
+
+## Statistical Validation
 
 ### Interactive Web Application
 
@@ -409,7 +425,7 @@ flowchart TD
 
 ## Project Structure
 
-```
+```bash
 dip-smc-pso/
 ├── simulate.py              # Main CLI application
 ├── streamlit_app.py         # Web dashboard
@@ -500,6 +516,8 @@ pytest --cov=src --cov-report=html
 python tests/browser_automation/run_tests.py --browser chromium
 ```
 
+## Browser Automation Tests
+
 ### Automated Browser Testing
 
 **NEW:** Comprehensive browser automation with Playwright + pytest
@@ -526,9 +544,11 @@ python tests/browser_automation/run_tests.py --all-browsers
 
 **Documentation:** `tests/browser_automation/README.md`
 
+## Open Tests
+
 ### Test Structure
 
-```
+```bash
 tests/
 ├── test_controllers/
 │   ├── base/                    # Controller interface tests
@@ -555,6 +575,8 @@ pytest --benchmark-only --benchmark-autosave
 pytest --benchmark-only --benchmark-compare --benchmark-compare-fail=mean:5%
 ```
 
+## Overview
+
 ### What Gets Measured
 - **Controller microbenchmarks**: `compute_control` for each controller type
 - **End-to-end throughput**: Batch simulation for 50 particles over 1.0s
@@ -580,6 +602,8 @@ pre-commit install
 pre-commit run --all-files
 ```
 
+## Pre Hooks
+
 ### Documentation
 
 ```bash
@@ -589,6 +613,8 @@ sphinx-build -b html docs docs/_build/html
 # Serve Locally
 python -m http.server -d docs/_build/html
 ```
+
+## Serve Locally
 
 ### Performance Profiling
 
@@ -602,6 +628,8 @@ python -m memory_profiler simulate.py --ctrl classical_smc
 # Generate Performance Report
 python .dev_tools/performance_audit.py
 ```
+
+## Generate Performance Report
 
 ### Automated Checkpoints
 
@@ -632,11 +660,13 @@ schtasks /Create ^
 
 See [docs/claude-backup.md](docs/claude-backup.md) for full documentation.
 
+## Manual Checkpoint
+
 ### Account Switching (zero-effort Session Continuity)
 
 Hit token limits? Switch Claude Code accounts effortlessly:
 
-```
+```bash
 1. Account A hits token limit
 2. Switch to Account B
 3. Say: "continue" or "hi"
@@ -743,7 +773,7 @@ python scripts/test_spof_fixes.py
 ## License & Citations
 
 ### License
-```
+```bash
 MIT License - see LICENSE file for details
 ```
 

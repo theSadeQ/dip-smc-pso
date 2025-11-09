@@ -294,6 +294,8 @@ python simulate.py --ctrl classical_smc --plot
 streamlit run streamlit_app.py
 ```
 
+## Launch Interactive Dashboard
+
 ### Optimize Controller Gains (15 Minutes)
 
 ```bash
@@ -303,6 +305,8 @@ python simulate.py --ctrl adaptive_smc --run-pso --save gains_adaptive.json
 # Test Optimized Controller
 python simulate.py --load gains_adaptive.json --plot
 ```
+
+## Test Optimized Controller
 
 ### Run Test Suite
 
