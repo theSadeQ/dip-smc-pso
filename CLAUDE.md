@@ -17,6 +17,13 @@
 - **Action:** Complete task → Update tracking docs → Commit → Push → Start next task
 - **Exception:** Only ask questions when user input is REQUIRED for implementation decisions
 
+**CRITICAL RULE - WINDOWS PLATFORM:**
+- **Platform**: Windows (win32) - Working Directory: D:\Projects\main
+- **ALWAYS use `python`** NOT `python3` (python3 doesn't exist on Windows, causes exit code 49)
+- **ALWAYS use `python -m pytest`** NOT `python3 -m pytest`
+- **ALWAYS use `python simulate.py`** NOT `python3 simulate.py`
+- **Example:** `python --version` works ✓ | `python3 --version` fails with exit code 49 ✗
+
 ------
 
 ## 1) Repository Information
