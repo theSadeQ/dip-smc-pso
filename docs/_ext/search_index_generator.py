@@ -163,11 +163,12 @@ def build_search_index(app, exception):
 
     Called automatically after Sphinx HTML build completes.
     """
-    if exception:
-        return  # Don't build index if Sphinx build failed
-
+    # Only generate search index for HTML builds
     if app.builder.name != 'html':
-        return  # Only build for HTML output
+        return
+
+    # Proceed even if there were warnings/exceptions from other extensions
+    # (as long as HTML files were successfully generated)
 
     # Paths
     build_dir = Path(app.outdir)
