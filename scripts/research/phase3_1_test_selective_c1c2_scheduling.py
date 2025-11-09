@@ -61,6 +61,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Enable DEBUG logging when verification mode is active
+VERIFICATION_MODE = False  # Set to True for detailed verification logging
+
 # ASCII-only output (Windows terminal compatibility)
 ASCII_OK = "[OK]"
 ASCII_ERROR = "[ERROR]"
@@ -256,6 +259,7 @@ def create_selective_scheduler(
             theta_mag = self._compute_theta_magnitude(state)
 
             # Determine mode with hysteresis
+            old_mode = self.current_mode
             if self.current_mode == "aggressive":
                 # In aggressive mode, switch to conservative if theta exceeds large threshold
                 if theta_mag > self.large_threshold + self.hysteresis_width:
@@ -264,6 +268,10 @@ def create_selective_scheduler(
                 # In conservative mode, switch to aggressive if theta below small threshold
                 if theta_mag < self.small_threshold - self.hysteresis_width:
                     self.current_mode = "aggressive"
+
+            # Log mode transitions if verification mode enabled
+            if VERIFICATION_MODE and old_mode != self.current_mode:
+                logger.debug(f"  [SCHEDULER] Mode transition: {old_mode} -> {self.current_mode} (theta_mag={theta_mag:.4f})")
 
             self.last_theta_mag = theta_mag
 
@@ -281,11 +289,15 @@ def create_selective_scheduler(
                 scheduled_gains[0] = self.robust_gains[0] * scale  # c1
                 scheduled_gains[1] = self.robust_gains[1] * scale  # lambda1
                 # c2 and lambda2 remain at robust values
+                if VERIFICATION_MODE:
+                    logger.debug(f"  [c1_only] c1: {scheduled_gains[0]:.4f} (scale={scale:.2f}), c2: {scheduled_gains[2]:.4f} (FIXED)")
             elif self.mode == "c2_only":
                 # Only scale c2 and lambda2 (indices 2, 3)
                 scheduled_gains[2] = self.robust_gains[2] * scale  # c2
                 scheduled_gains[3] = self.robust_gains[3] * scale  # lambda2
                 # c1 and lambda1 remain at robust values
+                if VERIFICATION_MODE:
+                    logger.debug(f"  [c2_only] c1: {scheduled_gains[0]:.4f} (FIXED), c2: {scheduled_gains[2]:.4f} (scale={scale:.2f})")
 
             return scheduled_gains
 
@@ -603,15 +615,25 @@ def create_comparison_plots(
 
 
 def main():
+    global VERIFICATION_MODE  # Allow modifying global verification flag
+
     parser = argparse.ArgumentParser(description="Phase 3.1: Selective c1/c2 Scheduling Testing")
     parser.add_argument("--trials", type=int, default=25,
                        help="Number of trials per condition (default: 25)")
     parser.add_argument("--quick", action="store_true",
                        help="Quick test with 10 trials per condition")
+    parser.add_argument("--verify", action="store_true",
+                       help="Enable verification mode with detailed DEBUG logging")
     parser.add_argument("--seed", type=int, default=42,
                        help="Random seed (default: 42)")
 
     args = parser.parse_args()
+
+    # Enable verification mode if requested
+    if args.verify:
+        VERIFICATION_MODE = True
+        logger.setLevel(logging.DEBUG)
+        logger.info(f"{ASCII_INFO} Verification mode ENABLED - detailed logging active")
 
     if args.quick:
         num_trials = 10
