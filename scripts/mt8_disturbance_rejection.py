@@ -184,6 +184,69 @@ def run_simulation_with_disturbance(
     return t_arr, x_arr, u_arr
 
 
+def compute_metrics(
+    t_arr: np.ndarray,
+    x_arr: np.ndarray,
+    u_arr: np.ndarray,
+    disturbance_start_time: float = 2.0
+) -> Dict[str, Any]:
+    """
+    Compute disturbance rejection metrics (simplified interface for validation scripts).
+
+    Args:
+        t_arr: Time array
+        x_arr: State array
+        u_arr: Control array
+        disturbance_start_time: When disturbance starts (s)
+
+    Returns:
+        Dictionary with metrics: settling_time, max_overshoot, recovery_time,
+        control_effort, converged
+    """
+    # Extract angles
+    theta1 = x_arr[:, 1]
+    theta2 = x_arr[:, 2]
+
+    # Angle threshold for "settled"
+    angle_threshold = np.radians(5)  # 5 degrees
+
+    # Find when disturbance starts (index)
+    dist_start_idx = np.searchsorted(t_arr, disturbance_start_time)
+
+    # 1. Settling time under disturbance
+    settled_mask = (np.abs(theta1) < angle_threshold) & (np.abs(theta2) < angle_threshold)
+    settling_time = 10.0  # Default: didn't settle
+    for i in range(dist_start_idx, len(settled_mask) - 50):
+        if np.all(settled_mask[i:i + 50]):  # 0.5s = 50 samples at dt=0.01
+            settling_time = t_arr[i]
+            break
+
+    # 2. Maximum overshoot after disturbance
+    theta_max_after_dist = np.max(np.abs(np.concatenate([theta1[dist_start_idx:], theta2[dist_start_idx:]])))
+    max_overshoot = np.degrees(theta_max_after_dist)
+
+    # 3. Recovery time
+    recovery_time = 10.0  # Default: didn't recover
+    for i in range(dist_start_idx, len(theta1)):
+        if np.abs(theta1[i]) < angle_threshold and np.abs(theta2[i]) < angle_threshold:
+            recovery_time = t_arr[i] - disturbance_start_time
+            break
+
+    # 4. Control effort
+    control_effort = np.sqrt(np.mean(u_arr**2))
+
+    # Check convergence
+    converged = settling_time < 10.0 and max_overshoot < 30.0
+
+    return {
+        'settling_time': settling_time,
+        'max_overshoot': max_overshoot,
+        'recovery_time': recovery_time,
+        'control_effort': control_effort,
+        'converged': converged
+    }
+
+
 def analyze_disturbance_rejection(
     controller_name: str,
     disturbance_type: str,
