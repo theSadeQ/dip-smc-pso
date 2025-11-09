@@ -1,0 +1,1043 @@
+{
+  "qa02_audit_date": "2025-11-09 19:48:00",
+  "overall_qa02_score": 66.5,
+  "files_audited": 4,
+  "results": [
+    {
+      "file": "D:\\Projects\\main\\docs\\index.md",
+      "name": "docs/index.md",
+      "type": "sphinx_index",
+      "description": "Sphinx homepage",
+      "file_stats": {
+        "size_chars": 9120,
+        "size_lines": 346,
+        "size_kb": 8.90625
+      },
+      "completeness": {
+        "score": 100,
+        "issues": [],
+        "metrics": {
+          "total_issues": 0
+        }
+      },
+      "accuracy": {
+        "score": 100,
+        "issues": [],
+        "metrics": {
+          "total_issues": 0
+        }
+      },
+      "readability": {
+        "score": 40,
+        "issues": [
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (241 words): \n\n**Key Capabilities:**\n- **Research-Grade Impleme...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (73 words): )\n- **NEW: Live Python Code Execution** - Run Pyth...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (197 words): )\n:link: guides/interactive/live-python-demo\n:link...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "major",
+            "issue": "Low readability score: 35.1 (target: 60-70)",
+            "impact": "Difficult for mixed audience"
+          }
+        ],
+        "metrics": {
+          "avg_sentence_length": "44.2 words",
+          "passive_voice_pct": "0.0%",
+          "flesch_reading_ease": "35.1",
+          "long_sentences": 3,
+          "dense_paragraphs": 2
+        }
+      },
+      "accessibility": {
+        "score": 0,
+        "issues": [
+          {
+            "line": 297,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 307,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 231,
+            "severity": "critical",
+            "issue": "Unicode emoji found: :::{grid-item-card} \ud83c\udfae 3D Interactive Pendulum (NEW",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 238,
+            "severity": "critical",
+            "issue": "Unicode emoji found: :::{grid-item-card} \ud83d\udc0d Live Python Code (NEW!)",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 245,
+            "severity": "critical",
+            "issue": "Unicode emoji found: :::{grid-item-card} \ud83c\udf9b\ufe0f Control Room",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 252,
+            "severity": "critical",
+            "issue": "Unicode emoji found: :::{grid-item-card} \ud83c\udfaf Interactive Graph",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 259,
+            "severity": "critical",
+            "issue": "Unicode emoji found: :::{grid-item-card} \ud83c\udfa8 Card View",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 266,
+            "severity": "critical",
+            "issue": "Unicode emoji found: :::{grid-item-card} \ud83d\uddfa\ufe0f Mindmap",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 273,
+            "severity": "critical",
+            "issue": "Unicode emoji found: :::{grid-item-card} \ud83d\udcdc Text Sitemap",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 245,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): :::{grid-item-card} \ud83c\udf9b\ufe0f Control Room",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 266,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): :::{grid-item-card} \ud83d\uddfa\ufe0f Mindmap",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          }
+        ],
+        "metrics": {
+          "heading_hierarchy_errors": 2,
+          "unicode_emoji_violations": 9,
+          "code_block_issues": 0
+        }
+      },
+      "link_validation": {
+        "score": 100,
+        "issues": [],
+        "tested_links": [
+          "NAVIGATION.md",
+          "index.md"
+        ],
+        "broken_links": [],
+        "metrics": {
+          "links_tested": 2,
+          "broken_links": 0
+        }
+      },
+      "overall_score": 68.0
+    },
+    {
+      "file": "D:\\Projects\\main\\docs\\guides\\INDEX.md",
+      "name": "guides/INDEX.md",
+      "type": "guides_hub",
+      "description": "User guides hub",
+      "file_stats": {
+        "size_chars": 14085,
+        "size_lines": 383,
+        "size_kb": 13.7548828125
+      },
+      "completeness": {
+        "score": 100,
+        "issues": [],
+        "metrics": {
+          "total_issues": 0
+        }
+      },
+      "accuracy": {
+        "score": 100,
+        "issues": [],
+        "metrics": {
+          "total_issues": 0
+        }
+      },
+      "readability": {
+        "score": 40,
+        "issues": [
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (65 words): 5 hours)\n- **[How-To Guides](#how-to-guides)** - T...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (135 words): \n\n\n---\n\n## Learning Paths\n\n### Path 1: Quick Start...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (48 words):  **Theory & Explanation** (Understanding-oriented)...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (72 words):  **Follow the style guide**: Consistent formatting...",
+            "impact": "Reduced readability"
+          }
+        ],
+        "metrics": {
+          "avg_sentence_length": "14.9 words",
+          "passive_voice_pct": "1.7%",
+          "flesch_reading_ease": "64.8",
+          "long_sentences": 4,
+          "dense_paragraphs": 2
+        }
+      },
+      "accessibility": {
+        "score": 60,
+        "issues": [
+          {
+            "line": 7,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): [GREEN] **Complete Beginner?** Start with [Path 0:",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "4 code blocks without language tags",
+            "impact": "Syntax highlighting and screen readers impaired"
+          }
+        ],
+        "metrics": {
+          "heading_hierarchy_errors": 0,
+          "unicode_emoji_violations": 1,
+          "code_block_issues": 4
+        }
+      },
+      "link_validation": {
+        "score": 90,
+        "issues": [
+          {
+            "line": null,
+            "severity": "critical",
+            "issue": "Broken link: ../.project/ai/edu/beginner-roadmap.md",
+            "impact": "Navigation fails, user cannot access content"
+          }
+        ],
+        "tested_links": [
+          "../NAVIGATION.md",
+          "../.project/ai/edu/beginner-roadmap.md",
+          "getting-started.md",
+          "user-guide.md",
+          "QUICK_REFERENCE.md",
+          "tutorials/tutorial-01-first-simulation.md",
+          "tutorials/tutorial-02-controller-comparison.md",
+          "tutorials/tutorial-03-pso-optimization.md",
+          "tutorials/tutorial-04-custom-controller.md",
+          "tutorials/tutorial-05-research-workflow.md",
+          "how-to/running-simulations.md",
+          "how-to/result-analysis.md",
+          "how-to/optimization-workflows.md",
+          "how-to/testing-validation.md"
+        ],
+        "broken_links": [
+          "../.project/ai/edu/beginner-roadmap.md"
+        ],
+        "metrics": {
+          "links_tested": 14,
+          "broken_links": 1
+        }
+      },
+      "overall_score": 78.0
+    },
+    {
+      "file": "D:\\Projects\\main\\README.md",
+      "name": "README.md",
+      "type": "github_readme",
+      "description": "GitHub entry point",
+      "file_stats": {
+        "size_chars": 28762,
+        "size_lines": 829,
+        "size_kb": 28.087890625
+      },
+      "completeness": {
+        "score": 100,
+        "issues": [],
+        "metrics": {
+          "total_issues": 0
+        }
+      },
+      "accuracy": {
+        "score": 100,
+        "issues": [],
+        "metrics": {
+          "total_issues": 0
+        }
+      },
+      "readability": {
+        "score": 0,
+        "issues": [
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (297 words): \n\n## Key Features\n\n### Advanced Control Systems\n- ...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (77 words): 11)\n- **Git** for version control\n- **Optional**: ...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (128 words): \n\n### Comprehensive Documentation\n\nThis project pr...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (79 words): \n\n## Project Structure\n\n\n## Testing\n\n### Coverage ...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (78 words):  **CONTINUOUS**: Maintain and update tests for cha...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (65 words): 0s\n- **Memory usage**: Peak memory consumption dur...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (169 words): \n\n## Configuration Reference\n\nThe system uses YAML...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (74 words): 0 compatibility verified\n- **Memory Safety**: Boun...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (55 words): md)\n**39 academic references** for control theory ...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (97 words): md)\n\n---\n\n### How to Cite This Work\n\n**For Academi...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "6 paragraphs exceed 5 sentences",
+            "impact": "Dense text blocks reduce scannability"
+          },
+          {
+            "line": null,
+            "severity": "major",
+            "issue": "Low readability score: 59.9 (target: 60-70)",
+            "impact": "Difficult for mixed audience"
+          }
+        ],
+        "metrics": {
+          "avg_sentence_length": "19.8 words",
+          "passive_voice_pct": "1.2%",
+          "flesch_reading_ease": "59.9",
+          "long_sentences": 10,
+          "dense_paragraphs": 6
+        }
+      },
+      "accessibility": {
+        "score": 0,
+        "issues": [
+          {
+            "line": 212,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 238,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H4",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 250,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H4",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 259,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H4",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 268,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 503,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 529,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 558,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 583,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 593,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 606,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 635,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 133,
+            "severity": "critical",
+            "issue": "Unicode emoji found: - \ud83d\udd35 **User Interfaces**: CLI and web-based interac",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 134,
+            "severity": "critical",
+            "issue": "Unicode emoji found: - \ud83d\udfe1 **Controllers**: SMC algorithms with factory p",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 135,
+            "severity": "critical",
+            "issue": "Unicode emoji found: - \ud83d\udfe2 **Plant Models**: Dynamics with varying fideli",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 136,
+            "severity": "critical",
+            "issue": "Unicode emoji found: - \ud83d\udd34 **Core Engine**: Simulation orchestration and ",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 137,
+            "severity": "critical",
+            "issue": "Unicode emoji found: - \ud83d\udfe1 **Optimization**: PSO-based automated tuning",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 304,
+            "severity": "critical",
+            "issue": "Unicode emoji found: **\ud83d\udcda Tutorials** - Step-by-step learning paths",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 309,
+            "severity": "critical",
+            "issue": "Unicode emoji found: **\ud83d\udcd6 How-To Guides** - Task-oriented recipes",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 314,
+            "severity": "critical",
+            "issue": "Unicode emoji found: **\ud83d\udd27 API Reference** - Technical documentation",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 319,
+            "severity": "critical",
+            "issue": "Unicode emoji found: **\ud83d\udcd0 Theory & Explanation** - Mathematical foundati",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 330,
+            "severity": "critical",
+            "issue": "Unicode emoji found:     START[\"\ud83c\udfaf Start Here\"] --> GOAL{What's your goa",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 377,
+            "severity": "critical",
+            "issue": "Unicode emoji found: | **\ud83d\ude80 Getting Started** | | | | |",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 381,
+            "severity": "critical",
+            "issue": "Unicode emoji found: | **\ud83d\udcda Tutorials** | | | | |",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 387,
+            "severity": "critical",
+            "issue": "Unicode emoji found: | **\ud83d\udcd6 How-To Guides** | | | | |",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 392,
+            "severity": "critical",
+            "issue": "Unicode emoji found: | **\ud83d\udd27 API Reference** | | | | |",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 400,
+            "severity": "critical",
+            "issue": "Unicode emoji found: | **\ud83d\udcd0 Theory** | | | | |",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 754,
+            "severity": "critical",
+            "issue": "Unicode emoji found: #### \ud83d\udcda [Academic Theory & Research](CITATIONS_ACAD",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 761,
+            "severity": "critical",
+            "issue": "Unicode emoji found: \ud83d\udcd6 [View complete academic citations \u2192](CITATIONS_A",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 763,
+            "severity": "critical",
+            "issue": "Unicode emoji found: #### \ud83d\udd27 [Software Dependencies](DEPENDENCIES.md)",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 770,
+            "severity": "critical",
+            "issue": "Unicode emoji found: \ud83d\udce6 [View dependency citations \u2192](DEPENDENCIES.md)",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 772,
+            "severity": "critical",
+            "issue": "Unicode emoji found: #### \ud83c\udfd7\ufe0f [Design Patterns & Architecture](PATTERNS.",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 778,
+            "severity": "critical",
+            "issue": "Unicode emoji found: \ud83d\udd28 [View pattern documentation \u2192](PATTERNS.md)",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 780,
+            "severity": "critical",
+            "issue": "Unicode emoji found: #### \ud83d\udccb [Master Citation Index](CITATIONS.md)",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 787,
+            "severity": "critical",
+            "issue": "Unicode emoji found: \ud83d\udcca [View master index \u2192](CITATIONS.md)",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 133,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - \ud83d\udd35 **User Interfaces**: CLI and web-based interac",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 134,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - \ud83d\udfe1 **Controllers**: SMC algorithms with factory p",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 135,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - \ud83d\udfe2 **Plant Models**: Dynamics with varying fideli",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 136,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - \ud83d\udd34 **Core Engine**: Simulation orchestration and ",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 137,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - \ud83d\udfe1 **Optimization**: PSO-based automated tuning",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 174,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII):     State-->>Controller: \u2705 Stabilized",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 332,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII):     GOAL -->|Quick prototype| PATH1[\"Path 1: Quick",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 333,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII):     GOAL -->|Compare controllers| PATH2[\"Path 2: C",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 334,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII):     GOAL -->|Build custom SMC| PATH3[\"Path 3: Cust",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 335,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII):     GOAL -->|Research publication| PATH4[\"Path 4: ",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 340,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII):     P1_3 --> DONE1[\"\u2705 Ready to experiment\"]",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 347,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII):     P2_5 --> DONE2[\"\u2705 Controller expert\"]",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 354,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII):     P3_5 --> DONE3[\"\u2705 Custom SMC ready\"]",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 360,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII):     P4_4 --> DONE4[\"\u2705 Publication ready\"]",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 772,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): #### \ud83c\udfd7\ufe0f [Design Patterns & Architecture](PATTERNS.",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 812,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - \u2705 **50,000+ words** of attribution documentation",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 813,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - \u2705 **85% primary sources** (foundational papers a",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 814,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - \u2705 **100% license compliance** (all dependencies ",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 815,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - \u2705 **Complete BibTeX database** ready for LaTeX/S",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "4 code blocks without language tags",
+            "impact": "Syntax highlighting and screen readers impaired"
+          }
+        ],
+        "metrics": {
+          "heading_hierarchy_errors": 12,
+          "unicode_emoji_violations": 42,
+          "code_block_issues": 4
+        }
+      },
+      "link_validation": {
+        "score": 100,
+        "issues": [],
+        "tested_links": [
+          "docs/NAVIGATION.md",
+          "docs/guides/getting-started.md",
+          "docs/guides/user-guide.md",
+          "docs/guides/QUICK_REFERENCE.md",
+          "docs/guides/tutorials/tutorial-01-first-simulation.md",
+          "docs/guides/tutorials/tutorial-02-controller-comparison.md",
+          "docs/guides/tutorials/tutorial-03-pso-optimization.md",
+          "docs/guides/tutorials/tutorial-04-custom-controller.md",
+          "docs/guides/tutorials/tutorial-05-research-workflow.md",
+          "docs/guides/how-to/running-simulations.md",
+          "docs/guides/how-to/result-analysis.md",
+          "docs/guides/how-to/optimization-workflows.md",
+          "docs/guides/how-to/testing-validation.md",
+          "docs/guides/api/README.md",
+          "docs/guides/api/controllers.md",
+          "docs/guides/api/simulation.md"
+        ],
+        "broken_links": [],
+        "metrics": {
+          "links_tested": 16,
+          "broken_links": 0
+        }
+      },
+      "overall_score": 60.0
+    },
+    {
+      "file": "D:\\Projects\\main\\CLAUDE.md",
+      "name": "CLAUDE.md",
+      "type": "team_memory",
+      "description": "Team memory",
+      "file_stats": {
+        "size_chars": 25538,
+        "size_lines": 700,
+        "size_kb": 24.939453125
+      },
+      "completeness": {
+        "score": 100,
+        "issues": [],
+        "metrics": {
+          "total_issues": 0
+        }
+      },
+      "accuracy": {
+        "score": 100,
+        "issues": [],
+        "metrics": {
+          "total_issues": 0
+        }
+      },
+      "readability": {
+        "score": 0,
+        "issues": [
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (61 words): \n- **Reason:** Windows terminal (cp1252 encoding) ...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (97 words): \"\n- **ALWAYS commit and push** changes automatical...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (71 words): py`) - Recovers interrupted multi-agent work\n\n### ...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (52 words): md`):\n- **Target**: Complete beginners with ZERO c...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (42 words): 9+\n- NumPy, SciPy, Matplotlib\n- Numba for vectoriz...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (68 words): 2 complete)\n- Thread Safety: 100% (11/11 tests pas...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (117 words): 9/100 (BLOCKED)\n\n### Validation Commands:\n\n### Pha...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (52 words): \n\n**Quick Reference:**\n- All controllers use weakr...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (73 words): \n\n**Quick Reference:**\n- 6-agent parallel orchestr...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (82 words): rst`, any `toctree` directives\n\n### Common Pitfall...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (74 words): project/mcp/servers/`)\n- For semantic documentatio...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "Long sentence (56 words): 1 Level AA, 18 design tokens, 4 breakpoints valida...",
+            "impact": "Reduced readability"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "13 paragraphs exceed 5 sentences",
+            "impact": "Dense text blocks reduce scannability"
+          }
+        ],
+        "metrics": {
+          "avg_sentence_length": "11.1 words",
+          "passive_voice_pct": "0.8%",
+          "flesch_reading_ease": "68.7",
+          "long_sentences": 12,
+          "dense_paragraphs": 13
+        }
+      },
+      "accessibility": {
+        "score": 0,
+        "issues": [
+          {
+            "line": 68,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 361,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 531,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 592,
+            "severity": "major",
+            "issue": "Heading hierarchy skip: H1 to H3",
+            "impact": "Screen readers cannot navigate properly"
+          },
+          {
+            "line": 6,
+            "severity": "critical",
+            "issue": "Unicode emoji found: - **NEVER use Unicode emojis** (\ud83d\ude80, \u2705, \u274c, etc.) in ",
+            "impact": "Violates ASCII-only rule, breaks Windows terminal"
+          },
+          {
+            "line": 6,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - **NEVER use Unicode emojis** (\ud83d\ude80, \u2705, \u274c, etc.) in ",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 10,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - **Example:** Use \"[OK]\" not \"\u2705\", \"[ERROR]\" not \"",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 54,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): **Status:** \u2705 Operational (Oct 2025)",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 75,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - \u2705 Git commits (10/10), project state (9/10), age",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 335,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - Status: RESEARCH-READY \u2705 | NOT production-ready ",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 337,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): ### Current Status: RESEARCH-READY \u2705",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 340,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - \u2705 Single-threaded & multi-threaded operation val",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 341,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - \u2705 Controllers functional and tested",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 342,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - \u2705 Documentation complete and accurate",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 363,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): **Status**: \u2705 COMPLETE (11/11 tasks, 100%)",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 542,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): \u2705 Do verify timestamps - `stat` both source and bu",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 543,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): \u2705 Do check MD5 sums - ensure files actually copied",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 544,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): \u2705 Do test with curl - verify localhost serves new ",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 619,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - Phase 3: \u2705 COMPLETE (34/34 issues, October 9-17,",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": 622,
+            "severity": "critical",
+            "issue": "Unicode emoji/marker found (not ASCII): - Browser: Chromium validated \u2705 | Firefox/Safari d",
+            "impact": "VIOLATES CLAUDE.md CRITICAL RULE - Windows terminal incompatible"
+          },
+          {
+            "line": null,
+            "severity": "minor",
+            "issue": "4 code blocks without language tags",
+            "impact": "Syntax highlighting and screen readers impaired"
+          }
+        ],
+        "metrics": {
+          "heading_hierarchy_errors": 4,
+          "unicode_emoji_violations": 16,
+          "code_block_issues": 4
+        }
+      },
+      "link_validation": {
+        "score": 100,
+        "issues": [],
+        "tested_links": [
+          "docs/NAVIGATION.md"
+        ],
+        "broken_links": [],
+        "metrics": {
+          "links_tested": 1,
+          "broken_links": 0
+        }
+      },
+      "overall_score": 60.0
+    }
+  ],
+  "ranked_priority": [
+    {
+      "priority": 1,
+      "name": "README.md",
+      "score": 60.0,
+      "description": "GitHub entry point"
+    },
+    {
+      "priority": 2,
+      "name": "CLAUDE.md",
+      "score": 60.0,
+      "description": "Team memory"
+    },
+    {
+      "priority": 3,
+      "name": "docs/index.md",
+      "score": 68.0,
+      "description": "Sphinx homepage"
+    },
+    {
+      "priority": 4,
+      "name": "guides/INDEX.md",
+      "score": 78.0,
+      "description": "User guides hub"
+    }
+  ]
+}
