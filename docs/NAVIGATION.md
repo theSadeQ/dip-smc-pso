@@ -84,13 +84,13 @@ Welcome to the master navigation hub! This page connects all 11 documentation sy
 [Architecture Overview](architecture.md)
 → System design, component interactions, timing analysis
 
-**Quick API Access**:
-- [Controllers API](api/controllers.md) - SMC types, factory, gain bounds
-- [Simulation API](api/simulation.md) - SimulationRunner, dynamics models, batch processing
-- [Optimization API](api/optimization.md) - PSOTuner, cost functions, convergence
-- [Plant Models API](api/plant-models.md) - Physics models, parameter configuration
-- [Configuration API](api/configuration.md) - YAML loading, validation, programmatic config
-- [Utilities API](api/utilities.md) - Validation, control primitives, monitoring tools
+**Quick API Access**: See [Complete API Reference](api/index.md) for detailed documentation of:
+- Controllers (SMC types, factory, gain bounds)
+- Simulation (SimulationRunner, dynamics models, batch processing)
+- Optimization (PSOTuner, cost functions, convergence)
+- Plant Models (physics models, parameter configuration)
+- Configuration (YAML loading, validation, programmatic config)
+- Utilities (validation, control primitives, monitoring tools)
 
 ---
 
@@ -102,16 +102,11 @@ Welcome to the master navigation hub! This page connects all 11 documentation sy
 [PSO Optimization Workflows](guides/how-to/optimization-workflows.md) (25 min)
 → Quick recipes for common optimization tasks
 
-[Custom Cost Functions](workflows/custom-cost-functions.md)
-→ Design multi-objective cost functions for specific requirements
+[PSO Integration Guide](PSO_INTEGRATION_GUIDE.md)
+→ Complete PSO integration with custom cost functions and controller-specific tuning
 
 [PSO Convergence Theory](pso_convergence_theory.md)
 → Mathematical foundations of PSO convergence guarantees
-
-**Controller-Specific PSO Guides**:
-- [PSO for Adaptive SMC](workflows/pso-adaptive-smc.md)
-- [PSO for Hybrid SMC](workflows/pso-hybrid-smc.md)
-- [PSO for Super-Twisting SMC](workflows/pso-sta-smc.md)
 
 ---
 
@@ -124,20 +119,10 @@ Welcome to the master navigation hub! This page connects all 11 documentation sy
 → Deploy interactive dashboard to cloud platforms
 
 [Hardware-in-the-Loop Quickstart](hil_quickstart.md)
-→ Real-time simulation with physical systems
+→ Real-time simulation with physical systems (basic setup, safety protocols, deployment)
 
-**HIL Workflows** (6 documents):
-- [HIL Workflow](workflows/hil-workflow.md) - Basic setup
-- [HIL Production Checklist](workflows/hil-production-checklist.md) - Deployment readiness
-- [HIL Safety Validation](workflows/hil-safety-validation.md) - Safety protocols
-- [HIL Multi-Machine](workflows/hil-multi-machine.md) - Distributed systems
-- [HIL Disaster Recovery](workflows/hil-disaster-recovery.md) - Fault tolerance
-- [PSO HIL Tuning](workflows/pso-hil-tuning.md) - Optimize on real hardware
-
-**Production Readiness**:
-- [Production Index](production/index.md) - Production deployment guides
-- [Quality Gates](quality_gates.md) - Requirements for production release
-- [Safe Operations Reference](safe_operations_reference.md) - Safety-critical operations
+[Production Deployment Guide](production/index.md)
+→ Production readiness guides, quality gates, deployment checklists
 
 ---
 
@@ -156,7 +141,7 @@ Welcome to the master navigation hub! This page connects all 11 documentation sy
 - Installation errors → [Getting Started - Troubleshooting](guides/getting-started.md#troubleshooting)
 - Test failures → [Testing Guide](guides/how-to/testing-validation.md)
 - PSO convergence issues → [PSO Workflows](guides/how-to/optimization-workflows.md#troubleshooting)
-- Configuration errors → [Configuration API](api/configuration.md#validation)
+- Configuration errors → [Configuration Reference](configuration-reference.md)
 
 ---
 
@@ -289,7 +274,7 @@ Quick Mastery (5h) + SMC Theory (30 min) + PSO Theory (25 min) + DIP Dynamics (2
 
 #### Quick Access
 
-**[CORE]** [Research Workflow Guide](workflows/research_workflow.md)
+**[CORE]** [Research Workflow Guide](workflow/research_workflow.md)
 → Complete end-to-end research project workflow
 
 **[CORE]** [Tutorial 05: Research Workflow](guides/tutorials/tutorial-05-research-workflow.md) (120 min)
@@ -301,8 +286,7 @@ Quick Mastery (5h) + SMC Theory (30 min) + PSO Theory (25 min) + DIP Dynamics (2
 #### Research Tools & Workflows
 
 **Statistical Validation**:
-- [Monte Carlo Validation Quickstart](workflows/monte-carlo-validation-quickstart.md)
-- [How-To: Result Analysis](guides/how-to/result-analysis.md)
+- [How-To: Result Analysis](guides/how-to/result-analysis.md) - Monte Carlo analysis, metrics interpretation, confidence intervals
 - [Benchmarks Index](benchmarks/index.md) - Performance benchmarks with statistical analysis
 
 **Mathematical Foundations**:
@@ -370,14 +354,13 @@ Quick Mastery (5h) + SMC Theory (30 min) + PSO Theory (25 min) + DIP Dynamics (2
 
 #### Development Resources
 
-**API Documentation** (7 modules):
-- [Controllers API](api/controllers.md) - Factory system, SMC types, gain bounds (726 lines, 30 min)
-- [Simulation API](api/simulation.md) - SimulationRunner, dynamics models, batch processing (517 lines, 25 min)
-- [Optimization API](api/optimization.md) - PSOTuner, cost functions, convergence (543 lines, 25 min)
-- [Configuration API](api/configuration.md) - YAML loading, validation (438 lines, 20 min)
-- [Plant Models API](api/plant-models.md) - Physics models, custom dynamics (424 lines, 20 min)
-- [Utilities API](api/utilities.md) - Validation, control primitives, monitoring (434 lines, 20 min)
-- [API Index](api/index.md) - Overview and navigation (203 lines, 10 min)
+**API Documentation**: [Complete API Reference](api/index.md) - 7 modules covering:
+- Controllers (factory system, SMC types, gain bounds)
+- Simulation (SimulationRunner, dynamics models, batch processing)
+- Optimization (PSOTuner, cost functions, convergence)
+- Configuration (YAML loading, validation)
+- Plant Models (physics models, custom dynamics)
+- Utilities (validation, control primitives, monitoring)
 
 **Architecture Documentation**:
 - [Architecture Overview](architecture.md) - Complete system architecture
@@ -399,9 +382,8 @@ Quick Mastery (5h) + SMC Theory (30 min) + PSO Theory (25 min) + DIP Dynamics (2
 #### Configuration & Deployment
 
 **Configuration**:
-- [Configuration Reference](configuration-reference.md) - Complete YAML schema
+- [Configuration Reference](configuration-reference.md) - Complete YAML schema and programmatic configuration
 - [Plant Configuration](PLANT_CONFIGURATION.md) - Physics parameter configuration
-- [Configuration API](api/configuration.md) - Programmatic configuration
 
 **Deployment**:
 - [Deployment Guide](deployment/DEPLOYMENT_GUIDE.md) - General deployment strategies
@@ -552,7 +534,6 @@ Complete directory of all 43 index.md files organized by documentation domain.
 - [thesis/index.md](thesis/index.md) - Thesis materials (40 docs)
 - [mcp-debugging/index.md](mcp-debugging/index.md) - MCP debugging workflows
 - [analysis/index.md](analysis/index.md) - Analysis tools and reports
-- [plans/index.md](plans/index.md) - Planning documents
 - [changelog/index.md](changelog/index.md) - Version history
 - [contributing/index.md](contributing/index.md) - Contribution guidelines
 
@@ -835,8 +816,8 @@ flowchart TD
 | **Create a custom controller** | [Tutorial 04](guides/tutorials/tutorial-04-custom-controller.md) | 120 min |
 | **Understand SMC mathematics** | [SMC Theory](guides/theory/smc-theory.md) | 30 min |
 | **Understand PSO convergence** | [PSO Theory](guides/theory/pso-theory.md) | 25 min |
-| **Use the factory system** | [Controllers API](api/controllers.md) | 30 min |
-| **Configure PSO parameters** | [Optimization API](api/optimization.md) | 25 min |
+| **Use the factory system** | [Controller Factory Guide](CONTROLLER_FACTORY.md) | 30 min |
+| **Configure PSO parameters** | [PSO Integration Guide](PSO_INTEGRATION_GUIDE.md) | 25 min |
 | **Interpret performance metrics** | [How-To: Result Analysis](guides/how-to/result-analysis.md) | 20 min |
 | **Run batch simulations** | [User Guide - Batch Processing](guides/user-guide.md#batch-processing) | 15 min |
 | **Deploy to Docker** | [Docker Deployment](deployment/docker.md) | 30 min |
