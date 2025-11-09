@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 MCP Health Check Script
-Verifies all 11 MCP servers are installed and operational
+Verifies all 12 MCP servers are installed and operational
 
 Usage:
     python .project/dev_tools/check_mcp_health.py
@@ -108,13 +108,7 @@ def check_all_servers(config, verbose=False):
         command = server_config.get("command")
         args = server_config.get("args", [])
 
-        # Special handling for context7 - check if API key is configured
-        if server_name == "context7":
-            if "REQUIRED" in args:
-                status, message = False, "API key required (get from context7.com/dashboard)"
-            else:
-                status, message = check_npx_server(server_name, "@upstash/context7-mcp")
-        elif command == "node" and args:
+        if command == "node" and args:
             status, message = check_node_server(server_name, args[0])
         elif command == "python" and args:
             status, message = check_python_server(server_name, " ".join(args))
