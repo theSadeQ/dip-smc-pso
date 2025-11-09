@@ -208,15 +208,8 @@ def run_single_trial(s_aggressive: float, s_conservative: float,
     # Load config
     config = load_config()
 
-    # Create dynamics
-    dynamics = FullDIPDynamics(
-        m1=config.physics.m1,
-        m2=config.physics.m2,
-        l1=config.physics.l1,
-        l2=config.physics.l2,
-        M=config.physics.M,
-        g=config.physics.g
-    )
+    # Create dynamics (FullDIPDynamics takes config object, not individual params)
+    dynamics = FullDIPDynamics(config=config)
 
     # Create scheduler
     scheduler = SlidingSurfaceAdaptiveScheduler(
