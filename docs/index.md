@@ -88,6 +88,7 @@ python -m http.server 8000 --directory docs/_build/html
 :hidden:
 
 README
+NAVIGATION
 guides/getting-started
 guides/index
 hil_quickstart
@@ -137,6 +138,7 @@ pso_convergence_theory
 :caption: Testing & Validation
 :hidden:
 
+TESTING
 testing/index
 benchmarks/index
 coverage/index
@@ -165,6 +167,7 @@ plant_model
 production/index
 PSO_INTEGRATION_GUIDE
 fault_detection_guide
+fault_detection_system_documentation
 memory_management_patterns
 numerical_stability_guide
 safe_operations_reference
