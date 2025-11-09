@@ -1,13 +1,13 @@
 # Phase 4.1: Status Report
 
 **Date:** November 9, 2025
-**Status:** 95% COMPLETE - One remaining config type issue
+**Status:** 85% COMPLETE - Custom simulation loop needs replacement with standard infrastructure
 
 ---
 
 ## Summary
 
-Phase 4.1 (|s|-based threshold optimization) is nearly complete with all major components implemented. One minor config type conversion issue remains.
+Phase 4.1 (|s|-based threshold optimization) has all major components implemented. Multiple bugs fixed. Remaining blocker: custom simulation loop doesn't integrate properly with existing dynamics/controller infrastructure. Solution: Use project's standard simulation functions (like Phase 3 scripts).
 
 ---
 
@@ -21,66 +21,57 @@ Phase 4.1 (|s|-based threshold optimization) is nearly complete with all major c
 - ✅ Validation testing framework
 - ✅ Result saving and reporting
 
-### 2. Bug Fixes Applied
+### 2. Bug Fixes Applied (This Session)
 - ✅ Import path corrected: `src.controllers.smc.hybrid_adaptive_sta_smc`
 - ✅ PSO bounds fixed: 2 dimensions (s_aggressive, s_conservative)
 - ✅ PSO parameters reduced for faster execution (10 particles, 15 iterations)
 - ✅ Validation trial counts reduced (20 trials vs 100)
+- ✅ Config type conversion: `config.physics.model_dump()` → dict
+- ✅ Switched to `SimplifiedDIPDynamics` (same as Phase 3 scripts)
+- ✅ Controller output extraction: `output.u` from `HybridSTAOutput`
+- ✅ Dynamics result extraction: `result.state_derivative` from `DynamicsResult`
+- ✅ Control input wrapping: `np.array([u])` for dynamics.compute_dynamics()
 
 ---
 
 ## Remaining Issue ❌
 
-### Config Type Mismatch
+### Custom Simulation Loop Integration
 **File:** `scripts/research/phase4_1_optimize_s_based_thresholds.py`
-**Line:** 212
+**Lines:** 256-282 (run_single_trial simulation loop)
+
 **Error:**
 ```
-ValueError: config must be FullDIPConfig, dict, or AttributeDictionary,
-got <class 'src.config.loader.ConfigSchema'>
+[ERROR] Dynamics computation failed at t=3.910
+  State: [-10.02676413  -3.34021001  -3.76341586  -3.66135731  -3.85275889 -0.3486295 ]
+  Control: 0.0
+  Success: False
+  State derivative shape: (0,)
+  Info: {'failure_reason': 'Invalid state vector'}
 ```
 
-**Current Code (Line 208-212):**
+**Root Cause:**
+- Custom simulation loop doesn't properly integrate with project's infrastructure
+- State becomes invalid (angles blow up) after ~4 seconds
+- Controller producing 0.0 control despite large errors
+- Dynamics validation rejects invalid states and returns empty array
+
+**Solution:**
+Use project's standard simulation infrastructure instead of custom loop:
+
+**Example from Phase 3.1:**
 ```python
-# Load config
-config = load_config()
-
-# Create dynamics (FullDIPDynamics takes config object, not individual params)
-dynamics = FullDIPDynamics(config=config)
+from src.plant.core.dynamics import DIPDynamics
+# Use existing simulate_system or simulate_system_batch functions
 ```
 
-**Issue:**
-- `load_config()` returns `ConfigSchema` type
-- `FullDIPDynamics.__init__()` expects `FullDIPConfig`, `dict`, or `AttributeDictionary`
+**Recommended Approach:**
+1. Find simulation function used by Phase 3 scripts (validate_mt7_robust_pso.py, phase3_1_test_selective_c1c2_scheduling.py)
+2. Replace custom loop (lines 246-282) with standard simulation call
+3. Adapt controller wrapper (HybridWithSScheduling) to work with standard infrastructure
+4. Test with single trial before running full PSO
 
-**Solution Options:**
-
-**Option A: Convert to dict**
-```python
-config = load_config()
-dynamics = FullDIPDynamics(config=config.model_dump())  # Pydantic v2 method
-# OR
-dynamics = FullDIPDynamics(config=config.dict())  # Pydantic v1 method
-```
-
-**Option B: Use FullDIPConfig.from_dict()**
-```python
-from src.plant.models.full.config import FullDIPConfig
-
-config = load_config()
-full_dip_config = FullDIPConfig.from_dict(config.model_dump())
-dynamics = FullDIPDynamics(config=full_dip_config)
-```
-
-**Option C: Check existing usage**
-```bash
-# Find how FullDIPDynamics is used elsewhere
-grep -r "FullDIPDynamics(" --include="*.py" src/ scripts/ tests/
-```
-
-**Recommended:** Option C first (check existing usage), then apply Option A or B based on findings.
-
-**Time to Fix:** 5-10 minutes
+**Time to Fix:** 30-60 minutes (investigate + implement + test)
 
 ---
 
@@ -196,9 +187,9 @@ Small |s| → System on surface → Aggressive gains → Fast convergence
 
 ## Time Estimate
 
-**Total Time Remaining:** 1.5-2 hours
+**Total Time Remaining:** 2-3 hours
 
-- Fix config issue: 5-10 min
+- Fix simulation loop integration: 30-60 min
 - Run PSO (10 particles, 15 iters): 20-30 min
 - Run validation + baseline (20 trials each): 15-20 min
 - Analyze results: 10-15 min
@@ -207,6 +198,46 @@ Small |s| → System on surface → Aggressive gains → Fast convergence
 
 **If successful:** Proceed to Phase 4.2 (2-3 hours)
 **If failed:** Document and propose alternatives (30-60 min)
+
+---
+
+## Session Summary (November 9, 2025)
+
+### Accomplishments
+- Fixed 8 integration bugs (import paths, config types, output extraction, array wrapping)
+- Switched from FullDIPDynamics to SimplifiedDIPDynamics (aligning with Phase 3 scripts)
+- Added comprehensive error diagnostics to simulation loop
+- Identified root cause of simulation failure (custom loop vs standard infrastructure)
+- Updated status document with clear path forward
+
+### Bugs Fixed
+1. **Import path**: `src.controllers.smc.hybrid_adaptive_sta_smc`
+2. **Config conversion**: `config.physics.model_dump()` for dynamics init
+3. **Dynamics switch**: FullDIPDynamics → SimplifiedDIPDynamics
+4. **Controller output**: Extract `.u` from `HybridSTAOutput` NamedTuple
+5. **Dynamics output**: Extract `.state_derivative` from `DynamicsResult` NamedTuple
+6. **Control wrapping**: Wrap scalar control in `np.array([u])` for dynamics call
+7. **PSO bounds**: 2D for (s_aggressive, s_conservative)
+8. **PSO parameters**: Reduced to 10 particles, 15 iterations for faster execution
+
+### Current Blocker
+Custom simulation loop (lines 256-282) produces unstable control (u=0.0), causing state to blow up after 3.9 seconds. Dynamics validation rejects invalid states.
+
+**Root Cause**: Not using project's standard simulation infrastructure.
+
+**Solution**: Replace custom loop with standard simulation functions (like Phase 3 scripts use).
+
+### Next Session Action Items
+1. Investigate `src/plant/core/dynamics.py` DIPDynamics usage in Phase 3 scripts
+2. Find simulation function (likely `simulate_system` or `simulate_system_batch`)
+3. Replace lines 246-282 with standard simulation call
+4. Test single trial to verify stability
+5. Run full PSO optimization (estimated 20-30 min)
+6. Analyze results and create PHASE4_1_SUMMARY.md
+
+### Files Modified This Session
+- `scripts/research/phase4_1_optimize_s_based_thresholds.py` (8 bug fixes, error diagnostics added)
+- `benchmarks/research/PHASE4_1_STATUS.md` (comprehensive update with bug tracking)
 
 ---
 
