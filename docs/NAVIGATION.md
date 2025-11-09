@@ -90,12 +90,13 @@ Welcome to the master navigation hub! This page connects all 11 documentation sy
 → System design, component interactions, timing analysis
 
 **Quick API Access**: See [Complete API Reference](api/index.md) for detailed documentation of:
-- Controllers (SMC types, factory, gain bounds)
-- Simulation (SimulationRunner, dynamics models, batch processing)
-- Optimization (PSOTuner, cost functions, convergence)
-- Plant Models (physics models, parameter configuration)
-- Configuration (YAML loading, validation, programmatic config)
-- Utilities (validation, control primitives, monitoring tools)
+- Controllers (SMC types, factory, gain bounds).
+- Simulation (SimulationRunner, dynamics models, batch processing).
+- Optimization (PSOTuner, cost functions, convergence).
+
+- Plant Models (physics models, parameter configuration).
+- Configuration (YAML loading, validation, programmatic config).
+- Utilities (validation, control primitives, monitoring tools).
 
 ---
 
@@ -143,10 +144,10 @@ Welcome to the master navigation hub! This page connects all 11 documentation sy
 → Debug MCP server issues, integration problems
 
 **Common Issues**:
-- Installation errors → [Getting Started - Troubleshooting](guides/getting-started.md#troubleshooting)
-- Test failures → [Testing Guide](guides/how-to/testing-validation.md)
-- PSO convergence issues → [PSO Workflows](guides/how-to/optimization-workflows.md#troubleshooting)
-- Configuration errors → [Configuration Reference](configuration-reference.md)
+- Installation errors → [Getting Started - Troubleshooting](guides/getting-started.md#troubleshooting).
+- Test failures → [Testing Guide](guides/how-to/testing-validation.md).
+- PSO convergence issues → [PSO Workflows](guides/how-to/optimization-workflows.md#troubleshooting).
+- Configuration errors → [Configuration Reference](configuration-reference.md).
 
 ---
 
@@ -230,7 +231,7 @@ Run Python+NumPy+Matplotlib directly in browser. Edit examples and see results i
   - Phases 3-5: Hands-on practice to mastery (50-75 hrs, planned).
 
 **If you already know Python & control theory basics**:
-→ [Getting Started Guide](guides/getting-started.md) (15 min) → [Tutorial 01](guides/tutorials/tutorial-01-first-simulation.md) (45 min)
+→ [Getting Started Guide](guides/getting-started.md) (15 min) → [Tutorial 01](guides/tutorials/tutorial-01-first-simulation.md) (45 min).
 
 #### Learning Tracks by Time Investment
 
@@ -238,40 +239,40 @@ Run Python+NumPy+Matplotlib directly in browser. Edit examples and see results i
 ```text
 Tutorial 01 (45 min) → Tutorial 02 (60 min) → Tutorial 03 (90 min) → How-To: Running Simulations (20 min) → User Guide (30 min)
 ```
-**Outcome**: Run simulations, compare controllers, optimize gains, interpret results
+**Outcome**: Run simulations, compare controllers, optimize gains, interpret results.
 
 **10 Hours - Theory + Practice**:
 ```text
 Quick Mastery (5h) + SMC Theory (30 min) + PSO Theory (25 min) + DIP Dynamics (25 min) + How-To: Result Analysis (20 min) + Tutorial 05 (120 min)
 ```
-**Outcome**: Understand mathematical foundations, statistical validation, publication workflow
+**Outcome**: Understand mathematical foundations, statistical validation, publication workflow.
 
 **30+ Hours - Expert Level**:
 ```text
 10-Hour Track + Tutorial 04 (120 min) + Complete API Reference (150 min) + Mathematical Foundations + Research Workflow + Custom Controller Development
 ```
-**Outcome**: Implement novel SMC algorithms, extend framework, publish research
+**Outcome**: Implement novel SMC algorithms, extend framework, publish research.
 
 #### Learning Resources
 
 **Tutorials** (5 tutorials, 635 min):
-- [Tutorials Index](guides/tutorials/index.md)
-- Start with Tutorial 01, progress sequentially
+- [Tutorials Index](guides/tutorials/index.md).
+- Start with Tutorial 01, progress sequentially.
 
 **Theory Guides** (4 guides, 1,662 lines):
-- [SMC Theory](guides/theory/smc-theory.md) - Lyapunov stability, chattering, super-twisting (30 min)
-- [PSO Theory](guides/theory/pso-theory.md) - Swarm intelligence, convergence (25 min)
-- [DIP Dynamics](guides/theory/dip-dynamics.md) - Lagrangian derivation, controllability (25 min)
-- [Theory Index](guides/theory/index.md) - Complete overview
+- [SMC Theory](guides/theory/smc-theory.md) - Lyapunov stability, chattering, super-twisting (30 min).
+- [PSO Theory](guides/theory/pso-theory.md) - Swarm intelligence, convergence (25 min).
+- [DIP Dynamics](guides/theory/dip-dynamics.md) - Lagrangian derivation, controllability (25 min).
+- [Theory Index](guides/theory/index.md) - Complete overview.
 
 **Interactive Visualizations**:
-- [Interactive Visualizations Guide](guides/interactive_visualizations.md)
-- [3D Pendulum Demo](guides/interactive/3d-pendulum-demo.md)
-- [Live Python Demo](guides/interactive/live-python-demo.md)
+- [Interactive Visualizations Guide](guides/interactive_visualizations.md).
+- [3D Pendulum Demo](guides/interactive/3d-pendulum-demo.md).
+- [Live Python Demo](guides/interactive/live-python-demo.md).
 
 **Quick References**:
-- [Quick Reference Cheat Sheet](guides/QUICK_REFERENCE.md) - Command syntax (5 min)
-- [User Guide](guides/user-guide.md) - Comprehensive daily usage (30 min)
+- [Quick Reference Cheat Sheet](guides/QUICK_REFERENCE.md) - Command syntax (5 min).
+- [User Guide](guides/user-guide.md) - Comprehensive daily usage (30 min).
 
 ---
 
@@ -363,6 +364,7 @@ Quick Mastery (5h) + SMC Theory (30 min) + PSO Theory (25 min) + DIP Dynamics (2
 - Controllers (factory system, SMC types, gain bounds).
 - Simulation (SimulationRunner, dynamics models, batch processing).
 - Optimization (PSOTuner, cost functions, convergence).
+
 - Configuration (YAML loading, validation).
 - Plant Models (physics models, custom dynamics).
 - Utilities (validation, control primitives, monitoring).
@@ -459,6 +461,7 @@ Complete directory of all 44 index.md files organized by documentation domain.
 - [tutorials/index.md](tutorials/index.md) - 5 tutorials (635 min)
 - [examples/index.md](examples/index.md) - Code examples
 - [workflows/index.md](workflows/index.md) - 14 workflow documents
+
 - [guides/how-to/index.md](guides/how-to/index.md) - Task-oriented recipes (4 guides)
 - [guides/theory/index.md](guides/theory/index.md) - 4 theory guides (1,662 lines)
 - [guides/api/index.md](guides/api/index.md) - API quick references
@@ -473,10 +476,12 @@ Complete directory of all 44 index.md files organized by documentation domain.
 - [reference/index.md](reference/index.md) - Technical reference overview
 - [reference/controllers/index.md](reference/controllers/index.md) - Controller reference
 - [reference/optimization/index.md](reference/optimization/index.md) - Optimization reference
+
 - [reference/simulation/index.md](reference/simulation/index.md) - Simulation engine reference
 - [reference/plant/index.md](reference/plant/index.md) - Plant models reference
 - [reference/analysis/index.md](reference/analysis/index.md) - Analysis tools reference
 - [reference/utils/index.md](reference/utils/index.md) - Utilities reference
+
 - [reference/interfaces/index.md](reference/interfaces/index.md) - Interface contracts
 - [reference/core/index.md](reference/core/index.md) - Core engine reference
 - [reference/integration/index.md](reference/integration/index.md) - Integration reference
@@ -509,6 +514,7 @@ Complete directory of all 44 index.md files organized by documentation domain.
 - [architecture/index.md](architecture/index.md) - Architecture documentation
 - [factory/index.md](factory/index.md) - Factory system documentation
 - [deployment/index.md](deployment/index.md) - Deployment guides
+
 - [plant/index.md](plant/index.md) - Plant model documentation
 - [hil/index.md](hil/index.md) - Hardware-in-the-loop documentation
 - [configuration/index.md](configuration/index.md) - Configuration documentation
@@ -523,6 +529,7 @@ Complete directory of all 44 index.md files organized by documentation domain.
 - [presentation/index.md](presentation/index.md) - Research presentations
 - [thesis/index.md](thesis/index.md) - Thesis materials (40 docs)
 - [mcp-debugging/index.md](mcp-debugging/index.md) - MCP debugging workflows
+
 - [analysis/index.md](analysis/index.md) - Analysis tools and reports
 - [CHANGELOG.md](CHANGELOG.md) - Version history
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines
@@ -712,6 +719,7 @@ graph TB
 - [RED] **NAVIGATION.md** - Master hub (this page)
 - [BLUE] **Main Entry Points** - Primary documentation portals
 - [GREEN] **Visual Navigation** - Interactive exploration tools
+
 - [YELLOW] **Content Indexes** - Category-specific navigation
 - **Solid arrows** - Links from NAVIGATION.md to systems
 - **Dashed arrows** - Bidirectional links back to NAVIGATION.md
@@ -836,10 +844,12 @@ flowchart TD
 2. **docs/index.md** - Sphinx homepage
 3. **guides/INDEX.md** - User guides hub
 4. **README.md** - GitHub entry point
+
 5. **CLAUDE.md** - Team memory
 6. **sitemap_cards.md** - Card-based navigation
 7. **sitemap_interactive.md** - D3.js graph
 8. **sitemap_visual.md** - Mermaid mindmap
+
 9. **architecture_control_room.md** - 3D control room
 10. **3d-pendulum-demo** - Interactive pendulum
 11. **live-python-demo** - Live code execution.
@@ -887,33 +897,35 @@ sphinx-build -M html docs docs/_build -W --keep-going
 ```
 
 **Manual Validation**:
-- All 44 category indexes linked: [OK]
-- All 4 main entry points bidirectionally linked: [PENDING] (Pending Phase 2)
-- All 4 visual systems linked: [PENDING] (Pending Phase 2)
-- All learning paths accessible: [OK]
-- All persona entry points clear: [OK]
+- All 44 category indexes linked: [OK].
+- All 4 main entry points bidirectionally linked: [PENDING] (Pending Phase 2).
+- All 4 visual systems linked: [PENDING] (Pending Phase 2).
+
+- All learning paths accessible: [OK].
+- All persona entry points clear: [OK].
 
 ---
 
 ## External Links
 
 **Project Information**:
-- **GitHub Repository**: [github.com/theSadeQ/dip-smc-pso](https://github.com/theSadeQ/dip-smc-pso)
-- **Issues Tracker**: [GitHub Issues](https://github.com/theSadeQ/dip-smc-pso/issues)
-- **Documentation**: [Main Index](index.md)
+- **GitHub Repository**: [github.com/theSadeQ/dip-smc-pso](https://github.com/theSadeQ/dip-smc-pso).
+- **Issues Tracker**: [GitHub Issues](https://github.com/theSadeQ/dip-smc-pso/issues).
+- **Documentation**: [Main Index](index.md).
 
 **Key Documents**:
-- [README.md](README.md) - Project overview
-- [CHANGELOG.md](CHANGELOG.md) - Version history
-- [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines
-- [LICENSES.md](LICENSES.md) - License information
-- [ACADEMIC_INTEGRITY_STATEMENT.md](ACADEMIC_INTEGRITY_STATEMENT.md) - Research ethics
+- [README.md](README.md) - Project overview.
+- [CHANGELOG.md](CHANGELOG.md) - Version history.
+- [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines.
+- [LICENSES.md](LICENSES.md) - License information.
+- [ACADEMIC_INTEGRITY_STATEMENT.md](ACADEMIC_INTEGRITY_STATEMENT.md) - Research ethics.
 
 ---
 
 **Ready to Get Started?**
 - **Complete Beginners**: [Path 0: Beginner Roadmap](../.project/ai/edu/beginner-roadmap.md).
 - **New Users**: [Getting Started Guide](guides/getting-started.md).
+
 - **Researchers**: [Research Workflow](workflow/research_workflow.md).
 - **Developers**: [API Reference](api/index.md).
 - **Integrators**: [HIL Quickstart](hil_quickstart.md).
