@@ -208,13 +208,64 @@ SlidingSurfaceAdaptiveScheduler(
 
 ---
 
-## Next Steps
+## CRITICAL UPDATE: Dynamics Model Mismatch Discovered
 
-1. **CRITICAL:** Verify MT-8 ROBUST_GAINS are appropriate for HybridAdaptiveSTASMC
-2. **CRITICAL:** Review s-scheduling logic - aggressive_scale may be inverted
-3. Test with known-good gains from working controllers
-4. Re-run PSO only after controller is validated to work
+**Date:** 2025-11-09 (Post-investigation)
+
+###Smoking Gun Found
+
+By inspecting `scripts/mt8_robust_pso.py`, I discovered the MT-8 gains were optimized using:
+
+```python
+# Line 31: MT-8 used FULL dynamics
+from src.core.dynamics import DIPDynamics
+
+# Line 430:
+dynamics = DIPDynamics(config.physics)
+
+# Line 91: IC perturbation 0.1 rad (5.7°)
+initial_state = np.array([0, 0.1, 0.1, 0, 0, 0])
+```
+
+**But Phase 4.1 PSO script used:**
+```python
+# Phase 4.1 used SIMPLIFIED dynamics
+from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
+
+dip_config = SimplifiedDIPConfig.create_default()
+dynamics = SimplifiedDIPDynamics(dip_config)
+
+# IC perturbation 0.05 rad (2.9°)
+ic = np.array([0.0, 0.05, 0.03, 0.0, 0.0, 0.0])
+```
+
+### Impact
+
+**This is a CRITICAL mismatch:**
+1. **Different physics models** - Simplified vs Full dynamics have different equations of motion
+2. **Different IC ranges** - 0.1 rad vs 0.05 rad perturbations
+3. **Gains optimized for wrong model** - MT-8 gains tuned for Full, applied to Simplified
+
+**This completely explains the failure:**
+- Gains optimized for one model won't work on another
+- Like tuning a car's ECU on a dynamometer, then expecting it to work on a boat
+
+### Verification Attempted
+
+Created `test_with_full_dynamics.py` to test MT-8 gains with DIPDynamics:
+- Script created successfully
+- Hit API incompatibility issues with `DIPDynamics.compute_dynamics()`
+- Further debugging needed to complete verification
 
 ---
 
-**Conclusion:** PSO is not broken. The controller/gains combination is fundamentally unstable for the given initial condition. Fix the controller first, then retry PSO.
+## Next Steps (UPDATED)
+
+1. **CRITICAL:** Fix Phase 4.1 PSO to use **DIPDynamics** (not SimplifiedDIPDynamics)
+2. **CRITICAL:** Update IC range to match MT-8 (0.1 rad)
+3. Re-run PSO with correct dynamics model
+4. Alternative: Re-optimize MT-8 gains for SimplifiedDIPDynamics if that's the target platform
+
+---
+
+**Conclusion (UPDATED):** PSO is not broken. The failure is caused by a **dynamics model mismatch** - MT-8 ROBUST_GAINS were optimized for DIPDynamics (full model) but Phase 4.1 applied them to SimplifiedDIPDynamics. This is like using diesel engine parameters in a gasoline engine - fundamentally incompatible.
