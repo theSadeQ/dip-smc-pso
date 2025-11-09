@@ -10,7 +10,7 @@
 
 **USER NOTE**: You DON'T need to use exact keywords or craft special prompts. Just ask naturally!
 - "Where's the adaptive SMC?" → Claude uses context7 + filesystem automatically
-- "Is this data good?" → Claude uses pandas-mcp + numpy-mcp automatically
+- "Check code quality" → Claude uses mcp-analyzer + filesystem automatically
 - "Test the dashboard" → Claude uses puppeteer automatically
 
 **MANDATORY FOR CLAUDE**: Claude MUST automatically use MCP servers when these conditions are detected:
@@ -155,11 +155,11 @@ analyze git blame for authorship, and generate a cross-reference report"
 - Fallback to manual tools if MCP unavailable
 
 ### MCP Collaboration Patterns (MANDATORY):
-- **Data Analysis Pipeline**: filesystem → pandas-mcp → numpy-mcp → sqlite-mcp
+- **Data Analysis Pipeline**: filesystem → sqlite-mcp → mcp-analyzer
 - **Documentation Workflow**: context7 → filesystem → git-mcp (find → read → trace history)
-- **Testing Pipeline**: pytest-mcp → puppeteer → pandas-mcp (debug → UI test → analyze results)
+- **Testing Pipeline**: pytest-mcp → puppeteer → lighthouse-mcp (debug → UI test → audit)
 - **Code Quality**: mcp-analyzer → filesystem → git-mcp (lint → inspect → commit analysis)
-- **Research Workflow**: context7 → pandas-mcp → numpy-mcp (search theory → load data → compute)
+- **Research Workflow**: context7 → filesystem → git-mcp (search theory → read code → trace history)
 - **Debugging Session**: sequential-thinking → pytest-mcp → filesystem (systematic → test trace → code inspection)
 
 ---
@@ -266,7 +266,7 @@ Speak naturally! Claude figures out intent → picks right MCPs → chains them 
 
 ### JUST ASK NATURALLY:
 - "What's wrong with this controller?" (triggers: filesystem → pytest-mcp → sequential-thinking)
-- "Check that optimization run" (triggers: pandas-mcp → numpy-mcp)
+- "Check code quality in controllers" (triggers: mcp-analyzer → filesystem)
 - "Find docs about PSO and show me the code" (triggers: context7 → filesystem)
 
 ---
