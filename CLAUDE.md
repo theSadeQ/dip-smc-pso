@@ -546,7 +546,7 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 
 **For Users:** Just ask naturally! No special keywords required.
 
-### Quick Reference: Available MCP Servers (11 Total - VERIFIED INSTALLED)
+### Quick Reference: Available MCP Servers (13 Total - 12 Operational)
 
 | Server | Auto-Trigger Keywords | Primary Use Cases |
 |--------|----------------------|-------------------|
@@ -559,10 +559,14 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 | **git-mcp** | git history, branch, stats | Advanced Git ops |
 | **sqlite-mcp** | query, database, results | PSO results DB |
 | **mcp-analyzer** | lint, ruff, vulture, quality | Code quality checks |
-| **context7** | find, search, where, related | Doc search, cross-refs |
+| **context7** | find, search, where, related | Doc search, cross-refs (requires API key) |
 | **lighthouse-mcp** | audit, accessibility, performance | Lighthouse audits |
+| **pandas-mcp** | data analysis, statistics, plotting | PSO data analysis |
+| **numpy-mcp** | matrix ops, numerical compute | Control theory math |
 
-**NOTE:** numpy-mcp and pandas-mcp were removed (local server files not found). Can be reinstalled later if needed.
+**NOTES:**
+- **context7** requires API key from context7.com/dashboard (optional, provides higher rate limits)
+- **pandas-mcp** and **numpy-mcp** are local custom servers (configured in `.project/mcp/servers/`)
 
 ### Multi-MCP Collaboration (MANDATORY)
 
@@ -597,7 +601,7 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 - "Test the dashboard" → puppeteer + lighthouse-mcp
 - "What's wrong with this controller?" → filesystem + pytest-mcp + sequential-thinking
 
-**Configuration:** `.mcp.json` (11 servers) | `.ai/config/settings.local.json` (`enableAllProjectMcpServers: true`)
+**Configuration:** `.mcp.json` (13 servers) | `.project/ai/config/mcp_usage_guide.md` (auto-trigger guide)
 
 ------
 
@@ -626,7 +630,7 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 - Test coverage gates met (85% overall / 95% critical / 100% safety‑critical).
 - Single‑threaded operation stable; no dependency conflicts; memory bounded.
 - Clear, validated configuration; reproducible experiments.
-- MCP servers auto-trigger for appropriate tasks; all 11 servers operational.
+- MCP servers auto-trigger for appropriate tasks; 12/13 servers operational (context7 requires user API key).
 
 ------
 

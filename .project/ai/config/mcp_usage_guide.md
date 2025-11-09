@@ -26,6 +26,7 @@
 - Finding related code/docs across the project
 - Validating cross-references between files
 - Keywords: "find", "search docs", "where is", "related to", "references"
+- **NOTE**: Requires API key from context7.com/dashboard (optional but provides higher rate limits)
 
 ### Puppeteer MCP - Auto-trigger when:
 - Testing Streamlit dashboard functionality
