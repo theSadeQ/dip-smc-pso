@@ -1,6 +1,11 @@
 # Documentation Navigation Hub
 
-**Your Complete Guide to Navigating the DIP SMC PSO Documentation**
+**Your Complete Guide to Navigating the Double Inverted Pendulum (DIP) Sliding Mode Control (SMC) Particle Swarm Optimization (PSO) Documentation**
+
+**Quick Reference**:
+- **DIP**: Double Inverted Pendulum - unstable mechanical system
+- **SMC**: Sliding Mode Control - robust nonlinear control method
+- **PSO**: Particle Swarm Optimization - metaheuristic optimization algorithm
 
 Welcome to the master navigation hub! This page connects all 11 documentation systems into one unified entry point. Whether you're a complete beginner, an experienced researcher, or a developer integrating the framework, you'll find your path here.
 
