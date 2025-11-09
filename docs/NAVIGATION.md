@@ -416,25 +416,10 @@ Quick Mastery (5h) + SMC Theory (30 min) + PSO Theory (25 min) + DIP Dynamics (2
 #### Quick Access
 
 **[CORE]** [Hardware-in-the-Loop Quickstart](hil_quickstart.md)
-→ Real-time simulation with physical systems
-
-**[CORE]** [HIL Workflow](workflows/hil-workflow.md)
-→ Complete HIL setup and operation guide
+→ Real-time simulation with physical systems (setup, safety protocols, basic operation)
 
 **[CORE]** [Docker Deployment](deployment/docker.md)
 → Containerized deployment with GPU support
-
-#### HIL Workflows (6 documents)
-
-**Setup & Operation**:
-- [HIL Workflow](workflows/hil-workflow.md) - Basic setup and operation
-- [HIL Production Checklist](workflows/hil-production-checklist.md) - Deployment readiness validation
-- [HIL Safety Validation](workflows/hil-safety-validation.md) - Safety protocols and fault handling
-
-**Advanced HIL**:
-- [HIL Multi-Machine](workflows/hil-multi-machine.md) - Distributed systems coordination
-- [HIL Disaster Recovery](workflows/hil-disaster-recovery.md) - Fault tolerance and recovery
-- [PSO HIL Tuning](workflows/pso-hil-tuning.md) - Optimize controllers on real hardware
 
 #### Integration Guides
 
@@ -534,8 +519,8 @@ Complete directory of all 43 index.md files organized by documentation domain.
 - [thesis/index.md](thesis/index.md) - Thesis materials (40 docs)
 - [mcp-debugging/index.md](mcp-debugging/index.md) - MCP debugging workflows
 - [analysis/index.md](analysis/index.md) - Analysis tools and reports
-- [changelog/index.md](changelog/index.md) - Version history
-- [contributing/index.md](contributing/index.md) - Contribution guidelines
+- [CHANGELOG.md](CHANGELOG.md) - Version history
+- [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines
 
 </details>
 
@@ -924,7 +909,7 @@ sphinx-build -M html docs docs/_build -W --keep-going
 **Ready to Get Started?**
 - **Complete Beginners**: [Path 0: Beginner Roadmap](../.project/ai/edu/beginner-roadmap.md)
 - **New Users**: [Getting Started Guide](guides/getting-started.md)
-- **Researchers**: [Research Workflow](workflows/research_workflow.md)
+- **Researchers**: [Research Workflow](workflow/research_workflow.md)
 - **Developers**: [API Reference](api/index.md)
 - **Integrators**: [HIL Quickstart](hil_quickstart.md)
 
