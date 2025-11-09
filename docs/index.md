@@ -114,6 +114,7 @@ deployment/docker
 :hidden:
 
 api/index
+controllers/index
 reference/controllers/index
 reference/plant/index
 reference/optimization/index
@@ -210,6 +211,7 @@ LICENSES
 DEPENDENCIES
 ACADEMIC_INTEGRITY_STATEMENT
 meta/index
+reports/index
 ```
 
 ## Visual Navigation
