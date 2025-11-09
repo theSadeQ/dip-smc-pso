@@ -85,10 +85,10 @@
     },
     "context7": {
       "type": "stdio",
-      "command": "cmd",
-      "args": ["/c", "npx", "-y", "@context7/mcp"],
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp", "--api-key", "REQUIRED"],
       "env": {},
-      "description": "Intelligent context search and semantic retrieval across documentation and codebase"
+      "description": "Intelligent context search and semantic retrieval across documentation and codebase (REQUIRES API KEY from context7.com/dashboard - replace REQUIRED with your key)"
     },
     "lighthouse-mcp": {
       "type": "stdio",

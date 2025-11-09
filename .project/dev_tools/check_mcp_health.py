@@ -108,18 +108,24 @@ def check_all_servers(config, verbose=False):
         command = server_config.get("command")
         args = server_config.get("args", [])
 
-        if command == "node" and args:
+        # Special handling for context7 - check if API key is configured
+        if server_name == "context7":
+            if "REQUIRED" in args:
+                status, message = False, "API key required (get from context7.com/dashboard)"
+            else:
+                status, message = check_npx_server(server_name, "@upstash/context7-mcp")
+        elif command == "node" and args:
             status, message = check_node_server(server_name, args[0])
         elif command == "python" and args:
             status, message = check_python_server(server_name, " ".join(args))
         elif command == "cmd" or command.endswith("npx"):
             status, message = check_npx_server(server_name, args[-1] if args else server_name)
         elif command == "lighthouse-mcp":
-            # Standalone executable
-            try:
-                subprocess.run([command, "--version"], capture_output=True, timeout=2)
+            # Standalone executable - check if in PATH (doesn't support --version)
+            import shutil
+            if shutil.which(command):
                 status, message = True, "Operational (standalone)"
-            except:
+            else:
                 status, message = False, "Not found in PATH"
         else:
             status, message = False, f"Unknown command type: {command}"
