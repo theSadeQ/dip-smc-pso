@@ -111,12 +111,8 @@ extensions = [
     'jupyter_extension',          # Custom Jupyter directives (Phase 4 - custom)
     'mathviz_extension',          # Mathematical visualization library (Phase 5)
     'mathjax_extension',          # Conditional MathJax loading (Wave 2 LCP optimization)
-    'sphinxcontrib.lunrsearch',   # Full-text search via Lunr.js (client-side instant search)
+    'search_index_generator',     # Custom Lunr.js search index generator
 ]
-
-# Lunr.js search configuration
-lunrsearch_highlight = True  # Highlight search terms in results
-lunrsearch_indexing_limit = 1000  # Index up to 1000 files (covers all 821 docs)
 
 # MyST Parser configuration - quality-of-life features
 myst_enable_extensions = [
@@ -259,6 +255,7 @@ html_css_files = [
     'code-collapse.css',
     'code-runner.css',  # Pyodide live code execution styles (Phase 2)
     'mathviz.css',  # Mathematical visualization library styles (Phase 5)
+    'search.css',  # Lunr.js search UI styles (custom implementation)
 
     # REMOVED FROM GLOBAL LOADING (Wave 2 LCP optimization - CSS files):
     # These CSS files are 100% unused on homepage, now load conditionally via extensions:
@@ -270,6 +267,9 @@ html_css_files = [
 ]
 
 html_js_files = [
+    # Search functionality (Lunr.js from CDN)
+    ('https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js', {'defer': 'defer'}),
+
     # Core lightweight utilities (load on all pages)
     # 'back-to-top.js',  # Disabled - using Furo's built-in back-to-top button
     'lazy-load.js',
@@ -278,6 +278,7 @@ html_js_files = [
     'control-room.js',
     'code-collapse.js',
     'fix-caption-aria.js',  # Wave 1 validation fix: aria-level for caption headings
+    'search.js',  # Custom Lunr.js search UI (loads after lunr.min.js)
 
     # REMOVED FROM GLOBAL LOADING (Wave 2 LCP optimization):
     # Heavyweight visualization libraries now load ONLY on pages that use them
