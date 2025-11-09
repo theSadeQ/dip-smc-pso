@@ -32,7 +32,8 @@ import sys
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from src.controllers.smc.hybrid_adaptive_sta_smc import HybridAdaptiveSTASMC
-from src.core.dynamics_full import FullDIPDynamics
+from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
+from src.plant.models.simplified.config import SimplifiedDIPConfig
 from src.config import load_config
 
 try:
@@ -179,12 +180,14 @@ class HybridWithSScheduling(HybridAdaptiveSTASMC):
         self.c1, self.lambda1, self.c2, self.lambda2 = scheduled_gains
 
         # Compute control with scheduled gains
-        control = super().compute_control(state, last_control, history)
+        # Parent expects (state, state_vars, history) and returns HybridSTAOutput
+        output = super().compute_control(state, state_vars=None, history=None)
 
         # Restore original gains
         self.c1, self.lambda1, self.c2, self.lambda2 = original_gains
 
-        return control
+        # Extract control value from output
+        return float(output.u)
 
 
 # ============================================================================
@@ -208,8 +211,9 @@ def run_single_trial(s_aggressive: float, s_conservative: float,
     # Load config
     config = load_config()
 
-    # Create dynamics (FullDIPDynamics takes config object, not individual params)
-    dynamics = FullDIPDynamics(config=config)
+    # Create dynamics using simplified model (same as other research scripts)
+    dip_config = SimplifiedDIPConfig.create_default()
+    dynamics = SimplifiedDIPDynamics(dip_config)
 
     # Create scheduler
     scheduler = SlidingSurfaceAdaptiveScheduler(
@@ -219,17 +223,18 @@ def run_single_trial(s_aggressive: float, s_conservative: float,
         conservative_scale=conservative_scale
     )
 
-    # Create controller
+    # Create controller with proper HybridAdaptiveSTASMC parameters
     controller = HybridWithSScheduling(
         scheduler=scheduler,
-        c1=ROBUST_GAINS[0],
-        lambda1=ROBUST_GAINS[1],
-        c2=ROBUST_GAINS[2],
-        lambda2=ROBUST_GAINS[3],
-        k1=15.0,
-        k2=8.0,
-        epsilon=0.5,
-        dynamics=dynamics
+        gains=ROBUST_GAINS,  # [c1, lambda1, c2, lambda2]
+        dt=DT,
+        max_force=20.0,
+        k1_init=15.0,
+        k2_init=8.0,
+        gamma1=1.0,
+        gamma2=1.0,
+        dead_zone=0.01,
+        dynamics_model=dynamics
     )
 
     # Random initial condition
@@ -256,9 +261,20 @@ def run_single_trial(s_aggressive: float, s_conservative: float,
         u = np.clip(u, -20.0, 20.0)  # Actuator limits
         control_history.append(u)
 
-        # Dynamics
-        state_dot = dynamics.compute_dynamics(state, u)
-        state = state + state_dot * DT
+        # Dynamics (expects control as array, returns DynamicsResult)
+        result = dynamics.compute_dynamics(state, np.array([u]))
+
+        # Check if dynamics computation succeeded
+        if not result.success or len(result.state_derivative) == 0:
+            print(f"[ERROR] Dynamics computation failed at t={t:.3f}")
+            print(f"  State: {state}")
+            print(f"  Control: {u}")
+            print(f"  Success: {result.success}")
+            print(f"  State derivative shape: {result.state_derivative.shape}")
+            print(f"  Info: {result.info}")
+            raise RuntimeError("Dynamics computation failed")
+
+        state = state + result.state_derivative * DT
         state_history.append(state.copy())
 
         u_last = u
