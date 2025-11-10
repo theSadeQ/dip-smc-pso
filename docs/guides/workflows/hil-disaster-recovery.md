@@ -11,7 +11,7 @@
 ## Executive Summary
 
 **What This Guide Covers:**
-This guide provides disaster recovery (DR) procedures for production Hardware-in-the-Loop (HIL) systems. When something goes wrong (hardware failure, network outage, power loss), you need a plan to recover quickly.  A good DR plan minimizes downtime, prevents data loss, and gets your system back online fast.
+This guide provides disaster recovery (DR) procedures for production Hardware-in-the-Loop (HIL) systems. When something goes wrong, you need a plan to recover quickly. Common disasters include hardware failure, network outage, and power loss. A good DR plan minimizes downtime, prevents data loss, and gets your system back online fast.
 
 **Who Should Read This:**
 - Operations engineers managing production HIL systems
@@ -38,7 +38,7 @@ These metrics define how fast you need to recover from different types of incide
   - Example: Most incidents resolved within 30 minutes
 
 **Why These Targets Matter:**
-Production HIL systems often run continuous experiments. Even brief downtime can invalidate hours of data collection. Fast recovery preserves your work and maintains system reliability.
+Production HIL systems often run continuous experiments. Even brief downtime can invalidate hours of data collection. For example, a 30-minute outage during a 4-hour test means starting over. Fast recovery preserves your work and maintains system reliability.
 
 ---
 
@@ -136,7 +136,8 @@ find "${BACKUP_DIR}" -name "*.tar.gz" -mtime +30 -delete
 ```
 
 **Cron Schedule:**
-```cron
+
+```bash
 # Backup config every 4 hours
 0 */4 * * * /opt/hil/scripts/backup_config.sh
 
@@ -147,10 +148,12 @@ find "${BACKUP_DIR}" -name "*.tar.gz" -mtime +30 -delete
 ### 2.2 State Checkpointing
 
 **What State Checkpointing Does:**
-Imagine running a 4-hour experiment. At hour 3, the system crashes. Without checkpoints, you start from zero. With checkpoints saved every minute, you resume from hour 2:59 and only lose 1 minute of work.
+Imagine running a 4-hour experiment. At hour 3, the system crashes.
+
+Without checkpoints, you start from zero and lose all 3 hours of work. With checkpoints saved every minute, you resume from hour 2:59 and only lose 1 minute. Checkpointing saves time and preserves data.
 
 **How It Works:**
-The checkpoint manager saves the system state (pendulum angles, velocities, controller gains) to disk every 60 seconds. If the system crashes and restarts, it loads the most recent checkpoint and continues from there.
+The checkpoint manager saves the system state to disk every 60 seconds. This includes pendulum angles, velocities, and controller gains. If the system crashes and restarts, it loads the most recent checkpoint and continues from there.
 
 **Implementation:**
 This Python class handles automatic checkpointing. It tracks when the last checkpoint was saved and saves a new one every 60 seconds (configurable).
@@ -190,7 +193,8 @@ class HILCheckpoint:
             return None
 ```
 
-**Usage:**
+**Usage Example:**
+
 ```python
 checkpoint_mgr = HILCheckpoint(checkpoint_interval=60.0)  # Every 60s
 
@@ -210,10 +214,14 @@ for step in range(num_steps):
 ### 2.3 Data Logging Redundancy
 
 **Why Dual Logging:**
-Your experimental data is irreplaceable. Controller performance metrics, sensor readings, and test results represent hours or days of work. Dual logging writes data to two locations simultaneously. If one storage device fails, you still have the other copy.
+Your experimental data is irreplaceable. Controller performance metrics, sensor readings, and test results represent hours or days of work.
+
+Dual logging writes data to two locations simultaneously. If one storage device fails, you still have the other copy. This redundancy protects against hardware failure.
 
 **How Dual Logging Works:**
-The system writes data to both local disk (fast, immediate) and network storage (slower, but survives local hardware failure). Both logs run in parallel. If network storage is slow or unavailable, the local log continues working.
+The system writes data to two locations: local disk and network storage. Local disk is fast and immediate. Network storage is slower but survives local hardware failure.
+
+Both logs run in parallel. If network storage is slow or unavailable, the local log continues working. This ensures you never lose data due to network issues.
 
 **Implementation:**
 
@@ -567,6 +575,11 @@ graph TD
 
 ### 6.2 Incident Log Template
 
+**Why Documentation Matters:**
+Incident logs help you learn from failures and improve your disaster recovery processes. Document every incident, even minor ones.
+
+**Template:**
+
 ```markdown
 # Incident Report: [ID]
 
@@ -629,6 +642,9 @@ Primary controller server experienced kernel panic due to memory corruption
 
 ## Part 7: Post-Disaster Validation
 
+**Why Validation Matters:**
+After recovering from a disaster, you must verify that everything works correctly. Don't assume recovery was successful. Run validation checks to confirm the system is healthy before resuming normal operations.
+
 ### 7.1 System Health Check
 
 ```bash
@@ -689,7 +705,7 @@ def verify_data_integrity(data_file):
 
 ### A.1 Emergency Contacts
 
-```
+```text
 Operations Engineer (Primary): +1-XXX-XXX-XXXX
 DevOps Lead (Secondary): +1-XXX-XXX-XXXX
 Security Team (24/7): security@company.com
