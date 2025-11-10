@@ -3,6 +3,27 @@
 **For Sphinx Project Developers**
 **Last Updated:** 2025-10-12
 
+**What This Covers:**
+This guide shows you how to add collapsible code blocks to your Sphinx documentation. You'll learn how to install the feature, customize it for your theme, and troubleshoot common issues.
+
+**Who This Is For:**
+- Sphinx documentation maintainers
+- Technical writers working with code-heavy docs
+- Developers integrating UI features into Sphinx sites
+
+**What You'll Learn:**
+- 5-minute installation process (copy files + edit conf.py)
+- Theme compatibility and customization options
+- Integration with sphinx-copybutton and other extensions
+
+**Quick Example:**
+```python
+# Just add two lines to conf.py
+html_css_files = ['code-collapse.css']
+html_js_files = ['code-collapse.js']
+# Rebuild docs - done!
+```
+
 ---
 
 ## Quick Start (5 Minutes)
