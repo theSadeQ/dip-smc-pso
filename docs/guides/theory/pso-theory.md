@@ -296,7 +296,7 @@ w(t) = w_max - (w_max - w_min) · t/T
 - `T` = max iterations
 
 **Adaptive**: Adjust based on convergence
-```
+```yaml
 if improving:
     w = w_max (explore more)
 else:

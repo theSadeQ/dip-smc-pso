@@ -882,7 +882,7 @@ The adaptive gains evolve according to:
 ```text
 k1_dot = gamma1 * |s| * taper_factor - leak1 * k1
 k2_dot = gamma2 * |s| * taper_factor - leak2 * k2
-```
+```yaml
 
 Where:
 - `|s|`: Sliding surface magnitude (error measure)
