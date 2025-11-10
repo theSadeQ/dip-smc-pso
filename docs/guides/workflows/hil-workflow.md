@@ -1,26 +1,29 @@
 # HIL (Hardware-in-the-Loop) Workflow Guide
 
-**MCP-Validated Workflow with Real Network Metrics**
+**What This Workflow Covers:**
+This guide shows you how to run Hardware-in-the-Loop (HIL) simulations with real UDP network execution. You'll learn to split the plant (physics) and controller into separate processes communicating over network, enabling testing with real hardware, distributed systems, or production validation before physical deployment.
 
-**Version:** 1.0
-**Date:** 2025-10-07
-**Validation Status:** ✅ All examples tested with real HIL execution
+**Who This Is For:**
+- Engineers integrating real hardware with simulation (microcontroller testing)
+- Researchers validating controllers before expensive physical builds
+- Production system validators testing network timing constraints
+- Anyone needing distributed controller-plant architecture
 
+**What You'll Learn:**
+- Setting up HIL architecture (plant server + controller client over UDP)
+- Running HIL simulations with validated network timing measurements
+- Monitoring real-time constraints (10ms target control loop)
+- Troubleshooting network latency and missed deadlines
+- When HIL is required vs when standard simulation suffices
 
-
-## Executive Summary
-
-This guide provides a complete, validated workflow for Hardware-in-the-Loop (HIL) simulation with the DIP-SMC-PSO system. **All examples have been tested with real UDP network execution and validated timing measurements.**
-
-**Target Audience:**
-- Engineers integrating real hardware with simulation
-- Researchers testing controllers before physical deployment
-- Production system validators
+**MCP-Validated Workflow** | **Version:** 1.0 | **Date:** 2025-10-07 | **Validation Status:** All examples tested with real HIL execution
 
 **Prerequisites:**
 - Completed [Tutorial 01: First Simulation](../tutorials/tutorial-01-first-simulation.md)
 - Understanding of UDP networking basics
 - Familiarity with controller concepts
+
+---
 
 
 

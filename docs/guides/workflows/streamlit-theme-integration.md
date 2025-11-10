@@ -1,9 +1,22 @@
 # Streamlit Theme Integration Guide
 
-**Purpose**: Guide for integrating and customizing the DIP documentation theme in Streamlit applications.
+**What This Workflow Covers:**
+This guide shows how to integrate the DIP documentation theme into Streamlit applications using a token-driven theming system. You'll learn to achieve visual parity between Sphinx docs and Streamlit apps, customize design tokens (colors, spacing, typography), and maintain WCAG AA accessibility across both platforms.
 
-**Version**: 2.0.0
-**Last Updated**: 2025-10-16
+**Who This Is For:**
+- Streamlit developers building companion apps for technical documentation
+- UI/UX designers maintaining visual consistency across platforms
+- Documentation teams wanting matching Streamlit demos
+- Anyone needing professional, accessible Streamlit themes
+
+**What You'll Learn:**
+- Integrating the token-based theme system (one function call)
+- Customizing design tokens (colors, spacing, shadows, typography)
+- Achieving visual parity between Sphinx docs and Streamlit UI
+- Performance optimization (<3KB gzipped CSS)
+- WCAG AA accessibility validation
+
+**Version**: 2.0.0 | **Last Updated**: 2025-10-16
 
 ---
 

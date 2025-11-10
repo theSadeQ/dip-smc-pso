@@ -1,10 +1,33 @@
-# Tutorial 05: End-to-End Research Workflow **Level:** Advanced
+# Tutorial 05: End-to-End Research Workflow
 
-**Duration:** 120+ minutes (spread across multiple sessions)
+**What This Tutorial Covers:**
+This advanced tutorial guides you through a complete research workflow from formulating a hypothesis to publication-quality results. You'll conduct a rigorous comparison study (Classical SMC vs Hybrid Adaptive STA-SMC) using statistical validation, Monte Carlo analysis, and reproducible research practices suitable for academic publication.
+
+**Who This Is For:**
+- Graduate students preparing research papers on control systems
+- Researchers new to rigorous experimental methodology
+- Engineers validating controller improvements for publication
+- Anyone wanting to conduct defensible, reproducible benchmarking studies
+
+**What You'll Learn:**
+- How to formulate testable research questions with statistical hypotheses
+- Designing experiments with proper controls and statistical power
+- Executing Monte Carlo studies with confidence intervals
+- Analyzing results using t-tests, effect sizes, and ANOVA
+- Creating publication-quality figures (matplotlib, LaTeX equations)
+- Ensuring full reproducibility (random seeds, environment captures, data archiving)
+
+**Level:** Advanced | **Duration:** 120+ minutes (spread across multiple sessions)
+
 **Prerequisites:**
 - All previous tutorials completed
 - Understanding of research methodology
-- Familiarity with statistical analysis ## Learning Objectives By the end of this tutorial, you will: - [ ] Formulate a research question for control systems
+- Familiarity with statistical analysis
+
+## Learning Objectives
+
+By the end of this tutorial, you will:
+- [ ] Formulate a research question for control systems
 - [ ] Design rigorous experiments with statistical validation
 - [ ] Execute benchmarking studies
 - [ ] Analyze results and draw defensible conclusions
