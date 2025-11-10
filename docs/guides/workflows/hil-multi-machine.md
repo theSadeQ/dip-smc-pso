@@ -367,7 +367,7 @@ python -m src.hil.plant_server --host 0.0.0.0 --port 5555
 # Controller (Raspberry Pi, Raspberry Pi OS)
 python simulate.py --run-hil --plant-host 192.168.1.100 \
     --controller classical_smc --gains-file tuned_gains.json
-```
+```yaml
 
 **Performance:**
 - Latency: ~3-5ms (LAN)
@@ -386,7 +386,7 @@ python -m src.hil.plant_server --host 0.0.0.0 --port 5555
 
 # Developer Laptop (anywhere)
 python simulate.py --run-hil --plant-host 54.123.45.67 --port 5555
-```
+```yaml
 
 **Considerations:**
 - Use TLS/SSH tunnel for security
@@ -607,7 +607,7 @@ python simulate.py --run-hil --plant-host 10.1.5.100 --port 5555 \
 ```bash
 # On separate monitoring machine
 python scripts/monitor_hil.py --plant-host 10.1.5.100 --port 5556
-```
+```yaml
 
 **Results (Actual Deployment):**
 - Latency: P50=2.3ms, P95=4.1ms, P99=7.8ms

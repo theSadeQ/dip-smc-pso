@@ -209,7 +209,7 @@ Visualize PSO optimization convergence behavior.
            }
        ]
    }
-```
+```bash
 
 ## Loading Data from Files
 

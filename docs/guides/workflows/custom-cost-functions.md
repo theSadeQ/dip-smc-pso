@@ -161,7 +161,7 @@ def product_cost(results):
     cost = (f1 * f2 * f3) ** (1/3)
 
     return cost
-```
+```yaml
 
 **When to Use:**
 - Need balanced performance across all objectives

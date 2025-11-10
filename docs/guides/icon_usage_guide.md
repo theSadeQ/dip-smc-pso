@@ -55,7 +55,7 @@ Use markdown image syntax with relative paths:
 - ![check](../_static/icons/status/check.svg) Python 3.9+
 - ![check](../_static/icons/status/check.svg) NumPy 1.21+
 - ![info](../_static/icons/status/info.svg) Optional: CUDA GPU
-```
+```bash
 
 ### HTML Syntax (Advanced)
 
@@ -74,7 +74,7 @@ For custom styling or CSS classes:
 
 ```html
 <p>Status: <img src="../_static/icons/status/check.svg" alt="Passed" class="icon icon-success" /> Tests passed</p>
-```
+```bash
 
 ### Inline SVG (Rare)
 
@@ -207,7 +207,7 @@ Always provide descriptive alt text:
 
 ```markdown
 ![check](../_static/icons/status/check.svg)  <!-- Alt text: "check" -->
-```
+```bash
 
 For HTML:
 
@@ -308,7 +308,7 @@ Create 24×24 SVG with Heroicons-style outline:
      role="img" aria-label="Icon description">
   <!-- SVG paths here -->
 </svg>
-```
+```yaml
 
 ### 2. Optimize
 

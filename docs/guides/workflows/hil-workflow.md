@@ -492,7 +492,7 @@ Start-Process python -ArgumentList "simulate.py --run-hil --controller classical
 # Disable any packet inspection/modification
 
 # Use TCP instead of UDP (not implemented, but possible)
-```
+```yaml
 
 ## Issue 5: ModuleNotFoundError in Client
 
