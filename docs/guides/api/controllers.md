@@ -1,10 +1,28 @@
 # Controllers API Guide
 
 **Module:** `src.controllers`
-**Purpose:** Sliding mode controller creation, configuration, and customization
+
+**What This API Does:**
+This API provides functions to create and configure controllers for the double-inverted pendulum system. Instead of writing controller code from scratch, you use these factory functions to create pre-built controllers with your desired settings.
+
+**Who This Is For:**
+- Python developers integrating controllers into applications
+- Researchers running controller experiments
+- Anyone automating simulations or optimization workflows
+
 **Level:** Intermediate to Advanced
 
+**Quick Start:**
+```python
+# Create a controller in 2 lines
+from src.controllers import create_controller
+from src.config import load_config
 
+config = load_config('config.yaml')
+controller = create_controller('classical_smc', config.controllers.classical_smc)
+```
+
+---
 
 ## Table of Contents
 
@@ -20,14 +38,26 @@
 
 ## Overview
 
-The Controllers API provides a clean, type-safe factory system for creating and configuring sliding mode controllers (SMC) for the double-inverted pendulum system.
+**What "Factory System" Means:**
+A factory is a function that creates objects for you. Instead of manually calling `ClassicalSMC(...)` with many parameters, you call `create_controller('classical_smc', config)` and the factory handles the details.
+
+**Why Use This API:**
+The Controllers API provides a clean, type-safe factory system for creating and configuring sliding mode controllers (SMC) for the double-inverted pendulum system. It saves you from writing boilerplate code and reduces errors.
 
 **Key Features:**
-- ✅ **Factory Pattern:** Clean creation via `create_controller()` and `create_smc_for_pso()`
-- ✅ **4 SMC Variants:** Classical, Super-Twisting, Adaptive, Hybrid Adaptive STA
-- ✅ **Type Safety:** Enum-based controller selection with validation
-- ✅ **PSO Integration:** Built-in support for automated gain tuning
-- ✅ **Extensible:** Base classes for custom controller development
+- ✅ **Factory Pattern** - Create controllers with one function call
+  - `create_controller()` for general use
+  - `create_smc_for_pso()` for optimization workflows
+
+- ✅ **4 SMC Variants** - Choose the right controller for your needs
+  - Classical SMC (simple, robust)
+  - Super-Twisting (reduces chattering)
+  - Adaptive SMC (auto-adjusts gains)
+  - Hybrid Adaptive STA-SMC (combines adaptive + super-twisting)
+
+- ✅ **Type Safety** - Enum-based selection prevents typos and errors
+- ✅ **PSO Integration** - Built-in support for automated gain tuning
+- ✅ **Extensible** - Base classes for building custom controllers
 
 **Related Documentation:**
 - [Tutorial 02: Controller Comparison](../tutorials/tutorial-02-controller-comparison.md)
