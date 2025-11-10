@@ -10,45 +10,73 @@
 
 ## Executive Summary
 
-This guide provides disaster recovery (DR) procedures for production Hardware-in-the-Loop (HIL) systems. A comprehensive DR plan minimizes downtime, prevents data loss, and ensures rapid recovery from hardware failures, network outages, or other critical incidents.
+**What This Guide Covers:**
+This guide provides disaster recovery (DR) procedures for production Hardware-in-the-Loop (HIL) systems. When something goes wrong (hardware failure, network outage, power loss), you need a plan to recover quickly.  A good DR plan minimizes downtime, prevents data loss, and gets your system back online fast.
 
-**Target Audience:**
-- Operations engineers managing production HIL
-- DevOps teams responsible for system reliability
-- Incident response teams
+**Who Should Read This:**
+- Operations engineers managing production HIL systems
+- DevOps teams responsible for keeping systems running
+- Incident response teams who handle emergencies
 
-**Prerequisites:**
-- Understanding of [HIL Production Checklist](hil-production-checklist.md)
-- Familiarity with [HIL Safety Validation](hil-safety-validation.md)
+**What You Need to Know First:**
+- Understanding of [HIL Production Checklist](hil-production-checklist.md) - basic production setup
+- Familiarity with [HIL Safety Validation](hil-safety-validation.md) - safety procedures
 
-**Key Metrics:**
+**Key Recovery Targets:**
+These metrics define how fast you need to recover from different types of incidents.
+
 - **RTO (Recovery Time Objective):** <15 minutes
+  - Maximum time the system can be down before business impact
+  - Example: After hardware failure, you have 15 minutes to switch to backup
+
 - **RPO (Recovery Point Objective):** <5 minutes data loss
+  - Maximum acceptable data loss measured in time
+  - Example: Lose at most the last 5 minutes of experimental data
+
 - **MTTR (Mean Time To Repair):** <30 minutes
+  - Average time to fix and restore full operation
+  - Example: Most incidents resolved within 30 minutes
+
+**Why These Targets Matter:**
+Production HIL systems often run continuous experiments. Even brief downtime can invalidate hours of data collection. Fast recovery preserves your work and maintains system reliability.
 
 ---
 
 ## Part 1: Disaster Classification
 
+**Why Classification Matters:**
+Not all problems are equal. A complete power failure needs immediate action. A single sensor glitch can wait. This classification system helps you respond appropriately based on severity.
+
 ### 1.1 Severity Levels
 
-**Level 1: Critical (Red)**
-- Complete system outage
-- Hardware damage risk
-- Data loss imminent
-- **Response:** Immediate escalation + emergency shutdown
+Understanding severity levels helps you decide how urgently to respond and who to notify.
 
-**Level 2: Major (Orange)**
-- Degraded performance (>50% capacity loss)
-- Network connectivity issues
-- Controller malfunction
-- **Response:** Escalate to on-call engineer within 15 minutes
+**Level 1: Critical (Red) - Drop Everything**
+Signs you're seeing a critical incident:
+- Complete system outage (nothing works)
+- Hardware damage risk (smoke, unusual sounds, extreme temps)
+- Data loss imminent (disk full, corrupted state)
 
-**Level 3: Minor (Yellow)**
-- Transient errors
-- Single component failure with redundancy
-- Performance degradation (<50%)
-- **Response:** Monitor and log; repair during next maintenance window
+**What to Do:**
+Immediate escalation + emergency shutdown. Don't try to save data. Protect the hardware first.
+
+**Level 2: Major (Orange) - Act Within 15 Minutes**
+Signs you're seeing a major incident:
+- Degraded performance (system running at less than 50% capacity)
+- Network connectivity issues (frequent disconnects)
+- Controller malfunction (control loop unstable)
+
+**What to Do:**
+Escalate to on-call engineer within 15 minutes. System is degraded but not destroyed. You have time to diagnose properly.
+
+**Level 3: Minor (Yellow) - Log and Schedule**
+Signs you're seeing a minor incident:
+- Transient errors (occasional glitches that self-correct)
+- Single component failure with redundancy (backup is working)
+- Performance degradation (less than 50% capacity loss)
+
+**What to Do:**
+Monitor and log the issue. Schedule repair during the next maintenance window. No urgent action needed.
 
 ### 1.2 Disaster Scenarios
 

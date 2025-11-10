@@ -4,114 +4,241 @@
 
 ---
 
+## What This Page Covers
+
+This reference guide explains every configuration option for the code-collapse feature. You'll learn how to customize the appearance, behavior, and performance of collapsible code blocks.
+
+**Who This Is For:**
+- Developers customizing the documentation theme
+- Site administrators tuning performance settings
+- Anyone wanting to understand available options
+
+**What You Can Configure:**
+- Animation speed and smoothness (how blocks expand/collapse)
+- Button appearance and icons (what users see and click)
+- Performance optimizations (GPU acceleration, memory usage)
+- Browser compatibility settings (supporting older browsers)
+
+**Quick Navigation:**
+- [Basic Settings](#config-object-javascript) - Animation, icons, storage
+- [Advanced Styling](#css-customization) - Colors, positioning, dark mode
+- [Performance Tuning](#performance-settings) - GPU, memory optimization
+- [Common Use Cases](#recommended-settings-by-use-case) - Pre-configured setups
+
+---
+
 ## CONFIG Object (JavaScript)
 
-Located in `code-collapse.js` (lines 21-28)
+The CONFIG object controls the core behavior of code block collapsing. These settings are located in `code-collapse.js` (lines 21-28). Each setting below includes its purpose and when you'd want to change it.
 
 ### storageKey
+
+**What This Does:**
+This setting controls where the browser remembers which code blocks you've collapsed. When you collapse a block and refresh the page, it stays collapsed because the state is saved in browser storage.
 
 ```javascript
 storageKey: 'code-block-states'
 ```
 
+**Technical Details:**
 - **Type:** `string`
 - **Default:** `'code-block-states'`
-- **Description:** LocalStorage key for persisting collapse states
-- **Change if:** You have multiple docs sites on same domain (avoid key collision)
+- **Purpose:** LocalStorage key name for saving collapse states
+
+**When to Change:**
+Change this if you're running multiple documentation sites on the same domain. Different keys prevent sites from interfering with each other's saved states.
+
+**Example:**
+```javascript
+// For a second docs site on the same domain
+storageKey: 'my-other-project-code-states'
+```
 
 ### animationDuration
+
+**What This Does:**
+This controls how fast code blocks expand and collapse. The number represents milliseconds (1000 = 1 second). The animation makes the transition smooth instead of instant.
 
 ```javascript
 animationDuration: 350
 ```
 
+**Technical Details:**
 - **Type:** `number` (milliseconds)
-- **Default:** `350`
+- **Default:** `350` (about one-third of a second)
 - **Valid Range:** 100-1000ms
-- **Description:** Duration of collapse/expand animation
-- **Recommended:** 300-500ms (too fast = jarring, too slow = sluggish)
+
+**Finding the Right Speed:**
+- **Too fast (100-200ms):** Feels jarring and abrupt
+- **Just right (300-500ms):** Smooth and natural (recommended)
+- **Too slow (700-1000ms):** Feels sluggish and annoying
+
+**When to Change:**
+Adjust this based on your site's overall feel. Fast-paced sites may prefer 250ms. Documentation-heavy sites might prefer 400ms for a calmer experience.
+
+**Examples:**
+```javascript
+animationDuration: 250  // Snappy, modern feel
+animationDuration: 350  // Default, balanced
+animationDuration: 500  // Relaxed, deliberate
+```
 
 ### easing
+
+**What This Does:**
+This controls the "feel" of the animation - whether it moves at constant speed, accelerates, or has special effects like bouncing. Think of it like choosing between an elevator that starts/stops smoothly versus one that moves at constant speed.
 
 ```javascript
 easing: 'cubic-bezier(0.4, 0.0, 0.2, 1)'
 ```
 
+**Technical Details:**
 - **Type:** `string` (CSS timing function)
-- **Default:** `'cubic-bezier(0.4, 0.0, 0.2, 1)'` (Material Design standard easing)
-- **Alternatives:**
-  - `'linear'` - constant speed
-  - `'ease-in-out'` - slow start/end
-  - `'cubic-bezier(0.68, -0.55, 0.265, 1.55)'` - bounce effect
-- **Tool:** https://cubic-bezier.com
+- **Default:** `'cubic-bezier(0.4, 0.0, 0.2, 1)'` (Material Design standard)
+
+**Common Options:**
+- `'linear'` - Constant speed (robotic feel)
+- `'ease-in-out'` - Slow start and end (smooth and natural)
+- `'cubic-bezier(0.4, 0.0, 0.2, 1)'` - Material Design (professional feel)
+- `'cubic-bezier(0.68, -0.55, 0.265, 1.55)'` - Bounce effect (playful feel)
+
+**Visualization Tool:**
+Use https://cubic-bezier.com to preview and create custom easing curves.
+
+**When to Change:**
+Choose based on your site's personality. Corporate sites use Material Design. Fun sites might use bounce. Minimalist sites prefer linear.
+
+---
 
 ### expandedIcon
+
+**What This Does:**
+This is the symbol shown on the button when a code block is currently expanded (visible). It suggests "click me to collapse."
 
 ```javascript
 expandedIcon: '▼'
 ```
 
+**Technical Details:**
 - **Type:** `string` (Unicode character or emoji)
-- **Default:** `'▼'` (down triangle)
-- **Examples:** `'➖'`, `'[-]'`, `'🔽'`
-- **Note:** Use single character for best visual alignment
+- **Default:** `'▼'` (down-pointing triangle)
+
+**Popular Alternatives:**
+- `'➖'` (minus sign - like closing an accordion)
+- `'[-]'` (ASCII minus in brackets)
+- `'🔽'` (emoji down arrow)
+
+**Design Tip:**
+Use a single character for clean visual alignment. The icon should suggest "this is open, click to close."
+
+---
 
 ### collapsedIcon
+
+**What This Does:**
+This is the symbol shown when a code block is currently collapsed (hidden). It suggests "click me to expand."
 
 ```javascript
 collapsedIcon: '▲'
 ```
 
+**Technical Details:**
 - **Type:** `string` (Unicode character or emoji)
-- **Default:** `'▲'` (up triangle)
-- **Examples:** `'➕'`, `'[+]'`, `'🔼'`
+- **Default:** `'▲'` (up-pointing triangle)
+
+**Popular Alternatives:**
+- `'➕'` (plus sign - like opening an accordion)
+- `'[+]'` (ASCII plus in brackets)
+- `'🔼'` (emoji up arrow)
+
+**Design Consistency:**
+Pair this with expandedIcon logically. If expanded is `'[-]'`, collapsed should be `'[+]'`. If expanded is `'▼'`, collapsed should be `'▲'`.
+
+---
 
 ### buttonTitle
+
+**What This Does:**
+This text appears when users hover their mouse over the collapse/expand button. It helps users understand what the button does.
 
 ```javascript
 buttonTitle: 'Toggle code block'
 ```
 
+**Technical Details:**
 - **Type:** `string`
 - **Default:** `'Toggle code block'`
-- **Description:** Tooltip text shown on button hover
-- **Change for:** Localization or custom messaging
+
+**When to Change:**
+Change this for non-English sites or to provide more specific instructions.
+
+**Localization Examples:**
+```javascript
+buttonTitle: 'Código alternar'      // Spanish
+buttonTitle: 'Basculer le code'     // French
+buttonTitle: 'Code umschalten'      // German
+buttonTitle: 'Click to show/hide'   // More explicit English
+```
 
 ---
 
 ## Selectors Array (JavaScript)
 
-Located in `code-collapse.js` (lines 43-50)
+**What This Section Covers:**
+Selectors are CSS patterns that tell the code-collapse feature which elements on the page are code blocks. If you have custom code block styles or use a non-standard documentation generator, you'll need to adjust these.
+
+Located in `code-collapse.js` (lines 43-50).
 
 ### Default Selectors
 
+These selectors match the most common code block formats in Sphinx documentation. The feature will add collapse buttons to any element matching these patterns.
+
 ```javascript
 const selectors = [
-    'div.notranslate[class*="highlight-"]',      // Primary language blocks
-    'div[class*="highlight-"]:not(.nohighlight)', // Catch-all edge cases
-    'div.doctest',                                // Python doctest blocks
-    'div.literal-block',                          // reST literal blocks
+    'div.notranslate[class*="highlight-"]',      // Primary language blocks (python, bash, etc.)
+    'div[class*="highlight-"]:not(.nohighlight)', // Catch-all for edge cases
+    'div.doctest',                                // Python doctest examples
+    'div.literal-block',                          // reStructuredText literal blocks
     'div.code-block',                             // code-block directive
-    'pre.literal-block'                           // Pre-formatted blocks
+    'pre.literal-block'                           // Pre-formatted text blocks
 ];
 ```
 
-### Adding Custom Selector
+**How It Works:**
+The system checks every element on the page against these patterns. If an element matches AND contains code content, it gets a collapse button.
 
+### Adding Custom Selectors
+
+If your code blocks use custom CSS classes (for example, from a theme or plugin), add your own selector.
+
+**Example:** Adding support for a custom code class:
 ```javascript
 const selectors = [
     // ... existing selectors ...
-    'div.my-custom-code-class',  // Your custom selector
+    'div.my-custom-code-class',  // Your custom selector here
 ];
 ```
 
-**Test after adding:** Check console for 100% coverage message.
+**Testing Your Changes:**
+After adding a selector, open your browser's console. You should see:
+```
+[Code Collapse] Initialized 47 blocks (100% coverage)
+```
+
+The "100% coverage" message means all your code blocks were found. If coverage is less than 100%, you may need additional selectors.
 
 ---
 
 ## CSS Customization
 
+**What This Section Covers:**
+If you want to change how the collapse buttons look (colors, size, position), you'll modify the CSS file. This section explains the most commonly customized properties.
+
+All CSS customizations are in `code-collapse.css`. Changes take effect immediately after saving and refreshing your browser.
+
 ### Button Appearance
+
+This controls where the button appears on each code block and how visible it is.
 
 **File:** `code-collapse.css` (lines 65-80)
 
@@ -321,4 +448,38 @@ easing: 'ease-in-out'   // Standard CSS
 
 ---
 
-**For full technical details, see:** [technical-reference.md](technical-reference.md)
+## Summary and Quick Reference
+
+This configuration reference covered all customizable aspects of the code-collapse feature. Here's a quick recap of what you can control:
+
+**JavaScript Settings** (in `code-collapse.js`):
+- Storage key for remembering collapse states
+- Animation speed and easing curves
+- Button icons and hover text
+- Which code blocks get collapse buttons
+- Exclusion rules for special blocks
+
+**CSS Styling** (in `code-collapse.css`):
+- Button positioning and appearance
+- Colors and opacity
+- Dark mode styles
+- Master control bar styling
+- Mobile responsive adjustments
+
+**Performance Tuning** (in CSS and JS):
+- GPU acceleration toggles
+- Animation optimization flags
+- Memory usage controls
+- Browser compatibility fallbacks
+
+**Common Configurations:**
+Refer to the [Recommended Settings by Use Case](#recommended-settings-by-use-case) section above for pre-configured setups for accessibility, performance, or legacy browser support.
+
+**Next Steps:**
+- Need implementation help? See [integration-guide.md](integration-guide.md)
+- Having issues? See [troubleshooting.md](troubleshooting.md)
+- Want to understand the internals? See [technical-reference.md](technical-reference.md)
+- Looking for usage tips? See [user-guide.md](user-guide.md)
+
+**Questions or Feedback:**
+This feature is actively maintained. If you need configuration options not covered here, check the technical reference for advanced customization patterns.
