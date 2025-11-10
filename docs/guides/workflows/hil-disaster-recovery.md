@@ -95,9 +95,21 @@ Monitor and log the issue. Schedule repair during the next maintenance window. N
 
 ## Part 2: Backup Strategies
 
+**Why Backups Matter:**
+Backups are your insurance policy. When disaster strikes, you need to restore configuration and data quickly. This section shows you how to automate backups so you never lose critical information.
+
+**Three Types of Backups:**
+1. **Configuration Backups** - Save your settings (config files, gains, parameters)
+2. **State Checkpoints** - Save the running state (so you can resume mid-experiment)
+3. **Data Logging** - Save experimental results (your valuable research data)
+
 ### 2.1 Configuration Backups
 
-**Automated Backup:**
+**What Gets Backed Up:**
+Configuration files define how your system runs. This includes controller gains, simulation parameters, and environment settings. If you lose these, you'll have to reconfigure everything from scratch.
+
+**Automated Backup Script:**
+This bash script runs automatically every 4 hours. It saves your configuration files, compresses them, and deletes old backups after 30 days.
 
 ```bash
 #!/bin/bash
@@ -134,7 +146,14 @@ find "${BACKUP_DIR}" -name "*.tar.gz" -mtime +30 -delete
 
 ### 2.2 State Checkpointing
 
-**Real-Time Checkpointing:**
+**What State Checkpointing Does:**
+Imagine running a 4-hour experiment. At hour 3, the system crashes. Without checkpoints, you start from zero. With checkpoints saved every minute, you resume from hour 2:59 and only lose 1 minute of work.
+
+**How It Works:**
+The checkpoint manager saves the system state (pendulum angles, velocities, controller gains) to disk every 60 seconds. If the system crashes and restarts, it loads the most recent checkpoint and continues from there.
+
+**Implementation:**
+This Python class handles automatic checkpointing. It tracks when the last checkpoint was saved and saves a new one every 60 seconds (configurable).
 
 ```python
 import json
@@ -190,7 +209,13 @@ for step in range(num_steps):
 
 ### 2.3 Data Logging Redundancy
 
-**Dual Logging:**
+**Why Dual Logging:**
+Your experimental data is irreplaceable. Controller performance metrics, sensor readings, and test results represent hours or days of work. Dual logging writes data to two locations simultaneously. If one storage device fails, you still have the other copy.
+
+**How Dual Logging Works:**
+The system writes data to both local disk (fast, immediate) and network storage (slower, but survives local hardware failure). Both logs run in parallel. If network storage is slow or unavailable, the local log continues working.
+
+**Implementation:**
 
 ```python
 # Primary: Local disk
