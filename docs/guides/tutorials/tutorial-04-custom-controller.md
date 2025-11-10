@@ -84,8 +84,11 @@ class MyCustomController:
 
 **1. Gains (`__init__`)**
 
-- Controller-specific parameters (surface gains, switching gains, adaptation rates, etc.)
-- Must be validated for physical plausibility
+Controller-specific parameters must be validated for physical plausibility. These include:
+- Surface gains (k₁, k₂, λ₁, λ₂)
+- Switching gains (K)
+- Adaptation rates (for adaptive controllers)
+- Other controller-specific parameters
 
 **2. State Variables (`state_vars`)**
 
@@ -105,6 +108,12 @@ class MyCustomController:
 ---
 
 ## Part 2: Implementing a Terminal SMC (TSMC)
+
+**What You'll Build:**
+In this part, you'll implement a Terminal Sliding Mode Controller from scratch. This includes writing the control law, adding gain validation, implementing the sliding surface computation, and handling numerical edge cases like singularity avoidance.
+
+**Why Terminal SMC:**
+Terminal SMC achieves faster convergence than classical SMC near equilibrium. It's useful for applications requiring quick settling times and precise control.
 
 ### What is Terminal SMC?
 
@@ -126,7 +135,7 @@ s = k₁·θ₁ + k₂·sign(dθ₁)·|dθ₁|^α + λ₁·θ₂ + λ₂·sign(d
 
 where `α, β ∈ (0, 1)` (e.g., 0.5, 0.7) create the terminal attractor.
 
-**What This Means:** The fractional exponents (α, β < 1) create stronger control action when errors are small, pulling the system to equilibrium faster.
+**What This Means:** The fractional exponents (α, β < 1) create stronger control action when errors are small. This pulls the system to equilibrium faster than classical SMC.
 
 **Benefits:**
 
@@ -137,6 +146,9 @@ where `α, β ∈ (0, 1)` (e.g., 0.5, 0.7) create the terminal attractor.
 
 - **Singularity avoidance**: Control can blow up if not handled carefully
 - **More gains to tune**: 4 surface gains + 2 exponents
+
+> **What is Singularity Avoidance?**
+> When velocities approach zero, the fractional power terms (|velocity|^α) can cause numerical issues. We add a small epsilon (10⁻³) to prevent division by zero and keep control signals bounded.
 
 > **Theory Background:** For SMC foundations before implementing custom controllers:
 > - [SMC Theory Guide](../theory/smc-theory.md) - Lyapunov stability, sliding surfaces, design guidelines
@@ -364,6 +376,9 @@ class TerminalSMC:
         self.cleanup()
 ```
 
+> **Why Use Weakref?**
+> A weakref (weak reference) prevents circular references between the controller and dynamics model. Without it, Python's garbage collector can't clean up memory properly, causing memory leaks in long-running simulations. The weakref allows the controller to access the model without "owning" it.
+
 ### Step 2: Create Output Dataclass
 
 Add to `src/utils/types/control_types.py`:
@@ -382,6 +397,12 @@ class TerminalSMCOutput:
 ---
 
 ## Part 3: Factory Integration
+
+**Why Factory Pattern Matters:**
+The factory pattern allows your custom controller to work seamlessly with the existing framework. This means you can use it with PSO optimization, batch simulations, and all other framework features without modifying core code.
+
+**What You'll Do:**
+Register your Terminal SMC with the factory system and add configuration support. This takes about 10 minutes but makes your controller production-ready.
 
 ### Step 1: Add to SMC Factory
 
@@ -453,6 +474,12 @@ controllers:
 ---
 
 ## Part 4: Testing Your Custom Controller
+
+**What Success Looks Like:**
+Your controller passes both manual and unit tests. You'll see smooth convergence in plots, bounded control signals, and all assertions passing. This confirms your implementation is correct and ready for optimization.
+
+**Testing Strategy:**
+Start with manual testing to verify basic functionality. Then add unit tests to catch edge cases. This two-layer approach ensures robustness.
 
 ### Manual Testing
 
@@ -614,6 +641,9 @@ print(f'Improvement: {(1 - terminal[\"metrics\"][\"ise\"]/classical[\"metrics\"]
 ### Adding Equivalent Control
 
 For better performance, add model-based equivalent control:
+
+> **What is Equivalent Control?**
+> Equivalent control is the portion of the control signal that keeps the system on the sliding surface. It uses the system dynamics model to compute the exact force needed. Combined with the switching term, it provides both precision (equivalent control) and robustness (switching term).
 
 ```python
 # example-metadata:
@@ -816,10 +846,10 @@ s = θ₁ + β₁·sign(dθ₁)·|dθ₁|^α + θ₂ + β₂·sign(dθ₂)·|dθ
 
 **When to Create Custom Controllers:**
 
-- Research on novel SMC variants
-- Application-specific requirements (constraints, objectives)
-- Comparing different control strategies
-- Educational purposes
+- **Research**: Novel SMC variants and control law exploration
+- **Applications**: Specific requirements like custom constraints or objectives
+- **Comparison**: Benchmarking different control strategies
+- **Education**: Learning controller design and implementation
 
 ---
 
