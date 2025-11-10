@@ -1,10 +1,30 @@
 # Utilities API Guide
 
 **Module:** `src.utils`
-**Purpose:** Helper utilities for validation, control, monitoring, and analysis
+
+**What This API Does:**
+This API provides helper functions for common tasks like validating inputs, monitoring performance, plotting results, and analyzing simulations. These utilities save you from writing repetitive code.
+
+**Who This Is For:**
+- Developers validating controller implementations
+- Researchers analyzing experimental results
+- Anyone monitoring real-time control loop performance
+
 **Level:** Intermediate
 
+**Quick Start:**
+```python
+# Validate controller gains
+from src.utils.validation import validate_gains
+validate_gains([10, 5, 8, 3, 15, 2])  # Returns True or raises error
 
+# Monitor control loop timing
+from src.utils.monitoring import LatencyMonitor
+monitor = LatencyMonitor(dt=0.01)
+# ... use in control loop
+```
+
+---
 
 ## Table of Contents
 
