@@ -1,10 +1,22 @@
 # Sliding Mode Control Theory
 
-**Understanding the Mathematics and Principles of SMC**
+**What This Theory Guide Covers:**
+This guide explains the theoretical foundations of sliding mode control (SMC), from basic principles to advanced algorithms. You'll learn the mathematics behind SMC, how to prove stability using Lyapunov theory, and when to use different SMC variants for the double-inverted pendulum.
 
-This guide explains the theoretical foundations of sliding mode control, from basic principles to advanced algorithms. You'll learn why SMC works, how to prove stability, and when to use different SMC variants.
+**Who This Is For:**
+- Control theory students learning SMC fundamentals
+- Researchers implementing SMC for nonlinear systems
+- Engineers validating SMC designs with mathematical proofs
+- Anyone wanting to understand why SMC works (not just how)
 
+**What You'll Learn:**
+- How sliding surfaces force desired system dynamics
+- Lyapunov stability proofs for reaching conditions
+- Chattering analysis and mitigation strategies (boundary layers, super-twisting)
+- Mathematical foundations for all 7 DIP controllers
+- When to choose Classical SMC vs STA-SMC vs Adaptive variants
 
+---
 
 ## Table of Contents
 

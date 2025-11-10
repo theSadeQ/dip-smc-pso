@@ -1,8 +1,24 @@
 # Interactive Plotly Charts Demo
 
+**What This Demo Covers:**
+This page demonstrates how to create interactive Plotly charts in documentation with zoom, pan, and hover tooltips. You'll learn to transform static matplotlib plots into explorable visualizations that readers can interact with directly in the browser, no code execution required.
+
+**Who This Is For:**
+- Documentation writers wanting interactive data visualizations
+- Researchers presenting controller performance comparisons
+- Technical writers creating engaging user guides
+- Anyone wanting professional interactive charts in Sphinx docs
+
+**What You'll Learn:**
+- Creating basic Plotly charts with inline JSON data
+- Embedding controller performance comparisons (multi-series plots)
+- Advanced features: hover tooltips, zoom controls, export options
+- Best practices for chart sizing, colors, and accessibility
+- When to use Plotly vs static matplotlib (performance trade-offs)
+
 **Phase 3 Feature**: Transform static data visualizations into interactive, explorable Plotly charts with zoom, pan, and hover tooltips.
 
-This page demonstrates the new Plotly integration capabilities for creating professional interactive visualizations directly in documentation.
+---
 
 ---
 

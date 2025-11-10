@@ -1,21 +1,22 @@
 # Custom Cost Functions for PSO Optimization
 
-**Designing Fitness Functions for Controller Parameter Tuning**
+**What This Workflow Covers:**
+This guide teaches you how to design custom cost (fitness) functions for PSO-based controller optimization. You'll learn to translate qualitative control objectives ("fast response", "smooth control") into quantitative metrics that PSO can optimize, enabling domain-specific controller tuning beyond the default cost function.
 
-**Version:** 1.0
-**Date:** 2025-11-10
-**Status:** Complete (replaces stub from 2025-10-07)
-
----
-
-## Executive Summary
-
-This guide provides comprehensive instructions for designing custom cost (fitness) functions for PSO-based controller optimization. The cost function defines "goodness" of controller parameters - PSO searches for parameters that minimize this function. Proper cost function design is critical for finding controller gains that meet your specific performance requirements.
-
-**Target Audience:**
-- Researchers optimizing controllers for custom objectives
+**Who This Is For:**
+- Researchers optimizing controllers for custom objectives (energy efficiency, safety margins)
 - Engineers with domain-specific performance requirements
-- Advanced users customizing PSO optimization
+- Advanced users needing multi-objective optimization with custom weightings
+- Anyone wanting controllers tuned for their specific application constraints
+
+**What You'll Learn:**
+- How to decompose control objectives into measurable metrics
+- Weighting strategies for multi-objective optimization (ISE + control effort + stability)
+- Implementing custom cost functions compatible with PSO tuner
+- Validating cost function sensitivity (does changing weights change behavior?)
+- Examples: energy-optimal, chattering-minimal, and robustness-focused cost functions
+
+**Version:** 1.0 | **Date:** 2025-11-10 | **Status:** Complete (replaces stub from 2025-10-07)
 
 **Prerequisites:**
 - Completed [PSO Optimization Workflow](pso-optimization-workflow.md)

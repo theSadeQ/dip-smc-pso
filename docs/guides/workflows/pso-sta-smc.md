@@ -1,20 +1,32 @@
 # PSO Optimization Guide: Super-Twisting SMC
 
-**MCP-Validated Workflow**
+**What This Workflow Covers:**
+This guide walks you through PSO optimization of Super-Twisting SMC (STA-SMC) controller gains for the double-inverted pendulum. You'll learn to use swarm intelligence to find optimal gains that reduce chattering while maintaining fast convergence, achieving smooth continuous control signals validated with real hardware-in-the-loop testing.
 
-**Controller Type:** Super-Twisting Sliding Mode Control (STA-SMC)
-**Validation Date:** 2025-10-07
-**Test Command:** `/optimize-controller sta_smc`
+**Who This Is For:**
+- Engineers optimizing controllers for chattering-sensitive applications
+- Researchers comparing STA-SMC to classical SMC
+- Control designers needing smooth continuous control signals
+- Anyone wanting reduced chattering without sacrificing performance
 
+**What You'll Learn:**
+- How Super-Twisting algorithm reduces chattering (second-order sliding mode)
+- Running PSO optimization for STA-SMC gains (α, β parameters)
+- Validating chattering reduction vs classical SMC
+- When to choose STA-SMC over simpler controllers
+- Interpreting PSO convergence curves and gain sensitivity
 
+**MCP-Validated Workflow** | **Controller Type:** Super-Twisting Sliding Mode Control (STA-SMC) | **Validation Date:** 2025-10-07 | **Test Command:** `/optimize-controller sta_smc`
+
+---
 
 ## Overview
 
 Super-Twisting SMC is a **second-order sliding mode** controller that provides:
-- ✅ **Reduced chattering** compared to classical SMC
-- ✅ **Finite-time convergence** to sliding surface
-- ✅ **Continuous control signal** (no discontinuous switching)
-- ✅ **Robustness** to matched uncertainties
+- Reduced chattering compared to classical SMC
+- Finite-time convergence to sliding surface
+- Continuous control signal (no discontinuous switching)
+- Robustness to matched uncertainties
 
 ### When to Use STA-SMC
 
