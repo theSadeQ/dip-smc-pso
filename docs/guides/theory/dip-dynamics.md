@@ -57,7 +57,7 @@ graph TD
 **Generalized Coordinates** (3 DOF):
 ```
 q = [x, θ₁, θ₂]ᵀ
-```
+```yaml
 
 Where:
 - `x`: Cart position (m)
@@ -172,7 +172,7 @@ Position of COM:
 ```
 x₁ = x + (l₁/2)sin(θ₁)
 z₁ = (l₁/2)cos(θ₁)
-```
+```yaml
 
 Velocity:
 ```
@@ -184,7 +184,7 @@ Kinetic energy:
 ```
 T₁ = ½m₁(ẋ₁² + ż₁²) + ½I₁θ̇₁²
    = ½m₁[ẋ² + (l₁/2)²θ̇₁² + l₁ẋθ̇₁cos(θ₁)] + ½I₁θ̇₁²
-```
+```yaml
 
 Where `I₁ = (1/3)m₁l₁²` (inertia of rod about end)
 
@@ -277,7 +277,7 @@ After applying Euler-Lagrange and simplifying:
 
 ```
 M(q)q̈ + C(q, q̇)q̇ + G(q) = Qu
-```
+```yaml
 
 Where:
 - `M(q)`: **Inertia matrix** (3×3, configuration-dependent)
@@ -349,7 +349,7 @@ sin(θ)cos(θ) ≈ θ
 **Result**: Linearized equations
 ```
 M_lin·q̈ + G_lin·q = Q·u
-```
+```yaml
 
 Where:
 - `M_lin`: Constant inertia matrix
@@ -392,7 +392,7 @@ A = [0   I  ]    B = [  0      ]
 **Test**: Controllability matrix has full rank:
 ```
 C = [B  AB  A²B  ...  A⁵B]
-```
+```bash
 
 For 6-state system, need rank(C) = 6.
 

@@ -694,7 +694,7 @@ st.button("Generate Report")  # Uses corporate blue
     "text-secondary": {"value": "#111111"}  // Nearly black
   }
 }
-```
+```yaml
 
 **Benefits:**
 - 21:1 contrast ratio (AAA level)

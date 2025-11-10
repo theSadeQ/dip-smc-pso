@@ -223,7 +223,7 @@ Accessibility Implementation
         title="Collapse code block">
     <span class="collapse-icon">▼</span>
 </button>
-```
+```yaml
 
 **State Updates:**
 - Collapsed: `aria-expanded="false"`, `title="Expand code block"`
