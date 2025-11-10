@@ -1,5 +1,23 @@
 # Theory & Explanation
 
+**What This Section Covers:**
+This section provides theoretical foundations for sliding mode control, PSO optimization, and double-inverted pendulum dynamics. You'll learn the "why" behind the controllers, moving from practical tutorials to rigorous mathematical understanding suitable for research and academic validation.
+
+**Who This Is For:**
+- Graduate students studying nonlinear control theory
+- Researchers wanting mathematical proofs and Lyapunov analysis
+- Engineers validating controller designs with theory
+- Anyone transitioning from "how to use" tutorials to "why it works" understanding
+
+**What You'll Learn:**
+- Sliding mode control mathematics (reaching conditions, Lyapunov proofs, chattering analysis)
+- PSO algorithm theory (convergence, parameter selection, benchmarking)
+- Double-inverted pendulum dynamics (Euler-Lagrange, state-space, nonlinear effects)
+- When to choose Classical SMC vs STA-SMC vs Adaptive variants (theoretical trade-offs)
+- Mathematical foundations for all 7 controllers in the framework
+
+---
+
 **Understanding the "Why" Behind DIP SMC PSO**
 
 Welcome to the Theory & Explanation section—the bridge between practical tutorials and deep mathematical foundations. These guides explain the theoretical principles that make the framework work.

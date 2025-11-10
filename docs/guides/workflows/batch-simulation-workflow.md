@@ -1,26 +1,29 @@
 # Batch Simulation Workflow Guide
 
-**Vectorized Execution for Monte Carlo and Parameter Sweeps**
+**What This Workflow Covers:**
+This guide shows how to run vectorized batch simulations for Monte Carlo analysis, parameter sweeps, and robustness validation. You'll learn to execute hundreds of controller scenarios simultaneously using NumPy vectorization, achieving 10-50x speedup over sequential loops.
 
-**Version:** 1.0
-**Date:** 2025-10-07
-**Status:** Architecture documented, performance testing pending module fixes
-
-
-
-## Executive Summary
-
-This guide documents batch simulation features for vectorized execution of multiple controller scenarios simultaneously. Batch simulation is essential for Monte Carlo analysis, parameter sweeps, and robustness validation.
-
-**Target Audience:**
-- Researchers performing Monte Carlo simulations
+**Who This Is For:**
+- Researchers performing Monte Carlo simulations (1000+ trials)
 - Engineers running parameter sensitivity studies
-- Validation engineers testing robustness
+- Validation engineers testing robustness across uncertainty ranges
+- Anyone needing statistical confidence in controller performance
+
+**What You'll Learn:**
+- How to structure batch simulations with vectorized arrays
+- Running Monte Carlo trials (1000+ scenarios in parallel)
+- Parameter sweeps for sensitivity analysis
+- Performance benchmarking: batch vs sequential execution
+- Analyzing batch results with statistical tools
+
+**Version:** 1.0 | **Date:** 2025-10-07 | **Status:** Architecture documented, performance testing pending module fixes
 
 **Prerequisites:**
 - Completed [Tutorial 01: First Simulation](../tutorials/tutorial-01-first-simulation.md)
 - Understanding of NumPy array operations
 - Familiarity with controller concepts
+
+---
 
 
 
