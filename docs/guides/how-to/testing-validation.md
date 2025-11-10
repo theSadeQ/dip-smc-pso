@@ -1,4 +1,7 @@
-# How-To: Testing & Validation **Type:** Task-Oriented Guide
+# How-To: Testing & Validation
+
+**What This Guide Covers:**
+This guide shows you how to test and validate your controllers before deploying them. You'll learn how to run tests, interpret results, and ensure your controller works correctly. **Type:** Task-Oriented Guide
 
 **Level:** Intermediate to Advanced
 **Prerequisites:**

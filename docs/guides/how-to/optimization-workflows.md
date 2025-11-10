@@ -1,19 +1,34 @@
-# How-To: Optimization Workflows **Type:** Task-Oriented Guide
+# How-To: Optimization Workflows
+
+**Type:** Task-Oriented Guide
 
 **Level:** Intermediate to Advanced
+
+**What This Guide Covers:**
+This guide shows you how to optimize controller gains using Particle Swarm Optimization (PSO). You'll learn how to choose the right settings, design cost functions, and diagnose problems when optimization doesn't work as expected.
+
 **Prerequisites:**
-- [Tutorial 03: PSO Optimization](../tutorials/tutorial-03-pso-optimization.md)
-- [How-To: Running Simulations](running-simulations.md)
+- [Tutorial 03: PSO Optimization](../tutorials/tutorial-03-pso-optimization.md) - basic PSO concepts
+- [How-To: Running Simulations](running-simulations.md) - simulation basics
 
 ---
 
-## Overview This guide provides practical workflows for optimizing controller gains using Particle Swarm Optimization (PSO) and other techniques. **Common Tasks:**
+## Overview
 
+**Why Optimization Matters:**
+Default controller gains work, but they're not optimal for your specific setup. Optimization finds better gains automatically by testing thousands of combinations and keeping the best.
+
+**What You'll Learn:**
 - Run PSO optimization with appropriate settings
-- Design custom cost functions
-- Diagnose convergence issues
-- Parallelize optimization
-- Deploy optimized controllers
+- Design custom cost functions for specific goals
+- Diagnose convergence issues when PSO gets stuck
+- Parallelize optimization to save time
+- Deploy optimized controllers to production
+
+**Expected Time:**
+- Quick optimization: 2-3 minutes
+- Production optimization: 8-10 minutes
+- Thorough research optimization: 30-40 minutes
 
 ---
 
@@ -25,18 +40,53 @@
 
 ---
 
-## PSO Parameter Tuning ### Quick Start ```bash
+## PSO Parameter Tuning
 
+**What This Section Covers:**
+PSO has several parameters that affect optimization quality and speed. This section shows you how to choose the right values for your situation.
+
+### Quick Start
+
+**Basic Commands:**
+Start here if you just want to optimize quickly with default settings.
+
+```bash
 # Basic PSO optimization
+python simulate.py --ctrl classical_smc --run-pso --save optimized_gains.json
 
-python simulate.py --ctrl classical_smc --run-pso --save optimized_gains.json # With specific seed for reproducibility
-python simulate.py --ctrl classical_smc --run-pso --seed 42 --save gains.json # Test optimized gains
+# With specific seed for reproducibility
+python simulate.py --ctrl classical_smc --run-pso --seed 42 --save gains.json
+
+# Test optimized gains
 python simulate.py --load optimized_gains.json --plot
-``` ### Choosing Swarm Size **Rule of thumb:** `n_particles = 10 × n_parameters` ```bash
-# Classical SMC (6 gains) → 30-60 particles
-python simulate.py --ctrl classical_smc --run-pso \ --override "pso.n_particles=30" \ --save gains.json # Adaptive SMC (5 gains) → 25-50 particles
-python simulate.py --ctrl adaptive_smc --run-pso \ --override "pso.n_particles=30" \ --save gains.json # Hybrid SMC (4 gains) → 20-40 particles
-python simulate.py --ctrl hybrid_adaptive_sta_smc --run-pso \ --override "pso.n_particles=25" \ --save gains.json
+```
+
+### Choosing Swarm Size
+
+**What Swarm Size Means:**
+The swarm size is how many "particles" (candidate solutions) PSO uses. More particles mean better exploration but slower computation.
+
+**Rule of Thumb:**
+Use 10× the number of parameters you're optimizing.
+- Formula: `n_particles = 10 × n_parameters`
+
+**Examples for Different Controllers:**
+
+```bash
+# Classical SMC (6 gains) → 30-60 particles recommended
+python simulate.py --ctrl classical_smc --run-pso \
+  --override "pso.n_particles=30" \
+  --save gains.json
+
+# Adaptive SMC (5 gains) → 25-50 particles recommended
+python simulate.py --ctrl adaptive_smc --run-pso \
+  --override "pso.n_particles=30" \
+  --save gains.json
+
+# Hybrid SMC (4 gains) → 20-40 particles recommended
+python simulate.py --ctrl hybrid_adaptive_sta_smc --run-pso \
+  --override "pso.n_particles=25" \
+  --save gains.json
 ``` **Swarm Size Trade-offs:** | Size | Exploration | Computation | Convergence | Best For |
 
 |------|-------------|-------------|-------------|----------|

@@ -1,19 +1,37 @@
 # 3D Interactive Pendulum Visualization
 
-**Revolutionary Feature**: Real-time 3D physics simulation with WebGL rendering, directly in your browser.
+**What This Is:**
+An interactive 3D simulation of the double-inverted pendulum that runs directly in your browser. No installation required. Just adjust the controls and watch the physics happen in real-time.
 
-This page demonstrates the world's first fully interactive 3D double-inverted pendulum embedded in technical documentation. Adjust controller gains, set initial conditions, and watch the physics unfold in real-time with cinematic lighting and materials.
+**Why This Matters:**
+Understanding how a double-inverted pendulum behaves is hard from equations alone. This visualization lets you see the system move, experiment with different settings, and build intuition for how the controller works.
+
+**What You Can Do:**
+- Adjust controller gains and see instant results
+- Set different starting angles
+- Watch the system stabilize or fail
+- View from any angle using 3D camera controls
 
 ---
 
-## Features
+## Features Overview
 
-- **WebGL Rendering**: GPU-accelerated 3D graphics with Three.js
-- **Real-Time Physics**: Simplified dynamics simulation at 60 FPS
-- **Interactive Controls**: Adjust gains, angles, and physical parameters
-- **Orbit Camera**: Zoom, pan, and rotate to view from any angle
-- **Visual Trail**: See the path traced by the pendulum tip
-- **Material Effects**: Realistic metallic materials with shadows
+**Graphics:**
+- **WebGL Rendering** - Uses your graphics card (GPU) for smooth 3D graphics
+- **Three.js Library** - Industry-standard 3D engine for web browsers
+
+**Physics:**
+- **Real-Time Simulation** - Runs at 60 frames per second
+- **Simplified Dynamics** - Lighter math for browser performance
+- **Interactive Control** - Change parameters while simulation runs
+
+**Visualization:**
+- **Orbit Camera** - Click and drag to rotate, scroll to zoom, right-click to pan
+- **Visual Trail** - Shows the path the pendulum tip follows
+- **Realistic Materials** - Metallic surfaces with realistic lighting and shadows
+
+**Key Point:**
+This is a simplified version for visualization. For precise simulations, use the Python version in `simulate.py`.
 
 ---
 
@@ -146,7 +164,11 @@ This page demonstrates the world's first fully interactive 3D double-inverted pe
 
 ## Physics Model
 
-The visualization uses **simplified dynamics** for browser performance:
+**Why Simplified Dynamics:**
+This visualization uses a lighter version of the physics equations to run smoothly in your browser. The full equations have coupling terms that are computationally expensive. For learning and visualization, this simplified version works great.
+
+**The Math:**
+Here's how the system calculates motion. Don't worry if the equations look complex - the key idea is that cart acceleration (ẍ) and pendulum angles (θ₁, θ₂) all influence each other.
 
 $$
 \begin{aligned}
@@ -156,43 +178,82 @@ $$
 \end{aligned}
 $$
 
-**Full nonlinear dynamics** (used in Python simulations) are available in `src/core/dynamics.py`.
+**What Each Variable Means:**
+- ẍ: Cart acceleration (how fast the cart speeds up)
+- θ₁, θ₂: Pendulum angles (how tilted each rod is)
+- u: Control force (what the controller applies to stabilize)
+- m₀, m₁, m₂: Masses (cart and two pendulums)
+- l₁, l₂: Lengths (how long each pendulum rod is)
+- g: Gravity (9.81 m/s²)
+
+**For Precise Research:**
+The full nonlinear dynamics (with all coupling terms) are available in `src/core/dynamics.py`. Use those for research and publication-quality results.
 
 ---
 
 ## Controller
 
-**Classical Sliding Mode Control (SMC)** with linear sliding surface:
+**What Type of Controller:**
+This uses Classical Sliding Mode Control (SMC). It's a robust control method that pushes the system toward a "sliding surface" where the pendulums stay balanced.
+
+**How It Works:**
+The control force (u) is calculated from six gains (K₁ through K₆) multiplied by the system state (position, velocity, angles). Higher gains mean stronger corrections.
 
 $$
 u = -\mathbf{K} \cdot \mathbf{x} = -(K_1 x + K_2 \dot{x} + K_3 \theta_1 + K_4 \dot{\theta}_1 + K_5 \theta_2 + K_6 \dot{\theta}_2)
 $$
 
-where:
-- $\mathbf{x} = [x, \dot{x}, \theta_1, \dot{\theta}_1, \theta_2, \dot{\theta}_2]^T$ is the state vector
-- $\mathbf{K} = [K_1, K_2, K_3, K_4, K_5, K_6]$ are the controller gains
+**What You Control:**
+The six K values in the control panel. Each one affects a different aspect:
+- K₁: Cart position correction
+- K₂: Cart velocity damping
+- K₃, K₄: First pendulum stabilization
+- K₅, K₆: Second pendulum stabilization
 
-**Default gains**: Tuned via PSO optimization for stability and performance.
+**Default Gains:**
+The default values were found using PSO (Particle Swarm Optimization). They provide good stability for most initial conditions. Try changing them to see what happens!
 
 ---
 
 ## Technical Details
 
+**For Developers and Curious Users:**
+This section explains how the visualization works under the hood.
+
 ### Rendering Engine
-- **Library**: Three.js r158 (WebGL 2.0)
-- **Scene**: Perspective camera with orbit controls
-- **Lighting**: Ambient + directional + point lights with shadow mapping
-- **Materials**: PBR (Physically-Based Rendering) with metalness/roughness
+
+**What Powers The Graphics:**
+- **Three.js r158** - A JavaScript library that makes WebGL easier to use
+- **WebGL 2.0** - Direct access to your graphics card for fast 3D rendering
+
+**Scene Components:**
+- **Camera**: Perspective view with orbit controls (like a virtual drone camera)
+- **Lighting**: Three light sources for realistic shading and shadows
+- **Materials**: PBR rendering (same tech used in video games for realistic metals)
 
 ### Performance
-- **Target FPS**: 60 FPS (browser-dependent)
-- **Physics Steps**: 2 substeps per frame (dt = 0.01s)
-- **Integration**: Euler method (simplified for real-time)
-- **Trail**: 500-point buffer for pendulum tip visualization
+
+**How Fast It Runs:**
+- **Target**: 60 FPS (frames per second) - same as most games
+- **Physics Rate**: 100 Hz (2 physics steps per visual frame)
+- **Integration Method**: Euler method (simple and fast, good enough for visualization)
+
+**Visual Effects:**
+- **Trail Buffer**: Stores last 500 positions to show the pendulum's path
+
+**Real-World Performance:**
+Actual frame rate depends on your computer. Dedicated graphics cards will hit 60 FPS easily. Integrated graphics may run at 30-40 FPS.
 
 ### Browser Requirements
-- Modern browser with WebGL support (Chrome 90+, Firefox 88+, Safari 14+)
-- Recommended: Dedicated GPU for smooth 60 FPS performance
+
+**Minimum:**
+- Modern browser: Chrome 90+, Firefox 88+, Safari 14+, or Edge 90+
+- WebGL support (enabled by default in most browsers)
+
+**Recommended:**
+- Dedicated GPU (graphics card) for smooth 60 FPS
+- At least 4GB RAM
+- Recent processor (2018 or newer)
 
 ---
 
