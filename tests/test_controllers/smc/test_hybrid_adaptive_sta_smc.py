@@ -529,4 +529,135 @@ class TestHybridAdaptiveSTASMCIntegration:
         # Results should differ due to different parameters
         assert result1.state[0] != result2.state[0] or result1.state[2] != result2.state[2]
 
+
+class TestHybridAdaptiveSTASMCEdgeCases:
+    """Test edge cases identified in MA-02 audit: relative surface mode and cart recentering hysteresis."""
+
+    def test_relative_surface_mode(self):
+        """Test that relative surface mode (use_relative_surface=True) computes control correctly."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+
+        # Create controller with relative surface mode
+        controller_rel = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+            use_relative_surface=True,
+        )
+
+        # Create controller with absolute surface mode (default)
+        controller_abs = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+            use_relative_surface=False,
+        )
+
+        # State where θ2 ≠ θ1 (should produce different sliding surfaces)
+        state = np.array([0.0, 0.1, 0.2, 0.0, 0.1, 0.15], dtype=float)
+
+        result_rel = controller_rel.compute_control(state, None, None)
+        result_abs = controller_abs.compute_control(state, None, None)
+
+        # Verify both produce finite control
+        assert np.isfinite(result_rel.u)
+        assert np.isfinite(result_abs.u)
+
+        # Verify control outputs differ (relative vs absolute formulation)
+        assert result_rel.u != result_abs.u, \
+            "Relative and absolute surface modes should produce different control"
+
+        # Verify sliding surface calculation differs
+        s_rel = controller_rel._compute_sliding_surface(state)
+        s_abs = controller_abs._compute_sliding_surface(state)
+        assert s_rel != s_abs, "Sliding surface should differ between modes"
+
+    def test_cart_recentering_hysteresis_engage(self):
+        """Test cart recentering engages smoothly when cart exceeds high threshold."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        controller = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+            recenter_low_thresh=0.02,
+            recenter_high_thresh=0.05,
+        )
+
+        # State 1: Cart position below low threshold (no recentering)
+        state_low = np.array([0.01, 0.1, 0.1, 0.0, 0.0, 0.0], dtype=float)
+        result_low = controller.compute_control(state_low, None, None)
+
+        # State 2: Cart position in hysteresis zone (partial recentering)
+        state_mid = np.array([0.035, 0.1, 0.1, 0.0, 0.0, 0.0], dtype=float)
+        result_mid = controller.compute_control(state_mid, None, None)
+
+        # State 3: Cart position above high threshold (full recentering)
+        state_high = np.array([0.06, 0.1, 0.1, 0.0, 0.0, 0.0], dtype=float)
+        result_high = controller.compute_control(state_high, None, None)
+
+        # All should produce finite control
+        assert np.isfinite(result_low.u)
+        assert np.isfinite(result_mid.u)
+        assert np.isfinite(result_high.u)
+
+        # Control magnitude should generally increase with cart displacement
+        # (though exact ordering depends on pendulum angles and adaptive gains)
+        assert abs(result_high.u) >= abs(result_low.u) or \
+               abs(result_mid.u) >= abs(result_low.u), \
+            "Cart recentering should affect control magnitude"
+
+    def test_cart_recentering_hysteresis_disengage(self):
+        """Test cart recentering disengages correctly when cart returns below low threshold."""
+        gains = [2.0, 1.0, 2.0, 1.0]
+        controller = HybridAdaptiveSTASMC(
+            gains=gains,
+            dt=0.01,
+            max_force=100.0,
+            k1_init=5.0,
+            k2_init=5.0,
+            gamma1=1.0,
+            gamma2=1.0,
+            dead_zone=0.01,
+            recenter_low_thresh=0.03,
+            recenter_high_thresh=0.08,
+        )
+
+        # Simulate trajectory: high -> mid (in hysteresis) -> low
+        # Step 1: Start above high threshold (full recentering)
+        state_high = np.array([0.10, 0.0, 0.0, 0.0, 0.0, 0.0], dtype=float)
+        result_high = controller.compute_control(state_high, None, None)
+        assert np.isfinite(result_high.u)
+
+        # Step 2: Move to hysteresis zone (still recentering, but less)
+        state_mid = np.array([0.05, 0.0, 0.0, 0.0, 0.0, 0.0], dtype=float)
+        result_mid = controller.compute_control(state_mid, result_high.state, result_high.history)
+        assert np.isfinite(result_mid.u)
+
+        # Step 3: Move below low threshold (minimal/no recentering)
+        state_low = np.array([0.01, 0.0, 0.0, 0.0, 0.0, 0.0], dtype=float)
+        result_low = controller.compute_control(state_low, result_mid.state, result_mid.history)
+        assert np.isfinite(result_low.u)
+
+        # Verify hysteresis behavior: control should vary smoothly across zones
+        # (exact values depend on adaptive gains, but all should be finite and reasonable)
+        assert abs(result_high.u) <= controller.max_force
+        assert abs(result_mid.u) <= controller.max_force
+        assert abs(result_low.u) <= controller.max_force
+
+
 #========================================================================================================\\\

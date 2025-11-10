@@ -96,6 +96,20 @@ class HybridAdaptiveSTASMC:
 
     n_gains: int = 4  # [c1, λ1, c2, λ2]
 
+    # Numerical constants for stability and safety
+    _TIKHONOV_REGULARIZATION: float = 1e-10  # Matrix inversion regularization
+    _MIN_DENOMINATOR: float = 1e-6  # Safe division threshold
+    _EQUIV_CONTROL_CLAMP_MULTIPLIER: float = 10.0  # u_eq clamp = multiplier * max_force
+    _HARD_SATURATION_EPSILON: float = 1e-12  # Hard saturation check tolerance
+    _MIN_DT_EPSILON: float = 1e-12  # Minimum safe timestep
+    _TIME_TAPER_DECAY_RATE: float = 0.01  # Time-based adaptation tapering
+    _TIME_TAPER_STEP_THRESHOLD: int = 1000  # Steps before time tapering starts
+    _MAX_LEAK_RATE_DIVISOR: float = 10.0  # Limits leak rate: k/(divisor*dt)
+    _MAX_K_DOT_RATE: float = 5.0  # Maximum gain rate of change
+    _GAIN_WARNING_THRESHOLD: float = 0.8  # Fraction of k_max to trigger leak boost
+    _LEAK_MULTIPLIER_NEAR_MAX: float = 2.0  # Leak boost when near k_max
+    _MIN_TAPER_EPS: float = 1e-9  # Minimum tapering epsilon
+
     def __init__(
         self,
         gains: List[float],
@@ -287,13 +301,13 @@ class HybridAdaptiveSTASMC:
 
         # CRITICAL VALIDATION (Issue #13): dt must be > EPSILON_DIV to prevent division by zero
         # in gain leak rate limiter (lines 570-571)
-        if self.dt <= 1e-12:
-            raise ValueError(f"dt={self.dt} too small for safe division (must be > 1e-12)")
+        if self.dt <= self._MIN_DT_EPSILON:
+            raise ValueError(f"dt={self.dt} too small for safe division (must be > {self._MIN_DT_EPSILON})")
 
         # Initialize numerical safety and self-tapering parameters
         self.gain_leak = max(0.0, float(gain_leak))
         self.adaptation_sat_threshold = max(0.0, float(adaptation_sat_threshold))
-        self.taper_eps = max(1e-9, float(taper_eps))
+        self.taper_eps = max(self._MIN_TAPER_EPS, float(taper_eps))
 
         # For optional equivalent control - use weakref to break circular references
         if dynamics_model is not None:
@@ -360,14 +374,14 @@ class HybridAdaptiveSTASMC:
         return list(self._gains)
 
     @property
-    def dyn(self):
+    def dyn(self) -> Optional[Any]:
         """Access dynamics model via weakref."""
         if self._dynamics_ref is not None:
             return self._dynamics_ref()
         return None
 
     @dyn.setter
-    def dyn(self, value):
+    def dyn(self, value: Optional[Any]) -> None:
         """Set dynamics model using weakref."""
         if value is not None:
             self._dynamics_ref = weakref.ref(value)
@@ -481,7 +495,7 @@ class HybridAdaptiveSTASMC:
             B    = np.array([1.0, 0.0, 0.0], dtype=float)
             # Regularise inertia matrix.  Use a small diagonal bias to
             # guarantee invertibility【385796022798831†L145-L149】.
-            M_reg = M + np.eye(3) * 1e-10
+            M_reg = M + np.eye(3) * self._TIKHONOV_REGULARIZATION
             # Solve linear systems directly; avoid explicit inversion
             try:
                 Minv_B = np.linalg.solve(M_reg, B)
@@ -490,7 +504,7 @@ class HybridAdaptiveSTASMC:
                 logger.warning(f"Matrix solve failed in equivalent control computation, returning safe zero control: {e}")
                 return 0.0  # OK: Safe fallback when dynamics ill-conditioned
             denom = float(L @ Minv_B)
-            if not np.isfinite(denom) or abs(denom) < 1e-6:
+            if not np.isfinite(denom) or abs(denom) < self._MIN_DENOMINATOR:
                 return 0.0
             num = float(L @ Minv_rhs - Llam @ v)
             ueq = num / denom
@@ -503,7 +517,7 @@ class HybridAdaptiveSTASMC:
             # control preserves robustness while still providing steady‑state
             # compensation.  Use ±10×max_force as a
             # guideline; users can adjust this multiplier if needed.
-            clamp = 10.0 * self.max_force
+            clamp = self._EQUIV_CONTROL_CLAMP_MULTIPLIER * self.max_force
             return float(np.clip(ueq, -clamp, clamp))
         except Exception as e:
             logger.warning(f"Equivalent control computation failed, returning safe zero control: {e}")
@@ -570,7 +584,7 @@ class HybridAdaptiveSTASMC:
         u_pre_temp = u_sw_temp + u_int_prev + u_damp_temp + u_cart_temp + u_eq_temp
 
         # Check if we would be hard-saturated
-        hard_saturated = abs(u_pre_temp) > self.max_force + 1e-12
+        hard_saturated = abs(u_pre_temp) > self.max_force + self._HARD_SATURATION_EPSILON
         near_equilibrium = abs_s < self.adaptation_sat_threshold
 
         # Adaptation: increase k1 and k2 proportional to |s| outside the dead‑zone
@@ -591,24 +605,24 @@ class HybridAdaptiveSTASMC:
             k2_raw = self.gamma2 * abs_s * taper_factor
 
             # Additional time-based tapering to slow down in second half
-            time_factor = 1.0 / (1.0 + 0.01 * max(0, len(history.get("k1", [])) - 1000))
+            time_factor = 1.0 / (1.0 + self._TIME_TAPER_DECAY_RATE * max(0, len(history.get("k1", [])) - self._TIME_TAPER_STEP_THRESHOLD))
 
             k1_dot = min(k1_raw * time_factor, self.adapt_rate_limit)
             k2_dot = min(k2_raw * time_factor, self.adapt_rate_limit)
 
             # Stronger leak during adaptation
-            k1_dot = max(k1_dot - self.gain_leak, -k1_prev / (10.0 * self.dt))
-            k2_dot = max(k2_dot - self.gain_leak, -k2_prev / (10.0 * self.dt))
+            k1_dot = max(k1_dot - self.gain_leak, -k1_prev / (self._MAX_LEAK_RATE_DIVISOR * self.dt))
+            k2_dot = max(k2_dot - self.gain_leak, -k2_prev / (self._MAX_LEAK_RATE_DIVISOR * self.dt))
 
         # More aggressive clipping for double-inverted pendulum stability
-        k1_dot = float(max(-5.0, min(5.0, k1_dot)))
-        k2_dot = float(max(-5.0, min(5.0, k2_dot)))
+        k1_dot = float(max(-self._MAX_K_DOT_RATE, min(self._MAX_K_DOT_RATE, k1_dot)))
+        k2_dot = float(max(-self._MAX_K_DOT_RATE, min(self._MAX_K_DOT_RATE, k2_dot)))
 
         # Additional safety: prevent gains from growing too fast
-        if k1_prev > self.k1_max * 0.8:
-            k1_dot = min(k1_dot, -self.gain_leak * 2)
-        if k2_prev > self.k2_max * 0.8:
-            k2_dot = min(k2_dot, -self.gain_leak * 2)
+        if k1_prev > self.k1_max * self._GAIN_WARNING_THRESHOLD:
+            k1_dot = min(k1_dot, -self.gain_leak * self._LEAK_MULTIPLIER_NEAR_MAX)
+        if k2_prev > self.k2_max * self._GAIN_WARNING_THRESHOLD:
+            k2_dot = min(k2_dot, -self.gain_leak * self._LEAK_MULTIPLIER_NEAR_MAX)
 
         # Update adaptive gains and clip within [0, k*_max]
         k1_new = float(np.clip(k1_prev + k1_dot * self.dt, 0.0, self.k1_max))
