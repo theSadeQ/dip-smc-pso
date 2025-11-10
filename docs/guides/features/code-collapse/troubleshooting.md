@@ -2,6 +2,34 @@
 
 **Last Updated:** 2025-10-12
 
+**What This Guide Covers:**
+This troubleshooting guide provides step-by-step solutions for common issues with collapsible code blocks. Each issue includes symptoms, diagnosis procedures, multiple solution paths, and prevention strategies.
+
+**Who This Is For:**
+- **End users**: Experiencing issues with code block functionality
+- **Developers**: Debugging integration problems
+- **Support team**: Assisting users with technical problems
+- **Maintainers**: Resolving production issues
+
+**How to Use This Guide:**
+1. Find your issue in the table of contents below
+2. Check symptoms match your situation
+3. Follow diagnosis steps to confirm root cause
+4. Try solutions in order (A → B → C)
+5. If unresolved, see "Getting Help" section at end
+
+**Quick Diagnosis:**
+- **No buttons?** → Issue #1 (JavaScript not loaded)
+- **Buttons misaligned?** → Issue #2 (CSS conflict)
+- **State not saved?** → Issue #5 (LocalStorage blocked)
+- **Slow animations?** → Issue #7 (GPU acceleration disabled)
+
+**Related Documentation:**
+- [User Guide](user-guide.md) - Normal usage instructions
+- [Configuration Reference](configuration-reference.md) - Settings and options
+- [Technical Reference](technical-reference.md) - Architecture details
+- [Maintenance Guide](maintenance-guide.md) - Developer procedures
+
 ---
 
 ## Common Issues & Solutions
