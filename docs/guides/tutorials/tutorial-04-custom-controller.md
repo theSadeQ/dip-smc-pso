@@ -1,11 +1,26 @@
-# Tutorial 04: Custom Controller Development **Level:** Advanced
+# Tutorial 04: Custom Controller Development
+
+**Level:** Advanced
+
+**What You'll Build:**
+In this tutorial, you'll create a custom controller from scratch - a Terminal Sliding Mode Controller (TSMC). You'll learn the complete workflow: design the control law, implement it in Python, integrate it with the factory system, test it, and optimize its gains using PSO.
+
+**Why This Matters:**
+The framework ships with 4 controllers, but research often requires custom variants. This tutorial shows you how to extend the framework with your own control strategies while maintaining code quality and integration.
 
 **Duration:** 90-120 minutes
+
 **Prerequisites:**
 - Completed [Tutorial 01: Your First Simulation](tutorial-01-first-simulation.md)
 - Completed [Tutorial 02: Controller Comparison](tutorial-02-controller-comparison.md)
 - Python programming experience
-- Understanding of SMC theory (recommended) ## Learning Objectives By the end of this tutorial, you will: - [ ] Understand the controller interface and architecture
+- Understanding of SMC theory (recommended)
+
+---
+
+## Learning Objectives
+
+By the end of this tutorial, you will: - [ ] Understand the controller interface and architecture
 - [ ] Implement a custom SMC variant from scratch
 - [ ] Add gain validation and error handling
 - [ ] Integrate your controller with the factory system
