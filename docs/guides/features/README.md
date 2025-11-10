@@ -1,6 +1,17 @@
 # Features Documentation
 
-This directory contains user-facing documentation for special features in the DIP SMC PSO documentation site.
+**What This Section Covers:**
+This directory contains comprehensive documentation for special documentation features that enhance the reading and navigation experience of the DIP SMC PSO project. Each feature has full user guides, technical references, and troubleshooting documentation.
+
+**Who This Is For:**
+- **End users**: See individual feature user guides for instructions
+- **Developers**: Integration guides for adding features to new projects
+- **Contributors**: Learn how to develop new documentation features
+- **Maintainers**: Access operational procedures and quality checklists
+
+**Current Features:**
+- **Collapsible Code Blocks** (v1.0.0) - Collapse/expand code with state persistence
+- More features coming soon (see Future Features section below)
 
 ---
 
@@ -114,6 +125,36 @@ Before releasing a feature:
 - [ ] Performance benchmarks recorded
 - [ ] Integration guide verified (can follow steps)
 - [ ] Troubleshooting guide covers Phase 5 findings
+
+---
+
+## Summary
+
+This features directory provides a centralized hub for all special documentation enhancements. Currently featuring:
+
+- **1 production feature**: Collapsible Code Blocks (v1.0.0)
+- **Complete documentation suite**: 8 docs per feature (user guide, integration, config, troubleshooting, technical ref, maintenance, changelog, testing)
+- **Quality standards**: Full browser compatibility, accessibility, and performance testing required
+
+**Feature Status:** ✅ All documented features are production-ready with comprehensive test coverage.
+
+---
+
+## Navigation
+
+**Get Started:**
+- Browse [Collapsible Code Blocks User Guide](code-collapse/user-guide.md)
+- See [Integration Guide](code-collapse/integration-guide.md) to add to your project
+
+**For Developers:**
+- Review [Technical Reference](code-collapse/technical-reference.md) for architecture
+- Check [Configuration Reference](code-collapse/configuration-reference.md) for all settings
+- Follow [Testing Procedures](../../testing/TESTING_PROCEDURES.md)
+
+**Back to Main Documentation:**
+- [Guides Hub](../README.md)
+- [Getting Started](../getting-started.md)
+- [API Reference](../api/README.md)
 
 ---
 
