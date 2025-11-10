@@ -213,7 +213,7 @@ This means:
 
 ```
 u = -(K·sign(s) + ε)
-```
+```yaml
 
 Where:
 - `K > 0`: Switching gain (control authority)
@@ -436,7 +436,7 @@ Sliding surface visualization showing s = x₁ + x₂ = 0 with adjustable bounda
 **Practical Guideline**: Choose `ε` such that:
 ```
 ε ≈ 0.01 to 0.1 (for normalized states)
-```
+```bash
 
 ### Adaptive Boundary Layer
 
@@ -444,7 +444,7 @@ For time-varying systems, use **adaptive boundary layer**:
 
 ```
 ε_eff(t) = ε_0 + α|ṡ(t)|
-```
+```yaml
 
 Where:
 - `ε_0`: Nominal thickness
@@ -611,7 +611,7 @@ u = u₁ + u₂
 
 u₁ = -α·|s|^(1/2)·sign(s)
 u₂ = ∫(-β·sign(s)) dt
-```
+```yaml
 
 Where:
 - `α, β > 0`: Super-twisting gains
@@ -767,7 +767,7 @@ flowchart TD
 The sliding surface `s = 0` defines dynamics:
 ```
 k₁θ₁ + k₂θ̇₁ + λ₁θ₂ + λ₂θ̇₂ = 0
-```
+```yaml
 
 Rearranging:
 ```

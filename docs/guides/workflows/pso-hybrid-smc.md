@@ -296,7 +296,7 @@ Validation: Tested across 100+ disturbance scenarios
 **Test Optimized Gains:**
 ```bash
 python simulate.py --load gains_hybrid.json --plot
-```
+```yaml
 
 **Expected Performance:**
 - Settling time: < 3.0 seconds
@@ -441,7 +441,7 @@ PSO does NOT directly tune k1_init, k2_init, gamma1, gamma2. However, PSO-optimi
 **Model-Based Feedforward:**
 ```
 u_eq = M^(-1) * [C*q̇ + G] projected onto sliding surface
-```
+```yaml
 
 Where:
 - M: Inertia matrix (nonlinear, state-dependent)

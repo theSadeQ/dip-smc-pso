@@ -138,7 +138,7 @@ optimized_gains = [
 ```bash
 # Test default STA-SMC gains
 python simulate.py --controller sta_smc --duration 5.0 --plot
-```
+```yaml
 
 **Expected Baseline:**
 - Settling time: ~2.5-3.0 seconds

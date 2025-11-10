@@ -208,7 +208,7 @@ Buttons Overlap Copy Button
 .copybtn + .code-collapse-btn {
     margin-left: 12px;  /* Increase gap (default: 8px) */
 }
-```
+```yaml
 
 Recommended values:
 - Desktop: 8-12px

@@ -54,7 +54,7 @@ flowchart TD
 
     style INIT fill:#ccccff
     style DONE fill:#ccffcc
-```
+```yaml
 
 **Each particle `i` has**:
 - Position: `xᵢ(t)` (current solution)
@@ -66,7 +66,7 @@ flowchart TD
 ```
 vᵢ(t+1) = w·vᵢ(t) + c₁·r₁·(pᵢ - xᵢ(t)) + c₂·r₂·(g - xᵢ(t))
 xᵢ(t+1) = xᵢ(t) + vᵢ(t+1)
-```
+```yaml
 
 Where:
 - `w`: Inertia weight (momentum)
@@ -200,7 +200,7 @@ if |vᵢ| > v_max:
 **Update Equation**:
 ```
 vᵢ(t+1) = χ · [vᵢ(t) + c₁·r₁·(pᵢ - xᵢ) + c₂·r₂·(g - xᵢ)]
-```
+```yaml
 
 Where:
 ```
@@ -273,7 +273,7 @@ Where `D` = problem dimensionality
 Quick tuning: 50 iterations
 Standard: 100 iterations
 Thorough: 200+ iterations
-```
+```yaml
 
 **For Controller Tuning**:
 - Prototyping: 50 iterations (5-10 min)
