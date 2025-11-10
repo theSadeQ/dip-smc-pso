@@ -3,6 +3,28 @@
 **For Future Maintainers**
 **Last Updated:** 2025-10-12
 
+**What This Guide Covers:**
+This maintenance guide provides operational procedures, troubleshooting workflows, and update instructions for future maintainers of the collapsible code blocks feature. It documents file locations, change procedures, testing requirements, and common maintenance tasks.
+
+**Who This Is For:**
+- **Future maintainers**: Developers taking over this codebase
+- **Operations team**: DevOps managing deployments
+- **Contributors**: Adding enhancements or fixing bugs
+- **Support team**: Troubleshooting user-reported issues
+
+**What You'll Learn:**
+- File locations and architecture overview
+- Step-by-step procedures for making changes
+- Testing and validation requirements
+- Emergency hotfix procedures
+- Common maintenance tasks and their frequency
+
+**Related Documentation:**
+- [Technical Reference](technical-reference.md) - Architecture and API details
+- [Troubleshooting Guide](troubleshooting.md) - Issue resolution procedures
+- [Changelog](changelog.md) - Version history
+- [Testing Procedures](../../testing/TESTING_PROCEDURES.md) - Validation steps
+
 ---
 
 ## File Locations
