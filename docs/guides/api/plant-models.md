@@ -1,10 +1,28 @@
 # Plant Models API Guide
 
 **Module:** `src.core.dynamics`, `src.plant`
-**Purpose:** Physics models and parameter configuration for double-inverted pendulum
+
+**What This API Does:**
+This API provides the physics equations that simulate how the double-inverted pendulum moves. When you run a simulation, these models calculate what happens when the controller applies force to the cart.
+
+**Who This Is For:**
+- Researchers modeling physical systems
+- Developers building custom simulations
+- Anyone wanting to understand the physics behind the system
+
 **Level:** Intermediate to Advanced
 
+**Quick Start:**
+```python
+# Use the simplified dynamics model
+from src.core.dynamics import SimplifiedDynamics
+from src.plant.configurations import DefaultPhysicsConfig
 
+dynamics = SimplifiedDynamics(DefaultPhysicsConfig())
+state_derivative = dynamics.compute(state, control_force)
+```
+
+---
 
 ## Table of Contents
 
