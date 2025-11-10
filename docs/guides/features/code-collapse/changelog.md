@@ -1,8 +1,35 @@
 # Changelog - Collapsible Code Blocks Feature
 
-All notable changes to this feature will be documented in this file.
+**What This Document Is:**
+This changelog tracks all changes to the collapsible code blocks feature. You can see what was added, what changed, and what's planned for future versions.
 
-Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+**Who Should Read This:**
+- Developers maintaining the feature
+- Users wanting to know what's new
+- Anyone tracking feature evolution over time
+
+**Format:**
+This changelog follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format, which organizes changes into clear categories (Added, Changed, Fixed, etc.).
+
+**Quick Navigation:**
+- [Latest Release (1.0.0)](#100---2025-10-12) - Current stable version
+- [Planned Features](#unreleased) - What's coming next
+- [Migration Guide](#migration-guide) - How to upgrade
+
+---
+
+## Introduction
+
+The collapsible code blocks feature was developed in 6 phases from October 2025. It allows users to collapse and expand code examples in the documentation, making pages easier to navigate and read.
+
+**Key Benefits:**
+- Cleaner documentation pages (less scrolling)
+- User control over what code to view
+- Fast performance (60 FPS animations)
+- Works on all modern browsers
+
+**Development History:**
+Started as a simple button spacing fix (Phase 1), evolved into a comprehensive feature with accessibility, performance optimization, and full browser support (Phases 2-6).
 
 ---
 
@@ -63,6 +90,21 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Configuration Changes
 
+**How to Enable:**
+Add these lines to your Sphinx `conf.py` file:
+
+```python
+# In conf.py
+html_css_files = [
+    'code-collapse.css',  # Add to your existing list
+]
+
+html_js_files = [
+    'code-collapse.js',   # Add to your existing list
+]
+```
+
+**Configuration Details:**
 - Added `'code-collapse.css'` to `html_css_files` in `conf.py` (line 204)
 - Added `'code-collapse.js'` to `html_js_files` in `conf.py` (line 213)
 
@@ -136,15 +178,33 @@ This project follows [Semantic Versioning](https://semver.org/):
 
 ---
 
+## How to Use This Changelog
+
+**Finding What You Need:**
+- **Looking for new features?** Check the [Added] sections in each version
+- **Upgrading?** See the [Migration Guide](#migration-guide) section
+- **Planning ahead?** Review [Unreleased](#unreleased) for upcoming features
+
 **Legend:**
-- **Added:** New features
-- **Changed:** Changes in existing functionality
-- **Deprecated:** Soon-to-be removed features
-- **Removed:** Removed features
-- **Fixed:** Bug fixes
-- **Security:** Security improvements
+- **Added** - New features that didn't exist before
+- **Changed** - Modifications to existing functionality
+- **Deprecated** - Features that still work but will be removed soon
+- **Removed** - Features that no longer work
+- **Fixed** - Bug fixes and corrections
+- **Security** - Security-related improvements
+
+---
+
+## Related Documentation
+
+- [User Guide](user-guide.md) - How to use collapsible code blocks
+- [Configuration Reference](configuration-reference.md) - All customization options
+- [Integration Guide](integration-guide.md) - Adding to your Sphinx docs
+- [Technical Reference](technical-reference.md) - Implementation details
+- [Troubleshooting](troubleshooting.md) - Common issues and solutions
 
 ---
 
 **Maintained by:** DIP_SMC_PSO Documentation Team
-**Last Updated:** 2025-10-12
+**Last Updated:** 2025-11-10
+**Version:** 1.0.0
