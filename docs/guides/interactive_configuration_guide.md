@@ -1,6 +1,10 @@
 # Interactive Configuration Guide
 
-This guide demonstrates how configuration parameters affect controller performance using interactive visualizations.
+**What This Guide Shows:**
+This guide demonstrates how configuration parameters affect controller performance. You'll see interactive visualizations showing the impact of different settings on system behavior.
+
+**How to Use This Guide:**
+Each visualization shows real data from controller testing. Use these charts to understand parameter tradeoffs and optimize your configuration.
 
 ## Controller Gain Impact Analysis
 
@@ -133,7 +137,7 @@ Visualize the safe operating ranges for controller gains:
            }
        ]
    }
-```yaml
+```
 
 **Safe Ranges (Classical SMC):**
 - k1: [5, 20] - Position gain for θ1
