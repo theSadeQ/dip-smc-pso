@@ -43,6 +43,12 @@ This guide provides a systematic framework for validating three safety aspects:
 - Understanding of [HIL Production Checklist](hil-production-checklist.md)
 - Familiarity with safety-critical systems
 
+**Quick Navigation:**
+- **Testing force limits?** → Part 1 (Safety Invariants)
+- **Testing emergency stops?** → Part 2 (Fault Detection)
+- **Fault injection tests?** → Part 3 (Robustness Testing)
+- **Need certification report?** → Part 5 (Validation Report)
+
 **Key Principle:** Fail-safe operation - every failure mode must result in safe system state.
 
 ---
@@ -53,24 +59,39 @@ This guide provides a systematic framework for validating three safety aspects:
 
 **Property 1: Force Limits**
 
+**Plain English:** Control force must never exceed maximum rated force.
+
 ```text
 INVARIANT: |u(t)| ≤ max_force ∀t
-Violation consequence: Actuator damage, mechanical failure
 ```
+
+**What this means:** At all times (∀t), the absolute value of control force |u(t)| must stay below the maximum safe limit.
+
+**Violation consequence:** Actuator damage, mechanical failure
 
 **Property 2: Velocity Limits**
 
+**Plain English:** Pendulum angular velocities must stay within safe limits.
+
 ```text
 INVARIANT: |θ̇₁(t)|, |θ̇₂(t)| ≤ max_angular_velocity ∀t
-Violation consequence: Bearing damage, instability
 ```
+
+**What this means:** Both pendulum angular velocities must stay below maximum safe speed at all times.
+
+**Violation consequence:** Bearing damage, system instability
 
 **Property 3: Position Constraints**
 
+**Plain English:** Pendulum angles must stay within safe operating range.
+
 ```text
 INVARIANT: -π/2 ≤ θ₁(t), θ₂(t) ≤ π/2 ∀t
-Violation consequence: Mechanical collision, damage
 ```
+
+**What this means:** Both angles must stay between -90° and +90° to prevent mechanical collision with frame.
+
+**Violation consequence:** Mechanical collision, hardware damage
 
 **Property 4: Emergency Stop Response**
 
@@ -135,6 +156,9 @@ comm_loss_state = {
 ## Part 2: Validation Test Procedures
 
 ### 2.1 Emergency Stop Testing
+
+> **Why This Test Matters:**
+> Emergency stops are your last line of defense. If they fail, you have no way to stop runaway controllers or prevent damage during failures. This test verifies the system can stop within 100ms - fast enough to prevent most damage scenarios.
 
 **Test 1: E-Stop Response Time**
 
@@ -290,6 +314,9 @@ def test_invalid_command_rejection():
 ---
 
 ## Part 3: Fault Injection Testing
+
+> **Why Fault Injection Validates Robustness:**
+> Real-world systems face network delays, packet loss, and hardware glitches. Fault injection testing deliberately introduces these problems to verify your controller handles them gracefully. A robust controller degrades gracefully rather than failing catastrophically.
 
 ### 3.1 Network Fault Injection
 

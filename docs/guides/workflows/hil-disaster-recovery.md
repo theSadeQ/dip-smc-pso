@@ -242,6 +242,12 @@ for step in range(num_steps):
 
 ## Part 3: Recovery Procedures
 
+**Why Order of Operations Matters:**
+Recovery steps must follow a specific sequence. Doing them out of order can corrupt data or cause safety hazards. Always verify each step completes successfully before moving to the next. This systematic approach prevents cascading failures.
+
+**Recovery Strategy:**
+Detect → Stop → Assess → Restore → Validate → Resume
+
 ### 3.1 Hardware Failure Recovery
 
 **Plant Server Failure:**
@@ -386,6 +392,14 @@ def recover_corrupted_data(corrupted_file):
 ---
 
 ## Part 4: Failover Mechanisms
+
+**Why Automatic Failover Needs Testing:**
+Automatic failover sounds great until it fails when you need it most. Untested failover mechanisms often have hidden bugs that only appear during real disasters. Regular testing ensures your backup systems actually work under pressure.
+
+**Failover Types:**
+- **Hot Standby**: Backup runs continuously, instant switch (0-second downtime)
+- **Warm Standby**: Backup on but idle, quick start (5-30 second downtime)
+- **Cold Standby**: Backup off, manual start (1-5 minute downtime)
 
 ### 4.1 Hot Standby Configuration
 
