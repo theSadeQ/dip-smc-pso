@@ -1,0 +1,201 @@
+# Proposed Config Additions for Dynamics Model Validation
+# QA-03 Audit Recommendation Implementation
+# Date: November 10, 2025
+
+# =============================================================================
+# SECTION 1: New Dynamics Model Selection (RECOMMENDED)
+# =============================================================================
+
+simulation:
+  duration: 10.0
+  dt: 0.01
+  initial_state: [0.0, 0.05, -0.03, 0.0, 0.0, 0.0]
+
+  # NEW FIELD: Explicit dynamics model specification
+  # Replaces ambiguous boolean use_full_dynamics
+  #
+  # Options:
+  #   "full"       - FullDIPDynamics (highest accuracy, includes Coriolis/centrifugal/gyroscopic)
+  #   "dip"        - DIPDynamics (standard model, balanced speed/accuracy)
+  #   "simplified" - SimplifiedDIPDynamics (fastest, linearized approximations)
+  #
+  # IMPORTANT: Gains optimized for one model are NOT compatible with others!
+  # Always verify gain provenance before applying.
+  dynamics_model: "dip"  # Default: standard DIPDynamics
+
+  # DEPRECATED: use_full_dynamics boolean
+  # Kept for backward compatibility (will emit DeprecationWarning)
+  # Mapping: use_full_dynamics=true -> dynamics_model="full"
+  #          use_full_dynamics=false -> dynamics_model="dip"
+  # use_full_dynamics: false  # DEPRECATED - use dynamics_model instead
+
+  # Existing fields (unchanged)
+  sensor_latency: 0.0
+  actuator_latency: 0.0
+
+
+# =============================================================================
+# SECTION 2: Validation Configuration (NEW)
+# =============================================================================
+
+validation:
+  # Enable model consistency checks
+  # When true, scripts will validate that:
+  #   1. Loaded gains match current dynamics_model
+  #   2. Physics config matches optimization context
+  #   3. Initial conditions are within validated range
+  enabled: true
+
+  # Behavior when mismatch detected
+  # Options: "error", "warn", "silent"
+  on_mismatch: "error"  # Stop execution on model mismatch
+
+  # Require gain provenance metadata
+  # When true, gain files must include dynamics.model field
+  require_provenance: true
+
+  # Allow loading gains without metadata (legacy mode)
+  # WARNING: Disabling this bypasses safety checks!
+  allow_legacy_gains: false
+
+
+# =============================================================================
+# SECTION 3: PSO Result Provenance (NEW)
+# =============================================================================
+
+pso:
+  # Existing PSO config (unchanged)
+  n_particles: 40
+  iters: 50
+  w: 0.7
+  c1: 2.0
+  c2: 2.0
+  seed: 42
+
+  # NEW: Provenance tracking for optimization results
+  results:
+    # Include full metadata in saved JSON files
+    # Fields: script, timestamp, git_commit, dynamics, physics, controller, IC
+    include_metadata: true
+
+    # Schema version for result files (for future compatibility)
+    metadata_version: "2.0"
+
+    # Save optimization trace (particle history, convergence)
+    # Useful for debugging PSO failures
+    save_trace: false  # Large files, disable by default
+
+    # Auto-tag results with git commit hash
+    # Enables reproducibility and provenance tracking
+    include_git_commit: true
+
+
+# =============================================================================
+# SECTION 4: Pre-Flight Checks (NEW)
+# =============================================================================
+
+pre_flight:
+  # Run validation checks before expensive operations
+  # Prevents wasted compute on incompatible configurations
+  enabled: true
+
+  # Checks to perform
+  checks:
+    - "dynamics_model_specified"      # Ensure simulation.dynamics_model is set
+    - "gain_provenance"               # Verify loaded gains have metadata
+    - "model_consistency"             # Check gains.dynamics.model == config.simulation.dynamics_model
+    - "physics_compatibility"         # Warn if physics params differ from optimization
+    - "ic_range_validation"           # Ensure IC within optimized range
+
+  # Stop execution if ANY check fails
+  fail_fast: true
+
+  # Log pre-flight results
+  log_file: ".cache/pre_flight_checks.log"
+
+
+# =============================================================================
+# IMPLEMENTATION NOTES
+# =============================================================================
+
+# Phase A: Immediate (Week 1)
+# 1. Add dynamics_model enum to src/config/schemas.py
+# 2. Update this config.yaml with dynamics_model field
+# 3. Deprecate use_full_dynamics (keep for compatibility)
+
+# Phase B: Short-term (Weeks 2-3)
+# 1. Implement validation section (model consistency checks)
+# 2. Update PSOTuner.save_results() to include metadata
+# 3. Create scripts/validate_model_consistency.py
+
+# Phase C: Medium-term (Weeks 4-6)
+# 1. Implement pre_flight checks infrastructure
+# 2. Update all PSO scripts to use create_dynamics_model(config)
+# 3. Add metadata to existing gain files (manual or scripted)
+
+# Phase D: Long-term (Weeks 7-8)
+# 1. Write docs/guides/dynamics_models.md
+# 2. Add model selection UI to Streamlit
+# 3. Comprehensive integration testing
+
+# =============================================================================
+# BACKWARD COMPATIBILITY
+# =============================================================================
+
+# Migration path:
+# 1. Old configs WITHOUT dynamics_model: use use_full_dynamics (legacy mode)
+# 2. New configs WITH dynamics_model: use explicit model (recommended)
+# 3. If BOTH present: dynamics_model takes precedence, warn about use_full_dynamics
+
+# Deprecation timeline:
+# - v2.0: Add dynamics_model, keep use_full_dynamics (emit warnings)
+# - v3.0: Make dynamics_model required (use_full_dynamics optional)
+# - v4.0: Remove use_full_dynamics entirely
+
+# =============================================================================
+# EXAMPLE CONFIGURATIONS
+# =============================================================================
+
+# Example 1: High-fidelity research simulation
+# simulation:
+#   dynamics_model: "full"  # FullDIPDynamics for maximum accuracy
+#   duration: 20.0
+#   dt: 0.001  # Smaller timestep for numerical stability
+
+# Example 2: Fast PSO optimization (RECOMMENDED for MT-series)
+# simulation:
+#   dynamics_model: "dip"  # DIPDynamics for speed/accuracy balance
+#   duration: 10.0
+#   dt: 0.01
+
+# Example 3: Hardware-in-the-loop testing
+# simulation:
+#   dynamics_model: "simplified"  # SimplifiedDIPDynamics for real-time performance
+#   duration: 5.0
+#   dt: 0.01
+
+# =============================================================================
+# VALIDATION SCRIPT USAGE
+# =============================================================================
+
+# Before running PSO with loaded gains:
+# $ python scripts/validate_model_consistency.py optimization_results/mt8_robust_hybrid_adaptive_sta_smc.json
+#
+# Output (SUCCESS):
+#   [OK] Config dynamics_model: dip
+#   [OK] Gains dynamics.model: DIPDynamics
+#   [OK] Model consistency validated
+#   Exit code: 0
+#
+# Output (FAILURE):
+#   [ERROR] Model mismatch!
+#     Config:  simplified
+#     Gains:   DIPDynamics
+#
+#     These gains were optimized for DIPDynamics.
+#     Applying them to simplified will likely FAIL.
+#   Exit code: 1
+
+# =============================================================================
+# END OF PROPOSED CONFIG ADDITIONS
+# =============================================================================
