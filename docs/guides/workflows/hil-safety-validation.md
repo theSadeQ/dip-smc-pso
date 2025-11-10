@@ -3,7 +3,9 @@
 **Comprehensive Safety Testing for Hardware-in-the-Loop Controller Deployment**
 
 **What This Guide Covers:**
-This guide shows you how to test that your HIL system is safe before production use. Safety validation prevents hardware damage, ensures emergency stops work, and verifies fault handling. You'll learn systematic testing procedures to validate every safety mechanism.
+This guide shows you how to test that your HIL system is safe before production use. You'll learn systematic testing procedures to validate every safety mechanism.
+
+Safety validation serves three purposes: prevents hardware damage, ensures emergency stops work, and verifies fault handling.
 
 **Why Safety First:**
 HIL systems control real hardware. A software bug or controller malfunction can damage expensive equipment or create dangerous situations. Safety validation catches these problems before they cause harm.
@@ -17,7 +19,12 @@ HIL systems control real hardware. A software bug or controller malfunction can 
 ## Executive Summary
 
 **The Core Principle:**
-Every failure mode must result in a safe system state. This guide provides a systematic framework for validating that controllers operate within physical limits, handle faults gracefully, and protect hardware from damage.
+Every failure mode must result in a safe system state.
+
+This guide provides a systematic framework for validating three safety aspects:
+1. Controllers operate within physical limits
+2. Faults are handled gracefully
+3. Hardware is protected from damage
 
 **What You'll Test:**
 - Force limits (prevents actuator damage)
@@ -45,31 +52,36 @@ Every failure mode must result in a safe system state. This guide provides a sys
 ### 1.1 Critical Safety Properties
 
 **Property 1: Force Limits**
-```
+
+```text
 INVARIANT: |u(t)| ≤ max_force ∀t
 Violation consequence: Actuator damage, mechanical failure
 ```
 
 **Property 2: Velocity Limits**
-```
+
+```text
 INVARIANT: |θ̇₁(t)|, |θ̇₂(t)| ≤ max_angular_velocity ∀t
 Violation consequence: Bearing damage, instability
 ```
 
 **Property 3: Position Constraints**
-```
+
+```text
 INVARIANT: -π/2 ≤ θ₁(t), θ₂(t) ≤ π/2 ∀t
 Violation consequence: Mechanical collision, damage
 ```
 
 **Property 4: Emergency Stop Response**
-```
+
+```text
 GUARANTEE: u(t) = 0 within 100ms of E-stop trigger
 Violation consequence: Inability to stop during emergency
 ```
 
 **Property 5: Timeout Detection**
-```
+
+```text
 GUARANTEE: Controller stops if no state received for >2× control period
 Violation consequence: Controller operates on stale data
 ```
@@ -85,7 +97,8 @@ Violation consequence: Controller operates on stale data
 | Angle Range | ±90° | ±75° | 17% | Mechanical clearance |
 | Latency | 50ms | 20ms | 60% | Control stability |
 
-**Validation:** All safety limits must be tested at 110% of safety limit (not physical limit) to verify margin enforcement.
+**How to Validate Margins:**
+All safety limits must be tested at 110% of safety limit (not physical limit). This verifies that margin enforcement works correctly. Never test at physical limits as this risks hardware damage.
 
 ### 1.3 Fail-Safe States
 
@@ -133,7 +146,8 @@ python scripts/validation/test_emergency_stop.py \
 ```
 
 **Expected Behavior:**
-```
+
+```text
 T=0.0s: Normal operation, u=50N
 T=2.0s: E-stop triggered
 T=2.05s: u transitions to 0N
@@ -605,7 +619,7 @@ assert coverage['overall_pct'] >= 90.0
 
 **Safety Certificate Template:**
 
-```
+```text
 SAFETY VALIDATION CERTIFICATE
 
 System: Double Inverted Pendulum SMC HIL
@@ -618,11 +632,11 @@ internal safety standards and meets all critical safety requirements for
 deployment in [environment].
 
 Safety Properties Validated:
-✅ Force limits enforced (max_force: 150 N)
-✅ Emergency stop response time < 100 ms
-✅ Timeout detection < 2× control period
-✅ Communication fault handling verified
-✅ Fail-safe state transitions validated
+[OK] Force limits enforced (max_force: 150 N)
+[OK] Emergency stop response time < 100 ms
+[OK] Timeout detection < 2× control period
+[OK] Communication fault handling verified
+[OK] Fail-safe state transitions validated
 
 Test Coverage: 94.2%
 Critical Tests Passed: 100%
@@ -645,6 +659,9 @@ Date: [Date]
 ---
 
 ## Part 7: Production Safety Monitoring
+
+**Why Continuous Monitoring Matters:**
+Safety validation doesn't end at deployment. Production systems need continuous monitoring to detect safety violations in real-time. This section shows you how to implement automated safety monitoring and incident response.
 
 ### 7.1 Real-Time Safety Monitoring
 
