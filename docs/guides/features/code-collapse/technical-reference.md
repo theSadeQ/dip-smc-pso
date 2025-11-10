@@ -10,31 +10,30 @@
 ### System Design
 
 The collapsible code blocks feature consists of two core files:
+
 - **code-collapse.js** (21KB): Core logic, event handling, state management
 - **code-collapse.css** (8.9KB): Styles, animations, responsive design
 
 ### Design Principles
 
-1. **Progressive Enhancement**: Works without JavaScript (graceful degradation)
-2. **Zero Dependencies**: Pure vanilla JavaScript (except copybutton.js integration)
-3. **Performance First**: GPU-accelerated animations, 60 FPS target
-4. **Accessibility**: Full ARIA support, keyboard navigation, reduced motion
-5. **State Persistence**: LocalStorage for collapse state across page loads
+1. **Progressive Enhancement**: Works without JavaScript with graceful degradation
+2. **Zero Dependencies**: Pure vanilla JavaScript, except copybutton.js integration
+3. **Performance First**: GPU-accelerated animations with 60 FPS target
+4. **Accessibility**: Full ARIA support, keyboard navigation, and reduced motion
+5. **State Persistence**: LocalStorage persists collapse state across page loads
 
 ---
 
 ## Implementation Phases
 
-### Phase 1:
+### Phase 1: Button Spacing Fix
 
-Button Spacing Fix
-- **Goal**: Fix 40px gap → 5-8px professional spacing
+- **Goal**: Fix 40px gap to 5-8px professional spacing
 - **Solution**: CSS selector `.copybtn + .code-collapse-btn`
 - **Result**: Clean button alignment
 
-### Phase 2:
+### Phase 2: Architectural Fix (True Button Siblings)
 
-Architectural Fix (True Button Siblings)
 - **Goal**: Insert collapse button as true sibling to copy button
 - **Challenge**: Race condition with copybutton.js async loading
 - **Solution**: Wait-and-retry pattern (5 attempts × 50ms)
@@ -57,16 +56,14 @@ Architectural Fix (True Button Siblings)
   - Material Design easing curves
 - **Result**: 58-60 FPS on all modern browsers
 
-### Phase 5:
+### Phase 5: Testing & Validation
 
-Testing & Validation
 - **Testing**: Cross-browser, performance, accessibility
 - **Documentation**: Testing procedures, browser checklist
 - **Result**: Production-ready validation
 
-### Phase 6:
+### Phase 6: Documentation & Maintenance
 
-Documentation & Maintenance
 - **Goal**: Comprehensive documentation for users and maintainers
 - **Deliverables**: 8 documentation files, integration guides
 - **Result**: This document
@@ -75,9 +72,7 @@ Documentation & Maintenance
 
 ## Implementation Details
 
-### 1.
-
-Selector Coverage System
+### 1. Selector Coverage System
 
 #### How It Works
 
@@ -112,9 +107,7 @@ Console output includes:
 - Selector performance table
 - Excluded elements (math blocks, etc.)
 
-### 2.
-
-Button Insertion (Wait-and-Retry Pattern)
+### 2. Button Insertion (Wait-and-Retry Pattern)
 
 #### Challenge
 
@@ -145,9 +138,7 @@ const insertCollapseButton = (attempt = 0) => {
 - Max wait time: 250ms (5 attempts × 50ms)
 - Success rate: ~99% within 2-3 attempts
 
-### 3.
-
-Animation Engine
+### 3. Animation Engine
 
 #### Double RequestAnimationFrame Pattern
 
@@ -186,9 +177,7 @@ div[class*="highlight"] pre {
 }
 ```
 
-### 4.
-
-State Management
+### 4. State Management
 
 #### LocalStorage Schema
 
@@ -210,9 +199,7 @@ State Management
 4. On page load → `loadStates()`
 5. Apply saved states: `collapseCodeBlock(block, false)` (no animation)
 
-### 5.
-
-Accessibility Implementation
+### 5. Accessibility Implementation
 
 #### ARIA Attributes
 
@@ -223,7 +210,7 @@ Accessibility Implementation
         title="Collapse code block">
     <span class="collapse-icon">▼</span>
 </button>
-```yaml
+```
 
 **State Updates:**
 - Collapsed: `aria-expanded="false"`, `title="Expand code block"`
@@ -264,39 +251,36 @@ Accessibility Implementation
 
 ## Browser Support Matrix
 
-| Feature            | Chrome   | Firefox    | Edge     | Safari      |
-|--------------------|----------|------------|----------|-------------|
-| Core Functionality | 90+      | 88+        | 90+      | 14+         |
-| GPU Acceleration   | ✅ Full   | ✅ Full     | ✅ Full   | ⚠️ Partial  |
-| Layout Containment | ✅ Full   | ⚠️ Partial | ✅ Full   | ⚠️ Limited  |
-| Animations         | ✅ 60 FPS | ✅ 60 FPS   | ✅ 60 FPS | ✅ 55-60 FPS |
+| Feature            | Chrome        | Firefox       | Edge          | Safari          |
+|--------------------|---------------|---------------|---------------|-----------------|
+| Core Functionality | 90+           | 88+           | 90+           | 14+             |
+| GPU Acceleration   | [OK] Full     | [OK] Full     | [OK] Full     | [PARTIAL]       |
+| Layout Containment | [OK] Full     | [PARTIAL]     | [OK] Full     | [LIMITED]       |
+| Animations         | [OK] 60 FPS   | [OK] 60 FPS   | [OK] 60 FPS   | [OK] 55-60 FPS  |
 
 **Legend:**
-- ✅ Full: Complete support, tested
-- ⚠️ Partial: Works but limited
-- ❌ None: Not supported
+- [OK] Full: Complete support, tested
+- [PARTIAL]: Works but limited
+- [LIMITED]: Basic functionality only
 
 ---
 
 ## Known Limitations
 
-### 1.
+### 1. Safari Layout Containment
 
-Safari Layout Containment
 - `contain: layout` has limited support in Safari <15
 - May see minor layout shifts during animation
 - Core functionality still works
 
-### 2.
+### 2. LocalStorage Quota
 
-LocalStorage Quota
 - 5-10MB limit (browser dependent)
 - State storage uses ~1KB per 100 blocks
 - Graceful degradation if quota exceeded
 
-### 3.
+### 3. Dynamic Content
 
-Dynamic Content
 - MutationObserver handles most cases
 - Very fast DOM changes may miss some blocks
 - Refresh page if buttons missing
