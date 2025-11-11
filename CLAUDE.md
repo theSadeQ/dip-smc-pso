@@ -59,19 +59,48 @@
 /recover
 
 # Or Manually
-bash .dev_tools/recover_project.sh
+bash .project/dev_tools/recover_project.sh
 
 # Check Roadmap Progress
-python .dev_tools/roadmap_tracker.py
+python .project/dev_tools/roadmap_tracker.py
 ```
 
-## Check Roadmap Progress
+### Multi-Account Recovery (NEW - Nov 2025)
+
+**Purpose:** Resume work when switching Claude Code accounts or starting new sessions
+
+**Quick Start:**
+```bash
+# Windows: Double-click this file
+.project\dev_tools\quick_recovery.bat
+
+# Linux/Mac: Run recovery + checkpoint analysis
+bash .project/dev_tools/recover_project.sh && python .project/dev_tools/analyze_checkpoints.py
+```
+
+**What it does:**
+1. Shows recent commits and project status
+2. Detects incomplete multi-agent work
+3. Categorizes real vs test checkpoints
+4. Provides resumption recommendations
+
+**Then ask Claude:**
+> "What should I resume based on the recovery output?"
+
+**Detailed Guide:** See `.project/dev_tools/MULTI_ACCOUNT_RECOVERY_GUIDE.md` for complete workflow
+
+**Tools:**
+- **quick_recovery.bat** - One-click recovery for Windows
+- **analyze_checkpoints.py** - Categorize incomplete work (real vs test)
+- **cleanup_test_checkpoints.py** - Clean up test checkpoint artifacts
+- **MULTI_ACCOUNT_RECOVERY_GUIDE.md** - Complete recovery workflow documentation
 
 ### Key Tools
-1. **Project State Manager** (`.dev_tools/project_state_manager.py`) - Tracks phase, roadmap progress, completed tasks
-2. **Git Recovery Script** (`.dev_tools/recover_project.sh`) - 30-second recovery workflow
-3. **Roadmap Tracker** (`.dev_tools/roadmap_tracker.py`) - Parses 72-hour research roadmap (50 tasks)
-4. **Agent Checkpoint System** (`.dev_tools/agent_checkpoint.py`) - Recovers interrupted multi-agent work
+1. **Project State Manager** (`.project/dev_tools/project_state_manager.py`) - Tracks phase, roadmap progress, completed tasks
+2. **Git Recovery Script** (`.project/dev_tools/recover_project.sh`) - 30-second recovery workflow
+3. **Roadmap Tracker** (`.project/dev_tools/roadmap_tracker.py`) - Parses 72-hour research roadmap (50 tasks)
+4. **Agent Checkpoint System** (`.project/dev_tools/agent_checkpoint.py`) - Recovers interrupted multi-agent work
+5. **Multi-Account Recovery** (`.project/dev_tools/MULTI_ACCOUNT_RECOVERY_GUIDE.md`) - Resume work across accounts/sessions
 
 ### What Survives Token Limits
 - [OK] Git commits (10/10), project state (9/10), agent checkpoints (9/10), data files (8/10)
@@ -84,7 +113,7 @@ git commit -m "feat(MT-6): Complete boundary layer optimization"
 # Pre-commit Hook Auto-detects Mt-6 + Updates Project State
 ```
 
-**Recovery Reliability:** Git commits (10/10) | Automated tracking (10/10) | Test coverage (11/11 tests, 100%)
+**Recovery Reliability:** Git commits (10/10) | Automated tracking (10/10) | Multi-account recovery (NEW) | Test coverage (11/11 tests, 100%)
 
 **Current Phase:** Maintenance/Publication | **Completed:** Phase 3 (UI 34/34), Phase 4 (Production 4.1+4.2), Phase 5 (Research 11/11 tasks, LT-7 submission-ready)
 
