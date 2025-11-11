@@ -4,7 +4,7 @@
 
 [BLUE] **Looking for something specific?** See the [Master Navigation Hub](../NAVIGATION.md) for complete documentation mapping across all 985 files and 11 navigation systems.
 
-[GREEN] **Complete Beginner?** Start with [Path 0: Beginner Roadmap](../.project/ai/edu/beginner-roadmap.md) (125-175 hours) - Takes you from ZERO coding/control theory background to running simulations confidently. **NOW COMPLETE** with all 5 phases! [OK]
+[GREEN] **Complete Beginner?** Start with [Path 0: Beginner Roadmap](../learning/beginner-roadmap.md) (125-175 hours) - Takes you from ZERO coding/control theory background to running simulations confidently. **NOW COMPLETE** with all 5 phases! [OK]
 
 This is your central navigation hub for all user guides, tutorials, and learning resources. Whether you're a beginner taking your first steps or an experienced researcher implementing novel controllers, you'll find the right resources here.
 
