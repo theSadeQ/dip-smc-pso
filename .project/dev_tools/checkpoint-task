@@ -1,0 +1,43 @@
+#!/bin/bash
+# Checkpoint Task Launcher - Simple bash wrapper
+#
+# Usage:
+#   ./checkpoint-task --task LT-4 --agent agent1 --role "Theory Specialist" --prompt "Your prompt"
+#
+# Or simpler:
+#   ./checkpoint-task LT-4 agent1 "Theory Specialist" "Your prompt here"
+
+# Check if running from right directory
+if [ ! -f ".project/dev_tools/launch_checkpoint_task.py" ]; then
+    echo "[ERROR] Must run from project root directory"
+    echo "[INFO] Current directory: $(pwd)"
+    exit 1
+fi
+
+# Simple positional argument parsing
+if [ $# -eq 4 ]; then
+    # Simple format: task_id agent_id role prompt
+    python ".project/dev_tools/launch_checkpoint_task.py" \
+        --task "$1" \
+        --agent "$2" \
+        --role "$3" \
+        --description "$3" \
+        --prompt "$4" \
+        --type "general-purpose"
+elif [ $# -gt 4 ]; then
+    # Full format with named arguments
+    python ".project/dev_tools/launch_checkpoint_task.py" "$@"
+else
+    echo "[ERROR] Invalid arguments"
+    echo ""
+    echo "Usage (simple):"
+    echo "  ./checkpoint-task TASK_ID AGENT_ID ROLE PROMPT"
+    echo ""
+    echo "Example:"
+    echo "  ./checkpoint-task LT-4 agent1_theory \"Theory Specialist\" \"Derive Lyapunov proofs...\""
+    echo ""
+    echo "Usage (advanced):"
+    echo "  ./checkpoint-task --task LT-4 --agent agent1 --role \"Role\" --prompt \"Prompt\" --type general-purpose"
+    echo ""
+    exit 1
+fi
