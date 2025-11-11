@@ -37,7 +37,7 @@ Welcome to the master navigation hub! This page connects all 11 documentation sy
 
 #### Prerequisites & Learning Paths
 
-**Path 0**: [Complete Beginner Roadmap](../.project/ai/edu/beginner-roadmap.md) (125-150 hrs) [OK] **COMPLETE**
+**Path 0**: [Complete Beginner Roadmap](learning/beginner-roadmap.md) (125-150 hrs) [OK] **COMPLETE**
 - Target: ZERO coding/control theory background.
 - Coverage: Computing → Python → Physics → Math → Control Theory → SMC → Hands-On → Advanced Skills → Mastery.
 - Status: ALL 5 PHASES COMPLETE (~5,250 lines, 150 hours of learning content).
@@ -225,7 +225,7 @@ Run Python+NumPy+Matplotlib directly in browser. Edit examples and see results i
 #### Quick Start
 
 **[CORE]** Start here if you have ZERO background:
-→ [Path 0: Complete Beginner Roadmap](../.project/ai/edu/beginner-roadmap.md) (125-150 hrs)
+→ [Path 0: Complete Beginner Roadmap](learning/beginner-roadmap.md) (125-150 hrs)
   - Phase 1: Computing fundamentals, Python basics (30 hrs).
   - Phase 2: Physics, Math, Control Theory (45 hrs).
   - Phases 3-5: Hands-on practice to mastery (50-75 hrs, planned).
@@ -923,7 +923,7 @@ sphinx-build -M html docs docs/_build -W --keep-going
 ---
 
 **Ready to Get Started?**
-- **Complete Beginners**: [Path 0: Beginner Roadmap](../.project/ai/edu/beginner-roadmap.md).
+- **Complete Beginners**: [Path 0: Beginner Roadmap](learning/beginner-roadmap.md).
 - **New Users**: [Getting Started Guide](guides/getting-started.md).
 
 - **Researchers**: [Research Workflow](workflow/research_workflow.md).

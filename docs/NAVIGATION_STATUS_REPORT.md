@@ -197,7 +197,7 @@
 **Duration**: 125-175 hours
 **Target**: ZERO coding/control theory background
 **Status**: ALL 5 PHASES COMPLETE (~5,250 lines)
-**Location**: .project/ai/edu/beginner-roadmap.md
+**Location**: learning/beginner-roadmap.md
 
 **Phases**:
 1. Computing Foundations (25-30 hrs)

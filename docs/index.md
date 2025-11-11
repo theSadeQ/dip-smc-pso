@@ -90,6 +90,7 @@ python -m http.server 8000 --directory docs/_build/html
 README
 NAVIGATION
 guides/getting-started
+learning/index
 guides/index
 hil_quickstart
 ```
