@@ -204,6 +204,10 @@ class FaultScenario:
             # controller gains or plant parameters before simulation loop
             pass
 
+        # Initialize controller state and history
+        controller_state = None
+        history = {}
+
         # Simulation loop
         for step in range(num_steps):
             current_time = step * dt
@@ -216,16 +220,9 @@ class FaultScenario:
                     state_measured = sensor_fault.inject(state_measured)
 
             # 2. Compute control
-            # Extract state variables for controller
-            state_vars = tuple(state_measured)
-
-            # Initialize history dict if needed
-            if step == 0:
-                history = {}
-
             control_output = controller.compute_control(
                 state_measured,
-                state_vars,
+                controller_state,
                 history
             )
 
@@ -233,7 +230,8 @@ class FaultScenario:
             # Controllers return a NamedTuple with (u, state, history)
             control_commanded = control_output.u
 
-            # Update history for next iteration
+            # Update controller state and history for next iteration
+            controller_state = control_output.state
             history = control_output.history
 
             # Handle array/scalar control output
