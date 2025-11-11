@@ -216,11 +216,25 @@ class FaultScenario:
                     state_measured = sensor_fault.inject(state_measured)
 
             # 2. Compute control
-            control_commanded = controller.compute_control(
+            # Extract state variables for controller
+            state_vars = tuple(state_measured)
+
+            # Initialize history dict if needed
+            if step == 0:
+                history = {}
+
+            control_output = controller.compute_control(
                 state_measured,
-                last_control=last_control,
-                history=None
+                state_vars,
+                history
             )
+
+            # Extract control value from controller output
+            # Controllers return a NamedTuple with (u, state, history)
+            control_commanded = control_output.u
+
+            # Update history for next iteration
+            history = control_output.history
 
             # Handle array/scalar control output
             if isinstance(control_commanded, np.ndarray):
