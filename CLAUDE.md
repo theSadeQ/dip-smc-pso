@@ -698,6 +698,157 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 
 ------
 
+## 24) Task Wrapper & Checkpoint System for Multi-Agent Orchestration
+
+**See:** `.project/dev_tools/TASK_WRAPPER_USAGE.md` for complete guide.
+
+**Quick Reference:**
+- Automatic checkpointing for Task tool invocations
+- Survives token limits, crashes, session interruptions
+- Hybrid auto-polling: tracks progress every 5 minutes
+- Zero-friction recovery: `/recover` + `/resume` commands
+- Output preservation: agent work saved to `.artifacts/`
+
+### One-Line Integration Pattern
+
+```python
+from .project.dev_tools.task_wrapper import checkpoint_task_launch
+
+# Automatic checkpointing - work survives token limits!
+result = checkpoint_task_launch(
+    task_id="LT-4",
+    agent_id="agent1_theory",
+    task_config={
+        "subagent_type": "general-purpose",
+        "description": "Derive Lyapunov proofs",
+        "prompt": "Your detailed prompt..."
+    },
+    role="Theory Specialist - Derive Lyapunov proofs"
+)
+
+# Result includes:
+# - result["task_result"] - Agent output
+# - result["checkpoint_file"] - Location of complete checkpoint
+# - result["hours_spent"] - Total time elapsed
+# - result["output_artifact"] - Location of saved output JSON
+```
+
+### Recovery After Token Limit
+
+```bash
+# 1. Detect incomplete work
+/recover
+
+# 2. Auto-resume interrupted agents
+/resume LT-4 agent1_theory
+
+# 3. Verify completion
+/recover
+```
+
+### Key Features
+
+**Auto-Checkpointing:**
+- Plan approval checkpoint (pre-launch)
+- Agent launch checkpoint (at start)
+- Progress checkpoints (every 5 min, hybrid auto-polling)
+- Completion checkpoint (at finish)
+- Output capture (auto-save to .artifacts/)
+
+**Checkpoint Files Location:**
+```
+.artifacts/
+├── lt4_plan_approved.json
+├── lt4_agent1_theory_launched.json
+├── lt4_agent1_theory_progress.json
+├── lt4_agent1_theory_complete.json
+└── lt4_agent1_theory_output.json
+```
+
+**Recovery Functions:**
+- `resume_incomplete_agents(task_id)` - List incomplete agents for recovery
+- `cleanup_task_checkpoints(task_id)` - Clean up after git commit
+- `get_task_status(task_id)` - Check task progress
+- `get_incomplete_agents()` - Find all interrupted work
+
+### Multi-Agent Patterns
+
+**Sequential (Agent 2 depends on Agent 1):**
+```python
+result1 = checkpoint_task_launch(task_id="LT-7", agent_id="agent1_research", ...)
+result2 = checkpoint_task_launch(
+    task_id="LT-7",
+    agent_id="agent2_paper",
+    dependencies=[result1["output_artifact"]]
+)
+```
+
+**Parallel (Independent agents):**
+```python
+result1 = checkpoint_task_launch(task_id="MT-6", agent_id="agent1_sim", ...)
+result2 = checkpoint_task_launch(task_id="MT-6", agent_id="agent2_analysis", ...)
+```
+
+### Configuration
+
+**Custom polling interval:**
+```python
+checkpoint_task_launch(
+    ...,
+    poll_interval_seconds=600  # Every 10 min instead of 5
+)
+```
+
+**Disable auto-polling (manual updates only):**
+```python
+checkpoint_task_launch(
+    ...,
+    auto_progress=False
+)
+```
+
+### Implementation Details
+
+**Location:** `.project/dev_tools/task_wrapper.py` (250+ lines)
+
+**Files Modified:**
+- `.project/dev_tools/agent_checkpoint.py` - Added `resume_incomplete_agents()`, `cleanup_task_checkpoints()`
+- `.project/dev_tools/recover_project.sh` - Enhanced section [5] with recovery suggestions
+
+**Test Suite:** `.project/dev_tools/test_task_wrapper.py`
+
+**Documentation:** `.project/dev_tools/TASK_WRAPPER_USAGE.md` (complete usage guide with examples)
+
+### Status
+
+[OK] **Operational** (November 2025)
+- Task wrapper implementation complete
+- Checkpoint system integrated and tested
+- Recovery system fully functional
+- Documentation comprehensive with examples
+- Ready for multi-agent orchestration workflows
+
+### Usage Checklist
+
+Before launching multi-agent tasks:
+- [OK] Use `checkpoint_task_launch()` instead of bare Task tool calls
+- [OK] Provide task_id and agent_id (consistent naming)
+- [OK] Include descriptive role for recovery context
+- [OK] Set dependencies if agents depend on each other
+- [OK] After completion, run cleanup: `cleanup_task_checkpoints(task_id)`
+
+### Success Criteria
+
+✅ Multi-agent work survives token limits
+✅ Recovery is automatic (one-command: `/resume`)
+✅ Progress tracking shows where agents left off
+✅ Output preserved in .artifacts/
+✅ No manual recovery work needed
+
+**See Also:** `.project/ai/config/agent_checkpoint_system.md` (original design), `.project/ai/config/agent_orchestration.md` (orchestration patterns)
+
+------
+
 ### Appendix: Notes
 
 - Keep this file authoritative for style, testing, and operational posture.

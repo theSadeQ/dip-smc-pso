@@ -448,6 +448,109 @@ def get_task_status(task_id: str) -> Dict[str, Any]:
 
 
 # ============================================================================
+# Resume & Recovery Functions (NEW - Nov 2025)
+# ============================================================================
+
+def resume_incomplete_agents(task_id: Optional[str] = None) -> List[Dict[str, Any]]:
+    """
+    Get list of incomplete agents for recovery/resume.
+
+    Auto-resume pattern: when token limit hits, recovery script detects
+    incomplete agents and user can call /resume to relaunch them.
+
+    Args:
+        task_id: Optional task ID to filter by. If None, returns all incomplete.
+
+    Returns:
+        List of incomplete agent dicts ready for resume (enriched with recommendations):
+        [
+            {
+                "task_id": "LT-4",
+                "agent_id": "agent1_theory",
+                "role": "Theory Specialist - Derive Lyapunov proofs",
+                "launched_timestamp": "2025-11-11T10:30:00",
+                "last_progress": {
+                    "current_phase": "Proving Classical SMC (Hour 2-3.5)",
+                    "hours_completed": 2.5,
+                    "deliverables_created": [...]
+                },
+                "recommendation": "Re-launch from Hour 0"
+            }
+        ]
+
+    Example:
+        incomplete = resume_incomplete_agents("LT-4")
+        for agent in incomplete:
+            print(f"Resume {agent['task_id']}/{agent['agent_id']}?")
+    """
+
+    # Get all incomplete agents
+    all_incomplete = get_incomplete_agents()
+
+    # Filter by task_id if specified
+    if task_id:
+        task_prefix = task_id.lower().replace('-', '')
+        incomplete = [a for a in all_incomplete if a.get("task_id", "").lower() == task_prefix]
+    else:
+        incomplete = all_incomplete
+
+    # Enrich with resume recommendations
+    for agent in incomplete:
+        # Default recommendation
+        agent_id = agent.get("agent_id", "unknown")
+        agent["recommendation"] = f"Re-launch {agent_id} from Hour 0"
+
+        # If we have progress, show it in recommendation
+        if agent.get("last_progress"):
+            last_phase = agent["last_progress"].get("current_phase", "Unknown phase")
+            hours_done = agent["last_progress"].get("hours_completed", 0)
+            agent["recommendation"] = (
+                f"Resume {agent_id}: Last at {hours_done}h "
+                f"({last_phase}). Re-launch from Hour 0."
+            )
+
+    return incomplete
+
+
+def cleanup_task_checkpoints(task_id: str) -> None:
+    """
+    Clean up checkpoint files after task is committed to git.
+
+    After a task is committed to git, checkpoints become redundant.
+    This removes all *_launched.json, *_progress.json, *_complete.json
+    files for the given task.
+
+    Args:
+        task_id: Task ID to clean up (e.g., "LT-4")
+
+    Example:
+        cleanup_task_checkpoints("LT-4")
+        # Removes all .artifacts/lt4_*.json checkpoint files
+    """
+
+    task_prefix = task_id.lower()
+    checkpoint_patterns = [
+        f"{task_prefix}_*_launched.json",
+        f"{task_prefix}_*_progress.json",
+        f"{task_prefix}_*_complete.json",
+        f"{task_prefix}_*_failed.json",
+        f"{task_prefix}_plan_approved.json"
+    ]
+
+    removed_count = 0
+    for pattern in checkpoint_patterns:
+        for checkpoint_file in CHECKPOINT_DIR.glob(pattern):
+            try:
+                checkpoint_file.unlink()
+                print(f"[OK] Removed: {checkpoint_file.name}")
+                removed_count += 1
+            except Exception as e:
+                print(f"[ERROR] Failed to remove {checkpoint_file.name}: {e}")
+
+    print(f"[OK] Cleaned up {removed_count} checkpoint files for task {task_id}")
+
+
+# ============================================================================
 # Main (for testing)
 # ============================================================================
 
