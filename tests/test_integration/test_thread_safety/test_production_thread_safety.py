@@ -166,7 +166,18 @@ class TestProductionThreadSafety:
         def create_mixed_controller(task_id: int) -> Dict[str, Any]:
             ctrl_type = controller_types[task_id % len(controller_types)][1]
             try:
-                controller = create_controller(ctrl_type, config=config)
+                # Extract gains from config (fix for CA-01 audit finding)
+                if ctrl_type == "classical_smc":
+                    gains = config.controller_defaults.classical_smc.gains
+                elif ctrl_type == "sta_smc":
+                    gains = config.controller_defaults.sta_smc.gains
+                elif ctrl_type == "adaptive_smc":
+                    gains = config.controller_defaults.adaptive_smc.gains
+                elif ctrl_type == "hybrid_adaptive_sta_smc":
+                    gains = config.controller_defaults.hybrid_adaptive_sta_smc.gains
+                else:
+                    gains = [1.0, 1.0, 1.0, 1.0]  # Fallback
+                controller = create_controller(ctrl_type, config=config, gains=gains)
                 assert controller is not None
                 return {"success": True, "type": ctrl_type, "id": task_id}
             except Exception as exc:  # pragma: no cover - diagnostic path
@@ -196,7 +207,9 @@ class TestProductionThreadSafety:
         initial_memory = process.memory_info().rss / 1024 / 1024  # MB
 
         def create_and_destroy_controller(task_id: int) -> bool:
-            controller = create_controller("classical_smc", config=config)
+            # Extract gains from config (fix for CA-01 audit finding)
+            gains = config.controller_defaults.classical_smc.gains
+            controller = create_controller("classical_smc", config=config, gains=gains)
             local_rng = np.random.default_rng(42 + task_id)
             state = local_rng.normal(0, 0.1, 6)
             _ = controller.compute_control(state, None, None)
@@ -388,7 +401,9 @@ class TestProductionThreadSafety:
                     results.append(outcome["best_pos"])
 
         def creation_worker(task_id: int) -> bool:
-            controller = create_controller("classical_smc", config=config)
+            # Extract gains from config (fix for CA-01 audit finding)
+            gains = config.controller_defaults.classical_smc.gains
+            controller = create_controller("classical_smc", config=config, gains=gains)
             assert controller is not None
             return True
 
@@ -419,7 +434,12 @@ class TestProductionThreadSafety:
             try:
                 if op_type == "create":
                     ctrl_type = ["classical_smc", "sta_smc"][task_id % 2]
-                    controller = create_controller(ctrl_type, config=config)
+                    # Extract gains from config (fix for CA-01 audit finding)
+                    if ctrl_type == "classical_smc":
+                        gains = config.controller_defaults.classical_smc.gains
+                    else:  # sta_smc
+                        gains = config.controller_defaults.sta_smc.gains
+                    controller = create_controller(ctrl_type, config=config, gains=gains)
                     return "created" if controller else "failed"
                 if op_type == "get_info":
                     thread_safety = get_thread_safety_enhancement()
@@ -459,7 +479,9 @@ class TestProductionThreadSafety:
         initial_memory = process.memory_info().rss / 1024 / 1024  # MB
 
         def create_use_destroy(task_id: int) -> bool:
-            controller = create_controller("classical_smc", config=config)
+            # Extract gains from config (fix for CA-01 audit finding)
+            gains = config.controller_defaults.classical_smc.gains
+            controller = create_controller("classical_smc", config=config, gains=gains)
             local_rng = np.random.default_rng(314 + task_id)
             state = local_rng.normal(0, 0.1, 6)
             _ = controller.compute_control(state, None, None)
@@ -494,7 +516,9 @@ class TestProductionThreadSafety:
         weak_refs: List[weakref.ReferenceType[Any]] = []
         lock = threading.Lock()
         def create_and_track_controller(task_id: int) -> bool:
-            controller = create_controller("classical_smc", config=config)
+            # Extract gains from config (fix for CA-01 audit finding)
+            gains = config.controller_defaults.classical_smc.gains
+            controller = create_controller("classical_smc", config=config, gains=gains)
             weak_ref = weakref.ref(controller)
             with lock:
                 weak_refs.append(weak_ref)
