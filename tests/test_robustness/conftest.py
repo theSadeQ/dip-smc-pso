@@ -7,8 +7,8 @@ for all robustness tests.
 
 import pytest
 import numpy as np
-from src.controllers.factory import create_controller, SMCType, SMCConfig
-from src.core.dynamics import SimplifiedDynamics
+from src.controllers.factory import create_controller
+from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics as SimplifiedDynamics
 from src.utils.fault_injection import (
     FaultScenario,
     GaussianNoiseFault,
@@ -20,19 +20,22 @@ from src.utils.fault_injection import (
 @pytest.fixture
 def initial_state():
     """Standard initial state for robustness tests."""
-    return np.array([0.1, -0.1, 0.0, 0.0])  # Small perturbation from equilibrium
+    # State vector: [x, theta1, theta2, xdot, dtheta1, dtheta2]
+    return np.array([0.0, 0.1, -0.1, 0.0, 0.0, 0.0])  # Small perturbation from equilibrium
 
 
 @pytest.fixture
 def target_state():
     """Target equilibrium state (upright)."""
-    return np.zeros(4)
+    return np.zeros(6)
 
 
 @pytest.fixture
 def dynamics():
     """Simplified dynamics model for testing."""
-    return SimplifiedDynamics()
+    from src.plant.models.simplified.config import SimplifiedDIPConfig
+    config = SimplifiedDIPConfig.create_default()
+    return SimplifiedDynamics(config)
 
 
 @pytest.fixture
@@ -199,24 +202,12 @@ def create_test_controller(controller_type: str, gains: list = None):
     Returns:
         Controller instance
     """
-    # Map string names to SMCType enum
-    type_map = {
-        'classical_smc': SMCType.CLASSICAL,
-        'sta_smc': SMCType.STA,
-        'adaptive_smc': SMCType.ADAPTIVE,
-        'hybrid_adaptive_sta_smc': SMCType.HYBRID_ADAPTIVE_STA,
-        'swing_up_smc': SMCType.SWING_UP,
-        'mpc': SMCType.MPC
-    }
+    from src.controllers.factory import get_default_gains
 
-    smc_type = type_map.get(controller_type, SMCType.CLASSICAL)
+    if gains is None:
+        gains = get_default_gains(controller_type)
 
-    config = SMCConfig(
-        smc_type=smc_type,
-        gains=gains
-    )
-
-    return create_controller(config)
+    return create_controller(controller_type, gains=gains)
 
 
 @pytest.fixture
