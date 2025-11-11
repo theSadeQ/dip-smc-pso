@@ -21,6 +21,21 @@ from .diagnostics import (
     InstabilityType,
     DiagnosticResult
 )
+from .data_model import (
+    MetricsSnapshot,
+    PerformanceSummary,
+    DashboardData,
+    ComparisonData,
+    RunStatus,
+    ControllerType
+)
+from .metrics_collector_control import ControlMetricsCollector
+from .visualization import (
+    PerformanceVisualizer,
+    DataExporter,
+    CONTROLLER_COLORS,
+    METRIC_COLORS
+)
 
 __all__ = [
     "LatencyMonitor",
@@ -30,5 +45,16 @@ __all__ = [
     "StabilityMonitoringSystem",
     "DiagnosticChecklist",
     "InstabilityType",
-    "DiagnosticResult"
+    "DiagnosticResult",
+    "MetricsSnapshot",
+    "PerformanceSummary",
+    "DashboardData",
+    "ComparisonData",
+    "RunStatus",
+    "ControllerType",
+    "ControlMetricsCollector",
+    "PerformanceVisualizer",
+    "DataExporter",
+    "CONTROLLER_COLORS",
+    "METRIC_COLORS"
 ]
