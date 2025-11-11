@@ -27,7 +27,7 @@ except ImportError:
         return decorator
 
 
-@njit
+@njit(cache=True)
 def rhs_numba(state: np.ndarray, u: float, params) -> np.ndarray:
     """
     Numba-optimized right-hand side function for DIP dynamics.
@@ -66,7 +66,7 @@ def rhs_numba(state: np.ndarray, u: float, params) -> np.ndarray:
     )
 
 
-@njit
+@njit(cache=True)
 def step_euler_numba(state: np.ndarray, u: float, dt: float, params) -> np.ndarray:
     """
     Numba-optimized Euler integration step for DIP dynamics.
@@ -108,7 +108,7 @@ def step_euler_numba(state: np.ndarray, u: float, dt: float, params) -> np.ndarr
     return state + dt * state_dot
 
 
-@njit
+@njit(cache=True)
 def step_rk4_numba(state: np.ndarray, u: float, dt: float, params) -> np.ndarray:
     """
     Numba-optimized 4th-order Runge-Kutta integration step for DIP dynamics.

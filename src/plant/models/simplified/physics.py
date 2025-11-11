@@ -233,7 +233,7 @@ class SimplifiedPhysicsComputer:
             return False
 
 
-@njit
+@njit(cache=True)
 def compute_simplified_dynamics_numba(
     state: np.ndarray,
     control_force: float,

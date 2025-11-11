@@ -301,7 +301,7 @@ class MatrixInverter:
             raise NumericalInstabilityError(f"Linear system solve failed: {e}")
 
 
-@njit
+@njit(cache=True)
 def fast_condition_estimate(matrix: np.ndarray) -> float:
     """
     Fast condition number estimation using determinant ratio.
