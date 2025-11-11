@@ -7,7 +7,7 @@ parameter variations, and combined disturbances.
 
 import pytest
 import numpy as np
-from src.controllers.factory import create_controller, SMCType, SMCConfig
+from src.controllers.factory import create_controller, get_default_gains
 from src.utils.fault_injection import FaultScenario, SimulationResult
 
 
@@ -17,8 +17,8 @@ class TestClassicalSMCRobustness:
     @pytest.fixture
     def controller(self):
         """Create Classical SMC controller."""
-        config = SMCConfig(smc_type=SMCType.CLASSICAL)
-        return create_controller(config)
+        gains = get_default_gains('classical_smc')
+        return create_controller('classical_smc', gains=gains)
 
     @pytest.fixture
     def baseline_result(self, controller, dynamics, initial_state, simulation_params):
@@ -209,8 +209,7 @@ class TestClassicalSMCRobustness:
         corrupted_gains = gain_fault.inject(nominal_gains)
 
         # Recreate controller with corrupted gains
-        config = SMCConfig(smc_type=SMCType.CLASSICAL, gains=corrupted_gains.tolist())
-        faulty_controller = create_controller(config)
+        faulty_controller = create_controller('classical_smc', gains=corrupted_gains.tolist())
 
         # Run simulation without parameter fault (since we already applied it)
         scenario = FaultScenario(name="parameter_uncertainty_mild_applied", seed=42)
@@ -241,8 +240,7 @@ class TestClassicalSMCRobustness:
         gain_fault = parameter_uncertainty_moderate._parametric_faults[0]
         corrupted_gains = gain_fault.inject(nominal_gains)
 
-        config = SMCConfig(smc_type=SMCType.CLASSICAL, gains=corrupted_gains.tolist())
-        faulty_controller = create_controller(config)
+        faulty_controller = create_controller('classical_smc', gains=corrupted_gains.tolist())
 
         scenario = FaultScenario(name="parameter_uncertainty_moderate_applied", seed=42)
         result = scenario.run_simulation(
@@ -271,8 +269,7 @@ class TestClassicalSMCRobustness:
         gain_fault = parameter_uncertainty_severe._parametric_faults[0]
         corrupted_gains = gain_fault.inject(nominal_gains)
 
-        config = SMCConfig(smc_type=SMCType.CLASSICAL, gains=corrupted_gains.tolist())
-        faulty_controller = create_controller(config)
+        faulty_controller = create_controller('classical_smc', gains=corrupted_gains.tolist())
 
         scenario = FaultScenario(name="parameter_uncertainty_severe_applied", seed=42)
         result = scenario.run_simulation(
