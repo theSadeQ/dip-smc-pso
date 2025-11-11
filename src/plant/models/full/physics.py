@@ -309,7 +309,7 @@ class FullFidelityPhysicsComputer:
                           self.config.pendulum2_mass)
 
     @staticmethod
-    @njit
+    @njit(cache=True)
     def _compute_full_inertia_matrix_numba(
         theta1: float, theta2: float,
         m0: float, m1: float, m2: float,
@@ -343,7 +343,7 @@ class FullFidelityPhysicsComputer:
         return M
 
     @staticmethod
-    @njit
+    @njit(cache=True)
     def _compute_full_coriolis_matrix_numba(
         theta1: float, theta2: float,
         theta1_dot: float, theta2_dot: float,

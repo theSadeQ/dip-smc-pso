@@ -154,7 +154,7 @@ class DIPPhysicsMatrices:
         return M, C, G
 
     @staticmethod
-    @njit
+    @njit(cache=True)
     def _compute_inertia_matrix_numba(
         theta1: float, theta2: float,
         m0: float, m1: float, m2: float,
@@ -189,7 +189,7 @@ class DIPPhysicsMatrices:
         return M
 
     @staticmethod
-    @njit
+    @njit(cache=True)
     def _compute_coriolis_matrix_numba(
         theta1: float, theta2: float,
         theta1_dot: float, theta2_dot: float,
@@ -225,7 +225,7 @@ class DIPPhysicsMatrices:
         return C
 
     @staticmethod
-    @njit
+    @njit(cache=True)
     def _compute_gravity_vector_numba(
         theta1: float, theta2: float,
         m1: float, m2: float,
@@ -264,7 +264,7 @@ class SimplifiedDIPPhysicsMatrices(DIPPhysicsMatrices):
         )
 
     @staticmethod
-    @njit
+    @njit(cache=True)
     def _compute_simplified_inertia_matrix_numba(
         theta1: float, theta2: float,
         m0: float, m1: float, m2: float,
