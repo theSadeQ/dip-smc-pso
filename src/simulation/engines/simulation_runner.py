@@ -18,9 +18,13 @@ from __future__ import annotations
 
 from importlib import import_module
 
+import logging
 import time
 from typing import Any, Callable, Optional, Tuple
 import numpy as np
+
+# Configure logger for simulation runner
+logger = logging.getLogger(__name__)
 
 # Attempt to import the configuration.  The config module must define an
 # attribute ``config.simulation.use_full_dynamics``.  We import lazily in
@@ -118,6 +122,7 @@ def run_simulation(
     rng: Optional[np.random.Generator] = None,
     latency_margin: Optional[float] = None,
     fallback_controller: Optional[Callable[[float, np.ndarray], float]] = None,
+    strict_mode: bool = False,
     **_kwargs: Any,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Simulate a single controller trajectory using an explicit Euler method.
@@ -176,6 +181,11 @@ def run_simulation(
         Function ``fallback_controller(t, x) -> float`` invoked to compute
         control after a deadline miss.  When a control call exceeds ``dt`` in
         duration, the fallback controller is used for all subsequent steps.
+    strict_mode : bool, default=False
+        When True, exceptions are re-raised instead of returning partial
+        results.  Useful for development and debugging to catch errors early.
+        When False (default), graceful degradation is used: exceptions are
+        logged and partial results are returned.  Added in CA-01 P1 fix.
     **_kwargs : dict
         Additional keyword arguments are ignored.  They are accepted to
         preserve backward compatibility with earlier versions of this API.
@@ -272,8 +282,16 @@ def run_simulation(
                         pass
                 else:
                     u_val = float(controller(t_now, x_curr))
-        except Exception:
+        except Exception as e:
             # Terminate on control exception
+            logger.warning(
+                f"Simulation terminated early at step {i}/{n_steps} (t={t_now:.3f}s): "
+                f"Controller raised exception: {type(e).__name__}: {e}"
+            )
+            if strict_mode:
+                # Re-raise exception in strict mode for debugging
+                raise
+            # Graceful degradation: return partial results
             t_arr = t_arr[: i + 1]
             x_arr = x_arr[: i + 1]
             u_arr = u_arr[: i]
@@ -296,7 +314,15 @@ def run_simulation(
         # Propagate dynamics
         try:
             x_next = dynamics_model.step(x_curr, u_val, dt)
-        except Exception:
+        except Exception as e:
+            logger.warning(
+                f"Simulation terminated early at step {i}/{n_steps} (t={t_now:.3f}s): "
+                f"Dynamics raised exception: {type(e).__name__}: {e}"
+            )
+            if strict_mode:
+                # Re-raise exception in strict mode for debugging
+                raise
+            # Graceful degradation: return partial results
             t_arr = t_arr[: i + 1]
             x_arr = x_arr[: i + 1]
             u_arr = u_arr[: i]
@@ -309,6 +335,14 @@ def run_simulation(
         # MEMORY OPTIMIZATION: asarray creates view when input is already ndarray with correct dtype
         x_next = np.asarray(x_next, dtype=float).reshape(-1)
         if not np.all(np.isfinite(x_next)):
+            logger.warning(
+                f"Simulation terminated early at step {i}/{n_steps} (t={t_now:.3f}s): "
+                f"Dynamics returned non-finite state: {x_next}"
+            )
+            if strict_mode:
+                # Raise exception in strict mode for debugging
+                raise ValueError(f"Dynamics returned non-finite state at step {i}: {x_next}")
+            # Graceful degradation: return partial results
             t_arr = t_arr[: i + 1]
             x_arr = x_arr[: i + 1]
             u_arr = u_arr[: i]
