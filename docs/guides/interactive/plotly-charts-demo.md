@@ -20,8 +20,6 @@ This page demonstrates how to create interactive Plotly charts in documentation 
 
 ---
 
----
-
 ## Quick Start: Your First Interactive Chart
 
 The simplest Plotly chart uses inline JSON data:

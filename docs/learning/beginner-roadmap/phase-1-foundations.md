@@ -1901,7 +1901,7 @@ Write Python code to:
 
 ## Learning Resources
 
-```{grid} 1 2 3
+```{grid} 1 1 2 3
 :gutter: 2
 
 ```{grid-item-card} YouTube: Phase 1 Tutorials
