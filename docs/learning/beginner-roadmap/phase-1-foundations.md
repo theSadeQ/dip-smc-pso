@@ -1291,6 +1291,44 @@ Write Python code to:
 
 ---
 
+
+## Learning Resources
+
+```{grid} 1 2 3
+:gutter: 2
+
+```{grid-item-card} YouTube: Phase 1 Tutorials
+:link: https://www.youtube.com/results?search_query=python+programming+beginners+2024
+:link-type: url
+:text-align: center
+
+Watch video tutorials for Python, command line, and physics basics
+[View →]
+
+```
+
+```{grid-item-card} Article: Computing & Python Concepts
+:link: https://realpython.com/learning-paths/python3-introduction/
+:link-type: url
+:text-align: center
+
+Read detailed explanations and examples for beginners
+[Read →]
+
+```
+
+```{grid-item-card} Interactive Quiz
+:link: #self-assessment-phase-15
+:link-type: url
+:text-align: center
+
+Test your understanding of Phase 1 concepts
+[Take Quiz →]
+
+```
+```
+
+---
 ## Phase 1 Complete!
 
 **Achievement Unlocked**: Foundation Builder

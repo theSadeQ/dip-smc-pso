@@ -914,6 +914,44 @@ ValueError: Unknown controller type: 'classical'
 
 ---
 
+
+## Learning Resources
+
+```{grid} 1 2 3
+:gutter: 2
+
+```{grid-item-card} YouTube: Simulation & Analysis
+:link: https://www.youtube.com/results?search_query=python+simulation+control+systems
+:link-type: url
+:text-align: center
+
+Watch tutorials on running simulations and analyzing results
+[View →]
+
+```
+
+```{grid-item-card} Article: Controller Comparison Methods
+:link: https://www.mathworks.com/help/control/
+:link-type: url
+:text-align: center
+
+Read about comparing controller performance metrics
+[Read →]
+
+```
+
+```{grid-item-card} Interactive Quiz
+:link: #self-assessment-phase-35
+:link-type: url
+:text-align: center
+
+Test your hands-on simulation skills from Phase 3
+[Take Quiz →]
+
+```
+```
+
+---
 **CONGRATULATIONS!** 🎉
 
 You've completed **Phase 3: Hands-On Learning** (~25 hours)!
