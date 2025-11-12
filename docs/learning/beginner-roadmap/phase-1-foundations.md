@@ -369,116 +369,200 @@ clear
 
 **Essential Concepts to Learn**:
 
-1. **Variables and Data Types** (2 hours)
-   - Numbers (integers, floats)
-   - Strings (text)
-   - Booleans (True/False)
-   - Type conversion
+:::{dropdown} 1. Variables and Data Types (2 hours)
+:animate: fade-in-slide-down
+:color: primary
 
-   ```python
-   # Variables store values
-   age = 25
-   name = "Alice"
-   height = 1.75  # meters
-   is_student = True
+Learn how to store and manipulate different types of data in Python.
 
-   # You can change variable values
-   age = age + 1  # Now 26
+**Topics Covered**:
+- Numbers (integers, floats)
+- Strings (text)
+- Booleans (True/False)
+- Type conversion
 
-   # Type conversion
-   age_string = str(age)  # "26"
-   number = int("42")     # 42
-   ```
+**Code Examples**:
 
-2. **Operators and Expressions** (1 hour)
-   - Arithmetic: `+`, `-`, `*`, `/`, `**` (power), `%` (modulo)
-   - Comparison: `==`, `!=`, `<`, `>`, `<=`, `>=`
-   - Logical: `and`, `or`, `not`
+```python
+# Variables store values
+age = 25
+name = "Alice"
+height = 1.75  # meters
+is_student = True
 
-   ```python
-   # Arithmetic
-   result = 10 + 5 * 2  # 20 (multiplication first)
-   power = 2 ** 3       # 8 (2 to the power of 3)
+# You can change variable values
+age = age + 1  # Now 26
 
-   # Comparison
-   is_adult = age >= 18  # True if age is 18 or more
+# Type conversion
+age_string = str(age)  # "26"
+number = int("42")     # 42
+```
 
-   # Logical
-   can_vote = (age >= 18) and (is_citizen)
-   ```
+**Practice**: Try creating variables for your name, age, and favorite number. Print them!
 
-3. **Control Flow: if/else** (2 hours)
-   - Making decisions in code
+:::
 
-   ```python
-   age = 20
+:::{dropdown} 2. Operators and Expressions (1 hour)
+:animate: fade-in-slide-down
+:color: primary
 
-   if age >= 18:
-       print("You are an adult")
-   elif age >= 13:
-       print("You are a teenager")
-   else:
-       print("You are a child")
-   ```
+Learn how to perform calculations and comparisons in Python.
 
-4. **Loops: for and while** (2 hours)
-   - Repeating actions
+**Topics Covered**:
+- Arithmetic: `+`, `-`, `*`, `/`, `**` (power), `%` (modulo)
+- Comparison: `==`, `!=`, `<`, `>`, `<=`, `>=`
+- Logical: `and`, `or`, `not`
 
-   ```python
-   # For loop (repeat N times)
-   for i in range(5):
-       print(f"Count: {i}")  # Prints 0, 1, 2, 3, 4
+**Code Examples**:
 
-   # While loop (repeat until condition false)
-   count = 0
-   while count < 5:
-       print(f"Count: {count}")
-       count = count + 1
-   ```
+```python
+# Arithmetic
+result = 10 + 5 * 2  # 20 (multiplication first)
+power = 2 ** 3       # 8 (2 to the power of 3)
 
-5. **Functions** (2 hours)
-   - Reusable blocks of code
+# Comparison
+is_adult = age >= 18  # True if age is 18 or more
 
-   ```python
-   # Define a function
-   def greet(name):
-       return f"Hello, {name}!"
+# Logical
+can_vote = (age >= 18) and (is_citizen)
+```
 
-   # Call the function
-   message = greet("Alice")
-   print(message)  # "Hello, Alice!"
+**Practice**: Calculate the area of a circle with radius 5 using `area = 3.14 * radius ** 2`
 
-   # Function with multiple parameters
-   def add_numbers(a, b):
-       return a + b
+:::
 
-   result = add_numbers(5, 3)  # 8
-   ```
+:::{dropdown} 3. Control Flow: if/else (2 hours)
+:animate: fade-in-slide-down
+:color: primary
 
-6. **Lists and Dictionaries** (1 hour)
-   - Storing collections of data
+Learn how to make decisions in your code based on conditions.
 
-   ```python
-   # Lists (ordered)
-   numbers = [1, 2, 3, 4, 5]
-   names = ["Alice", "Bob", "Charlie"]
+**Topics Covered**:
+- if statements
+- elif (else if) for multiple conditions
+- else for default case
+- Indentation matters!
 
-   # Access by index (starts at 0)
-   first_name = names[0]  # "Alice"
+**Code Examples**:
 
-   # Add to list
-   names.append("David")
+```python
+age = 20
 
-   # Dictionaries (key-value pairs)
-   person = {
-       "name": "Alice",
-       "age": 25,
-       "city": "New York"
-   }
+if age >= 18:
+    print("You are an adult")
+elif age >= 13:
+    print("You are a teenager")
+else:
+    print("You are a child")
+```
 
-   # Access by key
-   person_age = person["age"]  # 25
-   ```
+**Practice**: Write an if/else that checks if a number is positive, negative, or zero.
+
+:::
+
+:::{dropdown} 4. Loops: for and while (2 hours)
+:animate: fade-in-slide-down
+:color: primary
+
+Learn how to repeat actions efficiently without writing the same code multiple times.
+
+**Topics Covered**:
+- for loops (repeat N times)
+- while loops (repeat until condition)
+- range() function
+- Loop control (break, continue)
+
+**Code Examples**:
+
+```python
+# For loop (repeat N times)
+for i in range(5):
+    print(f"Count: {i}")  # Prints 0, 1, 2, 3, 4
+
+# While loop (repeat until condition false)
+count = 0
+while count < 5:
+    print(f"Count: {count}")
+    count = count + 1
+```
+
+**Practice**: Write a loop that calculates the sum of numbers from 1 to 100.
+
+:::
+
+:::{dropdown} 5. Functions (2 hours)
+:animate: fade-in-slide-down
+:color: primary
+
+Learn how to create reusable blocks of code that perform specific tasks.
+
+**Topics Covered**:
+- Defining functions with def
+- Parameters and arguments
+- Return values
+- Function documentation
+
+**Code Examples**:
+
+```python
+# Define a function
+def greet(name):
+    return f"Hello, {name}!"
+
+# Call the function
+message = greet("Alice")
+print(message)  # "Hello, Alice!"
+
+# Function with multiple parameters
+def add_numbers(a, b):
+    return a + b
+
+result = add_numbers(5, 3)  # 8
+```
+
+**Practice**: Write a function that takes two numbers and returns their average.
+
+:::
+
+:::{dropdown} 6. Lists and Dictionaries (1 hour)
+:animate: fade-in-slide-down
+:color: primary
+
+Learn how to work with collections of data - ordered lists and key-value dictionaries.
+
+**Topics Covered**:
+- Creating and accessing lists
+- List methods (append, remove, sort)
+- Creating and accessing dictionaries
+- When to use lists vs dictionaries
+
+**Code Examples**:
+
+```python
+# Lists (ordered)
+numbers = [1, 2, 3, 4, 5]
+names = ["Alice", "Bob", "Charlie"]
+
+# Access by index (starts at 0)
+first_name = names[0]  # "Alice"
+
+# Add to list
+names.append("David")
+
+# Dictionaries (key-value pairs)
+person = {
+    "name": "Alice",
+    "age": 25,
+    "city": "New York"
+}
+
+# Access by key
+person_age = person["age"]  # 25
+```
+
+**Practice**: Create a list of your top 5 favorite movies, then access the first and last items.
+
+:::
 
 **Practice Exercises**:
 
@@ -490,9 +574,78 @@ clear
        pass
    ```
 
+   :::{dropdown} Solution (try first!)
+   :color: success
+   :icon: light-bulb
+
+   ```python
+   def celsius_to_fahrenheit(celsius):
+       """Convert Celsius to Fahrenheit."""
+       fahrenheit = celsius * 9/5 + 32
+       return fahrenheit
+
+   # Test it
+   print(celsius_to_fahrenheit(0))    # 32.0
+   print(celsius_to_fahrenheit(100))  # 212.0
+   print(celsius_to_fahrenheit(37))   # 98.6 (body temperature)
+   ```
+
+   **Explanation**: The formula multiplies Celsius by 9/5 (or 1.8) and adds 32. This converts the temperature scale from Celsius to Fahrenheit.
+
+   :::
+
 2. **Exercise 2**: Write a loop that prints all numbers from 1 to 10 that are even.
 
+   :::{dropdown} Solution (try first!)
+   :color: success
+   :icon: light-bulb
+
+   **Method 1: Using modulo operator**
+   ```python
+   for i in range(1, 11):
+       if i % 2 == 0:  # % is modulo (remainder)
+           print(i)
+   # Output: 2, 4, 6, 8, 10
+   ```
+
+   **Method 2: Using range with step**
+   ```python
+   for i in range(2, 11, 2):  # Start at 2, end at 11, step by 2
+       print(i)
+   # Output: 2, 4, 6, 8, 10
+   ```
+
+   **Explanation**: Method 1 checks if each number is divisible by 2 (remainder is 0). Method 2 is more efficient, starting at 2 and counting by 2s.
+
+   :::
+
 3. **Exercise 3**: Create a dictionary representing a pendulum with keys: "length", "mass", "angle".
+
+   :::{dropdown} Solution (try first!)
+   :color: success
+   :icon: light-bulb
+
+   ```python
+   # Simple pendulum dictionary
+   pendulum = {
+       "length": 1.5,    # meters
+       "mass": 0.5,      # kilograms
+       "angle": 30       # degrees
+   }
+
+   # Access the values
+   print(f"Pendulum length: {pendulum['length']} m")
+   print(f"Pendulum mass: {pendulum['mass']} kg")
+   print(f"Initial angle: {pendulum['angle']} degrees")
+
+   # Modify values
+   pendulum["angle"] = 15  # Swing to new angle
+   print(f"New angle: {pendulum['angle']} degrees")
+   ```
+
+   **Explanation**: Dictionaries use key-value pairs. Each key (like "length") maps to a value (like 1.5). This is perfect for representing objects with named properties.
+
+   :::
 
 **Resources**:
 - [Python for Everybody (Free Course, 10 hours)](https://www.py4e.com/)
@@ -933,15 +1086,169 @@ python simulate.py --help
 
 **Troubleshooting**:
 
-- **"Microsoft Visual C++ required" (Windows)**:
-  - Install: [Visual C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+:::{dropdown} Microsoft Visual C++ required (Windows)
+:color: warning
+:icon: alert
 
-- **"pip: command not found"**:
-  - Use: `python -m pip install -r requirements.txt` instead
+**Error Message**: "Microsoft Visual C++ 14.0 or greater is required" when installing packages.
 
-- **"Permission denied"**:
-  - Make sure virtual environment is activated (see `(venv)` in prompt)
-  - Or add `--user` flag: `pip install --user -r requirements.txt`
+**Why This Happens**: Some Python packages (like NumPy, SciPy) need to compile C/C++ code during installation. Windows doesn't include these tools by default.
+
+**Solution**:
+
+1. **Download Visual C++ Build Tools**:
+   - Go to: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+   - Download "Build Tools for Visual Studio"
+   - Run the installer
+
+2. **Select Workloads**:
+   - Check "Desktop development with C++"
+   - Click Install (may take 15-30 minutes)
+
+3. **Retry pip install**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+**Alternative**: Use pre-compiled wheels from https://www.lfd.uci.edu/~gohlke/pythonlibs/ (advanced)
+
+:::
+
+:::{dropdown} pip command not found
+:color: warning
+:icon: alert
+
+**Error Message**: "'pip' is not recognized as an internal or external command"
+
+**Solutions** (try in order):
+
+1. **Use python -m pip**:
+   ```bash
+   python -m pip install -r requirements.txt
+   ```
+   This explicitly calls pip through Python.
+
+2. **Check PATH** (Windows):
+   - During Python installation, was "Add to PATH" checked?
+   - If not, reinstall Python with this option enabled
+
+3. **Verify pip is installed**:
+   ```bash
+   python -m ensurepip --upgrade
+   ```
+
+**Why This Happens**: pip wasn't added to your system PATH during Python installation, so your terminal can't find it.
+
+:::
+
+:::{dropdown} Permission denied errors
+:color: warning
+:icon: alert
+
+**Error Message**: "PermissionError: [Errno 13] Permission denied"
+
+**Solutions** (try in order):
+
+1. **Check virtual environment is activated**:
+   - Look for `(venv)` prefix in your terminal prompt
+   - If missing, run activation command again:
+     ```bash
+     # Windows
+     venv\Scripts\activate.bat
+
+     # Mac/Linux
+     source venv/bin/activate
+     ```
+
+2. **Use --user flag** (if venv doesn't work):
+   ```bash
+   pip install --user -r requirements.txt
+   ```
+   This installs packages to your user directory instead of system-wide.
+
+3. **Check folder permissions**:
+   - Make sure you have write access to the project folder
+   - On Windows, don't install in `C:\Program Files\`
+
+**Why This Happens**: You're trying to install packages to a protected system location without proper permissions.
+
+:::
+
+:::{dropdown} Virtual environment activation fails (PowerShell)
+:color: warning
+:icon: tools
+
+**Error Message**: "cannot be loaded because running scripts is disabled on this system"
+
+**Why This Happens**: Windows PowerShell blocks script execution by default for security.
+
+**Solution**:
+
+1. **Check current execution policy**:
+   ```powershell
+   Get-ExecutionPolicy
+   ```
+
+2. **Allow script execution** (run PowerShell as Administrator):
+   ```powershell
+   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+   ```
+
+3. **Activate virtual environment**:
+   ```powershell
+   venv\Scripts\Activate.ps1
+   ```
+
+4. **Verify activation**:
+   - You should see `(venv)` in prompt
+
+**Alternative**: Use Command Prompt instead:
+```cmd
+venv\Scripts\activate.bat
+```
+
+**Security Note**: `RemoteSigned` only affects scripts. It's safe for local development.
+
+:::
+
+:::{dropdown} Import errors after installation
+:color: warning
+:icon: alert
+
+**Error Message**: "ModuleNotFoundError: No module named 'numpy'" (or other package)
+
+**Solutions** (try in order):
+
+1. **Verify virtual environment is activated**:
+   ```bash
+   # Check if (venv) appears in prompt
+   # If not, activate it first
+   ```
+
+2. **Check packages are installed**:
+   ```bash
+   pip list | grep numpy
+   # Or on Windows:
+   pip list | findstr numpy
+   ```
+
+3. **Reinstall the package**:
+   ```bash
+   pip install numpy --force-reinstall
+   ```
+
+4. **Check Python interpreter**:
+   ```bash
+   which python   # Mac/Linux
+   where python   # Windows
+   ```
+   Should point to `venv/bin/python` or `venv\Scripts\python.exe`
+
+**Why This Happens**: You might be running a different Python interpreter that doesn't have access to the packages installed in your virtual environment.
+
+**Pro Tip**: Always activate venv before running Python code!
+
+:::
 
 **Resources**:
 - [pip Documentation](https://pip.pypa.io/en/stable/getting-started/)
@@ -985,7 +1292,12 @@ python simulate.py --help
 
 ### Learning Path
 
-**Step 1: Forces and Newton's Laws (2 hours)**
+:::{dropdown} Step 1: Forces and Newton's Laws (2 hours)
+:animate: fade-in-slide-down
+:color: info
+:icon: mortar-board
+
+Understand the fundamental laws that govern how objects move and interact.
 
 **Newton's First Law** (Inertia):
 - An object at rest stays at rest
@@ -1012,13 +1324,42 @@ python simulate.py --help
 2. What happens to acceleration if you double the force?
 3. What happens if you double the mass instead?
 
+:::{dropdown} Exercise Solutions
+:color: success
+:icon: light-bulb
+
+1. **Acceleration = Force / Mass = 10 N / 2 kg = 5 m/s²**
+
+   Using F = ma, rearrange to get a = F/m.
+
+2. **Acceleration doubles to 10 m/s²**
+
+   If force doubles (20 N) and mass stays the same (2 kg):
+   a = 20 / 2 = 10 m/s²
+
+3. **Acceleration is cut in half to 2.5 m/s²**
+
+   If mass doubles (4 kg) and force stays the same (10 N):
+   a = 10 / 4 = 2.5 m/s²
+
+**Key Insight**: Acceleration is directly proportional to force and inversely proportional to mass.
+
+:::
+
 **Resources**:
 - [Newton's Laws Explained (Video, 15 min)](https://www.youtube.com/results?search_query=newton's+laws+explained+simply)
 - [Khan Academy: Newton's Laws](https://www.khanacademy.org/science/physics/forces-newtons-laws)
 
+:::
+
 ---
 
-**Step 2: Understanding Pendulums (3 hours)**
+:::{dropdown} Step 2: Understanding Pendulums (3 hours)
+:animate: fade-in-slide-down
+:color: info
+:icon: mortar-board
+
+Learn how pendulums work and why they're important for control systems.
 
 **What is a Pendulum?**
 - A mass suspended from a fixed point that can swing freely
@@ -1063,13 +1404,46 @@ Try this online simulator:
 2. What happens if you double the mass?
 3. What happens if you increase the initial angle?
 
+:::{dropdown} Exercise Solutions
+:color: success
+:icon: light-bulb
+
+1. **Period increases by √2 (about 1.41 times)**
+
+   If L doubles: Period = 2π√(2L/g) = √2 × 2π√(L/g)
+
+   Example: 1m pendulum (2 sec) → 2m pendulum (2.83 sec)
+
+2. **Period stays the same**
+
+   Mass doesn't appear in the period equation! All pendulums with the same length have the same period, regardless of mass.
+
+   This surprised Galileo when he first discovered it.
+
+3. **Period increases slightly (for large angles)**
+
+   The equation Period = 2π√(L/g) assumes small angles (< 15°).
+
+   For larger angles, the period is longer because the pendulum takes a longer path.
+
+**Key Insight**: Pendulum period depends only on length and gravity, not mass!
+
+:::
+
 **Resources**:
 - [Pendulum Physics Explained (Video, 10 min)](https://www.youtube.com/results?search_query=pendulum+physics+explained)
 - [Khan Academy: Pendulums](https://www.khanacademy.org/science/physics/mechanical-waves-and-sound/harmonic-motion/v/pendulum)
 
+:::
+
 ---
 
-**Step 3: Double-Inverted Pendulum (2 hours)**
+:::{dropdown} Step 3: Double-Inverted Pendulum Basics (2 hours)
+:animate: fade-in-slide-down
+:color: info
+:icon: mortar-board
+
+Understand the specific challenges of the double-inverted pendulum system.
 
 **What Makes It "Double"?**
 - TWO pendulums connected in series
@@ -1142,14 +1516,45 @@ Imagine balancing two broomsticks stacked end-to-end on a cart that you can only
 2. What happens if we push the cart to the right when both pendulums are tilting right?
 3. Why is the upright position unstable?
 
+:::{dropdown} Practice Solutions
+:color: success
+:icon: light-bulb
+
+1. **Why can't we directly control the pendulum angles?**
+
+   Because we only have ONE control input (force on cart), but THREE things to control (cart position, angle 1, angle 2). This is called an "underactuated" system.
+
+   We can only indirectly influence the angles by moving the cart, which affects the pendulums through their connection points.
+
+2. **What happens if we push the cart right when both pendulums tilt right?**
+
+   It depends on how fast they're tilting! If tilting slowly: cart acceleration might help bring them back. If tilting fast: cart movement might make it worse.
+
+   This is why control algorithms are complex - they must consider both position AND velocity of all components.
+
+3. **Why is the upright position unstable?**
+
+   Gravity always pulls the pendulums down. In the upright position, even the tiniest disturbance creates a torque that causes the pendulum to fall away from vertical.
+
+   Unlike a hanging pendulum (where gravity pulls it BACK to equilibrium), an inverted pendulum has gravity pulling it AWAY from equilibrium.
+
+:::
+
 **Resources**:
 - [Inverted Pendulum Explained (Video, 15 min)](https://www.youtube.com/results?search_query=inverted+pendulum+control+explained)
 - [Double Pendulum Chaos (Video, 10 min)](https://www.youtube.com/results?search_query=double+pendulum+chaos)
 - [Interactive Double Pendulum](https://www.myphysicslab.com/pendulum/double-pendulum-en.html)
 
+:::
+
 ---
 
-**Step 4: Energy and Stability (1 hour)**
+:::{dropdown} Step 4: Energy and Stability (1 hour)
+:animate: fade-in-slide-down
+:color: info
+:icon: mortar-board
+
+Learn about energy conversion and why some equilibrium positions are stable while others aren't.
 
 **Potential Energy** (PE):
 - Energy due to position in gravitational field
@@ -1185,6 +1590,8 @@ Imagine balancing two broomsticks stacked end-to-end on a cart that you can only
 **Resources**:
 - [Potential vs Kinetic Energy (Video, 10 min)](https://www.youtube.com/results?search_query=potential+kinetic+energy+explained)
 - [Stable vs Unstable Equilibrium (Article)](https://physics.info/equilibrium/)
+
+:::
 
 ---
 
