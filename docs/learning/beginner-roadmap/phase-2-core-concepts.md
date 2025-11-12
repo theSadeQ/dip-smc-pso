@@ -4,7 +4,25 @@
 
 # Phase 2: Core Concepts (Week 5-8, ~30 Hours)
 
-[Home](../../../index.md) › [Learning](../index.md) › [Beginner Roadmap](../beginner-roadmap.md) › Phase 2: Core Concepts
+::::{card}
+:class-card: breadcrumb-container
+
+:::{raw} html
+<nav aria-label="Learning path breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item">
+      <a href="../beginner-roadmap.html" class="breadcrumb-link">Beginner Roadmap</a>
+    </li>
+    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+    <li class="breadcrumb-item breadcrumb-active" aria-current="page">
+      <span class="phase-badge phase-2">Phase 2</span>
+      <span class="breadcrumb-text">Core Concepts</span>
+    </li>
+  </ol>
+</nav>
+:::
+
+::::
 
 ---
 
@@ -1495,6 +1513,58 @@ Read detailed explanations of feedback control and SMC
 
 Test your understanding of Phase 2 control concepts
 [Take Quiz →]
+
+```
+
+```{grid-item-card} 🧪 Python for Scientists - Interactive Tutorial
+:link: https://www.learnpython.org/
+:link-type: url
+:class-card: resource-card resource-interactive
+:shadow: md
+:text-align: center
+
+Free interactive Python tutorial for everyone. Learn Python directly in your browser with hands-on exercises.
+📊 *Estimated Time:* 20 min | 🎯 *Level:* Beginner
+[View →]
+
+```
+
+```{grid-item-card} 📖 NumPy Fundamentals - Official Guide
+:link: https://numpy.org/doc/stable/user/absolute_beginners.html
+:link-type: url
+:class-card: resource-card resource-article
+:shadow: md
+:text-align: center
+
+Official NumPy documentation guide for absolute beginners. Covers arrays, indexing, and scientific computing.
+📊 *Estimated Time:* 45 min | 🎯 *Level:* Intermediate
+[Read →]
+
+```
+
+```{grid-item-card} 🎥 Control Systems Introduction - MIT OCW
+:link: https://ocw.mit.edu/courses/2-04a-systems-and-controls-spring-2013/
+:link-type: url
+:class-card: resource-card resource-video
+:shadow: md
+:text-align: center
+
+MIT OpenCourseWare course on linear systems, transfer functions, and Laplace transforms. Free lecture notes available.
+📊 *Estimated Time:* 60 min | 🎯 *Level:* Beginner
+[Watch →]
+
+```
+
+```{grid-item-card} 🛠️ Python REPL - Browser Practice
+:link: https://www.pythonmorsels.com/repl/
+:link-type: url
+:class-card: resource-card resource-tool
+:shadow: md
+:text-align: center
+
+Free in-browser Python REPL with no sign-up required. Practice Python immediately with instant code execution.
+📊 *Estimated Time:* 15 min | 🎯 *Level:* Hands-on
+[Try It →]
 
 ```
 ```

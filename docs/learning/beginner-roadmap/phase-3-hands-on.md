@@ -4,7 +4,25 @@
 
 # Phase 3: Hands-On Learning (Week 9-12, ~25 hours)
 
-[Home](../../../index.md) › [Learning](../index.md) › [Beginner Roadmap](../beginner-roadmap.md) › Phase 3: Hands-On Learning
+::::{card}
+:class-card: breadcrumb-container
+
+:::{raw} html
+<nav aria-label="Learning path breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item">
+      <a href="../beginner-roadmap.html" class="breadcrumb-link">Beginner Roadmap</a>
+    </li>
+    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+    <li class="breadcrumb-item breadcrumb-active" aria-current="page">
+      <span class="phase-badge phase-3">Phase 3</span>
+      <span class="breadcrumb-text">Hands-On Learning</span>
+    </li>
+  </ol>
+</nav>
+:::
+
+::::
 
 ---
 
@@ -1007,6 +1025,58 @@ Read about comparing controller performance metrics
 
 Test your hands-on simulation skills from Phase 3
 [Take Quiz →]
+
+```
+
+```{grid-item-card} 📖 Sliding Mode Control Overview
+:link: https://www.researchgate.net/publication/36218899_A_QUICK_INTRODUCTION_TO_SLIDING_MODE_CONTROL_AND_ITS_APPLICATIONS
+:link-type: url
+:class-card: resource-card resource-article
+:shadow: md
+:text-align: center
+
+Quick introduction to SMC theory covering first and second-order SMC with chattering solutions. Free access.
+📊 *Estimated Time:* 60 min | 🎯 *Level:* Intermediate
+[Read →]
+
+```
+
+```{grid-item-card} 🎥 Lyapunov Stability Theory - Stanford
+:link: https://stanford.edu/class/ee363/lectures/lyap.pdf
+:link-type: url
+:class-card: resource-card resource-video
+:shadow: md
+:text-align: center
+
+Stanford University lecture notes on basic Lyapunov theory. Mathematical foundation for control stability.
+📊 *Estimated Time:* 45 min | 🎯 *Level:* Technical
+[View →]
+
+```
+
+```{grid-item-card} 📚 SciPy Control Systems Documentation
+:link: https://docs.scipy.org/doc/scipy/reference/integrate.html
+:link-type: url
+:class-card: resource-card resource-docs
+:shadow: md
+:text-align: center
+
+Official SciPy documentation for ODE solvers and integration. Complete API reference with examples.
+📊 *Estimated Time:* Reference | 🎯 *Level:* Reference
+[Browse →]
+
+```
+
+```{grid-item-card} 🧪 Pendulum Simulation Demo
+:link: https://www.myphysicslab.com/pendulum/inverted-double-pendulum-en.html
+:link-type: url
+:class-card: resource-card resource-interactive
+:shadow: md
+:text-align: center
+
+Interactive double inverted pendulum simulation. Adjust parameters, drag pendulum, visualize dynamics.
+📊 *Estimated Time:* 30 min | 🎯 *Level:* Hands-on
+[Try It →]
 
 ```
 ```

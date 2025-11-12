@@ -4,7 +4,25 @@
 
 # Phase 5: Mastery Path (Week 17+, variable)
 
-[Home](../../../index.md) › [Learning](../index.md) › [Beginner Roadmap](../beginner-roadmap.md) › Phase 5: Mastery Path
+::::{card}
+:class-card: breadcrumb-container
+
+:::{raw} html
+<nav aria-label="Learning path breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item">
+      <a href="../beginner-roadmap.html" class="breadcrumb-link">Beginner Roadmap</a>
+    </li>
+    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+    <li class="breadcrumb-item breadcrumb-active" aria-current="page">
+      <span class="phase-badge phase-5">Phase 5</span>
+      <span class="breadcrumb-text">Mastery Path</span>
+    </li>
+  </ol>
+</nav>
+:::
+
+::::
 
 ---
 
@@ -611,6 +629,45 @@ Read about optimization and controller design
 
 Test your mastery path understanding from Phase 5
 [Take Quiz →]
+
+```
+
+```{grid-item-card} 📖 Research Paper Writing Guide
+:link: https://www.grammarly.com/blog/academic-writing/how-to-write-a-research-paper/
+:link-type: url
+:class-card: resource-card resource-article
+:shadow: md
+:text-align: center
+
+The Ultimate Guide to Writing a Research Paper covering structure, academic style, and citations.
+📊 *Estimated Time:* 90 min | 🎯 *Level:* Academic
+[Read →]
+
+```
+
+```{grid-item-card} 🛠️ LaTeX Equation Editor - Overleaf
+:link: https://www.overleaf.com/
+:link-type: url
+:class-card: resource-card resource-tool
+:shadow: md
+:text-align: center
+
+Free online LaTeX editor with unlimited projects. Professional equation typesetting for research papers.
+📊 *Estimated Time:* Reference | 🎯 *Level:* Reference
+[Try It →]
+
+```
+
+```{grid-item-card} 🧪 Project Showcase Gallery
+:link: https://github.com/topics/inverted-pendulum
+:link-type: url
+:class-card: resource-card resource-interactive
+:shadow: md
+:text-align: center
+
+GitHub repository showcase for inverted pendulum projects. Explore PID, LQR, MPC implementations.
+📊 *Estimated Time:* 30 min | 🎯 *Level:* Browsing
+[Browse →]
 
 ```
 ```
