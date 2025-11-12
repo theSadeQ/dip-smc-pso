@@ -4,7 +4,25 @@
 
 # Phase 4: Advancing Skills (Week 13-16, ~30 hours)
 
-[Home](../../../index.md) › [Learning](../index.md) › [Beginner Roadmap](../beginner-roadmap.md) › Phase 4: Advancing Skills
+::::{card}
+:class-card: breadcrumb-container
+
+:::{raw} html
+<nav aria-label="Learning path breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item">
+      <a href="../beginner-roadmap.html" class="breadcrumb-link">Beginner Roadmap</a>
+    </li>
+    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+    <li class="breadcrumb-item breadcrumb-active" aria-current="page">
+      <span class="phase-badge phase-4">Phase 4</span>
+      <span class="breadcrumb-text">Advancing Skills</span>
+    </li>
+  </ol>
+</nav>
+:::
+
+::::
 
 ---
 
@@ -1090,6 +1108,58 @@ Read about reading and understanding complex code
 
 Test your advanced skills from Phase 4
 [Take Quiz →]
+
+```
+
+```{grid-item-card} 📖 PSO Algorithm Explained
+:link: https://www.geeksforgeeks.org/machine-learning/particle-swarm-optimization-pso-an-overview/
+:link-type: url
+:class-card: resource-card resource-article
+:shadow: md
+:text-align: center
+
+Comprehensive PSO overview with algorithm fundamentals, swarm intelligence, and Python implementation examples.
+📊 *Estimated Time:* 40 min | 🎯 *Level:* Advanced
+[Read →]
+
+```
+
+```{grid-item-card} 📖 Chattering Reduction Techniques
+:link: https://www.mdpi.com/2504-446X/7/7/420
+:link-type: url
+:class-card: resource-card resource-article
+:shadow: md
+:text-align: center
+
+Open-access MDPI paper on chattering reduction using reinforcement learning for SMC. Practical engineering focus.
+📊 *Estimated Time:* 50 min | 🎯 *Level:* Technical
+[Read →]
+
+```
+
+```{grid-item-card} 🛠️ Matplotlib Best Practices
+:link: https://matplotlib.org/
+:link-type: url
+:class-card: resource-card resource-tool
+:shadow: md
+:text-align: center
+
+Official Matplotlib documentation with examples gallery, user guide, and API docs for data visualization.
+📊 *Estimated Time:* Reference | 🎯 *Level:* Reference
+[Browse →]
+
+```
+
+```{grid-item-card} 🧪 Streamlit UI Tutorial
+:link: https://docs.streamlit.io/get-started/tutorials/create-an-app
+:link-type: url
+:class-card: resource-card resource-interactive
+:shadow: md
+:text-align: center
+
+Official Streamlit tutorial building interactive NYC Uber app. Covers caching, widgets, and deployment.
+📊 *Estimated Time:* 60 min | 🎯 *Level:* Beginner
+[Try It →]
 
 ```
 ```

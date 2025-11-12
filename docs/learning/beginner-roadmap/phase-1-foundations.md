@@ -4,7 +4,25 @@
 
 # Phase 1: Foundations (Week 1-4, ~40 Hours)
 
-[Home](../../../index.md) › [Learning](../index.md) › [Beginner Roadmap](../beginner-roadmap.md) › Phase 1: Foundations
+::::{card}
+:class-card: breadcrumb-container
+
+:::{raw} html
+<nav aria-label="Learning path breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item">
+      <a href="../beginner-roadmap.html" class="breadcrumb-link">Beginner Roadmap</a>
+    </li>
+    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+    <li class="breadcrumb-item breadcrumb-active" aria-current="page">
+      <span class="phase-badge phase-1">Phase 1</span>
+      <span class="breadcrumb-text">Computing Fundamentals</span>
+    </li>
+  </ol>
+</nav>
+:::
+
+::::
 
 ---
 
