@@ -137,7 +137,7 @@ Visualize the safe operating ranges for controller gains:
            }
        ]
    }
-```yaml
+```
 
 **Safe Ranges (Classical SMC):**
 - k1: [5, 20] - Position gain for θ1
