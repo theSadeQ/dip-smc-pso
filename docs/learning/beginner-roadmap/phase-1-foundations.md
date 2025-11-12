@@ -76,7 +76,14 @@
 - Instead of clicking, you type commands
 - Faster and more powerful than graphical interfaces
 
-**Essential Commands** (Windows):
+**Essential Commands**:
+
+::::{tab-set}
+:sync-group: os
+
+:::{tab-item} Windows
+:sync: win
+:selected:
 
 ```cmd
 # Show current directory
@@ -104,7 +111,10 @@ type filename.txt
 cls
 ```
 
-**Essential Commands** (Mac/Linux):
+:::
+
+:::{tab-item} Mac/Linux
+:sync: unix
 
 ```bash
 # Show current directory
@@ -135,6 +145,10 @@ cat filename.txt
 clear
 ```
 
+:::
+
+::::
+
 **Practice Exercise**:
 1. Open terminal/command prompt
 2. Navigate to your Documents folder
@@ -159,6 +173,13 @@ clear
 
 **Recommended Editors for Beginners**:
 
+::::{tab-set}
+:sync-group: os
+
+:::{tab-item} Windows
+:sync: win
+:selected:
+
 1. **VS Code** (Most popular, free)
    - Download: https://code.visualstudio.com/
    - Easy to use, lots of extensions
@@ -171,6 +192,28 @@ clear
 3. **Sublime Text** (Cross-platform, fast)
    - Download: https://www.sublimetext.com/
    - Free trial, minimal interface
+
+:::
+
+:::{tab-item} Mac/Linux
+:sync: unix
+
+1. **VS Code** (Most popular, free)
+   - Download: https://code.visualstudio.com/
+   - Easy to use, lots of extensions
+   - Works on Windows, Mac, Linux
+
+2. **Vim** (Terminal-based, powerful)
+   - Pre-installed on most Unix systems
+   - Steep learning curve, very efficient once learned
+
+3. **Sublime Text** (Cross-platform, fast)
+   - Download: https://www.sublimetext.com/
+   - Free trial, minimal interface
+
+:::
+
+::::
 
 **Practice Exercise**:
 1. Install VS Code (recommended)
@@ -233,20 +276,22 @@ clear
 
 **Installation**:
 
+::::{tab-set}
+:sync-group: os
+
+:::{tab-item} Windows
+:sync: win
+:selected:
+
 1. **Download Python 3.11+**:
    - Go to: https://www.python.org/downloads/
    - Click "Download Python 3.11.x"
-   - **Windows**: Check "Add Python to PATH" during installation!
-   - **Mac**: Use the .pkg installer
-   - **Linux**: Usually pre-installed, or use: `sudo apt install python3`
+   - **IMPORTANT**: Check "Add Python to PATH" during installation!
 
 2. **Verify Installation**:
    ```bash
    python --version
    # Should show: Python 3.11.x or higher
-
-   # If that doesn't work, try:
-   python3 --version
    ```
 
 3. **Test Python**:
@@ -256,6 +301,63 @@ clear
    Hello, World!
    >>> exit()
    ```
+
+:::
+
+:::{tab-item} Mac
+:sync: unix
+
+1. **Download Python 3.11+**:
+   - Go to: https://www.python.org/downloads/
+   - Click "Download Python 3.11.x"
+   - Use the .pkg installer
+
+2. **Verify Installation**:
+   ```bash
+   python3 --version
+   # Should show: Python 3.11.x or higher
+   ```
+
+3. **Test Python**:
+   ```bash
+   python3
+   >>> print("Hello, World!")
+   Hello, World!
+   >>> exit()
+   ```
+
+:::
+
+:::{tab-item} Linux
+:sync: unix
+
+1. **Install Python 3.11+**:
+   ```bash
+   # Usually pre-installed, check version first
+   python3 --version
+
+   # If not installed or too old:
+   sudo apt update
+   sudo apt install python3 python3-pip
+   ```
+
+2. **Verify Installation**:
+   ```bash
+   python3 --version
+   # Should show: Python 3.11.x or higher
+   ```
+
+3. **Test Python**:
+   ```bash
+   python3
+   >>> print("Hello, World!")
+   Hello, World!
+   >>> exit()
+   ```
+
+:::
+
+::::
 
 **Resources**:
 - [Python Installation Guide (Video, 10 min)](https://www.youtube.com/results?search_query=how+to+install+python+windows)
@@ -605,26 +707,50 @@ Before moving on, solidify your skills with small projects:
 
 **Creating a Virtual Environment**:
 
+::::{tab-set}
+:sync-group: os
+
+:::{tab-item} Windows
+:sync: win
+:selected:
+
 ```bash
 # Navigate to where you want to create your project
-cd C:\Users\YourName\Projects  # Windows
-cd /home/yourname/Projects      # Mac/Linux
+cd C:\Users\YourName\Projects
 
 # Create virtual environment named 'venv'
 python -m venv venv
 
-# Activate it
-# Windows (Command Prompt):
+# Activate it (Command Prompt):
 venv\Scripts\activate.bat
 
-# Windows (PowerShell):
+# OR activate it (PowerShell):
 venv\Scripts\Activate.ps1
 
-# Mac/Linux:
+# You should see (venv) in your terminal prompt
+```
+
+:::
+
+:::{tab-item} Mac/Linux
+:sync: unix
+
+```bash
+# Navigate to where you want to create your project
+cd /home/yourname/Projects
+
+# Create virtual environment named 'venv'
+python3 -m venv venv
+
+# Activate it:
 source venv/bin/activate
 
 # You should see (venv) in your terminal prompt
 ```
+
+:::
+
+::::
 
 **Resources**:
 - [Virtual Environments Explained (Video, 10 min)](https://www.youtube.com/results?search_query=python+virtual+environment+explained)
@@ -644,16 +770,66 @@ source venv/bin/activate
 
 **Installing Git**:
 
+::::{tab-set}
+:sync-group: os
+
+:::{tab-item} Windows
+:sync: win
+:selected:
+
 1. **Download Git**:
-   - Windows: https://git-scm.com/download/win
-   - Mac: Comes pre-installed, or use Homebrew: `brew install git`
-   - Linux: `sudo apt install git`
+   - Go to: https://git-scm.com/download/win
+   - Run the installer with default settings
 
 2. **Verify Installation**:
    ```bash
    git --version
    # Should show: git version 2.x.x
    ```
+
+:::
+
+:::{tab-item} Mac
+:sync: unix
+
+1. **Install Git**:
+   ```bash
+   # Check if already installed
+   git --version
+
+   # If not installed, use Homebrew:
+   brew install git
+
+   # Or install Xcode Command Line Tools:
+   xcode-select --install
+   ```
+
+2. **Verify Installation**:
+   ```bash
+   git --version
+   # Should show: git version 2.x.x
+   ```
+
+:::
+
+:::{tab-item} Linux
+:sync: unix
+
+1. **Install Git**:
+   ```bash
+   sudo apt update
+   sudo apt install git
+   ```
+
+2. **Verify Installation**:
+   ```bash
+   git --version
+   # Should show: git version 2.x.x
+   ```
+
+:::
+
+::::
 
 **Basic Git Concepts**:
 - **Repository (Repo)**: A project folder tracked by Git
