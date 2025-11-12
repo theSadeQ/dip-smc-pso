@@ -654,6 +654,37 @@ def set_gains(self, gains: list[float]):
 
 ---
 
+**Controller Comparison Matrix**:
+
+```{mermaid}
+:alt: Controller performance comparison matrix showing trade-offs between classical, super-twisting, adaptive, and hybrid SMC variants
+:align: center
+
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#9B59B6','primaryTextColor':'#fff','primaryBorderColor':'#8E44AD','lineColor':'#8E44AD','secondaryColor':'#E8DAEF','tertiaryColor':'#fff'}}}%%
+graph TD
+    A[Controller Types] --> B[Classical SMC]
+    A --> C[Super-Twisting STA]
+    A --> D[Adaptive SMC]
+    A --> E[Hybrid Adaptive STA]
+
+    B --> B1[Speed: Medium<br/>Chattering: Moderate<br/>Complexity: Low]
+    C --> C1[Speed: Fast<br/>Chattering: Low<br/>Complexity: Medium]
+    D --> D1[Speed: Variable<br/>Chattering: Moderate<br/>Complexity: High]
+    E --> E1[Speed: Fast<br/>Chattering: Very Low<br/>Complexity: High]
+
+    style A fill:#9B59B6,stroke:#8E44AD,stroke-width:2px,color:#fff
+    style B fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px
+    style C fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px
+    style D fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px
+    style E fill:#10b981,stroke:#059669,stroke-width:3px,color:#fff
+    style B1 fill:#FEF3C7,stroke:#F59E0B,stroke-width:2px
+    style C1 fill:#D1FAE5,stroke:#10b981,stroke-width:2px
+    style D1 fill:#FEF3C7,stroke:#F59E0B,stroke-width:2px
+    style E1 fill:#D1FAE5,stroke:#10b981,stroke-width:2px
+```
+
+---
+
 ### Self-Assessment: Phase 4.2
 
 **Quiz**:
@@ -701,6 +732,37 @@ def set_gains(self, gains: list[float]):
 **Why Full Equations?**
 
 In Phase 2, we used intuition. Now we see the actual equations.
+
+**Math Concepts Glossary Map**:
+
+```{mermaid}
+:alt: Mathematical concepts glossary showing relationships between key equations, derivatives, matrices, and control theory foundations
+:align: center
+
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#9B59B6','primaryTextColor':'#fff','primaryBorderColor':'#8E44AD','lineColor':'#8E44AD','secondaryColor':'#E8DAEF','tertiaryColor':'#fff'}}}%%
+mindmap
+  root((Math for SMC))
+    Lagrangian Mechanics
+      Kinetic Energy T
+      Potential Energy V
+      L = T - V
+      Euler-Lagrange Equations
+    Linear Algebra
+      Mass Matrix M θ
+      State Vector x θ ẋ θ̇
+      Matrix Inversion
+      Jacobian
+    Calculus
+      Time Derivatives ẋ ẍ
+      Partial Derivatives ∂f/∂x
+      Chain Rule
+      Gradient ∇V
+    Control Theory
+      Sliding Surface s
+      Lyapunov Function V
+      Stability Analysis
+      Finite-Time Convergence
+```
 
 **Lagrangian Mechanics** (conceptual):
 
