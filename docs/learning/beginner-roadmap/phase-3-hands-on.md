@@ -26,6 +26,8 @@
 
 **Total**: ~25 hours over 4 weeks (~6 hours/week)
 
+**Visual Aids**: [View Phase 3 Diagrams →](phase-3-diagrams.md) (Simulation Workflow, Result Interpretation, Tuning Guide, Analysis)
+
 ---
 
 <details>
