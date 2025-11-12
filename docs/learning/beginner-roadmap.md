@@ -10,6 +10,34 @@
 
 ## Progress Timeline
 
+```{mermaid}
+:alt: Learning journey timeline showing 4-6 month progression through 5 phases from foundations to mastery
+:align: center
+
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2563eb','primaryTextColor':'#fff','primaryBorderColor':'#1e40af','lineColor':'#1e40af','secondaryColor':'#dbeafe','tertiaryColor':'#fff'}}}%%
+gantt
+    title 4-6 Month Learning Journey (125-150 hours)
+    dateFormat YYYY-MM-DD
+    axisFormat Week %U
+
+    section Phase 1
+    Foundations (40h)     :p1, 2025-01-01, 4w
+
+    section Phase 2
+    Core Concepts (30h)   :p2, after p1, 4w
+
+    section Phase 3
+    Hands-On (25h)        :p3, after p2, 3w
+
+    section Phase 4
+    Advancing Skills (30h):p4, after p3, 4w
+
+    section Phase 5
+    Mastery Path (25-75h) :p5, after p4, 4w
+```
+
+**Visual Navigation**:
+
 [Phase 1: Foundations](beginner-roadmap/phase-1-foundations.md) → [Phase 2: Core Concepts](beginner-roadmap/phase-2-core-concepts.md) → [Phase 3: Hands-On](beginner-roadmap/phase-3-hands-on.md) → [Phase 4: Advancing Skills](beginner-roadmap/phase-4-advancing-skills.md) → [Phase 5: Mastery Path](beginner-roadmap/phase-5-mastery.md)
 
 ---
@@ -25,6 +53,45 @@ The roadmap is divided into 5 phases spanning 4-6 months:
 | Phase 3: Hands-On | 25 hours | Simulation, Experiments | 5 sub-phases | [Start](beginner-roadmap/phase-3-hands-on.md) |
 | Phase 4: Advancing Skills | 30 hours | Advanced Python, Source Code | 3 sub-phases | [Start](beginner-roadmap/phase-4-advancing-skills.md) |
 | Phase 5: Mastery | 25-75 hours | Specialization, Research | 5 sub-phases | [Start](beginner-roadmap/phase-5-mastery.md) |
+
+**Difficulty vs Time Metrics**:
+
+<div class="metrics-grid">
+  <div class="metric-card phase-1-metric">
+    <h4>Phase 1</h4>
+    <p class="difficulty-badge difficulty-easy">Beginner</p>
+    <p class="time-estimate">40 hours</p>
+    <p class="pace">Weeks 1-4</p>
+  </div>
+
+  <div class="metric-card phase-2-metric">
+    <h4>Phase 2</h4>
+    <p class="difficulty-badge difficulty-medium">Intermediate</p>
+    <p class="time-estimate">30 hours</p>
+    <p class="pace">Weeks 5-8</p>
+  </div>
+
+  <div class="metric-card phase-3-metric">
+    <h4>Phase 3</h4>
+    <p class="difficulty-badge difficulty-medium">Intermediate</p>
+    <p class="time-estimate">25 hours</p>
+    <p class="pace">Weeks 9-12</p>
+  </div>
+
+  <div class="metric-card phase-4-metric">
+    <h4>Phase 4</h4>
+    <p class="difficulty-badge difficulty-hard">Advanced</p>
+    <p class="time-estimate">30 hours</p>
+    <p class="pace">Weeks 13-16</p>
+  </div>
+
+  <div class="metric-card phase-5-metric">
+    <h4>Phase 5</h4>
+    <p class="difficulty-badge difficulty-hard">Expert</p>
+    <p class="time-estimate">25-75 hours</p>
+    <p class="pace">Weeks 17+</p>
+  </div>
+</div>
 
 ---
 

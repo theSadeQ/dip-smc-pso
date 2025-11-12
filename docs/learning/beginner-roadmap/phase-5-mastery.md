@@ -107,6 +107,35 @@ Before starting Tutorial 01, you should:
 
 **Goal**: Choose the learning path that matches your goals and time availability.
 
+**Specialization Path Decision Tree**:
+
+```{mermaid}
+:alt: Decision tree for choosing specialization path based on goals, time availability, and desired depth of understanding
+:align: center
+
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#34495E','primaryTextColor':'#fff','primaryBorderColor':'#2C3E50','lineColor':'#2C3E50','secondaryColor':'#D5DBDB','tertiaryColor':'#fff'}}}%%
+flowchart TD
+    A{What's Your Goal?} --> B[Apply SMC<br/>to Projects]
+    A --> C[Research &<br/>Publish]
+    A --> D[Industry/Academic<br/>Expert]
+
+    B --> B1[Path 1: Practitioner<br/>5-10 hours]
+    C --> C1[Path 2: Student/Researcher<br/>30-50 hours]
+    D --> D1[Path 3: Expert<br/>100+ hours]
+
+    B1 --> B2[Tutorial 01-03<br/>PSO Optimization]
+    C1 --> C2[Tutorial 01-05<br/>Theory Deep Dives]
+    D1 --> D2[All Tutorials<br/>HIL + Production]
+
+    style A fill:#34495E,stroke:#2C3E50,stroke-width:2px,color:#fff
+    style B fill:#D5DBDB,stroke:#2C3E50,stroke-width:2px
+    style C fill:#D5DBDB,stroke:#2C3E50,stroke-width:2px
+    style D fill:#D5DBDB,stroke:#2C3E50,stroke-width:2px
+    style B1 fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+    style C1 fill:#3b82f6,stroke:#2563eb,stroke-width:2px,color:#fff
+    style D1 fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#fff
+```
+
 ### Path 1: Quick Start - Practitioner Path (5-10 hours total)
 
 **Who it's for**:
