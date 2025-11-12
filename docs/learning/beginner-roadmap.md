@@ -8,6 +8,12 @@
 
 ---
 
+## Progress Timeline
+
+[Phase 1: Foundations](beginner-roadmap/phase-1-foundations.md) → [Phase 2: Core Concepts](beginner-roadmap/phase-2-core-concepts.md) → [Phase 3: Hands-On](beginner-roadmap/phase-3-hands-on.md) → [Phase 4: Advancing Skills](beginner-roadmap/phase-4-advancing-skills.md) → [Phase 5: Mastery Path](beginner-roadmap/phase-5-mastery.md)
+
+---
+
 ## Phase Overview
 
 The roadmap is divided into 5 phases spanning 4-6 months:
