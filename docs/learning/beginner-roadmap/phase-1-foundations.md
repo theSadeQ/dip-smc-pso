@@ -4,6 +4,10 @@
 
 # Phase 1: Foundations (Week 1-4, ~40 Hours)
 
+[Home](../../../index.md) › [Learning](../index.md) › [Beginner Roadmap](../beginner-roadmap.md) › Phase 1: Foundations
+
+---
+
 **Prerequisites**: None
 **Next Phase**: [Phase 2: Core Concepts](phase-2-core-concepts.md)
 

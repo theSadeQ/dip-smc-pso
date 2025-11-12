@@ -4,6 +4,10 @@
 
 # Phase 3: Hands-On Learning (Week 9-12, ~25 hours)
 
+[Home](../../../index.md) › [Learning](../index.md) › [Beginner Roadmap](../beginner-roadmap.md) › Phase 3: Hands-On Learning
+
+---
+
 **Prerequisites**: Phase 1-2 completion
 **Previous Phase**: [Phase 2: Core Concepts](phase-2-core-concepts.md)
 **Next Phase**: [Phase 4: Advancing Skills](phase-4-advancing-skills.md)

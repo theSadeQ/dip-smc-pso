@@ -4,6 +4,10 @@
 
 # Phase 5: Mastery Path (Week 17+, variable)
 
+[Home](../../../index.md) › [Learning](../index.md) › [Beginner Roadmap](../beginner-roadmap.md) › Phase 5: Mastery Path
+
+---
+
 **Prerequisites**: Phase 1-4 completion
 **Previous Phase**: [Phase 4: Advancing Skills](phase-4-advancing-skills.md)
 

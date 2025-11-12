@@ -4,6 +4,10 @@
 
 # Phase 2: Core Concepts (Week 5-8, ~30 Hours)
 
+[Home](../../../index.md) › [Learning](../index.md) › [Beginner Roadmap](../beginner-roadmap.md) › Phase 2: Core Concepts
+
+---
+
 **Prerequisites**: Phase 1 completion
 **Previous Phase**: [Phase 1: Foundations](phase-1-foundations.md)
 **Next Phase**: [Phase 3: Hands-On Learning](phase-3-hands-on.md)
