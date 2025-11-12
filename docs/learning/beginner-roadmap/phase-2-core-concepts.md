@@ -1338,6 +1338,44 @@ Sketch (on paper):
 
 ---
 
+
+## Learning Resources
+
+```{grid} 1 2 3
+:gutter: 2
+
+```{grid-item-card} YouTube: Control Theory & SMC
+:link: https://www.youtube.com/results?search_query=control+theory+basics+sliding+mode
+:link-type: url
+:text-align: center
+
+Watch video tutorials on control theory and SMC fundamentals
+[View →]
+
+```
+
+```{grid-item-card} Article: PID and SMC Concepts
+:link: https://en.wikipedia.org/wiki/Sliding_mode_control
+:link-type: url
+:text-align: center
+
+Read detailed explanations of feedback control and SMC
+[Read →]
+
+```
+
+```{grid-item-card} Interactive Quiz
+:link: #self-assessment-phase-25
+:link-type: url
+:text-align: center
+
+Test your understanding of Phase 2 control concepts
+[Take Quiz →]
+
+```
+```
+
+---
 ## Phase 2 Complete!
 
 **Achievement Unlocked**: Control Theory Scholar

@@ -968,6 +968,44 @@ Can you explain (in your own words, no equations):
 
 ---
 
+
+## Learning Resources
+
+```{grid} 1 2 3
+:gutter: 2
+
+```{grid-item-card} YouTube: Advanced Python & Math
+:link: https://www.youtube.com/results?search_query=python+oop+advanced+lyapunov+stability
+:link-type: url
+:text-align: center
+
+Watch tutorials on OOP, decorators, and Lyapunov theory
+[View →]
+
+```
+
+```{grid-item-card} Article: Source Code Reading Guide
+:link: https://realpython.com/python3-object-oriented-programming/
+:link-type: url
+:text-align: center
+
+Read about reading and understanding complex code
+[Read →]
+
+```
+
+```{grid-item-card} Interactive Quiz
+:link: #self-assessment-phase-43
+:link-type: url
+:text-align: center
+
+Test your advanced skills from Phase 4
+[Take Quiz →]
+
+```
+```
+
+---
 **CONGRATULATIONS!** 🎉
 
 You've completed **Phase 4: Advancing Skills** (~30 hours)!
