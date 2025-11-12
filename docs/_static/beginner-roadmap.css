@@ -996,4 +996,273 @@ details > :first-child {
     }
 }
 
+/* ===== 20. SEMANTIC BREADCRUMB NAVIGATION (WEEK 6) ===== */
+
+/* Base breadcrumb navigation container */
+.breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.breadcrumb-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.breadcrumb-link {
+    color: #4b5563;
+    text-decoration: none;
+    transition: color var(--transition-base);
+    font-weight: 500;
+}
+
+.breadcrumb-link:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    color: #9ca3af;
+    font-weight: 300;
+    user-select: none;
+}
+
+.breadcrumb-text {
+    color: #111827;
+    font-weight: 600;
+}
+
+/* Phase badge styles - color-coded for each phase */
+.phase-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25;
+    transition: all var(--transition-base);
+}
+
+/* Phase 1: Blue (Computing Fundamentals) */
+.phase-badge.phase-1 {
+    background-color: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+}
+
+/* Phase 2: Green (Core Concepts) */
+.phase-badge.phase-2 {
+    background-color: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+}
+
+/* Phase 3: Orange (Hands-On Learning) */
+.phase-badge.phase-3 {
+    background-color: #fef3c7;
+    color: #d97706;
+    border: 1px solid #fde68a;
+}
+
+/* Phase 4: Purple (Advancing Skills) */
+.phase-badge.phase-4 {
+    background-color: #f5f3ff;
+    color: #7c3aed;
+    border: 1px solid #ddd6fe;
+}
+
+/* Phase 5: Red (Mastery Path) */
+.phase-badge.phase-5 {
+    background-color: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+/* Mobile responsive breadcrumbs */
+@media (max-width: 767px) {
+    .breadcrumb-list {
+        gap: var(--space-1);
+        flex-wrap: nowrap;
+    }
+
+    .breadcrumb-text {
+        font-size: 0.875rem;
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .phase-badge {
+        font-size: 0.8125rem;
+        padding: 0.2rem 0.6rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .breadcrumb-text {
+        max-width: 100px;
+    }
+
+    .breadcrumb-link {
+        font-size: 0.875rem;
+    }
+}
+
+/* ========================================================================
+   RESOURCE CARDS - Week 6 Implementation (Agent 2)
+   Lines 1101-1200 (100 lines allocated)
+   ======================================================================== */
+
+/* Base resource card styling */
+.resource-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+/* Resource type badges - color-coded left border with gradients */
+
+/* Video resources (red gradient) */
+.resource-video {
+    border-left: 4px solid transparent;
+    border-image: linear-gradient(to bottom, #dc2626, #ef4444) 1;
+}
+
+.resource-video::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #dc2626, #ef4444);
+}
+
+/* Article resources (green gradient) */
+.resource-article {
+    border-left: 4px solid transparent;
+    border-image: linear-gradient(to bottom, #059669, #10b981) 1;
+}
+
+.resource-article::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #059669, #10b981);
+}
+
+/* Interactive resources (orange gradient) */
+.resource-interactive {
+    border-left: 4px solid transparent;
+    border-image: linear-gradient(to bottom, #d97706, #f59e0b) 1;
+}
+
+.resource-interactive::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #d97706, #f59e0b);
+}
+
+/* Tool resources (purple gradient) */
+.resource-tool {
+    border-left: 4px solid transparent;
+    border-image: linear-gradient(to bottom, #7c3aed, #8b5cf6) 1;
+}
+
+.resource-tool::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #7c3aed, #8b5cf6);
+}
+
+/* Documentation resources (blue gradient) */
+.resource-docs {
+    border-left: 4px solid transparent;
+    border-image: linear-gradient(to bottom, #1e40af, #3b82f6) 1;
+}
+
+.resource-docs::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #1e40af, #3b82f6);
+}
+
+/* Hover animations for resource cards */
+.resource-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Duration and level badges styling */
+.resource-card em {
+    font-style: normal;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.resource-card strong {
+    font-weight: 600;
+}
+
+/* Mobile responsive - single column on mobile */
+@media (max-width: 767px) {
+    .resource-card {
+        margin-bottom: 1rem;
+    }
+
+    .resource-card em {
+        font-size: 0.8125rem;
+    }
+}
+
+/* Tablet - 2 columns */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Cards will show 2 columns via sphinx-design grid-2 */
+}
+
+/* Desktop - 3 columns */
+@media (min-width: 1024px) {
+    /* Cards will show 3 columns via sphinx-design grid-3 */
+}
+
+/* Accessibility - reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .resource-card {
+        transition: none;
+    }
+
+    .resource-card:hover {
+        transform: none;
+    }
+}
+
 /* ===== END OF FILE ===== */
