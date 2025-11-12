@@ -252,6 +252,7 @@ def setup(app):
 # Custom CSS and JavaScript files
 html_css_files = [
     'custom.css',
+    'beginner-roadmap.css',  # Beginner roadmap phase styling (Week 2)
     'code-collapse.css',
     'code-runner.css',  # Pyodide live code execution styles (Phase 2)
     'mathviz.css',  # Mathematical visualization library styles (Phase 5)
