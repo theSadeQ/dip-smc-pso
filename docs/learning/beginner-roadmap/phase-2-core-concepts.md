@@ -1401,3 +1401,9 @@ You now understand:
 - ← [Phase 1: Foundations](phase-1-foundations.md)
 - **Next**: [Phase 3: Hands-On Learning](phase-3-hands-on.md) →
 - [← Back to Beginner Roadmap](../beginner-roadmap.md)
+
+---
+
+## Navigation
+
+[← Phase 1: Foundations](phase-1-foundations.md) | [Back to Roadmap](../beginner-roadmap.md) | [Phase 3: Hands-On →](phase-3-hands-on.md)

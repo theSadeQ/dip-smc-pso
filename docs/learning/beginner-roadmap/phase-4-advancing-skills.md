@@ -1033,3 +1033,9 @@ You now understand:
 - ← [Phase 3: Hands-On Learning](phase-3-hands-on.md)
 - **Next**: [Phase 5: Mastery Path](phase-5-mastery.md) →
 - [← Back to Beginner Roadmap](../beginner-roadmap.md)
+
+---
+
+## Navigation
+
+[← Phase 3: Hands-On Learning](phase-3-hands-on.md) | [Back to Roadmap](../beginner-roadmap.md) | [Phase 5: Mastery Path →](phase-5-mastery.md)

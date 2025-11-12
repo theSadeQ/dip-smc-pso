@@ -1352,3 +1352,11 @@ You now have:
 **Navigation:**
 - **Next**: [Phase 2: Core Concepts](phase-2-core-concepts.md) →
 - [← Back to Beginner Roadmap](../beginner-roadmap.md)
+
+---
+
+## Next Steps
+
+Ready to move on? [→ Phase 2: Core Concepts](phase-2-core-concepts.md)
+
+Or [← Back to Beginner Roadmap](../beginner-roadmap.md)
