@@ -113,8 +113,11 @@ def parameter_sweep(controller_type='classical_smc',
         setattr(config.physics, param_name, nominal_value * scale_factor)
 
         # Create controller and dynamics
-        controller = create_controller(controller_type, config=config)
-        dynamics = DIPDynamics(config)
+        # Extract gains from config for the specific controller type
+        controller_config = getattr(config.controllers, controller_type)
+        gains = controller_config.gains if hasattr(controller_config, 'gains') and controller_config.gains else None
+        controller = create_controller(controller_type, config=config, gains=gains)
+        dynamics = DIPDynamics(config.physics)
 
         # Run simulation
         runner = SimulationRunner(controller, dynamics, config)
@@ -270,6 +273,10 @@ def monte_carlo_robustness(controller_type='classical_smc',
     print(f"[INFO] Parameters varied: {', '.join(param_names)}")
     print(f"[INFO] Starting simulation...")
 
+    # Extract gains from config once (outside loop for efficiency)
+    controller_config = getattr(config.controllers, controller_type)
+    gains = controller_config.gains if hasattr(controller_config, 'gains') and controller_config.gains else None
+
     for run in range(n_runs):
         # Sample parameters from uniform distribution
         for param_name in param_names:
@@ -278,8 +285,8 @@ def monte_carlo_robustness(controller_type='classical_smc',
             setattr(config.physics, param_name, nominal * scale_factor)
 
         # Create controller and dynamics
-        controller = create_controller(controller_type, config=config)
-        dynamics = DIPDynamics(config)
+        controller = create_controller(controller_type, config=config, gains=gains)
+        dynamics = DIPDynamics(config.physics)
 
         # Run simulation
         runner = SimulationRunner(controller, dynamics, config)
