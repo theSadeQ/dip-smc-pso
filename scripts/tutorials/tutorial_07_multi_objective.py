@@ -113,7 +113,7 @@ def multi_objective_cost_function(gains, controller_type, weights):
         print(f"[ERROR] Controller creation failed: {e}")
         return 9999.0
 
-    dynamics = DIPDynamics(config)
+    dynamics = DIPDynamics(config.physics)
 
     # Run simulation
     runner = SimulationRunner(controller, dynamics, config)
@@ -229,7 +229,7 @@ def generate_pareto_frontier_settling_chattering(controller_type='classical_smc'
 
                 # Re-simulate for metrics
                 controller = create_controller(controller_type, config=config, gains=best_gains)
-                dynamics = DIPDynamics(config)
+                dynamics = DIPDynamics(config.physics)
                 runner = SimulationRunner(controller, dynamics, config)
                 best_result = runner.run()
 
