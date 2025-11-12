@@ -113,7 +113,7 @@ def parameter_sweep(controller_type='classical_smc',
         setattr(config.physics, param_name, nominal_value * scale_factor)
 
         # Create controller and dynamics
-        controller = create_controller(controller_type, config)
+        controller = create_controller(controller_type, config=config)
         dynamics = DIPDynamics(config)
 
         # Run simulation
@@ -278,7 +278,7 @@ def monte_carlo_robustness(controller_type='classical_smc',
             setattr(config.physics, param_name, nominal * scale_factor)
 
         # Create controller and dynamics
-        controller = create_controller(controller_type, config)
+        controller = create_controller(controller_type, config=config)
         dynamics = DIPDynamics(config)
 
         # Run simulation
