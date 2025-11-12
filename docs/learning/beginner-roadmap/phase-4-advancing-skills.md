@@ -175,15 +175,38 @@ class ClassicalSMC(ControllerInterface):
     # Inherits reset() method from parent - no need to redefine
 ```
 
-**Inheritance Hierarchy**:
+**Source Code Navigation Tree**:
 
-```
- ControllerInterface (abstract base)
-    |
-    +-- ClassicalSMC
-    +-- STASMC
-    +-- AdaptiveSMC
-    +-- HybridAdaptiveSTASMC
+```{mermaid}
+:alt: Source code file structure showing organization of controllers, dynamics, optimization, and utility modules
+:align: center
+
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#9B59B6','primaryTextColor':'#fff','primaryBorderColor':'#8E44AD','lineColor':'#8E44AD','secondaryColor':'#E8DAEF','tertiaryColor':'#fff'}}}%%
+graph TD
+    A[src/] --> B[controllers/]
+    A --> C[core/]
+    A --> D[optimizer/]
+    A --> E[utils/]
+
+    B --> B1[base.py<br/>Interface]
+    B --> B2[classical_smc.py]
+    B --> B3[sta_smc.py]
+    B --> B4[adaptive_smc.py]
+    B --> B5[factory.py]
+
+    C --> C1[dynamics.py]
+    C --> C2[simulation_runner.py]
+
+    D --> D1[pso_optimizer.py]
+
+    E --> E1[validation/]
+    E --> E2[visualization/]
+
+    style A fill:#9B59B6,stroke:#8E44AD,stroke-width:2px,color:#fff
+    style B fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px
+    style C fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px
+    style D fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px
+    style E fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px
 ```
 
 **Benefits**:
