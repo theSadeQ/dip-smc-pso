@@ -545,6 +545,44 @@ Focus: Specialized expertise, high-value projects
 
 ---
 
+
+## Learning Resources
+
+```{grid} 1 2 3
+:gutter: 2
+
+```{grid-item-card} YouTube: Research & Advanced Topics
+:link: https://www.youtube.com/results?search_query=control+systems+research+publication
+:link-type: url
+:text-align: center
+
+Watch tutorials on research workflows and publication
+[View →]
+
+```
+
+```{grid-item-card} Article: PSO & Custom Controllers
+:link: https://en.wikipedia.org/wiki/Particle_swarm_optimization
+:link-type: url
+:text-align: center
+
+Read about optimization and controller design
+[Read →]
+
+```
+
+```{grid-item-card} Interactive Quiz
+:link: #self-assessment-phase-55
+:link-type: url
+:text-align: center
+
+Test your mastery path understanding from Phase 5
+[Take Quiz →]
+
+```
+```
+
+---
 **CONGRATULATIONS!** 🎉🎉🎉
 
 You've completed the **ENTIRE Beginner Roadmap** (~150 hours)!
