@@ -23,6 +23,9 @@
 
 ---
 
+<details>
+<summary>5.1 Transition to Tutorial 01</summary>
+
 ## Phase 5.1: Transition to Tutorial 01 (2 hours)
 
 **Goal**: Bridge from beginner roadmap to main project documentation.
@@ -89,7 +92,12 @@ Before starting Tutorial 01, you should:
 - **If you want to plan ahead**: Continue Phase 5.2 (Learning Pathways), then start tutorials
 - **If unsure**: Continue reading Phase 5, tutorials aren't going anywhere!
 
+</details>
+
 ---
+
+<details>
+<summary>5.2 Learning Pathway Selection</summary>
 
 ## Phase 5.2: Learning Pathway Selection (3 hours)
 
@@ -221,7 +229,12 @@ Before starting Tutorial 01, you should:
 **Mostly C's**: Start Path 3 (Expert Path)
 **Mixed**: Start Path 2, decide later if you want Path 3
 
+</details>
+
 ---
+
+<details>
+<summary>5.3 PSO Optimization Introduction</summary>
 
 ## Phase 5.3: PSO Optimization Introduction (4-6 hours)
 
@@ -265,7 +278,12 @@ python simulate.py --ctrl classical_smc --load optimized_gains.json --plot
 
 **Next**: Work through Tutorial 03 when ready
 
+</details>
+
 ---
+
+<details>
+<summary>5.4 Custom Controller Development Pathway</summary>
 
 ## Phase 5.4: Custom Controller Development Pathway (Variable)
 
@@ -383,7 +401,12 @@ If performance is novel:
 - `docs/theory/controller-design-guide.md`
 - Research paper templates in `docs/research/`
 
+</details>
+
 ---
+
+<details>
+<summary>5.5 Research and Publication Pathway</summary>
 
 ## Phase 5.5: Research and Publication Pathway (Variable)
 
@@ -517,6 +540,8 @@ Focus: Specialized expertise, high-value projects
 - If research-oriented: Work through Tutorial 05, start reading papers
 - If application-oriented: Focus on Tutorials 01-04, skip theoretical proofs
 - If unsure: Try Tutorial 04, see if controller design interests you
+
+</details>
 
 ---
 

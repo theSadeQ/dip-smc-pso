@@ -23,6 +23,9 @@
 
 ---
 
+<details>
+<summary>1.1 Computing Basics</summary>
+
 ## Phase 1.1: Computing Basics (4 hours)
 
 **Skip if**: You already use command line, understand file paths, and know what a directory is.
@@ -194,7 +197,12 @@ clear
 **If you got 2-3 correct**: Review command line basics
 **If you got 0-1 correct**: Spend more time with the resources above
 
+</details>
+
 ---
+
+<details>
+<summary>1.2 Python Fundamentals</summary>
 
 ## Phase 1.2: Python Fundamentals (20 hours)
 
@@ -559,7 +567,12 @@ Before moving on, solidify your skills with small projects:
 **If you can complete 3-4**: Practice more with loops and functions
 **If you can complete 0-2**: Revisit Python Crash Course resources
 
+</details>
+
 ---
+
+<details>
+<summary>1.3 Setting Up the Project Environment</summary>
 
 ## Phase 1.3: Setting Up the Project Environment (3 hours)
 
@@ -771,7 +784,12 @@ python simulate.py --help
 **If 4-5 boxes checked**: Review troubleshooting steps
 **If 0-3 boxes checked**: Revisit installation steps, seek help in GitHub Discussions
 
+</details>
+
 ---
+
+<details>
+<summary>1.4 Basic Physics Concepts</summary>
 
 ## Phase 1.4: Basic Physics Concepts (8 hours)
 
@@ -1005,7 +1023,12 @@ Imagine balancing two broomsticks stacked end-to-end on a cart that you can only
 **If you can answer 3-4 correctly**: Review pendulum and stability concepts
 **If you can answer 0-2 correctly**: Spend more time with Khan Academy physics resources
 
+</details>
+
 ---
+
+<details>
+<summary>1.5 Basic Math Concepts</summary>
 
 ## Phase 1.5: Basic Math Concepts (5 hours)
 
@@ -1263,6 +1286,8 @@ Write Python code to:
 **If you can complete the quiz and practical test**: Move to Phase 2
 **If you struggle with derivatives**: Review calculus concepts
 **If you struggle with trigonometry**: Review unit circle and sin/cos
+
+</details>
 
 ---
 

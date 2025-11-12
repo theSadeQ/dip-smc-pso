@@ -22,6 +22,9 @@
 
 ---
 
+<details>
+<summary>4.1 Advanced Python for This Project</summary>
+
 ## Phase 4.1: Advanced Python for This Project (12 hours)
 
 **Goal**: Master Python concepts used in this codebase - classes, inheritance, decorators, type hints, and testing.
@@ -394,7 +397,12 @@ pytest --cov=src
 - [Decorators Explained (YouTube, 15 min)](https://www.youtube.com/results?search_query=python+decorators+explained)
 - [Type Hints Crash Course (Article, 20 min)](https://realpython.com/python-type-checking/)
 
+</details>
+
 ---
+
+<details>
+<summary>4.2 Reading Controller Source Code</summary>
 
 ## Phase 4.2: Reading Controller Source Code (8 hours)
 
@@ -648,7 +656,12 @@ def set_gains(self, gains: list[float]):
 - [SMC Control Law Explained (Video, 12 min)](https://www.youtube.com/results?search_query=sliding+mode+control+explained)
 - [Boundary Layer in SMC (Article)](https://www.sciencedirect.com/topics/engineering/boundary-layer-method)
 
+</details>
+
 ---
+
+<details>
+<summary>4.3 Advanced Math for SMC</summary>
 
 ## Phase 4.3: Advanced Math for SMC (10 hours)
 
@@ -950,6 +963,8 @@ Can you explain (in your own words, no equations):
 - [Lyapunov Stability Intuition (Video, 10 min)](https://www.youtube.com/results?search_query=lyapunov+stability+explained)
 - [Phase Portraits (Interactive)](https://www.geogebra.org/m/KPqq8KBQ)
 - [Scipy odeint Tutorial (Article, 15 min)](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html)
+
+</details>
 
 ---
 
