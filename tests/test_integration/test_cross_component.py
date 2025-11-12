@@ -351,10 +351,13 @@ def test_cross_component_integration(
 
     # Create controller
     try:
+        # Extract gains from config for the specific controller type
+        controller_config = getattr(test_config.controllers, controller_type)
+        gains = controller_config.gains if hasattr(controller_config, 'gains') and controller_config.gains else None
         controller = create_controller(
             controller_type,
             config=test_config,
-            gains=None  # Use default gains
+            gains=gains
         )
     except Exception as e:
         pytest.fail(f"Controller creation failed: {e}")
@@ -363,10 +366,10 @@ def test_cross_component_integration(
     try:
         if dynamics_type == "simplified":
             from src.core.dynamics import DIPDynamics
-            dynamics = DIPDynamics(config=test_config)
+            dynamics = DIPDynamics(config=test_config.physics)
         elif dynamics_type == "full":
             from src.core.dynamics_full import DIPDynamicsFull
-            dynamics = DIPDynamicsFull(config=test_config)
+            dynamics = DIPDynamicsFull(config=test_config.physics)
         else:
             pytest.skip(f"Dynamics type '{dynamics_type}' not implemented yet")
     except Exception as e:
@@ -374,11 +377,7 @@ def test_cross_component_integration(
 
     # Run simulation
     try:
-        runner = SimulationRunner(
-            controller=controller,
-            dynamics=dynamics,
-            config=test_config
-        )
+        runner = SimulationRunner(controller, dynamics, test_config)
 
         result = runner.run()
 
@@ -469,14 +468,17 @@ def test_generate_baseline_benchmarks(config):
                 try:
                     # Create components
                     test_config = create_pso_config(pso_config, config)
-                    controller = create_controller(controller_type, config=test_config)
+                    # Extract gains from config for the specific controller type
+                    controller_config = getattr(test_config.controllers, controller_type)
+                    gains = controller_config.gains if hasattr(controller_config, 'gains') and controller_config.gains else None
+                    controller = create_controller(controller_type, config=test_config, gains=gains)
 
                     if dynamics_type == "simplified":
                         from src.core.dynamics import DIPDynamics
-                        dynamics = DIPDynamics(config=test_config)
+                        dynamics = DIPDynamics(config=test_config.physics)
                     elif dynamics_type == "full":
                         from src.core.dynamics_full import DIPDynamicsFull
-                        dynamics = DIPDynamicsFull(config=test_config)
+                        dynamics = DIPDynamicsFull(config=test_config.physics)
                     else:
                         continue
 
