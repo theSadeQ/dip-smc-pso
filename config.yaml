@@ -73,6 +73,13 @@ controller_defaults:
     - 2.7500136927843215   # lambda2: MT-8 robust optimized (was 0.5, +450% increase)
 controllers:
   classical_smc:
+    gains:
+    - 23.068200752497802   # k1: Optimized from 5.0 (+360% increase)
+    - 12.853586891155206   # k2: Optimized from 5.0 (+157% increase)
+    - 5.514970338688094    # k3: Optimized from 5.0 (+10% increase)
+    - 3.487196490326416    # k4: Optimized from 0.5 (+597% increase)
+    - 2.2331074770549435   # k5: Optimized from 0.5 (+347% increase)
+    - 0.14834799545581934  # k6: Optimized from 0.5 (-70% reduction)
     max_force: 150.0
     boundary_layer: 0.3  # Increased from 0.02 for Issue #12 chattering reduction
     dt: 0.001
@@ -89,6 +96,12 @@ controllers:
     dt: 0.001
     boundary_layer: 0.3  # Increased from 0.05 for Issue #12 chattering reduction
   adaptive_smc:
+    gains:
+    - 2.142207994033271    # k1: MT-8 robust optimized (was 10.0, -79% reduction)
+    - 3.355938383745894    # k2: MT-8 robust optimized (was 8.0, -58% reduction)
+    - 7.200505646106438    # k3: MT-8 robust optimized (was 5.0, +44% increase)
+    - 0.3374379808658892   # k4: MT-8 robust optimized (was 4.0, -92% reduction)
+    - 0.2852044368386544   # k5: MT-8 robust optimized (was 1.0, -71% reduction)
     max_force: 150.0
     leak_rate: 0.01
     dead_zone: 0.05
@@ -113,6 +126,11 @@ controllers:
   # formulation for finite‑time convergence and adaptive gain
   # adjustment.
   hybrid_adaptive_sta_smc:
+    gains:
+    - 10.148979254143576   # c1: MT-8 robust optimized (was 5.0, +103% increase)
+    - 12.839386550675101   # lambda1: MT-8 robust optimized (was 5.0, +157% increase)
+    - 6.815065802267164    # c2: MT-8 robust optimized (was 5.0, +36% increase)
+    - 2.7500136927843215   # lambda2: MT-8 robust optimized (was 0.5, +450% increase)
     # Actuator saturation limit [N].  Control commands will be clipped
     # to the interval [-max_force, max_force].
     max_force: 150.0
