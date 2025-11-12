@@ -24,6 +24,9 @@
 
 ---
 
+<details>
+<summary>2.1 What is Control Theory?</summary>
+
 ## Phase 2.1: What is Control Theory? (6 hours)
 
 **Goal**: Understand control theory through everyday examples before diving into technical details.
@@ -248,7 +251,12 @@ For each scenario, identify what needs to be minimized:
 **If you can answer 2-3 correctly**: Review feedback loop concept
 **If you can answer 0-1 correctly**: Re-watch introductory control theory videos
 
+</details>
+
 ---
+
+<details>
+<summary>2.2 Feedback Control Deep Dive</summary>
 
 ## Phase 2.2: Feedback Control Deep Dive (5 hours)
 
@@ -473,7 +481,12 @@ Try different gains and observe:
 **If you can answer 2-3 correctly**: Review PID concepts
 **If you can answer 0-1 correctly**: Re-watch PID tutorial videos and try the simulator
 
+</details>
+
 ---
+
+<details>
+<summary>2.3 Introduction to Sliding Mode Control</summary>
 
 ## Phase 2.3: Introduction to Sliding Mode Control (8 hours)
 
@@ -829,7 +842,12 @@ Sketch (on paper or draw in software):
 **If struggling with sliding surface concept**: Review Step 1 again
 **If struggling with control law**: Review Step 2 and experiment with tanh vs sign
 
+</details>
+
 ---
+
+<details>
+<summary>2.4 What is Optimization?</summary>
 
 ## Phase 2.4: What is Optimization? (6 hours)
 
@@ -1075,7 +1093,12 @@ What are the optimal values of x and y that minimize f(x, y)? (Hint: The minimum
 - [PSO Visualization (Video, 5 min)](https://www.youtube.com/results?search_query=particle+swarm+optimization+visualization)
 - [Optimization Crash Course (Article)](https://www.w3schools.com/python/python_ml_optimization.asp)
 
+</details>
+
 ---
+
+<details>
+<summary>2.5 Understanding the DIP System</summary>
 
 ## Phase 2.5: Understanding the DIP System (5 hours)
 
@@ -1310,6 +1333,8 @@ Sketch (on paper):
 - [Double Inverted Pendulum Simulation (Video, 3 min)](https://www.youtube.com/results?search_query=double+inverted+pendulum+simulation)
 - [Real Segway Control (Video, 5 min)](https://www.youtube.com/results?search_query=segway+balance+control)
 - [SpaceX Rocket Landing (Video, 10 min)](https://www.youtube.com/results?search_query=spacex+falcon+landing+control)
+
+</details>
 
 ---
 
