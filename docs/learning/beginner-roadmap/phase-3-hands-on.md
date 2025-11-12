@@ -981,3 +981,9 @@ You now can:
 - ← [Phase 2: Core Concepts](phase-2-core-concepts.md)
 - **Next**: [Phase 4: Advancing Skills](phase-4-advancing-skills.md) →
 - [← Back to Beginner Roadmap](../beginner-roadmap.md)
+
+---
+
+## Navigation
+
+[← Phase 2: Core Concepts](phase-2-core-concepts.md) | [Back to Roadmap](../beginner-roadmap.md) | [Phase 4: Advancing Skills →](phase-4-advancing-skills.md)
