@@ -133,14 +133,59 @@ Identify the components (goal, sensor, actuator, controller) for:
 
 ---
 
+**Comparison Diagram**:
+
+```{mermaid}
+:alt: Comparison between open-loop control (no feedback) and closed-loop control (with feedback) showing structural differences
+:align: center
+
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#FFA500','primaryTextColor':'#fff','primaryBorderColor':'#FF8C00','lineColor':'#FF8C00','secondaryColor':'#FFE5CC','tertiaryColor':'#fff'}}}%%
+flowchart TB
+    subgraph OpenLoop[Open-Loop: No Feedback]
+        A1[Input] --> B1[Controller] --> C1[System] --> D1[Output]
+        E1[Disturbance] -.-> C1
+    end
+
+    subgraph ClosedLoop[Closed-Loop: With Feedback]
+        A2[Desired] -->|+| B2((Compare)) --> C2[Controller] --> D2[System] --> E2[Output]
+        E2 -->|Feedback| B2
+        F2[Disturbance] -.-> D2
+    end
+
+    style A1 fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style B1 fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style C1 fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style D1 fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style A2 fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style B2 fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style C2 fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style D2 fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style E2 fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+```
+
+---
+
 **The Feedback Loop**:
 
-```
-Desired    +     Error        Controller      Control       Plant        Actual
-State   -----> (Compare) ---> (Decide)  ----> Action  ----> (System) ---> State
-(Setpoint) -                                                               |
-            |                                                              |
-            +------------------ Feedback (Sensor) -------------------------+
+```{mermaid}
+:alt: Control loop feedback diagram showing the flow from desired state through error calculation, controller decision, control action, plant system, to actual state with sensor feedback
+:align: center
+
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#FFA500','primaryTextColor':'#fff','primaryBorderColor':'#FF8C00','lineColor':'#FF8C00','secondaryColor':'#FFE5CC','tertiaryColor':'#fff'}}}%%
+flowchart LR
+    A[Desired State<br/>Setpoint] -->|+| B((Error<br/>Compare))
+    B --> C[Controller<br/>Decide]
+    C --> D[Control Action]
+    D --> E[Plant<br/>System]
+    E --> F[Actual State]
+    F -->|Sensor Feedback| B
+
+    style A fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style B fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style C fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style D fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style E fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style F fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
 ```
 
 **Double-Inverted Pendulum Example**:
@@ -517,6 +562,29 @@ Imagine a ball on a hill:
 
 **The Sliding Surface**:
 
+**State Space Representation**:
+
+```{mermaid}
+:alt: State space model showing how system states (position, velocity, angles, angular velocities) relate to each other and to control input
+:align: center
+
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#FFA500','primaryTextColor':'#fff','primaryBorderColor':'#FF8C00','lineColor':'#FF8C00','secondaryColor':'#FFE5CC','tertiaryColor':'#fff'}}}%%
+graph LR
+    A[Control Input<br/>Force F] --> B[System Dynamics]
+    B --> C[State Vector<br/>x, ẋ, θ₁, θ̇₁, θ₂, θ̇₂]
+    C --> D{Sliding Surface<br/>s = f states}
+    D --> E[Error Signal]
+    E --> F[Controller]
+    F --> A
+
+    style A fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style B fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style C fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style D fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style E fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style F fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+```
+
 For double-inverted pendulum:
 ```
 s = k₁·θ₁ + k₂·θ̇₁ + λ₁·θ₂ + λ₂·θ̇₂
@@ -545,17 +613,30 @@ s = k₁·θ₁ + k₂·θ̇₁ + λ₁·θ₂ + λ₂·θ̇₂
 
 **Visualization**:
 
-```
-         ↑
-    θ̇ (Velocity)
-         |
-         |    s = 0 (Sliding Surface)
-         |   /
-         |  /
-         | / ← System slides toward origin
-         |/
-    -----+--------→ θ (Angle)
-         |
+```{mermaid}
+:alt: SMC intuitive concept map showing the two-phase process - reaching phase drives system to sliding surface, sliding phase maintains system on surface toward equilibrium
+:align: center
+
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#FFA500','primaryTextColor':'#fff','primaryBorderColor':'#FF8C00','lineColor':'#FF8C00','secondaryColor':'#FFE5CC','tertiaryColor':'#fff'}}}%%
+flowchart TD
+    A[Start: System Off Surface<br/>s ≠ 0] --> B{Reaching Phase}
+    B -->|Aggressive Control| C[Drive to Surface<br/>s → 0]
+    C --> D{On Surface?}
+    D -->|No, s ≠ 0| B
+    D -->|Yes, s = 0| E{Sliding Phase}
+    E -->|Maintain s = 0| F[Slide to Equilibrium<br/>θ → 0, θ̇ → 0]
+    F --> G{At Equilibrium?}
+    G -->|No| E
+    G -->|Yes| H[Goal Achieved<br/>Pendulums Upright]
+
+    style A fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style B fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style C fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style D fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style E fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style F fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style G fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style H fill:#10b981,stroke:#059669,stroke-width:3px,color:#fff
 ```
 
 **Example Trajectory**:
@@ -776,6 +857,30 @@ plt.show()
    - Adapts gains online based on tracking error
    - Better for systems with large uncertainties
 
+```{mermaid}
+:alt: Adaptation mechanism flowchart showing how adaptive SMC adjusts controller gains based on tracking error in real-time
+:align: center
+
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#FFA500','primaryTextColor':'#fff','primaryBorderColor':'#FF8C00','lineColor':'#FF8C00','secondaryColor':'#FFE5CC','tertiaryColor':'#fff'}}}%%
+flowchart TD
+    A[Current State] --> B[Compute Error<br/>e = θ_desired - θ_actual]
+    B --> C{Error Large?}
+    C -->|Yes, e > threshold| D[Increase Gains<br/>k = k + Δk]
+    C -->|No, e ≤ threshold| E[Decrease Gains<br/>k = k - Δk]
+    D --> F[Apply Updated Control<br/>u = -k·sign s]
+    E --> F
+    F --> G[Update System State]
+    G --> A
+
+    style A fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style B fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style C fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style D fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style E fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style F fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style G fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+```
+
 4. **Hybrid Adaptive STA-SMC**:
    - Combines adaptation with super-twisting
    - Best overall performance
@@ -952,24 +1057,32 @@ def performance_metric(gains):
     return cost  # Lower cost = better performance
 ```
 
-**Visualization** (conceptual):
+**Visualization**:
 
-```
-Cost Function Landscape (simplified to 2 gains)
+```{mermaid}
+:alt: Optimization space landscape showing cost function with multiple local minima and global minimum, representing search for optimal controller gains
+:align: center
 
-   Cost
-    ^
-  20|                    *
-    |              *  *     *
-  15|         *                *
-    |    *                         *
-  10|                                  *
-    | *              GLOBAL              *
-   5|                MINIMUM
-    |         (optimal gains)
-   0+----------------------------------------> k1
-    0    5   10   15   20   25   30
-         k2 (second parameter)
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#FFA500','primaryTextColor':'#fff','primaryBorderColor':'#FF8C00','lineColor':'#FF8C00','secondaryColor':'#FFE5CC','tertiaryColor':'#fff'}}}%%
+graph TD
+    A[Parameter Space<br/>k1, k2, ..., k6] --> B{Run Simulation}
+    B --> C[Performance Metrics]
+    C --> D[Settling Time]
+    C --> E[Overshoot]
+    C --> F[Control Effort]
+    C --> G[Chattering]
+    D --> H[Cost Function]
+    E --> H
+    F --> H
+    G --> H
+    H --> I{Minimize Cost}
+    I -->|Search Algorithm| A
+
+    style A fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style B fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style C fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style H fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style I fill:#10b981,stroke:#059669,stroke-width:3px,color:#fff
 ```
 
 **Goal of Optimization**: Find the valley (minimum cost) in this multi-dimensional landscape.
@@ -1128,22 +1241,29 @@ The system consists of:
 3. **Second Pendulum**: Hinged to tip of first pendulum, swings freely
 4. **Control Input**: Horizontal force applied to cart
 
-**Visualization**:
+**System Block Diagram**:
 
-```
-                     O  <- Second pendulum bob (mass m2)
-                     |
-                     | L2 (length 2)
-                     |
-                     O  <- First pendulum bob (mass m1)
-                     |
-                     | L1 (length 1)
-                     |
-    ================+===============  <- Cart (mass M)
-                    |
-                    | <- Force F (control input)
-                    |
-    ================================  <- Track
+```{mermaid}
+:alt: Control system block diagram for double-inverted pendulum showing sensor feedback, controller computation, and plant dynamics
+:align: center
+
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#FFA500','primaryTextColor':'#fff','primaryBorderColor':'#FF8C00','lineColor':'#FF8C00','secondaryColor':'#FFE5CC','tertiaryColor':'#fff'}}}%%
+flowchart LR
+    A[Reference<br/>θ1=0, θ2=0] -->|+| B((Error<br/>Computation))
+    B --> C[SMC Controller<br/>Gains: k1-k6]
+    C --> D[Force F<br/>-20 to +20 N]
+    D --> E[DIP Plant<br/>Cart + 2 Pendulums]
+    E --> F[States<br/>x, θ1, θ2, velocities]
+    F -->|Sensors| B
+
+    G[Disturbances<br/>External forces] -.-> E
+
+    style A fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style B fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style C fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style D fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
+    style E fill:#FFE5CC,stroke:#FF8C00,stroke-width:2px
+    style F fill:#FFA500,stroke:#FF8C00,stroke-width:2px,color:#fff
 ```
 
 **Why "Double"?**

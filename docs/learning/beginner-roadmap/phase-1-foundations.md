@@ -25,6 +25,8 @@
 
 **Total**: ~40 hours over 4 weeks (~10 hours/week)
 
+**Visual Aids**: [View Phase 1 Diagrams →](phase-1-diagrams.md) (File System, Computing Basics, Error Diagnosis, Data Types, Setup)
+
 ---
 
 <details>
