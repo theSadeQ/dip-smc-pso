@@ -48,19 +48,53 @@
 
 **Activate Your Virtual Environment** (from Phase 1.3):
 
-```bash
-# On Windows
-cd D:\Projects\dip-smc-pso
-venv\Scripts\activate
+::::{tab-set}
+:sync-group: os
 
-# On macOS/Linux
+:::{tab-item} Windows
+:sync: win
+:selected:
+
+```bash
+# Navigate to project directory
+cd D:\Projects\dip-smc-pso
+
+# Activate virtual environment (Command Prompt)
+venv\Scripts\activate.bat
+
+# OR activate (PowerShell)
+venv\Scripts\Activate.ps1
+
+# You should see (venv) at the start of your command prompt
+```
+
+:::
+
+:::{tab-item} Mac/Linux
+:sync: unix
+
+```bash
+# Navigate to project directory
 cd ~/projects/dip-smc-pso
+
+# Activate virtual environment
 source venv/bin/activate
 
 # You should see (venv) at the start of your command prompt
 ```
 
+:::
+
+::::
+
 **Verify Installation**:
+
+::::{tab-set}
+:sync-group: os
+
+:::{tab-item} Windows
+:sync: win
+:selected:
 
 ```bash
 # Check Python version (should be 3.9+)
@@ -72,6 +106,26 @@ python -c "import numpy, scipy, matplotlib; print('OK - All packages installed')
 # If you get errors, reinstall packages
 pip install -r requirements.txt
 ```
+
+:::
+
+:::{tab-item} Mac/Linux
+:sync: unix
+
+```bash
+# Check Python version (should be 3.9+)
+python3 --version
+
+# Test imports
+python3 -c "import numpy, scipy, matplotlib; print('OK - All packages installed')"
+
+# If you get errors, reinstall packages
+pip3 install -r requirements.txt
+```
+
+:::
+
+::::
 
 **Project Structure Review**:
 
