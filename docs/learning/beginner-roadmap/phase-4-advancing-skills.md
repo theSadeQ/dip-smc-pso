@@ -4,6 +4,10 @@
 
 # Phase 4: Advancing Skills (Week 13-16, ~30 hours)
 
+[Home](../../../index.md) › [Learning](../index.md) › [Beginner Roadmap](../beginner-roadmap.md) › Phase 4: Advancing Skills
+
+---
+
 **Prerequisites**: Phase 1-3 completion
 **Previous Phase**: [Phase 3: Hands-On Learning](phase-3-hands-on.md)
 **Next Phase**: [Phase 5: Mastery Path](phase-5-mastery.md)
