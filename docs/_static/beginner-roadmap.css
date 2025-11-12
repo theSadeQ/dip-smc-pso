@@ -598,4 +598,78 @@ details > :first-child {
     animation: fadeIn 0.5s ease-out;
 }
 
+/* ===== 14. SPHINX-DESIGN DROPDOWN ENHANCEMENTS ===== */
+
+/* Base dropdown styling improvements */
+.sd-dropdown {
+    transition: all var(--transition-base);
+    margin-bottom: var(--space-3);
+}
+
+.sd-dropdown > .sd-summary-title {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.sd-dropdown:hover > .sd-summary-title {
+    transform: translateX(4px);
+}
+
+.sd-dropdown[open] > .sd-summary-title {
+    color: var(--phase-color);
+    font-weight: 600;
+}
+
+.sd-dropdown[open] {
+    background: var(--phase-bg-light);
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+}
+
+/* Enhanced icon colors for better contrast */
+.sd-dropdown[data-sd-icon="octicon-light-bulb"] .sd-summary-icon {
+    color: #10b981;  /* Green for success/tips */
+}
+
+.sd-dropdown[data-sd-icon="octicon-alert"] .sd-summary-icon {
+    color: #f59e0b;  /* Orange for warnings */
+}
+
+.sd-dropdown[data-sd-icon="octicon-mortar-board"] .sd-summary-icon {
+    color: #3b82f6;  /* Blue for education */
+}
+
+.sd-dropdown[data-sd-icon="octicon-tools"] .sd-summary-icon {
+    color: #8b5cf6;  /* Purple for technical */
+}
+
+/* Nested dropdown styling (2 levels max) */
+.sd-dropdown .sd-dropdown {
+    margin-left: var(--space-4);
+    margin-top: var(--space-3);
+    border-left: 3px solid var(--phase-color);
+    padding-left: var(--space-3);
+}
+
+.sd-dropdown .sd-dropdown[open] {
+    background: rgba(37, 99, 235, 0.05);
+}
+
+/* Smoother dropdown content reveal */
+.sd-dropdown .sd-summary-content {
+    animation: fadeInDown 0.3s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* ===== END OF FILE ===== */
