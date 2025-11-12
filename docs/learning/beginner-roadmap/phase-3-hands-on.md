@@ -24,6 +24,9 @@
 
 ---
 
+<details>
+<summary>3.1 Running Your First Simulation</summary>
+
 ## Phase 3.1: Running Your First Simulation (8 hours)
 
 **Goal**: Successfully run your first DIP simulation and see the results.
@@ -204,7 +207,12 @@ Run the simulation and answer:
 **If simulation won't run**: ⚠️ Check troubleshooting in Phase 3.5
 **If plots don't show**: ⚠️ Check matplotlib backend (use `--save` instead)
 
+</details>
+
 ---
+
+<details>
+<summary>3.2 Understanding Simulation Results</summary>
 
 ## Phase 3.2: Understanding Simulation Results (6 hours)
 
@@ -424,7 +432,12 @@ Sketch (on paper) what a "good" pendulum angle plot looks like vs a "poor" one w
 **If struggling with plots**: ⚠️ Review Step 1, run more simulations
 **If struggling with metrics**: ⚠️ Review Step 3, compare controller outputs
 
+</details>
+
 ---
+
+<details>
+<summary>3.3 Comparing Controllers</summary>
 
 ## Phase 3.3: Comparing Controllers (5 hours)
 
@@ -553,7 +566,12 @@ Run all 4 controllers and create your own comparison table. Verify your results 
 **If controllers won't run**: ⚠️ Check controller names (case-sensitive)
 **If results seem wrong**: ⚠️ Check initial conditions are same for all runs
 
+</details>
+
 ---
+
+<details>
+<summary>3.4 Modifying Configuration</summary>
 
 ## Phase 3.4: Modifying Configuration (4 hours)
 
@@ -767,7 +785,12 @@ git checkout config.yaml  # If using git
 **If YAML syntax errors**: ⚠️ Check indentation (use spaces, not tabs)
 **If simulation fails after changes**: ⚠️ Reset config.yaml and try again
 
+</details>
+
 ---
+
+<details>
+<summary>3.5 Troubleshooting Common Issues</summary>
 
 ## Phase 3.5: Troubleshooting Common Issues (2 hours)
 
@@ -886,6 +909,8 @@ ValueError: Unknown controller type: 'classical'
 
 **If all checked**: 🎉 **Phase 3 COMPLETE!**
 **If stuck on errors**: ⚠️ Review solutions above, ask for help
+
+</details>
 
 ---
 
