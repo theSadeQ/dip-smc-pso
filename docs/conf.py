@@ -272,8 +272,9 @@ html_js_files = [
     ('https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js', {'defer': 'defer'}),
 
     # Core lightweight utilities (load on all pages)
-    # 'back-to-top.js',  # Disabled - using Furo's built-in back-to-top button
-    'smooth-scroll-fix.js',  # Smooth scroll for Furo's back-to-top button (Nov 2025 fix)
+    # 'back-to-top.js',  # Disabled - replaced by unified handler (Nov 2025)
+    # 'smooth-scroll-fix.js',  # Disabled - replaced by unified handler (Nov 2025)
+    'unified-back-to-top.js',  # Unified visibility manager: syncs Furo + custom systems (Nov 2025)
     'lazy-load.js',
     'dark-mode.js',
     'visual-sitemap.js',
