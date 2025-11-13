@@ -40,7 +40,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 try:
     from src.controllers.factory import create_controller
     from src.core.dynamics import DIPDynamics
-    from src.core.simulation_runner import SimulationRunner
+    from src.core.simulation_runner import run_simulation
     from src.config import load_config
     COMPONENTS_AVAILABLE = True
 except ImportError as e:
@@ -377,13 +377,17 @@ def test_cross_component_integration(
 
     # Run simulation
     try:
-        runner = SimulationRunner(controller, dynamics, test_config)
+        t_arr, x_arr, u_arr = run_simulation(
+            controller=controller,
+            dynamics_model=dynamics,
+            sim_time=test_config.simulation.duration,
+            dt=test_config.simulation.dt,
+            initial_state=test_config.simulation.initial_state
+        )
 
-        result = runner.run()
-
-        state_history = result['states']
-        control_history = result['controls']
-        time_vector = result['time']
+        state_history = x_arr
+        control_history = u_arr
+        time_vector = t_arr
 
     except Exception as e:
         pytest.fail(f"Simulation execution failed: {e}")
@@ -483,12 +487,17 @@ def test_generate_baseline_benchmarks(config):
                         continue
 
                     # Run simulation
-                    runner = SimulationRunner(controller, dynamics, test_config)
-                    result = runner.run()
+                    t_arr, x_arr, u_arr = run_simulation(
+                        controller=controller,
+                        dynamics_model=dynamics,
+                        sim_time=test_config.simulation.duration,
+                        dt=test_config.simulation.dt,
+                        initial_state=test_config.simulation.initial_state
+                    )
 
                     # Calculate metrics
                     metrics = calculate_performance_metrics(
-                        result['states'], result['controls'], result['time'], test_config
+                        x_arr, u_arr, t_arr, test_config
                     )
 
                     if not metrics.crashed:
