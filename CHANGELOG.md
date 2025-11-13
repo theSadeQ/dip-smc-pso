@@ -136,6 +136,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Creates `optimization_results/` directory automatically
   - Generates publication-quality convergence plots (300 DPI, log scale support)
 
+### Fixed
+- **Learning Documentation: Windows Terminal Compatibility** (November 13, 2025)
+  - **Issue**: Unicode arrows (→ ← ↑ ↓) rendered as � glyphs in Windows terminal (cp1252 encoding)
+  - **Fix**: Replaced all Unicode arrows with ASCII equivalents (-->, <--, etc.)
+  - **Scope**: 8 files in `docs/learning/beginner-roadmap/` directory
+    - phase-1-foundations.md: 22 replacements
+    - phase-2-core-concepts.md: 22 replacements
+    - phase-3-hands-on.md: 21 replacements
+    - phase-4-advancing-skills.md: 16 replacements
+    - phase-5-mastery.md: 18 replacements
+    - phase-1-diagrams.md: 1 replacement
+    - phase-3-diagrams.md: 1 replacement
+    - README.md: 12 replacements (path references + navigation)
+  - **Validation**:
+    - AI pattern detection: All 5 phase files pass (<5 patterns threshold)
+    - Link integrity: All internal links verified (8/8 files exist)
+    - Sphinx build: Successful (exit code 0, 317 documents indexed)
+    - Built HTML: 0 � glyphs remaining in output
+  - **Impact**: Beginner roadmap now fully readable in Windows CMD/PowerShell
+  - **Related**: Commit 82fa49e3 (Nov 13, 11:24), Commit 3851be00 (Nov 13, 11:40)
+
 ## [1.2.0] - 2025-10-01
 
 ### Fixed
