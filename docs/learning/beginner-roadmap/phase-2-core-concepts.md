@@ -1,4 +1,4 @@
-[← Back to Beginner Roadmap](../beginner-roadmap.md)
+[<--Back to Beginner Roadmap](../beginner-roadmap.md)
 
 ---
 
@@ -622,7 +622,7 @@ s = k₁·θ₁ + k₂·θ̇₁ + λ₁·θ₂ + λ₂·θ̇₂
 1. **Reaching Phase** (s ≠ 0):
    - System far from surface
    - Control law aggressively drives toward surface
-   - Goal: Make s → 0
+   - Goal: Make s --> 0
 
 2. **Sliding Phase** (s = 0):
    - System on surface
@@ -638,11 +638,11 @@ s = k₁·θ₁ + k₂·θ̇₁ + λ₁·θ₂ + λ₂·θ̇₂
 %%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#FFA500','primaryTextColor':'#fff','primaryBorderColor':'#FF8C00','lineColor':'#FF8C00','secondaryColor':'#FFE5CC','tertiaryColor':'#fff'}}}%%
 flowchart TD
     A[Start: System Off Surface<br/>s ≠ 0] --> B{Reaching Phase}
-    B -->|Aggressive Control| C[Drive to Surface<br/>s → 0]
+    B -->|Aggressive Control| C[Drive to Surface<br/>s --> 0]
     C --> D{On Surface?}
     D -->|No, s ≠ 0| B
     D -->|Yes, s = 0| E{Sliding Phase}
-    E -->|Maintain s = 0| F[Slide to Equilibrium<br/>θ → 0, θ̇ → 0]
+    E -->|Maintain s = 0| F[Slide to Equilibrium<br/>θ --> 0, θ̇ --> 0]
     F --> G{At Equilibrium?}
     G -->|No| E
     G -->|Yes| H[Goal Achieved<br/>Pendulums Upright]
@@ -708,7 +708,7 @@ plt.show()
 
 print("Notice how:")
 print("1. Sliding surface (s) converges to zero first")
-print("2. Once s ≈ 0, system slides to equilibrium (θ→0, dθ→0)")
+print("2. Once s ≈ 0, system slides to equilibrium (theta-->0, dtheta-->0)")
 ```
 
 **Practice Exercise**:
@@ -1010,10 +1010,10 @@ gains = [10.0, 5.0, 8.0, 3.0, 15.0, 2.0]
 
 **Manual Tuning Process**:
 1. Start with initial guess: `[1, 1, 1, 1, 1, 1]`
-2. Run simulation → Pendulum falls → Increase k1
-3. Run again → Still unstable → Increase k3
-4. Run again → Now chattering → Reduce eta
-5. Run again → Better but oscillates → Adjust k2
+2. Run simulation --> Pendulum falls --> Increase k1
+3. Run again --> Still unstable --> Increase k3
+4. Run again --> Now chattering --> Reduce eta
+5. Run again --> Better but oscillates --> Adjust k2
 6. Repeat steps 2-5 for hours...
 
 **Why This is Tedious**:
@@ -1349,7 +1349,7 @@ flowchart LR
 - Benchmark problem in control theory research
 - Tests controller robustness and performance
 - Simpler than real-world systems but captures key challenges
-- Success on DIP → Confidence for robotics/aerospace applications
+- Success on DIP --> Confidence for robotics/aerospace applications
 
 ---
 
@@ -1444,10 +1444,10 @@ The simulation numerically integrates these equations:
 
 **Control Objective**:
 Design F(state) such that:
-- θ1 → 0 (pendulum 1 upright)
-- θ2 → 0 (pendulum 2 upright)
-- x → 0 (cart returns to center)
-- All velocities → 0 (system at rest)
+- θ1 --> 0 (pendulum 1 upright)
+- θ2 --> 0 (pendulum 2 upright)
+- x --> 0 (cart returns to center)
+- All velocities --> 0 (system at rest)
 
 ---
 
@@ -1492,7 +1492,7 @@ Sketch (on paper):
 :text-align: center
 
 Watch video tutorials on control theory and SMC fundamentals
-[View →]
+[View -->]
 
 ```
 
@@ -1502,7 +1502,7 @@ Watch video tutorials on control theory and SMC fundamentals
 :text-align: center
 
 Read detailed explanations of feedback control and SMC
-[Read →]
+[Read -->]
 
 ```
 
@@ -1512,7 +1512,7 @@ Read detailed explanations of feedback control and SMC
 :text-align: center
 
 Test your understanding of Phase 2 control concepts
-[Take Quiz →]
+[Take Quiz -->]
 
 ```
 
@@ -1525,7 +1525,7 @@ Test your understanding of Phase 2 control concepts
 
 Free interactive Python tutorial for everyone. Learn Python directly in your browser with hands-on exercises.
 📊 *Estimated Time:* 20 min | 🎯 *Level:* Beginner
-[View →]
+[View -->]
 
 ```
 
@@ -1538,7 +1538,7 @@ Free interactive Python tutorial for everyone. Learn Python directly in your bro
 
 Official NumPy documentation guide for absolute beginners. Covers arrays, indexing, and scientific computing.
 📊 *Estimated Time:* 45 min | 🎯 *Level:* Intermediate
-[Read →]
+[Read -->]
 
 ```
 
@@ -1551,7 +1551,7 @@ Official NumPy documentation guide for absolute beginners. Covers arrays, indexi
 
 MIT OpenCourseWare course on linear systems, transfer functions, and Laplace transforms. Free lecture notes available.
 📊 *Estimated Time:* 60 min | 🎯 *Level:* Beginner
-[Watch →]
+[Watch -->]
 
 ```
 
@@ -1564,7 +1564,7 @@ MIT OpenCourseWare course on linear systems, transfer functions, and Laplace tra
 
 Free in-browser Python REPL with no sign-up required. Practice Python immediately with instant code execution.
 📊 *Estimated Time:* 15 min | 🎯 *Level:* Hands-on
-[Try It →]
+[Try It -->]
 
 ```
 ```
@@ -1583,17 +1583,17 @@ You now understand:
 - Optimization with PSO
 - The double-inverted pendulum problem
 
-**Next Phase**: [Phase 3: Hands-On Learning →](phase-3-hands-on.md)
+**Next Phase**: [Phase 3: Hands-On Learning -->](phase-3-hands-on.md)
 
 ---
 
 **Navigation:**
-- ← [Phase 1: Foundations](phase-1-foundations.md)
-- **Next**: [Phase 3: Hands-On Learning](phase-3-hands-on.md) →
-- [← Back to Beginner Roadmap](../beginner-roadmap.md)
+- <--[Phase 1: Foundations](phase-1-foundations.md)
+- **Next**: [Phase 3: Hands-On Learning](phase-3-hands-on.md) -->
+- [<--Back to Beginner Roadmap](../beginner-roadmap.md)
 
 ---
 
 ## Navigation
 
-[← Phase 1: Foundations](phase-1-foundations.md) | [Back to Roadmap](../beginner-roadmap.md) | [Phase 3: Hands-On →](phase-3-hands-on.md)
+[<--Phase 1: Foundations](phase-1-foundations.md) | [Back to Roadmap](../beginner-roadmap.md) | [Phase 3: Hands-On -->](phase-3-hands-on.md)

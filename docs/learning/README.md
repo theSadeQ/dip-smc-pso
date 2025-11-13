@@ -6,7 +6,7 @@
 
 **Purpose**: Educational resources and learning roadmaps for users at all skill levels, managed by Claude Code.
 
-**Directory**: `.ai/edu/` (Educational materials, excluded from main docs build)
+**Directory**: `.project/ai/edu/` (Educational materials, excluded from main docs build)
 
 ---
 
@@ -37,13 +37,13 @@
 
 **Separation of Concerns**:
 - Main `docs/` focuses on project-specific documentation (tutorials, API, theory)
-- `.ai/edu/` provides prerequisite learning for complete beginners
+- `.project/ai/edu/` provides prerequisite learning for complete beginners
 - Users who already have Python/physics knowledge can skip directly to `docs/guides/getting-started.md`
 
 **Audience Segmentation**:
-- `.ai/edu/beginner-roadmap.md` → Users with NO programming/physics background (Path 0)
-- `docs/guides/getting-started.md` → Users with Python basics and some physics (Path 1)
-- `docs/guides/tutorials/` → Users ready for hands-on project work (Paths 2-4)
+- `.project/ai/edu/beginner-roadmap.md` --> Users with NO programming/physics background (Path 0)
+- `docs/guides/getting-started.md` --> Users with Python basics and some physics (Path 1)
+- `docs/guides/tutorials/` --> Users ready for hands-on project work (Paths 2-4)
 
 **Maintenance**:
 - Educational content evolves separately from project documentation
@@ -58,23 +58,23 @@
 
 ```
 Path 0: Complete Beginner (NEW)
-  └─> .ai/edu/beginner-roadmap.md (125-150 hours)
+  └─> .project/ai/edu/beginner-roadmap.md (125-150 hours)
        ├─> Phase 1: Foundations (Python, physics, math)
        ├─> Phase 2: Core Concepts (Control theory, SMC)
-       ├─> Phase 3-5: Hands-on → Mastery
-       └─> Connects to Path 1 ↓
+       ├─> Phase 3-5: Hands-on --> Mastery
+       └─> Connects to Path 1 (v)
 
 Path 1: Quick Start (EXISTING)
-  └─> docs/guides/getting-started.md → Tutorial 01 (1-2 hours)
+  └─> docs/guides/getting-started.md --> Tutorial 01 (1-2 hours)
 
 Path 2: Controller Expert (EXISTING)
-  └─> Getting Started → Tutorials 01-03 → SMC Theory (4-6 hours)
+  └─> Getting Started --> Tutorials 01-03 --> SMC Theory (4-6 hours)
 
 Path 3: Custom Development (EXISTING)
-  └─> Getting Started → Tutorials 01-04 → API Reference (8-12 hours)
+  └─> Getting Started --> Tutorials 01-04 --> API Reference (8-12 hours)
 
 Path 4: Research Publication (EXISTING)
-  └─> Complete Paths 1-2 → Tutorial 05 → Theory Guides (12+ hours)
+  └─> Complete Paths 1-2 --> Tutorial 05 --> Theory Guides (12+ hours)
 ```
 
 ### Cross-References
@@ -86,9 +86,9 @@ Path 4: Research Publication (EXISTING)
 - Python skills needed for `docs/guides/api/` usage
 
 **From main docs to beginner-roadmap.md**:
-- `docs/guides/getting-started.md` → Prerequisites section links to `.ai/edu/beginner-roadmap.md`
-- `docs/guides/INDEX.md` → "Path 0: Complete Beginner" references this directory
-- `README.md` → Learning paths section mentions Path 0 for absolute beginners
+- `docs/guides/getting-started.md` --> Prerequisites section links to `.project/ai/edu/beginner-roadmap.md`
+- `docs/guides/INDEX.md` --> "Path 0: Complete Beginner" references this directory
+- `README.md` --> Learning paths section mentions Path 0 for absolute beginners
 
 ---
 
@@ -96,30 +96,30 @@ Path 4: Research Publication (EXISTING)
 
 **Planned Additions**:
 
-1. **Intermediate Roadmap** (`.ai/edu/intermediate-roadmap.md`)
+1. **Intermediate Roadmap** (`.project/ai/edu/intermediate-roadmap.md`)
    - For users who completed Path 1-2 and want to go deeper
    - Advanced control theory (Lyapunov, stability proofs)
    - Advanced Python (decorators, generators, async)
    - Research methods (experimental design, statistical validation)
 
-2. **Quick Reference Cards** (`.ai/edu/cheatsheets/`)
+2. **Quick Reference Cards** (`.project/ai/edu/cheatsheets/`)
    - Python essentials for this project
    - Control theory formulas
    - Git commands
    - Command line reference
    - NumPy/Matplotlib quick reference
 
-3. **Video Curriculum** (`.ai/edu/video-series.md`)
+3. **Video Curriculum** (`.project/ai/edu/video-series.md`)
    - Curated YouTube playlists for each phase
    - Timestamp links to specific topics
    - Alternative explanations for difficult concepts
 
-4. **Exercise Solutions** (`.ai/edu/exercises/`)
+4. **Exercise Solutions** (`.project/ai/edu/exercises/`)
    - Detailed solutions to practice problems
    - Worked examples with explanations
    - Additional challenge problems
 
-5. **FAQ for Beginners** (`.ai/edu/faq-beginners.md`)
+5. **FAQ for Beginners** (`.project/ai/edu/faq-beginners.md`)
    - Common misconceptions
    - "I'm stuck at X, what should I do?"
    - Hardware requirements clarification
@@ -138,7 +138,7 @@ Path 4: Research Publication (EXISTING)
    - Maintain consistency with main `docs/` tutorials
 
 2. **When adding new educational content**:
-   - Follow the same structure: Learning objectives → Steps → Self-assessment
+   - Follow the same structure: Learning objectives --> Steps --> Self-assessment
    - Include time estimates for each section
    - Provide multiple learning modalities (video, text, interactive)
    - Link to relevant main docs sections
@@ -208,7 +208,7 @@ Path 4: Research Publication (EXISTING)
 
 3. **Improve explanations**:
    - Fork repository
-   - Edit `.ai/edu/beginner-roadmap.md`
+   - Edit `.project/ai/edu/beginner-roadmap.md`
    - Submit pull request with clear description of improvement
 
 4. **Add interactive examples**:

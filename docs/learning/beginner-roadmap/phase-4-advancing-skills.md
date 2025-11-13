@@ -1,4 +1,4 @@
-[← Back to Beginner Roadmap](../beginner-roadmap.md)
+[<--Back to Beginner Roadmap](../beginner-roadmap.md)
 
 ---
 
@@ -636,8 +636,8 @@ def compute_control(self, state: np.ndarray, dt: float) -> float:
 
 **Boundary Layer**:
 - Region where tanh ≈ linear (not saturated)
-- Wider layer → smoother control, slower convergence
-- Narrower layer → faster convergence, more chattering
+- Wider layer --> smoother control, slower convergence
+- Narrower layer --> faster convergence, more chattering
 
 **Saturation**:
 - Real actuators have force limits
@@ -899,9 +899,9 @@ A method to prove a system converges to equilibrium WITHOUT solving differential
 **Analogy**: Imagine a ball rolling in a bowl.
 - Bowl = Lyapunov function V(x)
 - Ball's position = system state x
-- Gravity pulls ball down → V decreases
+- Gravity pulls ball down --> V decreases
 - Bottom of bowl = equilibrium (V minimum)
-- Ball eventually rests at bottom → stable
+- Ball eventually rests at bottom --> stable
 
 **Formal Definition** (simplified):
 
@@ -971,12 +971,12 @@ V̇ = s * ṡ < 0  # System approaches surface
 ```
    θ̇ (angular velocity)
     ^
-    |     ●────→        ← Trajectories
+    |     ●------>        <-- Trajectories
     |    /
     |   /
-    |  ●────→
+    |  ●------>
     | /
-    +──────────────────> θ (angle)
+    +--------------------> θ (angle)
     |
     |    Equilibrium (θ=0, θ̇=0) is at origin
 ```
@@ -989,7 +989,7 @@ V̇ = s * ṡ < 0  # System approaches surface
     |     ╱ Sliding surface: s = θ + k*θ̇ = 0
     |    ╱   (line in 2D, plane in higher dimensions)
     |   ╱
-    |  ╱  ← Trajectories converge to this line
+    |  ╱  <--Trajectories converge to this line
     | ╱
     +╱─────────────────> θ
    ╱ |
@@ -1087,7 +1087,7 @@ Can you explain (in your own words, no equations):
 :text-align: center
 
 Watch tutorials on OOP, decorators, and Lyapunov theory
-[View →]
+[View -->]
 
 ```
 
@@ -1097,7 +1097,7 @@ Watch tutorials on OOP, decorators, and Lyapunov theory
 :text-align: center
 
 Read about reading and understanding complex code
-[Read →]
+[Read -->]
 
 ```
 
@@ -1107,7 +1107,7 @@ Read about reading and understanding complex code
 :text-align: center
 
 Test your advanced skills from Phase 4
-[Take Quiz →]
+[Take Quiz -->]
 
 ```
 
@@ -1120,7 +1120,7 @@ Test your advanced skills from Phase 4
 
 Comprehensive PSO overview with algorithm fundamentals, swarm intelligence, and Python implementation examples.
 📊 *Estimated Time:* 40 min | 🎯 *Level:* Advanced
-[Read →]
+[Read -->]
 
 ```
 
@@ -1133,7 +1133,7 @@ Comprehensive PSO overview with algorithm fundamentals, swarm intelligence, and 
 
 Open-access MDPI paper on chattering reduction using reinforcement learning for SMC. Practical engineering focus.
 📊 *Estimated Time:* 50 min | 🎯 *Level:* Technical
-[Read →]
+[Read -->]
 
 ```
 
@@ -1146,7 +1146,7 @@ Open-access MDPI paper on chattering reduction using reinforcement learning for 
 
 Official Matplotlib documentation with examples gallery, user guide, and API docs for data visualization.
 📊 *Estimated Time:* Reference | 🎯 *Level:* Reference
-[Browse →]
+[Browse -->]
 
 ```
 
@@ -1159,7 +1159,7 @@ Official Matplotlib documentation with examples gallery, user guide, and API doc
 
 Official Streamlit tutorial building interactive NYC Uber app. Covers caching, widgets, and deployment.
 📊 *Estimated Time:* 60 min | 🎯 *Level:* Beginner
-[Try It →]
+[Try It -->]
 
 ```
 ```
@@ -1185,12 +1185,12 @@ You now understand:
 ---
 
 **Navigation:**
-- ← [Phase 3: Hands-On Learning](phase-3-hands-on.md)
-- **Next**: [Phase 5: Mastery Path](phase-5-mastery.md) →
-- [← Back to Beginner Roadmap](../beginner-roadmap.md)
+- <--[Phase 3: Hands-On Learning](phase-3-hands-on.md)
+- **Next**: [Phase 5: Mastery Path](phase-5-mastery.md) -->
+- [<--Back to Beginner Roadmap](../beginner-roadmap.md)
 
 ---
 
 ## Navigation
 
-[← Phase 3: Hands-On Learning](phase-3-hands-on.md) | [Back to Roadmap](../beginner-roadmap.md) | [Phase 5: Mastery Path →](phase-5-mastery.md)
+[<--Phase 3: Hands-On Learning](phase-3-hands-on.md) | [Back to Roadmap](../beginner-roadmap.md) | [Phase 5: Mastery Path -->](phase-5-mastery.md)

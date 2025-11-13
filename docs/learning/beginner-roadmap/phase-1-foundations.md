@@ -1,4 +1,4 @@
-[← Back to Beginner Roadmap](../beginner-roadmap.md)
+[<-- Back to Beginner Roadmap](../beginner-roadmap.md)
 
 ---
 
@@ -43,7 +43,7 @@
 
 **Total**: ~40 hours over 4 weeks (~10 hours/week)
 
-**Visual Aids**: [View Phase 1 Diagrams →](phase-1-diagrams.md) (File System, Computing Basics, Error Diagnosis, Data Types, Setup)
+**Visual Aids**: [View Phase 1 Diagrams -->](phase-1-diagrams.md) (File System, Computing Basics, Error Diagnosis, Data Types, Setup)
 
 ---
 
@@ -1432,7 +1432,7 @@ Try this online simulator:
 
    If L doubles: Period = 2π√(2L/g) = √2 × 2π√(L/g)
 
-   Example: 1m pendulum (2 sec) → 2m pendulum (2.83 sec)
+   Example: 1m pendulum (2 sec) --> 2m pendulum (2.83 sec)
 
 2. **Period stays the same**
 
@@ -1510,17 +1510,17 @@ Imagine balancing two broomsticks stacked end-to-end on a cart that you can only
 **Visual Understanding**:
 
 ```
-     O ← m2 (second pendulum mass)
+     O <-- m2 (second pendulum mass)
      |
      | L2 (second pendulum length)
      |
-     O ← m1 (first pendulum mass)
+     O <-- m1 (first pendulum mass)
      |
      | L1 (first pendulum length)
      |
-    [===] ← Cart (mass m0)
+    [===] <-- Cart (mass m0)
      |||
-  =========== ← Track (cart moves left/right)
+  =========== <-- Track (cart moves left/right)
 ```
 
 **State Variables** (what we need to track):
@@ -1655,7 +1655,7 @@ Learn about energy conversion and why some equilibrium positions are stable whil
 **What is a Function?**
 - A relationship between input and output
 - Example: f(x) = 2x (double the input)
-- Input x=3 → Output f(3) = 6
+- Input x=3 --> Output f(3) = 6
 
 **Graphing Functions**:
 - x-axis: Input (independent variable)
@@ -1732,9 +1732,9 @@ Plot these functions from x = 0 to 10:
 **Unit Circle**:
 - Circle with radius 1
 - Point on circle: (cos(θ), sin(θ))
-- θ = 0: Point at (1, 0) → Right
-- θ = π/2: Point at (0, 1) → Top
-- θ = π: Point at (-1, 0) → Left
+- θ = 0: Point at (1, 0) --> Right
+- θ = π/2: Point at (0, 1) --> Top
+- θ = π: Point at (-1, 0) --> Left
 
 **Pendulum Connection**:
 - Pendulum angle θ measured from vertical
@@ -1786,7 +1786,7 @@ print(f"Difference: {abs(np.sin(small_angle) - small_angle):.6f}")
 **What is a Derivative?**
 - Measures how fast something is changing
 - Slope of a function at a point
-- Example: Position → Velocity (rate of change of position)
+- Example: Position --> Velocity (rate of change of position)
 
 **Notation**:
 - dx/dt: Derivative of x with respect to t (velocity)
@@ -1847,7 +1847,7 @@ plt.show()
 State vector includes both positions AND velocities:
 ```
 [x, ẋ, θ₁, θ̇₁, θ₂, θ̇₂]
- ↑  ↑   ↑   ↑    ↑   ↑
+ ^  ^   ^   ^    ^   ^
  |  |   |   |    |   dθ₂/dt (second pendulum angular velocity)
  |  |   |   |    θ₂ (second pendulum angle)
  |  |   |   dθ₁/dt (first pendulum angular velocity)
@@ -1910,7 +1910,7 @@ Write Python code to:
 :text-align: center
 
 Watch video tutorials for Python, command line, and physics basics
-[View →]
+[View -->]
 
 ```
 
@@ -1920,7 +1920,7 @@ Watch video tutorials for Python, command line, and physics basics
 :text-align: center
 
 Read detailed explanations and examples for beginners
-[Read →]
+[Read -->]
 
 ```
 
@@ -1930,7 +1930,7 @@ Read detailed explanations and examples for beginners
 :text-align: center
 
 Test your understanding of Phase 1 concepts
-[Take Quiz →]
+[Take Quiz -->]
 
 ```
 ```
@@ -1948,18 +1948,18 @@ You now have:
 
 **Time to Celebrate!** Take a break, you've earned it.
 
-**Next Phase**: [Phase 2: Core Concepts →](phase-2-core-concepts.md)
+**Next Phase**: [Phase 2: Core Concepts -->](phase-2-core-concepts.md)
 
 ---
 
 **Navigation:**
-- **Next**: [Phase 2: Core Concepts](phase-2-core-concepts.md) →
-- [← Back to Beginner Roadmap](../beginner-roadmap.md)
+- **Next**: [Phase 2: Core Concepts](phase-2-core-concepts.md) -->
+- [<-- Back to Beginner Roadmap](../beginner-roadmap.md)
 
 ---
 
 ## Next Steps
 
-Ready to move on? [→ Phase 2: Core Concepts](phase-2-core-concepts.md)
+Ready to move on? [--> Phase 2: Core Concepts](phase-2-core-concepts.md)
 
-Or [← Back to Beginner Roadmap](../beginner-roadmap.md)
+Or [<-- Back to Beginner Roadmap](../beginner-roadmap.md)
