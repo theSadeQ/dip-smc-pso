@@ -1539,109 +1539,27 @@ aside.sidebar-secondary a {
 }
 
 /* ============================================================================
-   23. UI-027 FIX: BACK-TO-TOP BUTTON ENHANCED SHADOW
-   UPDATED: Nov 2025 - Integration with Furo scroll visibility control
+   23. UI-027 FIX: BACK-TO-TOP BUTTON - SIMPLE HIDE APPROACH
+   UPDATED: Nov 2025 - Completely hide Furo's button to prevent conflicts
    ============================================================================ */
 
 /* Apply stronger shadow to floating action button for better prominence */
-/* Issue: FAB blends into content, lacks depth, always visible (ignores scroll) */
-/* Solution: Enhanced gradient shadow with hover glow + Furo integration */
-/* Integration: Works with Furo's html.show-back-to-top visibility gate */
+/* Issue: FAB appears incorrectly during scroll, causes blue flash */
+/* Solution: Completely hide Furo's back-to-top button */
 
-/* Back-to-top button (FAB) - HIDDEN BY DEFAULT */
+/* HIDE FURO'S BACK-TO-TOP BUTTON COMPLETELY */
 .back-to-top,
 .btn-scroll-top,
 [id*="back-to-top"],
-[class*="back-to-top"] {
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #2563eb, #0b2763); /* Blue gradient */
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: none;
-    z-index: 1000;
-
-    /* VISIBILITY GATING - Hidden by default */
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(100px);
-
-    /* Transition ONLY relevant properties (prevents blue flash) */
-    /* Reduced from 300ms to 150ms to minimize race condition window */
-    transition: opacity 0.15s ease,
-                transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.15s ease;
-
-    /* GPU acceleration hint for smoother transitions */
-    will-change: opacity, transform;
-
-    /* Enhanced shadow - UI-027 specification */
-    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.35);
-}
-
-/* FURO INTEGRATION + FALLBACK - Show when either class active */
-/* Dual-selector: Works with Furo's html.show-back-to-top OR standalone .show class */
+[class*="back-to-top"],
 html.show-back-to-top .back-to-top,
 html.show-back-to-top .btn-scroll-top,
 html.show-back-to-top [id*="back-to-top"],
-html.show-back-to-top [class*="back-to-top"],
-.back-to-top.show,
-.btn-scroll-top.show,
-[id*="back-to-top"].show,
-[class*="back-to-top"].show {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
-/* Hover state - add glow (ONLY when visible) */
-html.show-back-to-top .back-to-top:hover,
-html.show-back-to-top .btn-scroll-top:hover,
-html.show-back-to-top [id*="back-to-top"]:hover,
-html.show-back-to-top [class*="back-to-top"]:hover,
-.back-to-top.show:hover,
-.btn-scroll-top.show:hover,
-[id*="back-to-top"].show:hover,
-[class*="back-to-top"].show:hover {
-    transform: translateY(-4px);
-    box-shadow:
-        0 16px 40px rgba(37, 99, 235, 0.45),    /* Stronger shadow */
-        0 0 24px rgba(37, 99, 235, 0.4);        /* Glow effect */
-}
-
-/* Focus state for keyboard navigation */
-html.show-back-to-top .back-to-top:focus-visible,
-html.show-back-to-top .btn-scroll-top:focus-visible,
-html.show-back-to-top [id*="back-to-top"]:focus-visible,
-html.show-back-to-top [class*="back-to-top"]:focus-visible,
-.back-to-top.show:focus-visible,
-.btn-scroll-top.show:focus-visible,
-[id*="back-to-top"].show:focus-visible,
-[class*="back-to-top"].show:focus-visible {
-    outline: 3px solid rgba(255, 255, 255, 0.8);
-    outline-offset: 3px;
-}
-
-/* Mobile - reduce size slightly */
-@media (max-width: 767px) {
-    .back-to-top,
-    .btn-scroll-top,
-    [id*="back-to-top"],
-    [class*="back-to-top"] {
-        width: 48px;
-        height: 48px;
-        bottom: 24px;
-        right: 24px;
-    }
+html.show-back-to-top [class*="back-to-top"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 
 /* ============================================================================
