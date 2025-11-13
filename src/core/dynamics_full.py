@@ -11,6 +11,9 @@ for backward compatibility with legacy import paths.
 # Re-export full dynamics class from new location
 from ..plant.models.full.dynamics import FullDIPDynamics
 
+# Backward compatibility alias (tests expect DIPDynamicsFull)
+DIPDynamicsFull = FullDIPDynamics
+
 # Re-export integration functions for test compatibility
 from .dynamics import step_rk4_numba, step_euler_numba
 
@@ -43,4 +46,4 @@ class FullDIPParams:
             self.physics = config.physics
             self.damping = config.damping
 
-__all__ = ['FullDIPDynamics', 'step_rk4_numba', 'step_euler_numba', 'FullDIPParams']
+__all__ = ['FullDIPDynamics', 'DIPDynamicsFull', 'step_rk4_numba', 'step_euler_numba', 'FullDIPParams']

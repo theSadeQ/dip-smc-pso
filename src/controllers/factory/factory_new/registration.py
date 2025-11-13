@@ -46,7 +46,7 @@ except ImportError:
 
 # Optional MPC controller import
 try:
-    from src.controllers.mpc.controller import MPCController
+    from src.controllers.mpc.mpc_controller import MPCController
     MPC_AVAILABLE = True
 except ImportError:
     MPCController = None

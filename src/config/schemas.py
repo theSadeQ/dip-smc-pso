@@ -211,6 +211,14 @@ class SwingUpSMCConfig(_BaseControllerConfig):
     exit_energy_factor: Optional[float] = Field(None, gt=0.0, le=1.0)
     reentry_angle_tolerance: Optional[float] = Field(None, gt=0.0)
 
+class MPCControllerConfig(_BaseControllerConfig):
+    """Configuration for Model Predictive Controller."""
+    horizon: Optional[int] = Field(10, gt=0)
+    q_x: Optional[float] = Field(1.0, gt=0.0)
+    q_theta: Optional[float] = Field(1.0, gt=0.0)
+    r_u: Optional[float] = Field(0.1, gt=0.0)
+    max_force: Optional[float] = Field(None, gt=0.0)
+
 class HybridAdaptiveSTASMCConfig(_BaseControllerConfig):
     """Configuration for Hybrid Adaptive Super-Twisting Sliding Mode Controller."""
     max_force: Optional[float] = Field(None, gt=0.0)
@@ -268,8 +276,8 @@ class ControllersConfig(StrictModel):
     sta_smc: Optional[STASMCConfig] = None
     adaptive_smc: Optional[AdaptiveSMCConfig] = None
     swing_up_smc: Optional[SwingUpSMCConfig] = None
+    mpc_controller: Optional[MPCControllerConfig] = None
     hybrid_adaptive_sta_smc: Optional[HybridAdaptiveSTASMCConfig] = None
-    mpc_controller: Optional[PermissiveControllerConfig] = None
 
     def keys(self) -> List[str]:
         return [
