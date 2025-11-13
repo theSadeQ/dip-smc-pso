@@ -1540,13 +1540,15 @@ aside.sidebar-secondary a {
 
 /* ============================================================================
    23. UI-027 FIX: BACK-TO-TOP BUTTON ENHANCED SHADOW
+   UPDATED: Nov 2025 - Integration with Furo scroll visibility control
    ============================================================================ */
 
 /* Apply stronger shadow to floating action button for better prominence */
-/* Issue: FAB blends into content, lacks depth */
-/* Solution: Enhanced gradient shadow with hover glow */
+/* Issue: FAB blends into content, lacks depth, always visible (ignores scroll) */
+/* Solution: Enhanced gradient shadow with hover glow + Furo integration */
+/* Integration: Works with Furo's html.show-back-to-top visibility gate */
 
-/* Back-to-top button (FAB) */
+/* Back-to-top button (FAB) - HIDDEN BY DEFAULT */
 .back-to-top,
 .btn-scroll-top,
 [id*="back-to-top"],
@@ -1564,18 +1566,39 @@ aside.sidebar-secondary a {
     justify-content: center;
     cursor: pointer;
     border: none;
-    transition: all 0.3s ease;
     z-index: 1000;
+
+    /* VISIBILITY GATING - Hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(100px);
+
+    /* Transition ONLY relevant properties (prevents blue flash) */
+    transition: opacity 0.3s ease,
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s ease;
 
     /* Enhanced shadow - UI-027 specification */
     box-shadow: 0 12px 32px rgba(37, 99, 235, 0.35);
 }
 
-/* Hover state - add glow */
-.back-to-top:hover,
-.btn-scroll-top:hover,
-[id*="back-to-top"]:hover,
-[class*="back-to-top"]:hover {
+/* FURO INTEGRATION - Show when .show-back-to-top class active */
+html.show-back-to-top .back-to-top,
+html.show-back-to-top .btn-scroll-top,
+html.show-back-to-top [id*="back-to-top"],
+html.show-back-to-top [class*="back-to-top"] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Hover state - add glow (ONLY when visible) */
+html.show-back-to-top .back-to-top:hover,
+html.show-back-to-top .btn-scroll-top:hover,
+html.show-back-to-top [id*="back-to-top"]:hover,
+html.show-back-to-top [class*="back-to-top"]:hover {
     transform: translateY(-4px);
     box-shadow:
         0 16px 40px rgba(37, 99, 235, 0.45),    /* Stronger shadow */
@@ -1583,10 +1606,10 @@ aside.sidebar-secondary a {
 }
 
 /* Focus state for keyboard navigation */
-.back-to-top:focus-visible,
-.btn-scroll-top:focus-visible,
-[id*="back-to-top"]:focus-visible,
-[class*="back-to-top"]:focus-visible {
+html.show-back-to-top .back-to-top:focus-visible,
+html.show-back-to-top .btn-scroll-top:focus-visible,
+html.show-back-to-top [id*="back-to-top"]:focus-visible,
+html.show-back-to-top [class*="back-to-top"]:focus-visible {
     outline: 3px solid rgba(255, 255, 255, 0.8);
     outline-offset: 3px;
 }

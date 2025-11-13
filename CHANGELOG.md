@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Back-to-Top Button Scroll Bug** (November 13, 2025)
+  - **Status**: COMPLETE - Integrated with Furo theme visibility control
+  - **Issue**: Back-to-top FAB button always visible, causing blue flashes on scroll and unwanted scroll-to-top on accidental clicks
+  - **Root Cause**: Custom CSS override (UI-027) ignored Furo's `html.show-back-to-top` visibility gating
+  - **Implementation**:
+    - Updated `docs/_static/custom.css` (lines 1551-1628) with visibility gating:
+      - Default hidden: `opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(100px);`
+      - Visible when gated: `html.show-back-to-top .back-to-top { opacity: 1; ... }`
+      - Specific transitions: `transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;`
+    - Created `docs/_static/smooth-scroll-fix.js` (64 lines) - Smooth scroll handler with accessibility focus management
+    - Updated `docs/conf.py` (line 276) to load smooth-scroll-fix.js
+  - **UX Improvements**:
+    - Button hidden when scrollY < 64px
+    - Button visible only when scrolling UP after 64px (Furo's built-in logic)
+    - Smooth scroll animation on click (not instant jump)
+    - No blue flash during scroll (transition optimized)
+    - Maintained brand gradient (#2563eb → #0b2763)
+    - Maintained mobile positioning (bottom: 24px, right: 24px, 48x48px)
+  - **WCAG 2.1 Level AA Compliance**: Maintained (keyboard navigation, focus outline, screen reader support)
+  - **Testing**: Manual testing on Chrome desktop + mobile simulator
+  - **Files Modified**:
+    - `docs/_static/custom.css` (lines 1541-1628) - CSS visibility gating
+    - `docs/_static/smooth-scroll-fix.js` (NEW, 64 lines) - Smooth scroll handler
+    - `docs/conf.py` (line 276) - JavaScript loading configuration
+
 ### Added
 - **MT-8 Robust PSO Optimization for Disturbance Rejection** (November 8, 2025)
   - **Status**: COMPLETE - Classical SMC optimized gains validated
