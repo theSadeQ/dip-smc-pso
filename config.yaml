@@ -120,6 +120,15 @@ controllers:
     reentry_angle_tolerance: 0.4 # [CIT-047]
     max_force: 150.0 # [CIT-045]
 
+  # Model Predictive Controller (MPC)
+  # Requires cvxpy package (optional dependency)
+  mpc_controller:
+    horizon: 10          # Prediction horizon (timesteps)
+    q_x: 1.0            # State weight (cart position)
+    q_theta: 1.0        # State weight (pendulum angles)
+    r_u: 0.1            # Control effort weight
+    max_force: 150.0    # Maximum control force
+
   # Hybrid adaptive super‑twisting sliding mode controller.  This
   # configuration enables the controller described in Deepresearch.md
   # section II.B.  Each parameter aligns with the theoretical

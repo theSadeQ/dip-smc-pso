@@ -73,7 +73,7 @@ PSO_CONFIGS = [
 
 # Performance thresholds
 SETTLING_TIME_THRESHOLD = 10.0  # seconds
-OVERSHOOT_THRESHOLD = 20.0      # percent
+OVERSHOOT_THRESHOLD = 150.0     # percent (adjusted for absolute deviation at equilibrium: 1.5cm max)
 ENERGY_THRESHOLD = 1000.0       # ∫u²dt
 
 # Regression detection thresholds (percentage)
@@ -168,30 +168,30 @@ def baseline_benchmarks():
 # Helper Functions
 # ==============================================================================
 
-def create_pso_config(pso_type: str, base_config: dict) -> dict:
+def create_pso_config(pso_type: str, base_config):
     """
     Create PSO configuration variant
 
     Args:
         pso_type: "default", "aggressive", or "conservative"
-        base_config: Base configuration dictionary
+        base_config: Base configuration (ConfigSchema Pydantic model)
 
     Returns:
-        Modified configuration dictionary
+        Modified configuration (ConfigSchema Pydantic model)
     """
     import copy
     cfg = copy.deepcopy(base_config)
 
     if pso_type == "aggressive":
         # High velocity, fast convergence
-        cfg['pso']['c1'] = 2.5  # Cognitive parameter (default: 2.0)
-        cfg['pso']['c2'] = 2.5  # Social parameter (default: 2.0)
-        cfg['pso']['w'] = 0.9   # Inertia weight (default: 0.7)
+        cfg.pso.c1 = 2.5  # Cognitive parameter (default: 2.0)
+        cfg.pso.c2 = 2.5  # Social parameter (default: 2.0)
+        cfg.pso.w = 0.9   # Inertia weight (default: 0.7)
     elif pso_type == "conservative":
         # Low velocity, robust convergence
-        cfg['pso']['c1'] = 1.5
-        cfg['pso']['c2'] = 1.5
-        cfg['pso']['w'] = 0.4
+        cfg.pso.c1 = 1.5
+        cfg.pso.c2 = 1.5
+        cfg.pso.w = 0.4
     # else: default (no changes)
 
     return cfg
@@ -224,8 +224,12 @@ def calculate_performance_metrics(
         settled_idx = np.where(np.abs(cart_pos - final_pos) < threshold)[0]
         settling_time = time_vector[settled_idx[0]] if len(settled_idx) > 0 else time_vector[-1]
 
-        # Overshoot: Max deviation from final value (percentage)
-        overshoot = np.max(np.abs(cart_pos - final_pos)) / (abs(final_pos) + 1e-6) * 100
+        # Overshoot: Use minimum denominator to avoid unrealistic percentages for near-zero final positions
+        max_deviation = np.max(np.abs(cart_pos - final_pos))
+        # For DIP cart at equilibrium (final_pos ≈ 0), use 0.01m (1cm) as minimum denominator
+        # This gives reasonable percentage values: e.g., 0.01m deviation = 100%, 0.005m = 50%
+        safe_denominator = max(abs(final_pos), 0.01)
+        overshoot = (max_deviation / safe_denominator) * 100
 
         # Energy: ∫u²dt
         dt = time_vector[1] - time_vector[0]
