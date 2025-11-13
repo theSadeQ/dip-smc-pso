@@ -18,7 +18,27 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent / "src"))
 from src.config import load_config
 from src.controllers.factory import create_controller
 from src.core.dynamics import DIPDynamics
-from src.core.simulation_runner import SimulationRunner
+from src.core.simulation_runner import run_simulation
+
+
+def calculate_settling_time(t_arr, x_arr):
+    """Calculate settling time from state trajectory."""
+    cart_pos = x_arr[:, 0]
+    final_pos = cart_pos[-1]
+    threshold = 0.02 * abs(final_pos) if abs(final_pos) > 1e-6 else 0.02
+    settled_idx = np.where(np.abs(cart_pos - final_pos) < threshold)[0]
+    return t_arr[settled_idx[0]] if len(settled_idx) > 0 else t_arr[-1]
+
+
+def check_convergence(x_arr):
+    """Check if simulation converged (no NaN/Inf and pendulums stabilized)."""
+    if np.any(np.isnan(x_arr)) or np.any(np.isinf(x_arr)):
+        return False
+    # Check last 10% of trajectory - pendulum angles should be small (<5 deg)
+    final_window = int(len(x_arr) * 0.1)
+    theta1_final = x_arr[-final_window:, 2]
+    theta2_final = x_arr[-final_window:, 3]
+    return np.all(np.abs(theta1_final) < np.deg2rad(5)) and np.all(np.abs(theta2_final) < np.deg2rad(5))
 
 
 def monte_carlo_uncertainty(n_runs=50, uncertainty=0.30, seed=42):
@@ -43,11 +63,17 @@ def monte_carlo_uncertainty(n_runs=50, uncertainty=0.30, seed=42):
         # Run simulation
         controller = create_controller('sta_smc', config)
         dynamics = DIPDynamics(config)
-        runner = SimulationRunner(controller, dynamics, config)
-        result = runner.run()
+        t_arr, x_arr, u_arr = run_simulation(
+            controller=controller,
+            dynamics_model=dynamics,
+            sim_time=config.simulation.duration,
+            dt=config.simulation.dt,
+            initial_state=config.simulation.initial_state
+        )
 
-        if result.converged:
-            settling_times.append(result.settling_time)
+        if check_convergence(x_arr):
+            settling_time = calculate_settling_time(t_arr, x_arr)
+            settling_times.append(settling_time)
             converged_count += 1
 
         if (run + 1) % 10 == 0:
