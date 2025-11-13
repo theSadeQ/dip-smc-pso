@@ -87,7 +87,10 @@
       "type": "stdio",
       "command": "lighthouse-mcp",
       "args": [],
-      "env": {},
+      "env": {
+        "CHROME_PATH": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "PROGRAMFILES": "C:\\Program Files"
+      },
       "description": "Automated Lighthouse accessibility and performance audits"
     },
     "pandas-mcp": {
