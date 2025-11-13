@@ -273,6 +273,7 @@ html_js_files = [
 
     # Core lightweight utilities (load on all pages)
     # 'back-to-top.js',  # Disabled - using Furo's built-in back-to-top button
+    'smooth-scroll-fix.js',  # Smooth scroll for Furo's back-to-top button (Nov 2025 fix)
     'lazy-load.js',
     'dark-mode.js',
     'visual-sitemap.js',
