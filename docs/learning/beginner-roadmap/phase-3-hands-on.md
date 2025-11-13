@@ -1,4 +1,4 @@
-[← Back to Beginner Roadmap](../beginner-roadmap.md)
+[<--Back to Beginner Roadmap](../beginner-roadmap.md)
 
 ---
 
@@ -44,7 +44,7 @@
 
 **Total**: ~25 hours over 4 weeks (~6 hours/week)
 
-**Visual Aids**: [View Phase 3 Diagrams →](phase-3-diagrams.md) (Simulation Workflow, Result Interpretation, Tuning Guide, Analysis)
+**Visual Aids**: [View Phase 3 Diagrams -->](phase-3-diagrams.md) (Simulation Workflow, Result Interpretation, Tuning Guide, Analysis)
 
 ---
 
@@ -362,7 +362,7 @@ Pendulum 1 Angle vs Time
 **Typical behavior**:
 - Initial velocities: 0 (system starts at rest)
 - Transient: Large velocities as controller stabilizes
-- Final: All velocities → 0
+- Final: All velocities --> 0
 
 **Good performance**: Velocities decay smoothly to zero
 
@@ -397,7 +397,7 @@ Control Input (Force) vs Time
 **What to look for**:
 - **Magnitude**: Is force within limits? (saturated = bad)
 - **Smoothness**: Is it smooth or oscillating rapidly?
-- **Settling**: Does force → 0 as system stabilizes?
+- **Settling**: Does force --> 0 as system stabilizes?
 
 **Good control**:
 - Moderate initial force (not saturated)
@@ -612,17 +612,17 @@ python simulate.py --ctrl hybrid_adaptive_sta_smc --plot --save hybrid_results.j
 ```
 
 **No controller is "best" at everything**:
-- Fast settling often → Higher chattering
-- Low chattering often → Slower settling
-- Low energy often → Longer settling
+- Fast settling often --> Higher chattering
+- Low chattering often --> Slower settling
+- Low energy often --> Longer settling
 
 **Choosing a Controller**:
 
 Ask yourself:
-1. Is speed critical? → Hybrid
-2. Is smoothness critical? → STA
-3. Is energy limited? → Adaptive
-4. Is simplicity needed? → Classical
+1. Is speed critical? --> Hybrid
+2. Is smoothness critical? --> STA
+3. Is energy limited? --> Adaptive
+4. Is simplicity needed? --> Classical
 
 ---
 
@@ -771,7 +771,7 @@ python simulate.py --ctrl classical_smc --plot
 - Higher chattering
 - More aggressive control
 
-**Why?** Higher gains → Stronger control response → Faster but noisier.
+**Why?** Higher gains --> Stronger control response --> Faster but noisier.
 
 ---
 
@@ -791,7 +791,7 @@ Run again.
 - Lower chattering
 - System may oscillate longer
 
-**Why?** Lower gains → Weaker control response → Slower, smoother.
+**Why?** Lower gains --> Weaker control response --> Slower, smoother.
 
 ---
 
@@ -1004,7 +1004,7 @@ ValueError: Unknown controller type: 'classical'
 :text-align: center
 
 Watch tutorials on running simulations and analyzing results
-[View →]
+[View -->]
 
 ```
 
@@ -1014,7 +1014,7 @@ Watch tutorials on running simulations and analyzing results
 :text-align: center
 
 Read about comparing controller performance metrics
-[Read →]
+[Read -->]
 
 ```
 
@@ -1024,7 +1024,7 @@ Read about comparing controller performance metrics
 :text-align: center
 
 Test your hands-on simulation skills from Phase 3
-[Take Quiz →]
+[Take Quiz -->]
 
 ```
 
@@ -1037,7 +1037,7 @@ Test your hands-on simulation skills from Phase 3
 
 Quick introduction to SMC theory covering first and second-order SMC with chattering solutions. Free access.
 📊 *Estimated Time:* 60 min | 🎯 *Level:* Intermediate
-[Read →]
+[Read -->]
 
 ```
 
@@ -1050,7 +1050,7 @@ Quick introduction to SMC theory covering first and second-order SMC with chatte
 
 Stanford University lecture notes on basic Lyapunov theory. Mathematical foundation for control stability.
 📊 *Estimated Time:* 45 min | 🎯 *Level:* Technical
-[View →]
+[View -->]
 
 ```
 
@@ -1063,7 +1063,7 @@ Stanford University lecture notes on basic Lyapunov theory. Mathematical foundat
 
 Official SciPy documentation for ODE solvers and integration. Complete API reference with examples.
 📊 *Estimated Time:* Reference | 🎯 *Level:* Reference
-[Browse →]
+[Browse -->]
 
 ```
 
@@ -1076,7 +1076,7 @@ Official SciPy documentation for ODE solvers and integration. Complete API refer
 
 Interactive double inverted pendulum simulation. Adjust parameters, drag pendulum, visualize dynamics.
 📊 *Estimated Time:* 30 min | 🎯 *Level:* Hands-on
-[Try It →]
+[Try It -->]
 
 ```
 ```
@@ -1104,12 +1104,12 @@ You now can:
 ---
 
 **Navigation:**
-- ← [Phase 2: Core Concepts](phase-2-core-concepts.md)
-- **Next**: [Phase 4: Advancing Skills](phase-4-advancing-skills.md) →
-- [← Back to Beginner Roadmap](../beginner-roadmap.md)
+- <--[Phase 2: Core Concepts](phase-2-core-concepts.md)
+- **Next**: [Phase 4: Advancing Skills](phase-4-advancing-skills.md) -->
+- [<--Back to Beginner Roadmap](../beginner-roadmap.md)
 
 ---
 
 ## Navigation
 
-[← Phase 2: Core Concepts](phase-2-core-concepts.md) | [Back to Roadmap](../beginner-roadmap.md) | [Phase 4: Advancing Skills →](phase-4-advancing-skills.md)
+[<--Phase 2: Core Concepts](phase-2-core-concepts.md) | [Back to Roadmap](../beginner-roadmap.md) | [Phase 4: Advancing Skills -->](phase-4-advancing-skills.md)
