@@ -21,10 +21,14 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import sys
 
-# Add src to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
+# Add project root to path (so we can import src package)
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.config import load_config
+
+# Config file path (at project root)
+CONFIG_PATH = PROJECT_ROOT / "config.yaml"
 from src.controllers.factory import create_controller
 from src.core.dynamics import DIPDynamics
 from src.core.simulation_runner import run_simulation
@@ -124,7 +128,7 @@ def parameter_sweep(controller_type='classical_smc',
     if variation_range is None:
         variation_range = np.linspace(0.8, 1.2, 9)  # ±20% in 5% steps
 
-    config = load_config("config.yaml")
+    config = load_config(str(CONFIG_PATH))
 
     # Get nominal parameter value
     nominal_value = getattr(config.physics, param_name)
@@ -289,7 +293,7 @@ def monte_carlo_robustness(controller_type='classical_smc',
     }
     uncertainty = uncertainty_ranges[uncertainty_level]
 
-    config = load_config("config.yaml")
+    config = load_config(str(CONFIG_PATH))
 
     # Parameters to vary (most influential)
     param_names = ['cart_mass', 'link1_length', 'link1_mass',
