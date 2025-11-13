@@ -1575,19 +1575,28 @@ aside.sidebar-secondary a {
     transform: translateY(100px);
 
     /* Transition ONLY relevant properties (prevents blue flash) */
-    transition: opacity 0.3s ease,
-                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.3s ease;
+    /* Reduced from 300ms to 150ms to minimize race condition window */
+    transition: opacity 0.15s ease,
+                transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.15s ease;
+
+    /* GPU acceleration hint for smoother transitions */
+    will-change: opacity, transform;
 
     /* Enhanced shadow - UI-027 specification */
     box-shadow: 0 12px 32px rgba(37, 99, 235, 0.35);
 }
 
-/* FURO INTEGRATION - Show when .show-back-to-top class active */
+/* FURO INTEGRATION + FALLBACK - Show when either class active */
+/* Dual-selector: Works with Furo's html.show-back-to-top OR standalone .show class */
 html.show-back-to-top .back-to-top,
 html.show-back-to-top .btn-scroll-top,
 html.show-back-to-top [id*="back-to-top"],
-html.show-back-to-top [class*="back-to-top"] {
+html.show-back-to-top [class*="back-to-top"],
+.back-to-top.show,
+.btn-scroll-top.show,
+[id*="back-to-top"].show,
+[class*="back-to-top"].show {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -1598,7 +1607,11 @@ html.show-back-to-top [class*="back-to-top"] {
 html.show-back-to-top .back-to-top:hover,
 html.show-back-to-top .btn-scroll-top:hover,
 html.show-back-to-top [id*="back-to-top"]:hover,
-html.show-back-to-top [class*="back-to-top"]:hover {
+html.show-back-to-top [class*="back-to-top"]:hover,
+.back-to-top.show:hover,
+.btn-scroll-top.show:hover,
+[id*="back-to-top"].show:hover,
+[class*="back-to-top"].show:hover {
     transform: translateY(-4px);
     box-shadow:
         0 16px 40px rgba(37, 99, 235, 0.45),    /* Stronger shadow */
@@ -1609,7 +1622,11 @@ html.show-back-to-top [class*="back-to-top"]:hover {
 html.show-back-to-top .back-to-top:focus-visible,
 html.show-back-to-top .btn-scroll-top:focus-visible,
 html.show-back-to-top [id*="back-to-top"]:focus-visible,
-html.show-back-to-top [class*="back-to-top"]:focus-visible {
+html.show-back-to-top [class*="back-to-top"]:focus-visible,
+.back-to-top.show:focus-visible,
+.btn-scroll-top.show:focus-visible,
+[id*="back-to-top"].show:focus-visible,
+[class*="back-to-top"].show:focus-visible {
     outline: 3px solid rgba(255, 255, 255, 0.8);
     outline-offset: 3px;
 }

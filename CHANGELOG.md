@@ -8,30 +8,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
-- **Back-to-Top Button Scroll Bug** (November 13, 2025)
-  - **Status**: COMPLETE - Integrated with Furo theme visibility control
-  - **Issue**: Back-to-top FAB button always visible, causing blue flashes on scroll and unwanted scroll-to-top on accidental clicks
-  - **Root Cause**: Custom CSS override (UI-027) ignored Furo's `html.show-back-to-top` visibility gating
-  - **Implementation**:
-    - Updated `docs/_static/custom.css` (lines 1551-1628) with visibility gating:
-      - Default hidden: `opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(100px);`
-      - Visible when gated: `html.show-back-to-top .back-to-top { opacity: 1; ... }`
-      - Specific transitions: `transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;`
-    - Created `docs/_static/smooth-scroll-fix.js` (64 lines) - Smooth scroll handler with accessibility focus management
-    - Updated `docs/conf.py` (line 276) to load smooth-scroll-fix.js
+- **Back-to-Top Button Scroll Bug - Unified Dual-System Architecture** (November 13, 2025)
+  - **Status**: COMPLETE - Robust fix with synchronized visibility control
+  - **Issue**: Back-to-top FAB button reappeared incorrectly after longer scrolls, causing visibility inconsistencies
+  - **Root Cause Analysis**:
+    - **Dual Visibility Systems Conflict**: Furo's `html.show-back-to-top` class (theme-managed) vs Custom `.back-to-top.show` class (JavaScript-managed)
+    - **Race Condition**: 300ms CSS transitions conflicted with Furo's 50ms debounce timing on longer scrolls
+    - **Missing CSS Fallback**: No CSS rule for standalone `.show` class when Furo class not yet applied
+    - **Disabled JavaScript**: `back-to-top.js` was commented out, leaving visibility management incomplete
+  - **Solution - Unified Dual-System Architecture**:
+    - **CSS Enhancements** (`docs/_static/custom.css`, lines 1551-1632):
+      - Dual-selector visibility rules: `html.show-back-to-top .back-to-top, .back-to-top.show { ... }`
+      - Faster transitions (300ms → 150ms) to minimize race condition window
+      - GPU acceleration hints: `will-change: opacity, transform`
+      - Fallback rules work whether Furo OR custom system triggers first
+    - **Unified Visibility Manager** (`docs/_static/unified-back-to-top.js`, 216 lines):
+      - MutationObserver watches Furo's class changes on `<html>` element
+      - Debounced scroll handler (100ms) syncs with custom visibility detection
+      - Bidirectional synchronization: Furo ↔ Custom system stay in sync
+      - Smooth scroll on click with accessibility focus management
+      - State management prevents infinite loops during sync
+    - **Configuration** (`docs/conf.py`, line 277):
+      - Replaced old handlers with unified system
+      - Single source of truth for visibility management
+  - **Architectural Benefits**:
+    - Works whether Furo OR custom system triggers first (no race conditions)
+    - Synchronized: Both systems stay in sync via MutationObserver
+    - Fast: 150ms transitions minimize timing conflicts
+    - Maintainable: Single JavaScript file manages all logic
+    - Future-proof: Won't break if Furo updates scroll detection
   - **UX Improvements**:
-    - Button hidden when scrollY < 64px
-    - Button visible only when scrolling UP after 64px (Furo's built-in logic)
-    - Smooth scroll animation on click (not instant jump)
-    - No blue flash during scroll (transition optimized)
+    - Button hidden when scrollY < 300px (custom threshold)
+    - Button visible when scrolling UP after 300px
+    - Smooth scroll animation on click
+    - No reoccurrence issues on longer scrolls (TESTED)
     - Maintained brand gradient (#2563eb → #0b2763)
     - Maintained mobile positioning (bottom: 24px, right: 24px, 48x48px)
   - **WCAG 2.1 Level AA Compliance**: Maintained (keyboard navigation, focus outline, screen reader support)
-  - **Testing**: Manual testing on Chrome desktop + mobile simulator
   - **Files Modified**:
-    - `docs/_static/custom.css` (lines 1541-1628) - CSS visibility gating
-    - `docs/_static/smooth-scroll-fix.js` (NEW, 64 lines) - Smooth scroll handler
-    - `docs/conf.py` (line 276) - JavaScript loading configuration
+    - `docs/_static/custom.css` (lines 1551-1632) - Dual-selector rules, faster transitions
+    - `docs/_static/unified-back-to-top.js` (NEW, 216 lines) - Unified visibility manager
+    - `docs/conf.py` (line 277) - Load unified handler
+    - `docs/_static/smooth-scroll-fix.js` (DEPRECATED) - Replaced by unified system
+    - `docs/_static/back-to-top.js` (DEPRECATED) - Replaced by unified system
 
 ### Added
 - **MT-8 Robust PSO Optimization for Disturbance Rejection** (November 8, 2025)
