@@ -209,4 +209,4 @@ graph LR
 
 ---
 
-[← Back to Phase 1](phase-1-foundations.md)
+[<-- Back to Phase 1](phase-1-foundations.md)
