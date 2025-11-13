@@ -112,4 +112,164 @@ Next Steps:
 - Test controllers with actual plant dynamics
 - Update documentation and training materials
 """ return doc
-``` This migration guide provides the tools, procedures, and best practices necessary to successfully transition from older controller factory configurations to the enhanced GitHub Issue #6 implementation, ensuring system stability and backward compatibility throughout the migration process.
+``` ## SimulationRunner API Migration (v2.0+)
+
+### Overview
+
+Starting in v2.0, the `SimulationRunner` class-based API has been deprecated in favor of the functional `run_simulation` API. The new functional API provides better composability, clearer interfaces, and easier testing.
+
+### Migration Pattern
+
+```python
+# example-metadata:
+# runnable: false
+
+# OLD API (SimulationRunner class - DEPRECATED)
+from src.core.simulation_runner import SimulationRunner
+from src.controllers.factory import create_controller
+from src.core.dynamics import DIPDynamics
+from src.config import load_config
+
+config = load_config("config.yaml")
+controller = create_controller('classical_smc', config)
+dynamics = DIPDynamics(config)
+
+# Class-based approach
+runner = SimulationRunner(controller, dynamics, config)
+result = runner.run()
+
+# Access results from result object
+settling_time = result.settling_time
+overshoot = result.max_theta1
+energy = np.sum(result.control_history**2) * config.simulation.dt
+time_vector = result.time_history
+states = result.state_history
+controls = result.control_history
+
+# NEW API (run_simulation function - RECOMMENDED)
+from src.core.simulation_runner import run_simulation  # Note: functional import
+from src.controllers.factory import create_controller
+from src.core.dynamics import DIPDynamics
+from src.config import load_config
+
+config = load_config("config.yaml")
+controller = create_controller('classical_smc', config)
+dynamics = DIPDynamics(config)
+
+# Functional approach
+t_arr, x_arr, u_arr = run_simulation(
+    controller=controller,
+    dynamics_model=dynamics,
+    sim_time=config.simulation.duration,
+    dt=config.simulation.dt,
+    initial_state=config.simulation.initial_state
+)
+
+# Calculate metrics from raw arrays
+def calculate_settling_time(t, x):
+    cart_pos = x[:, 0]
+    final_pos = cart_pos[-1]
+    threshold = 0.02 * abs(final_pos) if abs(final_pos) > 1e-6 else 0.02
+    settled_idx = np.where(np.abs(cart_pos - final_pos) < threshold)[0]
+    return t[settled_idx[0]] if len(settled_idx) > 0 else t[-1]
+
+settling_time = calculate_settling_time(t_arr, x_arr)
+overshoot = np.max(np.abs(x_arr[:, 2]))  # theta1
+energy = np.sum(u_arr**2) * (t_arr[1] - t_arr[0])
+time_vector = t_arr
+states = x_arr
+controls = u_arr
+```
+
+### Key Differences
+
+1. **Function vs Class**: Use `run_simulation()` function instead of `SimulationRunner` class
+2. **Return Values**: Returns tuple `(t_arr, x_arr, u_arr)` instead of result object
+3. **Metrics**: Calculate metrics manually from raw arrays
+4. **Parameters**: Keyword-only parameters extracted from config
+5. **Import Path**: Same module `src.core.simulation_runner`, different symbol
+
+### Helper Functions for Metrics
+
+```python
+def calculate_metrics(t_arr, x_arr, u_arr):
+    """Calculate performance metrics from raw simulation arrays."""
+    # Settling time
+    cart_pos = x_arr[:, 0]
+    final_pos = cart_pos[-1]
+    threshold = 0.02 * abs(final_pos) if abs(final_pos) > 1e-6 else 0.02
+    settled_idx = np.where(np.abs(cart_pos - final_pos) < threshold)[0]
+    settling_time = t_arr[settled_idx[0]] if len(settled_idx) > 0 else t_arr[-1]
+
+    # Overshoot (theta1)
+    max_theta1 = np.max(np.abs(x_arr[:, 2]))
+
+    # Energy
+    dt = t_arr[1] - t_arr[0]
+    energy = np.sum(u_arr**2) * dt
+
+    # Convergence check
+    final_window = int(len(x_arr) * 0.1)
+    theta1_final = x_arr[-final_window:, 2]
+    theta2_final = x_arr[-final_window:, 3]
+    converged = (np.all(np.abs(theta1_final) < np.deg2rad(5)) and
+                 np.all(np.abs(theta2_final) < np.deg2rad(5)))
+
+    return {
+        'settling_time': settling_time,
+        'max_theta1': max_theta1,
+        'energy': energy,
+        'converged': converged
+    }
+
+# Usage
+metrics = calculate_metrics(t_arr, x_arr, u_arr)
+print(f"Settling time: {metrics['settling_time']:.2f}s")
+print(f"Overshoot: {np.rad2deg(metrics['max_theta1']):.2f} deg")
+print(f"Energy: {metrics['energy']:.1f} J")
+```
+
+### Monte Carlo Simulations
+
+```python
+# OLD API
+for run in range(n_runs):
+    runner = SimulationRunner(controller, dynamics, config)
+    result = runner.run()
+    if result.converged:
+        results.append(result.settling_time)
+
+# NEW API
+for run in range(n_runs):
+    t_arr, x_arr, u_arr = run_simulation(
+        controller=controller,
+        dynamics_model=dynamics,
+        sim_time=config.simulation.duration,
+        dt=config.simulation.dt,
+        initial_state=config.simulation.initial_state
+    )
+    metrics = calculate_metrics(t_arr, x_arr, u_arr)
+    if metrics['converged']:
+        results.append(metrics['settling_time'])
+```
+
+### Migration Checklist
+
+- [ ] Replace `from src.core.simulation_runner import SimulationRunner` with `from src.core.simulation_runner import run_simulation`
+- [ ] Change `runner = SimulationRunner(...); result = runner.run()` to `t_arr, x_arr, u_arr = run_simulation(...)`
+- [ ] Update parameter calls: extract `sim_time`, `dt`, `initial_state` from `config`
+- [ ] Replace `result.property` access with metric calculation functions
+- [ ] Update plotting code to use `(t_arr, x_arr, u_arr)` instead of `result` object
+- [ ] Test migrated code with end-to-end simulation
+
+### Benefits of Functional API
+
+1. **Composability**: Easier to chain with other functional operations
+2. **Testing**: Simpler mocking and unit testing
+3. **Clarity**: Explicit parameters make dependencies clear
+4. **Performance**: No object overhead for large batch simulations
+5. **Flexibility**: Easy to customize metrics calculation
+
+---
+
+This migration guide provides the tools, procedures, and best practices necessary to successfully transition from older controller factory configurations to the enhanced GitHub Issue #6 implementation, ensuring system stability and backward compatibility throughout the migration process.
