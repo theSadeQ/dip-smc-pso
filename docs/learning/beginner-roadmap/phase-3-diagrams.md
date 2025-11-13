@@ -149,4 +149,4 @@ flowchart TD
 
 ---
 
-[← Back to Phase 3](phase-3-hands-on.md)
+[<-- Back to Phase 3](phase-3-hands-on.md)
