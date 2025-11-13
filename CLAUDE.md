@@ -245,10 +245,11 @@ Paths 2-4: Advanced (EXISTING)
 **Purpose**: Convert written educational content into podcast-style audio for commute/exercise learning
 
 **Available Series**:
+- **Phase 1**: `docs/learning/notebooklm/phase1/` (11 episodes, ~3.5-4 hours audio, 40 hours learning content)
 - **Phase 2**: `.ai/edu/notebooklm/phase2/` (12 episodes, ~5 hours audio, 30 hours learning content)
 - **Phase 3**: `.ai/edu/notebooklm/phase3/` (8 episodes, ~2.5 hours audio, 25 hours learning content)
 
-**Status**: [OK] Phase 2 complete (November 2025) | Phase 3 complete (November 2025)
+**Status**: [OK] Phase 1 complete (November 2025) | Phase 2 complete (November 2025) | Phase 3 complete (November 2025)
 
 #### What Is NotebookLM?
 
@@ -422,6 +423,34 @@ Starting at the top, we have the setpoint. An arrow flows down...
 
 **Key Difference from Phase 2**: Focuses on hands-on workflows and plot interpretation rather than theory
 
+#### Phase 1 Example (Reference Implementation)
+
+**Location**: `docs/learning/notebooklm/phase1/`
+
+**Structure**:
+- 11 episodes covering Computing Basics, Python, Environment Setup, Physics, Math
+- Episodes 1-2: File systems, command line, Python installation, variables (40-44 min)
+- Episodes 3-6: Control flow, functions, lists/dicts, NumPy/Matplotlib (80-88 min)
+- Episode 7: Virtual environments, Git, DIP-SMC-PSO project setup (22-25 min)
+- Episodes 8-9: Newton's laws, pendulums, double-inverted pendulum system (40-45 min)
+- Episodes 10-11: Functions, trigonometry, derivatives, differential equations (38-42 min)
+
+**Key Features**:
+- Complete beginner focus (ZERO prior knowledge assumed)
+- Multi-platform commands (Windows, Mac, Linux variations)
+- Commands spelled phonetically ("pip install" → "p-i-p space install")
+- Code narration with indentation cues ("Four spaces indent, then type...")
+- Error message pronunciation and diagnosis
+- Physical analogies before formalism (filing cabinet → file systems)
+
+**Key Files**:
+- `phase1_episode01.md` through `phase1_episode11.md`: Individual episodes
+- `README.md`: Complete usage guide for NotebookLM
+
+**Total Output**: ~34,800 words, generates ~3.5-4 hours podcast audio
+
+**Key Difference from Phases 2-3**: Entry point for absolute beginners, covers programming and computing fundamentals before control theory
+
 #### Validation Checklist (Per Episode)
 
 Before finalizing any NotebookLM episode:
@@ -465,6 +494,7 @@ Podcast content is successful when:
 - Retention matches or exceeds reading comprehension
 
 **See Also**:
+- Phase 1 usage guide: `docs/learning/notebooklm/phase1/README.md`
 - Phase 2 usage guide: `.ai/edu/notebooklm/phase2/README.md`
 - Phase 3 usage guide: `.ai/edu/notebooklm/phase3/README.md`
 
