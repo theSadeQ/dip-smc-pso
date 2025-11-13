@@ -1547,19 +1547,30 @@ aside.sidebar-secondary a {
 /* Issue: FAB appears incorrectly during scroll, causes blue flash */
 /* Solution: Completely hide Furo's back-to-top button */
 
-/* HIDE FURO'S BACK-TO-TOP BUTTON COMPLETELY */
+/* HIDE ALL BACK-TO-TOP / SCROLL BUTTONS COMPLETELY */
 .back-to-top,
 .btn-scroll-top,
 [id*="back-to-top"],
 [class*="back-to-top"],
+[class*="scroll-top"],
+[class*="scrolltop"],
+.scroll-to-top,
+button[aria-label*="top"],
+button[title*="top"],
 html.show-back-to-top .back-to-top,
 html.show-back-to-top .btn-scroll-top,
 html.show-back-to-top [id*="back-to-top"],
-html.show-back-to-top [class*="back-to-top"] {
+html.show-back-to-top [class*="back-to-top"],
+html.show-back-to-top [class*="scroll-top"],
+/* Also hide any blue gradient elements that might flash */
+*[style*="linear-gradient"][style*="#2563eb"],
+*[style*="linear-gradient"][style*="37, 99, 235"] {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
+    transition: none !important;
+    animation: none !important;
 }
 
 /* ============================================================================
