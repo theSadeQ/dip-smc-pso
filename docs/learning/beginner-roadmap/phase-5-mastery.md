@@ -1,4 +1,4 @@
-[← Back to Beginner Roadmap](../beginner-roadmap.md)
+[<--Back to Beginner Roadmap](../beginner-roadmap.md)
 
 ---
 
@@ -261,19 +261,19 @@ flowchart TD
 **Quiz**:
 
 1. What's your primary goal with this project?
-   - (A) Apply SMC to a specific problem → Path 1
-   - (B) Understand theory deeply → Path 2
-   - (C) Publish research papers → Path 3
+   - (A) Apply SMC to a specific problem --> Path 1
+   - (B) Understand theory deeply --> Path 2
+   - (C) Publish research papers --> Path 3
 
 2. How much time can you dedicate?
-   - (A) 5-10 hours → Path 1
-   - (B) 30-50 hours → Path 2
-   - (C) 100+ hours → Path 3
+   - (A) 5-10 hours --> Path 1
+   - (B) 30-50 hours --> Path 2
+   - (C) 100+ hours --> Path 3
 
 3. What's your background?
-   - (A) Engineering/hobbyist → Path 1
-   - (B) Master's student/engineer → Path 2
-   - (C) PhD student/researcher → Path 3
+   - (A) Engineering/hobbyist --> Path 1
+   - (B) Master's student/engineer --> Path 2
+   - (C) PhD student/researcher --> Path 3
 
 **Mostly A's**: Start Path 1 (Quick Start)
 **Mostly B's**: Start Path 2 (Theory + Practice)
@@ -504,7 +504,7 @@ If performance is novel:
 
 ### Career Pathways in Control Systems
 
-**1. Academia (PhD → Postdoc → Professor)**
+**1. Academia (PhD --> Postdoc --> Professor)**
 
 Typical path:
 - PhD: 4-6 years researching control theory
@@ -608,7 +608,7 @@ Focus: Specialized expertise, high-value projects
 :text-align: center
 
 Watch tutorials on research workflows and publication
-[View →]
+[View -->]
 
 ```
 
@@ -618,7 +618,7 @@ Watch tutorials on research workflows and publication
 :text-align: center
 
 Read about optimization and controller design
-[Read →]
+[Read -->]
 
 ```
 
@@ -628,7 +628,7 @@ Read about optimization and controller design
 :text-align: center
 
 Test your mastery path understanding from Phase 5
-[Take Quiz →]
+[Take Quiz -->]
 
 ```
 
@@ -641,7 +641,7 @@ Test your mastery path understanding from Phase 5
 
 The Ultimate Guide to Writing a Research Paper covering structure, academic style, and citations.
 📊 *Estimated Time:* 90 min | 🎯 *Level:* Academic
-[Read →]
+[Read -->]
 
 ```
 
@@ -654,7 +654,7 @@ The Ultimate Guide to Writing a Research Paper covering structure, academic styl
 
 Free online LaTeX editor with unlimited projects. Professional equation typesetting for research papers.
 📊 *Estimated Time:* Reference | 🎯 *Level:* Reference
-[Try It →]
+[Try It -->]
 
 ```
 
@@ -667,7 +667,7 @@ Free online LaTeX editor with unlimited projects. Professional equation typesett
 
 GitHub repository showcase for inverted pendulum projects. Explore PID, LQR, MPC implementations.
 📊 *Estimated Time:* 30 min | 🎯 *Level:* Browsing
-[Browse →]
+[Browse -->]
 
 ```
 ```
@@ -770,8 +770,8 @@ If this helped you, consider:
 ---
 
 **Navigation:**
-- ← [Phase 4: Advancing Skills](phase-4-advancing-skills.md)
-- [← Back to Beginner Roadmap](../beginner-roadmap.md)
+- <--[Phase 4: Advancing Skills](phase-4-advancing-skills.md)
+- [<--Back to Beginner Roadmap](../beginner-roadmap.md)
 
 ---
 
@@ -779,6 +779,6 @@ If this helped you, consider:
 
 Completed Phase 5?
 
-- [→ Tutorial 01: Quick Start](../../guides/getting-started.md)
-- [→ API Reference](../../reference/index.md)
-- [← Back to Beginner Roadmap](../beginner-roadmap.md)
+- [--> Tutorial 01: Quick Start](../../guides/tutorials/tutorial-01-first-simulation.md)
+- [--> API Reference](../../reference/index.md)
+- [<--Back to Beginner Roadmap](../beginner-roadmap.md)

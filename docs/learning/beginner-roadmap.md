@@ -1,4 +1,26 @@
+[<-- Back to Learning Index](index.md)
+
+---
+
 # Beginner Roadmap
+
+:::{raw} html
+<nav aria-label="Learning path breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="breadcrumb-link">Documentation Home</a>
+    </li>
+    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+    <li class="breadcrumb-item">
+      <a href="index.html" class="breadcrumb-link">Learning Materials</a>
+    </li>
+    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+    <li class="breadcrumb-item breadcrumb-active" aria-current="page">
+      <span class="breadcrumb-text">Beginner Roadmap</span>
+    </li>
+  </ol>
+</nav>
+:::
 
 ## From Zero Coding Knowledge to Control Theory Expert
 
@@ -38,7 +60,7 @@ gantt
 
 **Visual Navigation**:
 
-[Phase 1: Foundations](beginner-roadmap/phase-1-foundations.md) → [Phase 2: Core Concepts](beginner-roadmap/phase-2-core-concepts.md) → [Phase 3: Hands-On](beginner-roadmap/phase-3-hands-on.md) → [Phase 4: Advancing Skills](beginner-roadmap/phase-4-advancing-skills.md) → [Phase 5: Mastery Path](beginner-roadmap/phase-5-mastery.md)
+[Phase 1: Foundations](beginner-roadmap/phase-1-foundations.md) --> [Phase 2: Core Concepts](beginner-roadmap/phase-2-core-concepts.md) --> [Phase 3: Hands-On](beginner-roadmap/phase-3-hands-on.md) --> [Phase 4: Advancing Skills](beginner-roadmap/phase-4-advancing-skills.md) --> [Phase 5: Mastery Path](beginner-roadmap/phase-5-mastery.md)
 
 ---
 
@@ -166,7 +188,7 @@ A: Only if you already have the prerequisite knowledge. Each phase builds on pre
 A: Each section has remediation paths. If you score less than 70% on the self-assessment, review that section again. Don't skip past confusion!
 
 **Q: What happens after Phase 5?**
-A: You transition to [Tutorial 01](../guides/getting-started.md) for hands-on work, or choose a specialization path (Classical SMC, Adaptive SMC, Hybrid Controllers, Super-Twisting Control, etc.).
+A: You transition to [Tutorial 01](../guides/tutorials/tutorial-01-first-simulation.md) for hands-on work, or choose a specialization path (Classical SMC, Adaptive SMC, Hybrid Controllers, Super-Twisting Control, etc.).
 
 **Q: Do I need special equipment or software?**
 A: Just a laptop with Python 3.9+. Everything else is free and open-source. Windows, Mac, or Linux all work.

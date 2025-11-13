@@ -1,7 +1,3 @@
-<!-- AUTO-GENERATED from .project/ai/edu/ - DO NOT EDIT DIRECTLY -->
-<!-- Source: .project/ai/edu/index.md -->
-<!-- Generated: 2025-11-12 09:00:00 -->
-
 # Educational Materials Index
 
 **Quick Access**: Learning resources for all skill levels
@@ -12,6 +8,24 @@
 Beginner Roadmap <beginner-roadmap>
 ```
 
+:::{raw} html
+<nav aria-label="Documentation breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="breadcrumb-link">Documentation Home</a>
+    </li>
+    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+    <li class="breadcrumb-item">
+      <a href="../guides/INDEX.html" class="breadcrumb-link">Guides</a>
+    </li>
+    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+    <li class="breadcrumb-item breadcrumb-active" aria-current="page">
+      <span class="breadcrumb-text">Learning Materials</span>
+    </li>
+  </ol>
+</nav>
+:::
+
 ---
 
 ## For Complete Beginners
@@ -21,11 +35,11 @@ Beginner Roadmap <beginner-roadmap>
 - **Target**: ZERO coding + ZERO control theory background
 - **Time**: 125-150 hours over 4-6 months
 - **Phases**:
-  - Phase 1: Foundations (Computing, Python, Physics, Math) - ✅ Complete
-  - Phase 2: Core Concepts (Control theory, SMC basics) - ✅ Complete
-  - Phase 3: Hands-On Learning - ✅ Complete
-  - Phase 4: Advancing Skills - ✅ Complete
-  - Phase 5: Mastery Path - ✅ Complete
+  - Phase 1: Foundations (Computing, Python, Physics, Math) - [OK] Complete
+  - Phase 2: Core Concepts (Control theory, SMC basics) - [OK] Complete
+  - Phase 3: Hands-On Learning - [OK] Complete
+  - Phase 4: Advancing Skills - [OK] Complete
+  - Phase 5: Mastery Path - [OK] Complete
 
 **Status**: 100% complete (5,258 lines extracted to modular files)
 
@@ -33,7 +47,7 @@ Beginner Roadmap <beginner-roadmap>
 
 **[Beginner Roadmap](beginner-roadmap.md)** — Start here if you have zero programming or control theory experience.
 
-This comprehensive roadmap guides you from complete beginner to Tutorial 01 completion:
+This detailed roadmap guides you from complete beginner to Tutorial 01 completion:
 - **Phase 1: Foundations** (40 hours) - Computing, Python, physics, math
 - **Phase 2: Core Concepts** (30 hours) - Control theory, SMC, optimization
 - **Phase 3: Hands-On** (25 hours) - Running simulations and experiments
@@ -47,31 +61,31 @@ Each phase is now available as a standalone modular file for easy navigation:
 - [Phase 4: Advancing Skills](beginner-roadmap/phase-4-advancing-skills.md)
 - [Phase 5: Mastery Path](beginner-roadmap/phase-5-mastery.md)
 
-[→ Start the Beginner Roadmap](beginner-roadmap.md)
+[Start the Beginner Roadmap -->](beginner-roadmap.md)
 
 ---
 
 ## Learning Path Progression
 
-```
-┌─────────────────────────────────────┐
-│  Path 0: Complete Beginner (NEW)   │
-│  .ai/edu/beginner-roadmap.md        │
-│  125-150 hours                      │
-└──────────────┬──────────────────────┘
-               ↓
-┌──────────────────────────────────────┐
-│  Path 1: Quick Start (EXISTING)     │
-│  docs/guides/getting-started.md     │
-│  1-2 hours                           │
-└──────────────┬───────────────────────┘
-               ↓
-┌──────────────────────────────────────┐
-│  Paths 2-4: Advanced (EXISTING)     │
-│  Tutorials 02-05, Theory, Research  │
-│  4+ hours per path                   │
-└──────────────────────────────────────┘
-```
+Complete beginners start with Path 0 (beginner roadmap) to build foundational skills, then transition to Path 1 (quick start tutorials) for hands-on work:
+
+### Path 0: Complete Beginner (NEW)
+- **Location**: `.project/ai/edu/beginner-roadmap.md` (source) / `docs/learning/` (published)
+- **Duration**: 125-150 hours
+- **Target**: Zero programming/control background
+- **Outcome**: Ready for Tutorial 01
+
+### Path 1: Quick Start (EXISTING)
+- **Location**: `docs/guides/getting-started.md` --> `docs/guides/tutorials/tutorial-01-first-simulation.md`
+- **Duration**: 1-2 hours
+- **Prerequisites**: Basic Python, command line, physics
+- **Outcome**: First successful simulation
+
+### Paths 2-4: Advanced (EXISTING)
+- **Location**: Tutorials 02-05, Theory guides, Research workflows
+- **Duration**: 4+ hours per path
+- **Prerequisites**: Completed Path 1
+- **Outcome**: Domain expertise in specific controllers/topics
 
 ---
 
@@ -79,31 +93,31 @@ Each phase is now available as a standalone modular file for easy navigation:
 
 | Resource | Description | Status |
 |----------|-------------|--------|
-| [Beginner Roadmap](beginner-roadmap.md) | Zero to Tutorial 01 ready | 50% complete |
-| [README](README.md) | Directory documentation | Complete |
-| Getting Started → | [Jump to main docs](../guides/getting-started.md) | Complete |
-| Tutorials → | [Jump to tutorials](../guides/tutorials/) | Complete |
+| [Beginner Roadmap](beginner-roadmap.md) | Zero to Tutorial 01 ready | [OK] 100% complete |
+| [README](README.md) | Directory documentation | [OK] Complete |
+| Getting Started | [Jump to main docs](../guides/getting-started.md) | [OK] Complete |
+| Tutorials | [Jump to tutorials](../guides/tutorials/) | [OK] Complete |
 
 ---
 
 ## Who Should Use Which Path?
 
 **Use Path 0** if:
-- ❌ Never written code before
-- ❌ Don't know what a terminal is
-- ❌ Physics/math concepts are unfamiliar
-- ❌ "What's Python?" describes your current state
+- [X] Never written code before
+- [X] Don't know what a terminal is
+- [X] Physics/math concepts are unfamiliar
+- [X] "What's Python?" describes your current state
 
 **Skip to Path 1** if:
-- ✅ Can write basic Python (functions, loops, lists)
-- ✅ Comfortable with command line
-- ✅ Understand basic physics (forces, motion)
-- ✅ Math: know what derivatives/functions are
+- [OK] Can write basic Python (functions, loops, lists)
+- [OK] Comfortable with command line
+- [OK] Understand basic physics (forces, motion)
+- [OK] Math: know what derivatives/functions are
 
 **Skip to Paths 2-4** if:
-- ✅ Experienced Python programmer
-- ✅ Control theory background (PID, feedback)
-- ✅ Ready for hands-on project work
+- [OK] Experienced Python programmer
+- [OK] Control theory background (PID, feedback)
+- [OK] Ready for hands-on project work
 
 ---
 
@@ -123,14 +137,14 @@ See [README.md](README.md#contributing) for details.
 ## Future Content
 
 **Coming Soon**:
-- 🚧 Intermediate roadmap (deeper theory, advanced Python)
-- 🚧 Cheatsheets (Python, Git, CLI quick reference)
-- 🚧 Video curriculum (curated playlists)
-- 🚧 Exercise solutions (worked examples)
-- 🚧 FAQ for beginners
+- Intermediate roadmap (deeper theory, advanced Python)
+- Cheatsheets (Python, Git, CLI quick reference)
+- Video curriculum (curated playlists)
+- Exercise solutions (worked examples)
+- FAQ for beginners
 
 ---
 
-**Last Updated**: 2025-10-16
+**Last Updated**: 2025-11-13
 **Maintained By**: Claude Code
 **Repository**: https://github.com/theSadeQ/dip-smc-pso
