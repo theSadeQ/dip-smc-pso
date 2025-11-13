@@ -17,21 +17,36 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent / "src"))
 from src.config import load_config
 from src.controllers.factory import create_controller
 from src.core.dynamics import DIPDynamics
-from src.core.simulation_runner import SimulationRunner
+from src.core.simulation_runner import run_simulation
+
+
+def check_convergence(x_arr):
+    """Check if simulation converged."""
+    if np.any(np.isnan(x_arr)) or np.any(np.isinf(x_arr)):
+        return False
+    final_window = int(len(x_arr) * 0.1)
+    theta1_final = x_arr[-final_window:, 2]
+    theta2_final = x_arr[-final_window:, 3]
+    return np.all(np.abs(theta1_final) < np.deg2rad(5)) and np.all(np.abs(theta2_final) < np.deg2rad(5))
 
 
 def custom_cost_function(gains, config, weights):
     """Multi-objective cost: energy + chattering."""
     controller = create_controller('classical_smc', config, gains=gains)
     dynamics = DIPDynamics(config)
-    runner = SimulationRunner(controller, dynamics, config)
-    result = runner.run()
+    t_arr, x_arr, u_arr = run_simulation(
+        controller=controller,
+        dynamics_model=dynamics,
+        sim_time=config.simulation.duration,
+        dt=config.simulation.dt,
+        initial_state=config.simulation.initial_state
+    )
 
-    if not result.converged:
+    if not check_convergence(x_arr):
         return 9999.0
 
-    energy = np.sum(result.control_history**2) * config.simulation.dt
-    chattering = compute_chattering(result.control_history, config.simulation.dt)
+    energy = np.sum(u_arr**2) * config.simulation.dt
+    chattering = compute_chattering(u_arr, config.simulation.dt)
 
     # Normalize
     norm_energy = 300.0
@@ -93,11 +108,16 @@ def run_exercise():
                 # Evaluate metrics
                 controller = create_controller('classical_smc', config, gains=best_gains)
                 dynamics = DIPDynamics(config)
-                runner = SimulationRunner(controller, dynamics, config)
-                result = runner.run()
+                t_arr, x_arr, u_arr = run_simulation(
+                    controller=controller,
+                    dynamics_model=dynamics,
+                    sim_time=config.simulation.duration,
+                    dt=config.simulation.dt,
+                    initial_state=config.simulation.initial_state
+                )
 
-                energy = np.sum(result.control_history**2) * config.simulation.dt
-                chattering = compute_chattering(result.control_history, config.simulation.dt)
+                energy = np.sum(u_arr**2) * config.simulation.dt
+                chattering = compute_chattering(u_arr, config.simulation.dt)
                 best_metrics = (energy, chattering)
 
         solutions.append({'weights': weights, 'gains': best_gains, 'metrics': best_metrics})

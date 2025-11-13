@@ -18,7 +18,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent / "src"))
 from src.config import load_config
 from src.controllers.factory import create_controller
 from src.core.dynamics import DIPDynamics
-from src.core.simulation_runner import SimulationRunner
+from src.core.simulation_runner import run_simulation
 
 
 def step_disturbance(t, state, magnitude=50.0, start=2.0, duration=0.5):
@@ -26,6 +26,28 @@ def step_disturbance(t, state, magnitude=50.0, start=2.0, duration=0.5):
     if start <= t < (start + duration):
         return np.array([magnitude, 0, 0, 0, 0, 0])
     return np.zeros(6)
+
+
+def calculate_metrics(t_arr, x_arr, u_arr, config):
+    """Calculate performance metrics from raw simulation arrays."""
+    # Extract cart position
+    cart_pos = x_arr[:, 0]
+    theta1 = x_arr[:, 2]  # First pendulum angle
+
+    # Settling time: Time to reach ±2% of final value
+    final_pos = cart_pos[-1]
+    threshold = 0.02 * abs(final_pos) if abs(final_pos) > 1e-6 else 0.02
+    settled_idx = np.where(np.abs(cart_pos - final_pos) < threshold)[0]
+    settling_time = t_arr[settled_idx[0]] if len(settled_idx) > 0 else t_arr[-1]
+
+    # Max theta1 (for overshoot calculation)
+    max_theta1 = np.max(np.abs(theta1))
+
+    # Energy: ∫u²dt
+    dt = t_arr[1] - t_arr[0]
+    energy = np.sum(u_arr**2) * dt
+
+    return settling_time, max_theta1, energy
 
 
 def run_disturbance_test():
@@ -40,23 +62,31 @@ def run_disturbance_test():
     print("\n[1/2] Running nominal simulation...")
     controller_nom = create_controller('adaptive_smc', config)
     dynamics_nom = DIPDynamics(config)
-    runner_nom = SimulationRunner(controller_nom, dynamics_nom, config)
-    result_nom = runner_nom.run()
+    t_nom, x_nom, u_nom = run_simulation(
+        controller=controller_nom,
+        dynamics_model=dynamics_nom,
+        sim_time=config.simulation.duration,
+        dt=config.simulation.dt,
+        initial_state=config.simulation.initial_state
+    )
 
     # Disturbed case (with disturbance)
     print("[2/2] Running disturbed simulation...")
     controller_dis = create_controller('adaptive_smc', config)
     dynamics_dis = DIPDynamics(config)
-    runner_dis = SimulationRunner(controller_dis, dynamics_dis, config)
-    result_dis = runner_dis.run()
+    t_dis, x_dis, u_dis = run_simulation(
+        controller=controller_dis,
+        dynamics_model=dynamics_dis,
+        sim_time=config.simulation.duration,
+        dt=config.simulation.dt,
+        initial_state=config.simulation.initial_state
+    )
 
     # Compute metrics
-    settling_nom = result_nom.settling_time
-    settling_dis = result_dis.settling_time
-    overshoot_nom = np.rad2deg(result_nom.max_theta1)
-    overshoot_dis = np.rad2deg(result_dis.max_theta1)
-    energy_nom = np.sum(result_nom.control_history**2) * config.simulation.dt
-    energy_dis = np.sum(result_dis.control_history**2) * config.simulation.dt
+    settling_nom, max_theta1_nom, energy_nom = calculate_metrics(t_nom, x_nom, u_nom, config)
+    settling_dis, max_theta1_dis, energy_dis = calculate_metrics(t_dis, x_dis, u_dis, config)
+    overshoot_nom = np.rad2deg(max_theta1_nom)
+    overshoot_dis = np.rad2deg(max_theta1_dis)
 
     # Compute degradation
     settling_degradation = (settling_dis - settling_nom) / settling_nom * 100
@@ -82,7 +112,7 @@ def run_disturbance_test():
         print("  Settling Time: FAIR (>20% degradation)")
 
     # Plot
-    plot_comparison(result_nom, result_dis)
+    plot_comparison(t_nom, x_nom, u_nom, t_dis, x_dis, u_dis)
 
     return {
         'nominal': (settling_nom, overshoot_nom, energy_nom),
@@ -91,21 +121,18 @@ def run_disturbance_test():
     }
 
 
-def plot_comparison(result_nom, result_dis):
+def plot_comparison(t_nom, x_nom, u_nom, t_dis, x_dis, u_dis):
     """Plot nominal vs disturbed response."""
     fig, axes = plt.subplots(3, 1, figsize=(12, 10), sharex=True)
-
-    t_nom = result_nom.time_history
-    t_dis = result_dis.time_history
 
     # Disturbance period
     t_start = 2.0
     t_end = 2.5
 
     # Plot 1: Theta1
-    axes[0].plot(t_nom, np.rad2deg(result_nom.state_history[:, 2]),
+    axes[0].plot(t_nom, np.rad2deg(x_nom[:, 2]),
                  'b-', linewidth=2, label='Nominal')
-    axes[0].plot(t_dis, np.rad2deg(result_dis.state_history[:, 2]),
+    axes[0].plot(t_dis, np.rad2deg(x_dis[:, 2]),
                  'r--', linewidth=2, label='Disturbed (50N)')
     axes[0].axvspan(t_start, t_end, alpha=0.2, color='orange', label='Disturbance Period')
     axes[0].axhline(0, color='k', linestyle=':', linewidth=1)
@@ -116,16 +143,16 @@ def plot_comparison(result_nom, result_dis):
                      fontsize=14, fontweight='bold')
 
     # Plot 2: Cart Position
-    axes[1].plot(t_nom, result_nom.state_history[:, 0], 'b-', linewidth=2)
-    axes[1].plot(t_dis, result_dis.state_history[:, 0], 'r--', linewidth=2)
+    axes[1].plot(t_nom, x_nom[:, 0], 'b-', linewidth=2)
+    axes[1].plot(t_dis, x_dis[:, 0], 'r--', linewidth=2)
     axes[1].axvspan(t_start, t_end, alpha=0.2, color='orange')
     axes[1].axhline(0, color='k', linestyle=':', linewidth=1)
     axes[1].set_ylabel('Cart Position (m)', fontsize=12, fontweight='bold')
     axes[1].grid(True, alpha=0.3)
 
     # Plot 3: Control Input
-    axes[2].plot(t_nom, result_nom.control_history, 'b-', linewidth=2)
-    axes[2].plot(t_dis, result_dis.control_history, 'r--', linewidth=2)
+    axes[2].plot(t_nom, u_nom, 'b-', linewidth=2)
+    axes[2].plot(t_dis, u_dis, 'r--', linewidth=2)
     axes[2].axvspan(t_start, t_end, alpha=0.2, color='orange')
     axes[2].axhline(0, color='k', linestyle=':', linewidth=1)
     axes[2].set_ylabel('Control Input (N)', fontsize=12, fontweight='bold')
