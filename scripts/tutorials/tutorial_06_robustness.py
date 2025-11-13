@@ -27,7 +27,37 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 from src.config import load_config
 from src.controllers.factory import create_controller
 from src.core.dynamics import DIPDynamics
-from src.core.simulation_runner import SimulationRunner
+from src.core.simulation_runner import run_simulation
+
+
+# ============================================================================
+# HELPER CLASS: Simulation Result Wrapper
+# ============================================================================
+
+class SimulationResult:
+    """Wrapper for simulation results with calculated metrics."""
+    def __init__(self, t_arr, x_arr, u_arr):
+        self.time = t_arr
+        self.state_history = x_arr
+        self.control_history = u_arr
+
+        # Calculate metrics
+        # State order: [x, x_dot, theta1, theta1_dot, theta2, theta2_dot]
+        theta1 = x_arr[:, 2]
+        self.max_theta1 = np.max(np.abs(theta1))
+
+        # Simple settling time: when theta1 stays within 2% of zero
+        threshold = 0.02
+        settled = np.abs(theta1) < threshold
+        settled_idx = np.where(settled)[0]
+        self.settling_time = t_arr[settled_idx[0]] if len(settled_idx) > 0 else t_arr[-1]
+
+        # Check convergence: no NaN/Inf and final state close to equilibrium
+        self.converged = (
+            not np.any(np.isnan(x_arr)) and
+            not np.any(np.isinf(x_arr)) and
+            np.abs(theta1[-1]) < 0.1
+        )
 
 
 # ============================================================================
@@ -120,8 +150,14 @@ def parameter_sweep(controller_type='classical_smc',
         dynamics = DIPDynamics(config.physics)
 
         # Run simulation
-        runner = SimulationRunner(controller, dynamics, config)
-        result = runner.run()
+        t_arr, x_arr, u_arr = run_simulation(
+            controller=controller,
+            dynamics_model=dynamics,
+            sim_time=config.simulation.duration,
+            dt=config.simulation.dt,
+            initial_state=config.simulation.initial_state
+        )
+        result = SimulationResult(t_arr, x_arr, u_arr)
 
         # Record metrics
         settling_times.append(result.settling_time)
@@ -289,8 +325,14 @@ def monte_carlo_robustness(controller_type='classical_smc',
         dynamics = DIPDynamics(config.physics)
 
         # Run simulation
-        runner = SimulationRunner(controller, dynamics, config)
-        result = runner.run()
+        t_arr, x_arr, u_arr = run_simulation(
+            controller=controller,
+            dynamics_model=dynamics,
+            sim_time=config.simulation.duration,
+            dt=config.simulation.dt,
+            initial_state=config.simulation.initial_state
+        )
+        result = SimulationResult(t_arr, x_arr, u_arr)
 
         # Check convergence
         if result.converged:
