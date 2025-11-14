@@ -223,6 +223,36 @@ Control systems are literally everywhere once you start noticing them. They're o
 
 ---
 
+## Want More Examples?
+
+If you're hungry for more examples of the four-component pattern in action, check out our **[Supplementary Examples Guide](phase2_episode01_supplementary_examples.md)**, which explores **20 mechanical control engineering examples** ranging from everyday devices to aerospace applications:
+
+**TIER 1 - Beginner (Everyday)**:
+- Refrigerator temperature control
+- Water tank level regulation
+- **Stick balancing on hand** (direct inverted pendulum analogy!)
+- Bicycle balancing
+
+**TIER 2 - Intermediate (Industrial)**:
+- Elevator positioning, Robot arm joints, Satellite antenna tracking
+- **Gantry crane load positioning** (EXACT match: cart + pendulum structure!)
+- Ball-and-beam balancing, Magnetic levitation
+
+**TIER 3 - Advanced (Robotics)**:
+- **Segway self-balancing** (mobile inverted pendulum!)
+- Quadcopter altitude/attitude, Missile guidance
+- Humanoid robot balance, Unicycle robot
+
+**TIER 4 - Aerospace (Specialized)**:
+- Rocket thrust vector control (landing), Telescope tracking
+- Robotic surgery arm, Spacecraft attitude control, Active vehicle suspension
+
+**Each example identifies**: Setpoint, actual state, error, control action, pedagogical value, and direct connection to the double-inverted pendulum project.
+
+The supplementary guide is a **written-only reference** (not podcast-optimized) - perfect for deep study, browsing interesting examples, and reinforcing the four-component pattern through diverse applications.
+
+---
+
 ## Key Takeaways
 
 Before moving to the next episode, let's recap what we've learned:
