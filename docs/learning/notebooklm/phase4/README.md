@@ -570,6 +570,102 @@ After completing all 13 episodes, learners should be able to:
 
 ---
 
+## What Comes After Phase 4?
+
+### Series Complete at Phase 4 (By Design)
+
+You may have noticed this NotebookLM podcast series ends at Phase 4 with 44 episodes total. This is intentional, and here's why:
+
+**Phase 5 (Mastery Path) is Fundamentally Different**
+
+Unlike Phases 1-4 which provide sequential, linear learning, Phase 5 is an interactive "choose-your-own-adventure" navigation hub. It features:
+
+- **3 Branching Paths**: You must choose ONE based on your goals:
+  - Path 1: Practitioner (5-10 hours) - Focus on simulations and experiments
+  - Path 2: Researcher (30-50 hours) - Theory + practice + research methods
+  - Path 3: Expert (100+ hours) - Novel controllers, rigorous proofs, publications
+
+- **Visual Decision Trees**: Flowcharts showing which path suits your goals and timeline
+
+- **Interactive Elements**: 11+ decision points, self-assessment quizzes, path selection tools
+
+- **Reference Material**: Career pathways, textbook recommendations, conference listings
+
+- **Meta-Learning Content**: Pointers to tutorials and resources rather than direct teaching
+
+**Why This Doesn't Suit Podcast Format**
+
+Podcasts excel at linear, sequential learning - exactly what Phases 1-4 provided. But Phase 5 requires:
+- Visual navigation (flowcharts can't be conveyed aurally)
+- Interactive choice-making (pause → decide → resume 11+ times)
+- External resource exploration (opening browser links while listening)
+- Branching paths (2/3 of content would be irrelevant to each listener)
+
+**The podcast format would harm Phase 5's effectiveness, not enhance it.**
+
+### Where to Find Phase 5
+
+Phase 5 is available as comprehensive written documentation:
+
+📄 **[Phase 5: Mastery Path](../../beginner-roadmap/phase-5-mastery.md)**
+
+This document provides:
+- Interactive path selection guidance
+- Detailed roadmap for each of the 3 paths
+- Tutorial connections (Tutorial 01-05)
+- PSO optimization workflows
+- Custom controller development guide (9-step process with code templates)
+- Research and publication pathways
+- Career guidance and professional resources
+
+### How to Use Phase 5
+
+After completing Phase 4 Episode 13:
+
+1. **Read Phase 5 documentation** (30-45 minutes)
+   - Understand the 3 paths available
+   - Review prerequisites for each path
+   - Consider your goals and time availability
+
+2. **Take the path selection quiz** (self-assessment in Phase 5 doc)
+   - Answer 3 questions about your goals
+   - Get personalized path recommendation
+   - Refine based on your situation
+
+3. **Choose your path**
+   - Path 1: Quick practitioner (if time-constrained, project-focused)
+   - Path 2: Theory + practice (if pursuing research, grad school)
+   - Path 3: Expert (if PhD track, cutting-edge contributions)
+
+4. **Follow your customized roadmap**
+   - Each path has specific tutorial sequences
+   - Theory deep dives tailored to your level
+   - Research workflows matched to your goals
+
+5. **Revisit and adjust as needed**
+   - Paths are not rigid - you can switch
+   - Explore content from other paths as interests evolve
+
+### Your Learning Journey Summary
+
+**Completed (Podcasted)**:
+- Phase 1: Foundations (11 episodes, 40 hours)
+- Phase 2: Core Concepts (12 episodes, 30 hours)
+- Phase 3: Hands-On Learning (8 episodes, 25 hours)
+- Phase 4: Advancing Skills (13 episodes, 30 hours)
+- **Total**: 44 episodes, ~40 hours audio, 125 hours learning content
+
+**Next (Written Documentation)**:
+- Phase 5: Mastery Path (variable duration based on chosen path)
+- Format: Interactive written guide with branching paths
+- Why written: Incompatible with linear podcast format
+
+**You now have a complete learning system:**
+- Phases 1-4 (podcast): Sequential foundations → developer skills
+- Phase 5 (written): Choose-your-own-adventure → specialization
+
+---
+
 ## Frequently Asked Questions
 
 **Q: Can I skip Phases 1-3 and start directly with Phase 4?**
