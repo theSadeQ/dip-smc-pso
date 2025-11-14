@@ -244,13 +244,17 @@ Paths 2-4: Advanced (EXISTING)
 
 **Purpose**: Convert written educational content into podcast-style audio for commute/exercise learning
 
-**Available Series**:
-- **Phase 1**: `docs/learning/notebooklm/phase1/` (11 episodes, ~3.5-4 hours audio, 40 hours learning content)
-- **Phase 2**: `.ai/edu/notebooklm/phase2/` (12 episodes, ~5 hours audio, 30 hours learning content)
-- **Phase 3**: `.ai/edu/notebooklm/phase3/` (8 episodes, ~2.5 hours audio, 25 hours learning content)
-- **Phase 4**: `docs/learning/notebooklm/phase4/` (13 episodes, ~12-15 hours audio, 30 hours learning content)
+**Available Series** (Phases 1-4):
+- **Phase 1 - Foundations**: `docs/learning/notebooklm/phase1/` (11 episodes, ~3.5-4 hours audio, 40 hours learning content)
+- **Phase 2 - Core Concepts**: `.ai/edu/notebooklm/phase2/` (12 episodes, ~5 hours audio, 30 hours learning content)
+- **Phase 3 - Hands-On Learning**: `.ai/edu/notebooklm/phase3/` (8 episodes, ~2.5 hours audio, 25 hours learning content)
+- **Phase 4 - Advancing Skills**: `docs/learning/notebooklm/phase4/` (13 episodes, ~12-15 hours audio, 30 hours learning content)
 
-**Status**: [OK] All phases complete (November 2025)
+**Series Totals**: 44 episodes, ~40 hours audio, 125 hours learning content
+
+**Status**: [OK] Series complete at Phase 4 (November 2025)
+
+**Phase 5 Note**: Phase 5 (Mastery Path) is NOT included in the podcast series because it uses a branching "choose-your-own-adventure" structure with interactive decision trees, which is incompatible with linear podcast format. Phase 5 remains available as written documentation: `.ai/edu/beginner-roadmap.md` (Phase 5 section).
 
 #### What Is NotebookLM?
 
