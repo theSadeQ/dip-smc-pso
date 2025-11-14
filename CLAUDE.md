@@ -248,8 +248,9 @@ Paths 2-4: Advanced (EXISTING)
 - **Phase 1**: `docs/learning/notebooklm/phase1/` (11 episodes, ~3.5-4 hours audio, 40 hours learning content)
 - **Phase 2**: `.ai/edu/notebooklm/phase2/` (12 episodes, ~5 hours audio, 30 hours learning content)
 - **Phase 3**: `.ai/edu/notebooklm/phase3/` (8 episodes, ~2.5 hours audio, 25 hours learning content)
+- **Phase 4**: `docs/learning/notebooklm/phase4/` (13 episodes, ~12-15 hours audio, 30 hours learning content)
 
-**Status**: [OK] Phase 1 complete (November 2025) | Phase 2 complete (November 2025) | Phase 3 complete (November 2025)
+**Status**: [OK] All phases complete (November 2025)
 
 #### What Is NotebookLM?
 
@@ -451,6 +452,32 @@ Starting at the top, we have the setpoint. An arrow flows down...
 
 **Key Difference from Phases 2-3**: Entry point for absolute beginners, covers programming and computing fundamentals before control theory
 
+#### Phase 4 Example (Reference Implementation)
+
+**Location**: `docs/learning/notebooklm/phase4/`
+
+**Structure**:
+- 13 episodes covering Advanced Python, Source Code Reading, Advanced Math
+- Episodes 1-5: OOP, inheritance, decorators, type hints, testing (12 hours → ~6 hours audio)
+- Episodes 6-10: Codebase navigation, Classical SMC line-by-line walkthrough, controller comparison (8 hours → ~4 hours audio)
+- Episodes 11-13: Lagrangian mechanics, vector calculus, Lyapunov stability, phase space (10 hours → ~5 hours audio)
+
+**Key Features**:
+- Mindset shift: user → developer (transparent box, code literacy)
+- Python OOP: Abstract base classes, inheritance, decorators, type hints verbalized
+- Code walkthroughs: Line-by-line narration of classical_smc.py with phonetic syntax
+- Advanced math: Lagrangian L = T - V, mass matrix M(θ), Lyapunov V̇ < 0
+- Prerequisites: Phases 1-3 completion (60 hours) required
+- TTS optimization: `__init__` → "dunder init", θ̇ → "theta-dot", ∇V → "del V"
+
+**Key Files**:
+- `phase4_episode01.md` through `phase4_episode13.md`: Individual episodes
+- `README.md`: Complete usage guide for NotebookLM with Phase 4-specific instructions
+
+**Total Output**: ~29,000 words, generates ~12-15 hours podcast audio
+
+**Key Difference from Phases 1-3**: Advanced learners only, opens black box to understand controller internals, mathematical rigor
+
 #### Validation Checklist (Per Episode)
 
 Before finalizing any NotebookLM episode:
@@ -497,6 +524,7 @@ Podcast content is successful when:
 - Phase 1 usage guide: `docs/learning/notebooklm/phase1/README.md`
 - Phase 2 usage guide: `.ai/edu/notebooklm/phase2/README.md`
 - Phase 3 usage guide: `.ai/edu/notebooklm/phase3/README.md`
+- Phase 4 usage guide: `docs/learning/notebooklm/phase4/README.md`
 
 ------
 
