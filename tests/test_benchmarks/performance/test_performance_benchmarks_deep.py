@@ -14,7 +14,7 @@ import gc
 try:
     import psutil
 except ImportError:
-    from psutil_fallback import *  # noqa: F403 - wildcard import for test convenience
+    from tests.utils.psutil_fallback import *  # noqa: F403 - wildcard import for test convenience
 import os
 
 
