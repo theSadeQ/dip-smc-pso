@@ -67,33 +67,9 @@ python .project/dev_tools/roadmap_tracker.py
 
 ### Multi-Account Recovery (NEW - Nov 2025)
 
-**Purpose:** Resume work when switching Claude Code accounts or starting new sessions
+**Quick Start**: Windows: `.project\dev_tools\quick_recovery.bat` | Linux/Mac: `bash .project/dev_tools/recover_project.sh && python .project/dev_tools/analyze_checkpoints.py`
 
-**Quick Start:**
-```bash
-# Windows: Double-click this file
-.project\dev_tools\quick_recovery.bat
-
-# Linux/Mac: Run recovery + checkpoint analysis
-bash .project/dev_tools/recover_project.sh && python .project/dev_tools/analyze_checkpoints.py
-```
-
-**What it does:**
-1. Shows recent commits and project status
-2. Detects incomplete multi-agent work
-3. Categorizes real vs test checkpoints
-4. Provides resumption recommendations
-
-**Then ask Claude:**
-> "What should I resume based on the recovery output?"
-
-**Detailed Guide:** See `.project/dev_tools/MULTI_ACCOUNT_RECOVERY_GUIDE.md` for complete workflow
-
-**Tools:**
-- **quick_recovery.bat** - One-click recovery for Windows
-- **analyze_checkpoints.py** - Categorize incomplete work (real vs test)
-- **cleanup_test_checkpoints.py** - Clean up test checkpoint artifacts
-- **MULTI_ACCOUNT_RECOVERY_GUIDE.md** - Complete recovery workflow documentation
+**See**: `.project/dev_tools/MULTI_ACCOUNT_RECOVERY_GUIDE.md` for complete workflow
 
 ### Key Tools
 1. **Project State Manager** (`.project/dev_tools/project_state_manager.py`) - Tracks phase, roadmap progress, completed tasks
@@ -142,52 +118,14 @@ A Python framework for simulating, controlling, and analyzing a double‑inverte
 
 ```bash
 src/
-├─ controllers/
-│  ├─ classic_smc.py
-│  ├─ sta_smc.py
-│  ├─ adaptive_smc.py
-│  ├─ hybrid_adaptive_sta_smc.py
-│  ├─ swing_up_smc.py
-│  ├─ mpc_controller.py
-│  └─ factory.py
-├─ core/
-│  ├─ dynamics.py
-│  ├─ dynamics_full.py
-│  ├─ simulation_runner.py
-│  ├─ simulation_context.py
-│  └─ vector_sim.py
-├─ plant/
-│  ├─ models/
-│  │  ├─ simplified/
-│  │  ├─ full/
-│  │  └─ lowrank/
-│  ├─ configurations/
-│  └─ core/
-├─ optimizer/
-│  └─ pso_optimizer.py
-├─ utils/
-│  ├─ validation/
-│  ├─ control/
-│  ├─ monitoring/
-│  ├─ visualization/
-│  ├─ analysis/
-│  ├─ types/
-│  ├─ reproducibility/
-│  └─ development/
-└─ hil/
-   ├─ plant_server.py
-   └─ controller_client.py
-```
+├─ controllers/     # SMC variants (classical, STA, adaptive, hybrid, swing-up, MPC), factory
+├─ core/           # Dynamics, simulation runner, context, vectorized simulators
+├─ plant/          # Models (simplified/full/lowrank), configurations, core interfaces
+├─ optimizer/      # PSO tuner
+├─ utils/          # Validation, control primitives, monitoring, visualization, analysis
+└─ hil/            # Plant server, controller client
 
-**Top‑level**
-
-```bash
-simulate.py        # CLI entry
-streamlit_app.py   # Web UI
-config.yaml        # Main configuration
-requirements.txt   # Pinned deps / ranges
-run_tests.py       # Test runner helper
-README.md, CHANGELOG.md
+Top-level: simulate.py, streamlit_app.py, config.yaml, requirements.txt
 ```
 
 ------
@@ -242,293 +180,13 @@ Paths 2-4: Advanced (EXISTING)
 
 ### 6.4 NotebookLM Podcast Generation (NEW - Nov 2025)
 
-**Purpose**: Convert written educational content into podcast-style audio for commute/exercise learning
+**Purpose**: Convert educational content into podcast-style audio for commute/exercise learning
 
-**Available Series** (Phases 1-4):
-- **Phase 1 - Foundations**: `docs/learning/notebooklm/phase1/` (11 episodes, ~3.5-4 hours audio, 40 hours learning content)
-- **Phase 2 - Core Concepts**: `.ai/edu/notebooklm/phase2/` (12 episodes, ~5 hours audio, 30 hours learning content)
-- **Phase 3 - Hands-On Learning**: `.ai/edu/notebooklm/phase3/` (8 episodes, ~2.5 hours audio, 25 hours learning content)
-- **Phase 4 - Advancing Skills**: `docs/learning/notebooklm/phase4/` (13 episodes, ~12-15 hours audio, 30 hours learning content)
-
-**Series Totals**: 44 episodes, ~40 hours audio, 125 hours learning content
+**Available Series**: 44 episodes (Phases 1-4), ~40 hours audio, 125 hours learning content
 
 **Status**: [OK] Series complete at Phase 4 (November 2025)
 
-**Phase 5 Note**: Phase 5 (Mastery Path) is NOT included in the podcast series because it uses a branching "choose-your-own-adventure" structure with interactive decision trees, which is incompatible with linear podcast format. Phase 5 remains available as written documentation: `.ai/edu/beginner-roadmap.md` (Phase 5 section).
-
-#### What Is NotebookLM?
-
-Google's AI-powered tool that generates podcast-style audio discussions from documents:
-- Upload markdown files to [notebooklm.google.com](https://notebooklm.google.com)
-- Click "Generate Audio Overview" button
-- AI creates 20-30 minute conversational podcast with two hosts
-- Technical terms pronounced correctly via TTS optimization
-
-#### Quick Start (for Claude)
-
-When user requests podcast generation for educational content:
-
-**1. Identify Source Content**: Which phase/topic needs podcast optimization?
-**2. Create Episode Structure**: Break content into 2-2.5 hour chunks (20-30 min audio each)
-**3. Apply TTS Optimization**: Use enhanced narrative style + verbalized equations
-**4. Generate Episodes**: Create separate markdown files per episode
-**5. Create README**: Usage instructions for NotebookLM upload
-
-#### TTS Optimization Requirements (MANDATORY)
-
-**Mathematical Expressions - Verbalized Format**:
-```
-NOT: u = -K·sign(s)
-BUT: u equals negative K times sign of s
-
-NOT: s = k₁·θ₁ + k₂·θ̇₁
-BUT: s equals k-one times theta-one plus k-two times theta-one-dot
-```
-
-**Greek Letters - Spelled Out**:
-```
-θ -> "theta"
-ε -> "epsilon"
-λ -> "lambda"
-Δ -> "delta"
-ω -> "omega"
-```
-
-**Mathematical Notation - Verbal Equivalents**:
-```
-θ̇ -> "theta-dot" (time derivative)
-θ̂ -> "theta-hat" (estimate)
-∫ -> "integral of"
-∂ -> "partial derivative of"
-≈ -> "approximately equals"
-≤ -> "less than or equal to"
-```
-
-**Code Examples - Narrated Format**:
-```markdown
-Let's see this concept in action with a Python simulation.
-First, we import NumPy for numerical operations...
-
-[CODE BLOCK]
-import numpy as np
-...
-[/CODE BLOCK]
-
-Walking through the main loop: For each time step,
-we calculate the error as setpoint minus current position...
-```
-
-**Diagrams - Verbal Descriptions**:
-```markdown
-Picture a flowchart with four boxes connected by arrows.
-Starting at the top, we have the setpoint. An arrow flows down...
-```
-
-#### Enhanced Narrative Style Guidelines
-
-**Conversational Framing**:
-- Start with relatable scenario or question
-- Use "imagine", "picture this", "let's think about"
-- Progressive revelation (build complexity gradually)
-
-**Analogy-First Approach**:
-- Begin major concepts with physical analogies
-- Transition to technical explanation
-- Connect back to analogy for reinforcement
-
-**Retention Techniques**:
-- Recap every 5-7 minutes of content
-- Callbacks to previous episodes
-- "Pause and reflect" sections
-- Preview of next episode
-
-**Question-Driven Narrative**:
-- Pose questions learners would ask
-- Answer with examples first, then formalism
-- "Now you might be wondering..." transitions
-
-#### Episode Structure Template
-
-```markdown
-# Episode N: [Catchy Title]
-
-**Duration**: 20-30 minutes | **Learning Time**: 2-2.5 hours | **Difficulty**: [Level]
-
-## Opening Hook
-[Relatable scenario that introduces the concept]
-
-## What You'll Discover
-[Bullet list of key takeaways]
-
-## [Section 1]: [Main Content]
-[Enhanced narrative with analogies, examples, TTS-optimized equations]
-
-## [Section 2]: [Code/Visualization]
-[Narrated walkthrough with verbal descriptions]
-
-## Key Takeaways
-[Numbered recap of essential insights]
-
-## Pronunciation Guide
-[Technical terms with phonetic spellings]
-
-## What's Next
-[Preview of next episode]
-
-## Pause and Reflect
-[Questions to consider before continuing]
-
----
-
-**Episode N of M** | [Phase/Topic]
-
-**Previous**: [Link] | **Next**: [Link]
-```
-
-#### Phase 2 Example (Reference Implementation)
-
-**Location**: `.ai/edu/notebooklm/phase2/`
-
-**Structure**:
-- 12 episodes covering Control Theory, SMC, Optimization, DIP System
-- Episodes 1-2: Control theory fundamentals
-- Episodes 3-4: PID control and limitations
-- Episodes 5-7: Sliding Mode Control trilogy
-- Episodes 8-9: Optimization and PSO
-- Episodes 10-12: DIP system understanding
-
-**Key Files**:
-- `phase2_episode01.md` through `phase2_episode12.md`: Individual episodes
-- `README.md`: Complete usage guide for NotebookLM
-
-**Total Output**: ~150 KB markdown, generates ~5 hours podcast audio
-
-#### Phase 3 Example (Reference Implementation)
-
-**Location**: `.ai/edu/notebooklm/phase3/`
-
-**Structure**:
-- 8 episodes covering Hands-On Learning, Simulations, Controller Comparison
-- Episodes 1-2: Environment setup, first simulation, plot interpretation
-- Episodes 3-4: Controller comparison, performance metrics
-- Episodes 5-6: Config modification, PSO optimization
-- Episodes 7-8: Troubleshooting, phase wrap-up
-
-**Key Features**:
-- Rich verbal descriptions of 6 simulation plots (multi-pass: sketch → story → meaning)
-- Commands spelled out phonetically ("dash dash ctrl classical underscore s-m-c")
-- YAML hierarchy verbalized for configuration edits
-- "Tour guide + sports commentary" style for live plot narration
-
-**Key Files**:
-- `phase3_episode01.md` through `phase3_episode08.md`: Individual episodes
-- `README.md`: Complete usage guide for NotebookLM
-
-**Total Output**: ~85 KB markdown, generates ~2.5 hours podcast audio
-
-**Key Difference from Phase 2**: Focuses on hands-on workflows and plot interpretation rather than theory
-
-#### Phase 1 Example (Reference Implementation)
-
-**Location**: `docs/learning/notebooklm/phase1/`
-
-**Structure**:
-- 11 episodes covering Computing Basics, Python, Environment Setup, Physics, Math
-- Episodes 1-2: File systems, command line, Python installation, variables (40-44 min)
-- Episodes 3-6: Control flow, functions, lists/dicts, NumPy/Matplotlib (80-88 min)
-- Episode 7: Virtual environments, Git, DIP-SMC-PSO project setup (22-25 min)
-- Episodes 8-9: Newton's laws, pendulums, double-inverted pendulum system (40-45 min)
-- Episodes 10-11: Functions, trigonometry, derivatives, differential equations (38-42 min)
-
-**Key Features**:
-- Complete beginner focus (ZERO prior knowledge assumed)
-- Multi-platform commands (Windows, Mac, Linux variations)
-- Commands spelled phonetically ("pip install" → "p-i-p space install")
-- Code narration with indentation cues ("Four spaces indent, then type...")
-- Error message pronunciation and diagnosis
-- Physical analogies before formalism (filing cabinet → file systems)
-
-**Key Files**:
-- `phase1_episode01.md` through `phase1_episode11.md`: Individual episodes
-- `README.md`: Complete usage guide for NotebookLM
-
-**Total Output**: ~34,800 words, generates ~3.5-4 hours podcast audio
-
-**Key Difference from Phases 2-3**: Entry point for absolute beginners, covers programming and computing fundamentals before control theory
-
-#### Phase 4 Example (Reference Implementation)
-
-**Location**: `docs/learning/notebooklm/phase4/`
-
-**Structure**:
-- 13 episodes covering Advanced Python, Source Code Reading, Advanced Math
-- Episodes 1-5: OOP, inheritance, decorators, type hints, testing (12 hours → ~6 hours audio)
-- Episodes 6-10: Codebase navigation, Classical SMC line-by-line walkthrough, controller comparison (8 hours → ~4 hours audio)
-- Episodes 11-13: Lagrangian mechanics, vector calculus, Lyapunov stability, phase space (10 hours → ~5 hours audio)
-
-**Key Features**:
-- Mindset shift: user → developer (transparent box, code literacy)
-- Python OOP: Abstract base classes, inheritance, decorators, type hints verbalized
-- Code walkthroughs: Line-by-line narration of classical_smc.py with phonetic syntax
-- Advanced math: Lagrangian L = T - V, mass matrix M(θ), Lyapunov V̇ < 0
-- Prerequisites: Phases 1-3 completion (60 hours) required
-- TTS optimization: `__init__` → "dunder init", θ̇ → "theta-dot", ∇V → "del V"
-
-**Key Files**:
-- `phase4_episode01.md` through `phase4_episode13.md`: Individual episodes
-- `README.md`: Complete usage guide for NotebookLM with Phase 4-specific instructions
-
-**Total Output**: ~29,000 words, generates ~12-15 hours podcast audio
-
-**Key Difference from Phases 1-3**: Advanced learners only, opens black box to understand controller internals, mathematical rigor
-
-#### Validation Checklist (Per Episode)
-
-Before finalizing any NotebookLM episode:
-
-- [ ] **Length**: 2,500-3,500 words (~130-150 lines)
-- [ ] **TTS Optimization**: All equations verbalized phonetically
-- [ ] **Greek Letters**: Spelled out on first use
-- [ ] **Code Examples**: Narrated with context
-- [ ] **Diagrams**: Verbally described in detail
-- [ ] **Analogies**: At least 2 physical examples per episode
-- [ ] **Retention**: Recap section every 700-1,000 words
-- [ ] **Callbacks**: Reference to previous episodes (Episodes 2+)
-- [ ] **Preview**: Teaser for next episode at end
-- [ ] **Technical Accuracy**: All formulas verified
-- [ ] **Pronunciation Guide**: Included for technical terms
-- [ ] **Self-Contained**: Understandable independently
-
-#### User Workflow
-
-**For Listeners**:
-1. Visit [notebooklm.google.com](https://notebooklm.google.com), create notebook
-2. Upload episode markdown files (one or multiple)
-3. Click "Generate Audio Overview"
-4. Listen during commute/exercise (20-30 min per episode)
-5. Read detailed roadmap for exercises and deeper understanding
-
-**For Content Creators (Claude)**:
-1. Identify educational content needing audio format
-2. Generate TTS-optimized episodes using guidelines above
-3. Create README with NotebookLM usage instructions
-4. Test by uploading to NotebookLM and verifying audio quality
-5. Update CLAUDE.md section 6.4 with new content location
-
-#### Success Metrics
-
-Podcast content is successful when:
-- Users can follow along by audio alone (no visual needed)
-- Technical terms pronounced correctly by TTS
-- Concepts build progressively without confusion
-- Listeners can explain key ideas after one listen
-- Retention matches or exceeds reading comprehension
-
-**See Also**:
-- Phase 1 usage guide: `docs/learning/notebooklm/phase1/README.md`
-- Phase 2 usage guide: `.ai/edu/notebooklm/phase2/README.md`
-- Phase 3 usage guide: `.ai/edu/notebooklm/phase3/README.md`
-- Phase 4 usage guide: `docs/learning/notebooklm/phase4/README.md`
+**See**: `.project/ai/config/notebooklm_guide.md` for complete TTS optimization requirements, episode templates, validation checklists, phase examples, and usage workflows
 
 ------
 
@@ -657,27 +315,9 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ### Current Status: Research-ready [ok]
 
-**Safe for Research/Academic Use:**
-- [OK] Single-threaded & multi-threaded operation validated
-- [OK] Controllers functional and tested
-- [OK] Documentation complete and accurate
+**Safe for Research/Academic Use**: Single-threaded & multi-threaded operation validated, controllers functional and tested, documentation complete
 
-**NOT Ready for Production:**
-- [ERROR] Quality gates: 1/8 passing
-- [ERROR] Coverage measurement broken (pytest Unicode issue)
-- [ERROR] Production score: 23.9/100 (BLOCKED)
-
-### Validation Commands
-```bash
-# Thread Safety (works - 11/11 Passing)
-python -m pytest tests/test_integration/test_thread_safety/test_production_thread_safety.py -v
-
-# Production Readiness (works - Reports 23.9/100)
-python -c "from src.integration.production_readiness import ProductionReadinessScorer; \
-           scorer = ProductionReadinessScorer(); \
-           result = scorer.assess_production_readiness(); \
-           print(f'Score: {result.overall_score:.1f}/100')"
-```
+**NOT Ready for Production**: Quality gates 1/8 passing, coverage measurement broken, production score 23.9/100
 
 ## Production Readiness Reports
 
@@ -878,63 +518,18 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 
 **For Users:** Just ask naturally! No special keywords required.
 
-### Quick Reference: Available MCP Servers (12 Total - All Operational)
+### Quick Reference: Available MCP Servers (12 Total)
 
-| Server | Auto-Trigger Keywords | Primary Use Cases |
-|--------|----------------------|-------------------|
-| **filesystem** | inspect, read, analyze files | Code/log analysis |
-| **github** | issue, PR, commit | Issue tracking |
-| **sequential-thinking** | **plan**, debug, investigate, verify, figure out | **Planning**, debugging, systematic analysis |
-| **puppeteer** | test, screenshot, UI, dashboard | Streamlit testing |
-| **mcp-debugger** | debug, postman, API | API endpoint testing |
-| **pytest-mcp** | test failure, pytest, debug | Test debugging |
-| **git-mcp** | git history, branch, stats | Advanced Git ops |
-| **sqlite-mcp** | query, database, results | PSO results DB |
-| **mcp-analyzer** | lint, ruff, vulture, quality | Code quality checks |
-| **lighthouse-mcp** | audit, accessibility, performance | Lighthouse audits |
-| **pandas-mcp** | data analysis, statistics, plotting | PSO data analysis |
-| **numpy-mcp** | matrix ops, numerical compute | Control theory math |
+**Core Servers**: filesystem (file ops), github (issues/PRs), sequential-thinking (planning/debugging), puppeteer (UI testing), pytest-mcp (test debugging), git-mcp (advanced Git), sqlite-mcp (PSO DB), mcp-analyzer (code quality), lighthouse-mcp (audits), pandas-mcp (data analysis), numpy-mcp (numerical compute), mcp-debugger (API testing)
 
-**NOTES:**
-- **pandas-mcp** and **numpy-mcp** are local custom servers (configured in `.project/mcp/servers/`)
-- For semantic documentation search, use **filesystem** + **git-mcp** + **Grep** combination
+**Auto-Trigger Strategy**: Chain 3-5 MCPs for complete workflows. Use sequential-thinking for planning, filesystem+Grep for search, pytest-mcp for debugging.
 
-### Multi-mcp Collaboration (mandatory)
+**Common Workflows**:
+- Data Analysis: filesystem -> sqlite-mcp -> pandas-mcp
+- Testing: pytest-mcp -> puppeteer -> mcp-analyzer
+- Research: Grep -> filesystem -> git-mcp -> pandas-mcp
 
-**Chain 3-5 MCPs for complete workflows:**
-- **Data Analysis**: filesystem -> sqlite-mcp -> pandas-mcp -> mcp-analyzer
-- **Documentation**: filesystem -> git-mcp -> Grep (built-in search)
-- **Testing**: pytest-mcp -> puppeteer -> mcp-analyzer
-- **Research**: Grep -> filesystem -> git-mcp -> pandas-mcp
-- **Debugging**: sequential-thinking -> pytest-mcp -> filesystem
-
-**Example Multi-MCP Workflow:**
-```bash
-# User: "find the Adaptive SMC Controller and Analyze Its Test Results"
-# Claude Triggers: Grep -> Filesystem -> Pytest-mcp -> Mcp-analyzer
-```
-
-## Overview
-
-### Orchestration Rules (for Claude)
-
-1. If user mentions 2+ domains (docs + data + testing), use 2+ MCPs
-2. For "complete analysis" tasks, use full pipeline (3-5 MCPs minimum)
-3. For debugging, combine sequential-thinking + domain-specific MCPs
-4. **For PLANNING, ALWAYS use sequential-thinking first** (most commonly missed!)
-5. For research workflows: Grep -> filesystem -> relevant analysis MCPs
-6. **Understand intent, not keywords**: "where is" = search, "check" = analyze, "test" = validate, **"plan" = systematic thinking**
-7. **Chain automatically**: Complete full workflow without asking user for next step
-
-### Natural Language Examples
-
-**Users can ask naturally (all work the same):**
-- "Where's the adaptive SMC?" -> Grep + filesystem
-- "Check code quality" -> mcp-analyzer + filesystem
-- "Test the dashboard" -> puppeteer + lighthouse-mcp
-- "What's wrong with this controller?" -> filesystem + pytest-mcp + sequential-thinking
-
-**Configuration:** `.mcp.json` (12 servers) | `.project/ai/config/mcp_usage_guide.md` (auto-trigger guide)
+**Configuration:** `.mcp.json` (12 servers) | **See**: `.project/ai/config/mcp_usage_guide.md` for complete auto-trigger keywords and orchestration patterns
 
 ------
 
@@ -985,186 +580,33 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
   - Visual navigation tools (6 interactive systems)
   - Attribution & cross-references (citations, dependencies, patterns)
 
-**Navigation Systems:**
-1. **NAVIGATION.md** - Master unified hub (NEW: Nov 2025)
-2. **docs/index.md** - Sphinx homepage with 11 toctrees
-3. **guides/INDEX.md** - User guides hub (43 files, 12,525 lines)
-4. **README.md** - GitHub entry point with architecture diagrams
-5. **CLAUDE.md** - Team memory & project conventions (this file)
-6. **sitemap_cards.md** - Card-based tree view with icons
-7. **sitemap_interactive.md** - D3.js force-directed graph (985 files)
-8. **sitemap_visual.md** - Mermaid mindmap & flowcharts
-9. **architecture_control_room.md** - 3D isometric system visualization
-10. **3d-pendulum-demo** - Interactive WebGL pendulum simulation
-11. **live-python-demo** - Browser-based Python code execution
+**Navigation Systems**: 11 total including NAVIGATION.md (master hub), docs/index.md (Sphinx), guides/INDEX.md, README.md, 3 visual sitemaps, 2 interactive demos
 
-**User Journeys:**
-- **Complete Beginners**: NAVIGATION.md -> Path 0 (beginner-roadmap.md) -> Tutorial 01
-- **Quick Start**: NAVIGATION.md -> Getting Started -> Tutorial 01 (1-2 hrs)
-- **Researchers**: NAVIGATION.md -> Research Workflows -> Citations & Theory
-- **Developers**: NAVIGATION.md -> API Reference -> Architecture -> Testing
-- **Integrators**: NAVIGATION.md -> HIL Quickstart -> Docker Deployment
-
-**Cross-References:**
-- All 43 category indexes link to NAVIGATION.md (standardized footer)
-- All 4 main entry points link bidirectionally to NAVIGATION.md
-- All 4 visual navigation systems include NAVIGATION.md node/card
-
-**Maintenance:**
-- Update NAVIGATION.md when adding new category indexes
-- Run validation script: `python .project/dev_tools/validate_navigation.py`
-- Rebuild Sphinx after changes: `sphinx-build -M html docs docs/_build -W`
+**User Journeys**: 5 learning paths from Complete Beginners (Path 0: 125-150 hrs) to Advanced (Path 4: 12+ hrs)
 
 ------
 
 ## 24) Task Wrapper & Checkpoint System for Multi-Agent Orchestration
 
-**See:** `.project/dev_tools/TASK_WRAPPER_USAGE.md` for complete guide.
-
 **Quick Reference:**
 - Automatic checkpointing for Task tool invocations
 - Survives token limits, crashes, session interruptions
-- Hybrid auto-polling: tracks progress every 5 minutes
 - Zero-friction recovery: `/recover` + `/resume` commands
 - Output preservation: agent work saved to `.artifacts/`
 
-### One-Line Integration Pattern
-
+**Usage**:
 ```python
 from .project.dev_tools.task_wrapper import checkpoint_task_launch
-
-# Automatic checkpointing - work survives token limits!
-result = checkpoint_task_launch(
-    task_id="LT-4",
-    agent_id="agent1_theory",
-    task_config={
-        "subagent_type": "general-purpose",
-        "description": "Derive Lyapunov proofs",
-        "prompt": "Your detailed prompt..."
-    },
-    role="Theory Specialist - Derive Lyapunov proofs"
-)
-
-# Result includes:
-# - result["task_result"] - Agent output
-# - result["checkpoint_file"] - Location of complete checkpoint
-# - result["hours_spent"] - Total time elapsed
-# - result["output_artifact"] - Location of saved output JSON
+result = checkpoint_task_launch(task_id="LT-4", agent_id="agent1", task_config={...}, role="...")
 ```
 
-### Recovery After Token Limit
+**Recovery**: `/recover` -> `/resume LT-4 agent1` -> verify completion
 
-```bash
-# 1. Detect incomplete work
-/recover
+**Status**: [OK] Operational (November 2025)
 
-# 2. Auto-resume interrupted agents
-/resume LT-4 agent1_theory
+**See**: `.project/dev_tools/TASK_WRAPPER_USAGE.md` for complete guide, code examples, multi-agent patterns, and configuration options
 
-# 3. Verify completion
-/recover
-```
-
-### Key Features
-
-**Auto-Checkpointing:**
-- Plan approval checkpoint (pre-launch)
-- Agent launch checkpoint (at start)
-- Progress checkpoints (every 5 min, hybrid auto-polling)
-- Completion checkpoint (at finish)
-- Output capture (auto-save to .artifacts/)
-
-**Checkpoint Files Location:**
-```
-.artifacts/
-├── lt4_plan_approved.json
-├── lt4_agent1_theory_launched.json
-├── lt4_agent1_theory_progress.json
-├── lt4_agent1_theory_complete.json
-└── lt4_agent1_theory_output.json
-```
-
-**Recovery Functions:**
-- `resume_incomplete_agents(task_id)` - List incomplete agents for recovery
-- `cleanup_task_checkpoints(task_id)` - Clean up after git commit
-- `get_task_status(task_id)` - Check task progress
-- `get_incomplete_agents()` - Find all interrupted work
-
-### Multi-Agent Patterns
-
-**Sequential (Agent 2 depends on Agent 1):**
-```python
-result1 = checkpoint_task_launch(task_id="LT-7", agent_id="agent1_research", ...)
-result2 = checkpoint_task_launch(
-    task_id="LT-7",
-    agent_id="agent2_paper",
-    dependencies=[result1["output_artifact"]]
-)
-```
-
-**Parallel (Independent agents):**
-```python
-result1 = checkpoint_task_launch(task_id="MT-6", agent_id="agent1_sim", ...)
-result2 = checkpoint_task_launch(task_id="MT-6", agent_id="agent2_analysis", ...)
-```
-
-### Configuration
-
-**Custom polling interval:**
-```python
-checkpoint_task_launch(
-    ...,
-    poll_interval_seconds=600  # Every 10 min instead of 5
-)
-```
-
-**Disable auto-polling (manual updates only):**
-```python
-checkpoint_task_launch(
-    ...,
-    auto_progress=False
-)
-```
-
-### Implementation Details
-
-**Location:** `.project/dev_tools/task_wrapper.py` (250+ lines)
-
-**Files Modified:**
-- `.project/dev_tools/agent_checkpoint.py` - Added `resume_incomplete_agents()`, `cleanup_task_checkpoints()`
-- `.project/dev_tools/recover_project.sh` - Enhanced section [5] with recovery suggestions
-
-**Test Suite:** `.project/dev_tools/test_task_wrapper.py`
-
-**Documentation:** `.project/dev_tools/TASK_WRAPPER_USAGE.md` (complete usage guide with examples)
-
-### Status
-
-[OK] **Operational** (November 2025)
-- Task wrapper implementation complete
-- Checkpoint system integrated and tested
-- Recovery system fully functional
-- Documentation comprehensive with examples
-- Ready for multi-agent orchestration workflows
-
-### Usage Checklist
-
-Before launching multi-agent tasks:
-- [OK] Use `checkpoint_task_launch()` instead of bare Task tool calls
-- [OK] Provide task_id and agent_id (consistent naming)
-- [OK] Include descriptive role for recovery context
-- [OK] Set dependencies if agents depend on each other
-- [OK] After completion, run cleanup: `cleanup_task_checkpoints(task_id)`
-
-### Success Criteria
-
-✅ Multi-agent work survives token limits
-✅ Recovery is automatic (one-command: `/resume`)
-✅ Progress tracking shows where agents left off
-✅ Output preserved in .artifacts/
-✅ No manual recovery work needed
-
-**See Also:** `.project/ai/config/agent_checkpoint_system.md` (original design), `.project/ai/config/agent_orchestration.md` (orchestration patterns)
+**See Also**: `.project/ai/config/agent_checkpoint_system.md` (design), `.project/ai/config/agent_orchestration.md` (patterns)
 
 ------
 
