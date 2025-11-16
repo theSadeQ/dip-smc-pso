@@ -236,6 +236,16 @@ class TestAdaptationComponents:
 class TestAdaptationScenarios:
     """Test adaptation in different scenarios."""
 
+    @pytest.fixture
+    def adaptive_smc_config(self) -> AdaptiveSMCConfig:
+        """Create test configuration for scenarios."""
+        return AdaptiveSMCConfig(
+            gains=[1.0, 1.0, 1.0, 1.0, 0.5],
+            max_force=50.0,
+            dt=0.01,
+            K_init=10.0
+        )
+
     def test_constant_disturbance_adaptation(self, adaptive_smc_config: AdaptiveSMCConfig):
         """Test adaptation to constant disturbances."""
         dynamics = MockDynamics(n_dof=3)
