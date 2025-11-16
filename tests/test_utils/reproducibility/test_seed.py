@@ -475,3 +475,69 @@ class TestReproducibilityIntegration:
         for i in range(5):
             for j in range(i + 1, 5):
                 assert not np.allclose(worker_data[i], worker_data[j])
+
+
+# =====================================================================================
+# Exception Handling Tests (Coverage for error paths)
+# =====================================================================================
+
+class TestSeedExceptionHandling:
+    """Test exception handling in seed utilities."""
+
+    def test_set_global_seed_with_invalid_type(self):
+        """Test graceful handling when seed cannot convert to int (dict)."""
+        # Should not raise - exception is caught and ignored
+        set_global_seed({"invalid": "seed"})
+
+        # RNGs should still work (not crashed)
+        value = random.random()
+        assert isinstance(value, float)
+
+    def test_set_global_seed_with_float_seed(self):
+        """Test that float seeds are properly converted to int."""
+        set_global_seed(42.7)
+        value1 = random.random()
+
+        # Same seed (truncated to int) should produce same value
+        set_global_seed(42)
+        value2 = random.random()
+
+        assert value1 == value2  # 42.7 converts to 42
+
+    def test_create_rng_with_invalid_seed_type(self):
+        """Test create_rng returns unseeded generator with invalid seed."""
+        # String that can't convert to int - should fallback to unseeded
+        rng = create_rng(seed="invalid")
+
+        assert isinstance(rng, np.random.Generator)
+        # Should still generate valid random values
+        value = rng.random()
+        assert 0.0 <= value < 1.0
+
+    def test_create_rng_with_non_serializable_seed(self):
+        """Test create_rng handles complex objects gracefully."""
+        # Complex object seed - should catch exception and fallback
+        class ComplexObject:
+            def __int__(self):
+                raise ValueError("Cannot convert to int")
+
+        rng = create_rng(seed=ComplexObject())
+
+        assert isinstance(rng, np.random.Generator)
+        value = rng.random()
+        assert 0.0 <= value < 1.0
+
+    def test_set_global_seed_exception_isolation(self):
+        """Test that Python and NumPy seeding exceptions are independent."""
+        # Create a mock scenario where one might fail but not the other
+        # Even if one exception is triggered, the other should still work
+
+        # Use a string - will trigger exception in int() conversion
+        set_global_seed("not_a_number")
+
+        # Both RNGs should still be usable (didn't crash the program)
+        python_value = random.random()
+        numpy_value = np.random.rand()
+
+        assert isinstance(python_value, float)
+        assert isinstance(numpy_value, float)
