@@ -97,7 +97,7 @@ class EulerIntegrator:
 
         last_u, history = None, None
         if controller is not None:
-            last_u, = controller.initialize_state()
+            _ = controller.initialize_state()  # Returns empty tuple for classical SMC
             history = controller.initialize_history()
 
         start_time = time.time()
@@ -144,7 +144,7 @@ class RK4Integrator:
 
         last_u, history = None, None
         if controller is not None:
-            last_u, = controller.initialize_state()
+            _ = controller.initialize_state()  # Returns empty tuple for classical SMC
             history = controller.initialize_history()
 
         start_time = time.time()
@@ -276,7 +276,7 @@ class AdaptiveRK45Integrator:
         current_state = x0.copy()
 
         # Initialize controller
-        last_u, = controller.initialize_state()
+        _ = controller.initialize_state()  # Returns empty tuple for classical SMC
         history = controller.initialize_history()
 
         total_nfev = 0
