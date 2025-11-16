@@ -153,7 +153,7 @@ def test_cli_save_gains_creates_file_and_logs(tmp_path: Path):
         (
             "import runpy, sys\n"
             f"sys.path.insert(0, r'{str(app.parent)}')\n"
-            "import src.optimization.pso_optimizer as p\n"
+            "import src.optimizer.pso_optimizer as p\n"
             "class _Dummy:\n"
             "    def __init__(self, *a, **k): pass\n"
             "    def optimise(self): return {'best_cost':1.23,'best_pos':[1,2,3,4,5,6]}\n"
