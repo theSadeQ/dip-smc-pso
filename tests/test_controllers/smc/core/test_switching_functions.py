@@ -73,7 +73,8 @@ class TestSwitchingFunctionClass:
         switch_func = SwitchingFunction(SwitchingMethod.TANH)
 
         result = switch_func.compute(1.0, 1.0)
-        expected = np.tanh(1.0)
+        # With default slope=3.0: tanh((3*1.0)/1.0) = tanh(3.0)
+        expected = np.tanh(3.0)
 
         assert abs(result - expected) < 1e-10
 
@@ -271,7 +272,8 @@ class TestConvenienceFunctions:
     def test_tanh_switching_function(self):
         """Test standalone tanh switching function."""
         result = tanh_switching(1.0, 1.0)
-        expected = np.tanh(1.0)
+        # With default slope=3.0: tanh((3*1.0)/1.0) = tanh(3.0)
+        expected = np.tanh(3.0)
 
         assert abs(result - expected) < 1e-10
 
@@ -298,20 +300,30 @@ class TestConvenienceFunctions:
 
     def test_sign_switching_function(self):
         """Test standalone sign switching function."""
-        result_pos = sign_switching(1.0)
-        result_neg = sign_switching(-1.0)
-        result_zero = sign_switching(0.0)
+        import warnings
 
-        assert result_pos == 1.0
-        assert result_neg == -1.0
-        assert result_zero == 0.0
+        # Suppress deprecation warnings for functional tests
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", DeprecationWarning)
+            result_pos = sign_switching(1.0)
+            result_neg = sign_switching(-1.0)
+            result_zero = sign_switching(0.0)
+
+            assert result_pos == 1.0
+            assert result_neg == -1.0
+            assert result_zero == 0.0
 
     def test_sign_switching_ignores_epsilon(self):
         """Test that sign switching ignores epsilon parameter."""
-        result1 = sign_switching(1.0, 0.1)
-        result2 = sign_switching(1.0, 10.0)
+        import warnings
 
-        assert result1 == result2 == 1.0
+        # Suppress deprecation warnings for functional tests
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", DeprecationWarning)
+            result1 = sign_switching(1.0, 0.1)
+            result2 = sign_switching(1.0, 10.0)
+
+            assert result1 == result2 == 1.0
 
 
 class TestAdaptiveBoundaryLayer:
@@ -508,3 +520,150 @@ class TestSwitchingFunctionNumericalProperties:
         # Smaller epsilon should give results closer to ±1
         # Larger epsilon should give results closer to 0
         assert abs(results[0]) > abs(results[1]) > abs(results[2])
+
+
+class TestSwitchingFunctionEdgeCases:
+    """Test edge cases and safety features for 100% coverage."""
+
+    def test_compute_non_finite_surface_value_inf(self):
+        """Test compute with infinite surface value."""
+        switch_func = SwitchingFunction(SwitchingMethod.TANH)
+
+        result_pos_inf = switch_func.compute(np.inf, 1.0)
+        result_neg_inf = switch_func.compute(-np.inf, 1.0)
+
+        # Should return safe fallback value (0.0)
+        assert result_pos_inf == 0.0
+        assert result_neg_inf == 0.0
+
+    def test_compute_non_finite_surface_value_nan(self):
+        """Test compute with NaN surface value."""
+        switch_func = SwitchingFunction(SwitchingMethod.TANH)
+
+        result = switch_func.compute(np.nan, 1.0)
+
+        # Should return safe fallback value (0.0)
+        assert result == 0.0
+
+    def test_linear_switching_negative_epsilon(self):
+        """Test linear switching with negative epsilon."""
+        switch_func = SwitchingFunction(SwitchingMethod.LINEAR)
+
+        result = switch_func.compute(1.0, -0.5)
+        # Should fall back to sign function
+        assert result == 1.0
+
+        result = switch_func.compute(-1.0, -0.5)
+        assert result == -1.0
+
+    def test_linear_switching_non_finite_ratio(self):
+        """Test linear switching with values causing non-finite ratio."""
+        switch_func = SwitchingFunction(SwitchingMethod.LINEAR)
+
+        # Extreme value that could cause overflow in division
+        result = switch_func.compute(1e308, 1e-308)
+        # Should fall back to sign function
+        assert result == 1.0
+
+    def test_sigmoid_switching_extreme_overflow(self):
+        """Test sigmoid switching with extreme values causing overflow."""
+        switch_func = SwitchingFunction(SwitchingMethod.SIGMOID)
+
+        # Very large negative value that would cause exp(-slope*s/epsilon) to overflow
+        # With slope=3, s=-1000, epsilon=0.1: ratio = 30000, exp(30000) overflows
+        result = switch_func.compute(-1000.0, 0.1)
+        # Should return -1.0 (overflow prevention line 189)
+        assert result == -1.0
+
+    def test_sigmoid_switching_extreme_underflow(self):
+        """Test sigmoid switching with extreme positive values."""
+        switch_func = SwitchingFunction(SwitchingMethod.SIGMOID)
+
+        # Very large positive value that would cause exp(-slope*s/epsilon) to underflow
+        result = switch_func.compute(1000.0, 0.1)
+        # Should return 1.0 (underflow prevention)
+        assert result == 1.0
+
+    def test_sigmoid_derivative_zero_epsilon(self):
+        """Test sigmoid derivative with zero epsilon."""
+        switch_func = SwitchingFunction(SwitchingMethod.SIGMOID)
+
+        derivative = switch_func.get_derivative(1.0, 0.0)
+        # Should return 0.0 (sign function has zero derivative)
+        assert derivative == 0.0
+
+    def test_sigmoid_derivative_negative_epsilon(self):
+        """Test sigmoid derivative with negative epsilon."""
+        switch_func = SwitchingFunction(SwitchingMethod.SIGMOID)
+
+        derivative = switch_func.get_derivative(1.0, -0.5)
+        # Should return 0.0 (safe fallback)
+        assert derivative == 0.0
+
+    def test_deprecated_sign_switching_warning(self):
+        """Test that deprecated sign_switching issues deprecation warning."""
+        import warnings
+
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            result = sign_switching(1.5)
+
+            # Check that warning was issued
+            assert len(w) == 1
+            assert issubclass(w[-1].category, DeprecationWarning)
+            assert "deprecated" in str(w[-1].message).lower()
+            assert "chattering" in str(w[-1].message).lower()
+
+            # Function should still work
+            assert result == 1.0
+
+    def test_tanh_switching_negative_epsilon(self):
+        """Test tanh switching with negative epsilon."""
+        switch_func = SwitchingFunction(SwitchingMethod.TANH)
+
+        result = switch_func.compute(1.0, -0.1)
+        # Should fall back to sign function
+        assert result == 1.0
+
+    def test_sigmoid_switching_negative_epsilon(self):
+        """Test sigmoid switching with negative epsilon."""
+        switch_func = SwitchingFunction(SwitchingMethod.SIGMOID)
+
+        result = switch_func.compute(1.0, -0.1)
+        # Should fall back to sign function
+        assert result == 1.0
+
+    def test_internal_tanh_method_epsilon_zero(self):
+        """Test internal _tanh_switching method directly with epsilon=0."""
+        switch_func = SwitchingFunction(SwitchingMethod.TANH)
+
+        # Call internal method directly to hit line 112
+        result = switch_func._tanh_switching(1.0, 0.0)
+        assert result == 1.0  # Falls back to sign function
+
+    def test_internal_linear_method_epsilon_zero(self):
+        """Test internal _linear_switching method directly with epsilon=0."""
+        switch_func = SwitchingFunction(SwitchingMethod.LINEAR)
+
+        # Call internal method directly to hit line 139
+        result = switch_func._linear_switching(1.0, 0.0)
+        assert result == 1.0  # Falls back to sign function
+
+    def test_internal_sigmoid_method_epsilon_zero(self):
+        """Test internal _sigmoid_switching method directly with epsilon=0."""
+        switch_func = SwitchingFunction(SwitchingMethod.SIGMOID)
+
+        # Call internal method directly to hit line 182
+        result = switch_func._sigmoid_switching(1.0, 0.0)
+        assert result == 1.0  # Falls back to sign function
+
+    def test_internal_sigmoid_method_non_finite_exp(self):
+        """Test internal _sigmoid_switching with extreme values causing non-finite exp."""
+        switch_func = SwitchingFunction(SwitchingMethod.SIGMOID)
+
+        # Extreme value that should trigger non-finite exp check (line 195)
+        # This is defensive code that may be hard to trigger due to earlier checks
+        # But we test it for completeness
+        result = switch_func._sigmoid_switching(1e10, 1e-10)
+        # Should handle gracefully
+        assert np.isfinite(result)
