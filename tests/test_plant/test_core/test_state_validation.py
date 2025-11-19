@@ -372,6 +372,83 @@ class TestMinimalStateValidator:
 
 
 # ======================================================================================
+# Edge Cases for 100% Safety-Critical Coverage
+# ======================================================================================
+
+class TestStateValidationEdgeCases:
+    """Test edge cases for 100% coverage of safety-critical code."""
+
+    def test_strict_validation_invalid_structure_raises(self):
+        """Test line 104: strict_validation raises on invalid structure."""
+        validator = DIPStateValidator(strict_validation=True)
+        invalid_state = np.array([1.0, 2.0, 3.0])  # Wrong shape
+
+        with pytest.raises(StateValidationError, match="Invalid state vector structure"):
+            validator.validate_state(invalid_state)
+
+    def test_strict_validation_physical_bounds_raises(self):
+        """Test line 116: strict_validation raises on physical bounds violation."""
+        validator = DIPStateValidator(
+            strict_validation=True,
+            position_bounds=(-1.0, 1.0)  # Tight bounds
+        )
+        state = np.array([5.0, 0.0, 0.0, 0.0, 0.0, 0.0])  # x=5.0 exceeds bounds
+
+        with pytest.raises(StateValidationError, match="violates physical bounds"):
+            validator.validate_state(state)
+
+    def test_strict_validation_exception_handling(self):
+        """Test line 125: strict_validation exception handling path."""
+        validator = DIPStateValidator(strict_validation=True)
+
+        # Trigger an exception during validation by passing incompatible type
+        # This will cause an exception that's caught and re-raised
+        with pytest.raises(StateValidationError, match="State validation failed"):
+            validator.validate_state(None)  # None will cause exception
+
+    def test_check_physical_bounds_invalid_structure(self):
+        """Test line 246: _check_physical_bounds early return on invalid structure."""
+        validator = DIPStateValidator()
+        invalid_state = np.array([1.0, 2.0, 3.0])  # Wrong shape
+
+        # This triggers the internal _check_physical_bounds which checks structure first
+        result = validator.validate_state(invalid_state)
+        assert result is False
+
+    def test_angular_velocity_bounds_violation_theta1(self):
+        """Test line 266: theta1_dot bounds violation."""
+        validator = DIPStateValidator(
+            angular_velocity_bounds=(-10.0, 10.0)  # Tight bounds
+        )
+        # State format: [x, theta1, theta2, x_dot, theta1_dot, theta2_dot]
+        state = np.array([0.0, 0.0, 0.0, 0.0, 15.0, 0.0])  # theta1_dot=15.0 at index 4
+
+        result = validator.validate_state(state)
+        assert result is False
+
+    def test_angular_velocity_bounds_violation_theta2(self):
+        """Test line 268: theta2_dot bounds violation."""
+        validator = DIPStateValidator(
+            angular_velocity_bounds=(-10.0, 10.0)  # Tight bounds
+        )
+        # State format: [x, theta1, theta2, x_dot, theta1_dot, theta2_dot]
+        state = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 15.0])  # theta2_dot=15.0 at index 5
+
+        result = validator.validate_state(state)
+        assert result is False
+
+    def test_non_strict_validation_returns_false_on_error(self):
+        """Test non-strict mode returns False instead of raising."""
+        validator = DIPStateValidator(strict_validation=False)
+
+        # Test with None (fails structure check but doesn't raise in non-strict mode)
+        result = validator.validate_state(None)
+        assert result is False
+        # Verify validation was attempted
+        assert validator.validation_count > 0
+
+
+# ======================================================================================
 # StateValidationError Tests
 # ======================================================================================
 
