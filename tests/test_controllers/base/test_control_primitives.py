@@ -160,6 +160,11 @@ class TestRequireInRange:
         with pytest.raises(ValueError, match="test_param must be a finite number"):
             require_in_range(float('nan'), "test_param", minimum=0.0, maximum=10.0)
 
+    def test_string_rejected(self):
+        """Test that string values are rejected."""
+        with pytest.raises(ValueError, match="test_param must be a finite number"):
+            require_in_range("5.0", "test_param", minimum=0.0, maximum=10.0)
+
     def test_negative_range(self):
         """Test validation with negative ranges."""
         result = require_in_range(-5.0, "test_param", minimum=-10.0, maximum=-1.0)
