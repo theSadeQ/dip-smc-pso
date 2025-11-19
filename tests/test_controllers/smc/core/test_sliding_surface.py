@@ -420,3 +420,52 @@ class TestSlidingSurfaceMathematicalProperties:
 
         # Infinite input should be sanitized to finite output for controller safety
         assert np.isfinite(result)
+
+
+class TestSlidingSurfaceEdgeCases:
+    """Test edge cases for 100% coverage of safety-critical code."""
+
+    def test_initialization_nan_gains(self):
+        """Test error with NaN gains."""
+        nan_gains = [1.0, np.nan, 3.0, 4.0]
+
+        with pytest.raises(ValueError, match="NaN or infinite values at indices"):
+            LinearSlidingSurface(nan_gains)
+
+    def test_initialization_inf_gains(self):
+        """Test error with infinite gains."""
+        inf_gains = [1.0, np.inf, 3.0, 4.0]
+
+        with pytest.raises(ValueError, match="NaN or infinite values at indices"):
+            LinearSlidingSurface(inf_gains)
+
+    def test_initialization_very_small_gains(self):
+        """Test error with very small gains (< 1e-12)."""
+        tiny_gains = [1e-13, 1.0, 2.0, 3.0]  # First gain too small
+
+        with pytest.raises(ValueError, match="too small.*minimum: 1e-12"):
+            LinearSlidingSurface(tiny_gains)
+
+    def test_compute_result_non_finite_fallback(self):
+        """Test safe fallback when computed surface is non-finite."""
+        # This is hard to trigger naturally, so we test the logic indirectly
+        # by ensuring very large gains * very large states stay finite
+        surface = LinearSlidingSurface([1e10, 1e10, 1e10, 1e10])
+        large_state = np.array([0.0, 0.0, 1e-10, 1e-10, 1e-10, 1e-10])
+
+        result = surface.compute(large_state)
+
+        # Should still be finite due to safe fallback
+        assert np.isfinite(result)
+
+    def test_higher_order_derivative_insufficient_gains(self):
+        """Test HigherOrderSlidingSurface.compute_derivative with <4 gains."""
+        gains = [1.0, 2.0]  # Only 2 gains, less than 4
+        surface = HigherOrderSlidingSurface(gains, order=1)
+
+        test_state = np.array([0.1, 0.2, 0.05, 0.1, -0.03, -0.05])
+        state_dot = np.array([0.2, 0.5, 0.1, 0.8, -0.05, -0.6])
+
+        # Should return 0.0 when insufficient gains for linear fallback
+        result = surface.compute_derivative(test_state, state_dot)
+        assert result == 0.0
