@@ -1048,3 +1048,96 @@ class TestPSOTunerEdgeCases:
 
         # Should return original values unchanged
         np.testing.assert_array_equal(normalised, values)
+
+    def test_compute_cost_from_traj_handles_normal_trajectories(self, minimal_config, mock_controller_factory):
+        """Test _compute_cost_from_traj with normal trajectories."""
+        tuner = PSOTuner(
+            controller_factory=mock_controller_factory,
+            config=minimal_config,
+            seed=42
+        )
+
+        n_particles = 3
+        n_steps = 10
+        n_states = 6
+
+        t = np.linspace(0, 1.0, n_steps)
+        x_b = np.random.randn(n_particles, n_steps, n_states) * 0.1
+        u_b = np.random.randn(n_particles, n_steps) * 10.0
+        sigma_b = np.random.randn(n_particles, n_steps) * 0.5
+
+        costs = tuner._compute_cost_from_traj(t, x_b, u_b, sigma_b)
+
+        assert costs.shape == (n_particles,)
+        assert np.all(np.isfinite(costs))
+        assert np.all(costs >= 0)
+
+    def test_normalise_with_large_denominator(self, minimal_config, mock_controller_factory):
+        """Test _normalise with large denominator value."""
+        tuner = PSOTuner(
+            controller_factory=mock_controller_factory,
+            config=minimal_config,
+            seed=42
+        )
+
+        values = np.array([100.0, 200.0, 300.0])
+        large_denom = 1000.0
+
+        normalised = tuner._normalise(values, large_denom)
+
+        expected = values / large_denom
+        np.testing.assert_array_almost_equal(normalised, expected)
+
+    def test_combine_costs_weighted_mean_max(self, minimal_config, mock_controller_factory):
+        """Test _combine_costs computes weighted mean+max across draws."""
+        tuner = PSOTuner(
+            controller_factory=mock_controller_factory,
+            config=minimal_config,
+            seed=42
+        )
+
+        # Create cost matrix: (n_draws, n_particles)
+        costs = np.array([
+            [10.0, 20.0, 30.0],
+            [12.0, 22.0, 32.0],
+            [14.0, 24.0, 34.0]
+        ])
+
+        combined = tuner._combine_costs(costs)
+
+        # Default combine_weights is (0.7, 0.3) for (mean_weight, max_weight)
+        mean_w, max_w = tuner.combine_weights
+        expected = mean_w * np.mean(costs, axis=0) + max_w * np.max(costs, axis=0)
+        np.testing.assert_array_almost_equal(combined, expected)
+
+    def test_iter_perturbed_physics_returns_iterable(self, minimal_config, mock_controller_factory):
+        """Test _iter_perturbed_physics returns iterable of physics models."""
+        config_copy = minimal_config
+        config_copy.physics_uncertainty.n_evals = 3
+
+        tuner = PSOTuner(
+            controller_factory=mock_controller_factory,
+            config=config_copy,
+            seed=42
+        )
+
+        physics_models = list(tuner._iter_perturbed_physics())
+
+        assert len(physics_models) == 3
+        assert all(hasattr(model, 'cart_mass') for model in physics_models)
+
+    def test_normalise_handles_zero_values(self, minimal_config, mock_controller_factory):
+        """Test _normalise handles array with zero values."""
+        tuner = PSOTuner(
+            controller_factory=mock_controller_factory,
+            config=minimal_config,
+            seed=42
+        )
+
+        values = np.array([0.0, 0.0, 0.0])
+        denom = 10.0
+
+        normalised = tuner._normalise(values, denom)
+
+        expected = np.zeros(3)
+        np.testing.assert_array_equal(normalised, expected)
