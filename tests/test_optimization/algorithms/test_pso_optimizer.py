@@ -756,3 +756,295 @@ class TestPSOTunerProperties:
             fitness = tuner._fitness(invalid_particles)
             # Should handle gracefully, potentially with high penalty
             assert np.all(np.isfinite(fitness))
+
+class TestPSOTunerEdgeCases:
+    """Edge case tests for PSO optimizer to achieve 85%+ coverage."""
+
+    @pytest.fixture
+    def minimal_config(self):
+        """Create minimal valid configuration for testing."""
+        from dataclasses import dataclass
+        from typing import Any, List
+
+        @dataclass
+        class MockPhysics:
+            cart_mass: float = 1.5
+            pendulum1_mass: float = 0.2
+            pendulum2_mass: float = 0.15
+            pendulum1_length: float = 0.4
+            pendulum2_length: float = 0.3
+            pendulum1_com: float = 0.2
+            pendulum2_com: float = 0.15
+            pendulum1_inertia: float = 0.009
+            pendulum2_inertia: float = 0.009
+            gravity: float = 9.81
+            cart_friction: float = 0.2
+            joint1_friction: float = 0.005
+            joint2_friction: float = 0.004
+
+            def model_dump(self) -> dict:
+                return {
+                    'cart_mass': self.cart_mass,
+                    'pendulum1_mass': self.pendulum1_mass,
+                    'pendulum2_mass': self.pendulum2_mass,
+                    'pendulum1_length': self.pendulum1_length,
+                    'pendulum2_length': self.pendulum2_length,
+                    'pendulum1_com': self.pendulum1_com,
+                    'pendulum2_com': self.pendulum2_com,
+                    'pendulum1_inertia': self.pendulum1_inertia,
+                    'pendulum2_inertia': self.pendulum2_inertia,
+                    'gravity': self.gravity,
+                    'cart_friction': self.cart_friction,
+                    'joint1_friction': self.joint1_friction,
+                    'joint2_friction': self.joint2_friction
+                }
+
+        @dataclass
+        class MockSimulation:
+            duration: float = 1.0
+            dt: float = 0.01
+            initial_state: List[float] = None
+            use_full_dynamics: bool = False
+
+            def __post_init__(self):
+                if self.initial_state is None:
+                    self.initial_state = [0.0, 0.05, -0.03, 0.0, 0.0, 0.0]
+
+        @dataclass
+        class MockWeights:
+            state_error: float = 50.0
+            control_effort: float = 0.2
+            control_rate: float = 0.1
+            stability: float = 0.1
+
+        @dataclass
+        class MockNorms:
+            state_error: float = 1.0
+            control_effort: float = 1.0
+            control_rate: float = 1.0
+            sliding: float = 1.0
+
+        @dataclass
+        class MockCostFunction:
+            weights: MockWeights = None
+            norms: MockNorms = None
+            instability_penalty: float = 1000.0
+
+            def __post_init__(self):
+                if self.weights is None:
+                    self.weights = MockWeights()
+                if self.norms is None:
+                    self.norms = MockNorms()
+
+        @dataclass
+        class MockControllerBounds:
+            min: List[float]
+            max: List[float]
+
+        @dataclass
+        class MockPSOBounds:
+            min: List[float] = None
+            max: List[float] = None
+            classical_smc: MockControllerBounds = None
+
+            def __post_init__(self):
+                if self.min is None:
+                    self.min = [1.0, 1.0, 1.0, 1.0, 5.0, 0.1]
+                if self.max is None:
+                    self.max = [20.0, 20.0, 10.0, 10.0, 50.0, 5.0]
+                if self.classical_smc is None:
+                    self.classical_smc = MockControllerBounds(
+                        min=[1.0, 1.0, 1.0, 1.0, 5.0, 0.1],
+                        max=[30.0, 30.0, 20.0, 20.0, 50.0, 10.0]
+                    )
+
+        @dataclass
+        class MockPSO:
+            n_particles: int = 5
+            bounds: MockPSOBounds = None
+            w: float = 0.5
+            c1: float = 1.5
+            c2: float = 1.5
+            iters: int = 3
+            w_schedule: Any = None
+            n_processes: Any = None
+            hyper_trials: Any = None
+            hyper_search: Any = None
+            study_timeout: Any = None
+
+            def __post_init__(self):
+                if self.bounds is None:
+                    self.bounds = MockPSOBounds()
+
+        @dataclass
+        class MockPhysicsUncertainty:
+            n_evals: int = 1
+
+            def model_dump(self) -> dict:
+                return {'n_evals': self.n_evals}
+
+        @dataclass
+        class MockConfig:
+            global_seed: int = 42
+            physics: MockPhysics = None
+            simulation: MockSimulation = None
+            cost_function: MockCostFunction = None
+            pso: MockPSO = None
+            physics_uncertainty: MockPhysicsUncertainty = None
+
+            def __post_init__(self):
+                if self.physics is None:
+                    self.physics = MockPhysics()
+                if self.simulation is None:
+                    self.simulation = MockSimulation()
+                if self.cost_function is None:
+                    self.cost_function = MockCostFunction()
+                if self.pso is None:
+                    self.pso = MockPSO()
+                if self.physics_uncertainty is None:
+                    self.physics_uncertainty = MockPhysicsUncertainty()
+
+        return MockConfig()
+
+    @pytest.fixture
+    def mock_controller_factory(self):
+        """Create mock controller factory."""
+        def factory(gains):
+            controller = Mock()
+            controller.max_force = 150.0
+            controller.n_gains = len(gains)
+            controller.controller_type = 'classical_smc'
+            controller.validate_gains = Mock(return_value=np.ones(len(gains), dtype=bool))
+            return controller
+
+        factory.n_gains = 6
+        factory.controller_type = 'classical_smc'
+        return factory
+
+    def test_deprecated_hyper_trials_raises_error(self, minimal_config, mock_controller_factory):
+        """Test lines 197-198: deprecated hyper_trials parameter."""
+        config_copy = minimal_config
+        config_copy.pso.hyper_trials = 10  # Set deprecated field
+
+        with pytest.raises(ValueError, match="Deprecated PSO configuration fields"):
+            PSOTuner(
+                controller_factory=mock_controller_factory,
+                config=config_copy,
+                seed=42
+            )
+
+    def test_deprecated_hyper_search_raises_error(self, minimal_config, mock_controller_factory):
+        """Test lines 199-200: deprecated hyper_search parameter."""
+        config_copy = minimal_config
+        config_copy.pso.hyper_search = True  # Set deprecated field
+
+        with pytest.raises(ValueError, match="Deprecated PSO configuration fields"):
+            PSOTuner(
+                controller_factory=mock_controller_factory,
+                config=config_copy,
+                seed=42
+            )
+
+    def test_deprecated_study_timeout_raises_error(self, minimal_config, mock_controller_factory):
+        """Test lines 201-202: deprecated study_timeout parameter."""
+        config_copy = minimal_config
+        config_copy.pso.study_timeout = 600  # Set deprecated field
+
+        with pytest.raises(ValueError, match="Deprecated PSO configuration fields"):
+            PSOTuner(
+                controller_factory=mock_controller_factory,
+                config=config_copy,
+                seed=42
+            )
+
+    def test_multiple_deprecated_fields_in_error_message(self, minimal_config, mock_controller_factory):
+        """Test lines 203-207: multiple deprecated fields in single error message."""
+        config_copy = minimal_config
+        config_copy.pso.hyper_trials = 10
+        config_copy.pso.hyper_search = True
+        config_copy.pso.study_timeout = 600
+
+        with pytest.raises(ValueError, match="hyper_trials.*hyper_search.*study_timeout"):
+            PSOTuner(
+                controller_factory=mock_controller_factory,
+                config=config_copy,
+                seed=42
+            )
+
+    def test_invalid_instability_penalty_falls_back_to_default(self, minimal_config, mock_controller_factory):
+        """Test lines 217-221: invalid instability_penalty value handling."""
+        from dataclasses import dataclass
+        from typing import Any
+
+        @dataclass
+        class MockWeights:
+            state_error: float = 50.0
+            control_effort: float = 0.2
+            control_rate: float = 0.1
+            stability: float = 0.1
+
+        @dataclass
+        class MockNorms:
+            state_error: float = 1.0
+            control_effort: float = 1.0
+            control_rate: float = 1.0
+            sliding: float = 1.0
+
+        @dataclass
+        class MockCostFunction:
+            weights: MockWeights = None
+            norms: MockNorms = None
+            instability_penalty: Any = "invalid_string"  # Invalid value
+
+            def __post_init__(self):
+                if self.weights is None:
+                    self.weights = MockWeights()
+                if self.norms is None:
+                    self.norms = MockNorms()
+
+        config_copy = minimal_config
+        config_copy.cost_function = MockCostFunction()
+
+        # Should log warning and fall back to default factor
+        tuner = PSOTuner(
+            controller_factory=mock_controller_factory,
+            config=config_copy,
+            seed=42
+        )
+
+        # Should fall back to default penalty factor (100.0)
+        assert tuner.instability_penalty == 100.0
+
+    def test_normalization_with_very_small_denominator(self, minimal_config, mock_controller_factory):
+        """Test lines 263-267: normalization with near-zero denominator."""
+        tuner = PSOTuner(
+            controller_factory=mock_controller_factory,
+            config=minimal_config,
+            seed=42
+        )
+
+        values = np.array([1.0, 2.0, 3.0])
+        # Test with denominator just above threshold
+        small_denom = tuner.normalisation_threshold * 1.1
+        normalised = tuner._normalise(values, small_denom)
+
+        # Should normalize normally
+        expected = values / small_denom
+        np.testing.assert_array_almost_equal(normalised, expected)
+
+    def test_normalization_below_threshold_returns_original(self, minimal_config, mock_controller_factory):
+        """Test normalization threshold bypass - returns original values."""
+        tuner = PSOTuner(
+            controller_factory=mock_controller_factory,
+            config=minimal_config,
+            seed=42
+        )
+
+        values = np.array([1.0, 2.0, 3.0])
+        # Test with denominator below threshold
+        tiny_denom = tuner.normalisation_threshold * 0.5
+
+        normalised = tuner._normalise(values, tiny_denom)
+
+        # Should return original values unchanged
+        np.testing.assert_array_equal(normalised, values)
