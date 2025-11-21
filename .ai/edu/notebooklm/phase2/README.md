@@ -233,7 +233,7 @@ These episodes were generated in November 2025 as part of the DIP-SMC-PSO projec
 ## Additional Resources
 
 **Supplementary Learning Materials**:
-- **[20 Mechanical Control Examples](phase2_episode01_supplementary_examples.md)** (NEW - Companion to Episode 1)
+- **[20 Mechanical Control Examples](../../../../../docs/learning/notebooklm/phase2/phase2_episode01_supplementary_examples.md)** (NEW - Companion to Episode 1)
   - Refrigerator → Gantry crane → Segway → Rocket landing
   - Each example shows: setpoint, actual state, error, control action
   - Direct connections to DIP project concepts
