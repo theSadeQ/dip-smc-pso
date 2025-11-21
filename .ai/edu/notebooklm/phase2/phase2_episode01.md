@@ -225,7 +225,7 @@ Control systems are literally everywhere once you start noticing them. They're o
 
 ## Want More Examples?
 
-If you're hungry for more examples of the four-component pattern in action, check out our **[Supplementary Examples Guide](phase2_episode01_supplementary_examples.md)**, which explores **20 mechanical control engineering examples** ranging from everyday devices to aerospace applications:
+If you're hungry for more examples of the four-component pattern in action, check out our **[Supplementary Examples Guide](../../../../../docs/learning/notebooklm/phase2/phase2_episode01_supplementary_examples.md)**, which explores **20 mechanical control engineering examples** ranging from everyday devices to aerospace applications:
 
 **TIER 1 - Beginner (Everyday)**:
 - Refrigerator temperature control
