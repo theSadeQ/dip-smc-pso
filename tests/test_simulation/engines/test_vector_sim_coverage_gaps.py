@@ -562,3 +562,184 @@ class TestSimulateSystemBatchEdgeCases:
             assert len(r) == 4
             t, x_b, u_b, sigma_b = r
             assert t.shape[0] == 11
+
+
+class TestSimulateEarlyStoppingBatchMode:
+    """Test early stopping logic in batch mode (lines 227-235)."""
+
+    def test_early_stopping_batch_mode_any_stops(self):
+        """Test that any batch element stopping triggers early termination."""
+        # Create stop function that stops after 5 steps for one element
+        def stop_fn(state):
+            return np.sum(state**2) > 0.5  # Will trigger for growing states
+
+        x0 = np.array([[0.1, 0.0], [10.0, 0.0]])  # Second element will trigger stop
+        u = np.array([[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+                      [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]])
+
+        result = simulate(x0, u, dt=0.1, stop_fn=stop_fn)
+
+        # Should stop early when any batch element meets condition
+        assert result.shape[1] < 11  # Stopped before 10 steps + initial
+
+    def test_early_stopping_scalar_mode(self):
+        """Test early stopping in scalar mode (lines 232-235)."""
+        def stop_fn(state):
+            return np.sum(state**2) > 1.0  # Will trigger as state grows
+
+        x0 = np.array([1.0, 1.0])  # Start with larger initial state
+        u = np.full(20, 10.0)  # Large control to grow state quickly
+
+        result = simulate(x0, u, dt=0.1, stop_fn=stop_fn)
+
+        # Should stop early (within a few steps)
+        assert result.shape[0] < 10  # Should stop much earlier than 21
+
+
+class TestSimulateSystemBatchCallableController:
+    """Test simulate_system_batch with callable controller (lines 448-450)."""
+
+    def test_controller_without_compute_control_uses_call(self):
+        """Test controller using __call__ instead of compute_control."""
+        def factory(gains):
+            controller = Mock()
+            controller.state_dim = 6
+            controller.dynamics_model = Mock()
+            controller.dynamics_model.state_dim = 6
+            controller.dynamics_model.step = Mock(
+                side_effect=lambda x, u, dt: x + u * dt * 0.01
+            )
+
+            # Check hasattr returns False for compute_control
+            controller.compute_control = Mock(side_effect=AttributeError("No compute_control"))
+            # Remove the mock so hasattr returns False
+            del controller.compute_control
+
+            # Define __call__ method
+            def controller_call(t, x):
+                return float(-gains[0] * x[0])
+
+            controller.__call__ = controller_call
+            controller.side_effect = None  # Ensure no side effects
+
+            return controller
+
+        particles = np.array([[1.0, 2.0]])
+
+        result = simulate_system_batch(
+            controller_factory=factory,
+            particles=particles,
+            sim_time=0.1,
+            dt=0.01
+        )
+
+        t, x_b, u_b, sigma_b = result
+        # Should complete full simulation
+        assert t.shape[0] == 11
+        # sigma should be 0.0 when using __call__
+        assert np.all(sigma_b == 0.0)
+
+
+class TestSimulateSystemBatchSigmaExtraction:
+    """Test sigma value extraction from control return (lines 442-447)."""
+
+    def test_sigma_from_hasattr(self):
+        """Test extracting sigma via hasattr check."""
+        from collections import namedtuple
+
+        ControlResult = namedtuple('ControlResult', ['u', 'state', 'history', 'sigma'])
+
+        def factory(gains):
+            controller = Mock()
+            controller.state_dim = 6
+            controller.dynamics_model = Mock()
+            controller.dynamics_model.state_dim = 6
+            controller.dynamics_model.step = Mock(
+                side_effect=lambda x, u, dt: x + 0.01
+            )
+
+            def compute_control_with_sigma(x, state, history):
+                result = ControlResult(u=-gains[0] * x[0], state=state, history=history, sigma=0.5)
+                return result
+
+            controller.compute_control = compute_control_with_sigma
+
+            return controller
+
+        particles = np.array([[1.0, 2.0]])
+
+        result = simulate_system_batch(
+            controller_factory=factory,
+            particles=particles,
+            sim_time=0.1,
+            dt=0.01
+        )
+
+        t, x_b, u_b, sigma_b = result
+        # sigma should be extracted from namedtuple
+        assert np.all(sigma_b == 0.5)
+
+    def test_sigma_from_tuple_index(self):
+        """Test extracting sigma from tuple index 3."""
+        def factory(gains):
+            controller = Mock()
+            controller.state_dim = 6
+            controller.dynamics_model = Mock()
+            controller.dynamics_model.state_dim = 6
+            controller.dynamics_model.step = Mock(
+                side_effect=lambda x, u, dt: x + 0.01
+            )
+
+            def compute_control_with_sigma_tuple(x, state, history):
+                # Return tuple with 4 elements: (u, state, history, sigma)
+                return (-gains[0] * x[0], state, history, 0.75)
+
+            controller.compute_control = compute_control_with_sigma_tuple
+
+            return controller
+
+        particles = np.array([[1.0, 2.0]])
+
+        result = simulate_system_batch(
+            controller_factory=factory,
+            particles=particles,
+            sim_time=0.1,
+            dt=0.01
+        )
+
+        t, x_b, u_b, sigma_b = result
+        # sigma should be extracted from tuple index 3
+        assert np.all(sigma_b == 0.75)
+
+
+class TestSimulateSystemBatchWarningException:
+    """Test Warning exception re-raising (lines 454-455)."""
+
+    def test_warning_exception_is_reraised(self):
+        """Test that Warning exceptions are re-raised, not caught."""
+        def factory(gains):
+            controller = Mock()
+            controller.state_dim = 6
+            controller.dynamics_model = Mock()
+            controller.dynamics_model.state_dim = 6
+            controller.dynamics_model.step = Mock(
+                side_effect=lambda x, u, dt: x + 0.01
+            )
+
+            def compute_control_with_warning(x, state, history):
+                raise UserWarning("Test warning - should be re-raised")
+
+            controller.compute_control = compute_control_with_warning
+
+            return controller
+
+        particles = np.array([[1.0, 2.0]])
+
+        # Warning should be re-raised, not caught by exception handler
+        with pytest.raises(UserWarning, match="should be re-raised"):
+            simulate_system_batch(
+                controller_factory=factory,
+                particles=particles,
+                sim_time=0.1,
+                dt=0.01
+            )
