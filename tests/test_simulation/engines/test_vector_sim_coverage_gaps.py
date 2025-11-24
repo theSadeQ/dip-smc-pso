@@ -51,10 +51,11 @@ class TestSimulateConfigHandling:
         x0 = np.array([1.0, 0.0])
         u = np.array(0.5)  # Scalar control (ndim==0)
 
-        result = simulate(x0, u, dt=0.1, horizon=5)
+        # Don't provide horizon - let it infer H=1 from u.ndim==0 (line 129)
+        result = simulate(x0, u, dt=0.1)
 
-        # Should run for 5 steps with same control value
-        assert result.shape == (6, 2)  # 5 steps + initial state
+        # Should run for 1 step (H=1 inferred) + initial state
+        assert result.shape == (2, 2)  # 1 step + initial state
 
     def test_config_based_energy_limits_loading(self):
         """Test config-based energy limit loading (lines 151-171)."""
@@ -115,6 +116,69 @@ class TestSimulateConfigHandling:
             u = np.zeros(10)
 
             # Should continue without config limits
+            result = simulate(x0, u, dt=0.1)
+            assert result.shape[0] == 11
+
+    def test_config_energy_limit_float_conversion_fails(self):
+        """Test exception when energy.max can't convert to float (lines 160-161)."""
+        from types import SimpleNamespace
+        mock_config = SimpleNamespace(
+            simulation=SimpleNamespace(
+                safety=SimpleNamespace(
+                    energy=SimpleNamespace(max="invalid_float_string"),  # Can't convert to float
+                    bounds=None
+                )
+            )
+        )
+
+        with patch('src.simulation.engines.vector_sim.config', mock_config):
+            x0 = np.array([1.0, 0.0])
+            u = np.zeros(10)
+
+            # Should continue without energy limits (exception caught)
+            result = simulate(x0, u, dt=0.1)
+            assert result.shape[0] == 11
+
+    def test_config_bounds_structure_malformed(self):
+        """Test exception when bounds structure is invalid (lines 167-168)."""
+        from types import SimpleNamespace
+        # Create object that will cause exception when getattr is used
+        class BadBounds:
+            @property
+            def lower(self):
+                raise RuntimeError("Can't access lower")
+            @property
+            def upper(self):
+                raise RuntimeError("Can't access upper")
+
+        mock_config = SimpleNamespace(
+            simulation=SimpleNamespace(
+                safety=SimpleNamespace(
+                    energy=None,
+                    bounds=BadBounds()  # Object that raises on attribute access
+                )
+            )
+        )
+
+        with patch('src.simulation.engines.vector_sim.config', mock_config):
+            x0 = np.array([1.0, 0.0])
+            u = np.zeros(10)
+
+            # Should continue without bounds (exception caught)
+            result = simulate(x0, u, dt=0.1)
+            assert result.shape[0] == 11
+
+    def test_config_simulation_access_fails(self):
+        """Test exception at top-level config.simulation access (lines 169-171)."""
+        from types import SimpleNamespace
+        mock_config = SimpleNamespace()
+        # No simulation attribute - accessing it will raise AttributeError
+
+        with patch('src.simulation.engines.vector_sim.config', mock_config):
+            x0 = np.array([1.0, 0.0])
+            u = np.zeros(10)
+
+            # Should continue without any config limits (exception caught at top level)
             result = simulate(x0, u, dt=0.1)
             assert result.shape[0] == 11
 
@@ -601,28 +665,22 @@ class TestSimulateSystemBatchCallableController:
 
     def test_controller_without_compute_control_uses_call(self):
         """Test controller using __call__ instead of compute_control."""
+        class CallableController:
+            """Controller that implements __call__ but not compute_control."""
+            def __init__(self):
+                self.state_dim = 6
+                self.dynamics_model = Mock()
+                self.dynamics_model.state_dim = 6
+                self.dynamics_model.step = Mock(
+                    side_effect=lambda x, u, dt: x + u * dt * 0.01
+                )
+
+            def __call__(self, t, x):
+                """Callable interface instead of compute_control."""
+                return float(-0.1 * x[0])
+
         def factory(gains):
-            controller = Mock()
-            controller.state_dim = 6
-            controller.dynamics_model = Mock()
-            controller.dynamics_model.state_dim = 6
-            controller.dynamics_model.step = Mock(
-                side_effect=lambda x, u, dt: x + u * dt * 0.01
-            )
-
-            # Check hasattr returns False for compute_control
-            controller.compute_control = Mock(side_effect=AttributeError("No compute_control"))
-            # Remove the mock so hasattr returns False
-            del controller.compute_control
-
-            # Define __call__ method
-            def controller_call(t, x):
-                return float(-gains[0] * x[0])
-
-            controller.__call__ = controller_call
-            controller.side_effect = None  # Ensure no side effects
-
-            return controller
+            return CallableController()
 
         particles = np.array([[1.0, 2.0]])
 
@@ -743,3 +801,106 @@ class TestSimulateSystemBatchWarningException:
                 sim_time=0.1,
                 dt=0.01
             )
+
+
+class TestBatchControlExtractionPhase2:
+    """Phase 2: Additional batch control extraction tests (lines 191-192, 198-199)."""
+
+    def test_batch_control_HxU_broadcast_format(self):
+        """Test batch with (H,U) control broadcasted across batches (lines 191-192)."""
+        x0 = np.array([[1.0, 0.0], [2.0, 0.0]])  # B=2, D=2
+        u = np.array([[0.1, 0.2], [0.3, 0.4]])  # (H=2, U=2)
+        # Not matching (B,H) shape, triggers else at line 191
+        result = simulate(x0, u, dt=0.1, horizon=2)
+        assert result.shape == (2, 3, 2)  # B=2, H+1=3, D=2
+
+    def test_batch_control_dimension_fallback(self):
+        """Test batch control fallback extraction (lines 198-199)."""
+        x0 = np.array([[1.0, 0.0], [2.0, 0.0]])  # B=2
+        u = np.array([[0.1, 0.2, 0.3], [0.4, 0.5, 0.6]])  # (B=2, H=3)
+        result = simulate(x0, u, dt=0.1)
+        assert result.shape == (2, 4, 2)  # B=2, H+1=4, D=2
+
+
+class TestControlReturnEdgeCases:
+    """Phase 2: Control return edge cases for simulate_system_batch."""
+
+    def test_control_return_non_indexable_floatable(self):
+        """Test when control return can't be indexed but can float (lines 432-433)."""
+        def factory(gains):
+            controller = Mock()
+            controller.state_dim = 6
+            controller.dynamics_model = Mock()
+            controller.dynamics_model.state_dim = 6
+            controller.dynamics_model.step = Mock(side_effect=lambda x, u, dt: x + 0.01)
+
+            class FloatableNonIndexable:
+                def __float__(self):
+                    return 0.75
+                def __getitem__(self, idx):
+                    raise TypeError("Can't index this object")
+
+            controller.compute_control = Mock(return_value=FloatableNonIndexable())
+            return controller
+
+        result = simulate_system_batch(
+            controller_factory=factory,
+            particles=np.array([[1.0, 2.0]]),
+            sim_time=0.1,
+            dt=0.01
+        )
+        t, x_b, u_b, sigma_b = result
+        assert np.all(u_b == 0.75)
+
+    def test_control_return_short_tuple(self):
+        """Test when control return has only 1 element (lines 440-441)."""
+        def factory(gains):
+            controller = Mock()
+            controller.state_dim = 6
+            controller.dynamics_model = Mock()
+            controller.dynamics_model.state_dim = 6
+            controller.dynamics_model.step = Mock(side_effect=lambda x, u, dt: x + 0.01)
+            controller.compute_control = Mock(return_value=(0.5,))  # Only 1 element
+            return controller
+
+        result = simulate_system_batch(
+            controller_factory=factory,
+            particles=np.array([[1.0, 2.0]]),
+            sim_time=0.1,
+            dt=0.01
+        )
+        t, x_b, u_b, sigma_b = result
+        assert t.shape[0] == 11  # Should complete without error
+
+
+class TestDynamicsStepExceptions:
+    """Phase 2: Dynamics step exception handling (lines 500-501)."""
+
+    def test_dynamics_step_raises_exception(self):
+        """Test dynamics.step exception handling (lines 500-501)."""
+        call_count = [0]
+
+        def factory(gains):
+            controller = Mock()
+            controller.state_dim = 6
+            controller.dynamics_model = Mock()
+            controller.dynamics_model.state_dim = 6
+
+            def step_fails(x, u, dt):
+                call_count[0] += 1
+                if call_count[0] > 3:
+                    raise ValueError("Step computation failed")
+                return x + 0.01
+
+            controller.dynamics_model.step = step_fails
+            controller.compute_control = Mock(return_value=(0.0, None, None))
+            return controller
+
+        result = simulate_system_batch(
+            controller_factory=factory,
+            particles=np.array([[1.0, 2.0]]),
+            sim_time=1.0,
+            dt=0.01
+        )
+        t, x_b, u_b, sigma_b = result
+        assert t.shape[0] < 101  # Early termination due to exception
