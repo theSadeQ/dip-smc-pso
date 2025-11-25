@@ -284,8 +284,8 @@ class TestLowRankDIPDynamics:
         result = dynamics_model.compute_dynamics(test_states['equilibrium'], invalid_control)
         assert not result.success
 
-        # Control input too large
-        excessive_control = np.array([100.0])  # Exceeds force limit
+        # Control input too large (exceeds default force_limit=150.0)
+        excessive_control = np.array([200.0])  # Exceeds force limit
 
         result = dynamics_model.compute_dynamics(test_states['equilibrium'], excessive_control)
         assert not result.success
