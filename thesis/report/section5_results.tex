@@ -75,12 +75,14 @@ Figure \ref{fig:overshoot} compares overshoot percentages, while Figure \ref{fig
 \label{fig:energy}
 \end{figure}
 
-Comprehensive benchmark statistics across 100 Monte Carlo runs confirm these trends with high confidence intervals. Table \ref{tab:comprehensive} presents the complete statistical analysis including means, standard deviations, and 95\% confidence intervals for all performance metrics.
+Comprehensive benchmark statistics across 100 Monte Carlo runs confirm these trends with high confidence intervals. Tables \ref{tab:comprehensive_part1} and \ref{tab:comprehensive_part2} present the complete statistical analysis including means, standard deviations, and 95\% confidence intervals for all performance metrics.
 
-% Note: Comprehensive table included in landscape format due to width (18 columns)
+% Note: Comprehensive tables split into two parts for readability
 \clearpage
 \begin{landscape}
-\input{tables/comprehensive}
+\input{tables/comprehensive_part1}
+\vspace{1cm}
+\input{tables/comprehensive_part2}
 \end{landscape}
 \clearpage
 
@@ -141,7 +143,7 @@ The null hypothesis $H_0$ states that two controllers have equal mean performanc
 \item Classical vs. Adaptive (chattering): $t = 12.3$, $p < 0.001$ — Adaptive significantly lower chattering
 \end{itemize}
 
-The comprehensive benchmark table (Table \ref{tab:comprehensive}) includes 95\% confidence intervals for all metrics. Non-overlapping confidence intervals provide visual confirmation of statistical significance.
+The comprehensive benchmark tables (Tables \ref{tab:comprehensive_part1} and \ref{tab:comprehensive_part2}) include 95\% confidence intervals for all metrics. Non-overlapping confidence intervals provide visual confirmation of statistical significance.
 
 \textbf{Effect Sizes:}
 Beyond statistical significance, we quantify practical significance using Cohen's $d$ effect size:
