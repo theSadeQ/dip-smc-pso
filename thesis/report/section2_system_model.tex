@@ -4,7 +4,25 @@
 % Content to be extracted from docs/theory/system_dynamics.md
 
 \subsection{Physical Description}
-The double-inverted pendulum consists of a cart with two links attached via frictionless revolute joints. The control objective is to stabilize both pendulums in the upright position while regulating cart position.
+The double-inverted pendulum (DIP) system consists of three main components:
+\begin{itemize}
+\item \textbf{Cart} (mass $m_0$): Moves horizontally on a frictionless track
+\item \textbf{First Pendulum} (mass $m_1$, length $l_1$): Revolute joint attached to cart
+\item \textbf{Second Pendulum} (mass $m_2$, length $l_2$): Revolute joint attached to first pendulum tip
+\end{itemize}
+
+The control objective is to stabilize both pendulums in the upright position ($\theta_1 = \theta_2 = 0$) using horizontal cart force $u$, while regulating cart position within bounds.
+
+\subsection{System Challenges}
+The DIP presents four key challenges for control design:
+
+\textbf{Underactuation}: The system has 3 degrees of freedom (DOF) but only 1 control input, requiring exploitation of dynamic coupling.
+
+\textbf{Unstable Equilibrium}: The upright position is inherently unstable—small perturbations cause pendulums to fall without active stabilization.
+
+\textbf{Nonlinear Dynamics}: Trigonometric functions in the equations of motion complicate controller design, especially for large-angle swings.
+
+\textbf{System Coupling}: Cart motion affects both pendulums, and second pendulum motion influences the first through inertial coupling.
 
 \subsection{State-Space Representation}
 The system state vector is:
