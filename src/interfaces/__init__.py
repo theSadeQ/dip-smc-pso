@@ -1,90 +1,20 @@
-#======================================================================================\\\
-#============================= src/interfaces/__init__.py =============================\\\
-#======================================================================================\\\
+#======================================================================================\\
+#============================= src/interfaces/__init__.py =============================\\
+#======================================================================================\\
 
 """
 Interfaces framework for control engineering applications.
 This module provides interface systems for network communication, hardware abstraction,
 HIL systems, data exchange, and monitoring capabilities designed for real-time
 control systems and scientific computing applications.
+
+Note: This module uses lazy imports to avoid loading heavy dependencies
+(websockets, pyserial, etc.) unless actually needed.
 """
-
-# Hardware-in-the-Loop (HIL) System - Complete and tested
-from .hil import (
-    # Enhanced HIL System
-    EnhancedHILSystem, HILConfig, HILMode, TestScenario,
-    # Real-time capabilities
-    RealTimeScheduler, TimingConstraints, DeadlineMissHandler,
-    # Fault injection
-    FaultInjector, FaultType, FaultScenario,
-    # Test automation
-    HILTestFramework, TestSuite, TestCase,
-    # Data logging
-    HILDataLogger, LoggingConfig,
-    # Simulation bridge
-    SimulationBridge, ModelInterface,
-    # Legacy compatibility
-    HILControllerClient, PlantServer, run_client
-)
-
-# Data Exchange and Serialization - Complete framework
-from .data_exchange import (
-    # Core serialization
-    SerializationFormat, SerializerInterface, SerializationError,
-    JSONSerializer, MessagePackSerializer, PickleSerializer,
-    BinarySerializer, CompressionSerializer,
-    # Data types and schemas
-    DataPacket,
-    DataSchema, SchemaValidator, ValidationError,
-    # Factory and performance
-    SerializerFactory, StreamingSerializer
-)
-
-# Monitoring and Diagnostics - Complete system
-from .monitoring import (
-    # Health monitoring
-    HealthStatus, HealthCheck, ComponentHealth,
-    HealthMonitor, SystemHealthMonitor,
-    # Metrics collection
-    MetricType, Metric, MetricsCollector,
-    PerformanceMonitor, SystemMetricsCollector,
-    # Diagnostics and alerting
-    DiagnosticEngine, DiagnosticResult,
-    AlertManager, Alert, AlertRule, AlertLevel,
-    EmailNotificationHandler, LogNotificationHandler,
-    # Dashboard
-    DashboardServer, MetricSeries, ChartConfig
-)
-
-# Hardware Abstraction - Basic hardware interfaces
-from .hardware import (
-    # Device management
-    DeviceDriver, DeviceStatus, BaseDevice,
-    DeviceManager, HardwareInterfaceFactory,
-    # Drivers and interfaces
-    SerialDevice, DAQInterface, SensorInterface,
-    ActuatorInterface, AnalogSensor, DigitalSensor
-)
-
-# Network Interfaces - Basic networking
-from .network import (
-    # Core interfaces
-    TCPInterface, UDPInterface, WebSocketInterface,
-    HTTPInterface, NetworkInterfaceFactory,
-    # Message handling
-    MessageQueueInterface, ZeroMQInterface, RabbitMQInterface,
-    # Servers and clients
-    TCPServer, UDPServer, WebSocketServer
-)
-
-# Core interfaces and protocols
-from .core import (
-    CommunicationProtocol, MessageProtocol, ConnectionProtocol,
-    InterfaceType, Message, ConnectionInfo, InterfaceConfig
-)
 
 __version__ = "1.0.0"
 
+# Define what's available for import without actually importing
 __all__ = [
     # Hardware-in-the-Loop (HIL) System
     'EnhancedHILSystem', 'HILConfig', 'HILMode', 'TestScenario',
@@ -108,7 +38,7 @@ __all__ = [
     'HealthMonitor', 'SystemHealthMonitor',
     'MetricType', 'Metric', 'MetricsCollector',
     'PerformanceMonitor', 'SystemMetricsCollector',
-    'DiagnosticEngine', 'DiagnosticResult', 'TroubleshootingAssistant',
+    'DiagnosticEngine', 'DiagnosticResult',
     'AlertManager', 'Alert', 'AlertRule', 'AlertLevel',
     'EmailNotificationHandler', 'LogNotificationHandler',
     'DashboardServer', 'MetricSeries', 'ChartConfig',
@@ -129,6 +59,144 @@ __all__ = [
     'CommunicationProtocol', 'MessageProtocol', 'ConnectionProtocol',
     'InterfaceType', 'Message', 'ConnectionInfo', 'InterfaceConfig',
 ]
+
+# Lazy import mapping: attribute name -> (module, import_from)
+_LAZY_IMPORTS = {
+    # HIL System
+    'EnhancedHILSystem': ('hil', 'EnhancedHILSystem'),
+    'HILConfig': ('hil', 'HILConfig'),
+    'HILMode': ('hil', 'HILMode'),
+    'TestScenario': ('hil', 'TestScenario'),
+    'RealTimeScheduler': ('hil', 'RealTimeScheduler'),
+    'TimingConstraints': ('hil', 'TimingConstraints'),
+    'DeadlineMissHandler': ('hil', 'DeadlineMissHandler'),
+    'FaultInjector': ('hil', 'FaultInjector'),
+    'FaultType': ('hil', 'FaultType'),
+    'FaultScenario': ('hil', 'FaultScenario'),
+    'HILTestFramework': ('hil', 'HILTestFramework'),
+    'TestSuite': ('hil', 'TestSuite'),
+    'TestCase': ('hil', 'TestCase'),
+    'HILDataLogger': ('hil', 'HILDataLogger'),
+    'LoggingConfig': ('hil', 'LoggingConfig'),
+    'SimulationBridge': ('hil', 'SimulationBridge'),
+    'ModelInterface': ('hil', 'ModelInterface'),
+    'HILControllerClient': ('hil', 'HILControllerClient'),
+    'PlantServer': ('hil', 'PlantServer'),
+    'run_client': ('hil', 'run_client'),
+
+    # Data Exchange
+    'SerializationFormat': ('data_exchange', 'SerializationFormat'),
+    'SerializerInterface': ('data_exchange', 'SerializerInterface'),
+    'SerializationError': ('data_exchange', 'SerializationError'),
+    'JSONSerializer': ('data_exchange', 'JSONSerializer'),
+    'MessagePackSerializer': ('data_exchange', 'MessagePackSerializer'),
+    'PickleSerializer': ('data_exchange', 'PickleSerializer'),
+    'BinarySerializer': ('data_exchange', 'BinarySerializer'),
+    'CompressionSerializer': ('data_exchange', 'CompressionSerializer'),
+    'DataPacket': ('data_exchange', 'DataPacket'),
+    'DataSchema': ('data_exchange', 'DataSchema'),
+    'SchemaValidator': ('data_exchange', 'SchemaValidator'),
+    'ValidationError': ('data_exchange', 'ValidationError'),
+    'SerializerFactory': ('data_exchange', 'SerializerFactory'),
+    'StreamingSerializer': ('data_exchange', 'StreamingSerializer'),
+
+    # Monitoring
+    'HealthStatus': ('monitoring', 'HealthStatus'),
+    'HealthCheck': ('monitoring', 'HealthCheck'),
+    'ComponentHealth': ('monitoring', 'ComponentHealth'),
+    'HealthMonitor': ('monitoring', 'HealthMonitor'),
+    'SystemHealthMonitor': ('monitoring', 'SystemHealthMonitor'),
+    'MetricType': ('monitoring', 'MetricType'),
+    'Metric': ('monitoring', 'Metric'),
+    'MetricsCollector': ('monitoring', 'MetricsCollector'),
+    'PerformanceMonitor': ('monitoring', 'PerformanceMonitor'),
+    'SystemMetricsCollector': ('monitoring', 'SystemMetricsCollector'),
+    'DiagnosticEngine': ('monitoring', 'DiagnosticEngine'),
+    'DiagnosticResult': ('monitoring', 'DiagnosticResult'),
+    'AlertManager': ('monitoring', 'AlertManager'),
+    'Alert': ('monitoring', 'Alert'),
+    'AlertRule': ('monitoring', 'AlertRule'),
+    'AlertLevel': ('monitoring', 'AlertLevel'),
+    'EmailNotificationHandler': ('monitoring', 'EmailNotificationHandler'),
+    'LogNotificationHandler': ('monitoring', 'LogNotificationHandler'),
+    'DashboardServer': ('monitoring', 'DashboardServer'),
+    'MetricSeries': ('monitoring', 'MetricSeries'),
+    'ChartConfig': ('monitoring', 'ChartConfig'),
+
+    # Hardware
+    'DeviceDriver': ('hardware', 'DeviceDriver'),
+    'DeviceStatus': ('hardware', 'DeviceStatus'),
+    'BaseDevice': ('hardware', 'BaseDevice'),
+    'DeviceManager': ('hardware', 'DeviceManager'),
+    'HardwareInterfaceFactory': ('hardware', 'HardwareInterfaceFactory'),
+    'SerialDevice': ('hardware', 'SerialDevice'),
+    'DAQInterface': ('hardware', 'DAQInterface'),
+    'SensorInterface': ('hardware', 'SensorInterface'),
+    'ActuatorInterface': ('hardware', 'ActuatorInterface'),
+    'AnalogSensor': ('hardware', 'AnalogSensor'),
+    'DigitalSensor': ('hardware', 'DigitalSensor'),
+
+    # Network
+    'TCPInterface': ('network', 'TCPInterface'),
+    'UDPInterface': ('network', 'UDPInterface'),
+    'WebSocketInterface': ('network', 'WebSocketInterface'),
+    'HTTPInterface': ('network', 'HTTPInterface'),
+    'NetworkInterfaceFactory': ('network', 'NetworkInterfaceFactory'),
+    'MessageQueueInterface': ('network', 'MessageQueueInterface'),
+    'ZeroMQInterface': ('network', 'ZeroMQInterface'),
+    'RabbitMQInterface': ('network', 'RabbitMQInterface'),
+    'TCPServer': ('network', 'TCPServer'),
+    'UDPServer': ('network', 'UDPServer'),
+    'WebSocketServer': ('network', 'WebSocketServer'),
+
+    # Core
+    'CommunicationProtocol': ('core', 'CommunicationProtocol'),
+    'MessageProtocol': ('core', 'MessageProtocol'),
+    'ConnectionProtocol': ('core', 'ConnectionProtocol'),
+    'InterfaceType': ('core', 'InterfaceType'),
+    'Message': ('core', 'Message'),
+    'ConnectionInfo': ('core', 'ConnectionInfo'),
+    'InterfaceConfig': ('core', 'InterfaceConfig'),
+}
+
+# Cache for imported modules
+_imported_cache = {}
+
+
+def __getattr__(name):
+    """
+    Lazy import attributes on demand.
+
+    This function is called when an attribute is not found in the module's namespace.
+    It allows us to defer imports until they're actually needed, avoiding loading
+    heavy dependencies (websockets, pyserial, etc.) at module import time.
+    """
+    if name in _LAZY_IMPORTS:
+        # Check cache first
+        if name in _imported_cache:
+            return _imported_cache[name]
+
+        # Import the module and get the attribute
+        module_name, attr_name = _LAZY_IMPORTS[name]
+        try:
+            from importlib import import_module
+            module = import_module(f'.{module_name}', package='interfaces')
+            attr = getattr(module, attr_name)
+            _imported_cache[name] = attr
+            return attr
+        except ImportError as e:
+            raise AttributeError(
+                f"Cannot import '{name}' from interfaces.{module_name}. "
+                f"This may be due to missing optional dependencies. "
+                f"Original error: {e}"
+            )
+
+    raise AttributeError(f"module 'interfaces' has no attribute '{name}'")
+
+
+def __dir__():
+    """Return list of available attributes for tab completion."""
+    return list(__all__) + ['__version__', 'get_framework_info']
 
 
 def get_framework_info():
@@ -154,64 +222,3 @@ def get_framework_info():
         ],
         "total_components": len(__all__)
     }
-
-
-def create_basic_interfaces_manager():
-    """Create a basic manager for core interface components."""
-
-    class BasicInterfacesManager:
-        """Basic manager for interface framework components."""
-
-        def __init__(self):
-            self.hil_system = None
-            self.monitoring_system = None
-            self.hardware_manager = None
-
-        def initialize_hil(self, config=None):
-            """Initialize HIL system."""
-            if config:
-                self.hil_system = EnhancedHILSystem(config)
-            return self.hil_system
-
-        def initialize_monitoring(self):
-            """Initialize monitoring system."""
-            self.monitoring_system = SystemHealthMonitor()
-            return self.monitoring_system
-
-        def initialize_hardware(self):
-            """Initialize hardware manager."""
-            self.hardware_manager = HardwareManager()  # noqa: F821 - stub implementation
-            return self.hardware_manager
-
-        def get_status(self):
-            """Get status of initialized components."""
-            return {
-                "hil_active": self.hil_system is not None,
-                "monitoring_active": self.monitoring_system is not None,
-                "hardware_active": self.hardware_manager is not None
-            }
-
-    return BasicInterfacesManager()
-
-
-# Convenience factory functions
-def create_hil_system(config=None):
-    """Create and configure a HIL system."""
-    if config:
-        return EnhancedHILSystem(config)
-    return EnhancedHILSystem()
-
-
-def create_data_serializer(format_type="json"):
-    """Create a data serializer for the specified format."""
-    return SerializerFactory.create_serializer(format_type)
-
-
-def create_health_monitor():
-    """Create a system health monitor."""
-    return SystemHealthMonitor()
-
-
-def create_hardware_manager():
-    """Create a hardware device manager."""
-    return HardwareManager()  # noqa: F821 - stub implementation
