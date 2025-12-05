@@ -35,6 +35,49 @@ where:
 
 The algorithm balances exploration (global search) via $w$ and exploitation (local search) via $c_1$ and $c_2$. Figure \ref{fig:pso_swarm} illustrates the particle swarm evolution over iterations, showing convergence toward optimal gain regions.
 
+Algorithm \ref{alg:pso} presents the complete PSO implementation for controller gain optimization.
+
+\begin{algorithm}[htbp]
+\caption{Particle Swarm Optimization for Controller Gain Tuning}
+\label{alg:pso}
+\KwIn{Swarm size $N$, Max iterations $T_{max}$, Gain bounds $[\vect{K}_{min}, \vect{K}_{max}]$}
+\KwOut{Optimal gain vector $\vect{K}^*$}
+\BlankLine
+\tcp{Initialization}
+\For{$i = 1$ \KwTo $N$}{
+    $\vect{x}_i \leftarrow$ random position in $[\vect{K}_{min}, \vect{K}_{max}]$\;
+    $\vect{v}_i \leftarrow$ random velocity\;
+    $\vect{p}_i \leftarrow \vect{x}_i$ \tcp*{Personal best}
+    $f_i \leftarrow J(\vect{x}_i)$ \tcp*{Evaluate cost}
+}
+$\vect{g} \leftarrow \arg\min_i f_i$ \tcp*{Global best}
+\BlankLine
+\tcp{Optimization Loop}
+\For{$k = 1$ \KwTo $T_{max}$}{
+    \For{$i = 1$ \KwTo $N$}{
+        \tcp{Update velocity}
+        $r_1, r_2 \leftarrow$ random$([0,1])$\;
+        $\vect{v}_i \leftarrow w\vect{v}_i + c_1 r_1 (\vect{p}_i - \vect{x}_i) + c_2 r_2 (\vect{g} - \vect{x}_i)$\;
+        \tcp{Update position}
+        $\vect{x}_i \leftarrow \vect{x}_i + \vect{v}_i$\;
+        $\vect{x}_i \leftarrow$ clip($\vect{x}_i$, $\vect{K}_{min}$, $\vect{K}_{max}$)\;
+        \tcp{Evaluate fitness}
+        $f_i \leftarrow J(\vect{x}_i)$ via simulation\;
+        \tcp{Update personal best}
+        \If{$f_i < J(\vect{p}_i)$}{
+            $\vect{p}_i \leftarrow \vect{x}_i$\;
+        }
+    }
+    \tcp{Update global best}
+    $\vect{g} \leftarrow \arg\min_i J(\vect{p}_i)$\;
+    \tcp{Check convergence}
+    \If{$|\Delta J(\vect{g})| < \epsilon$ for $n_{stall}$ iterations}{
+        break\;
+    }
+}
+\Return{$\vect{g}$}\;
+\end{algorithm}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/fig_pso_swarm_evolution.pdf}
