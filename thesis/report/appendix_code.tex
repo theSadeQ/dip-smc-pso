@@ -1,0 +1,24 @@
+\section{Controller Implementation}
+\label{app:code}
+
+\subsection{Classical SMC Implementation}
+\begin{lstlisting}[language=Python, caption=Classical SMC Controller]
+def compute_control(self, state, last_control, history):
+    """Classical SMC control computation."""
+    s = self.compute_sliding_variable(state)
+    u = -self.gains * np.sign(s)
+    return self.saturate(u)
+\end{lstlisting}
+
+\subsection{PSO Optimization}
+\begin{lstlisting}[language=Python, caption=PSO Gain Tuning]
+optimizer = PSOTuner(
+    bounds=gain_bounds,
+    swarm_size=30,
+    max_iter=100,
+    cost_function=evaluate_performance
+)
+optimal_gains, best_cost = optimizer.optimize()
+\end{lstlisting}
+
+% Full source code available at: https://github.com/theSadeQ/dip-smc-pso

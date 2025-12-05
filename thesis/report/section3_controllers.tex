@@ -1,0 +1,36 @@
+\section{Sliding Mode Controller Design}
+\label{sec:controllers}
+
+% Content to be extracted from docs/theory/classical_smc.md, sta_smc.md, adaptive_smc.md
+
+\subsection{Classical SMC}
+The sliding surface is defined as:
+\begin{equation}
+s(\vect{x}, t) = \lambda \vect{e} + \dot{\vect{e}}
+\label{eq:sliding_surface}
+\end{equation}
+
+The control law ensures $s \to 0$ in finite time:
+\begin{equation}
+u = -K \sign(s)
+\label{eq:classical_control}
+\end{equation}
+
+\subsection{Super-Twisting Algorithm (STA-SMC)}
+To reduce chattering, STA uses continuous control with second-order sliding mode:
+\begin{equation}
+u = -k_1 |s|^{1/2} \sign(s) + u_1, \quad \dot{u}_1 = -k_2 \sign(s)
+\label{eq:sta_control}
+\end{equation}
+
+\subsection{Adaptive SMC}
+Gain adaptation handles model uncertainty:
+\begin{equation}
+\hat{K}(t) = \hat{K}(0) + \gamma \int_0^t |s(\tau)| d\tau
+\label{eq:adaptive_gain}
+\end{equation}
+
+\subsection{Hybrid Adaptive STA-SMC}
+Combines adaptive gains with super-twisting for robust, low-chattering control.
+
+% Comparison table will be added from csv_to_table.py script

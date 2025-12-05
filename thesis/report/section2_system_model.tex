@@ -1,0 +1,31 @@
+\section{System Model and Problem Formulation}
+\label{sec:model}
+
+% Content to be extracted from docs/theory/system_dynamics.md
+
+\subsection{Physical Description}
+The double-inverted pendulum consists of a cart with two links attached via frictionless revolute joints. The control objective is to stabilize both pendulums in the upright position while regulating cart position.
+
+\subsection{State-Space Representation}
+The system state vector is:
+\begin{equation}
+\vect{x} = [x, \theta_1, \theta_2, \dot{x}, \dot{\theta}_1, \dot{\theta}_2]^T \in \Real^6
+\label{eq:state_vector}
+\end{equation}
+
+The nonlinear dynamics are:
+\begin{equation}
+\vect{M}(\vect{q})\ddot{\vect{q}} + \vect{C}(\vect{q}, \dot{\vect{q}}) + \vect{G}(\vect{q}) = \vect{B}u
+\label{eq:dynamics}
+\end{equation}
+
+where $\vect{q} = [x, \theta_1, \theta_2]^T$ represents generalized coordinates, $u$ is the control force applied to the cart, and $\vect{M}$, $\vect{C}$, $\vect{G}$ are inertia, Coriolis, and gravity terms.
+
+\subsection{Control Objectives}
+\begin{enumerate}
+\item Stabilization: $\lim_{t \to \infty} [\theta_1(t), \theta_2(t)] = [0, 0]$
+\item Cart regulation: $|x(t)| \leq x_{max}$
+\item Bounded control effort: $|u(t)| \leq u_{max}$
+\end{enumerate}
+
+% Figures will be added here from generate_figures.py script
