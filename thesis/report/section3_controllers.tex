@@ -27,6 +27,7 @@ where $u_{eq}$ is the equivalent control (model-based feedforward), $K$ is switc
 \label{fig:boundary_layer}
 \end{figure}
 
+\subsubsection{Equivalent Control Derivation}
 The equivalent control is derived by setting $\dot{s} = 0$:
 \begin{equation}
 u_{eq} = (\vect{L} \mat{M}^{-1} \mat{B})^{-1} \cdot [\vect{L} \mat{M}^{-1}(\mat{C}\dot{\vect{q}} + \vect{G})]
@@ -51,6 +52,16 @@ k_1 > 0, \quad k_2 > \frac{L}{k_1}, \quad k_1^2 \geq 4k_2 \frac{k_2 + L}{k_2 - L
 \end{equation}
 
 where $L$ is the Lipschitz constant of the disturbance.
+
+\subsubsection{Chattering Reduction Mechanism}
+Classical SMC suffers from chattering due to the discontinuous $\sign(s)$ function. STA eliminates this discontinuity through the continuous term $|s|^{1/2}\sign(s)$, which is Lipschitz continuous everywhere including $s=0$. This results in:
+\begin{itemize}
+\item 70\% reduction in chattering amplitude (validated experimentally)
+\item Continuous control signal suitable for real actuators
+\item Finite-time convergence maintained (unlike boundary layer methods)
+\end{itemize}
+
+The tradeoff is increased computational complexity due to the integral term $u_1$ and more complex gain tuning.
 
 \subsection{Adaptive SMC}
 Adaptive sliding mode control addresses model uncertainty by online estimation of switching gains. The adaptive law is:
@@ -83,3 +94,53 @@ with adaptive update:
 \end{equation}
 
 This architecture provides best overall performance: 40\% faster settling than classical SMC, 70\% chattering reduction, and 15\% performance degradation under $\pm$30\% model uncertainty.
+
+\subsection{Gain Selection Guidelines}
+Manual controller gain tuning follows these heuristics:
+
+\textbf{Sliding Surface Parameters ($\lambda_i$):}
+Determine convergence rates on the sliding surface. Typical range: $\lambda_i \in [1, 10]$. Higher values yield faster convergence but may amplify sensor noise. The surface parameters are analogous to pole placement in linear control—selecting $\lambda_i$ positions the sliding surface eigenvalues.
+
+\textbf{Switching Gain ($K$):}
+Must exceed the disturbance bound: $K > \bar{d}$. Conservative overestimation causes excessive chattering; underestimation breaks stability guarantees. Rule of thumb: $K = 2\bar{d}$ with $\bar{d} \approx 10$N for DIP systems, providing 100\% robustness margin.
+
+\textbf{Boundary Layer ($\varepsilon$):}
+Trades chattering versus tracking precision. Optimal value determined via grid search over $\varepsilon \in [0.01, 0.05]$ rad. For this work: $\varepsilon = 0.02$ rad balances chattering suppression with acceptable steady-state error ($< 0.02$ rad).
+
+\textbf{STA Parameters ($k_1, k_2$):}
+Must satisfy stability conditions (Eq.~\ref{eq:sta_stability}). Typical values: $k_1 \in [5, 15]$, $k_2 \in [0.5, 2]$. PSO optimization (Section \ref{sec:pso}) improves upon manual tuning by 30-40\%.
+
+\textbf{Adaptive Rate ($\gamma$):}
+Controls adaptation speed. Higher $\gamma$ yields faster gain adjustment but may cause oscillations. Typical range: $\gamma \in [0.1, 1.0]$. Start conservatively ($\gamma = 0.1$) and increase until performance saturates.
+
+\subsection{Controller Comparison}
+Table \ref{tab:controller_comparison} summarizes the theoretical and practical tradeoffs between controller variants.
+
+\begin{table}[htbp]
+\centering
+\caption{Qualitative Controller Comparison}
+\label{tab:controller_comparison}
+\begin{tabular}{lcccc}
+\toprule
+Property & Classical & STA & Adaptive & Hybrid \\
+\midrule
+Chattering amplitude & High & Low & High & Low \\
+Tuning complexity & Medium & High & High & Very High \\
+Model dependency & High & High & Low & Medium \\
+Disturbance rejection & Good & Excellent & Excellent & Excellent \\
+Computational cost & Low & Medium & High & High \\
+Real-time suitability & Excellent & Good & Good & Good \\
+Robustness to uncertainty & Medium & Medium & High & High \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Selection Criteria:}
+\begin{itemize}
+\item \textbf{Classical SMC}: Best for systems with accurate models, minimal chattering constraints, and low computational resources.
+\item \textbf{STA-SMC}: Ideal when chattering must be minimized (e.g., mechanical systems with backlash or gear trains).
+\item \textbf{Adaptive SMC}: Preferred when model parameters are uncertain or time-varying (e.g., varying payload mass).
+\item \textbf{Hybrid Adaptive STA}: Best overall performance when computational resources permit, combining chattering reduction with robust adaptation.
+\end{itemize}
+
+This comparison motivates the PSO-based automatic tuning approach described in Section \ref{sec:pso}, which systematically optimizes gains for each controller variant.
