@@ -33,7 +33,14 @@ where:
 \item $\vect{g}$: Global best position (swarm leader)
 \end{itemize}
 
-The algorithm balances exploration (global search) via $w$ and exploitation (local search) via $c_1$ and $c_2$.
+The algorithm balances exploration (global search) via $w$ and exploitation (local search) via $c_1$ and $c_2$. Figure \ref{fig:pso_swarm} illustrates the particle swarm evolution over iterations, showing convergence toward optimal gain regions.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/fig_pso_swarm_evolution.pdf}
+\caption{PSO swarm evolution showing particle positions converging toward optimal controller gains over 100 iterations. Color intensity indicates fitness (darker colors represent better cost function values).}
+\label{fig:pso_swarm}
+\end{figure}
 
 \subsection{Implementation}
 PSO configuration optimized for controller tuning:
