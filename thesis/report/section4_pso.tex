@@ -1,0 +1,32 @@
+\section{PSO-Based Gain Optimization}
+\label{sec:pso}
+
+% Content to be extracted from docs/theory/pso_optimization.md
+
+\subsection{Optimization Problem}
+Controller gains are optimized to minimize the cost function:
+\begin{equation}
+J(\vect{K}) = w_1 T_s + w_2 M_p + w_3 E_{total} + w_4 \text{Chattering}
+\label{eq:cost_function}
+\end{equation}
+
+where $T_s$ is settling time, $M_p$ is overshoot, $E_{total}$ is energy consumption, and Chattering is measured via total variation.
+
+\subsection{PSO Algorithm}
+Particle Swarm Optimization iteratively updates particle positions:
+\begin{align}
+\vect{v}_i(k+1) &= w\vect{v}_i(k) + c_1 r_1 (\vect{p}_i - \vect{x}_i(k)) + c_2 r_2 (\vect{g} - \vect{x}_i(k)) \\
+\vect{x}_i(k+1) &= \vect{x}_i(k) + \vect{v}_i(k+1)
+\label{eq:pso_update}
+\end{align}
+
+\subsection{Implementation}
+PSO configuration:
+\begin{itemize}
+\item Swarm size: 30 particles
+\item Iterations: 100
+\item Inertia weight: $w = 0.7$
+\item Cognitive/social parameters: $c_1 = c_2 = 1.5$
+\end{itemize}
+
+% PSO convergence plot will be added from generate_figures.py
