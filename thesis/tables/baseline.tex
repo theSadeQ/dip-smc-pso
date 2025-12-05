@@ -5,17 +5,19 @@
 \centering
 \caption{Baseline Performance Comparison}
 \label{tab:baseline}
-\begin{tabular}{lcccccc}
+\small
+\begin{tabular}{lcccccp{4.5cm}}
 \toprule
-Controller Name & Compute Time Us & Settling Time S & Overshoot Pct & Energy J & Convergence Ms & Note \\
+Controller & Comp. & Settling & Overshoot & Energy & Conv. & Note \\
+ & ($\mu$s) & (s) & (\%) & (J) & (ms) &  \\
 \midrule
-Classical SMC & \textbf{18.500} & 2.150 & 5.800 & 12.400 & 2100.0 & Boundary layer $\epsilon$=0.02; stable baseline \\
-STA SMC & 24.200 & 1.820 & 2.300 & 11.800 & 1850.0 & Super-Twisting Algorithm; low overshoot \\
-Adaptive SMC & 31.600 & 2.350 & 8.200 & 13.600 & 2400.0 & Online parameter estimation; higher control effort \\
-Hybrid Adaptive STA & 26.800 & 1.950 & 3.500 & 12.300 & 1920.0 & Modular switching; balanced performance \\
-Swing-Up SMC & 42.300 & 3.150 & 7.100 & 14.500 & 3100.0 & Energy-based large-angle control \\
-MPC Controller & 48.700 & \textbf{1.480} & \textbf{1.200} & \textbf{10.900} & \textbf{1650.0} & Experimental mode; requires cvxpy \\
-Factory Pattern & 20.100 & 2.080 & 5.200 & 12.500 & 2150.0 & Thread-safe wrapper; minimal overhead \\
+Classical SMC & \textbf{18.5} & 2.15 & 5.8 & 12.4 & 2100 & Boundary layer $\epsilon$=0.02; stable baseline \\
+STA SMC & 24.2 & 1.82 & 2.3 & 11.8 & 1850 & Super-Twisting Algorithm; low overshoot \\
+Adaptive SMC & 31.6 & 2.35 & 8.2 & 13.6 & 2400 & Online parameter estimation; higher control effort \\
+Hybrid Adaptive STA & 26.8 & 1.95 & 3.5 & 12.3 & 1920 & Modular switching; balanced performance \\
+Swing-Up SMC & 42.3 & 3.15 & 7.1 & 14.5 & 3100 & Energy-based large-angle control \\
+MPC Controller & 48.7 & \textbf{1.48} & \textbf{1.2} & \textbf{10.9} & \textbf{1650} & Experimental mode; requires cvxpy \\
+Factory Pattern & 20.1 & 2.08 & 5.2 & 12.5 & 2150 & Thread-safe wrapper; minimal overhead \\
 \bottomrule
 \end{tabular}
 \end{table}
