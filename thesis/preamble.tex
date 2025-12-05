@@ -62,22 +62,6 @@
 %%% BIBLIOGRAPHY %%%
 \usepackage[numbers,sort&compress]{natbib}  % Numeric citations [1,2,3]
 
-%%% HYPERLINKS & CROSS-REFERENCES %%%
-% Compatibility fix for hyperref with older LaTeX kernels
-\providecommand{\IfFormatAtLeastT}[2]{}
-\providecommand{\IfDocumentMetadataT}[1]{}
-\usepackage[
-    colorlinks=true,
-    linkcolor=blue,       % Internal links (chapters, figures)
-    citecolor=red,        % Citation links
-    urlcolor=cyan,        % External URLs
-    bookmarks=true
-]{hyperref}
-
-% Ensure proper section numbering (article class should do this by default)
-\setcounter{secnumdepth}{3}  % Number down to subsubsection
-\setcounter{tocdepth}{3}      % TOC depth to subsubsection
-
 %%% HEADERS & FOOTERS %%%
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -112,6 +96,43 @@
 %%% TIKZ (for diagrams) %%%
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,positioning,calc}
+
+%%% HYPERLINKS & CROSS-REFERENCES %%%
+% IMPORTANT: hyperref must be loaded LAST (after all other packages)
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,       % Internal links (sections, figures, tables)
+    citecolor=red,        % Citation links
+    urlcolor=cyan,        % External URLs
+    bookmarks=true
+]{hyperref}
+
+% CRITICAL FIX: Hyperref 7.01o (July 2025) has a bug preventing counter increments
+% Root cause: hyperref's \H@refstepcounter is not properly incrementing counters
+% Workaround: manually restore proper counter stepping behavior for all counter types
+\makeatletter
+
+% Fix 1: Standard \refstepcounter (for sections, equations, etc.)
+\let\@@latex@refstepcounter\refstepcounter
+\def\refstepcounter#1{%
+  \stepcounter{#1}%  % Manually increment the counter FIRST
+  \protected@edef\@currentlabel{\csname p@#1\endcsname\csname the#1\endcsname}%
+  \@ifundefined{@hyper@refstepcounter}{}{%
+    \@hyper@refstepcounter{#1}%  % Create hyperlink anchor if hyperref loaded
+  }%
+}
+
+% Fix 2: Caption package's refstepcounter wrapper (for tables/figures)
+\@ifpackageloaded{caption}{%
+  % Patch caption package to use fixed \refstepcounter
+  \let\caption@refstepcounter\refstepcounter
+}{}
+
+\makeatother
+
+% Ensure proper section numbering (article class should do this by default)
+\setcounter{secnumdepth}{3}  % Number down to subsubsection
+\setcounter{tocdepth}{3}      % TOC depth to subsubsection
 
 %%% CUSTOM COMMANDS %%%
 
