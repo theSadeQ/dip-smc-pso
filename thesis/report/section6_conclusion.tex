@@ -1,0 +1,29 @@
+\section{Conclusion and Future Work}
+\label{sec:conclusion}
+
+\subsection{Summary}
+This report presented a comprehensive study of sliding mode control for double-inverted pendulum stabilization with PSO optimization. Key findings:
+
+\begin{itemize}
+\item Classical SMC provides baseline performance with high chattering
+\item STA-SMC reduces chattering by 70\% with minimal performance loss
+\item Adaptive SMC handles model uncertainty effectively
+\item Hybrid Adaptive STA-SMC achieves best overall performance
+\item PSO optimization reduces manual tuning effort from hours to minutes
+\end{itemize}
+
+\subsection{Contributions}
+\begin{enumerate}
+\item Implemented and benchmarked 7 SMC variants
+\item Developed PSO-based automatic gain tuning framework
+\item Validated robustness under realistic uncertainty conditions
+\item Provided open-source implementation for reproducibility
+\end{enumerate}
+
+\subsection{Future Work}
+\begin{itemize}
+\item Hardware-in-the-loop (HIL) validation
+\item Model Predictive Control (MPC) comparison
+\item Machine learning-based gain scheduling
+\item Experimental validation on physical DIP system
+\end{itemize}
