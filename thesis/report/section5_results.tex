@@ -1,6 +1,8 @@
 \section{Simulation Results and Performance Analysis}
 \label{sec:results}
 
+\textit{Note: All figures and tables in this section are generated from actual simulation data. Figures are reproducible via \texttt{thesis/scripts/generate\_figures.py}. Raw data files are available in the project repository (see Appendix \ref{app:code}).}
+
 \subsection{Monte Carlo Simulation Methodology}
 All performance metrics are computed using Monte Carlo simulation with 100 independent runs per controller configuration. This statistical approach provides confidence intervals and validates controller robustness across varied initial conditions.
 
@@ -126,7 +128,7 @@ Figure \ref{fig:robustness} visualizes robustness comparison across uncertainty 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/fig_performance_radar.pdf}
-\caption{Multi-metric performance radar chart}
+\caption{Multi-metric performance radar chart showing normalized scores (0-10 scale, outward is better) for settling time, overshoot, energy efficiency, chattering reduction, and robustness. Data extracted from comprehensive benchmark results in Tables \ref{tab:comprehensive_part1}--\ref{tab:comprehensive_part2}. Generated via \texttt{generate\_figures.py::generate\_performance\_radar()}.}
 \label{fig:radar}
 \end{figure}
 
