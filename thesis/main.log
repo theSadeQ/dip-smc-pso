@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.10.26)  5 DEC 2025 18:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.10.26)  5 DEC 2025 18:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1179,10 +1179,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 2.
 ) [3
 
-{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}] (main.toc
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 2.
-)
+{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}] (main.toc)
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
@@ -1266,7 +1263,8 @@ Package hyperref Warning: Suppressing empty link on input line 21.
 Package hyperref Warning: Suppressing empty link on input line 21.
 
 
-Package hyperref Warning: Suppressing empty link on input line 21.
+LaTeX Warning: Reference `sec:conclusion' on page 5 undefined on input line 21.
+
 
 ) (report/section2_system_model.tex
 ! Undefined control sequence.
@@ -1302,6 +1300,8 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 11.
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {equation}\bool_lazy_and:nnT {\l__hyp_target_cr...
@@ -1844,12 +1844,34 @@ pdfTeX warning (ext4): destination with the same identifier (name{subsection.0.
 l.6 \subsection{Baseline Comparison}
                                     
 
-LaTeX Warning: Reference `tab:baseline' on page 7 undefined on input line 7.
+Package caption Warning: \label without proper reference on input line 18.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `fig:settling_time' on page 7 undefined on input line 
+12.
+
+<figures/fig_settling_time_comparison.pdf, id=114, 385.64076pt x 304.65141pt>
+File: figures/fig_settling_time_comparison.pdf Graphic file (type pdf)
+<use figures/fig_settling_time_comparison.pdf>
+Package pdftex.def Info: figures/fig_settling_time_comparison.pdf  used on inpu
+t line 16.
+(pdftex.def)             Requested size: 341.43437pt x 269.73502pt.
+! Undefined control sequence.
+\caption@refstepcounter@ ->\H@refstepcounter 
+                                             
+l.17 \caption{
+              Settling time comparison for all controllers}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {subsection}\bool_lazy_and:nnT {\l__hyp_target_...
-l.12 \subsection{PSO-Optimized Performance}
+l.21 \subsection{PSO-Optimized Performance}
                                            
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1862,12 +1884,95 @@ pdfTeX warning (ext4): destination with the same identifier (name{subsection.0.
 0}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.12 \subsection{PSO-Optimized Performance}
+l.21 \subsection{PSO-Optimized Performance}
                                            
+
+LaTeX Warning: Reference `fig:pso_convergence' on page 7 undefined on input lin
+e 22.
+
+<figures/fig_pso_convergence.pdf, id=115, 394.28242pt x 280.95967pt>
+File: figures/fig_pso_convergence.pdf Graphic file (type pdf)
+<use figures/fig_pso_convergence.pdf>
+Package pdftex.def Info: figures/fig_pso_convergence.pdf  used on input line 26
+.
+(pdftex.def)             Requested size: 320.0935pt x 228.09052pt.
+! Undefined control sequence.
+\caption@refstepcounter@ ->\H@refstepcounter 
+                                             
+l.27 \caption{
+              PSO cost function convergence over iterations}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[7 <./figures/fig_settling_time_comparison.pdf>]
+
+LaTeX Warning: Reference `fig:overshoot' on page 8 undefined on input line 31.
+
+
+LaTeX Warning: Reference `fig:energy' on page 8 undefined on input line 31.
+
+<figures/fig_overshoot_comparison.pdf, id=163, 382.77066pt x 304.65141pt>
+File: figures/fig_overshoot_comparison.pdf Graphic file (type pdf)
+<use figures/fig_overshoot_comparison.pdf>
+Package pdftex.def Info: figures/fig_overshoot_comparison.pdf  used on input li
+ne 35.
+(pdftex.def)             Requested size: 341.43437pt x 271.76181pt.
+! Undefined control sequence.
+\caption@refstepcounter@ ->\H@refstepcounter 
+                                             
+l.36 \caption{
+              Overshoot comparison across controllers}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+<figures/fig_energy_consumption.pdf, id=164, 388.52655pt x 304.65141pt>
+File: figures/fig_energy_consumption.pdf Graphic file (type pdf)
+<use figures/fig_energy_consumption.pdf>
+Package pdftex.def Info: figures/fig_energy_consumption.pdf  used on input line
+ 42.
+(pdftex.def)             Requested size: 341.43437pt x 267.74077pt.
+! Undefined control sequence.
+\caption@refstepcounter@ ->\H@refstepcounter 
+                                             
+l.43 \caption{
+              Total energy consumption comparison}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Reference `fig:chattering' on page 8 undefined on input line 50.
+
+
+<figures/fig_chattering_amplitude.pdf, id=165, 382.77066pt x 304.65141pt>
+File: figures/fig_chattering_amplitude.pdf Graphic file (type pdf)
+<use figures/fig_chattering_amplitude.pdf>
+Package pdftex.def Info: figures/fig_chattering_amplitude.pdf  used on input li
+ne 54.
+(pdftex.def)             Requested size: 341.43437pt x 271.76181pt.
+! Undefined control sequence.
+\caption@refstepcounter@ ->\H@refstepcounter 
+                                             
+l.55 \caption{
+              Chattering amplitude comparison}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {subsection}\bool_lazy_and:nnT {\l__hyp_target_...
-l.21 \subsection{Robustness Analysis}
+l.59 \subsection{Robustness Analysis}
                                      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1880,12 +1985,92 @@ pdfTeX warning (ext4): destination with the same identifier (name{subsection.0.
 0}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.21 \subsection{Robustness Analysis}
+l.59 \subsection{Robustness Analysis}
                                      
+
+LaTeX Warning: Reference `fig:robustness' on page 8 undefined on input line 72.
+
+
+
+LaTeX Warning: Reference `fig:radar' on page 8 undefined on input line 72.
+
+<figures/fig_robustness_comparison.pdf, id=166, 382.77066pt x 304.65141pt>
+File: figures/fig_robustness_comparison.pdf Graphic file (type pdf)
+<use figures/fig_robustness_comparison.pdf>
+Package pdftex.def Info: figures/fig_robustness_comparison.pdf  used on input l
+ine 76.
+(pdftex.def)             Requested size: 341.43437pt x 271.76181pt.
+! Undefined control sequence.
+\caption@refstepcounter@ ->\H@refstepcounter 
+                                             
+l.77 \caption{
+              Robustness comparison under model uncertainty}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+<figures/fig_performance_radar.pdf, id=167, 395.76021pt x 386.37675pt>
+File: figures/fig_performance_radar.pdf Graphic file (type pdf)
+<use figures/fig_performance_radar.pdf>
+Package pdftex.def Info: figures/fig_performance_radar.pdf  used on input line 
+83.
+(pdftex.def)             Requested size: 341.43437pt x 333.34462pt.
+! Undefined control sequence.
+\caption@refstepcounter@ ->\H@refstepcounter 
+                                             
+l.84 \caption{
+              Multi-metric performance radar chart}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {subsection}\bool_lazy_and:nnT {\l__hyp_target_...
-l.31 \subsection{Computational Efficiency}
+l.88 \subsection{Time-Domain Analysis}
+                                      
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{subsection.0.
+0}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.88 \subsection{Time-Domain Analysis}
+                                      
+
+LaTeX Warning: Reference `fig:timeseries' on page 8 undefined on input line 89.
+
+
+<figures/fig_time_series_response.pdf, id=168, 385.64076pt x 280.95967pt>
+File: figures/fig_time_series_response.pdf Graphic file (type pdf)
+<use figures/fig_time_series_response.pdf>
+Package pdftex.def Info: figures/fig_time_series_response.pdf  used on input li
+ne 93.
+(pdftex.def)             Requested size: 362.77525pt x 264.30789pt.
+! Undefined control sequence.
+\caption@refstepcounter@ ->\H@refstepcounter 
+                                             
+l.94 \caption{
+              Time-domain response comparison}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> \H@refstepcounter 
+                             {subsection}\bool_lazy_and:nnT {\l__hyp_target_...
+l.98 \subsection{Computational Efficiency}
                                           
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1898,8 +2083,12 @@ pdfTeX warning (ext4): destination with the same identifier (name{subsection.0.
 0}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.31 \subsection{Computational Efficiency}
+l.98 \subsection{Computational Efficiency}
                                           ) (report/section6_conclusion.tex
+[8 <./figures/fig_pso_convergence.pdf>] [9 <./figures/fig_overshoot_comparison.
+pdf> <./figures/fig_energy_consumption.pdf>] [10 <./figures/fig_chattering_ampl
+itude.pdf> <./figures/fig_robustness_comparison.pdf>] [11 <./figures/fig_perfor
+mance_radar.pdf> <./figures/fig_time_series_response.pdf>]
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {section}\bool_lazy_and:nnT {\l__hyp_target_cre...
@@ -1935,7 +2124,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{subsection.0.
 <to be read again> 
                    \relax 
 l.4 \subsection{Summary}
-                         [7]
+                        
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {subsection}\bool_lazy_and:nnT {\l__hyp_target_...
@@ -2116,6 +2305,13 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+[12
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
+}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.11 \end{lstlisting}
+                     ]
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {subsection}\bool_lazy_and:nnT {\l__hyp_target_...
@@ -2127,6 +2323,13 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+
+pdfTeX warning (ext4): destination with the same identifier (name{subsection.Al
+ph0.0}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.13 \subsection{PSO Optimization}
+                                  
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {lstlisting}\bool_lazy_and:nnT {\l__hyp_target_...
@@ -2138,6 +2341,13 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+
+pdfTeX warning (ext4): destination with the same identifier (name{lstlisting.0}
+) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.14 ...[language=Python, caption=PSO Gain Tuning]
+                                                  
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {lstnumber}\bool_lazy_and:nnT {\l__hyp_target_c...
@@ -2149,6 +2359,13 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.15 optimizer 
+               = PSOTuner(
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {lstnumber}\bool_lazy_and:nnT {\l__hyp_target_c...
@@ -2160,6 +2377,13 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.16     bounds=
+                gain_bounds,
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {lstnumber}\bool_lazy_and:nnT {\l__hyp_target_c...
@@ -2171,6 +2395,13 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.17     swarm_size=
+                    30,
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {lstnumber}\bool_lazy_and:nnT {\l__hyp_target_c...
@@ -2182,6 +2413,13 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.18     max_iter=
+                  100,
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {lstnumber}\bool_lazy_and:nnT {\l__hyp_target_c...
@@ -2193,6 +2431,13 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.19     cost_function=
+                       evaluate_performance
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {lstnumber}\bool_lazy_and:nnT {\l__hyp_target_c...
@@ -2204,6 +2449,13 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.20 )
+      
 ! Undefined control sequence.
 <argument> \H@refstepcounter 
                              {lstnumber}\bool_lazy_and:nnT {\l__hyp_target_c...
@@ -2215,71 +2467,17 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[8
+
 pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
 }) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.22 \end{lstlisting}
-                     
-pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
-}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.22 \end{lstlisting}
-                     
-pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
-}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.22 \end{lstlisting}
-                     
-pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
-}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.22 \end{lstlisting}
-                     
-pdfTeX warning (ext4): destination with the same identifier (name{subsection.Al
-ph0.0}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.22 \end{lstlisting}
-                     
-pdfTeX warning (ext4): destination with the same identifier (name{lstlisting.0}
-) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.22 \end{lstlisting}
-                     
-pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
-}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.22 \end{lstlisting}
-                     
-pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
-}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.22 \end{lstlisting}
-                     
-pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
-}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.22 \end{lstlisting}
-                     
-pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
-}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.22 \end{lstlisting}
-                     ])
+<to be read again> 
+                   \relax 
+l.21 optimal_gains,
+                    best_cost = optimizer.optimize())
 
 Package natbib Warning: There were undefined citations.
 
-[9
+[13
 pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.0.0
 }) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
@@ -2306,17 +2504,26 @@ L3 programming layer <2024-01-04>
 
 LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 366F79FFA463319EFEB550D019FDEACF;4826.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: 5986738D6A0A261D6194E8414D1C6C75;3248
+(rerunfilecheck)             After:  1D292BB11ABC0E85E9F313B8138D87AC;4987.
  ) 
 Here is how much of TeX's memory you used:
- 34630 strings out of 474484
- 701910 string characters out of 5753421
- 1995542 words of memory out of 5000000
- 56314 multiletter control sequences out of 15000+600000
+ 34711 strings out of 474484
+ 704865 string characters out of 5753421
+ 1976542 words of memory out of 5000000
+ 56383 multiletter control sequences out of 15000+600000
  633278 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 115i,12n,110p,882b,1406s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 115i,12n,110p,882b,1462s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\SadeQ\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm
 1200.pk><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Program F
 iles/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX/fonts/typ
@@ -2328,9 +2535,9 @@ gram Files/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX/fonts
 /type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy
 8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Program Fil
 es/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (9 pages, 266327 bytes).
+Output written on main.pdf (13 pages, 382124 bytes).
 PDF statistics:
- 278 PDF objects out of 1000 (max. 8388607)
- 25 named destinations out of 1000 (max. 500000)
- 253 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 585 PDF objects out of 1000 (max. 8388607)
+ 37 named destinations out of 1000 (max. 500000)
+ 213 words of extra memory for PDF output out of 10000 (max. 10000000)
 
