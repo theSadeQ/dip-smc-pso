@@ -77,27 +77,12 @@ Figure \ref{fig:overshoot} compares overshoot percentages, while Figure \ref{fig
 
 Comprehensive benchmark statistics across 100 Monte Carlo runs confirm these trends with high confidence intervals. Table \ref{tab:comprehensive} presents the complete statistical analysis including means, standard deviations, and 95\% confidence intervals for all performance metrics.
 
-% Note: Comprehensive table included in landscape format due to width (20 columns)
-\afterpage{
+% Note: Comprehensive table included in landscape format due to width (18 columns)
+\clearpage
 \begin{landscape}
-\begin{table}[htbp]
-\centering
-\caption{Comprehensive Controller Benchmark - 100 Monte Carlo Runs}
-\label{tab:comprehensive}
-\scriptsize
-\begin{tabular}{lccccccccccccccccccc}
-\toprule
-Controller Name & N Runs & N Success & Success Rate & Settling Time Mean & Settling Time Std & Settling Time CI Lower & Settling Time CI Upper & Overshoot Mean & Overshoot Std & Overshoot CI Lower & Overshoot CI Upper & Energy Mean & Energy Std & Energy CI Lower & Energy CI Upper & Chattering Freq Mean & Chattering Freq Std & Chattering Amp Mean & Chattering Amp Std \\
-\midrule
-classical\_smc & 100 & 100 & 1.00 & 10.00 & 0.00 & 10.00 & 10.00 & 27487.6 & 22121.7 & 23151.8 & 31823.5 & 9842.6 & 7517.8 & 8369.1 & 11316.1 & 0.002 & 0.014 & 0.647 & 0.347 \\
-sta\_smc & 100 & 100 & 1.00 & 10.00 & 0.00 & 10.00 & 10.00 & 15083.0 & 13222.8 & 12491.3 & 17674.7 & 202907.0 & 15749.5 & 199820.1 & 205993.9 & 0.000 & 0.000 & 3.088 & 0.141 \\
-adaptive\_smc & 100 & 100 & 1.00 & 10.00 & 0.00 & 10.00 & 10.00 & 15246.0 & 13391.4 & 12621.3 & 17870.7 & 214255.0 & 6254.4 & 213029.1 & 215480.8 & 0.000 & 0.000 & 3.098 & 0.030 \\
-hybrid\_adaptive\_sta\_smc & 100 & 100 & 1.00 & 10.00 & 0.00 & 10.00 & 10.00 & 100.0 & 0.0 & 100.0 & 100.0 & 1000000.0 & 0.0 & 1000000.0 & 1000000.0 & 0.000 & 0.000 & 0.000 & 0.000 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\input{tables/comprehensive}
 \end{landscape}
-}
+\clearpage
 
 Chattering analysis (Figure \ref{fig:chattering}) shows STA-SMC reduces chattering amplitude by 70\% compared to classical SMC.
 
@@ -121,26 +106,11 @@ Hybrid Adaptive STA-SMC demonstrated best robustness with 15\% performance degra
 Table \ref{tab:robustness} quantifies robustness metrics under $\pm$30\% parameter uncertainty, showing settling time degradation, convergence rates, and overall robustness scores.
 
 % Note: Robustness table in landscape format
-\afterpage{
+\clearpage
 \begin{landscape}
-\begin{table}[htbp]
-\centering
-\caption{Robustness Analysis Under $\pm$30\% Parameter Uncertainty}
-\label{tab:robustness}
-\small
-\begin{tabular}{lccccccc}
-\toprule
-Controller & Nominal Settling & Perturbed Settling & Settling Degrad. \% & Nominal Conv. \% & Perturbed Conv. \% & Conv. Degrad. \% & Robustness Score \\
-\midrule
-classical\_smc & 10.00 & 10.00 & 0.00 & 0.00 & 0.00 & 100.00 & 30.00 \\
-sta\_smc & 10.00 & 10.00 & 0.00 & 0.00 & 0.00 & 100.00 & 30.00 \\
-adaptive\_smc & 10.00 & 10.00 & 0.00 & 0.00 & 0.00 & 100.00 & 30.00 \\
-hybrid\_adaptive\_sta\_smc & 10.00 & 10.00 & 0.00 & 0.00 & 0.00 & 100.00 & 30.00 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\input{tables/robustness}
 \end{landscape}
-}
+\clearpage
 
 Figure \ref{fig:robustness} visualizes robustness comparison across uncertainty conditions, while Figure \ref{fig:radar} provides a multi-metric performance overview.
 
