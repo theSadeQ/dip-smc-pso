@@ -54,8 +54,18 @@
 % MAIN CONTENT (6 sections for 20-30 page report)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Workaround for numbering issue: manually set counters
+% Root cause unknown - LaTeX not auto-incrementing section counter
+\setcounter{section}{0}      % Will become 1 when first \section is called
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\setcounter{equation}{0}
+
 %%% SECTION 1: INTRODUCTION %%%
 \input{report/section1_introduction}
+%\addtocounter{section}{1}   % Manual increment if auto-increment fails
 
 %%% SECTION 2: SYSTEM MODEL & PROBLEM FORMULATION %%%
 \input{report/section2_system_model}

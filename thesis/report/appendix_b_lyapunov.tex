@@ -180,21 +180,19 @@ Table \ref{tab:lyapunov_summary} summarizes the stability results for all contro
 \centering
 \caption{Lyapunov Stability Summary for All Controllers}
 \label{tab:lyapunov_summary}
-\begin{tabular}{@{}lllll@{}}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lp{2.5cm}lp{2cm}p{2.5cm}@{}}
 \toprule
-\textbf{Controller} & \textbf{Lyapunov Function} & \textbf{Stability} & \textbf{Key Conditions} & \textbf{Convergence} \\
+\textbf{Controller} & \textbf{Lyapunov $V$} & \textbf{Stability} & \textbf{Key Conditions} & \textbf{Convergence} \\
 \midrule
-Classical SMC & $V = \frac{1}{2}s^2$ & Asymptotic & $K > \bar{d}$ & Finite-time to surface \\
- & & (exponential) & Controllability & Exponential on surface \\
+Classical & $\frac{1}{2}s^2$ & Asymptotic (exp.) & $K > \bar{d}$, Controllable & Finite-time to surf., Exp. on surf. \\
 \midrule
-STA & $V = 2K_2|s| + \frac{1}{2}z^2$ & Finite-time & $K_1 > 2\sqrt{2L/\beta}$ & $T \leq 2V(0)^{1/2}/\gamma$ \\
- & & & $K_2 > L/\beta$ & \\
+STA & $2K_2|s| + \frac{1}{2}z^2$ & Finite-time & $K_1 > 2\sqrt{2L/\beta}$, $K_2 > L/\beta$ & $T \leq 2V(0)^{1/2}/\gamma$ \\
 \midrule
-Adaptive SMC & $V = \frac{1}{2}s^2 + \frac{1}{2\gamma}\tilde{K}^2$ & Asymptotic & $K^* \geq \bar{d}$ & Asymptotic \\
- & & & $\gamma, \lambda > 0$ & (Barbalat's Lemma) \\
+Adaptive & $\frac{1}{2}s^2 + \frac{1}{2\gamma}\tilde{K}^2$ & Asymptotic & $K^* \geq \bar{d}$, $\gamma, \lambda > 0$ & Asymptotic (Barbalat) \\
 \midrule
-Hybrid & $V = \frac{1}{2}s^2 + $ gain errors & ISS & Finite reset & Ultimate bound \\
-Adaptive-STA & $ + \frac{1}{2}u_{\text{int}}^2$ & (ultimate bound) & frequency & (ISS) \\
+Hybrid Adaptive-STA & $\frac{1}{2}s^2 + $ gains $+ \frac{1}{2}u_{\text{int}}^2$ & ISS (ult. bound) & Finite reset freq. & Ultimate bound (ISS) \\
 \bottomrule
 \end{tabular}
 \end{table}
