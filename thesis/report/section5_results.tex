@@ -177,18 +177,19 @@ Real-time implementation feasibility is assessed via per-step execution time mea
 
 \begin{table}[htbp]
 \centering
-\caption{Computational Performance (mean $\pm$ std, $N=1000$ control steps)}
+\caption{Computational Performance (mean $\pm$ std, $N=1000$ steps)}
 \label{tab:computational}
+\small
 \begin{tabular}{lcccc}
 \toprule
-Controller & Time ($\mu$s) & Real-Time Factor & 100Hz Suitable & Memory (KB) \\
+Controller & Time ($\mu$s) & RT Factor & 100Hz OK & Mem (KB) \\
 \midrule
-Classical SMC & $18.5 \pm 2.1$ & 541$\times$ & Yes & 2.4 \\
-STA-SMC & $24.2 \pm 3.4$ & 413$\times$ & Yes & 3.1 \\
-Adaptive SMC & $31.6 \pm 4.8$ & 316$\times$ & Yes & 4.2 \\
-Hybrid Adaptive STA & $26.8 \pm 3.9$ & 373$\times$ & Yes & 3.8 \\
+Classical & $18.5 \pm 2.1$ & 541$\times$ & Yes & 2.4 \\
+STA & $24.2 \pm 3.4$ & 413$\times$ & Yes & 3.1 \\
+Adaptive & $31.6 \pm 4.8$ & 316$\times$ & Yes & 4.2 \\
+Hybrid Adapt. STA & $26.8 \pm 3.9$ & 373$\times$ & Yes & 3.8 \\
 \bottomrule
-\multicolumn{5}{l}{Real-Time Factor = Available time (10ms) / Compute time}
+\multicolumn{5}{l}{\footnotesize RT Factor = 10ms / Compute time}
 \end{tabular}
 \end{table}
 

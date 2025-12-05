@@ -29,6 +29,11 @@
 \usepackage{caption}          % Caption customization
 \usepackage{subcaption}       % Subfigures (a), (b), (c)
 
+% Fix figure/table numbering - ensure sequential numbering (Figure 1, 2, 3...)
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\theequation}{\arabic{equation}}
+
 %%% TABLES %%%
 \usepackage{booktabs}         % Professional tables (\toprule, \midrule)
 \usepackage{multirow}         % Multi-row cells
@@ -68,6 +73,10 @@
     urlcolor=cyan,        % External URLs
     bookmarks=true
 ]{hyperref}
+
+% Ensure proper section numbering (article class should do this by default)
+\setcounter{secnumdepth}{3}  % Number down to subsubsection
+\setcounter{tocdepth}{3}      % TOC depth to subsubsection
 
 %%% HEADERS & FOOTERS %%%
 \usepackage{fancyhdr}
