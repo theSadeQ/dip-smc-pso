@@ -80,3 +80,22 @@ Ultimate validation requires testing on physical DIP hardware with realistic dis
 
 \textbf{Adaptive Sampling Strategies:}
 Investigate variable-rate sampling based on system state (faster sampling during transients, slower during steady-state) to reduce computational load while maintaining performance.
+
+\subsection{Code and Data Availability}
+All source code, simulation data, and experimental results presented in this report are publicly available under the MIT License at:
+
+\begin{center}
+\url{https://github.com/theSadeQ/dip-smc-pso}
+\end{center}
+
+The repository includes:
+\begin{itemize}
+\item Complete implementation of all controllers (Classical, STA, Adaptive, Hybrid SMC)
+\item PSO optimization framework with tuned gain configurations
+\item Simulation scripts for reproducing all benchmark results
+\item Figure generation scripts (\texttt{thesis/scripts/generate\_figures.py})
+\item Raw data files for all tables and figures in Section \ref{sec:results}
+\item Installation instructions and software dependencies
+\end{itemize}
+
+Detailed code structure and usage instructions are provided in Appendix \ref{app:code}. All results are fully reproducible using the provided scripts and configuration files.
