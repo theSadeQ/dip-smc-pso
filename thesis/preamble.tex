@@ -58,6 +58,9 @@
 \usepackage[numbers,sort&compress]{natbib}  % Numeric citations [1,2,3]
 
 %%% HYPERLINKS & CROSS-REFERENCES %%%
+% Compatibility fix for hyperref with older LaTeX kernels
+\providecommand{\IfFormatAtLeastT}[2]{}
+\providecommand{\IfDocumentMetadataT}[1]{}
 \usepackage[
     colorlinks=true,
     linkcolor=blue,       % Internal links (chapters, figures)
