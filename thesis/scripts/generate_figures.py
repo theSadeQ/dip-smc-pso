@@ -326,35 +326,89 @@ class FigureGenerator:
         print(f"[OK] Saved: {output_path}")
 
     def generate_performance_radar(self):
-        """Figure 8: Multi-metric radar chart."""
-        print("[INFO] Generating Figure 8: Performance radar chart")
+        """Figure 8: Multi-metric radar chart with ACTUAL data from comprehensive tables."""
+        print("[INFO] Generating Figure 8: Performance radar chart (CORRECTED)")
 
-        # Metrics (normalized to 0-10 scale)
-        categories = ['Settling Time', 'Overshoot', 'Energy', 'Chattering', 'Robustness']
+        # ACTUAL performance data from thesis/tables/comprehensive_part1.tex & part2.tex
+        # Format: [Classical, STA, Adaptive, Hybrid]
+        settling_time_raw = [10.0, 10.0, 10.0, 10.0]  # All same
+        overshoot_raw = [27488, 15083, 15246, 100]  # Lower is better
+        energy_raw = [9843, 202907, 214255, 1000000]  # Lower is better
+        chattering_raw = [0.647, 3.088, 3.098, 0.000]  # Lower is better
+        robustness_raw = [30.0, 30.0, 30.0, 30.0]  # All same (not useful)
+
+        # Normalize to 0-10 scale (higher = better performance)
+        def normalize_inverted(values):
+            """For metrics where lower is better, invert the scale."""
+            min_val, max_val = min(values), max(values)
+            if max_val == min_val:
+                return [5.0] * len(values)  # All same
+            return [(max_val - v) / (max_val - min_val) * 10 for v in values]
+
+        def normalize_direct(values):
+            """For metrics where higher is better."""
+            min_val, max_val = min(values), max(values)
+            if max_val == min_val:
+                return [5.0] * len(values)  # All same
+            return [(v - min_val) / (max_val - min_val) * 10 for v in values]
+
+        # Normalize each metric (higher = better on chart)
+        settling_norm = normalize_inverted(settling_time_raw)  # Lower is better
+        overshoot_norm = normalize_inverted(overshoot_raw)  # Lower is better
+        energy_norm = normalize_inverted(energy_raw)  # Lower is better
+        chattering_norm = normalize_inverted(chattering_raw)  # Lower is better
+
+        # Replace robustness (all same) with success rate (all 100%)
+        # Use inverse of settling time as a proxy for speed
+        speed_norm = [10.0 - s for s in settling_norm]  # Invert settling time
+
+        # Prepare data for all 4 controllers
+        categories = ['Overshoot', 'Energy', 'Chattering', 'Robustness', 'Settling Time']
         N = len(categories)
 
-        # Data for one controller (Hybrid Adaptive-STA)
-        values = [8.5, 9.0, 8.8, 9.2, 8.5]
-        values += values[:1]  # Complete the circle
+        # Data for each controller [Overshoot, Energy, Chattering, Robustness, Settling]
+        classical_values = [overshoot_norm[0], energy_norm[0], chattering_norm[0], 5.0, settling_norm[0]]
+        sta_values = [overshoot_norm[1], energy_norm[1], chattering_norm[1], 5.0, settling_norm[1]]
+        adaptive_values = [overshoot_norm[2], energy_norm[2], chattering_norm[2], 5.0, settling_norm[2]]
+        hybrid_values = [overshoot_norm[3], energy_norm[3], chattering_norm[3], 5.0, settling_norm[3]]
+
+        # Complete the circle
+        classical_values += classical_values[:1]
+        sta_values += sta_values[:1]
+        adaptive_values += adaptive_values[:1]
+        hybrid_values += hybrid_values[:1]
 
         angles = [n / float(N) * 2 * np.pi for n in range(N)]
         angles += angles[:1]
 
-        fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(projection='polar'))
+        # Create plot
+        fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(projection='polar'))
 
-        ax.plot(angles, values, 'o-', linewidth=2, color=self.colors['Hybrid Adaptive-STA'])
-        ax.fill(angles, values, alpha=0.25, color=self.colors['Hybrid Adaptive-STA'])
+        # Plot all controllers
+        ax.plot(angles, classical_values, 'o-', linewidth=2, label='Classical SMC',
+                color=self.colors['Classical SMC'], alpha=0.7)
+        ax.plot(angles, sta_values, 's-', linewidth=2, label='STA-SMC',
+                color=self.colors['STA-SMC'], alpha=0.7)
+        ax.plot(angles, adaptive_values, '^-', linewidth=2, label='Adaptive SMC',
+                color=self.colors['Adaptive SMC'], alpha=0.7)
+        ax.plot(angles, hybrid_values, 'D-', linewidth=2.5, label='Hybrid Adaptive-STA',
+                color=self.colors['Hybrid Adaptive-STA'], alpha=0.9)
+
+        # Fill only Hybrid for emphasis
+        ax.fill(angles, hybrid_values, alpha=0.15, color=self.colors['Hybrid Adaptive-STA'])
 
         ax.set_xticks(angles[:-1])
-        ax.set_xticklabels(categories)
+        ax.set_xticklabels(categories, size=10)
         ax.set_ylim([0, 10])
-        ax.set_title('Hybrid Adaptive-STA Performance', pad=20)
-        ax.grid(True)
+        ax.set_title('Multi-Metric Performance Comparison\n(Outward = Better)', pad=20, size=12, weight='bold')
+        ax.grid(True, alpha=0.3)
+        ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1), framealpha=0.9)
 
         output_path = self.output_dir / 'fig_performance_radar.pdf'
-        plt.savefig(output_path)
+        plt.savefig(output_path, bbox_inches='tight')
         plt.close()
         print(f"[OK] Saved: {output_path}")
+        print(f"[INFO] Actual data used: Overshoot={overshoot_raw}, Energy={energy_raw}, Chattering={chattering_raw}")
 
     def generate_time_series_response(self):
         """Figure 9: Time series response comparison."""
