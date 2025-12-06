@@ -98,13 +98,33 @@
 **File**: `slotine1983.pdf`
 **Size**: 821 KB
 **BibTeX Key**: `Slotine1983`
-**Tracking File**: `Slotine1983_tracking.md` (pending)
-**Status**: [PENDING] Not yet tracked
+**Tracking File**: `Slotine1983_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available (970 lines)
 
 **Key Topics**:
-- Sliding surface design
-- Tracking control
-- Nonlinear systems
+- Time-varying sliding surfaces for tracking (vs. stabilization)
+- Fillipov's solution concept for discontinuous differential equations
+- Boundary layer for chattering elimination
+- Continuous approximation of discontinuous control
+- Multi-input decoupling via independent sliding surfaces
+- Two-link manipulator application (robot control)
+- Robustness to parameter variations and disturbances
+
+**Common Citations**:
+- Fillipov's solution concept → Eq. (4), p. 469
+- Sliding mode dynamics construction → Eq. (5)-(6), p. 470
+- Local sliding condition → Eq. (7), p. 471
+- Time-varying sliding surface → Eq. (14)-(15), p. 472
+- Linear system control law → Eq. (22), p. 474
+- Non-linear control structure → Eq. (41)-(42), pp. 477-478
+- Boundary layer definition → Eq. (60)-(62), p. 482
+- Tracking accuracy bound → Eq. (66), p. 483
+- Manipulator example → Sec. 6, pp. 484-489
+
+**Relation to Slotine1986**:
+- Slotine1983: Classical SMC tracking (known parameters with bounds)
+- Slotine1986: Adaptive SMC (unknown parameters, on-line estimation)
+- Together form complete SMC foundation for DIP thesis
 
 ### 4. Slotine1986 - Adaptive Sliding Controller Synthesis for Nonlinear Systems
 
@@ -426,9 +446,9 @@
 
 | Status | Count | Percentage |
 |--------|-------|------------|
-| [TRACKED] Complete | 10 | 45.5% |
+| [TRACKED] Complete | 11 | 50.0% |
 | [READY] for tracking | 0 | 0.0% |
-| [PENDING] tracking | 12 | 54.5% |
+| [PENDING] tracking | 11 | 50.0% |
 | **Total** | **22** | **100%** |
 
 ---
@@ -578,9 +598,9 @@ thesis/references.bib (contains @article{Levant2007, ...})
 
 ---
 
-**Quick Start**: Check `Levant2007_tracking.md`, `Khalil2002_tracking.md`, `Zhou2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, `Plestan2010_tracking.md`, or `Slotine1986_tracking.md` for complete examples!
+**Quick Start**: Check `Levant2007_tracking.md`, `Khalil2002_tracking.md`, `Zhou2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, `Plestan2010_tracking.md`, `Slotine1986_tracking.md`, or `Slotine1983_tracking.md` for complete examples!
 
-**Status**: [OK] Index ready, 10/22 PDFs tracked (45.5% complete)
+**Status**: [OK] Index ready, 11/22 PDFs tracked (50.0% complete - HALFWAY MILESTONE!)
 
 **Tracked PDFs**:
 1. Khalil2002 - Nonlinear Systems (Lyapunov stability theory)
@@ -593,5 +613,6 @@ thesis/references.bib (contains @article{Levant2007, ...})
 8. Deb2002 - NSGA-II Multiobjective GA
 9. Plestan2010 - Adaptive Sliding Mode Control
 10. Slotine1986 - Adaptive Sliding Controller Synthesis
+11. Slotine1983 - Tracking Control Using Sliding Surfaces
 
 **Last Updated**: 2025-12-06
