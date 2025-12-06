@@ -442,12 +442,22 @@
 **File**: `ECP2020_Model_505_Manual.pdf`
 **Size**: 86 KB
 **BibTeX Key**: `ECP2020`
-**Tracking File**: `ECP2020_tracking.md` (pending)
-**Status**: [PENDING] Not yet tracked
+**Tracking File**: `ECP2020_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available (442 lines)
 
 **Key Topics**:
-- Equipment specifications
-- Setup instructions
+- 4th order non-minimum phase dynamics (RHP zero)
+- Exact nonlinear and linearized equations of motion
+- Transfer function with bandwidth limitations
+- High-resolution encoders (16,000 count/rev, 44,000 count/m)
+- Adjustable parameters (mass, inertia, pole frequencies 0.4-1.2 Hz)
+- Safety features (limit switches, fail-safe shutdown)
+
+**Common Citations**:
+- System dynamics → Exact/linearized equations, p. 1
+- RHP zero analysis → Transfer function, non-minimum phase
+- Hardware specs → Encoder resolution, sampling rate (500 Hz)
+- Safety protocols → Limit switches, angle limits (|θ| < 45°)
 
 ### 2. Quanser2020 (see Inverted Pendulum Systems)
 
@@ -457,9 +467,9 @@
 
 | Status | Count | Percentage |
 |--------|-------|------------|
-| [TRACKED] Complete | 12 | 54.5% |
+| [TRACKED] Complete | 13 | 59.1% |
 | [READY] for tracking | 0 | 0.0% |
-| [PENDING] tracking | 10 | 45.5% |
+| [PENDING] tracking | 9 | 40.9% |
 | **Total** | **22** | **100%** |
 
 ---
@@ -609,9 +619,9 @@ thesis/references.bib (contains @article{Levant2007, ...})
 
 ---
 
-**Quick Start**: Check `Levant2007_tracking.md`, `Khalil2002_tracking.md`, `Zhou2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, `Plestan2010_tracking.md`, `Slotine1986_tracking.md`, `Slotine1983_tracking.md`, or `Ahmadieh2007_tracking.md` for complete examples!
+**Quick Start**: Check `Levant2007_tracking.md`, `Khalil2002_tracking.md`, `Zhou2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, `Plestan2010_tracking.md`, `Slotine1986_tracking.md`, `Slotine1983_tracking.md`, `Ahmadieh2007_tracking.md`, or `ECP2020_tracking.md` for complete examples!
 
-**Status**: [OK] Index ready, 12/22 PDFs tracked (54.5% complete - OVER HALFWAY!)
+**Status**: [OK] Index ready, 13/22 PDFs tracked (59.1% complete - OVER HALFWAY!)
 
 **Tracked PDFs**:
 1. Khalil2002 - Nonlinear Systems (Lyapunov stability theory)
@@ -626,5 +636,6 @@ thesis/references.bib (contains @article{Levant2007, ...})
 10. Slotine1986 - Adaptive Sliding Controller Synthesis
 11. Slotine1983 - Tracking Control Using Sliding Surfaces
 12. Ahmadieh2007 - SMC of Rotary Inverted Pendulum
+13. ECP2020 - Model 505 Hardware Manual
 
 **Last Updated**: 2025-12-06
