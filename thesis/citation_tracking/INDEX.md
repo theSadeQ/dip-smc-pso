@@ -410,17 +410,28 @@
 - Control strategies
 - Applications
 
-### 4. Sliding Mode Control of Rotary Inverted Pendulum (paper)
+### 4. Ahmadieh2007 - Sliding Mode Control of Rotary Inverted Pendulum
 
 **File**: `Sliding_mode_control_of_Rotary_Inverted_Pendulm.pdf`
 **Size**: 271 KB
-**BibTeX Key**: TBD
-**Tracking File**: Pending
-**Status**: [PENDING] Not yet tracked
+**BibTeX Key**: `Ahmadieh2007`
+**Tracking File**: `Ahmadieh2007_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available (970 lines)
 
 **Key Topics**:
-- Rotary pendulum dynamics
-- SMC implementation
+- Rotary inverted pendulum SMC (non-minimum-phase system)
+- Two sliding surfaces design (motor + pendulum)
+- Weighted Lyapunov function V = |s₁| + λ₂|s₂|
+- Saturation function for chattering reduction
+- Zero dynamics instability analysis
+- Euler-Lagrange dynamics formulation
+
+**Common Citations**:
+- Two sliding surfaces → Eq. (32)-(33), p. 4
+- Weighted Lyapunov → Eq. (34), p. 4
+- Saturation function → Eq. (36), p. 4
+- Non-minimum-phase challenge → p. 1, Eq. (29)
+- Control law → Eq. (37), p. 5
 
 ---
 
@@ -446,9 +457,9 @@
 
 | Status | Count | Percentage |
 |--------|-------|------------|
-| [TRACKED] Complete | 11 | 50.0% |
+| [TRACKED] Complete | 12 | 54.5% |
 | [READY] for tracking | 0 | 0.0% |
-| [PENDING] tracking | 11 | 50.0% |
+| [PENDING] tracking | 10 | 45.5% |
 | **Total** | **22** | **100%** |
 
 ---
@@ -598,9 +609,9 @@ thesis/references.bib (contains @article{Levant2007, ...})
 
 ---
 
-**Quick Start**: Check `Levant2007_tracking.md`, `Khalil2002_tracking.md`, `Zhou2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, `Plestan2010_tracking.md`, `Slotine1986_tracking.md`, or `Slotine1983_tracking.md` for complete examples!
+**Quick Start**: Check `Levant2007_tracking.md`, `Khalil2002_tracking.md`, `Zhou2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, `Plestan2010_tracking.md`, `Slotine1986_tracking.md`, `Slotine1983_tracking.md`, or `Ahmadieh2007_tracking.md` for complete examples!
 
-**Status**: [OK] Index ready, 11/22 PDFs tracked (50.0% complete - HALFWAY MILESTONE!)
+**Status**: [OK] Index ready, 12/22 PDFs tracked (54.5% complete - OVER HALFWAY!)
 
 **Tracked PDFs**:
 1. Khalil2002 - Nonlinear Systems (Lyapunov stability theory)
@@ -614,5 +625,6 @@ thesis/references.bib (contains @article{Levant2007, ...})
 9. Plestan2010 - Adaptive Sliding Mode Control
 10. Slotine1986 - Adaptive Sliding Controller Synthesis
 11. Slotine1983 - Tracking Control Using Sliding Surfaces
+12. Ahmadieh2007 - SMC of Rotary Inverted Pendulum
 
 **Last Updated**: 2025-12-06
