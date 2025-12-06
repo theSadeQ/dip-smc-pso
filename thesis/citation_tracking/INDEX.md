@@ -222,26 +222,26 @@
 **File**: `clerc2002.pdf`
 **Size**: 412 KB
 **BibTeX Key**: `Clerc2002`
-**Tracking File**: `Clerc2002_tracking.md` (pending)
-**Status**: [PENDING] Not yet tracked
+**Tracking File**: `Clerc2002_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available (810 lines)
 
 **Key Topics**:
-- PSO convergence analysis
-- Parameter selection
-- Stability conditions
+- PSO convergence analysis (χ constriction coefficient)
+- Eigenvalue stability analysis
+- Parameter selection (φ = 4.1, χ ≈ 0.729)
 
-### 2. Particle Swarm Optimization (general reference)
+### 2. Particle Swarm Optimization (original PSO paper)
 
 **File**: `particle-swarm-optimization.pdf`
 **Size**: 626 KB
-**BibTeX Key**: `Kennedy1995` or `Eberhart1995` (to be confirmed)
-**Tracking File**: Pending
-**Status**: [PENDING] Not yet tracked
+**BibTeX Key**: `Kennedy1995`
+**Tracking File**: `Kennedy1995_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available (780 lines)
 
 **Key Topics**:
-- PSO algorithm fundamentals
-- Velocity update equations
-- Social/cognitive components
+- Original PSO algorithm (pbest/gbest)
+- Social behavior simulation origins
+- Millonas' five principles of swarm intelligence
 
 ### 3. Collins2005 - A Review of Particle Swarm Optimization
 
