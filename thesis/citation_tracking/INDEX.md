@@ -69,16 +69,24 @@
 
 ### 2. Utkin1977 - Variable Structure Systems with Sliding Modes
 
-**File**: `utkin1977.pdf`
+**File**: `Utkin1977_Variable_Structure_Systems.pdf`
 **Size**: 1.1 MB
 **BibTeX Key**: `Utkin1977`
-**Tracking File**: `Utkin1977_tracking.md` (pending)
-**Status**: [PENDING] Not yet tracked
+**Tracking File**: `Utkin1977_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available
 
 **Key Topics**:
-- Original SMC theory
-- Sliding mode existence conditions
-- Reaching phase dynamics
+- Original SMC theory (1977 survey paper)
+- Sliding mode existence conditions (Eq. 3, p. 213)
+- Reaching phase dynamics (Theorems 3-4, p. 215)
+- Design procedures for VSS (pp. 214-215)
+- Invariance property (p. 214)
+
+**Common Citations**:
+- Sliding surface design → Eq. 2.2, p. 213
+- Existence conditions → Theorem 1, p. 214
+- Invariance property → p. 214
+- Disturbance rejection → Eq. 11-12, p. 216
 
 ### 3. Slotine1983 - Tracking Control of Nonlinear Systems Using Sliding Surfaces
 
@@ -175,7 +183,30 @@
 
 ## Underactuated Systems
 
-### 1. Zhou2007 - Swing-Up and Stabilization Control Design
+### 1. Spong1998 - Underactuated Mechanical Systems
+
+**File**: `Spong1998_Underactuated_Mechanical_Systems.pdf`
+**Size**: 698 KB
+**BibTeX Key**: `Spong1998`
+**Tracking File**: `Spong1998_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available
+
+**Key Topics**:
+- Underactuated systems fundamentals (m < n)
+- Lagrangian dynamics formulation
+- Partial feedback linearization (collocated/non-collocated)
+- Passivity and energy-based control
+- Acrobot, Pendubot, cart-pole examples
+
+**Common Citations**:
+- Underactuated definition → p. 135
+- Lagrangian dynamics → Eq. 2.1, p. 137
+- Collocated linearization → Sec. 3.1, p. 140
+- Strong Inertial Coupling → Def. 3.1, p. 140
+- Energy-based swingup → Sec. 4.1, pp. 142-143
+- Hybrid switching control → Sec. 4.3, p. 145
+
+### 2. Zhou2007 - Swing-Up and Stabilization Control Design
 
 **File**: `zhou2007.pdf`
 **Size**: 687 KB
@@ -188,7 +219,7 @@
 - Energy-based methods
 - Stabilization strategies
 
-### 2. Underactuated Mechanical Systems (Russ Tedrake et al.)
+### 3. Underactuated Mechanical Systems (Russ Tedrake et al.)
 
 **File**: `underactuated-mechanical-systems.pdf`
 **Size**: 699 KB
@@ -256,18 +287,28 @@
 - Applications survey
 - Comparison with other methods
 
-### 4. Deb2002 - Multi-objective Optimization Using Evolutionary Algorithms
+### 4. Deb2002 - A Fast and Elitist Multiobjective Genetic Algorithm: NSGA-II
 
-**File**: `deb2002.pdf`
+**File**: `Deb2002_NSGA2.pdf`
 **Size**: 715 KB
 **BibTeX Key**: `Deb2002`
-**Tracking File**: `Deb2002_tracking.md` (pending)
-**Status**: [PENDING] Not yet tracked
+**Tracking File**: `Deb2002_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available
 
 **Key Topics**:
-- Multi-objective PSO
-- Pareto optimality
-- NSGA-II
+- NSGA-II algorithm (fast elitist MOEA)
+- Fast nondominated sorting O(MN²)
+- Crowding distance diversity mechanism
+- Elitism and constraint handling
+- Multiobjective optimization
+
+**Common Citations**:
+- NSGA-II algorithm → Sec. III, pp. 183-186
+- Fast sorting → p. 184
+- Crowding distance → p. 185, Eq. (1)
+- Convergence metric → p. 188, Fig. 3
+- Diversity metric → p. 188, Eq. (1)
+- Constrained-domination → Def. 1, p. 192
 
 ---
 
@@ -347,9 +388,9 @@
 
 | Status | Count | Percentage |
 |--------|-------|------------|
-| [TRACKED] Complete | 1 | 4.5% |
+| [TRACKED] Complete | 6 | 27.3% |
 | [READY] for tracking | 0 | 0.0% |
-| [PENDING] tracking | 21 | 95.5% |
+| [PENDING] tracking | 16 | 72.7% |
 | **Total** | **22** | **100%** |
 
 ---
@@ -499,8 +540,16 @@ thesis/references.bib (contains @article{Levant2007, ...})
 
 ---
 
-**Quick Start**: Check `Levant2007_tracking.md` for a complete example, or start tracking another PDF!
+**Quick Start**: Check `Levant2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, or `Deb2002_tracking.md` for complete examples!
 
-**Status**: [OK] Index ready, 1/22 PDFs tracked (4.5% complete)
+**Status**: [OK] Index ready, 6/22 PDFs tracked (27.3% complete)
+
+**Tracked PDFs**:
+1. Levant2007 - Higher-Order Sliding Modes
+2. Clerc2002 - PSO Constriction Coefficient
+3. Kennedy1995 - Original PSO Algorithm
+4. Utkin1977 - Variable Structure Systems
+5. Spong1998 - Underactuated Mechanical Systems
+6. Deb2002 - NSGA-II Multiobjective GA
 
 **Last Updated**: 2025-12-06
