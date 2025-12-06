@@ -115,16 +115,25 @@
 
 ### 5. Plestan2010 - New Methodologies for Adaptive Sliding Mode Control
 
-**File**: `plestan2010.pdf`
-**Size**: 1.9 MB
+**File**: `Plestan2010_Adaptive_Sliding_Mode.pdf`
+**Size**: 1.8 MB
 **BibTeX Key**: `Plestan2010`
-**Tracking File**: `Plestan2010_tracking.md` (pending)
-**Status**: [PENDING] Not yet tracked
+**Tracking File**: `Plestan2010_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available (732 lines)
 
 **Key Topics**:
-- Adaptive sliding mode
-- Gain adaptation
-- Robustness to uncertainties
+- Algorithm 1: Hybrid adaptive gain (reaching + equivalent control)
+- Algorithm 2: Original adaptive without equivalent control (recommended)
+- ε-tuning methodology for boundary layer selection
+- Eliminates need for uncertainty bound knowledge
+- Automatic gain adaptation to disturbance level
+
+**Common Citations**:
+- Algorithm 2 → Sec. 3.2, pp. 8-11, Eq. (16)
+- Accuracy bound → Eq. (17), δ = √(ε² + Ψ²_M/(K̄Γ_m))
+- ε-tuning → Sec. 4, pp. 10-12, Eq. (31)
+- Finite-time stability → Theorem 4, pp. 8-11
+- Electropneumatic validation → Sec. 5.2, pp. 13-17
 
 ### 6. Edwards & Spurgeon - Sliding Mode Control Theory And Applications
 
@@ -388,9 +397,9 @@
 
 | Status | Count | Percentage |
 |--------|-------|------------|
-| [TRACKED] Complete | 6 | 27.3% |
+| [TRACKED] Complete | 7 | 31.8% |
 | [READY] for tracking | 0 | 0.0% |
-| [PENDING] tracking | 16 | 72.7% |
+| [PENDING] tracking | 15 | 68.2% |
 | **Total** | **22** | **100%** |
 
 ---
@@ -540,9 +549,9 @@ thesis/references.bib (contains @article{Levant2007, ...})
 
 ---
 
-**Quick Start**: Check `Levant2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, or `Deb2002_tracking.md` for complete examples!
+**Quick Start**: Check `Levant2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, or `Plestan2010_tracking.md` for complete examples!
 
-**Status**: [OK] Index ready, 6/22 PDFs tracked (27.3% complete)
+**Status**: [OK] Index ready, 7/22 PDFs tracked (31.8% complete)
 
 **Tracked PDFs**:
 1. Levant2007 - Higher-Order Sliding Modes
@@ -551,5 +560,6 @@ thesis/references.bib (contains @article{Levant2007, ...})
 4. Utkin1977 - Variable Structure Systems
 5. Spong1998 - Underactuated Mechanical Systems
 6. Deb2002 - NSGA-II Multiobjective GA
+7. Plestan2010 - Adaptive Sliding Mode Control
 
 **Last Updated**: 2025-12-06
