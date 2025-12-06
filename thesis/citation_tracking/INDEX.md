@@ -372,18 +372,28 @@
 
 ## Inverted Pendulum Systems
 
-### 1. Quanser2020 - QUBE-Servo 2 User Manual
+### 1. Quanser2012 - Linear Double Inverted Pendulum (DBPEN-LIN) User Manual
 
-**File**: `quanser2020.pdf`
+**File**: `quanser2020.pdf` (filename mismatch - contains 2012 DBPEN-LIN manual)
 **Size**: 3.9 MB
-**BibTeX Key**: `Quanser2020`
-**Tracking File**: `Quanser2020_tracking.md` (pending)
-**Status**: [PENDING] Not yet tracked
+**BibTeX Key**: `Quanser2012`
+**Tracking File**: `Quanser2012_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available (550+ lines)
 
 **Key Topics**:
-- Hardware specifications
-- System parameters
-- Dynamics equations
+- Linear Double Inverted Pendulum (2 links: 7" + 12")
+- Complete system parameters (masses, lengths, inertias, damping)
+- Encoder specifications (4096 counts/rev quadrature)
+- Encoder hinge mass (mh = 0.141 kg - 38.7% of total!)
+- Wiring procedures (3 encoders: cart, link 1, link 2)
+- Setup, testing, and troubleshooting protocols
+
+**Common Citations**:
+- System parameters → Table 3.1 (m₁=0.097kg, m₂=0.127kg, L₁=0.2m, L₂=0.3365m)
+- Encoder resolution → 4096 counts/rev (0.088° resolution)
+- Encoder hinge mass → mh = 0.141 kg (critical for dynamics)
+- Component nomenclature → Figure 2.1, Table 2.1
+- Wiring diagram → Figure 5.1 (3-channel DAQ integration)
 
 ### 2. Dash2018 - Sliding Mode Control of Rotary Inverted Pendulum
 
@@ -459,7 +469,7 @@
 - Hardware specs → Encoder resolution, sampling rate (500 Hz)
 - Safety protocols → Limit switches, angle limits (|θ| < 45°)
 
-### 2. Quanser2020 (see Inverted Pendulum Systems)
+### 2. Quanser2012 (see Inverted Pendulum Systems - DBPEN-LIN)
 
 ---
 
@@ -467,9 +477,9 @@
 
 | Status | Count | Percentage |
 |--------|-------|------------|
-| [TRACKED] Complete | 13 | 59.1% |
+| [TRACKED] Complete | 14 | 63.6% |
 | [READY] for tracking | 0 | 0.0% |
-| [PENDING] tracking | 9 | 40.9% |
+| [PENDING] tracking | 8 | 36.4% |
 | **Total** | **22** | **100%** |
 
 ---
@@ -619,9 +629,9 @@ thesis/references.bib (contains @article{Levant2007, ...})
 
 ---
 
-**Quick Start**: Check `Levant2007_tracking.md`, `Khalil2002_tracking.md`, `Zhou2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, `Plestan2010_tracking.md`, `Slotine1986_tracking.md`, `Slotine1983_tracking.md`, `Ahmadieh2007_tracking.md`, or `ECP2020_tracking.md` for complete examples!
+**Quick Start**: Check `Levant2007_tracking.md`, `Khalil2002_tracking.md`, `Zhou2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, `Plestan2010_tracking.md`, `Slotine1986_tracking.md`, `Slotine1983_tracking.md`, `Ahmadieh2007_tracking.md`, `ECP2020_tracking.md`, or `Quanser2012_tracking.md` for complete examples!
 
-**Status**: [OK] Index ready, 13/22 PDFs tracked (59.1% complete - OVER HALFWAY!)
+**Status**: [OK] Index ready, 14/22 PDFs tracked (63.6% complete - NEARLY TWO-THIRDS!)
 
 **Tracked PDFs**:
 1. Khalil2002 - Nonlinear Systems (Lyapunov stability theory)
@@ -636,6 +646,7 @@ thesis/references.bib (contains @article{Levant2007, ...})
 10. Slotine1986 - Adaptive Sliding Controller Synthesis
 11. Slotine1983 - Tracking Control Using Sliding Surfaces
 12. Ahmadieh2007 - SMC of Rotary Inverted Pendulum
-13. ECP2020 - Model 505 Hardware Manual
+13. ECP2020 - Model 505 Hardware Manual (Single IP)
+14. Quanser2012 - Linear Double Inverted Pendulum (DBPEN-LIN)
 
 **Last Updated**: 2025-12-06
