@@ -220,18 +220,29 @@
 - Energy-based swingup → Sec. 4.1, pp. 142-143
 - Hybrid switching control → Sec. 4.3, p. 145
 
-### 2. Zhou2007 - Swing-Up and Stabilization Control Design
+### 2. Zhou2007 - Adaptive Control With Backlash Nonlinearity
 
 **File**: `zhou2007.pdf`
 **Size**: 687 KB
 **BibTeX Key**: `Zhou2007`
-**Tracking File**: `Zhou2007_tracking.md` (pending)
-**Status**: [PENDING] Not yet tracked
+**Tracking File**: `Zhou2007_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available (597 lines)
 
 **Key Topics**:
-- Swing-up control
-- Energy-based methods
-- Stabilization strategies
+- Smooth backlash inverse (χᵣ, χₗ functions) - avoids chattering
+- Output feedback adaptive backstepping
+- Unknown backlash parameters (m, Bᵣ, Bₗ) adapted online
+- Tuning functions (no over-parametrization)
+- Explicit L₂ transient performance bounds
+
+**Common Citations**:
+- Smooth inverse → Eq. (5)-(7), p. 504
+- Adaptive inverse → Eq. (14)-(15), p. 505
+- Output feedback design → Section III, p. 505
+- Backstepping control → Section IV, pp. 506-507
+- Theorem 1 (L₂ performance) → Eq. (63), p. 508
+
+**Note**: Originally listed as "swing-up control" but actual topic is backlash actuator compensation
 
 ### 3. Underactuated Mechanical Systems (Russ Tedrake et al.)
 
@@ -402,9 +413,9 @@
 
 | Status | Count | Percentage |
 |--------|-------|------------|
-| [TRACKED] Complete | 8 | 36.4% |
+| [TRACKED] Complete | 9 | 40.9% |
 | [READY] for tracking | 0 | 0.0% |
-| [PENDING] tracking | 14 | 63.6% |
+| [PENDING] tracking | 13 | 59.1% |
 | **Total** | **22** | **100%** |
 
 ---
@@ -554,18 +565,19 @@ thesis/references.bib (contains @article{Levant2007, ...})
 
 ---
 
-**Quick Start**: Check `Levant2007_tracking.md`, `Khalil2002_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, or `Plestan2010_tracking.md` for complete examples!
+**Quick Start**: Check `Levant2007_tracking.md`, `Khalil2002_tracking.md`, `Zhou2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, or `Plestan2010_tracking.md` for complete examples!
 
-**Status**: [OK] Index ready, 8/22 PDFs tracked (36.4% complete)
+**Status**: [OK] Index ready, 9/22 PDFs tracked (40.9% complete)
 
 **Tracked PDFs**:
 1. Khalil2002 - Nonlinear Systems (Lyapunov stability theory)
 2. Levant2007 - Higher-Order Sliding Modes
-3. Clerc2002 - PSO Constriction Coefficient
-4. Kennedy1995 - Original PSO Algorithm
-5. Utkin1977 - Variable Structure Systems
-6. Spong1998 - Underactuated Mechanical Systems
-7. Deb2002 - NSGA-II Multiobjective GA
-8. Plestan2010 - Adaptive Sliding Mode Control
+3. Zhou2007 - Adaptive Control With Backlash Nonlinearity
+4. Clerc2002 - PSO Constriction Coefficient
+5. Kennedy1995 - Original PSO Algorithm
+6. Utkin1977 - Variable Structure Systems
+7. Spong1998 - Underactuated Mechanical Systems
+8. Deb2002 - NSGA-II Multiobjective GA
+9. Plestan2010 - Adaptive Sliding Mode Control
 
 **Last Updated**: 2025-12-06
