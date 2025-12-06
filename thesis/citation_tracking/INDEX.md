@@ -52,8 +52,8 @@
 **File**: `levant2007.pdf`
 **Size**: 403 KB
 **BibTeX Key**: `Levant2007`
-**Tracking File**: `Levant2007_tracking.md` (ready to create)
-**Status**: [READY] PDF read, ready for tracking
+**Tracking File**: `Levant2007_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available
 
 **Key Topics**:
 - Super-twisting algorithm
@@ -347,7 +347,8 @@
 
 | Status | Count | Percentage |
 |--------|-------|------------|
-| [READY] for tracking | 1 | 4.5% |
+| [TRACKED] Complete | 1 | 4.5% |
+| [READY] for tracking | 0 | 0.0% |
 | [PENDING] tracking | 21 | 95.5% |
 | **Total** | **22** | **100%** |
 
@@ -498,8 +499,8 @@ thesis/references.bib (contains @article{Levant2007, ...})
 
 ---
 
-**Quick Start**: Try "Create tracking file for Levant2007" to see the system in action!
+**Quick Start**: Check `Levant2007_tracking.md` for a complete example, or start tracking another PDF!
 
-**Status**: [OK] Index ready, 1/22 PDFs tracked
+**Status**: [OK] Index ready, 1/22 PDFs tracked (4.5% complete)
 
 **Last Updated**: 2025-12-06
