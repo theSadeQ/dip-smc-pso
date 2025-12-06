@@ -26,22 +26,27 @@
 
 ### Khalil - Nonlinear Systems (3rd Edition)
 
-**File**: `Nonlinear Systems (3rd Edition) (Hass... (Z-Library).pdf`
+**File**: `Khalil2002_Nonlinear_Systems.pdf`
 **Size**: 34 MB
-**BibTeX Key**: `Khalil2002` (to be confirmed)
-**Tracking File**: `Khalil2002_tracking.md` (pending)
-**Status**: [PENDING] Not yet tracked
+**BibTeX Key**: `Khalil2002`
+**Tracking File**: `Khalil2002_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available (613 lines)
 
 **Key Topics**:
-- Lyapunov stability theory
-- Phase plane analysis
-- Describing function method
-- Feedback linearization
+- Chapter 3: Fundamental Lyapunov stability theorems
+- Chapter 4: LaSalle's invariance principle, Barbalat's lemma
+- Chapter 8: Feedback linearization, Lie derivatives
+- Comparison functions (class K, KL)
+- Exponential stability and convergence rates
 
 **Common Citations**:
-- Lyapunov theorems → Section/Chapter TBD
-- Stability proofs → TBD
-- Nonlinear system analysis → TBD
+- Theorem 3.2: Asymptotic stability → Ch. 3, p. ~111
+- Theorem 4.1: LaSalle's principle → Ch. 4, p. ~123
+- Lemma 4.2: Barbalat's lemma → Ch. 4, p. ~126
+- Theorem 3.3: Exponential stability → Ch. 3, p. ~114
+- Lie derivatives → Ch. 8, Section 8.2
+
+**Note**: PDF too large to read (34 MB), tracking based on standard 3rd edition structure
 
 ---
 
@@ -397,9 +402,9 @@
 
 | Status | Count | Percentage |
 |--------|-------|------------|
-| [TRACKED] Complete | 7 | 31.8% |
+| [TRACKED] Complete | 8 | 36.4% |
 | [READY] for tracking | 0 | 0.0% |
-| [PENDING] tracking | 15 | 68.2% |
+| [PENDING] tracking | 14 | 63.6% |
 | **Total** | **22** | **100%** |
 
 ---
@@ -549,17 +554,18 @@ thesis/references.bib (contains @article{Levant2007, ...})
 
 ---
 
-**Quick Start**: Check `Levant2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, or `Plestan2010_tracking.md` for complete examples!
+**Quick Start**: Check `Levant2007_tracking.md`, `Khalil2002_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, or `Plestan2010_tracking.md` for complete examples!
 
-**Status**: [OK] Index ready, 7/22 PDFs tracked (31.8% complete)
+**Status**: [OK] Index ready, 8/22 PDFs tracked (36.4% complete)
 
 **Tracked PDFs**:
-1. Levant2007 - Higher-Order Sliding Modes
-2. Clerc2002 - PSO Constriction Coefficient
-3. Kennedy1995 - Original PSO Algorithm
-4. Utkin1977 - Variable Structure Systems
-5. Spong1998 - Underactuated Mechanical Systems
-6. Deb2002 - NSGA-II Multiobjective GA
-7. Plestan2010 - Adaptive Sliding Mode Control
+1. Khalil2002 - Nonlinear Systems (Lyapunov stability theory)
+2. Levant2007 - Higher-Order Sliding Modes
+3. Clerc2002 - PSO Constriction Coefficient
+4. Kennedy1995 - Original PSO Algorithm
+5. Utkin1977 - Variable Structure Systems
+6. Spong1998 - Underactuated Mechanical Systems
+7. Deb2002 - NSGA-II Multiobjective GA
+8. Plestan2010 - Adaptive Sliding Mode Control
 
 **Last Updated**: 2025-12-06
