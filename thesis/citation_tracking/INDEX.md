@@ -332,18 +332,16 @@
 - Social behavior simulation origins
 - Millonas' five principles of swarm intelligence
 
-### 3. Collins2005 - A Review of Particle Swarm Optimization
+### 3. Collins2005 - [FILE MISMATCH] Bipedal Robotics (Passive-Dynamic Walkers)
 
-**File**: `collins2005.pdf`
+**File**: `collins2005.pdf` [WARNING] File content mismatch!
+**Actual Content**: "Efficient Bipedal Robots Based on Passive-Dynamic Walkers"
 **Size**: 418 KB
-**BibTeX Key**: `Collins2005`
-**Tracking File**: `Collins2005_tracking.md` (pending)
-**Status**: [PENDING] Not yet tracked
+**BibTeX Key**: `Collins2005` (needs correction)
+**Tracking File**: N/A - Not relevant to DIP thesis
+**Status**: [MISMATCH] File contains bipedal robotics paper, NOT PSO review
 
-**Key Topics**:
-- PSO variants
-- Applications survey
-- Comparison with other methods
+**Note**: This PDF is NOT about Particle Swarm Optimization as originally listed. It's a robotics paper about passive-dynamic walking and bipedal robot design. Not relevant to thesis PSO work.
 
 ### 4. Deb2002 - A Fast and Elitist Multiobjective Genetic Algorithm: NSGA-II
 
@@ -395,17 +393,16 @@
 - Component nomenclature → Figure 2.1, Table 2.1
 - Wiring diagram → Figure 5.1 (3-channel DAQ integration)
 
-### 2. Dash2018 - Sliding Mode Control of Rotary Inverted Pendulum
+### 2. Dash2018 - [FILE MISMATCH] Power Systems (UPFC/DFIG Wind Farm)
 
-**File**: `dash2018.pdf`
+**File**: `dash2018.pdf` [WARNING] File content mismatch!
+**Actual Content**: "Adaptive fractional integral terminal sliding mode power control of UPFC in DFIG wind farm penetrated multimachine power system"
 **Size**: 1.6 MB
-**BibTeX Key**: `Dash2018`
-**Tracking File**: `Dash2018_tracking.md` (pending)
-**Status**: [PENDING] Not yet tracked
+**BibTeX Key**: `Dash2018` (needs correction)
+**Tracking File**: N/A - Not relevant to DIP thesis
+**Status**: [MISMATCH] File contains power systems paper, NOT inverted pendulum control
 
-**Key Topics**:
-- SMC for rotary pendulum
-- Experimental results
+**Note**: This PDF is NOT about rotary inverted pendulum as originally listed. It's a power systems paper about UPFC (Unified Power Flow Controller) and DFIG (Doubly-Fed Induction Generator) wind farms. Not relevant to thesis.
 
 ### 3. The Inverted Pendulum in Control Theory and Robotics
 
