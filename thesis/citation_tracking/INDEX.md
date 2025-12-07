@@ -4,7 +4,7 @@
 
 **Total PDFs**: 22
 
-**Last Updated**: 2025-12-06
+**Last Updated**: 2025-12-07
 
 ---
 
@@ -185,17 +185,35 @@
 - Comprehensive SMC theory
 - Applications across domains
 
-### 7. Barbot et al. - Sliding mode control and observation
+### 7. Shtessel2014 - Sliding Mode Control and Observation
 
 **File**: `Sliding mode control and observation... (Z-Library).pdf`
-**Size**: 11 MB
-**BibTeX Key**: TBD
-**Tracking File**: Pending
-**Status**: [PENDING] Not yet tracked
+**Size**: 11 MB (PDF), 8.6 MB (books/ folder duplicate)
+**Extracted Text**: `extracted_text/Shtessel2014_Sliding_Mode_Control_Observation.txt` (19,064 lines)
+**BibTeX Key**: `Shtessel2014`
+**Tracking File**: `Shtessel2014_tracking.md` [TRACKED]
+**Status**: [TRACKED] Complete tracking file available (932 lines)
+
+**Authors**: Yuri Shtessel, Christopher Edwards, Leonid Fridman, Arie Levant
+**Publisher**: Springer, 2014
 
 **Key Topics**:
-- Observer design
-- Output feedback control
+- Conventional SMC (Ch. 1-2): Theory, design, stability
+- Sliding mode observers (Ch. 3): State estimation, disturbance reconstruction
+- Second-order sliding modes (Ch. 4): Super-twisting, variable-gain STA
+- Robustness to parasitic dynamics (Ch. 5): Frequency-domain analysis
+- Higher-order sliding modes (Ch. 6): HOSM, robust differentiators
+- HOSM observers (Ch. 7): Identification, parameter estimation
+- Applications (Ch. 8): Power, motors, aerospace, robotics
+
+**Common Citations**:
+- Super-twisting algorithm → Ch. 4, Sec. 4.3
+- Variable-gain STA → Ch. 4, Sec. 4.7
+- Eigenvalue placement → Ch. 2, Sec. 2.2.2
+- Integral sliding mode → Ch. 2, Sec. 2.7
+- HOSM differentiators → Ch. 6
+
+**Relevance**: FOUNDATIONAL for all thesis SMC controllers (classical, STA, hybrid adaptive STA)
 
 ---
 
@@ -404,18 +422,35 @@
 
 **Note**: This PDF is NOT about rotary inverted pendulum as originally listed. It's a power systems paper about UPFC (Unified Power Flow Controller) and DFIG (Doubly-Fed Induction Generator) wind farms. Not relevant to thesis.
 
-### 3. The Inverted Pendulum in Control Theory and Robotics
+### 3. Boubaker2014 - The Inverted Pendulum in Control Theory and Robotics
 
 **File**: `The inverted pendulum in control theo... (Z-Library).pdf`
 **Size**: 12 MB
-**BibTeX Key**: TBD
-**Tracking File**: Pending
-**Status**: [PENDING] Not yet tracked
+**Extracted Text**: `extracted_text/Boubaker2014_Inverted_Pendulum.txt` (28,094 lines)
+**BibTeX Key**: `Boubaker2014`
+**Tracking File**: `Boubaker2014_tracking.md` [TRACKED]
+**Status**: [TRACKED] Chapter-level tracking complete (463 lines)
+
+**Editor**: Olfa Boubaker and Rafael Iriarte
+**Publisher**: IET, 2017
 
 **Key Topics**:
-- Historical review
-- Control strategies
-- Applications
+- Historical review (Ch. 1): 50+ years of IP research (1960-2014), 150+ references
+- Mathematical modeling (Ch. 2): Lagrangian dynamics, linearization, state-space
+- Classical control (Ch. 3): PID, pole placement, LQR/LQG
+- Modern control (Ch. 4): SMC, adaptive, robust, fuzzy, neural networks
+- Variants & applications (Ch. 5): Rotary, double, triple pendulums, swing-up
+- Hardware platforms (Ch. 6): Quanser, ECP, AMIRA, custom designs
+
+**Common Citations**:
+- Historical context → Ch. 1 (150+ compiled references)
+- SMC for IP → Ch. 4
+- Double IP complexity → Ch. 5
+- Quanser platforms → Ch. 6
+
+**Note**: PDF too large for full extraction; tracking based on table of contents + arXiv companion (arXiv:1405.3094)
+
+**Relevance**: Comprehensive IP survey, valuable for literature review and historical context
 
 ### 4. Ahmadieh2007 - Sliding Mode Control of Rotary Inverted Pendulum
 
@@ -474,9 +509,9 @@
 
 | Status | Count | Percentage |
 |--------|-------|------------|
-| [TRACKED] Complete | 14 | 63.6% |
+| [TRACKED] Complete | 16 | 72.7% |
 | [READY] for tracking | 0 | 0.0% |
-| [PENDING] tracking | 8 | 36.4% |
+| [PENDING] tracking | 6 | 27.3% |
 | **Total** | **22** | **100%** |
 
 ---
@@ -626,9 +661,9 @@ thesis/references.bib (contains @article{Levant2007, ...})
 
 ---
 
-**Quick Start**: Check `Levant2007_tracking.md`, `Khalil2002_tracking.md`, `Zhou2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, `Plestan2010_tracking.md`, `Slotine1986_tracking.md`, `Slotine1983_tracking.md`, `Ahmadieh2007_tracking.md`, `ECP2020_tracking.md`, or `Quanser2012_tracking.md` for complete examples!
+**Quick Start**: Check `Levant2007_tracking.md`, `Khalil2002_tracking.md`, `Zhou2007_tracking.md`, `Clerc2002_tracking.md`, `Kennedy1995_tracking.md`, `Utkin1977_tracking.md`, `Spong1998_tracking.md`, `Deb2002_tracking.md`, `Plestan2010_tracking.md`, `Slotine1986_tracking.md`, `Slotine1983_tracking.md`, `Ahmadieh2007_tracking.md`, `ECP2020_tracking.md`, `Quanser2012_tracking.md`, `Boubaker2014_tracking.md`, or `Shtessel2014_tracking.md` for complete examples!
 
-**Status**: [OK] Index ready, 14/22 PDFs tracked (63.6% complete - NEARLY TWO-THIRDS!)
+**Status**: [OK] Index ready, 16/22 PDFs tracked (72.7% complete - OVER TWO-THIRDS!)
 
 **Tracked PDFs**:
 1. Khalil2002 - Nonlinear Systems (Lyapunov stability theory)
@@ -645,5 +680,7 @@ thesis/references.bib (contains @article{Levant2007, ...})
 12. Ahmadieh2007 - SMC of Rotary Inverted Pendulum
 13. ECP2020 - Model 505 Hardware Manual (Single IP)
 14. Quanser2012 - Linear Double Inverted Pendulum (DBPEN-LIN)
+15. Boubaker2014 - Inverted Pendulum in Control Theory and Robotics
+16. Shtessel2014 - Sliding Mode Control and Observation (FOUNDATIONAL!)
 
-**Last Updated**: 2025-12-06
+**Last Updated**: 2025-12-07
