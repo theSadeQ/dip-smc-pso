@@ -29,7 +29,7 @@ Sliding mode control originated with Utkin's seminal work on variable structure 
 
 Modern advances address chattering through three main approaches: boundary layer methods \cite{SlotineSastry1983}, higher-order sliding modes \cite{Levant2007}, and adaptive gain tuning \cite{SlotineCoetsee1986}. The Super-Twisting Algorithm represents second-order sliding mode control, achieving continuous control with finite-time convergence. Comprehensive treatment of modern SMC theory and applications is provided by Shtessel et al.\ \cite{Shtessel2014}.
 
-Adaptive SMC addresses model uncertainty through online parameter estimation. Plestan et al.\ \cite{Plestan2010} survey methodologies for adaptive sliding mode control, demonstrating improved robustness over fixed-gain approaches. The hybrid combination of adaptive gains with super-twisting dynamics represents current state-of-the-art for chattering reduction and robustness.
+Adaptive SMC addresses model uncertainty through online parameter estimation. Plestan et al.\ \cite{Plestan2010} survey methodologies for adaptive sliding mode control, demonstrating improved robustness over fixed-gain approaches. The hybrid combination of adaptive gains with super-twisting dynamics represents current state-of-the-art for chattering reduction and robustness. SMC has been successfully applied to various inverted pendulum configurations, including rotary (Furuta) pendulums \cite{Ahmadieh2007}, demonstrating versatility across different mechanical topologies.
 
 \subsubsection{Optimization-Based Controller Tuning}
 Manual controller tuning remains time-intensive and suboptimal. Particle Swarm Optimization, introduced by Kennedy and Eberhart \cite{Kennedy1995}, provides population-based metaheuristic search inspired by social behavior. PSO has been successfully applied to SMC gain tuning for inverted pendulums \cite{Zhou2012}, robotic manipulators \cite{Khanesar2013}, and power systems \cite{Dash2015}.
@@ -51,7 +51,7 @@ This work addresses these gaps through implementation and benchmarking of four S
 This report makes the following contributions:
 \begin{itemize}
 \item Implementation of four SMC variants (Classical, STA, Adaptive, Hybrid) for DIP control
-\item PSO-based automatic gain tuning achieving 25-40\% performance improvement
+\item PSO-based automatic gain tuning achieving 25-40\% performance improvement (detailed in Section~\ref{sec:pso}, validated in Section~\ref{sec:results})
 \item Comprehensive benchmark comparing settling time, overshoot, energy, and chattering
 \item Robustness validation under $\pm$30\% model uncertainty and external disturbances
 \item Open-source implementation for reproducibility\footnote{Source code, simulation data, and documentation: \url{https://github.com/theSadeQ/dip-smc-pso}}

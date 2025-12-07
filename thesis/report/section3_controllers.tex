@@ -18,7 +18,7 @@ u = u_{eq} - K \cdot \sat(s/\varepsilon) - k_d \cdot s
 \label{eq:classical_control}
 \end{equation}
 
-where $u_{eq}$ is the equivalent control (model-based feedforward), $K$ is switching gain, $\varepsilon$ is boundary layer thickness for chattering reduction, and $k_d$ is damping coefficient. The boundary layer parameter $\varepsilon$ trades off chattering reduction against tracking precision, as illustrated in Figure \ref{fig:boundary_layer}.
+where $u_{eq}$ is the equivalent control (model-based feedforward, Eq.~\eqref{eq:equivalent_control}), $K$ is switching gain, $\varepsilon$ is boundary layer thickness for chattering reduction, and $k_d$ is damping coefficient. The boundary layer parameter $\varepsilon$ trades off chattering reduction against tracking precision, as illustrated in Figure \ref{fig:boundary_layer}.
 
 \begin{figure}[htbp]
 \centering
@@ -34,16 +34,16 @@ u_{eq} = (\vect{L} \mat{M}^{-1} \mat{B})^{-1} \cdot [\vect{L} \mat{M}^{-1}(\mat{
 \label{eq:equivalent_control}
 \end{equation}
 
-where $\mat{M}$, $\mat{C}$, $\vect{G}$ are inertia, Coriolis, and gravity matrices, and $\vect{L} = [\lambda_1, \lambda_2, k_1, k_2]$ defines the sliding surface coefficients.
+where $\mat{M}$, $\mat{C}$, $\vect{G}$ are inertia, Coriolis, and gravity matrices (defined in Section~\ref{sec:model}, Eq.~\eqref{eq:manipulator_form}), and $\vect{L} = [\lambda_1, \lambda_2, k_1, k_2]$ defines the sliding surface coefficients.
 
 \subsection{Super-Twisting Algorithm (STA-SMC)}
-To address chattering inherent in classical SMC, the Super-Twisting Algorithm achieves second-order sliding mode with continuous control. The control law consists of two components:
+To address chattering inherent in classical SMC, the Super-Twisting Algorithm \cite[Ch.~4]{Shtessel2014} achieves second-order sliding mode with continuous control. The control law consists of two components:
 \begin{equation}
 u = -k_1 |s|^{1/2} \sign(s) + u_1, \quad \dot{u}_1 = -k_2 \sign(s)
 \label{eq:sta_control}
 \end{equation}
 
-where $k_1$ and $k_2$ are STA gains satisfying stability conditions. The fractional power $|s|^{1/2}$ provides finite-time convergence while maintaining control continuity, resulting in 70\% chattering reduction compared to classical SMC.
+where $k_1$ and $k_2$ are STA gains satisfying stability conditions \cite[Sec.~4.3]{Shtessel2014}. The fractional power $|s|^{1/2}$ provides finite-time convergence while maintaining control continuity, resulting in 70\% chattering reduction compared to classical SMC.
 
 The stability conditions are:
 \begin{equation}
@@ -64,7 +64,7 @@ Classical SMC suffers from chattering due to the discontinuous $\sign(s)$ functi
 The tradeoff is increased computational complexity due to the integral term $u_1$ and more complex gain tuning.
 
 \subsection{Adaptive SMC}
-Adaptive sliding mode control addresses model uncertainty by online estimation of switching gains. The adaptive law is:
+Adaptive sliding mode control addresses model uncertainty by online estimation of switching gains \cite{Plestan2010,SlotineCoetsee1986}. The adaptive law is:
 \begin{equation}
 \hat{K}(t) = \hat{K}(0) + \gamma \int_0^t |s(\tau)| d\tau
 \label{eq:adaptive_gain}
