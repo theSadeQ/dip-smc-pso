@@ -118,19 +118,19 @@ Table \ref{tab:controller_comparison} summarizes the theoretical and practical t
 
 \begin{table}[htbp]
 \centering
-\caption{Qualitative Controller Comparison}
+\caption{Qualitative Controller Comparison (6 Controllers)}
 \label{tab:controller_comparison}
-\begin{tabular}{lcccc}
+\begin{tabular}{lcccccc}
 \toprule
-Property & Classical & STA & Adaptive & Hybrid \\
+Property & Classical & STA & Adaptive & Hybrid & MPC & Swing-Up \\
 \midrule
-Chattering amplitude & High & Low & High & Low \\
-Tuning complexity & Medium & High & High & Very High \\
-Model dependency & High & High & Low & Medium \\
-Disturbance rejection & Good & Excellent & Excellent & Excellent \\
-Computational cost & Low & Medium & High & High \\
-Real-time suitability & Excellent & Good & Good & Good \\
-Robustness to uncertainty & Medium & Medium & High & High \\
+Chattering amplitude & High & Low & High & Low & None & Medium \\
+Tuning complexity & Medium & High & High & Very High & Medium & High \\
+Model dependency & High & High & Low & Medium & Very High & Medium \\
+Disturbance rejection & Good & Excellent & Excellent & Excellent & Good & Fair \\
+Computational cost & Low & Medium & High & High & High & Medium \\
+Real-time suitability & Excellent & Good & Good & Good & Good & Excellent \\
+Robustness to uncertainty & Medium & Medium & High & High & Low & Medium \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -141,6 +141,112 @@ Robustness to uncertainty & Medium & Medium & High & High \\
 \item \textbf{STA-SMC}: Ideal when chattering must be minimized (e.g., mechanical systems with backlash or gear trains).
 \item \textbf{Adaptive SMC}: Preferred when model parameters are uncertain or time-varying (e.g., varying payload mass).
 \item \textbf{Hybrid Adaptive STA}: Best overall performance when computational resources permit, combining chattering reduction with robust adaptation.
+\item \textbf{MPC}: Optimal when constraint satisfaction is critical and accurate models are available. Best transient performance (lowest overshoot, fastest settling) but requires convex optimization solver. Sensitive to model mismatch.
+\item \textbf{Swing-Up SMC}: Required for large initial angles ($|\theta| > 15^\circ$). Not a standalone stabilizing controller—must be paired with a stabilizing controller (Classical/STA/Adaptive/Hybrid) for the catch phase.
 \end{itemize}
 
 This comparison motivates the PSO-based automatic tuning approach described in Section \ref{sec:pso}, which systematically optimizes gains for each controller variant.
+
+\subsection{Model Predictive Control (MPC)}
+\label{subsec:mpc}
+While sliding mode controllers provide robust performance through nonlinear feedback, Model Predictive Control (MPC) offers an alternative approach based on constrained optimization at each timestep. MPC explicitly handles actuator and state constraints while providing predictive control that anticipates future system behavior.
+
+\subsubsection{MPC Problem Formulation}
+MPC operates on a linearized state-space model of the system. The double inverted pendulum dynamics are linearized around the upright equilibrium $\vect{x}_{eq} = [0, 0, 0, 0, 0, 0]^T$ using numerical finite-difference approximation. The resulting discrete-time linear model is:
+\begin{equation}
+\vect{x}(k+1) = \mat{A}_d \vect{x}(k) + \mat{B}_d u(k)
+\label{eq:mpc_state_space}
+\end{equation}
+
+where $\vect{x} = [x, \theta_1, \theta_2, \dot{x}, \dot{\theta}_1, \dot{\theta}_2]^T$ is the 6-dimensional state vector, $u$ is the cart force, and $\mat{A}_d$, $\mat{B}_d$ are obtained via zero-order hold discretization with sampling period $dt = 0.02$s (50 Hz).
+
+At each timestep, MPC solves a finite-horizon optimization problem:
+\begin{equation}
+\min_{\vect{u}_0, \ldots, \vect{u}_{N-1}} J = \sum_{k=0}^{N-1} \left( \|\vect{x}(k) - \vect{x}_{ref}\|^2_{\mat{Q}} + \|u(k)\|^2_R \right) + \|\vect{x}(N) - \vect{x}_{ref}\|^2_{\mat{Q}_f}
+\label{eq:mpc_cost}
+\end{equation}
+
+subject to constraints:
+\begin{align}
+|u(k)| &\leq u_{max} = 20\text{N} \quad \forall k = 0, \ldots, N-1 \label{eq:mpc_force_constraint}\\
+|x(k)| &\leq 2.4\text{m} \quad \forall k = 1, \ldots, N \label{eq:mpc_cart_constraint}\\
+|\theta_i(k)| &\leq 0.5\text{ rad} \quad \forall k = 1, \ldots, N, \; i \in \{1,2\} \label{eq:mpc_angle_constraint}
+\end{align}
+
+where $N = 20$ is the prediction horizon, $\mat{Q} = \text{diag}(1.0, 10.0, 10.0, 0.1, 0.5, 0.5)$ is the state cost matrix (emphasizing angle regulation), $R = 0.01$ is the input cost coefficient, and $\mat{Q}_f = \mat{Q}$ is the terminal cost. The reference state $\vect{x}_{ref} = \vect{0}$ corresponds to the upright equilibrium.
+
+\subsubsection{Online Optimization via Quadratic Programming}
+The optimization problem \eqref{eq:mpc_cost}--\eqref{eq:mpc_angle_constraint} is a convex Quadratic Program (QP) since the cost is quadratic and constraints are linear. The controller implementation uses \texttt{cvxpy} \cite{Diamond2016} with the OSQP solver \cite{Stellato2020}, which exploits problem sparsity for efficient computation.
+
+The computational cost is 48.7 $\mu$s per control step (validated on baseline hardware, Section \ref{sec:results}), which is well below the 20 ms sampling period (2.4\% duty cycle). This allows real-time deployment despite the online optimization requirement.
+
+Only the first control action $u(0)$ from the optimal sequence $\{\vect{u}_0^*, \ldots, \vect{u}_{N-1}^*\}$ is applied to the system. At the next timestep, the horizon shifts forward (receding horizon strategy), and the optimization is re-solved with updated state measurements, providing closed-loop feedback.
+
+\subsubsection{Advantages Over SMC}
+MPC provides several benefits compared to sliding mode controllers:
+
+\textbf{Explicit Constraint Handling:} Actuator saturation and state limits are incorporated directly in the optimization \eqref{eq:mpc_force_constraint}--\eqref{eq:mpc_angle_constraint}, guaranteeing constraint satisfaction (subject to model accuracy). SMC controllers require ad-hoc saturation and may violate constraints during transients.
+
+\textbf{Predictive Nature Reduces Overshoot:} The finite-horizon cost \eqref{eq:mpc_cost} anticipates future system evolution, enabling proactive control. Baseline results (Section \ref{sec:results}) show MPC achieves 1.2\% overshoot versus 5.8\% for classical SMC, demonstrating superior transient performance.
+
+\textbf{Smooth Control Signals:} The quadratic input penalty $R\|u(k)\|^2$ naturally regularizes control effort, producing continuous signals with no chattering. This contrasts with the discontinuous switching in classical SMC (chattering amplitude 4.8N) and even STA-SMC (1.2N residual chattering).
+
+\textbf{Limitations:} MPC requires an accurate linear model, limiting robustness to unmodeled dynamics and large disturbances. Computational cost (48.7 $\mu$s) is 2.6× higher than classical SMC (18.5 $\mu$s), though still real-time feasible. Performance degrades when the system operates far from the linearization point, requiring gain-scheduled or nonlinear MPC extensions.
+
+\subsection{Swing-Up SMC}
+\label{subsec:swing_up}
+The controllers in Sections \ref{subsec:mpc}--\ref{subsec:swing_up} assume the pendulum starts near the upright equilibrium ($|\theta_i| < 15^\circ$). For large initial angles (e.g., hanging downward position $\theta_1 = 180^\circ$), a separate \textit{swing-up} strategy is required to bring the system into the controllable region before switching to a stabilizing controller.
+
+\subsubsection{Energy-Based Swing-Up Strategy}
+The swing-up controller exploits energy shaping to pump mechanical energy into the system. The total mechanical energy of the double pendulum is:
+\begin{equation}
+E = T + V = \frac{1}{2}\dot{\vect{q}}^T \mat{M}(\vect{q}) \dot{\vect{q}} + V(\vect{q})
+\label{eq:total_energy}
+\end{equation}
+
+where $T$ is kinetic energy (involving the mass matrix $\mat{M}$ from Eq.~\eqref{eq:manipulator_form}), and $V$ is gravitational potential energy. At the upright equilibrium, the reference energy is:
+\begin{equation}
+E_{ref} = m_1 g l_1 + m_2 g (l_1 + l_2)
+\label{eq:reference_energy}
+\end{equation}
+
+The energy error is defined as:
+\begin{equation}
+\tilde{E}(t) = E(t) - E_{ref}
+\label{eq:energy_error}
+\end{equation}
+
+The swing-up control law modulates cart force to inject energy when $\tilde{E} < 0$ (pendulum below upright) and extract energy when $\tilde{E} > 0$ (pendulum above upright):
+\begin{equation}
+u_{swing} = -K_{energy} \cdot \sign(\cos\theta_1 \cdot \dot{\theta}_1) \cdot \tilde{E}
+\label{eq:swing_up_control}
+\end{equation}
+
+where $K_{energy} = 3.5$ is the energy injection gain. The $\sign(\cos\theta_1 \cdot \dot{\theta}_1)$ term ensures the force direction aligns with pendulum motion to add energy during upswing and brake during downswing.
+
+\subsubsection{Two-Phase Control Law}
+The complete swing-up controller operates in two phases:
+
+\textbf{Phase 1 -- Swing-Up} ($|\theta_1| > \theta_{switch}$ or $|\theta_2| > \theta_{switch}$):
+Apply energy-based control \eqref{eq:swing_up_control} to pump energy until both angles enter the catch region. The switching threshold is $\theta_{switch} = 15^\circ$ (0.26 rad).
+
+\textbf{Phase 2 -- Catch \& Stabilize} ($|\theta_1|, |\theta_2| < \theta_{switch}$):
+Switch to classical SMC (Section \ref{subsec:classical_smc}) to stabilize the system at the upright equilibrium. The switching logic monitors both angles to prevent premature transition during oscillations.
+
+Baseline results (Section \ref{sec:results}) show 94\% success rate (47/50 Monte Carlo runs) for swing-up from $\theta_1(0) = 180^\circ \pm 10^\circ$, with average swing-up time of 3.15 seconds. Failed runs occur when excessive cart motion violates position limits ($|x| > 2.4$m) before reaching the catch region.
+
+\subsubsection{Global Stability Considerations}
+The swing-up controller lacks a unified Lyapunov function covering the full state space. Energy-based analysis provides stability guarantees for Phase 1 (swing-up):
+\begin{equation}
+V_{swing} = \frac{1}{2}\tilde{E}^2
+\label{eq:swing_lyapunov}
+\end{equation}
+
+Under ideal conditions (no friction, perfect energy estimation), $\dot{V}_{swing} \leq 0$ ensures energy convergence. However, the catch region (Phase 2) uses classical SMC with its own Lyapunov function (Section \ref{subsec:classical_smc}). The gap between phases introduces potential instability if switching occurs at high velocities or during unfavorable pendulum configurations.
+
+Future work should investigate:
+\begin{itemize}
+\item Smooth blending of swing-up and stabilization control laws to eliminate discontinuous switching
+\item Adaptive threshold $\theta_{switch}(E, \dot{\theta})$ based on energy and velocity
+\item Unified control Lyapunov function covering the entire state space using hybrid systems theory
+\end{itemize}
