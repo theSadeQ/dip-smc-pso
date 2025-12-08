@@ -85,23 +85,23 @@ controllers:
     dt: 0.01  # Match baseline script simulation dt
   sta_smc:
     gains:
-    - 23.67  # K1: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
-    - 13.29  # K2: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
-    - 8.87   # k1: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
-    - 3.55   # k2: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
-    - 6.52   # λ1: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
-    - 2.93   # λ2: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
+    - 2.02   # K1: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 6.67   # K2: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 5.62   # k1: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 3.75   # k2: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 4.36   # λ1: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 2.05   # λ2: PSO-optimized (MT-8 robust gains for DIPDynamics)
     damping_gain: 0.0
     max_force: 150.0
     dt: 0.01  # Match baseline script simulation dt
     boundary_layer: 0.05  # Restored from 0.3 (Issue #12 fix reverted for benchmarking)
   adaptive_smc:
     gains:
-    - 23.67  # k1: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
-    - 14.29  # k2: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
-    - 8.87   # k3: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
-    - 3.55   # k4: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
-    - 0.33   # k5: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
+    - 2.14   # k1: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 3.36   # k2: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 7.20   # k3: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 0.34   # k4: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 0.29   # k5: PSO-optimized (MT-8 robust gains for DIPDynamics)
     max_force: 150.0
     leak_rate: 0.01
     dead_zone: 0.05
@@ -136,10 +136,10 @@ controllers:
   # adjustment.
   hybrid_adaptive_sta_smc:
     gains:
-    - 23.67  # c1: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
-    - 14.29  # lambda1: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
-    - 8.87   # c2: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
-    - 3.55   # lambda2: PSO-optimized (Phase 2 robust gains for LowRankDIPDynamics)
+    - 10.15  # c1: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 12.84  # lambda1: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 6.82   # c2: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 2.75   # lambda2: PSO-optimized (MT-8 robust gains for DIPDynamics)
     # Actuator saturation limit [N].  Control commands will be clipped
     # to the interval [-max_force, max_force].
     max_force: 150.0
