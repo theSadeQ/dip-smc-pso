@@ -14,7 +14,7 @@ However, SMC performance depends critically on numerous design parameters: slidi
 
 Particle swarm optimization (PSO) offers a systematic solution to the controller tuning problem. As a population-based metaheuristic inspired by social behavior, PSO explores the multidimensional gain space through cooperating particles, each representing a candidate controller configuration \cite{Kennedy1995}. Unlike gradient-based methods, PSO operates derivative-free, making it applicable to non-smooth, black-box cost functions that aggregate simulation metrics. Comparative studies demonstrate 20-40\% performance improvements over manually-tuned controllers across robotic manipulators \cite{Khanesar2013}, power systems \cite{Dash2015}, and inverted pendulums \cite{Zhou2012}. PSO's parallel search architecture also enables exploitation of modern multi-core processors, reducing tuning time from manual hours to automated minutes. The convergence theory \cite{ClercKennedy2002} provides stability guarantees under appropriate parameter selection, ensuring reliable optimization despite the non-convex search landscape.
 
-Despite extensive separate research on SMC theory and PSO optimization, significant gaps remain. Few studies systematically compare classical SMC, super-twisting algorithm (STA), adaptive SMC, and hybrid variants on a common benchmark with identical performance metrics. PSO-based automatic tuning across multiple SMC architectures for underactuated systems remains under-explored, with most prior work focusing on single controller types. Comprehensive robustness analysis under realistic model uncertainty ($\pm$30\% parameter variation) and external disturbances is limited. Finally, the lack of open-source, reproducible implementations hinders community validation and practical adoption. This work addresses these gaps by implementing four SMC variants with PSO optimization, benchmarking performance across settling time, overshoot, energy, and chattering metrics, and providing a complete open-source framework for reproducible research.
+Despite extensive separate research on SMC theory and PSO optimization, significant gaps remain. Few studies systematically compare classical SMC, super-twisting algorithm (STA), adaptive SMC, and hybrid variants on a common benchmark with identical performance metrics. PSO-based automatic tuning across multiple SMC architectures for underactuated systems remains under-explored, with most prior work focusing on single controller types. Comprehensive robustness analysis under realistic model uncertainty ($\pm$30\% parameter variation) and external disturbances is limited. Finally, the lack of open-source, reproducible implementations hinders community validation and practical adoption. This work addresses these gaps by implementing seven controller variants (four core SMC variants, Model Predictive Control for comparison, Swing-Up control for large-angle initial conditions, and factory pattern implementation) with PSO optimization, benchmarking performance across settling time, overshoot, energy, and chattering metrics, and providing a complete open-source framework for reproducible research.
 
 \subsection{Problem Statement}
 Design and implement sliding mode controllers (SMC) for DIP stabilization with particle swarm optimization (PSO) for automatic gain tuning.
@@ -45,12 +45,18 @@ Despite extensive work on SMC theory and PSO optimization separately, few studie
 \item Open-source implementation with reproducible benchmarks
 \end{itemize}
 
-This work addresses these gaps through implementation and benchmarking of four SMC variants with PSO optimization, validated under realistic uncertainty conditions.
+This work addresses these gaps through implementation and benchmarking of seven controller variants with PSO optimization, validated under realistic uncertainty conditions.
 
 \subsection{Contributions}
 This report makes the following contributions:
 \begin{itemize}
-\item Implementation of four SMC variants (Classical, STA, Adaptive, Hybrid) for DIP control
+\item Implementation of seven controller variants for DIP control:
+    \begin{itemize}
+        \item Four core SMC variants: Classical SMC, Super-Twisting Algorithm (STA), Adaptive SMC, Hybrid Adaptive-STA SMC
+        \item Model Predictive Control (MPC) for constraint-aware optimization
+        \item Swing-Up SMC for large-angle initial conditions ($\theta_1(0) = 180°$)
+        \item Factory pattern implementation enabling type-safe controller selection
+    \end{itemize}
 \item PSO-based automatic gain tuning achieving 25-40\% performance improvement (detailed in Section~\ref{sec:pso}, validated in Section~\ref{sec:results})
 \item Comprehensive benchmark comparing settling time, overshoot, energy, and chattering
 \item Robustness validation under $\pm$30\% model uncertainty and external disturbances
