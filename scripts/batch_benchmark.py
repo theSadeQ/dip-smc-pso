@@ -328,7 +328,10 @@ def benchmark_controller(
 
     # Create controller
     try:
-        controller = create_controller(controller_name, config)
+        # Extract gains from config for the specific controller type
+        controller_config = getattr(config.controllers, controller_name)
+        controller_gains = controller_config.gains
+        controller = create_controller(controller_name, config=config, gains=controller_gains)
     except Exception as e:
         print(f"   [FAIL] Could not create controller: {e}")
         # Return failed results
