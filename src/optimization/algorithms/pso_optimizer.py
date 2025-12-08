@@ -167,6 +167,9 @@ class PSOTuner:
         self.cost_cfg = self.cfg.cost_function
         self.uncertainty_cfg = getattr(self.cfg, "physics_uncertainty", None)
 
+        # Extract initial state from config for PSO fitness evaluation
+        self.initial_state = np.array(self.sim_cfg.initial_state, dtype=float)
+
         # Local PRNG.  Use provided rng or create a new one seeded from
         # ``seed`` or ``global_seed``.  Avoid modifying global RNGs.
         default_seed = seed if seed is not None else getattr(self.cfg, "global_seed", None)
@@ -581,6 +584,7 @@ class PSOTuner:
                     sim_time=self._T,
                     dt=self.sim_cfg.dt,
                     u_max=self._u_max,
+                    initial_state=self.initial_state,
                     params_list=physics_models,
                 )
             except TypeError:
@@ -614,6 +618,7 @@ class PSOTuner:
                     sim_time=self._T,
                     dt=self.sim_cfg.dt,
                     u_max=self._u_max,
+                    initial_state=self.initial_state,
                 )
             except TypeError:
                 t, x_b, u_b, sigma_b = simulate_system_batch(
