@@ -234,7 +234,9 @@ class AdaptiveSMC:
         ValueError
             If ``gains`` has fewer than five elements.
         """
-        if not isinstance(gains, (list, tuple)) or len(gains) < 5:
+        # Accept lists, tuples, or numpy arrays (PSO passes np.ndarray)
+        import numpy as np
+        if not isinstance(gains, (list, tuple, np.ndarray)) or len(gains) < 5:
             raise ValueError(
                 "AdaptiveSMC requires at least 5 gains: [k1, k2, lam1, lam2, gamma]"
             )
