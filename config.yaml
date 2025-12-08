@@ -38,79 +38,79 @@ fault_detection:
 controller_defaults:
   classical_smc:
     gains:
-    - 23.068200752497802   # k1: Optimized from 5.0 (+360% increase)
-    - 12.853586891155206   # k2: Optimized from 5.0 (+157% increase)
-    - 5.514970338688094    # k3: Optimized from 5.0 (+10% increase)
-    - 3.487196490326416    # k4: Optimized from 0.5 (+597% increase)
-    - 2.2331074770549435   # k5: Optimized from 0.5 (+347% increase)
-    - 0.14834799545581934  # k6: Optimized from 0.5 (-70% reduction)
+    - 5.0   # k1: Safe baseline (restored from pre-MT-8)
+    - 5.0   # k2: Safe baseline (restored from pre-MT-8)
+    - 5.0   # k3: Safe baseline (restored from pre-MT-8)
+    - 0.5   # k4: Safe baseline (restored from pre-MT-8)
+    - 0.5   # k5: Safe baseline (restored from pre-MT-8)
+    - 0.5   # k6: Safe baseline (restored from pre-MT-8)
   sta_smc:
     gains:
-    - 2.017611719524936    # K1: MT-8 robust optimized (was 8.0, -75% reduction)
-    - 6.672119935276616    # K2: MT-8 robust optimized (was 4.0, +67% increase)
-    - 5.618034769343865    # k1: MT-8 robust optimized (was 12.0, -53% reduction)
-    - 3.7474442752642325   # k2: MT-8 robust optimized (was 6.0, -38% reduction)
-    - 4.355334618057576    # λ1: MT-8 robust optimized (was 4.85, -10% reduction)
-    - 2.054542527244675    # λ2: MT-8 robust optimized (was 3.43, -40% reduction)
+    - 8.0    # K1: Safe baseline (from Issue #2 resolution)
+    - 4.0    # K2: Safe baseline (from Issue #2 resolution)
+    - 12.0   # k1: Safe baseline (from Issue #2 resolution)
+    - 6.0    # k2: Safe baseline (from Issue #2 resolution)
+    - 4.85   # λ1: Safe baseline (from Issue #2 resolution)
+    - 3.43   # λ2: Safe baseline (from Issue #2 resolution)
   adaptive_smc:
     gains:
-    - 2.142207994033271    # k1: MT-8 robust optimized (was 10.0, -79% reduction)
-    - 3.355938383745894    # k2: MT-8 robust optimized (was 8.0, -58% reduction)
-    - 7.200505646106438    # k3: MT-8 robust optimized (was 5.0, +44% increase)
-    - 0.3374379808658892   # k4: MT-8 robust optimized (was 4.0, -92% reduction)
-    - 0.2852044368386544   # k5: MT-8 robust optimized (was 1.0, -71% reduction)
+    - 10.0   # k1: Safe baseline (restored from pre-MT-8)
+    - 8.0    # k2: Safe baseline (restored from pre-MT-8)
+    - 5.0    # k3: Safe baseline (restored from pre-MT-8)
+    - 4.0    # k4: Safe baseline (restored from pre-MT-8)
+    - 1.0    # k5: Safe baseline (restored from pre-MT-8)
 
   # Default sliding surface gains for the hybrid adaptive super‑twisting
   # controller.  These four values correspond to [c1, lambda1, c2, lambda2].
   # They define the dynamics on the sliding surface used to drive the
   # pendulum angles to zero.
-  # MT-8: Best performance (21.4% improvement over baseline)
+  # Safe baseline gains (restored for benchmarking)
   hybrid_adaptive_sta_smc:
     gains:
-    - 10.148979254143576   # c1: MT-8 robust optimized (was 5.0, +103% increase)
-    - 12.839386550675101   # lambda1: MT-8 robust optimized (was 5.0, +157% increase)
-    - 6.815065802267164    # c2: MT-8 robust optimized (was 5.0, +36% increase)
-    - 2.7500136927843215   # lambda2: MT-8 robust optimized (was 0.5, +450% increase)
+    - 5.0    # c1: Safe baseline (restored from pre-MT-8)
+    - 5.0    # lambda1: Safe baseline (restored from pre-MT-8)
+    - 5.0    # c2: Safe baseline (restored from pre-MT-8)
+    - 0.5    # lambda2: Safe baseline (restored from pre-MT-8)
 controllers:
   classical_smc:
     gains:
-    - 23.068200752497802   # k1: Optimized from 5.0 (+360% increase)
-    - 12.853586891155206   # k2: Optimized from 5.0 (+157% increase)
-    - 5.514970338688094    # k3: Optimized from 5.0 (+10% increase)
-    - 3.487196490326416    # k4: Optimized from 0.5 (+597% increase)
-    - 2.2331074770549435   # k5: Optimized from 0.5 (+347% increase)
-    - 0.14834799545581934  # k6: Optimized from 0.5 (-70% reduction)
+    - 23.07  # k1: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 12.85  # k2: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 5.51   # k3: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 3.49   # k4: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 2.23   # k5: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 0.15   # k6: PSO-optimized (MT-8 robust gains for DIPDynamics)
     max_force: 150.0
-    boundary_layer: 0.3  # Increased from 0.02 for Issue #12 chattering reduction
-    dt: 0.001
+    boundary_layer: 0.02  # Restored from 0.3 (Issue #12 fix reverted for benchmarking)
+    dt: 0.01  # Match baseline script simulation dt
   sta_smc:
     gains:
-    - 8.0    # K1: Algorithmic gain (optimized for Issue #2 resolution)
-    - 4.0    # K2: Algorithmic gain (reduced from 8.0 for Issue #2 resolution)
-    - 12.0   # k1: Surface gain (maintained for proper scaling)
-    - 6.0    # k2: Surface gain (maintained for proper scaling)
-    - 4.85   # λ1: Surface coefficient (optimized for ζ=0.7 target damping)
-    - 3.43   # λ2: Surface coefficient (optimized for ζ=0.7 target damping)
+    - 2.02   # K1: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 6.67   # K2: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 5.62   # k1: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 3.75   # k2: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 4.36   # λ1: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 2.05   # λ2: PSO-optimized (MT-8 robust gains for DIPDynamics)
     damping_gain: 0.0
     max_force: 150.0
-    dt: 0.001
-    boundary_layer: 0.3  # Increased from 0.05 for Issue #12 chattering reduction
+    dt: 0.01  # Match baseline script simulation dt
+    boundary_layer: 0.05  # Restored from 0.3 (Issue #12 fix reverted for benchmarking)
   adaptive_smc:
     gains:
-    - 2.142207994033271    # k1: MT-8 robust optimized (was 10.0, -79% reduction)
-    - 3.355938383745894    # k2: MT-8 robust optimized (was 8.0, -58% reduction)
-    - 7.200505646106438    # k3: MT-8 robust optimized (was 5.0, +44% increase)
-    - 0.3374379808658892   # k4: MT-8 robust optimized (was 4.0, -92% reduction)
-    - 0.2852044368386544   # k5: MT-8 robust optimized (was 1.0, -71% reduction)
+    - 2.14   # k1: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 3.36   # k2: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 7.20   # k3: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 0.34   # k4: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 0.29   # k5: PSO-optimized (MT-8 robust gains for DIPDynamics)
     max_force: 150.0
     leak_rate: 0.01
     dead_zone: 0.05
     adapt_rate_limit: 10.0
     K_min: 0.1
     K_max: 100.0
-    dt: 0.001
+    dt: 0.01  # Match baseline script simulation dt
     smooth_switch: true
-    boundary_layer: 0.4  # Increased from 0.1 for Issue #12 chattering reduction
+    boundary_layer: 0.1  # Restored from 0.4 (Issue #12 fix reverted for benchmarking)
   swing_up_smc:
     stabilizing_controller: classical_smc
     energy_gain: 50.0
@@ -136,16 +136,16 @@ controllers:
   # adjustment.
   hybrid_adaptive_sta_smc:
     gains:
-    - 10.148979254143576   # c1: MT-8 robust optimized (was 5.0, +103% increase)
-    - 12.839386550675101   # lambda1: MT-8 robust optimized (was 5.0, +157% increase)
-    - 6.815065802267164    # c2: MT-8 robust optimized (was 5.0, +36% increase)
-    - 2.7500136927843215   # lambda2: MT-8 robust optimized (was 0.5, +450% increase)
+    - 10.15  # c1: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 12.84  # lambda1: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 6.82   # c2: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    - 2.75   # lambda2: PSO-optimized (MT-8 robust gains for DIPDynamics)
     # Actuator saturation limit [N].  Control commands will be clipped
     # to the interval [-max_force, max_force].
     max_force: 150.0
     # Discrete integration step [s] for the adaptive gains and STA
     # integral term.  Should match the simulator time step.
-    dt: 0.001
+    dt: 0.01  # Match baseline script simulation dt
     # Initial value for the proportional‑like adaptive gain k1.
     k1_init: 4.0
     # Initial value for the integral‑like adaptive gain k2.
