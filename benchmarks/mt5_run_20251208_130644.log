@@ -1,0 +1,42 @@
+================================================================================
+MT-5: Comprehensive Controller Benchmark
+================================================================================
+
+[1/5] Loading configuration...
+   [OK] Configuration loaded
+
+[2/5] Creating dynamics model...
+   [OK] Dynamics model created
+
+[3/5] Generating initial conditions...
+   [OK] Generated 100 initial condition samples
+
+[4/5] Running benchmarks for 4 controllers...
+   Controllers: classical_smc, sta_smc, adaptive_smc, hybrid_adaptive_sta_smc
+
+[BENCH] Benchmarking classical_smc...
+   [FAIL] Could not create controller: create_controller() takes 1 positional argument but 2 were given
+
+[BENCH] Benchmarking sta_smc...
+   [FAIL] Could not create controller: create_controller() takes 1 positional argument but 2 were given
+
+[BENCH] Benchmarking adaptive_smc...
+   [FAIL] Could not create controller: create_controller() takes 1 positional argument but 2 were given
+
+[BENCH] Benchmarking hybrid_adaptive_sta_smc...
+   [FAIL] Could not create controller: create_controller() takes 1 positional argument but 2 were given
+
+[5/5] Saving results...
+
+[OK] CSV saved to: benchmarks\comprehensive_benchmark.csv
+[OK] JSON saved to: benchmarks\comprehensive_benchmark.json
+
+================================================================================
+[SUCCESS] MT-5 Comprehensive Benchmark Complete!
+================================================================================
+
+Next steps:
+1. Review: cat benchmarks/comprehensive_benchmark.csv
+2. Analyze: python scripts/analyze_benchmark_results.py
+3. Update: docs/tutorials/02-controller-comparison.md
+4. Continue with MT-6 (Boundary Layer Optimization)

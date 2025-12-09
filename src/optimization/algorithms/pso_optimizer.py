@@ -619,11 +619,15 @@ class PSOTuner:
                 all_costs.append(cost)
             costs_per_draw = np.stack(all_costs, axis=0)
             J_valid = self._combine_costs(costs_per_draw)
+            # Re-apply floor after aggregation (fix for zero-cost bug)
+            J_valid = np.maximum(J_valid, self.min_cost_floor)
             penalty = float(self.instability_penalty)
             unstable_mask = np.max(costs_per_draw, axis=0) >= penalty
             if np.any(unstable_mask):
                 J_valid = J_valid.astype(float, copy=True)
                 J_valid[unstable_mask] = penalty
+            # Re-apply floor after penalty modifications (defensive)
+            J_valid = np.maximum(J_valid, self.min_cost_floor)
         else:
             try:
                 t, x_b, u_b, sigma_b = simulate_system_batch(
@@ -654,6 +658,8 @@ class PSOTuner:
             J_valid = self._compute_cost_from_traj(t, x_b, u_b, sigma_b)
             if nan_mask.any():
                 J_valid[nan_mask] = float(self.instability_penalty)
+            # Re-apply floor after NaN handling (defensive, non-uncertainty path)
+            J_valid = np.maximum(J_valid, self.min_cost_floor)
         if violation_mask.any():
             J_full = np.full(B, float(self.instability_penalty), dtype=float)
             J_full[valid_mask] = J_valid
