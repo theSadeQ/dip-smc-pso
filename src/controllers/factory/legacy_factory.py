@@ -1100,6 +1100,18 @@ def create_controller(name: str, /, **kwargs: Any) -> Any:
         if gains is None:
             raise ValueError(f"Controller '{name}': gains parameter is required")
 
+        # Extract dynamics model from config if not explicitly provided
+        dynamics_model = normalized_kwargs.get('dynamics_model')
+        if dynamics_model is None:
+            config = normalized_kwargs.get('config')
+            if config is not None:
+                try:
+                    from src.plant import DoubleInvertedPendulum
+                    phys = getattr(config, "physics", None)
+                    if phys is not None:
+                        dynamics_model = DoubleInvertedPendulum(phys)
+                except Exception:
+                    pass  # OK: Controller can work without dynamics
         max_force = normalized_kwargs.get('max_force', 20.0)
         boundary_layer = normalized_kwargs.get('boundary_layer', 0.01)
 
@@ -1108,7 +1120,7 @@ def create_controller(name: str, /, **kwargs: Any) -> Any:
             'gains': gains,
             'max_force': max_force,
             'boundary_layer': boundary_layer,
-            'dynamics_model': normalized_kwargs.get('dynamics_model'),
+            'dynamics_model': dynamics_model,
             'regularization': normalized_kwargs.get('regularization', 1e-10),
             'switch_method': normalized_kwargs.get('switch_method', 'tanh'),
         }
@@ -1124,6 +1136,19 @@ def create_controller(name: str, /, **kwargs: Any) -> Any:
         if gains is None:
             raise ValueError(f"Controller '{name}': gains parameter is required")
 
+        # Extract dynamics model from config if not explicitly provided
+        dynamics_model = normalized_kwargs.get('dynamics_model')
+        if dynamics_model is None:
+            config = normalized_kwargs.get('config')
+            if config is not None:
+                try:
+                    from src.plant import DoubleInvertedPendulum
+                    phys = getattr(config, "physics", None)
+                    if phys is not None:
+                        dynamics_model = DoubleInvertedPendulum(phys)
+                except Exception:
+                    pass  # OK: Controller can work without dynamics
+
         max_force = normalized_kwargs.get('max_force', 20.0)
         boundary_layer = normalized_kwargs.get('boundary_layer', 0.01)
         dt = normalized_kwargs.get('dt', 0.01)
@@ -1133,7 +1158,7 @@ def create_controller(name: str, /, **kwargs: Any) -> Any:
             'max_force': max_force,
             'boundary_layer': boundary_layer,
             'dt': dt,
-            'dynamics_model': normalized_kwargs.get('dynamics_model'),
+            'dynamics_model': dynamics_model,
             'damping_gain': normalized_kwargs.get('damping_gain', 0.0),
             'regularization': normalized_kwargs.get('regularization', 1e-10),
             'switch_method': normalized_kwargs.get('switch_method', 'tanh'),
@@ -1153,6 +1178,19 @@ def create_controller(name: str, /, **kwargs: Any) -> Any:
         if gains is None:
             raise ValueError(f"Controller '{name}': gains parameter is required")
 
+        # Extract dynamics model from config if not explicitly provided
+        dynamics_model = normalized_kwargs.get('dynamics_model')
+        if dynamics_model is None:
+            config = normalized_kwargs.get('config')
+            if config is not None:
+                try:
+                    from src.plant import DoubleInvertedPendulum
+                    phys = getattr(config, "physics", None)
+                    if phys is not None:
+                        dynamics_model = DoubleInvertedPendulum(phys)
+                except Exception:
+                    pass  # OK: Controller can work without dynamics
+
         known_params = {
             'gains': gains,
             'dt': normalized_kwargs.get('dt', 0.01),
@@ -1166,6 +1204,7 @@ def create_controller(name: str, /, **kwargs: Any) -> Any:
             'boundary_layer': normalized_kwargs.get('boundary_layer', 0.01),
             'K_init': normalized_kwargs.get('K_init', 10.0),
             'alpha': normalized_kwargs.get('alpha', 0.5),
+            'dynamics_model': dynamics_model,
         }
 
         # All parameters have defaults, so just pass them all

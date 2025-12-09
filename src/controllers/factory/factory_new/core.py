@@ -274,6 +274,8 @@ def create_controller(controller_type: str,
                 dynamics_model = DIPDynamics(config.dip_params)
         except Exception as e:
             logger.warning(f"Could not create dynamics model: {e}")
+            import traceback
+            logger.debug(f"Traceback: {traceback.format_exc()}")
 
     # Extract controller-specific parameters from config
     controller_params = _extract_controller_parameters(config, controller_type, controller_info)

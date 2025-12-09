@@ -256,10 +256,14 @@ class SuperTwistingSMC:
             raise ValueError("SuperTwistingSMC requires 2 or 6 gains")
 
 
-        # Store parameters from arguments using weakref to break circular references
+        # Store dynamics model with both strong and weak references
+        # Strong reference prevents premature GC when factory creates dynamics
+        # Weak reference allows external dynamics to be managed independently
         if dynamics_model is not None:
-            self._dynamics_ref = weakref.ref(dynamics_model)
+            self._dynamics_model = dynamics_model  # Strong reference
+            self._dynamics_ref = weakref.ref(dynamics_model)  # Weak reference for compatibility
         else:
+            self._dynamics_model = None
             self._dynamics_ref = lambda: None
         # Validate core parameters using the shared utility.  These
         # validations enforce positivity or non‑negativity with
@@ -455,17 +459,23 @@ class SuperTwistingSMC:
 
     @property
     def dyn(self):
-        """Access dynamics model via weakref."""
+        """Access dynamics model. Returns strong reference if available, otherwise tries weakref."""
+        # Prefer strong reference (factory-created dynamics)
+        if hasattr(self, '_dynamics_model') and self._dynamics_model is not None:
+            return self._dynamics_model
+        # Fall back to weakref (externally-managed dynamics)
         if self._dynamics_ref is not None:
             return self._dynamics_ref()
         return None
 
     @dyn.setter
     def dyn(self, value):
-        """Set dynamics model using weakref."""
+        """Set dynamics model using both strong and weak references."""
         if value is not None:
-            self._dynamics_ref = weakref.ref(value)
+            self._dynamics_model = value  # Strong reference
+            self._dynamics_ref = weakref.ref(value)  # Weak reference for compatibility
         else:
+            self._dynamics_model = None
             self._dynamics_ref = lambda: None
 
     @property

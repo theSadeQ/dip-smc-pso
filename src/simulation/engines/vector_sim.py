@@ -346,6 +346,30 @@ def simulate_system_batch(
         except Exception:
             ctrl = controller_factory(part_arr[j])
         controllers.append(ctrl)
+
+    # Ensure all controllers have a dynamics model
+    # If any controller lacks dynamics, create one from default physics
+    needs_dynamics = []
+    for j, ctrl in enumerate(controllers):
+        dyn = getattr(ctrl, "dynamics_model", None)
+        if dyn is None and hasattr(ctrl, "dyn"):
+            dyn = ctrl.dyn
+        if dyn is None:
+            needs_dynamics.append(j)
+
+    if needs_dynamics:
+        # Create a default dynamics model for controllers that need it
+        try:
+            from src.config import load_config
+            from src.plant import DoubleInvertedPendulum
+            config = load_config("config.yaml")
+            default_dyn = DoubleInvertedPendulum(config.physics)
+            # Assign to controllers that need it
+            for j in needs_dynamics:
+                if hasattr(controllers[j], "dyn"):
+                    controllers[j].dyn = default_dyn
+        except Exception:
+            pass  # If we can't create dynamics, simulation will use fallback
     # Determine state dimension from first controller's dynamics model
     if initial_state is None:
         # Try to introspect state dimension
@@ -354,9 +378,16 @@ def simulate_system_batch(
             state_dim = int(getattr(controllers[0], "state_dim"))
         except Exception:
             try:
-                state_dim = int(getattr(controllers[0], "dynamics_model").state_dim)
+                # Try dynamics_model attribute first, then dyn property
+                dyn = getattr(controllers[0], "dynamics_model", None)
+                if dyn is None and hasattr(controllers[0], "dyn"):
+                    dyn = controllers[0].dyn
+                if dyn is not None:
+                    state_dim = int(dyn.state_dim)
             except Exception:
                 state_dim = 6  # fall back to DIP dimension
+        if state_dim is None:
+            state_dim = 6  # fall back to DIP dimension
         init_b = _np.zeros((B, state_dim), dtype=float)
     else:
         # MEMORY OPTIMIZATION: asarray creates view when input is already ndarray with correct dtype
@@ -487,7 +518,10 @@ def simulate_system_batch(
         # Step all particles forward using their dynamics model
         early_stop = False
         for j, ctrl in enumerate(controllers):
+            # Try to get dynamics model from multiple possible attributes
             dyn = getattr(ctrl, "dynamics_model", None)
+            if dyn is None and hasattr(ctrl, "dyn"):
+                dyn = ctrl.dyn  # ClassicalSMC and other SMC controllers use .dyn property
             if dyn is None:
                 # If controller lacks dynamics_model, fall back to global step
                 try:
