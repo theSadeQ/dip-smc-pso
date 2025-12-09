@@ -370,6 +370,7 @@ cost_function:
     control_effort: 0.1    # Balanced weights for proper multi-objective optimization
     control_rate: 0.01
     stability: 0.1
+    sliding: 0.1           # Sliding surface variable energy weight
   # baseline:                # REMOVED: Caused excessive normalization → cost=0.0
   #   gains:                 # Root cause documented in docs/testing/reports/2025-09-30/pso_fitness_investigation.md
   #   - 50
