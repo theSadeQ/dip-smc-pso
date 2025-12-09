@@ -404,6 +404,7 @@ class CostFunctionConfig(StrictModel):
     weights: CostFunctionWeights
     baseline: Optional[Dict[str, Any]] = None  # Optional: legacy baseline normalization
     norms: Optional[Dict[str, float]] = None   # Optional: explicit normalization constants
+    min_cost_floor: float = Field(1e-6, gt=0.0)  # Minimum cost floor to prevent zero-cost solutions
     instability_penalty: float = Field(1000.0, ge=0.0)
     combine_weights: CombineWeights = CombineWeights()
     normalization_threshold: float = Field(1e-12, ge=0.0)
