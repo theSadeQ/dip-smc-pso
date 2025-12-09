@@ -114,7 +114,7 @@ class ClassicalSMC:
             gains: Six gains in the order ``[k1, k2, lam1, lam2, K, kd]``.
             max_force: Saturation limit for the control input (N).
             boundary_layer: Boundary layer thickness (epsilon) for chattering reduction.
-            dynamics_model: Dynamics model providing physics matrices via ``_compute_physics_matrices``.
+            dynamics_model: Dynamics model providing physics matrices via ``get_physics_matrices``.
             regularization: Small value to add to the diagonal of the inertia matrix for numerical stability.
             **kwargs: Ignored extras to keep factory compatibility.
 
@@ -364,7 +364,7 @@ class ClassicalSMC:
         # upstream.  When the model cannot provide the matrices, equivalent
         # control is set to zero.
         try:
-            M, C, G = self.dyn._compute_physics_matrices(state)
+            M, C, G = self.dyn.get_physics_matrices(state)
         except Exception as e:
             self.logger.warning(f"Physics matrix computation failed, returning safe zero control: {e}")
             return 0.0  # OK: Safe fallback when dynamics unavailable

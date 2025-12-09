@@ -389,7 +389,7 @@ class HybridAdaptiveSTASMC:
             self._dynamics_ref = lambda: None
 
     def set_dynamics(self, dynamics_model: Any) -> None:
-        """Attach dynamics model providing _compute_physics_matrices(state)->(M,C,G)."""
+        """Attach dynamics model providing get_physics_matrices(state)->(M,C,G)."""
         self.dyn = dynamics_model
 
     def initialize_state(self) -> Tuple[float, float, float]:
@@ -477,10 +477,10 @@ class HybridAdaptiveSTASMC:
         """
         if not self.use_equivalent:
             return 0.0
-        if self.dyn is None or not hasattr(self.dyn, "_compute_physics_matrices"):
+        if self.dyn is None or not hasattr(self.dyn, "get_physics_matrices"):
             return 0.0
         try:
-            M, C, G = self.dyn._compute_physics_matrices(state)  # type: ignore[attr-defined]
+            M, C, G = self.dyn.get_physics_matrices(state)
             M = np.asarray(M, dtype=float)
             v = np.array([state[3], state[4], state[5]], dtype=float)
             # C may be a matrix or vector

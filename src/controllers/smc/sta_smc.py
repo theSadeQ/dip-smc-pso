@@ -555,7 +555,7 @@ class SuperTwistingSMC:
 
         q_dot = state[3:]
         try:
-            M, C, G = self.dyn._compute_physics_matrices(state)
+            M, C, G = self.dyn.get_physics_matrices(state)
         except Exception as e:
             logging.warning(f"Physics matrix computation failed, returning safe zero control: {e}")
             return 0.0  # OK: Safe fallback when dynamics unavailable
