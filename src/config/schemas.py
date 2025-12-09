@@ -394,6 +394,7 @@ class CostFunctionWeights(StrictModel):
     control_effort: float = Field(0.2, ge=0.0)
     control_rate: float = Field(0.1, ge=0.0)
     stability: float = Field(0.1, ge=0.0)
+    sliding: float = Field(0.1, ge=0.0)
 
 class CombineWeights(StrictModel):
     mean: float = Field(0.7, ge=0.0, le=1.0)
