@@ -249,6 +249,13 @@ class PSOTuner:
                 denom_sum = 1.0
             self.instability_penalty = float(self.instability_penalty_factor * denom_sum)
 
+        # Minimum cost floor to prevent zero-cost solutions (PSO bug fix)
+        min_floor_cfg = getattr(self.cost_cfg, "min_cost_floor", None)
+        if min_floor_cfg is not None:
+            self.min_cost_floor = float(min_floor_cfg)
+        else:
+            self.min_cost_floor = 1e-6  # Default floor
+
         # Automatic baseline normalisation
         try:
             baseline = getattr(self.cost_cfg, "baseline", None)
@@ -483,6 +490,13 @@ class PSOTuner:
             + self.weights.control_rate * du_n
             + self.weights.stability * sigma_n
         ) + penalty  # [CIT-068]
+
+        # Apply minimum cost floor to prevent zero-cost solutions (PSO bug fix)
+        # Zero-cost solutions represent controllers with minimal activity that
+        # pass by inaction rather than active stabilization
+        min_cost_floor = getattr(self, 'min_cost_floor', 1e-6)
+        J = np.maximum(J, min_cost_floor)
+
         # Explicitly penalise NaN trajectories
         if nan_traj_mask.any():
             J = J.astype(float, copy=True)
