@@ -384,6 +384,7 @@ cost_function:
     control_effort: 100.0    # Approximates u_max^2 * duration for saturated control
     control_rate: 1000.0     # Typical control slew rate squared
     sliding: 1.0             # Typical sliding variable magnitude
+  min_cost_floor: 1.0e-6     # Minimum cost floor to prevent zero-cost solutions (PSO bug fix)
   instability_penalty: 1000.0
   # Combine mean and max costs using configurable weights.  The PSO tuner
   # aggregates per‑particle costs as ``combine_weights.mean * mean(costs) +
