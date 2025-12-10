@@ -1,33 +1,30 @@
 #!/usr/bin/env python
 """
 ================================================================================
-Phase 2 Bulletproof PSO v2 - Multi-Scenario Robust Optimization
+Phase 2 Warm-Start PSO Optimization - Hybrid Initialization with Crash Resistance
 ================================================================================
 
-Fixes 4 critical root causes from diagnostic report:
-1. Uses RobustCostEvaluator (15 IC scenarios, no disturbances)
-2. Baseline-only warm-start (40% baseline + 60% random, NO MT-8 gains)
-3. Adaptive PSO hyperparameters (w_schedule, velocity_clamp, c1=1.5)
-4. Updated config bounds (k1_max=15, k2_max=7, epsilon_max=4)
+Optimizes 3 controllers sequentially with hybrid warm-start approach:
+- 20% particles near optimized gains (config.controllers.*.gains)
+- 20% particles near baseline gains (config.controller_defaults.*.gains)
+- 60% particles random (standard PSO exploration)
 
 Features:
-- 15-scenario robust evaluation (±0.05, ±0.15, ±0.3 rad initial conditions)
-- Baseline-guided warm-start (40% near safe defaults + 60% random)
-- Adaptive inertia weight (0.9 -> 0.4 linear decay)
-- Velocity clamping (10-50% of bounds)
-- Checkpoint saves every 20 iterations
-- Automatic resume from last checkpoint
+- Hybrid warm-start initialization (40% guided + 60% random)
 - Sequential controller optimization (STA-SMC -> Adaptive SMC -> Hybrid)
-
-Expected Outcome: Cost ~15-30 (vs 136-140 previous), convergence at iteration 100-120
+- Atomic checkpoint saves every 20 iterations
+- Automatic resume from last checkpoint
+- Per-controller isolation (crash in one doesn't affect others)
+- Comprehensive logging and progress tracking
+- Auto-restart on failure
 
 Usage:
-    python scripts/phase2_bulletproof_pso_v2.py                    # Start fresh
-    python scripts/phase2_bulletproof_pso_v2.py --resume            # Resume from checkpoint
-    python scripts/phase2_bulletproof_pso_v2.py --controller sta_smc  # Run single controller
+    python scripts/phase2_warmstart_pso.py                    # Start fresh with warm-start
+    python scripts/phase2_warmstart_pso.py --resume            # Resume from checkpoint
+    python scripts/phase2_warmstart_pso.py --controller sta_smc  # Run single controller
 
 Author: Claude Code
-Created: December 10, 2025
+Created: December 9, 2025
 """
 
 import argparse
@@ -46,7 +43,7 @@ sys.path.insert(0, str(project_root))
 from src.controllers.factory import create_controller
 from src.config import load_config
 from src.optimization.checkpoint import get_checkpoint_manager, PSOCheckpoint
-from src.optimization.core.robust_cost_evaluator import RobustCostEvaluator
+from src.core.dynamics import DIPDynamics
 
 
 # Configure logging
@@ -87,14 +84,13 @@ def setup_output_directory():
     logger.info(f"Output directory: {output_dir}")
 
 
-def load_baseline_gains(
+def load_warm_start_gains(
     controller_key: str,
     n_gains: int,
     config
-) -> Optional[np.ndarray]:
+) -> Tuple[Optional[np.ndarray], Optional[np.ndarray]]:
     """
-    Load only baseline gains (NO MT-8 optimized gains).
-    MT-8 gains were optimized for disturbances, not nominal ICs.
+    Load optimized and baseline gains from config.yaml for warm-start initialization.
 
     Args:
         controller_key: Controller identifier (e.g., 'sta_smc')
@@ -102,9 +98,20 @@ def load_baseline_gains(
         config: Loaded configuration object
 
     Returns:
-        Baseline gains array or None if not found
+        Tuple of (optimized_gains, baseline_gains) or (None, None) if not found
     """
+    optimized_gains = None
     baseline_gains = None
+
+    try:
+        # Load optimized gains from config.controllers.<controller_key>.gains
+        if hasattr(config.controllers, controller_key):
+            controller_config = getattr(config.controllers, controller_key)
+            if hasattr(controller_config, 'gains'):
+                optimized_gains = np.array(controller_config.gains[:n_gains])
+                logger.info(f"[OK] Loaded optimized gains: {optimized_gains}")
+    except Exception as e:
+        logger.warning(f"[WARNING] Failed to load optimized gains: {e}")
 
     try:
         # Load baseline gains from config.controller_defaults.<controller_key>.gains
@@ -114,19 +121,28 @@ def load_baseline_gains(
                 baseline_gains = np.array(default_config.gains[:n_gains])
                 logger.info(f"[OK] Loaded baseline gains: {baseline_gains}")
     except Exception as e:
-        logger.warning(f"[WARNING] Failed to load baseline: {e}")
+        logger.warning(f"[WARNING] Failed to load baseline gains: {e}")
 
-    # Validation
-    if baseline_gains is None or len(baseline_gains) != n_gains:
-        logger.warning("[WARNING] Warm-start disabled, using random init")
-        return None
+    # Validation: both must exist for warm-start
+    if optimized_gains is None or baseline_gains is None:
+        logger.warning(f"[WARNING] Warm-start disabled: missing gains in config.yaml")
+        logger.warning(f"  Optimized: {'OK' if optimized_gains is not None else 'MISSING'}")
+        logger.warning(f"  Baseline: {'OK' if baseline_gains is not None else 'MISSING'}")
+        return None, None
 
-    return baseline_gains
+    # Validation: dimensions must match
+    if len(optimized_gains) != n_gains or len(baseline_gains) != n_gains:
+        logger.error(f"[ERROR] Gain dimension mismatch: expected {n_gains}, got "
+                    f"optimized={len(optimized_gains)}, baseline={len(baseline_gains)}")
+        return None, None
+
+    return optimized_gains, baseline_gains
 
 
 def initialize_warm_start_swarm(
     n_particles: int,
     n_gains: int,
+    optimized_gains: np.ndarray,
     baseline_gains: np.ndarray,
     min_bounds: np.ndarray,
     max_bounds: np.ndarray,
@@ -134,11 +150,17 @@ def initialize_warm_start_swarm(
     noise_factor: float = 0.1
 ) -> np.ndarray:
     """
-    40% baseline + 60% random (NO MT-8 optimized gains).
+    Initialize PSO swarm with hybrid warm-start strategy.
+
+    Distribution:
+    - 20% particles near optimized gains (MT-8 tuned)
+    - 20% particles near baseline gains (safe defaults)
+    - 60% particles random uniform (exploration)
 
     Args:
-        n_particles: Swarm size (default 40)
+        n_particles: Swarm size (default 30)
         n_gains: Number of gains for controller
+        optimized_gains: Best known gains from config.controllers.<ctrl>.gains
         baseline_gains: Safe defaults from config.controller_defaults.<ctrl>.gains
         min_bounds: Lower bounds for gains
         max_bounds: Upper bounds for gains
@@ -153,19 +175,28 @@ def initialize_warm_start_swarm(
     # Calculate noise standard deviation (10% of bound range)
     noise_std = noise_factor * (max_bounds - min_bounds)
 
-    # Calculate particle counts (for n_particles=40)
-    n_baseline = int(0.40 * n_particles)  # 16 particles
-    n_random = n_particles - n_baseline   # 24 particles
+    # Calculate particle counts (for n_particles=30)
+    n_optimized = int(0.20 * n_particles)  # 6 particles
+    n_baseline = int(0.20 * n_particles)   # 6 particles
+    n_random = n_particles - n_optimized - n_baseline  # 18 particles
 
     idx = 0
 
-    # Particles near baseline
-    for i in range(n_baseline):
+    # 1. Particles near optimized gains (indices 0-5)
+    for i in range(n_optimized):
         noise = rng.normal(0, noise_std)
-        swarm_pos[idx] = np.clip(baseline_gains + noise, min_bounds, max_bounds)
+        swarm_pos[idx] = optimized_gains + noise
+        swarm_pos[idx] = np.clip(swarm_pos[idx], min_bounds, max_bounds)
         idx += 1
 
-    # Random particles
+    # 2. Particles near baseline gains (indices 6-11)
+    for i in range(n_baseline):
+        noise = rng.normal(0, noise_std)
+        swarm_pos[idx] = baseline_gains + noise
+        swarm_pos[idx] = np.clip(swarm_pos[idx], min_bounds, max_bounds)
+        idx += 1
+
+    # 3. Random particles (indices 12-29)
     for i in range(n_random):
         swarm_pos[idx] = rng.uniform(min_bounds, max_bounds)
         idx += 1
@@ -173,53 +204,102 @@ def initialize_warm_start_swarm(
     return swarm_pos
 
 
-def create_robust_cost_evaluator_wrapper(controller_type: str, config):
+def create_robust_cost_function(controller_type: str, config):
     """
-    Use RobustCostEvaluator for proper 15-scenario IC-based robust evaluation.
-    NO disturbances (different from MT-8).
+    Create robust cost function with 15 disturbance scenarios.
 
-    Args:
-        controller_type: Controller type string (e.g., 'sta_smc')
-        config: Global configuration object
-
-    Returns:
-        Cost function that evaluates a single gain vector
+    Same approach as Phase 2 (MT-8): evaluates controller under
+    uncertain initial conditions, measurement noise, and external disturbances.
     """
-    # Controller factory
-    def controller_factory(gains):
-        controller_config = getattr(config.controllers, controller_type)
-        return create_controller(
-            controller_type,
-            config=controller_config.model_dump() if hasattr(controller_config, 'model_dump') else dict(controller_config),
-            gains=gains.tolist() if isinstance(gains, np.ndarray) else gains
-        )
-
-    # Create RobustCostEvaluator (5 IC scenarios, alpha=0.3) - FAST MODE
-    evaluator = RobustCostEvaluator(
-        controller_factory=controller_factory,
-        config=config,
-        seed=42,
-        n_scenarios=5,
-        worst_case_weight=0.3,
-        scenario_distribution={
-            'nominal': 0.2,    # 1 scenario: ±0.05 rad
-            'moderate': 0.2,   # 1 scenario: ±0.15 rad
-            'large': 0.6       # 3 scenarios: ±0.3 rad (focus on worst case)
-        },
-        nominal_range=0.05,
-        moderate_range=0.15,
-        large_range=0.3
-    )
-
-    # Single-particle wrapper
-    def cost_fn(gains: np.ndarray) -> float:
+    def robust_cost(gains: np.ndarray) -> float:
+        """Cost function with 15 robustness scenarios."""
         try:
-            return evaluator.evaluate_single_robust(gains)
+            # Create controller with proposed gains
+            controller_config = getattr(config.controllers, controller_type)
+            controller = create_controller(
+                controller_type,
+                config=controller_config.model_dump() if hasattr(controller_config, 'model_dump') else dict(controller_config),
+                gains=gains.tolist()
+            )
+
+            # Create dynamics
+            dynamics = DIPDynamics(config.physics)
+
+            # 15 scenarios: 5 initial conditions x 3 disturbance levels
+            initial_conditions = [
+                np.array([0.0, 0.1, 0.1, 0.0, 0.0, 0.0]),   # Small angles
+                np.array([0.0, 0.2, 0.15, 0.0, 0.0, 0.0]),  # Moderate angles
+                np.array([0.0, -0.15, 0.2, 0.0, 0.0, 0.0]), # Asymmetric
+                np.array([0.0, 0.1, -0.1, 0.1, 0.0, 0.0]),  # With velocity
+                np.array([0.0, 0.05, 0.05, 0.0, 0.1, 0.1])  # Rotating
+            ]
+
+            disturbance_levels = [0.0, 0.5, 1.0]  # No disturbance, light, moderate
+
+            costs = []
+            for ic in initial_conditions:
+                for dist_level in disturbance_levels:
+                    # Simple simulation (10 seconds)
+                    cost = simulate_scenario(controller, dynamics, ic, dist_level, config)
+                    costs.append(cost)
+
+            # Robust cost = mean + 0.3 * max (balance average and worst-case)
+            return 0.7 * np.mean(costs) + 0.3 * np.max(costs)
+
         except Exception as e:
             logger.warning(f"Cost evaluation failed: {e}")
-            return 1e6  # Penalty for failures
+            return 1e6  # Penalty for failed evaluation
 
-    return cost_fn
+    return robust_cost
+
+
+def simulate_scenario(controller, dynamics, initial_state: np.ndarray, disturbance_level: float, config) -> float:
+    """Run single simulation scenario and return cost."""
+    dt = config.simulation.dt
+    sim_time = 10.0  # 10 second simulation
+    n_steps = int(sim_time / dt)
+
+    x = initial_state.copy()
+    ctrl_state = None
+    history = {}
+
+    if hasattr(controller, 'initialize_state'):
+        ctrl_state = controller.initialize_state()
+    if hasattr(controller, 'initialize_history'):
+        history = controller.initialize_history()
+
+    # Cost accumulators
+    ise = 0.0  # Integrated squared error
+    control_effort = 0.0
+
+    for i in range(n_steps):
+        # Compute control
+        if hasattr(controller, 'compute_control'):
+            result = controller.compute_control(x, ctrl_state, history)
+            if isinstance(result, dict):
+                u = result.get('u', 0.0)
+            elif hasattr(result, 'u'):
+                u = float(result.u)
+            else:
+                u = float(result)
+        else:
+            u = 0.0
+
+        # Add disturbance
+        u_disturbed = u + disturbance_level * np.random.randn()
+
+        # Saturate
+        u_disturbed = np.clip(u_disturbed, -150.0, 150.0)
+
+        # Step dynamics
+        x = dynamics.step(x, u_disturbed, dt)
+
+        # Accumulate cost (penalize angle errors and control effort)
+        ise += (x[1]**2 + x[2]**2) * dt  # theta1 and theta2 errors
+        control_effort += u_disturbed**2 * dt
+
+    # Total cost (weighted sum)
+    return ise + 0.01 * control_effort
 
 
 def run_pso_with_checkpoints(
@@ -227,13 +307,13 @@ def run_pso_with_checkpoints(
     controller_config: Dict[str, Any],
     config,
     checkpoint_manager,
-    max_iters: int = 150,
-    n_particles: int = 25,
+    max_iters: int = 200,
+    n_particles: int = 30,
     seed: Optional[int] = None,
     resume: bool = True
 ) -> Tuple[float, np.ndarray, int]:
     """
-    Run PSO optimization with automatic checkpointing and baseline warm-start.
+    Run PSO optimization with automatic checkpointing and warm-start initialization.
 
     Args:
         controller_key: Controller identifier (e.g., 'sta_smc')
@@ -264,7 +344,8 @@ def run_pso_with_checkpoints(
             logger.info(f"[RESUME] Found checkpoint at iteration {start_iter}/{max_iters}")
             logger.info(f"[RESUME] Best cost so far: {checkpoint.best_cost:.6f}")
 
-    # Initialize RNG
+    # Simple PSO implementation with checkpointing
+    # (For production, this would use PySwarms with custom callback)
     rng = np.random.default_rng(seed)
 
     # Get bounds from config
@@ -292,21 +373,24 @@ def run_pso_with_checkpoints(
         cost_history = checkpoint.cost_history.copy()
         pos_history = [np.array(p) for p in checkpoint.position_history]
     else:
-        # Load baseline gains for warm-start
-        baseline_gains = load_baseline_gains(
+        # Load gains for warm-start
+        optimized_gains, baseline_gains = load_warm_start_gains(
             controller_key=controller_key,
             n_gains=controller_config['n_gains'],
             config=config
         )
 
-        if baseline_gains is not None:
-            # Warm-start initialization (baseline approach)
-            logger.info("[WARM-START] Initializing: 40% baseline + 60% random")
-            logger.info(f"  Baseline: {baseline_gains}")
+        if optimized_gains is not None and baseline_gains is not None:
+            # Warm-start initialization (hybrid approach)
+            logger.info("[WARM-START] Initializing swarm with hybrid strategy")
+            logger.info(f"  20% near optimized gains: {optimized_gains}")
+            logger.info(f"  20% near baseline gains: {baseline_gains}")
+            logger.info(f"  60% random exploration")
 
             swarm_pos = initialize_warm_start_swarm(
                 n_particles=n_particles,
                 n_gains=controller_config['n_gains'],
+                optimized_gains=optimized_gains,
                 baseline_gains=baseline_gains,
                 min_bounds=min_bounds,
                 max_bounds=max_bounds,
@@ -318,7 +402,7 @@ def run_pso_with_checkpoints(
             logger.info("[RANDOM] Warm-start disabled, using random initialization")
             swarm_pos = rng.uniform(min_bounds, max_bounds, size=(n_particles, controller_config['n_gains']))
 
-        # Initialize remaining PSO state
+        # Initialize remaining PSO state (unchanged from bulletproof)
         swarm_vel = np.zeros((n_particles, controller_config['n_gains']))
         swarm_best_pos = swarm_pos.copy()
         swarm_best_cost = np.full(n_particles, np.inf)
@@ -327,37 +411,19 @@ def run_pso_with_checkpoints(
         cost_history = []
         pos_history = []
 
-    # Cost function (RobustCostEvaluator)
-    cost_fn = create_robust_cost_evaluator_wrapper(controller_config['type'], config)
+    # Cost function
+    cost_fn = create_robust_cost_function(controller_config['type'], config)
 
-    # Adaptive PSO hyperparameters
-    c1 = 1.5  # Reduced from 2.0 (less fragmentation)
-    c2 = pso_cfg.c2  # Keep 2.0 (social weight)
-
-    # Adaptive inertia schedule (linear decay)
-    w_max = pso_cfg.w_schedule[0] if hasattr(pso_cfg, 'w_schedule') else 0.9
-    w_min = pso_cfg.w_schedule[1] if hasattr(pso_cfg, 'w_schedule') else 0.4
-    w_values = np.linspace(w_max, w_min, max_iters)
-
-    # Velocity clamping (fraction of bounds)
-    range_bounds = max_bounds - min_bounds
-    v_clamp_min_frac = pso_cfg.velocity_clamp[0] if hasattr(pso_cfg, 'velocity_clamp') else 0.1
-    v_clamp_max_frac = pso_cfg.velocity_clamp[1] if hasattr(pso_cfg, 'velocity_clamp') else 0.5
-    v_min_clamp = v_clamp_min_frac * range_bounds
-    v_max_clamp = v_clamp_max_frac * range_bounds
-
-    logger.info(f"[PSO CONFIG] Adaptive inertia: w=[{w_max:.2f} -> {w_min:.2f}]")
-    logger.info(f"[PSO CONFIG] Velocity clamp: [{v_clamp_min_frac*100:.0f}%, {v_clamp_max_frac*100:.0f}%] of bounds")
-    logger.info(f"[PSO CONFIG] c1={c1:.2f} (cognitive), c2={c2:.2f} (social)")
+    # PSO hyperparameters
+    c1 = pso_cfg.c1  # Cognitive weight
+    c2 = pso_cfg.c2  # Social weight
+    w = pso_cfg.w    # Inertia weight
 
     # PSO loop with checkpointing
     checkpoint_interval = checkpoint_manager.checkpoint_interval
 
     for iter_num in range(start_iter, max_iters):
         iter_start_time = time.time()
-
-        # Get adaptive inertia for this iteration
-        w = w_values[iter_num]
 
         # Evaluate fitness for all particles
         for i in range(n_particles):
@@ -377,39 +443,30 @@ def run_pso_with_checkpoints(
         cost_history.append(float(global_best_cost))
         pos_history.append(global_best_pos.copy())
 
-        # Update velocities and positions with adaptive w and velocity clamping
+        # Update velocities and positions
         for i in range(n_particles):
             r1 = rng.random(controller_config['n_gains'])
             r2 = rng.random(controller_config['n_gains'])
 
-            # Velocity update with adaptive inertia
             swarm_vel[i] = (
-                w * swarm_vel[i] +                              # Adaptive inertia (0.9->0.4)
-                c1 * r1 * (swarm_best_pos[i] - swarm_pos[i]) + # Reduced cognitive (1.5)
-                c2 * r2 * (global_best_pos - swarm_pos[i])     # Social (2.0)
+                w * swarm_vel[i] +
+                c1 * r1 * (swarm_best_pos[i] - swarm_pos[i]) +
+                c2 * r2 * (global_best_pos - swarm_pos[i])
             )
 
-            # Apply velocity clamping
-            swarm_vel[i] = np.clip(swarm_vel[i], -v_max_clamp, v_max_clamp)
-
-            # Enforce minimum velocity (prevent stagnation)
-            vel_mag = np.abs(swarm_vel[i])
-            below_min = vel_mag < v_min_clamp
-            if below_min.any():
-                swarm_vel[i][below_min] = np.sign(swarm_vel[i][below_min]) * v_min_clamp[below_min]
-
-            # Update position
             swarm_pos[i] = swarm_pos[i] + swarm_vel[i]
+
+            # Apply bounds
             swarm_pos[i] = np.clip(swarm_pos[i], min_bounds, max_bounds)
 
         iter_time = time.time() - iter_start_time
 
-        # Log progress with adaptive w
+        # Log progress
         if (iter_num + 1) % 10 == 0 or iter_num == 0:
             logger.info(
                 f"  Iteration {iter_num+1}/{max_iters} | "
                 f"Best Cost: {global_best_cost:.6f} | "
-                f"w={w:.3f} | Time: {iter_time:.2f}s"
+                f"Time: {iter_time:.2f}s"
             )
 
         # Save checkpoint at interval
@@ -453,7 +510,7 @@ def save_controller_results(controller_key: str, controller_config: Dict[str, An
         'gains': best_gains.tolist(),
         'iterations': iterations,
         'timestamp': time.time(),
-        'method': 'Bulletproof PSO v2 FAST (5 IC scenarios, adaptive w, baseline warm-start, 25 particles, 150 iters)'
+        'method': 'Warm-Start Robust PSO (15 scenarios, 20% optimized + 20% baseline + 60% random)'
     }
 
     with open(output_file, 'w') as f:
@@ -464,21 +521,18 @@ def save_controller_results(controller_key: str, controller_config: Dict[str, An
 
 def main():
     """Main execution."""
-    parser = argparse.ArgumentParser(description="Bulletproof Phase 2 PSO v2 Optimization")
+    parser = argparse.ArgumentParser(description="Warm-Start Phase 2 PSO Optimization")
     parser.add_argument('--resume', action='store_true', help="Resume from checkpoints")
     parser.add_argument('--controller', type=str, choices=list(CONTROLLERS.keys()), help="Run single controller")
-    parser.add_argument('--iterations', type=int, default=150, help="PSO iterations (default: 150)")
-    parser.add_argument('--particles', type=int, default=25, help="Swarm size (default: 25)")
+    parser.add_argument('--iterations', type=int, default=200, help="PSO iterations (default: 200)")
+    parser.add_argument('--particles', type=int, default=30, help="Swarm size (default: 30)")
     parser.add_argument('--seed', type=int, default=42, help="Random seed (default: 42)")
     args = parser.parse_args()
 
     logger.info("="*80)
-    logger.info("PHASE 2 BULLETPROOF PSO v2 OPTIMIZATION")
+    logger.info("PHASE 2 WARM-START PSO OPTIMIZATION")
     logger.info("="*80)
-    logger.info(f"Initialization: 40% baseline + 60% random (NO MT-8 gains)")
-    logger.info(f"Cost function: RobustCostEvaluator (15 IC scenarios)")
-    logger.info(f"Adaptive inertia: 0.9 -> 0.4 (linear decay)")
-    logger.info(f"Velocity clamp: [10%, 50%] of bounds")
+    logger.info(f"Hybrid Initialization: 20% optimized + 20% baseline + 60% random")
     logger.info(f"Checkpoint interval: Every 20 iterations")
     logger.info(f"Resume mode: {'Enabled' if args.resume else 'Disabled'}")
     logger.info("="*80)
