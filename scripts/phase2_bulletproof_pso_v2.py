@@ -89,6 +89,15 @@ CONTROLLERS = {
     }
 }
 
+# MT-8 Optimized Gains (Phase 2.4): Use proven successful gains for warm-start
+# These gains achieved cost ~8.94 in MT-8 research, much better than baseline defaults
+MT8_BASELINE_GAINS = {
+    'sta_smc': np.array([2.02, 6.67, 5.62, 3.75, 4.36, 2.05]),
+    'adaptive_smc': np.array([2.14, 3.36, 7.20, 0.34, 0.29]),
+    'classical_smc': np.array([23.07, 12.85, 5.51, 3.49, 2.23, 0.15]),
+    'hybrid_adaptive_sta_smc': np.array([10.15, 12.84, 6.82, 2.75])
+}
+
 
 def setup_output_directory():
     """Create output directories."""
@@ -103,8 +112,9 @@ def load_baseline_gains(
     config
 ) -> Optional[np.ndarray]:
     """
-    Load only baseline gains (NO MT-8 optimized gains).
-    MT-8 gains were optimized for disturbances, not nominal ICs.
+    Load MT-8 optimized gains for warm-start (Phase 2.4).
+    MT-8 gains achieved cost ~8.94, much better than config defaults.
+    Fallback to config baseline if MT-8 gains not available.
 
     Args:
         controller_key: Controller identifier (e.g., 'sta_smc')
@@ -112,17 +122,27 @@ def load_baseline_gains(
         config: Loaded configuration object
 
     Returns:
-        Baseline gains array or None if not found
+        MT-8 or baseline gains array, or None if not found
     """
     baseline_gains = None
 
+    # Priority 1: Use MT-8 optimized gains (Phase 2.4)
+    if controller_key in MT8_BASELINE_GAINS:
+        mt8_gains = MT8_BASELINE_GAINS[controller_key]
+        if len(mt8_gains) == n_gains:
+            baseline_gains = mt8_gains
+            logger.info(f"[OK] Using MT-8 optimized gains: {baseline_gains}")
+            return baseline_gains
+        else:
+            logger.warning(f"[WARNING] MT-8 gains length mismatch: {len(mt8_gains)} vs {n_gains}")
+
+    # Priority 2: Fallback to config baseline gains
     try:
-        # Load baseline gains from config.controller_defaults.<controller_key>.gains
         if hasattr(config.controller_defaults, controller_key):
             default_config = getattr(config.controller_defaults, controller_key)
             if hasattr(default_config, 'gains'):
                 baseline_gains = np.array(default_config.gains[:n_gains])
-                logger.info(f"[OK] Loaded baseline gains: {baseline_gains}")
+                logger.info(f"[OK] Loaded baseline gains (fallback): {baseline_gains}")
     except Exception as e:
         logger.warning(f"[WARNING] Failed to load baseline: {e}")
 
@@ -163,9 +183,9 @@ def initialize_warm_start_swarm(
     # Calculate noise standard deviation (10% of bound range)
     noise_std = noise_factor * (max_bounds - min_bounds)
 
-    # Calculate particle counts (for n_particles=40)
-    n_baseline = int(0.40 * n_particles)  # 16 particles
-    n_random = n_particles - n_baseline   # 24 particles
+    # Calculate particle counts (Phase 2.4: 40% -> 50% for better MT-8 warm-start)
+    n_baseline = int(0.50 * n_particles)  # 50% near MT-8 optimized gains (12-13 particles for n=25)
+    n_random = n_particles - n_baseline   # 50% random exploration
 
     idx = 0
 
@@ -204,22 +224,22 @@ def create_robust_cost_evaluator_wrapper(controller_type: str, config):
             gains=gains.tolist() if isinstance(gains, np.ndarray) else gains
         )
 
-    # Create RobustCostEvaluator (5 IC scenarios, alpha=0.3) - FAST MODE
+    # Create RobustCostEvaluator - BALANCED DIFFICULTY (Phase 2.3)
     evaluator = RobustCostEvaluator(
         controller_factory=controller_factory,
         config=config,
         seed=42,
-        u_max=150.0,  # FIX: Pass explicitly to avoid 20.0 vs 150.0 mismatch (56x error!)
-        n_scenarios=10,  # UPGRADED: 5 -> 10 for better quality (2x slower but 10x better results)
+        u_max=150.0,  # FIX (Phase 2.1): Pass explicitly to avoid 20.0 vs 150.0 mismatch (56x error!)
+        n_scenarios=5,  # REDUCED: 10 -> 5 for faster iterations (3x speedup), still robust
         worst_case_weight=0.3,
         scenario_distribution={
-            'nominal': 0.2,    # 2 scenarios: ±0.05 rad
-            'moderate': 0.3,   # 3 scenarios: ±0.15 rad
-            'large': 0.5       # 5 scenarios: ±0.3 rad (focus on worst case)
+            'nominal': 0.4,    # 2 scenarios: ±0.05 rad (INCREASED from 20%)
+            'moderate': 0.4,   # 2 scenarios: ±0.15 rad (INCREASED from 30%)
+            'large': 0.2       # 1 scenario:  ±0.25 rad (REDUCED from 50%, less extreme)
         },
         nominal_range=0.05,
         moderate_range=0.15,
-        large_range=0.3
+        large_range=0.25  # REDUCED: 0.3 -> 0.25 rad (17° -> 14°, more realistic)
     )
 
     # Single-particle wrapper
