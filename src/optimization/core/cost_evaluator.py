@@ -64,7 +64,8 @@ class ControllerCostEvaluator:
                  config: Any,
                  seed: Optional[int] = None,
                  instability_penalty_factor: float = 100.0,
-                 min_cost_floor: float = 1e-6):
+                 min_cost_floor: float = 1e-6,
+                 u_max: Optional[float] = None):
         """Initialize cost evaluator.
 
         Parameters
@@ -79,6 +80,9 @@ class ControllerCostEvaluator:
             Scale factor for instability penalty (default: 100.0)
         min_cost_floor : float, optional
             Minimum cost floor to prevent zero-cost solutions (default: 1e-6)
+        u_max : float, optional
+            Maximum control force (N). If provided, overrides automatic detection.
+            Recommended to pass explicitly to avoid mismatches (default: None, auto-detect)
         """
         # Load configuration if path provided
         if isinstance(config, (str, Path)):
@@ -128,11 +132,16 @@ class ControllerCostEvaluator:
             self.min_cost_floor = float(min_cost_floor)  # Use constructor default
 
         # Extract u_max from config or use default
-        try:
-            baseline_ctrl = controller_factory(np.ones(6))  # Dummy gains
-            self.u_max = float(getattr(baseline_ctrl, "max_force", 150.0))
-        except Exception:
-            self.u_max = 150.0
+        if u_max is not None:
+            # Use explicitly provided u_max (recommended to avoid mismatches)
+            self.u_max = float(u_max)
+        else:
+            # Fallback: try to auto-detect from dummy controller (may be incorrect!)
+            try:
+                baseline_ctrl = controller_factory(np.ones(6))  # Dummy gains
+                self.u_max = float(getattr(baseline_ctrl, "max_force", 150.0))
+            except Exception:
+                self.u_max = 150.0
 
         logger.info("ControllerCostEvaluator initialized: instability_penalty=%.2f, u_max=%.2f",
                    self.instability_penalty, self.u_max)
