@@ -373,8 +373,8 @@ class PSOConfig(StrictModel):
     c1: float = Field(1.5, ge=0.0)
     c2: float = Field(1.5, ge=0.0)
     iters: int = Field(200, ge=1)
-    w_schedule: Optional[Tuple[float, float]] = None
-    velocity_clamp: Optional[Tuple[float, float]] = None
+    w_schedule: Optional[List[float]] = None
+    velocity_clamp: Optional[List[float]] = None
     n_processes: Optional[int] = Field(None, ge=1)
     hyper_trials: Optional[int] = None
     hyper_search: Optional[Dict[str, List[float]]] = None

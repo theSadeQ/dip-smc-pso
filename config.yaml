@@ -201,24 +201,26 @@ pso:
       min: [2.0, 2.0, 2.0, 0.2, 2.0, 0.05]
       max: [30.0, 30.0, 10.0, 5.0, 50.0, 3.0]
     sta_smc:
-      # K1 > K2 constraint: K1 in [2.0, 30.0], K2 in [1.0, 29.0] ensures K1 > K2
-      # Narrowed bounds for stability (Issue #12 fix)
+      # K1 > K2 constraint: K1 in [2.0, 30.0], K2 in [1.0, 14.0] ensures K1 > K2
+      # Updated bounds to accommodate baseline gains [8.0, 4.0, 12.0, 6.0, 4.85, 3.43]
       min: [2.0, 1.0, 2.0, 0.2, 2.0, 0.05]
-      max: [30.0, 29.0, 10.0, 5.0, 50.0, 3.0]
+      max: [30.0, 14.0, 15.0, 7.0, 50.0, 4.0]
     adaptive_smc:
-      # Narrowed bounds for stability (Issue #12 fix)
+      # Updated bounds to accommodate baseline gains
       min: [2.0, 2.0, 2.0, 0.2, 0.05]
-      max: [30.0, 30.0, 10.0, 5.0, 3.0]
+      max: [30.0, 30.0, 15.0, 5.0, 4.0]
     hybrid_adaptive_sta_smc:
-      # Narrowed bounds for stability (Issue #12 fix)
+      # Updated bounds to accommodate baseline gains
       min: [2.0, 2.0, 2.0, 0.2]
-      max: [30.0, 30.0, 10.0, 5.0]
-  # Set inertia weight within [0.4,0.9] and balance cognitive/social
-  # acceleration coefficients.  A balanced choice c1≈c2≈2.0 encourages
-  # exploration without divergence【360839346985391†L94-L100】.
-  w: 0.7
-  c1: 2.0
+      max: [30.0, 30.0, 15.0, 5.0]
+  # Adaptive inertia weight for better exploration→exploitation balance
+  # Starting high (0.9) promotes exploration, decaying to low (0.4) for fine-tuning
+  # Reduced cognitive weight (c1=1.5) prevents particle fragmentation
+  w: 0.9
+  c1: 1.5
   c2: 2.0
+  w_schedule: [0.9, 0.4]        # Linear decay from exploration to exploitation
+  velocity_clamp: [0.1, 0.5]    # Min/max velocity as fraction of bounds (prevents stagnation/overshoot)
   iters: 200
   # Deprecated fields removed to ensure clean configuration.  Previously
   # unused fields such as n_processes, hyper_trials, hyper_search and
