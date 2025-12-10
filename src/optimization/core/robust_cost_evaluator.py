@@ -85,7 +85,8 @@ class RobustCostEvaluator(ControllerCostEvaluator):
                  scenario_distribution: Optional[Dict[str, float]] = None,
                  nominal_range: float = 0.05,
                  moderate_range: float = 0.15,
-                 large_range: float = 0.3):
+                 large_range: float = 0.3,
+                 u_max: Optional[float] = None):
         """Initialize robust cost evaluator.
 
         Parameters
@@ -109,9 +110,11 @@ class RobustCostEvaluator(ControllerCostEvaluator):
             Maximum moderate angle perturbation (rad)
         large_range : float, default=0.3
             Maximum large angle perturbation (rad)
+        u_max : float, optional
+            Maximum control force (N). Pass explicitly to avoid mismatches.
         """
         # Initialize base evaluator
-        super().__init__(controller_factory, config, seed)
+        super().__init__(controller_factory, config, seed, u_max=u_max)
 
         # Robust optimization parameters
         self.n_scenarios = n_scenarios
