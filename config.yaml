@@ -319,7 +319,7 @@ physics_uncertainty:
   joint1_friction: 0.1
   joint2_friction: 0.1
 simulation:
-  duration: 5.0  # OPTIMIZED: Reduced from 10.0s (most controllers stabilize by 5s, 2x speedup)
+  duration: 7.0  # BALANCED: Compromise between 5s (too short) and 10s (too long) for quality+speed
   dt: 0.01 # [CIT-043]
   initial_state:
   - 0.0

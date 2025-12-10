@@ -287,22 +287,9 @@ class RobustCostEvaluator(ControllerCostEvaluator):
         from src.simulation.engines.vector_sim import simulate_system_batch
 
         # Run simulation with this scenario's initial condition
-        # Early termination: Define stability threshold (angles > 10 rad = clearly unstable)
-        def early_stop_fn(state: np.ndarray) -> bool:
-            """Stop simulation if clearly unstable (saves 2-3x computation)."""
-            # Check if any angle or angular velocity is huge (diverged)
-            # State format: [x, theta1, theta2, x_dot, theta1_dot, theta2_dot]
-            if state.ndim == 1:
-                # Single state
-                angles_and_velocities = state[1:3]  # theta1, theta2
-                velocities = state[4:6]  # theta1_dot, theta2_dot
-                return (np.abs(angles_and_velocities) > 5.0).any() or (np.abs(velocities) > 20.0).any()
-            else:
-                # Batch of states (B, 6)
-                angles_and_velocities = state[:, 1:3]
-                velocities = state[:, 4:6]
-                return (np.abs(angles_and_velocities) > 5.0).any() or (np.abs(velocities) > 20.0).any()
-
+        # REMOVED: Early termination (was too aggressive, breaking controllers)
+        # Previous version stopped at 5 rad, but this prevented PSO from exploring
+        # solutions that need time to stabilize
         try:
             t, x_b, u_b, sigma_b = simulate_system_batch(
                 controller_factory=self.controller_factory,
@@ -310,8 +297,8 @@ class RobustCostEvaluator(ControllerCostEvaluator):
                 sim_time=self.sim_cfg.duration,
                 dt=self.sim_cfg.dt,
                 u_max=self.u_max,
-                initial_state=scenario_ic,  # Override IC for this scenario!
-                stop_fn=early_stop_fn  # OPTIMIZATION: Stop if diverged (2-3x speedup)
+                initial_state=scenario_ic  # Override IC for this scenario!
+                # No stop_fn - let simulations complete
             )
         except Exception as e:
             logger.warning("Simulation failed for scenario: %s", e)
