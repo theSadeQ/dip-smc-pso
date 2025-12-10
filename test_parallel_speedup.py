@@ -80,7 +80,7 @@ def main():
     print("       This should be much faster...")
     start_par = time.time()
 
-    costs_par = evaluate_particles_parallel(test_particles, cost_fn, n_workers)
+    costs_par = evaluate_particles_parallel(test_particles, cost_fn, 'sta_smc', config, n_workers)
 
     time_par = time.time() - start_par
     print(f"[OK] Parallel time: {time_par:.2f} seconds")

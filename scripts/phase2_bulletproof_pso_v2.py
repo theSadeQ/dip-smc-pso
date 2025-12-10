@@ -232,35 +232,99 @@ def create_robust_cost_evaluator_wrapper(controller_type: str, config):
     return cost_fn
 
 
-def evaluate_particle_wrapper(gains: np.ndarray, cost_fn: callable) -> float:
+# GLOBAL EVALUATOR for multiprocessing (pickling workaround)
+# Python multiprocessing can't pickle nested functions/closures
+# Solution: Recreate evaluator in each worker process using picklable args
+_GLOBAL_ROBUST_EVALUATOR = None
+
+
+def _init_worker(controller_type: str, config_path: str):
     """
-    Wrapper for parallel particle evaluation.
+    Initialize worker process by creating a RobustCostEvaluator.
+
+    This function is called once per worker process at startup.
+    On Windows (spawn mode), workers start fresh so we need this initializer
+    to create the evaluator instance in each worker.
+
+    Args:
+        controller_type: Controller type string (e.g., 'sta_smc')
+        config_path: Path to config.yaml file
+    """
+    global _GLOBAL_ROBUST_EVALUATOR
+
+    # Load config from file in this worker process
+    config = load_config(config_path)
+
+    # Controller factory
+    def controller_factory(gains):
+        controller_config = getattr(config.controllers, controller_type)
+        return create_controller(
+            controller_type,
+            config=controller_config.model_dump() if hasattr(controller_config, 'model_dump') else dict(controller_config),
+            gains=gains.tolist() if isinstance(gains, np.ndarray) else gains
+        )
+
+    # Create RobustCostEvaluator in this worker
+    _GLOBAL_ROBUST_EVALUATOR = RobustCostEvaluator(
+        controller_factory=controller_factory,
+        config=config,
+        seed=42,
+        n_scenarios=5,
+        worst_case_weight=0.3,
+        scenario_distribution={
+            'nominal': 0.2,
+            'moderate': 0.2,
+            'large': 0.6
+        },
+        nominal_range=0.05,
+        moderate_range=0.15,
+        large_range=0.3
+    )
+
+
+def _evaluate_particle_worker(gains: np.ndarray) -> float:
+    """
+    Top-level worker function for parallel evaluation (picklable).
+
+    This function is called by multiprocessing.Pool workers.
+    It accesses the global evaluator created by _init_worker().
 
     Args:
         gains: Particle position (controller gains)
-        cost_fn: Cost evaluation function
 
     Returns:
         Cost value for this particle
     """
+    global _GLOBAL_ROBUST_EVALUATOR
     try:
-        return cost_fn(gains)
+        if _GLOBAL_ROBUST_EVALUATOR is None:
+            raise RuntimeError("Global evaluator not initialized")
+        return _GLOBAL_ROBUST_EVALUATOR.evaluate_single_robust(gains)
     except Exception as e:
+        logger.warning(f"Particle evaluation failed: {e}")
         return 1e6  # Penalty
 
 
 def evaluate_particles_parallel(
     swarm_positions: np.ndarray,
     cost_fn: callable,
-    n_workers: int = None
+    controller_type: str,
+    config,
+    n_workers: int = None,
+    config_path: str = "config.yaml"
 ) -> np.ndarray:
     """
     Evaluate all particles in parallel using multiprocessing.
 
+    Recreates RobustCostEvaluator in each worker process to avoid pickling closures.
+
     Args:
         swarm_positions: Array of particle positions (n_particles, n_dims)
-        cost_fn: Cost evaluation function
+        cost_fn: Cost evaluation function (not used, kept for compatibility)
+        controller_type: Controller type string (e.g., 'sta_smc')
+        config: Configuration object (not used, kept for compatibility)
         n_workers: Number of parallel workers (default: cpu_count() - 1)
+        config_path: Path to config.yaml file (default: "config.yaml")
 
     Returns:
         Array of costs for each particle (n_particles,)
@@ -268,12 +332,10 @@ def evaluate_particles_parallel(
     if n_workers is None:
         n_workers = max(1, cpu_count() - 1)  # Leave 1 core for system
 
-    # Partial function with cost_fn fixed
-    eval_fn = partial(evaluate_particle_wrapper, cost_fn=cost_fn)
-
-    # Parallel evaluation
-    with Pool(processes=n_workers) as pool:
-        costs = pool.map(eval_fn, swarm_positions)
+    # Parallel evaluation with proper worker initialization for Windows
+    # Pass config file path instead of trying to serialize config object
+    with Pool(processes=n_workers, initializer=_init_worker, initargs=(controller_type, config_path)) as pool:
+        costs = pool.map(_evaluate_particle_worker, swarm_positions)
 
     return np.array(costs)
 
@@ -430,7 +492,9 @@ def run_pso_with_checkpoints(
         # Evaluate fitness for all particles (parallel or sequential)
         if use_parallel:
             # Parallel evaluation (10-20x faster!)
-            particle_costs = evaluate_particles_parallel(swarm_pos, cost_fn, n_workers)
+            particle_costs = evaluate_particles_parallel(
+                swarm_pos, cost_fn, controller_config['type'], config, n_workers
+            )
         else:
             # Sequential evaluation (original)
             particle_costs = np.array([cost_fn(swarm_pos[i]) for i in range(n_particles)])
