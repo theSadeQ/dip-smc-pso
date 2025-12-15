@@ -1,0 +1,93 @@
+================================================================================
+QUICK VALIDATION TEST - DISTURBANCE INJECTION
+================================================================================
+
+Purpose: Validate that disturbances create cost discrimination
+Duration: ~5 minutes (250 simulations)
+Test design: Add simple sinusoidal force to control input
+
+Gemini's prediction: 90% success probability
+Pass condition: Particles show different non-zero costs
+
+================================================================================
+
+[Configuration]
+  Particles: 5 (validation test)
+  Iterations: 5 (validation test)
+  Scenarios: 10
+  Duration: 10.0s per simulation
+  u_max: 150.0 N
+  Disturbance: 5.0 * sin(2*pi*0.5*t) N
+  Frequency: 0.5 Hz (2-second period)
+
+[Starting validation test...]
+Start time: 16:43:11
+
+[Evaluating particles with disturbances...]
+
+  Particle 1/5: Gains = [2.23934283 3.33234714 7.32953771 0.64460597 0.24316933]
+                Cost = 0.00000000
+
+  Particle 2/5: Gains = [2.09317261 3.67584256 7.35348695 0.24610512 0.39851201]
+                Cost = 0.00000000
+
+  Particle 3/5: Gains = [2.04731646 3.26685405 7.24839245 0.1        0.05      ]
+                Cost = 0.00000000
+
+  Particle 4/5: Gains = [9.37186697 1.82519168 4.7360974  1.89517303 0.93933647]
+                Cost = 0.00000000
+
+  Particle 5/5: Gains = [11.88505144  2.39690093  7.95639936  3.00283139  0.1405783 ]
+                Cost = 0.00000000
+
+================================================================================
+VALIDATION TEST RESULTS
+================================================================================
+End time: 16:43:14
+
+[Cost Summary]
+  Particle 1: 0.00000000
+  Particle 2: 0.00000000
+  Particle 3: 0.00000000
+  Particle 4: 0.00000000
+  Particle 5: 0.00000000
+
+[Analysis]
+  Unique cost values: 1
+  Cost range: [0.00000000, 0.00000000]
+  Cost std dev: 0.00000000
+  All costs zero? True
+  All costs non-zero? False
+
+================================================================================
+GEMINI'S PASS CONDITION
+================================================================================
+
+Condition: Particles show different non-zero costs
+
+[FAIL] All costs are zero - disturbances didn't help
+
+[FAIL] No variation (1 unique value)
+
+[FAIL] Costs not in expected range
+
+================================================================================
+FINAL VERDICT
+================================================================================
+[FAILURE] Validation test FAILED
+
+Disturbances did NOT create discrimination
+
+This is unexpected given Gemini's 90% prediction.
+Possible issues:
+  - Disturbance too small (increase magnitude)
+  - Controller wrapper not working correctly
+  - SMC is even more robust than expected
+
+RECOMMENDATION: Debug or fall back to Option 1
+
+================================================================================
+VERDICT: FAILURE
+================================================================================
+
+Results saved to: pso_optimization_fix/phase3_pso_rerun/results/disturbance_validation.json
