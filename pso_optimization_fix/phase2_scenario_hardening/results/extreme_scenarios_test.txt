@@ -1,0 +1,37 @@
+================================================================================
+PHASE 2: TEST EXTREME SCENARIOS
+================================================================================
+
+[EXTREME Configuration]
+  Simulation duration: 15.0s (was 5.0s)
+  Scenarios: 15
+  Perturbation ranges:
+    Nominal: +/-0.2 rad (+/-11.5 deg)
+    Moderate: +/-0.6 rad (+/-34.4 deg)
+    Large: +/-1.0 rad (+/-57.3 deg) [EXTREME!]
+
+[Test 1] Good gains (MT-8 baseline)
+  Gains: [2.14 3.36 7.2  0.34 0.29]
+  Cost: 0.00000000
+
+[Test 2] Poor gains
+  Gains: [0.8 0.8 0.8 0.2 0.2]
+  Cost: 0.00000000
+
+[Test 3] Very poor gains
+  Gains: [0.3  0.3  0.3  0.05 0.05]
+  Cost: 0.00000000
+
+================================================================================
+DISCRIMINATION ANALYSIS
+================================================================================
+[ERROR] All costs are zero - scenarios STILL too easy!
+
+================================================================================
+FINAL VERDICT
+================================================================================
+Status: FAILURE
+[ERROR] Still no discrimination
+        May need: disturbances, parameter uncertainty, or different test
+
+Save output to: phase2_scenario_hardening/results/extreme_scenarios_test.txt

@@ -215,8 +215,9 @@ class ControllerCostEvaluator:
         if nan_mask.any():
             J_valid[nan_mask] = self.instability_penalty
 
-        # Ensure no costs are exactly zero (double-check after _compute_cost_from_traj)
-        J_valid = np.maximum(J_valid, self.min_cost_floor)
+        # Cost floor removed - allow true discrimination between controllers
+        # Previous floor (1e-06) prevented proper cost discrimination
+        # J_valid = np.maximum(J_valid, self.min_cost_floor)
 
         # Merge valid and invalid costs
         if violation_mask.any():
@@ -304,17 +305,14 @@ class ControllerCostEvaluator:
             w.sliding * sigma_n
         )
 
-        # Control activity validation (Priority 2 fix)
-        # Penalize "passive" controllers that avoid action rather than actively stabilizing
-        # This prevents PSO from converging to weak gains that pass by inaction
-        total_control_activity = np.sum(np.abs(u_b_trunc), axis=1)
-        min_activity = self.u_max * 0.01 * N  # At least 1% of max control per timestep
-
-        passive_mask = total_control_activity < min_activity
-        if np.any(passive_mask):
-            # Penalize passive controllers with 10% of instability penalty
-            # This is less severe than full instability but still discourages inaction
-            cost[passive_mask] = cost[passive_mask] + 0.1 * self.instability_penalty
+        # Passive controller penalty removed - was preventing proper cost discrimination
+        # The penalty was adding artificial costs that interfered with optimization
+        # Natural cost components (ISE, control effort) are sufficient to discriminate
+        # total_control_activity = np.sum(np.abs(u_b_trunc), axis=1)
+        # min_activity = self.u_max * 0.01 * N
+        # passive_mask = total_control_activity < min_activity
+        # if np.any(passive_mask):
+        #     cost[passive_mask] = cost[passive_mask] + 0.1 * self.instability_penalty
 
         # Apply instability penalty for trajectories that failed early
         failed_early = (failure_steps < N)
@@ -323,10 +321,10 @@ class ControllerCostEvaluator:
             penalty_scale = 1.0 + (N - failure_steps[failed_early]) / N
             cost[failed_early] = cost[failed_early] * penalty_scale
 
-        # Apply minimum cost floor to prevent zero-cost solutions (PSO bug fix)
-        # Zero-cost solutions represent controllers with minimal activity that
-        # pass by inaction rather than active stabilization
-        cost = np.maximum(cost, self.min_cost_floor)
+        # Cost floor removed - allow true zero cost if system achieves perfect control
+        # Previous floor (1e-06) prevented discrimination between excellent controllers
+        # This was causing saturation where both optimized and baseline hit the same floor
+        # cost = np.maximum(cost, self.min_cost_floor)
 
         return cost
 

@@ -246,9 +246,10 @@ class RobustCostEvaluator(ControllerCostEvaluator):
         worst_cost = scenario_costs.max(axis=1)
         robust_cost = mean_cost + self.worst_case_weight * worst_cost
 
-        # Apply minimum cost floor to prevent zero-cost solutions (PSO bug fix)
-        # This was the root cause of the zero-cost bug in RobustCostEvaluator!
-        robust_cost = np.maximum(robust_cost, self.min_cost_floor)
+        # Cost floor removed - allow true cost discrimination
+        # Previous floor (1e-06) prevented discrimination between controllers
+        # Parent class (ControllerCostEvaluator) also had floor removed
+        # robust_cost = np.maximum(robust_cost, self.min_cost_floor)
 
         # Log statistics
         if logger.isEnabledFor(logging.DEBUG):

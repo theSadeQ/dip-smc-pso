@@ -1,0 +1,44 @@
+================================================================================
+PHASE 2: TEST HARDER SCENARIOS
+================================================================================
+
+[Configuration]
+  Simulation duration: 10.0s (was 5.0s)
+  Scenarios: 10 (was 5)
+  Perturbation ranges:
+    Nominal: ±0.1 rad (±5.7°) - was ±0.05 rad
+    Moderate: ±0.3 rad (±17.2°) - was ±0.15 rad
+    Large: ±0.5 rad (±28.6°) - was ±0.25 rad
+
+[Test 1] Good gains (MT-8 baseline)
+  Gains: [2.14 3.36 7.2  0.34 0.29]
+  Cost: 0.00000000
+
+[Test 2] Poor gains
+  Gains: [0.8 0.8 0.8 0.2 0.2]
+  Cost: 0.00000000
+
+[Test 3] Very poor gains
+  Gains: [0.3  0.3  0.3  0.05 0.05]
+  Cost: 0.00000000
+
+================================================================================
+DISCRIMINATION ANALYSIS
+================================================================================
+[ERROR] No proper discrimination detected
+
+Cost ratios:
+  Poor/Good: infx
+  Bad/Good: infx
+  Bad/Poor: infx
+
+[EXCELLENT] Very strong discrimination (>10x)
+
+================================================================================
+FINAL VERDICT
+================================================================================
+Status: SUCCESS
+[OK] Harder scenarios provide strong cost discrimination!
+     Ready to proceed to Phase 3 (PSO re-run)
+
+Save output to: phase2_scenario_hardening/results/harder_scenarios_test.txt

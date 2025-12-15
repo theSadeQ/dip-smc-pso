@@ -1,0 +1,30 @@
+================================================================================
+PHASE 1.4: VALIDATE COST FUNCTION FIXES
+================================================================================
+
+[Test 1] Very good gains (should have low cost)
+  Cost: 0.00000000
+
+[Test 2] Poor gains (should have higher cost)
+  Cost: 0.00000000
+
+[Test 3] Very poor gains (should have much higher cost)
+  Cost: 0.00000000
+
+================================================================================
+VALIDATION RESULTS
+================================================================================
+[ERROR] Cost function NOT discriminating properly
+        Good: 0.000000, Poor: 0.000000, Bad: 0.000000
+
+[INFO] Costs still close - may need harder scenarios for better discrimination
+
+Cost ratio (poor/good): infx
+[EXCELLENT] Very strong discrimination (>10x)
+
+================================================================================
+FINAL VERDICT
+================================================================================
+[FAILURE] Cost function still not discriminating properly
+
+Save output to: phase1_cost_function_fix/results/validation.txt

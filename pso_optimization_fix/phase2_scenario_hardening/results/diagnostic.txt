@@ -1,0 +1,13 @@
+================================================================================
+DIAGNOSTIC: COST CALCULATION ANALYSIS
+================================================================================
+
+Testing gains: [2.14 3.36 7.2  0.34 0.29]
+
+Traceback (most recent call last):
+  File "D:\Projects\main\pso_optimization_fix\phase2_scenario_hardening\diagnose_cost_calculation.py", line 32, in <module>
+    dynamics = FullDIPDynamics(config.physics)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\main\src\plant\models\full\dynamics.py", line 71, in __init__
+    raise ValueError(f"config must be FullDIPConfig, dict, or AttributeDictionary, got {type(config)}")
+ValueError: config must be FullDIPConfig, dict, or AttributeDictionary, got <class 'src.config.schemas.PhysicsConfig'>
