@@ -44,6 +44,7 @@ from src.core.dynamics_full import FullDIPDynamics
 from src.core.simulation_runner import run_simulation
 from src.optimization.algorithms.pso_optimizer import PSOTuner
 from src.utils.streamlit_theme import inject_theme
+from src.utils.monitoring.history_browser import render_history_browser
 
 # Performance caching decorators
 @st.cache_data
@@ -518,6 +519,29 @@ def main():
 
         **Ready?** Close this guide and start experimenting! 🚀
         """)
+
+    # ───────── Run History Browser (NEW - Phase 2 monitoring dashboard)
+    with st.expander("📚 Run History Browser - View past simulation results", expanded=False):
+        st.markdown("""
+        **Browse and analyze historical simulation runs** stored in the monitoring system.
+        This tool lets you:
+        - 🔍 **Query** runs by date, controller, scenario, or performance score
+        - 📊 **Visualize** run summaries in sortable tables
+        - 📥 **Export** results to CSV or JSON for external analysis
+        - 🔬 **Inspect** detailed time-series data for individual runs
+
+        **Tip**: Use the `--save-results` flag when running `simulate.py` to automatically
+        save runs to the monitoring database.
+
+        ---
+        """)
+
+        # Render the History Browser UI component
+        try:
+            render_history_browser()
+        except Exception as e:
+            st.error(f"Failed to load History Browser: {e}")
+            st.info("Make sure you have run at least one simulation with the `--save-results` flag.")
 
     # ───────── Advanced Documentation (renamed from previous expander)
     with st.expander("🚀 Advanced Features & Documentation"):
