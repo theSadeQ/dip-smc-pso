@@ -74,34 +74,43 @@ controller_defaults:
 controllers:
   classical_smc:
     gains:
-    - 23.07  # k1: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 12.85  # k2: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 5.51   # k3: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 3.49   # k4: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 2.23   # k5: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 0.15   # k6: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    # BASELINE FOR REPRODUCIBILITY TEST (2025-12-15)
+    # Restored from controller_defaults (pre-MT-8 nominal-only tuning)
+    # WARNING: These gains FAIL under disturbances (0% convergence, 236° overshoot)
+    - 5.0   # k1: Safe baseline (restored from pre-MT-8)
+    - 5.0   # k2: Safe baseline (restored from pre-MT-8)
+    - 5.0   # k3: Safe baseline (restored from pre-MT-8)
+    - 0.5   # k4: Safe baseline (restored from pre-MT-8)
+    - 0.5   # k5: Safe baseline (restored from pre-MT-8)
+    - 0.5   # k6: Safe baseline (restored from pre-MT-8)
     max_force: 150.0
     boundary_layer: 0.02  # Restored from 0.3 (Issue #12 fix reverted for benchmarking)
     dt: 0.01  # Match baseline script simulation dt
   sta_smc:
     gains:
-    - 2.02   # K1: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 6.67   # K2: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 5.62   # k1: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 3.75   # k2: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 4.36   # λ1: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 2.05   # λ2: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    # BASELINE FOR REPRODUCIBILITY TEST (2025-12-15)
+    # Restored from controller_defaults (Issue #2 resolution, pre-MT-8)
+    # WARNING: These gains FAIL under disturbances (0% convergence, 241° overshoot)
+    - 8.0    # K1: Safe baseline (from Issue #2 resolution)
+    - 4.0    # K2: Safe baseline (from Issue #2 resolution)
+    - 12.0   # k1: Safe baseline (from Issue #2 resolution)
+    - 6.0    # k2: Safe baseline (from Issue #2 resolution)
+    - 4.85   # λ1: Safe baseline (from Issue #2 resolution)
+    - 3.43   # λ2: Safe baseline (from Issue #2 resolution)
     damping_gain: 0.0
     max_force: 150.0
     dt: 0.01  # Match baseline script simulation dt
     boundary_layer: 0.05  # Restored from 0.3 (Issue #12 fix reverted for benchmarking)
   adaptive_smc:
     gains:
-    - 2.14   # k1: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 3.36   # k2: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 7.20   # k3: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 0.34   # k4: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 0.29   # k5: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    # BASELINE FOR REPRODUCIBILITY TEST (2025-12-15)
+    # Restored from controller_defaults (pre-MT-8 nominal-only tuning)
+    # WARNING: These gains FAIL under disturbances (0% convergence, 187° overshoot)
+    - 10.0   # k1: Safe baseline (restored from pre-MT-8)
+    - 8.0    # k2: Safe baseline (restored from pre-MT-8)
+    - 5.0    # k3: Safe baseline (restored from pre-MT-8)
+    - 4.0    # k4: Safe baseline (restored from pre-MT-8)
+    - 1.0    # k5: Safe baseline (restored from pre-MT-8)
     max_force: 150.0
     leak_rate: 0.01
     dead_zone: 0.05
@@ -136,10 +145,13 @@ controllers:
   # adjustment.
   hybrid_adaptive_sta_smc:
     gains:
-    - 10.15  # c1: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 12.84  # lambda1: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 6.82   # c2: PSO-optimized (MT-8 robust gains for DIPDynamics)
-    - 2.75   # lambda2: PSO-optimized (MT-8 robust gains for DIPDynamics)
+    # BASELINE FOR REPRODUCIBILITY TEST (2025-12-15)
+    # Restored from controller_defaults (pre-MT-8 nominal-only tuning)
+    # WARNING: These gains FAIL under disturbances (0% convergence, 667° overshoot - CATASTROPHIC)
+    - 5.0    # c1: Safe baseline (restored from pre-MT-8)
+    - 5.0    # lambda1: Safe baseline (restored from pre-MT-8)
+    - 5.0    # c2: Safe baseline (restored from pre-MT-8)
+    - 0.5    # lambda2: Safe baseline (restored from pre-MT-8)
     # Actuator saturation limit [N].  Control commands will be clipped
     # to the interval [-max_force, max_force].
     max_force: 150.0
@@ -220,9 +232,9 @@ pso:
   w: 0.9
   c1: 1.5
   c2: 2.0
-  w_schedule: [0.9, 0.4]        # Linear decay from exploration to exploitation
+  # w_schedule: [0.9, 0.4]        # DISABLED - optimizer.step() API broken in current pyswarms
   velocity_clamp: [0.1, 0.5]    # Min/max velocity as fraction of bounds (prevents stagnation/overshoot)
-  iters: 200
+  iters: 50                      # Reduced from 200 for faster PSO runs
   # Deprecated fields removed to ensure clean configuration.  Previously
   # unused fields such as n_processes, hyper_trials, hyper_search and
   # study_timeout were ignored by the PSO tuner, yet their presence

@@ -775,7 +775,9 @@ def _run_simulation_and_plot(args: argparse.Namespace) -> int:
             )
 
             # Add snapshots from simulation results
-            for i in range(len(t)):
+            # Use min length to handle potential size mismatches
+            n_samples = min(len(t), len(u), x.shape[0])
+            for i in range(n_samples):
                 state_vector = x[i, :]
                 control_output = u[i]
                 collector.add_snapshot(

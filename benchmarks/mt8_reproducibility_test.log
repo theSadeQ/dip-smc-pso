@@ -1,0 +1,24 @@
+2025-12-15 19:00:30,227 - INFO - ================================================================================
+2025-12-15 19:00:30,228 - INFO - MT-8: Reproducibility Test
+2025-12-15 19:00:30,228 - INFO - Random Seed: 42
+2025-12-15 19:00:30,228 - INFO - Particles: 30, Iterations: 50
+2025-12-15 19:00:30,228 - INFO - Save Prefix: mt8_repro_seed42
+2025-12-15 19:00:30,228 - INFO - ================================================================================
+2025-12-15 19:00:30,282 - INFO - Configuration loaded from sources: ENV > .env > config.yaml
+2025-12-15 19:00:30,282 - INFO - Configuration loaded (baseline gains from controller_defaults)
+2025-12-15 19:00:30,283 - INFO - Dynamics model initialized
+2025-12-15 19:00:30,283 - INFO - 
+Optimizing 4 controller(s):
+2025-12-15 19:00:30,283 - INFO -   - classical_smc
+2025-12-15 19:00:30,283 - INFO -   - sta_smc
+2025-12-15 19:00:30,283 - INFO -   - adaptive_smc
+2025-12-15 19:00:30,284 - INFO -   - hybrid_adaptive_sta_smc
+2025-12-15 19:00:30,284 - INFO - 
+================================================================================
+2025-12-15 19:00:30,284 - INFO - Optimizing: classical_smc (Robust PSO, Seed=42)
+2025-12-15 19:00:30,284 - INFO - ================================================================================
+2025-12-15 19:00:30,284 - INFO -   Particles: 30, Iterations: 50, Seed: 42
+2025-12-15 19:00:30,284 - INFO -   [OK] Random seed set: 42
+2025-12-15 19:00:30,284 - INFO -   Gain bounds: [2.0, 30.0] (×6)
+2025-12-15 19:00:30,284 - INFO -   Evaluating baseline gains...
+2025-12-15 19:00:32,325 - INFO -     Baseline robust fitness: 9.1450

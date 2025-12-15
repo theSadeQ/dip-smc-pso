@@ -50,6 +50,32 @@ from .data_model import (
 )
 
 
+def convert_numpy_types(obj):
+    """
+    Recursively convert numpy types to Python native types for JSON serialization.
+
+    Args:
+        obj: Object to convert
+
+    Returns:
+        Object with numpy types converted to Python native types
+    """
+    if isinstance(obj, np.integer):
+        return int(obj)
+    elif isinstance(obj, np.floating):
+        return float(obj)
+    elif isinstance(obj, np.bool_):
+        return bool(obj)
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, dict):
+        return {key: convert_numpy_types(value) for key, value in obj.items()}
+    elif isinstance(obj, (list, tuple)):
+        return [convert_numpy_types(item) for item in obj]
+    else:
+        return obj
+
+
 class LRUCache:
     """
     Least Recently Used (LRU) cache for run metadata.
@@ -155,6 +181,10 @@ class DataManager:
                      self.cache_path, self.logs_path]:
             path.mkdir(parents=True, exist_ok=True)
 
+        # Logger (initialize early so _init_database can use it)
+        self.logger = logging.getLogger("DataManager")
+        self._setup_logging()
+
         # SQLite index
         self.db_path = self.base_path / "index.db"
         self._init_database()
@@ -164,10 +194,6 @@ class DataManager:
 
         # Live sessions tracking
         self._live_sessions: Dict[str, Dict[str, Any]] = {}
-
-        # Logger
-        self.logger = logging.getLogger("DataManager")
-        self._setup_logging()
 
     def _setup_logging(self) -> None:
         """Configure logging to file and console."""
@@ -307,6 +333,9 @@ class DataManager:
                     "timeseries": "timeseries.csv" if save_timeseries else None
                 }
             }
+
+            # Convert numpy types to Python native types for JSON serialization
+            metadata = convert_numpy_types(metadata)
 
             metadata_path = run_dir / "metadata.json"
             with open(metadata_path, 'w') as f:
