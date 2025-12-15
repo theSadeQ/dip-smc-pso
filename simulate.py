@@ -476,10 +476,106 @@ def _run_pso(args: Args) -> int:
     # pass a different configuration rather than relying on environment
     # variables.  The tuner itself supports override arguments (iters_override
     # and n_particles_override) if explicit control is needed.
+
+    # Initialize PSO tracking if save_results is enabled
+    pso_tracker = None
+    pso_run_id = None
+    if args.save_results:
+        try:
+            from src.utils.monitoring.pso_tracker import PSORunTracker
+            pso_tracker = PSORunTracker()
+
+            # Extract hyperparameters from config
+            pso_cfg = cfg.pso
+            scenario = "robust" if args.robust_pso else "nominal"
+
+            # Extract bounds (handle different bounds types)
+            bounds_lower = [0.1] * 6
+            bounds_upper = [20.0] * 6
+            if hasattr(pso_cfg, 'bounds'):
+                try:
+                    # Try tuple/list access
+                    bounds_lower = list(pso_cfg.bounds[0])
+                    bounds_upper = list(pso_cfg.bounds[1])
+                except (TypeError, KeyError):
+                    # Handle object with attributes
+                    if hasattr(pso_cfg.bounds, ctrl_name):
+                        ctrl_bounds = getattr(pso_cfg.bounds, ctrl_name)
+                        if hasattr(ctrl_bounds, 'lower') and hasattr(ctrl_bounds, 'upper'):
+                            bounds_lower = list(ctrl_bounds.lower)
+                            bounds_upper = list(ctrl_bounds.upper)
+
+            hyperparameters = {
+                'n_particles': getattr(pso_cfg, 'n_particles', 30),
+                'iterations': getattr(pso_cfg, 'iterations', 50),
+                'bounds_lower': bounds_lower,
+                'bounds_upper': bounds_upper,
+                'inertia': getattr(pso_cfg, 'w', 0.7298),
+                'cognitive': getattr(pso_cfg, 'c1', 1.49618),
+                'social': getattr(pso_cfg, 'c2', 1.49618),
+                'seed': seed_to_use
+            }
+
+            pso_run_id = pso_tracker.start_pso_run(
+                controller=ctrl_name,
+                scenario=scenario,
+                hyperparameters=hyperparameters
+            )
+            logging.info(f"Started PSO tracking: {pso_run_id}")
+        except Exception as e:
+            logging.warning(f"Failed to initialize PSO tracking: {e}")
+            pso_tracker = None
+
     result = tuner.optimise()
 
     best_cost = result.get("best_cost", float("inf"))
     best_gains = result.get("best_pos", [])
+
+    # Log PSO convergence history and complete tracking
+    if pso_tracker and pso_run_id:
+        try:
+            history = result.get("history", {})
+            cost_history = history.get("cost")
+            pos_history = history.get("pos")
+
+            if cost_history is not None and pos_history is not None:
+                # Log each iteration
+                for i, (cost, pos) in enumerate(zip(cost_history, pos_history)):
+                    # Convert numpy arrays to lists for JSON serialization
+                    if hasattr(pos, 'tolist'):
+                        pos_list = pos.tolist()
+                    elif hasattr(pos, '__iter__'):
+                        pos_list = [float(x) for x in pos]
+                    else:
+                        pos_list = [float(pos)]
+
+                    pso_tracker.log_iteration(
+                        pso_run_id,
+                        iteration=i,
+                        gbest_fitness=float(cost),
+                        gbest_position=pos_list
+                    )
+
+            # Complete PSO run with final gains and score
+            # Convert numpy array to list for JSON serialization
+            if hasattr(best_gains, 'tolist'):
+                gains_list = best_gains.tolist()
+            elif hasattr(best_gains, '__iter__'):
+                gains_list = [float(x) for x in best_gains]
+            else:
+                gains_list = [float(best_gains)]
+
+            pso_tracker.complete_pso_run(
+                pso_run_id,
+                final_gains=gains_list,
+                final_score=float(best_cost)
+            )
+            logging.info(f"Completed PSO tracking: {pso_run_id}")
+            print(f"  PSO Run ID: {pso_run_id}")
+        except Exception as e:
+            logging.warning(f"Failed to complete PSO tracking: {e}")
+            if pso_tracker and pso_run_id:
+                pso_tracker.fail_pso_run(pso_run_id, str(e))
 
     # Print results with exact labels expected by tests
     print(f"\nOptimization Complete for '{ctrl_name}'")
@@ -757,6 +853,7 @@ def _run_simulation_and_plot(args: argparse.Namespace) -> int:
             from src.utils.monitoring.data_manager import DataManager
             from src.utils.monitoring.metrics_collector_control import ControlMetricsCollector
             from src.utils.monitoring.live_monitor import LiveMonitor, LiveMetrics
+            from src.utils.monitoring.pso_tracker import PSORunTracker
             import time as time_module
 
             # Determine controller name and scenario
