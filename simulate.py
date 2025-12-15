@@ -287,6 +287,7 @@ class Args:
     run_cmaes: bool
     robust_pso: bool
     seed: Optional[int]
+    save_results: bool = False
 
 # simulate.py - Update the _run_pso function (around line 288)
 def _run_pso(args: Args) -> int:
@@ -688,6 +689,7 @@ def _parse_cli_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     p.add_argument("--run-cmaes", action="store_true", help="Run CMA-ES to optimize controller gains.")
     p.add_argument("--robust-pso", action="store_true", help="Enable robust multi-scenario PSO (addresses MT-7 overfitting; requires --run-pso).")
     p.add_argument("--seed",type=int,default=None,help="Random seed for PSO/GA/DE/CMA-ES/simulation determinism (CLI overrides config/global).")
+    p.add_argument("--save-results", action="store_true", help="Save simulation results to monitoring_data/ for production monitoring system.")
     return p.parse_args(argv)
 
 def _run_simulation_and_plot(args: argparse.Namespace) -> int:
@@ -746,6 +748,60 @@ def _run_simulation_and_plot(args: argparse.Namespace) -> int:
         fdi=fdi,
         simulate_fault=None,
     )
+
+    # Save results to monitoring_data/ if requested
+    if args.save_results:
+        try:
+            from src.utils.monitoring.data_manager import DataManager
+            from src.utils.monitoring.metrics_collector_control import ControlMetricsCollector
+
+            # Determine controller name and scenario
+            controller_name = args.controller if args.controller else "default_controller"
+            scenario = "nominal"  # Default scenario
+
+            # Create metrics collector and convert simulation results to DashboardData
+            collector = ControlMetricsCollector(config=cfg_dict, sampling_interval=1)
+
+            # Generate run ID
+            dm = DataManager()
+            run_id = dm.generate_run_id(controller_name, scenario)
+
+            # Start run and collect snapshots
+            collector.start_run(
+                run_id=run_id,
+                controller_type=controller_name,
+                scenario=scenario,
+                config=cfg_dict
+            )
+
+            # Add snapshots from simulation results
+            for i in range(len(t)):
+                state_vector = x[i, :]
+                control_output = u[i]
+                collector.add_snapshot(
+                    state=state_vector,
+                    control_output=control_output,
+                    time_step=i,
+                    timestamp_s=t[i],
+                    computation_time_ms=None,
+                    metadata={}
+                )
+
+            # Finalize run with summary metrics
+            dashboard_data = collector.end_run(success=True)
+
+            # Store to disk and index
+            dm.store_run(dashboard_data, save_timeseries=True)
+
+            logging.info(f"Simulation results saved to monitoring_data/runs/{run_id}")
+            print(f"[OK] Results saved: {run_id}")
+            print(f"    Location: monitoring_data/runs/{run_id}/")
+            print(f"    Score: {dashboard_data.summary.get_score():.1f}/100")
+
+        except Exception as e:
+            logging.error(f"Failed to save results: {e}")
+            print(f"[WARNING] Could not save results: {e}")
+            # Don't fail the simulation if saving fails
 
     if args.plot:
         _plot_results(t, x, u)
@@ -972,6 +1028,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             run_cmaes=args.run_cmaes,
             robust_pso=args.robust_pso,
             seed=args.seed,
+            save_results=args.save_results,
         )
 
         if args.run_pso:
