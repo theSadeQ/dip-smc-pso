@@ -49,6 +49,7 @@ from src.utils.monitoring.live_monitor_ui import render_live_monitor_ui
 from src.utils.monitoring.pso_viz import render_pso_browser
 from src.utils.monitoring.multi_controller_viz import render_multi_controller_comparison
 from src.utils.monitoring.health_dashboard import render_health_dashboard
+from src.utils.monitoring.reproducibility_dashboard import render_reproducibility_dashboard
 
 # Performance caching decorators
 @st.cache_data
@@ -649,6 +650,38 @@ def main():
             render_health_dashboard()
         except Exception as e:
             st.error(f"Failed to load Health Dashboard: {e}")
+            st.exception(e)
+
+    # ───────── MT-8 Reproducibility Validation (NEW - Reproducibility testing)
+    with st.expander("🔬 MT-8 Reproducibility Validation - Multi-seed statistical analysis", expanded=False):
+        st.markdown("""
+        **Validate reproducibility of MT-8 robust PSO optimization** across multiple random seeds.
+        This tool lets you:
+        - 📊 **Execute** reproducibility tests with different random seeds (42, 123, 456)
+        - 📈 **Analyze** statistical variation in fitness and gains across seeds
+        - 🎯 **Validate** success criteria (CV < 5%, RSD < 20%, improvements match MT-8)
+        - 📉 **Visualize** convergence comparison and distribution across seeds
+        - ✅ **Verify** methodology reliability for research publication
+
+        **Reproducibility Metrics:**
+        - Coefficient of Variation (CV) for fitness reproducibility
+        - Relative Standard Deviation (RSD) for gain reproducibility
+        - Improvement delta from original MT-8 results
+        - Statistical validation across 3 independent seeds
+
+        **Original MT-8 Results** (Nov 8, 2025):
+        - Classical: 2.15%, STA: 1.38%, Adaptive: 0.47%, Hybrid: 21.39%
+        - Average: 6.35% improvement
+        - Configuration: 30 particles × 50 iterations
+
+        ---
+        """)
+
+        # Render the Reproducibility Dashboard UI component
+        try:
+            render_reproducibility_dashboard()
+        except Exception as e:
+            st.error(f"Failed to load Reproducibility Dashboard: {e}")
             st.exception(e)
 
     # ───────── Advanced Documentation (renamed from previous expander)
