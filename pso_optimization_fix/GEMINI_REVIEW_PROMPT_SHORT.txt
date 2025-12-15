@@ -1,0 +1,120 @@
+==============================================================================
+GEMINI REVIEW REQUEST - PSO FIX PRE-RUN CHECK
+==============================================================================
+
+CONTEXT:
+I fixed PSO optimization cost saturation by removing min_cost_floor (1e-06) and
+passive controller penalty from two evaluators. Before running 2-4 hour PSO
+re-optimization, please verify these changes are safe.
+
+PROJECT: Double Inverted Pendulum SMC with PSO Optimization (D:\Projects\main)
+
+==============================================================================
+CHANGES MADE (4 total)
+==============================================================================
+
+CHANGE 1 & 2: Removed cost floor from ControllerCostEvaluator (2 locations)
+File: src/optimization/core/cost_evaluator.py
+
+Line ~219:
+  BEFORE: J_valid = np.maximum(J_valid, self.min_cost_floor)
+  AFTER: # J_valid = np.maximum(J_valid, self.min_cost_floor)
+
+Line ~329:
+  BEFORE: cost = np.maximum(cost, self.min_cost_floor)
+  AFTER: # cost = np.maximum(cost, self.min_cost_floor)
+
+CHANGE 3: Removed passive controller penalty
+File: src/optimization/core/cost_evaluator.py (lines ~308-318)
+
+  BEFORE: Added 0.1 * instability_penalty if total_control_activity < 1% u_max
+  AFTER: Commented out entire passive penalty block
+
+CHANGE 4: Removed cost floor from RobustCostEvaluator
+File: src/optimization/core/robust_cost_evaluator.py (line ~251)
+
+  BEFORE: robust_cost = np.maximum(robust_cost, self.min_cost_floor)
+  AFTER: # robust_cost = np.maximum(robust_cost, self.min_cost_floor)
+
+==============================================================================
+RATIONALE
+==============================================================================
+
+PROBLEM: Both "optimized" and baseline gains returned cost = 1e-06 (saturated)
+CAUSE: min_cost_floor prevented discrimination between controllers
+SOLUTION: Remove floor to allow true cost differences
+
+PHASE 2 FINDING: Even extreme scenarios (15s, ±57° perturbations) yield zero
+cost for all gains. System is VERY controllable. This is OK - PSO will explore
+unstable regions during swarm optimization.
+
+==============================================================================
+QUESTIONS FOR GEMINI
+==============================================================================
+
+1. SAFETY: Can cost be 0.0 without causing numerical issues?
+   - Division by zero risks?
+   - PSO swarm dynamics compatible with zero costs?
+
+2. SIDE EFFECTS: Could removing floors cause problems?
+   - Instability penalties still work?
+   - Logging/visualization code assumes cost >= 1e-06?
+
+3. PASSIVE PENALTY: Is removing it safe?
+   - Could PSO converge to near-zero gains?
+   - Are natural costs (ISE, control effort) sufficient?
+
+4. PSO DISCRIMINATION: Will PSO still work?
+   - Will swarm exploration create cost variation?
+   - Cost function still properly bounded?
+
+5. TESTING: Should we test first?
+   - Run small PSO (5 particles, 10 iterations, 5 min)?
+   - Or proceed with full run (30 particles, 200 iterations, 2-4 hours)?
+
+==============================================================================
+YOUR TASK
+==============================================================================
+
+Please provide:
+
+1. VERDICT (choose one):
+   [ ] APPROVED - Safe to run full PSO (2-4 hours)
+   [ ] APPROVED WITH CAUTION - Proceed but monitor X, Y, Z
+   [ ] NOT APPROVED - Fix issues A, B, C first
+   [ ] NEEDS TESTING - Run small PSO test first (5 min)
+
+2. RISK ASSESSMENT:
+   - High risks (must fix):
+   - Medium risks (monitor):
+   - Low risks (acceptable):
+
+3. RECOMMENDATIONS:
+   - Configuration changes needed?
+   - Monitoring during PSO?
+   - Safeguards to add?
+
+4. CONFIDENCE: High / Medium / Low
+
+==============================================================================
+FILES AVAILABLE FOR REVIEW
+==============================================================================
+
+Changed files (backups exist):
+- src/optimization/core/cost_evaluator.py
+- src/optimization/core/robust_cost_evaluator.py
+
+Test results:
+- pso_optimization_fix/phase1_cost_function_fix/results/analysis.txt
+- pso_optimization_fix/phase1_cost_function_fix/results/validation.txt
+
+Full documentation:
+- VERIFICATION_FINDINGS.md (original problem)
+- pso_optimization_fix/PHASE1_2_SUMMARY.md (complete changes)
+- pso_optimization_fix/GEMINI_REVIEW_PROMPT.md (detailed version)
+
+==============================================================================
+
+Thank you, Gemini! Your review will save time if there are issues.
+
+Generated: December 15, 2025
