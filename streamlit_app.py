@@ -48,6 +48,7 @@ from src.utils.monitoring.history_browser import render_history_browser
 from src.utils.monitoring.live_monitor_ui import render_live_monitor_ui
 from src.utils.monitoring.pso_viz import render_pso_browser
 from src.utils.monitoring.multi_controller_viz import render_multi_controller_comparison
+from src.utils.monitoring.health_dashboard import render_health_dashboard
 
 # Performance caching decorators
 @st.cache_data
@@ -620,6 +621,34 @@ def main():
             render_multi_controller_comparison()
         except Exception as e:
             st.error(f"Failed to load Multi-Controller Comparison: {e}")
+            st.exception(e)
+
+    # ───────── System Health Dashboard (NEW - Phase 6 production hardening)
+    with st.expander("🏥 System Health Dashboard - Production monitoring & maintenance", expanded=False):
+        st.markdown("""
+        **Monitor system health and perform maintenance** with automated alerts, anomaly detection, and cleanup.
+        This tool lets you:
+        - 📊 **Monitor** system health metrics and performance trends
+        - 🚨 **Detect** threshold violations and anomalies automatically
+        - 💾 **Manage** disk usage with retention policies
+        - 🔧 **Maintain** database with automated cleanup and optimization
+        - 📈 **Track** alerts and degradation over time
+
+        **Production Features:**
+        - Configurable alert thresholds (score, settling time, overshoot, etc.)
+        - Statistical anomaly detection (Z-score, MAD, IQR methods)
+        - Automated retention policies (age-based, count-based)
+        - Database optimization (VACUUM + ANALYZE)
+        - Orphaned file detection and removal
+
+        ---
+        """)
+
+        # Render the Health Dashboard UI component
+        try:
+            render_health_dashboard()
+        except Exception as e:
+            st.error(f"Failed to load Health Dashboard: {e}")
             st.exception(e)
 
     # ───────── Advanced Documentation (renamed from previous expander)
