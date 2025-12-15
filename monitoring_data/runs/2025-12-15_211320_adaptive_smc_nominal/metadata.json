@@ -1,8 +1,8 @@
 {
-  "run_id": "2025-12-15_200138_hybrid_adaptive_sta_smc_nominal",
-  "timestamp": "2025-12-15T20:01:38.556791",
+  "run_id": "2025-12-15_211320_adaptive_smc_nominal",
+  "timestamp": "2025-12-15T21:13:20.506905",
   "controller": {
-    "type": "hybrid_adaptive_sta_smc",
+    "type": "adaptive_smc",
     "config": {
       "global_seed": 42,
       "controller_defaults": {
@@ -528,17 +528,17 @@
   "performance": {
     "settling_time_s": Infinity,
     "rise_time_s": Infinity,
-    "overshoot_pct": 1182893081317.118,
-    "steady_state_error": 15.66707385797912,
-    "energy_j": 1834.6832550634351,
-    "total_variation": 1223.3197357583074,
-    "peak_control": 150.0,
-    "stability_margin": -9.82893081317118,
-    "lyapunov_decrease_rate": 46.05424001434596,
+    "overshoot_pct": 1014176050133.2295,
+    "steady_state_error": 18.239595346255484,
+    "energy_j": 780.2673931078156,
+    "total_variation": 9.23,
+    "peak_control": 20.0,
+    "stability_margin": -8.141760501332294,
+    "lyapunov_decrease_rate": 167.17559718348974,
     "bounded_states": false,
-    "chattering_frequency_hz": 3.0,
-    "chattering_amplitude": 11.691376521212444,
-    "chattering_total_variation": 1223.3197357583074,
+    "chattering_frequency_hz": 0.5,
+    "chattering_amplitude": 0.20501598991682468,
+    "chattering_total_variation": 9.23,
     "disturbance_rejection_db": 0.0,
     "recovery_time_s": 0.0,
     "avg_computation_time_ms": 0.0,
@@ -546,9 +546,9 @@
     "deadline_misses": 0
   },
   "status": "complete",
-  "start_time": 1765816298.511277,
-  "end_time": 1765816298.555714,
-  "duration_s": 0.04443693161010742,
+  "start_time": 1765820600.488906,
+  "end_time": 1765820600.506905,
+  "duration_s": 0.01799917221069336,
   "errors": [],
   "warnings": [],
   "files": {

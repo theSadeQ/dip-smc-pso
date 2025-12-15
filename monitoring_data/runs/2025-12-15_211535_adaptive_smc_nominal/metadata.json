@@ -1,6 +1,6 @@
 {
-  "run_id": "2025-12-15_195207_adaptive_smc_nominal",
-  "timestamp": "2025-12-15T19:52:07.085971",
+  "run_id": "2025-12-15_211535_adaptive_smc_nominal",
+  "timestamp": "2025-12-15T21:15:35.368169",
   "controller": {
     "type": "adaptive_smc",
     "config": {
@@ -529,10 +529,29 @@
     "settling_time_s": Infinity,
     "rise_time_s": Infinity,
     "overshoot_pct": 1014176050133.2295,
-    "steady_state_error": 18.23959534625548,
-    "energy_j": 1980.2673931078157,
+    "steady_state_error": 18.239595346255484,
+    "energy_j": 780.2673931078156,
     "total_variation": 9.23,
     "peak_control": 20.0,
     "stability_margin": -8.141760501332294,
-    "lyapunov_decrease_rate": 66.6692261312915,
-    "bounded_states": 
+    "lyapunov_decrease_rate": 167.17559718348974,
+    "bounded_states": false,
+    "chattering_frequency_hz": 0.5,
+    "chattering_amplitude": 0.20501598991682468,
+    "chattering_total_variation": 9.23,
+    "disturbance_rejection_db": 0.0,
+    "recovery_time_s": 0.0,
+    "avg_computation_time_ms": 0.0,
+    "max_computation_time_ms": 0.0,
+    "deadline_misses": 0
+  },
+  "status": "complete",
+  "start_time": 1765820735.3552043,
+  "end_time": 1765820735.3671718,
+  "duration_s": 0.01196742057800293,
+  "errors": [],
+  "warnings": [],
+  "files": {
+    "timeseries": "timeseries.csv"
+  }
+}

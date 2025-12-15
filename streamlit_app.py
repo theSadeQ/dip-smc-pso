@@ -47,6 +47,7 @@ from src.utils.streamlit_theme import inject_theme
 from src.utils.monitoring.history_browser import render_history_browser
 from src.utils.monitoring.live_monitor_ui import render_live_monitor_ui
 from src.utils.monitoring.pso_viz import render_pso_browser
+from src.utils.monitoring.multi_controller_viz import render_multi_controller_comparison
 
 # Performance caching decorators
 @st.cache_data
@@ -591,6 +592,34 @@ def main():
             render_pso_browser()
         except Exception as e:
             st.error(f"Failed to load PSO Browser: {e}")
+            st.exception(e)
+
+    # ───────── Multi-Controller Comparison (NEW - Phase 5 monitoring dashboard)
+    with st.expander("📊 Multi-Controller Comparison - Side-by-side statistical analysis", expanded=False):
+        st.markdown("""
+        **Compare multiple controllers statistically** with box plots, radar charts, and significance testing.
+        This tool lets you:
+        - 📦 **Visualize** performance distribution with box plots
+        - 🎯 **Compare** controllers across all metrics simultaneously (radar chart)
+        - 📈 **Test** statistical significance with t-tests and ANOVA
+        - 🏆 **Rank** controllers by weighted composite score
+        - 📊 **Analyze** effect sizes with Cohen's d
+
+        **Tip**: Run simulations for multiple controllers with `--save-results`:
+        ```bash
+        python simulate.py --controller classical_smc --duration 10.0 --save-results
+        python simulate.py --controller adaptive_smc --duration 10.0 --save-results
+        python simulate.py --controller sta_smc --duration 10.0 --save-results
+        ```
+
+        ---
+        """)
+
+        # Render the Multi-Controller Comparison UI component
+        try:
+            render_multi_controller_comparison()
+        except Exception as e:
+            st.error(f"Failed to load Multi-Controller Comparison: {e}")
             st.exception(e)
 
     # ───────── Advanced Documentation (renamed from previous expander)
