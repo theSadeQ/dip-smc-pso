@@ -45,6 +45,7 @@ from src.core.simulation_runner import run_simulation
 from src.optimization.algorithms.pso_optimizer import PSOTuner
 from src.utils.streamlit_theme import inject_theme
 from src.utils.monitoring.history_browser import render_history_browser
+from src.utils.monitoring.live_monitor_ui import render_live_monitor_ui
 
 # Performance caching decorators
 @st.cache_data
@@ -519,6 +520,29 @@ def main():
 
         **Ready?** Close this guide and start experimenting! 🚀
         """)
+
+    # ───────── Live Simulation Monitor (NEW - Phase 3 monitoring dashboard)
+    with st.expander("🔴 Live Simulation Monitor - Real-time monitoring", expanded=False):
+        st.markdown("""
+        **Watch simulations run in real-time** with live progress tracking!
+        This tool lets you:
+        - 🚀 **Start** new simulations with custom parameters
+        - 📊 **Track** progress with real-time metrics and charts
+        - ⛔ **Abort** running simulations if needed
+        - 🔄 **Monitor** multiple sessions simultaneously
+
+        **Perfect for:** Long-running simulations, parameter tuning experiments,
+        and understanding controller behavior in real-time.
+
+        ---
+        """)
+
+        # Render the Live Monitor UI component
+        try:
+            render_live_monitor_ui(config=cfg)
+        except Exception as e:
+            st.error(f"Failed to load Live Monitor: {e}")
+            st.exception(e)
 
     # ───────── Run History Browser (NEW - Phase 2 monitoring dashboard)
     with st.expander("📚 Run History Browser - View past simulation results", expanded=False):

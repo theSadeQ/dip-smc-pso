@@ -288,6 +288,7 @@ class Args:
     robust_pso: bool
     seed: Optional[int]
     save_results: bool = False
+    live_session: Optional[str] = None
 
 # simulate.py - Update the _run_pso function (around line 288)
 def _run_pso(args: Args) -> int:
@@ -690,6 +691,7 @@ def _parse_cli_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     p.add_argument("--robust-pso", action="store_true", help="Enable robust multi-scenario PSO (addresses MT-7 overfitting; requires --run-pso).")
     p.add_argument("--seed",type=int,default=None,help="Random seed for PSO/GA/DE/CMA-ES/simulation determinism (CLI overrides config/global).")
     p.add_argument("--save-results", action="store_true", help="Save simulation results to monitoring_data/ for production monitoring system.")
+    p.add_argument("--live-session", type=str, default=None, help="Session ID for live monitoring (used internally by LiveMonitor).")
     return p.parse_args(argv)
 
 def _run_simulation_and_plot(args: argparse.Namespace) -> int:
@@ -754,6 +756,8 @@ def _run_simulation_and_plot(args: argparse.Namespace) -> int:
         try:
             from src.utils.monitoring.data_manager import DataManager
             from src.utils.monitoring.metrics_collector_control import ControlMetricsCollector
+            from src.utils.monitoring.live_monitor import LiveMonitor, LiveMetrics
+            import time as time_module
 
             # Determine controller name and scenario
             controller_name = args.controller if args.controller else "default_controller"
@@ -766,6 +770,13 @@ def _run_simulation_and_plot(args: argparse.Namespace) -> int:
             dm = DataManager()
             run_id = dm.generate_run_id(controller_name, scenario)
 
+            # Initialize LiveMonitor if live session is active
+            live_monitor = None
+            start_time = time_module.time()
+            if args.live_session:
+                live_monitor = LiveMonitor()
+                logging.info(f"Live monitoring active for session: {args.live_session}")
+
             # Start run and collect snapshots
             collector.start_run(
                 run_id=run_id,
@@ -777,6 +788,7 @@ def _run_simulation_and_plot(args: argparse.Namespace) -> int:
             # Add snapshots from simulation results
             # Use min length to handle potential size mismatches
             n_samples = min(len(t), len(u), x.shape[0])
+            last_progress_update = time_module.time()
             for i in range(n_samples):
                 state_vector = x[i, :]
                 control_output = u[i]
@@ -789,6 +801,28 @@ def _run_simulation_and_plot(args: argparse.Namespace) -> int:
                     metadata={}
                 )
 
+                # Update live monitoring progress (every 100 samples or every 1 second)
+                if live_monitor and (i % 100 == 0 or time_module.time() - last_progress_update >= 1.0):
+                    elapsed = time_module.time() - start_time
+                    progress_pct = (i / n_samples) * 100
+
+                    # Get current metrics from collector
+                    current_error = np.linalg.norm(state_vector[:2]) if len(state_vector) >= 2 else 0.0
+
+                    metrics = LiveMetrics(
+                        timestamp=t[i] if i < len(t) else 0.0,
+                        progress_pct=progress_pct,
+                        elapsed_s=elapsed,
+                        samples_completed=i,
+                        samples_total=n_samples,
+                        current_score=0.0,  # Will be calculated at the end
+                        current_error=current_error,
+                        current_control=float(control_output)
+                    )
+
+                    live_monitor.update_metrics(args.live_session, metrics)
+                    last_progress_update = time_module.time()
+
             # Finalize run with summary metrics
             dashboard_data = collector.end_run(success=True)
 
@@ -800,9 +834,19 @@ def _run_simulation_and_plot(args: argparse.Namespace) -> int:
             print(f"    Location: monitoring_data/runs/{run_id}/")
             print(f"    Score: {dashboard_data.summary.get_score():.1f}/100")
 
+            # Mark live session as complete
+            if live_monitor and args.live_session:
+                live_monitor.mark_complete(args.live_session, run_id)
+                logging.info(f"Live session {args.live_session} marked complete")
+
         except Exception as e:
             logging.error(f"Failed to save results: {e}")
             print(f"[WARNING] Could not save results: {e}")
+
+            # Mark live session as failed
+            if live_monitor and args.live_session:
+                live_monitor.mark_failed(args.live_session, str(e))
+
             # Don't fail the simulation if saving fails
 
     if args.plot:
