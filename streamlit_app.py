@@ -46,6 +46,7 @@ from src.optimization.algorithms.pso_optimizer import PSOTuner
 from src.utils.streamlit_theme import inject_theme
 from src.utils.monitoring.history_browser import render_history_browser
 from src.utils.monitoring.live_monitor_ui import render_live_monitor_ui
+from src.utils.monitoring.pso_viz import render_pso_browser
 
 # Performance caching decorators
 @st.cache_data
@@ -566,6 +567,31 @@ def main():
         except Exception as e:
             st.error(f"Failed to load History Browser: {e}")
             st.info("Make sure you have run at least one simulation with the `--save-results` flag.")
+
+    # ───────── PSO Optimization Browser (NEW - Phase 4 monitoring dashboard)
+    with st.expander("🎯 PSO Optimization Browser - Analyze optimization runs", expanded=False):
+        st.markdown("""
+        **Browse and analyze PSO optimization runs** with convergence plots and hyperparameter comparison.
+        This tool lets you:
+        - 📈 **Visualize** convergence history (gbest fitness over iterations)
+        - 🔍 **Compare** multiple PSO runs side-by-side
+        - ⚙️ **Analyze** hyperparameters (swarm size, inertia, cognitive, social)
+        - 📊 **Inspect** final optimized gains and performance metrics
+
+        **Tip**: Run PSO optimization with the `--save-results` flag:
+        ```bash
+        python simulate.py --controller adaptive_smc --run-pso --save-results
+        ```
+
+        ---
+        """)
+
+        # Render the PSO Browser UI component
+        try:
+            render_pso_browser()
+        except Exception as e:
+            st.error(f"Failed to load PSO Browser: {e}")
+            st.exception(e)
 
     # ───────── Advanced Documentation (renamed from previous expander)
     with st.expander("🚀 Advanced Features & Documentation"):
