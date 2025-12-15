@@ -1,0 +1,91 @@
+================================================================================
+SMOKE TEST PSO - 5 PARTICLES, 10 ITERATIONS
+================================================================================
+
+Purpose: Verify cost function discriminates after removing floor/penalty
+Duration: ~5 minutes (500 simulations)
+
+Gemini's recommendations:
+  1. Ensure costs are varying (not all 0.0)
+  2. Best cost not exactly 0.0 (unless perfect stabilization)
+  3. Gains not converging to zero
+
+================================================================================
+
+[Configuration]
+  Particles: 5 (smoke test)
+  Iterations: 10 (smoke test)
+  Scenarios: 10
+  Duration: 10.0s per simulation
+  u_max: 150.0 (EXPLICIT)
+  Perturbations: +/-0.1, +/-0.3, +/-0.5 rad
+  Warm-start: 50% near MT-8 baseline
+
+[Starting smoke test PSO...]
+Start time: 15:45:54
+
+[Initial State]
+  Particle costs: [0. 0. 0. 0. 0.]
+  Initial best cost: 0.00000000
+  Initial best gains: [2.18967142 3.34617357 7.26476885 0.49230299 0.26658466]
+
+[WARNING] All initial costs are 0.0 - scenarios too easy!
+
+[Running 10 iterations...]
+
+  Iter  1: Best = 0.00000000
+  Iter  2: Best = 0.00000000
+  Iter  3: Best = 0.00000000
+  Iter  4: Best = 0.00000000
+  Iter  5: Best = 0.00000000
+  Iter  6: Best = 0.00000000
+  Iter  7: Best = 0.00000000
+  Iter  8: Best = 0.00000000
+  Iter  9: Best = 0.00000000
+  Iter 10: Best = 0.00000000
+
+================================================================================
+SMOKE TEST COMPLETE
+================================================================================
+End time: 15:46:47
+
+[ANALYSIS - Gemini's Checks]
+
+1. Cost Variation Check:
+   Unique cost values encountered: 1
+   Cost range: [0.00000000, 0.00000000]
+   Cost std dev: 0.00000000
+   [ERROR] Very few unique costs - poor discrimination!
+
+2. Zero Cost Check:
+   Final best cost: 0.0000000000
+   [WARNING] Best cost is exactly 0.0
+            This suggests perfect control or floor still active
+
+3. Zero Gains Check:
+   Final best gains: [2.18967142 3.34617357 7.26476885 0.49230299 0.26658466]
+   Minimum gain: 0.2666
+   Maximum gain: 7.2648
+   [OK] Gains are reasonable
+
+================================================================================
+SMOKE TEST VERDICT
+================================================================================
+Check 1 (Cost variation): FAIL
+Check 2 (Non-zero cost): WARNING
+Check 3 (Non-zero gains): PASS
+
+[FAILURE] Critical issues detected!
+
+RECOMMENDATION: Fix issues before full PSO run
+  Possible fixes:
+  - Increase scenario difficulty (longer duration, larger perturbations)
+  - Add disturbances or parameter uncertainty
+  - Verify cost floor actually removed
+  - Check if scenarios allow any error accumulation
+
+================================================================================
+FINAL VERDICT: NOT_APPROVED
+================================================================================
+
+Results saved to: pso_optimization_fix/phase3_pso_rerun/results/smoke_test_results.json

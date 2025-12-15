@@ -1,0 +1,26 @@
+================================================================================
+DIAGNOSTIC: WHY ARE ALL COSTS 0.0?
+================================================================================
+
+Testing gains: [2.14 3.36 7.2  0.34 0.29]
+
+[Evaluator Configuration]
+  u_max: 150.0
+  min_cost_floor: 1e-06
+  instability_penalty: 1000.0
+  Weights: state_error=1.0 control_effort=0.1 control_rate=0.01 stability=0.1 sliding=0.1
+  Normalization factors:
+    norm_ise: 1.0
+    norm_u: 1.0
+    norm_du: 1.0
+    norm_sigma: 1.0
+
+[Test 1: Single evaluation with moderate perturbation]
+Initial condition: [0, 0, 0.3, 0, 0.3, 0] rad
+Returned cost: 0.000000000000000
+
+[Test 2: Manual simulation trace]
+Traceback (most recent call last):
+  File "D:\Projects\main\pso_optimization_fix\phase3_pso_rerun\diagnose_zero_cost.py", line 67, in <module>
+    from src.core.batch_sim import run_batch_vectorized
+ModuleNotFoundError: No module named 'src.core.batch_sim'
