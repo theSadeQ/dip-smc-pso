@@ -242,18 +242,19 @@ class DataManager:
             )
         """)
 
-        # PSO runs index
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS pso_runs (
-                pso_id TEXT PRIMARY KEY,
-                timestamp TEXT NOT NULL,
-                controller TEXT NOT NULL,
-                seed INTEGER,
-                best_fitness REAL,
-                iterations_converged INTEGER,
-                created_at TEXT NOT NULL
-            )
-        """)
+        # PSO runs index (now managed by PSORunTracker - commented out to avoid conflicts)
+        # The PSORunTracker class now handles its own table creation with updated schema
+        # cursor.execute("""
+        #     CREATE TABLE IF NOT EXISTS pso_runs (
+        #         pso_id TEXT PRIMARY KEY,
+        #         timestamp TEXT NOT NULL,
+        #         controller TEXT NOT NULL,
+        #         seed INTEGER,
+        #         best_fitness REAL,
+        #         iterations_converged INTEGER,
+        #         created_at TEXT NOT NULL
+        #     )
+        # """)
 
         # Benchmarks index
         cursor.execute("""
@@ -271,7 +272,8 @@ class DataManager:
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_runs_controller ON runs(controller)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_runs_timestamp ON runs(timestamp)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_runs_score ON runs(score)")
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_pso_controller ON pso_runs(controller)")
+        # PSO runs index now managed by PSORunTracker
+        # cursor.execute("CREATE INDEX IF NOT EXISTS idx_pso_controller ON pso_runs(controller)")
 
         conn.commit()
         conn.close()
