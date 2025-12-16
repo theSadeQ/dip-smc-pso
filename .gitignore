@@ -23,6 +23,15 @@ build/
 dist/
 *.egg-info/
 thesis/build/
+thesis/*.aux
+thesis/*.log
+thesis/*.out
+thesis/*.toc
+thesis/*.blg
+thesis/*.bbl
+thesis/*.lof
+thesis/*.lot
+thesis/*.nlo
 
 # Environment and configs
 .env
@@ -92,6 +101,7 @@ node_modules/
 data/
 logs/
 .logs/
+monitoring_data/
 optimization_results/
 docs/_build/
 

@@ -346,10 +346,10 @@ config = load_config("config.yaml", allow_unknown=False)
 **See:** `.project/ai/config/workspace_organization.md` for complete details.
 
 **Quick Reference:**
-- Target: ≤19 visible root items, ≤7 hidden dirs
+- Target: ≤19 visible root items, ≤3 hidden dirs
 - Use `.project/` for ALL AI/dev configs (CANONICAL)
-- Use `.artifacts/` NOT `artifacts/`
-- Use `.cache/` for ephemeral data
+- Runtime artifacts ARCHIVED externally (no .artifacts/ in repo)
+- Use `.cache/` for ephemeral data (regenerable only)
 
 ### Config Consolidation (Use `.project/` as CANONICAL)
 ```bash
@@ -365,9 +365,9 @@ config = load_config("config.yaml", allow_unknown=False)
 - [ERROR] `.dev_tools/` at root -> use `.project/dev_tools/`
 
 ### Directory Rules
-- **Runtime artifacts**: `.artifacts/` (outputs, research papers, scripts)
-- **Runtime caches**: `.cache/` (pytest, hypothesis, htmlcov, benchmarks, test_data)
-- **Visible directories** (10): `src/`, `tests/`, `docs/`, `scripts/`, `benchmarks/`, `optimization_results/`, `thesis/`, `research/`, `monitoring_data/`, `logs/`
+- **Hidden directories** (3): `.git/` (essential), `.github/` (CI/CD workflows), `.project/` (canonical config root)
+- **Runtime caches**: `.cache/` (pytest, hypothesis - regenerable only, NOT in git)
+- **Visible directories** (9): `src/`, `tests/`, `docs/`, `scripts/`, `benchmarks/`, `optimization_results/`, `thesis/`, `research/`, `logs/`
   - `scripts/research/{mt6_boundary_layer,mt7_robustness,mt8_reproducibility,lt6_model_uncertainty,lt7_paper}/` - Research task scripts
   - `scripts/optimization/` - PSO tuning and monitoring
   - `scripts/testing/` - Test automation and validation
@@ -388,10 +388,17 @@ config = load_config("config.yaml", allow_unknown=False)
 ### Weekly Health Check
 ```bash
 ls | wc -l                                          # ≤19 visible items
-find . -maxdepth 1 -type d -name ".*" | wc -l      # ≤7 hidden dirs
-du -sh .cache/                                      # <50MB
-du -sh .artifacts/                                  # <100MB
+find . -maxdepth 1 -type d -name ".*" | wc -l      # ≤3 hidden dirs (.git, .github, .project)
+du -sh .cache/                                      # <10MB (regenerable only)
+du -sh .project/                                    # <5MB (config + active dev tools only)
 ```
+
+### Post-Audit Status (December 16, 2025)
+- **Hidden directories**: 3 [OK] (.git/, .github/, .project/)
+- **Visible directories**: 9 [OK] (removed monitoring_data/)
+- **.project/ size**: ~1.5MB (reduced from 6.4MB, -77%)
+- **External archive**: ~250MB (caches, old docs, historical artifacts)
+- **Space savings**: ~410MB total (160MB deleted regenerable, 250MB archived)
 
 **See Also**: `.project/dev_tools/RESTRUCTURING_PLAN_2025-10-26.md` | `.project/ai/config/WORKSPACE_CLEANUP_2025-10-26.md`
 
