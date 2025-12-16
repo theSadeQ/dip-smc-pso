@@ -1,0 +1,51 @@
+2025-12-16 09:14:04,363 - INFO - Progress tracker initialized for job f9c01645
+2025-12-16 09:14:04,364 - INFO - ================================================================================
+2025-12-16 09:14:04,364 - INFO - MT-8: Reproducibility Test
+2025-12-16 09:14:04,364 - INFO - Random Seed: 42
+2025-12-16 09:14:04,364 - INFO - Particles: 5, Iterations: 3
+2025-12-16 09:14:04,366 - INFO - Save Prefix: test_panel
+2025-12-16 09:14:04,366 - INFO - ================================================================================
+2025-12-16 09:14:04,453 - INFO - Configuration loaded from sources: ENV > .env > config.yaml
+2025-12-16 09:14:04,453 - INFO - Configuration loaded (baseline gains from controller_defaults)
+2025-12-16 09:14:04,513 - INFO - Dynamics model initialized
+2025-12-16 09:14:04,514 - INFO - 
+Optimizing 1 controller(s):
+2025-12-16 09:14:04,514 - INFO -   - classical_smc
+2025-12-16 09:14:04,515 - INFO - 
+================================================================================
+2025-12-16 09:14:04,515 - INFO - Optimizing: classical_smc (Robust PSO, Seed=42)
+2025-12-16 09:14:04,517 - INFO - ================================================================================
+2025-12-16 09:14:04,517 - INFO -   Particles: 5, Iterations: 3, Seed: 42
+2025-12-16 09:14:04,517 - INFO -   [OK] Random seed set: 42
+2025-12-16 09:14:04,517 - INFO -   Gain bounds: [2.0, 30.0] (×6)
+2025-12-16 09:14:04,517 - INFO -   Evaluating baseline gains...
+D:\Projects\main\src\plant\core\state_validation.py:171: UserWarning: State vector was modified during sanitization
+  warnings.warn("State vector was modified during sanitization", UserWarning)
+2025-12-16 09:14:06,485 - INFO -     Baseline robust fitness: 9.1450
+2025-12-16 09:14:06,609 - __main__ - INFO -   Starting PSO optimization with seed 42...
+2025-12-16 09:14:11,660 - __main__ - INFO -     Evaluated 5/5 particles...
+2025-12-16 09:14:16,185 - __main__ - INFO -     Evaluated 5/5 particles...
+2025-12-16 09:14:20,929 - __main__ - INFO -     Evaluated 5/5 particles...
+2025-12-16 09:14:20,934 - __main__ - INFO -   [OK] PSO complete!
+2025-12-16 09:14:20,935 - __main__ - INFO -     Best robust fitness: 9.0246
+2025-12-16 09:14:20,936 - __main__ - INFO -     Improvement: 1.3%
+2025-12-16 09:14:20,936 - __main__ - INFO -     Optimized gains: ['15.573', '10.170', '2.229', '1.754', '19.772', '2.028']
+2025-12-16 09:14:22,692 - __main__ - INFO -   [OK] Saved gains: optimization_results\test_panel_classical_smc.json
+2025-12-16 09:14:22,693 - __main__ - INFO - 
+================================================================================
+2025-12-16 09:14:22,693 - __main__ - INFO - Saving optimization summary...
+2025-12-16 09:14:22,693 - __main__ - INFO - ================================================================================
+2025-12-16 09:14:22,694 - __main__ - INFO - [OK] Saved summary: optimization_results\test_panel_summary.json
+2025-12-16 09:14:22,697 - root - INFO - Job f9c01645 marked as complete
+2025-12-16 09:14:22,697 - __main__ - INFO - 
+================================================================================
+2025-12-16 09:14:22,697 - __main__ - INFO - REPRODUCIBILITY TEST SUMMARY (Seed=42)
+2025-12-16 09:14:22,698 - __main__ - INFO - ================================================================================
+2025-12-16 09:14:22,698 - __main__ - INFO - 
+Controller                     Baseline Cost   Optimized Cost  Improvement
+2025-12-16 09:14:22,698 - __main__ - INFO - --------------------------------------------------------------------------------
+2025-12-16 09:14:22,698 - __main__ - INFO - classical_smc                  9.1450          9.0246             1.3%
+2025-12-16 09:14:22,698 - __main__ - INFO - 
+Average Improvement: 1.32%
+2025-12-16 09:14:22,698 - __main__ - INFO - ================================================================================
+2025-12-16 09:14:22,699 - __main__ - INFO - [OK] Reproducibility test complete!

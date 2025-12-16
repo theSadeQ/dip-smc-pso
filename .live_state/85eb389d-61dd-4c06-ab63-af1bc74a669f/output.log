@@ -1,0 +1,56 @@
+2025-12-16 09:11:03,202 - INFO - Progress tracker initialized for job 85eb389d
+2025-12-16 09:11:03,203 - INFO - ================================================================================
+2025-12-16 09:11:03,203 - INFO - MT-8: Reproducibility Test
+2025-12-16 09:11:03,203 - INFO - Random Seed: 42
+2025-12-16 09:11:03,203 - INFO - Particles: 5, Iterations: 3
+2025-12-16 09:11:03,203 - INFO - Save Prefix: test_panel
+2025-12-16 09:11:03,203 - INFO - ================================================================================
+2025-12-16 09:11:03,290 - INFO - Configuration loaded from sources: ENV > .env > config.yaml
+2025-12-16 09:11:03,291 - INFO - Configuration loaded (baseline gains from controller_defaults)
+2025-12-16 09:11:03,292 - INFO - Dynamics model initialized
+2025-12-16 09:11:03,293 - INFO - 
+Optimizing 1 controller(s):
+2025-12-16 09:11:03,294 - INFO -   - classical_smc
+2025-12-16 09:11:03,295 - INFO - 
+================================================================================
+2025-12-16 09:11:03,295 - INFO - Optimizing: classical_smc (Robust PSO, Seed=42)
+2025-12-16 09:11:03,295 - INFO - ================================================================================
+2025-12-16 09:11:03,295 - INFO -   Particles: 5, Iterations: 3, Seed: 42
+2025-12-16 09:11:03,295 - INFO -   [OK] Random seed set: 42
+2025-12-16 09:11:03,296 - INFO -   Gain bounds: [2.0, 30.0] (×6)
+2025-12-16 09:11:03,296 - INFO -   Evaluating baseline gains...
+D:\Projects\main\src\plant\core\state_validation.py:171: UserWarning: State vector was modified during sanitization
+  warnings.warn("State vector was modified during sanitization", UserWarning)
+2025-12-16 09:11:05,252 - INFO -     Baseline robust fitness: 9.1450
+2025-12-16 09:11:05,397 - __main__ - INFO -   Starting PSO optimization with seed 42...
+2025-12-16 09:11:10,071 - __main__ - INFO -     Evaluated 5/5 particles...
+2025-12-16 09:11:10,073 - __main__ - ERROR - ERROR optimizing classical_smc: 'GlobalBestPSO' object has no attribute 'cost'
+Traceback (most recent call last):
+  File "D:\Projects\main\scripts\mt8_reproducibility_test.py", line 508, in main
+    result = optimize_controller_robust_pso(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\main\scripts\mt8_reproducibility_test.py", line 388, in optimize_controller_robust_pso
+    if optimizer.cost < best_cost:
+       ^^^^^^^^^^^^^^
+AttributeError: 'GlobalBestPSO' object has no attribute 'cost'
+2025-12-16 09:11:10,078 - __main__ - INFO - 
+================================================================================
+2025-12-16 09:11:10,078 - __main__ - INFO - Saving optimization summary...
+2025-12-16 09:11:10,079 - __main__ - INFO - ================================================================================
+2025-12-16 09:11:10,080 - __main__ - INFO - [OK] Saved summary: optimization_results\test_panel_summary.json
+2025-12-16 09:11:10,087 - root - INFO - Job 85eb389d marked as complete
+2025-12-16 09:11:10,088 - __main__ - INFO - 
+================================================================================
+2025-12-16 09:11:10,089 - __main__ - INFO - REPRODUCIBILITY TEST SUMMARY (Seed=42)
+2025-12-16 09:11:10,089 - __main__ - INFO - ================================================================================
+2025-12-16 09:11:10,090 - __main__ - INFO - 
+Controller                     Baseline Cost   Optimized Cost  Improvement
+2025-12-16 09:11:10,091 - __main__ - INFO - --------------------------------------------------------------------------------
+C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\core\fromnumeric.py:3504: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+C:\Users\SadeQ\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\core\_methods.py:129: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+2025-12-16 09:11:10,095 - __main__ - INFO - 
+Average Improvement: nan%
+2025-12-16 09:11:10,095 - __main__ - INFO - ================================================================================
+2025-12-16 09:11:10,096 - __main__ - INFO - [OK] Reproducibility test complete!
