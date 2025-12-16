@@ -33,6 +33,7 @@ from src.config import load_config
 from src.core.dynamics import DIPDynamics
 from src.controllers.factory import create_controller
 from src.utils.disturbances import create_step_scenario, create_impulse_scenario
+from src.utils.monitoring.progress_tracker import ProgressTracker, ProgressEstimator
 
 # Configure logging
 logging.basicConfig(
@@ -284,7 +285,10 @@ def optimize_controller_robust_pso(
     n_particles: int = 30,
     n_iterations: int = 50,
     bounds_min: List[float] = None,
-    bounds_max: List[float] = None
+    bounds_max: List[float] = None,
+    tracker: Optional[ProgressTracker] = None,
+    controller_idx: int = 0,
+    total_controllers: int = 1
 ) -> RobustPSOResult:
     """
     Optimize controller gains using robust PSO with explicit random seed.
@@ -342,6 +346,10 @@ def optimize_controller_robust_pso(
         logger.error("PySwarms not installed! Run: pip install pyswarms")
         raise
 
+    # Progress estimator for this controller
+    estimator = ProgressEstimator(total_operations=n_iterations)
+    iteration_start_time = time.time()
+
     # Define fitness function for swarm
     def fitness_func(particles: np.ndarray) -> np.ndarray:
         """Vectorized fitness evaluation for swarm."""
@@ -365,12 +373,38 @@ def optimize_controller_robust_pso(
         bounds=bounds
     )
 
-    # Run optimization
-    best_cost, best_gains = optimizer.optimize(
-        fitness_func,
-        iters=n_iterations,
-        verbose=False
-    )
+    # Run optimization with progress tracking
+    best_cost = float('inf')
+    best_gains = None
+
+    for iteration in range(n_iterations):
+        iter_start = time.time()
+
+        # Optimize for one iteration
+        optimizer.optimize(fitness_func, iters=1, verbose=False)
+
+        # Update best cost and gains
+        if optimizer.cost < best_cost:
+            best_cost = optimizer.cost
+            best_gains = optimizer.pos
+
+        # Record iteration time
+        iter_time = time.time() - iter_start
+        estimator.record_operation(iter_time)
+
+        # Update progress
+        if tracker:
+            # Calculate progress within this controller
+            controller_progress = estimator.get_progress_pct()
+
+            # Calculate overall progress across all controllers
+            controller_weight = 1.0 / total_controllers
+            overall_progress = ((controller_idx + controller_progress / 100.0) / total_controllers) * 100
+
+            status_msg = f"{controller_name} | Iteration {iteration+1}/{n_iterations} | Best: {best_cost:.4f}"
+            eta = estimator.get_eta_seconds()
+
+            tracker.update(overall_progress, status_msg, eta)
 
     logger.info(f"  [OK] PSO complete!")
     logger.info(f"    Best robust fitness: {best_cost:.4f}")
@@ -431,7 +465,11 @@ def main():
                         help='Controller to optimize (classical_smc, sta_smc, adaptive_smc, hybrid_adaptive_sta_smc, or all)')
     parser.add_argument('--particles', type=int, default=30, help='Number of PSO particles')
     parser.add_argument('--iterations', type=int, default=50, help='Number of PSO iterations')
+    parser.add_argument('--job-id', type=str, default=None, help='Job ID for progress tracking')
     args = parser.parse_args()
+
+    # Initialize progress tracker
+    tracker = ProgressTracker(args.job_id)
 
     logger.info("="*80)
     logger.info("MT-8: Reproducibility Test")
@@ -460,7 +498,11 @@ def main():
 
     # Run optimization
     all_results = []
-    for controller_name in controllers:
+    total_controllers = len(controllers)
+    for controller_idx, controller_name in enumerate(controllers):
+        # Update overall progress
+        overall_progress = (controller_idx / total_controllers) * 100
+        tracker.update(overall_progress, f"Optimizing {controller_name} ({controller_idx+1}/{total_controllers})")
         try:
             result = optimize_controller_robust_pso(
                 controller_name=controller_name,
@@ -468,7 +510,10 @@ def main():
                 config=config,
                 random_seed=args.seed,
                 n_particles=args.particles,
-                n_iterations=args.iterations
+                n_iterations=args.iterations,
+                tracker=tracker,
+                controller_idx=controller_idx,
+                total_controllers=total_controllers
             )
             all_results.append(result)
 
@@ -512,6 +557,9 @@ def main():
             'results': [asdict(r) for r in all_results]
         }, f, indent=2)
     logger.info(f"[OK] Saved summary: {summary_file}")
+
+    # Mark job as complete
+    tracker.complete(result_path=str(summary_file))
 
     # Print summary
     logger.info(f"\n{'='*80}")
