@@ -219,7 +219,13 @@ class DisturbedDynamics:
         return self._base.step(state, u + d, dt)
 
     def __getattr__(self, name):  # allow Visualizer to read geometry (l1/l2/etc.)
-        return getattr(self._base, name)
+        # Try to get from base dynamics object first
+        if hasattr(self._base, name):
+            return getattr(self._base, name)
+        # If not found, try to get from config (for l1, l2, etc.)
+        if hasattr(self._base, 'config') and hasattr(self._base.config, name):
+            return getattr(self._base.config, name)
+        raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
 
 # ────────────────────────────────────────────────────────────────────────────────
 # Main
@@ -294,7 +300,7 @@ def main():
 
     # 3) PSO (optional)
     st.sidebar.subheader(t.get("pso_header", "Optimization"))
-    best_params = np.array(cfg.controller_defaults[controller_sel]["gains"], dtype=float)
+    best_params = np.array(cfg.controller_defaults[controller_sel].gains, dtype=float)
     if st.sidebar.button(t.get("run_button", "Run PSO")):
         with st.spinner(t.get("spinner_msg", "Optimizing...")):
             def controller_factory(gains):
