@@ -366,14 +366,20 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ### Directory Rules
 - **Runtime artifacts**: `.artifacts/` (outputs, research papers, scripts)
-- **Runtime caches**: `.cache/` (pytest, hypothesis, htmlcov, benchmarks)
-- **Visible directories** (12): `src/`, `tests/`, `docs/`, `scripts/`, `notebooks/`, `data/`, `benchmarks/`, `optimization_results/`, `thesis/`, `research/`, `monitoring_data/`, `logs/`
+- **Runtime caches**: `.cache/` (pytest, hypothesis, htmlcov, benchmarks, test_data)
+- **Visible directories** (10): `src/`, `tests/`, `docs/`, `scripts/`, `benchmarks/`, `optimization_results/`, `thesis/`, `research/`, `monitoring_data/`, `logs/`
+  - `scripts/research/{mt6_boundary_layer,mt7_robustness,mt8_reproducibility,lt6_model_uncertainty,lt7_paper}/` - Research task scripts
+  - `scripts/optimization/` - PSO tuning and monitoring
+  - `scripts/testing/` - Test automation and validation
   - `scripts/debug/` - Debug and verification scripts
   - `scripts/monitoring/` - PSO and system monitoring scripts
   - `scripts/fixes/` - One-off fix scripts
-- **Root files** (5 core + 4 config + 2 MCP):
-  - Core: `README.md`, `CHANGELOG.md`, `CLAUDE.md`, `ARCHIVE.md`, `BULLETPROOF_PSO_GUIDE.md`
-  - Config: `config.yaml`, `requirements.txt`, `simulate.py`, `streamlit_app.py`
+  - `scripts/docs/` - Documentation build and maintenance
+  - `scripts/benchmarks/` - Performance benchmarking
+  - `scripts/coverage/` - Coverage analysis
+- **Root files** (3 core + 5 config + 2 MCP):
+  - Core: `README.md`, `CHANGELOG.md`, `CLAUDE.md`
+  - Config: `config.yaml`, `requirements.txt`, `setup.py`, `simulate.py`, `streamlit_app.py`
   - MCP: `package.json`, `package-lock.json`
 
 ### Protected Files (never Delete)
