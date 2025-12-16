@@ -367,8 +367,14 @@ config = load_config("config.yaml", allow_unknown=False)
 ### Directory Rules
 - **Runtime artifacts**: `.artifacts/` (outputs, research papers, scripts)
 - **Runtime caches**: `.cache/` (pytest, hypothesis, htmlcov, benchmarks)
-- **Visible directories** (8): `src/`, `tests/`, `docs/`, `scripts/`, `notebooks/`, `data/`, `benchmarks/`, `optimization_results/`
-- **Root files** (9 core + 2 MCP): `README.md`, `CHANGELOG.md`, `CLAUDE.md`, `config.yaml`, `requirements.txt`, `simulate.py`, `streamlit_app.py`, `package.json`, `package-lock.json`
+- **Visible directories** (12): `src/`, `tests/`, `docs/`, `scripts/`, `notebooks/`, `data/`, `benchmarks/`, `optimization_results/`, `thesis/`, `research/`, `monitoring_data/`, `logs/`
+  - `scripts/debug/` - Debug and verification scripts
+  - `scripts/monitoring/` - PSO and system monitoring scripts
+  - `scripts/fixes/` - One-off fix scripts
+- **Root files** (5 core + 4 config + 2 MCP):
+  - Core: `README.md`, `CHANGELOG.md`, `CLAUDE.md`, `ARCHIVE.md`, `BULLETPROOF_PSO_GUIDE.md`
+  - Config: `config.yaml`, `requirements.txt`, `simulate.py`, `streamlit_app.py`
+  - MCP: `package.json`, `package-lock.json`
 
 ### Protected Files (never Delete)
 - `.project/dev_tools/Switch-ClaudeAccount.ps1` - Multi-account switcher (CANONICAL)

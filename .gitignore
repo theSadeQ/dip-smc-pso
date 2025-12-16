@@ -22,6 +22,7 @@
 build/
 dist/
 *.egg-info/
+thesis/build/
 
 # Environment and configs
 .env
@@ -65,6 +66,8 @@ coverage.json
 .regression_baselines.json
 coverage_report.txt
 coverage_report.html
+coverage.xml
+*.db
 
 # Large project directories (for clean GitHub setup)
 SubAgent/
