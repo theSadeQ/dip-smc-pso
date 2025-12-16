@@ -57,7 +57,7 @@ print(f"Score: {completed_run.summary.get_score():.1f} / 100")
 ### 2. Launch Interactive Dashboard
 
 ```bash
-streamlit run streamlit_monitoring_dashboard.py
+streamlit run scripts/monitoring/streamlit_monitoring_dashboard.py
 ```
 
 Navigate to `http://localhost:8501` to access:
@@ -306,7 +306,7 @@ collector = ControlMetricsCollector(
 
 ```bash
 # Dashboard startup
-streamlit run streamlit_monitoring_dashboard.py
+streamlit run scripts/monitoring/streamlit_monitoring_dashboard.py
 
 # Examples execution
 python -m src.utils.monitoring.examples
