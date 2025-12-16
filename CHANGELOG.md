@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - **Back-to-Top Button Scroll Bug - Unified Dual-System Architecture** (November 13, 2025)
-  - **Status**: COMPLETE - Robust fix with synchronized visibility control
+  - **Status**: COMPLETE - Fix with synchronized visibility control
   - **Issue**: Back-to-top FAB button reappeared incorrectly after longer scrolls, causing visibility inconsistencies
   - **Root Cause Analysis**:
     - **Dual Visibility Systems Conflict**: Furo's `html.show-back-to-top` class (theme-managed) vs Custom `.back-to-top.show` class (JavaScript-managed)
@@ -53,21 +53,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `docs/_static/back-to-top.js` (DEPRECATED) - Replaced by unified system
 
 ### Added
-- **MT-8 Robust PSO Optimization for Disturbance Rejection** (November 8, 2025)
+- **MT-8 PSO Optimization for Disturbance Rejection** (November 8, 2025)
   - **Status**: COMPLETE - Classical SMC optimized gains validated
-  - **Implementation**: Multi-objective PSO optimization targeting robustness under disturbances
+  - **Implementation**: Multi-objective PSO optimization targeting performance under disturbances
     - Objective function: Weighted combination of settling time, overshoot, and recovery time across 4 disturbance types
     - Scenarios: step (10N), impulse (30N), sinusoidal (8N @ 2Hz), random noise (σ=3N)
     - PSO Configuration: 30 particles, 50 iterations, gain bounds [2.0, 30.0]
   - **Results (Classical SMC)**:
-    - Robust fitness improvement: 2.2% (9.145 → 8.948)
+    - Fitness improvement: 2.2% (9.145 → 8.948)
     - Optimized gains: [23.068, 12.854, 5.515, 3.487, 2.233, 0.148]
     - Convergence: Stable after 35 iterations
   - **Disturbance Rejection Performance**:
     - Step disturbance: 204.3° avg overshoot, 10.00s settling time
     - Impulse disturbance: 187.7° overshoot, stable recovery
     - Sinusoidal disturbance: 226.2° overshoot under continuous forcing
-    - Random noise: 215.9° overshoot, robust to stochastic inputs
+    - Random noise: 215.9° overshoot with σ=3N stochastic input
   - **Critical Finding - Hybrid Controller Anomaly**:
     - Hybrid Adaptive STA SMC: **666.9° average overshoot** (3.3x worse than Classical SMC)
     - Root cause: Adaptive gain scheduling creates feedback loop instability (Phase 2.3 validated)
@@ -166,7 +166,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Classical SMC: DO NOT DEPLOY for step disturbance applications
     - Hybrid: BLOCKED pending root cause investigation (gain coordination interference)
   - **Documentation**: Complete analysis in `benchmarks/MT8_ADAPTIVE_SCHEDULING_SUMMARY.md` (385 lines) and `benchmarks/MT8_HIL_VALIDATION_SUMMARY.md` (394 lines)
-  - **Integration**: LT-7 research paper updated with comprehensive results (Section 8.2), limitations (Section 9.3), contributions (Section 10.1), findings (Section 10.2), future work (Section 10.3)
+  - **Integration**: LT-7 research paper updated with results (Section 8.2), limitations (Section 9.3), contributions (Section 10.1), findings (Section 10.2), future work (Section 10.3)
   - **Future Extensions**: Disturbance-aware scheduling (Enhancement #3a), asymmetric scheduling (#3b), gradient-based scheduling (#3c)
   - **Files Added/Modified**:
     - `src/controllers/adaptive_gain_scheduler.py` (287 lines) - Core scheduler implementation
@@ -249,7 +249,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Statistical calibration methodology using P99 percentile approach
 - Configuration section for fault detection parameters in config.yaml
 
-- `test_matrix_regularization()` in `test_numerical_stability_deep.py` for comprehensive validation
+- `test_matrix_regularization()` in `test_numerical_stability_deep.py` for matrix regularization validation
   - Tests extreme singular value ratios [1e-8, 2e-9, 5e-9, 1e-10]
   - Validates automatic triggers for high condition numbers
   - Verifies accuracy preservation for well-conditioned matrices
@@ -471,7 +471,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Performance optimization (CSS minification, tree-shaking, critical CSS extraction)
 
 ### Documentation
-- **Strategic Roadmap**: Created `.codex/STRATEGIC_ROADMAP.md` (comprehensive vision for Phases 3-6)
+- **Strategic Roadmap**: Created `.codex/STRATEGIC_ROADMAP.md` (vision for Phases 3-6)
   - Executive summary: Current state (production score 6.1/10) → Version 2.0 (score 9.0/10, 3-6 months)
   - Phase 3 completion plan (4 days): Wave 3 finale + Wave 4 consolidation
   - Phase 4 strategic options: Production Readiness Sprint (recommended), Performance Optimization, UI Polish, Feature Development
