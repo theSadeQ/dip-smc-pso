@@ -47,10 +47,10 @@ graph TD
 ```
 
 **System Components**:
-- 🔵 **Cart**: Movable platform (1 DOF: position x)
-- 🔴 **Pendulum 1**: First link (1 DOF: angle θ₁)
-- 🟢 **Pendulum 2**: Second link (1 DOF: angle θ₂)
-- 🟡 **Control**: Horizontal force u (single actuator)
+-  **Cart**: Movable platform (1 DOF: position x)
+-  **Pendulum 1**: First link (1 DOF: angle θ₁)
+-  **Pendulum 2**: Second link (1 DOF: angle θ₂)
+-  **Control**: Horizontal force u (single actuator)
 
 ### State Variables
 
@@ -155,9 +155,9 @@ flowchart TD
 ```
 
 **Advantages**:
-- 🔵 **Systematic**: No need to derive constraint forces
-- 🟡 **Lagrangian** L = T - V: Single scalar function
-- 🟢 **Result**: Configuration-dependent dynamics M(q)
+-  **Systematic**: No need to derive constraint forces
+-  **Lagrangian** L = T - V: Single scalar function
+-  **Result**: Configuration-dependent dynamics M(q)
 
 ### Kinetic Energy
 
@@ -344,7 +344,7 @@ sin(θ)cos(θ) ≈ θ
 **Assumptions**:
 1. Small angles: `θ₁, θ₂ ≪ 1`
 2. Small velocities: `θ̇₁, θ̇₂ ≪ 1`
-3. Neglect products: `θᵢθⱼ ≈ 0`
+3. Neglect products: `θᵢθ ≈ 0`
 
 **Result**: Linearized equations
 ```
@@ -415,7 +415,7 @@ For 6-state system, need rank(C) = 6.
 2. First-order coupling: `ẍ → θ̈₁` (first pendulum)
 3. Second-order coupling: `θ̈₁ → θ̈₂` (second pendulum)
 4. Three integration steps → reach all position states
-5. Controllability matrix full rank ✓
+5. Controllability matrix full rank 
 
 **Control Propagation Diagram**:
 
@@ -440,14 +440,14 @@ flowchart TD
 ```
 
 **Key Insight**: Single control input reaches all 6 states via:
-- 🟡 **Direct** effect on cart
-- 🟢 **Inertial coupling** to pendulum 1
-- 🔴 **Secondary coupling** to pendulum 2
-- 🔵 **Integration** for position control
+-  **Direct** effect on cart
+-  **Inertial coupling** to pendulum 1
+-  **Secondary coupling** to pendulum 2
+-  **Integration** for position control
 
 **Controllability Matrix**:
 ```
-rank([B  AB  A²B  A³B  A⁴B  A⁵B]) = 6  ✓
+rank([B  AB  A²B  A³B  A⁴B  A⁵B]) = 6  
 ```
 
 System is **fully controllable** despite underactuation!

@@ -37,7 +37,7 @@ def remove_emojis_for_display(text: str) -> str:
     Returns:
         Text with emojis removed (replaced with [EMOJI])
     """
-    # Unicode emoji ranges (comprehensive)
+    # Unicode emoji ranges (complete)
     emoji_pattern = re.compile(
         "["
         "\U0001F600-\U0001F64F"  # Emoticons

@@ -1,9 +1,9 @@
 """
 ================================================================================
-Phase 3.3: Comprehensive Statistical Comparison
+Phase 3.3: complete Statistical Comparison
 ================================================================================
 
-Performs comprehensive statistical analysis across all Phase 2+3 conditions
+Performs complete statistical analysis across all Phase 2+3 conditions
 to validate findings and prepare results for research paper.
 
 NOTE: This analysis works with available data. Phase 2.1 has 100 individual
@@ -223,8 +223,8 @@ def analyze_phase2_1(phase2_1: Dict) -> Dict:
 
 
 def summarize_phases(phase2_1: Dict, phase2_3: Dict, phase3_1: Dict, phase3_2: Dict) -> Dict:
-    """Create comprehensive summary of all phases."""
-    print("\n[INFO] Generating comprehensive summary...")
+    """Create complete summary of all phases."""
+    print("\n[INFO] Generating complete summary...")
 
     summary = {
         "phase2_1": analyze_phase2_1(phase2_1),
@@ -265,7 +265,7 @@ def summarize_phases(phase2_1: Dict, phase2_3: Dict, phase3_1: Dict, phase3_2: D
 # ============================================================================
 
 def plot_phase_comparison(summary: Dict, output_path: Path):
-    """Create comprehensive phase comparison plot."""
+    """Create complete phase comparison plot."""
     print("\n[INFO] Generating phase comparison plot...")
 
     fig, axes = plt.subplots(2, 2, figsize=(16, 12))
@@ -345,7 +345,7 @@ def plot_phase_comparison(summary: Dict, output_path: Path):
     ax.text(3, means_3_2[3], f"+{data_3_2['full_vs_baseline_percent']:.1f}%",
            ha='center', va='bottom', fontsize=11, weight='bold', color='red')
 
-    fig.suptitle("Phase 2+3 Comprehensive Statistical Comparison", fontsize=16, weight='bold', y=0.995)
+    fig.suptitle("Phase 2+3 complete Statistical Comparison", fontsize=16, weight='bold', y=0.995)
     plt.tight_layout()
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.close()
@@ -450,12 +450,12 @@ def plot_phase2_1_distributions(phase2_1: Dict, output_path: Path):
 # ============================================================================
 
 def generate_summary_report(summary: Dict, output_path: Path):
-    """Generate comprehensive markdown summary report."""
+    """Generate complete markdown summary report."""
     print("\n[INFO] Generating summary report...")
 
     with open(output_path, 'w') as f:
         # Header
-        f.write("# Phase 3.3: Comprehensive Statistical Comparison\n\n")
+        f.write("# Phase 3.3: complete Statistical Comparison\n\n")
         f.write("**Date:** November 2025  \n")
         f.write("**Objective:** Validate Phase 2+3 findings with rigorous statistical analysis  \n")
         f.write("**Related:** MT-6 (Boundary Layer Optimization)  \n\n")
@@ -665,7 +665,7 @@ def generate_summary_report(summary: Dict, output_path: Path):
 
 def main():
     print("=" * 80)
-    print("Phase 3.3: Comprehensive Statistical Comparison")
+    print("Phase 3.3: complete Statistical Comparison")
     print("=" * 80)
 
     # Load data

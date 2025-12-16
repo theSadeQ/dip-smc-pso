@@ -32,36 +32,36 @@ This guide shows how to run vectorized batch simulations for Monte Carlo analysi
 ### 1.1 Batch Simulation Components
 
 ```
-┌───────────────────────────────────────────────────────┐
-│  User API                                              │
-│  simulate(initial_states, controls, dt, horizon)      │
-└─────────────────────┬─────────────────────────────────┘
-                      │
-                      ▼
-┌───────────────────────────────────────────────────────┐
-│  BatchOrchestrator                                     │
-│  - Manages batch execution                             │
-│  - Vectorized operations                               │
-│  - Safety guards per simulation                        │
-└─────────────────────┬─────────────────────────────────┘
-                      │
-                      ▼
-┌───────────────────────────────────────────────────────┐
-│  Vectorized Simulation Engine                          │
-│  - Numba-accelerated dynamics step                     │
-│  - Parallel batch processing                           │
-│  - Shape: (batch_size, horizon+1, state_dim)          │
-└───────────────────────────────────────────────────────┘
+
+  User API                                              
+  simulate(initial_states, controls, dt, horizon)      
+
+                      
+                      
+
+  BatchOrchestrator                                     
+  - Manages batch execution                             
+  - Vectorized operations                               
+  - Safety guards per simulation                        
+
+                      
+                      
+
+  Vectorized Simulation Engine                          
+  - Numba-accelerated dynamics step                     
+  - Parallel batch processing                           
+  - Shape: (batch_size, horizon+1, state_dim)          
+
 ```
 
 ### 1.2 Key Features
 
 **Vectorization Benefits:**
-- ✅ **Performance**: 10-100× faster than sequential loops
-- ✅ **Memory Efficient**: Single allocation for batch
-- ✅ **NumPy Native**: uses BLAS/LAPACK
-- ✅ **Numba Acceleration**: JIT compilation for dynamics
-- ✅ **Safety Guards**: Per-simulation monitoring
+-  **Performance**: 10-100× faster than sequential loops
+-  **Memory Efficient**: Single allocation for batch
+-  **NumPy Native**: uses BLAS/LAPACK
+-  **Numba Acceleration**: JIT compilation for dynamics
+-  **Safety Guards**: Per-simulation monitoring
 
 **Use Cases:**
 1. **Monte Carlo Simulation**: Vary initial conditions (100-10,000 trials)
@@ -475,7 +475,7 @@ def check_convergence(samples, window=100):
 # Example
 theta1_samples = results[:, -1, 1]
 converged = check_convergence(theta1_samples)
-print(f"Convergence: {'✓' if converged else '✗'}")
+print(f"Convergence: {'' if converged else ''}")
 ```
 
 ## 7.3 Parameter Sweep Efficiency
@@ -511,19 +511,19 @@ k2_fine = np.linspace(k2_best-5, k2_best+5, 20)
 
 ### For Monte Carlo Users:
 
-✅ **Completed**: Basic batch simulation structure
-➡️ **Next**: [Monte Carlo Validation Quickstart](monte-carlo-validation-quickstart.md)
-➡️ **Next**: [Statistical Benchmarks](../../reference/benchmarks/statistical_benchmarks_v2.md)
+ **Completed**: Basic batch simulation structure
+ **Next**: [Monte Carlo Validation Quickstart](monte-carlo-validation-quickstart.md)
+ **Next**: [Statistical Benchmarks](../../reference/benchmarks/statistical_benchmarks_v2.md)
 
 ### For Parameter Sweep Users:
 
-➡️ **Next**: [PSO vs Grid Search Comparison](pso-vs-grid-search.md)
-➡️ **Next**: [Multi-Objective PSO](../../reference/optimization/algorithms_multi_objective_pso.md)
+ **Next**: [PSO vs Grid Search Comparison](pso-vs-grid-search.md)
+ **Next**: [Multi-Objective PSO](../../reference/optimization/algorithms_multi_objective_pso.md)
 
 ### For Advanced Users:
 
-➡️ **Next**: [Batch Orchestrators](../../reference/simulation/orchestrators_batch.md)
-➡️ **Next**: [Full Dynamics Model](../../reference/core/dynamics_full.md)
+ **Next**: [Batch Orchestrators](../../reference/simulation/orchestrators_batch.md)
+ **Next**: [Full Dynamics Model](../../reference/core/dynamics_full.md)
 
 
 
@@ -549,7 +549,7 @@ count = container.get_batch_count()
 
 
 
-**Document Status:** ⚠️ Architecture Documented, Performance Testing Pending
+**Document Status:**  Architecture Documented, Performance Testing Pending
 **Last Updated:** 2025-10-07
 **Validation Method:** Code review, module error encountered during testing
 **Note**: Performance benchmarks are estimates pending module fixes for testing

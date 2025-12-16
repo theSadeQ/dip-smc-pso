@@ -32,30 +32,30 @@
 | Aspect | Classical SMC | Adaptive SMC | STA SMC | Hybrid SMC |
 |--------|---------------|--------------|---------|------------|
 | **Convergence** | Exponential | Exponential | Finite-time | Finite-time |
-| **Convergence Speed** | ★★★ | ★★★ | ★★★★ | ★★★★★ |
-| **Robustness** | ★★★ | ★★★★ | ★★★★ | ★★★★★ |
+| **Convergence Speed** |  |  |  |  |
+| **Robustness** |  |  |  |  |
 | **Chattering** | High | Medium | Low | Very Low |
 | **Tuning Complexity** | Simple | Medium | Medium | High |
 | **Parameter Count** | 6 gains | 5 gains + 3 params | 6 gains | 4 gains + 8 params |
 | **Computational Cost** | Low | Medium | Medium | High |
-| **Unknown Disturbances** | ★ | ★★★★★ | ★★ | ★★★★★ |
+| **Unknown Disturbances** |  |  |  |  |
 | **Real-time Capable** | 10kHz | 5kHz | 5kHz | 2kHz |
 | **Best For** | Prototyping | Unknown params | High precision | Max performance |
 
-**Legend**: ★ = Poor, ★★ = Fair, ★★★ = Good, ★★★★ = Very Good, ★★★★★ = 
+**Legend**:  = Poor,  = Fair,  = Good,  = Very Good,  = 
 ### 1.2 Decision Tree
 
 ```
 START: Which SMC controller for DIP?
-├─ Known disturbance bounds?
-│  ├─ YES → Need finite-time convergence?
-│  │  ├─ YES → STA SMC (best chattering reduction)
-│  │  └─ NO  → Classical SMC (simplest, fastest)
-│  └─ NO  → Maximum performance required?
-│     ├─ YES → Hybrid Adaptive STA-SMC (research-grade)
-│     └─ NO  → Adaptive SMC (good balance)
-└─ Computational constraints?
-   └─ Limited → Classical SMC or Adaptive SMC
+ Known disturbance bounds?
+   YES → Need finite-time convergence?
+     YES → STA SMC (best chattering reduction)
+     NO  → Classical SMC (simplest, fastest)
+   NO  → Maximum performance required?
+      YES → Hybrid Adaptive STA-SMC (research-grade)
+      NO  → Adaptive SMC (good balance)
+ Computational constraints?
+    Limited → Classical SMC or Adaptive SMC
 ```
 
 ### 1.3 Summary Recommendations
@@ -641,15 +641,15 @@ def compute_control_hybrid(state, k1_prev, k2_prev, u_int_prev):
 
 | Requirement | Classical | Adaptive | STA | Hybrid |
 |------------|-----------|----------|-----|--------|
-| **Simple tuning** | ★★★★★ | ★★★ | ★★★ | ★ |
-| **Robustness to disturbances** | ★★★ | ★★★★★ | ★★★★ | ★★★★★ |
-| **Low chattering** | ★ | ★★★ | ★★★★★ | ★★★★★ |
-| **Fast convergence** | ★★★ | ★★★ | ★★★★ | ★★★★★ |
-| **Unknown disturbances** | ★ | ★★★★★ | ★★ | ★★★★★ |
-| **Computational efficiency** | ★★★★★ | ★★★★ | ★★★★ | ★★★ |
-| **Zero steady-state error** | ★ | ★★★★ | ★★★★★ | ★★★★★ |
-| **Parameter uncertainty** | ★★ | ★★★★★ | ★★ | ★★★★★ |
-| **Ease of implementation** | ★★★★★ | ★★★★ | ★★★ | ★★ |
+| **Simple tuning** |  |  |  |  |
+| **Robustness to disturbances** |  |  |  |  |
+| **Low chattering** |  |  |  |  |
+| **Fast convergence** |  |  |  |  |
+| **Unknown disturbances** |  |  |  |  |
+| **Computational efficiency** |  |  |  |  |
+| **Zero steady-state error** |  |  |  |  |
+| **Parameter uncertainty** |  |  |  |  |
+| **Ease of implementation** |  |  |  |  |
 
 ### 6.2 Application-Specific Recommendations
 
@@ -743,23 +743,23 @@ dead_zone: 0.01
 
 ```
 Q1: Computational constraints tight (< 100 μs per step)?
-├─ YES → Classical SMC or Adaptive SMC
-└─ NO  → Continue to Q2
+ YES → Classical SMC or Adaptive SMC
+ NO  → Continue to Q2
 
 Q2: Unknown disturbance bounds?
-├─ YES → Adaptive SMC or Hybrid SMC
-└─ NO  → Continue to Q3
+ YES → Adaptive SMC or Hybrid SMC
+ NO  → Continue to Q3
 
 Q3: Need finite-time convergence?
-├─ YES → STA SMC or Hybrid SMC
-└─ NO  → Classical SMC
+ YES → STA SMC or Hybrid SMC
+ NO  → Classical SMC
 
 Q4: Chattering critical concern?
-├─ YES → STA SMC or Hybrid SMC
-└─ NO  → Classical SMC or Adaptive SMC
+ YES → STA SMC or Hybrid SMC
+ NO  → Classical SMC or Adaptive SMC
 
 Q5: Maximum performance required?
-└─ YES → Hybrid Adaptive STA-SMC
+ YES → Hybrid Adaptive STA-SMC
 ```
 
 ### 6.4 Practical Guidelines

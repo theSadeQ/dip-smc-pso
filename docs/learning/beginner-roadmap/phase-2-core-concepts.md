@@ -858,7 +858,7 @@ plt.show()
 
 4. **Disturbances**:
    - External pushes rejected automatically
-   - Robust performance
+   - reliable performance
 
 **SMC Variants in This Project**:
 
@@ -1516,7 +1516,7 @@ Test your understanding of Phase 2 control concepts
 
 ```
 
-```{grid-item-card} 🧪 Python for Scientists - Interactive Tutorial
+```{grid-item-card}  Python for Scientists - Interactive Tutorial
 :link: https://www.learnpython.org/
 :link-type: url
 :class-card: resource-card resource-interactive
@@ -1524,12 +1524,12 @@ Test your understanding of Phase 2 control concepts
 :text-align: center
 
 Free interactive Python tutorial for everyone. Learn Python directly in your browser with hands-on exercises.
-📊 *Estimated Time:* 20 min | 🎯 *Level:* Beginner
+ *Estimated Time:* 20 min |  *Level:* Beginner
 [View -->]
 
 ```
 
-```{grid-item-card} 📖 NumPy Fundamentals - Official Guide
+```{grid-item-card}  NumPy Fundamentals - Official Guide
 :link: https://numpy.org/doc/stable/user/absolute_beginners.html
 :link-type: url
 :class-card: resource-card resource-article
@@ -1537,12 +1537,12 @@ Free interactive Python tutorial for everyone. Learn Python directly in your bro
 :text-align: center
 
 Official NumPy documentation guide for absolute beginners. Covers arrays, indexing, and scientific computing.
-📊 *Estimated Time:* 45 min | 🎯 *Level:* Intermediate
+ *Estimated Time:* 45 min |  *Level:* Intermediate
 [Read -->]
 
 ```
 
-```{grid-item-card} 🎥 Control Systems Introduction - MIT OCW
+```{grid-item-card}  Control Systems Introduction - MIT OCW
 :link: https://ocw.mit.edu/courses/2-04a-systems-and-controls-spring-2013/
 :link-type: url
 :class-card: resource-card resource-video
@@ -1550,12 +1550,12 @@ Official NumPy documentation guide for absolute beginners. Covers arrays, indexi
 :text-align: center
 
 MIT OpenCourseWare course on linear systems, transfer functions, and Laplace transforms. Free lecture notes available.
-📊 *Estimated Time:* 60 min | 🎯 *Level:* Beginner
+ *Estimated Time:* 60 min |  *Level:* Beginner
 [Watch -->]
 
 ```
 
-```{grid-item-card} 🛠️ Python REPL - Browser Practice
+```{grid-item-card}  Python REPL - Browser Practice
 :link: https://www.pythonmorsels.com/repl/
 :link-type: url
 :class-card: resource-card resource-tool
@@ -1563,7 +1563,7 @@ MIT OpenCourseWare course on linear systems, transfer functions, and Laplace tra
 :text-align: center
 
 Free in-browser Python REPL with no sign-up required. Practice Python immediately with instant code execution.
-📊 *Estimated Time:* 15 min | 🎯 *Level:* Hands-on
+ *Estimated Time:* 15 min |  *Level:* Hands-on
 [Try It -->]
 
 ```

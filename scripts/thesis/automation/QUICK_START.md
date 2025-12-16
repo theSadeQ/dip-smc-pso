@@ -1,11 +1,11 @@
 # Thesis Validation - Quick Action Guide
 
-**Your automated validation is complete!** ✅
+**Your automated validation is complete!** 
 **Action required**: 50 minutes of manual review
 
 ---
 
-## 🚀 WHAT TO DO NOW (Besides Expert Proof Review)
+##  WHAT TO DO NOW (Besides Expert Proof Review)
 
 ### TODAY: Core Validation (50 min)
 
@@ -15,10 +15,10 @@
 .artifacts/thesis/reports/statistics_validation.md
 
 # Verify in Chapter 8:
-□ Bonferroni correction applied (α/15 = 0.00333)
-□ Normality tests mentioned (Shapiro-Wilk)
-□ All p-values < corrected alpha
-□ Effect sizes ≥ 0.5
+ Bonferroni correction applied (α/15 = 0.00333)
+ Normality tests mentioned (Shapiro-Wilk)
+ All p-values < corrected alpha
+ Effect sizes ≥ 0.5
 ```
 
 **Priority 2: Cross-References** (5 min)
@@ -86,26 +86,26 @@ python assess_completeness.py
 
 ---
 
-## 🚫 WHAT NOT TO DO (Skip These)
+##  WHAT NOT TO DO (Skip These)
 
-**❌ Expert Proof Review** (4-6 hours)
-- Screening shows all 6 proofs have complete structure ✅
+** Expert Proof Review** (4-6 hours)
+- Screening shows all 6 proofs have complete structure 
 - Deep validation = thesis committee's job
 - **Action**: DEFER TO COMMITTEE (they'll validate anyway)
 
-**❌ Equation Verification**
+** Equation Verification**
 - 0 equations found (your thesis uses different format)
 - This is expected behavior
 - **Action**: None needed
 
-**❌ Fix All 63 Reference Flags**
+** Fix All 63 Reference Flags**
 - Most are false positives
 - Just spot-check 5-10
 - **Action**: 5 min spot-check, not 2 hours of fixes
 
 ---
 
-## 📅 RECOMMENDED TIMELINE
+##  RECOMMENDED TIMELINE
 
 **Day 1** (Today - 50 min):
 - [ ] Statistics validation (30 min) - **START HERE**
@@ -126,42 +126,42 @@ python assess_completeness.py
 python run_all_validations.py --phase 1
 ```
 
-**Result**: ✅ Thesis ready for committee submission!
+**Result**:  Thesis ready for committee submission!
 
 ---
 
-## 🎯 SUCCESS CRITERIA
+##  SUCCESS CRITERIA
 
 **Minimum** (After 50 min):
-- ✅ Statistical methodology verified
-- ✅ Cross-references spot-checked
-- ✅ Notation inconsistencies noted
+-  Statistical methodology verified
+-  Cross-references spot-checked
+-  Notation inconsistencies noted
 
 **Recommended** (After +1 hour):
-- ✅ All above PLUS code-theory alignment verified
+-  All above PLUS code-theory alignment verified
 
 **Optional** (After +1.5 hours + $10-15):
-- ✅ All above PLUS claims extracted + completeness verified
+-  All above PLUS claims extracted + completeness verified
 
 ---
 
-## 📍 WHERE ARE THE REPORTS?
+##  WHERE ARE THE REPORTS?
 
 ```
 scripts/thesis/automation/
-├─ .artifacts/thesis/reports/     ← ALL REPORTS HERE
-│  ├─ README.md                   ← Read this for details
-│  ├─ references_validation.md    ← Priority 1 (5 min)
-│  ├─ statistics_validation.md    ← Priority 2 (30 min) **START HERE**
-│  ├─ notation_consistency.md     ← Priority 3 (15 min)
-│  └─ code_theory_alignment.md    ← Priority 4 (1 hour, optional)
-├─ VALIDATION_RESULTS_2025-11-05.md  ← Full test results
-└─ README.md                          ← Complete user guide
+ .artifacts/thesis/reports/     ← ALL REPORTS HERE
+   README.md                   ← Read this for details
+   references_validation.md    ← Priority 1 (5 min)
+   statistics_validation.md    ← Priority 2 (30 min) **START HERE**
+   notation_consistency.md     ← Priority 3 (15 min)
+   code_theory_alignment.md    ← Priority 4 (1 hour, optional)
+ VALIDATION_RESULTS_2025-11-05.md  ← Full test results
+ README.md                          ← Complete user guide
 ```
 
 ---
 
-## 💡 QUICK COMMANDS
+##  QUICK COMMANDS
 
 **View Reports**:
 ```bash
@@ -187,7 +187,7 @@ python assess_completeness.py
 
 ---
 
-## 🆘 NEED HELP?
+##  NEED HELP?
 
 **Confused about a report?**
 → Read: `.artifacts/thesis/reports/README.md`
@@ -203,7 +203,7 @@ python assess_completeness.py
 
 ---
 
-## ✅ BOTTOM LINE
+##  BOTTOM LINE
 
 **What You Need to Do**:
 1. **30 min**: Statistics validation (Priority 2) - **DO THIS FIRST**
@@ -212,14 +212,14 @@ python assess_completeness.py
 4. **Total**: 50 minutes
 
 **What You Can Skip**:
-- ❌ Expert proof review (4-6 hours) - Committee's job
-- ❌ API enhancements ($10-15) - Optional extras
-- ❌ Equation verification - Not applicable to your thesis
+-  Expert proof review (4-6 hours) - Committee's job
+-  API enhancements ($10-15) - Optional extras
+-  Equation verification - Not applicable to your thesis
 
-**Result**: Thesis validated and ready for committee submission! 🎉
+**Result**: Thesis validated and ready for committee submission! 
 
 ---
 
 **Start Here**: `.artifacts/thesis/reports/statistics_validation.md` (30 min)
 **Created**: November 5, 2025
-**Status**: ✅ VALIDATION COMPLETE, REVIEW PENDING
+**Status**:  VALIDATION COMPLETE, REVIEW PENDING

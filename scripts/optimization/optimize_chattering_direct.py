@@ -42,7 +42,7 @@ logger = logging.getLogger(__name__)
 def simulate_and_evaluate(gains: np.ndarray, controller_type: str, config,
                          dynamics, dt: float = 0.01, t_final: float = 15.0) -> Dict[str, float]:
     """
-    Simulate controller and compute comprehensive metrics.
+    Simulate controller and compute complete metrics.
 
     Returns metrics dictionary with:
     - tracking_error_rms: RMS tracking error for pendulum angles

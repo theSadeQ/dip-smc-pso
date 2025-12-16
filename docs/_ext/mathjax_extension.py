@@ -1,40 +1,40 @@
 """
-╔════════════════════════════════════════════════════════════════════════════╗
-║ Sphinx Extension: Conditional MathJax Loading (MyST Override)             ║
-╠════════════════════════════════════════════════════════════════════════════╣
-║ PURPOSE: Override MyST's global MathJax injection with conditional loading║
-║                                                                            ║
-║ THE PROBLEM:                                                               ║
-║ - MyST Parser with dollarmath auto-injects MathJax on ALL pages           ║
-║ - myst_update_mathjax=False doesn't prevent injection, only config update ║
-║ - Homepage loads 257 KB MathJax despite having zero math content          ║
-║                                                                            ║
-║ THE SOLUTION:                                                              ║
-║ - STEP 1: Remove MyST's MathJax from context.script_files                 ║
-║ - STEP 2: Check if page has math nodes + not in EXCLUDE_PAGES             ║
-║ - STEP 3: Conditionally re-inject MathJax only where needed               ║
-║                                                                            ║
-║ PERFORMANCE IMPACT:                                                        ║
-║ - Homepage: -257 KB transfer, -2.0s LCP (4.3s → 2.3s, 47% improvement)   ║
-║ - Non-math pages: 0 KB, 0ms overhead                                      ║
-║ - Math pages: 257 KB (deferred, non-blocking)                             ║
-║                                                                            ║
-║ CRITICAL SAFETY NOTE (2025-10-19):                                        ║
-║ - context['script_files'] can contain None entries from Sphinx/MyST       ║
-║ - ALWAYS check `script is not None` before .lower() or string methods     ║
-║ - Without guard: AttributeError crashes entire build (806 pages)          ║
-║ - See Line 92: if script is not None and 'mathjax' not in script.lower()  ║
-║                                                                            ║
-║ CONFIGURATION:                                                             ║
-║ 1. conf.py extensions: [..., 'mathjax_extension']  (load AFTER myst)      ║
-║ 2. conf.py: myst_update_mathjax = False                                   ║
-║ 3. conf.py: Comment out 'sphinx.ext.mathjax'                              ║
-║ 4. Define mathjax3_config for math rendering settings                     ║
-║                                                                            ║
-║ VERIFICATION:                                                              ║
-║ - Homepage: curl http://localhost:9000 | grep -c "mathjax" → 0            ║
-║ - Theory page: curl .../smc-theory.html | grep -c "mathjax" → 1+         ║
-╚════════════════════════════════════════════════════════════════════════════╝
+
+ Sphinx Extension: Conditional MathJax Loading (MyST Override)             
+
+ PURPOSE: Override MyST's global MathJax injection with conditional loading
+                                                                            
+ THE PROBLEM:                                                               
+ - MyST Parser with dollarmath auto-injects MathJax on ALL pages           
+ - myst_update_mathjax=False doesn't prevent injection, only config update 
+ - Homepage loads 257 KB MathJax despite having zero math content          
+                                                                            
+ THE SOLUTION:                                                              
+ - STEP 1: Remove MyST's MathJax from context.script_files                 
+ - STEP 2: Check if page has math nodes + not in EXCLUDE_PAGES             
+ - STEP 3: Conditionally re-inject MathJax only where needed               
+                                                                            
+ PERFORMANCE IMPACT:                                                        
+ - Homepage: -257 KB transfer, -2.0s LCP (4.3s → 2.3s, 47% improvement)   
+ - Non-math pages: 0 KB, 0ms overhead                                      
+ - Math pages: 257 KB (deferred, non-blocking)                             
+                                                                            
+ CRITICAL SAFETY NOTE (2025-10-19):                                        
+ - context['script_files'] can contain None entries from Sphinx/MyST       
+ - ALWAYS check `script is not None` before .lower() or string methods     
+ - Without guard: AttributeError crashes entire build (806 pages)          
+ - See Line 92: if script is not None and 'mathjax' not in script.lower()  
+                                                                            
+ CONFIGURATION:                                                             
+ 1. conf.py extensions: [..., 'mathjax_extension']  (load AFTER myst)      
+ 2. conf.py: myst_update_mathjax = False                                   
+ 3. conf.py: Comment out 'sphinx.ext.mathjax'                              
+ 4. Define mathjax3_config for math rendering settings                     
+                                                                            
+ VERIFICATION:                                                              
+ - Homepage: curl http://localhost:9000 | grep -c "mathjax" → 0            
+ - Theory page: curl .../smc-theory.html | grep -c "mathjax" → 1+         
+
 """
 
 from docutils import nodes

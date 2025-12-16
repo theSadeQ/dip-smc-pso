@@ -14,12 +14,12 @@ adds these fields to each ``LogRecord`` and a format string that
 prefixes messages with ``[commit|cfg_hash|seed=<seed>]``.  By
 including such metadata in logs, researchers can unambiguously trace
 results back to the precise code and configuration that generated
-them, satisfying reproducibility guidelines【985132039892507†L364-L377】.
+them, satisfying reproducibility guidelines985132039892507†L364-L377.
 
 The design of this module is inspired by best practices for
 reproducible computational research.  Sandve et al. (2013) emphasise
 that analyses involving randomness must record the underlying random
-seed so that results can be replicated exactly【985132039892507†L364-L377】.
+seed so that results can be replicated exactly985132039892507†L364-L377.
 Similarly, tagging logs with the commit SHA and configuration hash
 allows others to verify that they are running the same code base and
 parameters.  Logging provenance promotes transparency and fosters
@@ -131,7 +131,7 @@ config : dict
 seed : int
     The master random seed to record.  According to reproducibility
     guidelines, this value should be stored in logs so that
-    stochastic runs can be reproduced exactly【985132039892507†L364-L377】.
+    stochastic runs can be reproduced exactly985132039892507†L364-L377.
 level : int, optional
     Logging level for the root logger.  Defaults to ``logging.INFO``.
 

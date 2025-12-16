@@ -12,7 +12,7 @@
 5. [PSO Integration Patterns](#pso-integration-patterns)
 6. [Configuration Management](#configuration-management)
 7. [Controller Creation Workflows](#controller-creation-workflows)
-8. [Advanced Features](#advanced-features)
+8. [features](#advanced-features)
 9. [Best Practices](#best-practices)
 10. [Troubleshooting](#troubleshooting)
 
@@ -24,14 +24,14 @@
 - **Performance benchmarking** - Standardized interfaces
 - **Clean separation of concerns** - Modular design ### 1.2 Two-Tier Factory Architecture ```
 Factory System
-├── Enterprise Factory (src/controllers/factory.py)
-│ ├── Full registry-based system
-│ ├── Thread-safe operations
-│ ├── Backwards compatibility
-│ ├── Configuration validation
-│ └── Deprecation handling
-│
-└── Clean SMC Factory (src/controllers/factory/smc_factory.py) ├── Focused on 4 core SMC controllers ├── PSO-optimized interface ├── Minimal complexity └── Type-safe design
+ Enterprise Factory (src/controllers/factory.py)
+  Full registry-based system
+  Thread-safe operations
+  Backwards compatibility
+  Configuration validation
+  Deprecation handling
+
+ Clean SMC Factory (src/controllers/factory/smc_factory.py)  Focused on 4 core SMC controllers  PSO-optimized interface  Minimal complexity  Type-safe design
 ``` ### 1.3 Supported Controllers | Controller Type | Gain Count | Primary Use Case |
 |----------------|------------|------------------|
 | **Classical SMC** | 6 | Boundary layer control |
@@ -229,7 +229,7 @@ from src.controllers.smc.algorithms.hybrid.config import HybridMode classical_co
 
 ---
 
-## 8. Advanced Features ### 8.1 Dynamic Controller Discovery ```python
+## 8. features ### 8.1 Dynamic Controller Discovery ```python
 # List available controllers
 available = list_available_controllers()
 # ['classical_smc', 'sta_smc', 'adaptive_smc', 'hybrid_adaptive_sta_smc'] # Get controller metadata
@@ -307,8 +307,8 @@ controller = create_controller('classic_smc', ...) # Alias (auto-normalized)
 ``` **Issue: "Super-Twisting stability requires K1 > K2 > 0"** ```python
 # example-metadata:
 # runnable: false # Solution: Ensure K1 > K2 in gain array
-gains = [25.0, 15.0, ...] # K1=25 > K2=15 ✓
-gains = [15.0, 25.0, ...] # K1=15 < K2=25 ✗
+gains = [25.0, 15.0, ...] # K1=25 > K2=15 
+gains = [15.0, 25.0, ...] # K1=15 < K2=25 
 ``` **Issue: "Adaptive SMC requires exactly 5 gains"** ```python
 # Solution: Provide correct number of gains
 
@@ -347,7 +347,7 @@ else: # Use None if dynamics not needed dynamics_model = None
 
 ---
 
-## Conclusion The SMC Controller Factory System provides a robust, flexible, and type-safe mechanism for instantiating controllers with PSO integration. Key takeaways: - **Enterprise Factory**: Comprehensive, backwards-compatible, thread-safe
+## Conclusion The SMC Controller Factory System provides a robust, flexible, and type-safe mechanism for instantiating controllers with PSO integration. Key takeaways: - **Enterprise Factory**: complete, backwards-compatible, thread-safe
 
 - **Clean SMC Factory**: Streamlined, PSO-optimized, research-focused
 - **PSO Integration**: Simplified wrappers, automatic validation, standardized interfaces

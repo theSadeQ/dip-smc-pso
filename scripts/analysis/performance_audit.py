@@ -80,7 +80,7 @@ class PerformanceAuditor:
             # Wait for page to be fully interactive
             await page.wait_for_load_state("networkidle", timeout=10000)
 
-            # Get comprehensive performance metrics
+            # Get complete performance metrics
             metrics = await page.evaluate("""
                 () => {
                     const timing = performance.timing;

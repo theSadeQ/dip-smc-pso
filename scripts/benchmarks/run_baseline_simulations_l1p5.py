@@ -2,7 +2,7 @@
 """
 Phase 1.5: Baseline Performance Benchmark Script
 
-Executes comprehensive baseline simulations for 4 core controllers across 3 scenarios
+Executes complete baseline simulations for 4 core controllers across 3 scenarios
 with Monte Carlo analysis (30 runs per combination = 360 total simulations).
 
 Controllers tested:

@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-This guide provides a systematic workflow for optimizing Adaptive Sliding Mode Controller parameters using PSO. The Adaptive SMC extends classical SMC with online gain adaptation, eliminating the need for prior knowledge of disturbance bounds. PSO optimization tunes both the sliding surface and the adaptation dynamics for robust performance.
+This guide provides a systematic workflow for optimizing Adaptive Sliding Mode Controller parameters using PSO. The Adaptive SMC extends classical SMC with online gain adaptation, eliminating the need for prior knowledge of disturbance bounds. PSO optimization tunes both the sliding surface and the adaptation dynamics for reliable performance.
 
 **Target Audience:**
 - Researchers working with adaptive control systems
@@ -105,7 +105,7 @@ python simulate.py --ctrl adaptive_smc --run-pso --save gains_adaptive.json
 
 **Expected Output:**
 ```
-✓ PSO Execution Started
+ PSO Execution Started
   - Swarm Size: 40 particles
   - Target Iterations: 200
   - Controller Gains: 5 parameters to optimize
@@ -116,7 +116,7 @@ python simulate.py --ctrl adaptive_smc --run-pso --save gains_adaptive.json
     * λ2: [0.2, 5.0]
     * γ:  [0.05, 3.0]
 
-✓ Optimization Complete
+ Optimization Complete
   - Best Cost: 0.000000
   - Convergence: Achieved
 ```
@@ -663,6 +663,6 @@ python scripts/research/test_disturbance_rejection.py --controller adaptive_smc 
 **Replaces:** pso-adaptive-smc.md stub (2025-10-07, 36 lines)
 **Changelog:**
 - 2025-11-10: Complete rewrite from stub to production guide (36 → 700+ lines)
-- Added 7 comprehensive sections covering adaptive SMC PSO optimization
+- Added 7 complete sections covering adaptive SMC PSO optimization
 - Integrated adaptation dynamics validation, MT-8 case study, troubleshooting
 - Included hierarchical tuning, robust PSO, and production deployment guidelines

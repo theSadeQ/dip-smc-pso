@@ -94,7 +94,7 @@ def run_single_trial(
     dt: float = 0.01,
     window_duration: float = 1.0
 ) -> Dict:
-    """Run a single simulation trial with comprehensive metrics."""
+    """Run a single simulation trial with complete metrics."""
     steps = int(duration / dt)
     window_size = int(window_duration / dt)
 

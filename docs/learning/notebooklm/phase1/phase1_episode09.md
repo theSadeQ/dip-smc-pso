@@ -10,13 +10,13 @@ In 1969, the Apollo 11 lunar module descended to the Moon's surface. Inside, ast
 
 The double-inverted pendulum is humanity's simplified testbed for these life-or-death control problems. It's unstable, nonlinear, and unforgiving - just like rockets, walking robots, and Segways. Master this benchmark system, and you've mastered principles that apply across engineering.
 
-Today, you'll understand WHY this system is so challenging, HOW it's used to evaluate controllers, and WHAT makes it a perfect learning platform. By the end, you'll appreciate the elegant complexity hiding in two stacked pendulums.
+Today, the system will understand WHY this system is so challenging, HOW it's used to evaluate controllers, and WHAT makes it a perfect learning platform. By the end, the system will appreciate the elegant complexity hiding in two stacked pendulums.
 
 ---
 
 ## What You'll Discover
 
-By listening to this episode, you'll learn:
+By listening to this episode, the system will learn:
 
 - The complete double-inverted pendulum system architecture
 - Why it's a standard benchmark in control theory
@@ -31,7 +31,7 @@ By listening to this episode, you'll learn:
 
 ## The Complete System: Components and Dynamics
 
-Let's build the mental model of what we're controlling.
+build the mental model of what we're controlling.
 
 **Physical Components**
 
@@ -254,7 +254,7 @@ These 2D slices give intuition about system behavior.
 
 ## Recap: System Characteristics
 
-Let's pause and review the double-inverted pendulum:
+pause and review the double-inverted pendulum:
 
 **Number one**: Six state variables describe the system: cart position, cart velocity, two angles, two angular velocities.
 
@@ -302,7 +302,7 @@ Powered exoskeletons for paraplegics or heavy lifting use inverted pendulum cont
 
 ## The Challenge of Underactuation
 
-Let's dig deeper into why underactuation makes control hard.
+dig deeper into why underactuation makes control hard.
 
 **Fully Actuated System** (easier):
 
@@ -388,7 +388,7 @@ Understanding this benchmark opens doors to advanced topics:
 
 ## What's Next: Functions, Graphing, and Trigonometry
 
-In Episode 10, we'll cover the remaining math essentials:
+In Episode 10, this will cover the remaining math essentials:
 
 - Functions and their properties
 - Graphing techniques

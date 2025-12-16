@@ -26,11 +26,11 @@
 4. **Prevent oscillation** near threshold boundaries using hysteresis
 5. **Configuration integration** for reproducible deployment ### Acceptance Criteria | Criterion | Target | Achieved | Status |
 |-----------|--------|----------|--------|
-| Threshold Range | [0.135, 0.150] | 0.150 | ✅ Met |
-| False Positive Rate | <1% | 15.9% | ⚠️ Constraint-limited |
-| True Positive Rate | >99% | ~100% | ✅ Met |
-| Statistical Basis | ≥100 samples | 1,167 samples | ✅ Met |
-| Hysteresis Implementation | Required | Complete | ✅ Met | **Overall Status**: 4/5 criteria met. The false positive rate target cannot be achieved within the acceptable threshold range given the current measurement noise characteristics.
+| Threshold Range | [0.135, 0.150] | 0.150 |  Met |
+| False Positive Rate | <1% | 15.9% |  Constraint-limited |
+| True Positive Rate | >99% | ~100% |  Met |
+| Statistical Basis | ≥100 samples | 1,167 samples |  Met |
+| Hysteresis Implementation | Required | Complete |  Met | **Overall Status**: 4/5 criteria met. The false positive rate target cannot be achieved within the acceptable threshold range given the current measurement noise characteristics.
 
 ---
 
@@ -103,8 +103,8 @@ $$\text{Effective FPR} \approx (0.159)^{15} \approx 10^{-12} \quad \text{(neglig
 ---
 
 ## Hysteresis Design Theory ### Motivation **Problem**: Without hysteresis, residuals hovering near the threshold boundary cause rapid oscillation between OK and FAULT states (chattering). **Solution**: Implement a hysteresis state machine with separate upper and lower thresholds. ### State Machine Design **States**: {OK, FAULT} **Transitions**: ``` residual > upper_threshold
-OK ────────────────────────────────────> FAULT (for persistence_counter steps) FAULT residual < lower_threshold (persistent)
-(future) <────────────────────────────────
+OK > FAULT (for persistence_counter steps) FAULT residual < lower_threshold (persistent)
+(future) <
 ``` **Current Implementation**: Fault state is persistent (no automatic recovery). ### Mathematical Formulation **Hysteresis Parameters**: $$\text{upper\_threshold} = \tau \times 1.1 = 0.150 \times 1.1 = 0.165$$
 
 $$\text{lower\_threshold} = \tau \times 0.9 = 0.150 \times 0.9 = 0.135$$ **Deadband Calculation**: $$\text{deadband\_percent} = \frac{\text{upper} - \text{lower}}{(\text{upper} + \text{lower})/2} \times 100\% = 10\%$$ **State Transition Logic**: ```python
@@ -146,17 +146,17 @@ fault_detection: enabled: true residual_threshold: 0.150 # Statistically calibra
 
 ---
 
-## Validation Results ### Acceptance Criteria Assessment #### ✅ Threshold Range: [0.135, 0.150] **Result**: Threshold = 0.150 (within range) **Validation**: Upper bound of acceptable range selected to maximize performance. #### ⚠️ False Positive Rate: <1% **Target**: <1%
+## Validation Results ### Acceptance Criteria Assessment ####  Threshold Range: [0.135, 0.150] **Result**: Threshold = 0.150 (within range) **Validation**: Upper bound of acceptable range selected to maximize performance. ####  False Positive Rate: <1% **Target**: <1%
 **Achieved**: 15.9%
 **Status**: Not met (constraint-limited) **Analysis**:
 - Optimal threshold for <1% FPR is 0.219 (P99 percentile)
 - Maximum allowable threshold is 0.150 (system constraint)
 - **6x improvement** achieved (79.8% → 15.9%)
-- Further improvement requires noise reduction or relaxed constraints #### ✅ True Positive Rate: >99% **Result**: ~100% (maintained) **Validation**: Threshold of 0.150 is well above normal operation residuals but below typical fault magnitudes (>0.5). #### ✅ Statistical Basis: ≥100 samples **Required**: ≥100 samples
+- Further improvement requires noise reduction or relaxed constraints ####  True Positive Rate: >99% **Result**: ~100% (maintained) **Validation**: Threshold of 0.150 is well above normal operation residuals but below typical fault magnitudes (>0.5). ####  Statistical Basis: ≥100 samples **Required**: ≥100 samples
 **Achieved**: 1,167 samples **Statistical Significance**:
 - Large sample size enables robust percentile estimation
 - Bootstrap confidence intervals validate threshold stability
-- Multiple simulation iterations ensure independence #### ✅ Hysteresis Implementation **Status**: Complete **Features**:
+- Multiple simulation iterations ensure independence ####  Hysteresis Implementation **Status**: Complete **Features**:
 - 10% deadband (upper=0.165, lower=0.135)
 - Prevents oscillation near threshold boundary
 - Backward compatible (disabled by default) ### Performance Metrics **Comparison Table**: | Metric | Before (0.100) | After (0.150) | Improvement |
@@ -198,8 +198,8 @@ fault_detection: cusum_enabled: true cusum_threshold: 5.0 # Cumulative sum limit
 - Trade-off: Slower fault detection (0.15-0.20s delay) **Recommendation**: Use for non-time-critical fault types where false alarm avoidance is paramount. ### 5. Fault Recovery Mechanism **Approach**: Implement automatic fault recovery using `hysteresis_lower` threshold. **State Machine Extension**:
 ```
 
-OK ──(residual > upper)──> FAULT
-FAULT ──(residual < lower)──> OK
+OK (residual > upper)> FAULT
+FAULT (residual < lower)> OK
 ``` **Use Case**: Transient faults that self-clear (e.g., sensor glitches, brief disturbances). **Configuration**:
 ```yaml
 

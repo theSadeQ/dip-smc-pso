@@ -32,36 +32,36 @@
 ## Architecture ### Module Structure ```
 
 src/controllers/factory.py
-├── Type Definitions
-│ ├── StateVector, ControlOutput, GainsArray, ConfigDict
-│ ├── ControllerProtocol (Protocol class)
-│ └── SMCType, SMCConfig (Backward compatibility)
-│
-├── Controller Registry
-│ ├── CONTROLLER_REGISTRY: Dict[str, ControllerMetadata]
-│ └── CONTROLLER_ALIASES: Dict[str, str]
-│
-├── Core Factory Functions
-│ ├── create_controller(controller_type, config, gains)
-│ ├── list_available_controllers()
-│ ├── list_all_controllers()
-│ └── get_default_gains(controller_type)
-│
-├── Helper Functions (Internal)
-│ ├── _canonicalize_controller_type(name)
-│ ├── _get_controller_info(controller_type)
-│ ├── _resolve_controller_gains(gains, config, type, info)
-│ ├── _validate_controller_gains(gains, info, type)
-│ ├── _create_dynamics_model(config)
-│ ├── _extract_controller_parameters(config, type, info)
-│ └── _validate_mpc_parameters(config_params, controller_params)
-│
-├── PSO Integration Classes
-│ ├── PSOControllerWrapper: PSO-compatible controller interface
-│ ├── SMCFactory: Factory class for SMCType enum
-│ └── SMCGainSpec: Gain specification with bounds
-│
-└── PSO Factory Functions ├── create_smc_for_pso(smc_type, gains, plant_config, **kwargs) ├── create_pso_controller_factory(smc_type, plant_config, **kwargs) ├── get_expected_gain_count(smc_type) ├── get_gain_bounds_for_pso(smc_type) └── validate_smc_gains(smc_type, gains)
+ Type Definitions
+  StateVector, ControlOutput, GainsArray, ConfigDict
+  ControllerProtocol (Protocol class)
+  SMCType, SMCConfig (Backward compatibility)
+
+ Controller Registry
+  CONTROLLER_REGISTRY: Dict[str, ControllerMetadata]
+  CONTROLLER_ALIASES: Dict[str, str]
+
+ Core Factory Functions
+  create_controller(controller_type, config, gains)
+  list_available_controllers()
+  list_all_controllers()
+  get_default_gains(controller_type)
+
+ Helper Functions (Internal)
+  _canonicalize_controller_type(name)
+  _get_controller_info(controller_type)
+  _resolve_controller_gains(gains, config, type, info)
+  _validate_controller_gains(gains, info, type)
+  _create_dynamics_model(config)
+  _extract_controller_parameters(config, type, info)
+  _validate_mpc_parameters(config_params, controller_params)
+
+ PSO Integration Classes
+  PSOControllerWrapper: PSO-compatible controller interface
+  SMCFactory: Factory class for SMCType enum
+  SMCGainSpec: Gain specification with bounds
+
+ PSO Factory Functions  create_smc_for_pso(smc_type, gains, plant_config, **kwargs)  create_pso_controller_factory(smc_type, plant_config, **kwargs)  get_expected_gain_count(smc_type)  get_gain_bounds_for_pso(smc_type)  validate_smc_gains(smc_type, gains)
 ``` ### Thread Safety The factory uses a module-level reentrant lock (`_factory_lock`) with a 10-second timeout to ensure thread-safe operations: ```python
 # example-metadata:
 # runnable: false # Thread-safe factory operations with timeout protection
@@ -81,9 +81,9 @@ def create_controller( controller_type: str, config: Optional[Any] = None, gains
 ) -> Any
 ``` #### Parameters | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `controller_type` | `str` | ✅ Yes | Controller type identifier (case-insensitive, supports aliases) |
-| `config` | `Any` | ❌ No | Configuration object or dict (uses registry defaults if None) |
-| `gains` | `list` or `np.ndarray` | ❌ No | Gain vector (resolved from config or defaults if None) | #### Supported Controller Types | Type Identifier | Description | Gain Count | Required Dependencies |
+| `controller_type` | `str` |  Yes | Controller type identifier (case-insensitive, supports aliases) |
+| `config` | `Any` |  No | Configuration object or dict (uses registry defaults if None) |
+| `gains` | `list` or `np.ndarray` |  No | Gain vector (resolved from config or defaults if None) | #### Supported Controller Types | Type Identifier | Description | Gain Count | Required Dependencies |
 |----------------|-------------|------------|----------------------|
 | `'classical_smc'` | Classical SMC with boundary layer | 6 | None (always available) |
 | `'sta_smc'` | Super-twisting algorithm (2nd-order SMC) | 6 | None (always available) |
@@ -152,7 +152,7 @@ print(f"Cost improvement: {((baseline_cost - optimized_cost) / baseline_cost * 1
 from src.controllers.factory import create_controller, list_available_controllers
 from src.config import load_config config = load_config("config.yaml") # Create all available controller types
 controllers = {}
-for controller_type in list_available_controllers(): try: controllers[controller_type] = create_controller(controller_type, config) print(f"✓ Created {controller_type}") except Exception as e: print(f"✗ Failed to create {controller_type}: {e}") # Run comparative simulation
+for controller_type in list_available_controllers(): try: controllers[controller_type] = create_controller(controller_type, config) print(f" Created {controller_type}") except Exception as e: print(f" Failed to create {controller_type}: {e}") # Run comparative simulation
 for name, controller in controllers.items(): cost = simulate_and_evaluate(controller) print(f"{name}: cost={cost:.3f}")
 ``` **Example 4: Custom Configuration Override** ```python
 from src.controllers.factory import create_controller
@@ -207,8 +207,8 @@ print(df.sort_values('cost'))
 ['adaptive_smc', 'classical_smc', 'hybrid_adaptive_sta_smc', 'mpc_controller', 'sta_smc']
 ``` #### Difference from `list_available_controllers()` | Function | Includes Unavailable Controllers | Use Case |
 |----------|----------------------------------|----------|
-| `list_available_controllers()` | ❌ No | Safe iteration for controller creation |
-| `list_all_controllers()` | ✅ Yes | Documentation, dependency checking |
+| `list_available_controllers()` |  No | Safe iteration for controller creation |
+| `list_all_controllers()` |  Yes | Documentation, dependency checking |
 
 ---
 
@@ -218,7 +218,7 @@ print(df.sort_values('cost'))
 ``` #### Parameters | Parameter | Type | Required | Description |
 
 |-----------|------|----------|-------------|
-| `controller_type` | `str` | ✅ Yes | Controller type (canonical name, not alias) | #### Return Value Returns a **copy** of the default gain vector from the registry. Modifications to the returned list do not affect the registry. | Controller Type | Default Gains | Physical Interpretation |
+| `controller_type` | `str` |  Yes | Controller type (canonical name, not alias) | #### Return Value Returns a **copy** of the default gain vector from the registry. Modifications to the returned list do not affect the registry. | Controller Type | Default Gains | Physical Interpretation |
 |----------------|---------------|-------------------------|
 | `'classical_smc'` | `[20.0, 15.0, 12.0, 8.0, 35.0, 5.0]` | [k₁, k₂, λ₁, λ₂, K, kd] |
 | `'sta_smc'` | `[25.0, 15.0, 20.0, 12.0, 8.0, 6.0]` | [K₁, K₂, k₁, k₂, λ₁, λ₂] |
@@ -303,33 +303,33 @@ for controller_type, info in CONTROLLER_REGISTRY.items(): if info['class'] is no
 ---
 
 ## PSO Integration The factory system provides deep integration with Particle Swarm Optimization (PSO) for automatic gain tuning. ### PSO Integration Architecture ```
-┌─────────────────────────────────────────────────────────────────┐
-│ PSO Optimizer │
-│ (src/optimization/algorithms/pso_optimizer.py) │
-└───────────────┬─────────────────────────────────────────────────┘ │ │ optimizes ▼
-┌─────────────────────────────────────────────────────────────────┐
-│ PSO Factory Bridge │
-│ (src/optimization/integration/pso_factory_bridge.py) │
-│ ┌────────────────────────────────────────────────────┐ │
-│ │ EnhancedPSOFactory │ │
-│ │ - create_enhanced_controller_factory() │ │
-│ │ - create_enhanced_fitness_function() │ │
-│ │ - optimize_controller() │ │
-│ └────────────────────────────────────────────────────┘ │
-└───────────────┬─────────────────────────────────────────────────┘ │ │ uses ▼
-┌─────────────────────────────────────────────────────────────────┐
-│ Controller Factory │
-│ (src/controllers/factory.py) │
-│ ┌────────────────────────────────────────────────────┐ │
-│ │ PSO-Compatible Functions │ │
-│ │ - create_smc_for_pso() │ │
-│ │ - create_pso_controller_factory() │ │
-│ │ - PSOControllerWrapper │ │
-│ │ - get_expected_gain_count() │ │
-│ │ - get_gain_bounds_for_pso() │ │
-│ │ - validate_smc_gains() │ │
-│ └────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
+
+ PSO Optimizer 
+ (src/optimization/algorithms/pso_optimizer.py) 
+   optimizes 
+
+ PSO Factory Bridge 
+ (src/optimization/integration/pso_factory_bridge.py) 
+  
+  EnhancedPSOFactory  
+  - create_enhanced_controller_factory()  
+  - create_enhanced_fitness_function()  
+  - optimize_controller()  
+  
+   uses 
+
+ Controller Factory 
+ (src/controllers/factory.py) 
+  
+  PSO-Compatible Functions  
+  - create_smc_for_pso()  
+  - create_pso_controller_factory()  
+  - PSOControllerWrapper  
+  - get_expected_gain_count()  
+  - get_gain_bounds_for_pso()  
+  - validate_smc_gains()  
+  
+
 ``` ### Key PSO Integration Components #### 1. `PSOControllerWrapper` Wraps controller instances with PSO-compatible interface: ```python
 # example-metadata:
 
@@ -462,7 +462,7 @@ controller = ClassicalSMC( gains=[25.0, 18.0, 14.0, 10.0, 42.0, 6.0], max_force=
 ```yaml
 # config.yaml
 
-controllers: sta_smc: gains: [30.0, 18.0, 22.0, 14.0, 9.0, 7.0] # K1=30 > K2=18 ✓ max_force: 150.0 dt: 0.001 boundary_layer: 0.3 switch_method: 'tanh'
+controllers: sta_smc: gains: [30.0, 18.0, 22.0, 14.0, 9.0, 7.0] # K1=30 > K2=18  max_force: 150.0 dt: 0.001 boundary_layer: 0.3 switch_method: 'tanh'
 ``` ```python
 # example-metadata:
 # runnable: false # Maps to SuperTwistingSMC initialization:
@@ -566,7 +566,7 @@ if controller_type == 'adaptive_smc' and len(gains) != 5: raise ValueError("Adap
 ``` ### Validation Examples **Example 1: Valid Classical SMC Gains** ```python
 from src.controllers.factory import create_controller # Valid: 6 positive finite gains
 gains = [20.0, 15.0, 12.0, 8.0, 35.0, 5.0]
-controller = create_controller('classical_smc', gains=gains) # ✓ Success
+controller = create_controller('classical_smc', gains=gains) #  Success
 ``` **Example 2: Invalid Gain Count** ```python
 
 from src.controllers.factory import create_controller # Invalid: Wrong number of gains
@@ -575,14 +575,14 @@ try: controller = create_controller('classical_smc', gains=gains)
 except ValueError as e: print(e) # Output: "Controller 'Classical sliding mode controller with boundary layer' # requires 6 gains, got 3"
 ``` **Example 3: Invalid STA Constraint** ```python
 from src.controllers.factory import create_controller # Invalid: K1 ≤ K2 violates super-twisting stability
-gains = [15.0, 20.0, 12.0, 8.0, 6.0, 4.0] # K1=15 ≤ K2=20 ✗
+gains = [15.0, 20.0, 12.0, 8.0, 6.0, 4.0] # K1=15 ≤ K2=20 
 try: controller = create_controller('sta_smc', gains=gains)
 except ValueError as e: print(e) # Output: "Super-Twisting stability requires K1 > K2 > 0"
 ``` **Example 4: Automatic Correction** The factory attempts automatic correction for invalid default gains: ```python
 # Factory detects invalid default gains and auto-corrects
 
 controller = create_controller('sta_smc') # Uses defaults # If defaults violate K1 > K2, factory automatically uses:
-# [25.0, 15.0, 20.0, 12.0, 8.0, 6.0] # K1=25 > K2=15 ✓
+# [25.0, 15.0, 20.0, 12.0, 8.0, 6.0] # K1=25 > K2=15 
 
 ```
 
@@ -590,22 +590,22 @@ controller = create_controller('sta_smc') # Uses defaults # If defaults violate 
 
 ## Error Handling The factory implements error handling with graceful degradation. ### Exception Hierarchy ```
 Exception
-├── ValueError
-│ ├── Invalid controller type
-│ ├── Invalid gain count
-│ ├── Invalid gain values (non-finite, non-positive)
-│ ├── Controller-specific constraints (e.g., K1 ≤ K2)
-│ └── Empty or non-string controller type
-│
-├── ImportError
-│ └── Missing optional dependencies (e.g., MPC without cvxpy)
-│
-├── FactoryConfigurationError (custom)
-│ ├── Configuration building failed
-│ ├── Missing required parameters
-│ └── Incompatible configuration structure
-│
-└── ConfigValueError (custom, subclass of ValueError) ├── Invalid MPC horizon ├── Invalid MPC weights └── Invalid physical parameters
+ ValueError
+  Invalid controller type
+  Invalid gain count
+  Invalid gain values (non-finite, non-positive)
+  Controller-specific constraints (e.g., K1 ≤ K2)
+  Empty or non-string controller type
+
+ ImportError
+  Missing optional dependencies (e.g., MPC without cvxpy)
+
+ FactoryConfigurationError (custom)
+  Configuration building failed
+  Missing required parameters
+  Incompatible configuration structure
+
+ ConfigValueError (custom, subclass of ValueError)  Invalid MPC horizon  Invalid MPC weights  Invalid physical parameters
 ``` ### Error Handling Patterns #### Pattern 1: Type Validation with Detailed Messages ```python
 
 def _canonicalize_controller_type(name: str) -> str: if not isinstance(name, str): raise ValueError(f"Controller type must be string, got {type(name)}") if not name.strip(): raise ValueError("Controller type cannot be empty") key = name.strip().lower().replace('-', '_').replace(' ', '_') return CONTROLLER_ALIASES.get(key, key)
@@ -641,7 +641,7 @@ import numpy as np def validate_pso_particle(gains, smc_type): """Validate PSO p
 ``` #### Best Practice 3: Configuration Validation ```python
 
 from src.controllers.factory import create_controller
-from src.config import load_config def validate_configuration_before_creation(config_path): """Validate configuration file before controller creation.""" try: config = load_config(config_path) except Exception as e: print(f"Failed to load config: {e}") return False # Check required sections exist if not hasattr(config, 'controllers'): print("Config missing 'controllers' section") return False # Validate each controller configuration for controller_type in ['classical_smc', 'sta_smc', 'adaptive_smc']: try: controller = create_controller(controller_type, config) print(f"✓ {controller_type} config valid") except Exception as e: print(f"✗ {controller_type} config invalid: {e}") return False return True
+from src.config import load_config def validate_configuration_before_creation(config_path): """Validate configuration file before controller creation.""" try: config = load_config(config_path) except Exception as e: print(f"Failed to load config: {e}") return False # Check required sections exist if not hasattr(config, 'controllers'): print("Config missing 'controllers' section") return False # Validate each controller configuration for controller_type in ['classical_smc', 'sta_smc', 'adaptive_smc']: try: controller = create_controller(controller_type, config) print(f" {controller_type} config valid") except Exception as e: print(f" {controller_type} config invalid: {e}") return False return True
 ```
 
 ---
@@ -681,7 +681,7 @@ def get_expected_gain_count(smc_type: SMCType) -> int: expected_counts = { SMCTy
 def get_gain_bounds_for_pso(smc_type: SMCType) -> Tuple[List[float], List[float]]: bounds_map = { # ... existing bounds ... SMCType.NEW_CONTROLLER: { 'lower': [1.0, 1.0, 0.5, 0.5], 'upper': [30.0, 30.0, 20.0, 20.0] } } return (bounds_map[smc_type]['lower'], bounds_map[smc_type]['upper'])
 ``` #### Step 7: Test New Controller ```python
 # test_new_controller.py from src.controllers.factory import create_controller, get_default_gains
-import numpy as np def test_new_controller_creation(): """Test new controller can be created.""" # Test with defaults controller = create_controller('new_controller') assert controller is not None assert controller.gains == [10.0, 8.0, 5.0, 3.0] # Test with custom gains custom_gains = [15.0, 12.0, 8.0, 5.0] controller = create_controller('new_controller', gains=custom_gains) assert controller.gains == custom_gains # Test compute_control state = np.array([0.0, 0.1, 0.05, 0.0, 0.0, 0.0]) result = controller.compute_control(state, 0.0, {}) assert 'u' in result assert np.isfinite(result['u']) if __name__ == '__main__': test_new_controller_creation() print("✓ New controller tests passed")
+import numpy as np def test_new_controller_creation(): """Test new controller can be created.""" # Test with defaults controller = create_controller('new_controller') assert controller is not None assert controller.gains == [10.0, 8.0, 5.0, 3.0] # Test with custom gains custom_gains = [15.0, 12.0, 8.0, 5.0] controller = create_controller('new_controller', gains=custom_gains) assert controller.gains == custom_gains # Test compute_control state = np.array([0.0, 0.1, 0.05, 0.0, 0.0, 0.0]) result = controller.compute_control(state, 0.0, {}) assert 'u' in result assert np.isfinite(result['u']) if __name__ == '__main__': test_new_controller_creation() print(" New controller tests passed")
 ``` ### Extension Checklist When adding a new controller type, ensure: - [ ] Controller class implements `compute_control()`, `reset()`, and `gains` property
 
 - [ ] Configuration class validates all parameters
@@ -724,7 +724,7 @@ Demonstrates creating multiple controller types for benchmarking.
 """ from src.controllers.factory import create_controller, list_available_controllers
 from src.config import load_config
 import numpy as np
-import pandas as pd def simulate_trajectory(controller, initial_state, duration=2.0, dt=0.01): """Simulate closed-loop trajectory.""" steps = int(duration / dt) state = initial_state.copy() trajectory = [] controls = [] for _ in range(steps): # Compute control result = controller.compute_control(state, 0.0, {}) if hasattr(result, 'u'): u = result.u else: u = result['u'] if isinstance(result, dict) else result # Simple dynamics (placeholder - use actual dynamics in practice) state_dot = np.random.randn(6) * 0.1 # Dummy dynamics state = state + state_dot * dt trajectory.append(state.copy()) controls.append(u) return np.array(trajectory), np.array(controls) def compute_performance_metrics(trajectory, controls): """Compute performance metrics.""" # ISE: Integral of squared error ise = np.sum(trajectory[:, :3]**2) # Control effort effort = np.sum(controls**2) # Settling time (simplified) threshold = 0.02 settled = np.all(np.abs(trajectory[:, :3]) < threshold, axis=1) settling_time = np.argmax(settled) * 0.01 if np.any(settled) else float('inf') return { 'ise': ise, 'effort': effort, 'settling_time': settling_time } def main(): # Load configuration config = load_config("config.yaml") # Initial condition initial_state = np.array([0.0, 0.1, 0.05, 0.0, 0.0, 0.0]) # Create all available controllers print("Creating controllers...") results = [] for controller_type in list_available_controllers(): try: print(f" Creating {controller_type}...") controller = create_controller(controller_type, config) # Simulate print(f" Simulating {controller_type}...") trajectory, controls = simulate_trajectory(controller, initial_state) # Compute metrics metrics = compute_performance_metrics(trajectory, controls) results.append({ 'controller': controller_type, 'ise': metrics['ise'], 'effort': metrics['effort'], 'settling_time': metrics['settling_time'], 'n_gains': len(controller.gains) if hasattr(controller, 'gains') else 0 }) print(f" ✓ {controller_type}: ISE={metrics['ise']:.3f}") except Exception as e: print(f" ✗ Failed to benchmark {controller_type}: {e}") # Display results print("\n" + "="*80) print("BENCHMARK RESULTS") print("="*80) df = pd.DataFrame(results) df_sorted = df.sort_values('ise') print(df_sorted.to_string(index=False)) # Identify best controller best = df_sorted.iloc[0] print(f"\n🏆 Best Controller: {best['controller']}") print(f" ISE: {best['ise']:.3f}") print(f" Control Effort: {best['effort']:.3f}") print(f" Settling Time: {best['settling_time']:.3f} s") if __name__ == '__main__': main()
+import pandas as pd def simulate_trajectory(controller, initial_state, duration=2.0, dt=0.01): """Simulate closed-loop trajectory.""" steps = int(duration / dt) state = initial_state.copy() trajectory = [] controls = [] for _ in range(steps): # Compute control result = controller.compute_control(state, 0.0, {}) if hasattr(result, 'u'): u = result.u else: u = result['u'] if isinstance(result, dict) else result # Simple dynamics (placeholder - use actual dynamics in practice) state_dot = np.random.randn(6) * 0.1 # Dummy dynamics state = state + state_dot * dt trajectory.append(state.copy()) controls.append(u) return np.array(trajectory), np.array(controls) def compute_performance_metrics(trajectory, controls): """Compute performance metrics.""" # ISE: Integral of squared error ise = np.sum(trajectory[:, :3]**2) # Control effort effort = np.sum(controls**2) # Settling time (simplified) threshold = 0.02 settled = np.all(np.abs(trajectory[:, :3]) < threshold, axis=1) settling_time = np.argmax(settled) * 0.01 if np.any(settled) else float('inf') return { 'ise': ise, 'effort': effort, 'settling_time': settling_time } def main(): # Load configuration config = load_config("config.yaml") # Initial condition initial_state = np.array([0.0, 0.1, 0.05, 0.0, 0.0, 0.0]) # Create all available controllers print("Creating controllers...") results = [] for controller_type in list_available_controllers(): try: print(f" Creating {controller_type}...") controller = create_controller(controller_type, config) # Simulate print(f" Simulating {controller_type}...") trajectory, controls = simulate_trajectory(controller, initial_state) # Compute metrics metrics = compute_performance_metrics(trajectory, controls) results.append({ 'controller': controller_type, 'ise': metrics['ise'], 'effort': metrics['effort'], 'settling_time': metrics['settling_time'], 'n_gains': len(controller.gains) if hasattr(controller, 'gains') else 0 }) print(f"  {controller_type}: ISE={metrics['ise']:.3f}") except Exception as e: print(f"  Failed to benchmark {controller_type}: {e}") # Display results print("\n" + "="*80) print("BENCHMARK RESULTS") print("="*80) df = pd.DataFrame(results) df_sorted = df.sort_values('ise') print(df_sorted.to_string(index=False)) # Identify best controller best = df_sorted.iloc[0] print(f"\n Best Controller: {best['controller']}") print(f" ISE: {best['ise']:.3f}") print(f" Control Effort: {best['effort']:.3f}") print(f" Settling Time: {best['settling_time']:.3f} s") if __name__ == '__main__': main()
 ``` ### Example 4: Custom Configuration Override ```python
 """
 Example 4: Custom Configuration Override
@@ -740,19 +740,19 @@ Demonstrates robust error handling patterns.
 """ from src.controllers.factory import ( create_controller, list_available_controllers, get_default_gains, FactoryConfigurationError
 )
 from src.config import load_config
-import numpy as np def safe_controller_creation(controller_type, config=None, gains=None): """Create controller with error handling.""" try: # Pre-flight checks if controller_type not in list_available_controllers(): print(f"⚠ Warning: {controller_type} not available") return None, "Controller type unavailable" # Attempt creation controller = create_controller(controller_type, config, gains) return controller, None except ValueError as e: return None, f"Validation error: {e}" except ImportError as e: return None, f"Dependency error: {e}" except FactoryConfigurationError as e: return None, f"Configuration error: {e}" except Exception as e: return None, f"Unexpected error: {e}" def main(): config = load_config("config.yaml") print("Demonstrating error handling patterns\n") print("="*80) # Test 1: Valid creation print("\nTest 1: Valid controller creation") controller, error = safe_controller_creation('classical_smc', config) if controller: print(" ✓ Success: Controller created") else: print(f" ✗ Failed: {error}") # Test 2: Invalid controller type print("\nTest 2: Invalid controller type") controller, error = safe_controller_creation('nonexistent_controller', config) if controller: print(" ✓ Success: Controller created") else: print(f" ✗ Expected failure: {error}") # Test 3: Invalid gain count print("\nTest 3: Invalid gain count") invalid_gains = [10.0, 20.0] # Only 2 gains, need 6 controller, error = safe_controller_creation('classical_smc', config, invalid_gains) if controller: print(" ✓ Success: Controller created") else: print(f" ✗ Expected failure: {error}") # Test 4: Invalid gain values (non-positive) print("\nTest 4: Invalid gain values (non-positive)") invalid_gains = [10.0, -5.0, 12.0, 8.0, 35.0, 5.0] # Negative gain controller, error = safe_controller_creation('classical_smc', config, invalid_gains) if controller: print(" ✓ Success: Controller created") else: print(f" ✗ Expected failure: {error}") # Test 5: Super-twisting constraint violation print("\nTest 5: Super-twisting K1 > K2 constraint") invalid_sta_gains = [15.0, 20.0, 12.0, 8.0, 6.0, 4.0] # K1=15 ≤ K2=20 controller, error = safe_controller_creation('sta_smc', config, invalid_sta_gains) if controller: print(" ✓ Success: Controller created") else: print(f" ✗ Expected failure: {error}") # Test 6: Valid super-twisting gains print("\nTest 6: Valid super-twisting gains") valid_sta_gains = [30.0, 18.0, 22.0, 14.0, 9.0, 7.0] # K1=30 > K2=18 ✓ controller, error = safe_controller_creation('sta_smc', config, valid_sta_gains) if controller: print(" ✓ Success: Controller created with K1 > K2") else: print(f" ✗ Failed: {error}") # Test 7: Adaptive SMC gain count validation print("\nTest 7: Adaptive SMC gain count (must be exactly 5)") invalid_adaptive_gains = [10.0, 8.0, 5.0, 4.0, 1.0, 0.5] # 6 gains, need 5 controller, error = safe_controller_creation('adaptive_smc', config, invalid_adaptive_gains) if controller: print(" ✓ Success: Controller created") else: print(f" ✗ Expected failure: {error}") # Test 8: Recovery with default gains print("\nTest 8: Recovery with default gains") default_gains = get_default_gains('classical_smc') controller, error = safe_controller_creation('classical_smc', config, default_gains) if controller: print(f" ✓ Success: Controller created with defaults {default_gains}") else: print(f" ✗ Failed: {error}") print("\n" + "="*80) print("Error handling demonstration complete") if __name__ == '__main__': main()
+import numpy as np def safe_controller_creation(controller_type, config=None, gains=None): """Create controller with error handling.""" try: # Pre-flight checks if controller_type not in list_available_controllers(): print(f" Warning: {controller_type} not available") return None, "Controller type unavailable" # Attempt creation controller = create_controller(controller_type, config, gains) return controller, None except ValueError as e: return None, f"Validation error: {e}" except ImportError as e: return None, f"Dependency error: {e}" except FactoryConfigurationError as e: return None, f"Configuration error: {e}" except Exception as e: return None, f"Unexpected error: {e}" def main(): config = load_config("config.yaml") print("Demonstrating error handling patterns\n") print("="*80) # Test 1: Valid creation print("\nTest 1: Valid controller creation") controller, error = safe_controller_creation('classical_smc', config) if controller: print("  Success: Controller created") else: print(f"  Failed: {error}") # Test 2: Invalid controller type print("\nTest 2: Invalid controller type") controller, error = safe_controller_creation('nonexistent_controller', config) if controller: print("  Success: Controller created") else: print(f"  Expected failure: {error}") # Test 3: Invalid gain count print("\nTest 3: Invalid gain count") invalid_gains = [10.0, 20.0] # Only 2 gains, need 6 controller, error = safe_controller_creation('classical_smc', config, invalid_gains) if controller: print("  Success: Controller created") else: print(f"  Expected failure: {error}") # Test 4: Invalid gain values (non-positive) print("\nTest 4: Invalid gain values (non-positive)") invalid_gains = [10.0, -5.0, 12.0, 8.0, 35.0, 5.0] # Negative gain controller, error = safe_controller_creation('classical_smc', config, invalid_gains) if controller: print("  Success: Controller created") else: print(f"  Expected failure: {error}") # Test 5: Super-twisting constraint violation print("\nTest 5: Super-twisting K1 > K2 constraint") invalid_sta_gains = [15.0, 20.0, 12.0, 8.0, 6.0, 4.0] # K1=15 ≤ K2=20 controller, error = safe_controller_creation('sta_smc', config, invalid_sta_gains) if controller: print("  Success: Controller created") else: print(f"  Expected failure: {error}") # Test 6: Valid super-twisting gains print("\nTest 6: Valid super-twisting gains") valid_sta_gains = [30.0, 18.0, 22.0, 14.0, 9.0, 7.0] # K1=30 > K2=18  controller, error = safe_controller_creation('sta_smc', config, valid_sta_gains) if controller: print("  Success: Controller created with K1 > K2") else: print(f"  Failed: {error}") # Test 7: Adaptive SMC gain count validation print("\nTest 7: Adaptive SMC gain count (must be exactly 5)") invalid_adaptive_gains = [10.0, 8.0, 5.0, 4.0, 1.0, 0.5] # 6 gains, need 5 controller, error = safe_controller_creation('adaptive_smc', config, invalid_adaptive_gains) if controller: print("  Success: Controller created") else: print(f"  Expected failure: {error}") # Test 8: Recovery with default gains print("\nTest 8: Recovery with default gains") default_gains = get_default_gains('classical_smc') controller, error = safe_controller_creation('classical_smc', config, default_gains) if controller: print(f"  Success: Controller created with defaults {default_gains}") else: print(f"  Failed: {error}") print("\n" + "="*80) print("Error handling demonstration complete") if __name__ == '__main__': main()
 ```
 
 ---
 
-## Summary This API reference documents the complete factory system architecture including: ✅ **Core Functions**: `create_controller()`, `list_available_controllers()`, `get_default_gains()`
-✅ **Controller Registry**: Metadata, default gains, validation rules
-✅ **PSO Integration**: `PSOControllerWrapper`, factory functions, gain bounds
-✅ **Configuration Mapping**: YAML → controller initialization for all types
-✅ **Validation Rules**: Universal constraints and controller-specific requirements
-✅ **Error Handling**: Exception hierarchy, graceful degradation, automatic correction
-✅ **Extensibility**: Step-by-step guide for adding new controller types
-✅ **Complete Examples**: 5 validated, production-ready code examples ### Related Documentation - **Phase 4.1**: Controller Implementation API (individual controller documentation)
+## Summary This API reference documents the complete factory system architecture including:  **Core Functions**: `create_controller()`, `list_available_controllers()`, `get_default_gains()`
+ **Controller Registry**: Metadata, default gains, validation rules
+ **PSO Integration**: `PSOControllerWrapper`, factory functions, gain bounds
+ **Configuration Mapping**: YAML → controller initialization for all types
+ **Validation Rules**: Universal constraints and controller-specific requirements
+ **Error Handling**: Exception hierarchy, graceful degradation, automatic correction
+ **Extensibility**: Step-by-step guide for adding new controller types
+ **Complete Examples**: 5 validated, production-ready code examples ### Related Documentation - **Phase 4.1**: Controller Implementation API (individual controller documentation)
 - **Phase 4.3**: PSO Optimization Module API (optimization algorithms)
 - **config.yaml**: Configuration schema and parameter descriptions
 - **src/optimization/integration/pso_factory_bridge.py**: Enhanced PSO integration ### Next Steps 1. Review configuration schema completeness

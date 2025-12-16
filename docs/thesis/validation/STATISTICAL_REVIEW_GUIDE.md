@@ -359,7 +359,7 @@ Before reviewing individual tests, verify the broad statistical approach:
 
 - [ ] **10.11** p-values ordered from smallest to largest: [Yes / No]
 - [ ] **10.12** Correction applied sequentially: [Yes / No]
-- [ ] **10.13** Procedure more powerful than Bonferroni: [As expected / Not discussed]
+- [ ] **10.13** Procedure more effective than Bonferroni: [As expected / Not discussed]
 
 ### D. False Discovery Rate (FDR) (if used)
 

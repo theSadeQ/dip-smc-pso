@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Comprehensive documentation validation script.
+complete documentation validation script.
 
 Validates all user-facing documentation for:
 - Broken links (internal and external)

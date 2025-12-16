@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 LT-7 RESEARCH PAPER - TASK B.2: BOOTSTRAP CONVERGENCE ANALYSIS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 
 Purpose:
   Validate that 10,000 bootstrap iterations used in MT-6 analysis were sufficient
@@ -24,7 +24,7 @@ Output:
 
 Author: Claude Code
 Date: 2025-10-20 (Phase 2, Category B)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 """
 
 import pandas as pd
@@ -34,9 +34,9 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import time
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Configuration
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 # Data paths
 FIXED_CSV = Path("benchmarks/MT6_fixed_baseline.csv")
@@ -55,9 +55,9 @@ CONFIDENCE_LEVEL = 0.95
 RANDOM_SEED = 42
 CONVERGENCE_THRESHOLD = 0.05  # 5% change threshold
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Load Data
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("[LOAD] Loading MT-6 chattering data...")
 df_fixed = pd.read_csv(FIXED_CSV)
@@ -69,9 +69,9 @@ chattering_adaptive = df_adaptive['chattering_index'].values
 print(f"  Fixed boundary: n={len(chattering_fixed)}, mean={chattering_fixed.mean():.4f}")
 print(f"  Adaptive boundary: n={len(chattering_adaptive)}, mean={chattering_adaptive.mean():.4f}")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Bootstrap Function
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 def bootstrap_ci(data, n_bootstrap, confidence=0.95, seed=42):
     """
@@ -120,9 +120,9 @@ def bootstrap_ci(data, n_bootstrap, confidence=0.95, seed=42):
 
     return ci_lower, ci_upper, ci_width, elapsed
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Run Bootstrap Convergence Analysis
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print(f"\n[BOOTSTRAP] Running convergence analysis (B={BOOTSTRAP_ITERATIONS})...")
 print("This may take a few minutes...\n")
@@ -163,9 +163,9 @@ for B in BOOTSTRAP_ITERATIONS:
 df_results_fixed = pd.DataFrame(results_fixed)
 df_results_adaptive = pd.DataFrame(results_adaptive)
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Check Convergence (10K to 20K)
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n[CONVERGENCE] Checking CI width stability (10K to 20K)...")
 
@@ -186,9 +186,9 @@ converged_adaptive = change_adaptive < CONVERGENCE_THRESHOLD
 print(f"\n  Fixed: {'CONVERGED' if converged_fixed else 'NOT CONVERGED'} (threshold={CONVERGENCE_THRESHOLD*100:.0f}%)")
 print(f"  Adaptive: {'CONVERGED' if converged_adaptive else 'NOT CONVERGED'} (threshold={CONVERGENCE_THRESHOLD*100:.0f}%)")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Plot Convergence
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n[PLOT] Generating convergence plot...")
 
@@ -224,9 +224,9 @@ plt.savefig(FIGURE_PATH.with_suffix('.png'), dpi=150, bbox_inches='tight')
 print(f"  [OK] Saved: {FIGURE_PATH}")
 print(f"  [OK] Saved: {FIGURE_PATH.with_suffix('.png')}")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Generate Report
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n[REPORT] Generating markdown report...")
 
@@ -280,13 +280,13 @@ report += f"""
 - **B=10,000:** CI width = {width_10k_fixed:.4f}
 - **B=20,000:** CI width = {width_20k_fixed:.4f}
 - **Change:** {change_fixed*100:.2f}%
-- **Status:** {'✓ CONVERGED' if converged_fixed else '✗ NOT CONVERGED'}
+- **Status:** {' CONVERGED' if converged_fixed else ' NOT CONVERGED'}
 
 ### Adaptive Boundary
 - **B=10,000:** CI width = {width_10k_adaptive:.4f}
 - **B=20,000:** CI width = {width_20k_adaptive:.4f}
 - **Change:** {change_adaptive*100:.2f}%
-- **Status:** {'✓ CONVERGED' if converged_adaptive else '✗ NOT CONVERGED'}
+- **Status:** {' CONVERGED' if converged_adaptive else ' NOT CONVERGED'}
 
 ---
 
@@ -296,7 +296,7 @@ report += f"""
 
 if converged_fixed and converged_adaptive:
     report += """
-✓ **VALIDATION SUCCESSFUL:** Both distributions show convergence at B=10,000
+ **VALIDATION SUCCESSFUL:** Both distributions show convergence at B=10,000
 
 **Implications:**
 - The 10,000 bootstrap iterations used in MT-6 analysis were **sufficient**
@@ -308,7 +308,7 @@ if converged_fixed and converged_adaptive:
 """
 else:
     report += f"""
-⚠ **PARTIAL CONVERGENCE:** At least one distribution did not converge at B=10,000
+ **PARTIAL CONVERGENCE:** At least one distribution did not converge at B=10,000
 
 **Details:**
 - Fixed: {'CONVERGED' if converged_fixed else f'NOT CONVERGED ({change_fixed*100:.2f}% change)'}
@@ -345,9 +345,9 @@ with open(REPORT_PATH, 'w', encoding='utf-8') as f:
 
 print(f"  [OK] Saved: {REPORT_PATH}")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Summary
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n" + "="*80)
 print("BOOTSTRAP CONVERGENCE ANALYSIS COMPLETE")

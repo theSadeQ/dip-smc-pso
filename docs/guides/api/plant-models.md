@@ -41,10 +41,10 @@ state_derivative = dynamics.compute(state, control_force)
 The Plant Models API provides physics-based models of the double-inverted pendulum system.
 
 **Key Features:**
-- ✅ **Multiple Models:** Simplified and full nonlinear dynamics
-- ✅ **Configurable Physics:** Masses, lengths, friction, gravity
-- ✅ **State-Space Representation:** Standard 6-dimensional state vector
-- ✅ **Extensible:** Custom dynamics implementation support
+-  **Multiple Models:** Simplified and full nonlinear dynamics
+-  **Configurable Physics:** Masses, lengths, friction, gravity
+-  **State-Space Representation:** Standard 6-dimensional state vector
+-  **Extensible:** Custom dynamics implementation support
 
 **Related Documentation:**
 - [Tutorial 01: First Simulation](../tutorials/tutorial-01-first-simulation.md)
@@ -148,15 +148,15 @@ u = Control force
 - Simplified inertia matrix
 
 **Advantages:**
-- ✅ Fast computation (~2x faster than full dynamics)
-- ✅ Suitable for PSO optimization (many iterations)
-- ✅ Valid for small angles (|θ| < 15° ≈ 0.26 rad)
-- ✅ Numerically stable
+-  Fast computation (~2x faster than full dynamics)
+-  Suitable for PSO optimization (many iterations)
+-  Valid for small angles (|θ| < 15° ≈ 0.26 rad)
+-  Numerically stable
 
 **Limitations:**
-- ⚠️ Accuracy degrades for large angles
-- ⚠️ Ignores nonlinear coupling effects
-- ⚠️ Approximate Coriolis terms
+-  Accuracy degrades for large angles
+-  Ignores nonlinear coupling effects
+-  Approximate Coriolis terms
 
 **Usage:**
 ```python
@@ -191,14 +191,14 @@ state_dot = dynamics.compute_dynamics(state, control)
 - Configuration-dependent inertia matrix
 
 **Advantages:**
-- ✅ Exact physics representation
-- ✅ Valid for large angles (|θ| < 180°)
-- ✅ Captures all nonlinear effects
-- ✅ Suitable for hardware validation
+-  Exact physics representation
+-  Valid for large angles (|θ| < 180°)
+-  Captures all nonlinear effects
+-  Suitable for hardware validation
 
 **Limitations:**
-- ⚠️ Slower computation (~2x slower)
-- ⚠️ May require smaller timesteps for stability
+-  Slower computation (~2x slower)
+-  May require smaller timesteps for stability
 
 **Usage:**
 ```python
@@ -225,9 +225,9 @@ state_dot = dynamics.compute_dynamics(state, control)
 | **Accuracy** | Good (small angles) | Exact |
 | **Coupling** | Linear approximation | Full nonlinear |
 | **Coriolis Terms** | Approximate | Complete |
-| **PSO Optimization** | ✅ Recommended | ⚠️ Slow |
-| **Final Validation** | ⚠️ Not sufficient | ✅ Required |
-| **Swing-Up Control** | ❌ Invalid | ✅ Valid |
+| **PSO Optimization** |  Recommended |  Slow |
+| **Final Validation** |  Not sufficient |  Required |
+| **Swing-Up Control** |  Invalid |  Valid |
 
 
 

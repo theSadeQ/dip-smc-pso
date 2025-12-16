@@ -291,7 +291,7 @@ class NamingValidator:
             report_lines.append(f"\n{vtype.replace('_', ' ').upper()} ({len(violations)}):")
             for violation in violations:
                 rel_path = violation['file'].relative_to(self.project_root)
-                report_lines.append(f"  ✗ {rel_path}")
+                report_lines.append(f"   {rel_path}")
                 report_lines.append(f"    {violation['message']}")
                 report_lines.append(f"    Suggestion: {violation['suggestion']}")
 
@@ -370,12 +370,12 @@ def main() -> None:
             print("Violations Found:")
             for violation in violations:
                 rel_path = violation['file'].relative_to(project_root)
-                print(f"\n  ✗ {rel_path}")
+                print(f"\n   {rel_path}")
                 print(f"    {violation['message']}")
                 if args.suggest:
                     print(f"    Suggestion: {violation['suggestion']}")
         else:
-            print("✓ All files comply with naming conventions!")
+            print(" All files comply with naming conventions!")
 
 
 if __name__ == '__main__':

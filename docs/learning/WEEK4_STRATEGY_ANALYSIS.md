@@ -269,13 +269,13 @@ Based on cognitive load and learning research:
 **Approach**: Phase-by-phase progress bars
 
 ```
-Phase 1: Foundations [████████░░░░░░░░] 40% (16/40 hours)
-Phase 2: Core Concepts [██████░░░░░░░░░░░░] 20% (6/30 hours)
-Phase 3: Hands-On [░░░░░░░░░░░░░░░░░░░░] 0% (0/25 hours)
-Phase 4: Advancing [░░░░░░░░░░░░░░░░░░░░] 0% (0/30 hours)
-Phase 5: Mastery [░░░░░░░░░░░░░░░░░░░░░] 0% (0/25-75 hours)
+Phase 1: Foundations [] 40% (16/40 hours)
+Phase 2: Core Concepts [] 20% (6/30 hours)
+Phase 3: Hands-On [] 0% (0/25 hours)
+Phase 4: Advancing [] 0% (0/30 hours)
+Phase 5: Mastery [] 0% (0/25-75 hours)
 
-Total Progress: [██░░░░░░░░░░░░░░░░░░░] 12% (22/150 hours)
+Total Progress: [] 12% (22/150 hours)
 ```
 
 **Effectiveness**: 72/100
@@ -288,7 +288,7 @@ Total Progress: [██░░░░░░░░░░░░░░░░░░░
 
 ```
 Week 1-4    Week 5-8    Week 9-12   Week 13-16  Week 17+
-[Phase 1]─→[Phase 2]─→[Phase 3]─→[Phase 4]─→[Phase 5]
+[Phase 1]→[Phase 2]→[Phase 3]→[Phase 4]→[Phase 5]
   40h        30h         25h        30h       25-75h
 ```
 
@@ -328,11 +328,11 @@ Week 1-4    Week 5-8    Week 9-12   Week 13-16  Week 17+
 
 ```
 Phase 1 Milestones:
-✓ Computing Basics (1.1) - 4 hours
-✓ Python Fundamentals (1.2) - 20 hours
-○ Environment Setup (1.3) - 3 hours
-○ Physics Foundation (1.4) - 8 hours
-○ Math Fundamentals (1.5) - 5 hours
+ Computing Basics (1.1) - 4 hours
+ Python Fundamentals (1.2) - 20 hours
+ Environment Setup (1.3) - 3 hours
+ Physics Foundation (1.4) - 8 hours
+ Math Fundamentals (1.5) - 5 hours
 
 Unlocked: Phase 2 Start!
 ```
@@ -348,13 +348,13 @@ Unlocked: Phase 2 Start!
 ```
 Difficulty
     ↑
-  Hard│     [Phase 4]
-     │    /    [Phase 2]
-Medium│  [Phase 3]
-     │     [Phase 1]
-  Easy│      [Phase 5.1-5.2]
-     │
-     └─────────────────────→ Time (weeks)
+  Hard     [Phase 4]
+         /    [Phase 2]
+Medium  [Phase 3]
+          [Phase 1]
+  Easy      [Phase 5.1-5.2]
+     
+     → Time (weeks)
          8    8    4    4    4+
 ```
 
@@ -367,10 +367,10 @@ Medium│  [Phase 3]
 **Approach**: Show 3-4 metrics simultaneously
 
 ```
-Knowledge Acquisition:     [████░░░░░░] 40%
-Practical Skill Building:  [██░░░░░░░░░] 20%
-Time Investment:           [███░░░░░░░░] 30%
-System Understanding:      [█████░░░░░░] 50%
+Knowledge Acquisition:     [] 40%
+Practical Skill Building:  [] 20%
+Time Investment:           [] 30%
+System Understanding:      [] 50%
 
 Phase 1 Status: In Progress (Week 2 of 4)
 Estimated Completion: Week 4
@@ -378,7 +378,7 @@ Estimated Phase 2 Start: Week 5
 ```
 
 **Effectiveness**: 82/100
-- **Pros**: Comprehensive, shows multiple dimensions, accurate
+- **Pros**: complete, shows multiple dimensions, accurate
 - **Cons**: Complex, visual overload risk
 - **Best For**: Personal progress tracking (future feature)
 
@@ -412,24 +412,24 @@ mermaid_init_js = "mermaid.initialize({startOnLoad:true,theme:'neutral'});"
 ```
 
 **Supported Diagram Types**:
-✓ Flowchart (TB, LR, TD, BT directions)
-✓ State machine
-✓ Class diagram
-✓ Sequence diagram
-✓ Gantt chart
-✓ Pie chart
-✓ Git graph
-✓ C4 diagram
-✓ User journey
-✓ Timeline (NEW in Mermaid 10+)
-✓ Mindmap
-✓ Block diagram (NEW)
+ Flowchart (TB, LR, TD, BT directions)
+ State machine
+ Class diagram
+ Sequence diagram
+ Gantt chart
+ Pie chart
+ Git graph
+ C4 diagram
+ User journey
+ Timeline (NEW in Mermaid 10+)
+ Mindmap
+ Block diagram (NEW)
 
 **NOT Fully Supported**:
-✗ Advanced styling (limited CSS hooks)
-✗ Custom fonts in diagrams
-✗ 3D diagrams
-✗ Interactive elements (clickable nodes)
+ Advanced styling (limited CSS hooks)
+ Custom fonts in diagrams
+ 3D diagrams
+ Interactive elements (clickable nodes)
 
 ### 3.2 Responsive Diagram Design Strategy
 
@@ -801,25 +801,25 @@ For complex diagrams, include text description:
 ### 5.4 Success Criteria
 
 **Must-Have (Blocking)**:
-✓ All 22-25 diagrams render without errors
-✓ Sphinx build succeeds with `-W` flag (warnings = errors)
-✓ Mobile responsive at 320px minimum width
-✓ No CSS conflicts or overlaps
-✓ Phase colors used consistently
-✓ All diagrams follow beginner-friendly design
+ All 22-25 diagrams render without errors
+ Sphinx build succeeds with `-W` flag (warnings = errors)
+ Mobile responsive at 320px minimum width
+ No CSS conflicts or overlaps
+ Phase colors used consistently
+ All diagrams follow beginner-friendly design
 
 **Should-Have (Strong)**:
-✓ All diagrams include alt text
-✓ Text descriptions provided for complex diagrams
-✓ Progress visualizations integrated into roadmap
-✓ Timeline visualization in main index
-✓ Accessibility checklist completed
+ All diagrams include alt text
+ Text descriptions provided for complex diagrams
+ Progress visualizations integrated into roadmap
+ Timeline visualization in main index
+ Accessibility checklist completed
 
 **Nice-to-Have (Optional)**:
-✓ Animated transitions (subtle, not disorienting)
-✓ Interactive tooltips on hover
-✓ Multilingual support (future)
-✓ Diagram index/glossary document
+ Animated transitions (subtle, not disorienting)
+ Interactive tooltips on hover
+ Multilingual support (future)
+ Diagram index/glossary document
 
 ---
 

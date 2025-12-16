@@ -186,7 +186,7 @@ class LogArchiveManager:
                 file.unlink()  # Delete original
                 return True
             else:
-                print(f"⚠️  Integrity check failed for {dest}")
+                print(f"  Integrity check failed for {dest}")
                 dest.unlink()  # Delete bad compressed file
                 return False
 
@@ -277,7 +277,7 @@ class LogArchiveManager:
         print("=" * 90)
 
         # Migrate Tier 1 → Tier 2 (files older than tier1_days)
-        print("\n📦 TIER 1 → TIER 2 MIGRATION")
+        print("\n TIER 1 → TIER 2 MIGRATION")
         tier1_files = self.get_log_files(self.tier1_dir)
         for file in tier1_files:
             age = self.calculate_file_age(file)
@@ -288,7 +288,7 @@ class LogArchiveManager:
                     stats['errors'] += 1
 
         # Migrate Tier 2 → Tier 3 (files older than tier2_days)
-        print("\n❄️  TIER 2 → TIER 3 MIGRATION")
+        print("\n  TIER 2 → TIER 3 MIGRATION")
         tier2_files = self.get_log_files(self.tier2_dir, "*.log.gz")
         tier2_to_migrate = [f for f in tier2_files if self.calculate_file_age(f) > self.tier2_days]
 
@@ -298,7 +298,7 @@ class LogArchiveManager:
             stats['errors'] += 1
 
         # Cleanup expired Tier 3 files
-        print("\n🗑️  TIER 3 EXPIRED CLEANUP")
+        print("\n  TIER 3 EXPIRED CLEANUP")
         stats['expired_deleted'] = self.cleanup_expired(dry_run)
 
         # Final statistics

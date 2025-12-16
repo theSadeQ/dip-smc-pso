@@ -172,7 +172,7 @@ def validate_output(output):
 
 # Validate outputs
 classical_output = ClassicalSMCOutput(u, state_vars, history)
-validate_output(classical_output)  # ✓ Pass
+validate_output(classical_output)  #  Pass
 ```
 
 ## Example 3: Immutability and Contract Enforcement

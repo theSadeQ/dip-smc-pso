@@ -98,20 +98,20 @@ monitored against a threshold; persistent violations indicate a fault. To improv
 recent residual statistics and can optionally use a cumulative sum
 (CUSUM) statistic to detect slow drifts. Adaptive thresholding has
 been shown to enhance the robustness of fault diagnosis by
-automatically adjusting to operating conditions【218697608892619†L682-L687】. CUSUM
+automatically adjusting to operating conditions218697608892619†L682-L687. CUSUM
 methods accumulate deviations from a reference and are sensitive to
-faint changes【675426604190490†L699-L722】; however the choice of threshold and
-reference value is critical to avoid false alarms【675426604190490†L746-L752】. Attributes
+faint changes675426604190490†L699-L722; however the choice of threshold and
+reference value is critical to avoid false alarms675426604190490†L746-L752. Attributes
 ----------
 residual_threshold : float Base threshold for the residual norm. Used when adaptive thresholding is disabled or insufficient samples are available.
 persistence_counter : int Number of consecutive threshold violations required to declare a fault. Helps filter sporadic spikes.
 use_ekf_residual : bool Placeholder for future EKF innovation residual.
 residual_states : list[int] Indices of state variables to include in the residual.
 residual_weights : list[float], optional Optional weights applied elementwise to the residual before computing the norm.
-adaptive : bool adaptive thresholding. When True the threshold is computed as ``mu + threshold_factor * sigma`` over the last ``window_size`` residuals. This dynamic threshold adjusts to changing operating conditions【218697608892619†L682-L687】.
+adaptive : bool adaptive thresholding. When True the threshold is computed as ``mu + threshold_factor * sigma`` over the last ``window_size`` residuals. This dynamic threshold adjusts to changing operating conditions218697608892619†L682-L687.
 window_size : int Number of recent residuals used to estimate the mean and standard deviation for adaptive thresholding.
 threshold_factor : float Multiplicative factor applied to the standard deviation when computing the adaptive threshold. Larger values reduce sensitivity.
-cusum_enabled : bool simple CUSUM drift detection. When True the detector accumulates deviations of the residual norm from its running average and compares the sum against ``cusum_threshold`` to detect slow drifts【675426604190490†L699-L722】.
+cusum_enabled : bool simple CUSUM drift detection. When True the detector accumulates deviations of the residual norm from its running average and compares the sum against ``cusum_threshold`` to detect slow drifts675426604190490†L699-L722.
 cusum_threshold : float Threshold for the cumulative sum. When the cumulative sum exceeds this value a fault is declared.
 hysteresis_enabled : bool hysteresis mechanism to prevent rapid oscillation between OK and FAULT states near threshold boundaries. When False, uses original single-threshold behavior.
 hysteresis_upper : float Upper threshold for fault detection when hysteresis is enabled. Residual must exceed this value to trigger fault state. Typically set to threshold * 1.1 (10% deadband).

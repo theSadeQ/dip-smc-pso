@@ -3,7 +3,7 @@
 Numerical Stability Validation Suite
 =====================================
 
-Comprehensive validation of numerical methods for Double-Inverted Pendulum
+complete validation of numerical methods for Double-Inverted Pendulum
 Sliding Mode Control (DIP-SMC-PSO) system.
 
 This script validates all theoretical claims in numerical_stability_methods.md

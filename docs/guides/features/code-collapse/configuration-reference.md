@@ -116,17 +116,17 @@ Choose based on your site's personality. Corporate sites use Material Design. Fu
 This is the symbol shown on the button when a code block is currently expanded (visible). It suggests "click me to collapse."
 
 ```javascript
-expandedIcon: '▼'
+expandedIcon: ''
 ```
 
 **Technical Details:**
 - **Type:** `string` (Unicode character or emoji)
-- **Default:** `'▼'` (down-pointing triangle)
+- **Default:** `''` (down-pointing triangle)
 
 **Popular Alternatives:**
-- `'➖'` (minus sign - like closing an accordion)
+- `''` (minus sign - like closing an accordion)
 - `'[-]'` (ASCII minus in brackets)
-- `'🔽'` (emoji down arrow)
+- `''` (emoji down arrow)
 
 **Design Tip:**
 Use a single character for clean visual alignment. The icon should suggest "this is open, click to close."
@@ -139,20 +139,20 @@ Use a single character for clean visual alignment. The icon should suggest "this
 This is the symbol shown when a code block is currently collapsed (hidden). It suggests "click me to expand."
 
 ```javascript
-collapsedIcon: '▲'
+collapsedIcon: ''
 ```
 
 **Technical Details:**
 - **Type:** `string` (Unicode character or emoji)
-- **Default:** `'▲'` (up-pointing triangle)
+- **Default:** `''` (up-pointing triangle)
 
 **Popular Alternatives:**
-- `'➕'` (plus sign - like opening an accordion)
+- `''` (plus sign - like opening an accordion)
 - `'[+]'` (ASCII plus in brackets)
-- `'🔼'` (emoji up arrow)
+- `''` (emoji up arrow)
 
 **Design Consistency:**
-Pair this with expandedIcon logically. If expanded is `'[-]'`, collapsed should be `'[+]'`. If expanded is `'▼'`, collapsed should be `'▲'`.
+Pair this with expandedIcon logically. If expanded is `'[-]'`, collapsed should be `'[+]'`. If expanded is `''`, collapsed should be `''`.
 
 ---
 
@@ -185,7 +185,7 @@ buttonTitle: 'Click to show/hide'   // More explicit English
 ## Selectors Array (JavaScript)
 
 **What This Section Covers:**
-Selectors are CSS patterns that tell the code-collapse feature which elements on the page are code blocks. If you have custom code block styles or use a non-standard documentation generator, you'll need to adjust these.
+Selectors are CSS patterns that tell the code-collapse feature which elements on the page are code blocks. If you have custom code block styles or use a non-standard documentation generator, the system will need to adjust these.
 
 Located in `code-collapse.js` (lines 43-50).
 
@@ -232,7 +232,7 @@ The "100% coverage" message means all your code blocks were found. If coverage i
 ## CSS Customization
 
 **What This Section Covers:**
-If you want to change how the collapse buttons look (colors, size, position), you'll modify the CSS file. This section explains the most commonly customized properties.
+If you want to change how the collapse buttons look (colors, size, position), the system will modify the CSS file. This section explains the most commonly customized properties.
 
 All CSS customizations are in `code-collapse.css`. Changes take effect immediately after saving and refreshing your browser.
 
@@ -397,18 +397,18 @@ div.highlight {
 
 | Feature | Chrome 90+ | Firefox 88+ | Edge 90+ | Safari 14+ |
 |---------|-----------|-------------|----------|-----------|
-| Core functionality | ✅ | ✅ | ✅ | ✅ |
-| `requestAnimationFrame` | ✅ | ✅ | ✅ | ✅ |
-| `cubic-bezier()` | ✅ | ✅ | ✅ | ✅ |
-| `localStorage` | ✅ | ✅ | ✅ | ✅ |
-| `contain: layout` | ✅ Full | ⚠️ Partial | ✅ Full | ⚠️ Limited |
-| `will-change` | ✅ | ✅ | ✅ | ✅ |
-| `backface-visibility` | ✅ | ✅ | ✅ | ✅ |
+| Core functionality |  |  |  |  |
+| `requestAnimationFrame` |  |  |  |  |
+| `cubic-bezier()` |  |  |  |  |
+| `localStorage` |  |  |  |  |
+| `contain: layout` |  Full |  Partial |  Full |  Limited |
+| `will-change` |  |  |  |  |
+| `backface-visibility` |  |  |  |  |
 
 **Legend:**
-- ✅ Full support
-- ⚠️ Partial/limited support (feature still works)
-- ❌ Not supported
+-  Full support
+-  Partial/limited support (feature still works)
+-  Not supported
 
 ---
 
@@ -442,7 +442,7 @@ easing: 'cubic-bezier(0.4, 0.0, 0.2, 1)'  // Material Design
 animationDuration: 400  // Slightly slower
 easing: 'ease-in-out'   // Standard CSS
 
-// CSS - Disable advanced features
+// CSS - Disable features
 // Comment out: contain, transform, backface-visibility, will-change
 ```
 

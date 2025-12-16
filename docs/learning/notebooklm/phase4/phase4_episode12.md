@@ -8,13 +8,13 @@
 
 You've seen the Lagrangian, understood the mass matrix, and grasped why the equations are nonlinear. Now let's add another layer: vector calculus. Control theory papers are filled with symbols like del-V (gradient), J (Jacobian), and expressions like d-V over d-t equals del-V dot x-dot. What do these mean?
 
-In this episode, we'll explore vector calculus conceptually, focusing on the tools you need for control theory. You'll understand gradients, Jacobians, and the multivariable chain rule. These aren't just abstract math. They're the foundation for linearization, stability analysis, and understanding how control laws are derived.
+In this episode, this will explore vector calculus conceptually, focusing on the tools you need for control theory. You'll understand gradients, Jacobians, and the multivariable chain rule. These aren't just abstract math. They're the foundation for linearization, stability analysis, and understanding how control laws are derived.
 
-By the end, you'll be able to read control theory papers and understand the mathematical notation.
+By the end, the system will be able to read control theory papers and understand the mathematical notation.
 
 ## What You'll Discover
 
-In this episode, you'll learn:
+In this episode, the system will learn:
 - Gradients explained: del-V points in the direction of steepest increase
 - Jacobian matrices: matrices of partial derivatives
 - Time derivatives of vectors: how to compute d over d-t of vector-valued functions
@@ -24,7 +24,7 @@ In this episode, you'll learn:
 
 ## Gradients: Direction of Steepest Increase
 
-Let's start with gradients. Imagine a hilly landscape. At any point, there's a direction of steepest uphill climb. The gradient is a vector pointing in that direction.
+start with gradients. Imagine a hilly landscape. At any point, there's a direction of steepest uphill climb. The gradient is a vector pointing in that direction.
 
 **Mathematical Definition:**
 
@@ -58,7 +58,7 @@ At the origin open-paren x equals 0 comma y equals 0 close-paren, del-V equals o
 
 **Why gradients matter in control:**
 
-Lyapunov functions, which we'll explore in Episode 13, use gradients to analyze stability. If del-V points away from equilibrium, V is increasing, which is bad for stability.
+Lyapunov functions, which this will explore in Episode 13, use gradients to analyze stability. If del-V points away from equilibrium, V is increasing, which is bad for stability.
 
 ## Jacobian Matrices: Linearization Tool
 
@@ -110,7 +110,7 @@ This is how engineers linearize the double-inverted pendulum around the upright 
 
 ## Linearization: Approximating Nonlinear Dynamics
 
-Let's see linearization in action for the double-inverted pendulum.
+see linearization in action for the double-inverted pendulum.
 
 **Nonlinear dynamics:**
 
@@ -144,7 +144,7 @@ Linearization is only valid near the equilibrium. For large deviations, the appr
 
 ## Recap: Core Concepts
 
-Let's recap what we've covered so far.
+recap what we've covered so far.
 
 **Gradients**: del-V is a vector of partial derivatives, pointing in the direction of steepest increase.
 
@@ -202,7 +202,7 @@ Lyapunov stability analysis uses d-V over d-t. If V is a "distance to equilibriu
 
 ## Partial Derivatives: Notation and Meaning
 
-Let's clarify partial derivative notation, which trips up many learners.
+clarify partial derivative notation, which trips up many learners.
 
 **Notation:**
 
@@ -232,7 +232,7 @@ This is the multivariable chain rule in expanded form.
 
 ## Practical Example: Pendulum Energy
 
-Let's apply these concepts to the simple pendulum.
+apply these concepts to the simple pendulum.
 
 **Energy function:**
 
@@ -291,7 +291,7 @@ Here are the technical terms from this episode with phonetic pronunciations:
 
 ## What's Next
 
-In Episode 13, we'll conclude Phase 4 with Lyapunov stability and phase space. You'll understand the ball-in-bowl analogy for Lyapunov functions, positive definite functions, the concept of d-V over d-t less than 0 for stability, and how phase portraits visualize system behavior. We'll also explain how scipy dot integrate dot odeint numerically solves differential equations.
+In Episode 13, this will conclude Phase 4 with Lyapunov stability and phase space. You'll understand the ball-in-bowl analogy for Lyapunov functions, positive definite functions, the concept of d-V over d-t less than 0 for stability, and how phase portraits visualize system behavior. We'll also explain how scipy dot integrate dot odeint numerically solves differential equations.
 
 Here's a preview question: What is a Lyapunov function, and how does it prove stability without solving differential equations? We'll answer this next episode.
 
@@ -307,7 +307,7 @@ Before moving to Episode 13, ask yourself these questions:
 
 If you can answer these conceptually, you're ready for the final episode. If anything is unclear, focus on the intuition: gradients point uphill, Jacobians linearize, and the chain rule connects time derivatives to gradients.
 
-**Excellent progress! You've mastered vector calculus for control. Let's finish strong!**
+**Excellent progress! You've mastered vector calculus for control. finish strong!**
 
 ---
 

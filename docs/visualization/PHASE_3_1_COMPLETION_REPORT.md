@@ -170,23 +170,23 @@ pso: n_particles: 30 iters: 150 cognitive_coeff: 2.0 # c1 social_coeff: 2.0 # c2
 ## File Manifest ### Generated Artifacts ```
 
 D:/Projects/main/
-├── docs/
-│ └── visualization/
-│ ├── data/
-│ │ ├── convergence_statistics.json (2.7KB)
-│ │ ├── pso_classical_smc_convergence.json (4.1KB)
-│ │ ├── pso_sta_smc_convergence.json (4.2KB)
-│ │ ├── pso_adaptive_smc_convergence.json (4.2KB)
-│ │ ├── pso_hybrid_adaptive_sta_smc_convergence.json (3.2KB)
-│ │ └── pso_comparison.json (13KB)
-│ └── PHASE_3_1_COMPLETION_REPORT.md (this file)
-└── scripts/ └── visualization/ └── parse_pso_logs.py (474 lines)
+ docs/
+  visualization/
+  data/
+   convergence_statistics.json (2.7KB)
+   pso_classical_smc_convergence.json (4.1KB)
+   pso_sta_smc_convergence.json (4.2KB)
+   pso_adaptive_smc_convergence.json (4.2KB)
+   pso_hybrid_adaptive_sta_smc_convergence.json (3.2KB)
+   pso_comparison.json (13KB)
+  PHASE_3_1_COMPLETION_REPORT.md (this file)
+ scripts/  visualization/  parse_pso_logs.py (474 lines)
 ``` ### Source Logs (Input) ```
 D:/Projects/main/logs/
-├── pso_classical.log (963KB)
-├── pso_sta_smc.log (768KB)
-├── pso_adaptive_smc.log (876KB)
-└── pso_hybrid_adaptive_sta_smc.log (1.4MB)
+ pso_classical.log (963KB)
+ pso_sta_smc.log (768KB)
+ pso_adaptive_smc.log (876KB)
+ pso_hybrid_adaptive_sta_smc.log (1.4MB)
 ```
 
 ---

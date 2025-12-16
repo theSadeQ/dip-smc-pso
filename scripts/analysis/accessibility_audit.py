@@ -145,14 +145,14 @@ class AccessibilityAuditor:
 
                 if result['status'] == 'success':
                     v = result['violations']
-                    wcag_icon = "✅" if result['wcag_level'] == "AA" else "❌"
+                    wcag_icon = "" if result['wcag_level'] == "AA" else ""
 
                     print(f"[{i:2d}/{len(html_files)}] {wcag_icon} {result['page']}")
                     print(f"        Violations: {v['total']} "
                           f"(Critical: {v['critical']}, Serious: {v['serious']}) "
                           f"| Score: {result['score']}/100")
                 else:
-                    print(f"[{i:2d}/{len(html_files)}] ❌ {result['page']} - FAILED: {result.get('error', 'Unknown')}")
+                    print(f"[{i:2d}/{len(html_files)}]  {result['page']} - FAILED: {result.get('error', 'Unknown')}")
 
             await browser.close()
 
@@ -217,11 +217,11 @@ class AccessibilityAuditor:
         print()
 
         if summary['pass_rate'] >= 90:
-            print("✅ PASS: Documentation meets >90% WCAG 2.1 AA compliance target")
+            print(" PASS: Documentation meets >90% WCAG 2.1 AA compliance target")
         elif summary['pass_rate'] >= 75:
-            print("⚠️  WARNING: Documentation at {summary['pass_rate']}% compliance")
+            print("  WARNING: Documentation at {summary['pass_rate']}% compliance")
         else:
-            print("❌ FAIL: Documentation below 75% WCAG 2.1 AA compliance")
+            print(" FAIL: Documentation below 75% WCAG 2.1 AA compliance")
 
         print("="*70)
 

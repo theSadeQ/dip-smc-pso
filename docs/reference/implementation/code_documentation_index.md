@@ -19,10 +19,10 @@ For detailed implementation documentation, refer to: - **Controllers:** [referen
 - [Dynamics Derivations](../../mathematical_foundations/dynamics_derivations.md) ## Code Organization The implementation follows this structure:
 ```
 src/
-├── controllers/ # SMC controller implementations
-├── plant/ # Dynamics models
-├── core/ # Simulation engine
-├── optimization/ # PSO and optimization
-├── analysis/ # Performance analysis
-└── utils/ # Utilities and helpers
+ controllers/ # SMC controller implementations
+ plant/ # Dynamics models
+ core/ # Simulation engine
+ optimization/ # PSO and optimization
+ analysis/ # Performance analysis
+ utils/ # Utilities and helpers
 ``` For complete API reference, see the [main API index](../index.md).

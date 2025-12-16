@@ -140,9 +140,9 @@ def main():
     ])
 
     if val_result.returncode == 0:
-        print("\n✓ Validation PASSED")
+        print("\n Validation PASSED")
     else:
-        print("\n✗ Validation FAILED")
+        print("\n Validation FAILED")
 
     # Step 5: Instructions
     print("\n" + "="*80)
@@ -150,7 +150,7 @@ def main():
     print("="*80)
 
     if all_passed:
-        print("\n✓✓✓ ALL CONTROLLERS OPTIMIZED SUCCESSFULLY ✓✓✓\n")
+        print("\n ALL CONTROLLERS OPTIMIZED SUCCESSFULLY \n")
         print("1. Review results above")
         print("2. Update config.yaml manually with optimized gains")
         print("3. Commit results:")
@@ -158,7 +158,7 @@ def main():
         print("   git commit -m 'RESOLVED: Issue #12 - Chattering Reduction (3/4 controllers)'")
         print("   git push origin main")
     else:
-        print("\n⚠ Some controllers did not meet targets")
+        print("\n Some controllers did not meet targets")
         print("1. Review results above")
         print("2. Consider re-running PSO with adjusted parameters")
         print("3. Or commit partial results with documentation")

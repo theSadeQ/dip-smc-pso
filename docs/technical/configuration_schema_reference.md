@@ -25,24 +25,24 @@
 - **Backwards Compatibility**: Supports legacy configuration formats
 - **Auto-Completion**: IDE support through type hints and dataclasses ### Configuration Hierarchy ```
 Controller Configuration
-├── Common Parameters (all controllers)
-│ ├── gains: List[float]
-│ ├── max_force: float
-│ └── dt: float
-├── Classical SMC Specific
-│ ├── boundary_layer: float
-│ ├── switch_method: Literal
-│ └── regularization: float
-├── STA SMC Specific
-│ ├── power_exponent: float
-│ ├── damping_gain: float
-│ └── boundary_layer: float
-├── Adaptive SMC Specific
-│ ├── leak_rate: float
-│ ├── dead_zone: float
-│ ├── adapt_rate_limit: float
-│ └── adaptation bounds
-└── Hybrid SMC Specific ├── hybrid_mode: HybridMode ├── classical_config: ClassicalSMCConfig └── adaptive_config: AdaptiveSMCConfig
+ Common Parameters (all controllers)
+  gains: List[float]
+  max_force: float
+  dt: float
+ Classical SMC Specific
+  boundary_layer: float
+  switch_method: Literal
+  regularization: float
+ STA SMC Specific
+  power_exponent: float
+  damping_gain: float
+  boundary_layer: float
+ Adaptive SMC Specific
+  leak_rate: float
+  dead_zone: float
+  adapt_rate_limit: float
+  adaptation bounds
+ Hybrid SMC Specific  hybrid_mode: HybridMode  classical_config: ClassicalSMCConfig  adaptive_config: AdaptiveSMCConfig
 ```
 
 ---
@@ -275,6 +275,6 @@ adaptive_controller = create_controller('adaptive_smc', config=adaptive_config)
 ``` ### Configuration Validation Test ```python
 # example-metadata:
 
-# runnable: false def validate_all_configurations(): """Test configuration validation for all controller types.""" try: # Test valid configurations configs = { 'classical': ClassicalSMCConfig( gains=[8.0, 6.0, 4.0, 3.0, 15.0, 2.0], max_force=150.0, boundary_layer=0.02 ), 'sta': SuperTwistingSMCConfig( gains=[8.0, 4.0, 12.0, 6.0, 4.85, 3.43], max_force=150.0, dt=0.001 ), 'adaptive': AdaptiveSMCConfig( gains=[12.0, 10.0, 6.0, 5.0, 2.5], max_force=150.0, dt=0.001 ) } for name, config in configs.items(): controller = create_controller(name + '_smc', config=config) print(f"✅ {name.capitalize()} SMC configuration valid") except Exception as e: print(f"❌ Configuration validation failed: {e}") validate_all_configurations()
+# runnable: false def validate_all_configurations(): """Test configuration validation for all controller types.""" try: # Test valid configurations configs = { 'classical': ClassicalSMCConfig( gains=[8.0, 6.0, 4.0, 3.0, 15.0, 2.0], max_force=150.0, boundary_layer=0.02 ), 'sta': SuperTwistingSMCConfig( gains=[8.0, 4.0, 12.0, 6.0, 4.85, 3.43], max_force=150.0, dt=0.001 ), 'adaptive': AdaptiveSMCConfig( gains=[12.0, 10.0, 6.0, 5.0, 2.5], max_force=150.0, dt=0.001 ) } for name, config in configs.items(): controller = create_controller(name + '_smc', config=config) print(f" {name.capitalize()} SMC configuration valid") except Exception as e: print(f" Configuration validation failed: {e}") validate_all_configurations()
 
 ``` This configuration schema reference provides complete documentation for all controller types, their parameters, validation rules, and usage examples. The schemas ensure type safety, mathematical correctness, and production reliability for the enhanced factory system.

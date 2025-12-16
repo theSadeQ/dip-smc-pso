@@ -241,11 +241,11 @@ STATUS: PASS - All statistical elements validated"
 1. Extract all statistical claims from Chapter 8
 2. Identify all tests (t-tests, ANOVA, etc.)
 3. Generate checklist:
-   ✓ Normality test conducted?
-   ✓ p-value reported?
-   ✓ Effect size reported?
-   ✓ Multiple comparison correction applied?
-   ✓ Sample size justified?
+    Normality test conducted?
+    p-value reported?
+    Effect size reported?
+    Multiple comparison correction applied?
+    Sample size justified?
 4. Flag items missing evidence
 5. Check Bonferroni correction: α = 0.05/n
 6. Verify effect size interpretation
@@ -367,7 +367,7 @@ STATUS: PASS - All statistical elements validated"
 
 ### Option C: AI-Heavy with Expert Review (Budget Option)
 - **Time**: 12-15 hours (5-7 expert + 7-8 AI)
-- **AI Cost**: $200-$300 (more comprehensive AI analysis)
+- **AI Cost**: $200-$300 (more complete AI analysis)
 - **Expert Cost**: $425-$595 (@ $85/hour for 5-7 hours)
 - **Total Cost**: $625-$895
 - **Timeline**: 3-4 weeks
@@ -385,7 +385,7 @@ STATUS: PASS - All statistical elements validated"
 - [OK] Generate structured checklists
 - [OK] Verify mathematical formatting
 - [OK] Check logical consistency
-- [OK] Create comprehensive reports
+- [OK] Create complete reports
 - [OK] Compare theory vs. code
 - [OK] Identify missing elements
 

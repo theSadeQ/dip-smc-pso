@@ -218,7 +218,7 @@ $c_i > 0$, then the sliding surface dynamics are exponentially stable
 with convergence rates determined by $c_i$
 {cite}`smc_bucak_2020_analysis_robotics,smc_edardar_2015_hysteresis_compensation,smc_farrell_2006_adaptive_approximation`. *Proof*: The characteristic polynomial of each error component is
 $s + c_i = 0$, yielding eigenvalues $\lambda_i = -c_i < 0$ for
-$c_i > 0$. □
+$c_i > 0$. 
 ```
 
 ## How to Access Sources ### By DOI (Preferred) **Format:** `https://doi.org/{doi}` **Example:**
@@ -266,9 +266,9 @@ grep -A 10 "author.*Levant" docs/bib/smc.bib
 ## Validation Commands ### Check All Citations Valid ```bash
 python scripts/docs/validate_citations.py
 ``` **Expected:**
-- ✅ All 94 entries have DOI or URL
-- ✅ All 39 documentation citations have BibTeX entries
-- ✅ VALIDATION PASSED
+-  All 94 entries have DOI or URL
+-  All 39 documentation citations have BibTeX entries
+-  VALIDATION PASSED
 
 ### List Citations by File ```bash
 # Count citations per BibTeX file

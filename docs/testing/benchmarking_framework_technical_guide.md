@@ -19,37 +19,37 @@
 
 2. **Integration Benchmarking** (`benchmarks/`) - Numerical integration method comparison ```
 Benchmarking Infrastructure
-├── src/benchmarks/ # Statistical benchmarking framework (modular)
-│ ├── metrics/ # Performance metric computation
-│ │ ├── control_metrics.py # ISE, ITAE, RMS control effort
-│ │ ├── stability_metrics.py # Overshoot, damping, oscillation
-│ │ ├── constraint_metrics.py # Saturation violations
-│ │ └── __init__.py # Unified metrics interface
-│ ├── core/ # Trial execution engine
-│ │ ├── trial_runner.py # Multi-trial orchestration
-│ │ └── __init__.py
-│ ├── statistics/ # Statistical analysis
-│ │ ├── confidence_intervals.py # CI computation, hypothesis testing
-│ │ └── __init__.py
-│ ├── config/ # Benchmark configuration
-│ └── statistical_benchmarks_v2.py # Main interface (backward compatible)
-│
-├── benchmarks/ # Integration benchmarking framework
-│ ├── integration/ # Numerical integration methods
-│ │ ├── numerical_methods.py # Euler, RK4, RK45 implementations
-│ │ └── __init__.py
-│ ├── analysis/ # Accuracy & performance analysis
-│ │ ├── accuracy_metrics.py # Energy conservation, convergence
-│ │ └── __init__.py
-│ ├── comparison/ # Method comparison framework
-│ │ ├── method_comparison.py # Systematic comparison engine
-│ │ └── __init__.py
-│ ├── benchmark/ # Benchmark orchestration
-│ │ ├── integration_benchmark.py # Main benchmark class
-│ │ └── __init__.py
-│ └── examples/ # Usage demonstrations
-│
-└── tests/test_benchmarks/ # Benchmark framework tests (18 files) ├── core/ # Core functionality tests ├── statistics/ # Statistical analysis tests ├── integration/ # Integration method tests └── performance/ # Performance regression tests
+ src/benchmarks/ # Statistical benchmarking framework (modular)
+  metrics/ # Performance metric computation
+   control_metrics.py # ISE, ITAE, RMS control effort
+   stability_metrics.py # Overshoot, damping, oscillation
+   constraint_metrics.py # Saturation violations
+   __init__.py # Unified metrics interface
+  core/ # Trial execution engine
+   trial_runner.py # Multi-trial orchestration
+   __init__.py
+  statistics/ # Statistical analysis
+   confidence_intervals.py # CI computation, hypothesis testing
+   __init__.py
+  config/ # Benchmark configuration
+  statistical_benchmarks_v2.py # Main interface (backward compatible)
+
+ benchmarks/ # Integration benchmarking framework
+  integration/ # Numerical integration methods
+   numerical_methods.py # Euler, RK4, RK45 implementations
+   __init__.py
+  analysis/ # Accuracy & performance analysis
+   accuracy_metrics.py # Energy conservation, convergence
+   __init__.py
+  comparison/ # Method comparison framework
+   method_comparison.py # Systematic comparison engine
+   __init__.py
+  benchmark/ # Benchmark orchestration
+   integration_benchmark.py # Main benchmark class
+   __init__.py
+  examples/ # Usage demonstrations
+
+ tests/test_benchmarks/ # Benchmark framework tests (18 files)  core/ # Core functionality tests  statistics/ # Statistical analysis tests  integration/ # Integration method tests  performance/ # Performance regression tests
 ``` ### 1.2 Design Principles #### 1.2.1 Modular Architecture
 - **Single Responsibility**: Each module handles one specific domain
 - **Dependency Injection**: Configurable components for flexibility

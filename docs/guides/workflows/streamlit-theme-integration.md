@@ -376,11 +376,11 @@ div[data-testid="stTabs"] button { ... }
 **Structure:**
 ```
 config/
-├── tokens/
-│   ├── base.json          # Shared tokens
-│   ├── light.json         # Light theme overrides
-│   ├── dark.json          # Dark theme overrides
-│   └── brand_blue.json    # Brand variant
+ tokens/
+    base.json          # Shared tokens
+    light.json         # Light theme overrides
+    dark.json          # Dark theme overrides
+    brand_blue.json    # Brand variant
 ```
 
 **Implementation:**

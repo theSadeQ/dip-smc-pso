@@ -17,7 +17,7 @@
 ### Algorithm Categories
 
 **Optimization Algorithms:**
-- Particle Swarm Optimization (PSO) with advanced features
+- Particle Swarm Optimization (PSO) with features
 - Genetic Algorithm (GA) comparison framework
 - Differential Evolution (DE) comparison framework **Control Algorithms:**
 - Super-Twisting Algorithm (STA) for second-order sliding mode
@@ -207,16 +207,16 @@ print(f" Anti-windup active: {analysis['control_characteristics']['anti_windup_a
 ``` ### Gain Tuning Guidelines #### Stability Constraint **Required:** $K_1 > K_2 > 0$ **Recommended:** $K_1 / K_2 \in [1.2, 3.0]$ - **Ratio too small ($< 1.2$):** Slower convergence, chattering
 
 - **Ratio too large ($> 3.0$):** Aggressive control, potential overshoot #### Performance Trade-offs **Increasing $K_1$:**
-- ✓ Faster convergence
-- ✓ Stronger disturbance rejection
-- ✗ Higher control effort
-- ✗ More chattering **Increasing $K_2$:**
-- ✓ Better steady-state precision
-- ✓ Improved integral action
-- ✗ Risk of instability if $K_2 \geq K_1$ **Decreasing $\alpha$:**
-- ✓ Faster finite-time convergence
-- ✗ More sensitive to noise
-- ✗ Higher control effort near $s = 0$ ### Comparison: STA vs Classical SMC | Aspect | Classical SMC | Super-Twisting |
+-  Faster convergence
+-  Stronger disturbance rejection
+-  Higher control effort
+-  More chattering **Increasing $K_2$:**
+-  Better steady-state precision
+-  Improved integral action
+-  Risk of instability if $K_2 \geq K_1$ **Decreasing $\alpha$:**
+-  Faster finite-time convergence
+-  More sensitive to noise
+-  Higher control effort near $s = 0$ ### Comparison: STA vs Classical SMC | Aspect | Classical SMC | Super-Twisting |
 |--------|---------------|----------------|
 | Convergence | Asymptotic ($\propto e^{-\lambda t}$) | Finite-time ($t < T_{\text{conv}}$) |
 | Chattering | High (discontinuous control) | Low (continuous $u_1$) |

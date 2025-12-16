@@ -8,13 +8,13 @@
 
 You've learned object-oriented programming, inheritance, and navigation strategies. Now it's time to read actual controller source code line by line. Think of this like learning to read sheet music. At first, notes and symbols seem mysterious, but once you understand the notation, you can play any piece.
 
-In this episode, we'll walk through Classical S-M-C's imports and initialization. You'll understand what every import does, see how the class definition establishes inheritance, and trace the dunder init method step by step as it validates gains, unpacks them into meaningful names, and initializes controller state.
+In this episode, this will walk through Classical S-M-C's imports and initialization. You'll understand what every import does, see how the class definition establishes inheritance, and trace the dunder init method step by step as it validates gains, unpacks them into meaningful names, and initializes controller state.
 
-By the end, you'll be able to read any controller's initialization code and understand exactly what's happening.
+By the end, the system will be able to read any controller's initialization code and understand exactly what's happening.
 
 ## What You'll Discover
 
-In this episode, you'll learn:
+In this episode, the system will learn:
 - What each import statement brings into classical underscore s-m-c dot p-y
 - How the class definition establishes inheritance from ControllerInterface
 - The role of docstrings in documenting controller purpose and references
@@ -24,7 +24,7 @@ In this episode, you'll learn:
 
 ## The Imports: Bringing in Tools
 
-Open source slash controllers slash classical underscore s-m-c dot p-y in your editor. The file starts with imports. Let's examine each one.
+Open source slash controllers slash classical underscore s-m-c dot p-y in your editor. The file starts with imports. examine each one.
 
 **Import 1: NumPy**
 
@@ -174,7 +174,7 @@ This docstring is incredibly valuable. It tells you exactly what each gain does 
 
 ## Recap: Core Concepts So Far
 
-Let's recap what we've covered.
+recap what we've covered.
 
 **Imports**: NumPy for numerical operations, typing for type hints, ControllerInterface for inheritance.
 
@@ -329,7 +329,7 @@ Here are the technical terms from this episode with phonetic pronunciations:
 
 ## What's Next
 
-In Episode 8, we'll dive into the compute underscore control method, which is the heart of Classical S-M-C. You'll see state extraction, sliding surface calculation, equivalent control, switching control with tanh, and saturation with n-p dot clip. We'll trace every mathematical operation and understand how the control law balances pendulums.
+In Episode 8, this will dive into the compute underscore control method, which is the heart of Classical S-M-C. You'll see state extraction, sliding surface calculation, equivalent control, switching control with tanh, and saturation with n-p dot clip. We'll trace every mathematical operation and understand how the control law balances pendulums.
 
 Here's a preview question: What's the difference between equivalent control and switching control, and why does Classical S-M-C use both? We'll answer this in detail next episode.
 
@@ -345,7 +345,7 @@ Before moving to Episode 8, ask yourself these questions:
 
 If you can answer these confidently, you're ready to proceed. If anything is unclear, open classical underscore s-m-c dot p-y and read through the imports and dunder init method again, tracing each line.
 
-**Excellent progress! You've decoded the initialization. Let's continue!**
+**Excellent progress! You've decoded the initialization. continue!**
 
 ---
 

@@ -1,10 +1,10 @@
 # MCP Debugging Quick Reference
 
-**🚀 Quick access to common MCP debugging operations**
+** Quick access to common MCP debugging operations**
 
 
 
-## 📋 Slash Commands
+##  Slash Commands
 
 | Command | Description | Use When |
 |---------|-------------|----------|
@@ -19,7 +19,7 @@
 
 
 
-## 🔧 MCP Server Tools
+##  MCP Server Tools
 
 ### filesystem (File Operations)
 
@@ -90,7 +90,7 @@ show({ commit: "<hash>" })
 
 
 
-## 🐛 Common Debugging Scenarios
+##  Common Debugging Scenarios
 
 ### Scenario 1: PSO Not Converging
 
@@ -158,7 +158,7 @@ sqlite: SELECT COUNT(*) FROM simulation_results;
 
 
 
-## 📊 Quick Data Queries
+##  Quick Data Queries
 
 ### PSO Performance
 
@@ -222,7 +222,7 @@ LIMIT 5;
 
 
 
-## 🔍 Search Patterns
+##  Search Patterns
 
 ### Log Analysis Patterns
 
@@ -258,7 +258,7 @@ filesystem: search_files({ pattern: "*.py", query: "deprecated" })
 
 
 
-## 🛠️ Configuration Files
+##  Configuration Files
 
 ### .mcp.json Structure
 
@@ -296,7 +296,7 @@ sqlite-mcp:
 
 
 
-## 🚨 Troubleshooting
+##  Troubleshooting
 
 ### Server Not Responding
 
@@ -349,7 +349,7 @@ which python
 
 
 
-## 📖 Documentation Links
+##  Documentation Links
 
 ### Workflows
 
@@ -371,7 +371,7 @@ which python
 
 
 
-## 💡 Tips and Tricks
+##  Tips and Tricks
 
 ### 1. Parallel Debugging
 

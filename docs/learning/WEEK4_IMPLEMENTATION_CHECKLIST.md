@@ -190,7 +190,7 @@
   - [ ] Add to beginner-roadmap.md (intro section)
   - [ ] Add to each phase overview (phase-1-foundations.md, etc.)
   - [ ] Each shows: Phase name + hours completed/total + percentage
-  - [ ] Example: "Phase 1: [████░░] 40% (16/40 hours)"
+  - [ ] Example: "Phase 1: [] 40% (16/40 hours)"
 
 - [ ] **Test**:
   - [ ] Sphinx builds clean
@@ -203,7 +203,7 @@
 #### Completion Badges Implementation
 - [ ] **Day 6 - Afternoon (90 min)**
   - [ ] Add CSS for badges (within progress styling)
-  - [ ] Create badge component: ✓ or ○ for completed/pending
+  - [ ] Create badge component:  or  for completed/pending
   - [ ] Create grid layout for badges
   - [ ] Test responsive stacking on mobile
 
@@ -212,9 +212,9 @@
   - [ ] Show sub-phase completion status
   - [ ] Example:
     ```
-    ✓ 1.1 Computing Basics (4/40 hours)
-    ✓ 1.2 Python Fundamentals (20/40 hours)
-    ○ 1.3 Environment Setup (3/40 hours)
+     1.1 Computing Basics (4/40 hours)
+     1.2 Python Fundamentals (20/40 hours)
+     1.3 Environment Setup (3/40 hours)
     ```
 
 - [ ] **Test**: Same as above
@@ -413,7 +413,7 @@
 
 ## Joint Testing (Both Agents - Days 8-10)
 
-### Comprehensive Testing
+### complete Testing
 
 #### Sphinx Build & Rendering
 - [ ] **Day 8 - Morning**:
@@ -632,9 +632,9 @@
 **Example**:
 ```
 Agent 1 - Day 1:
-- ✓ Created diagrams 1.1A (Computing Basics) and 1.1B (File System Tree)
-- ✓ Both render correctly, Sphinx builds clean
-- ✓ Mobile tested at 320px
+-  Created diagrams 1.1A (Computing Basics) and 1.1B (File System Tree)
+-  Both render correctly, Sphinx builds clean
+-  Mobile tested at 320px
 - Tomorrow: Create Python Data Types (1.2) and Error Diagnosis (1.3)
 - No blockers
 ```
@@ -678,8 +678,8 @@ Agent 1 - Day 1:
 
 ## Checklist Review Cadence
 
-- **Pre-Implementation**: Check ✓ everything above (1 hour setup)
-- **Daily**: Mark completed items with ✓ and update daily standup
+- **Pre-Implementation**: Check  everything above (1 hour setup)
+- **Daily**: Mark completed items with  and update daily standup
 - **End of Day 3**: Checkpoint 1 (Agent 1 Phase 1, Agent 2 Phase 2)
 - **End of Day 5**: Checkpoint 2 (Agent 1 Phase 3, Agent 2 Phase 4-5)
 - **End of Day 7**: Checkpoint 3 (Progress visualization complete)
@@ -699,9 +699,9 @@ Agent 1 - Day 1:
 
 ---
 
-**Good luck!** 🚀
+**Good luck!** 
 
-This is a well-structured, achievable plan. Follow the checklist, sync daily, test regularly, and you'll deliver high-quality diagrams and visualizations by end of Week 4.
+This is a well-structured, achievable plan. Follow the checklist, sync daily, test regularly, and the system will deliver high-quality diagrams and visualizations by end of Week 4.
 
 **Estimated Time to Success**: 40-45 hours (both agents)
 **Expected Learning Impact**: 25-40% comprehension increase for beginner roadmap users

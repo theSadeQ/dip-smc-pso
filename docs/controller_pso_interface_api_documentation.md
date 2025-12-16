@@ -3,7 +3,7 @@
 #==========================================================================================\\\
 
 # Controller-PSO Interface API Documentation
-**Double-Inverted Pendulum Sliding Mode Control System** ## Executive Summary This document provides API documentation for the interface between Particle Swarm Optimization (PSO) and Sliding Mode Control (SMC) controllers within the Double-Inverted Pendulum system. The interface ensures integration between optimization algorithms and control implementations while maintaining type safety, performance, and mathematical rigor. **API Status**: ✅ **PRODUCTION READY** - All interfaces validated and operational
+**Double-Inverted Pendulum Sliding Mode Control System** ## Executive Summary This document provides API documentation for the interface between Particle Swarm Optimization (PSO) and Sliding Mode Control (SMC) controllers within the Double-Inverted Pendulum system. The interface ensures integration between optimization algorithms and control implementations while maintaining type safety, performance, and mathematical rigor. **API Status**:  **PRODUCTION READY** - All interfaces validated and operational
 **Type Safety**: 100% type-annotated with runtime validation
 **Performance**: Vectorized operations with sub-millisecond controller instantiation
 
@@ -142,7 +142,7 @@ class ValidationResult: """Parameter validation result.""" is_valid: bool errors
 ```python
 # example-metadata:
 
-# runnable: false def robust_controller_factory(gains: np.ndarray, controller_type: str, fallback_gains: Optional[np.ndarray] = None) -> PSO_ControllerInterface: """Robust controller factory with error recovery. Parameters ---------- gains : np.ndarray Primary gain vector controller_type : str Controller type fallback_gains : np.ndarray, optional Fallback gains for error recovery Returns ------- PSO_ControllerInterface Controller instance (primary or fallback) Raises ------ ControllerInstantiationError If both primary and fallback creation fail """ try: # Validate gains first validation = ParameterValidator.validate_gain_vector(gains, controller_type) if not validation.is_valid: raise InvalidGainsError(gains, controller_type, '; '.join(validation.errors)) # Create controller return ControllerFactory.create_controller(controller_type, gains) except Exception as e: if fallback_gains is not None: try: return ControllerFactory.create_controller(controller_type, fallback_gains) except Exception: pass raise ControllerInstantiationError( f"Failed to create {controller_type} controller: {str(e)}" ) from e
+# runnable: false def robust_controller_factory(gains: np.ndarray, controller_type: str, fallback_gains: Optional[np.ndarray] = None) -> PSO_ControllerInterface: """controller with error handling factory with error recovery. Parameters ---------- gains : np.ndarray Primary gain vector controller_type : str Controller type fallback_gains : np.ndarray, optional Fallback gains for error recovery Returns ------- PSO_ControllerInterface Controller instance (primary or fallback) Raises ------ ControllerInstantiationError If both primary and fallback creation fail """ try: # Validate gains first validation = ParameterValidator.validate_gain_vector(gains, controller_type) if not validation.is_valid: raise InvalidGainsError(gains, controller_type, '; '.join(validation.errors)) # Create controller return ControllerFactory.create_controller(controller_type, gains) except Exception as e: if fallback_gains is not None: try: return ControllerFactory.create_controller(controller_type, fallback_gains) except Exception: pass raise ControllerInstantiationError( f"Failed to create {controller_type} controller: {str(e)}" ) from e
 
 ```
 
@@ -215,7 +215,7 @@ from src.optimization.algorithms.pso_optimizer import PSOTuner class CustomSMC: 
 
 ---
 
-## 9. Conclusion The Controller-PSO Interface API provides a comprehensive, type-safe, and performant framework for integrating optimization algorithms with sliding mode controllers. Key API strengths include: **Interface Design:**
+## 9. Conclusion The Controller-PSO Interface API provides a complete, type-safe, and performant framework for integrating optimization algorithms with sliding mode controllers. Key API strengths include: **Interface Design:**
 - **Standardized Contracts**: Consistent interface across all controller types
 - **Type Safety**: Full type annotation with runtime validation
 - **Performance**: Vectorized operations with minimal overhead

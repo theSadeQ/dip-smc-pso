@@ -4,7 +4,7 @@ Master Validation Script
 ========================
 
 Runs all validation checks for DIP-SMC-PSO project and generates
-comprehensive publication-readiness report.
+complete publication-readiness report.
 
 Usage:
     python scripts/docs/verify_all.py

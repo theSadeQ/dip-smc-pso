@@ -13,9 +13,9 @@
 
 | Icon | File | Usage | Color Class |
 |------|------|-------|-------------|
-| ✓ | `check.svg` | Success, passed, confirmed | `.icon-success` (green) |
-| ✗ | `x-mark.svg` | Failed, error, blocked | `.icon-danger` (red) |
-| ⚠ | `warning.svg` | Warning, caution | `.icon-warning` (orange) |
+|  | `check.svg` | Success, passed, confirmed | `.icon-success` (green) |
+|  | `x-mark.svg` | Failed, error, blocked | `.icon-danger` (red) |
+|  | `warning.svg` | Warning, caution | `.icon-warning` (orange) |
 | ℹ | `info.svg` | Information, note | `.icon-info` (blue) |
 
 ### Navigation Icons (`docs/_static/icons/navigation/`)
@@ -76,7 +76,7 @@ All icons use classes from `docs/_static/custom.css`:
 ```markdown
 | Metric | Formula | Lower is Better |
 |--------|---------|-----------------|
-| ISE    | ∫‖x‖² dt | ✓ |
+| ISE    | ∫‖x‖² dt |  |
 ```
 
 **After**:
@@ -100,10 +100,10 @@ All SVG icons include:
 
 ## Browser Support
 
-- Chrome 90+ ✅
-- Firefox 88+ ✅
-- Safari 14+ ✅
-- Edge 90+ ✅
+- Chrome 90+ 
+- Firefox 88+ 
+- Safari 14+ 
+- Edge 90+ 
 - All modern browsers with SVG support
 
 ---
@@ -122,10 +122,10 @@ All SVG icons include:
 
 | Old (Unicode) | New (SVG) | Class |
 |---------------|-----------|-------|
-| ✓ | `check.svg` | `.icon-success` |
-| ✗ | `x-mark.svg` | `.icon-danger` |
-| ⚠️ | `warning.svg` | `.icon-warning` |
-| ℹ️ | `info.svg` | `.icon-info` |
+|  | `check.svg` | `.icon-success` |
+|  | `x-mark.svg` | `.icon-danger` |
+|  | `warning.svg` | `.icon-warning` |
+| ℹ | `info.svg` | `.icon-info` |
 | → | `arrow-right.svg` | `.icon-primary` |
 | ← | `arrow-left.svg` | `.icon-primary` |
 | ↓ | `arrow-down.svg` | `.icon-primary` |
@@ -133,8 +133,8 @@ All SVG icons include:
 ### Sed Command for Batch Replacement
 
 ```bash
-# Replace ✓ with SVG check icon in all markdown files
-find docs/guides -name "*.md" -exec sed -i 's/✓/![check](\/_static\/icons\/status\/check.svg){.icon .icon-success}/g' {} +
+# Replace  with SVG check icon in all markdown files
+find docs/guides -name "*.md" -exec sed -i 's//![check](\/_static\/icons\/status\/check.svg){.icon .icon-success}/g' {} +
 ```
 
 **Warning**: Review changes manually before committing!

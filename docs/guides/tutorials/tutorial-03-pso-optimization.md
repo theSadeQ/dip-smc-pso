@@ -38,33 +38,33 @@ x[i] = x[i] + v[i]
 - `w`: Inertia weight (0.4-0.9, balances exploration vs exploitation)
 - `c1`: Cognitive coefficient (~2.0, attraction to personal best)
 - `c2`: Social coefficient (~2.0, attraction to global best)
-- `r1, r2`: Random numbers in [0, 1] (stochastic exploration) > **📚 Theory Deep Dive:** For PSO foundations, see:
+- `r1, r2`: Random numbers in [0, 1] (stochastic exploration) > ** Theory Deep Dive:** For PSO foundations, see:
 > - [PSO Algorithm Theory](../theory/pso-theory.md) - Swarm intelligence, convergence theory, parameter selection ### PSO Optimization Workflow **Complete PSO Process Visualization:** ```mermaid
-flowchart TD START["🎯 Start PSO Optimization"] --> INIT["📍 Initialize Swarm<br/>Generate N random particles<br/>(candidate gain sets)"] INIT --> INIT_EVAL["📊 Initial Fitness Evaluation<br/>For each particle:<br/>- Run simulation<br/>- Compute cost function<br/>- Record performance"] INIT_EVAL --> SET_BEST["🏆 Set Initial Bests<br/>- Personal best (pbest) = current position<br/>- Global best (gbest) = best in swarm"] SET_BEST --> ITER_START{Iteration Loop<br/>i < max_iters?} ITER_START -->|Yes| UPDATE_VEL["⚡ Update Velocities<br/>v[i] = w·v[i] + c1·r1·(pbest - x)<br/>+ c2·r2·(gbest - x)<br/>(Cognitive + Social components)"] UPDATE_VEL --> UPDATE_POS["📍 Update Positions<br/>x[i] = x[i] + v[i]<br/>Clamp to bounds"] UPDATE_POS --> EVAL["📊 Evaluate Fitness<br/>For each particle:<br/>- Simulate with new gains<br/>- Compute cost function"] EVAL --> UPDATE_PBEST["🔄 Update Personal Best<br/>If cost < pbest_cost:<br/>pbest = current position"] UPDATE_PBEST --> UPDATE_GBEST["🏆 Update Global Best<br/>If cost < gbest_cost:<br/>gbest = current position"] UPDATE_GBEST --> CHECK_CONV{Convergence<br/>Check} CHECK_CONV -->|Converged<br/>or max iters| DONE["✅ PSO Complete<br/>Return gbest (optimized gains)"] CHECK_CONV -->|Not converged| ITER_START DONE --> VALIDATE["✔️ Validation<br/>Re-simulate with optimized gains<br/>Verify performance improvement"] VALIDATE --> FINAL["🎉 Optimized Controller Ready<br/>Save gains to JSON"] style START fill:#ccccff style INIT fill:#ffffcc style INIT_EVAL fill:#ffcccc style SET_BEST fill:#ccffcc style ITER_START fill:#ccccff style UPDATE_VEL fill:#ffffcc style UPDATE_POS fill:#ffcccc style EVAL fill:#ccffcc style UPDATE_PBEST fill:#ffffcc style UPDATE_GBEST fill:#ccffcc style CHECK_CONV fill:#ffcccc style DONE fill:#ccffcc style VALIDATE fill:#ffffcc style FINAL fill:#ccccff
-``` **Workflow Stages:** 1. 🔵 **Initialization**: Create swarm with random candidate approaches 2. 🟡 **Velocity Update**: Adjust particle search direction (exploration + exploitation)
-3. 🔴 **Position Update**: Move particles in search space
-4. 🟢 **Fitness Evaluation**: Simulate and compute cost for each particle
-5. 🟢 **Best Tracking**: Update personal and global bests
-6. 🔴 **Convergence Check**: Stop if converged or max iterations reached
-7. 🟡 **Validation**: Verify final optimized gains **Typical Execution Times** (30 particles, 100 iterations):
+flowchart TD START[" Start PSO Optimization"] --> INIT[" Initialize Swarm<br/>Generate N random particles<br/>(candidate gain sets)"] INIT --> INIT_EVAL[" Initial Fitness Evaluation<br/>For each particle:<br/>- Run simulation<br/>- Compute cost function<br/>- Record performance"] INIT_EVAL --> SET_BEST[" Set Initial Bests<br/>- Personal best (pbest) = current position<br/>- Global best (gbest) = best in swarm"] SET_BEST --> ITER_START{Iteration Loop<br/>i < max_iters?} ITER_START -->|Yes| UPDATE_VEL[" Update Velocities<br/>v[i] = w·v[i] + c1·r1·(pbest - x)<br/>+ c2·r2·(gbest - x)<br/>(Cognitive + Social components)"] UPDATE_VEL --> UPDATE_POS[" Update Positions<br/>x[i] = x[i] + v[i]<br/>Clamp to bounds"] UPDATE_POS --> EVAL[" Evaluate Fitness<br/>For each particle:<br/>- Simulate with new gains<br/>- Compute cost function"] EVAL --> UPDATE_PBEST[" Update Personal Best<br/>If cost < pbest_cost:<br/>pbest = current position"] UPDATE_PBEST --> UPDATE_GBEST[" Update Global Best<br/>If cost < gbest_cost:<br/>gbest = current position"] UPDATE_GBEST --> CHECK_CONV{Convergence<br/>Check} CHECK_CONV -->|Converged<br/>or max iters| DONE[" PSO Complete<br/>Return gbest (optimized gains)"] CHECK_CONV -->|Not converged| ITER_START DONE --> VALIDATE[" Validation<br/>Re-simulate with optimized gains<br/>Verify performance improvement"] VALIDATE --> FINAL[" Optimized Controller Ready<br/>Save gains to JSON"] style START fill:#ccccff style INIT fill:#ffffcc style INIT_EVAL fill:#ffcccc style SET_BEST fill:#ccffcc style ITER_START fill:#ccccff style UPDATE_VEL fill:#ffffcc style UPDATE_POS fill:#ffcccc style EVAL fill:#ccffcc style UPDATE_PBEST fill:#ffffcc style UPDATE_GBEST fill:#ccffcc style CHECK_CONV fill:#ffcccc style DONE fill:#ccffcc style VALIDATE fill:#ffffcc style FINAL fill:#ccccff
+``` **Workflow Stages:** 1.  **Initialization**: Create swarm with random candidate approaches 2.  **Velocity Update**: Adjust particle search direction (exploration + exploitation)
+3.  **Position Update**: Move particles in search space
+4.  **Fitness Evaluation**: Simulate and compute cost for each particle
+5.  **Best Tracking**: Update personal and global bests
+6.  **Convergence Check**: Stop if converged or max iterations reached
+7.  **Validation**: Verify final optimized gains **Typical Execution Times** (30 particles, 100 iterations):
 - **Classical SMC** (6 gains): ~5-10 minutes
 - **Super-Twisting** (6 gains): ~8-12 minutes
 - **Adaptive SMC** (5 gains): ~6-10 minutes
 - **Hybrid STA** (4 base gains): ~10-15 minutes **Convergence Patterns:** ```mermaid
-graph LR subgraph "Typical PSO Convergence" direction TB EARLY["Iterations 1-20<br/>🔴 Exploration Phase<br/>High cost variance<br/>Global search"] MID["Iterations 21-60<br/>🟡 Exploitation Phase<br/>Decreasing cost<br/>Focusing on best region"] LATE["Iterations 61-100<br/>🟢 Convergence Phase<br/>Minimal cost change<br/>Fine-tuning"] end EARLY --> MID MID --> LATE style EARLY fill:#ffcccc style MID fill:#ffffcc style LATE fill:#ccffcc
+graph LR subgraph "Typical PSO Convergence" direction TB EARLY["Iterations 1-20<br/> Exploration Phase<br/>High cost variance<br/>Global search"] MID["Iterations 21-60<br/> Exploitation Phase<br/>Decreasing cost<br/>Focusing on best region"] LATE["Iterations 61-100<br/> Convergence Phase<br/>Minimal cost change<br/>Fine-tuning"] end EARLY --> MID MID --> LATE style EARLY fill:#ffcccc style MID fill:#ffffcc style LATE fill:#ccffcc
 ``` **Convergence Indicators**:
 
-- 🔴 **Early iterations (1-20%)**: High cost variance, global exploration
-- 🟡 **Mid iterations (20-60%)**: Cost decreasing, swarm converging
-- 🟢 **Late iterations (60-100%)**: Minimal improvement, fine-tuning **Good Convergence Signs**:
-- ✅ Steady cost decrease (no plateaus early)
-- ✅ gbest cost improves regularly
-- ✅ Swarm diversity decreases gradually
-- ✅ Final cost significantly lower than initial **Poor Convergence Signs**:
-- ❌ Cost plateaus at iteration 10-20 (premature convergence)
-- ❌ High cost variance throughout (not converging)
-- ❌ Oscillating gbest cost (unstable)
-- ❌ Final cost similar to initial (no optimization)
+-  **Early iterations (1-20%)**: High cost variance, global exploration
+-  **Mid iterations (20-60%)**: Cost decreasing, swarm converging
+-  **Late iterations (60-100%)**: Minimal improvement, fine-tuning **Good Convergence Signs**:
+-  Steady cost decrease (no plateaus early)
+-  gbest cost improves regularly
+-  Swarm diversity decreases gradually
+-  Final cost significantly lower than initial **Poor Convergence Signs**:
+-  Cost plateaus at iteration 10-20 (premature convergence)
+-  High cost variance throughout (not converging)
+-  Oscillating gbest cost (unstable)
+-  Final cost similar to initial (no optimization)
 
 ---
 
@@ -141,7 +141,7 @@ Performance Improvement:
 ISE: 0.4523 → 0.2847 (37.1% better)
 Settling: 3.18s → 2.65s
 Overshoot: 8.47% → 4.32%
-``` ### PSO Progress Monitoring During optimization, you'll see real-time progress: ```
+``` ### PSO Progress Monitoring During optimization, the system will see real-time progress: ```
 PSO Optimization for classical_smc
 Swarm Size: 30 particles
 Max Iterations: 100
@@ -206,17 +206,17 @@ python simulate.py --load gains_classical.json \ --override "simulation.initial_
 
 results = {} for scenario in scenarios: data = json.load(open(f'test_{scenario}.json')) results[scenario] = { 'ise': data['metrics']['ise'], 'settling': data['metrics']['settling_time'], 'stable': data['metrics']['settling_time'] < 10.0 # Stability criterion } # Print summary
 print("Robustness Validation:")
-for scenario, metrics in results.items(): status = "✓" if metrics['stable'] else "✗" print(f"{status} {scenario:10s}: ISE={metrics['ise']:.3f}, Settling={metrics['settling']:.2f}s")
+for scenario, metrics in results.items(): status = "" if metrics['stable'] else "" print(f"{status} {scenario:10s}: ISE={metrics['ise']:.3f}, Settling={metrics['settling']:.2f}s")
 ``` **Expected Output:**
 ```
 
 Robustness Validation:
-✓ small : ISE=0.285, Settling=2.65s
-✓ large : ISE=1.234, Settling=4.82s
-✓ cart : ISE=0.312, Settling=2.89s
-✓ velocity : ISE=0.451, Settling=3.21s
+ small : ISE=0.285, Settling=2.65s
+ large : ISE=1.234, Settling=4.82s
+ cart : ISE=0.312, Settling=2.89s
+ velocity : ISE=0.451, Settling=3.21s
 ``` **Red Flags:**
-- Any scenario marked with ✗ (unstable)
+- Any scenario marked with  (unstable)
 - Settling time > 10 seconds
 - ISE variance > 5× across scenarios (over-tuned to specific condition)
 
@@ -378,13 +378,13 @@ if 'pso_history' in pso_log: costs = pso_log['pso_history']['best_costs'] improv
 - **Swarm size** and **iterations** control exploration vs computation
 - **Parameter bounds** should be wide but physically meaningful
 - **Cost function** design is critical—must align with actual objectives
-- **Always validate** optimized gains on diverse scenarios **When to Use PSO:** ✅ Controller gain tuning (4-10 parameters)
-✅ Non-convex, non-differentiable cost landscapes
-✅ Computational budget allows (minutes to hours)
-✅ Want global optimization (avoid local minima) **When NOT to Use PSO:** ❌ >20 parameters (curse of dimensionality)
-❌ Very expensive simulations (>1 minute per evaluation)
-❌ Gradient information available (use gradient-based methods)
-❌ Need real-time adaptation (use adaptive control instead)
+- **Always validate** optimized gains on diverse scenarios **When to Use PSO:**  Controller gain tuning (4-10 parameters)
+ Non-convex, non-differentiable cost landscapes
+ Computational budget allows (minutes to hours)
+ Want global optimization (avoid local minima) **When NOT to Use PSO:**  >20 parameters (curse of dimensionality)
+ Very expensive simulations (>1 minute per evaluation)
+ Gradient information available (use gradient-based methods)
+ Need real-time adaptation (use adaptive control instead)
 
 ---
 

@@ -32,7 +32,7 @@ code "D:\Projects\main\docs\thesis\chapters\appendix_a_proofs.md"
 
 ---
 
-## PART 1: STATISTICAL VALIDATION (30 min) ⚠️ CRITICAL
+## PART 1: STATISTICAL VALIDATION (30 min)  CRITICAL
 
 ### Task 1A: Verify Bonferroni Correction (10 min)
 
@@ -56,8 +56,8 @@ Ctrl+F → Type: "Bonferroni"
 - [ ] Found text like "corrected for multiple comparisons"
 - [ ] Found α = 0.00333 or α/15
 
-**If FOUND**: ✅ Great! Note the location. Move to Step 2.
-**If NOT FOUND**: ⚠️ Continue to Step 2 to check if it's implicit.
+**If FOUND**:  Great! Note the location. Move to Step 2.
+**If NOT FOUND**:  Continue to Step 2 to check if it's implicit.
 
 ---
 
@@ -77,8 +77,8 @@ Ctrl+F → Type: "0.00333" or "0.003"
 - [ ] Found text comparing p-values to 0.00333 (not 0.05)
 - [ ] Table shows corrected alpha column
 
-**If FOUND**: ✅ Bonferroni is applied! Just not explicitly named.
-**If NOT FOUND**: ⚠️ Move to Step 3.
+**If FOUND**:  Bonferroni is applied! Just not explicitly named.
+**If NOT FOUND**:  Move to Step 3.
 
 ---
 
@@ -89,7 +89,7 @@ Ctrl+F → Type: "p < 0.001" or "p-value"
 ```
 
 **What I already found** (from my research):
-- **Line 53**: "p less than 0.001" ✅
+- **Line 53**: "p less than 0.001" 
 - **Line 13**: Cohen's d = 5.29 result
 - **Line 58**: Welch's t-test mentioned
 
@@ -106,10 +106,10 @@ Ctrl+F → Type: "p < 0.001" or "p-value"
 
 | Finding | Action Needed |
 |---------|---------------|
-| ✅ "Bonferroni" found explicitly | None - perfect! |
-| ✅ α = 0.00333 found | None - correction applied correctly |
-| ⚠️ Using p < 0.001 threshold | Consider adding one sentence: "To control for multiple comparisons across 15 tests, we applied Bonferroni correction (α = 0.05/15 = 0.00333)" |
-| ❌ Using p < 0.05 threshold | **CRITICAL FIX NEEDED** - Must add Bonferroni correction |
+|  "Bonferroni" found explicitly | None - perfect! |
+|  α = 0.00333 found | None - correction applied correctly |
+|  Using p < 0.001 threshold | Consider adding one sentence: "To control for multiple comparisons across 15 tests, we applied Bonferroni correction (α = 0.05/15 = 0.00333)" |
+|  Using p < 0.05 threshold | **CRITICAL FIX NEEDED** - Must add Bonferroni correction |
 
 **Your verdict**:
 - [ ] Bonferroni correction: **FOUND / IMPLICIT / NEEDS ADDING**
@@ -149,7 +149,7 @@ Ctrl+F → Search each term:
 - [ ] Found other normality test name
 - [ ] Found p-value for normality test (should be p > 0.05 = normal)
 
-**If FOUND**: ✅ Great! Note the test name and location.
+**If FOUND**:  Great! Note the test name and location.
 **If NOT FOUND**: Continue to Step 2.
 
 ---
@@ -171,7 +171,7 @@ Ctrl+F → Type: "normality" or "normal distribution"
 - [ ] Found assumption mentioned
 - [ ] Found visual check mentioned (Q-Q plot, histogram)
 
-**If FOUND**: ✅ Assumption acknowledged, even if test not named.
+**If FOUND**:  Assumption acknowledged, even if test not named.
 **If NOT FOUND**: Continue to Step 3.
 
 ---
@@ -201,7 +201,7 @@ Ctrl+F → Type: "Welch"
 ```
 
 **What I found** (from research):
-- **Line 58**: "Welch's t-test" explicitly mentioned ✅
+- **Line 58**: "Welch's t-test" explicitly mentioned 
 
 **Note**: Welch's t-test is ROBUST to violations of normality assumption (especially with large samples). Less critical than standard t-test.
 
@@ -217,10 +217,10 @@ Ctrl+F → Type: "Welch"
 
 | Finding | Action Needed |
 |---------|---------------|
-| ✅ Shapiro-Wilk test mentioned | None - excellent! |
-| ✅ "Normality verified" stated | Low priority - consider adding test name |
-| ⚠️ Welch's t-test + large n | Low priority - Welch's is robust to non-normality |
-| ❌ No mention + standard t-test | **CRITICAL FIX NEEDED** - Must add normality verification |
+|  Shapiro-Wilk test mentioned | None - excellent! |
+|  "Normality verified" stated | Low priority - consider adding test name |
+|  Welch's t-test + large n | Low priority - Welch's is robust to non-normality |
+|  No mention + standard t-test | **CRITICAL FIX NEEDED** - Must add normality verification |
 
 **Your verdict**:
 - [ ] Normality verification: **FOUND / IMPLIED / NEEDS ADDING**
@@ -244,9 +244,9 @@ Ctrl+F → Type: "Welch"
 
 | Location | Finding | Status |
 |----------|---------|--------|
-| Line 13 | Cohen's d = 5.29 (MT-6 optimization) | ✅ Very large |
-| Line 54 | Cohen's d = -26.5 (MT-7 validation) | ✅ Very large |
-| Line 58 | Welch's t-test mentioned | ✅ |
+| Line 13 | Cohen's d = 5.29 (MT-6 optimization) |  Very large |
+| Line 54 | Cohen's d = -26.5 (MT-7 validation) |  Very large |
+| Line 58 | Welch's t-test mentioned |  |
 
 **What to Do**:
 
@@ -272,14 +272,14 @@ Ctrl+F → Type: "t-test" or "p <" or "p ="
 **For each test found, check**:
 
 **Test 1** (MT-6 optimization, line 13):
-- [ ] Effect size reported: Cohen's d = 5.29 ✅
-- [ ] Value ≥ 0.5: YES (5.29 >> 0.5) ✅
-- [ ] Interpretation stated: "very large" ✅
+- [ ] Effect size reported: Cohen's d = 5.29 
+- [ ] Value ≥ 0.5: YES (5.29 >> 0.5) 
+- [ ] Interpretation stated: "very large" 
 
 **Test 2** (MT-7 overfitting, line 54):
-- [ ] Effect size reported: Cohen's d = -26.5 ✅
-- [ ] Value ≥ 0.5: YES (|-26.5| >> 0.5) ✅
-- [ ] Interpretation stated: "very large" ✅
+- [ ] Effect size reported: Cohen's d = -26.5 
+- [ ] Value ≥ 0.5: YES (|-26.5| >> 0.5) 
+- [ ] Interpretation stated: "very large" 
 
 **Test 3** (if exists):
 - [ ] Effect size reported: d = _______
@@ -311,10 +311,10 @@ Ctrl+F → Type: "Cohen" or "effect size"
 
 | Finding | Status |
 |---------|--------|
-| All tests have effect sizes ≥ 0.5 | ✅ Excellent |
-| Missing effect size for 1-2 tests | ⚠️ Needs adding |
-| Effect sizes < 0.5 | ⚠️ Practical significance questionable |
-| No effect sizes reported | ❌ CRITICAL - Must add |
+| All tests have effect sizes ≥ 0.5 |  Excellent |
+| Missing effect size for 1-2 tests |  Needs adding |
+| Effect sizes < 0.5 |  Practical significance questionable |
+| No effect sizes reported |  CRITICAL - Must add |
 
 **Your verdict**:
 - [ ] Effect sizes: **ALL PRESENT / SOME MISSING / NONE**
@@ -493,7 +493,7 @@ docs/thesis/chapters/04_sliding_mode_control.md
 
 ---
 
-### Task 2D: Verify Equation 3.15 in Appendix (3 min) ⚠️ ONLY EQUATION FLAGGED
+### Task 2D: Verify Equation 3.15 in Appendix (3 min)  ONLY EQUATION FLAGGED
 
 **This is THE ONLY equation reference flagged - must verify!**
 
@@ -554,7 +554,7 @@ Ctrl+F → "3.15" or search for equation tags
 
 **Scroll to "Notation Inconsistencies" section** (around line 171)
 
-**What you'll see**:
+**What the system will see**:
 - Symbols with multiple forms (e.g., `theta` has 4 variations)
 - Base letters used with different subscripts (e.g., `k`, `k_1`, `k_d`)
 
@@ -781,7 +781,7 @@ python check_notation.py
 - [ ] All validation reports reviewed and understood
 - [ ] Confident in thesis quality
 
-**Your thesis is now validated and ready for committee submission!** ✅
+**Your thesis is now validated and ready for committee submission!** 
 
 ---
 

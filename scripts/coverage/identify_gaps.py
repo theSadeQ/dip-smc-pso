@@ -257,7 +257,7 @@ class GapIdentifier:
         print("="*90)
 
         if not gaps:
-            print("\n✓ No coverage gaps found! All targets met.\n")
+            print("\n No coverage gaps found! All targets met.\n")
             return
 
         print(f"\nTotal Gaps: {len(gaps)}")
@@ -338,7 +338,7 @@ class GapIdentifier:
         with open(output_file, 'w') as f:
             json.dump(plans_dict, f, indent=2)
 
-        print(f"✓ Test plan saved to {output_file}")
+        print(f" Test plan saved to {output_file}")
 
 
 def main():

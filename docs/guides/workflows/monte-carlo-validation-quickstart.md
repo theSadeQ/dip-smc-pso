@@ -131,7 +131,7 @@ print("\\nPlot saved: monte_carlo_quick_test/performance_comparison.png")
 - N=10: Power ≈ 0.25 (25% chance of detecting effect)
 - N=20: Power ≈ 0.45 (45%)
 - N=30: Power ≈ 0.60 (60%)
-- N=50: Power ≈ 0.82 (82%) ✅ Adequate
+- N=50: Power ≈ 0.82 (82%)  Adequate
 - N=100: Power ≈ 0.97 (97%) **Recommendation**: Aim for power ≥ 0.80 (80%) ### When to Use Which Test **Welch's t-test (recommended default):**
 - Comparing two controllers
 - Don't assume equal variances
@@ -213,18 +213,18 @@ print("\\nPlot saved: monte_carlo_quick_test/analysis_summary.png") def interpre
 
 ## Next Steps **After Quick Validation:**
 
-1. ✅ Verify Monte Carlo workflow works
-2. ✅ Check statistical analysis pipeline
-3. ➡️ Scale up to N=50 trials for full study
-4. ➡️ Add additional scenarios (parameter variations)
-5. ➡️ Document results in research paper format **For Full Research Study:**
-➡️ Return to [Tutorial 05: Research Workflow](../tutorials/tutorial-05-research-workflow.md)
-➡️ Follow complete experimental design (50+ trials, multiple scenarios)
-➡️ Prepare publication-quality figures and tables
+1.  Verify Monte Carlo workflow works
+2.  Check statistical analysis pipeline
+3.  Scale up to N=50 trials for full study
+4.  Add additional scenarios (parameter variations)
+5.  Document results in research paper format **For Full Research Study:**
+ Return to [Tutorial 05: Research Workflow](../tutorials/tutorial-05-research-workflow.md)
+ Follow complete experimental design (50+ trials, multiple scenarios)
+ Prepare publication-quality figures and tables
 
 ---
 
-**Document Status:** ✅ Practical Templates
+**Document Status:**  Practical Templates
 **Last Updated:** 2025-10-07
 **Validation Method:** Code templates based on scipy/statsmodels APIs
 **Recommended Use:** Quick validation before full-scale studies

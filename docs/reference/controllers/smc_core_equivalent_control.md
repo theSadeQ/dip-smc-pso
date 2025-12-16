@@ -93,16 +93,16 @@ Where:
 ### Model-Based vs Model-Free
 
 **Model-Based (Equivalent Control):**
-- ✅ Accurate on sliding surface
-- ✅ Smooth control
-- ❌ Requires accurate model
-- ❌ Computational cost $O(n^3)$ for inversion
+-  Accurate on sliding surface
+-  Smooth control
+-  Requires accurate model
+-  Computational cost $O(n^3)$ for inversion
 
 **Model-Free (Pure Switching):**
-- ✅ Robust to model uncertainty
-- ✅ Low computational cost
-- ❌ High-frequency chattering
-- ❌ Actuator wear
+-  Robust to model uncertainty
+-  Low computational cost
+-  High-frequency chattering
+-  Actuator wear
 
 ### Hybrid Approach
 

@@ -1,12 +1,12 @@
 # React Bits - Quick Reference Cheat Sheet
 
-One-page reference for the most useful components. 📋
+One-page reference for the most useful components. 
 
 
 
-## 🔥 Top 20 Most Useful Components
+##  Top 20 Most Useful Components
 
-### Text & Typography (⭐ Essential)
+### Text & Typography ( Essential)
 
 | Component | Use Case | Props |
 |-----------|----------|-------|
@@ -16,7 +16,7 @@ One-page reference for the most useful components. 📋
 | **TextType** | Typewriter effect | `text`, `speed` |
 | **GradientText** | Colorful headings | `text`, `colors[]` |
 
-### UI Components (⭐ Essential)
+### UI Components ( Essential)
 
 | Component | Use Case | Props |
 |-----------|----------|-------|
@@ -26,7 +26,7 @@ One-page reference for the most useful components. 📋
 | **AnimatedList** | Lists with animation | `items[]`, `delay` |
 | **Stepper** | Progress indicator | `steps[]`, `current` |
 
-### Backgrounds (⭐ Essential)
+### Backgrounds ( Essential)
 
 | Component | Use Case | Props |
 |-----------|----------|-------|
@@ -36,7 +36,7 @@ One-page reference for the most useful components. 📋
 | **Waves** | Wave patterns | `amplitude`, `frequency` |
 | **DotGrid** | Minimalist background | `spacing`, `color` |
 
-### Animations (⭐ Essential)
+### Animations ( Essential)
 
 | Component | Use Case | Props |
 |-----------|----------|-------|
@@ -48,7 +48,7 @@ One-page reference for the most useful components. 📋
 
 
 
-## 🎯 By Use Case
+##  By Use Case
 
 ### Dashboard Hero Section
 
@@ -105,7 +105,7 @@ import Stepper from '@/components/react-bits/Stepper'
 
 
 
-## 📦 Quick Copy Commands
+##  Quick Copy Commands
 
 ### Copy Popular Components
 
@@ -130,7 +130,7 @@ cp src/content/Backgrounds/Particles/component.tsx ../study-dashboard/components
 
 
 
-## 🎨 Common Props Patterns
+##  Common Props Patterns
 
 ### Text Components
 
@@ -170,7 +170,7 @@ cp src/content/Backgrounds/Particles/component.tsx ../study-dashboard/components
 
 
 
-## 🚀 One-Liner Integrations
+##  One-Liner Integrations
 
 ### Replace Text
 
@@ -216,13 +216,13 @@ cp src/content/Backgrounds/Particles/component.tsx ../study-dashboard/components
 
 
 
-## 🔧 Required Dependencies
+##  Required Dependencies
 
 ### Minimal Setup (Works Immediately)
 
-- ✅ Framer Motion - Already in your dashboard
-- ✅ React - Already installed
-- ✅ Tailwind CSS - Already configured
+-  Framer Motion - Already in your dashboard
+-  React - Already installed
+-  Tailwind CSS - Already configured
 
 ### Optional (For Advanced Components)
 
@@ -239,36 +239,36 @@ npm install @react-spring/web
 
 
 
-## 📂 Component Locations
+##  Component Locations
 
 Quick reference map:
 
 ```
 src/content/
-├── TextAnimations/     # Text effects
-│   ├── ShinyText/
-│   ├── CountUp/
-│   ├── GlitchText/
-│   └── ...
-├── Components/         # UI components
-│   ├── MagicBento/
-│   ├── TiltedCard/
-│   ├── Dock/
-│   └── ...
-├── Backgrounds/        # Backgrounds
-│   ├── Aurora/
-│   ├── Galaxy/
-│   ├── Particles/
-│   └── ...
-└── Animations/         # Effects
-    ├── BlobCursor/
-    ├── ClickSpark/
-    └── ...
+ TextAnimations/     # Text effects
+    ShinyText/
+    CountUp/
+    GlitchText/
+    ...
+ Components/         # UI components
+    MagicBento/
+    TiltedCard/
+    Dock/
+    ...
+ Backgrounds/        # Backgrounds
+    Aurora/
+    Galaxy/
+    Particles/
+    ...
+ Animations/         # Effects
+     BlobCursor/
+     ClickSpark/
+     ...
 ```
 
 
 
-## 💡 Pro Tips
+##  Pro Tips
 
 1. **Always use "use client"** directive for interactive components
    ```tsx
@@ -301,7 +301,7 @@ src/content/
 
 
 
-## 🎯 Just Ask Claude!
+##  Just Ask Claude!
 
 Instead of manually copying, simply say:
 
@@ -313,11 +313,11 @@ Instead of manually copying, simply say:
 
 > "Add **MagicBento** grid for the stats cards"
 
-Claude will automatically find and integrate the component! 🚀
+Claude will automatically find and integrate the component! 
 
 
 
-## 📚 Full Documentation
+##  Full Documentation
 
 - **Component Index**: [`COMPONENTS_INDEX.md`](./COMPONENTS_INDEX.md) - All 115+ components
 - **Quick Start**: [`QUICK_START.md`](./QUICK_START.md) - Getting started guide
@@ -326,4 +326,4 @@ Claude will automatically find and integrate the component! 🚀
 
 
 
-**Save this cheat sheet for quick reference!** 📌
+**Save this cheat sheet for quick reference!** 

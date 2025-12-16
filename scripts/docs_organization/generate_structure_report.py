@@ -5,7 +5,7 @@
 """
 Documentation Structure Health Report Generator
 
-Generates comprehensive health score and structural analysis for documentation directories.
+Generates complete health score and structural analysis for documentation directories.
 
 Health Scoring Criteria (10-point scale):
     - Organization: Clear directory hierarchy and logical file placement
@@ -342,7 +342,7 @@ class DocumentationHealthAnalyzer:
 
     def generate_report(self) -> Dict:
         """
-        Generate comprehensive health report.
+        Generate complete health report.
 
         Returns:
             Report dictionary with scores, metrics, and recommendations
@@ -372,9 +372,9 @@ class DocumentationHealthAnalyzer:
         self.results['overall_score'] = round(overall_score, 1)
 
         # Print component scores
-        print("\n📊 COMPONENT SCORES (0-10 scale):")
+        print("\n COMPONENT SCORES (0-10 scale):")
         for component, score in components.items():
-            status = "✅" if score >= 9.0 else "⚠️" if score >= 7.0 else "❌"
+            status = "" if score >= 9.0 else "" if score >= 7.0 else ""
             print(f"  {status} {component:20s}: {score:4.1f}/10.0")
 
         print(f"\n{'=' * 90}")
@@ -397,7 +397,7 @@ class DocumentationHealthAnalyzer:
 
         # Print issues
         if self.results['issues']:
-            print("\n⚠️  ISSUES DETECTED:")
+            print("\n  ISSUES DETECTED:")
             for i, issue in enumerate(self.results['issues'][:10], 1):  # Show first 10
                 print(f"  {i}. {issue}")
 
@@ -406,7 +406,7 @@ class DocumentationHealthAnalyzer:
 
         # Print recommendations
         if self.results['recommendations']:
-            print("\n💡 RECOMMENDATIONS:")
+            print("\n RECOMMENDATIONS:")
             for i, rec in enumerate(self.results['recommendations'], 1):
                 print(f"  {i}. {rec}")
 
@@ -441,7 +441,7 @@ def main():
         args.output.parent.mkdir(parents=True, exist_ok=True)
         with open(args.output, 'w', encoding='utf-8') as f:
             json.dump(report, f, indent=2)
-        print(f"\n📄 Report saved to: {args.output}")
+        print(f"\n Report saved to: {args.output}")
 
     # Exit code based on health score
     if report['overall_score'] >= 9.0:

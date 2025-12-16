@@ -19,8 +19,8 @@
 | **Super-Twisting SMC** | Chattering reduction | High-frequency actuators, smooth control | Medium |
 | **Adaptive SMC** | Uncertainty handling | Unknown/varying parameters | Medium-High |
 | **Hybrid Adaptive STA** | Best of both worlds | High-performance applications | High | ### Controller Evolution ```
-Classical SMC (1970s) ↓ ├─→ Super-Twisting SMC (1990s) ← Addresses chattering ├─→ Adaptive SMC (1980s) ← Addresses uncertainty └─→ Hybrid Adaptive STA (2000s) ← Combines both
-``` > **📚 Theory Deep Dive:** For mathematical foundations of these controllers, see:
+Classical SMC (1970s) ↓ → Super-Twisting SMC (1990s) ← Addresses chattering → Adaptive SMC (1980s) ← Addresses uncertainty → Hybrid Adaptive STA (2000s) ← Combines both
+``` > ** Theory Deep Dive:** For mathematical foundations of these controllers, see:
 > - [SMC Theory Guide](../theory/smc-theory.md) - Lyapunov stability, chattering analysis, super-twisting mathematics
 
 ---
@@ -35,13 +35,13 @@ u = -K·tanh(s/ε) (control input)
 - `λ₁, λ₂`: Second pendulum surface gains
 - `K`: Switching gain (robustness)
 - `ε`: Boundary layer thickness (chattering reduction) **Strengths:**
-✅ Simple to understand and implement
-✅ Robust to matched disturbances
-✅ Fast response to large errors
-✅ Minimal computational overhead **Limitations:**
-❌ Chattering (high-frequency oscillations)
-❌ Requires accurate model for best performance
-❌ Fixed gains may be conservative **Typical Performance (from reference tuning):**
+ Simple to understand and implement
+ Robust to matched disturbances
+ Fast response to large errors
+ Minimal computational overhead **Limitations:**
+ Chattering (high-frequency oscillations)
+ Requires accurate model for best performance
+ Fixed gains may be conservative **Typical Performance (from reference tuning):**
 ```yaml
 
 Settling Time: 3.2 seconds
@@ -61,13 +61,13 @@ u = -α·|s|^(1/2)·sign(s) - ∫β·sign(s) dt
 - `k₁, k₂, λ₁, λ₂`: Sliding surface (same as classical)
 - `α`: First-order super-twisting gain
 - `β`: Second-order super-twisting gain **Strengths:**
-✅ **Continuous control** (no discontinuous switching)
-✅ **Chattering-free** by design
-✅ **Finite-time convergence** (faster than asymptotic)
-✅ Robust to Lipschitz-continuous disturbances **Limitations:**
-❌ More complex gain tuning (α, β must satisfy stability conditions)
-❌ Requires relative degree 1 (satisfied for DIP)
-❌ Higher computational cost than classical **Typical Performance:**
+ **Continuous control** (no discontinuous switching)
+ **Chattering-free** by design
+ **Finite-time convergence** (faster than asymptotic)
+ Robust to Lipschitz-continuous disturbances **Limitations:**
+ More complex gain tuning (α, β must satisfy stability conditions)
+ Requires relative degree 1 (satisfied for DIP)
+ Higher computational cost than classical **Typical Performance:**
 ```yaml
 
 Settling Time: 2.8 seconds (15% faster than classical)
@@ -87,13 +87,13 @@ u = -K_adaptive(t)·tanh(s/ε)
 ``` **5 Tunable Gains:**
 - `k₁, k₂, λ₁, λ₂`: Sliding surface
 - `γ`: Adaptation rate (higher = faster but less stable) **Strengths:**
-✅ **Handles parameter uncertainty** (mass variations, friction changes)
-✅ **Self-tuning** gains reduce conservatism
-✅ **Improved efficiency** (lower control effort after adaptation)
-✅ Lyapunov-stable adaptation law **Limitations:**
-❌ Transient phase during adaptation (~2-3 seconds)
-❌ Risk of parameter drift without leakage term
-❌ Sensitive to noise (can cause false adaptation) **Typical Performance:**
+ **Handles parameter uncertainty** (mass variations, friction changes)
+ **Self-tuning** gains reduce conservatism
+ **Improved efficiency** (lower control effort after adaptation)
+ Lyapunov-stable adaptation law **Limitations:**
+ Transient phase during adaptation (~2-3 seconds)
+ Risk of parameter drift without leakage term
+ Sensitive to noise (can cause false adaptation) **Typical Performance:**
 ```yaml
 
 Settling Time: 3.5 seconds (includes adaptation phase)
@@ -116,13 +116,13 @@ u = -α_adaptive·|s|^(1/2)·sign(s) - ∫β_adaptive·sign(s) dt
 - `k₁, k₂, λ₁, λ₂`: Sliding surface
 - `α₀, β₀`: Initial super-twisting gains (auto-computed or manual)
 - `γ_α, γ_β`: Adaptation rates (configured, not tuned) **Strengths:**
-✅ **Best overall performance** (combines all advantages)
-✅ Chattering-free + uncertainty handling
-✅ Fast finite-time convergence
-✅ Optimal for high-performance applications **Limitations:**
-❌ **Highest computational cost** (~30% more than classical)
-❌ Most complex to tune (4-8 parameters depending on mode)
-❌ Requires careful initialization to avoid transient instability **Typical Performance:**
+ **Best overall performance** (combines all advantages)
+ Chattering-free + uncertainty handling
+ Fast finite-time convergence
+ Optimal for high-performance applications **Limitations:**
+ **Highest computational cost** (~30% more than classical)
+ Most complex to tune (4-8 parameters depending on mode)
+ Requires careful initialization to avoid transient instability **Typical Performance:**
 ```yaml
 
 Settling Time: 2.3 seconds (best of all controllers)
@@ -163,7 +163,7 @@ Chattering: None (continuous + adaptive)
 | **Research/publication** | Hybrid Adaptive STA | performance (see references) |
 | **Industrial deployment** | Super-Twisting | Good balance of performance and complexity |
 | **Educational purposes** | Classical SMC | Clear mathematical structure | #### Controller Selection Flowchart ```mermaid
-flowchart TD START["🎯 Select SMC Controller"] --> Q1{Is smooth<br/>control required?} Q1 -->|Yes| Q2{Parameter<br/>uncertainty<br/>present?} Q1 -->|No| Q3{Parameter<br/>uncertainty<br/>present?} Q2 -->|Yes| HYBRID["✅ Hybrid Adaptive STA-SMC<br/>🎯 Best overall performance<br/>⚡ Continuous + adaptive<br/>⏱️ Fastest settling<br/>💰 High computational cost"] Q2 -->|No| STA["✅ Super-Twisting SMC<br/>🎯 Chattering-free<br/>⚡ Continuous control<br/>⏱️ Fast convergence<br/>💰 Medium computational cost"] Q3 -->|Yes| ADAPTIVE["✅ Adaptive SMC<br/>🎯 Handles uncertainty<br/>⚡ Self-tuning gains<br/>⏱️ Includes adaptation phase<br/>💰 Medium computational cost"] Q3 -->|No| Q4{Performance<br/>priority?} Q4 -->|High| STA Q4 -->|Moderate| CLASSICAL["✅ Classical SMC<br/>🎯 Simple and robust<br/>⚡ Well-understood<br/>⏱️ Good performance<br/>💰 Low computational cost"] style START fill:#ccccff style CLASSICAL fill:#ccffcc style STA fill:#ffffcc style ADAPTIVE fill:#ffcccc style HYBRID fill:#ccccff
+flowchart TD START[" Select SMC Controller"] --> Q1{Is smooth<br/>control required?} Q1 -->|Yes| Q2{Parameter<br/>uncertainty<br/>present?} Q1 -->|No| Q3{Parameter<br/>uncertainty<br/>present?} Q2 -->|Yes| HYBRID[" Hybrid Adaptive STA-SMC<br/> Best overall performance<br/> Continuous + adaptive<br/>⏱ Fastest settling<br/> High computational cost"] Q2 -->|No| STA[" Super-Twisting SMC<br/> Chattering-free<br/> Continuous control<br/>⏱ Fast convergence<br/> Medium computational cost"] Q3 -->|Yes| ADAPTIVE[" Adaptive SMC<br/> Handles uncertainty<br/> Self-tuning gains<br/>⏱ Includes adaptation phase<br/> Medium computational cost"] Q3 -->|No| Q4{Performance<br/>priority?} Q4 -->|High| STA Q4 -->|Moderate| CLASSICAL[" Classical SMC<br/> Simple and robust<br/> Well-understood<br/>⏱ Good performance<br/> Low computational cost"] style START fill:#ccccff style CLASSICAL fill:#ccffcc style STA fill:#ffffcc style ADAPTIVE fill:#ffcccc style HYBRID fill:#ccccff
 ``` **Decision Tree Guidance**: 1. **Start with smooth control requirement**: - Chattering-sensitive applications → Continuous controllers (STA or Hybrid) - Chattering acceptable → Classical or Adaptive 2. **Consider parameter uncertainty**: - High uncertainty → Adaptive controllers (Adaptive or Hybrid) - Well-known system → Fixed-gain controllers (Classical or STA) 3. **Performance vs complexity tradeoff**: - **Best performance**: Hybrid Adaptive STA (highest complexity) - **Best balance**: Super-Twisting (moderate complexity) - **Simplicity priority**: Classical SMC (lowest complexity) **Quick Recommendations**:
 
 - **Not sure?** Start with **Classical SMC** for rapid prototyping
@@ -239,7 +239,7 @@ hybrid chattering index: 8.92 N/s (99% reduction!)
 
 ## Part 3: Controller Selection Framework ### 3.1 Decision Tree Use this flowchart to select the appropriate controller: ```
 
-START │ ├─→ Is chattering a critical concern? (high-freq actuators, sensitive equipment) │ │ │ YES → Is system well-modeled? (known parameters, minimal uncertainty) │ │ │ │ │ YES → USE: Super-Twisting SMC │ │ │ │ │ NO → USE: Hybrid Adaptive STA-SMC │ │ │ NO → Is parameter uncertainty significant? (>20% mass variation, unknown friction) │ │ │ YES → Is computational cost a constraint? (embedded system, <100 Hz control) │ │ │ │ │ YES → USE: Adaptive SMC │ │ │ │ │ NO → USE: Hybrid Adaptive STA-SMC │ │ │ NO → Is simplicity/prototyping the priority? │ │ │ YES → USE: Classical SMC │ │ │ NO → USE: Super-Twisting SMC
+START  → Is chattering a critical concern? (high-freq actuators, sensitive equipment)    YES → Is system well-modeled? (known parameters, minimal uncertainty)      YES → USE: Super-Twisting SMC      NO → USE: Hybrid Adaptive STA-SMC    NO → Is parameter uncertainty significant? (>20% mass variation, unknown friction)    YES → Is computational cost a constraint? (embedded system, <100 Hz control)      YES → USE: Adaptive SMC      NO → USE: Hybrid Adaptive STA-SMC    NO → Is simplicity/prototyping the priority?    YES → USE: Classical SMC    NO → USE: Super-Twisting SMC
 ```
 
 ---
@@ -472,12 +472,12 @@ gain_trajectory = data['state_vars']['adaptive_gain'] if np.std(gain_trajectory)
 ## Summary **Controller Comparison Matrix:** | Aspect | Classical | Super-Twisting | Adaptive | Hybrid |
 
 |--------|-----------|----------------|----------|--------|
-| **Simplicity** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ |
-| **Chattering** | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Robustness** | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Convergence** | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Computation** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
-| **Tunability** | ⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐ | **Key Takeaways:**
+| **Simplicity** |  |  |  |  |
+| **Chattering** |  |  |  |  |
+| **Robustness** |  |  |  |  |
+| **Convergence** |  |  |  |  |
+| **Computation** |  |  |  |  |
+| **Tunability** |  |  |  |  | **Key Takeaways:**
 - **Classical SMC:** Best starting point for learning and prototyping
 - **Super-Twisting SMC:** Best for chattering-sensitive applications
 - **Adaptive SMC:** Best for uncertain/varying systems

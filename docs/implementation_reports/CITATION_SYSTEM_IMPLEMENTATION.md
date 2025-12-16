@@ -52,9 +52,9 @@ Text with citation :cite:`smc_slotine_li_1991_applied_nonlinear_control`. .. rub
 ``` **Replacement Process:**
 
 - Replace `\[([1-9]\d*)\]` with `:cite:`KEY`` using mapping
-- Add `.. bibliography::` sections to pages with citations ## Implementation Tasks ### ✅ Completed
+- Add `.. bibliography::` sections to pages with citations ## Implementation Tasks ###  Completed
 1. Examine ChatGPT's citation system implementation files
-2. Read and analyze the bibliography structure and configuration ### 🔄 In Progress
+2. Read and analyze the bibliography structure and configuration ###  In Progress
 3. Create docs/bib/ directory structure in current project ### ⏳ Pending
 4. Copy and adapt bibliography files (smc.bib, pso.bib, dip.bib, software.bib)
 5. Update docs/conf.py with sphinxcontrib-bibtex configuration

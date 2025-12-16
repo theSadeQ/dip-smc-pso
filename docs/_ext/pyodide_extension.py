@@ -120,7 +120,7 @@ class RunnableCodeDirective(SphinxDirective):
         if caption:
             html_parts.append(f'''
 <div class="runnable-code-caption">
-    <strong>📝 {html.escape(caption)}</strong>
+    <strong> {html.escape(caption)}</strong>
 </div>
             ''')
 
@@ -138,7 +138,7 @@ class RunnableCodeDirective(SphinxDirective):
         html_parts.append('''
 <div class="runnable-code-info">
     <small>
-        💡 <strong>Interactive Code:</strong>
+         <strong>Interactive Code:</strong>
         Click "Run Code" to execute in your browser (first run loads Python, ~15-30s).
         Edit code directly and re-run.
         Use <kbd>Ctrl+Enter</kbd> to run.
@@ -184,7 +184,7 @@ class PyodideInfoDirective(SphinxDirective):
         if show_requirements:
             html_parts.append('''
 <div class="info-section">
-    <h4>🖥️ System Requirements</h4>
+    <h4> System Requirements</h4>
     <ul>
         <li><strong>Browser:</strong> Chrome 90+, Firefox 88+, Safari 14+, Edge 90+</li>
         <li><strong>JavaScript:</strong> Must be enabled</li>
@@ -199,7 +199,7 @@ class PyodideInfoDirective(SphinxDirective):
         if show_packages:
             html_parts.append('''
 <div class="info-section">
-    <h4>📦 Available Packages</h4>
+    <h4> Available Packages</h4>
     <ul>
         <li><strong>NumPy:</strong> Scientific computing with arrays</li>
         <li><strong>Matplotlib:</strong> Plotting and visualization</li>
@@ -212,7 +212,7 @@ class PyodideInfoDirective(SphinxDirective):
         if show_limitations:
             html_parts.append('''
 <div class="info-section">
-    <h4>⚠️ Limitations</h4>
+    <h4> Limitations</h4>
     <ul>
         <li><strong>Execution Time:</strong> 10-second timeout (prevents infinite loops)</li>
         <li><strong>File I/O:</strong> No access to local filesystem</li>

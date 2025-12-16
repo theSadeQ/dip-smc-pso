@@ -193,7 +193,7 @@ Based on our literature review and cited works, we suggest the following expert 
 
 ## Conclusion
 
-This manuscript represents a comprehensive, rigorous comparative analysis of sliding mode control variants with novel findings on PSO optimization generalization. We believe it will be of significant interest to the {JOURNAL} readership and make a valuable contribution to the control systems literature.
+This manuscript represents a complete, rigorous comparative analysis of sliding mode control variants with novel findings on PSO optimization generalization. We believe it will be of significant interest to the {JOURNAL} readership and make a valuable contribution to the control systems literature.
 
 We look forward to your consideration and welcome any questions or requests for additional information.
 

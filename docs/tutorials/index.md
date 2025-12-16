@@ -4,7 +4,7 @@ Step-by-step tutorials for using controllers, optimization, and analysis feature
 
 ## Overview
 
-This section provides hands-on tutorials for common workflows and advanced features.
+This section provides hands-on tutorials for common workflows and features.
 
 ## Available Tutorials
 

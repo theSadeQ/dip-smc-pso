@@ -13,7 +13,7 @@ same function evaluations; the difference between the 4th‑ and 5th‑order
 approximations provides an estimate of the local truncation error.  By
 comparing this error against user‑supplied absolute and relative
 tolerances the integrator can accept or reject a proposed step and
-adjust the step size accordingly【313837333132264†L58-L82】.  Adaptive
+adjust the step size accordingly313837333132264†L58-L82.  Adaptive
 integrators avoid manual tuning of Courant–Friedrichs–Lewy (CFL)
 parameters and automatically reduce the step size when the system
 exhibits rapid dynamics or near‑singular mass matrices.
@@ -27,7 +27,7 @@ accepted the integrator proposes a new step size that can be used for
 the next call.
 
 The algorithm is described in many numerical analysis textbooks; see
-Section III of Shampine and Reichelt for details【313837333132264†L58-L82】.
+Section III of Shampine and Reichelt for details313837333132264†L58-L82.
 
 ## Complete Source Code
 
@@ -74,7 +74,7 @@ Notes
 This implementation uses the Dormand–Prince coefficients for the
 classic `RK45` method.  The constants are hard‑coded for clarity
 rather than generated programmatically.  See the cited reference
-for the Butcher tableau【313837333132264†L58-L82】.
+for the Butcher tableau313837333132264†L58-L82.
 
 #### Source Code
 

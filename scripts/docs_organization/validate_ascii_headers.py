@@ -334,9 +334,9 @@ def main() -> None:
             if not result['compliant']:
                 if fix_header(filepath, project_root):
                     fixed_count += 1
-                    print(f"  ✓ Fixed: {filepath.relative_to(project_root)}")
+                    print(f"   Fixed: {filepath.relative_to(project_root)}")
                 else:
-                    print(f"  ✗ Failed: {filepath.relative_to(project_root)}")
+                    print(f"   Failed: {filepath.relative_to(project_root)}")
 
         print(f"\nFixed {fixed_count} files")
 
@@ -354,7 +354,7 @@ def main() -> None:
         for filepath, result in results.items():
             if not result['compliant']:
                 rel_path = filepath.relative_to(project_root)
-                print(f"  ✗ {rel_path}")
+                print(f"   {rel_path}")
                 for error in result['errors']:
                     print(f"    - {error}")
 

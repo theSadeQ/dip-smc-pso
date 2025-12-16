@@ -10,7 +10,7 @@ This module centralises the handling of pseudo‑random number generators used
 throughout the project.  Reproducibility is a cornerstone of computational
 experiments; when models include stochastic elements, the random seeds used
 must be recorded and shared so that results can be replicated on different
-machines and numbers of processors【675644021986605†L385-L388】.  Failing to set
+machines and numbers of processors675644021986605†L385-L388.  Failing to set
 a consistent seed can lead to subtle nondeterministic behaviour when code
 implicitly calls Python’s ``random`` module or NumPy’s global generator.
 
@@ -24,7 +24,7 @@ Usage
 -----
 Call ``set_global_seed(seed)`` once at the start of your program or in
 ``load_config`` to ensure that all subsequent stochastic operations
-produce deterministic results.  Note that individual components of the
+produce deterministic results.  individual components of the
 project, such as the PSO tuner, may still instantiate their own local
 ``numpy.random.Generator`` instances for thread safety; those generators
 should be seeded explicitly using the same or a derived seed.
@@ -101,7 +101,7 @@ should be seeded to ensure that repeated runs yield identical
 trajectories and results.  According to reproducibility guidelines in
 computational science, when random number generation is part of a
 model, the seeds form part of the model description and must be
-recorded and shared to allow replicability【675644021986605†L385-L388】.
+recorded and shared to allow replicability675644021986605†L385-L388.
 
 Examples
 --------
@@ -150,7 +150,7 @@ Notes
 Creating local PRNGs instead of seeding the global RNG allows
 different components to use independent random streams without
 interfering with each other.  This is particularly important when
-running concurrent simulations or optimisation algorithms【675644021986605†L385-L388】.
+running concurrent simulations or optimisation algorithms675644021986605†L385-L388.
 
 #### Source Code
 

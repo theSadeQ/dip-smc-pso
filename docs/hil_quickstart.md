@@ -9,11 +9,11 @@ Hardware-in-the-Loop (HIL) allows you to connect real hardware components to the
 The HIL system uses a client-server architecture with UDP communication:
 
 ```
-┌─────────────────┐    UDP     ┌─────────────────┐
-│   Plant Server  │ ◄─────────► │ Controller Client│
-│   (Simulation)  │             │   (Hardware)    │
-│   Port: 9000    │             │   Port: 9001    │
-└─────────────────┘             └─────────────────┘
+    UDP     
+   Plant Server     Controller Client
+   (Simulation)                  (Hardware)    
+   Port: 9000                    Port: 9001    
+             
 ```
 
 **Two Operating Modes:**
@@ -108,7 +108,7 @@ packet = payload + struct.pack("!I", crc)
 
 ## Safety Guidelines
 
-⚠️ **Important Safety Considerations**
+ **Important Safety Considerations**
 
 1. **Start with Low Gains**: Use conservative controller parameters initially
 2. **Implement Software Limits**:

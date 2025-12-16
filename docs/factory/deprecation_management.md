@@ -2,23 +2,23 @@
 
 class DeprecationLevel(Enum): """Hierarchical deprecation severity levels.""" INFO = "info" # Informational - still fully supported WARNING = "warning" # Will be removed in future versions ERROR = "error" # Already removed, error fallback provided
 ``` ### Deprecation Lifecycle ```
-┌─────────────────────────────────────────────────────────────────┐
-│ DEPRECATION LIFECYCLE │
-├─────────────────────────────────────────────────────────────────┤
-│ INFO Phase │ New preferred method introduced │
-│ (1-2 versions) │ - Old method still fully supported │
-│ │ - Optional migration warnings │
-├─────────────────────────────────────────────────────────────────┤
-│ WARNING Phase │ Deprecation warnings activated │
-│ (2-3 versions) │ - Clear migration guidance provided │
-│ │ - Automatic parameter migration │
-│ │ - Documentation updates │
-├─────────────────────────────────────────────────────────────────┤
-│ ERROR Phase │ Old method removed, fallback provided │
-│ (1+ versions) │ - Graceful error handling │
-│ │ - Automatic migration to new format │
-│ │ - Clear error messages with approaches │
-└─────────────────────────────────────────────────────────────────┘
+
+ DEPRECATION LIFECYCLE 
+
+ INFO Phase  New preferred method introduced 
+ (1-2 versions)  - Old method still fully supported 
+  - Optional migration warnings 
+
+ WARNING Phase  Deprecation warnings activated 
+ (2-3 versions)  - Clear migration guidance provided 
+  - Automatic parameter migration 
+  - Documentation updates 
+
+ ERROR Phase  Old method removed, fallback provided 
+ (1+ versions)  - Graceful error handling 
+  - Automatic migration to new format 
+  - Clear error messages with approaches 
+
 ``` ### Deprecation Mapping System ```python
 # example-metadata:
 

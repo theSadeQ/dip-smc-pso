@@ -6,9 +6,9 @@
 These pages are adapted from research presentation slides for web documentation.
 
 **Options:**
-- 📖 **Web Version**: Browse chapters below (optimized for online reading)
-- 📄 **PDF Export**: Use your browser's Print → Save as PDF for offline reading
-- 🎨 **Slide Layout**: Each chapter represents a slide or section from the original presentation
+-  **Web Version**: Browse chapters below (optimized for online reading)
+-  **PDF Export**: Use your browser's Print → Save as PDF for offline reading
+-  **Slide Layout**: Each chapter represents a slide or section from the original presentation
 
 **Tip:** For the best offline experience, use Chrome/Edge's "Print to PDF" with the following settings:
 - Layout: Portrait
@@ -41,7 +41,7 @@ references
 
 ## Overview
 
-These materials present a comprehensive overview of the research project, from initial motivation through final results and analysis. Each chapter builds upon the previous ones to provide a complete understanding of the sliding mode control implementation and PSO optimization approach.
+These materials present a complete overview of the research project, from initial motivation through final results and analysis. Each chapter builds upon the previous ones to provide a complete understanding of the sliding mode control implementation and PSO optimization approach.
 
 The presentation covers both theoretical foundations and practical implementation details, making it suitable for academic and engineering audiences.
 ---

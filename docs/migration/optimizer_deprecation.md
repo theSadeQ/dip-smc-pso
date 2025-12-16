@@ -8,7 +8,7 @@
 
 ## Why This Change?
 
-The `src.optimizer/` module is a legacy compatibility layer. The project now uses the more comprehensive `src.optimization/` framework:
+The `src.optimizer/` module is a legacy compatibility layer. The project now uses the more complete `src.optimization/` framework:
 
 | Aspect | src.optimizer/ (Legacy) | src.optimization/ (Current) |
 |--------|------------------------|-----------------------------|
@@ -73,13 +73,13 @@ grep -r "src.optimizer" docs/
 ## What If I Don't Migrate?
 
 **Current Behavior (v1.x):**
-- ✓ Old imports still work
-- ⚠️ DeprecationWarning issued on import
-- ✓ No breaking changes
+-  Old imports still work
+-  DeprecationWarning issued on import
+-  No breaking changes
 
 **Future Behavior (v2.0.0):**
-- ✗ Old imports will fail with ImportError
-- ✗ Code will break unless migrated
+-  Old imports will fail with ImportError
+-  Code will break unless migrated
 
 ---
 

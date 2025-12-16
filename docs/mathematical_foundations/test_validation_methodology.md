@@ -37,21 +37,21 @@ from hypothesis import given, strategies as st class TestPropertyBasedSMC: """Pr
 
 ``` ## 3. Test Organization and Execution ### 3.1 Test Hierarchy ```
 tests/test_controllers/smc/
-├── algorithms/
-│ ├── classical/
-│ │ ├── test_boundary_layer.py # Boundary layer mathematics
-│ │ ├── test_sliding_surface.py # Surface computation tests
-│ │ ├── test_config_validation.py # Parameter validation
-│ │ └── test_modular_controller.py # Integration tests
-│ ├── adaptive/
-│ │ └── test_modular_adaptive_smc.py # Adaptive algorithm tests
-│ └── super_twisting/
-│ └── test_super_twisting_smc.py # Higher-order SMC tests
-├── core/
-│ ├── test_sliding_surface.py # Core surface mathematics
-│ ├── test_equivalent_control.py # Model-based control
-│ └── test_switching_functions.py # Switching function tests
-└── test_property_based_smc.py # Property-based tests
+ algorithms/
+  classical/
+   test_boundary_layer.py # Boundary layer mathematics
+   test_sliding_surface.py # Surface computation tests
+   test_config_validation.py # Parameter validation
+   test_modular_controller.py # Integration tests
+  adaptive/
+   test_modular_adaptive_smc.py # Adaptive algorithm tests
+  super_twisting/
+  test_super_twisting_smc.py # Higher-order SMC tests
+ core/
+  test_sliding_surface.py # Core surface mathematics
+  test_equivalent_control.py # Model-based control
+  test_switching_functions.py # Switching function tests
+ test_property_based_smc.py # Property-based tests
 ``` ### 3.2 Test Execution Strategy #### 3.2.1 Continuous Integration ```bash
 # Fast unit tests (mathematical properties)
 

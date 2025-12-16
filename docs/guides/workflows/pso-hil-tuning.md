@@ -59,7 +59,7 @@ HIL Deployment (same gains):
 ```
 [Controller] → (5-10ms network) → [Plant] → (5-10ms network) → [Controller]
      ↑                                                                ↓
-     └─────────────── Total round-trip: 10-20ms ────────────────────┘
+      Total round-trip: 10-20ms 
 ```
 
 **Timing Requirements:**
@@ -520,12 +520,12 @@ def robust_hil_fitness(gains):
 
 ```
 Total: 10.0 ms per iteration
-  ├─ Network receive: 0.5 ms
-  ├─ State filtering: 0.3 ms
-  ├─ Controller compute: ??? (PSO optimization target)
-  ├─ Safety checks: 0.2 ms
-  ├─ Logging: 0.3 ms
-  └─ Network transmit: 0.5 ms
+   Network receive: 0.5 ms
+   State filtering: 0.3 ms
+   Controller compute: ??? (PSO optimization target)
+   Safety checks: 0.2 ms
+   Logging: 0.3 ms
+   Network transmit: 0.5 ms
 
 Remaining budget for controller: ~8.0 ms
 ```
@@ -1284,6 +1284,6 @@ def hil_fitness_function(gains):
 **Replaces:** pso-hil-tuning.md stub (2025-10-07, 28 lines)
 **Changelog:**
 - 2025-11-10: Complete rewrite from stub to production guide (28 → 900+ lines)
-- Added 10 comprehensive sections covering HIL-specific PSO optimization
+- Added 10 complete sections covering HIL-specific PSO optimization
 - Integrated real-time constraints, safety considerations, and deployment workflows
 - Included case studies, troubleshooting, and validation procedures

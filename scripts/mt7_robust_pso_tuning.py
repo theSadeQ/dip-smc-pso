@@ -541,7 +541,7 @@ def main():
     generate_summary_json(all_results, output_dir)
 
     print(f"\nTotal execution time: {total_elapsed/60:.1f} minutes")
-    print("\n✅ MT-7 robustness validation complete!")
+    print("\n MT-7 robustness validation complete!")
     print(f"Next steps:")
     print(f"  1. Run statistical analysis: python scripts/mt7_statistical_analysis.py")
     print(f"  2. Generate visualizations: python scripts/mt7_visualize_robustness.py")

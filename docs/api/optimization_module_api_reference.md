@@ -23,45 +23,45 @@
 
 ## 1. Overview & Architecture ### 1.1 Optimization System Architecture The optimization system consists of four primary modules working in concert to tune sliding mode controller (SMC) parameters: ```
 
-┌─────────────────────────────────────────────────────────────────┐
-│ OPTIMIZATION SYSTEM │
-│ │
-│ ┌──────────────┐ ┌──────────────────┐ │
-│ │ Factory │─────>│ PSO Tuner │ │
-│ │ Bridge │ │ (algorithms/) │ │
-│ └──────────────┘ └────────┬─────────┘ │
-│ │ │ │
-│ │ ┌────────▼────────┐ │
-│ │ │ Fitness │ │
-│ │ │ Evaluation │ │
-│ │ └────────┬────────┘ │
-│ │ │ │
-│ │ ┌────────▼────────────┐ │
-│ │ │ Convergence │ │
-│ │ │ Analyzer │ │
-│ │ │ (validation/) │ │
-│ │ └────────┬────────────┘ │
-│ │ │ │
-│ │ ┌────────▼────────────┐ │
-│ └─────────────>│ Bounds │ │
-│ │ Validator │ │
-│ │ (validation/) │ │
-│ └─────────────────────┘ │
-│ │
-│ Supporting Modules: │
-│ • Bounds Optimizer (validation/) │
-│ • Hyperparameter Optimizer (tuning/) │
-│ • Factory Integration (integration/) │
-└─────────────────────────────────────────────────────────────────┘
+
+ OPTIMIZATION SYSTEM 
+ 
+   
+  Factory > PSO Tuner  
+  Bridge   (algorithms/)  
+   
+   
+   
+   Fitness  
+   Evaluation  
+   
+   
+   
+   Convergence  
+   Analyzer  
+   (validation/)  
+   
+   
+   
+ > Bounds  
+  Validator  
+  (validation/)  
+  
+ 
+ Supporting Modules: 
+ • Bounds Optimizer (validation/) 
+ • Hyperparameter Optimizer (tuning/) 
+ • Factory Integration (integration/) 
+
 ``` **Module Responsibilities:** 1. **PSOTuner** (`src/optimization/algorithms/pso_optimizer.py`) - Particle swarm optimization algorithm implementation - Vectorized batch simulation integration - Cost computation and normalization - Uncertainty-aware robustness evaluation 2. **EnhancedConvergenceAnalyzer** (`src/optimization/validation/enhanced_convergence_analyzer.py`) - Multi-criteria convergence detection - Statistical validation of optimization progress - Real-time performance prediction - Early stopping recommendations 3. **PSOBoundsValidator** (`src/optimization/validation/pso_bounds_validator.py`) - Controller-specific parameter bounds validation - Physical constraint enforcement - Automatic bounds adjustment algorithms - Stability-aware bounds checking 4. **PSOBoundsOptimizer** (`src/optimization/validation/pso_bounds_optimizer.py`) - Multi-strategy bounds optimization - Performance-driven bounds generation - Convergence-focused parameter space definition - Physics-based constraint derivation 5. **PSOHyperparameterOptimizer** (`src/optimization/tuning/pso_hyperparameter_optimizer.py`) - Meta-optimization of PSO parameters - Multi-objective PSO tuning - Controller-specific hyperparameter adaptation - Baseline performance benchmarking 6. **EnhancedPSOFactory** (`src/optimization/integration/pso_factory_bridge.py`) - factory-PSO integration - Enhanced fitness function construction - Robust error handling and recovery - Configuration management ### 1.2 PSO Workflow The complete PSO optimization workflow follows this sequence: ```
-[1] Configuration Loading │ ▼
-[2] Factory Initialization │ ▼
-[3] Bounds Validation │ ▼
-[4] PSO Initialization • Swarm creation • Velocity initialization • Fitness evaluation │ ▼
-[5] Optimization Loop (iterative) ┌─────────────────────┐ │ a) Update velocities│ │ b) Update positions │ │ c) Evaluate fitness │ │ d) Update best │ │ e) Check convergence│ └──────┬──────────────┘ │ ▼ Converged? ──No──┐ │ │ Yes │ │ │ ▼ │
-[6] Results Extraction │ │ │ ▼ │
-[7] Validation │ │ │ ▼ │
-[8] Controller Creation│ │ │ └───────────┘
+[1] Configuration Loading  
+[2] Factory Initialization  
+[3] Bounds Validation  
+[4] PSO Initialization • Swarm creation • Velocity initialization • Fitness evaluation  
+[5] Optimization Loop (iterative)   a) Update velocities  b) Update positions   c) Evaluate fitness   d) Update best   e) Check convergence    Converged? No   Yes     
+[6] Results Extraction     
+[7] Validation     
+[8] Controller Creation   
 ``` **Convergence Detection:** The system monitors five convergence criteria simultaneously:
 
 1. **Fitness Tolerance**: $|f_{best}^t - f_{best}^{t-1}| < \epsilon_{tol}$
@@ -69,7 +69,7 @@
 3. **Population Diversity**: $\sigma_{swarm} < \epsilon_{div}$
 4. **Stagnation Detection**: No improvement for $t_{stag}$ iterations
 5. **Statistical Significance**: $p$-value $> \alpha_{conf}$ for improvement ### 1.3 Module Relationships **Data Flow:** ```
-Configuration (YAML) │ ├──> PSOTuner.__init__() │ │ │ ├──> Controller Factory (from factory.py) │ ├──> Bounds (PSOBoundsValidator) │ └──> Fitness Function Construction │ └──> EnhancedConvergenceAnalyzer.__init__() │ └──> Convergence Criteria Configuration PSOTuner.optimise() │ ├──> PySwarms GlobalBestPSO │ │ │ └──> _fitness() callback │ │ │ ├──> simulate_system_batch() │ ├──> _compute_cost_from_traj() │ └──> _combine_costs() │ └──> EnhancedConvergenceAnalyzer.check_convergence() │ ├──> ConvergenceMetrics └──> ConvergenceStatus
+Configuration (YAML)  > PSOTuner.__init__()    > Controller Factory (from factory.py)  > Bounds (PSOBoundsValidator)  > Fitness Function Construction  > EnhancedConvergenceAnalyzer.__init__()  > Convergence Criteria Configuration PSOTuner.optimise()  > PySwarms GlobalBestPSO    > _fitness() callback    > simulate_system_batch()  > _compute_cost_from_traj()  > _combine_costs()  > EnhancedConvergenceAnalyzer.check_convergence()  > ConvergenceMetrics > ConvergenceStatus
 ``` **Cross-Module Dependencies:** - **PSOTuner** → `src.controllers.factory` (controller creation)
 - **PSOTuner** → `src.simulation.engines.vector_sim` (batch simulation)
 - **PSOTuner** → `src.plant.models.dynamics` (DIPParams)
@@ -158,12 +158,12 @@ result = tuner.optimise( iters_override=200, # More iterations n_particles_overr
 def _fitness(self, particles: np.ndarray) -> np.ndarray: """Vectorised fitness function for a swarm of particles."""
 ``` The fitness function evaluates controller performance for a batch of gain vectors simultaneously. **Fitness Computation Pipeline:** ```
 
-Particle Gains (B × D) │ ├──> Bounds Validation (filter invalid gains) │ ▼
-Controller Creation (B controllers) │ ▼
-Batch Simulation (vectorized) │ ├──> Trajectory: (t, x_b, u_b, σ_b) │ ▼
-Cost Computation per Particle │ ├──> State Error (ISE) ├──> Control Effort (U²) ├──> Control Slew (ΔU²) ├──> Stability (σ²) └──> Instability Penalty (early failure) │ ▼
-Cost Normalization │ ▼
-Weighted Aggregation │ ▼
+Particle Gains (B × D)  > Bounds Validation (filter invalid gains)  
+Controller Creation (B controllers)  
+Batch Simulation (vectorized)  > Trajectory: (t, x_b, u_b, σ_b)  
+Cost Computation per Particle  > State Error (ISE) > Control Effort (U²) > Control Slew (ΔU²) > Stability (σ²) > Instability Penalty (early failure)  
+Cost Normalization  
+Weighted Aggregation  
 Final Fitness Values (B × 1)
 ``` **Mathematical Definition:** The fitness function computes: $$
 J(\mathbf{gains}) = w_1 \cdot \text{ISE}_n + w_2 \cdot U_n^2 + w_3 \cdot (\Delta U)_n^2 + w_4 \cdot \sigma_n^2 + P_{inst}
@@ -551,7 +551,7 @@ TEST_BOUNDS_LOWER = [0.1, 0.1, 0.1, 0.1, 0.01] # Too narrow
 TEST_BOUNDS_UPPER = [5.0, 5.0, 5.0, 5.0, 1.0] # Too narrow # ============================================================================
 # Main
 
-# ============================================================================ def main(): # Load configuration config = load_config(CONFIG_PATH) # Initialize bounds validator validator = PSOBoundsValidator(config) # Validate test bounds print("Validating test bounds for Adaptive SMC...") print(f"Lower: {TEST_BOUNDS_LOWER}") print(f"Upper: {TEST_BOUNDS_UPPER}") print() result = validator.validate_bounds( controller_type=CONTROLLER_TYPE, lower_bounds=TEST_BOUNDS_LOWER, upper_bounds=TEST_BOUNDS_UPPER ) if result.is_valid: print("✓ Bounds are valid!") else: print("✗ Bounds validation failed!") print("\nWarnings:") for warning in result.warnings: print(f" - {warning}") print("\nRecommendations:") for rec in result.recommendations: print(f" - {rec}") if result.adjusted_bounds: print("\nAutomatically adjusted bounds:") adjusted_lower = result.adjusted_bounds['lower'] adjusted_upper = result.adjusted_bounds['upper'] print(f" Lower: {adjusted_lower}") print(f" Upper: {adjusted_upper}") # Compare PSO performance with original vs. adjusted bounds print("\n" + "="*80) print("Performance Comparison: Original vs. Adjusted Bounds") print("="*80) controller_factory = partial( create_controller, controller_type=CONTROLLER_TYPE, config=config ) # PSO with original bounds print("\n[1/2] Running PSO with ORIGINAL bounds...") tuner_original = PSOTuner( controller_factory=controller_factory, config=config, seed=42 ) # Override bounds config.pso.bounds.min = TEST_BOUNDS_LOWER config.pso.bounds.max = TEST_BOUNDS_UPPER result_original = tuner_original.optimise(iters_override=50) # PSO with adjusted bounds print("[2/2] Running PSO with ADJUSTED bounds...") tuner_adjusted = PSOTuner( controller_factory=controller_factory, config=config, seed=42 ) # Override bounds with adjusted config.pso.bounds.min = adjusted_lower config.pso.bounds.max = adjusted_upper result_adjusted = tuner_adjusted.optimise(iters_override=50) # Compare results print("\n" + "="*80) print("Results Comparison") print("="*80) print(f"{'Metric':<30s} | {'Original Bounds':>20s} | {'Adjusted Bounds':>20s} | {'Improvement':>15s}") print("-"*80) cost_original = result_original['best_cost'] cost_adjusted = result_adjusted['best_cost'] improvement = (cost_original - cost_adjusted) / cost_original * 100 print(f"{'Best Cost':<30s} | {cost_original:20.6f} | {cost_adjusted:20.6f} | {improvement:14.2f}%") print(f"{'Best Gains':<30s}") print(f" Original: {result_original['best_pos']}") print(f" Adjusted: {result_adjusted['best_pos']}") print("="*80) if improvement > 0: print(f"\n✓ Adjusted bounds achieved {improvement:.2f}% cost reduction!") else: print(f"\n✗ Adjusted bounds did not improve performance.") if __name__ == "__main__": main()
+# ============================================================================ def main(): # Load configuration config = load_config(CONFIG_PATH) # Initialize bounds validator validator = PSOBoundsValidator(config) # Validate test bounds print("Validating test bounds for Adaptive SMC...") print(f"Lower: {TEST_BOUNDS_LOWER}") print(f"Upper: {TEST_BOUNDS_UPPER}") print() result = validator.validate_bounds( controller_type=CONTROLLER_TYPE, lower_bounds=TEST_BOUNDS_LOWER, upper_bounds=TEST_BOUNDS_UPPER ) if result.is_valid: print(" Bounds are valid!") else: print(" Bounds validation failed!") print("\nWarnings:") for warning in result.warnings: print(f" - {warning}") print("\nRecommendations:") for rec in result.recommendations: print(f" - {rec}") if result.adjusted_bounds: print("\nAutomatically adjusted bounds:") adjusted_lower = result.adjusted_bounds['lower'] adjusted_upper = result.adjusted_bounds['upper'] print(f" Lower: {adjusted_lower}") print(f" Upper: {adjusted_upper}") # Compare PSO performance with original vs. adjusted bounds print("\n" + "="*80) print("Performance Comparison: Original vs. Adjusted Bounds") print("="*80) controller_factory = partial( create_controller, controller_type=CONTROLLER_TYPE, config=config ) # PSO with original bounds print("\n[1/2] Running PSO with ORIGINAL bounds...") tuner_original = PSOTuner( controller_factory=controller_factory, config=config, seed=42 ) # Override bounds config.pso.bounds.min = TEST_BOUNDS_LOWER config.pso.bounds.max = TEST_BOUNDS_UPPER result_original = tuner_original.optimise(iters_override=50) # PSO with adjusted bounds print("[2/2] Running PSO with ADJUSTED bounds...") tuner_adjusted = PSOTuner( controller_factory=controller_factory, config=config, seed=42 ) # Override bounds with adjusted config.pso.bounds.min = adjusted_lower config.pso.bounds.max = adjusted_upper result_adjusted = tuner_adjusted.optimise(iters_override=50) # Compare results print("\n" + "="*80) print("Results Comparison") print("="*80) print(f"{'Metric':<30s} | {'Original Bounds':>20s} | {'Adjusted Bounds':>20s} | {'Improvement':>15s}") print("-"*80) cost_original = result_original['best_cost'] cost_adjusted = result_adjusted['best_cost'] improvement = (cost_original - cost_adjusted) / cost_original * 100 print(f"{'Best Cost':<30s} | {cost_original:20.6f} | {cost_adjusted:20.6f} | {improvement:14.2f}%") print(f"{'Best Gains':<30s}") print(f" Original: {result_original['best_pos']}") print(f" Adjusted: {result_adjusted['best_pos']}") print("="*80) if improvement > 0: print(f"\n Adjusted bounds achieved {improvement:.2f}% cost reduction!") else: print(f"\n Adjusted bounds did not improve performance.") if __name__ == "__main__": main()
 
 ```
 
@@ -615,7 +615,7 @@ OUTPUT_DIR = Path("optimization_results")
 SEED = 42 # ============================================================================
 # Pipeline
 
-# ============================================================================ def main(): # Create output directory OUTPUT_DIR.mkdir(exist_ok=True) print("="*80) print("COMPLETE PSO OPTIMIZATION PIPELINE") print("="*80) # ------------------------------------------------------------------------- # Step 1: Load Configuration # ------------------------------------------------------------------------- print("\n[1/7] Loading configuration...") config = load_config(CONFIG_PATH) print(f" ✓ Configuration loaded from {CONFIG_PATH}") # ------------------------------------------------------------------------- # Step 2: Validate and Adjust Bounds # ------------------------------------------------------------------------- print("\n[2/7] Validating PSO bounds...") validator = PSOBoundsValidator(config) bounds_result = validator.validate_bounds( controller_type=CONTROLLER_TYPE, lower_bounds=list(config.pso.bounds.min), upper_bounds=list(config.pso.bounds.max) ) if bounds_result.is_valid: print(" ✓ Bounds are valid") else: print(" ✗ Bounds validation failed, using adjusted bounds") config.pso.bounds.min = bounds_result.adjusted_bounds['lower'] config.pso.bounds.max = bounds_result.adjusted_bounds['upper'] # ------------------------------------------------------------------------- # Step 3: Initialize Convergence Analyzer # ------------------------------------------------------------------------- print("\n[3/7] Initializing convergence analyzer...") criteria = ConvergenceCriteria( fitness_tolerance=1e-6, max_stagnation_iterations=50 ) analyzer = EnhancedConvergenceAnalyzer( criteria=criteria, controller_type=SMCType.CLASSICAL ) print(" ✓ Convergence analyzer ready") # ------------------------------------------------------------------------- # Step 4: Create Controller Factory # ------------------------------------------------------------------------- print("\n[4/7] Creating controller factory...") controller_factory = partial( create_controller, controller_type=CONTROLLER_TYPE, config=config ) print(" ✓ Factory created") # ------------------------------------------------------------------------- # Step 5: Run PSO Optimization # ------------------------------------------------------------------------- print("\n[5/7] Running PSO optimization...") tuner = PSOTuner( controller_factory=controller_factory, config=config, seed=SEED, instability_penalty_factor=100.0 ) result = tuner.optimise() best_gains = result['best_pos'] best_cost = result['best_cost'] cost_history = result['cost_history'] print(f" ✓ Optimization complete") print(f" Best cost: {best_cost:.6f}") print(f" Convergence: {len(cost_history)} iterations") # Save results np.save(OUTPUT_DIR / "optimized_gains.npy", best_gains) np.save(OUTPUT_DIR / "cost_history.npy", cost_history) # ------------------------------------------------------------------------- # Step 6: Validate Optimized Controller # ------------------------------------------------------------------------- print("\n[6/7] Validating optimized controller...") # Create controller with optimized gains optimized_controller = create_controller( controller_type=CONTROLLER_TYPE, config=config, gains=best_gains ) # Run validation simulations n_validation_trials = 10 validation_costs = [] for trial in range(n_validation_trials): sim_runner = SimulationRunner( controller=optimized_controller, config=config, seed=SEED + trial ) result_trial = sim_runner.run() # Compute cost ise = np.sum(result_trial.states ** 2) * config.simulation.dt validation_costs.append(ise) mean_cost = np.mean(validation_costs) std_cost = np.std(validation_costs) print(f" ✓ Validation complete ({n_validation_trials} trials)") print(f" Mean cost: {mean_cost:.6f} ± {std_cost:.6f}") # ------------------------------------------------------------------------- # Step 7: Generate Report and Visualizations # ------------------------------------------------------------------------- print("\n[7/7] Generating reports and visualizations...") # Convergence plot fig, axes = plt.subplots(2, 1, figsize=(10, 8)) axes[0].plot(cost_history, linewidth=2, color='blue') axes[0].set_ylabel('Best Cost', fontsize=12) axes[0].set_title('PSO Convergence History', fontsize=14, fontweight='bold') axes[0].set_yscale('log') axes[0].grid(True, alpha=0.3) axes[1].bar(range(n_validation_trials), validation_costs, alpha=0.7, color='green') axes[1].axhline(y=mean_cost, color='red', linestyle='--', label=f'Mean: {mean_cost:.4f}') axes[1].set_xlabel('Validation Trial', fontsize=12) axes[1].set_ylabel('Cost (ISE)', fontsize=12) axes[1].set_title('Validation Performance', fontsize=14, fontweight='bold') axes[1].legend() axes[1].grid(True, alpha=0.3) plt.tight_layout() plt.savefig(OUTPUT_DIR / "optimization_pipeline_summary.png", dpi=300) # Summary report report_path = OUTPUT_DIR / "optimization_report.txt" with open(report_path, 'w') as f: f.write("="*80 + "\n") f.write("PSO OPTIMIZATION PIPELINE - SUMMARY REPORT\n") f.write("="*80 + "\n\n") f.write(f"Controller Type: {CONTROLLER_TYPE}\n") f.write(f"Configuration: {CONFIG_PATH}\n") f.write(f"Random Seed: {SEED}\n\n") f.write("-"*80 + "\n") f.write("OPTIMIZATION RESULTS\n") f.write("-"*80 + "\n") f.write(f"Best Cost: {best_cost:.6f}\n") f.write(f"Convergence Iterations: {len(cost_history)}\n") f.write(f"Optimized Gains: {best_gains}\n\n") f.write("-"*80 + "\n") f.write("VALIDATION RESULTS\n") f.write("-"*80 + "\n") f.write(f"Number of Trials: {n_validation_trials}\n") f.write(f"Mean Cost: {mean_cost:.6f}\n") f.write(f"Std. Deviation: {std_cost:.6f}\n") f.write(f"Min Cost: {np.min(validation_costs):.6f}\n") f.write(f"Max Cost: {np.max(validation_costs):.6f}\n") f.write("="*80 + "\n") print(f" ✓ Summary report: {report_path}") print(f" ✓ Visualization: {OUTPUT_DIR / 'optimization_pipeline_summary.png'}") print("\n" + "="*80) print("PIPELINE COMPLETE") print("="*80) print(f"\nOptimized controller ready for deployment!") print(f"Gains: {best_gains}") if __name__ == "__main__": main()
+# ============================================================================ def main(): # Create output directory OUTPUT_DIR.mkdir(exist_ok=True) print("="*80) print("COMPLETE PSO OPTIMIZATION PIPELINE") print("="*80) # ------------------------------------------------------------------------- # Step 1: Load Configuration # ------------------------------------------------------------------------- print("\n[1/7] Loading configuration...") config = load_config(CONFIG_PATH) print(f"  Configuration loaded from {CONFIG_PATH}") # ------------------------------------------------------------------------- # Step 2: Validate and Adjust Bounds # ------------------------------------------------------------------------- print("\n[2/7] Validating PSO bounds...") validator = PSOBoundsValidator(config) bounds_result = validator.validate_bounds( controller_type=CONTROLLER_TYPE, lower_bounds=list(config.pso.bounds.min), upper_bounds=list(config.pso.bounds.max) ) if bounds_result.is_valid: print("  Bounds are valid") else: print("  Bounds validation failed, using adjusted bounds") config.pso.bounds.min = bounds_result.adjusted_bounds['lower'] config.pso.bounds.max = bounds_result.adjusted_bounds['upper'] # ------------------------------------------------------------------------- # Step 3: Initialize Convergence Analyzer # ------------------------------------------------------------------------- print("\n[3/7] Initializing convergence analyzer...") criteria = ConvergenceCriteria( fitness_tolerance=1e-6, max_stagnation_iterations=50 ) analyzer = EnhancedConvergenceAnalyzer( criteria=criteria, controller_type=SMCType.CLASSICAL ) print("  Convergence analyzer ready") # ------------------------------------------------------------------------- # Step 4: Create Controller Factory # ------------------------------------------------------------------------- print("\n[4/7] Creating controller factory...") controller_factory = partial( create_controller, controller_type=CONTROLLER_TYPE, config=config ) print("  Factory created") # ------------------------------------------------------------------------- # Step 5: Run PSO Optimization # ------------------------------------------------------------------------- print("\n[5/7] Running PSO optimization...") tuner = PSOTuner( controller_factory=controller_factory, config=config, seed=SEED, instability_penalty_factor=100.0 ) result = tuner.optimise() best_gains = result['best_pos'] best_cost = result['best_cost'] cost_history = result['cost_history'] print(f"  Optimization complete") print(f" Best cost: {best_cost:.6f}") print(f" Convergence: {len(cost_history)} iterations") # Save results np.save(OUTPUT_DIR / "optimized_gains.npy", best_gains) np.save(OUTPUT_DIR / "cost_history.npy", cost_history) # ------------------------------------------------------------------------- # Step 6: Validate Optimized Controller # ------------------------------------------------------------------------- print("\n[6/7] Validating optimized controller...") # Create controller with optimized gains optimized_controller = create_controller( controller_type=CONTROLLER_TYPE, config=config, gains=best_gains ) # Run validation simulations n_validation_trials = 10 validation_costs = [] for trial in range(n_validation_trials): sim_runner = SimulationRunner( controller=optimized_controller, config=config, seed=SEED + trial ) result_trial = sim_runner.run() # Compute cost ise = np.sum(result_trial.states ** 2) * config.simulation.dt validation_costs.append(ise) mean_cost = np.mean(validation_costs) std_cost = np.std(validation_costs) print(f"  Validation complete ({n_validation_trials} trials)") print(f" Mean cost: {mean_cost:.6f} ± {std_cost:.6f}") # ------------------------------------------------------------------------- # Step 7: Generate Report and Visualizations # ------------------------------------------------------------------------- print("\n[7/7] Generating reports and visualizations...") # Convergence plot fig, axes = plt.subplots(2, 1, figsize=(10, 8)) axes[0].plot(cost_history, linewidth=2, color='blue') axes[0].set_ylabel('Best Cost', fontsize=12) axes[0].set_title('PSO Convergence History', fontsize=14, fontweight='bold') axes[0].set_yscale('log') axes[0].grid(True, alpha=0.3) axes[1].bar(range(n_validation_trials), validation_costs, alpha=0.7, color='green') axes[1].axhline(y=mean_cost, color='red', linestyle='--', label=f'Mean: {mean_cost:.4f}') axes[1].set_xlabel('Validation Trial', fontsize=12) axes[1].set_ylabel('Cost (ISE)', fontsize=12) axes[1].set_title('Validation Performance', fontsize=14, fontweight='bold') axes[1].legend() axes[1].grid(True, alpha=0.3) plt.tight_layout() plt.savefig(OUTPUT_DIR / "optimization_pipeline_summary.png", dpi=300) # Summary report report_path = OUTPUT_DIR / "optimization_report.txt" with open(report_path, 'w') as f: f.write("="*80 + "\n") f.write("PSO OPTIMIZATION PIPELINE - SUMMARY REPORT\n") f.write("="*80 + "\n\n") f.write(f"Controller Type: {CONTROLLER_TYPE}\n") f.write(f"Configuration: {CONFIG_PATH}\n") f.write(f"Random Seed: {SEED}\n\n") f.write("-"*80 + "\n") f.write("OPTIMIZATION RESULTS\n") f.write("-"*80 + "\n") f.write(f"Best Cost: {best_cost:.6f}\n") f.write(f"Convergence Iterations: {len(cost_history)}\n") f.write(f"Optimized Gains: {best_gains}\n\n") f.write("-"*80 + "\n") f.write("VALIDATION RESULTS\n") f.write("-"*80 + "\n") f.write(f"Number of Trials: {n_validation_trials}\n") f.write(f"Mean Cost: {mean_cost:.6f}\n") f.write(f"Std. Deviation: {std_cost:.6f}\n") f.write(f"Min Cost: {np.min(validation_costs):.6f}\n") f.write(f"Max Cost: {np.max(validation_costs):.6f}\n") f.write("="*80 + "\n") print(f"  Summary report: {report_path}") print(f"  Visualization: {OUTPUT_DIR / 'optimization_pipeline_summary.png'}") print("\n" + "="*80) print("PIPELINE COMPLETE") print("="*80) print(f"\nOptimized controller ready for deployment!") print(f"Gains: {best_gains}") if __name__ == "__main__": main()
 
 ```
 
@@ -670,12 +670,12 @@ $$ Typical: $\epsilon_{div} = 10^{-3}$ ### 9.3 Computational Efficiency **Vector
 ## Document Metadata **Version:** 1.0
 **Date:** 2025-10-07
 **Status:** Complete
-**Quality Score:** Target ≥96/100 (Phase 4.2 benchmark) **Cross-Reference Validation:** ✓ All links verified
-**Code Example Validation:** ✓ All 5 examples syntactically correct
-**API Coverage:** ✓ 100% public classes and methods documented
-**Architecture Diagrams:** ✓ 2 diagrams included
-**Theory Integration:** ✓ Complete cross-references to Phase 2.2 **Line Count:** ~1,400 lines (target: 1,000-1,500) ✓
-**Code Examples:** 5 complete workflows ✓ **Maintenance:**
+**Quality Score:** Target ≥96/100 (Phase 4.2 benchmark) **Cross-Reference Validation:**  All links verified
+**Code Example Validation:**  All 5 examples syntactically correct
+**API Coverage:**  100% public classes and methods documented
+**Architecture Diagrams:**  2 diagrams included
+**Theory Integration:**  Complete cross-references to Phase 2.2 **Line Count:** ~1,400 lines (target: 1,000-1,500) 
+**Code Examples:** 5 complete workflows  **Maintenance:**
 - Update when optimization algorithms are added or modified
 - Validate cross-references when theory docs are updated
 - Re-run code examples after API changes

@@ -3,7 +3,7 @@
 #===================================================================================\\\
 
 """
-Comprehensive Coverage Report Generator.
+complete Coverage Report Generator.
 
 This script generates detailed coverage reports with statistics,
 trend analysis, and gap identification.
@@ -46,7 +46,7 @@ class CoverageSnapshot:
 
 
 class CoverageReportGenerator:
-    """Comprehensive coverage report generator."""
+    """complete coverage report generator."""
 
     def __init__(self, project_root: Path = Path(".")):
         self.project_root = project_root
@@ -140,7 +140,7 @@ class CoverageReportGenerator:
         """Save current coverage as baseline."""
         with open(self.baseline_file, 'w') as f:
             json.dump(asdict(snapshot), f, indent=2)
-        print(f"✓ Baseline saved to {self.baseline_file}")
+        print(f" Baseline saved to {self.baseline_file}")
 
     def load_baseline(self) -> Optional[CoverageSnapshot]:
         """Load baseline coverage snapshot."""
@@ -199,9 +199,9 @@ class CoverageReportGenerator:
 
         # Quality gates status
         print("\nQuality Gates:")
-        print(f"  Overall (≥85%):           {'✓ PASS' if snapshot.overall_percent >= 85 else '✗ FAIL'}")
-        print(f"  Critical (≥95%):          {'✓ PASS' if snapshot.critical_percent >= 95 else '✗ FAIL'}")
-        print(f"  Safety-Critical (100%):   {'✓ PASS' if snapshot.safety_critical_percent >= 100 else '✗ FAIL'}")
+        print(f"  Overall (≥85%):           {' PASS' if snapshot.overall_percent >= 85 else ' FAIL'}")
+        print(f"  Critical (≥95%):          {' PASS' if snapshot.critical_percent >= 95 else ' FAIL'}")
+        print(f"  Safety-Critical (100%):   {' PASS' if snapshot.safety_critical_percent >= 100 else ' FAIL'}")
 
         print("\n" + "="*80 + "\n")
 
@@ -289,7 +289,7 @@ class CoverageReportGenerator:
 
     def generate_report(self, run_tests: bool = False, save_baseline: bool = False,
                        compare_baseline: bool = False):
-        """Generate comprehensive coverage report."""
+        """Generate complete coverage report."""
         # Step 1: Run tests if requested
         if run_tests:
             if not self.run_coverage_tests():

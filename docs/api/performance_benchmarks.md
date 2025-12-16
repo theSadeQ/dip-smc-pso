@@ -1,4 +1,4 @@
-# Performance Benchmarks Reference **Status:** 🚧 Under Construction This document will contain performance benchmarking documentation including: ## Planned Content ### Benchmark Methodology
+# Performance Benchmarks Reference **Status:**  Under Construction This document will contain performance benchmarking documentation including: ## Planned Content ### Benchmark Methodology
 
 - Performance metrics definitions
 - Test scenario specifications

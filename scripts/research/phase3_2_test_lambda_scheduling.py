@@ -225,7 +225,7 @@ def create_selective_lambda_scheduler(
 
     if mode == "full":
         # Full lambda scheduling - use AdaptiveGainScheduler
-        # NOTE: This schedules ALL gains, but we'll create a custom wrapper
+        # NOTE: This schedules ALL gains, but this will create a custom wrapper
         # that only schedules lambda1 and lambda2
         pass
 

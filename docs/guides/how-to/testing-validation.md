@@ -39,20 +39,20 @@ python -m pytest tests/test_controllers/test_classical_smc.py -v # Run specific 
 python -m pytest tests/test_controllers/test_classical_smc.py::TestClassicalSMC::test_initialization -v
 ``` ### Test Organization ```
 tests/
-├── test_controllers/ # Controller unit tests
-│ ├── test_classical_smc.py
-│ ├── test_sta_smc.py
-│ ├── test_adaptive_smc.py
-│ └── test_hybrid_smc.py
-├── test_core/ # Core simulation tests
-│ ├── test_dynamics.py
-│ ├── test_simulation_runner.py
-│ └── test_vector_sim.py
-├── test_optimizer/ # PSO tests
-│ └── test_pso_optimizer.py
-├── test_integration/ # Integration tests
-│ └── test_end_to_end.py
-└── conftest.py # Test fixtures
+ test_controllers/ # Controller unit tests
+  test_classical_smc.py
+  test_sta_smc.py
+  test_adaptive_smc.py
+  test_hybrid_smc.py
+ test_core/ # Core simulation tests
+  test_dynamics.py
+  test_simulation_runner.py
+  test_vector_sim.py
+ test_optimizer/ # PSO tests
+  test_pso_optimizer.py
+ test_integration/ # Integration tests
+  test_end_to_end.py
+ conftest.py # Test fixtures
 ``` ### Running Specific Test Categories ```bash
 # Unit tests only (fast)
 

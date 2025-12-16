@@ -40,9 +40,9 @@ The `plant.models.base` package defines the **abstract interface hierarchy** for
 
 ```
 DynamicsInterface (ABC)
-    ├─ SimplifiedDIPDynamics
-    ├─ FullNonlinearDIPDynamics
-    └─ LowRankDIPDynamics
+     SimplifiedDIPDynamics
+     FullNonlinearDIPDynamics
+     LowRankDIPDynamics
 ```
 
 **Liskov Substitution Principle:**

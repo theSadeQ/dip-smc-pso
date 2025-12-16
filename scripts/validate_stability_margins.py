@@ -392,7 +392,7 @@ def validate_controller(controller: str, csv_path: str, threshold: float = 0.95,
     print(f"  V(final) = {validation_result['V_final']:.6f}")
     print(f"  V(max) = {validation_result['V_max']:.6f}")
     print(f"  Mean(dV/dt) = {validation_result['mean_dV_dt']:.6f}")
-    print(f"  Status: {'✅ PASS' if validation_result['passed'] else '❌ FAIL'}")
+    print(f"  Status: {' PASS' if validation_result['passed'] else ' FAIL'}")
 
     # Plot
     if plot:

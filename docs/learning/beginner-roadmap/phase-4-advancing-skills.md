@@ -433,9 +433,9 @@ pytest --cov=src
 2. Identify: abstract methods, attributes, concrete methods
 3. Explain in your own words what `@abstractmethod` does
 
-**If you can complete quiz and exercise**: ✅ Move to Phase 4.2
-**If struggling with classes**: ⚠️ Review Python OOP tutorials online
-**If struggling with decorators**: ⚠️ Watch "Python Decorators Explained" videos
+**If you can complete quiz and exercise**:  Move to Phase 4.2
+**If struggling with classes**:  Review Python OOP tutorials online
+**If struggling with decorators**:  Watch "Python Decorators Explained" videos
 
 **Resources**:
 - [Python Classes Tutorial (Real Python, 30 min)](https://realpython.com/python3-object-oriented-programming/)
@@ -461,12 +461,12 @@ pytest --cov=src
 
 ```
 src/controllers/
-├─ base.py                      # Abstract interface
-├─ classical_smc.py             # Classical SMC (START HERE)
-├─ sta_smc.py                   # Super-Twisting
-├─ adaptive_smc.py              # Adaptive
-├─ hybrid_adaptive_sta_smc.py   # Hybrid
-└─ factory.py                   # Controller creation
+ base.py                      # Abstract interface
+ classical_smc.py             # Classical SMC (START HERE)
+ sta_smc.py                   # Super-Twisting
+ adaptive_smc.py              # Adaptive
+ hybrid_adaptive_sta_smc.py   # Hybrid
+ factory.py                   # Controller creation
 ```
 
 **Reading Order**:
@@ -724,9 +724,9 @@ graph TD
 3. Run simulation, observe how s1, s2 evolve
 4. Remove prints when done
 
-**If you can complete quiz and exercise**: ✅ Move to Phase 4.3
-**If sliding surface confusing**: ⚠️ Review Phase 2.3 (SMC theory)
-**If code unclear**: ⚠️ Add more print statements, run with small disturbance
+**If you can complete quiz and exercise**:  Move to Phase 4.3
+**If sliding surface confusing**:  Review Phase 2.3 (SMC theory)
+**If code unclear**:  Add more print statements, run with small disturbance
 
 **Resources**:
 - [SMC Control Law Explained (Video, 12 min)](https://www.youtube.com/results?search_query=sliding+mode+control+explained)
@@ -971,10 +971,10 @@ V̇ = s * ṡ < 0  # System approaches surface
 ```
    θ̇ (angular velocity)
     ^
-    |     ●------>        <-- Trajectories
+    |     ------>        <-- Trajectories
     |    /
     |   /
-    |  ●------>
+    |  ------>
     | /
     +--------------------> θ (angle)
     |
@@ -986,13 +986,13 @@ V̇ = s * ṡ < 0  # System approaches surface
 ```
    θ̇
     ^
-    |     ╱ Sliding surface: s = θ + k*θ̇ = 0
-    |    ╱   (line in 2D, plane in higher dimensions)
-    |   ╱
-    |  ╱  <--Trajectories converge to this line
-    | ╱
-    +╱─────────────────> θ
-   ╱ |
+    |      Sliding surface: s = θ + k*θ̇ = 0
+    |       (line in 2D, plane in higher dimensions)
+    |   
+    |    <--Trajectories converge to this line
+    | 
+    +> θ
+    |
 ```
 
 **Key Insight**: SMC drives system TO the sliding surface, THEN slides along it to equilibrium.
@@ -1062,9 +1062,9 @@ Can you explain (in your own words, no equations):
 2. How Lyapunov functions prove stability without solving equations?
 3. What a sliding surface represents geometrically?
 
-**If you can answer conceptually**: 🎉 **Phase 4 COMPLETE!**
-**If math too abstract**: ⚠️ Focus on conceptual understanding, skip derivations
-**If want deeper math**: ✅ Read Slotine & Li textbook (graduate level)
+**If you can answer conceptually**:  **Phase 4 COMPLETE!**
+**If math too abstract**:  Focus on conceptual understanding, skip derivations
+**If want deeper math**:  Read Slotine & Li textbook (graduate level)
 
 **Resources**:
 - [Lyapunov Stability Intuition (Video, 10 min)](https://www.youtube.com/results?search_query=lyapunov+stability+explained)
@@ -1111,20 +1111,20 @@ Test your advanced skills from Phase 4
 
 ```
 
-```{grid-item-card} 📖 PSO Algorithm Explained
+```{grid-item-card}  PSO Algorithm Explained
 :link: https://www.geeksforgeeks.org/machine-learning/particle-swarm-optimization-pso-an-overview/
 :link-type: url
 :class-card: resource-card resource-article
 :shadow: md
 :text-align: center
 
-Comprehensive PSO overview with algorithm fundamentals, swarm intelligence, and Python implementation examples.
-📊 *Estimated Time:* 40 min | 🎯 *Level:* Advanced
+complete PSO overview with algorithm fundamentals, swarm intelligence, and Python implementation examples.
+ *Estimated Time:* 40 min |  *Level:* Advanced
 [Read -->]
 
 ```
 
-```{grid-item-card} 📖 Chattering Reduction Techniques
+```{grid-item-card}  Chattering Reduction Techniques
 :link: https://www.mdpi.com/2504-446X/7/7/420
 :link-type: url
 :class-card: resource-card resource-article
@@ -1132,12 +1132,12 @@ Comprehensive PSO overview with algorithm fundamentals, swarm intelligence, and 
 :text-align: center
 
 Open-access MDPI paper on chattering reduction using reinforcement learning for SMC. Practical engineering focus.
-📊 *Estimated Time:* 50 min | 🎯 *Level:* Technical
+ *Estimated Time:* 50 min |  *Level:* Technical
 [Read -->]
 
 ```
 
-```{grid-item-card} 🛠️ Matplotlib Best Practices
+```{grid-item-card}  Matplotlib Best Practices
 :link: https://matplotlib.org/
 :link-type: url
 :class-card: resource-card resource-tool
@@ -1145,12 +1145,12 @@ Open-access MDPI paper on chattering reduction using reinforcement learning for 
 :text-align: center
 
 Official Matplotlib documentation with examples gallery, user guide, and API docs for data visualization.
-📊 *Estimated Time:* Reference | 🎯 *Level:* Reference
+ *Estimated Time:* Reference |  *Level:* Reference
 [Browse -->]
 
 ```
 
-```{grid-item-card} 🧪 Streamlit UI Tutorial
+```{grid-item-card}  Streamlit UI Tutorial
 :link: https://docs.streamlit.io/get-started/tutorials/create-an-app
 :link-type: url
 :class-card: resource-card resource-interactive
@@ -1158,21 +1158,21 @@ Official Matplotlib documentation with examples gallery, user guide, and API doc
 :text-align: center
 
 Official Streamlit tutorial building interactive NYC Uber app. Covers caching, widgets, and deployment.
-📊 *Estimated Time:* 60 min | 🎯 *Level:* Beginner
+ *Estimated Time:* 60 min |  *Level:* Beginner
 [Try It -->]
 
 ```
 ```
 
 ---
-**CONGRATULATIONS!** 🎉
+**CONGRATULATIONS!** 
 
 You've completed **Phase 4: Advancing Skills** (~30 hours)!
 
 You now understand:
-✅ Advanced Python concepts (classes, inheritance, decorators)
-✅ How to read and understand controller source code
-✅ Mathematical foundations (Lagrangian, Lyapunov, phase space)
+ Advanced Python concepts (classes, inheritance, decorators)
+ How to read and understand controller source code
+ Mathematical foundations (Lagrangian, Lyapunov, phase space)
 
 **Skills Gained**:
 - Code reading and comprehension

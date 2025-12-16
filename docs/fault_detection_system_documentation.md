@@ -66,15 +66,15 @@ N ≥ max(10, 3/σ_noise²)
 ## Implementation Documentation ### 2.1 FDI System Architecture The fault detection system follows a modular, extensible architecture: ```
 
 FDIsystem
-├── Core Detection Engine
-│ ├── Residual Generation
-│ ├── Threshold Management
-│ └── Persistence Filtering
-├── Advanced Algorithms
-│ ├── Adaptive Thresholding
-│ ├── CUSUM Drift Detection
-│ └── Statistical Validation
-└── Analysis Framework ├── History Recording ├── Performance Metrics └── Diagnostic Reporting
+ Core Detection Engine
+  Residual Generation
+  Threshold Management
+  Persistence Filtering
+ Advanced Algorithms
+  Adaptive Thresholding
+  CUSUM Drift Detection
+  Statistical Validation
+ Analysis Framework  History Recording  Performance Metrics  Diagnostic Reporting
 ``` ### 2.2 Configuration Parameters **Core Parameters:**
 - `residual_threshold: float = 0.5` - Base threshold for fault detection
 - `persistence_counter: int = 10` - Required consecutive violations for fault declaration
@@ -229,10 +229,10 @@ class FDIsystem: residual_threshold: float = 0.150 # Calibrated from 0.5 hystere
 fault_detection: residual_threshold: 0.150 hysteresis_enabled: true hysteresis_upper: 0.165 hysteresis_lower: 0.135
 ``` ### 6.0.5 Validation and Documentation **Acceptance Criteria Status**:
 
-- ✅ Threshold in range [0.135, 0.150]: 0.150
-- ⚠️ False positive rate <1%: 15.9% (constraint-limited)
-- ✅ True positive rate >99%: ~100%
-- ✅ Statistical basis ≥100 samples: 1,167 samples **Documentation**:
+-  Threshold in range [0.135, 0.150]: 0.150
+-  False positive rate <1%: 15.9% (constraint-limited)
+-  True positive rate >99%: ~100%
+-  Statistical basis ≥100 samples: 1,167 samples **Documentation**:
 - methodology: [FDI Threshold Calibration Methodology](fdi_threshold_calibration_methodology.md)
 - Statistical analysis: `artifacts/fdi_threshold_calibration_report.json`
 - Hysteresis design: `artifacts/hysteresis_design_spec.json`
@@ -322,11 +322,11 @@ Measurement_Cases = { "basic_detection": "~0.05ms per timestep", "adaptive_enabl
 ```
 Safety Property Test Method Status
 ------------------------------------------------------------------
-Detection Delay ≤ 50 steps Monte Carlo simulation ✅ VERIFIED
-False Alarm Rate ≤ 1% Statistical testing ✅ VERIFIED
-No Memory Leaks Extended operation test ✅ VERIFIED
-Numerical Stability Edge case testing ✅ VERIFIED
-Error Recovery Fault injection ✅ VERIFIED
+Detection Delay ≤ 50 steps Monte Carlo simulation  VERIFIED
+False Alarm Rate ≤ 1% Statistical testing  VERIFIED
+No Memory Leaks Extended operation test  VERIFIED
+Numerical Stability Edge case testing  VERIFIED
+Error Recovery Fault injection  VERIFIED
 ------------------------------------------------------------------
 ``` ### 7.3 Operational Limits and Constraints #### **7.3.1 Parameter Bounds:**
 
@@ -390,7 +390,7 @@ def recommend_threshold(baseline_stats, target_far=0.01): """Recommend threshold
 # runnable: false def tune_persistence_counter(fault_scenarios, detection_delay_target=20): """Tune persistence counter based on detection delay requirements.""" optimal_persistence = {} for fault_type, magnitude in fault_scenarios.items(): delays = [] for persistence in range(1, 21): # Test 1-20 fdi = FDIsystem(persistence_counter=persistence) delay = simulate_fault_detection(fdi, fault_type, magnitude) delays.append(delay) if delay <= detection_delay_target: optimal_persistence[fault_type] = persistence break return optimal_persistence
 ``` ### 8.3 Validation Checklist #### **8.3.1 Pre-Deployment Validation:** ```
 
-□ Mathematical correctness verified □ Weighted residual calculation tested □ CUSUM algorithm validated □ Adaptive threshold convergence confirmed □ Performance requirements met □ Execution time < 1ms per timestep □ Memory usage bounded □ Real-time constraints satisfied □ Safety requirements validated □ Detection delay ≤ 50 timesteps for critical faults □ False alarm rate ≤ 1% during normal operation □ Fault persistence verified □ Graceful degradation confirmed □ Integration testing complete □ Controller integration validated □ HIL testing passed (if applicable) □ Multi-agent coordination verified □ Error handling tested □ Documentation complete □ Parameter tuning guidelines provided □ Troubleshooting procedures documented □ API reference updated □ Configuration examples included
+ Mathematical correctness verified  Weighted residual calculation tested  CUSUM algorithm validated  Adaptive threshold convergence confirmed  Performance requirements met  Execution time < 1ms per timestep  Memory usage bounded  Real-time constraints satisfied  Safety requirements validated  Detection delay ≤ 50 timesteps for critical faults  False alarm rate ≤ 1% during normal operation  Fault persistence verified  Graceful degradation confirmed  Integration testing complete  Controller integration validated  HIL testing passed (if applicable)  Multi-agent coordination verified  Error handling tested  Documentation complete  Parameter tuning guidelines provided  Troubleshooting procedures documented  API reference updated  Configuration examples included
 ```
 
 ---

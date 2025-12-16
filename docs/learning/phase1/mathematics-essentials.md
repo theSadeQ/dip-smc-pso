@@ -11,7 +11,7 @@
 
 ## What You'll Learn
 
-By the end of this module, you'll understand:
+By the end of this module, the system will understand:
 - Derivatives and integrals (calculus basics)
 - Vectors and matrices (linear algebra)
 - Differential equations
@@ -544,7 +544,7 @@ x = np.linalg.solve(A, b)
 print(x)  # [1. 2.]
 
 # Verify
-print(A @ x)  # [8. 2.] ✓
+print(A @ x)  # [8. 2.] 
 ```
 
 ------

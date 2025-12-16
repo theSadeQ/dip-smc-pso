@@ -10,7 +10,7 @@ Enhances 15 critical analysis framework files with:
 - Validation framework theory (statistical testing, Monte Carlo, cross-validation)
 - Core infrastructure (metrics, data structures, interfaces)
 - Architecture diagrams (Mermaid flowcharts)
-- Comprehensive usage examples (75 total scenarios)
+- complete usage examples (75 total scenarios)
 
 Usage:
     python scripts/docs/enhance_analysis_core_docs.py --dry-run
@@ -37,7 +37,7 @@ class AnalysisEnhancementStats:
 
 
 class AnalysisCoreDocEnhancer:
-    """Enhances core analysis documentation with comprehensive content."""
+    """Enhances core analysis documentation with complete content."""
 
     # All 15 core analysis files to enhance (Week 11 Phase 1)
     CORE_FILES = {
@@ -1718,7 +1718,7 @@ print(f"95% CI: [{ci.lower:.3f}, {ci.upper:.3f}]")
 ### Example 3: Performance Metrics
 
 ```python
-# Compute comprehensive metrics
+# Compute complete metrics
 from src.analysis.performance import compute_all_metrics
 
 metrics = compute_all_metrics(

@@ -23,7 +23,7 @@ The Model Predictive Controller (MPC) represents an optimization-based control p
 - **Convergence Type**: Optimal (within QP tolerance)
 - **Computational Cost**: Highest among controllers (O(N³) per solve)
 - **Constraint Handling**: Explicit state/input constraints
-- **Runtime Status**: ✅ **OPERATIONAL** (fallback-protected)
+- **Runtime Status**:  **OPERATIONAL** (fallback-protected)
 
 **Best Use Cases**:
 - Systems requiring explicit constraint satisfaction
@@ -792,7 +792,7 @@ return float(np.clip(u0, -self.max_force, self.max_force))
   - May miss fast dynamics
 
 **Rule of Thumb**: dt ≤ 1/(10 × f_fastest)
-- For DIP: f_fastest ~5 Hz → dt ≤ 0.02 s ✓
+- For DIP: f_fastest ~5 Hz → dt ≤ 0.02 s 
 
 #### 1.3 Cost Function Weights
 
@@ -1187,10 +1187,10 @@ N=50:  ~15 ms
 #### 1.3 Real-Time Feasibility
 
 **Control Frequencies**:
-- **100 Hz** (10 ms): ✅ Feasible with warm start, N≤20
-- **50 Hz** (20 ms): ✅ Comfortable, N≤30
-- **20 Hz** (50 ms): ✅ Easy, N≤50
-- **10 Hz** (100 ms): ✅ Trivial, any N
+- **100 Hz** (10 ms):  Feasible with warm start, N≤20
+- **50 Hz** (20 ms):  Comfortable, N≤30
+- **20 Hz** (50 ms):  Easy, N≤50
+- **10 Hz** (100 ms):  Trivial, any N
 
 **Recommendation**: For real-time control at 50-100 Hz, use N=10-15 with OSQP and warm start.
 

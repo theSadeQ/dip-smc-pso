@@ -8,43 +8,43 @@
 
 ### Phase 1: Foundations
 ```
-┌─────────────────────────────────────────────┐
-│ 1. Control Loop Basics (Phase 2.1)         │
-│    Type: Circular feedback loop            │
-│    Impact: 96/100 (FOUNDATION)             │
-│    Time: 30 min                            │
-│    Simple example: Thermostat              │
-├─────────────────────────────────────────────┤
-│ 2. Error Diagnosis Flowchart (Phase 1.3)   │
-│    Type: Decision tree                     │
-│    Impact: 92/100 (Prevents frustration)   │
-│    Time: 45 min                            │
-│    Purpose: "pip not found" → Solutions    │
-├─────────────────────────────────────────────┤
-│ 3. Computing Basics (Phase 1.1)            │
-│    Type: Process flowchart                 │
-│    Impact: 95/100 (File navigation)        │
-│    Time: 40 min                            │
-│    Focus: pwd/cd/ls workflow               │
-├─────────────────────────────────────────────┤
-│ 4. SMC Intuitive Concept Map (Phase 2.3)   │
-│    Type: Concept map (mind map)            │
-│    Impact: 91/100 (Demystifies SMC)        │
-│    Time: 50 min                            │
-│    Core: Surface + Forcing + Sliding       │
-├─────────────────────────────────────────────┤
-│ 5. File System Tree (Phase 1.1)            │
-│    Type: Tree diagram                      │
-│    Impact: 90/100 (Visual hierarchy)       │
-│    Time: 35 min                            │
-│    Shows: C: → Users → YourName → Projects │
-├─────────────────────────────────────────────┤
-│ 6. Feedback vs Open-Loop (Phase 2.2)       │
-│    Type: Comparison diagram                │
-│    Impact: 94/100 (Core distinction)       │
-│    Time: 40 min                            │
-│    Example: Toaster vs Oven                │
-└─────────────────────────────────────────────┘
+
+ 1. Control Loop Basics (Phase 2.1)         
+    Type: Circular feedback loop            
+    Impact: 96/100 (FOUNDATION)             
+    Time: 30 min                            
+    Simple example: Thermostat              
+
+ 2. Error Diagnosis Flowchart (Phase 1.3)   
+    Type: Decision tree                     
+    Impact: 92/100 (Prevents frustration)   
+    Time: 45 min                            
+    Purpose: "pip not found" → Solutions    
+
+ 3. Computing Basics (Phase 1.1)            
+    Type: Process flowchart                 
+    Impact: 95/100 (File navigation)        
+    Time: 40 min                            
+    Focus: pwd/cd/ls workflow               
+
+ 4. SMC Intuitive Concept Map (Phase 2.3)   
+    Type: Concept map (mind map)            
+    Impact: 91/100 (Demystifies SMC)        
+    Time: 50 min                            
+    Core: Surface + Forcing + Sliding       
+
+ 5. File System Tree (Phase 1.1)            
+    Type: Tree diagram                      
+    Impact: 90/100 (Visual hierarchy)       
+    Time: 35 min                            
+    Shows: C: → Users → YourName → Projects 
+
+ 6. Feedback vs Open-Loop (Phase 2.2)       
+    Type: Comparison diagram                
+    Impact: 94/100 (Core distinction)       
+    Time: 40 min                            
+    Example: Toaster vs Oven                
+
 ```
 
 ---
@@ -52,35 +52,35 @@
 ## Tier 2: High Value Diagrams (7 diagrams)
 
 ```
-┌─────────────────────────────────────────────┐
-│ 7. Python Data Types Map (Phase 1.2)        │
-│    Type: Concept map                       │
-│    Impact: 85/100 | Time: 45 min           │
-├─────────────────────────────────────────────┤
-│ 8. Simulation Workflow (Phase 3.1)          │
-│    Type: Process flowchart                 │
-│    Impact: 82/100 | Time: 40 min           │
-├─────────────────────────────────────────────┤
-│ 9. Pendulum Simple Physics (Phase 1.4)      │
-│    Type: State machine                     │
-│    Impact: 88/100 | Time: 50 min           │
-├─────────────────────────────────────────────┤
-│ 10. DIP System Components (Phase 2.5)       │
-│     Type: Block diagram                    │
-│     Impact: 88/100 | Time: 45 min          │
-├─────────────────────────────────────────────┤
-│ 11. Optimization Problem Space (Phase 2.4)  │
-│     Type: Landscape/contour diagram        │
-│     Impact: 87/100 | Time: 55 min          │
-├─────────────────────────────────────────────┤
-│ 12. Result Interpretation (Phase 3.2)       │
-│     Type: Decision tree                    │
-│     Impact: 80/100 | Time: 45 min          │
-├─────────────────────────────────────────────┤
-│ 13. Physics Forces (Phase 1.4)              │
-│     Type: Force diagram                    │
-│     Impact: 87/100 | Time: 50 min          │
-└─────────────────────────────────────────────┘
+
+ 7. Python Data Types Map (Phase 1.2)        
+    Type: Concept map                       
+    Impact: 85/100 | Time: 45 min           
+
+ 8. Simulation Workflow (Phase 3.1)          
+    Type: Process flowchart                 
+    Impact: 82/100 | Time: 40 min           
+
+ 9. Pendulum Simple Physics (Phase 1.4)      
+    Type: State machine                     
+    Impact: 88/100 | Time: 50 min           
+
+ 10. DIP System Components (Phase 2.5)       
+     Type: Block diagram                    
+     Impact: 88/100 | Time: 45 min          
+
+ 11. Optimization Problem Space (Phase 2.4)  
+     Type: Landscape/contour diagram        
+     Impact: 87/100 | Time: 55 min          
+
+ 12. Result Interpretation (Phase 3.2)       
+     Type: Decision tree                    
+     Impact: 80/100 | Time: 45 min          
+
+ 13. Physics Forces (Phase 1.4)              
+     Type: Force diagram                    
+     Impact: 87/100 | Time: 50 min          
+
 ```
 
 ---
@@ -108,24 +108,24 @@ Physics        Energy Flow
 ### Option 1: Linear Progress Bars (Phase 1-5)
 
 ```
-Phase 1: Foundations    [████████░░░░░░░░] 40% (16/40 hours)
-Phase 2: Core Concepts  [██████░░░░░░░░░░░░] 20% (6/30 hours)
-Phase 3: Hands-On       [░░░░░░░░░░░░░░░░░░░░] 0% (0/25 hours)
-Phase 4: Advancing      [░░░░░░░░░░░░░░░░░░░░] 0% (0/30 hours)
-Phase 5: Mastery        [░░░░░░░░░░░░░░░░░░░░░] 0% (0/25-75 hours)
+Phase 1: Foundations    [] 40% (16/40 hours)
+Phase 2: Core Concepts  [] 20% (6/30 hours)
+Phase 3: Hands-On       [] 0% (0/25 hours)
+Phase 4: Advancing      [] 0% (0/30 hours)
+Phase 5: Mastery        [] 0% (0/25-75 hours)
 
-Total Progress: [██░░░░░░░░░░░░░░░░░░░] 12% (22/150 hours)
+Total Progress: [] 12% (22/150 hours)
 ```
 
 ### Option 2: Completion Badges (Per Phase)
 
 ```
 Phase 1 Milestones:
-  ✓ Computing Basics (1.1)      - 4 hours
-  ✓ Python Fundamentals (1.2)   - 20 hours
-  ○ Environment Setup (1.3)     - 3 hours
-  ○ Physics Foundation (1.4)    - 8 hours
-  ○ Math Fundamentals (1.5)     - 5 hours
+   Computing Basics (1.1)      - 4 hours
+   Python Fundamentals (1.2)   - 20 hours
+   Environment Setup (1.3)     - 3 hours
+   Physics Foundation (1.4)    - 8 hours
+   Math Fundamentals (1.5)     - 5 hours
 
   Unlocked: Phase 2 Start!
 ```
@@ -134,7 +134,7 @@ Phase 1 Milestones:
 
 ```
 Week 1-4        Week 5-8        Week 9-12       Week 13-16      Week 17+
-[Phase 1]────→[Phase 2]────→[Phase 3]────→[Phase 4]────→[Phase 5]
+[Phase 1]→[Phase 2]→[Phase 3]→[Phase 4]→[Phase 5]
   40h            30h             25h             30h           25-75h
                                                               (Your Path)
 ```
@@ -144,13 +144,13 @@ Week 1-4        Week 5-8        Week 9-12       Week 13-16      Week 17+
 ```
 Difficulty
     ↑
-  Hard│         Phase 4
-     │       ↗    Phase 2
-Medium│   Phase 3
-     │   Phase 1
-  Easy│        Phase 5.1-5.2
-     │
-     └────────────────────→ Time
+  Hard         Phase 4
+            ↗    Phase 2
+Medium   Phase 3
+        Phase 1
+  Easy        Phase 5.1-5.2
+     
+     → Time
          8    8    4    4    4+ weeks
 ```
 
@@ -200,15 +200,15 @@ CHECKPOINT 2: Phase 2, 4, 5 + Timeline Complete (20-21 hours)
 
 ```
 docs/learning/beginner-roadmap/
-├── phase-1-foundations.md      (Add 6 diagrams + CSS classes)
-├── phase-2-core-concepts.md    (Add 7 diagrams + CSS classes)
-├── phase-3-hands-on.md         (Add 4 diagrams + badges)
-├── phase-4-advancing-skills.md (Add 3 diagrams)
-├── phase-5-mastery.md          (Add 2 diagrams)
-└── beginner-roadmap.md         (Add timeline + progress bars)
+ phase-1-foundations.md      (Add 6 diagrams + CSS classes)
+ phase-2-core-concepts.md    (Add 7 diagrams + CSS classes)
+ phase-3-hands-on.md         (Add 4 diagrams + badges)
+ phase-4-advancing-skills.md (Add 3 diagrams)
+ phase-5-mastery.md          (Add 2 diagrams)
+ beginner-roadmap.md         (Add timeline + progress bars)
 
 docs/_static/
-└── beginner-roadmap.css        (Add ~120 lines for Mermaid + progress viz)
+ beginner-roadmap.css        (Add ~120 lines for Mermaid + progress viz)
 ```
 
 ### CSS Line Reservations
@@ -379,27 +379,27 @@ Readable font (12px minimum)
 
 ```
 WEEK 4 DELIVERABLES
-├─ Diagrams: 22-25 total
-│  ├─ Phase 1: 6 diagrams (10-12h)
-│  ├─ Phase 2: 7 diagrams (12-14h)
-│  ├─ Phase 3: 4 diagrams (6-7h)
-│  ├─ Phase 4: 3 diagrams (4-5h)
-│  └─ Phase 5: 2 diagrams (3-4h)
-├─ Progress Visualization: 4 systems
-│  ├─ Progress bars
-│  ├─ Completion badges
-│  ├─ Timeline
-│  └─ Difficulty grid
-├─ CSS Enhancements: ~120 lines
-│  ├─ Mermaid responsiveness
-│  ├─ Progress bar styling
-│  ├─ Timeline layout
-│  └─ Accessibility support
-└─ Testing & Documentation
-   ├─ Sphinx build validation
-   ├─ Mobile testing (4 breakpoints)
-   ├─ Accessibility audit
-   └─ Implementation summary
+ Diagrams: 22-25 total
+   Phase 1: 6 diagrams (10-12h)
+   Phase 2: 7 diagrams (12-14h)
+   Phase 3: 4 diagrams (6-7h)
+   Phase 4: 3 diagrams (4-5h)
+   Phase 5: 2 diagrams (3-4h)
+ Progress Visualization: 4 systems
+   Progress bars
+   Completion badges
+   Timeline
+   Difficulty grid
+ CSS Enhancements: ~120 lines
+   Mermaid responsiveness
+   Progress bar styling
+   Timeline layout
+   Accessibility support
+ Testing & Documentation
+    Sphinx build validation
+    Mobile testing (4 breakpoints)
+    Accessibility audit
+    Implementation summary
 
 TOTAL: 40-45 hours across 2 agents
 ```

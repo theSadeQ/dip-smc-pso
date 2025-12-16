@@ -177,10 +177,10 @@ def main():
     print("=" * 80)
     print("VALIDATION SUMMARY")
     print("=" * 80)
-    print(f"✓ Copies eliminated: {memory_results['copies_eliminated']}")
-    print(f"✓ Views introduced: {memory_results['views_introduced']}")
-    print(f"✓ Numerical stability: {'maintained' if stability_ok else 'degraded'}")
-    print(f"✓ Performance overhead: {perf_results['overhead_percent']:.1f}% ({'acceptable' if perf_status == 'PASS' else 'review needed'})")
+    print(f" Copies eliminated: {memory_results['copies_eliminated']}")
+    print(f" Views introduced: {memory_results['views_introduced']}")
+    print(f" Numerical stability: {'maintained' if stability_ok else 'degraded'}")
+    print(f" Performance overhead: {perf_results['overhead_percent']:.1f}% ({'acceptable' if perf_status == 'PASS' else 'review needed'})")
     print()
 
     # Generate report

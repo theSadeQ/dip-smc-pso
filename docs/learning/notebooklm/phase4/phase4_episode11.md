@@ -8,13 +8,13 @@
 
 You've seen the controllers, understood the control laws, and compared performance. But where do the system dynamics come from? How do engineers derive the equations of motion for a double-inverted pendulum? Why are they called "nonlinear"?
 
-Welcome to Sub-Phase 4.3: Advanced Math for S-M-C. In this episode, we'll explore Lagrangian mechanics conceptually, not with rigorous proofs. You'll understand what kinetic energy T, potential energy V, and the Lagrangian L equals T minus V represent. You'll see the structure of the equations of motion: mass matrix M of theta, Coriolis terms C, gravity terms G. And you'll grasp why these equations are nonlinear and what that means for control.
+Welcome to Sub-Phase 4.3: Advanced Math for S-M-C. In this episode, this will explore Lagrangian mechanics conceptually, not with rigorous proofs. You'll understand what kinetic energy T, potential energy V, and the Lagrangian L equals T minus V represent. You'll see the structure of the equations of motion: mass matrix M of theta, Coriolis terms C, gravity terms G. And the system will grasp why these equations are nonlinear and what that means for control.
 
-By the end, you'll have the mathematical foundation to understand advanced control theory papers.
+By the end, the system will have the mathematical foundation to understand advanced control theory papers.
 
 ## What You'll Discover
 
-In this episode, you'll learn:
+In this episode, the system will learn:
 - Lagrangian mechanics conceptually: kinetic energy T, potential energy V, Lagrangian L equals T minus V
 - Euler-Lagrange equations for deriving equations of motion
 - Equations of motion structure: M of theta times q double-dot plus C of theta and theta-dot times theta-dot plus G of theta equals B times F
@@ -39,13 +39,13 @@ L equals T minus V
 
 **Why T minus V, not T plus V?**
 
-This is a deep result from classical mechanics. The Lagrangian formulation leads to the correct equations of motion when you apply the Euler-Lagrange equations, which we'll see shortly.
+This is a deep result from classical mechanics. The Lagrangian formulation leads to the correct equations of motion when you apply the Euler-Lagrange equations, which this will see shortly.
 
 Think of L as a function that captures the system's energy balance. When L is maximized or minimized in a specific sense, you get the natural motion of the system.
 
 ## Kinetic Energy for the Double-Inverted Pendulum
 
-Let's conceptually build the kinetic energy T.
+conceptually build the kinetic energy T.
 
 **Cart kinetic energy:**
 
@@ -169,7 +169,7 @@ M of theta times q double-dot plus C of theta comma theta-dot times theta-dot pl
 
 ## Recap: Core Concepts
 
-Let's recap what we've covered so far.
+recap what we've covered so far.
 
 **Lagrangian Mechanics**: Uses energy (T and V) instead of forces to derive equations of motion.
 
@@ -187,7 +187,7 @@ Let's recap what we've covered so far.
 
 ## The Mass Matrix: Structure and Coupling
 
-Let's look at the mass matrix M of theta more closely (simplified, conceptual):
+look at the mass matrix M of theta more closely (simplified, conceptual):
 
 M of theta equals open-bracket
   M plus m1 plus m2 comma  m1 L1 cos open-paren theta1 close-paren plus m2 L cos open-paren theta1 close-paren comma  m2 L2 cos open-paren theta2 close-paren
@@ -289,7 +289,7 @@ If the pendulum angles are small, sin open-paren theta close-paren approximately
 
 S-M-C is a nonlinear control method. It doesn't require linearization. It works for large deviations from equilibrium, making it robust.
 
-**This is why S-M-C is powerful**: it handles the full nonlinear dynamics without approximation.
+**This is why S-M-C is effective**: it handles the full nonlinear dynamics without approximation.
 
 ## Pronunciation Guide
 
@@ -308,7 +308,7 @@ Here are the technical terms from this episode with phonetic pronunciations:
 
 ## What's Next
 
-In Episode 12, we'll explore vector calculus for control. You'll learn about gradients, Jacobians, and the chain rule for multivariable functions. These tools appear everywhere in control theory papers and are essential for understanding linearization and stability analysis.
+In Episode 12, this will explore vector calculus for control. You'll learn about gradients, Jacobians, and the chain rule for multivariable functions. These tools appear everywhere in control theory papers and are essential for understanding linearization and stability analysis.
 
 Here's a preview question: What is a gradient vector, and what does it represent geometrically? We'll answer this next episode.
 
@@ -324,7 +324,7 @@ Before moving to Episode 12, ask yourself these questions:
 
 If you can answer these conceptually, you're ready to proceed. If anything is unclear, focus on the big picture: energy-based derivation, state-dependent coefficients, and nonlinearity from trigonometric functions. You don't need to derive the equations yourself.
 
-**Excellent progress! You've grasped Lagrangian mechanics conceptually. Let's continue!**
+**Excellent progress! You've grasped Lagrangian mechanics conceptually. continue!**
 
 ---
 

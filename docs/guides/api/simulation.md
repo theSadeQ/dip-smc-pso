@@ -24,11 +24,11 @@
 The Simulation API provides the core engine for running double-inverted pendulum simulations with sliding mode controllers.
 
 **Key Features:**
-- ✅ **SimulationRunner:** High-level simulation orchestration
-- ✅ **Multiple Dynamics:** Simplified and full nonlinear models
-- ✅ **Unified Context:** Consistent simulation state management
-- ✅ **Batch Processing:** Numba-accelerated parallel simulations
-- ✅ **Safety Guards:** Numerical stability monitoring and error handling
+-  **SimulationRunner:** High-level simulation orchestration
+-  **Multiple Dynamics:** Simplified and full nonlinear models
+-  **Unified Context:** Consistent simulation state management
+-  **Batch Processing:** Numba-accelerated parallel simulations
+-  **Safety Guards:** Numerical stability monitoring and error handling
 
 **Related Documentation:**
 - [Tutorial 01: First Simulation](../tutorials/tutorial-01-first-simulation.md)

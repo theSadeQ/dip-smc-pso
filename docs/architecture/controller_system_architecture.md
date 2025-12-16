@@ -8,77 +8,77 @@
 
 ## Executive Summary This document provides architectural documentation for the Double-Inverted Pendulum SMC system, covering the complete controller ecosystem, factory integration patterns, PSO optimization pipeline, and production deployment architecture. Following the successful Hybrid SMC fix, all components are fully operational with 100% integration success. **System Overview**:
 
-- 🏗️ **Modular Architecture**: Clean separation of concerns with factory patterns
-- 🔧 **4 Controller Types**: Classical, Adaptive, STA, and Hybrid SMC implementations
-- ⚡ **PSO Integration**: optimization framework for all controllers
-- 🔍 **Type Safety**: type hints and validation throughout
-- 📊 **Monitoring**: Real-time health checks and performance monitoring
-- 🚀 **Production Ready**: Deployment-grade robustness and reliability
+-  **Modular Architecture**: Clean separation of concerns with factory patterns
+-  **4 Controller Types**: Classical, Adaptive, STA, and Hybrid SMC implementations
+-  **PSO Integration**: optimization framework for all controllers
+-  **Type Safety**: type hints and validation throughout
+-  **Monitoring**: Real-time health checks and performance monitoring
+-  **Production Ready**: Deployment-grade robustness and reliability
 
 ---
 
 ## High-Level System Architecture ```
 
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│ SMC Control System │
-│ │
-│ ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐ │
-│ │ User Interface│ │ Configuration │ │ Monitoring │ │
-│ │ │ │ Management │ │ & Logging │ │
-│ │ • CLI (simulate)│ │ • YAML Schema │ │ • Health Checks │ │
-│ │ • Streamlit App │ │ • Validation │ │ • Performance │ │
-│ │ • Jupyter NB │ │ • Defaults │ │ • Error Tracking│ │
-│ └─────────────────┘ └─────────────────┘ └─────────────────┘ │
-│ │ │ │ │
-│ └───────────────────────┼───────────────────────┘ │
-│ │ │
-│ ┌─────────────────────────────────▼─────────────────────────────────┐ │
-│ │ Core Control Engine │ │
-│ │ │ │
-│ │ ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐ │ │
-│ │ │ Controller │ │ Simulation │ │ Optimization │ │ │
-│ │ │ Factory │ │ Engine │ │ Framework │ │ │
-│ │ │ │ │ │ │ │ │ │
-│ │ │ • SMC Registry │ │ • Dynamics │ │ • PSO Core │ │ │
-│ │ │ • Type Safety │ │ • Integration │ │ • Fitness Eval │ │ │
-│ │ │ • Error Handling│ │ • Vectorization │ │ • Convergence │ │ │
-│ │ │ • Config Bridge │ │ • Real-time │ │ • Result Cache │ │ │
-│ │ └─────────────────┘ └─────────────────┘ └─────────────────┘ │ │
-│ │ │ │ │ │ │
-│ │ └───────────────────────┼───────────────────────┘ │ │
-│ │ │ │ │
-│ │ ┌─────────────────────────────────▼─────────────────────────────────┐ │
-│ │ │ Controller Implementations │ │
-│ │ │ │ │
-│ │ │ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐│ │
-│ │ │ │ Classical │ │ Adaptive │ │ STA │ │ Hybrid ││ │
-│ │ │ │ SMC │ │ SMC │ │ SMC │ │ Adaptive ││ │
-│ │ │ │ │ │ │ │ │ │ STA-SMC ││ │
-│ │ │ │ • Boundary │ │ • Parameter │ │ • Super- │ │ • Combined ││ │
-│ │ │ │ Layer │ │ Estimation │ │ Twisting │ │ Approach ││ │
-│ │ │ │ • Equivalent │ │ • Dead Zone │ │ • Finite-Time│ │ • Self- ││ │
-│ │ │ │ Control │ │ • Leakage │ │ • Continuous │ │ Tapering ││ │
-│ │ │ │ • Damping │ │ • Bounded │ │ • Integral │ │ • Emergency ││ │
-│ │ │ │ • Saturation │ │ Adaptation │ │ Update │ │ Reset ││ │
-│ │ │ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘│ │
-│ │ └─────────────────────────────────────────────────────────────────────┘ │
-│ └─────────────────────────────────────────────────────────────────────┘ │
-│ │
-│ ┌─────────────────────────────────────────────────────────────────────────────┐│
-│ │ Supporting Infrastructure ││
-│ │ ││
-│ │ ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐ ┌─────────────┐││
-│ │ │ Dynamics │ │ Utils │ │ Testing │ │ HIL │││
-│ │ │ Models │ │ Framework │ │ Framework │ │ Interface │││
-│ │ │ │ │ │ │ │ │ │││
-│ │ │ • Simplified │ │ • Validation │ │ • Unit Tests │ │ • Plant │││
-│ │ │ • Full Nonlinear│ │ • Control Prims │ │ • Integration │ │ Server │││
-│ │ │ • Low-Rank │ │ • Visualization │ │ • Property │ │ • Controller│││
-│ │ │ • Base Interface│ │ • Analysis │ │ • Performance │ │ Client │││
-│ │ │ • Shared Params │ │ • Types │ │ • Scientific │ │ • Real-time │││
-│ │ └─────────────────┘ └─────────────────┘ └─────────────────┘ └─────────────┘││
-│ └─────────────────────────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────────────────────────┘
+
+ SMC Control System 
+ 
+    
+  User Interface  Configuration   Monitoring  
+    Management   & Logging  
+  • CLI (simulate)  • YAML Schema   • Health Checks  
+  • Streamlit App   • Validation   • Performance  
+  • Jupyter NB   • Defaults   • Error Tracking 
+    
+    
+  
+  
+  
+  Core Control Engine  
+   
+      
+   Controller   Simulation   Optimization   
+   Factory   Engine   Framework   
+         
+   • SMC Registry   • Dynamics   • PSO Core   
+   • Type Safety   • Integration   • Fitness Eval   
+   • Error Handling  • Vectorization   • Convergence   
+   • Config Bridge   • Real-time   • Result Cache   
+      
+      
+    
+    
+   
+   Controller Implementations  
+    
+       
+    Classical   Adaptive   STA   Hybrid  
+    SMC   SMC   SMC   Adaptive  
+          STA-SMC  
+    • Boundary   • Parameter   • Super-   • Combined  
+    Layer   Estimation   Twisting   Approach  
+    • Equivalent   • Dead Zone   • Finite-Time  • Self-  
+    Control   • Leakage   • Continuous   Tapering  
+    • Damping   • Bounded   • Integral   • Emergency  
+    • Saturation   Adaptation   Update   Reset  
+       
+   
+  
+ 
+ 
+  Supporting Infrastructure 
+  
+     
+   Dynamics   Utils   Testing   HIL 
+   Models   Framework   Framework   Interface 
+         
+   • Simplified   • Validation   • Unit Tests   • Plant 
+   • Full Nonlinear  • Control Prims   • Integration   Server 
+   • Low-Rank   • Visualization   • Property   • Controller
+   • Base Interface  • Analysis   • Performance   Client 
+   • Shared Params   • Types   • Scientific   • Real-time 
+     
+ 
+
 ```
 
 ---
@@ -219,17 +219,17 @@ spec: selector: app: smc-controller ports: - protocol: TCP port: 80 targetPort: 
 ---
 
 ## Architecture Assessment Summary ### System Architecture Score: 9.0/10 #### Strengths
-- ✅ **Modular Design**: Clean separation of concerns with well-defined interfaces
-- ✅ **Factory Pattern**: Robust controller instantiation with type safety
-- ✅ **PSO Integration**: optimization framework for all controllers
-- ✅ **Error Handling**: error recovery and graceful degradation
-- ✅ **Performance**: Optimized computation with Numba acceleration
-- ✅ **Monitoring**: Real-time observability and performance analytics
-- ✅ **Security**: Production-grade security and safety mechanisms
-- ✅ **Scalability**: Horizontal scaling support with distributed optimization #### Areas for Enhancement
-- ⚠️ **Container Orchestration**: Kubernetes configuration needs refinement
-- ⚠️ **Database Integration**: Persistent storage layer not fully implemented
-- ⚠️ **Service Mesh**: Microservices communication patterns could be improved ### Production Readiness
+-  **Modular Design**: Clean separation of concerns with well-defined interfaces
+-  **Factory Pattern**: controller with error handling instantiation with type safety
+-  **PSO Integration**: optimization framework for all controllers
+-  **Error Handling**: error recovery and graceful degradation
+-  **Performance**: Optimized computation with Numba acceleration
+-  **Monitoring**: Real-time observability and performance analytics
+-  **Security**: Production-grade security and safety mechanisms
+-  **Scalability**: Horizontal scaling support with distributed optimization #### Areas for Enhancement
+-  **Container Orchestration**: Kubernetes configuration needs refinement
+-  **Database Integration**: Persistent storage layer not fully implemented
+-  **Service Mesh**: Microservices communication patterns could be improved ### Production Readiness
 **STATUS**: **APPROVED FOR PRODUCTION DEPLOYMENT** The architecture demonstrates design principles with error handling, monitoring, and safety mechanisms. All critical components are fully operational with robust integration patterns.
 
 ---

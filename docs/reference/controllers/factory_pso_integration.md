@@ -134,7 +134,7 @@ Performance metrics for PSO controller evaluation.
 
 ### `EnhancedPSOControllerWrapper`
 
-Enhanced PSO-compatible controller wrapper with advanced features. Features:
+Enhanced PSO-compatible controller wrapper with features. Features:
 - Thread-safe operation
 - Performance monitoring
 - Automatic saturation handling
@@ -151,7 +151,7 @@ Enhanced PSO-compatible controller wrapper with advanced features. Features:
 
 ### `create_enhanced_pso_controller(smc_type, gains, plant_config, max_force, dt, enable_monitoring)`
 
-Create enhanced PSO-compatible controller with advanced features. Args: smc_type: SMC controller type gains: Controller gains plant_config: Plant configuration (optional) max_force: Maximum control force dt: Control timestep enable_monitoring: performance monitoring **kwargs: Additional controller parameters Returns: Enhanced PSO controller wrapper Raises: ValueError: If parameters are invalid
+Create enhanced PSO-compatible controller with features. Args: smc_type: SMC controller type gains: Controller gains plant_config: Plant configuration (optional) max_force: Maximum control force dt: Control timestep enable_monitoring: performance monitoring **kwargs: Additional controller parameters Returns: Enhanced PSO controller wrapper Raises: ValueError: If parameters are invalid
 
 #### Source Code ```
 

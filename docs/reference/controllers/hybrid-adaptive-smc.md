@@ -95,7 +95,7 @@ controllers:
 
 ## Current Simulation Results
 
-**⚠️ Note**: Results shown are for **default parameters only** (not PSO-optimized):
+** Note**: Results shown are for **default parameters only** (not PSO-optimized):
 
 ### Exceptional Performance with Defaults
 
@@ -195,7 +195,7 @@ The controller ensures:
 1. Finite-time convergence to sliding surface
 2. Bounded adaptive gain evolution
 3. Continuous control signal
-4. Robust performance under uncertainties
+4. reliable performance under uncertainties
 
 ## Comparison with Other Controllers
 

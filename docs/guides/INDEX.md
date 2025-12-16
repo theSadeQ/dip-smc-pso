@@ -6,7 +6,7 @@
 
 [GREEN] **Complete Beginner?** Start with [Path 0: Beginner Roadmap](../learning/beginner-roadmap.md) (125-175 hours) - Takes you from ZERO coding/control theory background to running simulations confidently. **NOW COMPLETE** with all 5 phases! [OK]
 
-This is your central navigation hub for all user guides, tutorials, and learning resources. Whether you're a beginner taking your first steps or an experienced researcher implementing novel controllers, you'll find the right resources here.
+This is your central navigation hub for all user guides, tutorials, and learning resources. Whether you're a beginner taking your first steps or an experienced researcher implementing novel controllers, the system will find the right resources here.
 
 ---
 
@@ -44,7 +44,7 @@ interactive_visualizations
 
 **Start Here:**
 - [Getting Started Guide](getting-started.md) - 15-minute installation and first simulation
-- [User Guide](user-guide.md) - Comprehensive daily usage reference (826 lines, 30 min)
+- [User Guide](user-guide.md) - complete daily usage reference (826 lines, 30 min)
 - [Quick Reference](QUICK_REFERENCE.md) - Command syntax cheat sheet (5 min)
 
 **Recommended Start**: Getting Started Guide -> Tutorial 01 -> User Guide
@@ -320,7 +320,7 @@ Based on user engagement and typical workflows:
    - 726 lines, 30 minutes
 
 5. **[User Guide](user-guide.md)** [STAR][STAR][STAR][STAR]
-   - Comprehensive reference
+   - complete reference
    - Daily usage workflows
    - 826 lines, 30 minutes
 

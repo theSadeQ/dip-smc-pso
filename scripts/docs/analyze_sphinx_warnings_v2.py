@@ -5,7 +5,7 @@
 #==============================================================================
 # D:/Projects/main/scripts/docs/analyze_sphinx_warnings_v2.py
 #==============================================================================
-# Comprehensive Sphinx Warning Analyzer - Phase 1
+# complete Sphinx Warning Analyzer - Phase 1
 #
 # Parses Sphinx build logs and categorizes all warnings with detailed
 # analysis, severity ranking, and fix complexity estimates.
@@ -184,7 +184,7 @@ def parse_warning_line(line: str) -> Dict:
 
 def analyze_warnings(log_content: str) -> Dict:
     """
-    Comprehensive analysis of all warnings in build log.
+    complete analysis of all warnings in build log.
 
     Args:
         log_content: Complete Sphinx build log
@@ -427,7 +427,7 @@ def generate_markdown_report(analysis: Dict, output_path: Path):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Comprehensive Sphinx warning analyzer - Phase 1"
+        description="complete Sphinx warning analyzer - Phase 1"
     )
     parser.add_argument(
         "--log",

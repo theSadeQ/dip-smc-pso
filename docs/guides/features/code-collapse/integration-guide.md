@@ -72,7 +72,7 @@ sphinx-build -b html . _build/html
 #### Step 4: Verify
 
 Open `_build/html/index.html` in a browser:
-- Check console (F12) for: `[CodeCollapse] ✅ 100% coverage`
+- Check console (F12) for: `[CodeCollapse]  100% coverage`
 - Verify collapse buttons appear on code blocks
 - Test collapse/expand functionality
 
@@ -84,10 +84,10 @@ Open `_build/html/index.html` in a browser:
 
 ### Tested Themes
 
-- ✅ **Furo** (fully tested, recommended)
-- ✅ **Read the Docs** (compatible)
-- ✅ **Alabaster** (compatible)
-- ⚠️ **Custom themes** (may need CSS adjustments)
+-  **Furo** (fully tested, recommended)
+-  **Read the Docs** (compatible)
+-  **Alabaster** (compatible)
+-  **Custom themes** (may need CSS adjustments)
 
 ### Required Extensions
 
@@ -96,11 +96,11 @@ Open `_build/html/index.html` in a browser:
 
 ### Compatible Extensions
 
-- ✅ sphinx-design
-- ✅ myst-parser
-- ✅ sphinxcontrib.mermaid
-- ✅ sphinx.ext.autodoc
-- ⚠️ Custom JavaScript extensions (test for conflicts)
+-  sphinx-design
+-  myst-parser
+-  sphinxcontrib.mermaid
+-  sphinx.ext.autodoc
+-  Custom JavaScript extensions (test for conflicts)
 
 ---
 
@@ -125,8 +125,8 @@ const CONFIG = {
 
 ```javascript
 const CONFIG = {
-    expandedIcon: '➖',  // Unicode character
-    collapsedIcon: '➕',
+    expandedIcon: '',  // Unicode character
+    collapsedIcon: '',
     // ...
 };
 ```
@@ -305,14 +305,14 @@ start docs/_build/html/index.html  # Windows
 # 3.
 
 Check console
-# Should see: [CodeCollapse] ✅ 100% coverage
+# Should see: [CodeCollapse]  100% coverage
 
 # 4. Test buttons
-# Click collapse (▼) → code hides
-# Click expand (▲) → code shows
+# Click collapse () → code hides
+# Click expand () → code shows
 ```
 
-### Comprehensive Test
+### complete Test
 
 Use the provided test suite: `../../testing/BROWSER_TESTING_CHECKLIST.md`
 
@@ -384,4 +384,4 @@ You can use both together without conflicts.
 
 ---
 
-**Happy integrating!** 🚀
+**Happy integrating!** 

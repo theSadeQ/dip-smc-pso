@@ -703,11 +703,11 @@ def simulate_adaptive_gain_evolution(s_trajectory, gamma, alpha, K_init, K_min, 
 
 All theoretical claims have been validated using NumPy:
 
-- **Mass matrix properties** (symmetric positive definite): VALIDATED ✓
-- **Sliding surface eigenvalues** (Hurwitz stability): VALIDATED ✓
-- **Finite-time reaching bounds** (classical SMC): VALIDATED ✓
-- **Super-twisting gain conditions** (finite-time convergence): VALIDATED ✓
-- **Adaptive gain boundedness** (ultimate boundedness): VALIDATED ✓
+- **Mass matrix properties** (symmetric positive definite): VALIDATED 
+- **Sliding surface eigenvalues** (Hurwitz stability): VALIDATED 
+- **Finite-time reaching bounds** (classical SMC): VALIDATED 
+- **Super-twisting gain conditions** (finite-time convergence): VALIDATED 
+- **Adaptive gain boundedness** (ultimate boundedness): VALIDATED 
 
 **Validation Scripts Location:** `docs/theory/validation_scripts/`
 

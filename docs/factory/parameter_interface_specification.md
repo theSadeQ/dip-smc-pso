@@ -1,6 +1,6 @@
 # Parameter Interface Specification ## Overview This document provides a specification of the parameter interface system implemented in the SMC Controller Factory. The interface resolves the gamma vs gains parameter conflicts and establishes clear parameter handling contracts across all controller types. ## Parameter Resolution Architecture ### Hierarchical Parameter Sources The factory implements a multi-level parameter resolution system: ```
 
-1. Explicit Parameters (Highest Priority) ├── Direct function arguments └── Explicitly passed gains arrays 2. Configuration-Embedded Parameters ├── config.controller_defaults[controller_type].gains ├── config.controllers[controller_type].gains └── config object attribute extraction 3. Registry Default Parameters (Fallback) ├── CONTROLLER_REGISTRY[controller_type]['default_gains'] └── Hardcoded safe defaults
+1. Explicit Parameters (Highest Priority)  Direct function arguments  Explicitly passed gains arrays 2. Configuration-Embedded Parameters  config.controller_defaults[controller_type].gains  config.controllers[controller_type].gains  config object attribute extraction 3. Registry Default Parameters (Fallback)  CONTROLLER_REGISTRY[controller_type]['default_gains']  Hardcoded safe defaults
 ``` ### Parameter Resolution Implementation ```python
 # example-metadata:
 # runnable: false def _resolve_controller_gains( gains: Optional[Union[List[float], np.ndarray]], config: Optional[Any], controller_type: str, controller_info: Dict[str, Any]

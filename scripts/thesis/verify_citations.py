@@ -349,7 +349,7 @@ def verify_all_citations() -> Dict:
     """
     Verify citations across all chapters + references.
 
-    Returns comprehensive report.
+    Returns complete report.
     """
 
     # Load references first
@@ -414,9 +414,9 @@ def main():
         help="Verify references.md only"
     )
     parser.add_argument(
-        "--comprehensive",
+        "--complete",
         action="store_true",
-        help="Comprehensive verification (all chapters + references + uncited)"
+        help="complete verification (all chapters + references + uncited)"
     )
     parser.add_argument(
         "--save-issues",
@@ -429,8 +429,8 @@ def main():
     # Load references (needed for most operations)
     references = extract_references(REFERENCES_FILE)
 
-    if args.comprehensive or args.all_chapters:
-        print("[CITATION VERIFICATION] Comprehensive check")
+    if args.complete or args.all_chapters:
+        print("[CITATION VERIFICATION] complete check")
         result = verify_all_citations()
 
         if "error" in result:

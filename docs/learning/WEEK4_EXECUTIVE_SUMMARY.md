@@ -81,16 +81,16 @@ By end of Week 4, beginner roadmap will be:
 
 ```
 Week 1 (Days 1-7):
-├─ Agent 1: Phase 1 diagrams (6) + Phase 3 start (2)
-└─ Agent 2: Phase 2 diagrams (7)
+ Agent 1: Phase 1 diagrams (6) + Phase 3 start (2)
+ Agent 2: Phase 2 diagrams (7)
 
 Week 2 (Days 8-14):
-├─ Agent 1: Phase 3 diagrams (4) + Progress bars + Badges
-└─ Agent 2: Phase 4-5 diagrams (5) + Timeline + Metrics grid
+ Agent 1: Phase 3 diagrams (4) + Progress bars + Badges
+ Agent 2: Phase 4-5 diagrams (5) + Timeline + Metrics grid
 
 Week 3 (Days 15-21):
-├─ Both: Testing (Sphinx build, mobile, accessibility)
-└─ Both: Refinement, documentation, final commits
+ Both: Testing (Sphinx build, mobile, accessibility)
+ Both: Refinement, documentation, final commits
 ```
 
 **Estimated Time**: 40-45 hours total
@@ -118,39 +118,39 @@ Week 3 (Days 15-21):
 
 ```
 docs/learning/beginner-roadmap/
-├── phase-1-foundations.md        (+6 diagrams, ~100 lines)
-├── phase-2-core-concepts.md      (+7 diagrams, ~120 lines)
-├── phase-3-hands-on.md           (+4 diagrams, ~80 lines)
-├── phase-4-advancing-skills.md   (+3 diagrams, ~60 lines)
-├── phase-5-mastery.md            (+1 diagram, ~20 lines)
-└── beginner-roadmap.md           (+progress viz, ~40 lines)
+ phase-1-foundations.md        (+6 diagrams, ~100 lines)
+ phase-2-core-concepts.md      (+7 diagrams, ~120 lines)
+ phase-3-hands-on.md           (+4 diagrams, ~80 lines)
+ phase-4-advancing-skills.md   (+3 diagrams, ~60 lines)
+ phase-5-mastery.md            (+1 diagram, ~20 lines)
+ beginner-roadmap.md           (+progress viz, ~40 lines)
 
 docs/_static/
-└── beginner-roadmap.css          (+120 lines for Mermaid + progress)
+ beginner-roadmap.css          (+120 lines for Mermaid + progress)
 ```
 
 **Total Changes**: ~540 lines of content + CSS (highly manageable)
 
 ### Quality Standards
 
-✓ **Mermaid Diagram Rules**:
+ **Mermaid Diagram Rules**:
 - Max 15 nodes per diagram (avoid complexity)
 - Simple flowcharts, concept maps, trees (beginner-appropriate)
 - No heavy math (avoid scary notation)
 - All use phase colors for visual consistency
 
-✓ **Accessibility**:
+ **Accessibility**:
 - WCAG 2.1 Level AA (proven achievable - Phase 3 already AA)
 - Alt text for all diagrams
 - Color-independent design (labels + colors, never color-only)
 - Reduced motion support
 
-✓ **Responsive Design**:
+ **Responsive Design**:
 - Tested at 320px, 768px, 1024px, 1440px
 - Mobile-first approach (collapsible wrappers for large diagrams)
 - Touch-friendly spacing and sizing
 
-✓ **Quality Assurance**:
+ **Quality Assurance**:
 - Sphinx builds with `-W` (warnings = errors)
 - No CSS conflicts or overlaps
 - All diagrams render in Chrome/Chromium
@@ -244,11 +244,11 @@ Lines 890-920:   Accessibility (Both)
 - **Color Scheme**: Week 2 tokens + Week 4 Mermaid unified palette
 - **Animations**: Week 2 transitions + Week 4 smooth diagram loading
 - **Mobile Design**: Week 3 responsive tabs + Week 4 collapsible diagrams
-- **Accessibility**: Week 2 standards + Week 4 alt text = comprehensive coverage
+- **Accessibility**: Week 2 standards + Week 4 alt text = complete coverage
 
 ### End Result: Modern, Accessible, Visually-Engaging Learning Platform
 
-This comprehensive approach ensures the beginner roadmap becomes a world-class learning resource.
+This complete approach ensures the beginner roadmap becomes a world-class learning resource.
 
 ---
 
@@ -256,12 +256,12 @@ This comprehensive approach ensures the beginner roadmap becomes a world-class l
 
 | Feature | Coursera | Udemy | Khan Academy | **Our Roadmap** |
 |---------|----------|-------|--------------|-----------------|
-| Structured Roadmap | ✓ | ✓ | ✓ | ✓ Week 1 |
-| Visual Diagrams | ✓ | Limited | ✓ | ✓ **Week 4** |
-| Progress Tracking | ✓ | ✓ | ✓ | ✓ **Week 4** |
-| Mobile Responsive | ✓ | ✓ | ✓ | ✓ **Week 3-4** |
-| Accessibility (AA) | Partial | Partial | ✓ | ✓ **Week 2-4** |
-| Interactive Content | ✓ | Limited | ✓ | ◐ Deferred |
+| Structured Roadmap |  |  |  |  Week 1 |
+| Visual Diagrams |  | Limited |  |  **Week 4** |
+| Progress Tracking |  |  |  |  **Week 4** |
+| Mobile Responsive |  |  |  |  **Week 3-4** |
+| Accessibility (AA) | Partial | Partial |  |  **Week 2-4** |
+| Interactive Content |  | Limited |  |  Deferred |
 | Cost | $$ | $ | Free | **Free** |
 
 **Positioning**: Free, open-source learning platform with premium UX/DX

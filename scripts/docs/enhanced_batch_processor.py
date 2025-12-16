@@ -18,12 +18,12 @@ import json
 
 # Context-aware replacement rules
 REPLACEMENT_RULES = [
-    # ========== COMPREHENSIVE PATTERNS ==========
-    # Remove "comprehensive" when used as filler
+    # ========== complete PATTERNS ==========
+    # Remove "complete" when used as filler
     (r'\bcomprehensive\s+(documentation|framework|system|validation|testing|coverage|solution|approach|guide|analysis|review|assessment|report)\b',
      lambda m: m.group(1), re.IGNORECASE),
 
-    # Keep "comprehensive" when backed by metrics (contains numbers or percentages)
+    # Keep "complete" when backed by metrics (contains numbers or percentages)
     # This is handled by checking context in the replacement function
 
     # ========== EXCELLENT/AMAZING/INCREDIBLE PATTERNS ==========
@@ -78,7 +78,7 @@ TECHNICAL_WHITELIST = [
     r'\brobust\s+stability\b',
     r'\badvanced\s+MPC\b',
     r'\benable\s+(flag|option|logging|the|this)\b',
-    r'\bcomprehensive\s+.*?(\d+%|\d+\.\d+)',  # Metric-backed comprehensive
+    r'\bcomprehensive\s+.*?(\d+%|\d+\.\d+)',  # Metric-backed complete
 ]
 
 

@@ -139,7 +139,7 @@ class JupyterNotebookDirective(SphinxDirective):
         html_parts.append(f'''
 <div class="jupyter-notebook-header">
     <div class="jupyter-notebook-title">
-        📓 <strong>{html.escape(notebook_name)}</strong>
+         <strong>{html.escape(notebook_name)}</strong>
     </div>
     <div class="jupyter-notebook-meta">
         <span class="jupyter-badge">Jupyter Notebook</span>
@@ -171,7 +171,7 @@ class JupyterNotebookDirective(SphinxDirective):
         html_parts.append('''
 <div class="jupyter-notebook-info">
     <small>
-        💡 <strong>Interactive Notebook:</strong>
+         <strong>Interactive Notebook:</strong>
         This notebook is executed during documentation build.
         All outputs are cached for fast rebuilds.
     </small>
@@ -339,7 +339,7 @@ class JupyterCellDirective(SphinxDirective):
     <div class="jupyter-input-header">
         <span class="jupyter-prompt">In [{execution_result.get('execution_count', '')}]:</span>
         <button class="jupyter-copy-btn" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.textContent)">
-            📋 Copy
+             Copy
         </button>
     </div>
     <pre class="jupyter-code{linenos_class}"><code class="language-python">{escaped_code}</code></pre>
@@ -468,7 +468,7 @@ class JupyterWidgetDirective(SphinxDirective):
         # Widget header
         html_parts.append(f'''
 <div class="jupyter-widget-header">
-    <strong>🎛️ {html.escape(label)}</strong>
+    <strong> {html.escape(label)}</strong>
 </div>
         ''')
 

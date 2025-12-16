@@ -8,7 +8,7 @@
 
 Imagine you're learning a new language - say, Spanish. You could spend months studying grammar rules and vocabulary lists before ever speaking a word. Or you could jump in, make mistakes, and start communicating right away. Which approach would help you learn faster?
 
-Programming is the same. Today, we're not going to study Python theory. We're going to write actual code, see it run, and learn by doing. By the end of this episode, you'll have Python installed, you'll have written your first program, and you'll understand how to store and manipulate information using variables.
+Programming is the same. Today, we're not going to study Python theory. We're going to write actual code, see it run, and learn by doing. By the end of this episode, the system will have Python installed, the system will have written your first program, and the system will understand how to store and manipulate information using variables.
 
 The magic moment when you type a command and the computer does exactly what you told it to? That's coming in the next twenty minutes.
 
@@ -16,7 +16,7 @@ The magic moment when you type a command and the computer does exactly what you 
 
 ## What You'll Discover
 
-By listening to this episode, you'll learn:
+By listening to this episode, the system will learn:
 
 - How to install Python 3.11 or higher on Windows, Mac, or Linux
 - How to verify Python is working correctly
@@ -29,9 +29,9 @@ By listening to this episode, you'll learn:
 
 ## Installing Python: Your Programming Foundation
 
-Python is a programming language - a way to give instructions to computers using English-like commands instead of clicking buttons. It's particularly popular for scientific computing, data science, and control systems because it's powerful but relatively easy to learn.
+Python is a programming language - a way to give instructions to computers using English-like commands instead of clicking buttons. It's particularly popular for scientific computing, data science, and control systems because it's effective but relatively easy to learn.
 
-Let's get it installed on your computer.
+get it installed on your computer.
 
 **Windows Installation**
 
@@ -43,7 +43,7 @@ The installer downloads. When it finishes, run it. Here's the critical step that
 
 This is at the bottom of the first installer screen. It's easy to overlook, but it's essential. PATH tells Windows where to find Python when you type "python" in the command line. Without this checkbox, Windows won't know what "python" means.
 
-After checking that box, click "Install Now". The installer does its thing for a few minutes. When it finishes, you'll see "Setup was successful". Click Close.
+After checking that box, click "Install Now". The installer does its thing for a few minutes. When it finishes, the system will see "Setup was successful". Click Close.
 
 Now let's verify it worked. Open Command Prompt:
 - Press Windows key
@@ -76,7 +76,7 @@ When installation finishes, open Terminal:
 In Terminal, type:
 python3 space dash dash version
 
-Note that it's "python3" not just "python" on Mac. This is because Mac keeps the old Python 2 around for legacy software.
+it's "python3" not just "python" on Mac. This is because Mac keeps the old Python 2 around for legacy software.
 
 You should see:
 Python 3 dot 11 dot something
@@ -85,7 +85,7 @@ If you do, you're ready to code!
 
 **Linux Installation**
 
-Most Linux distributions come with Python 3 pre-installed. Let's check what version you have.
+Most Linux distributions come with Python 3 pre-installed. check what version you have.
 
 Open Terminal (usually Ctrl-Alt-T) and type:
 python3 space dash dash version
@@ -112,7 +112,7 @@ REPL stands for "Read, Eval, Print, Loop". It's an interactive environment where
 
 Think of it like a conversation with the computer. You say something, it responds. You say something else, it responds again.
 
-Let's start the REPL. Open your command line (Command Prompt on Windows, Terminal on Mac/Linux) and type:
+start the REPL. Open your command line (Command Prompt on Windows, Terminal on Mac/Linux) and type:
 
 Windows: python
 Mac/Linux: python3
@@ -126,7 +126,7 @@ This is Python's prompt. It's waiting for you to type Python code.
 
 **The Obligatory Hello World**
 
-Every programming tutorial starts with "Hello, World!" - a program that displays that message. Let's do it.
+Every programming tutorial starts with "Hello, World!" - a program that displays that message. do it.
 
 Type:
 print open-parenthesis double-quote Hello comma World! double-quote close-parenthesis
@@ -138,7 +138,7 @@ Hello, World!
 
 Congratulations! You just wrote and ran your first Python program.
 
-Let's break down what happened:
+break down what happened:
 - **print** is a function that displays text
 - **open-parenthesis** starts the list of things to give the function
 - **double-quote** marks the beginning of text (a "string" in programming)
@@ -150,7 +150,7 @@ So in full: print takes the text "Hello, World!" and displays it.
 
 **Python as a Calculator**
 
-Let's try some math. Type:
+try some math. Type:
 2 space plus space 3
 
 Press Enter.
@@ -178,7 +178,7 @@ Try:
 Double-asterisk means "to the power of". Two to the power of eight equals:
 256
 
-Python is a calculator, but it's also so much more. Let's see how to remember values.
+Python is a calculator, but it's also so much more. see how to remember values.
 
 ---
 
@@ -211,7 +211,7 @@ length space equals space 0 point 8
 
 Press Enter.
 
-And use both variables in a calculation. Let's compute a simple energy value - don't worry about the physics, focus on the code:
+And use both variables in a calculation. compute a simple energy value - don't worry about the physics, focus on the code:
 
 energy space equals space mass space asterisk space 10 space asterisk space length
 
@@ -238,13 +238,13 @@ Second, **reuse**. You can use the same variable many times without retyping the
 
 Third, **flexibility**. If you want to try a different mass, you change one line - "mass equals 2.0" - and all calculations using that variable automatically update.
 
-Variables are fundamental to every program you'll ever write.
+Variables are fundamental to every program the system will ever write.
 
 ---
 
 ## Data Types: Different Kinds of Information
 
-Python handles different kinds of data differently. Let's explore the main types.
+Python handles different kinds of data differently. explore the main types.
 
 **Integers: Whole Numbers**
 
@@ -320,7 +320,7 @@ less-than class quote bool quote greater-than
 
 ## Recap: Core Concepts So Far
 
-Let's pause and summarize what you've learned:
+pause and summarize what you've learned:
 
 **Number one**: Python is a programming language that you can install on any computer. It's free, open-source, and widely used for scientific computing.
 
@@ -344,7 +344,7 @@ Now let's write a slightly more complex program.
 
 So far, we've been working in the REPL - typing one line at a time. But most programs are scripts: files with multiple lines of code that run in sequence.
 
-Let's create a Python script that calculates something relevant to our double-inverted pendulum project: the period of a simple pendulum.
+create a Python script that calculates something relevant to our double-inverted pendulum project: the period of a simple pendulum.
 
 The period is the time for one complete swing. For small angles, it's given by:
 T equals 2 pi times the square root of quantity L over g
@@ -397,7 +397,7 @@ Line five: Blank line
 Line six: Calculate period
 T space equals space 2 space asterisk space m-a-t-h dot p-i space asterisk space m-a-t-h dot s-q-r-t open-parenthesis L space forward-slash space g close-parenthesis
 
-Let's break this down:
+break this down:
 - **2 asterisk math dot pi** - 2 times pi (pi comes from the math library we imported)
 - **math dot sqrt** - square root function (also from math library)
 - **open-parenthesis L forward-slash g close-parenthesis** - L divided by g, inside the square root
@@ -457,7 +457,7 @@ Shorter pendulum, shorter period. Change it to 2.0 meters and see what happens. 
 
 ## Understanding the Code: Line by Line
 
-Let's revisit the program and understand every part:
+revisit the program and understand every part:
 
 **import math**
 
@@ -496,7 +496,7 @@ Much uglier. F-strings (added in Python 3.6) make string formatting clean and re
 
 ## Common Errors and How to Fix Them
 
-Let's talk about errors you might encounter. In programming, errors are not failures - they're learning opportunities. Every programmer sees hundreds of errors per day. The skill is recognizing and fixing them quickly.
+talk about errors you might encounter. In programming, errors are not failures - they're learning opportunities. Every programmer sees hundreds of errors per day. The skill is recognizing and fixing them quickly.
 
 **Error Type One: NameError**
 
@@ -558,7 +558,7 @@ A sliding mode controller is, at its core, a function that takes the current sta
 When you run a simulation, you're executing a Python script that:
 - Loads configuration (reading variables)
 - Initializes the system (setting up data structures)
-- Runs a time loop (iteration we'll learn next episode)
+- Runs a time loop (iteration this will learn next episode)
 - Calculates physics at each step (math operations like we just did)
 - Saves results (writing to files)
 
@@ -566,7 +566,7 @@ Every line uses concepts from this episode.
 
 **Reason Three: Debugging is Inevitable**
 
-When (not if) something goes wrong, you'll need to:
+When (not if) something goes wrong, the system will need to:
 - Read error messages and understand them
 - Check variable values at different points
 - Verify calculations are correct
@@ -601,7 +601,7 @@ Technical terms from this episode with phonetic pronunciations:
 
 ## What's Next: Control Flow and Loops
 
-In Episode 3, we'll learn how to make programs that make decisions and repeat actions:
+In Episode 3, this will learn how to make programs that make decisions and repeat actions:
 
 - **if/else statements**: "If the angle is greater than 0.5 radians, apply maximum force. Otherwise, use proportional control."
 - **for loops**: "For each time step from 0 to 10 seconds, calculate the system state."

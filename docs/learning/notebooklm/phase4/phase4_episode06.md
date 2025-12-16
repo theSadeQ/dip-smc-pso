@@ -8,13 +8,13 @@
 
 Imagine exploring a new city. You could wander randomly and eventually find landmarks, or you could follow a map that shows you the main streets, neighborhoods, and points of interest. Reading a codebase is similar. You need a navigation strategy: where to start, what to read first, and how to trace connections between files.
 
-In this episode, we'll learn how to navigate the controller source code effectively. You'll discover the directory structure, the recommended reading order, and powerful V-S Code features that let you jump to definitions, search for references, and understand import relationships.
+In this episode, this will learn how to navigate the controller source code effectively. You'll discover the directory structure, the recommended reading order, and effective V-S Code features that let you jump to definitions, search for references, and understand import relationships.
 
-By the end, you'll feel confident opening any file in the project and understanding how it fits into the bigger picture.
+By the end, the system will feel confident opening any file in the project and understanding how it fits into the bigger picture.
 
 ## What You'll Discover
 
-In this episode, you'll learn:
+In this episode, the system will learn:
 - The directory structure of source slash controllers
 - The recommended reading order: base dot p-y, classical underscore s-m-c dot p-y, sta underscore s-m-c dot p-y, factory dot p-y
 - V-S Code navigation features: F12 to jump to definitions, search to find text, find all references
@@ -23,7 +23,7 @@ In this episode, you'll learn:
 
 ## The Directory Structure: source/controllers
 
-Let's start with the high-level organization. Open your terminal and navigate to the project directory. Run:
+start with the high-level organization. Open your terminal and navigate to the project directory. Run:
 
 ```
 ls source slash controllers
@@ -150,7 +150,7 @@ V-S Code shows breadcrumbs at the top of the editor: the current file path and t
 
 ## Understanding Import Statements
 
-Imports are how files connect. Let's decode common import patterns.
+Imports are how files connect. decode common import patterns.
 
 **Absolute Imports:**
 
@@ -188,7 +188,7 @@ This imports only specific names from the typing module, not the entire module.
 
 ## Recap: Core Concepts
 
-Let's recap what we've covered so far.
+recap what we've covered so far.
 
 **Directory Structure**: source slash controllers contains base dot p-y, controller implementations, and factory dot p-y.
 
@@ -200,7 +200,7 @@ Let's recap what we've covered so far.
 
 ## Code Organization Principles
 
-Let's step back and understand why the codebase is organized this way.
+step back and understand why the codebase is organized this way.
 
 **Principle 1: Separation of Concerns**
 
@@ -227,7 +227,7 @@ Simple controllers (ClassicalSMC) are short and readable. Complex controllers (H
 
 ## Tracing Code Flow: From Command Line to Controller
 
-Let's trace what happens when you run:
+trace what happens when you run:
 
 ```
 python simulate dot p-y dash-dash ctrl classical underscore s-m-c dash-dash plot
@@ -277,7 +277,7 @@ Because controller is a ClassicalSMC instance, Python calls ClassicalSMC's compu
 
 ## Practical Exercise: Trace an Import
 
-Let's do a hands-on exercise. Open classical underscore s-m-c dot p-y in V-S Code.
+do a hands-on exercise. Open classical underscore s-m-c dot p-y in V-S Code.
 
 **Step 1**: Find the import for ControllerInterface:
 
@@ -319,7 +319,7 @@ Here are the technical terms from this episode with phonetic pronunciations:
 
 ## What's Next
 
-In Episode 7, we'll dive into Classical S-M-C's imports and initialization. You'll go line by line through the import statements, understand what each imported module does, and walk through the dunder init method to see how gains are validated, unpacked, and stored as instance attributes.
+In Episode 7, this will dive into Classical S-M-C's imports and initialization. You'll go line by line through the import statements, understand what each imported module does, and walk through the dunder init method to see how gains are validated, unpacked, and stored as instance attributes.
 
 Here's a preview question: Why do we validate that gains has exactly 6 elements before unpacking? What error would occur without validation? We'll answer this next episode.
 
@@ -335,7 +335,7 @@ Before moving to Episode 7, ask yourself these questions:
 
 If you can answer these confidently, you're ready to proceed. If anything is unclear, open V-S Code and practice using F12, Shift-F12, and Ctrl-P to navigate the codebase.
 
-**Great work! You can now navigate the codebase like a pro. Let's continue!**
+**Great work! You can now navigate the codebase like a pro. continue!**
 
 ---
 

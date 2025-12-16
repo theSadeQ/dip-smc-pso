@@ -69,9 +69,9 @@
  be strictly positive and the sliding‑surface gains ``k1`` and ``k2`` together
  with the slope parameters ``λ1`` and ``λ2`` must also be strictly positive.
  Super‑twisting literature emphasises that positive constants are required to
- ensure robust finite‑time stability【MorenoOsorio2012†L27-L40】 and positive
+ ensure robust finite‑time stabilityMorenoOsorio2012†L27-L40 and positive
  sliding‑surface coefficients guarantee that the error terms combine with
- positive weights【OkstateThesis2013†L1415-L1419】.  The constructor therefore
+ positive weightsOkstateThesis2013†L1415-L1419.  The constructor therefore
  validates all gains using ``require_positive`` and raises a ``ValueError``
  when any gain is non‑positive.
 
@@ -202,7 +202,7 @@ Numba-accelerated core using precomputed sigma and its saturated sign.
 
 Includes anti-windup back‑calculation: the integrator state ``z`` is
 updated using the difference between the saturated and unsaturated
-control multiplied by ``Kaw``【789743582768797†L224-L249】.  Returns
+control multiplied by ``Kaw``789743582768797†L224-L249.  Returns
 ``(u_saturated, new_z, sigma)``.
 
 #### Source Code

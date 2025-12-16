@@ -16,7 +16,7 @@
 - **PSO Optimization Cost**: 0.000000 (perfect optimization convergence)
 - **Parameter Count**: 4 primary gains [c1, λ1, c2, λ2]
 - **Stability Guarantee**: Finite-time convergence with adaptive robustness
-- **Runtime Status**: ✅ **OPERATIONAL** (runtime fix implemented)
+- **Runtime Status**:  **OPERATIONAL** (runtime fix implemented)
 
 ---
 
@@ -251,7 +251,7 @@ uncertainties = { 'mass_variation': ±20%, # Result: Stable 'length_variation': 
 | **Complexity** | Low | Medium | Medium | **High** |
 | **Tuning** | 6 params | 5 params | 6 params | **4 params** |
 | **PSO Cost** | 0.000000 | 0.000000 | 0.000000 | **0.000000** | #### 2.2 Use Case Recommendations **Hybrid Controller Best For**:
-- Complex, highly coupled systems (✓ Double-inverted pendulum)
+- Complex, highly coupled systems ( Double-inverted pendulum)
 - High uncertainty environments
 - Research applications requiring advanced control
 - Systems needing finite-time convergence with minimal chattering **Alternative Controllers For**:

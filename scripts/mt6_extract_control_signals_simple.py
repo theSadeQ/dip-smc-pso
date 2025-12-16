@@ -125,7 +125,7 @@ def main():
         s=s_fixed,
         epsilon_eff=epsilon_fixed
     )
-    logger.info(f"\n✓ Saved: {fixed_file} ({fixed_file.stat().st_size / 1024:.1f} KB)")
+    logger.info(f"\n Saved: {fixed_file} ({fixed_file.stat().st_size / 1024:.1f} KB)")
 
     # -------------------------------------------------------------------------
     # ADAPTIVE BOUNDARY LAYER
@@ -183,7 +183,7 @@ def main():
         s=s_adaptive,
         epsilon_eff=epsilon_adaptive
     )
-    logger.info(f"\n✓ Saved: {adaptive_file} ({adaptive_file.stat().st_size / 1024:.1f} KB)")
+    logger.info(f"\n Saved: {adaptive_file} ({adaptive_file.stat().st_size / 1024:.1f} KB)")
     logger.info(f"  epsilon_eff range: [{epsilon_adaptive.min():.4f}, {epsilon_adaptive.max():.4f}]")
 
     # -------------------------------------------------------------------------

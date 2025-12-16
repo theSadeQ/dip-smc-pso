@@ -8,11 +8,11 @@
 
 You've mastered Classical S-M-C: its sliding surfaces, equivalent control, switching control, and boundary layer. But this project includes three other controllers: Super-Twisting S-T-A, Adaptive S-M-C, and Hybrid Adaptive S-T-A. What makes them different? When should you use each one?
 
-In this episode, we'll compare all four controllers side by side. You'll understand the trade-offs in convergence speed, chattering, implementation complexity, and robustness. By the end, you'll know how to choose the right controller for your specific scenario.
+In this episode, this will compare all four controllers side by side. You'll understand the trade-offs in convergence speed, chattering, implementation complexity, and robustness. By the end, the system will know how to choose the right controller for your specific scenario.
 
 ## What You'll Discover
 
-In this episode, you'll learn:
+In this episode, the system will learn:
 - Classical S-M-C characteristics: speed, chattering, complexity
 - Super-Twisting S-T-A improvements: second-order sliding mode, reduced chattering
 - Adaptive S-M-C features: gain adaptation, parameter uncertainty handling
@@ -22,7 +22,7 @@ In this episode, you'll learn:
 
 ## Classical SMC: The Baseline
 
-Let's start by summarizing Classical S-M-C, which serves as the baseline for comparison.
+start by summarizing Classical S-M-C, which serves as the baseline for comparison.
 
 **Characteristics:**
 
@@ -37,7 +37,7 @@ Let's start by summarizing Classical S-M-C, which serves as the baseline for com
 **Implementation Difficulty**: Easy. Only 6 gains to tune: k1, k2, k3, k4, k5, eta. The control law is straightforward.
 
 **When to use Classical S-M-C:**
-- When you need a simple, robust controller
+- When you need a simple, controller with error handling
 - When moderate chattering is acceptable
 - When you have a rough model of the system
 - When computational resources are limited
@@ -161,7 +161,7 @@ alpha dot equals gamma underscore alpha times absolute-value open-paren s close-
 
 ## Comparison Matrix
 
-Let's summarize the four controllers in a comparison matrix:
+summarize the four controllers in a comparison matrix:
 
 **Metric** | **Classical S-M-C** | **Super-Twisting S-T-A** | **Adaptive S-M-C** | **Hybrid Adaptive S-T-A**
 
@@ -185,7 +185,7 @@ Let's summarize the four controllers in a comparison matrix:
 
 ## Trade-off Analysis
 
-Choosing a controller involves trade-offs. Let's explore common scenarios.
+Choosing a controller involves trade-offs. explore common scenarios.
 
 **Scenario 1: You need a quick, simple solution**
 
@@ -219,7 +219,7 @@ Choosing a controller involves trade-offs. Let's explore common scenarios.
 
 ## Recap: Core Concepts
 
-Let's recap the key comparisons.
+recap the key comparisons.
 
 **Classical S-M-C**: Simple, robust baseline. Medium speed, moderate chattering.
 
@@ -261,7 +261,7 @@ Here are the technical terms from this episode with phonetic pronunciations:
 
 ## What's Next
 
-Congratulations! You've completed Sub-Phase 4.2 on reading controller source code. In Episode 11, we'll begin Sub-Phase 4.3: Advanced Math for S-M-C. You'll learn Lagrangian mechanics and nonlinear equations, understanding how the double-inverted pendulum's equations of motion are derived and why they're nonlinear.
+Congratulations! You've completed Sub-Phase 4.2 on reading controller source code. In Episode 11, this will begin Sub-Phase 4.3: Advanced Math for S-M-C. You'll learn Lagrangian mechanics and nonlinear equations, understanding how the double-inverted pendulum's equations of motion are derived and why they're nonlinear.
 
 Here's a preview question: What is the Lagrangian, and how does it relate to kinetic and potential energy? We'll answer this conceptually next episode.
 
@@ -277,7 +277,7 @@ Before moving to Episode 11, ask yourself these questions:
 
 If you can answer these confidently, you're ready to proceed to the advanced math phase. If anything is unclear, run simulations with different controllers and compare their behavior.
 
-**Excellent progress! You understand all four controllers. Let's continue!**
+**Excellent progress! You understand all four controllers. continue!**
 
 ---
 

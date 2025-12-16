@@ -21,26 +21,26 @@
 
 ## Framework Architecture ```
 
-┌─────────────────────────────────────────────────────────────┐
-│ User Application Layer │
-│ (simulate.py, streamlit_app.py, custom scripts) │
-└───────────────┬─────────────────────────────────────────────┘ │
-┌───────────────┴─────────────────────────────────────────────┐
-│ High-Level API Layer │
-├──────────────────────┬──────────────────┬───────────────────┤
-│ Controllers API │ Simulation API │ Optimization API │
-│ - Factory pattern │ - Runner │ - PSO Tuner │
-│ - 4 SMC types │ - Dynamics │ - Cost functions │
-│ - Custom creation │ - Context │ - Bounds │
-└──────────────────────┴──────────────────┴───────────────────┘ │
-┌───────────────┴─────────────────────────────────────────────┐
-│ Supporting Services Layer │
-├──────────────────────┬──────────────────┬───────────────────┤
-│ Configuration API │ Plant Models │ Utilities API │
-│ - YAML loading │ - Physics │ - Validation │
-│ - Schema validation │ - Dynamics │ - Control prims │
-│ - Overrides │ - Parameters │ - Monitoring │
-└──────────────────────┴──────────────────┴───────────────────┘
+
+ User Application Layer 
+ (simulate.py, streamlit_app.py, custom scripts) 
+ 
+
+ High-Level API Layer 
+
+ Controllers API  Simulation API  Optimization API 
+ - Factory pattern  - Runner  - PSO Tuner 
+ - 4 SMC types  - Dynamics  - Cost functions 
+ - Custom creation  - Context  - Bounds 
+ 
+
+ Supporting Services Layer 
+
+ Configuration API  Plant Models  Utilities API 
+ - YAML loading  - Physics  - Validation 
+ - Schema validation  - Dynamics  - Control prims 
+ - Overrides  - Parameters  - Monitoring 
+
 ```
 
 ---

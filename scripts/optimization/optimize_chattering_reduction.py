@@ -7,7 +7,7 @@ PSO Optimization Campaign for Issue #12 Chattering Reduction.
 
 This script executes multi-objective optimization to achieve chattering_index < 2.0
 while maintaining tracking performance. Uses custom fitness function with chattering
-penalty and comprehensive validation reporting.
+penalty and complete validation reporting.
 """
 
 import argparse
@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 
 def compute_chattering_metrics(control_array: np.ndarray, dt: float) -> Dict[str, float]:
     """
-    Compute comprehensive chattering metrics.
+    Compute complete chattering metrics.
 
     Metrics:
     - chattering_index: 0.7 * time_domain_index + 0.3 * freq_domain_index

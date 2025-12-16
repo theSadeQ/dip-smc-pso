@@ -303,16 +303,16 @@ where λₘᵢₙ is the smallest eigenvalue of the closed-loop system matrix.
 Based on the codebase review:
 
 1. **Classical SMC** (`classic_smc.py`):
-   - ✅ Implements adaptive boundary layer: `ε = ε₀ + ε₁||σ||`
-   - ✅ Supports both "tanh" and "linear" saturation methods
-   - ✅ Includes hysteresis with configurable ratio
-   - ✅ Proper validation of ε > 0
+   -  Implements adaptive boundary layer: `ε = ε₀ + ε₁||σ||`
+   -  Supports both "tanh" and "linear" saturation methods
+   -  Includes hysteresis with configurable ratio
+   -  Proper validation of ε > 0
 
 2. **Super-Twisting SMC** (`sta_smc.py`):
-   - ✅ Uses boundary layer for sign function approximation
-   - ✅ Implements both "tanh" and "linear" methods
-   - ✅ Validates boundary layer positivity
-   - ⚠️ Could benefit from adaptive boundary layer option
+   -  Uses boundary layer for sign function approximation
+   -  Implements both "tanh" and "linear" methods
+   -  Validates boundary layer positivity
+   -  Could benefit from adaptive boundary layer option
 
 3. **Common Implementation Issues Found**:
    - **Mathematical correctness**: All boundary layer computations are mathematically sound

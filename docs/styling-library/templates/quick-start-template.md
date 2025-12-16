@@ -1,16 +1,16 @@
 # React Bits - Quick Start Guide
 
-Get started with React Bits components in 3 minutes! ⚡
+Get started with React Bits components in 3 minutes! 
 
-## 📦 What You Have
+##  What You Have
 
 **115+ animated React components** organized in 4 categories:
-- 🎬 **25 Animations** - Interactive effects
-- ✨ **24 Text Animations** - Typography effects
-- 🧩 **36 UI Components** - Interface elements
-- 🌈 **30 Backgrounds** - Animated backgrounds
+-  **25 Animations** - Interactive effects
+-  **24 Text Animations** - Typography effects
+-  **36 UI Components** - Interface elements
+-  **30 Backgrounds** - Animated backgrounds
 
-## 🚀 3 Ways to Use Components
+##  3 Ways to Use Components
 
 ### Method 1: Browse & Copy (Recommended)
 
@@ -32,64 +32,64 @@ Claude will automatically find and integrate it!
 npm install react-bits
 ```
 
-## 🎯 Popular Components for Your Dashboard
+##  Popular Components for Your Dashboard
 
 ### Best for Hero Sections
 
 ```
-✨ Aurora - Aurora borealis background
-🌟 GradientText - Animated gradient text
-💫 ShinyText - Shiny text effect
-🎨 LiquidChrome - Liquid chrome background
+ Aurora - Aurora borealis background
+ GradientText - Animated gradient text
+ ShinyText - Shiny text effect
+ LiquidChrome - Liquid chrome background
 ```
 
 ### Best for Cards & Lists
 
 ```
-🎴 BounceCards - Bouncing card effects
-📊 MagicBento - Bento grid layout
-🔲 TiltedCard - 3D tilt effect
-📋 AnimatedList - List with transitions
+ BounceCards - Bouncing card effects
+ MagicBento - Bento grid layout
+ TiltedCard - 3D tilt effect
+ AnimatedList - List with transitions
 ```
 
 ### Best for Navigation
 
 ```
-🔘 Dock - macOS-style dock
-💊 PillNav - Pill navigation
-🫧 BubbleMenu - Bubble menu
-🌊 FlowingMenu - Flowing menu animation
+ Dock - macOS-style dock
+ PillNav - Pill navigation
+ BubbleMenu - Bubble menu
+ FlowingMenu - Flowing menu animation
 ```
 
 ### Best for Text Effects
 
 ```
-⚡ GlitchText - Glitch animation
-🎯 ScrambledText - Scramble effect
-✍️ TextType - Typewriter effect
-🌈 GradientText - Gradient animation
+ GlitchText - Glitch animation
+ ScrambledText - Scramble effect
+ TextType - Typewriter effect
+ GradientText - Gradient animation
 ```
 
 ### Best for Backgrounds
 
 ```
-🌌 Galaxy - Space effect
-⚡ Lightning - Electric effects
-🌊 Waves - Wave patterns
-✨ Particles - Particle system
+ Galaxy - Space effect
+ Lightning - Electric effects
+ Waves - Wave patterns
+ Particles - Particle system
 ```
 
-## 📁 Component Structure
+##  Component Structure
 
 Each component folder contains:
 ```
 ComponentName/
-├── component.tsx    # Main component code
-├── demo.tsx        # Usage example
-└── README.md       # Documentation
+ component.tsx    # Main component code
+ demo.tsx        # Usage example
+ README.md       # Documentation
 ```
 
-## 💡 Quick Examples
+##  Quick Examples
 
 ### Example 1: Add ShinyText to Dashboard
 
@@ -149,7 +149,7 @@ export default function Dashboard() {
 }
 ```
 
-## 🔧 Dependencies
+##  Dependencies
 
 Most components work with minimal dependencies. Common requirements:
 
@@ -179,15 +179,15 @@ npm install three @react-three/fiber @react-three/drei
 
 > **Pro Tip**: Check the component's `README.md` for specific dependencies!
 
-## 🎨 Styling
+##  Styling
 
 Components support both:
-- ✅ **Tailwind CSS** (default)
-- ✅ **Vanilla CSS** (alternative)
+-  **Tailwind CSS** (default)
+-  **Vanilla CSS** (alternative)
 
 Your dashboard already uses Tailwind, so you're good to go!
 
-## 📚 Finding Components
+##  Finding Components
 
 ### By Name
 
@@ -205,7 +205,7 @@ Browse directories:
 
 Check the "By Use Case" section in the index
 
-## 🎯 Integration Checklist
+##  Integration Checklist
 
 When adding a component to your dashboard:
 
@@ -217,7 +217,7 @@ When adding a component to your dashboard:
 - [ ] Import and use in your page
 - [ ] Customize props and styling
 
-## 🔥 Pro Tips
+##  Pro Tips
 
 1. **Start Small**: Begin with text animations (easiest)
 2. **Check Demos**: Look at `demo.tsx` for usage examples
@@ -225,14 +225,14 @@ When adding a component to your dashboard:
 4. **Customize**: All components accept className props
 5. **Performance**: Use lazy loading for heavy components
 
-## 📖 Next Steps
+##  Next Steps
 
 1. Browse the full index → [`COMPONENTS_INDEX.md`](./COMPONENTS_INDEX.md)
 2. Check integration guide → [`INTEGRATION_GUIDE.md`](./INTEGRATION_GUIDE.md)
 3. Explore component files → `src/content/`
 4. Visit official docs → [reactbits.dev](https://reactbits.dev)
 
-## 🎨 Example: Enhanced Dashboard Header
+##  Example: Enhanced Dashboard Header
 
 ```tsx
 import ShinyText from '@/components/ShinyText'
@@ -260,6 +260,6 @@ export default function Dashboard() {
 
 
 
-**Ready to build stunning UIs!** 🚀
+**Ready to build stunning UIs!** 
 
 Just say: "Add [ComponentName] from React Bits" and Claude will handle the rest!

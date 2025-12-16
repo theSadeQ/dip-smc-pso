@@ -20,19 +20,19 @@
 4. **Scientific Rigor**: Control theory-based gain bounds and validation
 5. **Flexible Configuration**: Support for various PSO algorithms and strategies ### Architecture Overview ```
 PSO Integration Layer
-├── Factory Functions
-│ ├── create_smc_for_pso() # Direct controller creation for PSO
-│ ├── create_pso_controller_factory() # Factory function creation
-│ └── create_all_smc_controllers() # Batch controller creation
-├── Wrapper System
-│ ├── PSOControllerWrapper # PSO-compatible interface wrapper
-│ ├── gain validation methods # Domain-specific validation
-│ └── standardized compute_control # Unified control computation
-├── Gain Management
-│ ├── get_gain_bounds_for_pso() # Control theory-based bounds
-│ ├── validate_smc_gains() # Pre-optimization validation
-│ └── SMC_GAIN_SPECS # Complete gain specifications
-└── Configuration Integration ├── PSO parameter resolution # Multi-source parameter resolution ├── optimization-specific configs # PSO-optimized configurations └── performance monitoring # Real-time optimization metrics
+ Factory Functions
+  create_smc_for_pso() # Direct controller creation for PSO
+  create_pso_controller_factory() # Factory function creation
+  create_all_smc_controllers() # Batch controller creation
+ Wrapper System
+  PSOControllerWrapper # PSO-compatible interface wrapper
+  gain validation methods # Domain-specific validation
+  standardized compute_control # Unified control computation
+ Gain Management
+  get_gain_bounds_for_pso() # Control theory-based bounds
+  validate_smc_gains() # Pre-optimization validation
+  SMC_GAIN_SPECS # Complete gain specifications
+ Configuration Integration  PSO parameter resolution # Multi-source parameter resolution  optimization-specific configs # PSO-optimized configurations  performance monitoring # Real-time optimization metrics
 ```
 
 ---
@@ -46,24 +46,24 @@ tuner = PSOTuner( controller_factory=simple_fitness_function, config=config
 best_gains, best_fitness = tuner.optimize()
 ``` **Advantages:**
 
-- ✅ Simple and straightforward
-- ✅ Minimal setup code
-- ✅ Direct control over parameters **Disadvantages:**
-- ❌ Recreates factory overhead for each evaluation
-- ❌ Less efficient for high-frequency PSO calls ### Pattern 2: Factory Function Pattern (Recommended) **Use Case:** High-performance PSO optimization with thousands of fitness evaluations. ```python
+-  Simple and straightforward
+-  Minimal setup code
+-  Direct control over parameters **Disadvantages:**
+-  Recreates factory overhead for each evaluation
+-  Less efficient for high-frequency PSO calls ### Pattern 2: Factory Function Pattern (Recommended) **Use Case:** High-performance PSO optimization with thousands of fitness evaluations. ```python
 from src.controllers.factory import create_pso_controller_factory, SMCType def optimized_pso_workflow(): """High-performance PSO workflow using factory function pattern.""" # Create factory function once (expensive operation) controller_factory = create_pso_controller_factory( SMCType.CLASSICAL, plant_config=config.physics, max_force=150.0, dt=0.001 ) # Factory function has required PSO attributes assert hasattr(controller_factory, 'n_gains') # Number of gains required assert hasattr(controller_factory, 'controller_type') # Controller type string assert hasattr(controller_factory, 'max_force') # Force saturation limit # Define fitness function using pre-created factory def fitness_function(gains_array: np.ndarray) -> float: """Fast fitness evaluation using factory function.""" # Create controller (fast operation) controller = controller_factory(gains_array) # Evaluate performance return evaluate_controller_performance(controller)['total_cost'] # PSO optimization with optimized factory tuner = PSOTuner( controller_factory=fitness_function, config=config ) return tuner.optimize()
 ``` **Advantages:**
-- ✅ Maximum performance for PSO loops
-- ✅ Factory overhead paid only once
-- ✅ Built-in PSO metadata (n_gains, controller_type)
-- ✅ Thread-safe operation **Disadvantages:**
-- ❌ Slightly more complex setup ### Pattern 3: Batch Controller Creation **Use Case:** Comparative studies, batch optimization, multi-objective PSO. ```python
+-  Maximum performance for PSO loops
+-  Factory overhead paid only once
+-  Built-in PSO metadata (n_gains, controller_type)
+-  Thread-safe operation **Disadvantages:**
+-  Slightly more complex setup ### Pattern 3: Batch Controller Creation **Use Case:** Comparative studies, batch optimization, multi-objective PSO. ```python
 from src.controllers.factory import create_all_smc_controllers def multi_controller_optimization(): """Optimize gains for multiple controller types simultaneously.""" # Define gain sets for all controller types gains_dict = { 'classical': [20.0, 15.0, 12.0, 8.0, 35.0, 5.0], 'adaptive': [25.0, 18.0, 15.0, 10.0, 4.0], 'sta': [25.0, 15.0, 20.0, 12.0, 8.0, 6.0], 'hybrid': [18.0, 12.0, 10.0, 8.0] } # Create all controllers efficiently controllers = create_all_smc_controllers( gains_dict, max_force=150.0, dt=0.001 ) # Evaluate all controllers performance_results = {} for controller_type, controller in controllers.items(): performance_results[controller_type] = evaluate_controller_performance(controller) return performance_results def parallel_multi_objective_pso(): """Multi-objective PSO across different controller types.""" controller_types = [SMCType.CLASSICAL, SMCType.ADAPTIVE, SMCType.SUPER_TWISTING] # Create factory functions for each type factories = { ctrl_type: create_pso_controller_factory(ctrl_type) for ctrl_type in controller_types } def multi_objective_fitness(gains_dict: Dict[str, np.ndarray]) -> List[float]: """Multi-objective fitness evaluation.""" objectives = [] for ctrl_type, gains in gains_dict.items(): controller = factories[ctrl_type](gains) performance = evaluate_controller_performance(controller) objectives.append(performance['total_cost']) return objectives # Pareto optimization # Run multi-objective PSO return run_multi_objective_pso(multi_objective_fitness)
 ``` **Advantages:**
 
-- ✅ Efficient for multiple controller types
-- ✅ Unified configuration management
-- ✅ Parallel evaluation support
+-  Efficient for multiple controller types
+-  Unified configuration management
+-  Parallel evaluation support
 
 ---
 
@@ -116,29 +116,29 @@ def multi_objective_pso_optimization(controller_type: SMCType) -> Dict[str, Any]
 ---
 
 ## Best Practices ### 1. Factory Function Reuse ```python
-# ✅ Good: Create factory once, use many times
-factory = create_pso_controller_factory(SMCType.CLASSICAL) def fitness_function(gains): controller = factory(gains) # Fast operation return evaluate_performance(controller) # ❌ Bad: Recreate factory every time
+#  Good: Create factory once, use many times
+factory = create_pso_controller_factory(SMCType.CLASSICAL) def fitness_function(gains): controller = factory(gains) # Fast operation return evaluate_performance(controller) #  Bad: Recreate factory every time
 def fitness_function(gains): controller = create_smc_for_pso(SMCType.CLASSICAL, gains) # Slow operation return evaluate_performance(controller)
 ``` ### 2. Gain Validation ```python
 # example-metadata:
 
-# runnable: false # ✅ Good: Validate gains before expensive simulation
+# runnable: false #  Good: Validate gains before expensive simulation
 
-def robust_fitness_function(gains): if not validate_smc_gains(controller_type, gains): return float('inf') # Early exit for invalid gains controller = factory(gains) return evaluate_performance(controller) # ❌ Bad: No validation, let controller creation fail
+def robust_fitness_function(gains): if not validate_smc_gains(controller_type, gains): return float('inf') # Early exit for invalid gains controller = factory(gains) return evaluate_performance(controller) #  Bad: No validation, let controller creation fail
 def fragile_fitness_function(gains): controller = factory(gains) # May fail with cryptic error return evaluate_performance(controller)
 ``` ### 3. Error Handling ```python
 # example-metadata:
-# runnable: false # ✅ Good: error handling
+# runnable: false #  Good: error handling
 def robust_fitness_function(gains): try: # Validate inputs if not validate_smc_gains(controller_type, gains): return float('inf') # Create controller controller = factory(gains) # Evaluate with timeout with timeout(30): # 30-second timeout performance = evaluate_performance(controller) # Check for numerical issues if not np.isfinite(performance['total_cost']): return float('inf') return performance['total_cost'] except TimeoutError: logger.warning(f"Evaluation timeout for gains: {gains}") return float('inf') except Exception as e: logger.warning(f"Evaluation failed for gains {gains}: {e}") return float('inf')
 ``` ### 4. Performance Monitoring ```python
 # example-metadata:
 
-# runnable: false # ✅ Good: Monitor PSO progress and performance
+# runnable: false #  Good: Monitor PSO progress and performance
 
 class PSO_Monitor: def __init__(self): self.iteration_times = [] self.fitness_history = [] self.evaluation_count = 0 def log_iteration(self, iteration, best_fitness, elapsed_time): self.fitness_history.append(best_fitness) self.iteration_times.append(elapsed_time) if iteration % 10 == 0: avg_time = np.mean(self.iteration_times[-10:]) logger.info(f"Iteration {iteration}: fitness={best_fitness:.6f}, " f"avg_time={avg_time:.3f}s") def log_evaluation(self): self.evaluation_count += 1 if self.evaluation_count % 100 == 0: logger.info(f"Completed {self.evaluation_count} evaluations") monitor = PSO_Monitor() def monitored_fitness_function(gains): monitor.log_evaluation() # ... fitness computation return fitness_value
 ``` ### 5. Configuration Management ```python
 # example-metadata:
-# runnable: false # ✅ Good: Centralized PSO configuration
+# runnable: false #  Good: Centralized PSO configuration
 PSO_CONFIGS = { SMCType.CLASSICAL: { 'n_particles': 30, 'max_iter': 100, 'w': 0.9, 'c1': 2.0, 'c2': 2.0, 'early_stopping': True }, SMCType.ADAPTIVE: { 'n_particles': 40, 'max_iter': 150, 'w': 0.8, 'c1': 2.2, 'c2': 1.8, 'early_stopping': True }
 } def get_pso_config(controller_type: SMCType) -> Dict[str, Any]: """Get optimized PSO configuration for controller type.""" return PSO_CONFIGS.get(controller_type, PSO_CONFIGS[SMCType.CLASSICAL])
 ```

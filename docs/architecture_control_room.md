@@ -8,7 +8,7 @@
 
 <div class="control-room-container">
 
-<h1 class="control-room-title">🎛️ DIP SMC PSO Control Room</h1>
+<h1 class="control-room-title"> DIP SMC PSO Control Room</h1>
 <p class="control-room-subtitle">Interactive System Architecture Visualization</p>
 
 <div class="isometric-scene" id="control-room-scene">
@@ -30,10 +30,10 @@
         <span>Standby</span>
     </div>
     <div class="legend-item" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(59, 130, 246, 0.3);">
-        <span style="font-size: 0.75rem; opacity: 0.8;">💡 Click components to navigate</span>
+        <span style="font-size: 0.75rem; opacity: 0.8;"> Click components to navigate</span>
     </div>
     <div class="legend-item">
-        <span style="font-size: 0.75rem; opacity: 0.8;">⌨️ Use arrow keys to explore</span>
+        <span style="font-size: 0.75rem; opacity: 0.8;">⌨ Use arrow keys to explore</span>
     </div>
 </div>
 
@@ -45,42 +45,42 @@
 
 The control room visualization shows the complete DIP_SMC_PSO architecture with real-time data flow:
 
-### 🎮 Controllers Station
+###  Controllers Station
 **Classical SMC | Super-Twisting | Adaptive | Hybrid**
 
 The controller hub manages all sliding mode control variants. Each controller processes plant states and computes optimal control signals. See {doc}`reference/controllers/index` for technical details.
 
-### ⚡ PSO Optimization Engine
+###  PSO Optimization Engine
 **Particle Swarm Optimization & Parameter Tuning**
 
 The PSO engine continuously optimizes controller parameters using swarm intelligence algorithms. Monitors convergence and adjusts hyperparameters dynamically. Explore {doc}`reference/optimization/index`.
 
-### 🖥️ Simulation Core
+###  Simulation Core
 **Orchestration & Execution Engine**
 
 Central simulation hub that coordinates all system components. Manages batch simulations, parallel execution, and result aggregation. Learn more at {doc}`reference/simulation/index`.
 
-### 📐 Plant Dynamics
+###  Plant Dynamics
 **Double Inverted Pendulum Models**
 
 Full nonlinear and simplified dynamics models of the DIP system. Implements physical equations, numerical integration, and state validation. Details in {doc}`reference/plant/index`.
 
-### 📊 Monitoring Dashboard
+###  Monitoring Dashboard
 **Real-time Metrics & Health Checks**
 
 Tracks system health, performance metrics, latency, and resource usage. Provides alerts and diagnostics for anomaly detection. See {doc}`reference/interfaces/monitoring___init__`.
 
-### ✅ Testing & Quality Assurance
+###  Testing & Quality Assurance
 **Automated Test Suite & Validation**
 
-Comprehensive test framework with ≥85% coverage. Includes unit tests, integration tests, and benchmark validation. View {doc}`TESTING`.
+complete test framework with ≥85% coverage. Includes unit tests, integration tests, and benchmark validation. View {doc}`TESTING`.
 
-### 💾 Data Storage
+###  Data Storage
 **Configuration & Results Persistence**
 
 Stores simulation results, optimized parameters, and system configurations. Enables reproducibility and experiment tracking.
 
-### 🔌 HIL Interface
+###  HIL Interface
 **Hardware-in-the-Loop Integration**
 
 Connects simulation to physical hardware for real-world testing. Plant server and controller client architecture. Quickstart: {doc}`hil_quickstart`.
@@ -109,17 +109,17 @@ Connects simulation to physical hardware for real-world testing. Plant server an
 
 ## Interactive Features
 
-**🖱️ Mouse Interactions:**
+** Mouse Interactions:**
 - **Hover** over components to see tooltips
 - **Click** components to navigate to documentation
 - Watch **animated data flow** between systems
 
-**⌨️ Keyboard Navigation:**
+**⌨ Keyboard Navigation:**
 - **Arrow Keys** or **Tab** to cycle through components
 - **Enter** to navigate to selected component
 - **Esc** to reset selection
 
-**📱 Mobile Support:**
+** Mobile Support:**
 - Touch-friendly interface
 - Responsive layout
 - Swipe to explore
@@ -134,28 +134,28 @@ Connects simulation to physical hardware for real-world testing. Plant server an
   - Status
   - Description
 * - Controllers
-  - 🟢 Online
+  -  Online
   - 4 variants operational
 * - PSO Engine
-  - 🟠 Processing
+  -  Processing
   - Optimizing Hybrid SMC
 * - Simulation Core
-  - 🟢 Online
+  -  Online
   - Ready for execution
 * - Plant Dynamics
-  - 🟢 Online
+  -  Online
   - Full & simplified models
 * - Monitoring
-  - 🟢 Online
+  -  Online
   - Collecting metrics
 * - Testing & QA
-  - 🔵 Standby
+  -  Standby
   - 872/872 tests passing
 * - Data Storage
-  - 🟢 Online
+  -  Online
   - 1.2 GB available
 * - HIL Interface
-  - 🔵 Standby
+  -  Standby
   - No hardware connected
 ```
 
@@ -178,8 +178,8 @@ Connects simulation to physical hardware for real-world testing. Plant server an
 
 ---
 
-**💡 Pro Tip:** This control room provides a high-level overview of the system. For detailed API documentation, component-specific guides, and mathematical foundations, navigate through the components above or use the sidebar navigation.
+** Pro Tip:** This control room provides a high-level overview of the system. For detailed API documentation, component-specific guides, and mathematical foundations, navigate through the components above or use the sidebar navigation.
 
-**🎨 Visualization Technology:** Built with pure JavaScript, CSS3 transforms, and SVG. No external dependencies. Fully accessible and keyboard-navigable.
+** Visualization Technology:** Built with pure JavaScript, CSS3 transforms, and SVG. No external dependencies. Fully accessible and keyboard-navigable.
 
 **Last Updated:** October 2025 | **Version:** 1.0.0 | **Status:** Production Ready

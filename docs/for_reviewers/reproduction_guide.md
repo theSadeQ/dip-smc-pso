@@ -378,7 +378,7 @@ PSO Convergence Analysis:
 1. Stability Condition (Theorem 8):
    - w + c1 + c2 = 0.65 + 2.0 + 2.0 = 4.65
    - Stability range: 0 < w + c1 + c2 < 4
-   - Status: ⚠️  MARGINAL (consider reducing c1 or c2)
+   - Status:   MARGINAL (consider reducing c1 or c2)
 
 2. Convergence Detection (Theorem 10):
    - Stagnation: Iteration 487
@@ -432,8 +432,8 @@ TOTAL                                    2145    275   87.2%
 
 **Success Criteria:**
 - **All tests pass:** 187/187
-- **Coverage ≥ 85%:** 87.2% ✅
-- **Critical components ≥ 90%:** Controllers, dynamics, optimizer all > 90% ✅
+- **Coverage ≥ 85%:** 87.2% 
+- **Critical components ≥ 90%:** Controllers, dynamics, optimizer all > 90% 
 - **No warnings:** Check for deprecation warnings
 
 
@@ -501,7 +501,7 @@ python scripts/docs/check_attribution.py
 [3/4] Generating report... (.artifacts/attribution_coverage_report.md)
 [4/4] Summary: 133 high-severity, 810 medium-severity, 201 low-severity
 
-✅ PASS: See .artifacts/attribution_audit_executive_summary.md for details
+ PASS: See .artifacts/attribution_audit_executive_summary.md for details
 ```
 
 
@@ -518,26 +518,26 @@ DIP-SMC-PSO Project Validation
 ==============================
 
 [1/5] Citation validation...
-  ✅ BibTeX coverage: 94/94 (100%)
-  ✅ Documentation citations: 39/39 valid
+   BibTeX coverage: 94/94 (100%)
+   Documentation citations: 39/39 valid
 
 [2/5] Theorem accuracy verification...
-  ✅ Mean accuracy: 99.1%
-  ✅ All 11 theorems PASS
+   Mean accuracy: 99.1%
+   All 11 theorems PASS
 
 [3/5] Test suite execution...
-  ✅ 187/187 tests passed
-  ✅ Coverage: 87.2%
+   187/187 tests passed
+   Coverage: 87.2%
 
 [4/5] Simulation smoke tests...
-  ✅ Classical SMC: Stabilized
-  ✅ STA-SMC: Stabilized
-  ✅ Adaptive SMC: Stabilized
+   Classical SMC: Stabilized
+   STA-SMC: Stabilized
+   Adaptive SMC: Stabilized
 
 [5/5] Attribution completeness...
-  ⚠️  CONDITIONAL PASS (see executive summary)
+    CONDITIONAL PASS (see executive summary)
 
-Overall Status: ✅ PASS
+Overall Status:  PASS
 Publication Ready: YES (with minor attribution improvements)
 ```
 

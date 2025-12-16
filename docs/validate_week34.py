@@ -5,7 +5,7 @@
 """
 Week 3 & 4 Documentation Validation Script
 
-Comprehensive validation of:
+complete validation of:
 - Week 3: Plant Models & Optimization/Simulation Infrastructure
 - Week 4: Advanced Controllers (Hybrid SMC, MPC, Swing-Up)
 
@@ -264,11 +264,11 @@ def main():
 
     if all_passed:
         print("[PASS] ALL VALIDATION CHECKS PASSED!")
-        print("\n✅ Week 3 & 4 Documentation: PRODUCTION READY")
+        print("\n Week 3 & 4 Documentation: PRODUCTION READY")
         return 0
     else:
         print("[WARN] SOME VALIDATION CHECKS FAILED - REVIEW ABOVE")
-        print("\n⚠️ Week 3 & 4 Documentation: REVIEW REQUIRED")
+        print("\n Week 3 & 4 Documentation: REVIEW REQUIRED")
         return 1
 
 

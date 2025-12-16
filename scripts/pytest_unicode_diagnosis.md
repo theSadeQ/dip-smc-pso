@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Windows terminals use `cp1252` encoding by default, which cannot display Unicode characters (✓, ✗, →, █, ⚠, ●) that pytest uses in its output. This causes:
+Windows terminals use `cp1252` encoding by default, which cannot display Unicode characters (, , →, , , ) that pytest uses in its output. This causes:
 - `UnicodeEncodeError` crashes when pytest tries to output test results
 - Garbled or missing characters in terminal output
 - Broken coverage reports due to Unicode in module/function names
@@ -77,7 +77,7 @@ UNICODE CHARACTER TEST:
    - No automatic UTF-8 fallback for Unicode-heavy output
 
 3. **pytest Unicode Output:**
-   - pytest uses Unicode symbols for test results (✓ = pass, ✗ = fail)
+   - pytest uses Unicode symbols for test results ( = pass,  = fail)
    - pytest uses Unicode box-drawing characters for progress bars
    - pytest-cov uses Unicode for coverage report formatting
 
@@ -110,7 +110,7 @@ python -m pytest
 - Not enforced - developers can still run pytest without it
 - Doesn't work for IDE test runners (PyCharm, VSCode)
 
-**Verdict:** ❌ Not suitable for team environment
+**Verdict:**  Not suitable for team environment
 
 ---
 
@@ -131,7 +131,7 @@ addopts = --capture=no --tb=short
 - `--capture=no` disables output capture, doesn't fix encoding
 - No pytest plugin for encoding management
 
-**Verdict:** ❌ Not possible with pytest configuration system
+**Verdict:**  Not possible with pytest configuration system
 
 ---
 
@@ -164,18 +164,18 @@ if os.name == "nt":
 ```
 
 **Pros:**
-- ✅ Automatic - works for all pytest invocations
-- ✅ Zero developer configuration required
-- ✅ Works in IDEs, CI/CD, command line
-- ✅ Version controlled (committed to repo)
-- ✅ Runs before any test collection
-- ✅ Platform-aware (only activates on Windows)
+-  Automatic - works for all pytest invocations
+-  Zero developer configuration required
+-  Works in IDEs, CI/CD, command line
+-  Version controlled (committed to repo)
+-  Runs before any test collection
+-  Platform-aware (only activates on Windows)
 
 **Cons:**
 - Adds ~30 lines to conftest.py
 - Runs on every pytest session (minimal overhead ~1ms)
 
-**Verdict:** ✅ **RECOMMENDED** - Currently implemented in this project
+**Verdict:**  **RECOMMENDED** - Currently implemented in this project
 
 ---
 
@@ -200,7 +200,7 @@ python -m pytest %*
 - Platform-specific (need separate .sh for Unix)
 - Not automatic
 
-**Verdict:** ⚠️ **SUPPLEMENTARY** - Useful as backup, but not primary solution
+**Verdict:**  **SUPPLEMENTARY** - Useful as backup, but not primary solution
 
 ---
 
@@ -225,7 +225,7 @@ python -m pytest %*
 
 3. **Error Handling:**
    - `errors="replace"` ensures no crashes on invalid characters
-   - Replaces unmappable characters with � instead of raising UnicodeEncodeError
+   - Replaces unmappable characters with  instead of raising UnicodeEncodeError
 
 ### Verification
 
@@ -271,9 +271,9 @@ tests/config_validation/test_config_validation.py::TestUnknownKeyValidation::tes
 ```
 
 **Verification:**
-- ✅ No encoding errors
-- ✅ Test results display correctly
-- ✅ Coverage reports generate without issues
+-  No encoding errors
+-  Test results display correctly
+-  Coverage reports generate without issues
 
 ---
 
@@ -281,10 +281,10 @@ tests/config_validation/test_config_validation.py::TestUnknownKeyValidation::tes
 
 | Solution | Automatic | IDE Support | Zero Config | Version Control | Team-Friendly | Verdict |
 |----------|-----------|-------------|-------------|------------------|---------------|---------|
-| Environment Var | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ Not recommended |
-| pytest.ini | N/A | N/A | N/A | N/A | N/A | ❌ Not possible |
-| conftest.py | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ **IMPLEMENTED** |
-| Batch wrapper | ❌ | ❌ | ❌ | ✅ | ⚠️ | ⚠️ Supplementary |
+| Environment Var |  |  |  |  |  |  Not recommended |
+| pytest.ini | N/A | N/A | N/A | N/A | N/A |  Not possible |
+| conftest.py |  |  |  |  |  |  **IMPLEMENTED** |
+| Batch wrapper |  |  |  |  |  |  Supplementary |
 
 ---
 
@@ -292,13 +292,13 @@ tests/config_validation/test_config_validation.py::TestUnknownKeyValidation::tes
 
 ### For This Project (DIP-SMC-PSO)
 
-**Status:** ✅ **RESOLVED** - conftest.py hook is already implemented and working
+**Status:**  **RESOLVED** - conftest.py hook is already implemented and working
 
 **Actions:**
-1. ✅ Keep UTF-8 enforcement in `tests/conftest.py` (lines 21-39)
-2. ✅ Document solution in testing docs (this file)
-3. ✅ Add diagnostic script to repository (`scripts/diagnose_pytest_unicode.py`)
-4. ⚠️ Optional: Create `run_tests.bat` as convenience wrapper (lower priority)
+1.  Keep UTF-8 enforcement in `tests/conftest.py` (lines 21-39)
+2.  Document solution in testing docs (this file)
+3.  Add diagnostic script to repository (`scripts/diagnose_pytest_unicode.py`)
+4.  Optional: Create `run_tests.bat` as convenience wrapper (lower priority)
 
 ### For Other Projects
 

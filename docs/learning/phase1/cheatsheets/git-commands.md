@@ -122,7 +122,7 @@ git log --graph          # Visual graph
 | `git reset --hard HEAD~1` | Undo last commit (discard changes) | `git reset --hard HEAD~1` |
 | `git revert <commit>` | Create new commit that undoes | `git revert abc1234` |
 
-**⚠️ WARNING**: `git reset --hard` permanently deletes changes!
+** WARNING**: `git reset --hard` permanently deletes changes!
 
 ------
 

@@ -8,23 +8,23 @@ The Claude Code Automated Backup System provides **frequent, automatic restore p
 ### Architecture
 
 ```
-┌─────────────────────────────────────────────────────┐
-│  Windows Task Scheduler (every 1 minute)            │
-│  ├─ Triggers: .dev_tools/claude-backup.ps1          │
-│  └─ Runs as: Current User (non-elevated)            │
-└─────────────────────────────────────────────────────┘
-                      │
-                      ▼
-┌─────────────────────────────────────────────────────┐
-│  PowerShell Script Workflow                         │
-│  1. Verify repository location (D:\Projects\main)   │
-│  2. Assert remote: github.com/theSadeQ/dip-smc-pso  │
-│  3. Stage all changes (git add -A)                  │
-│  4. Check if changes exist → Exit if none           │
-│  5. Commit with timestamped message                 │
-│  6. Push to origin/main                             │
-│  7. Log result to .dev_tools/backup/backup.log      │
-└─────────────────────────────────────────────────────┘
+
+  Windows Task Scheduler (every 1 minute)            
+   Triggers: .dev_tools/claude-backup.ps1          
+   Runs as: Current User (non-elevated)            
+
+                      
+                      
+
+  PowerShell Script Workflow                         
+  1. Verify repository location (D:\Projects\main)   
+  2. Assert remote: github.com/theSadeQ/dip-smc-pso  
+  3. Stage all changes (git add -A)                  
+  4. Check if changes exist → Exit if none           
+  5. Commit with timestamped message                 
+  6. Push to origin/main                             
+  7. Log result to .dev_tools/backup/backup.log      
+
 ```
 
 ### Commit Message Format
@@ -38,9 +38,8 @@ Auto-backup: 2025-10-01T14:23:15
 - Periodic checkpoint from CI agent
 - Includes files modified during this session
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
+ Generated with [Claude Code](https://claude.com/claude-code)
 
-Co-Authored-By: Claude <noreply@anthropic.com>
 ```
 
 **Timestamp**: ISO 8601 format (YYYY-MM-DDTHH:mm:ss)
@@ -177,7 +176,7 @@ If the Task Scheduler runs while a manual checkpoint is in progress:
 - If changes are detected but no diff exists (race condition), script exits cleanly
 - If push fails due to remote changes, error is logged with actionable hint
 
-## Advanced Features
+## features
 
 ### Token-Aware Backup
 
@@ -323,9 +322,8 @@ Auto-backup: $timestamp
 - Custom message here
 - Your changes
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
+ Generated with [Claude Code](https://claude.com/claude-code)
 
-Co-Authored-By: Claude <noreply@anthropic.com>
 "@
 ```
 

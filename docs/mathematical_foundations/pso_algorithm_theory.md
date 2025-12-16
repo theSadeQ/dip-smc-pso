@@ -14,11 +14,11 @@
 
 ---
 
-## Overview Particle Swarm Optimization (PSO) is a population-based metaheuristic optimization algorithm inspired by the social behavior of bird flocking and fish schooling. PSO has become the primary automated gain tuning method for sliding mode controllers in the DIP-SMC-PSO system due to its: ✅ **Derivative-free nature** - No gradient information required
-✅ **Global search capability** - Escapes local minima effectively
-✅ **Fast convergence** - Typically 50-150 iterations for SMC gains
-✅ **Simplicity** - Few parameters to tune (ω, c₁, c₂)
-✅ **Parallelizability** - Fitness evaluations are independent **Typical Application:**
+## Overview Particle Swarm Optimization (PSO) is a population-based metaheuristic optimization algorithm inspired by the social behavior of bird flocking and fish schooling. PSO has become the primary automated gain tuning method for sliding mode controllers in the DIP-SMC-PSO system due to its:  **Derivative-free nature** - No gradient information required
+ **Global search capability** - Escapes local minima effectively
+ **Fast convergence** - Typically 50-150 iterations for SMC gains
+ **Simplicity** - Few parameters to tune (ω, c₁, c₂)
+ **Parallelizability** - Fitness evaluations are independent **Typical Application:**
 - **Problem:** Find optimal SMC controller gains [k₁, k₂, λ₁, λ₂, K, k_d] ∈ ℝ⁶
 - **Objective:** Minimize J(g) = w₁·ISE + w₂·chattering + w₃·effort
 - **Constraints:** Stability bounds (k₁,k₂,λ₁,λ₂ > 0, K > disturbance)
@@ -89,9 +89,9 @@ velocity_new += social
 - **Convergence driver:** All particles attracted to g_best
 - **Premature convergence risk:** If g_best is local optimum ### Algorithm Pseudocode ```
 Algorithm: Particle Swarm Optimization
-──────────────────────────────────────────────────────────────────────
+
 Input: f (fitness function) bounds (search space limits) N (swarm size) T_max (maximum iterations) ω, c₁, c₂ (PSO parameters) Output: x_best (optimal solution) f_best (optimal fitness)
-────────────────────────────────────────────────────────────────────── 1. Initialize swarm: FOR i = 1 to N: x_i ∼ Uniform(bounds) # Random initial positions v_i ∼ Uniform(-Δx, Δx) # Random initial velocities p_best,i ← x_i # Personal best = initial position f_i ← f(x_i) # Evaluate fitness END FOR 2. Set global best: g_best ← argmin_i f(p_best,i) # Best particle in swarm f_best ← min_i f(p_best,i) 3. Main optimization loop: FOR t = 1 to T_max: a. Update velocities and positions: FOR i = 1 to N: r_1, r_2 ∼ Uniform(0, 1) # Velocity update (Eq. 1) v_i ← ω·v_i + c₁·r₁·(p_best,i - x_i) + c₂·r₂·(g_best - x_i) # Velocity clamping (prevent explosion) v_i ← clip(v_i, v_min, v_max) # Position update (Eq. 2) x_i ← x_i + v_i # Boundary handling x_i ← clip(x_i, bounds) END FOR b. Evaluate fitness: FOR i = 1 to N: f_i ← f(x_i) END FOR c. Update personal bests: FOR i = 1 to N: IF f_i < f(p_best,i): p_best,i ← x_i END IF END FOR d. Update global best: i_best ← argmin_i f(p_best,i) IF f(p_best,i_best) < f_best: g_best ← p_best,i_best f_best ← f(p_best,i_best) END IF e. Check convergence (optional): IF convergence_criterion_met(): BREAK END IF END FOR 4. Return results: RETURN g_best, f_best
+ 1. Initialize swarm: FOR i = 1 to N: x_i ∼ Uniform(bounds) # Random initial positions v_i ∼ Uniform(-Δx, Δx) # Random initial velocities p_best,i ← x_i # Personal best = initial position f_i ← f(x_i) # Evaluate fitness END FOR 2. Set global best: g_best ← argmin_i f(p_best,i) # Best particle in swarm f_best ← min_i f(p_best,i) 3. Main optimization loop: FOR t = 1 to T_max: a. Update velocities and positions: FOR i = 1 to N: r_1, r_2 ∼ Uniform(0, 1) # Velocity update (Eq. 1) v_i ← ω·v_i + c₁·r₁·(p_best,i - x_i) + c₂·r₂·(g_best - x_i) # Velocity clamping (prevent explosion) v_i ← clip(v_i, v_min, v_max) # Position update (Eq. 2) x_i ← x_i + v_i # Boundary handling x_i ← clip(x_i, bounds) END FOR b. Evaluate fitness: FOR i = 1 to N: f_i ← f(x_i) END FOR c. Update personal bests: FOR i = 1 to N: IF f_i < f(p_best,i): p_best,i ← x_i END IF END FOR d. Update global best: i_best ← argmin_i f(p_best,i) IF f(p_best,i_best) < f_best: g_best ← p_best,i_best f_best ← f(p_best,i_best) END IF e. Check convergence (optional): IF convergence_criterion_met(): BREAK END IF END FOR 4. Return results: RETURN g_best, f_best
 ```
 
 ---
@@ -301,8 +301,8 @@ from multiprocessing import Pool with Pool(processes=8) as pool: fitness = pool.
 
 ## Comparison with Other Algorithms ### PSO vs Genetic Algorithms (GA) | Feature | PSO | Genetic Algorithm |
 |---------|-----|-------------------|
-| Population-based | ✓ | ✓ |
-| Gradient-free | ✓ | ✓ |
+| Population-based |  |  |
+| Gradient-free |  |  |
 | Convergence speed | **Faster** (continuous updates) | Slower (generational) |
 | Parameter count | 3 (ω, c₁, c₂) | 5+ (crossover, mutation, selection) |
 | Premature convergence | **Higher risk** | Lower risk (diversity operators) |
@@ -311,8 +311,8 @@ from multiprocessing import Pool with Pool(processes=8) as pool: fitness = pool.
 | Discrete optimization | Good | **Excellent** |
 | SMC gain tuning | **Recommended** | Alternative | ### PSO vs Gradient-Based (BFGS, Adam) | Feature | PSO | Gradient Methods |
 |---------|-----|------------------|
-| Requires derivatives | ✗ | ✓ |
-| Global search | ✓ | ✗ (local) |
+| Requires derivatives |  |  |
+| Global search |  |  (local) |
 | Noisy fitness | **Robust** | Sensitive |
 | Computational cost | High (N evaluations/iter) | Low (1-2 evaluations/iter) |
 | Convex functions | Good | **Excellent** |
@@ -320,7 +320,7 @@ from multiprocessing import Pool with Pool(processes=8) as pool: fitness = pool.
 | SMC gain tuning | **Recommended** | Not suitable (no gradients) | ### PSO vs Bayesian Optimization (BO) | Feature | PSO | Bayesian Optimization |
 |---------|-----|----------------------|
 | Sample efficiency | Moderate | **Excellent** |
-| Parallel evaluation | ✓ (natural) | ✗ (sequential) |
+| Parallel evaluation |  (natural) |  (sequential) |
 | Computational overhead | Low | **High** (GP training) |
 | Iterations to converge | 50-150 | **20-50** |
 | Wall-clock time | Fast (parallel) | **Slower** (sequential) |
@@ -336,11 +336,11 @@ from multiprocessing import Pool with Pool(processes=8) as pool: fitness = pool.
 
 ---
 
-## Summary ### Key Takeaways ✅ **PSO is derivative-free** - Suitable for black-box optimization (simulation-based fitness)
-✅ **Simple yet effective** - Only 3 main parameters (ω, c₁, c₂)
-✅ **Fast convergence** - 50-150 iterations typical for SMC gain tuning
-✅ **Parallelizable** - Fitness evaluations are independent (8x speedup possible)
-✅ **Robust to noise** - Stochastic nature handles noisy fitness landscapes ### Standard Configuration for SMC ```python
+## Summary ### Key Takeaways  **PSO is derivative-free** - Suitable for black-box optimization (simulation-based fitness)
+ **Simple yet effective** - Only 3 main parameters (ω, c₁, c₂)
+ **Fast convergence** - 50-150 iterations typical for SMC gain tuning
+ **Parallelizable** - Fitness evaluations are independent (8x speedup possible)
+ **Robust to noise** - Stochastic nature handles noisy fitness landscapes ### Standard Configuration for SMC ```python
 pso_params = { 'n_particles': 30, 'max_iters': 100, 'inertia': 0.7298, # Constriction coefficient 'c1': 2.05, # Cognitive coefficient 'c2': 2.05, # Social coefficient 'v_max': 0.2 * range, # Velocity clamping
 }
 ``` ### When to Use PSO **Ideal for:**
@@ -360,5 +360,5 @@ pso_params = { 'n_particles': 30, 'max_iters': 100, 'inertia': 0.7298, # Constri
 
 **Document Version:** 1.0
 **Last Updated:** 2025-10-04
-**Status:** ✅ Complete
+**Status:**  Complete
 **Word Count:** ~8,500 words | ~850 lines

@@ -1,10 +1,10 @@
 # Factory Configuration Reference ## Overview The SMC Controller Factory system provides a unified, type-safe interface for creating sliding mode controllers with parameter validation, deprecation management, and PSO optimization integration. This reference documents the factory configuration system implemented to resolve GitHub Issue #6. ## Factory Architecture ### Core Components ```
 
 src/controllers/factory/
-├── __init__.py # Main factory interface
-├── smc_factory.py # Clean SMC-specific factory
-├── deprecation.py # Deprecation management system
-└── fallback_configs.py # Graceful degradation support
+ __init__.py # Main factory interface
+ smc_factory.py # Clean SMC-specific factory
+ deprecation.py # Deprecation management system
+ fallback_configs.py # Graceful degradation support
 ``` ### Thread Safety Implementation The factory implements thread-safe operations using `threading.RLock()`: ```python
 # example-metadata:
 # runnable: false # Thread-safe factory operations

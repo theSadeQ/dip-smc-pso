@@ -8,15 +8,15 @@ Professional CSS theme collection for Sphinx documentation. Pick a theme, switch
 
 ```
 docs/_static/
-├── custom.css              ← ACTIVE theme (loaded by Sphinx)
-└── css-themes/             ← Theme library (you are here)
-    ├── README.md           ← This file
-    ├── switch.sh           ← Theme switcher script
-    ├── base-theme.css      ← Backup of original custom.css
-    ├── minimal-professional.css
-    ├── academic-journal.css
-    ├── modern-tech.css
-    └── colorful-indicators.css
+ custom.css              ← ACTIVE theme (loaded by Sphinx)
+ css-themes/             ← Theme library (you are here)
+     README.md           ← This file
+     switch.sh           ← Theme switcher script
+     base-theme.css      ← Backup of original custom.css
+     minimal-professional.css
+     academic-journal.css
+     modern-tech.css
+     colorful-indicators.css
 ```
 
 ---

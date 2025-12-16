@@ -46,7 +46,7 @@ g: 9.81 # Gravitational acceleration (m/s²)
 **Total Mass:** 1.2 kg (cart + both pendulums) ### Classical SMC Overview Sliding Mode Control (SMC) is a nonlinear control technique that: 1. **Defines a Sliding Surface:** A function of state errors ``` s = k₁·θ₁ + k₂·dθ₁ + λ₁·θ₂ + λ₂·dθ₂ ``` 2. **Drives System to Surface:** Control law forces `s → 0` ``` u = -K·sign(s) or u = -K·tanh(s/ε) (smoothed) ``` 3. **Maintains on Surface:** Once on surface, system slides to equilibrium **Key Properties:**
 - **Robustness:** Insensitive to model uncertainties and disturbances
 - **Finite-Time Convergence:** Reaches sliding surface in finite time
-- **Chattering:** High-frequency switching (mitigated by boundary layer ε) > **📚 Deep Dive:** For detailed mathematical foundations, see:
+- **Chattering:** High-frequency switching (mitigated by boundary layer ε) > ** Deep Dive:** For detailed mathematical foundations, see:
 > - [DIP Dynamics Theory](../theory/dip-dynamics.md) - Lagrangian derivation and controllability
 > - [SMC Theory](../theory/smc-theory.md) - Lyapunov stability and sliding mode principles
 
@@ -82,7 +82,7 @@ python simulate.py --controller classical_smc --plot
 ``` **What's happening:** 1. **Configuration Loading** (0.1s) - Reads `config.yaml` - Validates all parameters - Seeds random number generator (for reproducibility) 2. **Controller Creation** (0.01s) - Instantiates `ClassicalSMC` with default gains - Sets saturation limit and boundary layer 3. **Dynamics Model Initialization** (0.01s) - Creates simplified nonlinear dynamics model - Precomputes mass matrix and Coriolis terms 4. **Simulation Loop** (1-3s) - 5,000 integration steps (5.0s / 0.001s) - At each step: * Controller computes force `u` from current state * Dynamics integrates equations of motion * State updated and logged 5. **Post-Processing** (0.5s) - Computes performance metrics - Generates plots **Expected terminal output:** ```
 INFO:root:Provenance configured: commit=<hash>, cfg_hash=<hash>, seed=0
 D:\Projects\main\src\plant\core\state_validation.py:171: UserWarning: State vector was modified during sanitization warnings.warn("State vector was modified during sanitization", UserWarning)
-``` **Note:** The simulation runs with minimal terminal output. The provenance line confirms the simulation configuration is tracked for reproducibility. The state sanitization warning is normal and indicates the simulator is ensuring numerical stability. **⏱️ Total Time:** ~10-15 seconds (includes initialization and plotting) ### Step 4: Interpret Results Two plot windows will appear. analyze each carefully. #### Plot 1: State Trajectories Six subplots showing the evolution of all state variables: **Subplot 1: Cart Position `x(t)`**
+``` **Note:** The simulation runs with minimal terminal output. The provenance line confirms the simulation configuration is tracked for reproducibility. The state sanitization warning is normal and indicates the simulator is ensuring numerical stability. **⏱ Total Time:** ~10-15 seconds (includes initialization and plotting) ### Step 4: Interpret Results Two plot windows will appear. analyze each carefully. #### Plot 1: State Trajectories Six subplots showing the evolution of all state variables: **Subplot 1: Cart Position `x(t)`**
 
 - **Initial value:** 0.1 m (displaced right)
 - **Behavior:** Slight oscillation, then settles near 0.1 m
@@ -228,7 +228,7 @@ D:\Projects\main\src\plant\core\state_validation.py:171: UserWarning: State vect
    plt.tight_layout()
    plt.show()
 
-   # Print comprehensive summary
+   # Print complete summary
    print("=" * 60)
    print("PERFORMANCE METRICS SUMMARY")
    print("=" * 60)
@@ -292,21 +292,21 @@ rms_control = np.sqrt(np.mean(u**2))
 | **Peak Control** | 40-60 N | Maximum force during transient |
 | **RMS Control** | 10-15 N | Average control effort |
 | **Saturation Events** | 0-2% | Percentage of time at limits | **Visual Behavior Pattern**: ```mermaid
-flowchart LR subgraph "Simulation Timeline (0-5 seconds)" direction TB PHASE1["Phase 1: Initial Response<br/>0-0.5s<br/>⚡ Large control spike<br/>📊 Rapid state change"] PHASE2["Phase 2: Active Stabilization<br/>0.5-2.5s<br/>🔄 Oscillating control<br/>📉 Decreasing amplitude"] PHASE3["Phase 3: Steady State<br/>2.5-5.0s<br/>✅ Small corrections<br/>🎯 Near equilibrium"] end PHASE1 --> PHASE2 PHASE2 --> PHASE3 style PHASE1 fill:#ffcccc style PHASE2 fill:#ffffcc style PHASE3 fill:#ccffcc
-``` **Phase Characteristics**: - 🔴 **Phase 1** (Initial Response): Large control action, rapid state change, peak forces
-- 🟡 **Phase 2** (Active Stabilization): Oscillatory behavior, gradually decreasing amplitude
-- 🟢 **Phase 3** (Steady State): Minimal oscillations, small control effort, convergence achieved **Good Results Checklist**:
-- ✅ All state variables bounded (no divergence)
-- ✅ Control input stays within ±150 N (no saturation)
-- ✅ Settling time < 3 seconds
-- ✅ Overshoot < 5%
-- ✅ Steady-state error < 1°
-- ✅ Smooth convergence (no instability) **Warning Signs** (Results requiring investigation):
-- ❌ States diverging to ±∞
-- ❌ Settling time > 5 seconds
-- ❌ Overshoot > 20%
-- ❌ Control saturated > 10% of time
-- ❌ Persistent high-frequency chattering
+flowchart LR subgraph "Simulation Timeline (0-5 seconds)" direction TB PHASE1["Phase 1: Initial Response<br/>0-0.5s<br/> Large control spike<br/> Rapid state change"] PHASE2["Phase 2: Active Stabilization<br/>0.5-2.5s<br/> Oscillating control<br/> Decreasing amplitude"] PHASE3["Phase 3: Steady State<br/>2.5-5.0s<br/> Small corrections<br/> Near equilibrium"] end PHASE1 --> PHASE2 PHASE2 --> PHASE3 style PHASE1 fill:#ffcccc style PHASE2 fill:#ffffcc style PHASE3 fill:#ccffcc
+``` **Phase Characteristics**: -  **Phase 1** (Initial Response): Large control action, rapid state change, peak forces
+-  **Phase 2** (Active Stabilization): Oscillatory behavior, gradually decreasing amplitude
+-  **Phase 3** (Steady State): Minimal oscillations, small control effort, convergence achieved **Good Results Checklist**:
+-  All state variables bounded (no divergence)
+-  Control input stays within ±150 N (no saturation)
+-  Settling time < 3 seconds
+-  Overshoot < 5%
+-  Steady-state error < 1°
+-  Smooth convergence (no instability) **Warning Signs** (Results requiring investigation):
+-  States diverging to ±∞
+-  Settling time > 5 seconds
+-  Overshoot > 20%
+-  Control saturated > 10% of time
+-  Persistent high-frequency chattering
 
 ---
 
@@ -499,10 +499,10 @@ controller_defaults: classical_smc: gains: - 10.0 # k₁ (was 5.0) - 10.0 # k₂
 
 python simulate.py --controller classical_smc --plot
 ``` **Expected changes:**
-- ✅ Faster settling time (~1.8s)
-- ❌ Higher overshoot (~8-10%)
-- ❌ More chattering visible
-- ❌ Higher control effort (~25 N RMS) **Trade-off:** Speed vs smoothness ### Experiment 3: Wider Boundary Layer Edit `config.yaml`: ```yaml
+-  Faster settling time (~1.8s)
+-  Higher overshoot (~8-10%)
+-  More chattering visible
+-  Higher control effort (~25 N RMS) **Trade-off:** Speed vs smoothness ### Experiment 3: Wider Boundary Layer Edit `config.yaml`: ```yaml
 controllers: classical_smc: boundary_layer: 1.0 # Increased from 0.3
 ``` Run simulation:
 
@@ -510,8 +510,8 @@ controllers: classical_smc: boundary_layer: 1.0 # Increased from 0.3
 python simulate.py --controller classical_smc --plot
 ``` **Expected changes:**
 
-- ✅ Much less chattering (smoother control)
-- ❌ Larger steady-state error (~0.02 rad)
+-  Much less chattering (smoother control)
+-  Larger steady-state error (~0.02 rad)
 - ≈ Similar settling time **Trade-off:** Smoothness vs accuracy ### Experiment 4: Moving Cart Initial Condition Edit `config.yaml`: ```yaml
 simulation: initial_state: [0.0, 1.0, 0.05, 0.0, -0.05, 0.0] # Cart moving at 1.0 m/s, pendulums slightly perturbed
 ``` Run simulation:
@@ -553,12 +553,12 @@ python simulate.py --controller classical_smc --plot
 
 ---
 
-## Next Steps **Congratulations!** You've completed your first simulation tutorial. ### What You've Learned ✅ The double-inverted pendulum control problem
-✅ How to run simulations with Classical SMC
-✅ Interpreting state trajectories and control inputs
-✅ Understanding performance metrics
-✅ Modifying parameters and observing effects
-✅ Troubleshooting common issues ### Continue Learning **Next Tutorial:** [Tutorial 02: Controller Comparison](tutorial-02-controller-comparison.md)
+## Next Steps **Congratulations!** You've completed your first simulation tutorial. ### What You've Learned  The double-inverted pendulum control problem
+ How to run simulations with Classical SMC
+ Interpreting state trajectories and control inputs
+ Understanding performance metrics
+ Modifying parameters and observing effects
+ Troubleshooting common issues ### Continue Learning **Next Tutorial:** [Tutorial 02: Controller Comparison](tutorial-02-controller-comparison.md)
 - Compare all 4 SMC controller types side-by-side
 - Quantitative performance analysis
 - Learn when to use each controller **Related Guides:**

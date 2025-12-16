@@ -20,10 +20,10 @@
 
 The **optimization landscape** is the geometric structure of the fitness function over the parameter search space. Understanding this landscape is critical for:
 
-✅ **Parameter bound selection** - Defining meaningful search regions
-✅ **Algorithm configuration** - Choosing PSO parameters for landscape characteristics
-✅ **Convergence diagnosis** - Understanding why optimization succeeds or fails
-✅ **Multi-objective trade-offs** - Navigating performance vs smoothness conflicts
+ **Parameter bound selection** - Defining meaningful search regions
+ **Algorithm configuration** - Choosing PSO parameters for landscape characteristics
+ **Convergence diagnosis** - Understanding why optimization succeeds or fails
+ **Multi-objective trade-offs** - Navigating performance vs smoothness conflicts
 
 **Key Challenge for SMC Gain Tuning:**
 
@@ -188,23 +188,23 @@ Fixing k₂ = 15, λ₁ = 12, λ₂ = 8, K = 40, k_d = 5, vary k₁ ∈ [0.1, 50
 
 ```
 Fitness Landscape (k₁ vs λ₂)
-──────────────────────────────────────
-     50│    ░░░█████░░░    ░░██░░
-       │  ░░██▓▓▓▓▓██░░  ░██▓██░
-       │ ░██▓▓▓▓▓▓▓▓▓██░██▓▓▓▓██
-  λ₂   │░██▓▓▓▓▓▓▓▓▓▓▓███▓▓▓▓▓██
-       │██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██
-       │██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██
-       │░██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██░
-       │ ░██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██░
-       │  ░░███▓▓▓▓▓▓▓▓▓▓▓███░░
-     0 │    ░░░████████████░░░
-       └──────────────────────────
+
+     50        
+           
+        
+  λ₂   
+       
+       
+       
+        
+         
+     0     
+       
          0        k₁        50
 
-Legend: ░ High fitness (poor)
-        ▓ Medium fitness
-        █ Low fitness (good) ← Multiple basins!
+Legend:  High fitness (poor)
+         Medium fitness
+         Low fitness (good) ← Multiple basins!
 ```
 
 **Implication for PSO:**
@@ -475,22 +475,22 @@ $$
 
 ```
 Chattering
-    │
-250 │     ○                    ← Dominated solutions
-    │       ○
-200 │         ○
-    │           ○
-150 │     ╔═══════╗            ← Pareto front
-    │     ║ ●●●●● ║               (non-dominated)
-100 │     ║●●●  ● ║
-    │     ║●       ║
- 50 │     ║●       ║
-    │     ╚════════╝
-  0 │─────────────────────────
+    
+250                          ← Dominated solutions
+           
+200          
+               
+150                  ← Pareto front
+                          (non-dominated)
+100         
+                
+ 50             
+         
+  0 
     0    5    10   15   20     ISE
 
-● Pareto-optimal solutions
-○ Dominated solutions
+ Pareto-optimal solutions
+ Dominated solutions
 ```
 
 **Pareto Set Characteristics:**
@@ -906,11 +906,11 @@ def diagnose_convergence(fitness_history, diversity_history):
 
 ### Key Insights
 
-✅ **6D search space** for Classical SMC with ~95% feasible region
-✅ **Multimodal landscape** with 10-20 local minima (requires multi-start PSO)
-✅ **Moderately rugged** due to chattering (PSO handles well)
-✅ **Switching gain K** is dominant parameter (45% variance contribution)
-✅ **Multi-objective trade-off** between ISE and chattering (Pareto frontier)
+ **6D search space** for Classical SMC with ~95% feasible region
+ **Multimodal landscape** with 10-20 local minima (requires multi-start PSO)
+ **Moderately rugged** due to chattering (PSO handles well)
+ **Switching gain K** is dominant parameter (45% variance contribution)
+ **Multi-objective trade-off** between ISE and chattering (Pareto frontier)
 
 ### Optimization Strategy
 
@@ -930,5 +930,5 @@ def diagnose_convergence(fitness_history, diversity_history):
 
 **Document Version:** 1.0
 **Last Updated:** 2025-10-04
-**Status:** ✅ Complete
+**Status:**  Complete
 **Word Count:** ~5,200 words | ~540 lines

@@ -22,7 +22,7 @@ Generated: D:\Projects\main
 - **Improvement**: -44689.92%
 - **Converged At**: Iteration 43
 - **Total Iterations Logged**: 91
-- **Assessment**: ❌ **FAIL** (chattering target < 2.0 not met)
+- **Assessment**:  **FAIL** (chattering target < 2.0 not met)
 
 ### adaptive_smc
 
@@ -34,7 +34,7 @@ Generated: D:\Projects\main
 - **Converged At**: Iteration 5
 - **95% Convergence Rate**: Iteration 15
 - **Total Iterations Logged**: 72
-- **Assessment**: ✅ **PASS** (chattering target < 2.0 met)
+- **Assessment**:  **PASS** (chattering target < 2.0 met)
 
 ### sta_smc
 
@@ -45,7 +45,7 @@ Generated: D:\Projects\main
 - **Improvement**: -47.22%
 - **Converged At**: Iteration 5
 - **Total Iterations Logged**: 74
-- **Assessment**: ❌ **FAIL** (chattering target < 2.0 not met)
+- **Assessment**:  **FAIL** (chattering target < 2.0 not met)
 
 ### hybrid_adaptive_sta_smc
 
@@ -56,7 +56,7 @@ Generated: D:\Projects\main
 - **Improvement**: 0.00%
 - **Converged At**: Iteration 5
 - **Total Iterations Logged**: 248
-- **Assessment**: ✅ **PASS** (chattering target < 2.0 met)
+- **Assessment**:  **PASS** (chattering target < 2.0 met)
 
 ## Observations
 

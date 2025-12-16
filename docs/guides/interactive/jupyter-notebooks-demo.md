@@ -8,7 +8,7 @@ This page demonstrates all Jupyter integration features available in Phase 4 of 
 
 ## Feature Overview
 
-Phase 4 brings three powerful Jupyter directives:
+Phase 4 brings three effective Jupyter directives:
 
 1. **`jupyter-notebook`**: Embed full notebooks with execution caching
 2. **`jupyter-cell`**: Inline code cells for quick demonstrations
@@ -172,7 +172,7 @@ The `jupyter-widget` directive creates interactive controls:
 
 ---
 
-## 4. Advanced Features
+## 4. features
 
 ### Execution Caching
 

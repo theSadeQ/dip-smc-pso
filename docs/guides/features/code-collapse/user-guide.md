@@ -1,6 +1,6 @@
 # Collapsible Code Blocks - User Guide
 
-**Feature Status:** ✅ Production Ready (v1.0.0)
+**Feature Status:**  Production Ready (v1.0.0)
 **Last Updated:** 2025-10-12
 
 ---
@@ -23,19 +23,19 @@ Collapsible code blocks allow you to collapse and expand code examples on docume
 
 Every code block has two buttons in the top-right corner:
 
-1. **Copy button** (📋) - copies code to clipboard
-2. **Collapse button** (▼/▲) - collapses or expands the code block
+1. **Copy button** () - copies code to clipboard
+2. **Collapse button** (/) - collapses or expands the code block
 
 #### To Collapse a Code Block
 
-1. Find the collapse button in the top-right corner (shows **▼** when expanded)
+1. Find the collapse button in the top-right corner (shows **** when expanded)
 2. Click the button
 3. The code smoothly slides up (curtain effect)
-4. A message appears: "Code hidden (click ▲ to expand)"
+4. A message appears: "Code hidden (click  to expand)"
 
 #### To Expand a Code Block
 
-1. Find the expand button in the top-right corner (shows **▲** when collapsed)
+1. Find the expand button in the top-right corner (shows **** when collapsed)
 2. Click the button
 3. The code smoothly slides down
 
@@ -45,10 +45,10 @@ Every code block has two buttons in the top-right corner:
 
 ### Master Controls
 
-At the top of each documentation page (below the first heading), you'll find master control buttons:
+At the top of each documentation page (below the first heading), the system will find master control buttons:
 
 ```
-[X code blocks:]  [▲ Collapse All]  [▼ Expand All]
+[X code blocks:]  [ Collapse All]  [ Expand All]
 ```
 
 - **Collapse All** - Collapses all code blocks on the current page
@@ -160,10 +160,10 @@ When you print a page (Ctrl+P or Cmd+P):
 
 | Browser | Minimum Version | Status |
 |---------|----------------|--------|
-| **Chrome** | 90+ | ✅ Fully supported |
-| **Firefox** | 88+ | ✅ Fully supported |
-| **Edge** | 90+ | ✅ Fully supported |
-| **Safari** | 14+ | ⚠️ Partial GPU acceleration |
+| **Chrome** | 90+ |  Fully supported |
+| **Firefox** | 88+ |  Fully supported |
+| **Edge** | 90+ |  Fully supported |
+| **Safari** | 14+ |  Partial GPU acceleration |
 
 **All core functionality works on all modern browsers.** Some advanced GPU acceleration features may be limited in older Safari versions.
 
@@ -201,7 +201,7 @@ If you're a developer integrating this feature, see the [Integration Guide](inte
 - Collapse/expand works without internet
 - State persistence uses browser's local storage (no server needed)
 
-However, your collapsed state is stored per-browser. If you switch browsers, you'll need to collapse blocks again.
+However, your collapsed state is stored per-browser. If you switch browsers, the system will need to collapse blocks again.
 
 ### What if I run out of local storage space?
 
@@ -274,4 +274,4 @@ If you encounter a bug:
 
 ---
 
-**Enjoy cleaner, more focused documentation reading!** 📚
+**Enjoy cleaner, more focused documentation reading!** 

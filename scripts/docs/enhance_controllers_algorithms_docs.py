@@ -9,7 +9,7 @@ Enhances 9 critical SMC algorithm files with:
 - Advanced SMC algorithm theory (Classical, Adaptive, STA, Hybrid)
 - Lyapunov-based analysis and finite-time convergence proofs
 - Architecture diagrams (Mermaid flowcharts)
-- Comprehensive usage examples (45 total scenarios)
+- complete usage examples (45 total scenarios)
 
 Usage:
     python scripts/docs/enhance_controllers_algorithms_docs.py --dry-run
@@ -36,7 +36,7 @@ class AlgorithmsEnhancementStats:
 
 
 class AlgorithmsDocEnhancer:
-    """Enhances SMC algorithms documentation with comprehensive content."""
+    """Enhances SMC algorithms documentation with complete content."""
 
     # All 9 algorithm files to enhance (Week 9 Phase 2)
     ALGORITHM_FILES = {

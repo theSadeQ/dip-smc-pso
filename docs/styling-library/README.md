@@ -1,17 +1,17 @@
 # Documentation Styling Library This directory contains documentation styling templates and patterns inspired by the **react-bits-library** project, adapted for the DIP-SMC-PSO control systems framework.
 
-## 📁 Directory Structure ```
+##  Directory Structure ```
 
 docs/styling-library/
-├── README.md (this file)
-├── templates/ # Reusable documentation templates
-├── examples/ # Example adaptations for DIP project
-└── assets/ # Visual assets (badges, logos)
+ README.md (this file)
+ templates/ # Reusable documentation templates
+ examples/ # Example adaptations for DIP project
+ assets/ # Visual assets (badges, logos)
 ```
 
 ---
 
-## 🎨 Template Collection ### 1. **quick-start-template.md**
+##  Template Collection ### 1. **quick-start-template.md**
 **Purpose:** Create fast onboarding guides (< 5 minutes to productivity) **Key Features:**
 - Visual organization with emojis
 - "3 Ways to Use" structure
@@ -55,7 +55,7 @@ docs/styling-library/
 
 ---
 
-## 🚀 Usage Guide ### Step 1: Choose Template
+##  Usage Guide ### Step 1: Choose Template
 Select the template that matches your documentation goal:
 - **Learning path** → quick-start-template.md
 - **Quick reference** → cheat-sheet-template.md
@@ -67,14 +67,14 @@ Select the template that matches your documentation goal:
 3. Adapt examples for control systems domain
 4. Update section headers as needed ### Step 3: Apply Styling Patterns
 Use these visual patterns from react-bits:
-- **Emojis for navigation:** 🎛️ Controllers, 📊 Analysis, 🔧 Utils, ⚙️ Config
+- **Emojis for navigation:**  Controllers,  Analysis,  Utils,  Config
 - **Tables for parameters:** Component, Use-Case, Props columns
 - **Code blocks with context:** Always show before/after or usage example
 - **Progressive disclosure:** Overview → Details → Advanced
 
 ---
 
-## 📊 Styling Patterns ### Visual Hierarchy
+##  Styling Patterns ### Visual Hierarchy
 ```markdown
 # H1: Page Title (one per document)
 
@@ -105,15 +105,15 @@ from src.controllers import ClassicalSMC controller = ClassicalSMC(gains=[...]) 
 ``` ### Lists with Icons
 ```markdown
 
-✅ **Completed** - Feature implemented
-🚧 **In Progress** - Under development
-📋 **Planned** - Future enhancement
-❌ **Not Supported** - Out of scope
+ **Completed** - Feature implemented
+ **In Progress** - Under development
+ **Planned** - Future enhancement
+ **Not Supported** - Out of scope
 ```
 
 ---
 
-## 🎯 Examples (To Be Created) ### Example 1: Controller Quick Start
+##  Examples (To Be Created) ### Example 1: Controller Quick Start
 **Template:** quick-start-template.md
 **Target:** `docs/guides/controllers-quick-start.md` **Adaptation:**
 - Replace "115+ animated components" → "7 controller implementations"
@@ -132,7 +132,7 @@ from src.controllers import ClassicalSMC controller = ClassicalSMC(gains=[...]) 
 
 ---
 
-## 🎨 Visual Asset Guidelines ### Badges
+##  Visual Asset Guidelines ### Badges
 Store in `assets/badges/`:
 - **License badge**: MIT license indicator
 - **Build status**: CI/CD status
@@ -143,7 +143,7 @@ Store in `assets/badges/`:
 
 ---
 
-## 📝 Documentation Standards ### Writing Style
+##  Documentation Standards ### Writing Style
 1. **Conversational tone**: "You can..." not "One can..."
 2. **Active voice**: "Run the simulation" not "The simulation should be run"
 3. **Present tense**: "The controller computes" not "The controller will compute"
@@ -159,7 +159,7 @@ Implemented in `src/controllers/classical_smc.py:45-67`
 
 ---
 
-## 🔗 Resources **Inspiration:**
+##  Resources **Inspiration:**
 - [react-bits-library](https://github.com/davidhdev/react-bits) - Original styling source
 - [reactbits.dev](https://reactbits.dev/) - Live documentation example **DIP Project Docs:**
 - [Documentation Plan](../plans/documentation/README.md) - Overall documentation roadmap
@@ -167,7 +167,7 @@ Implemented in `src/controllers/classical_smc.py:45-67`
 
 ---
 
-## 📅 Maintenance **When to Update:**
+##  Maintenance **When to Update:**
 - Adding new controllers/modules → Update component-index
 - New user workflows → Create quick-start guide
 - Common questions → Add to cheat-sheet **Quality Checklist:**

@@ -11,17 +11,17 @@ from typing import Dict, List, Tuple
 
 # Define smart replacement rules
 COMPREHENSIVE_RULES = [
-    # Remove "comprehensive" when used as filler
+    # Remove "complete" when used as filler
     (r'\bcomprehensive\s+(?:documentation|framework|system|validation|testing|coverage)\b',
-     lambda m: m.group(0).replace('comprehensive ', '')),
+     lambda m: m.group(0).replace('complete ', '')),
 
-    # Keep "comprehensive" when backed by metrics
+    # Keep "complete" when backed by metrics
     (r'\bcomprehensive\s+(?:.*?(?:\d+%|\d+\.\d+))',
      lambda m: m.group(0)),  # Keep unchanged
 
-    # Special case: "Comprehensive" at start of sentence
-    (r'^Comprehensive\s+(?:documentation|framework|testing)',
-     lambda m: m.group(0).replace('Comprehensive ', ''),
+    # Special case: "complete" at start of sentence
+    (r'^complete\s+(?:documentation|framework|testing)',
+     lambda m: m.group(0).replace('complete ', ''),
      re.MULTILINE),
 ]
 
@@ -79,7 +79,7 @@ def revise_file(file_path: Path) -> Dict:
     original_content = content
     total_replacements = 0
 
-    # Apply comprehensive rules
+    # Apply complete rules
     for rule in COMPREHENSIVE_RULES:
         if len(rule) == 2:
             pattern, replacement = rule
@@ -103,7 +103,7 @@ def revise_file(file_path: Path) -> Dict:
 
     # Additional simple replacements
     simple_replacements = [
-        (r'\bcomprehensive\b', ''),  # Remove standalone "comprehensive"
+        (r'\bcomprehensive\b', ''),  # Remove standalone "complete"
         (r'\s{2,}', ' '),  # Clean up double spaces
     ]
 

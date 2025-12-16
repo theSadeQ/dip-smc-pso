@@ -40,12 +40,12 @@ def load_optimized_gains():
                     'chattering': chattering,
                     'timestamp': data.get('timestamp', 'unknown')
                 }
-                print(f"✓ Loaded {ctrl}: gains={gains}, chattering={chattering:.3f}")
+                print(f" Loaded {ctrl}: gains={gains}, chattering={chattering:.3f}")
             else:
-                print(f"✗ {ctrl}: No gains found in JSON")
+                print(f" {ctrl}: No gains found in JSON")
 
         except Exception as e:
-            print(f"✗ Error loading {ctrl}: {e}")
+            print(f" Error loading {ctrl}: {e}")
 
     return gains_data
 
@@ -54,7 +54,7 @@ def update_config(gains_data, dry_run=False):
     config_file = Path('config.yaml')
 
     if not config_file.exists():
-        print("✗ config.yaml not found!")
+        print(" config.yaml not found!")
         return False
 
     # Backup original
@@ -66,7 +66,7 @@ def update_config(gains_data, dry_run=False):
             with open(backup_file, 'w') as bf:
                 bf.write(f.read())
 
-        print(f"✓ Backup saved: {backup_file}")
+        print(f" Backup saved: {backup_file}")
 
     # Load config
     with open(config_file) as f:
@@ -109,7 +109,7 @@ def update_config(gains_data, dry_run=False):
         with open(config_file, 'w') as f:
             yaml.dump(config, f, default_flow_style=False, sort_keys=False)
 
-        print(f"\n✓ Updated config.yaml with {updated_count} controllers")
+        print(f"\n Updated config.yaml with {updated_count} controllers")
         return True
     else:
         print(f"\n[DRY RUN] Would update {updated_count} controllers")
@@ -138,7 +138,7 @@ def main():
     gains_data = load_optimized_gains()
 
     if not gains_data:
-        print("\n✗ No optimized gains found!")
+        print("\n No optimized gains found!")
         print("Make sure PSO optimization has completed and JSON files exist.")
         sys.exit(1)
 
@@ -153,7 +153,7 @@ def main():
 
     if success:
         if not args.dry_run:
-            print("\n✓✓✓ CONFIG UPDATE COMPLETE ✓✓✓")
+            print("\n CONFIG UPDATE COMPLETE ")
             print("\nNext steps:")
             print("1. Verify changes: git diff config.yaml")
             print("2. Test with updated config: python simulate.py --ctrl classical_smc")
@@ -164,7 +164,7 @@ def main():
 
         sys.exit(0)
     else:
-        print("\n✗ Config update failed")
+        print("\n Config update failed")
         sys.exit(1)
 
 if __name__ == '__main__':

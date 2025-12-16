@@ -51,16 +51,16 @@ This guide describes automatic deployment of Sphinx documentation to GitHub Page
 
 ```
 dip-smc-pso/
-├── .github/
-│   └── workflows/
-│       └── deploy-docs.yml  # GitHub Pages deployment workflow
-├── docs/
-│   ├── index.rst            # Sphinx homepage
-│   ├── conf.py              # Sphinx configuration
-│   ├── _static/             # CSS, JS, images
-│   └── ...                  # 873 documentation files
-├── requirements.txt         # Python dependencies (Sphinx, theme, extensions)
-└── README.md
+ .github/
+    workflows/
+        deploy-docs.yml  # GitHub Pages deployment workflow
+ docs/
+    index.rst            # Sphinx homepage
+    conf.py              # Sphinx configuration
+    _static/             # CSS, JS, images
+    ...                  # 873 documentation files
+ requirements.txt         # Python dependencies (Sphinx, theme, extensions)
+ README.md
 ```
 
 ### Sphinx Build Validation
@@ -204,7 +204,7 @@ jobs:
 | Source | Deploy from a branch |
 | Branch | `gh-pages` |
 | Folder | `/ (root)` |
-| Enforce HTTPS | ✓ (recommended) |
+| Enforce HTTPS |  (recommended) |
 | Custom domain | (optional) |
 
 ### Actions Permissions
@@ -217,7 +217,7 @@ jobs:
 |------------|---------|
 | Actions permissions | Allow all actions and reusable workflows |
 | Workflow permissions | Read and write permissions |
-| Allow GitHub Actions to create and approve pull requests | ✓ |
+| Allow GitHub Actions to create and approve pull requests |  |
 
 ---
 
@@ -227,7 +227,7 @@ jobs:
 
 1. Go to **Actions** tab
 2. Latest workflow run should show:
-   - ✓ Build Sphinx Documentation and Deploy to GitHub Pages
+   -  Build Sphinx Documentation and Deploy to GitHub Pages
    - Duration: ~3-5 minutes
    - Status: Success (green checkmark)
 
@@ -560,7 +560,7 @@ curl -I https://docs.dip-smc-pso.com
 
 1. **Check workflow status:**
    - Actions tab → Recent workflows
-   - All should show ✓ (green checkmark)
+   - All should show  (green checkmark)
 
 2. **Monitor deployment time:**
    - Expected: 3-5 minutes

@@ -204,7 +204,7 @@ print(f"Best fitness: {metrics.best_fitness:.3f}")
 Professional Particle Swarm Optimization algorithm.
 
 This implementation provides a modern, framework-integrated PSO algorithm
-with advanced features for control engineering applications.
+with features for control engineering applications.
 
 #### Source Code
 

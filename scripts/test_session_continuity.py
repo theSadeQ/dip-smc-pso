@@ -319,7 +319,7 @@ def main():
     try:
         schema_valid = validate_session_file_schema()
     except Exception as e:
-        print(f"❌ EXCEPTION - {e}")
+        print(f" EXCEPTION - {e}")
         schema_valid = False
 
     # Summary

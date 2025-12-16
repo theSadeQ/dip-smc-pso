@@ -31,6 +31,6 @@ detailed results and analysis, refer to: - **Production Readiness:** [production
 - Optimal chattering reduction ### Optimization Results PSO-based gain tuning provides:
 - Systematic parameter optimization
 - Multi-objective fitness optimization
-- Robust performance across initial conditions ### Future Work - Multi-threaded operation validation
+- reliable performance across initial conditions ### Future Work - Multi-threaded operation validation
 - HIL system integration testing
 - Extended validation scenarios For complete results with interactive visualizations, see the [benchmarks documentation](../../benchmarks/controller_performance_benchmarks.md).

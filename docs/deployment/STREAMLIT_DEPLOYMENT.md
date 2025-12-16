@@ -189,7 +189,7 @@ The app includes built-in health monitoring:
 import streamlit as st
 
 if st.sidebar.button("Health Check"):
-    st.success("✅ Application is running normally")
+    st.success(" Application is running normally")
     st.info(f"Cache size: {len(st.session_state)} items")
 ```
 

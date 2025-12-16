@@ -10,7 +10,7 @@ This section provides mathematical foundations for the sliding mode control stra
 
 ## SMC Control Theory
 
-Comprehensive mathematical foundations for all sliding mode control variants.
+complete mathematical foundations for all sliding mode control variants.
 
 ```{toctree}
 :maxdepth: 2
@@ -73,10 +73,10 @@ algorithm_fixes_summary
 - **Sensor Requirements**: Measurement quality needed
 - **Tuning Difficulty**: PSO convergence and parameter ranges ### Decision Matrices: **Performance vs Complexity:** | Controller | Performance | Complexity | Overall Score |
 |-----------|-------------|------------|---------------|
-| Classical SMC | ★★★☆☆ | ★★★★★ | 4.0/5 |
-| Adaptive SMC | ★★★★☆ | ★★★☆☆ | 3.5/5 |
-| Super-Twisting SMC | ★★★★☆ | ★★★★☆ | 4.5/5 |
-| Hybrid Adaptive-STA | ★★★★★ | ★★☆☆☆ | 4.0/5 |
+| Classical SMC |  |  | 4.0/5 |
+| Adaptive SMC |  |  | 3.5/5 |
+| Super-Twisting SMC |  |  | 4.5/5 |
+| Hybrid Adaptive-STA |  |  | 4.0/5 |
 
 ---
 

@@ -8,13 +8,13 @@
 
 You've seen how Classical S-M-C initializes: validating gains, unpacking them into meaningful names, and storing parameters. Now comes the main event: the compute underscore control method. This is where theory becomes code, where mathematical equations turn into numerical operations that run sixty times per second to keep pendulums balanced.
 
-Think of this like watching a chef cook. You know the ingredients (gains, state), you know the recipe (control law), and now you'll see the actual technique: how to extract state variables, compute sliding surfaces, combine equivalent and switching control, and apply saturation.
+Think of this like watching a chef cook. You know the ingredients (gains, state), you know the recipe (control law), and now the system will see the actual technique: how to extract state variables, compute sliding surfaces, combine equivalent and switching control, and apply saturation.
 
-By the end of this episode, you'll understand every line of the control law implementation.
+By the end of this episode, the system will understand every line of the control law implementation.
 
 ## What You'll Discover
 
-In this episode, you'll learn:
+In this episode, the system will learn:
 - How the compute underscore control method signature matches the interface
 - State extraction: unpacking the 6-element state vector into named variables
 - Sliding surface definition: s1 equals theta1 plus k1 times theta1 underscore dot
@@ -158,7 +158,7 @@ This is a first-order stable system. If theta is positive, theta underscore dot 
 
 ## Recap: Core Concepts So Far
 
-Let's recap what we've covered.
+recap what we've covered.
 
 **Method Signature**: Matches ControllerInterface's abstract method. Takes state and d-t, returns float.
 
@@ -307,7 +307,7 @@ For analysis and plotting. You can compare different controllers by plotting the
 
 ## Recap: Complete Control Law
 
-Let's recap the entire compute underscore control method.
+recap the entire compute underscore control method.
 
 **Step 1: Extract state variables** into named variables for readability.
 
@@ -340,7 +340,7 @@ Here are the technical terms from this episode with phonetic pronunciations:
 
 ## What's Next
 
-In Episode 9, we'll dive deeper into the mathematics behind the control law. You'll understand why the sliding surface is defined as s equals theta plus k times theta underscore dot, what equivalent control means theoretically, how the boundary layer trades off chattering versus convergence, and why helper methods like reset and get underscore gains exist.
+In Episode 9, this will dive deeper into the mathematics behind the control law. You'll understand why the sliding surface is defined as s equals theta plus k times theta underscore dot, what equivalent control means theoretically, how the boundary layer trades off chattering versus convergence, and why helper methods like reset and get underscore gains exist.
 
 Here's a preview question: What happens on the sliding surface? How does the system behave when s equals 0? We'll answer this with phase space analysis next episode.
 
@@ -356,7 +356,7 @@ Before moving to Episode 9, ask yourself these questions:
 
 If you can answer these confidently, you're ready to proceed. If anything is unclear, open classical underscore s-m-c dot p-y and trace through the compute underscore control method line by line, annotating what each operation does.
 
-**Excellent progress! You've decoded the control law. Let's continue!**
+**Excellent progress! You've decoded the control law. continue!**
 
 ---
 

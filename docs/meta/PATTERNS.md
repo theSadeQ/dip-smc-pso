@@ -15,7 +15,7 @@
 
 ---
 
-## Design Patterns (Gang of Four) All classical design patterns are attributed to: > **Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994).** *Design Patterns: Elements of Reusable Object-Oriented Software.* Addison-Wesley Professional. ### 1. Factory Pattern ⭐ **PRIMARY PATTERN** **Usage:** 102+ files across the codebase
+## Design Patterns (Gang of Four) All classical design patterns are attributed to: > **Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994).** *Design Patterns: Elements of Reusable Object-Oriented Software.* Addison-Wesley Professional. ### 1. Factory Pattern  **PRIMARY PATTERN** **Usage:** 102+ files across the codebase
 
 **Core Implementation:** `src/controllers/factory.py` #### What It Is The Factory Pattern provides an interface for creating objects without specifying their exact classes. It encapsulates object creation logic and allows clients to create instances through a common interface. #### Why We Use It Controller instantiation requires complex configuration handling, parameter validation, and dependency injection. The Factory Pattern centralizes this complexity and provides:
 - **Type safety:** Single entry point ensures consistent object creation
@@ -37,12 +37,12 @@ controller = create_controller('adaptive_smc', config=app_config, gains=optimize
 # runnable: false # Controller registry with metadata (lines 181-218)
 CONTROLLER_REGISTRY = { 'classical_smc': { 'class': ClassicalSMC, 'config_class': ClassicalSMCConfig, 'default_gains': [20.0, 15.0, 12.0, 8.0, 35.0, 5.0], 'gain_count': 6, 'description': 'Classical sliding mode controller with boundary layer', 'supports_dynamics': True, 'required_params': ['gains', 'max_force', 'boundary_layer'] }, 'sta_smc': { ... }, 'adaptive_smc': { ... }, 'hybrid_adaptive_sta_smc': { ... }
 }
-``` #### Benefits Realized ✅ **102+ instantiation points** use standardized interface
+``` #### Benefits Realized  **102+ instantiation points** use standardized interface
 
-✅ **Thread-safe** with `threading.RLock()` protection
-✅ **Type-safe** with validation
-✅ **Extensible** via registry-based design
-✅ **PSO-optimized** with specialized wrappers (`PSOControllerWrapper`) **Files Using Factory:**
+ **Thread-safe** with `threading.RLock()` protection
+ **Type-safe** with validation
+ **Extensible** via registry-based design
+ **PSO-optimized** with specialized wrappers (`PSOControllerWrapper`) **Files Using Factory:**
 - `simulate.py` - CLI controller instantiation
 - `streamlit_app.py` - Web UI controller creation
 - `src/optimization/algorithms/pso_optimizer.py` - PSO tuning workflows
@@ -118,16 +118,16 @@ optimizer.optimize(pso_compatible.compute_control)
 ---
 
 ## 5. Singleton Pattern **Usage:** 0 files (deliberately avoided) #### Why Not Used While common in many codebases, the Singleton pattern is **deliberately avoided** in this project due to:
-- ❌ **Testing difficulties:** Global state hinders unit testing
-- ❌ **Thread safety concerns:** Singleton introduces concurrency challenges
-- ❌ **Tight coupling:** Global access creates hidden dependencies **Alternative Approaches:**
+-  **Testing difficulties:** Global state hinders unit testing
+-  **Thread safety concerns:** Singleton introduces concurrency challenges
+-  **Tight coupling:** Global access creates hidden dependencies **Alternative Approaches:**
 - **Dependency Injection:** Pass shared objects explicitly
 - **Factory with caching:** Registry-based factories for shared instances
 - **Module-level constants:** Immutable configuration at module level
 
 ---
 
-## Architectural Patterns These patterns are from broader software architecture literature beyond GoF. ### 1. Composition Over Inheritance ⭐ **Source:** *Design Patterns* (Gamma et al., 1994) + *Effective Python* (Slatkin, 2019) **Usage:** Modular SMC architecture throughout `src/controllers/smc/algorithms/` #### What It Is Favor object composition (building complex objects from simpler ones) over class inheritance hierarchies. #### Why We Use It Sliding mode controllers have complex behaviors that are better composed from focused modules than inherited from a deep class hierarchy:
+## Architectural Patterns These patterns are from broader software architecture literature beyond GoF. ### 1. Composition Over Inheritance  **Source:** *Design Patterns* (Gamma et al., 1994) + *Effective Python* (Slatkin, 2019) **Usage:** Modular SMC architecture throughout `src/controllers/smc/algorithms/` #### What It Is Favor object composition (building complex objects from simpler ones) over class inheritance hierarchies. #### Why We Use It Sliding mode controllers have complex behaviors that are better composed from focused modules than inherited from a deep class hierarchy:
 - **Sliding surface computation** (different surfaces for different systems)
 - **Switching functions** (sign, tanh, boundary layer variations)
 - **Adaptation laws** (gain adaptation, uncertainty estimation)
@@ -138,33 +138,33 @@ class AdaptiveSMC(BaseSMC): def compute_control(self, state): # 427 lines of mon
 class ModularAdaptiveSMC: """Adaptive SMC using composed components.""" def __init__(self, config: AdaptiveSMCConfig): # Compose from focused modules self.surface = LinearSlidingSurface(config.k1, config.k2, config.lam1, config.lam2) self.adaptation = AdaptationLaw(config.gamma, config.leak_rate) self.estimator = UncertaintyEstimator(config.K_min, config.K_max) self.switching = SwitchingFunction(method='boundary_layer', epsilon=config.boundary_layer) def compute_control(self, state): """Compute control using composed modules.""" # Each module is independently testable s = self.surface.compute(state) K_adapted = self.adaptation.update(s, self.K_current) uncertainty = self.estimator.estimate(state, s) u_switch = self.switching.compute(s, K_adapted) return u_switch
 ``` **Benefits:**
 
-- ✅ **Testability:** Each module tested independently (>95% coverage achieved)
-- ✅ **Reusability:** Modules shared across controller types
-- ✅ **Maintainability:** 427-line monolith → 4 focused modules (<100 lines each)
-- ✅ **Extensibility:** New modules added without modifying existing code **Composed Modules:**
+-  **Testability:** Each module tested independently (>95% coverage achieved)
+-  **Reusability:** Modules shared across controller types
+-  **Maintainability:** 427-line monolith → 4 focused modules (<100 lines each)
+-  **Extensibility:** New modules added without modifying existing code **Composed Modules:**
 ```
 src/controllers/smc/
-├── core/
-│ ├── switching_functions.py # 6 switching methods
-│ ├── sliding_surfaces.py # Surface computation
-│ ├── equivalent_control.py # Equivalent control term
-│ └── gain_validation.py # Gain validation utilities
-└── algorithms/ ├── adaptive/ │ ├── adaptation_law.py # Online gain adaptation │ ├── parameter_estimation.py # Uncertainty estimation │ └── controller.py # Composed controller └── ...
+ core/
+  switching_functions.py # 6 switching methods
+  sliding_surfaces.py # Surface computation
+  equivalent_control.py # Equivalent control term
+  gain_validation.py # Gain validation utilities
+ algorithms/  adaptive/   adaptation_law.py # Online gain adaptation   parameter_estimation.py # Uncertainty estimation   controller.py # Composed controller  ...
 ```
 
 ---
 
 ## 2. Dependency Injection **Source:** *Dependency Injection in .NET* (Seemann, 2011) + Python community practices **Usage:** Throughout codebase, especially controller-dynamics coupling #### What It Is Dependencies are provided to objects from external sources rather than created internally, enabling loose coupling and testability. #### Why We Use It Controllers need plant dynamics models, but hardcoding this coupling would:
 
-- ❌ Prevent testing with mock dynamics
-- ❌ Prevent using different dynamics models
-- ❌ Prevent dependency-free controller instantiation #### Implementation Example ```python
+-  Prevent testing with mock dynamics
+-  Prevent using different dynamics models
+-  Prevent dependency-free controller instantiation #### Implementation Example ```python
 # example-metadata:
 
 # runnable: false # BAD: Tight coupling (hardcoded dependency)
 
-class ClassicalSMC: def __init__(self, gains): self.gains = gains self.dynamics = DIPDynamics() # ❌ Hardcoded dependency def compute_control(self, state): # Can't test without real dynamics dynamics_info = self.dynamics.compute(state, u=0) # GOOD: Dependency Injection
-class ClassicalSMC: def __init__(self, gains, dynamics_model=None): # ✅ Injected dependency self.gains = gains self._dynamics_ref = weakref.ref(dynamics_model) if dynamics_model else None def compute_control(self, state): if self._dynamics_ref: dynamics = self._dynamics_ref() # Use injected dynamics # Controller logic works with or without dynamics
+class ClassicalSMC: def __init__(self, gains): self.gains = gains self.dynamics = DIPDynamics() #  Hardcoded dependency def compute_control(self, state): # Can't test without real dynamics dynamics_info = self.dynamics.compute(state, u=0) # GOOD: Dependency Injection
+class ClassicalSMC: def __init__(self, gains, dynamics_model=None): #  Injected dependency self.gains = gains self._dynamics_ref = weakref.ref(dynamics_model) if dynamics_model else None def compute_control(self, state): if self._dynamics_ref: dynamics = self._dynamics_ref() # Use injected dynamics # Controller logic works with or without dynamics
 ``` **Usage in Factory:**
 ```python
 # example-metadata:
@@ -172,9 +172,9 @@ class ClassicalSMC: def __init__(self, gains, dynamics_model=None): # ✅ Inject
 # runnable: false # src/controllers/factory.py (lines 569-580) def create_controller(controller_type: str, config: Optional[Any] = None): # Create dynamics model from config dynamics_model = None if config is not None and hasattr(config, 'physics'): dynamics_model = DIPDynamics(config.physics) # Inject dynamics into controller if dynamics_model is not None: config_params['dynamics_model'] = dynamics_model return controller_class(**config_params)
 
 ``` **Benefits:**
-- ✅ **Testability:** Controllers tested with mock dynamics objects
-- ✅ **Flexibility:** Same controller works with multiple plant models
-- ✅ **Decoupling:** Controller code independent of dynamics implementation **Injected Dependencies:**
+-  **Testability:** Controllers tested with mock dynamics objects
+-  **Flexibility:** Same controller works with multiple plant models
+-  **Decoupling:** Controller code independent of dynamics implementation **Injected Dependencies:**
 - `DIPDynamics` → Controllers (plant dynamics)
 - `Config` → Factory (configuration objects)
 - `Logger` → All modules (logging infrastructure)
@@ -184,26 +184,26 @@ class ClassicalSMC: def __init__(self, gains, dynamics_model=None): # ✅ Inject
 
 ## 3. Separation of Concerns **Source:** Dijkstra, E. W. (1982). "On the role of scientific thought." *Selected Writings on Computing: A Personal Perspective.* **Usage:** Clean module boundaries throughout `src/` #### What It Is Different concerns (controller logic, simulation, optimization, analysis) are separated into distinct modules with minimal overlap. #### Directory Structure ```
 src/
-├── controllers/ # Control algorithms ONLY
-│ ├── smc/ # Sliding mode control
-│ ├── mpc/ # Model predictive control
-│ └── factory.py # Controller instantiation
-├── core/ # Simulation engine ONLY
-│ ├── dynamics.py # Plant dynamics
-│ └── simulation_runner.py
-├── optimization/ # Optimization algorithms ONLY
-│ ├── algorithms/ # PSO, genetic, differential evolution
-│ └── objectives/ # Fitness functions
-├── analysis/ # Post-analysis ONLY
-│ ├── performance/ # Performance metrics
-│ └── visualization/ # Plotting utilities
-└── utils/ # Shared utilities ONLY ├── validation/ # Parameter validation └── monitoring/ # Real-time monitoring
+ controllers/ # Control algorithms ONLY
+  smc/ # Sliding mode control
+  mpc/ # Model predictive control
+  factory.py # Controller instantiation
+ core/ # Simulation engine ONLY
+  dynamics.py # Plant dynamics
+  simulation_runner.py
+ optimization/ # Optimization algorithms ONLY
+  algorithms/ # PSO, genetic, differential evolution
+  objectives/ # Fitness functions
+ analysis/ # Post-analysis ONLY
+  performance/ # Performance metrics
+  visualization/ # Plotting utilities
+ utils/ # Shared utilities ONLY  validation/ # Parameter validation  monitoring/ # Real-time monitoring
 ``` **Principle:**
 
-- ✅ **Controller code** doesn't know about plotting
-- ✅ **Optimization code** doesn't know about real-time simulation
-- ✅ **Analysis code** doesn't modify controller behavior
-- ✅ **Each module** has single, well-defined responsibility
+-  **Controller code** doesn't know about plotting
+-  **Optimization code** doesn't know about real-time simulation
+-  **Analysis code** doesn't modify controller behavior
+-  **Each module** has single, well-defined responsibility
 
 ---
 
@@ -214,18 +214,18 @@ src/
 # runnable: false # src/controllers/factory.py (lines 114-134) class ControllerProtocol(Protocol): """Minimal controller interface - only essential methods.""" def compute_control(self, state: StateVector, last_control: float, history: ConfigDict) -> ControlOutput: """Compute control output for given state.""" ... def reset(self) -> None: """Reset controller internal state.""" ... @property def gains(self) -> List[float]: """Return controller gains.""" ...
 
 ``` **Why Small Interfaces:**
-- ❌ **Large interface problem:** If interface has 20 methods, every controller must implement all 20
-- ✅ **Small interface solution:** Core interface has 3 methods, optional features in separate protocols **Additional Protocols:**
+-  **Large interface problem:** If interface has 20 methods, every controller must implement all 20
+-  **Small interface solution:** Core interface has 3 methods, optional features in separate protocols **Additional Protocols:**
 ```python
 # example-metadata:
 
-# runnable: false # Optional protocols for advanced features
+# runnable: false # Optional protocols for features
 
 class DynamicsAwareController(Protocol): """Protocol for controllers that use plant dynamics.""" def set_dynamics(self, dynamics: DIPDynamics) -> None: ... class AdaptiveController(Protocol): """Protocol for controllers with online adaptation.""" def get_adapted_gains(self) -> List[float]: ... def reset_adaptation(self) -> None: ... class ObservableController(Protocol): """Protocol for controllers that provide internal state.""" def get_internal_state(self) -> Dict[str, Any]: ...
 ``` **Benefits:**
-- ✅ **Lean implementations:** Controllers only implement what they need
-- ✅ **Flexibility:** New controllers don't need all features
-- ✅ **Type safety:** Protocol-based static checking
+-  **Lean implementations:** Controllers only implement what they need
+-  **Flexibility:** New controllers don't need all features
+-  **Type safety:** Protocol-based static checking
 
 ---
 
@@ -265,10 +265,10 @@ GainsArray = Union[List[float], NDArray[np.float64]]
 ConfigDict = Dict[str, Any] def create_controller(controller_type: str, config: Optional[Any] = None, gains: Optional[GainsArray] = None) -> ControllerProtocol: """Type-safe controller instantiation.""" ...
 ``` **Benefits:**
 
-- ✅ Static type checking with `mypy`
-- ✅ IDE autocomplete and inline documentation
-- ✅ Self-documenting code
-- ✅ Early error detection
+-  Static type checking with `mypy`
+-  IDE autocomplete and inline documentation
+-  Self-documenting code
+-  Early error detection
 
 ---
 
@@ -279,9 +279,9 @@ ConfigDict = Dict[str, Any] def create_controller(controller_type: str, config: 
 # runnable: false # src/simulation/engines/vector_sim.py def run_batch_simulation(controller, dynamics, initial_conditions_batch, dt=0.001): """Vectorized batch simulation - process 1000 simulations simultaneously.""" n_simulations = initial_conditions_batch.shape[0] n_steps = int(T / dt) # Allocate batch arrays (vectorized storage) states_batch = np.zeros((n_simulations, n_steps, 6)) # 1000 x 10000 x 6 controls_batch = np.zeros((n_simulations, n_steps)) states_batch[:, 0, :] = initial_conditions_batch for i in range(1, n_steps): # Vectorized control computation (1000 controllers at once) controls_batch[:, i] = controller.compute_control_batch(states_batch[:, i-1, :]) # Vectorized dynamics integration (1000 integrations at once) states_batch[:, i, :] = dynamics.step_batch(states_batch[:, i-1, :], controls_batch[:, i], dt) return states_batch, controls_batch
 
 ``` **Performance:**
-- ✅ **100× speedup** vs. loop-based simulation
-- ✅ **Cache-efficient** memory access patterns
-- ✅ **SIMD instructions** via NumPy's C backend
+-  **100× speedup** vs. loop-based simulation
+-  **Cache-efficient** memory access patterns
+-  **SIMD instructions** via NumPy's C backend
 
 ---
 
@@ -290,9 +290,9 @@ from numba import jit @jit(nopython=True, cache=True)
 def compute_sliding_surface_batch(states, k1, k2, lam1, lam2): """JIT-compiled sliding surface computation (1000× faster).""" n = states.shape[0] surfaces = np.zeros(n) for i in range(n): x, x_dot, theta1, theta1_dot, theta2, theta2_dot = states[i] surfaces[i] = (k1 * x + lam1 * x_dot + k2 * theta1 + lam2 * theta1_dot) return surfaces
 ``` **Performance:**
 
-- ✅ **1000× speedup** vs. pure Python
-- ✅ **Native machine code** generated at first call
-- ✅ **Cached compilation** for subsequent runs
+-  **1000× speedup** vs. pure Python
+-  **Native machine code** generated at first call
+-  **Cached compilation** for subsequent runs
 
 ---
 
@@ -381,26 +381,26 @@ set_global_seed(42) # Ensures reproducible results
 
 ---
 
-## Pattern Selection Guidelines ### When to Use Factory Pattern ✅ **Use when:**
+## Pattern Selection Guidelines ### When to Use Factory Pattern  **Use when:**
 
 - Multiple related classes need instantiation
 - Complex initialization logic (validation, configuration)
 - Want to centralize object creation
-- Need to swap implementations at runtime ❌ **Don't use when:**
+- Need to swap implementations at runtime  **Don't use when:**
 - Simple, one-off object creation
 - No shared initialization logic
-- Adds unnecessary complexity ### When to Use Strategy Pattern ✅ **Use when:**
+- Adds unnecessary complexity ### When to Use Strategy Pattern  **Use when:**
 - Multiple algorithms for same problem
 - Need to swap algorithms at runtime
 - Clients shouldn't know algorithm details
-- Want to test algorithms independently ❌ **Don't use when:**
+- Want to test algorithms independently  **Don't use when:**
 - Only one algorithm exists
 - Algorithm unlikely to change
-- Overhead of interface not justified ### When to Use Composition Over Inheritance ✅ **Use when:**
+- Overhead of interface not justified ### When to Use Composition Over Inheritance  **Use when:**
 - Multiple independent behaviors need combination
 - Want to change behavior at runtime
 - Deep inheritance hierarchies cause brittleness
-- Want independent testing of components ❌ **Don't use when:**
+- Want independent testing of components  **Don't use when:**
 - Clear "is-a" relationship (inheritance appropriate)
 - Shared implementation across many classes
 - Composition adds boilerplate without benefit

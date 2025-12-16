@@ -14,24 +14,24 @@ This document defines the testing standards for the DIP SMC PSO project, ensurin
 
 ```
 tests/
-├── conftest.py # Global test configuration and fixtures
-├── test_controllers/ # Controller-specific unit tests
-│ ├── conftest.py # Controller test fixtures
-│ ├── test_classical_smc.py # Classical SMC unit tests
-│ ├── test_adaptive_smc.py # Adaptive SMC unit tests
-│ ├── test_sta_smc.py # Super-twisting SMC unit tests
-│ └── test_hybrid_adaptive_sta_smc.py # Hybrid SMC unit tests
-├── test_core/ # Core simulation engine tests
-│ ├── test_dynamics.py # Dynamics model validation
-│ ├── test_simulation_runner.py # Simulation orchestration tests
-│ └── test_vector_sim.py # Batch simulation tests
-├── test_optimizer/ # PSO optimization tests
-│ └── test_pso_optimizer.py # PSO algorithm validation
-├── test_benchmarks/ # Performance and scientific validation
-│ ├── test_statistical_benchmarks.py # Statistical analysis validation
-│ ├── test_integration_accuracy.py # Numerical integration accuracy
-│ └── test_modular_framework.py # Framework component tests
-└── test_integration/ # End-to-end integration tests ├── test_cli_workflows.py # CLI application workflows ├── test_hil_system.py # Hardware-in-the-loop tests └── test_pso_workflows.py # PSO optimization workflows
+ conftest.py # Global test configuration and fixtures
+ test_controllers/ # Controller-specific unit tests
+  conftest.py # Controller test fixtures
+  test_classical_smc.py # Classical SMC unit tests
+  test_adaptive_smc.py # Adaptive SMC unit tests
+  test_sta_smc.py # Super-twisting SMC unit tests
+  test_hybrid_adaptive_sta_smc.py # Hybrid SMC unit tests
+ test_core/ # Core simulation engine tests
+  test_dynamics.py # Dynamics model validation
+  test_simulation_runner.py # Simulation orchestration tests
+  test_vector_sim.py # Batch simulation tests
+ test_optimizer/ # PSO optimization tests
+  test_pso_optimizer.py # PSO algorithm validation
+ test_benchmarks/ # Performance and scientific validation
+  test_statistical_benchmarks.py # Statistical analysis validation
+  test_integration_accuracy.py # Numerical integration accuracy
+  test_modular_framework.py # Framework component tests
+ test_integration/ # End-to-end integration tests  test_cli_workflows.py # CLI application workflows  test_hil_system.py # Hardware-in-the-loop tests  test_pso_workflows.py # PSO optimization workflows
 ``` ### Naming Conventions #### Test Files
 - **Pattern**: `test_<module_name>.py`
 - **Location**: Mirror source structure under `tests/`

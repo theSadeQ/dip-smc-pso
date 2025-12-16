@@ -55,14 +55,14 @@
 #!/bin/bash
 # scripts/independent_quality_gates.sh
 
-# Automated independent quality gate execution set -e echo "🔒 Starting Independent Quality Gate Validation..." # Create results directory with timestamp
+# Automated independent quality gate execution set -e echo " Starting Independent Quality Gate Validation..." # Create results directory with timestamp
 
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 RESULTS_DIR="validation/quality_gates/$TIMESTAMP"
 mkdir -p "$RESULTS_DIR" # Function to run validation path independently
-run_validation_path() { local path_name=$1 local timeout=${2:-600} echo "🔍 Executing $path_name validation..." # Run with timeout and capture exit code timeout $timeout python scripts/validate_${path_name}.py \ --output-dir "$RESULTS_DIR" \ --enable-failure-tolerance \ || echo "⚠️ $path_name validation completed with issues"
+run_validation_path() { local path_name=$1 local timeout=${2:-600} echo " Executing $path_name validation..." # Run with timeout and capture exit code timeout $timeout python scripts/validate_${path_name}.py \ --output-dir "$RESULTS_DIR" \ --enable-failure-tolerance \ || echo " $path_name validation completed with issues"
 } # Execute all validation paths in parallel
-echo "🚀 Launching parallel validation paths..." run_validation_path "coverage" 600 &
+echo " Launching parallel validation paths..." run_validation_path "coverage" 600 &
 COVERAGE_PID=$! run_validation_path "mathematical" 300 &
 MATHEMATICAL_PID=$! run_validation_path "performance" 450 &
 PERFORMANCE_PID=$! run_validation_path "compliance" 180 &
@@ -71,21 +71,21 @@ echo "⏳ Waiting for validation paths to complete..." wait $COVERAGE_PID
 COVERAGE_EXIT=$? wait $MATHEMATICAL_PID
 MATHEMATICAL_EXIT=$? wait $PERFORMANCE_PID
 PERFORMANCE_EXIT=$? wait $COMPLIANCE_PID
-COMPLIANCE_EXIT=$? echo "📊 Consolidating validation results..." # Generate consolidated report with failure tolerance
+COMPLIANCE_EXIT=$? echo " Consolidating validation results..." # Generate consolidated report with failure tolerance
 python scripts/consolidate_quality_gate_results.py \ --input-dir "$RESULTS_DIR" \ --output "$RESULTS_DIR/consolidated_quality_gate_report.json" \ --enable-partial-success-reporting \ --enable-deployment-decision # Extract deployment decision
 DEPLOYMENT_DECISION=$(python -c "
 import json
 with open('$RESULTS_DIR/consolidated_quality_gate_report.json') as f: report = json.load(f)
 print(report['deployment_decision']['decision'])
-") echo "🎯 Quality Gate Results Summary:"
-echo " Coverage Validation: $([ $COVERAGE_EXIT -eq 0 ] && echo '✅ PASSED' || echo '⚠️ PARTIAL')"
-echo " Mathematical Validation: $([ $MATHEMATICAL_EXIT -eq 0 ] && echo '✅ PASSED' || echo '⚠️ PARTIAL')"
-echo " Performance Validation: $([ $PERFORMANCE_EXIT -eq 0 ] && echo '✅ PASSED' || echo '⚠️ PARTIAL')"
-echo " Compliance Validation: $([ $COMPLIANCE_EXIT -eq 0 ] && echo '✅ PASSED' || echo '⚠️ PARTIAL')"
+") echo " Quality Gate Results Summary:"
+echo " Coverage Validation: $([ $COVERAGE_EXIT -eq 0 ] && echo ' PASSED' || echo ' PARTIAL')"
+echo " Mathematical Validation: $([ $MATHEMATICAL_EXIT -eq 0 ] && echo ' PASSED' || echo ' PARTIAL')"
+echo " Performance Validation: $([ $PERFORMANCE_EXIT -eq 0 ] && echo ' PASSED' || echo ' PARTIAL')"
+echo " Compliance Validation: $([ $COMPLIANCE_EXIT -eq 0 ] && echo ' PASSED' || echo ' PARTIAL')"
 echo ""
-echo "🚀 Deployment Decision: $DEPLOYMENT_DECISION" # Copy results to standard location
-cp "$RESULTS_DIR/consolidated_quality_gate_report.json" "validation/latest_quality_gate_report.json" echo "✅ Independent Quality Gate validation complete."
-echo "📁 Results available in: $RESULTS_DIR" # Exit with appropriate code for CI systems
+echo " Deployment Decision: $DEPLOYMENT_DECISION" # Copy results to standard location
+cp "$RESULTS_DIR/consolidated_quality_gate_report.json" "validation/latest_quality_gate_report.json" echo " Independent Quality Gate validation complete."
+echo " Results available in: $RESULTS_DIR" # Exit with appropriate code for CI systems
 if [ "$DEPLOYMENT_DECISION" = "approved" ] || [ "$DEPLOYMENT_DECISION" = "conditional_approval" ]; then exit 0
 else exit 1
 fi

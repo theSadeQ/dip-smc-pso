@@ -223,30 +223,30 @@ python simulate.py --ctrl classical_smc --plot
 ## File Locations Reference ```
 
 project_root/
-├── simulate.py # Main CLI
-├── streamlit_app.py # Web UI
-├── config.yaml # Main configuration
-├── requirements.txt # Dependencies
-│
-├── src/ # Source code
-│ ├── controllers/ # Controller implementations
-│ │ ├── factory/ # Factory system
-│ │ ├── smc/ # 4 core SMC controllers
-│ │ ├── specialized/ # Specialized controllers
-│ │ └── mpc/ # MPC (experimental)
-│ ├── core/ # Simulation engine
-│ ├── optimizer/ # PSO implementation
-│ └── utils/ # Utilities
-│
-├── tests/ # Test suite
-│ ├── test_controllers/ # Controller tests
-│ ├── test_core/ # Simulation tests
-│ └── test_optimizer/ # PSO tests
-│
-├── docs/ # Documentation
-│ └── guides/ # This directory
-│
-└── scripts/ # Utility scripts └── validate_documentation.py
+ simulate.py # Main CLI
+ streamlit_app.py # Web UI
+ config.yaml # Main configuration
+ requirements.txt # Dependencies
+
+ src/ # Source code
+  controllers/ # Controller implementations
+   factory/ # Factory system
+   smc/ # 4 core SMC controllers
+   specialized/ # Specialized controllers
+   mpc/ # MPC (experimental)
+  core/ # Simulation engine
+  optimizer/ # PSO implementation
+  utils/ # Utilities
+
+ tests/ # Test suite
+  test_controllers/ # Controller tests
+  test_core/ # Simulation tests
+  test_optimizer/ # PSO tests
+
+ docs/ # Documentation
+  guides/ # This directory
+
+ scripts/ # Utility scripts  validate_documentation.py
 ```
 
 ---

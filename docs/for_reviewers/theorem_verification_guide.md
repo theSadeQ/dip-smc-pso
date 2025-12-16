@@ -44,17 +44,17 @@ This guide shows how to systematically verify the accuracy and consistency of th
 
 | ID | Theorem Summary | File | Citations | Status |
 |----|----------------|------|-----------|--------|
-| [001](#formal-theorem-001) | Hysteresis prevents oscillation | fdi.py | 3 | ✅ VERIFIED |
-| [004](#formal-theorem-004) | PSO ensures global asymptotic stability | pso_optimization_complete.md | 3 | ⚠️ MINOR |
-| [005](#formal-theorem-005) | PSO maintains Lyapunov stability | lyapunov_stability_analysis.md | 3 | ✅ VERIFIED |
-| [008](#formal-theorem-008) | PSO particle convergence | pso_optimization_complete.md | 3 | ✅ VERIFIED |
-| [010](#formal-theorem-010) | PSO global convergence (unimodal) | pso_optimization_complete.md | 3 | ✅ VERIFIED |
-| [016](#formal-theorem-016) | Sliding surface exponential stability | smc_theory_complete.md | 3 | ✅ VERIFIED |
-| [019](#formal-theorem-019) | Finite-time reaching condition | smc_theory_complete.md | 3 | ✅ VERIFIED |
-| [020](#formal-theorem-020) | Classical SMC global convergence | smc_theory_complete.md | 3 | ✅ VERIFIED |
-| [021](#formal-theorem-021) | Super-twisting finite-time convergence | smc_theory_complete.md | 3 | ✅ VERIFIED |
-| [022](#formal-theorem-022) | Adaptive SMC stability | smc_theory_complete.md | 2 | ✅ VERIFIED |
-| [023](#formal-theorem-023) | Boundary layer tracking error bound | smc_theory_complete.md | 3 | ✅ VERIFIED |
+| [001](#formal-theorem-001) | Hysteresis prevents oscillation | fdi.py | 3 |  VERIFIED |
+| [004](#formal-theorem-004) | PSO ensures global asymptotic stability | pso_optimization_complete.md | 3 |  MINOR |
+| [005](#formal-theorem-005) | PSO maintains Lyapunov stability | lyapunov_stability_analysis.md | 3 |  VERIFIED |
+| [008](#formal-theorem-008) | PSO particle convergence | pso_optimization_complete.md | 3 |  VERIFIED |
+| [010](#formal-theorem-010) | PSO global convergence (unimodal) | pso_optimization_complete.md | 3 |  VERIFIED |
+| [016](#formal-theorem-016) | Sliding surface exponential stability | smc_theory_complete.md | 3 |  VERIFIED |
+| [019](#formal-theorem-019) | Finite-time reaching condition | smc_theory_complete.md | 3 |  VERIFIED |
+| [020](#formal-theorem-020) | Classical SMC global convergence | smc_theory_complete.md | 3 |  VERIFIED |
+| [021](#formal-theorem-021) | Super-twisting finite-time convergence | smc_theory_complete.md | 3 |  VERIFIED |
+| [022](#formal-theorem-022) | Adaptive SMC stability | smc_theory_complete.md | 2 |  VERIFIED |
+| [023](#formal-theorem-023) | Boundary layer tracking error bound | smc_theory_complete.md | 3 |  VERIFIED |
 
 **Overall Assessment:** Mean accuracy 99.1% (see `.artifacts/accuracy_audit.md`)
 
@@ -103,7 +103,7 @@ with convergence rates determined by $c_i$
 
 *Proof*: The characteristic polynomial of each error component is
 $s + c_i = 0$, yielding eigenvalues $\lambda_i = -c_i < 0$ for
-$c_i > 0$. □
+$c_i > 0$. 
 ```
 
 
@@ -136,7 +136,7 @@ def compute_sliding_surface(self, state: np.ndarray) -> np.ndarray:
     ...
 ```
 
-**Verification Result:** ✅ Code implements positive gain check and exponential stability condition
+**Verification Result:**  Code implements positive gain check and exponential stability condition
 
 
 
@@ -163,7 +163,7 @@ def test_sliding_surface_stability():
     ...
 ```
 
-**Verification Result:** ✅ Test confirms exponential convergence to sliding surface
+**Verification Result:**  Test confirms exponential convergence to sliding surface
 
 
 
@@ -171,12 +171,12 @@ def test_sliding_surface_stability():
 
 | Aspect | Status | Notes |
 |--------|--------|-------|
-| **Theorem Statement** | ✅ CLEAR | Well-defined conditions and conclusion |
-| **Citations** | ✅ APPROPRIATE | 3 sources confirm Hurwitz stability for c_i > 0 |
-| **Mathematical Proof** | ✅ CORRECT | Characteristic polynomial analysis valid |
-| **Code Implementation** | ✅ CONSISTENT | Positive gain assertion matches theorem |
-| **Test Coverage** | ✅ ADEQUATE | Exponential convergence verified |
-| **Overall Accuracy** | ✅ 100% | Perfect match between theory, citations, and code |
+| **Theorem Statement** |  CLEAR | Well-defined conditions and conclusion |
+| **Citations** |  APPROPRIATE | 3 sources confirm Hurwitz stability for c_i > 0 |
+| **Mathematical Proof** |  CORRECT | Characteristic polynomial analysis valid |
+| **Code Implementation** |  CONSISTENT | Positive gain assertion matches theorem |
+| **Test Coverage** |  ADEQUATE | Exponential convergence verified |
+| **Overall Accuracy** |  100% | Perfect match between theory, citations, and code |
 
 
 
@@ -218,7 +218,7 @@ convergence to the sliding surface
 
 *Proof*: Using Lyapunov function $V = \frac{1}{2}s^2$, the
 derivative satisfies $\dot{V} \leq -(\eta - \rho)|s|$, ensuring
-finite-time reaching in $t \leq \frac{|s(0)|}{\eta - \rho}$. □
+finite-time reaching in $t \leq \frac{|s(0)|}{\eta - \rho}$. 
 ```
 
 
@@ -255,7 +255,7 @@ def compute_control(self, state: np.ndarray, ...) -> float:
     return np.clip(u, -self.max_force, self.max_force)
 ```
 
-**Verification Result:** ✅ Implementation matches theorem, η selection critical
+**Verification Result:**  Implementation matches theorem, η selection critical
 
 
 
@@ -287,7 +287,7 @@ def test_finite_time_convergence():
     assert reaching_time <= theoretical_bound, "Should reach in finite time"
 ```
 
-**Verification Result:** ✅ Test confirms finite-time reaching within theoretical bound
+**Verification Result:**  Test confirms finite-time reaching within theoretical bound
 
 
 
@@ -295,12 +295,12 @@ def test_finite_time_convergence():
 
 | Aspect | Status | Notes |
 |--------|--------|-------|
-| **Theorem Statement** | ✅ CLEAR | Condition η > ρ and conclusion well-defined |
-| **Citations** | ✅ APPROPRIATE | Khalil, Orlov, Slotine & Li are authoritative sources |
-| **Mathematical Proof** | ✅ CORRECT | Lyapunov analysis shows $\dot{V} \leq -(\eta - \rho) s $ |
-| **Code Implementation** | ✅ CONSISTENT | Switching gain η implemented correctly |
-| **Test Coverage** | ✅ ADEQUATE | Finite-time convergence verified experimentally |
-| **Overall Accuracy** | ✅ 100% | Perfect alignment across theory, citations, and implementation |
+| **Theorem Statement** |  CLEAR | Condition η > ρ and conclusion well-defined |
+| **Citations** |  APPROPRIATE | Khalil, Orlov, Slotine & Li are authoritative sources |
+| **Mathematical Proof** |  CORRECT | Lyapunov analysis shows $\dot{V} \leq -(\eta - \rho) s $ |
+| **Code Implementation** |  CONSISTENT | Switching gain η implemented correctly |
+| **Test Coverage** |  ADEQUATE | Finite-time convergence verified experimentally |
+| **Overall Accuracy** |  100% | Perfect alignment across theory, citations, and implementation |
 
 
 
@@ -351,7 +351,7 @@ where $\rho$ is the Lipschitz constant of the disturbance.
 
 *Proof*: Using the strict Lyapunov function from Moreno & Osorio (2012),
 the derivative $\dot{V}$ is negative definite when conditions hold,
-ensuring finite-time convergence. □
+ensuring finite-time convergence. 
 ```
 
 
@@ -400,7 +400,7 @@ class STASMC:
         return np.clip(u, -self.max_force, self.max_force)
 ```
 
-**Verification Result:** ✅ Implements super-twisting law with parameter conditions
+**Verification Result:**  Implements super-twisting law with parameter conditions
 
 
 
@@ -433,7 +433,7 @@ def test_second_order_sliding_convergence():
     assert convergence_time < 5.0, "Should converge in finite time"
 ```
 
-**Verification Result:** ✅ Second-order sliding {s=0, ṡ=0} achieved
+**Verification Result:**  Second-order sliding {s=0, ṡ=0} achieved
 
 
 
@@ -441,12 +441,12 @@ def test_second_order_sliding_convergence():
 
 | Aspect | Status | Notes |
 |--------|--------|-------|
-| **Theorem Statement** | ✅ CLEAR | Parameter conditions explicitly stated |
-| **Citations** | ✅ APPROPRIATE | Levant 2003 (original), Moreno 2008 (Lyapunov), Seeber 2017 (practical) |
-| **Mathematical Proof** | ✅ CORRECT | Strict Lyapunov function ensures finite-time convergence |
-| **Code Implementation** | ✅ CONSISTENT | STA law matches Levant 2003 formulation |
-| **Test Coverage** | ✅ ADEQUATE | {s=0, ṡ=0} convergence verified |
-| **Overall Accuracy** | ✅ 100% | Perfect consistency across all aspects |
+| **Theorem Statement** |  CLEAR | Parameter conditions explicitly stated |
+| **Citations** |  APPROPRIATE | Levant 2003 (original), Moreno 2008 (Lyapunov), Seeber 2017 (practical) |
+| **Mathematical Proof** |  CORRECT | Strict Lyapunov function ensures finite-time convergence |
+| **Code Implementation** |  CONSISTENT | STA law matches Levant 2003 formulation |
+| **Test Coverage** |  ADEQUATE | {s=0, ṡ=0} convergence verified |
+| **Overall Accuracy** |  100% | Perfect consistency across all aspects |
 
 
 
@@ -489,7 +489,7 @@ def validate_parameters(self, w, c1, c2) -> bool:
     return 0 < w + c1 + c2 < 4
 ```
 
-**Status:** ✅ VERIFIED - Parameters validated against stability condition
+**Status:**  VERIFIED - Parameters validated against stability condition
 
 
 
@@ -527,7 +527,7 @@ def update_inertia(self, iteration: int) -> float:
     return max(w, self.w_min)
 ```
 
-**Status:** ✅ VERIFIED - Decreasing inertia weight implemented
+**Status:**  VERIFIED - Decreasing inertia weight implemented
 
 
 

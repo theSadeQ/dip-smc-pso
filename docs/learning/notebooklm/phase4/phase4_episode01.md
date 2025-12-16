@@ -12,7 +12,7 @@ Think of it like learning to drive versus learning how the engine works. Phases 
 
 ## What You'll Discover
 
-By the end of Phase 4's thirteen episodes, you'll be able to:
+By the end of Phase 4's thirteen episodes, the system will be able to:
 - Read and understand Python classes, inheritance, and decorators
 - Navigate controller source code line by line
 - Understand the mathematical foundations behind S-M-C
@@ -23,13 +23,13 @@ This is the phase where everything clicks together. The math you learned in Phas
 
 ## Phase 4 Overview: Three Sub-Phases
 
-Phase 4 is organized into three distinct sub-phases, each building on the previous one. Let's break down what you'll learn and why it matters.
+Phase 4 is organized into three distinct sub-phases, each building on the previous one. break down what the system will learn and why it matters.
 
 **Sub-Phase 4.1: Advanced Python for This Project - twelve hours**
 
-This is where you'll master object-oriented programming, or O-O-P. You'll learn why controllers are implemented as classes instead of simple functions. You'll understand inheritance, which lets the Classical S-M-C controller and Super-Twisting S-T-A controller share common functionality. You'll discover decorators, those mysterious at-symbols you see before function definitions. And you'll learn type hints, which make code self-documenting and help your I-D-E provide better autocomplete.
+This is where the system will master object-oriented programming, or O-O-P. You'll learn why controllers are implemented as classes instead of simple functions. You'll understand inheritance, which lets the Classical S-M-C controller and Super-Twisting S-T-A controller share common functionality. You'll discover decorators, those mysterious at-symbols you see before function definitions. And the system will learn type hints, which make code self-documenting and help your I-D-E provide better autocomplete.
 
-Why does this matter? Because once you understand O-O-P, you'll realize that the controller factory isn't magic. It's just a pattern for creating objects. You'll be able to swap controllers, modify gains, and even write your own custom controller by following the same blueprint.
+Why does this matter? Because once you understand O-O-P, the system will realize that the controller factory isn't magic. It's just a pattern for creating objects. You'll be able to swap controllers, modify gains, and even write your own custom controller by following the same blueprint.
 
 **Sub-Phase 4.2: Reading Controller Source Code - eight hours**
 
@@ -43,7 +43,7 @@ This is the theoretical foundation. We'll explore Lagrangian mechanics, which is
 
 You'll also learn vector calculus basics: gradients, Jacobians, and the chain rule for multivariable functions. These tools let us analyze how control systems behave without solving differential equations by hand.
 
-Finally, we'll cover Lyapunov stability theory, which is the cornerstone of S-M-C analysis. Imagine proving a ball will roll to the bottom of a bowl without actually tracing its path. That's what Lyapunov functions do. They prove stability by showing that a "distance-to-equilibrium" function always decreases.
+Finally, this will cover Lyapunov stability theory, which is the cornerstone of S-M-C analysis. Imagine proving a ball will roll to the bottom of a bowl without actually tracing its path. That's what Lyapunov functions do. They prove stability by showing that a "distance-to-equilibrium" function always decreases.
 
 ## The Mindset Shift: From User to Developer
 
@@ -53,17 +53,17 @@ Let me give you an example. In Phase 3, you ran this command:
 
 python simulate dot p-y dash-dash c-t-r-l classical underscore s-m-c dash-dash plot
 
-You saw the pendulums balance. Great! But in Phase 4, you'll ask deeper questions:
+You saw the pendulums balance. Great! But in Phase 4, the system will ask deeper questions:
 - How does the dash-dash c-t-r-l flag trigger controller creation?
 - What happens inside the factory dot p-y file?
 - How does the Classical S-M-C class inherit from Controller Interface?
 - What's the difference between underscore-underscore init underscore-underscore and compute underscore control?
 
-These questions transform you from a user into a developer. And that's powerful, because developers can customize, extend, and innovate.
+These questions transform you from a user into a developer. And that's effective, because developers can customize, extend, and innovate.
 
 ## Learning Objectives for 30 Hours
 
-Let's be specific about what you'll achieve in Phase 4's thirty hours of learning.
+be specific about what the system will achieve in Phase 4's thirty hours of learning.
 
 **After Sub-Phase 4.1 - Advanced Python:**
 - You'll understand abstract base classes and why they enforce interfaces
@@ -150,13 +150,13 @@ Episode 13 concludes with Lyapunov stability and phase space. You'll understand 
 
 ## Recap: Core Concepts
 
-Let's recap the key ideas from this welcome episode.
+recap the key ideas from this welcome episode.
 
 **Phase 4 Structure**: Three sub-phases over thirty hours. Advanced Python for twelve hours, source code reading for eight hours, and advanced math for ten hours.
 
 **Mindset Shift**: You're transitioning from user to developer. You're learning to read source code, understand design patterns, and recognize the mathematical foundations that make controllers work.
 
-**Learning Objectives**: By the end of Phase 4, you'll understand object-oriented programming, navigate controller source code confidently, and grasp Lyapunov stability conceptually.
+**Learning Objectives**: By the end of Phase 4, the system will understand object-oriented programming, navigate controller source code confidently, and grasp Lyapunov stability conceptually.
 
 **Tools Setup**: Visual Studio Code, Python interpreter, p-y-test, and the project source code open in your editor.
 
@@ -179,7 +179,7 @@ Here are the technical terms from this episode with phonetic pronunciations:
 
 ## What's Next
 
-In Episode 2, we'll dive into object-oriented programming foundations. You'll learn why controllers are implemented as classes, what abstract base classes enforce, and how the at-abstract-method decorator works. We'll walk through the Controller Interface base class line by line, explaining every attribute and method.
+In Episode 2, this will dive into object-oriented programming foundations. You'll learn why controllers are implemented as classes, what abstract base classes enforce, and how the at-abstract-method decorator works. We'll walk through the Controller Interface base class line by line, explaining every attribute and method.
 
 Here's a preview question to get you thinking: Why would we use a class instead of just a function for controllers? What benefits does encapsulation provide? Think about state management, interface consistency, and polymorphism. We'll answer this in detail next episode.
 
@@ -189,13 +189,13 @@ Before moving to Episode 2, ask yourself these questions:
 
 1. What are the three sub-phases of Phase 4, and how many hours does each require?
 2. What is the mindset shift from Phases 1-3 to Phase 4?
-3. Name three tools you'll need for Phase 4 learning.
+3. Name three tools the system will need for Phase 4 learning.
 4. What will you understand after completing Sub-Phase 4.3 on advanced math?
 5. How many episodes cover source code reading, and which episodes are they?
 
 If you can answer these confidently, you're ready to proceed. If anything is unclear, re-read the relevant section. Remember, Phase 4 builds on everything from Phases 1 through 3. If you feel shaky on Python basics, Phase 2 control theory, or Phase 3 simulations, consider reviewing those materials before continuing.
 
-**You're about to unlock a new level of understanding. Let's begin!**
+**You're about to unlock a new level of understanding. begin!**
 
 ---
 

@@ -1,6 +1,6 @@
 # Theory Overview
 
-﻿# 1. Theoretical Background â€” Overview
+# 1. Theoretical Background â€” Overview
 
 ## 1.1 Control Problem
 

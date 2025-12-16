@@ -8,7 +8,7 @@
 
 ## Overview
 
-This document outlines the optional future coverage work to further improve test coverage across the `dip-smc-pso` project. These items are **not blockers** for the current release but represent high-impact modules that would benefit from comprehensive testing.
+This document outlines the optional future coverage work to further improve test coverage across the `dip-smc-pso` project. These items are **not blockers** for the current release but represent high-impact modules that would benefit from complete testing.
 
 **Current Project Coverage** (after Phase 2.1-2.3): ~65-70%
 **Potential Coverage** (after completing this plan): ~80-85%

@@ -14,12 +14,12 @@
 
 ---
 
-## Overview This guide provides documentation for the **Particle Swarm Optimization (PSO)** implementation used for automated SMC controller gain tuning in the DIP-SMC-PSO system. **Key Features:** ✅ **Framework-integrated** - Uses unified optimizer interfaces
-✅ **Adaptive parameters** - Time-varying ω, c₁, c₂ for better convergence
-✅ **Velocity clamping** - Prevents particle explosion
-✅ **Convergence detection** - Automatic termination on stagnation
-✅ **Performance monitoring** - Diversity tracking, fitness history
-✅ **Production-ready** - Robust error handling, logging, validation **Typical Performance:** | Controller | Gains (n) | Swarm Size | Iterations | Time | ISE Improvement |
+## Overview This guide provides documentation for the **Particle Swarm Optimization (PSO)** implementation used for automated SMC controller gain tuning in the DIP-SMC-PSO system. **Key Features:**  **Framework-integrated** - Uses unified optimizer interfaces
+ **Adaptive parameters** - Time-varying ω, c₁, c₂ for better convergence
+ **Velocity clamping** - Prevents particle explosion
+ **Convergence detection** - Automatic termination on stagnation
+ **Performance monitoring** - Diversity tracking, fitness history
+ **Production-ready** - Robust error handling, logging, validation **Typical Performance:** | Controller | Gains (n) | Swarm Size | Iterations | Time | ISE Improvement |
 |------------|-----------|------------|------------|------|-----------------|
 | Classical SMC | 6 | 30 | 80-120 | 15 min | 15-25% |
 | Adaptive SMC | 5 | 30 | 60-100 | 12 min | 20-30% |
@@ -124,7 +124,7 @@ $$ **Implementation:** ```python
 
 ``` **Parameter Evolution:** ```
 Iteration ω c1 c2 Effect
-─────────────────────────────────────────
+
 0 0.73 1.49 1.49 Balanced
 25 0.65 1.24 1.87 → Social
 50 0.57 0.99 2.24 → Exploitation
@@ -269,11 +269,11 @@ plt.scatter(global_best_position[0], global_best_position[1], c='red', marker='*
 
 ---
 
-## Summary ### Key Takeaways ✅ **PSO is the default optimizer** for SMC gain tuning (fast, reliable)
-✅ **Adaptive parameters** improve convergence (ω decreases, c₂ increases)
-✅ **Velocity clamping** prevents explosion (20% of range typical)
-✅ **Multi-start** recommended for critical applications (3-5 runs)
-✅ **Parallelization** provides 6-8× speedup (use multiprocessing) ### Configuration Template ```python
+## Summary ### Key Takeaways  **PSO is the default optimizer** for SMC gain tuning (fast, reliable)
+ **Adaptive parameters** improve convergence (ω decreases, c₂ increases)
+ **Velocity clamping** prevents explosion (20% of range typical)
+ **Multi-start** recommended for critical applications (3-5 runs)
+ **Parallelization** provides 6-8× speedup (use multiprocessing) ### Configuration Template ```python
 # example-metadata:
 # runnable: false # Production-ready PSO configuration
 pso_config = { 'population_size': 30, 'max_iterations': 100, 'inertia_weight': 0.7298, 'cognitive_weight': 2.05, 'social_weight': 2.05, 'adaptive_weights': True, 'velocity_clamping': True, 'tolerance': 1e-6,
@@ -288,5 +288,5 @@ pso_config = { 'population_size': 30, 'max_iterations': 100, 'inertia_weight': 0
 
 **Document Version:** 1.0
 **Last Updated:** 2025-10-04
-**Status:** ✅ Complete
+**Status:**  Complete
 **Word Count:** ~7,200 words | ~950 lines

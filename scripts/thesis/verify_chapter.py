@@ -3,7 +3,7 @@
 Thesis Chapter Verification Tool - Master Orchestrator
 =======================================================
 
-Comprehensive chapter verification using all automated tools:
+complete chapter verification using all automated tools:
 - Equations (LaTeX syntax, numbering, references)
 - Citations (existence, sequencing)
 - Figures & Tables (numbering, captions, references)
@@ -12,7 +12,7 @@ Comprehensive chapter verification using all automated tools:
 
 Usage:
     python verify_chapter.py --chapter 3
-    python verify_chapter.py --chapter 3 --comprehensive
+    python verify_chapter.py --chapter 3 --complete
     python verify_chapter.py --all-chapters
     python verify_chapter.py --resume
 
@@ -74,7 +74,7 @@ CHAPTERS = [
 ]
 
 # ==============================================================================
-# Comprehensive Verification
+# complete Verification
 # ==============================================================================
 
 def verify_chapter_comprehensive(chapter_num: int, validate_algebra: bool = False) -> Dict:
@@ -111,7 +111,7 @@ def verify_chapter_comprehensive(chapter_num: int, validate_algebra: bool = Fals
         print(f"[ERROR] Chapter file not found: {chapter_file}", file=sys.stderr)
         return {"error": f"Chapter file not found: {chapter_file}"}
 
-    print(f"[COMPREHENSIVE VERIFICATION] Chapter {chapter_num}: {chapter_info['title']}")
+    print(f"[complete VERIFICATION] Chapter {chapter_num}: {chapter_info['title']}")
     print(f"File: {chapter_file}")
     print("")
 
@@ -200,7 +200,7 @@ def _determine_status(critical_count: int, major_count: int) -> str:
 # Batch Verification
 # ==============================================================================
 
-def verify_all_chapters(comprehensive: bool = False) -> Dict:
+def verify_all_chapters(complete: bool = False) -> Dict:
     """
     Verify all chapters in sequence.
 
@@ -208,7 +208,7 @@ def verify_all_chapters(comprehensive: bool = False) -> Dict:
     """
 
     print("[BATCH VERIFICATION] All chapters")
-    print(f"Mode: {'Comprehensive' if comprehensive else 'Basic'}")
+    print(f"Mode: {'complete' if complete else 'Basic'}")
     print("")
 
     chapter_results = []
@@ -217,7 +217,7 @@ def verify_all_chapters(comprehensive: bool = False) -> Dict:
     for ch_info in CHAPTERS:
         ch_num = ch_info["num"]
 
-        if comprehensive:
+        if complete:
             result = verify_chapter_comprehensive(ch_num)
         else:
             # Quick verification (just equations and citations)
@@ -352,9 +352,9 @@ def main():
         help="Verify all chapters in sequence"
     )
     parser.add_argument(
-        "--comprehensive",
+        "--complete",
         action="store_true",
-        help="Run comprehensive verification (all tools)"
+        help="Run complete verification (all tools)"
     )
     parser.add_argument(
         "--validate-algebra",
@@ -392,16 +392,16 @@ def main():
             print(f"Progress: {len(checkpoint['progress']['chapters_complete'])}/12 chapters")
             print("")
             print("To continue, specify next chapter:")
-            print("  python verify_chapter.py --chapter N --comprehensive --save")
+            print("  python verify_chapter.py --chapter N --complete --save")
         else:
             print("[ERROR] No checkpoint found to resume from.", file=sys.stderr)
             print("Start fresh:")
-            print("  python verify_chapter.py --chapter 0 --comprehensive --save")
+            print("  python verify_chapter.py --chapter 0 --complete --save")
         return
 
     # Handle verification
     if args.all_chapters:
-        result = verify_all_chapters(comprehensive=args.comprehensive)
+        result = verify_all_chapters(complete=args.complete)
 
         if args.save:
             # Save batch report

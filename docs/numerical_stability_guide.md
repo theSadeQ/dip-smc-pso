@@ -3,10 +3,10 @@
 ## Architecture ### Core Components ```
 
 src/plant/core/numerical_stability.py
-├── AdaptiveRegularizer # 5-level adaptive regularization
-├── MatrixInverter # Robust matrix inversion
-├── NumericalStabilityMonitor # Performance tracking
-└── fast_condition_estimate # Lightweight condition checking
+ AdaptiveRegularizer # 5-level adaptive regularization
+ MatrixInverter # Robust matrix inversion
+ NumericalStabilityMonitor # Performance tracking
+ fast_condition_estimate # Lightweight condition checking
 ```
 
 ---
@@ -107,28 +107,28 @@ if hasattr(config, 'regularization'): # Convert to fixed regularization mode reg
 |------------------------|----------------------|---------------------|
 | cond < 1e10 | 0% | 0% |
 | 1e10 - 1e12 | 5% | 0% |
-| cond > 1e12 | 15% | **0%** ✅ |
+| cond > 1e12 | 15% | **0%**  |
 
 ---
 
-## Acceptance Criteria Validation ### Criterion 1: Consistent Regularization ✅ **PASS**: All modules use centralized `AdaptiveRegularizer` **Validation**:
+## Acceptance Criteria Validation ### Criterion 1: Consistent Regularization  **PASS**: All modules use centralized `AdaptiveRegularizer` **Validation**:
 
 ```bash
 grep -r "AdaptiveRegularizer" src/ | wc -l
 # Expected: 20+ imports across modules
-``` ### Criterion 2: Adaptive Parameters ✅ **PASS**: Handles singular value ratios down to **1e-10** **Test Case**:
+``` ### Criterion 2: Adaptive Parameters  **PASS**: Handles singular value ratios down to **1e-10** **Test Case**:
 
 ```python
 # From test_matrix_regularization()
 extreme_ratios = [1e-8, 2e-9, 5e-9, 1e-10]
 for ratio in extreme_ratios: # All ratios handled without LinAlgError assert linalg_errors == 0
-``` ### Criterion 3: Automatic Triggers ✅ **PASS**: Triggers for `cond > 1e12` and `sv_ratio < 1e-8` **Validation**:
+``` ### Criterion 3: Automatic Triggers  **PASS**: Triggers for `cond > 1e12` and `sv_ratio < 1e-8` **Validation**:
 
 ```python
 # High condition matrix
 M = diag([1.0, 1e-6, 1e-13]) # cond ~ 1e13
 # Automatic regularization triggered -> No LinAlgError
-``` ### Criterion 4: Accuracy Maintained ✅ **PASS**: Well-conditioned matrices have < 1e-10 error **Validation**:
+``` ### Criterion 4: Accuracy Maintained  **PASS**: Well-conditioned matrices have < 1e-10 error **Validation**:
 
 ```python
 # Well-conditioned matrix (cond ~ 1.25)

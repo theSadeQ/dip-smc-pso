@@ -8,13 +8,13 @@
 
 You've seen the code: state extraction, sliding surface calculation, equivalent control, switching control, saturation. But why does the math work this way? Why is the sliding surface s equals theta plus k times theta underscore dot? What's special about tanh versus sign? How does the boundary layer affect performance?
 
-In this episode, we'll connect the code back to the control theory you learned in Phase 2. You'll understand the mathematical reasoning behind every design choice, see how the boundary layer trades off chattering versus convergence speed, and explore helper methods that support the control law.
+In this episode, this will connect the code back to the control theory you learned in Phase 2. You'll understand the mathematical reasoning behind every design choice, see how the boundary layer trades off chattering versus convergence speed, and explore helper methods that support the control law.
 
-By the end, you'll grasp not just what the code does, but why it's designed that way.
+By the end, the system will grasp not just what the code does, but why it's designed that way.
 
 ## What You'll Discover
 
-In this episode, you'll learn:
+In this episode, the system will learn:
 - Why the sliding surface is defined as s equals theta plus k times theta underscore dot
 - The mathematical meaning of equivalent control
 - How switching control provides robustness despite model errors
@@ -24,7 +24,7 @@ In this episode, you'll learn:
 
 ## Sliding Surface Mathematics
 
-Let's start with the sliding surface definition:
+start with the sliding surface definition:
 
 s1 equals theta1 plus k1 times theta1 underscore dot
 
@@ -36,7 +36,7 @@ theta1 underscore dot equals negative theta1 divided by k1
 
 **Why this line?**
 
-Because when the system is on this line (s1 equals 0), the dynamics become first-order stable. Let's see why.
+Because when the system is on this line (s1 equals 0), the dynamics become first-order stable. see why.
 
 If s1 equals 0, then:
 
@@ -170,7 +170,7 @@ The default in Classical S-M-C is 0 dot 1, which balances chattering and converg
 
 ## Recap: Core Concepts
 
-Let's recap the mathematical insights.
+recap the mathematical insights.
 
 **Sliding Surface**: Defined as s equals theta plus k times theta underscore dot. When s equals 0, theta decays exponentially with time constant k.
 
@@ -182,7 +182,7 @@ Let's recap the mathematical insights.
 
 ## Helper Methods: reset
 
-Classical S-M-C has several helper methods. Let's examine them.
+Classical S-M-C has several helper methods. examine them.
 
 **The reset method:**
 
@@ -286,7 +286,7 @@ Because set underscore gains can be called at any time, not just during initiali
 
 ## Recap: Helper Methods
 
-Let's recap the helper methods.
+recap the helper methods.
 
 **reset**: Clears controller state (last underscore control and history) between simulations.
 
@@ -298,7 +298,7 @@ Let's recap the helper methods.
 
 ## Self-Assessment for Phase 4.2
 
-You've now completed Sub-Phase 4.2: Reading Controller Source Code. Let's assess your understanding.
+You've now completed Sub-Phase 4.2: Reading Controller Source Code. assess your understanding.
 
 **Quiz Questions:**
 
@@ -341,7 +341,7 @@ Here are the technical terms from this episode with phonetic pronunciations:
 
 ## What's Next
 
-In Episode 10, we'll compare all four controller types: Classical S-M-C, Super-Twisting S-T-A, Adaptive S-M-C, and Hybrid Adaptive S-T-A. You'll understand the trade-offs in convergence speed, chattering, and implementation complexity. This helps you choose the right controller for different scenarios.
+In Episode 10, this will compare all four controller types: Classical S-M-C, Super-Twisting S-T-A, Adaptive S-M-C, and Hybrid Adaptive S-T-A. You'll understand the trade-offs in convergence speed, chattering, and implementation complexity. This helps you choose the right controller for different scenarios.
 
 Here's a preview question: What makes Super-Twisting S-T-A faster and smoother than Classical S-M-C? We'll answer this with a side-by-side comparison next episode.
 
@@ -357,7 +357,7 @@ Before moving to Episode 10, ask yourself these questions:
 
 If you can answer these confidently, you're ready to proceed. If anything is unclear, re-read the relevant section or experiment with the code by modifying gains and observing the effect on performance.
 
-**Excellent progress! You've mastered the mathematics. Let's continue!**
+**Excellent progress! You've mastered the mathematics. continue!**
 
 ---
 

@@ -12,13 +12,13 @@ The same problem exists in programming. Different projects need different versio
 
 And once you're working on projects, you need version control - a system that tracks every change, lets you experiment safely, and enables collaboration. That's what Git provides.
 
-Today, you'll learn the essential tools that professional developers use daily. By the end, you'll have the DIP-SMC-PSO project running on your machine with proper dependency isolation and version control.
+Today, the system will learn the essential tools that professional developers use daily. By the end, the system will have the DIP-SMC-PSO project running on your machine with proper dependency isolation and version control.
 
 ---
 
 ## What You'll Discover
 
-By listening to this episode, you'll learn:
+By listening to this episode, the system will learn:
 
 - What virtual environments are and why they're essential
 - Creating and activating virtual environments
@@ -33,7 +33,7 @@ By listening to this episode, you'll learn:
 
 ## The Problem: Dependency Conflicts
 
-Let's understand why we need virtual environments.
+understand why we need virtual environments.
 
 **Scenario**: You have two Python projects on your computer:
 
@@ -57,7 +57,7 @@ Think of it as: Each project gets its own kitchen with its own ingredients. They
 
 ## Creating a Virtual Environment
 
-Let's create a virtual environment for the DIP-SMC-PSO project.
+create a virtual environment for the DIP-SMC-PSO project.
 
 **Step One: Navigate to Your Projects Folder**
 
@@ -87,7 +87,7 @@ python space dash m space v-e-n-v space v-e-n-v
 Mac/Linux:
 python3 space dash m space v-e-n-v space v-e-n-v
 
-Let's break this down:
+break this down:
 - **python** or **python3** - The Python interpreter
 - **dash m** - Run a module
 - **v-e-n-v** - The virtual environment module (built into Python)
@@ -192,7 +192,7 @@ This generates a file listing everything currently installed.
 
 ## Recap: Virtual Environments
 
-Let's pause and review what you've learned:
+pause and review what you've learned:
 
 **Number one**: Virtual environments isolate project dependencies. Each project has its own Python installation and packages.
 
@@ -223,7 +223,7 @@ Git is a version control system. It tracks changes to files over time, enabling:
 - **Collaboration**: Multiple people work on the same project simultaneously
 - **Backup**: Your code lives on remote servers (like GitHub), not just your laptop
 
-Think of Git like "Track Changes" in Microsoft Word, but for entire projects, with powerful features for collaboration.
+Think of Git like "Track Changes" in Microsoft Word, but for entire projects, with effective features for collaboration.
 
 **Git vs GitHub**
 
@@ -371,7 +371,7 @@ This shows:
 
 ## Making Changes and Committing
 
-Let's practice the Git workflow.
+practice the Git workflow.
 
 **Step One: Make a Change**
 
@@ -535,13 +535,13 @@ Git commit messages document WHY changes were made, not just WHAT changed.
 
 ## What's Next: Newton's Laws and Pendulum Physics
 
-In Episode 8, we'll dive into the physics underlying the double-inverted pendulum:
+In Episode 8, this will dive into the physics underlying the double-inverted pendulum:
 
 - Newton's three laws of motion
 - Forces, torque, and rotational motion
 - Why pendulums swing
 - Stable vs unstable equilibria
-- The physics equations we'll simulate
+- The physics equations this will simulate
 
 These concepts connect the math and code you've learned to the physical system you're controlling.
 

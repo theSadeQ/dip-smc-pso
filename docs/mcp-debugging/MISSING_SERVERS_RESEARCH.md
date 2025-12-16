@@ -1,22 +1,22 @@
 # Missing MCP Servers - Research Results **Date**: 2025-10-06
 
-**Research Status**: ✅ All servers located
+**Research Status**:  All servers located
 
 ---
 
-## 📊 Summary All 6 "missing" MCP servers have been located with correct package names and installation methods. | Server | Status | Correct Package/Repo |
+##  Summary All 6 "missing" MCP servers have been located with correct package names and installation methods. | Server | Status | Correct Package/Repo |
 
 |--------|--------|---------------------|
-| MCP Code Checker | ✅ Found | `mcp_server_code_checker_python` (GitHub) |
-| Python LFT MCP | ✅ Found | `python-lft-mcp` (PyPI) |
-| MCP Analyzer | ✅ Found | `mcp-server-analyzer` (PyPI/uvx) |
-| NumPy MCP | ✅ Found | `numpy-mcp` (GitHub) |
-| Pandas MCP | ✅ Found | `pandas-mcp-server` (GitHub) |
-| Sphinx-MCP | ✅ Found | `sphinx-mcp` (PyPI, likely already installed) |
+| MCP Code Checker |  Found | `mcp_server_code_checker_python` (GitHub) |
+| Python LFT MCP |  Found | `python-lft-mcp` (PyPI) |
+| MCP Analyzer |  Found | `mcp-server-analyzer` (PyPI/uvx) |
+| NumPy MCP |  Found | `numpy-mcp` (GitHub) |
+| Pandas MCP |  Found | `pandas-mcp-server` (GitHub) |
+| Sphinx-MCP |  Found | `sphinx-mcp` (PyPI, likely already installed) |
 
 ---
 
-## 1️⃣ MCP Code Checker (Python) ### Overview
+## 1⃣ MCP Code Checker (Python) ### Overview
 
 MCP server providing code quality checks (pylint and pytest) with smart LLM-friendly prompts for analysis and fixes. ### Correct Installation **Option A: From GitHub (Recommended)**
 ```bash
@@ -37,10 +37,10 @@ pip install -e .
 python -m src.main --project-dir D:\Projects\main
 ``` ### Features
 
-- ✅ Run pylint checks for code quality
-- ✅ Execute pytest to identify failing tests
-- ✅ Generate smart prompts for LLMs
-- ✅ Explain issues and suggest fixes ### Requirements
+-  Run pylint checks for code quality
+-  Execute pytest to identify failing tests
+-  Generate smart prompts for LLMs
+-  Explain issues and suggest fixes ### Requirements
 - Python 3.10+
 - Python MCP SDK 1.2.0+ ### Configuration
 ```json
@@ -50,7 +50,7 @@ python -m src.main --project-dir D:\Projects\main
 
 ---
 
-## 2️⃣ Python LFT MCP (Lint, Format, Test) ### Overview
+## 2⃣ Python LFT MCP (Lint, Format, Test) ### Overview
 
 Modern, modular Python development tools package exposing linting, formatting, and testing features via MCP. ### Correct Installation **From PyPI:**
 ```bash
@@ -59,10 +59,10 @@ pip install python-lft-mcp # With all optional tool dependencies (recommended)
 pip install python-lft-mcp[tools]
 ``` ### Features
 
-- ✅ Auto-detection of 70+ Python config files
-- ✅ Integrated tools: ruff, black, pytest, mypy, pylint
-- ✅ Unified MCP interface
-- ✅ Tox for standardized workflows ### Supported Tools
+-  Auto-detection of 70+ Python config files
+-  Integrated tools: ruff, black, pytest, mypy, pylint
+-  Unified MCP interface
+-  Tox for standardized workflows ### Supported Tools
 - **Linting**: ruff, pylint
 - **Formatting**: black, ruff
 - **Testing**: pytest
@@ -75,7 +75,7 @@ pip install python-lft-mcp[tools]
 
 ---
 
-## 3️⃣ MCP Server Analyzer (RUFF + Vulture) ### Overview
+## 3⃣ MCP Server Analyzer (RUFF + Vulture) ### Overview
 
 Python code analysis using RUFF for linting and VULTURE for dead code detection. ### Correct Installation **Option A: uvx (Recommended)**
 ```bash
@@ -97,8 +97,8 @@ uv run mcp-server-analyzer
 docker run ghcr.io/anselmoo/mcp-server-analyzer:latest
 ``` ### Features
 
-- 🔍 **RUFF Analysis**: Python linting with auto-fixes
-- 🧹 **Dead Code Detection**: Find unused imports, functions, variables with VULTURE ### Package Info
+-  **RUFF Analysis**: Python linting with auto-fixes
+-  **Dead Code Detection**: Find unused imports, functions, variables with VULTURE ### Package Info
 - **PyPI**: mcp-server-analyzer v0.1.1
 - **GitHub**: https://github.com/anselmoo/mcp-server-analyzer ### Configuration
 ```json
@@ -108,7 +108,7 @@ docker run ghcr.io/anselmoo/mcp-server-analyzer:latest
 
 ---
 
-## 4️⃣ NumPy MCP Server ### Overview
+## 4⃣ NumPy MCP Server ### Overview
 
 Model Context Protocol server for numerical computations with NumPy. ### Correct Installation **From GitHub:**
 ```bash
@@ -121,10 +121,10 @@ uv pip install -r requirements.txt # Or install in Claude Desktop
 mcp install server.py --name "NumPy Calculator"
 ``` ### Features
 
-- ✅ Basic arithmetic operations
-- ✅ Linear algebra (matrix multiplication, eigendecomposition)
-- ✅ Statistical analysis (mean, median, std dev)
-- ✅ Polynomial fitting ### Testing with Dependencies
+-  Basic arithmetic operations
+-  Linear algebra (matrix multiplication, eigendecomposition)
+-  Statistical analysis (mean, median, std dev)
+-  Polynomial fitting ### Testing with Dependencies
 ```bash
 uv run mcp dev server.py --with pandas --with numpy
 ``` ### Configuration
@@ -136,7 +136,7 @@ uv run mcp dev server.py --with pandas --with numpy
 
 ---
 
-## 5️⃣ Pandas MCP Server ### Overview
+## 5⃣ Pandas MCP Server ### Overview
 
 Multiple implementations available for pandas data analysis via MCP. ### Correct Installation **Option A: marlonluo2018 implementation (Recommended)**
 ```bash
@@ -150,11 +150,11 @@ pip install -r requirements.txt
 # Installation details from repository
 ``` ### Features
 
-- ✅ Execute pandas code through standardized workflow
-- ✅ Data manipulation and analysis
-- ✅ Statistical analysis
-- ✅ Data visualization with matplotlib
-- ✅ Support for CSV and Parquet files ### Use Cases
+-  Execute pandas code through standardized workflow
+-  Data manipulation and analysis
+-  Statistical analysis
+-  Data visualization with matplotlib
+-  Support for CSV and Parquet files ### Use Cases
 - Automated data exploration
 - Dynamic RAG pipelines
 - Real-time sentiment analysis
@@ -166,7 +166,7 @@ pip install -r requirements.txt
 
 ---
 
-## 6️⃣ Sphinx-MCP Extension ### Overview
+## 6⃣ Sphinx-MCP Extension ### Overview
 
 Sphinx extension for documenting MCP tools, prompts, resources and resource templates. ### Correct Installation **Option A: From PyPI (if available)**
 ```bash
@@ -180,8 +180,8 @@ uv sync --all-groups
 ``` ### Status
 
 - ⏳ Early stage project (no tests yet)
-- 📄 Documentation: sphinx-mcp.pdf (pre-compiled)
-- 🔧 Development setup with uv and pre-commit ### Features
+-  Documentation: sphinx-mcp.pdf (pre-compiled)
+-  Development setup with uv and pre-commit ### Features
 - Document MCP tools
 - Document prompts
 - Document resources and resource templates
@@ -196,7 +196,7 @@ python -c "import sphinx_mcp; print(sphinx_mcp.__version__)"
 
 ---
 
-## 📦 Installation Priority ### High Priority (Production Ready)
+##  Installation Priority ### High Priority (Production Ready)
 
 1. **mcp-server-analyzer** - RUFF + Vulture, ready to use
 2. **python-lft-mcp** - Available on PyPI, tooling ### Medium Priority (Active Development)
@@ -207,7 +207,7 @@ python -c "import sphinx_mcp; print(sphinx_mcp.__version__)"
 
 ---
 
-## 🎯 Recommended Installation Order 1. **mcp-server-analyzer** (uvx) - Easiest install, immediate value
+##  Recommended Installation Order 1. **mcp-server-analyzer** (uvx) - Easiest install, immediate value
 
 2. **python-lft-mcp** (PyPI) - One command install, broad utility
 3. **mcp-code-checker** (GitHub) - Clone and pip install
@@ -217,17 +217,17 @@ python -c "import sphinx_mcp; print(sphinx_mcp.__version__)"
 
 ---
 
-## 🔧 Local Server Directory Structure Create a dedicated directory for locally-installed MCP servers: ```
+##  Local Server Directory Structure Create a dedicated directory for locally-installed MCP servers: ```
 
 D:\Projects\main\.mcp_servers\
-├── mcp-code-checker\
-├── numpy-mcp\
-└── pandas-mcp-server\
+ mcp-code-checker\
+ numpy-mcp\
+ pandas-mcp-server\
 ``` This keeps GitHub-cloned servers organized and separate from npm global packages.
 
 ---
 
-## ✅ Next Steps 1. Install high-priority servers (analyzer, python-lft)
+##  Next Steps 1. Install high-priority servers (analyzer, python-lft)
 2. Clone and setup GitHub-based servers (code-checker, numpy-mcp, pandas-mcp)
 3. Verify sphinx-mcp installation status
 4. Update .mcp.json with all new server configurations

@@ -188,7 +188,7 @@ if not is_valid:
     for error in errors:
         print(f"  - {error}")
 else:
-    print("✓ Result is valid")
+    print(" Result is valid")
 \`\`\`
 
 ## Example 4: Export to Multiple Formats

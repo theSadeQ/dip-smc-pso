@@ -32,7 +32,7 @@ async def capture_with_optimized_settings(page, html_file: Path, screenshot_path
     file_url = html_file.as_uri()
 
     try:
-        print(f"\n🔄 Attempting: {html_file.name}")
+        print(f"\n Attempting: {html_file.name}")
 
         # Strategy 1: Use 'domcontentloaded' instead of 'networkidle'
         print("  Strategy: domcontentloaded (60s timeout)")
@@ -47,22 +47,22 @@ async def capture_with_optimized_settings(page, html_file: Path, screenshot_path
         # Take screenshot
         await page.screenshot(path=str(screenshot_path), full_page=True)
 
-        print(f"  ✅ SUCCESS: {screenshot_path.name}")
+        print(f"   SUCCESS: {screenshot_path.name}")
         return True
 
     except Exception as e:
-        print(f"  ❌ FAILED: {e}")
+        print(f"   FAILED: {e}")
 
         # Fallback: Try with 'load' strategy
         try:
-            print("  🔄 Fallback: load strategy")
+            print("   Fallback: load strategy")
             await page.goto(file_url, wait_until="load", timeout=90000)
             await asyncio.sleep(3)
             await page.screenshot(path=str(screenshot_path), full_page=True)
-            print(f"  ✅ FALLBACK SUCCESS: {screenshot_path.name}")
+            print(f"   FALLBACK SUCCESS: {screenshot_path.name}")
             return True
         except Exception as e2:
-            print(f"  ❌ FALLBACK FAILED: {e2}")
+            print(f"   FALLBACK FAILED: {e2}")
             return False
 
 
@@ -71,9 +71,9 @@ async def main():
     project_root = Path(__file__).parent.parent.parent
     output_dir = project_root / ".test_artifacts" / "doc_screenshots"
 
-    print("🔧 Screenshot Timeout Fix Tool")
-    print(f"📂 Output directory: {output_dir}")
-    print(f"📄 Pages to retry: {len(FAILED_PAGES)}\n")
+    print(" Screenshot Timeout Fix Tool")
+    print(f" Output directory: {output_dir}")
+    print(f" Pages to retry: {len(FAILED_PAGES)}\n")
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
@@ -88,7 +88,7 @@ async def main():
             html_file = project_root / html_path
 
             if not html_file.exists():
-                print(f"❌ File not found: {html_file}")
+                print(f" File not found: {html_file}")
                 continue
 
             # Generate screenshot filename
@@ -103,8 +103,8 @@ async def main():
         await browser.close()
 
         print(f"\n{'='*70}")
-        print(f"✅ Successfully captured: {success_count}/{len(FAILED_PAGES)}")
-        print(f"❌ Failed: {len(FAILED_PAGES) - success_count}/{len(FAILED_PAGES)}")
+        print(f" Successfully captured: {success_count}/{len(FAILED_PAGES)}")
+        print(f" Failed: {len(FAILED_PAGES) - success_count}/{len(FAILED_PAGES)}")
         print(f"{'='*70}")
 
 

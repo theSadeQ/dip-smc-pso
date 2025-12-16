@@ -200,9 +200,9 @@ def main():
 
     # Verify accuracy
     if percent_error < 1.0:
-        print("\n✓ PASS: Measured period matches theory (< 1% error)")
+        print("\n PASS: Measured period matches theory (< 1% error)")
     else:
-        print("\n✗ FAIL: Error too large (> 1%)")
+        print("\n FAIL: Error too large (> 1%)")
 
     # Plot results
     plt.figure(figsize=(12, 8))
@@ -252,7 +252,7 @@ Measured period: 2.006385 s
 Absolute error: 0.000006 s
 Percent error: 0.000%
 
-✓ PASS: Measured period matches theory (< 1% error)
+ PASS: Measured period matches theory (< 1% error)
 ```
 
 ------
@@ -378,7 +378,7 @@ In addition to period, verify that total energy remains constant (for undamped c
 2. **Zero crossing detection** is a robust way to measure period
 3. **Small angle approximation** is necessary for simple formula
 4. **Multiple measurements** improve accuracy through averaging
-5. **SciPy's solve_ivp** is powerful and easy to use
+5. **SciPy's solve_ivp** is effective and easy to use
 
 ------
 

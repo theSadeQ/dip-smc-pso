@@ -27,19 +27,19 @@ If you use the DIP-SMC-PSO framework in your research, please cite:
 **APA Format:**
 ```
 Your Name. (2025). Sliding Mode Control with PSO Optimization for
-Double-Inverted Pendulum: A Comprehensive Study. arXiv preprint arXiv:YYMM.NNNNN.
+Double-Inverted Pendulum: A complete Study. arXiv preprint arXiv:YYMM.NNNNN.
 ```
 
 **IEEE Format:**
 ```
 Y. Name, "Sliding mode control with PSO optimization for double-inverted
-pendulum: A comprehensive study," arXiv preprint arXiv:YYMM.NNNNN, 2025.
+pendulum: A complete study," arXiv preprint arXiv:YYMM.NNNNN, 2025.
 ```
 
 **Chicago Format:**
 ```
 Name, Your. 2025. "Sliding Mode Control with PSO Optimization for
-Double-Inverted Pendulum: A Comprehensive Study." arXiv preprint arXiv:YYMM.NNNNN.
+Double-Inverted Pendulum: A complete Study." arXiv preprint arXiv:YYMM.NNNNN.
 ```
 
 ### Software Repository
@@ -74,7 +74,7 @@ with PSO Optimization [Software]. GitHub. https://github.com/theSadeQ/dip-smc-ps
 ```bibtex
 @article{dipsmc2025,
   author = {Your Name},
-  title = {Sliding Mode Control with {PSO} Optimization for Double-Inverted Pendulum: A Comprehensive Study},
+  title = {Sliding Mode Control with {PSO} Optimization for Double-Inverted Pendulum: A complete Study},
   journal = {arXiv preprint arXiv:YYMM.NNNNN},
   year = {2025},
   month = {November},
@@ -91,7 +91,7 @@ with PSO Optimization [Software]. GitHub. https://github.com/theSadeQ/dip-smc-ps
 ```bibtex
 @inproceedings{dipsmc2025cdc,
   author = {Your Name},
-  title = {Sliding Mode Control with {PSO} Optimization for Double-Inverted Pendulum: A Comprehensive Study},
+  title = {Sliding Mode Control with {PSO} Optimization for Double-Inverted Pendulum: A complete Study},
   booktitle = {Proceedings of the IEEE Conference on Decision and Control (CDC)},
   year = {2025},
   month = {December},
@@ -107,7 +107,7 @@ with PSO Optimization [Software]. GitHub. https://github.com/theSadeQ/dip-smc-ps
 ```bibtex
 @article{dipsmc2025tac,
   author = {Your Name},
-  title = {Sliding Mode Control with {PSO} Optimization for Double-Inverted Pendulum: A Comprehensive Study},
+  title = {Sliding Mode Control with {PSO} Optimization for Double-Inverted Pendulum: A complete Study},
   journal = {IEEE Transactions on Automatic Control},
   year = {2026},
   volume = {71},

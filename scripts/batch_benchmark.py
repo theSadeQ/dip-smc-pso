@@ -1,9 +1,9 @@
 """
 ================================================================================
-Batch Benchmark Script - MT-5 (Comprehensive Controller Comparison)
+Batch Benchmark Script - MT-5 (complete Controller Comparison)
 ================================================================================
 
-Comprehensive benchmark of all existing SMC controllers using Monte Carlo
+complete benchmark of all existing SMC controllers using Monte Carlo
 simulation. This script implements MT-5 from ROADMAP_EXISTING_PROJECT.md.
 
 Methodology:
@@ -540,7 +540,7 @@ def save_results(results: List[ControllerResults], output_dir: str = "benchmarks
     results_dict = {
         'metadata': {
             'script': 'scripts/batch_benchmark.py',
-            'task': 'MT-5 Comprehensive Benchmark',
+            'task': 'MT-5 complete Benchmark',
             'date': time.strftime('%Y-%m-%d %H:%M:%S'),
             'n_controllers': len(results),
             'n_runs_per_controller': results[0].n_runs if results else 0
@@ -557,7 +557,7 @@ def save_results(results: List[ControllerResults], output_dir: str = "benchmarks
 def main():
     """Main execution: batch benchmark all existing controllers."""
     print("=" * 80)
-    print("MT-5: Comprehensive Controller Benchmark")
+    print("MT-5: complete Controller Benchmark")
     print("=" * 80)
 
     # Load configuration
@@ -601,7 +601,7 @@ def main():
     save_results(results, output_dir="benchmarks")
 
     print("\n" + "=" * 80)
-    print("[SUCCESS] MT-5 Comprehensive Benchmark Complete!")
+    print("[SUCCESS] MT-5 complete Benchmark Complete!")
     print("=" * 80)
     print("\nNext steps:")
     print("1. Review: cat benchmarks/comprehensive_benchmark.csv")

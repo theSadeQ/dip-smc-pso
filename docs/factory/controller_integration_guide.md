@@ -1,9 +1,9 @@
 # Controller Integration Guide ## Overview This guide provides instructions for integrating SMC controllers with the factory system, plant models, and PSO optimization workflows. It covers the enhanced integration patterns implemented to resolve GitHub Issue #6 factory integration challenges. ## Factory-Controller Integration Architecture ### Controller Lifecycle Management ```
 
-┌─────────────────┐ ┌──────────────────┐ ┌─────────────────┐
-│ Factory │ │ Controller │ │ Plant Model │
-│ Creation │───▶│ Instance │◄──▶│ Integration │
-└─────────────────┘ └──────────────────┘ └─────────────────┘ │ │ │ │ ▼ │ │ ┌──────────────────┐ │ │ │ Configuration │ │ └─────────────▶│ Validation │◄────────────┘ └──────────────────┘ │ ▼ ┌──────────────────┐ │ Parameter │ │ Resolution │ └──────────────────┘
+  
+ Factory   Controller   Plant Model 
+ Creation  Instance  Integration 
+              Configuration    Validation       Parameter   Resolution  
 ``` ### Enhanced Factory Interface ```python
 # example-metadata:
 # runnable: false class EnterpriseControllerFactory: """ Enterprise-grade controller factory with integration support. Features: - Type-safe controller creation - Automatic parameter validation - Plant model integration - PSO optimization support - Thread-safe operations - error handling """ @staticmethod def create_controller( controller_type: str, config: Optional[Any] = None, gains: Optional[GainsArray] = None, **kwargs: Any ) -> ControllerProtocol: """ Create controller with enhanced integration support. Args: controller_type: Type of controller to create config: Configuration object or dictionary gains: Controller gains array **kwargs: Additional parameters for flexibility Returns: Configured controller instance Raises: ValueError: Invalid controller type or configuration TypeError: Invalid parameter types """

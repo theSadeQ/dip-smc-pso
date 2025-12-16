@@ -1,5 +1,5 @@
 # Thesis Verification Roadmap
-# LT-8: Comprehensive Thesis Verification Project
+# LT-8: complete Thesis Verification Project
 # Created: 2025-11-05
 # Purpose: Chapter-by-chapter execution plan
 
@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-**Project**: LT-8 - Comprehensive Thesis Verification & Refinement
+**Project**: LT-8 - complete Thesis Verification & Refinement
 **Duration**: 2-4 weeks (50-65 hours of verification work)
 **Scope**: 12 entities (10 chapters + 1 appendix + references)
 **Approach**: Systematic verification using automated tools + manual review
@@ -44,7 +44,7 @@ The chapters are verified in order of appearance (0 → 9 → Appendix A → Ref
 
 **Automated Checks**:
 ```bash
-python scripts/thesis/verify_chapter.py --chapter 0 --comprehensive
+python scripts/thesis/verify_chapter.py --chapter 0 --complete
 ```
 
 **Expected Issues**: 5-10 (mostly minor: citations, cross-refs)
@@ -75,7 +75,7 @@ python scripts/thesis/verify_chapter.py --chapter 0 --comprehensive
 
 **Automated Checks**:
 ```bash
-python scripts/thesis/verify_chapter.py --chapter 1 --comprehensive
+python scripts/thesis/verify_chapter.py --chapter 1 --complete
 ```
 
 **Expected Issues**: 3-5 (mostly minor)
@@ -107,7 +107,7 @@ python scripts/thesis/verify_chapter.py --chapter 1 --comprehensive
 
 **Automated Checks**:
 ```bash
-python scripts/thesis/verify_chapter.py --chapter 2 --comprehensive
+python scripts/thesis/verify_chapter.py --chapter 2 --complete
 python scripts/thesis/verify_citations.py --chapter 2 --deep-check
 ```
 
@@ -149,7 +149,7 @@ python scripts/thesis/verify_citations.py --chapter 2 --deep-check
 
 **Automated Checks**:
 ```bash
-python scripts/thesis/verify_chapter.py --chapter 3 --comprehensive
+python scripts/thesis/verify_chapter.py --chapter 3 --complete
 python scripts/thesis/verify_equations.py --chapter 3 --validate-algebra
 ```
 
@@ -192,7 +192,7 @@ python scripts/thesis/verify_equations.py --chapter 3 --validate-algebra
 
 **Automated Checks**:
 ```bash
-python scripts/thesis/verify_chapter.py --chapter 4 --comprehensive
+python scripts/thesis/verify_chapter.py --chapter 4 --complete
 python scripts/thesis/verify_equations.py --chapter 4 --validate-proofs
 ```
 
@@ -235,7 +235,7 @@ python scripts/thesis/verify_equations.py --chapter 4 --validate-proofs
 
 **Automated Checks**:
 ```bash
-python scripts/thesis/verify_chapter.py --chapter 5 --comprehensive
+python scripts/thesis/verify_chapter.py --chapter 5 --complete
 ```
 
 **Expected Issues**: 10-15 (figures, equations, code match)
@@ -271,7 +271,7 @@ python scripts/thesis/verify_chapter.py --chapter 5 --comprehensive
 
 **Automated Checks**:
 ```bash
-python scripts/thesis/verify_chapter.py --chapter 6 --comprehensive
+python scripts/thesis/verify_chapter.py --chapter 6 --complete
 python scripts/thesis/verify_code.py --chapter 6
 ```
 
@@ -308,7 +308,7 @@ python scripts/thesis/verify_code.py --chapter 6
 
 **Automated Checks**:
 ```bash
-python scripts/thesis/verify_chapter.py --chapter 7 --comprehensive
+python scripts/thesis/verify_chapter.py --chapter 7 --complete
 python scripts/thesis/verify_code.py --chapter 7 --check-paths
 ```
 
@@ -352,7 +352,7 @@ python scripts/thesis/verify_code.py --chapter 7 --check-paths
 
 **Automated Checks**:
 ```bash
-python scripts/thesis/verify_chapter.py --chapter 8 --comprehensive
+python scripts/thesis/verify_chapter.py --chapter 8 --complete
 python scripts/thesis/verify_figures.py --chapter 8
 ```
 
@@ -387,7 +387,7 @@ python scripts/thesis/verify_figures.py --chapter 8
 
 **Automated Checks**:
 ```bash
-python scripts/thesis/verify_chapter.py --chapter 9 --comprehensive
+python scripts/thesis/verify_chapter.py --chapter 9 --complete
 ```
 
 **Expected Issues**: 3-5 (cross-refs, minor polish)
@@ -431,7 +431,7 @@ python scripts/thesis/verify_chapter.py --chapter 9 --comprehensive
 
 **Automated Checks**:
 ```bash
-python scripts/thesis/verify_chapter.py --chapter appendix_a --comprehensive
+python scripts/thesis/verify_chapter.py --chapter appendix_a --complete
 python scripts/thesis/verify_equations.py --chapter appendix_a --validate-proofs
 ```
 
@@ -470,7 +470,7 @@ python scripts/thesis/verify_equations.py --chapter appendix_a --validate-proofs
 
 **Automated Checks**:
 ```bash
-python scripts/thesis/verify_citations.py --references --comprehensive
+python scripts/thesis/verify_citations.py --references --complete
 ```
 
 **Expected Issues**: 5-10 (formatting, typos in titles/authors)
@@ -589,7 +589,7 @@ python scripts/thesis/verify_table_numbering.py --all-chapters
    - "Chapter X will present..."
    - "We will demonstrate..."
 3. For each promise, identify fulfillment chapter/section
-4. Mark fulfilled (✅) or missing (❌)
+4. Mark fulfilled () or missing ()
 
 **Manual Process**: Read Introduction → scan thesis → mark promises
 
@@ -791,7 +791,7 @@ python scripts/thesis/triage_issues.py --input-dir .artifacts/thesis/issues/ --o
 **Method**:
 1. Re-run ALL automated tools on full thesis:
    ```bash
-   python scripts/thesis/verify_chapter.py --all-chapters --comprehensive
+   python scripts/thesis/verify_chapter.py --all-chapters --complete
    python scripts/thesis/verify_equations.py --all-chapters
    python scripts/thesis/verify_citations.py --all-chapters
    python scripts/thesis/verify_figures.py --all-chapters
@@ -871,7 +871,7 @@ python scripts/thesis/triage_issues.py --input-dir .artifacts/thesis/issues/ --o
 2. Update status: "Thesis verification project complete (2025-11-XX)"
 3. Add summary:
    ```markdown
-   ## LT-8: Comprehensive Thesis Verification ✅ COMPLETE
+   ## LT-8: complete Thesis Verification  COMPLETE
 
    **Duration**: 2025-11-05 to 2025-11-XX (X weeks)
    **Deliverables**:
@@ -928,7 +928,7 @@ git add docs/thesis/chapters/ (if any fixes)
 git add docs/VALIDATION_CHECKLIST.md
 
 # Commit
-git commit -m "docs(thesis): LT-8 COMPLETE - Comprehensive thesis verification
+git commit -m "docs(thesis): LT-8 COMPLETE - complete thesis verification
 
 - Verified all 12 entities (Chapters 0-9, Appendix A, References)
 - Fixed 187 issues (8 critical, 67 major, 112 minor)
@@ -942,10 +942,8 @@ Deliverables:
 - Full checkpoint audit trail
 
 [AI] Generated with Claude Code
-Co-Authored-By: Claude <noreply@anthropic.com>"
-
 # Push to remote
-git push origin refactor/phase3-comprehensive-cleanup
+git push origin refactor/phase3-complete-cleanup
 ```
 
 ---
@@ -956,7 +954,7 @@ git push origin refactor/phase3-comprehensive-cleanup
 **Deliverables**: Quality report, submission package, updated tracking docs
 
 **Completion Criteria**:
-- [ ] Quality report complete and comprehensive
+- [ ] Quality report complete and complete
 - [ ] VALIDATION_CHECKLIST updated (LT-8 marked complete)
 - [ ] Submission package ready
 - [ ] All changes committed and pushed to GitHub
@@ -989,21 +987,21 @@ git push origin refactor/phase3-comprehensive-cleanup
 ### Success Criteria (Final)
 
 **Minimum Success** (Submission-Ready):
-- ✅ Zero CRITICAL issues (mathematical/technical correctness 100%)
-- ✅ Zero MAJOR issues (or <5 justified deferred)
-- ✅ All cross-references valid (100%)
-- ✅ All citations accurate (100%)
-- ✅ Grammar/spelling ≥95%
-- ✅ Professional formatting throughout
-- ✅ Complete narrative arc (intro → body → conclusion)
+-  Zero CRITICAL issues (mathematical/technical correctness 100%)
+-  Zero MAJOR issues (or <5 justified deferred)
+-  All cross-references valid (100%)
+-  All citations accurate (100%)
+-  Grammar/spelling ≥95%
+-  Professional formatting throughout
+-  Complete narrative arc (intro → body → conclusion)
 
 **Stretch Success** (Publication-Ready):
-- ✅ All minimum criteria PLUS:
-- ✅ Perfect LaTeX notation consistency
-- ✅ All figures camera-ready (high-res, professional captions)
-- ✅ Chapter 8 restructured (formatting issues resolved)
-- ✅ All derivations fully expanded (no skipped steps)
-- ✅ External reviewer feedback incorporated (if obtained)
+-  All minimum criteria PLUS:
+-  Perfect LaTeX notation consistency
+-  All figures camera-ready (high-res, professional captions)
+-  Chapter 8 restructured (formatting issues resolved)
+-  All derivations fully expanded (no skipped steps)
+-  External reviewer feedback incorporated (if obtained)
 
 ---
 
@@ -1028,8 +1026,8 @@ git push origin refactor/phase3-comprehensive-cleanup
 
 Immediate actions once this roadmap is approved:
 
-1. ✅ **Task 0.1**: Verification framework created (DONE)
-2. ✅ **Task 0.2**: Verification roadmap created (DONE - this document)
+1.  **Task 0.1**: Verification framework created (DONE)
+2.  **Task 0.2**: Verification roadmap created (DONE - this document)
 3. [ ] **Task 0.3**: Build automated tools (next, 4-6 hours)
 4. [ ] **Task 0.4**: Enhance /recover command (parallel with 0.3, 2-3 hours)
 5. [ ] **Phase 1 Start**: Begin Chapter 0 verification (end of Week 1)

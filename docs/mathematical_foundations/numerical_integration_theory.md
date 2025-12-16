@@ -28,10 +28,10 @@ For the double inverted pendulum (DIP) system, $x \in \mathbb{R}^6$ represents t
 
 **Critical Requirements for SMC Simulation:**
 
-✅ **Accuracy:** Capture fast dynamics (chattering at ~100 Hz)
-✅ **Stability:** Handle stiff systems (rapid switching)
-✅ **Efficiency:** Fast enough for PSO optimization (30 particles × 100 iterations)
-✅ **Reliability:** Numerical robustness for varying controller gains
+ **Accuracy:** Capture fast dynamics (chattering at ~100 Hz)
+ **Stability:** Handle stiff systems (rapid switching)
+ **Efficiency:** Fast enough for PSO optimization (30 particles × 100 iterations)
+ **Reliability:** Numerical robustness for varying controller gains
 
 **Method Comparison Summary:**
 
@@ -144,9 +144,9 @@ A method is **A-stable** if $\mathcal{S}$ contains the entire left half-plane $\
 
 | Method | Stability Function R(z) | A-Stable? |
 |--------|------------------------|-----------|
-| Euler | $1 + z$ | ✗ |
-| RK4 | $1 + z + z^2/2 + z^3/6 + z^4/24$ | ✗ |
-| Implicit Euler | $1/(1-z)$ | ✓ |
+| Euler | $1 + z$ |  |
+| RK4 | $1 + z + z^2/2 + z^3/6 + z^4/24$ |  |
+| Implicit Euler | $1/(1-z)$ |  |
 
 **Stiffness:**
 
@@ -182,13 +182,13 @@ Tangent line approximation:
 
 ```
 x(t)
-  │     /
-  │    / True solution
-  │   /
-  │  /
-  │ /_____ Euler approximation (straight line)
-  │/
-  └─────────────> t
+       /
+      / True solution
+     /
+    /
+   /_____ Euler approximation (straight line)
+  /
+  > t
   t_n         t_{n+1}
 ```
 
@@ -278,16 +278,16 @@ def euler_step(x, u, dynamics, dt):
 ## Advantages and Disadvantages
 
 **Advantages:**
-- ✅ Extremely simple to implement
-- ✅ Minimal computational cost (1 function evaluation per step)
-- ✅ Low memory usage
-- ✅ Suitable for PSO fitness evaluation (speed critical)
+-  Extremely simple to implement
+-  Minimal computational cost (1 function evaluation per step)
+-  Low memory usage
+-  Suitable for PSO fitness evaluation (speed critical)
 
 **Disadvantages:**
-- ❌ Low accuracy (first-order)
-- ❌ Requires small timesteps for stability
-- ❌ Accumulates error quickly
-- ❌ Not suitable for stiff systems
+-  Low accuracy (first-order)
+-  Requires small timesteps for stability
+-  Accumulates error quickly
+-  Not suitable for stiff systems
 
 **Recommendation:**
 - **Use for:** PSO optimization (dt = 0.001-0.005)
@@ -328,12 +328,12 @@ RK4 performs a **weighted average of slopes** at different points:
 
 ```
 x(t)
-  │          k4 ↗
-  │       k3 ↗
-  │    k2 ↗
-  │ k1 ↗     True solution ~~~
-  │/        RK4 approximation ___
-  └────────────────────────────────> t
+            k4 ↗
+         k3 ↗
+      k2 ↗
+   k1 ↗     True solution ~~~
+  /        RK4 approximation ___
+  > t
   t_n     t_n+h/2        t_{n+1}
 ```
 
@@ -434,15 +434,15 @@ def rk4_step(x, u, dynamics, dt):
 ### Advantages and Disadvantages
 
 **Advantages:**
-- ✅ High accuracy (4th order)
-- ✅ Widely used and well-understood
-- ✅ Good balance of accuracy vs cost (4 evaluations)
-- ✅ Suitable for most control simulations
+-  High accuracy (4th order)
+-  Widely used and well-understood
+-  Good balance of accuracy vs cost (4 evaluations)
+-  Suitable for most control simulations
 
 **Disadvantages:**
-- ❌ 4× computational cost vs Euler
-- ❌ Still not ideal for stiff systems
-- ❌ Fixed timestep (no adaptivity)
+-  4× computational cost vs Euler
+-  Still not ideal for stiff systems
+-  Fixed timestep (no adaptivity)
 
 **Recommendation:**
 - **Use for:** Development, debugging, standard simulations (dt = 0.01)
@@ -599,15 +599,15 @@ def rk45_adaptive_step(x, u, dynamics, t, dt, tol=1e-6):
 ### Advantages and Disadvantages
 
 **Advantages:**
-- ✅ Automatic error control (specify tolerance, not timestep)
-- ✅ Efficient (adapts dt to problem difficulty)
-- ✅ High accuracy with minimal evaluations
-- ✅ Industry standard (SciPy, MATLAB)
+-  Automatic error control (specify tolerance, not timestep)
+-  Efficient (adapts dt to problem difficulty)
+-  High accuracy with minimal evaluations
+-  Industry standard (SciPy, MATLAB)
 
 **Disadvantages:**
-- ❌ Variable cost (unpredictable for real-time)
-- ❌ More complex implementation
-- ❌ Overhead for simple problems
+-  Variable cost (unpredictable for real-time)
+-  More complex implementation
+-  Overhead for simple problems
 
 **Recommendation:**
 - **Use for:** Production simulations, research validation
@@ -631,9 +631,9 @@ $$
 
 | Method | Theoretical Order | Measured Order | Verification |
 |--------|------------------|----------------|--------------|
-| Euler | 1 | 0.98-1.02 | ✓ |
-| RK4 | 4 | 3.95-4.05 | ✓ |
-| RK45 | 5 | 4.90-5.10 | ✓ |
+| Euler | 1 | 0.98-1.02 |  |
+| RK4 | 4 | 3.95-4.05 |  |
+| RK45 | 5 | 4.90-5.10 |  |
 
 ### Computational Cost
 
@@ -687,17 +687,17 @@ For T = 5 seconds:
 
 ```
     Im(z)
-     │
-   2 │     ┌─────┐
-     │     │ RK4 │
-   1 │   ┌─┴─────┴─┐
-     │   │         │
-   0 │───●─────────┼─── Re(z)
-     │ ╱ │ Euler   │
-  -1 │╱  └─────────┘
-     │
-  -2 │
-     │
+     
+   2      
+           RK4 
+   1    
+                 
+   0  Re(z)
+        Euler   
+  -1   
+     
+  -2 
+     
     -3  -2  -1   0
 ```
 
@@ -728,23 +728,23 @@ Still restrictive for explicit methods.
 ```
 START: Need to simulate DIP-SMC system
 
-├─ Use Case: PSO Optimization?
-│  ├─ YES → Euler (dt = 0.001-0.005)
-│  │         Fast, acceptable accuracy for fitness
-│  │
-│  └─ NO → Continue
-│
-├─ Real-time Constraints?
-│  ├─ YES → RK4 (dt = 0.01)
-│  │         Predictable cost, good accuracy
-│  │
-│  └─ NO → Continue
-│
-├─ Research Publication?
-│  ├─ YES → RK45 (rtol = 1e-8, atol = 1e-10)
-│  │         Highest accuracy
-│  │
-│  └─ NO → RK4 (dt = 0.01) [default]
+ Use Case: PSO Optimization?
+   YES → Euler (dt = 0.001-0.005)
+           Fast, acceptable accuracy for fitness
+  
+   NO → Continue
+
+ Real-time Constraints?
+   YES → RK4 (dt = 0.01)
+           Predictable cost, good accuracy
+  
+   NO → Continue
+
+ Research Publication?
+   YES → RK45 (rtol = 1e-8, atol = 1e-10)
+           Highest accuracy
+  
+   NO → RK4 (dt = 0.01) [default]
 ```
 
 ### Timestep Selection Guidelines
@@ -857,9 +857,9 @@ Examples: Verlet, Störmer, symplectic Euler
 
 ### Key Takeaways
 
-✅ **Euler:** Fast (1 eval), low accuracy (O(h)), PSO-suitable
-✅ **RK4:** Balanced (4 evals), high accuracy (O(h⁴)), development/production
-✅ **RK45:** Adaptive, highest accuracy, automatic error control, research-grade
+ **Euler:** Fast (1 eval), low accuracy (O(h)), PSO-suitable
+ **RK4:** Balanced (4 evals), high accuracy (O(h⁴)), development/production
+ **RK45:** Adaptive, highest accuracy, automatic error control, research-grade
 
 ### Method Selection Matrix
 
@@ -888,5 +888,5 @@ Examples: Verlet, Störmer, symplectic Euler
 
 **Document Version:** 1.0
 **Last Updated:** 2025-10-04
-**Status:** ✅ Complete
+**Status:**  Complete
 **Word Count:** ~5,800 words | ~620 lines

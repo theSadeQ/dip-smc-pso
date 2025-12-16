@@ -9,7 +9,7 @@ Analyzes reproducibility test results from multiple random seeds to compute:
 - Improvement reproducibility (comparison with original MT-8)
 - Success criteria assessment
 
-Generates a comprehensive reproducibility report with pass/fail assessment.
+Generates a complete reproducibility report with pass/fail assessment.
 
 Author: MT-8 Reproducibility Team
 Created: December 15, 2025
@@ -172,7 +172,7 @@ def generate_reproducibility_report(
     output_file: str = "benchmarks/MT8_REPRODUCIBILITY_REPORT.md"
 ) -> None:
     """
-    Generate comprehensive reproducibility report.
+    Generate complete reproducibility report.
 
     Args:
         metrics: Dictionary mapping controller names to reproducibility metrics

@@ -183,13 +183,13 @@ Console Shows "X Unmatched <pre> Elements"
 
 #### Symptoms
 
-- Warning in console: `⚠️ X unmatched <pre> elements found`
+- Warning in console: ` X unmatched <pre> elements found`
 
 #### Diagnosis
 
 Console output shows:
 ```
-[CodeCollapse] ⚠️ 2 unmatched <pre> elements found:
+[CodeCollapse]  2 unmatched <pre> elements found:
   [1] Parent classes: "amsmath"
   [2] Parent classes: "math"
 ```
@@ -207,8 +207,8 @@ Console output shows:
 
 #### Action Needed
 
-- If unmatched = math blocks: ✅ OK (intentional exclusion)
-- If unmatched = code blocks: ❌ Report as bug with console output
+- If unmatched = math blocks:  OK (intentional exclusion)
+- If unmatched = code blocks:  Report as bug with console output
 
 ---
 
@@ -461,7 +461,7 @@ Enable and collect debug information:
 
 // Example output:
 [CodeCollapse] Found 42 code blocks
-[CodeCollapse] ✅ 100% coverage (42 matched, 0 unmatched)
+[CodeCollapse]  100% coverage (42 matched, 0 unmatched)
 [CodeCollapse] Selector performance: [table]
 ```
 

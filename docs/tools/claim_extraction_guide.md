@@ -22,30 +22,30 @@
 
 ## 1. Overview ### 1.1 Phase 1 Objectives **Goal:** Extract **500+ claims** from codebase to create research queue for Phase 2 automated citation validation. **Two-Pronged Extraction Strategy:** 1. **Formal Claims** (from documentation) - **Source:** `docs/` directory (259 markdown files) - **Targets:** Theorems, lemmas, propositions, corollaries - **Tool:** `.dev_tools/claim_extraction/formal_extractor.py` - **Expected Output:** 40-50 formal mathematical claims 2. **Code Claims** (from implementation) - **Source:** `src/` directory (165 Python files) - **Targets:** "Implements X from Y" patterns in docstrings - **Tool:** `.dev_tools/claim_extraction/code_extractor.py` - **Expected Output:** 150-250 implementation claims ### 1.2 Tool Architecture ```
 
-┌─────────────────────────────────────────────────────────────┐
-│ Phase 1 Architecture │
-├─────────────────────────────────────────────────────────────┤
-│ │
-│ ┌──────────────┐ ┌──────────────┐ │
-│ │ docs/ │ ───────>│ Formal │ │
-│ │ (259 .md) │ │ Extractor │──> formal_claims.json
-│ └──────────────┘ │ (Regex-based)│ │
-│ └──────────────┘ │
-│ │
-│ ┌──────────────┐ ┌──────────────┐ │
-│ │ src/ │ ───────>│ Code │ │
-│ │ (165 .py) │ │ Extractor │──> code_claims.json
-│ └──────────────┘ │ (AST-based) │ │
-│ └──────────────┘ │
-│ │ │
-│ v │
-│ ┌──────────────┐ │
-│ │ Merge │ │
-│ │ + Dedup │──> claims_inventory.json
-│ │ + Prioritize │ (500+ claims) │
-│ └──────────────┘ │
-│ │
-└─────────────────────────────────────────────────────────────┘
+
+ Phase 1 Architecture 
+
+ 
+   
+  docs/  > Formal  
+  (259 .md)   Extractor > formal_claims.json
+   (Regex-based) 
+  
+ 
+   
+  src/  > Code  
+  (165 .py)   Extractor > code_claims.json
+   (AST-based)  
+  
+  
+ v 
+  
+  Merge  
+  + Dedup > claims_inventory.json
+  + Prioritize  (500+ claims) 
+  
+ 
+
 ``` ### 1.3 Expected Outputs **Final Artifact:** `artifacts/claims_inventory.json` **Contents:**
 - **Total Claims:** 500+ extracted claims
 - **Research Queue:** Prioritized list (CRITICAL → HIGH → MEDIUM)
@@ -63,7 +63,7 @@ python .dev_tools/claim_extraction/formal_extractor.py \ --input docs/ \ --outpu
 
 ```
 [FORMAL EXTRACTOR] Starting extraction from docs/
-Scanning 259 markdown files... ├─ Processing docs/theory/smc_theory_complete.md (12 claims) ├─ Processing docs/mathematical_foundations/lyapunov_stability.md (8 claims) ├─ Processing docs/controllers/adaptive_smc.md (5 claims) └─ ... (256 more files) Extraction Summary: Total claims extracted: 41 ├─ Theorems: 15 ├─ Lemmas: 8 ├─ Propositions: 12 └─ Corollaries: 6 Citation Status: ├─ Cited (confidence ≥0.8): 12 └─ Uncited (confidence <0.8): 29 ← CRITICAL research targets Performance: Execution time: 1.24 seconds Throughput: 208 files/second Output saved to: artifacts/formal_claims.json ✅
+Scanning 259 markdown files...  Processing docs/theory/smc_theory_complete.md (12 claims)  Processing docs/mathematical_foundations/lyapunov_stability.md (8 claims)  Processing docs/controllers/adaptive_smc.md (5 claims)  ... (256 more files) Extraction Summary: Total claims extracted: 41  Theorems: 15  Lemmas: 8  Propositions: 12  Corollaries: 6 Citation Status:  Cited (confidence ≥0.8): 12  Uncited (confidence <0.8): 29 ← CRITICAL research targets Performance: Execution time: 1.24 seconds Throughput: 208 files/second Output saved to: artifacts/formal_claims.json 
 ``` **Step 2: Extract Code Claims** ```bash
 
 python .dev_tools/claim_extraction/code_extractor.py \ --input src/ \ --output artifacts/code_claims.json \ --verbose
@@ -71,13 +71,13 @@ python .dev_tools/claim_extraction/code_extractor.py \ --input src/ \ --output a
 ```
 
 [CODE EXTRACTOR] Starting AST-based extraction from src/
-Scanning 165 Python files... ├─ src/controllers/smc/classical_smc.py (4 claims) ├─ src/controllers/smc/sta_smc.py (6 claims) ├─ src/controllers/adaptive_smc.py (5 claims) └─ ... (162 more files) Extraction Summary: Total claims extracted: 187 ├─ Implementation claims: 142 ├─ Algorithm references: 28 └─ Citation patterns: 17 Scope Distribution: ├─ Class-level: 85 ├─ Method-level: 78 └─ Module-level: 24 Performance: Execution time: 2.31 seconds Throughput: 71 files/second Output saved to: artifacts/code_claims.json ✅
+Scanning 165 Python files...  src/controllers/smc/classical_smc.py (4 claims)  src/controllers/smc/sta_smc.py (6 claims)  src/controllers/adaptive_smc.py (5 claims)  ... (162 more files) Extraction Summary: Total claims extracted: 187  Implementation claims: 142  Algorithm references: 28  Citation patterns: 17 Scope Distribution:  Class-level: 85  Method-level: 78  Module-level: 24 Performance: Execution time: 2.31 seconds Throughput: 71 files/second Output saved to: artifacts/code_claims.json 
 ``` **Step 3: Merge and Prioritize** ```bash
 python .dev_tools/claim_extraction/merge_claims.py \ --formal artifacts/formal_claims.json \ --code artifacts/code_claims.json \ --output artifacts/claims_inventory.json \ --verbose
 ``` **Expected Console Output:**
 
 ```
-[MERGE CLAIMS] Loading input files... ├─ Formal claims: 41 loaded └─ Code claims: 187 loaded Deduplication: Total before merge: 228 Duplicates removed: 16 Total after merge: 212 Priority Assignment: ├─ CRITICAL: 29 claims (uncited formal theorems/lemmas) ├─ HIGH: 68 claims (uncited implementations) └─ MEDIUM: 115 claims (cited or informal) Research Queue Generation: Phase 2 queue created with 212 claims Top priority: CRITICAL claims require ≥2 academic references Performance: Execution time: 0.38 seconds Output saved to: artifacts/claims_inventory.json ✅ Next Steps: 1. Review claims_inventory.json 2. Validate quality with: python .dev_tools/claim_extraction/validate_precision.py 3. Proceed to Phase 2 citation research
+[MERGE CLAIMS] Loading input files...  Formal claims: 41 loaded  Code claims: 187 loaded Deduplication: Total before merge: 228 Duplicates removed: 16 Total after merge: 212 Priority Assignment:  CRITICAL: 29 claims (uncited formal theorems/lemmas)  HIGH: 68 claims (uncited implementations)  MEDIUM: 115 claims (cited or informal) Research Queue Generation: Phase 2 queue created with 212 claims Top priority: CRITICAL claims require ≥2 academic references Performance: Execution time: 0.38 seconds Output saved to: artifacts/claims_inventory.json  Next Steps: 1. Review claims_inventory.json 2. Validate quality with: python .dev_tools/claim_extraction/validate_precision.py 3. Proceed to Phase 2 citation research
 ``` ### 2.2 One-Command Execution **Full Pipeline Script:** ```bash
 # Create shell script for convenience
 
@@ -86,7 +86,7 @@ cat > extract_all_claims.sh << 'EOF'
 set -e echo "=== Phase 1 Claim Extraction Pipeline ===" # Step 1: Formal claims
 python .dev_tools/claim_extraction/formal_extractor.py \ --input docs/ \ --output artifacts/formal_claims.json \ --verbose # Step 2: Code claims
 python .dev_tools/claim_extraction/code_extractor.py \ --input src/ \ --output artifacts/code_claims.json \ --verbose # Step 3: Merge
-python .dev_tools/claim_extraction/merge_claims.py \ --formal artifacts/formal_claims.json \ --code artifacts/code_claims.json \ --output artifacts/claims_inventory.json \ --verbose echo "✅ Pipeline complete! Review artifacts/claims_inventory.json"
+python .dev_tools/claim_extraction/merge_claims.py \ --formal artifacts/formal_claims.json \ --code artifacts/code_claims.json \ --output artifacts/claims_inventory.json \ --verbose echo " Pipeline complete! Review artifacts/claims_inventory.json"
 EOF chmod +x extract_all_claims.sh
 ./extract_all_claims.sh
 ```
@@ -100,29 +100,29 @@ EOF chmod +x extract_all_claims.sh
 |-----------|-------------|-----------|---------|
 | **Numbered** | +0.2 | Explicit numbering | `**Theorem 3.1**` |
 | **Cited** | +0.2 | Reference present | `` {cite}`utkin1992` `` |
-| **Proof** | +0.1 | Proof included | `**Proof**: ... □` |
+| **Proof** | +0.1 | Proof included | `**Proof**: ... ` |
 | **Math Block** | +0.1 | LaTeX equations | `` ```{math} ... `` ` | **Examples with Calculations:** **Example 1: High Confidence (1.0)**
 ```markdown
 
-**Theorem 3.1** {cite}`utkin1992` The sliding surface $s = \lambda e + \dot{e}$ guarantees finite-time convergence. **Proof**: Consider Lyapunov function $V = \frac{1}{2}s^2$... □ ```{math}
+**Theorem 3.1** {cite}`utkin1992` The sliding surface $s = \lambda e + \dot{e}$ guarantees finite-time convergence. **Proof**: Consider Lyapunov function $V = \frac{1}{2}s^2$...  ```{math}
 \dot{V} = s\dot{s} \leq -\eta|s| < 0
 ```
 ``` **Calculation:**
 
 - Base: 0.5
-- Numbered (+0.2): `**Theorem 3.1**` ✅
-- Cited (+0.2): `` {cite}`utkin1992` `` ✅
-- Proof (+0.1): `**Proof**: ... □` ✅
-- Math (+0.1): `` ```{math} `` block ✅ **Total:** $0.5 + 0.2 + 0.2 + 0.1 + 0.1 = 1.0$ (maximum confidence) **Example 2: Medium Confidence (0.6)**
+- Numbered (+0.2): `**Theorem 3.1**` 
+- Cited (+0.2): `` {cite}`utkin1992` `` 
+- Proof (+0.1): `**Proof**: ... ` 
+- Math (+0.1): `` ```{math} `` block  **Total:** $0.5 + 0.2 + 0.2 + 0.1 + 0.1 = 1.0$ (maximum confidence) **Example 2: Medium Confidence (0.6)**
 ```markdown
 **Lemma** (Informal) Boundary layer thickness affects chattering amplitude.
 ``` **Calculation:**
 
 - Base: 0.5
-- Numbered: No explicit number ❌
-- Cited: No citation ❌
-- Proof: No proof ❌
-- Math: No math block ❌ **Total:** $0.5 + 0.1$ (bonus for keyword "Lemma") = 0.6 **Example 3: Low Confidence (0.5)**
+- Numbered: No explicit number 
+- Cited: No citation 
+- Proof: No proof 
+- Math: No math block  **Total:** $0.5 + 0.1$ (bonus for keyword "Lemma") = 0.6 **Example 3: Low Confidence (0.5)**
 ```markdown
 The control law converges in finite time.
 ``` **Calculation:**
@@ -173,16 +173,16 @@ def adaptive_gain(self, error: float) -> float: """ Adaptive gain scheduling fro
 - **Lower Risk:** Citation already exists, just needs verification
 - **Efficiency:** Focus Phase 2 AI research on gaps ### 4.4 Expected Distribution **Target Breakdown (500 claims):** ```
 CRITICAL (29 claims - 6%)
-├─ Uncited Theorem: 15
-├─ Uncited Lemma: 8
-└─ Uncited Corollary: 6 HIGH (136 claims - 27%)
-├─ Uncited "Implements X from Y": 95
-├─ Vague sources ("literature"): 28
-└─ Algorithm references without DOI: 13 MEDIUM (335 claims - 67%)
-├─ Cited implementations: 142
-├─ Propositions (formal but less critical): 58
-├─ Informal notes: 85
-└─ Supporting utilities: 50
+ Uncited Theorem: 15
+ Uncited Lemma: 8
+ Uncited Corollary: 6 HIGH (136 claims - 27%)
+ Uncited "Implements X from Y": 95
+ Vague sources ("literature"): 28
+ Algorithm references without DOI: 13 MEDIUM (335 claims - 67%)
+ Cited implementations: 142
+ Propositions (formal but less critical): 58
+ Informal notes: 85
+ Supporting utilities: 50
 ```
 
 ---
@@ -218,10 +218,10 @@ for claim_id in inventory["research_queue"]["CRITICAL"]: claim = next(c for c in
 
 ## 6. Performance Benchmarks ### 6.1 Target Performance Table **Phase 1 Acceptance Criteria:** | Component | Input | Target Time | Target Throughput | Status |
 |-----------|-------|-------------|------------------|--------|
-| **Formal Extractor** | 259 MD files | ≤1.4s | ≥185 files/s | ✅ (1.24s) |
-| **Code Extractor** | 165 PY files | ≤2.5s | ≥66 files/s | ✅ (2.31s) |
-| **Merger** | 2 JSON files | ≤0.5s | N/A | ✅ (0.38s) |
-| **Total Pipeline** | 424 files | <5.0s | - | ✅ (3.93s) | ### 6.2 Quality Metrics (Expected) **Precision (Manual Review):**
+| **Formal Extractor** | 259 MD files | ≤1.4s | ≥185 files/s |  (1.24s) |
+| **Code Extractor** | 165 PY files | ≤2.5s | ≥66 files/s |  (2.31s) |
+| **Merger** | 2 JSON files | ≤0.5s | N/A |  (0.38s) |
+| **Total Pipeline** | 424 files | <5.0s | - |  (3.93s) | ### 6.2 Quality Metrics (Expected) **Precision (Manual Review):**
 - Sample size: 40 claims (stratified)
 - Target: ≥90% overall precision
 - CRITICAL tier: ≥95% precision **Recall (Ground Truth):**
@@ -269,8 +269,8 @@ bash .dev_tools/claim_extraction/run_full_validation.sh
 ./extract_all_claims.sh # Validate precision
 python .dev_tools/claim_extraction/validate_precision.py --sample-size 40 # Validate recall
 pytest .dev_tools/claim_extraction/tests/test_ground_truth_recall.py -v # Performance check
-if [ $(cat artifacts/claims_inventory.json | jq '.metadata.performance.total_time_sec') -gt 5.0 ]; then echo "❌ Performance regression: execution time >5.0s" exit 1
-fi echo "✅ All validation checks passed"
+if [ $(cat artifacts/claims_inventory.json | jq '.metadata.performance.total_time_sec') -gt 5.0 ]; then echo " Performance regression: execution time >5.0s" exit 1
+fi echo " All validation checks passed"
 ```
 
 ---
@@ -370,7 +370,7 @@ python -c "
 import json
 import jsonschema schema = json.load(open('artifacts/quality_report_schema.json'))
 data = json.load(open('artifacts/quality_report_sample.json')) jsonschema.validate(data, schema)
-print('✅ Valid')
+print(' Valid')
 "
 ``` **Fixes:** **Fix 1: Add missing required fields**
 
@@ -512,7 +512,7 @@ python -c "import json, jsonschema; jsonschema.validate(json.load(open('artifact
 
 ---
 
-**Document Status:** ✅ Complete (Week 1 Deliverable)
+**Document Status:**  Complete (Week 1 Deliverable)
 **Total Sections:** 10 guides
 **Code Examples:** 25+ executable snippets
 **Troubleshooting Scenarios:** 8 common issues with approaches 

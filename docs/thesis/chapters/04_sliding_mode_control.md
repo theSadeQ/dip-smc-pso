@@ -219,13 +219,13 @@ The hybrid controller combines the adaptive law with the super‑twisting algori
 \sigma = c_{1}\,(\dot{\theta}_{1} + \lambda_{1}\,\theta_{1}) + c_{2}\,(\dot{\theta}_{2} + \lambda_{2}\,\theta_{2}) + k_{c}\,(\dot{x} + \lambda_{c}\,x),
 \]
 
-where \(c_{i}>0\) and \(\lambda_{i}>0\) weight the pendulum angle and velocity errors, and \(k_{c}\), \(\lambda_{c}\) weight the cart velocity and position in the sliding manifold.  Selecting **positive coefficients** ensures that the sliding manifold is attractive and defines a stable reduced‑order error surface—this is a standard requirement in sliding‑mode design【895515998216162†L326-L329】.  The terms involving the cart state encourage the cart to recenter without destabilising the pendula.  The implementation also supports a **relative formulation** in which the second pendulum is represented by \(\theta_{2}-\theta_{1}\) and \(\dot{\theta}_{2}-\dot{\theta}_{1}\); users can enable this mode with `use_relative_surface=True` to study coupled pendulum dynamics.  Keeping both options accessible avoids hard‑coding a specific manifold and lets users explore alternative designs.
+where \(c_{i}>0\) and \(\lambda_{i}>0\) weight the pendulum angle and velocity errors, and \(k_{c}\), \(\lambda_{c}\) weight the cart velocity and position in the sliding manifold.  Selecting **positive coefficients** ensures that the sliding manifold is attractive and defines a stable reduced‑order error surface—this is a standard requirement in sliding‑mode design895515998216162†L326-L329.  The terms involving the cart state encourage the cart to recenter without destabilising the pendula.  The implementation also supports a **relative formulation** in which the second pendulum is represented by \(\theta_{2}-\theta_{1}\) and \(\dot{\theta}_{2}-\dot{\theta}_{1}\); users can enable this mode with `use_relative_surface=True` to study coupled pendulum dynamics.  Keeping both options accessible avoids hard‑coding a specific manifold and lets users explore alternative designs.
 
 The PD recentering behaviour is further reinforced by separate proportional–derivative gains \(p_{\mathrm{gain}}\) and \(p_{\lambda}\) applied to the cart velocity and position.  These gains shape the transient response of the cart and are exposed as `cart_p_gain` and `cart_p_lambda` in the configuration.
 
 ### Super‑twisting with adaptive gains
 
-The hybrid control input consists of an equivalent part, a **super‑twisting continuous term** and an **integral term**.  The continuous term uses the square‑root law from the STA, \(-k_{1}\sqrt{\|\sigma\|}\,\mathrm{sgn}(\sigma)\), while the integral term \(z\) obeys \(\dot{z} = -k_{2}\,\mathrm{sgn}(\sigma)\).  Both gains \(k_{1}\) and \(k_{2}\) adapt online according to the same dead‑zone logic as in the adaptive SMC: when \(|\sigma|\) exceeds the dead‑zone threshold, the gains increase proportionally to \(|\sigma|\); inside the dead zone they are held constant or allowed to decay slowly.  To prevent runaway adaptation the gains are clipped at configurable maxima ``k1_max`` and ``k2_max``, and the integral term ``u_int`` is limited by ``u_int_max``.  Separating these bounds from the actuator saturation ensures that adaptation can proceed even when the actuator saturates【895515998216162†L326-L329】.  The equivalent control term \(u_{\mathrm{eq}}\) is **enabled by default**; it can be disabled via `enable_equivalent=False` if a purely sliding‑mode law is desired.  This piece‑wise adaptation law is supported by recent research showing that the gain should increase until sliding occurs and then decrease once the trajectory enters a neighbourhood of the manifold to avoid over‑estimation【462167782799487†L186-L195】.
+The hybrid control input consists of an equivalent part, a **super‑twisting continuous term** and an **integral term**.  The continuous term uses the square‑root law from the STA, \(-k_{1}\sqrt{\|\sigma\|}\,\mathrm{sgn}(\sigma)\), while the integral term \(z\) obeys \(\dot{z} = -k_{2}\,\mathrm{sgn}(\sigma)\).  Both gains \(k_{1}\) and \(k_{2}\) adapt online according to the same dead‑zone logic as in the adaptive SMC: when \(|\sigma|\) exceeds the dead‑zone threshold, the gains increase proportionally to \(|\sigma|\); inside the dead zone they are held constant or allowed to decay slowly.  To prevent runaway adaptation the gains are clipped at configurable maxima ``k1_max`` and ``k2_max``, and the integral term ``u_int`` is limited by ``u_int_max``.  Separating these bounds from the actuator saturation ensures that adaptation can proceed even when the actuator saturates895515998216162†L326-L329.  The equivalent control term \(u_{\mathrm{eq}}\) is **enabled by default**; it can be disabled via `enable_equivalent=False` if a purely sliding‑mode law is desired.  This piece‑wise adaptation law is supported by recent research showing that the gain should increase until sliding occurs and then decrease once the trajectory enters a neighbourhood of the manifold to avoid over‑estimation462167782799487†L186-L195.
 
 ### Advantages and tuning
 
@@ -314,7 +314,7 @@ The `config.yaml` file defines tunable parameters for each controller. Mapping t
 | `dead_zone` | \(\delta\) | Dead‑zone width preventing gain wind‑up due to noise. |
 | `enable_equivalent` | – | If true, includes an equivalent control term computed from the system dynamics.  This option replaces the deprecated `use_equivalent` flag, which is still accepted as an alias.  The equivalent control is **enabled by default** in the revised implementation. |
 | `use_relative_surface` | – | When true, defines the sliding surface using relative coordinates \(\theta_{2}-\theta_{1}\) and \(\dot{\theta}_{2}-\dot{\theta}_{1}\).  When false (default), uses absolute angles.  This switch allows users to explore alternative manifold definitions without modifying code. |
-| `k1_max`, `k2_max` | – | Maximum allowed values for the adaptive gains \(k_{1}\) and \(k_{2}\).  Bounding these gains independently of the actuator limit prevents runaway adaptation and preserves stability【895515998216162†L326-L329】. |
+| `k1_max`, `k2_max` | – | Maximum allowed values for the adaptive gains \(k_{1}\) and \(k_{2}\).  Bounding these gains independently of the actuator limit prevents runaway adaptation and preserves stability895515998216162†L326-L329. |
 | `u_int_max` | – | Maximum absolute value of the integral term in the super‑twisting algorithm.  Decoupling this bound from `max_force` avoids overly conservative integral clipping and improves robustness. |
 | `damping_gain` | \(k_{\mathrm{d}}\) | Linear damping gain applied to the super‑twisting control. |
 | `adapt_rate_limit` | \(\Gamma_{\max}\) | Maximum rate of change allowed for the adaptive super‑twisting gains. |
@@ -335,7 +335,7 @@ High‑performance control of the DIP requires careful handling of numerical iss
 - **Condition‑number checking:** The `_compute_equivalent_control` method in both `classic_smc.py` and `sta_smc.py` computes the condition number of \M(q)\ (`np.linalg.cond`). If the condition number exceeds a threshold (`singularity_cond_threshold` in `config.yaml`), the method logs a warning and uses a pseudo‑inverse instead of the standard inverse.
 - **Matrix regularisation:** To prevent singularities due to modelling uncertainties, a small regularisation term \(\varepsilon I\) is added to \M(q)\ before inversion. This ensures that \(M(q)+\varepsilon I\) is always invertible, albeit with some approximation error.
 - **Safe inversion with pseudo‑inverse:** When the matrix is ill‑conditioned, the code uses `np.linalg.pinv`, which computes the Moore–Penrose pseudo‑inverse and yields a least‑squares solution that minimises the effect of noise.
-- **Regularisation justification:**  Adding a positive constant to the diagonal of a symmetric matrix shifts all of its eigenvalues upward and can convert an indefinite matrix into a positive‑definite one【385796022798831†L145-L149】.  This mathematical result justifies the use of the diagonal regularisation term \(\varepsilon I\): by perturbing \(M(q)\) in this way, \(M(q)+\varepsilon I\) remains invertible even when \(M(q)\) is nearly singular, though at the cost of a small approximation error.
+- **Regularisation justification:**  Adding a positive constant to the diagonal of a symmetric matrix shifts all of its eigenvalues upward and can convert an indefinite matrix into a positive‑definite one385796022798831†L145-L149.  This mathematical result justifies the use of the diagonal regularisation term \(\varepsilon I\): by perturbing \(M(q)\) in this way, \(M(q)+\varepsilon I\) remains invertible even when \(M(q)\) is nearly singular, though at the cost of a small approximation error.
 - **Fallback control:** If the pseudo‑inverse computation still fails (for example, if the system becomes uncontrollable), the controller saturates the output to zero and reports failure rather than producing unbounded values. This conservative action prevents destabilisation.
 
 By systematically checking for singularities and regularising the matrix inversion, the project ensures that the control law remains well‑defined even when the physical system operates near its limits or when the model parameters are uncertain.
@@ -421,15 +421,15 @@ The following matrix lists critical validation checks for each controller. These
 
 | Validation Check | Classical SMC | STA | Adaptive SMC | Hybrid | Swing-Up | MPC |
 |------------------|---------------|-----|--------------|--------|----------|-----|
-| Positive sliding gains (k_i, λ_i > 0) | ✓ | ✓ | ✓ | ✓ | N/A | N/A |
-| Switching gain dominance (K > d̄) | ✓ | ✓ (via K₁, K₂) | ✓ (via adaptation) | ✓ (adaptive) | N/A | N/A |
-| Controllability (L M⁻¹ B > 0) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ (linearised) |
-| Boundary layer positivity (ε > 0) | ✓ | ✓ | ✓ | ✓ | N/A | N/A |
-| Gain bounds (K_min ≤ K_init ≤ K_max) | N/A | N/A | ✓ | ✓ | N/A | N/A |
-| Hysteresis deadband | N/A | N/A | N/A | N/A | ✓ | N/A |
-| Positive definite cost matrices (Q, R > 0) | N/A | N/A | N/A | N/A | N/A | ✓ |
-| Linearisation validity near equilibrium | N/A | N/A | N/A | N/A | N/A | ✓ |
-| Recursive feasibility (horizon N sufficient) | N/A | N/A | N/A | N/A | N/A | ✓ |
+| Positive sliding gains (k_i, λ_i > 0) |  |  |  |  | N/A | N/A |
+| Switching gain dominance (K > d̄) |  |  (via K₁, K₂) |  (via adaptation) |  (adaptive) | N/A | N/A |
+| Controllability (L M⁻¹ B > 0) |  |  |  |  |  |  (linearised) |
+| Boundary layer positivity (ε > 0) |  |  |  |  | N/A | N/A |
+| Gain bounds (K_min ≤ K_init ≤ K_max) | N/A | N/A |  |  | N/A | N/A |
+| Hysteresis deadband | N/A | N/A | N/A | N/A |  | N/A |
+| Positive definite cost matrices (Q, R > 0) | N/A | N/A | N/A | N/A | N/A |  |
+| Linearisation validity near equilibrium | N/A | N/A | N/A | N/A | N/A |  |
+| Recursive feasibility (horizon N sufficient) | N/A | N/A | N/A | N/A | N/A |  |
 
 Use this matrix to cross-check `config.yaml` parameters against the theoretical requirements before running simulations. Runtime monitoring should verify that the controllability scalar remains above threshold, that emergency resets (for the hybrid controller) do not occur infinitely often, and that the MPC solver reports feasibility at each time step.
 

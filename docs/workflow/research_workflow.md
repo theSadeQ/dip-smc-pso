@@ -25,7 +25,7 @@
 ```
 Hypothesis → Design → Implementation → Experiments → Analysis → Validation → Publication
      ↑                                                                          |
-     └──────────────────────────── Iteration ────────────────────────────────┘
+      Iteration 
 ```
 
 ### Project Strengths for Research
@@ -287,7 +287,7 @@ while True:
     print(f"Progress: {completed}/{total} ({progress:.1f}%)")
 
     if completed >= total:
-        print("✓ Experiment complete!")
+        print(" Experiment complete!")
         break
 
     time.sleep(60)  # Check every minute
@@ -318,7 +318,7 @@ failed = df[df['settling_time'].isna()]
 print(f"Failed simulations: {len(failed)}/{len(df)}")
 
 # Data integrity report
-print(f"\n✓ Data quality check complete")
+print(f"\n Data quality check complete")
 print(f"  Total trials: {len(df)}")
 print(f"  Valid data: {len(df) - len(failed)} ({100*(1-len(failed)/len(df)):.1f}%)")
 ```
@@ -465,11 +465,11 @@ for metric in metrics:
     print(f"  Mean difference: {mean_diff:.6f}")
 
     if max_diff < 1e-10:
-        print(f"  ✓ Perfect reproducibility")
+        print(f"   Perfect reproducibility")
     elif max_diff < 1e-6:
-        print(f"  ✓ Excellent reproducibility (numerical precision)")
+        print(f"   Excellent reproducibility (numerical precision)")
     else:
-        print(f"  ⚠️  Reproducibility issue detected!")
+        print(f"    Reproducibility issue detected!")
 ```
 
 ## 5.2 Sensitivity Analysis
@@ -540,9 +540,9 @@ Hybrid Adaptive STA-SMC achieves 30% lower settling time than Classical SMC unde
 **Statistical Significance**: Welch's t-test, p = 0.0001 (p < 0.05), Cohen's d = 0.82 (large effect)
 
 ## Conclusion
-✓ Hypothesis confirmed: Hybrid Adaptive STA-SMC reduces settling time by 30.4% (p < 0.001)
-✓ No significant increase in control effort (p = 0.12)
-✓ Robust to ±20% mass uncertainty
+ Hypothesis confirmed: Hybrid Adaptive STA-SMC reduces settling time by 30.4% (p < 0.001)
+ No significant increase in control effort (p = 0.12)
+ Robust to ±20% mass uncertainty
 
 ## Reproducibility
 ```bash
@@ -609,17 +609,17 @@ python scripts/docs/export_citations.py --format bibtex
 
 ```
 supplementary/
-├── code/                       # Experiment scripts
-│   ├── run_experiment.py
-│   ├── analyze.py
-│   └── requirements.txt
-├── data/                       # Raw data (or link to Zenodo)
-│   ├── results.csv
-│   └── metadata.json
-├── figures/                    # High-res figures (vector format)
-│   ├── comparison.pdf
-│   └── robustness.pdf
-└── README.md                   # Instructions for reviewers
+ code/                       # Experiment scripts
+    run_experiment.py
+    analyze.py
+    requirements.txt
+ data/                       # Raw data (or link to Zenodo)
+    results.csv
+    metadata.json
+ figures/                    # High-res figures (vector format)
+    comparison.pdf
+    robustness.pdf
+ README.md                   # Instructions for reviewers
 ```
 
 **Zenodo upload:**
@@ -681,13 +681,13 @@ python scripts/publication/generate_arxiv_package.py
 
 ```
 reproduction/
-├── README.md              # Step-by-step instructions
-├── environment.yml        # Conda environment (Python 3.9)
-├── requirements.txt       # Pip dependencies (pinned versions)
-├── config.yaml            # Exact experiment configuration
-├── run_reproduction.sh    # Automated reproduction script
-├── verify_results.py      # Compare reproduction vs. published
-└── expected_results.csv   # Ground truth results
+ README.md              # Step-by-step instructions
+ environment.yml        # Conda environment (Python 3.9)
+ requirements.txt       # Pip dependencies (pinned versions)
+ config.yaml            # Exact experiment configuration
+ run_reproduction.sh    # Automated reproduction script
+ verify_results.py      # Compare reproduction vs. published
+ expected_results.csv   # Ground truth results
 ```
 
 **Example `README.md`:**
@@ -717,7 +717,7 @@ Expected runtime: ~2 hours on 4-core CPU
 python verify_results.py --tolerance 1e-6
 ```
 
-Should output: ✓ All results match within tolerance
+Should output:  All results match within tolerance
 ```
 
 

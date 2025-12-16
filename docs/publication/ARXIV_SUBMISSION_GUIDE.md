@@ -61,14 +61,14 @@ All source files must be placed in `.artifacts/thesis/`:
 
 ```
 .artifacts/thesis/
-├── paper.tex           # Main LaTeX document
-├── references.bib      # Bibliography (BibTeX format)
-├── figures/            # 14 publication-quality figures
-│   ├── fig1_*.png
-│   ├── fig2_*.pdf
-│   └── ...
-├── IEEEtran.cls        # LaTeX class file (optional, if custom)
-└── IEEEtran.bst        # Bibliography style (optional, if custom)
+ paper.tex           # Main LaTeX document
+ references.bib      # Bibliography (BibTeX format)
+ figures/            # 14 publication-quality figures
+    fig1_*.png
+    fig2_*.pdf
+    ...
+ IEEEtran.cls        # LaTeX class file (optional, if custom)
+ IEEEtran.bst        # Bibliography style (optional, if custom)
 ```
 
 **Note:** If LaTeX files don't exist yet, convert the LT-7 v2.1 Markdown research paper to LaTeX format.
@@ -185,13 +185,13 @@ pdflatex paper.tex    # Pass 3: Finalize cross-references
 **Tarball contents:**
 ```
 arxiv_submission.tar.gz
-├── paper.tex
-├── references.bib
-├── fig1_*.png
-├── fig2_*.pdf
-├── ...
-├── IEEEtran.cls (if present)
-└── IEEEtran.bst (if present)
+ paper.tex
+ references.bib
+ fig1_*.png
+ fig2_*.pdf
+ ...
+ IEEEtran.cls (if present)
+ IEEEtran.bst (if present)
 ```
 
 **Size constraints:**
@@ -486,7 +486,7 @@ Excited to share our new preprint on arXiv!
 "Sliding Mode Control with PSO Optimization for Double-Inverted Pendulum"
 https://arxiv.org/abs/2511.12345
 
-We present 7 SMC controllers with formal stability proofs and comprehensive benchmarks.
+We present 7 SMC controllers with formal stability proofs and complete benchmarks.
 
 #ControlTheory #Robotics #Optimization
 ```
@@ -545,7 +545,7 @@ We present 7 SMC controllers with formal stability proofs and comprehensive benc
 \usepackage{cite}
 \usepackage{hyperref}
 
-\title{Sliding Mode Control with PSO Optimization\\for Double-Inverted Pendulum: A Comprehensive Study}
+\title{Sliding Mode Control with PSO Optimization\\for Double-Inverted Pendulum: A complete Study}
 
 \author{
   \IEEEauthorblockN{Your Name}
@@ -559,7 +559,7 @@ We present 7 SMC controllers with formal stability proofs and comprehensive benc
 \maketitle
 
 \begin{abstract}
-This paper presents a comprehensive study of sliding mode control (SMC)
+This paper presents a complete study of sliding mode control (SMC)
 techniques applied to a double-inverted pendulum (DIP) system...
 \end{abstract}
 
@@ -583,7 +583,7 @@ The classical sliding mode controller uses...
 
 \section{Results}
 \label{sec:results}
-Comprehensive benchmarks show...
+complete benchmarks show...
 
 \section{Conclusion}
 \label{sec:conclusion}

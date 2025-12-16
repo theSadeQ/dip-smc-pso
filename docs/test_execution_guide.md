@@ -223,23 +223,23 @@ name: Test Suite
 on: [push, pull_request] jobs: test: runs-on: ubuntu-latest strategy: matrix: python-version: [3.9, 3.10, 3.11] steps: - uses: actions/checkout@v3 - name: Set up Python ${{ matrix.python-version }} uses: actions/setup-python@v4 with: python-version: ${{ matrix.python-version }} - name: Install dependencies run: | pip install --upgrade pip pip install -r requirements.txt pip install pytest-cov pytest-benchmark pytest-xdist - name: Run unit tests run: | pytest -m "unit" --cov=src --cov-report=xml - name: Run integration tests run: | pytest -m "integration and not slow" --cov=src --cov-append - name: Run scientific validation run: | pytest -m "convergence or numerical_stability" -v - name: Run benchmarks run: | pytest -m "benchmark" --benchmark-only - name: Upload coverage to Codecov uses: codecov/codecov-action@v3 with: file: ./coverage.xml flags: unittests name: codecov-umbrella
 ``` ### Quality Gate Script ```bash
 #!/bin/bash
-# quality_gate.sh - Production deployment validation set -e echo "🚀 Starting quality gate validation..." # 1. Fast unit tests
-echo "📋 Running unit tests..."
-pytest -m "unit" --tb=short || { echo "❌ Unit tests failed"; exit 1; } # 2. Integration tests (excluding slow)
-echo "🔗 Running integration tests..."
-pytest -m "integration and not slow" --tb=short || { echo "❌ Integration tests failed"; exit 1; } # 3. Coverage validation
-echo "📊 Validating coverage..."
-pytest --cov=src --cov-fail-under=85 --tb=no || { echo "❌ Coverage below threshold"; exit 1; } # 4. Critical component coverage
-echo "🎯 Validating critical component coverage..."
-pytest tests/test_controllers/ --cov=src/controllers --cov-fail-under=95 --tb=no || { echo "❌ Controller coverage insufficient"; exit 1; }
-pytest tests/test_core/ --cov=src/core --cov-fail-under=95 --tb=no || { echo "❌ Core coverage insufficient"; exit 1; }
-pytest tests/test_optimization/ --cov=src/optimization --cov-fail-under=95 --tb=no || { echo "❌ Optimization coverage insufficient"; exit 1; } # 5. Scientific validation
-echo "🔬 Running scientific validation..."
-pytest -m "convergence or numerical_stability" --tb=short || { echo "❌ Scientific validation failed"; exit 1; } # 6. Performance regression check
-echo "⚡ Checking performance regression..."
-pytest -m "benchmark" --benchmark-compare --benchmark-compare-fail=mean:5% || { echo "❌ Performance regression detected"; exit 1; } # 7. Statistical validation
-echo "📈 Running statistical validation..."
-pytest -m "statistical" --tb=short || { echo "❌ Statistical validation failed"; exit 1; } echo "✅ All quality gates passed! Deployment approved."
+# quality_gate.sh - Production deployment validation set -e echo " Starting quality gate validation..." # 1. Fast unit tests
+echo " Running unit tests..."
+pytest -m "unit" --tb=short || { echo " Unit tests failed"; exit 1; } # 2. Integration tests (excluding slow)
+echo " Running integration tests..."
+pytest -m "integration and not slow" --tb=short || { echo " Integration tests failed"; exit 1; } # 3. Coverage validation
+echo " Validating coverage..."
+pytest --cov=src --cov-fail-under=85 --tb=no || { echo " Coverage below threshold"; exit 1; } # 4. Critical component coverage
+echo " Validating critical component coverage..."
+pytest tests/test_controllers/ --cov=src/controllers --cov-fail-under=95 --tb=no || { echo " Controller coverage insufficient"; exit 1; }
+pytest tests/test_core/ --cov=src/core --cov-fail-under=95 --tb=no || { echo " Core coverage insufficient"; exit 1; }
+pytest tests/test_optimization/ --cov=src/optimization --cov-fail-under=95 --tb=no || { echo " Optimization coverage insufficient"; exit 1; } # 5. Scientific validation
+echo " Running scientific validation..."
+pytest -m "convergence or numerical_stability" --tb=short || { echo " Scientific validation failed"; exit 1; } # 6. Performance regression check
+echo " Checking performance regression..."
+pytest -m "benchmark" --benchmark-compare --benchmark-compare-fail=mean:5% || { echo " Performance regression detected"; exit 1; } # 7. Statistical validation
+echo " Running statistical validation..."
+pytest -m "statistical" --tb=short || { echo " Statistical validation failed"; exit 1; } echo " All quality gates passed! Deployment approved."
 ``` ### Pre-commit Hook Configuration ```yaml
 # .pre-commit-config.yaml
 

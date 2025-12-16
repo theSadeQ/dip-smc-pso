@@ -8,7 +8,7 @@
 
 
 
-## 📐 Theoretical Foundations
+##  Theoretical Foundations
 
 ### Lyapunov Stability Theorem
 
@@ -42,7 +42,7 @@ $$t_{\text{reach}} = \frac{|\sigma(0)|}{\eta}$$
 
 
 
-## 🧪 Testing Methodologies
+##  Testing Methodologies
 
 ### Test 1: Positive Definiteness
 
@@ -122,7 +122,7 @@ def test_finite_time_reaching():
 
 
 
-## 🔬 Advanced Validation
+##  Advanced Validation
 
 ### Regional Stability
 
@@ -176,7 +176,7 @@ def test_ISS_property(state, disturbance):
 
 
 
-## 📊 Practical Considerations
+##  Practical Considerations
 
 ### Numerical Issues
 
@@ -229,7 +229,7 @@ def test_lyapunov_averaged_decrease(state):
 
 
 
-## 📚 Related Documentation
+##  Related Documentation
 
 - [SMC Validation Mathematics](smc_validation_mathematics.md)
 - [Property-Based Testing](../guides/property_based_testing.md)
@@ -237,9 +237,9 @@ def test_lyapunov_averaged_decrease(state):
 
 
 
-## 🔗 Navigation
+##  Navigation
 
-[⬅️ Back to Theory](../theory/) | [🏠 Testing Home](../README.md) | [➡️ SMC Validation Math](smc_validation_mathematics.md)
+[ Back to Theory](../theory/) | [ Testing Home](../README.md) | [ SMC Validation Math](smc_validation_mathematics.md)
 
 
 

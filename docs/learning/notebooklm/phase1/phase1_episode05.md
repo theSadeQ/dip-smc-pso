@@ -8,13 +8,13 @@
 
 Imagine you're organizing a library. You could arrange books in a line, numbered 1, 2, 3... That's one approach. Or you could organize them by ISBN, where each book has a unique identifier that maps to its location. The first approach is like a list - ordered items accessed by position. The second is like a dictionary - key-value pairs where you look up information by name.
 
-Today, you'll learn Python's two most important data structures: lists and dictionaries. These let you organize, access, and manipulate collections of data efficiently. By the end of this episode, you'll be ready to handle the state vectors, time series data, and configuration parameters that power control system simulations.
+Today, the system will learn Python's two most important data structures: lists and dictionaries. These let you organize, access, and manipulate collections of data efficiently. By the end of this episode, the system will be ready to handle the state vectors, time series data, and configuration parameters that power control system simulations.
 
 ---
 
 ## What You'll Discover
 
-By listening to this episode, you'll learn:
+By listening to this episode, the system will learn:
 
 - Creating and accessing lists
 - List operations: append, remove, sort, slice
@@ -197,7 +197,7 @@ print open-parenthesis large underscore angles close-parenthesis  # [0.15, 0.20]
 
 ## Recap: Lists So Far
 
-Let's pause and review what you've learned about lists:
+pause and review what you've learned about lists:
 
 **Number one**: Lists are ordered collections accessed by index. Indices start at 0.
 
@@ -489,7 +489,7 @@ for gains space in space gain underscore sets colon
 
 ## What's Next: NumPy and Matplotlib Basics
 
-In Episode 6, we'll explore the numerical computing libraries essential for control systems:
+In Episode 6, this will explore the numerical computing libraries essential for control systems:
 
 - NumPy arrays: Fast numerical operations
 - Array creation and manipulation
@@ -497,7 +497,7 @@ In Episode 6, we'll explore the numerical computing libraries essential for cont
 - Matplotlib: Plotting and visualization
 - Creating publication-quality plots
 
-These libraries turn Python from a general-purpose language into a powerful scientific computing platform.
+These libraries turn Python from a general-purpose language into a effective scientific computing platform.
 
 ---
 

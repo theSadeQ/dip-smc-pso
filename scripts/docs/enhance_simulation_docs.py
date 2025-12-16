@@ -10,7 +10,7 @@ Enhances 12 critical simulation framework files with:
 - Parallel computing theory (Amdahl's law, thread safety, load balancing)
 - Safety-critical systems theory (formal methods, runtime verification)
 - Architecture diagrams (Mermaid flowcharts)
-- Comprehensive usage examples (60 total scenarios)
+- complete usage examples (60 total scenarios)
 
 Usage:
     python scripts/docs/enhance_simulation_docs.py --dry-run
@@ -35,7 +35,7 @@ class SimulationEnhancementStats:
 
 
 class SimulationDocEnhancer:
-    """Enhances simulation framework documentation with comprehensive content."""
+    """Enhances simulation framework documentation with complete content."""
 
     # All 12 simulation framework files to enhance (Week 8 Phase 1)
     SIMULATION_FILES = {
@@ -709,7 +709,7 @@ x_{n+1} = x_n + \\Delta t \\cdot \\Phi(x_n, x_{n+1}, t_n, \\Delta t)
 
 For a consistent numerical method applied to a well-posed linear IVP:
 
-**Stability + Consistency ⟹ Convergence**
+**Stability + Consistency  Convergence**
 
 ### Performance Characteristics
 
@@ -902,16 +902,16 @@ x_{k+1} = \\Phi(x_k, u_k, \\Delta t) \\quad \\Rightarrow \\quad x_{k+1} \\text{ 
 ### Performance Characteristics
 
 **Advantages:**
-- ✅ Deterministic execution
-- ✅ Simple debugging
-- ✅ Low memory overhead
-- ✅ No thread synchronization overhead
-- ✅ Cache-friendly access patterns
+-  Deterministic execution
+-  Simple debugging
+-  Low memory overhead
+-  No thread synchronization overhead
+-  Cache-friendly access patterns
 
 **Limitations:**
-- ❌ Single-core utilization
-- ❌ No speedup for batch operations
-- ❌ Underutilizes modern multi-core CPUs
+-  Single-core utilization
+-  No speedup for batch operations
+-  Underutilizes modern multi-core CPUs
 
 ### Computational Efficiency
 

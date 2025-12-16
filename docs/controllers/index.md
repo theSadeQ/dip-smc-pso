@@ -11,7 +11,7 @@ This section provides complete documentation for the DIP_SMC_PSO controllers mod
 - **API Reference**: Detailed code documentation
 - **Best Practices**: Usage patterns and optimization workflows
 
-## 📚 Technical Guides
+##  Technical Guides
 
 ### Core SMC Controllers
 
@@ -70,7 +70,7 @@ control_primitives_reference
 - Control primitives (saturation, dead zones, safe operations)
 - Numerical stability guarantees
 
-## 🔬 Mathematical Foundations
+##  Mathematical Foundations
 
 ```{toctree}
 :maxdepth: 2
@@ -89,7 +89,7 @@ control_primitives_reference
 
 ---
 
-## 📖 API Reference
+##  API Reference
 
 Complete Python API documentation for all controller modules:
 
@@ -179,16 +179,16 @@ else:
 
 ### Completed (Weeks 1-4)
 
-✅ **Week 1**: Documentation automation infrastructure
-✅ **Week 2**: Core SMC controllers (Classical, Adaptive, STA) + mathematical foundations
-✅ **Week 3**: Plant models + Optimization/Simulation infrastructure
-✅ **Week 4**: Advanced controllers (Hybrid SMC, MPC, Swing-Up SMC)
+ **Week 1**: Documentation automation infrastructure
+ **Week 2**: Core SMC controllers (Classical, Adaptive, STA) + mathematical foundations
+ **Week 3**: Plant models + Optimization/Simulation infrastructure
+ **Week 4**: Advanced controllers (Hybrid SMC, MPC, Swing-Up SMC)
 
 ### New in Week 4
 
-📚 **{doc}`hybrid_smc_technical_guide`** - Hybrid Adaptive-STA SMC for maximum performance
-📚 **{doc}`mpc_technical_guide`** - Model predictive control with constraint handling
-📚 **{doc}`swing_up_smc_technical_guide`** - Energy-based large angle stabilization
+ **{doc}`hybrid_smc_technical_guide`** - Hybrid Adaptive-STA SMC for maximum performance
+ **{doc}`mpc_technical_guide`** - Model predictive control with constraint handling
+ **{doc}`swing_up_smc_technical_guide`** - Energy-based large angle stabilization
 
 ### Documentation Coverage Summary
 

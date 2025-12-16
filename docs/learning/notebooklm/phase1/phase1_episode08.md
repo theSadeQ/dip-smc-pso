@@ -8,13 +8,13 @@
 
 Drop a ball. It falls. Push a cart. It rolls. These everyday observations seem simple, but they contain profound truths about how the universe works. In 1687, Isaac Newton published three laws that explain all mechanical motion - from falling apples to orbiting planets to swinging pendulums.
 
-Today, you'll learn those laws and understand how they govern the double-inverted pendulum you'll soon be controlling. By the end of this episode, you'll see physics not as abstract equations, but as descriptions of real, observable behavior. You'll understand WHY pendulums swing, WHY inverted pendulums fall, and WHY control is necessary to keep them upright.
+Today, the system will learn those laws and understand how they govern the double-inverted pendulum the system will soon be controlling. By the end of this episode, the system will see physics not as abstract equations, but as descriptions of real, observable behavior. You'll understand WHY pendulums swing, WHY inverted pendulums fall, and WHY control is necessary to keep them upright.
 
 ---
 
 ## What You'll Discover
 
-By listening to this episode, you'll learn:
+By listening to this episode, the system will learn:
 
 - Newton's three laws of motion with physical intuition
 - What forces are and how they cause motion
@@ -31,11 +31,11 @@ By listening to this episode, you'll learn:
 
 **The Law**: An object at rest stays at rest. An object in motion stays in motion at constant velocity. Unless acted upon by an external force.
 
-Let's unpack this with examples.
+unpack this with examples.
 
 **Example One: The Stationary Cart**
 
-Imagine the pendulum cart sitting on the track. No forces act on it horizontally (we'll ignore friction for now). According to Newton's First Law, it stays at rest. Forever. It won't spontaneously start moving.
+Imagine the pendulum cart sitting on the track. No forces act on it horizontally (this will ignore friction for now). According to Newton's First Law, it stays at rest. Forever. It won't spontaneously start moving.
 
 **Example Two: The Moving Cart**
 
@@ -57,7 +57,7 @@ When you want to move the cart, you must apply a force to overcome its inertia. 
 
 **The Law**: Force equals mass times acceleration. Or rearranged: acceleration equals force divided by mass.
 
-This is THE fundamental equation of dynamics. Let's explore what it means.
+This is THE fundamental equation of dynamics. explore what it means.
 
 **The Equation**
 
@@ -136,7 +136,7 @@ When your controller applies force to move the cart left, the cart pushes back o
 
 ## Recap: Newton's Laws
 
-Let's pause and review:
+pause and review:
 
 **First Law (Inertia)**: Objects resist changes in motion. Stationary objects stay stationary. Moving objects maintain constant velocity. Unless forces act.
 
@@ -397,7 +397,7 @@ Physics imposes hard limits. Maximum actuator force. Maximum acceleration. Under
 
 ## What's Next: Double-Inverted Pendulum and Stability
 
-In Episode 9, we'll dive deeper into the double-inverted pendulum specifically:
+In Episode 9, this will dive deeper into the double-inverted pendulum specifically:
 
 - Detailed system dynamics
 - Why it's a benchmark for control systems

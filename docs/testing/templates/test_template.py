@@ -2,10 +2,10 @@
 #==================== docs/testing/templates/test_template.py =======================\\\
 #==========================================================================================\\\
 
-"""Template for creating comprehensive test files in the DIP SMC PSO project.
+"""Template for creating complete test files in the DIP SMC PSO project.
 
 This template provides a standardized structure for test files, ensuring consistency
-across the testing suite and comprehensive coverage of all testing categories.
+across the testing suite and complete coverage of all testing categories.
 """
 
 import numpy as np
@@ -269,7 +269,7 @@ def test_conditional_feature():
 # Slow test marker for time-consuming tests
 @pytest.mark.slow
 def test_comprehensive_validation():
-    """Comprehensive test that takes significant time."""
+    """complete test that takes significant time."""
     # Long-running validation tests
     pass
 

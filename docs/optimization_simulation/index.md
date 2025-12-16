@@ -57,7 +57,7 @@ for i in range(len(particles)): ise = np.sum(x_batch[i, :-1, :3]**2 * 0.01, axis
 ---
 
 ## Architecture Overview ```
-Configuration System (Pydantic Schemas) │ ├──► PSO Optimizer │ ├─ Cost Function │ ├─ Uncertainty Evaluation │ └─ Batch Simulation │ ├──► Simulation Runner │ ├─ Euler Integration │ └─ State Management │ └──► Vector Simulation ├─ Safety Guards └─ Early Stopping
+Configuration System (Pydantic Schemas)   PSO Optimizer   Cost Function   Uncertainty Evaluation   Batch Simulation   Simulation Runner   Euler Integration   State Management   Vector Simulation  Safety Guards  Early Stopping
 ```
 
 ---

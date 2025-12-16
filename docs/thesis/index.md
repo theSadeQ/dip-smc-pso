@@ -1,6 +1,6 @@
 # Thesis Documentation
 
-Comprehensive thesis materials for the double-inverted pendulum sliding mode control project, including main chapters, validation framework, and verification protocols.
+complete thesis materials for the double-inverted pendulum sliding mode control project, including main chapters, validation framework, and verification protocols.
 
 ## Overview
 

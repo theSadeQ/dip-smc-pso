@@ -151,7 +151,7 @@ def plot_visual_comparison(
     output_path: Path
 ):
     """
-    Create comprehensive visual comparison plots.
+    Create complete visual comparison plots.
 
     Plots:
     1. Full trajectory u(t) - 10 seconds
@@ -252,7 +252,7 @@ def plot_visual_comparison(
     # -------------------------------------------------------------------------
     plt.tight_layout()
     plt.savefig(output_path, dpi=150, bbox_inches='tight')
-    logger.info(f"✓ Saved visual comparison to {output_path}")
+    logger.info(f" Saved visual comparison to {output_path}")
     plt.close()
 
 
@@ -337,16 +337,16 @@ def main():
     freq_20_better = metrics_adaptive['freq_domain_20hz'] <= metrics_fixed['freq_domain_20hz'] * 1.1  # Within 10%
 
     logger.info("\nPredicted Outcomes (from Phase 1 analysis):")
-    logger.info(f"  Zero-Crossing Rate: Adaptive BETTER? {zero_cross_better} {'✓' if zero_cross_better else '✗'}")
-    logger.info(f"  Steady-State Variance: Adaptive BETTER? {ss_var_better} {'✓' if ss_var_better else '✗'}")
-    logger.info(f"  Freq-Domain (20 Hz): Adaptive SAME/BETTER? {freq_20_better} {'✓' if freq_20_better else '✗'}")
+    logger.info(f"  Zero-Crossing Rate: Adaptive BETTER? {zero_cross_better} {'' if zero_cross_better else ''}")
+    logger.info(f"  Steady-State Variance: Adaptive BETTER? {ss_var_better} {'' if ss_var_better else ''}")
+    logger.info(f"  Freq-Domain (20 Hz): Adaptive SAME/BETTER? {freq_20_better} {'' if freq_20_better else ''}")
 
     # Overall conclusion
     bias_confirmed = sum([zero_cross_better, ss_var_better, freq_20_better]) >= 2
 
     logger.info("\n" + "=" * 80)
     if bias_confirmed:
-        logger.info("✓ BIAS HYPOTHESIS CONFIRMED")
+        logger.info(" BIAS HYPOTHESIS CONFIRMED")
         logger.info("=" * 80)
         logger.info("Conclusion:")
         logger.info("  - Adaptive boundary layer performs BETTER on unbiased metrics")
@@ -355,7 +355,7 @@ def main():
         logger.info("  - Recommendation: Use zero-crossing rate or frequency-domain metrics")
         logger.info("\nMT-6 Status: SUCCESS (adaptive works, metric doesn't)")
     else:
-        logger.info("✗ BIAS HYPOTHESIS REJECTED")
+        logger.info(" BIAS HYPOTHESIS REJECTED")
         logger.info("=" * 80)
         logger.info("Conclusion:")
         logger.info("  - Adaptive boundary layer may genuinely chatter more")
@@ -391,8 +391,8 @@ def main():
     with open(results_file, 'w') as f:
         json.dump(results, f, indent=2)
 
-    logger.info(f"\n✓ Saved alternative metrics to {results_file}")
-    logger.info(f"✓ Saved visual comparison to {output_plot}")
+    logger.info(f"\n Saved alternative metrics to {results_file}")
+    logger.info(f" Saved visual comparison to {output_plot}")
     logger.info("\nMT-6 Phase 2 Complete!")
 
 

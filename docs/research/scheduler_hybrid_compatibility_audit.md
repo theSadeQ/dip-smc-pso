@@ -186,13 +186,13 @@ elif controller_type == 'HybridAdaptiveSTASMC':
 ```
 
 **What Gets Modified:**
-- ✓ c1, lambda1, c2, lambda2 (external surface coefficients)
+-  c1, lambda1, c2, lambda2 (external surface coefficients)
 
 **What Does NOT Get Modified:**
-- ✗ k1, k2 (internal adaptive gains) - these evolve via Hybrid's adaptation law
-- ✗ u_int (STA integral state) - evolves via STA dynamics
-- ✗ gamma1, gamma2 (adaptation rates) - fixed parameters
-- ✗ taper_eps (self-tapering threshold) - fixed parameter
+-  k1, k2 (internal adaptive gains) - these evolve via Hybrid's adaptation law
+-  u_int (STA integral state) - evolves via STA dynamics
+-  gamma1, gamma2 (adaptation rates) - fixed parameters
+-  taper_eps (self-tapering threshold) - fixed parameter
 
 **Critical Observation:**
 
@@ -468,10 +468,10 @@ def update_controller_gains(self, new_gains):
 
 The adaptive gain scheduler implements a **one-size-fits-all** approach that:
 
-1. ✓ Works well for Classical SMC (28-40% chattering reduction)
-2. ⚪ Has no effect on STA SMC (already optimal, 0% change)
-3. ⚠️ Has mixed results for Adaptive SMC (conflicts with internal adaptation)
-4. ❌ **FAILS catastrophically for Hybrid SMC (+217% chattering increase)**
+1.  Works well for Classical SMC (28-40% chattering reduction)
+2.  Has no effect on STA SMC (already optimal, 0% change)
+3.  Has mixed results for Adaptive SMC (conflicts with internal adaptation)
+4.  **FAILS catastrophically for Hybrid SMC (+217% chattering increase)**
 
 **Root Causes of Hybrid Incompatibility:**
 

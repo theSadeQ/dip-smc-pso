@@ -409,7 +409,7 @@ def generate_report(
     output_dir: Path
 ) -> None:
     """
-    Generate comprehensive Phase 2.1 report.
+    Generate complete Phase 2.1 report.
 
     Args:
         baseline_results: Baseline condition statistics

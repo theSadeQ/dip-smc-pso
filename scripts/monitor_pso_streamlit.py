@@ -213,12 +213,12 @@ def estimate_time_remaining(status: ControllerStatus) -> Optional[str]:
 def main():
     st.set_page_config(
         page_title="PSO Optimization Monitor",
-        page_icon="📊",
+        page_icon="",
         layout="wide",
         initial_sidebar_state="expanded"
     )
 
-    st.title("🔧 PSO Gain Tuning Monitor")
+    st.title(" PSO Gain Tuning Monitor")
     st.markdown("**Real-time monitoring of controller gain optimization (LT-7)**")
 
     # Sidebar controls
@@ -226,7 +226,7 @@ def main():
     auto_refresh = st.sidebar.checkbox("Auto-refresh", value=True)
     refresh_interval = st.sidebar.slider("Refresh interval (seconds)", 1, 10, 3)
 
-    if st.sidebar.button("🔄 Refresh Now"):
+    if st.sidebar.button(" Refresh Now"):
         st.rerun()
 
     # Parse log file
@@ -237,7 +237,7 @@ def main():
         statuses[ctrl] = update_status_from_json(status)
 
     # Overall progress
-    st.header("📈 Overall Progress")
+    st.header(" Overall Progress")
 
     completed = sum(1 for s in statuses.values() if s.status == 'completed')
     running = sum(1 for s in statuses.values() if s.status == 'running')
@@ -245,27 +245,27 @@ def main():
     pending = sum(1 for s in statuses.values() if s.status == 'pending')
 
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("✅ Completed", completed)
-    col2.metric("▶️ Running", running)
-    col3.metric("❌ Failed", failed)
+    col1.metric(" Completed", completed)
+    col2.metric(" Running", running)
+    col3.metric(" Failed", failed)
     col4.metric("⏳ Pending", pending)
 
     overall_progress = completed / len(CONTROLLERS)
     st.progress(overall_progress, text=f"{completed}/{len(CONTROLLERS)} controllers optimized")
 
     # Individual controller status
-    st.header("🎯 Controller Status")
+    st.header(" Controller Status")
 
     for ctrl, status in statuses.items():
         with st.expander(f"**{ctrl}** - {status.status.upper()}", expanded=(status.status == 'running')):
 
             # Status indicators
             if status.status == 'completed':
-                st.success("✅ Optimization completed")
+                st.success(" Optimization completed")
             elif status.status == 'running':
-                st.info("▶️ Optimization in progress...")
+                st.info(" Optimization in progress...")
             elif status.status == 'failed':
-                st.error("❌ Optimization failed")
+                st.error(" Optimization failed")
             else:
                 st.warning("⏳ Waiting to start...")
 
@@ -278,18 +278,18 @@ def main():
             if status.status == 'running':
                 time_remaining = estimate_time_remaining(status)
                 if time_remaining:
-                    st.metric("⏱️ Estimated Time Remaining", time_remaining)
+                    st.metric("⏱ Estimated Time Remaining", time_remaining)
 
             if status.optimization_time_minutes:
-                st.metric("⏱️ Total Optimization Time", f"{status.optimization_time_minutes:.1f} minutes")
+                st.metric("⏱ Total Optimization Time", f"{status.optimization_time_minutes:.1f} minutes")
 
             # Best cost
             if status.best_cost is not None:
-                st.metric("🏆 Best Cost", f"{status.best_cost:.6f}")
+                st.metric(" Best Cost", f"{status.best_cost:.6f}")
 
             # Best gains
             if status.best_gains and status.gain_names:
-                st.subheader("🎛️ Optimized Gains")
+                st.subheader(" Optimized Gains")
                 gains_df = pd.DataFrame({
                     'Parameter': status.gain_names,
                     'Value': [f"{g:.4f}" for g in status.best_gains]
@@ -298,13 +298,13 @@ def main():
 
             # Convergence plot
             if status.convergence_history:
-                st.subheader("📉 Convergence Curve")
+                st.subheader(" Convergence Curve")
                 fig = plot_convergence(status.convergence_history, ctrl)
                 st.pyplot(fig)
                 plt.close(fig)
 
     # Log file preview
-    with st.expander("📄 Log File (Last 50 Lines)"):
+    with st.expander(" Log File (Last 50 Lines)"):
         if LOG_FILE.exists():
             with open(LOG_FILE, 'r', encoding='utf-8') as f:
                 lines = f.readlines()

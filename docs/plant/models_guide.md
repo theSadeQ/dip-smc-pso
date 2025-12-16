@@ -98,20 +98,20 @@ The plant module uses a layered architecture with clear separation of concerns:
 
 ```
 src/plant/models/
-├── base/ # Abstract interfaces
-│ └── dynamics_interface.py # Protocol and base classes
-├── simplified/ # Simplified model implementation
-│ ├── config.py # Type-safe configuration
-│ ├── dynamics.py # Main dynamics class
-│ └── physics.py # Physics computation
-├── full/ # Full-fidelity model
-│ ├── config.py
-│ ├── dynamics.py
-│ └── physics.py
-└── lowrank/ # Low-rank model
-    ├── config.py
-    ├── dynamics.py
-    └── physics.py
+ base/ # Abstract interfaces
+  dynamics_interface.py # Protocol and base classes
+ simplified/ # Simplified model implementation
+  config.py # Type-safe configuration
+  dynamics.py # Main dynamics class
+  physics.py # Physics computation
+ full/ # Full-fidelity model
+  config.py
+  dynamics.py
+  physics.py
+ lowrank/ # Low-rank model
+     config.py
+     dynamics.py
+     physics.py
 ```
 
 ### Design Principles
@@ -790,7 +790,7 @@ C = ctrb(A, B)
 rank = np.linalg.matrix_rank(C)
 
 if rank == A.shape[0]:
-    print("System is controllable ✓")
+    print("System is controllable ")
 else:
     print(f"System rank deficient: {rank}/{A.shape[0]}")
 
@@ -1056,4 +1056,4 @@ class LowRankDIPDynamics(BaseDynamicsModel):
 
 **Version:** Phase 3
 **Last Updated:** October 2025
-**Status:** Production-Ready ✓
+**Status:** Production-Ready 

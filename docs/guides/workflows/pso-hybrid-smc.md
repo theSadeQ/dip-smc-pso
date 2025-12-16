@@ -100,13 +100,13 @@ python simulate.py --ctrl hybrid_adaptive_sta_smc --run-pso --save gains_hybrid.
 
 **Expected Output:**
 ```
-✓ Pre-Flight Validation
+ Pre-Flight Validation
   - Configuration loaded successfully
   - Hybrid Adaptive STA-SMC controller supported
   - PSO optimizer module available
   - Dependencies validated
 
-✓ PSO Execution Started
+ PSO Execution Started
   - Swarm Size: 40 particles
   - Target Iterations: 200
   - PSO Parameters: c1=2.0, c2=2.0, w=0.7
@@ -117,13 +117,13 @@ python simulate.py --ctrl hybrid_adaptive_sta_smc --run-pso --save gains_hybrid.
     * c2: [2.0, 10.0]
     * λ2: [0.2, 5.0]
 
-✓ Optimization Progress
+ Optimization Progress
   Iteration 50/200: Best cost = 12.34567
   Iteration 100/200: Best cost = 1.23456
   Iteration 150/200: Best cost = 0.12345
   Iteration 200/200: Best cost = 0.000000
 
-✓ Optimization Complete
+ Optimization Complete
   - Execution Time: 45-60 seconds
   - Best Cost: 0.000000 (perfect convergence)
   - Convergence: Achieved
@@ -1068,6 +1068,6 @@ python scripts/research/test_disturbance_rejection.py --controller hybrid_adapti
 **Replaces:** pso-hybrid-smc.md stub (2025-10-07, 43 lines)
 **Changelog:**
 - 2025-11-10: Complete rewrite from stub to production guide (43 → 850+ lines)
-- Added 10 comprehensive sections with real examples
+- Added 10 complete sections with real examples
 - Integrated MT-8 robust optimization case study
 - Included troubleshooting, validation, and production deployment guidance

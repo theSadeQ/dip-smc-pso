@@ -430,15 +430,15 @@ from pyswarms.single import GlobalBestPSO
 
 ---
 
-## Compliance Checklist ✅ **Open-Source Best Practices:**
+## Compliance Checklist  **Open-Source Best Practices:**
 
 - [ ] All dependencies documented
 - [ ] Licenses identified and compatible
 - [ ] Citations included where available
-- [ ] GitHub repositories linked ✅ **Academic Integrity:**
+- [ ] GitHub repositories linked  **Academic Integrity:**
 - [ ] Scientific libraries properly cited
 - [ ] BibTeX entries provided
-- [ ] DOIs included where available ✅ **Legal Compliance:**
+- [ ] DOIs included where available  **Legal Compliance:**
 - [ ] No GPL dependencies in distributed code (linkchecker is dev-only)
 - [ ] All licenses permit commercial use
 - [ ] Attribution requirements met

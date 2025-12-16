@@ -103,8 +103,8 @@ const selectors = [
 
 ```javascript
 const CONFIG = {
-    collapsedIcon: '▶',  // Change from '▶'
-    expandedIcon: '▼',   // Change from '▼'
+    collapsedIcon: '',  // Change from ''
+    expandedIcon: '',   // Change from ''
 };
 ```
 
@@ -131,10 +131,10 @@ open docs/_build/html/index.html   # Mac
 Verify functionality
 # - Buttons appear on all code blocks
 # - Collapse/expand works smoothly
-# - Console shows "[CodeCollapse] ✅ 100% coverage"
+# - Console shows "[CodeCollapse]  100% coverage"
 ```
 
-### Comprehensive Test (30 minutes)
+### complete Test (30 minutes)
 
 Follow complete testing procedure:
 ```bash
@@ -168,14 +168,14 @@ Debug logging is **enabled by default** (lines 58-89 in `code-collapse.js`).
 **Console output includes:**
 ```
 [CodeCollapse] Found 42 code blocks
-[CodeCollapse] ✅ 100% coverage (42 matched, 0 unmatched)
+[CodeCollapse]  100% coverage (42 matched, 0 unmatched)
 [CodeCollapse] Selector performance:
-┌─────────┬──────────────────────────┬────────┐
-│ (index) │ selector                 │ count  │
-├─────────┼──────────────────────────┼────────┤
-│ 0       │ 'div.highlight-python'   │ 15     │
-│ 1       │ 'div[class*="highlight"]'│ 27     │
-└─────────┴──────────────────────────┴────────┘
+
+ (index)  selector                  count  
+
+ 0        'div.highlight-python'    15     
+ 1        'div[class*="highlight"]' 27     
+
 ```
 
 ### Common Issues
@@ -290,7 +290,7 @@ localStorage.getItem('code-block-states')
 // FPS: DevTools → Performance → Record → Collapse block
 // CLS: DevTools → Performance Insights → Core Web Vitals
 // Memory: DevTools → Memory → Take heap snapshot
-// Coverage: Check console log "[CodeCollapse] ✅ 100% coverage"
+// Coverage: Check console log "[CodeCollapse]  100% coverage"
 ```
 
 ### Performance Regression Detection

@@ -398,13 +398,13 @@ def check_schedulability(tasks):
     print(f"Liu & Layland bound: {bound:.4f}")
 
     if utilization <= bound:
-        print("✓ Schedulable by RMS (sufficient test)")
+        print(" Schedulable by RMS (sufficient test)")
         return True
     elif utilization <= 1.0:
         print("? May be schedulable (exact test required)")
         return None
     else:
-        print("✗ Not schedulable (utilization > 1)")
+        print(" Not schedulable (utilization > 1)")
         return False
 
 # Example task set

@@ -5,7 +5,7 @@
 =======================================================================================
 Automated Documentation Generator for DIP_SMC_PSO Project
 
-Generates comprehensive Sphinx documentation with embedded source code for all Python
+Generates complete Sphinx documentation with embedded source code for all Python
 files in the project. Creates markdown files with literalinclude directives, extracted
 docstrings, and structured navigation.
 
@@ -334,7 +334,7 @@ This section documents all Python source files in `src/{module_name}/`.
         return filename
 
     def _generate_file_doc(self, module_info: ModuleInfo, output_dir: Path):
-        """Generate comprehensive documentation for a single Python file."""
+        """Generate complete documentation for a single Python file."""
         doc_filename = self._get_doc_filename(module_info)
         doc_path = output_dir / doc_filename
 
@@ -468,11 +468,11 @@ This section provides **complete source code documentation** for all Python modu
 ## Overview
 
 Every Python file in the project is documented here with:
-- ✅ **Full source code** embedded with syntax highlighting
-- ✅ **Extracted docstrings** for modules, classes, and functions
-- ✅ **Architecture information** and module relationships
-- ✅ **Line-by-line explanations** for key algorithms
-- ✅ **Usage examples** and tutorials
+-  **Full source code** embedded with syntax highlighting
+-  **Extracted docstrings** for modules, classes, and functions
+-  **Architecture information** and module relationships
+-  **Line-by-line explanations** for key algorithms
+-  **Usage examples** and tutorials
 
 ## Modules
 
@@ -550,7 +550,7 @@ Every Python file in the project is documented here with:
 def main():
     """Main entry point for documentation generator."""
     parser = argparse.ArgumentParser(
-        description='Generate comprehensive Sphinx documentation with embedded source code'
+        description='Generate complete Sphinx documentation with embedded source code'
     )
     parser.add_argument(
         '--module',

@@ -154,7 +154,7 @@ def generate_markdown_report(json_data: Dict) -> str:
         "greeting": {
             "description": "Conversational welcomes and exploratory language",
             "examples": [
-                ("Let's explore the PSO optimizer", "The PSO optimizer minimizes..."),
+                ("explore the PSO optimizer", "The PSO optimizer minimizes..."),
                 ("Welcome to the guide!", "This guide covers..."),
                 ("We will examine the controller", "The controller implements..."),
             ]
@@ -162,9 +162,9 @@ def generate_markdown_report(json_data: Dict) -> str:
         "enthusiasm": {
             "description": "Marketing buzzwords and hype language",
             "examples": [
-                ("powerful framework", "framework"),
+                ("effective framework", "framework"),
                 ("seamless integration", "integration"),
-                ("cutting-edge algorithms", "algorithms (see references)"),
+                ("current algorithms", "algorithms (see references)"),
             ]
         },
         "hedge_words": {

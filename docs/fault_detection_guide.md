@@ -1,10 +1,10 @@
 # Fault Detection & Isolation (FDI) Guide ## Overview The DIP_SMC_PSO system includes a Fault Detection and Isolation (FDI) module that monitors system health in real-time. The FDI system compares model predictions with actual measurements to detect deviations that may indicate component failures, sensor faults, or unexpected disturbances. ## Architecture The FDI system uses a **model-based residual approach**: ```
 
-┌─────────────┐ ┌─────────────┐
-│ Dynamics │ │ Measurement │
-│ Model │ │ (Actual) │
-│ x̂(k+1) │ │ x(k+1) │
-└──────┬──────┘ └──────┬──────┘ │ │ └────────┬─────────┘ │ ┌───────▼────────┐ │ Residual = r │ │ = x(k+1)-x̂(k+1)│ └───────┬────────┘ │ ┌───────▼────────┐ │ ||r|| > threshold │ │ & persistence? │ └────────────────┘
+ 
+ Dynamics   Measurement 
+ Model   (Actual) 
+ x̂(k+1)   x(k+1) 
+        Residual = r   = x(k+1)-x̂(k+1)     ||r|| > threshold   & persistence?  
 ``` **Key Components:** 1. **Residual Generation**: Compares one-step predictions with measurements
 2. **Threshold Testing**: Monitors residual norm against configurable limits
 3. **Persistence Filter**: Requires sustained violations to avoid false alarms

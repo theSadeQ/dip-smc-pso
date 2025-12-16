@@ -615,9 +615,9 @@ def main():
         logger.info(f"  Improvement:         {chattering_reduction:+.1f}%")
 
         if chattering_reduction >= 30:
-            logger.info(f"  ✓ SUCCESS: Achieved ≥30% chattering reduction target")
+            logger.info(f"   SUCCESS: Achieved ≥30% chattering reduction target")
         else:
-            logger.info(f"  ✗ Target not met: Required ≥30% reduction, achieved {chattering_reduction:.1f}%")
+            logger.info(f"   Target not met: Required ≥30% reduction, achieved {chattering_reduction:.1f}%")
 
         # Statistical significance test (Welch's t-test)
         # Assume baseline has similar std (1.20) based on Agent A

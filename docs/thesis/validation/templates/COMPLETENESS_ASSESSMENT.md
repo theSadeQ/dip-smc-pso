@@ -10,29 +10,29 @@
 
 ### RQ1: Classical SMC Effectiveness for DIP
 - **Addressed In**: [Chapter X, Section X.X]
-- **Coverage**: [Comprehensive / Adequate / Partial / Missing]
+- **Coverage**: [complete / Adequate / Partial / Missing]
 - **Evidence**: [Theory / Simulation / Both]
 - **Assessment**: [Sufficiently addressed / Needs more evidence / Not addressed]
 
 ### RQ2: STA Improvements over Classical SMC
 - **Addressed In**: [Chapter X, Section X.X]
-- **Coverage**: [Comprehensive / Adequate / Partial / Missing]
+- **Coverage**: [complete / Adequate / Partial / Missing]
 - **Metrics Compared**: [Convergence / Chattering / Robustness]
 - **Assessment**: [Sufficiently addressed / Needs more evidence / Not addressed]
 
 ### RQ3: Adaptive Control Benefits
 - **Addressed In**: [Chapter X]
-- **Coverage**: [Comprehensive / Adequate / Partial / Missing]
+- **Coverage**: [complete / Adequate / Partial / Missing]
 - **Assessment**: [Sufficiently addressed / Incomplete / Missing]
 
 ### RQ4: PSO Optimization Impact
 - **Addressed In**: [Chapter X]
-- **Coverage**: [Comprehensive / Adequate / Partial / Missing]
+- **Coverage**: [complete / Adequate / Partial / Missing]
 - **Assessment**: [Sufficiently addressed / Incomplete / Missing]
 
 ### RQ5: Hybrid Approach Advantages
 - **Addressed In**: [Chapter X]
-- **Coverage**: [Comprehensive / Adequate / Partial / Missing]
+- **Coverage**: [complete / Adequate / Partial / Missing]
 - **Assessment**: [Sufficiently addressed / Incomplete / Missing]
 
 ### Overall RQ Coverage: [5/5 / 4/5 / 3/5 / Other]
@@ -158,7 +158,7 @@
 
 ## OVERALL COMPLETENESS ASSESSMENT
 
-**Assessment**: [Comprehensive / Mostly complete / Adequate with gaps / Incomplete]
+**Assessment**: [complete / Mostly complete / Adequate with gaps / Incomplete]
 
 **Confidence Level**: [Very High / High / Medium / Low]
 

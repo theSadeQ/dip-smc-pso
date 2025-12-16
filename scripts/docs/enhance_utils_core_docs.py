@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-════════════════════════════════════════════════════════════════════════════════════════════════════
+
 scripts/docs/enhance_utils_core_docs.py
-════════════════════════════════════════════════════════════════════════════════════════════════════
+
 
 Week 13 Phase 2: Utils Framework Core Documentation Enhancement
 
@@ -12,14 +12,14 @@ Enhances 12 utils core documentation files covering:
 - Numerical stability (2 files)
 - Analysis subsystem (2 files)
 
-Adds comprehensive mathematical theory, architecture diagrams, and usage examples.
+Adds complete mathematical theory, architecture diagrams, and usage examples.
 
 Target Metrics:
 - Files Enhanced: 12
 - Total Lines: ~2,000-2,500 (avg ~183-208 per file)
 - Mathematical Equations: ~50-60 LaTeX blocks
 - Architecture Diagrams: 12 Mermaid flowcharts
-- Usage Examples: 60 comprehensive scenarios
+- Usage Examples: 60 complete scenarios
 
 Usage:
     python scripts/docs/enhance_utils_core_docs.py
@@ -39,9 +39,9 @@ sys.path.insert(0, str(PROJECT_ROOT))
 DOCS_DIR = PROJECT_ROOT / "docs" / "reference" / "utils"
 
 
-# ═══════════════════════════════════════════════════════════════════════════════════════════════════
+# 
 # FILE DEFINITIONS
-# ═══════════════════════════════════════════════════════════════════════════════════════════════════
+# 
 
 FILES_TO_ENHANCE = [
     # Monitoring Subsystem (5 files)
@@ -66,9 +66,9 @@ FILES_TO_ENHANCE = [
 ]
 
 
-# ═══════════════════════════════════════════════════════════════════════════════════════════════════
+# 
 # THEORY CONTENT DEFINITIONS
-# ═══════════════════════════════════════════════════════════════════════════════════════════════════
+# 
 
 def get_monitoring_init_theory() -> str:
     """Theory for monitoring___init__.md"""
@@ -76,7 +76,7 @@ def get_monitoring_init_theory() -> str:
 
 ### Real-Time Monitoring Infrastructure
 
-The monitoring subsystem provides comprehensive real-time tracking for control loop performance, stability, and resource utilization.
+The monitoring subsystem provides complete real-time tracking for control loop performance, stability, and resource utilization.
 
 #### Monitoring Hierarchy
 
@@ -252,7 +252,7 @@ for trial in range(1000):
         memory_monitor.force_gc()
 \`\`\`
 
-### Example 5: Comprehensive Monitoring Pipeline
+### Example 5: complete Monitoring Pipeline
 
 \`\`\`python
 from src.utils.monitoring import StabilityMonitoringSystem
@@ -274,7 +274,7 @@ result = monitoring.run_monitored_simulation(
     duration=10.0
 )
 
-# Get comprehensive report
+# Get complete report
 report = monitoring.generate_report()
 print(f"Performance: {report['performance']}")
 print(f"Stability: {report['stability']}")
@@ -797,7 +797,7 @@ if kappa > 1e12:
     print(f"Epsilon used: {epsilon_used:.2e}")
 \`\`\`
 
-### Example 5: Comprehensive Numerical Safety Pipeline
+### Example 5: complete Numerical Safety Pipeline
 
 \`\`\`python
 from src.utils.numerical_stability import (
@@ -808,7 +808,7 @@ from src.utils.numerical_stability import (
 )
 
 def compute_control_with_safety(x, controller_gains):
-    \"\"\"Control computation with comprehensive numerical safety.\"\"\"
+    \"\"\"Control computation with complete numerical safety.\"\"\"
 
     # Safe normalization
     x_norm = safe_normalize(x, epsilon=1e-10)
@@ -856,9 +856,9 @@ def get_generic_utils_theory(subsystem: str) -> str:
 """
 
 
-# ═══════════════════════════════════════════════════════════════════════════════════════════════════
+# 
 # DIAGRAM CREATION
-# ═══════════════════════════════════════════════════════════════════════════════════════════════════
+# 
 
 def create_generic_utils_diagram() -> str:
     """Generic diagram template"""
@@ -877,9 +877,9 @@ graph TD
 """
 
 
-# ═══════════════════════════════════════════════════════════════════════════════════════════════════
+# 
 # EXAMPLE CREATION
-# ═══════════════════════════════════════════════════════════════════════════════════════════════════
+# 
 
 def create_generic_utils_examples(module_name: str) -> str:
     """Create 5 generic usage examples"""
@@ -929,9 +929,9 @@ except ComponentError as e:
 """
 
 
-# ═══════════════════════════════════════════════════════════════════════════════════════════════════
+# 
 # ENHANCEMENT APPLICATION
-# ═══════════════════════════════════════════════════════════════════════════════════════════════════
+# 
 
 class UtilsCoreDocsEnhancer:
     """Enhances utils core documentation files."""

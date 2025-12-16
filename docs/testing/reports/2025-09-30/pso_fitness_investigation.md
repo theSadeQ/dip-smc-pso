@@ -6,12 +6,12 @@
 
 **Investigation Date**: September 30, 2025
 **Issue**: All 22 PSO runs converged to `cost=0.0` (statistically impossible)
-**Status**: 🔴 **ROOT CAUSE IDENTIFIED** - Excessive Baseline Normalization
+**Status**:  **ROOT CAUSE IDENTIFIED** - Excessive Baseline Normalization
 **Priority**: Critical - Blocks reliable PSO parameter tuning
 
 
 
-## 📋 Executive Summary
+##  Executive Summary
 
 **Root Cause**: Baseline normalization with poorly-tuned gains creates excessively large denominators, causing all subsequent PSO particle costs to normalize to near-zero values.
 
@@ -27,7 +27,7 @@
 
 
 
-## 🔍 Investigation Process
+##  Investigation Process
 
 ### Step 1: Configuration Analysis
 
@@ -36,12 +36,12 @@
 ```yaml
 cost_function:
   weights:
-    state_error: 50.0        # ⚠️  EXTREMELY HIGH (typical: 1.0-5.0)
+    state_error: 50.0        #   EXTREMELY HIGH (typical: 1.0-5.0)
     control_effort: 0.2
     control_rate: 0.1
     stability: 0.1
   baseline:
-    gains: [50, 100, 10, 8, 5, 4]  # ⚠️  Likely poorly tuned
+    gains: [50, 100, 10, 8, 5, 4]  #   Likely poorly tuned
   instability_penalty: 1000.0
   combine_weights:
     mean: 0.7
@@ -100,7 +100,7 @@ self.norm_sigma = max(sigma_sq_base, 1e-12)
 
 # State error integration
 ise = np.sum((x_b[:, :-1, :] ** 2 * dt_b) * time_mask, axis=(1, 2))
-ise_n = self._normalise(ise, self.norm_ise)  # ⚠️  Division by large baseline
+ise_n = self._normalise(ise, self.norm_ise)  #   Division by large baseline
 
 # Control effort
 u_sq = np.sum((u_b_trunc ** 2 * dt_b) * time_mask, axis=1)
@@ -158,7 +158,7 @@ def _normalise(self, val: np.ndarray, denom: float) -> np.ndarray:
 
 
 
-## 🧪 Validation Experiment
+##  Validation Experiment
 
 ### Recommended Test
 
@@ -194,7 +194,7 @@ python simulate.py --ctrl classical_smc --run-pso \
 
 
 
-## 📊 Evidence from Logs
+##  Evidence from Logs
 
 ### Symptom 1: Identical Convergence
 
@@ -239,7 +239,7 @@ optimal_gains = [77.62, 44.45, 17.31, 14.25, 18.66, 9.76]
 
 
 
-## 🔧 Recommended Fixes
+##  Recommended Fixes
 
 ### Fix 1: Remove Baseline Normalization (Immediate)
 
@@ -317,7 +317,7 @@ pso:
 
 
 
-## 🧬 Diagnostic Script
+##  Diagnostic Script
 
 **Create**: `scripts/debug_pso_fitness.py`
 
@@ -408,13 +408,13 @@ def diagnose_normalization():
 
     # Assess normalization health
     if tuner.norm_ise > 100.0:
-        print("⚠️  WARNING: norm_ise is very large - may cause excessive normalization")
+        print("  WARNING: norm_ise is very large - may cause excessive normalization")
     if tuner.weights.state_error > 10.0:
-        print("⚠️  WARNING: state_error weight is very high - may dominate cost")
+        print("  WARNING: state_error weight is very high - may dominate cost")
     if J_total < 1e-3:
-        print("🔴 CRITICAL: Total cost is near zero - PSO cannot distinguish particles")
+        print(" CRITICAL: Total cost is near zero - PSO cannot distinguish particles")
     else:
-        print("✅ Cost function sensitivity appears reasonable")
+        print(" Cost function sensitivity appears reasonable")
 
 if __name__ == "__main__":
     diagnose_normalization()
@@ -427,7 +427,7 @@ python scripts/debug_pso_fitness.py
 
 
 
-## 📈 Prevention Strategy
+##  Prevention Strategy
 
 ### 1. Configuration Validation
 
@@ -496,24 +496,24 @@ def test_cost_sensitivity():
 
 
 
-## ✅ Success Criteria
+##  Success Criteria
 
 **After Applying Fixes**:
-1. ✅ PSO cost values are non-zero (> 1e-3)
-2. ✅ Cost values show meaningful variation between particles
-3. ✅ Diagnostic script shows balanced cost components
-4. ✅ PSO finds different solutions with different random seeds
-5. ✅ Unit tests pass for cost sensitivity
+1.  PSO cost values are non-zero (> 1e-3)
+2.  Cost values show meaningful variation between particles
+3.  Diagnostic script shows balanced cost components
+4.  PSO finds different solutions with different random seeds
+5.  Unit tests pass for cost sensitivity
 
 
 
-## 🔗 Navigation
+##  Navigation
 
-[🏠 Testing Home](../../README.md) | [📊 PSO Convergence Analysis](pso_convergence_analysis.md)
+[ Testing Home](../../README.md) | [ PSO Convergence Analysis](pso_convergence_analysis.md)
 
 
 
 **Investigation Complete**: September 30, 2025
 **Root Cause**: Excessive baseline normalization + unbalanced weights
 **Recommended Action**: Apply Fix 1 + Fix 3 + Fix 4 immediately
-**Status**: 🔴 Awaiting configuration changes and validation
+**Status**:  Awaiting configuration changes and validation

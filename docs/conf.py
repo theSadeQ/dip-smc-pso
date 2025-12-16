@@ -78,7 +78,7 @@ exclude_patterns = [
     # '*verification*',
 ]
 
-# Extensions - comprehensive set for world-class docs
+# Extensions - complete set for world-class docs
 extensions = [
     # Core Sphinx extensions
     'sphinx.ext.autodoc',         # Auto-generate docs from docstrings

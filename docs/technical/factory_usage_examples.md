@@ -114,7 +114,7 @@ else: print("Invalid gains - adjustment needed")
 
 ## Error Handling Examples
 
-### 1. Robust Controller Creation
+### 1. controller with error handling Creation
 
 ```python
 

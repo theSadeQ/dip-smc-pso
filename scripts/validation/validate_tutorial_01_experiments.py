@@ -183,7 +183,7 @@ class Tutorial01ExperimentValidator:
             else:
                 print(f"{RED}[FAIL]{RESET} {len(failures)} metrics outside expected ranges ({duration:.1f}s)")
                 for failure in failures:
-                    print(f"  {YELLOW}▸{RESET} {failure}")
+                    print(f"  {YELLOW}{RESET} {failure}")
 
             # Print metrics
             print(f"  Settling Time: {metrics.settling_time:.2f}s")

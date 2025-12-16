@@ -1,4 +1,4 @@
-# PSO Optimization Guide **Status:** 🚧 Under Construction This document will contain PSO optimization documentation including: ## Planned Content ### PSO Algorithm Fundamentals
+# PSO Optimization Guide **Status:**  Under Construction This document will contain PSO optimization documentation including: ## Planned Content ### PSO Algorithm Fundamentals
 
 - Particle swarm mechanics
 - Velocity and position updates

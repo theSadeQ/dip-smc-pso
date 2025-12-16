@@ -47,9 +47,9 @@ analyzer = MonteCarloAnalyzer(config)
 - Parameter sensitivity analysis
 - Design space exploration
 - Limited computational budget **Mathematical Foundation:** Partition each parameter dimension into N intervals of equal probability. Sample one point from each interval with random permutation across dimensions: ```
-For parameter θⱼ ∈ [a, b]:
+For parameter θ ∈ [a, b]:
 Intervals: [a + (i-1)(b-a)/N, a + i(b-a)/N], i = 1,...,N
-Sample: θⱼ,ᵢ ~ Uniform(interval_i)
+Sample: θ,ᵢ ~ Uniform(interval_i)
 Apply random permutation π across dimensions
 ``` **Convergence Rate:** O(N^(-1)) - faster than random sampling **Implementation Example:**
 
@@ -102,8 +102,8 @@ analyzer = MonteCarloAnalyzer(config)
 - Alternative to Sobol for moderate dimensions (5-15)
 - Sequential simulation (easy to extend sample size)
 - Real-time uncertainty propagation **Mathematical Foundation:** Halton sequence uses van der Corput sequences with different prime bases: ```
-For dimension j with prime pⱼ:
-xⱼ,ᵢ = vdC(i, pⱼ) where vdC(n, p) = Σₖ aₖp^(-k-1)
+For dimension j with prime p:
+x,ᵢ = vdC(i, p) where vdC(n, p) = Σₖ aₖp^(-k-1)
 and n = Σₖ aₖp^k (base-p expansion)
 ``` **Convergence Rate:** O(N^(-1) log N) - slightly worse than Sobol **Implementation Example:**
 
@@ -228,9 +228,9 @@ config = MonteCarloConfig( sensitivity_analysis=True, sensitivity_method="simple
 
 #### 1.6.2 Sobol Sensitivity Indices **Description:** Variance-based global sensitivity analysis decomposing output variance into parameter contributions. **Mathematical Foundation:** Total variance decomposition: ```
 
-Var(Y) = Σᵢ Vᵢ + Σᵢ<ⱼ Vᵢⱼ + ... + V₁₂...ₙ where:
+Var(Y) = Σᵢ Vᵢ + Σᵢ< Vᵢ + ... + V₁₂...ₙ where:
 Vᵢ = Var[E(Y|Xᵢ)] = variance due to Xᵢ alone
-Vᵢⱼ = Var[E(Y|Xᵢ,Xⱼ)] - Vᵢ - Vⱼ = interaction effect
+Vᵢ = Var[E(Y|Xᵢ,X)] - Vᵢ - V = interaction effect
 ``` **Sobol Indices:** First-order (main effect):
 ```
 
@@ -512,11 +512,11 @@ K² = Z₁² + Z₂² ~ χ²(2) where Z₁ = skewness test, Z₂ = kurtosis test
 
 **Normality Test Decision Tree:** ```
 Sample Size?
-│
-├─ n < 50: Use Shapiro-Wilk (most powerful)
-├─ 50 ≤ n ≤ 300: Use Shapiro-Wilk or Anderson-Darling
-├─ n > 300: Use D'Agostino-Pearson
-└─ Very large: Use QQ-plot (visual) + A-D test
+
+ n < 50: Use Shapiro-Wilk (most effective)
+ 50 ≤ n ≤ 300: Use Shapiro-Wilk or Anderson-Darling
+ n > 300: Use D'Agostino-Pearson
+ Very large: Use QQ-plot (visual) + A-D test
 ``` **If Non-Normal:**
 1. Check for outliers
 2. Consider transformation (log, Box-Cox)
@@ -533,7 +533,7 @@ Sample Size?
 ---
 
 #### 3.3.1 Augmented Dickey-Fuller (ADF) Test **Description:** Tests for unit root (non-stationarity). **Null Hypothesis:** Series has unit root (non-stationary) **Test Regression:** ```
-Δyₜ = α + βt + γyₜ₋₁ + ΣⱼδⱼΔyₜ₋ⱼ + εₜ H₀: γ = 0 (unit root)
+Δyₜ = α + βt + γyₜ₋₁ + ΣδΔyₜ₋ + εₜ H₀: γ = 0 (unit root)
 H₁: γ < 0 (stationary)
 ``` **Implementation:**
 
@@ -645,13 +645,13 @@ n = 2(z₁₋α/₂ + z₁₋β)² / δ² where δ = effect size (Cohen's d)
 
 result = suite.validate(data, test_types=['power_analysis'])
 power_analysis = result.data['power_analysis'] print(f"Current power: {power_analysis['estimated_power']:.2f}")
-print(f"Recommended N: {power_analysis['recommended_sample_size']}") if not power_analysis['power_adequate']: print("⚠ Insufficient power - need more data")
+print(f"Recommended N: {power_analysis['recommended_sample_size']}") if not power_analysis['power_adequate']: print(" Insufficient power - need more data")
 ``` **Interpretation:** | Current N | Power | Action |
 |-----------|-------|----------------------------------|
 | 30 | 0.45 | Need 2x more data (underpowered)|
 | 50 | 0.75 | Marginal - collect more if possible|
-| 100 | 0.85 | Adequate power ✓ |
-| 200 | 0.95 | power ✓✓ | **Control System Context:** - **Before Experiments:** Determine required test scenarios
+| 100 | 0.85 | Adequate power  |
+| 200 | 0.95 | power  | **Control System Context:** - **Before Experiments:** Determine required test scenarios
 - **During Analysis:** Check if differences are detectable
 - **Publication:** Report achieved power to avoid false negatives
 
@@ -699,16 +699,16 @@ g = d × [1 - 3/(4n - 9)] Correction factor ≈ 1 for n > 50
 
 **Effect Size Decision Tree:** ```
 What are you comparing?
-│
-├─ Two groups (between-subjects)
-│ ├─ Equal variances expected: Cohen's d
-│ ├─ Control is reference: Glass's Δ
-│ └─ Small sample: Hedges' g
-│
-├─ Paired observations (within-subjects)
-│ └─ Use Cohen's d on differences
-│
-└─ Multiple groups └─ Use η² (eta-squared) or ω² (omega-squared)
+
+ Two groups (between-subjects)
+  Equal variances expected: Cohen's d
+  Control is reference: Glass's Δ
+  Small sample: Hedges' g
+
+ Paired observations (within-subjects)
+  Use Cohen's d on differences
+
+ Multiple groups  Use η² (eta-squared) or ω² (omega-squared)
 ```
 
 ---
@@ -891,7 +891,7 @@ print(f"Once-in-100-scenarios worst-case: {return_100:.2f}")
 ---
 
 ## 6. Integration with Control Systems ### 6.1 Validation Workflow for New Controllers **Standard Validation Protocol:** ```
-1. **Unit Testing:** ├─ Verify implementation correctness └─ Test edge cases (saturation, singular configurations) 2. **Monte Carlo Validation:** ├─ Parameter uncertainty propagation ├─ LHS sampling (500-1000 samples) ├─ Check convergence └─ Distribution fitting 3. **Cross-Validation:** ├─ Time series CV (respect temporal order) ├─ Test on held-out scenarios └─ Bias-variance analysis 4. **Statistical Testing:** ├─ Normality of residuals ├─ Stationarity of performance └─ Hypothesis tests vs. baseline 5. **Benchmark Comparison:** ├─ Compare with ├─ Statistical significance + effect size └─ Robustness comparison 6. **Uncertainty Quantification:** ├─ Confidence intervals ├─ Risk analysis (VaR, CVaR) └─ Extreme value analysis 7. **Production Validation:** ├─ Hardware-in-the-loop testing ├─ Field trials └─ Long-term monitoring
+1. **Unit Testing:**  Verify implementation correctness  Test edge cases (saturation, singular configurations) 2. **Monte Carlo Validation:**  Parameter uncertainty propagation  LHS sampling (500-1000 samples)  Check convergence  Distribution fitting 3. **Cross-Validation:**  Time series CV (respect temporal order)  Test on held-out scenarios  Bias-variance analysis 4. **Statistical Testing:**  Normality of residuals  Stationarity of performance  Hypothesis tests vs. baseline 5. **Benchmark Comparison:**  Compare with  Statistical significance + effect size  Robustness comparison 6. **Uncertainty Quantification:**  Confidence intervals  Risk analysis (VaR, CVaR)  Extreme value analysis 7. **Production Validation:**  Hardware-in-the-loop testing  Field trials  Long-term monitoring
 ```
 
 ---
@@ -909,7 +909,7 @@ from src.analysis.validation.cross_validation import CrossValidator validator = 
 # - Record generalization gap cv_result = validator.validate( scenarios, models=[pso_optimized_controller], prediction_function=simulate_controller
 
 ) generalization_gap = ( cv_result.data['monte_carlo_validation']['training_score'] - cv_result.data['monte_carlo_validation']['test_score']
-) if generalization_gap > threshold: print("⚠ Overfitting detected - need more diverse training scenarios")
+) if generalization_gap > threshold: print(" Overfitting detected - need more diverse training scenarios")
 ```
 
 ---
@@ -936,8 +936,8 @@ config = CrossValidationConfig( cv_method="time_series", n_splits=5, max_train_s
 ) benchmark = BenchmarkSuite(config)
 result = benchmark.validate(...) comp_time = result.data['simulation_benchmarks'][scenario][method]['computational_analysis'] mean_time = comp_time['mean_computation_time']
 std_time = comp_time['std_computation_time']
-worst_case_time = comp_time['mean_computation_time'] + 3*comp_time['std_computation_time'] if worst_case_time < control_period: print("✓ Real-time feasible")
-else: print("✗ Timing constraint violated")
+worst_case_time = comp_time['mean_computation_time'] + 3*comp_time['std_computation_time'] if worst_case_time < control_period: print(" Real-time feasible")
+else: print(" Timing constraint violated")
 ``` **Jitter Analysis:** ```
 Jitter = std(computation_time) Low jitter (<10% of mean) → Predictable timing
 High jitter (>30% of mean) → May cause control instability
@@ -950,7 +950,7 @@ High jitter (>30% of mean) → May cause control instability
 ```python
 # Always check power
 result = suite.validate(data, test_types=['power_analysis'])
-if not result.data['power_analysis']['power_adequate']: print(f"⚠ Need {result.data['power_analysis']['recommended_sample_size']} samples")
+if not result.data['power_analysis']['power_adequate']: print(f" Need {result.data['power_analysis']['recommended_sample_size']} samples")
 ```
 
 ---
@@ -968,7 +968,7 @@ config = StatisticalTestConfig( multiple_comparisons_correction="holm" # Use Hol
 
 ```python
 # Always report effect size
-if test['p_value'] < 0.05: effect_size = compute_cohens_d(group1, group2) if abs(effect_size) < 0.2: print("⚠ Statistically significant but negligible effect")
+if test['p_value'] < 0.05: effect_size = compute_cohens_d(group1, group2) if abs(effect_size) < 0.2: print(" Statistically significant but negligible effect")
 ```
 
 ---

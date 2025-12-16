@@ -4,7 +4,7 @@
 
 """
 Visualization tool for PSO optimization results from Issue #12.
-Generates comprehensive comparison plots for all optimized controllers.
+Generates complete comparison plots for all optimized controllers.
 """
 
 import sys
@@ -38,7 +38,7 @@ def load_optimization_results(results_dir: Path) -> Dict:
 
 
 def create_comparison_plots(results: Dict, output_dir: Path):
-    """Create comprehensive comparison plots."""
+    """Create complete comparison plots."""
 
     # Extract metrics
     controllers = list(results.keys())
@@ -122,7 +122,7 @@ def create_comparison_plots(results: Dict, output_dir: Path):
     # Save
     output_file = output_dir / 'optimization_results_comparison.png'
     plt.savefig(output_file, dpi=300, bbox_inches='tight')
-    print(f"✓ Saved comparison plot: {output_file}")
+    print(f" Saved comparison plot: {output_file}")
     plt.close()
 
 
@@ -154,7 +154,7 @@ def create_gains_comparison(results: Dict, output_dir: Path):
 
     output_file = output_dir / 'optimized_gains_comparison.png'
     plt.savefig(output_file, dpi=300, bbox_inches='tight')
-    print(f"✓ Saved gains plot: {output_file}")
+    print(f" Saved gains plot: {output_file}")
     plt.close()
 
 
@@ -174,17 +174,17 @@ def generate_summary_table(results: Dict, output_dir: Path):
         smooth = metrics['smoothness_index']
 
         # Determine pass/fail
-        pass_chat = "✓" if chat < 2.0 else "✗"
-        pass_track = "✓" if track < 0.1 else "✗"
-        pass_effort = "✓" if effort < 100.0 else "✗"
-        pass_smooth = "✓" if smooth > 0.001 else "✗"
+        pass_chat = "" if chat < 2.0 else ""
+        pass_track = "" if track < 0.1 else ""
+        pass_effort = "" if effort < 100.0 else ""
+        pass_smooth = "" if smooth > 0.001 else ""
 
         status = f"{pass_chat}{pass_track}{pass_effort}{pass_smooth}"
 
         md_content += f"| {ctrl_name} | {chat:.3f} | {track:.4f} | {effort:.2f} | {smooth:.4f} | {status} |\n"
 
     md_content += "\n## Criteria\n\n"
-    md_content += "- ✓ = Pass, ✗ = Fail\n"
+    md_content += "-  = Pass,  = Fail\n"
     md_content += "- Order: Chattering | Tracking | Control | Smoothness\n"
     md_content += "- Targets: <2.0 | <0.1 rad | <100 N | >0.001\n\n"
 
@@ -198,7 +198,7 @@ def generate_summary_table(results: Dict, output_dir: Path):
     with open(output_file, 'w') as f:
         f.write(md_content)
 
-    print(f"✓ Saved summary: {output_file}")
+    print(f" Saved summary: {output_file}")
 
 
 def main():
@@ -228,7 +228,7 @@ def main():
     create_gains_comparison(results, args.output_dir)
     generate_summary_table(results, args.output_dir)
 
-    print(f"\n✅ All visualizations saved to: {args.output_dir}")
+    print(f"\n All visualizations saved to: {args.output_dir}")
 
 
 if __name__ == '__main__':

@@ -101,11 +101,11 @@ default_gains = [
 
 **Optimization Execution:**
 ```
-✓ Swarm Size: 40 particles
-✓ Iterations: 200/200
-✓ Execution Time: ~35 seconds
-✓ PSO Parameters: c1=2.0, c2=2.0, w=0.7
-✓ Convergence: Achieved
+ Swarm Size: 40 particles
+ Iterations: 200/200
+ Execution Time: ~35 seconds
+ PSO Parameters: c1=2.0, c2=2.0, w=0.7
+ Convergence: Achieved
 ```
 
 **Post-Optimization (PSO Gains):**
@@ -219,10 +219,10 @@ python scripts/analysis/compare_controllers.py \
 ```
 
 **Expected Improvements:**
-- ✅ Faster settling time (20-40% reduction)
-- ✅ Reduced steady-state error
-- ✅ Smoother control signal
-- ✅ Better disturbance rejection
+-  Faster settling time (20-40% reduction)
+-  Reduced steady-state error
+-  Smoother control signal
+-  Better disturbance rejection
 
 
 
@@ -288,9 +288,9 @@ print(f"K2 = {K2:.2f}")
 print(f"K2/K1 = {ratio:.3f}")
 
 if ratio > 0.5:
-    print("✅ Stability condition satisfied (K2 > 0.5·K1)")
+    print(" Stability condition satisfied (K2 > 0.5·K1)")
 else:
-    print("❌ WARNING: Stability condition violated!")
+    print(" WARNING: Stability condition violated!")
 ```
 
 **Real Validation:**
@@ -298,7 +298,7 @@ else:
 K1 = 23.67
 K2 = 13.29
 K2/K1 = 0.561
-✅ Stability condition satisfied (K2 > 0.5·K1)
+ Stability condition satisfied (K2 > 0.5·K1)
 ```
 
 
@@ -392,14 +392,14 @@ if K2 < 0.5 * K1:
 
 ### When to Choose STA-SMC
 
-✅ **Choose STA-SMC if:**
+ **Choose STA-SMC if:**
 - Smooth control signals required
 - Actuator has bandwidth limitations
 - Sensor measurements are noisy
 - Production deployment planned
 - Chattering reduction is priority
 
-❌ **Stick with Classical SMC if:**
+ **Stick with Classical SMC if:**
 - Rapid prototyping phase
 - Chattering acceptable
 - Maximum simplicity needed
@@ -490,7 +490,7 @@ git tag -a v1.0-sta-smc-optimized \
 Gains: [23.67, 13.29, 8.87, 3.55, 6.52, 2.93]
 Cost: 0.0
 Date: 2025-10-07
-Validation: ✅ Passed all tests"
+Validation:  Passed all tests"
 
 git push --tags
 ```
@@ -501,23 +501,23 @@ git push --tags
 
 ### Further Optimization:
 
-➡️ [Adaptive SMC Optimization](pso-adaptive-smc.md) - Online adaptation
-➡️ [Hybrid STA-SMC Optimization](pso-hybrid-smc.md) - Combined approach
+ [Adaptive SMC Optimization](pso-adaptive-smc.md) - Online adaptation
+ [Hybrid STA-SMC Optimization](pso-hybrid-smc.md) - Combined approach
 
 ### Advanced Topics:
 
-➡️ [Custom Cost Functions](custom-cost-functions.md)
-➡️ [Multi-Objective PSO](../../reference/optimization/algorithms_multi_objective_pso.md)
-➡️ [Robustness Objectives](../../reference/optimization/objectives_control_robustness.md)
+ [Custom Cost Functions](custom-cost-functions.md)
+ [Multi-Objective PSO](../../reference/optimization/algorithms_multi_objective_pso.md)
+ [Robustness Objectives](../../reference/optimization/objectives_control_robustness.md)
 
 ### Performance Analysis:
 
-➡️ [Controller Comparison Tutorial](../tutorials/tutorial-02-controller-comparison.md)
-➡️ [Performance Benchmarks](../../benchmarks/controller_performance_benchmarks.md)
+ [Controller Comparison Tutorial](../tutorials/tutorial-02-controller-comparison.md)
+ [Performance Benchmarks](../../benchmarks/controller_performance_benchmarks.md)
 
 
 
-**Document Status:** ✅ MCP-Validated
+**Document Status:**  MCP-Validated
 **Last Updated:** 2025-10-07
 **Validation Method:** `/optimize-controller sta_smc` execution
 **Real Data**: All examples tested and verified

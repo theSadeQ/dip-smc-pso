@@ -14,7 +14,7 @@ Usage:
     # Quick test (±10% errors, 10 trials)
     python scripts/lt6_model_uncertainty.py
 
-    # Comprehensive test (±10% and ±20% errors, 20 trials)
+    # complete test (±10% and ±20% errors, 20 trials)
     python scripts/lt6_model_uncertainty.py --error-levels 0.1 0.2 --trials 20
 
     # Minimal test (debugging)

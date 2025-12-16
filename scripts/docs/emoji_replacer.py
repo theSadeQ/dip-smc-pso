@@ -23,37 +23,37 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 
-# Comprehensive emoji replacement map (from QA-02 baseline analysis)
+# complete emoji replacement map (from QA-02 baseline analysis)
 EMOJI_MAP = {
     # Status/validation emojis (most common)
-    '✅': '[OK]',
-    '❌': '[ERROR]',
-    '⚠️': '[WARNING]',
-    '⚠': '[WARNING]',
-    'ℹ️': '[INFO]',
+    '': '[OK]',
+    '': '[ERROR]',
+    '': '[WARNING]',
+    '': '[WARNING]',
+    'ℹ': '[INFO]',
     'ℹ': '[INFO]',
 
     # Common markers
-    '🚀': '[LAUNCH]',
-    '🎯': '[TARGET]',
-    '🔧': '[CONFIG]',
-    '📚': '[DOCS]',
-    '📖': '[READ]',
-    '🎮': '[DEMO]',
-    '📐': '[MATH]',
-    '🔬': '[RESEARCH]',
-    '🧪': '[TEST]',
-    '🤖': '[AI]',
+    '': '[LAUNCH]',
+    '': '[TARGET]',
+    '': '[CONFIG]',
+    '': '[DOCS]',
+    '': '[READ]',
+    '': '[DEMO]',
+    '': '[MATH]',
+    '': '[RESEARCH]',
+    '': '[TEST]',
+    '': '[AI]',
 
     # Architecture/structure emojis
-    '🔵': '[BLUE]',
-    '🟡': '[YELLOW]',
-    '🟢': '[GREEN]',
-    '🔴': '[RED]',
-    '⚪': '[WHITE]',
-    '⚫': '[BLACK]',
-    '🟣': '[PURPLE]',
-    '🟠': '[ORANGE]',
+    '': '[BLUE]',
+    '': '[YELLOW]',
+    '': '[GREEN]',
+    '': '[RED]',
+    '': '[WHITE]',
+    '': '[BLACK]',
+    '': '[PURPLE]',
+    '': '[ORANGE]',
 
     # Directional/flow emojis
     '→': '->',
@@ -66,45 +66,45 @@ EMOJI_MAP = {
     '⇔': '<=>',
 
     # Special symbols
-    '✓': '[DONE]',
-    '✗': '[FAIL]',
-    '⏸️': '[PAUSE]',
+    '': '[DONE]',
+    '': '[FAIL]',
     '⏸': '[PAUSE]',
-    '⏹️': '[STOP]',
+    '⏸': '[PAUSE]',
     '⏹': '[STOP]',
-    '▶️': '[PLAY]',
-    '▶': '[PLAY]',
-    '⏭️': '[SKIP]',
+    '⏹': '[STOP]',
+    '': '[PLAY]',
+    '': '[PLAY]',
+    '⏭': '[SKIP]',
     '⏭': '[SKIP]',
 
     # Additional common emojis
-    '💡': '[IDEA]',
-    '🔥': '[HOT]',
-    '⭐': '[STAR]',
-    '📊': '[CHART]',
-    '📈': '[GROWTH]',
-    '📉': '[DECLINE]',
-    '🔒': '[LOCKED]',
-    '🔓': '[UNLOCKED]',
-    '🔑': '[KEY]',
-    '🏆': '[TROPHY]',
-    '🎉': '[PARTY]',
-    '👍': '[THUMBS_UP]',
-    '👎': '[THUMBS_DOWN]',
+    '': '[IDEA]',
+    '': '[HOT]',
+    '': '[STAR]',
+    '': '[CHART]',
+    '': '[GROWTH]',
+    '': '[DECLINE]',
+    '': '[LOCKED]',
+    '': '[UNLOCKED]',
+    '': '[KEY]',
+    '': '[TROPHY]',
+    '': '[PARTY]',
+    '': '[THUMBS_UP]',
+    '': '[THUMBS_DOWN]',
 
     # Additional emojis found in docs
-    '📋': '[CLIPBOARD]',
-    '📦': '[PACKAGE]',
-    '🏗️': '[CONSTRUCTION]',
-    '🏗': '[CONSTRUCTION]',
-    '🔨': '[HAMMER]',
-    '🗺️': '[MAP]',
-    '🗺': '[MAP]',
-    '📜': '[SCROLL]',
-    '🐍': '[PYTHON]',
-    '🎨': '[ART]',
-    '🎛️': '[CONTROLS]',
-    '🎛': '[CONTROLS]',
+    '': '[CLIPBOARD]',
+    '': '[PACKAGE]',
+    '': '[CONSTRUCTION]',
+    '': '[CONSTRUCTION]',
+    '': '[HAMMER]',
+    '': '[MAP]',
+    '': '[MAP]',
+    '': '[SCROLL]',
+    '': '[PYTHON]',
+    '': '[ART]',
+    '': '[CONTROLS]',
+    '': '[CONTROLS]',
 }
 
 
@@ -157,7 +157,7 @@ def find_remaining_emojis(text: str) -> List[str]:
     Returns:
         List of unique emojis found
     """
-    # Unicode emoji ranges (comprehensive)
+    # Unicode emoji ranges (complete)
     emoji_pattern = re.compile(
         "["
         "\U0001F600-\U0001F64F"  # Emoticons

@@ -11,7 +11,7 @@
 
 ## What You'll Learn
 
-By the end of this module, you'll be able to:
+By the end of this module, the system will be able to:
 - Write Python programs with variables, loops, and functions
 - Work with data structures (lists, dictionaries, arrays)
 - Handle errors gracefully

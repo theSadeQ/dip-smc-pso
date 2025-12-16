@@ -46,8 +46,8 @@ Use the language selector in the top-left sidebar to switch between languages.
 **Purpose**: Choose between simplified and full nonlinear dynamics models.
 
 **Options**:
-- ☐ **Simplified Dynamics** (Default): Faster computation, suitable for controller design
-- ☑ **Use Full Nonlinear Dynamics**: Complete model with all nonlinearities, more accurate
+-  **Simplified Dynamics** (Default): Faster computation, suitable for controller design
+-  **Use Full Nonlinear Dynamics**: Complete model with all nonlinearities, more accurate
 
 **When to Use**:
 - **Simplified**: Initial controller tuning, parameter exploration, educational purposes
@@ -188,7 +188,7 @@ d(t) = { 0           if t < start_time
 - **Lower peak deviations**: Better tracking
 - **Lower max control**: Less demanding on actuators
 
-## Advanced Features
+## features
 
 ### Configuration Export/Import
 

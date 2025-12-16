@@ -138,7 +138,7 @@ def find_hierarchy_violations(headings: List[Dict]) -> List[Dict]:
 
 def generate_report(all_headings: List[Dict], docs_path: Path) -> Dict:
     """
-    Generate comprehensive heading anchor validation report.
+    Generate complete heading anchor validation report.
 
     Args:
         all_headings: All headings from all files

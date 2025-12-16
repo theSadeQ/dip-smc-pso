@@ -2,21 +2,21 @@
 
 **Total Components: 115+** | Last Updated: 2025-10-04
 
-## 📁 Directory Structure
+##  Directory Structure
 
 ```
 react-bits-library/
-├── src/
-│   └── content/
-│       ├── Animations/        (25 components)
-│       ├── TextAnimations/    (24 components)
-│       ├── Components/        (36 components)
-│       └── Backgrounds/       (30 components)
+ src/
+    content/
+        Animations/        (25 components)
+        TextAnimations/    (24 components)
+        Components/        (36 components)
+        Backgrounds/       (30 components)
 ```
 
 
 
-## 🎬 Animations (25 Components)
+##  Animations (25 Components)
 
 Interactive animations and effects for user engagement.
 
@@ -48,7 +48,7 @@ Interactive animations and effects for user engagement.
 
 
 
-## ✨ Text Animations (24 Components)
+##  Text Animations (24 Components)
 
 Dynamic text effects and typography animations.
 
@@ -79,7 +79,7 @@ Dynamic text effects and typography animations.
 
 
 
-## 🧩 Components (36 Components)
+##  Components (36 Components)
 
 UI components for interfaces and interactions.
 
@@ -122,7 +122,7 @@ UI components for interfaces and interactions.
 
 
 
-## 🌈 Backgrounds (30 Components)
+##  Backgrounds (30 Components)
 
 Animated background effects and patterns.
 
@@ -159,7 +159,7 @@ Animated background effects and patterns.
 
 
 
-## 🔍 Quick Reference
+##  Quick Reference
 
 ### By Animation Style
 
@@ -180,7 +180,7 @@ Animated background effects and patterns.
 
 
 
-## 📚 Component File Locations
+##  Component File Locations
 
 All component source files are located at:
 ```
@@ -195,7 +195,7 @@ Each component folder typically contains:
 
 
 
-## 🚀 Usage in Your Project
+##  Usage in Your Project
 
 ### Method 1: Direct Copy
 
@@ -215,7 +215,7 @@ npm install react-bits
 
 
 
-## 🎨 Integration with Your Dashboard
+##  Integration with Your Dashboard
 
 To add React Bits components to your study dashboard:
 
@@ -236,7 +236,7 @@ export default function Dashboard() {
 
 
 
-## 📖 Documentation
+##  Documentation
 
 - **GitHub**: https://github.com/DavidHDev/react-bits
 - **Official Site**: https://reactbits.dev

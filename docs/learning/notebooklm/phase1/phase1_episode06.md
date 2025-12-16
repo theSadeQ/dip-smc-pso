@@ -10,13 +10,13 @@ Imagine trying to add two lists of a thousand numbers using basic Python. You'd 
 
 That's why NumPy exists. It provides arrays - like Python lists, but optimized for numerical computation. Operations that would take minutes in pure Python take milliseconds with NumPy. And when you need to visualize results? Matplotlib turns your data into publication-quality plots with just a few lines of code.
 
-Today, you'll learn the two libraries that make Python a powerhouse for scientific computing. By the end, you'll be creating arrays, performing mathematical operations, and plotting results like a pro.
+Today, the system will learn the two libraries that make Python a powerhouse for scientific computing. By the end, the system will be creating arrays, performing mathematical operations, and plotting results like a pro.
 
 ---
 
 ## What You'll Discover
 
-By listening to this episode, you'll learn:
+By listening to this episode, the system will learn:
 
 - What NumPy is and why it's essential
 - Creating and manipulating NumPy arrays
@@ -173,13 +173,13 @@ arr space equals space n-p dot array open-parenthesis open-bracket 1 comma 5 com
 large space equals space arr open-bracket arr space greater-than space 5 close-bracket
 print open-parenthesis large close-parenthesis  # [8 10]
 
-This is extremely powerful for filtering data.
+This is extremely effective for filtering data.
 
 ---
 
 ## Practical Example: Simulating Pendulum Motion
 
-Let's use NumPy to simulate a simple pendulum:
+use NumPy to simulate a simple pendulum:
 
 import space n-u-m-p-y space as space n-p
 
@@ -208,7 +208,7 @@ Notice: No loops! We calculated 1000 time points in three lines.
 
 ## Recap: NumPy Essentials
 
-Let's pause and review NumPy fundamentals:
+pause and review NumPy fundamentals:
 
 **Number one**: NumPy provides arrays - like lists, but optimized for numerical operations. Much faster and more convenient.
 
@@ -240,7 +240,7 @@ print open-parenthesis p-l-t dot matplotlib dot version dot version close-parent
 
 ## Your First Plot
 
-Let's plot the pendulum motion we simulated:
+plot the pendulum motion we simulated:
 
 import space n-u-m-p-y space as space n-p
 import space m-a-t-plot-l-i-b dot p-y-plot space as space p-l-t
@@ -263,7 +263,7 @@ p-l-t dot show open-parenthesis close-parenthesis
 
 This opens a window showing a cosine wave - the pendulum swinging back and forth.
 
-Let's break it down:
+break it down:
 
 - **p-l-t dot plot** - Create the plot with x-values (t) and y-values (theta)
 - **p-l-t dot xlabel** - Label for horizontal axis
@@ -276,7 +276,7 @@ Let's break it down:
 
 ## Multiple Lines on One Plot
 
-Let's plot both angle and angular velocity:
+plot both angle and angular velocity:
 
 import space n-u-m-p-y space as space n-p
 import space m-a-t-plot-l-i-b dot p-y-plot space as space p-l-t
@@ -399,7 +399,7 @@ p-l-t dot show open-parenthesis close-parenthesis
 
 ## Practical Example: Double Pendulum State Over Time
 
-Let's create a multi-panel plot showing all state variables:
+create a multi-panel plot showing all state variables:
 
 import space n-u-m-p-y space as space n-p
 import space m-a-t-plot-l-i-b dot p-y-plot space as space p-l-t
@@ -485,7 +485,7 @@ The DIP-SMC-PSO project uses both libraries extensively. Every simulation produc
 
 ## What's Next: Virtual Environments and Git
 
-In Episode 7, we'll learn essential development tools:
+In Episode 7, this will learn essential development tools:
 
 - Virtual environments: Isolating project dependencies
 - Installing packages with pip

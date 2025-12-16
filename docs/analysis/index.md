@@ -1,6 +1,6 @@
 # Analysis & Technical Reports
 
-Comprehensive technical analysis, controller comparisons, and system assessments for the DIP SMC PSO framework.
+complete technical analysis, controller comparisons, and system assessments for the DIP SMC PSO framework.
 
 ## Overview
 

@@ -12,7 +12,7 @@ Features:
 - Atomic checkpoint saves every 20 iterations
 - Automatic resume from last checkpoint
 - Per-controller isolation (crash in one doesn't affect others)
-- Comprehensive logging and progress tracking
+- complete logging and progress tracking
 - Auto-restart on failure
 
 Usage:

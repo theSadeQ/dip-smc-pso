@@ -382,10 +382,10 @@ Choose your controller based on requirements:
 
 | Controller | Complexity | Performance | Robustness | Tuning Effort |
 |-----------|------------|-------------|------------|---------------|
-| Classical SMC | ⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐ |
-| Adaptive SMC | ⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ |
-| Hybrid STA-SMC | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
-| Terminal SMC | ⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
+| Classical SMC |  |  |  |  |
+| Adaptive SMC |  |  |  |  |
+| Hybrid STA-SMC |  |  |  |  |
+| Terminal SMC |  |  |  |  |
 
 ### Step 2: Configure Gains
 

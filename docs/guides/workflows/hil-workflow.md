@@ -39,33 +39,33 @@ python simulate.py --run-hil --controller classical_smc --duration 5.0
 **What Actually Happens** (captured from real run):
 
 ```
-✓ Configuration Loaded
+ Configuration Loaded
   - Sources: ENV > .env > config.yaml
   - HIL plant IP: 127.0.0.1:9000
   - HIL controller IP: 127.0.0.1:9001
   - Simulation dt: 0.01 seconds (100 Hz)
 
-✓ Plant Server Started
+ Plant Server Started
   - UDP server listening on 127.0.0.1:9000
   - CRC-32 integrity checking enabled
   - Sequence number tracking active
   - Sensor noise: 0.0 (disabled by default)
   - Extra latency: 0.0 ms (disabled by default)
 
-✓ Controller Client Started
+ Controller Client Started
   - UDP client binding to 127.0.0.1:9001
   - Controller: classical_smc
   - Target steps: 1000 (10 seconds @ dt=0.01)
   - Recv timeout: 2.0 seconds
 
-✓ Real-Time Control Loop
+ Real-Time Control Loop
   - Packets exchanged: 1000 command + 1000 state
   - Total simulation time: 10.0 seconds
   - Control loop frequency: 100 Hz (dt=0.01)
   - No packet loss detected
   - CRC checksum: 100% pass rate
 
-✓ Results Saved
+ Results Saved
   - File: out/hil_results.npz
   - Data: time (1001), state (1001×6), control (1000)
   - Metadata: network config, dt, steps
@@ -88,12 +88,12 @@ CRC failures:          0 (no corrupted packets)
 ### 2.1 Client-Server Model
 
 ```
-┌──────────────────────┐   UDP Command    ┌───────────────────────┐
-│   Plant Server       │ ◄───────────────  │ Controller Client     │
-│   (Simulation)       │                   │ (Control Algorithm)   │
-│   Port: 9000         │  UDP State        │ Port: 9001            │
-│                      │  ──────────────►  │                       │
-└──────────────────────┘                   └───────────────────────┘
+   UDP Command    
+   Plant Server           Controller Client     
+   (Simulation)                           (Control Algorithm)   
+   Port: 9000           UDP State         Port: 9001            
+                                                 
+                   
 ```
 
 **Plant Server Responsibilities:**
@@ -207,7 +207,7 @@ python simulate.py --run-hil --controller hybrid_adaptive_sta_smc --duration 10.
 3. Controller client startup: ~28 seconds (includes module imports)
 4. Simulation execution: 10 seconds (actual control loop)
 5. Graceful shutdown: ~0.5 seconds
-─────────────────────────────────────────────
+
 Total: ~41.5 seconds for 10-second simulation
 ```
 
@@ -557,7 +557,7 @@ Client setup:              ~3 seconds
 Network initialization:    ~0.5 seconds
 Simulation execution:      10 seconds
 Shutdown:                  ~0.08 seconds
-───────────────────────────────────────
+
 Total:                     41.58 seconds
 ```
 
@@ -670,21 +670,21 @@ while True:
 
 ### For First-Time HIL Users:
 
-✅ **Completed**: Basic HIL simulation workflow
-➡️ **Next**: [Controller Optimization for HIL](pso-hil-tuning.md)
-➡️ **Next**: [HIL Safety Validation](hil-safety-validation.md)
+ **Completed**: Basic HIL simulation workflow
+ **Next**: [Controller Optimization for HIL](pso-hil-tuning.md)
+ **Next**: [HIL Safety Validation](hil-safety-validation.md)
 
 ### For Advanced Users:
 
-➡️ **Next**: [Multi-Machine HIL Setup](hil-multi-machine.md)
-➡️ **Next**: [Real-Time Synchronization](../../reference/interfaces/hil_real_time_sync.md)
-➡️ **Next**: [Fault Injection Testing](../../reference/interfaces/hil_fault_injection.md)
+ **Next**: [Multi-Machine HIL Setup](hil-multi-machine.md)
+ **Next**: [Real-Time Synchronization](../../reference/interfaces/hil_real_time_sync.md)
+ **Next**: [Fault Injection Testing](../../reference/interfaces/hil_fault_injection.md)
 
 ### For Production Deployment:
 
-➡️ **Next**: [HIL Production Checklist](hil-production-checklist.md)
-➡️ **Next**: [HIL Data Logging & Monitoring](../../reference/interfaces/hil_data_logging.md)
-➡️ **Next**: [Disaster Recovery](hil-disaster-recovery.md)
+ **Next**: [HIL Production Checklist](hil-production-checklist.md)
+ **Next**: [HIL Data Logging & Monitoring](../../reference/interfaces/hil_data_logging.md)
+ **Next**: [Disaster Recovery](hil-disaster-recovery.md)
 
 
 
@@ -748,7 +748,7 @@ struct StatePacket {
 
 
 
-**Document Status:** ✅ MCP-Validated
+**Document Status:**  MCP-Validated
 **Last Updated:** 2025-10-07
 **Validation Method:** Real HIL execution on localhost
 **Test Environment:** Windows, Python 3.12, DIP-SMC-PSO v2.0

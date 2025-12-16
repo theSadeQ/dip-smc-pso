@@ -28,14 +28,14 @@
 ## Pre-Flight Verification
 
 **Files Deployed:**
-- ✅ `docs/_build/html/_static/code-collapse.js` (21KB)
-- ✅ `docs/_build/html/_static/code-collapse.css` (8.9KB)
+-  `docs/_build/html/_static/code-collapse.js` (21KB)
+-  `docs/_build/html/_static/code-collapse.css` (8.9KB)
 
 **Implementation Features:**
-- ✅ Phase 1: Button spacing (5-8px gap)
-- ✅ Phase 2: True button siblings (wait-and-retry pattern)
-- ✅ Phase 3: 100% selector coverage (6 selectors + debug logging)
-- ✅ Phase 4: GPU-accelerated animations (Material Design easing)
+-  Phase 1: Button spacing (5-8px gap)
+-  Phase 2: True button siblings (wait-and-retry pattern)
+-  Phase 3: 100% selector coverage (6 selectors + debug logging)
+-  Phase 4: GPU-accelerated animations (Material Design easing)
 
 ---
 
@@ -48,7 +48,7 @@ Functional Validation (20min)
 ### 1.1 Button Insertion Test
 
 - [ ] Open `docs/_build/html/index.html` in browser
-- [ ] Check console for coverage report: `[CodeCollapse] ✅ 100% coverage`
+- [ ] Check console for coverage report: `[CodeCollapse]  100% coverage`
 - [ ] Verify collapse buttons appear on all code blocks
 - [ ] Measure gap between copy and collapse buttons (DevTools ruler)
 - [ ] **Expected:** 5-8px gap
@@ -61,10 +61,10 @@ Functional Validation (20min)
 
 ### 1.2 Collapse/Expand Test
 
-- [ ] Click individual collapse button (▼ → ▲)
+- [ ] Click individual collapse button ( → )
 - [ ] Verify code hides smoothly with curtain animation
-- [ ] Verify "Code hidden (click ▲ to expand)" message appears
-- [ ] Click expand button (▲ → ▼)
+- [ ] Verify "Code hidden (click  to expand)" message appears
+- [ ] Click expand button ( → )
 - [ ] Verify code shows smoothly
 - [ ] **Animation Duration:** Expected 350ms, Actual _____ms
 
@@ -201,7 +201,7 @@ Cross-Browser Compatibility (30min)
 - [ ] Test keyboard shortcuts (Ctrl+Shift+C/E)
 - [ ] Check console for errors
 - [ ] **Version:** Chrome _____
-- [ ] **Status:** ✅ Pass / ❌ Fail
+- [ ] **Status:**  Pass /  Fail
 
 **Issues:** [None / List issues]
 
@@ -214,7 +214,7 @@ Cross-Browser Compatibility (30min)
 - [ ] Test keyboard shortcuts (Ctrl+Shift+C/E)
 - [ ] Check console for errors
 - [ ] **Version:** Firefox _____
-- [ ] **Status:** ✅ Pass / ❌ Fail
+- [ ] **Status:**  Pass /  Fail
 
 **Issues:** [None / List issues]
 
@@ -227,7 +227,7 @@ Cross-Browser Compatibility (30min)
 - [ ] Test keyboard shortcuts (Ctrl+Shift+C/E)
 - [ ] Check console for errors
 - [ ] **Version:** Edge _____
-- [ ] **Status:** ✅ Pass / ❌ Fail
+- [ ] **Status:**  Pass /  Fail
 
 **Issues:** [None / List issues]
 
@@ -237,7 +237,7 @@ Cross-Browser Compatibility (30min)
 - [ ] Run functional test (collapse/expand)
 - [ ] Note: `contain: layout` has limited support in Safari
 - [ ] **Version:** Safari _____ (macOS/iOS)
-- [ ] **Status:** ✅ Pass / ❌ Fail / ⏭️ Skipped
+- [ ] **Status:**  Pass /  Fail / ⏭ Skipped
 
 **Issues:** [None / List issues]
 
@@ -263,7 +263,7 @@ Accessibility Validation (20min)
 - [ ] Verify collapse/expand works
 - [ ] Test Ctrl+Shift+C (Collapse All)
 - [ ] Test Ctrl+Shift+E (Expand All)
-- [ ] **Keyboard Navigation:** ✅ Pass / ❌ Fail
+- [ ] **Keyboard Navigation:**  Pass /  Fail
 
 ### 5.2 Screen Reader Test (Optional)
 
@@ -271,7 +271,7 @@ Accessibility Validation (20min)
 - [ ] Focus collapse button
 - [ ] Verify announces: "Toggle code block visibility, button, expanded/collapsed"
 - [ ] Verify `aria-expanded` attribute updates
-- [ ] **Screen Reader:** ✅ Pass / ❌ Fail / ⏭️ Skipped
+- [ ] **Screen Reader:**  Pass /  Fail / ⏭ Skipped
 
 ### 5.3 Reduced Motion Test
 
@@ -281,14 +281,14 @@ Accessibility Validation (20min)
 - [ ] Verify no animation (instant collapse)
 - [ ] Disable reduced motion
 - [ ] Verify animations return
-- [ ] **Reduced Motion:** ✅ Pass / ❌ Fail
+- [ ] **Reduced Motion:**  Pass /  Fail
 
 ### 5.4 High Contrast Mode Test (Windows Only)
 
 - [ ] Enable Windows High Contrast mode
 - [ ] Verify buttons have 3px borders
 - [ ] Verify sufficient color contrast
-- [ ] **High Contrast:** ✅ Pass / ❌ Fail / ⏭️ Skipped (not Windows)
+- [ ] **High Contrast:**  Pass /  Fail / ⏭ Skipped (not Windows)
 
 **Task 5 Results:**
 - **Accessibility Features Working:** _____ / 4
@@ -309,7 +309,7 @@ Regression Testing (15min)
 - [ ] Verify control bar has darker gradient
 - [ ] Verify buttons visible in dark mode
 - [ ] Verify collapsed message has lighter text color
-- [ ] **Dark Mode:** ✅ Pass / ❌ Fail / ⏭️ N/A (no dark mode)
+- [ ] **Dark Mode:**  Pass /  Fail / ⏭ N/A (no dark mode)
 
 ### 6.2 Mobile Responsive Test
 
@@ -319,7 +319,7 @@ Regression Testing (15min)
 - [ ] Verify gap reduces on mobile (5px instead of 8px)
 - [ ] Verify master controls wrap correctly
 - [ ] Test collapse/expand on mobile
-- [ ] **Mobile Responsive:** ✅ Pass / ❌ Fail
+- [ ] **Mobile Responsive:**  Pass /  Fail
 
 ### 6.3 Print Preview Test
 
@@ -328,7 +328,7 @@ Regression Testing (15min)
 - [ ] Verify no collapse buttons visible
 - [ ] Verify no master controls visible
 - [ ] Verify "Code hidden" message not visible
-- [ ] **Print Preview:** ✅ Pass / ❌ Fail
+- [ ] **Print Preview:**  Pass /  Fail
 
 **Task 6 Results:**
 - **Regression Tests Passed:** _____ / 3
@@ -349,7 +349,7 @@ Edge Case Testing (15min)
 - [ ] Watch first code block as page loads
 - [ ] Verify collapse button appears after copy button (wait-and-retry working)
 - [ ] Check console for retry attempts (if logged)
-- [ ] **Race Condition Handling:** ✅ Pass / ❌ Fail
+- [ ] **Race Condition Handling:**  Pass /  Fail
 
 ### 7.2 LocalStorage Disabled Test
 
@@ -358,7 +358,7 @@ Edge Case Testing (15min)
 - [ ] Verify still works (state just not persisted)
 - [ ] Check console for warning: `Failed to save code block states`
 - [ ] Re-enable LocalStorage
-- [ ] **LocalStorage Disabled:** ✅ Pass / ❌ Fail
+- [ ] **LocalStorage Disabled:**  Pass /  Fail
 
 ### 7.3 Very Large Code Block Test
 
@@ -367,14 +367,14 @@ Edge Case Testing (15min)
 - [ ] Verify animation smooth even with large content
 - [ ] Measure FPS (should still be ≥55)
 - [ ] **Large Block FPS:** _____
-- [ ] **Large Block Performance:** ✅ Pass / ❌ Fail
+- [ ] **Large Block Performance:**  Pass /  Fail
 
 ### 7.4 Rapid Click Test
 
 - [ ] Rapidly click collapse button 5 times
 - [ ] Verify no broken state
 - [ ] Verify `.code-collapsing` prevents interaction during animation
-- [ ] **Rapid Click Handling:** ✅ Pass / ❌ Fail
+- [ ] **Rapid Click Handling:**  Pass /  Fail
 
 **Task 7 Results:**
 - **Edge Cases Handled:** _____ / 4
@@ -452,7 +452,7 @@ Edge Case Testing (15min)
 **Approved By:** _____________________
 **Date:** _____________________
 
-**Phase 5 Status:** ⏳ IN PROGRESS / ✅ COMPLETE / ❌ BLOCKED
+**Phase 5 Status:** ⏳ IN PROGRESS /  COMPLETE /  BLOCKED
 
 ---
 

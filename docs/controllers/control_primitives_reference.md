@@ -21,16 +21,16 @@
 - **Parameter Validation**: Type-safe parameter checking for stability
 - **Numerical Stability**: Safe mathematical operations with epsilon protection ### 1.2 Module Organization ```
 src/utils/
-├── control/
-│ ├── saturation.py # Saturation and smoothing functions
-│ └── __init__.py
-├── types/
-│ ├── control_outputs.py # Structured output types
-│ └── __init__.py
-├── validation/
-│ ├── parameter_validators.py # Parameter checking
-│ └── __init__.py
-└── numerical_stability/ ├── safe_operations.py # Numerically stable math └── __init__.py
+ control/
+  saturation.py # Saturation and smoothing functions
+  __init__.py
+ types/
+  control_outputs.py # Structured output types
+  __init__.py
+ validation/
+  parameter_validators.py # Parameter checking
+  __init__.py
+ numerical_stability/  safe_operations.py # Numerically stable math  __init__.py
 ```
 
 ---

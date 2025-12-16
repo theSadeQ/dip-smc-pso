@@ -11,7 +11,7 @@
 
 ## What You'll Learn
 
-By the end of this module, you'll understand:
+By the end of this module, the system will understand:
 - What computers and programs are
 - How to navigate your operating system
 - Command line basics for Windows
@@ -48,7 +48,7 @@ Programming is writing instructions that a computer can follow. These instructio
 Python is ideal for beginners because:
 - **Readable**: Looks almost like English
 - **Forgiving**: Helps you find mistakes easily
-- **Powerful**: Used by NASA, Google, scientific research
+- **effective**: Used by NASA, Google, scientific research
 - **Popular**: Huge community, tons of tutorials
 
 ### Example: Your First Program
@@ -69,13 +69,13 @@ Your files are organized in a tree structure:
 
 ```
 C:\                          (root drive)
-├─ Users\
-│  └─ YourName\
-│     ├─ Documents\
-│     ├─ Downloads\
-│     └─ Desktop\
-├─ Program Files\
-└─ Windows\
+ Users\
+   YourName\
+      Documents\
+      Downloads\
+      Desktop\
+ Program Files\
+ Windows\
 ```
 
 ### File Paths
@@ -103,7 +103,7 @@ The **command line** (also called terminal, shell, or PowerShell) lets you contr
 ### Why Learn the Command Line?
 
 - **Faster**: Type commands vs. clicking through menus
-- **Powerful**: Access advanced features not in GUI
+- **effective**: Access features not in GUI
 - **Required**: Many development tools are CLI-only
 - **Professional**: Industry standard for software development
 
@@ -224,7 +224,7 @@ You need a text editor designed for code. Recommended options:
 
 ### Option 1: Visual Studio Code (VS Code) - Recommended
 
-**Pros**: Free, powerful, huge community, great Python support
+**Pros**: Free, effective, huge community, great Python support
 
 **Installation**:
 1. Visit https://code.visualstudio.com/
@@ -302,17 +302,17 @@ deactivate
 
 ```
 my_project/
-├─ venv/                 # Virtual environment (don't commit to Git)
-├─ src/                  # Source code
-│  ├─ __init__.py
-│  └─ main.py
-├─ tests/                # Test files
-│  └─ test_main.py
-├─ docs/                 # Documentation
-├─ data/                 # Data files
-├─ requirements.txt      # List of dependencies
-├─ README.md             # Project description
-└─ .gitignore            # Files to ignore in version control
+ venv/                 # Virtual environment (don't commit to Git)
+ src/                  # Source code
+   __init__.py
+   main.py
+ tests/                # Test files
+   test_main.py
+ docs/                 # Documentation
+ data/                 # Data files
+ requirements.txt      # List of dependencies
+ README.md             # Project description
+ .gitignore            # Files to ignore in version control
 ```
 
 ### Creating requirements.txt

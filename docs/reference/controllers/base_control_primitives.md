@@ -361,7 +361,7 @@ ValueError
 Notes
 -----
 Many control gains and time constants must be positive to ensure
-stability in sliding‑mode and adaptive control laws【462167782799487†L186-L195】.
+stability in sliding‑mode and adaptive control laws462167782799487†L186-L195.
 Centralising positivity checks via this helper reduces duplicated logic
 across controllers and configuration validators.  Callers may still
 choose to perform their own validation before construction, but using
@@ -411,7 +411,7 @@ Notes
 Range constraints arise frequently in control law design; for
 example, a controllability threshold should be positive but small,
 whereas adaptation gains must lie within finite bounds to ensure
-stability【462167782799487†L186-L195】.  Centralising range checks
+stability462167782799487†L186-L195.  Centralising range checks
 avoids duplicating logic across the project and produces uniform
 error messages.
 
@@ -443,7 +443,7 @@ The boundary layer width ``epsilon`` should be chosen based on the
 expected amplitude of measurement noise and the desired steady‑state
 accuracy.  A larger ``epsilon`` reduces chattering but introduces
 a finite steady‑state error; conversely, a smaller ``epsilon`` reduces
-error but may increase high‑frequency switching【538884328193976†L412-L423】.
+error but may increase high‑frequency switching538884328193976†L412-L423.
 
 Raises:
     ValueError

@@ -24,7 +24,7 @@ Welcome to the Theory & Explanation section—the bridge between practical tutor
 
 
 
-## 📚 Theory Guides
+##  Theory Guides
 
 ### [Sliding Mode Control Theory](smc-theory.md)
 
@@ -101,7 +101,7 @@ Welcome to the Theory & Explanation section—the bridge between practical tutor
 
 
 
-## 🎯 Learning Path
+##  Learning Path
 
 ```
 Tutorials (How to use)
@@ -132,7 +132,7 @@ Mathematical Foundations (Deep research)
 
 
 
-## 🔬 What You'll Learn
+##  What You'll Learn
 
 ### Sliding Mode Control Theory
 
@@ -157,7 +157,7 @@ Mathematical Foundations (Deep research)
 
 
 
-## 🧮 Mathematical Prerequisites
+##  Mathematical Prerequisites
 
 **Recommended Background**:
 - Linear algebra (matrices, eigenvalues)
@@ -169,7 +169,7 @@ Mathematical Foundations (Deep research)
 
 
 
-## 📖 Notation Conventions
+##  Notation Conventions
 
 These symbols appear throughout the theory guides:
 

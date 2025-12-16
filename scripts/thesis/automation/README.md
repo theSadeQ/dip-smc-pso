@@ -393,10 +393,10 @@ ollama pull llama3:70b
 ### After Phase 1 (Quick Wins)
 
 You will have:
-- ✅ All cross-references validated (0 broken links)
-- ✅ Chapter 8 statistics verified (p-values, effect sizes, corrections)
-- ✅ 120+ technical claims extracted and audited
-- ✅ Mathematical notation standardized
+-  All cross-references validated (0 broken links)
+-  Chapter 8 statistics verified (p-values, effect sizes, corrections)
+-  120+ technical claims extracted and audited
+-  Mathematical notation standardized
 
 **Manual Work**: 50 min review
 **Confidence Level**: High for mechanical correctness
@@ -406,10 +406,10 @@ You will have:
 ### After Phase 2 (Advanced)
 
 You will additionally have:
-- ✅ Equations symbolically verified
-- ✅ 10 critical implementations checked
-- ✅ All research questions coverage confirmed
-- ✅ Proof structures screened for red flags
+-  Equations symbolically verified
+-  10 critical implementations checked
+-  All research questions coverage confirmed
+-  Proof structures screened for red flags
 
 **Manual Work**: Additional 6-9 hours (including expert proof review)
 **Confidence Level**: Very high for complete validation
@@ -444,7 +444,7 @@ You will additionally have:
 
 ### Week 2-3: Deep Validation (Optional)
 
-**Goal**: Comprehensive validation for high-stakes submission (journal, PhD application)
+**Goal**: complete validation for high-stakes submission (journal, PhD application)
 
 1. **Week 2**: Run Phase 2 automation (2-3 hours)
 2. **Week 2**: Manual review of equations & code (2-3 hours)
@@ -523,7 +523,7 @@ You will additionally have:
 ### 2025-11-05 - Initial Release
 - 8 automation scripts operational
 - Master runner script
-- Comprehensive documentation
+- complete documentation
 - Configuration system
 - Cost tracking
 - Phase-based execution

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate comprehensive citation integration report.
+Generate complete citation integration report.
 
 This script creates a markdown report summarizing:
 1. BibTeX coverage and organization
@@ -15,7 +15,7 @@ Usage:
 """
 # example-metadata:
 # runnable: true
-# expected_result: Comprehensive citation integration report in Markdown
+# expected_result: complete citation integration report in Markdown
 
 import argparse
 import json
@@ -84,8 +84,8 @@ def find_cite_references(doc_path: Path) -> Set[str]:
 def count_docstring_citations(file_path: Path) -> int:
     """Count citation references in Python docstrings."""
     content = file_path.read_text(encoding='utf-8')
-    # Pattern:【source†lines】
-    citation_pattern = r'【[^】]+†[^】]+】'
+    # Pattern:source†lines
+    citation_pattern = r'[^]+†[^]+'
     return len(re.findall(citation_pattern, content))
 
 
@@ -96,7 +96,7 @@ def generate_report(
     mapping_file: Path,
     output: Path
 ) -> str:
-    """Generate comprehensive citation integration report."""
+    """Generate complete citation integration report."""
 
     report_lines = []
 

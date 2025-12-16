@@ -10,17 +10,17 @@
 
 | Controller Type | Implementation | Config | Algorithm | Safety | Overall | Target |
 |----------------|----------------|---------|-----------|---------|---------|---------|
-| **Classical SMC** | 87% | 79% | 91% | 100% | **85%** | ✅ 85% |
-| **STA SMC** | 52% | 62% | 59% | 67% | **58%** | ❌ 85% |
-| **Adaptive SMC** | 71% | 73% | 53% | 63% | **63%** | ❌ 85% |
-| **Hybrid SMC** | 50% | 64% | 19% | 50% | **38%** | ❌ 85% |
-| **Factory System** | 50% | 85% | 28% | 75% | **55%** | ❌ 85% |
+| **Classical SMC** | 87% | 79% | 91% | 100% | **85%** |  85% |
+| **STA SMC** | 52% | 62% | 59% | 67% | **58%** |  85% |
+| **Adaptive SMC** | 71% | 73% | 53% | 63% | **63%** |  85% |
+| **Hybrid SMC** | 50% | 64% | 19% | 50% | **38%** |  85% |
+| **Factory System** | 50% | 85% | 28% | 75% | **55%** |  85% |
 
 ## Critical Code Paths Analysis
 
 ### 1. Safety-Critical Functions (TARGET: 100%)
 
-**Control Saturation Mechanisms** ✅ **100% Coverage**
+**Control Saturation Mechanisms**  **100% Coverage**
 ```python
 # example-metadata:
 # runnable: false
@@ -37,7 +37,7 @@ def require_in_range(value, name, minimum, maximum, allow_equal=True):
     # FULL COVERAGE: range validation, boundary conditions, error handling
 ```
 
-**Force Limiting & Bounds Enforcement** ✅ **100% Coverage**
+**Force Limiting & Bounds Enforcement**  **100% Coverage**
 ```python
 # All controller implementations include validated saturation:
 u_saturated = np.clip(u_total, -self.config.max_force, self.config.max_force)
@@ -46,7 +46,7 @@ u_saturated = np.clip(u_total, -self.config.max_force, self.config.max_force)
 
 ## 2. Critical Coverage Gaps Requiring Immediate Attention
 
-**Hybrid Switching Logic** ❌ **19% Coverage - CRITICAL GAP**
+**Hybrid Switching Logic**  **19% Coverage - CRITICAL GAP**
 ```python
 # example-metadata:
 # runnable: false
@@ -66,7 +66,7 @@ def validate_transition_safety(self, from_controller, to_controller, state):
     # UNTESTED: stability margin enforcement
 ```
 
-**Adaptive Parameter Estimation** ❌ **48% Coverage - STABILITY RISK**
+**Adaptive Parameter Estimation**  **48% Coverage - STABILITY RISK**
 ```python
 # example-metadata:
 # runnable: false
@@ -86,7 +86,7 @@ def validate_stability_conditions(self, current_estimates):
     # UNTESTED: recovery mechanisms
 ```
 
-**STA Twisting Algorithm** ❌ **59% Coverage - CONVERGENCE RISK**
+**STA Twisting Algorithm**  **59% Coverage - CONVERGENCE RISK**
 ```python
 # example-metadata:
 # runnable: false
@@ -327,10 +327,10 @@ repos:
 
 | Risk Level | Coverage Threshold | Deployment Action |
 |------------|-------------------|-------------------|
-| **CRITICAL** | <50% | ❌ BLOCK DEPLOYMENT |
-| **HIGH** | 50-75% | ⚠️ REQUIRE APPROVAL |
-| **MEDIUM** | 75-85% | ✅ STAGED DEPLOYMENT |
-| **LOW** | >85% | ✅ FULL DEPLOYMENT |
+| **CRITICAL** | <50% |  BLOCK DEPLOYMENT |
+| **HIGH** | 50-75% |  REQUIRE APPROVAL |
+| **MEDIUM** | 75-85% |  STAGED DEPLOYMENT |
+| **LOW** | >85% |  FULL DEPLOYMENT |
 
 ### Controller-Specific Risk Assessment
 

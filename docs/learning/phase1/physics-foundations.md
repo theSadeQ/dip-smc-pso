@@ -11,7 +11,7 @@
 
 ## What You'll Learn
 
-By the end of this module, you'll understand:
+By the end of this module, the system will understand:
 - Newton's laws and how they govern motion
 - Forces, torque, and rotational motion
 - Energy conservation in mechanical systems

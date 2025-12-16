@@ -19,7 +19,7 @@ Real-world control systems must handle unexpected disturbances such as:
 - Load changes (picking up/dropping objects)
 - Environmental perturbations (terrain bumps for mobile robots)
 
-A robust controller should:
+A controller with error handling should:
 1. **Reject disturbances quickly** (return to equilibrium within 2-5 seconds)
 2. **Minimize performance degradation** (settling time increase <20%)
 3. **Maintain stability** (no divergence or oscillations)

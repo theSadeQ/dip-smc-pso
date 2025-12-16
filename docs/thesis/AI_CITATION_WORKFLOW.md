@@ -287,7 +287,7 @@ While \cite{Levant2007} analyzes STA via homogeneity,
 
 ---
 
-## Advanced Features
+## features
 
 ### Feature 1: Batch Extraction
 
@@ -346,19 +346,19 @@ While \cite{Levant2007} analyzes STA via homogeneity,
 
 ```
 thesis/
-├── sources_archive/
-│   └── manuelly downloaded/
-│       ├── levant2007.pdf
-│       ├── Khalil2002.pdf
-│       ├── Kennedy1995.pdf
-│       └── ... (22 PDFs total)
-├── citation_tracking/
-│   ├── INDEX.md                    # Master index of all PDFs
-│   ├── Levant2007_tracking.md      # Per-PDF tracking
-│   ├── Khalil2002_tracking.md
-│   └── ...
-├── references.bib                  # BibTeX database
-└── main.tex                        # Thesis LaTeX
+ sources_archive/
+    manuelly downloaded/
+        levant2007.pdf
+        Khalil2002.pdf
+        Kennedy1995.pdf
+        ... (22 PDFs total)
+ citation_tracking/
+    INDEX.md                    # Master index of all PDFs
+    Levant2007_tracking.md      # Per-PDF tracking
+    Khalil2002_tracking.md
+    ...
+ references.bib                  # BibTeX database
+ main.tex                        # Thesis LaTeX
 ```
 
 ---

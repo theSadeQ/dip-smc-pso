@@ -59,7 +59,7 @@ CONTROLLER_COLORS = {
 
 
 def load_qw2_benchmark_data() -> pd.DataFrame:
-    """Load comprehensive benchmark data from QW-2."""
+    """Load complete benchmark data from QW-2."""
     csv_path = BENCHMARKS_DIR / "comprehensive_benchmark.csv"
     if csv_path.exists():
         return pd.read_csv(csv_path)

@@ -91,12 +91,12 @@ Where $m$ is effective inertia.
 ### Trade-offs
 
 **Larger $\epsilon$:**
-- ✅ Less chattering
-- ❌ Larger steady-state error: $|e_{ss}| \leq \epsilon \max_i \lambda_i$
+-  Less chattering
+-  Larger steady-state error: $|e_{ss}| \leq \epsilon \max_i \lambda_i$
 
 **Smaller $\epsilon$:**
-- ✅ Better tracking accuracy
-- ❌ More chattering
+-  Better tracking accuracy
+-  More chattering
 
 **Typical design:**
 

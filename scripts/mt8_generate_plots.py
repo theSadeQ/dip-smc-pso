@@ -1,7 +1,7 @@
 """
 MT-8 Plot Generator: Visualization for Baseline vs Robust Comparison
 
-Generates comprehensive comparison plots:
+Generates complete comparison plots:
 1. Convergence rate comparison (baseline vs robust)
 2. Overshoot comparison with error bars
 3. Settling time comparison

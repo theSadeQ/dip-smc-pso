@@ -62,7 +62,7 @@ float ITAE value averaged across batch dimension #### Source Code ```{literalinc
 ### `compute_rms_control_effort(u)`
 
 Compute Root Mean Square (RMS) control effort. The RMS control effort measures the average magnitude of control inputs:
-RMS = √(⟨u²(t)⟩) This metric quantifies actuator usage and energy consumption. Lower
+RMS = √(u²(t)) This metric quantifies actuator usage and energy consumption. Lower
 values indicate more efficient control that requires less actuation. Parameters
 ----------
 u : np.ndarray Control input trajectories of shape (B, N) Returns

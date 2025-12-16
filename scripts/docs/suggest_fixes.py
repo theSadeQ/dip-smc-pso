@@ -17,7 +17,7 @@ from typing import Dict, List
 from collections import defaultdict
 
 
-# Comprehensive replacement mapping
+# complete replacement mapping
 REPLACEMENTS = {
     # Greeting patterns
     r"\bLet's\s+": "REMOVE_OR_REPHRASE",
@@ -179,7 +179,7 @@ def process_critical_files(json_report_path: Path, output_dir: Path):
 
             print(f"  [{i}/{len(critical_files)}] {file_path.name}: {len(suggestions)} fixes -> {diff_file.name}")
 
-    # Save comprehensive JSON
+    # Save complete JSON
     json_output = output_dir / "all_fix_suggestions.json"
     json_output.write_text(json.dumps(all_suggestions, indent=2), encoding='utf-8')
 

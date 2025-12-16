@@ -99,7 +99,7 @@ from src.analysis.performance import sensitivity_analysis sensitivity = sensitiv
 print(f"Most sensitive: {sensitivity.most_sensitive_param}")
 ```
 This module provides robustness analysis features including
-sensitivity analysis, uncertainty quantification, and robust performance metrics. ## Complete Source Code ```{literalinclude} ../../../src/analysis/performance/robustness.py
+sensitivity analysis, uncertainty quantification, and reliable performance metrics. ## Complete Source Code ```{literalinclude} ../../../src/analysis/performance/robustness.py
 :language: python
 :linenos:
 ```

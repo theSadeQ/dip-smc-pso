@@ -79,9 +79,9 @@ term is applied.
 requires that the sliding‑surface gains ``k1``, ``k2`` and the slope
 coefficients ``lam1``, ``lam2`` be strictly positive.  Utkin and
 Levant note that the discontinuous control gain ``k`` must be a
-positive constant【Rhif2012†L563-L564】, and the slope ``λ`` of the
+positive constantRhif2012†L563-L564, and the slope ``λ`` of the
 sliding function must be chosen positive to ensure Hurwitz
-stability【ModelFreeSMC2018†L340-L345】.  The switching gain ``K`` must
+stabilityModelFreeSMC2018†L340-L345.  The switching gain ``K`` must
 also be strictly positive to drive the system to the sliding surface,
 while the derivative gain ``kd`` should be non‑negative to provide
 damping.  The constructor validates these constraints and raises

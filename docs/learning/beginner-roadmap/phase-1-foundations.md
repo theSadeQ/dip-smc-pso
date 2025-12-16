@@ -94,7 +94,7 @@
 **What is the command line?**
 - A text interface to control your computer
 - Instead of clicking, you type commands
-- Faster and more powerful than graphical interfaces
+- Faster and more effective than graphical interfaces
 
 **Essential Commands**:
 
@@ -223,7 +223,7 @@ clear
    - Easy to use, lots of extensions
    - Works on Windows, Mac, Linux
 
-2. **Vim** (Terminal-based, powerful)
+2. **Vim** (Terminal-based, effective)
    - Pre-installed on most Unix systems
    - Steep learning curve, very efficient once learned
 
@@ -1043,18 +1043,18 @@ ls   # Mac/Linux
 
 ```
 dip-smc-pso/
-├── simulate.py              # Main program (you'll run this)
-├── streamlit_app.py         # Web interface
-├── config.yaml              # Configuration file (you'll edit this)
-├── requirements.txt         # List of dependencies
-├── src/                     # Source code
-│   ├── controllers/         # Control algorithms
-│   ├── core/                # Simulation engine
-│   ├── plant/               # Physics models
-│   └── optimization/        # PSO optimizer
-├── tests/                   # Test code
-├── docs/                    # Documentation
-└── README.md                # Project overview
+ simulate.py              # Main program (the system will run this)
+ streamlit_app.py         # Web interface
+ config.yaml              # Configuration file (the system will edit this)
+ requirements.txt         # List of dependencies
+ src/                     # Source code
+    controllers/         # Control algorithms
+    core/                # Simulation engine
+    plant/               # Physics models
+    optimization/        # PSO optimizer
+ tests/                   # Test code
+ docs/                    # Documentation
+ README.md                # Project overview
 ```
 
 ---

@@ -42,7 +42,7 @@ Tutorial 03 development was deferred to focus on:
 
 ## Alternatives (Use These Instead)
 
-While Tutorial 03 remains a placeholder, comprehensive PSO documentation exists elsewhere:
+While Tutorial 03 remains a placeholder, complete PSO documentation exists elsewhere:
 
 ### 1. PSO Theory & Implementation
 - **File:** `docs/theory/pso_optimization_complete.md`
@@ -101,7 +101,7 @@ Tutorial 03 completion is planned but not scheduled. Priority depends on:
 - Availability of development resources
 - Completion of higher-priority documentation
 
-**Estimated effort:** 8-12 hours to write comprehensive tutorial
+**Estimated effort:** 8-12 hours to write complete tutorial
 **Target audience:** Intermediate users (familiar with basic SMC, want to master PSO)
 
 ---

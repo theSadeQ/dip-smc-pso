@@ -219,10 +219,10 @@ For HTML:
 
 Ensure minimum 3:1 contrast between icon color and background:
 
-- **Success green (#059669)** on white: 4.5:1 ✓
-- **Danger red (#dc2626)** on white: 5.2:1 ✓
-- **Warning orange (#d97706)** on white: 4.1:1 ✓
-- **Info blue (#2563eb)** on white: 6.3:1 ✓
+- **Success green (#059669)** on white: 4.5:1 
+- **Danger red (#dc2626)** on white: 5.2:1 
+- **Warning orange (#d97706)** on white: 4.1:1 
+- **Info blue (#2563eb)** on white: 6.3:1 
 
 ### Decorative vs Semantic
 
@@ -242,10 +242,10 @@ Replace Unicode symbols with SVG icons:
 
 | Old (Unicode) | New (SVG) | Usage |
 |---------------|-----------|-------|
-| ✓ | `![check](../_static/icons/status/check.svg)` | Success |
-| ✗ | `![x-mark](../_static/icons/status/x-mark.svg)` | Error |
-| ⚠️ | `![warning](../_static/icons/status/warning.svg)` | Warning |
-| ℹ️ | `![info](../_static/icons/status/info.svg)` | Info |
+|  | `![check](../_static/icons/status/check.svg)` | Success |
+|  | `![x-mark](../_static/icons/status/x-mark.svg)` | Error |
+|  | `![warning](../_static/icons/status/warning.svg)` | Warning |
+| ℹ | `![info](../_static/icons/status/info.svg)` | Info |
 | → | `![arrow-right](../_static/icons/navigation/arrow-right.svg)` | Next |
 | ← | `![arrow-left](../_static/icons/navigation/arrow-left.svg)` | Previous |
 | ↓ | `![arrow-down](../_static/icons/navigation/arrow-down.svg)` | Expand |
@@ -254,13 +254,13 @@ Replace Unicode symbols with SVG icons:
 
 ```bash
 # Replace checkmarks in markdown files
-find docs/guides -name "*.md" -exec sed -i 's/✓/![check](..\/\\_static\/icons\/status\/check.svg)/g' {} +
+find docs/guides -name "*.md" -exec sed -i 's//![check](..\/\\_static\/icons\/status\/check.svg)/g' {} +
 
 # Replace x-marks
-find docs/guides -name "*.md" -exec sed -i 's/✗/![x-mark](..\/\\_static\/icons\/status\/x-mark.svg)/g' {} +
+find docs/guides -name "*.md" -exec sed -i 's//![x-mark](..\/\\_static\/icons\/status\/x-mark.svg)/g' {} +
 
 # Replace warnings
-find docs/guides -name "*.md" -exec sed -i 's/⚠️/![warning](..\/\\_static\/icons\/status\/warning.svg)/g' {} +
+find docs/guides -name "*.md" -exec sed -i 's//![warning](..\/\\_static\/icons\/status\/warning.svg)/g' {} +
 ```
 
 ---

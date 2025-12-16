@@ -18,9 +18,9 @@
 ```python
 # example-metadata:
 # runnable: false # BEFORE (35 occurrences across 3 files)
-return self._create_failure_result( "Invalid inputs", state=state.copy(), # ❌ Unnecessary control_input=control_input.copy(), # ❌ Unnecessary time=time
+return self._create_failure_result( "Invalid inputs", state=state.copy(), #  Unnecessary control_input=control_input.copy(), #  Unnecessary time=time
 ) # AFTER
-return self._create_failure_result( "Invalid inputs", state=state, # ✅ No mutation after return control_input=control_input, # ✅ Caller owns arrays time=time
+return self._create_failure_result( "Invalid inputs", state=state, #  No mutation after return control_input=control_input, #  Caller owns arrays time=time
 )
 ``` **Reason**: Result dictionaries are immutable after construction. No mutation risk.
 
@@ -38,8 +38,8 @@ return self._create_failure_result( "Invalid inputs", state=state, # ✅ No muta
 ```python
 # example-metadata:
 # runnable: false # BEFORE
-def get_statistics(self) -> Dict[str, Any]: stats = self._stats.copy() # ❌ Defensive copy stats['miss_rate'] = self._missed / self._total return stats # AFTER
-def get_statistics(self) -> Dict[str, Any]: stats = self._stats # ✅ Direct reference (no mutation after this point) stats['miss_rate'] = self._missed / self._total return stats
+def get_statistics(self) -> Dict[str, Any]: stats = self._stats.copy() #  Defensive copy stats['miss_rate'] = self._missed / self._total return stats # AFTER
+def get_statistics(self) -> Dict[str, Any]: stats = self._stats #  Direct reference (no mutation after this point) stats['miss_rate'] = self._missed / self._total return stats
 ``` **Reason**: Stats are read-only snapshots. Caller expects snapshot semantics.
 
 **Impact**: 7 copies eliminated in monitoring/diagnostic paths
@@ -51,7 +51,7 @@ def get_statistics(self) -> Dict[str, Any]: stats = self._stats # ✅ Direct ref
 
 ```python
 # CORRECT (already optimized)
-if init.ndim == 1: # broadcast across batch init_b = np.broadcast_to(init, (B, init.shape[0])).copy() # ✅ Required
+if init.ndim == 1: # broadcast across batch init_b = np.broadcast_to(init, (B, init.shape[0])).copy() #  Required
 ``` **Reason**: `np.broadcast_to()` returns a **read-only view**. Copy makes it writable.
 
 **Evidence**: NumPy raises `ValueError: assignment destination is read-only` without copy.
@@ -64,7 +64,7 @@ if init.ndim == 1: # broadcast across batch init_b = np.broadcast_to(init, (B, i
 
 ```python
 # CORRECT
-if self._dominates(new_objectives[i], self.personal_best_objectives[i]): self.personal_best_positions[i] = self.positions[i].copy() # ✅ Required self.personal_best_objectives[i] = new_objectives[i].copy() # ✅ Required
+if self._dominates(new_objectives[i], self.personal_best_objectives[i]): self.personal_best_positions[i] = self.positions[i].copy() #  Required self.personal_best_objectives[i] = new_objectives[i].copy() #  Required
 ``` **Reason**: Personal best must be independent from current position (which continues to evolve).
 
 **Impact**: No optimization possible
@@ -78,7 +78,7 @@ if self._dominates(new_objectives[i], self.personal_best_objectives[i]): self.pe
 - `src/optimization/algorithms/gradient_based/bfgs.py:194,202,209-210` **Example**:
 ```python
 # CORRECT
-for i in range(n): state_plus = eq_state.copy() # ✅ Required (will mutate) state_plus[i] += eps dynamics_plus = self.compute_dynamics(state_plus, eq_input)
+for i in range(n): state_plus = eq_state.copy() #  Required (will mutate) state_plus[i] += eps dynamics_plus = self.compute_dynamics(state_plus, eq_input)
 ``` **Reason**: Each perturbation needs independent state vector. Element mutation follows.
 
 **Impact**: No optimization possible
@@ -90,7 +90,7 @@ for i in range(n): state_plus = eq_state.copy() # ✅ Required (will mutate) sta
 
 ```python
 # CORRECT
-def _crossover(self, target: np.ndarray, mutant: np.ndarray) -> np.ndarray: trial = target.copy() # ✅ Required (will mutate) j_rand = rng.integers(0, len(target)) trial[j_rand] = mutant[j_rand] # In-place mutation return trial
+def _crossover(self, target: np.ndarray, mutant: np.ndarray) -> np.ndarray: trial = target.copy() #  Required (will mutate) j_rand = rng.integers(0, len(target)) trial[j_rand] = mutant[j_rand] # In-place mutation return trial
 ``` **Reason**: Trial vector must be independent from target (population member).
 
 **Impact**: No optimization possible
@@ -98,10 +98,10 @@ def _crossover(self, target: np.ndarray, mutant: np.ndarray) -> np.ndarray: tria
 
 ---
 
-## 7. CONVERTIBLE PATTERN NOT FOUND **Analysis**: No instances of `.copy()` chained with operations that already copy: - ❌ `arr.copy().astype(dtype)` - Would be redundant (`.astype()` creates copy)
+## 7. CONVERTIBLE PATTERN NOT FOUND **Analysis**: No instances of `.copy()` chained with operations that already copy: -  `arr.copy().astype(dtype)` - Would be redundant (`.astype()` creates copy)
 
-- ❌ `arr.copy().reshape(shape)` - Would be inefficient (`.reshape()` returns view)
-- ❌ `arr.copy()[start:end]` - Would be redundant (slicing creates copy) **Conclusion**: Existing codebase already avoids these anti-patterns.
+-  `arr.copy().reshape(shape)` - Would be inefficient (`.reshape()` returns view)
+-  `arr.copy()[start:end]` - Would be redundant (slicing creates copy) **Conclusion**: Existing codebase already avoids these anti-patterns.
 
 ---
 
@@ -113,9 +113,9 @@ x0 = np.asarray(initial_state, dtype=float, copy=False).reshape(-1) # src/simula
 x = np.asarray(initial_state, dtype=float, copy=False) # src/simulation/engines/vector_sim.py:329
 part_arr = np.asarray(particles, dtype=float, copy=False)
 ``` **Effect**: Creates view when possible, avoids unnecessary copy overhead. **When to use**:
-- ✅ Input validation (read-only operations)
-- ✅ Array normalization before processing
-- ❌ Before in-place mutations
+-  Input validation (read-only operations)
+-  Array normalization before processing
+-  Before in-place mutations
 
 ---
 
@@ -146,14 +146,14 @@ def run_5s_simulation(): t, x, u = run_simulation( controller=controller, dynami
 ---
 
 ## Risk Assessment ### Low Risk (Apply immediately)
-- ✅ Result dict construction copies (35 occurrences)
-- ✅ Stats dict copies (7 occurrences) **Rationale**: These copies are purely defensive. No mutation after construction. ### Medium Risk (Review class implementation)
-- ⚠️ Registry/cache copies (5 occurrences)
-- ⚠️ History buffer copies (5 occurrences) **Action**: Verify that returned objects are not mutated by caller. ### High Risk (DO NOT REMOVE)
-- ❌ Broadcast view copies (2 occurrences) - **Read-only view**
-- ❌ PSO particle tracking (14 occurrences) - **Aliasing prevention**
-- ❌ Numerical differentiation (8 occurrences) - **Independent perturbations**
-- ❌ Evolutionary crossover (13 occurrences) - **Population independence**
+-  Result dict construction copies (35 occurrences)
+-  Stats dict copies (7 occurrences) **Rationale**: These copies are purely defensive. No mutation after construction. ### Medium Risk (Review class implementation)
+-  Registry/cache copies (5 occurrences)
+-  History buffer copies (5 occurrences) **Action**: Verify that returned objects are not mutated by caller. ### High Risk (DO NOT REMOVE)
+-  Broadcast view copies (2 occurrences) - **Read-only view**
+-  PSO particle tracking (14 occurrences) - **Aliasing prevention**
+-  Numerical differentiation (8 occurrences) - **Independent perturbations**
+-  Evolutionary crossover (13 occurrences) - **Population independence**
 
 ---
 

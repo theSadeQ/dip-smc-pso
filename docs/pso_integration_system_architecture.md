@@ -3,7 +3,7 @@
 #==========================================================================================\\\
 
 # PSO Integration System Architecture
-**Double-Inverted Pendulum Sliding Mode Control System** ## Executive Summary This document provides architectural documentation for the Particle Swarm Optimization (PSO) integration system within the Double-Inverted Pendulum (DIP) Sliding Mode Control framework. The architecture encompasses a sophisticated multi-layered design that enables automated controller gain optimization across multiple SMC variants with robust performance metrics and uncertainty handling. **System Status**: ✅ **PRODUCTION READY** - All components fully operational
+**Double-Inverted Pendulum Sliding Mode Control System** ## Executive Summary This document provides architectural documentation for the Particle Swarm Optimization (PSO) integration system within the Double-Inverted Pendulum (DIP) Sliding Mode Control framework. The architecture encompasses a sophisticated multi-layered design that enables automated controller gain optimization across multiple SMC variants with reliable performance metrics and uncertainty handling. **System Status**:  **PRODUCTION READY** - All components fully operational
 **Integration Health**: 100% functional capability with validation
 **Performance**: Vectorized optimization achieving sub-second iteration times
 
@@ -11,35 +11,35 @@
 
 ## 1. High-Level System Architecture ### 1.1 Architectural Overview ```
 
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ PSO INTEGRATION SYSTEM │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ │
-│ ┌─────────────────┐ ┌──────────────────┐ ┌─────────────────────┐ │
-│ │ CLI Interface │────│ PSO Orchestrator │────│ Configuration Mgmt │ │
-│ │ (simulate.py) │ │ (pso_optimizer) │ │ (config.yaml) │ │
-│ └─────────────────┘ └──────────────────┘ └─────────────────────┘ │
-│ │ │ │ │
-│ ▼ ▼ ▼ │
-│ ┌─────────────────┐ ┌──────────────────┐ ┌─────────────────────┐ │
-│ │ Controller │◄───│ Factory Pattern │────│ Parameter Bounds │ │
-│ │ Instantiation │ │ Integration │ │ Validation │ │
-│ └─────────────────┘ └──────────────────┘ └─────────────────────┘ │
-│ │ │ │ │
-│ ▼ ▼ ▼ │
-│ ┌─────────────────┐ ┌──────────────────┐ ┌─────────────────────┐ │
-│ │ Vectorized │◄───│ Batch Fitness │────│ Cost Function │ │
-│ │ Simulation │ │ Evaluation │ │ Normalization │ │
-│ │ (vector_sim) │ │ │ │ │ │
-│ └─────────────────┘ └──────────────────┘ └─────────────────────┘ │
-│ │ │ │ │
-│ ▼ ▼ ▼ │
-│ ┌─────────────────┐ ┌──────────────────┐ ┌─────────────────────┐ │
-│ │ Performance │◄───│ PSO Algorithm │────│ Result Storage │ │
-│ │ Analysis │ │ (PySwarms) │ │ & Validation │ │
-│ └─────────────────┘ └──────────────────┘ └─────────────────────┘ │
-│ │
-└─────────────────────────────────────────────────────────────────────────────┘
+
+ PSO INTEGRATION SYSTEM 
+
+ 
+    
+  CLI Interface  PSO Orchestrator  Configuration Mgmt  
+  (simulate.py)   (pso_optimizer)   (config.yaml)  
+    
+    
+    
+    
+  Controller  Factory Pattern  Parameter Bounds  
+  Instantiation   Integration   Validation  
+    
+    
+    
+    
+  Vectorized  Batch Fitness  Cost Function  
+  Simulation   Evaluation   Normalization  
+  (vector_sim)      
+    
+    
+    
+    
+  Performance  PSO Algorithm  Result Storage  
+  Analysis   (PySwarms)   & Validation  
+    
+ 
+
 ``` ### 1.2 Core Integration Components **Primary System Modules:** 1. **PSO Tuner Engine** (`src/optimization/algorithms/pso_optimizer.py`) - Vectorized particle swarm optimization implementation - Adaptive penalty mechanisms for stability enforcement - Uncertainty-aware optimization with robustness evaluation 2. **Controller Factory Interface** (`src/controllers/factory.py`) - Unified controller instantiation across SMC variants - Dynamic parameter validation and bounds checking - PSO-compatible gain vector interface contracts 3. **Vectorized Simulation Engine** (`src/simulation/engines/vector_sim.py`) - High-performance batch trajectory evaluation - Parallel computation for swarm fitness assessment - Memory-efficient state trajectory management 4. **Configuration Management System** (`config.yaml`) - parameter bounds specification - Controller-specific optimization settings - Cost function normalization parameters
 
 ---
@@ -77,35 +77,35 @@ class ClassicalSMC: def __init__(self, gains: np.ndarray): # [c1, λ1, c2, λ2, 
 
 ## 3. Data Flow Architecture ### 3.1 PSO Optimization Workflow ```
 
-┌─────────────────┐
-│ CLI Command │ python simulate.py --ctrl classical_smc --run-pso
-│ (simulate.py) │
-└─────────┬───────┘ ▼
-┌─────────────────┐
-│ Configuration │ Load config.yaml, validate PSO parameters
-│ Loading │ Extract controller bounds, cost function weights
-└─────────┬───────┘ ▼
-┌─────────────────┐
-│ PSOTuner Init │ Initialize with controller_factory, local RNG
-│ │ Compute normalization constants, penalty factors
-└─────────┬───────┘ ▼
-┌─────────────────┐
-│ PySwarms Setup │ Configure particle bounds, PSO hyperparameters
-│ │ Initialize swarm positions and velocities
-└─────────┬───────┘ ▼
-┌─────────────────┐
-│ Optimization │ ┌─ For each iteration:
-│ Loop │ │ ├─ Pre-filter particles (validate_gains)
-│ │ │ ├─ Batch simulation (vector_sim)
-│ │ │ ├─ Fitness evaluation (cost computation)
-│ │ │ ├─ Update particle positions/velocities
-│ │ │ └─ Check convergence criteria
-│ │ └─ Return best gains and cost history
-└─────────┬───────┘ ▼
-┌─────────────────┐
-│ Result Storage │ Save optimized gains to JSON file
-│ & Validation │ Perform final validation simulation
-└─────────────────┘
+
+ CLI Command  python simulate.py --ctrl classical_smc --run-pso
+ (simulate.py) 
+ 
+
+ Configuration  Load config.yaml, validate PSO parameters
+ Loading  Extract controller bounds, cost function weights
+ 
+
+ PSOTuner Init  Initialize with controller_factory, local RNG
+  Compute normalization constants, penalty factors
+ 
+
+ PySwarms Setup  Configure particle bounds, PSO hyperparameters
+  Initialize swarm positions and velocities
+ 
+
+ Optimization   For each iteration:
+ Loop    Pre-filter particles (validate_gains)
+    Batch simulation (vector_sim)
+    Fitness evaluation (cost computation)
+    Update particle positions/velocities
+    Check convergence criteria
+   Return best gains and cost history
+ 
+
+ Result Storage  Save optimized gains to JSON file
+ & Validation  Perform final validation simulation
+
 ``` ### 3.2 Cost Function Architecture **Mathematical Foundation:**
 ```
 
@@ -138,7 +138,7 @@ GAIN_DIMENSIONS = { 'classical_smc': 6, # [c1, λ1, c2, λ2, K, kd] 'sta_smc': 6
 ``` ### 4.2 Configuration Schema Interface **PSO Configuration Structure:**
 ```yaml
 
-pso: # Core PSO parameters n_particles: 50 n_iterations: 100 cognitive_weight: 1.49445 social_weight: 1.49445 inertia_weight: 0.729 # Advanced features velocity_clamp: [0.1, 0.5] # [min_factor, max_factor] w_schedule: [0.9, 0.4] # [w_start, w_end] # Parameter bounds (controller-specific) bounds: classical_smc: lower: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1] upper: [20.0, 20.0, 20.0, 20.0, 100.0, 10.0]
+pso: # Core PSO parameters n_particles: 50 n_iterations: 100 cognitive_weight: 1.49445 social_weight: 1.49445 inertia_weight: 0.729 # features velocity_clamp: [0.1, 0.5] # [min_factor, max_factor] w_schedule: [0.9, 0.4] # [w_start, w_end] # Parameter bounds (controller-specific) bounds: classical_smc: lower: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1] upper: [20.0, 20.0, 20.0, 20.0, 100.0, 10.0]
 ``` **Cost Function Configuration:**
 ```yaml
 

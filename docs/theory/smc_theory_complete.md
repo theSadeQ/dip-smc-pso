@@ -26,7 +26,7 @@ s(\vec{x}, t) = \mat{S}\vec{e}(t) = \vec{c}^T\vec{e}_p + \dot{\vec{e}}_p
 ``` ### Surface Dynamics Analysis When the system is constrained to the sliding surface $s = 0$, the reduced-order dynamics become: ```{math}
 :label: eq:sliding_surface_dynamics
 \dot{\vec{e}}_p + \mat{C}\vec{e}_p = 0
-``` where $\mat{C} = \text{diag}(c_x, c_{\theta_1}, c_{\theta_2})$. **Theorem 1 (Surface Stability)**: If all sliding surface parameters $c_i > 0$, then the sliding surface dynamics are exponentially stable with convergence rates determined by $c_i$ {cite}`smc_bucak_2020_analysis_robotics,smc_edardar_2015_hysteresis_compensation,smc_farrell_2006_adaptive_approximation`. *Proof*: The characteristic polynomial of each error component is $s + c_i = 0$, yielding eigenvalues $\lambda_i = -c_i < 0$ for $c_i > 0$. □ ## Classical Sliding Mode Control ### Control Law Structure The classical SMC law consists of two components: ```{math}
+``` where $\mat{C} = \text{diag}(c_x, c_{\theta_1}, c_{\theta_2})$. **Theorem 1 (Surface Stability)**: If all sliding surface parameters $c_i > 0$, then the sliding surface dynamics are exponentially stable with convergence rates determined by $c_i$ {cite}`smc_bucak_2020_analysis_robotics,smc_edardar_2015_hysteresis_compensation,smc_farrell_2006_adaptive_approximation`. *Proof*: The characteristic polynomial of each error component is $s + c_i = 0$, yielding eigenvalues $\lambda_i = -c_i < 0$ for $c_i > 0$.  ## Classical Sliding Mode Control ### Control Law Structure The classical SMC law consists of two components: ```{math}
 
 :label: eq:classical_smc_structure
 u(t) = u_{eq}(t) + u_{sw}(t)
@@ -54,7 +54,7 @@ t_{reach} \leq \frac{|s(0)|}{\alpha}
 ``` *Proof*: From the reaching condition:
 
 $$\frac{d}{dt}(|s|) = \text{sign}(s) \cdot \dot{s} \leq -\alpha$$ Integrating from $0$ to $t_{reach}$:
-$$|s(t_{reach})| - |s(0)| \leq -\alpha t_{reach}$$ Setting $|s(t_{reach})| = 0$ yields the bound. □ ## Lyapunov Stability Analysis ### Lyapunov Function Candidate For stability analysis, we consider the Lyapunov function: ```{math}
+$$|s(t_{reach})| - |s(0)| \leq -\alpha t_{reach}$$ Setting $|s(t_{reach})| = 0$ yields the bound.  ## Lyapunov Stability Analysis ### Lyapunov Function Candidate For stability analysis, we consider the Lyapunov function: ```{math}
 :label: eq:lyapunov_candidate
 V(s) = \frac{1}{2}s^2
 ``` ### Stability Proof **Theorem 3 (Classical SMC Stability)**: The classical SMC law {eq}`eq:classical_smc_structure` with switching gain $\eta > \rho$ (where $\rho$ is the uncertainty bound) ensures global finite-time convergence to the sliding surface {cite}`smc_khalil_lecture33_sliding_mode,smc_orlov_2018_analysis_tools,smc_slotine_li_1991_applied_nonlinear_control`. *Proof*: Consider the Lyapunov function derivative: ```{math}
@@ -70,7 +70,7 @@ V(s) = \frac{1}{2}s^2
 ```{math}
 :label: eq:lyapunov_switching_term
 \dot{V} = s \cdot \mat{S}\vec{g}(\vec{x}) \cdot (-\eta \frac{s}{|s| + \epsilon}) = -\eta \frac{s^2}{|s| + \epsilon} \leq -\eta \frac{|s|}{1 + \epsilon} < 0
-``` This establishes finite-time convergence. □ ## Super-Twisting Algorithm ### Motivation for Higher-Order SMC Classical SMC suffers from chattering due to the discontinuous switching control. The super-twisting algorithm {cite}`smc_levant_2003_higher_order_smc` provides continuous control while maintaining finite-time convergence. ### Super-Twisting Control Law The super-twisting algorithm is a second-order sliding mode controller: ```{math}
+``` This establishes finite-time convergence.  ## Super-Twisting Algorithm ### Motivation for Higher-Order SMC Classical SMC suffers from chattering due to the discontinuous switching control. The super-twisting algorithm {cite}`smc_levant_2003_higher_order_smc` provides continuous control while maintaining finite-time convergence. ### Super-Twisting Control Law The super-twisting algorithm is a second-order sliding mode controller: ```{math}
 
 :label: eq:supertwisting_control
 \begin{aligned}
@@ -85,7 +85,7 @@ u_2 &= -\beta \text{sign}(s)
 
 :label: eq:supertwisting_lyapunov
 V = \zeta^T \mat{P} \zeta
-``` where $\zeta = [|s|^{1/2}\text{sign}(s), \dot{s}]^T$ and $\mat{P}$ is a positive definite matrix. The detailed proof shows $\dot{V} < 0$ outside the origin. □ ## Adaptive Sliding Mode Control ### Parameter Uncertainty Model Consider the DIP system with parametric uncertainties: ```{math}
+``` where $\zeta = [|s|^{1/2}\text{sign}(s), \dot{s}]^T$ and $\mat{P}$ is a positive definite matrix. The detailed proof shows $\dot{V} < 0$ outside the origin.  ## Adaptive Sliding Mode Control ### Parameter Uncertainty Model Consider the DIP system with parametric uncertainties: ```{math}
 :label: eq:uncertain_system
 \mat{M}(\vec{q}, \vec{\theta})\ddot{\vec{q}} + \mat{C}(\vec{q}, \dot{\vec{q}}, \vec{\theta})\dot{\vec{q}} + \mat{G}(\vec{q}, \vec{\theta}) = \mat{B}u + \vec{d}(t)
 ``` where:
@@ -116,7 +116,7 @@ V = \frac{1}{2}s^2 + \frac{1}{2}\tilde{\vec{\theta}}^T \Gamma^{-1} \tilde{\vec{\
 
 :label: eq:adaptive_lyapunov_derivative
 \dot{V} = s\dot{s} + \tilde{\vec{\theta}}^T \Gamma^{-1} \dot{\tilde{\vec{\theta}}} = -\eta |s| \leq 0
-``` This establishes Lyapunov stability and convergence of $s(t)$ to zero. □ ## Chattering Analysis and Mitigation ### Chattering Phenomenon Chattering occurs due to:
+``` This establishes Lyapunov stability and convergence of $s(t)$ to zero.  ## Chattering Analysis and Mitigation ### Chattering Phenomenon Chattering occurs due to:
 1. **Finite switching frequency** of digital implementations
 2. **Unmodeled dynamics** (actuator dynamics, sensor delays)
 3. **Measurement noise** affecting the sliding variable ### Quantitative Chattering Measure Define the chattering index as: ```{math}
@@ -467,6 +467,6 @@ with $\alpha > \beta > 0$.
 - Levant (2005): "Homogeneity approach to high-order sliding mode design"
 
 ## Conclusions This analysis of sliding mode control theory provides the mathematical foundation for the controller implementations in the DIP_SMC_PSO project. The theoretical results guarantee: 1. **Finite-time convergence** for classical and super-twisting algorithms
-2. **Robust performance** under uncertainties and disturbances
+2. **reliable performance** under uncertainties and disturbances
 3. **Adaptive capabilities** for unknown system parameters
 4. **Practical implementability** with bounded control signals The next step is to apply these theoretical results to automated parameter optimization using PSO techniques, covered in {doc}`pso_optimization_complete`. ## References The theoretical development follows {cite}`smc_utkin_1993_sliding_mode_control_design`, {cite}`smc_edwards_spurgeon_1998_sliding_mode_control`, and {cite}`smc_shtessel_2014_sliding_mode_control_and_observation`, with super-twisting analysis from {cite}`smc_levant_2003_higher_order_smc` and {cite}`smc_moreno_2012_strict_lyapunov`. Adaptive extensions are based on {cite}`smc_slotine_li_1991_applied_nonlinear_control` and {cite}`smc_krstic_1995_nonlinear_adaptive`.

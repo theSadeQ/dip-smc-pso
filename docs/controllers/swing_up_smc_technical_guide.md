@@ -17,7 +17,7 @@
 - **Energy-Based Control**: Hamiltonian framework
 - **Convergence**: Swing phase → handoff → exponential/finite-time (depends on stabilizer)
 - **Computational Cost**: Minimal (simple energy pumping law)
-- **Runtime Status**: ✅ **OPERATIONAL** (production-ready) **Best Use Cases**:
+- **Runtime Status**:  **OPERATIONAL** (production-ready) **Best Use Cases**:
 - Large angle initial conditions (>30° from upright)
 - Startup from fully inverted (down-down) position
 - Systems requiring robust swing-up before regulation
@@ -131,7 +131,7 @@ Deadband: [exit_energy_factor, switch_energy_factor] · E_bottom = [0.90, 0.95] 
 - Prevents rapid mode switching (chattering)
 - Ensures mode stability in presence of noise
 - Requires: exit_energy_factor < switch_energy_factor #### 2.3 Transition Logic **State Machine**:
-``` E ≥ 0.95·E_b AND |θ| ≤ 0.35 ──────────────────────────────► SWING STABILIZE ◄────────────────────────────── E < 0.90·E_b OR |θ| > 0.35
+``` E ≥ 0.95·E_b AND |θ| ≤ 0.35  SWING STABILIZE  E < 0.90·E_b OR |θ| > 0.35
 
 ``` **Critical Design**:
 - Forward: **AND** logic (strict conditions for safe handoff)
@@ -219,11 +219,11 @@ Stabilize Mode
 
 # runnable: false def initialize_state(self) -> Tuple: """Return initial controller state.""" ... def initialize_history(self) -> Dict: """Return initial history dict.""" ... ``` 3. **Attributes**: ```python max_force: float # Force saturation limit (fallback to np.inf) ``` **Compatible Controllers**:
 
-- ✅ ClassicalSMC
-- ✅ AdaptiveSMC
-- ✅ SuperTwistingSMC
-- ✅ HybridAdaptiveSTASMC
-- ✅ MPCController (with wrapper) ### 3. State Management **Controller State**:
+-  ClassicalSMC
+-  AdaptiveSMC
+-  SuperTwistingSMC
+-  HybridAdaptiveSTASMC
+-  MPCController (with wrapper) ### 3. State Management **Controller State**:
 ```python
 self._mode: Mode # "swing" or "stabilize"
 self._switch_time: Optional[float] # Time of last handoff
@@ -475,7 +475,7 @@ Mode Check: O(1) (simple comparisons)
 
 - Swing phase: 0.01-0.05 ms
 - Stabilize phase: 0.1-1.0 ms (depends on stabilizer)
-- Mode transition: 0.01 ms **Real-Time Feasibility**: ✅ Suitable for 100+ Hz control
+- Mode transition: 0.01 ms **Real-Time Feasibility**:  Suitable for 100+ Hz control
 
 ---
 
@@ -551,7 +551,7 @@ if not np.isfinite(E): E = 0.0 # Fallback
 - [ ] Tight handoff criteria (small tolerances) ### 3. Diagnostic Tools **Energy Monitoring**:
 ```python
 # example-metadata:
-# runnable: false def diagnose_energy(swing_up, state): """Print detailed energy diagnostics.""" E_current = swing_up.dyn.total_energy(state) E_about_bottom = swing_up.E_bottom - E_current E_ratio = E_about_bottom / swing_up.E_bottom print(f"E_current: {E_current:.3f} J") print(f"E_bottom: {swing_up.E_bottom:.3f} J") print(f"E_about_bottom: {E_about_bottom:.3f} J") print(f"E_ratio: {E_ratio:.3f} (target: 0.95)") if E_ratio >= swing_up.switch_energy_factor: print("✅ Energy sufficient for handoff") else: shortage = (swing_up.switch_energy_factor - E_ratio) * swing_up.E_bottom print(f"❌ Energy shortage: {shortage:.3f} J")
+# runnable: false def diagnose_energy(swing_up, state): """Print detailed energy diagnostics.""" E_current = swing_up.dyn.total_energy(state) E_about_bottom = swing_up.E_bottom - E_current E_ratio = E_about_bottom / swing_up.E_bottom print(f"E_current: {E_current:.3f} J") print(f"E_bottom: {swing_up.E_bottom:.3f} J") print(f"E_about_bottom: {E_about_bottom:.3f} J") print(f"E_ratio: {E_ratio:.3f} (target: 0.95)") if E_ratio >= swing_up.switch_energy_factor: print(" Energy sufficient for handoff") else: shortage = (swing_up.switch_energy_factor - E_ratio) * swing_up.E_bottom print(f" Energy shortage: {shortage:.3f} J")
 ``` **Mode Transition Analysis**:
 
 ```python

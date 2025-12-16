@@ -7,14 +7,14 @@ This document describes the quality gates enforced in the DIP-SMC-PSO project to
 ## Overview
 
 Quality gates are **automated checks** that must pass before code can be merged. They ensure:
-- ✅ Consistent code quality and style
-- ✅ Complete documentation and type hints
-- ✅ Valid internal links
-- ✅ Production-ready codebase
+-  Consistent code quality and style
+-  Complete documentation and type hints
+-  Valid internal links
+-  Production-ready codebase
 
 ## Gate Types
 
-### 🔴 Blocking Gates (MUST PASS)
+###  Blocking Gates (MUST PASS)
 
 These gates will **fail CI builds** if not met:
 
@@ -24,7 +24,7 @@ These gates will **fail CI builds** if not met:
 | **Link Validation** | 0 broken links | Fails build if links broken |
 | **Type Hint Coverage** | ≥95% | Fails build if below threshold |
 
-### ⚠️ Advisory Gates (Recommended)
+###  Advisory Gates (Recommended)
 
 These gates provide **warnings only**:
 
@@ -96,13 +96,13 @@ python scripts/validation/fix_common_issues.py --target docs
 ```
 
 **What gets fixed:**
-- ✓ Trailing whitespace
-- ✓ Missing final newlines
-- ✓ Import organization (isort)
-- ✓ Code formatting (ruff)
-- ✓ Auto-fixable linting issues
-- ✓ Markdown formatting
-- ✓ Common typos
+-  Trailing whitespace
+-  Missing final newlines
+-  Import organization (isort)
+-  Code formatting (ruff)
+-  Auto-fixable linting issues
+-  Markdown formatting
+-  Common typos
 
 ---
 
@@ -130,11 +130,11 @@ File: `.github/workflows/docs-quality.yml`
 Check your PR for quality gate status:
 
 ```
-✓ Markdown Linting (advisory)
-✓ Spell Checking (advisory)
-✓ Docstring Coverage (95.8%) ← BLOCKING
-✓ Link Validation (0 broken) ← BLOCKING
-✓ Type Hint Coverage (96.2%) ← BLOCKING
+ Markdown Linting (advisory)
+ Spell Checking (advisory)
+ Docstring Coverage (95.8%) ← BLOCKING
+ Link Validation (0 broken) ← BLOCKING
+ Type Hint Coverage (96.2%) ← BLOCKING
 ```
 
 ### Failure Response
@@ -395,7 +395,7 @@ A: To maintain consistent code quality, complete documentation, and production r
 - **Phase 6.1-6.2:** Cross-reference integration, code example validation
 - **Phase 6.3:** Interactive documentation enhancement (Chart.js, dashboards)
 - **Phase 6.4:** Documentation build automation
-- **Phase 6.5:** ✅ **Quality gates enforcement** (this phase)
+- **Phase 6.5:**  **Quality gates enforcement** (this phase)
 - **Phase 6.6:** Changelog & version documentation
 - **Phase 6.7:** Final cleanup
 

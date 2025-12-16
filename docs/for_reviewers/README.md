@@ -28,39 +28,39 @@ python scripts/docs/verify_all.py
 
 ## Project Structure ```
 dip-smc-pso/
-├── src/ # Source code
-│ ├── controllers/ # SMC controller implementations
-│ ├── core/ # Simulation engine
-│ ├── optimizer/ # PSO optimization
-│ └── plant/ # Dynamics models
-├── tests/ # test suite (85%+ coverage)
-├── docs/ # Documentation
-│ ├── theory/ # Theoretical foundations (39 citations)
-│ ├── api/ # API reference
-│ ├── bib/ # BibTeX bibliography (94 entries)
-│ ├── references/ # Notation guide, glossary
-│ └── for_reviewers/ # This package
-├── .artifacts/ # Verification reports
-│ ├── accuracy_audit.md # Citation accuracy verification
-│ ├── citation_report.md # Citation coverage analysis
-│ ├── attribution_audit_executive_summary.md
-│ └── citation_mapping.json # Theorem-citation mapping
-└── scripts/docs/ # Validation scripts ├── validate_citations.py # BibTeX verification ├── check_attribution.py # Attribution completeness └── verify_all.py # Master validation
+ src/ # Source code
+  controllers/ # SMC controller implementations
+  core/ # Simulation engine
+  optimizer/ # PSO optimization
+  plant/ # Dynamics models
+ tests/ # test suite (85%+ coverage)
+ docs/ # Documentation
+  theory/ # Theoretical foundations (39 citations)
+  api/ # API reference
+  bib/ # BibTeX bibliography (94 entries)
+  references/ # Notation guide, glossary
+  for_reviewers/ # This package
+ .artifacts/ # Verification reports
+  accuracy_audit.md # Citation accuracy verification
+  citation_report.md # Citation coverage analysis
+  attribution_audit_executive_summary.md
+  citation_mapping.json # Theorem-citation mapping
+ scripts/docs/ # Validation scripts  validate_citations.py # BibTeX verification  check_attribution.py # Attribution completeness  verify_all.py # Master validation
 ```
 
 ## Verification Workflow ### Step 1: Citation Verification (15 minutes) **Objective:** Verify all citations have valid BibTeX entries with DOI/URL ```bash
 python scripts/docs/validate_citations.py
 ``` **Expected Result:**
-- ✅ All 94 BibTeX entries have DOI or URL (100%)
-- ✅ All 39 documentation citations have valid BibTeX entries
-- ✅ VALIDATION PASSED **Reference:** `.artifacts/citation_report.md`
+-  All 94 BibTeX entries have DOI or URL (100%)
+-  All 39 documentation citations have valid BibTeX entries
+-  VALIDATION PASSED **Reference:** `.artifacts/citation_report.md`
 
 ### Step 2: Theorem Accuracy Verification (30 minutes) **Objective:** Verify 11 FORMAL-THEOREM claims accurately represent cited sources **Process:**
 1. Read `.artifacts/accuracy_audit.md` (executive summary)
 2. For each theorem (FORMAL-THEOREM-001 to FORMAL-THEOREM-023): - Review theorem statement - Check cited sources (BibTeX `note` fields) - Verify mathematical correctness - Confirm citation appropriateness **Expected Result:**
-- ✅ Mean accuracy: 99.1%
-- ✅ All 11 theorems PASS verification
-- ✅ 33 citations cross-referenced **Reference:** `docs/for_reviewers/theorem_verification_guide.md`
+-  Mean accuracy: 99.1%
+-  All 11 theorems PASS verification
+-  33 citations cross-referenced **Reference:** `docs/for_reviewers/theorem_verification_guide.md`
 
 ### Step 3: Code Reproduction (45 minutes) **Objective:** Reproduce key simulation and optimization results ```bash
 # Test 1: Classical SMC simulation
@@ -75,7 +75,7 @@ python run_tests.py --coverage
 ## Step 4: Attribution Completeness (15 minutes) **Objective:** Verify technical claims have proper attribution ```bash
 python scripts/docs/check_attribution.py
 ``` **Review:** `.artifacts/attribution_audit_executive_summary.md` **Expected Assessment:**
-- ⚠️ CONDITIONAL PASS (with context)
+-  CONDITIONAL PASS (with context)
 - 75% of high-severity claims in 5 theory files (manageable)
 - Strong existing citation coverage (39 citations)
 - Phase reports and API docs acceptable as-is **Note:** See executive summary for detailed analysis and recommendations
@@ -112,9 +112,9 @@ $c_i > 0$, then the sliding surface dynamics are exponentially stable
 { "FORMAL-THEOREM-021": { "id": "FORMAL-THEOREM-021", "theorem": "Super-twisting algorithm ensures finite-time convergence to sliding surface with continuous control", "citations": [ "smc_levant_2003_higher_order_sliding_modes", "smc_moreno_2012_strict_lyapunov_sta", "smc_cruz_zavala_2018_uniform_sta" ], "locations": [ { "file": "src/controllers/sta_smc.py", "context": "Super-twisting control law implementation", "line_approx": "L112-L130" } ] }
 }
 ``` **Verification:**
-- ✅ Theorem statement matches Levant 2003 (higher-order sliding modes)
-- ✅ Finite-time convergence condition verified (Moreno & Osorio 2012)
-- ✅ Code implements super-twisting law correctly (L112-L130) **Full Guide:** `docs/for_reviewers/theorem_verification_guide.md`
+-  Theorem statement matches Levant 2003 (higher-order sliding modes)
+-  Finite-time convergence condition verified (Moreno & Osorio 2012)
+-  Code implements super-twisting law correctly (L112-L130) **Full Guide:** `docs/for_reviewers/theorem_verification_guide.md`
 
 ## Common Reviewer Questions ### Q1: How do I verify a specific citation is accurate? **Answer:**
 1. Find citation key (e.g., `smc_levant_2003_higher_order_sliding_modes`)
@@ -192,26 +192,26 @@ tree docs/ -L 2
 ``` **Output:**
 ```
 docs/
-├── theory/
-│ ├── smc_theory_complete.md (22 citations)
-│ ├── pso_optimization_complete.md (13 citations)
-│ ├── system_dynamics_complete.md (4 citations)
-│ ├── lyapunov_stability_analysis.md
-│ ├── pso_algorithm_foundations.md
-│ └── ...
-├── api/
-│ ├── controller_api_reference.md
-│ ├── optimization_module_api_reference.md
-│ └── ...
-├── bib/
-│ ├── smc.bib (35 entries)
-│ ├── pso.bib (22 entries)
-│ ├── dip.bib (8 entries)
-│ └── ... (94 total)
-├── references/
-│ ├── notation_guide.md
-│ └── glossary.md
-└── for_reviewers/ ├── README.md (this file) ├── citation_quick_reference.md ├── theorem_verification_guide.md ├── reproduction_guide.md └── verification_checklist.md
+ theory/
+  smc_theory_complete.md (22 citations)
+  pso_optimization_complete.md (13 citations)
+  system_dynamics_complete.md (4 citations)
+  lyapunov_stability_analysis.md
+  pso_algorithm_foundations.md
+  ...
+ api/
+  controller_api_reference.md
+  optimization_module_api_reference.md
+  ...
+ bib/
+  smc.bib (35 entries)
+  pso.bib (22 entries)
+  dip.bib (8 entries)
+  ... (94 total)
+ references/
+  notation_guide.md
+  glossary.md
+ for_reviewers/  README.md (this file)  citation_quick_reference.md  theorem_verification_guide.md  reproduction_guide.md  verification_checklist.md
 ```
 
 **Thank you for your thorough review!** This documentation package is designed to make your verification process as efficient and as possible. If you have suggestions for improving this reviewer package, please know. **Document Version:** 1.0

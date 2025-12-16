@@ -29,7 +29,7 @@ The collapsible code blocks feature was developed in 6 phases from October 2025.
 - Works on all modern browsers
 
 **Development History:**
-Started as a simple button spacing fix (Phase 1), evolved into a comprehensive feature with accessibility, performance optimization, and full browser support (Phases 2-6).
+Started as a simple button spacing fix (Phase 1), evolved into a complete feature with accessibility, performance optimization, and full browser support (Phases 2-6).
 
 ---
 
@@ -52,7 +52,7 @@ Started as a simple button spacing fix (Phase 1), evolved into a comprehensive f
 
 1. **Phase 1:** Button spacing fix (40px → 5-8px gap)
 2. **Phase 2:** Architectural fix (true button siblings, wait-and-retry pattern)
-3. **Phase 3:** 100% selector coverage + comprehensive debug logging
+3. **Phase 3:** 100% selector coverage + complete debug logging
 4. **Phase 4:** GPU-accelerated smooth animations (Material Design easing, double RAF)
 5. **Phase 5:** Testing & validation (35+ test cases across 7 categories)
 6. **Phase 6:** Documentation & maintenance (this release)
@@ -110,7 +110,7 @@ html_js_files = [
 
 ### Technical Details
 
-- **Selectors:** 6 comprehensive patterns for 100% code block coverage
+- **Selectors:** 6 complete patterns for 100% code block coverage
 - **Exclusions:** Math blocks (amsmath, math, nohighlight), very short blocks (<10 chars)
 - **Animation:** Double `requestAnimationFrame` pattern with Material Design easing
 - **GPU Hints:** `contain: layout`, `transform: translateZ(0)`, `will-change`, `backface-visibility`

@@ -10,7 +10,7 @@ Enhances 8 critical optimization framework files with:
 - Parameter space theory (LHS sampling, bounds, constraints)
 - Multi-objective optimization foundations
 - Architecture diagrams (Mermaid flowcharts)
-- Comprehensive usage examples (40 total scenarios)
+- complete usage examples (40 total scenarios)
 
 Usage:
     python scripts/docs/enhance_optimization_core_docs.py --dry-run
@@ -37,7 +37,7 @@ class OptimizationEnhancementStats:
 
 
 class OptimizationDocEnhancer:
-    """Enhances optimization framework documentation with comprehensive content."""
+    """Enhances optimization framework documentation with complete content."""
 
     # All 8 optimization core files to enhance (Week 10 Phase 1)
     OPTIMIZATION_FILES = {

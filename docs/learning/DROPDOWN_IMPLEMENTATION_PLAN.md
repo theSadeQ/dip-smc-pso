@@ -310,12 +310,12 @@ Example of compatible nesting:
 
 ## Success Criteria
 
-✅ 21 dropdowns total (6+3+5+7)
-✅ 5 semantic colors (primary, success, warning, info, light)
-✅ 4 icon types (light-bulb, alert, mortar-board, tools)
-✅ ~52 CSS lines
-✅ Sphinx build succeeds
-✅ No merge conflicts with Agent 1
+ 21 dropdowns total (6+3+5+7)
+ 5 semantic colors (primary, success, warning, info, light)
+ 4 icon types (light-bulb, alert, mortar-board, tools)
+ ~52 CSS lines
+ Sphinx build succeeds
+ No merge conflicts with Agent 1
 
 ---
 

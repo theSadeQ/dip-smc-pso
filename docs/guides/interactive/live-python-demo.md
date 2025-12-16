@@ -37,7 +37,7 @@ Subsequent runs are instant (cached in browser). Please be patient!
 
 ## Example 1: Hello World + NumPy Verification
 
-Let's verify Python and NumPy are working correctly:
+verify Python and NumPy are working correctly:
 
 ```{eval-rst}
 .. runnable-code::
@@ -45,7 +45,7 @@ Let's verify Python and NumPy are working correctly:
    :caption: Example 1 - Hello World with NumPy
    :preload: numpy
 
-   print("🐍 Python running in your browser!")
+   print(" Python running in your browser!")
    print("=" * 50)
 
    import numpy as np
@@ -118,8 +118,8 @@ Generate interactive plots with Matplotlib:
    plt.tight_layout()
    plt.show()
 
-   print(f"✓ Figure generated with {len(t)} data points")
-   print(f"✓ Peak amplitude: {envelope.max():.2f}")
+   print(f" Figure generated with {len(t)} data points")
+   print(f" Peak amplitude: {envelope.max():.2f}")
 ```
 
 **What's Happening:**
@@ -132,7 +132,7 @@ Generate interactive plots with Matplotlib:
 
 ## Example 3: Array Broadcasting & Linear Algebra
 
-Explore NumPy's powerful array operations:
+Explore NumPy's effective array operations:
 
 ```{eval-rst}
 .. runnable-code::
@@ -235,7 +235,7 @@ NumPy's random module for statistical analysis:
    plt.tight_layout()
    plt.show()
 
-   print(f"\n✓ Generated {len(normal_data)} samples")
+   print(f"\n Generated {len(normal_data)} samples")
 ```
 
 **Try This:**
@@ -302,21 +302,21 @@ NumPy's random module for statistical analysis:
 ## Limitations & Performance
 
 ### What Works
-✅ Full Python 3.11 standard library
-✅ NumPy (all operations)
-✅ Matplotlib (all plot types)
-✅ SciPy (optional, adds 30MB)
-✅ Math, statistics, itertools, etc.
-✅ List comprehensions, generators
-✅ Classes, decorators, context managers
+ Full Python 3.11 standard library
+ NumPy (all operations)
+ Matplotlib (all plot types)
+ SciPy (optional, adds 30MB)
+ Math, statistics, itertools, etc.
+ List comprehensions, generators
+ Classes, decorators, context managers
 
 ### What Doesn't Work
-❌ File I/O (`open()`, file reading/writing)
-❌ Multiprocessing/threading
-❌ System calls (`os.system()`, subprocess)
-❌ Network requests (limited by CORS)
-❌ Native extensions (C libraries)
-❌ pip install (use preloaded packages only)
+ File I/O (`open()`, file reading/writing)
+ Multiprocessing/threading
+ System calls (`os.system()`, subprocess)
+ Network requests (limited by CORS)
+ Native extensions (C libraries)
+ pip install (use preloaded packages only)
 
 ### Performance
 - **Speed:** 50-70% of native Python
@@ -340,12 +340,12 @@ NumPy's random module for statistical analysis:
 ### Architecture
 ```
 [Browser]
-  └─ [Main Thread]
-       ├─ pyodide-runner.js (UI controller)
-       └─ [Web Worker]
-            ├─ Pyodide Runtime (Python 3.11 WASM)
-            ├─ NumPy Package
-            └─ Matplotlib Package
+   [Main Thread]
+        pyodide-runner.js (UI controller)
+        [Web Worker]
+             Pyodide Runtime (Python 3.11 WASM)
+             NumPy Package
+             Matplotlib Package
 ```
 
 ### Loading Sequence

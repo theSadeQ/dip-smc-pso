@@ -5,7 +5,7 @@
 """Analyze and validate cross-references in documentation.
 
 This script scans all markdown files for internal and external links,
-validates their targets exist, and generates a comprehensive report.
+validates their targets exist, and generates a complete report.
 
 Usage:
     python scripts/documentation/analyze_cross_references.py

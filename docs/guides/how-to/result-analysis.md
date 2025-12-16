@@ -36,11 +36,11 @@ The framework computes these metrics automatically for every simulation:
 
 | Metric | Formula | Physical Meaning | Lower is Better |
 |--------|---------|------------------|-----------------|
-| **ISE** | ∫‖x‖² dt | Total squared tracking error | ✓ |
-| **ITAE** | ∫t·‖x‖ dt | Time-weighted error (penalizes slow settling) | ✓ |
-| **Settling Time** | t when ‖x‖ < 5% | Time to reach near-equilibrium | ✓ |
-| **Overshoot** | max(‖x‖) / setpoint × 100% | Peak deviation | ✓ |
-| **Control Effort** | ∫‖u‖ dt | Total energy consumption | ✓ |
+| **ISE** | ∫‖x‖² dt | Total squared tracking error |  |
+| **ITAE** | ∫t·‖x‖ dt | Time-weighted error (penalizes slow settling) |  |
+| **Settling Time** | t when ‖x‖ < 5% | Time to reach near-equilibrium |  |
+| **Overshoot** | max(‖x‖) / setpoint × 100% | Peak deviation |  |
+| **Control Effort** | ∫‖u‖ dt | Total energy consumption |  |
 
 ### Loading Results
 

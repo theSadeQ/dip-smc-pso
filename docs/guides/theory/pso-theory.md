@@ -104,10 +104,10 @@ flowchart TD
 ```
 
 **Components**:
-- 🔵 **Inertia**: Momentum from previous motion
-- 🟢 **Cognitive**: Attraction to personal best experience
-- 🔴 **Social**: Attraction to swarm's collective best
-- 🟡 **Result**: Balanced exploration and exploitation
+-  **Inertia**: Momentum from previous motion
+-  **Cognitive**: Attraction to personal best experience
+-  **Social**: Attraction to swarm's collective best
+-  **Result**: Balanced exploration and exploitation
 
 ### Exploration vs Exploitation
 
@@ -140,9 +140,9 @@ graph LR
 ```
 
 **Phases**:
-- 🔴 **Exploration** (High w): Search broadly, discover promising regions
-- 🟡 **Transition** (Medium w): Balance between search and convergence
-- 🟢 **Exploitation** (Low w): Refine solution, converge to optimum
+-  **Exploration** (High w): Search broadly, discover promising regions
+-  **Transition** (Medium w): Balance between search and convergence
+-  **Exploitation** (Low w): Refine solution, converge to optimum
 
 ### Global vs Local Optima
 
@@ -349,9 +349,9 @@ w = 0.7298    (inertia)
 graph TD
     PROBLEM["Controller Gain Tuning<br/>(6-8 parameters)"] --> CHOICE{Problem<br/>Characteristics}
 
-    CHOICE -->|Continuous<br/>Non-differentiable<br/>Multi-modal| PSO["PSO<br/>✓ Best choice<br/>Fast, robust"]
-    CHOICE -->|Discrete<br/>Combinatorial| GA["Genetic Algorithm<br/>✓ Good for discrete<br/>Slower convergence"]
-    CHOICE -->|Smooth<br/>Convex<br/>Gradient available| GRAD["Gradient Descent<br/>✓ Fast if convex<br/>Local optima risk"]
+    CHOICE -->|Continuous<br/>Non-differentiable<br/>Multi-modal| PSO["PSO<br/> Best choice<br/>Fast, robust"]
+    CHOICE -->|Discrete<br/>Combinatorial| GA["Genetic Algorithm<br/> Good for discrete<br/>Slower convergence"]
+    CHOICE -->|Smooth<br/>Convex<br/>Gradient available| GRAD["Gradient Descent<br/> Fast if convex<br/>Local optima risk"]
 
     PSO --> RESULT["Optimized SMC Gains<br/>(100-200 iterations)"]
     GA --> RESULT2["Optimized Gains<br/>(500+ generations)"]

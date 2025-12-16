@@ -219,18 +219,18 @@ Episodes 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11
 
 ```
 docs/learning/notebooklm/phase1/
-├── README.md (this file)
-├── phase1_episode01.md (File systems, command line)
-├── phase1_episode02.md (Python install, variables)
-├── phase1_episode03.md (Control flow, loops)
-├── phase1_episode04.md (Functions)
-├── phase1_episode05.md (Lists, dictionaries)
-├── phase1_episode06.md (NumPy, Matplotlib)
-├── phase1_episode07.md (Virtual environments, Git)
-├── phase1_episode08.md (Newton's laws, pendulums)
-├── phase1_episode09.md (Double-inverted pendulum)
-├── phase1_episode10.md (Functions, trigonometry)
-└── phase1_episode11.md (Derivatives, diff eqs)
+ README.md (this file)
+ phase1_episode01.md (File systems, command line)
+ phase1_episode02.md (Python install, variables)
+ phase1_episode03.md (Control flow, loops)
+ phase1_episode04.md (Functions)
+ phase1_episode05.md (Lists, dictionaries)
+ phase1_episode06.md (NumPy, Matplotlib)
+ phase1_episode07.md (Virtual environments, Git)
+ phase1_episode08.md (Newton's laws, pendulums)
+ phase1_episode09.md (Double-inverted pendulum)
+ phase1_episode10.md (Functions, trigonometry)
+ phase1_episode11.md (Derivatives, diff eqs)
 ```
 
 ### NotebookLM Specifications
@@ -268,7 +268,7 @@ def calculate_area(length, width):
 
 **After (TTS-Optimized Narration)**:
 ```
-Let's define a function. Type:
+define a function. Type:
 d-e-f space calculate underscore area open-parenthesis length comma space width close-parenthesis colon
 Then press Enter.
 Four spaces indent, then type:

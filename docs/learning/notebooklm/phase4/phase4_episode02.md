@@ -8,13 +8,13 @@
 
 Imagine you're building a fleet of robots. Each robot needs to move, sense its environment, and make decisions. You could write a separate set of functions for each robot, but that would be messy and repetitive. Instead, you create a "Robot" blueprint that defines what every robot can do. Then you stamp out individual robots from that blueprint, each with its own battery level, position, and sensor data.
 
-That's the essence of object-oriented programming, or O-O-P. In this episode, we'll discover why controllers in this project are implemented as classes rather than simple functions. We'll explore the Controller Interface base class, understand abstract methods, and see how the self keyword gives each controller its own independent state.
+That's the essence of object-oriented programming, or O-O-P. In this episode, this will discover why controllers in this project are implemented as classes rather than simple functions. We'll explore the Controller Interface base class, understand abstract methods, and see how the self keyword gives each controller its own independent state.
 
-By the end, you'll understand why O-O-P makes the codebase flexible, maintainable, and extensible.
+By the end, the system will understand why O-O-P makes the codebase flexible, maintainable, and extensible.
 
 ## What You'll Discover
 
-In this episode, you'll learn:
+In this episode, the system will learn:
 - Why classes encapsulate state and provide consistent interfaces
 - What abstract base classes or A-B-C enforce across subclasses
 - How the at-abstract-method decorator requires implementation
@@ -23,7 +23,7 @@ In this episode, you'll learn:
 
 ## Why Classes? The Problem They Solve
 
-Let's start with a concrete problem. Suppose you want to implement three different controllers: Classical S-M-C, Super-Twisting S-T-A, and Adaptive S-M-C. Each controller needs:
+start with a concrete problem. Suppose you want to implement three different controllers: Classical S-M-C, Super-Twisting S-T-A, and Adaptive S-M-C. Each controller needs:
 - A set of gains, like k1, k2, k3
 - A history of previous control outputs for plotting
 - A method to compute the control force given the current state
@@ -48,7 +48,7 @@ This is called **encapsulation**: hiding internal details and exposing a consist
 
 ## The Controller Interface Base Class
 
-Let's look at the actual base class that all controllers inherit from. Open your editor and navigate to source slash controllers slash base dot p-y. If you don't have the file open yet, do that now. We'll walk through it together.
+look at the actual base class that all controllers inherit from. Open your editor and navigate to source slash controllers slash base dot p-y. If you don't have the file open yet, do that now. We'll walk through it together.
 
 Here's the beginning of the file:
 
@@ -153,7 +153,7 @@ The method signature shows:
 
 The body is just pass, which means "do nothing." The base class doesn't provide an implementation. Subclasses provide the actual control law.
 
-**Why is this useful?** Because it enforces consistency. The simulation runner can call controller dot compute underscore control without caring whether it's a Classical S-M-C or Adaptive S-M-C. Polymorphism, which we'll explore more in Episode 3, relies on this consistent interface.
+**Why is this useful?** Because it enforces consistency. The simulation runner can call controller dot compute underscore control without caring whether it's a Classical S-M-C or Adaptive S-M-C. Polymorphism, which this will explore more in Episode 3, relies on this consistent interface.
 
 ## Concrete Methods: reset
 
@@ -174,7 +174,7 @@ This method is not decorated with at-abstract-method, so subclasses inherit it a
 
 ## Recap: Core Concepts
 
-Let's recap what we've covered in the first half of this episode.
+recap what we've covered in the first half of this episode.
 
 **Why Classes?** Classes encapsulate state, which are the attributes, and behavior, which are the methods, into a single unit. This prevents global variables from causing interference and allows polymorphism, where different classes can be swapped as long as they share an interface.
 
@@ -209,7 +209,7 @@ Here's a key distinction: attributes store data, methods perform actions. Attrib
 
 ## Try This: Experimenting in the Python Interpreter
 
-Let's make this concrete with hands-on experimentation. Open your Python interpreter by typing python in your terminal. Now try the following:
+make this concrete with hands-on experimentation. Open your Python interpreter by typing python in your terminal. Now try the following:
 
 ```
 from source dot controllers dot base import ControllerInterface
@@ -291,7 +291,7 @@ Abstract methods enforce that subclasses implement required methods. If you forg
 
 ## Recap: Advanced Concepts
 
-Let's recap the second half of this episode.
+recap the second half of this episode.
 
 **Attributes Store Data:** Instance attributes like self dot gains hold values specific to each instance. They're accessed with dot notation without parentheses.
 
@@ -316,7 +316,7 @@ Here are the technical terms from this episode with phonetic pronunciations:
 
 ## What's Next
 
-In Episode 3, we'll explore inheritance in depth. You'll see how Classical S-M-C inherits from ControllerInterface, what the super method does when calling the parent class constructor, and how method resolution order or M-R-O determines which implementation runs when methods are overridden.
+In Episode 3, this will explore inheritance in depth. You'll see how Classical S-M-C inherits from ControllerInterface, what the super method does when calling the parent class constructor, and how method resolution order or M-R-O determines which implementation runs when methods are overridden.
 
 Here's a preview question: If ClassicalSMC inherits reset from ControllerInterface but wants to add custom behavior, how does it call the parent class's reset first? We'll answer this with the super built-in function.
 
@@ -332,7 +332,7 @@ Before moving to Episode 3, ask yourself these questions:
 
 If you can answer these confidently, you're ready to proceed. If anything is unclear, re-read the relevant section or experiment in the Python interpreter. Understanding these foundations is critical for the rest of Phase 4.
 
-**Great work! You've unlocked the basics of O-O-P. Let's continue!**
+**Great work! You've unlocked the basics of O-O-P. continue!**
 
 ---
 

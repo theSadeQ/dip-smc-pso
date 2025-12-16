@@ -7,7 +7,7 @@
 - **SMC**: Sliding Mode Control - robust nonlinear control method
 - **PSO**: Particle Swarm Optimization - metaheuristic optimization algorithm
 
-Welcome to the master navigation hub! This page connects all 11 documentation systems into one unified entry point. Whether you're a complete beginner, an experienced researcher, or a developer integrating the framework, you'll find your path here.
+Welcome to the master navigation hub! This page connects all 11 documentation systems into one unified entry point. Whether you're a complete beginner, an experienced researcher, or a developer integrating the framework, the system will find your path here.
 
 **Total Documentation**: 3,708 files (3,292 in docs/, 416 in .project/). Content spans the Double Inverted Pendulum (DIP) control framework with Sliding Mode Control (SMC) and Particle Swarm Optimization (PSO), from beginner tutorials to advanced research workflows.
 
@@ -103,7 +103,7 @@ Welcome to the master navigation hub! This page connects all 11 documentation sy
 ### Optimize & Tune
 
 **[POPULAR]** [Tutorial 03: PSO Optimization](guides/tutorials/tutorial-03-pso-optimization.md) (90 min)
-→ Comprehensive PSO workflow with convergence analysis
+→ complete PSO workflow with convergence analysis
 
 [PSO Optimization Workflows](guides/how-to/optimization-workflows.md) (25 min)
 → Quick recipes for common optimization tasks
@@ -206,7 +206,7 @@ Run Python+NumPy+Matplotlib directly in browser. Edit examples and see results i
 
 #### Traditional Navigation
 
-**Comprehensive Indexes**:
+**complete Indexes**:
 - [Main Index (docs/index.md)](index.md) - Sphinx homepage with 11 toctree sections
 - [User Guides Hub (guides/INDEX.md)](guides/INDEX.md) - 43 files, 12,525 lines, learning paths
 - [Text Sitemap](documentation_structure.md) - Hierarchical list of all 3,708 files
@@ -272,7 +272,7 @@ Quick Mastery (5h) + SMC Theory (30 min) + PSO Theory (25 min) + DIP Dynamics (2
 
 **Quick References**:
 - [Quick Reference Cheat Sheet](guides/QUICK_REFERENCE.md) - Command syntax (5 min).
-- [User Guide](guides/user-guide.md) - Comprehensive daily usage (30 min).
+- [User Guide](guides/user-guide.md) - complete daily usage (30 min).
 
 ---
 

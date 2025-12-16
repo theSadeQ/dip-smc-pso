@@ -83,17 +83,17 @@ def process_file(file_path, citation_map, dry_run=False):
 
     # Check if changes were made
     if original_text != modified_text:
-        print(f"  ✓ Citations found and replaced")
+        print(f"   Citations found and replaced")
 
         if not dry_run:
             try:
                 with open(file_path, 'w', encoding='utf-8') as f:
                     f.write(modified_text)
-                print(f"  ✓ File updated")
+                print(f"   File updated")
             except Exception as e:
                 print(f"  Error writing {file_path}: {e}")
         else:
-            print(f"  ✓ Would update file (dry run)")
+            print(f"   Would update file (dry run)")
     else:
         # Check if there are any numbered patterns to help debug
         import re

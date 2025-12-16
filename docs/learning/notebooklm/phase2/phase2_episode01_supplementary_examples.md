@@ -635,7 +635,7 @@ These examples represent state-of-the-art control systems in robotics, aerospace
 
 ## TIER 4: Aerospace/Specialized Applications
 
-These examples represent cutting-edge control systems in aerospace, space exploration, medical robotics, and high-precision instrumentation. They push the boundaries of control theory and require advanced algorithms.
+These examples represent current control systems in aerospace, space exploration, medical robotics, and high-precision instrumentation. They push the boundaries of control theory and require advanced algorithms.
 
 ### 16. Rocket Thrust Vector Control (Landing)
 

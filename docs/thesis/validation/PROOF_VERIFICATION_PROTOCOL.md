@@ -48,7 +48,7 @@ For each proof, verify:
   - Notes:
 
 - [ ] **1.3** V is radially unbounded
-  - Property: ||x|| → ∞ ⟹ V(x) → ∞ [Yes / No / Not applicable]
+  - Property: ||x|| → ∞  V(x) → ∞ [Yes / No / Not applicable]
   - Verification: [Obvious from form / Proven / Missing]
   - Notes:
 
@@ -292,9 +292,9 @@ After all individual proofs verified:
   - Notes:
 
 - [ ] **Consistency 3**: Convergence results hierarchical
-  - Classical SMC ⟹ Asymptotic convergence [Yes / No]
-  - STA ⟹ Finite-time convergence (better) [Yes / No]
-  - Adaptive ⟹ Robust asymptotic convergence [Yes / No]
+  - Classical SMC  Asymptotic convergence [Yes / No]
+  - STA  Finite-time convergence (better) [Yes / No]
+  - Adaptive  Robust asymptotic convergence [Yes / No]
   - Notes:
 
 ---

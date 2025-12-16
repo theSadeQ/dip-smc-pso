@@ -9,7 +9,7 @@
 This Phase 4 NotebookLM podcast series transforms the 30-hour Phase 4 Advancing Skills roadmap into 13 audio episodes optimized for Google's NotebookLM podcast generation. This advanced series marks the transition from **user** to **developer**, opening the black box to understand controller internals.
 
 **What Makes Phase 4 Different:**
-- **Transparent Box**: No longer using controllers as black boxes—you'll read and understand the source code
+- **Transparent Box**: No longer using controllers as black boxes—the system will read and understand the source code
 - **Code Literacy**: Line-by-line walkthrough of actual controller implementations
 - **Mathematical Rigor**: Moving from intuition to formal proofs and Lyapunov stability
 - **OOP Mastery**: Abstract base classes, inheritance, decorators, type hints
@@ -32,27 +32,27 @@ Each episode is carefully crafted with:
 ### Required Background (60 hours total)
 
 **Phase 1 - Foundations (40 hours)**:
-- ✅ Computing basics and command line navigation
-- ✅ Python fundamentals (variables, functions, loops, lists/dicts)
-- ✅ NumPy and Matplotlib basics
-- ✅ Virtual environments and Git
-- ✅ Basic physics (Newton's laws, pendulums)
-- ✅ Basic math (trigonometry, derivatives)
+-  Computing basics and command line navigation
+-  Python fundamentals (variables, functions, loops, lists/dicts)
+-  NumPy and Matplotlib basics
+-  Virtual environments and Git
+-  Basic physics (Newton's laws, pendulums)
+-  Basic math (trigonometry, derivatives)
 
 **Phase 2 - Core Concepts (30 hours)**:
-- ✅ Control theory fundamentals
-- ✅ PID control and limitations
-- ✅ Sliding Mode Control (SMC) theory
-- ✅ PSO optimization
-- ✅ Double-inverted pendulum (DIP) system
+-  Control theory fundamentals
+-  PID control and limitations
+-  Sliding Mode Control (SMC) theory
+-  PSO optimization
+-  Double-inverted pendulum (DIP) system
 
 **Phase 3 - Hands-On (25 hours)**:
-- ✅ Running simulations (simulate.py)
-- ✅ Controller comparison experiments
-- ✅ PSO tuning
-- ✅ Config modification (config.yaml)
-- ✅ Plot interpretation
-- ✅ Troubleshooting
+-  Running simulations (simulate.py)
+-  Controller comparison experiments
+-  PSO tuning
+-  Config modification (config.yaml)
+-  Plot interpretation
+-  Troubleshooting
 
 ### Self-Assessment: Are You Ready?
 
@@ -312,20 +312,20 @@ Episodes 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 → 12 
 
 ```
 docs/learning/notebooklm/phase4/
-├── README.md (this file)
-├── phase4_episode01.md (Welcome to Advanced Skills)
-├── phase4_episode02.md (OOP Foundations)
-├── phase4_episode03.md (Inheritance)
-├── phase4_episode04.md (Decorators & Type Hints)
-├── phase4_episode05.md (Testing with pytest)
-├── phase4_episode06.md (Navigating Codebase)
-├── phase4_episode07.md (Imports & Initialization)
-├── phase4_episode08.md (Control Law Implementation)
-├── phase4_episode09.md (Math Breakdown)
-├── phase4_episode10.md (Controller Comparison)
-├── phase4_episode11.md (Lagrangian Mechanics)
-├── phase4_episode12.md (Vector Calculus)
-└── phase4_episode13.md (Lyapunov & Phase Space)
+ README.md (this file)
+ phase4_episode01.md (Welcome to Advanced Skills)
+ phase4_episode02.md (OOP Foundations)
+ phase4_episode03.md (Inheritance)
+ phase4_episode04.md (Decorators & Type Hints)
+ phase4_episode05.md (Testing with pytest)
+ phase4_episode06.md (Navigating Codebase)
+ phase4_episode07.md (Imports & Initialization)
+ phase4_episode08.md (Control Law Implementation)
+ phase4_episode09.md (Math Breakdown)
+ phase4_episode10.md (Controller Comparison)
+ phase4_episode11.md (Lagrangian Mechanics)
+ phase4_episode12.md (Vector Calculus)
+ phase4_episode13.md (Lyapunov & Phase Space)
 ```
 
 ### NotebookLM Specifications
@@ -368,7 +368,7 @@ class ClassicalSMC(ControllerInterface):
 
 **After (TTS-Optimized Narration)**:
 ```
-Let's examine the class definition. Type:
+examine the class definition. Type:
 class space Classical S-M-C open-paren ControllerInterface close-paren colon
 
 This means ClassicalSMC inherits from ControllerInterface.
@@ -605,9 +605,9 @@ Podcasts excel at linear, sequential learning - exactly what Phases 1-4 provided
 
 ### Where to Find Phase 5
 
-Phase 5 is available as comprehensive written documentation:
+Phase 5 is available as complete written documentation:
 
-📄 **[Phase 5: Mastery Path](../../beginner-roadmap/phase-5-mastery.md)**
+ **[Phase 5: Mastery Path](../../beginner-roadmap/phase-5-mastery.md)**
 
 This document provides:
 - Interactive path selection guidance
@@ -635,7 +635,7 @@ After completing Phase 4 Episode 13:
 3. **Choose your path**
    - Path 1: Quick practitioner (if time-constrained, project-focused)
    - Path 2: Theory + practice (if pursuing research, grad school)
-   - Path 3: Expert (if PhD track, cutting-edge contributions)
+   - Path 3: Expert (if PhD track, current contributions)
 
 4. **Follow your customized roadmap**
    - Each path has specific tutorial sequences

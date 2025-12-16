@@ -30,10 +30,10 @@ The hybrid controller violated the expected return type contract:
 - **Actual**: `None` (missing return)
 - **Consequence**: Downstream code expecting dictionary-like interface failed ### Pre-Fix Controller Status | Controller | Status | PSO Integration | Error State |
 |------------|---------|-----------------|-------------|
-| Classical SMC | ✅ Working | 0.000000 cost | None |
-| Adaptive SMC | ✅ Working | 0.000000 cost | None |
-| STA SMC | ✅ Working | 0.000000 cost | None |
-| **Hybrid SMC** | ❌ **Failed** | **Runtime Error** | **AttributeError** |
+| Classical SMC |  Working | 0.000000 cost | None |
+| Adaptive SMC |  Working | 0.000000 cost | None |
+| STA SMC |  Working | 0.000000 cost | None |
+| **Hybrid SMC** |  **Failed** | **Runtime Error** | **AttributeError** |
 
 ---
 
@@ -97,23 +97,23 @@ k̇₂ = γ₂|s| (outside dead zone)
 ## Validation Results ### Post-Fix Testing Results #### Controller Factory Integration
 
 ```bash
-✅ Controller creation via factory: SUCCESS
-✅ Basic control computation: SUCCESS
-✅ PSO optimization integration: SUCCESS
-✅ 0.000000 cost achievement: SUCCESS
-✅ Runtime error elimination: SUCCESS
+ Controller creation via factory: SUCCESS
+ Basic control computation: SUCCESS
+ PSO optimization integration: SUCCESS
+ 0.000000 cost achievement: SUCCESS
+ Runtime error elimination: SUCCESS
 ``` #### PSO Optimization Performance
 
 - **Target Cost**: 0.000000 (matching other controllers)
-- **Achieved Cost**: 0.000000 ✅
+- **Achieved Cost**: 0.000000 
 - **Optimized Gains**: [77.6216, 44.449, 17.3134, 14.25]
 - **Convergence**: Successful in standard PSO iterations
 - **File Saved**: `optimized_hybrid_gains.json` #### Controller Status Matrix (Post-Fix) | Controller | PSO Cost | Status | Mathematical Model |
 |------------|----------|--------|-------------------|
-| Classical SMC | 0.000000 | ✅ Working | Boundary layer SMC |
-| Adaptive SMC | 0.000000 | ✅ Working | Parameter estimation |
-| STA SMC | 0.000000 | ✅ Working | Super-twisting algorithm |
-| **Hybrid SMC** | **0.000000** | ✅ **Working** | **Adaptive + STA** |
+| Classical SMC | 0.000000 |  Working | Boundary layer SMC |
+| Adaptive SMC | 0.000000 |  Working | Parameter estimation |
+| STA SMC | 0.000000 |  Working | Super-twisting algorithm |
+| **Hybrid SMC** | **0.000000** |  **Working** | **Adaptive + STA** |
 
 ---
 

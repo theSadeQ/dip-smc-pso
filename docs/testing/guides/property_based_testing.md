@@ -8,7 +8,7 @@
 
 
 
-## 📖 Table of Contents
+##  Table of Contents
 
 1. [Introduction](#introduction)
 2. [Control System Properties](#control-system-properties)
@@ -18,7 +18,7 @@
 
 
 
-## 🎯 Introduction
+##  Introduction
 
 ### What is Property-Based Testing?
 
@@ -55,7 +55,7 @@ Property-based testing naturally expresses these invariants.
 
 
 
-## 🔬 Control System Properties
+##  Control System Properties
 
 ### Category 1: Safety Properties
 
@@ -169,7 +169,7 @@ def test_robust_stabilization(mass_error, friction_error, initial_state):
 
 
 
-## 🎲 Hypothesis Strategies
+##  Hypothesis Strategies
 
 ### Strategy 1: State Space Strategies
 
@@ -254,7 +254,7 @@ def trajectories(duration=5.0, dt=0.01):
 
 
 
-## 💻 Implementation Patterns
+##  Implementation Patterns
 
 ### Pattern 1: Invariant Testing
 
@@ -321,7 +321,7 @@ def test_no_regression_from_baseline(state):
 
 
 
-## 🏗️ Real-World Examples
+##  Real-World Examples
 
 ### Example 1: Sliding Surface Property
 
@@ -381,7 +381,7 @@ def test_chattering_bounded_by_boundary_layer(state, boundary_layer):
 
 
 
-## 🛠️ Best Practices
+##  Best Practices
 
 ### 1. Use `assume()` for Preconditions
 
@@ -443,7 +443,7 @@ def test_critical_property(state):
 
 
 
-## 📚 Related Documentation
+##  Related Documentation
 
 - [Control Systems Unit Testing](control_systems_unit_testing.md)
 - [Integration Workflows](integration_workflows.md)
@@ -451,9 +451,9 @@ def test_critical_property(state):
 
 
 
-## 🔗 Navigation
+##  Navigation
 
-[⬅️ Back to Guides](../guides/) | [🏠 Testing Home](../README.md) | [➡️ Performance Benchmarking](performance_benchmarking.md)
+[ Back to Guides](../guides/) | [ Testing Home](../README.md) | [ Performance Benchmarking](performance_benchmarking.md)
 
 
 

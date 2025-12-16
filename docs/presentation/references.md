@@ -124,7 +124,7 @@ This bibliography consolidates citations from all thesis chapters (0-9) and appe
 
 [31] "Multi‑objective optimization‑based tuning of two second‑order sliding‑mode controller variants for DFIGs connected to non‑ideal grid voltage," *MDPI Energies*, vol. 12, no. 19, art. 3782, 2019. Available: https://www.mdpi.com/1996-1073/12/19/3782
 
-[32] "A comprehensive review of particle swarm optimization," *ResearchGate*, Aug. 24, 2025. Available: https://www.researchgate.net/publication/301272239
+[32] "A complete review of particle swarm optimization," *ResearchGate*, Aug. 24, 2025. Available: https://www.researchgate.net/publication/301272239
 
 [33] "Set‑based particle swarm optimisation: a review," *MDPI Mathematics*, vol. 11, no. 13, art. 2980, 2023. Available: https://www.mdpi.com/2227-7390/11/13/2980
 

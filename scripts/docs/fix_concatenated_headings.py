@@ -306,18 +306,18 @@ def validate_with_sphinx(docs_dir: Path) -> bool:
         )
 
         if result.returncode == 0:
-            print("✓ Sphinx build succeeded")
+            print(" Sphinx build succeeded")
             return True
         else:
-            print("✗ Sphinx build failed")
+            print(" Sphinx build failed")
             print(result.stderr)
             return False
 
     except subprocess.TimeoutExpired:
-        print("✗ Sphinx build timed out")
+        print(" Sphinx build timed out")
         return False
     except Exception as e:
-        print(f"✗ Error running Sphinx: {e}")
+        print(f" Error running Sphinx: {e}")
         return False
 
 

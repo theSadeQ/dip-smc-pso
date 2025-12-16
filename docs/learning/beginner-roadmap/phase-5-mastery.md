@@ -56,13 +56,13 @@
 
 Before starting Tutorial 01, you should:
 
-- ✅ Understand control theory basics (Phase 2.1-2.2)
-- ✅ Know what SMC is conceptually (Phase 2.3)
-- ✅ Can run simulations confidently (Phase 3.1-3.3)
-- ✅ Comfortable with Python basics (Phase 1.2-1.3, Phase 4.1)
-- ✅ Understand basic DIP dynamics (Phase 2.5)
+-  Understand control theory basics (Phase 2.1-2.2)
+-  Know what SMC is conceptually (Phase 2.3)
+-  Can run simulations confidently (Phase 3.1-3.3)
+-  Comfortable with Python basics (Phase 1.2-1.3, Phase 4.1)
+-  Understand basic DIP dynamics (Phase 2.5)
 
-**If all checked**: You're ready for Tutorial 01! 🎉
+**If all checked**: You're ready for Tutorial 01! 
 
 ---
 
@@ -164,7 +164,7 @@ flowchart TD
 **Focus**: Running simulations, comparing controllers, basic tuning
 
 **Learning Path**:
-1. ✅ Phases 1-3 (foundations + hands-on) - DONE
+1.  Phases 1-3 (foundations + hands-on) - DONE
 2. Tutorial 01: First Simulation (1 hour, review)
 3. Tutorial 02: Controller Comparison (2 hours)
 4. Tutorial 03: PSO Optimization (3 hours)
@@ -191,7 +191,7 @@ flowchart TD
 **Focus**: Mathematical foundations, research methods, rigorous validation
 
 **Learning Path**:
-1. ✅ Phases 1-4 (foundations + theory) - DONE
+1.  Phases 1-4 (foundations + theory) - DONE
 2. Tutorial 01-03 (simulation + PSO) (6 hours)
 3. Tutorial 04: Advanced SMC Variants (10 hours)
 4. Tutorial 05: Research Workflows (8 hours)
@@ -219,13 +219,13 @@ flowchart TD
 
 **Who it's for**:
 - PhD students specializing in control
-- Researchers developing cutting-edge methods
+- Researchers developing current methods
 - Engineers working on safety-critical systems
 
 **Focus**: Novel controller design, rigorous proofs, real-world deployment
 
 **Learning Path**:
-1. ✅ Phases 1-4 (foundations + theory) - DONE
+1.  Phases 1-4 (foundations + theory) - DONE
 2. All Tutorials 01-05 (20 hours)
 3. All Theory Documents (30+ hours):
    - Full Lyapunov analysis
@@ -345,10 +345,10 @@ python simulate.py --ctrl classical_smc --load optimized_gains.json --plot
 ### When You're Ready
 
 **Prerequisites**:
-- ✅ Completed Phases 1-4
-- ✅ Comfortable reading source code (Phase 4.2)
-- ✅ Understand Lyapunov stability conceptually (Phase 4.3)
-- ✅ Completed Tutorials 01-03
+-  Completed Phases 1-4
+-  Comfortable reading source code (Phase 4.2)
+-  Understand Lyapunov stability conceptually (Phase 4.3)
+-  Completed Tutorials 01-03
 
 ### Steps to Create Custom Controller
 
@@ -632,7 +632,7 @@ Test your mastery path understanding from Phase 5
 
 ```
 
-```{grid-item-card} 📖 Research Paper Writing Guide
+```{grid-item-card}  Research Paper Writing Guide
 :link: https://www.grammarly.com/blog/academic-writing/how-to-write-a-research-paper/
 :link-type: url
 :class-card: resource-card resource-article
@@ -640,12 +640,12 @@ Test your mastery path understanding from Phase 5
 :text-align: center
 
 The Ultimate Guide to Writing a Research Paper covering structure, academic style, and citations.
-📊 *Estimated Time:* 90 min | 🎯 *Level:* Academic
+ *Estimated Time:* 90 min |  *Level:* Academic
 [Read -->]
 
 ```
 
-```{grid-item-card} 🛠️ LaTeX Equation Editor - Overleaf
+```{grid-item-card}  LaTeX Equation Editor - Overleaf
 :link: https://www.overleaf.com/
 :link-type: url
 :class-card: resource-card resource-tool
@@ -653,12 +653,12 @@ The Ultimate Guide to Writing a Research Paper covering structure, academic styl
 :text-align: center
 
 Free online LaTeX editor with unlimited projects. Professional equation typesetting for research papers.
-📊 *Estimated Time:* Reference | 🎯 *Level:* Reference
+ *Estimated Time:* Reference |  *Level:* Reference
 [Try It -->]
 
 ```
 
-```{grid-item-card} 🧪 Project Showcase Gallery
+```{grid-item-card}  Project Showcase Gallery
 :link: https://github.com/topics/inverted-pendulum
 :link-type: url
 :class-card: resource-card resource-interactive
@@ -666,50 +666,50 @@ Free online LaTeX editor with unlimited projects. Professional equation typesett
 :text-align: center
 
 GitHub repository showcase for inverted pendulum projects. Explore PID, LQR, MPC implementations.
-📊 *Estimated Time:* 30 min | 🎯 *Level:* Browsing
+ *Estimated Time:* 30 min |  *Level:* Browsing
 [Browse -->]
 
 ```
 ```
 
 ---
-**CONGRATULATIONS!** 🎉🎉🎉
+**CONGRATULATIONS!** 
 
 You've completed the **ENTIRE Beginner Roadmap** (~150 hours)!
 
 ## What You've Accomplished
 
 **Phase 1**: Foundations (40 hours)
-- ✅ Computing basics and Python programming
-- ✅ Development environment setup
-- ✅ Git version control
-- ✅ Physics and mathematics review
+-  Computing basics and Python programming
+-  Development environment setup
+-  Git version control
+-  Physics and mathematics review
 
 **Phase 2**: Core Concepts (30 hours)
-- ✅ Control theory fundamentals
-- ✅ Feedback control and PID
-- ✅ Sliding mode control introduction
-- ✅ Optimization with PSO
-- ✅ Double-inverted pendulum system
+-  Control theory fundamentals
+-  Feedback control and PID
+-  Sliding mode control introduction
+-  Optimization with PSO
+-  Double-inverted pendulum system
 
 **Phase 3**: Hands-On Learning (25 hours)
-- ✅ Running simulations confidently
-- ✅ Interpreting results and performance metrics
-- ✅ Comparing different controllers
-- ✅ Modifying configuration files
-- ✅ Troubleshooting independently
+-  Running simulations confidently
+-  Interpreting results and performance metrics
+-  Comparing different controllers
+-  Modifying configuration files
+-  Troubleshooting independently
 
 **Phase 4**: Advancing Skills (30 hours)
-- ✅ Advanced Python (OOP, decorators, type hints, testing)
-- ✅ Reading and understanding source code
-- ✅ Mathematical foundations (Lagrangian, Lyapunov, phase space)
+-  Advanced Python (OOP, decorators, type hints, testing)
+-  Reading and understanding source code
+-  Mathematical foundations (Lagrangian, Lyapunov, phase space)
 
 **Phase 5**: Mastery Path (25+ hours)
-- ✅ Connected to advanced tutorials
-- ✅ Chosen learning pathway
-- ✅ Prepared for PSO optimization
-- ✅ Roadmap for custom controller development
-- ✅ Research and career pathways identified
+-  Connected to advanced tutorials
+-  Chosen learning pathway
+-  Prepared for PSO optimization
+-  Roadmap for custom controller development
+-  Research and career pathways identified
 
 ---
 
@@ -760,12 +760,12 @@ Choose your path:
 **Thank you for completing this roadmap!**
 
 If this helped you, consider:
-- ⭐ Starring the GitHub repository
-- 📝 Sharing your learning journey (blog post, social media)
-- 🤝 Contributing improvements to documentation
-- 🎓 Mentoring other beginners
+-  Starring the GitHub repository
+-  Sharing your learning journey (blog post, social media)
+-  Contributing improvements to documentation
+-  Mentoring other beginners
 
-**Good luck on your control systems journey!** 🚀
+**Good luck on your control systems journey!** 
 
 ---
 

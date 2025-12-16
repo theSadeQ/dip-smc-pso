@@ -40,7 +40,7 @@
 - [ ] Verify citation keys follow pattern: `{topic}_{author}_{year}_{descriptor}`
 - [ ] Confirm all citations appear in bibliography (no broken references)
 
-**Status:** ☐ PASS ☐ FAIL ☐ NOTES: `_______________________`
+**Status:**  PASS  FAIL  NOTES: `_______________________`
 
 
 
@@ -76,7 +76,7 @@
 - [ ] Check code: `src/controllers/smc/sta_smc.py:L50-100`
 - [ ] Confirm STA law matches Levant 2003 formulation
 
-**Status:** ☐ PASS ☐ FAIL ☐ NOTES: `_______________________`
+**Status:**  PASS  FAIL  NOTES: `_______________________`
 
 
 
@@ -123,7 +123,7 @@
 - [ ] **Expected:** Critical components ≥ 90% coverage
 - [ ] Review coverage report: `.coverage/htmlcov/index.html` (if generated)
 
-**Status:** ☐ PASS ☐ FAIL ☐ NOTES: `_______________________`
+**Status:**  PASS  FAIL  NOTES: `_______________________`
 
 
 
@@ -149,7 +149,7 @@
 - [ ] Accept as-is: Phase completion reports (project documentation, not academic claims)
 - [ ] Accept as-is: API documentation (implementation details, not theoretical assertions)
 
-**Status:** ☐ PASS ☐ CONDITIONAL_PASS ☐ FAIL ☐ NOTES: `_______________________`
+**Status:**  PASS  CONDITIONAL_PASS  FAIL  NOTES: `_______________________`
 
 
 
@@ -170,7 +170,7 @@
 - [ ] Check docstrings reference theorems
 - [ ] Confirm test files exist for controllers
 
-**Status:** ☐ PASS ☐ FAIL ☐ NOTES: `_______________________`
+**Status:**  PASS  FAIL  NOTES: `_______________________`
 
 
 
@@ -181,16 +181,16 @@
 - [ ] Run: `python scripts/docs/verify_all.py`
 - [ ] **Expected Output:**
   ```
-  [1/5] Citation validation... ✅ PASS
-  [2/5] Theorem accuracy... ✅ PASS
-  [3/5] Test suite... ✅ PASS
-  [4/5] Simulation smoke tests... ✅ PASS
-  [5/5] Attribution completeness... ⚠️ CONDITIONAL PASS
-  Overall Status: ✅ PASS
+  [1/5] Citation validation...  PASS
+  [2/5] Theorem accuracy...  PASS
+  [3/5] Test suite...  PASS
+  [4/5] Simulation smoke tests...  PASS
+  [5/5] Attribution completeness...  CONDITIONAL PASS
+  Overall Status:  PASS
   Publication Ready: YES
   ```
 
-**Status:** ☐ PASS ☐ FAIL ☐ NOTES: `_______________________`
+**Status:**  PASS  FAIL  NOTES: `_______________________`
 
 
 
@@ -198,26 +198,26 @@
 
 ### Summary
 
-- **Citation System:** ☐ PASS ☐ FAIL
-- **Theorem Accuracy:** ☐ PASS ☐ FAIL
-- **Code Reproduction:** ☐ PASS ☐ FAIL
-- **Attribution:** ☐ PASS ☐ CONDITIONAL_PASS ☐ FAIL
-- **Documentation:** ☐ PASS ☐ FAIL
-- **Master Validation:** ☐ PASS ☐ FAIL
+- **Citation System:**  PASS  FAIL
+- **Theorem Accuracy:**  PASS  FAIL
+- **Code Reproduction:**  PASS  FAIL
+- **Attribution:**  PASS  CONDITIONAL_PASS  FAIL
+- **Documentation:**  PASS  FAIL
+- **Master Validation:**  PASS  FAIL
 
 ### Overall Recommendation
 
-☐ **ACCEPT** - All criteria met, publication ready
+ **ACCEPT** - All criteria met, publication ready
 
-☐ **ACCEPT WITH MINOR REVISIONS** - Minor improvements recommended:
-- \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-- \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-
-☐ **MAJOR REVISIONS REQUIRED** - Critical issues found:
+ **ACCEPT WITH MINOR REVISIONS** - Minor improvements recommended:
 - \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 - \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-☐ **REJECT** - Fundamental problems:
+ **MAJOR REVISIONS REQUIRED** - Critical issues found:
+- \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+- \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+ **REJECT** - Fundamental problems:
 - \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 - \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 

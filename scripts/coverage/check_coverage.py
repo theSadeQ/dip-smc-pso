@@ -286,18 +286,18 @@ def check_coverage_gates(components: List[ComponentCoverage]) -> int:
 
     # Check gates (priority order)
     if safety_pct < 100.0:
-        print(f"{CoverageColors.RED}✗ FAIL: Safety-critical coverage {safety_pct:.2f}% < 100%{CoverageColors.RESET}")
+        print(f"{CoverageColors.RED} FAIL: Safety-critical coverage {safety_pct:.2f}% < 100%{CoverageColors.RESET}")
         return 3
 
     if critical_pct < 95.0:
-        print(f"{CoverageColors.RED}✗ FAIL: Critical coverage {critical_pct:.2f}% < 95%{CoverageColors.RESET}")
+        print(f"{CoverageColors.RED} FAIL: Critical coverage {critical_pct:.2f}% < 95%{CoverageColors.RESET}")
         return 2
 
     if overall_pct < 85.0:
-        print(f"{CoverageColors.RED}✗ FAIL: Overall coverage {overall_pct:.2f}% < 85%{CoverageColors.RESET}")
+        print(f"{CoverageColors.RED} FAIL: Overall coverage {overall_pct:.2f}% < 85%{CoverageColors.RESET}")
         return 1
 
-    print(f"{CoverageColors.GREEN}✓ PASS: All coverage gates met{CoverageColors.RESET}")
+    print(f"{CoverageColors.GREEN} PASS: All coverage gates met{CoverageColors.RESET}")
     return 0
 
 

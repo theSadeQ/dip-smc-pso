@@ -8,7 +8,7 @@
 
 
 
-## 🎯 Quick Start
+##  Quick Start
 
 ```bash
 # Run all benchmarks
@@ -23,7 +23,7 @@ pytest tests/benchmarks/test_controllers_bench.py -k classical_smc --benchmark-h
 
 
 
-## 📊 Benchmark Categories
+##  Benchmark Categories
 
 ### 1. Controller Performance
 
@@ -118,7 +118,7 @@ def test_pso_optimization_benchmark(benchmark):
 
 
 
-## 🔬 Measurement Techniques
+##  Measurement Techniques
 
 ### Statistical Rigor
 
@@ -166,7 +166,7 @@ def profile_controller_step():
 
 
 
-## 📈 Regression Detection
+##  Regression Detection
 
 ### Automated Baseline Comparison
 
@@ -197,7 +197,7 @@ pytest tests/benchmarks/ --benchmark-only \
 
 
 
-## 🎯 Optimization Workflow
+##  Optimization Workflow
 
 ### Step 1: Identify Bottlenecks
 
@@ -253,7 +253,7 @@ def compute_control_numba(state, gains):
 
 
 
-## 📊 Reporting
+##  Reporting
 
 ### Generate HTML Report
 
@@ -287,7 +287,7 @@ def test_with_custom_metrics(benchmark):
 
 
 
-## 🛠️ Best Practices
+##  Best Practices
 
 ### 1. Isolate Benchmarks
 
@@ -332,16 +332,16 @@ def test_precise_benchmark():
 
 
 
-## 📚 Related Documentation
+##  Related Documentation
 
 - [PSO Convergence Analysis](../reports/2025-09-30/pso_convergence_analysis.md)
 - [Control Systems Unit Testing](control_systems_unit_testing.md)
 
 
 
-## 🔗 Navigation
+##  Navigation
 
-[⬅️ Back to Guides](../guides/) | [🏠 Testing Home](../README.md) | [➡️ Property-Based Testing](property_based_testing.md)
+[ Back to Guides](../guides/) | [ Testing Home](../README.md) | [ Property-Based Testing](property_based_testing.md)
 
 
 

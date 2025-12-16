@@ -10,13 +10,13 @@ Imagine you're giving directions to a friend. You might say: "If it's raining, t
 
 Programs need the same ability. They need to make choices: "If the angle is too large, apply maximum force. Otherwise, use proportional control." And they need to repeat tasks: "For each time step, calculate the new position. Keep doing this until 10 seconds have elapsed."
 
-Today, you'll learn the structures that make programs intelligent and efficient: if/else statements and loops. By the end of this episode, you'll be writing code that makes decisions and repeats actions automatically.
+Today, the system will learn the structures that make programs intelligent and efficient: if/else statements and loops. By the end of this episode, the system will be writing code that makes decisions and repeats actions automatically.
 
 ---
 
 ## What You'll Discover
 
-By listening to this episode, you'll learn:
+By listening to this episode, the system will learn:
 
 - How to make programs choose different paths with if/else statements
 - How to repeat actions efficiently with for and while loops
@@ -29,7 +29,7 @@ By listening to this episode, you'll learn:
 
 ## Decisions in Code: The if Statement
 
-Let's start with the most fundamental control structure: making decisions.
+start with the most fundamental control structure: making decisions.
 
 **The Basic if Statement**
 
@@ -40,7 +40,7 @@ age space equals space 20
 if space age space greater-than-equals space 18 colon
     print open-parenthesis "You are an adult" close-parenthesis
 
-Let's break this down:
+break this down:
 
 - **if** - The keyword that starts the decision
 - **age greater-than-equals 18** - The condition to check (True or False)
@@ -153,7 +153,7 @@ The second condition will NEVER run for temperature greater than 20, because the
 
 ## Recap: Decision-Making So Far
 
-Let's pause and review what you've learned about conditional statements:
+pause and review what you've learned about conditional statements:
 
 **Number one**: The if statement runs code only if a condition is True. The condition must be followed by a colon.
 
@@ -195,7 +195,7 @@ This prints:
 3
 4
 
-Let's dissect this:
+dissect this:
 - **for** - Keyword starting the loop
 - **i** - Loop variable (takes on each value in turn)
 - **in** - Keyword meaning "from this collection"
@@ -298,7 +298,7 @@ Count is 2
 Count is 3
 Count is 4
 
-Let's break it down:
+break it down:
 - **while** - Keyword starting the loop
 - **count less-than 5** - Condition to check before each iteration
 - **colon** - End of loop header
@@ -544,7 +544,7 @@ Mastering control flow means you can write intelligent, adaptive, safe control s
 
 ## What's Next: Functions and Reusability
 
-In Episode 4, we'll learn how to organize code into reusable functions:
+In Episode 4, this will learn how to organize code into reusable functions:
 
 - Defining functions with parameters
 - Returning values from functions

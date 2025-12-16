@@ -5,7 +5,7 @@
 
 ---
 
-## 📋 Overview This document provides debugging workflows using the integrated MCP (Model Context Protocol) servers for the Double Inverted Pendulum Sliding Mode Control with PSO Optimization project. ### Available MCP Servers | Server | Purpose | Tools |
+##  Overview This document provides debugging workflows using the integrated MCP (Model Context Protocol) servers for the Double Inverted Pendulum Sliding Mode Control with PSO Optimization project. ### Available MCP Servers | Server | Purpose | Tools |
 
 |--------|---------|-------|
 | **filesystem** | File system operations | read, write, search, list |
@@ -19,7 +19,7 @@
 
 ---
 
-## 🔧 Workflow 1: PSO Convergence Debugging **Use Case**: PSO optimization is converging slowly or getting stuck in local minima. ### Phase 1: Data Collection (sqlite-mcp) ```bash
+##  Workflow 1: PSO Convergence Debugging **Use Case**: PSO optimization is converging slowly or getting stuck in local minima. ### Phase 1: Data Collection (sqlite-mcp) ```bash
 
 # Query recent PSO runs
 
@@ -66,7 +66,7 @@ git commit -m "Improve PSO convergence with adaptive parameters"
 
 ---
 
-## 🧪 Workflow 2: Controller Test Debugging **Use Case**: Controller tests are failing with unexpected behavior. ### Phase 1: Test Failure Analysis (pytest-mcp) ```bash
+##  Workflow 2: Controller Test Debugging **Use Case**: Controller tests are failing with unexpected behavior. ### Phase 1: Test Failure Analysis (pytest-mcp) ```bash
 # View recent test failures
 pytest-mcp list-failures --last 5 # Get detailed failure information
 pytest-mcp analyze-failure --test-id <failure_id> # Check failure patterns
@@ -104,7 +104,7 @@ git commit -m "Fix controller test failures with proper initialization"
 
 ---
 
-## 🔢 Workflow 3: Numerical Error Analysis **Use Case**: Getting `LinAlgError: Singular matrix` or numerical warnings. ### Phase 1: Error Detection (filesystem) ```bash
+##  Workflow 3: Numerical Error Analysis **Use Case**: Getting `LinAlgError: Singular matrix` or numerical warnings. ### Phase 1: Error Detection (filesystem) ```bash
 
 # Search for numerical errors in logs
 
@@ -132,7 +132,7 @@ pytest tests/ -k "not slow" --tb=short
 
 ---
 
-## 📊 Workflow 4: Code Quality Improvement **Use Case**: Improving code quality, finding bugs, and ensuring best practices. ### Phase 1: Static Analysis (filesystem) ```bash
+##  Workflow 4: Code Quality Improvement **Use Case**: Improving code quality, finding bugs, and ensuring best practices. ### Phase 1: Static Analysis (filesystem) ```bash
 # Run ruff linter
 ruff check src/ tests/ # Check type hints
 mypy src/ --strict # Find unused imports
@@ -168,7 +168,7 @@ git commit -m "Code quality improvements: type hints, docs, linting"
 
 ---
 
-## 🎨 Workflow 5: Simulation Result Analysis **Use Case**: Analyzing and validating simulation results for research publication. ### Phase 1: Data Extraction (sqlite-mcp) ```sql
+##  Workflow 5: Simulation Result Analysis **Use Case**: Analyzing and validating simulation results for research publication. ### Phase 1: Data Extraction (sqlite-mcp) ```sql
 
 -- Extract best PSO results
 SELECT controller_type, AVG(settling_time) as avg_settling_time, AVG(overshoot) as avg_overshoot, AVG(steady_state_error) as avg_sse, COUNT(*) as num_trials
@@ -211,7 +211,7 @@ git push origin main --tags
 
 ---
 
-## 🚀 Quick Reference Commands ### Slash Commands | Command | Description |
+##  Quick Reference Commands ### Slash Commands | Command | Description |
 |---------|-------------|
 | `/analyze-logs` | Automated log analysis |
 | `/analyze-pso-logs` | PSO convergence analysis |
@@ -240,7 +240,7 @@ git push origin main --tags
 
 ---
 
-## 📚 Additional Resources ### Documentation
+##  Additional Resources ### Documentation
 - [MCP Debugging Quick Start](../README.md)
 - [Controller Testing Guide](../../testing/guides/control_systems_unit_testing.md)
 - [PSO Optimization Workflow](../../guides/workflows/pso-optimization-workflow.md) ### Slash Commands
@@ -253,7 +253,7 @@ git push origin main --tags
 
 ---
 
-## 🐛 Troubleshooting ### MCP Server Not Responding ```bash
+##  Troubleshooting ### MCP Server Not Responding ```bash
 # Check server status
 npx @modelcontextprotocol/inspector # Verify paths in .mcp.json
 cat .mcp.json | jq '.mcpServers' # Test individual server

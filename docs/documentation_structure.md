@@ -52,7 +52,7 @@ Step-by-step tutorials and how-to guides for common tasks and workflows.
 
 ## API & Technical Reference
 
-Comprehensive technical reference for all modules, classes, and functions.
+complete technical reference for all modules, classes, and functions.
 
 **Core API**
 - {doc}`api/index` - Complete API reference index

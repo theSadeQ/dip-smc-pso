@@ -22,7 +22,7 @@
 
 This document provides step-by-step procedures for validating the collapsible code blocks feature implemented in Phases 1-4.
 
-**Test Duration:** 2-2.5 hours (comprehensive) or 30 minutes (smoke test)
+**Test Duration:** 2-2.5 hours (complete) or 30 minutes (smoke test)
 
 **Prerequisites:**
 - Modern browser (Chrome, Firefox, or Edge recommended)
@@ -85,26 +85,26 @@ Open Browser DevTools
 ```javascript
 [CodeCollapse] Found X code blocks (Y raw matches)
 [CodeCollapse] Total <pre> elements: Z
-[CodeCollapse] ✅ 100% coverage - all <pre> elements matched
+[CodeCollapse]  100% coverage - all <pre> elements matched
 
-┌─────────────────────────────────────────────┬───────┐
-│ Selector                                    │ Count │
-├─────────────────────────────────────────────┼───────┤
-│ div.notranslate[class*="highlight-"]        │ XX    │
-│ div[class*="highlight-"]:not(.nohighlight)  │ XX    │
-│ div.doctest                                 │ X     │
-│ div.literal-block                           │ X     │
-│ div.code-block                              │ X     │
-│ pre.literal-block                           │ X     │
-└─────────────────────────────────────────────┴───────┘
+
+ Selector                                     Count 
+
+ div.notranslate[class*="highlight-"]         XX    
+ div[class*="highlight-"]:not(.nohighlight)   XX    
+ div.doctest                                  X     
+ div.literal-block                            X     
+ div.code-block                               X     
+ pre.literal-block                            X     
+
 ```
 
-**✅ Pass Criteria:**
-- Message: `✅ 100% coverage - all <pre> elements matched`
-- No warnings: `⚠️ X unmatched <pre> elements found`
+** Pass Criteria:**
+- Message: ` 100% coverage - all <pre> elements matched`
+- No warnings: ` X unmatched <pre> elements found`
 - Selector table shows counts for all selectors
 
-**❌ Fail Actions:**
+** Fail Actions:**
 - Check if unmatched `<pre>` elements are math blocks (expected exclusion)
 - If real code blocks are unmatched, file a P0 bug
 
@@ -147,7 +147,7 @@ Button Insertion (5min)
 3. Visually inspect all code blocks
 
 **Checks:**
-- [ ] All code blocks have collapse button (▼)
+- [ ] All code blocks have collapse button ()
 - [ ] All code blocks have copy button
 - [ ] Buttons are adjacent (not separated)
 - [ ] Gap between buttons = 5-8px (estimate visually)
@@ -164,14 +164,14 @@ Collapse Animation (5min)
 
 **Procedure:**
 1. Find a medium-sized code block (10-20 lines)
-2. Click collapse button (▼)
+2. Click collapse button ()
 3. Observe animation
 
 **Checks:**
 - [ ] Code slides up smoothly (curtain effect)
 - [ ] Animation duration feels natural (~350ms)
-- [ ] Button changes to expand icon (▲)
-- [ ] Message appears: "Code hidden (click ▲ to expand)"
+- [ ] Button changes to expand icon ()
+- [ ] Message appears: "Code hidden (click  to expand)"
 - [ ] No visible jank or stuttering
 
 ### Test 3:
@@ -179,13 +179,13 @@ Collapse Animation (5min)
 Expand Animation (5min)
 
 **Procedure:**
-1. Click expand button (▲) on collapsed block
+1. Click expand button () on collapsed block
 2. Observe animation
 
 **Checks:**
 - [ ] Code slides down smoothly
 - [ ] Animation duration consistent with collapse
-- [ ] Button changes to collapse icon (▼)
+- [ ] Button changes to collapse icon ()
 - [ ] Message disappears
 - [ ] Final state matches original (no layout shift)
 
@@ -266,17 +266,17 @@ Keyboard Shortcuts (2min)
 3. Target: No warnings during animation
 
 **Success Criteria:**
-- ✅ FPS ≥ 55 during animation
-- ✅ No layout shift warnings
-- ✅ Consistent frame timing (no spikes)
+-  FPS ≥ 55 during animation
+-  No layout shift warnings
+-  Consistent frame timing (no spikes)
 
 ### GPU Acceleration Check (10min)
 
 **Setup:**
 1. Open DevTools → Rendering tab (three dots → More tools → Rendering)
 2. Enable:
-   - ✅ Paint flashing
-   - ✅ Layer borders
+   -  Paint flashing
+   -  Layer borders
 
 **Procedure:**
 1. Collapse a code block
@@ -288,9 +288,9 @@ Keyboard Shortcuts (2min)
 - **Orange border** on collapse button (composited layer)
 
 **Success Criteria:**
-- ✅ Green layer borders visible
-- ✅ Paint flashing contained to animation area
-- ✅ No purple/red flashing (indicates layout thrashing)
+-  Green layer borders visible
+-  Paint flashing contained to animation area
+-  No purple/red flashing (indicates layout thrashing)
 
 ### Layout Shift Test (5min)
 
@@ -304,8 +304,8 @@ Keyboard Shortcuts (2min)
 - Click on them to see CLS (Cumulative Layout Shift) score
 
 **Success Criteria:**
-- ✅ CLS < 0.1 (Google Core Web Vitals threshold)
-- ✅ No unexpected layout shifts outside code block
+-  CLS < 0.1 (Google Core Web Vitals threshold)
+-  No unexpected layout shifts outside code block
 
 ---
 
@@ -376,9 +376,9 @@ Keyboard Shortcuts (2min)
 2. Observe behavior
 
 **Expected:**
-- ✅ Code collapses instantly (no animation)
-- ✅ Button still functions
-- ✅ State still persists
+-  Code collapses instantly (no animation)
+-  Button still functions
+-  State still persists
 
 **Disable Test:**
 1. Disable "prefers-reduced-motion"
@@ -485,10 +485,10 @@ clearCodeBlockStates()
 **Tester:** John Doe
 
 **Results:**
-- ✅ Functional: 5/5 tests passed
-- ✅ Performance: FPS 58 avg, CLS 0.03
-- ✅ Accessibility: 4/4 criteria met
-- ⚠️ Edge case: LocalStorage disabled warning too subtle
+-  Functional: 5/5 tests passed
+-  Performance: FPS 58 avg, CLS 0.03
+-  Accessibility: 4/4 criteria met
+-  Edge case: LocalStorage disabled warning too subtle
 
 **Recommendation:** Pass with minor note for localStorage UX
 ```

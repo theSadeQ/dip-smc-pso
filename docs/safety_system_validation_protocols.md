@@ -41,23 +41,23 @@ This document establishes mandatory safety validation protocols for the double-i
 ### Three-Layer Safety Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                 SAFETY MONITORING LAYER                    │
-│  Real-time constraint monitoring, fault detection,         │
-│  emergency stop coordination                               │
-└─────────────────────────────────────────────────────────────┘
-                            │
-┌─────────────────────────────────────────────────────────────┐
-│                 CONTROL SAFETY LAYER                       │
-│  Parameter bounds enforcement, stability monitoring,       │
-│  control signal saturation                                │
-└─────────────────────────────────────────────────────────────┘
-                            │
-┌─────────────────────────────────────────────────────────────┐
-│                 HARDWARE SAFETY LAYER                      │
-│  Physical limits enforcement, sensor validation,           │
-│  actuator protection                                       │
-└─────────────────────────────────────────────────────────────┘
+
+                 SAFETY MONITORING LAYER                    
+  Real-time constraint monitoring, fault detection,         
+  emergency stop coordination                               
+
+                            
+
+                 CONTROL SAFETY LAYER                       
+  Parameter bounds enforcement, stability monitoring,       
+  control signal saturation                                
+
+                            
+
+                 HARDWARE SAFETY LAYER                      
+  Physical limits enforcement, sensor validation,           
+  actuator protection                                       
+
 ```
 
 ### Safety Requirements Hierarchy
@@ -90,10 +90,10 @@ u(t) & \text{otherwise}
 ```
 
 **Validation Protocol**:
-- ✅ **Boundary Testing**: Verify limits at $u_{max} \pm \epsilon$
-- ✅ **Property-Based Testing**: Generate random control signals
-- ✅ **Hardware Simulation**: Test with actual actuator models
-- ✅ **Regression Testing**: Ensure no limit drift over time
+-  **Boundary Testing**: Verify limits at $u_{max} \pm \epsilon$
+-  **Property-Based Testing**: Generate random control signals
+-  **Hardware Simulation**: Test with actual actuator models
+-  **Regression Testing**: Ensure no limit drift over time
 
 **Test Coverage Requirements**:
 ```python
@@ -131,10 +131,10 @@ c_1 + c_2 &> 4 \quad \text{(PSO acceleration coefficients)}
 ```
 
 **Validation Protocol**:
-- ✅ **Range Validation**: All parameters within theoretical bounds
-- ✅ **Stability Analysis**: Lyapunov-based stability verification
-- ✅ **Robustness Testing**: Parameter sensitivity analysis
-- ✅ **Cross-Validation**: Multi-parameter constraint checking
+-  **Range Validation**: All parameters within theoretical bounds
+-  **Stability Analysis**: Lyapunov-based stability verification
+-  **Robustness Testing**: Parameter sensitivity analysis
+-  **Cross-Validation**: Multi-parameter constraint checking
 
 ### 1.3 Stability Monitoring
 
@@ -154,10 +154,10 @@ V(x) = x^T P x \quad \text{where } P > 0
 ```
 
 **Validation Protocol**:
-- ✅ **Lyapunov Function Computation**: Verify positive definiteness
-- ✅ **Derivative Monitoring**: Ensure $\dot{V} < 0$ when $x \neq 0$
-- ✅ **Threshold Detection**: Alert when stability margin drops
-- ✅ **Emergency Triggering**: Automatic safe mode activation
+-  **Lyapunov Function Computation**: Verify positive definiteness
+-  **Derivative Monitoring**: Ensure $\dot{V} < 0$ when $x \neq 0$
+-  **Threshold Detection**: Alert when stability margin drops
+-  **Emergency Triggering**: Automatic safe mode activation
 
 #### 1.4 Emergency Stop Logic
 
@@ -167,10 +167,10 @@ V(x) = x^T P x \quad \text{where } P > 0
 **Safety Requirement**: Immediate system shutdown within 50ms
 
 **Implementation Verification**:
-- ✅ **Response Time Testing**: Measure stop signal to actuator response
-- ✅ **State Machine Validation**: Verify safe state transitions
-- ✅ **Hardware Integration**: Test with actual emergency stop systems
-- ✅ **Fault Injection**: Simulate emergency conditions
+-  **Response Time Testing**: Measure stop signal to actuator response
+-  **State Machine Validation**: Verify safe state transitions
+-  **Hardware Integration**: Test with actual emergency stop systems
+-  **Fault Injection**: Simulate emergency conditions
 
 ### Tier 2: High-Priority Safety Components (≥95% Coverage)
 

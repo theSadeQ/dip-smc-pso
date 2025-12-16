@@ -1,6 +1,6 @@
 # Technical Reports & Assessments
 
-Comprehensive technical reports, analysis documents, and validation assessments.
+complete technical reports, analysis documents, and validation assessments.
 
 ## Overview
 

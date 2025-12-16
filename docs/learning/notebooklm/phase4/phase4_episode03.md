@@ -8,13 +8,13 @@
 
 Think about biological inheritance. You inherit traits from your parents: eye color, height, certain abilities. But you're not an exact copy. You have your own unique characteristics and behaviors. Similarly, in object-oriented programming, classes can inherit attributes and methods from parent classes while adding their own specializations.
 
-In this episode, we'll explore how Classical S-M-C inherits from ControllerInterface. You'll understand the parent-child relationship, learn what the super built-in function does, discover method resolution order or M-R-O, and see how polymorphism lets us swap controllers effortlessly.
+In this episode, this will explore how Classical S-M-C inherits from ControllerInterface. You'll understand the parent-child relationship, learn what the super built-in function does, discover method resolution order or M-R-O, and see how polymorphism lets us swap controllers effortlessly.
 
-By the end, you'll recognize inheritance patterns throughout the codebase and understand why they make the project flexible and maintainable.
+By the end, the system will recognize inheritance patterns throughout the codebase and understand why they make the project flexible and maintainable.
 
 ## What You'll Discover
 
-In this episode, you'll learn:
+In this episode, the system will learn:
 - How parent-child relationships work in class hierarchies
 - What the super built-in function does when calling parent methods
 - How method resolution order or M-R-O determines which implementation runs
@@ -23,7 +23,7 @@ In this episode, you'll learn:
 
 ## Parent-Child Relationships in Classes
 
-Let's start with the big picture. In this project, there's a hierarchy of controller classes:
+start with the big picture. In this project, there's a hierarchy of controller classes:
 
 ```
 ControllerInterface (parent, abstract base class)
@@ -154,7 +154,7 @@ The second version is self-documenting. You immediately know k3 and k4 are the g
 
 ## Method Overriding: Customizing Inherited Behavior
 
-ClassicalSMC inherits the reset method from ControllerInterface. Let's see if it overrides it:
+ClassicalSMC inherits the reset method from ControllerInterface. see if it overrides it:
 
 ```
 def reset open-paren self close-paren colon
@@ -206,7 +206,7 @@ This shows the exact order Python searches for methods.
 
 ## Recap: Core Concepts
 
-Let's recap what we've covered so far.
+recap what we've covered so far.
 
 **Inheritance**: Child classes inherit attributes and methods from parent classes. This enables code reuse and specialization.
 
@@ -250,7 +250,7 @@ elif isinstance open-paren controller comma SuperTwistingSMC close-paren colon
 
 ## Adding a New Controller: The Process
 
-Let's imagine you want to add a new controller called FuzzyLogicSMC. Here's the process:
+imagine you want to add a new controller called FuzzyLogicSMC. Here's the process:
 
 **Step 1**: Create a new file, source slash controllers slash fuzzy underscore logic underscore s-m-c dot p-y.
 
@@ -319,7 +319,7 @@ It doesn't need to know the specific class names or import paths. The factory ha
 
 ## Recap: Advanced Concepts
 
-Let's recap the second half of this episode.
+recap the second half of this episode.
 
 **Polymorphism**: The ability to treat objects of different classes uniformly if they share an interface. The simulation runner works with any controller that inherits from ControllerInterface.
 
@@ -344,7 +344,7 @@ Here are the technical terms from this episode with phonetic pronunciations:
 
 ## What's Next
 
-In Episode 4, we'll explore decorators and type hints. You'll learn what decorators are, those at-symbols before function definitions. We'll see real examples like at-timing-decorator and at-validate-inputs. Then we'll dive into type hints: state colon n-p dot n-d-array tells you state should be a NumPy array. These tools make code self-documenting and enable powerful static analysis.
+In Episode 4, this will explore decorators and type hints. You'll learn what decorators are, those at-symbols before function definitions. We'll see real examples like at-timing-decorator and at-validate-inputs. Then this will dive into type hints: state colon n-p dot n-d-array tells you state should be a NumPy array. These tools make code self-documenting and enable effective static analysis.
 
 Here's a preview question: What does a decorator do to a function? How does at-timing-decorator measure execution time without modifying the original function's code? We'll answer this in detail next episode.
 
@@ -360,7 +360,7 @@ Before moving to Episode 4, ask yourself these questions:
 
 If you can answer these confidently, you're ready to proceed. If anything is unclear, experiment in the Python interpreter. Create instances of ClassicalSMC, call methods, inspect the M-R-O, and observe inheritance in action.
 
-**Excellent progress! Inheritance is a powerful tool. Let's continue!**
+**Excellent progress! Inheritance is a effective tool. continue!**
 
 ---
 

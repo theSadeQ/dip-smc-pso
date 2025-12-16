@@ -15,14 +15,14 @@
 
 ## Executive Summary
 
-The Adaptive Sliding Mode Controller extends classical SMC with online gain adaptation, eliminating the need for prior knowledge of disturbance bounds. The switching gain K(t) adapts automatically based on observed sliding surface magnitude, providing robust performance without conservative over-design.
+The Adaptive Sliding Mode Controller extends classical SMC with online gain adaptation, eliminating the need for prior knowledge of disturbance bounds. The switching gain K(t) adapts automatically based on observed sliding surface magnitude, providing reliable performance without conservative over-design.
 
 **Performance Summary**:
 - **Parameter Count**: 5 primary gains [k1, k2, λ1, λ2, γ] + 3 adaptation params
 - **Convergence Type**: Exponential (asymptotic)
 - **Key Advantage**: No prior disturbance bound knowledge required
 - **Chattering Level**: Low to Medium (adaptive boundary layer)
-- **Runtime Status**: ✅ **OPERATIONAL** (production-ready)
+- **Runtime Status**:  **OPERATIONAL** (production-ready)
 
 **Best Use Cases**:
 - Systems with unknown or time-varying disturbances
@@ -127,7 +127,7 @@ where K* is the ideal (unknown) switching gain.
 
 **Proof Summary** (see `smc_complete_theory.md` for full proof):
 
-1. V ≥ 0 for all (σ, K) ✓
+1. V ≥ 0 for all (σ, K) 
 2. V̇ = σσ̇ + 1/γ·(K - K*)·K̇
 3. Substituting adaptation law:
    ```
@@ -187,56 +187,56 @@ class AdaptiveSMC:
 ### 2. Control Flow Architecture
 
 ```
-┌─────────────────────┐
-│   State Input       │
-│  [x,θ₁,θ₂,ẋ,θ̇₁,θ̇₂] │
-└──────────┬──────────┘
-           │
+
+   State Input       
+  [x,θ₁,θ₂,ẋ,θ̇₁,θ̇₂] 
+
+           
            v
-┌─────────────────────┐
-│ Sliding Surface     │
-│ σ = Σkᵢ(θ̇ᵢ+λᵢθᵢ)   │
-└──────────┬──────────┘
-           │
-           ├──────────────────┬───────────────────┐
+
+ Sliding Surface     
+ σ = Σkᵢ(θ̇ᵢ+λᵢθᵢ)   
+
+           
+           
            v                  v                   v
-┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐
-│ Adaptive Logic   │ │ Switching Term   │ │ Proportional     │
-│ K̇ = f(σ,K,δ)     │ │ -K·sat(σ/ε)      │ │ -α·σ             │
-└──────────┬───────┘ └────────┬─────────┘ └────────┬─────────┘
-           │                  │                     │
-           │ Update K         │                     │
-           v                  │                     │
-┌──────────────────┐         │                     │
-│ Rate Limiting    │         │                     │
-│ |K̇| ≤ Γ_max      │         │                     │
-└──────────┬───────┘         │                     │
-           │                  │                     │
-           v                  │                     │
-┌──────────────────┐         │                     │
-│ Bounded Gain     │         │                     │
-│ K ∈ [K_min,K_max]│         │                     │
-└──────────┬───────┘         │                     │
-           │                  │                     │
-           └──────────────────┴─────────────────────┘
-                              │
+  
+ Adaptive Logic     Switching Term     Proportional     
+ K̇ = f(σ,K,δ)       -K·sat(σ/ε)        -α·σ             
+  
+                                                  
+            Update K                              
+           v                                       
+                              
+ Rate Limiting                                  
+ |K̇| ≤ Γ_max                                    
+                              
+                                                  
+           v                                       
+                              
+ Bounded Gain                                   
+ K ∈ [K_min,K_max]                              
+                              
+                                                  
+           
+                              
                               v
-                    ┌──────────────────┐
-                    │ Sum Components   │
-                    │ u = -K·sat - α·σ │
-                    └──────────┬───────┘
-                              │
+                    
+                     Sum Components   
+                     u = -K·sat - α·σ 
+                    
+                              
                               v
-                    ┌──────────────────┐
-                    │ Actuator Sat     │
-                    │ u∈[-F_max,F_max] │
-                    └──────────┬───────┘
-                              │
+                    
+                     Actuator Sat     
+                     u∈[-F_max,F_max] 
+                    
+                              
                               v
-                    ┌──────────────────┐
-                    │ Output + History │
-                    │ (u, K_new, hist) │
-                    └──────────────────┘
+                    
+                     Output + History 
+                     (u, K_new, hist) 
+                    
 ```
 
 ### 3. State Management
@@ -706,15 +706,15 @@ def plot_adaptation_history(history):
 | **Tuning Complexity** | Simple (6) | **Medium (5+3)** | Medium (6) | High (4+8) |
 
 **Adaptive SMC Strengths**:
-- ✅ No disturbance bound knowledge needed
-- ✅ Lower chattering than classical
-- ✅ Better transient response
-- ✅ Simpler than hybrid
+-  No disturbance bound knowledge needed
+-  Lower chattering than classical
+-  Better transient response
+-  Simpler than hybrid
 
 **Adaptive SMC Weaknesses**:
-- ❌ Slower than finite-time controllers (STA, Hybrid)
-- ❌ More parameters than classical
-- ❌ Dead zone introduces small steady-state error
+-  Slower than finite-time controllers (STA, Hybrid)
+-  More parameters than classical
+-  Dead zone introduces small steady-state error
 
 ### 3. Computational Performance
 
@@ -747,11 +747,11 @@ def plot_adaptation_history(history):
 
 | Disturbance | K_final | Settling Time | Success |
 |-------------|---------|---------------|---------|
-| d = 5 N | 7.2 N | 3.8s | ✅ |
-| d = 15 N | 18.5 N | 4.5s | ✅ |
-| d = 30 N | 35.2 N | 5.2s | ✅ |
-| d = 60 N | 68.1 N | 6.8s | ✅ |
-| d = 120 N | 100.0 N (saturated) | Failed | ❌ |
+| d = 5 N | 7.2 N | 3.8s |  |
+| d = 15 N | 18.5 N | 4.5s |  |
+| d = 30 N | 35.2 N | 5.2s |  |
+| d = 60 N | 68.1 N | 6.8s |  |
+| d = 120 N | 100.0 N (saturated) | Failed |  |
 
 **Conclusion**: Adaptive SMC handles unknown disturbances up to K_max without prior tuning.
 

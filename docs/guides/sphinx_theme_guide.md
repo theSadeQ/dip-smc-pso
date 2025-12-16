@@ -22,35 +22,35 @@ The DIP SMC PSO documentation uses a custom Sphinx theme built on the **PyData S
 
 ```
 Sphinx HTML Build
-    │
-    ├─ PyData Sphinx Theme (base)
-    │   └─ Bootstrap 5 grid system
-    │
-    ├─ Design Tokens (CSS variables)
-    │   └─ docs/_static/design-tokens.css
-    │
-    └─ Custom Theme Extensions
-        ├─ custom.css (main theme)
-        ├─ code-collapse.css (interactive code blocks)
-        ├─ mathviz.css (LaTeX rendering)
-        ├─ plotly-charts.css (data visualization)
-        └─ pwa.css (progressive web app features)
+    
+     PyData Sphinx Theme (base)
+        Bootstrap 5 grid system
+    
+     Design Tokens (CSS variables)
+        docs/_static/design-tokens.css
+    
+     Custom Theme Extensions
+         custom.css (main theme)
+         code-collapse.css (interactive code blocks)
+         mathviz.css (LaTeX rendering)
+         plotly-charts.css (data visualization)
+         pwa.css (progressive web app features)
 ```
 
 ### File Structure
 
 ```
 docs/_static/
-├── custom.css                 # Main theme (this guide)
-├── design-tokens.css          # Color/spacing tokens
-├── code-collapse.css          # Collapsible code blocks
-├── code-collapse.js           # Code block interactions
-├── dark-mode.js               # Theme switcher
-├── mathviz.css                # LaTeX equation styling
-├── plotly-integration.js      # Interactive charts
-├── icons/                     # SVG icon library
-├── css-themes/                # Alternative color schemes
-└── back-to-top.js             # Scroll-to-top button
+ custom.css                 # Main theme (this guide)
+ design-tokens.css          # Color/spacing tokens
+ code-collapse.css          # Collapsible code blocks
+ code-collapse.js           # Code block interactions
+ dark-mode.js               # Theme switcher
+ mathviz.css                # LaTeX equation styling
+ plotly-integration.js      # Interactive charts
+ icons/                     # SVG icon library
+ css-themes/                # Alternative color schemes
+ back-to-top.js             # Scroll-to-top button
 ```
 
 ---
@@ -107,7 +107,7 @@ docs/_static/
 
 **Features**:
 - Gradient backgrounds
-- Icon prefixes (✓, ⚡, β, ⊘)
+- Icon prefixes (, , β, ⊘)
 - Hover animations
 - Uppercase typography with tracking
 
@@ -539,7 +539,7 @@ where :math:`e_i` represents tracking errors.
 }
 
 .admonition.research::before {
-    content: "🔬";
+    content: "";
     background: linear-gradient(135deg, #fbbf24, #f59e0b);
     font-size: 16px;
 }

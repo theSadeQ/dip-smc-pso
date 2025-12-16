@@ -154,10 +154,10 @@ def print_project_report(project: str, warnings: Dict[str, List[str]], validatio
     all_checks_pass = all(v for k, v in validation.items() if k.endswith('_ok') or k.endswith('_exists'))
     status = "[OK]" if all_checks_pass else "[WARN]"
     print(f"\nBuild Validation: {status}")
-    print(f"  index.html: {'✓' if validation['index_exists'] else '✗'} ({validation.get('index_size', 0) / 1024:.1f} KB)")
-    print(f"  genindex.html: {'✓' if validation['genindex_exists'] else '✗'}")
-    print(f "  _static/: {'✓' if validation['static_exists'] else '✗'}")
-    print(f"  search.html: {'✓' if validation['search_exists'] else '✗'}")
+    print(f"  index.html: {'' if validation['index_exists'] else ''} ({validation.get('index_size', 0) / 1024:.1f} KB)")
+    print(f"  genindex.html: {'' if validation['genindex_exists'] else ''}")
+    print(f "  _static/: {'' if validation['static_exists'] else ''}")
+    print(f"  search.html: {'' if validation['search_exists'] else ''}")
 
     # Warning summary
     total_warnings = sum(len(w) for w in warnings.values())

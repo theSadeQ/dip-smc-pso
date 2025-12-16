@@ -58,23 +58,23 @@
 
 ```
 Path 0: Complete Beginner (NEW)
-  └─> .project/ai/edu/beginner-roadmap.md (125-150 hours)
-       ├─> Phase 1: Foundations (Python, physics, math)
-       ├─> Phase 2: Core Concepts (Control theory, SMC)
-       ├─> Phase 3-5: Hands-on --> Mastery
-       └─> Connects to Path 1 (v)
+  > .project/ai/edu/beginner-roadmap.md (125-150 hours)
+       > Phase 1: Foundations (Python, physics, math)
+       > Phase 2: Core Concepts (Control theory, SMC)
+       > Phase 3-5: Hands-on --> Mastery
+       > Connects to Path 1 (v)
 
 Path 1: Quick Start (EXISTING)
-  └─> docs/guides/getting-started.md --> Tutorial 01 (1-2 hours)
+  > docs/guides/getting-started.md --> Tutorial 01 (1-2 hours)
 
 Path 2: Controller Expert (EXISTING)
-  └─> Getting Started --> Tutorials 01-03 --> SMC Theory (4-6 hours)
+  > Getting Started --> Tutorials 01-03 --> SMC Theory (4-6 hours)
 
 Path 3: Custom Development (EXISTING)
-  └─> Getting Started --> Tutorials 01-04 --> API Reference (8-12 hours)
+  > Getting Started --> Tutorials 01-04 --> API Reference (8-12 hours)
 
 Path 4: Research Publication (EXISTING)
-  └─> Complete Paths 1-2 --> Tutorial 05 --> Theory Guides (12+ hours)
+  > Complete Paths 1-2 --> Tutorial 05 --> Theory Guides (12+ hours)
 ```
 
 ### Cross-References
@@ -231,7 +231,7 @@ Path 4: Research Publication (EXISTING)
 
 **Just-In-Time Learning**:
 - Learn concepts right before you need them
-- Avoid "you'll need this later" syndrome
+- Avoid "the system will need this later" syndrome
 - Immediate application reinforces learning
 
 **Multiple Modalities**:

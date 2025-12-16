@@ -8,13 +8,13 @@
 
 Imagine you have a perfectly good function that computes control outputs. It works fine, but you wish you could time how long it takes to run. You could add timing code at the beginning and end of the function, but that clutters the logic. Plus, if you want to time ten different functions, you'd have to copy-paste that timing code ten times.
 
-Decorators solve this problem elegantly. They wrap functions with additional behavior without modifying the original code. And type hints solve a different problem: documenting what types of arguments a function expects and what it returns, making your code self-explanatory and enabling powerful tools like I-D-E autocomplete and static type checkers.
+Decorators solve this problem elegantly. They wrap functions with additional behavior without modifying the original code. And type hints solve a different problem: documenting what types of arguments a function expects and what it returns, making your code self-explanatory and enabling effective tools like I-D-E autocomplete and static type checkers.
 
-In this episode, we'll demystify decorators and type hints, showing you real examples from the codebase.
+In this episode, this will demystify decorators and type hints, showing you real examples from the codebase.
 
 ## What You'll Discover
 
-In this episode, you'll learn:
+In this episode, the system will learn:
 - What decorators are and how they wrap functions with additional behavior
 - Real examples like at-timing-decorator and at-validate-inputs
 - How type hints document expected types and return values
@@ -69,7 +69,7 @@ Python replaces the original say underscore hello with the wrapped version.
 
 ## Real Example: Timing Decorator
 
-Let's look at a real decorator from this project. Open source slash utils slash timing dot p-y (note: this is simplified for explanation):
+look at a real decorator from this project. Open source slash utils slash timing dot p-y (note: this is simplified for explanation):
 
 ```
 import time
@@ -162,7 +162,7 @@ Now every call to compute underscore control is automatically validated. If you 
 
 ## Recap: Core Concepts on Decorators
 
-Let's recap what we've learned about decorators.
+recap what we've learned about decorators.
 
 **What Decorators Do**: They wrap functions with additional behavior. The original function's logic remains unchanged, but extra functionality like timing or validation is added.
 
@@ -206,7 +206,7 @@ Type hints don't change runtime behavior. Python ignores them during execution. 
 
 ## Common Type Hint Syntax
 
-Let's see the most common type hints you'll encounter.
+see the most common type hints the system will encounter.
 
 **Primitive Types:**
 
@@ -243,7 +243,7 @@ The arrow symbol indicates the return type. If a function doesn't return anythin
 
 ## Type Hints in Controller Base Class
 
-Let's revisit ControllerInterface with a focus on type hints. Open source slash controllers slash base dot p-y:
+revisit ControllerInterface with a focus on type hints. Open source slash controllers slash base dot p-y:
 
 ```
 from typing import Optional
@@ -301,7 +301,7 @@ If you change a function signature, mypy detects all places where the old signat
 
 ## Recap: Core Concepts on Type Hints
 
-Let's recap what we've learned about type hints.
+recap what we've learned about type hints.
 
 **What Type Hints Do**: They annotate expected types for variables, parameters, and return values. They're optional and don't affect runtime behavior.
 
@@ -328,7 +328,7 @@ Here are the technical terms from this episode with phonetic pronunciations:
 
 ## What's Next
 
-In Episode 5, we'll explore testing with p-y-test. You'll learn why tests matter, the arrange-act-assert pattern, how to write assertions, and how to run tests with coverage reports. We'll walk through test underscore classical underscore s-m-c dot p-y to see how the project validates controller correctness. Testing is the safety net that lets you refactor confidently.
+In Episode 5, this will explore testing with p-y-test. You'll learn why tests matter, the arrange-act-assert pattern, how to write assertions, and how to run tests with coverage reports. We'll walk through test underscore classical underscore s-m-c dot p-y to see how the project validates controller correctness. Testing is the safety net that lets you refactor confidently.
 
 Here's a preview question: What's the difference between a unit test and an integration test? And why does this project have both? We'll answer this next episode.
 
@@ -344,7 +344,7 @@ Before moving to Episode 5, ask yourself these questions:
 
 If you can answer these confidently, you're ready to proceed. If anything is unclear, experiment in the Python interpreter. Define your own simple decorator or add type hints to a function and observe I-D-E autocomplete.
 
-**Great work! Decorators and type hints are powerful tools. Let's continue!**
+**Great work! Decorators and type hints are effective tools. continue!**
 
 ---
 

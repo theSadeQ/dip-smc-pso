@@ -174,11 +174,11 @@ Emerging research areas include:
 ### Citation Quality
 
 All references include:
-- ✅ **DOI links** where available (85% coverage)
-- ✅ **ISBN numbers** for books (100% coverage)
-- ✅ **Complete publication information**
-- ✅ **Keyword categorization** for filtering
-- ✅ **Validation** against original sources
+-  **DOI links** where available (85% coverage)
+-  **ISBN numbers** for books (100% coverage)
+-  **Complete publication information**
+-  **Keyword categorization** for filtering
+-  **Validation** against original sources
 
 ### Impact Metrics
 

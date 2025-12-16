@@ -8,13 +8,13 @@
 
 Imagine building a bridge. You wouldn't just construct it and hope it holds. You'd test load-bearing capacity, stress tolerances, and safety margins. Software is no different. Tests are the quality assurance that ensures your code does what you think it does, not just today but after every change you make.
 
-In this episode, we'll explore testing with p-y-test, Python's most popular testing framework. You'll learn the arrange-act-assert pattern, how to write meaningful assertions, and how to run tests with coverage reports. We'll walk through actual test files from this project to see how controllers are validated.
+In this episode, this will explore testing with p-y-test, Python's most popular testing framework. You'll learn the arrange-act-assert pattern, how to write meaningful assertions, and how to run tests with coverage reports. We'll walk through actual test files from this project to see how controllers are validated.
 
-By the end, you'll understand why tests are the safety net that lets developers refactor confidently.
+By the end, the system will understand why tests are the safety net that lets developers refactor confidently.
 
 ## What You'll Discover
 
-In this episode, you'll learn:
+In this episode, the system will learn:
 - Why testing matters and what tests prevent
 - The arrange-act-assert or triple-A pattern for structuring tests
 - How to write assertions that validate behavior
@@ -24,7 +24,7 @@ In this episode, you'll learn:
 
 ## Why Testing Matters
 
-Let's start with the fundamental question: why write tests?
+start with the fundamental question: why write tests?
 
 **Reason 1: Catch Bugs Early**
 
@@ -56,7 +56,7 @@ P-y-test tests follow a simple three-part structure called arrange-act-assert or
 
 **Assert**: Verify the result matches expectations. Use assert statements to check correctness.
 
-Let's see a concrete example:
+see a concrete example:
 
 ```
 def test underscore classical underscore s-m-c underscore initialization open-paren close-paren colon
@@ -146,7 +146,7 @@ assert value in gains
 
 ## Real Example: test_classical_smc.py
 
-Let's walk through the actual test file for Classical S-M-C. Open tests slash test underscore controllers slash test underscore classical underscore s-m-c dot p-y.
+walk through the actual test file for Classical S-M-C. Open tests slash test underscore controllers slash test underscore classical underscore s-m-c dot p-y.
 
 **Test 1: Initialization**
 
@@ -213,7 +213,7 @@ This test uses very high gains and a large disturbance. The control output shoul
 
 ## Running Tests: P-y-test Commands
 
-Let's see how to run these tests.
+see how to run these tests.
 
 **Run All Tests:**
 
@@ -255,7 +255,7 @@ The colon-colon syntax specifies a single test function.
 
 ## Recap: Core Concepts on Testing
 
-Let's recap what we've learned so far.
+recap what we've learned so far.
 
 **Why Testing Matters**: Tests catch bugs early, document expected behavior, enable confident refactoring, validate theoretical properties, and prevent regressions.
 
@@ -289,7 +289,7 @@ This generates an H-T-M-L report in htmlcov slash index dot html. Open it in a b
 
 ## Self-Assessment for Phase 4.1
 
-You've now completed Sub-Phase 4.1: Advanced Python for This Project. Let's assess your understanding.
+You've now completed Sub-Phase 4.1: Advanced Python for This Project. assess your understanding.
 
 **Quiz Questions:**
 
@@ -333,7 +333,7 @@ Here are the technical terms from this episode with phonetic pronunciations:
 
 ## What's Next
 
-Congratulations! You've completed Sub-Phase 4.1 on Advanced Python. In Episode 6, we'll begin Sub-Phase 4.2: Reading Controller Source Code. You'll learn how to navigate the codebase, the recommended reading order from base dot p-y to classical underscore s-m-c dot p-y to factory dot p-y, and how to use V-S Code features like F12 to jump to definitions.
+Congratulations! You've completed Sub-Phase 4.1 on Advanced Python. In Episode 6, this will begin Sub-Phase 4.2: Reading Controller Source Code. You'll learn how to navigate the codebase, the recommended reading order from base dot p-y to classical underscore s-m-c dot p-y to factory dot p-y, and how to use V-S Code features like F12 to jump to definitions.
 
 Here's a preview question: What's the recommended order for reading the controller files, and why start with base dot p-y? We'll answer this in detail next episode.
 
@@ -349,7 +349,7 @@ Before moving to Episode 6, ask yourself these questions:
 
 If you can answer these confidently, you're ready to proceed. If anything is unclear, run the tests yourself and observe the output. Experiment with modifying a test and seeing it fail, then fix it.
 
-**Excellent progress! You've mastered advanced Python concepts. Let's continue!**
+**Excellent progress! You've mastered advanced Python concepts. continue!**
 
 ---
 

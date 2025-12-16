@@ -4,7 +4,7 @@ Model Context Protocol (MCP) integration for systematic debugging of control sys
 
 
 
-## 📦 Available MCP Servers
+##  Available MCP Servers
 
 ### Active Servers (configured in `.mcp.json`)
 
@@ -30,7 +30,7 @@ Model Context Protocol (MCP) integration for systematic debugging of control sys
 
 
 
-## 🔧 Quick Start
+##  Quick Start
 
 ### 1. Verify MCP Installation
 
@@ -59,27 +59,27 @@ npm list -g | grep mcp
 
 
 
-## 📁 Directory Structure
+##  Directory Structure
 
 ```
 docs/mcp-debugging/
-├── README.md (this file)
-├── workflows/              # Debugging workflow documentation
-│   ├── pso-optimization-debugging.md
-│   ├── controller-test-debugging.md
-│   ├── simulation-failure-analysis.md
-│   └── log-analysis-workflow.md
-├── server-configs/         # MCP server setup guides
-│   ├── filesystem-server-setup.md
-│   ├── github-server-setup.md
-│   └── sequential-thinking-usage.md
-└── inspector-guide/        # MCP Inspector usage
-    └── mcp-inspector-quickstart.md
+ README.md (this file)
+ workflows/              # Debugging workflow documentation
+    pso-optimization-debugging.md
+    controller-test-debugging.md
+    simulation-failure-analysis.md
+    log-analysis-workflow.md
+ server-configs/         # MCP server setup guides
+    filesystem-server-setup.md
+    github-server-setup.md
+    sequential-thinking-usage.md
+ inspector-guide/        # MCP Inspector usage
+     mcp-inspector-quickstart.md
 ```
 
 
 
-## 🎯 Common Use Cases
+##  Common Use Cases
 
 ### Debug PSO Convergence Issues
 
@@ -107,7 +107,7 @@ docs/mcp-debugging/
 
 
 
-## 📊 Slash Commands
+##  Slash Commands
 
 | Command | Purpose | MCP Servers Used |
 |---------|---------|------------------|
@@ -122,7 +122,7 @@ docs/mcp-debugging/
 
 
 
-## 🔗 Configuration
+##  Configuration
 
 **MCP Configuration File**: `.mcp.json` (project root)
 
@@ -137,7 +137,7 @@ export GITHUB_TOKEN="your_personal_access_token"
 
 
 
-## 📚 Further Reading
+##  Further Reading
 
 **MCP Server Configuration:**
 - Filesystem Server: See `.mcp.json` configuration in project root

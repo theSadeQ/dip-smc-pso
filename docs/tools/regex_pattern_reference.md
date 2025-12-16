@@ -156,7 +156,7 @@ Under switching control, the system state reaches $x = 0$ in finite time $T \leq
 Theorem 1: The system converges.
 ```
 
-**Status:** ❌ **Rejected**
+**Status:**  **Rejected**
 **Reason:** Missing `**` markdown bold markers (not a formatted theorem)
 
 
@@ -168,7 +168,7 @@ Theorem 1: The system converges.
 **theorem 1** The system converges.
 ```
 
-**Status:** ❌ **Rejected**
+**Status:**  **Rejected**
 **Reason:** Type must be capitalized (`Theorem` not `theorem`)
 
 
@@ -180,7 +180,7 @@ Theorem 1: The system converges.
 **Theorem 1** [cite:levant2003]
 ```
 
-**Status:** ❌ **Rejected**
+**Status:**  **Rejected**
 **Reason:** Citation must use MyST syntax `{cite}\`key\`` (not `[cite:key]`)
 
 
@@ -192,7 +192,7 @@ Theorem 1: The system converges.
 ## Theorem 1: Main Result
 ```
 
-**Status:** ❌ **Rejected**
+**Status:**  **Rejected**
 **Reason:** Header format not supported (must use `**Theorem 1**` bold syntax)
 
 
@@ -205,7 +205,7 @@ Theorem 1: The system converges.
 PROOF_PATTERN = re.compile(
     r'\*\*Proof\*\*:?\s*'          # "**Proof**" with optional colon
     r'(?P<proof>.*?)'               # Proof text (non-greedy)
-    r'(?P<qed>□|∎|QED)',            # QED symbol (required)
+    r'(?P<qed>|∎|QED)',            # QED symbol (required)
     re.DOTALL
 )
 ```
@@ -217,7 +217,7 @@ PROOF_PATTERN = re.compile(
 
 <optional_colon> ::= ":" | ε
 <proof_text>     ::= .+?
-<qed_symbol>     ::= "□" | "∎" | "QED"
+<qed_symbol>     ::= "" | "∎" | "QED"
 ```
 
 ### LaTeX Notation
@@ -226,7 +226,7 @@ $$
 \textbf{Proof:} \quad p(x) \quad \qed
 $$
 
-Where $\qed \in \{□, ∎, \text{QED}\}$ (standardized end-of-proof markers)
+Where $\qed \in \{, ∎, \text{QED}\}$ (standardized end-of-proof markers)
 
 ### Examples
 
@@ -234,12 +234,12 @@ Where $\qed \in \{□, ∎, \text{QED}\}$ (standardized end-of-proof markers)
 
 **Input:**
 ```markdown
-**Proof**: By Lyapunov stability analysis, we have $\dot{V} < 0$ for all $x \neq 0$. □
+**Proof**: By Lyapunov stability analysis, we have $\dot{V} < 0$ for all $x \neq 0$. 
 ```
 
 **Captured Groups:**
 - `proof`: `"By Lyapunov stability analysis, we have $\dot{V} < 0$ for all $x \neq 0$."`
-- `qed`: `"□"`
+- `qed`: `""`
 
 
 
@@ -429,7 +429,7 @@ Linear in claim count (negligible for <10,000 claims).
 
 #### Pattern Compilation Caching
 
-**❌ Bad Practice (3x slower):**
+** Bad Practice (3x slower):**
 ```python
 def extract_theorems(file_content):
     for line in file_content.split('\n'):
@@ -441,7 +441,7 @@ def extract_theorems(file_content):
 
 
 
-**✅ Good Practice (optimal):**
+** Good Practice (optimal):**
 ```python
 # example-metadata:
 # runnable: false
@@ -482,7 +482,7 @@ class FormalClaimExtractor:
 | **Average per file** | 0.16 claims/file |
 | **Memory usage** | 45 MB peak |
 
-**Acceptance Criterion:** ✅ **PASS** (target: <2.0 seconds for formal extractor)
+**Acceptance Criterion:**  **PASS** (target: <2.0 seconds for formal extractor)
 
 
 
@@ -503,7 +503,7 @@ For all initial conditions $x_0 \in \mathbb{R}^6$ satisfying $\|x_0\| < R$, the 
 
 converges to the origin in finite time $T \leq \frac{2V(x_0)^{1/2}}{\alpha}$ under the control law $u = -k \cdot \text{sign}(s)$.
 
-**Proof**: By Lyapunov analysis with $V = \frac{1}{2}s^2$, we obtain $\dot{V} \leq -\alpha V^{1/2}$, yielding finite-time convergence by Lemma 2. □
+**Proof**: By Lyapunov analysis with $V = \frac{1}{2}s^2$, we obtain $\dot{V} \leq -\alpha V^{1/2}$, yielding finite-time convergence by Lemma 2. 
 ```
 
 **Expected Extraction:**
@@ -621,12 +621,12 @@ To maximize extraction accuracy and confidence scores, follow these documentatio
 
 #### 1. Use Numbered Theorems for Important Results
 
-**✅ Recommended:**
+** Recommended:**
 ```markdown
 **Theorem 1** (Main Result) {cite}`levant2003`
 ```
 
-**❌ Avoid:**
+** Avoid:**
 ```markdown
 **Theorem** (without number)
 ```
@@ -637,12 +637,12 @@ To maximize extraction accuracy and confidence scores, follow these documentatio
 
 #### 2. Include Citations Using MyST Syntax
 
-**✅ Recommended:**
+** Recommended:**
 ```markdown
 **Lemma 3** {cite}`smc_slotine_li_1991_applied_nonlinear_control`
 ```
 
-**❌ Avoid:**
+** Avoid:**
 ```markdown
 **Lemma 3** (Slotine 1991)  # Human-readable but not machine-parsable
 ```
@@ -653,12 +653,12 @@ To maximize extraction accuracy and confidence scores, follow these documentatio
 
 #### 3. Provide Proofs with QED Symbols
 
-**✅ Recommended:**
+** Recommended:**
 ```markdown
-**Proof**: By induction on $n$. □
+**Proof**: By induction on $n$. 
 ```
 
-**❌ Avoid:**
+** Avoid:**
 ```markdown
 Proof: By induction.  # No QED marker
 ```
@@ -669,7 +669,7 @@ Proof: By induction.  # No QED marker
 
 #### 4. Use Math Blocks for Equations
 
-**✅ Recommended:**
+** Recommended:**
 ````markdown
 **Theorem 2**
 
@@ -683,7 +683,7 @@ u(t) = -k \cdot \text{sign}(s(t))
 ensures stability.
 ````
 
-**❌ Avoid:**
+** Avoid:**
 ```markdown
 **Theorem 2** The control law u(t) = -k * sign(s(t)) ensures stability.
 ```
@@ -694,14 +694,14 @@ ensures stability.
 
 #### 5. Use Section Headers for Context
 
-**✅ Recommended:**
+** Recommended:**
 ```markdown
 ## Super-Twisting Algorithm
 
 **Theorem 1** (Finite-Time Convergence) {cite}`smc_levant_2003_higher_order_smc`
 ```
 
-**❌ Avoid:**
+** Avoid:**
 ```markdown
 **Theorem 1** without any section context
 ```
@@ -726,7 +726,7 @@ V(x) = \frac{1}{2}x^T P x
 
 where $P \succ 0$. If $\dot{V}(x) \leq -\alpha V(x)$ for all $x \neq 0$ and some $\alpha > 0$, then the origin is globally asymptotically stable.
 
-**Proof**: By LaSalle's invariance principle, the system converges to the largest invariant set where $\dot{V} = 0$. Since $\dot{V} < 0$ for $x \neq 0$, this set is $\{0\}$, completing the proof. □
+**Proof**: By LaSalle's invariance principle, the system converges to the largest invariant set where $\dot{V} = 0$. Since $\dot{V} < 0$ for $x \neq 0$, this set is $\{0\}$, completing the proof. 
 ````
 
 **Extraction Result:**

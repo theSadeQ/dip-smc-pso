@@ -1,4 +1,4 @@
-# Configuration Schema Reference **Status:** 🚧 Under Construction This document will contain configuration schema documentation including: ## Planned Content ### YAML Configuration Structure
+# Configuration Schema Reference **Status:**  Under Construction This document will contain configuration schema documentation including: ## Planned Content ### YAML Configuration Structure
 
 - Top-level configuration keys
 - Controller configuration blocks

@@ -2,7 +2,7 @@
 
 **Complete API documentation for all modules in the DIP SMC PSO project**
 
-This section provides comprehensive API documentation including controller APIs, optimization modules, configuration schemas, simulation engines, and factory system references.
+This section provides complete API documentation including controller APIs, optimization modules, configuration schemas, simulation engines, and factory system references.
 
 ---
 
@@ -220,7 +220,7 @@ The following documentation is automatically generated from Python docstrings us
 - **[Main Documentation Hub](../index.md)** - Complete project documentation
 - **[User Guides](../guides/index.md)** - Tutorials and how-to guides
 - **[Mathematical Foundations](../mathematical_foundations/index.md)** - Control theory proofs
-- **[Controller Factory](../factory/README.md)** - Factory system comprehensive guide
+- **[Controller Factory](../factory/README.md)** - Factory system complete guide
 
 ---
 

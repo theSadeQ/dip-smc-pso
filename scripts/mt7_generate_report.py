@@ -1,4 +1,4 @@
-"""Generate MT-7 comprehensive robustness validation report.
+"""Generate MT-7 complete robustness validation report.
 
 This script automatically generates a complete markdown report documenting the
 MT-7 robustness validation results, demonstrating that MT-6 optimized parameters
@@ -60,7 +60,7 @@ def generate_mt7_report(
     seed_df: pd.DataFrame,
     output_path: Path
 ) -> None:
-    """Generate comprehensive MT-7 robustness validation report.
+    """Generate complete MT-7 robustness validation report.
 
     Args:
         mt6_data: MT-6 baseline summary statistics.
@@ -119,7 +119,7 @@ def generate_mt7_report(
 - **Effect Size:** Cohen's d = {cohens_d:.1f} (very large effect)
 - **Worst-Case:** P95 = {mt7_p95:.2f}, P99 = {mt7_p99:.2f}
 
-**Conclusion:** MT-6 optimized parameters do NOT generalize to challenging conditions. The {degradation_ratio:.1f}x chattering degradation and {failure_rate:.1f}% failure rate demonstrate severe overfitting to narrow initial condition range (±0.05 rad). Multi-scenario PSO optimization is required for robust performance.
+**Conclusion:** MT-6 optimized parameters do NOT generalize to challenging conditions. The {degradation_ratio:.1f}x chattering degradation and {failure_rate:.1f}% failure rate demonstrate severe overfitting to narrow initial condition range (±0.05 rad). Multi-scenario PSO optimization is required for reliable performance.
 
 ---
 
@@ -288,9 +288,9 @@ def generate_mt7_report(
 4. **Worst-Case Degradation:** P95 performance ({mt7_p95:.2f}) far exceeds acceptable chattering thresholds
 
 **Comparison to Industrial Standards:**
-- Aerospace/robotics typically require <5% failure rate → MT-7 achieves {failure_rate:.1f}% ❌
-- High-precision control requires chattering <5.0 → MT-7 P95 = {mt7_p95:.2f} ❌
-- Robust control requires <10% performance degradation → MT-7 shows {degradation_percent:.0f}% ❌
+- Aerospace/robotics typically require <5% failure rate → MT-7 achieves {failure_rate:.1f}% 
+- High-precision control requires chattering <5.0 → MT-7 P95 = {mt7_p95:.2f} 
+- Robust control requires <10% performance degradation → MT-7 shows {degradation_percent:.0f}% 
 
 ### 4.3 Recommendations for MT-8+
 
@@ -314,11 +314,11 @@ def generate_mt7_report(
 MT-6 optimized parameters (ε_min={mt7_data['configuration']['epsilon_min']:.5f}, α={mt7_data['configuration']['alpha']:.2f}) do NOT generalize to challenging initial conditions (±0.3 rad).
 
 **Supporting Evidence:**
-1. ✅ **{degradation_ratio:.1f}x chattering degradation** (highly significant, p < 0.001)
-2. ✅ **{failure_rate:.1f}% failure rate** (vs 0% in MT-6)
-3. ✅ **Very large effect size** (Cohen's d = {cohens_d:.1f})
-4. ✅ **Consistent degradation** across all 10 seeds (CV={mt7_cv:.1f}%)
-5. ✅ **Worst-case unacceptable** (P95={mt7_p95:.2f}, P99={mt7_p99:.2f})
+1.  **{degradation_ratio:.1f}x chattering degradation** (highly significant, p < 0.001)
+2.  **{failure_rate:.1f}% failure rate** (vs 0% in MT-6)
+3.  **Very large effect size** (Cohen's d = {cohens_d:.1f})
+4.  **Consistent degradation** across all 10 seeds (CV={mt7_cv:.1f}%)
+5.  **Worst-case unacceptable** (P95={mt7_p95:.2f}, P99={mt7_p99:.2f})
 
 **Null Hypothesis Decision:**
 **REJECTED** - MT-6 parameters do NOT generalize to MT-7 conditions (Welch's t-test: t={comparison_data['comparison']['t_statistic']:.2f}, p<0.001)
@@ -383,7 +383,7 @@ python scripts/mt7_generate_report.py
 
 **Report Generated:** {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 **Generator:** `scripts/mt7_generate_report.py`
-**Status:** DELIVERABLE COMPLETE ✅
+**Status:** DELIVERABLE COMPLETE 
 """
 
     # Save report
@@ -394,7 +394,7 @@ python scripts/mt7_generate_report.py
 
 
 def main():
-    """Generate MT-7 comprehensive report."""
+    """Generate MT-7 complete report."""
 
     print("=" * 80)
     print("MT-7 Robustness Validation Report Generator")
@@ -443,7 +443,7 @@ def main():
     seed_df = pd.concat(seed_data, ignore_index=True) if seed_data else pd.DataFrame()
 
     # Generate report
-    print("\nGenerating comprehensive report...")
+    print("\nGenerating complete report...")
     generate_mt7_report(mt6_data, mt7_data, comparison_data, seed_df, output_path)
 
     print("=" * 80)

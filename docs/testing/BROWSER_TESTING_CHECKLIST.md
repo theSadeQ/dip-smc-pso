@@ -25,7 +25,7 @@
 
 2. **Console Check**
    - [ ] Open browser console (F12)
-   - [ ] Look for: `[CodeCollapse] ✅ 100% coverage`
+   - [ ] Look for: `[CodeCollapse]  100% coverage`
    - [ ] No red error messages
 
 3. **Button Presence**
@@ -33,12 +33,12 @@
    - [ ] Gap between copy and collapse buttons = 5-8px (visual check)
 
 4. **Collapse Test**
-   - [ ] Click collapse button (▼)
+   - [ ] Click collapse button ()
    - [ ] Code hides smoothly (curtain effect)
-   - [ ] Message appears: "Code hidden (click ▲ to expand)"
+   - [ ] Message appears: "Code hidden (click  to expand)"
 
 5. **Expand Test**
-   - [ ] Click expand button (▲)
+   - [ ] Click expand button ()
    - [ ] Code shows smoothly
 
 6. **Master Controls**
@@ -75,7 +75,7 @@
 - [ ] Green border on code blocks during animation
 - [ ] GPU layers active: Yes / No
 
-**Status:** ✅ Pass / ❌ Fail
+**Status:**  Pass /  Fail
 **Issues:** _______________
 
 ---
@@ -100,7 +100,7 @@
 
 **Note:** Firefox has partial support for `contain: layout` - minor performance differences expected.
 
-**Status:** ✅ Pass / ❌ Fail
+**Status:**  Pass /  Fail
 **Issues:** _______________
 
 ---
@@ -122,7 +122,7 @@
 - [ ] Animations smooth
 - [ ] FPS check: _____
 
-**Status:** ✅ Pass / ❌ Fail
+**Status:**  Pass /  Fail
 **Issues:** _______________
 
 ---
@@ -140,7 +140,7 @@
 
 **Known Limitation:** `contain: layout` has limited support in Safari - may see minor layout shifts.
 
-**Status:** ✅ Pass / ❌ Fail / ⏭️ Skipped
+**Status:**  Pass /  Fail / ⏭ Skipped
 **Issues:** _______________
 
 ---
@@ -168,7 +168,7 @@
 - [ ] Gap = 8px (desktop size)
 - [ ] Layout looks good
 
-**Status:** ✅ Pass / ❌ Fail
+**Status:**  Pass /  Fail
 **Issues:** _______________
 
 ---
@@ -193,7 +193,7 @@
 - [ ] Buttons have 3px borders
 - [ ] Sufficient color contrast
 
-**Status:** ✅ Pass / ❌ Fail / ⏭️ Skipped
+**Status:**  Pass /  Fail / ⏭ Skipped
 **Issues:** _______________
 
 ---
@@ -224,7 +224,7 @@
 - [ ] No broken state
 - [ ] `.code-collapsing` prevents interaction
 
-**Status:** ✅ Pass / ❌ Fail
+**Status:**  Pass /  Fail
 **Issues:** _______________
 
 ---
@@ -237,7 +237,7 @@
 - [ ] Collapsed message readable
 - [ ] Colors look good
 
-**Status:** ✅ Pass / ❌ Fail / ⏭️ N/A
+**Status:**  Pass /  Fail / ⏭ N/A
 **Issues:** _______________
 
 ---
@@ -250,7 +250,7 @@
 - [ ] No master controls visible
 - [ ] "Code hidden" message not visible
 
-**Status:** ✅ Pass / ❌ Fail
+**Status:**  Pass /  Fail
 **Issues:** _______________
 
 ---

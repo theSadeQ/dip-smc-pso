@@ -519,15 +519,15 @@ Compare to: Sliding down a target line on paper, even with turbulence.
 ```{mermaid}
 graph TB
     subgraph landscape["Imagine a Landscape"]
-        A["⛰️ Hilly terrain"]
-        B["🎯 Golden valley = Best solution"]
+        A[" Hilly terrain"]
+        B[" Golden valley = Best solution"]
         C["High peaks = Bad solutions"]
     end
 
     subgraph problem["PSO Particles Search"]
-        P1["🕊️ Particle 1: On peak"]
-        P2["🕊️ Particle 2: In valley"]
-        P3["🕊️ Particle 3: On slope"]
+        P1[" Particle 1: On peak"]
+        P2[" Particle 2: In valley"]
+        P3[" Particle 3: On slope"]
         P4["They explore terrain<br/>toward best spot"]
     end
 
@@ -576,15 +576,15 @@ PSO is like birds flocking toward the best feeding ground!
 ```{mermaid}
 graph TB
     subgraph DIP["Physical System"]
-        Cart["🚗 Cart<br/>Moves left/right<br/>x(t)"]
-        P1["⚙️ Pendulum 1<br/>Attached to cart<br/>θ₁(t)"]
-        P2["⚙️ Pendulum 2<br/>On top of P1<br/>θ₂(t)"]
-        Motor["⚡ Motor<br/>Applies force to cart<br/>u(t)"]
+        Cart[" Cart<br/>Moves left/right<br/>x(t)"]
+        P1[" Pendulum 1<br/>Attached to cart<br/>θ₁(t)"]
+        P2[" Pendulum 2<br/>On top of P1<br/>θ₂(t)"]
+        Motor[" Motor<br/>Applies force to cart<br/>u(t)"]
     end
 
     subgraph Control["Control System"]
-        Sensors["📍 Sensors<br/>Measure x, θ₁, θ₂"]
-        Controller["🧠 Controller<br/>Computes u(t)"]
+        Sensors[" Sensors<br/>Measure x, θ₁, θ₂"]
+        Controller[" Controller<br/>Computes u(t)"]
     end
 
     Motor --> Cart
@@ -638,11 +638,11 @@ graph TB
 
 ```{mermaid}
 graph LR
-    A["⚡ Motor<br/>Electrical Energy<br/>P = u·i<br/>Input Power"]
-    B["🏃 Motion<br/>Kinetic Energy<br/>T = ½mv²<br/>Cart & pendulum velocity"]
-    C["📏 Position<br/>Potential Energy<br/>V = mgh<br/>Height of pendulums"]
-    D["🔥 Heat<br/>Friction Losses<br/>P_friction = bv²<br/>Lost to air & bearings"]
-    E["🎯 Control<br/>Work Done by Motor<br/>W = ∫u·v dt<br/>Maintains motion"]
+    A[" Motor<br/>Electrical Energy<br/>P = u·i<br/>Input Power"]
+    B[" Motion<br/>Kinetic Energy<br/>T = ½mv²<br/>Cart & pendulum velocity"]
+    C[" Position<br/>Potential Energy<br/>V = mgh<br/>Height of pendulums"]
+    D[" Heat<br/>Friction Losses<br/>P_friction = bv²<br/>Lost to air & bearings"]
+    E[" Control<br/>Work Done by Motor<br/>W = ∫u·v dt<br/>Maintains motion"]
 
     A --> B
     A --> E
@@ -797,14 +797,14 @@ This is your **experimental loop**: Try → Observe → Modify → Repeat
 flowchart TD
     A["Plot Shows<br/>State over time"]
     B{"System stable?<br/>No wild oscillations?"}
-    B -->|No| C["❌ System unstable<br/>Increase gains"]
+    B -->|No| C[" System unstable<br/>Increase gains"]
     B -->|Yes| D{"Smooth convergence?<br/>No ringing?"}
-    D -->|No| E["⚠️ Overshoot/oscillation<br/>Decrease gains or increase damping"]
+    D -->|No| E[" Overshoot/oscillation<br/>Decrease gains or increase damping"]
     D -->|Yes| F{"Reaches goal?<br/>Within tolerance?"}
-    F -->|No| G["❌ Poor tracking<br/>Adjust control law"]
+    F -->|No| G[" Poor tracking<br/>Adjust control law"]
     F -->|Yes| H["Settling time ok?<br/>Within 2 seconds?"]
-    H -->|No| I["⚠️ Slow response<br/>Increase controller speed"]
-    H -->|Yes| J["✅ Good control!<br/>Keep these gains"]
+    H -->|No| I[" Slow response<br/>Increase controller speed"]
+    H -->|Yes| J[" Good control!<br/>Keep these gains"]
 
     style J fill:#d1fae5
     style C fill:#fee2e2
@@ -846,10 +846,10 @@ Use this flowchart to diagnose what's wrong when control looks bad!
 ```{mermaid}
 graph TB
     subgraph metrics["Performance Metrics"]
-        RT["⏱️ Response Time<br/>How fast system reacts<br/>Faster = Better control<br/>Trade-off: May cause overshoot"]
-        OS["📈 Overshoot<br/>Peak above target<br/>High overshoot = Oscillation<br/>Should be < 5-20%"]
-        ST["📊 Settling Time<br/>Time to stabilize at goal<br/>Typically 1-3 seconds<br/>Depends on system speed"]
-        SSE["📍 Steady-State Error<br/>Final difference from goal<br/>Should be < 1% of range<br/>Zero with integral action"]
+        RT["⏱ Response Time<br/>How fast system reacts<br/>Faster = Better control<br/>Trade-off: May cause overshoot"]
+        OS[" Overshoot<br/>Peak above target<br/>High overshoot = Oscillation<br/>Should be < 5-20%"]
+        ST[" Settling Time<br/>Time to stabilize at goal<br/>Typically 1-3 seconds<br/>Depends on system speed"]
+        SSE[" Steady-State Error<br/>Final difference from goal<br/>Should be < 1% of range<br/>Zero with integral action"]
     end
 
     subgraph tradeoffs["Trade-offs"]
@@ -906,11 +906,11 @@ flowchart TD
     C["Measure Performance<br/>response time, overshoot, error"]
     D["Compare to Goals<br/>Is it good enough?"]
     E{"Acceptable?"}
-    E -->|Yes| F["✅ Keep these gains<br/>Excellent control!"]
+    E -->|Yes| F[" Keep these gains<br/>Excellent control!"]
     E -->|No| G{"What's wrong?"}
-    G -->|Unstable| H["🔴 Decrease gains"]
-    G -->|Slow| I["🟢 Increase gains"]
-    G -->|Oscillating| J["🟡 Smooth transitions<br/>Increase damping"]
+    G -->|Unstable| H[" Decrease gains"]
+    G -->|Slow| I[" Increase gains"]
+    G -->|Oscillating| J[" Smooth transitions<br/>Increase damping"]
     H --> K["Adjust K values<br/>in config.yaml"]
     I --> K
     J --> K
@@ -1197,19 +1197,19 @@ Choose based on your interests and career goals!
 
 ### Completion Badges
 **Location**: End of each sub-phase section
-**Example**: After completing 1.1, badge shows "✓ Computing Basics (4 hours)"
+**Example**: After completing 1.1, badge shows " Computing Basics (4 hours)"
 
 **Format**:
 ```markdown
 ::::{grid}
 :::{grid-item}
-✓ **1.1 Computing Basics** (4/40 hours)
+ **1.1 Computing Basics** (4/40 hours)
 :::
 :::{grid-item}
-✓ **1.2 Python Fundamentals** (20/40 hours)
+ **1.2 Python Fundamentals** (20/40 hours)
 :::
 :::{grid-item}
-○ **1.3 Environment Setup** (3/40 hours)
+ **1.3 Environment Setup** (3/40 hours)
 :::
 ::::
 ```

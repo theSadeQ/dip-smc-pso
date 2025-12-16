@@ -249,7 +249,7 @@ c = a.view()       # Shallow copy
 d = a.copy()
 ```
 
-**⚠️ Important**: Slices are views, not copies!
+** Important**: Slices are views, not copies!
 
 ```python
 a = np.array([1, 2, 3, 4, 5])

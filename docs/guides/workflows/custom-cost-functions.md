@@ -769,6 +769,6 @@ cost = max([cost_scenario1, cost_scenario2, ...])
 **Replaces:** custom-cost-functions.md stub (2025-10-07, 51 lines)
 **Changelog:**
 - 2025-11-10: Complete rewrite from stub to production guide (51 → 650+ lines)
-- Added 6 comprehensive sections on cost function design
+- Added 6 complete sections on cost function design
 - Included multi-objective optimization, penalty functions, case studies
 - Provided implementation templates, testing strategies, best practices

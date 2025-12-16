@@ -12,7 +12,7 @@ Enhances existing API reference documentation with:
 - Mermaid architecture diagrams
 - Performance notes
 
-This script reads existing auto-generated docs and inserts comprehensive explanations.
+This script reads existing auto-generated docs and inserts complete explanations.
 
 Usage:
     python scripts/docs/enhance_api_docs.py --file docs/reference/controllers/smc_algorithms_classical_controller.md
@@ -41,7 +41,7 @@ class EnhancementConfig:
 
 
 class APIDocEnhancer:
-    """Enhances existing API documentation with comprehensive content."""
+    """Enhances existing API documentation with complete content."""
 
     # High-priority files that need most detailed enhancements
     HIGH_PRIORITY_FILES = [
@@ -1911,7 +1911,7 @@ graph TD
    - **ANOVA**: Test for significant differences
    - **Pairwise tests**: Identify specific differences (with Bonferroni correction)
    - **Pareto ranking**: Multi-objective dominance analysis
-4. Generate comprehensive benchmark report
+4. Generate complete benchmark report
 
 **Output Includes:**
 - Statistical significance (p-values)
@@ -2227,7 +2227,7 @@ result = run_simulation(
     dt=0.01
 )
 
-# Compute comprehensive metrics
+# Compute complete metrics
 metrics = compute_all_metrics(
     t=result.time,
     x=result.states,
@@ -2845,9 +2845,9 @@ graph TD
 - **Typical Execution Time**: 0.05-0.1ms per iteration
 
 ### Real-Time Suitability
-- ✅ Suitable for control loops up to 1kHz
-- ✅ Deterministic execution time
-- ✅ No dynamic memory allocation in control loop
+-  Suitable for control loops up to 1kHz
+-  Deterministic execution time
+-  No dynamic memory allocation in control loop
 
 ### Optimization Tips
 - Pre-compute constant matrices in initialization

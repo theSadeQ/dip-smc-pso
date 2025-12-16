@@ -1,5 +1,5 @@
 """
-MT-8 Report Generator: Create Comprehensive Disturbance Rejection Report
+MT-8 Report Generator: Create complete Disturbance Rejection Report
 
 Generates a complete markdown report comparing baseline and robust PSO performance:
 - Executive summary with key improvements

@@ -124,7 +124,7 @@ class PhasePortraitDirective(SphinxDirective):
         # Title
         html_parts.append(f'''
 <div class="mathviz-header">
-    <strong>📈 {html_module.escape(title)}</strong>
+    <strong> {html_module.escape(title)}</strong>
     <span class="mathviz-badge">Phase Portrait</span>
 </div>
         ''')
@@ -150,10 +150,10 @@ class PhasePortraitDirective(SphinxDirective):
         html_parts.append('''
 <div class="mathviz-controls">
     <button class="mathviz-btn" onclick="MathViz.resetView(this)">
-        🔄 Reset View
+         Reset View
     </button>
     <button class="mathviz-btn" onclick="MathViz.exportPlot(this)">
-        📥 Export PNG
+         Export PNG
     </button>
     <label class="mathviz-toggle">
         <input type="checkbox" onchange="MathViz.toggleVectorField(this)" checked>
@@ -166,7 +166,7 @@ class PhasePortraitDirective(SphinxDirective):
         html_parts.append(f'''
 <div class="mathviz-info">
     <small>
-        💡 <strong>Interactive Phase Portrait:</strong>
+         <strong>Interactive Phase Portrait:</strong>
         Drag to pan, scroll to zoom. Shows system evolution from initial state
         <code>{html_module.escape(initial_state)}</code>.
     </small>
@@ -254,7 +254,7 @@ class LyapunovSurfaceDirective(SphinxDirective):
         # Title with equation
         html_parts.append(f'''
 <div class="mathviz-header">
-    <strong>🎯 {html_module.escape(title)}</strong>
+    <strong> {html_module.escape(title)}</strong>
     <span class="mathviz-equation">{html_module.escape(function)}</span>
 </div>
         ''')
@@ -276,10 +276,10 @@ class LyapunovSurfaceDirective(SphinxDirective):
         html_parts.append('''
 <div class="mathviz-controls">
     <button class="mathviz-btn" onclick="MathViz.rotate3D(this, 'reset')">
-        🔄 Reset View
+         Reset View
     </button>
     <button class="mathviz-btn" onclick="MathViz.toggleProjection(this)">
-        📐 Toggle Projection
+         Toggle Projection
     </button>
     <label class="mathviz-toggle">
         <input type="checkbox" onchange="MathViz.toggleLevelCurves(this)" checked>
@@ -292,7 +292,7 @@ class LyapunovSurfaceDirective(SphinxDirective):
         html_parts.append(f'''
 <div class="mathviz-info">
     <small>
-        💡 <strong>Lyapunov "Energy Bowl":</strong>
+         <strong>Lyapunov "Energy Bowl":</strong>
         Function <code>{html_module.escape(function)}</code> always decreases along trajectories (V̇ < 0),
         proving convergence to equilibrium at the bottom of the bowl.
     </small>
@@ -387,7 +387,7 @@ class StabilityRegionDirective(SphinxDirective):
         # Title
         html_parts.append(f'''
 <div class="mathviz-header">
-    <strong>🎯 {html_module.escape(title)}</strong>
+    <strong> {html_module.escape(title)}</strong>
     <span class="mathviz-badge">Stability Analysis</span>
 </div>
         ''')
@@ -419,7 +419,7 @@ class StabilityRegionDirective(SphinxDirective):
         </select>
     </label>
     <button class="mathviz-btn" onclick="MathViz.exportPlot(this)">
-        📥 Export
+         Export
     </button>
 </div>
         ''')
@@ -428,7 +428,7 @@ class StabilityRegionDirective(SphinxDirective):
         html_parts.append(f'''
 <div class="mathviz-info">
     <small>
-        💡 <strong>Parameter Stability Map:</strong>
+         <strong>Parameter Stability Map:</strong>
         Green regions = stable/good performance, Red regions = unstable/poor performance.
         Hover to see exact {html_module.escape(metric)} values at each parameter combination.
     </small>
@@ -512,7 +512,7 @@ class SlidingSurfaceDirective(SphinxDirective):
         # Title
         html_parts.append(f'''
 <div class="mathviz-header">
-    <strong>📐 {html_module.escape(title)}</strong>
+    <strong> {html_module.escape(title)}</strong>
     <span class="mathviz-equation">s = k₁θ₁ + k₂θ̇₁ + λ₁θ₂ + λ₂θ̇₂ = 0</span>
 </div>
         ''')
@@ -551,7 +551,7 @@ class SlidingSurfaceDirective(SphinxDirective):
         html_parts.append(f'''
 <div class="mathviz-info">
     <small>
-        💡 <strong>SMC Two-Phase Operation:</strong>
+         <strong>SMC Two-Phase Operation:</strong>
         Trajectories start off-surface (red), reach surface (green line), then slide to equilibrium.
         Boundary layer (yellow band) prevents chattering: ε = {html_module.escape(boundary_layer)}.
     </small>
@@ -635,7 +635,7 @@ class ControlSignalDirective(SphinxDirective):
         # Title
         html_parts.append(f'''
 <div class="mathviz-header">
-    <strong>⚡ {html_module.escape(title)}</strong>
+    <strong> {html_module.escape(title)}</strong>
     <span class="mathviz-badge">{html_module.escape(controller_type.replace('_', ' ').title())}</span>
 </div>
         ''')
@@ -674,7 +674,7 @@ class ControlSignalDirective(SphinxDirective):
         html_parts.append('''
 <div class="mathviz-info">
     <small>
-        💡 <strong>Control Effort Analysis:</strong>
+         <strong>Control Effort Analysis:</strong>
         Classical SMC shows chattering (high-frequency switching).
         Super-Twisting provides smooth control. Compare RMS values and frequency content.
     </small>
@@ -761,7 +761,7 @@ class ParameterSweepDirective(SphinxDirective):
         # Title
         html_parts.append(f'''
 <div class="mathviz-header">
-    <strong>🔬 {html_module.escape(title)}</strong>
+    <strong> {html_module.escape(title)}</strong>
     <span class="mathviz-badge">Parameter Optimization</span>
 </div>
         ''')
@@ -791,10 +791,10 @@ class ParameterSweepDirective(SphinxDirective):
         </select>
     </label>
     <button class="mathviz-btn" onclick="MathViz.findOptimal(this)">
-        🎯 Find Optimal
+         Find Optimal
     </button>
     <button class="mathviz-btn" onclick="MathViz.exportPlot(this)">
-        📥 Export
+         Export
     </button>
 </div>
         ''')
@@ -803,8 +803,8 @@ class ParameterSweepDirective(SphinxDirective):
         html_parts.append(f'''
 <div class="mathviz-info">
     <small>
-        💡 <strong>Parameter Space Exploration:</strong>
-        Darker blue = better {html_module.escape(metric)}. Optimal point marked with ⭐.
+         <strong>Parameter Space Exploration:</strong>
+        Darker blue = better {html_module.escape(metric)}. Optimal point marked with .
         Use for PSO initialization or manual gain tuning.
     </small>
 </div>

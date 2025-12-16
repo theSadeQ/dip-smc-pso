@@ -99,10 +99,10 @@ difference with adaptive perturbations.
 A continuous‑time dynamics function ``f(x,u)`` is linearised as
 ``xdot ≈ A (x - x_eq) + B (u - u_eq) + f(x_eq,u_eq)``.  Central
 differences are second‑order accurate and reduce truncation error
-relative to one‑sided (forward) differences【738473614585036†L239-L256】.
+relative to one‑sided (forward) differences738473614585036†L239-L256.
 The perturbation for each state is scaled to the magnitude of
 ``x_eq[i]`` with a floor ``eps``.  This adaptive scaling balances
-rounding and truncation errors【738473614585036†L239-L256】.
+rounding and truncation errors738473614585036†L239-L256.
 
 Parameters
 ----------

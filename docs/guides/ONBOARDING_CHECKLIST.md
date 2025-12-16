@@ -87,7 +87,7 @@ This checklist provides structured onboarding paths for different user types. Tr
 
 ### Phase 4: Research Execution (20-40 hours, project-specific)
 
-- [ ] **Run Comprehensive Benchmarks**
+- [ ] **Run complete Benchmarks**
   - Implement benchmark scripts
   - Run Monte Carlo analysis (N=500+)
   - Collect performance metrics
@@ -388,4 +388,4 @@ This checklist provides structured onboarding paths for different user types. Tr
 
 ---
 
-**Congratulations on starting your DIP-SMC-PSO journey!** Follow your track systematically, and you'll be proficient in no time.
+**Congratulations on starting your DIP-SMC-PSO journey!** Follow your track systematically, and the system will be proficient in no time.

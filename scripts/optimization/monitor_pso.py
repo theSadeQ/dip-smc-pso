@@ -80,7 +80,7 @@ def main():
                 progress = current / 150 * 100
                 bar_len = 30
                 filled = int(bar_len * progress / 100)
-                bar = '█' * filled + '░' * (bar_len - filled)
+                bar = '' * filled + '' * (bar_len - filled)
 
                 # Calculate ETA
                 if start_time and current > 0:

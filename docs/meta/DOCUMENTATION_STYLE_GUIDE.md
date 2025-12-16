@@ -8,7 +8,7 @@
 
 ## Purpose
 
-This guide defines professional writing standards for the DIP-SMC-PSO project documentation based on lessons learned from comprehensive quality audits. Following these standards ensures documentation sounds human-written, professional, and technically accurate.
+This guide defines professional writing standards for the DIP-SMC-PSO project documentation based on lessons learned from complete quality audits. Following these standards ensures documentation sounds human-written, professional, and technically accurate.
 
 
 
@@ -26,20 +26,20 @@ This guide defines professional writing standards for the DIP-SMC-PSO project do
 
 ### Greeting & Conversational Language
 
-❌ **DO NOT USE:**
-- "Let's explore...", "Let us examine..."
+ **DO NOT USE:**
+- "explore...", "Let us examine..."
 - "You'll love..."
 - "In this section we will..."
 - "Now let's look at..."
 
-✅ **USE INSTEAD:**
+ **USE INSTEAD:**
 - Direct topic sentence: "The PSO optimizer minimizes..."
 - "This section covers..."
 - "The following demonstrates..."
 
 ### Enthusiasm & Marketing Buzzwords
 
-❌ **DO NOT USE:**
+ **DO NOT USE:**
 - "framework" (unless backed by metrics)
 - "capabilities"
 - "integration"
@@ -47,7 +47,7 @@ This guide defines professional writing standards for the DIP-SMC-PSO project do
 - "state-of-the-art" (without citations)
 - "reliable implementation" (use specific reliability features)
 
-✅ **USE INSTEAD:**
+ **USE INSTEAD:**
 - "framework" (let features speak)
 - List specific capabilities
 - "integration" (describe, don't hype)
@@ -57,21 +57,21 @@ This guide defines professional writing standards for the DIP-SMC-PSO project do
 
 ### Hedge Words
 
-❌ **DO NOT USE:**
-- "use the power of" → ✅ "use"
-- "use the optimizer" → ✅ "use the optimizer"
-- "examine the details" → ✅ "examine", "analyze"
-- "enable testing" → ✅ "enables testing" or be specific
+ **DO NOT USE:**
+- "use the power of" →  "use"
+- "use the optimizer" →  "use the optimizer"
+- "examine the details" →  "examine", "analyze"
+- "enable testing" →  "enables testing" or be specific
 
 ### Unnecessary Transitions
 
-❌ **DO NOT USE:**
+ **DO NOT USE:**
 - "..." (redundant)
 - "It's worth noting that..." (remove or integrate)
 - "Additionally, it should be mentioned..." (verbose)
 - "Furthermore, we observe that..." (simplify)
 
-✅ **USE INSTEAD:**
+ **USE INSTEAD:**
 - Remove entirely or state directly
 - "The results show..."
 - "Additionally," (shorter)
@@ -97,14 +97,14 @@ through velocity updates guided by personal best and global best positions.
 ### BAD: AI-ish Description
 
 ```
-This section covers the powerful PSO optimizer with its comprehensive capabilities!
+This section covers the effective PSO optimizer with its complete capabilities!
 how seamlessly it uses particle swarm dynamics
 to deliver amazing optimization results through techniques (see references)!
 ```
 
 **Why this fails:**
 - Conversational greeting ("Let's")
-- Marketing buzzwords ("powerful", "comprehensive", "seamless", "cutting-edge")
+- Marketing buzzwords ("effective", "complete", "seamless", "current")
 - No specific technical information
 - Over-enthusiastic tone
 
@@ -129,9 +129,9 @@ Controller gains are tuned using the following procedure:
 ### BAD: AI-ish Procedure
 
 ```
-In this comprehensive section, we will examine the exciting world of
+In this complete section, we will examine the exciting world of
 controller tuning! our robust framework facilitates
-parameter optimization through powerful PSO techniques that uses advanced capabilities.
+parameter optimization through effective PSO techniques that uses advanced capabilities.
 ```
 
 **Why this fails:**
@@ -160,7 +160,7 @@ Performance validated across 10,000 Monte Carlo trials.
 ### BAD: AI-ish Claims
 
 ```
-Our novel adaptive SMC delivers amazing performance with settling times and accuracy through powerful control algorithms!
+Our novel adaptive SMC delivers amazing performance with settling times and accuracy through effective control algorithms!
 ```
 
 **Why this fails:**
@@ -175,7 +175,7 @@ Our novel adaptive SMC delivers amazing performance with settling times and accu
 ### Getting Started Guides
 
 **Replace:**
-- "Let's get started with..."
+- "get started with..."
 - "how easy it is to..."
 
 **With:**
@@ -186,7 +186,7 @@ Our novel adaptive SMC delivers amazing performance with settling times and accu
 
 **Replace:**
 - "In this tutorial, we will explore..."
-- "Let's learn how to..."
+- "learn how to..."
 
 **With:**
 - "This tutorial demonstrates PSO parameter tuning."
@@ -241,7 +241,7 @@ for η > 0 (Utkin, 1992).
 These terms are acceptable when used in proper technical context:
 
 - **"robust control"** - Formal control theory term (H∞ robustness, μ-synthesis)
-- **"comprehensive test coverage: 95%"** - Backed by metrics
+- **"complete test coverage: 95%"** - Backed by metrics
 - **"enable logging"** - Software configuration terminology
 - **"advanced MPC"** - Distinguishing from basic variants
 
@@ -253,7 +253,7 @@ In interactive tutorial contexts (Jupyter notebooks, live demos):
 
 ```python
 # Interactive Jupyter notebook cell
-# Let's run a quick simulation to see the controller response
+# run a quick simulation to see the controller response
 result = simulate(controller, duration=5.0)
 plot(result)
 ```
@@ -266,7 +266,7 @@ This mirrors natural teaching flow in interactive environments.
 
 | AI-ish Pattern | Professional Alternative |
 |----------------|-------------------------|
-| "Let's explore..." | "The following section covers..." |
+| "explore..." | "The following section covers..." |
 | "framework" | "framework" (show features) |
 | "capabilities" | List specific capabilities |
 | "integration" | "integration" |
@@ -286,7 +286,7 @@ This mirrors natural teaching flow in interactive environments.
 Before committing documentation:
 
 - [ ] No greeting language ("Let's", "Welcome")
-- [ ] No marketing buzzwords ("seamless", "cutting-edge", "revolutionary")
+- [ ] No marketing buzzwords ("seamless", "current", "revolutionary")
 - [ ] No hedge words ("leverage", "utilize", "examine")
 - [ ] No unnecessary transitions ("")
 - [ ] Direct, factual statements
@@ -315,11 +315,11 @@ Before committing documentation:
 
 Documentation must achieve:
 
-- ✅ AI-ish phrase frequency: <10% of October 2025 baseline
-- ✅ Tone consistency: 95%+ professional, human-written sound
-- ✅ Technical accuracy: Zero regressions
-- ✅ Readability: Flesch-Kincaid maintained or improved
-- ✅ Peer review standard: "Sounds human-written, professional"
+-  AI-ish phrase frequency: <10% of October 2025 baseline
+-  Tone consistency: 95%+ professional, human-written sound
+-  Technical accuracy: Zero regressions
+-  Readability: Flesch-Kincaid maintained or improved
+-  Peer review standard: "Sounds human-written, professional"
 
 
 

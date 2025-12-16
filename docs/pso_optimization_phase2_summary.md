@@ -241,7 +241,7 @@ Phase 2 PSO optimization successfully diagnosed and fixed critical issues causin
 
 ### Controller 1: Adaptive SMC (EXCELLENT)
 
-**Status:** ✅ SUCCESS
+**Status:**  SUCCESS
 
 **Cost:** 1e-06 (minimum cost floor - essentially perfect!)
 
@@ -277,7 +277,7 @@ K3 =  5.98  (position gain 3)
 
 ### Controller 2: STA-SMC (Functional)
 
-**Status:** ⚠️ FUNCTIONAL (needs improvement)
+**Status:**  FUNCTIONAL (needs improvement)
 
 **Cost:** 92.52
 
@@ -300,7 +300,7 @@ K_λ2   =  0.05 (super-twisting gain 2 - at lower bound)
 
 ### Controller 3: Hybrid Adaptive STA-SMC (Failed in Old Run)
 
-**Status:** ❌ FAILED (controller not recognized in old PSO run)
+**Status:**  FAILED (controller not recognized in old PSO run)
 
 **Cost:** 1300.0 (instability penalty)
 
@@ -381,7 +381,7 @@ K2 = 2.09
 
 ### Immediate Actions
 
-1. **✅ Commit Phase 1 & 2 Work** (DONE)
+1. ** Commit Phase 1 & 2 Work** (DONE)
    - Diagnostic scripts
    - PSO optimization results
    - Documentation
@@ -557,7 +557,7 @@ Status: Phase 1 & 2 COMPLETE | Adaptive SMC EXCELLENT (1e-06)
 
 ### Phase 1.3: Baseline Warm-Start Quality Tests - COMPLETED
 
-**Status:** ⚠️ 1 PASS, 2 FAIL
+**Status:**  1 PASS, 2 FAIL
 
 #### Test 1: MT-8 vs Config Baseline Quality
 - **Status:** FAIL
@@ -584,7 +584,7 @@ Status: Phase 1 & 2 COMPLETE | Adaptive SMC EXCELLENT (1e-06)
 
 ### Phase 1.4: PSO Hyperparameters Sphere Test - COMPLETED
 
-**Status:** ✅ 2 PASS, 1 FAIL
+**Status:**  2 PASS, 1 FAIL
 
 #### Test 1: Sphere Function Convergence
 - **Status:** PASS
@@ -629,10 +629,10 @@ Status: Phase 1 & 2 COMPLETE | Adaptive SMC EXCELLENT (1e-06)
 
 ### PSO Algorithm Validation
 
-- ✅ Converges correctly on sphere function (0.0024 in 50 iterations)
-- ✅ 25 particles adequate for 6D problems
-- ✅ Bound width reasonable (narrow doesn't help much)
-- ⚠️ MT-8 warm-start only beats 83% of random (not 95%)
+-  Converges correctly on sphere function (0.0024 in 50 iterations)
+-  25 particles adequate for 6D problems
+-  Bound width reasonable (narrow doesn't help much)
+-  MT-8 warm-start only beats 83% of random (not 95%)
 
 ---
 
@@ -640,7 +640,7 @@ Status: Phase 1 & 2 COMPLETE | Adaptive SMC EXCELLENT (1e-06)
 
 ### Immediate Actions
 
-1. **✅ Phase 1 & 2 Complete** - All diagnostic tests run, fixes applied
+1. ** Phase 1 & 2 Complete** - All diagnostic tests run, fixes applied
 2. **Re-optimize STA-SMC** with one of:
    - Option A: Widen K1 bounds (30 → 50) and increase iterations (150 → 300)
    - Option B: Try different PSO hyperparameters (w=0.9 fixed, c1=c2=2.0)
@@ -696,12 +696,12 @@ Status: Phase 1 & 2 COMPLETE | Adaptive SMC EXCELLENT (1e-06)
 
 | Metric | Value | Target | Status |
 |--------|-------|--------|--------|
-| MT-8 STA-SMC Cost | 105.74 | <30 | ⚠️ High |
-| MT-8 vs Random Rank | 17th percentile | <20% | ✅ Pass |
-| Initial Swarm Best | 66.00 | <50 | ⚠️ Marginal |
-| PSO Sphere Final | 0.0024 | <0.01 | ✅ Pass |
-| Narrow Bounds Speedup | 10.7% | >30% | ⚠️ Low |
-| 25 vs 40 Particles | 0% improvement | <10% | ✅ Adequate |
+| MT-8 STA-SMC Cost | 105.74 | <30 |  High |
+| MT-8 vs Random Rank | 17th percentile | <20% |  Pass |
+| Initial Swarm Best | 66.00 | <50 |  Marginal |
+| PSO Sphere Final | 0.0024 | <0.01 |  Pass |
+| Narrow Bounds Speedup | 10.7% | >30% |  Low |
+| 25 vs 40 Particles | 0% improvement | <10% |  Adequate |
 
 ---
 

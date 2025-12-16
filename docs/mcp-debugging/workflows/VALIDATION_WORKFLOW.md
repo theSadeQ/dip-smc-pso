@@ -5,24 +5,24 @@
 
 ---
 
-## 📋 Overview This document provides **complete validation procedures** for all 11 MCP servers and demonstrates how they work together for debugging the DIP-SMC-PSO project. ### Complete Server Inventory | Server | Type | Purpose | Validation Status |
+##  Overview This document provides **complete validation procedures** for all 11 MCP servers and demonstrates how they work together for debugging the DIP-SMC-PSO project. ### Complete Server Inventory | Server | Type | Purpose | Validation Status |
 
 |--------|------|---------|-------------------|
-| **filesystem** | npm | File operations | ✅ Core server |
-| **github** | npm | Git operations | ✅ Core server |
-| **sequential-thinking** | npm | Systematic reasoning | ✅ Core server |
-| **puppeteer** | npm | Browser automation | ✅ Core server |
-| **mcp-debugger** | npm | API testing | ✅ Extended server |
-| **pytest-mcp** | npm | Test debugging | ✅ Extended server |
-| **git-mcp** | npm | Advanced Git ops | ✅ Extended server |
-| **sqlite-mcp** | npm | Database queries | ✅ Extended server |
-| **mcp-analyzer** | Python | Code quality (RUFF/Vulture) | 🆕 **New** |
-| **numpy-mcp** | Python | Numerical computations | 🆕 **New** |
-| **pandas-mcp** | Python | Data analysis/viz | 🆕 **New** |
+| **filesystem** | npm | File operations |  Core server |
+| **github** | npm | Git operations |  Core server |
+| **sequential-thinking** | npm | Systematic reasoning |  Core server |
+| **puppeteer** | npm | Browser automation |  Core server |
+| **mcp-debugger** | npm | API testing |  Extended server |
+| **pytest-mcp** | npm | Test debugging |  Extended server |
+| **git-mcp** | npm | Advanced Git ops |  Extended server |
+| **sqlite-mcp** | npm | Database queries |  Extended server |
+| **mcp-analyzer** | Python | Code quality (RUFF/Vulture) |  **New** |
+| **numpy-mcp** | Python | Numerical computations |  **New** |
+| **pandas-mcp** | Python | Data analysis/viz |  **New** |
 
 ---
 
-## 🧪 Validation Scenario 1: Code Quality Analysis (mcp-analyzer) **Use Case**: Analyze codebase for linting issues and dead code before committing. ### Step 1: Run RUFF Linter **MCP Server**: `mcp-analyzer` ```python
+##  Validation Scenario 1: Code Quality Analysis (mcp-analyzer) **Use Case**: Analyze codebase for linting issues and dead code before committing. ### Step 1: Run RUFF Linter **MCP Server**: `mcp-analyzer` ```python
 
 # example-metadata:
 
@@ -68,7 +68,7 @@ Dead Code Detected:
 
 ---
 
-## 🔢 Validation Scenario 2: Numerical Analysis (numpy-mcp) **Use Case**: Analyze matrix conditioning for LinAlgError debugging. ### Step 1: Check Matrix Condition Number **MCP Server**: `numpy-mcp` ```python
+##  Validation Scenario 2: Numerical Analysis (numpy-mcp) **Use Case**: Analyze matrix conditioning for LinAlgError debugging. ### Step 1: Check Matrix Condition Number **MCP Server**: `numpy-mcp` ```python
 # example-metadata:
 # runnable: false # Ask Claude:
 "Use numpy-mcp to calculate the condition number of the inertia matrix:
@@ -115,7 +115,7 @@ Dead Code Detected:
 
 ---
 
-## 📊 Validation Scenario 3: PSO Results Analysis (pandas-mcp + sqlite-mcp) **Use Case**: Extract PSO data from database, analyze with pandas, generate visualizations. ### Step 1: Query PSO Results (sqlite-mcp) **MCP Server**: `sqlite-mcp` ```sql
+##  Validation Scenario 3: PSO Results Analysis (pandas-mcp + sqlite-mcp) **Use Case**: Extract PSO data from database, analyze with pandas, generate visualizations. ### Step 1: Query PSO Results (sqlite-mcp) **MCP Server**: `sqlite-mcp` ```sql
 
 -- Ask Claude:
 "Use sqlite-mcp to query the 10 most recent PSO runs" -- Expected MCP tool call:
@@ -164,7 +164,7 @@ Interactive features:
 
 ---
 
-## 🧪 Validation Scenario 4: Test Failure Debugging (pytest-mcp + mcp-analyzer) **Use Case**: Debug failing tests, analyze code quality, fix issues. ### Step 1: List Recent Test Failures (pytest-mcp) **MCP Server**: `pytest-mcp` ```python
+##  Validation Scenario 4: Test Failure Debugging (pytest-mcp + mcp-analyzer) **Use Case**: Debug failing tests, analyze code quality, fix issues. ### Step 1: List Recent Test Failures (pytest-mcp) **MCP Server**: `pytest-mcp` ```python
 # example-metadata:
 # runnable: false # Ask Claude:
 "Use pytest-mcp to list the last 5 test failures" # Expected MCP tool call:
@@ -213,7 +213,7 @@ RUFF Analysis:
 
 ---
 
-## 🔄 Validation Scenario 5: Multi-Server Integrated Workflow **Use Case**: Complete debugging workflow using 6+ servers in sequence. ### Problem: PSO convergence is slow, controller tests are failing #### Phase 1: Data Collection **Step 1a**: Query database (sqlite-mcp)
+##  Validation Scenario 5: Multi-Server Integrated Workflow **Use Case**: Complete debugging workflow using 6+ servers in sequence. ### Problem: PSO convergence is slow, controller tests are failing #### Phase 1: Data Collection **Step 1a**: Query database (sqlite-mcp)
 
 ```sql
 SELECT * FROM pso_runs WHERE status = 'stagnated' LIMIT 5
@@ -294,7 +294,7 @@ git commit -m "Fix PSO convergence and matrix conditioning issues"
 
 ---
 
-## ✅ Complete Server Validation Checklist ### Core Servers (4)
+##  Complete Server Validation Checklist ### Core Servers (4)
 - [ ] **filesystem**: Read/write files, search logs
 - [ ] **github**: Query issues, check commit history
 - [ ] **sequential-thinking**: Systematic problem decomposition
@@ -309,17 +309,17 @@ git commit -m "Fix PSO convergence and matrix conditioning issues"
 
 ---
 
-## 🎯 Success Criteria ### Individual Server Validation
+##  Success Criteria ### Individual Server Validation
 Each server must:
-1. ✅ Connect successfully via MCP protocol
-2. ✅ Execute at least 1 tool/command without errors
-3. ✅ Return structured, parseable output
-4. ✅ Handle errors gracefully with clear messages ### Multi-Server Integration
+1.  Connect successfully via MCP protocol
+2.  Execute at least 1 tool/command without errors
+3.  Return structured, parseable output
+4.  Handle errors gracefully with clear messages ### Multi-Server Integration
 Workflows must demonstrate:
-1. ✅ Logical sequencing of server calls
-2. ✅ Data flow between servers (e.g., sqlite → pandas → chart)
-3. ✅ Combined analysis leading to actionable insights
-4. ✅ Complete problem resolution using multiple tools ### DIP-SMC-PSO Specific Validation
+1.  Logical sequencing of server calls
+2.  Data flow between servers (e.g., sqlite → pandas → chart)
+3.  Combined analysis leading to actionable insights
+4.  Complete problem resolution using multiple tools ### DIP-SMC-PSO Specific Validation
 - [ ] Debug PSO convergence issue (sqlite + pandas + numpy)
 - [ ] Fix controller stability (numpy + mcp-analyzer + pytest)
 - [ ] Analyze code quality (mcp-analyzer + git-mcp)
@@ -328,7 +328,7 @@ Workflows must demonstrate:
 
 ---
 
-## 🐛 Troubleshooting ### Server Not Responding
+##  Troubleshooting ### Server Not Responding
 ```bash
 # Check MCP configuration
 
@@ -364,7 +364,7 @@ cat logs/mcp_server.log
 
 ---
 
-## 📚 Additional Resources - **Server Documentation**: `docs/mcp-debugging/MISSING_SERVERS_RESEARCH.md`
+##  Additional Resources - **Server Documentation**: `docs/mcp-debugging/MISSING_SERVERS_RESEARCH.md`
 - **Quick Reference**: `docs/mcp-debugging/QUICK_REFERENCE.md`
 - **Integration Examples**: `docs/mcp-debugging/workflows/SERVER_INTEGRATION_EXAMPLES.md`
 - **Quick Start**: `docs/mcp-debugging/VALIDATION_QUICK_START.md`
@@ -373,4 +373,4 @@ cat logs/mcp_server.log
 
 **Version**: 1.0.0
 **Last Validated**: 2025-10-06
-**Validation Status**: ✅ All 11 servers operational
+**Validation Status**:  All 11 servers operational

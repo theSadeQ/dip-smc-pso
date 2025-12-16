@@ -29,7 +29,7 @@ sliding‑mode algorithm.  The sliding surface
 uses positive weights ``c1, c2, λ1, λ2`` for the pendulum joints and
 optional cart gains ``k_c, λ_c``.  The default formulation uses **absolute
 coordinates** for the second pendulum (``θ2`` and ``θ̇2``) because this
-simplifies stability proofs【895515998216162†L326-L329】.  Setting
+simplifies stability proofs895515998216162†L326-L329.  Setting
 ``use_relative_surface=True`` switches to a **relative formulation**
 ``θ2−θ1`` and ``θ̇2−θ̇1`` that can decouple the pendula.  Exposing this
 toggle allows users to explore both designs without modifying code.
@@ -47,7 +47,7 @@ and the integral term ``u_int`` freezes.  External parameters
 ``k1_max`` and ``k2_max`` bound the adaptive gains to avoid runaway
 growth, and ``u_int_max`` limits the integral state.  Separating these
 bounds from the actuator saturation ``max_force`` preserves adaptation
-capability even when the actuator saturates【895515998216162†L326-L329】.
+capability even when the actuator saturates895515998216162†L326-L329.
 
 The model‑based equivalent control ``u_eq`` can reduce steady‑state
 error by cancelling nominal dynamics.  This implementation enables
@@ -59,18 +59,18 @@ both flags are provided, the alias takes precedence and a
 deprecation warning is emitted.  Earlier versions disabled the
 equivalent control by default; however, the revised design enables it
 because the second‑order sliding law and adaptive gain ensure
-robustness even with the model term【895515998216162†L326-L329】.
+robustness even with the model term895515998216162†L326-L329.
 
 **Gain and boundary relationships (F‑4.HybridController.4 / RC‑04)**:  The
 sliding‑surface coefficients ``c1``, ``c2``, ``λ1`` and ``λ2`` must be strictly
-positive to define a valid Lyapunov surface【OkstateThesis2013†L1415-L1419】.  The
+positive to define a valid Lyapunov surfaceOkstateThesis2013†L1415-L1419.  The
 soft saturation width ``sat_soft_width`` acts as a boundary layer for the
 continuous sign function and should not be smaller than the dead zone
 ``dead_zone``; choosing ``sat_soft_width ≥ dead_zone`` prevents chattering by
-ensuring the approximation remains smooth throughout the dead zone【OkstateThesis2013†L1415-L1419】.
+ensuring the approximation remains smooth throughout the dead zoneOkstateThesis2013†L1415-L1419.
 Initial adaptive gains ``k1_init`` and ``k2_init`` must lie within the
 prescribed maxima ``k1_max`` and ``k2_max`` to avoid runaway adaptation and
-guarantee that adaptation begins in a feasible region【OkstateThesis2013†L1415-L1419】.
+guarantee that adaptation begins in a feasible regionOkstateThesis2013†L1415-L1419.
 
 **Cart recentering hysteresis:**
 A PD term drives the cart back toward the origin when the cart

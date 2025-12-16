@@ -10,13 +10,13 @@ Stand in an empty room. Face north. Turn 90 degrees clockwise. You're now facing
 
 Now imagine a pendulum. As it swings, its angle changes over time. Plot angle versus time, you get a smooth wave - a cosine curve. That curve is a FUNCTION: time is the input, angle is the output.
 
-Today, we'll connect three mathematical concepts that are fundamental to control systems: functions (relationships between variables), graphing (visualizing those relationships), and trigonometry (the mathematics of angles and rotation). By the end, you'll see how sine and cosine aren't abstract formulas - they're descriptions of circular motion that appear everywhere in oscillating systems.
+Today, this will connect three mathematical concepts that are fundamental to control systems: functions (relationships between variables), graphing (visualizing those relationships), and trigonometry (the mathematics of angles and rotation). By the end, the system will see how sine and cosine aren't abstract formulas - they're descriptions of circular motion that appear everywhere in oscillating systems.
 
 ---
 
 ## What You'll Discover
 
-By listening to this episode, you'll learn:
+By listening to this episode, the system will learn:
 
 - Mathematical functions: definition and notation
 - Function properties: domain, range, input, output
@@ -291,7 +291,7 @@ Cosine is sine shifted left by 90 degrees (pi forward-slash 2 radians).
 
 ## Recap: Functions and Trigonometry
 
-Let's pause and review:
+pause and review:
 
 **Number one**: A function maps inputs to outputs. Notation: y equals f of x.
 
@@ -480,7 +480,7 @@ Understanding function shapes helps you:
 
 ## What's Next: Derivatives and Differential Equations
 
-In Episode 11 (the final episode of Phase 1), we'll tackle calculus concepts:
+In Episode 11 (the final episode of Phase 1), this will tackle calculus concepts:
 
 - What derivatives represent physically
 - Velocity as derivative of position

@@ -72,7 +72,7 @@ pendulum dynamics at an equilibrium point and to construct the
 controllability and observability matrices for a linear time‑invariant
 (LTI) system. The Kalman rank criterion states that an LTI system is
 controllable if and only if its controllability matrix has full rank
-equal to the number of state variables【920100172589331†L79-L84】. An
+equal to the number of state variables920100172589331†L79-L84. An
 analogous condition holds for observability. These functions aid in
 assessing whether a given linearised model is suitable for state‐space
 control or estimation design. ## Complete Source Code ```{literalinclude} ../../../src/analysis/performance/control_analysis.py
@@ -114,7 +114,7 @@ u_eq : float Equilibrium control input. Returns
 
 ### `controllability_matrix(A, B)` Construct the controllability matrix of an LTI system. For an ``n``‑state system described by matrices ``A`` and ``B``, the
 controllability matrix is defined as ``[B, AB, A^2B, …, A^{n-1}B]``.
-The system is controllable if this matrix has full row rank equal to ``n``【920100172589331†L79-L84】. Parameters
+The system is controllable if this matrix has full row rank equal to ``n``920100172589331†L79-L84. Parameters
 ----------
 A : np.ndarray State transition matrix of shape ``(n, n)``.
 B : np.ndarray Input matrix of shape ``(n, m)``. Returns
@@ -131,7 +131,7 @@ np.ndarray The controllability matrix of shape ``(n, n*m)``. #### Source Code ``
 , the observability
 
 matrix is ``[C; CA; CA^2; …; CA^{n-1}]``. The system is observable
-when this matrix has full column rank equal to ``n``【920100172589331†L79-L84】. Parameters
+when this matrix has full column rank equal to ``n``920100172589331†L79-L84. Parameters
 ----------
 A : np.ndarray State transition matrix of shape ``(n, n)``.
 C : np.ndarray Output matrix of shape ``(p, n)``. Returns
@@ -151,7 +151,7 @@ A : np.ndarray State transition matrix ``(n, n)``.
 B : np.ndarray Input matrix ``(n, m)``.
 C : np.ndarray Output matrix ``(p, n)``. Returns
 -------
-(bool, bool) Tuple ``(is_controllable, is_observable)``. ``True`` when the corresponding rank test passes【920100172589331†L79-L84】. #### Source Code ```{literalinclude} ../../../src/analysis/performance/control_analysis.py
+(bool, bool) Tuple ``(is_controllable, is_observable)``. ``True`` when the corresponding rank test passes920100172589331†L79-L84. #### Source Code ```{literalinclude} ../../../src/analysis/performance/control_analysis.py
 :language: python
 :pyobject: check_controllability_observability
 :linenos:

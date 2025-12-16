@@ -37,7 +37,7 @@ FizzBuzz
 ## Solution Approach
 
 The key insight is to check divisibility in the correct order:
-1. Check if divisible by both 3 AND 5 first (otherwise you'll print Fizz or Buzz instead of FizzBuzz)
+1. Check if divisible by both 3 AND 5 first (otherwise the system will print Fizz or Buzz instead of FizzBuzz)
 2. Then check divisibility by 3
 3. Then check divisibility by 5
 4. Otherwise, print the number

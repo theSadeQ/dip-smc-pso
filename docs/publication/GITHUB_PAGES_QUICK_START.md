@@ -44,13 +44,13 @@ Under **Build and deployment**:
 
 **Screenshot Reference:**
 ```
-┌─────────────────────────────────────┐
-│ Build and deployment                │
-│                                     │
-│ Source: [Deploy from a branch ▼]   │
-│ Branch: [gh-pages ▼] [/ (root) ▼]  │
-│         [Save]                      │
-└─────────────────────────────────────┘
+
+ Build and deployment                
+                                     
+ Source: [Deploy from a branch ]   
+ Branch: [gh-pages ] [/ (root) ]  
+         [Save]                      
+
 ```
 
 ---
@@ -69,15 +69,15 @@ Since the `gh-pages` branch doesn't exist yet, you need to trigger the GitHub Ac
 
 **Screenshot Reference:**
 ```
-┌────────────────────────────────────┐
-│ Deploy Documentation to GitHub     │
-│ Pages                              │
-│                                    │
-│ Run workflow ▼                     │
-│   Use workflow from:               │
-│   Branch: main ▼                   │
-│   [Run workflow]                   │
-└────────────────────────────────────┘
+
+ Deploy Documentation to GitHub     
+ Pages                              
+                                    
+ Run workflow                      
+   Use workflow from:               
+   Branch: main                    
+   [Run workflow]                   
+
 ```
 
 ### Option B: Push to Main Branch (Automatic Trigger)
@@ -101,7 +101,7 @@ git push origin main
 ### 3.1 Check Workflow Status
 
 1. Go to **Actions** tab
-2. Click on the running workflow (you'll see a yellow spinner)
+2. Click on the running workflow (the system will see a yellow spinner)
 3. Click **build-and-deploy** job to see live logs
 
 **Expected Duration:** ~3-5 minutes
@@ -411,7 +411,7 @@ View deployment history:
 ## Additional Resources
 
 **Documentation:**
-- **Comprehensive Guide:** `docs/publication/GITHUB_PAGES_GUIDE.md` (1,900 lines)
+- **complete Guide:** `docs/publication/GITHUB_PAGES_GUIDE.md` (1,900 lines)
 - **Workflow File:** `.github/workflows/deploy-docs.yml` (190 lines with comments)
 - **arXiv Submission:** `docs/publication/ARXIV_SUBMISSION_GUIDE.md` (1,400 lines)
 - **Submission Checklist:** `docs/publication/SUBMISSION_CHECKLIST.md` (2,200 lines)

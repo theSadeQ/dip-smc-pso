@@ -500,19 +500,19 @@ MathViz.exportPlot(document.querySelector('.mathviz-export'), 'png');
   - Notes
 * - Chrome
   - 90+
-  - ✅ Full Support
+  -  Full Support
   - Best performance
 * - Firefox
   - 88+
-  - ✅ Full Support
+  -  Full Support
   - Excellent rendering
 * - Safari
   - 14+
-  - ✅ Full Support
+  -  Full Support
   - iOS/macOS compatible
 * - Edge
   - 90+
-  - ✅ Full Support
+  -  Full Support
   - Chromium-based
 :::
 
@@ -632,14 +632,14 @@ where $\text{sat}(\cdot)$ is the saturation function.
 
 Phase 5 Mathematical Visualization Library provides:
 
-✅ **6 Custom Directives** for control theory visualization
-✅ **Interactive Plotly.js** integration with zoom/pan/export
-✅ **Dark Mode Support** with theme-aware colors
-✅ **Mobile Responsive** touch-friendly controls
-✅ **Publication Quality** PNG/SVG export at 2× resolution
-✅ **Accessible** ARIA labels, keyboard navigation, reduced motion
-✅ **Performant** lazy loading, caching, GPU acceleration
-✅ **Integrated** seamless synergy with Phases 2-4
+ **6 Custom Directives** for control theory visualization
+ **Interactive Plotly.js** integration with zoom/pan/export
+ **Dark Mode Support** with theme-aware colors
+ **Mobile Responsive** touch-friendly controls
+ **Publication Quality** PNG/SVG export at 2× resolution
+ **Accessible** ARIA labels, keyboard navigation, reduced motion
+ **Performant** lazy loading, caching, GPU acceleration
+ **Integrated** seamless synergy with Phases 2-4
 
 **Total Implementation:** ~2,200 lines of code across 3 files
 - `mathviz_extension.py`: 650 lines

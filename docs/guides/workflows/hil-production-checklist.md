@@ -1,6 +1,6 @@
 # HIL Production Deployment Checklist
 
-A comprehensive pre-deployment checklist for production Hardware-in-the-Loop (HIL) systems. Use this guide to ensure your DIP SMC HIL setup is ready for reliable operation.
+A complete pre-deployment checklist for production Hardware-in-the-Loop (HIL) systems. Use this guide to ensure your DIP SMC HIL setup is ready for reliable operation.
 
 ---
 
@@ -273,12 +273,12 @@ hil:
 **Required Documentation:**
 ```
 docs/
-├── hil_deployment/
-│   ├── architecture_diagram.png
-│   ├── network_topology.md
-│   ├── runbook.md
-│   ├── troubleshooting.md
-│   └── contact_list.md
+ hil_deployment/
+    architecture_diagram.png
+    network_topology.md
+    runbook.md
+    troubleshooting.md
+    contact_list.md
 ```
 
 **Checklist:**
@@ -458,12 +458,12 @@ audit_logger.info(f"Gains updated: {old_gains} -> {new_gains}")
 **Required Runbooks:**
 ```
 runbooks/
-├── startup.md           # How to start HIL system
-├── shutdown.md          # How to stop HIL system gracefully
-├── restart.md           # How to restart after issues
-├── update_gains.md      # How to update controller parameters
-├── log_analysis.md      # How to analyze logs
-└── emergency.md         # Emergency procedures
+ startup.md           # How to start HIL system
+ shutdown.md          # How to stop HIL system gracefully
+ restart.md           # How to restart after issues
+ update_gains.md      # How to update controller parameters
+ log_analysis.md      # How to analyze logs
+ emergency.md         # Emergency procedures
 ```
 
 **Checklist:**

@@ -52,10 +52,10 @@ Standard deviation of control outputs over repeated calls with identical inputs.
 ## Controller Comparison Overview ### Performance Summary Table | Controller | Inst. Time (ms) | Comp. Time (ms) | Stability | Thread Safety | Overall Score | Rank |
 
 |------------|-----------------|-----------------|-----------|---------------|---------------|------|
-| **Classical SMC** | 0.075 ± 0.029 | **0.022 ± 0.000** | ✅ Pass | ✅ 100% | **100.0** | **1** |
-| **STA-SMC** | **0.049 ± 0.001** | 0.065 ± 0.000 | ✅ Pass | ✅ 100% | **100.0** | **1** (tied) |
-| **Adaptive SMC** | 0.080 ± 0.002 | 0.034 ± 0.000 | ✅ Pass | ✅ 100% | **100.0** | **1** (tied) |
-| **Hybrid Adaptive-STA** | 0.188 ± 0.069 | 0.098 ± 0.000 | ❌ Fail | ✅ 100% | 75.0 | 4 | **Legend:**
+| **Classical SMC** | 0.075 ± 0.029 | **0.022 ± 0.000** |  Pass |  100% | **100.0** | **1** |
+| **STA-SMC** | **0.049 ± 0.001** | 0.065 ± 0.000 |  Pass |  100% | **100.0** | **1** (tied) |
+| **Adaptive SMC** | 0.080 ± 0.002 | 0.034 ± 0.000 |  Pass |  100% | **100.0** | **1** (tied) |
+| **Hybrid Adaptive-STA** | 0.188 ± 0.069 | 0.098 ± 0.000 |  Fail |  100% | 75.0 | 4 | **Legend:**
 - **Inst. Time:** Controller instantiation time (mean ± std)
 - **Comp. Time:** Single control computation time (mean ± std)
 - **Stability:** Gain validation pass/fail
@@ -73,10 +73,10 @@ Standard deviation of control outputs over repeated calls with identical inputs.
 .. chartjs:: :type: bar :data: ../visualization/performance_charts/settling_time_comparison.json :height: 400 :responsive: :title: Settling Time Comparison with 95% Confidence Intervals
 ``` **Detailed Breakdown:** | Controller | Avg (ms) | Std Dev (ms) | P95 (ms) | Min (ms) | Max (ms) | Real-Time Capable |
 |------------|----------|--------------|----------|----------|----------|-------------------|
-| Classical SMC | 0.0750 | 0.0288 | 0.1352 | 0.0571 | 0.1906 | ✅ Yes (<1 ms target) |
-| STA-SMC | **0.0488** | 0.0013 | 0.0734 | 0.0424 | 0.0771 | ✅ Yes |
-| Adaptive SMC | 0.0795 | 0.0019 | 0.1427 | 0.0679 | 0.1931 | ✅ Yes |
-| Hybrid Adaptive-STA | 0.1880 | 0.0689 | 0.3178 | 0.1436 | 0.4833 | ✅ Yes | **Statistical Analysis:** ANOVA Test (Instantiation Time):
+| Classical SMC | 0.0750 | 0.0288 | 0.1352 | 0.0571 | 0.1906 |  Yes (<1 ms target) |
+| STA-SMC | **0.0488** | 0.0013 | 0.0734 | 0.0424 | 0.0771 |  Yes |
+| Adaptive SMC | 0.0795 | 0.0019 | 0.1427 | 0.0679 | 0.1931 |  Yes |
+| Hybrid Adaptive-STA | 0.1880 | 0.0689 | 0.3178 | 0.1436 | 0.4833 |  Yes | **Statistical Analysis:** ANOVA Test (Instantiation Time):
 - **F-statistic:** NaN (insufficient variance between groups)
 - **p-value:** NaN
 - **Interpretation:** No statistically significant difference detected (note: test inconclusive due to small sample sizes) **Engineering Interpretation:** Despite ANOVA inconclusiveness, engineering significance is clear:
@@ -98,11 +98,11 @@ Standard deviation of control outputs over repeated calls with identical inputs.
 - **Adaptive SMC:** 0.0467 (acceptable for adaptive controller)
 - **STA-SMC:** 0.216 (expected due to discontinuous switching)
 - **Hybrid Adaptive-STA:** 5.648 (concerning, suggests numerical instability or un-converged adaptation) **Recommendation:** **Classical SMC** is the best choice for applications requiring both speed and determinism. **Hybrid Adaptive-STA** requires further investigation for control consistency issues. ### Computational Efficiency Rankings **By Instantiation Speed:**
-1. STA-SMC (0.049 ms) ⭐ Fastest
+1. STA-SMC (0.049 ms)  Fastest
 2. Classical SMC (0.075 ms)
 3. Adaptive SMC (0.080 ms)
 4. Hybrid Adaptive-STA (0.188 ms) **By Control Computation Speed:**
-1. Classical SMC (0.022 ms) ⭐ Fastest
+1. Classical SMC (0.022 ms)  Fastest
 2. Adaptive SMC (0.034 ms)
 3. STA-SMC (0.065 ms)
 4. Hybrid Adaptive-STA (0.098 ms) **By Total Latency (Inst. + Comp.):**
@@ -119,10 +119,10 @@ Standard deviation of control outputs over repeated calls with identical inputs.
 .. chartjs:: :type: radar :data: ../visualization/performance_charts/stability_scores.json :height: 400 :responsive: :title: Controller Stability and Thread Safety Scores
 ``` **Pass/Fail Summary:** | Controller | Stability Validated | Failure Reason | Gains Checked |
 |------------|---------------------|----------------|---------------|
-| Classical SMC | ✅ Pass | N/A | [20.0, 15.0, 12.0, 8.0, 35.0, 5.0] |
-| STA-SMC | ✅ Pass | N/A | [25.0, 15.0, 20.0, 12.0, 8.0, 6.0] |
-| Adaptive SMC | ✅ Pass | N/A | [25.0, 18.0, 15.0, 10.0, 4.0] |
-| Hybrid Adaptive-STA | ❌ **Fail** | `'HybridSMCConfig' object has no attribute 'gains'` | N/A | **Stability Validation Methodology:** Each controller's gain vector is checked against theoretical constraints: 1. **Classical SMC:** - ✅ All gains positive - ✅ Correct gain count (6) 2. **STA-SMC:** - ✅ K1 > K2 (discontinuous gain dominance) - ✅ K1, K2 positive - ✅ Correct gain count (6) 3. **Adaptive SMC:** - ✅ All gains positive - ✅ Adaptation rate > 0 - ✅ Correct gain count (5) 4. **Hybrid Adaptive-STA:** - ❌ **Configuration object mismatch:** Gains not accessible via standard API - **Root Cause:** `HybridSMCConfig` uses nested configuration structure incompatible with validation script **Impact Assessment:** While Hybrid Adaptive-STA's failure is **implementation-related** (not a fundamental control theory issue), it indicates:
+| Classical SMC |  Pass | N/A | [20.0, 15.0, 12.0, 8.0, 35.0, 5.0] |
+| STA-SMC |  Pass | N/A | [25.0, 15.0, 20.0, 12.0, 8.0, 6.0] |
+| Adaptive SMC |  Pass | N/A | [25.0, 18.0, 15.0, 10.0, 4.0] |
+| Hybrid Adaptive-STA |  **Fail** | `'HybridSMCConfig' object has no attribute 'gains'` | N/A | **Stability Validation Methodology:** Each controller's gain vector is checked against theoretical constraints: 1. **Classical SMC:** -  All gains positive -  Correct gain count (6) 2. **STA-SMC:** -  K1 > K2 (discontinuous gain dominance) -  K1, K2 positive -  Correct gain count (6) 3. **Adaptive SMC:** -  All gains positive -  Adaptation rate > 0 -  Correct gain count (5) 4. **Hybrid Adaptive-STA:** -  **Configuration object mismatch:** Gains not accessible via standard API - **Root Cause:** `HybridSMCConfig` uses nested configuration structure incompatible with validation script **Impact Assessment:** While Hybrid Adaptive-STA's failure is **implementation-related** (not a fundamental control theory issue), it indicates:
 - API inconsistency across controller variants
 - Incomplete integration with validation infrastructure
 - Risk of runtime errors in production if gain access is required **Recommendation:** Refactor `HybridSMCConfig` to expose gains via standard `.gains` attribute before production deployment. ### Thread Safety Validation **Test Protocol:**
@@ -130,10 +130,10 @@ Standard deviation of control outputs over repeated calls with identical inputs.
 - Each thread performs 100 control computations
 - Success criterion: Zero exceptions, consistent outputs **Results:** | Controller | Threads Tested | Successful | Failed | Success Rate | Thread Safe |
 |------------|----------------|------------|--------|--------------|-------------|
-| Classical SMC | 4 | 4 | 0 | **100%** | ✅ Yes |
-| STA-SMC | 4 | 4 | 0 | **100%** | ✅ Yes |
-| Adaptive SMC | 4 | 4 | 0 | **100%** | ✅ Yes |
-| Hybrid Adaptive-STA | 4 | 4 | 0 | **100%** | ✅ Yes | **Analysis:** All controllers are **thread-safe** for concurrent read operations (control computation). This validates:
+| Classical SMC | 4 | 4 | 0 | **100%** |  Yes |
+| STA-SMC | 4 | 4 | 0 | **100%** |  Yes |
+| Adaptive SMC | 4 | 4 | 0 | **100%** |  Yes |
+| Hybrid Adaptive-STA | 4 | 4 | 0 | **100%** |  Yes | **Analysis:** All controllers are **thread-safe** for concurrent read operations (control computation). This validates:
 - No shared mutable state during control computation
 - Proper encapsulation of internal state variables
 - Safe for multi-threaded simulation environments **Caveat:** Thread safety test only validates concurrent **control computation**. Concurrent **gain updates** or **parameter adaptation** were not tested and may require locking mechanisms.
@@ -163,19 +163,19 @@ Standard deviation of control outputs over repeated calls with identical inputs.
 - Boundary layer thickness
 - Real-time implementation delays ### Pairwise Statistical Comparisons **Welch's t-test (Instantiation Time):** | Comparison | t-statistic | p-value | Significant (α=0.05) | Interpretation |
 |------------|-------------|---------|----------------------|----------------|
-| Classical vs STA | 2.11 | 0.041 | ✅ Yes | Classical 54% slower |
-| Classical vs Adaptive | -0.87 | 0.389 | ❌ No | No significant difference |
-| Classical vs Hybrid | -3.45 | 0.001 | ✅ Yes | Hybrid 151% slower |
-| STA vs Adaptive | -4.21 | <0.001 | ✅ Yes | Adaptive 63% slower |
-| STA vs Hybrid | -4.89 | <0.001 | ✅ Yes | Hybrid 285% slower |
-| Adaptive vs Hybrid | -2.98 | 0.005 | ✅ Yes | Hybrid 136% slower | **Key Insight:** Hybrid Adaptive-STA is **significantly slower** than all other controllers (p < 0.01 in all comparisons). **Welch's t-test (Computation Time):** | Comparison | t-statistic | p-value | Significant (α=0.05) | Interpretation |
+| Classical vs STA | 2.11 | 0.041 |  Yes | Classical 54% slower |
+| Classical vs Adaptive | -0.87 | 0.389 |  No | No significant difference |
+| Classical vs Hybrid | -3.45 | 0.001 |  Yes | Hybrid 151% slower |
+| STA vs Adaptive | -4.21 | <0.001 |  Yes | Adaptive 63% slower |
+| STA vs Hybrid | -4.89 | <0.001 |  Yes | Hybrid 285% slower |
+| Adaptive vs Hybrid | -2.98 | 0.005 |  Yes | Hybrid 136% slower | **Key Insight:** Hybrid Adaptive-STA is **significantly slower** than all other controllers (p < 0.01 in all comparisons). **Welch's t-test (Computation Time):** | Comparison | t-statistic | p-value | Significant (α=0.05) | Interpretation |
 |------------|-------------|---------|----------------------|----------------|
-| Classical vs STA | -8.92 | <0.001 | ✅ Yes | STA 188% slower |
-| Classical vs Adaptive | -3.45 | 0.001 | ✅ Yes | Adaptive 51% slower |
-| Classical vs Hybrid | -12.56 | <0.001 | ✅ Yes | Hybrid 337% slower |
-| STA vs Adaptive | 5.34 | <0.001 | ✅ Yes | STA 91% slower |
-| STA vs Hybrid | -4.21 | <0.001 | ✅ Yes | Hybrid 52% slower |
-| Adaptive vs Hybrid | -9.12 | <0.001 | ✅ Yes | Hybrid 189% slower | **Key Insight:** Classical SMC is **significantly faster** than all other controllers in control computation (p < 0.001). ### ANOVA Multi-Group Comparison **Instantiation Time ANOVA:**
+| Classical vs STA | -8.92 | <0.001 |  Yes | STA 188% slower |
+| Classical vs Adaptive | -3.45 | 0.001 |  Yes | Adaptive 51% slower |
+| Classical vs Hybrid | -12.56 | <0.001 |  Yes | Hybrid 337% slower |
+| STA vs Adaptive | 5.34 | <0.001 |  Yes | STA 91% slower |
+| STA vs Hybrid | -4.21 | <0.001 |  Yes | Hybrid 52% slower |
+| Adaptive vs Hybrid | -9.12 | <0.001 |  Yes | Hybrid 189% slower | **Key Insight:** Classical SMC is **significantly faster** than all other controllers in control computation (p < 0.001). ### ANOVA Multi-Group Comparison **Instantiation Time ANOVA:**
 - **F-statistic:** NaN (insufficient between-group variance)
 - **p-value:** NaN
 - **Conclusion:** Test inconclusive (sample sizes N=5 per group insufficient for reliable ANOVA) **Computation Time ANOVA:**
@@ -237,18 +237,18 @@ Standard deviation of control outputs over repeated calls with identical inputs.
 | Well-conditioned | <1e-10 | Negligible | **100%** |
 | Moderate ill-conditioned | <1e-6 | Controlled | **>99.9%** |
 | Extreme ill-conditioned | <1.0 | Significant but controlled | Stability prioritized | **Interpretation:** For well-conditioned matrices (>99% of control operations), regularization has zero impact on accuracy. Only in extreme edge cases is accuracy slightly degraded to prevent crashes. ### Production Readiness Assessment **Numerical Stability Module:**
-- ✅ Performance budget met (<5% overhead)
-- ✅ Zero tolerance for crashes (0% LinAlgError rate)
-- ✅ Acceptance criteria satisfied **Recommendation:** Deploy enhanced numerical stability methods in all production control loops.
+-  Performance budget met (<5% overhead)
+-  Zero tolerance for crashes (0% LinAlgError rate)
+-  Acceptance criteria satisfied **Recommendation:** Deploy enhanced numerical stability methods in all production control loops.
 
 ---
 
 ## Data Quality Notes and Limitations ### Data Source Reliability | Data Source | Status | Quality | Issues |
 |-------------|--------|---------|--------|
-| Controller Performance Analysis | ✅ Valid | High | None |
-| PSO Sensitivity Report | ✅ Valid | High | None |
-| Numerical Stability Report | ✅ Valid | High | None |
-| **Control Accuracy Benchmarks** | ❌ **Failed** | **N/A** | All controllers failed initialization | ### Control Accuracy Benchmark Failure Analysis **Error Message:**
+| Controller Performance Analysis |  Valid | High | None |
+| PSO Sensitivity Report |  Valid | High | None |
+| Numerical Stability Report |  Valid | High | None |
+| **Control Accuracy Benchmarks** |  **Failed** | **N/A** | All controllers failed initialization | ### Control Accuracy Benchmark Failure Analysis **Error Message:**
 ```
 
 "Controller/dynamics creation failed: SimplifiedDIPDynamics.__init__() missing 1 required positional argument: 'config'"
@@ -300,12 +300,12 @@ python benchmarks/scripts/control_accuracy_benchmark.py --controllers classical_
 | **Rapid Prototyping** | **STA-SMC** | Fastest instantiation (0.049 ms), good overall performance |
 | **Adaptive Control** | **Adaptive SMC** | Built-in adaptation, moderate speed, good consistency |
 | **Robust Nonlinear Control** | **STA-SMC** | Continuous control (no chattering), low overshoot |
-| **Research / Experimental** | **Hybrid Adaptive-STA** | ⚠️ Only after stability issues resolved | ### Production Deployment Readiness | Controller | Production Ready | Blockers | Actions Required |
+| **Research / Experimental** | **Hybrid Adaptive-STA** |  Only after stability issues resolved | ### Production Deployment Readiness | Controller | Production Ready | Blockers | Actions Required |
 |------------|------------------|----------|------------------|
-| **Classical SMC** | ✅ **Yes** | None | Deploy with confidence |
-| **STA-SMC** | ✅ **Yes** | None | Deploy with confidence |
-| **Adaptive SMC** | ✅ **Yes** | None | Deploy with confidence |
-| **Hybrid Adaptive-STA** | ❌ **No** | Stability validation failure | Fix `HybridSMCConfig.gains` API, re-validate | ### Best Practices for Deployment 1. **Classical SMC:** - **Strengths:** Fastest, most deterministic, proven stability - **Weaknesses:** Chattering (mitigate with boundary layer), fixed gains - **Tuning:** Optimize boundary layer thickness vs tracking error trade-off - **Monitoring:** Track control saturation events (max_force=100N) 2. **STA-SMC:** - **Strengths:** Continuous control (no chattering), fast convergence - **Weaknesses:** Higher computational cost, complex gain tuning - **Tuning:** Ensure K1 > K2 constraint, optimize for specific disturbance profiles - **Monitoring:** Verify finite-time convergence in worst-case scenarios 3. **Adaptive SMC:** - **Strengths:** Handles parameter uncertainties, moderate speed - **Weaknesses:** Adaptation transients, requires careful initialization - **Tuning:** Set adaptation rate (gamma) conservatively, monitor parameter drift - **Monitoring:** Log adapted gains for diagnostics, detect adaptation saturation 4. **Hybrid Adaptive-STA (Future):** - **Current Status:** Not production-ready - **Required Work:** Fix configuration API, re-run stability validation, investigate control consistency issues - **Potential Benefits:** Combines STA robustness with adaptive features - **Timeline:** Estimated 2-3 weeks for remediation and validation
+| **Classical SMC** |  **Yes** | None | Deploy with confidence |
+| **STA-SMC** |  **Yes** | None | Deploy with confidence |
+| **Adaptive SMC** |  **Yes** | None | Deploy with confidence |
+| **Hybrid Adaptive-STA** |  **No** | Stability validation failure | Fix `HybridSMCConfig.gains` API, re-validate | ### Best Practices for Deployment 1. **Classical SMC:** - **Strengths:** Fastest, most deterministic, proven stability - **Weaknesses:** Chattering (mitigate with boundary layer), fixed gains - **Tuning:** Optimize boundary layer thickness vs tracking error trade-off - **Monitoring:** Track control saturation events (max_force=100N) 2. **STA-SMC:** - **Strengths:** Continuous control (no chattering), fast convergence - **Weaknesses:** Higher computational cost, complex gain tuning - **Tuning:** Ensure K1 > K2 constraint, optimize for specific disturbance profiles - **Monitoring:** Verify finite-time convergence in worst-case scenarios 3. **Adaptive SMC:** - **Strengths:** Handles parameter uncertainties, moderate speed - **Weaknesses:** Adaptation transients, requires careful initialization - **Tuning:** Set adaptation rate (gamma) conservatively, monitor parameter drift - **Monitoring:** Log adapted gains for diagnostics, detect adaptation saturation 4. **Hybrid Adaptive-STA (Future):** - **Current Status:** Not production-ready - **Required Work:** Fix configuration API, re-run stability validation, investigate control consistency issues - **Potential Benefits:** Combines STA robustness with adaptive features - **Timeline:** Estimated 2-3 weeks for remediation and validation
 
 ---
 
@@ -401,13 +401,13 @@ import threading def thread_safety_test(controller_class, gains, n_threads=4, n_
 
 ## Conclusion Phase 3.2 successfully delivered controller performance benchmarks with statistical validation, revealing **Classical SMC** as the optimal choice for production deployment (fastest computation, perfect determinism, 100% stability). **STA-SMC** and **Adaptive SMC** also meet production standards, while **Hybrid Adaptive-STA** requires stability remediation. **Key Deliverables:**
 
-- ✅ 5 Chart.js visualizations (8.3 KB total)
-- ✅ 5 statistical CSV files
-- ✅ Pandas-based parser script (1,013 lines)
-- ✅ documentation (this file, 1,100+ lines) **Data Quality:**
-- ✅ Computational performance: High quality, production-ready
-- ⚠️ Control accuracy: Requires re-run with fixed dynamics initialization
-- ⚠️ Statistical tests: Limited by small sample size (N=5) **Next Steps:**
+-  5 Chart.js visualizations (8.3 KB total)
+-  5 statistical CSV files
+-  Pandas-based parser script (1,013 lines)
+-  documentation (this file, 1,100+ lines) **Data Quality:**
+-  Computational performance: High quality, production-ready
+-  Control accuracy: Requires re-run with fixed dynamics initialization
+-  Statistical tests: Limited by small sample size (N=5) **Next Steps:**
 - Fix control accuracy benchmark script (`SimplifiedDIPDynamics` config parameter)
 - Remediate Hybrid Adaptive-STA stability validation issues
 - Increase benchmark sample sizes for robust ANOVA analysis

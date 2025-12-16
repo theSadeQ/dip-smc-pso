@@ -130,7 +130,7 @@ hybrid_features = { 'c1, c2': 'Proportional-like surface gains', 'lambda1, lambd
 ## 3. Advanced Configuration and Customization ### 3.1 Custom PSO Parameters **Configuration File Modification (`config.yaml`):**
 
 ```yaml
-pso: # Basic PSO parameters n_particles: 50 # Swarm size (20-100 typical) n_iterations: 100 # Maximum iterations (50-200 typical) cognitive_weight: 1.49445 # c1: Personal best attraction social_weight: 1.49445 # c2: Global best attraction inertia_weight: 0.729 # w: Velocity persistence # Advanced features velocity_clamp: [0.1, 0.5] # Velocity limits as fraction of search space w_schedule: [0.9, 0.4] # Inertia weight schedule [start, end] # Convergence criteria tolerance: 1e-6 stagnation_iterations: 20
+pso: # Basic PSO parameters n_particles: 50 # Swarm size (20-100 typical) n_iterations: 100 # Maximum iterations (50-200 typical) cognitive_weight: 1.49445 # c1: Personal best attraction social_weight: 1.49445 # c2: Global best attraction inertia_weight: 0.729 # w: Velocity persistence # features velocity_clamp: [0.1, 0.5] # Velocity limits as fraction of search space w_schedule: [0.9, 0.4] # Inertia weight schedule [start, end] # Convergence criteria tolerance: 1e-6 stagnation_iterations: 20
 ``` **Custom Optimization with Parameters:**
 
 ```bash
@@ -188,14 +188,14 @@ J_robust = w_mean × E[J(θ)] + w_max × max[J(θ)]
 
 ```bash
 #!/bin/bash
-# optimize_all_controllers.sh echo "Starting multi-controller PSO optimization..." controllers=("classical_smc" "sta_smc" "adaptive_smc" "hybrid_adaptive_sta_smc") for ctrl in "${controllers[@]}"; do echo "Optimizing ${ctrl}..." python simulate.py --ctrl ${ctrl} --run-pso --save ${ctrl}_optimized.json if [ $? -eq 0 ]; then echo "✓ ${ctrl} optimization completed" else echo "✗ ${ctrl} optimization failed" fi
+# optimize_all_controllers.sh echo "Starting multi-controller PSO optimization..." controllers=("classical_smc" "sta_smc" "adaptive_smc" "hybrid_adaptive_sta_smc") for ctrl in "${controllers[@]}"; do echo "Optimizing ${ctrl}..." python simulate.py --ctrl ${ctrl} --run-pso --save ${ctrl}_optimized.json if [ $? -eq 0 ]; then echo " ${ctrl} optimization completed" else echo " ${ctrl} optimization failed" fi
 done echo "All optimizations completed!"
 ``` **Parallel Optimization (Advanced):**
 
 ```python
 import concurrent.futures
 import subprocess
-from pathlib import Path def optimize_controller(controller_type): """Optimize single controller type.""" cmd = [ 'python', 'simulate.py', '--ctrl', controller_type, '--run-pso', '--save', f'{controller_type}_parallel.json' ] result = subprocess.run(cmd, capture_output=True, text=True) return controller_type, result.returncode == 0, result.stdout def parallel_optimization(): """Run parallel PSO optimization for multiple controllers.""" controllers = ['classical_smc', 'sta_smc', 'adaptive_smc'] with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor: futures = {executor.submit(optimize_controller, ctrl): ctrl for ctrl in controllers} for future in concurrent.futures.as_completed(futures): controller = futures[future] ctrl_name, success, output = future.result() if success: print(f"✓ {ctrl_name} optimization completed") else: print(f"✗ {ctrl_name} optimization failed") print(f"Error output: {output}") if __name__ == "__main__": parallel_optimization()
+from pathlib import Path def optimize_controller(controller_type): """Optimize single controller type.""" cmd = [ 'python', 'simulate.py', '--ctrl', controller_type, '--run-pso', '--save', f'{controller_type}_parallel.json' ] result = subprocess.run(cmd, capture_output=True, text=True) return controller_type, result.returncode == 0, result.stdout def parallel_optimization(): """Run parallel PSO optimization for multiple controllers.""" controllers = ['classical_smc', 'sta_smc', 'adaptive_smc'] with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor: futures = {executor.submit(optimize_controller, ctrl): ctrl for ctrl in controllers} for future in concurrent.futures.as_completed(futures): controller = futures[future] ctrl_name, success, output = future.result() if success: print(f" {ctrl_name} optimization completed") else: print(f" {ctrl_name} optimization failed") print(f"Error output: {output}") if __name__ == "__main__": parallel_optimization()
 ``` ### 5.2 Performance Comparison Analysis **Comparison Script:**
 
 ```python
@@ -298,8 +298,8 @@ results = pso_tuner.optimize( bounds=bounds, hil_constraints=hil_config, real_ti
 # example-metadata:
 # runnable: false def validate_optimized_controller(gains_file): """validation before deployment.""" checks = { 'stability_margins': False, 'actuator_limits': False, 'robustness': False, 'performance': False } # Load optimized gains with open(gains_file, 'r') as f: data = json.load(f) gains = data['best_gains'] controller_type = data['controller_type'] # Stability margin check # ... implementation details # Actuator saturation check # ... implementation details # Robustness analysis # ... implementation details # Performance verification # ... implementation details return all(checks.values()), checks # Usage
 is_ready, check_results = validate_optimized_controller('optimized_gains.json')
-if is_ready: print("✓ Controller ready for production deployment")
-else: print("✗ Validation failed:", check_results)
+if is_ready: print(" Controller ready for production deployment")
+else: print(" Validation failed:", check_results)
 ```
 
 ---

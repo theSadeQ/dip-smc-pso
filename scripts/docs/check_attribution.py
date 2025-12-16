@@ -240,10 +240,10 @@ def generate_report(uncited_claims: List[UncitedClaim], output_path: Path) -> No
 
         # Assessment
         if severity_counts["high"] == 0:
-            f.write("## ✅ PASS: No High-Severity Uncited Claims\n\n")
+            f.write("##  PASS: No High-Severity Uncited Claims\n\n")
             f.write("All critical technical claims (theorems, proofs, stability assertions) have proper citations.\n\n")
         else:
-            f.write("## ⚠️ ACTION REQUIRED: High-Severity Uncited Claims Found\n\n")
+            f.write("##  ACTION REQUIRED: High-Severity Uncited Claims Found\n\n")
             f.write(f"Found {severity_counts['high']} high-severity claims without citations.\n")
             f.write("These must be addressed before publication.\n\n")
 
@@ -347,9 +347,9 @@ def main():
 
     # Validation status
     if severity_counts["high"] == 0:
-        print("✅ PASS: No high-severity uncited claims")
+        print(" PASS: No high-severity uncited claims")
     else:
-        print(f"⚠️  FAIL: {severity_counts['high']} high-severity claims need citations")
+        print(f"  FAIL: {severity_counts['high']} high-severity claims need citations")
 
     print()
     print(f"Full report: {output_path}")

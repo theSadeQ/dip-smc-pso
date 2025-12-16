@@ -2,7 +2,7 @@
 
 **Revolutionary Documentation Experience**: Run Python code, manipulate 3D visualizations, and explore control systems directly in your browser.
 
-This section showcases cutting-edge interactive documentation features that transform passive reading into active experimentation.
+This section showcases current interactive documentation features that transform passive reading into active experimentation.
 
 ---
 
@@ -144,12 +144,12 @@ Explore these enhanced pages with live, executable examples:
 
 ```
 [Browser]
-  └─ [Main Thread]
-       ├─ pyodide-runner.js (UI controller)
-       └─ [Web Worker]
-            ├─ Pyodide Runtime (Python 3.11 WASM)
-            ├─ NumPy Package (~25MB)
-            └─ Matplotlib Package (~22MB)
+   [Main Thread]
+        pyodide-runner.js (UI controller)
+        [Web Worker]
+             Pyodide Runtime (Python 3.11 WASM)
+             NumPy Package (~25MB)
+             Matplotlib Package (~22MB)
 ```
 
 ### Performance
@@ -192,10 +192,10 @@ All code executes in a sandboxed Web Worker:
 ## Browser Testing Status
 
 Tested and verified on:
-- ✅ Chrome 120+ (Windows/macOS/Linux)
-- ✅ Firefox 121+ (Windows/macOS/Linux)
-- ✅ Safari 17+ (macOS/iOS)
-- ✅ Edge 120+ (Windows)
+-  Chrome 120+ (Windows/macOS/Linux)
+-  Firefox 121+ (Windows/macOS/Linux)
+-  Safari 17+ (macOS/iOS)
+-  Edge 120+ (Windows)
 
 ---
 

@@ -36,11 +36,11 @@ The DIP SMC PSO Streamlit dashboard uses a token-driven theming system that achi
 
 **Color Palette**:
 ```
-Primary:      ████ #2563eb (blue-600)
-Primary Dark: ████ #0b2763 (navy)
-Text Primary: ████ #111827 (gray-900)
-Text Muted:   ████ #6c7280 (gray-500)
-Background:   ████ #ffffff (white)
+Primary:       #2563eb (blue-600)
+Primary Dark:  #0b2763 (navy)
+Text Primary:  #111827 (gray-900)
+Text Muted:    #6c7280 (gray-500)
+Background:    #ffffff (white)
 ```
 
 ### Spacing Tokens (4 tokens)
@@ -54,10 +54,10 @@ Background:   ████ #ffffff (white)
 
 **Spacing Scale**:
 ```
-8px  (space-2) ▓▓
-12px (space-3) ▓▓▓
-16px (space-4) ▓▓▓▓
-24px (space-5) ▓▓▓▓▓▓
+8px  (space-2) 
+12px (space-3) 
+16px (space-4) 
+24px (space-5) 
 ```
 
 ### Shadow Tokens (2 tokens)
@@ -69,18 +69,18 @@ Background:   ████ #ffffff (white)
 
 **Shadow Demonstration**:
 ```
-No shadow:  ┌─────────┐
-            │  Button │
-            └─────────┘
+No shadow:  
+              Button 
+            
 
-shadow-md:  ┌─────────┐
-            │  Button │
-            └─────────┘
-            ╰─░░░░░░░─╯  Subtle elevation
+shadow-md:  
+              Button 
+            
+              Subtle elevation
 
-shadow-focus: ┌─────────┐
-            ┆─│  Button │─┆  Blue glow ring
-            └─────────┘
+shadow-focus: 
+              Button   Blue glow ring
+            
 ```
 
 ### Border Radius Tokens (2 tokens)
@@ -92,13 +92,13 @@ shadow-focus: ┌─────────┐
 
 **Radius Examples**:
 ```
-radius-sm (6px):  ╭────╮  Buttons, inputs
-                  │    │
-                  ╰────╯
+radius-sm (6px):    Buttons, inputs
+                      
+                  
 
-radius-md (8px):  ╭─────╮  Cards, panels
-                  │     │
-                  ╰─────╯
+radius-md (8px):    Cards, panels
+                       
+                  
 ```
 
 ### Typography Tokens (2 tokens)
@@ -148,17 +148,17 @@ radius-md (8px):  ╭─────╮  Cards, panels
 
 **Visual Example**:
 ```
-Normal:  ╭───────────╮
-         │  Button   │  #2563eb background
-         ╰───────────╯
+Normal:  
+           Button     #2563eb background
+         
 
-Hover:   ╭───────────╮
-         │  Button   │  #0b2763 background + lift
-         ╰─────────╯░░
+Hover:   
+           Button     #0b2763 background + lift
+         
 
-Focus:   ┆───────────┆
-         │  Button   │  Blue glow ring
-         ╰───────────╯
+Focus:   
+           Button     Blue glow ring
+         
 ```
 
 ### Sidebar (`section[data-testid="stSidebar"]`)
@@ -170,15 +170,15 @@ Focus:   ┆───────────┆
 
 **Layout**:
 ```
-╔════════════════╗
-║   SIDEBAR      ║
-║  (bg-secondary)║
-║                ║
-║ • Navigation   ║
-║ • Controls     ║
-║ • Settings     ║
-║                ║
-╚════════════════╝ 1px border (#d9dde3)
+
+   SIDEBAR      
+  (bg-secondary)
+                
+ • Navigation   
+ • Controls     
+ • Settings     
+                
+ 1px border (#d9dde3)
 ```
 
 ### Metrics (`div[data-testid="stMetric"]`)
@@ -192,11 +192,11 @@ Focus:   ┆───────────┆
 
 **Structure**:
 ```
-╭────────────────╮
-│ ISE: 0.0045    │  Label: text-secondary
-│ ▲ 12.3%        │  Value: text-primary (monospace)
-│ (improvement)  │  Delta: text-muted
-╰────────────────╯  bg-secondary + radius-md
+
+ ISE: 0.0045      Label: text-secondary
+  12.3%          Value: text-primary (monospace)
+ (improvement)    Delta: text-muted
+  bg-secondary + radius-md
 ```
 
 ### Tabs (`div[data-testid="stTabs"] button`)
@@ -209,13 +209,13 @@ Focus:   ┆───────────┆
 
 **Tab States**:
 ```
-Inactive:  ┌──────┬──────┬──────┐
-           │ Tab1 │ Tab2 │ Tab3 │  text-secondary
-           └──────┴──────┴──────┘
+Inactive:  
+            Tab1  Tab2  Tab3   text-secondary
+           
 
-Active:    ┏━━━━━━┓──────┬──────┐
-           ┃ Tab1 ┃ Tab2 │ Tab3 │  Tab1: text-primary (bold)
-           ┗━━━━━━┛──────┴──────┘
+Active:    
+            Tab1  Tab2  Tab3   Tab1: text-primary (bold)
+           
 ```
 
 ### Code Blocks (`div.stCodeBlock`)
@@ -229,11 +229,11 @@ Active:    ┏━━━━━━┓──────┬──────┐
 
 **Example**:
 ```
-╭─────────────────────────╮
-│ def compute_control():  │  bg-secondary
-│     return -K * s       │  font-mono
-│                         │  radius-md
-╰─────────────────────────╯  border: #d9dde3
+
+ def compute_control():    bg-secondary
+     return -K * s         font-mono
+                           radius-md
+  border: #d9dde3
 ```
 
 ---
@@ -422,7 +422,7 @@ python wave3_axe_audit.py
 
 **Estimated Metrics**:
 - **Uncompressed CSS**: ~4.5 KB (18 tokens × ~250 bytes/rule)
-- **Gzipped CSS**: ~1.8 KB (target: <3KB ✓)
+- **Gzipped CSS**: ~1.8 KB (target: <3KB )
 - **Compression Ratio**: 2.5x
 
 **Performance Impact**:

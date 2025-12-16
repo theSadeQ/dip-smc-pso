@@ -138,7 +138,7 @@ class PlotlyChartDirective(SphinxDirective):
         if title:
             html_parts.append(f'''
 <div class="plotly-chart-caption">
-    <strong>📊 {html.escape(title)}</strong>
+    <strong> {html.escape(title)}</strong>
 </div>
             ''')
 
@@ -163,7 +163,7 @@ class PlotlyChartDirective(SphinxDirective):
         html_parts.append('''
 <div class="plotly-chart-info">
     <small>
-        💡 <strong>Interactive Chart:</strong>
+         <strong>Interactive Chart:</strong>
         Click and drag to zoom, double-click to reset, hover for details.
         Use toolbar (top-right) to pan, export, or customize view.
     </small>
@@ -258,7 +258,7 @@ class PlotlyComparisonDirective(SphinxDirective):
         # Title
         html_parts.append(f'''
 <div class="plotly-comparison-title">
-    <h3>📊 {html.escape(title)}</h3>
+    <h3> {html.escape(title)}</h3>
 </div>
         ''')
 
@@ -278,10 +278,10 @@ class PlotlyComparisonDirective(SphinxDirective):
         html_parts.append('''
 <div class="plotly-comparison-controls">
     <button class="plotly-btn" onclick="PlotlyIntegration.exportAllCharts(this)">
-        📥 Export All Charts
+         Export All Charts
     </button>
     <button class="plotly-btn" onclick="PlotlyIntegration.resetAllZoom(this)">
-        🔄 Reset All Zoom
+         Reset All Zoom
     </button>
 </div>
         ''')
@@ -371,7 +371,7 @@ class PlotlyConvergenceDirective(SphinxDirective):
         # Title
         html_parts.append(f'''
 <div class="plotly-convergence-title">
-    <h3>🎬 {html.escape(title)}</h3>
+    <h3> {html.escape(title)}</h3>
 </div>
         ''')
 
@@ -392,13 +392,13 @@ class PlotlyConvergenceDirective(SphinxDirective):
         html_parts.append('''
 <div class="plotly-convergence-controls">
     <button class="plotly-btn plotly-play" onclick="PlotlyIntegration.playAnimation(this)">
-        ▶️ Play
+         Play
     </button>
     <button class="plotly-btn plotly-pause" onclick="PlotlyIntegration.pauseAnimation(this)" disabled>
-        ⏸️ Pause
+        ⏸ Pause
     </button>
     <button class="plotly-btn" onclick="PlotlyIntegration.resetAnimation(this)">
-        ⏮️ Reset
+        ⏮ Reset
     </button>
     <span class="plotly-progress-label">Iteration: <span class="plotly-iteration-count">0</span></span>
 </div>
@@ -489,7 +489,7 @@ class PlotlyScatterMatrixDirective(SphinxDirective):
         # Title
         html_parts.append(f'''
 <div class="plotly-scatter-matrix-title">
-    <h3>🎯 {html.escape(title)}</h3>
+    <h3> {html.escape(title)}</h3>
 </div>
         ''')
 

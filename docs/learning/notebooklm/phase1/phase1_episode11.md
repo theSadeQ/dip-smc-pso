@@ -12,13 +12,13 @@ Now you press the gas pedal. The car accelerates. That acceleration is the DERIV
 
 This chain - position, velocity, acceleration - is the foundation of motion physics. And the equations relating these quantities are differential equations, the mathematical language of dynamics.
 
-Today, in the final episode of Phase 1, we'll demystify calculus. You won't need to calculate derivatives by hand. Instead, you'll understand what they MEAN physically and why simulation "integrates" the equations of motion. By the end, you'll see how all the pieces - Python, physics, math - come together to enable control system simulation.
+Today, in the final episode of Phase 1, this will demystify calculus. You won't need to calculate derivatives by hand. Instead, the system will understand what they MEAN physically and why simulation "integrates" the equations of motion. By the end, the system will see how all the pieces - Python, physics, math - come together to enable control system simulation.
 
 ---
 
 ## What You'll Discover
 
-By listening to this episode, you'll learn:
+By listening to this episode, the system will learn:
 
 - What derivatives represent physically
 - Notation: d-x forward-slash d-t, x-dot, and d-squared-x forward-slash d-t-squared
@@ -171,7 +171,7 @@ Constant acceleration due to gravity.
 
 ## Recap: Derivatives and Motion
 
-Let's pause and review:
+pause and review:
 
 **Number one**: A derivative measures rate of change. d-y forward-slash d-x is the rate y changes with respect to x.
 
@@ -490,7 +490,7 @@ Phase space plots state vs state-dot. Understanding derivatives lets you interpr
 
 Congratulations! You've completed Phase 1: Foundations.
 
-Let's review what you've learned across 11 episodes:
+review what you've learned across 11 episodes:
 
 **Computing Basics (Episodes 1-2)**
 - File systems, command line, text editors
@@ -520,16 +520,16 @@ Let's review what you've learned across 11 episodes:
 - Derivatives and their physical meaning
 - Differential equations and numerical integration
 
-You're now ready for Phase 2, where you'll dive into control theory, sliding mode control, and actually running simulations of the double-inverted pendulum.
+You're now ready for Phase 2, where the system will dive into control theory, sliding mode control, and actually running simulations of the double-inverted pendulum.
 
 ---
 
 ## What's Next: Phase 2
 
-In Phase 2, you'll learn:
+In Phase 2, the system will learn:
 
 - Control theory fundamentals
-- What sliding mode control is and why it's powerful
+- What sliding mode control is and why it's effective
 - Running your first DIP simulation
 - Understanding controller gains
 - Interpreting simulation results

@@ -49,9 +49,9 @@ class VersionBumper:
 
     def print_header(self, title: str) -> None:
         """Print a formatted section header."""
-        print(f"\n{Colors.BLUE}{Colors.BOLD}{'═' * 80}{Colors.END}")
+        print(f"\n{Colors.BLUE}{Colors.BOLD}{'' * 80}{Colors.END}")
         print(f"{Colors.BLUE}{Colors.BOLD}{title}{Colors.END}")
-        print(f"{Colors.BLUE}{Colors.BOLD}{'═' * 80}{Colors.END}\n")
+        print(f"{Colors.BLUE}{Colors.BOLD}{'' * 80}{Colors.END}\n")
 
     def parse_version(self, version: str) -> Tuple[int, int, int]:
         """Parse semantic version string."""
@@ -95,7 +95,7 @@ class VersionBumper:
     def update_version_in_file(self, file_path: Path, old_version: str, new_version: str) -> bool:
         """Update version string in a file."""
         if not file_path.exists():
-            print(f"{Colors.YELLOW}⚠ Skipped:{Colors.END} {file_path.name} (not found)")
+            print(f"{Colors.YELLOW} Skipped:{Colors.END} {file_path.name} (not found)")
             return False
 
         content = file_path.read_text(encoding='utf-8')
@@ -112,13 +112,13 @@ class VersionBumper:
             content = re.sub(pattern, replacement, content)
 
         if content == original_content:
-            print(f"{Colors.YELLOW}⚠ No change:{Colors.END} {file_path.name}")
+            print(f"{Colors.YELLOW} No change:{Colors.END} {file_path.name}")
             return False
 
         if not self.dry_run:
             file_path.write_text(content, encoding='utf-8')
 
-        print(f"{Colors.GREEN}✓ Updated:{Colors.END} {file_path.name} ({old_version} → {new_version})")
+        print(f"{Colors.GREEN} Updated:{Colors.END} {file_path.name} ({old_version} → {new_version})")
         return True
 
     def create_git_tag(self, version: str, message: Optional[str] = None) -> bool:
@@ -140,7 +140,7 @@ class VersionBumper:
             )
 
             if result.stdout.strip():
-                print(f"{Colors.RED}✗ Failed:{Colors.END} Tag {tag_name} already exists")
+                print(f"{Colors.RED} Failed:{Colors.END} Tag {tag_name} already exists")
                 return False
 
             # Create annotated tag
@@ -150,11 +150,11 @@ class VersionBumper:
                 cwd=self.project_root
             )
 
-            print(f"{Colors.GREEN}✓ Created:{Colors.END} Git tag {tag_name}")
+            print(f"{Colors.GREEN} Created:{Colors.END} Git tag {tag_name}")
             return True
 
         except subprocess.CalledProcessError as e:
-            print(f"{Colors.RED}✗ Failed:{Colors.END} Git tag creation: {e}")
+            print(f"{Colors.RED} Failed:{Colors.END} Git tag creation: {e}")
             return False
 
     def update_changelog(self, version: str) -> bool:
@@ -162,7 +162,7 @@ class VersionBumper:
         changelog = self.project_root / 'CHANGELOG.md'
 
         if not changelog.exists():
-            print(f"{Colors.YELLOW}⚠ Skipped:{Colors.END} CHANGELOG.md not found")
+            print(f"{Colors.YELLOW} Skipped:{Colors.END} CHANGELOG.md not found")
             return False
 
         content = changelog.read_text(encoding='utf-8')
@@ -199,7 +199,7 @@ class VersionBumper:
             if not self.dry_run:
                 changelog.write_text(new_content, encoding='utf-8')
 
-            print(f"{Colors.GREEN}✓ Updated:{Colors.END} CHANGELOG.md")
+            print(f"{Colors.GREEN} Updated:{Colors.END} CHANGELOG.md")
             return True
 
         return False
@@ -267,7 +267,7 @@ class VersionBumper:
             print(f"Would create tag: v{new_version}")
             print("\nRun without --dry-run to apply changes")
         else:
-            print(f"{Colors.GREEN}✓ Version bumped successfully!{Colors.END}")
+            print(f"{Colors.GREEN} Version bumped successfully!{Colors.END}")
             print(f"\nNew version: {Colors.BOLD}{new_version}{Colors.END}")
             print(f"Updated: {len(updated_files)} files")
             print(f"Tag created: v{new_version}")

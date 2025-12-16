@@ -75,16 +75,16 @@ x_{k+1} = \Phi(x_k, u_k, \Delta t) \quad \Rightarrow \quad x_{k+1} \text{ depend
 ### Performance Characteristics
 
 **Advantages:**
-- ✅ Deterministic execution
-- ✅ Simple debugging
-- ✅ Low memory overhead
-- ✅ No thread synchronization overhead
-- ✅ Cache-friendly access patterns
+-  Deterministic execution
+-  Simple debugging
+-  Low memory overhead
+-  No thread synchronization overhead
+-  Cache-friendly access patterns
 
 **Limitations:**
-- ❌ Single-core utilization
-- ❌ No speedup for batch operations
-- ❌ Underutilizes modern multi-core CPUs
+-  Single-core utilization
+-  No speedup for batch operations
+-  Underutilizes modern multi-core CPUs
 
 ### Computational Efficiency
 

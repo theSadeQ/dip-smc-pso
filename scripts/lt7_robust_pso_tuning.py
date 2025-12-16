@@ -255,7 +255,7 @@ def run_pso_optimization(
 
         # Validate against Lyapunov constraints
         valid = validate_gains_lyapunov(controller_type, best_gains)
-        logger.info(f"\nLyapunov constraint validation: {'✓ PASS' if valid else '✗ FAIL'}")
+        logger.info(f"\nLyapunov constraint validation: {' PASS' if valid else ' FAIL'}")
         if not valid:
             logger.warning("Optimized gains violate Lyapunov stability constraints!")
 

@@ -46,10 +46,10 @@ The `plant.models.simplified` package provides a **complete, self-contained** im
 
 ```
 models/simplified/
-    ├─ config.py         → Configuration and validation
-    ├─ physics.py        → M(q), C(q,q̇), G(q) computation
-    ├─ dynamics.py       → Main dynamics class
-    └─ __init__.py       → Public API exports
+     config.py         → Configuration and validation
+     physics.py        → M(q), C(q,q̇), G(q) computation
+     dynamics.py       → Main dynamics class
+     __init__.py       → Public API exports
 ```
 
 **Public API:**

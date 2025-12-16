@@ -310,65 +310,65 @@ k̇1(t) = gamma1 * |s(c1,c2)| * τ(|s|)  [depends on c1/c2!]
 ## State Flow Diagram
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     HYBRID ADAPTIVE STA SMC                  │
-│                   Dual-Layer Architecture                    │
-└─────────────────────────────────────────────────────────────┘
+
+                     HYBRID ADAPTIVE STA SMC                  
+                   Dual-Layer Architecture                    
+
 
 External Inputs:
   - state: [x, θ1, θ2, ẋ, θ̇1, θ̇2]
   - Adaptive scheduler: scales c1→c1_eff, c2→c2_eff (if enabled)
 
-┌─────────────────────────────────────────────────────────────┐
-│ Layer 1: Surface Coefficients (External, PSO-tunable)       │
-│                                                              │
-│  c1_eff, λ1_eff ◄── Scheduler (if enabled)                  │
-│  c2_eff, λ2_eff                                              │
-│                                                              │
-│  Sliding Surface:                                            │
-│  s = c1_eff*(θ̇1 + λ1_eff*θ1) +                              │
-│      c2_eff*(θ̇2 + λ2_eff*θ2) +                              │
-│      cart_gain*(ẋ + cart_lambda*x)                          │
-│                                                              │
-│  Output: |s| (magnitude) ──┐                                │
-└────────────────────────────┼────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────┐
-│ Layer 2: Internal Adaptive Gains (Runtime, NOT schedulable) │
-│                                                              │
-│  FEEDBACK: |s| ──► Adaptation Law                           │
-│                                                              │
-│  If |s| ≤ dead_zone:                                        │
-│    k̇1 = k̇2 = -gain_leak  (freeze + gentle decay)           │
-│  Elif hard_saturated AND near_equilibrium:                  │
-│    k̇1 = k̇2 = -gain_leak  (anti-windup)                     │
-│  Else:                                                       │
-│    τ = |s| / (|s| + ε)  (self-tapering)                     │
-│    k̇1 = clip(gamma1 * |s| * τ, -5, 5)                       │
-│    k̇2 = clip(gamma2 * |s| * τ, -5, 5)                       │
-│                                                              │
-│  k1(t+dt) = clip(k1(t) + k̇1*dt, 0, k1_max)                  │
-│  k2(t+dt) = clip(k2(t) + k̇2*dt, 0, k2_max)                  │
-│                                                              │
-│  u̇_int = -k2 * sat(s)  (STA integral)                       │
-│  u_int(t+dt) = clip(u_int(t) + u̇_int*dt, -u_int_max, +u_int_max) │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────┐
-│ Control Output Composition                                  │
-│                                                              │
-│  u_sw = -k1 * sqrt(|s|) * sat(s)    [Super-twisting]        │
-│  u_damp = -k_d * s                   [Damping]              │
-│  u_eq = equivalent_control(state)    [Model-based]          │
-│  u_cart = -cart_recenter_PD(x, ẋ)   [Cart recentering]     │
-│                                                              │
-│  u_total = u_sw + u_int + u_damp + u_cart + u_eq            │
-│  u_output = clip(u_total, -max_force, +max_force)           │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
+
+ Layer 1: Surface Coefficients (External, PSO-tunable)       
+                                                              
+  c1_eff, λ1_eff  Scheduler (if enabled)                  
+  c2_eff, λ2_eff                                              
+                                                              
+  Sliding Surface:                                            
+  s = c1_eff*(θ̇1 + λ1_eff*θ1) +                              
+      c2_eff*(θ̇2 + λ2_eff*θ2) +                              
+      cart_gain*(ẋ + cart_lambda*x)                          
+                                                              
+  Output: |s| (magnitude)                                 
+
+                             
+                             
+
+ Layer 2: Internal Adaptive Gains (Runtime, NOT schedulable) 
+                                                              
+  FEEDBACK: |s|  Adaptation Law                           
+                                                              
+  If |s| ≤ dead_zone:                                        
+    k̇1 = k̇2 = -gain_leak  (freeze + gentle decay)           
+  Elif hard_saturated AND near_equilibrium:                  
+    k̇1 = k̇2 = -gain_leak  (anti-windup)                     
+  Else:                                                       
+    τ = |s| / (|s| + ε)  (self-tapering)                     
+    k̇1 = clip(gamma1 * |s| * τ, -5, 5)                       
+    k̇2 = clip(gamma2 * |s| * τ, -5, 5)                       
+                                                              
+  k1(t+dt) = clip(k1(t) + k̇1*dt, 0, k1_max)                  
+  k2(t+dt) = clip(k2(t) + k̇2*dt, 0, k2_max)                  
+                                                              
+  u̇_int = -k2 * sat(s)  (STA integral)                       
+  u_int(t+dt) = clip(u_int(t) + u̇_int*dt, -u_int_max, +u_int_max) 
+                                                              
+
+                             
+                             
+
+ Control Output Composition                                  
+                                                              
+  u_sw = -k1 * sqrt(|s|) * sat(s)    [Super-twisting]        
+  u_damp = -k_d * s                   [Damping]              
+  u_eq = equivalent_control(state)    [Model-based]          
+  u_cart = -cart_recenter_PD(x, ẋ)   [Cart recentering]     
+                                                              
+  u_total = u_sw + u_int + u_damp + u_cart + u_eq            
+  u_output = clip(u_total, -max_force, +max_force)           
+                                                              
+
 ```
 
 ---

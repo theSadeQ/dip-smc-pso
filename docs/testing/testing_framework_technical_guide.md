@@ -18,82 +18,82 @@
 ## 1. Testing Architecture ### 1.1 Overview The DIP-SMC-PSO testing framework provides validation across **143 test files** organized into **22 specialized modules**. The architecture follows scientific computing best practices with rigorous coverage requirements and multi-level testing strategies. ```
 
 tests/ # 143 test files, 22 modules
-├── conftest.py # Session-scoped fixtures and pytest configuration
-├── test_controllers/ # Controller unit and integration tests (28 files)
-│ ├── base/ # Base controller interfaces and primitives
-│ ├── factory/ # Controller factory pattern tests
-│ ├── smc/ # SMC algorithm-specific tests
-│ │ ├── algorithms/
-│ │ │ ├── classical/ # Classical SMC tests
-│ │ │ ├── adaptive/ # Adaptive SMC tests
-│ │ │ ├── super_twisting/ # Super-Twisting SMC tests
-│ │ │ └── hybrid/ # Hybrid Adaptive-STA tests
-│ ├── specialized/ # Swing-up controller tests
-│ └── mpc/ # MPC controller tests
-├── test_benchmarks/ # Benchmarking framework tests (18 files)
-│ ├── core/ # Core benchmark functionality
-│ ├── statistics/ # Statistical analysis tests
-│ ├── integration/ # Integration method benchmarks
-│ ├── performance/ # Performance regression tests
-│ └── validation/ # Parameter realism validation
-├── test_simulation/ # Simulation engine tests (15 files)
-│ ├── core/ # Core simulation runner
-│ ├── engines/ # Simulation engines (standard, batch, vector)
-│ ├── integrators/ # Numerical integrators (Euler, RK4, RK45)
-│ ├── context/ # Simulation context management
-│ ├── results/ # Result storage and analysis
-│ ├── safety/ # Safety constraint validation
-│ └── vector/ # Numba-accelerated vector simulation
-├── test_plant/ # Plant dynamics tests (12 files)
-│ ├── models/ # Simplified, full, low-rank dynamics
-│ ├── configurations/ # Physics parameter configurations
-│ ├── core/ # Core dynamics interfaces
-│ └── parameters/ # Parameter validation
-├── test_optimization/ # Optimization framework tests (10 files)
-│ ├── algorithms/ # PSO, GA, differential evolution
-│ ├── objectives/ # Cost function design
-│ ├── results/ # Optimization result analysis
-│ └── core/ # Core optimization interfaces
-├── test_utils/ # Utility module tests (18 files)
-│ ├── analysis/ # Performance analysis utilities
-│ ├── control/ # Control primitives (saturation, deadband)
-│ ├── monitoring/ # Real-time monitoring (latency, deadlines)
-│ ├── validation/ # Input/output validation
-│ ├── visualization/ # Plotting and animation tests
-│ ├── types/ # Type system tests
-│ └── reproducibility/ # Seed management and determinism
-├── test_interfaces/ # HIL and data exchange tests (8 files)
-│ ├── core/ # Interface protocols
-│ ├── hil/ # Hardware-in-the-loop testing
-│ ├── data_exchange/ # Data serialization and exchange
-│ ├── hardware/ # Hardware abstraction layer
-│ ├── monitoring/ # Interface monitoring
-│ └── network/ # Network communication tests
-├── test_analysis/ # Analysis infrastructure tests (12 files)
-│ ├── core/ # Core analysis pipelines
-│ ├── performance/ # Lyapunov, performance metrics
-│ ├── fault_detection/ # FDI (Fault Detection & Isolation)
-│ ├── validation/ # Cross-validation and Monte Carlo
-│ ├── visualization/ # Analysis visualization
-│ └── infrastructure/ # Analysis chain orchestration
-├── test_config/ # Configuration validation tests (4 files)
-├── test_app/ # Application interface tests (8 files)
-│ ├── CLI tests (simulate.py)
-│ ├── Streamlit dashboard tests
-│ ├── Data export functionality
-│ └── Visualization tests
-├── integration/ # End-to-end integration tests (15 files)
-│ ├── PSO-controller integration
-│ ├── Factory integration workflows
-│ ├── HIL integration scenarios
-│ ├── Full simulation pipelines
-│ └── Issue regression tests
-├── validation/ # Scientific validation tests (5 files)
-│ ├── Control theory property tests
-│ ├── Stability analysis validation
-│ ├── Convergence verification
-│ └── Performance benchmarking
-└── config_validation/ # Configuration schema tests (3 files)
+ conftest.py # Session-scoped fixtures and pytest configuration
+ test_controllers/ # Controller unit and integration tests (28 files)
+  base/ # Base controller interfaces and primitives
+  factory/ # Controller factory pattern tests
+  smc/ # SMC algorithm-specific tests
+   algorithms/
+    classical/ # Classical SMC tests
+    adaptive/ # Adaptive SMC tests
+    super_twisting/ # Super-Twisting SMC tests
+    hybrid/ # Hybrid Adaptive-STA tests
+  specialized/ # Swing-up controller tests
+  mpc/ # MPC controller tests
+ test_benchmarks/ # Benchmarking framework tests (18 files)
+  core/ # Core benchmark functionality
+  statistics/ # Statistical analysis tests
+  integration/ # Integration method benchmarks
+  performance/ # Performance regression tests
+  validation/ # Parameter realism validation
+ test_simulation/ # Simulation engine tests (15 files)
+  core/ # Core simulation runner
+  engines/ # Simulation engines (standard, batch, vector)
+  integrators/ # Numerical integrators (Euler, RK4, RK45)
+  context/ # Simulation context management
+  results/ # Result storage and analysis
+  safety/ # Safety constraint validation
+  vector/ # Numba-accelerated vector simulation
+ test_plant/ # Plant dynamics tests (12 files)
+  models/ # Simplified, full, low-rank dynamics
+  configurations/ # Physics parameter configurations
+  core/ # Core dynamics interfaces
+  parameters/ # Parameter validation
+ test_optimization/ # Optimization framework tests (10 files)
+  algorithms/ # PSO, GA, differential evolution
+  objectives/ # Cost function design
+  results/ # Optimization result analysis
+  core/ # Core optimization interfaces
+ test_utils/ # Utility module tests (18 files)
+  analysis/ # Performance analysis utilities
+  control/ # Control primitives (saturation, deadband)
+  monitoring/ # Real-time monitoring (latency, deadlines)
+  validation/ # Input/output validation
+  visualization/ # Plotting and animation tests
+  types/ # Type system tests
+  reproducibility/ # Seed management and determinism
+ test_interfaces/ # HIL and data exchange tests (8 files)
+  core/ # Interface protocols
+  hil/ # Hardware-in-the-loop testing
+  data_exchange/ # Data serialization and exchange
+  hardware/ # Hardware abstraction layer
+  monitoring/ # Interface monitoring
+  network/ # Network communication tests
+ test_analysis/ # Analysis infrastructure tests (12 files)
+  core/ # Core analysis pipelines
+  performance/ # Lyapunov, performance metrics
+  fault_detection/ # FDI (Fault Detection & Isolation)
+  validation/ # Cross-validation and Monte Carlo
+  visualization/ # Analysis visualization
+  infrastructure/ # Analysis chain orchestration
+ test_config/ # Configuration validation tests (4 files)
+ test_app/ # Application interface tests (8 files)
+  CLI tests (simulate.py)
+  Streamlit dashboard tests
+  Data export functionality
+  Visualization tests
+ integration/ # End-to-end integration tests (15 files)
+  PSO-controller integration
+  Factory integration workflows
+  HIL integration scenarios
+  Full simulation pipelines
+  Issue regression tests
+ validation/ # Scientific validation tests (5 files)
+  Control theory property tests
+  Stability analysis validation
+  Convergence verification
+  Performance benchmarking
+ config_validation/ # Configuration schema tests (3 files)
 ``` ### 1.2 Test Categories #### 1.2.1 Unit Tests (85 files) **Purpose**: Validate individual components in isolation **Coverage Requirements**:
 - **Critical components** (controllers, dynamics): ≥95%
 - **Safety-critical** (control saturation, stability): 100%

@@ -45,19 +45,19 @@ A factory is a function that creates objects for you. Instead of manually callin
 The Controllers API provides a clean, type-safe factory system for creating and configuring sliding mode controllers (SMC) for the double-inverted pendulum system. It saves you from writing boilerplate code and reduces errors.
 
 **Key Features:**
-- ✅ **Factory Pattern** - Create controllers with one function call
+-  **Factory Pattern** - Create controllers with one function call
   - `create_controller()` for general use
   - `create_smc_for_pso()` for optimization workflows
 
-- ✅ **4 SMC Variants** - Choose the right controller for your needs
+-  **4 SMC Variants** - Choose the right controller for your needs
   - Classical SMC (simple, robust)
   - Super-Twisting (reduces chattering)
   - Adaptive SMC (auto-adjusts gains)
   - Hybrid Adaptive STA-SMC (combines adaptive + super-twisting)
 
-- ✅ **Type Safety** - Enum-based selection prevents typos and errors
-- ✅ **PSO Integration** - Built-in support for automated gain tuning
-- ✅ **Extensible** - Base classes for building custom controllers
+-  **Type Safety** - Enum-based selection prevents typos and errors
+-  **PSO Integration** - Built-in support for automated gain tuning
+-  **Extensible** - Base classes for building custom controllers
 
 **Related Documentation:**
 - [Tutorial 02: Controller Comparison](../tutorials/tutorial-02-controller-comparison.md)
@@ -75,10 +75,10 @@ The Controllers API provides a clean, type-safe factory system for creating and 
 
 ```
 BaseController (Abstract)
-├── ClassicalSMC
-├── SuperTwistingSMC (STA-SMC)
-├── AdaptiveSMC
-└── HybridAdaptiveSTASMC
+ ClassicalSMC
+ SuperTwistingSMC (STA-SMC)
+ AdaptiveSMC
+ HybridAdaptiveSTASMC
 ```
 
 ### Key Design Principles
@@ -254,10 +254,10 @@ controllers:
 ```
 
 **Characteristics:**
-- ✅ Simple and well-understood
-- ✅ Fast computation
-- ⚠️ Moderate chattering
-- ⚠️ Fixed gains (no adaptation)
+-  Simple and well-understood
+-  Fast computation
+-  Moderate chattering
+-  Fixed gains (no adaptation)
 
 **Best For:** Prototyping, known systems, baseline comparisons
 
@@ -313,10 +313,10 @@ controllers:
 ```
 
 **Characteristics:**
-- ✅ Smooth control (no chattering)
-- ✅ Finite-time convergence
-- ✅ Robust to matched disturbances
-- ⚠️ Slightly higher computational cost
+-  Smooth control (no chattering)
+-  Finite-time convergence
+-  Robust to matched disturbances
+-  Slightly higher computational cost
 
 **Best For:** Chattering-sensitive applications, smooth control requirements
 
@@ -381,11 +381,11 @@ controllers:
 ```
 
 **Characteristics:**
-- ✅ Adapts to parameter variations
-- ✅ Robust to disturbances
-- ✅ No retuning needed
-- ⚠️ Slower initial response
-- ⚠️ Requires monitoring adaptation trajectory
+-  Adapts to parameter variations
+-  Robust to disturbances
+-  No retuning needed
+-  Slower initial response
+-  Requires monitoring adaptation trajectory
 
 **Best For:** Unknown/varying systems, parameter uncertainty
 
@@ -448,11 +448,11 @@ controllers:
 ```
 
 **Characteristics:**
-- ✅ Best overall performance
-- ✅ Smooth control + adaptation
-- ✅ Handles uncertainty and disturbances
-- ⚠️ Most complex configuration
-- ⚠️ Highest computational cost
+-  Best overall performance
+-  Smooth control + adaptation
+-  Handles uncertainty and disturbances
+-  Most complex configuration
+-  Highest computational cost
 
 **Best For:** Research applications, maximum performance requirements
 

@@ -270,7 +270,7 @@ class LinkValidator:
 
         # Print broken links
         if self.results['broken_links']:
-            print("\n❌ BROKEN LINKS:")
+            print("\n BROKEN LINKS:")
             for i, broken in enumerate(self.results['broken_links'], 1):
                 print(f"\n  {i}. {broken['file']}:{broken['line']}")
                 print(f"     Link: [{broken['link_text']}]({broken['link_target']})")
@@ -278,7 +278,7 @@ class LinkValidator:
 
         # Print warnings
         if self.results['warnings']:
-            print(f"\n⚠️  WARNINGS ({len(self.results['warnings'])}):")
+            print(f"\n  WARNINGS ({len(self.results['warnings'])}):")
             for warning in self.results['warnings'][:5]:  # Show first 5
                 print(f"  - {warning}")
 
@@ -287,7 +287,7 @@ class LinkValidator:
 
         # Print orphaned files
         if self.results['orphaned_files']:
-            print(f"\n🔍 ORPHANED FILES ({len(self.results['orphaned_files'])}):")
+            print(f"\n ORPHANED FILES ({len(self.results['orphaned_files'])}):")
             print("(Not linked from any other documentation file)")
             for orphan in self.results['orphaned_files'][:10]:
                 print(f"  - {orphan.relative_to(self.docs_root)}")
@@ -298,9 +298,9 @@ class LinkValidator:
         # Final summary
         print("\n" + "=" * 90)
         if self.results['broken_links']:
-            print("❌ VALIDATION FAILED")
+            print(" VALIDATION FAILED")
         else:
-            print("✅ VALIDATION PASSED - All links are valid!")
+            print(" VALIDATION PASSED - All links are valid!")
         print("=" * 90)
 
     def run_validation(self, check_orphans: bool = True) -> bool:
@@ -372,7 +372,7 @@ Examples:
         import json
         with open(args.output, 'w', encoding='utf-8') as f:
             json.dump(validator.results, f, indent=2)
-        print(f"\n📄 Results exported to: {args.output}")
+        print(f"\n Results exported to: {args.output}")
 
     return 0 if success else 1
 

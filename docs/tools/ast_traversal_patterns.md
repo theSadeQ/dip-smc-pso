@@ -33,7 +33,7 @@
 
 # example-metadata:
 
-# runnable: false class ClassicalSMC: """ Implements classical SMC from Utkin (1992). This controller uses sliding surface design with boundary layers to reduce chattering in control systems. """ # ✅ Regex: Detects implementation claim # Scope: Unknown (could be module or class) def compute_control(self, state: np.ndarray) -> float: """ Computes control force based on sliding surface. Implements reaching law from Edwards & Spurgeon (1998) with adaptive gain scheduling. """ # ❌ Regex: May misattribute scope # (is this class-level or method-level?) def _inner_helper(): """Helper implements saturation from Slotine.""" # ❌❌ Regex: Completely misses nested function docstrings pass
+# runnable: false class ClassicalSMC: """ Implements classical SMC from Utkin (1992). This controller uses sliding surface design with boundary layers to reduce chattering in control systems. """ #  Regex: Detects implementation claim # Scope: Unknown (could be module or class) def compute_control(self, state: np.ndarray) -> float: """ Computes control force based on sliding surface. Implements reaching law from Edwards & Spurgeon (1998) with adaptive gain scheduling. """ #  Regex: May misattribute scope # (is this class-level or method-level?) def _inner_helper(): """Helper implements saturation from Slotine.""" #  Regex: Completely misses nested function docstrings pass
 
 ``` ### 2.2 Regex Limitations **Example regex pattern:**
 ```python
@@ -46,19 +46,19 @@ REGEX_IMPLEMENTS = re.compile( r'(?:Implements?|Implementation of)\s+([^,\.]+?)\
 3. **Nested structure blindness:** Misses inner classes, nested functions
 4. **Indentation sensitivity:** Regex doesn't understand Python syntax **Result:** ~60% precision, ~70% recall, **poor scope accuracy** ### 2.3 AST Solution **Core Principle:** Traverse the syntax tree with visitor pattern to maintain **scope stack**. ```python
 import ast
-from typing import List, Dict class CodeClaimExtractor(ast.NodeVisitor): def __init__(self): self.claims: List[Dict] = [] self.scope_stack: List[str] = [] # Hierarchical scope tracker def visit_Module(self, node: ast.Module) -> None: """Process module-level docstring.""" self.scope_stack.append("module") docstring = ast.get_docstring(node) if docstring: self._extract_claims(docstring, scope=":".join(self.scope_stack)) self.generic_visit(node) # Continue to children self.scope_stack.pop() def visit_ClassDef(self, node: ast.ClassDef) -> None: """Process class definition with correct scope.""" self.scope_stack.append(f"class:{node.name}") docstring = ast.get_docstring(node) if docstring: self._extract_claims(docstring, scope=":".join(self.scope_stack)) self.generic_visit(node) # Visit methods self.scope_stack.pop() def visit_FunctionDef(self, node: ast.FunctionDef) -> None: """Process function/method with nested scope support.""" self.scope_stack.append(f"function:{node.name}") docstring = ast.get_docstring(node) if docstring: self._extract_claims(docstring, scope=":".join(self.scope_stack)) self.generic_visit(node) # Handle nested functions self.scope_stack.pop() def _extract_claims(self, docstring: str, scope: str) -> None: """Apply regex patterns to docstring with known scope.""" # Now regex operates on clean docstring text with correct scope for pattern in CITATION_PATTERNS: for match in pattern.finditer(docstring): self.claims.append({ "text": match.group(0), "scope": scope, # ✅ Guaranteed correct "line": match.start() })
+from typing import List, Dict class CodeClaimExtractor(ast.NodeVisitor): def __init__(self): self.claims: List[Dict] = [] self.scope_stack: List[str] = [] # Hierarchical scope tracker def visit_Module(self, node: ast.Module) -> None: """Process module-level docstring.""" self.scope_stack.append("module") docstring = ast.get_docstring(node) if docstring: self._extract_claims(docstring, scope=":".join(self.scope_stack)) self.generic_visit(node) # Continue to children self.scope_stack.pop() def visit_ClassDef(self, node: ast.ClassDef) -> None: """Process class definition with correct scope.""" self.scope_stack.append(f"class:{node.name}") docstring = ast.get_docstring(node) if docstring: self._extract_claims(docstring, scope=":".join(self.scope_stack)) self.generic_visit(node) # Visit methods self.scope_stack.pop() def visit_FunctionDef(self, node: ast.FunctionDef) -> None: """Process function/method with nested scope support.""" self.scope_stack.append(f"function:{node.name}") docstring = ast.get_docstring(node) if docstring: self._extract_claims(docstring, scope=":".join(self.scope_stack)) self.generic_visit(node) # Handle nested functions self.scope_stack.pop() def _extract_claims(self, docstring: str, scope: str) -> None: """Apply regex patterns to docstring with known scope.""" # Now regex operates on clean docstring text with correct scope for pattern in CITATION_PATTERNS: for match in pattern.finditer(docstring): self.claims.append({ "text": match.group(0), "scope": scope, #  Guaranteed correct "line": match.start() })
 ``` **Advantages:**
 
-- ✅ **Scope tracking:** Full hierarchical context (`module:class:Foo:function:bar`)
-- ✅ **Nested structures:** Handles inner classes, decorators, lambdas
-- ✅ **Multi-line robust:** `ast.get_docstring()` handles all quote styles
-- ✅ **Syntax-aware:** Distinguishes docstrings from comments **Result:** ~85% precision, ~95% recall, **scope accuracy**
+-  **Scope tracking:** Full hierarchical context (`module:class:Foo:function:bar`)
+-  **Nested structures:** Handles inner classes, decorators, lambdas
+-  **Multi-line robust:** `ast.get_docstring()` handles all quote styles
+-  **Syntax-aware:** Distinguishes docstrings from comments **Result:** ~85% precision, ~95% recall, **scope accuracy**
 
 ---
 
 ## 3. Traversal Algorithm ### 3.1 Control Flow Diagram ```
 
-Module Root (src/controllers/classical_smc.py) │ ├─ visit_Module() │ ├─ Extract module docstring: "Classical SMC implementation" │ ├─ Push scope: ["module"] │ └─ Claim: {"scope": "module", "text": "..."} │ ├─ ClassDef "ClassicalSMC" │ ├─ visit_ClassDef() │ │ ├─ Extract: "Implements classical SMC from Utkin (1992)" │ │ ├─ Push scope: ["module", "class:ClassicalSMC"] │ │ └─ Claim: {"scope": "module:class:ClassicalSMC", ...} │ │ │ ├─ FunctionDef "__init__" │ │ ├─ visit_FunctionDef() │ │ │ ├─ Push scope: [..., "function:__init__"] │ │ │ ├─ Extract: "Initializes gains from config" │ │ │ └─ Claim: {"scope": "...:function:__init__", ...} │ │ └─ Pop scope │ │ │ ├─ FunctionDef "compute_control" │ │ ├─ Push scope: [..., "function:compute_control"] │ │ ├─ Extract: "Implements reaching law from Edwards (1998)" │ │ ├─ Claim: {"scope": "...:function:compute_control", ...} │ │ │ │ │ ├─ FunctionDef "_saturation" (nested) │ │ │ ├─ Push scope: [..., "function:_saturation"] │ │ │ ├─ Extract: "Saturation from Slotine (1991)" │ │ │ └─ Claim: {"scope": "...:function:_saturation", ...} │ │ │ └─ Pop scope │ │ └─ Pop scope │ └─ Pop scope │ └─ FunctionDef "create_controller" (module-level helper) ├─ Push scope: ["module", "function:create_controller"] ├─ Extract: "Factory pattern from Gang of Four" └─ Claim: {"scope": "module:function:create_controller", ...}
+Module Root (src/controllers/classical_smc.py)   visit_Module()   Extract module docstring: "Classical SMC implementation"   Push scope: ["module"]   Claim: {"scope": "module", "text": "..."}   ClassDef "ClassicalSMC"   visit_ClassDef()    Extract: "Implements classical SMC from Utkin (1992)"    Push scope: ["module", "class:ClassicalSMC"]    Claim: {"scope": "module:class:ClassicalSMC", ...}     FunctionDef "__init__"    visit_FunctionDef()     Push scope: [..., "function:__init__"]     Extract: "Initializes gains from config"     Claim: {"scope": "...:function:__init__", ...}    Pop scope     FunctionDef "compute_control"    Push scope: [..., "function:compute_control"]    Extract: "Implements reaching law from Edwards (1998)"    Claim: {"scope": "...:function:compute_control", ...}       FunctionDef "_saturation" (nested)     Push scope: [..., "function:_saturation"]     Extract: "Saturation from Slotine (1991)"     Claim: {"scope": "...:function:_saturation", ...}     Pop scope    Pop scope   Pop scope   FunctionDef "create_controller" (module-level helper)  Push scope: ["module", "function:create_controller"]  Extract: "Factory pattern from Gang of Four"  Claim: {"scope": "module:function:create_controller", ...}
 ``` ### 3.2 Scope Representation **Canonical Scope Format:** | Python Structure | Scope String Example |
 |------------------|---------------------|
 | Module docstring | `"module"` |
@@ -173,47 +173,47 @@ from pathlib import Path def benchmark_regex(file_path: str) -> float: """Regex-
 
 ---
 
-## 7. Edge Cases & Limitations ### 7.1 Successfully Handled Cases **✅ Multi-line Docstrings:**
+## 7. Edge Cases & Limitations ### 7.1 Successfully Handled Cases ** Multi-line Docstrings:**
 ```python
 
-def complex_method(): """ This is a multi-line docstring that implements STA from Levant (2003). """ # ✅ AST correctly extracts as single string
-``` **✅ All Quote Styles:**
+def complex_method(): """ This is a multi-line docstring that implements STA from Levant (2003). """ #  AST correctly extracts as single string
+``` ** All Quote Styles:**
 ```python
 
-def single_quotes(): 'Single-line with citation [1]' # ✅ Detected def triple_single(): '''Triple single quotes spanning multiple lines''' # ✅ Detected
-``` **✅ Nested Functions:**
+def single_quotes(): 'Single-line with citation [1]' #  Detected def triple_single(): '''Triple single quotes spanning multiple lines''' #  Detected
+``` ** Nested Functions:**
 ```python
 # example-metadata:
 
-# runnable: false class Outer: def method(self): def inner(): """Inner implements X from Y""" # ✅ Scope: ...Outer:method:inner
+# runnable: false class Outer: def method(self): def inner(): """Inner implements X from Y""" #  Scope: ...Outer:method:inner
 
-``` **✅ Decorators:**
+``` ** Decorators:**
 ```python
 
 @staticmethod
-def helper(): """Implements utility from paper [5]""" # ✅ Correctly attributed
-``` ### 7.2 Known Limitations **❌ Syntax Errors:**
+def helper(): """Implements utility from paper [5]""" #  Correctly attributed
+``` ### 7.2 Known Limitations ** Syntax Errors:**
 ```python
 
 def broken(): """Claim here""" return # Missing value causes SyntaxError
 ```
 - **Behavior:** File skipped entirely, logged as error
-- **Mitigation:** Validation pass before extraction (`python -m py_compile`) **❌ Non-Docstring Comments:**
+- **Mitigation:** Validation pass before extraction (`python -m py_compile`) ** Non-Docstring Comments:**
 ```python
 
-def foo(): # This comment implements X from Y # ❌ Not extracted pass
+def foo(): # This comment implements X from Y #  Not extracted pass
 ```
 - **Behavior:** Regular comments ignored (by design)
-- **Rationale:** Comments are implementation notes, not formal claims **❌ Dynamic Strings:**
+- **Rationale:** Comments are implementation notes, not formal claims ** Dynamic Strings:**
 ```python
 
-class Controller: DESCRIPTION = "Implements " + algorithm + " from " + paper # ❌ Not detected
+class Controller: DESCRIPTION = "Implements " + algorithm + " from " + paper #  Not detected
 ```
 - **Behavior:** Runtime string concatenation invisible to AST
-- **Mitigation:** Require static docstrings for claim extraction **❌ Type Annotations:**
+- **Mitigation:** Require static docstrings for claim extraction ** Type Annotations:**
 ```python
 
-def method() -> "Returns SMC control from Utkin": # ❌ Not extracted pass
+def method() -> "Returns SMC control from Utkin": #  Not extracted pass
 ```
 - **Behavior:** Type hints not processed (separate namespace)
 - **Mitigation:** Place claims in docstrings, not annotations ### 7.3 Error Handling Strategy **Robust Extraction Pipeline:** ```python
@@ -232,7 +232,7 @@ def method() -> "Returns SMC control from Utkin": # ❌ Not extracted pass
 
 ---
 
-**Document Status:** ✅ Complete
+**Document Status:**  Complete
 **Lines of Code Examples:** 15+ executable snippets
 **Mathematical Notation:** LaTeX-rendered complexity analysis
 **Cross-references:** 8 internal links to project artifacts

@@ -24,17 +24,17 @@ The double inverted pendulum (DIP) on a cart is a **nonlinear, underactuated mec
 
 ```
                 Link 2
-                  │ ↗ θ₂
-                  │/
-              m₂  ●
-                  │
-                  │ Link 1
-              m₁  ● ↗ θ₁
-                  │/
-        ┌─────────┴─────────┐
-        │   Cart (mass M)   │ ← u (control force)
-        └───────────────────┘
-        ═════════════════════ Rail
+                   ↗ θ₂
+                  /
+              m₂  
+                  
+                   Link 1
+              m₁   ↗ θ₁
+                  /
+        
+           Cart (mass M)    ← u (control force)
+        
+         Rail
 ```
 
 **Physical Parameters:**
@@ -804,5 +804,5 @@ physics_params = {
 
 **Document Version:** 1.0
 **Last Updated:** 2025-10-04
-**Status:** ✅ Complete
+**Status:**  Complete
 **Word Count:** ~6,100 words | ~720 lines

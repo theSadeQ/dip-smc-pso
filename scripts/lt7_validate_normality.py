@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 LT-7 RESEARCH PAPER - TASK B.1: NORMALITY VALIDATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 
 Purpose:
   Validate that chattering distributions are approximately normal
@@ -22,7 +22,7 @@ Output:
 
 Author: Claude Code
 Date: 2025-10-20 (Phase 2, Category B)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 """
 
 import pandas as pd
@@ -31,9 +31,9 @@ from scipy import stats
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Configuration
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 # Data paths
 FIXED_CSV = Path("benchmarks/MT6_fixed_baseline.csv")
@@ -49,9 +49,9 @@ REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
 # Statistical parameters
 ALPHA = 0.05  # Significance level for Shapiro-Wilk
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Load Data
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("[LOAD] Loading MT-6 chattering data...")
 df_fixed = pd.read_csv(FIXED_CSV)
@@ -63,9 +63,9 @@ chattering_adaptive = df_adaptive['chattering_index'].values
 print(f"  Fixed boundary: n={len(chattering_fixed)}, mean={chattering_fixed.mean():.2f}")
 print(f"  Adaptive boundary: n={len(chattering_adaptive)}, mean={chattering_adaptive.mean():.2f}")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Shapiro-Wilk Test
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n[TEST] Running Shapiro-Wilk normality test...")
 stat_fixed, p_fixed = stats.shapiro(chattering_fixed)
@@ -77,9 +77,9 @@ print(f"    -> {'NORMAL' if p_fixed > ALPHA else 'NOT NORMAL'} (alpha={ALPHA})")
 print(f"  Adaptive boundary: W={stat_adaptive:.4f}, p={p_adaptive:.4f}")
 print(f"    -> {'NORMAL' if p_adaptive > ALPHA else 'NOT NORMAL'} (alpha={ALPHA})")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Q-Q Plots (Visual Normality Check)
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n[PLOT] Generating Q-Q plots...")
 
@@ -115,9 +115,9 @@ plt.savefig(FIGURE_PATH.with_suffix('.png'), dpi=150, bbox_inches='tight')
 print(f"  [OK] Saved: {FIGURE_PATH}")
 print(f"  [OK] Saved: {FIGURE_PATH.with_suffix('.png')}")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Generate Report
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n[REPORT] Generating markdown report...")
 
@@ -156,8 +156,8 @@ report = f"""# Task B.1: Normality Validation Report
 
 | Distribution | W-statistic | p-value | Conclusion (α={ALPHA}) |
 |--------------|-------------|---------|------------------------|
-| **Fixed Boundary** | {stat_fixed:.4f} | {p_fixed:.4f} | {'✓ NORMAL' if p_fixed > ALPHA else '✗ NOT NORMAL'} |
-| **Adaptive Boundary** | {stat_adaptive:.4f} | {p_adaptive:.4f} | {'✓ NORMAL' if p_adaptive > ALPHA else '✗ NOT NORMAL'} |
+| **Fixed Boundary** | {stat_fixed:.4f} | {p_fixed:.4f} | {' NORMAL' if p_fixed > ALPHA else ' NOT NORMAL'} |
+| **Adaptive Boundary** | {stat_adaptive:.4f} | {p_adaptive:.4f} | {' NORMAL' if p_adaptive > ALPHA else ' NOT NORMAL'} |
 
 **Interpretation:**
 - **Fixed Boundary:** {'p > α, fail to reject H₀ → data is approximately normal' if p_fixed > ALPHA else 'p ≤ α, reject H₀ → data deviates significantly from normality'}
@@ -188,13 +188,13 @@ The Welch's t-test used in Chapter 6 (Figure VI-1) assumes approximate normality
 # Add validation status based on test results
 if p_fixed > ALPHA and p_adaptive > ALPHA:
     report += """
-✓ **VALID:** Both distributions pass Shapiro-Wilk test (p > 0.05)
-✓ Parametric tests (Welch's t-test) are appropriate for this data
-✓ Reported confidence intervals and p-values are reliable
+ **VALID:** Both distributions pass Shapiro-Wilk test (p > 0.05)
+ Parametric tests (Welch's t-test) are appropriate for this data
+ Reported confidence intervals and p-values are reliable
 """
 elif p_fixed > ALPHA or p_adaptive > ALPHA:
     report += f"""
-⚠ **PARTIAL:** One distribution passes, one fails normality test
+ **PARTIAL:** One distribution passes, one fails normality test
 - Fixed: {'PASS' if p_fixed > ALPHA else 'FAIL'} (p={p_fixed:.4f})
 - Adaptive: {'PASS' if p_adaptive > ALPHA else 'FAIL'} (p={p_adaptive:.4f})
 
@@ -202,7 +202,7 @@ elif p_fixed > ALPHA or p_adaptive > ALPHA:
 """
 else:
     report += f"""
-✗ **INVALID:** Both distributions fail Shapiro-Wilk test (p ≤ 0.05)
+ **INVALID:** Both distributions fail Shapiro-Wilk test (p ≤ 0.05)
 - Fixed: p={p_fixed:.4f}
 - Adaptive: p={p_adaptive:.4f}
 
@@ -218,15 +218,15 @@ report += f"""
 
 if p_fixed > ALPHA and p_adaptive > ALPHA:
     report += """
-1. ✓ Continue using Welch's t-test for statistical comparisons
-2. ✓ Confidence intervals computed via t-distribution are valid
-3. ✓ No need to switch to non-parametric methods
+1.  Continue using Welch's t-test for statistical comparisons
+2.  Confidence intervals computed via t-distribution are valid
+3.  No need to switch to non-parametric methods
 """
 else:
     report += """
-1. ⚠ Consider supplementing with Mann-Whitney U test (non-parametric alternative)
-2. ⚠ Use bootstrap confidence intervals for robustness
-3. ⚠ Report both parametric and non-parametric results for transparency
+1.  Consider supplementing with Mann-Whitney U test (non-parametric alternative)
+2.  Use bootstrap confidence intervals for robustness
+3.  Report both parametric and non-parametric results for transparency
 """
 
 report += f"""
@@ -244,9 +244,9 @@ with open(REPORT_PATH, 'w', encoding='utf-8') as f:
 
 print(f"  [OK] Saved: {REPORT_PATH}")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Summary
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n" + "="*80)
 print("NORMALITY VALIDATION COMPLETE")

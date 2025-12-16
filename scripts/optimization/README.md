@@ -1,6 +1,6 @@
 # PSO Optimization Scripts - Issue #12
 
-Comprehensive automation toolkit for PSO-based controller optimization and validation.
+complete automation toolkit for PSO-based controller optimization and validation.
 
 ---
 
@@ -53,7 +53,7 @@ fitness = tracking_error_rms + chattering_penalty + tracking_penalty + effort_pe
 
 **Usage:** ~~Not recommended for chattering reduction~~ Use `optimize_chattering_focused.py` instead
 
-#### `optimize_chattering_focused.py` ✨
+#### `optimize_chattering_focused.py` 
 **Corrected PSO optimizer** (direct chattering minimization)
 
 ```bash
@@ -101,8 +101,8 @@ Estimated Progress:
   sta_smc             : 8 iterations remaining
 ```
 
-#### `validate_and_summarize.py` ✨
-**Comprehensive validation** by re-simulation with exact PSO metrics
+#### `validate_and_summarize.py` 
+**complete validation** by re-simulation with exact PSO metrics
 
 ```bash
 python scripts/optimization/validate_and_summarize.py
@@ -133,7 +133,7 @@ Individual Results:
   sta_smc                     : chattering=   1.874 [PASS]
 ```
 
-#### `monitor_and_validate.py` ✨
+#### `monitor_and_validate.py` 
 **Automated end-to-end workflow** - monitor PSO and auto-validate
 
 ```bash
@@ -264,9 +264,9 @@ python scripts/optimization/validate_and_summarize.py
 - Control Effort: ~50 N
 
 ### Target (After Optimization)
-- Chattering Index: **< 2.0** ✅
-- Tracking Error: < 0.1 rad ✅
-- Control Effort: < 100 N RMS ✅
+- Chattering Index: **< 2.0** 
+- Tracking Error: < 0.1 rad 
+- Control Effort: < 100 N RMS 
 
 ### Likely Outcome (Current PSO Runs)
 Based on fitness function analysis:
@@ -380,7 +380,7 @@ Ensure PSO generated output files
 When adding new optimization scripts:
 1. Follow naming convention: `optimize_<objective>_<method>.py`
 2. Include ASCII header (90 chars wide)
-3. Add comprehensive docstring
+3. Add complete docstring
 4. Support `--controller`, `--iters`, `--n-particles`, `--seed` args
 5. Generate JSON output: `gains_<controller>_<objective>.json`
 6. Update this README

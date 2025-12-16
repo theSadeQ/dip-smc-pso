@@ -74,18 +74,18 @@ on: push: branches: [main, develop] pull_request: branches: [main] jobs: test: r
 # Pre-commit hook for quality gates set -e echo "Running pre-commit checks..." # 1. Configuration validation (fast fail)
 echo "→ Validating configuration..."
 python validate_config.py
-if [ $? -ne 0 ]; then echo "❌ Configuration validation failed" exit 1
+if [ $? -ne 0 ]; then echo " Configuration validation failed" exit 1
 fi # 2. Fast unit tests
 echo "→ Running fast unit tests..."
 pytest tests/ -k "not integration and not slow" -q --tb=no
-if [ $? -ne 0 ]; then echo "❌ Unit tests failed" exit 1
+if [ $? -ne 0 ]; then echo " Unit tests failed" exit 1
 fi # 3. Mathematical property tests (critical)
 echo "→ Running mathematical validation..."
 pytest tests/validation/ -k "property" -q --tb=no
-if [ $? -ne 0 ]; then echo "❌ Mathematical property tests failed" exit 1
+if [ $? -ne 0 ]; then echo " Mathematical property tests failed" exit 1
 fi # 4. Code formatting check (optional)
-if command -v black &> /dev/null; then echo "→ Checking code formatting..." black --check src/ tests/ --quiet if [ $? -ne 0 ]; then echo "⚠️ Code formatting issues detected (run 'black src/ tests/')" # Don't fail commit, just warn fi
-fi echo "✅ All pre-commit checks passed"
+if command -v black &> /dev/null; then echo "→ Checking code formatting..." black --check src/ tests/ --quiet if [ $? -ne 0 ]; then echo " Code formatting issues detected (run 'black src/ tests/')" # Don't fail commit, just warn fi
+fi echo " All pre-commit checks passed"
 exit 0
 ``` ### 2.3 Automated Test Execution Strategy ```yaml
 # pytest.ini

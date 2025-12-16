@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-This document defines the comprehensive structured logging architecture for the DIP-SMC-PSO project. The system provides JSON-based, machine-parseable, searchable logs with async I/O, rotation, and component-level configuration.
+This document defines the complete structured logging architecture for the DIP-SMC-PSO project. The system provides JSON-based, machine-parseable, searchable logs with async I/O, rotation, and component-level configuration.
 
 **Key Design Principles:**
 - Structured JSON format for machine parseability
@@ -38,43 +38,43 @@ This document defines the comprehensive structured logging architecture for the 
 ### 1.1 System Design
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     Application Layer                        │
-│  (Controllers, PSO, Simulation, Plant)                       │
-└───────────────────┬─────────────────────────────────────────┘
-                    │
-                    ▼
-┌─────────────────────────────────────────────────────────────┐
-│                  StructuredLogger API                        │
-│  - log_event(event_name, **data)                            │
-│  - log_performance(operation, duration_ms)                   │
-│  - log_exception(exception, context)                         │
-└───────────────────┬─────────────────────────────────────────┘
-                    │
-                    ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    Formatters Layer                          │
-│  - JSON Formatter (structured output)                        │
-│  - Console Formatter (human-readable)                        │
-│  - Metric Formatter (performance data)                       │
-└───────────────────┬─────────────────────────────────────────┘
-                    │
-                    ▼
-┌─────────────────────────────────────────────────────────────┐
-│                     Handlers Layer                           │
-│  - FileHandler (rotating files)                              │
-│  - JSONHandler (structured JSON)                             │
-│  - AsyncHandler (non-blocking I/O)                           │
-│  - ConsoleHandler (real-time output)                         │
-└───────────────────┬─────────────────────────────────────────┘
-                    │
-                    ▼
-┌─────────────────────────────────────────────────────────────┐
-│                      Storage Layer                           │
-│  - logs/controller_YYYY-MM-DD.log                            │
-│  - logs/pso_YYYY-MM-DD.json                                  │
-│  - logs/simulation_YYYY-MM-DD.log                            │
-└─────────────────────────────────────────────────────────────┘
+
+                     Application Layer                        
+  (Controllers, PSO, Simulation, Plant)                       
+
+                    
+                    
+
+                  StructuredLogger API                        
+  - log_event(event_name, **data)                            
+  - log_performance(operation, duration_ms)                   
+  - log_exception(exception, context)                         
+
+                    
+                    
+
+                    Formatters Layer                          
+  - JSON Formatter (structured output)                        
+  - Console Formatter (human-readable)                        
+  - Metric Formatter (performance data)                       
+
+                    
+                    
+
+                     Handlers Layer                           
+  - FileHandler (rotating files)                              
+  - JSONHandler (structured JSON)                             
+  - AsyncHandler (non-blocking I/O)                           
+  - ConsoleHandler (real-time output)                         
+
+                    
+                    
+
+                      Storage Layer                           
+  - logs/controller_YYYY-MM-DD.log                            
+  - logs/pso_YYYY-MM-DD.json                                  
+  - logs/simulation_YYYY-MM-DD.log                            
+
 ```
 
 ### 1.2 Key Components
@@ -174,7 +174,7 @@ Domain.SubDomain.Component.Method
 
 ### 3.3 Filtering by Component
 
-The hierarchical structure enables powerful filtering:
+The hierarchical structure enables effective filtering:
 
 ```python
 # Get all controller logs
@@ -764,7 +764,7 @@ This logging architecture provides:
 4. **Async, non-blocking I/O** (<0.1ms overhead)
 5. **Intelligent rotation** (daily + size-based)
 6. **Flexible log levels** (per-component configuration)
-7. **Comprehensive integration** (all 7 controllers + PSO)
+7. **complete integration** (all 7 controllers + PSO)
 8. **Performance monitoring** (self-observing system)
 
 The system is designed for:

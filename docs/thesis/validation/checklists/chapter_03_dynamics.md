@@ -152,7 +152,7 @@
   - Notes:
 
 - [ ] **3.7.2** Coriolis and centrifugal terms correctly assembled
-  - C(q,q̇) = (1/2)Ṁ(q) + [dM/dθᵢ]q̇ⱼ terms
+  - C(q,q̇) = (1/2)Ṁ(q) + [dM/dθᵢ]q̇ terms
   - All nonlinear coupling terms present: [Yes / No]
   - Derivation method: [Explicit formula / From Lagrange equations / Other]
   - Notes:
@@ -204,7 +204,7 @@
 - [ ] **3.10.1** All modeling assumptions explicitly listed
   - Assumptions found: [List here]
   - Examples: rigid bodies, point masses, no slip, perfect motors
-  - Completeness: [Comprehensive / Partial / Missing]
+  - Completeness: [complete / Partial / Missing]
   - Notes:
 
 - [ ] **3.10.2** Validity of assumptions justified

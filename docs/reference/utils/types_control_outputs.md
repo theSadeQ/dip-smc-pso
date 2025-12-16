@@ -17,7 +17,7 @@ between caller and callee: the client must satisfy preconditions and
 may rely on the supplier to guarantee postconditions.  As noted in
 interface‑based programming literature, the tighter the contract (for
 example through explicit return types), the less freedom the
-implementation has to deviate from expectations【738473614585036†L239-L256】.  By
+implementation has to deviate from expectations738473614585036†L239-L256.  By
 codifying controller outputs in named tuples, we communicate the
 structure of the returned data unambiguously and reduce the risk of
 misinterpretation by downstream components.
@@ -28,7 +28,7 @@ References
   of Object Technology*, vol. 4, no. 7, pp. 75–94, 2005.  The authors view
   interfaces as contracts between a client and a supplier, emphasising that
   clear preconditions and postconditions constrain the behaviour of
-  implementations【738473614585036†L239-L256】.  Encoding controller outputs as named
+  implementations738473614585036†L239-L256.  Encoding controller outputs as named
   tuples tightens the return contract and prevents ambiguous slicing or
   misuse.
 

@@ -10,13 +10,13 @@ Imagine you're explaining how to make coffee to different people throughout the 
 
 Functions work the same way in programming. Instead of writing the same code repeatedly, you package it once with a name, then call that name whenever you need it. This episode is about creating those reusable packages - functions - and understanding why they're fundamental to good programming.
 
-By the end, you'll be writing your own functions that make your code cleaner, more maintainable, and easier to understand.
+By the end, the system will be writing your own functions that make your code cleaner, more maintainable, and easier to understand.
 
 ---
 
 ## What You'll Discover
 
-By listening to this episode, you'll learn:
+By listening to this episode, the system will learn:
 
 - What functions are and why programmers use them
 - How to define functions with the def keyword
@@ -50,7 +50,7 @@ Third, **maintainability**. If you need to fix a bug or improve an algorithm, yo
 
 ## Defining Your First Function
 
-Let's create a simple function. Type this:
+create a simple function. Type this:
 
 def space greet open-parenthesis close-parenthesis colon
     print open-parenthesis "Hello, World!" close-parenthesis
@@ -62,7 +62,7 @@ greet open-parenthesis close-parenthesis
 You see:
 Hello, World!
 
-Let's break down the definition:
+break down the definition:
 
 - **def** - Keyword meaning "define a function"
 - **greet** - The function's name (you choose this)
@@ -85,7 +85,7 @@ Function names follow the same rules as variable names:
 
 ## Parameters: Giving Functions Input
 
-A function that always does the same thing isn't very useful. Let's make it flexible with parameters.
+A function that always does the same thing isn't very useful. make it flexible with parameters.
 
 def space greet open-parenthesis name close-parenthesis colon
     print open-parenthesis f-quote Hello comma open-brace name close-brace exclamation double-quote close-parenthesis
@@ -176,7 +176,7 @@ This is fine for functions that perform actions (like printing) but don't comput
 
 ## Recap: Function Fundamentals
 
-Let's pause and review what you've learned about functions:
+pause and review what you've learned about functions:
 
 **Number one**: Functions are named blocks of reusable code. You define them once with def, then call them many times.
 
@@ -242,7 +242,7 @@ Try to pass values as parameters instead of relying on global variables. This ma
 
 ## Practical Example: A Simple Controller Function
 
-Let's write a function that implements proportional control for a pendulum:
+write a function that implements proportional control for a pendulum:
 
 def space proportional underscore control open-parenthesis angle comma gain close-parenthesis colon
     """
@@ -514,7 +514,7 @@ Technical terms from this episode with phonetic pronunciations:
 
 ## What's Next: Lists and Dictionaries
 
-In Episode 5, we'll explore Python's data structures:
+In Episode 5, this will explore Python's data structures:
 
 - Lists: Ordered collections of items
 - Indexing and slicing: Accessing parts of lists

@@ -1,6 +1,6 @@
 # Test Protocols
 
-﻿# 5.x Test Protocols
+# 5.x Test Protocols
 
 ## Test Matrix
 

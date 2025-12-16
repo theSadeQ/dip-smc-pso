@@ -108,7 +108,7 @@ python simulate.py --controller classical_smc --plot
 ```
 INFO:root:Provenance configured: commit=<hash>, cfg_hash=<hash>, seed=0
 D:\Projects\main\src\plant\core\state_validation.py:171: UserWarning: State vector was modified during sanitization warnings.warn("State vector was modified during sanitization", UserWarning)
-``` **Note:** The simulation runs with minimal terminal output. The provenance line confirms the simulation configuration is tracked for reproducibility. The state sanitization warning is normal and indicates the simulator is ensuring numerical stability. **⏱️ Simulation takes:** 10-15 seconds on modern hardware (includes initialization and plotting) ### Understanding the Output #### Plot Window 1: State Trajectories You'll see a plot with 6 subplots showing: 1. **Cart Position (x):** Should stabilize near initial displacement (~0.1 m)
+``` **Note:** The simulation runs with minimal terminal output. The provenance line confirms the simulation configuration is tracked for reproducibility. The state sanitization warning is normal and indicates the simulator is ensuring numerical stability. **⏱ Simulation takes:** 10-15 seconds on modern hardware (includes initialization and plotting) ### Understanding the Output #### Plot Window 1: State Trajectories You'll see a plot with 6 subplots showing: 1. **Cart Position (x):** Should stabilize near initial displacement (~0.1 m)
 
 2. **Cart Velocity (dx):** Should converge to 0 m/s
 3. **First Pendulum Angle (θ₁):** Should converge to 0 rad (upright)
@@ -233,4 +233,4 @@ python -c "import src.config; print('OK')"
 
 ---
 
-**Congratulations! You've completed the getting started guide.** 🎉 You now have a working DIP SMC PSO installation and have run your first simulation. Continue with [Tutorial 01](tutorials/tutorial-01-first-simulation.md) for a deeper understanding.
+**Congratulations! You've completed the getting started guide.**  You now have a working DIP SMC PSO installation and have run your first simulation. Continue with [Tutorial 01](tutorials/tutorial-01-first-simulation.md) for a deeper understanding.

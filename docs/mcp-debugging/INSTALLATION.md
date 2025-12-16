@@ -247,7 +247,7 @@ node "C:\Program Files\nodejs\node_modules\@modelcontextprotocol\server-puppetee
 
 #### 5. Git MCP Server
 
-**Purpose:** Comprehensive Git operations and version control
+**Purpose:** complete Git operations and version control
 
 ```bash
 npm install -g @cyanheads/git-mcp-server

@@ -7,7 +7,7 @@ A practical guide for distributed Hardware-in-the-Loop (HIL) architectures where
 ## Overview
 
 Multi-machine HIL setups enable:
-- **Hardware separation:** Plant on powerful server, controller on embedded device
+- **Hardware separation:** Plant on effective server, controller on embedded device
 - **Geographic distribution:** Test controllers remotely
 - **Scalability:** Multiple controllers testing against same plant
 - **Realism:** Network latency mimics real distributed control systems
@@ -21,12 +21,12 @@ Multi-machine HIL setups enable:
 **Basic Setup:**
 ```
 Machine 1 (Plant Server)          Machine 2 (Controller Client)
-┌─────────────────────┐           ┌──────────────────────┐
-│  plant_server.py    │  <----->  │  controller_client.py│
-│  DIP Dynamics       │    TCP    │  SMC Controller      │
-│  Port 5555          │    or     │                      │
-│  ZeroMQ REP         │    UDP    │  ZeroMQ REQ          │
-└─────────────────────┘           └──────────────────────┘
+           
+  plant_server.py      <----->    controller_client.py
+  DIP Dynamics           TCP      SMC Controller      
+  Port 5555              or                           
+  ZeroMQ REP             UDP      ZeroMQ REQ          
+           
 ```
 
 ---
@@ -100,8 +100,8 @@ hil:
 ```
         Plant Server (192.168.1.100)
               |
-    ┌─────────┼─────────┐
-    │         │         │
+    
+                      
 Controller1 Controller2 Controller3
 (.101)      (.102)      (.103)
 ```
@@ -126,9 +126,9 @@ python simulate.py --run-hil --plant-host 192.168.1.100 --client-id ctrl3
 **Use Case:** Separate monitoring/logging node
 
 ```
-Plant Server ─┬─> Controller (controls)
-              │
-              └─> Observer (monitors only, no control)
+Plant Server > Controller (controls)
+              
+              > Observer (monitors only, no control)
 ```
 
 **Observer Mode:**

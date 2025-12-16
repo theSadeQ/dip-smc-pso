@@ -43,11 +43,11 @@ monitor = LatencyMonitor(dt=0.01)
 The Utilities API provides helper functions and tools for validation, control signal processing, performance monitoring, and result analysis.
 
 **Key Features:**
-- ✅ **Validation:** State and parameter bounds checking
-- ✅ **Control Primitives:** Saturation, deadzone, sign functions
-- ✅ **Monitoring:** Real-time performance tracking
-- ✅ **Analysis:** Metrics computation and statistical analysis
-- ✅ **Visualization:** Plotting and animation tools
+-  **Validation:** State and parameter bounds checking
+-  **Control Primitives:** Saturation, deadzone, sign functions
+-  **Monitoring:** Real-time performance tracking
+-  **Analysis:** Metrics computation and statistical analysis
+-  **Visualization:** Plotting and animation tools
 
 **Related Documentation:**
 - [How-To: Testing & Validation](../how-to/testing-validation.md)
@@ -534,9 +534,9 @@ try:
     validate_physics_params(config.dip_params)
     validate_controller_gains(gains, controller_type)
     validate_state(initial_state)
-    print("✅ All validation passed")
+    print(" All validation passed")
 except ValueError as e:
-    print(f"❌ Validation failed: {e}")
+    print(f" Validation failed: {e}")
     sys.exit(1)
 
 # Proceed with simulation

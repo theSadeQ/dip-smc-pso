@@ -29,7 +29,7 @@
 <!-- Getting Started Branch -->
 <div class="tree-branch getting-started">
     <div class="branch-header">
-        <div class="branch-icon">🚀</div>
+        <div class="branch-icon"></div>
         <div class="branch-title">Getting Started</div>
     </div>
     <div class="branch-description">
@@ -46,7 +46,7 @@
 <!-- User Guides Branch -->
 <div class="tree-branch user-guides">
     <div class="branch-header">
-        <div class="branch-icon">📖</div>
+        <div class="branch-icon"></div>
         <div class="branch-title">User Guides</div>
     </div>
     <div class="branch-description">
@@ -64,7 +64,7 @@
 <!-- API Reference Branch -->
 <div class="tree-branch api-reference">
     <div class="branch-header">
-        <div class="branch-icon">🔧</div>
+        <div class="branch-icon"></div>
         <div class="branch-title">API Reference</div>
     </div>
     <div class="branch-description">
@@ -84,7 +84,7 @@
 <!-- Theory & Mathematics Branch -->
 <div class="tree-branch theory">
     <div class="branch-header">
-        <div class="branch-icon">📐</div>
+        <div class="branch-icon"></div>
         <div class="branch-title">Theory & Math</div>
     </div>
     <div class="branch-description">
@@ -102,7 +102,7 @@
 <!-- Testing & Validation Branch -->
 <div class="tree-branch testing">
     <div class="branch-header">
-        <div class="branch-icon">✅</div>
+        <div class="branch-icon"></div>
         <div class="branch-title">Testing</div>
     </div>
     <div class="branch-description">
@@ -120,7 +120,7 @@
 <!-- Deployment Branch -->
 <div class="tree-branch deployment">
     <div class="branch-header">
-        <div class="branch-icon">🚢</div>
+        <div class="branch-icon"></div>
         <div class="branch-title">Deployment</div>
     </div>
     <div class="branch-description">
@@ -137,7 +137,7 @@
 <!-- Project Documentation Branch -->
 <div class="tree-branch project-docs">
     <div class="branch-header">
-        <div class="branch-icon">📋</div>
+        <div class="branch-icon"></div>
         <div class="branch-title">Project Docs</div>
     </div>
     <div class="branch-description">
@@ -165,4 +165,4 @@
 
 ---
 
-**💡 Tip**: Click any link to navigate directly to that section. Links marked with ▸ contain sub-sections with more detailed documentation.
+** Tip**: Click any link to navigate directly to that section. Links marked with  contain sub-sections with more detailed documentation.

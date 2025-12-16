@@ -199,7 +199,7 @@ def main():
     print(f"\nNext steps:")
     print(f"1. Review: cat {output_path}")
     print(f"2. Commit: git add {output_path} scripts/generate_performance_matrix.py")
-    print(f"3. Continue with Week 2: MT-5 (Comprehensive Benchmark)")
+    print(f"3. Continue with Week 2: MT-5 (complete Benchmark)")
 
 
 if __name__ == "__main__":

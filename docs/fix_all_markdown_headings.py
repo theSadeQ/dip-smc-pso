@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Comprehensive Markdown heading formatter for Sphinx documentation.
+complete Markdown heading formatter for Sphinx documentation.
 
 Fixes two main patterns that cause Sphinx sidebar rendering issues:
 1. Multiple headings on same line: # Title ## Subtitle

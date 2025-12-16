@@ -151,15 +151,15 @@ pip3 install -r requirements.txt
 
 ```
 dip-smc-pso/
-├─ src/                  # Source code
-│  ├─ controllers/       # SMC implementations
-│  ├─ plant/             # DIP dynamics
-│  ├─ optimizer/         # PSO tuner
-│  └─ utils/             # Helper functions
-├─ simulate.py           # Main entry point (YOU WILL RUN THIS)
-├─ config.yaml           # Configuration file
-├─ requirements.txt      # Dependencies
-└─ docs/                 # Documentation
+ src/                  # Source code
+   controllers/       # SMC implementations
+   plant/             # DIP dynamics
+   optimizer/         # PSO tuner
+   utils/             # Helper functions
+ simulate.py           # Main entry point (YOU WILL RUN THIS)
+ config.yaml           # Configuration file
+ requirements.txt      # Dependencies
+ docs/                 # Documentation
 ```
 
 ---
@@ -275,15 +275,15 @@ Run the simulation and answer:
 
 **Checklist**:
 
-- ✅ I can activate the virtual environment without errors
-- ✅ I can run `python simulate.py --help` and see options
-- ✅ I successfully ran my first simulation
-- ✅ I see 6 subplots showing system behavior
-- ✅ I understand what settling time and overshoot mean
+-  I can activate the virtual environment without errors
+-  I can run `python simulate.py --help` and see options
+-  I successfully ran my first simulation
+-  I see 6 subplots showing system behavior
+-  I understand what settling time and overshoot mean
 
-**If all checked**: ✅ Move to Phase 3.2
-**If simulation won't run**: ⚠️ Check troubleshooting in Phase 3.5
-**If plots don't show**: ⚠️ Check matplotlib backend (use `--save` instead)
+**If all checked**:  Move to Phase 3.2
+**If simulation won't run**:  Check troubleshooting in Phase 3.5
+**If plots don't show**:  Check matplotlib backend (use `--save` instead)
 
 </details>
 
@@ -506,9 +506,9 @@ chattering = std(diff(F)) / mean(|F|)  # Relative variation
 
 Sketch (on paper) what a "good" pendulum angle plot looks like vs a "poor" one with high overshoot.
 
-**If you can complete quiz and sketch**: ✅ Move to Phase 3.3
-**If struggling with plots**: ⚠️ Review Step 1, run more simulations
-**If struggling with metrics**: ⚠️ Review Step 3, compare controller outputs
+**If you can complete quiz and sketch**:  Move to Phase 3.3
+**If struggling with plots**:  Review Step 1, run more simulations
+**If struggling with metrics**:  Review Step 3, compare controller outputs
 
 </details>
 
@@ -640,9 +640,9 @@ Ask yourself:
 
 Run all 4 controllers and create your own comparison table. Verify your results match the trends described.
 
-**If you can complete quiz and exercise**: ✅ Move to Phase 3.4
-**If controllers won't run**: ⚠️ Check controller names (case-sensitive)
-**If results seem wrong**: ⚠️ Check initial conditions are same for all runs
+**If you can complete quiz and exercise**:  Move to Phase 3.4
+**If controllers won't run**:  Check controller names (case-sensitive)
+**If results seem wrong**:  Check initial conditions are same for all runs
 
 </details>
 
@@ -859,9 +859,9 @@ git checkout config.yaml  # If using git
 2. Observe how performance changes
 3. Explain why (in your own words)
 
-**If you can complete quiz and exercise**: ✅ Move to Phase 3.5
-**If YAML syntax errors**: ⚠️ Check indentation (use spaces, not tabs)
-**If simulation fails after changes**: ⚠️ Reset config.yaml and try again
+**If you can complete quiz and exercise**:  Move to Phase 3.5
+**If YAML syntax errors**:  Check indentation (use spaces, not tabs)
+**If simulation fails after changes**:  Reset config.yaml and try again
 
 </details>
 
@@ -979,14 +979,14 @@ ValueError: Unknown controller type: 'classical'
 
 **Checklist**:
 
-- ✅ I know how to activate virtual environment
-- ✅ I can fix YAML syntax errors
-- ✅ I know what to do if simulation diverges
-- ✅ I can troubleshoot import errors
-- ✅ I know where to get help
+-  I know how to activate virtual environment
+-  I can fix YAML syntax errors
+-  I know what to do if simulation diverges
+-  I can troubleshoot import errors
+-  I know where to get help
 
-**If all checked**: 🎉 **Phase 3 COMPLETE!**
-**If stuck on errors**: ⚠️ Review solutions above, ask for help
+**If all checked**:  **Phase 3 COMPLETE!**
+**If stuck on errors**:  Review solutions above, ask for help
 
 </details>
 
@@ -1028,7 +1028,7 @@ Test your hands-on simulation skills from Phase 3
 
 ```
 
-```{grid-item-card} 📖 Sliding Mode Control Overview
+```{grid-item-card}  Sliding Mode Control Overview
 :link: https://www.researchgate.net/publication/36218899_A_QUICK_INTRODUCTION_TO_SLIDING_MODE_CONTROL_AND_ITS_APPLICATIONS
 :link-type: url
 :class-card: resource-card resource-article
@@ -1036,12 +1036,12 @@ Test your hands-on simulation skills from Phase 3
 :text-align: center
 
 Quick introduction to SMC theory covering first and second-order SMC with chattering solutions. Free access.
-📊 *Estimated Time:* 60 min | 🎯 *Level:* Intermediate
+ *Estimated Time:* 60 min |  *Level:* Intermediate
 [Read -->]
 
 ```
 
-```{grid-item-card} 🎥 Lyapunov Stability Theory - Stanford
+```{grid-item-card}  Lyapunov Stability Theory - Stanford
 :link: https://stanford.edu/class/ee363/lectures/lyap.pdf
 :link-type: url
 :class-card: resource-card resource-video
@@ -1049,12 +1049,12 @@ Quick introduction to SMC theory covering first and second-order SMC with chatte
 :text-align: center
 
 Stanford University lecture notes on basic Lyapunov theory. Mathematical foundation for control stability.
-📊 *Estimated Time:* 45 min | 🎯 *Level:* Technical
+ *Estimated Time:* 45 min |  *Level:* Technical
 [View -->]
 
 ```
 
-```{grid-item-card} 📚 SciPy Control Systems Documentation
+```{grid-item-card}  SciPy Control Systems Documentation
 :link: https://docs.scipy.org/doc/scipy/reference/integrate.html
 :link-type: url
 :class-card: resource-card resource-docs
@@ -1062,12 +1062,12 @@ Stanford University lecture notes on basic Lyapunov theory. Mathematical foundat
 :text-align: center
 
 Official SciPy documentation for ODE solvers and integration. Complete API reference with examples.
-📊 *Estimated Time:* Reference | 🎯 *Level:* Reference
+ *Estimated Time:* Reference |  *Level:* Reference
 [Browse -->]
 
 ```
 
-```{grid-item-card} 🧪 Pendulum Simulation Demo
+```{grid-item-card}  Pendulum Simulation Demo
 :link: https://www.myphysicslab.com/pendulum/inverted-double-pendulum-en.html
 :link-type: url
 :class-card: resource-card resource-interactive
@@ -1075,23 +1075,23 @@ Official SciPy documentation for ODE solvers and integration. Complete API refer
 :text-align: center
 
 Interactive double inverted pendulum simulation. Adjust parameters, drag pendulum, visualize dynamics.
-📊 *Estimated Time:* 30 min | 🎯 *Level:* Hands-on
+ *Estimated Time:* 30 min |  *Level:* Hands-on
 [Try It -->]
 
 ```
 ```
 
 ---
-**CONGRATULATIONS!** 🎉
+**CONGRATULATIONS!** 
 
 You've completed **Phase 3: Hands-On Learning** (~25 hours)!
 
 You now can:
-✅ Run simulations with different controllers
-✅ Interpret result plots and performance metrics
-✅ Compare controller performance
-✅ Modify configuration files
-✅ Troubleshoot common errors
+ Run simulations with different controllers
+ Interpret result plots and performance metrics
+ Compare controller performance
+ Modify configuration files
+ Troubleshoot common errors
 
 **Skills Gained**:
 - Command-line proficiency

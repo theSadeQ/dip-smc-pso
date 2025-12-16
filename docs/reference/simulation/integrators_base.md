@@ -99,7 +99,7 @@ x_{n+1} = x_n + \Delta t \cdot \Phi(x_n, x_{n+1}, t_n, \Delta t)
 
 For a consistent numerical method applied to a well-posed linear IVP:
 
-**Stability + Consistency ⟹ Convergence**
+**Stability + Consistency  Convergence**
 
 ### Performance Characteristics
 

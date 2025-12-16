@@ -2,7 +2,7 @@
 """
 =================================================================================
 File: scripts/validation/run_quality_checks.py
-Description: Comprehensive local quality validation runner for DIP-SMC-PSO
+Description: complete local quality validation runner for DIP-SMC-PSO
 =================================================================================
 
 Phase 6.5: Documentation Quality Gates - Local Validation Script
@@ -33,7 +33,7 @@ class Colors:
 
 
 class QualityChecker:
-    """Runs comprehensive quality checks on the codebase."""
+    """Runs complete quality checks on the codebase."""
 
     def __init__(self, project_root: Path, auto_fix: bool = False):
         self.project_root = project_root
@@ -50,7 +50,7 @@ class QualityChecker:
 
     def print_result(self, check_name: str, passed: bool, details: str = "") -> None:
         """Print check result with color coding."""
-        status = f"{Colors.GREEN}✓ PASS{Colors.END}" if passed else f"{Colors.RED}✗ FAIL{Colors.END}"
+        status = f"{Colors.GREEN} PASS{Colors.END}" if passed else f"{Colors.RED} FAIL{Colors.END}"
         print(f"{status} | {check_name}")
         if details:
             print(f"     {details}")
@@ -76,7 +76,7 @@ class QualityChecker:
 
     def check_docstring_coverage(self) -> bool:
         """Check docstring coverage with interrogate."""
-        self.print_header("📚 Docstring Coverage Check")
+        self.print_header(" Docstring Coverage Check")
 
         cmd = [
             "interrogate",
@@ -101,7 +101,7 @@ class QualityChecker:
 
     def check_type_hints(self) -> bool:
         """Check type hint coverage."""
-        self.print_header("🏷️ Type Hint Coverage Check")
+        self.print_header(" Type Hint Coverage Check")
 
         # Count Python files
         py_files = list(self.src_dir.rglob("*.py"))
@@ -123,7 +123,7 @@ class QualityChecker:
 
     def check_links(self) -> bool:
         """Check documentation links."""
-        self.print_header("🔗 Documentation Link Validation")
+        self.print_header(" Documentation Link Validation")
 
         # Check if cross-reference script exists
         script_path = self.project_root / "scripts" / "documentation" / "analyze_cross_references.py"
@@ -151,7 +151,7 @@ class QualityChecker:
 
     def check_python_syntax(self) -> bool:
         """Check Python syntax errors."""
-        self.print_header("🐍 Python Syntax Check")
+        self.print_header(" Python Syntax Check")
 
         py_files = list(self.src_dir.rglob("*.py"))
         failed_files = []
@@ -175,7 +175,7 @@ class QualityChecker:
 
     def check_markdown_lint(self) -> bool:
         """Check markdown linting (advisory)."""
-        self.print_header("📝 Markdown Linting (Advisory)")
+        self.print_header(" Markdown Linting (Advisory)")
 
         cmd = ["markdownlint-cli2", str(self.docs_dir / "**" / "*.md")]
         passed, output = self.run_command(cmd, "Markdown Linting")
@@ -189,7 +189,7 @@ class QualityChecker:
 
     def check_spell(self) -> bool:
         """Check spelling (advisory)."""
-        self.print_header("🔤 Spell Checking (Advisory)")
+        self.print_header(" Spell Checking (Advisory)")
 
         cmd = [
             "codespell",
@@ -245,24 +245,24 @@ class QualityChecker:
 
     def print_summary(self) -> None:
         """Print final summary of all checks."""
-        self.print_header("📊 Summary")
+        self.print_header(" Summary")
 
         blocking = [name for name, passed in self.results.items() if not passed and '(advisory)' not in name.lower()]
         advisory = [name for name, passed in self.results.items() if not passed and '(advisory)' in name.lower()]
 
         if not blocking and not advisory:
-            print(f"{Colors.GREEN}✓ All quality checks passed!{Colors.END}")
-            print("\nYou're good to push! 🚀")
+            print(f"{Colors.GREEN} All quality checks passed!{Colors.END}")
+            print("\nYou're good to push! ")
         else:
             if blocking:
                 print(f"{Colors.RED}Blocking Issues ({len(blocking)}):{Colors.END}")
                 for check in blocking:
-                    print(f"  ✗ {check}")
+                    print(f"   {check}")
 
             if advisory:
                 print(f"\n{Colors.YELLOW}Advisory Warnings ({len(advisory)}):{Colors.END}")
                 for check in advisory:
-                    print(f"  ⚠ {check}")
+                    print(f"   {check}")
 
             print(f"\n{Colors.YELLOW}Fix the blocking issues before pushing.{Colors.END}")
 
@@ -270,7 +270,7 @@ class QualityChecker:
 def main() -> int:
     """Main entry point."""
     parser = argparse.ArgumentParser(
-        description="Run comprehensive quality checks for DIP-SMC-PSO project"
+        description="Run complete quality checks for DIP-SMC-PSO project"
     )
     parser.add_argument(
         '--fix',

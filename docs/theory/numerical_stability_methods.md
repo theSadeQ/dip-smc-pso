@@ -1092,24 +1092,24 @@ All theoretical claims in this document have been validated with executable NumP
 
 | **Test** | **Theoretical Prediction** | **Numerical Result** | **Agreement** |
 |----------|---------------------------|---------------------|--------------|
-| 1. RK4 stability region | 2.8× larger than Euler | 2.7× (measured) | ✓ (3% error) |
-| 2. DIP simulation stability | Euler stable for $h \leq 0.01$ s | Stable for $h \leq 0.012$ s | ✓ (20% margin) |
-| 3. RK4 speedup | 40% faster (larger steps) | 38% faster (measured) | ✓ (5% error) |
-| 4. Mass matrix conditioning | $\kappa_{\max} > 10^{13}$ | $\kappa_{\max} = 8.7 \times 10^{13}$ | ✓ (order of magnitude) |
-| 5. Regularization impact | Zero failures with adaptive | 0/10,000 failures | ✓ (100% success) |
-| 6. Error amplification | $\kappa \times \epsilon \approx 10^{-3}$ | $3.4 \times 10^{-4}$ | ✓ (same order) |
-| 7. Float64 improvement | 9 orders of magnitude | $9.2 \times 10^9$ ratio | ✓ (exact) |
-| 8. Catastrophic cancellation | Loss of sign in float32 | $\dot{V} = 0$ (float32) | ✓ (confirmed) |
-| 9. Error accumulation | $\propto \sqrt{n}$ for random | $\propto n^{0.52}$ (measured) | ✓ (random walk) |
-| 10. Quasi-sliding band | $\delta \propto h$ | $\delta = 0.78h K$ (linear fit) | ✓ ($R^2 = 0.99$) |
-| 11. Band width scaling | 10× for $h$ increase | 9.8× (measured) | ✓ (2% error) |
-| 12. RK4 chattering | 4× narrower band | 3.7× (measured) | ✓ (8% error) |
-| 13. Hessian conditioning | $10^4$ improvement | $1.8 \times 10^4$ | ✓ (same order) |
-| 14. PSO speedup | 3× with normalization | 3.0× (14 vs 42 iter) | ✓ (exact) |
-| 15. Bounds impact | 2.5× success rate | 2.4× (92% vs 37%) | ✓ (4% error) |
-| 16. Linearization accuracy | Within 15% for small $\sigma$ | 15.3% underestimate | ✓ (matched) |
-| 17. Sensitivity ranking | $K > m_1 > \lambda_1$ | Confirmed (2:1:0.6) | ✓ (ranking) |
-| 18. Robustness | 90% success for 20% uncertainty | 94% success | ✓ (exceeds target) |
+| 1. RK4 stability region | 2.8× larger than Euler | 2.7× (measured) |  (3% error) |
+| 2. DIP simulation stability | Euler stable for $h \leq 0.01$ s | Stable for $h \leq 0.012$ s |  (20% margin) |
+| 3. RK4 speedup | 40% faster (larger steps) | 38% faster (measured) |  (5% error) |
+| 4. Mass matrix conditioning | $\kappa_{\max} > 10^{13}$ | $\kappa_{\max} = 8.7 \times 10^{13}$ |  (order of magnitude) |
+| 5. Regularization impact | Zero failures with adaptive | 0/10,000 failures |  (100% success) |
+| 6. Error amplification | $\kappa \times \epsilon \approx 10^{-3}$ | $3.4 \times 10^{-4}$ |  (same order) |
+| 7. Float64 improvement | 9 orders of magnitude | $9.2 \times 10^9$ ratio |  (exact) |
+| 8. Catastrophic cancellation | Loss of sign in float32 | $\dot{V} = 0$ (float32) |  (confirmed) |
+| 9. Error accumulation | $\propto \sqrt{n}$ for random | $\propto n^{0.52}$ (measured) |  (random walk) |
+| 10. Quasi-sliding band | $\delta \propto h$ | $\delta = 0.78h K$ (linear fit) |  ($R^2 = 0.99$) |
+| 11. Band width scaling | 10× for $h$ increase | 9.8× (measured) |  (2% error) |
+| 12. RK4 chattering | 4× narrower band | 3.7× (measured) |  (8% error) |
+| 13. Hessian conditioning | $10^4$ improvement | $1.8 \times 10^4$ |  (same order) |
+| 14. PSO speedup | 3× with normalization | 3.0× (14 vs 42 iter) |  (exact) |
+| 15. Bounds impact | 2.5× success rate | 2.4× (92% vs 37%) |  (4% error) |
+| 16. Linearization accuracy | Within 15% for small $\sigma$ | 15.3% underestimate |  (matched) |
+| 17. Sensitivity ranking | $K > m_1 > \lambda_1$ | Confirmed (2:1:0.6) |  (ranking) |
+| 18. Robustness | 90% success for 20% uncertainty | 94% success |  (exceeds target) |
 
 **Overall:** 18/18 tests passed (100% validation success rate)
 

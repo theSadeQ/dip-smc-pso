@@ -725,33 +725,33 @@ Overall_Rank = 0.3 * RI + 0.3 * Stability_Margin + 0.2 * Consistency + 0.2 * Ene
 
 ```
 FaultInjector (Abstract Base)
-├── SensorFaultInjector
-│   ├── GaussianNoiseFault
-│   ├── BiasFault
-│   ├── DropoutFault
-│   └── QuantizationFault
-├── ActuatorFaultInjector
-│   ├── SaturationFault
-│   ├── DeadZoneFault
-│   ├── LagFault
-│   └── JitterFault
-├── ParametricFaultInjector
-│   ├── GainErrorFault
-│   ├── SystemUncertaintyFault
-│   └── DriftFault
-└── EnvironmentalFaultInjector
-    ├── DisturbanceFault
-    └── ModelMismatchFault
+ SensorFaultInjector
+    GaussianNoiseFault
+    BiasFault
+    DropoutFault
+    QuantizationFault
+ ActuatorFaultInjector
+    SaturationFault
+    DeadZoneFault
+    LagFault
+    JitterFault
+ ParametricFaultInjector
+    GainErrorFault
+    SystemUncertaintyFault
+    DriftFault
+ EnvironmentalFaultInjector
+     DisturbanceFault
+     ModelMismatchFault
 
 FaultScenario
-├── add_fault(fault_injector)
-├── run_simulation(controller, plant, initial_state)
-└── compute_metrics(baseline_metrics)
+ add_fault(fault_injector)
+ run_simulation(controller, plant, initial_state)
+ compute_metrics(baseline_metrics)
 
 RobustnessAnalyzer
-├── compare_controllers(results_dict)
-├── rank_controllers(metric='overall')
-└── generate_report(output_format='html')
+ compare_controllers(results_dict)
+ rank_controllers(metric='overall')
+ generate_report(output_format='html')
 ```
 
 ---
@@ -895,7 +895,7 @@ This framework enables systematic robustness validation of all 7 controllers und
 **Key Benefits:**
 
 1. **Realism:** Fault models match real-world conditions
-2. **Comprehensive:** 140 test cases cover wide fault space
+2. **complete:** 140 test cases cover wide fault space
 3. **Quantitative:** Degradation metrics enable objective comparison
 4. **Reproducible:** Seeded randomness ensures repeatability
 5. **Configurable:** YAML-based scenarios for easy experimentation

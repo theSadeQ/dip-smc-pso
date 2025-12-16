@@ -17,7 +17,7 @@
 - **Convergence Type**: Exponential (asymptotic)
 - **Computational Cost**: Lowest of all SMC variants
 - **Chattering Level**: Moderate (mitigated by boundary layer)
-- **Runtime Status**: ✅ **OPERATIONAL** (production-ready) **Best Use Cases**:
+- **Runtime Status**:  **OPERATIONAL** (production-ready) **Best Use Cases**:
 - Rapid prototyping and proof-of-concept
 - Systems with known disturbance bounds
 - Applications prioritizing simplicity over maximum performance
@@ -77,7 +77,7 @@ If |σ| < hysteresis_ratio · ε₀: sat(σ) = 0 (freeze switching term)
 
 ```
 V = ½σ²
-``` **Proof of Stability** (summary, see `smc_complete_theory.md` for full proof): 1. V > 0 for σ ≠ 0 (positive definiteness) ✓
+``` **Proof of Stability** (summary, see `smc_complete_theory.md` for full proof): 1. V > 0 for σ ≠ 0 (positive definiteness) 
 
 2. V̇ = σσ̇ = σ[λ₁θ̇₁ + λ₂θ̇₂ + k₁θ̈₁ + k₂θ̈₂]
 3. Substituting dynamics and control law: ``` V̇ ≤ -η|σ| where η = K - ||d||∞ > 0 ```
@@ -103,18 +103,18 @@ class ClassicalSMC: """ Classical Sliding-Mode Controller with modular design: C
 | `compute_control()` | Main control loop | 413-486 | O(n³) |
 | `validate_gains()` | Static gain validation | 281-317 | O(1) |
 | `cleanup()` | Memory management | 498-529 | O(1) | ### 2. Control Flow Architecture ```
-┌─────────────────────┐
-│ State Input │
-│ [x,θ₁,θ₂,ẋ,θ̇₁,θ̇₂] │
-└──────────┬──────────┘ │ v
-┌─────────────────────┐
-│ Sliding Surface │
-│ σ = Σ(λᵢθᵢ + kᵢθ̇ᵢ) │
-└──────────┬──────────┘ │ ├────────────────────┬────────────────────┐ v v v
-┌──────────────────┐ ┌──────────────────┐ ┌─────────────────┐
-│ Equivalent Ctrl │ │ Switching Term │ │ Damping Term │
-│ u_eq = f(M,C,G) │ │ -K·sat(σ/ε) │ │ -k_d·σ │
-└──────────┬───────┘ └────────┬─────────┘ └────────┬────────┘ │ │ │ └──────────────────┴────────────────────┘ │ v ┌──────────────────┐ │ Sum Components │ │ u = Σ │ └──────────┬───────┘ │ v ┌──────────────────┐ │ Actuator Sat │ │ u∈[-F_max,F_max] │ └──────────┬───────┘ │ v ┌──────────────────┐ │ Control Output │ │ + History │ └──────────────────┘
+
+ State Input 
+ [x,θ₁,θ₂,ẋ,θ̇₁,θ̇₂] 
+  v
+
+ Sliding Surface 
+ σ = Σ(λᵢθᵢ + kᵢθ̇ᵢ) 
+   v v v
+  
+ Equivalent Ctrl   Switching Term   Damping Term 
+ u_eq = f(M,C,G)   -K·sat(σ/ε)   -k_d·σ 
+        v   Sum Components   u = Σ    v   Actuator Sat   u∈[-F_max,F_max]    v   Control Output   + History  
 ``` ### 3. Safety and Numerical Stability Features #### 3.1 Matrix Regularization **Problem**: Inertia matrix M(q) can be ill-conditioned near singular configurations. **Solution**: Tikhonov regularization ```python
 
 M_reg = M + regularization * I # Default: regularization = 1e-10

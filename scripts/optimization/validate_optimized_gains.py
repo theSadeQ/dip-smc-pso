@@ -33,7 +33,7 @@ def load_optimized_gains(controller: str) -> Optional[Dict]:
     gain_file = Path(f"gains_{controller}_chattering.json")
 
     if not gain_file.exists():
-        print(f"✗ Gains file not found: {gain_file}")
+        print(f" Gains file not found: {gain_file}")
         return None
 
     with open(gain_file) as f:
@@ -129,7 +129,7 @@ def validate_controller(controller_type: str, target_chattering: float = 2.0) ->
     result = simulate_with_gains(controller_type, optimized_gains, config)
 
     if not result['success']:
-        print(f"✗ Validation FAILED: {result['reason']} at step {result['step']}")
+        print(f" Validation FAILED: {result['reason']} at step {result['step']}")
         return False
 
     # Check results
@@ -145,16 +145,16 @@ def validate_controller(controller_type: str, target_chattering: float = 2.0) ->
     # Acceptance criteria
     passed = True
     if chattering >= target_chattering:
-        print(f"✗ FAIL: Chattering {chattering:.3f} >= target {target_chattering}")
+        print(f" FAIL: Chattering {chattering:.3f} >= target {target_chattering}")
         passed = False
     else:
-        print(f"✓ PASS: Chattering {chattering:.3f} < target {target_chattering}")
+        print(f" PASS: Chattering {chattering:.3f} < target {target_chattering}")
 
     if tracking_error > 0.1:
-        print(f"✗ FAIL: Tracking error {tracking_error:.4f} > 0.1 rad")
+        print(f" FAIL: Tracking error {tracking_error:.4f} > 0.1 rad")
         passed = False
     else:
-        print(f"✓ PASS: Tracking error {tracking_error:.4f} <= 0.1 rad")
+        print(f" PASS: Tracking error {tracking_error:.4f} <= 0.1 rad")
 
     return passed
 
@@ -206,7 +206,7 @@ def main():
     print(f"{'='*60}")
 
     for ctrl, passed in results.items():
-        status = "✓ PASS" if passed else "✗ FAIL"
+        status = " PASS" if passed else " FAIL"
         print(f"{ctrl:30s}: {status}")
 
     total = len(results)
@@ -215,10 +215,10 @@ def main():
     print(f"\nTotal: {passed_count}/{total} controllers passed")
 
     if passed_count == total:
-        print("\n✓✓✓ ALL CONTROLLERS PASSED ✓✓✓")
+        print("\n ALL CONTROLLERS PASSED ")
         sys.exit(0)
     else:
-        print(f"\n✗✗✗ {total - passed_count} CONTROLLERS FAILED ✗✗✗")
+        print(f"\n {total - passed_count} CONTROLLERS FAILED ")
         sys.exit(1)
 
 

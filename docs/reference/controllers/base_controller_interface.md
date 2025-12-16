@@ -170,10 +170,10 @@ def compute_control(self, state, state_vars, history):
 
 ```
 Controller (abstract)
-├─ ClassicalSMC
-├─ AdaptiveSMC
-├─ SuperTwistingSMC
-└─ HybridAdaptiveSMC
+ ClassicalSMC
+ AdaptiveSMC
+ SuperTwistingSMC
+ HybridAdaptiveSMC
 ```
 
 **No deep hierarchies:** Avoid fragile base class problem.

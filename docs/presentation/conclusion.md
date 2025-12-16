@@ -1,12 +1,12 @@
 # Conclusion
 
-This thesis has presented a holistic framework for the automated design, tuning and validation of robust nonlinear controllers for underactuated mechanical systems. By synergizing sliding mode control (SMC) with particle swarm optimization (PSO) and applying the methodology to the canonical double inverted pendulum (DIP) benchmark, we have demonstrated a systematic approach that bridges the gap between theoretical controller design and practical deployment. This chapter summarizes the primary contributions of the work, discusses key findings from the comprehensive controller comparison, acknowledges limitations and outlines directions for future research.
+This thesis has presented a holistic framework for the automated design, tuning and validation of robust nonlinear controllers for underactuated mechanical systems. By synergizing sliding mode control (SMC) with particle swarm optimization (PSO) and applying the methodology to the canonical double inverted pendulum (DIP) benchmark, we have demonstrated a systematic approach that bridges the gap between theoretical controller design and practical deployment. This chapter summarizes the primary contributions of the work, discusses key findings from the complete controller comparison, acknowledges limitations and outlines directions for future research.
 
 ## 9.1 Summary of Contributions
 
 The research makes several interconnected contributions across control theory, optimization and software engineering domains:
 
-### 9.1.1 Comprehensive SMC Controller Suite
+### 9.1.1 complete SMC Controller Suite
 
 A principal contribution is the implementation and rigorous comparison of six distinct sliding-mode controller architectures, each addressing different aspects of the DIP control problem:
 
@@ -46,7 +46,7 @@ Task MT-6 extended the PSO tuning framework to optimize the boundary layer param
 
 allows the boundary layer to widen dynamically during large transients and shrink near steady state, balancing chattering suppression with tracking accuracy. PSO optimization over a 20-particle swarm for 30 iterations identified optimal parameters epsilon-min=0.0025 and alpha=1.21, achieving a 66.5 percent reduction in chattering index (from 6.37 to 2.14) compared to the fixed baseline (epsilon=0.02, alpha=0.0). Statistical validation across 100 Monte Carlo runs confirmed the improvement with p<0.0001 and a very large effect size (Cohen's d=5.29). Additionally, the optimized parameters reduced overshoot in theta-1 by 13.9 percent while maintaining equivalent control energy and settling time.
 
-These results demonstrate that adaptive boundary layers offer a powerful mechanism for chattering mitigation without sacrificing control performance, and that PSO can systematically discover parameter configurations that outperform manually tuned defaults.
+These results demonstrate that adaptive boundary layers offer a effective mechanism for chattering mitigation without sacrificing control performance, and that PSO can systematically discover parameter configurations that outperform manually tuned defaults.
 
 ### 9.1.4 Multi-Scenario Validation and Overfitting Analysis (MT-7)
 
@@ -68,7 +68,7 @@ The MT-7 findings have important design implications:
 
 By honestly reporting these limitations and failure modes, the thesis provides a cautionary lesson for practitioners and establishes best practices for robust PSO-based tuning.
 
-### 9.1.5 Comprehensive Lyapunov Stability Analysis (LT-4)
+### 9.1.5 complete Lyapunov Stability Analysis (LT-4)
 
 Task LT-4 provided rigorous Lyapunov-based stability proofs for all six implemented controllers, strengthening the theoretical foundations of the framework. Key contributions include:
 
@@ -186,7 +186,7 @@ Despite the contributions outlined above, several limitations constrain the scop
 
 **7. Computational cost of robust PSO**: Evaluating each particle on multiple perturbed models increases computational cost by an order of magnitude. For complex systems or large swarms, this overhead may become prohibitive without parallelization or reduced-order modeling.
 
-**8. Limited disturbance scenarios**: The thesis considers parametric uncertainties (±5 percent variations) and simple disturbance injection (sinusoidal forces, impulses) but does not explore comprehensive robustness under sensor noise, actuator faults, model mismatch or adversarial disturbances.
+**8. Limited disturbance scenarios**: The thesis considers parametric uncertainties (±5 percent variations) and simple disturbance injection (sinusoidal forces, impulses) but does not explore complete robustness under sensor noise, actuator faults, model mismatch or adversarial disturbances.
 
 ### 9.3.2 Recommended Future Work
 
@@ -232,7 +232,7 @@ By demonstrating that automated tuning can discover high-performance robust cont
 
 ## 9.5 Closing Remarks
 
-This thesis has presented a comprehensive framework for the automated design, tuning and validation of robust sliding mode controllers for underactuated mechanical systems. By combining rigorous Lyapunov stability analysis, systematic PSO-based optimization, multi-scenario validation and honest reporting of overfitting risks, we have advanced both the theoretical foundations and practical deployment readiness of SMC for complex nonlinear control problems.
+This thesis has presented a complete framework for the automated design, tuning and validation of robust sliding mode controllers for underactuated mechanical systems. By combining rigorous Lyapunov stability analysis, systematic PSO-based optimization, multi-scenario validation and honest reporting of overfitting risks, we have advanced both the theoretical foundations and practical deployment readiness of SMC for complex nonlinear control problems.
 
 The six-controller suite (Classical, STA, Adaptive, Hybrid, Swing-Up, MPC) spans a spectrum of design philosophies, from discontinuous to continuous control, local to global regulation and fixed to adaptive gains. The PSO tuning methodology automates the discovery of parameter sets that balance competing objectives (tracking accuracy, control effort, chattering suppression, robustness), replacing labor-intensive manual trial-and-error with data-driven optimization. The MT-6 adaptive boundary layer optimization achieved a 66.5 percent chattering reduction, demonstrating the power of systematic parameter tuning. The MT-7 multi-scenario validation exposed fundamental overfitting risks and established best practices for robust PSO-based controller design.
 

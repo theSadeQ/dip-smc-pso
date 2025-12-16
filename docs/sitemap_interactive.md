@@ -11,10 +11,10 @@ Explore the documentation structure visually with an interactive force-directed 
 
 ## How to Use
 
-**🎯 Navigate**: Click any node to jump to that documentation page
-**🔍 Zoom**: Scroll to zoom in/out
-**👆 Drag**: Click and drag nodes to rearrange
-**💡 Explore**: Hover over nodes for quick info
+** Navigate**: Click any node to jump to that documentation page
+** Zoom**: Scroll to zoom in/out
+** Drag**: Click and drag nodes to rearrange
+** Explore**: Hover over nodes for quick info
 
 ## Color Legend
 

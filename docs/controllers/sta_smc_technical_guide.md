@@ -22,7 +22,7 @@ The Super-Twisting Sliding Mode Controller implements a second-order sliding mod
 - **Convergence Type**: Finite-time (both σ and σ̇ → 0)
 - **Key Advantage**: Continuous control with minimal chattering
 - **Chattering Level**: Very Low (8.3 N/s vs 45.2 for Classical)
-- **Runtime Status**: ✅ **OPERATIONAL** (production-ready, Numba-accelerated)
+- **Runtime Status**:  **OPERATIONAL** (production-ready, Numba-accelerated)
 
 **Best Use Cases**:
 - High-precision tracking applications
@@ -197,57 +197,57 @@ class SuperTwistingSMC:
 ### 2. Control Flow with Numba Acceleration
 
 ```
-┌─────────────────────┐
-│   State Input       │
-│  [x,θ₁,θ₂,ẋ,θ̇₁,θ̇₂] │
-└──────────┬──────────┘
-           │
+
+   State Input       
+  [x,θ₁,θ₂,ẋ,θ̇₁,θ̇₂] 
+
+           
            v
-┌─────────────────────┐
-│ Sliding Surface     │  ← Numba-accelerated
-│ σ = Σkᵢ(θ̇ᵢ+λᵢθᵢ)   │
-└──────────┬──────────┘
-           │
+
+ Sliding Surface       ← Numba-accelerated
+ σ = Σkᵢ(θ̇ᵢ+λᵢθᵢ)   
+
+           
            v
-┌─────────────────────┐
-│ Saturation Function │  ← saturate() utility
-│ sat(σ/ε)            │
-└──────────┬──────────┘
-           │
-           ├──────────────────┬────────────────┬──────────────┐
+
+ Saturation Function   ← saturate() utility
+ sat(σ/ε)            
+
+           
+           
            v                  v                v              v
-┌──────────────┐   ┌──────────────┐   ┌──────────┐   ┌──────────┐
-│ Continuous   │   │ Integral     │   │ Equiv    │   │ Damping  │
-│ -K₁√|σ|·sat  │   │ z update     │   │ u_eq     │   │ -d·σ     │
-│              │   │ ż=-K₂·sat·dt │   │          │   │          │
-└──────┬───────┘   └──────┬───────┘   └────┬─────┘   └────┬─────┘
-       │                  │                 │              │
-       └──────────────────┴─────────────────┴──────────────┘
-                          │
+         
+ Continuous       Integral         Equiv        Damping  
+ -K₁√|σ|·sat      z update         u_eq         -d·σ     
+                  ż=-K₂·sat·dt                           
+         
+                                                        
+       
+                          
                           v
-              ┌──────────────────────┐
-              │ Numba Core Function  │  ← _sta_smc_core()
-              │ u = u_eq+u_c+z-d·σ   │
-              └──────────┬───────────┘
-                        │
+              
+               Numba Core Function    ← _sta_smc_core()
+               u = u_eq+u_c+z-d·σ   
+              
+                        
                         v
-              ┌──────────────────────┐
-              │ Anti-Windup          │
-              │ Back-calculation     │
-              │ z adjustment         │
-              └──────────┬───────────┘
-                        │
+              
+               Anti-Windup          
+               Back-calculation     
+               z adjustment         
+              
+                        
                         v
-              ┌──────────────────────┐
-              │ Actuator Saturation  │
-              │ u, z ∈ [-F_max,F_max]│
-              └──────────┬───────────┘
-                        │
+              
+               Actuator Saturation  
+               u, z ∈ [-F_max,F_max]
+              
+                        
                         v
-              ┌──────────────────────┐
-              │ Output + History     │
-              │ (u, (z,σ), hist)     │
-              └──────────────────────┘
+              
+               Output + History     
+               (u, (z,σ), hist)     
+              
 ```
 
 ### 3. Numba Acceleration
@@ -598,9 +598,9 @@ def monitor_sta_performance(controller, result, history):
 | **Computational Cost** | 105 | FLOPs | +11% | +3% |
 
 **Key Advantages**:
-- ✅ Exact convergence (σ = 0 in finite time)
-- ✅ Lowest chattering among non-adaptive controllers
-- ✅ Continuous control signal
+-  Exact convergence (σ = 0 in finite time)
+-  Lowest chattering among non-adaptive controllers
+-  Continuous control signal
 
 ### 2. Finite-Time Convergence Validation
 

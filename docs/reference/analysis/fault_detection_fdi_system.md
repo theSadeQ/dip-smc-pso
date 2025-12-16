@@ -158,7 +158,7 @@ Signature for fault identification.
 
 Legacy fault detection and isolation system for backward compatibility. This is the original FDI system that provides basic fault detection
 capabilities. For new applications, consider using EnhancedFaultDetector
-which provides more advanced features and better integration with the
+which provides more features and better integration with the
 analysis framework. #### Source Code ```{literalinclude} ../../../src/analysis/fault_detection/fdi_system.py
 :language: python
 :pyobject: FDIsystem

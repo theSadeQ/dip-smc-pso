@@ -61,22 +61,22 @@ python scripts/sync_educational_content.py && sphinx-build -M html docs docs/_bu
 
 ```
 .project/ai/edu/                 (SOURCE - canonical version)
-├── beginner-roadmap.md
-├── index.md
-├── README.md
-└── phase1/
-    ├── *.md (4 files)
-    ├── cheatsheets/ (4 files)
-    ├── project-templates/ (1 file)
-    └── solutions/ (3 files)
+ beginner-roadmap.md
+ index.md
+ README.md
+ phase1/
+     *.md (4 files)
+     cheatsheets/ (4 files)
+     project-templates/ (1 file)
+     solutions/ (3 files)
 
 docs/learning/                   (DESTINATION - auto-generated)
-├── <!-- AUTO-GENERATED HEADER -->
-├── beginner-roadmap.md
-├── index.md
-├── README.md
-└── phase1/
-    └── (same structure as source)
+ <!-- AUTO-GENERATED HEADER -->
+ beginner-roadmap.md
+ index.md
+ README.md
+ phase1/
+     (same structure as source)
 ```
 
 ---

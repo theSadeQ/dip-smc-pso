@@ -46,7 +46,7 @@ By the end of this tutorial, you will:
 3. **Measurement noise:** Sensor errors and quantization effects
 4. **Actuator limitations:** Saturation, delays, and nonlinearities
 
-A **robust controller** degrades gracefully under these conditions, while a **fragile controller** may fail catastrophically.
+A **controller with error handling** degrades gracefully under these conditions, while a **fragile controller** may fail catastrophically.
 
 ### 1.2 Real-World Scenarios
 
@@ -264,7 +264,7 @@ def run_disturbance_test(controller_type='classical_smc',
 
     # Disturbed case (with disturbance)
     # NOTE: This requires modifying SimulationRunner to accept disturbance_fn
-    # For this tutorial, we'll use a simplified approach
+    # For this tutorial, this will use a simplified approach
     runner_disturbed = SimulationRunner(controller, dynamics, config)
 
     # Inject disturbance into dynamics (simplified approach)
@@ -976,7 +976,7 @@ if __name__ == "__main__":
 
 ### 5.1 Performance Degradation Matrix
 
-Let's compare all controllers under **moderate uncertainty (±10%)**:
+compare all controllers under **moderate uncertainty (±10%)**:
 
 | Controller | Nominal Settling (s) | Mean Settling (s) | Degradation (%) | 95% CI Width (s) | Convergence Rate (%) | Robustness Score |
 |------------|----------------------|-------------------|-----------------|------------------|----------------------|------------------|

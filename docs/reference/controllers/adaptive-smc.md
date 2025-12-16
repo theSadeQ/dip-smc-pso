@@ -109,7 +109,7 @@ The switching gain $K(t)$ adapts according to:
 
 ## Current Simulation Results
 
-**⚠️ Note**: Results shown are for **default parameters only** (not PSO-optimized):
+** Note**: Results shown are for **default parameters only** (not PSO-optimized):
 
 ### Performance Metrics
 

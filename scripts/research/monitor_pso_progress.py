@@ -64,7 +64,7 @@ def parse_log_file():
         }
 
     # Extract iteration progress from PySwarms progress bar
-    # Look for patterns like "pyswarms.single.global_best:   2%|█"
+    # Look for patterns like "pyswarms.single.global_best:   2%|"
     import re
     progress_pattern = r'pyswarms\.single\.global_best:\s+(\d+)%'
     matches = re.findall(progress_pattern, log_content)

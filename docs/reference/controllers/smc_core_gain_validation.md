@@ -242,15 +242,15 @@ omega_s = 2 * np.pi * f_s  # rad/s
 
 # Check Nyquist criterion
 if omega_n1 < omega_s / 5 and omega_n2 < omega_s / 5:
-    print(f"✓ Frequencies safe: ω_n1={omega_n1:.2f}, ω_n2={omega_n2:.2f} rad/s")
+    print(f" Frequencies safe: ω_n1={omega_n1:.2f}, ω_n2={omega_n2:.2f} rad/s")
 else:
-    print(f"✗ Aliasing risk: ω_n1={omega_n1:.2f}, ω_n2={omega_n2:.2f} rad/s")
+    print(f" Aliasing risk: ω_n1={omega_n1:.2f}, ω_n2={omega_n2:.2f} rad/s")
 
 # Check lower bound (avoid drift)
 if omega_n1 > 0.5 and omega_n2 > 0.5:
-    print("✓ Frequencies above DC drift threshold")
+    print(" Frequencies above DC drift threshold")
 else:
-    print("✗ Frequencies too low, drift risk")
+    print(" Frequencies too low, drift risk")
 ```
 
 ## Example 4: Robustness Margin
@@ -294,13 +294,13 @@ results = validate_all_criteria(gains, validation_config)
 print("\nValidation Results:")
 print("=" * 50)
 for criterion, passed in results.items():
-    status = "✓ PASS" if passed else "✗ FAIL"
+    status = " PASS" if passed else " FAIL"
     print(f"{criterion:30s}: {status}")
 
 if all(results.values()):
-    print("\n✓ All validation criteria passed")
+    print("\n All validation criteria passed")
 else:
-    print("\n✗ Some validation criteria failed")
+    print("\n Some validation criteria failed")
 ```
 
 ## Complete Source Code

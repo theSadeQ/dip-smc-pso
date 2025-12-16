@@ -4,7 +4,7 @@ MT-6 Fixed Boundary Layer Baseline Benchmark
 ================================================================================
 
 Establishes performance baseline for Classical SMC with FIXED boundary layer.
-This script collects comprehensive metrics for 100 Monte Carlo simulations
+This script collects complete metrics for 100 Monte Carlo simulations
 with fixed boundary layer parameters (ε=0.02, slope=0.0).
 
 Task: MT-6 Agent A - Fixed Boundary Layer Baseline

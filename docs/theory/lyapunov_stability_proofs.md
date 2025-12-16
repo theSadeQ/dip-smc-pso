@@ -80,7 +80,7 @@ where $k_1, k_2, \lambda_1, \lambda_2 > 0$ are design parameters.
 
 **Lemma 1.1 (Sliding Surface Stability):** If $k_i, \lambda_i > 0$ for $i=1,2$, then the sliding surface dynamics $\dot{e}_{\theta_i} + \lambda_i e_{\theta_i} = 0$ are exponentially stable with convergence rate $\lambda_i$.
 
-*Proof:* The characteristic equation is $s + \lambda_i = 0$, yielding eigenvalue $-\lambda_i < 0$. □
+*Proof:* The characteristic equation is $s + \lambda_i = 0$, yielding eigenvalue $-\lambda_i < 0$. 
 
 ---
 
@@ -197,7 +197,7 @@ Solving this differential inequality yields:
 V(t) \leq [V(0)^{1/2} - \eta\beta t]^2
 ```
 
-Thus, $s(t)$ reaches zero in finite time $t_{\text{reach}} \leq \frac{|s(0)|}{\eta\beta}$. □
+Thus, $s(t)$ reaches zero in finite time $t_{\text{reach}} \leq \frac{|s(0)|}{\eta\beta}$. 
 
 **Case 2: Inside boundary layer ($|s| \leq \epsilon$)**
 
@@ -219,7 +219,7 @@ The control is continuous, and the closed-loop system becomes:
 \limsup_{t \to \infty} |s(t)| \leq \frac{\bar{d} \epsilon}{K}
 ```
 
-*Proof:* The boundary layer approximation introduces a steady-state error proportional to $\epsilon$. See {cite}`smc_edardar_2015_hysteresis_compensation` for detailed analysis. □
+*Proof:* The boundary layer approximation introduces a steady-state error proportional to $\epsilon$. See {cite}`smc_edardar_2015_hysteresis_compensation` for detailed analysis. 
 
 ### 2.4 Assumptions Summary
 
@@ -344,7 +344,7 @@ where $\mathbf{Q} > 0$ when the gain conditions hold.
 
 for positive constants $c_1, c_2$.
 
-When $\|\xi\|$ is sufficiently large, the negative term dominates, guaranteeing convergence to a residual set. With proper gain selection, finite-time convergence to the second-order sliding set $\{s = 0, \dot{s} = 0\}$ is achieved. □
+When $\|\xi\|$ is sufficiently large, the negative term dominates, guaranteeing convergence to a residual set. With proper gain selection, finite-time convergence to the second-order sliding set $\{s = 0, \dot{s} = 0\}$ is achieved. 
 
 **Remark 3.1:** The non-smooth Lyapunov function $V = |s|$ is standard in super-twisting analysis but requires generalized derivatives. Our implementation uses the boundary layer approximation $\text{sat}(s/\epsilon)$ to regularize the sign function, making the control continuous. This introduces a small steady-state error $\mathcal{O}(\epsilon)$ but preserves finite-time convergence outside the boundary layer.
 
@@ -496,7 +496,7 @@ where $\eta = \beta(K^* - \bar{d}) > 0$.
 
 This shows $\dot{V} \leq 0$ when $(s, \tilde{K})$ are sufficiently large, establishing boundedness.
 
-By Barbalat's lemma {cite}`smc_khalil_2002_nonlinear_systems`, $\dot{V} \to 0$ implies $s(t) \to 0$ as $t \to \infty$. □
+By Barbalat's lemma {cite}`smc_khalil_2002_nonlinear_systems`, $\dot{V} \to 0$ implies $s(t) \to 0$ as $t \to \infty$. 
 
 **Case 2: Inside dead zone ($|s| \leq \delta$)**
 
@@ -596,7 +596,7 @@ where $\mathbf{w}$ represents emergency reset events (treated as exogenous input
    V(t) \leq e^{-\alpha_1 t}V(0) + \sum_{i=1}^{N_{\text{reset}}} \Delta V_{\text{reset}} \cdot e^{-\alpha_1(t - t_i)}
    ```
 
-4. **Ultimate bound:** If reset frequency is bounded, $V(t)$ remains bounded for all $t \geq 0$. □
+4. **Ultimate bound:** If reset frequency is bounded, $V(t)$ remains bounded for all $t \geq 0$. 
 
 **Remark 5.1:** The ISS framework provides weaker guarantees than asymptotic stability but is more appropriate for systems with safety resets. The key requirement is that resets do not occur infinitely often in finite time (no Zeno behavior).
 
@@ -668,7 +668,7 @@ When $\theta_1 \approx \pi$ (pendulum down), $\cos(\theta_1) \approx -1$ and the
 
 **Lemma 6.1 (Energy Increase in Swing Mode):** If $k_{\text{swing}} > 0$ and disturbances are bounded, then $E_{\text{total}}$ increases on average during swing-up, eventually bringing the system near the upright configuration.
 
-*Proof:* The control $u = k_{\text{swing}}\cos(\theta_1)\dot{\theta}_1$ pumps energy into the system when $\dot{\theta}_1 \neq 0$. Over multiple oscillations, the accumulated energy grows until $E_{\text{total}} \approx E_{\text{top}}$. □
+*Proof:* The control $u = k_{\text{swing}}\cos(\theta_1)\dot{\theta}_1$ pumps energy into the system when $\dot{\theta}_1 \neq 0$. Over multiple oscillations, the accumulated energy grows until $E_{\text{total}} \approx E_{\text{top}}$. 
 
 **Stabilization Mode Lyapunov Function:**
 ```math
@@ -697,7 +697,7 @@ Then the closed-loop system is globally stable, and the pendulum converges to th
 3. **Hysteresis:** The energy deadband ($\alpha_{\text{exit}} < \alpha_{\text{switch}}$) prevents chattering between modes.
 4. **Common Lyapunov:** At switching instants, continuity of state ensures $V$ does not jump.
 
-By Branicky's results on switched systems with dwell time {cite}`branicky_1998_multiple_lyapunov`, stability is preserved. □
+By Branicky's results on switched systems with dwell time {cite}`branicky_1998_multiple_lyapunov`, stability is preserved. 
 
 **Remark 6.1:** The simplified approach here cites literature for energy-based swing-up stability. A full proof would require bounding dwell times and verifying no Zeno behavior, which is beyond the scope of this 12-hour task.
 
@@ -852,7 +852,7 @@ Since $\ell(\mathbf{x}_k, u_k^*) \geq \lambda_{\min}(\mathbf{Q})\|\mathbf{x}_k\|
 \boxed{V_{k+1}(\mathbf{x}_{k+1}) - V_k(\mathbf{x}_k) \leq -\lambda_{\min}(\mathbf{Q})\|\mathbf{x}_k\|^2 < 0 \quad \forall \mathbf{x}_k \neq \mathbf{0}}
 ```
 
-This proves **asymptotic stability** of the origin. □
+This proves **asymptotic stability** of the origin. 
 
 **Remark 6.6.1 (Terminal Cost Design):** The terminal cost $V_f(\mathbf{x}) = \mathbf{x}^T \mathbf{Q}_f \mathbf{x}$ must satisfy the Lyapunov condition. A common choice is the **discrete algebraic Riccati equation (DARE)** solution:
 
@@ -930,15 +930,15 @@ For the DIP implementation, feasibility is ensured by:
 
 | Validation Check | Classical SMC | STA | Adaptive SMC | Hybrid | Swing-Up | MPC |
 |------------------|---------------|-----|--------------|--------|----------|-----|
-| Positive sliding gains ($k_i, \lambda_i > 0$) | ✓ | ✓ | ✓ | ✓ | N/A | N/A |
-| Switching gain dominance ($K > \bar{d}$) | ✓ | ✓ (via $K_1, K_2$) | ✓ (via adaptation) | ✓ (adaptive) | N/A | N/A |
-| Controllability ($\mathbf{L}\mathbf{M}^{-1}\mathbf{B} > 0$) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ (linearized) |
-| Boundary layer positivity ($\epsilon > 0$) | ✓ | ✓ | ✓ | ✓ | N/A | N/A |
-| Gain bounds ($K_{\min} \leq K_{\text{init}} \leq K_{\max}$) | N/A | N/A | ✓ | ✓ | N/A | N/A |
-| Hysteresis deadband | N/A | N/A | N/A | N/A | ✓ | N/A |
-| Positive definite cost matrices ($\mathbf{Q}, R > 0$) | N/A | N/A | N/A | N/A | N/A | ✓ |
-| Linearization validity near equilibrium | N/A | N/A | N/A | N/A | N/A | ✓ |
-| Recursive feasibility (horizon $N$ sufficient) | N/A | N/A | N/A | N/A | N/A | ✓ |
+| Positive sliding gains ($k_i, \lambda_i > 0$) |  |  |  |  | N/A | N/A |
+| Switching gain dominance ($K > \bar{d}$) |  |  (via $K_1, K_2$) |  (via adaptation) |  (adaptive) | N/A | N/A |
+| Controllability ($\mathbf{L}\mathbf{M}^{-1}\mathbf{B} > 0$) |  |  |  |  |  |  (linearized) |
+| Boundary layer positivity ($\epsilon > 0$) |  |  |  |  | N/A | N/A |
+| Gain bounds ($K_{\min} \leq K_{\text{init}} \leq K_{\max}$) | N/A | N/A |  |  | N/A | N/A |
+| Hysteresis deadband | N/A | N/A | N/A | N/A |  | N/A |
+| Positive definite cost matrices ($\mathbf{Q}, R > 0$) | N/A | N/A | N/A | N/A | N/A |  |
+| Linearization validity near equilibrium | N/A | N/A | N/A | N/A | N/A |  |
+| Recursive feasibility (horizon $N$ sufficient) | N/A | N/A | N/A | N/A | N/A |  |
 
 ### 7.3 Implementation Validation Checklist
 

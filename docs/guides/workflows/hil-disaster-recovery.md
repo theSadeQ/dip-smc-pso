@@ -106,7 +106,7 @@ Backups are your insurance policy. When disaster strikes, you need to restore co
 ### 2.1 Configuration Backups
 
 **What Gets Backed Up:**
-Configuration files define how your system runs. This includes controller gains, simulation parameters, and environment settings. If you lose these, you'll have to reconfigure everything from scratch.
+Configuration files define how your system runs. This includes controller gains, simulation parameters, and environment settings. If you lose these, the system will have to reconfigure everything from scratch.
 
 **Automated Backup Script:**
 This bash script runs automatically every 4 hours. It saves your configuration files, compresses them, and deletes old backups after 30 days.
@@ -765,6 +765,6 @@ python simulate.py --run-hil
 **Replaces:** hil-disaster-recovery.md stub (2025-10-07, 42 lines)
 **Changelog:**
 - 2025-11-10: Complete rewrite from stub to production guide (42 → 650+ lines)
-- Added 7 comprehensive sections on disaster recovery
+- Added 7 complete sections on disaster recovery
 - Integrated backup strategies, failover mechanisms, incident management
 - Included drill procedures, validation workflows, RTO/RPO metrics

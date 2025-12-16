@@ -136,7 +136,7 @@ Learn control theory foundations, SMC theory, and optimization.
 
 - 5 sub-sections on control theory, feedback, SMC, optimization, DIP system
 - 15+ hands-on code examples
-- 2 comprehensive self-assessment quizzes
+- 2 complete self-assessment quizzes
 - **Requires**: Phase 1 completion
 - [Start Phase 2](beginner-roadmap/phase-2-core-concepts.md)
 

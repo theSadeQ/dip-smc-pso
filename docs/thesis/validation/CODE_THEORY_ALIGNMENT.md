@@ -304,7 +304,7 @@ Cost function: J = w₁·ISE + w₂·Chattering + w₃·Robustness
 - [ ] **6.4** Robustness evaluation
   - Theory: Worst-case over parameter variations ±10%, ±20%, etc.
   - Code: [Tests multiple perturbations / Single case / Not implemented]
-  - Coverage: [Comprehensive / Limited]
+  - Coverage: [complete / Limited]
   - Notes:
 
 - [ ] **6.5** Cost function evaluation call
@@ -348,7 +348,7 @@ Robust evaluation:
   - Notes:
 
 - [ ] **7.3** Number of perturbations tested
-  - Theory: Comprehensive coverage
+  - Theory: complete coverage
   - Code: [Number of cases = ___]
   - Coverage adequate: [Yes / No]
   - Notes:

@@ -12,7 +12,7 @@
 - [PSOTuner](#psotuner)
 - [Cost Functions](#cost-functions)
 - [Gain Bounds](#gain-bounds)
-- [Advanced Features](#advanced-features)
+- [features](#advanced-features)
 - [Integration Patterns](#integration-patterns)
 - [Performance Tips](#performance-tips)
 - [Troubleshooting](#troubleshooting)
@@ -24,11 +24,11 @@
 The Optimization API provides Particle Swarm Optimization (PSO) for automated controller gain tuning.
 
 **Key Features:**
-- ✅ **PSOTuner:** High-level PSO interface for controller optimization
-- ✅ **Custom Cost Functions:** Flexible performance metric definitions
-- ✅ **Smart Bounds:** Automatic gain bounds based on controller type
-- ✅ **Convergence Monitoring:** Real-time optimization progress tracking
-- ✅ **Multi-Objective:** Support for weighted multi-objective optimization
+-  **PSOTuner:** High-level PSO interface for controller optimization
+-  **Custom Cost Functions:** Flexible performance metric definitions
+-  **Smart Bounds:** Automatic gain bounds based on controller type
+-  **Convergence Monitoring:** Real-time optimization progress tracking
+-  **Multi-Objective:** Support for weighted multi-objective optimization
 
 **Related Documentation:**
 - [Tutorial 03: PSO Optimization](../tutorials/tutorial-03-pso-optimization.md)
@@ -409,7 +409,7 @@ def validate_bounds(bounds, controller_type):
 
 
 
-## Advanced Features
+## features
 
 ### Parallel PSO Execution
 

@@ -188,7 +188,7 @@ class PSOLogParser:
     def calculate_convergence_metrics(self, df: pd.DataFrame, controller_name: str,
                                      log_path: Path) -> ConvergenceMetrics:
         """
-        Calculate comprehensive convergence metrics from parsed data.
+        Calculate complete convergence metrics from parsed data.
 
         Parameters
         ----------

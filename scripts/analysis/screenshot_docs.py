@@ -77,7 +77,7 @@ class DocumentationScreenshotter:
     def find_html_files(self) -> List[Path]:
         """Find all HTML files in documentation directory."""
         html_files = sorted(self.docs_dir.rglob("*.html"))
-        print(f"📁 Found {len(html_files)} HTML files")
+        print(f" Found {len(html_files)} HTML files")
         return html_files
 
     def get_screenshot_path(self, html_file: Path) -> Path:
@@ -117,7 +117,7 @@ class DocumentationScreenshotter:
             # Wait for Mermaid diagrams to render (if present)
             try:
                 await page.wait_for_selector(".mermaid svg", timeout=5000)
-                print("  ✅ Mermaid diagram detected and rendered")
+                print("   Mermaid diagram detected and rendered")
             except Exception:  # noqa: E722
                 pass  # No Mermaid diagrams on this page
 
@@ -138,7 +138,7 @@ class DocumentationScreenshotter:
 
             # Log file size for format comparison
             file_size_mb = screenshot_path.stat().st_size / 1024 / 1024
-            print(f"  💾 Saved: {screenshot_path.name} ({file_size_mb:.2f} MB)")
+            print(f"   Saved: {screenshot_path.name} ({file_size_mb:.2f} MB)")
 
             # Get page title
             page_title = await page.title()
@@ -151,10 +151,10 @@ class DocumentationScreenshotter:
                 "url": file_url
             })
 
-            print(f"✅ {html_file.name} → {screenshot_path.name}")
+            print(f" {html_file.name} → {screenshot_path.name}")
 
         except Exception as e:
-            print(f"❌ Failed to capture {html_file.name}: {e}")
+            print(f" Failed to capture {html_file.name}: {e}")
 
     async def generate_all_screenshots(self):
         """Generate screenshots for all HTML files."""
@@ -172,7 +172,7 @@ class DocumentationScreenshotter:
             # Create page
             page = await context.new_page()
 
-            print("\n📸 Generating screenshots...\n")
+            print("\n Generating screenshots...\n")
 
             # Capture screenshots
             for html_file in html_files:
@@ -187,8 +187,8 @@ class DocumentationScreenshotter:
         with open(index_path, "w") as f:
             json.dump(self.screenshot_index, f, indent=2)
 
-        print(f"\n✅ Generated {len(self.screenshot_index)} screenshots")
-        print(f"📊 Screenshot index: {index_path}")
+        print(f"\n Generated {len(self.screenshot_index)} screenshots")
+        print(f" Screenshot index: {index_path}")
 
 
 async def main():
@@ -232,12 +232,12 @@ async def main():
 
     # Verify docs exist
     if not docs_dir.exists():
-        print(f"❌ Documentation directory not found: {docs_dir}")
+        print(f" Documentation directory not found: {docs_dir}")
         print("   Run: sphinx-build -b html docs docs/_build/html")
         sys.exit(1)
 
     # Display configuration
-    print("📸 Screenshot Configuration:")
+    print(" Screenshot Configuration:")
     print(f"   Viewport: {args.viewport}")
     print(f"   Format: {args.format.upper()}")
     if args.format in ["jpeg", "webp"]:
@@ -256,8 +256,8 @@ async def main():
     # Generate screenshots
     await screenshotter.generate_all_screenshots()
 
-    print(f"\n📂 Screenshots saved to: {output_dir}")
-    print(f"\n🔍 Next step: Visual analysis of {len(screenshotter.screenshot_index)} screenshots")
+    print(f"\n Screenshots saved to: {output_dir}")
+    print(f"\n Next step: Visual analysis of {len(screenshotter.screenshot_index)} screenshots")
 
 
 if __name__ == "__main__":

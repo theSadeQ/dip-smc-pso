@@ -1,4 +1,4 @@
-# Controller Theory Reference **Status:** 🚧 Under Construction This document will contain controller theory documentation including: ## Planned Content ### Sliding Mode Control Theory
+# Controller Theory Reference **Status:**  Under Construction This document will contain controller theory documentation including: ## Planned Content ### Sliding Mode Control Theory
 
 - Classical SMC foundations
 - Super-Twisting Algorithm (STA)

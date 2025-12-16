@@ -8,13 +8,13 @@
 
 Picture yourself in a massive library with millions of books, but there's no Dewey Decimal System, no card catalog, and no signs telling you where anything is. That's what your computer would be like without understanding file systems and directories. Every time you save a document, take a screenshot, or download a file, your computer is organizing it somewhere - but where?
 
-By the end of this episode, you'll understand how your computer stores files, how to navigate using the command line, and why these skills are essential for programming and control systems engineering. You'll never feel lost in your own computer again.
+By the end of this episode, the system will understand how your computer stores files, how to navigate using the command line, and why these skills are essential for programming and control systems engineering. You'll never feel lost in your own computer again.
 
 ---
 
 ## What You'll Discover
 
-By listening to this episode, you'll learn:
+By listening to this episode, the system will learn:
 
 - How computers organize files using hierarchies (drives, folders, files)
 - The difference between absolute and relative paths
@@ -26,7 +26,7 @@ By listening to this episode, you'll learn:
 
 ## Your Computer: The Filing Cabinet Analogy
 
-Let's start with a mental model that makes everything click. Imagine walking up to a large filing cabinet in an office.
+start with a mental model that makes everything click. Imagine walking up to a large filing cabinet in an office.
 
 **The filing cabinet has multiple drawers** - maybe four or five of them, each labeled. On Windows, these are your drives: C colon, D colon, maybe E colon if you have an external hard drive. On Mac or Linux, you have your root directory, which we say as "slash" or "forward slash".
 
@@ -51,7 +51,7 @@ An absolute path is like giving someone your complete mailing address. It starts
 On Windows, an absolute path looks like this:
 C colon backslash Users backslash YourName backslash Documents backslash project backslash code dot py
 
-Let's break that down phonetically:
+break that down phonetically:
 - **C colon** - That's the drive letter followed by a colon
 - **backslash Users** - First folder level
 - **backslash YourName** - Your user account folder
@@ -83,13 +83,13 @@ That takes you up one level to the parent directory.
 
 **Why This Matters for Programming**
 
-When you're writing code, you'll constantly be telling your program where to find files. "Open this data file." "Save the results here." "Load that configuration." Understanding paths makes this natural instead of confusing.
+When you're writing code, the system will constantly be telling your program where to find files. "Open this data file." "Save the results here." "Load that configuration." Understanding paths makes this natural instead of confusing.
 
 ---
 
 ## The Command Line: Talking to Your Computer in Text
 
-Here's where things get really powerful. Up until now, you've probably been clicking on folders and files to navigate your computer. But there's another way - a way that's faster once you learn it, and essential for programming and automation.
+Here's where things get really effective. Up until now, you've probably been clicking on folders and files to navigate your computer. But there's another way - a way that's faster once you learn it, and essential for programming and automation.
 
 The command line is a text interface where you type commands to control your computer. On Windows, it's called Command Prompt or PowerShell. On Mac and Linux, it's called Terminal. They all do the same basic job: let you control your computer by typing instead of clicking.
 
@@ -103,7 +103,7 @@ Second, **automation**. You can write scripts - sequences of commands that run a
 
 Third, **remote access**. When you're connecting to another computer (like a server or Raspberry Pi running your control system), you often only have text access. No mouse, no clicking, just commands.
 
-Let's learn the essential commands.
+learn the essential commands.
 
 ---
 
@@ -227,7 +227,7 @@ Screen cleared!
 
 ## Practical Exercise: Navigate Your Computer
 
-Let's put this together. Pause here if you want to follow along on your own computer.
+put this together. Pause here if you want to follow along on your own computer.
 
 Your mission: Create a folder structure for organizing a project.
 
@@ -273,7 +273,7 @@ Congratulations! You've just navigated your computer entirely with text commands
 
 ## Key Takeaways: What You've Learned So Far
 
-Let's recap the core concepts from the first half of this episode:
+recap the core concepts from the first half of this episode:
 
 **Number one**: Your computer organizes files in a hierarchy - drives contain folders, folders contain subfolders, subfolders contain files. This is true across all operating systems.
 
@@ -288,7 +288,7 @@ Let's recap the core concepts from the first half of this episode:
 - Go up one level: cd dot dot
 - Clear screen: cls (Windows) or clear (Unix)
 
-Now let's talk about where you'll be writing your code.
+Now let's talk about where the system will be writing your code.
 
 ---
 
@@ -323,7 +323,7 @@ To install VS Code:
 3. Run the installer with default settings
 4. Launch VS Code
 
-When you first open it, you'll see a welcome screen with tutorials. You don't need to watch them all right now - we'll learn by doing.
+When you first open it, the system will see a welcome screen with tutorials. You don't need to watch them all right now - this will learn by doing.
 
 **Key Features**:
 - **File explorer on the left**: Shows your project folder structure
@@ -339,15 +339,15 @@ If VS Code feels too heavy or complex, consider:
 
 **Notepad plus plus (Windows only)**: Lightweight, fast, good syntax highlighting. Free and open source.
 
-**Vim (Unix systems)**: Terminal-based, steep learning curve, but incredibly powerful once mastered. Already installed on Mac and Linux.
+**Vim (Unix systems)**: Terminal-based, steep learning curve, but incredibly effective once mastered. Already installed on Mac and Linux.
 
-For this beginner roadmap, we'll assume you're using VS Code since it's the most popular and beginner-friendly.
+For this beginner roadmap, this will assume you're using VS Code since it's the most popular and beginner-friendly.
 
 ---
 
 ## Your First Text File: Hello World
 
-Let's create your first code file. This won't be Python yet - just a simple text file to get comfortable with the editor.
+create your first code file. This won't be Python yet - just a simple text file to get comfortable with the editor.
 
 **Open VS Code**
 
@@ -414,14 +414,14 @@ Without understanding folders and paths, you'd be lost trying to find anything.
 
 **Reason two: Running Simulations**
 
-To run a simulation, you'll open a command line, navigate to the project folder, and type:
+To run a simulation, the system will open a command line, navigate to the project folder, and type:
 python space simulate dot py space dash dash ctrl space classical underscore smc space dash dash plot
 
 Every word in that command assumes you understand: paths, commands, arguments, flags. Now you do.
 
 **Reason three: Editing Code**
 
-When you want to modify controller gains or experiment with parameters, you'll open the source code in a text editor, make changes, save, and re-run. This workflow is how all programming happens.
+When you want to modify controller gains or experiment with parameters, the system will open the source code in a text editor, make changes, save, and re-run. This workflow is how all programming happens.
 
 **Reason four: Debugging**
 
@@ -500,7 +500,7 @@ Here are the technical terms from this episode with phonetic pronunciations:
 
 ## What's Next: Python Programming
 
-In the next episode, we'll take these foundational skills and start writing actual Python code. You'll learn:
+In the next episode, this will take these foundational skills and start writing actual Python code. You'll learn:
 
 - How to install Python and verify it works
 - Variables: storing information
@@ -508,7 +508,7 @@ In the next episode, we'll take these foundational skills and start writing actu
 - Basic operators: math and logic
 - Your first Python program beyond "Hello World"
 
-By the end of Episode 2, you'll be writing code that calculates, makes decisions, and prints results. The building blocks of any program.
+By the end of Episode 2, the system will be writing code that calculates, makes decisions, and prints results. The building blocks of any program.
 
 ---
 

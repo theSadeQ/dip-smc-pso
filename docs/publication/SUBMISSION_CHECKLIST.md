@@ -44,7 +44,7 @@ This checklist ensures a complete and professional research paper submission for
 #### Content Validation
 
 - [ ] **Title**: Clear, descriptive, <15 words
-  - Current: "Sliding Mode Control with PSO Optimization for Double-Inverted Pendulum: A Comprehensive Study"
+  - Current: "Sliding Mode Control with PSO Optimization for Double-Inverted Pendulum: A complete Study"
   - Length: 14 words [OK]
 
 - [ ] **Abstract**: Complete, <250 words
@@ -60,11 +60,11 @@ This checklist ensures a complete and professional research paper submission for
   - Novelty statement explicit
   - Contributions enumerated (3-5 bullet points)
 
-- [ ] **Related Work**: Comprehensive literature review
+- [ ] **Related Work**: complete literature review
   - SMC history (Utkin 1977 - present)
   - PSO evolution (Kennedy & Eberhart 1995 - present)
   - DIP benchmarks (Bogdanov 2004, Muskinja 2006)
-  - Gaps identified (no comprehensive SMC + PSO study for DIP)
+  - Gaps identified (no complete SMC + PSO study for DIP)
 
 - [ ] **Methodology**: Clear and reproducible
   - Controller equations provided (7 controllers)
@@ -408,7 +408,7 @@ This checklist ensures a complete and professional research paper submission for
   https://arxiv.org/abs/2511.12345
 
   We present 7 SMC controllers with formal stability proofs and
-  comprehensive benchmarks.
+  complete benchmarks.
 
   #ControlTheory #Robotics #Optimization #arXiv
   ```
@@ -449,10 +449,10 @@ Dear Editor-in-Chief,
 Subject: Submission of Manuscript for [Conference/Journal Name]
 
 I am pleased to submit our manuscript entitled "Sliding Mode Control with PSO
-Optimization for Double-Inverted Pendulum: A Comprehensive Study" for
+Optimization for Double-Inverted Pendulum: A complete Study" for
 consideration for publication in [Conference/Journal Name].
 
-This manuscript presents a comprehensive study of sliding mode control (SMC)
+This manuscript presents a complete study of sliding mode control (SMC)
 techniques applied to the double-inverted pendulum (DIP) system, with particle
 swarm optimization (PSO) for gain tuning. The key contributions include:
 
@@ -460,7 +460,7 @@ swarm optimization (PSO) for gain tuning. The key contributions include:
    Super-Twisting Algorithm, Adaptive SMC, Hybrid Adaptive STA-SMC, Swing-Up
    SMC, MPC, and Factory registry) with formal Lyapunov stability proofs.
 
-2. Comprehensive benchmarks (100 runs per controller) demonstrating superior
+2. complete benchmarks (100 runs per controller) demonstrating superior
    robustness of adaptive and hybrid controllers under high-disturbance
    environments.
 
@@ -471,7 +471,7 @@ swarm optimization (PSO) for gain tuning. The key contributions include:
    https://github.com/theSadeQ/dip-smc-pso with extensive documentation.
 
 This work addresses a significant gap in the literature by providing the first
-comprehensive comparison of SMC variants with PSO optimization for the DIP
+complete comparison of SMC variants with PSO optimization for the DIP
 benchmark problem. The results have important implications for industrial
 applications requiring robust control under model uncertainty and disturbances.
 
@@ -595,7 +595,7 @@ Dear Editor and Reviewers,
 
 We thank the editor and reviewers for their valuable feedback on our manuscript
 "Sliding Mode Control with PSO Optimization for Double-Inverted Pendulum: A
-Comprehensive Study" (Manuscript ID: CDC-2025-12345).
+complete Study" (Manuscript ID: CDC-2025-12345).
 
 We have carefully addressed all comments and believe the manuscript is
 significantly improved as a result. Below, we provide a detailed point-by-point

@@ -115,13 +115,13 @@ flowchart TB
 
 ```{mermaid}
 graph LR
-    Root((DIP SMC PSO)) --> A[📚 Getting Started]
-    Root --> B[📖 User Guides]
-    Root --> C[🔧 API Reference]
-    Root --> D[📐 Theory & Math]
-    Root --> E[✅ Testing]
-    Root --> F[🚀 Deployment]
-    Root --> G[📋 Project Docs]
+    Root((DIP SMC PSO)) --> A[ Getting Started]
+    Root --> B[ User Guides]
+    Root --> C[ API Reference]
+    Root --> D[ Theory & Math]
+    Root --> E[ Testing]
+    Root --> F[ Deployment]
+    Root --> G[ Project Docs]
 
     A --> A1[Installation]
     A --> A2[Quick Start]

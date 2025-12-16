@@ -18,20 +18,20 @@
 ## Architecture Overview ### System Architecture The factory integration system follows enterprise-grade design patterns with clear separation of concerns: ```
 
 Factory Integration System
-├── Enterprise Controller Factory (src/controllers/factory.py)
-│ ├── Thread-safe Operations (RLock with timeout)
-│ ├── Type-safe Interfaces (Protocol-based design)
-│ ├── Configuration Validation (Pydantic integration)
-│ └── PSO Optimization Integration (Native PSO support)
-├── Controller Registry System
-│ ├── Metadata Management (Gain specifications, requirements)
-│ ├── Alias Resolution (Backward compatibility)
-│ └── Dynamic Registration (Extensible design)
-├── Configuration Integration Layer
-│ ├── Multi-source Configuration Resolution
-│ ├── Deprecation Handling (Graceful migrations)
-│ └── Fallback Mechanisms (Graceful degradation)
-└── PSO Integration Layer ├── Controller Wrapper System (PSO-compatible interfaces) ├── Gain Validation (Domain-specific validation) └── Batch Creation (Performance optimization)
+ Enterprise Controller Factory (src/controllers/factory.py)
+  Thread-safe Operations (RLock with timeout)
+  Type-safe Interfaces (Protocol-based design)
+  Configuration Validation (Pydantic integration)
+  PSO Optimization Integration (Native PSO support)
+ Controller Registry System
+  Metadata Management (Gain specifications, requirements)
+  Alias Resolution (Backward compatibility)
+  Dynamic Registration (Extensible design)
+ Configuration Integration Layer
+  Multi-source Configuration Resolution
+  Deprecation Handling (Graceful migrations)
+  Fallback Mechanisms (Graceful degradation)
+ PSO Integration Layer  Controller Wrapper System (PSO-compatible interfaces)  Gain Validation (Domain-specific validation)  Batch Creation (Performance optimization)
 ``` ### Design Principles 1. **Enterprise-Grade Quality**: Thread-safe operations with error handling
 2. **Type Safety**: Protocol-based interfaces with 95%+ type hint coverage
 3. **PSO Optimization**: Native integration with particle swarm optimization workflows
@@ -131,7 +131,7 @@ else: CONTROLLER_REGISTRY['mpc_controller'] = { 'class': None, 'config_class': U
 - `gains` (Optional[Union[list, np.ndarray]]): Controller gain array **Returns:**
 - Configured controller instance implementing `ControllerProtocol` **Raises:**
 - `ValueError`: Invalid controller type or parameters
-- `ImportError`: Missing required dependencies **Thread Safety:** ✅ Thread-safe with timeout protection #### `list_available_controllers()` **Get list of available controller types.** **Returns:**
+- `ImportError`: Missing required dependencies **Thread Safety:**  Thread-safe with timeout protection #### `list_available_controllers()` **Get list of available controller types.** **Returns:**
 - `List[str]`: List of available controller type identifiers #### `get_default_gains(controller_type)` **Get default gains for a specific controller type.** **Parameters:**
 - `controller_type` (str): Controller type identifier **Returns:**
 - `List[float]`: Default gain values for the controller ### PSO Integration Functions #### `create_smc_for_pso(smc_type, gains, plant_config_or_model=None, **kwargs)` **Create SMC controller optimized for PSO usage.** **Parameters:**
@@ -197,7 +197,7 @@ ValueError: Unknown controller type 'classical'. Available: ['classical_smc', 's
 - Incorrect controller type string
 - Typo in controller name
 - Missing controller registration **Solutions:**
-1. **Check available controllers:** ```python from src.controllers.factory import list_available_controllers print("Available controllers:", list_available_controllers()) ``` 2. **Use correct controller names:** - ✅ `'classical_smc'` (correct) - ❌ `'classical'` (incorrect) - ✅ `'sta_smc'` (correct) - ❌ `'super_twisting'` (incorrect) 3. **Check controller aliases:** ```python # These aliases are supported: 'classic_smc' -> 'classical_smc' 'super_twisting' -> 'sta_smc' 'adaptive' -> 'adaptive_smc' 'hybrid' -> 'hybrid_adaptive_sta_smc' ``` #### Issue: `ImportError: Controller class not available` **Symptoms:**
+1. **Check available controllers:** ```python from src.controllers.factory import list_available_controllers print("Available controllers:", list_available_controllers()) ``` 2. **Use correct controller names:** -  `'classical_smc'` (correct) -  `'classical'` (incorrect) -  `'sta_smc'` (correct) -  `'super_twisting'` (incorrect) 3. **Check controller aliases:** ```python # These aliases are supported: 'classic_smc' -> 'classical_smc' 'super_twisting' -> 'sta_smc' 'adaptive' -> 'adaptive_smc' 'hybrid' -> 'hybrid_adaptive_sta_smc' ``` #### Issue: `ImportError: Controller class not available` **Symptoms:**
 ```
 
 ImportError: Controller class for mpc_controller is not available
@@ -237,15 +237,15 @@ Deadlock in concurrent controller creation
 1. **Avoid excessive concurrent calls:** ```python # Instead of many concurrent calls: controllers = [] for i in range(100): controller = create_controller('classical_smc') # Can cause contention controllers.append(controller) # Use batch creation: from src.controllers.factory import create_all_smc_controllers controllers = create_all_smc_controllers(gains_dict) ``` 2. **Handle timeout gracefully:** ```python try: controller = create_controller('classical_smc') except RuntimeError as e: if "timeout" in str(e).lower(): # Retry with exponential backoff time.sleep(random.uniform(0.1, 0.5)) controller = create_controller('classical_smc') else: raise ``` 3. **Use pre-created controllers for PSO:** ```python # Pre-create factory function (once) factory = create_pso_controller_factory(SMCType.CLASSICAL) # Use factory in PSO fitness function (many times) def fitness_function(gains): controller = factory(gains) # Thread-safe, fast return evaluate_performance(controller) ``` ### Performance Optimization #### Memory Usage Optimization ```python
 # example-metadata:
 # runnable: false # Avoid creating unnecessary controllers
-def optimize_controller_creation(): # ❌ Creates many controller instances controllers = [] for gains_set in gain_sets: controller = create_controller('classical_smc', gains=gains_set) controllers.append(controller) # ✅ Use single factory function factory = create_pso_controller_factory(SMCType.CLASSICAL) controllers = [factory(gains_set) for gains_set in gain_sets]
+def optimize_controller_creation(): #  Creates many controller instances controllers = [] for gains_set in gain_sets: controller = create_controller('classical_smc', gains=gains_set) controllers.append(controller) #  Use single factory function factory = create_pso_controller_factory(SMCType.CLASSICAL) controllers = [factory(gains_set) for gains_set in gain_sets]
 ``` #### Import Time Optimization ```python
 # example-metadata:
 
-# runnable: false # ❌ Imports all controllers at module level
+# runnable: false #  Imports all controllers at module level
 
 from src.controllers.factory import ( create_controller, create_classical_smc_controller, create_sta_smc_controller, # ... all functions
-) # ✅ Import only what you need
-from src.controllers.factory import create_controller # ✅ Or use lazy imports
+) #  Import only what you need
+from src.controllers.factory import create_controller #  Or use lazy imports
 def get_factory_function(): from src.controllers.factory import create_pso_controller_factory return create_pso_controller_factory
 ```
 

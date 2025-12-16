@@ -32,10 +32,10 @@ The optimization and simulation infrastructure provides:
 | **Vector Simulation** | Batch processing | Safety guards, early stopping, convergence detection |
 | **Simulation Context** | Framework integration | Configuration loading, component registration, model selection |
 | **Configuration System** | Parameter validation | Pydantic schemas, type safety, physical constraints | ### Architecture Diagram ```
-┌─────────────────────────────────────────────────────────────┐
-│ Configuration System │
-│ (Pydantic Schemas: Physics, Simulation, Controllers, PSO) │
-└────────────┬────────────────────────────────────┬───────────┘ │ │ ┌────────▼────────┐ ┌───────▼──────────┐ │ PSO Optimizer │◄─────────────────│ Vector Sim │ │ Cost Function │ batch evaluate │ Safety Guards │ │ Uncertainty │ │ Early Stopping │ └────────┬────────┘ └───────┬──────────┘ │ │ │ ┌───────────────────┐ │ └─────►│ Simulation Runner │◄────────┘ │ Euler Integration│ │ State Management │ └─────────┬─────────┘ │ ┌─────────▼──────────┐ │ Dynamics Models │ │ Simplified / Full │ └────────────────────┘
+
+ Configuration System 
+ (Pydantic Schemas: Physics, Simulation, Controllers, PSO) 
+      PSO Optimizer  Vector Sim   Cost Function  batch evaluate  Safety Guards   Uncertainty   Early Stopping          Simulation Runner   Euler Integration  State Management      Dynamics Models   Simplified / Full  
 ```
 
 ---
@@ -71,7 +71,7 @@ config.physics_uncertainty.pendulum2_mass = 0.1
 $$
 J_{robust} = w_{mean} \cdot \text{mean}(J_i) + w_{max} \cdot \text{max}(J_i)
 $$ Default weights: $(w_{mean}, w_{max}) = (0.7, 0.3)$ balances average and worst-case performance. **Implementation:** [`src/optimization/algorithms/pso_optimizer.py:348-390`](../../src/optimization/algorithms/pso_optimizer.py#L348-L390) ### PSO Configuration Configuration via `config.yaml`: ```yaml
-pso: n_particles: 30 # Swarm size (recommended: 10-50) iters: 100 # Optimization iterations c1: 2.0 # Cognitive coefficient (self-confidence) c2: 2.0 # Social coefficient (swarm influence) w: 0.9 # Inertia weight (exploration vs exploitation) # Advanced features velocity_clamp: [0.1, 0.5] # Velocity limits as fraction of search space w_schedule: [0.9, 0.4] # Linear inertia decrease (exploration → exploitation) # Controller-specific gain bounds bounds: classical_smc: min: [0.1, 0.1, 0.1, 0.1, 1.0, 0.0] # [k1, k2, λ1, λ2, K, K_rate] max: [50.0, 50.0, 50.0, 50.0, 200.0, 50.0] adaptive_smc: min: [0.1, 0.1, 0.1, 0.1, 0.01] # [k1, k2, λ1, λ2, adapt_rate] max: [50.0, 50.0, 50.0, 50.0, 10.0] sta_smc: min: [0.5, 0.5, 0.5, 0.5, 0.1, 0.1] # [k1, k2, λ1, λ2, α, β] max: [100.0, 100.0, 100.0, 100.0, 50.0, 50.0] hybrid_adaptive_sta_smc: min: [0.5, 0.5, 0.5, 0.01] # [λ1, λ2, α, adapt_rate] max: [100.0, 100.0, 50.0, 10.0]
+pso: n_particles: 30 # Swarm size (recommended: 10-50) iters: 100 # Optimization iterations c1: 2.0 # Cognitive coefficient (self-confidence) c2: 2.0 # Social coefficient (swarm influence) w: 0.9 # Inertia weight (exploration vs exploitation) # features velocity_clamp: [0.1, 0.5] # Velocity limits as fraction of search space w_schedule: [0.9, 0.4] # Linear inertia decrease (exploration → exploitation) # Controller-specific gain bounds bounds: classical_smc: min: [0.1, 0.1, 0.1, 0.1, 1.0, 0.0] # [k1, k2, λ1, λ2, K, K_rate] max: [50.0, 50.0, 50.0, 50.0, 200.0, 50.0] adaptive_smc: min: [0.1, 0.1, 0.1, 0.1, 0.01] # [k1, k2, λ1, λ2, adapt_rate] max: [50.0, 50.0, 50.0, 50.0, 10.0] sta_smc: min: [0.5, 0.5, 0.5, 0.5, 0.1, 0.1] # [k1, k2, λ1, λ2, α, β] max: [100.0, 100.0, 100.0, 100.0, 50.0, 50.0] hybrid_adaptive_sta_smc: min: [0.5, 0.5, 0.5, 0.01] # [λ1, λ2, α, adapt_rate] max: [100.0, 100.0, 50.0, 10.0]
 ``` **Hyperparameter Guidelines:** | Parameter | Recommended Range | Effect |
 |-----------|-------------------|--------|
 | `n_particles` | 10-50 | Larger swarms explore better but cost more |
@@ -226,32 +226,32 @@ The configuration system uses Pydantic for type-safe, validated parameter manage
 
 ```
 ConfigSchema
-├── physics: PhysicsConfig
-│ ├── Mass parameters (cart, pendulums)
-│ ├── Geometric parameters (lengths, COM)
-│ ├── Inertia parameters
-│ ├── Friction coefficients
-│ └── Numerical stability settings
-├── simulation: SimulationConfig
-│ ├── duration, dt
-│ ├── use_full_dynamics
-│ ├── latency settings
-│ └── real-time mode
-├── controller_defaults: Dict[str, ControllerConfig]
-│ ├── classical_smc: ClassicalSMCConfig
-│ ├── adaptive_smc: AdaptiveSMCConfig
-│ ├── sta_smc: STASMCConfig
-│ └── hybrid_adaptive_sta_smc: HybridAdaptiveSMCConfig
-├── pso: PSOConfig
-│ ├── Swarm parameters (n_particles, iters)
-│ ├── PSO hyperparameters (c1, c2, w)
-│ ├── Gain bounds per controller type
-│ └── Advanced features (velocity_clamp, w_schedule)
-├── cost_function: CostFunctionConfig
-│ ├── weights: (state_error, control_effort, control_rate, stability)
-│ ├── norms: Normalization constants
-│ └── combine_weights: (mean, max)
-└── physics_uncertainty: PhysicsUncertaintySchema ├── n_evals: Number of perturbed evaluations └── Parameter variation percentages
+ physics: PhysicsConfig
+  Mass parameters (cart, pendulums)
+  Geometric parameters (lengths, COM)
+  Inertia parameters
+  Friction coefficients
+  Numerical stability settings
+ simulation: SimulationConfig
+  duration, dt
+  use_full_dynamics
+  latency settings
+  real-time mode
+ controller_defaults: Dict[str, ControllerConfig]
+  classical_smc: ClassicalSMCConfig
+  adaptive_smc: AdaptiveSMCConfig
+  sta_smc: STASMCConfig
+  hybrid_adaptive_sta_smc: HybridAdaptiveSMCConfig
+ pso: PSOConfig
+  Swarm parameters (n_particles, iters)
+  PSO hyperparameters (c1, c2, w)
+  Gain bounds per controller type
+  features (velocity_clamp, w_schedule)
+ cost_function: CostFunctionConfig
+  weights: (state_error, control_effort, control_rate, stability)
+  norms: Normalization constants
+  combine_weights: (mean, max)
+ physics_uncertainty: PhysicsUncertaintySchema  n_evals: Number of perturbed evaluations  Parameter variation percentages
 ``` ### Type-Safe Configuration Pydantic provides compile-time type safety and runtime validation: ```python
 
 from src.config import load_config # Load and validate configuration
@@ -559,4 +559,4 @@ t, x_batch, u_batch, sigma_batch = simulate_system_batch( controller_factory=fac
 
 **Version:** Phase 3
 **Last Updated:** October 2025
-**Status:** Production-Ready ✓
+**Status:** Production-Ready 

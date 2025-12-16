@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 LT-7 RESEARCH PAPER - TASK B.3: SENSITIVITY ANALYSIS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 
 Purpose:
   Test sensitivity of statistical results to analysis parameters:
@@ -25,7 +25,7 @@ Output:
 
 Author: Claude Code
 Date: 2025-10-20 (Phase 2, Category B)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 """
 
 import pandas as pd
@@ -34,9 +34,9 @@ from scipy import stats
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Configuration
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 # Data paths
 FIXED_CSV = Path("benchmarks/MT6_fixed_baseline.csv")
@@ -57,9 +57,9 @@ N_BOOTSTRAP = 10000
 CONFIDENCE_LEVEL = 0.95
 RANDOM_SEED = 42
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Load Data
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("[LOAD] Loading MT-6 chattering data...")
 df_fixed = pd.read_csv(FIXED_CSV)
@@ -71,9 +71,9 @@ chattering_adaptive_full = df_adaptive['chattering_index'].values
 print(f"  Fixed boundary: n={len(chattering_fixed_full)}, mean={chattering_fixed_full.mean():.4f}")
 print(f"  Adaptive boundary: n={len(chattering_adaptive_full)}, mean={chattering_adaptive_full.mean():.4f}")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Helper Functions
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 def remove_outliers(data, z_threshold):
     """Remove outliers based on Z-score threshold."""
@@ -143,9 +143,9 @@ def bootstrap_bca_ci(data, n_bootstrap, confidence=0.95, seed=42):
 
     return ci_lower, ci_upper
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Sensitivity Analysis: Sample Size
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n[SENSITIVITY 1/3] Sample size (random subsampling)...")
 results_sample_size = []
@@ -183,9 +183,9 @@ for n in SAMPLE_SIZES:
 df_sample_size = pd.DataFrame(results_sample_size)
 print(f"    [OK] Completed {len(SAMPLE_SIZES)} sample size tests")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Sensitivity Analysis: Outlier Removal
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n[SENSITIVITY 2/3] Outlier removal threshold...")
 results_outlier = []
@@ -222,9 +222,9 @@ for threshold in OUTLIER_THRESHOLDS:
 df_outlier = pd.DataFrame(results_outlier)
 print(f"    [OK] Completed {len(OUTLIER_THRESHOLDS)} outlier threshold tests")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Sensitivity Analysis: CI Method
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n[SENSITIVITY 3/3] Bootstrap CI method (percentile vs BCa)...")
 results_ci_method = []
@@ -252,9 +252,9 @@ for method in CI_METHODS:
 df_ci_method = pd.DataFrame(results_ci_method)
 print(f"    [OK] Completed {len(CI_METHODS)} CI method tests")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Plot Sensitivity Results
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n[PLOT] Generating sensitivity analysis plot...")
 
@@ -304,9 +304,9 @@ plt.savefig(FIGURE_PATH.with_suffix('.png'), dpi=150, bbox_inches='tight')
 print(f"  [OK] Saved: {FIGURE_PATH}")
 print(f"  [OK] Saved: {FIGURE_PATH.with_suffix('.png')}")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Generate Report
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n[REPORT] Generating markdown report...")
 
@@ -417,7 +417,7 @@ report += f"""
 
 if mean_change_fixed_pct < 5 and mean_change_adaptive_pct < 5:
     report += """
-✓ **RESULTS ARE ROBUST:** Statistical findings are insensitive to reasonable variations in analysis parameters
+ **RESULTS ARE ROBUST:** Statistical findings are insensitive to reasonable variations in analysis parameters
 
 **Recommendations:**
 1. Continue using n=100, percentile bootstrap, no outlier removal
@@ -426,7 +426,7 @@ if mean_change_fixed_pct < 5 and mean_change_adaptive_pct < 5:
 """
 else:
     report += """
-⚠ **MODERATE SENSITIVITY DETECTED:** Some parameters show >5% variation
+ **MODERATE SENSITIVITY DETECTED:** Some parameters show >5% variation
 
 **Recommendations:**
 1. Report sensitivity ranges in manuscript
@@ -449,9 +449,9 @@ with open(REPORT_PATH, 'w', encoding='utf-8') as f:
 
 print(f"  [OK] Saved: {REPORT_PATH}")
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # Summary
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 print("\n" + "="*80)
 print("SENSITIVITY ANALYSIS COMPLETE")

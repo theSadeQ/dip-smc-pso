@@ -152,7 +152,7 @@ graph TD
     K --> L
 
     L --> M{Reproducibility Check}
-    M -->|Same Seed| N[Same Sequence ✓]
+    M -->|Same Seed| N[Same Sequence ]
     M -->|Different Seed| O[Different Sequence]
 
     D --> P[Save State]
@@ -185,7 +185,7 @@ random_values_2 = np.random.randn(10)
 
 # Verify reproducibility
 assert np.allclose(random_values_1, random_values_2)
-print("✓ Reproducibility verified")
+print(" Reproducibility verified")
 ```
 
 ## Example 2: Monte Carlo with Reproducibility
@@ -214,7 +214,7 @@ mean1, std1 = monte_carlo_simulation(1000, seed=42)
 mean2, std2 = monte_carlo_simulation(1000, seed=42)
 
 assert mean1 == mean2 and std1 == std2
-print("✓ Monte Carlo reproducibility confirmed")
+print(" Monte Carlo reproducibility confirmed")
 ```
 
 ## Example 3: PSO Optimization Reproducibility
@@ -244,7 +244,7 @@ gains_run1 = reproducible_pso_tuning(seed=123)
 gains_run2 = reproducible_pso_tuning(seed=123)
 
 assert np.allclose(gains_run1, gains_run2)
-print("✓ PSO optimization is reproducible")
+print(" PSO optimization is reproducible")
 ```
 
 ## Example 4: State Capture and Restore
@@ -321,5 +321,5 @@ exp2 = ReproducibleExperiment("controller_comparison", seed=42)
 results2 = exp2.run()
 
 assert results == results2
-print("✓ Full experiment reproducibility achieved")
+print(" Full experiment reproducibility achieved")
 ```

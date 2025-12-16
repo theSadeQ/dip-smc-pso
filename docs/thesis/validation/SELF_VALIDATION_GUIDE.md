@@ -12,18 +12,18 @@
 ### A. For Master's Thesis Specifically
 
 **You CAN Self-Validate Because:**
-- ✅ **Master's standard**: External validation before submission is NOT required
-- ✅ **You're the expert**: You understand your work better than anyone
-- ✅ **Committee validates**: Your thesis committee is the final validator
-- ✅ **Cost-effective**: External experts cost $1,700-2,200 for work you can do
-- ✅ **You're qualified**: You have the control theory knowledge needed
-- ✅ **Framework compensates**: Systematic checklists prevent author blind spots
-- ✅ **AI assists**: Catches errors you might miss from familiarity
+-  **Master's standard**: External validation before submission is NOT required
+-  **You're the expert**: You understand your work better than anyone
+-  **Committee validates**: Your thesis committee is the final validator
+-  **Cost-effective**: External experts cost $1,700-2,200 for work you can do
+-  **You're qualified**: You have the control theory knowledge needed
+-  **Framework compensates**: Systematic checklists prevent author blind spots
+-  **AI assists**: Catches errors you might miss from familiarity
 
 **External Validation Is Optional:**
-- ❌ **Not required** for master's thesis submission
-- ⏸️ **May be useful IF**: Publishing in journal, pursuing PhD, or institutional requirement
-- ⏸️ **Can defer**: Committee feedback may request external review later
+-  **Not required** for master's thesis submission
+- ⏸ **May be useful IF**: Publishing in journal, pursuing PhD, or institutional requirement
+- ⏸ **Can defer**: Committee feedback may request external review later
 
 ### B. Difference: Pre-Submission vs. Committee Evaluation
 
@@ -42,11 +42,11 @@
 ### A. Your Qualifications (Why You CAN Do This)
 
 You have:
-- ✅ Master's-level control theory knowledge
-- ✅ Deep familiarity with SMC, Lyapunov stability, PSO
-- ✅ Implementation experience (you wrote the code)
-- ✅ Mathematical background (Lagrangian mechanics, differential equations)
-- ✅ Statistical knowledge (Welch's t-test, effect sizes)
+-  Master's-level control theory knowledge
+-  Deep familiarity with SMC, Lyapunov stability, PSO
+-  Implementation experience (you wrote the code)
+-  Mathematical background (Lagrangian mechanics, differential equations)
+-  Statistical knowledge (Welch's t-test, effect sizes)
 
 You're reviewing YOUR OWN work with systematic tools to ensure:
 - No algebra errors in derivations
@@ -165,11 +165,11 @@ This is **rigorous self-review**, not external auditing.
 ## IV. WHEN TO CONSIDER EXTERNAL EXPERT (Optional)
 
 Consider external validation IF:
-- ⏸️ **Publishing**: Planning to submit to IEEE/Elsevier journal
-- ⏸️ **PhD pursuit**: Want extra validation for PhD applications
-- ⏸️ **Novel contribution**: Claiming significant theoretical advance
-- ⏸️ **Committee request**: Advisor recommends external review
-- ⏸️ **Confidence boost**: Want independent confirmation
+- ⏸ **Publishing**: Planning to submit to IEEE/Elsevier journal
+- ⏸ **PhD pursuit**: Want extra validation for PhD applications
+- ⏸ **Novel contribution**: Claiming significant theoretical advance
+- ⏸ **Committee request**: Advisor recommends external review
+- ⏸ **Confidence boost**: Want independent confirmation
 
 **Recommendation for Master's Thesis**: Self-review is sufficient. Defer external validation until:
 1. Committee review complete (they may have feedback first)
@@ -302,10 +302,10 @@ Check:
 - No broken references
 
 **This Dramatically Improves Committee Review Experience:**
-- ✅ Faster approval (no need for major revisions)
-- ✅ Committee can focus on content, not mechanics
-- ✅ Demonstrates thoroughness and professionalism
-- ✅ Shows you take validation seriously
+-  Faster approval (no need for major revisions)
+-  Committee can focus on content, not mechanics
+-  Demonstrates thoroughness and professionalism
+-  Shows you take validation seriously
 
 ---
 
@@ -370,12 +370,12 @@ For each critical area, rate confidence (1-5):
 
 ## VALIDATION ACTIVITIES COMPLETED
 
-✅ **Cross-References**: AI verified 287 references, fixed 3 broken links
-✅ **Technical Claims**: Extracted 123 claims, verified evidence for all
-✅ **Statistical Analysis**: Reran all tests, verified assumptions met
-✅ **Proof Verification**: Line-by-line review of 6 Lyapunov proofs
-✅ **Code-Theory Alignment**: Spot-checked 10 critical implementations
-✅ **Completeness**: All 5 research questions explicitly answered
+ **Cross-References**: AI verified 287 references, fixed 3 broken links
+ **Technical Claims**: Extracted 123 claims, verified evidence for all
+ **Statistical Analysis**: Reran all tests, verified assumptions met
+ **Proof Verification**: Line-by-line review of 6 Lyapunov proofs
+ **Code-Theory Alignment**: Spot-checked 10 critical implementations
+ **Completeness**: All 5 research questions explicitly answered
 
 ---
 
@@ -448,10 +448,10 @@ All mechanical errors corrected. Ready for committee review.
 - Claiming independent certification - this is self-review
 
 **Bottom line:**
-- ✅ You CAN self-validate
-- ✅ You SHOULD use this framework for self-review
-- ✅ AI assistance makes self-review very effective
-- ✅ Committee is the final validator (as it should be)
-- ❌ External expert is optional (defer until publishing)
+-  You CAN self-validate
+-  You SHOULD use this framework for self-review
+-  AI assistance makes self-review very effective
+-  Committee is the final validator (as it should be)
+-  External expert is optional (defer until publishing)
 
 The framework is YOUR TOOL for rigorous self-review. Use it!

@@ -230,9 +230,9 @@ def generate_convergence_report(results: Dict[str, Dict], output_dir: Path):
 
         # Pass/fail assessment
         if data['final_cost'] and data['final_cost'] < 2.0:
-            md_content += "- **Assessment**: ✅ **PASS** (chattering target < 2.0 met)\n"
+            md_content += "- **Assessment**:  **PASS** (chattering target < 2.0 met)\n"
         else:
-            md_content += "- **Assessment**: ❌ **FAIL** (chattering target < 2.0 not met)\n"
+            md_content += "- **Assessment**:  **FAIL** (chattering target < 2.0 not met)\n"
 
         md_content += "\n"
 

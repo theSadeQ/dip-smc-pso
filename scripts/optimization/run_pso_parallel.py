@@ -49,7 +49,7 @@ def launch_pso(controller: str, n_particles: int = 30, iters: int = 150,
             text=True
         )
 
-    print(f"✓ Launched PSO for {controller}")
+    print(f" Launched PSO for {controller}")
     print(f"  PID: {process.pid}")
     print(f"  Log: {log_file}")
     print(f"  Output: {output_file}")
@@ -74,7 +74,7 @@ def monitor_processes(processes: Dict[str, subprocess.Popen]):
                     print(f"  {ctrl:25s}: Running (PID {proc.pid})")
                 else:
                     returncode = proc.returncode
-                    status = "✓ Complete" if returncode == 0 else f"✗ Failed (code {returncode})"
+                    status = " Complete" if returncode == 0 else f" Failed (code {returncode})"
                     print(f"  {ctrl:25s}: {status}")
             print()
 
@@ -100,11 +100,11 @@ def monitor_processes(processes: Dict[str, subprocess.Popen]):
                 with open(output_file) as f:
                     data = json.load(f)
                 chattering = data.get('chattering_index', 'N/A')
-                print(f"✓ {ctrl:25s}: chattering_index = {chattering}")
+                print(f" {ctrl:25s}: chattering_index = {chattering}")
             else:
                 print(f"? {ctrl:25s}: Completed but output file not found")
         else:
-            print(f"✗ {ctrl:25s}: Failed with return code {returncode}")
+            print(f" {ctrl:25s}: Failed with return code {returncode}")
 
 
 def main():

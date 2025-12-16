@@ -74,9 +74,9 @@ graph TD
 ```
 
 **Regions**:
-- 🔴 Red: System off surface (`s ≠ 0`) - Reaching phase active
-- 🟢 Green: On sliding surface (`s = 0`) - Desired dynamics
-- 🔵 Blue: Equilibrium point - Control objective
+-  Red: System off surface (`s ≠ 0`) - Reaching phase active
+-  Green: On sliding surface (`s = 0`) - Desired dynamics
+-  Blue: Equilibrium point - Control objective
 
 **Interactive Phase Portrait - Explore System Dynamics:**
 
@@ -332,7 +332,7 @@ Reaching time: T ≤ |s(0)| / K
    print("=" * 60)
    print(f"\n1. Lyapunov Function: V(s) = ½s²")
    print(f"   → Always non-negative: V ≥ 0")
-   print(f"   → Zero only at equilibrium: V = 0 ⟺ s = 0")
+   print(f"   → Zero only at equilibrium: V = 0  s = 0")
    print(f"\n2. Lyapunov Derivative: V̇ = s·ṡ = -K|s|")
    print(f"   → Always negative except at equilibrium: V̇ < 0 for s ≠ 0")
    print(f"   → Energy decreases monotonically")
@@ -407,9 +407,9 @@ graph LR
 ```
 
 **Regions**:
-- 🔴 Red (`|s| > ε`): Discontinuous sign function (traditional SMC)
-- 🟡 Yellow (`|s| ≤ ε`): Boundary layer (smooth approximation)
-- 🟢 Green: Continuous control, no chattering
+-  Red (`|s| > ε`): Discontinuous sign function (traditional SMC)
+-  Yellow (`|s| ≤ ε`): Boundary layer (smooth approximation)
+-  Green: Continuous control, no chattering
 
 **Interactive Sliding Surface with Boundary Layer:**
 
@@ -438,12 +438,12 @@ Sliding surface visualization showing s = x₁ + x₂ = 0 with adjustable bounda
 ### Trade-off: Accuracy vs Chattering
 
 **Smaller `ε`** (thin boundary layer):
-- ✅ Better tracking accuracy
-- ❌ More chattering
+-  Better tracking accuracy
+-  More chattering
 
 **Larger `ε`** (thick boundary layer):
-- ✅ Less chattering
-- ❌ Reduced tracking accuracy (steady-state error)
+-  Less chattering
+-  Reduced tracking accuracy (steady-state error)
 
 **Practical Guideline**: Choose `ε` such that:
 ```
@@ -499,7 +499,7 @@ Where:
    u_sat = sat_func(s, eps)
    u_tanh = tanh_func(s, eps)
 
-   # Create comprehensive figure
+   # Create complete figure
    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(14, 10))
 
    # Plot 1: All three functions together
@@ -655,9 +655,9 @@ flowchart TD
 ```
 
 **Components**:
-- 🟢 **u₁** (Continuous): Proportional to `|s|^(1/2)`, vanishes smoothly at `s=0`
-- 🔴 **u₂** (Integral): Accumulates switching term, provides robustness
-- 🔵 **Total u**: Sum is continuous despite discontinuous `sign(s)`
+-  **u₁** (Continuous): Proportional to `|s|^(1/2)`, vanishes smoothly at `s=0`
+-  **u₂** (Integral): Accumulates switching term, provides robustness
+-  **Total u**: Sum is continuous despite discontinuous `sign(s)`
 
 ### Lyapunov Stability for STA
 

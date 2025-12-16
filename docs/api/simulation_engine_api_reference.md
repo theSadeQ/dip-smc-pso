@@ -28,68 +28,68 @@
 - **Safety monitoring** and constraint enforcement
 - **Professional result management** with export features - **PSO optimization integration** through batch execution
 - **Hardware-in-loop (HIL)** real-time simulation support **Key Features:**
-- ✅ 45 Python modules providing complete simulation framework
-- ✅ Backward-compatible with legacy `simulation_runner.py` interface
-- ✅ Extensible architecture for research and production use
-- ✅ Type-safe interfaces with protocols
-- ✅ Production-grade error handling and monitoring
-- ✅ Memory-optimized for long-running simulations ### 1.2 System Architecture ```
-┌────────────────────────────────────────────────────────────────────────┐
-│ SIMULATION ENGINE SYSTEM │
-├────────────────────────────────────────────────────────────────────────┤
-│ │
-│ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │
-│ │ Controller │────▶│ Simulation │────▶│ Dynamics │ │
-│ │ Factory │ │ Runner │ │ Model │ │
-│ └─────────────┘ └─────────────┘ └─────────────┘ │
-│ │ │ │ │
-│ │ ▼ │ │
-│ │ ┌──────────────┐ │ │
-│ │ │ Orchestrator │ │ │
-│ │ │ Strategy │ │ │
-│ │ └──────────────┘ │ │
-│ │ │ │ │
-│ │ ┌──────────┴──────────┐ │ │
-│ │ ▼ ▼ │ │
-│ │ ┌───────────┐ ┌───────────┐ │ │
-│ │ │Sequential │ │ Batch │ │ │
-│ │ │Orchestr. │ │Orchestr. │ │ │
-│ │ └───────────┘ └───────────┘ │ │
-│ │ │ │ │ │
-│ │ └──────────┬──────────┘ │ │
-│ │ ▼ │ │
-│ │ ┌──────────────┐ │ │
-│ │ │ Integrator │◀───────────┘ │
-│ │ │ Factory │ │
-│ │ └──────────────┘ │
-│ │ │ │
-│ │ ┌──────────┴──────────┐ │
-│ │ ▼ ▼ │
-│ │ ┌───────────┐ ┌───────────┐ │
-│ │ │ Euler │ │ RK4 │ │
-│ │ │ (1st ord) │ │ (4th ord) │ │
-│ │ └───────────┘ └───────────┘ │
-│ │ │ │ │
-│ │ └──────────┬──────────┘ │
-│ │ ▼ │
-│ │ ┌──────────────┐ │
-│ │ │ Safety │ │
-│ │ │ Guards │ │
-│ │ └──────────────┘ │
-│ │ │
-│ ▼ │
-│ ┌─────────────┐ │
-│ │ PSO │ │
-│ │Optimization │ │
-│ └─────────────┘ │
-│ │ │
-│ ▼ │
-│ ┌─────────────┐ │
-│ │ Results │ │
-│ │ Container │ │
-│ └─────────────┘ │
-│ │
-└──────────────────────────────────────────────────────────────────────┘
+-  45 Python modules providing complete simulation framework
+-  Backward-compatible with legacy `simulation_runner.py` interface
+-  Extensible architecture for research and production use
+-  Type-safe interfaces with protocols
+-  Production-grade error handling and monitoring
+-  Memory-optimized for long-running simulations ### 1.2 System Architecture ```
+
+ SIMULATION ENGINE SYSTEM 
+
+ 
+    
+  Controller  Simulation  Dynamics  
+  Factory   Runner   Model  
+    
+    
+    
+    
+   Orchestrator   
+   Strategy   
+    
+    
+    
+     
+     
+  Sequential   Batch   
+  Orchestr.  Orchestr.   
+     
+     
+    
+    
+    
+   Integrator  
+   Factory  
+   
+   
+   
+    
+    
+   Euler   RK4  
+   (1st ord)   (4th ord)  
+    
+    
+   
+   
+   
+   Safety  
+   Guards  
+   
+  
+  
+  
+  PSO  
+ Optimization  
+  
+  
+  
+  
+  Results  
+  Container  
+  
+ 
+
 ``` ### 1.3 Module Relationships **Core Components:**
 - **`simulation_runner.py`** - Main simulation loop and legacy compatibility
 - **`simulation_context.py`** - Configuration management and orchestrator selection
@@ -111,24 +111,24 @@
 - **`results/exporters.py`** - CSV, HDF5 export functionality
 - **`safety/guards.py`** - NaN/Inf detection, energy bounds, state validation
 - **`safety/monitors.py`** - Performance monitoring and statistics ### 1.4 Data Flow Diagram #### Simulation Loop Execution Flow ```
-START │ ├─▶ Initialize state (x0) │ ├─▶ Initialize controller (state_vars, history) │ ├─▶ FOR each timestep i = 0 to N-1: │ │ │ ├─▶ Measure control computation time (start timer) │ │ │ ├─▶ Compute control: u = controller(t, x) │ │ │ │ │ ├─▶ [Has compute_control] → u, state_vars, history │ │ └─▶ [Has __call__] → u = controller(t, x) │ │ │ ├─▶ Check latency (end timer) │ │ │ │ │ └─▶ [Exceeds dt AND fallback available] → use fallback_controller │ │ │ ├─▶ Apply control saturation: u = clip(u, -u_max, u_max) │ │ │ ├─▶ Apply safety guards (NaN/Inf/Bounds checks) │ │ │ │ │ └─▶ [FAIL] → Truncate trajectory and return │ │ │ ├─▶ Propagate dynamics: x_next = dynamics.step(x, u, dt) │ │ │ │ │ └─▶ [Exception or NaN/Inf] → Truncate and return │ │ │ ├─▶ Validate result: np.isfinite(x_next) │ │ │ │ │ ├─▶ [PASS] → Continue │ │ └─▶ [FAIL] → Truncate and return │ │ │ └─▶ Store trajectory: (t[i+1], x[i+1], u[i]) │ └─▶ Attach final history to controller (if available) │ └─▶ Return: (t_arr, x_arr, u_arr)
+START   Initialize state (x0)   Initialize controller (state_vars, history)   FOR each timestep i = 0 to N-1:     Measure control computation time (start timer)     Compute control: u = controller(t, x)       [Has compute_control] → u, state_vars, history    [Has __call__] → u = controller(t, x)     Check latency (end timer)       [Exceeds dt AND fallback available] → use fallback_controller     Apply control saturation: u = clip(u, -u_max, u_max)     Apply safety guards (NaN/Inf/Bounds checks)       [FAIL] → Truncate trajectory and return     Propagate dynamics: x_next = dynamics.step(x, u, dt)       [Exception or NaN/Inf] → Truncate and return     Validate result: np.isfinite(x_next)       [PASS] → Continue    [FAIL] → Truncate and return     Store trajectory: (t[i+1], x[i+1], u[i])   Attach final history to controller (if available)   Return: (t_arr, x_arr, u_arr)
 ``` #### Batch Simulation for PSO ```
 
-PSO Tuner │ ├─▶ Generate N particles (gain sets) │ ├─▶ Create controller factory: functools.partial(create_controller, ...) │ ├─▶ FOR each particle p: │ │ │ ├─▶ Instantiate controller: ctrl = factory(gains=particle_p) │ │ │ ├─▶ BatchOrchestrator.execute() │ │ │ │ │ ├─▶ Initialize batch_size trajectories │ │ │ │ │ ├─▶ FOR each step: │ │ │ │ │ │ │ ├─▶ Vectorized control computation (batch_size x) │ │ │ │ │ │ │ ├─▶ Safety guard check (each trajectory) │ │ │ │ │ │ │ ├─▶ Dynamics step (each trajectory) │ │ │ │ │ │ │ └─▶ Collect results │ │ │ │ │ └─▶ Return BatchResultContainer │ │ │ ├─▶ Compute fitness metrics: │ │ │ │ │ ├─▶ Settling time (2% threshold) │ │ ├─▶ Overshoot (peak deviation) │ │ ├─▶ ISE (Integral Squared Error) │ │ └─▶ Control effort (sum |u|) │ │ │ └─▶ Store fitness[p] = combined_cost │ └─▶ PSO iteration: Update velocities and positions │ ├─▶ Convergence check (EnhancedConvergenceAnalyzer) │ │ │ ├─▶ Population diversity < threshold │ ├─▶ Fitness stagnation > N iterations │ └─▶ Velocity convergence < threshold │ └─▶ [Converged] → Return optimal gains [Not converged] → Continue PSO iteration
+PSO Tuner   Generate N particles (gain sets)   Create controller factory: functools.partial(create_controller, ...)   FOR each particle p:     Instantiate controller: ctrl = factory(gains=particle_p)     BatchOrchestrator.execute()       Initialize batch_size trajectories       FOR each step:         Vectorized control computation (batch_size x)         Safety guard check (each trajectory)         Dynamics step (each trajectory)         Collect results       Return BatchResultContainer     Compute fitness metrics:       Settling time (2% threshold)    Overshoot (peak deviation)    ISE (Integral Squared Error)    Control effort (sum |u|)     Store fitness[p] = combined_cost   PSO iteration: Update velocities and positions   Convergence check (EnhancedConvergenceAnalyzer)     Population diversity < threshold   Fitness stagnation > N iterations   Velocity convergence < threshold   [Converged] → Return optimal gains [Not converged] → Continue PSO iteration
 ``` ### 1.5 Key Design Patterns #### 1.5.1 Protocol-Based Interfaces All major components define protocols for extensibility: ```python
 # example-metadata:
 # runnable: false from typing import Protocol class DynamicsModel(Protocol): """Protocol for plant dynamics models.""" def compute_dynamics(self, state, control_input, time=0.0, **kwargs) -> DynamicsResult: ... def get_physics_matrices(self, state) -> Tuple[np.ndarray, np.ndarray, np.ndarray]: ... def validate_state(self, state) -> bool: ...
 ``` This allows:
 
-- ✅ Duck-typed dynamics models (no inheritance required)
-- ✅ Easy integration of custom dynamics
-- ✅ Type checker validation (mypy, pyright) #### 1.5.2 Factory Pattern Integrator and orchestrator creation uses factory pattern: ```python
+-  Duck-typed dynamics models (no inheritance required)
+-  Easy integration of custom dynamics
+-  Type checker validation (mypy, pyright) #### 1.5.2 Factory Pattern Integrator and orchestrator creation uses factory pattern: ```python
 from src.simulation.integrators import IntegratorFactory integrator = IntegratorFactory.create_integrator('rk4', dt=0.01)
 ``` Benefits:
-- ✅ Centralized integrator registry
-- ✅ Consistent initialization
-- ✅ Easy addition of new integrators
-- ✅ Type safety and validation #### 1.5.3 Strategy Pattern Execution strategies encapsulated in orchestrators: ```python
+-  Centralized integrator registry
+-  Consistent initialization
+-  Easy addition of new integrators
+-  Type safety and validation #### 1.5.3 Strategy Pattern Execution strategies encapsulated in orchestrators: ```python
 # Sequential execution
 seq_orchestrator = SequentialOrchestrator(dynamics, integrator)
 result = seq_orchestrator.execute(initial_state, controls, dt, horizon) # Batch execution
@@ -136,9 +136,9 @@ batch_orchestrator = BatchOrchestrator(dynamics, integrator)
 result = batch_orchestrator.execute(batch_initial_states, controls, dt, horizon)
 ``` Advantages:
 
-- ✅ Swappable execution strategies
-- ✅ Common interface for all orchestrators
-- ✅ Performance optimization per strategy ### 1.6 Backward Compatibility **Legacy Interface Support:** The simulation engine maintains 100% backward compatibility with the original `simulation_runner.py`: ```python
+-  Swappable execution strategies
+-  Common interface for all orchestrators
+-  Performance optimization per strategy ### 1.6 Backward Compatibility **Legacy Interface Support:** The simulation engine maintains 100% backward compatibility with the original `simulation_runner.py`: ```python
 # example-metadata:
 
 # runnable: false # Legacy imports work unchanged
@@ -176,17 +176,17 @@ result = orchestrator.execute(initial_state, controls, dt, horizon)
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]: """Simulate a single controller trajectory using explicit Euler method."""
 ``` #### 2.1.2 Parameters | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `controller` | Any | ✅ Yes | - | Controller object with `__call__(t, x)` or `compute_control(x, state, hist)` |
-| `dynamics_model` | Any | ✅ Yes | - | Dynamics object with `step(state, u, dt)` method |
-| `sim_time` | float | ✅ Yes | - | Total simulation time horizon (seconds) |
-| `dt` | float | ✅ Yes | - | Integration timestep (seconds), must be > 0 |
-| `initial_state` | array-like | ✅ Yes | - | Initial state vector (flattened to 1D) |
-| `u_max` | float | ❌ No | None | Control saturation limit; if None, uses `controller.max_force` |
-| `seed` | int | ❌ No | None | (Deprecated) Random seed; use `rng` instead |
-| `rng` | np.random.Generator | ❌ No | None | Random number generator for stochastic controllers |
-| `latency_margin` | float | ❌ No | None | (Unused) Reserved for future latency control |
-| `fallback_controller` | Callable | ❌ No | None | Fallback controller invoked after deadline miss |
-| `**_kwargs` | dict | ❌ No | - | Additional kwargs ignored (backward compatibility) | #### 2.1.3 Return Values ```python
+| `controller` | Any |  Yes | - | Controller object with `__call__(t, x)` or `compute_control(x, state, hist)` |
+| `dynamics_model` | Any |  Yes | - | Dynamics object with `step(state, u, dt)` method |
+| `sim_time` | float |  Yes | - | Total simulation time horizon (seconds) |
+| `dt` | float |  Yes | - | Integration timestep (seconds), must be > 0 |
+| `initial_state` | array-like |  Yes | - | Initial state vector (flattened to 1D) |
+| `u_max` | float |  No | None | Control saturation limit; if None, uses `controller.max_force` |
+| `seed` | int |  No | None | (Deprecated) Random seed; use `rng` instead |
+| `rng` | np.random.Generator |  No | None | Random number generator for stochastic controllers |
+| `latency_margin` | float |  No | None | (Unused) Reserved for future latency control |
+| `fallback_controller` | Callable |  No | None | Fallback controller invoked after deadline miss |
+| `**_kwargs` | dict |  No | - | Additional kwargs ignored (backward compatibility) | #### 2.1.3 Return Values ```python
 Tuple[np.ndarray, np.ndarray, np.ndarray] t_arr : np.ndarray # Time vector (n_steps+1,) x_arr : np.ndarray # State trajectory (n_steps+1, state_dim) u_arr : np.ndarray # Control sequence (n_steps,)
 ``` **Notes:**
 
@@ -374,12 +374,12 @@ def get_state_dimension(self) -> int: """Get state vector dimension (default: 6 
 
 ## 3.3 `LowRankDIPDynamics` Implementation **File:** `src/plant/models/lowrank/dynamics.py:27` Simplified double-inverted pendulum dynamics optimized for computational efficiency. #### 3.3.1 Class Definition ```python
 class LowRankDIPDynamics(BaseDynamicsModel): """Low-rank Double Inverted Pendulum Dynamics Model.""" def __init__( self, config: Union[LowRankDIPConfig, Dict[str, Any]], enable_monitoring: bool = False, enable_validation: bool = True ): """Initialize low-rank DIP dynamics."""
-``` #### 3.3.2 Features - ✅ **Fast computation** with reduced complexity
+``` #### 3.3.2 Features -  **Fast computation** with reduced complexity
 
-- ✅ **Essential dynamics preservation** (qualitatively similar to full model)
-- ✅ **Optional linearization** for stability analysis
-- ✅ **Small-angle approximations** for efficiency
-- ✅ **Educational clarity** with simplified physics #### 3.3.3 Configuration ```python
+-  **Essential dynamics preservation** (qualitatively similar to full model)
+-  **Optional linearization** for stability analysis
+-  **Small-angle approximations** for efficiency
+-  **Educational clarity** with simplified physics #### 3.3.3 Configuration ```python
 from src.plant.models.lowrank import LowRankDIPConfig, LowRankDIPDynamics # Create default configuration
 config = LowRankDIPConfig.create_default() # Or load from dictionary
 config = LowRankDIPConfig.from_dict({ 'cart_mass': 1.0, 'pole1_mass': 0.1, 'pole2_mass': 0.1, 'pole1_length': 0.5, 'pole2_length': 0.5, 'gravity': 9.81, 'damping_cart': 0.01, 'damping_pole1': 0.001, 'damping_pole2': 0.001
@@ -456,11 +456,11 @@ t, x, u = run_simulation( controller=linear_controller, dynamics_model=linear_dy
 | `**kwargs` | dict | - | Additional options | **Optional Kwargs:**
 - `safety_guards` (bool): safety checking (default: True)
 - `stop_fn` (Callable): Custom stop condition function
-- `t0` (float): Initial time (default: 0.0) #### 4.2.3 Features - ✅ **Step-by-step execution** with full state tracking
-- ✅ **Safety guard integration** (NaN/Inf detection)
-- ✅ **Early termination** on stop condition
-- ✅ **Trajectory truncation** on failure
-- ✅ **Compatible with all integrators** #### 4.2.4 Usage Example ```python
+- `t0` (float): Initial time (default: 0.0) #### 4.2.3 Features -  **Step-by-step execution** with full state tracking
+-  **Safety guard integration** (NaN/Inf detection)
+-  **Early termination** on stop condition
+-  **Trajectory truncation** on failure
+-  **Compatible with all integrators** #### 4.2.4 Usage Example ```python
 from src.simulation.orchestrators import SequentialOrchestrator
 from src.simulation.integrators import IntegratorFactory # Create orchestrator
 integrator = IntegratorFactory.create_integrator('rk4', dt=0.01)
@@ -487,11 +487,11 @@ times = result.get_times() # (horizon+1,)
 | `horizon` | int | scalar | Number of simulation steps |
 | `**kwargs` | dict | - | Additional options | **Batch Size Handling:**
 - If `initial_state.shape == (n,)`: Single simulation (batch_size=1)
-- If `initial_state.shape == (B, n)`: Batch of B simulations #### 4.3.3 Features - ✅ **Vectorized execution** for multiple trajectories
-- ✅ **Active mask management** (track which sims are active)
-- ✅ **Per-trajectory safety guards**
-- ✅ **Independent truncation** (failures don't affect other trajectories)
-- ✅ **Batch result aggregation** in BatchResultContainer #### 4.3.4 Performance Characteristics | Batch Size | Speedup vs Sequential | Memory Overhead |
+- If `initial_state.shape == (B, n)`: Batch of B simulations #### 4.3.3 Features -  **Vectorized execution** for multiple trajectories
+-  **Active mask management** (track which sims are active)
+-  **Per-trajectory safety guards**
+-  **Independent truncation** (failures don't affect other trajectories)
+-  **Batch result aggregation** in BatchResultContainer #### 4.3.4 Performance Characteristics | Batch Size | Speedup vs Sequential | Memory Overhead |
 |------------|----------------------|-----------------|
 | 10x | 9.5x faster | 10x memory |
 | 100x | 95x faster | 100x memory |
@@ -510,10 +510,10 @@ result = tuner.optimise()
 
 ---
 
-## 4.4 `ParallelOrchestrator` **File:** `src/simulation/orchestrators/parallel.py` Multi-threaded execution for large-scale parameter studies. #### 4.4.1 Features - ✅ **Thread pool management** (configurable pool size)
-- ✅ **Result synchronization** across threads
-- ✅ **Load balancing** for uneven workloads
-- ✅ **Exception handling** per thread #### 4.4.2 Usage Example ```python
+## 4.4 `ParallelOrchestrator` **File:** `src/simulation/orchestrators/parallel.py` Multi-threaded execution for large-scale parameter studies. #### 4.4.1 Features -  **Thread pool management** (configurable pool size)
+-  **Result synchronization** across threads
+-  **Load balancing** for uneven workloads
+-  **Exception handling** per thread #### 4.4.2 Usage Example ```python
 from src.simulation.orchestrators import ParallelOrchestrator # Create parallel orchestrator (4 worker threads)
 orchestrator = ParallelOrchestrator( dynamics=dynamics, integrator=integrator, num_workers=4
 ) # Execute parameter sweep
@@ -523,11 +523,11 @@ results = orchestrator.execute_parameter_sweep(param_grid)
 
 ---
 
-## 4.5 `RealTimeOrchestrator` **File:** `src/simulation/orchestrators/real_time.py` Real-time constraint enforcement for hardware-in-loop (HIL) applications. #### 4.5.1 Features - ✅ **Real-time timing** synchronized with wall clock
+## 4.5 `RealTimeOrchestrator` **File:** `src/simulation/orchestrators/real_time.py` Real-time constraint enforcement for hardware-in-loop (HIL) applications. #### 4.5.1 Features -  **Real-time timing** synchronized with wall clock
 
-- ✅ **Deadline monitoring** with configurable tolerance
-- ✅ **Late execution detection** and logging
-- ✅ **Compatible with HIL interfaces** #### 4.5.2 Usage Example ```python
+-  **Deadline monitoring** with configurable tolerance
+-  **Late execution detection** and logging
+-  **Compatible with HIL interfaces** #### 4.5.2 Usage Example ```python
 from src.simulation.orchestrators import RealTimeOrchestrator
 from src.interfaces.hil import PlantServer # Create real-time orchestrator
 orchestrator = RealTimeOrchestrator( dynamics=hardware_interface, integrator=integrator, real_time_factor=1.0, # Real-time (use 0.5 for slow-motion, 2.0 for fast) deadline_tolerance=0.001 # 1ms tolerance
@@ -698,19 +698,19 @@ result = orchestrator.execute( initial_state=x0, control_inputs=discrete_control
 ### 5.5 Integrator Selection Guide #### 5.5.1 Decision Tree ```
 
 Need adaptive step size?
-├─ YES → DormandPrince45 (atol=1e-6, rtol=1e-3)
-│ Use for: High accuracy, stiff systems, variable dynamics
-│
-└─ NO → Need high accuracy? ├─ YES → RungeKutta4 (dt=0.001-0.01) │ Use for: Standard simulations, balance speed/accuracy │ └─ NO → Need maximum speed? ├─ YES → ForwardEuler (dt=0.0001-0.001) │ Use for: Fast prototyping, real-time constraints │ └─ Discrete control? → ZeroOrderHold (dt=sampling period) Use for: Discrete-time, HIL, sampled-data
+ YES → DormandPrince45 (atol=1e-6, rtol=1e-3)
+ Use for: High accuracy, stiff systems, variable dynamics
+
+ NO → Need high accuracy?  YES → RungeKutta4 (dt=0.001-0.01)  Use for: Standard simulations, balance speed/accuracy   NO → Need maximum speed?  YES → ForwardEuler (dt=0.0001-0.001)  Use for: Fast prototyping, real-time constraints   Discrete control? → ZeroOrderHold (dt=sampling period) Use for: Discrete-time, HIL, sampled-data
 ``` #### 5.5.2 Performance Comparison | Integrator | Relative Speed | Accuracy | Memory | Recommended dt | Use Case |
 |------------|---------------|----------|--------|---------------|----------|
-| ForwardEuler | 5.0x | ★☆☆☆☆ | 1x | 0.0001s | Fast prototyping |
-| RungeKutta2 | 2.5x | ★★☆☆☆ | 1x | 0.001s | Educational |
-| RungeKutta4 | 1.0x (baseline) | ★★★★☆ | 1x | 0.01s | **Standard choice** |
-| DormandPrince45 | 0.2-0.5x | ★★★★★ | 2x | Adaptive | High-accuracy |
-| ZeroOrderHold | 4.5x | ★☆☆☆☆ | 1x | Variable | Discrete control | **Benchmark:** 1000-step DIP simulation on Intel i7-9700K #### 5.5.3 Accuracy vs. Performance Trade-off ```
-High Accuracy (atol < 1e-6) ↑ │ DP45 (adaptive) │ ★ │ │ RK4 (dt=0.001) │ ★ │ │ RK4 (dt=0.01) │ ★ │ │ Euler (dt=0.0001) │ ★ │
-Low Accuracy Euler (dt=0.01) └───────────────────────────────────────────★───────────▶ Slow Fast Performance
+| ForwardEuler | 5.0x |  | 1x | 0.0001s | Fast prototyping |
+| RungeKutta2 | 2.5x |  | 1x | 0.001s | Educational |
+| RungeKutta4 | 1.0x (baseline) |  | 1x | 0.01s | **Standard choice** |
+| DormandPrince45 | 0.2-0.5x |  | 2x | Adaptive | High-accuracy |
+| ZeroOrderHold | 4.5x |  | 1x | Variable | Discrete control | **Benchmark:** 1000-step DIP simulation on Intel i7-9700K #### 5.5.3 Accuracy vs. Performance Trade-off ```
+High Accuracy (atol < 1e-6) ↑  DP45 (adaptive)     RK4 (dt=0.001)     RK4 (dt=0.01)     Euler (dt=0.0001)   
+Low Accuracy Euler (dt=0.01)  Slow Fast Performance
 ``` #### 5.5.4 Recommendation by Application | Application | Recommended Integrator | Configuration |
 
 |-------------|----------------------|---------------|
@@ -822,10 +822,10 @@ result.export('csv', 'results/sim_001.csv')
 ```
 
 simulation_001.h5
-├── /states (dataset: n_steps+1 x 6)
-├── /times (dataset: n_steps+1)
-├── /controls (dataset: n_steps)
-└── /metadata (attributes)
+ /states (dataset: n_steps+1 x 6)
+ /times (dataset: n_steps+1)
+ /controls (dataset: n_steps)
+ /metadata (attributes)
 ``` **Usage:**
 ```python
 
@@ -833,10 +833,10 @@ result.export('hdf5', 'results/sim_001.h5') # Load with h5py
 import h5py
 with h5py.File('results/sim_001.h5', 'r') as f: states = f['states'][:] times = f['times'][:] metadata = dict(f.attrs)
 ``` **Advantages:**
-- ✅ Fast read/write (10-100x faster than CSV for large datasets)
-- ✅ Compression support (50-90% size reduction)
-- ✅ Hierarchical structure (organize multiple simulations)
-- ✅ Metadata storage (preserve all simulation parameters)
+-  Fast read/write (10-100x faster than CSV for large datasets)
+-  Compression support (50-90% size reduction)
+-  Hierarchical structure (organize multiple simulations)
+-  Metadata storage (preserve all simulation parameters)
 
 ---
 

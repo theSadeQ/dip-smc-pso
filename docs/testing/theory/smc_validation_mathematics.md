@@ -28,7 +28,7 @@ V̇(σ) = σᵀσ̇ < 0
 ``` **Design Criterion:**
 
 ```
-λᵢ chosen such that σ = 0 ⟹ asymptotic stability
+λᵢ chosen such that σ = 0  asymptotic stability
 ``` ### 3. Control Law Validation The control law must:
 
 1. Drive the system to the sliding surface

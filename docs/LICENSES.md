@@ -24,10 +24,10 @@ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions: [Full MIT License text]
 ``` **What this means:**
-- ✅ Free for commercial use
-- ✅ Free for academic use
-- ✅ Can be modified and redistributed
-- ✅ Must include original copyright notice
+-  Free for commercial use
+-  Free for academic use
+-  Can be modified and redistributed
+-  Must include original copyright notice
 
 ---
 
@@ -49,12 +49,12 @@ furnished to do so, subject to the following conditions: [Full MIT License text]
 | myst-parser | ≥1.0.0 | Markdown parsing |
 | sphinx-rtd-theme | ≥1.3.0 | Docs theme |
 | h5py | ≥3.11.0 | HDF5 support | **MIT License Terms:**
-- ✅ Commercial use allowed
-- ✅ Modification allowed
-- ✅ Distribution allowed
-- ✅ Private use allowed
-- ⚠️ **Must include original license text**
-- ⚠️ **Must include copyright notice**
+-  Commercial use allowed
+-  Modification allowed
+-  Distribution allowed
+-  Private use allowed
+-  **Must include original license text**
+-  **Must include copyright notice**
 
 ---
 
@@ -70,12 +70,12 @@ furnished to do so, subject to the following conditions: [Full MIT License text]
 | SymPy | ≥1.11.0 | Symbolic math |
 | PyModbus | ≥3.6.0 | Industrial control |
 | watchdog | ≥3.0.0 | File monitoring | **BSD-3-Clause Terms:**
-- ✅ Commercial use allowed
-- ✅ Modification allowed
-- ✅ Distribution allowed
-- ⚠️ **Must include original license text**
-- ⚠️ **Must include copyright notice**
-- ⚠️ **Cannot use library name for endorsement without permission**
+-  Commercial use allowed
+-  Modification allowed
+-  Distribution allowed
+-  **Must include original license text**
+-  **Must include copyright notice**
+-  **Cannot use library name for endorsement without permission**
 
 ---
 
@@ -85,11 +85,11 @@ furnished to do so, subject to the following conditions: [Full MIT License text]
 | pytest-benchmark | ≥4.0.0 | Performance testing |
 | Sphinx | ≥5.0.0 | Documentation |
 | Pygments | ≥2.14.0 | Syntax highlighting | **BSD-2-Clause Terms:**
-- ✅ Commercial use allowed
-- ✅ Modification allowed
-- ✅ Distribution allowed
-- ⚠️ **Must include original license text**
-- ⚠️ **Must include copyright notice** *(Simpler than BSD-3-Clause - no endorsement clause)*
+-  Commercial use allowed
+-  Modification allowed
+-  Distribution allowed
+-  **Must include original license text**
+-  **Must include copyright notice** *(Simpler than BSD-3-Clause - no endorsement clause)*
 
 ---
 
@@ -100,60 +100,60 @@ furnished to do so, subject to the following conditions: [Full MIT License text]
 | aiohttp | ≥3.9.0 | Async HTTP |
 | aio-pika | ≥9.4.0 | RabbitMQ client |
 | Watchdog | ≥3.0.0 | File monitoring | **Apache 2.0 Terms:**
-- ✅ Commercial use allowed
-- ✅ Modification allowed
-- ✅ Distribution allowed
-- ✅ Patent grant included (explicit patent protection)
-- ⚠️ **Must include original license text**
-- ⚠️ **Must include NOTICE file if present**
-- ⚠️ **Must state significant changes**
+-  Commercial use allowed
+-  Modification allowed
+-  Distribution allowed
+-  Patent grant included (explicit patent protection)
+-  **Must include original license text**
+-  **Must include NOTICE file if present**
+-  **Must state significant changes**
 
 ---
 
 ### Group 5: PSF-based License (Python Software Foundation) **1 Dependency:** | Library | Version | Purpose |
 |---------|---------|---------|
 | **Matplotlib** | ≥3.6.0 | **Plotting & visualization** | **PSF License Terms:**
-- ✅ BSD-compatible (very permissive)
-- ✅ Commercial use allowed
-- ✅ Modification allowed
-- ✅ Distribution allowed
+-  BSD-compatible (very permissive)
+-  Commercial use allowed
+-  Modification allowed
+-  Distribution allowed
 
 ---
 
 ### Group 6: MPL 2.0 (Mozilla Public License) **1 Dependency:** | Library | Version | Purpose |
 |---------|---------|---------|
 | **Hypothesis** | ≥6.70.0 | **Property-based testing** | **MPL 2.0 Terms:**
-- ✅ Commercial use allowed
-- ✅ Can combine with proprietary code
-- ⚠️ **Modified files must be open-sourced**
-- ⚠️ **Must disclose source of modified MPL files** **Our usage:** Testing only (not modified), no distribution concerns
+-  Commercial use allowed
+-  Can combine with proprietary code
+-  **Modified files must be open-sourced**
+-  **Must disclose source of modified MPL files** **Our usage:** Testing only (not modified), no distribution concerns
 
 ---
 
 ### Group 7: GPL-2.0 (Copyleft) **1 Dependency (Development Only):** | Library | Version | Purpose |
 |---------|---------|---------|
 | linkchecker | ≥10.0.0 | Link validation (dev tool) | **GPL-2.0 Terms:**
-- ⚠️ **Copyleft:** Derivative works must be GPL
-- ⚠️ **Source code must be available** **Compliance:** Used only in development, not distributed with software
-- ✅ Safe for our use (dev tool only)
-- ✅ Not linked into distributed code
-- ✅ Not included in production builds
+-  **Copyleft:** Derivative works must be GPL
+-  **Source code must be available** **Compliance:** Used only in development, not distributed with software
+-  Safe for our use (dev tool only)
+-  Not linked into distributed code
+-  Not included in production builds
 
 ---
 
 ## License Compatibility ### Compatibility Matrix | Our License | Dependency License | Compatible? | Notes |
 |-------------|-------------------|-------------|-------|
-| MIT | MIT | ✅ Yes | Perfect match |
-| MIT | BSD-3-Clause | ✅ Yes | BSD → MIT allowed |
-| MIT | BSD-2-Clause | ✅ Yes | BSD → MIT allowed |
-| MIT | Apache 2.0 | ✅ Yes | Apache → MIT allowed |
-| MIT | PSF | ✅ Yes | BSD-compatible |
-| MIT | MPL 2.0 | ✅ Yes | Can combine (testing only) |
-| MIT | GPL-2.0 | ⚠️ Caution | **Dev tool only - not distributed** | **Overall:** ✅ **All licenses compatible** with MIT project license
+| MIT | MIT |  Yes | Perfect match |
+| MIT | BSD-3-Clause |  Yes | BSD → MIT allowed |
+| MIT | BSD-2-Clause |  Yes | BSD → MIT allowed |
+| MIT | Apache 2.0 |  Yes | Apache → MIT allowed |
+| MIT | PSF |  Yes | BSD-compatible |
+| MIT | MPL 2.0 |  Yes | Can combine (testing only) |
+| MIT | GPL-2.0 |  Caution | **Dev tool only - not distributed** | **Overall:**  **All licenses compatible** with MIT project license
 
 ---
 
-## Commercial Use ### Can This Project Be Used Commercially? **✅ YES** - All dependencies permit commercial use **Requirements for commercial use:** 1. **Include all license texts:** - MIT license texts (16 dependencies) - BSD license texts (14 dependencies) - Apache license texts (6 dependencies) - PSF license text (1 dependency) - MPL license text (1 dependency) 2. **Include copyright notices:** - See `DEPENDENCIES.md` for full attribution 3. **No warranty:** - All dependencies provided "AS IS" - No liability for damages 4. **Patent protection:** - Apache 2.0 dependencies include explicit patent grant **Recommendation for commercial deployment:**
+## Commercial Use ### Can This Project Be Used Commercially? ** YES** - All dependencies permit commercial use **Requirements for commercial use:** 1. **Include all license texts:** - MIT license texts (16 dependencies) - BSD license texts (14 dependencies) - Apache license texts (6 dependencies) - PSF license text (1 dependency) - MPL license text (1 dependency) 2. **Include copyright notices:** - See `DEPENDENCIES.md` for full attribution 3. **No warranty:** - All dependencies provided "AS IS" - No liability for damages 4. **Patent protection:** - Apache 2.0 dependencies include explicit patent grant **Recommendation for commercial deployment:**
 - Create `THIRD_PARTY_LICENSES.txt` with all dependency licenses
 - Include in distribution package
 - Add to documentation/about page
@@ -196,7 +196,7 @@ Full attributions: see DEPENDENCIES.md
 - [ ] Include `LICENSES.md` (this document)
 - [ ] Create `THIRD_PARTY_LICENSES/` folder with all dependency licenses
 - [ ] Update `README.md` with attribution section
-- [ ] Ensure no GPL code is distributed (linkchecker is dev-only ✅)
+- [ ] Ensure no GPL code is distributed (linkchecker is dev-only )
 
 ---
 
@@ -204,7 +204,7 @@ Full attributions: see DEPENDENCIES.md
 - [ ] Include `THIRD_PARTY_LICENSES.txt` in installation
 - [ ] Add "About" dialog with attributions
 - [ ] Include copyright notices
-- [ ] No GPL dependencies included ✅
+- [ ] No GPL dependencies included 
 
 ---
 
@@ -243,12 +243,12 @@ Since these are dev tools, GPL restriction doesn't apply.
 ---
 
 ## Quick Reference **All dependencies are compatible with:**
-- ✅ Academic research
-- ✅ Commercial products
-- ✅ Open-source projects
-- ✅ Proprietary software (with proper attribution) **Most permissive:** MIT, BSD licenses (30 of 38 dependencies)
+-  Academic research
+-  Commercial products
+-  Open-source projects
+-  Proprietary software (with proper attribution) **Most permissive:** MIT, BSD licenses (30 of 38 dependencies)
 **Patent protection:** Apache 2.0 (6 dependencies)
-**No strong copyleft:** Only GPL is dev-only tool **Compliance status:** ✅ **FULL COMPLIANCE**
+**No strong copyleft:** Only GPL is dev-only tool **Compliance status:**  **FULL COMPLIANCE**
 
 ---
 

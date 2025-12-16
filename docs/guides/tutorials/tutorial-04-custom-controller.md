@@ -3,7 +3,7 @@
 **Level:** Advanced
 
 **What You'll Build:**
-In this tutorial, you'll create a custom controller from scratch - a Terminal Sliding Mode Controller (TSMC). You'll learn the complete workflow: design the control law, implement it in Python, integrate it with the factory system, test it, and optimize its gains using PSO.
+In this tutorial, the system will create a custom controller from scratch - a Terminal Sliding Mode Controller (TSMC). You'll learn the complete workflow: design the control law, implement it in Python, integrate it with the factory system, test it, and optimize its gains using PSO.
 
 **Why This Matters:**
 The framework ships with 4 controllers, but research often requires custom variants. This tutorial shows you how to extend the framework with your own control strategies while maintaining code quality and integration.
@@ -110,7 +110,7 @@ Controller-specific parameters must be validated for physical plausibility. Thes
 ## Part 2: Implementing a Terminal SMC (TSMC)
 
 **What You'll Build:**
-In this part, you'll implement a Terminal Sliding Mode Controller from scratch. This includes writing the control law, adding gain validation, implementing the sliding surface computation, and handling numerical edge cases like singularity avoidance.
+In this part, the system will implement a Terminal Sliding Mode Controller from scratch. This includes writing the control law, adding gain validation, implementing the sliding surface computation, and handling numerical edge cases like singularity avoidance.
 
 **Why Terminal SMC:**
 Terminal SMC achieves faster convergence than classical SMC near equilibrium. It's useful for applications requiring quick settling times and precise control.

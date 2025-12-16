@@ -272,13 +272,13 @@
 
 1. **Complete TIER 1 + 2**
 2. **Add TIER 3** (items 9-15)
-3. **Comprehensive report** with all categories
+3. **complete report** with all categories
 
 **If you have FULL TIME (20+ hours):**
 
 1. **Complete all 4 tiers**
 2. **Deep dives** on all validation categories
-3. **Final comprehensive report** with full documentation
+3. **Final complete report** with full documentation
 
 ---
 
@@ -288,26 +288,26 @@
 START
   ↓
 [1] Review Appendix A.2 (STA Proof)
-  ├─ PASS → continue to [2]
-  ├─ FAIL → REJECT thesis
-  ├─ CONDITIONAL → flag as issue
+   PASS → continue to [2]
+   FAIL → REJECT thesis
+   CONDITIONAL → flag as issue
   ↓ [2]
 [2] Review Ch 8, Appendix B (Statistics)
-  ├─ PASS → continue to [3]
-  ├─ FAIL → CONDITIONAL (fix statistics)
-  ├─ CONDITIONAL → flag as issue
+   PASS → continue to [3]
+   FAIL → CONDITIONAL (fix statistics)
+   CONDITIONAL → flag as issue
   ↓ [3]
 [3] Review Chapter 3-4 (Dynamics & SMC)
-  ├─ PASS → continue to TIER 2
-  ├─ FAIL → CONDITIONAL (fix theory)
-  ├─ CONDITIONAL → flag as issue
+   PASS → continue to TIER 2
+   FAIL → CONDITIONAL (fix theory)
+   CONDITIONAL → flag as issue
   ↓ TIER 2
 [4-8] Review TIER 2 items
-  ├─ Major issues found → CONDITIONAL
-  ├─ No major issues → consider PASS
+   Major issues found → CONDITIONAL
+   No major issues → consider PASS
   ↓ FINAL
 [9-20] Review TIER 3-4 as time permits
-  ├─ No critical issues → FINAL DECISION
+   No critical issues → FINAL DECISION
   ↓
 FINAL DECISION: [PASS / CONDITIONAL / FAIL]
 ```

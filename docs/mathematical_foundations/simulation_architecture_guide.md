@@ -46,58 +46,58 @@ The DIP-SMC-PSO simulation architecture provides a high-performance, production-
 ### Component Hierarchy
 
 ```
-┌───────────────────────────────────────────────────────────┐
-│              User Interface (CLI, Streamlit)               │
-└─────────────────────┬─────────────────────────────────────┘
-                      │
-┌─────────────────────▼─────────────────────────────────────┐
-│          Simulation Context (Configuration Layer)          │
-├────────────────────────────────────────────────────────────┤
-│  • Configuration loading & validation                      │
-│  • Dynamics model selection                                │
-│  • Controller creation                                     │
-│  • FDI system initialization                               │
-└─────────────────────┬─────────────────────────────────────┘
-                      │
-┌─────────────────────▼─────────────────────────────────────┐
-│          Orchestrators (Execution Strategy Layer)          │
-├────────────────────────────────────────────────────────────┤
-│  • BatchOrchestrator (vectorized)                          │
-│  • SequentialOrchestrator (single-threaded)                │
-│  • ParallelOrchestrator (multi-process)                    │
-│  • RealTimeOrchestrator (hardware-in-loop)                 │
-└─────────────────────┬─────────────────────────────────────┘
-                      │
-┌─────────────────────▼─────────────────────────────────────┐
-│          Vector Simulation Engine (Core Layer)             │
-├────────────────────────────────────────────────────────────┤
-│  • simulate() - unified façade                             │
-│  • Batch dimension handling                                │
-│  • Early stopping support                                  │
-│  • Safety guard integration                                │
-└─────────────────────┬─────────────────────────────────────┘
-                      │
-┌─────────────────────▼─────────────────────────────────────┐
-│        Simulation Runner (Dispatch Layer)                  │
-├────────────────────────────────────────────────────────────┤
-│  • step() - dynamics dispatch                              │
-│  • run_simulation() - trajectory generation                │
-│  • Model selection (full vs simplified)                    │
-│  • Latency monitoring                                      │
-└─────────────────────┬─────────────────────────────────────┘
-                      │
-        ┌─────────────┴─────────────┐
-        │                           │
-┌───────▼────────┐         ┌────────▼─────────┐
-│ Dynamics Models │         │   Integrators    │
-├────────────────┤         ├──────────────────┤
-│ • Simplified   │         │ • Fixed-step     │
-│ • Full         │         │   - Euler        │
-│ • Low-rank     │         │   - RK4          │
-└────────────────┘         │ • Adaptive       │
-                           │   - RK45         │
-                           │   - RK23         │
-                           └──────────────────┘
+
+              User Interface (CLI, Streamlit)               
+
+                      
+
+          Simulation Context (Configuration Layer)          
+
+  • Configuration loading & validation                      
+  • Dynamics model selection                                
+  • Controller creation                                     
+  • FDI system initialization                               
+
+                      
+
+          Orchestrators (Execution Strategy Layer)          
+
+  • BatchOrchestrator (vectorized)                          
+  • SequentialOrchestrator (single-threaded)                
+  • ParallelOrchestrator (multi-process)                    
+  • RealTimeOrchestrator (hardware-in-loop)                 
+
+                      
+
+          Vector Simulation Engine (Core Layer)             
+
+  • simulate() - unified façade                             
+  • Batch dimension handling                                
+  • Early stopping support                                  
+  • Safety guard integration                                
+
+                      
+
+        Simulation Runner (Dispatch Layer)                  
+
+  • step() - dynamics dispatch                              
+  • run_simulation() - trajectory generation                
+  • Model selection (full vs simplified)                    
+  • Latency monitoring                                      
+
+                      
+        
+                                   
+         
+ Dynamics Models             Integrators    
+         
+ • Simplified             • Fixed-step     
+ • Full                     - Euler        
+ • Low-rank                 - RK4          
+          • Adaptive       
+                              - RK45         
+                              - RK23         
+                           
 ```
 
 ### Data Flow
@@ -489,23 +489,23 @@ print(f"Execution time: {result.execution_time:.3f}s")
 ### Safety Guard Architecture
 
 ```
-┌────────────────────────────────────────┐
-│     Simulation Step (t → t + dt)       │
-└────────────┬───────────────────────────┘
-             │
-             ├─► Pre-step guards (optional)
-             │   └─ Input validation
-             │
-             ├─► Dynamics evaluation
-             │   └─ x(t+dt) = f(x(t), u(t), dt)
-             │
-             ├─► Post-step guards (mandatory)
-             │   ├─ NaN detection
-             │   ├─ Energy limits
-             │   └─ State bounds
-             │
-             └─► Early stop check
-                 └─ user-defined stop_fn
+
+     Simulation Step (t → t + dt)       
+
+             
+              Pre-step guards (optional)
+                 Input validation
+             
+              Dynamics evaluation
+                 x(t+dt) = f(x(t), u(t), dt)
+             
+              Post-step guards (mandatory)
+                 NaN detection
+                 Energy limits
+                 State bounds
+             
+              Early stop check
+                  user-defined stop_fn
 ```
 
 ### Guard Configuration

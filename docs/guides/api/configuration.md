@@ -23,11 +23,11 @@
 The Configuration API provides type-safe, validated configuration management for the DIP SMC PSO framework.
 
 **Key Features:**
-- ✅ **YAML-Based:** Human-readable configuration files
-- ✅ **Pydantic Validation:** Automatic type checking and validation
-- ✅ **Nested Structure:** Organized by domain (physics, controllers, simulation, PSO)
-- ✅ **Default Values:** Sensible defaults for all parameters
-- ✅ **Environment Variables:** Support for environment-based configuration
+-  **YAML-Based:** Human-readable configuration files
+-  **Pydantic Validation:** Automatic type checking and validation
+-  **Nested Structure:** Organized by domain (physics, controllers, simulation, PSO)
+-  **Default Values:** Sensible defaults for all parameters
+-  **Environment Variables:** Support for environment-based configuration
 
 **Related Documentation:**
 - [User Guide: Configuration Management](../user-guide.md#configuration-management)
@@ -578,11 +578,11 @@ except ValueError as e:
 # Classical SMC requires 6 gains
 controllers:
   classical_smc:
-    gains: [10, 8, 15, 12, 50, 5]  # ✅ Correct
+    gains: [10, 8, 15, 12, 50, 5]  #  Correct
 
 # Adaptive SMC requires 5 gains
   adaptive_smc:
-    gains: [10, 8, 15, 12, 0.5]     # ✅ Correct
+    gains: [10, 8, 15, 12, 0.5]     #  Correct
 ```
 
 ## Problem: Unknown fields in config

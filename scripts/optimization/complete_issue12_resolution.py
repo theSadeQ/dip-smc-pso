@@ -58,10 +58,10 @@ def wait_for_pso(controller: str, check_interval: int = 60):
         status = check_pso_status(controller)
 
         if status == "complete":
-            print(f"✓ {controller} PSO completed!")
+            print(f" {controller} PSO completed!")
             return True
         elif status == "failed":
-            print(f"✗ {controller} PSO failed!")
+            print(f" {controller} PSO failed!")
             return False
         elif status == "running":
             print(f"  [{time.strftime('%H:%M:%S')}] {controller} still running...")
@@ -127,7 +127,7 @@ def update_config_with_gains():
     for ctrl in controllers:
         gain_file = Path(f"gains_{ctrl}_chattering.json")
         if not gain_file.exists():
-            print(f"  ✗ {ctrl}: Gains file not found")
+            print(f"   {ctrl}: Gains file not found")
             continue
 
         with open(gain_file) as f:
@@ -148,10 +148,10 @@ def update_config_with_gains():
                 'chattering': chattering
             }
 
-            print(f"  ✓ {ctrl}: Updated with gains {gains}")
+            print(f"   {ctrl}: Updated with gains {gains}")
             print(f"    Chattering: {chattering:.3f}")
         else:
-            print(f"  ✗ {ctrl}: No gains found in file")
+            print(f"   {ctrl}: No gains found in file")
 
     if updated:
         # Backup original config
@@ -168,11 +168,11 @@ def update_config_with_gains():
         with open('config.yaml', 'w') as f:
             yaml.dump(config, f, default_flow_style=False, sort_keys=False)
 
-        print(f"  ✓ config.yaml updated with {len(updated)} controllers")
+        print(f"   config.yaml updated with {len(updated)} controllers")
 
         return True
     else:
-        print("  ✗ No controllers updated")
+        print("   No controllers updated")
         return False
 
 
@@ -204,7 +204,7 @@ def generate_summary_report():
     for ctrl in controllers:
         gain_file = Path(f"gains_{ctrl}_chattering.json")
         if not gain_file.exists():
-            results.append(f"{ctrl:30s}: ✗ NO DATA")
+            results.append(f"{ctrl:30s}:  NO DATA")
             all_passed = False
             continue
 
@@ -215,12 +215,12 @@ def generate_summary_report():
         chattering = data.get('chattering_index', 999)
         tracking = data.get('tracking_error_rms', 999)
 
-        status = "✓ PASS" if chattering < 2.0 else "✗ FAIL"
+        status = " PASS" if chattering < 2.0 else " FAIL"
         if chattering >= 2.0:
             all_passed = False
 
         results.append(f"{ctrl:30s}: {status}")
-        results.append(f"  Chattering:     {chattering:.3f} {'< 2.0 ✓' if chattering < 2.0 else '>= 2.0 ✗'}")
+        results.append(f"  Chattering:     {chattering:.3f} {'< 2.0 ' if chattering < 2.0 else '>= 2.0 '}")
         results.append(f"  Tracking Error: {tracking:.4f} rad")
         results.append(f"  Gains:          {gains}")
         results.append("")
@@ -236,7 +236,7 @@ def generate_summary_report():
 
     if all_passed:
         report_lines.extend([
-            "✓✓✓ ISSUE #12 RESOLVED ✓✓✓",
+            " ISSUE #12 RESOLVED ",
             "",
             "All 4 controllers successfully optimized with chattering < 2.0 target.",
             "Chattering reduced from baseline ~69 to < 2.0 (97% reduction).",
@@ -246,7 +246,7 @@ def generate_summary_report():
         ])
     else:
         report_lines.extend([
-            "✗✗✗ ISSUE #12 PARTIALLY RESOLVED ✗✗✗",
+            " ISSUE #12 PARTIALLY RESOLVED ",
             "",
             "Some controllers did not meet chattering < 2.0 target.",
             "Additional optimization may be required.",
@@ -305,13 +305,13 @@ def main():
         if classical_status == "running":
             success = wait_for_pso('classical_smc')
             if not success:
-                print("\n✗ classical_smc PSO failed. Aborting workflow.")
+                print("\n classical_smc PSO failed. Aborting workflow.")
                 sys.exit(1)
         elif classical_status == "not_started":
-            print("\n✗ classical_smc PSO not started. Please launch first.")
+            print("\n classical_smc PSO not started. Please launch first.")
             sys.exit(1)
         elif classical_status == "failed":
-            print("\n✗ classical_smc PSO failed. Please debug first.")
+            print("\n classical_smc PSO failed. Please debug first.")
             sys.exit(1)
     else:
         print("Skipping classical_smc wait (--skip-classical)")
@@ -323,7 +323,7 @@ def main():
 
     success = launch_remaining_controllers()
     if not success:
-        print("\n✗ Failed to launch remaining controllers")
+        print("\n Failed to launch remaining controllers")
         sys.exit(1)
 
     # Step 3: Validate all gains
@@ -333,7 +333,7 @@ def main():
 
     success = validate_all_gains()
     if not success:
-        print("\n⚠ Some validations failed (see above)")
+        print("\n Some validations failed (see above)")
 
     # Step 4: Update config
     print("\n" + "="*60)
@@ -355,11 +355,11 @@ def main():
     print("="*80)
 
     if all_passed:
-        print("\n✓ All controllers optimized successfully!")
-        print("✓ Issue #12 can be marked as RESOLVED")
+        print("\n All controllers optimized successfully!")
+        print(" Issue #12 can be marked as RESOLVED")
         sys.exit(0)
     else:
-        print("\n⚠ Some controllers need attention")
+        print("\n Some controllers need attention")
         print("Review the summary report for details")
         sys.exit(1)
 

@@ -118,11 +118,11 @@ Add/remove directories based on your needs:
 
 ```
 my_project/
-├─ src/           # Keep if you have modules
-├─ tests/         # Keep if you're writing tests
-├─ data/          # Add if you have data files
-├─ results/       # Add for output files
-└─ notebooks/     # Add if using Jupyter
+ src/           # Keep if you have modules
+ tests/         # Keep if you're writing tests
+ data/          # Add if you have data files
+ results/       # Add for output files
+ notebooks/     # Add if using Jupyter
 ```
 
 ------

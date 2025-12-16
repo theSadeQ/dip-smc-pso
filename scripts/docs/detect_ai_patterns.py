@@ -76,7 +76,7 @@ AI_PATTERNS = {
     "repetitive": [
         r"\bIn this (section|chapter|guide)\b",
         r"\bThis (section|chapter|guide) (will|covers)\b",
-        r"\bLet's (explore|examine|look at)\b",
+        r"\b(explore|examine|look at)\b",
         r"\bWe (will|can) (see|observe|note)\b",
     ],
 }
@@ -123,8 +123,8 @@ def scan_file(file_path: Path, single_file_mode: bool = False) -> Dict:
             # Exclude quoted examples in bullet points (lines with - "...pattern...")
             elif stripped.startswith('- "') and '"' in stripped[3:]:
                 exclude_lines.add(i)
-            # Exclude examples showing bad patterns (lines with ❌, BAD:, DO NOT USE:)
-            elif any(marker in line for marker in ['❌', 'BAD:', 'DO NOT USE:', 'AI-ish']):
+            # Exclude examples showing bad patterns (lines with , BAD:, DO NOT USE:)
+            elif any(marker in line for marker in ['', 'BAD:', 'DO NOT USE:', 'AI-ish']):
                 exclude_lines.add(i)
             # Exclude lines with mathematical notation (inline $...$ or display $$...$$)
             elif '$' in line and line.count('$') >= 2:
@@ -201,7 +201,7 @@ def scan_all_docs(docs_dir: Path) -> Dict:
         docs_dir: Path to docs directory
 
     Returns:
-        Comprehensive audit report with statistics and per-file results
+        complete audit report with statistics and per-file results
     """
     results = []
     pattern_stats = defaultdict(int)

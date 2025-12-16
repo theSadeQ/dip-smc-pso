@@ -113,7 +113,7 @@ controller = create_controller('classical_smc', gains=[20.0, 15.0, 12.0, 8.0, 35
 - 3 different creation methods available ## Troubleshooting ### Common Issues 1. **"Unknown controller type"** - Check available controllers with `list_available_controllers()` - Verify spelling and use canonical names 2. **"Requires X gains, got Y"** - Check expected gain count with registry information - Verify gain array length 3. **"All gains must be positive"** - Ensure all gains are > 0 - Check for NaN or infinite values 4. **"K1 > K2 constraint violation" (STA-SMC)** - First gain must be larger than second gain - Adjust gain values accordingly ### Debug Information debug logging for detailed factory operations: ```python
 import logging
 logging.getLogger('src.controllers.factory').setLevel(logging.DEBUG)
-``` ## Best Practices ### Controller Selection 1. **Classical SMC**: General-purpose, robust performance
+``` ## Best Practices ### Controller Selection 1. **Classical SMC**: General-purpose, reliable performance
 2. **Adaptive SMC**: Best for uncertain systems, performance
 3. **Super-Twisting**: Reduced chattering, good disturbance rejection
 4. **Hybrid**: Combines benefits, complex tuning ### Gain Tuning 1. Start with default gains from `get_default_gains()`

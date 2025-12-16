@@ -3,11 +3,11 @@
 #==========================================================================================\\\
 
 # Coverage Quality Gates Troubleshooting Guide
-**Issue #9 - Advanced Troubleshooting & Threshold Documentation** > **🎯 Mission**: troubleshooting guide for coverage quality gate failures and threshold optimization strategies
+**Issue #9 - Advanced Troubleshooting & Threshold Documentation** > ** Mission**: troubleshooting guide for coverage quality gate failures and threshold optimization strategies
 
 ---
 
-## 📊 Quality Gate Threshold Framework ### Mathematical Coverage Definitions #### Coverage Efficiency Formula
+##  Quality Gate Threshold Framework ### Mathematical Coverage Definitions #### Coverage Efficiency Formula
 
 ```
 Coverage Efficiency (C_eff) = C_achieved / C_target Where:
@@ -18,21 +18,21 @@ Coverage Efficiency (C_eff) = C_achieved / C_target Where:
 
 ```
 Quality Gate Matrix:
-┌─────────────────────┬───────────┬─────────────────┬──────────────┐
-│ Component Category │ Threshold │ Enforcement │ Impact │
-├─────────────────────┼───────────┼─────────────────┼──────────────┤
-│ Safety-Critical │ 100% │ MANDATORY │ Deploy Block │
-│ Critical Components │ ≥95% │ REQUIRED │ PR Block │
-│ General System │ ≥85% │ STANDARD │ Warning │
-└─────────────────────┴───────────┴─────────────────┴──────────────┘
+
+ Component Category  Threshold  Enforcement  Impact 
+
+ Safety-Critical  100%  MANDATORY  Deploy Block 
+ Critical Components  ≥95%  REQUIRED  PR Block 
+ General System  ≥85%  STANDARD  Warning 
+
 ```
 
 ---
 
-## 🚨 Common Quality Gate Failures ### 1. Infrastructure Health Failures #### Symptom: Test Collection Failed
+##  Common Quality Gate Failures ### 1. Infrastructure Health Failures #### Symptom: Test Collection Failed
 
 ```
-❌ Gate 1: Infrastructure Health: FAILED ✗ Test collection failed: ModuleNotFoundError: No module named 'src'
+ Gate 1: Infrastructure Health: FAILED  Test collection failed: ModuleNotFoundError: No module named 'src'
 ``` **Root Cause Analysis:**
 
 ```bash
@@ -56,7 +56,7 @@ pythonpath = src
 ``` #### Symptom: Pytest Dependencies Missing
 
 ```
-❌ Gate 1: Infrastructure Health: FAILED ✗ Pytest unavailable: command not found
+ Gate 1: Infrastructure Health: FAILED  Pytest unavailable: command not found
 ``` **Solution:**
 
 ```bash
@@ -71,7 +71,7 @@ python -m coverage --version
 ## 2. Safety-Critical Coverage Failures (100% Required) #### Symptom: Below 100% Coverage
 
 ```
-❌ Gate 2: Safety-Critical Coverage: FAILED Safety-critical component coverage 97.5% < 100% required
+ Gate 2: Safety-Critical Coverage: FAILED Safety-critical component coverage 97.5% < 100% required
 ``` **Detailed Diagnosis:**
 
 ```bash
@@ -93,7 +93,7 @@ python -m pytest tests/test_controllers/smc/core/ --cov=src/controllers/smc/core
 ## 3. Critical Components Coverage Failures (≥95% Required) #### Symptom: Critical Components Below 95%
 
 ```
-❌ Gate 3: Critical Components Coverage: FAILED controller_factory: 92.3% < 95% required optimization: 89.1% < 95% required
+ Gate 3: Critical Components Coverage: FAILED controller_factory: 92.3% < 95% required optimization: 89.1% < 95% required
 ``` **Component-Specific Analysis:**
 
 ```bash
@@ -115,7 +115,7 @@ done
 ## 4. Overall System Coverage Failures (≥85% Required) #### Symptom: Overall Coverage Below Threshold
 
 ```
-❌ Gate 4: Overall System Coverage: FAILED Overall Coverage: 82.3% < 85% required
+ Gate 4: Overall System Coverage: FAILED Overall Coverage: 82.3% < 85% required
 ``` **System-Wide Coverage Analysis:**
 
 ```bash
@@ -132,21 +132,21 @@ for filename, coverage in files[:10]: if coverage < 85: print(f'{coverage:5.1f}%
 
 ```bash
 #!/bin/bash
-# coverage_improvement_workflow.sh echo "🔧 Starting systematic coverage improvement..." # 1. Baseline measurement
+# coverage_improvement_workflow.sh echo " Starting systematic coverage improvement..." # 1. Baseline measurement
 python -m pytest tests/ --cov=src --cov-report=json:baseline.json -q
 BASELINE=$(python -c "import json; print(f\"{json.load(open('baseline.json'))['totals']['percent_covered']:.1f}\")")
-echo "📊 Baseline coverage: $BASELINE%" # 2. Identify improvement targets (modules < 85%)
+echo " Baseline coverage: $BASELINE%" # 2. Identify improvement targets (modules < 85%)
 python -c "
 import json
 with open('baseline.json') as f: data = json.load(f)
 targets = [filename for filename, file_data in data['files'].items() if file_data['summary']['percent_covered'] < 85]
 print('\\n'.join(targets))
 " > improvement_targets.txt # 3. Iterative improvement
-while read -r target_file; do module_name=$(echo "$target_file" | sed 's/src\///' | sed 's/\.py$//' | tr '/' '_') test_file="tests/test_${module_name}.py" echo "🎯 Improving: $target_file" if [[ -f "$test_file" ]]; then python -m pytest "$test_file" --cov="$target_file" --cov-report=missing -v else echo "⚠️ Test file missing: $test_file" fi
+while read -r target_file; do module_name=$(echo "$target_file" | sed 's/src\///' | sed 's/\.py$//' | tr '/' '_') test_file="tests/test_${module_name}.py" echo " Improving: $target_file" if [[ -f "$test_file" ]]; then python -m pytest "$test_file" --cov="$target_file" --cov-report=missing -v else echo " Test file missing: $test_file" fi
 done < improvement_targets.txt # 4. Final measurement
 python -m pytest tests/ --cov=src --cov-report=json:final.json -q
 FINAL=$(python -c "import json; print(f\"{json.load(open('final.json'))['totals']['percent_covered']:.1f}\")")
-echo "📈 Final coverage: $FINAL% (improvement: +$(echo \"$FINAL - $BASELINE\" | bc -l)%)"
+echo " Final coverage: $FINAL% (improvement: +$(echo \"$FINAL - $BASELINE\" | bc -l)%)"
 ```
 
 ---
@@ -154,7 +154,7 @@ echo "📈 Final coverage: $FINAL% (improvement: +$(echo \"$FINAL - $BASELINE\" 
 ## 5. Theoretical Validation Failures #### Symptom: Mathematical Property Tests Failing
 
 ```
-❌ Gate 5: Theoretical Validation: FAILED Mathematical stability tests failed
+ Gate 5: Theoretical Validation: FAILED Mathematical stability tests failed
 ``` **Mathematical Property Testing:**
 
 ```bash
@@ -166,7 +166,7 @@ python -m pytest -k "lyapunov or convergence" -v --tb=short
 
 # runnable: false # Enhanced stability test def test_lyapunov_stability_mathematical_proof(): """Validate Lyapunov stability conditions with mathematical rigor.""" controller = ClassicalSMC(gains=[10, 8, 15, 12, 50, 5]) # Test multiple initial conditions initial_conditions = generate_stability_test_conditions(n=100) for ic in initial_conditions: # Lyapunov function: V = 0.5 * s² trajectory = simulate_trajectory(controller, ic, duration=5.0) lyapunov_values = [0.5 * compute_sliding_surface(state)**2 for state in trajectory] # V̇ ≤ 0 (non-increasing Lyapunov function) for i in range(1, len(lyapunov_values)): assert lyapunov_values[i] <= lyapunov_values[i-1] + 1e-6, \ f"Lyapunov function not decreasing at step {i}" ```
 
-## 🔧 Advanced Troubleshooting Techniques ### Coverage Data Collection Issues #### Issue: Coverage.xml Not Generated
+##  Advanced Troubleshooting Techniques ### Coverage Data Collection Issues #### Issue: Coverage.xml Not Generated
 
 ```bash
 # Diagnose coverage file generation
@@ -174,8 +174,8 @@ python -m pytest tests/test_sample.py --cov=src --cov-report=xml:debug_coverage.
 ls -la debug_coverage.xml # Verify XML content
 python -c "
 import xml.etree.ElementTree as ET
-try: tree = ET.parse('debug_coverage.xml') print('✅ XML valid') print('Root tag:', tree.getroot().tag) print('Total lines:', tree.getroot().get('lines-valid'))
-except Exception as e: print('❌ XML error:', e)
+try: tree = ET.parse('debug_coverage.xml') print(' XML valid') print('Root tag:', tree.getroot().tag) print('Total lines:', tree.getroot().get('lines-valid'))
+except Exception as e: print(' XML error:', e)
 "
 ``` #### Issue: Inconsistent Coverage Results
 
@@ -212,7 +212,7 @@ print(f'Process completed with exit code: {exit_code}')
 
 ---
 
-## 📈 Threshold Optimization Strategies ### Dynamic Threshold Adjustment #### Component-Based Threshold Calculation
+##  Threshold Optimization Strategies ### Dynamic Threshold Adjustment #### Component-Based Threshold Calculation
 
 ```python
 # example-metadata:
@@ -222,7 +222,7 @@ def calculate_optimal_thresholds(codebase_analysis): """ Calculate component-spe
 
 ```bash
 # Gradual threshold increase strategy
-echo "📈 Progressive Coverage Improvement Plan" # Phase 1: Establish baseline (current coverage)
+echo " Progressive Coverage Improvement Plan" # Phase 1: Establish baseline (current coverage)
 CURRENT_COV=$(python -m pytest tests/ --cov=src --cov-report=json:current.json -q && python -c "import json; print(json.load(open('current.json'))['totals']['percent_covered'])") # Phase 2: Set incremental targets
 TARGET_1=$((CURRENT_COV + 2)) # +2% monthly
 TARGET_2=$((CURRENT_COV + 5)) # +5% quarterly
@@ -231,18 +231,18 @@ TARGET_3=85 # Final target echo "Current: ${CURRENT_COV}% → Target 1: ${TARGET
 
 ---
 
-## 🎯 Success Metrics & Validation ### Quality Gate Health Indicators #### Gate Status Dashboard
+##  Success Metrics & Validation ### Quality Gate Health Indicators #### Gate Status Dashboard
 
 ```bash
 #!/bin/bash
 # quality_gate_dashboard.sh
-echo "🔵 Coverage Quality Gate Health Dashboard"
+echo " Coverage Quality Gate Health Dashboard"
 echo "==========================================" # Run validation
 python scripts/run_quality_gates.py --gate all --output gate_status.json # Extract gate status
 python -c "
 import json
 with open('gate_status.json') as f: results = json.load(f) print(f\"Overall Status: {results['overall_status'].upper()}\")
-print(\"\\nIndividual Gates:\") for gate_id, gate_result in results['gates'].items(): status_emoji = { 'passed': '✅', 'failed': '❌', 'timeout': '⏰', 'error': '⚠️' }.get(gate_result['status'], '❓') print(f\"{status_emoji} {gate_id.replace('_', ' ').title()}: {gate_result['status'].upper()}\") if results.get('recommendations'): print(f\"\\n📋 Priority Recommendations: {len(results['recommendations'])}\") for i, rec in enumerate(results['recommendations'][:3], 1): print(f\"{i}. [{rec['priority'].upper()}] {rec['action']}\")
+print(\"\\nIndividual Gates:\") for gate_id, gate_result in results['gates'].items(): status_emoji = { 'passed': '', 'failed': '', 'timeout': '⏰', 'error': '' }.get(gate_result['status'], '') print(f\"{status_emoji} {gate_id.replace('_', ' ').title()}: {gate_result['status'].upper()}\") if results.get('recommendations'): print(f\"\\n Priority Recommendations: {len(results['recommendations'])}\") for i, rec in enumerate(results['recommendations'][:3], 1): print(f\"{i}. [{rec['priority'].upper()}] {rec['action']}\")
 "
 ``` #### Coverage Trend Analysis
 
@@ -251,14 +251,14 @@ print(\"\\nIndividual Gates:\") for gate_id, gate_result in results['gates'].ite
 python -c "
 import json, glob, os
 from datetime import datetime, timedelta # Load historical coverage data
-coverage_files = sorted(glob.glob('.coverage_history/coverage_*.json')) if coverage_files: print('📊 Coverage Trend Analysis (Last 30 days):') for file in coverage_files[-30:]: # Last 30 snapshots try: with open(file) as f: data = json.load(f) timestamp = os.path.basename(file).replace('coverage_', '').replace('.json', '') coverage = data['totals']['percent_covered'] print(f'{timestamp}: {coverage:5.1f}%') except Exception as e: continue
-else: print('📊 No historical coverage data available') print('💡 Run: mkdir -p .coverage_history && python scripts/start_coverage_tracking.py')
+coverage_files = sorted(glob.glob('.coverage_history/coverage_*.json')) if coverage_files: print(' Coverage Trend Analysis (Last 30 days):') for file in coverage_files[-30:]: # Last 30 snapshots try: with open(file) as f: data = json.load(f) timestamp = os.path.basename(file).replace('coverage_', '').replace('.json', '') coverage = data['totals']['percent_covered'] print(f'{timestamp}: {coverage:5.1f}%') except Exception as e: continue
+else: print(' No historical coverage data available') print(' Run: mkdir -p .coverage_history && python scripts/start_coverage_tracking.py')
 "
 ```
 
 ---
 
-## 🚀 Production Readiness Assessment ### Coverage Contribution to Production Score ```python
+##  Production Readiness Assessment ### Coverage Contribution to Production Score ```python
 
 # example-metadata:
 
@@ -267,18 +267,18 @@ else: print('📊 No historical coverage data available') print('💡 Run: mkdir
 ``` ### Deployment Authorization Matrix
 ```
 
-Coverage Quality Gate Status → Deployment Authorization: ┌─────────────────────┬─────────────────┬──────────────────┐
-│ Gate Status │ Deployment │ Action Required │
-├─────────────────────┼─────────────────┼──────────────────┤
-│ All Gates Pass │ ✅ AUTHORIZED │ Deploy to PROD │
-│ Critical Gates Pass │ ⚠️ CONDITIONAL │ Deploy to STAGE │
-│ Safety Gates Fail │ ❌ BLOCKED │ Fix immediately │
-│ Infrastructure Fail │ ❌ BLOCKED │ Fix infrastructure│
-└─────────────────────┴─────────────────┴──────────────────┘
+Coverage Quality Gate Status → Deployment Authorization: 
+ Gate Status  Deployment  Action Required 
+
+ All Gates Pass   AUTHORIZED  Deploy to PROD 
+ Critical Gates Pass   CONDITIONAL  Deploy to STAGE 
+ Safety Gates Fail   BLOCKED  Fix immediately 
+ Infrastructure Fail   BLOCKED  Fix infrastructure
+
 ```
 
 ---
 
-**🎯 Issue #9 Troubleshooting Resolution**: This troubleshooting guide provides systematic diagnosis and resolution procedures for all coverage quality gate failures, enabling efficient problem resolution and threshold optimization. **🔗 Repository**: https://github.com/theSadeQ/dip-smc-pso.git
-**📋 Documentation Version**: 1.0.0 - Issue #9 Advanced Troubleshooting
-**🤖 Generated with**: [Claude Code](https://claude.ai/code) - Documentation Expert Agent
+** Issue #9 Troubleshooting Resolution**: This troubleshooting guide provides systematic diagnosis and resolution procedures for all coverage quality gate failures, enabling efficient problem resolution and threshold optimization. ** Repository**: https://github.com/theSadeQ/dip-smc-pso.git
+** Documentation Version**: 1.0.0 - Issue #9 Advanced Troubleshooting
+** Generated with**: [Claude Code](https://claude.ai/code) - Documentation Expert Agent

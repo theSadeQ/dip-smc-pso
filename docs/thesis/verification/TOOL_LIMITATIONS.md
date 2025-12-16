@@ -1,5 +1,5 @@
 # Verification Tool Limitations
-# LT-8: Comprehensive Thesis Verification Project
+# LT-8: complete Thesis Verification Project
 # Date: 2025-11-05
 
 ---
@@ -188,18 +188,18 @@ x_max          # "multi-character subscript without braces" (technically correct
 **After Manual Review and False Positive Analysis**:
 
 **Critical Issues Breakdown (22 total → 1 real)**:
-- ✅ **FIXED**: 2 table numbering issues in Chapter 3 (Table 1.1→3.1, Table 1.2→3.2)
-- ❌ **FALSE POSITIVES**: ~19-20 issues
+-  **FIXED**: 2 table numbering issues in Chapter 3 (Table 1.1→3.1, Table 1.2→3.2)
+-  **FALSE POSITIVES**: ~19-20 issues
   - ~10 Sphinx citation format misidentified (Chapters 3,4,6,7,8,A)
   - ~3 Hyperlink references misidentified as citations (Chapter 3)
   - ~6 Numerical array notation misidentified as citations (Chapter 8)
   - ~7-10 Figure captions not recognized (italic vs bold format, Chapters 4,6,7)
   - ~1 Cross-chapter reference (Appendix A → Chapter 4)
-- ⚠️ **REMAINING REAL CRITICAL**: 0-1 (to be verified)
+-  **REMAINING REAL CRITICAL**: 0-1 (to be verified)
 
 **Minor Issues Breakdown (51 total → ~10 real)**:
-- ❌ **FALSE POSITIVES**: ~40 conservative LaTeX warnings (mathrm, lambda, in, etc.)
-- ✅ **REAL MINOR**: ~10-15 genuine style improvements (multi-char subscripts, etc.)
+-  **FALSE POSITIVES**: ~40 conservative LaTeX warnings (mathrm, lambda, in, etc.)
+-  **REAL MINOR**: ~10-15 genuine style improvements (multi-char subscripts, etc.)
 
 **Revised Assessment**:
 - **Status**: "MINOR REVISION NEEDED" (not "substantial work")

@@ -50,13 +50,13 @@ class CommonIssueFixer:
     def print_header(self, title: str) -> None:
         """Print a formatted section header."""
         print(f"\n{Colors.BLUE}{Colors.BOLD}{title}{Colors.END}")
-        print(f"{Colors.BLUE}{'─' * 60}{Colors.END}")
+        print(f"{Colors.BLUE}{'' * 60}{Colors.END}")
 
     def print_fix(self, description: str, file_path: Path = None) -> None:
         """Print a fix notification."""
         mode = "Would fix" if self.dry_run else "Fixed"
         file_info = f" in {file_path.name}" if file_path else ""
-        print(f"{Colors.GREEN}✓{Colors.END} {mode}: {description}{file_info}")
+        print(f"{Colors.GREEN}{Colors.END} {mode}: {description}{file_info}")
         if not self.dry_run:
             self.fixes_applied += 1
             if file_path:
@@ -90,7 +90,7 @@ class CommonIssueFixer:
 
     def fix_trailing_whitespace(self, target_dir: Path) -> None:
         """Remove trailing whitespace from Python and Markdown files."""
-        self.print_header("🧹 Fixing Trailing Whitespace")
+        self.print_header(" Fixing Trailing Whitespace")
 
         for pattern in ["**/*.py", "**/*.md"]:
             for file_path in target_dir.glob(pattern):
@@ -110,7 +110,7 @@ class CommonIssueFixer:
 
     def fix_final_newlines(self, target_dir: Path) -> None:
         """Ensure files end with a single newline."""
-        self.print_header("📄 Fixing Final Newlines")
+        self.print_header(" Fixing Final Newlines")
 
         for pattern in ["**/*.py", "**/*.md", "**/*.yaml", "**/*.yml"]:
             for file_path in target_dir.glob(pattern):
@@ -130,28 +130,28 @@ class CommonIssueFixer:
 
     def fix_imports_with_isort(self, target_dir: Path) -> None:
         """Organize imports using isort."""
-        self.print_header("📦 Organizing Imports (isort)")
+        self.print_header(" Organizing Imports (isort)")
 
         cmd = ["isort", str(target_dir), "--profile", "black"]
         self.run_command(cmd, "Organized imports with isort")
 
     def fix_formatting_with_ruff(self, target_dir: Path) -> None:
         """Format code using ruff."""
-        self.print_header("🎨 Code Formatting (ruff)")
+        self.print_header(" Code Formatting (ruff)")
 
         cmd = ["ruff", "format", str(target_dir)]
         self.run_command(cmd, "Formatted code with ruff")
 
     def fix_common_linting_issues(self, target_dir: Path) -> None:
         """Auto-fix common linting issues with ruff."""
-        self.print_header("🔧 Auto-Fixing Linting Issues (ruff)")
+        self.print_header(" Auto-Fixing Linting Issues (ruff)")
 
         cmd = ["ruff", "check", str(target_dir), "--fix"]
         self.run_command(cmd, "Fixed auto-fixable linting issues")
 
     def fix_markdown_issues(self, target_dir: Path) -> None:
         """Fix common markdown issues."""
-        self.print_header("📝 Fixing Markdown Issues")
+        self.print_header(" Fixing Markdown Issues")
 
         for file_path in target_dir.glob("**/*.md"):
             if '.git' in str(file_path):
@@ -179,7 +179,7 @@ class CommonIssueFixer:
 
     def fix_common_typos(self, target_dir: Path) -> None:
         """Fix common typos in documentation."""
-        self.print_header("✏️ Fixing Common Typos")
+        self.print_header(" Fixing Common Typos")
 
         # Common typos mapping (conservative list)
         typo_fixes = {
@@ -229,9 +229,9 @@ class CommonIssueFixer:
 
     def print_summary(self) -> None:
         """Print final summary."""
-        print(f"\n{Colors.BLUE}{Colors.BOLD}{'═' * 60}{Colors.END}")
+        print(f"\n{Colors.BLUE}{Colors.BOLD}{'' * 60}{Colors.END}")
         print(f"{Colors.BOLD}Summary{Colors.END}")
-        print(f"{'─' * 60}")
+        print(f"{'' * 60}")
 
         if self.dry_run:
             print(f"Mode: {Colors.YELLOW}DRY RUN{Colors.END} (no changes applied)")
@@ -248,10 +248,10 @@ class CommonIssueFixer:
                 if len(self.files_modified) > 10:
                     print(f"  ... and {len(self.files_modified) - 10} more")
 
-            print(f"\n{Colors.GREEN}✓ Auto-fix complete!{Colors.END}")
+            print(f"\n{Colors.GREEN} Auto-fix complete!{Colors.END}")
             print("Run quality checks to verify: python scripts/validation/run_quality_checks.py")
 
-        print(f"{Colors.BLUE}{'═' * 60}{Colors.END}\n")
+        print(f"{Colors.BLUE}{'' * 60}{Colors.END}\n")
 
 
 def main() -> int:

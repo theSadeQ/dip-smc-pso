@@ -98,7 +98,7 @@ def collect_normal_operation_residuals(num_iterations: int = 100, seed: int = 42
 
 def compute_statistical_metrics(residuals: List[float]) -> Dict[str, float]:
     """
-    Compute comprehensive statistical metrics from residual distribution.
+    Compute complete statistical metrics from residual distribution.
 
     Args:
         residuals: List of residual norms
@@ -403,9 +403,9 @@ def main():
     )
 
     if all_criteria_met:
-        logging.info("\n✅ ALL ACCEPTANCE CRITERIA MET")
+        logging.info("\n ALL ACCEPTANCE CRITERIA MET")
     else:
-        logging.warning("\n⚠️  SOME ACCEPTANCE CRITERIA NOT MET")
+        logging.warning("\n  SOME ACCEPTANCE CRITERIA NOT MET")
         if not calibration_details["within_target_range"]:
             logging.warning("  - Threshold outside target range [0.135, 0.150]")
         if not calibration_details["meets_false_positive_target"]:

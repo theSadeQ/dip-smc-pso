@@ -3,7 +3,7 @@
 Performance Benchmark Data Parser with Statistical Analysis and Chart.js Generation.
 
 This script parses controller performance benchmarks from multiple JSON sources and
-generates comprehensive statistical analysis with Chart.js-compatible visualization data.
+generates complete statistical analysis with Chart.js-compatible visualization data.
 
 Data Sources:
 -------------
@@ -16,7 +16,7 @@ Outputs:
 --------
 1. Statistical summary CSV files
 2. Chart.js JSON data files for visualization
-3. Comprehensive analysis report
+3. complete analysis report
 
 Usage:
 ------
