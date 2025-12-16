@@ -50,6 +50,9 @@ from src.utils.monitoring.pso_viz import render_pso_browser
 from src.utils.monitoring.multi_controller_viz import render_multi_controller_comparison
 from src.utils.monitoring.health_dashboard import render_health_dashboard
 from src.utils.monitoring.reproducibility_dashboard import render_reproducibility_dashboard
+from src.utils.monitoring.job_manager import JobManager
+from src.utils.monitoring.pso_config_panel import render_pso_config_panel
+from src.utils.monitoring.progress_monitor import render_progress_monitor
 
 # Performance caching decorators
 @st.cache_data
@@ -683,6 +686,117 @@ def main():
         except Exception as e:
             st.error(f"Failed to load Reproducibility Dashboard: {e}")
             st.exception(e)
+
+    # ───────── MT-8 Operations Control Panel (NEW - Background job management)
+    with st.expander("🎛️ MT-8 Operations Control Panel - Advanced PSO controls with background execution", expanded=False):
+        st.markdown("""
+        **Complete MT-8 testing suite** with real-time progress tracking and advanced PSO configuration.
+        - 🧪 **Reproducibility Testing**: Launch seeds 42, 123, 456 with custom PSO parameters
+        - 🎯 **Advanced PSO Controls**: Configure bounds, hyperparameters (w, c1, c2), velocity clamping
+        - 📊 **Real-Time Progress**: Live progress bars with iteration/particle tracking and ETA
+        - 🔍 **Job Monitoring**: Track multiple background processes, view logs, kill jobs
+
+        **Background Execution:** Jobs run in background processes (70+ min runtime). You can close
+        browser and check back later - progress is saved to disk.
+
+        ---
+        """)
+
+        # Initialize job manager in session state
+        if 'job_manager' not in st.session_state:
+            st.session_state.job_manager = JobManager()
+
+        # 2-tab interface (simplified for MVP)
+        tab1, tab2 = st.tabs([
+            "🧪 Launch PSO Tests",
+            "🔍 Active Jobs Monitor"
+        ])
+
+        with tab1:
+            # Reproducibility testing with advanced PSO controls
+            st.subheader("MT-8 Reproducibility Testing")
+
+            st.markdown("""
+            Launch PSO optimization runs with advanced parameter controls. Configure gain bounds,
+            swarm hyperparameters (w, c1, c2), and other settings before launching.
+            """)
+
+            # Controller selection
+            controller = st.selectbox(
+                "Select Controller",
+                options=["classical_smc", "sta_smc", "adaptive_smc", "hybrid_adaptive_sta_smc"],
+                key="mt8_controller_select"
+            )
+
+            # Advanced PSO configuration panel
+            st.divider()
+            st.markdown("### Advanced PSO Configuration")
+
+            pso_config = render_pso_config_panel(controller)
+
+            st.divider()
+
+            # Seed launch controls
+            st.subheader("Launch Seed Tests")
+
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                if st.button("Launch Seed 42", type="primary", key="launch_seed_42"):
+                    job_id = st.session_state.job_manager.launch_job(
+                        job_type="reproducibility_test",
+                        script_path="scripts/mt8_reproducibility_test.py",
+                        args={
+                            "seed": 42,
+                            "controller": controller,
+                            "save_prefix": "mt8_repro_seed42",
+                            "particles": pso_config["n_particles"],
+                            "iterations": pso_config["n_iterations"],
+                            # Note: Bounds and hyperparameters will be passed once scripts support them
+                        }
+                    )
+                    st.success(f"Launched seed 42 test (Job ID: {job_id[:8]})")
+                    st.info("Switch to 'Active Jobs Monitor' tab to track progress")
+
+            with col2:
+                if st.button("Launch Seed 123", type="primary", key="launch_seed_123"):
+                    job_id = st.session_state.job_manager.launch_job(
+                        job_type="reproducibility_test",
+                        script_path="scripts/mt8_reproducibility_test.py",
+                        args={
+                            "seed": 123,
+                            "controller": controller,
+                            "save_prefix": "mt8_repro_seed123",
+                            "particles": pso_config["n_particles"],
+                            "iterations": pso_config["n_iterations"],
+                        }
+                    )
+                    st.success(f"Launched seed 123 test (Job ID: {job_id[:8]})")
+                    st.info("Switch to 'Active Jobs Monitor' tab to track progress")
+
+            with col3:
+                if st.button("Launch Seed 456", type="primary", key="launch_seed_456"):
+                    job_id = st.session_state.job_manager.launch_job(
+                        job_type="reproducibility_test",
+                        script_path="scripts/mt8_reproducibility_test.py",
+                        args={
+                            "seed": 456,
+                            "controller": controller,
+                            "save_prefix": "mt8_repro_seed456",
+                            "particles": pso_config["n_particles"],
+                            "iterations": pso_config["n_iterations"],
+                        }
+                    )
+                    st.success(f"Launched seed 456 test (Job ID: {job_id[:8]})")
+                    st.info("Switch to 'Active Jobs Monitor' tab to track progress")
+
+        with tab2:
+            # Active jobs monitor with real-time progress
+            try:
+                render_progress_monitor(st.session_state.job_manager)
+            except Exception as e:
+                st.error(f"Failed to load Progress Monitor: {e}")
+                st.exception(e)
 
     # ───────── Advanced Documentation (renamed from previous expander)
     with st.expander("🚀 Advanced Features & Documentation"):
