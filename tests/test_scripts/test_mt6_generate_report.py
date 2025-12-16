@@ -1,6 +1,13 @@
+import sys
+from pathlib import Path
+
 import pandas as pd
 
-import mt6_generate_report as mt6_report
+# Add scripts directory to path
+scripts_dir = Path(__file__).parent.parent.parent / "scripts" / "research" / "mt6_boundary_layer"
+sys.path.insert(0, str(scripts_dir))
+
+import generate_report as mt6_report
 
 
 def test_format_number_handles_nan_and_precision():

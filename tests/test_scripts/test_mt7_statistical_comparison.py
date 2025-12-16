@@ -6,12 +6,12 @@ import numpy as np
 import pytest
 
 # Ensure scripts directory is importable
-SCRIPTS_DIR = Path(__file__).parent.parent.parent / "scripts"
 import sys
 
-sys.path.insert(0, str(SCRIPTS_DIR))
+scripts_dir = Path(__file__).parent.parent.parent / "scripts" / "research" / "mt7_robustness"
+sys.path.insert(0, str(scripts_dir))
 
-import mt7_statistical_comparison as mt7_stat
+import statistical_comparison as mt7_stat
 
 
 # 1.1 Data Loading Tests -------------------------------------------------------

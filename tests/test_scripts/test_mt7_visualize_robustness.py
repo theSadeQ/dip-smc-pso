@@ -6,10 +6,11 @@ import pytest
 
 import sys
 
-SCRIPTS_DIR = Path(__file__).parent.parent.parent / "scripts"
-sys.path.insert(0, str(SCRIPTS_DIR))
+# Add scripts directory to path
+scripts_dir = Path(__file__).parent.parent.parent / "scripts" / "research" / "mt7_robustness"
+sys.path.insert(0, str(scripts_dir))
 
-import mt7_visualize_robustness as mt7_viz  # noqa: E402
+import visualize_robustness as mt7_viz  # noqa: E402
 from matplotlib import axes as mpl_axes  # noqa: E402
 from matplotlib._api.deprecation import MatplotlibDeprecationWarning  # noqa: E402
 

@@ -1,9 +1,14 @@
 import json
+import sys
 from pathlib import Path
 
 import pytest
 
-import mt6_statistical_comparison as mt6_stat
+# Add scripts directory to path
+scripts_dir = Path(__file__).parent.parent.parent / "scripts" / "research" / "mt6_boundary_layer"
+sys.path.insert(0, str(scripts_dir))
+
+import statistical_comparison as mt6_stat
 
 
 def test_load_summary_data(tmp_path):

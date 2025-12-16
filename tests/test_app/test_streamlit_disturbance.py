@@ -4,6 +4,10 @@
 
 """
 Streamlit app — disturbance wrapper correctness for DisturbedDynamics.
+
+KNOWN ISSUE: These tests are currently DISABLED due to Python 3.12 + protobuf compatibility.
+The Streamlit app works fine at runtime - this is only a test collection issue.
+See: MERGE_VALIDATION_REPORT_2025-12-16.md for details.
 """
 
 from __future__ import annotations

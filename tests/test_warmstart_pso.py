@@ -17,7 +17,11 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from scripts.phase2_warmstart_pso import initialize_warm_start_swarm, load_warm_start_gains
+# Add scripts directory to path
+scripts_dir = Path(__file__).parent.parent / "scripts" / "optimization"
+sys.path.insert(0, str(scripts_dir))
+
+from phase2_warmstart_pso import initialize_warm_start_swarm, load_warm_start_gains
 from src.config import load_config
 
 

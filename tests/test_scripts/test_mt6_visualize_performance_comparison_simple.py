@@ -1,9 +1,15 @@
 import json
+import sys
+from pathlib import Path
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-import mt6_visualize_performance_comparison_simple as viz_compare
+# Add scripts directory to path
+scripts_dir = Path(__file__).parent.parent.parent / "scripts" / "research" / "mt6_boundary_layer"
+sys.path.insert(0, str(scripts_dir))
+
+import visualize_performance_comparison_simple as viz_compare
 
 
 def test_load_json_summary(tmp_path):

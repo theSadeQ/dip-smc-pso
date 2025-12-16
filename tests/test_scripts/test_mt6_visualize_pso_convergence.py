@@ -1,10 +1,15 @@
+import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-import mt6_visualize_pso_convergence as mt6_viz
+# Add scripts directory to path
+scripts_dir = Path(__file__).parent.parent.parent / "scripts" / "research" / "mt6_boundary_layer"
+sys.path.insert(0, str(scripts_dir))
+
+import visualize_pso_convergence as mt6_viz
 
 
 def test_load_pso_history_reads_csv(tmp_path):

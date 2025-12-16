@@ -8,10 +8,11 @@ import pytest
 
 import sys
 
-SCRIPTS_DIR = Path(__file__).parent.parent.parent / "scripts"
-sys.path.insert(0, str(SCRIPTS_DIR))
+# Add scripts directory to path
+scripts_dir = Path(__file__).parent.parent.parent / "scripts" / "research" / "mt7_robustness"
+sys.path.insert(0, str(scripts_dir))
 
-import mt7_robust_pso_tuning as mt7_tuning  # noqa: E402
+import robust_pso_tuning as mt7_tuning  # noqa: E402
 
 
 def make_metric(seed, run_id, chattering, success=True):

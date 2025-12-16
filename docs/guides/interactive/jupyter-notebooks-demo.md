@@ -35,6 +35,7 @@ The `jupyter-notebook` directive embeds complete Jupyter notebooks:
 
 ### Example: Getting Started Notebook
 
+<!-- DISABLED: Notebook not available
 ```{eval-rst}
 .. jupyter-notebook::
    :path: notebooks/01_getting_started.ipynb
@@ -42,6 +43,9 @@ The `jupyter-notebook` directive embeds complete Jupyter notebooks:
    :show-cells: 0-5
    :hide-output:
 ```
+-->
+
+**Note**: This example is disabled pending notebook creation. See [Tutorial 01](../tutorials/tutorial-01-first-simulation.md) for live demonstrations.
 
 **Features:**
 - Selective cell display (`:show-cells: 0,2,5-8`)

@@ -1,6 +1,6 @@
 [<-- Back to Beginner Roadmap](../beginner-roadmap.md)
 
----
+
 
 # Phase 1: Foundations (Week 1-4, ~40 Hours)
 
@@ -24,7 +24,7 @@
 
 ::::
 
----
+
 
 **Prerequisites**: None
 **Next Phase**: [Phase 2: Core Concepts](phase-2-core-concepts.md)
@@ -45,7 +45,7 @@
 
 **Visual Aids**: [View Phase 1 Diagrams -->](phase-1-diagrams.md) (File System, Computing Basics, Error Diagnosis, Data Types, Setup)
 
----
+
 
 <details>
 <summary>1.1 Computing Basics</summary>
@@ -87,7 +87,7 @@
 - [File Systems Explained (Video, 10 min)](https://www.youtube.com/results?search_query=file+system+basics+explained)
 - [Understanding File Paths (Article)](https://www.computerhope.com/jargon/p/path.htm)
 
----
+
 
 **Step 2: Command Line Basics (2 hours)**
 
@@ -183,7 +183,7 @@ clear
 - [Windows Command Prompt Guide](https://www.computerhope.com/issues/chusedos.htm)
 - [Mac/Linux Terminal Guide](https://ubuntu.com/tutorials/command-line-for-beginners)
 
----
+
 
 **Step 3: Text Editors (1 hour)**
 
@@ -246,7 +246,7 @@ clear
 - [VS Code for Beginners (Video, 20 min)](https://www.youtube.com/results?search_query=vs+code+tutorial+beginners)
 - [VS Code Documentation](https://code.visualstudio.com/docs/getstarted/introvideos)
 
----
+
 
 ### Self-Assessment: Phase 1.1
 
@@ -266,7 +266,7 @@ clear
 
 </details>
 
----
+
 
 <details>
 <summary>1.2 Python Fundamentals</summary>
@@ -383,7 +383,7 @@ clear
 - [Python Installation Guide (Video, 10 min)](https://www.youtube.com/results?search_query=how+to+install+python+windows)
 - [Python.org Beginner's Guide](https://wiki.python.org/moin/BeginnersGuide)
 
----
+
 
 **Step 2: Python Basics (10 hours)**
 
@@ -673,7 +673,7 @@ person_age = person["age"]  # 25
 - [Learn Python - Codecademy (Interactive)](https://www.codecademy.com/learn/learn-python-3)
 - [Python Tutorial - W3Schools](https://www.w3schools.com/python/)
 
----
+
 
 **Step 3: Working with Libraries (3 hours)**
 
@@ -737,7 +737,7 @@ plt.show()
 - [NumPy Quickstart Tutorial](https://numpy.org/doc/stable/user/quickstart.html)
 - [Matplotlib Tutorial (Video, 1 hour)](https://www.youtube.com/results?search_query=matplotlib+tutorial+beginners)
 
----
+
 
 **Step 4: Reading Error Messages (1 hour)**
 
@@ -802,7 +802,7 @@ print(name + age)
 - [Understanding Python Errors (Article)](https://realpython.com/python-traceback/)
 - [Debugging Python Code (Video, 20 min)](https://www.youtube.com/results?search_query=debugging+python+code+beginners)
 
----
+
 
 **Step 5: Python Practice Projects (5 hours)**
 
@@ -830,7 +830,7 @@ Before moving on, solidify your skills with small projects:
 - [Python Project Ideas for Beginners](https://realpython.com/tutorials/projects/)
 - [50 Python Projects (Video Series)](https://www.youtube.com/results?search_query=python+projects+for+beginners)
 
----
+
 
 ### Self-Assessment: Phase 1.2
 
@@ -848,7 +848,7 @@ Before moving on, solidify your skills with small projects:
 
 </details>
 
----
+
 
 <details>
 <summary>1.3 Setting Up the Project Environment</summary>
@@ -929,7 +929,7 @@ source venv/bin/activate
 - [Virtual Environments Explained (Video, 10 min)](https://www.youtube.com/results?search_query=python+virtual+environment+explained)
 - [Python venv Documentation](https://docs.python.org/3/library/venv.html)
 
----
+
 
 **Step 2: Understanding Git and GitHub (1 hour)**
 
@@ -1015,7 +1015,7 @@ source venv/bin/activate
 - [Git Explained in 100 Seconds (Video)](https://www.youtube.com/watch?v=hwP7WQkmECE)
 - [Git Basics (Video, 30 min)](https://www.youtube.com/results?search_query=git+basics+tutorial)
 
----
+
 
 **Step 3: Clone the DIP-SMC-PSO Project (30 min)**
 
@@ -1057,7 +1057,7 @@ dip-smc-pso/
  README.md                # Project overview
 ```
 
----
+
 
 **Step 4: Install Project Dependencies (1 hour)**
 
@@ -1274,7 +1274,7 @@ venv\Scripts\activate.bat
 - [pip Documentation](https://pip.pypa.io/en/stable/getting-started/)
 - [Troubleshooting pip (Article)](https://realpython.com/what-is-pip/)
 
----
+
 
 ### Self-Assessment: Phase 1.3
 
@@ -1293,7 +1293,7 @@ venv\Scripts\activate.bat
 
 </details>
 
----
+
 
 <details>
 <summary>1.4 Basic Physics Concepts</summary>
@@ -1372,7 +1372,7 @@ Understand the fundamental laws that govern how objects move and interact.
 
 :::
 
----
+
 
 :::{dropdown} Step 2: Understanding Pendulums (3 hours)
 :animate: fade-in-slide-down
@@ -1456,7 +1456,7 @@ Try this online simulator:
 
 :::
 
----
+
 
 :::{dropdown} Step 3: Double-Inverted Pendulum Basics (2 hours)
 :animate: fade-in-slide-down
@@ -1567,7 +1567,7 @@ Imagine balancing two broomsticks stacked end-to-end on a cart that you can only
 
 :::
 
----
+
 
 :::{dropdown} Step 4: Energy and Stability (1 hour)
 :animate: fade-in-slide-down
@@ -1613,7 +1613,7 @@ Learn about energy conversion and why some equilibrium positions are stable whil
 
 :::
 
----
+
 
 ### Self-Assessment: Phase 1.4
 
@@ -1632,7 +1632,7 @@ Learn about energy conversion and why some equilibrium positions are stable whil
 
 </details>
 
----
+
 
 <details>
 <summary>1.5 Basic Math Concepts</summary>
@@ -1699,7 +1699,7 @@ Plot these functions from x = 0 to 10:
 - [Khan Academy: Functions](https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions)
 - [Graphing Functions (Video, 20 min)](https://www.youtube.com/results?search_query=graphing+functions+explained)
 
----
+
 
 **Step 2: Trigonometry Basics (1.5 hours)**
 
@@ -1779,7 +1779,7 @@ print(f"Difference: {abs(np.sin(small_angle) - small_angle):.6f}")
 - [Khan Academy: Trigonometry](https://www.khanacademy.org/math/trigonometry)
 - [Unit Circle Explained (Video, 15 min)](https://www.youtube.com/results?search_query=unit+circle+explained)
 
----
+
 
 **Step 3: Derivatives (Rate of Change) (2 hours)**
 
@@ -1871,7 +1871,7 @@ State vector includes both positions AND velocities:
 - [Khan Academy: Derivatives](https://www.khanacademy.org/math/calculus-1/cs1-derivatives-definition-and-basic-rules)
 - [3Blue1Brown: Essence of Calculus (Video Series, 3 hours)](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr)
 
----
+
 
 ### Self-Assessment: Phase 1.5
 
@@ -1896,7 +1896,7 @@ Write Python code to:
 
 </details>
 
----
+
 
 
 ## Learning Resources
@@ -1935,7 +1935,7 @@ Test your understanding of Phase 1 concepts
 ```
 ```
 
----
+
 ## Phase 1 Complete!
 
 **Achievement Unlocked**: Foundation Builder
@@ -1950,13 +1950,13 @@ You now have:
 
 **Next Phase**: [Phase 2: Core Concepts -->](phase-2-core-concepts.md)
 
----
+
 
 **Navigation:**
 - **Next**: [Phase 2: Core Concepts](phase-2-core-concepts.md) -->
 - [<-- Back to Beginner Roadmap](../beginner-roadmap.md)
 
----
+
 
 ## Next Steps
 

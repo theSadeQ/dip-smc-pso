@@ -6,10 +6,11 @@ import pytest
 
 import sys
 
-SCRIPTS_DIR = Path(__file__).parent.parent.parent / "scripts"
-sys.path.insert(0, str(SCRIPTS_DIR))
+# Add scripts directory to path
+scripts_dir = Path(__file__).parent.parent.parent / "scripts" / "research" / "mt7_robustness"
+sys.path.insert(0, str(scripts_dir))
 
-import mt7_generate_report as mt7_report  # noqa: E402
+import generate_report as mt7_report  # noqa: E402
 
 
 def create_mock_mt6_data():

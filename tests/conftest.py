@@ -15,6 +15,9 @@ from pathlib import Path
 # Filter NumPy reload warnings that cause test infrastructure issues
 warnings.filterwarnings("ignore", message=".*The NumPy module was reloaded.*", category=UserWarning)
 
+# Filter Python 3.12/3.14 protobuf metaclass deprecation warnings
+warnings.filterwarnings("ignore", message=".*PyType_Spec.*metaclass.*", category=DeprecationWarning)
+
 # Import matplotlib only after warning filters are set
 import matplotlib  # noqa: E402 - must import after warnings.filterwarnings
 
