@@ -179,13 +179,17 @@ class JobManager:
         # Build command
         cmd = self._build_command(script_path, job_id, args)
 
+        # Create log file for stdout/stderr
+        log_file = job_dir / "output.log"
+        log_f = open(log_file, 'w')
+
         # Launch subprocess (non-blocking)
         try:
             process = subprocess.Popen(
                 cmd,
                 cwd=Path.cwd(),
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
+                stdout=log_f,
+                stderr=subprocess.STDOUT,  # Merge stderr into stdout
                 creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if hasattr(subprocess, 'CREATE_NEW_PROCESS_GROUP') else 0
             )
 

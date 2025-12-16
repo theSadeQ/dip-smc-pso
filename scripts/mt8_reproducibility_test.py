@@ -20,8 +20,9 @@ import numpy as np
 import json
 import logging
 import sys
+import time
 from pathlib import Path
-from typing import Dict, List, Tuple, Any
+from typing import Dict, List, Tuple, Any, Optional
 from dataclasses import dataclass, asdict
 from datetime import datetime
 
@@ -384,9 +385,9 @@ def optimize_controller_robust_pso(
         optimizer.optimize(fitness_func, iters=1, verbose=False)
 
         # Update best cost and gains
-        if optimizer.cost < best_cost:
-            best_cost = optimizer.cost
-            best_gains = optimizer.pos
+        if optimizer.swarm.best_cost < best_cost:
+            best_cost = optimizer.swarm.best_cost
+            best_gains = optimizer.swarm.best_pos
 
         # Record iteration time
         iter_time = time.time() - iter_start
@@ -558,8 +559,17 @@ def main():
         }, f, indent=2)
     logger.info(f"[OK] Saved summary: {summary_file}")
 
-    # Mark job as complete
-    tracker.complete(result_path=str(summary_file))
+    # Mark job as complete with result data
+    result_summary = {
+        'test_type': 'MT-8 Reproducibility Test',
+        'random_seed': args.seed,
+        'controllers_optimized': [r.controller_name for r in all_results],
+        'n_controllers': len(all_results),
+        'avg_improvement_pct': sum(r.improvement_pct for r in all_results) / len(all_results) if all_results else 0.0,
+        'timestamp': datetime.now().isoformat(),
+        'summary_file': str(summary_file)
+    }
+    tracker.complete(result_path=str(summary_file), result_data=result_summary)
 
     # Print summary
     logger.info(f"\n{'='*80}")
