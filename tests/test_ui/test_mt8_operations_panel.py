@@ -24,6 +24,16 @@ from pathlib import Path
 import pytest
 from playwright.sync_api import Page, expect
 
+# Import Streamlit-aware helpers
+from .streamlit_helpers import (
+    wait_for_streamlit_ready,
+    find_expander_by_text,
+    click_expander,
+    find_tab_by_text,
+    switch_to_tab,
+    debug_streamlit_state
+)
+
 
 # Streamlit app URL
 STREAMLIT_URL = "http://localhost:8502"
@@ -77,67 +87,73 @@ def test_mt8_panel_visibility(page: Page, streamlit_app):
 
     # Navigate to Streamlit app
     page.goto(STREAMLIT_URL)
-    page.wait_for_load_state("networkidle")
 
-    # Wait for Streamlit to fully load (look for the main content)
-    page.wait_for_selector("div[data-testid='stApp']", timeout=10000)
+    # NEW: Use Streamlit-aware wait (waits for all 4 rendering phases)
+    wait_for_streamlit_ready(page, timeout_ms=15000)
 
-    # Find MT-8 Operations Control Panel expander
-    # Streamlit expanders have data-testid="stExpander"
-    expanders = page.locator("div[data-testid='stExpander']")
+    # Optional: Debug Streamlit state if needed
+    # debug_streamlit_state(page, "after wait_for_streamlit_ready")
 
-    # Find the MT-8 Operations Control Panel by looking for text content
-    mt8_expander = None
-    for i in range(expanders.count()):
-        expander_text = expanders.nth(i).text_content()
-        if "MT-8 Operations Control Panel" in expander_text:
-            mt8_expander = expanders.nth(i)
-            break
+    # NEW: Find expander using helper (handles emoji issues, Windows-compatible)
+    mt8_expander = find_expander_by_text(
+        page,
+        "MT-8 Operations Control Panel",  # Search by key text
+        timeout_ms=10000
+    )
 
-    assert mt8_expander is not None, "MT-8 Operations Control Panel not found"
+    # Verify expander is visible
+    assert mt8_expander.is_visible(), "MT-8 panel not visible"
 
-    # Click to expand
-    mt8_expander.locator("summary").click()
-    page.wait_for_timeout(1000)  # Wait for animation
+    # NEW: Click to expand using helper (waits for animation)
+    click_expander(page, mt8_expander, timeout_ms=5000)
 
-    # Verify tabs are visible
-    tabs = page.locator("div[data-testid='stTabs']")
+    # Verify tabs are visible after expansion - search WITHIN the expander
+    tabs = mt8_expander.locator("div[data-testid='stTabs']")
+    tabs.first.wait_for(state="visible", timeout=10000)
     assert tabs.count() > 0, "Tabs not found in MT-8 panel"
 
-    # Verify both tabs exist
-    tab_list = page.locator("button[role='tab']")
-    tab_names = [tab_list.nth(i).text_content() for i in range(tab_list.count())]
+    # Verify both tab buttons exist within the MT-8 expander
+    tab_buttons = mt8_expander.locator("button[role='tab']")
 
-    assert "Launch PSO Tests" in " ".join(tab_names), "Launch PSO Tests tab not found"
-    assert "Active Jobs Monitor" in " ".join(tab_names), "Active Jobs Monitor tab not found"
+    # Find specific tabs by text
+    launch_tab = tab_buttons.filter(has_text="Launch PSO Tests")
+    monitor_tab = tab_buttons.filter(has_text="Active Jobs Monitor")
+
+    # Wait for tabs to be visible
+    launch_tab.wait_for(state="visible", timeout=5000)
+    monitor_tab.wait_for(state="visible", timeout=5000)
+
+    assert launch_tab.is_visible(), "Launch PSO Tests tab not found"
+    assert monitor_tab.is_visible(), "Active Jobs Monitor tab not found"
 
 
 def test_pso_configuration_panel(page: Page, streamlit_app):
     """Test PSO configuration panel UI elements."""
 
     page.goto(STREAMLIT_URL)
-    page.wait_for_selector("div[data-testid='stApp']", timeout=10000)
 
-    # Open MT-8 panel
-    expanders = page.locator("div[data-testid='stExpander']")
-    for i in range(expanders.count()):
-        if "MT-8 Operations Control Panel" in expanders.nth(i).text_content():
-            expanders.nth(i).locator("summary").click()
-            break
+    # NEW: Use Streamlit-aware wait
+    wait_for_streamlit_ready(page, timeout_ms=15000)
 
-    page.wait_for_timeout(1000)
+    # NEW: Find and open MT-8 panel using helpers
+    mt8_expander = find_expander_by_text(page, "MT-8 Operations Control Panel", timeout_ms=10000)
+    click_expander(page, mt8_expander, timeout_ms=5000)
 
     # Should be on "Launch PSO Tests" tab by default
-    # Look for controller selection
-    controller_select = page.locator("div[data-testid='stSelectbox']").first
+    # Look for controller selection within the MT-8 expander
+    controller_select = mt8_expander.locator("div[data-testid='stSelectbox']").first
+    controller_select.wait_for(state="visible", timeout=5000)
     assert controller_select.is_visible(), "Controller selection not visible"
 
-    # Check if PSO Configuration panel is visible
-    # Look for text "PSO Configuration"
-    assert page.get_by_text("PSO Configuration").count() > 0, "PSO Configuration header not found"
+    # Check if PSO Configuration panel is visible within MT-8 expander
+    pso_config_header = mt8_expander.get_by_text("PSO Configuration")
+    assert pso_config_header.count() > 0, "PSO Configuration header not found"
 
     # Verify tabs within PSO config (Bounds, Swarm Parameters, Advanced)
-    config_tabs = page.locator("div[data-testid='stTabs']").nth(1)  # Second set of tabs
+    # These are the nested tabs WITHIN the Launch PSO Tests tab
+    config_tabs = mt8_expander.locator("div[data-testid='stTabs']").nth(1)  # Second set of tabs (first is Launch/Monitor)
+    config_tabs.wait_for(state="visible", timeout=5000)
+
     config_tab_buttons = config_tabs.locator("button[role='tab']")
 
     config_tab_names = [config_tab_buttons.nth(i).text_content() for i in range(config_tab_buttons.count())]
@@ -150,42 +166,31 @@ def test_launch_job_button(page: Page, streamlit_app):
     """Test launching a PSO job from UI."""
 
     page.goto(STREAMLIT_URL)
-    page.wait_for_selector("div[data-testid='stApp']", timeout=10000)
 
-    # Open MT-8 panel
-    expanders = page.locator("div[data-testid='stExpander']")
-    for i in range(expanders.count()):
-        if "MT-8 Operations Control Panel" in expanders.nth(i).text_content():
-            expanders.nth(i).locator("summary").click()
-            break
+    # NEW: Use Streamlit-aware wait
+    wait_for_streamlit_ready(page, timeout_ms=15000)
 
-    page.wait_for_timeout(1000)
+    # NEW: Find and open MT-8 panel using helpers
+    mt8_expander = find_expander_by_text(page, "MT-8 Operations Control Panel", timeout_ms=10000)
+    click_expander(page, mt8_expander, timeout_ms=5000)
 
-    # Find and click "Launch Seed 42" button
-    # Streamlit buttons have data-testid="baseButton-secondary" or "baseButton-primary"
-    buttons = page.locator("button")
-    launch_button = None
+    # Find "Launch Seed 42" button within the MT-8 expander
+    buttons = mt8_expander.locator("button")
+    launch_button = buttons.filter(has_text="Launch Seed 42")
 
-    for i in range(buttons.count()):
-        button_text = buttons.nth(i).text_content()
-        if "Launch Seed 42" in button_text:
-            launch_button = buttons.nth(i)
-            break
-
-    assert launch_button is not None, "Launch Seed 42 button not found"
+    # Wait for button to be visible and click
+    launch_button.wait_for(state="visible", timeout=5000)
+    assert launch_button.is_visible(), "Launch Seed 42 button not found"
 
     # Click the button
     launch_button.click()
 
-    # Wait for success message
+    # Wait for success message (Streamlit uses st.success())
     page.wait_for_timeout(2000)
 
-    # Should see a success toast or message
-    # Streamlit shows success messages with st.success()
+    # Verify success notification appeared
     success_message = page.locator("div[data-testid='stNotification']")
-
-    # Verify success message appeared
-    # (Note: might need to adjust selector based on actual Streamlit behavior)
+    # Note: Streamlit notifications may auto-dismiss, so just check if one appeared
     page.wait_for_timeout(1000)
 
 
@@ -193,31 +198,31 @@ def test_active_jobs_monitor(page: Page, streamlit_app):
     """Test active jobs monitor tab shows running jobs."""
 
     page.goto(STREAMLIT_URL)
-    page.wait_for_selector("div[data-testid='stApp']", timeout=10000)
 
-    # Open MT-8 panel
-    expanders = page.locator("div[data-testid='stExpander']")
-    for i in range(expanders.count()):
-        if "MT-8 Operations Control Panel" in expanders.nth(i).text_content():
-            expanders.nth(i).locator("summary").click()
-            break
+    # NEW: Use Streamlit-aware wait
+    wait_for_streamlit_ready(page, timeout_ms=15000)
 
-    page.wait_for_timeout(1000)
+    # NEW: Find and open MT-8 panel using helpers
+    mt8_expander = find_expander_by_text(page, "MT-8 Operations Control Panel", timeout_ms=10000)
+    click_expander(page, mt8_expander, timeout_ms=5000)
 
-    # Switch to "Active Jobs Monitor" tab
-    tab_buttons = page.locator("button[role='tab']")
-    for i in range(tab_buttons.count()):
-        if "Active Jobs Monitor" in tab_buttons.nth(i).text_content():
-            tab_buttons.nth(i).click()
-            break
+    # Switch to "Active Jobs Monitor" tab within the MT-8 expander
+    tab_buttons = mt8_expander.locator("button[role='tab']")
+    monitor_tab = tab_buttons.filter(has_text="Active Jobs Monitor")
 
+    # Wait for tab to be visible and click
+    monitor_tab.wait_for(state="visible", timeout=5000)
+    monitor_tab.click()
+
+    # Wait for tab content to load
     page.wait_for_timeout(2000)
 
     # Should see either:
     # - "No active jobs" message, or
     # - Active job progress display
 
-    page_text = page.text_content("body")
+    # Check within the MT-8 expander only
+    page_text = mt8_expander.text_content()
 
     # Either no active jobs or active jobs are shown
     assert (
@@ -235,50 +240,47 @@ def test_full_workflow_quick_job(page: Page, streamlit_app):
     """
 
     page.goto(STREAMLIT_URL)
-    page.wait_for_selector("div[data-testid='stApp']", timeout=10000)
 
-    # 1. Open MT-8 panel
-    expanders = page.locator("div[data-testid='stExpander']")
-    for i in range(expanders.count()):
-        if "MT-8 Operations Control Panel" in expanders.nth(i).text_content():
-            expanders.nth(i).locator("summary").click()
-            break
+    # NEW: Use Streamlit-aware wait
+    wait_for_streamlit_ready(page, timeout_ms=15000)
 
-    page.wait_for_timeout(1000)
+    # 1. NEW: Find and open MT-8 panel using helpers
+    mt8_expander = find_expander_by_text(page, "MT-8 Operations Control Panel", timeout_ms=10000)
+    click_expander(page, mt8_expander, timeout_ms=5000)
 
     # 2. Configure minimal PSO parameters for quick test
-    # Click on "Swarm Parameters" tab in PSO config
-    config_tabs = page.locator("div[data-testid='stTabs']").nth(1)
+    # Click on "Swarm Parameters" tab in PSO config (nested tabs)
+    config_tabs = mt8_expander.locator("div[data-testid='stTabs']").nth(1)
     swarm_tab = config_tabs.locator("button[role='tab']").filter(has_text="Swarm Parameters")
+    swarm_tab.wait_for(state="visible", timeout=5000)
     swarm_tab.click()
 
     page.wait_for_timeout(500)
 
-    # 3. Launch job
-    buttons = page.locator("button")
-    for i in range(buttons.count()):
-        if "Launch Seed 42" in buttons.nth(i).text_content():
-            buttons.nth(i).click()
-            break
+    # 3. Launch job using scoped button search
+    buttons = mt8_expander.locator("button")
+    launch_button = buttons.filter(has_text="Launch Seed 42")
+    launch_button.wait_for(state="visible", timeout=5000)
+    launch_button.click()
 
     page.wait_for_timeout(2000)
 
-    # 4. Switch to Active Jobs Monitor
-    tab_buttons = page.locator("button[role='tab']").first
-    for i in range(tab_buttons.count()):
-        if "Active Jobs Monitor" in tab_buttons.nth(i).text_content():
-            tab_buttons.nth(i).click()
-            break
+    # 4. Switch to Active Jobs Monitor tab
+    tab_buttons = mt8_expander.locator("button[role='tab']")
+    monitor_tab = tab_buttons.filter(has_text="Active Jobs Monitor")
+    monitor_tab.wait_for(state="visible", timeout=5000)
+    monitor_tab.click()
 
     page.wait_for_timeout(2000)
 
     # 5. Monitor for job activity
-    # Look for progress indicators
+    # Look for progress indicators within the MT-8 expander
     max_wait = 60  # 60 seconds max
     job_found = False
 
     for attempt in range(max_wait):
-        page_text = page.text_content("body")
+        # Check text within MT-8 expander only
+        page_text = mt8_expander.text_content()
 
         # Check if job is running or completed
         if "Progress" in page_text or "Iteration" in page_text or "completed" in page_text:
