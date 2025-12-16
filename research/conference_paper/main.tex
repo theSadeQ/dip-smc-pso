@@ -1,0 +1,66 @@
+\documentclass[journal]{IEEEtran}
+
+% Packages
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+
+% Graphics path
+\graphicspath{{./figures/}}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+
+% Title and authors
+\title{Comparative Analysis of Sliding Mode Control Variants for Double-Inverted Pendulum Systems: Performance, Stability, and Robustness}
+
+\author{
+\IEEEauthorblockN{[Author Names]}
+\IEEEauthorblockA{
+\textit{[Department]} \\
+\textit{[Institution Name]} \\
+[City], [Country] \\
+[corresponding.author@institution.edu]
+}
+}
+
+\begin{document}
+
+\maketitle
+
+% Abstract
+\input{sections/abstract}
+
+% Keywords
+\begin{IEEEkeywords}
+Sliding mode control, double-inverted pendulum, super-twisting algorithm, adaptive control, Lyapunov stability, particle swarm optimization, robust control, chattering reduction
+\end{IEEEkeywords}
+
+% Sections
+\input{sections/introduction}
+\input{sections/system_model}
+\input{sections/controller_design}
+\input{sections/stability_analysis}
+\input{sections/pso_optimization}
+\input{sections/experimental_setup}
+\input{sections/performance_results}
+\input{sections/robustness_analysis}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+% Bibliography
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}
