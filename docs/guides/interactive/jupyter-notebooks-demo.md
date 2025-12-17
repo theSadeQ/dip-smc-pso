@@ -28,7 +28,7 @@ The `jupyter-notebook` directive embeds complete Jupyter notebooks:
 
 ```rst
 .. jupyter-notebook::
-   :path: notebooks/01_getting_started.ipynb
+   :path: docs/tutorials/notebooks/01_getting_started.ipynb
    :execute: auto
    :show-cells: all
 ```
@@ -37,7 +37,7 @@ The `jupyter-notebook` directive embeds complete Jupyter notebooks:
 
 ```{eval-rst}
 .. jupyter-notebook::
-   :path: notebooks/01_getting_started.ipynb
+   :path: docs/tutorials/notebooks/01_getting_started.ipynb
    :execute: auto
    :show-cells: 0-5
    :hide-output:
@@ -198,7 +198,7 @@ Cells can continue execution on errors:
 
 ```rst
 .. jupyter-notebook::
-   :path: notebooks/experimental.ipynb
+   :path: docs/tutorials/notebooks/experimental.ipynb
    :allow-errors:
 ```
 
@@ -208,7 +208,7 @@ Show only specific cells from notebooks:
 
 ```rst
 .. jupyter-notebook::
-   :path: notebooks/tutorial.ipynb
+   :path: docs/tutorials/notebooks/tutorial.ipynb
    :show-cells: 0,2,5-8,12
    :hide-input:
 ```

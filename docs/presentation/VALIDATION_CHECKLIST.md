@@ -256,7 +256,7 @@
   - [x] Statistical validation: Cohen's d=5.29, p<0.0001 (Section 3.2.3)
   - [x] Robustness analysis across perturbed dynamics (Section 3.2.4)
 - **File:** `docs/presentation/pso-optimization.md` (sections 3.2.1-3.2.4, 8 pages)
-- **Source:** `benchmarks/MT6_COMPLETE_REPORT.md` (MT-6 research)
+- **Source:** `.artifacts/research/experiments/mt6_boundary_layer/MT6_COMPLETE_REPORT.md` (MT-6 research)
 - **Note:** MT-6 content already substantively integrated; covers problem statement, PSO tuning, quantitative results, robustness
 
 #### Task 1.3: Add MT-7 Multi-Scenario Validation to Chapter 8 [COMPLETED]
@@ -271,7 +271,7 @@
   - [x] Table 8.1: MT-6 vs MT-7 performance comparison
   - [x] Warning box on overfitting risks
 - **File:** `docs/presentation/results-discussion.md` (section 8.4.5, 50+ lines)
-- **Source:** `benchmarks/MT7_COMPLETE_REPORT.md` (MT-7 research)
+- **Source:** `.artifacts/research/experiments/mt7_robustness/MT7_COMPLETE_REPORT.md` (MT-7 research)
 - **Note:** Comprehensive MT-7 integration with statistical analysis (t=-131.22, p<0.001, Cohen's d=-26.5), generalization failure analysis
 
 #### Task 1.4: Polish Chapter 8 Limitations Section [PENDING]

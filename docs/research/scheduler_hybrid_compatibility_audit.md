@@ -504,7 +504,7 @@ The adaptive gain scheduler implements a **one-size-fits-all** approach that:
 
 - `src/controllers/adaptive_gain_scheduler.py`: Complete implementation (281 lines)
 - `src/controllers/smc/hybrid_adaptive_sta_smc.py`: Lines 400-443 (sliding surface computation)
-- `benchmarks/MT8_ADAPTIVE_SCHEDULING_SUMMARY.md`: Lines 119-149 (Hybrid results)
+- `.artifacts/research/experiments/mt8_disturbances/MT8_ADAPTIVE_SCHEDULING_SUMMARY.md`: Lines 119-149 (Hybrid results)
 - `docs/research/hybrid_gain_coordination_analysis.md`: Phase 1.1 architecture analysis
 
 ---

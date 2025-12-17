@@ -468,7 +468,7 @@ Classical SMC benefits from scheduling because it has NO internal adaptation lay
 
 - `src/controllers/smc/hybrid_adaptive_sta_smc.py`: Lines 1-700 (full implementation)
 - `src/controllers/adaptive_gain_scheduler.py`: Lines 224-227 (Hybrid scheduling)
-- `benchmarks/MT8_ADAPTIVE_SCHEDULING_SUMMARY.md`: Lines 119-149 (Hybrid results)
+- `.artifacts/research/experiments/mt8_disturbances/MT8_ADAPTIVE_SCHEDULING_SUMMARY.md`: Lines 119-149 (Hybrid results)
 - MT-8 robust PSO gains: `[c1, λ1, c2, λ2] = [10.149, 12.839, 6.815, 2.750]`
 
 ---
