@@ -5,6 +5,9 @@ import time
 from pathlib import Path
 from datetime import datetime, timedelta
 
+# Centralized log paths
+from src.utils.logging.paths import PSO_LOG_DIR
+
 def parse_log(log_file):
     """Extract PSO progress from log file."""
     if not Path(log_file).exists():
@@ -44,10 +47,10 @@ def parse_log(log_file):
 
 def main():
     controllers = [
-        ('classical', 'pso_classical.log'),
-        ('adaptive_smc', 'logs/pso_adaptive_smc.log'),
-        ('sta_smc', 'logs/pso_sta_smc.log'),
-        ('hybrid_adaptive_sta_smc', 'logs/pso_hybrid_adaptive_sta_smc.log')
+        ('classical', PSO_LOG_DIR / 'pso_classical.log'),
+        ('adaptive_smc', PSO_LOG_DIR / 'pso_adaptive_smc.log'),
+        ('sta_smc', PSO_LOG_DIR / 'pso_sta_smc.log'),
+        ('hybrid_adaptive_sta_smc', PSO_LOG_DIR / 'pso_hybrid_adaptive_sta_smc.log')
     ]
 
     print("\033[2J\033[H")  # Clear screen
@@ -112,7 +115,7 @@ def main():
 
     except KeyboardInterrupt:
         print("\n\nMonitoring stopped. PSO processes continue in background.")
-        print("Logs: tail -f logs/pso_*.log")
+        print(f"Logs: tail -f {PSO_LOG_DIR}/pso_*.log")
 
 if __name__ == '__main__':
     main()

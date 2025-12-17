@@ -21,12 +21,15 @@ from pathlib import Path
 from typing import Dict
 import json
 
+# Centralized log paths
+from src.utils.logging.paths import PSO_LOG_DIR
+
 
 def launch_pso(controller: str, n_particles: int = 30, iters: int = 150,
                seed: int = 42) -> subprocess.Popen:
     """Launch PSO optimization in background process."""
     output_file = f"gains_{controller}_chattering.json"
-    log_file = f"logs/pso_{controller}.log"
+    log_file = PSO_LOG_DIR / f"pso_{controller}.log"
 
     cmd = [
         sys.executable,
@@ -80,11 +83,11 @@ def monitor_processes(processes: Dict[str, subprocess.Popen]):
 
     except KeyboardInterrupt:
         print("\n\nMonitoring interrupted (processes still running in background)")
-        print("Check logs: tail -f logs/pso_*.log")
+        print(f"Check logs: tail -f {PSO_LOG_DIR}/pso_*.log")
         print()
         for ctrl, proc in processes.items():
             if proc.poll() is None:
-                print(f"  {ctrl}: PID {proc.pid} - logs/pso_{ctrl}.log")
+                print(f"  {ctrl}: PID {proc.pid} - {PSO_LOG_DIR}/pso_{ctrl}.log")
         sys.exit(0)
 
     print("\n" + "="*60)

@@ -21,6 +21,9 @@ from datetime import datetime
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
+# Centralized log paths
+from src.utils.logging.paths import PSO_LOG_DIR
+
 from check_pso_completion import check_log_completion  # noqa: E402
 
 
@@ -112,9 +115,9 @@ def main():
     args = parser.parse_args()
 
     controllers = {
-        'classical_smc': 'logs/pso_classical.log',
-        'adaptive_smc': 'logs/pso_adaptive_smc.log',
-        'sta_smc': 'logs/pso_sta_smc.log'
+        'classical_smc': PSO_LOG_DIR / 'pso_classical.log',
+        'adaptive_smc': PSO_LOG_DIR / 'pso_adaptive_smc.log',
+        'sta_smc': PSO_LOG_DIR / 'pso_sta_smc.log'
     }
 
     try:

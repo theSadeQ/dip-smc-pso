@@ -346,13 +346,15 @@ config = load_config("config.yaml", allow_unknown=False)
 **See:** `.project/ai/config/workspace_organization.md` for complete details.
 
 **Quick Reference:**
-- Target: ≤19 visible root items, ≤9 hidden dirs
-- Current: 18 visible items, 9 hidden dirs [OK] (Dec 17, 2025 reorganization)
+- Target: ≤19 visible root items, ≤100MB .logs/
+- Current: 20 visible items (3 locked files pending cleanup), 56MB .logs/ [OK] (Dec 17, 2025 cleanup)
+- Centralized log paths: `src/utils/logging/paths.py` (single source of truth)
 - Use `.project/` for ALL AI/dev configs (CANONICAL)
 - Use `.artifacts/` for research outputs and thesis
-- Use `.logs/` for centralized logging (hidden directory)
+- Use `.logs/` for centralized logging (hidden directory, structured subdirectories)
 - Use `.cache/` for ephemeral data
 - Use `D:\Tools\Claude\` for system-level external tools (account switcher)
+- Migration guide: `docs/guides/logs_migration_guide.md`
 
 ### Config Consolidation (Use `.project/` as CANONICAL)
 ```bash

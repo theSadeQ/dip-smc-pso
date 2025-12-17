@@ -62,10 +62,13 @@ find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
 
 ### File Placement Rules
 
-1. **Logs** → `.logs/` directory (hidden)
-   - Format: `{script}_{timestamp}.log`
-   - Examples: `pso_classical_20250930.log`, `pytest_run_20250930.log`
-   - NEVER leave `.log` files in root
+1. **Logs** → `.logs/` directory (hidden, centralized)
+   - **Centralized paths:** Use `src/utils/logging/paths.py` (MANDATORY)
+   - **Structure:** `.logs/{pso,test,monitoring,archive}/`
+   - **Format:** `{script}_{timestamp}.log`
+   - **Examples:** `.logs/pso/pso_classical_20250930.log`, `.logs/test/pytest_run_20250930.log`
+   - **Migration:** See `docs/guides/logs_migration_guide.md`
+   - NEVER hardcode "logs/" paths in code
 
 2. **Test Artifacts** → `.test_artifacts/` (auto-cleanup)
    - Use for temporary test runs
@@ -90,11 +93,14 @@ find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
 ### Before Session Ends Checklist
 
 - [x] Move all logs to `.logs/` directory (completed Dec 17, 2025)
+- [x] Centralize log paths via `src/utils/logging/paths.py` (completed Dec 17, 2025)
+- [x] Archive old logs to `.logs/archive/YYYY-MM-DD/` (completed Dec 17, 2025)
 - [ ] Delete or archive test artifacts
 - [ ] Organize optimization results into timestamped directories
 - [ ] Move any root-level scripts to appropriate `scripts/` subdirectory
 - [ ] Archive temporary documentation files
-- [ ] Verify root item count: `ls | wc -l` (target: ≤19 visible, current: 18)
+- [ ] Verify root item count: `ls | wc -l` (target: ≤19 visible, current: 20, pending 3 locked files)
+- [ ] Verify `.logs/` size: `du -sh .logs/` (target: ≤100MB, current: 56MB [OK])
 - [ ] Clean caches: `find . -name "__pycache__" -type d -exec rm -rf {} +`
 
 ### File Naming Conventions
