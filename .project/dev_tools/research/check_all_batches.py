@@ -1,8 +1,16 @@
 #!/usr/bin/env python3
 """Check progress of all running batches."""
 import re
+import sys
 from pathlib import Path
 from collections import defaultdict
+
+# Add project root to path for imports
+project_root = Path(__file__).parent.parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+# Centralized log paths
+from src.utils.logging.paths import LOG_DIR
 
 def parse_log(log_file):
     """Parse a batch log file and extract metrics."""
@@ -53,15 +61,15 @@ def parse_log(log_file):
 
 def main():
     batches = [
-        ('Batch 1: Optimization', 'logs/batch_01_optimization.log'),
-        ('Batch 2: Controllers', 'logs/batch_02_controllers.log'),
-        ('Batch 3: Analysis', 'logs/batch_03_analysis.log'),
-        ('Batch 4: Simulation', 'logs/batch_04_simulation.log'),
-        ('Batch 5: Plant', 'logs/batch_05_plant.log'),
-        ('Batch 6: Interfaces', 'logs/batch_06_interfaces.log'),
-        ('Batch 7: Utils', 'logs/batch_07_utils.log'),
-        ('Batch 8: Other', 'logs/batch_08_other.log'),
-        ('Batch 9: MEDIUM', 'logs/batch_09_medium.log'),
+        ('Batch 1: Optimization', LOG_DIR / 'batch_01_optimization.log'),
+        ('Batch 2: Controllers', LOG_DIR / 'batch_02_controllers.log'),
+        ('Batch 3: Analysis', LOG_DIR / 'batch_03_analysis.log'),
+        ('Batch 4: Simulation', LOG_DIR / 'batch_04_simulation.log'),
+        ('Batch 5: Plant', LOG_DIR / 'batch_05_plant.log'),
+        ('Batch 6: Interfaces', LOG_DIR / 'batch_06_interfaces.log'),
+        ('Batch 7: Utils', LOG_DIR / 'batch_07_utils.log'),
+        ('Batch 8: Other', LOG_DIR / 'batch_08_other.log'),
+        ('Batch 9: MEDIUM', LOG_DIR / 'batch_09_medium.log'),
     ]
 
     print("=" * 80)

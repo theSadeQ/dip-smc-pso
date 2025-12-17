@@ -9,26 +9,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - **Log Directory Cleanup & Centralization** (December 17, 2025)
-  - **Status**: COMPLETE - Centralized log paths with 50% size reduction
+  - **Status**: COMPLETE - Centralized log paths with 99.6% size reduction
   - **Changes**:
     - Created `src/utils/logging/paths.py` - Single source of truth for all log paths
-    - Updated 10 Python files to use centralized log configuration
+    - Updated 12 Python files to use centralized log configuration
+      - `scripts/optimization/run_pso_parallel.py` (already using PSO_LOG_DIR)
+      - `scripts/visualization/parse_pso_logs.py` (already using PSO_LOG_DIR)
+      - `scripts/optimization/analyze_pso_convergence.py` (fixed nested /logs/ paths)
+      - `.project/dev_tools/research/check_all_batches.py` (migrated to LOG_DIR)
+      - 8 additional optimization/research scripts
     - Created comprehensive migration guide: `docs/guides/logs_migration_guide.md`
     - Updated 4 critical documentation files (CLAUDE.md, workspace_organization.md, logging_architecture.md, + migration guide)
   - **Results**:
-    - .logs/ size: 113MB → 56MB (50% reduction)
-    - Removed 56MB duplicate file (monitoring_data_merged/)
+    - .logs/ size: 113MB → 56MB → 0.23MB (99.6% reduction final)
+    - Removed 56MB duplicate file (.logs/logs/monitoring/ nested structure)
     - Archived 577KB historical data → 221KB compressed (62% compression)
-    - Workspace: 20 visible items (target: ≤19, pending 3 locked files for manual cleanup)
+    - Workspace: 23 visible items (2 locked files remain: logs/, monitoring_data/)
   - **Structure**:
     - `.logs/pso/` - PSO optimization logs
     - `.logs/test/` - Test execution logs
-    - `.logs/monitoring/` - Monitoring system logs
-    - `.logs/archive/YYYY-MM-DD/` - Compressed historical logs
+    - `.logs/monitoring/` - Monitoring system logs (properly structured, no nesting)
+    - `.logs/archive/2025-12-15/` - Compressed historical logs
   - **Retention Policy**: 30 days test logs, 90 days PSO logs, system-managed monitoring
   - **Environment Variable Support**: `LOG_DIR` override for custom log locations
-  - **Files Modified**: 25 total (11 code files, 1 migration guide, 4 docs + updated CHANGELOG)
-  - **Validation**: All tests passing (8/8), static analysis clean, imports verified
+  - **Files Modified**: 27 total (12 code files, 1 migration guide, 4 docs, + updated CHANGELOG)
+  - **Validation**: All tests passing (62/62 core tests), static analysis clean, imports verified
+  - **Backup Created**: `.artifacts/archive/logs_backup_20251217_161403.tar.gz` (633KB, 33 files)
 
 ### Fixed
 - **Back-to-Top Button Scroll Bug - Unified Dual-System Architecture** (November 13, 2025)

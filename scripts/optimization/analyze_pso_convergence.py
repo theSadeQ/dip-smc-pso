@@ -20,6 +20,9 @@ import matplotlib.pyplot as plt  # noqa: E402
 from typing import Dict, List, Tuple  # noqa: E402
 import argparse  # noqa: E402
 
+# Centralized log paths
+from src.utils.logging.paths import PSO_LOG_DIR  # noqa: E402
+
 
 def extract_convergence_data(log_file: Path) -> Tuple[List[int], List[float]]:
     """
@@ -264,9 +267,9 @@ def main():
     # Analyze each controller
     controllers = {
         'classical_smc': args.logs_dir / 'pso_classical.log',
-        'adaptive_smc': args.logs_dir / 'logs' / 'pso_adaptive_smc.log',
-        'sta_smc': args.logs_dir / 'logs' / 'pso_sta_smc.log',
-        'hybrid_adaptive_sta_smc': args.logs_dir / 'logs' / 'pso_hybrid_adaptive_sta_smc.log'
+        'adaptive_smc': args.logs_dir / 'pso_adaptive_smc.log',
+        'sta_smc': args.logs_dir / 'pso_sta_smc.log',
+        'hybrid_adaptive_sta_smc': args.logs_dir / 'pso_hybrid_adaptive_sta_smc.log'
     }
 
     results = {}
