@@ -25,8 +25,40 @@ import re
 # ============================================================================
 
 PROJECT_ROOT = Path(__file__).parent.parent
-PROJECT_STATE_FILE = PROJECT_ROOT / ".ai" / "config" / "project_state.json"
-ROADMAP_FILE = PROJECT_ROOT / ".ai" / "planning" / "research" / "ROADMAP_EXISTING_PROJECT.md"
+
+
+def get_project_state_file() -> Path:
+    """
+    Get project state file path with dual-path support.
+
+    During migration, checks both new (.project/recovery/state/) and old
+    (.project/ai/config/) locations. Prioritizes new location if it exists.
+
+    Returns:
+        Path: Path to project_state.json file
+    """
+    new_path = PROJECT_ROOT / ".project" / "recovery" / "state" / "project_state.json"
+    old_path = PROJECT_ROOT / ".project" / "ai" / "config" / "project_state.json"
+
+    if new_path.exists():
+        return new_path
+    elif old_path.exists():
+        import warnings
+        warnings.warn(
+            "Using deprecated state file path (.project/ai/config/project_state.json). "
+            "Please migrate to .project/recovery/state/project_state.json",
+            DeprecationWarning,
+            stacklevel=2
+        )
+        return old_path
+    else:
+        # Create in new location by default
+        new_path.parent.mkdir(parents=True, exist_ok=True)
+        return new_path
+
+
+PROJECT_STATE_FILE = get_project_state_file()
+ROADMAP_FILE = PROJECT_ROOT / ".project" / "ai" / "planning" / "research" / "ROADMAP_EXISTING_PROJECT.md"
 
 
 # ============================================================================
