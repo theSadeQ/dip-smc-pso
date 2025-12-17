@@ -8,6 +8,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- **.project Directory Reorganization** (December 17, 2025)
+  - **Status**: IN PROGRESS - Function-based restructure with enhanced recovery
+  - **Scope**: Reorganizing 400+ files from domain-based to function-based structure
+  - **Timeline**: 8 phases, ~20 hours
+  - **New Structure**:
+    - `recovery/` - Unified recovery & checkpoint system
+    - `orchestration/` - Agent profiles & MCP coordination
+    - `education/` - Learning roadmaps & podcasts
+    - `development/` - Dev tools & automation
+    - `planning/` - Roadmaps & execution tracking
+    - `config/` - Technical configs
+    - `claude/` - Claude Code settings
+    - `archive/` - Historical backups
+  - **Enhancements**: 5 new recovery tools with sequential-thinking MCP integration
+  - **Safety**: Dual-path support during migration ensures zero downtime
+  - **Backup**: Full backup created at `.artifacts/archive/project_backup_20251217_193412.tar.gz`
+
 - **Log Directory Cleanup & Centralization** (December 17, 2025)
   - **Status**: COMPLETE - Centralized log paths with 99.6% size reduction
   - **Changes**:
