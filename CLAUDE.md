@@ -371,7 +371,7 @@ config = load_config("config.yaml", allow_unknown=False)
 - **Root files** (9 core + 2 MCP): `README.md`, `CHANGELOG.md`, `CLAUDE.md`, `config.yaml`, `requirements.txt`, `simulate.py`, `streamlit_app.py`, `package.json`, `package-lock.json`
 
 ### Protected Files (never Delete)
-- `.project/dev_tools/Switch-ClaudeAccount.ps1` - Multi-account switcher (CANONICAL)
+- `D:\Tools\Claude\Switch-ClaudeAccount.ps1` - Multi-account switcher (EXTERNAL LOCATION)
 
 ### Weekly Health Check
 ```bash

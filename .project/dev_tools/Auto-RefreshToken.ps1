@@ -30,7 +30,7 @@ param(
 
 # Configuration
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$SwitcherScript = Join-Path $ScriptDir "Switch-ClaudeAccount.ps1"
+$SwitcherScript = "D:\Tools\Claude\Switch-ClaudeAccount.ps1"
 $AllAccounts = @(1..28 + 100..103)
 
 function Write-Success {
