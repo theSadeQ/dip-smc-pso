@@ -468,11 +468,26 @@ dip-smc-pso/
 ├── docs/                    # Documentation
 │   ├── reference/          # API documentation
 │   ├── guides/             # User guides
+│   ├── tutorials/          # Learning tutorials
+│   │   └── notebooks/      # Jupyter notebooks (moved from root)
 │   └── theory/            # Mathematical background
-├── notebooks/               # Jupyter analysis notebooks
-├── benchmarks/              # Performance benchmarks
+├── scripts/                 # Utility scripts
+│   ├── research/           # Research task scripts (organized by task)
+│   ├── benchmarks/         # Benchmarking scripts
+│   ├── analysis/           # Analysis scripts
+│   └── validation/         # Validation scripts
+├── benchmarks/              # Performance benchmark data
+├── optimization_results/    # PSO optimization outputs
 ├── config/                  # Configuration schemas
-└── .dev_tools/              # Development utilities
+├── .artifacts/              # Hidden: Research outputs, thesis, QA audits
+│   ├── thesis/             # LaTeX thesis (moved from root)
+│   ├── research/           # Research papers and experiments
+│   └── testing/            # Test summaries
+├── .logs/                   # Hidden: Centralized logging
+│   ├── monitoring/         # Monitoring system logs
+│   └── pso_*.log          # PSO optimization logs
+└── .project/                # Hidden: AI/dev configs (CANONICAL)
+    └── dev_tools/          # Development utilities
 ```
 
 ## Testing

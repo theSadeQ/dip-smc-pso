@@ -346,9 +346,11 @@ config = load_config("config.yaml", allow_unknown=False)
 **See:** `.project/ai/config/workspace_organization.md` for complete details.
 
 **Quick Reference:**
-- Target: ≤19 visible root items, ≤7 hidden dirs
+- Target: ≤19 visible root items, ≤9 hidden dirs
+- Current: 18 visible items, 9 hidden dirs [OK] (Dec 17, 2025 reorganization)
 - Use `.project/` for ALL AI/dev configs (CANONICAL)
-- Use `.artifacts/` NOT `artifacts/`
+- Use `.artifacts/` for research outputs and thesis
+- Use `.logs/` for centralized logging (hidden directory)
 - Use `.cache/` for ephemeral data
 - Use `D:\Tools\Claude\` for system-level external tools (account switcher)
 
@@ -366,20 +368,36 @@ config = load_config("config.yaml", allow_unknown=False)
 - [ERROR] `.dev_tools/` at root -> use `.project/dev_tools/`
 
 ### Directory Rules
-- **Runtime artifacts**: `.artifacts/` (outputs, research papers, scripts)
+- **Runtime artifacts**: `.artifacts/` (research outputs, thesis, QA audits, test summaries)
+  - `thesis/` - LaTeX thesis source and PDFs (98MB, moved from root)
+  - `research/` - Research papers, experiments, phase data
+  - `testing/` - Test summaries and quality gates
+  - `qa_audits/` - Quality assurance deliverables
+- **Runtime logs**: `.logs/` (centralized logging, hidden directory)
+  - `test_core_validation.log` - Pytest test runs
+  - `monitoring/` - Runtime monitoring system logs and data
+  - `pso_*.log` - PSO optimization logs (timestamped)
 - **Runtime caches**: `.cache/` (pytest, hypothesis, htmlcov, benchmarks)
-- **Visible directories** (8): `src/`, `tests/`, `docs/`, `scripts/`, `notebooks/`, `data/`, `benchmarks/`, `optimization_results/`
+- **Visible directories** (8): `src/`, `tests/`, `docs/`, `scripts/`, `data/`, `benchmarks/`, `optimization_results/`, `envs/`
 - **Root files** (9 core + 2 MCP): `README.md`, `CHANGELOG.md`, `CLAUDE.md`, `config.yaml`, `requirements.txt`, `simulate.py`, `streamlit_app.py`, `package.json`, `package-lock.json`
+
+### Recent Reorganization (Dec 17, 2025)
+- [OK] thesis/ (98MB) → .artifacts/thesis/
+- [OK] logs/ → .logs/ (hidden, centralized logging)
+- [OK] notebooks/ → docs/tutorials/notebooks/
+- [OK] Research outputs from benchmarks/ → .artifacts/research/
+- [OK] Scripts organized: 55 → 15 at root, 40 in subdirectories
 
 ### Protected Files (never Delete)
 - `D:\Tools\Claude\Switch-ClaudeAccount.ps1` - Multi-account switcher (EXTERNAL LOCATION)
 
 ### Weekly Health Check
 ```bash
-ls | wc -l                                          # ≤19 visible items
-find . -maxdepth 1 -type d -name ".*" | wc -l      # ≤7 hidden dirs
+ls | wc -l                                          # ≤19 visible items (current: 18)
+find . -maxdepth 1 -type d -name ".*" | wc -l      # ≤9 hidden dirs (current: 9)
 du -sh .cache/                                      # <50MB
-du -sh .artifacts/                                  # <100MB
+du -sh .artifacts/                                  # <150MB (includes 98MB thesis)
+du -sh .logs/                                       # <100MB (monitoring data)
 ```
 
 **See Also**: `.project/dev_tools/RESTRUCTURING_PLAN_2025-10-26.md` | `.project/ai/config/WORKSPACE_CLEANUP_2025-10-26.md`

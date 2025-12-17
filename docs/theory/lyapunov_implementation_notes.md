@@ -258,7 +258,7 @@ new_K = float(np.clip(new_K, self.K_min, self.K_max))
 
 ### Empirical Validation
 
-**Simulation Data:** ✅ **AVAILABLE** - `benchmarks/MT6_adaptive_optimization.csv`, `MT6_adaptive_validation.csv`
+**Simulation Data:** ✅ **AVAILABLE** - `.artifacts/research/experiments/mt6_boundary_layer/MT6_adaptive_optimization.csv`, `MT6_adaptive_validation.csv`
 **Action:** Load MT6 data, compute $V(t)$ and verify $\dot{V} \leq 0$
 
 ---
