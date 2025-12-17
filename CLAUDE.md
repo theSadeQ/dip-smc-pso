@@ -350,6 +350,7 @@ config = load_config("config.yaml", allow_unknown=False)
 - Use `.project/` for ALL AI/dev configs (CANONICAL)
 - Use `.artifacts/` NOT `artifacts/`
 - Use `.cache/` for ephemeral data
+- Use `D:\Tools\Claude\` for system-level external tools (account switcher)
 
 ### Config Consolidation (Use `.project/` as CANONICAL)
 ```bash
