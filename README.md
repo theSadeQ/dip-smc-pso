@@ -689,7 +689,7 @@ Hit token limits? Switch Claude Code accounts effortlessly:
 ```
 
 **How it works:**
-- Session state automatically saved to `.dev_tools/session_state.json`
+- Session state automatically saved to `D:\Tools\Claude\session_state.json` (external location)
 - Committed every 1 minute with automated backups
 - Claude checks for recent session on startup
 - Zero manual handoff prompt writing required
