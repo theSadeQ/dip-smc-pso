@@ -1,4 +1,11 @@
+import sys
+from pathlib import Path
+
 import pandas as pd
+
+# Add scripts/research/mt6_boundary_layer to path for import
+scripts_path = Path(__file__).parents[2] / "scripts" / "research" / "mt6_boundary_layer"
+sys.path.insert(0, str(scripts_path))
 
 import mt6_generate_report as mt6_report
 
