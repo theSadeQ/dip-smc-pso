@@ -149,7 +149,7 @@ Claude: [Triggers sequential-thinking MCP automatically]
 .ai/planning/phase3/COORDINATION_STATUS.md
 .ai/planning/phase3/CODEX_HANDOFF_INSTRUCTIONS.md
 CLAUDE.md (Section 21)
-.ai/config/session_state.json
+D:\Tools\Claude\session_state.json (external location)
 ```
 
 ---
@@ -237,7 +237,7 @@ docs/_static/custom.css (+108 lines)
 - `.ai/planning/phase3/HANDOFF.md` (Claude is editing this)
 - `.ai/planning/phase3/ISSUE_STATUS_CORRECTION.md` (Claude's file)
 - `CLAUDE.md` (Claude's file)
-- `.ai/config/session_state.json` (Claude's file)
+- `D:\Tools\Claude\session_state.json` (Claude's file, external location)
 
 ---
 
@@ -384,7 +384,7 @@ docs/_static/custom.css (+108 lines)
 | `.ai/planning/phase3/changelog.md` | ❌ | ✅ (append) | **None** (append-only) |
 | `.ai/planning/phase3/FINAL_CLOSEOUT_PROGRESS.md` | ❌ | ✅ | **None** (Codex creates) |
 | `CLAUDE.md` | ✅ | ❌ | **None** |
-| `.ai/config/session_state.json` | ✅ | ❌ | **None** |
+| `D:\Tools\Claude\session_state.json` | ✅ | ❌ | **None** (external) |
 
 **Conflict Risk**: 0/9 files ✅
 
