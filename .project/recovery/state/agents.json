@@ -1,0 +1,61 @@
+{
+  "claude_code_agents": {
+    "ultimate-orchestrator": {
+      "name": "Ultimate Orchestrator",
+      "description": "Use this agent as the master conductor for complex multi-phase projects. Delegate to general-purpose agent with specialized prompts from ultimate-orchestrator.md",
+      "type": "general-purpose",
+      "prompt_template": "ultimate-orchestrator.md"
+    },
+    "integration-coordinator": {
+      "name": "Integration Coordinator",
+      "description": "Cross-domain orchestration, system health, configuration validation",
+      "type": "general-purpose",
+      "prompt_template": "integration-coordinator.md"
+    },
+    "control-systems-specialist": {
+      "name": "Control Systems Specialist",
+      "description": "Controller factory, SMC logic, dynamics models, stability analysis",
+      "type": "general-purpose",
+      "prompt_template": "control-systems-specialist.md"
+    },
+    "pso-optimization-engineer": {
+      "name": "PSO Optimization Engineer",
+      "description": "Parameter tuning, optimization workflows, convergence validation",
+      "type": "general-purpose",
+      "prompt_template": "pso-optimization-engineer.md"
+    },
+    "documentation-expert": {
+      "name": "Control Systems Documentation Expert",
+      "description": "Specialized technical writing for control theory and optimization systems",
+      "type": "general-purpose",
+      "prompt_template": "documentation-expert.md"
+    },
+    "code-beautification-directory-specialist": {
+      "name": "Code Beautification & Directory Organization Specialist",
+      "description": "Systematic code style enforcement, directory organization, ASCII header implementation, file placement optimization",
+      "type": "general-purpose",
+      "prompt_template": "code-beautification-directory-specialist.md"
+    },
+    "documentation-review": {
+      "name": "Documentation Review Specialist",
+      "description": "Technical documentation review for control systems, mathematical correctness, code example validation, cross-reference integrity",
+      "type": "general-purpose",
+      "prompt_template": "documentation-review-agent.md"
+    }
+  },
+  "orchestration": {
+    "total_agents": 7,
+    "subordinate_specialists": 6,
+    "parallel_execution_enabled": true,
+    "quality_gates": {
+      "system_health_threshold": 0.90,
+      "validation_matrix_minimum": "7/8",
+      "code_style_requirements": {
+        "ascii_headers": "100%",
+        "type_hints": "95%",
+        "directory_compliance": "100%",
+        "import_organization": "100%"
+      }
+    }
+  }
+}
