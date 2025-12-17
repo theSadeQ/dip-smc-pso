@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **Log Directory Cleanup & Centralization** (December 17, 2025)
+  - **Status**: COMPLETE - Centralized log paths with 50% size reduction
+  - **Changes**:
+    - Created `src/utils/logging/paths.py` - Single source of truth for all log paths
+    - Updated 10 Python files to use centralized log configuration
+    - Created comprehensive migration guide: `docs/guides/logs_migration_guide.md`
+    - Updated 4 critical documentation files (CLAUDE.md, workspace_organization.md, logging_architecture.md, + migration guide)
+  - **Results**:
+    - .logs/ size: 113MB → 56MB (50% reduction)
+    - Removed 56MB duplicate file (monitoring_data_merged/)
+    - Archived 577KB historical data → 221KB compressed (62% compression)
+    - Workspace: 20 visible items (target: ≤19, pending 3 locked files for manual cleanup)
+  - **Structure**:
+    - `.logs/pso/` - PSO optimization logs
+    - `.logs/test/` - Test execution logs
+    - `.logs/monitoring/` - Monitoring system logs
+    - `.logs/archive/YYYY-MM-DD/` - Compressed historical logs
+  - **Retention Policy**: 30 days test logs, 90 days PSO logs, system-managed monitoring
+  - **Environment Variable Support**: `LOG_DIR` override for custom log locations
+  - **Files Modified**: 25 total (11 code files, 1 migration guide, 4 docs + updated CHANGELOG)
+  - **Validation**: All tests passing (8/8), static analysis clean, imports verified
+
 ### Fixed
 - **Back-to-Top Button Scroll Bug - Unified Dual-System Architecture** (November 13, 2025)
   - **Status**: COMPLETE - Robust fix with synchronized visibility control

@@ -165,10 +165,11 @@ def main():
 
     args = parser.parse_args()
 
+    from src.utils.logging.paths import PSO_LOG_DIR
     controllers = {
-        'classical_smc': 'logs/pso_classical.log',
-        'adaptive_smc': 'logs/pso_adaptive_smc.log',
-        'sta_smc': 'logs/pso_sta_smc.log'
+        'classical_smc': PSO_LOG_DIR / 'pso_classical.log',
+        'adaptive_smc': PSO_LOG_DIR / 'pso_adaptive_smc.log',
+        'sta_smc': PSO_LOG_DIR / 'pso_sta_smc.log'
     }
 
     print("=" * 80)

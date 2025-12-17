@@ -15,6 +15,9 @@ import re
 import subprocess
 from datetime import datetime
 
+# Centralized log paths
+from src.utils.logging.paths import PSO_LOG_DIR
+
 def check_log_completion(log_file: Path) -> dict:
     """
     Check if PSO log file shows completion.
@@ -76,9 +79,9 @@ def main():
     print()
 
     controllers = {
-        'classical_smc': 'logs/pso_classical.log',
-        'adaptive_smc': 'logs/pso_adaptive_smc.log',
-        'sta_smc': 'logs/pso_sta_smc.log'
+        'classical_smc': PSO_LOG_DIR / 'pso_classical.log',
+        'adaptive_smc': PSO_LOG_DIR / 'pso_adaptive_smc.log',
+        'sta_smc': PSO_LOG_DIR / 'pso_sta_smc.log'
     }
 
     status = {}

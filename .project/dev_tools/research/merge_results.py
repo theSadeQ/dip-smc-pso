@@ -13,7 +13,11 @@ from pathlib import Path
 from typing import List, Dict, Any
 
 
-def load_v3_results(v3_backup_path: str = "logs/test_pipeline_batch01_v3.log") -> Dict[str, Any]:
+def load_v3_results(v3_backup_path: str = None) -> Dict[str, Any]:
+    """Load V3 test results from backup/log. Defaults to centralized log directory."""
+    if v3_backup_path is None:
+        from src.utils.logging.paths import LOG_DIR
+        v3_backup_path = str(LOG_DIR / "test_pipeline_batch01_v3.log")
     """
     Load V3 test results from backup/log.
 

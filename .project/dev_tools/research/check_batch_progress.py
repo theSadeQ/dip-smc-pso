@@ -71,5 +71,6 @@ def check_progress(log_file: str):
     print("\n" + "=" * 70)
 
 if __name__ == '__main__':
-    log_file = sys.argv[1] if len(sys.argv) > 1 else 'logs/batch_01_optimization.log'
+    from src.utils.logging.paths import LOG_DIR
+    log_file = sys.argv[1] if len(sys.argv) > 1 else str(LOG_DIR / 'batch_01_optimization.log')
     check_progress(log_file)

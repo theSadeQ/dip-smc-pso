@@ -71,9 +71,10 @@ This document defines the comprehensive structured logging architecture for the 
                     ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                      Storage Layer                           │
-│  - logs/controller_YYYY-MM-DD.log                            │
-│  - logs/pso_YYYY-MM-DD.json                                  │
-│  - logs/simulation_YYYY-MM-DD.log                            │
+│  - .logs/test/controller_YYYY-MM-DD.log                      │
+│  - .logs/pso/pso_YYYY-MM-DD.json                             │
+│  - .logs/test/simulation_YYYY-MM-DD.log                      │
+│  - Centralized via src/utils/logging/paths.py                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -159,17 +160,17 @@ Domain.SubDomain.Component.Method
 
 | Component Path | Description | Log File |
 |----------------|-------------|----------|
-| `Controller.*` | All controllers | `logs/controller_YYYY-MM-DD.log` |
-| `Controller.ClassicalSMC` | Classical SMC | `logs/controller_YYYY-MM-DD.log` |
-| `Controller.AdaptiveSMC` | Adaptive SMC | `logs/controller_YYYY-MM-DD.log` |
-| `Controller.STASMC` | Super-twisting SMC | `logs/controller_YYYY-MM-DD.log` |
-| `Controller.HybridAdaptiveSTA` | Hybrid adaptive STA | `logs/controller_YYYY-MM-DD.log` |
-| `Controller.SwingUpSMC` | Swing-up controller | `logs/controller_YYYY-MM-DD.log` |
-| `Controller.MPC` | Model predictive controller | `logs/controller_YYYY-MM-DD.log` |
-| `Optimizer.PSO` | PSO optimization | `logs/pso_YYYY-MM-DD.json` |
-| `Simulation.Runner` | Simulation execution | `logs/simulation_YYYY-MM-DD.log` |
-| `Plant.*` | Plant models | `logs/plant_YYYY-MM-DD.log` |
-| `HIL.PlantServer` | HIL plant server | `logs/hil_YYYY-MM-DD.log` |
+| `Controller.*` | All controllers | `.logs/test/controller_YYYY-MM-DD.log` |
+| `Controller.ClassicalSMC` | Classical SMC | `.logs/test/controller_YYYY-MM-DD.log` |
+| `Controller.AdaptiveSMC` | Adaptive SMC | `.logs/test/controller_YYYY-MM-DD.log` |
+| `Controller.STASMC` | Super-twisting SMC | `.logs/test/controller_YYYY-MM-DD.log` |
+| `Controller.HybridAdaptiveSTA` | Hybrid adaptive STA | `.logs/test/controller_YYYY-MM-DD.log` |
+| `Controller.SwingUpSMC` | Swing-up controller | `.logs/test/controller_YYYY-MM-DD.log` |
+| `Controller.MPC` | Model predictive controller | `.logs/test/controller_YYYY-MM-DD.log` |
+| `Optimizer.PSO` | PSO optimization | `.logs/pso/pso_YYYY-MM-DD.json` |
+| `Simulation.Runner` | Simulation execution | `.logs/test/simulation_YYYY-MM-DD.log` |
+| `Plant.*` | Plant models | `.logs/test/plant_YYYY-MM-DD.log` |
+| `HIL.PlantServer` | HIL plant server | `.logs/monitoring/hil_YYYY-MM-DD.log` |
 | `HIL.ControllerClient` | HIL controller client | `logs/hil_YYYY-MM-DD.log` |
 
 ### 3.3 Filtering by Component
@@ -283,9 +284,9 @@ Automatic flush occurs on:
 Log files rotate daily at midnight (local time):
 
 ```
-logs/controller_2025-11-11.log
-logs/controller_2025-11-12.log
-logs/controller_2025-11-13.log
+.logs/test/controller_2025-11-11.log
+.logs/test/controller_2025-11-12.log
+.logs/test/controller_2025-11-13.log
 ```
 
 ### 6.2 Size-Based Rotation
@@ -293,10 +294,10 @@ logs/controller_2025-11-13.log
 If a log file exceeds 100MB, it rotates immediately:
 
 ```
-logs/controller_2025-11-11.log       (current)
-logs/controller_2025-11-11.log.1     (backup 1)
-logs/controller_2025-11-11.log.2     (backup 2)
+.logs/test/controller_2025-11-11.log       (current)
+.logs/archive/2025-11-11/controller.log.gz  (archived + compressed)
 ```
+**Note:** Archival uses centralized `.logs/archive/YYYY-MM-DD/` structure (see `docs/guides/logs_migration_guide.md`)
 
 ### 6.3 Retention Policy
 

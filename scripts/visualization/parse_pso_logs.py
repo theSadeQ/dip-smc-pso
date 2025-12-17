@@ -32,6 +32,9 @@ from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass, asdict
 from datetime import datetime
 
+# Centralized log paths
+from src.utils.logging.paths import PSO_LOG_DIR
+
 
 @dataclass
 class ConvergenceMetrics:
@@ -76,8 +79,8 @@ class PSOLogParser:
         'hybrid_adaptive_sta_smc': 'rgb(255, 206, 86)'
     }
 
-    def __init__(self, logs_dir: Path = Path("D:/Projects/main/logs")):
-        """Initialize parser with log directory."""
+    def __init__(self, logs_dir: Path = PSO_LOG_DIR):
+        """Initialize parser with log directory (defaults to centralized PSO log dir)."""
         self.logs_dir = logs_dir
         self.convergence_data: Dict[str, pd.DataFrame] = {}
         self.metrics: Dict[str, ConvergenceMetrics] = {}

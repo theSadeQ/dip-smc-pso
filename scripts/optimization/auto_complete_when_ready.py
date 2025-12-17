@@ -17,10 +17,11 @@ from datetime import datetime
 
 def check_pso_complete(controller):
     """Check if PSO is complete for a controller."""
+    from src.utils.logging.paths import PSO_LOG_DIR
     log_map = {
-        'classical_smc': 'pso_classical.log',
-        'adaptive_smc': 'logs/pso_adaptive_smc.log',
-        'sta_smc': 'logs/pso_sta_smc.log'
+        'classical_smc': PSO_LOG_DIR / 'pso_classical.log',
+        'adaptive_smc': PSO_LOG_DIR / 'pso_adaptive_smc.log',
+        'sta_smc': PSO_LOG_DIR / 'pso_sta_smc.log'
     }
 
     log_file = log_map.get(controller)
