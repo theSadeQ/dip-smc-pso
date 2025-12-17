@@ -42,12 +42,22 @@ echo ""
 echo -e "${GREEN}[1] PROJECT STATE${NC}"
 echo -e "${CYAN}------------------------------------------------------------------------------${NC}"
 
-if [ -f ".ai/config/project_state.json" ]; then
-    # Use Python to parse and display state
-    python .dev_tools/project_state_manager.py status
+# Dual-path support for state files (migration to .project/recovery/state/)
+if [ -f ".project/recovery/state/project_state.json" ]; then
+    STATE_FILE=".project/recovery/state/project_state.json"
+elif [ -f ".project/ai/config/project_state.json" ]; then
+    STATE_FILE=".project/ai/config/project_state.json"
+    echo -e "${YELLOW}[WARNING] Using deprecated state file path (.project/ai/config/)${NC}"
+    echo -e "${YELLOW}           Please migrate to .project/recovery/state/${NC}"
 else
     echo -e "${YELLOW}[WARNING] Project state not initialized${NC}"
-    echo "Run: python .dev_tools/project_state_manager.py init"
+    echo "Run: python .project/dev_tools/project_state_manager.py init"
+    STATE_FILE=""
+fi
+
+if [ -n "$STATE_FILE" ]; then
+    # Use Python to parse and display state
+    python .project/dev_tools/project_state_manager.py status
 fi
 
 echo ""
@@ -216,11 +226,12 @@ echo ""
 echo -e "${GREEN}[7] RECOMMENDED NEXT ACTIONS${NC}"
 echo -e "${CYAN}------------------------------------------------------------------------------${NC}"
 
-if [ -f ".ai/config/project_state.json" ]; then
-    python .dev_tools/project_state_manager.py recommend-next
+# Dual-path support for state files
+if [ -f ".project/recovery/state/project_state.json" ] || [ -f ".project/ai/config/project_state.json" ]; then
+    python .project/dev_tools/project_state_manager.py recommend-next
 else
     echo -e "${YELLOW}[WARNING] Project state not initialized - cannot recommend tasks${NC}"
-    echo "Run: python .dev_tools/project_state_manager.py init"
+    echo "Run: python .project/dev_tools/project_state_manager.py init"
 fi
 
 echo ""
