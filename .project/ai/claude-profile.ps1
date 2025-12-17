@@ -10,13 +10,13 @@
 # Installation:
 #   1. Copy this file to your PowerShell profile location
 #   2. Add this line to your $PROFILE:
-#      . D:\Projects\main\.dev_tools\claude-profile.ps1
+#      . D:\Projects\main\.project\ai\claude-profile.ps1
 #   3. Reload profile: . $PROFILE
 #
 # ============================================================================
 
 # Import the switcher function
-$SwitcherPath = "D:\Projects\main\.dev_tools\Switch-ClaudeAccount.ps1"
+$SwitcherPath = "D:\Tools\Claude\Switch-ClaudeAccount.ps1"
 
 if (Test-Path $SwitcherPath) {
     # Create the main switching function
