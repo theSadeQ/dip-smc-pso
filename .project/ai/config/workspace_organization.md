@@ -6,7 +6,7 @@ Keep visible items ≤ 15 (core files/dirs only). Hide dev/build clutter behind 
 
 **Visible files**: `simulate.py`, `streamlit_app.py`, `config.yaml`, `requirements.txt`, `README.md`, `CHANGELOG.md`
 
-**Visible dirs**: `src/`, `tests/`, `docs/`, `notebooks/`, `benchmarks/`, `scripts/`
+**Visible dirs**: `src/`, `tests/`, `docs/`, `benchmarks/`, `scripts/`, `envs/`, `optimization_results/`
 
 **Hidden dev dirs (examples)**: `.archive/`, `.build/`, `.dev_tools/`, `.scripts/`, `.tools/`
  Move **CLAUDE.md → .CLAUDE.md** if you prefer a clean root.
@@ -62,7 +62,7 @@ find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
 
 ### File Placement Rules
 
-1. **Logs** → `logs/` directory
+1. **Logs** → `.logs/` directory (hidden)
    - Format: `{script}_{timestamp}.log`
    - Examples: `pso_classical_20250930.log`, `pytest_run_20250930.log`
    - NEVER leave `.log` files in root
@@ -89,12 +89,12 @@ find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
 
 ### Before Session Ends Checklist
 
-- [ ] Move all logs to `logs/` directory
+- [x] Move all logs to `.logs/` directory (completed Dec 17, 2025)
 - [ ] Delete or archive test artifacts
 - [ ] Organize optimization results into timestamped directories
 - [ ] Move any root-level scripts to appropriate `scripts/` subdirectory
 - [ ] Archive temporary documentation files
-- [ ] Verify root item count: `ls | wc -l` (target: ≤12 visible)
+- [ ] Verify root item count: `ls | wc -l` (target: ≤19 visible, current: 18)
 - [ ] Clean caches: `find . -name "__pycache__" -type d -exec rm -rf {} +`
 
 ### File Naming Conventions
@@ -104,22 +104,22 @@ find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
 - Test artifacts: `.test_artifacts/{purpose}_{iteration}/`
 - Archived docs: `.archive/{category}_{YYYYMMDD}/`
 
-### Acceptable Root Items (≤15 visible)
+### Acceptable Root Items (≤19 visible)
 
-**Core Files (6):**
+**Core Files (9):**
 - `simulate.py`, `streamlit_app.py`, `config.yaml`
-- `requirements.txt`, `README.md`, `CHANGELOG.md`
+- `requirements.txt`, `README.md`, `CHANGELOG.md`, `CLAUDE.md`
+- `package.json`, `package-lock.json` (MCP config)
 
-**Additional Accepted:**
-- `CLAUDE.md`, `logs/`, `optimization_results/`
+**Core Dirs (8):**
+- `src/`, `tests/`, `docs/`, `benchmarks/`, `scripts/`, `envs/`
+- `optimization_results/`, `data/`
 
-**Core Dirs (6):**
-- `src/`, `tests/`, `docs/`, `notebooks/`, `benchmarks/`, `scripts/`
-
-**Total:** ≤15 items (realistic target)
+**Current:** 18 items (Dec 17, 2025 - meets target ≤19)
 
 **Hidden Dirs (acceptable):**
-- `.archive/`, `.test_artifacts/`, `.dev_tools/`, `.build/`, `.cache/`, `.coverage/`, `.artifacts/`
+- `.archive/`, `.test_artifacts/`, `.project/`, `.build/`, `.cache/`, `.coverage/`, `.artifacts/`
+- `.logs/` (centralized logging), `.git/`, `.github/`
 
 ### File Organization Enforcement (MANDATORY)
 
@@ -136,7 +136,7 @@ find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
 | File Pattern | Destination | Example |
 |-------------|-------------|---------|
 | `test_*.py` | `tests/debug/` | `test_my_feature.py` → `tests/debug/test_my_feature.py` |
-| `*.log`, `report.*` | `logs/` | `output.log` → `logs/script_20251009.log` |
+| `*.log`, `report.*` | `.logs/` | `output.log` → `.logs/script_20251009.log` |
 | `*_gains*.json`, `optimized_*.json` | `optimization_results/{controller}_{date}/` | `optimized_gains_smc.json` → `optimization_results/classical_smc_20251009/gains.json` |
 | `*_AUDIT.md`, `*_REPORT.md`, `INVESTIGATION_*.md` | `.archive/analysis_reports/` | `EXCEPTION_HANDLER_AUDIT.md` → `.archive/analysis_reports/EXCEPTION_HANDLER_AUDIT.md` |
 | `*.txt` (analysis results) | `.archive/analysis_reports/` or `logs/` | `phase5_stats.txt` → `.archive/analysis_reports/phase5_stats.txt` |
@@ -160,8 +160,8 @@ python tests/debug/test_my_feature.py
 # WRONG: Dumping logs in root
 python optimize.py > output.log
 
-# CORRECT: Logs in logs/ with timestamps
-python optimize.py > logs/optimize_$(date +%Y%m%d_%H%M%S).log
+# CORRECT: Logs in .logs/ with timestamps
+python optimize.py > .logs/optimize_$(date +%Y%m%d_%H%M%S).log
 ```
 
 ```bash
@@ -196,7 +196,7 @@ find . -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null
 ```bash
 # Move misplaced files to proper locations
 mv test_*.py tests/debug/ 2>/dev/null || true
-mv *.log logs/ 2>/dev/null || true
+mv *.log .logs/ 2>/dev/null || true
 mv *_gains*.json *optimized*.json optimization_results/ 2>/dev/null || true
 mv *_AUDIT.md *_REPORT.md INVESTIGATION_*.md .archive/analysis_reports/ 2>/dev/null || true
 rm -rf __pycache__ out
@@ -214,7 +214,7 @@ rm -rf __pycache__ out
    - Set appropriate iteration count and swarm size
 
 2. **Prepare Monitoring**
-   - Set up log directory: `logs/`
+   - Set up log directory: `.logs/`
    - Create monitoring scripts ready
    - Document expected completion time
 
@@ -238,7 +238,7 @@ rm -rf __pycache__ out
    ```
 
 2. **Progress Tracking**
-   - Monitor log files: `tail -f logs/pso_*.log`
+   - Monitor log files: `tail -f .logs/pso_*.log`
    - Check iteration progress and convergence
    - Verify no errors or instability
 
@@ -344,16 +344,16 @@ Early warning signs that cleanup is needed:
 - [ ] Any `*.log.*` files anywhere in project
 - [ ] Multiple backup files with incrementing numbers (file_v1, file_v2...)
 - [ ] Duplicate directories (both visible and hidden versions exist)
-- [ ] `logs/` directory > 20MB
+- [ ] `.logs/` directory > 100MB
 - [ ] More than 3 validation/phase report .md files in `docs/`
 
 **Check command:**
 ```bash
 # Quick health check
-ls | wc -l                           # Target: ≤15
+ls | wc -l                           # Target: ≤19 (current: 18)
 du -sh .test_artifacts/              # Target: <10MB
 du -sh .dev_validation/              # Target: <5MB
-du -sh logs/                         # Target: <20MB
+du -sh .logs/                        # Target: <100MB (current: ~8MB)
 find . -name "*.log.*" | wc -l       # Target: 0
 ```
 
@@ -374,11 +374,11 @@ Archive to `.archive/` when you see:
 | Purpose | Use This | NOT This | Reason |
 |---------|----------|----------|--------|
 | Research artifacts | `.artifacts/` | `artifacts/` | Hidden = not cluttering root |
-| Active notebooks | `notebooks/` | `.notebooks/` | Visible = actively used |
+| Active notebooks | `docs/tutorials/notebooks/` | `notebooks/` (moved Dec 17, 2025) | Integrated with documentation |
 | Optimization results | `optimization_results/` | `.optimization_results/` | Visible = current results |
 | Test artifacts | `.test_artifacts/` | `test_artifacts/` | Hidden = temporary |
 | Archives | `.archive/` | `archive/` | Hidden = historical |
-| Development tools | `.dev_tools/` | `dev_tools/` | Hidden = internal tooling |
+| Development tools | `.project/dev_tools/` | `.dev_tools/` (at root) | Centralized config location |
 
 **Rule**: If you find both visible and hidden versions, merge to the preferred location and delete the other.
 
