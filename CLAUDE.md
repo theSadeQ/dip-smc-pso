@@ -384,8 +384,25 @@ config = load_config("config.yaml", allow_unknown=False)
 - **Runtime caches**: `.cache/` (pytest, hypothesis, htmlcov, benchmarks)
 - **Visible directories** (8): `src/`, `tests/`, `docs/`, `scripts/`, `data/`, `benchmarks/`, `optimization_results/`, `envs/`
 - **Root files** (9 core + 2 MCP): `README.md`, `CHANGELOG.md`, `CLAUDE.md`, `config.yaml`, `requirements.txt`, `simulate.py`, `streamlit_app.py`, `package.json`, `package-lock.json`
+- **Benchmarks organization** (reorganized Dec 18, 2025):
+  - `benchmarks/raw/` - Immutable original outputs by research task (MT-5, baselines, etc.)
+  - `benchmarks/processed/` - Derived/aggregated analysis datasets
+  - `benchmarks/figures/` - Publication-ready plots (PRESERVED PATH)
+  - `benchmarks/reports/` - Task completion summaries
+  - `src/benchmarks/` - Analysis modules (moved from benchmarks/ root for proper package structure)
+  - `.logs/benchmarks/` - Log files (9.7 MB, hidden directory)
+  - Import changes: `from benchmarks.*` → `from src.benchmarks.*` (auto-updated)
 
-### Recent Reorganization (Dec 17, 2025)
+### Recent Reorganization
+
+**Dec 18, 2025 - Benchmarks:**
+- [OK] benchmarks/ → Publication-ready structure (raw/, processed/, figures/, reports/)
+- [OK] benchmarks/{analysis,benchmark,comparison} → src/benchmarks/ (proper package structure)
+- [OK] benchmarks/*.log → .logs/benchmarks/ (9.7 MB logs centralized)
+- [OK] 8 README files added with research task provenance
+- [OK] 567 files scanned, 8 modified, imports auto-updated
+
+**Dec 17, 2025 - Workspace:**
 - [OK] thesis/ (98MB) → .artifacts/thesis/
 - [OK] logs/ → .logs/ (hidden, centralized logging)
 - [OK] notebooks/ → docs/tutorials/notebooks/
