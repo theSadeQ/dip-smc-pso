@@ -27,9 +27,9 @@ from typing import Dict, List
 # Add parent directories to path for imports
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
-from benchmarks.benchmark import IntegrationBenchmark
-from benchmarks.comparison import ComparisonScenario, IntegrationMethodComparator
-from benchmarks.analysis import EnergyAnalyzer, ConvergenceAnalyzer
+from src.benchmarks.benchmark import IntegrationBenchmark
+from src.benchmarks.comparison import ComparisonScenario, IntegrationMethodComparator
+from src.benchmarks.analysis import EnergyAnalyzer, ConvergenceAnalyzer
 import numpy as np
 
 
