@@ -4,7 +4,7 @@
 # =============================================================================
 #
 # Purpose: Show complete project context in one command
-# Usage: bash .dev_tools/recover_project.sh
+# Usage: bash .project/tools/recovery/recover_project.sh
 #
 # What it shows:
 # - Current phase and roadmap progress
@@ -42,22 +42,22 @@ echo ""
 echo -e "${GREEN}[1] PROJECT STATE${NC}"
 echo -e "${CYAN}------------------------------------------------------------------------------${NC}"
 
-# Dual-path support for state files (migration to .project/recovery/state/)
-if [ -f ".project/recovery/state/project_state.json" ]; then
-    STATE_FILE=".project/recovery/state/project_state.json"
+# Canonical state file location (migrated 2025-12-18)
+if [ -f ".project/state/project_state.json" ]; then
+    STATE_FILE=".project/state/project_state.json"
 elif [ -f ".project/ai/config/project_state.json" ]; then
     STATE_FILE=".project/ai/config/project_state.json"
     echo -e "${YELLOW}[WARNING] Using deprecated state file path (.project/ai/config/)${NC}"
     echo -e "${YELLOW}           Please migrate to .project/recovery/state/${NC}"
 else
     echo -e "${YELLOW}[WARNING] Project state not initialized${NC}"
-    echo "Run: python .project/dev_tools/project_state_manager.py init"
+    echo "Run: python .project/tools/recovery/project_state_manager.py init"
     STATE_FILE=""
 fi
 
 if [ -n "$STATE_FILE" ]; then
     # Use Python to parse and display state
-    python .project/dev_tools/project_state_manager.py status
+    python .project/tools/recovery/project_state_manager.py status
 fi
 
 echo ""
@@ -228,10 +228,10 @@ echo -e "${CYAN}----------------------------------------------------------------
 
 # Dual-path support for state files
 if [ -f ".project/recovery/state/project_state.json" ] || [ -f ".project/ai/config/project_state.json" ]; then
-    python .project/dev_tools/project_state_manager.py recommend-next
+    python .project/tools/recovery/project_state_manager.py recommend-next
 else
     echo -e "${YELLOW}[WARNING] Project state not initialized - cannot recommend tasks${NC}"
-    echo "Run: python .project/dev_tools/project_state_manager.py init"
+    echo "Run: python .project/tools/recovery/project_state_manager.py init"
 fi
 
 echo ""
@@ -244,16 +244,16 @@ echo -e "${GREEN}[8] QUICK START COMMANDS${NC}"
 echo -e "${CYAN}------------------------------------------------------------------------------${NC}"
 echo ""
 echo "Initialize project state:"
-echo "  python .dev_tools/project_state_manager.py init"
+echo "  python .project/tools/recovery/project_state_manager.py init"
 echo ""
 echo "Mark task complete:"
-echo "  python .dev_tools/project_state_manager.py complete MT-5 --deliverables MT5_COMPLETE_ANALYSIS.md"
+echo "  python .project/tools/recovery/project_state_manager.py complete MT-5 --deliverables MT5_COMPLETE_ANALYSIS.md"
 echo ""
 echo "Check roadmap progress:"
-echo "  python .dev_tools/roadmap_tracker.py"
+echo "  python .project/tools/recovery/roadmap_tracker.py"
 echo ""
 echo "Run recovery again:"
-echo "  bash .dev_tools/recover_project.sh"
+echo "  bash .project/tools/recovery/recover_project.sh"
 echo ""
 
 echo -e "${CYAN}=============================================================================="
