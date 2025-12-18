@@ -208,6 +208,81 @@ mv *_AUDIT.md *_REPORT.md INVESTIGATION_*.md .archive/analysis_reports/ 2>/dev/n
 rm -rf __pycache__ out
 ```
 
+## Benchmarks Directory Organization
+
+**Status:** Reorganized December 18, 2025 for publication-ready structure
+
+### Directory Structure
+
+```
+benchmarks/
+├── raw/                    # Immutable original benchmark outputs (organized by research task)
+│   ├── MT-5_comprehensive/ # MT-5: Comprehensive benchmark suite (Oct 25, 2025)
+│   ├── baselines/          # Original baseline performance data
+│   └── README.md           # Task provenance and metadata
+├── processed/              # Derived/aggregated analysis datasets
+├── figures/                # Publication-ready plots (PRESERVED PATH - DO NOT MOVE)
+└── reports/                # Task completion summaries and research documentation
+
+src/benchmarks/             # Analysis modules (moved from benchmarks/ root)
+├── analysis/               # Accuracy metrics, statistical analysis
+├── benchmark/              # Integration benchmark runner
+├── comparison/             # Method comparison utilities
+├── integration/            # Numerical integration methods
+└── examples/               # Usage examples
+
+.logs/benchmarks/           # Log files (9.7 MB, hidden directory)
+```
+
+### Key Principles
+
+1. **Raw Data Immutability**: Original benchmark outputs never modified
+2. **Task Traceability**: Clear provenance (which research task generated which data)
+3. **Publication Ready**: Figures/ path preserved for existing references
+4. **Proper Package Structure**: Analysis modules in src/, not data directory
+
+### Import Path Changes
+
+**Old (deprecated):**
+```python
+from benchmarks.analysis import accuracy_metrics
+from benchmarks.benchmark import IntegrationBenchmark
+```
+
+**New:**
+```python
+from src.benchmarks.analysis import accuracy_metrics
+from src.benchmarks.benchmark import IntegrationBenchmark
+```
+
+All imports automatically updated by `scripts/migration/update_benchmark_paths.py`.
+
+### Research Task Provenance
+
+- **MT-5** (Oct 25, 2025): Comprehensive benchmark suite (7 controllers)
+- **MT-6** (Oct 26-27, 2025): Boundary layer optimization
+- **MT-7** (Oct 28, 2025): Robust PSO tuning
+- **MT-8** (Oct 29, 2025): Disturbance rejection testing
+- **LT-4** (Oct 30, 2025): Lyapunov stability proofs
+- **QW-2** (Nov 7, 2025): Quick win comprehensive benchmark
+
+### Migration Artifacts
+
+- **Backup:** `.artifacts/backups/benchmarks_pre_reorg_20251218.tar.gz`
+- **Script:** `scripts/migration/update_benchmark_paths.py`
+- **Validation:** 111 benchmark tests collected successfully
+
+### DO NOT
+
+- Move or rename `benchmarks/figures/` (breaks existing references)
+- Create new files in `benchmarks/` root (use subdirectories)
+- Import from `benchmarks.*` (use `src.benchmarks.*`)
+
+### See Also
+
+- Complete reorganization plan: `C:\Users\SadeQ\.claude42\plans\polished-inventing-spindle.md`
+- Benchmark README files: `benchmarks/README.md`, `benchmarks/raw/*/README.md`
+
 ## Long-Running Optimization Processes (PSO)
 
 **Best practices for managing multi-hour PSO optimization runs:**
