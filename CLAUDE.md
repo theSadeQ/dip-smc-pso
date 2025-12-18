@@ -47,7 +47,7 @@
 
 ## 3) Session Continuity & Project-wide Recovery System
 
-**See:** `.project/ai/config/session_continuity.md` for complete details.
+**See:** `.project/ai/guides/session_continuity.md` for complete details.
 
 **Purpose:** 30-second recovery from token limits or multi-month gaps
 
@@ -59,24 +59,24 @@
 /recover
 
 # Or Manually
-bash .project/dev_tools/recover_project.sh
+bash .project/tools/recovery/recover_project.sh
 
 # Check Roadmap Progress
-python .project/dev_tools/roadmap_tracker.py
+python .project/tools/analysis/roadmap_tracker.py
 ```
 
 ### Multi-Account Recovery (NEW - Nov 2025)
 
-**Quick Start**: Windows: `.project\dev_tools\quick_recovery.bat` | Linux/Mac: `bash .project/dev_tools/recover_project.sh && python .project/dev_tools/analyze_checkpoints.py`
+**Quick Start**: Windows: `.project\tools\recovery\quick_recovery.bat` | Linux/Mac: `bash .project/tools/recovery/recover_project.sh && python .project/tools/checkpoints/analyze_checkpoints.py`
 
-**See**: `.project/dev_tools/MULTI_ACCOUNT_RECOVERY_GUIDE.md` for complete workflow
+**See**: `.project/tools/multi_account/MULTI_ACCOUNT_RECOVERY_GUIDE.md` for complete workflow
 
 ### Key Tools
-1. **Project State Manager** (`.project/dev_tools/project_state_manager.py`) - Tracks phase, roadmap progress, completed tasks
-2. **Git Recovery Script** (`.project/dev_tools/recover_project.sh`) - 30-second recovery workflow
-3. **Roadmap Tracker** (`.project/dev_tools/roadmap_tracker.py`) - Parses 72-hour research roadmap (50 tasks)
-4. **Agent Checkpoint System** (`.project/dev_tools/agent_checkpoint.py`) - Recovers interrupted multi-agent work
-5. **Multi-Account Recovery** (`.project/dev_tools/MULTI_ACCOUNT_RECOVERY_GUIDE.md`) - Resume work across accounts/sessions
+1. **Project State Manager** (`.project/tools/recovery/project_state_manager.py`) - Tracks phase, roadmap progress, completed tasks
+2. **Git Recovery Script** (`.project/tools/recovery/recover_project.sh`) - 30-second recovery workflow
+3. **Roadmap Tracker** (`.project/tools/analysis/roadmap_tracker.py`) - Parses 72-hour research roadmap (50 tasks)
+4. **Agent Checkpoint System** (`.project/tools/checkpoints/agent_checkpoint.py`) - Recovers interrupted multi-agent work
+5. **Multi-Account Recovery** (`.project/tools/multi_account/MULTI_ACCOUNT_RECOVERY_GUIDE.md`) - Resume work across accounts/sessions
 
 ### What Survives Token Limits
 - [OK] Git commits (10/10), project state (9/10), agent checkpoints (9/10), data files (8/10)
@@ -186,7 +186,7 @@ Paths 2-4: Advanced (EXISTING)
 
 **Status**: [OK] Series complete at Phase 4 (November 2025)
 
-**See**: `.project/ai/config/notebooklm_guide.md` for complete TTS optimization requirements, episode templates, validation checklists, phase examples, and usage workflows
+**See**: `.project/ai/guides/notebooklm_guide.md` for complete TTS optimization requirements, episode templates, validation checklists, phase examples, and usage workflows
 
 ------
 
@@ -306,7 +306,7 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ## 13) Production Safety & Readiness (phase 4 Status)
 
-**See:** `.project/ai/config/phase4_status.md` for complete status.
+**See:** `.project/ai/guides/phase4_status.md` for complete status.
 
 **Quick Reference:**
 - Production Readiness: 23.9/100 (Phase 4.1+4.2 complete)
@@ -343,7 +343,7 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ## 14) Workspace Organization & Hygiene
 
-**See:** `.project/ai/config/workspace_organization.md` for complete details.
+**See:** `.project/ai/guides/workspace_organization.md` for complete details.
 
 **Quick Reference:**
 - Target: ≤19 visible root items, ≤100MB .logs/
@@ -367,7 +367,9 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ### DO NOT USE (deprecated Aliases)
 - [ERROR] `.ai/` -> use `.project/ai/`
-- [ERROR] `.dev_tools/` at root -> use `.project/dev_tools/`
+- [ERROR] `.dev_tools/` at root -> use `.project/tools/`
+- [ERROR] `.project/dev_tools/` -> use `.project/tools/` (reorganized Dec 2025)
+- [ERROR] `.project/ai/config/` -> use `.project/ai/guides/` (reorganized Dec 2025)
 
 ### Directory Rules
 - **Runtime artifacts**: `.artifacts/` (research outputs, thesis, QA audits, test summaries)
@@ -402,7 +404,7 @@ du -sh .artifacts/                                  # <150MB (includes 98MB thes
 du -sh .logs/                                       # <100MB (monitoring data)
 ```
 
-**See Also**: `.project/dev_tools/RESTRUCTURING_PLAN_2025-10-26.md` | `.project/ai/config/WORKSPACE_CLEANUP_2025-10-26.md`
+**See Also**: `.project/archive/RESTRUCTURING_PLAN_2025-10-26.md` | `.project/archive/WORKSPACE_CLEANUP_2025-10-26.md`
 
 ------
 
@@ -493,7 +495,7 @@ checkpoint_agent_failed(task_id, agent_id, hours, reason, recovery_recommendatio
 
 ## 19) Documentation Build System
 
-**See:** `.project/ai/config/documentation_build_system.md` for complete workflow.
+**See:** `.project/ai/guides/documentation_build_system.md` for complete workflow.
 
 **MANDATORY FOR CLAUDE**: After ANY documentation changes, rebuild and verify.
 
@@ -533,7 +535,7 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 
 ## 20) Model Context Protocol (mcp) Auto-triggers
 
-**See:** `.project/ai/config/mcp_usage_guide.md` for complete guide | `docs/mcp-debugging/README.md` for workflows
+**See:** `.project/ai/guides/mcp_usage_guide.md` for complete guide | `docs/mcp-debugging/README.md` for workflows
 
 **For Claude:** Auto-trigger MCPs based on task keywords (NO user confirmation needed).
 
@@ -550,13 +552,13 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 - Testing: pytest-mcp -> puppeteer -> mcp-analyzer
 - Research: Grep -> filesystem -> git-mcp -> pandas-mcp
 
-**Configuration:** `.mcp.json` (12 servers) | **See**: `.project/ai/config/mcp_usage_guide.md` for complete auto-trigger keywords and orchestration patterns
+**Configuration:** `.mcp.json` (12 servers) | **See**: `.project/ai/guides/mcp_usage_guide.md` for complete auto-trigger keywords and orchestration patterns
 
 ------
 
 ## 21) Phase 3 Ui/ux Status & Maintenance Mode
 
-**See:** `.project/ai/config/phase3_status.md` for complete status.
+**See:** `.project/ai/guides/phase3_status.md` for complete status.
 
 **Quick Reference:**
 - Phase 3: [OK] COMPLETE (34/34 issues, October 9-17, 2025)
@@ -625,9 +627,9 @@ result = checkpoint_task_launch(task_id="LT-4", agent_id="agent1", task_config={
 
 **Status**: [OK] Operational (November 2025)
 
-**See**: `.project/dev_tools/TASK_WRAPPER_USAGE.md` for complete guide, code examples, multi-agent patterns, and configuration options
+**See**: `.project/tools/checkpoints/TASK_WRAPPER_USAGE.md` for complete guide, code examples, multi-agent patterns, and configuration options
 
-**See Also**: `.project/ai/config/agent_checkpoint_system.md` (design), `.project/ai/config/agent_orchestration.md` (patterns)
+**See Also**: `.project/ai/guides/agent_checkpoint_system.md` (design), `.project/ai/guides/agent_orchestration.md` (patterns)
 
 ------
 
