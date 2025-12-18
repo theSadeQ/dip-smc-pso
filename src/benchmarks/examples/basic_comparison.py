@@ -24,8 +24,8 @@ from pathlib import Path
 # Add parent directories to path for imports
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
-from benchmarks.benchmark import IntegrationBenchmark
-from benchmarks.comparison import ComparisonScenario
+from src.benchmarks.benchmark import IntegrationBenchmark
+from src.benchmarks.comparison import ComparisonScenario
 import numpy as np
 
 
