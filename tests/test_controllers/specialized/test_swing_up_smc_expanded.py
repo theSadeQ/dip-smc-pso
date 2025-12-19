@@ -18,7 +18,7 @@ import pytest
 import numpy as np
 from unittest.mock import Mock
 
-from src.controllers.swing_up_smc import SwingUpSMC
+from src.controllers.specialized.swing_up_smc import SwingUpSMC
 
 
 class SimpleDynamics:

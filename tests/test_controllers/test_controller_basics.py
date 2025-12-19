@@ -22,9 +22,9 @@ import pytest
 # Import from src.* now that pytest.ini configures pythonpath properly
 
 from src.controllers.factory import create_controller
-from src.controllers.classic_smc import ClassicalSMC
-from src.controllers.sta_smc import SuperTwistingSMC
-from src.controllers.adaptive_smc import AdaptiveSMC
+from src.controllers.smc.classic_smc import ClassicalSMC
+from src.controllers.smc.sta_smc import SuperTwistingSMC
+from src.controllers.smc.adaptive_smc import AdaptiveSMC
 
 
 def test_sta_smc_state_vars_signature() -> None:

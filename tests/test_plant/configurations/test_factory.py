@@ -21,7 +21,7 @@ import pytest
 # Import from src.* now that pytest.ini configures pythonpath properly
 
 from src.controllers.factory import create_controller_legacy as create_controller, _canonical
-from src.controllers.classic_smc import ClassicalSMC
+from src.controllers.smc.classic_smc import ClassicalSMC
 
 
 def test_factory_importable() -> None:

@@ -33,7 +33,7 @@ from ..comparison import IntegrationMethodComparator, ComparisonScenario
 # Original imports for compatibility
 sys.path.append("../..")
 from src.config import load_config
-from src.controllers.classic_smc import ClassicalSMC
+from src.controllers.smc.classic_smc import ClassicalSMC
 from src.plant import SimplifiedDIPDynamics as DIPDynamics
 from src.utils.config_compatibility import wrap_physics_config
 

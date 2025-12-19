@@ -1,6 +1,6 @@
 """Test using compatibility layer imports (same as pytest test)."""
 import numpy as np
-from src.controllers.sta_smc import SuperTwistingSMC
+from src.controllers.smc.sta_smc import SuperTwistingSMC
 from src.core.dynamics import DoubleInvertedPendulum
 from src.core.vector_sim import simulate_system_batch
 

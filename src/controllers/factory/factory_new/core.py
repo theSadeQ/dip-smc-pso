@@ -38,9 +38,9 @@ from src.core.dynamics import DIPDynamics
 
 # Local imports - Controller implementations
 from src.controllers.smc.algorithms.hybrid.controller import ModularHybridSMC
-from src.controllers.classic_smc import ClassicalSMC
-from src.controllers.sta_smc import SuperTwistingSMC
-from src.controllers.adaptive_smc import AdaptiveSMC
+from src.controllers.smc.classic_smc import ClassicalSMC
+from src.controllers.smc.sta_smc import SuperTwistingSMC
+from src.controllers.smc.adaptive_smc import AdaptiveSMC
 
 # Import exceptions from legacy factory
 from src.controllers.factory.legacy_factory import FactoryConfigurationError

@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.controllers.swing_up_smc import SwingUpSMC
+from src.controllers.specialized.swing_up_smc import SwingUpSMC
 
 
 class DummyStabilizer:

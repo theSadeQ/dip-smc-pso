@@ -18,9 +18,9 @@ from typing import Any, Dict, List, Optional
 from .types import ConfigValueError
 
 # Local imports - Controller implementations
-from src.controllers.classic_smc import ClassicalSMC
-from src.controllers.sta_smc import SuperTwistingSMC
-from src.controllers.adaptive_smc import AdaptiveSMC
+from src.controllers.smc.classic_smc import ClassicalSMC
+from src.controllers.smc.sta_smc import SuperTwistingSMC
+from src.controllers.smc.adaptive_smc import AdaptiveSMC
 from src.controllers.smc.algorithms.hybrid.controller import ModularHybridSMC
 
 # Local imports - Configuration classes with fallback handling

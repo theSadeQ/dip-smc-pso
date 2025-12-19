@@ -28,7 +28,7 @@ except Exception:
         DoubleInvertedPendulum = object  # type: ignore
 
 try:
-    from src.controllers.classic_smc import ClassicalSMC  # type: ignore
+    from src.controllers.smc.classic_smc import ClassicalSMC  # type: ignore
 except Exception:
     try:
         from controllers.classic_smc import ClassicalSMC  # type: ignore
