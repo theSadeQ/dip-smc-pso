@@ -7,6 +7,11 @@ Advanced PSO Integration Module for SMC Controllers.
 
 This module provides optimized integration between SMC controllers and PSO optimization,
 featuring thread-safe operations, performance monitoring, and comprehensive error handling.
+Consolidates PSO-related utilities from:
+- pso_integration.py (500 lines) - Primary PSO optimization integration
+- factory_new/utils.py (103 lines) - Performance monitoring utilities
+
+Week 1 aggressive factory refactoring (18 files -> 6 files).
 """
 
 import logging
