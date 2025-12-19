@@ -1,0 +1,43 @@
+DOCS ROOT REORGANIZATION ANALYSIS - COMPLETE INVENTORY
+======================================================
+
+102 FILES AT DOCS/ ROOT - ALL CATEGORIZED
+
+KEEP AT ROOT (6 files):
+- index.md (Sphinx entry)
+- conf.py (Sphinx config, 20KB)
+- Makefile (Build automation)
+- README.md (Docs entry)
+- CODEOWNERS (GitHub)
+- requirements.txt (Dependencies)
+
+MOVE TO SUBDIRECTORIES (71 markdown files):
+- Theory & Math (14) → docs/theory/
+- PSO Optimization (11) → docs/optimization/
+- Production (6) → docs/production/
+- Testing (8) → docs/testing/
+- Architecture (5) → docs/architecture/
+- Guides (8) → docs/guides/
+- Reference (4) → docs/reference/
+- Meta (13) → docs/meta/
+
+MOVE TO ARTIFACTS (12 text files):
+- 11 build logs (313KB) → .artifacts/docs_build/logs/
+- 1 requirements.txt → KEEP at root
+
+MOVE SCRIPTS (6 Python files):
+- 3 validation scripts → .project/tools/validation/docs/
+- 3 utility scripts → .project/tools/docs/
+
+MOVE DATA (7 files):
+- 2 JSON → docs/_data/citations/
+- 1 CSV citations → docs/_data/citations/
+- 1 CSV specs → docs/_data/specs/
+- 1 CSV traceability → .artifacts/docs_build/reports/
+- 1 bib file → docs/bib/
+- 1 HTML static → docs/_static/pwa/
+
+DELETE (1 file):
+- index.md.bak (backup, 9.5KB)
+
+CLEANUP IMPACT: 102 → 6 files (94% reduction)
