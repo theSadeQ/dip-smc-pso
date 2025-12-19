@@ -15,8 +15,8 @@ SINGLE JOB: Test only computational speed of controller compute_control methods.
 import numpy as np
 import pytest
 
-from src.controllers.classic_smc import ClassicalSMC
-from src.controllers.sta_smc import SuperTwistingSMC
+from src.controllers.smc.classic_smc import ClassicalSMC
+from src.controllers.smc.sta_smc import SuperTwistingSMC
 
 try:
     from src.controllers.factory import create_controller

@@ -10,7 +10,7 @@ if 'src.plant.models.simplified.dynamics' in sys.modules:
     del sys.modules['src.plant.models.simplified.dynamics']
 
 import numpy as np
-from src.controllers.sta_smc import SuperTwistingSMC
+from src.controllers.smc.sta_smc import SuperTwistingSMC
 from src.core.dynamics import DoubleInvertedPendulum
 from src.core.vector_sim import simulate_system_batch
 from src.plant.models.simplified.config import SimplifiedDIPConfig

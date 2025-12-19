@@ -21,7 +21,7 @@ from __future__ import annotations
 from typing import Tuple
 import numpy as np
 
-from src.controllers.mpc_controller import _numeric_linearize_continuous
+from src.controllers.mpc.mpc_controller import _numeric_linearize_continuous
 
 
 def _controllability_matrix(A: np.ndarray, B: np.ndarray) -> np.ndarray:

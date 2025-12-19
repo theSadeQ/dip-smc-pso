@@ -12,8 +12,8 @@ import sys
 import numpy as np
 import pytest
 
-from src.controllers.classic_smc import ClassicalSMC
-from src.controllers.sta_smc import SuperTwistingSMC
+from src.controllers.smc.classic_smc import ClassicalSMC
+from src.controllers.smc.sta_smc import SuperTwistingSMC
 from src.core.dynamics import DoubleInvertedPendulum
 from src.core.vector_sim import simulate_system_batch
 

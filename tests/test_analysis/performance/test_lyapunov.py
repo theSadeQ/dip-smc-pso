@@ -14,7 +14,7 @@ Each section is delimited by BEGIN/END markers.
 import numpy as np
 import pytest
 
-from src.controllers.sta_smc import SuperTwistingSMC
+from src.controllers.smc.sta_smc import SuperTwistingSMC
 from src.core.dynamics import DoubleInvertedPendulum
 from src.core.vector_sim import simulate_system_batch
 

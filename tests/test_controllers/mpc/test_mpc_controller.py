@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.controllers.mpc_controller import MPCController
+from src.controllers.mpc.mpc_controller import MPCController
 
 
 class LinearModel:

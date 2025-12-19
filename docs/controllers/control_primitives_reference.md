@@ -109,7 +109,7 @@ else: sigma_active = dead_zone(sigma, self.dead_zone) dK = self.gamma * abs(sigm
 # runnable: false class ClassicalSMCOutput(NamedTuple): """Return type for ClassicalSMC.compute_control(). Attributes: u: Saturated control input (N) state: Internal controller state (empty tuple for stateless) history: History dictionary for debugging/plotting """ u: float state: Tuple[Any, ...] history: Dict[str, Any]
 ``` **Usage:** ```python
 
-from src.controllers.classic_smc import ClassicalSMC controller = ClassicalSMC(gains=[10, 8, 15, 12, 50, 5], max_force=100, boundary_layer=0.01)
+from src.controllers.smc.classic_smc import ClassicalSMC controller = ClassicalSMC(gains=[10, 8, 15, 12, 50, 5], max_force=100, boundary_layer=0.01)
 result = controller.compute_control(state, (), {}) # Access via attributes
 control_input = result.u
 controller_state = result.state
@@ -288,7 +288,7 @@ sigma = recompute_sliding_surface(state) # Redundant!
 - **Output Structures**: Prefer NamedTuple for type safety and clarity
 - **Parameter Validation**: Validate early, fail fast with clear error messages
 - **Numerical Stability**: Always use safe operations for division, square roots, and logarithms For implementation examples, see:
-- `src/controllers/classic_smc.py` - Classical SMC using saturate()
+- `src/controllers/smc/classic_smc.py` - Classical SMC using saturate()
 - `src/controllers/adaptive_smc.py` - Adaptive SMC using dead_zone()
 - `src/controllers/sta_smc.py` - Super-Twisting SMC using safe_sqrt()
 - `tests/test_utils/` - test suite for all primitives **Next Steps:**
