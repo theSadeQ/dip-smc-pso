@@ -7,6 +7,15 @@ Controller Registry Management - Centralized Controller Metadata
 
 Manages the central registry of available controllers with comprehensive metadata,
 validation rules, and type-safe access patterns.
+
+Consolidates controller registry from core/registry.py and factory_new/registration.py
+during Week 1 aggressive factory refactoring (18 files → 6 files).
+
+This module manages:
+- CONTROLLER_REGISTRY: Central metadata for all controller types
+- Controller aliases and normalization
+- Registry access functions with validation
+- Default gains and bounds management
 """
 
 from typing import Dict, Any, List
@@ -38,7 +47,7 @@ try:
     from src.controllers.smc.algorithms.hybrid.config import HybridSMCConfig as HybridAdaptiveSTASMCConfig
     CONFIG_CLASSES_AVAILABLE = True
 except ImportError:
-    from ..fallback_configs import (
+    from .fallback_configs import (
         ClassicalSMCConfig,
         STASMCConfig,
         AdaptiveSMCConfig,
