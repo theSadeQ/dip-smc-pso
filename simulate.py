@@ -379,7 +379,7 @@ def _run_pso(args: Args) -> int:
 
 
     try:
-        from src.optimizer.pso_optimizer import PSOTuner
+        from src.optimization.algorithms.pso_optimizer import PSOTuner
         from src.optimization.algorithms.robust_pso_optimizer import RobustPSOTuner
         from src.controllers.factory import create_controller
     except ModuleNotFoundError as e:

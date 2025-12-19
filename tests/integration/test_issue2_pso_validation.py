@@ -18,7 +18,7 @@ from typing import Dict, List
 
 from src.config import load_config
 from src.controllers.factory import create_controller
-from src.optimizer.pso_optimizer import PSOTuner
+from src.optimization.algorithms.pso_optimizer import PSOTuner
 from src.core.simulation_context import SimulationContext
 
 

@@ -89,7 +89,7 @@ results = runner.run(initial_state=[0.1, 0.0, 0.05, 0.0, 0.1, 0.0], duration=2.0
 ``` ### PSO Optimization Integration ```python
 
 from src.controllers.factory import create_smc_for_pso, SMCType
-from src.optimizer.pso_optimizer import PSOTuner def fitness_function(gains): controller = create_smc_for_pso(SMCType.CLASSICAL, gains) # Evaluate controller performance return performance_score # Configure PSO optimization
+from src.optimization.algorithms.pso_optimizer import PSOTuner def fitness_function(gains): controller = create_smc_for_pso(SMCType.CLASSICAL, gains) # Evaluate controller performance return performance_score # Configure PSO optimization
 tuner = PSOTuner()
 best_gains = tuner.optimize(fitness_function, bounds=gain_bounds)
 ``` ## Performance Characteristics ### Computation Time

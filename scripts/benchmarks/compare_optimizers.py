@@ -46,7 +46,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from src.config import load_config
 from src.controllers.factory import create_controller
-from src.optimizer.pso_optimizer import PSOTuner
+from src.optimization.algorithms.pso_optimizer import PSOTuner
 from src.optimizer.ga_optimizer import GATuner
 from src.optimizer.de_optimizer import DETuner
 

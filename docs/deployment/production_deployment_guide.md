@@ -413,7 +413,7 @@ else echo "FAIL" exit 1
 fi # Test 3: PSO Integration
 echo -n "3. PSO Integration: "
 if python3 -c "
-from src.optimizer.pso_optimizer import PSOTuner
+from src.optimization.algorithms.pso_optimizer import PSOTuner
 config = {'dt': 0.01, 'duration': 5.0}
 tuner = PSOTuner('classical_smc', config, {})
 # Quick optimization test
