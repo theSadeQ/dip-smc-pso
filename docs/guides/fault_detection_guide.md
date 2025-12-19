@@ -19,7 +19,7 @@ fdi: enabled: true residual_threshold: 0.150 persistence_counter: 10 residual_st
 python simulate.py --ctrl classical_smc --plot --plot-fdi
 ``` ### Programmatic Usage ```python
 
-from src.fault_detection.fdi import FDIsystem
+from src.analysis.fault_detection.fdi import FDIsystem
 from src.core.dynamics import DoublePendulum
 import numpy as np # Create FDI system with calibrated threshold and hysteresis
 fdi = FDIsystem( residual_threshold=0.150, # Statistically calibrated (Issue #18) persistence_counter=10, residual_states=[0, 1, 2], # Monitor position and angles hysteresis_enabled=True, # Prevent oscillation near threshold hysteresis_upper=0.165, hysteresis_lower=0.135
