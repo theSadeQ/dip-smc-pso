@@ -404,6 +404,14 @@ config = load_config("config.yaml", allow_unknown=False)
 - [OK] 8 README files added with research task provenance
 - [OK] 567 files scanned, 8 modified, imports auto-updated
 
+**Dec 19, 2025 - Scripts Directory:**
+- [OK] scripts/ → Publication-ready structure (21 root files → 5 root files, 73% reduction)
+- [OK] Consolidated duplicate directories: documentation/ + docs_organization/ → docs/
+- [OK] Created categorized subdirectories: testing/, infrastructure/, utils/
+- [OK] 18 files moved with git mv (history preserved), 4 files updated (path/import fixes)
+- [OK] 195 Python scripts across 21 categorized subdirectories
+- [OK] Migration docs: scripts/README.md, scripts/MIGRATION_HISTORY.md
+
 **Dec 19, 2025 - Logs/Monitoring + Optimization Results:**
 - [OK] monitoring_data/ (56MB) → .logs/archive/ (compressed to 214KB, 99.6% reduction)
 - [OK] 13 PSO logs (978KB) → .logs/pso/ (from optimization_results/)
@@ -416,7 +424,7 @@ config = load_config("config.yaml", allow_unknown=False)
 - [OK] logs/ → .logs/ (hidden, centralized logging)
 - [OK] notebooks/ → docs/tutorials/notebooks/
 - [OK] Research outputs from benchmarks/ → .artifacts/research/
-- [OK] Scripts organized: 55 → 15 at root, 40 in subdirectories
+- [OK] Scripts organized: 55 → 15 at root, 40 in subdirectories (superseded by Dec 19 reorganization)
 
 ### Protected Files (never Delete)
 - `D:\Tools\Claude\Switch-ClaudeAccount.ps1` - Multi-account switcher (EXTERNAL LOCATION)

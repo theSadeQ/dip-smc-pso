@@ -22,7 +22,7 @@ ASCII_WARN = "[WARNING]"
 ASCII_ERROR = "[ERROR]"
 
 # Paths
-LOG_FILE = Path("benchmarks/research/phase4_2/pso_optimization.log")
+LOG_FILE = Path(".logs/benchmarks/research/phase4_2/pso_optimization.log")
 RESULTS_FILE = Path("benchmarks/research/phase4_2/phase4_2_pso_results.json")
 BASELINE_FILE = Path("benchmarks/research/phase4_2/phase4_2_baseline.json")
 
