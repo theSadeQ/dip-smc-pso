@@ -283,6 +283,98 @@ All imports automatically updated by `scripts/migration/update_benchmark_paths.p
 - Complete reorganization plan: `C:\Users\SadeQ\.claude42\plans\polished-inventing-spindle.md`
 - Benchmark README files: `benchmarks/README.md`, `benchmarks/raw/*/README.md`
 
+## Logs and Monitoring Consolidation
+
+**Status:** Consolidated December 19, 2025
+
+### Legacy Directories Removed
+
+**Visible directories removed from root:**
+- `logs/` (120 KB) → `.logs/` (centralized)
+- `monitoring_data/` (56 MB) → `.logs/archive/` (compressed to 214 KB)
+
+**Result:** Removed 1 visible root directory (monitoring_data/), improved workspace hygiene
+
+**Note:** `logs/` directory still exists with 1 locked file (pso_results.db, 0 bytes) pending manual cleanup
+
+### Centralized Logging Structure
+
+All logs now in `.logs/` (hidden directory):
+
+```
+.logs/
+├── README.md                       # Documentation and retention policies
+├── combined_YYYYMMDD.log           # Active MCP server logs
+├── archive/                        # Compressed historical logs
+│   └── 2025-12-16/                 # Compressed monitoring logs
+│       └── data_manager_20251216.log.gz (214 KB, was 56 MB)
+├── benchmarks/                     # Research task logs (9.7 MB)
+├── pso/                            # PSO optimization logs (978 KB)
+│   ├── 2025-12-09_*.log            # Root PSO logs (from optimization_results/)
+│   └── phase2/                     # Phase 2 PSO logs
+├── monitoring/                     # Monitoring system logs (reserved)
+└── test/                           # Test runner logs (reserved)
+```
+
+**Total Size:** 12 MB (well under 100 MB target)
+
+### Optimization Results Restructuring
+
+Organized PSO gains and analysis results for clarity:
+
+```
+optimization_results/
+├── README.md                       # Comprehensive documentation
+├── active/                         # Current working results (MT-8, test panels)
+├── phases/                         # Phase-organized gains
+│   ├── phase2/gains/               # Comprehensive benchmark gains
+│   └── phase53/                    # Lyapunov-optimized gains
+├── analysis_results/               # Comparison JSONs, summary statistics
+│   ├── phase2_summary.json
+│   ├── phase2_vs_mt8_comparison.json
+│   └── standard_vs_robust_comparison.json
+└── archive/                        # Historical/deprecated gains
+    ├── 2024_10/                    # October 2024 gains
+    └── robust_2025_12/             # December 2025 robust variants
+```
+
+**Changes:**
+- Moved 13 PSO logs (978 KB) → `.logs/pso/`
+- Organized gains: active/, phases/, analysis_results/, archive/
+- Removed empty directories: analysis/, comparisons/
+- Created comprehensive README.md
+
+### Centralized Path Configuration
+
+**Single Source of Truth:** `src/utils/logging/paths.py`
+
+All logging uses centralized configuration:
+```python
+from src.utils.logging.paths import LOG_DIR, PSO_LOG_DIR, MONITORING_LOG_DIR
+
+# Automatically resolves to .logs/ subdirectories
+pso_log = PSO_LOG_DIR / f"{datetime.now():%Y%m%d}_{controller}_pso.log"
+```
+
+**Environment Override:**
+```bash
+export LOG_DIR="/custom/log/path"  # Override default .logs/
+```
+
+### DO NOT
+
+- Create logs in root directory (use `.logs/`)
+- Hardcode "logs/" paths (use `src/utils/logging/paths.py`)
+- Create visible log directories (always use hidden `.logs/`)
+- Store PSO logs in `optimization_results/` (use `.logs/pso/`)
+
+### See Also
+
+- Log paths config: `src/utils/logging/paths.py`
+- Logging handlers: `src/utils/logging/handlers.py`
+- Logs README: `.logs/README.md`
+- Optimization results README: `optimization_results/README.md`
+
 ## Long-Running Optimization Processes (PSO)
 
 **Best practices for managing multi-hour PSO optimization runs:**
