@@ -42,8 +42,7 @@ from .factory import (
     get_gain_bounds_for_pso,
     validate_smc_gains,
 
-    # Specifications
-    SMC_GAIN_SPECS
+
 )
 
 # Import individual SMC controllers for direct access
@@ -105,7 +104,7 @@ __all__ = [
     "validate_smc_gains",
 
     # Gain Specifications
-    "SMC_GAIN_SPECS",
+    "",
 
     # ========================================
     # SECONDARY API (optional)
