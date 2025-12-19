@@ -251,7 +251,7 @@ hil:
 ### FDI Integration Example
 
 ```python
-from src.fault_detection.fdi import FaultDetector
+from src.analysis.fault_detection.fdi import FaultDetector
 from src.interfaces.hil.plant_server import PlantServer
 
 # Create FDI system with HIL-specific fault types
