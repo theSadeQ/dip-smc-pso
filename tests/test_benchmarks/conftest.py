@@ -20,8 +20,8 @@ from typing import List, Dict
 import numpy as np
 import pytest
 
-from benchmarks.benchmark import IntegrationBenchmark
-from benchmarks.comparison import ComparisonScenario
+from src.benchmarks.benchmark import IntegrationBenchmark
+from src.benchmarks.comparison import ComparisonScenario
 
 
 @pytest.fixture

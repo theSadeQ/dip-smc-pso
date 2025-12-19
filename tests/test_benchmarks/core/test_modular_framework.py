@@ -22,8 +22,8 @@ from typing import List
 import numpy as np
 import pytest
 
-from benchmarks.benchmark import IntegrationBenchmark
-from benchmarks.comparison import ComparisonScenario
+from src.benchmarks.benchmark import IntegrationBenchmark
+from src.benchmarks.comparison import ComparisonScenario
 
 
 def test_comprehensive_method_comparison(integration_benchmark: IntegrationBenchmark, test_scenarios: List[ComparisonScenario]):

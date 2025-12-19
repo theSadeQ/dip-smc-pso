@@ -190,7 +190,7 @@ def main():
 
     # Generate CSV
     print("\n[4/4] Generating CSV...")
-    output_path = "benchmarks/baseline_performance.csv"
+    output_path = "benchmarks/raw/baselines/baseline_performance.csv"
     generate_performance_csv(metrics, output_path)
 
     print("\n" + "=" * 80)
