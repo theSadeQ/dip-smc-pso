@@ -43,9 +43,9 @@ def _build_dynamics(cfg: dict):
     use_full = bool(_get(cfg, "simulation.use_full_dynamics", False))
     try:
         if use_full:
-            from src.models.double_inverted_pendulum_full import DoubleInvertedPendulumFull as Model
+            from src.plant.models.full.full_dynamics import FullDynamics as Model
         else:
-            from src.models.double_inverted_pendulum_light import DoubleInvertedPendulumLight as Model
+            from src.plant.models.simplified.simplified_dynamics import SimplifiedDynamics as Model
     except Exception:
         class Model:
             def __init__(self, dt: float):
