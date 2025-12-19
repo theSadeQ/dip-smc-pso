@@ -347,7 +347,7 @@ config = load_config("config.yaml", allow_unknown=False)
 
 **Quick Reference:**
 - Target: ≤19 visible root items, ≤100MB .logs/
-- Current: 20 visible items (3 locked files pending cleanup), 56MB .logs/ [OK] (Dec 17, 2025 cleanup)
+- Current: 22 visible items (1 locked file pending cleanup), 12MB .logs/ [OK] (Dec 19, 2025)
 - Centralized log paths: `src/utils/logging/paths.py` (single source of truth)
 - Use `.project/` for ALL AI/dev configs (CANONICAL)
 - Use `.artifacts/` for research outputs and thesis
@@ -380,7 +380,9 @@ config = load_config("config.yaml", allow_unknown=False)
 - **Runtime logs**: `.logs/` (centralized logging, hidden directory)
   - `test_core_validation.log` - Pytest test runs
   - `monitoring/` - Runtime monitoring system logs and data
-  - `pso_*.log` - PSO optimization logs (timestamped)
+  - `pso/` - PSO optimization logs (978KB, 13 logs from optimization_results migration)
+  - `benchmarks/` - Research task logs (9.7MB)
+  - `archive/` - Compressed historical logs (214KB compressed from 56MB)
 - **Runtime caches**: `.cache/` (pytest, hypothesis, htmlcov, benchmarks)
 - **Visible directories** (8): `src/`, `tests/`, `docs/`, `scripts/`, `data/`, `benchmarks/`, `optimization_results/`, `envs/`
 - **Root files** (9 core + 2 MCP): `README.md`, `CHANGELOG.md`, `CLAUDE.md`, `config.yaml`, `requirements.txt`, `simulate.py`, `streamlit_app.py`, `package.json`, `package-lock.json`
@@ -402,6 +404,13 @@ config = load_config("config.yaml", allow_unknown=False)
 - [OK] 8 README files added with research task provenance
 - [OK] 567 files scanned, 8 modified, imports auto-updated
 
+**Dec 19, 2025 - Logs/Monitoring + Optimization Results:**
+- [OK] monitoring_data/ (56MB) → .logs/archive/ (compressed to 214KB, 99.6% reduction)
+- [OK] 13 PSO logs (978KB) → .logs/pso/ (from optimization_results/)
+- [OK] optimization_results/ restructured: active/, phases/, analysis_results/, archive/
+- [OK] Removed 1 visible directory (monitoring_data/), 22 visible items total
+- [OK] .logs/ size: 12MB (under 100MB target)
+
 **Dec 17, 2025 - Workspace:**
 - [OK] thesis/ (98MB) → .artifacts/thesis/
 - [OK] logs/ → .logs/ (hidden, centralized logging)
@@ -414,11 +423,11 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ### Weekly Health Check
 ```bash
-ls | wc -l                                          # ≤19 visible items (current: 18)
+ls | wc -l                                          # ≤19 visible items (current: 22)
 find . -maxdepth 1 -type d -name ".*" | wc -l      # ≤9 hidden dirs (current: 9)
 du -sh .cache/                                      # <50MB
 du -sh .artifacts/                                  # <150MB (includes 98MB thesis)
-du -sh .logs/                                       # <100MB (monitoring data)
+du -sh .logs/                                       # <100MB (current: 12MB)
 ```
 
 **See Also**: `.project/archive/RESTRUCTURING_PLAN_2025-10-26.md` | `.project/archive/WORKSPACE_CLEANUP_2025-10-26.md`
