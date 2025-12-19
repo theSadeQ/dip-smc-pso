@@ -235,7 +235,7 @@ controller = ClassicalSMC( gains=[10, 8, 15, 12, 50, 5], max_force=100.0, bounda
 )
 ``` ### 2. PSO Optimization Integration #### 2.1 Gain Bounds Definition ```python
 
-from src.optimizer.pso_optimizer import PSOTuner # Define PSO search space
+from src.optimization.algorithms.pso_optimizer import PSOTuner # Define PSO search space
 pso_bounds = [ (1.0, 50.0), # k1: velocity gain 1 (1.0, 50.0), # k2: velocity gain 2 (1.0, 100.0), # lam1: position gain 1 (1.0, 100.0), # lam2: position gain 2 (5.0, 200.0), # K: switching gain (0.0, 50.0), # kd: damping gain
 ] # Run PSO optimization
 tuner = PSOTuner(bounds=pso_bounds, n_particles=30, iters=200)

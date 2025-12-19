@@ -91,7 +91,7 @@ pso: bounds: classical_smc: min: [1.0, 1.0, 1.0, 1.0, 5.0, 0.1] max: [100.0, 100
 # 1. Create controller factory
 from src.controllers.factory import create_pso_controller_factory, SMCType
 controller_factory = create_pso_controller_factory(SMCType.CLASSICAL, plant_config) # 2. Initialize PSO tuner
-from src.optimizer.pso_optimizer import PSOTuner
+from src.optimization.algorithms.pso_optimizer import PSOTuner
 tuner = PSOTuner(controller_factory, config) # 3. Run optimization
 result = tuner.optimise()
 optimal_gains = result['best_pos']

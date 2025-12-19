@@ -147,7 +147,7 @@ The following documentation is automatically generated from Python docstrings us
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: src.optimizer.pso_optimizer
+.. automodule:: src.optimization.algorithms.pso_optimizer
    :members:
    :undoc-members:
    :show-inheritance:
@@ -195,7 +195,7 @@ The following documentation is automatically generated from Python docstrings us
 - **src.controllers.hybrid_adaptive_sta_smc** - Hybrid adaptive STA-SMC
 
 ### Optimization Modules
-- **src.optimizer.pso_optimizer** - PSO tuning algorithms
+- **src.optimization.algorithms.pso_optimizer** - PSO tuning algorithms
 - **src.optimizer.cost_functions** - Cost function definitions
 
 ### MT-6 Analysis Scripts

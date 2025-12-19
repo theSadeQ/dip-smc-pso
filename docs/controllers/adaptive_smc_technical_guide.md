@@ -564,7 +564,7 @@ controller = create_controller(
 ## 2. PSO Optimization Integration
 
 ```python
-from src.optimizer.pso_optimizer import PSOTuner
+from src.optimization.algorithms.pso_optimizer import PSOTuner
 
 # Define PSO search space for 5 gains
 pso_bounds = [

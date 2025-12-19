@@ -202,7 +202,7 @@ from src.controllers.factory import create_controller # Create via factory (reco
 controller = create_controller( 'hybrid_adaptive_sta_smc', gains=[77.6216, 44.449, 17.3134, 14.25], max_force=100.0
 )
 ``` ### 2. PSO Optimization Integration #### 2.1 Gain Bounds Definition ```python
-from src.optimizer.pso_optimizer import PSOTuner # Define PSO search space for hybrid controller
+from src.optimization.algorithms.pso_optimizer import PSOTuner # Define PSO search space for hybrid controller
 pso_bounds = [ (1.0, 100.0), # c1: First pendulum weight (1.0, 100.0), # λ1: First pendulum damping (1.0, 20.0), # c2: Second pendulum weight (1.0, 20.0), # λ2: Second pendulum damping
 ] # Run PSO optimization
 tuner = PSOTuner(bounds=pso_bounds, n_particles=20, iters=200)
