@@ -60,7 +60,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('benchmarks/mt8_disturbance_rejection.log'),
+        logging.FileHandler('.logs/benchmarks/mt8_disturbance_rejection.log'),
         logging.StreamHandler()
     ]
 )
