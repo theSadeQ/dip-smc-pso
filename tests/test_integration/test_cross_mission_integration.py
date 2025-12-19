@@ -59,7 +59,7 @@ mission_components = {}
 
 # Mission 1-3: Core infrastructure
 try:
-    from src.controllers.factory.smc_factory import SMCFactory, SMCType, SMCConfig
+    from src.controllers.factory.base import SMCFactory, SMCType, SMCConfig
     from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
     from src.plant.models.full.dynamics import FullDIPDynamics  # noqa: F401
     mission_components['core'] = True

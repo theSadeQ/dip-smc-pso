@@ -13,7 +13,7 @@ import pytest
 import numpy as np
 from typing import List
 
-from src.controllers.factory.core.validation import (
+from src.controllers.factory.validation import (
     ValidationResult,
     validate_controller_gains,
     validate_configuration,

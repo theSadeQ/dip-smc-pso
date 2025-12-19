@@ -37,7 +37,7 @@ import sys
 sys.path.append(str(Path(__file__).parent.parent.parent.parent / "src"))
 
 try:
-    from src.controllers.factory.smc_factory import SMCFactory, SMCType, SMCConfig
+    from src.controllers.factory.base import SMCFactory, SMCType, SMCConfig
     from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
     from src.plant.models.full.dynamics import FullDIPDynamics  # noqa: F401
     from src.simulation.engines.simulation_runner import SimulationRunner  # noqa: F401
@@ -569,7 +569,7 @@ class IntegratedBenchmarkOrchestrator:
 
         try:
             # Create a simple PSO test with very few iterations
-            spec = SMC_GAIN_SPECS[smc_type]  # noqa: F821 - conditional import or test mock
+            spec =[smc_type]  # noqa: F821 - conditional import or test mock
             bounds = spec.gain_bounds
 
             # Mock PSO optimization (simplified for testing)
