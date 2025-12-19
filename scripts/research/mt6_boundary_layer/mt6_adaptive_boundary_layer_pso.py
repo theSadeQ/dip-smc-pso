@@ -46,7 +46,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('benchmarks/mt6_adaptive_optimization.log'),
+        logging.FileHandler('.logs/benchmarks/mt6_adaptive_optimization.log'),
         logging.StreamHandler()
     ]
 )

@@ -29,7 +29,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from src.config import load_config
 from src.controllers.factory import create_controller
 from src.plant.core.dynamics import DIPDynamics
-from scripts.mt8_disturbance_rejection import (
+from scripts.research.mt8_disturbances.mt8_disturbance_rejection import (
     create_step_scenario,
     create_impulse_scenario,
     create_sinusoidal_scenario,

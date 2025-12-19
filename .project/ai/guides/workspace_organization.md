@@ -85,22 +85,31 @@ find . -name "*.bak" -o -name "*.backup" -o -name "*~" | wc -l  # target = 0
    - Analysis reports → `docs/analysis/`
    - Historical docs → `.archive/docs_{date}/`
 
-5. **Scripts** → `scripts/` with subdirectories
-   - Optimization scripts → `scripts/optimization/`
-   - Analysis scripts → `scripts/analysis/`
-   - Utility scripts → `scripts/utils/`
+5. **Scripts** → `scripts/` with categorized subdirectories (reorganized Dec 19, 2025)
+   - **Entry points at root:** `run_tests.sh/bat`, `rebuild-docs.cmd` (frequently-used only)
+   - **docs/** (55 scripts) - Documentation generation, validation, QA
+   - **validation/** (6 scripts) - Test validation, quality checks
+   - **testing/** (2 scripts) - Test infrastructure, baseline tests
+   - **optimization/** (20 scripts) - PSO tuning, monitoring, chattering optimization
+   - **research/** (75 scripts) - Research task automation (lt7, mt6, mt7, mt8)
+   - **analysis/** (12 scripts) - Performance analysis, benchmarking, visualization
+   - **monitoring/** (2 scripts) - Real-time dashboards (Streamlit)
+   - **infrastructure/** (1 script) - System diagnostics (pytest Unicode)
+   - **utils/** - Standalone utilities (reserved)
+   - **See:** `scripts/README.md`, `scripts/MIGRATION_HISTORY.md`
+   - **Result:** 21 root files → 5 root files (73% reduction, publication-ready)
 
 ### Before Session Ends Checklist
 
 - [x] Move all logs to `.logs/` directory (completed Dec 17, 2025)
 - [x] Centralize log paths via `src/utils/logging/paths.py` (completed Dec 17, 2025)
 - [x] Archive old logs to `.logs/archive/YYYY-MM-DD/` (completed Dec 17, 2025)
+- [x] Move any root-level scripts to appropriate `scripts/` subdirectory (completed Dec 19, 2025)
 - [ ] Delete or archive test artifacts
 - [ ] Organize optimization results into timestamped directories
-- [ ] Move any root-level scripts to appropriate `scripts/` subdirectory
 - [ ] Archive temporary documentation files
-- [ ] Verify root item count: `ls | wc -l` (target: ≤19 visible, current: 20, pending 3 locked files)
-- [ ] Verify `.logs/` size: `du -sh .logs/` (target: ≤100MB, current: 56MB [OK])
+- [ ] Verify root item count: `ls | wc -l` (target: ≤19 visible, current: 22 post-reorg)
+- [ ] Verify `.logs/` size: `du -sh .logs/` (target: ≤100MB, current: 12MB [OK])
 - [ ] Clean caches: `find . -name "__pycache__" -type d -exec rm -rf {} +`
 
 ### File Naming Conventions
