@@ -11,7 +11,7 @@ Tests registry access functions, controller metadata, aliases, and validation.
 import pytest
 from unittest.mock import patch, MagicMock
 
-from src.controllers.factory.core.registry import (
+from src.controllers.factory.registry import (
     CONTROLLER_REGISTRY,
     CONTROLLER_ALIASES,
     get_controller_info,
@@ -467,12 +467,12 @@ class TestMPCControllerRegistration:
 
     def test_mpc_availability_is_boolean(self):
         """Test that MPC_AVAILABLE is a boolean flag."""
-        from src.controllers.factory.core.registry import MPC_AVAILABLE
+        from src.controllers.factory.registry import MPC_AVAILABLE
         assert isinstance(MPC_AVAILABLE, bool)
 
     def test_mpc_registration_consistent_with_availability(self):
         """Test that MPC registration is consistent with availability flag."""
-        from src.controllers.factory.core.registry import MPC_AVAILABLE
+        from src.controllers.factory.registry import MPC_AVAILABLE
 
         if MPC_AVAILABLE:
             # If MPC is available, it should be registered

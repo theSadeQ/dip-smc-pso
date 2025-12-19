@@ -31,7 +31,7 @@ import sys
 sys.path.append(str(Path(__file__).parent.parent.parent.parent / "src"))
 
 try:
-    from src.controllers.factory.smc_factory import SMCFactory, SMCType, SMCConfig
+    from src.controllers.factory.base import SMCFactory, SMCType, SMCConfig
     from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics
     from src.plant.models.full.dynamics import FullDIPDynamics
     from src.simulation.engines.simulation_runner import SimulationRunner  # noqa: F401

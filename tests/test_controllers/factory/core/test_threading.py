@@ -14,7 +14,7 @@ import threading
 import time
 from unittest.mock import patch, MagicMock
 
-from src.controllers.factory.core.threading import (
+from src.controllers.factory.base import (
     with_factory_lock,
     factory_lock_context,
     factory_lock,

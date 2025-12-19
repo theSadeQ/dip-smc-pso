@@ -15,7 +15,7 @@ import numpy as np
 # Import controller factory components
 from src.controllers.factory import (
     SMCFactory, SMCType, SMCConfig, create_smc_for_pso,
-    get_gain_bounds_for_pso, validate_smc_gains, SMC_GAIN_SPECS
+    get_gain_bounds_for_pso, validate_smc_gains
 )
 
 # Import plant configuration for controller testing
@@ -48,9 +48,9 @@ class TestSMCFactory:
 
     def test_gain_specifications(self):
         """Test that gain specifications are properly defined."""
-        assert len(SMC_GAIN_SPECS) >= 4
+        assert len() >= 4
 
-        for smc_type, spec in SMC_GAIN_SPECS.items():
+        for smc_type, spec in.items():
             assert hasattr(spec, 'gain_names')
             assert hasattr(spec, 'gain_bounds')
             assert hasattr(spec, 'controller_type')
