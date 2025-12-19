@@ -307,3 +307,11 @@ def validate_controller_type(controller_type: str) -> bool:
         return canonicalized in CONTROLLER_REGISTRY
     except (ValueError, TypeError):
         return False
+
+def list_all_controllers() -> List[str]:
+    """Get list of all registered controller types, including unavailable ones.
+
+    Returns:
+        List of all controller type names in the registry
+    """
+    return sorted(CONTROLLER_REGISTRY.keys())

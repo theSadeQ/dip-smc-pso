@@ -101,3 +101,17 @@ class SMCType(Enum):
     ADAPTIVE = "adaptive_smc"
     SUPER_TWISTING = "sta_smc"
     HYBRID = "hybrid_adaptive_sta_smc"
+
+
+# =============================================================================
+# CONFIGURATION CLASSES
+# =============================================================================
+
+class SMCConfig:
+    """Configuration class for SMC controllers."""
+    def __init__(self, gains: List[float], max_force: float = 150.0, dt: float = 0.001, **kwargs: Any) -> None:
+        self.gains = gains
+        self.max_force = max_force
+        self.dt = dt
+        for key, value in kwargs.items():
+            setattr(self, key, value)

@@ -23,11 +23,160 @@ Supported Controllers:
 - Adaptive SMC: Online parameter adaptation
 - Hybrid Adaptive-STA SMC: Combined adaptive and super-twisting
 - MPC Controller: Model predictive control (optional)
+Consolidates core factory functionality from:
+- factory_new/core.py (745 lines) - Modern enterprise factory
+- smc_factory.py (526 lines) - Clean SMC-only factory, PSO-optimized
+- core/threading.py (335 lines) - Thread-safety primitives (to be added)
+
+Week 1 aggressive factory refactoring (18 files -> 6 files).
 """
 
 # Standard library imports
 import logging
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+
+
+# =============================================================================
+# THREAD-SAFETY PRIMITIVES (from core/threading.py)
+# =============================================================================
+
+import threading
+import time
+from typing import Callable, Optional, TypeVar, ParamSpec
+from functools import wraps
+from contextlib import contextmanager
+
+# Type variables for generic decorator support
+P = ParamSpec("P")
+T = TypeVar("T")
+
+# Global factory lock with timeout protection
+_factory_lock = threading.RLock()
+_LOCK_TIMEOUT = 10.0  # seconds
+_DEADLOCK_DETECTION_ENABLED = True
+
+# Performance monitoring
+_lock_acquisitions = 0
+_lock_contentions = 0
+_total_wait_time = 0.0
+_max_wait_time = 0.0
+
+
+class FactoryLockTimeoutError(Exception):
+    """Raised when factory lock acquisition times out."""
+    pass
+
+
+class FactoryDeadlockError(Exception):
+    """Raised when potential deadlock is detected."""
+    pass
+
+
+def with_factory_lock(
+    timeout: Optional[float] = None,
+    raise_on_timeout: bool = True
+) -> Callable[[Callable[P, T]], Callable[P, T]]:
+    """
+    Decorator to make factory functions thread-safe.
+
+    Args:
+        timeout: Lock acquisition timeout (default: global timeout)
+        raise_on_timeout: Raise exception on timeout vs return None
+
+    Returns:
+        Thread-safe decorated function
+
+    Raises:
+        FactoryLockTimeoutError: If lock acquisition times out
+    """
+    def decorator(func: Callable[P, T]) -> Callable[P, T]:
+        @wraps(func)
+        def wrapper(*args: P.args, **kwargs: P.kwargs) -> T:
+            effective_timeout = timeout or _LOCK_TIMEOUT
+            start_time = time.perf_counter()
+
+            global _lock_acquisitions, _lock_contentions, _total_wait_time, _max_wait_time
+
+            try:
+                # Attempt to acquire lock with timeout
+                acquired = _factory_lock.acquire(timeout=effective_timeout)
+
+                if not acquired:
+                    wait_time = time.perf_counter() - start_time
+                    _lock_contentions += 1
+                    _total_wait_time += wait_time
+                    _max_wait_time = max(_max_wait_time, wait_time)
+
+                    error_msg = (
+                        f"Failed to acquire factory lock within {effective_timeout}s for {func.__name__}. "
+                        f"Possible deadlock or contention."
+                    )
+                    logger.error(error_msg)
+
+                    if raise_on_timeout:
+                        raise FactoryLockTimeoutError(error_msg)
+                    else:
+                        return None
+
+                # Lock acquired successfully
+                wait_time = time.perf_counter() - start_time
+                _lock_acquisitions += 1
+                if wait_time > 0.001:  # Only count significant waits as contention
+                    _lock_contentions += 1
+                _total_wait_time += wait_time
+                _max_wait_time = max(_max_wait_time, wait_time)
+
+                # Execute the protected function
+                return func(*args, **kwargs)
+
+            finally:
+                # Always release lock if acquired
+                if acquired:
+                    _factory_lock.release()
+
+        return wrapper
+    return decorator
+
+
+@contextmanager
+def factory_lock_context(timeout: Optional[float] = None):
+    """
+    Context manager for thread-safe factory operations.
+
+    Args:
+        timeout: Lock acquisition timeout (default: global timeout)
+
+    Yields:
+        None
+
+    Raises:
+        FactoryLockTimeoutError: If lock acquisition times out
+    """
+    effective_timeout = timeout or _LOCK_TIMEOUT
+    acquired = _factory_lock.acquire(timeout=effective_timeout)
+
+    if not acquired:
+        raise FactoryLockTimeoutError(
+            f"Failed to acquire factory lock within {effective_timeout}s"
+        )
+
+    try:
+        yield
+    finally:
+        _factory_lock.release()
+
+
+def get_lock_statistics() -> dict:
+    """Get factory lock performance statistics."""
+    return {
+        "acquisitions": _lock_acquisitions,
+        "contentions": _lock_contentions,
+        "total_wait_time": _total_wait_time,
+        "max_wait_time": _max_wait_time,
+        "avg_wait_time": _total_wait_time / max(_lock_acquisitions, 1),
+        "contention_rate": _lock_contentions / max(_lock_acquisitions, 1),
+    }
+
 
 # Third-party imports
 import numpy as np
@@ -68,22 +217,19 @@ except ImportError:
 # Local imports - Extracted factory modules (Phase 2 refactor)
 from .types import (
     StateVector, ControlOutput, GainsArray, ConfigDict, ControllerT,
-    ConfigValueError, ControllerProtocol, _factory_lock, _LOCK_TIMEOUT,
-    SMCType, SMCConfig, SMCGainSpec, SMC_GAIN_SPECS
-)
-from .registration import (
-    CONTROLLER_ALIASES, _canonicalize_controller_type,
-    CONTROLLER_REGISTRY, _get_controller_info,
+    ConfigValueError, ControllerProtocol, SMCType
+, SMCConfig)
+from .registry import (
+    CONTROLLER_ALIASES, canonicalize_controller_type,
+    CONTROLLER_REGISTRY, get_controller_info,
     list_available_controllers, list_all_controllers, get_default_gains
 )
 from .validation import (
-    _resolve_controller_gains, _validate_controller_gains,
-    validate_smc_gains, _extract_controller_parameters,
-    _validate_mpc_parameters
+    validate_controller_gains, validate_configuration,
+    _resolve_controller_gains, _extract_controller_parameters,
+    validate_smc_gains, _validate_mpc_parameters
 )
-from .utils import (
-    _create_dynamics_model, get_expected_gain_count, get_gain_bounds_for_pso
-)
+# from .utils import  # MERGED INTO base.py
 
 # Optional MPC controller import
 try:
@@ -225,11 +371,11 @@ def create_controller(controller_type: str,
     """
     with _factory_lock:
         # Normalize/alias controller type
-        controller_type = _canonicalize_controller_type(controller_type)
+        controller_type = canonicalize_controller_type(controller_type)
 
         # Validate controller type and get info (handles availability checks)
         try:
-            controller_info = _get_controller_info(controller_type)
+            controller_info = get_controller_info(controller_type)
         except ImportError as e:
             # Re-raise import errors with better context
             available = list_available_controllers()
@@ -243,7 +389,7 @@ def create_controller(controller_type: str,
 
     # Validate gains with controller-specific rules
     try:
-        _validate_controller_gains(controller_gains, controller_info, controller_type)
+        validate_controller_gains(controller_gains, controller_info, controller_type)
     except ValueError as e:
         # For invalid default gains, try to fix them automatically
         if gains is None:  # Only auto-fix if using default gains
@@ -257,7 +403,7 @@ def create_controller(controller_type: str,
                 raise e
 
             # Re-validate after fix
-            _validate_controller_gains(controller_gains, controller_info, controller_type)
+            validate_controller_gains(controller_gains, controller_info, controller_type)
         else:
             raise e
 
@@ -743,3 +889,40 @@ def create_pso_controller_factory(smc_type: SMCType, plant_config: Optional[Any]
     controller_factory.max_force = kwargs.get('max_force', 150.0)
 
     return controller_factory
+
+
+# =============================================================================
+# PSO OPTIMIZATION UTILITIES (from smc_factory.py)
+# =============================================================================
+
+def get_gain_bounds_for_pso(controller_type: Union[str, Any]) -> tuple:
+    """Get PSO optimization bounds for controller gains.
+    
+    Args:
+        controller_type: Controller type (string or SMCType enum)
+        
+    Returns:
+        Tuple of (lower_bounds, upper_bounds) lists for PSO optimization
+        
+    Examples:
+        >>> from src.controllers.factory import get_gain_bounds_for_pso
+        >>> lower, upper = get_gain_bounds_for_pso('classical_smc')
+        >>> print(f'Bounds: {list(zip(lower, upper))}')
+    """
+    from .registry import get_gain_bounds
+    
+    # Handle both string and enum types
+    if hasattr(controller_type, 'value'):
+        controller_type = controller_type.value
+    
+    # Get bounds from registry
+    bounds = get_gain_bounds(str(controller_type))
+    
+    if not bounds:
+        raise ValueError(f'No gain bounds found for controller type: {controller_type}')
+    
+    # Convert to PSO format: (lower_bounds, upper_bounds)
+    lower_bounds = [bound[0] for bound in bounds]
+    upper_bounds = [bound[1] for bound in bounds]
+    
+    return (lower_bounds, upper_bounds)
