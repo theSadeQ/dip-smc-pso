@@ -404,6 +404,14 @@ config = load_config("config.yaml", allow_unknown=False)
 - [OK] 8 README files added with research task provenance
 - [OK] 567 files scanned, 8 modified, imports auto-updated
 
+**Dec 19, 2025 - docs/ Directory:**
+- [OK] docs/ → Clean root structure (102 root files → 5 core files, 95% reduction)
+- [OK] Moved 70 markdown files to 8 categorized subdirectories (theory/, optimization/, production/, testing/, architecture/, guides/, reference/, meta/)
+- [OK] Moved 15 build artifacts to .artifacts/docs_build/logs/
+- [OK] Moved 6 scripts to .project/tools/validation/docs/ and .project/tools/docs/
+- [OK] Moved 8 data files to docs/_data/, docs/bib/, docs/_static/pwa/
+- [OK] Deleted 1 obsolete backup file; 564 total markdown files now organized
+
 **Dec 19, 2025 - Scripts Directory:**
 - [OK] scripts/ → Publication-ready structure (21 root files → 5 root files, 73% reduction)
 - [OK] Consolidated duplicate directories: documentation/ + docs_organization/ → docs/
