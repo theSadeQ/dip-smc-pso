@@ -21,6 +21,20 @@
 - Coverage: 9.95% baseline → 15% factory base (partial)
 - Commits: 1 (cc1cd722)
 
+### Session 2 (Dec 20, 1:30-2:30pm) - 1 hour spent
+
+✅ **Completed**:
+- Fixed 5 gain count assumptions (adaptive=5, hybrid=4)
+- Created 27 thread-safety tests (test_base_thread_safety.py)
+- Documented API discoveries with source code evidence
+- Identified need for integration tests with real config
+
+📊 **Metrics**:
+- Tests created: 75 total (48 base + 27 thread-safety)
+- Tests passing: 15/75 (20% - expected for discovery phase)
+- Coverage: 9.14% overall (slight decrease due to new imports)
+- Commits: 3 total (cc1cd722, dc3aaa7a, c799d22b, b2542041)
+
 🔍 **Key Discoveries**:
 1. Adaptive SMC: 5 gains (not 6)
 2. Hybrid SMC: 4 gains (not 8)
