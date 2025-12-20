@@ -112,6 +112,7 @@ from .fallback_configs import (
 # Backward compatibility aliases
 create_controller_new = create_controller  # New factory is now primary
 SMCProtocol = ControllerProtocol  # Alias for backward compatibility
+build_controller = build_controller_legacy  # Legacy API compatibility
 
 __all__ = [
     # Primary factory
@@ -145,7 +146,8 @@ __all__ = [
     # Legacy
     'create_controller_legacy',
     'build_controller_legacy',
-    
+    'build_controller',  # Backward compatibility alias
+
     # Thread-safety
     'with_factory_lock',
     'FactoryLockTimeoutError',

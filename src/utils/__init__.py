@@ -34,6 +34,7 @@ from .control.types import (
     HybridSTAOutput,
 )
 from .testing.reproducibility import set_global_seed
+from .visualization.legacy_visualizer import Visualizer
 
 __all__ = [
     'analysis',
@@ -50,6 +51,7 @@ __all__ = [
     'STAOutput',
     'HybridSTAOutput',
     'set_global_seed',
+    'Visualizer',
 ]
 
 __version__ = '1.0.0'  # Post-reorganization
