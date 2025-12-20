@@ -62,11 +62,10 @@ GAIN_BASED_CONTROLLERS = [
     "hybrid_adaptive_sta_smc",
 ]
 
-# All available controllers
-ALL_CONTROLLERS = GAIN_BASED_CONTROLLERS + [
-    "swing_up_smc",
-    # "mpc_controller",  # Skip MPC - requires cvxpy (optional dependency)
-]
+# All available controllers (factory-registered only)
+# Note: swing_up_smc not yet registered in factory (returns "Unknown controller type")
+# Note: mpc_controller requires cvxpy (optional dependency)
+ALL_CONTROLLERS = GAIN_BASED_CONTROLLERS
 
 # Test states for control computation
 TEST_STATES = [
