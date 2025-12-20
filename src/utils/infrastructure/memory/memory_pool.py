@@ -11,7 +11,7 @@ simulations and batch operations to minimize memory allocation overhead.
 
 Example:
     >>> import numpy as np
-    >>> from src.utils.memory.memory_pool import MemoryPool
+    >>> from src.utils.infrastructure.memory.memory_pool import MemoryPool
     >>>
     >>> # Create pool with 20 blocks of shape (100,)
     >>> pool = MemoryPool(block_size=(100,), num_blocks=20)

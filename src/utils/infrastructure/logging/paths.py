@@ -13,7 +13,7 @@ Environment Variables:
     LOG_DIR: Override default log directory (default: ".logs")
 
 Usage:
-    from src.utils.logging.paths import LOG_DIR, PSO_LOG_DIR, TEST_LOG_DIR
+    from src.utils.infrastructure.logging.paths import LOG_DIR, PSO_LOG_DIR, TEST_LOG_DIR
 
     log_file = PSO_LOG_DIR / f"pso_{controller}.log"
     test_log = TEST_LOG_DIR / "test_validation.log"
