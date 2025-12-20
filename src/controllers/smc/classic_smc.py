@@ -9,7 +9,7 @@ import numpy as np
 import logging
 import weakref
 # Import from new organized structure
-from ...utils import saturate
+from ...utils.control.primitives import saturate
 from ...utils import ClassicalSMCOutput
 from typing import TYPE_CHECKING, List, Optional, Union, Sequence, Any
 

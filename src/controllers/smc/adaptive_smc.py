@@ -358,12 +358,12 @@ class AdaptiveSMC:
         # across controllers.  ``saturate`` divides by epsilon internally.
         # robust import for utils.* to support both import styles
         try:
-            from src.utils import saturate  # when repo root on sys.path
+            from src.utils.control.primitives import saturate  # when repo root on sys.path
         except Exception:
             try:
-                from ...utils import saturate  # when importing as src.controllers.*
+                from ...utils.control.primitives import saturate  # when importing as src.controllers.*
             except Exception:
-                from utils import saturate    # when src itself on sys.path
+                from utils.control.primitives import saturate    # when src itself on sys.path
         if self.smooth_switch:
             switching = saturate(sigma, self.boundary_layer, method="tanh")
         else:

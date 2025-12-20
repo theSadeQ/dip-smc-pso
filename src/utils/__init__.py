@@ -25,6 +25,16 @@ from . import numerical_stability
 from . import testing
 from . import visualization
 
+# Re-export commonly used items for backward compatibility
+from .control.primitives import saturate
+from .control.types import (
+    ClassicalSMCOutput,
+    AdaptiveSMCOutput,
+    STAOutput,
+    HybridSTAOutput,
+)
+from .testing.reproducibility import set_global_seed
+
 __all__ = [
     'analysis',
     'control',
@@ -33,6 +43,13 @@ __all__ = [
     'numerical_stability',
     'testing',
     'visualization',
+    # Backward compatibility exports
+    'saturate',
+    'ClassicalSMCOutput',
+    'AdaptiveSMCOutput',
+    'STAOutput',
+    'HybridSTAOutput',
+    'set_global_seed',
 ]
 
 __version__ = '1.0.0'  # Post-reorganization

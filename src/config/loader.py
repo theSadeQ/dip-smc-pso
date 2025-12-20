@@ -23,7 +23,7 @@ from .schemas import (
     PermissiveControllerConfig, redact_value, PSOConfig, StabilityMonitoringConfig,
     FaultDetectionConfig, StreamlitConfig
 )
-from src.utils import set_global_seed
+from src.utils.testing.reproducibility import set_global_seed
 
 # ------------------------------------------------------------------------------
 # Logging
