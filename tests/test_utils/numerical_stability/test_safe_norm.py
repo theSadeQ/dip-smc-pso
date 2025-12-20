@@ -115,9 +115,9 @@ class TestSafeNormMultiDimensional:
     """Test norm with multi-dimensional arrays"""
 
     def test_norm_matrix_flatten(self):
-        """Test norm of matrix (flattened by default)"""
+        """Test norm of matrix (Frobenius norm for matrices)"""
         m = np.array([[3.0, 0.0], [0.0, 4.0]])
-        result = safe_norm(m, ord=2)  # axis=None (flatten)
+        result = safe_norm(m, ord='fro')  # Frobenius norm (like flattened L2)
         expected = np.sqrt(3**2 + 4**2)  # sqrt(25) = 5
         assert abs(result - expected) < 1e-10
 
@@ -214,11 +214,11 @@ class TestSafeNormalizeZeroVectors:
         v = np.array([1e-20, 1e-20])
         result = safe_normalize(v, min_norm=1e-15)
 
-        # Should normalize using min_norm protection
+        # Should normalize using min_norm protection (result won't be unit vector)
         assert np.all(np.isfinite(result))
-        # Norm of result should be close to 1 (within numerical precision)
-        norm = safe_norm(result, ord=2)
-        assert abs(norm - 1.0) < 0.1  # Relaxed tolerance for near-zero vectors
+        # Result should be v / min_norm = [1e-20, 1e-20] / 1e-15 = [1e-5, 1e-5]
+        expected = np.array([1e-5, 1e-5])
+        np.testing.assert_array_almost_equal(result, expected, decimal=20)
 
 # ==============================================================================
 # Test safe_normalize - Multi-Dimensional Normalization
