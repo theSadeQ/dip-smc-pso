@@ -1,7 +1,24 @@
 # Project Current Status - Consolidated Summary
 
-**Last Updated:** November 7, 2025
+**Last Updated:** December 20, 2025
 **Current Phase:** Maintenance/Publication (Research Phase Complete)
+**Active Work:** Week 3 Coverage Improvement **PAUSED** (Critical Bug)
+
+---
+
+## 🚨 Current Issue: Factory API Bug (CRITICAL)
+
+**Status:** BLOCKING Week 3 Coverage Work
+**Discovered:** December 20, 2025 (Session 3)
+**Severity:** P0 - Production Blocking
+
+**Issue:** Factory passes `gains` as keyword argument to controllers, but modular controllers expect `gains` in `config.gains`. Only 1/5 controllers (hybrid_adaptive_sta_smc) works correctly.
+
+**Impact:** Cannot create classical_smc, sta_smc, adaptive_smc, swing_up_smc controllers.
+
+**Documentation:** `.project/ai/issues/FACTORY_API_BUG.md`
+
+**Recommendation:** Fix factory API before resuming Week 3 work.
 
 ---
 
@@ -9,16 +26,18 @@
 
 **Project:** Double-Inverted Pendulum SMC with PSO Optimization
 
-**Status:** Research Complete ✅
+**Status:** Research Complete ✅ | Coverage Work PAUSED ⚠️
 - All infrastructure work complete
 - Research validation complete (11/11 tasks)
 - LT-7 research paper SUBMISSION-READY (v2.1)
+- **Week 3 Coverage**: PAUSED pending factory fix
 
 **Progress:**
 - Phase 3 (UI/UX): 100% complete
 - Phase 4 (Production): Partial (research-ready)
 - Phase 5 (Research): 100% complete
 - Recovery Infrastructure: 100% automated
+- **Week 3 Coverage**: PAUSED (critical bug found)
 
 ---
 
@@ -109,6 +128,59 @@
 - `8c75b434` - feat(recovery): Add /recover slash command
 
 **Reference:** `CLAUDE.md` Section 3.2, `.project/dev_tools/README.md`
+
+---
+
+## Week 3: Coverage Improvement (December 2025)
+
+**Status:** ⏸️ **PAUSED** (Critical factory bug discovered)
+**Duration:** 3 sessions (4 hours total)
+**Pause Date:** December 20, 2025, 9:00pm
+
+### Progress Summary
+
+**Sessions Completed:**
+1. **Session 1** (2h): 48 factory base tests (mock-based)
+2. **Session 2** (1h): 27 thread-safety tests (mock-based)
+3. **Session 3** (1h): 48 integration tests (real config) - **FOUND CRITICAL BUG**
+
+**Metrics:**
+- Tests Created: 123 total (75 unit + 48 integration)
+- Tests Passing: 16/123 (13% - due to factory bug)
+- Coverage: 9.14% overall (baseline)
+- Production Bugs Found: **1 CRITICAL** (factory API inconsistency)
+
+### Critical Discovery: Factory API Bug
+
+Integration tests with real `config.yaml` discovered that factory passes `gains` as keyword argument, but modular controllers expect `gains` in `config.gains`. This breaks 4 out of 5 controllers:
+
+- ❌ classical_smc: TypeError
+- ❌ sta_smc: TypeError
+- ❌ adaptive_smc: TypeError
+- ✅ hybrid_adaptive_sta_smc: PASSING
+- ❌ swing_up_smc: TypeError
+
+**Value:** Integration tests prevented deployment of broken code!
+
+### Documentation
+
+- **Session Findings**: `.project/ai/planning/WEEK3_SESSION3_FINDINGS.md`
+- **Bug Report**: `.project/ai/issues/FACTORY_API_BUG.md`
+- **Resume Guide**: `.project/ai/planning/WEEK3_RESUME_GUIDE.md`
+- **Progress Tracker**: `.project/ai/planning/WEEK3_PROGRESS.md`
+
+### Resume Conditions
+
+**Before resuming Week 3:**
+1. Fix factory API bug (FACTORY-001)
+2. Verify all 5 controllers pass integration tests
+3. Re-baseline coverage after fix
+4. Follow resume guide for 30-second recovery
+
+**Expected After Fix:**
+- Integration tests: 40+ passing (85%+)
+- Coverage: 15-25% overall, 30-40% factory
+- Ready to continue Week 3 phases 4-7
 
 ---
 
