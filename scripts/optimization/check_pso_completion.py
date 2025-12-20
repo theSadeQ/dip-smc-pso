@@ -16,7 +16,7 @@ import subprocess
 from datetime import datetime
 
 # Centralized log paths
-from src.utils.logging.paths import PSO_LOG_DIR
+from src.utils.infrastructure.logging.paths import PSO_LOG_DIR
 
 def check_log_completion(log_file: Path) -> dict:
     """

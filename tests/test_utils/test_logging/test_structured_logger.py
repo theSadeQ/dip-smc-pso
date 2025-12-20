@@ -15,8 +15,8 @@ import logging
 from pathlib import Path
 from unittest.mock import Mock, patch
 
-from src.utils.logging import StructuredLogger, LoggingConfig
-from src.utils.logging.config import ConsoleHandlerConfig, FileHandlerConfig
+from src.utils.infrastructure.logging import StructuredLogger, LoggingConfig
+from src.utils.infrastructure.logging.config import ConsoleHandlerConfig, FileHandlerConfig
 
 
 @pytest.fixture

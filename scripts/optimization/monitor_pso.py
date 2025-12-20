@@ -6,7 +6,7 @@ from pathlib import Path
 from datetime import datetime, timedelta
 
 # Centralized log paths
-from src.utils.logging.paths import PSO_LOG_DIR
+from src.utils.infrastructure.logging.paths import PSO_LOG_DIR
 
 def parse_log(log_file):
     """Extract PSO progress from log file."""

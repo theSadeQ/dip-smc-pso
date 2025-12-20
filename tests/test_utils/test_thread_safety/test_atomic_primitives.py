@@ -15,7 +15,7 @@ Tests cover:
 import pytest
 import threading
 import time
-from src.utils.thread_safety import AtomicCounter, AtomicFlag, ThreadSafeDict
+from src.utils.infrastructure.threading import AtomicCounter, AtomicFlag, ThreadSafeDict
 
 
 class TestAtomicCounter:

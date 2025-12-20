@@ -10,7 +10,7 @@ Provides comprehensive structured logging with:
 - Context injection
 
 Quick Start:
-    from src.utils.logging import StructuredLogger
+    from src.utils.infrastructure.logging import StructuredLogger
 
     logger = StructuredLogger("Controller.ClassicalSMC")
     logger.log_event("initialized", gains=[10.0, 5.0, 8.0])

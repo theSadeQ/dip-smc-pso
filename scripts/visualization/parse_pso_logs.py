@@ -33,7 +33,7 @@ from dataclasses import dataclass, asdict
 from datetime import datetime
 
 # Centralized log paths
-from src.utils.logging.paths import PSO_LOG_DIR
+from src.utils.infrastructure.logging.paths import PSO_LOG_DIR
 
 
 @dataclass

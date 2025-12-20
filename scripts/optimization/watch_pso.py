@@ -22,7 +22,7 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 # Centralized log paths
-from src.utils.logging.paths import PSO_LOG_DIR
+from src.utils.infrastructure.logging.paths import PSO_LOG_DIR
 
 from check_pso_completion import check_log_completion  # noqa: E402
 

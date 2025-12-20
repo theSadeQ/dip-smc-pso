@@ -224,7 +224,7 @@ class QualityValidator:
         """
         try:
             result = subprocess.run(
-                [sys.executable, '-c', 'from src.utils.memory import MemoryPool; print(MemoryPool)'],
+                [sys.executable, '-c', 'from src.utils.infrastructure.memory import MemoryPool; print(MemoryPool)'],
                 capture_output=True,
                 text=True,
                 timeout=10,
@@ -257,7 +257,7 @@ class QualityValidator:
             "validation_commands": {
                 "mypy": f"mypy {memory_pool_path.relative_to(self.project_root)} --strict",
                 "pep8": f"ruff check {memory_pool_path.relative_to(self.project_root)} --line-length=90",
-                "import_test": "python -c 'from src.utils.memory import MemoryPool; print(MemoryPool)'"
+                "import_test": "python -c 'from src.utils.infrastructure.memory import MemoryPool; print(MemoryPool)'"
             },
             "validation_results": {},
             "issues_found": [],
