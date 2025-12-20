@@ -1,5 +1,5 @@
 """
-Unit tests for saturation functions (src/utils/control/saturation.py).
+Unit tests for saturation functions (src/utils/control/primitives/saturation.py).
 
 Tests cover:
 - Normal operation for saturate(), smooth_sign(), dead_zone()
@@ -13,7 +13,7 @@ import numpy as np
 import pytest
 import warnings
 
-from src.utils.control.saturation import saturate, smooth_sign, dead_zone
+from src.utils.control.primitives.saturation import saturate, smooth_sign, dead_zone
 
 
 # ======================================================================================

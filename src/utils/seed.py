@@ -9,6 +9,6 @@ for backward compatibility with legacy import paths.
 """
 
 # Re-export seed functions from new location
-from .reproducibility.seed import set_global_seed, create_rng
+from .testing.reproducibility.seed import set_global_seed, create_rng
 
 __all__ = ['set_global_seed', 'create_rng']
