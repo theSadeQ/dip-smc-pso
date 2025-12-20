@@ -853,7 +853,7 @@ graph TD
 ### Example 1: Basic Seed Setting
 
 ```python
-from src.utils.reproducibility import set_seed
+from src.utils.testing.reproducibility import set_seed
 import numpy as np
 
 # Set global seed for reproducibility
@@ -874,7 +874,7 @@ print("✓ Reproducibility verified")
 ### Example 2: Monte Carlo with Reproducibility
 
 ```python
-from src.utils.reproducibility import set_seed
+from src.utils.testing.reproducibility import set_seed
 import numpy as np
 
 def monte_carlo_simulation(n_trials: int, seed: int):
@@ -901,7 +901,7 @@ print("✓ Monte Carlo reproducibility confirmed")
 ### Example 3: PSO Optimization Reproducibility
 
 ```python
-from src.utils.reproducibility import set_seed
+from src.utils.testing.reproducibility import set_seed
 from src.optimizer import PSOTuner
 
 def reproducible_pso_tuning(seed: int):
@@ -931,7 +931,7 @@ print("✓ PSO optimization is reproducible")
 ### Example 4: State Capture and Restore
 
 ```python
-from src.utils.reproducibility import capture_random_state, restore_random_state
+from src.utils.testing.reproducibility import capture_random_state, restore_random_state
 import numpy as np
 
 # Generate some random numbers
@@ -957,7 +957,7 @@ print("State restoration allows sequence continuation")
 ### Example 5: Experiment Reproducibility Framework
 
 ```python
-from src.utils.reproducibility import set_seed, capture_random_state
+from src.utils.testing.reproducibility import set_seed, capture_random_state
 import json
 from pathlib import Path
 
@@ -1117,14 +1117,14 @@ graph TD
 ### Example 1: Jupyter Magic Commands
 
 ```python
-from src.utils.development import load_simulation_environment
+from src.utils.testing.dev_tools import load_simulation_environment
 
 # Load environment in Jupyter
 %load_ext autoreload
 %autoreload 2
 
 # Load simulation tools
-from src.utils.development import JupyterTools
+from src.utils.testing.dev_tools import JupyterTools
 tools = JupyterTools()
 
 # Interactive plotting
@@ -1138,7 +1138,7 @@ tools.plot_controller_performance(results)
 ### Example 2: Interactive Debugging
 
 ```python
-from src.utils.development import DebugTools
+from src.utils.testing.dev_tools import DebugTools
 import numpy as np
 
 # Enable interactive debugging
@@ -1164,7 +1164,7 @@ result = problematic_function(x)  # Stops at breakpoint
 ### Example 3: Rich Display Integration
 
 ```python
-from src.utils.development import RichDisplay
+from src.utils.testing.dev_tools import RichDisplay
 from IPython.display import display, Markdown
 
 # Create rich display helper
@@ -1190,7 +1190,7 @@ show_results(simulation_results)
 ### Example 4: Notebook State Management
 
 ```python
-from src.utils.development import NotebookStateManager
+from src.utils.testing.dev_tools import NotebookStateManager
 
 # Create state manager
 state_mgr = NotebookStateManager()
@@ -1214,7 +1214,7 @@ if not state_mgr.check_consistency():
 ### Example 5: Interactive Parameter Tuning
 
 ```python
-from src.utils.development import InteractiveTuner
+from src.utils.testing.dev_tools import InteractiveTuner
 from ipywidgets import interact, FloatSlider
 
 # Create interactive tuner

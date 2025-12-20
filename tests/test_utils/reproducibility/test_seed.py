@@ -15,7 +15,7 @@ Tests cover:
 import pytest
 import random
 import numpy as np
-from src.utils.reproducibility.seed import SeedManager, set_global_seed, create_rng
+from src.utils.testing.reproducibility.seed import SeedManager, set_global_seed, create_rng
 
 
 # =====================================================================================

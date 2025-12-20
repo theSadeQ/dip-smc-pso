@@ -86,7 +86,7 @@ except ImportError:
 
 # Mission 8-9: Scientific & Production validation
 try:
-    from src.utils.reproducibility.seed import set_global_seed
+    from src.utils.testing.reproducibility.seed import set_global_seed
     from src.utils.monitoring.latency import LatencyMonitor
     mission_components['production'] = True
 except ImportError:

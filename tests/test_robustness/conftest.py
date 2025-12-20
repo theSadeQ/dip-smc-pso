@@ -9,7 +9,7 @@ import pytest
 import numpy as np
 from src.controllers.factory import create_controller
 from src.plant.models.simplified.dynamics import SimplifiedDIPDynamics as SimplifiedDynamics
-from src.utils.fault_injection import (
+from src.utils.testing.fault_injection import (
     FaultScenario,
     GaussianNoiseFault,
     SaturationFault,
