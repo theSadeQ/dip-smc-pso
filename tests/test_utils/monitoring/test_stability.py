@@ -15,7 +15,7 @@ Tests cover:
 import pytest
 import numpy as np
 
-from src.utils.monitoring.stability import (
+from src.utils.monitoring.realtime.stability import (
     LyapunovDecreaseMonitor,
     SaturationMonitor,
     DynamicsConditioningMonitor,

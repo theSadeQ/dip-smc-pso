@@ -625,7 +625,7 @@ controller = ClassicalSMC(config)
 ### Performance Monitoring
 
 ```python
-from src.utils.monitoring.latency import LatencyMonitor
+from src.utils.monitoring.realtime.latency import LatencyMonitor
 
 # Monitor control loop timing
 monitor = LatencyMonitor(dt=0.01)
