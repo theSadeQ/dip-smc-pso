@@ -45,7 +45,7 @@ try:
     from src.config import load_config  # noqa: F401
     from src.utils.config_compatibility import wrap_physics_config
     # from src.utils.analysis.statistics import StatisticalAnalyzer  # May not exist
-    from src.utils.reproducibility.seed import set_global_seed
+    from src.utils.testing.reproducibility.seed import set_global_seed
 except ImportError as e:
     pytest.skip(f"Required modules not available: {e}", allow_module_level=True)
 

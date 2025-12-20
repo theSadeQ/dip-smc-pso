@@ -12,7 +12,7 @@ Main Components:
 - Config: YAML-based configuration loader
 
 Usage:
-    from src.utils.fault_injection import (
+    from src.utils.testing.fault_injection import (
         GaussianNoiseFault,
         SaturationFault,
         FaultScenario

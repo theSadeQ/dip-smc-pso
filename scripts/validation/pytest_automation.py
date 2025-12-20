@@ -24,7 +24,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 try:
-    from src.utils.coverage.monitoring import CoverageMonitor, CoverageMetrics
+    from src.utils.monitoring.metrics.monitoring import CoverageMonitor, CoverageMetrics
 except ImportError:
     # Fallback if coverage monitoring not available
     CoverageMonitor = None

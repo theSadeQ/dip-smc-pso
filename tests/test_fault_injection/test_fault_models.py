@@ -6,7 +6,7 @@ Tests each fault type independently to verify correct behavior.
 
 import pytest
 import numpy as np
-from src.utils.fault_injection.fault_models import (
+from src.utils.testing.fault_injection.fault_models import (
     GaussianNoiseFault,
     BiasFault,
     DropoutFault,

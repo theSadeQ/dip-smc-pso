@@ -9,7 +9,7 @@ of gain adaptation mechanism under fault conditions.
 import pytest
 import numpy as np
 from src.controllers.factory import create_controller, get_default_gains
-from src.utils.fault_injection import FaultScenario, SimulationResult
+from src.utils.testing.fault_injection import FaultScenario, SimulationResult
 
 
 class TestAdaptiveSMCRobustness:
