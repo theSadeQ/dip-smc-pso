@@ -432,7 +432,7 @@ def safe_power(
     # Handle negative bases
     abs_base = np.abs(base_array)
     sign_base = np.sign(base_array)
-    sign_base[sign_base == 0] = 1.0  # Treat zero as positive
+    sign_base = np.where(sign_base == 0, 1.0, sign_base)  # Treat zero as positive
 
     # Protect small bases
     safe_base = np.maximum(abs_base, epsilon)
