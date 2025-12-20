@@ -1,93 +1,38 @@
-#======================================================================================\\\
-#=============================== src/utils/__init__.py ================================\\\
-#======================================================================================\\\
-
 """
-Comprehensive utilities package for control engineering.
+Utilities package for DIP-SMC-PSO project.
 
-This package provides a complete suite of utilities organized into focused modules:
+Reorganized structure (Week 2, December 2025):
+- 14 subdirectories → 10 subdirectories
+- Clearer domain organization
+- Infrastructure, testing, control, monitoring domains
 
-Packages:
----------
-validation : Parameter validation and range checking
-control : Control primitives and saturation functions
-monitoring : Real-time performance and latency monitoring
-visualization : Animation, plotting, and movie generation
-analysis : Statistical analysis and hypothesis testing
-
-Legacy imports are maintained for backward compatibility.
+Modules:
+    analysis: Statistical analysis and metrics
+    control: Control engineering utilities (primitives, validation, types)
+    infrastructure: Low-level system utilities (logging, memory, threading)
+    monitoring: Runtime monitoring (realtime, metrics)
+    numerical_stability: Safe numerical operations
+    testing: Development and testing utilities (dev_tools, reproducibility, fault_injection)
+    visualization: Plotting and animation utilities
 """
 
-# New modular architecture (recommended)
-from .validation import require_positive, require_finite, require_in_range, require_probability
-from .control import saturate, smooth_sign, dead_zone
-from .monitoring import LatencyMonitor
-try:
-    from .visualization import (
-        DIPAnimator,
-        MultiSystemAnimator,
-        ControlPlotter,
-        SystemVisualization,
-        ProjectMovieGenerator,
-        MovieScene,
-        Visualizer as _Visualizer,
-    )
-except ImportError:
-    DIPAnimator = MultiSystemAnimator = ControlPlotter = SystemVisualization = ProjectMovieGenerator = MovieScene = None  # type: ignore
-    _Visualizer = None
-from .analysis import (
-    confidence_interval, bootstrap_confidence_interval,
-    welch_t_test, one_way_anova, monte_carlo_analysis,
-    performance_comparison_summary, sample_size_calculation
-)
-
-# Import from properly organized modular packages
-try:
-    from .types import (
-        ClassicalSMCOutput, AdaptiveSMCOutput, STAOutput, HybridSTAOutput
-    )
-    from .reproducibility import (
-        set_seed, set_global_seed, SeedManager, with_seed, random_seed_context
-    )
-except ImportError:
-    # Handle case where some modules are not available
-    pass
-
-Visualizer = _Visualizer
+# Re-export main packages
+from . import analysis
+from . import control
+from . import infrastructure
+from . import monitoring
+from . import numerical_stability
+from . import testing
+from . import visualization
 
 __all__ = [
-    # New modular architecture
-    "require_positive",
-    "require_finite",
-    "require_in_range",
-    "require_probability",
-    "saturate",
-    "smooth_sign",
-    "dead_zone",
-    "LatencyMonitor",
-    "DIPAnimator",
-    "MultiSystemAnimator",
-    "ControlPlotter",
-    "SystemVisualization",
-    "ProjectMovieGenerator",
-    "MovieScene",
-    "confidence_interval",
-    "bootstrap_confidence_interval",
-    "welch_t_test",
-    "one_way_anova",
-    "monte_carlo_analysis",
-    "performance_comparison_summary",
-    "sample_size_calculation",
-
-    # Legacy compatibility (if available)
-    "ClassicalSMCOutput",
-    "AdaptiveSMCOutput",
-    "STAOutput",
-    "HybridSTAOutput",
-    "set_seed",
-    "set_global_seed",
-    "SeedManager",
-    "with_seed",
-    "random_seed_context",
-    "Visualizer"  # Legacy Visualizer class
+    'analysis',
+    'control',
+    'infrastructure',
+    'monitoring',
+    'numerical_stability',
+    'testing',
+    'visualization',
 ]
+
+__version__ = '1.0.0'  # Post-reorganization

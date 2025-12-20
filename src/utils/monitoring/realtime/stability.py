@@ -17,7 +17,7 @@ from typing import List, Dict, Any, Optional
 import numpy as np
 from collections import deque
 
-from src.utils.thread_safety import AtomicCounter
+from src.utils.infrastructure.threading import AtomicCounter
 
 
 class LyapunovDecreaseMonitor:
