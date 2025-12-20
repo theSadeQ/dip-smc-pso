@@ -15,7 +15,7 @@ Tests cover:
 
 import pytest
 from typing import Tuple, Dict, Any
-from src.utils.types.control_outputs import (
+from src.utils.control.types.control_outputs import (
     ClassicalSMCOutput,
     AdaptiveSMCOutput,
     STAOutput,

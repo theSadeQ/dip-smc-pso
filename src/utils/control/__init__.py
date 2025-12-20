@@ -1,18 +1,15 @@
-#======================================================================================\\\
-#=========================== src/utils/control/__init__.py ============================\\\
-#======================================================================================\\\
-
 """
 Control engineering utilities.
 
-This package provides fundamental control system utilities including
-saturation functions, output structures, and control primitives.
+Modules:
+    primitives: Basic control primitives (saturation, deadband, etc.)
+    validation: Parameter and configuration validation
+    types: Type definitions for control systems
 """
 
-from .saturation import saturate, smooth_sign, dead_zone
+# Re-export everything from subdirectories for backward compatibility
+from .primitives import *
+from .validation import *
+from .types import *
 
-__all__ = [
-    "saturate",
-    "smooth_sign",
-    "dead_zone"
-]
+__all__ = ['primitives', 'validation', 'types']
