@@ -18,7 +18,7 @@ Tests cover:
 import pytest
 import time
 import numpy as np
-from src.utils.monitoring.latency import LatencyMonitor
+from src.utils.monitoring.realtime.latency import LatencyMonitor
 
 
 # =====================================================================================

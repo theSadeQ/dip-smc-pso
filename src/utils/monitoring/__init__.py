@@ -1,60 +1,19 @@
-#======================================================================================\\\
-#========================== src/utils/monitoring/__init__.py ==========================\\\
-#======================================================================================\\\
-
 """
-Real-time monitoring utilities for control systems.
+Monitoring utilities for runtime system monitoring.
 
-This package provides tools for monitoring control loop performance,
-latency tracking, stability monitoring, and real-time constraint verification.
+Modules:
+    realtime: Real-time monitoring (latency, stability, diagnostics)
+    metrics: Metrics collection and data models
 """
 
-from .latency import LatencyMonitor
-from .stability import (
-    LyapunovDecreaseMonitor,
-    SaturationMonitor,
-    DynamicsConditioningMonitor,
-    StabilityMonitoringSystem
-)
-from .diagnostics import (
-    DiagnosticChecklist,
-    InstabilityType,
-    DiagnosticResult
-)
-from .data_model import (
-    MetricsSnapshot,
-    PerformanceSummary,
-    DashboardData,
-    ComparisonData,
-    RunStatus,
-    ControllerType
-)
-from .metrics_collector_control import ControlMetricsCollector
-from .visualization import (
-    PerformanceVisualizer,
-    DataExporter,
-    CONTROLLER_COLORS,
-    METRIC_COLORS
-)
+from . import realtime
+from . import metrics
 
-__all__ = [
-    "LatencyMonitor",
-    "LyapunovDecreaseMonitor",
-    "SaturationMonitor",
-    "DynamicsConditioningMonitor",
-    "StabilityMonitoringSystem",
-    "DiagnosticChecklist",
-    "InstabilityType",
-    "DiagnosticResult",
-    "MetricsSnapshot",
-    "PerformanceSummary",
-    "DashboardData",
-    "ComparisonData",
-    "RunStatus",
-    "ControllerType",
-    "ControlMetricsCollector",
-    "PerformanceVisualizer",
-    "DataExporter",
-    "CONTROLLER_COLORS",
-    "METRIC_COLORS"
-]
+# Re-export commonly used items at package level for convenience
+try:
+    from .visualization import *
+    from .examples import *
+except ImportError:
+    pass
+
+__all__ = ['realtime', 'metrics']
