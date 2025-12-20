@@ -10,7 +10,7 @@ project_root = Path(__file__).parent.parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 # Centralized log paths
-from src.utils.logging.paths import LOG_DIR
+from src.utils.infrastructure.logging.paths import LOG_DIR
 
 def parse_log(log_file):
     """Parse a batch log file and extract metrics."""

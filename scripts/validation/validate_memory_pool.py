@@ -25,7 +25,7 @@ except ImportError:
     print("Warning: psutil not available, using approximate memory tracking")
     psutil = None
 
-from src.utils.memory.memory_pool import MemoryPool  # noqa: E402
+from src.utils.infrastructure.memory.memory_pool import MemoryPool  # noqa: E402
 
 
 def get_memory_mb():

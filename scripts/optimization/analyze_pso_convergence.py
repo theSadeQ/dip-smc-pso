@@ -21,7 +21,7 @@ from typing import Dict, List, Tuple  # noqa: E402
 import argparse  # noqa: E402
 
 # Centralized log paths
-from src.utils.logging.paths import PSO_LOG_DIR  # noqa: E402
+from src.utils.infrastructure.logging.paths import PSO_LOG_DIR  # noqa: E402
 
 
 def extract_convergence_data(log_file: Path) -> Tuple[List[int], List[float]]:

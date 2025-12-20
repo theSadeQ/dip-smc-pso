@@ -165,7 +165,7 @@ def main():
 
     args = parser.parse_args()
 
-    from src.utils.logging.paths import PSO_LOG_DIR
+    from src.utils.infrastructure.logging.paths import PSO_LOG_DIR
     controllers = {
         'classical_smc': PSO_LOG_DIR / 'pso_classical.log',
         'adaptive_smc': PSO_LOG_DIR / 'pso_adaptive_smc.log',

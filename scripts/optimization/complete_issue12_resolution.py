@@ -29,7 +29,7 @@ import yaml
 
 def check_pso_status(controller: str) -> str:
     """Check PSO optimization status."""
-    from src.utils.logging.paths import PSO_LOG_DIR
+    from src.utils.infrastructure.logging.paths import PSO_LOG_DIR
     log_file = PSO_LOG_DIR / f"pso_{controller}.log"
     gain_file = f"gains_{controller}_chattering.json"
 

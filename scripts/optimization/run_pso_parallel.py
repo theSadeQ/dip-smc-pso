@@ -22,7 +22,7 @@ from typing import Dict
 import json
 
 # Centralized log paths
-from src.utils.logging.paths import PSO_LOG_DIR
+from src.utils.infrastructure.logging.paths import PSO_LOG_DIR
 
 
 def launch_pso(controller: str, n_particles: int = 30, iters: int = 150,

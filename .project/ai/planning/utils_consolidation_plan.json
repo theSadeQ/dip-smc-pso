@@ -1,0 +1,77 @@
+{
+  "current_state": {
+    "total_subdirectories": 14,
+    "total_files": 56,
+    "total_lines": 11969,
+    "root_files": 7,
+    "root_lines": 1309
+  },
+  "target_state": {
+    "total_subdirectories": 10,
+    "reduction": 4,
+    "subdirs_to_merge": [
+      "logging",
+      "memory",
+      "thread_safety",
+      "development",
+      "reproducibility",
+      "fault_injection",
+      "coverage"
+    ],
+    "subdirs_to_expand": [
+      "control",
+      "monitoring"
+    ]
+  },
+  "consolidations": [
+    {
+      "name": "infrastructure",
+      "merge": [
+        "logging",
+        "memory",
+        "thread_safety"
+      ],
+      "rationale": "Production infrastructure concerns",
+      "files": 10,
+      "lines": 2378,
+      "risk": "LOW"
+    },
+    {
+      "name": "testing",
+      "merge": [
+        "development",
+        "reproducibility",
+        "fault_injection",
+        "coverage"
+      ],
+      "rationale": "Testing and development tools",
+      "files": 11,
+      "lines": 2017,
+      "risk": "LOW"
+    },
+    {
+      "name": "control_expanded",
+      "add_to": "control",
+      "move": [
+        "validation",
+        "types"
+      ],
+      "rationale": "Core control engineering primitives",
+      "files": 7,
+      "lines": 473,
+      "risk": "MEDIUM"
+    },
+    {
+      "name": "monitoring_expanded",
+      "add_to": "monitoring",
+      "create_subdirs": [
+        "realtime",
+        "metrics"
+      ],
+      "rationale": "Better organization of 9 monitoring files",
+      "files": 9,
+      "lines": 3406,
+      "risk": "LOW"
+    }
+  ]
+}

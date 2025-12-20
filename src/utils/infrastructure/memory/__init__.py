@@ -18,7 +18,7 @@ Key Features
 
 Example
 -------
->>> from src.utils.memory import MemoryPool
+>>> from src.utils.infrastructure.memory import MemoryPool
 >>> import numpy as np
 >>>
 >>> # Create pool with 20 blocks of shape (100,)
