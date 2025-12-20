@@ -629,34 +629,11 @@ def create_controller(controller_type: str,
             else:
                 raise ImportError(f"Controller class for {controller_type} is not available")
 
-        # Handle different controller creation patterns (Integration Coordinator reconciliation)
-        if controller_type in ['classical_smc', 'sta_smc', 'adaptive_smc']:
-            # Legacy controllers use direct parameter passing instead of config objects
-            controller_params = controller_config.__dict__ if hasattr(controller_config, '__dict__') else {}
-
-            # Filter parameters based on controller type to avoid unexpected keyword errors
-            if controller_type == 'sta_smc':
-                # SuperTwistingSMC only accepts specific parameters
-                allowed_params = {'gains', 'dt', 'max_force', 'damping_gain', 'boundary_layer',
-                                'dynamics_model', 'switch_method', 'regularization', 'anti_windup_gain'}
-                controller_params = {k: v for k, v in controller_params.items() if k in allowed_params and v is not None}
-            elif controller_type == 'classical_smc':
-                # ClassicalSMC has specific parameter requirements
-                allowed_params = {'gains', 'max_force', 'boundary_layer', 'dynamics_model',
-                                'regularization', 'switch_method', 'boundary_layer_slope',
-                                'controllability_threshold', 'hysteresis_ratio'}
-                controller_params = {k: v for k, v in controller_params.items() if k in allowed_params and v is not None}
-            elif controller_type == 'adaptive_smc':
-                # AdaptiveSMC parameter filtering
-                allowed_params = {'gains', 'max_force', 'dt', 'dynamics_model', 'leak_rate',
-                                'dead_zone', 'adapt_rate_limit', 'K_min', 'K_max', 'K_init',
-                                'alpha', 'boundary_layer', 'smooth_switch'}
-                controller_params = {k: v for k, v in controller_params.items() if k in allowed_params and v is not None}
-
-            controller = controller_class(**controller_params)
-        else:
-            # Modular controllers use config objects
-            controller = controller_class(controller_config)
+        # All modular controllers use config objects (unified approach)
+        # FIX: Removed incorrect "legacy" handling that passed **kwargs instead of config
+        # All controllers (classical_smc, sta_smc, adaptive_smc, hybrid, swing_up, mpc)
+        # now use consistent config-driven initialization: controller_class(config)
+        controller = controller_class(controller_config)
 
         logger.info(f"Created {controller_type} controller with gains: {controller_gains}")
         return controller
