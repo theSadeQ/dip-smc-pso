@@ -27,7 +27,7 @@ except Exception:  # pragma: no cover - fallback when numba is missing
     numba = _DummyNumba()  # type: ignore
 import numpy as np
 # Import from new organized structure
-from ...utils import saturate
+from ...utils.control.primitives import saturate
 from ...utils import STAOutput
 from typing import Optional, List, Tuple, Dict, Union
 
