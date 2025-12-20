@@ -59,14 +59,14 @@ def valid_sta_gains():
 
 @pytest.fixture
 def valid_adaptive_gains():
-    """Valid gains for adaptive SMC: [lambda1, lambda2, gamma1, gamma2, phi1, phi2]."""
-    return [10.0, 5.0, 5.0, 5.0, 15.0, 2.0]
+    """Valid gains for adaptive SMC: [k1, k2, lam1, lam2, gamma]."""
+    return [10.0, 5.0, 8.0, 3.0, 5.0]
 
 
 @pytest.fixture
 def valid_hybrid_gains():
-    """Valid gains for hybrid adaptive-STA SMC."""
-    return [10.0, 5.0, 1.5, 1.5, 5.0, 5.0, 15.0, 2.0]
+    """Valid gains for hybrid adaptive-STA SMC: [k1, k2, lam1, lam2]."""
+    return [18.0, 12.0, 10.0, 8.0]
 
 
 # =============================================================================
@@ -189,15 +189,15 @@ class TestCreateControllerGainsValidation:
         with pytest.raises((ValueError, ConfigValueError)):
             create_controller('sta_smc', config=mock_config, gains=[1, 2, 3, 4])
 
-    def test_adaptive_smc_requires_6_gains(self, mock_config):
-        """Should raise error if adaptive SMC gains length != 6."""
+    def test_adaptive_smc_requires_5_gains(self, mock_config):
+        """Should raise error if adaptive SMC gains length != 5."""
         with pytest.raises((ValueError, ConfigValueError)):
             create_controller('adaptive_smc', config=mock_config, gains=[1, 2])
 
-    def test_hybrid_smc_requires_8_gains(self, mock_config):
-        """Should raise error if hybrid SMC gains length != 8."""
+    def test_hybrid_smc_requires_4_gains(self, mock_config):
+        """Should raise error if hybrid SMC gains length != 4."""
         with pytest.raises((ValueError, ConfigValueError)):
-            create_controller('hybrid_adaptive_sta_smc', config=mock_config, gains=[1, 2, 3, 4, 5, 6])
+            create_controller('hybrid_adaptive_sta_smc', config=mock_config, gains=[1, 2])
 
     def test_negative_gains_raise_error(self, mock_config):
         """Should raise error for negative gain values."""
@@ -378,9 +378,11 @@ class TestCreateControllerRegistryIntegration:
         for controller_type in testable_controllers:
             # Use appropriate gains for each type
             if 'hybrid' in controller_type:
-                gains = [10, 5, 1.5, 1.5, 5, 5, 15, 2]
+                gains = [18, 12, 10, 8]  # 4 gains for hybrid
+            elif 'adaptive' in controller_type:
+                gains = [10, 5, 8, 3, 5]  # 5 gains for adaptive
             else:
-                gains = [10, 5, 8, 3, 15, 2]
+                gains = [10, 5, 8, 3, 15, 2]  # 6 gains for classical/STA
 
             try:
                 controller = create_controller(controller_type, config=mock_config, gains=gains)
