@@ -13,7 +13,7 @@ Tests cover:
 
 import pytest
 import math
-from src.utils.validation.range_validators import require_in_range, require_probability
+from src.utils.control.validation.range_validators import require_in_range, require_probability
 
 
 # =====================================================================================

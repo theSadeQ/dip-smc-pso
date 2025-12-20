@@ -18,11 +18,11 @@ from __future__ import annotations
 
 import pytest
 
-from src.utils.validation.parameter_validators import (
+from src.utils.control.validation.parameter_validators import (
     require_positive,
     require_finite
 )
-from src.utils.validation.range_validators import (
+from src.utils.control.validation.range_validators import (
     require_in_range,
     require_probability
 )

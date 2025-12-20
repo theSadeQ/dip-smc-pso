@@ -117,7 +117,7 @@ graph TD
 ### Example 1: Basic Type-Safe Controller Output
 
 ```python
-from src.utils.types import ClassicalSMCOutput
+from src.utils.control.types import ClassicalSMCOutput
 import numpy as np
 
 # Controller computation returns structured output
@@ -139,7 +139,7 @@ past_controls = output.history
 ### Example 2: Type Checking and Validation
 
 ```python
-from src.utils.types import ClassicalSMCOutput, AdaptiveSMCOutput
+from src.utils.control.types import ClassicalSMCOutput, AdaptiveSMCOutput
 import numpy as np
 
 def validate_output(output):
@@ -163,7 +163,7 @@ validate_output(classical_output)  # ✓ Pass
 ### Example 3: Immutability and Contract Enforcement
 
 ```python
-from src.utils.types import STAOutput
+from src.utils.control.types import STAOutput
 
 # Create immutable output
 sta_output = STAOutput(u, state_vars, history)
@@ -185,7 +185,7 @@ modified_output = STAOutput(
 ### Example 4: Integration with Type Hints
 
 ```python
-from src.utils.types import HybridSTAOutput
+from src.utils.control.types import HybridSTAOutput
 from typing import Tuple
 import numpy as np
 
@@ -208,7 +208,7 @@ output: HybridSTAOutput = hybrid_controller(x, state_vars, history)
 ### Example 5: Batch Processing with Type Safety
 
 ```python
-from src.utils.types import ClassicalSMCOutput
+from src.utils.control.types import ClassicalSMCOutput
 import numpy as np
 from typing import List
 
@@ -351,7 +351,7 @@ graph TD
 ### Example 1: Basic Range Validation
 
 ```python
-from src.utils.validation import require_in_range
+from src.utils.control.validation import require_in_range
 
 def set_control_gain(gain: float):
     # Validate gain is in acceptable range
@@ -374,7 +374,7 @@ except ValueError as e:
 ### Example 2: Positivity Validation
 
 ```python
-from src.utils.validation import require_positive
+from src.utils.control.validation import require_positive
 
 def configure_pendulum(mass: float, length: float):
     # Physical parameters must be positive
@@ -398,7 +398,7 @@ except ValueError as e:
 ### Example 3: Probability Validation
 
 ```python
-from src.utils.validation import require_probability
+from src.utils.control.validation import require_probability
 
 def set_confidence_level(alpha: float):
     # Validate probability constraint
@@ -420,7 +420,7 @@ except ValueError as e:
 ### Example 4: Constraint Validation
 
 ```python
-from src.utils.validation import require_in_range, require_positive
+from src.utils.control.validation import require_in_range, require_positive
 import numpy as np
 
 def validate_controller_parameters(params: dict):
@@ -459,7 +459,7 @@ valid_params = validate_controller_parameters(params)  # ✓ All pass
 ### Example 5: Batch Parameter Validation
 
 ```python
-from src.utils.validation import require_positive, require_in_range
+from src.utils.control.validation import require_positive, require_in_range
 import numpy as np
 
 def validate_gains_array(gains: np.ndarray):

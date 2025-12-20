@@ -13,7 +13,7 @@ Tests cover:
 
 import pytest
 import math
-from src.utils.validation.parameter_validators import require_positive, require_finite
+from src.utils.control.validation.parameter_validators import require_positive, require_finite
 
 
 # =====================================================================================

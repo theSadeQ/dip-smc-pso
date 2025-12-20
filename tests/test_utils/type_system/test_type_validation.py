@@ -19,7 +19,7 @@ from __future__ import annotations
 import pytest
 from typing import Any, Dict, Tuple, get_type_hints
 
-from src.utils.types.control_outputs import (
+from src.utils.control.types.control_outputs import (
     ClassicalSMCOutput,
     AdaptiveSMCOutput,
     STAOutput,
