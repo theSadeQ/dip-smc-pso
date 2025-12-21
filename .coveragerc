@@ -75,18 +75,18 @@ exclude_lines =
 
 [html]
 # HTML report output directory
-directory = .htmlcov
+directory = .cache/htmlcov
 
 # Title for HTML report
 title = DIP SMC PSO Coverage Report
 
 [xml]
 # XML output file for CI/CD integration
-output = coverage.xml
+output = .cache/coverage.xml
 
 [json]
 # JSON output for programmatic analysis
-output = coverage.json
+output = .cache/coverage.json
 show_contexts = True
 
 [paths]
