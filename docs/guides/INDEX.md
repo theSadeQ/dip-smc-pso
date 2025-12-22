@@ -37,7 +37,6 @@ getting-started
 user-guide
 QUICK_REFERENCE
 README
-getting-started-validation-report
 interactive_configuration_guide
 interactive_visualizations
 ```
@@ -64,7 +63,6 @@ tutorials/tutorial-02-controller-comparison
 tutorials/tutorial-03-pso-optimization
 tutorials/tutorial-04-custom-controller
 tutorials/tutorial-05-research-workflow
-tutorials/tutorial-01-validation-report
 ```
 
 ### Tutorial Series
