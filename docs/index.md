@@ -90,7 +90,6 @@ python -m http.server 8000 --directory docs/_build/html
 README
 NAVIGATION
 guides/getting-started
-learning/index
 guides/index
 hil_quickstart
 ```
@@ -181,8 +180,6 @@ research_workflow
 :caption: Research & Presentation
 :hidden:
 
-presentation/index
-thesis/index
 bibliography
 CITATIONS
 CITATIONS_ACADEMIC
@@ -212,7 +209,6 @@ LICENSES
 DEPENDENCIES
 ACADEMIC_INTEGRITY_STATEMENT
 meta/index
-reports/index
 ```
 
 ## Visual Navigation
