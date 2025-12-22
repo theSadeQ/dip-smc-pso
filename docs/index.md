@@ -142,7 +142,7 @@ pso_convergence_theory
 TESTING
 testing/index
 benchmarks/index
-coverage/index
+testing/coverage/index
 validation/index
 quality_gates
 ```
