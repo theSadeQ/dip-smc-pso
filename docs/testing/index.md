@@ -231,29 +231,11 @@ theory/smc_validation_mathematics
 
 Historical test reports, failure analysis, and PSO convergence studies.
 
-```{toctree}
-:maxdepth: 2
-:caption: Test Reports (2025-09-30)
+### Historical Test Failure Reports (Archived)
 
-reports/2025-09-30/executive/executive_summary
-reports/2025-09-30/test_failure_analysis
-reports/2025-09-30/failure_breakdown
-reports/2025-09-30/pso_convergence_analysis
-reports/2025-09-30/pso_fitness_investigation
-reports/2025-09-30/technical_analysis
-reports/2025-09-30/technical/control_theory_analysis
-reports/2025-09-30/technical/resolution_roadmap
-```
-
-### Report Archive (2025-09-30)
-
-Major test failure analysis and PSO optimization investigation:
-
-- [Executive Summary](reports/2025-09-30/executive/executive_summary.md) - High-level findings
-- [Test Failure Analysis](reports/2025-09-30/test_failure_analysis.md) - Root cause investigation
-- [PSO Convergence Analysis](reports/2025-09-30/pso_convergence_analysis.md) - Optimization convergence issues
-- [Technical Control Theory Analysis](reports/2025-09-30/technical/control_theory_analysis.md) - Stability analysis
-- [Resolution Roadmap](reports/2025-09-30/technical/resolution_roadmap.md) - Fix strategy
+September 2025 test failure analysis (11 files, 684 KB) archived to `.artifacts/testing/historical_failures/2025-09-30/`:
+- Issues resolved, findings documented in current testing standards
+- Full git history preserved for recovery if needed
 
 ---
 
