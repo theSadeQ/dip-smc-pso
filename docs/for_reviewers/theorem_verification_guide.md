@@ -599,7 +599,7 @@ grep -rn "Super-Twisting" src/controllers/smc/sta_smc.py
 **Problem:** Documentation uses $\lambda$, code uses `c`
 
 **Solution:**
-- Check `docs/references/notation_guide.md`
+- Check `docs/reference/legacy/notation_guide.md`
 - Notation guide documents all symbol↔code mappings
 - Conflicts are explicitly resolved with citations
 
