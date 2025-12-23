@@ -38,7 +38,7 @@ dip-smc-pso/
 │ ├── theory/ # Theoretical foundations (39 citations)
 │ ├── api/ # API reference
 │ ├── bib/ # BibTeX bibliography (94 entries)
-│ ├── references/ # Notation guide, glossary
+│ ├── reference/ # API references, notation guide (subdirectories)
 │ └── for_reviewers/ # This package
 ├── .artifacts/ # Verification reports
 │ ├── accuracy_audit.md # Citation accuracy verification
@@ -176,7 +176,7 @@ python scripts/analysis/compare_gains.py gains_full.json config/tuned_gains.json
 - [ ] **Glossary:** Technical terms defined and cross-referenced
 - [ ] **Examples:** Code examples match documentation descriptions
 
-## Recommended Review Focus ### Priority 1 (Essential for Publication) 1. **Citation Accuracy Audit** (`.artifacts/accuracy_audit.md`) - Verify 11 theorem claims - Check citation appropriateness - Confirm mathematical correctness 2. **BibTeX Verification** (`.artifacts/citation_report.md`) - Confirm 100% DOI/URL coverage - Verify accessibility of key sources - Check citation style consistency 3. **Code Reproduction** (`docs/for_reviewers/reproduction_guide.md`) - Run simulation examples - Reproduce PSO optimization - Verify test suite passes ### Priority 2 (Recommended) 1. **Attribution Review** (`.artifacts/attribution_audit_executive_summary.md`) - Understand flagged claims context - Review top 5 theory files - Assess overall attribution quality 2. **Theorem Verification** (`docs/for_reviewers/theorem_verification_guide.md`) - Cross-check theorem-to-code mappings - Verify implementation correctness - Review test coverage for theorems ### Priority 3 (Optional) 1. **Notation Guide** (`docs/references/notation_guide.md`) - Verify symbol consistency - Check code variable mappings - Review conflict resolutions 2. **API Documentation** (`docs/api/`) - Check implementation examples - Verify code snippets - Review docstring quality
+## Recommended Review Focus ### Priority 1 (Essential for Publication) 1. **Citation Accuracy Audit** (`.artifacts/accuracy_audit.md`) - Verify 11 theorem claims - Check citation appropriateness - Confirm mathematical correctness 2. **BibTeX Verification** (`.artifacts/citation_report.md`) - Confirm 100% DOI/URL coverage - Verify accessibility of key sources - Check citation style consistency 3. **Code Reproduction** (`docs/for_reviewers/reproduction_guide.md`) - Run simulation examples - Reproduce PSO optimization - Verify test suite passes ### Priority 2 (Recommended) 1. **Attribution Review** (`.artifacts/attribution_audit_executive_summary.md`) - Understand flagged claims context - Review top 5 theory files - Assess overall attribution quality 2. **Theorem Verification** (`docs/for_reviewers/theorem_verification_guide.md`) - Cross-check theorem-to-code mappings - Verify implementation correctness - Review test coverage for theorems ### Priority 3 (Optional) 1. **Notation Guide** (`docs/reference/legacy/notation_guide.md`) - Verify symbol consistency - Check code variable mappings - Review conflict resolutions 2. **API Documentation** (`docs/api/`) - Check implementation examples - Verify code snippets - Review docstring quality
 
 ## Support and Contact **Issues or Questions:**
 - GitHub Issues: https://github.com/theSadeQ/dip-smc-pso/issues

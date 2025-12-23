@@ -157,7 +157,7 @@
 
 ### Mathematical Notation
 
-- [ ] Open: `docs/references/notation_guide.md`
+- [ ] Open: `docs/reference/legacy/notation_guide.md`
 - [ ] Verify state variables: $\vec{x}$ → `state`, $\theta_1$ → `state[1]`
 - [ ] Verify SMC notation: $c_i$ → `gains[i]`, $\eta$ → `eta`, $s$ → `s`
 - [ ] Verify PSO notation: $w$ → `w`, $c_1$ → `c1`, $c_2$ → `c2`
@@ -263,7 +263,7 @@
 | `.artifacts/accuracy_audit.md` | Theorem accuracy verification |
 | `.artifacts/attribution_audit_executive_summary.md` | Attribution analysis |
 | `.artifacts/citation_mapping.json` | Theorem-to-code mappings |
-| `docs/references/notation_guide.md` | Math symbols → code variables |
+| `docs/reference/legacy/notation_guide.md` | Math symbols → code variables |
 | `docs/for_reviewers/README.md` | Main reviewer guide |
 
 ### Critical Commands
