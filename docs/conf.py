@@ -166,7 +166,7 @@ numfig_format = {
 
 # Bibliography configuration
 bibtex_bibfiles = [
-    'refs.bib',            # Main bibliography file
+    'reference/legacy/refs.bib',  # Main bibliography file (moved from root in Phase 1)
     'bib/smc.bib',         # Sliding mode control references
     'bib/pso.bib',         # PSO optimization references
     'bib/dip.bib',         # Double inverted pendulum references
