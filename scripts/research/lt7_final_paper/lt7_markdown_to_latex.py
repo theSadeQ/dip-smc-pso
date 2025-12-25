@@ -14,9 +14,9 @@ Output:
 import re
 from pathlib import Path
 
-INPUT_PATH = Path("benchmarks/LT7_RESEARCH_PAPER.md")
-OUTPUT_TEX = Path("benchmarks/LT7_RESEARCH_PAPER.tex")
-OUTPUT_BIB = Path("benchmarks/LT7_RESEARCH_PAPER.bib")
+INPUT_PATH = Path(".artifacts/research/papers/LT7_journal_paper/LT7_RESEARCH_PAPER.md")
+OUTPUT_TEX = Path(".artifacts/research/papers/LT7_journal_paper/LT7_RESEARCH_PAPER.tex")
+OUTPUT_BIB = Path(".artifacts/research/papers/LT7_journal_paper/LT7_RESEARCH_PAPER.bib")
 
 PREAMBLE = r"""\documentclass[11pt,twocolumn]{article}
 \usepackage[utf8]{inputenc}
