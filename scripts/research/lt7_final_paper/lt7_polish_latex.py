@@ -17,8 +17,8 @@ import re
 from pathlib import Path
 from typing import List, Tuple
 
-INPUT_TEX = Path("benchmarks/LT7_RESEARCH_PAPER.tex")
-BACKUP_TEX = Path("benchmarks/LT7_RESEARCH_PAPER.tex.backup")
+INPUT_TEX = Path(".artifacts/research/papers/LT7_journal_paper/LT7_RESEARCH_PAPER.tex")
+BACKUP_TEX = Path(".artifacts/research/papers/LT7_journal_paper/LT7_RESEARCH_PAPER.tex.backup")
 
 def convert_math_blocks(content: str) -> str:
     """Convert ```math blocks to LaTeX equation/align environments."""

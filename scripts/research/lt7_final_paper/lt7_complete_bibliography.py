@@ -14,8 +14,8 @@ import re
 from pathlib import Path
 from typing import Dict, Tuple, Optional
 
-INPUT_PAPER = Path("benchmarks/LT7_RESEARCH_PAPER.md")
-OUTPUT_BIB = Path("benchmarks/LT7_RESEARCH_PAPER.bib")
+INPUT_PAPER = Path(".artifacts/research/papers/LT7_journal_paper/LT7_RESEARCH_PAPER.md")
+OUTPUT_BIB = Path(".artifacts/research/papers/LT7_journal_paper/LT7_RESEARCH_PAPER.bib")
 
 def parse_ieee_book(ref_text: str) -> Optional[Dict]:
     """Parse IEEE book citation format."""
