@@ -726,6 +726,69 @@ Two options implemented:
 - Larger overshoot (5.8%, Section 7.2)
 - Boundary layer introduces steady-state error
 
+**Implementation Notes:**
+
+**Discretization (dt = 0.01s, 100 Hz control loop):**
+
+The continuous-time control law must be discretized for digital implementation:
+
+1. **Sliding Surface:** Direct substitution (no discretization error)
+   ```math
+   \sigma[k] = \lambda_1 \theta_1[k] + \lambda_2 \theta_2[k] + k_1 \dot{\theta}_1[k] + k_2 \dot{\theta}_2[k]
+   ```
+
+2. **Equivalent Control:** Use backward differentiation for stability
+   ```math
+   u_{\text{eq}}[k] = (L M^{-1} B)^{-1} \left[ L M^{-1}(C\dot{q}[k] + G[k]) - \lambda_1 \dot{\theta}_1[k] - \lambda_2 \dot{\theta}_2[k] \right]
+   ```
+
+3. **Saturation Function:** tanh is inherently continuous, no discretization needed
+
+**Numerical Stability:**
+
+- **Matrix Inversion:** M(q) is always invertible (positive definite) but can become ill-conditioned for large θ. Use LU decomposition (scipy.linalg.solve) instead of explicit inv(M)
+- **Overflow Prevention:** Clip intermediate calculations: u_eq limited to ±100N before adding switching term
+- **Derivative Estimation:** Use filtered backward difference for θ̇ (Butterworth 2nd-order, 20 Hz cutoff) to reduce noise amplification
+
+**Computational Breakdown (18.5 μs total):**
+
+| Operation | FLOPs | Time (μs) | % Total |
+|-----------|-------|-----------|---------|
+| M, C, G evaluation | ~120 | 8.2 | 44% |
+| M^{-1} (3×3 LU solve) | ~60 | 4.1 | 22% |
+| u_eq calculation | ~40 | 2.8 | 15% |
+| σ calculation | ~10 | 0.9 | 5% |
+| Switching term | ~5 | 1.2 | 6% |
+| Saturation | ~3 | 1.3 | 7% |
+| **TOTAL** | **~238** | **18.5** | **100%** |
+
+**Common Pitfalls:**
+
+1. **Chattering from small ε:** Setting ε<0.01 causes high-frequency switching (>50 Hz). Stay above ε≥0.02 for dt=0.01s.
+2. **Instability from large k_d:** Derivative gain k_d>5.0 can cause oscillations due to noise amplification in θ̇ estimates.
+3. **Steady-state error from large ε:** Boundary layer ε>0.1 introduces ~5% steady-state error in θ. Tune ε to balance chattering vs accuracy.
+4. **Matrix inversion failure:** For |θ|>π/2, M(q) becomes poorly conditioned. Always check condition number: cond(M) < 1000.
+
+**Figure 3.2:** Classical SMC block diagram
+
+```
+State x → [Sliding Surface σ] → [Saturation sat(σ/ε)] → [×] ← K
+                                                           │
+                                                           ▼
+State x → [Equivalent Control u_eq] ────────────────────→ [+] → u → Plant
+                                                           ▲
+Sliding Surface σ ────────────→ [×] ← k_d ────────────────┘
+```
+
+**Signal Flow:**
+1. Measure state x = [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂]ᵀ
+2. Compute sliding surface σ = λ₁θ₁ + λ₂θ₂ + k₁θ̇₁ + k₂θ̇₂
+3. Compute equivalent control u_eq (model-based feedforward)
+4. Compute switching term: -K·sat(σ/ε)
+5. Compute derivative damping: -k_d·σ
+6. Sum all terms: u = u_eq - K·sat(σ/ε) - k_d·σ
+7. Apply saturation: u_sat = clip(u, -20N, +20N)
+
 ---
 
 ### 3.3 Super-Twisting Algorithm (STA-SMC)
