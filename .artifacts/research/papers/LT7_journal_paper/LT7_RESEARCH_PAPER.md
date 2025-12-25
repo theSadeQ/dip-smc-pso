@@ -853,6 +853,65 @@ T_{\text{reach}} \leq \frac{2 |\sigma(0)|^{1/2}}{K_1 - \sqrt{2 K_2 \bar{d}}}
 - More complex gain tuning (Lyapunov conditions)
 - Less intuitive than classical SMC
 
+**Figure 3.3:** Super-Twisting Algorithm (STA) block diagram
+
+```
+State x → [Sliding Surface σ] → [|σ|^(1/2) · sign(σ)] → [×] ← K₁
+                  │                                       │
+                  │                                       ▼
+                  └────────→ [sign(σ)] → [Integrator z] → [+] → u_STA
+                                           ▲              ▲
+                                           │              │
+                             K₂ ───────────┘              │
+                                                          │
+State x → [Equivalent Control u_eq] ─────────────────────┘ → [+] → u → Plant
+```
+
+**Signal Flow:**
+1. Measure state x = [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂]ᵀ
+2. Compute sliding surface σ = λ₁θ₁ + λ₂θ₂ + k₁θ̇₁ + k₂θ̇₂
+3. Compute equivalent control u_eq (model-based feedforward)
+4. Compute proportional term: -K₁|σ|^(1/2)·sign(σ)
+5. Compute integral state: ż = -K₂·sign(σ)
+6. Sum STA terms: u_STA = -K₁|σ|^(1/2)·sign(σ) + z
+7. Total control: u = u_eq + u_STA
+8. Apply saturation: u_sat = clip(u, -20N, +20N)
+
+**Implementation Notes:**
+
+**Discretization (dt = 0.01s):**
+
+1. **Fractional Power Term:** |σ|^(1/2) can cause numerical issues for small σ. Use safety threshold:
+   ```math
+   |σ|^{1/2} = \begin{cases}
+   \sqrt{|\sigma|} & |\sigma| > 10^{-6} \\
+   0 & \text{otherwise}
+   \end{cases}
+   ```
+
+2. **Integral State Update:** Use backward Euler for stability:
+   ```math
+   z[k+1] = z[k] - K_2 \cdot \text{sign}(\sigma[k]) \cdot dt
+   ```
+
+3. **Sign Function Smoothing:** Replace discontinuous sign with smooth saturation:
+   ```math
+   \text{sign}(\sigma) \approx \tanh(\sigma / \epsilon), \quad \epsilon = 0.01
+   ```
+
+**Numerical Stability:**
+
+- **Integral Windup:** Clip z to prevent unbounded growth: z ∈ [-100, +100]
+- **Division by Zero:** Check |σ| > ε_min before computing fractional power
+- **Overflow Protection:** Clip u_STA before adding to u_eq: u_STA ∈ [-50N, +50N]
+
+**Common Pitfalls:**
+
+1. **Instability from violating Lyapunov conditions:** Ensure K₁² ≥ 2K₂d̄ where d̄ is disturbance bound (~1.0 for DIP)
+2. **Integral windup:** Without anti-windup (z clamping), integral state can grow unbounded during saturation
+3. **Chattering from small ε:** If ε<0.005, sign function becomes too sharp → high-frequency switching
+4. **Slow convergence from small K₁:** If K₁<8.0, reaching time increases beyond acceptable limits (>5s)
+
 ---
 
 ### 3.4 Adaptive Sliding Mode Control
