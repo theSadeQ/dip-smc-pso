@@ -197,6 +197,14 @@ The remainder of this paper is organized as follows:
 
 **Figure 2.1:** Double-inverted pendulum system schematic showing cart (m0), two pendulum links (m1, m2), angles (θ1, θ2), control force (u), and coordinate system
 
+**Figure 3.1:** Common SMC architecture showing sliding surface calculation, controller-specific control law, saturation, and feedback to DIP plant
+
+**Figure 3.2:** Classical SMC block diagram with equivalent control, switching term, and derivative damping
+
+**Figure 3.3:** Super-Twisting Algorithm control architecture with integral state z and fractional power term |σ|^(1/2)
+
+**Figure 3.4:** Hybrid Adaptive STA-SMC block diagram with mode switching logic between STA and Adaptive modes
+
 **Figure 5.1:** PSO convergence curves for Classical SMC gain optimization over 200 iterations
 
 **Figure 5.2:** MT-6 PSO convergence comparison (adaptive boundary layer optimization, marginal benefit observed)
@@ -574,6 +582,79 @@ The sliding surface represents a weighted combination of pendulum state errors. 
 1. **Reaching Phase:** Drive system toward sliding surface ($\sigma \to 0$)
 2. **Sliding Phase:** Maintain system on surface ($\sigma = 0$), ensuring exponential convergence to equilibrium
 3. **Steady-State:** System remains at equilibrium ($\theta_1 = \theta_2 = 0$)
+
+---
+
+#### 3.1.1 Controller Architecture Overview
+
+All seven SMC variants in this study share a **common architecture pattern** but differ in specific implementation of the control law and how they handle uncertainties.
+
+**Figure 3.1:** Common SMC architecture for DIP stabilization
+
+```
+    θ₁,θ₂,θ̇₁,θ̇₂ (State Measurements)
+           │
+           ▼
+    ┌──────────────────┐
+    │  Sliding Surface │  σ = λ₁θ₁ + λ₂θ₂ + k₁θ̇₁ + k₂θ̇₂
+    │   Calculation    │
+    └─────────┬────────┘
+              │ σ
+              ▼
+    ┌─────────────────────────────┐
+    │   Controller-Specific       │
+    │   Control Law Computation   │
+    │  (Classical/STA/Adaptive)   │
+    └─────────────┬───────────────┘
+                  │ u
+                  ▼
+    ┌─────────────────────────┐
+    │  Saturation (|u|≤20N)  │
+    └─────────────┬───────────┘
+                  │ u_sat
+                  ▼
+           DIP Plant (Section 2)
+```
+
+**Controller Family Tree:**
+
+```
+SMC Variants (7 total)
+│
+├─ Classical SMC (3.2)
+│  └─ Boundary Layer + Derivative Damping
+│
+├─ Higher-Order SMC
+│  └─ STA-SMC (3.3)
+│     └─ 2nd-order sliding mode with integral state
+│
+├─ Adaptive SMC
+│  ├─ Adaptive SMC (3.4)
+│  │  └─ Time-varying gain K(t)
+│  │
+│  └─ Hybrid Adaptive STA (3.5)
+│     └─ Mode-switching between STA and Adaptive
+│
+├─ Global Control
+│  └─ Swing-Up SMC (3.6)
+│     └─ Energy-based swing-up + SMC stabilization
+│
+└─ Non-SMC Benchmark
+   └─ MPC (3.7)
+      └─ Finite-horizon optimization
+```
+
+**Architectural Differences:**
+
+| Aspect | Classical | STA | Adaptive | Hybrid |
+|--------|-----------|-----|----------|--------|
+| **Control Structure** | Single-layer | Integral state z | Gain adaptation | Dual-mode |
+| **Discontinuity** | Smoothed sign | Continuous | Smoothed sign | Mode-dependent |
+| **State Augmentation** | None | +1 (z) | +1 (K) | +1 (z) + mode |
+| **Feedback Type** | Proportional | Prop + Integral | Adaptive Prop | Switching |
+| **Computational Load** | 18.5 μs | 24.2 μs | 31.6 μs | 26.8 μs |
+
+This architectural overview provides context for understanding design tradeoffs: simplicity (Classical) vs performance (STA) vs adaptability (Adaptive/Hybrid).
 
 ---
 
