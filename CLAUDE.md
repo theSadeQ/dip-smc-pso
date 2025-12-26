@@ -454,6 +454,79 @@ du -sh .artifacts/                                  # <150MB (includes 98MB thes
 du -sh .logs/                                       # <100MB (current: 12MB)
 ```
 
+### Automatic Cleanup Policy (MANDATORY)
+
+**CRITICAL RULE - PROFESSIONAL CLEANUP:**
+- **ALWAYS cleanup** folder after creating/editing multiple files
+- **NEVER leave** intermediate versions, test files, or build artifacts at root level
+- **Action:** Create/Edit files -> Archive old versions -> Add README.md -> Commit
+- **Target:** ≤5 active files at folder root (final deliverables only)
+
+**Cleanup Principles:**
+
+1. **Archive Structure** - Create subdirectories for organization:
+   - `archive/old_versions/` - Previous iterations (PDFs, source files)
+   - `archive/planning/` - Planning docs, progress reports, completion summaries
+   - `archive/test_files/` - Test compilations and validation files
+   - `archive/build_artifacts/` - Compiler outputs (.aux, .log, .toc, .out, etc.)
+
+2. **Keep at Root** - Only essential deliverables:
+   - Final output files (e.g., `PROJECT_FINAL.pdf`, `PROJECT_FINAL.tex`)
+   - Active source files (e.g., `PROJECT.md`, `PROJECT.bib`)
+   - Documentation (`README.md`, `CHECKLIST.md`, `MANUAL.md`)
+
+3. **Archive Pattern** - Move intermediate files:
+   ```bash
+   # Old versions
+   mv PROJECT_v1.pdf PROJECT_v2.pdf archive/old_versions/
+
+   # Test files
+   mv TEST_*.pdf TEST_*.tex archive/test_files/
+
+   # Build artifacts
+   mv *.aux *.log *.toc *.out archive/build_artifacts/
+
+   # Planning docs
+   mv *_PLAN.md *_REPORT.md *_SUMMARY.md archive/planning/
+   ```
+
+4. **README Creation** - Always create `README.md` with:
+   - Section: Final Deliverables (list primary outputs with sizes)
+   - Section: Source Files (working files, databases)
+   - Section: Submission Materials (if applicable)
+   - Section: Archive Structure (describe subdirectories)
+   - Section: Status (completion date, version, quality metrics)
+   - Section: Usage (how to compile/run/view outputs)
+
+5. **Verification** - Before committing:
+   ```bash
+   ls -lah                    # Verify root has ≤5 core files
+   ls archive/*/              # Verify archive structure
+   cat README.md              # Verify documentation complete
+   ```
+
+**Example: Research Paper Cleanup**
+```bash
+# BEFORE: 95 files at root (messy)
+# AFTER: 12 files at root + archive/ subdirectories (professional)
+#
+# Root structure:
+# - PAPER_FINAL.pdf (final output)
+# - PAPER_FINAL.tex (LaTeX source)
+# - PAPER.md (markdown master)
+# - PAPER.bib (bibliography)
+# - README.md (documentation)
+# - CHECKLIST.md (submission guide)
+# - archive/ (old versions, planning, tests, build artifacts)
+```
+
+**When to Cleanup:**
+- [MANDATORY] After completing any multi-file creation task
+- [MANDATORY] After PDF/LaTeX compilation creates build artifacts
+- [MANDATORY] After iterative development creates v1, v2, v3 versions
+- [MANDATORY] Before committing changes to repository
+- [RECOMMENDED] Weekly during active development
+
 **See Also**: `.project/archive/RESTRUCTURING_PLAN_2025-10-26.md` | `.project/archive/WORKSPACE_CLEANUP_2025-10-26.md`
 
 ------
