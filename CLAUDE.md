@@ -346,15 +346,17 @@ config = load_config("config.yaml", allow_unknown=False)
 **See:** `.ai_workspace/guides/workspace_organization.md` for complete details.
 
 **Quick Reference:**
-- Target: ≤19 visible root items, ≤100MB .logs/
-- Current: 22 visible items (1 locked file pending cleanup), 12MB .logs/ [OK] (Dec 19, 2025)
+- Target: ≤19 visible root items, ≤100MB academic/logs/
+- Current: 22 visible items, academic/logs/ 13MB [OK] (Dec 29, 2025)
 - Centralized log paths: `src/utils/logging/paths.py` (single source of truth)
 - Use `.ai_workspace/` for ALL AI/dev configs (CANONICAL)
-- Use `academic/` for research outputs and thesis (visible directory)
-- Use `academic/logs/` for centralized logging
-- Use `.cache/` for ephemeral data (if not migrated to academic/.cache/)
+- Use `academic/` for THREE-CATEGORY STRUCTURE (paper/, logs/, dev/)
+  - `academic/paper/` [202 MB] - Research papers, thesis, documentation
+  - `academic/logs/` [13 MB] - Runtime and development logs
+  - `academic/dev/` [46 MB] - QA audits, coverage reports, caches
+- Use `.cache/` for project root ephemeral data
 - Use `D:\Tools\Claude\` for system-level external tools (account switcher)
-- Migration guide: `docs/guides/logs_migration_guide.md`
+- Migration guide: `academic/paper/README.md`, `academic/logs/README.md`, `academic/dev/README.md`
 
 ### Config Consolidation (Use `.ai_workspace/` as CANONICAL)
 ```bash
@@ -377,19 +379,31 @@ config = load_config("config.yaml", allow_unknown=False)
 - [ERROR] `.logs/` -> migrated to `academic/logs/` (visible directory)
 
 ### Directory Rules
-- **Academic outputs**: `academic/` (research outputs, thesis, papers - VISIBLE directory)
-  - `thesis/` - LaTeX thesis source and PDFs (98MB, moved from root)
-  - `research/` - Research papers, experiments, phase data
-  - `docs/` - Sphinx documentation build outputs
-  - `logs/` - Centralized logging (moved from hidden .logs/)
-  - `archive/` - Archived research artifacts
+- **Academic outputs**: `academic/` (THREE-CATEGORY STRUCTURE - reorganized Dec 29, 2025)
+  - **paper/** [~202 MB] - Research papers, thesis, documentation
+    - `thesis/` [98 MB] - LaTeX thesis source and PDFs
+    - `research/` [28 MB] - Research papers, experiments, phase data
+    - `docs/` [64 MB] - Sphinx documentation build outputs
+    - `archive/` [12 MB] - Archived research artifacts
+    - `data/` [3 KB] - Simulation and research data
+  - **logs/** [~13 MB] - Runtime and development logs
+    - `benchmarks/` [~10 MB] - Research task execution logs
+    - `pso/` [978 KB] - PSO optimization logs
+    - `docs_build/` [352 KB] - Sphinx build logs
+    - `monitoring/` - Runtime monitoring logs
+    - `test/` - Test execution logs
+    - `migration/` - Migration logs
+    - `archive/` [214 KB] - Compressed historical logs
+  - **dev/** [~46 MB] - Development artifacts
+    - `quality/` [46 MB] - QA audits, coverage reports
+    - `caches/` [133 KB] - Pytest, hypothesis, benchmark caches
 - **AI workspace**: `.ai_workspace/` (AI operation configs, tools, guides - HIDDEN directory)
   - `tools/` - Development and recovery scripts
   - `guides/` - AI operation documentation
   - `planning/` - Project planning and roadmaps
   - `state/` - Project state tracking
   - `config/` - Claude and MCP configurations
-- **Runtime caches**: `.cache/` or `academic/.cache/` (pytest, hypothesis, htmlcov, benchmarks)
+- **Runtime caches**: `.cache/` (pytest, hypothesis, htmlcov, benchmarks - project root caches)
 - **Visible directories** (core): `src/`, `tests/`, `academic/`, `scripts/`, `data/`, `benchmarks/`, `optimization_results/`
 - **Root files** (9 core + 2 MCP): `README.md`, `CHANGELOG.md`, `CLAUDE.md`, `config.yaml`, `requirements.txt`, `simulate.py`, `streamlit_app.py`, `package.json`, `package-lock.json`
 - **Benchmarks organization** (reorganized Dec 18, 2025):
@@ -403,7 +417,25 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ### Recent Reorganization
 
-**Dec 29, 2025 - AI Workspace & Academic Migration:**
+**Dec 29, 2025 - Academic Folder Reorganization (THREE-CATEGORY STRUCTURE):**
+- [OK] Created three top-level categories: paper/, logs/, dev/
+- [OK] paper/ consolidation (202 MB total):
+  - thesis/ [98 MB], research/ [28 MB], docs/ [64 MB], archive/ [12 MB], data/ [3 KB]
+  - Flattened nested structures: docs/docs/ → docs/, research/papers/papers/ → research/papers/
+- [OK] logs/ reorganization (13 MB total):
+  - Flattened .logs/ → logs/ (merged nested structure)
+  - Added migration/ subdirectory for migration logs
+  - Moved archive/docs_build/logs/ → logs/docs_build/
+- [OK] dev/ consolidation (46 MB total):
+  - quality/ [46 MB] - QA audits, coverage reports
+  - caches/ [133 KB] - Pytest, hypothesis, benchmark caches
+- [OK] Cleanup: Deleted 294 MB backup file (52% size reduction)
+- [OK] Cleanup: Removed redundant archive backups (4.6 MB saved)
+- [OK] README files created for paper/, logs/, dev/
+- [OK] Updated CLAUDE.md Section 14 with new structure
+- [OK] Git history preserved: All moves use git mv
+
+**Dec 29, 2025 - AI Workspace Migration:**
 - [OK] .project/ → .ai_workspace/ (complete AI workspace consolidation)
 - [OK] .project/ai/ subdirectories → .ai_workspace/ (planning, guides, education, issues, testing, quality, orchestration, collaboration, ultrathink_sessions)
 - [OK] .project/tools/ → .ai_workspace/tools/ (recovery scripts, checkpoints, automation)
@@ -413,7 +445,6 @@ config = load_config("config.yaml", allow_unknown=False)
 - [OK] Documentation updated: CLAUDE.md path references, .ai_workspace/ markdown files
 - [OK] Cleanup: Removed .project/, .ai/, .benchmarks/, malformed files, Python cache
 - [OK] Git history preserved: All migrations use git mv
-- [PENDING] Agent 1 migrations: .artifacts/ → academic/, .logs/ → academic/logs/, test_logs → academic/logs/tests/
 
 **Dec 18, 2025 - Benchmarks:**
 - [OK] benchmarks/ → Publication-ready structure (raw/, processed/, figures/, reports/)
