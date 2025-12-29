@@ -6,19 +6,29 @@
 - `LT7_PROFESSIONAL_FINAL.pdf` (449KB) - Final submission-ready paper
 - `LT7_PROFESSIONAL_FINAL.tex` (264KB) - LaTeX source for final version
 
-**Source Files:**
-- `LT7_RESEARCH_PAPER.md` (366KB) - Markdown master version
-- `LT7_RESEARCH_PAPER.tex` (391KB) - Working LaTeX source
-- `LT7_RESEARCH_PAPER.html` (225KB) - HTML export
-- `LT7_RESEARCH_PAPER.bib` (20KB) - Bibliography database
+**Source Files (see source/):**
+- `source/LT7_RESEARCH_PAPER.md` (366KB) - Markdown master version
+- `source/LT7_RESEARCH_PAPER.tex` (391KB) - Working LaTeX source
+- `source/LT7_RESEARCH_PAPER.html` (225KB) - HTML export
+- `LT7_RESEARCH_PAPER.bib` (20KB) - Bibliography database (root)
 
-**Submission Materials:**
-- `LT7_COVER_LETTER.md` - Cover letter for journal submission
-- `LT7_SUBMISSION_CHECKLIST.md` - Pre-submission validation
-- `LT7_SUGGESTED_REVIEWERS.md` - Reviewer recommendations
-- `LT7_USER_MANUAL.md` - Documentation guide
-- `LT7_AUTOMATION_COMPLETE.md` - Automation workflow summary
-- `SECTION_4_COMPLETION_REPORT.md` - Section 4 completion status
+**Submission Materials (see submission/):**
+- `submission/LT7_COVER_LETTER.md` - Cover letter for journal submission
+- `submission/LT7_SUBMISSION_CHECKLIST.md` - Pre-submission validation
+- `submission/LT7_SUGGESTED_REVIEWERS.md` - Reviewer recommendations
+- `submission/LT7_USER_MANUAL.md` - Documentation guide
+
+**Progress Reports (see reports/):**
+- `reports/LT7_AUTOMATION_COMPLETE.md` - Automation workflow summary
+- `reports/SECTION_4_COMPLETION_REPORT.md` - Section 4 completion status
+
+## Section-Level Sources (see sections_source/)
+
+**sections_source/** - Section-level markdown, LaTeX, and PDF files
+**sections_source/scripts/** - Automation tools for extraction, PDF generation, and audits
+**sections_source/config/** - Configuration files for automation workflows
+**sections_source/guides/** - Usage documentation and quick-start guides
+**sections_source/audits/** - Quality assurance reports and audit summaries
 
 ## Archive Structure
 
@@ -51,5 +61,6 @@ Open `LT7_PROFESSIONAL_FINAL.pdf`
 ## See Also
 
 - Project root: `D:\Projects\main\`
-- Research roadmap: `.project/ai/planning/research/RESEARCH_COMPLETION_SUMMARY.md`
-- Phase 5 status: `.project/ai/guides/phase4_status.md`
+- Research roadmap: `.ai_workspace/planning/research/RESEARCH_COMPLETION_SUMMARY.md`
+- Phase 5 status: `.ai_workspace/guides/phase4_status.md`
+- Publications index: `academic/paper/publications/README.md`
