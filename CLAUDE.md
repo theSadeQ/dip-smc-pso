@@ -380,10 +380,11 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ### Directory Rules
 - **Academic outputs**: `academic/` (THREE-CATEGORY STRUCTURE - reorganized Dec 29, 2025)
-  - **paper/** [~202 MB] - Research papers, thesis, documentation
+  - **paper/** [~203 MB] - Research papers, thesis, documentation (merged Dec 29, 2025)
+    - `sphinx_docs/` [64 MB] - Sphinx documentation system
     - `thesis/` [98 MB] - LaTeX thesis source and PDFs
-    - `research/` [28 MB] - Research papers, experiments, phase data
-    - `docs/` [64 MB] - Sphinx documentation build outputs
+    - `publications/` [13 MB] - Research papers and journal articles
+    - `experiments/` [16 MB] - All experimental data, benchmarks, phase results
     - `archive/` [12 MB] - Archived research artifacts
     - `data/` [3 KB] - Simulation and research data
   - **logs/** [~13 MB] - Runtime and development logs
@@ -416,6 +417,17 @@ config = load_config("config.yaml", allow_unknown=False)
   - Import changes: `from benchmarks.*` → `from src.benchmarks.*` (auto-updated)
 
 ### Recent Reorganization
+
+**Dec 29, 2025 - Academic Paper Merge (UNIFIED STRUCTURE):**
+- [OK] Merged docs/ + research/ → Unified academic/paper/ structure
+- [OK] docs/ → sphinx_docs/ (64 MB, renamed for clarity)
+- [OK] research/papers/ → publications/ (13 MB, research papers)
+- [OK] research/benchmarks/ + research/experiments/ + research/phases/ + research/optimization/ → experiments/ (16 MB, consolidated experimental data)
+- [OK] research/theory/ removed (empty directory)
+- [OK] Updated academic/paper/README.md with new v3.0 structure
+- [OK] Updated CLAUDE.md Section 14 references
+- [OK] Git history preserved: All moves use git mv
+- [OK] New structure: sphinx_docs/, thesis/, publications/, experiments/, archive/, data/
 
 **Dec 29, 2025 - Academic Folder Reorganization (THREE-CATEGORY STRUCTURE):**
 - [OK] Created three top-level categories: paper/, logs/, dev/
