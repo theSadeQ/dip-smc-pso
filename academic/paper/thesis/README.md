@@ -29,22 +29,26 @@ thesis/
 │   └── main.bib         # Primary bibliography database
 │
 ├── figures/              # Figures organized by category
-│   ├── architecture/    # System architecture diagrams
-│   ├── benchmarks/      # Benchmark comparison plots
-│   ├── convergence/     # PSO convergence plots
-│   ├── lyapunov/        # Lyapunov analysis plots
-│   └── schematics/      # System schematics
+│   ├── architecture/    # System architecture diagrams (empty, reserved)
+│   ├── benchmarks/      # Benchmark comparison plots (8 PDFs)
+│   ├── convergence/     # PSO convergence plots (2 PDFs)
+│   ├── lyapunov/        # Lyapunov analysis plots (empty, reserved)
+│   └── schematics/      # System schematics (empty, reserved)
 │
 ├── tables/               # Tables organized by category
-│   ├── benchmarks/      # Benchmark results tables
-│   ├── comparisons/     # Controller comparison tables
-│   └── parameters/      # System parameter tables
+│   ├── benchmarks/      # Benchmark results tables (5 .tex files)
+│   ├── comparisons/     # Controller comparison tables (empty, reserved)
+│   └── parameters/      # System parameter tables (empty, reserved)
 │
 ├── references/           # Reference materials (96 MB)
-│   ├── papers/          # Research papers (SMC, PSO, control theory)
-│   ├── theses/          # Related theses and dissertations
-│   ├── books/           # Control theory textbooks
-│   └── web/             # Web resources and tutorials
+│   ├── articles/        # Journal articles (12 MB)
+│   ├── books/           # Control theory textbooks (43 MB)
+│   ├── manuals/         # Technical manuals (3.5 MB)
+│   ├── proceedings/     # Conference proceedings (629 KB)
+│   ├── manually_downloaded/ # Manually acquired PDFs (38 MB)
+│   ├── metadata/        # BibTeX and citation mappings (52 KB)
+│   ├── archive/         # Archived documentation
+│   └── README.md        # Reference management guide
 │
 ├── scripts/              # Build and automation scripts
 │   ├── build.sh         # Unix/Linux build script
@@ -219,15 +223,19 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 
 ### Root File Limits
 **Target**: ≤12 visible files at thesis/ root
-**Current**: 10 visible files (main.tex, main.pdf, preamble.tex, metadata.tex, + 6 directories)
+**Current**: 13 visible items (6 files + 7 directories)
+- Files: main.tex, main.pdf, preamble.tex, metadata.tex, Makefile, README.md
+- Directories: source/, bibliography/, figures/, tables/, references/, scripts/, archive/
 
 ### Cleanup Policy
-After compilation, move build artifacts to `archive/build_artifacts/`:
+After compilation, build artifacts are automatically cleaned:
 ```bash
-make clean     # Automatic cleanup via Makefile
-# OR
-mv *.aux *.log *.toc archive/build_artifacts/
+make clean     # Automatic cleanup via Makefile (recommended)
+# Build artifacts are NOT tracked by git (.gitignore rules)
+# Old artifacts preserved in archive/build_artifacts/ for reference
 ```
+
+**Current Status**: All build artifacts moved to archive/ (Dec 29, 2025)
 
 ### Professional Standards (CLAUDE.md Section 14)
 - [OK] Source files organized in subdirectories
