@@ -60,24 +60,32 @@ Research papers and journal article submissions.
 **Purpose:** Publication-ready research papers and journal articles.
 
 ### experiments/ [16 MB]
-All experimental data, benchmarks, and research task results.
+All experimental data organized by controller type and cross-controller comparative studies.
 
-**Subdirectories:**
-- `benchmarks/` [3.8 MB] - Performance benchmark results
-  - `figures/` - MT5-MT8 benchmark plots
-  - `processed/` - JSON benchmark data
-  - `reports/` - Analysis summaries
-  - `raw/` - Raw benchmark outputs
-- `LT6_model_uncertainty/` - Model uncertainty analysis (LT-6)
-- `MT6_boundary_layer/` - Boundary layer optimization (MT-6)
-- `MT7_robust_pso/` - Robust PSO tuning (MT-7)
-- `MT8_disturbance_rejection/` - Disturbance rejection tests (MT-8)
-- `phases/` [11 MB] - Research phase experiment data
-  - `phase2_experiments/`, `phase3_experiments/`, `phase4_experiments/`
-  - `investigations/` - Exploratory research
-- `optimization/` [434 KB] - PSO optimization results
+**Controller-Specific Subdirectories:**
+- `classical_smc/` [~50 KB] - Classical SMC optimization results
+- `sta_smc/` [~700 KB] - STA SMC experiments
+  - `boundary_layer/` - MT-6 adaptive boundary layer optimization
+  - `optimization/` - PSO gains and convergence
+- `adaptive_smc/` [~120 KB] - Adaptive SMC optimization results
+- `hybrid_adaptive_sta/` [~11 MB] - Hybrid Adaptive STA SMC experiments
+  - `anomaly_analysis/` - Phases 2-4 investigations (gain interference, mode confusion, scheduling)
+  - `investigations/` - Zero variance investigation
+  - `optimization/` - PSO gains across all phases
 
-**Purpose:** Consolidate all experimental data and benchmark results for analysis and publication.
+**Cross-Controller Comparative:**
+- `comparative/` [~4 MB] - Cross-controller performance studies
+  - `comprehensive_benchmarks/` - MT-5: 7 controllers comparison
+  - `pso_robustness/` - MT-7: PSO robustness (10 seeds)
+  - `disturbance_rejection/` - MT-8: Disturbance rejection + HIL
+  - `model_uncertainty/` - LT-6: Model uncertainty analysis
+  - `baselines/` - Reference performance data
+
+**Shared Resources:**
+- `figures/` [~250 KB] - Publication-ready figures (LT7 paper)
+- `reports/` [~100 KB] - Research task summaries (MT5, QW2, LT4)
+
+**Purpose:** Controller-based organization enables easy comparison within controller families while preserving cross-controller comparative studies. Reorganized December 29, 2025 from task-based to controller-based structure.
 
 ### archive/ [12 MB]
 Historical research artifacts, migration records, and backup materials.

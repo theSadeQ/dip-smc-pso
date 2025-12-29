@@ -384,7 +384,10 @@ config = load_config("config.yaml", allow_unknown=False)
     - `sphinx_docs/` [64 MB] - Sphinx documentation system
     - `thesis/` [98 MB] - LaTeX thesis source and PDFs
     - `publications/` [13 MB] - Research papers and journal articles
-    - `experiments/` [16 MB] - All experimental data, benchmarks, phase results
+    - `experiments/` [16 MB] - Controller-based experiments + cross-controller comparative studies
+      - `comparative/` [4 MB] - Cross-controller studies (MT-5, MT-7, MT-8, LT-6)
+      - `classical_smc/`, `sta_smc/`, `adaptive_smc/`, `hybrid_adaptive_sta/` - Controller-specific data
+      - `figures/` [250 KB] - LT7 paper figures | `reports/` [100 KB] - Task summaries
     - `archive/` [12 MB] - Archived research artifacts
     - `data/` [3 KB] - Simulation and research data
   - **logs/** [~13 MB] - Runtime and development logs
@@ -417,6 +420,18 @@ config = load_config("config.yaml", allow_unknown=False)
   - Import changes: `from benchmarks.*` → `from src.benchmarks.*` (auto-updated)
 
 ### Recent Reorganization
+
+**Dec 29, 2025 - Experiments Controller-Based Reorganization:**
+- [OK] Reorganized experiments/ from task-based to controller-based + comparative structure
+- [OK] Created comparative/ for cross-controller studies (MT-5, MT-7, MT-8, LT-6)
+- [OK] Distributed optimization/ results to controller-specific directories
+- [OK] Moved phases/ → hybrid_adaptive_sta/anomaly_analysis/
+- [OK] Moved MT6_boundary_layer/ → sta_smc/boundary_layer/
+- [OK] Preserved figures/ and reports/ at root for LT7 paper references
+- [OK] Created comprehensive README files for navigation
+- [OK] Updated academic/paper/README.md and CLAUDE.md Section 14
+- [OK] Git history preserved for tracked files (154 files total)
+- [OK] New structure: comparative/, classical_smc/, sta_smc/, adaptive_smc/, hybrid_adaptive_sta/, figures/, reports/
 
 **Dec 29, 2025 - Academic Paper Merge (UNIFIED STRUCTURE):**
 - [OK] Merged docs/ + research/ → Unified academic/paper/ structure
