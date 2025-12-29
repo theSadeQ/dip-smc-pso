@@ -36,7 +36,7 @@
 
 ## 2) Automatic Repository Management
 
-**See:** `.ai/config/repository_management.md` for complete details.
+**See:** `.ai_workspace/config/repository_management.md` for complete details.
 
 **Quick Reference:**
 - MANDATORY: Auto-commit and push after ANY repository changes
@@ -47,7 +47,7 @@
 
 ## 3) Session Continuity & Project-wide Recovery System
 
-**See:** `.project/ai/guides/session_continuity.md` for complete details.
+**See:** `.ai_workspace/guides/session_continuity.md` for complete details.
 
 **Purpose:** 30-second recovery from token limits or multi-month gaps
 
@@ -59,24 +59,24 @@
 /recover
 
 # Or Manually
-bash .project/tools/recovery/recover_project.sh
+bash .ai_workspace/tools/recovery/recover_project.sh
 
 # Check Roadmap Progress
-python .project/tools/analysis/roadmap_tracker.py
+python .ai_workspace/tools/analysis/roadmap_tracker.py
 ```
 
 ### Multi-Account Recovery (NEW - Nov 2025)
 
-**Quick Start**: Windows: `.project\tools\recovery\quick_recovery.bat` | Linux/Mac: `bash .project/tools/recovery/recover_project.sh && python .project/tools/checkpoints/analyze_checkpoints.py`
+**Quick Start**: Windows: `.project\tools\recovery\quick_recovery.bat` | Linux/Mac: `bash .ai_workspace/tools/recovery/recover_project.sh && python .ai_workspace/tools/checkpoints/analyze_checkpoints.py`
 
-**See**: `.project/tools/multi_account/MULTI_ACCOUNT_RECOVERY_GUIDE.md` for complete workflow
+**See**: `.ai_workspace/tools/multi_account/MULTI_ACCOUNT_RECOVERY_GUIDE.md` for complete workflow
 
 ### Key Tools
-1. **Project State Manager** (`.project/tools/recovery/project_state_manager.py`) - Tracks phase, roadmap progress, completed tasks
-2. **Git Recovery Script** (`.project/tools/recovery/recover_project.sh`) - 30-second recovery workflow
-3. **Roadmap Tracker** (`.project/tools/analysis/roadmap_tracker.py`) - Parses 72-hour research roadmap (50 tasks)
-4. **Agent Checkpoint System** (`.project/tools/checkpoints/agent_checkpoint.py`) - Recovers interrupted multi-agent work
-5. **Multi-Account Recovery** (`.project/tools/multi_account/MULTI_ACCOUNT_RECOVERY_GUIDE.md`) - Resume work across accounts/sessions
+1. **Project State Manager** (`.ai_workspace/tools/recovery/project_state_manager.py`) - Tracks phase, roadmap progress, completed tasks
+2. **Git Recovery Script** (`.ai_workspace/tools/recovery/recover_project.sh`) - 30-second recovery workflow
+3. **Roadmap Tracker** (`.ai_workspace/tools/analysis/roadmap_tracker.py`) - Parses 72-hour research roadmap (50 tasks)
+4. **Agent Checkpoint System** (`.ai_workspace/tools/checkpoints/agent_checkpoint.py`) - Recovers interrupted multi-agent work
+5. **Multi-Account Recovery** (`.ai_workspace/tools/multi_account/MULTI_ACCOUNT_RECOVERY_GUIDE.md`) - Resume work across accounts/sessions
 
 ### What Survives Token Limits
 - [OK] Git commits (10/10), project state (9/10), agent checkpoints (9/10), data files (8/10)
@@ -134,11 +134,11 @@ Top-level: simulate.py, streamlit_app.py, config.yaml, requirements.txt
 
 **Purpose**: Learning roadmaps for users at all skill levels, separate from project-specific documentation.
 
-**Directory**: `.ai/edu/` (Educational content, managed by Claude Code)
+**Directory**: `.ai_workspace/edu/` (Educational content, managed by Claude Code)
 
 ### 6.1 Available Resources
 
-**Beginner Roadmap** (`.ai/edu/beginner-roadmap.md`):
+**Beginner Roadmap** (`.ai_workspace/edu/beginner-roadmap.md`):
 - **Target**: Complete beginners with ZERO coding/control theory background
 - **Duration**: 125-150 hours over 4-6 months
 - **Coverage**: Phase 1 (Computing, Python, Physics, Math) -> Phase 2 (Control theory, SMC) -> Phases 3-5 (Hands-on to mastery)
@@ -149,7 +149,7 @@ Top-level: simulate.py, streamlit_app.py, config.yaml, requirements.txt
 **Learning Path Progression**:
 ```bash
 Path 0: Complete Beginner (NEW)
-  .ai/edu/beginner-roadmap.md (125-150 hours) ->
+  .ai_workspace/education/beginner-roadmap.md (125-150 hours) ->
 
 Path 1: Quick Start (EXISTING)
   docs/guides/getting-started.md -> Tutorial 01 (1-2 hours) ->
@@ -159,7 +159,7 @@ Paths 2-4: Advanced (EXISTING)
 ```
 
 **Audience Segmentation**:
-- `.ai/edu/` -> Prerequisites for absolute beginners (Path 0)
+- `.ai_workspace/edu/` -> Prerequisites for absolute beginners (Path 0)
 - `docs/guides/` -> Project-specific documentation (Paths 1-4)
 
 **Cross-References**:
@@ -176,7 +176,7 @@ Paths 2-4: Advanced (EXISTING)
 - Exercise solutions (worked examples)
 - FAQ for beginners
 
-**See**: `.ai/edu/README.md` for complete details
+**See**: `.ai_workspace/edu/README.md` for complete details
 
 ### 6.4 NotebookLM Podcast Generation (NEW - Nov 2025)
 
@@ -186,7 +186,7 @@ Paths 2-4: Advanced (EXISTING)
 
 **Status**: [OK] Series complete at Phase 4 (November 2025)
 
-**See**: `.project/ai/guides/notebooklm_guide.md` for complete TTS optimization requirements, episode templates, validation checklists, phase examples, and usage workflows
+**See**: `.ai_workspace/guides/notebooklm_guide.md` for complete TTS optimization requirements, episode templates, validation checklists, phase examples, and usage workflows
 
 ------
 
@@ -287,7 +287,7 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ## 11) Testing & Coverage Standards
 
-**See:** `.ai/config/testing_standards.md` for complete details.
+**See:** `.ai_workspace/config/testing_standards.md` for complete details.
 
 **Quick Reference:**
 - Overall: ≥85% | Critical components: ≥95% | Safety‑critical: 100%
@@ -306,7 +306,7 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ## 13) Production Safety & Readiness (phase 4 Status)
 
-**See:** `.project/ai/guides/phase4_status.md` for complete status.
+**See:** `.ai_workspace/guides/phase4_status.md` for complete status.
 
 **Quick Reference:**
 - Production Readiness: 23.9/100 (Phase 4.1+4.2 complete)
@@ -337,54 +337,60 @@ config = load_config("config.yaml", allow_unknown=False)
 
 **Final Deliverable**: LT-7 research paper SUBMISSION-READY (v2.1) with 14 figures, automation scripts, comprehensive bibliography
 
-**See Also**: `.project/ai/planning/research/RESEARCH_COMPLETION_SUMMARY.md` | `.project/ai/planning/CURRENT_STATUS.md`
+**See Also**: `.ai_workspace/planning/research/RESEARCH_COMPLETION_SUMMARY.md` | `.ai_workspace/planning/CURRENT_STATUS.md`
 
 ------
 
 ## 14) Workspace Organization & Hygiene
 
-**See:** `.project/ai/guides/workspace_organization.md` for complete details.
+**See:** `.ai_workspace/guides/workspace_organization.md` for complete details.
 
 **Quick Reference:**
 - Target: ≤19 visible root items, ≤100MB .logs/
 - Current: 22 visible items (1 locked file pending cleanup), 12MB .logs/ [OK] (Dec 19, 2025)
 - Centralized log paths: `src/utils/logging/paths.py` (single source of truth)
-- Use `.project/` for ALL AI/dev configs (CANONICAL)
-- Use `.artifacts/` for research outputs and thesis
-- Use `.logs/` for centralized logging (hidden directory, structured subdirectories)
-- Use `.cache/` for ephemeral data
+- Use `.ai_workspace/` for ALL AI/dev configs (CANONICAL)
+- Use `academic/` for research outputs and thesis (visible directory)
+- Use `academic/logs/` for centralized logging
+- Use `.cache/` for ephemeral data (if not migrated to academic/.cache/)
 - Use `D:\Tools\Claude\` for system-level external tools (account switcher)
 - Migration guide: `docs/guides/logs_migration_guide.md`
 
-### Config Consolidation (Use `.project/` as CANONICAL)
+### Config Consolidation (Use `.ai_workspace/` as CANONICAL)
 ```bash
-.project/                          # CANONICAL CONFIG ROOT
-├─ ai/config/                     # AI configurations
-├─ claude/                        # Claude Code settings
-├─ dev_tools/                     # Development scripts (CANONICAL)
-└─ archive/                       # Archived artifacts
+.ai_workspace/                     # CANONICAL CONFIG ROOT
+├─ config/                         # Configuration files
+│  ├─ claude/                      # Claude Code settings
+│  └─ mcp/                         # MCP server configs
+├─ tools/                          # Development scripts (CANONICAL)
+├─ guides/                         # AI operation guides
+├─ planning/                       # Project planning docs
+├─ education/                      # Educational materials
+├─ state/                          # Project state tracking
+└─ archive/                        # Archived artifacts
 ```
 
 ### DO NOT USE (deprecated Aliases)
-- [ERROR] `.ai/` -> use `.project/ai/`
-- [ERROR] `.dev_tools/` at root -> use `.project/tools/`
-- [ERROR] `.project/dev_tools/` -> use `.project/tools/` (reorganized Dec 2025)
-- [ERROR] `.project/ai/config/` -> use `.project/ai/guides/` (reorganized Dec 2025)
+- [ERROR] `.project/` -> migrated to `.ai_workspace/` (Dec 29, 2025)
+- [ERROR] `.ai/` -> migrated to `.ai_workspace/` or `academic/archive/` (Dec 29, 2025)
+- [ERROR] `.artifacts/` -> migrated to `academic/` (visible directory)
+- [ERROR] `.logs/` -> migrated to `academic/logs/` (visible directory)
 
 ### Directory Rules
-- **Runtime artifacts**: `.artifacts/` (research outputs, thesis, QA audits, test summaries)
+- **Academic outputs**: `academic/` (research outputs, thesis, papers - VISIBLE directory)
   - `thesis/` - LaTeX thesis source and PDFs (98MB, moved from root)
   - `research/` - Research papers, experiments, phase data
-  - `testing/` - Test summaries and quality gates
-  - `qa_audits/` - Quality assurance deliverables
-- **Runtime logs**: `.logs/` (centralized logging, hidden directory)
-  - `test_core_validation.log` - Pytest test runs
-  - `monitoring/` - Runtime monitoring system logs and data
-  - `pso/` - PSO optimization logs (978KB, 13 logs from optimization_results migration)
-  - `benchmarks/` - Research task logs (9.7MB)
-  - `archive/` - Compressed historical logs (214KB compressed from 56MB)
-- **Runtime caches**: `.cache/` (pytest, hypothesis, htmlcov, benchmarks)
-- **Visible directories** (8): `src/`, `tests/`, `docs/`, `scripts/`, `data/`, `benchmarks/`, `optimization_results/`, `envs/`
+  - `docs/` - Sphinx documentation build outputs
+  - `logs/` - Centralized logging (moved from hidden .logs/)
+  - `archive/` - Archived research artifacts
+- **AI workspace**: `.ai_workspace/` (AI operation configs, tools, guides - HIDDEN directory)
+  - `tools/` - Development and recovery scripts
+  - `guides/` - AI operation documentation
+  - `planning/` - Project planning and roadmaps
+  - `state/` - Project state tracking
+  - `config/` - Claude and MCP configurations
+- **Runtime caches**: `.cache/` or `academic/.cache/` (pytest, hypothesis, htmlcov, benchmarks)
+- **Visible directories** (core): `src/`, `tests/`, `academic/`, `scripts/`, `data/`, `benchmarks/`, `optimization_results/`
 - **Root files** (9 core + 2 MCP): `README.md`, `CHANGELOG.md`, `CLAUDE.md`, `config.yaml`, `requirements.txt`, `simulate.py`, `streamlit_app.py`, `package.json`, `package-lock.json`
 - **Benchmarks organization** (reorganized Dec 18, 2025):
   - `benchmarks/raw/` - Immutable original outputs by research task (MT-5, baselines, etc.)
@@ -397,6 +403,18 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ### Recent Reorganization
 
+**Dec 29, 2025 - AI Workspace & Academic Migration:**
+- [OK] .project/ → .ai_workspace/ (complete AI workspace consolidation)
+- [OK] .project/ai/ subdirectories → .ai_workspace/ (planning, guides, education, issues, testing, quality, orchestration, collaboration, ultrathink_sessions)
+- [OK] .project/tools/ → .ai_workspace/tools/ (recovery scripts, checkpoints, automation)
+- [OK] .project/config/ → .ai_workspace/config/ (claude, mcp)
+- [OK] .project/state/ → .ai_workspace/state/ (project state tracking)
+- [OK] .ai/paper_enhancement_plans → academic/archive/ (historical research plans)
+- [OK] Documentation updated: CLAUDE.md path references, .ai_workspace/ markdown files
+- [OK] Cleanup: Removed .project/, .ai/, .benchmarks/, malformed files, Python cache
+- [OK] Git history preserved: All migrations use git mv
+- [PENDING] Agent 1 migrations: .artifacts/ → academic/, .logs/ → academic/logs/, test_logs → academic/logs/tests/
+
 **Dec 18, 2025 - Benchmarks:**
 - [OK] benchmarks/ → Publication-ready structure (raw/, processed/, figures/, reports/)
 - [OK] benchmarks/{analysis,benchmark,comparison} → src/benchmarks/ (proper package structure)
@@ -408,7 +426,7 @@ config = load_config("config.yaml", allow_unknown=False)
 - [OK] docs/ → Clean root structure (102 root files → 5 core files, 95% reduction)
 - [OK] Moved 70 markdown files to 8 categorized subdirectories (theory/, optimization/, production/, testing/, architecture/, guides/, reference/, meta/)
 - [OK] Moved 15 build artifacts to .artifacts/docs_build/logs/
-- [OK] Moved 6 scripts to .project/tools/validation/docs/ and .project/tools/docs/
+- [OK] Moved 6 scripts to .ai_workspace/tools/validation/docs/ and .ai_workspace/tools/docs/
 - [OK] Moved 8 data files to docs/_data/, docs/bib/, docs/_static/pwa/
 - [OK] Deleted 1 obsolete backup file; 564 total markdown files now organized
 
@@ -418,7 +436,7 @@ config = load_config("config.yaml", allow_unknown=False)
 - [OK] Moved test artifacts: coverage.xml → .cache/coverage/, report.log → .logs/
 - [OK] Workspace health: 18 visible items (1 below target, 99% reorganization value achieved)
 - [OK] Documented deferrals: tests/ (HIGH risk, deferred) + data/ (zero benefit, skipped)
-- [OK] Backlog created: .project/ai/planning/BACKLOG.md
+- [OK] Backlog created: .ai_workspace/planning/BACKLOG.md
 
 **Dec 19, 2025 - Scripts Directory:**
 - [OK] scripts/ → Publication-ready structure (21 root files → 5 root files, 73% reduction)
@@ -527,13 +545,13 @@ du -sh .logs/                                       # <100MB (current: 12MB)
 - [MANDATORY] Before committing changes to repository
 - [RECOMMENDED] Weekly during active development
 
-**See Also**: `.project/archive/RESTRUCTURING_PLAN_2025-10-26.md` | `.project/archive/WORKSPACE_CLEANUP_2025-10-26.md`
+**See Also**: `.ai_workspace/archive/RESTRUCTURING_PLAN_2025-10-26.md` | `.ai_workspace/archive/WORKSPACE_CLEANUP_2025-10-26.md`
 
 ------
 
 ## 15) Controller Memory Management
 
-**See:** `.ai/config/controller_memory.md` for complete details.
+**See:** `.ai_workspace/config/controller_memory.md` for complete details.
 
 **Quick Reference:**
 - All controllers use weakref patterns to prevent circular references
@@ -571,7 +589,7 @@ missed = monitor.end(start)
 
 ## 17) Multi-agent Orchestration System
 
-**See:** `.ai/config/agent_orchestration.md` for complete details.
+**See:** `.ai_workspace/config/agent_orchestration.md` for complete details.
 
 **Quick Reference:**
 - 6-agent parallel orchestration workflow (Ultimate Orchestrator pattern)
@@ -583,7 +601,7 @@ missed = monitor.end(start)
 - All multi-agent tasks MUST use checkpoint system
 - Checkpoints prevent loss of work on token limits/crashes
 - Recovery script automatically detects incomplete agent work
-- See: `.ai/config/agent_checkpoint_system.md` for usage guide
+- See: `.ai_workspace/config/agent_checkpoint_system.md` for usage guide
 
 **Mandatory Checkpoint Calls:**
 ```python
@@ -605,7 +623,7 @@ checkpoint_agent_failed(task_id, agent_id, hours, reason, recovery_recommendatio
 
 ## 18) Documentation Quality Standards
 
-**See:** `.ai/config/documentation_quality.md` for complete details.
+**See:** `.ai_workspace/config/documentation_quality.md` for complete details.
 
 **Quick Reference:**
 - Direct, not conversational (avoid "Let's explore...")
@@ -618,7 +636,7 @@ checkpoint_agent_failed(task_id, agent_id, hours, reason, recovery_recommendatio
 
 ## 19) Documentation Build System
 
-**See:** `.project/ai/guides/documentation_build_system.md` for complete workflow.
+**See:** `.ai_workspace/guides/documentation_build_system.md` for complete workflow.
 
 **MANDATORY FOR CLAUDE**: After ANY documentation changes, rebuild and verify.
 
@@ -658,7 +676,7 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 
 ## 20) Model Context Protocol (mcp) Auto-triggers
 
-**See:** `.project/ai/guides/mcp_usage_guide.md` for complete guide | `docs/mcp-debugging/README.md` for workflows
+**See:** `.ai_workspace/guides/mcp_usage_guide.md` for complete guide | `docs/mcp-debugging/README.md` for workflows
 
 **For Claude:** Auto-trigger MCPs based on task keywords (NO user confirmation needed).
 
@@ -675,13 +693,13 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 - Testing: pytest-mcp -> puppeteer -> mcp-analyzer
 - Research: Grep -> filesystem -> git-mcp -> pandas-mcp
 
-**Configuration:** `.mcp.json` (12 servers) | **See**: `.project/ai/guides/mcp_usage_guide.md` for complete auto-trigger keywords and orchestration patterns
+**Configuration:** `.mcp.json` (12 servers) | **See**: `.ai_workspace/guides/mcp_usage_guide.md` for complete auto-trigger keywords and orchestration patterns
 
 ------
 
 ## 21) Phase 3 Ui/ux Status & Maintenance Mode
 
-**See:** `.project/ai/guides/phase3_status.md` for complete status.
+**See:** `.ai_workspace/guides/phase3_status.md` for complete status.
 
 **Quick Reference:**
 - Phase 3: [OK] COMPLETE (34/34 issues, October 9-17, 2025)
@@ -694,7 +712,7 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 - **DON'T**: Proactive enhancements, Firefox/Safari validation, "nice-to-have" polish
 - **Focus**: 80-90% time on research (controllers, PSO, SMC theory)
 
-**See Also**: `.ai/planning/phase3/HANDOFF.md` for handoff document
+**See Also**: `.ai_workspace/planning/phase3/HANDOFF.md` for handoff document
 
 ------
 
@@ -713,7 +731,7 @@ curl -s "http://localhost:9000/_static/your-file.css" | grep "YOUR_CHANGE"
 **See:** `docs/NAVIGATION.md` for master navigation hub.
 
 **Quick Reference:**
-- Total Documentation: 985 files (814 in docs/, 171 in .project/)
+- Total Documentation: 985 files (814 in docs/, 171 in .ai_workspace/)
 - Navigation Systems: 11 total (NAVIGATION.md is the master hub)
 - Category Indexes: 43 index.md files across all documentation domains
 - Learning Paths: 5 paths (Path 0: 125-150 hrs -> Path 4: 12+ hrs)
@@ -750,9 +768,9 @@ result = checkpoint_task_launch(task_id="LT-4", agent_id="agent1", task_config={
 
 **Status**: [OK] Operational (November 2025)
 
-**See**: `.project/tools/checkpoints/TASK_WRAPPER_USAGE.md` for complete guide, code examples, multi-agent patterns, and configuration options
+**See**: `.ai_workspace/tools/checkpoints/TASK_WRAPPER_USAGE.md` for complete guide, code examples, multi-agent patterns, and configuration options
 
-**See Also**: `.project/ai/guides/agent_checkpoint_system.md` (design), `.project/ai/guides/agent_orchestration.md` (patterns)
+**See Also**: `.ai_workspace/guides/agent_checkpoint_system.md` (design), `.ai_workspace/guides/agent_orchestration.md` (patterns)
 
 ------
 

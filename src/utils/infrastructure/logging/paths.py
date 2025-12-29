@@ -28,7 +28,8 @@ from pathlib import Path
 import os
 
 # Base log directory (can be overridden via environment variable)
-LOG_DIR = Path(os.getenv("LOG_DIR", ".logs"))
+# Updated for academic/ reorganization (Dec 2025)
+LOG_DIR = Path(os.getenv("LOG_DIR", "academic/logs"))
 
 # Subdirectories for different log types
 PSO_LOG_DIR = LOG_DIR / "pso"

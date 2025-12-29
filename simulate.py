@@ -492,8 +492,8 @@ def _run_pso(args: Args) -> int:
         history = result.get("history", {})
         cost_history = history.get("cost")
         if cost_history is not None and len(cost_history) > 0:
-            # Save plot to optimization_results directory
-            output_dir = Path("optimization_results")
+            # Save plot to academic/research/optimization directory (updated Dec 2025)
+            output_dir = Path("academic/research/optimization")
             output_dir.mkdir(parents=True, exist_ok=True)
             plot_path = output_dir / f"{ctrl_name}_convergence.png"
 

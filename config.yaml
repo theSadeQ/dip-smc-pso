@@ -33,8 +33,8 @@ fault_detection:
 # Configuration: 30 particles × 50 iterations (~4,500 evaluations per controller)
 # Disturbances: Step (10N @ t=2s), Impulse (30N pulse @ t=2s, 0.1s duration)
 # Result: 6.35% avg improvement | Hybrid controller: 21.4% improvement (best)
-# Validation: benchmarks/MT8_COMPLETE_REPORT.md
-# Technical Details: scripts/mt8_robust_pso.py, optimization_results/mt8_robust_pso_summary.json
+# Validation: academic/research/benchmarks/reports/MT8_COMPLETE_REPORT.md
+# Technical Details: scripts/mt8_robust_pso.py, academic/research/optimization/mt8_robust_pso_summary.json
 controller_defaults:
   classical_smc:
     gains:

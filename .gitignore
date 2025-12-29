@@ -115,3 +115,15 @@ tests/browser_automation/tests/
 # Hidden logs directory (workspace cleanup Dec 17, 2025)
 .logs/
 *.log
+
+# Academic artifacts (reorganization Dec 29, 2025)
+academic/logs/*.log
+academic/caches/*
+academic/quality/coverage/htmlcov/
+
+# Old patterns (kept for backward compatibility during migration)
+# .cache/
+# .benchmarks/
+# .pytest_cache/
+# .hypothesis/
+# .htmlcov/
