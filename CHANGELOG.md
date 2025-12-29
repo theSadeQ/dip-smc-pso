@@ -8,6 +8,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- **Workspace Reorganization: Academic/AI Division** (December 29, 2025)
+  - **Status**: COMPLETE - Major directory restructure for clean academic/AI separation
+  - **Scope**: 1,807 files changed (1,521+ renamed with git history preserved)
+  - **Structure Changes**:
+    - Created `academic/` (visible) - All research outputs, docs, thesis, logs, caches (94MB)
+    - Created `.ai_workspace/` (hidden) - All AI tools, planning, guides, configs (27MB)
+    - Migrated `.artifacts/` -> `academic/`
+    - Migrated `.project/` -> `.ai_workspace/`
+    - Migrated `.logs/` -> `academic/logs/`
+    - Deleted: `.benchmarks/`, `test_logs/`, `__pycache__/`, `.ai/`, `.cache/`
+  - **Code Updates**: 4 critical files (logging paths, simulate.py, config.yaml, .gitignore)
+  - **Documentation Updates**: CLAUDE.md Section 14 + 511 files (332 markdown + 43 shell + 136 Python)
+  - **Results**:
+    - Root items: 25 -> 23 (8% reduction, progress toward <=19 target)
+    - Git history: PRESERVED for all migrations (git mv)
+    - Test suite: 62/62 core tests PASS (100%)
+    - Python imports: PASS
+    - Logging system: OPERATIONAL (academic/logs/)
+  - **Execution**: Parallel agent orchestration (Agent 1: Academic + Code, Agent 2: AI Workspace + Docs)
+  - **Commit**: 2143694c
+
 - **.project Directory Reorganization** (December 17, 2025)
   - **Status**: IN PROGRESS - Function-based restructure with enhanced recovery
   - **Scope**: Reorganizing 400+ files from domain-based to function-based structure
