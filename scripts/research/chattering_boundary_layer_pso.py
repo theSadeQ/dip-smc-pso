@@ -22,11 +22,18 @@ Controllers:
 
 PSO Parameters:
 - Parameters (Classical/Adaptive): epsilon_min in [0.01, 0.05], alpha in [0.0, 2.0]
-- Parameters (Hybrid): gamma1 in [0.05, 0.8], gamma2 in [0.02, 0.4],
-  adapt_rate_limit in [0.5, 5.0], gain_leak in [1e-4, 5e-3]
+- Parameters (Hybrid Set 2 - after bug fix): gamma1 in [0.01, 0.1], gamma2 in [0.005, 0.05],
+  adapt_rate_limit in [0.1, 1.0], gain_leak in [1e-4, 1e-3]
+- Fixed (Hybrid): sat_soft_width=0.05, dead_zone=0.01, k1_max=100.0, u_int_max=100.0
 - Swarm: 30 particles, 50 iterations
-- Fitness: 70% chattering + 15% settling + 15% overshoot
+- Fitness: 70% chattering + 15% settling + 15% overshoot + 5.0*reset_rate
 - Monte Carlo: 5 runs per fitness evaluation
+
+Emergency Reset Bug Fix (Dec 30, 2025):
+- Original issue: Reset triggered at 0.9*k_max (45) but gains clipped at k_max (50)
+- Result: Infinite reset loop -> 91% emergency reset rate -> chattering 56-58
+- Fix: Relaxed threshold to 1.5*k_max (75), increased limits (k1_max=100, u_int_max=100)
+- Expected: Chattering <0.1 (similar to Adaptive SMC)
 """
 
 import json
@@ -94,9 +101,10 @@ class ChatteringBoundaryLayerPSO:
 
         # PSO parameter bounds depend on controller type.
         if controller_type == 'hybrid_adaptive_sta_smc':
+            # Set 2: Narrower ranges after emergency reset bug fix (0.9*k_max -> 1.5*k_max)
             self.param_names = ["gamma1", "gamma2", "adapt_rate_limit", "gain_leak"]
-            self.bounds_min = np.array([0.05, 0.02, 0.5, 1e-4])
-            self.bounds_max = np.array([0.8, 0.4, 5.0, 5e-3])
+            self.bounds_min = np.array([0.01, 0.005, 0.1, 1e-4])
+            self.bounds_max = np.array([0.1, 0.05, 1.0, 1e-3])
         else:
             # Classical/Adaptive: standard ranges
             self.param_names = ["epsilon_min", "alpha"]
@@ -353,6 +361,7 @@ class ChatteringBoundaryLayerPSO:
             )
         elif self.controller_type == 'hybrid_adaptive_sta_smc':
             gamma1, gamma2, adapt_rate_limit, gain_leak = params
+            # Set 2: Fixed parameters after emergency reset bug fix
             return HybridAdaptiveSTASMC(
                 gains=self.optimized_gains,
                 dt=0.01,
@@ -363,9 +372,11 @@ class ChatteringBoundaryLayerPSO:
                 gamma2=gamma2,
                 adapt_rate_limit=adapt_rate_limit,
                 gain_leak=gain_leak,
-                sat_soft_width=0.03,
-                dead_zone=0.0,
-                damping_gain=3.0
+                sat_soft_width=0.05,         # Increased from 0.03
+                dead_zone=0.01,              # Increased from 0.0
+                damping_gain=3.0,
+                k1_max=100.0,                # Increased from 50.0
+                u_int_max=100.0              # Increased from 50.0
             )
         else:
             raise ValueError(f"Unknown controller type: {self.controller_type}")
