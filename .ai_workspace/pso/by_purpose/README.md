@@ -1,9 +1,9 @@
 # Framework 1: PSO Files by Purpose/Objective
 
 **Categorization Framework**: Organize PSO files by optimization objective
-**Total Files**: 78 shortcuts (pointing to 90+ actual files)
-**Status**: 73% Complete - Phase 1 Closed ✅ (Category 1: 95%, Categories 2-3: operational, 4-5: infrastructure)
-**Created**: 2025-12-30 | **Updated**: 2025-12-30 (Phase 1 gaps resolved)
+**Total Files**: 81 shortcuts (pointing to 93+ actual files)
+**Status**: 76% Complete - Phase 1 Closed ✅ | Phase 2 Partial ⚠️ (Cat 1: 95%, Cat 2: 53%, Cat 3: 95%)
+**Created**: 2025-12-30 | **Updated**: 2025-12-30 (Phase 2 partial - Classical SMC success)
 
 ---
 
@@ -59,19 +59,20 @@
 
 ---
 
-### Category 2: Safety-Focused [40% Complete]
+### Category 2: Safety-Focused [53% Complete] ⚠️
 
 **Purpose**: Reduce chattering, optimize boundary layers, improve actuator safety
 
-**Files**: 3 (2 MT-6 data + 1 config)
-**Controllers**: STA SMC (primary), others planned
-**Research Tasks**: MT-6, Issue #12
+**Files**: 6 (3 Classical SMC + 2 STA MT-6 + 1 config)
+**Controllers**: Classical SMC ✅, STA SMC ✅, Adaptive/Hybrid (not applicable)
+**Research Tasks**: MT-6, Phase 2
 
 **Key Metrics**:
-- Chattering Reduction: 3.7% (MT-6 adaptive boundary layer)
-- Optimal ε_min: 0.00250, α: 1.21
+- STA SMC Chattering Reduction: 3.7% (MT-6, ε_min: 0.00250, α: 1.21)
+- Classical SMC Chattering Index: 0.066 ± 0.069 (ε: 0.0448, α: 1.917)
 
-**Gaps**: Missing chattering optimization for Classical, Adaptive, Hybrid (15+ files needed)
+**Phase 2 Results**: Classical SMC successful, Adaptive/Hybrid failed (no boundary layer support)
+**Gaps**: Adaptive/Hybrid chattering requires controller-specific approaches (12+ files)
 
 **[View Details →](2_safety/README.md)**
 
