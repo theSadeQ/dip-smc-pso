@@ -27,6 +27,7 @@ from . import visualization
 
 # Re-export commonly used items for backward compatibility
 from .control.primitives import saturate
+from .control.validation.parameter_validators import require_positive
 from .control.types import (
     ClassicalSMCOutput,
     AdaptiveSMCOutput,
@@ -46,6 +47,7 @@ __all__ = [
     'visualization',
     # Backward compatibility exports
     'saturate',
+    'require_positive',
     'ClassicalSMCOutput',
     'AdaptiveSMCOutput',
     'STAOutput',
