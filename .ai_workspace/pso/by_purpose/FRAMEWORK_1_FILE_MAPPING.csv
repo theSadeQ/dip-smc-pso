@@ -17,10 +17,11 @@ cost_evaluator.py,Performance,Multi,Source,src/optimization/core/,Complete,Fitne
 tracking.py,Performance,Multi,Source,src/optimization/objectives/control/,Complete,Tracking objectives
 stability.py,Performance,Multi,Source,src/optimization/objectives/control/,Complete,Stability objectives
 pso_plots.py,Performance,Multi,Source,src/utils/visualization/,Complete,PSO visualization (QW-3)
-pso_convergence_classical_smc.png,Performance,Classical,Phase53,experiments/classical_smc/optimization/active/,Missing,NEED TO LOCATE
-pso_convergence_sta_smc.png,Performance,STA,Phase53,experiments/sta_smc/optimization/active/,Missing,NEED TO LOCATE
-pso_convergence_adaptive_smc.png,Performance,Adaptive,Phase53,experiments/adaptive_smc/optimization/active/,Missing,NEED TO LOCATE
-pso_classical_smc_standard.json,Performance,Classical,Phase2,experiments/classical_smc/optimization/phases/phase2/gains/standard/,Missing,NEED TO LOCATE
+sta_smc_convergence.png,Performance,STA,Phase53,academic/paper/experiments/sta_smc/optimization/active/,Complete,PSO convergence plot - Phase 53
+adaptive_smc_convergence.png,Performance,Adaptive,Phase53,academic/paper/experiments/adaptive_smc/optimization/active/,Complete,PSO convergence plot - Phase 53
+hybrid_adaptive_sta_smc_convergence.png,Performance,Hybrid,Phase53,academic/paper/experiments/hybrid_adaptive_sta/optimization/active/,Complete,PSO convergence plot - Phase 53
+pso_convergence_classical_smc.png,Performance,Classical,Phase53,academic/paper/experiments/classical_smc/optimization/active/,Missing,Plot not generated - Classical has no convergence visualization
+pso_classical_smc_standard.json,Performance,Classical,Phase2,academic/paper/experiments/classical_smc/optimization/phases/phase2/gains/standard/,Intentional Gap,Classical controller only has Phase 53 (not Phase 2)
 MT6_adaptive_optimization.csv,Safety,STA,MT-6,experiments/sta_smc/boundary_layer/,Complete,Adaptive boundary layer (ε_min + α)
 MT6_pso_convergence.png,Safety,STA,MT-6,experiments/figures/,Complete,MT-6 convergence plot
 config.yaml,Safety,Multi,Config,./,Complete,Lines 84 97 113 179-181 (boundary_layer)

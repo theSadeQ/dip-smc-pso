@@ -118,6 +118,31 @@ create_shortcut(
     "Phase 2 baseline gains - STA SMC"
 )
 
+# Convergence Plots (3 files)
+print("\nConvergence Plots (3 files):")
+convergence_dir = PSO_ROOT / "1_performance/convergence_plots"
+create_shortcut(
+    EXPERIMENTS / "sta_smc/optimization/active/sta_smc_convergence.png",
+    convergence_dir,
+    "sta_smc_convergence",
+    "Performance",
+    "PSO convergence plot - STA SMC"
+)
+create_shortcut(
+    EXPERIMENTS / "adaptive_smc/optimization/active/adaptive_smc_convergence.png",
+    convergence_dir,
+    "adaptive_smc_convergence",
+    "Performance",
+    "PSO convergence plot - Adaptive SMC"
+)
+create_shortcut(
+    EXPERIMENTS / "hybrid_adaptive_sta/optimization/active/hybrid_adaptive_sta_smc_convergence.png",
+    convergence_dir,
+    "hybrid_adaptive_sta_convergence",
+    "Performance",
+    "PSO convergence plot - Hybrid Adaptive STA"
+)
+
 # LT7 Figures (2 files)
 print("\nLT7 Publication Figures (2 files):")
 lt7_dir = PSO_ROOT / "1_performance/lt7_figures"
