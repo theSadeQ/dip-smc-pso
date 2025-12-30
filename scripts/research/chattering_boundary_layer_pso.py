@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 """
-Phase 2 Chattering Boundary Layer PSO Optimization
+Phase 2 Chattering PSO Optimization
 
-Optimizes adaptive boundary layer parameters (epsilon_min, alpha) for
-Classical SMC, Adaptive SMC, and Hybrid controllers to minimize chattering
-while maintaining control performance.
+Optimizes boundary layer parameters (epsilon_min, alpha) for Classical SMC
+and Adaptive SMC, and adaptation dynamics parameters for Hybrid Adaptive
+STA-SMC to minimize chattering while maintaining control performance.
 
 Approach:
 - Use Phase 53 optimized gains (FIXED) for stability
-- Optimize only 2D boundary layer parameters (epsilon, smoothing_factor)
+- Optimize 2D boundary layer parameters for Classical/Adaptive SMC
+- Optimize 4D adaptation dynamics for Hybrid Adaptive STA-SMC
 - Based on successful MT-6 methodology (3.7% chattering reduction)
 
 Controllers:
@@ -17,11 +18,12 @@ Controllers:
 2. Adaptive SMC: 5 gains [k1, k2, lam1, lam2, gamma]
    - Params: boundary_layer (epsilon) + dead_zone (alpha)
 3. Hybrid Adaptive STA: 4 gains [k1, k2, lam1, lam2]
-   - Params: sat_soft_width (epsilon) + dead_zone (alpha)
+   - Params: gamma1 + gamma2 + adapt_rate_limit + gain_leak
 
 PSO Parameters:
-- Parameter 1: epsilon (boundary layer / soft saturation width) in [0.01, 0.05]
-- Parameter 2: alpha (dead_zone / slope) in [0.0, 2.0]
+- Parameters (Classical/Adaptive): epsilon_min in [0.01, 0.05], alpha in [0.0, 2.0]
+- Parameters (Hybrid): gamma1 in [0.05, 0.8], gamma2 in [0.02, 0.4],
+  adapt_rate_limit in [0.5, 5.0], gain_leak in [1e-4, 5e-3]
 - Swarm: 30 particles, 50 iterations
 - Fitness: 70% chattering + 15% settling + 15% overshoot
 - Monte Carlo: 5 runs per fitness evaluation
@@ -56,8 +58,14 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+def _format_param_value(value: float) -> str:
+    if value != 0.0 and abs(value) < 1e-3:
+        return f"{value:.2e}"
+    return f"{value:.4f}"
+
+
 class ChatteringBoundaryLayerPSO:
-    """PSO optimizer for boundary layer parameters to reduce chattering."""
+    """PSO optimizer for controller-specific parameters to reduce chattering."""
 
     def __init__(self,
                  controller_type: str,
@@ -84,18 +92,17 @@ class ChatteringBoundaryLayerPSO:
         self.n_monte_carlo_runs = n_monte_carlo_runs
         self.seed = seed
 
-        # PSO parameter bounds: [epsilon_min, alpha]
-        # For Hybrid STA: use original ranges from PHASE_2_FIX_PLAN.md
-        # sat_soft_width=[0.01, 0.05], dead_zone=[0.0, 0.05]
+        # PSO parameter bounds depend on controller type.
         if controller_type == 'hybrid_adaptive_sta_smc':
-            # Hybrid: epsilon=[0.01, 0.05] (sat_soft_width), alpha=[0.0, 0.05] (dead_zone)
-            # Includes default sat_soft_width=0.03 in search space
-            self.bounds_min = np.array([0.01, 0.0])    # [epsilon_min, alpha_min]
-            self.bounds_max = np.array([0.05, 0.05])    # [epsilon_max, alpha_max]
+            self.param_names = ["gamma1", "gamma2", "adapt_rate_limit", "gain_leak"]
+            self.bounds_min = np.array([0.05, 0.02, 0.5, 1e-4])
+            self.bounds_max = np.array([0.8, 0.4, 5.0, 5e-3])
         else:
             # Classical/Adaptive: standard ranges
+            self.param_names = ["epsilon_min", "alpha"]
             self.bounds_min = np.array([0.01, 0.0])    # Minimum values
             self.bounds_max = np.array([0.05, 2.0])     # Maximum values
+        self.param_dim = len(self.param_names)
 
         # PSO hyperparameters
         self.w = 0.7    # Inertia weight
@@ -121,8 +128,11 @@ class ChatteringBoundaryLayerPSO:
 
         logger.info(f"Initialized ChatteringBoundaryLayerPSO for {controller_type}")
         logger.info(f"  Swarm: {n_particles} particles, {n_iterations} iterations")
-        logger.info(f"  Bounds: eps_min in [{self.bounds_min[0]:.3f}, {self.bounds_max[0]:.3f}], "
-                   f"alpha in [{self.bounds_min[1]:.1f}, {self.bounds_max[1]:.1f}]")
+        bounds_str = ", ".join(
+            f"{name} in [{_format_param_value(low)}, {_format_param_value(high)}]"
+            for name, low, high in zip(self.param_names, self.bounds_min, self.bounds_max)
+        )
+        logger.info(f"  Bounds: {bounds_str}")
         logger.info(f"  Optimized gains: {optimized_gains}")
 
     def _initialize_swarm(self):
@@ -130,14 +140,14 @@ class ChatteringBoundaryLayerPSO:
         self.positions = np.random.uniform(
             low=self.bounds_min,
             high=self.bounds_max,
-            size=(self.n_particles, 2)
+            size=(self.n_particles, self.param_dim)
         )
 
         velocity_scale = 0.1 * (self.bounds_max - self.bounds_min)
         self.velocities = np.random.uniform(
             low=-velocity_scale,
             high=velocity_scale,
-            size=(self.n_particles, 2)
+            size=(self.n_particles, self.param_dim)
         )
 
         self.personal_best_positions = self.positions.copy()
@@ -145,18 +155,63 @@ class ChatteringBoundaryLayerPSO:
 
         logger.info("Swarm initialized")
 
-    def _compute_fitness(self, epsilon_min: float, alpha: float) -> Dict[str, float]:
+    def _format_params(self, params: np.ndarray) -> str:
+        parts = []
+        for name, value in zip(self.param_names, params):
+            parts.append(f"{name}={_format_param_value(float(value))}")
+        return ", ".join(parts)
+
+    def _estimate_emergency_reset_rate(self, controls: np.ndarray, controller: Any) -> float:
+        history = getattr(controller, "_last_history", None)
+        if not isinstance(history, dict):
+            return 0.0
+        reset_flags = history.get("emergency_reset")
+        if isinstance(reset_flags, list) and len(reset_flags) > 0:
+            return float(np.mean(np.asarray(reset_flags, dtype=float)))
+
+        k1_hist = history.get("k1")
+        k2_hist = history.get("k2")
+        if not isinstance(k1_hist, list) or not isinstance(k2_hist, list):
+            return 0.0
+        if len(k1_hist) == 0 or len(k2_hist) == 0 or len(controls) == 0:
+            return 0.0
+
+        # Heuristic: emergency reset forces u=0 and gains to ~5% of their initial values.
+        try:
+            k1_init = float(getattr(controller, "k1_init", 0.0))
+            k2_init = float(getattr(controller, "k2_init", 0.0))
+        except Exception:
+            return 0.0
+        if k1_init <= 0.0 or k2_init <= 0.0:
+            return 0.0
+        k1_thresh = 0.06 * k1_init
+        k2_thresh = 0.06 * k2_init
+
+        k1_arr = np.asarray(k1_hist, dtype=float)
+        k2_arr = np.asarray(k2_hist, dtype=float)
+        u_arr = np.asarray(controls, dtype=float)
+        min_len = min(len(k1_arr), len(k2_arr), len(u_arr))
+        if min_len == 0:
+            return 0.0
+        reset_mask = (
+            (np.abs(u_arr[:min_len]) < 1e-6) &
+            (k1_arr[:min_len] <= k1_thresh) &
+            (k2_arr[:min_len] <= k2_thresh)
+        )
+        return float(np.mean(reset_mask))
+
+    def _compute_fitness(self, params: np.ndarray) -> Dict[str, float]:
         """
-        Compute fitness for given boundary layer parameters.
+        Compute fitness for given controller parameters.
 
         Runs Monte Carlo simulations and computes:
         - chattering_index (70% weight)
         - settling_time penalty (15% weight)
         - overshoot penalty (15% weight)
+        - emergency reset penalty for hybrid controller (optional)
 
         Args:
-            epsilon_min: Boundary layer thickness
-            alpha: Smoothing factor
+            params: Controller-specific parameter vector
 
         Returns:
             Dictionary with metrics and fitness score
@@ -165,6 +220,7 @@ class ChatteringBoundaryLayerPSO:
         settling_values = []
         overshoot_values = []
         energy_values = []
+        reset_rates = []
 
         for run_idx in range(self.n_monte_carlo_runs):
             # Random initial conditions
@@ -184,7 +240,7 @@ class ChatteringBoundaryLayerPSO:
 
             try:
                 # Create controller with boundary layer
-                controller = self._create_controller_with_boundary_layer(epsilon_min, alpha)
+                controller = self._create_controller_with_params(params)
 
                 # Create dynamics model
                 dynamics = DIPDynamics(self.config.physics)
@@ -228,8 +284,11 @@ class ChatteringBoundaryLayerPSO:
                 control_energy = np.trapz(controls**2, time[:-1])
                 energy_values.append(control_energy)
 
+                if self.controller_type == 'hybrid_adaptive_sta_smc':
+                    reset_rates.append(self._estimate_emergency_reset_rate(controls, controller))
+
             except Exception as e:
-                logger.warning(f"Simulation failed for eps={epsilon_min:.4f}, alpha={alpha:.4f}: {e}")
+                logger.warning(f"Simulation failed for params ({self._format_params(params)}): {e}")
                 # Penalize failed simulations
                 chattering_values.append(100.0)
                 settling_values.append(20.0)
@@ -247,7 +306,10 @@ class ChatteringBoundaryLayerPSO:
         settling_penalty = 0.15 * max(0, mean_settling - 5.0)
         overshoot_penalty = 0.15 * max(0, mean_overshoot - 0.3) * 10.0
 
-        fitness = chattering_term + settling_penalty + overshoot_penalty
+        mean_reset_rate = float(np.mean(reset_rates)) if reset_rates else 0.0
+        reset_penalty = 5.0 * mean_reset_rate
+
+        fitness = chattering_term + settling_penalty + overshoot_penalty + reset_penalty
 
         return {
             'fitness': fitness,
@@ -257,12 +319,15 @@ class ChatteringBoundaryLayerPSO:
             'control_energy': mean_energy,
             'chattering_std': np.std(chattering_values),
             'settling_std': np.std(settling_values),
-            'overshoot_std': np.std(overshoot_values)
+            'overshoot_std': np.std(overshoot_values),
+            'emergency_reset_rate': mean_reset_rate,
+            'reset_penalty': reset_penalty
         }
 
-    def _create_controller_with_boundary_layer(self, epsilon: float, alpha: float):
-        """Create controller with specified boundary layer parameters."""
+    def _create_controller_with_params(self, params: np.ndarray):
+        """Create controller with specified parameters."""
         if self.controller_type == 'classical_smc':
+            epsilon, alpha = params
             return ClassicalSMC(
                 gains=self.optimized_gains,
                 max_force=150.0,
@@ -271,6 +336,7 @@ class ChatteringBoundaryLayerPSO:
                 switch_method='tanh'
             )
         elif self.controller_type == 'adaptive_smc':
+            epsilon, alpha = params
             return AdaptiveSMC(
                 gains=self.optimized_gains,
                 dt=0.01,
@@ -286,16 +352,20 @@ class ChatteringBoundaryLayerPSO:
                 alpha=0.5                    # Fixed proportional weight (NOT optimization param)
             )
         elif self.controller_type == 'hybrid_adaptive_sta_smc':
+            gamma1, gamma2, adapt_rate_limit, gain_leak = params
             return HybridAdaptiveSTASMC(
                 gains=self.optimized_gains,
                 dt=0.01,
                 max_force=150.0,
                 k1_init=10.0,
                 k2_init=5.0,
-                gamma1=1.0,
-                gamma2=0.5,
-                sat_soft_width=epsilon,      # Param 1: sat_soft_width [0.01, 0.05] (includes default 0.03)
-                dead_zone=alpha              # Param 2: dead_zone [0.0, 0.05]
+                gamma1=gamma1,
+                gamma2=gamma2,
+                adapt_rate_limit=adapt_rate_limit,
+                gain_leak=gain_leak,
+                sat_soft_width=0.03,
+                dead_zone=0.0,
+                damping_gain=3.0
             )
         else:
             raise ValueError(f"Unknown controller type: {self.controller_type}")
@@ -340,8 +410,8 @@ class ChatteringBoundaryLayerPSO:
     def _update_velocities_and_positions(self):
         """Update particle velocities and positions using PSO update rules."""
         for i in range(self.n_particles):
-            r1 = np.random.random(2)
-            r2 = np.random.random(2)
+            r1 = np.random.random(self.param_dim)
+            r2 = np.random.random(self.param_dim)
 
             cognitive_component = self.c1 * r1 * (self.personal_best_positions[i] - self.positions[i])
             social_component = self.c2 * r2 * (self.global_best_position - self.positions[i])
@@ -359,7 +429,7 @@ class ChatteringBoundaryLayerPSO:
         Run PSO optimization.
 
         Returns:
-            Best parameters [epsilon_min, alpha] and optimization history
+            Best parameters and optimization history
         """
         logger.info("=" * 80)
         logger.info(f"Starting PSO Optimization for {self.controller_type}")
@@ -373,16 +443,21 @@ class ChatteringBoundaryLayerPSO:
             iteration_scores = []
 
             for i in range(self.n_particles):
-                epsilon_min, alpha = self.positions[i]
+                params = self.positions[i]
 
-                metrics = self._compute_fitness(epsilon_min, alpha)
+                metrics = self._compute_fitness(params)
                 fitness = metrics['fitness']
                 iteration_scores.append(fitness)
 
+                reset_rate = metrics.get('emergency_reset_rate', 0.0)
+                reset_str = ""
+                if self.controller_type == 'hybrid_adaptive_sta_smc':
+                    reset_str = f", reset_rate={reset_rate:.3f}"
+
                 logger.info(
-                    f"  Particle {i+1}: eps={epsilon_min:.4f}, alpha={alpha:.4f} | "
+                    f"  Particle {i+1}: {self._format_params(params)} | "
                     f"Fitness={fitness:.4f} (chattering={metrics['chattering_index']:.2f}, "
-                    f"settling={metrics['settling_time']:.2f}s)"
+                    f"settling={metrics['settling_time']:.2f}s{reset_str})"
                 )
 
                 if fitness < self.personal_best_scores[i]:
@@ -401,8 +476,10 @@ class ChatteringBoundaryLayerPSO:
                 'best_fitness': best_iter,
                 'mean_fitness': mean_iter,
                 'global_best_fitness': self.global_best_score,
-                'best_epsilon_min': self.global_best_position[0],
-                'best_alpha': self.global_best_position[1]
+                **{
+                    f"best_{name}": float(value)
+                    for name, value in zip(self.param_names, self.global_best_position)
+                }
             })
 
             logger.info(
@@ -415,8 +492,7 @@ class ChatteringBoundaryLayerPSO:
 
         logger.info("=" * 80)
         logger.info("PSO Optimization Complete")
-        logger.info(f"Best Parameters: eps_min={self.global_best_position[0]:.4f}, "
-                   f"alpha={self.global_best_position[1]:.4f}")
+        logger.info(f"Best Parameters: {self._format_params(self.global_best_position)}")
         logger.info(f"Best Fitness: {self.global_best_score:.4f}")
         logger.info("=" * 80)
 
@@ -426,15 +502,13 @@ class ChatteringBoundaryLayerPSO:
         }
 
     def validate_best_parameters(self,
-                                epsilon_min: float,
-                                alpha: float,
+                                params: np.ndarray,
                                 n_runs: int = 100) -> pd.DataFrame:
         """
         Validate best parameters with extensive Monte Carlo runs.
 
         Args:
-            epsilon_min: Optimized thickness
-            alpha: Optimized smoothing factor
+            params: Optimized parameter vector
             n_runs: Number of validation runs
 
         Returns:
@@ -442,7 +516,7 @@ class ChatteringBoundaryLayerPSO:
         """
         logger.info("=" * 80)
         logger.info(f"Validating Best Parameters (n={n_runs} runs)")
-        logger.info(f"  eps_min={epsilon_min:.4f}, alpha={alpha:.4f}")
+        logger.info(f"  {self._format_params(params)}")
         logger.info("=" * 80)
 
         results = []
@@ -461,7 +535,7 @@ class ChatteringBoundaryLayerPSO:
             ])
 
             try:
-                controller = self._create_controller_with_boundary_layer(epsilon_min, alpha)
+                controller = self._create_controller_with_params(params)
                 dynamics = DIPDynamics(self.config.physics)
 
                 t_arr, x_arr, u_arr = run_simulation(
@@ -491,6 +565,9 @@ class ChatteringBoundaryLayerPSO:
 
                 max_overshoot = max(np.max(np.abs(theta1)), np.max(np.abs(theta2)))
                 control_energy = np.trapz(controls**2, time[:-1])
+                reset_rate = 0.0
+                if self.controller_type == 'hybrid_adaptive_sta_smc':
+                    reset_rate = self._estimate_emergency_reset_rate(controls, controller)
 
                 results.append({
                     'run': run_idx + 1,
@@ -498,6 +575,7 @@ class ChatteringBoundaryLayerPSO:
                     'settling_time': settling_time,
                     'overshoot': max_overshoot,
                     'control_energy': control_energy,
+                    'emergency_reset_rate': reset_rate,
                     'theta1_init': theta1_init,
                     'theta2_init': theta2_init,
                     'success': True
@@ -511,6 +589,7 @@ class ChatteringBoundaryLayerPSO:
                     'settling_time': np.nan,
                     'overshoot': np.nan,
                     'control_energy': np.nan,
+                    'emergency_reset_rate': np.nan,
                     'theta1_init': theta1_init,
                     'theta2_init': theta2_init,
                     'success': False
@@ -525,7 +604,10 @@ class ChatteringBoundaryLayerPSO:
         logger.info(f"  Successful runs: {n_successful}/{n_runs}")
 
         if n_successful > 0:
-            for metric in ['chattering_index', 'settling_time', 'overshoot', 'control_energy']:
+            metrics = ['chattering_index', 'settling_time', 'overshoot', 'control_energy']
+            if self.controller_type == 'hybrid_adaptive_sta_smc':
+                metrics.append('emergency_reset_rate')
+            for metric in metrics:
                 mean_val = successful_runs[metric].mean()
                 std_val = successful_runs[metric].std()
                 ci = 1.96 * std_val / np.sqrt(n_successful)
@@ -566,7 +648,7 @@ def run_optimization_for_controller(controller_type: str,
                                     n_iterations: int = 50,
                                     seed: int = 42) -> Dict[str, Any]:
     """
-    Run boundary layer optimization for specified controller.
+    Run controller-specific chattering optimization for specified controller.
 
     Args:
         controller_type: Controller type
@@ -579,7 +661,7 @@ def run_optimization_for_controller(controller_type: str,
         Dictionary with optimization results
     """
     logger.info("\n" + "=" * 80)
-    logger.info(f"OPTIMIZING BOUNDARY LAYER FOR: {controller_type.upper()}")
+    logger.info(f"OPTIMIZING CHATTERING PARAMETERS FOR: {controller_type.upper()}")
     logger.info("=" * 80)
 
     # Load Phase 53 optimized gains
@@ -597,7 +679,9 @@ def run_optimization_for_controller(controller_type: str,
 
     # Run optimization
     best_params, history = optimizer.optimize()
-    epsilon_min_opt, alpha_opt = best_params
+    best_param_map = {
+        name: float(value) for name, value in zip(optimizer.param_names, best_params)
+    }
 
     # Save iteration history
     iteration_df = pd.DataFrame(history['iteration_history'])
@@ -608,7 +692,7 @@ def run_optimization_for_controller(controller_type: str,
 
     # Validate with 100 runs
     logger.info("\nRunning validation (100 runs)...")
-    validation_df = optimizer.validate_best_parameters(epsilon_min_opt, alpha_opt, n_runs=100)
+    validation_df = optimizer.validate_best_parameters(best_params, n_runs=100)
 
     # Save validation results
     validation_csv = output_dir / f"{controller_type}_boundary_layer_validation.csv"
@@ -635,41 +719,50 @@ def run_optimization_for_controller(controller_type: str,
         mean_energy = successful['control_energy'].mean()
         std_energy = successful['control_energy'].std()
 
+        summary_stats = {
+            'n_runs': int(n_successful),
+            'chattering_index': {
+                'mean': float(mean_chattering),
+                'std': float(std_chattering),
+                'ci_95': float(ci_chattering)
+            },
+            'settling_time': {
+                'mean': float(mean_settling),
+                'std': float(std_settling),
+                'ci_95': float(ci_settling)
+            },
+            'overshoot': {
+                'mean': float(mean_overshoot),
+                'std': float(std_overshoot),
+                'ci_95': float(ci_overshoot)
+            },
+            'control_energy': {
+                'mean': float(mean_energy),
+                'std': float(std_energy)
+            }
+        }
+
+        if controller_type == 'hybrid_adaptive_sta_smc':
+            mean_reset = successful['emergency_reset_rate'].mean()
+            std_reset = successful['emergency_reset_rate'].std()
+            ci_reset = 1.96 * std_reset / np.sqrt(n_successful)
+            summary_stats['emergency_reset_rate'] = {
+                'mean': float(mean_reset),
+                'std': float(std_reset),
+                'ci_95': float(ci_reset)
+            }
+
         # Summary
         summary = {
             'controller_type': controller_type,
             'phase53_gains': gains,
-            'best_parameters': {
-                'epsilon_min': float(epsilon_min_opt),
-                'alpha': float(alpha_opt)
-            },
+            'best_parameters': best_param_map,
             'pso_optimization': {
                 'n_particles': n_particles,
                 'n_iterations': n_iterations,
                 'final_fitness': history['final_best_fitness']
             },
-            'validation_statistics': {
-                'n_runs': int(n_successful),
-                'chattering_index': {
-                    'mean': float(mean_chattering),
-                    'std': float(std_chattering),
-                    'ci_95': float(ci_chattering)
-                },
-                'settling_time': {
-                    'mean': float(mean_settling),
-                    'std': float(std_settling),
-                    'ci_95': float(ci_settling)
-                },
-                'overshoot': {
-                    'mean': float(mean_overshoot),
-                    'std': float(std_overshoot),
-                    'ci_95': float(ci_overshoot)
-                },
-                'control_energy': {
-                    'mean': float(mean_energy),
-                    'std': float(std_energy)
-                }
-            }
+            'validation_statistics': summary_stats
         }
 
         # Save summary
@@ -681,10 +774,15 @@ def run_optimization_for_controller(controller_type: str,
         logger.info("\n" + "=" * 80)
         logger.info(f"RESULTS FOR {controller_type.upper()}")
         logger.info("=" * 80)
-        logger.info(f"Best Parameters: eps_min={epsilon_min_opt:.4f}, alpha={alpha_opt:.4f}")
+        best_param_str = ", ".join(
+            f"{name}={_format_param_value(value)}" for name, value in best_param_map.items()
+        )
+        logger.info(f"Best Parameters: {best_param_str}")
         logger.info(f"Chattering Index: {mean_chattering:.4f} +- {std_chattering:.4f}")
         logger.info(f"Settling Time: {mean_settling:.4f} +- {std_settling:.4f}s")
         logger.info(f"Overshoot: {mean_overshoot:.4f} +- {std_overshoot:.4f} rad")
+        if controller_type == 'hybrid_adaptive_sta_smc':
+            logger.info(f"Emergency Reset Rate: {mean_reset:.4f} +- {std_reset:.4f}")
         logger.info("=" * 80)
 
         return summary
@@ -696,13 +794,13 @@ def run_optimization_for_controller(controller_type: str,
 def main():
     """Main execution function."""
     logger.info("=" * 80)
-    logger.info("PHASE 2: CHATTERING BOUNDARY LAYER OPTIMIZATION")
+    logger.info("PHASE 2: CHATTERING PARAMETER OPTIMIZATION")
     logger.info("=" * 80)
-    logger.info("\nOptimizing boundary layer parameters for 3 controllers:")
+    logger.info("\nOptimizing parameters for 3 controllers:")
     logger.info("  1. Classical SMC")
     logger.info("  2. Adaptive SMC")
     logger.info("  3. Hybrid Adaptive STA SMC")
-    logger.info("\nApproach: MT-6 methodology (fix Phase 53 gains, optimize 2D boundary layer)")
+    logger.info("\nApproach: fix Phase 53 gains, optimize controller-specific parameters")
     logger.info("=" * 80)
 
     # Output directory
