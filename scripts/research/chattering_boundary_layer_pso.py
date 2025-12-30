@@ -85,8 +85,15 @@ class ChatteringBoundaryLayerPSO:
         self.seed = seed
 
         # PSO parameter bounds: [epsilon_min, alpha]
-        self.bounds_min = np.array([0.01, 0.0])    # Minimum values
-        self.bounds_max = np.array([0.05, 2.0])     # Maximum values
+        # For Hybrid STA: ensure sat_soft_width (alpha) >= dead_zone (epsilon)
+        if controller_type == 'hybrid_adaptive_sta_smc':
+            # Hybrid: alpha=[0.05, 0.10], epsilon=[0.0, 0.05] ensures alpha >= epsilon
+            self.bounds_min = np.array([0.0, 0.05])    # [epsilon_min, alpha_min]
+            self.bounds_max = np.array([0.05, 0.10])    # [epsilon_max, alpha_max]
+        else:
+            # Classical/Adaptive: standard ranges
+            self.bounds_min = np.array([0.01, 0.0])    # Minimum values
+            self.bounds_max = np.array([0.05, 2.0])     # Maximum values
 
         # PSO hyperparameters
         self.w = 0.7    # Inertia weight
@@ -285,8 +292,8 @@ class ChatteringBoundaryLayerPSO:
                 k2_init=5.0,
                 gamma1=1.0,
                 gamma2=0.5,
-                dead_zone=alpha,             # Param 2: dead zone (renamed from alpha)
-                sat_soft_width=epsilon       # Param 1: soft saturation width (acts like boundary layer)
+                dead_zone=epsilon,           # Param 1: dead zone (use smaller range [0.01, 0.05])
+                sat_soft_width=alpha         # Param 2: sat_soft_width (use larger range [0.0, 2.0])
             )
         else:
             raise ValueError(f"Unknown controller type: {self.controller_type}")
