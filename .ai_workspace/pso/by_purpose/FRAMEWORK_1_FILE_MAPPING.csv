@@ -1,0 +1,79 @@
+filename,category,controller,task,path,status,notes
+optimized_gains_classical_smc_phase53.json,Performance,Classical,Phase53,experiments/classical_smc/optimization/phases/phase53/,Complete,Baseline RMSE optimization
+optimized_gains_sta_smc_phase53.json,Performance,STA,Phase53,experiments/sta_smc/optimization/phases/phase53/,Complete,Baseline RMSE optimization
+gains_sta_lyapunov_optimized.json,Performance,STA,Phase53,experiments/sta_smc/optimization/phases/phase53/,Complete,Lyapunov-based alternative
+optimized_gains_adaptive_smc_phase53.json,Performance,Adaptive,Phase53,experiments/adaptive_smc/optimization/phases/phase53/,Complete,Best performance (RMSE 0.0289)
+optimized_gains_hybrid_phase53.json,Performance,Hybrid,Phase53,experiments/hybrid_adaptive_sta/optimization/phases/phase53/,Complete,2nd best performance
+pso_sta_smc_standard.json,Performance,STA,Phase2,experiments/sta_smc/optimization/phases/phase2/gains/standard/,Complete,Phase 2 standard conditions
+pso_adaptive_smc_standard.json,Performance,Adaptive,Phase2,experiments/adaptive_smc/optimization/phases/phase2/gains/standard/,Complete,Phase 2 standard conditions
+pso_hybrid_adaptive_sta_smc_standard.json,Performance,Hybrid,Phase2,experiments/hybrid_adaptive_sta/optimization/phases/phase2/gains/standard/,Complete,Phase 2 standard conditions
+sta_smc_gains.json,Performance,STA,Phase2,experiments/sta_smc/optimization/phases/phase2/gains/,Complete,Phase 2 baseline
+LT7_section_5_1_pso_convergence.png,Performance,Multi,LT-7,experiments/figures/,Complete,LT-7 paper Section 5.1
+LT7_section_8_3_pso_generalization.png,Performance,Multi,LT-7,experiments/figures/,Complete,LT-7 paper Section 8.3
+config.yaml,Performance,Multi,Config,./,Complete,Lines 39-83 (defaults) 186-229 (bounds)
+pso_optimizer.py,Performance,Multi,Source,src/optimization/algorithms/,Complete,Core PSO implementation
+pso.py,Performance,Multi,Source,src/optimization/algorithms/swarm/,Complete,Swarm-based PSO
+cost_evaluator.py,Performance,Multi,Source,src/optimization/core/,Complete,Fitness evaluation
+tracking.py,Performance,Multi,Source,src/optimization/objectives/control/,Complete,Tracking objectives
+stability.py,Performance,Multi,Source,src/optimization/objectives/control/,Complete,Stability objectives
+pso_plots.py,Performance,Multi,Source,src/utils/visualization/,Complete,PSO visualization (QW-3)
+pso_convergence_classical_smc.png,Performance,Classical,Phase53,experiments/classical_smc/optimization/active/,Missing,NEED TO LOCATE
+pso_convergence_sta_smc.png,Performance,STA,Phase53,experiments/sta_smc/optimization/active/,Missing,NEED TO LOCATE
+pso_convergence_adaptive_smc.png,Performance,Adaptive,Phase53,experiments/adaptive_smc/optimization/active/,Missing,NEED TO LOCATE
+pso_classical_smc_standard.json,Performance,Classical,Phase2,experiments/classical_smc/optimization/phases/phase2/gains/standard/,Missing,NEED TO LOCATE
+MT6_adaptive_optimization.csv,Safety,STA,MT-6,experiments/sta_smc/boundary_layer/,Complete,Adaptive boundary layer (ε_min + α)
+MT6_pso_convergence.png,Safety,STA,MT-6,experiments/figures/,Complete,MT-6 convergence plot
+config.yaml,Safety,Multi,Config,./,Complete,Lines 84 97 113 179-181 (boundary_layer)
+chattering_classical_smc.csv,Safety,Classical,Planned,N/A,Missing,NOT YET RUN (Phase 1.2)
+chattering_adaptive_smc.csv,Safety,Adaptive,Planned,N/A,Missing,NOT YET RUN (Phase 1.2)
+chattering_hybrid.csv,Safety,Hybrid,Planned,N/A,Missing,NOT YET RUN (Phase 1.2)
+MT7_COMPLETE_REPORT.md,Robustness,Multi,MT-7,experiments/comparative/pso_robustness/,Complete,50.4x degradation report
+MT7_robustness_summary.json,Robustness,Multi,MT-7,experiments/comparative/pso_robustness/,Complete,10 seeds 500 runs summary
+MT7_statistical_comparison.json,Robustness,Multi,MT-7,experiments/comparative/pso_robustness/,Complete,Welch's t-test Cohen's d
+MT7_seed_42_results.csv,Robustness,Multi,MT-7,experiments/comparative/pso_robustness/,Complete,Seed 42 (50 runs)
+MT7_seed_43_results.csv,Robustness,Multi,MT-7,experiments/comparative/pso_robustness/,Complete,Seed 43 (50 runs)
+MT7_seed_44_results.csv,Robustness,Multi,MT-7,experiments/comparative/pso_robustness/,Complete,Seed 44 (50 runs)
+MT7_seed_45_results.csv,Robustness,Multi,MT-7,experiments/comparative/pso_robustness/,Complete,Seed 45 (50 runs)
+MT7_seed_46_results.csv,Robustness,Multi,MT-7,experiments/comparative/pso_robustness/,Complete,Seed 46 (50 runs)
+MT7_seed_47_results.csv,Robustness,Multi,MT-7,experiments/comparative/pso_robustness/,Complete,Seed 47 (50 runs)
+MT7_seed_48_results.csv,Robustness,Multi,MT-7,experiments/comparative/pso_robustness/,Complete,Seed 48 (50 runs)
+MT7_seed_49_results.csv,Robustness,Multi,MT-7,experiments/comparative/pso_robustness/,Complete,Seed 49 (50 runs)
+MT7_seed_50_results.csv,Robustness,Multi,MT-7,experiments/comparative/pso_robustness/,Complete,Seed 50 (50 runs)
+MT7_seed_51_results.csv,Robustness,Multi,MT-7,experiments/comparative/pso_robustness/,Complete,Seed 51 (50 runs)
+MT8_robust_validation_summary.json,Robustness,Multi,MT-8,experiments/comparative/disturbance_rejection/,Complete,Hybrid +21.4% best
+MT8_disturbance_rejection.csv,Robustness,Multi,MT-8,experiments/comparative/disturbance_rejection/,Complete,All controllers comparison
+MT8_disturbance_rejection.json,Robustness,Multi,MT-8,experiments/comparative/disturbance_rejection/,Complete,JSON format
+MT8_adaptive_scheduling_results.json,Robustness,Multi,MT-8,experiments/comparative/disturbance_rejection/,Complete,Adaptive gain scheduling
+MT8_hil_validation_results.json,Robustness,Multi,MT-8,experiments/comparative/disturbance_rejection/,Complete,HIL validation
+MT8_extended_validation_results.json,Robustness,Multi,MT-8,experiments/comparative/disturbance_rejection/,Complete,Extended validation
+mt8_repro_seed42_classical_smc.json,Robustness,Classical,MT-8,experiments/classical_smc/optimization/active/,Complete,MT-8 robust gains
+mt8_repro_seed42_sta_smc.json,Robustness,STA,MT-8,experiments/sta_smc/optimization/active/,Complete,MT-8 robust gains
+mt8_repro_seed42_adaptive_smc.json,Robustness,Adaptive,MT-8,experiments/adaptive_smc/optimization/active/,Complete,MT-8 robust gains
+mt8_repro_seed42_hybrid_adaptive_sta_smc.json,Robustness,Hybrid,MT-8,experiments/hybrid_adaptive_sta/optimization/active/,Complete,MT-8 robust gains
+pso_sta_smc_robust.json,Robustness,STA,Phase2,experiments/sta_smc/optimization/phases/phase2/gains/robust/,Complete,Phase 2 robust gains
+pso_adaptive_smc_robust.json,Robustness,Adaptive,Phase2,experiments/adaptive_smc/optimization/phases/phase2/gains/robust/,Complete,Phase 2 robust gains
+pso_hybrid_adaptive_sta_smc_robust.json,Robustness,Hybrid,Phase2,experiments/hybrid_adaptive_sta/optimization/phases/phase2/gains/robust/,Complete,Phase 2 robust gains
+adaptive_smc_robust_gains.json,Robustness,Adaptive,Archive,experiments/adaptive_smc/optimization/archive/,Complete,Archived robust gains
+hybrid_adaptive_sta_smc_robust_gains.json,Robustness,Hybrid,Archive,experiments/hybrid_adaptive_sta/optimization/archive/,Complete,Archived robust gains
+2025-12-09_classical_smc_robust.log,Robustness,Classical,Logs,academic/logs/pso/,Complete,Robust PSO execution log
+2025-12-09_sta_smc_robust.log,Robustness,STA,Logs,academic/logs/pso/,Complete,Robust PSO execution log
+2025-12-09_adaptive_smc_robust.log,Robustness,Adaptive,Logs,academic/logs/pso/,Complete,Robust PSO execution log
+2025-12-09_hybrid_adaptive_sta_smc_robust.log,Robustness,Hybrid,Logs,academic/logs/pso/,Complete,Robust PSO execution log
+config.yaml,Robustness,Multi,Config,./,Complete,Lines 30-37 (MT-8) 230-244 (robustness)
+robust_pso_optimizer.py,Robustness,Multi,Source,src/optimization/algorithms/,Complete,Robust PSO implementation
+robust_cost_evaluator.py,Robustness,Multi,Source,src/optimization/core/,Complete,Robust fitness evaluation
+robustness.py,Robustness,Multi,Source,src/optimization/objectives/control/,Complete,Robustness objectives
+energy.py,Efficiency,Multi,Source,src/optimization/objectives/control/,Complete,Energy objectives (infrastructure)
+config.yaml,Efficiency,Multi,Config,./,Complete,Lines 367-396 (energy weights)
+classical_smc_energy_optimized.json,Efficiency,Classical,Planned,N/A,Missing,NOT YET RUN (Phase 1.1)
+sta_smc_energy_optimized.json,Efficiency,STA,Planned,N/A,Missing,NOT YET RUN (Phase 1.1)
+adaptive_smc_energy_optimized.json,Efficiency,Adaptive,Planned,N/A,Missing,NOT YET RUN (Phase 1.1)
+hybrid_energy_optimized.json,Efficiency,Hybrid,Planned,N/A,Missing,NOT YET RUN (Phase 1.1)
+multi_objective_pso.py,Multi-Objective,Multi,Source,src/optimization/algorithms/,Complete,MOPSO infrastructure
+pso_factory_bridge.py,Multi-Objective,Multi,Source,src/optimization/integration/,Complete,PSO factory integration
+config.yaml,Multi-Objective,Multi,Config,./,Complete,Lines 367-392 (MO weights)
+README_DUAL_CATEGORY.txt,Multi-Objective,Multi,MT-8,5_multi_objective/mt8_implicit/,Complete,MT-8 implicit MO explanation
+classical_smc_pareto_front.json,Multi-Objective,Classical,Planned,N/A,Missing,NOT YET RUN (Phase 1.3)
+sta_smc_pareto_front.json,Multi-Objective,STA,Planned,N/A,Missing,NOT YET RUN (Phase 1.3)
+adaptive_smc_pareto_front.json,Multi-Objective,Adaptive,Planned,N/A,Missing,NOT YET RUN (Phase 1.3)
+hybrid_pareto_front.json,Multi-Objective,Hybrid,Planned,N/A,Missing,NOT YET RUN (Phase 1.3)
