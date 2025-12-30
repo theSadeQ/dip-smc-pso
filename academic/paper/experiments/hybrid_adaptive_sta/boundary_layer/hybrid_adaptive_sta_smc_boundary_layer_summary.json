@@ -1,0 +1,40 @@
+{
+  "controller_type": "hybrid_adaptive_sta_smc",
+  "phase53_gains": [
+    23.670769359566975,
+    14.288596313057464,
+    8.86878335929106,
+    3.5473665394849467
+  ],
+  "best_parameters": {
+    "epsilon_min": 0.0,
+    "alpha": 0.09272460521764936
+  },
+  "pso_optimization": {
+    "n_particles": 30,
+    "n_iterations": 50,
+    "final_fitness": 38.23053286915731
+  },
+  "validation_statistics": {
+    "n_runs": 100,
+    "chattering_index": {
+      "mean": 56.21871410907452,
+      "std": 15.94106243681432,
+      "ci_95": 3.124448237615607
+    },
+    "settling_time": {
+      "mean": 10.0,
+      "std": 0.0,
+      "ci_95": 0.0
+    },
+    "overshoot": {
+      "mean": 9.788507302342468,
+      "std": 2.6614092869772703,
+      "ci_95": 0.521636220247545
+    },
+    "control_energy": {
+      "mean": 726.4979160892525,
+      "std": 403.76453676233854
+    }
+  }
+}

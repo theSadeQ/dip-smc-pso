@@ -85,11 +85,13 @@ class ChatteringBoundaryLayerPSO:
         self.seed = seed
 
         # PSO parameter bounds: [epsilon_min, alpha]
-        # For Hybrid STA: ensure sat_soft_width (alpha) >= dead_zone (epsilon)
+        # For Hybrid STA: use original ranges from PHASE_2_FIX_PLAN.md
+        # sat_soft_width=[0.01, 0.05], dead_zone=[0.0, 0.05]
         if controller_type == 'hybrid_adaptive_sta_smc':
-            # Hybrid: alpha=[0.05, 0.10], epsilon=[0.0, 0.05] ensures alpha >= epsilon
-            self.bounds_min = np.array([0.0, 0.05])    # [epsilon_min, alpha_min]
-            self.bounds_max = np.array([0.05, 0.10])    # [epsilon_max, alpha_max]
+            # Hybrid: epsilon=[0.01, 0.05] (sat_soft_width), alpha=[0.0, 0.05] (dead_zone)
+            # Includes default sat_soft_width=0.03 in search space
+            self.bounds_min = np.array([0.01, 0.0])    # [epsilon_min, alpha_min]
+            self.bounds_max = np.array([0.05, 0.05])    # [epsilon_max, alpha_max]
         else:
             # Classical/Adaptive: standard ranges
             self.bounds_min = np.array([0.01, 0.0])    # Minimum values
@@ -292,8 +294,8 @@ class ChatteringBoundaryLayerPSO:
                 k2_init=5.0,
                 gamma1=1.0,
                 gamma2=0.5,
-                dead_zone=epsilon,           # Param 1: dead zone (use smaller range [0.01, 0.05])
-                sat_soft_width=alpha         # Param 2: sat_soft_width (use larger range [0.0, 2.0])
+                sat_soft_width=epsilon,      # Param 1: sat_soft_width [0.01, 0.05] (includes default 0.03)
+                dead_zone=alpha              # Param 2: dead_zone [0.0, 0.05]
             )
         else:
             raise ValueError(f"Unknown controller type: {self.controller_type}")
