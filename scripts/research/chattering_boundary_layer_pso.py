@@ -13,12 +13,15 @@ Approach:
 
 Controllers:
 1. Classical SMC: 6 gains [k1, k2, lam1, lam2, K, kd]
+   - Params: boundary_layer (epsilon) + boundary_layer_slope (alpha)
 2. Adaptive SMC: 5 gains [k1, k2, lam1, lam2, gamma]
+   - Params: boundary_layer (epsilon) + dead_zone (alpha)
 3. Hybrid Adaptive STA: 4 gains [k1, k2, lam1, lam2]
+   - Params: sat_soft_width (epsilon) + dead_zone (alpha)
 
 PSO Parameters:
-- Parameter 1: epsilon_min (boundary layer thickness) in [0.01, 0.05]
-- Parameter 2: alpha (smoothing factor) in [0.0, 2.0]
+- Parameter 1: epsilon (boundary layer / soft saturation width) in [0.01, 0.05]
+- Parameter 2: alpha (dead_zone / slope) in [0.0, 2.0]
 - Swarm: 30 particles, 50 iterations
 - Fitness: 70% chattering + 15% settling + 15% overshoot
 - Monte Carlo: 5 runs per fitness evaluation
@@ -261,18 +264,29 @@ class ChatteringBoundaryLayerPSO:
         elif self.controller_type == 'adaptive_smc':
             return AdaptiveSMC(
                 gains=self.optimized_gains,
+                dt=0.01,
                 max_force=150.0,
-                boundary_layer=epsilon,
-                boundary_layer_slope=alpha,
-                switch_method='tanh'
+                leak_rate=0.001,
+                adapt_rate_limit=5.0,
+                K_min=5.0,
+                K_max=50.0,
+                smooth_switch=True,
+                boundary_layer=epsilon,      # Param 1: boundary layer thickness
+                dead_zone=alpha,             # Param 2: dead zone (renamed from alpha)
+                K_init=10.0,
+                alpha=0.5                    # Fixed proportional weight (NOT optimization param)
             )
         elif self.controller_type == 'hybrid_adaptive_sta_smc':
             return HybridAdaptiveSTASMC(
                 gains=self.optimized_gains,
+                dt=0.01,
                 max_force=150.0,
-                boundary_layer=epsilon,
-                boundary_layer_slope=alpha,
-                switch_method='tanh'
+                k1_init=10.0,
+                k2_init=5.0,
+                gamma1=1.0,
+                gamma2=0.5,
+                dead_zone=alpha,             # Param 2: dead zone (renamed from alpha)
+                sat_soft_width=epsilon       # Param 1: soft saturation width (acts like boundary layer)
             )
         else:
             raise ValueError(f"Unknown controller type: {self.controller_type}")
