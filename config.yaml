@@ -153,10 +153,14 @@ controllers:
     # Adaptation rate for k1.  Controls how quickly k1 increases
     # outside the dead‑zone.  Larger values yield faster adaptation but
     # may introduce oscillations.
-    gamma1: 2.0
+    gamma1: 0.1
     # Adaptation rate for k2.  Typically smaller than gamma1 to
     # balance the proportional and integral actions.
-    gamma2: 0.5
+    gamma2: 0.05
+    # Leak rate for the adaptive gains.  Determines how quickly gains decay
+    # when the system is stable or inside the dead zone.  Increased to prevent
+    # gain "ratcheting" and reduce chattering.
+    gain_leak: 0.1
     # Dead‑zone width.  When |s| ≤ dead_zone the gains are held
     # constant to prevent wind‑up from measurement noise.
     dead_zone: 0.05

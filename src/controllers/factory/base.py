@@ -448,10 +448,16 @@ def create_controller(controller_type: str,
                 dt=0.001,
                 boundary_layer=0.02
             )
+            
+            # Extract adaptive parameters from hybrid config
+            hybrid_gamma = controller_params.get('gamma1', 4.0)
+            hybrid_leak = controller_params.get('gain_leak', 0.01)
+            
             adaptive_config = AdaptiveSMCConfig(
-                gains=[25.0, 18.0, 15.0, 10.0, 4.0],
+                gains=[25.0, 18.0, 15.0, 10.0, hybrid_gamma],  # Use gamma1 as adaptation rate
                 max_force=150.0,
-                dt=0.001
+                dt=0.001,
+                leak_rate=hybrid_leak
             )
 
             config_params = {

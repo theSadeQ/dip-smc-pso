@@ -227,6 +227,7 @@ class HybridAdaptiveSTASMCConfig(_BaseControllerConfig):
     k2_init: Optional[float] = Field(None, gt=0.0)
     gamma1: Optional[float] = Field(None, gt=0.0)
     gamma2: Optional[float] = Field(None, gt=0.0)
+    gain_leak: Optional[float] = Field(None, ge=0.0)
     dead_zone: Optional[float] = Field(None, gt=0.0)
     enable_equivalent: Optional[bool] = None
     damping_gain: Optional[float] = Field(None, ge=0.0)

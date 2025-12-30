@@ -269,15 +269,29 @@ def run_simulation(
             else:
                 if use_compute:
                     ret = controller.compute_control(x_curr, ctrl_state, history)  # type: ignore[attr-defined]
+                    # Handle dictionary return (new Modular Controller interface)
+                    if isinstance(ret, dict):
+                        if 'u' in ret:
+                            u_val = float(ret['u'])
+                        elif 'control' in ret:
+                            u_val = float(ret['control'])
+                        else:
+                            # Fallback: try to convert dict to float (unlikely to work but preserves logic)
+                            u_val = float(ret)
+                    else:
+                        # Handle tuple/list/scalar return (legacy/test interface)
+                        try:
+                            u_val = float(ret[0])
+                        except Exception:
+                            u_val = float(ret)
+
+                    # Extract state and history from tuple return (legacy)
                     try:
-                        u_val = float(ret[0])
-                    except Exception:
-                        u_val = float(ret)
-                    try:
-                        if len(ret) >= 2:
-                            ctrl_state = ret[1]
-                        if len(ret) >= 3:
-                            history = ret[2]
+                        if isinstance(ret, (tuple, list)):
+                            if len(ret) >= 2:
+                                ctrl_state = ret[1]
+                            if len(ret) >= 3:
+                                history = ret[2]
                     except Exception:
                         pass
                 else:
