@@ -285,4 +285,26 @@ Please provide:
 
 ---
 
+## Instructions for Analysis
+
+**Step 1**: Read and analyze these files I will provide:
+- PHASE_2_RESULTS.md (optimization history)
+- HYBRID_STA_ANALYSIS.md (root cause analysis)
+- hybrid_adaptive_sta_smc.py (controller source code)
+
+**Step 2**: Execute this analysis workflow:
+1. Identify the root cause of chattering=56.21
+2. Propose 3 alternative parameter sets to optimize
+3. Provide PSO configuration (bounds, dimensions)
+4. Estimate success probability for each approach
+
+**Step 3**: Output actionable implementation plan with:
+- Exact parameter names and ranges
+- Expected chattering reduction
+- Time estimate (hours)
+
+**I will paste the file contents in my next message. Please wait for them before starting your analysis.**
+
+---
+
 **Thank you for your analysis! Please be as specific as possible with parameter names, ranges, and test procedures.**
