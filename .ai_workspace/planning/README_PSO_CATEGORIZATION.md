@@ -1,6 +1,7 @@
 # PSO Categorization System - Overview
 
 **Created:** December 30, 2025
+**Updated:** December 31, 2025 (added Regional Hybrid SMC)
 **Location:** `.ai_workspace/planning/`
 **Status:** PLANNING PHASE
 
@@ -8,7 +9,7 @@
 
 ## What Is This?
 
-A comprehensive 6-framework categorization system for organizing 153 PSO optimization files across 60 scenarios and 7 controllers.
+A comprehensive 6-framework categorization system for organizing 153 PSO optimization files across 60 scenarios and 8 controllers (including new Regional Hybrid SMC).
 
 **Current State:** 78% organized (experiments/ already well-structured)
 **Goal:** 100% organized with multiple navigation paths

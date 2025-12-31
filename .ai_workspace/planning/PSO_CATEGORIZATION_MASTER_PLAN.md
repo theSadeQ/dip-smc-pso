@@ -2,8 +2,9 @@
 ## 6-Framework Organization System
 
 **Created:** December 30, 2025
+**Updated:** December 31, 2025 (added Regional Hybrid SMC)
 **Purpose:** Comprehensive categorization system for PSO optimization work
-**Scope:** 153 files, 60 scenarios, 7 controllers
+**Scope:** 153 files, 60 scenarios, 8 controllers
 **Location:** `.ai_workspace/planning/`
 
 ---
@@ -42,7 +43,7 @@ This document defines 6 complementary categorization frameworks for organizing a
 1. **Performance-Focused (Speed/Accuracy)**
    - Goal: Minimize RMSE, settling time, overshoot
    - Scenarios: S1 (Nominal PSO), S10 (Phase-based)
-   - Status: ✅ 100% complete (4/4 controllers)
+   - Status: ⚠️ 80% complete (4/5 core controllers, Regional Hybrid pending PSO)
    - Files: 23 gain files
    - Priority: HIGH
 
@@ -265,11 +266,12 @@ This document defines 6 complementary categorization frameworks for organizing a
    - Characteristics: Fixed structure, 6 params, boundary layer
    - Files: 9 gain files, 33 data files
 
-2. **Adaptive Controllers (2 controllers)**
+2. **Adaptive Controllers (3 controllers)**
    - Adaptive SMC: 75% coverage (7.5/10 scenarios)
    - Hybrid Adaptive STA: 85% coverage (8.5/10 scenarios)
+   - Regional Hybrid SMC: 0% coverage (NEW - Dec 31, 2025, PSO pending)
    - Characteristics: Online adaptation, 4-5 params, research focus
-   - Files: 14 gain files, 48 data files
+   - Files: 14 gain files, 48 data files (Regional Hybrid not yet optimized)
 
 3. **Specialized Controllers (2 controllers)**
    - Swing-Up SMC: 20% coverage (2/10 scenarios)
@@ -539,7 +541,8 @@ This document defines 6 complementary categorization frameworks for organizing a
 │   │   └── sta_smc/
 │   ├── adaptive/
 │   │   ├── adaptive_smc/
-│   │   └── hybrid_adaptive_sta/
+│   │   ├── hybrid_adaptive_sta/
+│   │   └── regional_hybrid_smc/     # NEW (Dec 31, 2025)
 │   └── specialized/
 │       ├── swing_up_smc/
 │       └── mpc/
