@@ -8,8 +8,7 @@ Configuration Schema for Adaptive SMC.
 Type-safe configuration for Adaptive Sliding Mode Control with online gain adaptation.
 Replaces parameter validation from the original 427-line monolithic controller.
 """
-
-from typing import List
+from typing import List, Optional, Any
 from dataclasses import dataclass, field
 import numpy as np
 
@@ -42,6 +41,9 @@ class AdaptiveSMCConfig:
     boundary_layer: float = field(default=0.01)           # Chattering reduction
     smooth_switch: bool = field(default=True)             # Use smooth switching
     dead_zone: float = field(default=0.01)                # Dead zone for adaptation
+
+    # Optional dynamics model
+    dynamics_model: Optional[Any] = field(default=None)   # [CIT-063]
 
     def __post_init__(self):
         """Validate configuration after creation."""
@@ -183,7 +185,8 @@ class AdaptiveSMCConfig:
             'alpha': self.alpha,
             'boundary_layer': self.boundary_layer,
             'smooth_switch': self.smooth_switch,
-            'dead_zone': self.dead_zone
+            'dead_zone': self.dead_zone,
+            'dynamics_model': self.dynamics_model
         }
 
     @classmethod

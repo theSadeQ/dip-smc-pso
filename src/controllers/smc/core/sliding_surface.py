@@ -62,18 +62,18 @@ class LinearSlidingSurface(SlidingSurface):
 
         Args:
             gains: [k1, k2, lam1, lam2] where:
-                   k1, k2 = position gains (must be > 0)
-                   lam1, lam2 = velocity gains (must be > 0)
+                   k1, k2 = velocity gains (must be > 0)
+                   lam1, lam2 = position gains (must be > 0)
         """
         super().__init__(gains)
 
         if len(self.gains) < 4:
             raise ValueError("Linear sliding surface requires at least 4 gains [k1, k2, lam1, lam2]")
 
-        self.k1 = self.gains[0]      # Joint 1 position gain
-        self.k2 = self.gains[1]      # Joint 2 position gain
-        self.lam1 = self.gains[2]    # Joint 1 velocity gain
-        self.lam2 = self.gains[3]    # Joint 2 velocity gain
+        self.k1 = self.gains[0]      # Joint 1 velocity gain
+        self.k2 = self.gains[1]      # Joint 2 velocity gain
+        self.lam1 = self.gains[2]    # Joint 1 position gain
+        self.lam2 = self.gains[3]    # Joint 2 position gain
 
     def _validate_gains(self) -> None:
         """Validate that surface gains satisfy stability requirements."""
@@ -100,10 +100,10 @@ class LinearSlidingSurface(SlidingSurface):
         Compute linear sliding surface value.
 
         Args:
-            state: [x, x_dot, theta1, theta1_dot, theta2, theta2_dot]
+            state: [x, theta1, theta2, x_dot, theta1_dot, theta2_dot]
 
         Returns:
-            Sliding surface value: s = lam1*theta1_dot + k1*theta1 + lam2*theta2_dot + k2*theta2
+            Sliding surface value: s = k1*theta1_dot + lam1*theta1 + k2*theta2_dot + lam2*theta2
         """
         if len(state) < 6:
             raise ValueError("State must have at least 6 elements for double-inverted pendulum")
@@ -114,14 +114,15 @@ class LinearSlidingSurface(SlidingSurface):
             state = np.where(np.isfinite(state), state, 0.0)
 
         # Extract joint angles and velocities (reference is upright: theta=0)
-        theta1 = state[2]      # Joint 1 angle error
-        theta1_dot = state[3]  # Joint 1 velocity error
-        theta2 = state[4]      # Joint 2 angle error
+        # Standard format: [x, theta1, theta2, x_dot, theta1_dot, theta2_dot]
+        theta1 = state[1]      # Joint 1 angle error
+        theta2 = state[2]      # Joint 2 angle error
+        theta1_dot = state[4]  # Joint 1 velocity error
         theta2_dot = state[5]  # Joint 2 velocity error
 
-        # Linear sliding surface: s = λ₁ė₁ + c₁e₁ + λ₂ė₂ + c₂e₂
-        s = (self.lam1 * theta1_dot + self.k1 * theta1 +
-             self.lam2 * theta2_dot + self.k2 * theta2)
+        # Linear sliding surface: s = k₁ė₁ + λ₁e₁ + k₂ė₂ + λ₂e₂
+        s = (self.k1 * theta1_dot + self.lam1 * theta1 +
+             self.k2 * theta2_dot + self.lam2 * theta2)
 
         # Ensure finite result
         if not np.isfinite(s):
@@ -150,20 +151,21 @@ class LinearSlidingSurface(SlidingSurface):
             state_dot: State derivative vector
 
         Returns:
-            Surface derivative: ṡ = λ₁θ̈₁ + c₁θ̇₁ + λ₂θ̈₂ + c₂θ̇₂
+            Surface derivative: ṡ = k₁θ̈₁ + λ₁θ̇₁ + k₂θ̈₂ + λ₂θ̇₂
         """
         if len(state_dot) < 6:
             raise ValueError("State derivative must have at least 6 elements")
 
         # Extract joint accelerations and velocities
-        theta1_dot = state[3]     # Joint 1 velocity
-        theta1_ddot = state_dot[3] # Joint 1 acceleration
+        # Standard format: [x, theta1, theta2, x_dot, theta1_dot, theta2_dot]
+        theta1_dot = state[4]     # Joint 1 velocity
+        theta1_ddot = state_dot[4] # Joint 1 acceleration
         theta2_dot = state[5]     # Joint 2 velocity
         theta2_ddot = state_dot[5] # Joint 2 acceleration
 
-        # Surface derivative
-        s_dot = (self.lam1 * theta1_ddot + self.k1 * theta1_dot +
-                 self.lam2 * theta2_ddot + self.k2 * theta2_dot)
+        # Surface derivative: ṡ = k₁θ̈₁ + λ₁θ̇₁ + k₂θ̈₂ + λ₂θ̇₂
+        s_dot = (self.k1 * theta1_ddot + self.lam1 * theta1_dot +
+                 self.k2 * theta2_ddot + self.lam2 * theta2_dot)
 
         return float(s_dot)
 

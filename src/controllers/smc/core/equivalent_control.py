@@ -172,8 +172,12 @@ class EquivalentControl:
             return sliding_surface.get_gradient()
         else:
             # Default for double-inverted pendulum (affects joint dynamics only)
-            # L = [0, k1, k2] for reduced state [theta1_dot, theta1, theta2]
-            if hasattr(sliding_surface, 'k1') and hasattr(sliding_surface, 'k2'):
+            # For s = lam1*theta1_dot + k1*theta1 + lam2*theta2_dot + k2*theta2,
+            # the gradient w.r.t velocities is [0, lam1, lam2]
+            if hasattr(sliding_surface, 'lam1') and hasattr(sliding_surface, 'lam2'):
+                return np.array([0.0, sliding_surface.lam1, sliding_surface.lam2], dtype=float)
+            elif hasattr(sliding_surface, 'k1') and hasattr(sliding_surface, 'k2'):
+                # Fallback to position gains if velocity gains not found (less accurate)
                 return np.array([0.0, sliding_surface.k1, sliding_surface.k2], dtype=float)
             else:
                 # Fallback: assume unit gains

@@ -441,23 +441,36 @@ def create_controller(controller_type: str,
             from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
             from src.controllers.smc.algorithms.adaptive.config import AdaptiveSMCConfig
 
-            # Create proper sub-configs with all required parameters
-            classical_config = ClassicalSMCConfig(
-                gains=[20.0, 15.0, 12.0, 8.0, 35.0, 5.0],
-                max_force=150.0,
-                dt=0.001,
-                boundary_layer=0.02
-            )
+            # Use the provided hybrid surface gains [c1, lambda1, c2, lambda2]
+            # for the sub-controllers to ensure surface consistency.
+            # Classical SMC gains: [k1, k2, lambda1, lambda2, K, kd]
+            # Adaptive SMC gains: [k1, k2, lambda1, lambda2, gamma]
             
-            # Extract adaptive parameters from hybrid config
+            # Use direct mapping for surface gains
+            k1_sub, k2_sub, lam1_sub, lam2_sub = controller_gains[:4]
+            
+            # Sub-controller algorithmic gains (K, kd for classical; gamma for adaptive)
             hybrid_gamma = controller_params.get('gamma1', 4.0)
             hybrid_leak = controller_params.get('gain_leak', 0.01)
             
-            adaptive_config = AdaptiveSMCConfig(
-                gains=[25.0, 18.0, 15.0, 10.0, hybrid_gamma],  # Use gamma1 as adaptation rate
+            classical_sub_gains = [k1_sub, k2_sub, lam1_sub, lam2_sub, 35.0, 5.0]
+            adaptive_sub_gains = [k1_sub, k2_sub, lam1_sub, lam2_sub, hybrid_gamma]
+
+            # Create proper sub-configs with all required parameters
+            classical_config = ClassicalSMCConfig(
+                gains=classical_sub_gains,
                 max_force=150.0,
                 dt=0.001,
-                leak_rate=hybrid_leak
+                boundary_layer=0.02,
+                dynamics_model=dynamics_model
+            )
+            
+            adaptive_config = AdaptiveSMCConfig(
+                gains=adaptive_sub_gains,
+                max_force=150.0,
+                dt=0.001,
+                leak_rate=hybrid_leak,
+                dynamics_model=dynamics_model
             )
 
             config_params = {
@@ -550,17 +563,22 @@ def create_controller(controller_type: str,
             from src.controllers.smc.algorithms.classical.config import ClassicalSMCConfig
             from src.controllers.smc.algorithms.adaptive.config import AdaptiveSMCConfig
 
+            # Extract surface gains
+            k1_sub, k2_sub, lam1_sub, lam2_sub = controller_gains[:4]
+            
             # Create minimal sub-configs with ALL required parameters
             classical_config = ClassicalSMCConfig(
-                gains=[20.0, 15.0, 12.0, 8.0, 35.0, 5.0],
+                gains=[k1_sub, k2_sub, lam1_sub, lam2_sub, 35.0, 5.0],
                 max_force=150.0,
                 dt=0.001,
-                boundary_layer=0.02
+                boundary_layer=0.02,
+                dynamics_model=dynamics_model
             )
             adaptive_config = AdaptiveSMCConfig(
-                gains=[25.0, 18.0, 15.0, 10.0, 4.0],
+                gains=[k1_sub, k2_sub, lam1_sub, lam2_sub, 4.0],
                 max_force=150.0,
-                dt=0.001
+                dt=0.001,
+                dynamics_model=dynamics_model
             )
 
             fallback_params = {
@@ -568,7 +586,8 @@ def create_controller(controller_type: str,
                 'dt': 0.001,
                 'max_force': 150.0,
                 'classical_config': classical_config,
-                'adaptive_config': adaptive_config
+                'adaptive_config': adaptive_config,
+                'dynamics_model': dynamics_model
             }
         else:
             # Standard controllers use gains - ensure ALL required parameters are included

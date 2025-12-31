@@ -99,7 +99,10 @@ class ModularSuperTwistingSMC:
             # 4. Add damping if specified
             u_twisting = twisting_result['u_total']
             if self.config.damping_gain > 0:
-                damping_control = -self.config.damping_gain * surface_derivative
+                # 5. Compute derivative control (damping)
+                # Damping should oppose the surface derivative
+                u_derivative = -self.config.damping_gain * surface_derivative
+                damping_control = u_derivative
                 u_with_damping = u_twisting + damping_control
             else:
                 u_with_damping = u_twisting
@@ -153,20 +156,15 @@ class ModularSuperTwistingSMC:
                 # Standard interface: return error dictionary
                 return error_result
 
-    def _estimate_surface_derivative(self, state: np.ndarray, current_surface: float) -> float:
-        """Estimate surface derivative using finite differences."""
-        if self.config.dt > 0:
-            surface_derivative = (current_surface - self._previous_surface) / self.config.dt
-        else:
-            # Fallback: simplified derivative from joint velocities
-            if len(state) >= 6:
-                theta1_dot = state[3]
-                theta2_dot = state[5]
-                surface_derivative = self.config.lam1 * theta1_dot + self.config.lam2 * theta2_dot
-            else:
-                surface_derivative = 0.0
-
-        return surface_derivative
+    def _estimate_surface_derivative(self, state: np.ndarray) -> float:
+        """Estimate surface derivative for algorithm logic."""
+        # Simplified derivative estimation
+        # Standard format: [x, theta1, theta2, xdot, theta1dot, theta2dot]
+        if len(state) >= 6:
+            theta1_dot = state[4]
+            theta2_dot = state[5]
+            return self.config.lam1 * theta1_dot + self.config.lam2 * theta2_dot
+        return 0.0
 
     def _create_control_result(self, u_final: float, surface_value: float,
                              surface_derivative: float, twisting_result: Dict[str, float],

@@ -165,8 +165,9 @@ class ModularAdaptiveSMC:
             surface_derivative = (current_surface - self._previous_surface) / self.config.dt
         else:
             # Fallback: simplified derivative from joint velocities
+            # Standard format: [x, theta1, theta2, xdot, theta1dot, theta2dot]
             if len(state) >= 6:
-                theta1_dot = state[3]
+                theta1_dot = state[4]
                 theta2_dot = state[5]
                 surface_derivative = self.config.lam1 * theta1_dot + self.config.lam2 * theta2_dot
             else:

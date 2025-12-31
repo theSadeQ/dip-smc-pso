@@ -93,7 +93,8 @@ class ModularClassicalSMC:
             )
 
             # 5. Compute derivative control (damping)
-            u_derivative = self.config.kd * surface_derivative
+            # Damping should oppose the surface derivative
+            u_derivative = -self.config.kd * surface_derivative
 
             # 6. Combine control components
             u_total = u_equivalent + u_switching + u_derivative
@@ -115,8 +116,9 @@ class ModularClassicalSMC:
         """Estimate surface derivative for derivative control."""
         # Simplified derivative estimation
         # In full implementation, this would use dynamics model
+        # Standard format: [x, theta1, theta2, xdot, theta1dot, theta2dot]
         if len(state) >= 6:
-            theta1_dot = state[3]
+            theta1_dot = state[4]
             theta2_dot = state[5]
             return self.config.lam1 * theta1_dot + self.config.lam2 * theta2_dot
         return 0.0

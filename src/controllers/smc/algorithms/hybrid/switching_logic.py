@@ -179,10 +179,10 @@ class HybridSwitchingLogic:
         # Extract common metrics
         metrics = {}
 
-        # Tracking error (assuming state format [x, x_dot, theta1, theta1_dot, theta2, theta2_dot])
+        # Tracking error (assuming standard format [x, theta1, theta2, x_dot, theta1_dot, theta2_dot])
         if len(system_state) >= 6:
-            position_error = np.sqrt(system_state[0]**2)  # Cart position error
-            angle_errors = np.sqrt(system_state[2]**2 + system_state[4]**2)  # Joint angle errors
+            position_error = abs(system_state[0])  # Cart position error
+            angle_errors = abs(system_state[1]) + abs(system_state[2])  # Joint angle errors
             metrics['tracking_error'] = position_error + angle_errors
         else:
             metrics['tracking_error'] = 0.0

@@ -368,10 +368,11 @@ class ModularHybridSMC:
 
     def _compute_tracking_error(self, state: np.ndarray) -> float:
         """Compute tracking error from system state."""
+        # Standard format: [x, theta1, theta2, xdot, theta1dot, theta2dot]
         if len(state) >= 6:
             # Assume desired position is 0 for all variables
             position_error = abs(state[0])  # Cart position
-            angle_errors = abs(state[2]) + abs(state[4])  # Joint angles
+            angle_errors = abs(state[1]) + abs(state[2])  # Joint angles
             return position_error + angle_errors
         return 0.0
 
