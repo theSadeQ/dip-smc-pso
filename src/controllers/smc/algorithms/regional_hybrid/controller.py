@@ -91,8 +91,16 @@ class RegionalHybridController:
             f"boundary_layer: {config.epsilon_min:.4f}"
         )
 
-        # TODO Phase 2.2: Initialize Super-Twisting layer
-        # self.super_twisting = SuperTwistingAlgorithm(...)
+        # Phase 2.2: Initialize Super-Twisting state
+        # We use inline implementation rather than separate module for simplicity
+        self.st_integral = 0.0  # Integral term for super-twisting
+        self.st_gamma1 = config.gamma1  # Proportional gain
+        self.st_gamma2 = config.gamma2  # Integral gain
+
+        logger.info(
+            f"Initialized Super-Twisting layer with gamma1={config.gamma1:.2f}, "
+            f"gamma2={config.gamma2:.2f}"
+        )
 
         # Statistics tracking
         self.stats = {
@@ -138,27 +146,64 @@ class RegionalHybridController:
             # Fallback if array returned (should not happen with our interface)
             u_adaptive = float(adaptive_result[0]) if len(adaptive_result) > 0 else 0.0
 
-        # TODO Phase 2.2-2.3: Implement super-twisting and blending
-        # For now (Phase 2.1), just use baseline Adaptive SMC
-        u_final = u_adaptive
+        # Phase 2.3: Check if super-twisting is SAFE to apply
+        is_safe, diagnostics = is_safe_for_supertwisting(
+            state, self.gains,
+            self.config.angle_threshold,
+            self.config.surface_threshold,
+            self.config.B_eq_threshold
+        )
 
-        # Step 2: Check if super-twisting is SAFE to apply (not yet implemented)
-        # is_safe, diagnostics = is_safe_for_supertwisting(
-        #     state, self.gains,
-        #     self.config.angle_threshold,
-        #     self.config.surface_threshold,
-        #     self.config.B_eq_threshold
-        # )
+        # Phase 2.2 + 2.3: Apply super-twisting ONLY in safe regions
+        if is_safe:
+            self.stats["sta_active_steps"] += 1
 
-        # Step 3: If safe, blend with super-twisting (not yet implemented)
-        # if is_safe:
-        #     self.stats["sta_active_steps"] += 1
-        #     u_sta = self.super_twisting.compute_control(state, t, last_control)
-        #     blend_weight = compute_blend_weight(...)
-        #     u_final = (1 - blend_weight) * u_adaptive + blend_weight * u_sta
-        # else:
-        #     self.stats["unsafe_conditions"] += 1
-        #     u_final = u_adaptive  # Safe fallback
+            # Compute sliding surface for super-twisting
+            # s = k1*theta1_dot + lambda1*theta1 + k2*theta2_dot + lambda2*theta2
+            from .safety_checker import compute_sliding_surface
+            s = compute_sliding_surface(state, self.gains)
+
+            # Super-Twisting Algorithm
+            # u_st = -gamma1 * |s|^(1/2) * sign(s) - gamma2 * integral(sign(s))
+            sign_s = np.sign(s)
+            u_st_prop = -self.st_gamma1 * np.sqrt(abs(s)) * sign_s
+
+            # Update integral term
+            self.st_integral += sign_s * self.config.dt
+            u_st_int = -self.st_gamma2 * self.st_integral
+
+            u_st = u_st_prop + u_st_int
+
+            # Compute blend weight for smooth transitions
+            blend_weight = compute_blend_weight(
+                state, self.gains,
+                self.config.angle_threshold,
+                self.config.surface_threshold,
+                self.config.B_eq_threshold,
+                self.config.w_angle,
+                self.config.w_surface,
+                self.config.w_singularity
+            )
+
+            # Blend: u = (1 - w) * u_adaptive + w * u_st
+            u_final = (1.0 - blend_weight) * u_adaptive + blend_weight * u_st
+
+            logger.debug(
+                f"STA active: s={s:.4f}, blend_weight={blend_weight:.3f}, "
+                f"u_adaptive={u_adaptive:.2f}, u_st={u_st:.2f}, u_final={u_final:.2f}"
+            )
+        else:
+            # Unsafe region - use pure Adaptive SMC (safe fallback)
+            self.stats["unsafe_conditions"] += 1
+            u_final = u_adaptive
+
+            # Reset super-twisting integral to avoid windup
+            self.st_integral = 0.0
+
+            logger.debug(
+                f"STA inactive (unsafe): B_eq={diagnostics['B_eq']:.4f}, "
+                f"s={diagnostics['s']:.4f}, u_adaptive={u_adaptive:.2f}"
+            )
 
         # Saturate control
         u_saturated = np.clip(u_final, -self.config.max_force, self.config.max_force)
@@ -174,8 +219,9 @@ class RegionalHybridController:
             # For now, just log that we would reset it
             logger.info("Resetting Adaptive SMC baseline")
 
-        # TODO Phase 2.2: Reset Super-Twisting layer
-        # self.super_twisting.reset()
+        # Phase 2.2: Reset Super-Twisting integral
+        self.st_integral = 0.0
+        logger.info("Reset Super-Twisting integral")
 
         # Reset statistics
         self.stats = {
