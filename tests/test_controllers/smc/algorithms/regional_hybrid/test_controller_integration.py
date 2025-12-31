@@ -396,7 +396,7 @@ class TestRegionalHybridIntegration:
             # (state, expected_safe)
             (np.array([0.0, 0.05, 0.03, 0.0, 0.0, 0.0]), True),   # Near equilibrium
             (np.array([0.0, 0.25, 0.20, 0.0, 0.0, 0.0]), False),  # Large angles
-            (np.array([0.0, 0.10, 0.08, 0.0, 0.0, 0.0]), True),   # Moderate angles (borderline)
+            (np.array([0.0, 0.10, 0.08, 0.0, 0.0, 0.0]), False),  # Moderate angles (|s|=1.22 > threshold=1.0)
             (np.array([0.0, 0.01, 0.01, 0.0, 0.0, 0.0]), True),   # Very small angles
         ]
 
