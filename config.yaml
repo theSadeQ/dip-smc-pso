@@ -87,6 +87,7 @@ controllers:
     - 2.2331074770549435   # k5: Optimized from 0.5 (+347% increase)
     - 0.14834799545581934  # k6: Optimized from 0.5 (-70% reduction)
     max_force: 150.0
+    dt: 0.001
     boundary_layer: 0.3  # Increased from 0.02 for Issue #12 chattering reduction
     dt: 0.001
   sta_smc:
@@ -136,6 +137,7 @@ controllers:
     - 9.0   # lambda1: Baseline sliding surface coefficient
     - 4.0   # lambda2: Baseline sliding surface coefficient
     max_force: 150.0
+    dt: 0.001
     dt: 0.001
     # Safety thresholds for super-twisting activation
     angle_threshold: 0.2        # rad - Maximum angle for STA activation

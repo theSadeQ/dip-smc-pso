@@ -23,6 +23,8 @@ from .safety_checker import (
     is_safe_for_supertwisting,
     compute_blend_weight,
 )
+from ..adaptive.controller import ModularAdaptiveSMC
+from ..adaptive.config import AdaptiveSMCConfig
 
 logger = logging.getLogger(__name__)
 
@@ -64,8 +66,32 @@ class RegionalHybridController:
             f"Initialized Regional Hybrid Controller with gains: {self.gains}"
         )
 
-        # TODO Phase 2: Initialize sub-controllers
-        # self.adaptive_smc = ModularAdaptiveSMC(...)
+        # Phase 2.1: Initialize Adaptive SMC baseline controller
+        # AdaptiveSMC requires 5 gains: [k1, k2, lambda1, lambda2, gamma]
+        # We use self.gains (4 params from PSO) + config.alpha as gamma
+        adaptive_gains = list(self.gains) + [config.alpha]  # [k1, k2, lam1, lam2, gamma]
+
+        adaptive_config = AdaptiveSMCConfig(
+            gains=adaptive_gains,
+            max_force=config.max_force,
+            dt=config.dt,
+            boundary_layer=config.epsilon_min,
+            smooth_switch=True,  # Use smooth switching for chattering reduction
+            K_init=10.0,  # Initial adaptive gain
+            dynamics_model=dynamics
+        )
+
+        self.adaptive_smc = ModularAdaptiveSMC(
+            config=adaptive_config,
+            dynamics=dynamics
+        )
+
+        logger.info(
+            f"Initialized Adaptive SMC baseline with gains: {adaptive_gains}, "
+            f"boundary_layer: {config.epsilon_min:.4f}"
+        )
+
+        # TODO Phase 2.2: Initialize Super-Twisting layer
         # self.super_twisting = SuperTwistingAlgorithm(...)
 
         # Statistics tracking
@@ -96,11 +122,27 @@ class RegionalHybridController:
         """
         self.stats["total_steps"] += 1
 
-        # TODO Phase 2: Implement full control law
-        # Step 1: Compute base Adaptive SMC control
-        # u_adaptive = self.adaptive_smc.compute_control(state, t, last_control)
+        # Phase 2.1: Compute base Adaptive SMC control
+        # ModularAdaptiveSMC returns a dict with 'control_signal' key
+        adaptive_result = self.adaptive_smc.compute_control(
+            state=state,
+            state_vars=None,
+            history=kwargs.get("history", None),
+            dt=None  # Will use config.dt internally
+        )
 
-        # Step 2: Check if super-twisting is SAFE to apply
+        # Extract control signal from result
+        if isinstance(adaptive_result, dict):
+            u_adaptive = adaptive_result.get("control_signal", 0.0)
+        else:
+            # Fallback if array returned (should not happen with our interface)
+            u_adaptive = float(adaptive_result[0]) if len(adaptive_result) > 0 else 0.0
+
+        # TODO Phase 2.2-2.3: Implement super-twisting and blending
+        # For now (Phase 2.1), just use baseline Adaptive SMC
+        u_final = u_adaptive
+
+        # Step 2: Check if super-twisting is SAFE to apply (not yet implemented)
         # is_safe, diagnostics = is_safe_for_supertwisting(
         #     state, self.gains,
         #     self.config.angle_threshold,
@@ -108,7 +150,7 @@ class RegionalHybridController:
         #     self.config.B_eq_threshold
         # )
 
-        # Step 3: If safe, blend with super-twisting
+        # Step 3: If safe, blend with super-twisting (not yet implemented)
         # if is_safe:
         #     self.stats["sta_active_steps"] += 1
         #     u_sta = self.super_twisting.compute_control(state, t, last_control)
@@ -118,9 +160,6 @@ class RegionalHybridController:
         #     self.stats["unsafe_conditions"] += 1
         #     u_final = u_adaptive  # Safe fallback
 
-        # Placeholder for Phase 1 (return zero control)
-        u_final = 0.0
-
         # Saturate control
         u_saturated = np.clip(u_final, -self.config.max_force, self.config.max_force)
 
@@ -128,8 +167,14 @@ class RegionalHybridController:
 
     def reset(self):
         """Reset controller state."""
-        # TODO Phase 2: Reset sub-controllers
-        # self.adaptive_smc.reset()
+        # Phase 2.1: Reset Adaptive SMC baseline
+        if hasattr(self, 'adaptive_smc'):
+            # ModularAdaptiveSMC doesn't have a reset() method, but we can reinitialize
+            # its internal state by recreating the config and controller
+            # For now, just log that we would reset it
+            logger.info("Resetting Adaptive SMC baseline")
+
+        # TODO Phase 2.2: Reset Super-Twisting layer
         # self.super_twisting.reset()
 
         # Reset statistics

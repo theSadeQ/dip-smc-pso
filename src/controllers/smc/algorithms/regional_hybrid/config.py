@@ -41,6 +41,7 @@ class RegionalHybridConfig:
 
     # === System Limits ===
     max_force: float = 150.0  # N - Hardware saturation limit
+    dt: float = 0.001  # s - Control timestep
 
     def __post_init__(self):
         """Validate configuration after initialization."""
