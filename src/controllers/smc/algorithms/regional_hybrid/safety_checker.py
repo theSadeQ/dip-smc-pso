@@ -133,19 +133,19 @@ def is_safe_for_supertwisting(
     # All conditions must be True
     is_safe = near_equilibrium and on_surface and no_singularity
 
-    # Diagnostics for logging/debugging
+    # Diagnostics for logging/debugging (convert numpy.bool_ to Python bool)
     diagnostics = {
-        "near_equilibrium": near_equilibrium,
-        "on_surface": on_surface,
-        "no_singularity": no_singularity,
-        "theta1": theta1,
-        "theta2": theta2,
-        "s": s,
-        "B_eq": B_eq,
-        "is_safe": is_safe,
+        "near_equilibrium": bool(near_equilibrium),
+        "on_surface": bool(on_surface),
+        "no_singularity": bool(no_singularity),
+        "theta1": float(theta1),
+        "theta2": float(theta2),
+        "s": float(s),
+        "B_eq": float(B_eq),
+        "is_safe": bool(is_safe),
     }
 
-    return is_safe, diagnostics
+    return bool(is_safe), diagnostics
 
 
 def compute_blend_weight(

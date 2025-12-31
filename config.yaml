@@ -71,6 +71,12 @@ controller_defaults:
     - 12.839386550675101   # lambda1: MT-8 robust optimized (was 5.0, +157% increase)
     - 6.815065802267164    # c2: MT-8 robust optimized (was 5.0, +36% increase)
     - 2.7500136927843215   # lambda2: MT-8 robust optimized (was 0.5, +450% increase)
+  regional_hybrid:
+    gains:
+    - 20.0  # k1: Baseline sliding surface gain
+    - 15.0  # k2: Baseline sliding surface gain
+    - 9.0   # lambda1: Baseline sliding surface coefficient
+    - 4.0   # lambda2: Baseline sliding surface coefficient
 controllers:
   classical_smc:
     gains:
@@ -119,6 +125,32 @@ controllers:
     exit_energy_factor: 0.9
     reentry_angle_tolerance: 0.4 # [CIT-047]
     max_force: 150.0 # [CIT-045]
+
+  # Regional Hybrid SMC Controller - Option 4 Implementation
+  # Combines Adaptive SMC baseline with super-twisting applied ONLY in safe regions
+  # Avoids B_eq singularities through safety region checking
+  regional_hybrid:
+    gains:
+    - 20.0  # k1: Baseline sliding surface gain
+    - 15.0  # k2: Baseline sliding surface gain
+    - 9.0   # lambda1: Baseline sliding surface coefficient
+    - 4.0   # lambda2: Baseline sliding surface coefficient
+    max_force: 150.0
+    dt: 0.001
+    # Safety thresholds for super-twisting activation
+    angle_threshold: 0.2        # rad - Maximum angle for STA activation
+    surface_threshold: 1.0      # Maximum sliding surface value for STA
+    B_eq_threshold: 0.1         # Minimum |B_eq| to avoid singularity
+    # Blend weights (must sum to 1.0)
+    w_angle: 0.3                # Weight for angle proximity
+    w_surface: 0.3              # Weight for surface proximity
+    w_singularity: 0.4          # Weight for singularity distance
+    # Super-twisting gains (regional application)
+    gamma1: 1.0                 # STA proportional gain
+    gamma2: 1.0                 # STA integral gain
+    # Adaptive SMC baseline parameters
+    epsilon_min: 0.017          # Boundary layer thickness
+    alpha: 1.142                # Adaptation rate
 
   # Model Predictive Controller (MPC)
   # Requires cvxpy package (optional dependency)
@@ -217,6 +249,10 @@ pso:
       # Narrowed bounds for stability (Issue #12 fix)
       min: [2.0, 2.0, 2.0, 0.2]
       max: [30.0, 30.0, 10.0, 5.0]
+    regional_hybrid:
+      # PSO bounds for 4-parameter sliding surface gains
+      min: [2.0, 2.0, 1.0, 1.0]
+      max: [50.0, 50.0, 30.0, 30.0]
   # Set inertia weight within [0.4,0.9] and balance cognitive/social
   # acceleration coefficients.  A balanced choice c1≈c2≈2.0 encourages
   # exploration without divergence【360839346985391†L94-L100】.
