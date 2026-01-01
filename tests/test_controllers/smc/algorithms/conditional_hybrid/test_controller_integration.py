@@ -1,9 +1,9 @@
 #======================================================================================
-#===== tests/test_controllers/smc/algorithms/regional_hybrid/test_controller_integration.py ====
+#== tests/test_controllers/smc/algorithms/conditional_hybrid/test_controller_integration.py ==
 #======================================================================================
 
 """
-Comprehensive Integration Tests for Regional Hybrid SMC Controller.
+Comprehensive Integration Tests for Conditional Hybrid SMC Controller.
 
 Tests the complete controller with full DIP dynamics, validates performance
 metrics, and compares against Adaptive SMC baseline.
@@ -13,8 +13,8 @@ import pytest
 import numpy as np
 from pathlib import Path
 
-from src.controllers.smc.algorithms.regional_hybrid.controller import RegionalHybridController
-from src.controllers.smc.algorithms.regional_hybrid.config import RegionalHybridConfig
+from src.controllers.smc.algorithms.conditional_hybrid.controller import ConditionalHybridController
+from src.controllers.smc.algorithms.conditional_hybrid.config import ConditionalHybridConfig
 from src.controllers.smc.algorithms.adaptive.controller import ModularAdaptiveSMC
 from src.controllers.smc.algorithms.adaptive.config import AdaptiveSMCConfig
 
@@ -56,7 +56,7 @@ def dynamics():
 @pytest.fixture
 def regional_hybrid_config():
     """Create Regional Hybrid configuration."""
-    return RegionalHybridConfig(
+    return ConditionalHybridConfig(
         angle_threshold=0.2,
         surface_threshold=1.0,
         B_eq_threshold=0.1,
@@ -75,7 +75,7 @@ def regional_hybrid_config():
 @pytest.fixture
 def regional_hybrid_controller(regional_hybrid_config, dynamics):
     """Create Regional Hybrid controller."""
-    controller = RegionalHybridController(
+    controller = ConditionalHybridController(
         config=regional_hybrid_config,
         dynamics=dynamics,
         gains=[20.0, 15.0, 9.0, 4.0]
@@ -98,7 +98,7 @@ def adaptive_baseline_controller(regional_hybrid_config, dynamics):
     return ModularAdaptiveSMC(config=adaptive_config, dynamics=dynamics)
 
 
-class TestRegionalHybridIntegration:
+class TestConditionalHybridIntegration:
     """Integration tests for Regional Hybrid SMC controller."""
 
     def test_full_simulation_near_equilibrium(
@@ -428,7 +428,7 @@ class TestRegionalHybridIntegration:
         # Test different threshold configurations
         configs = [
             # Strict thresholds (less STA usage)
-            RegionalHybridConfig(
+            ConditionalHybridConfig(
                 angle_threshold=0.1,
                 surface_threshold=0.5,
                 B_eq_threshold=0.2,
@@ -440,7 +440,7 @@ class TestRegionalHybridIntegration:
                 dt=0.001
             ),
             # Relaxed thresholds (more STA usage)
-            RegionalHybridConfig(
+            ConditionalHybridConfig(
                 angle_threshold=0.3,
                 surface_threshold=2.0,
                 B_eq_threshold=0.05,
@@ -456,7 +456,7 @@ class TestRegionalHybridIntegration:
         x0 = np.array([0.0, 0.10, 0.08, 0.0, 0.0, 0.0])
 
         for config in configs:
-            controller = RegionalHybridController(
+            controller = ConditionalHybridController(
                 config=config,
                 dynamics=dynamics,
                 gains=[20.0, 15.0, 9.0, 4.0]
@@ -538,7 +538,7 @@ class TestRegionalHybridIntegration:
         assert stats["unsafe_conditions"] > 0, "Unsafe condition not recorded"
 
 
-class TestRegionalHybridEdgeCases:
+class TestConditionalHybridEdgeCases:
     """Edge case tests for Regional Hybrid controller."""
 
     def test_zero_initial_state(

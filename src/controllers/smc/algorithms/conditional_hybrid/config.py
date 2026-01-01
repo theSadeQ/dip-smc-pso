@@ -1,12 +1,12 @@
 #======================================================================================
-#============= src/controllers/smc/algorithms/regional_hybrid/config.py ==============
+#=========== src/controllers/smc/algorithms/conditional_hybrid/config.py =============
 #======================================================================================
 
 """
-Regional Hybrid SMC Configuration.
+Conditional Hybrid SMC Configuration.
 
-Configuration for the Regional Hybrid Architecture that applies super-twisting
-only in safe operating regions to avoid B_eq singularities.
+Configuration for the Conditional Hybrid Architecture that applies super-twisting
+conditionally in safe operating regions to avoid B_eq singularities.
 """
 
 from dataclasses import dataclass
@@ -14,11 +14,11 @@ from typing import Optional
 
 
 @dataclass
-class RegionalHybridConfig:
+class ConditionalHybridConfig:
     """
-    Configuration for Regional Hybrid SMC Controller.
+    Configuration for Conditional Hybrid SMC Controller.
 
-    Architecture: Adaptive SMC baseline + regional super-twisting enhancement
+    Architecture: Adaptive SMC baseline + conditional super-twisting enhancement
     """
 
     # === Safety Thresholds ===

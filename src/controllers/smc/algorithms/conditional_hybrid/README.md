@@ -1,8 +1,8 @@
-# Regional Hybrid SMC Controller
+# Conditional Hybrid SMC Controller
 
 **Status**: Research Implementation (December 2025)
 **Chattering**: Expected < 0.05 (similar to Adaptive SMC baseline)
-**Architecture**: Adaptive SMC baseline + Regional super-twisting enhancement
+**Architecture**: Adaptive SMC baseline + Conditional super-twisting enhancement
 
 ## Overview
 
@@ -10,7 +10,7 @@ The Regional Hybrid SMC controller combines the proven chattering-reduction perf
 
 ### Key Innovation: Safety-First Super-Twisting
 
-Unlike traditional hybrid controllers that apply STA globally (risking B_eq singularities), this controller implements a **regional activation strategy** with three safety conditions:
+Unlike traditional hybrid controllers that apply STA globally (risking B_eq singularities), this controller implements a **conditional activation strategy** with three safety conditions:
 
 1. **Near equilibrium**: |θ₁|, |θ₂| < `angle_threshold` (default: 0.2 rad)
 2. **On sliding surface**: |s| < `surface_threshold` (default: 1.0)
@@ -22,7 +22,7 @@ Unlike traditional hybrid controllers that apply STA globally (risking B_eq sing
 
 ```
               ┌─────────────────────────────────────┐
-              │  Regional Hybrid SMC Controller    │
+              │  Conditional Hybrid SMC Controller    │
               └──────────┬─────────────┬────────────┘
                          │             │
         ┌────────────────┴───┐    ┌────┴──────────────────┐

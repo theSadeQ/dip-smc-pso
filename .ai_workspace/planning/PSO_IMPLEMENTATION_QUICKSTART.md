@@ -1,7 +1,7 @@
 # PSO Framework Implementation - Quick Start Guide
 
 **Created:** December 30, 2025
-**Updated:** December 31, 2025 (added Regional Hybrid SMC)
+**Updated:** December 31, 2025 (added Conditional Hybrid SMC)
 **Purpose:** Fast implementation guide for PSO categorization frameworks
 **Time to Complete:** 3-5 hours (Phase 1 only)
 
@@ -62,7 +62,7 @@ mkdir by_controller\classical\sta_smc
 mkdir by_controller\adaptive
 mkdir by_controller\adaptive\adaptive_smc
 mkdir by_controller\adaptive\hybrid_adaptive_sta
-mkdir by_controller\adaptive\regional_hybrid_smc
+mkdir by_controller\adaptive\conditional_hybrid_smc
 mkdir by_controller\specialized
 mkdir by_controller\specialized\swing_up_smc
 mkdir by_controller\specialized\mcp
@@ -93,7 +93,7 @@ Create `.ai_workspace\pso\README.md`:
 **Purpose:** Comprehensive categorization system for PSO optimization work
 **Total Files:** 153 PSO-related files
 **Total Scenarios:** 60 optimization scenarios
-**Controllers:** 8 (5 core + 3 experimental, including new Regional Hybrid SMC)
+**Controllers:** 8 (5 core + 3 experimental, including new Conditional Hybrid SMC)
 
 ---
 
@@ -150,7 +150,7 @@ Create `.ai_workspace\pso\README.md`:
 - STA SMC: 90% coverage (9/10 scenarios)
 - Adaptive SMC: 75% coverage (7.5/10 scenarios)
 - Hybrid Adaptive STA: 85% coverage (8.5/10 scenarios)
-- Regional Hybrid SMC: 0% coverage (NEW - Dec 31, 2025, PSO pending)
+- Conditional Hybrid SMC: 0% coverage (NEW - Dec 31, 2025, PSO pending)
 - Swing-Up SMC: 20% coverage (2/10 scenarios)
 - MPC: 0% coverage (N/A)
 
@@ -240,7 +240,7 @@ python tools/generate_coverage_dashboard.py
 - STA SMC: Phase 53 + Lyapunov-optimized
 - Adaptive SMC: Phase 53 gains
 - Hybrid Adaptive STA: Phase 53 gains
-- Regional Hybrid SMC: PSO optimization pending (NEW - Dec 31, 2025)
+- Conditional Hybrid SMC: PSO optimization pending (NEW - Dec 31, 2025)
 
 **Use Cases:**
 - Research benchmarks
@@ -477,7 +477,7 @@ EXPECTED_DIRS = [
     "by_controller/classical/sta_smc",
     "by_controller/adaptive/adaptive_smc",
     "by_controller/adaptive/hybrid_adaptive_sta",
-    "by_controller/adaptive/regional_hybrid_smc",
+    "by_controller/adaptive/conditional_hybrid_smc",
     "by_controller/specialized/swing_up_smc",
     "by_controller/specialized/mpc",
     "by_strategy/single_objective",

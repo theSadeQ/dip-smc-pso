@@ -2,7 +2,7 @@
 ## 6-Framework Organization System
 
 **Created:** December 30, 2025
-**Updated:** December 31, 2025 (added Regional Hybrid SMC)
+**Updated:** December 31, 2025 (added Conditional Hybrid SMC)
 **Purpose:** Comprehensive categorization system for PSO optimization work
 **Scope:** 153 files, 60 scenarios, 8 controllers
 **Location:** `.ai_workspace/planning/`
@@ -269,7 +269,7 @@ This document defines 6 complementary categorization frameworks for organizing a
 2. **Adaptive Controllers (3 controllers)**
    - Adaptive SMC: 75% coverage (7.5/10 scenarios)
    - Hybrid Adaptive STA: 85% coverage (8.5/10 scenarios)
-   - Regional Hybrid SMC: 0% coverage (NEW - Dec 31, 2025, PSO pending)
+   - Conditional Hybrid SMC: 0% coverage (NEW - Dec 31, 2025, PSO pending)
    - Characteristics: Online adaptation, 4-5 params, research focus
    - Files: 14 gain files, 48 data files (Regional Hybrid not yet optimized)
 
@@ -542,7 +542,7 @@ This document defines 6 complementary categorization frameworks for organizing a
 │   ├── adaptive/
 │   │   ├── adaptive_smc/
 │   │   ├── hybrid_adaptive_sta/
-│   │   └── regional_hybrid_smc/     # NEW (Dec 31, 2025)
+│   │   └── conditional_hybrid_smc/     # NEW (Dec 31, 2025)
 │   └── specialized/
 │       ├── swing_up_smc/
 │       └── mpc/

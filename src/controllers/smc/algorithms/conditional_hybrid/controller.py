@@ -1,16 +1,16 @@
 #======================================================================================
-#=========== src/controllers/smc/algorithms/regional_hybrid/controller.py ============
+#========= src/controllers/smc/algorithms/conditional_hybrid/controller.py ===========
 #======================================================================================
 
 """
-Regional Hybrid SMC Controller - Main Implementation.
+Conditional Hybrid SMC Controller - Main Implementation.
 
-Combines Adaptive SMC baseline with regional super-twisting enhancement.
+Combines Adaptive SMC baseline with conditional super-twisting enhancement.
 Avoids B_eq singularities through safe region checking.
 
 Architecture:
     - Base: Adaptive SMC (0.036 chattering - proven)
-    - Enhancement: Super-twisting applied ONLY in safe regions
+    - Enhancement: Super-twisting applied CONDITIONALLY in safe regions
     - Safety: Three conditions must ALL be met to enable STA
 """
 
@@ -18,7 +18,7 @@ from typing import Dict, List, Optional, Any
 import numpy as np
 import logging
 
-from .config import RegionalHybridConfig
+from .config import ConditionalHybridConfig
 from .safety_checker import (
     is_safe_for_supertwisting,
     compute_blend_weight,
@@ -29,11 +29,11 @@ from ..adaptive.config import AdaptiveSMCConfig
 logger = logging.getLogger(__name__)
 
 
-class RegionalHybridController:
+class ConditionalHybridController:
     """
-    Regional Hybrid SMC Controller.
+    Conditional Hybrid SMC Controller.
 
-    Uses Adaptive SMC as baseline, adds super-twisting only in safe regions
+    Uses Adaptive SMC as baseline, adds super-twisting conditionally in safe regions
     where B_eq singularities cannot occur.
 
     State Format: [x, θ₁, θ₂, ẋ, θ̇₁, θ̇₂]
@@ -42,9 +42,9 @@ class RegionalHybridController:
     # Required for PSO optimization integration
     n_gains = 4  # [k1, k2, lambda1, lambda2] for baseline surface
 
-    def __init__(self, config: RegionalHybridConfig, dynamics=None, **kwargs):
+    def __init__(self, config: ConditionalHybridConfig, dynamics=None, **kwargs):
         """
-        Initialize Regional Hybrid SMC controller.
+        Initialize Conditional Hybrid SMC controller.
 
         Args:
             config: Type-safe configuration object
