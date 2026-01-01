@@ -247,6 +247,35 @@ class HybridAdaptiveSTASMCConfig(_BaseControllerConfig):
                 )
         return self
 
+class ConditionalHybridConfig(_BaseControllerConfig):
+    """Configuration for Conditional Hybrid SMC Controller."""
+    max_force: Optional[float] = Field(None, gt=0.0)
+    dt: Optional[float] = Field(None, gt=0.0)
+    # Safety thresholds for super-twisting activation
+    angle_threshold: Optional[float] = Field(None, gt=0.0)
+    surface_threshold: Optional[float] = Field(None, gt=0.0)
+    B_eq_threshold: Optional[float] = Field(None, gt=0.0)
+    # Blend weights (must sum to 1.0)
+    w_angle: Optional[float] = Field(None, gt=0.0, le=1.0)
+    w_surface: Optional[float] = Field(None, gt=0.0, le=1.0)
+    w_singularity: Optional[float] = Field(None, gt=0.0, le=1.0)
+    # Super-twisting gains (regional application)
+    gamma1: Optional[float] = Field(None, gt=0.0)
+    gamma2: Optional[float] = Field(None, gt=0.0)
+    # Adaptive SMC baseline parameters
+    epsilon_min: Optional[float] = Field(None, gt=0.0)
+    alpha: Optional[float] = Field(None, gt=0.0)
+
+    @model_validator(mode="after")
+    def _validate_blend_weights(self) -> "ConditionalHybridConfig":
+        if self.w_angle is not None and self.w_surface is not None and self.w_singularity is not None:
+            weight_sum = self.w_angle + self.w_surface + self.w_singularity
+            if not (0.99 <= weight_sum <= 1.01):
+                raise ValueError(
+                    f"Blend weights must sum to 1.0, got {weight_sum:.3f}"
+                )
+        return self
+
 class PermissiveControllerConfig(_BaseControllerConfig):
     model_config = ConfigDict(extra="allow")
     unknown_params: Dict[str, Any] = Field(default_factory=dict)
@@ -279,12 +308,14 @@ class ControllersConfig(StrictModel):
     swing_up_smc: Optional[SwingUpSMCConfig] = None
     mpc_controller: Optional[MPCControllerConfig] = None
     hybrid_adaptive_sta_smc: Optional[HybridAdaptiveSTASMCConfig] = None
+    conditional_hybrid: Optional[ConditionalHybridConfig] = None
 
     def keys(self) -> List[str]:
         return [
             name for name in (
                 "classical_smc", "sta_smc", "adaptive_smc",
                 "swing_up_smc", "hybrid_adaptive_sta_smc", "mpc_controller",
+                "conditional_hybrid",
             ) if getattr(self, name) is not None
         ]
 
@@ -321,6 +352,7 @@ class PSOBoundsWithControllers(StrictModel):
     sta_smc: Optional[PSOBounds] = None
     adaptive_smc: Optional[PSOBounds] = None
     hybrid_adaptive_sta_smc: Optional[PSOBounds] = None
+    conditional_hybrid: Optional[PSOBounds] = None
 
 class ScenarioDistributionConfig(StrictModel):
     """Distribution of scenario difficulty levels for robust PSO."""
