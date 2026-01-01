@@ -21,6 +21,9 @@ class ConditionalHybridConfig:
     Architecture: Adaptive SMC baseline + conditional super-twisting enhancement
     """
 
+    # === Controller Gains (PSO optimizable) ===
+    gains: list = None  # [k1, k2, lambda1, lambda2] - Baseline sliding surface gains
+
     # === Safety Thresholds ===
     angle_threshold: float = 0.2  # rad - Maximum angle for ST activation
     surface_threshold: float = 1.0  # Maximum sliding surface value for ST
@@ -45,6 +48,10 @@ class ConditionalHybridConfig:
 
     def __post_init__(self):
         """Validate configuration after initialization."""
+        # Set default gains if not provided
+        if self.gains is None:
+            self.gains = [20.0, 15.0, 9.0, 4.0]
+
         # Validate blend weights sum to 1.0
         weight_sum = self.w_angle + self.w_surface + self.w_singularity
         if not (0.99 <= weight_sum <= 1.01):

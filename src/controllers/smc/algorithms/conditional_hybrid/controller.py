@@ -63,7 +63,7 @@ class ConditionalHybridController:
             self.gains = np.array([20.0, 15.0, 9.0, 4.0])
 
         logger.info(
-            f"Initialized Regional Hybrid Controller with gains: {self.gains}"
+            f"Initialized Conditional Hybrid Controller with gains: {self.gains}"
         )
 
         # Phase 2.1: Initialize Adaptive SMC baseline controller
