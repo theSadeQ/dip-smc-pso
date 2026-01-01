@@ -54,8 +54,8 @@ def dynamics():
 
 
 @pytest.fixture
-def regional_hybrid_config():
-    """Create Regional Hybrid configuration."""
+def conditional_hybrid_config():
+    """Create Conditional Hybrid configuration."""
     return ConditionalHybridConfig(
         angle_threshold=0.2,
         surface_threshold=1.0,
@@ -73,10 +73,10 @@ def regional_hybrid_config():
 
 
 @pytest.fixture
-def regional_hybrid_controller(regional_hybrid_config, dynamics):
-    """Create Regional Hybrid controller."""
+def conditional_hybrid_controller(conditional_hybrid_config, dynamics):
+    """Create Conditional Hybrid controller."""
     controller = ConditionalHybridController(
-        config=regional_hybrid_config,
+        config=conditional_hybrid_config,
         dynamics=dynamics,
         gains=[20.0, 15.0, 9.0, 4.0]
     )
@@ -84,7 +84,7 @@ def regional_hybrid_controller(regional_hybrid_config, dynamics):
 
 
 @pytest.fixture
-def adaptive_baseline_controller(regional_hybrid_config, dynamics):
+def adaptive_baseline_controller(conditional_hybrid_config, dynamics):
     """Create pure Adaptive SMC for comparison."""
     adaptive_config = AdaptiveSMCConfig(
         gains=[20.0, 15.0, 9.0, 4.0, 1.142],  # Same gains + alpha
@@ -99,10 +99,10 @@ def adaptive_baseline_controller(regional_hybrid_config, dynamics):
 
 
 class TestConditionalHybridIntegration:
-    """Integration tests for Regional Hybrid SMC controller."""
+    """Integration tests for Conditional Hybrid SMC controller."""
 
     def test_full_simulation_near_equilibrium(
-        self, regional_hybrid_controller, dynamics
+        self, conditional_hybrid_controller, dynamics
     ):
         """Test full simulation starting near equilibrium (STA should activate)."""
         # Initial state: small angles (within STA activation region)
@@ -121,7 +121,7 @@ class TestConditionalHybridIntegration:
 
         # Simulate
         for i in range(n_steps - 1):
-            u = regional_hybrid_controller.compute_control(
+            u = conditional_hybrid_controller.compute_control(
                 state=states[i],
                 t=t[i]
             )
@@ -132,13 +132,13 @@ class TestConditionalHybridIntegration:
             states[i + 1] = states[i] + dt * state_dot
 
         # Final control
-        controls[-1] = regional_hybrid_controller.compute_control(
+        controls[-1] = conditional_hybrid_controller.compute_control(
             state=states[-1],
             t=t[-1]
         )
 
         # Validate results
-        stats = regional_hybrid_controller.get_stats()
+        stats = conditional_hybrid_controller.get_stats()
 
         # STA should activate frequently near equilibrium
         assert stats["sta_usage_percent"] > 50.0, (
@@ -155,7 +155,7 @@ class TestConditionalHybridIntegration:
         assert np.max(np.abs(controls)) <= 150.0, "Control exceeded saturation"
 
     def test_full_simulation_large_initial_angles(
-        self, regional_hybrid_controller, dynamics
+        self, conditional_hybrid_controller, dynamics
     ):
         """Test full simulation starting with large angles (STA should be limited)."""
         # Initial state: large angles (outside STA activation region)
@@ -174,7 +174,7 @@ class TestConditionalHybridIntegration:
 
         # Simulate
         for i in range(n_steps - 1):
-            u = regional_hybrid_controller.compute_control(
+            u = conditional_hybrid_controller.compute_control(
                 state=states[i],
                 t=t[i]
             )
@@ -183,13 +183,13 @@ class TestConditionalHybridIntegration:
             state_dot = dynamics.compute_dynamics(states[i], u)
             states[i + 1] = states[i] + dt * state_dot
 
-        controls[-1] = regional_hybrid_controller.compute_control(
+        controls[-1] = conditional_hybrid_controller.compute_control(
             state=states[-1],
             t=t[-1]
         )
 
         # Validate results
-        stats = regional_hybrid_controller.get_stats()
+        stats = conditional_hybrid_controller.get_stats()
 
         # Initially, STA should NOT activate much
         # As system stabilizes, STA usage should increase
@@ -207,7 +207,7 @@ class TestConditionalHybridIntegration:
         assert np.max(np.abs(controls)) <= 150.0, "Control exceeded saturation"
 
     def test_chattering_index_calculation(
-        self, regional_hybrid_controller, dynamics
+        self, conditional_hybrid_controller, dynamics
     ):
         """Test that chattering index can be computed and is reasonable."""
         # Initial state near equilibrium
@@ -224,7 +224,7 @@ class TestConditionalHybridIntegration:
         states[0] = x0
 
         for i in range(n_steps - 1):
-            u = regional_hybrid_controller.compute_control(
+            u = conditional_hybrid_controller.compute_control(
                 state=states[i],
                 t=t[i]
             )
@@ -233,7 +233,7 @@ class TestConditionalHybridIntegration:
             state_dot = dynamics.compute_dynamics(states[i], u)
             states[i + 1] = states[i] + dt * state_dot
 
-        controls[-1] = regional_hybrid_controller.compute_control(
+        controls[-1] = conditional_hybrid_controller.compute_control(
             state=states[-1],
             t=t[-1]
         )
@@ -244,7 +244,7 @@ class TestConditionalHybridIntegration:
         chattering = np.sum(np.abs(np.diff(steady_state_controls))) / len(steady_state_controls)
 
         # Chattering should be reasonable (< 1.0 for good controllers)
-        # Regional Hybrid should have chattering similar to Adaptive SMC baseline
+        # Conditional Hybrid should have chattering similar to Adaptive SMC baseline
         assert chattering < 1.0, (
             f"High chattering detected: {chattering:.4f}"
         )
@@ -252,7 +252,7 @@ class TestConditionalHybridIntegration:
         print(f"Chattering index: {chattering:.4f}")
 
     def test_settling_time(
-        self, regional_hybrid_controller, dynamics
+        self, conditional_hybrid_controller, dynamics
     ):
         """Test that settling time is reasonable."""
         # Initial state with moderate angles
@@ -269,7 +269,7 @@ class TestConditionalHybridIntegration:
         states[0] = x0
 
         for i in range(n_steps - 1):
-            u = regional_hybrid_controller.compute_control(
+            u = conditional_hybrid_controller.compute_control(
                 state=states[i],
                 t=t[i]
             )
@@ -278,7 +278,7 @@ class TestConditionalHybridIntegration:
             state_dot = dynamics.compute_dynamics(states[i], u)
             states[i + 1] = states[i] + dt * state_dot
 
-        controls[-1] = regional_hybrid_controller.compute_control(
+        controls[-1] = conditional_hybrid_controller.compute_control(
             state=states[-1],
             t=t[-1]
         )
@@ -305,9 +305,9 @@ class TestConditionalHybridIntegration:
             pytest.fail("System did not settle within 10 seconds")
 
     def test_comparison_with_adaptive_baseline(
-        self, regional_hybrid_controller, adaptive_baseline_controller, dynamics
+        self, conditional_hybrid_controller, adaptive_baseline_controller, dynamics
     ):
-        """Compare Regional Hybrid with pure Adaptive SMC baseline."""
+        """Compare Conditional Hybrid with pure Adaptive SMC baseline."""
         # Same initial state for fair comparison
         x0 = np.array([0.0, 0.10, 0.08, 0.0, 0.0, 0.0])
 
@@ -317,13 +317,13 @@ class TestConditionalHybridIntegration:
         t = np.arange(0, t_final, dt)
         n_steps = len(t)
 
-        # Simulate Regional Hybrid
+        # Simulate Conditional Hybrid
         states_rh = np.zeros((n_steps, 6))
         controls_rh = np.zeros(n_steps)
         states_rh[0] = x0
 
         for i in range(n_steps - 1):
-            u = regional_hybrid_controller.compute_control(
+            u = conditional_hybrid_controller.compute_control(
                 state=states_rh[i],
                 t=t[i]
             )
@@ -332,7 +332,7 @@ class TestConditionalHybridIntegration:
             state_dot = dynamics.compute_dynamics(states_rh[i], u)
             states_rh[i + 1] = states_rh[i] + dt * state_dot
 
-        controls_rh[-1] = regional_hybrid_controller.compute_control(
+        controls_rh[-1] = conditional_hybrid_controller.compute_control(
             state=states_rh[-1],
             t=t[-1]
         )
@@ -373,22 +373,22 @@ class TestConditionalHybridIntegration:
         error_ad = np.mean(np.abs(states_ad[-1000:, 1:3]))
 
         print(f"\nPerformance Comparison:")
-        print(f"Regional Hybrid - Chattering: {chattering_rh:.4f}, Error: {error_rh:.4f}")
+        print(f"Conditional Hybrid - Chattering: {chattering_rh:.4f}, Error: {error_rh:.4f}")
         print(f"Adaptive Baseline - Chattering: {chattering_ad:.4f}, Error: {error_ad:.4f}")
 
-        # Regional Hybrid should perform at least as well as baseline
+        # Conditional Hybrid should perform at least as well as baseline
         # (May be better or similar, but not significantly worse)
         assert chattering_rh <= chattering_ad * 1.5, (
-            f"Regional Hybrid chattering ({chattering_rh:.4f}) significantly worse than baseline ({chattering_ad:.4f})"
+            f"Conditional Hybrid chattering ({chattering_rh:.4f}) significantly worse than baseline ({chattering_ad:.4f})"
         )
 
-        # Get Regional Hybrid statistics
-        stats = regional_hybrid_controller.get_stats()
+        # Get Conditional Hybrid statistics
+        stats = conditional_hybrid_controller.get_stats()
         print(f"STA usage: {stats['sta_usage_percent']:.1f}%")
         print(f"Unsafe conditions: {stats['unsafe_conditions']}")
 
     def test_sta_activation_regions(
-        self, regional_hybrid_controller, dynamics
+        self, conditional_hybrid_controller, dynamics
     ):
         """Test that STA activates only in safe regions."""
         # Test several states across the operating region
@@ -400,17 +400,17 @@ class TestConditionalHybridIntegration:
             (np.array([0.0, 0.01, 0.01, 0.0, 0.0, 0.0]), True),   # Very small angles
         ]
 
-        regional_hybrid_controller.reset()
+        conditional_hybrid_controller.reset()
 
         for state, expected_safe in test_states:
             # Simulate a few steps with this state
             for _ in range(10):
-                u = regional_hybrid_controller.compute_control(
+                u = conditional_hybrid_controller.compute_control(
                     state=state,
                     t=0.0
                 )
 
-            stats = regional_hybrid_controller.get_stats()
+            stats = conditional_hybrid_controller.get_stats()
 
             if expected_safe:
                 # STA should activate for safe states
@@ -419,7 +419,7 @@ class TestConditionalHybridIntegration:
                 )
             # Note: For borderline cases, we don't enforce strict requirements
 
-            regional_hybrid_controller.reset()
+            conditional_hybrid_controller.reset()
 
     def test_robustness_to_parameter_variations(
         self, dynamics
@@ -497,7 +497,7 @@ class TestConditionalHybridIntegration:
             assert np.max(np.abs(controls)) <= 150.0, "Control exceeded saturation"
 
     def test_integral_anti_windup(
-        self, regional_hybrid_controller, dynamics
+        self, conditional_hybrid_controller, dynamics
     ):
         """Test that integral anti-windup works (resets when leaving safe region)."""
         # Start in safe region, then move to unsafe region
@@ -508,46 +508,46 @@ class TestConditionalHybridIntegration:
             np.array([0.0, 0.30, 0.25, 0.0, 0.0, 0.0]),  # Unsafe (large angles)
         ]
 
-        regional_hybrid_controller.reset()
+        conditional_hybrid_controller.reset()
 
         # Accumulate integral in safe region
         for i in range(3):
-            u = regional_hybrid_controller.compute_control(
+            u = conditional_hybrid_controller.compute_control(
                 state=states_sequence[i],
                 t=float(i) * 0.001
             )
 
         # Integral should be non-zero
-        assert regional_hybrid_controller.st_integral != 0.0, (
+        assert conditional_hybrid_controller.st_integral != 0.0, (
             "Integral did not accumulate in safe region"
         )
 
         # Move to unsafe region
-        u = regional_hybrid_controller.compute_control(
+        u = conditional_hybrid_controller.compute_control(
             state=states_sequence[3],
             t=3 * 0.001
         )
 
         # Integral should be reset
-        assert regional_hybrid_controller.st_integral == 0.0, (
+        assert conditional_hybrid_controller.st_integral == 0.0, (
             "Integral anti-windup did not reset when entering unsafe region"
         )
 
         # Unsafe conditions should be recorded
-        stats = regional_hybrid_controller.get_stats()
+        stats = conditional_hybrid_controller.get_stats()
         assert stats["unsafe_conditions"] > 0, "Unsafe condition not recorded"
 
 
 class TestConditionalHybridEdgeCases:
-    """Edge case tests for Regional Hybrid controller."""
+    """Edge case tests for Conditional Hybrid controller."""
 
     def test_zero_initial_state(
-        self, regional_hybrid_controller
+        self, conditional_hybrid_controller
     ):
         """Test controller at exact equilibrium (zero state)."""
         x0 = np.zeros(6)
 
-        u = regional_hybrid_controller.compute_control(
+        u = conditional_hybrid_controller.compute_control(
             state=x0,
             t=0.0
         )
@@ -556,13 +556,13 @@ class TestConditionalHybridEdgeCases:
         assert np.abs(u) < 1.0, f"Control too large at equilibrium: {u:.4f}"
 
     def test_saturated_control(
-        self, regional_hybrid_controller
+        self, conditional_hybrid_controller
     ):
         """Test that control saturates properly at limits."""
         # Very large angles (should require large control)
         x_large = np.array([0.0, 0.8, 0.7, 0.0, 0.0, 0.0])
 
-        u = regional_hybrid_controller.compute_control(
+        u = conditional_hybrid_controller.compute_control(
             state=x_large,
             t=0.0
         )
@@ -571,44 +571,44 @@ class TestConditionalHybridEdgeCases:
         assert np.abs(u) <= 150.0, f"Control exceeded max_force: {u:.2f}"
 
     def test_reset_functionality(
-        self, regional_hybrid_controller
+        self, conditional_hybrid_controller
     ):
         """Test that reset() properly clears controller state."""
         # Run controller for a few steps
         state = np.array([0.0, 0.05, 0.03, 0.0, 0.0, 0.0])
         for _ in range(10):
-            u = regional_hybrid_controller.compute_control(
+            u = conditional_hybrid_controller.compute_control(
                 state=state,
                 t=0.0
             )
 
         # Verify state accumulated
-        stats_before = regional_hybrid_controller.get_stats()
+        stats_before = conditional_hybrid_controller.get_stats()
         assert stats_before["total_steps"] > 0
 
         # Reset
-        regional_hybrid_controller.reset()
+        conditional_hybrid_controller.reset()
 
         # Verify state cleared
-        assert regional_hybrid_controller.st_integral == 0.0
-        stats_after = regional_hybrid_controller.get_stats()
+        assert conditional_hybrid_controller.st_integral == 0.0
+        stats_after = conditional_hybrid_controller.get_stats()
         assert stats_after["total_steps"] == 0
         assert stats_after["sta_active_steps"] == 0
         assert stats_after["unsafe_conditions"] == 0
 
     def test_get_stats_format(
-        self, regional_hybrid_controller
+        self, conditional_hybrid_controller
     ):
         """Test that get_stats() returns correct format."""
         # Run a few steps
         state = np.array([0.0, 0.05, 0.03, 0.0, 0.0, 0.0])
         for _ in range(5):
-            u = regional_hybrid_controller.compute_control(
+            u = conditional_hybrid_controller.compute_control(
                 state=state,
                 t=0.0
             )
 
-        stats = regional_hybrid_controller.get_stats()
+        stats = conditional_hybrid_controller.get_stats()
 
         # Verify required fields
         assert "total_steps" in stats

@@ -1,9 +1,9 @@
-#=======================================================================================
-#=== tests/test_controllers/smc/algorithms/regional_hybrid/test_safety_checker.py ====
-#=======================================================================================
+#============================================================================================
+#=== tests/test_controllers/smc/algorithms/conditional_hybrid/test_safety_checker.py ====
+#============================================================================================
 
 """
-Safety Checker Tests for Regional Hybrid SMC.
+Safety Checker Tests for Conditional Hybrid SMC.
 
 Tests the safety region logic that determines when super-twisting can be safely
 applied without encountering B_eq singularities.
@@ -14,7 +14,7 @@ Based on Gemini's theoretical proof of architectural incompatibility.
 import numpy as np
 import pytest
 
-from src.controllers.smc.algorithms.regional_hybrid.safety_checker import (
+from src.controllers.smc.algorithms.conditional_hybrid.safety_checker import (
     compute_equivalent_gain,
     compute_sliding_surface,
     is_safe_for_supertwisting,
