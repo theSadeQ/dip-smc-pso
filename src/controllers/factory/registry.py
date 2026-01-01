@@ -27,7 +27,7 @@ try:
     from src.controllers.smc.algorithms.super_twisting.controller import ModularSuperTwistingSMC
     from src.controllers.smc.algorithms.adaptive.controller import ModularAdaptiveSMC
     from src.controllers.smc.algorithms.hybrid.controller import ModularHybridSMC
-    from src.controllers.smc.algorithms.regional_hybrid.controller import RegionalHybridController
+    from src.controllers.smc.algorithms.conditional_hybrid.controller import ConditionalHybridController
 except ImportError as e:
     logging.warning(f"Failed to import controller classes: {e}")
     # Define placeholder classes for development
@@ -39,7 +39,7 @@ except ImportError as e:
         pass
     class ModularHybridSMC:
         pass
-    class RegionalHybridController:
+    class ConditionalHybridController:
         pass
 
 # Import configuration classes with fallback handling
@@ -48,7 +48,7 @@ try:
     from src.controllers.smc.algorithms.super_twisting.config import SuperTwistingSMCConfig as STASMCConfig
     from src.controllers.smc.algorithms.adaptive.config import AdaptiveSMCConfig
     from src.controllers.smc.algorithms.hybrid.config import HybridSMCConfig as HybridAdaptiveSTASMCConfig
-    from src.controllers.smc.algorithms.regional_hybrid.config import RegionalHybridConfig
+    from src.controllers.smc.algorithms.conditional_hybrid.config import ConditionalHybridConfig
     CONFIG_CLASSES_AVAILABLE = True
 except ImportError:
     from .fallback_configs import (
@@ -57,8 +57,8 @@ except ImportError:
         AdaptiveSMCConfig,
         HybridAdaptiveSTASMCConfig
     )
-    # Define placeholder for regional hybrid if import fails
-    class RegionalHybridConfig:
+    # Define placeholder for conditional hybrid if import fails
+    class ConditionalHybridConfig:
         pass
     CONFIG_CLASSES_AVAILABLE = False
 
@@ -132,13 +132,13 @@ CONTROLLER_REGISTRY: Dict[str, Dict[str, Any]] = {
         'category': 'hybrid',
         'complexity': 'very_high'
     },
-    'regional_hybrid': {
-        'class': RegionalHybridController,
-        'config_class': RegionalHybridConfig,
+    'conditional_hybrid': {
+        'class': ConditionalHybridController,
+        'config_class': ConditionalHybridConfig,
         'default_gains': [20.0, 15.0, 9.0, 4.0],  # [k1, k2, λ1, λ2] - Baseline sliding surface gains
         'gain_count': 4,
         'gain_structure': '[k1, k2, λ1, λ2]',
-        'description': 'Regional hybrid SMC with adaptive baseline and safe super-twisting regions',
+        'description': 'Conditional hybrid SMC with adaptive baseline and conditional super-twisting activation',
         'supports_dynamics': True,
         'required_params': ['gains', 'max_force', 'angle_threshold', 'surface_threshold', 'B_eq_threshold'],
         'gain_bounds': [(2.0, 50.0), (2.0, 50.0), (1.0, 30.0), (1.0, 30.0)],
@@ -188,8 +188,8 @@ CONTROLLER_ALIASES = {
     'adaptive': 'adaptive_smc',
     'hybrid': 'hybrid_adaptive_sta_smc',
     'hybrid_sta': 'hybrid_adaptive_sta_smc',
-    'regional': 'regional_hybrid',
-    'regional_hybrid_smc': 'regional_hybrid',
+    'conditional': 'conditional_hybrid',
+    'conditional_hybrid_smc': 'conditional_hybrid',
 }
 
 

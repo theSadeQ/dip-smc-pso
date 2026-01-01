@@ -71,7 +71,7 @@ controller_defaults:
     - 12.839386550675101   # lambda1: MT-8 robust optimized (was 5.0, +157% increase)
     - 6.815065802267164    # c2: MT-8 robust optimized (was 5.0, +36% increase)
     - 2.7500136927843215   # lambda2: MT-8 robust optimized (was 0.5, +450% increase)
-  regional_hybrid:
+  conditional_hybrid:
     gains:
     - 20.0  # k1: Baseline sliding surface gain
     - 15.0  # k2: Baseline sliding surface gain
@@ -127,10 +127,10 @@ controllers:
     reentry_angle_tolerance: 0.4 # [CIT-047]
     max_force: 150.0 # [CIT-045]
 
-  # Regional Hybrid SMC Controller - Option 4 Implementation
-  # Combines Adaptive SMC baseline with super-twisting applied ONLY in safe regions
-  # Avoids B_eq singularities through safety region checking
-  regional_hybrid:
+  # Conditional Hybrid SMC Controller - Option 4 Implementation
+  # Combines Adaptive SMC baseline with super-twisting applied CONDITIONALLY in safe regions
+  # Avoids B_eq singularities through conditional activation
+  conditional_hybrid:
     gains:
     - 20.0  # k1: Baseline sliding surface gain
     - 15.0  # k2: Baseline sliding surface gain
@@ -251,7 +251,7 @@ pso:
       # Narrowed bounds for stability (Issue #12 fix)
       min: [2.0, 2.0, 2.0, 0.2]
       max: [30.0, 30.0, 10.0, 5.0]
-    regional_hybrid:
+    conditional_hybrid:
       # PSO bounds for 4-parameter sliding surface gains
       min: [2.0, 2.0, 1.0, 1.0]
       max: [50.0, 50.0, 30.0, 30.0]
