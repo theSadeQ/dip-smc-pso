@@ -73,10 +73,10 @@ controller_defaults:
     - 2.7500136927843215   # lambda2: MT-8 robust optimized (was 0.5, +450% increase)
   conditional_hybrid:
     gains:
-    - 20.0  # k1: Baseline sliding surface gain
-    - 15.0  # k2: Baseline sliding surface gain
-    - 9.0   # lambda1: Baseline sliding surface coefficient
-    - 4.0   # lambda2: Baseline sliding surface coefficient
+    - 39.15  # k1: PSO optimized (seed=42, cost=0.0)
+    - 23.07  # k2: PSO optimized
+    - 25.90  # lambda1: PSO optimized
+    - 21.22  # lambda2: PSO optimized
 controllers:
   classical_smc:
     gains:
@@ -132,10 +132,10 @@ controllers:
   # Avoids B_eq singularities through conditional activation
   conditional_hybrid:
     gains:
-    - 20.0  # k1: Baseline sliding surface gain
-    - 15.0  # k2: Baseline sliding surface gain
-    - 9.0   # lambda1: Baseline sliding surface coefficient
-    - 4.0   # lambda2: Baseline sliding surface coefficient
+    - 39.15  # k1: PSO optimized (seed=42, cost=0.0)
+    - 23.07  # k2: PSO optimized
+    - 25.90  # lambda1: PSO optimized
+    - 21.22  # lambda2: PSO optimized
     max_force: 150.0
     dt: 0.001
     dt: 0.001
