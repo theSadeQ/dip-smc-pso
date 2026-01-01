@@ -639,6 +639,20 @@ def create_controller(controller_type: str,
                     'boundary_layer': 0.01,
                     'smooth_switch': True
                 })
+            elif controller_type == 'conditional_hybrid':
+                # Conditional Hybrid SMC specific defaults
+                fallback_params.update({
+                    'angle_threshold': 0.2,
+                    'surface_threshold': 1.0,
+                    'B_eq_threshold': 0.1,
+                    'w_angle': 0.3,
+                    'w_surface': 0.3,
+                    'w_singularity': 0.4,
+                    'gamma1': 1.0,
+                    'gamma2': 1.0,
+                    'epsilon_min': 0.017,
+                    'alpha': 1.142
+                })
 
             # Only add dynamics_model if not None and controller supports it
             if dynamics_model is not None and controller_type in ['classical_smc', 'sta_smc', 'mpc_controller']:
