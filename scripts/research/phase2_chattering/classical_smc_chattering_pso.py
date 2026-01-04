@@ -32,7 +32,6 @@ sys.path.insert(0, str(project_root))
 from src.config import load_config
 from src.core.dynamics import DIPDynamics
 from src.controllers.factory import create_controller
-from src.optimization.algorithms.pso_optimizer import PSOTuner
 
 # Configure logging
 log_dir = project_root / "academic" / "logs" / "pso"
@@ -118,19 +117,20 @@ def simulate_with_controller(
         t_now = i * dt
         t_arr[i] = t_now
 
-        # Compute control
+        # Compute control - ModularClassicalSMC requires state, state_vars, and history
         try:
-            if ctrl_state is not None and history is not None:
-                result = controller.compute_control(x_curr, ctrl_state, history)
-                if hasattr(result, 'u'):
-                    u_nominal = float(result.u)
-                    ctrl_state = result.state if hasattr(result, 'state') else ctrl_state
-                    history = result.history if hasattr(result, 'history') else history
-                else:
-                    u_nominal = float(result)
+            result = controller.compute_control(x_curr, ctrl_state, history)
+            # Handle different return types (dict, object with attributes, or scalar)
+            if isinstance(result, dict):
+                u_nominal = float(result['u'])
+                ctrl_state = result.get('state', ctrl_state)
+                history = result.get('history', history)
+            elif hasattr(result, 'u'):
+                u_nominal = float(result.u)
+                ctrl_state = result.state if hasattr(result, 'state') else ctrl_state
+                history = result.history if hasattr(result, 'history') else history
             else:
-                result = controller.compute_control(x_curr)
-                u_nominal = float(result.u) if hasattr(result, 'u') else float(result)
+                u_nominal = float(result)
         except Exception as e:
             logger.warning(f"Control computation failed at t={t_now:.2f}s: {e}")
             u_nominal = 0.0
@@ -325,17 +325,37 @@ def optimize_classical_smc_chattering(
 
     logger.info(f"Original - Chattering: {chattering_orig:.4f}, RMSE: {rmse_orig:.4f}, Fitness: {fitness_orig:.4f}")
 
-    # Run PSO
+    # Run PSO optimization using PySwarms directly
     logger.info("Starting PSO optimization...")
-    tuner = PSOTuner(
-        objective_func=lambda g: objective_function(g, config, 'classical_smc'),
-        bounds=bounds,
+
+    # Import PySwarms
+    from pyswarms.single import GlobalBestPSO
+
+    # Set random seed for reproducibility
+    if seed is not None:
+        np.random.seed(seed)
+
+    # PSO configuration
+    pso_options = {
+        'c1': 2.0,  # Cognitive parameter
+        'c2': 2.0,  # Social parameter
+        'w': 0.9    # Inertia weight
+    }
+
+    # Create PSO optimizer
+    optimizer = GlobalBestPSO(
         n_particles=n_particles,
-        max_iterations=n_iterations,
-        seed=seed
+        dimensions=len(original_gains),
+        options=pso_options,
+        bounds=(np.array([b[0] for b in bounds]), np.array([b[1] for b in bounds]))
     )
 
-    optimized_gains, best_fitness = tuner.optimize()
+    # Run optimization
+    best_fitness, optimized_gains = optimizer.optimize(
+        lambda p: np.array([objective_function(gains, config, 'classical_smc') for gains in p]),
+        iters=n_iterations
+    )
+
     logger.info(f"PSO complete. Best fitness: {best_fitness:.4f}")
     logger.info(f"Optimized gains: {optimized_gains.tolist()}")
 
