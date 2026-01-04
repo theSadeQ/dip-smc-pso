@@ -421,102 +421,12 @@ config = load_config("config.yaml", allow_unknown=False)
 
 ### Recent Reorganization
 
-**Dec 29, 2025 - Experiments Controller-Based Reorganization:**
-- [OK] Reorganized experiments/ from task-based to controller-based + comparative structure
-- [OK] Created comparative/ for cross-controller studies (MT-5, MT-7, MT-8, LT-6)
-- [OK] Distributed optimization/ results to controller-specific directories
-- [OK] Moved phases/ → hybrid_adaptive_sta/anomaly_analysis/
-- [OK] Moved MT6_boundary_layer/ → sta_smc/boundary_layer/
-- [OK] Preserved figures/ and reports/ at root for LT7 paper references
-- [OK] Created comprehensive README files for navigation
-- [OK] Updated academic/paper/README.md and CLAUDE.md Section 14
-- [OK] Git history preserved for tracked files (154 files total)
-- [OK] New structure: comparative/, classical_smc/, sta_smc/, adaptive_smc/, hybrid_adaptive_sta/, figures/, reports/
+**Latest Status (Dec 2025):**
+- [OK] Complete workspace reorganization: .project/ → .ai_workspace/, academic/ THREE-CATEGORY structure
+- [OK] Experiments controller-based structure, benchmarks publication-ready
+- [OK] All migrations use git mv (history preserved)
 
-**Dec 29, 2025 - Academic Paper Merge (UNIFIED STRUCTURE):**
-- [OK] Merged docs/ + research/ → Unified academic/paper/ structure
-- [OK] docs/ → sphinx_docs/ (64 MB, renamed for clarity)
-- [OK] research/papers/ → publications/ (13 MB, research papers)
-- [OK] research/benchmarks/ + research/experiments/ + research/phases/ + research/optimization/ → experiments/ (16 MB, consolidated experimental data)
-- [OK] research/theory/ removed (empty directory)
-- [OK] Updated academic/paper/README.md with new v3.0 structure
-- [OK] Updated CLAUDE.md Section 14 references
-- [OK] Git history preserved: All moves use git mv
-- [OK] New structure: sphinx_docs/, thesis/, publications/, experiments/, archive/, data/
-
-**Dec 29, 2025 - Academic Folder Reorganization (THREE-CATEGORY STRUCTURE):**
-- [OK] Created three top-level categories: paper/, logs/, dev/
-- [OK] paper/ consolidation (202 MB total):
-  - thesis/ [98 MB], research/ [28 MB], docs/ [64 MB], archive/ [12 MB], data/ [3 KB]
-  - Flattened nested structures: docs/docs/ → docs/, research/papers/papers/ → research/papers/
-- [OK] logs/ reorganization (13 MB total):
-  - Flattened .logs/ → logs/ (merged nested structure)
-  - Added migration/ subdirectory for migration logs
-  - Moved archive/docs_build/logs/ → logs/docs_build/
-- [OK] dev/ consolidation (46 MB total):
-  - quality/ [46 MB] - QA audits, coverage reports
-  - caches/ [133 KB] - Pytest, hypothesis, benchmark caches
-- [OK] Cleanup: Deleted 294 MB backup file (52% size reduction)
-- [OK] Cleanup: Removed redundant archive backups (4.6 MB saved)
-- [OK] README files created for paper/, logs/, dev/
-- [OK] Updated CLAUDE.md Section 14 with new structure
-- [OK] Git history preserved: All moves use git mv
-
-**Dec 29, 2025 - AI Workspace Migration:**
-- [OK] .project/ → .ai_workspace/ (complete AI workspace consolidation)
-- [OK] .project/ai/ subdirectories → .ai_workspace/ (planning, guides, education, issues, testing, quality, orchestration, collaboration, ultrathink_sessions)
-- [OK] .project/tools/ → .ai_workspace/tools/ (recovery scripts, checkpoints, automation)
-- [OK] .project/config/ → .ai_workspace/config/ (claude, mcp)
-- [OK] .project/state/ → .ai_workspace/state/ (project state tracking)
-- [OK] .ai/paper_enhancement_plans → academic/archive/ (historical research plans)
-- [OK] Documentation updated: CLAUDE.md path references, .ai_workspace/ markdown files
-- [OK] Cleanup: Removed .project/, .ai/, .benchmarks/, malformed files, Python cache
-- [OK] Git history preserved: All migrations use git mv
-
-**Dec 18, 2025 - Benchmarks:**
-- [OK] benchmarks/ → Publication-ready structure (raw/, processed/, figures/, reports/)
-- [OK] benchmarks/{analysis,benchmark,comparison} → src/benchmarks/ (proper package structure)
-- [OK] benchmarks/*.log → .logs/benchmarks/ (9.7 MB logs centralized)
-- [OK] 8 README files added with research task provenance
-- [OK] 567 files scanned, 8 modified, imports auto-updated
-
-**Dec 19, 2025 - docs/ Directory:**
-- [OK] docs/ → Clean root structure (102 root files → 5 core files, 95% reduction)
-- [OK] Moved 70 markdown files to 8 categorized subdirectories (theory/, optimization/, production/, testing/, architecture/, guides/, reference/, meta/)
-- [OK] Moved 15 build artifacts to .artifacts/docs_build/logs/
-- [OK] Moved 6 scripts to .ai_workspace/tools/validation/docs/ and .ai_workspace/tools/docs/
-- [OK] Moved 8 data files to docs/_data/, docs/bib/, docs/_static/pwa/
-- [OK] Deleted 1 obsolete backup file; 564 total markdown files now organized
-
-**Dec 19, 2025 - Root Directory Cleanup:**
-- [OK] Root cleanup → 22 visible items → 18 items (exceeds ≤19 target)
-- [OK] Deleted build artifacts: __pycache__/, nul
-- [OK] Moved test artifacts: coverage.xml → .cache/coverage/, report.log → .logs/
-- [OK] Workspace health: 18 visible items (1 below target, 99% reorganization value achieved)
-- [OK] Documented deferrals: tests/ (HIGH risk, deferred) + data/ (zero benefit, skipped)
-- [OK] Backlog created: .ai_workspace/planning/BACKLOG.md
-
-**Dec 19, 2025 - Scripts Directory:**
-- [OK] scripts/ → Publication-ready structure (21 root files → 5 root files, 73% reduction)
-- [OK] Consolidated duplicate directories: documentation/ + docs_organization/ → docs/
-- [OK] Created categorized subdirectories: testing/, infrastructure/, utils/
-- [OK] 18 files moved with git mv (history preserved), 4 files updated (path/import fixes)
-- [OK] 195 Python scripts across 21 categorized subdirectories
-- [OK] Migration docs: scripts/README.md, scripts/MIGRATION_HISTORY.md
-
-**Dec 19, 2025 - Logs/Monitoring + Optimization Results:**
-- [OK] monitoring_data/ (56MB) → .logs/archive/ (compressed to 214KB, 99.6% reduction)
-- [OK] 13 PSO logs (978KB) → .logs/pso/ (from optimization_results/)
-- [OK] optimization_results/ restructured: active/, phases/, analysis_results/, archive/
-- [OK] Removed 1 visible directory (monitoring_data/), 22 visible items total
-- [OK] .logs/ size: 12MB (under 100MB target)
-
-**Dec 17, 2025 - Workspace:**
-- [OK] thesis/ (98MB) → .artifacts/thesis/
-- [OK] logs/ → .logs/ (hidden, centralized logging)
-- [OK] notebooks/ → docs/tutorials/notebooks/
-- [OK] Research outputs from benchmarks/ → .artifacts/research/
-- [OK] Scripts organized: 55 → 15 at root, 40 in subdirectories (superseded by Dec 19 reorganization)
+**See:** `.ai_workspace/guides/workspace_organization.md` for complete reorganization history
 
 ### Protected Files (never Delete)
 - `D:\Tools\Claude\Switch-ClaudeAccount.ps1` - Multi-account switcher (EXTERNAL LOCATION)
@@ -538,72 +448,12 @@ du -sh .logs/                                       # <100MB (current: 12MB)
 - **Action:** Create/Edit files -> Archive old versions -> Add README.md -> Commit
 - **Target:** ≤5 active files at folder root (final deliverables only)
 
-**Cleanup Principles:**
-
-1. **Archive Structure** - Create subdirectories for organization:
-   - `archive/old_versions/` - Previous iterations (PDFs, source files)
-   - `archive/planning/` - Planning docs, progress reports, completion summaries
-   - `archive/test_files/` - Test compilations and validation files
-   - `archive/build_artifacts/` - Compiler outputs (.aux, .log, .toc, .out, etc.)
-
-2. **Keep at Root** - Only essential deliverables:
-   - Final output files (e.g., `PROJECT_FINAL.pdf`, `PROJECT_FINAL.tex`)
-   - Active source files (e.g., `PROJECT.md`, `PROJECT.bib`)
-   - Documentation (`README.md`, `CHECKLIST.md`, `MANUAL.md`)
-
-3. **Archive Pattern** - Move intermediate files:
-   ```bash
-   # Old versions
-   mv PROJECT_v1.pdf PROJECT_v2.pdf archive/old_versions/
-
-   # Test files
-   mv TEST_*.pdf TEST_*.tex archive/test_files/
-
-   # Build artifacts
-   mv *.aux *.log *.toc *.out archive/build_artifacts/
-
-   # Planning docs
-   mv *_PLAN.md *_REPORT.md *_SUMMARY.md archive/planning/
-   ```
-
-4. **README Creation** - Always create `README.md` with:
-   - Section: Final Deliverables (list primary outputs with sizes)
-   - Section: Source Files (working files, databases)
-   - Section: Submission Materials (if applicable)
-   - Section: Archive Structure (describe subdirectories)
-   - Section: Status (completion date, version, quality metrics)
-   - Section: Usage (how to compile/run/view outputs)
-
-5. **Verification** - Before committing:
-   ```bash
-   ls -lah                    # Verify root has ≤5 core files
-   ls archive/*/              # Verify archive structure
-   cat README.md              # Verify documentation complete
-   ```
-
-**Example: Research Paper Cleanup**
-```bash
-# BEFORE: 95 files at root (messy)
-# AFTER: 12 files at root + archive/ subdirectories (professional)
-#
-# Root structure:
-# - PAPER_FINAL.pdf (final output)
-# - PAPER_FINAL.tex (LaTeX source)
-# - PAPER.md (markdown master)
-# - PAPER.bib (bibliography)
-# - README.md (documentation)
-# - CHECKLIST.md (submission guide)
-# - archive/ (old versions, planning, tests, build artifacts)
-```
-
-**When to Cleanup:**
-- [MANDATORY] After completing any multi-file creation task
-- [MANDATORY] After PDF/LaTeX compilation creates build artifacts
-- [MANDATORY] After iterative development creates v1, v2, v3 versions
-- [MANDATORY] Before committing changes to repository
+**Cleanup Triggers:**
+- [MANDATORY] After multi-file creation, PDF/LaTeX compilation, iterative development
+- [MANDATORY] Before committing to repository
 - [RECOMMENDED] Weekly during active development
 
-**See Also**: `.ai_workspace/archive/RESTRUCTURING_PLAN_2025-10-26.md` | `.ai_workspace/archive/WORKSPACE_CLEANUP_2025-10-26.md`
+**See:** `.ai_workspace/guides/workspace_organization.md` for complete cleanup principles and examples
 
 ------
 
@@ -835,342 +685,50 @@ result = checkpoint_task_launch(task_id="LT-4", agent_id="agent1", task_config={
 ## 25) Architectural Standards & Invariants (NEVER VIOLATE)
 
 **Status**: [OK] Established Dec 29, 2025 via comprehensive structural analysis
-**Validated**: Sequential-thinking MCP + 3 Explore agents + manual verification
-**Enforcement**: These patterns are INTENTIONAL architecture - do not "fix" them
 
----
+**See:** `.ai_workspace/guides/architectural_standards.md` for complete details
 
-### 25.1 Intentional Architectural Patterns (DO NOT CHANGE)
+### Critical Patterns (DO NOT "FIX")
 
-**These patterns may LOOK like issues but are CORRECT and serve specific purposes:**
+**Intentional Architectural Patterns:**
+- **Compatibility Layers**: src/optimizer/ → src/optimization/ (backward compatibility)
+- **Re-export Chains**: simulation_context.py in 3 locations (import path flexibility)
+- **Model Variants**: 8 dynamics files (different accuracy/performance tradeoffs)
+- **Framework Files**: src/interfaces/hil/test_automation.py is PRODUCTION code, not tests
 
-#### Pattern 1: Compatibility Layer (src/optimizer/ → src/optimization/)
+### Directory Placement Rules
 
-**Structure**:
-```
-src/optimizer/          [53 KB, 5 files]   - Backward-compatibility shim
-src/optimization/       [1.4 MB, 48 files] - Production modular architecture
-```
+**src/**: Production code only (controllers, models, utils, frameworks)
+**scripts/**: Development tools (executed, not imported)
+**tests/**: Pytest test files (test_*.py)
+**Root**: ≤19 visible items (currently 14) [OK]
 
-**Purpose**: Enable gradual migration from legacy code without breaking existing imports
-**Evidence**: `src/optimizer/pso_optimizer.py` re-exports from `src/optimization/algorithms/pso_optimizer.py`
-**Status**: [OK] INTENTIONAL - Similar to Django, NumPy migration patterns
-**Action**: NEVER consolidate these - backward compatibility required
+### Quality Gates (ENFORCE STRICTLY)
 
-#### Pattern 2: Re-export Chain (simulation_context.py exists in 3 locations)
+- Critical issues: 0 [MANDATORY]
+- High-priority: ≤3 [REQUIRED]
+- Test pass rate: 100% [MANDATORY]
+- Root items: ≤19 [REQUIRED]
+- Malformed names: 0 [MANDATORY]
 
-**Structure**:
-```
-src/core/simulation_context.py                [13 lines]  - Compat layer
-src/simulation/context/simulation_context.py  [116 lines] - Secondary shim
-src/simulation/core/simulation_context.py     [203 lines] - CANONICAL SOURCE
-```
+### File Classification Checklist
 
-**Purpose**: Multiple import paths for flexibility (legacy + new architecture)
-**Evidence**: All re-export to single canonical source (no duplication of logic)
-**Status**: [OK] INTENTIONAL - Provides import path flexibility
-**Action**: DO NOT consolidate unless migrating entire codebase
-
-#### Pattern 3: Model Variants (8 dynamics files)
-
-**Structure**:
-```
-src/plant/models/simplified/dynamics.py  - SimplifiedDIPDynamics (fast, low accuracy)
-src/plant/models/full/dynamics.py        - FullDIPDynamics (slow, high accuracy)
-src/plant/models/lowrank/dynamics.py     - LowRankDIPDynamics (medium tradeoff)
-src/plant/models/base/dynamics_interface.py - DynamicsInterface (abstract)
-src/core/dynamics.py                      - Compatibility re-export
-```
-
-**Purpose**: Different physics accuracy/computational cost tradeoffs
-**Evidence**: Each model serves different use cases (real-time vs research vs production)
-**Status**: [OK] INTENTIONAL - Not duplication, legitimate variants
-**Action**: NEVER consolidate - these are different implementations
-
-#### Pattern 4: Framework vs Test Files (test_automation.py)
-
-**File**: `src/interfaces/hil/test_automation.py` (581 lines, 23 KB)
-**Classification**: PRODUCTION CODE (HIL testing framework)
-**NOT**: A test file (despite the confusing name)
-
-**Evidence**:
-- Exported in `src/interfaces/hil/__init__.py` as public API
-- Used by production code in `enhanced_hil.py`
-- Provides 8 framework classes: HILTestFramework, TestSuite, TestCase, etc.
-- Similar to pytest (framework) vs test_*.py (actual tests)
-
-**Status**: [OK] CORRECTLY PLACED in src/ - this IS production infrastructure
-**Action**: NEVER move to tests/ - it's a framework, not tests
-**Optional**: Consider renaming to `hil_test_framework.py` (cosmetic only)
-
----
-
-### 25.2 Directory Placement Rules (STRICT)
-
-#### src/ Directory (Production Code Only)
-
-**Purpose**: Core library package (importable, distributable)
-**Contents**:
-- Controllers, plant models, optimization algorithms
-- Utilities, configurations, interfaces
-- Frameworks and infrastructure (test_automation.py)
-- Re-export compatibility layers
-
-**NEVER Put Here**:
-- Actual pytest test files (test_*.py) → Use tests/
-- Development scripts → Use scripts/
-- Build artifacts → Use .cache/ or archive/
-- Temporary files → Use .cache/
-
-#### scripts/ Directory (Development Tools)
-
-**Purpose**: Automation scripts, utilities (executed, not imported)
-**Contents**:
-- Documentation generation tools
-- Benchmark analysis scripts
-- Migration utilities
-- Quality validation tools
-
-**NEVER Put Here**:
-- Core library code → Use src/
-- Test files → Use tests/
-- Production entry points → Use project root (simulate.py, etc.)
-
-#### tests/ Directory (Pytest Test Files)
-
-**Purpose**: Test suite (mirrors src/ structure)
-**Contents**:
-- test_*.py files (actual pytest tests)
-- test_*/  directories (mirroring src/ structure)
-- Fixtures, conftest.py, test utilities
-
-**NEVER Put Here**:
-- Testing frameworks → Use src/ (they're production infrastructure)
-- Test automation infrastructure → Use src/
-- Development scripts → Use scripts/
-
-**Coverage Target**: 92.9% of core modules (13/14 validated)
-
----
-
-### 25.3 Root Directory Standards
-
-**Target**: ≤19 visible items
-**Current**: 14 visible items (26% under target) [OK]
-
-**ALLOWED at Root**:
-- Entry points: simulate.py, streamlit_app.py, setup.py
-- Configs: config.yaml, requirements.txt, package.json
-- Documentation: README.md, CHANGELOG.md, CLAUDE.md
-- Directories: src/, scripts/, tests/, academic/
-
-**NEVER at Root**:
-- Backup files (.tar.gz, .zip) → Use .ai_workspace/archive/
-- Build artifacts (.aux, .log, .pyc) → Use .cache/ or archive/
-- Test files (test_*.py) → Use tests/
-- Windows artifacts (nul) → Delete immediately
-- Temporary files → Use .cache/
-
-**Quality Gate**: If root exceeds 19 items, immediate cleanup required
-
----
-
-### 25.4 Malformed Names (FORBIDDEN)
+1. Exported in __init__.py? → Production code (src/)
+2. Imported by production? → Production code (src/)
+3. Framework/infrastructure? → Production code (src/)
+4. Has pytest imports? → Test file (tests/)
+5. Development tool? → Script (scripts/)
 
 **NEVER Create**:
-- Directories with braces: `{core,data_exchange,...}/` [CRITICAL ERROR]
-- Directories with spaces: `my folder/` [ERROR]
-- Files named after devices: `nul`, `con`, `prn` (Windows) [ERROR]
-- Unicode in Windows paths: Use ASCII only [ERROR]
+- Directories with braces/spaces: `{dir}/`, `my folder/`
+- Windows device names: `nul`, `con`, `prn`
+- Unicode paths on Windows
 
-**Detection**:
-```bash
-# Check for malformed names
-find . -name "*{*}*" -o -name "*}*" -o -name "* *"
-```
-
-**Prevention**: Add pre-commit hook to validate directory/file names
-
----
-
-### 25.5 Import Classification Rules
-
-**Before Moving ANY File, Check**:
-
-1. **Is it exported in __init__.py?** → Production code, STAYS in src/
-2. **Is it imported by production code?** → Production code, STAYS in src/
-3. **Does it provide framework/infrastructure?** → Production code, STAYS in src/
-4. **Does it have pytest imports?** → Test file, GOES to tests/
-5. **Does filename match test_*.py?** → Probably test, but VERIFY first (see test_automation.py)
-
-**False Positive Example**:
-- `test_automation.py` LOOKS like test file (name pattern)
-- Actually HIL testing framework (production infrastructure)
-- STAYS in src/ because it's exported and used by production code
-
-**Validation Checklist**:
-```bash
-# Check if file is exported
-grep -r "from .filename import" src/*/__init__.py
-
-# Check if production code imports it
-grep -r "from src.path.filename import" src/
-
-# Check for pytest usage
-grep "import pytest" filename.py
-grep "from pytest" filename.py
-```
-
----
-
-### 25.6 Structural Analysis Protocol
-
-**When to Analyze** (MANDATORY triggers):
-- After major refactoring (>50 files changed)
-- Before release/publication
-- Quarterly architectural reviews
-- When root directory exceeds 19 items
-- When unclear if file placement is correct
-
-**Analysis Method** (proven effective Dec 29, 2025):
-1. **Sequential-thinking MCP**: Systematic breakdown of all areas
-2. **3 Parallel Explore Agents**: Validate findings independently
-   - Agent 1: src/ duplication check
-   - Agent 2: Root directory audit
-   - Agent 3: tests/ structure validation
-3. **Manual Verification**: Cross-check agent findings with import analysis
-4. **Quality Gates**: 6 gates (critical=0, high≤3, tests=100%, root≤19, malformed=0, empty=0)
-
-**Documentation**:
-- Create `.ai_workspace/planning/STRUCTURAL_ANALYSIS_YYYY-MM-DD.md`
-- Include methodology, findings, corrections, quality gates
-- Commit with `docs(analysis):` prefix
-
----
-
-### 25.7 Quality Gates (ENFORCE STRICTLY)
-
-| Gate | Target | Enforcement |
-|------|--------|-------------|
-| Critical issues | 0 | [MANDATORY] BLOCK commits if any exist |
-| High-priority issues | ≤3 | [REQUIRED] Document exceptions |
-| Test pass rate | 100% | [MANDATORY] All tests must pass |
-| Root items (visible) | ≤19 | [REQUIRED] Cleanup if exceeded |
-| Malformed names | 0 | [MANDATORY] BLOCK commits if any exist |
-| Empty directories | 0 | [RECOMMENDED] Cleanup during reviews |
-
-**Verification**:
-```bash
-# Before any major commit
-ls -1 | wc -l                    # ≤19 visible
-find . -name "*{*}*"             # 0 results
-find tests/ -type d -empty       # 0 results
-pytest tests/ --tb=short         # 100% pass
-```
-
----
-
-### 25.8 Lessons Learned (NEVER REPEAT)
-
-**Dec 29, 2025 Analysis Corrections**:
-
-1. **Filename alone is insufficient for classification**
-   - test_automation.py LOOKED like test file
-   - Actually production HIL framework
-   - ALWAYS check imports and usage before moving
-
-2. **Compatibility layers are intentional, not duplication**
-   - optimizer/ → optimization/ enables gradual migration
-   - DO NOT consolidate without full codebase migration plan
-
-3. **Re-export chains serve a purpose**
-   - Multiple import paths enable backward compatibility
-   - Document rather than remove
-
-4. **Parallel validation saves time but needs manual review**
-   - 3 agents in 30 min vs 90 min sequential
-   - Still caught 1 false positive (test_automation.py)
-   - Final human verification is essential
-
----
-
-### 25.9 Pre-commit Hook Requirements
-
-**Add to `.git/hooks/pre-commit`** (future implementation):
-
-```bash
-#!/bin/bash
-# Enforce architectural standards
-
-# Check root item count
-ROOT_COUNT=$(ls -1 | wc -l)
-if [ $ROOT_COUNT -gt 19 ]; then
-  echo "[ERROR] Root has $ROOT_COUNT items (max 19)"
-  exit 1
-fi
-
-# Check for malformed names
-if find . -name "*{*}*" -o -name "*}*" | grep -q .; then
-  echo "[ERROR] Malformed directory/file names detected"
-  exit 1
-fi
-
-# Check for Windows device names
-if find . -iname "nul" -o -iname "con" -o -iname "prn" | grep -q .; then
-  echo "[ERROR] Windows device file names detected"
-  exit 1
-fi
-
-# Verify tests pass
-pytest tests/ --tb=short -q || exit 1
-```
-
----
-
-### 25.10 Quick Reference Card
-
-**When Classifying a File**:
-1. Is filename `test_*.py`? → Probably test, but CHECK imports first
-2. Exported in `__init__.py`? → Production code (src/)
-3. Used by production code? → Production code (src/)
-4. Framework/infrastructure? → Production code (src/)
-5. Has pytest imports? → Test file (tests/)
-6. Development tool? → Script (scripts/)
-
-**When Creating Directories**:
-- ✓ Use lowercase: `my_directory/`
-- ✓ Use underscores: `my_long_directory_name/`
-- ✗ NO braces: `{dir1,dir2}/`
-- ✗ NO spaces: `my directory/`
-- ✗ NO device names: `nul/`, `con/`, `prn/`
-
-**When Moving Files**:
-- ALWAYS use `git mv` (preserves history)
-- ALWAYS check imports first (grep for usage)
-- ALWAYS run tests after move
-- NEVER batch moves without verification
-
-**Root Directory Hygiene**:
-- Target: ≤19 visible items (currently 14) [OK]
-- Backups → .ai_workspace/archive/
-- Build artifacts → .cache/ or archive/
-- Temporary files → .cache/
-- Check weekly: `ls -1 | wc -l`
-
----
-
-**See Also**:
-- `.ai_workspace/planning/STRUCTURAL_ANALYSIS_2025-12-29.md` - Complete analysis report
-- `.ai_workspace/planning/CORRECTION_test_automation_20251229.md` - False positive analysis
-- `.ai_workspace/planning/FINAL_SUMMARY_2025-12-29.md` - Comprehensive summary
-
----
+------
 
 ### Appendix: Notes
 
-- Keep this file authoritative for style, testing, and operational posture.
-- Treat it as versioned team memory; update via PRs with a short change log.
-- **CRITICAL**: All git operations must target: https://github.com/theSadeQ/dip-smc-pso.git
-- **MANDATORY**: Automatic updates are REQUIRED for all repository changes
-- Maintain clean, professional commit messages following the established pattern
-- **NEW (Dec 29, 2025)**: Section 25 establishes architectural invariants - NEVER violate these patterns
+- Keep this file authoritative for style, testing, and operational posture
+- **CRITICAL**: All git operations target https://github.com/theSadeQ/dip-smc-pso.git
+- **MANDATORY**: Auto-commit and push after repository changes
+- Section 25 establishes architectural invariants - NEVER violate these patterns
