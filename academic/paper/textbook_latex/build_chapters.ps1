@@ -13,7 +13,8 @@ if (!(Test-Path $buildDir)) {
 
 Write-Host "`n[INFO] Build directory: $buildDir`n"
 
-# Chapter definitions (Number is used to set \setcounter{chapter}{Number-1})
+# Chapter definitions (Number is used to set \setcounter{chapter}{Number})
+# FIX: hyperref prevents \chapter from incrementing, so use final value not N-1
 $chapters = @(
     @{Name="chapter_01"; Path="chapters/ch01_introduction.tex"; Title="Chapter 1: Introduction"; Number=1},
     @{Name="chapter_02"; Path="chapters/ch02_mathematical_foundations.tex"; Title="Chapter 2: Mathematical Preliminaries"; Number=2},
@@ -44,11 +45,12 @@ function Compile-Chapter {
     $script:count++
 
     # Determine counter setup
+    # FIX: Use final chapter number (N), not N-1, because hyperref prevents \chapter from incrementing
     $counterSetup = ""
     if ($IsAppendix) {
         $counterSetup = "\appendix"
     } elseif ($null -ne $ChapterNumber) {
-        $counterSetup = "\setcounter{chapter}{$($ChapterNumber - 1)}"
+        $counterSetup = "\setcounter{chapter}{$ChapterNumber}"
     }
 
     # Create wrapper .tex file

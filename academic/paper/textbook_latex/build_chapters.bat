@@ -97,12 +97,12 @@ set CHAPTER_NUM=%~4
 echo [%CHAPTER_COUNT%] %TITLE%...
 
 REM Determine counter setup command
+REM FIX: Use final chapter number (N), not N-1, because hyperref prevents \chapter from incrementing
 set COUNTER_CMD=
 if "%CHAPTER_NUM%"=="APPENDIX" (
     set COUNTER_CMD=\appendix
 ) else if not "%CHAPTER_NUM%"=="" (
-    set /a COUNTER_VAL=%CHAPTER_NUM%-1
-    set COUNTER_CMD=\setcounter{chapter}{!COUNTER_VAL!}
+    set COUNTER_CMD=\setcounter{chapter}{%CHAPTER_NUM%}
 )
 
 REM Create standalone wrapper .tex file
