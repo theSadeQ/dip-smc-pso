@@ -49,8 +49,11 @@ where:
 \dot{K}_1(t) &= \gamma_1 \sqrt{|s|} (|s| - \delta)_+ \sign(s) - \alpha_1 K_1 \label{eq:K1_adaptation} \\
 \dot{K}_2(t) &= \gamma_2 (|s| - \delta)_+ \sign(s) - \alpha_2 K_2 \label{eq:K2_adaptation}
 \end{align}
+\coderef{src/controllers/smc/hybrid_adaptive_sta_smc.py}{201}
 
 \textbf{Coupling}: $K_1$ and $K_2$ must satisfy STA stability conditions (\cref{eq:sta_stability_conditions}) at all times to maintain finite-time convergence.
+
+See \pyfile{src/controllers/smc/hybrid\_adaptive\_sta\_smc.py} for complete implementation combining STA dynamics with dual-gain adaptation.
 
 %===============================================================================
 \section{Lambda Scheduling for Adaptive Sliding Surface}

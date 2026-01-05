@@ -46,6 +46,7 @@ where:
 \begin{equation}
 \vect{x}_i[k+1] = \vect{x}_i[k] + \vect{v}_i[k+1]
 \end{equation}
+\coderef{src/optimization/algorithms/pso_optimizer.py}{178}
 
 %===============================================================================
 \section{Inertia Weight Strategies}
@@ -118,6 +119,8 @@ PSO-optimized classical SMC achieves:
 \end{itemize}
 
 \textbf{Convergence}: 50 iterations, 30 particles, runtime 8 minutes (with Numba acceleration).
+
+See \pyfile{src/optimization/algorithms/pso\_optimizer.py} for complete PSO implementation with inertia weight scheduling, velocity clamping, and multi-objective fitness evaluation.
 
 %===============================================================================
 \section{Summary}

@@ -58,6 +58,7 @@ For numerical simulation with time step $\Delta t$, the discrete-time STA is:
 u[k] &= u_{\text{eq}}[k] - K_1 \sqrt{|s[k]|} \sat(s[k]/\epsilon) + z[k] - d \cdot s[k] \label{eq:sta_discrete_control} \\
 z[k+1] &= z[k] - K_2 \sat(s[k]/\epsilon) \Delta t \label{eq:sta_discrete_integral}
 \end{align}
+\coderef{src/controllers/smc/sta_smc.py}{156}
 
 where:
 \begin{itemize}
@@ -256,6 +257,8 @@ def _sta_smc_core(z, sigma, sgn_sigma, K1, K2, d, dt, u_max, u_eq, Kaw):
 
     return u_sat, new_z, sigma
 \end{lstlisting}
+
+See \pyfile{src/controllers/smc/sta\_smc.py} for complete implementation with validation, telemetry, and memory management.
 
 \textbf{Performance Gain}: Numba achieves 10-50x speedup compared to pure Python:
 \begin{itemize}

@@ -92,6 +92,8 @@ Table \ref{tab:pso_search_space} defines PSO search bounds for each controller.
     \item \textbf{Heterogeneous bounds:} Switching gains ($k_4$-$k_6$) typically smaller than sliding surface gains ($k_1$-$k_3$) based on theoretical analysis.
 \end{itemize}
 
+See \pyfile{src/optimization/algorithms/robust\_pso\_optimizer.py} for robust PSO implementation with mixed nominal/disturbed fitness evaluation.
+
 \subsection{Multi-Objective Cost Function}
 
 PSO minimizes a weighted aggregation of four objectives:
