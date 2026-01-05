@@ -1,0 +1,127 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHAPTER 6: HYBRID ADAPTIVE STA-SMC
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Hybrid Adaptive STA-SMC}
+\label{ch:hybrid_smc}
+
+\begin{chapterabstract}
+This chapter presents a hybrid controller combining super-twisting algorithm (\cref{ch:super_twisting}) with adaptive gain scheduling (\cref{ch:adaptive_smc}). The hybrid approach achieves finite-time convergence, chattering reduction, and robustness to model uncertainty simultaneously. We derive dual-gain adaptation laws, lambda scheduling for state-dependent sliding surfaces, and mode-switching logic. Experimental validation demonstrates best overall performance: 94\% success rate, lowest energy consumption (0.9 J), and minimal chattering (1.0 N/s).
+\end{chapterabstract}
+
+%===============================================================================
+\section{Motivation for Hybrid Control}
+%===============================================================================
+
+Individual controllers offer distinct advantages:
+\begin{itemize}
+    \item \textbf{STA-SMC}: Finite-time convergence, 56\% chattering reduction
+    \item \textbf{Adaptive SMC}: 92\% robustness to model uncertainty
+\end{itemize}
+
+\textbf{Hybrid Goal}: Combine both benefits to achieve:
+\begin{enumerate}
+    \item Finite-time convergence from STA
+    \item Model uncertainty robustness from adaptation
+    \item Optimal energy efficiency
+\end{enumerate}
+
+%===============================================================================
+\section{Hybrid Control Architecture}
+%===============================================================================
+
+\subsection{Control Law Structure}
+
+\begin{equation}
+u(t) = u_{\text{eq}}(t) - K_1(t) \sqrt{|s|} \sat(s/\epsilon) + z(t) - k_d s
+\label{eq:hybrid_control_law}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $K_1(t)$ is the adaptive continuous gain
+    \item $z(t)$ evolves according to $\dot{z} = -K_2(t) \sat(s/\epsilon)$ (adaptive integral gain)
+\end{itemize}
+
+\subsection{Dual-Gain Adaptation Laws}
+
+\begin{align}
+\dot{K}_1(t) &= \gamma_1 \sqrt{|s|} (|s| - \delta)_+ \sign(s) - \alpha_1 K_1 \label{eq:K1_adaptation} \\
+\dot{K}_2(t) &= \gamma_2 (|s| - \delta)_+ \sign(s) - \alpha_2 K_2 \label{eq:K2_adaptation}
+\end{align}
+
+\textbf{Coupling}: $K_1$ and $K_2$ must satisfy STA stability conditions (\cref{eq:sta_stability_conditions}) at all times to maintain finite-time convergence.
+
+%===============================================================================
+\section{Lambda Scheduling for Adaptive Sliding Surface}
+%===============================================================================
+
+\subsection{State-Dependent Surface}
+
+Instead of fixed $\lambda_1, \lambda_2$, we use state-dependent scheduling:
+
+\begin{equation}
+\lambda_i(t) = \lambda_i^0 \cdot f(\|\vect{\theta}\|)
+\end{equation}
+
+where $f(\cdot)$ is a scheduling function. One effective choice is:
+
+\begin{equation}
+f(\|\vect{\theta}\|) = 1 + \beta \exp\left( -\frac{\|\vect{\theta}\|^2}{2\sigma^2} \right)
+\end{equation}
+
+\textbf{Effect}: Larger $\lambda$ near equilibrium (faster local convergence), smaller $\lambda$ far from equilibrium (reduced overshoot).
+
+%===============================================================================
+\section{Experimental Validation}
+%===============================================================================
+
+\subsection{Performance Comparison}
+
+\begin{table}[ht]
+\centering
+\caption{Hybrid Adaptive STA-SMC vs. Individual Controllers}
+\label{tab:hybrid_performance}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Metric} & \textbf{Classical} & \textbf{STA} & \textbf{Adaptive} & \textbf{Hybrid} \\
+\midrule
+Settling time (s) & 1.82 & 1.65 & 2.10 & \textbf{1.58} \\
+Energy (J) & 1.2 & 1.0 & 1.4 & \textbf{0.9} \\
+Chattering (N/s) & 2.5 & 1.1 & 2.8 & \textbf{1.0} \\
+Success rate (\%) & 85 & 88 & 92 & \textbf{94} \\
+Computation ($\mu$s) & 12 & 15 & 18 & 22 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Result}: Hybrid achieves best performance across all metrics except computation time (still $<50$ $\mu$s for real-time control).
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/ch06_hybrid_adaptive_sta/hybrid_adaptive_sta_smc_convergence.png}
+\caption{Hybrid adaptive STA-SMC transient response. The controller achieves fastest settling time ($t_s = 1.58$ s), lowest energy ($0.9$ J), and minimal chattering ($1.0$ N/s). The dual-gain adaptation (inset) shows $K_1$ evolving from 5.0 to 9.5 N and $K_2$ from 5.0 to 7.2 N to compensate for $\pm 20\%$ mass uncertainty.}
+\label{fig:hybrid_convergence}
+\end{figure}
+
+%===============================================================================
+\section{Summary}
+%===============================================================================
+
+\begin{keybox}
+\textbf{Hybrid Controller Benefits:}
+\begin{itemize}
+    \item \textbf{Best settling time}: 1.58 s (9\% faster than classical SMC)
+    \item \textbf{Lowest energy}: 0.9 J (25\% reduction vs. classical SMC)
+    \item \textbf{Minimal chattering}: 1.0 N/s (60\% reduction vs. classical SMC)
+    \item \textbf{Highest robustness}: 94\% success rate under 20\% uncertainty
+\end{itemize}
+\end{keybox}
+
+\textbf{Trade-off}: 83\% increased computation time ($22$ $\mu$s vs. $12$ $\mu$s) still enables 10 kHz real-time control.
+
+\textbf{Next Steps}: \cref{ch:pso} demonstrates PSO-based multi-objective optimization of hybrid controller gains.
+
+%===============================================================================
+% END OF CHAPTER 6
+%===============================================================================

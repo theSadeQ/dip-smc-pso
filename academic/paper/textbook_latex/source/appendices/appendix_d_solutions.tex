@@ -1,0 +1,95 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APPENDIX D: EXERCISE SOLUTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Selected Exercise Solutions}
+\label{app:solutions}
+
+This appendix provides detailed solutions to selected exercises from each chapter.
+
+%===============================================================================
+\section{Chapter 1 Solutions}
+%===============================================================================
+
+\textbf{Exercise 1.1}: Calculate the degree of underactuation for the double-inverted pendulum.
+
+\textbf{Solution}: The DIP has 3 degrees of freedom ($x, \theta_1, \theta_2$) and 1 control input ($u$, horizontal force on cart). Degree of underactuation = $3 - 1 = 2$.
+
+\vspace{1em}
+
+\textbf{Exercise 1.3}: Explain three mechanisms that cause chattering in SMC.
+
+\textbf{Solution}:
+\begin{enumerate}
+    \item \textbf{Time discretization}: Finite sampling rate cannot implement infinite-frequency switching.
+    \item \textbf{Actuator bandwidth}: Physical actuators have finite response time, causing delays.
+    \item \textbf{Sensor noise}: Measurement noise near sliding surface triggers erratic switching.
+\end{enumerate}
+
+%===============================================================================
+\section{Chapter 2 Solutions}
+%===============================================================================
+
+\textbf{Exercise 2.4}: Derive the Lagrangian for a single link pendulum and verify the equation of motion.
+
+\textbf{Solution}: For a pendulum with mass $m$, length $L$, angle $\theta$:
+
+Kinetic energy: $T = \frac{1}{2} m L^2 \dot{\theta}^2$
+
+Potential energy: $U = m g L (1 - \cos\theta)$
+
+Lagrangian: $\mathcal{L} = T - U = \frac{1}{2} m L^2 \dot{\theta}^2 - m g L (1 - \cos\theta)$
+
+Euler-Lagrange equation:
+\begin{equation}
+\frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{\theta}} - \frac{\partial \mathcal{L}}{\partial \theta} = 0
+\end{equation}
+
+Yields: $m L^2 \ddot{\theta} + m g L \sin\theta = 0$, or $\ddot{\theta} = -\frac{g}{L} \sin\theta$.
+
+%===============================================================================
+\section{Chapter 3 Solutions}
+%===============================================================================
+
+\textbf{Exercise 3.5}: Prove that the sliding surface $s = k_1 \dot{\theta}_1 + \lambda_1 \theta_1$ is exponentially stable if $k_1, \lambda_1 > 0$.
+
+\textbf{Solution}: On the sliding surface ($s = 0$):
+\begin{equation}
+\dot{\theta}_1 = -\frac{\lambda_1}{k_1} \theta_1
+\end{equation}
+
+This is a first-order ODE with solution $\theta_1(t) = \theta_1(0) e^{-(\lambda_1/k_1) t}$.
+
+Since $\lambda_1/k_1 > 0$, we have exponential decay: $|\theta_1(t)| \leq |\theta_1(0)| e^{-\alpha t}$ with $\alpha = \lambda_1/k_1 > 0$.
+
+%===============================================================================
+\section{Chapter 4 Solutions}
+%===============================================================================
+
+\textbf{Exercise 4.2}: Verify that the super-twisting control $u = -K_1 \sqrt{|s|} \sign(s) + z$ is continuous even though $\dot{z} = -K_2 \sign(s)$ is discontinuous.
+
+\textbf{Solution}: The discontinuity in $\dot{z}$ is integrated to produce $z(t)$:
+\begin{equation}
+z(t) = z(0) - K_2 \int_0^t \sign(s(\tau)) d\tau
+\end{equation}
+
+Since integration smooths discontinuities, $z(t)$ is continuous (piecewise linear). The term $-K_1 \sqrt{|s|} \sign(s)$ is also continuous everywhere except at $s = 0$, where it equals zero. Therefore, $u(t) = -K_1 \sqrt{|s|} \sign(s) + z(t)$ is continuous.
+
+%===============================================================================
+\section{Chapter 8 Solutions}
+%===============================================================================
+
+\textbf{Exercise 8.3}: Compute the PSO velocity update for a particle with current position $\vect{x} = [1, 2]$, velocity $\vect{v} = [0.5, -0.3]$, personal best $\vect{p} = [0.8, 1.5]$, global best $\vect{g} = [0.6, 1.2]$, using $\omega = 0.7$, $c_1 = c_2 = 2.0$, $r_1 = 0.4$, $r_2 = 0.6$.
+
+\textbf{Solution}:
+\begin{align}
+\vect{v}_{\text{new}} &= \omega \vect{v} + c_1 r_1 (\vect{p} - \vect{x}) + c_2 r_2 (\vect{g} - \vect{x}) \\
+&= 0.7 [0.5, -0.3] + 2.0 \cdot 0.4 \cdot ([0.8, 1.5] - [1, 2]) + 2.0 \cdot 0.6 \cdot ([0.6, 1.2] - [1, 2]) \\
+&= [0.35, -0.21] + 0.8 \cdot [-0.2, -0.5] + 1.2 \cdot [-0.4, -0.8] \\
+&= [0.35, -0.21] + [-0.16, -0.40] + [-0.48, -0.96] \\
+&= [-0.29, -1.57]
+\end{align}
+
+%===============================================================================
+% END OF APPENDIX D
+%===============================================================================

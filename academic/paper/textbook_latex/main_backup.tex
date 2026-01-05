@@ -7,11 +7,12 @@
 % Version: 1.0
 %
 % Build Instructions:
-%   pdflatex main.tex
+%   pdflatex -shell-escape main.tex
 %   bibtex main
-%   pdflatex main.tex
-%   pdflatex main.tex
+%   pdflatex -shell-escape main.tex
+%   pdflatex -shell-escape main.tex
 %
+% NOTE: Remove -shell-escape if not using minted package
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%% DOCUMENT CLASS %%%
@@ -59,6 +60,7 @@ Theory, Implementation, and Optimization}. [Publisher/University].
 
 %%% DEDICATION (optional) %%%
 \input{source/front/dedication}
+\clearpage
 
 %%% PREFACE %%%
 \input{source/front/preface}
@@ -88,6 +90,10 @@ Theory, Implementation, and Optimization}. [Publisher/University].
 \listofalgorithms
 \clearpage
 
+%%% NOMENCLATURE (optional) %%%
+% \printnomenclature
+% \clearpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MAIN MATTER (Chapters)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -100,35 +106,35 @@ Theory, Implementation, and Optimization}. [Publisher/University].
 %%% CHAPTER 2: MATHEMATICAL FOUNDATIONS %%%
 \input{source/chapters/ch02_mathematical_foundations}
 
-%%% CHAPTER 3: CLASSICAL SLIDING MODE CONTROL %%%
-\input{source/chapters/ch03_classical_smc}
+%%% CHAPTER 3: SYSTEM MODELING %%%
+\input{source/chapters/ch03_system_modeling}
 
-%%% CHAPTER 4: SUPER-TWISTING ALGORITHM %%%
-\input{source/chapters/ch04_super_twisting}
+%%% CHAPTER 4: CLASSICAL SLIDING MODE CONTROL %%%
+\input{source/chapters/ch04_classical_smc}
 
-%%% CHAPTER 5: ADAPTIVE SMC %%%
-\input{source/chapters/ch05_adaptive_smc}
+%%% CHAPTER 5: SUPER-TWISTING ALGORITHM %%%
+\input{source/chapters/ch05_super_twisting}
 
-%%% CHAPTER 6: HYBRID ADAPTIVE-STA SMC %%%
-\input{source/chapters/ch06_hybrid_smc}
+%%% CHAPTER 6: ADAPTIVE SMC %%%
+\input{source/chapters/ch06_adaptive_smc}
 
-%%% CHAPTER 7: PSO THEORY %%%
-\input{source/chapters/ch07_pso_theory}
+%%% CHAPTER 7: HYBRID ADAPTIVE-STA SMC %%%
+\input{source/chapters/ch07_hybrid_smc}
 
-%%% CHAPTER 8: PERFORMANCE BENCHMARKING %%%
-\input{source/chapters/ch08_benchmarking}
+%%% CHAPTER 8: SWING-UP CONTROL %%%
+\input{source/chapters/ch08_swing_up}
 
-%%% CHAPTER 9: PSO RESULTS %%%
-\input{source/chapters/ch09_pso_results}
+%%% CHAPTER 9: PSO OPTIMIZATION %%%
+\input{source/chapters/ch09_pso_optimization}
 
-%%% CHAPTER 10: ADVANCED TOPICS %%%
-\input{source/chapters/ch10_advanced_topics}
+%%% CHAPTER 10: ROBUSTNESS ANALYSIS %%%
+\input{source/chapters/ch10_robustness}
 
-%%% CHAPTER 11: SOFTWARE IMPLEMENTATION %%%
-\input{source/chapters/ch11_software}
+%%% CHAPTER 11: BENCHMARKING & EXPERIMENTAL VALIDATION %%%
+\input{source/chapters/ch11_benchmarking}
 
-%%% CHAPTER 12: CASE STUDIES %%%
-\input{source/chapters/ch12_case_studies}
+%%% CHAPTER 12: SOFTWARE ARCHITECTURE & USAGE %%%
+\input{source/chapters/ch12_software}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BACK MATTER (Appendices, Bibliography, Index)
@@ -139,10 +145,11 @@ Theory, Implementation, and Optimization}. [Publisher/University].
 %%% APPENDICES %%%
 \appendix
 
-\input{source/appendices/appendix_a_math}
-\input{source/appendices/appendix_b_lyapunov_proofs}
-\input{source/appendices/appendix_c_api}
-\input{source/appendices/appendix_d_solutions}
+\input{source/appendices/appendix_a_math_prerequisites}
+\input{source/appendices/appendix_b_python_guide}
+\input{source/appendices/appendix_c_complete_implementations}
+\input{source/appendices/appendix_d_benchmark_data}
+\input{source/appendices/appendix_e_exercise_solutions}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BIBLIOGRAPHY
