@@ -46,7 +46,7 @@ For the double-inverted pendulum with state vector $\vect{x} = [x, \theta_1, \th
 s(\vect{x}) = \lambda_1 \theta_1 + \lambda_2 \theta_2 + k_1 \dot{\theta}_1 + k_2 \dot{\theta}_2
 \label{eq:sliding_surface}
 \end{equation}
-\coderef{src/controllers/smc/core/sliding_surface.py}{82}
+\coderef{src/controllers/smc/core/sliding_surface.py}{124}
 
 where $\lambda_1, \lambda_2, k_1, k_2 > 0$ are design parameters. The cart position $x$ does not appear in the sliding surface because it is not directly stabilized by the control law; instead, the cart's role is to manipulate the pendulum angles.
 
