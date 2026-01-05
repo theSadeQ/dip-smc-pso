@@ -13,20 +13,20 @@ if (!(Test-Path $buildDir)) {
 
 Write-Host "`n[INFO] Build directory: $buildDir`n"
 
-# Chapter definitions
+# Chapter definitions (Number is used to set \setcounter{chapter}{Number-1})
 $chapters = @(
-    @{Name="chapter_01"; Path="chapters/ch01_introduction.tex"; Title="Chapter 1: Introduction"},
-    @{Name="chapter_02"; Path="chapters/ch02_mathematical_foundations.tex"; Title="Chapter 2: Mathematical Preliminaries"},
-    @{Name="chapter_03"; Path="chapters/ch03_classical_smc.tex"; Title="Chapter 3: Classical SMC"},
-    @{Name="chapter_04"; Path="chapters/ch04_super_twisting.tex"; Title="Chapter 4: Super-Twisting Algorithm"},
-    @{Name="chapter_05"; Path="chapters/ch05_adaptive_smc.tex"; Title="Chapter 5: Adaptive SMC"},
-    @{Name="chapter_06"; Path="chapters/ch06_hybrid_smc.tex"; Title="Chapter 6: Hybrid SMC"},
-    @{Name="chapter_07"; Path="chapters/ch07_pso_theory.tex"; Title="Chapter 7: PSO Theory"},
-    @{Name="chapter_08"; Path="chapters/ch08_benchmarking.tex"; Title="Chapter 8: Benchmarking"},
-    @{Name="chapter_09"; Path="chapters/ch09_pso_results.tex"; Title="Chapter 9: PSO Results"},
-    @{Name="chapter_10"; Path="chapters/ch10_advanced_topics.tex"; Title="Chapter 10: Advanced Topics"},
-    @{Name="chapter_11"; Path="chapters/ch11_software.tex"; Title="Chapter 11: Software Implementation"},
-    @{Name="chapter_12"; Path="chapters/ch12_case_studies.tex"; Title="Chapter 12: Case Studies"}
+    @{Name="chapter_01"; Path="chapters/ch01_introduction.tex"; Title="Chapter 1: Introduction"; Number=1},
+    @{Name="chapter_02"; Path="chapters/ch02_mathematical_foundations.tex"; Title="Chapter 2: Mathematical Preliminaries"; Number=2},
+    @{Name="chapter_03"; Path="chapters/ch03_classical_smc.tex"; Title="Chapter 3: Classical SMC"; Number=3},
+    @{Name="chapter_04"; Path="chapters/ch04_super_twisting.tex"; Title="Chapter 4: Super-Twisting Algorithm"; Number=4},
+    @{Name="chapter_05"; Path="chapters/ch05_adaptive_smc.tex"; Title="Chapter 5: Adaptive SMC"; Number=5},
+    @{Name="chapter_06"; Path="chapters/ch06_hybrid_smc.tex"; Title="Chapter 6: Hybrid SMC"; Number=6},
+    @{Name="chapter_07"; Path="chapters/ch07_pso_theory.tex"; Title="Chapter 7: PSO Theory"; Number=7},
+    @{Name="chapter_08"; Path="chapters/ch08_benchmarking.tex"; Title="Chapter 8: Benchmarking"; Number=8},
+    @{Name="chapter_09"; Path="chapters/ch09_pso_results.tex"; Title="Chapter 9: PSO Results"; Number=9},
+    @{Name="chapter_10"; Path="chapters/ch10_advanced_topics.tex"; Title="Chapter 10: Advanced Topics"; Number=10},
+    @{Name="chapter_11"; Path="chapters/ch11_software.tex"; Title="Chapter 11: Software Implementation"; Number=11},
+    @{Name="chapter_12"; Path="chapters/ch12_case_studies.tex"; Title="Chapter 12: Case Studies"; Number=12}
 )
 
 $appendices = @(
@@ -38,10 +38,18 @@ $appendices = @(
 
 # Function to compile a chapter
 function Compile-Chapter {
-    param($Name, $ContentPath, $Title)
+    param($Name, $ContentPath, $Title, $ChapterNumber = $null, $IsAppendix = $false)
 
     Write-Host "[$($script:count)] $Title..."
     $script:count++
+
+    # Determine counter setup
+    $counterSetup = ""
+    if ($IsAppendix) {
+        $counterSetup = "\appendix"
+    } elseif ($null -ne $ChapterNumber) {
+        $counterSetup = "\setcounter{chapter}{$($ChapterNumber - 1)}"
+    }
 
     # Create wrapper .tex file
     $wrapperPath = Join-Path $buildDir "$Name.tex"
@@ -68,6 +76,9 @@ function Compile-Chapter {
 % Table of contents
 \tableofcontents
 \clearpage
+
+% Set chapter/appendix counter
+$counterSetup
 
 % Include chapter content
 \input{../../source/$ContentPath}
@@ -107,13 +118,13 @@ $script:successCount = 0
 # Build chapters
 Write-Host "`n[PHASE 1] Building Chapters (1-12)...`n"
 foreach ($chapter in $chapters) {
-    Compile-Chapter -Name $chapter.Name -ContentPath $chapter.Path -Title $chapter.Title
+    Compile-Chapter -Name $chapter.Name -ContentPath $chapter.Path -Title $chapter.Title -ChapterNumber $chapter.Number
 }
 
 # Build appendices
 Write-Host "`n[PHASE 2] Building Appendices (A-D)...`n"
 foreach ($appendix in $appendices) {
-    Compile-Chapter -Name $appendix.Name -ContentPath $appendix.Path -Title $appendix.Title
+    Compile-Chapter -Name $appendix.Name -ContentPath $appendix.Path -Title $appendix.Title -IsAppendix $true
 }
 
 # Final summary

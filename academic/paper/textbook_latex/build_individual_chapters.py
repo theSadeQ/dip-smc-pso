@@ -27,20 +27,20 @@ SOURCE_DIR = TEXTBOOK_ROOT / "source"
 BUILD_DIR = TEXTBOOK_ROOT / "build" / "individual_chapters"
 PREAMBLE_FILE = TEXTBOOK_ROOT / "source" / "preamble.tex"
 
-# Chapter and appendix mapping
+# Chapter and appendix mapping (with chapter numbers)
 CHAPTERS = {
-    "chapter_01": "chapters/ch01_introduction.tex",
-    "chapter_02": "chapters/ch02_mathematical_preliminaries.tex",
-    "chapter_03": "chapters/ch03_classical_smc.tex",
-    "chapter_04": "chapters/ch04_super_twisting.tex",
-    "chapter_05": "chapters/ch05_adaptive_smc.tex",
-    "chapter_06": "chapters/ch06_hybrid_smc.tex",
-    "chapter_07": "chapters/ch07_pso_theory.tex",
-    "chapter_08": "chapters/ch08_benchmarking.tex",
-    "chapter_09": "chapters/ch09_pso_results.tex",
-    "chapter_10": "chapters/ch10_advanced_topics.tex",
-    "chapter_11": "chapters/ch11_software_implementation.tex",
-    "chapter_12": "chapters/ch12_case_studies.tex",
+    "chapter_01": ("chapters/ch01_introduction.tex", 1),
+    "chapter_02": ("chapters/ch02_mathematical_foundations.tex", 2),
+    "chapter_03": ("chapters/ch03_classical_smc.tex", 3),
+    "chapter_04": ("chapters/ch04_super_twisting.tex", 4),
+    "chapter_05": ("chapters/ch05_adaptive_smc.tex", 5),
+    "chapter_06": ("chapters/ch06_hybrid_smc.tex", 6),
+    "chapter_07": ("chapters/ch07_pso_theory.tex", 7),
+    "chapter_08": ("chapters/ch08_benchmarking.tex", 8),
+    "chapter_09": ("chapters/ch09_pso_results.tex", 9),
+    "chapter_10": ("chapters/ch10_advanced_topics.tex", 10),
+    "chapter_11": ("chapters/ch11_software.tex", 11),
+    "chapter_12": ("chapters/ch12_case_studies.tex", 12),
 }
 
 APPENDICES = {
@@ -54,7 +54,7 @@ APPENDICES = {
 STANDALONE_TEMPLATE = r"""\documentclass[11pt,oneside]{{book}}
 
 % Include preamble
-\input{{../../source/preamble.tex}}
+\input{{../../preamble.tex}}
 
 \begin{{document}}
 
@@ -74,6 +74,9 @@ STANDALONE_TEMPLATE = r"""\documentclass[11pt,oneside]{{book}}
 \tableofcontents
 \clearpage
 
+% Set chapter/appendix counter
+{counter_setup}
+
 % Include the chapter content
 \input{{../../source/{content_path}}}
 
@@ -85,11 +88,20 @@ def create_build_directory():
     BUILD_DIR.mkdir(parents=True, exist_ok=True)
     print(f"[INFO] Build directory: {BUILD_DIR}")
 
-def generate_wrapper_tex(output_name, content_path, title):
+def generate_wrapper_tex(output_name, content_path, title, chapter_number=None, is_appendix=False):
     """Generate a standalone .tex wrapper file for a chapter/appendix."""
+    # Determine counter setup
+    if is_appendix:
+        counter_setup = r"\appendix"
+    elif chapter_number is not None:
+        counter_setup = f"\\setcounter{{chapter}}{{{chapter_number - 1}}}"
+    else:
+        counter_setup = ""
+
     wrapper_content = STANDALONE_TEMPLATE.format(
         title=title,
-        content_path=content_path
+        content_path=content_path,
+        counter_setup=counter_setup
     )
 
     wrapper_file = BUILD_DIR / f"{output_name}.tex"
@@ -133,12 +145,19 @@ def cleanup_aux_files(base_name):
         if aux_file.exists():
             aux_file.unlink()
 
-def build_chapters(chapters_dict, prefix="Chapter"):
+def build_chapters(chapters_dict, prefix="Chapter", is_appendix=False):
     """Build individual PDFs for a dictionary of chapters/appendices."""
     success_count = 0
     total_count = len(chapters_dict)
 
-    for output_name, content_path in chapters_dict.items():
+    for output_name, content_data in chapters_dict.items():
+        # Handle tuple format (path, number) for chapters or string for appendices
+        if isinstance(content_data, tuple):
+            content_path, chapter_number = content_data
+        else:
+            content_path = content_data
+            chapter_number = None
+
         # Generate title from output name
         if "chapter" in output_name:
             chapter_num = output_name.split("_")[1]
@@ -148,7 +167,11 @@ def build_chapters(chapters_dict, prefix="Chapter"):
             title = f"Appendix {appendix_letter}"
 
         # Generate wrapper .tex file
-        wrapper_file = generate_wrapper_tex(output_name, content_path, title)
+        wrapper_file = generate_wrapper_tex(
+            output_name, content_path, title,
+            chapter_number=chapter_number,
+            is_appendix=is_appendix
+        )
 
         # Compile to PDF
         if compile_pdf(wrapper_file):
@@ -186,7 +209,7 @@ def main():
     # Build appendices
     if not args.chapters_only:
         print("\n[PHASE 2] Building Appendices (A-D)...")
-        total_success += build_chapters(APPENDICES, "Appendices")
+        total_success += build_chapters(APPENDICES, "Appendices", is_appendix=True)
 
     # Final summary
     total_files = len(CHAPTERS) + len(APPENDICES)

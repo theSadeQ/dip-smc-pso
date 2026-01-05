@@ -24,56 +24,56 @@ set CHAPTER_COUNT=0
 set SUCCESS_COUNT=0
 
 REM Chapter 1
-call :compile_chapter chapter_01 "../../source/chapters/ch01_introduction.tex" "Chapter 1: Introduction"
+call :compile_chapter chapter_01 "../../source/chapters/ch01_introduction.tex" "Chapter 1: Introduction" 1
 
 REM Chapter 2
-call :compile_chapter chapter_02 "../../source/chapters/ch02_mathematical_foundations.tex" "Chapter 2: Mathematical Preliminaries"
+call :compile_chapter chapter_02 "../../source/chapters/ch02_mathematical_foundations.tex" "Chapter 2: Mathematical Preliminaries" 2
 
 REM Chapter 3
-call :compile_chapter chapter_03 "../../source/chapters/ch03_classical_smc.tex" "Chapter 3: Classical SMC"
+call :compile_chapter chapter_03 "../../source/chapters/ch03_classical_smc.tex" "Chapter 3: Classical SMC" 3
 
 REM Chapter 4
-call :compile_chapter chapter_04 "../../source/chapters/ch04_super_twisting.tex" "Chapter 4: Super-Twisting Algorithm"
+call :compile_chapter chapter_04 "../../source/chapters/ch04_super_twisting.tex" "Chapter 4: Super-Twisting Algorithm" 4
 
 REM Chapter 5
-call :compile_chapter chapter_05 "../../source/chapters/ch05_adaptive_smc.tex" "Chapter 5: Adaptive SMC"
+call :compile_chapter chapter_05 "../../source/chapters/ch05_adaptive_smc.tex" "Chapter 5: Adaptive SMC" 5
 
 REM Chapter 6
-call :compile_chapter chapter_06 "../../source/chapters/ch06_hybrid_smc.tex" "Chapter 6: Hybrid SMC"
+call :compile_chapter chapter_06 "../../source/chapters/ch06_hybrid_smc.tex" "Chapter 6: Hybrid SMC" 6
 
 REM Chapter 7
-call :compile_chapter chapter_07 "../../source/chapters/ch07_pso_theory.tex" "Chapter 7: PSO Theory"
+call :compile_chapter chapter_07 "../../source/chapters/ch07_pso_theory.tex" "Chapter 7: PSO Theory" 7
 
 REM Chapter 8
-call :compile_chapter chapter_08 "../../source/chapters/ch08_benchmarking.tex" "Chapter 8: Benchmarking"
+call :compile_chapter chapter_08 "../../source/chapters/ch08_benchmarking.tex" "Chapter 8: Benchmarking" 8
 
 REM Chapter 9
-call :compile_chapter chapter_09 "../../source/chapters/ch09_pso_results.tex" "Chapter 9: PSO Results"
+call :compile_chapter chapter_09 "../../source/chapters/ch09_pso_results.tex" "Chapter 9: PSO Results" 9
 
 REM Chapter 10
-call :compile_chapter chapter_10 "../../source/chapters/ch10_advanced_topics.tex" "Chapter 10: Advanced Topics"
+call :compile_chapter chapter_10 "../../source/chapters/ch10_advanced_topics.tex" "Chapter 10: Advanced Topics" 10
 
 REM Chapter 11
-call :compile_chapter chapter_11 "../../source/chapters/ch11_software.tex" "Chapter 11: Software Implementation"
+call :compile_chapter chapter_11 "../../source/chapters/ch11_software.tex" "Chapter 11: Software Implementation" 11
 
 REM Chapter 12
-call :compile_chapter chapter_12 "../../source/chapters/ch12_case_studies.tex" "Chapter 12: Case Studies"
+call :compile_chapter chapter_12 "../../source/chapters/ch12_case_studies.tex" "Chapter 12: Case Studies" 12
 
 echo.
 echo [PHASE 2] Building Appendices (A-D)...
 echo.
 
 REM Appendix A
-call :compile_chapter appendix_a "../../source/appendices/appendix_a_math.tex" "Appendix A: Mathematical Prerequisites"
+call :compile_chapter appendix_a "../../source/appendices/appendix_a_math.tex" "Appendix A: Mathematical Prerequisites" APPENDIX
 
 REM Appendix B
-call :compile_chapter appendix_b "../../source/appendices/appendix_b_lyapunov_proofs.tex" "Appendix B: Lyapunov Proofs"
+call :compile_chapter appendix_b "../../source/appendices/appendix_b_lyapunov_proofs.tex" "Appendix B: Lyapunov Proofs" APPENDIX
 
 REM Appendix C
-call :compile_chapter appendix_c "../../source/appendices/appendix_c_api.tex" "Appendix C: API Reference"
+call :compile_chapter appendix_c "../../source/appendices/appendix_c_api.tex" "Appendix C: API Reference" APPENDIX
 
 REM Appendix D
-call :compile_chapter appendix_d "../../source/appendices/appendix_d_solutions.tex" "Appendix D: Exercise Solutions"
+call :compile_chapter appendix_d "../../source/appendices/appendix_d_solutions.tex" "Appendix D: Exercise Solutions" APPENDIX
 
 echo.
 echo ======================================================================
@@ -86,14 +86,24 @@ goto :eof
 
 :compile_chapter
 REM Function to create wrapper .tex and compile to PDF
-REM Args: %1=output_name, %2=content_path, %3=title
+REM Args: %1=output_name, %2=content_path, %3=title, %4=chapter_number (or "APPENDIX")
 
 set /a CHAPTER_COUNT+=1
 set OUTPUT_NAME=%~1
 set CONTENT_PATH=%~2
 set TITLE=%~3
+set CHAPTER_NUM=%~4
 
 echo [%CHAPTER_COUNT%] %TITLE%...
+
+REM Determine counter setup command
+set COUNTER_CMD=
+if "%CHAPTER_NUM%"=="APPENDIX" (
+    set COUNTER_CMD=\appendix
+) else if not "%CHAPTER_NUM%"=="" (
+    set /a COUNTER_VAL=%CHAPTER_NUM%-1
+    set COUNTER_CMD=\setcounter{chapter}{!COUNTER_VAL!}
+)
 
 REM Create standalone wrapper .tex file
 (
@@ -119,6 +129,9 @@ echo.
 echo %% Table of contents
 echo \tableofcontents
 echo \clearpage
+echo.
+echo %% Set chapter/appendix counter
+if not "!COUNTER_CMD!"=="" echo !COUNTER_CMD!
 echo.
 echo %% Include chapter content
 echo \input{%CONTENT_PATH%}
