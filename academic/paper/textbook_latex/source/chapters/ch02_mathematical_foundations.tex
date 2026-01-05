@@ -79,9 +79,9 @@ The double-inverted pendulum consists of:
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.7\textwidth]{figures/placeholder_dip_coordinates.png}
-\caption[DIP Coordinate System]{Coordinate system for the double-inverted pendulum. Generalized coordinates: $q = [x_{\text{cart}}, \theta_1, \theta_2]^T$. Positive angles are measured clockwise from the vertical. The cart position $x_{\text{cart}}$ is measured from an arbitrary reference point on the rail. Centers of mass of the pendula are located at $L_i/2$ from their pivot points.}
-\label{fig:math:dip_coordinates}
+\includegraphics[width=0.8\textwidth]{figures/ch02_foundations/NEW_free_body_diagram.png}
+\caption[DIP Free-Body Diagram]{Free-body diagram showing all forces and torques acting on the double-inverted pendulum system. The diagram illustrates gravitational forces $m_1g$ and $m_2g$ acting at the centers of mass, reaction forces at the pivot points, and the control force $u$ applied horizontally to the cart. This forms the basis for deriving the equations of motion using Lagrangian mechanics.}
+\label{fig:math:free_body}
 \end{figure}
 
 \subsection{Generalized Coordinates}
@@ -448,6 +448,13 @@ Choose $\delta$ such that $V(\vect{x}) < \alpha$ for $\norm{\vect{x} - \vect{x}_
 For asymptotic stability, $\dot{V} < 0$ ensures $V(t) \to 0$, which (by positive definiteness) implies $\vect{x}(t) \to \vect{x}_e$.
 \end{proof}
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{figures/ch02_foundations/NEW_energy_landscape.png}
+\caption[Lyapunov Function Energy Landscape]{Lyapunov function $V(\vect{x})$ visualized as an energy landscape for a 2D system. The equilibrium point $\vect{x}_e$ is at the global minimum where $V(\vect{x}_e) = 0$. Level sets (contour lines) represent constant values of $V$. Trajectories (blue arrows) follow $\dot{\vect{x}}$ and always move toward lower $V$ values when $\dot{V} < 0$, guaranteeing convergence to $\vect{x}_e$.}
+\label{fig:math:energy_landscape}
+\end{figure}
+
 \begin{remark}[Class $\mathcal{K}$ and $\mathcal{K}_\infty$ Functions]
 Rigorous Lyapunov theory uses comparison functions:
 \begin{itemize}
@@ -456,6 +463,13 @@ Rigorous Lyapunov theory uses comparison functions:
 \end{itemize}
 Replacing "positive definiteness" with "$\alpha_1(\norm{\vect{x}}) \leq V(\vect{x}) \leq \alpha_2(\norm{\vect{x}})$" for $\alpha_1, \alpha_2 \in \mathcal{K}_\infty$ gives global results.
 \end{remark}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{figures/ch02_foundations/stability_regions.png}
+\caption[Region of Attraction and Stability Regions]{Stability regions for the double-inverted pendulum equilibrium. The \textbf{region of attraction} (blue shaded area) represents all initial states $\vect{x}(0)$ that converge to the upright equilibrium $\vect{x}_e = \vect{0}$ under the control law. States outside this region (red) diverge or converge to different equilibria. The boundary of the region of attraction is determined by the largest level set $V(\vect{x}) = c$ contained entirely within the basin.}
+\label{fig:math:stability_regions}
+\end{figure}
 
 \subsection{Lyapunov Functions for SMC}
 
