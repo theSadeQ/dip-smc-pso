@@ -435,6 +435,10 @@ $u \gets \text{clip}(u, -u_{\max}, +u_{\max})$\;
 
 See \pyfile{src/controllers/smc/classic\_smc.py} for complete Python implementation with weakref memory management, validation, and telemetry.
 
+\textbf{Algorithm Internals:} Detailed implementation components include \pyfile{src/controllers/smc/core/equivalent\_control.py} (feedforward control computation), \pyfile{src/controllers/smc/algorithms/classical/boundary\_layer.py} (chattering mitigation), and \pyfile{src/controllers/smc/core/switching\_functions.py} (discontinuous control terms).
+
+\textbf{Chattering Analysis:} Measurement tools available in \pyfile{src/utils/analysis/chattering.py} and \pyfile{src/utils/analysis/chattering\_metrics.py} for quantifying control signal oscillations.
+
 \subsection{Computational Complexity}
 
 \begin{itemize}
