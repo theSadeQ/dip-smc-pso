@@ -534,7 +534,7 @@ Adaptive SMC        & 4 & 4 & 4 & 2 & 4 & 3.6 \\
 
     \item \textbf{Narrow Initial Condition Range:} Perturbations limited to $\pm 0.05$ rad ($\pm 2.9^\circ$). Larger perturbations ($\pm 0.3$ rad, $\pm 17^\circ$) may reveal different performance trade-offs.
 
-    \item \textbf{No Disturbances:} Simulations assume perfect model, no external forces. Chapter 10 evaluates robustness under disturbances and model uncertainty.
+    \item \textbf{No Disturbances:} Simulations assume perfect model, no external forces. \cref{ch:advanced_topics} evaluates robustness under disturbances and model uncertainty.
 
     \item \textbf{Hybrid Controller Failure:} Unable to benchmark hybrid controller due to systematic convergence failures. Post-debugging re-evaluation required.
 
@@ -544,16 +544,16 @@ Adaptive SMC        & 4 & 4 & 4 & 2 & 4 & 3.6 \\
 \subsection{Future Research Directions}
 
 \begin{enumerate}
-    \item \textbf{PSO Gain Optimization (Chapter 9):} Re-benchmark all controllers with PSO-optimized gains. Hypothesis: Energy gap will narrow significantly with proper tuning.
+    \item \textbf{PSO Gain Optimization:} \cref{ch:pso_results} re-benchmarks all controllers with PSO-optimized gains. Hypothesis: Energy gap will narrow significantly with proper tuning.
 
-    \item \textbf{Robustness Analysis (Chapter 10):} Evaluate performance under:
+    \item \textbf{Robustness Analysis:} \cref{ch:advanced_topics} evaluates performance under:
         \begin{itemize}
             \item External disturbances (step, impulse, sinusoidal)
             \item Model parameter uncertainty ($\pm 10\%$, $\pm 20\%$ mass/length/inertia errors)
             \item Sensor noise (Gaussian, measurement delays)
         \end{itemize}
 
-    \item \textbf{Hardware-in-the-Loop Validation:} Deploy controllers on physical DIP testbed to validate simulation results and identify real-world effects (actuator dynamics, sensor quantization, communication latency).
+    \item \textbf{Hardware-in-the-Loop Validation:} \cref{ch:case_studies} presents HIL deployment on physical DIP testbed to validate simulation results and identify real-world effects (actuator dynamics, sensor quantization, communication latency).
 
     \item \textbf{Multi-Objective PSO:} Use NSGA-II or MOPSO to generate Pareto frontiers for energy-settling and chattering-overshoot trade-offs.
 
@@ -580,4 +580,4 @@ This chapter established empirical performance baselines for four SMC variants t
     \item \textbf{Hybrid Controller:} Systematic failure across 100/100 runs. Debugging required before deployment.
 \end{enumerate}
 
-\textbf{Recommendation:} Chapter 9 re-evaluates performance after PSO gain optimization to isolate algorithmic properties from gain selection effects.
+\textbf{Recommendation:} \cref{ch:pso_results} re-evaluates performance after PSO gain optimization to isolate algorithmic properties from gain selection effects. \cref{ch:case_studies} presents real-world validation through hardware-in-the-loop experiments.

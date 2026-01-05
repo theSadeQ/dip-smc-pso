@@ -267,6 +267,10 @@
 \newcommand{\NOTE}[1]{\textcolor{blue}{\textbf{[NOTE: #1]}}}
 
 %%% CODE REFERENCES %%%
+% For referencing Python files/functions with line numbers
+\newcommand{\coderef}[2]{%
+  \par\noindent\textcolor{blue!70!black}{\small$\triangleright$ \textbf{Implementation:} \texttt{#1:#2}}%
+}
 % For referencing Python files/functions in text
 \newcommand{\pyfile}[1]{\texttt{#1}}
 \newcommand{\pyfunc}[1]{\texttt{#1()}}
