@@ -8,17 +8,31 @@
 
 ## Quick Navigation by Goal
 
-### "I need production-ready gains for [controller]"
+### "I need production-ready gains for [controller]" ← FRAMEWORK 2
 
 ```bash
-# Navigate to Performance category
+# NEW: Check production-deployed gains (Framework 2 - TRL Level 6)
+cd .ai_workspace/pso/by_maturity/level_6_production/
+cat config_yaml_production_trl6.txt
+# Shows: config.yaml lines 39-83 (all 4 controllers, currently deployed)
+
+# Or check robustness-validated source (Framework 2 - TRL Level 4)
+cd .ai_workspace/pso/by_maturity/level_4_robustness/hybrid_adaptive_sta/
+cat hybrid_adaptive_sta_mt8_robust_trl4.txt
+# Result: +21.4% best disturbance rejection (MT-8 validated)
+```
+
+### "I need best nominal performance gains" ← FRAMEWORK 1
+
+```bash
+# Navigate to Performance category (Framework 1)
 cd .ai_workspace/pso/by_purpose/1_performance/phase53/
 
 # Available controllers:
-# - classical_smc_phase53.txt
-# - sta_smc_phase53.txt
-# - adaptive_smc_phase53.txt
-# - hybrid_adaptive_sta_phase53.txt
+# - classical_smc_phase53.txt (RMSE: 0.0485)
+# - sta_smc_phase53.txt (RMSE: 0.0398)
+# - adaptive_smc_phase53.txt (RMSE: 0.0289) ← BEST
+# - hybrid_adaptive_sta_phase53.txt (RMSE: 0.0315)
 ```
 
 **Best Performance:** Adaptive SMC (RMSE: 0.0289, 40.4% better than Classical)
@@ -220,6 +234,57 @@ cd .ai_workspace/pso/by_purpose/1_performance/phase53/
 ### Visualizations (.png)
 **Location:** `**/convergence_plots/`, `**/lt7_figures/`
 **Count:** 5 shortcuts (actual: 16 files in experiments/)
+
+---
+
+## Framework 2: TRL Maturity Quick-Lookup (NEW)
+
+### "What TRL level are these gains?"
+
+**Level 2: Simulation-Validated**
+- Phase 53 gains (nominal conditions only)
+- Location: `.ai_workspace/pso/by_maturity/level_2_simulation/`
+- Use: Research, benchmarking, initial tuning
+
+**Level 4: Robustness-Validated**
+- MT-8 robust gains (disturbances tested)
+- Location: `.ai_workspace/pso/by_maturity/level_4_robustness/`
+- Use: Production deployment with disturbances
+
+**Level 6: Production-Deployed**
+- Currently in config.yaml
+- Location: `.ai_workspace/pso/by_maturity/level_6_production/`
+- Use: Reference for deployed gains
+
+### "Which controller has highest maturity?"
+
+```bash
+# STA SMC: Only controller with statistical + robustness validation
+cd .ai_workspace/pso/by_maturity/level_2_simulation/sta_smc/
+cat sta_smc_phase53_trl2.txt
+# Maturity: Level 2 + Level 3 (MT-7 statistical) + Level 4 (MT-8 robust) + Level 6 (deployed)
+```
+
+**Answer:** STA SMC (highest maturity overall)
+
+### "Best controller for robustness?"
+
+```bash
+# Hybrid Adaptive STA: +21.4% disturbance rejection (best)
+cd .ai_workspace/pso/by_maturity/level_4_robustness/hybrid_adaptive_sta/
+cat hybrid_adaptive_sta_mt8_robust_trl4.txt
+```
+
+**Answer:** Hybrid Adaptive STA (+21.4%, 2.6× better than next best)
+
+### "Compare maturity across controllers"
+
+| Controller | Level 2 | Level 3 | Level 4 | Level 6 | Overall Maturity |
+|------------|---------|---------|---------|---------|------------------|
+| Classical SMC | ✅ | ❌ | ✅ (+3.5%) | ✅ | Medium |
+| STA SMC | ✅ | ✅ (MT-7) | ✅ (+6.1%) | ✅ | **HIGHEST** |
+| Adaptive SMC | ✅ (best RMSE) | ❌ | ✅ (+8.2%) | ✅ | Medium-High |
+| Hybrid STA | ✅ | ❌ | ✅ (+21.4%) | ✅ | High |
 
 ---
 

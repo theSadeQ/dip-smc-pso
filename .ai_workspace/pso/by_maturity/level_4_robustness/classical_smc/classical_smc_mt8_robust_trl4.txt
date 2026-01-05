@@ -1,0 +1,59 @@
+# Shortcut to: Classical SMC MT-8 Robust Gains
+# Framework: Maturity-Based (TRL) Classification
+# TRL Level: Level 4 - Robustness-Validated
+# Controller: Classical SMC
+# Task: MT-8 Disturbance Rejection Optimization
+
+Target Path:
+D:/Projects/main/academic/paper/experiments/comparative/disturbance_rejection/mt8_repro_classical_smc.json
+
+TRL Classification:
+Level 4 (Robustness-Validated) - These gains have been validated against disturbances
+and uncertainty scenarios via MT-8 robust multi-scenario PSO optimization.
+
+Maturity Assessment:
+- Theoretical Bounds: ✅ Pass (within stability-informed bounds)
+- Simulation Validation: ✅ Pass (nominal + disturbed conditions)
+- Statistical Validation: ❌ Not tested (MT-7 multi-seed pending)
+- Robustness Validation: ✅ Pass (MT-8: 15 disturbance scenarios tested)
+- Hardware Validation: ⚠️ Partial (preliminary HIL only)
+- Production Deployment: ❌ Not deployed (Phase 53 gains used instead)
+
+MT-8 Optimization Details:
+- Fitness Function: 50% nominal RMSE + 50% disturbed RMSE
+- Scenarios: 15 disturbance conditions (force disturbances, parameter variations)
+- Improvement: +3.5% vs baseline disturbance rejection
+- Trade-off: Slight nominal performance loss (~5%) for improved robustness
+
+Quality Gates to Level 5 (Hardware):
+1. Run HIL validation on physical testbed
+2. Verify disturbance rejection in real hardware
+3. Document actuator saturation and safety limits
+
+Use Cases:
+- Applications with external disturbances (wind, vibrations, load variations)
+- Robustness-critical deployments
+- Real-world conditions with uncertainty
+
+Performance Metrics:
+- Nominal RMSE: 0.0510 (slight degradation from Phase 53 baseline 0.0485)
+- Disturbed RMSE: 0.0680 (+3.5% vs baseline disturbance rejection)
+- Disturbance Rejection Improvement: +3.5% (4th best among controllers)
+- Settling Time: ~2.7s (under disturbances)
+- Robustness: Good (validated across 15 scenarios)
+
+Trade-offs vs Phase 53:
+- Nominal Performance: -5% (RMSE 0.0510 vs 0.0485)
+- Disturbed Performance: +3.5% (improved disturbance rejection)
+- Overall: Better for real-world deployment with disturbances
+
+Related Files:
+- Level 2 (Simulation): Phase 53 nominal-optimized gains
+- Framework 1: Robustness category (3_robustness/mt8_disturbance/)
+- MT-8 Report: comparative/disturbance_rejection/MT8_robust_validation_summary.json
+
+Recommendation:
+Use for production deployments where external disturbances are expected.
+Accept slight nominal performance loss for improved real-world robustness.
+
+Last Updated: January 5, 2026

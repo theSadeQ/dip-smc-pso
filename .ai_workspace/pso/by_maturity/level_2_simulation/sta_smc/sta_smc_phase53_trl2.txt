@@ -1,0 +1,52 @@
+# Shortcut to: STA SMC Phase 53 Optimized Gains
+# Framework: Maturity-Based (TRL) Classification
+# TRL Level: Level 2 - Simulation-Validated
+# Controller: Super-Twisting Algorithm (STA) SMC
+# Task: Phase 53 Progressive Optimization
+
+Target Path:
+D:/Projects/main/academic/paper/experiments/sta_smc/optimization/phases/phase53/optimized_gains_sta_smc_phase53.json
+
+TRL Classification:
+Level 2 (Simulation-Validated) - These gains have been validated in nominal simulation
+conditions and additionally validated via MT-7 multi-seed testing (only controller with
+Level 3 statistical validation).
+
+Maturity Assessment:
+- Theoretical Bounds: ✅ Pass (within stability-informed bounds)
+- Simulation Validation: ✅ Pass (nominal conditions, strong RMSE performance)
+- Statistical Validation: ✅ Pass (MT-7: 10 seeds × 50 runs, p < 0.05)
+- Robustness Validation: ✅ Pass (MT-8 disturbances tested)
+- Hardware Validation: ⚠️ Partial (preliminary HIL only)
+- Production Deployment: ✅ Deployed (in config.yaml)
+
+Note: STA SMC is the ONLY controller with full statistical validation (MT-7). Technically
+qualifies for Level 3 but kept in Level 2 for consistency with other Phase 53 gains.
+
+Quality Gates to Level 4 (Robustness):
+✅ Already passed - See Level 4 for MT-8 robust gains
+
+Use Cases:
+- Research benchmarking (nominal + statistical validation)
+- Production deployment (highest maturity of all controllers)
+- Baseline for other controller comparisons
+
+Performance Metrics:
+- RMSE: 0.0398 (Phase 53, nominal IC)
+- Settling Time: ~2.2s
+- Overshoot: Minimal
+- Chattering: Low (super-twisting algorithm inherently reduces chattering)
+- Statistical Robustness: 50.4x degradation detected in narrow IC range (MT-7 finding)
+
+Related Files:
+- Level 3 (Statistical): MT-7 validation reports
+- Level 4 (Robustness): MT-8 disturbance-validated gains
+- Level 6 (Production): Currently deployed in config.yaml
+- Framework 1: Performance category (1_performance/phase53/)
+
+Special Notes:
+- STA SMC has the MOST comprehensive validation of all controllers
+- Only controller with both MT-7 (statistical) and MT-8 (robustness) validation
+- Recommended for production deployment due to high maturity level
+
+Last Updated: January 5, 2026

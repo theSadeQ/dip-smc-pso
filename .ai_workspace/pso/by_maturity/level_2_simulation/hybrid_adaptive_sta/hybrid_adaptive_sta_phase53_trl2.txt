@@ -1,0 +1,66 @@
+# Shortcut to: Hybrid Adaptive STA SMC Phase 53 Optimized Gains
+# Framework: Maturity-Based (TRL) Classification
+# TRL Level: Level 2 - Simulation-Validated
+# Controller: Hybrid Adaptive STA SMC
+# Task: Phase 53 Progressive Optimization
+
+Target Path:
+D:/Projects/main/academic/paper/experiments/hybrid_adaptive_sta/optimization/phases/phase53/optimized_gains_hybrid_phase53.json
+
+TRL Classification:
+Level 2 (Simulation-Validated) - These gains have been validated in nominal simulation
+conditions and represent a balanced trade-off between Adaptive SMC (accuracy) and
+STA SMC (chattering reduction).
+
+Maturity Assessment:
+- Theoretical Bounds: ✅ Pass (within stability-informed bounds)
+- Simulation Validation: ✅ Pass (nominal conditions, 2nd best RMSE)
+- Statistical Validation: ❌ Not tested (MT-7 multi-seed pending)
+- Robustness Validation: ✅ Pass (MT-8: BEST disturbance rejection +21.4%)
+- Hardware Validation: ❌ Not tested (HIL pending)
+- Production Deployment: ✅ Deployed (in config.yaml)
+
+Quality Gates to Level 3 (Statistical):
+1. Run MT-7 multi-seed validation (10 seeds × 50 runs)
+2. Achieve p-value < 0.05 in Welch's t-test
+3. Verify balanced performance holds across seeds
+
+Use Cases:
+- Balanced accuracy + robustness (best of both worlds)
+- Disturbance rejection applications (MT-8: +21.4% best performer)
+- Production deployment (good maturity, strong robustness)
+
+Performance Metrics:
+- RMSE: 0.0315 (Phase 53, nominal IC) ← 2nd best performance
+- Improvement vs Classical: +35.1%
+- Disturbance Rejection: +21.4% vs baseline (MT-8) ← BEST ROBUSTNESS
+- Settling Time: ~2.1s
+- Overshoot: Minimal
+- Chattering: Low (STA component reduces chattering)
+
+Strengths:
+- BEST disturbance rejection (+21.4% in MT-8)
+- Balanced performance + robustness
+- Combines adaptive gains with super-twisting algorithm
+- Strong production readiness
+
+Weaknesses:
+- No statistical validation (MT-7 not run)
+- Slightly lower accuracy than pure Adaptive SMC
+- More complex than Classical/STA
+
+Related Files:
+- Level 4 (Robustness): MT-8 disturbance-validated gains (BEST performer)
+- Level 6 (Production): Currently deployed gains in config.yaml
+- Framework 1: Performance category (1_performance/phase53/)
+
+Recommendation:
+RECOMMENDED for production deployment due to:
+1. Strong robustness (MT-8 validated)
+2. Good accuracy (2nd best RMSE)
+3. Balanced trade-offs (accuracy + robustness)
+4. Low chattering (STA component)
+
+Ideal for applications requiring reliable performance under real-world disturbances.
+
+Last Updated: January 5, 2026

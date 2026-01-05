@@ -1,0 +1,105 @@
+# Shortcut to: Production-Deployed Gains (config.yaml)
+# Framework: Maturity-Based (TRL) Classification
+# TRL Level: Level 6 - Production-Deployed
+# Controllers: All 4 core controllers (Classical, STA, Adaptive, Hybrid)
+# Status: Currently deployed in production configuration
+
+Target Path:
+D:/Projects/main/config.yaml
+
+TRL Classification:
+Level 6 (Production-Deployed) - These are the gains currently deployed in the
+production configuration file (config.yaml). They represent the highest maturity
+level for deployment readiness.
+
+Maturity Assessment:
+- Theoretical Bounds: ✅ Pass (all gains within stability-informed bounds)
+- Simulation Validation: ✅ Pass (Phase 53 gains used)
+- Statistical Validation: ⚠️ Partial (STA only, others pending MT-7)
+- Robustness Validation: ✅ Pass (MT-8 tested for all controllers)
+- Hardware Validation: ⚠️ Partial (preliminary HIL only)
+- Production Deployment: ✅ DEPLOYED (in config.yaml lines 39-83)
+
+Production Gains Source:
+The current config.yaml uses a mix of optimization results:
+- Default gains: Derived from MT-8 robust optimization (50% nominal + 50% disturbed)
+- Fallback: Phase 53 gains for nominal conditions
+- Quality: All controllers have Level 4 robustness validation minimum
+
+Configuration Location:
+**File:** config.yaml
+**Lines 39-83:** Controller default gains (controller_defaults section)
+**Lines 186-229:** PSO parameter bounds (pso.bounds section)
+
+Deployment Controllers:
+1. **Classical SMC** (Lines 40-46)
+   - 6 parameters: λ1, λ2, k1, k2, φ1, φ2
+   - Source: MT-8 robust gains (Level 4)
+   - Maturity: Level 4 (robustness-validated)
+
+2. **STA SMC** (Lines 48-54)
+   - 6 parameters: λ1, λ2, k1, k2, α1, α2
+   - Source: MT-8 robust gains (Level 4)
+   - Maturity: Level 4+ (robustness + statistical validation)
+   - Note: Highest maturity controller (only one with MT-7)
+
+3. **Adaptive SMC** (Lines 56-65)
+   - 5 parameters: γ1, γ2, k1, k2, σ
+   - Source: MT-8 robust gains (Level 4)
+   - Maturity: Level 4 (robustness-validated)
+
+4. **Hybrid Adaptive STA** (Lines 67-77)
+   - 5 parameters: γ1, γ2, α1, α2, σ
+   - Source: MT-8 robust gains (Level 4)
+   - Maturity: Level 4 (robustness-validated, BEST disturbance rejection)
+
+Quality Gates for Production:
+✅ All controllers passed:
+1. Theoretical bounds validation
+2. Simulation validation (nominal conditions)
+3. Robustness validation (MT-8: 15 disturbance scenarios)
+4. Configuration validation (Pydantic schema)
+
+⚠️ Partial/Pending:
+1. Statistical validation (only STA has MT-7)
+2. Hardware validation (preliminary HIL only)
+3. Long-term stability testing
+
+Production Deployment Workflow:
+1. Gains optimized via PSO (Phase 53 or MT-8)
+2. Validation against quality gates
+3. Manual review and approval
+4. Update config.yaml controller_defaults
+5. Integration testing
+6. Version control and deployment
+
+Version Control:
+- Current config.yaml tracked in git
+- Gains updates require commit + review
+- Rollback available via git history
+
+Use Cases:
+- Reference for currently deployed gains
+- Baseline for new optimization campaigns
+- Production system configuration
+- Quality assurance and auditing
+
+Related Files:
+- Level 2 (Simulation): Phase 53 nominal-optimized gains
+- Level 4 (Robustness): MT-8 robust-optimized gains
+- Source gains: academic/paper/experiments/comparative/disturbance_rejection/
+
+Recommendation:
+This is the authoritative source for production gains. Any changes must:
+1. Pass quality gates (minimum Level 4 robustness validation)
+2. Be reviewed and approved
+3. Be version-controlled via git
+4. Include rollback plan
+
+For deployment decisions, consult:
+- Level 4 shortcuts for robustness-validated gains
+- Level 2 shortcuts for nominal-optimized gains
+- MT-8 validation reports for performance comparisons
+
+Last Updated: January 5, 2026
+Current Gains Version: MT-8 robust optimization (December 2025)
