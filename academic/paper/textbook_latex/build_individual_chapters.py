@@ -53,8 +53,8 @@ APPENDICES = {
 # LaTeX template for standalone chapter
 STANDALONE_TEMPLATE = r"""\documentclass[11pt,oneside]{{book}}
 
-% Include preamble
-\input{{../../preamble.tex}}
+% Include standalone preamble (without hyperref to avoid counter bugs)
+\input{{../../preamble_standalone.tex}}
 
 \begin{{document}}
 
@@ -77,6 +77,9 @@ STANDALONE_TEMPLATE = r"""\documentclass[11pt,oneside]{{book}}
 % Set chapter/appendix counter
 {counter_setup}
 
+% FIX: Redefine counter display to work around hyperref bug
+{counter_fix}
+
 % Include the chapter content
 \input{{../../source/{content_path}}}
 
@@ -91,18 +94,23 @@ def create_build_directory():
 def generate_wrapper_tex(output_name, content_path, title, chapter_number=None, is_appendix=False):
     """Generate a standalone .tex wrapper file for a chapter/appendix."""
     # Determine counter setup
-    # FIX: Use final chapter number (N), not N-1, because hyperref prevents \chapter from incrementing
+    # NOTE: hyperref is in draft mode for standalone chapters to avoid counter bugs
     if is_appendix:
         counter_setup = r"\appendix"
+        counter_fix = ""
     elif chapter_number is not None:
-        counter_setup = f"\\setcounter{{chapter}}{{{chapter_number}}}"
+        # Set to N-1 since \chapter will increment
+        counter_setup = f"\\setcounter{{chapter}}{{{chapter_number - 1}}}"
+        counter_fix = ""
     else:
         counter_setup = ""
+        counter_fix = ""
 
     wrapper_content = STANDALONE_TEMPLATE.format(
         title=title,
         content_path=content_path,
-        counter_setup=counter_setup
+        counter_setup=counter_setup,
+        counter_fix=counter_fix
     )
 
     wrapper_file = BUILD_DIR / f"{output_name}.tex"
