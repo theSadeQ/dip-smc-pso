@@ -197,3 +197,96 @@
 %%% HYPERLINKS & CROSS-REFERENCES %%%
 
 % hyperref and cleveref DISABLED for standalone chapters (avoids counter bugs)
+%%% CODE REFERENCES %%%
+% Custom command to link equations to Python code
+\newcommand{\coderef}[2]{%
+  \par\noindent\textcolor{blue!70!black}{\small$\triangleright$ \textbf{Implementation:} \texttt{#1:#2}}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CUSTOM COMMANDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% VECTORS & MATRICES %%%
+\newcommand{\vect}[1]{\mathbf{#1}}           % Bold vectors
+\newcommand{\mat}[1]{\mathbf{#1}}            % Bold matrices
+\newcommand{\uvect}[1]{\hat{\mathbf{#1}}}    % Unit vectors
+
+%%% NUMBER SETS %%%
+\newcommand{\Real}{\mathbb{R}}               % Real numbers
+\newcommand{\Natural}{\mathbb{N}}            % Natural numbers
+\newcommand{\Integer}{\mathbb{Z}}            % Integers
+\newcommand{\Complex}{\mathbb{C}}            % Complex numbers
+
+%%% CALCULUS SHORTCUTS %%%
+\newcommand{\diff}[2]{\frac{d #1}{d #2}}                    % Ordinary derivative
+\newcommand{\pdiff}[2]{\frac{\partial #1}{\partial #2}}    % Partial derivative
+\newcommand{\ddiff}[2]{\frac{d^2 #1}{d #2^2}}              % Second derivative
+
+%%% OPERATORS %%%
+\DeclareMathOperator{\sign}{sign}            % Sign function
+\DeclareMathOperator{\sat}{sat}              % Saturation function
+\DeclareMathOperator*{\argmin}{arg\,min}     % Argmin
+\DeclareMathOperator*{\argmax}{arg\,max}     % Argmax
+\DeclareMathOperator{\rank}{rank}            % Matrix rank
+\DeclareMathOperator{\trace}{tr}             % Matrix trace
+\DeclareMathOperator{\diag}{diag}            % Diagonal matrix
+
+%%% NORMS %%%
+\newcommand{\norm}[1]{\left\| #1 \right\|}   % Euclidean norm
+\newcommand{\abs}[1]{\left| #1 \right|}      % Absolute value
+
+%%% COMMON SYMBOLS (project-specific) %%%
+\newcommand{\thetaone}{\theta_1}             % Pendulum angle 1
+\newcommand{\thetatwo}{\theta_2}             % Pendulum angle 2
+\newcommand{\slidingsurf}{s}                 % Sliding surface
+\newcommand{\controllaw}{u}                  % Control input
+\newcommand{\lyapunov}{V}                    % Lyapunov function
+
+%%% HIGHLIGHTING (for notes during writing) %%%
+\newcommand{\TODO}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+\newcommand{\NOTE}[1]{\textcolor{blue}{\textbf{[NOTE: #1]}}}
+
+%%% CODE REFERENCES %%%
+% For referencing Python files/functions in text
+\newcommand{\pyfile}[1]{\texttt{#1}}
+\newcommand{\pyfunc}[1]{\texttt{#1()}}
+\newcommand{\pyclass}[1]{\texttt{#1}}
+
+%%% SPECIAL BOXES %%%
+% Key concept box
+\newtcolorbox{keybox}{
+    colback=yellow!10!white,
+    colframe=orange!75!black,
+    fonttitle=\bfseries,
+    title={Key Concept},
+    breakable
+}
+
+% Important note box
+\newtcolorbox{importantbox}{
+    colback=red!5!white,
+    colframe=red!75!black,
+    fonttitle=\bfseries,
+    title={Important},
+    breakable
+}
+
+% Example box
+\newtcolorbox{examplebox}[1][]{
+    colback=green!5!white,
+    colframe=green!75!black,
+    fonttitle=\bfseries,
+    title={Example: #1},
+    breakable
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LINE SPACING (for readability)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{setspace}
+\onehalfspacing  % 1.5 line spacing for main text
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF PREAMBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
