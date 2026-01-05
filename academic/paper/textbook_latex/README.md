@@ -26,6 +26,34 @@ pdflatex main.tex
 
 ---
 
+## Individual Chapter PDFs
+
+Generate separate PDFs for each chapter and appendix (useful for modular distribution):
+
+```bash
+# Windows (PowerShell) - Recommended
+powershell -ExecutionPolicy Bypass -File build_chapters.ps1
+
+# Cross-platform (Python)
+python build_individual_chapters.py
+
+# Windows (Batch script alternative)
+build_chapters.bat
+```
+
+**Output**:
+- 16 standalone PDFs (12 chapters + 4 appendices)
+- Total size: ~4.7 MB
+- Location: `build/individual_chapters/`
+
+**Features**:
+- Each PDF includes title page and table of contents
+- Standalone distribution (no dependencies)
+- Cross-references within each chapter work correctly
+- Useful for sharing specific chapters without the full textbook
+
+---
+
 ## Directory Structure
 
 ```
