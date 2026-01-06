@@ -611,7 +611,7 @@ The classical fourth-order method:
 \end{itemize}
 
 \begin{algorithm}[htbp]
-\caption{Runge-Kutta 4th Order Integration Step}
+\caption[Runge-Kutta 4th Order Integration Step]{Runge-Kutta 4th Order (RK4) Integration Step: Four-stage explicit method for numerically solving ordinary differential equations with $\mathcal{O}(h^5)$ local truncation error. This algorithm evaluates the dynamics function $\vect{f}(\vect{x}, u)$ at four intermediate points within each timestep $h$ to achieve fourth-order accuracy, making it the standard choice for simulating\index{simulation} double-inverted pendulum\index{double-inverted pendulum|see{DIP}} controllers with typical timesteps of 0.01 seconds.}
 \label{alg:math:rk4}
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
@@ -721,7 +721,7 @@ This chapter established the mathematical foundations for sliding mode controlle
     \item \textbf{Numerical integration methods} (Euler, RK4, RK45) offer different accuracy-speed trade-offs for simulation
 \end{itemize}
 
-\textbf{Next Steps}: \cref{ch:classical_smc} applies these foundations to design the first controller: classical sliding mode control with boundary layer.
+\textbf{Next Steps}: \cref{ch:classical_smc} applies these foundations to design the first controller: classical sliding mode control with boundary layer. The mathematical tools developed here are also essential for the Super-Twisting Algorithm\index{Super-Twisting Algorithm|see{STA}} (\cref{ch:sta_smc}), which uses higher-order sliding modes to eliminate chattering\index{chattering}, and Adaptive SMC\index{sliding mode control!adaptive} (\cref{ch:adaptive_smc}), which handles model uncertainty\index{model uncertainty} through online parameter estimation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End of Chapter 2

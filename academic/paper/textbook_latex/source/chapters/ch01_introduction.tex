@@ -247,7 +247,7 @@ Several approaches have been developed to reduce or eliminate chattering:
 
 \begin{table}[htbp]
 \centering
-\caption{Comparison of Chattering Reduction Methods}
+\caption[Comparison of Chattering Reduction Methods]{Comparison of Five Chattering Reduction Methods in Sliding Mode Control: Boundary layer smoothing, higher-order SMC (Super-Twisting\index{Super-Twisting Algorithm|see{STA}} Algorithm), observer-based filtering, adaptive gain scheduling, and disturbance observer compensation. Each method involves distinct trade-offs between chattering\index{chattering} suppression, steady-state accuracy, computational complexity, and robustness\index{robustness}.}
 \label{tab:intro:chattering_methods}
 \begin{tabular}{lp{6cm}p{4cm}}
 \toprule
@@ -349,7 +349,7 @@ u = -k_1(t) \sqrt{|\sigma|} \sat(\sigma/\epsilon) + u_{\text{int}} - k_d \sigma 
 
 \begin{table}[htbp]
 \centering
-\caption{Controller Selection Guidelines}
+\caption[Controller Selection Guidelines]{Controller Selection Guidelines for Sliding Mode Control of Double-Inverted Pendulum\index{double-inverted pendulum|see{DIP}}: Decision matrix showing optimal use cases and limitations for Classical SMC, STA-SMC\index{Super-Twisting Algorithm|see{STA}}, Adaptive SMC\index{sliding mode control!adaptive}, Hybrid Adaptive STA-SMC, and Swing-Up controllers. Key considerations include chattering\index{chattering} tolerance, disturbance characteristics, computational constraints, and performance requirements such as finite-time convergence\index{convergence} and smooth control action.}
 \label{tab:intro:controller_comparison}
 \small
 \begin{tabular}{lp{5cm}p{5cm}}
