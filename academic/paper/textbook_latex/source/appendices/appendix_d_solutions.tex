@@ -132,6 +132,79 @@ This is the gradient adaptation law that minimizes the Lyapunov function.
 
 \vspace{1em}
 
+\textbf{Exercise 5.3}: The leak term $-\alpha K$ in the adaptation law serves multiple purposes. (a) Explain why it prevents unbounded gain growth. (b) How does it help with time-varying disturbances? (c) What is the trade-off of increasing $\alpha$?
+
+\textbf{Solution}:
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Prevents unbounded gain growth}:
+
+    Consider the piecewise adaptation law without leak:
+    \begin{equation}
+    \dot{\hat{K}} = \begin{cases}
+    \gamma |\sigma| & \text{if } |\sigma| \geq \delta \\
+    0 & \text{if } |\sigma| < \delta
+    \end{cases}
+    \end{equation}
+
+    Problem: If $|\sigma| \geq \delta$ persists (e.g., due to unmodeled dynamics), $\hat{K}(t)$ monotonically increases without bound:
+    \begin{equation}
+    \hat{K}(t) = \hat{K}(0) + \gamma \int_0^t |\sigma(\tau)| d\tau \to \infty
+    \end{equation}
+
+    This causes:
+    \begin{itemize}
+        \item Actuator saturation: $|u| > u_{\max}$ (physical limit violated)
+        \item Numerical overflow in simulation ($\hat{K} > 10^{10}$)
+        \item Excessive control effort even after disturbance is rejected
+    \end{itemize}
+
+    The leak term $-\alpha \hat{K}$ provides negative feedback:
+    \begin{equation}
+    \dot{\hat{K}} = \gamma |\sigma| - \alpha \hat{K}
+    \end{equation}
+
+    At equilibrium ($\dot{\hat{K}} = 0$):
+    \begin{equation}
+    \hat{K}^* = \frac{\gamma |\sigma_{\text{ss}}|}{\alpha}
+    \end{equation}
+
+    Since $|\sigma_{\text{ss}}|$ is bounded by Lyapunov stability, $\hat{K}^*$ is bounded. Typical values: $\alpha = 0.1$ s$^{-1}$, resulting in $\hat{K}^* < 50$ N for DIP.
+
+    \item \textbf{Helps with time-varying disturbances}:
+
+    Time-varying disturbances $d(t) = A(t) \sin(\omega t)$ with decreasing amplitude $A(t) = A_0 e^{-\beta t}$ require adaptive gain tracking.
+
+    Without leak ($\alpha = 0$): $\hat{K}$ ratchets upward during initial high-amplitude phase but cannot decrease when $A(t)$ reduces. Result: overestimated gain causes unnecessary chattering.
+
+    With leak ($\alpha > 0$): The term $-\alpha \hat{K}$ allows $\hat{K}$ to decay when $|\sigma|$ decreases:
+    \begin{itemize}
+        \item During high-disturbance phase ($t < 5$ s): $\gamma |\sigma| \gg \alpha \hat{K}$ → gain increases
+        \item During low-disturbance phase ($t > 5$ s): $\gamma |\sigma| \ll \alpha \hat{K}$ → leak dominates → gain decreases
+    \end{itemize}
+
+    This bidirectional adaptation matches gain to current disturbance level, improving control effort economy.
+
+    \item \textbf{Trade-off of increasing $\alpha$}:
+
+    \textbf{Benefits} (larger $\alpha$):
+    \begin{itemize}
+        \item Faster forgetting: $\hat{K}$ decays quickly when disturbance disappears
+        \item Tighter gain bounds: $\hat{K}^* = \frac{\gamma |\sigma|}{\alpha}$ is smaller
+        \item Reduced overshoot: prevents gain from accumulating during transients
+    \end{itemize}
+
+    \textbf{Drawbacks} (larger $\alpha$):
+    \begin{itemize}
+        \item Slower adaptation: leak opposes gain increase, delaying convergence
+        \item Steady-state error: if $\alpha$ too large, $\hat{K}^*$ may undershoot required gain
+        \item Poor disturbance rejection: gain cannot rise sufficiently during high-disturbance events
+    \end{itemize}
+
+    Optimal $\alpha$ selection: Use $\alpha = 0.1 \tau_{\text{dist}}^{-1}$ where $\tau_{\text{dist}}$ is disturbance time constant. For DIP with $\tau_{\text{dist}} \approx 10$ s, use $\alpha \approx 0.01$ s$^{-1}$.
+\end{enumerate}
+
+\vspace{1em}
+
 \textbf{Exercise 5.6}: Explain why a dead-zone $\delta = 0.01$ rad prevents chattering-induced adaptation.
 
 \textbf{Solution}: Chattering causes rapid oscillations of the sliding surface around zero ($|s| < \delta$). Without a dead-zone, the adaptation law $\dot{K} = \gamma |s| \sign(s)$ would continuously update gains in response to these high-frequency oscillations, causing:
@@ -154,6 +227,67 @@ This ensures adaptation only occurs when the system is genuinely far from the sl
 %===============================================================================
 \section{Chapter 6 Solutions}
 %===============================================================================
+
+\textbf{Exercise 6.1}: Why combine adaptive gain tuning with super-twisting? What unique advantages does the hybrid approach provide over using each technique separately?
+
+\textbf{Solution}:
+
+The hybrid adaptive STA-SMC combines two powerful techniques to address complementary limitations:
+
+\textbf{Classical SMC + Adaptation (Chapter 5) Limitations:}
+\begin{itemize}
+    \item \textbf{Chattering persists}: Adaptive gain $\hat{K}(t)$ still switches discontinuously via $\sign(\sigma)$, causing 2-3 N/s control rate oscillations even with optimal $\hat{K}$
+    \item \textbf{Slow convergence}: First-order sliding mode $\dot{\sigma} = -K \sign(\sigma)$ converges asymptotically, not finite-time
+    \item \textbf{Measurement noise sensitivity}: Direct $\sign(\sigma)$ switching amplifies sensor noise
+\end{itemize}
+
+\textbf{Fixed-Gain STA-SMC (Chapter 4) Limitations:}
+\begin{itemize}
+    \item \textbf{Conservative tuning}: Gains $(k_1, k_2)$ must satisfy worst-case stability conditions $k_2 > L_m$ and $k_1^2 \geq 4 L_m k_2 (k_2 + L_m) / (k_2 - L_m)$ where $L_m$ is Lipschitz bound. For uncertain $L_m$, conservative overestimation wastes control effort.
+    \item \textbf{Poor disturbance adaptation}: Fixed $k_1, k_2$ cannot respond to time-varying disturbances $d(t) = A(t) \sin(\omega t)$ with varying amplitude $A(t)$
+    \item \textbf{Initialization sensitivity}: Performance degrades if initial $(k_1^0, k_2^0)$ are poorly chosen
+\end{itemize}
+
+\textbf{Hybrid Advantages (Synergistic Combination):}
+
+\begin{enumerate}
+    \item \textbf{Continuous control + Adaptive robustness}:
+    \begin{itemize}
+        \item STA provides continuous $u = -k_1 \sqrt{|\sigma|} \sign(\sigma) + u_1$ (no discontinuous switching)
+        \item Adaptation adjusts $(k_1, k_2)$ online: $\dot{k}_1 = \gamma_1 \sqrt{|\sigma|}$, $\dot{k}_2 = \gamma_2 |\sigma|$
+        \item Result: Chattering amplitude reduced to 1.0 N/s (vs. 2.5 N/s classical SMC, 56\% reduction) while maintaining disturbance rejection
+    \end{itemize}
+
+    \item \textbf{Finite-time convergence + Time-varying robustness}:
+    \begin{itemize}
+        \item STA achieves finite-time convergence to $\sigma = 0$ in $T_{\text{reach}} = O(\sigma_0^{1/2})$ (vs. asymptotic for classical SMC)
+        \item Adaptation tracks changing $L_m(t)$ due to model uncertainty or disturbances
+        \item Settling time: 1.58 s (hybrid) vs. 1.82 s (classical SMC), 13\% faster
+    \end{itemize}
+
+    \item \textbf{Optimal gain convergence + Stability preservation}:
+    \begin{itemize}
+        \item Adaptation drives $(k_1, k_2) \to (k_1^*, k_2^*)$ that minimize control effort while satisfying stability conditions
+        \item Projection operators ensure $k_1^2 \geq 4 L_m k_2 (k_2 + L_m) / (k_2 - L_m)$ at all times
+        \item Energy consumption: 0.9 J (hybrid) vs. 1.2 J (classical SMC), 25\% reduction
+    \end{itemize}
+
+    \item \textbf{Reduced tuning burden}:
+    \begin{itemize}
+        \item Fixed STA requires careful offline gain selection via PSO (1500 evaluations $\times$ 10 s = 4.2 hours)
+        \item Hybrid STA adapts online from conservative initial $(k_1^0, k_2^0)$, converging to optimal in $< 2$ s
+        \item Trade-off: Increased implementation complexity (dual adaptation laws + projection)
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Summary}: The hybrid approach achieves:
+\begin{itemize}
+    \item \textbf{Best of both worlds}: Continuous control (STA) + online robustness (adaptation)
+    \item \textbf{Performance gains}: 13\% faster settling, 25\% energy reduction, 56\% chattering reduction
+    \item \textbf{Practical benefits}: Reduced tuning time, improved disturbance rejection, actuator-friendly operation
+\end{itemize}
+
+\vspace{1em}
 
 \textbf{Exercise 6.3}: For the hybrid controller with dual-gain adaptation, verify that both $K_1$ and $K_2$ must satisfy the STA stability conditions at all times.
 
@@ -196,6 +330,132 @@ The scheduling improves local convergence (near equilibrium) while maintaining g
 %===============================================================================
 \section{Chapter 7 Solutions}
 %===============================================================================
+
+\textbf{Exercise 7.1}: Explain why linear controllers (LQR, SMC) cannot swing up a pendulum from hanging-down position ($\theta = \pi$) to upright ($\theta = 0$). What fundamental limitation do they face?
+
+\textbf{Solution}:
+
+Linear controllers (LQR, linearized SMC) are designed around the upright equilibrium $\theta = 0$ using linearized dynamics:
+\begin{equation}
+\ddot{\theta} \approx \frac{g}{L} \theta + \frac{1}{mL} u
+\end{equation}
+
+This approximation assumes $\sin\theta \approx \theta$ and $\cos\theta \approx 1 - \frac{\theta^2}{2}$, valid only for $|\theta| < 0.3$ rad ($\approx 17°$).
+
+\textbf{Fundamental Limitation (Loss of Controllability):}
+
+At hanging-down position ($\theta = \pi$, $\dot{\theta} = 0$), the linearized system is:
+\begin{equation}
+\delta\ddot{\theta} = -\frac{g}{L} \delta\theta + \frac{1}{mL} u
+\end{equation}
+where $\delta\theta = \theta - \pi$ is deviation from hanging-down.
+
+This system is \textbf{unstable} in the wrong direction: disturbances $\delta\theta > 0$ cause $\ddot{\theta} < 0$ (pendulum falls further down), while disturbances $\delta\theta < 0$ cause $\ddot{\theta} > 0$ (pendulum swings toward upright). However:
+
+\begin{enumerate}
+    \item \textbf{Local basin of attraction}: Linear controllers can only stabilize within a region $|\theta| < \theta_{\max} \approx 0.5$ rad around upright. From $\theta = \pi$, the controller sees $\theta - 0 = \pi$ rad error, which is outside its design range.
+
+    \item \textbf{Control authority insufficient}: At $\theta = \pi$, gravitational torque is $\tau_g = mgL \sin(\pi) = 0$ (no restoring force). The cart force $u$ couples to pendulum angle via:
+    \begin{equation}
+    \tau_{\text{cart}} = u \cdot L \cos\theta = u \cdot L \cos(\pi) = -uL
+    \end{equation}
+    This coupling is \textbf{sign-reversed} compared to upright ($\cos(0) = +1$ vs. $\cos(\pi) = -1$), causing linear controller to apply force in wrong direction.
+
+    \item \textbf{Energy barrier}: To swing from $\theta = \pi$ (potential energy $V = 0$) to $\theta = 0$ (potential energy $V = 2mgL$), the controller must pump $\Delta E = 2mgL$ joules into the system. Linear controllers lack energy-based planning and instead react to instantaneous error $e = \theta - \theta_{\text{ref}}$, which is insufficient to overcome the barrier.
+\end{enumerate}
+
+\textbf{Example}: LQR controller with gains $Q = \text{diag}(10, 1, 50, 5)$ and $R = 0.01$ applied from $\theta(0) = \pi$:
+\begin{itemize}
+    \item Time $t = 0$ s: $u = -K [\pi, 0, 0, 0]^T \approx -50$ N (pushes cart left)
+    \item Expected: Cart moves left → pendulum tilts right → $\theta$ decreases
+    \item Actual: At $\theta = \pi$, cart-pendulum coupling reversed → pendulum tilts left → $\theta$ increases to $1.1\pi$ (diverges!)
+\end{itemize}
+
+\textbf{Solution}: Use energy-based swing-up controller to pump energy until $\theta \approx 0$, then switch to linear SMC for stabilization. The switching threshold is typically $|\theta| < 0.3$ rad and $|\dot{\theta}| < 2$ rad/s.
+
+\vspace{1em}
+
+\textbf{Exercise 7.2}: The swing-up controller pumps energy into the system until the pendulum reaches the upright equilibrium. Give a physical analogy (e.g., playground swing). How does the controller know when to switch from swing-up to stabilization?
+
+\textbf{Solution}:
+
+\textbf{Physical Analogy (Playground Swing):}
+
+Imagine pushing a child on a playground swing to build amplitude:
+
+\begin{itemize}
+    \item \textbf{Energy pumping}: You push in sync with the swing's motion (when $\dot{x} > 0$, push forward; when $\dot{x} < 0$, push backward). Each push adds kinetic energy: $\Delta E = F \cdot \Delta x > 0$.
+
+    \item \textbf{Resonance}: Timing the pushes to match the swing's natural frequency $\omega_n = \sqrt{g/L}$ maximizes energy transfer efficiency. Random pushes would add/subtract energy unpredictably.
+
+    \item \textbf{Amplitude control}: You stop pushing when the swing reaches the desired angle (e.g., $\theta_{\max} = 45°$). Further pushing would make the swing go too high (potentially dangerous/unstable).
+
+    \item \textbf{Stabilization}: Once at the target amplitude, you switch to damping control (gentle resistance) to maintain $\theta_{\max}$ against friction losses.
+\end{itemize}
+
+For the DIP swing-up:
+\begin{itemize}
+    \item \textbf{Energy pumping}: Cart force $u = k_E \dot{x} (E - E_{\text{desired}}) \cos\theta_1$ mimics pushing in sync with cart velocity $\dot{x}$
+    \item \textbf{Target energy}: $E_{\text{desired}} = 2m_1 g L_1 + m_2 g (2L_1 + 2L_2)$ corresponds to upright equilibrium
+    \item \textbf{Switching}: When $E \approx E_{\text{desired}}$ and $|\theta_1| < 0.3$ rad, controller switches to SMC stabilization
+\end{itemize}
+
+\textbf{Switching Logic (When to Switch from Swing-Up to Stabilization):}
+
+The controller monitors three conditions:
+
+\begin{enumerate}
+    \item \textbf{Energy threshold}: $E(t) \geq E_{\text{switch}} = 0.95 \cdot E_{\text{desired}}$
+
+    Check that pendulum has sufficient energy to reach upright. Using 95\% threshold (not 100\%) accounts for:
+    \begin{itemize}
+        \item Energy measurement noise ($\pm 2\%$ typical)
+        \item Friction losses during final approach
+        \item Actuator response delay
+    \end{itemize}
+
+    \item \textbf{Angle threshold}: $|\theta_1| < \theta_{\text{switch}} = 0.3$ rad \textbf{and} $|\theta_2| < \theta_{\text{switch}}$
+
+    Ensure pendulum is near upright equilibrium where linear SMC is valid. At $\theta_1 = 0.3$ rad ($17°$):
+    \begin{itemize}
+        \item Linearization error: $|\sin(0.3) - 0.3| / 0.3 \approx 1.6\%$ (acceptable)
+        \item Basin of attraction: SMC can stabilize from this deviation
+    \end{itemize}
+
+    \item \textbf{Angular velocity threshold}: $|\dot{\theta}_1| < \dot{\theta}_{\text{switch}} = 2$ rad/s \textbf{and} $|\dot{\theta}_2| < 3$ rad/s
+
+    Prevent switching during fast swings where:
+    \begin{itemize}
+        \item SMC cannot apply sufficient braking torque to prevent overshoot
+        \item High velocity amplifies chattering due to $u = -K \sign(\sigma)$ discontinuity
+    \end{itemize}
+
+    \textbf{Hysteresis (Anti-Chattering):}
+    \begin{equation}
+    \text{Switch to SMC if:} \quad E \geq 0.95 E_d \text{ and } |\theta_1| < 0.3 \text{ and } |\dot{\theta}_1| < 2
+    \end{equation}
+    \begin{equation}
+    \text{Revert to swing-up if:} \quad E < 0.85 E_d \text{ or } |\theta_1| > 0.5
+    \end{equation}
+
+    The 10\% hysteresis gap ($0.85 E_d$ vs. $0.95 E_d$) prevents rapid mode switching (chattering between controllers) when conditions fluctuate near the threshold.
+\end{enumerate}
+
+\textbf{Implementation Example}:
+\begin{lstlisting}[language=Python]
+if mode == 'swing_up':
+    if (E >= 0.95 * E_desired and
+        abs(theta1) < 0.3 and abs(theta2) < 0.3 and
+        abs(dtheta1) < 2.0 and abs(dtheta2) < 3.0):
+        mode = 'stabilize'
+        print(f"Switched to stabilization at t={t:.2f}s")
+elif mode == 'stabilize':
+    if E < 0.85 * E_desired or abs(theta1) > 0.5:
+        mode = 'swing_up'
+        print(f"Reverted to swing-up at t={t:.2f}s")
+\end{lstlisting}
+
+\vspace{1em}
 
 \textbf{Exercise 7.3}: Derive the total mechanical energy for the DIP system and design the energy-based swing-up control law.
 
@@ -321,6 +581,77 @@ This adaptive strategy prevents premature convergence while ensuring final solut
         \item \textbf{High dimensionality}: PSO requires $N_p = 10d$ to $30d$ particles for $d$-dimensional problems. For $d > 50$ (e.g., neural network weights), gradient methods scale better.
         \item \textbf{Real-time adaptation}: Gradient descent with line search converges in 10-100 iterations, while PSO requires 500-5000 evaluations. For online tuning during operation, gradient methods are faster.
     \end{itemize}
+\end{enumerate}
+
+\vspace{1em}
+
+\textbf{Exercise 8.2}: A good PSO cost function balances tracking error, control effort, and chattering. Explain the trade-offs: (a) Minimizing tracking error alone may cause excessive control. (b) Minimizing control effort alone may sacrifice tracking accuracy. (c) How do weighting coefficients $w_{\text{tracking}}, w_{\text{effort}}, w_{\text{chattering}}$ affect the Pareto frontier?
+
+\textbf{Solution}:
+
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Minimizing tracking error alone causes excessive control}:
+
+    Single-objective cost: $J = w_{\text{track}} \cdot \text{RMS}(\theta)$ where $\text{RMS}(\theta) = \sqrt{\frac{1}{N}\sum_{i=1}^N \theta_i^2}$.
+
+    PSO optimization drives gains $(\lambda_1, \lambda_2, K) \to (\lambda_1^*, \lambda_2^*, K^*)$ that minimize $\text{RMS}(\theta)$. This results in:
+    \begin{itemize}
+        \item \textbf{Aggressive gains}: $K^* \gg K_{\text{nominal}}$ (e.g., $K = 50$ N vs. $K_{\text{nom}} = 15$ N)
+        \item \textbf{Fast sliding surface convergence}: $|\sigma| \to 0$ within 0.5 s → $|\theta| < 0.01$ rad quickly
+        \item \textbf{Excessive control effort}: $u(t) = u_{\text{eq}} - K \sign(\sigma)$ with large $K$ causes:
+        \begin{itemize}
+            \item High control rate: $|du/dt| > 100$ N/s (chattering)
+            \item Large total effort: $E = \int_0^T |u(t)| dt > 5$ J (vs. 1.2 J nominal)
+            \item Actuator saturation risk: $|u| > u_{\max} = 20$ N
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Example}: PSO finds $K = 45$ N achieving $\text{RMS}(\theta) = 0.008$ rad, but control effort $E = 4.5$ J (3.75$\times$ nominal), causing actuator wear.
+
+    \item \textbf{Minimizing control effort alone sacrifices tracking}:
+
+    Single-objective cost: $J = w_{\text{effort}} \cdot \text{IAE}(u)$ where $\text{IAE}(u) = \int_0^T |u(t)| dt$.
+
+    PSO optimization drives $(K, \lambda_i) \to (K^*, \lambda_i^*)$ that minimize $\text{IAE}(u)$. This results in:
+    \begin{itemize}
+        \item \textbf{Conservative gains}: $K^* \ll K_{\text{required}}$ (e.g., $K = 5$ N vs. $K_{\text{req}} = 15$ N for $d_{\max} = 10$ N disturbance)
+        \item \textbf{Low control authority}: Insufficient gain to reject disturbances
+        \item \textbf{Poor tracking}: $|\theta_{\max}| > 0.5$ rad (vs. $<0.05$ rad nominal), possibly unstable
+    \end{itemize}
+
+    \textbf{Example}: PSO finds $K = 3$ N achieving $\text{IAE}(u) = 0.8$ J, but $\text{RMS}(\theta) = 0.15$ rad (18.75$\times$ nominal), violating $|\theta| < 0.1$ rad specification.
+
+    \textbf{Fundamental conflict}: Controller must apply effort $u$ to reject $d$ and track $\theta_{\text{ref}}$. Minimizing $\text{IAE}(u)$ inevitably increases $\text{RMS}(\theta)$ for fixed disturbance level.
+
+    \item \textbf{Weighting coefficients affect Pareto frontier}:
+
+    Multi-objective cost:
+    \begin{equation}
+    J = w_{\text{track}} \cdot \text{RMS}(\theta) + w_{\text{effort}} \cdot \text{IAE}(u) + w_{\text{chatter}} \cdot \mathcal{C}
+    \end{equation}
+    where $\mathcal{C} = \text{RMS}(du/dt)$ is chattering metric.
+
+    \textbf{Pareto frontier}: Set of non-dominated solutions where improving one objective degrades another. For DIP:
+    \begin{itemize}
+        \item Point A: $w_{\text{track}} = 1.0, w_{\text{effort}} = 0, w_{\text{chatter}} = 0$ → $(K = 45$ N, $\text{RMS}(\theta) = 0.008$ rad, $E = 4.5$ J$)$ (tracking-optimal)
+        \item Point B: $w_{\text{track}} = 0, w_{\text{effort}} = 1.0, w_{\text{chatter}} = 0$ → $(K = 3$ N, $\text{RMS}(\theta) = 0.15$ rad, $E = 0.8$ J$)$ (efficiency-optimal)
+        \item Point C: $w_{\text{track}} = 0.6, w_{\text{effort}} = 0.3, w_{\text{chatter}} = 0.1$ → $(K = 15$ N, $\text{RMS}(\theta) = 0.02$ rad, $E = 1.2$ J$)$ (balanced)
+    \end{itemize}
+
+    \textbf{Effect of varying weights}:
+    \begin{itemize}
+        \item Increasing $w_{\text{track}}$: Moves optimal solution toward Point A (high $K$, low $\text{RMS}(\theta)$, high $E$)
+        \item Increasing $w_{\text{effort}}$: Moves toward Point B (low $K$, high $\text{RMS}(\theta)$, low $E$)
+        \item Increasing $w_{\text{chatter}}$: Reduces boundary layer $\epsilon$ and gain $K$, trades tracking for smoothness
+    \end{itemize}
+
+    \textbf{Recommended weighting (DIP application)}:
+    \begin{equation}
+    w_{\text{track}} : w_{\text{effort}} : w_{\text{chatter}} = 0.6 : 0.3 : 0.1
+    \end{equation}
+    Rationale: Tracking is primary objective (60\%), control economy important for actuator life (30\%), chattering reduction desirable but secondary (10\%).
+
+    This weighting achieves Point C: near-optimal tracking ($\text{RMS}(\theta) = 0.02$ rad, 2.5$\times$ Point A) with moderate effort ($E = 1.2$ J, 1.5$\times$ Point B), satisfying both $|\theta| < 0.05$ rad and $E < 2$ J constraints.
 \end{enumerate}
 
 \vspace{1em}
