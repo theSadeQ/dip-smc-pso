@@ -25,6 +25,13 @@ PSO, introduced by Kennedy \& Eberhart (1995) \cite{Kennedy1995}, is a populatio
     \item \textbf{Global best}: Best position found by entire swarm: $\vect{g}$
 \end{itemize}
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/ch07_pso_theory/pso_swarm_movement.png}
+\caption[PSO Particle Swarm Movement in 2D Parameter Space]{Particle Swarm Optimization\index{Particle Swarm Optimization} movement in 2D parameter space. Eight particles (blue circles) move through a fitness landscape (contours) toward the global best\index{Particle Swarm Optimization!global best} position (gold star). Velocity vectors (red arrows) show each particle's search direction, influenced by its personal best\index{Particle Swarm Optimization!personal best} (green squares) and the global best. The particles at time $t+1$ (light blue) demonstrate convergence\index{convergence} toward the optimum while maintaining diversity through stochastic components in the velocity update\index{Particle Swarm Optimization!velocity update}.}
+\label{fig:pso:swarm_movement}
+\end{figure}
+
 \subsection{Velocity Update Equation}
 
 At iteration $k$:
@@ -40,6 +47,13 @@ where:
     \item $c_1, c_2$: Cognitive and social learning rates (typically $c_1 = c_2 = 2.0$)
     \item $r_1, r_2 \sim \mathcal{U}(0, 1)$: Random numbers (ensures stochasticity)
 \end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/ch07_pso_theory/pso_velocity_components.png}
+\caption[PSO Velocity Update: Three-Component Decomposition]{PSO Velocity Update Decomposition: The new velocity $\vect{v}_i(t+1)$ (black dashed arrow) results from summing three components. The \textbf{inertia} component $w\vect{v}_i(t)$ (blue) maintains the particle's current search direction. The \textbf{cognitive} component $c_1 r_1 (\vect{p}_i - \vect{x}_i)$ (green) attracts the particle toward its personal best\index{Particle Swarm Optimization!personal best} position $\vect{p}_i$. The \textbf{social} component $c_2 r_2 (\vect{g} - \vect{x}_i)$ (red) attracts the particle toward the global best\index{Particle Swarm Optimization!global best} position $\vect{g}$ (gold star). This three-way balance enables PSO to explore\index{Particle Swarm Optimization!exploration} new regions while exploiting\index{Particle Swarm Optimization!exploitation} known good solutions.}
+\label{fig:pso:velocity_components}
+\end{figure}
 
 \subsection{Position Update}
 
@@ -64,6 +78,13 @@ Shi \& Eberhart (1998) \cite{Shi1998} proposed:
 Typical values: $\omega_{\max} = 0.9$, $\omega_{\min} = 0.4$.
 
 \textbf{Effect}: High $\omega$ early encourages exploration; low $\omega$ late promotes convergence.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/ch07_pso_theory/pso_inertia_effect.png}
+\caption[Effect of Inertia Weight on PSO Search Behavior]{Effect of Inertia Weight\index{Particle Swarm Optimization!inertia weight} on PSO Search Behavior: Three panels show particle trajectories over 10 iterations with varying inertia weights. \textbf{Left panel} ($w = 0.9$): High inertia promotes \textbf{exploration\index{Particle Swarm Optimization!exploration}}, with particles maintaining momentum and searching widely across the parameter space. \textbf{Middle panel} ($w = 0.6$): Moderate inertia balances exploration and exploitation\index{Particle Swarm Optimization!exploitation}, allowing both global search and local refinement. \textbf{Right panel} ($w = 0.3$): Low inertia promotes \textbf{exploitation}, with particles quickly converging\index{convergence} toward the global best\index{Particle Swarm Optimization!global best} (gold star) but risking premature convergence. The linearly decreasing inertia weight strategy (Equation~\ref{eq:linear_inertia}) combines these behaviors: starting with high $w$ for global exploration, then decreasing to low $w$ for local exploitation.}
+\label{fig:pso:inertia_effect}
+\end{figure}
 
 %===============================================================================
 \section{Multi-Objective PSO (MOPSO)}
