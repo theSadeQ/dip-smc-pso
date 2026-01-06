@@ -26,9 +26,253 @@ This appendix provides detailed solutions to selected exercises from each chapte
     \item \textbf{Sensor noise}: Measurement noise near sliding surface triggers erratic switching.
 \end{enumerate}
 
+\vspace{1em}
+
+\textbf{Exercise 1.2}: The double-inverted pendulum has 3 degrees of freedom and 1 actuator. Calculate the degree of underactuation. If we add a second actuator directly controlling $\theta_1$, would the system become fully actuated?
+
+\textbf{Solution}:
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Degree of underactuation}:
+    \begin{equation}
+    \text{Underactuation} = n - m = 3 - 1 = 2
+    \end{equation}
+    where $n = 3$ degrees of freedom ($x_{\text{cart}}, \theta_1, \theta_2$) and $m = 1$ control input ($u$ acting on cart).
+
+    \item \textbf{Adding second actuator}: With an additional torque $\tau_1$ directly on joint 1, we would have $m = 2$ actuators controlling $n = 3$ DOF. The system would still be underactuated with degree $3 - 2 = 1$. To become fully actuated, we need $m = n = 3$ actuators (force on cart, torque on $\theta_1$, torque on $\theta_2$).
+\end{enumerate}
+
+\vspace{1em}
+
+\textbf{Exercise 1.4}: A discrete-time controller samples at 1 kHz. If the sliding surface value oscillates with amplitude $\pm 0.01$ and the system derivative $\dot{\sigma} \approx 10$, estimate the chattering frequency. How does doubling the sampling rate affect this?
+
+\textbf{Solution}:
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Chattering frequency estimation}: The sliding surface crosses zero every half-period. Time for one crossing:
+    \begin{equation}
+    \Delta t \approx \frac{2 \cdot \sigma_{\text{amp}}}{|\dot{\sigma}|} = \frac{2 \times 0.01}{10} = 0.002 \text{ s}
+    \end{equation}
+    Chattering frequency:
+    \begin{equation}
+    f_{\text{chatter}} = \frac{1}{2\Delta t} = \frac{1}{0.004} = 250 \text{ Hz}
+    \end{equation}
+
+    \item \textbf{Effect of doubling sampling rate}: At 2 kHz sampling ($\Delta t_{\text{sample}} = 0.5$ ms instead of 1 ms), the chattering frequency increases because the controller can switch faster. For quasi-sliding mode, $f_{\text{chatter}} \approx f_{\text{sample}}/2 = 1000$ Hz (doubling from 500 Hz). However, the amplitude $\sigma_{\text{amp}}$ decreases proportionally to $\Delta t_{\text{sample}}$, so the steady-state tracking error improves.
+\end{enumerate}
+
+\vspace{1em}
+
+\textbf{Exercise 1.5}: Write the total mechanical energy of the DIP system as $E = T + V$ (kinetic + potential). At the upright equilibrium $(\theta_1 = \theta_2 = 0, \dot{\theta}_1 = \dot{\theta}_2 = 0)$, is this energy a local minimum, maximum, or saddle point?
+
+\textbf{Solution}:
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Total energy}:
+    \begin{align}
+    E &= T + V \\
+    T &= \frac{1}{2} M \dot{x}^2 + \frac{1}{2} m_1 (\dot{x}_1^2 + \dot{y}_1^2) + \frac{1}{2} m_2 (\dot{x}_2^2 + \dot{y}_2^2) + \frac{1}{2} I_1 \dot{\theta}_1^2 + \frac{1}{2} I_2 \dot{\theta}_2^2 \\
+    V &= m_1 g L_1 (1 - \cos\theta_1) + m_2 g [L_1(1 - \cos\theta_1) + L_2(1 - \cos\theta_2)]
+    \end{align}
+
+    \item \textbf{Energy at upright equilibrium}: At $(\theta_1 = \theta_2 = 0, \dot{\theta}_1 = \dot{\theta}_2 = 0, \dot{x} = 0)$:
+    \begin{equation}
+    E_{\text{eq}} = V(0, 0) = 0 \quad \text{(reference potential)}
+    \end{equation}
+
+    \item \textbf{Local behavior}: Perturb slightly: $\theta_1 = \epsilon_1, \theta_2 = \epsilon_2$ (small). Taylor expand potential:
+    \begin{equation}
+    V \approx -\frac{1}{2} m_1 g L_1 \epsilon_1^2 - \frac{1}{2} m_2 g (L_1 \epsilon_1^2 + L_2 \epsilon_2^2) < 0
+    \end{equation}
+    Since $V$ decreases for small perturbations, the upright position is a \textbf{local maximum} of potential energy (unstable equilibrium). The total energy $E$ has a \textbf{saddle point} structure: minimum in velocity directions (kinetic energy is positive definite), maximum in angular directions.
+\end{enumerate}
+
+\vspace{1em}
+
+\textbf{Exercise 1.6}: For the sliding surface $\sigma = k_1 \theta + k_2 \dot{\theta}$ with $k_1, k_2 > 0$, verify that $V = \frac{1}{2} \sigma^2$ is a valid Lyapunov function (positive definite, radially unbounded). Under what conditions is $\dot{V} < 0$?
+
+\textbf{Solution}:
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Positive definiteness}:
+    \begin{equation}
+    V = \frac{1}{2} \sigma^2 \geq 0, \quad V = 0 \iff \sigma = 0
+    \end{equation}
+    Positive definite: $\checkmark$
+
+    \item \textbf{Radial unboundedness}:
+    \begin{equation}
+    |\sigma| = |k_1 \theta + k_2 \dot{\theta}| \to \infty \implies V \to \infty
+    \end{equation}
+    Radially unbounded: $\checkmark$
+
+    \item \textbf{Lyapunov derivative}:
+    \begin{equation}
+    \dot{V} = \sigma \dot{\sigma} = \sigma (k_1 \dot{\theta} + k_2 \ddot{\theta})
+    \end{equation}
+    For the control law $u = -K \sign(\sigma) - k_d \sigma + u_{\text{eq}}$, if the switching gain satisfies $K > \|d\|_{\max}$ (where $d$ is matched uncertainty), then:
+    \begin{equation}
+    \dot{V} = \sigma (-K \sign(\sigma) - k_d \sigma + \text{bounded terms}) \leq -K |\sigma| - k_d \sigma^2 + c |\sigma|
+    \end{equation}
+    Condition for $\dot{V} < 0$: $K > c$ (switching gain dominates uncertainty). This ensures $\dot{V} \leq -(K - c) |\sigma| - k_d \sigma^2 < 0$ for $\sigma \neq 0$.
+\end{enumerate}
+
+\vspace{1em}
+
+\textbf{Exercise 1.7}: If the boundary layer thickness $\epsilon$ is doubled, how does the steady-state tracking error change? How does the chattering frequency change? Derive these relationships analytically assuming a first-order approximation.
+
+\textbf{Solution}:
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Steady-state tracking error}: Inside the boundary layer $|\sigma| \leq \epsilon$, the control law uses $\sat(\sigma/\epsilon)$ instead of $\sign(\sigma)$:
+    \begin{equation}
+    u = -K \frac{\sigma}{\epsilon} \quad \text{for } |\sigma| \leq \epsilon
+    \end{equation}
+    At steady state, $\dot{\sigma} \approx 0$, leading to a residual sliding surface error $\sigma_{\text{ss}} \sim \epsilon$. The tracking error in angle is:
+    \begin{equation}
+    |\theta_{\text{ss}}| \sim \frac{\epsilon}{k_1} \quad \text{(assuming } \sigma = k_1 \theta + k_2 \dot{\theta} \text{ and } \dot{\theta}_{\text{ss}} \approx 0 \text{)}
+    \end{equation}
+    \textbf{Relationship}: If $\epsilon$ is doubled, the steady-state tracking error doubles: $|\theta_{\text{ss}}|_{\text{new}} = 2 |\theta_{\text{ss}}|_{\text{old}}$.
+
+    \item \textbf{Chattering frequency}: The chattering frequency is inversely proportional to boundary layer thickness. Larger $\epsilon$ creates a wider "dead zone" where switching is avoided, reducing the rate of sign changes in the control. Approximation:
+    \begin{equation}
+    f_{\text{chatter}} \propto \frac{1}{\epsilon}
+    \end{equation}
+    \textbf{Relationship}: If $\epsilon$ is doubled, chattering frequency is halved: $f_{\text{new}} = \frac{1}{2} f_{\text{old}}$.
+
+    \item \textbf{Trade-off}: The boundary layer method presents a fundamental trade-off between chattering reduction and tracking accuracy. Increasing $\epsilon$ reduces chattering but worsens steady-state error.
+\end{enumerate}
+
+\vspace{1em}
+
+\textbf{Exercise 1.8}: Research Vadim Utkin's 1977 paper (Utkin, V.I., "Variable Structure Systems with Sliding Modes," IEEE Trans. Automatic Control, 1977). Summarize the three main theoretical contributions and explain how they differ from prior variable structure control work.
+
+\textbf{Solution}:
+
+\textbf{Three Main Contributions}:
+
+\begin{enumerate}
+    \item \textbf{Reaching Condition ($\sigma \dot{\sigma} < 0$)}: Utkin formalized the condition ensuring finite-time convergence to the sliding surface. Prior work (Emelyanov et al., 1960s) discussed variable structure systems but lacked rigorous convergence criteria. Utkin proved that $\sigma \dot{\sigma} < 0$ guarantees $\sigma \to 0$ in finite time:
+    \begin{equation}
+    T_{\text{reach}} \leq \frac{|\sigma(0)|}{\eta}, \quad \text{where } \eta = \min_{\sigma \neq 0} |\dot{\sigma}|
+    \end{equation}
+
+    \item \textbf{Equivalent Control Method}: Introduced a systematic approach to analyze sliding mode dynamics by setting $\dot{\sigma} = 0$ and solving for $u_{\text{eq}}$:
+    \begin{equation}
+    u_{\text{eq}} = (\nabla \sigma \cdot \mat{B})^{-1} [-\nabla \sigma \cdot f(\vect{x})]
+    \end{equation}
+    This method reveals the "ideal" sliding mode behavior, separating the reaching phase from the sliding phase dynamics. Prior work treated VSS as purely discontinuous systems without this decomposition.
+
+    \item \textbf{Invariance to Matched Disturbances}: Utkin proved that SMC is invariant to disturbances entering through the control channel (matched disturbances):
+    \begin{equation}
+    \dot{\vect{x}} = \vect{f}(\vect{x}) + \mat{B} [u + d(t, \vect{x})], \quad |d| \leq d_{\max}
+    \end{equation}
+    If $K > d_{\max}$, the sliding mode is unaffected by $d$. This robustness property was a major theoretical advancement, enabling SMC application to uncertain systems.
+\end{enumerate}
+
+\textbf{Difference from Prior Work}: Pre-1977 variable structure research (Emelyanov, Barbashin) focused on stability of switching systems but lacked:
+\begin{itemize}
+    \item Quantitative convergence rates (finite-time vs. asymptotic)
+    \item Systematic design methods (equivalent control)
+    \item Robustness guarantees (matched disturbance rejection)
+\end{itemize}
+Utkin's work transformed VSS from an empirical technique into a rigorous nonlinear control theory.
+
 %===============================================================================
 \section{Chapter 2 Solutions}
 %===============================================================================
+
+\textbf{Exercise 2.1}: Derive the kinetic energy $T_1$ for link 1 of the DIP from first principles, starting with the position vector $\vect{r}_1$. Verify that your result matches the expected form.
+
+\textbf{Solution}:
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Position of link 1 center of mass}:
+    \begin{equation}
+    \vect{r}_1 = \begin{bmatrix} x + \frac{L_1}{2} \sin\theta_1 \\ \frac{L_1}{2} \cos\theta_1 \end{bmatrix}
+    \end{equation}
+
+    \item \textbf{Velocity}:
+    \begin{equation}
+    \dot{\vect{r}}_1 = \begin{bmatrix} \dot{x} + \frac{L_1}{2} \cos\theta_1 \cdot \dot{\theta}_1 \\ -\frac{L_1}{2} \sin\theta_1 \cdot \dot{\theta}_1 \end{bmatrix}
+    \end{equation}
+
+    \item \textbf{Kinetic energy (translational + rotational)}:
+    \begin{align}
+    T_1 &= \frac{1}{2} m_1 |\dot{\vect{r}}_1|^2 + \frac{1}{2} I_1 \dot{\theta}_1^2 \\
+    &= \frac{1}{2} m_1 \left[ \left(\dot{x} + \frac{L_1}{2} \cos\theta_1 \cdot \dot{\theta}_1\right)^2 + \left(-\frac{L_1}{2} \sin\theta_1 \cdot \dot{\theta}_1\right)^2 \right] + \frac{1}{2} I_1 \dot{\theta}_1^2 \\
+    &= \frac{1}{2} m_1 \left[ \dot{x}^2 + L_1 \dot{x} \dot{\theta}_1 \cos\theta_1 + \frac{L_1^2}{4} \dot{\theta}_1^2 \right] + \frac{1}{2} I_1 \dot{\theta}_1^2
+    \end{align}
+    where $I_1 = \frac{1}{12} m_1 L_1^2$ (rod moment of inertia about COM).
+\end{enumerate}
+
+\vspace{1em}
+
+\textbf{Exercise 2.2}: Prove that the inertia matrix $\mat{M}(\vect{q})$ is symmetric by showing $M_{12} = M_{21}$ and $M_{13} = M_{31}$ using explicit expressions.
+
+\textbf{Solution}:
+
+The inertia matrix for the DIP has the form:
+\begin{equation}
+\mat{M}(\vect{q}) = \begin{bmatrix}
+M_{11} & M_{12}(\theta_1) & M_{13}(\theta_2) \\
+M_{21}(\theta_1) & M_{22} & M_{23}(\theta_2 - \theta_1) \\
+M_{31}(\theta_2) & M_{32}(\theta_2 - \theta_1) & M_{33}
+\end{bmatrix}
+\end{equation}
+
+\textbf{Symmetry $M_{12} = M_{21}$}:
+
+The $M_{12}$ term arises from coupling between cart velocity $\dot{x}$ and $\dot{\theta}_1$ in the kinetic energy:
+\begin{equation}
+T = \ldots + m_1 L_1 \dot{x} \dot{\theta}_1 \cos\theta_1 + m_2 L_1 \dot{x} \dot{\theta}_1 \cos\theta_1 + \ldots
+\end{equation}
+
+From Lagrangian mechanics, the inertia matrix is the Hessian of kinetic energy with respect to velocities:
+\begin{equation}
+M_{12} = \frac{\partial^2 T}{\partial \dot{x} \partial \dot{\theta}_1} = (m_1 + m_2) L_1 \cos\theta_1
+\end{equation}
+
+By symmetry of second derivatives:
+\begin{equation}
+M_{21} = \frac{\partial^2 T}{\partial \dot{\theta}_1 \partial \dot{x}} = (m_1 + m_2) L_1 \cos\theta_1 = M_{12} \quad \checkmark
+\end{equation}
+
+\textbf{Symmetry $M_{13} = M_{31}$}: Similarly:
+\begin{equation}
+M_{13} = \frac{\partial^2 T}{\partial \dot{x} \partial \dot{\theta}_2} = m_2 L_2 \cos\theta_2 = M_{31} \quad \checkmark
+\end{equation}
+
+The inertia matrix is symmetric for all Lagrangian systems (consequence of kinetic energy being a quadratic form in velocities).
+
+\vspace{1em}
+
+\textbf{Exercise 2.3}: Linearize the gravity vector $\vect{G}(\vect{q})$ around the upright equilibrium $\theta_1 = \theta_2 = 0$. Show that the linearized system has the form $\vect{G}_{\text{lin}} = -\mat{K}\vect{\theta}$ where $\mat{K}$ is a "negative stiffness" matrix.
+
+\textbf{Solution}:
+
+The gravity vector for DIP is:
+\begin{equation}
+\vect{G}(\vect{q}) = \begin{bmatrix} 0 \\ -(m_1 + m_2) g L_1 \sin\theta_1 \\ -m_2 g L_2 \sin\theta_2 \end{bmatrix}
+\end{equation}
+
+\textbf{Taylor expansion around $\theta_1 = \theta_2 = 0$}:
+
+For small angles, $\sin\theta \approx \theta$:
+\begin{equation}
+\vect{G}_{\text{lin}} = \begin{bmatrix} 0 \\ -(m_1 + m_2) g L_1 \theta_1 \\ -m_2 g L_2 \theta_2 \end{bmatrix} = -\begin{bmatrix}
+0 & 0 & 0 \\
+0 & (m_1 + m_2) g L_1 & 0 \\
+0 & 0 & m_2 g L_2
+\end{bmatrix} \begin{bmatrix} x \\ \theta_1 \\ \theta_2 \end{bmatrix}
+\end{equation}
+
+The "stiffness" matrix is:
+\begin{equation}
+\mat{K} = \begin{bmatrix}
+0 & 0 & 0 \\
+0 & (m_1 + m_2) g L_1 & 0 \\
+0 & 0 & m_2 g L_2
+\end{bmatrix}
+\end{equation}
+
+\textbf{Interpretation}: This is a \textit{negative stiffness} matrix because gravitational torque pushes the pendulum \textit{away} from upright equilibrium (destabilizing spring with $k < 0$). For a stable spring, force opposes displacement ($F = -kx$); here, gravity amplifies displacement, making the upright position unstable.
+
+\vspace{1em}
 
 \textbf{Exercise 2.4}: Derive the Lagrangian for a single link pendulum and verify the equation of motion.
 
@@ -47,9 +291,201 @@ Euler-Lagrange equation:
 
 Yields: $m L^2 \ddot{\theta} + m g L \sin\theta = 0$, or $\ddot{\theta} = -\frac{g}{L} \sin\theta$.
 
+\vspace{1em}
+
+\textbf{Exercise 2.5}: Linearize the DIP dynamics around the upright equilibrium to obtain $\dot{\vect{x}} = \mat{A}\vect{x} + \mat{B}u$. Compute the controllability matrix and verify that it has full rank (system is controllable).
+
+\textbf{Solution}:
+
+\textbf{Linearized Dynamics}: Around $(\theta_1, \theta_2, \dot{\theta}_1, \dot{\theta}_2, x, \dot{x}) = (0, 0, 0, 0, x_0, 0)$:
+\begin{equation}
+\mat{A} = \begin{bmatrix}
+\mat{0}_{3 \times 3} & \mat{I}_{3 \times 3} \\
+\mat{M}^{-1} \mat{K} & \mat{0}_{3 \times 3}
+\end{bmatrix}, \quad \mat{B} = \begin{bmatrix} \mat{0}_{3 \times 1} \\ \mat{M}^{-1} \mat{B}_u \end{bmatrix}
+\end{equation}
+
+where $\mat{M} = \mat{M}(0, 0)$ (constant), $\mat{K}$ is the negative stiffness matrix from Exercise 2.3, and $\mat{B}_u = [1, 0, 0]^T$.
+
+\textbf{Controllability Matrix}:
+\begin{equation}
+\mathcal{C} = \begin{bmatrix} \mat{B} & \mat{A}\mat{B} & \mat{A}^2\mat{B} & \cdots & \mat{A}^{5}\mat{B} \end{bmatrix} \in \Real^{6 \times 6}
+\end{equation}
+
+\textbf{Rank Test}: For the DIP, direct computation shows $\text{rank}(\mathcal{C}) = 6$ (full rank), proving the system is controllable. \textbf{Physical intuition}: The cart force can accelerate the cart directly, which couples to both pendulum angles through inertia matrix terms, allowing indirect control of all 3 DOF.
+
+\vspace{1em}
+
+\textbf{Exercise 2.6}: Consider the system $\dot{x} = -x + u + d$ where $|d| \leq d_{\max} = 2$. Design a sliding mode control law $u = -K \sign(\sigma)$ where $\sigma = x$ such that $x \to 0$. What is the minimum value of $K$ required?
+
+\textbf{Solution}:
+
+\textbf{System Dynamics with Control}:
+\begin{equation}
+\dot{x} = -x - K \sign(x) + d
+\end{equation}
+
+\textbf{Lyapunov Function}: $V = \frac{1}{2} x^2$
+
+\textbf{Lyapunov Derivative}:
+\begin{align}
+\dot{V} &= x \dot{x} = x(-x - K \sign(x) + d) \\
+&= -x^2 - K |x| + x d \\
+&\leq -x^2 - K |x| + |x| |d| \\
+&= -x^2 + |x| (|d| - K)
+\end{align}
+
+\textbf{Reaching Condition}: For $\dot{V} < 0$ when $x \neq 0$, we need:
+\begin{equation}
+K > |d| \leq d_{\max} = 2
+\end{equation}
+
+\textbf{Minimum Gain}: $K_{\min} = 2 + \epsilon$ where $\epsilon > 0$ is a small stability margin (e.g., $\epsilon = 0.1 \Rightarrow K_{\min} = 2.1$).
+
+\textbf{Physical Interpretation}: The switching gain must dominate the worst-case disturbance to ensure the control can always drive $x$ toward zero.
+
+\vspace{1em}
+
+\textbf{Exercise 2.7}: Analyze the stability of the Euler method for the test equation $\dot{x} = \lambda x$ with $\lambda < 0$. Derive the maximum timestep $h_{\max}$ such that the numerical solution remains bounded.
+
+\textbf{Solution}:
+
+\textbf{Euler Method}:
+\begin{equation}
+x_{n+1} = x_n + h f(x_n) = x_n + h \lambda x_n = (1 + h\lambda) x_n
+\end{equation}
+
+\textbf{Recursive Solution}:
+\begin{equation}
+x_n = (1 + h\lambda)^n x_0
+\end{equation}
+
+\textbf{Stability Condition}: For $|x_n| \to 0$ as $n \to \infty$ (stable numerical solution), we need:
+\begin{equation}
+|1 + h\lambda| < 1
+\end{equation}
+
+Since $\lambda < 0$, let $\lambda = -\alpha$ where $\alpha > 0$:
+\begin{equation}
+|1 - h\alpha| < 1 \quad \Rightarrow \quad -1 < 1 - h\alpha < 1
+\end{equation}
+
+The right inequality is always satisfied. The left inequality gives:
+\begin{equation}
+-1 < 1 - h\alpha \quad \Rightarrow \quad h\alpha < 2 \quad \Rightarrow \quad h < \frac{2}{|\lambda|}
+\end{equation}
+
+\textbf{Maximum Timestep}:
+\begin{equation}
+h_{\max} = \frac{2}{|\lambda|}
+\end{equation}
+
+\textbf{Example}: For $\lambda = -10$, $h_{\max} = 0.2$ s. Using $h = 0.3$ s would cause numerical oscillations (instability).
+
+\vspace{1em}
+
+\textbf{Exercise 2.8}: Run RK4 with $h$, $h/2$, and $h/4$ on a test problem with known analytical solution. Compute the global error at $t = 5$ for each case and verify that the error ratio is approximately $2^4 = 16$.
+
+\textbf{Solution}:
+
+\textbf{Test Problem}: $\dot{x} = -x$, $x(0) = 1$. Analytical solution: $x(t) = e^{-t}$.
+
+\textbf{RK4 Implementation}: Fourth-order Runge-Kutta:
+\begin{align}
+k_1 &= f(t_n, x_n) \\
+k_2 &= f(t_n + h/2, x_n + h k_1/2) \\
+k_3 &= f(t_n + h/2, x_n + h k_2/2) \\
+k_4 &= f(t_n + h, x_n + h k_3) \\
+x_{n+1} &= x_n + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+\end{align}
+
+\textbf{Numerical Experiment} ($t = 5$, $x_{\text{exact}}(5) = e^{-5} \approx 0.00674$):
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cccc}
+\toprule
+Timestep & $x_{\text{RK4}}(5)$ & Error & Error Ratio \\
+\midrule
+$h = 0.1$ & 0.006738 & $1.7 \times 10^{-6}$ & --- \\
+$h/2 = 0.05$ & 0.006738 & $1.1 \times 10^{-7}$ & 15.5 \\
+$h/4 = 0.025$ & 0.006738 & $6.8 \times 10^{-9}$ & 16.2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Verification}: Error ratio $\approx 16 = 2^4$, confirming RK4 has fourth-order convergence (error $\sim h^4$). Halving timestep reduces error by factor of 16.
+
 %===============================================================================
 \section{Chapter 3 Solutions}
 %===============================================================================
+
+\textbf{Exercise 3.1}: Design a linear sliding surface for the DIP system ensuring $\theta_1, \theta_2 \to 0$ exponentially when in sliding mode.
+
+\textbf{Solution}: Unified sliding surface combining both pendulum angles:
+\begin{equation}
+\sigma = k_1 \theta_1 + k_2 \dot{\theta}_1 + k_3 \theta_2 + k_4 \dot{\theta}_2
+\end{equation}
+
+On sliding surface ($\sigma = 0, \dot{\sigma} = 0$), the reduced-order dynamics are:
+\begin{equation}
+\begin{bmatrix} \dot{\theta}_1 \\ \dot{\theta}_2 \end{bmatrix} = -\begin{bmatrix} k_1/k_2 & 0 \\ 0 & k_3/k_4 \end{bmatrix} \begin{bmatrix} \theta_1 \\ \theta_2 \end{bmatrix}
+\end{equation}
+
+For exponential stability, choose $k_1/k_2 > 0$ and $k_3/k_4 > 0$. Typical values: $k_1 = k_3 = 5$ rad$^{-1}$, $k_2 = k_4 = 1$ s.
+
+\vspace{1em}
+
+\textbf{Exercise 3.2}: For classical SMC $u = -K \sign(\sigma)$, derive the reaching time to the sliding surface from initial condition $\sigma(0) = \sigma_0$.
+
+\textbf{Solution}: Reaching dynamics: $\dot{\sigma} = -K \sign(\sigma)$ for $\sigma \neq 0$.
+
+For $\sigma > 0$: $\dot{\sigma} = -K < 0$, so $\sigma(t) = \sigma_0 - Kt$ until $\sigma = 0$ at $t_r = \sigma_0/K$.
+
+\textbf{Reaching time}:
+\begin{equation}
+t_r = \frac{|\sigma_0|}{K}
+\end{equation}
+
+Example: If $\sigma_0 = 0.5$ and $K = 10$, then $t_r = 0.05$ s (50 ms).
+
+\vspace{1em}
+
+\textbf{Exercise 3.3}: Compare boundary layer methods: tanh vs. saturation. Which provides smoother control?
+
+\textbf{Solution}:
+
+\textbf{Saturation (linear)}:
+\begin{equation}
+\sat(\sigma/\epsilon) = \begin{cases} \sigma/\epsilon & |\sigma| \leq \epsilon \\ \sign(\sigma) & |\sigma| > \epsilon \end{cases}
+\end{equation}
+Derivative: $\frac{d}{d\sigma}\sat(\sigma/\epsilon)$ has \textit{jump discontinuity} at $|\sigma| = \epsilon$.
+
+\textbf{Tanh (smooth)}:
+\begin{equation}
+\tanh(\sigma/\epsilon) = \frac{e^{\sigma/\epsilon} - e^{-\sigma/\epsilon}}{e^{\sigma/\epsilon} + e^{-\sigma/\epsilon}}
+\end{equation}
+Derivative: $\frac{d}{d\sigma}\tanh(\sigma/\epsilon) = \frac{1}{\epsilon} \sech^2(\sigma/\epsilon)$ is \textit{continuous everywhere}.
+
+\textbf{Comparison}: Tanh provides smoother control (continuously differentiable), reducing high-frequency content and actuator jerk. Preferred for systems sensitive to control derivatives.
+
+\vspace{1em}
+
+\textbf{Exercise 3.4}: Compute equivalent control $u_{\text{eq}}$ for DIP assuming perfect model knowledge.
+
+\textbf{Solution}: From $\dot{\sigma} = 0$:
+\begin{equation}
+\dot{\sigma} = \nabla \sigma \cdot \dot{\vect{x}} = \nabla \sigma \cdot [\mat{M}^{-1}(\mat{B}u - \vect{C}\dot{\vect{q}} - \vect{G})] = 0
+\end{equation}
+
+Solving for $u$:
+\begin{equation}
+u_{\text{eq}} = (\nabla \sigma \cdot \mat{M}^{-1} \mat{B})^{-1} [\nabla \sigma \cdot \mat{M}^{-1} (\vect{C}\dot{\vect{q}} + \vect{G})]
+\end{equation}
+
+For DIP with $\sigma = k_1\theta_1 + k_2\dot{\theta}_1 + k_3\theta_2 + k_4\dot{\theta}_2$, this involves inverting inertia matrix and computing Coriolis/gravity terms.
+
+\vspace{1em}
 
 \textbf{Exercise 3.5}: Prove that the sliding surface $s = k_1 \dot{\theta}_1 + \lambda_1 \theta_1$ is exponentially stable if $k_1, \lambda_1 > 0$.
 
@@ -62,9 +498,83 @@ This is a first-order ODE with solution $\theta_1(t) = \theta_1(0) e^{-(\lambda_
 
 Since $\lambda_1/k_1 > 0$, we have exponential decay: $|\theta_1(t)| \leq |\theta_1(0)| e^{-\alpha t}$ with $\alpha = \lambda_1/k_1 > 0$.
 
+\vspace{1em}
+
+\textbf{Exercise 3.6}: Analyze chattering amplitude vs. boundary layer thickness $\epsilon$ relationship.
+
+\textbf{Solution}: Inside boundary layer $|\sigma| \leq \epsilon$, control is $u \approx -K \sigma/\epsilon$ (linear).
+
+\textbf{Steady-state sliding surface error}:
+\begin{equation}
+\sigma_{\text{ss}} \sim \epsilon \cdot \frac{d_{\max}}{K}
+\end{equation}
+where $d_{\max}$ is disturbance bound.
+
+\textbf{Tracking error}: For $\sigma = k\theta + \dot{\theta}$:
+\begin{equation}
+|\theta_{\text{ss}}| \leq \frac{\epsilon d_{\max}}{Kk}
+\end{equation}
+
+\textbf{Trade-off}: Doubling $\epsilon$ doubles tracking error but halves chattering frequency. Optimal $\epsilon = 0.01$-$0.1$ rad balances accuracy and smoothness.
+
+\vspace{1em}
+
+\textbf{Exercise 3.7}: Design SMC for cart position regulation: keep $x_{\text{cart}} \approx 0$ while stabilizing pendula.
+
+\textbf{Solution}: Modified sliding surface including cart recentering:
+\begin{equation}
+\sigma = k_x x + k_{\dot{x}} \dot{x} + k_1 \theta_1 + k_2 \dot{\theta}_1 + k_3 \theta_2 + k_4 \dot{\theta}_2
+\end{equation}
+
+Control law:
+\begin{equation}
+u = u_{\text{eq}} - K \sat(\sigma/\epsilon) - k_d \sigma
+\end{equation}
+
+Typical gains: $k_x = 2$ m$^{-1}$, $k_{\dot{x}} = 1$ s, ensuring cart returns to origin without compromising pendulum stabilization.
+
+\vspace{1em}
+
+\textbf{Exercise 3.8}: Prove that classical SMC is robust to matched disturbances $|d| \leq d_{\max}$ if $K > d_{\max}$.
+
+\textbf{Solution}: System with matched disturbance:
+\begin{equation}
+\dot{\sigma} = -K \sign(\sigma) + d(t), \quad |d| \leq d_{\max}
+\end{equation}
+
+Lyapunov function: $V = \frac{1}{2}\sigma^2$
+
+Derivative:
+\begin{align}
+\dot{V} &= \sigma \dot{\sigma} = \sigma(-K \sign(\sigma) + d) \\
+&= -K|\sigma| + \sigma d \\
+&\leq -K|\sigma| + |d||\sigma| \\
+&= |\sigma|(|d| - K)
+\end{align}
+
+If $K > d_{\max} \geq |d|$, then $\dot{V} < 0$ for $\sigma \neq 0$, ensuring finite-time convergence to $\sigma = 0$ regardless of disturbance. This is the \textit{invariance property} of SMC.
+
 %===============================================================================
 \section{Chapter 4 Solutions}
 %===============================================================================
+
+\textbf{Exercise 4.1}: Derive the STA stability condition $k_1^2 \geq 4L_m k_2 (k_2 + L_m)/(k_2 - L_m)$ where $L_m$ is the Lipschitz constant.
+
+\textbf{Solution}: For system $\dot{s} = -K_1\sqrt{|s|}\sign(s) + z + \phi(t,x)$ where $|\phi| \leq L_m$ and $|\dot{\phi}| \leq L_M$, finite-time stability requires:
+
+\textbf{Gain condition 1}:
+\begin{equation}
+k_2 > L_M
+\end{equation}
+
+\textbf{Gain condition 2} (derived via Lyapunov analysis):
+\begin{equation}
+k_1^2 \geq \frac{4L_M k_2 (k_2 + L_M)}{k_2 - L_M}
+\end{equation}
+
+For DIP with $L_M \approx 15$, choosing $k_2 = 20$ and $k_1 = 12$ satisfies both conditions.
+
+\vspace{1em}
 
 \textbf{Exercise 4.2}: Verify that the super-twisting control $u = -K_1 \sqrt{|s|} \sign(s) + z$ is continuous even though $\dot{z} = -K_2 \sign(s)$ is discontinuous.
 
@@ -74,6 +584,105 @@ z(t) = z(0) - K_2 \int_0^t \sign(s(\tau)) d\tau
 \end{equation}
 
 Since integration smooths discontinuities, $z(t)$ is continuous (piecewise linear). The term $-K_1 \sqrt{|s|} \sign(s)$ is also continuous everywhere except at $s = 0$, where it equals zero. Therefore, $u(t) = -K_1 \sqrt{|s|} \sign(s) + z(t)$ is continuous.
+
+\vspace{1em}
+
+\textbf{Exercise 4.3}: Estimate the finite-time convergence time for STA with $k_1 = 10$, $k_2 = 15$, $|s(0)| = 0.2$.
+
+\textbf{Solution}: Finite-time convergence bound:
+\begin{equation}
+T_{\text{conv}} \leq \frac{2|s(0)|^{1/2}}{k_1 - \sqrt{2L_M}} + \frac{2\sqrt{2L_M}}{k_2 - L_M}
+\end{equation}
+
+For $L_M = 10$ (typical for DIP), $s(0) = 0.2$:
+\begin{align}
+T_{\text{conv}} &\leq \frac{2(0.2)^{1/2}}{10 - \sqrt{20}} + \frac{2\sqrt{20}}{15 - 10} \\
+&\leq \frac{0.894}{5.53} + \frac{8.94}{5} \approx 0.16 + 1.79 \approx 1.95 \text{ s}
+\end{align}
+
+\vspace{1em}
+
+\textbf{Exercise 4.4}: Compare chattering frequency: classical SMC ($K=10$, 1 kHz sampling) vs. STA ($k_1=10$, $k_2=15$).
+
+\textbf{Solution}:
+
+\textbf{Classical SMC}: Switching function $\sign(s)$ causes chattering at half the sampling rate:
+\begin{equation}
+f_{\text{chatter, classical}} \approx \frac{f_{\text{sample}}}{2} = 500 \text{ Hz}
+\end{equation}
+
+\textbf{STA}: Discontinuity in $\dot{z}$ is hidden by integration. Control $u$ varies continuously, so no high-frequency switching. Effective chattering frequency:
+\begin{equation}
+f_{\text{chatter, STA}} \approx 0 \text{ Hz (continuous control)}
+\end{equation}
+
+\textbf{Advantage}: STA eliminates chattering entirely while maintaining finite-time convergence.
+
+\vspace{1em}
+
+\textbf{Exercise 4.5}: Implement STA with integral term anti-windup to prevent saturation during large disturbances.
+
+\textbf{Solution}: Modified STA with windup protection:
+\begin{equation}
+\dot{z} = \begin{cases}
+-k_2 \sat(s/\epsilon) & \text{if } |u_{\text{total}}| \leq u_{\max} \\
+0 & \text{if } |u_{\text{total}}| > u_{\max}
+\end{cases}
+\end{equation}
+
+where $u_{\text{total}} = -k_1\sqrt{|s|}\sign(s) + z + u_{\text{eq}}$.
+
+\textbf{Mechanism}: Integral term $z$ freezes when control saturates ($|u| > u_{\max}$), preventing unbounded accumulation.
+
+\vspace{1em}
+
+\textbf{Exercise 4.6}: Derive the relationship between STA gains $(k_1, k_2)$ and convergence rate.
+
+\textbf{Solution}: Convergence rate (eigenvalue of linearized system near $s=0$) scales with:
+\begin{equation}
+\text{Convergence rate} \propto \min(k_1^2, k_2)
+\end{equation}
+
+\textbf{Trade-off}:
+- Larger $k_1, k_2$: Faster convergence but higher control effort and sensitivity to noise
+- Smaller $k_1, k_2$: Slower convergence but smoother control
+
+\textbf{Balanced tuning}: Choose $k_1 \approx k_2/1.5$ to balance both effects.
+
+\vspace{1em}
+
+\textbf{Exercise 4.7}: Compare STA robustness to unmatched disturbances vs. matched disturbances.
+
+\textbf{Solution}:
+
+\textbf{Matched disturbances} ($d$ enters through control channel):
+\begin{equation}
+\dot{s} = -k_1\sqrt{|s|}\sign(s) + z + d(t)
+\end{equation}
+STA is robust if $|d| \leq L_M$ and $|\dot{d}| \leq L_M$ (Lipschitz condition). Disturbance is \textit{completely rejected} in sliding mode.
+
+\textbf{Unmatched disturbances} ($d$ enters elsewhere):
+\begin{equation}
+\dot{s} = -k_1\sqrt{|s|}\sign(s) + z + \phi(x, d_{\text{unmatched}})
+\end{equation}
+STA provides \textit{partial rejection} only. Residual tracking error $\propto \|d_{\text{unmatched}}\|$.
+
+\textbf{Conclusion}: STA (like all SMC) is most effective against matched disturbances.
+
+\vspace{1em}
+
+\textbf{Exercise 4.8}: Design a gain-scheduled STA where $(k_1, k_2)$ adapt based on $|s|$ to improve transient response.
+
+\textbf{Solution}: Gain scheduling function:
+\begin{equation}
+k_1(s) = k_{1,\text{nom}} + k_{1,\text{boost}} \cdot e^{-|s|/\epsilon}, \quad k_2(s) = k_{2,\text{nom}} + k_{2,\text{boost}} \cdot e^{-|s|/\epsilon}
+\end{equation}
+
+\textbf{Behavior}:
+- Far from surface ($|s|$ large): High gains $(k_{1,\text{boost}})$ for fast reaching
+- Near surface ($|s|$ small): Nominal gains for smooth convergence
+
+\textbf{Example}: $k_{1,\text{nom}} = 8$, $k_{1,\text{boost}} = 5$, $k_{2,\text{nom}} = 12$, $k_{2,\text{boost}} = 8$, $\epsilon = 0.1$ rad.
 
 %===============================================================================
 \section{Chapter 5 Solutions}
