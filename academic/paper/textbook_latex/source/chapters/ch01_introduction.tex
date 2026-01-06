@@ -79,8 +79,8 @@ The double-inverted pendulum (DIP) consists of two rigid links connected in seri
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.6\textwidth]{figures/placeholder_dip_schematic.png}
-\caption[Double-Inverted Pendulum Configuration]{Configuration of the double-inverted pendulum system. The cart (mass $M$) moves horizontally along a rail under control force $u$. Two pendula (masses $m_1, m_2$, lengths $L_1, L_2$) are connected in series. Angles $\theta_1$ and $\theta_2$ are measured from the vertical, with the upright equilibrium at $\theta_1 = \theta_2 = 0$. This system has 3 DOF ($x_{\text{cart}}, \theta_1, \theta_2$) but only 1 actuator ($u$), making it underactuated.}
+\includegraphics[width=0.75\textwidth]{figures/ch01_introduction/system_overview.png}
+\caption[Double-Inverted Pendulum System Overview]{System overview of the double-inverted pendulum benchmark. The cart (mass $M$) moves horizontally along a rail under control force $u$. Two pendula (masses $m_1, m_2$, lengths $L_1, L_2$) are connected in series. Angles $\theta_1$ and $\theta_2$ are measured from the vertical, with the upright equilibrium at $\theta_1 = \theta_2 = 0$. This system has 3 DOF ($x_{\text{cart}}, \theta_1, \theta_2$) but only 1 actuator ($u$), making it underactuated with 67\% underactuation ratio.}
 \label{fig:intro:dip_schematic}
 \end{figure}
 
@@ -384,6 +384,13 @@ The controllers presented in this book are implemented in a production-quality P
     \item \textbf{Comprehensive Testing}: Unit tests, integration tests, and property-based tests ensure correctness
     \item \textbf{Performance Optimization}: Numba JIT compilation for simulation-critical code
 \end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/ch01_introduction/control_loop.png}
+\caption[SMC Control Loop Block Diagram]{Block diagram of the sliding mode control loop architecture. The \textbf{Controller} computes control input $u$ based on state error $\vect{e} = \vect{x}_{\text{ref}} - \vect{x}$ and sliding surface $\sigma$. The \textbf{Plant} (DIP dynamics) evolves according to nonlinear equations of motion. \textbf{Sensors} measure cart position and pendulum angles ($x, \theta_1, \theta_2$) with optional state estimation for velocities. The control law enforces $\dot{\sigma} < 0$ to drive the system toward the sliding manifold $\sigma = 0$, ensuring convergence to equilibrium.}
+\label{fig:intro:control_loop}
+\end{figure}
 
 \subsection{Key Components}
 
