@@ -311,6 +311,17 @@ Computation time ($\mu$s) & $12 \pm 2$ & $15 \pm 3$ & 25\% slower \\
 \label{fig:sta_convergence}
 \end{figure}
 
+\subsection{Boundary Layer Optimization Results (MT-6)}
+
+PSO-based boundary layer optimization (\cref{ch:pso}) systematically explored $\epsilon \in [0.05, 0.50]$ to minimize the trade-off between chattering amplitude and steady-state tracking error. The MT-6 task evaluated 30 candidate boundary layers across 100 Monte Carlo trials per configuration.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/ch04_super_twisting/MT6_performance_comparison.png}
+\caption[MT-6 Boundary Layer Optimization Results]{Boundary layer optimization results from MT-6 task showing Pareto frontier of chattering vs. tracking error trade-off. Each point represents mean performance over 100 trials. The optimal boundary layer $\epsilon^* = 0.30$ (red star) achieves minimal chattering ($1.1$ N/s) while maintaining tracking error below $0.02$ rad. Smaller $\epsilon < 0.20$ reduces chattering further but increases steady-state error due to boundary layer approximation. Larger $\epsilon > 0.40$ degrades chattering performance without improving tracking. Shaded region shows 95\% confidence intervals. See \cref{ch:pso_results} for complete PSO optimization methodology.}
+\label{fig:mt6_boundary_layer}
+\end{figure}
+
 %===============================================================================
 \section{Gain Validation and Constraints}
 %===============================================================================

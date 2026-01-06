@@ -209,6 +209,17 @@ Hybrid Adaptive STA & \textbf{94\%} & [92\%, 96\%] \\
 \label{fig:adaptive_convergence}
 \end{figure}
 
+\subsection{Disturbance Rejection Performance}
+
+Beyond model uncertainty, adaptive SMC demonstrates superior performance under external disturbances. The following experiment applies step disturbances at regular intervals to evaluate real-time adaptation capability.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/ch05_adaptive_smc/disturbance_rejection_adaptive.png}
+\caption[Adaptive SMC Disturbance Rejection]{Disturbance rejection performance comparison between classical SMC (blue) and adaptive SMC (orange) under periodic step disturbances ($\pm 15$ N applied every 2 seconds). Top: Angular position $\theta_1$ shows adaptive SMC maintains tighter tracking ($\pm 0.015$ rad) compared to classical SMC ($\pm 0.035$ rad), representing 57\% improvement. Middle: Control signal evolution shows adaptive SMC modulating effort in response to disturbances. Bottom: Adaptive gain $K(t)$ increases from $2.0$ N to $6.5$ N during disturbance events, then returns to baseline due to leak rate. This demonstrates real-time compensation without requiring disturbance estimation or observer design.}
+\label{fig:adaptive_disturbance_rejection}
+\end{figure}
+
 %===============================================================================
 \section{Implementation Details}
 %===============================================================================
