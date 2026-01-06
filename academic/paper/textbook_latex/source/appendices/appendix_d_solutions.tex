@@ -814,6 +814,37 @@ This is the gradient adaptation law that minimizes the Lyapunov function.
 
 \vspace{1em}
 
+\textbf{Exercise 5.4}: Design an adaptive law with saturation to prevent gain from exceeding actuator limits.
+
+\textbf{Solution}: Modified adaptation law with gain saturation:
+\begin{equation}
+\dot{\hat{K}} = \begin{cases}
+\gamma |\sigma| - \alpha \hat{K} & \text{if } \hat{K}_{\min} < \hat{K} < \hat{K}_{\max} \\
+\max(0, \gamma |\sigma| - \alpha \hat{K}) & \text{if } \hat{K} = \hat{K}_{\min} \\
+\min(0, \gamma |\sigma| - \alpha \hat{K}) & \text{if } \hat{K} = \hat{K}_{\max}
+\end{cases}
+\end{equation}
+
+\textbf{Bounds}: For DIP with actuator limit $|u_{\max}| = 50$ N, choose $\hat{K}_{\min} = 1$ N, $\hat{K}_{\max} = 40$ N to prevent saturation while allowing adaptation range.
+
+\vspace{1em}
+
+\textbf{Exercise 5.5}: Compare adaptation rates: fast ($\gamma = 10$) vs. slow ($\gamma = 1$). Which provides better transient response?
+
+\textbf{Solution}:
+
+\textbf{Fast adaptation} ($\gamma = 10$):
+- \textbf{Pros}: Rapid gain increase during disturbance onset, shorter reaching time
+- \textbf{Cons}: Sensitive to noise, potential overshoot, gain oscillations
+
+\textbf{Slow adaptation} ($\gamma = 1$):
+- \textbf{Pros}: Smooth gain evolution, robust to noise
+- \textbf{Cons}: Delayed response to sudden disturbances, longer convergence
+
+\textbf{Optimal strategy}: Use gain scheduling: $\gamma(|\sigma|) = \gamma_{\text{fast}} \cdot e^{-t/\tau} + \gamma_{\text{slow}}$ where $\tau = 2$ s. Start fast, taper to slow.
+
+\vspace{1em}
+
 \textbf{Exercise 5.6}: Explain why a dead-zone $\delta = 0.01$ rad prevents chattering-induced adaptation.
 
 \textbf{Solution}: Chattering causes rapid oscillations of the sliding surface around zero ($|s| < \delta$). Without a dead-zone, the adaptation law $\dot{K} = \gamma |s| \sign(s)$ would continuously update gains in response to these high-frequency oscillations, causing:
@@ -832,6 +863,37 @@ The dead-zone freezes adaptation when $|s| < \delta$:
 \end{equation}
 
 This ensures adaptation only occurs when the system is genuinely far from the sliding surface, not during normal chattering behavior.
+
+\vspace{1em}
+
+\textbf{Exercise 5.7}: Derive the steady-state adapted gain $\hat{K}^*$ for constant disturbance $d = 5$ N.
+
+\textbf{Solution}: At equilibrium, $\dot{\hat{K}} = 0$:
+\begin{equation}
+\gamma |\sigma_{\text{ss}}| - \alpha \hat{K}^* = 0 \quad \Rightarrow \quad \hat{K}^* = \frac{\gamma |\sigma_{\text{ss}}|}{\alpha}
+\end{equation}
+
+For classical SMC with $\dot{\sigma} = -\hat{K} \sign(\sigma) + d$, steady-state requires $\hat{K}^* \geq d = 5$ N. With $\alpha = 0.1$ s$^{-1}$, $\gamma = 5$, and typical $|\sigma_{\text{ss}}| = 0.1$ rad:
+\begin{equation}
+\hat{K}^* = \frac{5 \times 0.1}{0.1} = 5 \text{ N}
+\end{equation}
+
+This exactly matches the disturbance magnitude, confirming optimal adaptation.
+
+\vspace{1em}
+
+\textbf{Exercise 5.8}: Implement dead-zone with hysteresis to prevent rapid switching at boundary.
+
+\textbf{Solution}: Hysteresis dead-zone:
+\begin{equation}
+\dot{\hat{K}} = \begin{cases}
+\gamma |\sigma| - \alpha \hat{K} & \text{if } |\sigma| > \delta_{\text{upper}} \\
+-\alpha \hat{K} & \text{if } |\sigma| < \delta_{\text{lower}} \\
+\text{maintain} & \text{if } \delta_{\text{lower}} \leq |\sigma| \leq \delta_{\text{upper}}
+\end{cases}
+\end{equation}
+
+Typical values: $\delta_{\text{lower}} = 0.008$ rad, $\delta_{\text{upper}} = 0.012$ rad. The hysteresis band $[\delta_{\text{lower}}, \delta_{\text{upper}}]$ prevents chattering of the adaptation mechanism itself.
 
 %===============================================================================
 \section{Chapter 6 Solutions}
