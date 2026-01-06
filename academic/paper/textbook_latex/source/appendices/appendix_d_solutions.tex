@@ -76,6 +76,131 @@ z(t) = z(0) - K_2 \int_0^t \sign(s(\tau)) d\tau
 Since integration smooths discontinuities, $z(t)$ is continuous (piecewise linear). The term $-K_1 \sqrt{|s|} \sign(s)$ is also continuous everywhere except at $s = 0$, where it equals zero. Therefore, $u(t) = -K_1 \sqrt{|s|} \sign(s) + z(t)$ is continuous.
 
 %===============================================================================
+\section{Chapter 5 Solutions}
+%===============================================================================
+
+\textbf{Exercise 5.2}: Derive the gradient adaptation law for the adaptive gain $K$ from the Lyapunov function $V = \frac{1}{2} s^2 + \frac{1}{2\gamma} \tilde{K}^2$.
+
+\textbf{Solution}: Taking the time derivative:
+\begin{equation}
+\dot{V} = s \dot{s} + \frac{1}{\gamma} \tilde{K} \dot{\tilde{K}}
+\end{equation}
+
+For sliding dynamics $\dot{s} = -K |s| + d(t)$ where $d(t)$ is bounded disturbance, we have:
+\begin{equation}
+\dot{V} = s(-K |s| + d) + \frac{1}{\gamma} \tilde{K} \dot{\tilde{K}}
+\end{equation}
+
+To ensure $\dot{V} < 0$, choose $\dot{\tilde{K}} = \gamma |s| \sign(s)$. Since $\tilde{K} = K - K^*$ where $K^*$ is constant, we get:
+\begin{equation}
+\dot{K} = \gamma |s| \sign(s)
+\end{equation}
+
+This is the gradient adaptation law that minimizes the Lyapunov function.
+
+\vspace{1em}
+
+\textbf{Exercise 5.6}: Explain why a dead-zone $\delta = 0.01$ rad prevents chattering-induced adaptation.
+
+\textbf{Solution}: Chattering causes rapid oscillations of the sliding surface around zero ($|s| < \delta$). Without a dead-zone, the adaptation law $\dot{K} = \gamma |s| \sign(s)$ would continuously update gains in response to these high-frequency oscillations, causing:
+\begin{itemize}
+    \item Unnecessary gain variation
+    \item Amplification of sensor noise
+    \item Instability in the adaptive mechanism
+\end{itemize}
+
+The dead-zone freezes adaptation when $|s| < \delta$:
+\begin{equation}
+\dot{K} = \begin{cases}
+\gamma (|s| - \delta)_+ \sign(s) & \text{if } |s| \geq \delta \\
+0 & \text{if } |s| < \delta
+\end{cases}
+\end{equation}
+
+This ensures adaptation only occurs when the system is genuinely far from the sliding surface, not during normal chattering behavior.
+
+%===============================================================================
+\section{Chapter 6 Solutions}
+%===============================================================================
+
+\textbf{Exercise 6.3}: For the hybrid controller with dual-gain adaptation, verify that both $K_1$ and $K_2$ must satisfy the STA stability conditions at all times.
+
+\textbf{Solution}: The STA stability conditions (Moreno-Osorio) require:
+\begin{align}
+K_2 &> L_m \quad \text{(disturbance Lipschitz bound)} \\
+K_1^2 &\geq \frac{4 L_m K_2 (K_2 + L_m)}{K_2 - L_m}
+\end{align}
+
+For the hybrid controller, both gains evolve:
+\begin{align}
+\dot{K}_1(t) &= \gamma_1 \sqrt{|s|} (|s| - \delta)_+ \sign(s) - \alpha_1 K_1 \\
+\dot{K}_2(t) &= \gamma_2 (|s| - \delta)_+ \sign(s) - \alpha_2 K_2
+\end{align}
+
+At initialization, we must choose $K_1(0), K_2(0)$ satisfying the stability conditions. The leak rates $\alpha_1, \alpha_2$ ensure gains remain bounded. However, during transients, the adaptive gains may temporarily violate the coupling condition $K_1^2 \geq \frac{4 L_m K_2 (K_2 + L_m)}{K_2 - L_m}$, which can cause loss of finite-time convergence. To prevent this, we add a projection operator:
+\begin{equation}
+K_1(t) \gets \max\left( K_1(t), \sqrt{\frac{4 L_m K_2(t) (K_2(t) + L_m)}{K_2(t) - L_m}} \right)
+\end{equation}
+
+This ensures the stability conditions are maintained throughout adaptation.
+
+\vspace{1em}
+
+\textbf{Exercise 6.5}: Derive the state-dependent lambda scheduling function and explain its effect on sliding surface dynamics.
+
+\textbf{Solution}: The scheduled lambda is:
+\begin{equation}
+\lambda_i(t) = \lambda_i^0 \cdot f(\|\vect{\theta}\|) = \lambda_i^0 \cdot \left(1 + \beta \exp\left( -\frac{\|\vect{\theta}\|^2}{2\sigma^2} \right)\right)
+\end{equation}
+
+Effect on sliding surface:
+\begin{itemize}
+    \item \textbf{Near equilibrium} ($\|\vect{\theta}\| \approx 0$): $f \approx 1 + \beta$, so $\lambda_i \approx (1 + \beta) \lambda_i^0$. Larger lambda increases convergence speed: $\dot{\theta}_i = -\frac{\lambda_i}{k_i} \theta_i$ has faster decay.
+    \item \textbf{Far from equilibrium} ($\|\vect{\theta}\| \gg \sigma$): $f \approx 1$, so $\lambda_i \approx \lambda_i^0$. Nominal lambda reduces overshoot during large transients.
+\end{itemize}
+
+The scheduling improves local convergence (near equilibrium) while maintaining global stability (far from equilibrium).
+
+%===============================================================================
+\section{Chapter 7 Solutions}
+%===============================================================================
+
+\textbf{Exercise 7.4}: For a PSO with swarm size $N_p = 30$ and maximum iterations $I_{\max} = 50$, compute the total number of fitness evaluations required.
+
+\textbf{Solution}: Each iteration evaluates fitness for all $N_p$ particles. Total evaluations:
+\begin{equation}
+N_{\text{eval}} = N_p \times I_{\max} = 30 \times 50 = 1500 \text{ evaluations}
+\end{equation}
+
+If each evaluation requires 10 s simulation time, total optimization time is:
+\begin{equation}
+T_{\text{opt}} = 1500 \times 10 \text{ s} = 15{,}000 \text{ s} = 4.17 \text{ hours}
+\end{equation}
+
+With Numba JIT acceleration (10x speedup), this reduces to $\sim$25 minutes.
+
+\vspace{1em}
+
+\textbf{Exercise 7.6}: Explain why inertia weight $\omega$ should decrease from 0.9 to 0.4 during PSO iterations.
+
+\textbf{Solution}: The inertia weight balances exploration and exploitation:
+\begin{equation}
+\vect{v}_{k+1} = \omega \vect{v}_k + c_1 r_1 (\vect{p}_k - \vect{x}_k) + c_2 r_2 (\vect{g}_k - \vect{x}_k)
+\end{equation}
+
+\begin{itemize}
+    \item \textbf{Early iterations} ($\omega = 0.9$): High inertia maintains particle momentum, enabling global exploration of the search space. Particles can escape local minima.
+    \item \textbf{Late iterations} ($\omega = 0.4$): Low inertia reduces momentum, allowing particles to converge tightly around the global best. Exploitation phase refines the solution.
+\end{itemize}
+
+Linear decrease:
+\begin{equation}
+\omega(i) = 0.9 - \frac{i}{50} (0.9 - 0.4) = 0.9 - 0.01 \cdot i
+\end{equation}
+
+This adaptive strategy prevents premature convergence while ensuring final solution quality.
+
+%===============================================================================
 \section{Chapter 8 Solutions}
 %===============================================================================
 
@@ -89,6 +214,159 @@ Since integration smooths discontinuities, $z(t)$ is continuous (piecewise linea
 &= [0.35, -0.21] + [-0.16, -0.40] + [-0.48, -0.96] \\
 &= [-0.29, -1.57]
 \end{align}
+
+%===============================================================================
+\section{Chapter 9 Solutions}
+%===============================================================================
+
+\textbf{Exercise 9.2}: Compute the robust fitness function for a controller that achieves $J_{\text{nominal}} = 8.5$ and $J_{\text{disturbed}} = [10.2, 9.8]$ (step and impulse disturbances). Use 50\% nominal, 50\% disturbed weighting.
+
+\textbf{Solution}: The robust fitness is:
+\begin{equation}
+J_{\text{robust}} = 0.5 \cdot J_{\text{nominal}} + 0.5 \cdot \frac{1}{N_{\text{dist}}} \sum_{i=1}^{N_{\text{dist}}} J_{\text{dist},i}
+\end{equation}
+
+With $N_{\text{dist}} = 2$ disturbance scenarios:
+\begin{align}
+J_{\text{robust}} &= 0.5 \cdot 8.5 + 0.5 \cdot \frac{1}{2} (10.2 + 9.8) \\
+&= 4.25 + 0.5 \cdot 10.0 \\
+&= 4.25 + 5.0 \\
+&= 9.25
+\end{align}
+
+\vspace{1em}
+
+\textbf{Exercise 9.7}: Given that PSO-optimized gains show 50.4x chattering degradation when tested on 6x larger perturbations (MT-7 result), explain the root cause and propose a solution.
+
+\textbf{Solution}: \textbf{Root Cause}: Overfitting to narrow training distribution. PSO optimized gains for $\pm 0.05$ rad perturbations, but test used $\pm 0.3$ rad (6x larger). The resulting gains are specialized for small errors and violate Lyapunov stability conditions for large sliding variable magnitudes.
+
+\textbf{Proposed Solutions}:
+\begin{enumerate}
+    \item \textbf{Multi-scenario training}: Modify fitness function to include worst-case penalty:
+    \begin{equation}
+    J_{\text{robust}} = 0.5 \cdot J_{\text{nominal}} + 0.3 \cdot J_{\text{large}} + 0.2 \cdot \max_i J_i
+    \end{equation}
+    where $J_{\text{large}}$ evaluates performance on $\pm 0.3$ rad perturbations.
+
+    \item \textbf{Adaptive boundary layer}: Use state-dependent $\epsilon(|\sigma|) = \epsilon_{\min} + \alpha |\sigma|$ to accommodate varying sliding surface magnitudes.
+
+    \item \textbf{Lyapunov-constrained PSO}: Add constraint that gains must satisfy $K_2 > L_m$ and $K_1^2 \geq \frac{4 L_m K_2 (K_2 + L_m)}{K_2 - L_m}$ for the worst-case sliding variable magnitude.
+\end{enumerate}
+
+%===============================================================================
+\section{Chapter 10 Solutions}
+%===============================================================================
+
+\textbf{Exercise 10.3}: A controller achieves 8.2° overshoot under 10 N step disturbance. Using the linear degradation model (0.7°/N), predict the overshoot under 15 N and 20 N disturbances.
+
+\textbf{Solution}: Linear model: $M_p = M_{p,0} + \beta (F - F_0)$ where $\beta = 0.7$ °/N.
+
+At $F_0 = 10$ N: $M_p = 8.2$°
+
+\textbf{At 15 N}:
+\begin{equation}
+M_p(15) = 8.2 + 0.7 \cdot (15 - 10) = 8.2 + 3.5 = 11.7°
+\end{equation}
+
+\textbf{At 20 N}:
+\begin{equation}
+M_p(20) = 8.2 + 0.7 \cdot (20 - 10) = 8.2 + 7.0 = 15.2°
+\end{equation}
+
+\textbf{Validity}: Model valid up to divergence threshold (typically 25 N for DIP). Above 20 N, nonlinear effects dominate.
+
+\vspace{1em}
+
+\textbf{Exercise 10.8}: Given that Adaptive SMC shows 5.1\% settling time degradation under ±20\% parameter uncertainty while Classical SMC shows 31.6\% degradation, calculate the relative robustness improvement.
+
+\textbf{Solution}: Relative improvement:
+\begin{equation}
+\text{Improvement} = \frac{\text{Classical degradation} - \text{Adaptive degradation}}{\text{Classical degradation}} \times 100\%
+\end{equation}
+
+\begin{equation}
+= \frac{31.6\% - 5.1\%}{31.6\%} \times 100\% = \frac{26.5\%}{31.6\%} \times 100\% = 83.9\%
+\end{equation}
+
+Adaptive SMC reduces settling time degradation by 83.9\% compared to Classical SMC under ±20\% uncertainty. This demonstrates the effectiveness of online gain adaptation for compensating model mismatch.
+
+%===============================================================================
+\section{Chapter 11 Solutions}
+%===============================================================================
+
+\textbf{Exercise 11.2}: Design a Kalman filter for the DIP system with encoder measurement noise $\sigma_\theta = 0.1$° and zero process noise. Write the measurement equation.
+
+\textbf{Solution}: State vector: $\vect{x} = [x, \theta_1, \theta_2, \dot{x}, \dot{\theta}_1, \dot{\theta}_2]^T$
+
+Measurement equation (angles only):
+\begin{equation}
+\vect{y} = \begin{bmatrix} \theta_1 \\ \theta_2 \end{bmatrix} = \begin{bmatrix} 0 & 1 & 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 & 0 & 0 \end{bmatrix} \vect{x} + \vect{v}
+\end{equation}
+
+Measurement noise covariance:
+\begin{equation}
+R = \begin{bmatrix} \sigma_\theta^2 & 0 \\ 0 & \sigma_\theta^2 \end{bmatrix} = \begin{bmatrix} (0.1 \pi/180)^2 & 0 \\ 0 & (0.1 \pi/180)^2 \end{bmatrix} \text{ rad}^2
+\end{equation}
+
+The Kalman filter provides optimal state estimates $\hat{\vect{x}}$ by fusing the noisy measurements with the DIP dynamics model, reducing velocity estimation noise by $\sim$70\% compared to numerical differentiation.
+
+\vspace{1em}
+
+\textbf{Exercise 11.5}: Explain three advantages of model-free reinforcement learning over PSO for controller gain optimization.
+
+\textbf{Solution}:
+\begin{enumerate}
+    \item \textbf{Online adaptation}: RL agents (e.g., TD3, SAC) adapt gains in real-time based on observed state-action-reward, while PSO requires offline batch optimization.
+
+    \item \textbf{No fitness function engineering}: RL learns directly from sparse rewards (e.g., +1 for upright, -1 for fall), while PSO requires carefully weighted multi-objective fitness $J = w_1 t_s + w_2 M_p + w_3 \sigma_u + w_4 E$.
+
+    \item \textbf{Generalization to unseen states}: RL policies generalize via neural network function approximation, while PSO gains are static lookup tables that fail on out-of-distribution states (MT-7 50.4x degradation example).
+\end{enumerate}
+
+\textbf{Tradeoffs}: RL requires 10-100x more training samples, lacks theoretical guarantees, and is sensitive to hyperparameters. PSO is sample-efficient and interpretable.
+
+%===============================================================================
+\section{Chapter 12 Solutions}
+%===============================================================================
+
+\textbf{Exercise 12.3}: In the HIL validation experiment, simulation predicted 8.2° overshoot but hardware achieved 9.7° (18.3\% gap). Identify three sources of this sim-hardware gap.
+
+\textbf{Solution}:
+\begin{enumerate}
+    \item \textbf{Actuator dynamics}: Simulation assumes instantaneous torque, but real DC motors have 0.05 s time constant causing phase lag. This delay increases overshoot by $\sim$10-15\%.
+
+    \item \textbf{Sensor quantization}: Encoders have 0.01° resolution. Near the sliding surface, quantization causes discrete jumps in control signal, increasing chattering and transient overshoot by $\sim$5\%.
+
+    \item \textbf{Model mismatch}: Real DIP has friction (Coulomb + viscous), joint flexibility, and cable drag not modeled in simulation. Combined effect adds $\sim$3-5\% performance degradation.
+\end{enumerate}
+
+\textbf{Mitigation}: Include second-order actuator model $\ddot{u} + 2\zeta\omega_n \dot{u} + \omega_n^2 u = \omega_n^2 u_{\text{cmd}}$ with $\omega_n = 2\pi \cdot 20$ rad/s (20 Hz bandwidth) to capture motor dynamics. Add Coulomb friction term $F_c \sign(\dot{x})$ to cart dynamics. These improvements reduce sim-hardware gap to $<$10\%.
+
+\vspace{1em}
+
+\textbf{Exercise 12.6}: For a plant-controller HIL setup with 50 Hz sampling rate and 10 ms communication delay, determine if the system remains stable under the Nyquist criterion.
+
+\textbf{Solution}: Sampling period: $\Delta t = 1/50 = 0.02$ s = 20 ms
+
+Total loop delay: $\tau = 10$ ms (communication) + 5 ms (computation) = 15 ms
+
+Phase lag at Nyquist frequency ($f_N = 25$ Hz):
+\begin{equation}
+\phi = -360° \cdot f_N \cdot \tau = -360° \cdot 25 \cdot 0.015 = -135°
+\end{equation}
+
+For a typical SMC open-loop system with gain margin GM = 12 dB and phase margin PM = 45°:
+\begin{itemize}
+    \item Required PM for stability: $>$ 0°
+    \item Actual PM with delay: $45° - 135° = -90°$ (unstable!)
+\end{itemize}
+
+\textbf{Conclusion}: System becomes unstable. \textbf{Solutions}:
+\begin{enumerate}
+    \item Increase sampling rate to 100 Hz ($\Delta t = 10$ ms, $\phi = -90°$, PM = -45° still unstable)
+    \item Increase to 200 Hz ($\Delta t = 5$ ms, $\phi = -54°$, PM = -9° marginally stable)
+    \item Add Smith predictor to compensate 10 ms delay: $u_{\text{comp}}(t) = u(t + \tau)$ restores PM to 45°
+\end{enumerate}
 
 %===============================================================================
 % END OF APPENDIX D
