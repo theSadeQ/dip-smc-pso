@@ -2,11 +2,11 @@
 % CHAPTER 5: ADAPTIVE SLIDING MODE CONTROL
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Adaptive Sliding Mode Control}
+\chapter{Adaptive Sliding Mode Control\index{sliding mode control}\index{sliding mode control}}
 \label{ch:adaptive_smc}
 
 \begin{chapterabstract}
-This chapter presents adaptive sliding mode control for systems with model uncertainty and time-varying disturbances. We derive gradient-based adaptation laws from extended Lyapunov functions, introduce dead-zone and leak-rate mechanisms for robustness, and analyze stability under bounded parameter variations. Implementation details include rate limiting, envelope saturation, and online gain evolution. Experimental validation demonstrates 92\% success rate under 20\% parameter uncertainty, outperforming classical SMC (85\%) and STA-SMC (88\%).
+This chapter presents adaptive sliding mode control for systems with model uncertainty\index{uncertainty}\index{model uncertainty}\index{model uncertainty} and time-varying disturbances. We derive gradient-based adaptation laws from extended Lyapunov\index{Lyapunov stability}\index{Lyapunov stability} functions, introduce dead-zone and leak-rate mechanisms for robustness\index{robustness}\index{robustness}, and analyze stability\index{stability} under bounded parameter variations. Implementation details include rate limiting, envelope saturation, and online gain evolution. Experimental validation demonstrates 92\% success rate under 20\% parameter uncertainty, outperforming classical SMC (85\%) and STA-SMC (88\%).
 \end{chapterabstract}
 
 %===============================================================================
@@ -16,9 +16,9 @@ This chapter presents adaptive sliding mode control for systems with model uncer
 Classical SMC (\cref{ch:classical_smc}) and STA-SMC (\cref{ch:super_twisting}) assume fixed gains. However, real systems exhibit:
 
 \begin{itemize}
-    \item \textbf{Model uncertainty}: Actual DIP parameters ($m_1, m_2, L_1, L_2$) differ from nominal values by $\pm 10-20\%$
+    \item \textbf{Model uncertainty}: Actual DIP\index{double-inverted pendulum|see{DIP}}\index{double-inverted pendulum|see{DIP}} parameters ($m_1, m_2, L_1, L_2$) differ from nominal values by $\pm 10-20\%$
     \item \textbf{Time-varying disturbances}: External forces, friction, actuator degradation change over time
-    \item \textbf{Unmodeled dynamics}: Flexible links, joint backlash, sensor noise
+    \item \textbf{Unmodeled dynamics}: Flexible links, joint backlash, sensor noise\index{sensor noise}
 \end{itemize}
 
 \textbf{Solution}: Adapt the control gains online to compensate for uncertainties without requiring precise system identification.
@@ -29,7 +29,7 @@ Classical SMC (\cref{ch:classical_smc}) and STA-SMC (\cref{ch:super_twisting}) a
 
 \subsection{Extended Lyapunov Function}
 
-For adaptive SMC, we augment the standard Lyapunov function with gain error terms:
+For adaptive SMC\index{sliding mode control!adaptive}\index{sliding mode control!adaptive}, we augment the standard Lyapunov function with gain error terms:
 
 \begin{equation}
 V(s, \tilde{K}) = \frac{1}{2} s^2 + \frac{1}{2\gamma} \tilde{K}^2
@@ -38,7 +38,7 @@ V(s, \tilde{K}) = \frac{1}{2} s^2 + \frac{1}{2\gamma} \tilde{K}^2
 
 where:
 \begin{itemize}
-    \item $s$ is the sliding surface (\cref{eq:sliding_surface})
+    \item $s$ is the sliding surface\index{sliding surface}\index{sliding surface} (\cref{eq:sliding_surface})
     \item $\tilde{K} = K - K^*$ is the gain error ($K^*$ is the ideal gain)
     \item $\gamma > 0$ is the adaptation rate
 \end{itemize}
@@ -67,7 +67,7 @@ This is the \textbf{gradient adaptation law}.
 
 \subsection{Dead-Zone Mechanism}
 
-To prevent adaptation during chattering (when $|s| < \delta$), we introduce a dead-zone:
+To prevent adaptation during chattering\index{chattering}\index{chattering} (when $|s| < \delta$), we introduce a dead-zone:
 
 \begin{equation}
 \dot{K} = \begin{cases}
@@ -118,7 +118,7 @@ Here $(x)_+ = \max(x, 0)$ denotes the positive part.
 
 \subsection{Discrete-Time Implementation}
 
-For simulation with time step $\Delta t$:
+For simulation\index{simulation} with time step $\Delta t$:
 
 \begin{align}
 K[k+1] &= K[k] + \gamma (|s[k]| - \delta)_+ \sign(s[k]) \Delta t - \alpha K[k] \Delta t \\
@@ -159,7 +159,7 @@ Inside the dead-zone ($|s| < \delta$), the adaptation law reduces to:
 
 which has solution $K(t) = K(0) e^{-\alpha t}$. Thus $K(t) \to 0$ as $t \to \infty$.
 
-Outside the dead-zone, the worst-case steady-state gain is:
+Outside the dead-zone, the worst-case\index{worst-case analysis} steady-state gain is:
 
 \begin{equation}
 K_{\text{ss}} = \frac{\gamma |s|}{\alpha} \leq \frac{\gamma \delta}{\alpha}
@@ -211,7 +211,7 @@ Hybrid Adaptive STA & \textbf{94\%} & [92\%, 96\%] \\
 
 \subsection{Disturbance Rejection Performance}
 
-Beyond model uncertainty, adaptive SMC demonstrates superior performance under external disturbances. The following experiment applies step disturbances at regular intervals to evaluate real-time adaptation capability.
+Beyond model uncertainty, adaptive SMC demonstrates superior performance under external disturbances. The following experiment applies step disturbances at regular intervals to evaluate real-time\index{real-time control} adaptation capability.
 
 \begin{figure}[ht]
 \centering

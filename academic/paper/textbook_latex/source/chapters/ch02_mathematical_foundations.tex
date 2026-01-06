@@ -6,7 +6,7 @@
 \chapter{Mathematical Foundations}
 \label{ch:mathematical_foundations}
 
-This chapter develops the mathematical prerequisites for sliding mode controller design. We derive the complete equations of motion for the double-inverted pendulum using Lagrangian mechanics, introduce Lyapunov stability theory for analyzing convergence, discuss controllability and observability concepts, and present numerical integration methods for simulation. Readers already familiar with these topics may skip to \cref{ch:classical_smc}.
+This chapter develops the mathematical prerequisites for sliding mode controller design. We derive the complete equations of motion for the double-inverted pendulum\index{double-inverted pendulum}\index{double-inverted pendulum} using Lagrangian\index{Lagrangian mechanics}\index{Lagrangian mechanics} mechanics, introduce Lyapunov\index{Lyapunov stability}\index{Lyapunov stability} stability\index{stability} theory for analyzing convergence\index{convergence}, discuss controllability\index{controllability}\index{controllability} and observability concepts, and present numerical integration methods for simulation\index{simulation}. Readers already familiar with these topics may skip to \cref{ch:classical_smc}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lagrangian Mechanics}
@@ -80,13 +80,13 @@ The double-inverted pendulum consists of:
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/ch02_foundations/NEW_free_body_diagram.png}
-\caption[DIP Free-Body Diagram]{Free-body diagram showing all forces and torques acting on the double-inverted pendulum system. The diagram illustrates gravitational forces $m_1g$ and $m_2g$ acting at the centers of mass, reaction forces at the pivot points, and the control force $u$ applied horizontally to the cart. This forms the basis for deriving the equations of motion using Lagrangian mechanics.}
+\caption[DIP\index{double-inverted pendulum|see{DIP}}\index{double-inverted pendulum|see{DIP}} Free-Body Diagram]{Free-body diagram showing all forces and torques acting on the double-inverted pendulum system. The diagram illustrates gravitational forces $m_1g$ and $m_2g$ acting at the centers of mass, reaction forces at the pivot points, and the control force $u$ applied horizontally to the cart. This forms the basis for deriving the equations of motion using Lagrangian mechanics.}
 \label{fig:math:free_body}
 \end{figure}
 
 \subsection{Generalized Coordinates}
 
-The system has 3 degrees of freedom with generalized coordinates:
+The system has 3 degrees of freedom\index{degrees of freedom}\index{degrees of freedom} with generalized coordinates\index{generalized coordinates}\index{generalized coordinates}:
 \begin{equation}
 \vect{q} = \begin{bmatrix} x_{\text{cart}} \\ \theta_1 \\ \theta_2 \end{bmatrix} \in \Real^3
 \end{equation}
@@ -164,7 +164,7 @@ T_2 = \frac{1}{2}m_2 v_2^2 + \frac{1}{2}I_2 \dot{\theta}_2^2
 T = T_c + T_1 + T_2 = \frac{1}{2}\dot{\vect{q}}^T \mat{M}(\vect{q}) \dot{\vect{q}}
 \end{equation}
 
-where $\mat{M}(\vect{q}) \in \Real^{3 \times 3}$ is the configuration-dependent inertia matrix (explicit form in \cref{sec:math:mass_matrix}).
+where $\mat{M}(\vect{q}) \in \Real^{3 \times 3}$ is the configuration-dependent inertia matrix\index{inertia matrix}\index{inertia matrix} (explicit form in \cref{sec:math:mass_matrix}).
 
 \subsection{Potential Energy}
 
@@ -185,7 +185,7 @@ V = g\left[\left(\frac{m_1}{2} + m_2\right)L_1\cos\theta_1 + \frac{m_2 L_2}{2}\c
 \end{equation}
 
 \begin{remark}
-At the upright equilibrium ($\theta_1 = \theta_2 = 0$), the potential energy is:
+At the upright equilibrium\index{equilibrium}\index{equilibrium} ($\theta_1 = \theta_2 = 0$), the potential energy is:
 \begin{equation}
 V_0 = g\left[\left(\frac{m_1}{2} + m_2\right)L_1 + \frac{m_2 L_2}{2}\right]
 \end{equation}
@@ -210,14 +210,14 @@ Applying the Euler-Lagrange equations (\cref{eq:math:euler_lagrange}) to each ge
 where:
 \begin{itemize}
     \item $\mat{M}(\vect{q}) \in \Real^{3 \times 3}$: Inertia matrix (symmetric, positive definite)
-    \item $\mat{C}(\vect{q}, \dot{\vect{q}}) \in \Real^{3 \times 3}$: Coriolis/centrifugal matrix
+    \item $\mat{C}(\vect{q}, \dot{\vect{q}}) \in \Real^{3 \times 3}$: Coriolis\index{Coriolis forces}\index{Coriolis forces}/centrifugal matrix
     \item $\vect{G}(\vect{q}) \in \Real^3$: Gravity vector
     \item $\vect{F}(\dot{\vect{q}}) \in \Real^3$: Friction vector (viscous damping)
     \item $\mat{B} = [1, 0, 0]^T$: Input distribution matrix (force acts on cart only)
     \item $u \in \Real$: Control force
 \end{itemize}
 
-See \pyfile{src/plant/models/full/dynamics.py} and \pyfile{src/plant/core/physics\_matrices.py} for complete Python implementation of the dynamics equations.
+See \pyfile{src/plant/models/full/dynamics.py} and \pyfile{src/plant/core/physics\_matrices.py} for complete Python\index{Python implementation}\index{Python implementation} implementation of the dynamics equations.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Mass Matrix}
@@ -256,7 +256,7 @@ The inertia matrix satisfies:
 \end{theorem}
 
 \begin{proof}[Proof of Property 4 (Skew-Symmetry)]
-This property is fundamental for passivity-based control. Define $\mat{N} = \dot{\mat{M}} - 2\mat{C}$. For any vector $\vect{z} \in \Real^3$:
+This property is fundamental for passivity\index{passivity-based control}-based control. Define $\mat{N} = \dot{\mat{M}} - 2\mat{C}$. For any vector $\vect{z} \in \Real^3$:
 \begin{equation}
 \vect{z}^T \mat{N} \vect{z} = \vect{z}^T \dot{\mat{M}} \vect{z} - 2\vect{z}^T \mat{C} \vect{z}
 \end{equation}

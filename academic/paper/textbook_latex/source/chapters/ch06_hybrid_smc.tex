@@ -6,7 +6,7 @@
 \label{ch:hybrid_smc}
 
 \begin{chapterabstract}
-This chapter presents a hybrid controller combining super-twisting algorithm (\cref{ch:super_twisting}) with adaptive gain scheduling (\cref{ch:adaptive_smc}). The hybrid approach achieves finite-time convergence, chattering reduction, and robustness to model uncertainty simultaneously. We derive dual-gain adaptation laws, lambda scheduling for state-dependent sliding surfaces, and mode-switching logic. Experimental validation demonstrates best overall performance: 94\% success rate, lowest energy consumption (0.9 J), and minimal chattering (1.0 N/s).
+This chapter presents a hybrid controller combining super-twisting algorithm (\cref{ch:super_twisting}) with adaptive gain scheduling (\cref{ch:adaptive_smc}). The hybrid approach achieves finite-time convergence\index{convergence}, chattering\index{chattering}\index{chattering} reduction, and robustness\index{robustness}\index{robustness} to model uncertainty\index{uncertainty}\index{model uncertainty}\index{model uncertainty} simultaneously. We derive dual-gain adaptation laws, lambda scheduling for state-dependent sliding surfaces, and mode-switching logic. Experimental validation demonstrates best overall performance: 94\% success rate, lowest energy consumption (0.9 J), and minimal chattering (1.0 N/s).
 \end{chapterabstract}
 
 %===============================================================================
@@ -51,7 +51,7 @@ where:
 \end{align}
 \coderef{src/controllers/smc/hybrid_adaptive_sta_smc.py}{201}
 
-\textbf{Coupling}: $K_1$ and $K_2$ must satisfy STA stability conditions (\cref{eq:sta_stability_conditions}) at all times to maintain finite-time convergence.
+\textbf{Coupling}: $K_1$ and $K_2$ must satisfy STA stability\index{stability}\index{stability} conditions (\cref{eq:sta_stability_conditions}) at all times to maintain finite-time convergence.
 
 See \pyfile{src/controllers/smc/hybrid\_adaptive\_sta\_smc.py} for complete implementation combining STA dynamics with dual-gain adaptation. Additional scheduling utilities: \pyfile{src/controllers/adaptive\_gain\_scheduler.py} and \pyfile{src/controllers/sliding\_surface\_scheduler.py}.
 
@@ -73,7 +73,7 @@ where $f(\cdot)$ is a scheduling function. One effective choice is:
 f(\|\vect{\theta}\|) = 1 + \beta \exp\left( -\frac{\|\vect{\theta}\|^2}{2\sigma^2} \right)
 \end{equation}
 
-\textbf{Effect}: Larger $\lambda$ near equilibrium (faster local convergence), smaller $\lambda$ far from equilibrium (reduced overshoot).
+\textbf{Effect}: Larger $\lambda$ near equilibrium\index{equilibrium}\index{equilibrium} (faster local convergence), smaller $\lambda$ far from equilibrium (reduced overshoot\index{performance metrics!overshoot}\index{performance metrics!overshoot}).
 
 %===============================================================================
 \section{Experimental Validation}
@@ -98,7 +98,7 @@ Computation ($\mu$s) & 12 & 15 & 18 & 22 \\
 \end{tabular}
 \end{table}
 
-\textbf{Result}: Hybrid achieves best performance across all metrics except computation time (still $<50$ $\mu$s for real-time control). For comprehensive benchmark comparisons including statistical significance testing, see \cref{ch:benchmarking}.
+\textbf{Result}: Hybrid achieves best performance across all metrics except computation time (still $<50$ $\mu$s for real-time\index{real-time control} control). For comprehensive benchmark comparisons including statistical significance testing, see \cref{ch:benchmarking}.
 
 \begin{figure}[ht]
 \centering
@@ -120,7 +120,7 @@ Energy consumption is a critical metric for embedded control systems where batte
 
 \subsection{Three-Phase Performance Comparison}
 
-Controller performance varies across three distinct phases of the stabilization task: initial swing-up, transient stabilization, and steady-state regulation. The following analysis decomposes performance metrics by phase.
+Controller performance varies across three distinct phases of the stabilization\index{stabilization} task: initial swing-up\index{swing-up control}, transient stabilization, and steady-state regulation. The following analysis decomposes performance metrics by phase.
 
 \begin{figure}[ht]
 \centering
@@ -145,7 +145,7 @@ Controller performance varies across three distinct phases of the stabilization 
 
 \textbf{Trade-off}: 83\% increased computation time ($22$ $\mu$s vs. $12$ $\mu$s) still enables 10 kHz real-time control.
 
-\textbf{Next Steps}: \cref{ch:pso} demonstrates PSO-based multi-objective optimization of hybrid controller gains. Real-world validation and hardware-in-the-loop testing are presented in \cref{ch:case_studies}.
+\textbf{Next Steps}: \cref{ch:pso} demonstrates PSO\index{Particle Swarm Optimization|see{PSO}}\index{Particle Swarm Optimization|see{PSO}}-based multi-objective optimization of hybrid controller gains. Real-world validation and hardware-in-the-loop\index{hardware-in-the-loop} testing are presented in \cref{ch:case_studies}.
 
 %===============================================================================
 % END OF CHAPTER 6

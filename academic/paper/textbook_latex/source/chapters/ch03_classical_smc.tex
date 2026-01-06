@@ -2,18 +2,18 @@
 % CHAPTER 3: CLASSICAL SLIDING MODE CONTROL
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Classical Sliding Mode Control}
+\chapter{Classical Sliding Mode Control\index{sliding mode control}\index{sliding mode control}}
 \label{ch:classical_smc}
 
 \begin{chapterabstract}
-This chapter presents the classical first-order sliding mode control (SMC) approach for the double-inverted pendulum. We derive the sliding surface design, equivalent control computation, and robust discontinuous term. The boundary layer technique is introduced to mitigate chattering while maintaining robustness to matched disturbances. Lyapunov-based stability proofs establish exponential convergence to the sliding manifold. Implementation details including Tikhonov regularization, numerical stability, and gain validation are discussed with references to the production Python codebase.
+This chapter presents the classical first-order sliding mode control (SMC\index{sliding mode control|see{SMC}}\index{sliding mode control|see{SMC}}) approach for the double-inverted pendulum\index{double-inverted pendulum}\index{double-inverted pendulum}. We derive the sliding surface\index{sliding surface}\index{sliding surface} design, equivalent control computation, and robust discontinuous term. The boundary layer\index{boundary layer}\index{boundary layer} technique is introduced to mitigate chattering\index{chattering}\index{chattering} while maintaining robustness\index{robustness}\index{robustness} to matched disturbances. Lyapunov\index{Lyapunov stability}\index{Lyapunov stability}-based stability\index{stability} proofs establish exponential convergence\index{convergence} to the sliding manifold. Implementation details including Tikhonov regularization, numerical stability, and gain validation are discussed with references to the production Python\index{Python implementation}\index{Python implementation} codebase.
 \end{chapterabstract}
 
 %===============================================================================
 \section{Introduction to Sliding Mode Control}
 %===============================================================================
 
-Sliding mode control is a robust nonlinear control technique that forces the system trajectory to converge to a predetermined sliding surface in the state space and remain there for all subsequent time. The fundamental idea, introduced by Utkin in 1977 \cite{Utkin1977}, is to decompose the control design into two phases:
+Sliding mode control is a robust nonlinear control technique that forces the system trajectory to converge to a predetermined sliding surface in the state space\index{state space}\index{state space} and remain there for all subsequent time. The fundamental idea, introduced by Utkin in 1977 \cite{Utkin1977}, is to decompose the control design into two phases:
 
 \begin{enumerate}
     \item \textbf{Reaching Phase}: Drive the system state from arbitrary initial conditions to the sliding surface $s(\vect{x}) = 0$.
@@ -30,7 +30,7 @@ u = u_{\text{eq}} + u_{\text{sw}}
 
 where:
 \begin{itemize}
-    \item $u_{\text{eq}}$ is the \textbf{equivalent control}, a model-based feedforward term that maintains motion along the sliding surface.
+    \item $u_{\text{eq}}$ is the \textbf{equivalent control}, a model-based feedforward\index{feedforward control} term that maintains motion along the sliding surface.
     \item $u_{\text{sw}}$ is the \textbf{switching control}, a discontinuous robust term that drives the state to the surface and rejects disturbances.
 \end{itemize}
 
@@ -77,12 +77,12 @@ where $\mat{A}_s$ depends on $\lambda_i$ and $k_i$. The eigenvalues of $\mat{A}_
 \subsection{Gain Selection Guidelines}
 
 \begin{itemize}
-    \item \textbf{Larger $k_1, k_2$}: Faster convergence on the sliding surface but increased control effort and potential chattering.
+    \item \textbf{Larger $k_1, k_2$}: Faster convergence on the sliding surface but increased control effort\index{performance metrics!control effort}\index{performance metrics!control effort} and potential chattering.
     \item \textbf{Larger $\lambda_1, \lambda_2$}: Stronger coupling between angles, faster transient response.
-    \item \textbf{Trade-off}: Balance settling time (requires high gains) against chattering amplitude (prefers moderate gains).
+    \item \textbf{Trade-off}: Balance settling time\index{performance metrics!settling time}\index{performance metrics!settling time} (requires high gains) against chattering amplitude (prefers moderate gains).
 \end{itemize}
 
-Particle Swarm Optimization (PSO) can systematically explore this trade-off space, as demonstrated in \cref{ch:pso}.
+Particle Swarm Optimization\index{Particle Swarm Optimization}\index{Particle Swarm Optimization} (PSO\index{Particle Swarm Optimization|see{PSO}}\index{Particle Swarm Optimization|see{PSO}}) can systematically explore this trade-off space, as demonstrated in \cref{ch:pso}.
 
 %===============================================================================
 \section{Equivalent Control Derivation}
@@ -90,9 +90,9 @@ Particle Swarm Optimization (PSO) can systematically explore this trade-off spac
 
 \subsection{Physical Interpretation}
 
-The equivalent control $u_{\text{eq}}$ is the control input required to maintain the system on the sliding surface once it has been reached. Mathematically, it is derived by enforcing $\dot{s} = 0$ along the nominal trajectory.
+The equivalent control $u_{\text{eq}}$ is the control input\index{control input}\index{control input} required to maintain the system on the sliding surface once it has been reached. Mathematically, it is derived by enforcing $\dot{s} = 0$ along the nominal trajectory.
 
-For the DIP system with dynamics:
+For the DIP\index{double-inverted pendulum|see{DIP}}\index{double-inverted pendulum|see{DIP}} system with dynamics:
 
 \begin{equation}
 \mat{M}(\vect{q}) \ddot{\vect{q}} + \mat{C}(\vect{q}, \dot{\vect{q}}) \dot{\vect{q}} + \vect{G}(\vect{q}) = \vect{B} u
@@ -156,7 +156,7 @@ u_{\text{eq}} = \frac{\vect{L} \mat{M}_{\text{reg}}^{-1} (\mat{C} \dot{\vect{q}}
 
 \subsection{Controllability Threshold}
 
-If the denominator $\vect{L} \mat{M}^{-1} \vect{B}$ approaches zero, the system is uncontrollable in the direction normal to the sliding surface. To avoid division by near-zero values, we introduce a controllability threshold:
+If the denominator $\vect{L} \mat{M}^{-1} \vect{B}$ approaches zero, the system is uncontrollable in the direction normal to the sliding surface. To avoid division by near-zero values, we introduce a controllability\index{controllability}\index{controllability} threshold:
 
 \begin{equation}
 \text{if } |\vect{L} \mat{M}_{\text{reg}}^{-1} \vect{B}| < \epsilon_{\text{ctrl}}, \quad \text{then } u_{\text{eq}} = 0
@@ -198,7 +198,7 @@ Chattering causes:
 \begin{itemize}
     \item Actuator wear and mechanical stress
     \item Excitation of unmodeled high-frequency dynamics
-    \item Increased energy consumption
+    \item Increased energy consumption\index{performance metrics!energy consumption}\index{performance metrics!energy consumption}
 \end{itemize}
 
 \subsection{Boundary Layer Technique}
@@ -210,7 +210,7 @@ u_{\text{sw}} = -K \sat\left( \frac{s}{\epsilon} \right) - k_d s
 \label{eq:smooth_switching_control}
 \end{equation}
 
-where $\sat(\cdot)$ is a saturation function. Two common choices are:
+where $\sat(\cdot)$ is a saturation function\index{saturation function}. Two common choices are:
 
 \begin{enumerate}
     \item \textbf{Tanh saturation (smooth)}:
@@ -243,12 +243,12 @@ The boundary layer thickness $\epsilon$ determines a fundamental trade-off:
 
 \begin{itemize}
     \item \textbf{Small $\epsilon$}: Closer approximation to ideal SMC, smaller steady-state error, but more chattering.
-    \item \textbf{Large $\epsilon$}: Smooth control, minimal chattering, but larger steady-state tracking error (proportional to $\epsilon$).
+    \item \textbf{Large $\epsilon$}: Smooth control, minimal chattering, but larger steady-state tracking error\index{performance metrics!tracking error} (proportional to $\epsilon$).
 \end{itemize}
 
 \begin{theorem}[Ultimate Boundedness with Boundary Layer]
 \label{thm:ultimate_boundedness}
-For a classical SMC with boundary layer thickness $\epsilon$, the sliding variable $s(t)$ is ultimately bounded within $|s| \leq \mathcal{O}(\epsilon)$ for all $t \geq T_r$, where $T_r$ is the reaching time.
+For a classical SMC\index{sliding mode control!classical}\index{sliding mode control!classical} with boundary layer thickness $\epsilon$, the sliding variable $s(t)$ is ultimately bounded within $|s| \leq \mathcal{O}(\epsilon)$ for all $t \geq T_r$, where $T_r$ is the reaching time.
 \end{theorem}
 
 \begin{proof}
@@ -292,7 +292,7 @@ k_d &\geq 0 \quad \text{(non-negative)}
 These constraints ensure:
 \begin{itemize}
     \item Hurwitz stability of the sliding surface (\cref{thm:hurwitz_stability})
-    \item Convergence to the sliding manifold (reaching condition)
+    \item Convergence to the sliding manifold (reaching condition\index{reaching condition}\index{reaching condition})
     \item Robustness to matched disturbances
 \end{itemize}
 
@@ -448,7 +448,7 @@ See \pyfile{src/controllers/smc/classic\_smc.py} for complete Python implementat
     \item \textbf{Total}: $\mathcal{O}(n^3) \approx \mathcal{O}(27)$ per control cycle
 \end{itemize}
 
-Benchmarking shows classical SMC achieves $12 \pm 2$ $\mu$s per control cycle on modern CPU, enabling real-time control at 10 kHz sampling rate (see \cref{ch:benchmarking}, Figure 8.1).
+Benchmarking shows classical SMC achieves $12 \pm 2$ $\mu$s per control cycle on modern CPU, enabling real-time\index{real-time control} control at 10 kHz sampling rate (see \cref{ch:benchmarking}, Figure 8.1).
 
 %===============================================================================
 \section{Experimental Validation}
@@ -459,7 +459,7 @@ Benchmarking shows classical SMC achieves $12 \pm 2$ $\mu$s per control cycle on
 
 \begin{itemize}
     \item \textbf{Gains}: PSO-optimized $k_1 = 23.07$, $k_2 = 12.85$, $\lambda_1 = 5.51$, $\lambda_2 = 3.49$, $K = 2.23$, $k_d = 0.15$
-    \item \textbf{Boundary layer}: $\epsilon = 0.3$ (MT-6 optimized)
+    \item \textbf{Boundary layer}: $\epsilon = 0.3$ (MT-6\index{research tasks!MT-6}\index{research tasks!MT-6} optimized)
     \item \textbf{Initial condition}: $\theta_1(0) = 0.2$ rad, $\theta_2(0) = 0.15$ rad
     \item \textbf{Simulation}: 10 seconds at $\Delta t = 0.01$ s
 \end{itemize}
@@ -502,7 +502,7 @@ Classical SMC serves as the baseline for evaluating advanced controllers:
 \begin{itemize}
     \item \textbf{Super-Twisting SMC} (\cref{ch:super_twisting}): Second-order sliding mode achieves 50-70\% chattering reduction via continuous control signal (finite-time convergence of $\dot{s}$).
 
-    \item \textbf{Adaptive SMC} (\cref{ch:adaptive_smc}): Online gain adaptation improves robustness to model uncertainty (92\% success rate vs. 85\% for classical SMC under 20\% parameter variations).
+    \item \textbf{Adaptive SMC} (\cref{ch:adaptive_smc}): Online gain adaptation improves robustness to model uncertainty\index{model uncertainty}\index{model uncertainty} (92\% success rate vs. 85\% for classical SMC under 20\% parameter variations).
 
     \item \textbf{Hybrid Adaptive STA-SMC} (\cref{ch:hybrid_smc}): Combines adaptation and finite-time convergence, achieving best overall performance (lowest energy, highest robustness) at the cost of increased complexity.
 \end{itemize}
@@ -522,7 +522,7 @@ This chapter established the theoretical and practical foundations of classical 
     \item \textbf{Equivalent control}: Model-based feedforward term maintaining motion on sliding surface (\cref{eq:equivalent_control_regularized})
     \item \textbf{Boundary layer}: Continuous approximation to $\sign(s)$ trading chattering reduction for steady-state error (\cref{eq:smooth_switching_control})
     \item \textbf{Lyapunov stability}: Finite-time convergence to sliding manifold with exponential sliding-phase dynamics
-    \item \textbf{Robustness}: Matched disturbance rejection when $K > \sup |d(t)| + \eta$
+    \item \textbf{Robustness}: Matched disturbance rejection\index{disturbance rejection}\index{disturbance rejection} when $K > \sup |d(t)| + \eta$
 \end{enumerate}
 \end{keybox}
 

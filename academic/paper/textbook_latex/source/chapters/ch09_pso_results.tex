@@ -6,14 +6,14 @@
 \label{ch:pso_results}
 
 \begin{chapterabstract}
-This chapter presents systematic Particle Swarm Optimization (PSO) results for automatic gain tuning of sliding mode controllers. We conducted robust PSO optimization with nominal and disturbed fitness evaluation, achieving 0.47-21.39\% performance improvements across four controllers. The results establish PSO as essential for controller deployment (default gains fail under disturbances) and reveal critical insights on fitness function design, convergence behavior, and generalization to challenging initial conditions.
+This chapter presents systematic Particle Swarm Optimization\index{Particle Swarm Optimization}\index{Particle Swarm Optimization} (PSO) results for automatic gain tuning\index{gain tuning} of sliding mode controllers. We conducted robust PSO optimization with nominal and disturbed fitness evaluation, achieving 0.47-21.39\% performance improvements across four controllers. The results establish PSO as essential for controller deployment (default gains fail under disturbances) and reveal critical insights on fitness function design, convergence behavior, and generalization to challenging initial conditions.
 \end{chapterabstract}
 
 %===============================================================================
 \section{Introduction}
 %===============================================================================
 
-Chapter 8 demonstrated that default controller gains from \texttt{config.yaml} produce suboptimal performance: classical SMC consumes 20$\times$ more energy than necessary, hybrid controller fails to converge,and adaptive SMC exhibits 8.2\% overshoot. Manual gain tuning is impractical for multi-input systems (classical SMC has 6 gains, adaptive SMC has 5) with nonlinear coupling between parameters.
+Chapter 8 demonstrated that default controller gains from \texttt{config.yaml} produce suboptimal performance: classical SMC\index{sliding mode control|see{SMC}}\index{sliding mode control!classical}\index{sliding mode control|see{SMC}}\index{sliding mode control!classical} consumes 20$\times$ more energy than necessary, hybrid controller fails to converge,and adaptive SMC\index{sliding mode control!adaptive}\index{sliding mode control!adaptive} exhibits 8.2\% overshoot. Manual gain tuning is impractical for multi-input systems (classical SMC has 6 gains, adaptive SMC has 5) with nonlinear coupling between parameters.
 
 Particle Swarm Optimization (PSO) \cite{Kennedy1995, Shi1998} offers a derivative-free, population-based approach to automatic gain tuning. This chapter evaluates PSO effectiveness across two tuning scenarios:
 
@@ -30,7 +30,7 @@ This chapter addresses four key questions:
 \begin{enumerate}
     \item \textbf{RQ1 (Necessity):} Are default gains adequate, or is PSO optimization essential for controller functionality?
 
-    \item \textbf{RQ2 (Effectiveness):} What performance improvements does PSO achieve (settling time, overshoot, energy, chattering)?
+    \item \textbf{RQ2 (Effectiveness):} What performance improvements does PSO achieve (settling time\index{performance metrics!settling time}\index{performance metrics!settling time}, overshoot, energy, chattering\index{chattering}\index{chattering})?
 
     \item \textbf{RQ3 (Generalization):} Do PSO-optimized gains generalize to challenging conditions (large perturbations, disturbances)?
 
@@ -89,7 +89,7 @@ Table \ref{tab:pso_search_space} defines PSO search bounds for each controller.
 \begin{itemize}
     \item \textbf{Lower bounds:} Prevent zero gains (loss of control authority).
     \item \textbf{Upper bounds:} Limit control saturation (actuator $u_{\max} = 150$ N) and prevent numerical instability.
-    \item \textbf{Heterogeneous bounds:} Switching gains ($k_4$-$k_6$) typically smaller than sliding surface gains ($k_1$-$k_3$) based on theoretical analysis.
+    \item \textbf{Heterogeneous bounds:} Switching gains ($k_4$-$k_6$) typically smaller than sliding surface\index{sliding surface}\index{sliding surface} gains ($k_1$-$k_3$) based on theoretical analysis.
 \end{itemize}
 
 See \pyfile{src/optimization/algorithms/robust\_pso\_optimizer.py} for robust PSO implementation with mixed nominal/disturbed fitness evaluation.
@@ -175,12 +175,12 @@ Velocity clamp & $v_{\max}$ & 20\% of search range \\
 Simulation horizon & $T$ & 10.0 s \\
 Time step & $\Delta t$ & 0.01 s \\
 Evaluations per particle & -- & 1500 (30 particles $\times$ 50 iterations) \\
-Total simulation time & -- & 4.17 hours (1500 evals $\times$ 10 s) \\
+Total simulation\index{simulation} time & -- & 4.17 hours (1500 evals $\times$ 10 s) \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Inertia Weight Scheduling:} Linearly decreases from 0.9 to 0.4 to balance exploration (early iterations) and exploitation (late iterations):
+\textbf{Inertia Weight Scheduling:} Linearly decreases from 0.9 to 0.4 to balance exploration\index{Particle Swarm Optimization!exploration} (early iterations) and exploitation\index{Particle Swarm Optimization!exploitation} (late iterations):
 \begin{equation}
 w(i) = w_{\text{init}} - \frac{i}{I_{\max}} (w_{\text{init}} - w_{\text{final}})
 \end{equation}
@@ -285,7 +285,7 @@ Figure \ref{fig:pso_convergence_all} shows PSO fitness evolution for all control
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/ch08_pso/pso_convergence_LT7.png}
-\caption[LT-7 PSO Convergence with Particle Diversity]{Detailed PSO convergence analysis for classical SMC (LT-7 task) showing global best fitness (blue), swarm mean fitness (orange), and particle diversity (green, right axis) over 50 iterations. Early iterations (0-15) exhibit high diversity (0.7-0.9) as particles explore the search space globally. Mid-phase (15-30) shows rapid fitness improvement with decreasing diversity as particles converge toward optimal region. Final phase (30-50) demonstrates exploitation with stable fitness and minimal diversity (0.15), confirming convergence to global optimum. The particle diversity metric $D = \text{std}(\mathbf{k}_i)$ quantifies swarm spread, validating PSO's exploration-exploitation trade-off.}
+\caption[LT-7\index{research tasks!LT-7}\index{research tasks!LT-7} PSO Convergence with Particle Diversity]{Detailed PSO convergence analysis for classical SMC (LT-7 task) showing global best fitness (blue), swarm mean fitness (orange), and particle diversity (green, right axis) over 50 iterations. Early iterations (0-15) exhibit high diversity (0.7-0.9) as particles explore the search space globally. Mid-phase (15-30) shows rapid fitness improvement with decreasing diversity as particles converge toward optimal region. Final phase (30-50) demonstrates exploitation with stable fitness and minimal diversity (0.15), confirming convergence to global optimum. The particle diversity metric $D = \text{std}(\mathbf{k}_i)$ quantifies swarm spread, validating PSO's exploration-exploitation trade-off.}
 \label{fig:pso_convergence_lt7}
 \end{figure}
 
@@ -312,7 +312,7 @@ Hybrid Adaptive STA & 50 & 1500 & 19.2 min & 0.77 s \\
 \textbf{Runtime Analysis:}
 \begin{itemize}
     \item \textbf{Average time per evaluation:} 0.74 seconds (includes 10 s simulation + 0.24 s PSO overhead).
-    \item \textbf{Batch acceleration:} Without Numba JIT, runtime would be ~7.4 hours (10$\times$ slower).
+    \item \textbf{Batch acceleration:} Without Numba\index{Numba optimization}\index{Numba optimization} JIT, runtime would be ~7.4 hours (10$\times$ slower).
     \item \textbf{Total optimization time:} 73.8 minutes for all four controllers ($\approx$ 1.25 hours).
 \end{itemize}
 
@@ -389,7 +389,7 @@ Chapter 9 established PSO effectiveness for nominal conditions ($\pm 0.05$ rad, 
 \begin{itemize}
     \item Initial condition range: $\pm 0.3$ rad ($\pm 17.2^\circ$), 6$\times$ larger than training
     \item Monte Carlo runs: 500 (10 seeds $\times$ 50 runs per seed)
-    \item Controllers tested: Classical SMC only (with MT-6 boundary layer optimization)
+    \item Controllers tested: Classical SMC only (with MT-6\index{research tasks!MT-6}\index{research tasks!MT-6} boundary layer optimization)
     \item Metric: Chattering amplitude (FFT-based, $>$10 Hz cutoff)
 \end{itemize}
 
@@ -426,12 +426,12 @@ PSO optimized gains for $\pm 0.05$ rad perturbations without exposing the optimi
 \begin{itemize}
     \item \textbf{Specialized for small perturbations:} High gains work well for 2.9$^\circ$ errors but cause instability at 17.2$^\circ$.
     \item \textbf{Lack robustness margin:} No safety factor for larger-than-expected disturbances.
-    \item \textbf{Violate sliding mode theory:} Gains may not satisfy Lyapunov stability conditions for large sliding variable magnitudes.
+    \item \textbf{Violate sliding mode theory:} Gains may not satisfy Lyapunov\index{Lyapunov stability}\index{Lyapunov stability} stability\index{stability} conditions for large sliding variable magnitudes.
 \end{itemize}
 
 \textbf{Secondary Contributing Factors:}
 \begin{enumerate}
-    \item \textbf{Fitness function deficiency:} Equation \ref{eq:cost_function} penalizes chattering but not robustness. Need worst-case penalty.
+    \item \textbf{Fitness function deficiency:} Equation \ref{eq:cost_function} penalizes chattering but not robustness. Need worst-case\index{worst-case analysis} penalty.
     \item \textbf{No multi-scenario training:} PSO evaluated single initial condition per iteration. Should use distribution of ICs.
     \item \textbf{Boundary layer limits:} Fixed $\epsilon = 0.02$ rad (1.15$^\circ$) too small for 17.2$^\circ$ perturbations. Need adaptive $\epsilon(|\sigma|)$.
 \end{enumerate}
@@ -630,7 +630,7 @@ Computational Budget & Allocate 20-30 minutes per controller (with Numba JIT). F
 \begin{enumerate}
     \item \textbf{Multi-Objective PSO:} Use NSGA-II or MOPSO to generate Pareto frontiers for energy-settling and chattering-overshoot trade-offs. Single fitness function (Equation \ref{eq:cost_function}) may miss non-dominated solutions.
 
-    \item \textbf{Online PSO:} Adapt gains in real-time as system parameters drift (e.g., load mass changes, actuator degradation). Requires faster PSO (reduce iterations to 10-20) or meta-learning approach.
+    \item \textbf{Online PSO:} Adapt gains in real-time\index{real-time control} as system parameters drift (e.g., load mass changes, actuator degradation). Requires faster PSO (reduce iterations to 10-20) or meta-learning approach.
 
     \item \textbf{Transfer Learning:} Train PSO on simulator, fine-tune on hardware. Simulator-hardware gap (actuator dynamics, sensor noise) may require domain adaptation techniques.
 
@@ -657,4 +657,4 @@ This chapter demonstrated that PSO optimization is essential for sliding mode co
     \item \textbf{Validation} that fixed boundary layer ($\epsilon = 0.02$ rad) is near-optimal for classical SMC (adaptive variant offers only 3.7\% improvement).
 \end{enumerate}
 
-\textbf{Next Chapter:} Chapter 10 evaluates controller robustness under model uncertainty ($\pm 10\%$, $\pm 20\%$ parameter errors) and systematic disturbance rejection tests.
+\textbf{Next Chapter:} Chapter 10 evaluates controller robustness under model uncertainty\index{uncertainty}\index{model uncertainty}\index{model uncertainty} ($\pm 10\%$, $\pm 20\%$ parameter errors) and systematic disturbance rejection tests.

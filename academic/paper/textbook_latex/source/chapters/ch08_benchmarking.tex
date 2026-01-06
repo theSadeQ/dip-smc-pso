@@ -6,21 +6,21 @@
 \label{ch:benchmarking}
 
 \begin{chapterabstract}
-This chapter presents comprehensive performance evaluation of four sliding mode control variants across multiple metrics: computational efficiency, transient response, chattering reduction, and energy consumption. We conducted 100 Monte Carlo simulations per controller (400 total) with rigorous statistical analysis including 95\% confidence intervals and Welch's t-tests. The results establish empirical foundations for controller selection in resource-constrained systems (classical SMC), performance-critical applications (STA-SMC), and robustness-oriented scenarios (adaptive SMC, hybrid adaptive STA-SMC).
+This chapter presents comprehensive performance evaluation of four sliding mode control variants across multiple metrics: computational efficiency, transient response, chattering\index{chattering}\index{chattering} reduction, and energy consumption\index{performance metrics!energy consumption}\index{performance metrics!energy consumption}. We conducted 100 Monte Carlo\index{Monte Carlo simulation} simulations per controller (400 total) with rigorous statistical analysis including 95\% confidence intervals and Welch's t-tests. The results establish empirical foundations for controller selection in resource-constrained systems (classical SMC), performance-critical applications (STA-SMC), and robustness-oriented scenarios (adaptive SMC, hybrid adaptive STA-SMC).
 \end{chapterabstract}
 
 %===============================================================================
 \section{Introduction}
 %===============================================================================
 
-The double-inverted pendulum (DIP) system presents a challenging testbed for evaluating control algorithms due to its underactuated nature, nonlinear dynamics, and inherent instability. While Chapters 3-6 established the theoretical foundations and algorithmic details of four SMC variants, this chapter provides empirical validation through comprehensive Monte Carlo benchmarking.
+The double-inverted pendulum\index{double-inverted pendulum}\index{double-inverted pendulum} (DIP\index{double-inverted pendulum|see{DIP}}\index{double-inverted pendulum|see{DIP}}) system presents a challenging testbed for evaluating control algorithms due to its underactuated\index{underactuated systems}\index{underactuated systems} nature, nonlinear dynamics, and inherent instability. While Chapters 3-6 established the theoretical foundations and algorithmic details of four SMC variants, this chapter provides empirical validation through comprehensive Monte Carlo benchmarking.
 
 \subsection{Motivation for Comparative Benchmarking}
 
 Controller selection requires balancing multiple, often conflicting objectives:
 \begin{itemize}
     \item \textbf{Computational efficiency}: Real-time constraints in embedded systems require low latency ($<$50 $\mu$s per control cycle for 10 kHz sampling).
-    \item \textbf{Transient performance}: Fast settling time ($t_s < 3$ s) with minimal overshoot ($M_p < 10\%$) ensures rapid stabilization.
+    \item \textbf{Transient performance}: Fast settling time\index{performance metrics!settling time}\index{performance metrics!settling time} ($t_s < 3$ s) with minimal overshoot\index{performance metrics!overshoot}\index{performance metrics!overshoot} ($M_p < 10\%$) ensures rapid stabilization.
     \item \textbf{Chattering reduction}: High-frequency control oscillations ($>$10 Hz) cause actuator wear and energy waste.
     \item \textbf{Energy efficiency}: Control effort $E = \int_0^T u^2 dt$ impacts battery life and thermal dissipation.
 \end{itemize}
@@ -31,7 +31,7 @@ Prior work \cite{Utkin1992, Moreno2008, Roy2020} demonstrated superior theoretic
 
 This benchmarking study addresses five key questions:
 \begin{enumerate}
-    \item \textbf{RQ1 (Efficiency)}: Which controller achieves the fastest computation time for real-time embedded systems?
+    \item \textbf{RQ1 (Efficiency)}: Which controller achieves the fastest computation time for real-time\index{real-time control} embedded systems?
     \item \textbf{RQ2 (Performance)}: Which controller provides the best transient response (settling time, overshoot)?
     \item \textbf{RQ3 (Chattering)}: Which controller minimizes control signal oscillations?
     \item \textbf{RQ4 (Energy)}: Which controller consumes the least energy during stabilization?
@@ -46,13 +46,13 @@ This benchmarking study addresses five key questions:
 
 \subsubsection{Controllers Evaluated}
 
-We benchmarked four SMC variants implemented in Python 3.9+ with NumPy 1.21 acceleration:
+We benchmarked four SMC variants implemented in Python\index{Python implementation}\index{Python implementation} 3.9+ with NumPy\index{NumPy}\index{NumPy} 1.21 acceleration:
 
 \begin{enumerate}
     \item \textbf{Classical SMC} (\texttt{classical\_smc}):
         \begin{itemize}
             \item Gains: $k_1 = 5.0$, $k_2 = 5.0$, $k_3 = 5.0$, $k_4 = 0.5$, $k_5 = 0.5$, $k_6 = 0.5$
-            \item Boundary layer: $\epsilon = 0.02$ (fixed, optimized via MT-6)
+            \item Boundary layer: $\epsilon = 0.02$ (fixed, optimized via MT-6\index{research tasks!MT-6}\index{research tasks!MT-6})
             \item Saturation: $u_{\max} = 150$ N
         \end{itemize}
 
@@ -60,7 +60,7 @@ We benchmarked four SMC variants implemented in Python 3.9+ with NumPy 1.21 acce
         \begin{itemize}
             \item Gains: $k_1 = 8.0$, $k_2 = 6.0$, $k_3 = 5.0$, $k_4 = 3.0$, $k_5 = 4.0$, $k_6 = 2.0$
             \item Anti-windup: Enabled with $\sigma_{\max} = 1.0$ rad
-            \item Square-root term: $\text{sign}(\sigma) |\sigma|^{1/2}$ for finite-time convergence
+            \item Square-root term: $\text{sign}(\sigma) |\sigma|^{1/2}$ for finite-time convergence\index{convergence}
         \end{itemize}
 
     \item \textbf{Adaptive SMC} (\texttt{adaptive\_smc}):
@@ -80,7 +80,7 @@ We benchmarked four SMC variants implemented in Python 3.9+ with NumPy 1.21 acce
 
 \subsubsection{Monte Carlo Simulation Setup}
 
-\textbf{Initial Conditions:} Randomized perturbations around equilibrium (upright position):
+\textbf{Initial Conditions:} Randomized perturbations around equilibrium\index{equilibrium}\index{equilibrium} (upright position):
 \begin{align*}
     x(0) &\sim \mathcal{U}(-0.05, 0.05) \text{ m} \\
     \theta_1(0), \theta_2(0) &\sim \mathcal{U}(-0.05, 0.05) \text{ rad} \quad (\approx \pm 2.9^\circ) \\
@@ -146,7 +146,7 @@ where $\mathcal{F}$ denotes the Fast Fourier Transform.
 
 \subsubsection{Energy Consumption}
 
-\textbf{Control Energy} ($E$): Cumulative squared control effort over simulation horizon:
+\textbf{Control Energy} ($E$): Cumulative squared control effort\index{performance metrics!control effort}\index{performance metrics!control effort} over simulation horizon:
 \[
     E = \int_0^T u(t)^2 \, dt \approx \Delta t \sum_{k=0}^{N-1} u_k^2 \quad \text{(N$^2 \cdot$s units)}
 \]
@@ -347,7 +347,7 @@ Hybrid Adaptive STA & 0.00 $\pm$ 0.00 & 0.00 $\pm$ 0.00 & 100\% (failed*) \\
     \item \textbf{Hypothesis 3 (Measurement Artifact):} FFT analysis may conflate controlled high-frequency content (STA square-root term) with true chattering.
 \end{itemize}
 
-\textbf{Recommendation:} Re-run chattering analysis after PSO gain optimization (Chapter 9) to isolate effect of default gains versus algorithmic properties.
+\textbf{Recommendation:} Re-run chattering analysis after PSO\index{Particle Swarm Optimization|see{PSO}}\index{Particle Swarm Optimization|see{PSO}} gain optimization (Chapter 9) to isolate effect of default gains versus algorithmic properties.
 
 \subsection{Time-Domain Chattering Analysis}
 
@@ -487,7 +487,7 @@ Adaptive SMC        & 4 & 4 & 4 & 2 & 4 & 3.6 \\
 
     \item \textbf{Hybrid Adaptive STA (3.0 average):} Mixed results. Requires debugging before deployment.
 
-    \item \textbf{Adaptive SMC (3.6 average):} Slowest settling and highest overshoot. However, online adaptation provides robustness advantages (see Chapter 10 for disturbance rejection tests).
+    \item \textbf{Adaptive SMC (3.6 average):} Slowest settling and highest overshoot. However, online adaptation provides robustness advantages (see Chapter 10 for disturbance rejection\index{disturbance rejection}\index{disturbance rejection} tests).
 \end{enumerate}
 
 \subsection{Controller Selection Decision Tree}
@@ -530,15 +530,15 @@ Adaptive SMC        & 4 & 4 & 4 & 2 & 4 & 3.6 \\
 \subsection{Limitations of Current Study}
 
 \begin{enumerate}
-    \item \textbf{Default Gains:} Results reflect \texttt{config.yaml} defaults, not PSO-optimized gains. Chapter 9 addresses this via systematic gain tuning.
+    \item \textbf{Default Gains:} Results reflect \texttt{config.yaml} defaults, not PSO-optimized gains. Chapter 9 addresses this via systematic gain tuning\index{gain tuning}.
 
     \item \textbf{Narrow Initial Condition Range:} Perturbations limited to $\pm 0.05$ rad ($\pm 2.9^\circ$). Larger perturbations ($\pm 0.3$ rad, $\pm 17^\circ$) may reveal different performance trade-offs.
 
-    \item \textbf{No Disturbances:} Simulations assume perfect model, no external forces. \cref{ch:advanced_topics} evaluates robustness under disturbances and model uncertainty.
+    \item \textbf{No Disturbances:} Simulations assume perfect model, no external forces. \cref{ch:advanced_topics} evaluates robustness under disturbances and model uncertainty\index{uncertainty}\index{model uncertainty}\index{model uncertainty}.
 
     \item \textbf{Hybrid Controller Failure:} Unable to benchmark hybrid controller due to systematic convergence failures. Post-debugging re-evaluation required.
 
-    \item \textbf{Single-Objective Fitness:} No multi-objective optimization (Pareto frontier exploration). Future work should systematically trade off energy versus settling time.
+    \item \textbf{Single-Objective Fitness:} No multi-objective optimization (Pareto frontier exploration\index{Particle Swarm Optimization!exploration}). Future work should systematically trade off energy versus settling time.
 \end{enumerate}
 
 \subsection{Future Research Directions}
@@ -550,7 +550,7 @@ Adaptive SMC        & 4 & 4 & 4 & 2 & 4 & 3.6 \\
         \begin{itemize}
             \item External disturbances (step, impulse, sinusoidal)
             \item Model parameter uncertainty ($\pm 10\%$, $\pm 20\%$ mass/length/inertia errors)
-            \item Sensor noise (Gaussian, measurement delays)
+            \item Sensor noise\index{sensor noise} (Gaussian, measurement delays)
         \end{itemize}
 
     \item \textbf{Hardware-in-the-Loop Validation:} \cref{ch:case_studies} presents HIL deployment on physical DIP testbed to validate simulation results and identify real-world effects (actuator dynamics, sensor quantization, communication latency).
@@ -580,4 +580,4 @@ This chapter established empirical performance baselines for four SMC variants t
     \item \textbf{Hybrid Controller:} Systematic failure across 100/100 runs. Debugging required before deployment.
 \end{enumerate}
 
-\textbf{Recommendation:} \cref{ch:pso_results} re-evaluates performance after PSO gain optimization to isolate algorithmic properties from gain selection effects. \cref{ch:case_studies} presents real-world validation through hardware-in-the-loop experiments.
+\textbf{Recommendation:} \cref{ch:pso_results} re-evaluates performance after PSO gain optimization to isolate algorithmic properties from gain selection effects. \cref{ch:case_studies} presents real-world validation through hardware-in-the-loop\index{hardware-in-the-loop} experiments.

@@ -6,7 +6,7 @@
 \chapter{Introduction}
 \label{ch:introduction}
 
-This chapter introduces the fundamental challenge of controlling underactuated mechanical systems and motivates the use of Sliding Mode Control (SMC) through the benchmark example of the double-inverted pendulum. We trace the historical development of SMC from the 1950s to present day, examine the persistent chattering problem and modern solutions, and provide an overview of the controllers and software framework developed in this book.
+This chapter introduces the fundamental challenge of controlling underactuated\index{underactuated systems}\index{underactuated systems} mechanical systems and motivates the use of Sliding Mode Control (SMC\index{sliding mode control|see{SMC}}\index{sliding mode control|see{SMC}}) through the benchmark example of the double-inverted pendulum\index{double-inverted pendulum}\index{double-inverted pendulum}. We trace the historical development of SMC from the 1950s to present day, examine the persistent chattering\index{chattering}\index{chattering} problem and modern solutions, and provide an overview of the controllers and software framework developed in this book.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Challenge of Underactuated Control}
@@ -14,7 +14,7 @@ This chapter introduces the fundamental challenge of controlling underactuated m
 
 \subsection{Definition and Characteristics}
 
-An underactuated mechanical system is one where the number of independent control inputs is less than the number of degrees of freedom. Formally, for a system with $n$ degrees of freedom and $m$ independent actuators:
+An underactuated mechanical system is one where the number of independent control inputs is less than the number of degrees of freedom\index{degrees of freedom}\index{degrees of freedom}. Formally, for a system with $n$ degrees of freedom and $m$ independent actuators:
 
 \begin{definition}[Underactuated System]
 A mechanical system is \textbf{underactuated} if $m < n$, where:
@@ -26,7 +26,7 @@ A mechanical system is \textbf{underactuated} if $m < n$, where:
 \end{definition}
 
 \begin{remark}
-Underactuation introduces fundamental constraints on controllability. Unlike fully actuated systems where every degree of freedom can be directly controlled, underactuated systems require careful exploitation of system dynamics (e.g., gravitational potential, centrifugal forces) to achieve desired motions.
+Underactuation introduces fundamental constraints on controllability\index{controllability}\index{controllability}. Unlike fully actuated systems where every degree of freedom can be directly controlled, underactuated systems require careful exploitation\index{Particle Swarm Optimization!exploitation} of system dynamics (e.g., gravitational potential, centrifugal forces) to achieve desired motions.
 \end{remark}
 
 \subsection{Physical Examples}
@@ -49,12 +49,12 @@ Underactuated systems present several fundamental challenges:
     \item \textbf{Limited Controllability}: Not all state variables can be directly commanded
     \item \textbf{Nonlinear Coupling}: Dynamics exhibit strong nonlinear coupling between actuated and unactuated coordinates
     \item \textbf{Sensitivity to Disturbances}: Reduced control authority makes the system more susceptible to external perturbations
-    \item \textbf{Complex Stabilization}: Maintaining equilibrium requires continuous feedback (unlike fully actuated systems where static feedback may suffice)
+    \item \textbf{Complex Stabilization}: Maintaining equilibrium\index{equilibrium}\index{equilibrium} requires continuous feedback\index{feedback control} (unlike fully actuated systems where static feedback may suffice)
     \item \textbf{Nonholonomic Constraints}: Some underactuated systems have velocity-dependent constraints that further limit reachable configurations
 \end{enumerate}
 
 \begin{example}[Cart-Pole Controllability]
-Consider the cart-pole system with state $x = [x_{\text{cart}}, \theta, \dot{x}_{\text{cart}}, \dot{\theta}]^T$. The control input $u$ (cart force) can directly affect $\ddot{x}_{\text{cart}}$, but $\ddot{\theta}$ is only indirectly influenced through the nonlinear coupling term:
+Consider the cart-pole\index{cart-pole system}\index{cart-pole system} system with state $x = [x_{\text{cart}}, \theta, \dot{x}_{\text{cart}}, \dot{\theta}]^T$. The control input\index{control input}\index{control input} $u$ (cart force) can directly affect $\ddot{x}_{\text{cart}}$, but $\ddot{\theta}$ is only indirectly influenced through the nonlinear coupling term:
 \begin{equation}
 \ddot{\theta} = f(x, \dot{x}, u) \propto u \cos\theta + \text{nonlinear terms}
 \end{equation}
@@ -67,13 +67,13 @@ At $\theta = \pi/2$ (horizontal pendulum), the coupling term vanishes ($\cos(\pi
 
 \subsection{System Description}
 
-The double-inverted pendulum (DIP) consists of two rigid links connected in series, mounted on a cart that moves horizontally along a rail. This system serves as an ideal benchmark for underactuated control research due to its:
+The double-inverted pendulum (DIP\index{double-inverted pendulum|see{DIP}}\index{double-inverted pendulum|see{DIP}}) consists of two rigid links connected in series, mounted on a cart that moves horizontally along a rail. This system serves as an ideal benchmark for underactuated control research due to its:
 
 \begin{itemize}
     \item \textbf{High Nonlinearity}: Trigonometric terms in equations of motion
     \item \textbf{Significant Coupling}: Motion of the cart affects both pendula, and pendulum motion affects each other
     \item \textbf{Unstable Equilibrium}: The upright position is naturally unstable
-    \item \textbf{Measurable Complexity}: 3 degrees of freedom, 6-dimensional state space, 1 control input
+    \item \textbf{Measurable Complexity}: 3 degrees of freedom, 6-dimensional state space\index{state space}\index{state space}, 1 control input
     \item \textbf{Computational Tractability}: Simulation and control implementation are feasible on standard hardware
 \end{itemize}
 
@@ -86,7 +86,7 @@ The double-inverted pendulum (DIP) consists of two rigid links connected in seri
 
 \subsection{Equations of Motion}
 
-The dynamics of the DIP are derived using Lagrangian mechanics (detailed derivation in \cref{ch:mathematical_foundations}). The equations of motion have the form:
+The dynamics of the DIP are derived using Lagrangian\index{Lagrangian mechanics}\index{Lagrangian mechanics} mechanics (detailed derivation in \cref{ch:mathematical_foundations}). The equations of motion have the form:
 
 \begin{equation}
 \label{eq:intro:dip_dynamics}
@@ -96,9 +96,9 @@ The dynamics of the DIP are derived using Lagrangian mechanics (detailed derivat
 where:
 \begin{itemize}
     \item $\vect{q} = [x_{\text{cart}}, \theta_1, \theta_2]^T \in \Real^3$ is the generalized coordinate vector
-    \item $\mat{M}(\vect{q}) \in \Real^{3 \times 3}$ is the configuration-dependent inertia matrix
-    \item $\mat{C}(\vect{q}, \dot{\vect{q}}) \in \Real^{3 \times 3}$ captures Coriolis and centrifugal forces
-    \item $\vect{G}(\vect{q}) \in \Real^3$ is the gravitational force vector
+    \item $\mat{M}(\vect{q}) \in \Real^{3 \times 3}$ is the configuration-dependent inertia matrix\index{inertia matrix}\index{inertia matrix}
+    \item $\mat{C}(\vect{q}, \dot{\vect{q}}) \in \Real^{3 \times 3}$ captures Coriolis\index{Coriolis forces}\index{Coriolis forces} and centrifugal forces
+    \item $\vect{G}(\vect{q}) \in \Real^3$ is the gravitational force\index{gravitational force}\index{gravitational force} vector
     \item $\vect{F}(\dot{\vect{q}}) \in \Real^3$ represents viscous friction
     \item $\mat{B} = [1, 0, 0]^T$ is the input distribution matrix (force acts only on cart)
     \item $u \in \Real$ is the control force
@@ -117,7 +117,7 @@ The double-inverted pendulum has become a standard benchmark in nonlinear contro
     \item \textbf{Well-Defined Control Objectives}: Stabilization around upright equilibrium ($\theta_1 = \theta_2 = 0$) provides a clear success criterion
     \item \textbf{Hardware Realizability}: Physical prototypes can be built at reasonable cost, enabling experimental validation
     \item \textbf{Scalability}: Concepts developed for DIP generalize to higher-dimensional underactuated systems (e.g., triple pendulum, Acrobot)
-    \item \textbf{Rich Behavior}: The system supports multiple control tasks (stabilization, swing-up, trajectory tracking), enabling comprehensive algorithm testing
+    \item \textbf{Rich Behavior}: The system supports multiple control tasks (stabilization\index{stabilization}, swing-up\index{swing-up control}, trajectory tracking\index{trajectory tracking}), enabling comprehensive algorithm testing
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -148,19 +148,19 @@ The 1970s and 1980s saw the development of rigorous mathematical foundations for
 \begin{itemize}
     \item \textbf{Utkin's Seminal Work (1977)}: Vadim Utkin formalized SMC theory~\cite{utkin1977variable}, establishing:
     \begin{itemize}
-        \item The \textit{reaching condition} ($\sigma \dot{\sigma} < 0$) ensures finite-time convergence to the sliding surface
+        \item The \textit{reaching condition} ($\sigma \dot{\sigma} < 0$) ensures finite-time convergence\index{convergence} to the sliding surface
         \item The \textit{equivalent control method} for analyzing sliding mode dynamics
         \item Robustness to \textit{matched disturbances} (perturbations entering through the control channel)
     \end{itemize}
 
     \item \textbf{Filippov Solutions (1960s-1980s)}: Filippov's theory of differential equations with discontinuous right-hand sides~\cite{filippov1988differential} provided the mathematical framework for analyzing SMC systems where $u(x)$ is discontinuous.
 
-    \item \textbf{Lyapunov-Based Design (1980s)}: Development of Lyapunov function methods to systematically prove stability and convergence of SMC laws.
+    \item \textbf{Lyapunov-Based Design (1980s)}: Development of Lyapunov function methods to systematically prove stability\index{stability}\index{stability} and convergence of SMC laws.
 \end{itemize}
 
 \subsection{Chattering Problem and Boundary Layer Method (1980s)}
 
-A major limitation of classical SMC emerged: \textit{chattering}---high-frequency oscillations around the sliding surface caused by imperfect control switching. Burton and Zinober~\cite{burton1986continuous} proposed the \textit{boundary layer method}:
+A major limitation of classical SMC\index{sliding mode control!classical}\index{sliding mode control!classical} emerged: \textit{chattering}---high-frequency oscillations around the sliding surface caused by imperfect control switching. Burton and Zinober~\cite{burton1986continuous} proposed the \textit{boundary layer method}:
 
 \begin{equation}
 \text{sign}(\sigma) \to \sat(\sigma/\epsilon) = \begin{cases}
@@ -169,7 +169,7 @@ A major limitation of classical SMC emerged: \textit{chattering}---high-frequenc
 \end{cases}
 \end{equation}
 
-This continuous approximation eliminates chattering at the cost of a small steady-state tracking error bounded by the boundary layer thickness $\epsilon$.
+This continuous approximation eliminates chattering at the cost of a small steady-state tracking error\index{performance metrics!tracking error} bounded by the boundary layer thickness $\epsilon$.
 
 \subsection{Higher-Order Sliding Modes (1990s--2000s)}
 
@@ -182,7 +182,7 @@ To eliminate chattering without sacrificing tracking accuracy, Levant developed 
     u &= -K_1 \sqrt{|\sigma|} \sign(\sigma) + u_{\text{int}} \\
     \dot{u}_{\text{int}} &= -K_2 \sign(\sigma)
     \end{align}
-    Achieves \textit{finite-time convergence} of both $\sigma$ and $\dot{\sigma}$ to zero, eliminating chattering while maintaining robustness.
+    Achieves \textit{finite-time convergence} of both $\sigma$ and $\dot{\sigma}$ to zero, eliminating chattering while maintaining robustness\index{robustness}\index{robustness}.
 \end{itemize}
 
 \subsection{Adaptive and Intelligent SMC (2000s--2010s)}
@@ -193,7 +193,7 @@ The 2000s saw integration of SMC with adaptive control and computational intelli
     \item \textbf{Adaptive Gain Tuning}: Online adjustment of switching gains based on observed disturbances, eliminating the need for conservative a priori bounds~\cite{yang2007adaptive}
     \item \textbf{Neural Network SMC}: Approximation of unknown dynamics using neural networks~\cite{huang2008adaptive}
     \item \textbf{Fuzzy SMC}: Fuzzy logic for gain scheduling and chattering reduction
-    \item \textbf{Optimization-Based Tuning}: Particle Swarm Optimization (PSO) and genetic algorithms for systematic gain selection~\cite{messina2013multiobjective}
+    \item \textbf{Optimization-Based Tuning}: Particle Swarm Optimization\index{Particle Swarm Optimization}\index{Particle Swarm Optimization} (PSO\index{Particle Swarm Optimization|see{PSO}}\index{Particle Swarm Optimization|see{PSO}}) and genetic algorithms for systematic gain selection~\cite{messina2013multiobjective}
 \end{itemize}
 
 \subsection{Recent Advances (2010s--Present)}
@@ -230,7 +230,7 @@ Chattering arises from several sources:
 \begin{enumerate}
     \item \textbf{Discrete-Time Implementation}: Digital controllers sample at finite frequency, converting the ideal sliding mode into a \textit{quasi-sliding mode} with zigzag motion around the surface
     \item \textbf{Switching Delays}: Actuators have nonzero response time, preventing instantaneous switching
-    \item \textbf{Measurement Noise}: Sensor noise causes spurious crossings of the sliding surface
+    \item \textbf{Measurement Noise}: Sensor noise\index{sensor noise} causes spurious crossings of the sliding surface
     \item \textbf{Unmodeled Dynamics}: High-frequency modes interact with the discontinuous control, creating limit cycles
 \end{enumerate}
 
@@ -270,7 +270,7 @@ Disturbance Observer & Estimate and compensate disturbances explicitly & Sensiti
 \section{Overview of Controllers Covered in This Book}
 \label{sec:intro:controllers}
 
-This book presents a comprehensive suite of SMC controllers for underactuated systems, ranging from classical first-order SMC to advanced hybrid adaptive algorithms. Each controller is derived rigorously, implemented in production-quality Python code, and validated experimentally on the DIP benchmark.
+This book presents a comprehensive suite of SMC controllers for underactuated systems, ranging from classical first-order SMC to advanced hybrid adaptive\index{sliding mode control!hybrid adaptive}\index{sliding mode control!hybrid adaptive} algorithms. Each controller is derived rigorously, implemented in production-quality Python\index{Python implementation}\index{Python implementation} code, and validated experimentally on the DIP benchmark.
 
 \subsection{Classical Sliding Mode Control (Chapter \ref{ch:classical_smc})}
 
@@ -325,9 +325,9 @@ u &= -K_1 \sqrt{|\sigma|} \sat(\sigma/\epsilon) + u_{\text{int}} + u_{\text{eq}}
 
 \textbf{Key Features}:
 \begin{itemize}
-    \item Combines STA finite-time convergence with adaptive gain tuning
+    \item Combines STA finite-time convergence with adaptive gain tuning\index{gain tuning}
     \item Unified sliding surface incorporating cart recentering
-    \item Self-tapering adaptation law to prevent overshoot
+    \item Self-tapering adaptation law to prevent overshoot\index{performance metrics!overshoot}\index{performance metrics!overshoot}
     \item Separate anti-windup for integral term
 \end{itemize}
 
@@ -382,7 +382,7 @@ The controllers presented in this book are implemented in a production-quality P
     \item \textbf{Factory Pattern}: Unified interface for instantiating controllers
     \item \textbf{Configuration Management}: YAML-based configuration with strict validation
     \item \textbf{Comprehensive Testing}: Unit tests, integration tests, and property-based tests ensure correctness
-    \item \textbf{Performance Optimization}: Numba JIT compilation for simulation-critical code
+    \item \textbf{Performance Optimization}: Numba\index{Numba optimization}\index{Numba optimization} JIT compilation for simulation\index{simulation}-critical code
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -420,7 +420,7 @@ Multiple fidelity levels for computational efficiency vs. accuracy trade-offs:
 
 \begin{itemize}
     \item \pyclass{PSOTuner}: Particle Swarm Optimization for automatic gain tuning
-    \item Multi-objective cost functions (tracking error, control effort, chattering)
+    \item Multi-objective cost functions (tracking error, control effort\index{performance metrics!control effort}\index{performance metrics!control effort}, chattering)
     \item Batch simulation with Numba acceleration (30 particles × 100 iterations in <3 minutes)
 \end{itemize}
 
@@ -428,9 +428,9 @@ Multiple fidelity levels for computational efficiency vs. accuracy trade-offs:
 
 \begin{itemize}
     \item \textbf{Command-Line Interface}: \texttt{simulate.py} for quick controller testing
-    \item \textbf{Web Interface}: Streamlit app for interactive parameter tuning
+    \item \textbf{Web Interface}: Streamlit\index{Streamlit}\index{Streamlit} app for interactive parameter tuning
     \item \textbf{Real-Time Animation}: DIPAnimator class for phase-space visualization
-    \item \textbf{Batch Analysis}: Monte Carlo simulations for robustness evaluation
+    \item \textbf{Batch Analysis}: Monte Carlo\index{Monte Carlo simulation} simulations for robustness evaluation
 \end{itemize}
 
 \subsection{Getting Started}
@@ -478,7 +478,7 @@ python simulate.py --ctrl classical_smc --load gains.json --plot
 
 \begin{itemize}
     \item \textbf{Chapter 8 (PSO Optimization)}: Gain tuning, multi-objective cost functions, generalization
-    \item \textbf{Chapter 9 (Robustness Analysis)}: Model uncertainty, Monte Carlo simulations, worst-case performance
+    \item \textbf{Chapter 9 (Robustness Analysis)}: Model uncertainty\index{uncertainty}, Monte Carlo simulations, worst-case\index{worst-case analysis} performance
     \item \textbf{Chapter 10 (Benchmarking)}: Performance metrics, statistical analysis, trade-off visualization
 \end{itemize}
 
@@ -522,7 +522,7 @@ Readers should be familiar with:
     \item \textbf{Linear Algebra}: Vector spaces, matrices, eigenvalues, definiteness
     \item \textbf{Ordinary Differential Equations}: Existence/uniqueness, stability, Lyapunov theory (basics)
     \item \textbf{Classical Mechanics}: Lagrangian formulation (helpful but not essential)
-    \item \textbf{Control Theory}: State-space representation, controllability, feedback linearization (introductory level)
+    \item \textbf{Control Theory}: State-space representation, controllability, feedback linearization\index{linearization} (introductory level)
 \end{itemize}
 
 Readers without these prerequisites should consult \cref{app:math_prereq} for a self-contained review.
@@ -532,8 +532,8 @@ Readers without these prerequisites should consult \cref{app:math_prereq} for a 
 The software implementations assume:
 
 \begin{itemize}
-    \item Basic Python programming (functions, classes, NumPy arrays)
-    \item Familiarity with scientific computing libraries (NumPy, SciPy, Matplotlib)
+    \item Basic Python programming (functions, classes, NumPy\index{NumPy}\index{NumPy} arrays)
+    \item Familiarity with scientific computing libraries (NumPy, SciPy\index{SciPy}\index{SciPy}, Matplotlib)
     \item Understanding of object-oriented programming (helpful but not essential)
 \end{itemize}
 

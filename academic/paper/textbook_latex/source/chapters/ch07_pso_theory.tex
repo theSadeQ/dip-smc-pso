@@ -2,11 +2,11 @@
 % CHAPTER 7: PSO THEORY AND FUNDAMENTALS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Particle Swarm Optimization Theory}
+\chapter{Particle Swarm Optimization\index{Particle Swarm Optimization}\index{Particle Swarm Optimization} Theory}
 \label{ch:pso}
 
 \begin{chapterabstract}
-This chapter presents the theoretical foundations of Particle Swarm Optimization (PSO) for controller gain tuning. We derive the velocity update equations, analyze convergence behavior, and introduce multi-objective PSO (MOPSO) for competing performance criteria. Inertia weight strategies, velocity clamping, and stopping criteria are discussed. Application to SMC gain optimization demonstrates 95-98\% performance improvement over manual tuning across settling time, chattering, and energy metrics.
+This chapter presents the theoretical foundations of Particle Swarm Optimization (PSO) for controller gain tuning\index{gain tuning}. We derive the velocity update\index{Particle Swarm Optimization!velocity update}\index{Particle Swarm Optimization!velocity update} equations, analyze convergence\index{convergence} behavior, and introduce multi-objective PSO (MOPSO) for competing performance criteria. Inertia weight strategies, velocity clamping, and stopping criteria are discussed. Application to SMC\index{sliding mode control|see{SMC}}\index{sliding mode control|see{SMC}} gain optimization demonstrates 95-98\% performance improvement over manual tuning across settling time, chattering, and energy metrics.
 \end{chapterabstract}
 
 %===============================================================================
@@ -36,7 +36,7 @@ At iteration $k$:
 
 where:
 \begin{itemize}
-    \item $\omega$: Inertia weight (balances exploration vs. exploitation)
+    \item $\omega$: Inertia weight (balances exploration\index{Particle Swarm Optimization!exploration} vs. exploitation\index{Particle Swarm Optimization!exploitation})
     \item $c_1, c_2$: Cognitive and social learning rates (typically $c_1 = c_2 = 2.0$)
     \item $r_1, r_2 \sim \mathcal{U}(0, 1)$: Random numbers (ensures stochasticity)
 \end{itemize}
@@ -73,7 +73,7 @@ Controller tuning involves competing objectives:
 \begin{itemize}
     \item Minimize settling time $t_s$
     \item Minimize chattering amplitude $C$
-    \item Minimize energy consumption $E$
+    \item Minimize energy consumption\index{performance metrics!energy consumption}\index{performance metrics!energy consumption} $E$
 \end{itemize}
 
 \subsection{Weighted Aggregation}
@@ -90,7 +90,7 @@ where $t_s^*, C^*, E^*$ are normalization constants and $w_1 + w_2 + w_3 = 1$.
 
 \subsection{Search Space}
 
-For classical SMC: $\vect{x} = [k_1, k_2, \lambda_1, \lambda_2, K, k_d, \epsilon] \in \mathbb{R}^7$
+For classical SMC\index{sliding mode control!classical}\index{sliding mode control!classical}: $\vect{x} = [k_1, k_2, \lambda_1, \lambda_2, K, k_d, \epsilon] \in \mathbb{R}^7$
 
 Bounds:
 \begin{itemize}
@@ -104,7 +104,7 @@ Bounds:
 For each particle:
 \begin{enumerate}
     \item Instantiate controller with gains $\vect{x}_i$
-    \item Simulate DIP for 10 seconds
+    \item Simulate DIP\index{double-inverted pendulum|see{DIP}}\index{double-inverted pendulum|see{DIP}} for 10 seconds
     \item Compute metrics: $t_s, C, E$
     \item Evaluate fitness: $f(\vect{x}_i)$
 \end{enumerate}
@@ -118,9 +118,9 @@ PSO-optimized classical SMC achieves:
     \item Energy: 1.2 J (vs. 1.8 J manual, 33\% savings)
 \end{itemize}
 
-\textbf{Convergence}: 50 iterations, 30 particles, runtime 8 minutes (with Numba acceleration).
+\textbf{Convergence}: 50 iterations, 30 particles, runtime 8 minutes (with Numba\index{Numba optimization}\index{Numba optimization} acceleration).
 
-See \pyfile{src/optimization/algorithms/pso\_optimizer.py} for complete PSO implementation with inertia weight scheduling, velocity clamping, and multi-objective fitness evaluation.
+See \pyfile{src/optimization/algorithms/pso\_optimizer.py} for complete PSO implementation with inertia weight\index{Particle Swarm Optimization!inertia weight}\index{Particle Swarm Optimization!inertia weight} scheduling, velocity clamping, and multi-objective fitness evaluation.
 
 %===============================================================================
 \section{Summary}

@@ -6,22 +6,22 @@
 \label{ch:software}
 
 \begin{chapterabstract}
-This chapter documents the complete Python implementation of all SMC controllers, optimization tools, and simulation framework presented in earlier chapters. We cover architectural design patterns, code organization, API documentation, testing strategies, and deployment guidelines. All code examples are production-tested and extracted from the \texttt{dip-smc-pso} GitHub repository. By the end of this chapter, readers will understand how to implement, test, and deploy robust sliding mode controllers for real-world applications.
+This chapter documents the complete Python\index{Python implementation}\index{Python implementation} implementation of all SMC\index{sliding mode control|see{SMC}}\index{sliding mode control|see{SMC}} controllers, optimization tools, and simulation\index{simulation} framework presented in earlier chapters. We cover architectural design patterns, code organization, API documentation, testing strategies, and deployment guidelines. All code examples are production-tested and extracted from the \texttt{dip-smc-pso} GitHub repository. By the end of this chapter, readers will understand how to implement, test, and deploy robust sliding mode controllers for real-world applications.
 \end{chapterabstract}
 
 %===============================================================================
 \section{Introduction}
 %===============================================================================
 
-This chapter bridges theory and practice by presenting the complete Python implementation of the DIP-SMC-PSO framework. Unlike typical textbook examples that show simplified code snippets, all code presented here is \textbf{production-tested} with:
+This chapter bridges theory and practice by presenting the complete Python implementation of the DIP\index{double-inverted pendulum|see{DIP}}\index{double-inverted pendulum|see{DIP}}-SMC-PSO\index{Particle Swarm Optimization|see{PSO}}\index{Particle Swarm Optimization|see{PSO}} framework. Unlike typical textbook examples that show simplified code snippets, all code presented here is \textbf{production-tested} with:
 
 \begin{itemize}
     \item 100\% test coverage for critical safety components
-    \item Rigorous benchmarking across multiple operating conditions (Chapter~\ref{ch:benchmarking})
+    \item Rigorous benchmarking\index{benchmarking} across multiple operating conditions (Chapter~\ref{ch:benchmarking})
     \item Industrial-grade error handling and validation
     \item Comprehensive documentation with type hints
     \item Memory safety through weakref patterns
-    \item Real-time performance optimization with Numba JIT compilation
+    \item Real-time performance optimization with Numba\index{Numba optimization}\index{Numba optimization} JIT compilation
 \end{itemize}
 
 \textbf{Repository:} \url{https://github.com/theSadeQ/dip-smc-pso}
@@ -30,7 +30,7 @@ This chapter bridges theory and practice by presenting the complete Python imple
 
 The implementation philosophy prioritizes:
 \begin{enumerate}
-    \item \textbf{Correctness over performance}: Controllers are validated against theoretical stability proofs before optimization
+    \item \textbf{Correctness over performance}: Controllers are validated against theoretical stability\index{stability}\index{stability} proofs before optimization
     \item \textbf{Maintainability over cleverness}: Code is structured for clarity and long-term maintenance
     \item \textbf{Reproducibility}: All parameters, seeds, and configurations are logged for exact replication
     \item \textbf{Safety}: Extensive validation prevents numerical instability and actuator violations
@@ -140,7 +140,7 @@ class ControllerProtocol(Protocol):
         state_vars: tuple,
         history: dict
     ) -> Tuple[float, tuple, dict]:
-        """Compute control input.
+        """Compute control input\index{control input}\index{control input}.
 
         Args:
             state: System state [x, theta1, theta2, dx, dtheta1, dtheta2]
@@ -186,11 +186,11 @@ import numpy as np
 from ...utils.control.primitives import saturate
 
 class ClassicalSMC:
-    """Classical sliding mode controller with boundary layer.
+    """Classical sliding mode controller with boundary layer\index{boundary layer}\index{boundary layer}.
 
     Implements conventional first-order SMC with:
     - Model-based equivalent control (u_eq)
-    - Boundary layer for chattering reduction
+    - Boundary layer for chattering\index{chattering}\index{chattering} reduction
     - Configurable switching function (tanh or linear)
     """
 
@@ -208,7 +208,7 @@ class ClassicalSMC:
         self.validate_gains(gains)
         self.k1, self.k2, self.lam1, self.lam2, self.K, self.kd = gains
 
-        # Validate positivity (Lyapunov stability requirements)
+        # Validate positivity (Lyapunov\index{Lyapunov stability}\index{Lyapunov stability} stability requirements)
         from src.utils import require_positive
         self.k1 = require_positive(self.k1, "k1")
         self.k2 = require_positive(self.k2, "k2")
@@ -242,7 +242,7 @@ class ClassicalSMC:
                 self.k2 * (dtheta2 + self.lam2 * theta2))
 
     def _compute_equivalent_control(self, state: np.ndarray) -> float:
-        """Compute model-based feedforward control u_eq.
+        """Compute model-based feedforward\index{feedforward control} control u_eq.
 
         Uses Tikhonov regularization for numerical stability:
         M_reg = M + eps * I
@@ -255,10 +255,10 @@ class ClassicalSMC:
 
         try:
             M, C, G = dyn._compute_physics_matrices(state)
-            # Regularize inertia matrix
+            # Regularize inertia matrix\index{inertia matrix}\index{inertia matrix}
             M_reg = M + np.eye(3) * self.regularization
 
-            # Check controllability: L @ M^-1 @ B
+            # Check controllability\index{controllability}\index{controllability}: L @ M^-1 @ B
             Minv_B = np.linalg.solve(M_reg, self.B)
             L_Minv_B = float(self.L @ Minv_B)
 
@@ -380,7 +380,7 @@ def _sta_smc_core(
     u_eq: float = 0.0,
     Kaw: float = 0.0       # Anti-windup gain
 ) -> tuple[float, float, float]:
-    """Numba-accelerated STA core.
+    """Numba-accelerated STA\index{Super-Twisting Algorithm|see{STA}}\index{Super-Twisting Algorithm|see{STA}} core.
 
     Returns: (u_saturated, new_z, sigma)
     """
@@ -404,7 +404,7 @@ def _sta_smc_core(
 class SuperTwistingSMC:
     """Second-order sliding mode controller (super-twisting algorithm).
 
-    Achieves finite-time convergence without discontinuous control.
+    Achieves finite-time convergence\index{convergence} without discontinuous control.
     Uses Numba JIT compilation for 10-50x speedup in batch simulation.
     """
 
@@ -476,7 +476,7 @@ class SuperTwistingSMC:
         except Exception:
             z = float(state_vars) if state_vars is not None else 0.0
 
-        # Compute sliding surface and saturated sign
+        # Compute sliding surface\index{sliding surface}\index{sliding surface} and saturated sign
         sigma = self._compute_sliding_surface(state)
         from ...utils.control.primitives import saturate
         sgn_sigma = saturate(sigma, self.boundary_layer,
@@ -661,7 +661,7 @@ def get_gain_bounds_for_pso(
 \section{PSO Optimization Framework}
 %===============================================================================
 
-Reference Algorithm~\ref{alg:pso} from Chapter~\ref{ch:pso}. The PSO optimizer automates controller gain tuning via multi-objective cost minimization.
+Reference Algorithm~\ref{alg:pso} from Chapter~\ref{ch:pso}. The PSO optimizer automates controller gain tuning\index{gain tuning} via multi-objective cost minimization.
 
 \begin{lstlisting}[language=Python, caption={PSO optimizer core (src/optimization/algorithms/pso\_optimizer.py - simplified)}, label={lst:pso_optimizer}]
 import numpy as np
@@ -733,7 +733,7 @@ class PSOTuner:
             t_s = results[i]['settling_time']
             M_p = results[i]['overshoot']
             sigma_u = results[i]['chattering']  # Control variation
-            E = results[i]['energy']  # Integrated control effort
+            E = results[i]['energy']  # Integrated control effort\index{performance metrics!control effort}\index{performance metrics!control effort}
 
             # Penalty for constraint violations
             penalty = 0.0
@@ -786,7 +786,7 @@ class PSOTuner:
 \textbf{Optimization Features}:
 \begin{itemize}
     \item \textbf{Vectorized simulation}: Evaluates all particles in parallel via Numba
-    \item \textbf{Multi-objective cost}: Balances settling time, overshoot, chattering, energy
+    \item \textbf{Multi-objective cost}: Balances settling time\index{performance metrics!settling time}\index{performance metrics!settling time}, overshoot, chattering, energy
     \item \textbf{Constraint handling}: Penalty functions for stability violations
     \item \textbf{Convergence history}: Tracks cost evolution for diagnostics
 \end{itemize}
@@ -962,7 +962,7 @@ simulation:
   duration: 10.0        # Simulation duration (s)
   initial_state:        # [x, theta1, theta2, dx, dtheta1, dtheta2]
     - 0.0
-    - 0.1               # 5.7 degrees initial perturbation
+    - 0.1               # 5.7 degrees initial perturbation\index{perturbation}
     - 0.05
     - 0.0
     - 0.0
@@ -1070,7 +1070,7 @@ class TestClassicalSMC:
         )
 
     def test_equilibrium_control(self, controller):
-        """At equilibrium, control should be zero."""
+        """At equilibrium\index{equilibrium}\index{equilibrium}, control should be zero."""
         state = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
         u, state_vars, history = controller.compute_control(
             state, (), {}
@@ -1318,7 +1318,7 @@ if __name__ == '__main__':
 \subsection{Example Usage}
 
 \begin{lstlisting}[language=bash, caption={Command-line examples}, label={lst:cli_examples}]
-# Run classical SMC with default gains
+# Run classical SMC\index{sliding mode control!classical}\index{sliding mode control!classical} with default gains
 python simulate.py --ctrl classical_smc --plot
 
 # Run PSO optimization for STA-SMC
@@ -1338,7 +1338,7 @@ done
 \section{Web Interface}
 %===============================================================================
 
-The Streamlit web UI provides interactive parameter tuning and visualization:
+The Streamlit\index{Streamlit}\index{Streamlit} web UI provides interactive parameter tuning and visualization:
 
 \begin{lstlisting}[language=Python, caption={Streamlit web UI (streamlit\_app.py - simplified)}, label={lst:streamlit}]
 import streamlit as st
@@ -1486,7 +1486,7 @@ The HIL framework enables testing controllers on real hardware. Reference Chapte
 
 HIL splits the simulation into two processes:
 \begin{enumerate}
-    \item \textbf{Plant Server}: Simulates system dynamics in real-time
+    \item \textbf{Plant Server}: Simulates system dynamics in real-time\index{real-time control}
     \item \textbf{Controller Client}: Runs controller and sends commands to plant
 \end{enumerate}
 

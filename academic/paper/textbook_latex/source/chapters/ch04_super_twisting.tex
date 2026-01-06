@@ -2,11 +2,11 @@
 % CHAPTER 4: SUPER-TWISTING SLIDING MODE CONTROL
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Super-Twisting Algorithm}
+\chapter{Super-Twisting Algorithm\index{Super-Twisting Algorithm}\index{Super-Twisting Algorithm}}
 \label{ch:super_twisting}
 
 \begin{chapterabstract}
-This chapter introduces the super-twisting algorithm (STA), a second-order sliding mode control technique that achieves finite-time convergence without requiring measurement of the sliding surface derivative. We derive the continuous and discrete-time STA control laws, prove finite-time convergence using the Moreno-Osorio Lyapunov function, and analyze chattering reduction mechanisms. Implementation details include Numba JIT acceleration, anti-windup logic, and gain tuning guidelines. Experimental results demonstrate 50-70\% chattering reduction compared to classical SMC while maintaining finite-time convergence.
+This chapter introduces the super-twisting algorithm (STA\index{Super-Twisting Algorithm|see{STA}}\index{Super-Twisting Algorithm|see{STA}}), a second-order sliding mode control technique that achieves finite-time convergence\index{convergence} without requiring measurement of the sliding surface\index{sliding surface}\index{sliding surface} derivative. We derive the continuous and discrete-time STA control laws, prove finite-time convergence using the Moreno-Osorio Lyapunov\index{Lyapunov stability}\index{Lyapunov stability} function, and analyze chattering\index{chattering}\index{chattering} reduction mechanisms. Implementation details include Numba\index{Numba optimization}\index{Numba optimization} JIT acceleration, anti-windup logic, and gain tuning\index{gain tuning} guidelines. Experimental results demonstrate 50-70\% chattering reduction compared to classical SMC while maintaining finite-time convergence.
 \end{chapterabstract}
 
 %===============================================================================
@@ -23,7 +23,7 @@ The super-twisting algorithm, introduced by Levant (2003) \cite{Levant2003}, pro
     \item \textbf{Continuous control signal}: $u(t)$ is continuous (no discontinuity), reducing chattering.
     \item \textbf{Finite-time convergence}: Both $s$ and $\dot{s}$ reach zero in finite time $T_r$.
     \item \textbf{No derivative measurement}: Unlike other second-order SMC, STA does not require $\dot{s}$ measurement.
-    \item \textbf{Robustness}: Maintains disturbance rejection properties of first-order SMC.
+    \item \textbf{Robustness}: Maintains disturbance rejection\index{disturbance rejection}\index{disturbance rejection} properties of first-order SMC.
 \end{itemize}
 
 %===============================================================================
@@ -52,7 +52,7 @@ Here $K_1, K_2 > 0$ are the super-twisting gains.
 
 \subsection{Discrete-Time Implementation}
 
-For numerical simulation with time step $\Delta t$, the discrete-time STA is:
+For numerical simulation\index{simulation} with time step $\Delta t$, the discrete-time STA is:
 
 \begin{align}
 u[k] &= u_{\text{eq}}[k] - K_1 \sqrt{|s[k]|} \sat(s[k]/\epsilon) + z[k] - d \cdot s[k] \label{eq:sta_discrete_control} \\
@@ -63,7 +63,7 @@ z[k+1] &= z[k] - K_2 \sat(s[k]/\epsilon) \Delta t \label{eq:sta_discrete_integra
 where:
 \begin{itemize}
     \item $u_{\text{eq}}$ is the equivalent control (same as classical SMC, \cref{eq:equivalent_control_regularized})
-    \item $\sat(s/\epsilon)$ is the boundary layer saturation (tanh or linear)
+    \item $\sat(s/\epsilon)$ is the boundary layer\index{boundary layer}\index{boundary layer} saturation (tanh or linear)
     \item $d \geq 0$ is an optional damping gain
     \item $z[k]$ is the internal disturbance-like state
 \end{itemize}
@@ -124,7 +124,7 @@ Compute the time derivative of $V$ along trajectories:
 \dot{V}(s, z) = K_2 \frac{\sign(s) \dot{s}}{2\sqrt{|s|}} + \left( z + K_1 \sqrt{|s|} \sign(s) \right) \left( \dot{z} + \frac{K_1 \sign(s) \dot{s}}{2\sqrt{|s|}} \right)
 \end{equation}
 
-Substituting the STA dynamics and using the stability conditions, one can show:
+Substituting the STA dynamics and using the stability\index{stability} conditions, one can show:
 
 \begin{equation}
 \dot{V}(s, z) \leq -\eta V^{1/2}(s, z)
@@ -142,7 +142,7 @@ K_2 &= 1.5 L_m \quad \text{(50\% margin above disturbance bound)} \\
 K_1 &= 1.5 \sqrt{K_2 L_m} \quad \text{(conservative coupling)}
 \end{align}
 
-However, \textbf{these theoretical bounds are overly conservative}. PSO-based optimization (\cref{ch:pso}) finds gains $K_1 = 8.0$, $K_2 = 6.0$ that outperform theoretical predictions, achieving 65\% chattering reduction (from $5.2$ N/s to $1.8$ N/s) with faster settling time ($t_s = 1.65$ s vs. $2.3$ s for conservative gains).
+However, \textbf{these theoretical bounds are overly conservative}. PSO\index{Particle Swarm Optimization|see{PSO}}\index{Particle Swarm Optimization|see{PSO}}-based optimization (\cref{ch:pso}) finds gains $K_1 = 8.0$, $K_2 = 6.0$ that outperform theoretical predictions, achieving 65\% chattering reduction (from $5.2$ N/s to $1.8$ N/s) with faster settling time ($t_s = 1.65$ s vs. $2.3$ s for conservative gains).
 
 %===============================================================================
 \section{Chattering Reduction Mechanisms}
@@ -193,7 +193,7 @@ Experimental results (\cref{fig:chattering_comparison_classical_vs_sta}) show:
 The internal state $z[k]$ can grow unbounded if the control saturates frequently, leading to integrator windup. Symptoms include:
 
 \begin{itemize}
-    \item Large overshoot when exiting saturation
+    \item Large overshoot\index{performance metrics!overshoot}\index{performance metrics!overshoot} when exiting saturation
     \item Sluggish response to transient changes
     \item Oscillatory behavior
 \end{itemize}
@@ -238,7 +238,7 @@ The STA computation is vectorized for PSO batch simulation (\cref{ch:pso}), wher
 
 We accelerate the STA core using Numba's Just-In-Time (JIT) compilation:
 
-\begin{lstlisting}[language=Python, caption={Numba-accelerated STA core}, label=lst:sta_numba]
+\begin{lstlisting}[language=Python\index{Python implementation}\index{Python implementation}, caption={Numba-accelerated STA core}, label=lst:sta_numba]
 import numba
 
 @numba.njit(cache=True)
@@ -267,7 +267,7 @@ See \pyfile{src/controllers/smc/sta\_smc.py} for complete implementation with va
     \item Speedup: $13.3$x
 \end{itemize}
 
-This enables real-time PSO optimization (5-10 minutes for 50 iterations with 30 particles) on modern CPUs.
+This enables real-time\index{real-time control} PSO optimization (5-10 minutes for 50 iterations with 30 particles) on modern CPUs.
 
 %===============================================================================
 \section{Experimental Validation}
@@ -313,7 +313,7 @@ Computation time ($\mu$s) & $12 \pm 2$ & $15 \pm 3$ & 25\% slower \\
 
 \subsection{Boundary Layer Optimization Results (MT-6)}
 
-PSO-based boundary layer optimization (\cref{ch:pso}) systematically explored $\epsilon \in [0.05, 0.50]$ to minimize the trade-off between chattering amplitude and steady-state tracking error. The MT-6 task evaluated 30 candidate boundary layers across 100 Monte Carlo trials per configuration.
+PSO-based boundary layer optimization (\cref{ch:pso}) systematically explored $\epsilon \in [0.05, 0.50]$ to minimize the trade-off between chattering amplitude and steady-state tracking error\index{performance metrics!tracking error}. The MT-6 task evaluated 30 candidate boundary layers across 100 Monte Carlo trials per configuration.
 
 \begin{figure}[ht]
 \centering
@@ -380,7 +380,7 @@ def validate_gains(gains):
 \end{itemize}
 \end{importantbox}
 
-\textbf{Next Steps}: \cref{ch:adaptive_smc} introduces adaptive gain scheduling to handle model uncertainty. \cref{ch:hybrid_smc} combines STA with adaptation for optimal performance.
+\textbf{Next Steps}: \cref{ch:adaptive_smc} introduces adaptive gain scheduling to handle model uncertainty\index{uncertainty}\index{model uncertainty}\index{model uncertainty}. \cref{ch:hybrid_smc} combines STA with adaptation for optimal performance.
 
 %===============================================================================
 % END OF CHAPTER 4

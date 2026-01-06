@@ -6,7 +6,7 @@
 \label{ch:advanced_topics}
 
 \begin{chapterabstract}
-This chapter evaluates controller robustness beyond nominal conditions through systematic disturbance rejection tests (MT-8) and model uncertainty analysis (LT-6). We demonstrate that PSO-optimized gains successfully reject step and impulse disturbances (96-99\% overshoot reduction), present adaptive gain scheduling results (11-40.6\% chattering reduction for oscillatory disturbances), and analyze performance degradation under $\pm 10\%$/$\pm 20\%$ parameter variations. The results establish design guidelines for industrial deployment in uncertain environments.
+This chapter evaluates controller robustness\index{robustness}\index{robustness} beyond nominal conditions through systematic disturbance rejection\index{disturbance rejection}\index{disturbance rejection} tests (MT-8\index{research tasks!MT-8}\index{research tasks!MT-8}) and model uncertainty\index{uncertainty}\index{model uncertainty}\index{model uncertainty} analysis (LT-6\index{research tasks!LT-6}\index{research tasks!LT-6}). We demonstrate that PSO\index{Particle Swarm Optimization|see{PSO}}\index{Particle Swarm Optimization|see{PSO}}-optimized gains successfully reject step and impulse disturbances (96-99\% overshoot reduction), present adaptive gain scheduling results (11-40.6\% chattering reduction for oscillatory disturbances), and analyze performance degradation under $\pm 10\%$/$\pm 20\%$ parameter variations. The results establish design guidelines for industrial deployment in uncertain environments.
 \end{chapterabstract}
 
 %===============================================================================
@@ -25,14 +25,14 @@ Chapters 8-9 established performance baselines and PSO optimization effectivenes
     \item \textbf{Actuator Limitations:} Saturation at $u_{\max} = 150$ N, bandwidth limits prevent instantaneous torque changes.
 \end{enumerate}
 
-This chapter focuses on disturbance rejection (Section \ref{sec:disturbance_rejection}) and model uncertainty (Section \ref{sec:model_uncertainty}), leaving sensor noise and actuator dynamics for future work.
+This chapter focuses on disturbance rejection (Section \ref{sec:disturbance_rejection}) and model uncertainty (Section \ref{sec:model_uncertainty}), leaving sensor noise\index{sensor noise} and actuator dynamics for future work.
 
 \subsection{Research Questions}
 
 \begin{enumerate}
     \item \textbf{RQ1 (Disturbance Rejection):} How much external force can controllers tolerate before divergence?
 
-    \item \textbf{RQ2 (Recovery Time):} How quickly do controllers return to equilibrium after disturbance removal?
+    \item \textbf{RQ2 (Recovery Time):} How quickly do controllers return to equilibrium\index{equilibrium}\index{equilibrium} after disturbance removal?
 
     \item \textbf{RQ3 (Model Uncertainty):} What parameter error magnitude ($\pm 10\%$, $\pm 20\%$, $\pm 30\%$) causes performance degradation or failure?
 
@@ -51,7 +51,7 @@ This chapter focuses on disturbance rejection (Section \ref{sec:disturbance_reje
 We evaluated three disturbance types with varying magnitudes:
 
 \begin{enumerate}
-    \item \textbf{Step Disturbance:} Constant force applied at $t = 2.0$ s until simulation end ($t = 10.0$ s).
+    \item \textbf{Step Disturbance:} Constant force applied at $t = 2.0$ s until simulation\index{simulation} end ($t = 10.0$ s).
         \begin{itemize}
             \item Magnitudes: 5 N, 10 N, 15 N, 20 N
             \item Physical interpretation: Constant horizontal push (e.g., wind)
@@ -84,8 +84,8 @@ Table \ref{tab:disturbance_rejection} presents post-PSO disturbance rejection pe
 \toprule
 \textbf{Controller} & \textbf{Step 10N (deg)} & \textbf{Impulse 30N (deg)} & \textbf{Recovery (s)} & \textbf{Converged?} \\
 \midrule
-Classical SMC       & 8.2 & 12.5 & 2.8 & Yes \\
-STA-SMC             & 6.8 & 10.1 & 2.3 & Yes \\
+Classical SMC\index{sliding mode control|see{SMC}}\index{sliding mode control|see{SMC}}       & 8.2 & 12.5 & 2.8 & Yes \\
+STA\index{Super-Twisting Algorithm|see{STA}}\index{Super-Twisting Algorithm|see{STA}}-SMC             & 6.8 & 10.1 & 2.3 & Yes \\
 Adaptive SMC        & 9.1 & 13.7 & 3.1 & Yes \\
 Hybrid Adaptive STA & 7.5 & 11.3 & 2.6 & Yes \\
 \bottomrule
@@ -189,7 +189,7 @@ where:
 
 \subsection{Adaptive Scheduling Results}
 
-Table \ref{tab:adaptive_scheduling} presents classical SMC chattering reduction with adaptive scheduling.
+Table \ref{tab:adaptive_scheduling} presents classical SMC\index{sliding mode control!classical}\index{sliding mode control!classical} chattering reduction with adaptive scheduling.
 
 \begin{table}[htbp]
 \centering
@@ -238,7 +238,7 @@ Sinusoidal 5N   & -12.3\% & +6.7\% & +1.1\% \\
 
 \subsection{Hardware-in-the-Loop (HIL) Validation}
 
-MT-8 conducted 120 HIL trials on physical DIP testbed:
+MT-8 conducted 120 HIL trials on physical DIP\index{double-inverted pendulum|see{DIP}}\index{double-inverted pendulum|see{DIP}} testbed:
 
 \begin{table}[htbp]
 \centering
@@ -277,7 +277,7 @@ Real-time control applications require controllers to execute within sampling pe
 
 \subsection{Comparative Benchmarking (MT-6)}
 
-MT-6 boundary layer optimization also collected comprehensive performance metrics across all controllers, enabling direct comparison of chattering, energy, and settling time trade-offs.
+MT-6 boundary layer\index{boundary layer}\index{boundary layer} optimization also collected comprehensive performance metrics across all controllers, enabling direct comparison of chattering, energy, and settling time\index{performance metrics!settling time}\index{performance metrics!settling time} trade-offs.
 
 \begin{figure}[htbp]
 \centering
@@ -427,11 +427,11 @@ All lengths -20\%   & Converge (2.9 s) & Converge (2.3 s) & Converge (2.5 s) & C
 
 \textbf{Critical Insight:} Only adaptive controllers (Adaptive SMC, Hybrid Adaptive STA) handle combined +20\% errors. Fixed-gain controllers (Classical, STA) diverge when multiple parameters increase simultaneously.
 
-\textbf{Physical Explanation:} Combined mass increases cause total system inertia to exceed design assumptions. Adaptive controllers compensate via gain adaptation, while fixed-gain controllers apply insufficient control effort.
+\textbf{Physical Explanation:} Combined mass increases cause total system inertia to exceed design assumptions. Adaptive controllers compensate via gain adaptation, while fixed-gain controllers apply insufficient control effort\index{performance metrics!control effort}\index{performance metrics!control effort}.
 
 \subsection{MT-7 Robustness Statistical Analysis}
 
-The MT-7 task extended robustness validation with large-scale Monte Carlo analysis (500 trials per scenario) to quantify success rates, worst-case performance, and variance under model uncertainty.
+The MT-7 task extended robustness validation with large-scale Monte Carlo\index{Monte Carlo simulation} analysis (500 trials per scenario) to quantify success rates, worst-case performance, and variance under model uncertainty.
 
 \begin{figure}[htbp]
 \centering

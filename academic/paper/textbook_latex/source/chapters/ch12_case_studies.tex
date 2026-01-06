@@ -6,7 +6,7 @@
 \label{ch:case_studies}
 
 \begin{chapterabstract}
-This chapter presents four case studies demonstrating the practical application of SMC controllers to the double-inverted pendulum: (1) Baseline comparison of all controllers, (2) Robust PSO optimization with 95-98\% improvement, (3) Model uncertainty analysis, and (4) Hardware-in-the-loop validation. Each case study includes problem statement, methodology, results, and lessons learned.
+This chapter presents four case studies demonstrating the practical application of SMC\index{sliding mode control|see{SMC}}\index{sliding mode control|see{SMC}} controllers to the double-inverted pendulum\index{double-inverted pendulum}\index{double-inverted pendulum}: (1) Baseline comparison of all controllers, (2) Robust PSO\index{Particle Swarm Optimization|see{PSO}}\index{Particle Swarm Optimization|see{PSO}} optimization with 95-98\% improvement, (3) Model uncertainty analysis, and (4) Hardware-in-the-loop validation. Each case study includes problem statement, methodology, results, and lessons learned.
 \end{chapterabstract}
 
 %===============================================================================
@@ -15,14 +15,14 @@ This chapter presents four case studies demonstrating the practical application 
 
 \subsection{Problem Statement}
 
-Compare four SMC variants (Classical, STA, Adaptive, Hybrid) across six performance metrics to establish baseline performance.
+Compare four SMC variants (Classical, STA\index{Super-Twisting Algorithm|see{STA}}\index{Super-Twisting Algorithm|see{STA}}, Adaptive, Hybrid) across six performance metrics to establish baseline performance.
 
 \subsection{Methodology}
 
 \begin{itemize}
-    \item 100 Monte Carlo trials per controller
+    \item 100 Monte Carlo\index{Monte Carlo simulation} trials per controller
     \item Randomized initial conditions: $\theta_i(0) \sim \mathcal{U}(-0.05, 0.05)$ rad
-    \item Metrics: Settling time, energy, chattering, computation time, robustness, tracking accuracy
+    \item Metrics: Settling time, energy, chattering\index{chattering}\index{chattering}, computation time, robustness\index{robustness}\index{robustness}, tracking accuracy
     \item Statistical analysis: 95\% confidence intervals, Welch's t-tests
 \end{itemize}
 
@@ -75,7 +75,7 @@ Success rate (\%) & 78 & 85 & 9\% \\
 
 \subsection{Problem Statement}
 
-Evaluate robustness of adaptive SMC to $\pm 20\%$ mass and length variations.
+Evaluate robustness of adaptive SMC\index{sliding mode control!adaptive}\index{sliding mode control!adaptive} to $\pm 20\%$ mass and length variations.
 
 \subsection{Methodology}
 
@@ -116,13 +116,13 @@ Validate simulation results using HIL testbed with real-time plant server and co
 \subsection{Methodology}
 
 \begin{itemize}
-    \item Plant server: Simulates DIP dynamics at 1 kHz
+    \item Plant server: Simulates DIP\index{double-inverted pendulum|see{DIP}}\index{double-inverted pendulum|see{DIP}} dynamics at 1 kHz
     \item Controller client: Computes control at 1 kHz via socket communication
     \item Latency: $<5$ ms round-trip (network + computation)
     \item Test duration: 10 seconds per trial
 \end{itemize}
 
-See \pyfile{src/interfaces/hil/plant\_server.py} and \pyfile{src/interfaces/hil/controller\_client.py} for hardware-in-the-loop implementation.
+See \pyfile{src/interfaces/hil/plant\_server.py} and \pyfile{src/interfaces/hil/controller\_client.py} for hardware-in-the-loop\index{hardware-in-the-loop} implementation.
 
 \subsection{Results}
 
