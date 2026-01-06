@@ -79,6 +79,38 @@ Since integration smooths discontinuities, $z(t)$ is continuous (piecewise linea
 \section{Chapter 5 Solutions}
 %===============================================================================
 
+\textbf{Exercise 5.1}: Explain why adaptive gain tuning is necessary when model uncertainty is large. What happens if $K$ is (a) too small, (b) too large, and (c) how does online adaptation resolve this trade-off?
+
+\textbf{Solution}:
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{K too small (underestimated)}: The switching gain $K$ must satisfy $K > \|d\|_{\max} + \eta$ where $d$ is the matched uncertainty/disturbance and $\eta > 0$ is a stability margin. If $K < \|d\|$, the control $u = -K \sign(s)$ cannot dominate the disturbance, violating the reaching condition $s\dot{s} < 0$. The system fails to reach the sliding surface, resulting in:
+    \begin{itemize}
+        \item Loss of tracking: $|\theta - \theta_{\text{ref}}| > \epsilon_{\max}$ (unacceptable error)
+        \item Potential instability: pendulum angles diverge
+    \end{itemize}
+
+    \item \textbf{K too large (overestimated)}: If $K \gg \|d\|_{\max}$, the control provides excessive authority, causing:
+    \begin{itemize}
+        \item Severe chattering: high-frequency oscillations in $u(t)$ due to discontinuous $\sign(s)$
+        \item Wear on actuators: repeated direction reversals damage motors
+        \item Energy waste: $\int |u(t)| dt$ is unnecessarily large
+    \end{itemize}
+    Example: If $\|d\|_{\max} = 5$ N but $K = 50$ N, the controller uses 10x more control effort than needed.
+
+    \item \textbf{Online adaptation resolution}: Adaptive SMC dynamically adjusts $\hat{K}(t)$ based on observed sliding surface magnitude:
+    \begin{equation}
+    \dot{\hat{K}} = \gamma |s| - \alpha \hat{K}
+    \end{equation}
+    \textbf{Trade-off resolution}:
+    \begin{itemize}
+        \item When $|s|$ is large (disturbance not rejected), $\dot{\hat{K}} > 0$ increases gain
+        \item When $|s|$ is small (disturbance rejected), leak term $-\alpha \hat{K}$ reduces gain
+        \item Converges to optimal $\hat{K}^* \approx \|d\|_{\max} + \eta$ balancing tracking and chattering
+    \end{itemize}
+\end{enumerate}
+
+\vspace{1em}
+
 \textbf{Exercise 5.2}: Derive the gradient adaptation law for the adaptive gain $K$ from the Lyapunov function $V = \frac{1}{2} s^2 + \frac{1}{2\gamma} \tilde{K}^2$.
 
 \textbf{Solution}: Taking the time derivative:
@@ -165,6 +197,54 @@ The scheduling improves local convergence (near equilibrium) while maintaining g
 \section{Chapter 7 Solutions}
 %===============================================================================
 
+\textbf{Exercise 7.3}: Derive the total mechanical energy for the DIP system and design the energy-based swing-up control law.
+
+\textbf{Solution}:
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Kinetic energy} $T$ (cart + two pendula):
+    \begin{align}
+    T = \frac{1}{2} M \dot{x}^2 &+ \frac{1}{2} m_1 (\dot{x}_1^2 + \dot{y}_1^2) + \frac{1}{2} I_1 \dot{\theta}_1^2 \nonumber \\
+    &+ \frac{1}{2} m_2 (\dot{x}_2^2 + \dot{y}_2^2) + \frac{1}{2} I_2 \dot{\theta}_2^2
+    \end{align}
+    where $(x_1, y_1) = (x + L_1 \sin\theta_1, L_1 \cos\theta_1)$ and $(x_2, y_2) = (x_1 + L_2 \sin\theta_2, y_1 + L_2 \cos\theta_2)$ are center-of-mass positions.
+
+    Substituting and simplifying:
+    \begin{equation}
+    T = \frac{1}{2}(M + m_1 + m_2)\dot{x}^2 + \frac{1}{2}(I_1 + m_1 L_1^2) \dot{\theta}_1^2 + \frac{1}{2}(I_2 + m_2 L_2^2) \dot{\theta}_2^2 + \text{coupling terms}
+    \end{equation}
+
+    \item \textbf{Potential energy} $V$ (gravitational, zero at hanging-down):
+    \begin{equation}
+    V = m_1 g L_1 (1 + \cos\theta_1) + m_2 g (L_1(1 + \cos\theta_1) + L_2(1 + \cos\theta_2))
+    \end{equation}
+
+    \item \textbf{Desired energy} $E_{\text{desired}}$ at upright equilibrium ($\theta_1 = \theta_2 = 0$, all velocities = 0):
+    \begin{equation}
+    E_{\text{desired}} = V(0, 0) = 2 m_1 g L_1 + m_2 g (2 L_1 + 2 L_2)
+    \end{equation}
+    This is the energy at the upright unstable equilibrium.
+
+    \item \textbf{Control law design}: The swing-up control pumps energy into the system:
+    \begin{equation}
+    u = k_E \dot{x} (E(t) - E_{\text{desired}}) \cos\theta_1
+    \end{equation}
+    where $E(t) = T(t) + V(t)$ is total energy.
+
+    \item \textbf{Physical explanation of each term}:
+    \begin{itemize}
+        \item $k_E > 0$: energy control gain (typical value: 50 N$\cdot$s/J)
+        \item $\dot{x}$: cart velocity couples energy transfer (move with pendulum)
+        \item $(E - E_{\text{desired}})$: energy error drives adaptation
+        \item $\cos\theta_1$: modulates force direction based on pendulum angle:
+        \begin{itemize}
+            \item When $\theta_1 \approx \pm\pi$ (hanging down): $\cos\theta_1 \approx -1$, control opposes cart motion to pump energy
+            \item When $\theta_1 \approx 0$ (near upright): $\cos\theta_1 \approx 1$, control reduces (switch to stabilization)
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\vspace{1em}
+
 \textbf{Exercise 7.4}: For a PSO with swarm size $N_p = 30$ and maximum iterations $I_{\max} = 50$, compute the total number of fitness evaluations required.
 
 \textbf{Solution}: Each iteration evaluates fitness for all $N_p$ particles. Total evaluations:
@@ -203,6 +283,47 @@ This adaptive strategy prevents premature convergence while ensuring final solut
 %===============================================================================
 \section{Chapter 8 Solutions}
 %===============================================================================
+
+\textbf{Exercise 8.1}: Compare PSO to gradient descent for controller gain tuning. (a) Why is gradient computation difficult for SMC systems? (b) What advantages does PSO provide? (c) When would gradient methods be preferred?
+
+\textbf{Solution}:
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Gradient computation difficulty in SMC}:
+
+    The cost function for SMC gain tuning is:
+    \begin{equation}
+    J(\vect{g}) = f(\text{simulation}(\vect{g}))
+    \end{equation}
+    where $\vect{g} = [K_1, K_2, \lambda_1, \lambda_2, \epsilon]$ are gains and $f$ computes tracking error, control effort, chattering.
+
+    Gradient descent requires $\nabla_{\vect{g}} J$, but:
+    \begin{itemize}
+        \item \textbf{Discontinuities}: The $\sign(s)$ function in SMC creates non-differentiable control law. $\frac{\partial u}{\partial K}$ is undefined at $s = 0$.
+        \item \textbf{Simulation dependency}: $J$ depends on simulation output, not an analytical expression. Computing $\frac{\partial J}{\partial K}$ requires either:
+        \begin{enumerate}
+            \item Finite differences: $\frac{\partial J}{\partial K} \approx \frac{J(K + \Delta K) - J(K)}{\Delta K}$ (expensive, $2d$ simulations per iteration)
+            \item Adjoint method: requires reverse-mode differentiation through ODE solver (complex implementation)
+        \end{enumerate}
+        \item \textbf{Noisy gradients}: Numerical errors in simulation (Euler/RK4 discretization) propagate to gradient estimates, causing optimizer instability.
+    \end{itemize}
+
+    \item \textbf{PSO advantages for SMC tuning}:
+    \begin{itemize}
+        \item \textbf{Derivative-free}: PSO only requires function evaluations $J(\vect{g})$, no gradient computation
+        \item \textbf{Global search}: Swarm explores multiple regions simultaneously, avoids local minima. Example: for multimodal $J$ with 5 local minima, gradient descent may converge to any depending on initialization, while PSO finds global minimum with 90\% probability.
+        \item \textbf{Parallel evaluation}: All $N_p$ particles can be simulated independently (embarrassingly parallel), reducing wall time by $N_p$x on multi-core systems.
+        \item \textbf{Robustness to noise}: Stochastic updates ($r_1, r_2$ randomness) naturally handle noisy $J$, while gradient methods require careful step size tuning.
+    \end{itemize}
+
+    \item \textbf{When gradient methods are preferred}:
+    \begin{itemize}
+        \item \textbf{Smooth, convex objectives}: If $J$ is differentiable and convex (e.g., LQR gain tuning via Riccati equation), gradient descent converges faster than PSO ($O(\log(1/\epsilon))$ iterations vs. $O(1/\epsilon)$).
+        \item \textbf{High dimensionality}: PSO requires $N_p = 10d$ to $30d$ particles for $d$-dimensional problems. For $d > 50$ (e.g., neural network weights), gradient methods scale better.
+        \item \textbf{Real-time adaptation}: Gradient descent with line search converges in 10-100 iterations, while PSO requires 500-5000 evaluations. For online tuning during operation, gradient methods are faster.
+    \end{itemize}
+\end{enumerate}
+
+\vspace{1em}
 
 \textbf{Exercise 8.3}: Compute the PSO velocity update for a particle with current position $\vect{x} = [1, 2]$, velocity $\vect{v} = [0.5, -0.3]$, personal best $\vect{p} = [0.8, 1.5]$, global best $\vect{g} = [0.6, 1.2]$, using $\omega = 0.7$, $c_1 = c_2 = 2.0$, $r_1 = 0.4$, $r_2 = 0.6$.
 
