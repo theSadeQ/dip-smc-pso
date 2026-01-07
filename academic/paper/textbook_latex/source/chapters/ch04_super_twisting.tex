@@ -26,6 +26,13 @@ The super-twisting algorithm, introduced by Levant (2003) \cite{Levant2003}, pro
     \item \textbf{Robustness}: Maintains disturbance rejection\index{disturbance rejection}\index{disturbance rejection} properties of first-order SMC.
 \end{itemize}
 
+\begin{figure}[ht]
+\centering
+\input{figures/ch04/sta_phase_portrait.tex}
+\caption{Super-twisting algorithm phase portrait showing twisting trajectories converging to the origin in finite time. Unlike classical SMC which approaches the sliding line asymptotically, STA trajectories spiral inward and reach $(s, \dot{s}) = (0, 0)$ exactly at finite time $T_{\text{conv}}$. The dashed circle indicates the finite-time convergence region. Four trajectories from different initial conditions demonstrate global stability.}
+\label{fig:sta_phase_portrait}
+\end{figure}
+
 %===============================================================================
 \section{Super-Twisting Control Law}
 %===============================================================================
@@ -133,6 +140,13 @@ Substituting the STA dynamics and using the stability\index{stability} condition
 for some $\eta > 0$. This differential inequality implies finite-time convergence. For complete proof, see \cite{Moreno2008}.
 \end{proof}
 
+\begin{figure}[ht]
+\centering
+\input{figures/ch04/finite_time_convergence.tex}
+\caption{Finite-time convergence comparison between classical SMC (exponential) and super-twisting algorithm. The classical SMC approaches zero asymptotically as $|s(t)| = s_0 e^{-\lambda t}$ where $t \to \infty$, while STA achieves exact convergence $|s(t)| = 0$ at finite time $T_{\text{conv}} = 4$ s. The convergence rate near the origin is faster than exponential for STA, demonstrating the advantage of second-order sliding modes.}
+\label{fig:sta_finite_time_convergence}
+\end{figure}
+
 \subsection{Gain Tuning Guidelines}
 
 From \cref{eq:sta_stability_conditions}, conservative gain selection is:
@@ -179,8 +193,8 @@ Experimental results (\cref{fig:chattering_comparison_classical_vs_sta}) show:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/ch04_super_twisting/chattering_comparison_classical_vs_sta.png}
-\caption{Control signal comparison: Classical SMC (blue) versus STA-SMC (orange) under identical initial conditions ($\theta_1(0) = 0.2$ rad). The classical SMC exhibits high-frequency oscillations (chattering amplitude $2.5$ N/s) due to discontinuous $\sign(s)$ approximation. STA-SMC maintains continuous control with chattering amplitude $1.1$ N/s (56\% reduction). Both controllers use boundary layer $\epsilon = 0.3$ and PSO-optimized gains. See \cref{sec:mt6_boundary_layer} for optimization details.}
+\input{figures/ch04/chattering_comparison.tex}
+\caption{Control signal comparison: Classical SMC (top) versus STA-SMC (bottom) under identical initial conditions. The classical SMC exhibits high-frequency switching (50-100 Hz) with chattering amplitude $\pm20$ N due to discontinuous $\sign(s)$ approximation. STA-SMC maintains continuous control signal with low-frequency variations (1-5 Hz) and chattering amplitude $\pm3$ N, achieving 85\% chattering reduction. Both controllers reach finite-time convergence at approximately $t = 3$ s. The inset box shows quantitative comparison metrics demonstrating STA's superior performance.}
 \label{fig:chattering_comparison_classical_vs_sta}
 \end{figure}
 

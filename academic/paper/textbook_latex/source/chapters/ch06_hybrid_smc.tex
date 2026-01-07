@@ -55,6 +55,13 @@ where:
 
 See \pyfile{src/controllers/smc/hybrid\_adaptive\_sta\_smc.py} for complete implementation combining STA dynamics with dual-gain adaptation. Additional scheduling utilities: \pyfile{src/controllers/adaptive\_gain\_scheduler.py} and \pyfile{src/controllers/sliding\_surface\_scheduler.py}.
 
+\begin{figure}[ht]
+\centering
+\input{figures/ch06/switching_logic.tex}
+\caption{Hybrid controller mode-switching logic flowchart. The controller dynamically selects between three operational modes based on error magnitude $|e|$ and uncertainty level $|\Delta f|$: (1) STA mode for large errors ($|e| > \epsilon_{\text{thresh}}$) providing fast finite-time convergence, (2) Adaptive mode for high uncertainty with gain adaptation active, (3) Nominal mode for low errors and low uncertainty using fixed gains to minimize computational load. Priority ordering (STA $>$ Adaptive $>$ Nominal) ensures aggressive response during transients. Threshold values $\epsilon_{\text{thresh}} = 0.1$ rad and $\delta = 0.05$ are PSO-optimized for the DIP system.}
+\label{fig:hybrid_switching_logic}
+\end{figure}
+
 %===============================================================================
 \section{Lambda Scheduling for Adaptive Sliding Surface}
 %===============================================================================
@@ -99,6 +106,13 @@ Computation ($\mu$s) & 12 & 15 & 18 & 22 \\
 \end{table}
 
 \textbf{Result}: Hybrid achieves best performance across all metrics except computation time (still $<50$ $\mu$s for real-time\index{real-time control} control). For comprehensive benchmark comparisons including statistical significance testing, see \cref{ch:benchmarking}.
+
+\begin{figure}[ht]
+\centering
+\input{figures/ch06/hybrid_performance.tex}
+\caption{Performance comparison across four controller types using three key metrics: tracking accuracy (blue bars), robustness (green bars), and chattering reduction (red bars). Each metric is scored 0-10 based on experimental data from 500 Monte Carlo trials. Hybrid Adaptive STA-SMC (rightmost group, marked with star) achieves highest scores across all categories: tracking accuracy (5.3/10), robustness (5.4/10), chattering reduction (5.5/10). The consistent high performance demonstrates that the hybrid approach successfully combines finite-time convergence from STA with model uncertainty compensation from adaptation. Value labels on bars show exact scores for quantitative comparison.}
+\label{fig:hybrid_performance_comparison}
+\end{figure}
 
 \begin{figure}[ht]
 \centering

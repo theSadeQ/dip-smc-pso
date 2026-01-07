@@ -421,6 +421,13 @@ The equilibrium $\vect{x}_e$ is \textbf{finite-time stable} if there exists a fu
 Finite-time stability is the strongest form: the system reaches equilibrium \textit{exactly} in finite time.
 \end{definition}
 
+\begin{figure}[htbp]
+\centering
+\input{figures/ch02/phase_portrait.tex}
+\caption[Phase Portrait for Simple Pendulum]{Phase portrait of a simple pendulum system in the $(\theta, \dot{\theta})$ phase plane. The diagram illustrates three types of trajectories: \textcolor{blue}{libration} (closed orbits around stable equilibria at $\pm\pi$), \textcolor{green!70!black}{rotation} (unbounded motion), and the \textcolor{red}{separatrix} (homoclinic orbit) separating these behaviors. Equilibrium points are marked: \textcolor{blue}{stable} (at $\theta = \pm\pi$) and \textcolor{red}{unstable} (at $\theta = 0$). This visualization demonstrates fundamental concepts of stability and trajectory behavior that extend to the double-inverted pendulum system.}
+\label{fig:math:phase_portrait}
+\end{figure}
+
 \subsection{Lyapunov's Direct Method}
 
 \begin{theorem}[Lyapunov's Stability Theorem]
@@ -450,8 +457,15 @@ For asymptotic stability, $\dot{V} < 0$ ensures $V(t) \to 0$, which (by positive
 
 \begin{figure}[htbp]
 \centering
+\input{figures/ch02/lyapunov_contours.tex}
+\caption[Lyapunov Function Contours]{Lyapunov function level sets for a 2D system with quadratic $V(\vect{x}) = \vect{x}^T \mat{P} \vect{x}$. Contour lines represent constant values $V = c_i$ forming nested ellipses around the equilibrium $\vect{x}^* = \vect{0}$ (green point). Red arrows show the gradient $-\nabla V$, indicating that trajectories move inward toward regions of decreasing $V$ when $\dot{V} < 0$. The dashed outer ellipse marks the boundary of the region of attraction. This geometric interpretation demonstrates how Lyapunov functions provide "energy-like" measures that monotonically decrease along system trajectories, guaranteeing convergence.}
+\label{fig:math:lyapunov_contours}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
 \includegraphics[width=0.75\textwidth]{figures/ch02_foundations/NEW_energy_landscape.png}
-\caption[Lyapunov Function Energy Landscape]{Lyapunov function $V(\vect{x})$ visualized as an energy landscape for a 2D system. The equilibrium point $\vect{x}_e$ is at the global minimum where $V(\vect{x}_e) = 0$. Level sets (contour lines) represent constant values of $V$. Trajectories (blue arrows) follow $\dot{\vect{x}}$ and always move toward lower $V$ values when $\dot{V} < 0$, guaranteeing convergence to $\vect{x}_e$.}
+\caption[Lyapunov Function 3D Energy Landscape]{Lyapunov function $V(\vect{x})$ visualized as a 3D energy landscape for a 2D system. The equilibrium point $\vect{x}_e$ is at the global minimum where $V(\vect{x}_e) = 0$. Level sets (contour lines in the base) represent constant values of $V$. Trajectories (blue arrows) follow $\dot{\vect{x}}$ and always move toward lower $V$ values when $\dot{V} < 0$, guaranteeing convergence to $\vect{x}_e$. Compare with the 2D contour visualization in \cref{fig:math:lyapunov_contours}.}
 \label{fig:math:energy_landscape}
 \end{figure}
 
@@ -466,8 +480,8 @@ Replacing "positive definiteness" with "$\alpha_1(\norm{\vect{x}}) \leq V(\vect{
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.75\textwidth]{figures/ch02_foundations/stability_regions.png}
-\caption[Region of Attraction and Stability Regions]{Stability regions for the double-inverted pendulum equilibrium. The \textbf{region of attraction} (blue shaded area) represents all initial states $\vect{x}(0)$ that converge to the upright equilibrium $\vect{x}_e = \vect{0}$ under the control law. States outside this region (red) diverge or converge to different equilibria. The boundary of the region of attraction is determined by the largest level set $V(\vect{x}) = c$ contained entirely within the basin.}
+\input{figures/ch02/stability_region.tex}
+\caption[Region of Asymptotic Stability]{Stability regions for a nonlinear system in the $(\theta_1, \theta_2)$ state space. The blue ellipse represents the \textbf{region of asymptotic stability} where all trajectories converge to the equilibrium $(\theta_1, \theta_2) = (0, 0)$. The \textcolor{green!70!black}{converging trajectory} (inside the region) spirals toward equilibrium, while the \textcolor{red!70}{diverging trajectory} (outside) grows unboundedly. The stability boundary is determined by the largest level set $V(\vect{x}) = V_{\text{critical}}$ of the Lyapunov function that remains inside the basin of attraction. For the double-inverted pendulum, this region depends on controller gains and system parameters.}
 \label{fig:math:stability_regions}
 \end{figure}
 

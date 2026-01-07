@@ -74,6 +74,13 @@ The sliding dynamics can be written as:
 where $\mat{A}_s$ depends on $\lambda_i$ and $k_i$. The eigenvalues of $\mat{A}_s$ determine the convergence rate. For Hurwitz stability, all eigenvalues must have negative real parts, which is guaranteed when $\lambda_i, k_i > 0$ and the gains satisfy coupling conditions derived from the pendulum dynamics. See \cref{sec:classical_experimental} for experimental validation.
 \end{proof}
 
+\begin{figure}[htbp]
+\centering
+\input{figures/ch03/sliding_surface.tex}
+\caption[Sliding Surface Geometry in 3D State Space]{Geometric illustration of the sliding mode control process in 3D state space $(x_1, x_2, x_3)$. The \textcolor{blue!70}{sliding surface} $s(\vect{x}, t) = 0$ (blue plane) divides the state space into two regions ($s > 0$ and $s < 0$). The control law exhibits two phases: \textbf{Phase 1 (Reaching)} - trajectories (\textcolor{red}{red arrow}) are driven toward the surface from arbitrary initial conditions, satisfying $s \cdot \dot{s} < 0$; \textbf{Phase 2 (Sliding)} - once on the surface, trajectories (\textcolor{green!70!black}{green arrow}) slide along it toward the equilibrium $\vect{x}^* = \vect{0}$. The \textcolor{purple}{normal vector} $\nabla s(\vect{x})$ indicates the direction perpendicular to the surface. Control force vectors (\textcolor{orange}{orange}) ensure reaching and sliding conditions are satisfied.}
+\label{fig:classical:sliding_surface}
+\end{figure}
+
 \subsection{Gain Selection Guidelines}
 
 \begin{itemize}
@@ -230,10 +237,17 @@ where $\sat(\cdot)$ is a saturation function\index{saturation function}. Two com
     Disadvantages: Discontinuous derivative at $|s| = \epsilon$, can reduce robustness near origin.
 \end{enumerate}
 
+\begin{figure}[htbp]
+\centering
+\input{figures/ch03/boundary_layer.tex}
+\caption[Boundary Layer Illustration for Chattering Reduction]{Comparison of classical SMC with and without boundary layer. The main phase plane shows the \textcolor{blue}{sliding line} $s(\vect{x}) = 0$ surrounded by a \textcolor{green!70!black}{boundary layer} of thickness $|s| \leq \Phi$. The \textcolor{purple}{system trajectory} smoothly approaches and enters the boundary layer. Top inset: Classical SMC without boundary layer exhibits high-frequency chattering oscillations around $s = 0$. Bottom inset: With boundary layer, the control becomes smooth inside $|s| \leq \Phi$, eliminating chattering while maintaining convergence. The saturation function $u = -K \cdot \text{sat}(s/\Phi)$ provides continuous control inside the boundary layer, transitioning smoothly from reaching to sliding phases.}
+\label{fig:classical:boundary_layer}
+\end{figure}
+
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/ch03_classical_smc/chattering_classical.png}
-\caption{Chattering amplitude comparison: ideal signum switching ($\epsilon = 0$) versus boundary layer approximation ($\epsilon = 0.3$). The boundary layer reduces control signal oscillations from $>50$ N/s to $<3$ N/s while maintaining tracking performance. PSO-optimized $\epsilon = 0.3$ achieves 94\% chattering reduction with negligible steady-state error increase ($<0.02$ rad). See \cref{sec:mt6_boundary_layer} for optimization details.}
+\caption{Chattering amplitude comparison: ideal signum switching ($\epsilon = 0$) versus boundary layer approximation ($\epsilon = 0.3$). The boundary layer reduces control signal oscillations from $>50$ N/s to $<3$ N/s while maintaining tracking performance. PSO-optimized $\epsilon = 0.3$ achieves 94\% chattering reduction with negligible steady-state error increase ($<0.02$ rad). See \cref{sec:mt6_boundary_layer} for optimization details and \cref{fig:classical:boundary_layer} for geometric interpretation.}
 \label{fig:chattering_classical}
 \end{figure}
 
@@ -336,6 +350,13 @@ Since $K > 0$ and $k_d \geq 0$:
 \end{equation}
 
 This proves the reaching condition: the system converges to $s = 0$ in finite time.
+
+\begin{figure}[htbp]
+\centering
+\input{figures/ch03/reaching_phase.tex}
+\caption[Reaching Phase Trajectories]{Phase plane illustration of the reaching phase for classical SMC. Multiple trajectories (\textcolor{green!70!black}{green arrows}) converge from different initial conditions (IC$_1$, IC$_2$, IC$_3$, IC$_4$) in both regions ($s < 0$ and $s > 0$) toward the \textcolor{blue}{sliding line} $s(\vect{x}) = 0$. The reaching condition $s \cdot \dot{s} < 0$ ensures that trajectories always move toward the sliding line from both sides. Once on the line, the system enters sliding mode (\textcolor{purple}{purple arrow}) and moves along the manifold toward equilibrium $\vect{x}^*$. Time markers along a sample trajectory show the finite reaching time $t_{\text{reach}}$. Control force vectors (\textcolor{orange}{orange}) maintain the reaching condition throughout the approach.}
+\label{fig:classical:reaching_phase}
+\end{figure}
 
 \subsection{Finite-Time Convergence}
 

@@ -27,6 +27,13 @@ PSO, introduced by Kennedy \& Eberhart (1995) \cite{Kennedy1995}, is a populatio
 
 \begin{figure}[htbp]
 \centering
+\input{figures/ch07/cost_landscape.tex}
+\caption{PSO cost function landscape showing particle trajectories converging to the global optimum. Three particles (red, purple, cyan) start from different initial positions and navigate through the 2D parameter space $(\lambda_1, \lambda_2)$. The contour lines represent level sets of the cost function $J$, with the global minimum $\lambda^*$ at the center (green dot). Two local minima (orange dots) demonstrate the multimodal nature of the optimization landscape. Particle 3 (cyan) successfully avoids the local minimum via the social term, which attracts it toward the global best discovered by other particles. The cognitive term drives particles toward their personal best, while the social term enables swarm-wide information sharing. This visualization demonstrates PSO's ability to escape local minima through population-based search.}
+\label{fig:pso:cost_landscape}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
 \includegraphics[width=0.85\textwidth]{figures/ch07_pso_theory/pso_swarm_movement.png}
 \caption[PSO Particle Swarm Movement in 2D Parameter Space]{Particle Swarm Optimization\index{Particle Swarm Optimization} movement in 2D parameter space. Eight particles (blue circles) move through a fitness landscape (contours) toward the global best\index{Particle Swarm Optimization!global best} position (gold star). Velocity vectors (red arrows) show each particle's search direction, influenced by its personal best\index{Particle Swarm Optimization!personal best} (green squares) and the global best. The particles at time $t+1$ (light blue) demonstrate convergence\index{convergence} toward the optimum while maintaining diversity through stochastic components in the velocity update\index{Particle Swarm Optimization!velocity update}.}
 \label{fig:pso:swarm_movement}
@@ -140,6 +147,13 @@ PSO-optimized classical SMC achieves:
 \end{itemize}
 
 \textbf{Convergence}: 50 iterations, 30 particles, runtime 8 minutes (with Numba\index{Numba optimization}\index{Numba optimization} acceleration).
+
+\begin{figure}[htbp]
+\centering
+\input{figures/ch07/pso_convergence.tex}
+\caption{PSO convergence history showing cost function evolution over 100 iterations. The algorithm exhibits three distinct phases: \textbf{Phase 1} (iterations 0-30) involves global exploration with rapid cost reduction from $J_0 = 5.3$ to $J \approx 2.0$; \textbf{Phase 2} (iterations 30-70) focuses on exploitation with local refinement reducing cost to $J \approx 0.8$; \textbf{Phase 3} (iterations 70-85) achieves final convergence to optimal gains with $J^* = 0.32$ (green dashed line). The shaded region indicates population diversity, which decreases as particles converge toward the global best. Red markers show global best updates at key iterations. The algorithm converges when cost reaches the threshold (orange dashed line) at iteration 85, achieving 94\% improvement over initial random gains. Final optimal gains: $\lambda = [12.3, 8.7, 15.1, 6.4]$.}
+\label{fig:pso:convergence_history}
+\end{figure}
 
 See \pyfile{src/optimization/algorithms/pso\_optimizer.py} for complete PSO implementation with inertia weight\index{Particle Swarm Optimization!inertia weight}\index{Particle Swarm Optimization!inertia weight} scheduling, velocity clamping, and multi-objective fitness evaluation.
 

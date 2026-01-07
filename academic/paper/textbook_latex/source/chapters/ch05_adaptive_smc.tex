@@ -204,8 +204,8 @@ Hybrid Adaptive STA & \textbf{94\%} & [92\%, 96\%] \\
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/ch05_adaptive_smc/adaptive_smc_convergence.png}
-\caption{Adaptive SMC gain evolution under time-varying disturbance. Top: Angular positions $\theta_1, \theta_2$ converge to equilibrium despite disturbance at $t = 3$ s (impulse force $+20$ N). Bottom: Adaptive gain $K(t)$ increases from $K(0) = 2.0$ N to $K = 8.5$ N to compensate for disturbance, then decays back to $K \approx 3.0$ N due to leak rate $\alpha = 0.001$. Dead-zone $\delta = 0.01$ rad prevents chatter-induced adaptation.}
+\input{figures/ch05/adaptive_gain_evolution.tex}
+\caption{Adaptive SMC gain evolution under time-varying disturbance. The plot shows gain $\lambda(t)$ increasing from baseline 1.5 N to 2.7 N when disturbance is applied at $t = 3$ s, then gradually decreasing to 2.0 N as tracking improves. The comparison with fixed gain $\lambda_0 = 1.5$ (red dashed line) demonstrates automatic tuning capability. Three distinct phases are visible: steady state (0-3 s), adaptation phase (3-6 s) with rapid gain increase to reject disturbance, and recovery phase (6-10 s) with gain decrease as tracking error reduces. This real-time adaptation eliminates manual retuning requirements.}
 \label{fig:adaptive_convergence}
 \end{figure}
 
@@ -215,8 +215,8 @@ Beyond model uncertainty, adaptive SMC demonstrates superior performance under e
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/ch05_adaptive_smc/disturbance_rejection_adaptive.png}
-\caption[Adaptive SMC Disturbance Rejection]{Disturbance rejection performance comparison between classical SMC (blue) and adaptive SMC (orange) under periodic step disturbances ($\pm 15$ N applied every 2 seconds). Top: Angular position $\theta_1$ shows adaptive SMC maintains tighter tracking ($\pm 0.015$ rad) compared to classical SMC ($\pm 0.035$ rad), representing 57\% improvement. Middle: Control signal evolution shows adaptive SMC modulating effort in response to disturbances. Bottom: Adaptive gain $K(t)$ increases from $2.0$ N to $6.5$ N during disturbance events, then returns to baseline due to leak rate. This demonstrates real-time compensation without requiring disturbance estimation or observer design.}
+\input{figures/ch05/uncertainty_response.tex}
+\caption[Adaptive SMC Uncertainty Response]{Tracking error comparison between fixed gains (top, classical SMC) and adaptive gains (bottom, adaptive SMC) under parameter uncertainty. A parameter change occurs at $t = 3$ s representing 20\% mass variation. The fixed-gain controller exhibits large steady-state error $\pm 0.4$ rad that persists indefinitely (red degraded performance region). The adaptive controller quickly compensates via gain adaptation, reducing error to $<0.05$ rad within 2 seconds (green adaptation region). The comparison metrics box shows adaptive SMC achieves 50\% faster settling time (5 s vs. $>10$ s) with 90\% error reduction ($0.05$ vs. $0.4$), demonstrating robust performance without system re-identification.}
 \label{fig:adaptive_disturbance_rejection}
 \end{figure}
 
