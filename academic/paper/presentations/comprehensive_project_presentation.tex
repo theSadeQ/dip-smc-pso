@@ -626,7 +626,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Controller Factory Pattern}
+\begin{frame}[fragile]{Controller Factory Pattern}
     \textbf{Design Pattern:} Unified interface for all controllers
 
     \vspace{0.3cm}
@@ -1199,7 +1199,7 @@ u = controller.compute_control(state, last_u, history)
     \end{block}
 \end{frame}
 
-\begin{frame}{Batch Simulation: Numba Acceleration}
+\begin{frame}[fragile]{Batch Simulation: Numba Acceleration}
     \textbf{Vectorized Execution:}
 
     \vspace{0.3cm}
@@ -1234,7 +1234,7 @@ results = run_batch_simulation(
     \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Hardware-in-the-Loop (HIL) Support}
+\begin{frame}[fragile]{Hardware-in-the-Loop (HIL) Support}
     \textbf{Architecture:}
 
     \vspace{0.3cm}
@@ -1358,7 +1358,7 @@ python simulate.py --run-hil --host localhost --port 8888
     \end{block}
 \end{frame}
 
-\begin{frame}{Visualization: DIPAnimator}
+\begin{frame}[fragile]{Visualization: DIPAnimator}
     \textbf{Real-Time Animation:}
 
     \vspace{0.3cm}
@@ -2001,7 +2001,7 @@ animator.animate(save_path='animation.mp4', fps=30)
     \end{block}
 \end{frame}
 
-\begin{frame}{Batch Simulation: Numba Acceleration}
+\begin{frame}[fragile]{Batch Simulation: Numba Acceleration}
     \textbf{Vectorized Execution:}
 
     \vspace{0.3cm}
@@ -2036,7 +2036,7 @@ results = run_batch_simulation(
     \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Hardware-in-the-Loop (HIL) Support}
+\begin{frame}[fragile]{Hardware-in-the-Loop (HIL) Support}
     \textbf{Architecture:}
 
     \vspace{0.3cm}
@@ -2160,7 +2160,7 @@ python simulate.py --run-hil --host localhost --port 8888
     \end{block}
 \end{frame}
 
-\begin{frame}{Visualization: DIPAnimator}
+\begin{frame}[fragile]{Visualization: DIPAnimator}
     \textbf{Real-Time Animation:}
 
     \vspace{0.3cm}
@@ -2780,7 +2780,7 @@ python simulate.py --ctrl classical_smc --save results.json
     \end{block}
 \end{frame}
 
-\begin{frame}{Sphinx Documentation Build System}
+\begin{frame}[fragile]{Sphinx Documentation Build System}
     \textbf{Professional Documentation Pipeline:}
 
     \vspace{0.3cm}
@@ -2868,7 +2868,7 @@ curl -s "http://localhost:9000/_static/custom.css" | grep "YOUR_CHANGE"
     \end{enumerate}
 \end{frame}
 
-\begin{frame}{Documentation Quality Standards}
+\begin{frame}[fragile]{Documentation Quality Standards}
     \textbf{Professional Writing Guidelines:}
 
     \vspace{0.3cm}
@@ -2981,7 +2981,7 @@ pso_particles = config.optimization.pso.num_particles
     \end{alertblock}
 \end{frame}
 
-\begin{frame}{CLI Interface}
+\begin{frame}[fragile]{CLI Interface}
     \textbf{Command-Line Interface: \texttt{simulate.py}}
 
     \vspace{0.3cm}
@@ -3062,7 +3062,7 @@ python simulate.py --print-config
     \end{enumerate}
 \end{frame}
 
-\begin{frame}{Web UI Technology Stack}
+\begin{frame}[fragile]{Web UI Technology Stack}
     \textbf{Launch Command:}
     \begin{lstlisting}[language=bash]
 streamlit run streamlit_app.py
@@ -3285,7 +3285,7 @@ while True:
 % ============================================================================
 \section{Monitoring Infrastructure}
 
-\begin{frame}{LatencyMonitor: Real-Time Performance Tracking}
+\begin{frame}[fragile]{LatencyMonitor: Real-Time Performance Tracking}
     \textbf{Purpose:} Track control loop timing for real-time systems
 
     \vspace{0.3cm}
@@ -3320,7 +3320,7 @@ for t in simulation_loop:
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Logging System Architecture}
+\begin{frame}[fragile]{Logging System Architecture}
     \textbf{Centralized Log Management:}
 
     \vspace{0.3cm}
@@ -3391,7 +3391,7 @@ log_file = get_log_path('pso', 'classical_smc_20250930.log')
     \end{enumerate}
 \end{frame}
 
-\begin{frame}{Monitoring Data Visualization}
+\begin{frame}[fragile]{Monitoring Data Visualization}
     \textbf{Real-Time Dashboard (Streamlit):}
 
     \vspace{0.3cm}
@@ -3484,7 +3484,7 @@ streamlit run scripts/monitoring/real_time_dashboard.py
     \end{enumerate}
 \end{frame}
 
-\begin{frame}{Checkpoint System for Multi-Agent Tasks}
+\begin{frame}[fragile]{Checkpoint System for Multi-Agent Tasks}
     \textbf{Purpose:} Prevent loss of agent work on token limits/crashes
 
     \vspace{0.3cm}
@@ -3566,7 +3566,7 @@ python .ai_workspace/tools/checkpoints/analyze_checkpoints.py
     \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Recovery System: 30-Second Project Restoration}
+\begin{frame}[fragile]{Recovery System: 30-Second Project Restoration}
     \textbf{Purpose:} Resume work after token limits or multi-month gaps
 
     \vspace{0.3cm}
@@ -3967,7 +3967,7 @@ git commit -m "feat(MT-6): Complete boundary layer optimization"
     \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Controller Memory Management}
+\begin{frame}[fragile]{Controller Memory Management}
     \textbf{Weakref Patterns to Prevent Circular References:}
 
     \vspace{0.3cm}
@@ -4153,7 +4153,7 @@ class ClassicalSMC:
     \end{enumerate}
 \end{frame}
 
-\begin{frame}{Playwright Test Suite}
+\begin{frame}[fragile]{Playwright Test Suite}
     \textbf{17 Automated UI Tests:}
 
     \vspace{0.3cm}
@@ -4359,7 +4359,7 @@ python scripts/ui/run_lighthouse_audit.py
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Weekly Health Check}
+\begin{frame}[fragile]{Weekly Health Check}
     \textbf{Automated Workspace Validation:}
 
     \vspace{0.3cm}
@@ -4395,7 +4395,7 @@ bash scripts/utils/workspace_health_check.sh
 % ============================================================================
 \section{Version Control}
 
-\begin{frame}{Git Workflow \& Repository Management}
+\begin{frame}[fragile]{Git Workflow \& Repository Management}
     \textbf{Repository Information:}
 
     \vspace{0.3cm}
@@ -4460,7 +4460,7 @@ git push origin main
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Git Safety Protocol}
+\begin{frame}[fragile]{Git Safety Protocol}
     \textbf{CRITICAL RULES (NEVER VIOLATE):}
 
     \vspace{0.3cm}
@@ -5163,7 +5163,7 @@ git log -1 --format='%an %ae'
 % ============================================================================
 \appendix
 
-\begin{frame}{Quick Reference: Essential Commands}
+\begin{frame}[fragile]{Quick Reference: Essential Commands}
     \textbf{Most Common Operations:}
 
     \vspace{0.3cm}
@@ -5270,7 +5270,7 @@ bash .ai_workspace/tools/recovery/recover_project.sh
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Repository Structure (Condensed)}
+\begin{frame}[fragile]{Repository Structure (Condensed)}
     \textbf{Top-Level Organization:}
 
     \vspace{0.3cm}
