@@ -61,7 +61,12 @@ def create_episode_tex(episode: Dict, output_dir: Path, base_dir: Path) -> Path:
     title = episode["title"]
 
     # Create episode-specific .tex file
-    tex_filename = output_dir / f"{episode_id}_{title.replace(' ', '_').replace(':', '').lower()}.tex"
+    # Sanitize filename: remove invalid Windows characters
+    safe_title = title.lower()
+    for char in ['?', ':', '<', '>', '"', '|', '*', '/', '\\']:
+        safe_title = safe_title.replace(char, '')
+    safe_title = safe_title.replace(' ', '_')
+    tex_filename = output_dir / f"{episode_id}_{safe_title}.tex"
 
     # LaTeX template for episode
     tex_content = f"""% ============================================================================
@@ -74,7 +79,8 @@ def create_episode_tex(episode: Dict, output_dir: Path, base_dir: Path) -> Path:
 \\documentclass[11pt,a4paper]{{article}}
 
 % Load presentation config (packages, commands)
-\\input{{../../speaker_config.tex}}
+% Path relative to episodes/part*/ directory
+\\input{{../../../speaker_config.tex}}
 
 % Title information
 \\title{{%
