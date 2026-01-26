@@ -79,3 +79,6 @@ This episode covers simulation engine architecture from the DIP-SMC-PSO project.
 ---
 
 *Educational podcast episode generated from comprehensive presentation materials*
+
+
+[TODO: Expand simulation engine episode with architecture, vectorization, Numba optimization]

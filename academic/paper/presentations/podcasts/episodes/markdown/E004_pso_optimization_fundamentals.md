@@ -155,3 +155,6 @@ This episode covers pso optimization fundamentals from the DIP-SMC-PSO project.
 ---
 
 *Educational podcast episode generated from comprehensive presentation materials*
+
+
+[TODO: Expand PSO episode with detailed algorithm, cost functions, constraints, and real MT-8 results]
