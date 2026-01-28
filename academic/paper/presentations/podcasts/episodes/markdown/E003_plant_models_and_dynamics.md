@@ -1,254 +1,129 @@
 # E003: Plant Models and Dynamics
 
-## Introduction
+**[AUDIO NOTE: This episode is about the physics - the actual equations of motion for our double broomstick. We'll cut straight to the intuition and skip the tedious algebra. The full derivations are in the show notes if you're curious, but you don't need them to understand how this works.]**
 
-Plant models are the mathematical representations of the physical system we want to control. For the double-inverted pendulum (DIP), we need equations that describe how the system moves in response to applied forces.
+## Introduction: What is the Plant?
+
+In control theory, the "plant" is the thing you're trying to control - the physical system itself. In Episodes E001 and E002, we talked about controllers (the brains making decisions). Now we're talking about the plant (the body those decisions act upon).
+
+For our double-inverted pendulum, the plant model is the set of equations that answer this question: "If I push the cart with force F right now, how will the pendulum angles and velocities change in the next millisecond?"
+
+**Remember that SpaceX rocket?** The plant model for a rocket describes how thrust forces translate into position and velocity changes, accounting for mass, moment of inertia, aerodynamic drag, and gravity. Same concept, different system.
 
 This episode covers:
-- Lagrangian mechanics derivation
-- Three model variants (simplified, full, low-rank)
+- WHY we use Lagrangian mechanics (skip the painful algebra)
+- THREE model variants: The Sprinter, The Simulator, and The Efficient Pro
 - Model accuracy and computational trade-offs
-- Singularities and numerical challenges
-- Implementation in Python
+- Singularities (when the math breaks down) and what they mean physically
+- How all this works in Python code
 
-## Physical System Description
+## Physical System Description: The Double Broomstick Revisited
 
-### Double-Inverted Pendulum Configuration
+Picture the system: A cart that slides left and right on a horizontal track. Standing upright on the cart is the first pendulum (the bottom broomstick). Attached to the top of that first pendulum is the second pendulum (the top broomstick). Both pendulums are free to rotate.
 
-```
-        ●  mass m₂, length L₂
-        |
-        |  ← Pendulum 2
-        |
-        ●  mass m₁, length L₁
-        |
-        |  ← Pendulum 1
-        |
-    ===========  mass M, position x
-        ↕ F
-    -----------
-     Track/Rail
-```
+**The ASCII diagram** in the show notes shows this setup, but here's the intuition:
+- **Cart**: Has mass, slides on a track with some friction, controlled by a horizontal push force
+- **Pendulum 1** (bottom stick): Has mass, length, rotates around a joint on the cart with a bit of friction
+- **Pendulum 2** (top stick): Has mass, length, rotates around a joint at the top of Pendulum 1
 
-**System Parameters:**
-- Cart: mass `M`, position `x`, friction `b_c`
-- Pendulum 1: mass `m₁`, length `L₁`, COM `l_c1`, inertia `I₁`, joint friction `b_1`
-- Pendulum 2: mass `m₂`, length `L₂`, COM `l_c2`, inertia `I₂`, joint friction `b_2`
-- Gravity: `g = 9.81 m/s²`
+**The Three Coordinates We Track:**
+1. **x**: Cart position (how far left or right along the track)
+2. **theta-1**: First pendulum angle (measured from vertical - zero means perfectly upright)
+3. **theta-2**: Second pendulum angle (also from vertical)
 
-**Generalized Coordinates:**
-```
-q = [x, θ₁, θ₂]ᵀ
+**Real-World Numbers:**
+Our default configuration models a realistic lab-scale system:
+- Cart: 1.5 kg (about as heavy as a laptop)
+- Pendulum 1: 0.2 kg, 40 cm long (about the weight and length of a wooden ruler)
+- Pendulum 2: 0.15 kg, 30 cm long (slightly lighter and shorter)
+- Friction: Small but non-zero (a bit of resistance at the joints and cart)
 
-Where:
-  x = cart position [m]
-  θ₁ = angle of pendulum 1 from vertical [rad] (0 = upright)
-  θ₂ = angle of pendulum 2 from vertical [rad] (0 = upright)
-```
+These aren't arbitrary - they're based on actual inverted pendulum rigs you'd find in control labs at universities.
 
-**Default Values** (from `config.yaml`):
-```yaml
-physics:
-  cart_mass: 1.5          # kg
-  pendulum1_mass: 0.2     # kg
-  pendulum2_mass: 0.15    # kg
-  pendulum1_length: 0.4   # m
-  pendulum2_length: 0.3   # m
-  pendulum1_com: 0.2      # m (center of mass from pivot)
-  pendulum2_com: 0.15     # m
-  pendulum1_inertia: 0.0081  # kg·m²
-  pendulum2_inertia: 0.0034  # kg·m²
-  gravity: 9.81           # m/s²
-  cart_friction: 0.2      # N·s/m
-  joint1_friction: 0.005  # N·m·s/rad
-  joint2_friction: 0.004  # N·m·s/rad
-```
+## Lagrangian Mechanics: The Elegant Shortcut
 
-## Lagrangian Mechanics Derivation
+**[AUDIO NOTE: We're skipping the painful algebra entirely. Focus on WHY this approach is brilliant, not HOW to grind through the calculus]**
 
-### Why Lagrangian Approach?
+### Why Lagrangian Instead of Newton's Laws?
 
-**Advantages over Newtonian mechanics:**
-1. No need to solve for constraint forces
-2. Systematic procedure (works for any mechanism)
-3. Coordinate-free formulation
-4. Easy to add/remove components
+Imagine trying to analyze this system using Newton's F=ma directly. You'd need to:
 
-**Lagrangian Method Steps:**
-1. Choose generalized coordinates `q`
-2. Compute kinetic energy `T(q, q̇)`
-3. Compute potential energy `V(q)`
-4. Form Lagrangian: `L = T - V`
-5. Apply Euler-Lagrange equations
+1. Draw free-body diagrams for the cart, first pendulum, and second pendulum
+2. Figure out all the internal forces - the force the cart exerts on Pendulum 1's pin, the force Pendulum 1's pin exerts back on the cart, the force Pendulum 1 exerts on Pendulum 2's pin, and so on
+3. Write force balance equations for each component
+4. Solve a coupled system of equations with all these unknown internal forces
 
-### Step 1: Kinetic Energy
+That's a **nightmare** of coupled equations with a dozen variables you don't even care about (the pin forces). You just want to know how the system moves!
 
-**Cart Kinetic Energy:**
-```
-T_cart = (1/2)M·ẋ²
-```
+**The Lagrangian Approach: Ignore the Internal Glue**
 
-**Pendulum 1 Kinetic Energy:**
+Lagrangian mechanics is a brilliant shortcut discovered in the 1700s. The key insight: you don't need to know the internal constraint forces (like pin forces) if you just focus on energy. Here's the recipe:
 
-Position of COM:
-```
-x_c1 = x + l_c1·sin(θ₁)
-y_c1 = l_c1·cos(θ₁)
-```
+1. **Calculate total kinetic energy**: How much energy is in the motion? This includes the cart sliding, plus both pendulums translating through space AND rotating. It's messy because Pendulum 2's motion depends on Pendulum 1's motion (they're coupled), but it's doable.
 
-Velocity:
-```
-ẋ_c1 = ẋ + l_c1·cos(θ₁)·θ̇₁
-ẏ_c1 = -l_c1·sin(θ₁)·θ̇₁
-```
+2. **Calculate total potential energy**: How much gravitational potential energy does the system have? Higher pendulums mean more potential energy.
 
-Kinetic energy (translation + rotation):
-```
-T₁ = (1/2)m₁·(ẋ_c1² + ẏ_c1²) + (1/2)I₁·θ̇₁²
-   = (1/2)m₁·[ẋ² + 2ẋ·l_c1·cos(θ₁)·θ̇₁ + l_c1²·θ̇₁²] + (1/2)I₁·θ̇₁²
-```
+3. **Subtract them to form the Lagrangian**: L = Kinetic Energy - Potential Energy. This single function captures all the system's dynamics.
 
-**Pendulum 2 Kinetic Energy:**
+4. **Apply Euler-Lagrange equations**: A systematic calculus recipe (like following a cooking recipe) that automatically gives you the equations of motion - NO internal forces needed!
 
-Position of COM (relative to pendulum 1 pivot):
-```
-x_c2 = x + L₁·sin(θ₁) + l_c2·sin(θ₂)
-y_c2 = L₁·cos(θ₁) + l_c2·cos(θ₂)
-```
+**The Beautiful Result:**
 
-Velocity:
-```
-ẋ_c2 = ẋ + L₁·cos(θ₁)·θ̇₁ + l_c2·cos(θ₂)·θ̇₂
-ẏ_c2 = -L₁·sin(θ₁)·θ̇₁ - l_c2·sin(θ₂)·θ̇₂
-```
+After all that calculus (which we're not subjecting you to), you get a single matrix equation:
 
-Kinetic energy:
-```
-T₂ = (1/2)m₂·(ẋ_c2² + ẏ_c2²) + (1/2)I₂·θ̇₂²
-```
+**M(q) × acceleration + C(q,q̇) × velocity + G(q) = B × control force + disturbances**
 
-**Total Kinetic Energy:**
-```
-T = T_cart + T₁ + T₂
-```
+Let's unpack what each matrix actually MEANS physically:
 
-### Step 2: Potential Energy
+- **M(q) - The Mass Matrix**: Captures how mass and inertia are distributed. "If I want to accelerate the cart by 1 m/s², and the pendulums are at these angles, how much force do I need?" The answer depends on the pendulum angles because the effective inertia changes with configuration.
 
-```
-V = m₁·g·l_c1·cos(θ₁) + m₂·g·(L₁·cos(θ₁) + l_c2·cos(θ₂))
-```
+- **C(q,q̇) - The Spinning Forces**: These are Coriolis and centrifugal terms. Remember that car-turn analogy from the Gemini review? When you take a sharp turn, you feel pushed against the car door - that's centrifugal force. When you try to walk straight on a spinning merry-go-round and your path curves - that's Coriolis. Our pendulums feel both because they're rotating and moving through space simultaneously.
 
-(Zero reference at θ₁ = θ₂ = π/2, i.e., horizontal)
+- **G(q) - Gravity**: How much does gravity pull on each component? Depends on the angles - when pendulums are more vertical, gravity pulls them down harder (larger torque).
 
-### Step 3: Euler-Lagrange Equations
+- **B - Input Distribution**: The control force only pushes the cart directly, not the pendulums. This matrix captures that "the force enters here but affects everything indirectly."
 
-```
-d/dt(∂L/∂q̇ᵢ) - ∂L/∂qᵢ = Qᵢ
+## Mass Matrix Structure: Action and Reaction
 
-Where Qᵢ = generalized force (includes friction + control input)
-```
+**[AUDIO NOTE: This is where the coupling between components shows up mathematically]**
 
-**For our system:**
-```
-Q = [F - b_c·ẋ,  -b₁·θ̇₁,  -b₂·θ̇₂]ᵀ
+The mass matrix is a 3×3 grid of numbers that changes with the pendulum angles. Here's the intuition:
 
-Where F = control force applied to cart
-```
+**Diagonal Elements** (M11, M22, M33):
+These represent "self-inertia" - how hard it is to accelerate each component by itself. M11 is the total mass of everything (cart plus both pendulums), because accelerating the cart means dragging everything along. M22 is the rotational inertia of Pendulum 1, M33 is the rotational inertia of Pendulum 2.
 
-### Step 4: Equation of Motion Form
+**Off-Diagonal Elements** (M12, M13, M23):
+These are the **coupling terms** - they capture how motion of one component affects the others. For example, M12 tells you: "If I accelerate the cart, how much does that torque Pendulum 1?" The answer depends on cos(theta-1) - when Pendulum 1 is vertical, the coupling is strongest. When it's horizontal, there's less coupling.
 
-After lengthy algebra, we get:
+**Key Property - Symmetry:**
+The matrix is symmetric: M12 equals M21, M13 equals M31, M23 equals M32. This is Newton's Third Law in disguise - **action and reaction**. The effect of Link 1 on Link 2 is exactly the same magnitude as the effect of Link 2 on Link 1. Just in different directions.
 
-```
-M(q)·q̈ + C(q,q̇)·q̇ + G(q) = Bu + d
+**In Code:**
+The Python implementation computes all these elements based on the current pendulum angles, using trig functions (cosines) for the coupling terms. It returns a 3×3 NumPy array that we can invert and use in our dynamics solver.
 
-Where:
-  M(q) = mass/inertia matrix (3×3, symmetric, positive definite)
-  C(q,q̇) = Coriolis/centrifugal matrix (3×3)
-  G(q) = gravity vector (3×1)
-  B = input distribution matrix (3×1, constant)
-  u = control input (scalar)
-  d = disturbances (friction, external forces)
-```
+### Singularities: When the Math Locks Up
 
-## Mass Matrix Structure
+**[AUDIO NOTE: This is where the physics breaks down - and it has a clear physical meaning]**
 
-### Full Nonlinear Mass Matrix
+Think about your arm. When you extend your arm fully and lock your elbow, you can't push it any further in that direction. The geometry has "locked up" - there's no more range of motion available in that direction. The same thing happens with our pendulum system at certain configurations.
 
-```python
-def _compute_mass_matrix(self, theta1: float, theta2: float) -> np.ndarray:
-    """
-    Compute M(q) for full nonlinear model.
+**What Causes Singularities?**
 
-    M = [M₁₁  M₁₂  M₁₃]
-        [M₂₁  M₂₂  M₂₃]
-        [M₃₁  M₃₂  M₃₃]
+For the double inverted pendulum, singularities occur when the pendulums align in very specific ways. For example, when both pendulums are perfectly horizontal (lying flat), the mass matrix becomes nearly singular. Why? Because in that configuration, certain motions become mechanically "locked" - the system can't accelerate in certain directions without infinite force.
 
-    Symmetric: M₁₂=M₂₁, M₁₃=M₃₁, M₂₃=M₃₂
-    """
-    c1 = np.cos(theta1)
-    c2 = np.cos(theta2)
-    c12 = np.cos(theta1 - theta2)
+**The Condition Number - A Health Check:**
 
-    # Diagonal elements
-    M11 = self.M + self.m1 + self.m2
-    M22 = self.I1 + self.m1 * self.lc1**2 + self.m2 * self.L1**2
-    M33 = self.I2 + self.m2 * self.lc2**2
+We use something called the "condition number" to measure how close the mass matrix is to being singular. Think of it as a health score:
+- **κ around 1-100**: Healthy - the matrix inverts cleanly, no numerical issues
+- **κ above 1 million**: Sick - numerical errors get amplified, results become unreliable
+- **κ approaching infinity**: Dead - the matrix is singular, can't be inverted
 
-    # Off-diagonal elements (coupling terms)
-    M12 = (self.m1 * self.lc1 + self.m2 * self.L1) * c1
-    M13 = self.m2 * self.lc2 * c2
-    M23 = self.m2 * self.L1 * self.lc2 * c12
+**How We Handle It in Code:**
 
-    return np.array([
-        [M11, M12, M13],
-        [M12, M22, M23],
-        [M13, M23, M33]
-    ])
-```
+The code checks the condition number before inverting the mass matrix. If it's too high (above 100 million), we switch to a safer "pseudoinverse" method with regularization - essentially adding a tiny bit of numerical cushioning to prevent division-by-near-zero. It's slightly slower but prevents crashes.
 
-**Key Properties:**
-1. **Symmetric**: `M = Mᵀ` (always true for Lagrangian systems)
-2. **Positive Definite**: All eigenvalues > 0 (kinetic energy always positive)
-3. **Configuration-Dependent**: Changes with `θ₁, θ₂`
-4. **Bounded**: `λ_min(M) ≥ m_min > 0` (invertible)
-
-### Singularities and Conditioning
-
-**Condition Number:**
-```
-κ(M) = λ_max(M) / λ_min(M)
-```
-
-**Interpretation:**
-- `κ ≈ 1`: Well-conditioned (easy to invert)
-- `κ > 10⁶`: Ill-conditioned (numerical errors amplified)
-- `κ → ∞`: Singular (non-invertible)
-
-**For DIP:**
-- Typical: `κ(M) ~ 10-100` (well-conditioned)
-- Near horizontal (`θ₁,θ₂ ≈ π/2`): `κ(M) ~ 10⁴-10⁶` (ill-conditioned)
-- At singularity: `κ(M) → ∞` (rare, requires exact alignment)
-
-**Code Implementation:**
-
-```python
-# Compute condition number
-cond = np.linalg.cond(M)
-
-if cond > self.singularity_threshold:  # Default: 1e8
-    # Use pseudoinverse with regularization
-    M_inv = np.linalg.pinv(M, rcond=1e-6)
-else:
-    # Standard inversion (faster)
-    M_inv = np.linalg.inv(M)
-```
-
-From `config.yaml`:
-```yaml
-physics:
-  singularity_cond_threshold: 100000000.0  # 1e8
-```
+**In Practice:**
+For normal operation near the upright position, the condition number stays in the healthy range (10-100). Only when pendulums swing toward horizontal do we approach dangerous territory. The controller is designed to avoid those configurations anyway.
 
 ## Coriolis and Centrifugal Terms
 
@@ -326,130 +201,76 @@ def _compute_gravity_vector(self, theta1: float, theta2: float) -> np.ndarray:
 - Gravity torque pushes pendulum away from vertical
 - Control must counteract this destabilizing torque
 
-## Three Model Variants
+## Three Model Variants: Meet the Characters
 
-### 1. Simplified Linear Model
+**[AUDIO NOTE: Think of these three models as three different teammates, each with their own personality and strengths]**
 
-**File**: `src/plant/simplified_dip.py`
+We provide three different mathematical models of the same physical system. Why three? Because there's a fundamental trade-off between **speed** and **accuracy**, and different tasks require different balances. Let's personify them:
 
-**Assumptions:**
-- Small angles: `sin(θ) ≈ θ`, `cos(θ) ≈ 1`
-- Neglect second-order terms: `θ₁·θ₂ ≈ 0`, `θ̇₁² ≈ 0`
-- Constant mass matrix (linearized around θ=0)
+### Model 1: The Sprinter (Simplified Linear Model)
 
-**Advantages:**
-- 10-100x faster computation
-- Ideal for PSO optimization (thousands of simulations)
-- Analytical Jacobians available
+**Personality**: Fast, agile, assumes everything is nearly perfect
 
-**Limitations:**
-- Accurate only near upright: `|θ₁|, |θ₂| < 5-10°`
-- Cannot simulate swing-up (large angles)
-- Underestimates nonlinear effects
+Think of the Sprinter as your quick prototyping buddy. Makes big simplifying assumptions:
+- **Assumes small angles**: "sine of theta is just theta, cosine is just one" - only true when angles are tiny (within 5-10 degrees of vertical)
+- **Ignores coupled effects**: "When both pendulums are moving, I'll pretend those interactions are negligible"
+- **Constant mass matrix**: "I'll compute the mass distribution once and never update it"
 
-**Code Structure:**
+**Superpowers**:
+- **Lightning fast**: 10 to 100 times faster than the full model. Can run thousands of simulations in minutes.
+- **Perfect for PSO**: When you need to evaluate 30 particles over 50 iterations (1500 simulations), you want the Sprinter.
+- **Great for teaching**: Simple enough that students can work through the equations by hand.
 
-```python
-class SimplifiedDIP:
-    def compute_dynamics(self, state: np.ndarray, u: float) -> np.ndarray:
-        # Extract state
-        x, theta1, theta2, x_dot, theta1_dot, theta2_dot = state
+**Kryptonite**:
+- **Can't handle large angles**: Try to simulate swing-up (starting from hanging down), and the Sprinter gives you garbage. The small-angle approximation breaks completely.
+- **Lies about nonlinear effects**: Underestimates how the pendulums actually couple when moving fast.
 
-        # Linearized mass matrix (constant)
-        M = self._get_linearized_mass_matrix()
+**When to Call the Sprinter**: Initial prototyping, PSO gain optimization, educational demos, any time you're operating near upright and need speed.
 
-        # Simplified dynamics (linear in theta)
-        h = self._compute_linear_terms(theta1, theta2)
+**Code Workflow**: Grab the linearized (constant) mass matrix, compute simplified dynamics (linear in angles), solve one matrix equation, done. Super clean, super fast.
 
-        # Solve: M·q̈ = Bu - h
-        B = np.array([1.0, 0.0, 0.0])
-        q_ddot = np.linalg.solve(M, B * u - h)
+### Model 2: The Simulator (Full Nonlinear Model)
 
-        return np.array([x_dot, theta1_dot, theta2_dot,
-                        q_ddot[0], q_ddot[1], q_ddot[2]])
-```
+**Personality**: Slow, heavy, brutally honest about physics
 
-**When to Use:**
-- PSO optimization
-- Initial controller testing
-- Educational demonstrations
-- Systems constrained to small angles
+The Simulator is your reality-check friend. No shortcuts, no approximations. Every trigonometric term, every Coriolis effect, every bit of coupling - all computed exactly.
 
-### 2. Full Nonlinear Model
+**Superpowers**:
+- **Tells the truth**: Accurate across the FULL operating range - from hanging down to perfectly upright and everywhere in between.
+- **All the physics**: Captures Coriolis forces (remember the merry-go-round?), centrifugal effects (car-turn push), gyroscopic coupling (how rotation in one axis affects another).
+- **Your final exam**: When you publish benchmark results, you use the Simulator to prove your controller actually works in realistic conditions.
 
-**File**: `src/plant/full_dip.py`
+**Kryptonite**:
+- **Computationally expensive**: 10-100x slower than the Sprinter. All those trig functions and matrix updates add up.
+- **Overkill for simple tasks**: If you just need a ballpark gain estimate, the Simulator is like using a sledgehammer to crack a nut.
 
-**Features:**
-- Complete trigonometric terms
-- Coriolis and centrifugal effects
-- Gyroscopic coupling
-- Full operating range
+**When to Call the Simulator**: Final validation before hardware deployment, swing-up control (large angles), research benchmarks you'll publish, any time accuracy matters more than speed.
 
-**Code Structure:**
+**Code Workflow**: Compute angle-dependent mass matrix, compute velocity-dependent Coriolis matrix, compute angle-dependent gravity vector, combine friction, solve the full dynamics equation. It's a workout for the CPU.
 
-```python
-class FullNonlinearDIP:
-    def compute_dynamics(self, state: np.ndarray, u: float) -> np.ndarray:
-        # Extract state
-        x, theta1, theta2, x_dot, theta1_dot, theta2_dot = state
+### Model 3: The Efficient Pro (Low-Rank Approximation)
 
-        # Configuration-dependent mass matrix
-        M = self._compute_mass_matrix(theta1, theta2)
+**Personality**: Smart compromise - fast like the Sprinter, accurate like the Simulator (mostly)
 
-        # Coriolis/centrifugal matrix
-        C = self._compute_coriolis_matrix(theta1, theta2,
-                                          theta1_dot, theta2_dot)
+The Efficient Pro uses a clever mathematical trick called Proper Orthogonal Decomposition (POD). Here's the idea: run the full Simulator thousands of times, collect all the data, then use math (Singular Value Decomposition) to figure out which "patterns" in the motion matter most. Keep the important patterns, throw away the noise.
 
-        # Gravity vector
-        G = self._compute_gravity_vector(theta1, theta2)
+**Superpowers**:
+- **10-50x speedup**: Almost as fast as the Sprinter, but preserves the accuracy of the Simulator for the dynamics that matter.
+- **Perfect for Monte Carlo**: Need to run 1000 simulations with parameter variations? The Efficient Pro handles it.
+- **Real-time capable**: Fast enough for hardware-in-the-loop (HIL) testing where you need millisecond-level updates.
 
-        # Friction
-        D = np.diag([self.b_cart, self.b_joint1, self.b_joint2])
+**Kryptonite**:
+- **Needs training**: You have to run the full Simulator first to collect the "snapshot" data. Not a drop-in replacement.
+- **Can miss rare events**: If your training data doesn't include a weird edge case, the reduced model won't capture it.
 
-        # Input distribution
-        B = np.array([1.0, 0.0, 0.0])
+**When to Call the Efficient Pro**: Large-scale parameter sweeps (testing 1000 different gain combinations), sensitivity analysis, HIL testing where real-time performance matters.
 
-        # Full dynamics: M·q̈ + C·q̇ + G + D·q̇ = Bu
-        q_dot = np.array([x_dot, theta1_dot, theta2_dot])
-        rhs = B * u - C @ q_dot - G - D @ q_dot
+**The Bottom Line**:
+- **Quick prototyping?** Sprinter.
+- **Final validation?** Simulator.
+- **Massive data crunching?** Efficient Pro.
 
-        # Solve for acceleration
-        q_ddot = np.linalg.solve(M, rhs)
-
-        return np.array([x_dot, theta1_dot, theta2_dot,
-                        q_ddot[0], q_ddot[1], q_ddot[2]])
-```
-
-**When to Use:**
-- Final validation
-- Swing-up control
-- Research benchmarks
-- Realistic simulations
-
-### 3. Low-Rank Approximation
-
-**File**: `src/plant/lowrank_dip.py`
-
-**Method**: Proper Orthogonal Decomposition (POD)
-1. Collect snapshots from full model
-2. Compute SVD: `X = UΣVᵀ`
-3. Retain top-k modes: `X̃ = U_k Σ_k V_kᵀ`
-4. Project dynamics onto reduced basis
-
-**Advantages:**
-- 10-50x speedup vs. full model
-- Preserves dominant dynamics
-- Suitable for Monte Carlo studies
-
-**Limitations:**
-- Requires training data
-- Accuracy depends on snapshot diversity
-- May miss rare phenomena
-
-**When to Use:**
-- Large-scale parameter sweeps
-- Sensitivity analysis (1000+ runs)
-- Real-time applications (HIL)
+It's like having three tools in your toolbox - hammer, precision screwdriver, and power drill. Use the right tool for the job.
 
 ## Model Accuracy Comparison
 
@@ -661,48 +482,44 @@ print(f"Mean θ₁ difference: {np.rad2deg(theta1_diff):.2f}°")
 assert theta1_diff < np.deg2rad(1.0)
 ```
 
-## Summary and Key Takeaways
+## Conclusion: From Equations to Rockets
 
-### Plant Model Fundamentals
+**Remember that SpaceX rocket from Episodes E001 and E002?** Now you understand what's running inside its flight computer's plant model:
 
-1. **Lagrangian Mechanics**: Systematic derivation from energy
-2. **Equation of Motion**: `M(q)q̈ + C(q,q̇)q̇ + G(q) = Bu`
-3. **Three Variants**: Simplified (fast), Full (accurate), Low-Rank (balanced)
+**The Rocket's Plant Model:**
+1. **Mass matrix**: Changes constantly as fuel burns - the effective inertia drops from millions of kilograms at launch to tens of thousands at landing. The control system recomputes M(q) hundreds of times per second.
+2. **Coriolis/centrifugal terms**: When the rocket is rotating to orient itself, these "spinning forces" affect how thrust translates to motion. Ignore them and your trajectory diverges.
+3. **Singularities**: Certain gimbal configurations lock up (like our arm analogy) - the flight computer actively avoids these.
+4. **Model switching**: During ascent, SpaceX likely uses a simplified model (small angle deviations from vertical). During landing, when the rocket is maneuvering aggressively, they switch to the full nonlinear model. Speed vs. accuracy - just like our three variants.
 
-### Numerical Considerations
+**What You've Learned:**
 
-1. **Mass Matrix**: Configuration-dependent, symmetric, positive definite
-2. **Conditioning**: Monitor κ(M), use regularization if needed
-3. **Integration**: RK4 recommended (balance of speed/accuracy)
+1. **Lagrangian Mechanics**: The elegant shortcut that lets us ignore internal constraint forces and focus on energy. No need to solve for pin forces when we just care about motion.
 
-### Practical Implementation
+2. **The Dynamics Equation**: M(q)×acceleration + C(q,q̇)×velocity + G(q) = control force. Mass distribution, spinning forces, gravity - all captured in one matrix equation.
 
-1. **Model Selection**: Simplified for PSO, Full for validation
-2. **Parameter Validation**: Check physical bounds
-3. **Energy Conservation**: Test case for validation
-4. **Cross-Checking**: Compare simplified vs. full models
+3. **Singularities**: Physical locking when geometry aligns in specific ways. The condition number is your health check - stay in the healthy range.
 
-### Performance Trade-offs
+4. **Three Models, Three Personalities**:
+   - **The Sprinter**: Fast prototyping, PSO optimization, small-angle assumptions
+   - **The Simulator**: Brutal honesty, full physics, your reality check
+   - **The Efficient Pro**: Smart compromise, captures dominant patterns, Monte Carlo champion
 
-| Aspect | Simplified | Full | Low-Rank |
-|--------|------------|------|----------|
-| Speed | 10/10 | 2/10 | 7/10 |
-| Accuracy (small θ) | 9/10 | 10/10 | 9/10 |
-| Accuracy (large θ) | 0/10 | 10/10 | 7/10 |
-| Use Case | PSO | Validation | Monte Carlo |
+5. **Use the Right Tool**: You wouldn't use a sledgehammer to crack a nut, and you wouldn't use the Sprinter to validate swing-up control.
 
-## Next Episode Preview
+**What's Next?**
 
-**E004: PSO Optimization** will cover:
-- Particle Swarm Optimization algorithm
-- Cost function design
-- Constraint handling
-- Robust optimization techniques
-- Real performance improvements (MT-8 results)
+Episode E004 dives into PSO Optimization - the algorithm that automatically tunes controller gains. Remember how we said the Sprinter is perfect for PSO? You're about to see why. We'll cover the particle swarm algorithm, cost function design, and the real performance improvements we achieved (up to 360% gain increases while maintaining stability).
+
+**Final Thought**: The physics we covered today - Lagrangian mechanics, coupled dynamics, singularities - has been refined over centuries by brilliant physicists. But at its heart, it's all about understanding how objects move when you push them. Keep the physical intuitions in mind (car turns, merry-go-rounds, locked elbows), and the math becomes a tool, not an obstacle.
+
+See you in E004!
 
 ---
 
-**Episode Length**: ~1000 lines
-**Reading Time**: 25-30 minutes
-**Prerequisites**: Classical mechanics, linear algebra
-**Next**: E004 - PSO Optimization
+**Episode Metadata:**
+- **Length**: ~529 lines (optimized for audio clarity, down from ~1000 lines)
+- **Audio Time**: 25-30 minutes (estimated at conversational pace)
+- **Prerequisites**: Classical mechanics, linear algebra, basic Python (or strong physical intuition)
+- **Next**: E004 - PSO Optimization
+- **Optimization**: Gemini AI review applied - ALL derivations cut, Lagrangian "WHY" explained, matrix terms given physical analogies (car turns, merry-go-rounds), singularities as "physical locking", three models personified as Sprinter/Simulator/Efficient Pro, SpaceX recurring theme, real-world consequences added
