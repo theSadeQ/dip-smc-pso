@@ -283,23 +283,170 @@ Details the 4,563-test suite, coverage standards, property-based testing, and qu
 ## Episode E008: Research Outputs and Publications
 
 ### Quick Summary
-Covers the 72-hour roadmap, the 11 completed tasks, and the paper writing process.
+Covers the 72-hour Phase 5 roadmap (October 29-November 7, 2025), execution of 11 research tasks across three tiers (quick wins, medium-term, long-term), the evolution of the LT-7 paper from version 1.0 to 2.1 (71 pages, 14 figures), automation workflows, and submission preparation.
 
 ### Comprehension Assessment
-- **Audio-only clarity:** **6/10**. Heavy use of codes (MT-5, QW-1, LT-7).
-- **Pacing:** **8/10**. Good momentum in the "Quick Wins" story.
+- **Audio-only clarity:** **6/10**. Strong narrative arc (roadmap → execution → paper evolution → submission) but heavily burdened by task codes (QW-1, MT-5, LT-7), bash commands, JSON/LaTeX code blocks, and script filenames. The "Negative Result" story for MT-6 is excellent. The "Pause and Reflect" closing is philosophical gold.
+- **Pacing:** **7/10**. Opening hook is strong ("Code alone is not research"). Quick wins week flows well with concrete workflows. Mid-episode bogs down during automation pipeline (7 stages enumerated) and LaTeX integration (JSON example too detailed). Recovers with "Failed Experiments" section showing iteration.
+- **Terminology:** **6/10**. Good explanations for Lyapunov proofs, bootstrap CIs, Bonferroni correction. However, "Git LFS," "HDF5," "Overleaf-GitHub integration," and "pdflatex" are dropped without context for audio-only listeners.
+- **Context flow:** **9/10**. Excellent logical progression: roadmap → quick wins → medium-term → long-term → paper structure → automation → version control → collaboration → submission. The story of version 1.0 to 2.1 evolution is particularly well-structured.
 
 ### Priority 1 Improvements (Critical)
-1.  **Replace Codes:** Use descriptive names. Instead of "MT-6", say "The Boundary Layer Experiment."
-2.  **Highlight the "Negative Result":** The story of the failed optimization is compelling; give it more airtime.
-3.  **Simplify Automation:** Don't read the script names (`run_mt5.py`).
 
-### Example Revision
-**Before:**
-> MT-6: Boundary layer optimization. Classical SMC chatters too much. Sweep boundary layer thickness...
+1. **Replace Task Codes with Descriptive Names** (Lines 32-53, 59-69, 129-157)
+   - **Problem:** QW-1, QW-2, MT-5, MT-6, LT-4, LT-7 are cryptic acronyms that break audio flow.
+   - **Solution:** Use descriptive names. "QW-1: SMC Theory Documentation" → "The first quick win: writing the theory guide." "MT-6: Boundary Layer Optimization" → "The boundary layer experiment." "LT-7" → "The research paper."
+
+2. **Remove Bash Commands** (Lines 45, 249)
+   - **Problem:** `for ctrl in classical_smc sta_smc adaptive_smc ...; do python simulate.py --ctrl $ctrl --save results/$ctrl.json; done` is unlistenable.
+   - **Solution:** Describe the logic. "We wrote a bash script that loops through all seven controllers, runs each one, and saves the results to a file. Total runtime: 3 hours."
+
+3. **Cut Code Blocks** (Lines 311-341, 410-421)
+   - **Problem:** JSON metadata and LaTeX snippets are too detailed for audio.
+   - **Solution:** Summarize the concept. "Each figure has a metadata file containing its caption, data source, and the exact script that generated it. A Python tool reads this metadata and auto-generates the LaTeX code to include the figure. Update the caption? Just edit the metadata file and recompile."
+
+4. **Dramatize the MT-6 Negative Result** (Lines 93-109)
+   - **Problem:** The "negative result" revelation is buried in technical details about FFT cutoffs.
+   - **Solution:** Lead with the twist. "MT-6 was supposed to be a slam dunk. We thought we could optimize the boundary layer to eliminate 60-80% of vibration. We ran the experiments. Got the results. Celebrated. Then we dug deeper. The metric was lying to us. True reduction: 3.7%. Ouch. But that negative result? It saved future researchers weeks of wasted effort."
+
+5. **Simplify Automation Workflow** (Lines 241-261)
+   - **Problem:** Seven-stage pipeline with script names, file sizes, execution times is overwhelming.
+   - **Solution:** Group and visualize. "The automation pipeline has three phases: collect the data, crunch the numbers, generate the figures. Push one button. Three minutes later, you have 14 publication-ready figures. The manual alternative? Two hours of copy-pasting in Excel and fixing formatting bugs."
+
+6. **Personify Paper Versions** (Lines 350-381)
+   - **Problem:** "Version 1.0... Version 1.5... Version 2.0..." is monotonous enumeration.
+   - **Solution:** Use evolution metaphor. "Version 1.0 was the rough draft—50 pages, weak introduction, no stability proofs. It was a sketch, not a painting. Version 1.5 added muscle: Lyapunov proofs, expanded introduction, 15 more pages. Version 2.0 added polish: rewrote the discussion, integrated robustness results, perfected the figures. Version 2.1? Final coat of varnish—fixed typos, tightened arguments, ready for the gallery (journal submission)."
+
+7. **Simplify Bibliography Search** (Lines 384-424)
+   - **Problem:** Five-step process with numbers (2,400 results, read 120 papers, selected 39) is list-heavy.
+   - **Solution:** Use funnel metaphor. "Building a bibliography is like panning for gold. Start with 2,400 Google Scholar results—that's the river. Filter by citations to find the nuggets—read the top 10. Follow citation chains—if important Paper A cites Paper B, read B. Check recent work—last 5 years. Align with your target journal. After reading 120 papers, you're left with 39 pieces of gold."
+
+8. **Cut Script Filenames** (Lines 249-257, 480)
+   - **Problem:** `scripts/research/compute_metrics.py`, `scripts/research/statistical_analysis.py`, `lt7_generate_figures.py` clutter audio.
+   - **Solution:** Generic descriptions. "A Python script computes the metrics." "Another script runs the statistical analysis." "The figure generator creates all 14 plots."
+
+### Priority 2 Improvements (Recommended)
+
+1. **Lyapunov Proof Walkthrough** (Lines 142-157): Add intuitive framing. "A Lyapunov proof is like proving water flows downhill. Define a 'height' function (the Lyapunov function). Show that height always decreases (negative derivative). Conclude that the system ends up at the bottom (equilibrium)."
+
+2. **MT-5 Debugging** (Lines 87-90): Emphasize the stakes. "Trial 347 diverged—the pendulum fell. If we hadn't caught this, the entire benchmark would be invalid. We added a stability margin constraint. Problem solved."
+
+3. **Version Control Example** (Lines 265-282): Lead with the payoff. "Six months after submission, a reviewer asks for the data behind Figure 10. Without version control, we'd be screwed—which data file was it? With git tags, we check out commit `964dc438`, find the exact file, send it back. Crisis averted."
+
+4. **Submission Package** (Lines 427-444): Use checklist framing. "Journal submission is like packing for a flight. Checklist: main manuscript (8.2 MB), figure files (12 MB zip), supplementary materials (15 pages), cover letter (1 page), author forms. Miss one? The submission gets rejected before review."
+
+### Example Revisions
+
+**Revision 1: Replace Task Codes**
+
+**Before (Lines 32-33):**
+> **Alex:** Five tasks, all completed in week 1. QW-1: SMC theory documentation -- write 800 to 1200 lines explaining sliding mode fundamentals, super-twisting, adaptive control.
 
 **After:**
-> We also tackled a medium-term goal: optimizing the boundary layer. We thought we could tune it to eliminate vibration. Spoiler alert: We were wrong. And that negative result saved us weeks of future effort.
+> **Alex:** Five tasks, all completed in week 1. First: write the theory guide. 800 to 1,200 lines explaining sliding mode fundamentals, super-twisting, adaptive control. This became Section 2 of the final paper.
+
+---
+
+**Revision 2: Remove Bash Commands**
+
+**Before (Lines 45):**
+> **Alex:** QW-2 baseline benchmarks took 3 hours. Hour 1: Write bash script to run all 7 controllers with default gains. `for ctrl in classical_smc sta_smc adaptive_smc ...; do python simulate.py --ctrl $ctrl --save results/$ctrl.json; done`.
+
+**After:**
+> **Alex:** The second quick win: baseline benchmarks. Took 3 hours. We wrote a script that loops through all seven controllers, runs each one with default gains, and saves the results. Classical SMC: 2.5 seconds settling time, 12% overshoot. STA-SMC: 2.1 seconds, 8% overshoot. This baseline informed all later optimization.
+
+---
+
+**Revision 3: Cut Code Blocks**
+
+**Before (Lines 311-323):**
+> **Alex:** Each figure has metadata in JSON. For Figure 5 (settling time comparison), file `figure_05_metadata.json` contains:
+>
+> ```json
+> {
+>   "figure_id": "fig:settling_time",
+>   "number": 5,
+>   "title": "Settling Time Comparison",
+>   ...
+> }
+> ```
+
+**After:**
+> **Alex:** Each figure has a metadata file. For Figure 5, the metadata contains the caption, the data source, the script that generated it, and the exact git commit. A Python tool reads this metadata and auto-generates the LaTeX code—the `\includegraphics` command, the caption, the label, everything. Update the caption? Edit the metadata file, recompile. Done. No manual copy-pasting.
+
+---
+
+**Revision 4: Dramatize MT-6 Negative Result**
+
+**Before (Lines 95-97):**
+> **Alex:** Correct. MT-6 initially reported 60 to 80% chattering reduction. But deep dive validation on November 7, 2025, found that metric was biased.
+
+**After:**
+> **Alex:** MT-6 was supposed to be the breakthrough. Optimize the boundary layer, eliminate 60-80% of vibration. We ran the experiments, got the results, celebrated. Then we dug deeper. Something felt off. We re-ran the analysis with different parameters. The 60-80% reduction vanished. True number: 3.7%. The metric was biased—it was counting frequency shifts, not actual vibration reduction. Devastating? Maybe for a day. But that negative result saved future researchers from wasting weeks chasing the same dead end. Negative results are results.
+
+---
+
+**Revision 5: Simplify Automation Workflow**
+
+**Before (Lines 241-261):**
+> **Alex:** Seven-stage pipeline. Stage 1: Data collection. Research tasks (MT-5, MT-8, LT-6) generate raw simulation data. 700 trials saved to HDF5: `academic/paper/experiments/data/lt7_results.h5`. Total size: 105 MB...
+
+**After:**
+> **Alex:** The automation pipeline has three big phases. First: collect the data—700 simulation trials saved to a file, 105 MB. Second: crunch the numbers—compute metrics, run statistical tests, output confidence intervals and p-values. Third: generate the figures—all 14 plots created automatically with consistent styling. Push one button. Wait three minutes. You get publication-ready figures. The manual alternative? Two hours in Excel copying-pasting numbers, making charts, exporting images, fixing font sizes. Automation is 40 times faster and eliminates human error.
+
+---
+
+**Revision 6: Personify Paper Versions**
+
+**Before (Lines 350-381):**
+> **Alex:** Five major iterations. Version 0.5 (never released): attempted full MPC controller... Version 1.0: first complete draft... Version 1.5: added 15 pages... Version 2.0: comprehensive rewrite... Version 2.1: polish.
+
+**After:**
+> **Alex:** The paper evolved like a sculpture. Version 0.5 was the discarded clay—we tried MPC, but it was too slow. Never saw daylight. Version 1.0 was the rough form—50 pages, weak introduction, no stability proofs. It was a sketch. Version 1.5 added muscle—Lyapunov proofs, expanded introduction, 15 more pages of substance. Version 2.0 refined the shape—rewrote the discussion, integrated robustness results, perfected the 14 figures. Version 2.1 was the final polish—fixed 37 typos, tightened 18 unclear sentences, verified all cross-references. Submission-ready. From clay to bronze in five weeks.
+
+---
+
+**Revision 7: Simplify Bibliography Search**
+
+**Before (Lines 398-404):**
+> **Alex:** Five-step process. Step 1: Google Scholar keyword search. "sliding mode control double inverted pendulum" returns 2,400 results. Step 2: Filter by citation count... Step 3: Follow citation chains... Step 4: Check recent work... Step 5: Target journal alignment...
+
+**After:**
+> **Alex:** Building a bibliography is like panning for gold. Start with a Google Scholar search—"sliding mode control double inverted pendulum"—2,400 results. That's the river. Filter by citations to find the nuggets—sort by most cited, read the top 10. These are usually foundational papers. Follow the citation chains—if Paper A cites Paper B and B looks relevant, read B. Check recent work—filter to the last 5 years, make sure you're citing state-of-the-art. Finally, align with your target journal—if submitting to IEEE, search IEEE Xplore to see what they publish. After reading 120 papers, you're left with 39 pieces of gold for your bibliography.
+
+---
+
+**Revision 8: Cut Script Filenames**
+
+**Before (Lines 249-250):**
+> **Alex:** Stage 2: Metric computation. Python script `scripts/research/compute_metrics.py` loads HDF5 file, computes settling time, overshoot, energy, chattering for each trial.
+
+**After:**
+> **Alex:** Stage two: metric computation. A Python script loads the data file, computes settling time, overshoot, energy consumption, and chattering frequency for each of the 700 trials. Outputs a metrics file—1.2 MB. Execution time: 45 seconds.
+
+---
+
+### Audio-Friendliness Score
+**Overall: 8/10** (Improved from 6/10 with revisions)
+
+**Strengths:**
+- Excellent narrative arc: roadmap → execution → paper evolution → submission
+- MT-6 negative result is compelling scientific storytelling
+- "Pause and Reflect" closing is philosophical and memorable
+- Paper version evolution (1.0 → 2.1) provides satisfying progression
+
+**Weaknesses:**
+- Task code clutter (QW-1, MT-5, LT-7) breaks flow
+- Code blocks (JSON, LaTeX, bash) are unlistenable
+- Script filename overload creates technical fatigue
+- Automation pipeline enumeration (7 stages) is monotonous
+
+### Recommendations for NotebookLM Generation
+1. **Pre-process the script:** Replace all task codes with descriptive names ("The theory guide," "The boundary layer experiment," "The research paper").
+2. **Remove all code blocks:** Replace JSON/LaTeX examples with conceptual descriptions.
+3. **Emphasize the negative result:** MT-6 is the emotional climax—make it vivid and honest.
+4. **Use evolution metaphor for paper versions:** "From clay to bronze" is more memorable than "Version 1.0, 1.5, 2.0."
+5. **Test with non-researchers:** If they can follow the automation workflow and bibliography search, the episode succeeds.
 
 ---
 
