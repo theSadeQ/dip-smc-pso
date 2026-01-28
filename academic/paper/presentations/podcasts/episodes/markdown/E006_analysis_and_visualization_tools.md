@@ -340,27 +340,128 @@
 
 **Alex:** Generate figures one at a time and close them. `plt.figure()`, `plt.plot()`, `plt.savefig()`, `plt.close()`. This releases memory before the next figure. If you generate all 14 figures without closing, you accumulate 2 GB of memory and might OOM on machines with 4 GB RAM.
 
+**Sarah:** What about plotting huge datasets?
+
+**Alex:** Use downsampling. If you have 100,000 timesteps but the figure is only 800 pixels wide, plotting all 100,000 points is wasteful -- multiple points map to the same pixel. Downsample to 2,000 points using `scipy.signal.resample()` or plot every 50th point. Visually indistinguishable, but 50x less memory and 50x faster rendering.
+
+---
+
+## Version Control for Figures: Git LFS and Figure Tracking
+
+**Sarah:** How do you version control figures?
+
+**Alex:** Three strategies. Strategy 1: Do not commit figures -- regenerate from data. `academic/paper/experiments/figures/` is in `.gitignore`. When you clone the repo, run `python scripts/research/lt7_generate_figures.py` to generate figures. This keeps the repository small. Strategy 2: Commit PDFs via Git LFS. Large File Storage handles binary files efficiently. Configure `.gitattributes` with `*.pdf filter=lfs diff=lfs merge=lfs`. Strategy 3: Commit low-resolution PNGs (72 DPI) for quick review, regenerate high-resolution (300 DPI) for publication.
+
+**Sarah:** Which strategy do you use?
+
+**Alex:** Hybrid. Data files and scripts are always committed. Final publication figures (14 PDFs for LT-7 paper) are committed via Git LFS -- reviewers need to see them without running code. Exploratory figures (hundreds generated during research) are gitignored -- they are temporary and disposable.
+
+**Sarah:** How do you track which figures correspond to which paper version?
+
+**Alex:** Git tags. When we submit the paper to a journal, we tag the commit: `git tag v1.0-submission-ieee-tac`. The tag captures the exact code, data, and figures at submission. If reviewers request changes, we create a new branch, regenerate figures, tag as `v1.1-revision-1`. The paper LaTeX file embeds the git commit hash in the footer, so anyone reading the PDF can trace it back to the exact repository state.
+
+---
+
+## Figure Management: Organization and Naming Conventions
+
+**Sarah:** How do you organize hundreds of figures?
+
+**Alex:** Hierarchical directory structure. `academic/paper/experiments/figures/` contains publication figures. Subdirectories by research task: `mt5_comprehensive_benchmark/` (42 figures), `mt8_disturbance_rejection/` (8 figures), `lt6_model_uncertainty/` (12 figures), `lt7_paper/` (14 figures). Each figure has a standardized name: `{task_id}_figure_{number}_{short_description}.pdf`. Example: `lt7_figure_05_settling_time_comparison.pdf`.
+
+**Sarah:** Why that naming convention?
+
+**Alex:** Three reasons. First: sorting. Alphabetical order matches logical order -- figure_01 before figure_02. Second: searching. Grep for "settling_time" finds all related figures. Third: uniqueness. Task ID plus number guarantees no collisions even if two tasks generate a "controller_comparison" figure.
+
+**Sarah:** What about figure metadata?
+
+**Alex:** Each figure has a companion JSON file: `lt7_figure_05_settling_time_comparison.json`. Contains caption, data sources, git commit hash, generation timestamp, software versions. When we include the figure in LaTeX, a script reads the JSON and auto-generates the caption and attribution.
+
+---
+
+## Collaboration Workflows: Sharing Figures with Co-authors
+
+**Sarah:** How do co-authors collaborate on figures?
+
+**Alex:** Four mechanisms. Mechanism 1: Shared repository. Co-authors clone the repo, run figure generation scripts, see the same figures. Mechanism 2: Figure gallery webpage. Automated script generates an HTML page with thumbnails and captions. Update figures, regenerate HTML, push to GitHub Pages, co-authors see updates instantly. Mechanism 3: Dropbox/Google Drive for high-resolution PDFs. Some co-authors do not use Git -- they want a folder that auto-syncs. Mechanism 4: Embedded figures in Overleaf. Upload PDFs to Overleaf LaTeX project, co-authors see figures in the compiled PDF.
+
+**Sarah:** How do you handle conflicting feedback?
+
+**Alex:** Version control for iterations. Co-author requests "make bars thicker and use blue instead of green." Generate new figure, save as `lt7_figure_05_v2.pdf`. Compare v1 and v2 side-by-side. If everyone prefers v2, it becomes the new canonical version and v1 is archived. If opinions differ, we document the tradeoff in a markdown file and make a decision based on journal style guidelines.
+
+**Sarah:** Example of a conflict?
+
+**Alex:** Figure 8: chattering comparison. First version used a log scale for the y-axis because chattering varies by 10x across controllers. One co-author said "log scale is hard to interpret for readers unfamiliar with log plots." Another co-author said "linear scale makes the low-chattering controllers indistinguishable." Resolution: generate both versions, submit linear scale for the main paper, include log scale in supplementary material with a note explaining why both are useful.
+
+---
+
+## LaTeX Integration: Automated Caption and Cross-reference Management
+
+**Sarah:** How do figures integrate with the LaTeX manuscript?
+
+**Alex:** Three-level integration. Level 1: Manual inclusion. `\begin{figure} \includegraphics{figure_05.pdf} \caption{...} \end{figure}`. Simple but error-prone -- if you reorder figures, you manually update all cross-references. Level 2: Label-based cross-references. `\label{fig:settling_time}` in the figure, `\ref{fig:settling_time}` in text. LaTeX auto-updates numbers, but captions are still manual. Level 3: JSON-driven automation. Python script reads `figure_05.json`, generates LaTeX snippet with `\includegraphics`, `\caption`, and `\label`. Include snippet in main document. Update caption in JSON, run script, recompile LaTeX -- done.
+
+**Sarah:** Show me the JSON structure.
+
+**Alex:** Sure:
+
+```json
+{
+  "figure_id": "lt7_figure_05",
+  "title": "Settling Time Comparison Across Seven Controllers",
+  "caption": "Mean settling time with 95% confidence intervals from 100 Monte Carlo trials. Hybrid Adaptive STA-SMC achieves fastest settling (2.1 ± 0.08 seconds), followed by STA-SMC (2.2 ± 0.09 seconds) and Adaptive SMC (2.3 ± 0.10 seconds).",
+  "data_source": "academic/paper/experiments/data/lt7_results.h5",
+  "script": "scripts/research/lt7_generate_figures.py",
+  "commit": "964dc438",
+  "timestamp": "2025-11-07T14:32:18Z"
+}
+```
+
+**Sarah:** And the generated LaTeX?
+
+**Alex:**
+
+```latex
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\columnwidth]{figures/lt7_figure_05_settling_time_comparison.pdf}
+  \caption{Settling Time Comparison Across Seven Controllers. Mean settling time with 95\% confidence intervals from 100 Monte Carlo trials. Hybrid Adaptive STA-SMC achieves fastest settling (2.1 ± 0.08 seconds), followed by STA-SMC (2.2 ± 0.09 seconds) and Adaptive SMC (2.3 ± 0.10 seconds).}
+  \label{fig:lt7_05}
+\end{figure}
+```
+
+This snippet is written to `figures/lt7_figure_05.tex`, then included in the main document with `\input{figures/lt7_figure_05.tex}`.
+
 ---
 
 ## Key Takeaways
 
 **Sarah:** Let us recap the analysis and visualization toolkit.
 
-**Alex:** Four primary performance metrics: settling time, overshoot, energy consumption, chattering frequency. These capture controller tradeoffs.
+**Alex:** Four primary performance metrics: settling time, overshoot, energy consumption, chattering frequency. These capture controller tradeoffs across all seven controllers.
 
-**Sarah:** Statistical validation via Monte Carlo with 100+ trials, bootstrap confidence intervals, Welch's t-test for pairwise comparison, ANOVA for multiple controllers.
+**Sarah:** Statistical validation via Monte Carlo with 100-1000 trials, bootstrap confidence intervals with 2,000 resamples, Welch's t-test for pairwise comparison, ANOVA with Bonferroni correction for multiple controllers.
 
-**Alex:** Real-time animation at 30 FPS with DIPAnimator. Shows cart, pendulum links, trajectory traces. Saves to video for presentations.
+**Alex:** Real-time animation at 30 FPS with DIPAnimator. Shows cart, pendulum links, trajectory traces. Renders at 10-30 seconds per simulated second, exports to MP4 for presentations.
 
-**Sarah:** Chattering analysis via FFT. High-frequency energy above 10 Hz cutoff. Boundary layer optimization (MT-6) found delta equals 0.05 rad optimal.
+**Sarah:** Chattering analysis via FFT with 10 Hz cutoff. Classical SMC: 45% high-frequency energy without boundary layer, 8% with delta equals 0.05 rad. STA-SMC: 3% inherent chattering suppression.
 
-**Alex:** Fourteen publication-ready figures for LT-7 paper. Automated generation in 60 seconds. Vector format (PDF/EPS), 300 DPI raster fallback, IEEE compliance.
+**Alex:** Boundary layer optimization (MT-6): grid search over delta in [0.01, 0.5] radians, 100 trials per value, optimal delta equals 0.05 for 60-80% chattering reduction while maintaining 0.02 radian tracking accuracy.
 
-**Sarah:** Figure quality standards: 10-12 pt fonts, colorblind-safe palettes, consistent styling via Matplotlib style sheets.
+**Sarah:** Fourteen publication-ready figures for LT-7 paper plus 28 phase portraits and 42 benchmark figures. Automated generation in 60 seconds. Vector PDF preferred, 300 DPI PNG fallback, IEEE compliance with 10-12 pt fonts.
 
-**Alex:** Common pitfalls: insufficient trials, ignoring autocorrelation, p-hacking, poor resolution, misleading scales.
+**Alex:** Figure quality standards: colorblind-safe palettes (seaborn), consistent styling via Matplotlib style sheets, error bars on all statistical plots, 15-item validation checklist before publication.
 
-**Sarah:** Five-step research workflow: data collection, statistical validation, automated figure generation, LaTeX integration, reproducibility documentation.
+**Sarah:** Seven common pitfalls: insufficient trials (need 100+ for power), ignoring autocorrelation (use block bootstrap), p-hacking (Bonferroni correction), poor resolution (300 DPI minimum), misleading scales (zero baseline or mark breaks), overplotting (transparency or density plots), inconsistent styling (use stylesheets).
+
+**Alex:** Seven-stage data pipeline: simulation execution (10 seconds, 1000 samples), JSON serialization (150 KB per trial), HDF5 batch aggregation (15 MB for 100 trials), metric computation (500 ms), bootstrap CI (2 seconds), figure generation (5 seconds), format conversion (2 seconds).
+
+**Sarah:** Advanced visualizations: phase portraits showing state space trajectories (28 generated, 3 published), spectrograms revealing time-varying frequency content via short-time FFT, parameter sensitivity heatmaps for 2D grid search, Pareto frontiers for multi-objective optimization.
+
+**Alex:** Version control: Git LFS for publication PDFs, gitignore exploratory figures, regenerate from data on clone. Git tags for paper versions: v1.0-submission, v1.1-revision-1. Embed commit hash in paper footer for traceability.
+
+**Sarah:** Collaboration: shared repository for co-authors, automated figure gallery HTML, Dropbox sync for non-Git users, Overleaf integration for LaTeX. Handle conflicts with versioned iterations (v1, v2) and side-by-side comparison.
+
+**Alex:** LaTeX integration: JSON-driven automation reads metadata, generates LaTeX snippets with captions and labels, auto-updates cross-references. Reproducibility: REPRODUCTION.md with exact commands, all 14 figures reproduced bit-for-bit from data.
 
 ---
 
@@ -391,7 +492,13 @@ For listeners unfamiliar with technical terms used in this episode:
 
 ## Pause and Reflect
 
-Visualization is translation. You translate numerical data into visual patterns that human perception can process. A good visualization reveals structure that is invisible in raw numbers. A bad visualization obscures truth or misleads. The responsibility is heavy -- your visualization choices influence how others interpret the work. A misleading y-axis can make a 5% improvement look like a 50% breakthrough. A cherry-picked example can make a flawed controller appear robust. Good visualization requires honesty, not just technical skill. Show the failures alongside the successes. Plot the error bars, not just the means. Make figures that survive scrutiny, not just figures that impress.
+Visualization is translation. You translate numerical data into visual patterns that human perception can process -- converting 100,000 timesteps of state evolution into a single phase portrait, reducing 700 Monte Carlo trials into a bar chart with error bars. But translation is never neutral. Every choice -- which metric to plot, which scale to use, which controllers to compare -- shapes interpretation. A good visualization reveals structure that is invisible in raw numbers: the spiral convergence in a phase portrait showing stability, the frequency spike in an FFT revealing chattering, the overlapping confidence intervals in a bar chart proving no significant difference. A bad visualization obscures truth or actively misleads: a y-axis starting at 2.0 instead of zero making a 10% difference look tenfold, a single cherry-picked trial hiding high variance, a log scale obscuring the human-readable magnitude.
+
+The responsibility is heavy. Your figures will be read by reviewers, cited by other researchers, presented to students. They become the canonical representation of your work -- more people will see Figure 5 than will read the methods section. If your figure is wrong, that wrong interpretation propagates. If it is misleading, you lose credibility. If it is honest but poorly designed, your good work goes unrecognized.
+
+Good visualization requires three virtues. First: honesty. Show the failures alongside the successes. Include the controller that diverged, not just the seven that converged. Plot the full distribution with outliers, not just the trimmed mean. Report the confidence intervals, not just the point estimates. Second: clarity. Make the figure readable without referring to the text. Label axes with units. Use legends that explain abbreviations. Choose colors that work in grayscale. Third: reproducibility. Document how the figure was generated. Commit the script, the data, the random seed. Let anyone verify your claims.
+
+When you generate a figure, ask: Does this show what I think it shows? Would this survive adversarial review? If I saw this figure without context, would I reach the correct conclusion? If the answer to any is no, regenerate. Your figures are not decorations. They are arguments. Make them rigorous.
 
 ---
 
