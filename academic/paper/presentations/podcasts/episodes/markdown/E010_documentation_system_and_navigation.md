@@ -34,7 +34,7 @@
 
 **Sarah:** Walk me through the Sphinx setup. What is Sphinx and why use it?
 
-**Alex:** Sphinx is a documentation generator. You write pages in markdown or reStructuredText, and Sphinx builds them into searchable HTML with cross-references, automatic indexing, and API reference generation. It is the standard in the Python ecosystem -- NumPy, SciPy, Django, Flask all use it.
+**Alex:** Think of Sphinx as a Librarian for your scattered notes. You have code comments here, theory explanations there, tutorial examples somewhere else. Sphinx gathers everything, organizes it into chapters, creates a table of contents, builds an index, adds cross-references between related topics, and binds it into a searchable book. It is the standard in the Python ecosystem -- NumPy, SciPy, Django, Flask all use it. The alternative is chaos -- dozens of disconnected markdown files that nobody can navigate.
 
 **Sarah:** Where does it live in the project?
 
@@ -42,11 +42,11 @@
 
 **Sarah:** How does the build process work?
 
-**Alex:** You run `sphinx-build -M html sphinx_docs sphinx_docs/_build`. Sphinx reads `conf.py` for configuration, parses all markdown and reStructuredText files, generates API reference from Python docstrings using autodoc, builds cross-reference links, and outputs HTML to `sphinx_docs/_build/html/`.
+**Alex:** You run a single command. Sphinx reads the configuration file, parses all markdown and reStructuredText files, generates API reference from Python docstrings using autodoc, builds cross-reference links, and outputs searchable HTML. Think of it like compiling code -- source files go in, website comes out.
 
 **Sarah:** What if the build fails?
 
-**Alex:** You use the `-W` flag: `sphinx-build -M html sphinx_docs sphinx_docs/_build -W --keep-going`. This treats warnings as errors and continues building to show all problems at once. Common failures: broken cross-references, missing docstrings for public functions, invalid reStructuredText syntax.
+**Alex:** Sphinx reports exactly what went wrong. Common failures: broken cross-references between pages, missing docstrings for public functions, invalid markup syntax. You fix the error, rebuild, and verify. We run this in strict mode -- warnings become errors -- to catch problems early. No broken documentation makes it to production.
 
 ---
 
@@ -66,50 +66,15 @@
 
 **Sarah:** Explain how API reference generation works.
 
-**Alex:** Sphinx autodoc extension. You write docstrings in your Python code following a standard format -- usually NumPy style or Google style. In the Sphinx source, you use the `automodule`, `autoclass`, or `autofunction` directive. Sphinx imports the module, extracts the docstring, parses the parameter descriptions and return types, and generates formatted HTML.
+**Alex:** Here is the key insight: documentation should live next to the code it documents. You write a docstring directly inside the Python function. Sphinx reads that docstring and auto-generates formatted reference pages. Change the function signature? The docs update automatically. No manual copy-pasting. No synchronization problems.
 
-**Sarah:** Show me an example.
+**Sarah:** Why is that important?
 
-**Alex:** In Python code:
-
-```python
-def compute_control(state, last_control, history):
-    """Compute control signal from current state.
-
-    Parameters
-    ----------
-    state : ndarray, shape (6,)
-        System state [x, x_dot, theta1, theta1_dot, theta2, theta2_dot]
-    last_control : float
-        Previous control signal in Newtons
-    history : SimulationHistory
-        Complete simulation history for adaptive controllers
-
-    Returns
-    -------
-    float
-        Control force in Newtons, bounded by max_force
-
-    Notes
-    -----
-    This method is called at every simulation timestep (100 Hz).
-    Subclasses must implement their specific control laws here.
-    """
-```
-
-In Sphinx markdown:
-
-```markdown
-## compute_control
-
-.. automethod:: BaseController.compute_control
-```
-
-Sphinx generates a formatted reference page with parameter table, return value description, and notes section.
+**Alex:** Documentation that lives in a separate file always goes stale. You change the code, forget to update the docs, now they lie. Docstrings prevent that. The documentation IS the code. Sphinx just formats it nicely. We use a standard format called NumPy Style -- it forces you to document exactly what goes in and what comes out. Think of it as a contract for every function.
 
 **Sarah:** What happens if you forget to document a public function?
 
-**Alex:** Build warning if you enable strict checking: "WARNING: no docstring found for BaseController.cleanup". We have a validation script that checks for missing docstrings in critical modules before every commit.
+**Alex:** The build fails. We enable strict checking -- missing docstrings trigger warnings, and warnings block commits. It sounds harsh, but it prevents the slow decay into undocumented code. You cannot merge a function without explaining what it does. This is accountability built into the development process.
 
 ---
 
@@ -117,11 +82,11 @@ Sphinx generates a formatted reference page with parameter table, return value d
 
 **Sarah:** You mentioned five learning paths. Who are they for?
 
-**Alex:** Path 0: Complete beginners with zero programming or control theory background. 125 to 150 hours of prerequisite material on Python, physics, calculus, linear algebra, and control fundamentals. This lives in `.ai_workspace/education/beginner-roadmap.md`.
+**Alex:** Path 0: Complete beginners with zero programming or control theory background. About a semester's worth of prerequisite material on Python, physics, calculus, linear algebra, and control fundamentals. This lives in the education directory as the beginner roadmap.
 
 **Sarah:** That is a long path.
 
-**Alex:** It is. But if you are a mechanical engineering student who has never coded, you need that foundation before you can understand sliding mode control. Path 0 gets you to the starting line.
+**Alex:** It is. But if you are a mechanical engineering student who has never coded, you need that foundation before you can understand sliding mode control. Path 0 gets you to the starting line. Think of it as the prerequisites course before the main class.
 
 **Sarah:** What about Path 1?
 
@@ -155,63 +120,21 @@ Sphinx generates a formatted reference page with parameter table, return value d
 
 ## Docstring Standards: NumPy Style
 
-**Sarah:** You mentioned NumPy style docstrings. What does that mean?
+**Sarah:** You mentioned NumPy style docstrings. Why does this matter?
 
-**Alex:** A format specification for documenting Python functions. NumPy style uses underlined section headers: Parameters, Returns, Raises, Notes, Examples. Each parameter gets a name, type, and description. Return values get type and description. Examples show runnable code.
+**Alex:** Future-proofing. Six months from now, you will not remember why you designed a function this way. A docstring is a contract. It forces you to document exactly what goes in, what comes out, and what can go wrong. We use NumPy Style -- a standard format that forces you to answer four questions: What does this function do? What inputs does it need? What does it return? What errors can it raise?
 
-**Sarah:** Show me a complete example.
+**Sarah:** Why not just comment the code?
 
-**Alex:** Sure:
+**Alex:** Comments explain HOW the code works. Docstrings explain WHAT the function promises. And here is the magic: Sphinx reads docstrings and auto-generates API reference. Write documentation once in the code, it appears in three places -- your IDE autocomplete, the function help text when you type question mark in Python, and the published HTML docs. Zero duplication.
 
-```python
-def run_simulation(controller, dynamics, initial_state, dt=0.01, duration=10.0):
-    """Run closed-loop simulation of DIP system.
+**Sarah:** What happens if someone writes a bad docstring?
 
-    Parameters
-    ----------
-    controller : BaseController
-        Controller instance implementing compute_control method
-    dynamics : DynamicsInterface
-        Dynamics model implementing compute_derivatives method
-    initial_state : ndarray, shape (6,)
-        Initial state [x=0, x_dot=0, theta1, theta1_dot, theta2, theta2_dot]
-    dt : float, optional
-        Simulation timestep in seconds (default: 0.01 for 100 Hz)
-    duration : float, optional
-        Total simulation time in seconds (default: 10.0)
+**Alex:** The build catches it. Missing parameter descriptions? Warning. Return type not documented? Warning. Example code does not run? Error. We enforce this with automated checks. A function without a proper docstring cannot be merged. It sounds strict, but it prevents six months of confusion later when someone asks "What is this parameter supposed to be?" and the original author has graduated and moved to another country.
 
-    Returns
-    -------
-    SimulationResult
-        Object containing time arrays, state trajectories, control history,
-        and performance metrics
+**Sarah:** So it is accountability.
 
-    Raises
-    ------
-    ValueError
-        If dt <= 0 or duration <= 0
-    PhysicsViolationError
-        If initial_state contains NaN or Inf values
-
-    Notes
-    -----
-    The simulation uses RK4 integration by default. Termination occurs
-    if the pendulum falls (abs(theta1) > pi/4 or abs(theta2) > pi/4).
-
-    Examples
-    --------
-    >>> controller = create_controller('classical_smc', config)
-    >>> dynamics = SimplifiedDIPDynamics(config.physics_params)
-    >>> initial = np.array([0, 0, 0.1, 0, 0.05, 0])
-    >>> result = run_simulation(controller, dynamics, initial)
-    >>> print(f"Settled in {result.settling_time:.2f} seconds")
-    Settled in 2.34 seconds
-    """
-```
-
-**Sarah:** That is thorough.
-
-**Alex:** That is the standard. Every public function in `src/` has this level of documentation. Private functions -- those with names starting with underscore -- can have shorter docstrings, but still must document parameters and return values.
+**Alex:** Exactly. A docstring is a promise to your future self and your collaborators. This function does X. It needs Y. It returns Z. If you cannot write that clearly, you probably do not understand what you are building yet. Good documentation makes you write better code.
 
 ---
 
@@ -281,21 +204,21 @@ def run_simulation(controller, dynamics, initial_state, dt=0.01, duration=10.0):
 
 ## Beginner Roadmap: Path 0
 
-**Sarah:** Tell me more about Path 0. You said 125 to 150 hours of material.
+**Sarah:** Tell me more about Path 0. You said about a semester's worth of material.
 
-**Alex:** Five phases. Phase 1: Computing basics -- command line, text editors, Git, Python fundamentals. 20 to 30 hours. Phase 2: Math foundations -- calculus, linear algebra, differential equations. 30 to 40 hours. Phase 3: Physics -- Newtonian mechanics, Lagrangian dynamics, pendulum systems. 20 to 25 hours. Phase 4: Control theory -- feedback, PID control, state-space methods. 30 to 35 hours. Phase 5: Sliding mode control -- fundamentals, Lyapunov stability, chattering mitigation. 25 to 30 hours.
+**Alex:** Five phases spread over 4 to 6 months. Phase 1: Computing basics -- command line, text editors, Git, Python fundamentals. Phase 2: Math foundations -- calculus, linear algebra, differential equations. Phase 3: Physics -- Newtonian mechanics, Lagrangian dynamics, pendulum systems. Phase 4: Control theory -- feedback, PID control, state-space methods. Phase 5: Sliding mode control -- fundamentals, Lyapunov stability, chattering mitigation.
 
 **Sarah:** That is a full semester course.
 
-**Alex:** It is. And that is deliberate. We do not want someone to reach Tutorial 01, hit a line of code that says `np.linalg.eig(A)`, and have no idea what eigenvalues are. Path 0 ensures you have the prerequisites.
+**Alex:** It is. And that is deliberate. We do not want someone to reach Tutorial 01, hit a line of code that says eigenvalue decomposition, and have no idea what that means. Path 0 ensures you have the prerequisites. Think of it as the foundation before building the house.
 
 **Sarah:** Where does Path 0 live?
 
-**Alex:** `.ai_workspace/education/beginner-roadmap.md`. It is separate from the Sphinx docs because it is not project-specific -- it is general education. We link to external resources: Python courses on Codecademy, linear algebra on Khan Academy, control theory on MIT OpenCourseWare.
+**Alex:** In the education directory as the beginner roadmap. It is separate from the Sphinx docs because it is not project-specific -- it is general education. We link to external resources: Python courses on Codecademy, linear algebra on Khan Academy, control theory on MIT OpenCourseWare. We curate the best free resources, not reinvent them.
 
 **Sarah:** How do you test if someone has completed Path 0?
 
-**Alex:** We do not. It is self-paced. But Tutorial 01 assumes you know Python syntax, can read NumPy array operations, and understand what a differential equation is. If you do not, you go back to Path 0.
+**Alex:** We do not. It is self-paced. But Tutorial 01 assumes you know Python syntax, can read NumPy array operations, and understand what a differential equation is. If you do not, you go back to Path 0. The roadmap has checkpoints -- "Can you write a function? Can you multiply matrices? Can you explain Newton's second law?" -- to help learners self-assess.
 
 ---
 
@@ -343,7 +266,7 @@ Sphinx renders this with a prominent warning box in the HTML.
 
 **Sarah:** API reference is auto-generated from NumPy-style docstrings using Sphinx autodoc. Change the code, the docs update automatically.
 
-**Alex:** Five learning paths for different audiences: Path 0 for complete beginners (125-150 hours), Path 1 for quick start (1-2 hours), Paths 2-4 for advanced usage, research, and production.
+**Alex:** Five learning paths for different audiences: Path 0 for complete beginners (about a semester's worth of prerequisites), Path 1 for quick start (1-2 hours), Paths 2-4 for advanced usage, research, and production.
 
 **Sarah:** Sphinx validates cross-references during build. Broken links cause build warnings. CI runs docs build on every commit to prevent merging broken documentation.
 
@@ -351,7 +274,7 @@ Sphinx renders this with a prominent warning box in the HTML.
 
 **Sarah:** Three freshness mechanisms: automated API generation, weekly link validation, PR checklist requiring architecture docs updates.
 
-**Alex:** Path 0 beginner roadmap lives in `.ai_workspace/education/` with 125-150 hours of prerequisite material on Python, math, physics, and control theory.
+**Alex:** Path 0 beginner roadmap lives in the education directory with about a semester's worth of prerequisite material on Python, math, physics, and control theory.
 
 **Sarah:** Quarterly audits identify undocumented modules. Prioritize based on usage. Document or deprecate.
 
