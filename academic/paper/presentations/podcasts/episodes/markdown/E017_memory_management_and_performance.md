@@ -1,114 +1,80 @@
 # E017: Memory Management and Performance
 
-**Part:** Part3 Advanced
-**Duration:** 15-20 minutes
-**Source:** DIP-SMC-PSO Comprehensive Presentation
+**Hosts**: Dr. Sarah Chen (Control Systems) & Alex Rivera (Software Engineering)
 
 ---
 
-## Overview
+## Opening Hook
 
-This episode covers memory management and performance from the DIP-SMC-PSO project.
+**Alex**: Your controller runs great for 100 iterations. Then 1000 iterations. Then you run a 10-hour experiment and...
 
-## HIL Architecture Overview
+**Sarah**: RAM usage balloons from 50 MB to 5 GB! System crashes! What happened?
 
-**Network-Based Plant-Controller Separation:**
+**Alex**: **Memory leak!** The controller is accumulating history without bounds.
 
-    [Visual diagram - see PDF]
+**Sarah**: Before fix:
+```python
+self.state_history = []
+self.state_history.append(state)  # Grows forever!
+```
 
-    **Key Benefits:**
-    
-        - **Hardware testing:** Replace plant server with real robot interface
-        - **Network simulation:** Test latency, packet loss effects
-        - **Safety validation:** Emergency stop mechanisms
-        - **Controller portability:** Same controller code for sim/hardware
+After fix:
+```python
+from collections import deque
+self.state_history = deque(maxlen=1000)  # Bounded circular buffer
+```
 
----
+**Alex**: This episode covers:
+- **Memory leak detection**: Tools and techniques (tracemalloc, pytest)
+- **Controller memory patterns**: Weakref, bounded buffers, cleanup methods
+- **Performance profiling**: Finding memory hotspots
+- **Production validation**: CA-02 audit results (100% passing)
 
-## HIL Safety Mechanisms
-
-**Multi-Layer Safety Architecture:**
-
-        - **Physical Limit Checks**
-        
-            - Cart position: $|x| < 2.0$ m
-            - Pole angles: $|\theta_1|, |\theta_2| < \pi/2$ rad
-            - Control force: $|u| < 100$ N
-
-        - **Timeout Detection**
-        
-            - Maximum control latency: 100 ms
-            - Heartbeat monitoring (1 Hz)
-            - Automatic emergency stop on timeout
-
-        - **Watchdog Timers**
-        
-            - Control loop must respond within deadline
-            - Watchdog reset every successful cycle
-            - Trigger emergency stop after 3 missed deadlines
-
-        - **Manual Override**
-        
-            - Emergency stop button (keyboard interrupt)
-            - Graceful shutdown sequence
-            - State logging before termination
+**Sarah**: Let's make sure your controller doesn't eat all your RAM!
 
 ---
 
-## HIL Latency Monitoring
+## The Problem: Memory Leaks in Controllers
 
-**Real-Time Performance Tracking:**
+**Sarah**: Let's start with a real example from our early development.
 
-    **Monitored Metrics:**
-    
-        - **Round-trip time (RTT):** Total communication delay
-        - **Controller computation time:** Time to compute control law
-        - **Network jitter:** Variance in communication delay
-        - **Deadline misses:** Cycles exceeding 100 ms deadline
+**Original implementation** (classical_smc.py, v0.1):
+```python
+class ClassicalSMC:
+    def __init__(self, config):
+        self.state_history = []  # Unbounded list!
+        self.control_history = []
+        self.sliding_surface_history = []
 
-    **Typical Performance (Local Network):**
-    \begin{tabular}{ll}
-        \toprule
-        **Metric** & **Value** \\
-        \midrule
-        Mean RTT & 2-5 ms \\
-        Max RTT & 8-12 ms \\
-        Controller compute time & 0.5-1 ms \\
-        Deadline miss rate & <0.1\
-        \bottomrule
-    \end{tabular}
+    def compute_control(self, state, last_control, history):
+        # Compute control...
+        self.state_history.append(state)  # Grows forever
+        self.control_history.append(control)
+        self.sliding_surface_history.append(s)
+        return control
+```
 
-        Allows occasional deadline misses (≤1\
+**Alex**: **What happens?**
+- **10-second simulation**: 1000 timesteps, ~50 KB memory
+- **100-second simulation**: 10,000 timesteps, ~500 KB memory
+- **10-hour overnight experiment**: 3.6 million timesteps, **180 MB per controller!**
+- **50 Monte Carlo runs**: 50 controllers × 180 MB = **9 GB RAM**
 
----
+**Sarah**: System crashes with `MemoryError`. We lost 8 hours of overnight PSO optimization!
 
-## HIL Validation Results
+**Alex**: **The fix**:
+```python
+from collections import deque
 
-**Test Scenarios:**
+class ClassicalSMC:
+    def __init__(self, config):
+        # Bounded circular buffers
+        self.state_history = deque(maxlen=1000)  # Only last 1000 states
+        self.control_history = deque(maxlen=1000)
+        self.sliding_surface_history = deque(maxlen=1000)
+```
 
-        - **Local Simulation (Baseline)**
-        
-            - Both plant and controller on same machine
-            - RTT: 1-3 ms, zero packet loss
-            - Result: Identical performance to non-HIL mode
-
-        - **Network Latency Injection**
-        
-            - Added 10 ms, 50 ms, 100 ms delays
-            - Controller adapts to latency (predictive compensation)
-            - Result: Stable up to 100 ms, degraded performance beyond
-
-        - **Packet Loss Simulation**
-        
-            - 1\
-            - Timeout recovery and state estimation
-            - Result: Stable up to 5\
-
-        - **Safety Limit Triggering**
-        
-            - Deliberately exceeded position/angle limits
-            - Emergency stop activated within 1 time step
-            - Result: No damage, graceful shutdown logged
+**Sarah**: Now memory usage is **constant** - doesn't matter if you run for 1 hour or 100 hours!
 
 ---
 
@@ -117,6 +83,8 @@ This episode covers memory management and performance from the DIP-SMC-PSO proje
 - **Repository:** https://github.com/theSadeQ/dip-smc-pso.git
 - **Documentation:** `docs/` directory
 - **Getting Started:** `docs/guides/getting-started.md`
+- **Memory Management Guide:** `.ai_workspace/config/controller_memory.md`
+- **CA-02 Audit Report:** `academic/dev/quality/CA-02_comprehensive_audit.md`
 
 ---
 
