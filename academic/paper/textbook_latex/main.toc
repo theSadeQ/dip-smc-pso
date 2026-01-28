@@ -106,282 +106,387 @@
 \contentsline {subsection}{\numberline {0.0.0}Trade-Off: Chattering vs. Steady-State Error}{44}{subsection.0.0.0}%
 \contentsline {section}{\numberline {0.0}Complete Control Law and Saturation}{46}{section.0.0}%
 \contentsline {subsection}{\numberline {0.0.0}Gain Positivity Constraints}{46}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Lyapunov Stability Analysis}{47}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Lyapunov Function for Reaching Phase}{47}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Finite-Time Convergence}{48}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Robustness to Matched Disturbances}{48}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Disturbance Rejection Condition}{49}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Implementation Details}{50}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Algorithm Structure}{50}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Computational Complexity}{51}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Experimental Validation}{51}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Test Configuration}{51}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Performance Metrics}{51}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Comparison with Advanced SMC Variants}{52}{section.0.0}%
-\contentsline {section}{\numberline {0.0}Summary and Key Takeaways}{52}{section.0.0}%
-\contentsline {chapter}{\numberline {0}Super-Twisting Algorithm}{55}{chapter.0}%
-\contentsline {section}{\numberline {0.0}Introduction to Second-Order Sliding Modes}{55}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Motivation}{55}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Super-Twisting Control Law}{55}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Continuous-Time Formulation}{55}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Discrete-Time Implementation}{56}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Comparison with Classical SMC}{57}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Finite-Time Convergence: Lyapunov Proof}{57}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Moreno-Osorio Lyapunov Function}{57}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Stability Conditions}{57}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Gain Tuning Guidelines}{58}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Chattering Reduction Mechanisms}{58}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Why STA Reduces Chattering}{58}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Boundary Layer Approximation}{59}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Anti-Windup and Integral State Management}{60}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Integrator Windup Problem}{60}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Back-Calculation Anti-Windup}{60}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Integrator Saturation}{60}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Implementation with Numba Acceleration}{60}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Computational Bottleneck}{60}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Numba JIT Compilation}{61}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Experimental Validation}{61}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Test Configuration}{61}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Performance Metrics}{61}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Boundary Layer Optimization Results (MT-6)}{62}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Gain Validation and Constraints}{62}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Positivity Requirements}{62}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Summary and Key Takeaways}{64}{section.0.0}%
-\contentsline {chapter}{\numberline {0}Adaptive Sliding Mode Control}{65}{chapter.0}%
-\contentsline {section}{\numberline {0.0}Motivation for Adaptive Control}{65}{section.0.0}%
-\contentsline {section}{\numberline {0.0}Adaptive Gain Scheduling}{65}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Extended Lyapunov Function}{65}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Adaptation Law Derivation}{66}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Dead-Zone Mechanism}{66}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Leak-Rate for Bounded Adaptation}{66}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Complete Adaptive SMC Control Law}{66}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Control Structure}{66}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Discrete-Time Implementation}{67}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Rate Limiting}{67}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Stability Analysis}{67}{section.0.0}%
-\contentsline {section}{\numberline {0.0}Model Uncertainty Robustness}{68}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Parameter Variations}{68}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Success Rate Comparison}{68}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Disturbance Rejection Performance}{69}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Implementation Details}{70}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Algorithm Structure}{70}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Tuning Guidelines}{70}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Worked Numerical Example}{47}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Problem Setup}{47}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Step-by-Step Computation}{48}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Result Interpretation}{49}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Comparison: With vs. Without Boundary Layer}{50}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Verification via Python Implementation}{50}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Lyapunov Stability Analysis}{51}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Lyapunov Function for Reaching Phase}{51}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Finite-Time Convergence}{52}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Robustness to Matched Disturbances}{52}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Disturbance Rejection Condition}{53}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Implementation Details}{54}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Algorithm Structure}{54}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Computational Complexity}{55}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Experimental Validation}{55}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Test Configuration}{55}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Performance Metrics}{55}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Comparison with Advanced SMC Variants}{56}{section.0.0}%
+\contentsline {section}{\numberline {0.0}Summary and Key Takeaways}{56}{section.0.0}%
+\contentsline {chapter}{\numberline {0}Super-Twisting Algorithm}{59}{chapter.0}%
+\contentsline {section}{\numberline {0.0}Introduction to Second-Order Sliding Modes}{59}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Motivation}{59}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Super-Twisting Control Law}{59}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Continuous-Time Formulation}{59}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Discrete-Time Implementation}{60}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Comparison with Classical SMC}{61}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Worked Numerical Example: STA Control Computation}{61}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Problem Setup}{61}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Step-by-Step Computation}{62}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Result Interpretation}{64}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Comparison with Classical SMC}{64}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Python Verification Code}{65}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Finite-Time Convergence: Lyapunov Proof}{67}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Moreno-Osorio Lyapunov Function}{67}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Stability Conditions}{67}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Gain Tuning Guidelines}{67}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Chattering Reduction Mechanisms}{68}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Why STA Reduces Chattering}{68}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Boundary Layer Approximation}{68}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Anti-Windup and Integral State Management}{69}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Integrator Windup Problem}{69}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Back-Calculation Anti-Windup}{69}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Integrator Saturation}{70}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Implementation with Numba Acceleration}{70}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Computational Bottleneck}{70}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Numba JIT Compilation}{70}{subsection.0.0.0}%
 \contentsline {section}{\numberline {0.0}Experimental Validation}{71}{section.0.0}%
 \contentsline {subsection}{\numberline {0.0.0}Test Configuration}{71}{subsection.0.0.0}%
 \contentsline {subsection}{\numberline {0.0.0}Performance Metrics}{71}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Summary and Key Takeaways}{71}{section.0.0}%
-\contentsline {chapter}{\numberline {0}Hybrid Adaptive STA-SMC}{73}{chapter.0}%
-\contentsline {section}{\numberline {0.0}Motivation for Hybrid Control}{73}{section.0.0}%
-\contentsline {section}{\numberline {0.0}Hybrid Control Architecture}{73}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Control Law Structure}{73}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Dual-Gain Adaptation Laws}{73}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Lambda Scheduling for Adaptive Sliding Surface}{74}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}State-Dependent Surface}{74}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Experimental Validation}{74}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Performance Comparison}{74}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Energy Efficiency Analysis}{75}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Three-Phase Performance Comparison}{75}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Summary}{75}{section.0.0}%
-\contentsline {chapter}{\numberline {0}Particle Swarm Optimization Theory}{81}{chapter.0}%
-\contentsline {section}{\numberline {0.0}Particle Swarm Optimization Fundamentals}{81}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Basic Concepts}{81}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Velocity Update Equation}{81}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Position Update}{85}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Inertia Weight Strategies}{85}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Linearly Decreasing Inertia Weight}{85}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Multi-Objective PSO (MOPSO)}{85}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Weighted Aggregation}{86}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Application to SMC Gain Tuning}{86}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Search Space}{86}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Fitness Evaluation}{86}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}PSO Results}{86}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Summary}{86}{section.0.0}%
-\contentsline {chapter}{\numberline {0}Performance Benchmarking and Comparative Analysis}{89}{chapter.0}%
-\contentsline {section}{\numberline {0.0}Introduction}{89}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Motivation for Comparative Benchmarking}{89}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Research Questions}{90}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Benchmark Methodology}{90}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Test Configuration}{90}{subsection.0.0.0}%
-\contentsline {subsubsection}{Controllers Evaluated}{90}{subsubsection*.60}%
-\contentsline {subsubsection}{Monte Carlo Simulation Setup}{91}{subsubsection*.61}%
-\contentsline {subsection}{\numberline {0.0.0}Performance Metrics}{91}{subsection.0.0.0}%
-\contentsline {subsubsection}{Computational Efficiency}{91}{subsubsection*.62}%
-\contentsline {subsubsection}{Transient Response}{92}{subsubsection*.63}%
-\contentsline {subsubsection}{Chattering Analysis}{92}{subsubsection*.64}%
-\contentsline {subsubsection}{Energy Consumption}{92}{subsubsection*.65}%
-\contentsline {section}{\numberline {0.0}Computational Efficiency Results}{92}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Compute Time Comparison}{92}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Statistical Significance of Compute Time Differences}{93}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Implications for Embedded Deployment}{93}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Transient Response Performance}{94}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Settling Time Analysis}{94}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Overshoot Comparison}{94}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Phase Plane Trajectory Analysis}{95}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Chattering Reduction Analysis}{96}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Frequency-Domain Chattering Metrics}{96}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Time-Domain Chattering Analysis}{96}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Energy Efficiency Comparison}{97}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Control Energy Statistics}{97}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Energy Consumption Analysis}{98}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Energy-Transient Trade-off Analysis}{98}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Hybrid Controller Failure Analysis}{99}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Failure Symptoms}{99}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Root Cause Hypotheses}{99}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Debugging Recommendations}{99}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Performance Ranking and Controller Selection Guide}{99}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Multi-Objective Performance Ranking}{99}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Controller Selection Decision Tree}{100}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Limitations and Future Work}{101}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Limitations of Current Study}{101}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Future Research Directions}{101}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Summary}{102}{section.0.0}%
-\contentsline {chapter}{\numberline {0}PSO Optimization Results for Gain Tuning}{103}{chapter.0}%
-\contentsline {section}{\numberline {0.0}Introduction}{103}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Research Questions}{103}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}PSO Optimization Framework}{104}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Search Space Definition}{104}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Multi-Objective Cost Function}{105}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Robust PSO Fitness Evaluation}{106}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}PSO Algorithm Configuration}{106}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Robust PSO Results (MT-8)}{106}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Performance Improvements}{106}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Optimized Gain Values}{108}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Energy and Chattering Improvements}{108}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Convergence Analysis}{108}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Computational Cost}{111}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Necessity of Robust PSO (MT-8 Baseline Failure)}{113}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Baseline Disturbance Rejection Failure}{113}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Post-Optimization Disturbance Rejection}{113}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Generalization to Challenging Conditions (MT-7)}{114}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}MT-7 Robustness Validation Methodology}{114}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Severe Generalization Failure}{114}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Root Cause Analysis}{115}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}MT-7 Statistical Validation}{115}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Recommendations for Robust PSO Design}{115}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Multi-Scenario PSO Optimization}{115}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Adaptive Boundary Layer Scheduling}{116}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Warm-Start PSO for Faster Convergence}{117}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}PSO Gain Tuning for Boundary Layer (MT-6)}{117}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Adaptive Boundary Layer Hypothesis}{117}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}MT-6 Results: Marginal Benefit}{117}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}MT-6 Conclusion: Fixed Boundary Layer Sufficient}{119}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Summary and Design Guidelines}{119}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Key Findings}{119}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}PSO Design Guidelines for Production}{119}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Open Questions for Future Research}{119}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Conclusion}{120}{section.0.0}%
-\contentsline {chapter}{\numberline {0}Advanced Topics: Robustness and Model Uncertainty}{123}{chapter.0}%
-\contentsline {section}{\numberline {0.0}Introduction}{123}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Research Questions}{123}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Disturbance Rejection Analysis (MT-8)}{124}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Disturbance Scenarios}{124}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Disturbance Rejection Results}{124}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Comparison to Baseline (Pre-PSO) Performance}{125}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Disturbance Magnitude Sensitivity}{125}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}LT-7 Disturbance Rejection Validation}{126}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Adaptive Gain Scheduling for Disturbance Rejection (MT-8 Enhancement)}{126}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Motivation: Disturbance-Dependent Chattering}{126}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Adaptive Scheduler Design}{127}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Adaptive Scheduling Results}{127}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Critical Limitation: Overshoot Penalty}{127}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Hardware-in-the-Loop (HIL) Validation}{128}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Computational Efficiency Analysis (LT-7)}{128}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Comparative Benchmarking (MT-6)}{128}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Deployment Recommendation}{128}{subsection.0.0.0}%
-\contentsline {chapter}{\numberline {0}Software Implementation}{131}{chapter.0}%
-\contentsline {section}{\numberline {0.0}Introduction}{131}{section.0.0}%
-\contentsline {section}{\numberline {0.0}Software Architecture}{132}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Module Organization}{132}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Design Principles}{134}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Controller Implementation}{134}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Base Controller Interface}{134}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Classical SMC Implementation}{136}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Super-Twisting Algorithm Implementation}{141}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Controller Factory Pattern}{146}{section.0.0}%
-\contentsline {section}{\numberline {0.0}PSO Optimization Framework}{149}{section.0.0}%
-\contentsline {section}{\numberline {0.0}Simulation Framework}{153}{section.0.0}%
-\contentsline {section}{\numberline {0.0}Configuration Management}{156}{section.0.0}%
-\contentsline {section}{\numberline {0.0}Testing and Validation}{159}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Unit Testing}{159}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Integration Testing}{162}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Property-Based Testing}{163}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Command-Line Interface}{164}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Example Usage}{166}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Web Interface}{167}{section.0.0}%
-\contentsline {section}{\numberline {0.0}Hardware-in-the-Loop (HIL) Framework}{171}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}HIL Architecture}{171}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Running HIL Simulation}{175}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Performance Optimization}{175}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Numba JIT Compilation}{175}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Memory Profiling}{177}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Deployment Guidelines}{178}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Installation}{178}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Production Checklist}{178}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Docker Deployment}{179}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Summary}{180}{section.0.0}%
-\contentsline {chapter}{\numberline {0}Case Studies and Applications}{183}{chapter.0}%
-\contentsline {section}{\numberline {0.0}Case Study 1: Baseline Controller Comparison (MT-5)}{183}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Problem Statement}{183}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Methodology}{183}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Results}{183}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Case Study 2: Robust PSO Optimization (MT-8)}{183}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Problem Statement}{183}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Methodology}{184}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Results}{184}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Case Study 3: Model Uncertainty Analysis (LT-6)}{184}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Problem Statement}{184}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Methodology}{184}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Results}{184}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Case Study 4: Hardware-in-the-Loop Validation}{185}{section.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Problem Statement}{185}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Methodology}{185}{subsection.0.0.0}%
-\contentsline {subsection}{\numberline {0.0.0}Results}{185}{subsection.0.0.0}%
-\contentsline {section}{\numberline {0.0}Lessons Learned and Best Practices}{185}{section.0.0}%
-\contentsline {chapter}{Mathematical Prerequisites}{187}{appendix*.107}%
-\contentsline {section}{\numberline {.0}Linear Algebra}{187}{section.Alph0.0}%
-\contentsline {subsection}{\numberline {.0.0}Matrices and Vectors}{187}{subsection.Alph0.0.0}%
-\contentsline {subsection}{\numberline {.0.0}Eigenvalues and Eigenvectors}{187}{subsection.Alph0.0.0}%
-\contentsline {section}{\numberline {.0}Differential Equations}{187}{section.Alph0.0}%
-\contentsline {subsection}{\numberline {.0.0}Ordinary Differential Equations (ODEs)}{187}{subsection.Alph0.0.0}%
-\contentsline {section}{\numberline {.0}Lyapunov Stability Theory}{187}{section.Alph0.0}%
-\contentsline {subsection}{\numberline {.0.0}Definitions}{187}{subsection.Alph0.0.0}%
-\contentsline {subsection}{\numberline {.0.0}Finite-Time Convergence}{188}{subsection.Alph0.0.0}%
-\contentsline {section}{\numberline {.0}Vector Calculus}{188}{section.Alph0.0}%
-\contentsline {subsection}{\numberline {.0.0}Gradient}{188}{subsection.Alph0.0.0}%
-\contentsline {subsection}{\numberline {.0.0}Jacobian Matrix}{188}{subsection.Alph0.0.0}%
-\contentsline {chapter}{Complete Lyapunov Stability Proofs}{189}{appendix*.108}%
-\contentsline {section}{\numberline {.0}Classical SMC Exponential Convergence Proof}{189}{section.Alph0.0}%
-\contentsline {subsection}{\numberline {.0.0}Theorem Statement}{189}{subsection.Alph0.0.0}%
-\contentsline {subsection}{\numberline {.0.0}Proof}{189}{subsection.Alph0.0.0}%
-\contentsline {section}{\numberline {.0}STA-SMC Finite-Time Convergence Proof}{189}{section.Alph0.0}%
-\contentsline {subsection}{\numberline {.0.0}Moreno-Osorio Lyapunov Function}{189}{subsection.Alph0.0.0}%
-\contentsline {subsection}{\numberline {.0.0}Proof Sketch}{190}{subsection.Alph0.0.0}%
-\contentsline {section}{\numberline {.0}Adaptive SMC Bounded Adaptation Proof}{190}{section.Alph0.0}%
-\contentsline {subsection}{\numberline {.0.0}Extended Lyapunov Function}{190}{subsection.Alph0.0.0}%
-\contentsline {subsection}{\numberline {.0.0}Proof}{190}{subsection.Alph0.0.0}%
-\contentsline {section}{\numberline {.0}Hybrid STA Stability with Dual-Gain Adaptation}{190}{section.Alph0.0}%
-\contentsline {chapter}{Python API Reference}{191}{appendix*.109}%
-\contentsline {section}{\numberline {.0}Controller Factory}{191}{section.Alph0.0}%
-\contentsline {subsection}{\numberline {.0.0}create\_controller Function}{191}{subsection.Alph0.0.0}%
-\contentsline {section}{\numberline {.0}PSO Optimizer}{191}{section.Alph0.0}%
-\contentsline {subsection}{\numberline {.0.0}PSOTuner Class}{191}{subsection.Alph0.0.0}%
-\contentsline {section}{\numberline {.0}Simulation Runner}{192}{section.Alph0.0}%
-\contentsline {subsection}{\numberline {.0.0}run\_simulation Function}{192}{subsection.Alph0.0.0}%
-\contentsline {section}{\numberline {.0}Dynamics Models}{192}{section.Alph0.0}%
-\contentsline {subsection}{\numberline {.0.0}FullDIPDynamics Class}{192}{subsection.Alph0.0.0}%
-\contentsline {section}{\numberline {.0}Configuration Management}{193}{section.Alph0.0}%
-\contentsline {subsection}{\numberline {.0.0}load\_config Function}{193}{subsection.Alph0.0.0}%
-\contentsline {chapter}{Selected Exercise Solutions}{195}{appendix*.110}%
-\contentsline {section}{\numberline {.0}Chapter 1 Solutions}{195}{section.Alph0.0}%
-\contentsline {section}{\numberline {.0}Chapter 2 Solutions}{199}{section.Alph0.0}%
-\contentsline {section}{\numberline {.0}Chapter 3 Solutions}{203}{section.Alph0.0}%
-\contentsline {section}{\numberline {.0}Chapter 4 Solutions}{206}{section.Alph0.0}%
-\contentsline {section}{\numberline {.0}Chapter 5 Solutions}{208}{section.Alph0.0}%
-\contentsline {section}{\numberline {.0}Chapter 6 Solutions}{212}{section.Alph0.0}%
-\contentsline {section}{\numberline {.0}Chapter 7 Solutions}{227}{section.Alph0.0}%
-\contentsline {section}{\numberline {.0}Chapter 8 Solutions}{244}{section.Alph0.0}%
-\contentsline {section}{\numberline {.0}Chapter 9 Solutions}{265}{section.Alph0.0}%
-\contentsline {section}{\numberline {.0}Chapter 10 Solutions}{276}{section.Alph0.0}%
-\contentsline {section}{\numberline {.0}Chapter 11 Solutions}{284}{section.Alph0.0}%
-\contentsline {section}{\numberline {.0}Chapter 12 Solutions}{289}{section.Alph0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Boundary Layer Optimization Results (MT-6)}{71}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Gain Validation and Constraints}{72}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Positivity Requirements}{72}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Summary and Key Takeaways}{73}{section.0.0}%
+\contentsline {chapter}{\numberline {0}Adaptive Sliding Mode Control}{75}{chapter.0}%
+\contentsline {section}{\numberline {0.0}Motivation for Adaptive Control}{75}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Limitations of Fixed-Gain Controllers}{75}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Sources of Uncertainty in DIP Systems}{75}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Why Adaptation Instead of Robust Fixed Gains?}{76}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Adaptive Gain Scheduling}{76}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Extended Lyapunov Function}{76}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Adaptation Law Derivation}{77}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Dead-Zone Mechanism}{77}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Leak-Rate for Bounded Adaptation}{77}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Worked Numerical Example}{78}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Problem Setup}{78}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Step-by-Step Computation}{78}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Key Observations}{79}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Comparison: Fixed vs. Adaptive Gain}{80}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Complete Adaptive SMC Control Law}{80}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Control Structure}{80}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Discrete-Time Implementation}{80}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Rate Limiting}{81}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Stability Analysis}{81}{section.0.0}%
+\contentsline {section}{\numberline {0.0}Model Uncertainty Robustness}{81}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Parameter Variations}{81}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Success Rate Comparison}{81}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Disturbance Rejection Performance}{82}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Implementation Details}{83}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Algorithm Structure}{83}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Tuning Guidelines}{84}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Experimental Validation}{84}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Test Configuration}{84}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Performance Metrics}{84}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Parameter Selection and Design Guidelines}{84}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Step-by-Step Design Procedure}{84}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Common Pitfalls and Solutions}{86}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Comparison with Other Adaptive Techniques}{86}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Summary and Key Takeaways}{87}{section.0.0}%
+\contentsline {chapter}{\numberline {0}Hybrid Adaptive STA-SMC}{89}{chapter.0}%
+\contentsline {section}{\numberline {0.0}Motivation for Hybrid Control}{89}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Limitations of Individual Controllers}{89}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Hybrid Design Philosophy}{89}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Design Goals}{90}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Hybrid Control Architecture}{90}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Control Law Structure}{90}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Dual-Gain Adaptation Laws}{91}{subsection.0.0.0}%
+\contentsline {subsubsection}{Adaptation Equations}{91}{subsubsection*.54}%
+\contentsline {subsubsection}{Design Rationale}{91}{subsubsection*.55}%
+\contentsline {subsubsection}{Discrete-Time Implementation}{92}{subsubsection*.56}%
+\contentsline {subsection}{\numberline {0.0.0}Gain Coupling Constraints}{92}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Stability Analysis}{92}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Lyapunov Function for Hybrid System}{92}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Finite-Time Convergence with Adaptation}{93}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Robustness to Model Uncertainty}{93}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Lambda Scheduling for Adaptive Sliding Surface}{94}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}State-Dependent Surface Design}{94}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Gaussian Scheduling Function}{94}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Alternative Scheduling Functions}{94}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Design Trade-offs}{94}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Implementation}{95}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Implementation Algorithm}{96}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Complete Control Computation}{96}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Parameter Tuning Guidelines}{97}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Common Pitfalls and Solutions}{97}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Experimental Validation}{97}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Performance Comparison}{97}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Energy Efficiency Analysis}{98}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Three-Phase Performance Comparison}{98}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Summary and Design Guidelines}{98}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Key Achievements}{98}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Design Trade-offs}{98}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}When to Use Hybrid STA-SMC}{98}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Step-by-Step Design Procedure}{99}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Implementation Checklist}{100}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Future Extensions}{101}{subsection.0.0.0}%
+\contentsline {chapter}{\numberline {0}Particle Swarm Optimization Theory}{107}{chapter.0}%
+\contentsline {section}{\numberline {0.0}Particle Swarm Optimization Fundamentals}{107}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Basic Concepts}{107}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Velocity Update Equation}{107}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Position Update}{111}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Worked Numerical Example: PSO Optimization}{111}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Problem Setup}{111}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Iteration 0: Initialization}{111}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Iteration 1: First Update}{112}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Iteration Summary}{114}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Convergence Analysis}{114}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Python Verification Code}{114}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Inertia Weight Strategies}{117}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Linearly Decreasing Inertia Weight}{117}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Multi-Objective PSO (MOPSO)}{117}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Weighted Aggregation}{118}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Application to SMC Gain Tuning}{118}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Search Space}{118}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Fitness Evaluation}{118}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}PSO Results}{119}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Summary}{120}{section.0.0}%
+\contentsline {chapter}{\numberline {0}Performance Benchmarking and Comparative Analysis}{121}{chapter.0}%
+\contentsline {section}{\numberline {0.0}Introduction}{121}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Motivation for Comparative Benchmarking}{121}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Research Questions}{122}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Benchmark Methodology}{122}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Test Configuration}{122}{subsection.0.0.0}%
+\contentsline {subsubsection}{Controllers Evaluated}{122}{subsubsection*.72}%
+\contentsline {subsubsection}{Monte Carlo Simulation Setup}{123}{subsubsection*.73}%
+\contentsline {subsection}{\numberline {0.0.0}Performance Metrics}{123}{subsection.0.0.0}%
+\contentsline {subsubsection}{Computational Efficiency}{123}{subsubsection*.74}%
+\contentsline {subsubsection}{Transient Response}{124}{subsubsection*.75}%
+\contentsline {subsubsection}{Chattering Analysis}{124}{subsubsection*.76}%
+\contentsline {subsubsection}{Energy Consumption}{124}{subsubsection*.77}%
+\contentsline {section}{\numberline {0.0}Computational Efficiency Results}{124}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Compute Time Comparison}{124}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Statistical Significance of Compute Time Differences}{125}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Implications for Embedded Deployment}{125}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Transient Response Performance}{126}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Settling Time Analysis}{126}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Overshoot Comparison}{126}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Phase Plane Trajectory Analysis}{127}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Chattering Reduction Analysis}{128}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Frequency-Domain Chattering Metrics}{128}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Time-Domain Chattering Analysis}{128}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Energy Efficiency Comparison}{129}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Control Energy Statistics}{129}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Energy Consumption Analysis}{130}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Energy-Transient Trade-off Analysis}{130}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Hybrid Controller Failure Analysis}{131}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Failure Symptoms}{131}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Root Cause Hypotheses}{131}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Debugging Recommendations}{131}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Performance Ranking and Controller Selection Guide}{131}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Multi-Objective Performance Ranking}{131}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Controller Selection Decision Tree}{132}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Limitations and Future Work}{133}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Limitations of Current Study}{133}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Future Research Directions}{133}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Summary}{134}{section.0.0}%
+\contentsline {chapter}{\numberline {0}PSO Optimization Results for Gain Tuning}{135}{chapter.0}%
+\contentsline {section}{\numberline {0.0}Introduction}{135}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Research Questions}{135}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}PSO Optimization Framework}{136}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Search Space Definition}{136}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Multi-Objective Cost Function}{137}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Robust PSO Fitness Evaluation}{138}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}PSO Algorithm Configuration}{138}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Robust PSO Results (MT-8)}{138}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Performance Improvements}{138}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Optimized Gain Values}{140}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Energy and Chattering Improvements}{140}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Convergence Analysis}{140}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Computational Cost}{143}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Necessity of Robust PSO (MT-8 Baseline Failure)}{145}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Baseline Disturbance Rejection Failure}{145}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Post-Optimization Disturbance Rejection}{145}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Generalization to Challenging Conditions (MT-7)}{146}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}MT-7 Robustness Validation Methodology}{146}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Severe Generalization Failure}{146}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Root Cause Analysis}{147}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}MT-7 Statistical Validation}{147}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Recommendations for Robust PSO Design}{147}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Multi-Scenario PSO Optimization}{147}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Adaptive Boundary Layer Scheduling}{148}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Warm-Start PSO for Faster Convergence}{149}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}PSO Gain Tuning for Boundary Layer (MT-6)}{149}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Adaptive Boundary Layer Hypothesis}{149}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}MT-6 Results: Marginal Benefit}{149}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}MT-6 Conclusion: Fixed Boundary Layer Sufficient}{151}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Summary and Design Guidelines}{151}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Key Findings}{151}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}PSO Design Guidelines for Production}{151}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Open Questions for Future Research}{151}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Conclusion}{152}{section.0.0}%
+\contentsline {chapter}{\numberline {0}Advanced Topics: Robustness and Model Uncertainty}{155}{chapter.0}%
+\contentsline {section}{\numberline {0.0}Introduction}{155}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Research Questions}{155}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Disturbance Rejection Analysis (MT-8)}{156}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Disturbance Scenarios}{156}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Disturbance Rejection Results}{156}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Comparison to Baseline (Pre-PSO) Performance}{157}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Disturbance Magnitude Sensitivity}{157}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}LT-7 Disturbance Rejection Validation}{158}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Adaptive Gain Scheduling for Disturbance Rejection (MT-8 Enhancement)}{158}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Motivation: Disturbance-Dependent Chattering}{158}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Adaptive Scheduler Design}{159}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Adaptive Scheduling Results}{159}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Critical Limitation: Overshoot Penalty}{159}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Hardware-in-the-Loop (HIL) Validation}{160}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Computational Efficiency Analysis (LT-7)}{160}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Comparative Benchmarking (MT-6)}{160}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Deployment Recommendation}{160}{subsection.0.0.0}%
+\contentsline {chapter}{\numberline {0}Software Implementation}{163}{chapter.0}%
+\contentsline {section}{\numberline {0.0}Introduction}{163}{section.0.0}%
+\contentsline {section}{\numberline {0.0}Software Architecture}{164}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Module Organization}{164}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Design Principles}{166}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Controller Implementation}{166}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Base Controller Interface}{166}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Classical SMC Implementation}{168}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Super-Twisting Algorithm Implementation}{173}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Controller Factory Pattern}{178}{section.0.0}%
+\contentsline {section}{\numberline {0.0}PSO Optimization Framework}{181}{section.0.0}%
+\contentsline {section}{\numberline {0.0}Simulation Framework}{185}{section.0.0}%
+\contentsline {section}{\numberline {0.0}Configuration Management}{188}{section.0.0}%
+\contentsline {section}{\numberline {0.0}Testing and Validation}{191}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Unit Testing}{191}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Integration Testing}{194}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Property-Based Testing}{195}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Command-Line Interface}{196}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Example Usage}{198}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Web Interface}{199}{section.0.0}%
+\contentsline {section}{\numberline {0.0}Hardware-in-the-Loop (HIL) Framework}{203}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}HIL Architecture}{203}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Running HIL Simulation}{207}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Performance Optimization}{207}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Numba JIT Compilation}{207}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Memory Profiling}{209}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Deployment Guidelines}{210}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Installation}{210}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Production Checklist}{210}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Docker Deployment}{211}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Summary}{212}{section.0.0}%
+\contentsline {chapter}{\numberline {0}Case Studies and Applications}{215}{chapter.0}%
+\contentsline {section}{\numberline {0.0}Case Study 1: Baseline Controller Comparison (MT-5)}{215}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Problem Statement}{215}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Experimental Setup}{215}{subsection.0.0.0}%
+\contentsline {subsubsection}{Simulation Configuration}{215}{subsubsection*.117}%
+\contentsline {subsubsection}{Controller Configurations}{216}{subsubsection*.118}%
+\contentsline {subsubsection}{Performance Metrics}{216}{subsubsection*.120}%
+\contentsline {subsection}{\numberline {0.0.0}Results}{216}{subsection.0.0.0}%
+\contentsline {subsubsection}{Comprehensive Performance Comparison}{216}{subsubsection*.121}%
+\contentsline {subsubsection}{Statistical Significance Analysis}{216}{subsubsection*.123}%
+\contentsline {subsubsection}{Key Findings}{217}{subsubsection*.124}%
+\contentsline {subsection}{\numberline {0.0.0}Discussion}{217}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Case Study 2: Robust PSO Optimization (MT-8)}{218}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Problem Statement}{218}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Methodology}{218}{subsection.0.0.0}%
+\contentsline {subsubsection}{PSO Configuration}{218}{subsubsection*.125}%
+\contentsline {subsubsection}{Multi-Objective Cost Function}{219}{subsubsection*.126}%
+\contentsline {subsubsection}{Search Space Bounds}{219}{subsubsection*.127}%
+\contentsline {subsubsection}{Robustness Testing Protocol}{219}{subsubsection*.129}%
+\contentsline {subsection}{\numberline {0.0.0}Results}{219}{subsection.0.0.0}%
+\contentsline {subsubsection}{Classical SMC Optimization}{219}{subsubsection*.130}%
+\contentsline {subsubsection}{All Controllers: Comparative Improvements}{219}{subsubsection*.132}%
+\contentsline {subsubsection}{Convergence Behavior}{220}{subsubsection*.134}%
+\contentsline {subsubsection}{Robustness Validation}{220}{subsubsection*.135}%
+\contentsline {subsection}{\numberline {0.0.0}Discussion}{220}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Case Study 3: Model Uncertainty Analysis (LT-6)}{221}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Problem Statement}{221}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Methodology}{222}{subsection.0.0.0}%
+\contentsline {subsubsection}{Uncertainty Model}{222}{subsubsection*.137}%
+\contentsline {subsubsection}{Sampling Strategy}{222}{subsubsection*.138}%
+\contentsline {subsubsection}{Success Metrics}{222}{subsubsection*.139}%
+\contentsline {subsection}{\numberline {0.0.0}Results}{222}{subsection.0.0.0}%
+\contentsline {subsubsection}{Success Rate Comparison}{222}{subsubsection*.140}%
+\contentsline {subsubsection}{Performance Degradation Analysis}{223}{subsubsection*.142}%
+\contentsline {subsubsection}{Worst-Case Analysis}{223}{subsubsection*.144}%
+\contentsline {subsubsection}{Failure Mode Analysis}{223}{subsubsection*.145}%
+\contentsline {subsection}{\numberline {0.0.0}Discussion}{223}{subsection.0.0.0}%
+\contentsline {subsubsection}{Why Adaptation Improves Robustness}{223}{subsubsection*.147}%
+\contentsline {subsubsection}{Practical Implications}{224}{subsubsection*.148}%
+\contentsline {subsubsection}{Comparison with Literature}{224}{subsubsection*.149}%
+\contentsline {subsection}{\numberline {0.0.0}Lessons Learned}{225}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Case Study 4: Hardware-in-the-Loop Validation}{225}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Problem Statement}{225}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Methodology}{225}{subsection.0.0.0}%
+\contentsline {subsubsection}{HIL Architecture}{225}{subsubsection*.150}%
+\contentsline {subsubsection}{Implementation Details}{225}{subsubsection*.152}%
+\contentsline {subsubsection}{Test Scenarios}{226}{subsubsection*.153}%
+\contentsline {subsubsection}{Performance Metrics}{226}{subsubsection*.154}%
+\contentsline {subsection}{\numberline {0.0.0}Results}{227}{subsection.0.0.0}%
+\contentsline {subsubsection}{Real-Time Performance}{227}{subsubsection*.155}%
+\contentsline {subsubsection}{Simulation Validation}{227}{subsubsection*.157}%
+\contentsline {subsubsection}{Latency Sensitivity Analysis}{227}{subsubsection*.159}%
+\contentsline {subsection}{\numberline {0.0.0}Discussion}{228}{subsection.0.0.0}%
+\contentsline {subsubsection}{HIL Validation Insights}{228}{subsubsection*.160}%
+\contentsline {subsubsection}{Practical Deployment Recommendations}{228}{subsubsection*.161}%
+\contentsline {subsubsection}{Comparison with Physical Experiments (Literature)}{228}{subsubsection*.162}%
+\contentsline {subsection}{\numberline {0.0.0}Lessons Learned}{228}{subsection.0.0.0}%
+\contentsline {section}{\numberline {0.0}Lessons Learned and Best Practices}{229}{section.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Controller Selection Guidelines}{229}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Optimization Best Practices}{229}{subsection.0.0.0}%
+\contentsline {subsubsection}{PSO Configuration}{229}{subsubsection*.164}%
+\contentsline {subsubsection}{Common Pitfalls and Solutions}{229}{subsubsection*.165}%
+\contentsline {subsection}{\numberline {0.0.0}Implementation Checklist}{229}{subsection.0.0.0}%
+\contentsline {subsubsection}{Before Deployment}{229}{subsubsection*.167}%
+\contentsline {subsubsection}{During Operation}{230}{subsubsection*.168}%
+\contentsline {subsection}{\numberline {0.0.0}Research Contributions Summary}{230}{subsection.0.0.0}%
+\contentsline {subsection}{\numberline {0.0.0}Future Research Directions}{231}{subsection.0.0.0}%
+\contentsline {chapter}{Mathematical Prerequisites}{233}{appendix*.169}%
+\contentsline {section}{\numberline {.0}Linear Algebra}{233}{section.Alph0.0}%
+\contentsline {subsection}{\numberline {.0.0}Matrices and Vectors}{233}{subsection.Alph0.0.0}%
+\contentsline {subsection}{\numberline {.0.0}Eigenvalues and Eigenvectors}{233}{subsection.Alph0.0.0}%
+\contentsline {section}{\numberline {.0}Differential Equations}{233}{section.Alph0.0}%
+\contentsline {subsection}{\numberline {.0.0}Ordinary Differential Equations (ODEs)}{233}{subsection.Alph0.0.0}%
+\contentsline {section}{\numberline {.0}Lyapunov Stability Theory}{233}{section.Alph0.0}%
+\contentsline {subsection}{\numberline {.0.0}Definitions}{233}{subsection.Alph0.0.0}%
+\contentsline {subsection}{\numberline {.0.0}Finite-Time Convergence}{234}{subsection.Alph0.0.0}%
+\contentsline {section}{\numberline {.0}Vector Calculus}{234}{section.Alph0.0}%
+\contentsline {subsection}{\numberline {.0.0}Gradient}{234}{subsection.Alph0.0.0}%
+\contentsline {subsection}{\numberline {.0.0}Jacobian Matrix}{234}{subsection.Alph0.0.0}%
+\contentsline {chapter}{Complete Lyapunov Stability Proofs}{235}{appendix*.170}%
+\contentsline {section}{\numberline {.0}Classical SMC Exponential Convergence Proof}{235}{section.Alph0.0}%
+\contentsline {subsection}{\numberline {.0.0}Theorem Statement}{235}{subsection.Alph0.0.0}%
+\contentsline {subsection}{\numberline {.0.0}Proof}{235}{subsection.Alph0.0.0}%
+\contentsline {section}{\numberline {.0}STA-SMC Finite-Time Convergence Proof}{235}{section.Alph0.0}%
+\contentsline {subsection}{\numberline {.0.0}Moreno-Osorio Lyapunov Function}{235}{subsection.Alph0.0.0}%
+\contentsline {subsection}{\numberline {.0.0}Proof Sketch}{236}{subsection.Alph0.0.0}%
+\contentsline {section}{\numberline {.0}Adaptive SMC Bounded Adaptation Proof}{236}{section.Alph0.0}%
+\contentsline {subsection}{\numberline {.0.0}Extended Lyapunov Function}{236}{subsection.Alph0.0.0}%
+\contentsline {subsection}{\numberline {.0.0}Proof}{236}{subsection.Alph0.0.0}%
+\contentsline {section}{\numberline {.0}Hybrid STA Stability with Dual-Gain Adaptation}{236}{section.Alph0.0}%
+\contentsline {chapter}{Python API Reference}{237}{appendix*.171}%
+\contentsline {section}{\numberline {.0}Controller Factory}{237}{section.Alph0.0}%
+\contentsline {subsection}{\numberline {.0.0}create\_controller Function}{237}{subsection.Alph0.0.0}%
+\contentsline {section}{\numberline {.0}PSO Optimizer}{237}{section.Alph0.0}%
+\contentsline {subsection}{\numberline {.0.0}PSOTuner Class}{237}{subsection.Alph0.0.0}%
+\contentsline {section}{\numberline {.0}Simulation Runner}{238}{section.Alph0.0}%
+\contentsline {subsection}{\numberline {.0.0}run\_simulation Function}{238}{subsection.Alph0.0.0}%
+\contentsline {section}{\numberline {.0}Dynamics Models}{238}{section.Alph0.0}%
+\contentsline {subsection}{\numberline {.0.0}FullDIPDynamics Class}{238}{subsection.Alph0.0.0}%
+\contentsline {section}{\numberline {.0}Configuration Management}{239}{section.Alph0.0}%
+\contentsline {subsection}{\numberline {.0.0}load\_config Function}{239}{subsection.Alph0.0.0}%
+\contentsline {chapter}{Selected Exercise Solutions}{241}{appendix*.172}%
+\contentsline {section}{\numberline {.0}Chapter 1 Solutions}{241}{section.Alph0.0}%
+\contentsline {section}{\numberline {.0}Chapter 2 Solutions}{245}{section.Alph0.0}%
+\contentsline {section}{\numberline {.0}Chapter 3 Solutions}{249}{section.Alph0.0}%
+\contentsline {section}{\numberline {.0}Chapter 4 Solutions}{252}{section.Alph0.0}%
+\contentsline {section}{\numberline {.0}Chapter 5 Solutions}{254}{section.Alph0.0}%
+\contentsline {section}{\numberline {.0}Chapter 6 Solutions}{258}{section.Alph0.0}%
+\contentsline {section}{\numberline {.0}Chapter 7 Solutions}{273}{section.Alph0.0}%
+\contentsline {section}{\numberline {.0}Chapter 8 Solutions}{290}{section.Alph0.0}%
+\contentsline {section}{\numberline {.0}Chapter 9 Solutions}{311}{section.Alph0.0}%
+\contentsline {section}{\numberline {.0}Chapter 10 Solutions}{322}{section.Alph0.0}%
+\contentsline {section}{\numberline {.0}Chapter 11 Solutions}{330}{section.Alph0.0}%
+\contentsline {section}{\numberline {.0}Chapter 12 Solutions}{335}{section.Alph0.0}%
 \contentsfinish 
