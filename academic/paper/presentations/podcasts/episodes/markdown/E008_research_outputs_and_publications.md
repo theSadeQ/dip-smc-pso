@@ -30,7 +30,7 @@
 
 **Sarah:** What were the quick wins?
 
-**Alex:** Five tasks, all completed in week 1. QW-1: SMC theory documentation -- write 800 to 1200 lines explaining sliding mode fundamentals, super-twisting, adaptive control. QW-2: Baseline benchmarks -- run all 7 controllers, compute 4 metrics each, establish performance baseline. QW-3: PSO visualization tools -- create plots showing swarm convergence, particle trajectories, cost function evolution. QW-4: Chattering metrics -- implement FFT-based analysis to quantify high-frequency oscillation. QW-5: Status tracking -- update project documentation to reflect Phase 5 progress.
+**Alex:** Five tasks, all completed in week 1. First: write the theory guide -- 800 to 1,200 lines explaining sliding mode fundamentals, super-twisting, adaptive control. This became Section 2 of the final paper. Second: baseline benchmarks -- run all 7 controllers, compute 4 metrics each, establish performance baseline. Third: PSO visualization tools -- create plots showing swarm convergence, particle trajectories, cost function evolution. Fourth: chattering metrics -- implement FFT-based analysis to quantify high-frequency oscillation. Fifth: status tracking -- update project documentation to reflect Phase 5 progress.
 
 ---
 
@@ -38,19 +38,19 @@
 
 **Sarah:** Walk me through the actual execution of these quick wins. How did they go from task description to completed work?
 
-**Alex:** Concrete workflow for QW-1. Day 1, hour 1: Create `docs/theory/smc_fundamentals.md`. Write introduction explaining why sliding mode control -- robustness to matched uncertainties, finite-time convergence. Hour 2 through 4: Classical SMC derivation. Start with sliding surface design, derive reaching law, analyze chattering phenomenon. Hours 5 through 8: Super-twisting algorithm. Explain why higher-order sliding modes eliminate chattering, derive STA control law, reference Levant 1993 paper.
+**Alex:** Concrete workflow for the theory guide. Day 1, hour 1: Create the fundamentals document. Write introduction explaining why sliding mode control -- robustness to matched uncertainties, finite-time convergence. Hour 2 through 4: Classical SMC derivation. Start with sliding surface design, derive reaching law, analyze chattering phenomenon. Hours 5 through 8: Super-twisting algorithm. Explain why higher-order sliding modes eliminate chattering, derive STA control law, reference Levant 1993 paper.
 
-**Sarah:** That is 8 hours just for QW-1. What about QW-2?
+**Sarah:** That is 8 hours just for the theory guide. What about the baseline benchmarks?
 
-**Alex:** QW-2 baseline benchmarks took 3 hours. Hour 1: Write bash script to run all 7 controllers with default gains. `for ctrl in classical_smc sta_smc adaptive_smc ...; do python simulate.py --ctrl $ctrl --save results/$ctrl.json; done`. Hour 2: Extract metrics from JSON files. Parse settling time, overshoot, energy, chattering. Hour 3: Generate comparison table. Classical SMC: 2.5 seconds settling, 12% overshoot. STA-SMC: 2.1 seconds, 8% overshoot. This baseline informed all later optimization.
+**Alex:** The second quick win: baseline benchmarks. Took 3 hours. Hour 1: Write a script to run all 7 controllers with default gains. The script loops through each controller, runs it, and saves the results. Hour 2: Extract metrics from the result files. Parse settling time, overshoot, energy, chattering. Hour 3: Generate comparison table. Classical SMC: 2.5 seconds settling, 12% overshoot. STA-SMC: 2.1 seconds, 8% overshoot. This baseline informed all later optimization.
 
-**Sarah:** QW-3, QW-4, QW-5?
+**Sarah:** The remaining quick wins?
 
-**Alex:** QW-3 PSO visualization: 2 hours. Modify PSO optimizer to log particle positions every iteration. Generate scatter plot animation showing particles converging toward optimal gains. Saved as `academic/paper/experiments/figures/pso_convergence.mp4`. QW-4 chattering metrics: 2 hours. Implement FFT in `src/utils/analysis/frequency.py`, add `compute_high_frequency_energy()` function, validate against known test signal. QW-5 status tracking: 1 hour. Update `.ai_workspace/planning/CURRENT_STATUS.md` to show Phase 5 in progress, commit with message "docs: QW-1 through QW-5 complete."
+**Alex:** PSO visualization: 2 hours. Modify PSO optimizer to log particle positions every iteration. Generate scatter plot animation showing particles converging toward optimal gains. Chattering metrics: 2 hours. Implement FFT analysis, add a function to compute high-frequency energy, validate against known test signal. Status tracking: 1 hour. Update project documentation to show Phase 5 in progress, commit the changes.
 
 **Sarah:** Total time for quick wins week?
 
-**Alex:** Planned: 8 hours. Actual: 16 hours. QW-1 theory documentation took twice as long as estimated -- writing rigorous mathematical derivations is slow. But the investment paid off -- that documentation became Section 2 of the LT-7 paper with minimal revisions.
+**Alex:** Planned: 8 hours. Actual: 16 hours. The theory guide took twice as long as estimated -- writing rigorous mathematical derivations is slow. But the investment paid off -- that documentation became Section 2 of the research paper with minimal revisions.
 
 ---
 
@@ -86,15 +86,15 @@
 
 **Sarah:** What debugging was required?
 
-**Alex:** Two major issues. First: trial 347 (Adaptive SMC, seed 42) diverged. Control signal hit saturation limit, pendulum fell. Root cause: PSO found gains on the edge of stability region. Fix: add stability margin constraint to PSO cost function. Second: memory leak in trial aggregation. Loading 700 JSON files consumed 4 GB RAM. Fix: switch to streaming HDF5 read, process trials one at a time. Memory usage dropped to 200 MB.
+**Alex:** Two major issues. First: trial 347 diverged -- the pendulum fell. If we had not caught this, the entire benchmark would be invalid. We dug into the root cause: PSO found gains on the edge of the stability region. Added a stability margin constraint to the cost function. Problem solved. Second: memory leak in trial aggregation. Loading 700 result files consumed 4 GB of RAM. Fixed by switching to streaming reads -- process one trial at a time. Memory usage dropped to 200 MB.
 
 ---
 
 ## MT-6 Boundary Layer: The Negative Result
 
-**Sarah:** You mentioned MT-6 found optimal boundary layer was 0.05 rad with 60 to 80% chattering reduction. But I have heard that result was questioned.
+**Sarah:** You mentioned the boundary layer experiment found optimal thickness was 0.05 rad with 60 to 80% chattering reduction. But I have heard that result was questioned.
 
-**Alex:** Correct. MT-6 initially reported 60 to 80% chattering reduction. But deep dive validation on November 7, 2025, found that metric was biased. The baseline (delta equals 0.01 rad) was actually near-optimal, not suboptimal. True reduction: 3.7%, not 60-80%. This is a negative result story.
+**Alex:** MT-6 was supposed to be the breakthrough. Optimize the boundary layer, eliminate 60 to 80% of vibration. We ran the experiments, got the results, celebrated. Then we dug deeper. Something felt off. We re-ran the analysis with different parameters. The 60-80% reduction vanished. True number: 3.7%. The metric was biased -- it was counting frequency shifts, not actual vibration reduction. Devastating? Maybe for a day. But that negative result saved future researchers from wasting weeks chasing the same dead end. Negative results are results.
 
 **Sarah:** Explain the bias.
 
@@ -142,7 +142,7 @@
 
 **Sarah:** Walk me through a Lyapunov proof for one controller. Pick Classical SMC.
 
-**Alex:** Lyapunov proof structure has four parts. Part 1: Define sliding surface. For Classical SMC: s equals lambda_1 times theta_1 plus theta_1_dot plus lambda_2 times theta_2 plus theta_2_dot. This is a linear combination of angles and angular velocities. Part 2: Construct candidate Lyapunov function. V equals one-half s squared. This is always non-negative, zero only when s equals zero (on the sliding surface).
+**Alex:** A Lyapunov proof is like proving water flows downhill. First, define a "height" function -- the Lyapunov function. For Classical SMC, we use the sliding surface error squared, divided by two. This is always non-negative, zero only when the system is on the sliding surface. Second part: show that height always decreases. Compute the time derivative of this function.
 
 **Sarah:** Part 3?
 
@@ -242,23 +242,19 @@
 
 **Sarah:** You keep mentioning automated scripts. Walk me through the complete automation workflow from raw data to publication-ready paper.
 
-**Alex:** Seven-stage pipeline. Stage 1: Data collection. Research tasks (MT-5, MT-8, LT-6) generate raw simulation data. 700 trials saved to HDF5: `academic/paper/experiments/data/lt7_results.h5`. Total size: 105 MB. Each trial includes state trajectory, control signal, timestamps, metadata.
+**Alex:** The automation pipeline has three big phases. First: collect the data. Research tasks generate raw simulation data -- 700 trials saved to a file, 105 MB total. Each trial includes state trajectory, control signal, timestamps, metadata.
 
-**Sarah:** Stage 2?
+**Sarah:** Phase two?
 
-**Alex:** Metric computation. Python script `scripts/research/compute_metrics.py` loads HDF5 file, computes settling time, overshoot, energy, chattering for each trial. Output: metrics CSV file (1.2 MB) with 700 rows, 12 columns. Execution time: 45 seconds on laptop.
+**Alex:** Crunch the numbers. A Python script loads the data file, computes settling time, overshoot, energy consumption, and chattering frequency for each of the 700 trials. Outputs a metrics file -- 1.2 MB. Execution time: 45 seconds. Then another script runs the statistical analysis -- bootstrap confidence intervals with 2,000 resamples per controller, Welch's t-tests with Bonferroni correction. Outputs statistics with means, CIs, p-values.
 
-**Sarah:** Stages 3 and 4?
+**Sarah:** Phase three?
 
-**Alex:** Stage 3: Statistical analysis. Script `scripts/research/statistical_analysis.py` reads metrics CSV, runs bootstrap for confidence intervals (2,000 resamples per controller), performs Welch's t-tests with Bonferroni correction. Output: statistics JSON file with means, CIs, p-values. Stage 4: Figure generation. Script `scripts/research/lt7_generate_figures.py` reads statistics JSON, generates all 14 figures using Matplotlib. Saves to `academic/paper/experiments/figures/` as PDF (vector) and PNG (300 DPI raster). Execution time: 60 seconds.
-
-**Sarah:** Stages 5, 6, 7?
-
-**Alex:** Stage 5: LaTeX integration. Each figure has companion JSON with caption and metadata. Script `scripts/research/generate_latex_snippets.py` reads figure JSONs, generates LaTeX code for `\includegraphics` and `\caption`. Writes to `academic/paper/latex/figures/`. Stage 6: Document compilation. Run `pdflatex` on main LaTeX file, includes generated figure snippets. Output: submission PDF. Stage 7: Reproducibility validation. Delete all figures, re-run stages 4-6, verify PDFs are bit-for-bit identical using `diff`. Result: 14 out of 14 figures reproduce exactly.
+**Alex:** Generate the figures. The figure generator reads the statistics, creates all 14 plots using Matplotlib with consistent styling. Saves them as vector PDFs and high-resolution PNGs. Execution time: 60 seconds. Then LaTeX integration. Each figure has a metadata file with its caption, data source, and generation script. A tool reads this metadata and auto-generates the LaTeX code to include the figures. Finally: document compilation. Run the LaTeX compiler, it pulls in all the generated figures. Output: submission PDF. Last step: reproducibility validation. Delete all figures, re-run the pipeline, verify the PDFs are bit-for-bit identical. Result: 14 out of 14 figures reproduce exactly.
 
 **Sarah:** Total automation time?
 
-**Alex:** From HDF5 data to compiled PDF: 3 minutes. Manual process would take 2 hours -- load data in Excel, make plots in GUI, export images, copy-paste captions, recompile LaTeX, fix formatting issues. Automation is 40x faster and eliminates human error.
+**Alex:** From data file to compiled PDF: 3 minutes. Manual process would take 2 hours -- load data in Excel, make charts, export images, copy-paste captions, recompile LaTeX, fix formatting issues. Automation is 40 times faster and eliminates human error.
 
 ---
 
@@ -278,7 +274,7 @@
 
 **Sarah:** Example of why this matters?
 
-**Alex:** Six months after submission, reviewer asks: "Can you provide the data for Figure 10?" We check the git tag `v1.0-submission-ieee-tcst`, see it points to commit `964dc438`. Check out that commit, find the exact data file `lt7_results.h5` version from that date, send it to reviewer. Without version control, we would have no idea which data version produced which figure.
+**Alex:** Six months after submission, a reviewer asks for the data behind Figure 10. Without version control, we would be screwed -- which data file was it? Which version of the analysis script? With git tags, we check the submission tag, see it points to commit 964dc438, check out that exact commit, find the data file version from that date, send it to the reviewer. Crisis averted. Version control is not optional -- it is academic integrity.
 
 ---
 
@@ -306,42 +302,15 @@
 
 **Sarah:** You mentioned JSON-driven LaTeX automation. Show me a concrete example.
 
-**Alex:** Each figure has metadata in JSON. For Figure 5 (settling time comparison), file `figure_05_metadata.json` contains:
-
-```json
-{
-  "figure_id": "fig:settling_time",
-  "number": 5,
-  "title": "Settling Time Comparison",
-  "caption": "Mean settling time with 95% confidence intervals from 100 Monte Carlo trials per controller. Hybrid Adaptive STA-SMC achieves fastest settling (2.1 ± 0.08 s), followed by STA-SMC (2.2 ± 0.09 s).",
-  "file_path": "figures/figure_05_settling_time.pdf",
-  "data_source": "academic/paper/experiments/data/lt7_results.h5",
-  "generation_script": "scripts/research/lt7_generate_figures.py",
-  "git_commit": "964dc438",
-  "timestamp": "2025-11-07T14:32:18Z"
-}
-```
+**Alex:** Each figure has a metadata file. For Figure 5, the settling time comparison, the metadata contains the caption, the data source, the script that generated it, and the exact git commit. It also has the figure number, the LaTeX label, and a timestamp.
 
 **Sarah:** How does this become LaTeX code?
 
-**Alex:** Python script `scripts/research/generate_latex_snippets.py` reads the JSON, generates this LaTeX:
-
-```latex
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.95\columnwidth]{figures/figure_05_settling_time.pdf}
-  \caption{Settling Time Comparison. Mean settling time with 95\% confidence intervals from 100 Monte Carlo trials per controller. Hybrid Adaptive STA-SMC achieves fastest settling (2.1 ± 0.08 s), followed by STA-SMC (2.2 ± 0.09 s).}
-  \label{fig:settling_time}
-  \vspace{-0.5em}
-  {\footnotesize Data: \texttt{lt7\_results.h5} | Script: \texttt{lt7\_generate\_figures.py} | Commit: \texttt{964dc438}}
-\end{figure}
-```
-
-This snippet is written to `latex/figures/figure_05.tex`, then included in main document with `\input{latex/figures/figure_05.tex}`. Update caption in JSON, re-run script, recompile LaTeX -- done. No manual editing.
+**Alex:** A Python tool reads the metadata file and auto-generates the LaTeX code. It creates the includegraphics command to pull in the PDF, the caption text with proper formatting, the label for cross-references, and a tiny attribution footer showing which data file and script produced this figure. The generated snippet is written to a file that gets included in the main document. Update the caption? Edit the metadata file, re-run the script, recompile LaTeX. Done. No manual copy-pasting.
 
 **Sarah:** What percentage of LaTeX is automated?
 
-**Alex:** Approximately 95% for figures. 100% of `\includegraphics` commands, 100% of captions, 100% of labels, 100% of attribution footers. Manual editing only for figure placement hints (`[htbp]` vs `[!t]`) and cross-references in main text.
+**Alex:** Approximately 95% for figures. 100% of includegraphics commands, 100% of captions, 100% of labels, 100% of attribution footers. Manual editing only for figure placement hints and cross-references in the main text.
 
 ---
 
@@ -349,23 +318,19 @@ This snippet is written to `latex/figures/figure_05.tex`, then included in main 
 
 **Sarah:** Research is not linear. What experiments failed? What did you try that did not work?
 
-**Alex:** Five major iterations. Version 0.5 (never released): attempted full MPC controller. Implemented model predictive control with quadratic programming solver. Problem: solver took 500 milliseconds per control step -- 50x slower than real-time requirement. Conclusion: MPC is infeasible for this system without custom solver. Abandoned, moved to sliding mode control.
-
-**Sarah:** Version 1.0?
-
-**Alex:** First complete draft of LT-7 paper. 50 pages, 8 figures. Weak introduction (2 pages, no related work), minimal theory (no Lyapunov proofs), thin results (just MT-5 benchmark, no robustness analysis). Submitted to co-authors for feedback. Response: "This needs substantial work before journal submission." Spent 3 weeks expanding to version 1.5.
+**Alex:** The paper evolved like a sculpture. Version 0.5 was the discarded clay -- we tried MPC, but the solver was 50 times too slow. Never saw daylight. Version 1.0 was the rough form -- 50 pages, weak introduction, no stability proofs. It was a sketch. We showed it to co-authors. Response: "This needs substantial work before journal submission." So we spent 3 weeks adding muscle.
 
 **Sarah:** What changed in version 1.5?
 
-**Alex:** Added 15 pages. Introduction expanded to 7 pages with comprehensive related work review (39 references). Section 4 (Lyapunov analysis) added: 10 pages of stability proofs. Figures expanded from 8 to 12 (added phase portraits, Monte Carlo histograms). Total: 65 pages. Still not submission-ready -- discussion section was weak.
+**Alex:** Version 1.5 added 15 pages of substance. Lyapunov proofs -- 10 pages of mathematical derivations. Expanded introduction with comprehensive related work review -- 39 references. More figures -- phase portraits, Monte Carlo histograms. Total: 65 pages, 12 figures. Still not submission-ready -- the discussion section was weak.
 
 **Sarah:** Versions 2.0 and 2.1?
 
-**Alex:** Version 2.0: comprehensive rewrite of Section 8 (Discussion). Expanded from 2 pages to 8 pages. Added three subsections: chattering-accuracy tradeoffs, adaptive vs fixed-gain comparison, practical implementation considerations. Integrated LT-6 model uncertainty results. Added Figures 13-14 (ranking matrix, Pareto frontier). Total: 70 pages, 14 figures. Version 2.1: polish. Fixed 37 typos, improved 18 unclear sentences, tightened 12 verbose paragraphs. Verified all 47 cross-references. Regenerated all figures with consistent styling. Final: 71 pages, submission-ready.
+**Alex:** Version 2.0 refined the shape. Comprehensive rewrite of the discussion -- expanded from 2 pages to 8 pages with three subsections on tradeoffs, comparisons, practical considerations. Integrated the model uncertainty robustness results. Perfected the 14 figures with consistent styling. Total: 70 pages. Version 2.1 was the final polish -- fixed 37 typos, tightened 18 unclear sentences, verified all 47 cross-references. Submission-ready. From clay to bronze in five weeks.
 
-**Sarah:** Time from version 1.0 to 2.1?
+**Sarah:** Time breakdown?
 
-**Alex:** Five weeks. Version 1.0 to 1.5: 3 weeks. Version 1.5 to 2.0: 1.5 weeks. Version 2.0 to 2.1: 4 days. The first major revision always takes longest -- subsequent iterations are faster.
+**Alex:** Version 1.0 to 1.5: 3 weeks. Version 1.5 to 2.0: 1.5 weeks. Version 2.0 to 2.1: 4 days. The first major revision always takes longest -- subsequent iterations are faster.
 
 ---
 
@@ -397,30 +362,15 @@ This snippet is written to `latex/figures/figure_05.tex`, then included in main 
 
 **Sarah:** How do you find relevant papers systematically?
 
-**Alex:** Five-step process. Step 1: Google Scholar keyword search. "sliding mode control double inverted pendulum" returns 2,400 results. Step 2: Filter by citation count. Sort by citations, read top 10 papers (these are usually important). Step 3: Follow citation chains. If paper A cites paper B and B looks relevant, add B to reading list. Build citation graph -- papers that are cited by many others in your set are foundational. Step 4: Check recent work. Filter to last 5 years (2020-2025), read top 10 recent papers. This ensures you cite state-of-the-art, not just old work. Step 5: Target journal alignment. If submitting to IEEE TCST, search IEEE Xplore for "sliding mode control" + "inverted pendulum", see what that journal publishes.
+**Alex:** Building a bibliography is like panning for gold. Start with a Google Scholar search -- "sliding mode control double inverted pendulum" -- 2,400 results. That is the river. Filter by citations to find the nuggets -- sort by most cited, read the top 10. These are usually foundational papers. Follow the citation chains -- if Paper A cites Paper B and B looks relevant, read B. Papers that are cited by many others in your set are probably foundational. Check recent work -- filter to the last 5 years, make sure you are citing state-of-the-art. Finally, align with your target journal -- if submitting to IEEE, search IEEE Xplore to see what they publish. After reading 120 papers, you are left with 39 pieces of gold for your bibliography.
 
-**Sarah:** How many papers did you read to select 39?
+**Sarah:** What gets rejected from those 120 papers?
 
-**Alex:** Read approximately 120 papers. About 80 from keyword search, 30 from citation chains, 10 from reviewer recommendations during internal review. Of those 120, selected 39 that directly support claims in the paper. Rejected papers that were: too tangential, too old without foundational status, too new without peer validation, duplicate results from same research group.
+**Alex:** Papers that are too tangential, too old without foundational status, too new without peer validation, or duplicate results from the same research group. You want papers that directly support specific claims in your paper, not generic background reading.
 
 **Sarah:** What citation management tool?
 
-**Alex:** BibTeX for LaTeX integration. Maintain `references.bib` file with all citations. Each entry has: author, title, journal, year, DOI, citation key. Example:
-
-```bibtex
-@article{levant1993sliding,
-  author={Levant, Arie},
-  title={Sliding order and sliding accuracy in sliding mode control},
-  journal={International Journal of Control},
-  volume={58},
-  number={6},
-  pages={1247--1263},
-  year={1993},
-  doi={10.1080/00207179308923053}
-}
-```
-
-In LaTeX document, cite with `\cite{levant1993sliding}`, bibliography auto-generates with `\bibliography{references}`. Update BibTeX file, recompile, citations update automatically.
+**Alex:** BibTeX for LaTeX integration. We maintain a references file with all citations. Each entry has author, title, journal, year, DOI, and a citation key. In the LaTeX document, you cite a paper by using its key. The bibliography auto-generates at the end of the paper. Update the references file, recompile, and all citations update automatically throughout the document. No manual numbering or formatting.
 
 ---
 
@@ -428,11 +378,7 @@ In LaTeX document, cite with `\cite{levant1993sliding}`, bibliography auto-gener
 
 **Sarah:** You mentioned a submission package. What components are required for journal submission?
 
-**Alex:** Five-component checklist. Component 1: Main manuscript PDF. Generated from LaTeX source, 71 pages, two-column IEEE format. Includes all sections, figures embedded, bibliography formatted. File size: 8.2 MB. Component 2: Individual figure files. All 14 figures as separate high-resolution PDFs. Zipped into `figures.zip` (12 MB). Some journals require this for typesetting.
-
-**Sarah:** Components 3, 4, 5?
-
-**Alex:** Component 3: Supplementary materials document. Additional plots, data tables, extended proofs that do not fit in main paper. 15 pages. Example: full Monte Carlo distributions (100 trials × 7 controllers = 700 histograms). Component 4: Cover letter. One-page letter addressed to the editor explaining: why this work is significant (first systematic comparison of 7 SMC variants for DIP with PSO tuning), how it fits journal scope (nonlinear control, underactuated systems), suggested reviewers (3 names of experts in SMC/DIP, not co-authors or collaborators). Component 5: Author forms. Copyright transfer agreement, conflict of interest statement, author contribution statement (who did what), ORCID IDs for all authors.
+**Alex:** Journal submission is like packing for a flight. Checklist: five components. Component 1: main manuscript PDF -- 71 pages, IEEE format, 8.2 MB. Component 2: individual figure files -- all 14 figures as separate high-resolution PDFs, zipped into 12 MB. Some journals require this for typesetting. Component 3: supplementary materials document -- 15 pages of additional plots, data tables, extended proofs that do not fit in the main paper. Component 4: cover letter -- one page addressed to the editor explaining why this work is significant, how it fits journal scope, and suggesting 3 expert reviewers. Component 5: author forms -- copyright transfer, conflict of interest statement, author contributions, ORCID IDs. Miss one component? The submission gets rejected before review. Checklist prevents that.
 
 **Sarah:** How do you choose suggested reviewers?
 
