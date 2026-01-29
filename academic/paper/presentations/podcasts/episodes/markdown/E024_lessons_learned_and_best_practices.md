@@ -6,7 +6,7 @@
 
 ---
 
-## Opening Hook
+## Opening Hook: Tales from the Trenches
 
 **Sarah:** Alex, if you could go back to the start of this project and tell yourself one thing, what would it be?
 
@@ -16,9 +16,11 @@
 
 **Alex:** It is the one that changes how you think about everything else. Once you stop measuring success by volume and start measuring by verifiable behavior, every other decision follows.
 
-**Sarah:** Today we are doing something different. No new features, no architecture walkthroughs. We are reflecting on what we learned -- the mistakes, the surprises, the principles that emerged from building this system over months of development.
+**Sarah:** Today we are doing something different. No new features, no architecture walkthroughs. We are reflecting on what we learned—the mistakes, the surprises, the **war stories** from the trenches.
 
-**Alex:** The lessons that do not make it into papers but determine whether a project is maintainable or a disaster.
+**Alex:** These are the lessons that do not make it into papers but determine whether a project is maintainable or a disaster. The bugs we shipped. The refactors we regretted. The moments we said "never again."
+
+**Sarah:** **Tales from the trenches.** The honest, unglamorous truth about building research software.
 
 ---
 
@@ -67,15 +69,19 @@
 
 ---
 
-## Lesson 2: Memory Leaks Are Silent Until They Are Not
+## Lesson 2: Memory Leaks Are Silent Until They Are Not (Universal Principle: Test at Scale)
 
 **Sarah:** The memory management story is one of the more dramatic lessons from this project. What happened?
 
-**Alex:** Early in development, we ran simulations for hours without issue. Then we tried a 10,000-simulation batch run -- the kind you need for Monte Carlo statistical analysis. Midway through, the process was consuming 800 megabytes of RAM. By the end, it had crashed.
+**Alex:** Early in development, we ran simulations for hours without issue. Then we tried a 10,000-simulation batch run—the kind you need for Monte Carlo statistical analysis. Midway through, the process was consuming 800 megabytes of RAM. By the end, it had crashed.
 
 **Sarah:** What was the leak?
 
 **Alex:** Circular references. The controller held a reference to its monitoring system. The monitoring system held a reference back to the controller for state tracking. Python's garbage collector handles cycles eventually, but not fast enough when you are creating and destroying controller instances thousands of times per hour.
+
+**Sarah:** So the bug was invisible at small scale?
+
+**Alex:** Exactly. **Universal principle: test at the scale you'll deploy.** A memory leak that's negligible for 100 iterations becomes catastrophic at 10,000. A race condition that happens once per thousand runs will never show up in unit tests but will crash production.
 
 **Sarah:** How did you fix it?
 
