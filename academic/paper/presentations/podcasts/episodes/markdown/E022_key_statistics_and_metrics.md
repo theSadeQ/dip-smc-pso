@@ -6,7 +6,7 @@
 
 ---
 
-## Opening Hook
+## Opening Hook: The Health Check
 
 **Sarah:** Alex, I have a question that sounds simple but is actually hard to answer honestly.
 
@@ -14,15 +14,15 @@
 
 **Sarah:** How big is this project, really? Not the marketing pitch. The actual numbers.
 
-**Alex:** That's a dangerous question. Most projects fudge those numbers -- lines of code inflated by generated boilerplate, test counts padded by trivial assertions.
+**Alex:** Think of this episode as a **health check**. You go to the doctor, they measure your vital signs—heart rate, blood pressure, temperature. Those numbers tell you whether you're healthy or need intervention.
 
-**Sarah:** So let's not fudge. Let's pull the real numbers, show the raw data, and let listeners decide what they mean.
+**Sarah:** So what are the vital signs of a software project?
 
-**Alex:** Every single metric we quote today -- you can verify yourself. Clone the repository, run the commands, get the same numbers we're quoting. That's what separates research software from marketing copy.
+**Alex:** **Scale** - how big is it? **Quality** - does it work reliably? **Speed** - is it fast enough? Those are the three categories we'll explore today.
 
-**Sarah:** I like it. A metrics episode with full reproducibility.
+**Sarah:** And every single metric we quote—you can verify yourself. Clone the repository, run the commands, get the same numbers. That's what separates research software from marketing copy.
 
-**Alex:** The only kind worth listening to.
+**Alex:** The only kind worth listening to. Let's do the health check.
 
 ---
 
@@ -42,11 +42,15 @@ In this episode, we walk through the complete statistical profile of the DIP-SMC
 
 ---
 
-## Project Scale: What 105,000 Lines Actually Means
+## Vital Sign 1: Scale - What 105,000 Lines Actually Means
 
 **Sarah:** Let's start with the headline number. Over 105,000 lines of code in the source directory alone. Alex, is that a lot?
 
-**Alex:** Context matters. A Boeing 737 fly-by-wire system is around 500,000 lines. A modern web browser is 50 million. So 105,000 lines is solidly in the "serious research tool" category -- not a weekend script, not an enterprise platform.
+**Alex:** Let me give you some comparisons. **105,000 lines is like a medium-sized novel**—think *The Great Gatsby*, about 47,000 words, which translates to roughly 100,000 characters. Our codebase is that much content, except instead of prose, it's Python.
+
+**Sarah:** And compared to other software?
+
+**Alex:** A Boeing 737 fly-by-wire system is around 500,000 lines. A modern web browser is 50 million. So 105,000 lines is solidly in the **"serious research tool"** category—not a weekend script, not an enterprise platform.
 
 **Sarah:** Break it down for me. Where do those lines live?
 
