@@ -6,11 +6,15 @@
 
 ## Opening Hook
 
-**Alex**: Your controller runs great for 100 iterations. Then 1000 iterations. Then you run a 10-hour experiment and...
+**Alex**: Picture this: It's 10 PM. You start an overnight PSO optimization—10 hours, 50 particles, thousands of simulations. You go home. Sleep soundly. Wake up excited to see the results.
 
-**Sarah**: RAM usage balloons from 50 MB to 5 GB! System crashes! What happened?
+**Sarah**: You check your computer. It's frozen. Blue screen. **Crashed at hour 9.**
 
-**Alex**: **Memory leak!** The controller is accumulating history without bounds.
+**Alex**: Nine hours of computation—**gone**. What happened?
+
+**Sarah**: RAM usage ballooned from 50 MB to 5 GB. The system ran out of memory and killed your process.
+
+**Alex**: **Memory leak.** The controller was hoarding every state it ever saw. For nine hours straight. Until the system said "enough" and pulled the plug.
 
 **Sarah**: Before fix:
 ```python
@@ -144,37 +148,47 @@ class AdaptiveSMC:
 - Integral: bounded buffer prevents windup
 - No reason to store entire simulation history!
 
-### Pattern 2: Weakref for Dynamics References
+### Pattern 2: Weakref—The Sticky Note, Not the Leash
 
-**Problem**: Controller holds reference to dynamics object causing circular references.
+**Sarah**: Here's the problem: Controllers need to reference the dynamics object. But if you hold a **strong reference**, you create a circular dependency.
 
-**Bad**:
+**Alex**: The controller points to dynamics. Dynamics points back to the controller. Neither can be garbage collected. They're stuck together like magnets.
+
+**Sarah**: Solution? **Weakref**—a weak reference. Think of it like this:
+
+**Alex**: A **strong reference** is a **leash**. You're holding the object. It can't go anywhere. Even if you're done with it, it stays in memory because **you're holding on**.
+
+**Sarah**: A **weakref** is a **sticky note**. It says "the object is over there" without actually holding it. If the object gets deleted, the sticky note just says "object not found." You know **where** it was, but you're not **keeping it alive**.
+
+**Bad approach (strong reference - the leash)**:
 ```python
 class HybridAdaptiveSTA:
     def __init__(self, config, dynamics):
-        self.dynamics = dynamics  # Strong reference - keeps dynamics in memory!
+        self.dynamics = dynamics  # Strong reference - holding tight!
 ```
 
-**Good**:
+**Good approach (weakref - the sticky note)**:
 ```python
 import weakref
 
 class HybridAdaptiveSTA:
     def __init__(self, config, dynamics):
-        self._dynamics_ref = weakref.ref(dynamics)  # Weak reference
+        self._dynamics_ref = weakref.ref(dynamics)  # Sticky note!
 
     @property
     def dynamics(self):
-        dyn = self._dynamics_ref()
+        dyn = self._dynamics_ref()  # Check if object still exists
         if dyn is None:
             raise RuntimeError("Dynamics object has been deleted")
         return dyn
 ```
 
-**Alex**: **Why weakref?**
-- Allows garbage collection of dynamics when simulation ends
-- Prevents circular references (controller to dynamics to controller)
-- CA-02 audit: 100% of controllers use weakref pattern
+**Alex**: **Why this matters:**
+- When the simulation ends, dynamics can be garbage collected **immediately**
+- No circular references—controller and dynamics can be freed independently
+- CA-02 audit: 100% of controllers use the weakref pattern
+
+**Sarah**: Sticky note, not a leash. Remember that!
 
 ### Pattern 3: Explicit Cleanup Methods
 
@@ -317,11 +331,19 @@ ALL CONTROLLERS: < 100 μs (within 10 ms deadline)
 
 ---
 
-## Garbage Collection Tuning
+## Garbage Collection: Taking Out the Trash (On Your Schedule)
 
-**Alex**: Python's garbage collector (GC) can cause real-time jitter.
+**Alex**: Python's garbage collector—**GC** for short—is like a janitor for your computer's memory.
 
-### Problem: GC Pauses
+**Sarah**: When objects are no longer needed, the GC **takes out the trash**. Frees up memory. Keeps things clean.
+
+**Alex**: But here's the problem: The janitor comes by **randomly**. And when they show up, they **stop everything** to clean. For 10 to 50 milliseconds!
+
+### Problem: The Janitor Shows Up at the Worst Time
+
+**Sarah**: You're running a real-time control loop. Deadline: 10 milliseconds. Everything's humming along smoothly—controller computes in 60 microseconds. Then, randomly, at iteration 734...
+
+**Alex**: **The janitor shows up.** Garbage collection kicks in. Takes 45 milliseconds. **You miss the deadline.** Your control loop stutters. In a real robot, the pendulum might fall.
 
 **Before tuning**:
 ```python
@@ -330,81 +352,84 @@ for t in range(num_steps):
     # Random GC pauses every ~700 iterations (10-50 ms!)
 ```
 
-**Sarah**: GC pauses can **exceed our 10 ms deadline**!
+### Solution: Take Out the Trash on YOUR Schedule
 
-### Solution: Disable GC During Critical Section
+**Sarah**: We don't want the janitor showing up randomly. We want them on **our schedule**. During breaks. When it's safe.
+
+**Alex**: So we **disable automatic garbage collection** during the critical real-time loop. Then we **manually trigger it** every 1,000 iterations—when we know we have time.
 
 ```python
 import gc
 
-gc.disable()  # Disable automatic GC
+gc.disable()  # Janitor takes a break—we'll call you when we need you
 
 try:
     for t in range(num_steps):
         control = controller.compute_control(state, ...)
 
-        # Manual GC every 1000 iterations
+        # Manual GC every 1000 iterations—trash day!
         if t % 1000 == 0:
-            gc.collect()
+            gc.collect()  # Take out the trash NOW
 finally:
-    gc.enable()
+    gc.enable()  # Re-enable automatic GC after loop ends
 ```
 
-**Alex**: GC pauses now occur **predictably** every 1000 iterations, not randomly.
+**Sarah**: Now garbage collection happens **predictably** every 1,000 iterations. No surprises. No missed deadlines.
 
-**Sarah**: **Benchmark**:
-- **Before**: 99th percentile latency = 45 ms (GC pauses)
-- **After**: 99th percentile latency = 89 μs (no pauses in control loop)
+**Alex**: **The results:**
+- **Before**: 99th percentile latency = 45 ms (random GC pauses killed us)
+- **After**: 99th percentile latency = 89 μs (no pauses in the control loop!)
+
+**Sarah**: We went from **missing deadlines** to being **500× faster than the deadline**. All by controlling **when** the trash gets taken out.
 
 ---
 
-## Summary: Memory Management Best Practices
+## Summary: Three Patterns That Prevent Memory Nightmares
 
-**Sarah**: Let's recap our memory management strategy:
+**Sarah**: Remember the opening story? Nine hours of computation lost to a memory leak. Let's make sure that **never** happens to you.
 
-**1. Bounded Circular Buffers**
-```python
-from collections import deque
-self.history = deque(maxlen=1000)  # NOT: self.history = []
-```
+**Alex**: Three simple patterns prevent 99% of memory problems:
 
-**2. Weakref for Dynamics**
-```python
-import weakref
-self._dynamics_ref = weakref.ref(dynamics)  # NOT: self.dynamics = dynamics
-```
+### Pattern 1: Bounded Buffers (Not Infinite Lists)
 
-**3. Explicit Cleanup**
-```python
-def cleanup(self):
-    self.state_history.clear()
-    self._dynamics_ref = None
-```
+**Sarah**: **Bad**: `self.history = []` — grows forever, eats all your RAM
 
-**4. Memory Testing**
-```python
-import tracemalloc
-# Monitor memory growth during tests
-```
+**Alex**: **Good**: `self.history = deque(maxlen=1000)` — fixed size, constant memory
 
-**5. GC Tuning**
-```python
-gc.disable()  # Disable during real-time loop
-gc.collect()  # Manual collection at safe points
-```
+**Sarah**: You don't need the entire simulation history. You need the **last N samples**. Bound it. Move on.
 
-**Alex**: **Key metrics from CA-02 audit**:
-- **Memory leak tests**: 11/11 passing
-- **Memory growth rate**: 0.0 KB/hour (all controllers)
-- **Peak memory**: 52-118 KB (constant, bounded)
-- **CPU performance**: 23-62 μs (600× faster than deadline)
+### Pattern 2: Weakrefs (Sticky Notes, Not Leashes)
 
-**Sarah**: **Production readiness**:
-- Thread-safe: 100% (11/11 tests passing)
-- Memory-safe: 100% (0 leaks, 0 growth)
-- Real-time capable: Yes (< 100 μs latency)
+**Alex**: **Bad**: `self.dynamics = dynamics` — strong reference, can't be garbage collected
 
-**Alex**: Your controller will run for **days** without eating RAM! Bounded buffers, weakrefs, cleanup methods - **three simple patterns** that prevent 99% of memory issues!
+**Sarah**: **Good**: `self._dynamics_ref = weakref.ref(dynamics)` — weak reference, garbage collectable
+
+**Alex**: A sticky note says "object is over there" without holding it hostage. When the simulation ends, memory gets freed **immediately**.
+
+### Pattern 3: Manual Garbage Collection (Your Schedule, Not Python's)
+
+**Sarah**: **Bad**: Let Python's GC run randomly—45 ms pauses kill real-time deadlines
+
+**Alex**: **Good**: `gc.disable()` during critical loops, `gc.collect()` at safe points every 1,000 iterations
+
+**Sarah**: Take out the trash on **your** schedule. Not when the janitor randomly shows up.
+
+---
+
+**Alex**: **The proof these patterns work**—CA-02 audit results:
+- **Memory leak tests**: 11 out of 11 passing
+- **Memory growth rate**: 0.0 KB per hour (all 4 controllers)
+- **Peak memory**: 52–118 KB (constant, bounded)
+- **CPU performance**: 23–62 microseconds (600× faster than deadline)
+
+**Sarah**: **Production readiness:**
+- Thread-safe: 100%
+- Memory-safe: 100% (zero leaks, zero growth)
+- Real-time capable: Yes (under 100 microseconds)
+
+**Alex**: These three patterns let your controller run for **days, weeks, months** without eating RAM. No crashes. No leaks. No surprises.
+
+**Sarah**: Bounded buffers. Sticky notes. Scheduled trash day. **Remember these, and you'll never lose nine hours of computation again.**
 
 ---
 
