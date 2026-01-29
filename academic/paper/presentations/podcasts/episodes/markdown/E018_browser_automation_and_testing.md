@@ -30,9 +30,13 @@
 
 ---
 
-## Puppeteer MCP: The Basics
+## Puppeteer MCP: The Ghost User
 
-[SARAH]: Puppeteer is a Node.js library that provides a high-level API to control Chrome or Chromium browsers. Think of it as a robot that can open websites, click buttons, and take screenshots.
+[SARAH]: Puppeteer is a Node.js library that provides a high-level API to control Chrome or Chromium browsers. But let's describe it more vividly.
+
+[ALEX]: Think of Puppeteer as a **ghost user**—an invisible visitor clicking through your website at lightning speed. It opens pages, fills forms, clicks buttons, and takes screenshots. All without a visible browser window.
+
+[SARAH]: It's like watching your computer use itself. The mouse moves. Buttons get clicked. Forms get filled. Except there's no human at the keyboard—just code.
 
 [ALEX]: Let me show you a real example. Here's how we test our controller selection dropdown:
 
@@ -98,11 +102,15 @@ async function testPSOWorkflow() {
 
 ---
 
-## Visual Regression Testing
+## Visual Regression Testing: Spot the Difference
 
 [SARAH]: Visual regression testing detects unintended UI changes. Did a CSS update accidentally move a button? Did a dependency upgrade change font sizes?
 
-[ALEX]: We use screenshot comparison. Here's how it works:
+[ALEX]: Think of it like the **"spot the difference"** game you played as a kid. Two pictures that look identical, but there are subtle changes. Circle the differences.
+
+[SARAH]: Except instead of you squinting at pictures, a computer compares screenshots **pixel by pixel**. It's inhumanly precise—can detect if a button moved 2 pixels left or if a color shifted by 1%.
+
+[ALEX]: Here's how it works:
 
 ```javascript
 const pixelmatch = require('pixelmatch');
@@ -137,11 +145,15 @@ async function compareScreenshots(baseline, current) {
 
 ---
 
-## Lighthouse Audits
+## Lighthouse Audits: The Health Inspector
 
 [SARAH]: Lighthouse is Google's automated tool for auditing web app quality. It measures performance, accessibility, best practices, and SEO.
 
-[ALEX]: Our Phase 3 UI work was all about WCAG 2.1 Level AA compliance. Lighthouse validates that automatically.
+[ALEX]: Think of Lighthouse as a **health inspector** for your website. You open a restaurant—the inspector shows up with a clipboard, checks the kitchen, tests the fire exits, measures the temperature of the fridge.
+
+[SARAH]: Lighthouse does the same for web apps. It loads your page, runs 100+ automated checks, and gives you a score out of 100 for each category. Pass? Green check. Fail? Red flag with specific fixes.
+
+[ALEX]: Our Phase 3 UI work was all about WCAG 2.1 Level AA compliance. Lighthouse validates that automatically—like having a health inspector on call 24/7.
 
 ```javascript
 const lighthouse = require('lighthouse');
