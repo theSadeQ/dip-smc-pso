@@ -32,13 +32,21 @@
 
 ---
 
-## Directory Structure: The 19-Item Rule
+## Directory Structure: The 19-Item Rule (The Limit of Human Short-Term Memory)
 
 **Sarah:** Let's start with the physical layout. The project root has a hard limit: no more than 19 visible directory entries.
 
 **Alex:** That sounds arbitrary. Why 19?
 
-**Sarah:** Because cognitive load scales with the number of items you need to scan. If you open a project directory and see 40 folders, your brain has already decided this is unmanageable. At 19 or fewer, you can mentally categorize everything in a few seconds.
+**Sarah:** Because of **cognitive load**—the limit of human short-term memory. Back in 1956, psychologist George Miller published a famous paper: "The Magical Number Seven, Plus or Minus Two."
+
+**Alex:** Seven items, plus or minus two. So humans can hold 5 to 9 items in short-term memory at once.
+
+**Sarah:** Exactly. When you open a project directory and see **40 folders**, your brain immediately feels overwhelmed. You can't process that many items at a glance. You have to scroll, re-read, forget what you've seen.
+
+**Alex:** At 19 or fewer items, you can **mentally categorize everything in a few seconds**. Source code here. Documentation there. Configuration files over there. Your brain can handle it.
+
+**Sarah:** It's not arbitrary—it's respecting the biological limits of human cognition.
 
 **Alex:** Walk me through the actual structure.
 
@@ -60,13 +68,17 @@
 
 ---
 
-## The 6-Agent Orchestration System
+## The 6-Agent Orchestration System: The Conductor
 
 **Sarah:** Now let's talk about the multi-agent system. This project uses what is called the Ultimate Orchestrator pattern for parallel AI-assisted development.
 
 **Alex:** Six agents working simultaneously. How does that actually work without chaos?
 
-**Sarah:** The hierarchy has a clear structure. At the top is the Ultimate Orchestrator -- that is the coordinating agent that plans multi-domain tasks, determines which subordinate agents to launch, and aggregates their results into a coherent whole.
+**Sarah:** Think of a symphony orchestra. You have 80 musicians—violins, cellos, trumpets, drums. If they all played independently, it would be noise. But there's a **conductor** standing in front, coordinating everyone.
+
+**Alex:** The Ultimate Orchestrator is the conductor. It doesn't play an instrument itself—it directs the other agents, decides when each one starts, makes sure they harmonize.
+
+**Sarah:** The hierarchy has a clear structure. At the top is the Ultimate Orchestrator—the coordinating agent that plans multi-domain tasks, determines which subordinate agents to launch, and aggregates their results into a coherent whole.
 
 **Alex:** And the subordinates?
 
