@@ -6,27 +6,31 @@
 
 ---
 
-## Opening Hook
+## Opening Hook: Sell, Don't Tell
 
-**Sarah:** Today's episode is about something you cannot see. We are going to describe visual diagrams without showing you any diagrams. Architecture, structure, dependencies, flow -- all verbally.
+**Sarah:** Today's episode is different. We're not going to describe diagrams—we're going to tell you **why** you need to see them and **where** to find them.
 
-**Alex:** This is harder than it sounds. A well-designed system diagram conveys relationships at a glance. Boxes, arrows, colors, groupings. Translating that into words forces you to think about what actually matters.
+**Alex:** Because here's the truth: describing a flowchart node-by-node over audio is like describing a painting to someone on the phone. "There's a blue box. An arrow goes from the blue box to the green box. The green box has text inside that says..."
 
-**Sarah:** If you cannot explain your architecture without drawing it, you probably do not understand it well enough.
+**Sarah:** You lose the **gestalt**—the at-a-glance understanding. A diagram shows you everything at once. Audio description is sequential—one piece at a time.
 
-**Alex:** Exactly. So let us try. We will walk through the DIP-SMC-PSO codebase structure, control flow, and module dependencies -- entirely verbally. No pictures. Just words.
+**Alex:** So instead of walking you through every arrow, we're going to tell you **what the diagrams are for**, **why they matter**, and **how to use them**. Then you can go look at them yourself.
+
+**Sarah:** Think of this episode as the **trailer** for the visual documentation. We're selling you on why it's worth your time to open `docs/diagrams/` and explore.
 
 ---
 
-## The Challenge of Verbal Architecture
+## Why Diagrams Matter: Water Through Pipes
 
-**Sarah:** Why is this difficult? A system diagram shows everything at once. Verbal description is sequential -- one thing after another.
+**Sarah:** Before we tell you where to find the diagrams, let's talk about **why** they're valuable. What do diagrams show that code can't?
 
-**Alex:** And you lose the spatial relationships. In a diagram, you see that the optimizer sits between the configuration system and the controllers. You see that the simulation engine is the core, and everything else connects to it. Verbally, you have to describe those relationships explicitly.
+**Alex:** **Flow**. Think of data moving through your system like **water through pipes**. Configuration flows in from `config.yaml`. It gets validated, parsed, split into controller settings and dynamics parameters. Controller settings flow to the factory. The factory instantiates a controller object. State flows from the dynamics model to the controller. Control signals flow back to the dynamics. History flows to the monitoring system.
 
-**Sarah:** So you need to build a mental model as you listen.
+**Sarah:** **Picture water flowing**. It's not static boxes. It's **movement**—data traveling, transforming, branching, merging.
 
-**Alex:** Correct. That is what we are asking you to do today. As we describe the architecture, visualize it in your head. Imagine the boxes and arrows. If you were drawing this on a whiteboard, what would it look like?
+**Alex:** That's what the control flow diagram shows. You see the **path** data takes from input to output. Where does user configuration enter? Where does it split? Where do control signals get computed? Where do results get logged?
+
+**Sarah:** And you can't get that from reading code alone. Code shows you **what** happens in each function. Diagrams show you **how** the functions connect—the plumbing of the entire system.
 
 ---
 
