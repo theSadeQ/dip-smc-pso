@@ -471,15 +471,14 @@ $\gamma$ = adaptation rate, $\lambda$ = leak rate, $\epsilon$ = dead zone
 \subsection*{Controller Comparison}
 
 \begin{tcolorbox}[colback=background, colframe=codeblock, title=\faChartBar\ Performance Trade-offs]
-\begin{tabular}{p{3cm}|p{4cm}|p{4cm}}
-\tableheadcolor
+\begin{tabular}{lll}
+\toprule
 \textbf{Controller} & \textbf{Pros} & \textbf{Cons} \\
 \midrule
 Classical SMC & Simple, robust, proven & Chattering \\
-\midrule
 STA-SMC & Smooth, low chattering & More complex tuning \\
-\midrule
 Adaptive SMC & Self-tuning, efficient & Slower transients \\
+\bottomrule
 \end{tabular}
 \end{tcolorbox}
 

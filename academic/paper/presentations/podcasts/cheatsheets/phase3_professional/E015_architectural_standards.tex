@@ -123,19 +123,16 @@ from src.interfaces import SimulationContext
 \begin{tcolorbox}[colback=secondary!10, colframe=secondary, title=\faFlask\ Accuracy/Performance Tradeoffs]
 \textbf{NOT Redundant - Each Serves Different Use Case:}
 
-\begin{tabular}{p{5cm}|p{3cm}|p{3.5cm}}
-\tableheadcolor
+\begin{tabular}{lll}
+\toprule
 \textbf{File} & \textbf{Compute Time} & \textbf{Accuracy} \\
 \midrule
 \texttt{simplified\_dynamics.py} & 5 µs & Linear approx \\
-\midrule
 \texttt{full\_nonlinear\_dynamics.py} & 50 µs & Full physics \\
-\midrule
 \texttt{lowrank\_dynamics.py} & 15 µs & Reduced model \\
-\midrule
 \texttt{coriolis\_dynamics.py} & 60 µs & With Coriolis \\
-\midrule
 + 4 more variants & varies & Specialized \\
+\bottomrule
 \end{tabular}
 
 \textbf{Strategy:} Develop with simplified (fast), validate with full (accurate)

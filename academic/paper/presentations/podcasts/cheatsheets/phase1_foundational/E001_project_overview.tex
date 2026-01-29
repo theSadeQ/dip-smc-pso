@@ -122,18 +122,17 @@ Blink and you've missed 300 control cycles!
 \subsection*{Three Levels of Reality: Plant Models}
 
 \begin{tcolorbox}[colback=background, colframe=primary, title=\faLayerGroup\ Model Comparison]
-\begin{tabular}{p{3.5cm}|p{4cm}|p{3.5cm}}
-\tableheadcolor
+\begin{tabular}{lll}
+\toprule
 \textbf{Model} & \textbf{When to Use} & \textbf{Accuracy vs. Speed} \\
 \midrule
 \textbf{Simplified DIP} & Initial testing, PSO prototyping & Fastest (no trig) \\
 & Small angles ($<5^\circ$) & \textcolor{warning}{Low accuracy} \\
-\midrule
 \textbf{Full Nonlinear} & Final validation, research papers & \textcolor{secondary}{Gold standard} \\
 & Complete equations & Slower \\
-\midrule
 \textbf{Low-Rank DIP} & Monte Carlo (1000 runs) & 10-50x faster \\
 & Sensitivity analysis & \textcolor{accent}{Dominant dynamics} \\
+\bottomrule
 \end{tabular}
 \end{tcolorbox}
 

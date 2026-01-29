@@ -350,15 +350,14 @@ Different tasks need different balances. Meet the three teammates!
 \begin{tcolorbox}[colback=background, colframe=codeblock, title=\faChartBar\ Validation Test Results]
 \textbf{Setup:} $\theta_1 = 10°$, $\theta_2 = 5°$, Classical SMC, 10 seconds
 
-\begin{tabular}{p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2.5cm}}
-\tableheadcolor
+\begin{tabular}{lcccc}
+\toprule
 \textbf{Model} & \textbf{Settling [s]} & \textbf{Overshoot [°]} & \textbf{RMS Error [°]} & \textbf{Speed [sims/s]} \\
 \midrule
 Simplified & 2.31 & 4.2 & 0.12 & 450 \\
-\midrule
 Full Nonlinear & 2.58 & 5.1 & 0.15 & 8 \\
-\midrule
 Low-Rank (k=10) & 2.54 & 4.9 & 0.14 & 95 \\
+\bottomrule
 \end{tabular}
 
 \vspace{0.3cm}

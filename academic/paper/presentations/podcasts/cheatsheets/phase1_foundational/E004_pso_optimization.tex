@@ -64,21 +64,17 @@ Nature-inspired algorithm that finds near-optimal solutions in \textbf{minutes},
 \subsection*{Translation to Optimization}
 
 \begin{tcolorbox}[colback=background, colframe=codeblock, title=\faRandom\ Bird $\leftrightarrow$ Optimization]
-\begin{tabular}{p{5cm}|p{5.5cm}}
-\tableheadcolor
+\begin{tabular}{ll}
+\toprule
 \textbf{Bird Flocking} & \textbf{PSO Optimization} \\
 \midrule
 Bird & Particle (candidate solution) \\
-\midrule
 Position in field & Controller gains $[\lambda_1, \lambda_2, k_1, ...]$ \\
-\midrule
 Food quality & Cost function value (lower = better) \\
-\midrule
 Flight direction & Velocity vector (parameter updates) \\
-\midrule
 Best food I found & Personal best position ($p_i$) \\
-\midrule
 Best food anyone found & Global best position ($g$) \\
+\bottomrule
 \end{tabular}
 \end{tcolorbox}
 
@@ -423,17 +419,16 @@ PSO immediately rejects unstable controllers!
 \end{itemize}
 
 \textbf{Performance Gains:}
-\begin{tabular}{p{5cm}|p{3cm}|p{3cm}}
-\tableheadcolor
+\begin{tabular}{lll}
+\toprule
 \textbf{Controller} & \textbf{Before PSO} & \textbf{After PSO} \\
 \midrule
 Classical SMC & Cost = 47.2 & Cost = 12.8 (\textbf{360\% improvement!}) \\
-\midrule
 STA-SMC & Cost = 18.5 & Cost = 14.2 (30\% improvement) \\
-\midrule
 Hybrid Adaptive STA & Cost = 15.3 & Cost = 12.1 (\textbf{21.4\% improvement}) \\
 \midrule
 \textbf{Average (all 7)} & - & \textbf{6.35\% improvement} \\
+\bottomrule
 \end{tabular}
 \end{tcolorbox}
 

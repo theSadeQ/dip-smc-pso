@@ -298,17 +298,15 @@ animator.save('sim.mp4', fps=30)
 \subsection*{FFT Analysis Results}
 
 \begin{tcolorbox}[colback=background, colframe=codeblock, title=\faMusic\ Chattering by Controller]
-\begin{tabular}{p{5cm}|p{3cm}|p{3cm}}
-\tableheadcolor
+\begin{tabular}{lll}
+\toprule
 \textbf{Controller} & \textbf{Energy >10 Hz} & \textbf{Sound} \\
 \midrule
 Classical (no boundary) & 45\% & Loud screech \\
-\midrule
 Classical ($\phi=0.05$ rad) & 8\% & Faint whine \\
-\midrule
 STA-SMC & 2\% & Nearly silent \\
-\midrule
 Hybrid Adaptive STA & 1.5\% & Silent (best!) \\
+\bottomrule
 \end{tabular}
 \end{tcolorbox}
 

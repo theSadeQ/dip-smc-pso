@@ -44,19 +44,16 @@
 \section*{Test Suite Breakdown: 4,563 Tests}
 
 \begin{tcolorbox}[colback=primary!5, colframe=primary, title=\faFlask\ Test Suite Distribution]
-\begin{tabular}{p{4cm}|p{2.5cm}|p{2cm}|p{2.5cm}}
-\tableheadcolor
+\begin{tabular}{llll}
+\toprule
 \textbf{Level} & \textbf{Count} & \textbf{Percent} & \textbf{Time/Test} \\
 \midrule
 Unit Tests & 3,678 & 81\% & 200 $\mu$s \\
-\midrule
 Integration Tests & 681 & 15\% & 50 ms \\
-\midrule
 System Tests & 182 & 4\% & 2 s \\
-\midrule
 Browser Tests & 22 & 0.5\% & 5 s \\
-\midrule
 \textbf{TOTAL} & \textbf{4,563} & \textbf{100\%} & \textbf{45 seconds} \\
+\bottomrule
 \end{tabular}
 \end{tcolorbox}
 
@@ -376,19 +373,16 @@ Never released memory (hoarding!).
 \section*{Test Execution: 45 Seconds for 4,563 Tests}
 
 \begin{tcolorbox}[colback=secondary!10, colframe=secondary, title=\faClock\ Execution Breakdown]
-\begin{tabular}{p{4cm}|p{3cm}|p{4cm}}
-\tableheadcolor
+\begin{tabular}{lll}
+\toprule
 \textbf{Test Type} & \textbf{Time} & \textbf{Why So Fast?} \\
 \midrule
 Unit (3,678) & 8 seconds & No I/O, pure functions \\
-\midrule
 Integration (681) & 15 seconds & Load configs, few timesteps \\
-\midrule
 System (182) & 20 seconds & Simplified dynamics + Numba JIT \\
-\midrule
 Browser (22) & 2 seconds & Parallel with pytest-xdist \\
-\midrule
 \textbf{TOTAL} & \textbf{45 seconds} & \textbf{10 ms/test average} \\
+\bottomrule
 \end{tabular}
 \end{tcolorbox}
 

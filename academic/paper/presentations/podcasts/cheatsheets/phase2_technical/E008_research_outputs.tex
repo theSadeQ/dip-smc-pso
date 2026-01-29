@@ -36,17 +36,15 @@
 
 \textbf{Structure:} Three-tier risk management approach
 
-\begin{tabular}{p{3cm}|p{2cm}|p{2cm}|p{4.5cm}}
-\tableheadcolor
+\begin{tabular}{llll}
+\toprule
 \textbf{Tier} & \textbf{Hours} & \textbf{Weeks} & \textbf{Strategy} \\
 \midrule
 Quick Wins & 8 (actual: 16) & Week 1 & Build confidence fast \\
-\midrule
 Medium-Term & 18 & Weeks 2-4 & Provide substance \\
-\midrule
 Long-Term & 46 & Months 2-3 & Real contributions \\
-\midrule
 \textbf{TOTAL} & \textbf{72} & \textbf{8 weeks} & \textbf{Momentum → Depth} \\
+\bottomrule
 \end{tabular}
 \end{tcolorbox}
 
@@ -235,19 +233,16 @@ Loading 700 result files consumed 4 GB RAM!
 
 \textbf{Results by Controller:}
 
-\begin{tabular}{p{4.5cm}|p{3cm}|p{4cm}}
-\tableheadcolor
+\begin{tabular}{lll}
+\toprule
 \textbf{Controller} & \textbf{Recovery Time} & \textbf{Why?} \\
 \midrule
 Adaptive SMC & $0.8 \pm 0.05$ s & Increases gains when error spikes \\
-\midrule
 Hybrid Adaptive STA & $0.85 \pm 0.06$ s & Adaptive + smooth control \\
-\midrule
 STA-SMC & $1.1 \pm 0.08$ s & Fixed gains, no adaptation \\
-\midrule
 Classical SMC & $1.5 \pm 0.12$ s & Fixed gains, chatters \\
-\midrule
 Swing-up & $2.2 \pm 0.18$ s & Optimized for large angles, not disturbances \\
+\bottomrule
 \end{tabular}
 
 \textbf{Paper Integration:} Figure 9 in LT-7 - time series showing cart position recovery
@@ -353,19 +348,16 @@ Rigorous enough for peer review in control systems journals
 
 \textbf{Version History:}
 
-\begin{tabular}{p{2cm}|p{2cm}|p{7cm}}
-\tableheadcolor
+\begin{tabular}{lll}
+\toprule
 \textbf{Version} & \textbf{Pages} & \textbf{Key Changes} \\
 \midrule
 v0.5 & - & MPC attempt abandoned (50× too slow), never released \\
-\midrule
 v1.0 & 50 pages & 8 figures, weak intro, no Lyapunov, thin results \\
-\midrule
 v1.5 & 65 pages & +15 pages: 7-page intro (39 refs), 10-page Lyapunov, 12 figures \\
-\midrule
 v2.0 & 70 pages & 8-page discussion rewrite, LT-6 integration, 14 figures \\
-\midrule
 v2.1 & 71 pages & \textbf{SUBMISSION-READY}: 37 typos fixed, 18 unclear sentences, 47 cross-refs verified \\
+\bottomrule
 \end{tabular}
 
 \textbf{Timeline:} Version 1.0 → 2.1 in 5 weeks
