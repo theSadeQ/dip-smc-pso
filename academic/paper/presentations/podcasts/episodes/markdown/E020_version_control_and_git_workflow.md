@@ -6,17 +6,19 @@
 
 ---
 
-## Opening Hook
+## Opening Hook: Git as a Time Machine
 
 **Sarah:** Last episode we talked about workspace organization - the structure that keeps 985 files navigable over months of development. But structure without persistence is worthless.
 
 **Alex:** You can organize your workspace perfectly. Give every directory a logical purpose, enforce cleanup policies, document every convention. But when the session ends at token limit - when the AI assistant runs out of context and everything stops - what survives?
 
-**Sarah:** Git commits. With 10 out of 10 reliability.
+**Sarah:** **Git commits.** With 10 out of 10 reliability.
 
-**Alex:** Most research projects use Git as a backup system. Clone, edit, commit when you remember, maybe push once a week. This project uses Git as the persistence layer for the entire recovery infrastructure.
+**Alex:** Think of Git as a **time machine** for your project. Every commit is a snapshot—a save point you can travel back to. Made a mistake? Travel back to yesterday. Need to see what the code looked like in October? Travel back to October.
 
-**Sarah:** Without proper Git workflow, the 30-second recovery we described in Episode 19 is impossible. Today we explain how Git enables that recovery - and why treating Git as mere version control is leaving 90 percent of its value on the table.
+**Sarah:** Most research projects use Git as a backup system—clone, edit, commit when you remember, maybe push once a week. This project uses Git as the **persistence layer** for the entire recovery infrastructure.
+
+**Alex:** Without proper Git workflow, the 30-second recovery we described in Episode 19 is impossible. Today we explain how Git enables that recovery—and why treating Git as mere version control is leaving 90% of its value on the table.
 
 ---
 
@@ -126,7 +128,13 @@ EOF
 
 **Sarah:** What about rollback? If a commit introduces a regression, do you revert?
 
-**Alex:** Git revert is available but rarely needed. The test suite is comprehensive - 4,563 tests with 100 percent pass rate. If a commit breaks something, the tests catch it before you push. And because every commit is atomic - one task, one logical change - reverting is straightforward if necessary.
+**Alex:** Git revert is available but rarely needed. The test suite is comprehensive - 4,563 tests with 100 percent pass rate. If a commit breaks something, the tests catch it before you push. And because every commit is **atomic**—one task, one logical change—reverting is straightforward if necessary.
+
+**Sarah:** Think of atomic commits like **saving your game before a boss fight**. You're about to do something risky—implement a new feature, refactor a complex module. Before you start, you commit your current state. Save the game.
+
+**Alex:** If the boss fight goes badly—the feature breaks, the refactor fails—you can reload from your save. One `git reset --hard HEAD`, and you're back to safety.
+
+**Sarah:** Atomic means **complete**. You don't commit half-finished work. You don't mix two unrelated changes in one commit. One commit = one logical change = one save point you can trust.
 
 **Sarah:** Repository verification. The automation scripts need to confirm they are pushing to the correct remote. How does that work?
 
