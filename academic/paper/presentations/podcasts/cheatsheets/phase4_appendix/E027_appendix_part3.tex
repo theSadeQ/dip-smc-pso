@@ -7,6 +7,10 @@
 \def\difficulty{Reference}
 \begin{document}
 \makeepisodetitle
+
+\section{Overview}
+Quick reference for testing workflows and benchmark results.
+
 \section{Test Commands}
 \begin{lstlisting}[style=bashstyle]
 # Run all tests
@@ -30,12 +34,12 @@ python -m pytest tests/test_benchmarks/ --benchmark-only
 \begin{center}
 \begin{tabular}{lc}
 \toprule
-\textbf{Controller} & \textbf{Time ($\mu$s)} \
+\textbf{Controller} & \textbf{Time ($\mu$s)} \\
 \midrule
-Classical SMC & 23 \
-Super-Twisting & 31 \
-Adaptive SMC & 45 \
-Hybrid Adaptive STA & 62 \
+Classical SMC & 23 \\
+Super-Twisting & 31 \\
+Adaptive SMC & 45 \\
+Hybrid Adaptive STA & 62 \\
 \bottomrule
 \end{tabular}
 \end{center}

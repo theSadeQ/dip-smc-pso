@@ -7,16 +7,20 @@
 \def\difficulty{Reference}
 \begin{document}
 \makeepisodetitle
+
+\section{Overview}
+Quick reference for DIP-SMC-PSO controllers and dynamics models.
+
 \section{Controller Variants}
 \begin{center}
 \begin{tabular}{lcc}
 \toprule
-\textbf{Controller} & \textbf{Gains} & \textbf{Complexity} \
+\textbf{Controller} & \textbf{Gains} & \textbf{Complexity} \\
 \midrule
-Classical SMC & 6 ($\lambda_1$-$\lambda_2$, $\phi_1$-$\phi_2$, $k_1$-$k_2$) & Low \
-Super-Twisting & 8 (classical + STA params) & Medium \
-Adaptive SMC & 6 + adaptation rates & Medium \
-Hybrid Adaptive STA & 8 + adaptation & High \
+Classical SMC & 6 ($\lambda_1$-$\lambda_2$, $\phi_1$-$\phi_2$, $k_1$-$k_2$) & Low \\
+Super-Twisting & 8 (classical + STA params) & Medium \\
+Adaptive SMC & 6 + adaptation rates & Medium \\
+Hybrid Adaptive STA & 8 + adaptation & High \\
 \bottomrule
 \end{tabular}
 \end{center}
