@@ -28,32 +28,20 @@
 
 ## Introduction: Why Architectural Standards?
 
-**Sarah**: A codebase without standards is like a city without zoning laws:
+**Sarah**: A codebase without standards is like a city without **zoning laws**. Imagine if someone could build a factory next to your house, or open a nightclub in a hospital. Chaos, right?
 
-**No standards**:
-```
-src/
-├── controller.py (which controller?)
-├── Controller_v2.py (why v2?)
-├── CONTROLLER_NEW.py (uppercase?)
-├── my_controller_final_FINAL.py (sigh...)
-└── temp_controller_backup_old_2.py (delete this?)
-```
+**Alex**: Same with code. Without standards, you get files like `controller.py`, `Controller_v2.py`, `CONTROLLER_NEW.py`, `my_controller_final_FINAL.py`, and `temp_controller_backup_old_2.py` all living in the same directory. Which one is production code? Which is safe to delete? Nobody knows!
 
-**With standards**:
-```
-src/controllers/
-├── classical_smc.py
-├── sta_smc.py
-├── adaptive_smc.py
-└── hybrid_adaptive_sta_smc.py
-```
+**Sarah**: With standards—with **zoning laws for code**—you get clean organization:
+- Controllers live in the Controllers District: `src/controllers/`
+- Each has a clear name: `classical_smc.py`, `sta_smc.py`, `adaptive_smc.py`
+- No version suffixes, no "final" labels, no confusion
 
-**Alex**: Standards answer:
-- **WHERE** to put code (directory structure)
+**Alex**: Standards answer four critical questions:
+- **WHERE** to put code (directory structure—our zoning laws)
 - **HOW** to name things (files, classes, functions)
 - **WHAT** patterns to use (factories, not if-else chains)
-- **WHEN** to deviate (documented exceptions)
+- **WHEN** to deviate (documented exceptions only)
 
 ## Documentation Scale \& Organization
 
@@ -118,7 +106,9 @@ src/controllers/
 
 **Sarah**: Let's start with the Factory pattern - the backbone of our controller creation system.
 
-**Alex**: **Why Factory?** Because we have 7 controller types and this pattern eliminates massive if-else chains:
+**Alex**: Think of it like a **vending machine**. You press the button for "Classical SMC" and out comes a Classical SMC controller object. Press "STA-SMC" and you get that instead. The vending machine handles all the complexity of storage, retrieval, and dispensing. You just make a simple request.
+
+**Sarah**: Exactly! **Why Factory?** Because we have 7 controller types and this pattern eliminates massive if-else chains:
 
 **Without Factory (Bad)**:
 ```python
@@ -327,26 +317,19 @@ from simulation_context import SimulationContext           # Test-local
 
 ### Pattern 3: Model Variants
 
-**8 dynamics files you'll find**:
-```
-src/plant/models/
-├── simplified_dynamics.py        # Fast, small-angle approximation
-├── full_nonlinear_dynamics.py    # Accurate, exact trig
-├── lowrank_dynamics.py           # Reduced-order for PSO
-├── friction_dynamics.py          # Friction-only model
-├── coriolis_dynamics.py          # Coriolis-only model
-├── linearized_dynamics.py        # Linearized around equilibrium
-├── stochastic_dynamics.py        # Noise injection for robustness
-└── hybrid_dynamics.py            # Mode-switching model
-```
+**Sarah**: You'll find **eight different dynamics files** in the models directory. Duplication?
 
-**Alex**: Each file serves a **different purpose**:
-- `simplified_dynamics.py`: Tutorial code (easy to understand)
-- `full_nonlinear_dynamics.py`: Production validation
-- `lowrank_dynamics.py`: PSO optimization (3× faster)
-- Others: Research variants for specific experiments
+**Alex**: Nope! Each serves a different purpose. Think of them as **different tools for different jobs**:
 
-**Sarah**: NEVER "consolidate" these into one file - they're deliberate accuracy/speed tradeoffs!
+**Sarah**: We have the **Simplified Dynamics**—fast and easy to understand, perfect for tutorials. Uses small-angle approximations, runs twice as fast as the full model.
+
+**Alex**: Then the **Full Nonlinear Dynamics**—accurate with exact trigonometry, friction, Coriolis terms. This is production-grade validation.
+
+**Sarah**: The **Low-Rank Dynamics** is optimized for PSO. Reduced-order model that runs three times faster. When you're running 1,500 simulations for optimization, that speed matters!
+
+**Alex**: Plus we have specialized research variants: **Friction-Only**, **Coriolis-Only**, **Linearized**, **Stochastic** with noise injection, and **Hybrid** with mode-switching. Each tests a specific hypothesis.
+
+**Sarah**: The key insight? These are **deliberate accuracy-speed tradeoffs**, not redundant code. NEVER consolidate them into one file—you'd lose the ability to choose the right tool for the job!
 
 ### Pattern 4: Framework Files in Unexpected Places
 
@@ -381,131 +364,77 @@ def test_plant_server_timeout():
 
 ## Directory Structure Rules
 
-**Sarah**: Where to put code? Follow these rules:
+**Sarah**: Where to put code? Think of it like **city zoning districts**. Each directory is a zone with specific rules:
 
-### Rule 1: src/ = Production Code
+### Rule 1: src/ = Production Code (The Business District)
 
-**Criteria** (any ONE triggers src/ placement):
-- Exported in `__init__.py`
-- Imported by production code
-- Framework/infrastructure code
-- Provides reusable functionality
+**Alex**: The `src` directory is your **Business District**—this is where the real work happens. Production code that ships to users lives here.
 
-**Examples**:
-```python
-# src/controllers/classical_smc.py - CORRECT
-# Exported in src/controllers/__init__.py, imported by simulate.py
+**Sarah**: How do you know if code belongs in `src`? Ask yourself: Does it meet **any** of these criteria?
+- Is it exported in an `__init__.py` file?
+- Does production code import and use it?
+- Is it framework or infrastructure code?
+- Does it provide reusable functionality?
 
-# src/utils/validation.py - CORRECT
-# Provides validate_state() used by all controllers
+**Alex**: If you answer **yes** to even one question, it goes in `src`.
 
-# src/interfaces/hil/test_automation.py - CORRECT
-# Framework code, imported by src/hil/controller_client.py
-```
+**Sarah**: Examples: `classical_smc.py` in the controllers directory? Yes—exported and imported by `simulate.py`. The validation utilities? Yes—provide reusable state validation for all controllers. Even `test_automation.py` in the HIL interfaces? Yes—it's a framework, not a test file!
 
-### Rule 2: scripts/ = Development Tools
+### Rule 2: scripts/ = Development Tools (The Workshop District)
 
-**Criteria** (ALL must be true):
-- Executed directly (not imported)
-- Development/automation tool
-- Not part of production runtime
+**Alex**: The `scripts` directory is your **Workshop District**—tools and utilities for developers, not end users.
 
-**Examples**:
-```bash
-# scripts/benchmarks/run_mt5.py - CORRECT
-# Automation tool, executed via: python scripts/benchmarks/run_mt5.py
+**Sarah**: Code goes in `scripts` only if **all three** of these are true:
+- It's executed directly, never imported
+- It's a development or automation tool
+- It's not part of production runtime
 
-# scripts/docs/detect_ai_patterns.py - CORRECT
-# Doc quality tool, executed via: python scripts/docs/detect_ai_patterns.py
+**Alex**: Think of it as the backstage area. Users never see it. Developers use it constantly.
 
-# scripts/testing/run_coverage.py - CORRECT
-# CI tool, executed via: python scripts/testing/run_coverage.py
-```
+**Sarah**: Examples: `run_mt5.py` runs benchmarks—you execute it directly, it's an automation tool, production code never calls it. The doc quality checker `detect_ai_patterns.py`? Same deal. The coverage runner? Definitely a workshop tool!
 
-### Rule 3: tests/ = Pytest Tests
+### Rule 3: tests/ = Pytest Tests (The Quality Assurance District)
 
-**Criteria** (ALL must be true):
+**Alex**: The `tests` directory is your **QA District**—where code goes to prove it works.
+
+**Sarah**: Code belongs in `tests` only if **all three** are true:
 - Filename matches `test_*.py` or `*_test.py`
-- Uses pytest imports (`import pytest`, `from pytest import ...`)
-- Contains test functions (`def test_*()`)
+- It uses pytest imports
+- It contains test functions starting with `test_`
 
-**Examples**:
-```python
-# tests/test_controllers/test_classical_smc.py - CORRECT
-import pytest
-def test_classical_smc_stability(): ...
-
-# tests/test_integration/test_memory_management.py - CORRECT
-from pytest import fixture
-@fixture
-def controller(): ...
-```
+**Alex**: Simple rule: If pytest runs it, it lives in `tests`. If production code imports it, it lives in `src`. **Never mix the two!**
 
 ---
 
 ## Code Style Conventions
 
-**Alex**: Naming rules that prevent chaos:
+**Alex**: Naming rules that prevent the chaos we saw earlier—remember `my_controller_final_FINAL.py`?
 
 ### File Naming
 
-**Python modules**:
-```
-✓ classical_smc.py         # snake_case, descriptive
-✓ pso_optimizer.py
-✓ latency_monitor.py
+**Sarah**: For Python modules, use **snake_case** and be descriptive: `classical_smc.py`, `pso_optimizer.py`, `latency_monitor.py`. Clear, consistent, readable.
 
-✗ ClassicalSMC.py          # No PascalCase for files
-✗ classical-smc.py         # No hyphens (breaks imports)
-✗ classical_smc_v2.py      # No version suffixes
-✗ classical_smc_FINAL.py   # No "final" labels
-```
+**Alex**: What **not** to do? No PascalCase for files—that's for classes inside the files. No hyphens—they break Python imports. No version suffixes like `_v2` or `_FINAL`—that's what Git is for!
 
-**Configuration files**:
-```
-✓ config.yaml              # Canonical config
-✓ .pre-commit-config.yaml  # Tool-specific (hyphens OK)
-✓ pytest.ini
-
-✗ Config.yaml              # No capital first letter
-✗ config_backup.yaml       # No backup suffixes
-```
+**Sarah**: For configuration files, lowercase is standard: `config.yaml`, `pytest.ini`. Tool-specific configs can use hyphens: `.pre-commit-config.yaml`. But never capitalize the first letter, and never add backup suffixes. Use version control, not filename hacks!
 
 ### Class Naming
 
-```python
-✓ class ClassicalSMC:          # PascalCase, acronyms uppercase
-✓ class LatencyMonitor:
-✓ class PSOTuner:
+**Alex**: Classes use **PascalCase**—capitalize every word: `ClassicalSMC`, `LatencyMonitor`, `PSOTuner`.
 
-✗ class classical_smc:         # No snake_case
-✗ class ClassicalSmc:          # Acronyms should be uppercase
-✗ class Classical_SMC:         # No underscores in PascalCase
-```
+**Sarah**: Keep acronyms fully uppercase: `SMC` not `Smc`, `PSO` not `Pso`. No underscores—`Classical_SMC` is wrong. No snake_case—classes aren't variables!
 
 ### Function Naming
 
-```python
-✓ def compute_control(state):        # snake_case, verb-noun
-✓ def validate_state_bounds(state):
-✓ def run_pso_optimization(params):
+**Alex**: Functions use **snake_case** with a verb-noun structure: `compute_control`, `validate_state_bounds`, `run_pso_optimization`. The verb tells you what it **does**, the noun tells you what it **operates on**.
 
-✗ def ComputeControl(state):         # No PascalCase
-✗ def compute_Control(state):        # No camelCase
-✗ def control(state):                # Missing verb
-```
+**Sarah**: Never use PascalCase or camelCase for functions. And always include the verb—`control(state)` is vague. Does it compute control? Validate control? Apply control? Be explicit: `compute_control(state)`.
 
 ### Variable Naming
 
-```python
-✓ state_dimension = 4               # snake_case, descriptive
-✓ max_iterations = 100
-✓ dt = 0.01                         # Short names OK for math
+**Sarah**: Variables also use **snake_case** and should be descriptive: `state_dimension`, `max_iterations`. Avoid abbreviations like `state_dim` unless it's universally understood.
 
-✗ StateDimension = 4                # No PascalCase
-✗ state_dim = 4                     # Avoid abbreviations
-✗ sd = 4                            # Too cryptic (not math)
-```
+**Alex**: Exception: mathematical variables can be short. `dt` for timestep? Fine—everyone knows that. `t` for time? Sure. But `sd` for state dimension? Too cryptic. Spell it out!
 
 ---
 
@@ -655,23 +584,33 @@ streamlit_app.py, tests, benchmarks, docs). High coupling, error-prone.
 
 ## Common Anti-Patterns (Avoid These)
 
-**Alex**: Patterns that seem reasonable but violate our standards:
+**Alex**: Patterns that seem reasonable but violate our standards. Let me tell you a cautionary tale:
 
-### Anti-Pattern 1: God Objects
+### Anti-Pattern 1: God Objects—The Monster That Ate the Codebase
+
+**Sarah**: What's a God Object?
+
+**Alex**: A class that does **everything**. It starts innocently: "I'll just add one more method..." Six months later, you have a 500-line monster that computes control, logs telemetry, plots results, saves to databases, and sends email reports. Changing **anything** risks breaking **everything**.
+
+**Sarah**: We encountered this early in development. The original controller class had 12 responsibilities. Testing was impossible—to test the control logic, you needed a database connection, a plotting library, and an SMTP server. Ridiculous!
+
 ```python
-# BAD: One class doing everything
+# BAD: The God Object Monster
 class Controller:
     def compute_control(self, state): ...
     def log_telemetry(self, state): ...
     def plot_results(self, results): ...
     def save_to_database(self, results): ...
     def send_email_report(self, results): ...
-    # 500 lines later...
+    def validate_inputs(self, state): ...
+    def check_safety_limits(self, u): ...
+    # 500 lines of tangled logic later...
 ```
 
-**Fix: Single Responsibility Principle**
+**Alex**: The fix? **Single Responsibility Principle**. Each class does **one thing** and does it well:
+
 ```python
-# GOOD: Separate concerns
+# GOOD: Clean separation of concerns
 class Controller:
     def compute_control(self, state): ...  # Only control logic
 
@@ -681,6 +620,8 @@ class TelemetryLogger:
 class ResultsVisualizer:
     def plot(self, results): ...  # Only plotting
 ```
+
+**Sarah**: After refactoring, testing became trivial. Mock the logger, test the controller in isolation. **God Objects are the enemy of maintainability.**
 
 ### Anti-Pattern 2: Magic Numbers
 ```python
@@ -722,37 +663,34 @@ def add_state(state, history=None):
 
 ## Summary: Architectural Lessons
 
-**Sarah**: What makes this architecture successful?
+**Sarah**: So what makes this architecture successful? After 100,000 lines of code, what did we learn?
 
-**Alex**: **Three core principles**:
+**Alex**: **Three core principles that saved our sanity**:
 
-1. **Intentional Patterns Over Clever Code**
-   - Factory pattern beats if-else cleverness
-   - Strategy pattern beats inheritance hierarchies
-   - DI beats hard-coded dependencies
+**1. Intentional Patterns Over Clever Code**
 
-2. **Standards Prevent Chaos**
-   - 8 quality gates enforced at commit time
-   - Directory rules (src/ vs scripts/ vs tests/)
-   - Naming conventions (no "final_v2_REALLY_FINAL.py")
+Think **vending machines** (Factory pattern), not if-else chains. Think **interchangeable tools** (Strategy pattern), not inheritance hell. Think **dependency injection**, not hard-coded nightmares. Simple, proven patterns beat clever hacks.
 
-3. **Document the Why**
-   - ADRs explain design decisions
-   - CLAUDE.md captures architectural invariants
-   - Comments explain non-obvious patterns
+**2. Standards Prevent Chaos—Zoning Laws for Code**
 
-**Sarah**: **Key metrics**:
-- 87.1% test coverage (≥85% required)
-- 668 tests (100% passing)
-- 14 visible root items (≤19 limit)
-- 0 critical issues (100% quality gates)
-- 50× productivity gain from good tooling (MT-5: 8 min vs 2 days)
+Eight quality gates enforced at commit time. Directory zoning: Business District (`src/`), Workshop (`scripts/`), QA (`tests/`). Naming conventions: no `final_v2_REALLY_FINAL.py`, no God Objects, no magic numbers. Standards are your safety net.
 
-**Alex**: The architecture isn't perfect, but it's **maintainable**, **extensible**, and **documented**.
+**3. Document the Why, Not Just the What**
 
-**Sarah**: And that's what matters when you're managing 100,000+ lines of code!
+ADRs explain **why** we chose Factory over plugin systems. CLAUDE.md captures **why** eight dynamics files exist. Comments explain **why** the pattern looks weird. Future you will thank present you.
 
-**Alex**: Standards beat cleverness. Every. Single. Time.
+**Sarah**: **The proof it works**—key metrics:
+- 87.1% test coverage—meets the 85% gate
+- 668 tests, 100% passing—zero failures tolerated
+- 14 visible root items—well under the 19-item chaos threshold
+- 0 critical issues—quality gates holding strong
+- 50× productivity gain—automation turns 2 days into 8 minutes
+
+**Alex**: The architecture isn't perfect. But it's **maintainable**—you can understand it in 30 minutes. It's **extensible**—adding a controller takes 5 minutes, not 5 hours. And it's **documented**—the "why" survives team turnover.
+
+**Sarah**: And that's what matters when you're managing 100,000+ lines of code across token limits and month-long gaps!
+
+**Alex**: Remember: **Standards beat cleverness. Every. Single. Time.** The Factory pattern is boring. The directory rules are strict. The naming conventions feel pedantic. But six months from now, when you return to this code? You'll thank yourself for being boring, strict, and pedantic.
 
 ---
 
