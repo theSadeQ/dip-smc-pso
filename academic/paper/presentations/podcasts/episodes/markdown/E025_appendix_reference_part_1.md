@@ -6,17 +6,21 @@
 
 ---
 
-## Opening Hook
+## Opening Hook: The Advanced Class
+
+**Sarah:** If you've been following this series, Episode 20 covered Git workflow basics—commit messages, branching strategies, the persistence layer. This episode is **the advanced class**.
+
+**Alex:** Think of Episode 20 as "Git 101: How to use version control." This is "Git 301: How to collaborate at scale."
 
 **Sarah:** This project has been a solo research effort from day one. One developer, one vision, one keyboard. But what happens when that changes?
 
 **Alex:** Every research project starts small. A thesis, a paper, a proof of concept. Then someone reads your work. They want to contribute. They fork your repository, open an issue, submit a pull request. Suddenly you are not coding alone anymore.
 
-**Sarah:** The infrastructure we built - the configuration system, the testing framework, the documentation - was designed for solo development. Main branch only. No code review. No merge conflicts. But it was also designed to scale.
+**Sarah:** Today we talk about the transition nobody plans for but everyone eventually faces: **from solo to collaborative**. The branching strategies that enable parallel development. The code review processes that maintain quality. The continuous integration pipelines that catch breakage before it reaches users.
 
-**Alex:** Today we talk about the transition nobody plans for but everyone eventually faces: from solo to collaborative. The branching strategies that enable parallel development. The code review processes that maintain quality without slowing progress. The continuous integration pipelines that catch breakage before it reaches users.
+**Alex:** This is not speculation. This is the roadmap for what happens **next**. When students want to implement new controllers, when researchers want to extend the optimizer, when industry partners want to deploy to hardware—this is how we handle it.
 
-**Sarah:** This is not speculation. This is the roadmap for what happens next. When the DIP-SMC-PSO project grows beyond one developer - when students want to implement new controllers, when researchers want to extend the optimizer, when industry partners want to deploy to hardware - this is how we handle it.
+**Sarah:** Episode 20 was foundational. This episode builds on that foundation. **The advanced class.**
 
 ---
 
@@ -141,7 +145,33 @@
 
 ---
 
-## Code Review Best Practices
+## Code Review Best Practices: The Human Dynamics
+
+**Sarah:** Code review is often described as a technical process—checking for bugs, verifying tests, enforcing style. But the real challenge is **human**.
+
+**Alex:** Exactly. You're asking another developer to scrutinize your work. That's vulnerable. You're asking them to invest time in understanding your code. That's demanding. You're opening yourself to criticism. That's uncomfortable.
+
+**Sarah:** And on the flip side, as a reviewer, you're giving feedback to a colleague. Too harsh, and you demoralize them. Too soft, and bad code gets merged.
+
+**Alex:** So code review isn't just about catching bugs. It's about **knowledge transfer**, **trust building**, and **quality amplification**. Let me break that down.
+
+### Knowledge Transfer
+
+**Sarah:** When I review your code, I learn how you approach problems. When you review mine, you learn my thought process. Over time, the team develops a **shared mental model**.
+
+**Alex:** That's why new contributors should **review before they write**. Read five PRs, understand the patterns, see how the team thinks. Then submit your own PR. You'll already know what reviewers will look for.
+
+### Trust Building
+
+**Sarah:** Code review is a **team sport, not a competition**. The goal isn't to "win" by getting your code approved. It's to **improve the codebase together**.
+
+**Alex:** Good reviewers praise what's good before critiquing what needs work. "This refactor is elegant—love the separation of concerns. Small nit: could we add a docstring here?" That builds trust.
+
+### Quality Amplification
+
+**Sarah:** Two developers reviewing the same code catch **orders of magnitude more bugs** than one developer testing alone. Studies show pair programming catches 85% of defects, compared to 50% for solo development.
+
+**Alex:** Code review is **asynchronous pair programming**. You get the benefits—shared knowledge, caught bugs, better design—without requiring both developers to be online simultaneously.
 
 **Sarah:** Code review can become a bottleneck. How do you keep it fast without sacrificing quality?
 
