@@ -6,15 +6,17 @@
 
 ---
 
-## Opening Hook
+## Opening Hook: The Menu for Future Researchers
 
 **Sarah:** The DIP-SMC-PSO project has seven controller variants operational, PSO optimization validated, and comprehensive benchmarking complete. Research Phase 5 finished in November 2025. All 11 tasks complete. Submission-ready research paper. What comes next?
 
-**Alex:** Every completed research project faces the same question. Do you publish and walk away, or do you build on the foundation you have created? The infrastructure is operational. The testing framework is comprehensive. The documentation is extensive. The recovery system makes long-term development feasible. Stopping now would be waste.
+**Alex:** Think of this episode as a **menu** at a restaurant. We've prepared the kitchen, stocked the ingredients, trained the chefs. Now here's what you can order.
 
-**Sarah:** This episode is not speculation. This is the roadmap for the next phase. The controller variants we could implement with the existing framework. The optimization algorithms that extend beyond PSO. The hardware deployment path from simulation to physical testbed. The machine learning integration that combines model-based control with data-driven learning.
+**Sarah:** Every completed research project faces the same question. Do you publish and walk away, or do you build on the foundation you have created? The infrastructure is operational. The testing framework is comprehensive. The documentation is extensive. The recovery system makes long-term development feasible. Stopping now would be waste.
 
-**Alex:** For listeners who are researchers looking for projects, students searching for thesis topics, or industry partners evaluating collaboration opportunities - this is your shopping list. Every enhancement described here is concrete, referenced, and compatible with the existing architecture.
+**Alex:** This episode is not speculation. This is the **menu**. The controller variants we could implement with the existing framework. The optimization algorithms that extend beyond PSO. The hardware deployment path from simulation to physical testbed. The machine learning integration that combines model-based control with data-driven learning.
+
+**Sarah:** For listeners who are researchers looking for projects, students searching for thesis topics, or industry partners evaluating collaboration opportunities—this is your **shopping list**. Every enhancement described here is concrete, referenced, and compatible with the existing architecture. Pick what interests you. The kitchen is ready.
 
 ---
 
@@ -43,19 +45,23 @@
 
 ---
 
-## Terminal SMC: Finite-Time Convergence
+## Terminal SMC: Finite-Time Convergence (Concept First, Math Second)
 
 **Sarah:** All current SMC controllers provide asymptotic stability. The state converges to zero as time approaches infinity. Terminal SMC is different?
 
-**Alex:** Terminal SMC guarantees convergence in finite time. The state reaches exactly zero in a bounded, calculable time interval. For a double inverted pendulum, this might mean stabilization in 1.2 seconds instead of asymptotic approach over 3-4 seconds.
+**Alex:** **Terminal SMC guarantees convergence in finite time.** Think of it like a deadline. Classical SMC says "the pendulum will stabilize... eventually." Terminal SMC says "the pendulum will stabilize in exactly 1.2 seconds."
 
-**Sarah:** How does it work?
+**Sarah:** How is that even possible? Why wouldn't classical SMC already do that?
 
-**Alex:** Nonlinear sliding surface. Classical SMC uses a linear surface: $s = c_1 x_1 + c_2 x_2 + \ldots$. Terminal SMC uses a nonlinear surface with fractional powers: $s = x_2 + \beta |x_1|^\alpha \text{sign}(x_1)$, where $0 < \alpha < 1$ and $\beta > 0$.
+**Alex:** Classical SMC approaches equilibrium like **Zeno's paradox**—you cover half the distance, then half the remaining distance, then half again. You get closer and closer, but mathematically you never quite arrive. It's asymptotic.
 
-**Sarah:** What does the fractional power accomplish?
+**Sarah:** And Terminal SMC?
 
-**Alex:** It creates a singularity at the origin. As the state approaches zero, the surface slope becomes infinite. This forces the state to reach zero in finite time instead of asymptotically approaching it. The convergence time can be computed analytically from the initial conditions.
+**Alex:** Terminal SMC uses a **nonlinear trick** with fractional powers. Imagine a curve that gets steeper and steeper as you approach zero. Eventually the slope becomes infinite—a vertical wall. The state **has** to hit zero. It can't asymptotically approach because the math doesn't allow it.
+
+**Sarah:** What's the benefit? Why does finite-time convergence matter?
+
+**Alex:** **Guarantees**. In safety-critical systems—robotics, aerospace, medical devices—you need to know "the system will stabilize within X seconds." Asymptotic stability doesn't give you that number. Terminal SMC does. You can compute the exact convergence time from the initial conditions.
 
 **Sarah:** Implementation complexity?
 
