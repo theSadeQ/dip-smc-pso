@@ -8,35 +8,30 @@
 
 **Alex**: Real-time control has ONE golden rule: **The control loop MUST complete within the deadline**.
 
-**Sarah**: For our DIP system with dt=0.01s, that means:
+**Sarah**: For our DIP system with a 10 millisecond time step, that means:
 1. Read sensors
-2. Compute control (SMC equations)
+2. Compute control using SMC equations
 3. Send actuator command
 
 ALL in less than 10 milliseconds. Every. Single. Time.
 
-**Alex**: Miss the deadline and...
-```
-Iteration 100: Loop time = 9.8ms  [OK]
-Iteration 101: Loop time = 9.9ms  [OK]
-Iteration 102: Loop time = 12.3ms [DEADLINE MISS!]
-  → Control computed for t=1.02s applied at t=1.023s
-  → Plant state has changed during computation
-  → Controller sees "ghost" of past state
-  → Instability!
-```
+**Alex**: Miss the deadline and you're in trouble. Picture this: Iteration 100 takes 9.8 milliseconds - safe. Iteration 101 takes 9.9 milliseconds - cutting it close but okay. Then iteration 102 takes 12.3 milliseconds. Deadline missed!
 
-**Sarah**: Over 1000 iterations, even 1% deadline misses (10 violations) can destabilize the system!
+**Sarah**: What happens? The control you computed for time 1.02 seconds gets applied at 1.023 seconds - 3 milliseconds late. But in those 3 milliseconds, the plant state has changed! The controller is making decisions based on a "ghost" of the past, not the current reality.
+
+**Alex**: It's like trying to drive while looking at a rearview mirror that shows where you were 3 seconds ago. Eventually, you crash!
+
+**Sarah**: Over 1000 iterations, even 1% deadline misses - just 10 violations - can destabilize the system and cause the pendulum to fall!
 
 **Alex**: So how do you ensure your control loop stays fast? **Monitoring infrastructure**!
 
 **Sarah**: This episode covers:
-- **Latency monitoring**: Measuring loop time down to microseconds
+- **Latency monitoring**: Checking the system's pulse - measuring loop time down to microseconds
 - **Real-time constraints**: Deadline detection and weakly-hard guarantees
-- **Performance profiling**: Finding bottlenecks with cProfile
+- **Performance profiling**: Finding bottlenecks before they cause problems
 - **Production validation**: Our 100% passing real-time tests
 
-**Alex**: Let's make sure your controller runs on time, every time!
+**Alex**: Think of monitoring as taking your system's vital signs. Just like a doctor checks your heartbeat to make sure you're healthy, we check control loop timing to make sure the system is safe. Let's make sure your controller runs on time, every time!
 
 ---
 
