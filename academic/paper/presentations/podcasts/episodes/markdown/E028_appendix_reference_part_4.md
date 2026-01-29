@@ -6,15 +6,17 @@
 
 ---
 
-## Opening Hook
+## Opening Hook: How to Think Visually About Code
 
 **Sarah:** A thousand words or one picture. Which conveys system architecture faster?
 
 **Alex:** Text is precise. It captures details that diagrams gloss over. But diagrams are immediate. One glance at a properly designed architecture diagram reveals component relationships that would take paragraphs to describe textually.
 
-**Sarah:** The DIP-SMC-PSO project has 985 documentation files. Most are text. But the project also maintains visual diagrams across four categories: system architecture, control loop flow, mathematical phase portraits, and LaTeX TikZ schematics. These diagrams are not decorative. They are functional communication tools.
+**Sarah:** But here's the deeper question: **How do you think visually about code?** Code is sequential—line 1, line 2, line 3. But systems are **spatial**—components arranged, connected, interacting. How do you translate from sequential text to spatial diagram?
 
-**Alex:** This episode walks through the visual representation system. What diagrams exist. How to read them. How they were created. Why they matter. For listeners preparing presentations, writing papers, or teaching courses based on this project - these are your figures.
+**Alex:** That's the skill this episode teaches. Not just "what diagrams exist" but **how to think in diagrams**. How to look at code and see boxes and arrows in your mind. How to choose the right visualization tool for the job.
+
+**Sarah:** For listeners preparing presentations, writing papers, or teaching courses based on this project—these are your figures. But more importantly, this is **the mental model** that lets you create your own figures from any codebase.
 
 ---
 
@@ -62,13 +64,52 @@ graph TD
     SIM --> DATA[Data Storage<br/>Logs + Benchmarks]
 ```
 
+## The Tools: Mermaid vs. TikZ vs. Traditional Diagram Tools
+
 **Sarah:** Why Mermaid instead of traditional diagram tools like Visio or draw.io?
 
-**Alex:** Version control. Mermaid diagrams are plain text. They live in markdown files, tracked by git, diffable across versions. Change a component name, commit, see the diff. With image-based tools, you commit a binary PNG or SVG. No diff, no history, no merge conflicts resolution - just newer file wins.
+**Alex:** Three reasons: **version control**, **reproducibility**, and **automation**.
 
-**Sarah:** How do you render Mermaid?
+**Sarah:** Version control first—what's the problem with Visio?
 
-**Alex:** GitHub and modern markdown renderers (MkDocs, Sphinx with extensions) display Mermaid natively. For LaTeX papers, convert to TikZ or include as SVG. Mermaid CLI: `mmdc -i diagram.mmd -o diagram.svg`.
+**Alex:** Visio saves binary `.vsdx` files. You commit them to Git. Six months later, you update the diagram. Git sees: "old binary blob vs. new binary blob." It can't show you what changed. No diff. No merge. Just "these files are different."
+
+**Sarah:** Mermaid is different?
+
+**Alex:** Mermaid is **plain text**. Here's the architecture diagram:
+```
+graph TD
+    UI --> SIM
+    SIM --> CTRL
+    CTRL --> PLANT
+```
+You change "CTRL" to "Controller". Git diff shows **exactly** what changed. Collaborators can review diagram changes the same way they review code changes.
+
+**Sarah:** Reproducibility?
+
+**Alex:** With draw.io, you manually draw boxes, position them, connect arrows. Ten people draw the same architecture, you get ten different layouts. With Mermaid, **the tool does layout**. You specify components and relationships. Mermaid positions them algorithmically. Consistent, repeatable.
+
+**Alex:** Automation?
+
+**Sarah:** Scripts can generate Mermaid diagrams from code. Parse imports, generate dependency graphs. Parse function calls, generate call graphs. You can't automate Visio—it requires human mouse clicks.
+
+### TikZ: Publication-Quality Figures
+
+**Sarah:** When do you use TikZ instead of Mermaid?
+
+**Alex:** **LaTeX papers**. TikZ is the LaTeX drawing package. It integrates seamlessly with LaTeX math, fonts, and styling. You write code, LaTeX renders beautiful vector graphics.
+
+**Sarah:** Trade-off?
+
+**Alex:** TikZ has a **steep learning curve**. Mermaid: 5 minutes to learn. TikZ: 5 hours. But TikZ gives you pixel-perfect control for publication figures. Mermaid is for documentation. TikZ is for journals.
+
+### The Decision Matrix
+
+**Alex**: Quick reference for choosing tools:
+- **Mermaid**: Documentation, GitHub, version control, automation
+- **TikZ**: LaTeX papers, publication figures, math integration
+- **Matplotlib**: Data plots, benchmarks, experimental results
+- **Visio/draw.io**: Only if you must share with non-technical stakeholders who demand GUI tools
 
 ---
 
