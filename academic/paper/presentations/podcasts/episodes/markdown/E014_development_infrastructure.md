@@ -17,18 +17,9 @@
 
 **Alex**: With GOOD development infrastructure? **3-4 weeks**!
 
-**Sarah**: The difference? Automation, automation, automation:
-```bash
-# One command to run complete benchmark
-python scripts/benchmarks/run_mt5.py --controllers all --scenarios all --seeds 50
+**Sarah**: The difference? Automation BUYS you time:
 
-# Outputs:
-# - CSV: Raw time-series data
-# - JSON: Statistical summaries
-# - PDF: Publication-ready figures
-# - LaTeX: Auto-generated tables
-# - Total time: 8 minutes (vs manual: 2 days!)
-```
+**The Magic Button**: One command runs a complete benchmark. Push it. Eight minutes later you get CSV time-series data, JSON statistical summaries, publication-ready PDF figures, and auto-generated LaTeX tables. The manual alternative? Two days of copying, pasting, and formatting.
 
 **Alex**: This episode covers the development infrastructure that makes research FAST:
 - **CLI tools**: `simulate.py`, benchmark scripts, analysis utilities
@@ -58,7 +49,7 @@ python scripts/benchmarks/run_mt5.py --controllers all --scenarios all --seeds 5
 **Without tooling**: Step 3-5 take **hours to days**
 **With tooling**: Step 3-5 take **minutes**
 
-**Alex**: Let's measure developer productivity:
+**Alex**: Good tooling BUYS you time. Let's measure the return on investment:
 
 | Task | Manual Approach | Automated Approach | Speedup |
 |------|----------------|-------------------|---------|
@@ -68,7 +59,7 @@ python scripts/benchmarks/run_mt5.py --controllers all --scenarios all --seeds 5
 | Generate paper figure | 1 hour (Excel→export→edit) | 30 sec (auto script) | 120× |
 | Find bug in code | 2 hours (print debugging) | 5 min (pytest pinpoints) | 24× |
 
-**Sarah**: Over a 3-month research project, good tooling saves **200-300 hours** of manual work!
+**Sarah**: Over a 3-month research project, good tooling BUYS you **200-300 hours**. That's seven weeks of your life back!
 
 ### The Development Stack
 
@@ -187,26 +178,9 @@ python simulate.py \
 
 ### MT-5 Comprehensive Benchmark
 
-**Script**: `scripts/benchmarks/run_mt5.py`
+**The Magic Button for Research**:
 
-**Purpose**: Compare all 7 controllers across 12 scenarios with Monte Carlo validation
-
-**Usage**:
-```bash
-python scripts/benchmarks/run_mt5.py \
-    --controllers all \
-    --scenarios all \
-    --seeds 50 \
-    --output academic/paper/experiments/comparative/MT5_comprehensive_benchmark/
-
-# This ONE command:
-# - Runs 7 controllers × 12 scenarios × 50 seeds = 4,200 simulations
-# - Generates CSV files with raw time-series data
-# - Computes statistical summaries (mean, std, confidence intervals)
-# - Creates publication-ready figures (PDF)
-# - Generates LaTeX tables for paper
-# - Total time: ~8 minutes
-```
+One script. One command. It runs 7 controllers across 12 scenarios with 50 random seeds—that's 4,200 simulations. It generates CSV files with raw time-series data, computes statistical summaries with confidence intervals, creates publication-ready PDF figures, and generates LaTeX tables for your paper. Total time? Eight minutes. A week's work compressed into the time it takes to make coffee.
 
 **Output structure**:
 ```
@@ -225,43 +199,21 @@ MT5_comprehensive_benchmark/
     └── results_table.tex
 ```
 
-**Sarah**: Manual approach: 2 days of work. Automated: 8 minutes + one command!
+**Sarah**: This is the Magic Button in action. Manual approach: two days. Automated: eight minutes. You just bought yourself 15 hours and 52 minutes.
 
 ### MT-8 Disturbance Rejection
 
-**Script**: `scripts/benchmarks/run_mt8.py`
+**Purpose**: Test robustness to external forces—impulse kicks, step changes, sinusoidal waves.
 
-```bash
-python scripts/benchmarks/run_mt8.py \
-    --controllers classical_smc,sta_smc,hybrid \
-    --disturbances impulse,step,sinusoidal \
-    --seeds 30
-
-# Tests:
-# - 3 controllers × 3 disturbance types × 30 seeds = 270 simulations
-# - Validates robustness to external forces
-# - Generates disturbance rejection plots
-# - Time: ~3 minutes
-```
+One command tests 3 controllers against 3 disturbance types with 30 random seeds. That's 270 simulations validating robustness, with disturbance rejection plots generated automatically. Time: three minutes.
 
 ### PSO Batch Optimization
 
-**Script**: `scripts/optimization/batch_pso.py`
+**Purpose**: Optimize all 7 controllers and validate consistency.
 
-```bash
-python scripts/optimization/batch_pso.py \
-    --controllers all \
-    --seeds 10 \
-    --output optimization_results/
+One command runs PSO ten times per controller with different random seeds. It saves the best gains from each run and compares consistency across seeds—critical for MT-7 validation. Total time: 45 minutes. The manual alternative? Four days of babysitting optimization runs.
 
-# Optimizes all 7 controllers:
-# - Runs PSO 10 times per controller (different random seeds)
-# - Saves best gains from each run
-# - Compares consistency across seeds (MT-7 validation)
-# - Total time: ~45 minutes
-```
-
-**Alex**: These scripts AUTOMATE the entire experimental pipeline!
+**Alex**: These are your Magic Buttons. They automate the entire experimental pipeline and buy you weeks of time!
 
 ---
 
@@ -561,13 +513,10 @@ Total: 7 days, ~20 hours of manual work
 ```
 
 **With tooling (automated)**:
-```
-python scripts/benchmarks/run_mt5.py --controllers all --scenarios all --seeds 50
 
-Total: 8 minutes
-```
+Push the Magic Button. Wait 8 minutes. Done.
 
-**Speedup**: **150×** (20 hours → 8 minutes)
+**Speedup**: **150×** (20 hours → 8 minutes). You just bought yourself 19 hours and 52 minutes.
 
 ### Annual Productivity Gains
 
@@ -583,7 +532,7 @@ Total: 8 minutes
 
 **Annual savings** (10 experiments): **~310 hours** = **7.75 work weeks**!
 
-**Sarah**: That's 2 months of productivity GAINED by investing 1 week in tooling!
+**Sarah**: You just BOUGHT yourself two months by investing one week in tooling. That's the power of the Magic Button!
 
 ---
 
