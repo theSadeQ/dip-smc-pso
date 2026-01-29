@@ -6,15 +6,19 @@
 
 ---
 
-## Opening Hook
+## Opening Hook: What's Next?
 
-**Sarah:** We have spent 20 episodes walking through what this project is -- the controllers, the optimization, the infrastructure, the lessons learned. Today we talk about what it is not yet, and what it could become.
+**Sarah:** We have spent 20 episodes walking through what this project **is**—the controllers, the optimization, the infrastructure, the lessons learned. Today we talk about what it is **not yet**, and what it **could become**.
 
-**Alex:** The roadmap. The future work. The ideas we had to defer, the features we decided not to build, and the research directions that are still open.
+**Alex:** The roadmap. The future work. The horizon.
 
-**Sarah:** Most research papers end with a "Future Work" section that is two paragraphs of vague aspirations. We are going to be more specific. What is actually on the horizon? What are the concrete next steps? And what would a Phase 6 look like if this project continued beyond its current scope?
+**Sarah:** Most research papers end with a "Future Work" section that's two paragraphs of vague aspirations. "This could be extended..." "Future research might explore..." We're going to be more specific.
 
-**Alex:** This is the episode where we separate "things we plan to do" from "things we wish someone would do" from "things that are interesting but out of scope."
+**Alex:** **What's actually on the horizon?** What are the concrete next steps? And what would Phase 6 look like if this project continued?
+
+**Sarah:** This is the episode where we separate three categories: "things we plan to do," "things we hope someone will do," and "things that are interesting but out of scope."
+
+**Alex:** And if you're listening and thinking "I could build that"—**good**. That's the point. This is open source. The door is open. Come join us.
 
 ---
 
@@ -81,15 +85,19 @@
 
 **Sarah:** Future work often gets grouped into a single list, but not all future work is equally urgent or feasible. You mentioned three categories. Let us start with immediate extensions -- what could be built in the next 3 to 6 months with current resources.
 
-**Alex:** Three items. First: additional controller variants. Terminal sliding mode control, integral sliding mode control, and fractional-order SMC. These are well-established algorithms in the literature with straightforward implementations.
+**Alex:** Three items. First: **additional controller variants**. Terminal sliding mode, integral sliding mode, and fractional-order SMC. These are well-established algorithms with straightforward implementations.
 
-**Sarah:** Why were they not included in the original seven controllers?
+**Sarah:** Keep it high-level for listeners. What do these controllers **do** differently?
 
-**Alex:** Scope management. The original goal was "demonstrate multiple SMC variants with PSO optimization." Seven controllers -- classical, super-twisting, adaptive, hybrid, conditional hybrid, swing-up, and MPC -- covered that goal. Adding three more would have extended Phase 2 by four weeks without adding new research insights.
+**Alex:** **Terminal SMC** achieves finite-time convergence—the pendulum reaches equilibrium in a guaranteed time, not just "eventually." **Integral SMC** eliminates steady-state error—no permanent drift. **Fractional-order SMC** uses calculus with non-integer derivatives—think "half a derivative"—for smoother control.
+
+**Sarah:** Why weren't they included in the original seven controllers?
+
+**Alex:** Scope management. The goal was "demonstrate multiple SMC variants with PSO optimization." Seven controllers covered that. Adding three more would have extended Phase 2 by four weeks without adding new research insights.
 
 **Sarah:** But now that the infrastructure exists?
 
-**Alex:** Now that we have the factory pattern, the benchmark scripts, the PSO tuner, and the documentation templates, adding a new controller takes 3 to 5 days instead of 2 weeks. The infrastructure cost is already paid.
+**Alex:** Now that we have the factory pattern, the benchmark scripts, the PSO tuner, and documentation templates, adding a new controller takes 3 to 5 days instead of 2 weeks. The infrastructure cost is already paid. **If you want to implement one of these—the codebase is ready. Go for it.**
 
 **Sarah:** Second immediate extension?
 
