@@ -22,726 +22,320 @@
 - **Academic citations**: 39 references in our bibliography
 - **Software attribution**: Open-source licenses and acknowledgments
 - **Code provenance**: Documenting algorithm sources
-- **Citation practices**: BibTeX, DOI, proper formatting
+- **Citation practices**: Why we cite, what to cite, how to cite
 
 **Alex**: Let's give credit where credit is due!
 
-## Configuration System Architecture
+---
 
-**Central Configuration: `config.yaml**`
+## Why We Cite: Standing on the Shoulders of Giants
 
-    **Configuration Domains:**
-    
-        - **Physics Parameters**
-        
-            - Cart mass, pole lengths/masses/inertias
-            - Gravitational constant, friction coefficients
+**Sarah**: Before we dive into the *how*, let's talk about the *why*. Why do we cite?
 
-        - **Controller Settings**
-        
-            - Gains, boundary layers, adaptation rates
-            - Specific parameters per controller type
+**Alex**: Isaac Newton said it best in 1675: **"If I have seen further, it is by standing on the shoulders of giants."**
 
-        - **PSO Parameters**
-        
-            - Particles (30), generations (50-100)
-            - Inertia weight (0.729), cognitive/social coefficients (1.494)
+**Sarah**: Every algorithm we implement, every equation we use, every experiment we design—someone thought of it first. Someone published it. Someone made it possible for us to build on their work.
 
-        - **Simulation Settings**
-        
-            - Time step (0.01s), duration (10s)
-            - Initial conditions, solver method (RK45)
+**Alex**: Classical SMC? That's Vadim Utkin in 1977. The Super-Twisting Algorithm? Arie Levant in 1993. PSO optimization? Kennedy and Eberhart in 1995. We didn't invent these—we **apply** them.
 
-        - **HIL Configuration**
-        
-            - Network addresses, ports, timeouts
-            - Safety limits, emergency stop thresholds
+**Sarah**: Citations are how we say "thank you" to the giants whose shoulders we stand on. It's academic gratitude. It's intellectual honesty. It's the foundation of scientific progress.
+
+**Alex**: And practically? Citations help readers:
+- **Verify** our claims—they can check the original sources
+- **Learn deeper**—follow citation chains to build expertise
+- **Reproduce** our work—use the same algorithms and parameters
+
+**Sarah**: So when we say we have 39 references in our bibliography, that's not to look impressive. That's 39 intellectual debts we're acknowledging. Let's explore them!
 
 ---
 
-## Web Interface: Streamlit Dashboard
+## Bibliography: 39 References—Our Intellectual Debts
 
-**Interactive Web UI for Non-Technical Users:**
+**Sarah**: Our bibliography has 39 references covering 50 years of control theory. Rather than list them all, let me group them into three categories: **The Classics**, **Modern Research**, and **The Tools We Build With**.
 
-    **Dashboard Features:**
+### The Classics (1970s-1990s): The Founding Fathers
 
-        - **Controller Selection**
+**Alex**: These are the papers that created the field. If you work in sliding mode control, you **must** know these names:
 
-            - Dropdown menu for 7 controller types
-            - Real-time parameter adjustment sliders
+**Vadim Utkin (1977)** - The father of SMC. His paper "Variable Structure Systems with Sliding Modes" defined the theory. Every sliding surface we design, every reaching condition we prove? That's Utkin's legacy.
 
-        - **Simulation Control**
+**Jean-Jacques Slotine and Weiping Li (1991)** - Their textbook "Applied Nonlinear Control" is the Bible of SMC. We use their Lyapunov approach, their control laws, even their notation. When we write equations in our paper, they're echoing Slotine and Li.
 
-            - Start/stop buttons
-            - Duration and time step configuration
-            - Initial condition presets
+**Arie Levant (1993)** - He invented higher-order sliding modes, the foundation of our Super-Twisting controller. Before Levant, SMC was loud and chattery. After Levant? Smooth and quiet.
 
-        - **Real-Time Visualization**
+**Sarah**: These three names appear in **every** SMC paper written in the last 30 years. They're not optional citations—they're required acknowledgment of the giants.
 
-            - Animated pendulum motion
-            - State trajectory plots (angles, velocities)
-            - Control input time series
+### Modern Research (2000s-2020s): Refining the Craft
 
-        - **Performance Metrics**
+**Alex**: The classics gave us the foundation. Modern researchers gave us the tools to make it practical:
 
-            - Settling time calculation
-            - Overshoot percentage
-            - Energy consumption (∫u²dt)
-            - Chattering frequency analysis
+**Yuri Shtessel and colleagues (2014)** wrote the modern SMC encyclopedia. Their textbook "Sliding Mode Control and Observation" taught us how to reduce chattering with boundary layers. Our `boundary_layer_width` parameter? Straight from their Chapter 5.
 
-        - **PSO Integration**
+**Jaime Moreno and Leonid Fridman's group (2008-2012)** proved rigorous stability for the Super-Twisting Algorithm. We follow their Lyapunov proof structure but extend it to the harder double-inverted pendulum problem.
 
-            - One-click gain optimization
-            - Convergence curve visualization
-            - Gain comparison table
+**Kennedy and Eberhart (1995)**, **Shi and Eberhart (1998)**, and **Maurice Clerc (2002)** form the PSO trinity. The original algorithm, the inertia weight improvement, and the mathematical stability proof. Our PSO parameters—w=0.729, c1=c2=1.494—come from Clerc's convergence analysis. They're not arbitrary; they're **proven** to work.
 
----
+**Sarah**: Notice a pattern? We don't just cite papers and forget them. We cite **specific chapters**, **equation numbers**, **parameter values**. If a reader wants to verify our work, they can trace every decision back to a source.
 
-## Bibliography: 39 References
+### The Tools We Build With: Software Giants
 
-**Sarah**: Now let's talk about our bibliography - 39 references covering 50 years of control theory.
+**Alex**: Here's where citation practices get interesting. Should you cite NumPy?
 
-**Alex**: These aren't just citations to inflate the bibliography. Each reference serves a specific purpose.
+**Sarah**: In a software project's README? Just list it in dependencies. In a research paper? **Absolutely cite it!**
 
-### Foundational SMC Papers (1970s-1990s)
+**Alex**: The **NumPy team** (Harris et al., 2020, published in *Nature*)—over 1,000 contributors built the foundation of scientific Python. We use it for every matrix operation. They deserve credit.
 
-**Sarah**: The classics that defined the field:
+**SciPy** (Virtanen et al., 2020)—their RK45 ODE solver is the **engine** of our simulations. We didn't write our own integrator. We stood on their shoulders.
 
-**1. Utkin (1977) - "Variable Structure Systems with Sliding Modes"**
-- **Why cited**: Foundational paper defining SMC theory
-- **Used in**: Chapter 2 (SMC fundamentals), Lyapunov stability proofs
-- **Key contribution**: Sliding surface design, reaching condition
+**Matplotlib** (Hunter, 2007)—all 100+ figures in our paper? Generated with Matplotlib. Their documentation explicitly requests citation. We comply.
 
-**2. Slotine & Li (1991) - "Applied Nonlinear Control"**
-- **Why cited**: Textbook derivations of SMC for robot manipulators
-- **Used in**: Our stability analysis follows their Lyapunov approach
-- **Quote used**: "The sliding mode control guarantees finite-time convergence..."
+**Sarah**: Why cite software?
+- **Credit**: Developers rarely get academic recognition. Citations help.
+- **Reproducibility**: Readers know **exact versions** (NumPy 1.24.3, not just "NumPy").
+- **Transparency**: We're honest about what we built vs. what we used.
 
-**3. Levant (1993) - "Sliding Order and Sliding Accuracy in Sliding Mode Control"**
-- **Why cited**: Defines higher-order sliding modes (basis for STA-SMC)
-- **Used in**: Chapter 3 (Super-Twisting Algorithm implementation)
-- **Key formula**: Our STA-SMC uses his $\dot{s} = -\alpha |s|^{1/2} \text{sign}(s) + v$ formulation
+**Alex**: Our bibliography has 39 entries. Fourteen are foundational theory papers. Twelve are modern research extensions. Seven are software tools. Six are pendulum dynamics benchmarks for validation.
 
-**Alex**: Notice we cite the **EXACT page numbers** for key equations:
-```bibtex
-@article{levant1993,
-  author = {Levant, Arie},
-  title = {Sliding Order and Sliding Accuracy in Sliding Mode Control},
-  journal = {International Journal of Control},
-  volume = {58},
-  number = {6},
-  pages = {1247--1263},
-  year = {1993},
-  note = {Equation (12) provides the STA formulation used in Section 3.2}
-}
-```
-
-### Modern SMC Research (2000s-2020s)
-
-**4. Shtessel et al. (2014) - "Sliding Mode Control and Observation"**
-- **Why cited**: Modern comprehensive SMC textbook
-- **Used in**: Boundary layer design (Section 2.4), chattering reduction
-- **Code implementation**: Our `boundary_layer_width` parameter comes from Chapter 5
-
-**5. Moreno & Osorio (2012) - "Strict Lyapunov Functions for the Super-Twisting Algorithm"**
-- **Why cited**: Rigorous stability proof for STA-SMC
-- **Used in**: Our Lyapunov analysis in Appendix B follows their proof structure
-- **Contribution**: We extend their proof to double-inverted pendulum (originally for single integrator)
-
-**Alex**: This is an example of **building on prior work**:
-- They proved STA stability for simple systems
-- We prove it for double-inverted pendulum (harder!)
-- We cite them for the proof technique, not copying results
-
-### PSO Optimization Papers
-
-**6. Kennedy & Eberhart (1995) - "Particle Swarm Optimization"**
-- **Why cited**: Original PSO paper - MUST cite when using PSO
-- **Used in**: Chapter 4 (PSO for gain tuning)
-- **Even though**: We wrote our PSO code from scratch, the **algorithm** isn't ours
-
-**Sarah**: This is the citation ethics question from our opening hook!
-
-**7. Shi & Eberhart (1998) - "A Modified Particle Swarm Optimizer"**
-- **Why cited**: Introduces inertia weight (we use w=0.729)
-- **Used in**: Our PSO implementation uses their adaptive inertia weight strategy
-- **Parameters**: Our `config.yaml` PSO section references this paper
-
-**8. Clerc & Kennedy (2002) - "The Particle Swarm - Explosion, Stability, and Convergence"**
-- **Why cited**: Derives constriction coefficients (c1=c2=1.494)
-- **Used in**: Our default PSO parameters come from their theoretical analysis
-- **Justification**: Not arbitrary - these values have convergence guarantees!
-
-### Inverted Pendulum Dynamics
-
-**9. Spong (1995) - "The Swing-Up Control Problem for the Acrobot"**
-- **Why cited**: Energy-based swing-up strategy
-- **Used in**: Our SwingUpSMC controller (Section 5.3)
-- **Adaptation**: We extend single pendulum → double pendulum
-
-**10. Graichen et al. (2007) - "Swing-Up of the Double Pendulum on a Cart"**
-- **Why cited**: Double-pendulum-specific swing-up control
-- **Used in**: Validates our swing-up approach against published results
-- **Benchmark**: We compare our settling time (4.2s) vs their results (4.5s)
-
-### Software Libraries (Yes, We Cite Code!)
-
-**Alex**: Research software should cite dependencies properly!
-
-**11. NumPy (Harris et al., 2020)**
-```bibtex
-@article{harris2020numpy,
-  title={Array programming with NumPy},
-  author={Harris, Charles R and Millman, K Jarrod and van der Walt, Stéfan J and ...},
-  journal={Nature},
-  volume={585},
-  number={7825},
-  pages={357--362},
-  year={2020},
-  note={Used for all numerical array operations}
-}
-```
-
-**12. SciPy (Virtanen et al., 2020)**
-- **Why cited**: We use `scipy.integrate.solve_ivp` for ODE integration
-- **Impact**: RK45 solver is core to our simulation engine
-- **Citation**: Required by SciPy documentation
-
-**13. Matplotlib (Hunter, 2007)**
-- **Why cited**: All visualizations (100+ figures)
-- **Note**: Citation requested in Matplotlib docs
-
-**14. pytest (Krekel et al., 2004)**
-- **Why cited**: 668 tests depend on pytest framework
-- **Justification**: Testing is a core methodology component
-
-**Sarah**: **Why cite software?**
-- **Credit**: Developers deserve recognition (NumPy team: 1000+ contributors!)
-- **Reproducibility**: Readers know EXACT versions (NumPy 1.24.3)
-- **Transparency**: Shows we didn't implement RK45 from scratch
+**Sarah**: Every citation answers the question: "Whose shoulders am I standing on for this specific piece of work?"
 
 ---
 
-## Citation Practices: BibTeX Management
+## Citation Practices: Managing 39 References Without Losing Your Mind
 
-**Alex**: How we manage 39 references without going insane:
+**Alex**: Okay, we've talked about **who** to cite and **why**. Now let's talk about **how** to manage 39 references without going insane.
 
-### BibTeX Organization
+### The Magic of BibTeX
 
-**File structure**:
-```
-academic/paper/
-├── references.bib           # Main bibliography (39 entries)
-├── thesis/thesis.bib        # Thesis-specific additions (47 entries)
-└── publications/paper.bib   # Conference paper (25 entries, subset of main)
-```
+**Sarah**: BibTeX is like a contact list for papers. You create one master file—ours is called `references.bib`—with all 39 entries. Then every paper, thesis, or presentation you write can pull from that master list.
 
-**Sarah**: Different documents cite different subsets, but `references.bib` is the master source.
+**Alex**: Each entry has a **citation key**—a short nickname for the paper. We use the format: first author, year, keyword. Like `utkin1977variable` for Utkin's 1977 paper on variable structure systems. Or `kennedy1995particle` for the PSO paper.
 
-### BibTeX Entry Format
+**Sarah**: Why does the nickname matter? Because when you're writing, you just type "cite kennedy1995particle" and the bibliography software handles the rest. No copying titles, no formatting author names, no tracking page numbers. It's automatic.
 
-**Consistent structure**:
-```bibtex
-@article{author2020keyword,
-  author       = {Last1, First1 and Last2, First2},
-  title        = {Capitalize Major Words in Title},
-  journal      = {Full Journal Name},
-  volume       = {10},
-  number       = {3},
-  pages        = {123--145},
-  year         = {2020},
-  doi          = {10.1234/journal.2020.01234},
-  note         = {Used in Section X.Y for topic Z}
-}
-```
+### DOI: The Permanent Address for Papers
 
-**Alex**: **Key fields**:
-- `author`: Full names, use "and" (not commas) between authors
-- `title`: Title case, use curly braces for acronyms: `{SMC}` (preserves capitalization)
-- `doi`: Permanent link, better than URL
-- `note`: **CRITICAL** - explains WHY we cite this paper
+**Alex**: Here's a problem: URLs break. Publishers move papers. Websites go down. In 10 years, your link to "ieeexplore.ieee.org/document/12345" might be dead.
 
-### DOI vs URL
+**Sarah**: Solution: **DOI**—Digital Object Identifier. It's like a permanent forwarding address. The DOI "10.1109/TAC.2020.12345" will **always** redirect to the paper, even if the publisher changes platforms.
 
-**Sarah**: **Always prefer DOI** over URL:
+**Alex**: We use DOIs for every reference that has one. Thirty-seven of our 39 references have DOIs. The two that don't? They're old textbooks from before DOIs existed.
 
-**Bad**:
-```bibtex
-url = {https://ieeexplore.ieee.org/document/1234567}  # Link might break!
-```
+### Tools: Zotero and Better BibTeX
 
-**Good**:
-```bibtex
-doi = {10.1109/TAC.2020.1234567}  # Permanent identifier
-```
+**Sarah**: We use **Zotero** as our bibliography manager. It's like iTunes for papers. You add a paper once, and Zotero stores the PDF, extracts the metadata (authors, title, journal), and syncs it to the cloud.
 
-**Alex**: DOI = Digital Object Identifier = permanent redirect system. Even if publisher moves paper, DOI still works.
+**Alex**: We pair it with the **Better BibTeX plugin**, which auto-generates those citation keys. Click "add to Zotero," and it creates `slotine1991applied` automatically. No manual typing. No typos.
 
-### Citation Tools
-
-**We use**:
-- **Zotero**: Bibliography manager (synced to cloud)
-- **Better BibTeX plugin**: Auto-generates citation keys (author2020keyword)
-- **Citation key format**: `[firstauthor][year][keyword]`
-
-**Examples**:
-```
-kennedy1995particle     # Kennedy & Eberhart 1995 (PSO paper)
-utkin1977variable       # Utkin 1977 (foundational SMC)
-slotine1991applied      # Slotine & Li 1991 (textbook)
-```
-
-**Sarah**: Consistent citation keys make in-text citations readable:
-```latex
-The PSO algorithm \cite{kennedy1995particle} was modified with
-inertia weight \cite{shi1998modified} to improve convergence.
-```
+**Sarah**: The master file—`references.bib`—is 39 entries. Our thesis uses 47 (includes extra background). Our conference paper uses 25 (a focused subset). All sourced from the same master list. Update once, update everywhere.
 
 ---
 
-## Software Licenses & Open Source Attribution
+## Software Licenses: The Legal Side of "Thank You"
 
-**Alex**: Now the software side - how we attribute open-source dependencies.
+**Alex**: Now let's talk licenses. When you use open-source software, you're bound by its license. And when you **release** open-source software, you need to choose a license.
 
-### Our License: MIT
+### Our License: MIT ("Do Whatever You Want, Just Don't Sue Me")
 
-**Sarah**: Our repository uses the MIT License:
+**Sarah**: Our repository uses the **MIT License**. What does that mean?
 
-```
-MIT License
+**Alex**: In plain English? **"Do whatever you want with this code—use it, modify it, sell it—just don't sue me if it breaks."**
 
-Copyright (c) 2025 Sadek Degachi
+**Sarah**: The MIT License is 171 words. The GPL—another popular license—is 5,645 words. MIT is **simple**. It's **permissive**. It's the standard for academic code.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy...
-```
+**Alex**: Why MIT over GPL? GPL has "copyleft" rules—if you modify GPL code, you **must** open-source your modifications. Great for some projects, but it complicates commercial use. MIT says "take it, do whatever, just give credit."
 
-**Why MIT?**:
-- **Permissive**: Allows commercial use, modification, distribution
-- **Simple**: 171 words (vs GPL: 5,645 words)
-- **Compatible**: Can combine with most other licenses
-- **Academic-friendly**: Standard for research code
+**Sarah**: Perfect for research. A company can take our pendulum controller and use it in a product. A student can modify it for their thesis. No restrictions, no legal headaches.
 
-### Dependency Licenses
+### Dependency Licenses: Documenting What We Use
 
-**Alex**: Every dependency in `requirements.txt` has a license. We document them:
+**Alex**: We use 36 open-source libraries. Each has its own license. We document them all in a file called `LICENSES.md`.
 
-**File: `LICENSES.md`**
-```markdown
-# Third-Party Licenses
+**Sarah**: Why bother? Three reasons:
 
-This project uses the following open-source libraries:
+**1. Legal compliance** - Some licenses require attribution. BSD and MIT licenses say "include our copyright notice." We comply.
 
-## NumPy (BSD-3-Clause)
-- Package: numpy>=1.24.0
-- License: BSD 3-Clause License
-- Copyright: Copyright (c) 2005-2023, NumPy Developers
-- License text: https://github.com/numpy/numpy/blob/main/LICENSE.txt
+**2. Transparency** - Users know what they're getting. NumPy is BSD-licensed. Matplotlib uses a Python Software Foundation-based license. All compatible with MIT.
 
-## SciPy (BSD-3-Clause)
-- Package: scipy>=1.10.0
-- License: BSD 3-Clause License
-- Copyright: Copyright (c) 2001-2023, SciPy Developers
-- License text: https://github.com/scipy/scipy/blob/main/LICENSE.txt
+**3. Audit trail** - If someone questions our license choices, we can point to `LICENSES.md` and show: "Here are all 36 dependencies, their licenses, and their copyright holders."
 
-## Matplotlib (PSF-based)
-- Package: matplotlib>=3.7.0
-- License: Matplotlib License (PSF-based)
-- Copyright: Copyright (c) 2002-2023, John D. Hunter, Michael Droettboom
-- License text: https://matplotlib.org/stable/users/project/license.html
+**Alex**: We also run an automated check in our CI pipeline. It scans every dependency and flags anything with a **GPL** or **AGPL** license—those are copyleft licenses incompatible with MIT. If a GPL dependency sneaks in, the build fails. No exceptions.
 
-... (33 more entries)
-```
-
-**Sarah**: **Why document licenses?**
-- **Legal compliance**: Some licenses require attribution
-- **Transparency**: Users know what they're using
-- **Audit trail**: Proves we're not violating copyleft licenses
-
-### License Compatibility Check
-
-**Alex**: We verify no license conflicts:
-
-**Script: `scripts/licensing/check_licenses.py`**
-```python
-"""Verify all dependencies have compatible licenses."""
-import pkg_resources
-
-ALLOWED_LICENSES = [
-    "MIT", "BSD", "BSD-3-Clause", "Apache-2.0", "PSF", "ISC"
-]
-
-FORBIDDEN_LICENSES = [
-    "GPL-3.0",  # Copyleft incompatible with MIT
-    "AGPL",     # Requires open-sourcing network-served code
-]
-
-def check_dependency_licenses():
-    for dist in pkg_resources.working_set:
-        license = get_license(dist)  # Parse metadata
-        if license in FORBIDDEN_LICENSES:
-            raise LicenseError(f"{dist.project_name} has incompatible license: {license}")
-        elif license not in ALLOWED_LICENSES:
-            print(f"[WARNING] Unknown license: {dist.project_name} ({license})")
-
-check_dependency_licenses()
-```
-
-**Sarah**: Runs in CI - blocks merge if GPL dependency sneaks in!
+**Sarah**: Bottom line: Licenses are how the open-source community says "Here are the rules." We follow them, we document them, and we enforce them automatically.
 
 ---
 
-## Code Provenance: Documenting Algorithm Sources
+## Code Provenance: Tracing Every Line Back to Its Source
 
-**Alex**: Every algorithm in our codebase cites its source.
+**Alex**: Citations aren't just for papers. Every algorithm in our codebase cites its source **in the code itself**.
 
-### In-Code Citations
+### In-Code Citations: Comments That Give Credit
 
-**Example: Classical SMC**
-```python
-# src/controllers/classical_smc.py
-"""
-Classical Sliding Mode Controller
+**Sarah**: Open our Classical SMC controller file. The very first thing you see? A citation.
 
-Based on the control law from:
-    Slotine, J. J., & Li, W. (1991). Applied Nonlinear Control.
-    Prentice Hall. Chapter 7: Sliding Control.
+**Alex**: The docstring says: "Based on the control law from Slotine and Li (1991), Applied Nonlinear Control, Chapter 7: Sliding Control. Control law from Equation 7.18."
 
-Control law (Eq. 7.18):
-    u = -(C @ B)^-1 * (k * sign(s) + eta * s)
+**Sarah**: Then, in the actual code, we mark specific lines with comments: "Equation 7.12" on the sliding surface calculation, "Equation 7.18" on the control law.
 
-Where:
-    s = sliding surface (Eq. 7.12)
-    k = switching gain (must exceed disturbance bound)
-    eta = boundary layer width (chattering reduction)
-"""
+**Alex**: Why? **Traceability**. If a developer wonders "Where did this formula come from?", the comment answers immediately. No hunting through documentation. The citation is **right there** in the code.
 
-class ClassicalSMC:
-    def compute_control(self, state, ...):
-        s = self._compute_sliding_surface(state)  # Eq. 7.12
-        u = -(self.CB_inv) @ (self.k * np.sign(s) + self.eta * s)  # Eq. 7.18
-        return u
-```
+**Sarah**: Same for the Super-Twisting controller—cites Levant (1993), Equation 12. Same for PSO—cites Kennedy and Eberhart (1995), Shi and Eberhart (1998), Clerc (2002). Every algorithm, every equation, every parameter.
 
-**Sarah**: **Key practices**:
-- **Cite source** at module level (textbook/paper)
-- **Reference equation numbers** (Eq. 7.18) for traceability
-- **Link comments to code** (`# Eq. 7.18` on exact line)
+### Documentation Citations: Explaining the Why
 
-### In-Documentation Citations
+**Alex**: Our documentation goes deeper. For PSO, we explain:
+- **Position update**: Kennedy and Eberhart (1995), Equation 1
+- **Velocity update**: Shi and Eberhart (1998), Equation 3
+- **Parameters**: w=0.729, c1=c2=1.494 from Clerc (2002)
 
-**Example: PSO Documentation**
-```markdown
-# PSO Gain Tuning
+**Sarah**: And we emphasize: **These aren't arbitrary!** Clerc's 2002 paper proved these values guarantee convergence. They're not "tuned by trial and error"—they're mathematically justified.
 
-## Algorithm
+**Alex**: Every formula in our documentation includes the paper **and** the equation number. A reader can pull up Slotine and Li's textbook, flip to page 285, look at Equation 7.18, and verify: "Yep, they implemented it correctly."
 
-We use Particle Swarm Optimization (Kennedy & Eberhart, 1995) with inertia
-weight (Shi & Eberhart, 1998) and constriction coefficients (Clerc, 2002).
-
-**Position update** (Kennedy & Eberhart, 1995, Eq. 1):
-$$
-x_i(t+1) = x_i(t) + v_i(t+1)
-$$
-
-**Velocity update** (Shi & Eberhart, 1998, Eq. 3):
-$$
-v_i(t+1) = w \cdot v_i(t) + c_1 r_1 (p_i - x_i) + c_2 r_2 (g - x_i)
-$$
-
-**Parameters** (Clerc, 2002):
-- Inertia weight: $w = 0.729$ (from stability analysis)
-- Cognitive coefficient: $c_1 = 1.494$
-- Social coefficient: $c_2 = 1.494$
-
-These are NOT arbitrary! Clerc (2002) proved these values guarantee convergence.
-```
-
-**Alex**: Every formula cites the paper AND equation number. Readers can verify our implementation!
+**Sarah**: That's intellectual honesty. That's reproducible research. That's giving credit where it's due.
 
 ---
 
-## Citation Formatting: LaTeX Examples
+## Citation Formatting: How It Looks in the Paper
 
-**Sarah**: How citations appear in our LaTeX documents:
+**Sarah**: Okay, we've talked about managing citations. What does it actually look like in the finished paper?
 
-### In-Text Citations
+### In-Text Citations: Two Styles
 
-**Parenthetical citations**:
-```latex
-The sliding mode control guarantees finite-time convergence to the
-sliding surface \cite{utkin1977variable}.
-```
-**Output**: "...sliding surface (Utkin, 1977)."
+**Alex**: There are two ways to cite in LaTeX:
 
-**Narrative citations**:
-```latex
-\citet{slotine1991applied} derive the reaching condition for sliding mode control.
-```
-**Output**: "Slotine and Li (1991) derive the reaching condition..."
+**Parenthetical** - The citation is in parentheses at the end of the sentence. Example: "Sliding mode control guarantees finite-time convergence to the sliding surface (Utkin, 1977)."
 
-**Multiple citations**:
-```latex
-Higher-order sliding modes reduce chattering
-\cite{levant1993,shtessel2014,moreno2012}.
-```
-**Output**: "...(Levant, 1993; Shtessel et al., 2014; Moreno & Osorio, 2012)."
+**Narrative** - The authors are part of the sentence. Example: "Slotine and Li (1991) derive the reaching condition for sliding mode control."
 
-### Bibliography Section
+**Sarah**: Use parenthetical when the paper is supporting evidence. Use narrative when the authors **did** something you're referencing.
 
-**LaTeX setup**:
-```latex
-\documentclass{article}
-\usepackage{natbib}  % Citation package
-\bibliographystyle{plainnat}  % Author-year style
+**Alex**: You can also cite multiple papers at once: "Higher-order sliding modes reduce chattering (Levant, 1993; Shtessel et al., 2014; Moreno and Osorio, 2012)."
 
-\begin{document}
+### The Bibliography Section
 
-% ... Paper content with \cite{} commands ...
+**Sarah**: At the end of the paper, LaTeX auto-generates the bibliography. All 39 references, alphabetically sorted, consistently formatted.
 
-\bibliography{references}  % Load references.bib
+**Alex**: Each entry shows: authors, year, title, journal or conference, volume, page numbers, and DOI. The reader can find **any** paper we cite.
 
-\end{document}
-```
-
-**Compiled bibliography**:
-```
-References
-
-Kennedy, J., & Eberhart, R. (1995). Particle swarm optimization. In
-    Proceedings of IEEE International Conference on Neural Networks
-    (Vol. 4, pp. 1942-1948). IEEE.
-
-Utkin, V. I. (1977). Variable structure systems with sliding modes.
-    IEEE Transactions on Automatic Control, 22(2), 212-222.
-
-Slotine, J. J., & Li, W. (1991). Applied Nonlinear Control.
-    Prentice Hall.
-```
+**Sarah**: And because we used BibTeX, the formatting is automatic. No manual alignment. No typos. No inconsistencies. The computer does it all.
 
 ---
 
-## Citation Ethics & Academic Integrity
+## Citation Ethics: When You MUST Cite (And When You Don't)
 
-**Alex**: Now the ethical dimension - when you MUST cite.
+**Alex**: Let's talk ethics. When **must** you cite?
 
-### Always Cite
+### Always Cite These Four Things
 
-**1. Direct quotes** (even if you rephrase):
-```latex
-% BAD: No citation
-The sliding surface is defined as $s = Cx - x_{\text{desired}}$.
+**Sarah**: **1. Direct quotes or paraphrases** - If an idea came from a paper, cite it. Even if you rephrase. "The sliding surface is defined as..." Slotine and Li said that first. Cite them.
 
-% GOOD: Cited
-The sliding surface \cite{slotine1991applied} is defined as
-$s = Cx - x_{\text{desired}}$.
-```
+**Alex**: **2. Specific formulas or algorithms** - You implement Utkin's control law? Cite Utkin. You use the PSO algorithm? Cite Kennedy and Eberhart. Even if you wrote the code yourself, the **idea** isn't yours.
 
-**2. Specific formulas/algorithms**:
-```python
-# BAD: No source
-u = -k * sign(s) - eta * s  # Control law
+**Sarah**: **3. Experimental methods** - If you're copying someone's methodology, cite them. "We use 50 Monte Carlo runs for statistical validation." Where did that number come from? Graichen et al. (2007). Cite them.
 
-# GOOD: Cited
-u = -k * sign(s) - eta * s  # Slotine & Li (1991), Eq. 7.18
-```
+**Alex**: **4. Software libraries in your Methods section** - "All simulations were implemented in Python using NumPy for numerical arrays, SciPy for ODE integration, and Matplotlib for visualization." Three citations. Non-negotiable.
 
-**3. Experimental methods**:
-```latex
-% BAD: No citation
-We use 50 Monte Carlo runs for statistical validation.
+### Never Cite These Three Things
 
-% GOOD: Cited
-Following \citet{graichen2007}, we use 50 Monte Carlo runs for
-statistical validation.
-```
+**Sarah**: Not everything needs a citation!
 
-**4. Software libraries** (in Methods section):
-```latex
-All simulations were implemented in Python 3.11 using NumPy
-\cite{harris2020numpy} for numerical arrays, SciPy \cite{virtanen2020scipy}
-for ODE integration, and Matplotlib \cite{hunter2007matplotlib} for visualization.
-```
+**Alex**: **1. Textbook fundamentals** - "The derivative of x-squared is 2x." No citation. That's basic calculus, taught in every textbook for 300 years. It's general knowledge.
 
-### Never Cite (These are General Knowledge)
+**Sarah**: **2. Your own original work** - You invent a new metric for quantifying chattering? That's **your** contribution. No citation needed. That's the work you're **adding** to the field.
 
-**Alex**: Not everything needs a citation!
+**Alex**: **3. Common software patterns** - "import numpy as np" doesn't need a citation. It's standard practice. Every Python programmer does this.
 
-**1. Textbook fundamentals**:
-```latex
-% NO citation needed - basic calculus
-The derivative of $x^2$ is $2x$.
+### Self-Citation: The 20% Rule
 
-% NO citation needed - well-known fact
-Newton's second law states $F = ma$.
-```
+**Sarah**: Can you cite your own previous papers? Yes! But don't overdo it.
 
-**2. Your own original work**:
-```python
-# NO citation needed - you wrote this!
-def compute_chattering_frequency(control_signal, dt):
-    """Novel metric for quantifying chattering."""
-    sign_changes = np.sum(np.diff(np.sign(control_signal)) != 0)
-    return sign_changes / (len(control_signal) * dt)
-```
+**Alex**: **Appropriate**: "We previously demonstrated (Degachi, 2024) that adaptive SMC outperforms classical SMC." You're building on your own prior work. That's fine.
 
-**3. Common software practices**:
-```python
-# NO citation needed - standard Python
-import numpy as np
+**Sarah**: **Excessive**: Citing six of your own papers in a single sentence. Journals will flag that. It looks like you're gaming citation counts.
 
-# NO citation needed - common pattern
-if config is None:
-    config = load_default_config()
-```
-
-### Self-Citation Ethics
-
-**Sarah**: Can you cite your own papers? YES, but with limits.
-
-**Appropriate self-citation**:
-```latex
-We previously demonstrated \cite{degachi2024sliding} that adaptive SMC
-outperforms classical SMC for pendulum stabilization.
-```
-
-**Excessive self-citation** (journal might flag):
-```latex
-% BAD: Unnecessary self-citations
-We use sliding mode control \cite{degachi2024a, degachi2024b, degachi2024c,
-degachi2023a, degachi2023b, degachi2022}...
-```
-
-**Alex**: Rule of thumb: <20% self-citations in bibliography.
+**Alex**: Rule of thumb: Keep self-citations **under 20%** of your bibliography. If you have 39 references, no more than 8 should be your own papers. Ours? Zero self-citations, because this is our first paper on this topic.
 
 ---
 
-## Acknowledgments Section
+## Acknowledgments: The People Who Helped (But Aren't Authors)
 
-**Sarah**: Beyond citations - who helped but isn't an author?
+**Sarah**: Citations are for **ideas**. Acknowledgments are for **people**.
 
-**Example: Our Acknowledgments**
-```latex
-\section*{Acknowledgments}
+**Alex**: Who do you acknowledge? Five categories:
 
-This research was supported by the University of Kaiserslautern-Landau.
+**1. Funding sources** - "This research was supported by the University of Kaiserslautern-Landau." Money made the work possible. Say thank you.
 
-We thank:
-\begin{itemize}
-    \item Dr. XYZ for providing access to the HIL experimental setup
-    \item The open-source community for NumPy, SciPy, and Matplotlib
-    \item Anonymous reviewers for their constructive feedback on an earlier
-          draft of this manuscript
-    \item Claude Code (Anthropic) for development assistance and documentation
-\end{itemize}
+**2. Technical assistance** - "We thank Dr. XYZ for providing access to the HIL experimental setup." They didn't write the paper, but they provided critical resources.
 
-The authors declare no conflicts of interest.
-```
+**3. Software tools** - "We thank the open-source community for NumPy, SciPy, and Matplotlib." We cited them in the bibliography, but we also acknowledge the broader community.
 
-**Alex**: Notice we acknowledge:
-- **Funding sources** (institutional support)
-- **Technical assistance** (HIL hardware access)
-- **Software tools** (open-source libraries)
-- **AI assistance** (Claude Code)
-- **Reviewers** (anonymous peer review)
+**4. AI assistance** - "Claude Code (Anthropic) provided development assistance and documentation." Some journals **require** AI tool disclosure. We do it for transparency.
 
-**Sarah**: **Why acknowledge AI assistance?**
-- **Transparency**: Readers know what tools you used
-- **Ethics**: Some journals require AI tool disclosure
-- **Reproducibility**: Future researchers can replicate your workflow
+**5. Reviewers** - "We thank anonymous reviewers for their constructive feedback." They improved the paper. Give credit.
+
+**Sarah**: **Why acknowledge AI?** Three reasons:
+
+**Alex**: **Transparency** - Readers know what tools you used. **Ethics** - Journals increasingly require disclosure. **Reproducibility** - Future researchers can replicate your workflow.
+
+**Sarah**: Bottom line: Acknowledgments are about gratitude. If someone helped, say thank you.
 
 ---
 
-## Version Control & Reproducibility
+## Version Control: Citations in Git Commits
 
-**Alex**: Git commits are part of provenance tracking!
+**Alex**: Here's something most people don't think about: **Git commits** are part of attribution!
 
-### Commit Message Attribution
+**Sarah**: When we implement an algorithm from a paper, the commit message cites the source. Example: "Implement Super-Twisting Algorithm based on Levant (1993) and Moreno and Osorio (2012). Uses Levant's formulation (Equation 12) with strict Lyapunov function from Moreno and Osorio."
 
-**Example: Implementing algorithm from paper**
-```bash
-git commit -m "feat(controllers): Implement Super-Twisting Algorithm
+**Alex**: Why? Six months later, a developer looks at that code and wonders: "Where did this come from?" The Git history answers immediately. No archaeology required.
 
-Implements STA-SMC based on Levant (1993) and Moreno & Osorio (2012).
-Uses Levant's formulation (Eq. 12) with strict Lyapunov function from
-Moreno & Osorio.
+**Sarah**: Same reason we cite in code comments. **Traceability**. Every line of code has a story. Commit messages tell that story.
 
-References:
-- Levant (1993): Int J Control, 58(6):1247-1263
-- Moreno & Osorio (2012): IEEE TAC, 57(4):1035-1040"
-```
+### README: Teaching Others How to Cite You
 
-**Sarah**: Commit message cites sources! Future developers know where algorithm came from.
+**Alex**: Our README includes a "Citations" section. It tells users: "If you use this code, here's how to cite it."
 
-### README Attribution
+**Sarah**: We provide a BibTeX entry for the **software** itself—author, title, year, GitHub URL. Plus guidance: "For the algorithms, cite Slotine and Li (1991) for Classical SMC, Levant (1993) for STA-SMC, Kennedy and Eberhart (1995) for PSO."
 
-**Our `README.md` includes**:
-```markdown
-## Citations
+**Alex**: Why make it easy? Because if someone uses your code and can't figure out how to cite it, they might **not cite it**. Remove that friction. Give them the exact citation format.
 
-If you use this code in your research, please cite:
-
-**For the software:**
-```bibtex
-@software{degachi2025dipsmc,
-  author = {Degachi, Sadek},
-  title = {DIP-SMC-PSO: Double Inverted Pendulum Sliding Mode Control},
-  year = {2025},
-  url = {https://github.com/theSadeQ/dip-smc-pso}
-}
-```
-
-**For the algorithms:**
-- Classical SMC: Slotine & Li (1991)
-- STA-SMC: Levant (1993), Moreno & Osorio (2012)
-- PSO: Kennedy & Eberhart (1995), Shi & Eberhart (1998)
-```
-
-**Alex**: Makes it easy for others to cite us properly!
+**Sarah**: It's like leaving a tip jar on the counter. Make it obvious. Make it easy. Increase the chances they'll give credit.
 
 ---
 
-## Summary: Attribution Best Practices
+## Summary: Standing on the Shoulders of Giants
 
-**Sarah**: Let's recap the key principles:
+**Sarah**: Let's bring it all back to where we started. **Why do we cite?**
 
-**1. Academic Citations (39 references)**
-- **Foundational SMC**: Utkin (1977), Slotine & Li (1991)
-- **Modern SMC**: Levant (1993), Shtessel et al. (2014)
-- **PSO**: Kennedy & Eberhart (1995), Shi & Eberhart (1998)
-- **Software**: NumPy, SciPy, Matplotlib (yes, cite code!)
+**Alex**: Because we're standing on the shoulders of giants. Every algorithm, every formula, every tool—someone built it before us. Citations are how we say "thank you" and how we trace the genealogy of ideas.
 
-**2. In-Code Attribution**
-```python
-# Cite source in docstring
-# Reference equation numbers in comments
-# Link formulas to papers
-```
+**Sarah**: Our 39 references tell a story:
 
-**3. License Management**
-- MIT license (permissive)
-- `LICENSES.md` documents all 36 dependencies
-- Automated license compatibility checks in CI
+**The Classics** - Utkin (1977), Slotine and Li (1991), Levant (1993). The founding fathers of sliding mode control. We cite them because their ideas are embedded in every line of our code.
 
-**4. Citation Ethics**
-- Always cite: algorithms, formulas, methods, direct quotes
-- Never cite: general knowledge, your own original work
-- Self-citations: <20% of bibliography
+**Modern Research** - Shtessel et al. (2014), Moreno and Osorio (2012), Clerc (2002). They refined the craft, proved stability, optimized parameters. We cite them because they made the theory **practical**.
 
-**5. Reproducibility**
-- BibTeX for all references (39 entries)
-- DOI preferred over URL (permanent links)
-- Git commits cite algorithm sources
-- README includes citation instructions
+**The Tools** - NumPy, SciPy, Matplotlib. The software giants. We cite them because our work is impossible without them.
 
-**Alex**: **Key metrics**:
-- 39 bibliography entries (all DOI-linked)
-- 36 dependency licenses documented
-- 100% algorithm provenance tracked
-- 0 license conflicts (automated checks)
+**Alex**: **How do we cite?**
 
-**Sarah**: Ideas have authors. Algorithms have inventors. Software has maintainers.
+BibTeX manages 39 references automatically. DOIs provide permanent links. Zotero syncs everything to the cloud. Git commits trace algorithm sources. README files teach others how to cite us.
 
-**Alex**: **Give credit where credit is due!**
+**Sarah**: **When do we cite?**
+
+**Always**: algorithms, formulas, methods, software libraries. **Never**: general knowledge, your own original work. **Carefully**: self-citations under 20%.
+
+**Alex**: **Key numbers:**
+- 39 bibliography entries, all DOI-linked
+- 36 dependency licenses documented and automated
+- 100% algorithm provenance tracked in code
+- Zero license conflicts (enforced by CI)
+
+**Sarah**: **The philosophy?** Ideas have authors. Algorithms have inventors. Software has maintainers. **Give credit where credit is due.**
+
+**Alex**: Because someday, someone will cite **you**. And when they do, you'll be grateful they remembered whose shoulders they stood on.
+
+**Sarah**: That's the social contract of science. That's how knowledge grows. That's standing on the shoulders of giants.
 
 ---
 
