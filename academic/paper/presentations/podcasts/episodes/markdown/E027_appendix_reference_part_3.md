@@ -6,15 +6,15 @@
 
 ---
 
-## Opening Hook
+## Opening Hook: The Project Story in Numbers
 
 **Sarah:** "We have comprehensive testing." "The documentation is extensive." "Code quality is high." Claims every research project makes. Rarely measured. Even more rarely proven.
 
-**Alex:** This episode is different. No vague assertions. No hand-waving about quality. Just numbers. Lines of code. Test pass rates. Coverage percentages. Documentation file counts. Benchmark results. Every claim backed by measurable data.
+**Alex:** This episode is different. This is the **reference track**—the episode you cite when you need exact numbers. How many tests? 4,563. How many documentation files? 985. What's the production readiness score? 23.9 out of 100.
 
-**Sarah:** The DIP-SMC-PSO project tracks 47 distinct metrics across five categories: codebase statistics, research output, quality gates, performance benchmarks, and production readiness. These metrics are not cosmetic. They drive decisions. They trigger alerts. They gate releases.
+**Sarah:** But more than that, this episode tells the **project story**. Not just where we are now, but how we got here. October 2024: 2 controllers, 200 tests, minimal docs. November 2025: 7 controllers, 4,563 tests, submission-ready paper. **The growth** is the story.
 
-**Alex:** For listeners evaluating this project for collaboration, citation, or extension - this episode gives you the quantitative evidence to assess maturity. For researchers building your own projects - this episode shows you which metrics matter and how to track them systematically.
+**Alex:** For listeners evaluating this project for collaboration, citation, or extension—this episode gives you the quantitative evidence to assess maturity. For researchers building your own projects—this episode shows you which metrics matter and how they **evolve over time**.
 
 ---
 
@@ -76,6 +76,53 @@ du -sh scripts/
 **Sarah:** Run this manually or automatically?
 
 **Alex:** Automated via git hooks. The pre-commit hook runs count_codebase.sh after every commit and logs results to academic/logs/metrics/codebase_size.log. This creates a time series showing growth over months.
+
+---
+
+## The Growth Story: October 2024 to November 2025
+
+**Sarah:** You mentioned this episode tells the project story. Let's make that concrete. Walk me through the growth timeline.
+
+**Alex:** **October 2024 - The Beginning**:
+- Controllers: 2 (Classical SMC, STA-SMC)
+- Tests: 200
+- Documentation files: 50
+- Lines of code: 8,000
+
+**Sarah:** So we started small. When did the first major growth spurt happen?
+
+**Alex:** **Phase 2 (November-December 2024) - Controller Expansion**:
+- Added: Adaptive SMC, Hybrid Adaptive STA, Swing-up
+- Controllers: 2 → 5 (150% increase)
+- Tests: 200 → 1,200 (6× growth)
+- Lines of code: 8,000 → 28,000 (3.5× growth)
+
+**Sarah:** Phase 3?
+
+**Alex:** **Phase 3 (January-March 2025) - UI/UX & Infrastructure**:
+- Added: Streamlit dashboard, WCAG 2.1 compliance, documentation system
+- Documentation files: 50 → 650 (13× increase!)
+- Tests: 1,200 → 2,800
+- Lines of code: 28,000 → 65,000
+
+**Sarah:** The documentation explosion—that's when we built the 11 navigation systems?
+
+**Alex:** Exactly. And Phase 4?
+
+**Sarah:** **Phase 4 (April-September 2025) - Production Readiness**:
+- Added: Thread safety, memory management, quality audits
+- Tests: 2,800 → 4,200
+- Quality gates: 1/8 passing (production readiness 23.9/100)
+
+**Alex:** And finally, **Phase 5 (October-November 2025) - Research Completion**:
+- Completed: 11 research tasks, 72 hours, submission-ready paper
+- Controllers: 5 → 7 (added PID, experimental MPC)
+- Tests: 4,200 → 4,563 (final count)
+- Documentation: 650 → 985 files (narrative systems, podcasts, thesis)
+
+**Sarah:** So the growth wasn't linear. It came in **waves**. Each phase had a different focus, reflected in different metrics exploding.
+
+**Alex:** Exactly. Phase 2 was controllers (code growth). Phase 3 was docs (file growth). Phase 4 was quality (test growth). Phase 5 was consolidation (paper completion). The **story** is in the pattern.
 
 ---
 
