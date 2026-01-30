@@ -225,6 +225,19 @@ Trade-off: \textbf{Speed} vs. \textbf{Accuracy}
 Different tasks need different balances. Meet the three teammates!
 \end{keypoint}
 
+\begin{center}
+\begin{tikzpicture}[node distance=2.5cm]
+    \node[cloud] (input) {DIP\\System};
+    \node[block, fill=warning!30, right=of input] (simplified) {\textbf{Sprinter}\\Fast\\450 sims/s};
+    \node[process, right=of simplified] (full) {\textbf{Simulator}\\Accurate\\8 sims/s};
+    \node[block, fill=secondary!30, right=of full] (lowrank) {\textbf{Efficient Pro}\\Balanced\\95 sims/s};
+
+    \draw[arrow] (input) -- node[above] {Linear} (simplified);
+    \draw[arrow] (input) -- node[above] {Full NL} (full);
+    \draw[arrow] (input) -- node[above] {Low-Rank} (lowrank);
+\end{tikzpicture}
+\end{center}
+
 \subsection*{Model 1: The Sprinter (Simplified Linear)}
 
 \begin{multicols}{2}
