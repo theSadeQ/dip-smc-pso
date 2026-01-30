@@ -391,6 +391,24 @@ This concludes the DIP-SMC-PSO Professional Toolkit cheatsheet collection. You n
 % CHECKLIST: MAINTENANCE MODE
 % =============================================================================
 \section*{Checklist: Maintenance Mode Operations}
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm, auto]
+    \node[block, fill=primary!30] (issue) {\textbf{Issue}\\New\\request};
+    \node[decision, below=of issue] (type) {\textbf{Type?}\\Category\\check};
+    \node[block, fill=warning!30, below left=1.5cm and 2.5cm of type] (ui) {\textbf{UI}\\Defer\\non-critical};
+    \node[process, below=of type] (research) {\textbf{Research}\\Controllers\\PSO};
+    \node[block, fill=accent!30, below right=1.5cm and 2.5cm of type] (security) {\textbf{Security}\\24h\\patch};
+    \node[block, fill=secondary!30, below=of research] (publish) {\textbf{Publish}\\Research\\paper};
+
+    \draw[arrow] (issue) -- (type);
+    \draw[arrow] (type) -| node[left, near start] {UI} (ui);
+    \draw[arrow] (type) -- node[right] {Research} (research);
+    \draw[arrow] (type) -| node[right, near start] {Critical} (security);
+    \draw[arrow] (research) -- (publish);
+\end{tikzpicture}
+\end{center}
+
 \begin{itemize}
   \item[$\square$] \textbf{Policy}: Review maintenance mode rules (DO vs. DON'T)
   \item[$\square$] \textbf{Time Allocation}: 80-90\% research, 10-20\% maintenance

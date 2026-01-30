@@ -165,6 +165,21 @@ from src.interfaces import SimulationContext
 
 \section*{Design Patterns Used}
 
+\begin{center}
+\begin{tikzpicture}[node distance=2cm, auto]
+    \node[block, fill=primary!30] (need) {\textbf{Need}\\Architecture\\decision};
+    \node[decision, below=of need] (type) {\textbf{Type?}\\What to\\create};
+    \node[process, below left=1.5cm and 2cm of type] (factory) {\textbf{Factory}\\Controller\\creation};
+    \node[process, below=of type] (strategy) {\textbf{Strategy}\\Swappable\\dynamics};
+    \node[process, below right=1.5cm and 2cm of type] (di) {\textbf{DI}\\Testable\\code};
+
+    \draw[arrow] (need) -- (type);
+    \draw[arrow] (type) -| node[left, near start] {Objects} (factory);
+    \draw[arrow] (type) -- node[right] {Behavior} (strategy);
+    \draw[arrow] (type) -| node[right, near start] {Testing} (di);
+\end{tikzpicture}
+\end{center}
+
 \begin{tcolorbox}[colback=accent!10, colframe=accent, title=\faCogs\ Core Design Patterns]
 \textbf{1. Factory Pattern (Controller Creation)}
 \begin{lstlisting}[style=python, numbers=none]

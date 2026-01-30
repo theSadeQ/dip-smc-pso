@@ -301,6 +301,26 @@ tests/
 % CHECKLIST: DIAGRAM EXPLORATION
 % =============================================================================
 \section*{Checklist: Explore Visual Documentation}
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm, auto]
+    \node[block, fill=primary!30] (clone) {\textbf{Clone}\\Repository\\local};
+    \node[process, right=of clone] (project) {\textbf{Project}\\Structure\\SVG};
+    \node[process, right=of project] (control) {\textbf{Control}\\Flow\\trace};
+    \node[process, below=of control] (factory) {\textbf{Factory}\\Pattern\\understand};
+    \node[process, left=of factory] (xref) {\textbf{X-Ref}\\Diagrams\\to code};
+    \node[decision, left=of xref] (tests) {\textbf{Tests?}\\Peers\\exist};
+    \node[block, fill=secondary!30, below=of tests] (nav) {\textbf{Navigate}\\Docs\\hub};
+
+    \draw[arrow] (clone) -- (project);
+    \draw[arrow] (project) -- (control);
+    \draw[arrow] (control) -- (factory);
+    \draw[arrow] (factory) -- (xref);
+    \draw[arrow] (xref) -- (tests);
+    \draw[arrow] (tests) -- node[left] {Yes} (nav);
+\end{tikzpicture}
+\end{center}
+
 \begin{itemize}
   \item[$\square$] \textbf{Clone Repository}: Get local copy of diagrams
   \item[$\square$] \textbf{Project Structure}: Open \texttt{docs/diagrams/project\_structure.svg}

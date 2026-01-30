@@ -569,6 +569,17 @@ Flaky test rate & $<2\%$ & 0.5\% \\
 % CHECKLIST: TESTING PHILOSOPHY
 % =============================================================================
 \section*{Checklist: Testing Philosophy}
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.5cm]
+    \node[block, fill=accent!30] (e2e) {\textbf{E2E}\\Few\\Slow};
+    \node[process, below=of e2e] (integration) {\textbf{Integration}\\Some\\Medium};
+    \node[block, fill=secondary!30, below=of integration] (unit) {\textbf{Unit}\\Many\\Fast};
+
+    \draw[arrow] (unit) -- (integration);
+    \draw[arrow] (integration) -- (e2e);
+\end{tikzpicture}
+\end{center}
 \begin{itemize}
   \item[$\square$] \textbf{Organize}: Create peer test files (test\_*.py for every *.py)
   \item[$\square$] \textbf{Coverage}: Achieve 85\% overall, 95\% critical, 100\% safety-critical

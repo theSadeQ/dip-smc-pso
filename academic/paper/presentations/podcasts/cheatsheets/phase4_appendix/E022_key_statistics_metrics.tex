@@ -479,6 +479,22 @@ cd benchmarks/ && python run_benchmarks.py
 % CHECKLIST: STATISTICS VERIFICATION
 % =============================================================================
 \section*{Checklist: Verify Project Statistics}
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm]
+    \node[block, fill=primary!30] (clone) {\textbf{Clone}\\GitHub\\repo};
+    \node[process, right=of clone] (test) {\textbf{Test}\\4563\\count};
+    \node[process, right=of test] (lines) {\textbf{Lines}\\105K\\code};
+    \node[process, right=of lines] (bench) {\textbf{Bench}\\µs\\timings};
+    \node[block, fill=secondary!30, below=of bench] (verify) {\textbf{Verify}\\All\\metrics};
+
+    \draw[arrow] (clone) -- (test);
+    \draw[arrow] (test) -- (lines);
+    \draw[arrow] (lines) -- (bench);
+    \draw[arrow] (bench) -- (verify);
+\end{tikzpicture}
+\end{center}
+
 \begin{itemize}
   \item[$\square$] \textbf{Clone Repository}: \texttt{git clone https://github.com/theSadeQ/dip-smc-pso}
   \item[$\square$] \textbf{Test Count}: Run \texttt{pytest --co -q} (should show 4,563 tests)

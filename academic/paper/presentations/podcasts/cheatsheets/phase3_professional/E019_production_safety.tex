@@ -595,6 +595,29 @@ class ClassicalSMC:
 % CHECKLIST: PRODUCTION SAFETY
 % =============================================================================
 \section*{Checklist: Production Safety}
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.8cm, auto]
+    \node[block, fill=primary!30] (weakref) {\textbf{Weakref}\\Back-refs\\safe};
+    \node[process, below=of weakref] (cleanup) {\textbf{Cleanup}\\Methods\\explicit};
+    \node[process, below=of cleanup] (history) {\textbf{History}\\Limit\\1000 max};
+    \node[decision, below=of history] (thread) {\textbf{Thread?}\\11/11\\tests};
+    \node[process, below left=1.5cm and 2cm of thread] (memory) {\textbf{Memory}\\Monitor\\tracemalloc};
+    \node[decision, below=of thread] (gates) {\textbf{Gates?}\\7/8\\passing};
+    \node[block, fill=secondary!30, below=of gates] (ready) {\textbf{Ready}\\Production\\deploy};
+    \node[block, fill=warning!30, right=2.5cm of gates] (fail) {\textbf{Block}\\Fix\\issues};
+
+    \draw[arrow] (weakref) -- (cleanup);
+    \draw[arrow] (cleanup) -- (history);
+    \draw[arrow] (history) -- (thread);
+    \draw[arrow] (thread) -| node[left, near start] {Pass} (memory);
+    \draw[arrow] (memory) -- (gates);
+    \draw[arrow] (thread) -- node[right] {Pass} (gates);
+    \draw[arrow] (gates) -- node[right] {8/8} (ready);
+    \draw[arrow] (gates) -- node[above] {<8/8} (fail);
+\end{tikzpicture}
+\end{center}
+
 \begin{itemize}
   \item[$\square$] \textbf{Weakref}: All controllers use weakref for back-references
   \item[$\square$] \textbf{Cleanup}: Implement explicit cleanup() methods

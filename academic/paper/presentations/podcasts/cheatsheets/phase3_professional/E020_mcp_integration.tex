@@ -482,6 +482,24 @@ result = orchestrator.run_workflow("data_analysis", {
 % CHECKLIST: MCP INTEGRATION
 % =============================================================================
 \section*{Checklist: MCP Integration}
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm, auto]
+    \node[block, fill=primary!30] (config) {\textbf{Configure}\\12 servers\\.mcp.json};
+    \node[process, right=of config] (validate) {\textbf{Validate}\\11/12\\operational};
+    \node[decision, right=of validate] (ready) {\textbf{Ready?}\\Env vars\\set};
+    \node[process, below=of ready] (chain) {\textbf{Chain}\\3-5 MCPs\\workflows};
+    \node[process, left=of chain] (optimize) {\textbf{Optimize}\\Parallel\\execution};
+    \node[block, fill=secondary!30, left=of optimize] (monitor) {\textbf{Monitor}\\Usage\\stats};
+
+    \draw[arrow] (config) -- (validate);
+    \draw[arrow] (validate) -- (ready);
+    \draw[arrow] (ready) -- node[right] {Yes} (chain);
+    \draw[arrow] (chain) -- (optimize);
+    \draw[arrow] (optimize) -- (monitor);
+\end{tikzpicture}
+\end{center}
+
 \begin{itemize}
   \item[$\square$] \textbf{Configure}: Set up .mcp.json with 12 servers
   \item[$\square$] \textbf{Validate}: Run \texttt{validate\_servers.py} (11/12 operational)

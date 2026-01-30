@@ -365,6 +365,27 @@ controller = create_controller(
 % CHECKLIST: APPLY LESSONS
 % =============================================================================
 \section*{Checklist: Apply Lessons to Your Project}
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.8cm, auto]
+    \node[block, fill=primary!30] (config) {\textbf{Config}\\Pydantic\\validate};
+    \node[process, right=of config] (profile) {\textbf{Profile}\\Measure\\bottlenecks};
+    \node[process, right=of profile] (memory) {\textbf{Memory}\\Weakref\\circular};
+    \node[process, below=of memory] (checkpoint) {\textbf{Checkpoint}\\5-10 min\\state};
+    \node[decision, left=of checkpoint] (gates) {\textbf{Gates?}\\7/8\\passing};
+    \node[process, left=of gates] (docs) {\textbf{Docs}\\<5 AI\\patterns};
+    \node[block, fill=secondary!30, below=of gates] (apply) {\textbf{Apply}\\Lessons\\learned};
+
+    \draw[arrow] (config) -- (profile);
+    \draw[arrow] (profile) -- (memory);
+    \draw[arrow] (memory) -- (checkpoint);
+    \draw[arrow] (checkpoint) -- (gates);
+    \draw[arrow] (gates) -- (docs);
+    \draw[arrow] (docs) |- (apply);
+    \draw[arrow] (gates) -- node[right] {Pass} (apply);
+\end{tikzpicture}
+\end{center}
+
 \begin{itemize}
   \item[$\square$] \textbf{Config Validation}: Use Pydantic or similar (fail fast at load time)
   \item[$\square$] \textbf{Profile Before Optimizing}: Measure bottlenecks, don't guess

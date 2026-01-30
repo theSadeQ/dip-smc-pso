@@ -428,6 +428,19 @@ User time-to-answer & 8.2 min & <3.0 min \\
 % CHECKLIST: DOCUMENTATION QUALITY
 % =============================================================================
 \section*{Checklist: Documentation Quality Standards}
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm]
+    \node[block, fill=primary!30] (scan) {\textbf{Scan}\\detect\_ai\\<5 patterns};
+    \node[process, right=of scan] (verify) {\textbf{Verify}\\Evidence\\benchmarks};
+    \node[process, right=of verify] (measure) {\textbf{Measure}\\Density\\5+ facts/para};
+    \node[block, fill=secondary!30, right=of measure] (approve) {\textbf{Approve}\\Quality\\gates};
+
+    \draw[arrow] (scan) -- (verify);
+    \draw[arrow] (verify) -- (measure);
+    \draw[arrow] (measure) -- (approve);
+\end{tikzpicture}
+\end{center}
 \begin{itemize}
   \item[$\square$] \textbf{Scan}: Run \texttt{detect\_ai\_patterns.py} on all docs (<5 patterns per file)
   \item[$\square$] \textbf{Evidence}: Verify every claim has benchmark/citation/test coverage
