@@ -32,11 +32,11 @@ Each figure passed 15-item quality checklist, survived peer review, tells comple
 \subsection*{Three Challenges}
 
 \begin{warning}
-\begin{enumerate}
-    \item \textbf{Choosing representation}: Time series vs phase portraits vs frequency domain vs distributions
-    \item \textbf{Avoiding misleading scales}: Y-axis at zero? Log vs linear?
-    \item \textbf{Managing complexity}: 6 states + control + metrics + disturbances = overwhelming
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} \textbf{Choosing representation}: Time series vs phase portraits vs frequency domain vs distributions
+    \item \textbf{2.} \textbf{Avoiding misleading scales}: Y-axis at zero? Log vs linear?
+    \item \textbf{3.} \textbf{Managing complexity}: 6 states + control + metrics + disturbances = overwhelming
+\end{itemize}
 
 \textbf{Visualization is editorial} - choices change interpretation!
 \end{warning}
@@ -44,23 +44,23 @@ Each figure passed 15-item quality checklist, survived peer review, tells comple
 \section*{Four Primary Performance Metrics}
 
 \begin{tcolorbox}[colback=primary!5, colframe=primary, title=\faChartBar\ Controller Performance Metrics]
-\begin{enumerate}
-    \item \textbf{Settling Time ($t_{\text{settle}}$)}: How long until equilibrium?
+\begin{itemize}
+    \item \textbf{1.} \textbf{Settling Time ($t_{\text{settle}}$)}: How long until equilibrium?
 
     Min time where $|\theta_1| < \epsilon$ AND $|\theta_2| < \epsilon$ for all future $t$
 
-    \item \textbf{Overshoot}: How far past equilibrium before settling?
+    \item \textbf{2.} \textbf{Overshoot}: How far past equilibrium before settling?
 
     $\text{Overshoot} = \max(\theta) - \theta_{\text{desired}}$
 
-    \item \textbf{Energy Consumption}: Total control effort
+    \item \textbf{3.} \textbf{Energy Consumption}: Total control effort
 
     $E = \int_0^T u^2 \, dt$ (lower is better)
 
-    \item \textbf{Chattering Frequency}: High-frequency oscillations (via FFT)
+    \item \textbf{4.} \textbf{Chattering Frequency}: High-frequency oscillations (via FFT)
 
     Sum of energy above 10 Hz cutoff (screech vs hum)
-\end{enumerate}
+\end{itemize}
 \end{tcolorbox}
 
 \subsection*{Why These Four?}
@@ -151,12 +151,12 @@ You ran 100 real experiments (settling times). But maybe you got lucky?
 \textbf{Bootstrap asks:} "What if you ran the experiment again tomorrow?"
 
 \textbf{Method:}
-\begin{enumerate}
-    \item Take your 100 results (names in a hat)
-    \item Draw 100 names randomly WITH REPLACEMENT (same name can appear multiple times)
-    \item Create "virtual" set of 100 results
-    \item Repeat 10,000 times
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Take your 100 results (names in a hat)
+    \item \textbf{2.} Draw 100 names randomly WITH REPLACEMENT (same name can appear multiple times)
+    \item \textbf{3.} Create "virtual" set of 100 results
+    \item \textbf{4.} Repeat 10,000 times
+\end{itemize}
 
 \textbf{Result:} 10,000 "what-if" experiments simulated using only today's data!
 \end{example}
@@ -427,28 +427,28 @@ Each figure:
 
 \begin{summary}
 \textbf{Technical Accuracy:}
-\begin{enumerate}
-    \item Axes labeled with units
-    \item Legends clear and complete
-    \item Error bars/confidence intervals shown
-    \item Statistical significance indicated
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Axes labeled with units
+    \item \textbf{2.} Legends clear and complete
+    \item \textbf{3.} Error bars/confidence intervals shown
+    \item \textbf{4.} Statistical significance indicated
+\end{itemize}
 
 \textbf{Visual Design:}
-\begin{enumerate}
-    \item Colorblind-friendly palette
-    \item High-resolution (300 DPI for print)
-    \item Consistent fonts/sizes
-    \item No clutter or overlapping text
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Colorblind-friendly palette
+    \item \textbf{2.} High-resolution (300 DPI for print)
+    \item \textbf{3.} Consistent fonts/sizes
+    \item \textbf{4.} No clutter or overlapping text
+\end{itemize}
 
 \textbf{Storytelling:}
-\begin{enumerate}
-    \item Caption explains key insight
-    \item Figure stands alone (no external context needed)
-    \item Comparison is fair (same scales, conditions)
-    \item Conclusion is obvious from visual inspection
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Caption explains key insight
+    \item \textbf{2.} Figure stands alone (no external context needed)
+    \item \textbf{3.} Comparison is fair (same scales, conditions)
+    \item \textbf{4.} Conclusion is obvious from visual inspection
+\end{itemize}
 \end{summary}
 
 \subsection*{Quick Reference: Visualization Workflow}

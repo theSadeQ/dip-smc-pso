@@ -59,6 +59,19 @@ Pattern: "m-of-k" - At most m misses in any k consecutive cycles
 
 \subsection*{Latency Monitoring Workflow}
 
+\begin{center}
+\begin{tikzpicture}[node distance=2.5cm]
+    \node[block, fill=primary!30] (controller) {\textbf{Controller}\\Compute\\control};
+    \node[process, right=of controller] (monitor) {\textbf{Monitor}\\Track\\latency};
+    \node[process, right=of monitor] (metrics) {\textbf{Metrics}\\Collect\\stats};
+    \node[block, fill=secondary!30, right=of metrics] (alert) {\textbf{Alert}\\Check\\deadlines};
+
+    \draw[arrow] (controller) -- node[above] {Start/End} (monitor);
+    \draw[arrow] (monitor) -- node[above] {Timing} (metrics);
+    \draw[arrow] (metrics) -- node[above] {Violations} (alert);
+\end{tikzpicture}
+\end{center}
+
 \begin{tcolorbox}[colback=primary!5, colframe=primary, title=\faClock\ Four-Step Monitoring]
 \textbf{Step 1: Mark Cycle Start}
 \begin{lstlisting}[style=python, numbers=none]
@@ -121,12 +134,12 @@ If missed: log timestamp, duration, controller state for debugging
 \textbf{Threshold:} m = 2 misses
 
 \textbf{Algorithm:}
-\begin{enumerate}
-    \item Maintain circular buffer of last k outcomes (PASS/MISS)
-    \item On each cycle: Add new outcome, drop oldest
-    \item Count misses in current window
-    \item If misses > m → Constraint violated!
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Maintain circular buffer of last k outcomes (PASS/MISS)
+    \item \textbf{2.} On each cycle: Add new outcome, drop oldest
+    \item \textbf{3.} Count misses in current window
+    \item \textbf{4.} If misses > m → Constraint violated!
+\end{itemize}
 
 \textbf{Example Sequence:}
 \begin{verbatim}
@@ -185,12 +198,12 @@ Cycles: [P P M P P P P M P M]  → 3 misses in 10 → VIOLATION!
 
 \begin{keypoint}
 \textbf{Criteria:} System is production-ready if ALL tests pass:
-\begin{enumerate}
-    \item Thread safety: 11/11 tests passing
-    \item Memory: Zero growth over 10,000 simulations
-    \item Timing: < 5\% deadline miss rate
-    \item Weakly-hard: Zero (2, 10) violations in 24-hour test
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Thread safety: 11/11 tests passing
+    \item \textbf{2.} Memory: Zero growth over 10,000 simulations
+    \item \textbf{3.} Timing: < 5\% deadline miss rate
+    \item \textbf{4.} Weakly-hard: Zero (2, 10) violations in 24-hour test
+\end{itemize}
 
 \textbf{Status:} HIL + Monitoring infrastructure meets ALL criteria [OK]
 \end{keypoint}

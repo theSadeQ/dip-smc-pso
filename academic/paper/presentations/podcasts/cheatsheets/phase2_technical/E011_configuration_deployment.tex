@@ -284,10 +284,10 @@ Simplified (5 µs) vs Full nonlinear (50 µs)
 \textbf{Analogy:} Pydantic is a nightclub bouncer checking IDs at the door
 
 \textbf{Checks:}
-\begin{enumerate}
-    \item Data types correct? (Is cart\_mass a number or "heavy"?)
-    \item Values in acceptable ranges? (Mass positive? Length < 5 m?)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Data types correct? (Is cart\_mass a number or "heavy"?)
+    \item \textbf{2.} Values in acceptable ranges? (Mass positive? Length < 5 m?)
+\end{itemize}
 
 \textbf{Pass:} Simulation starts
 
@@ -319,6 +319,23 @@ Simplified (5 µs) vs Full nonlinear (50 µs)
 \newpage
 
 \section*{Configuration Loading Process}
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.8cm, auto]
+    \node[block, fill=primary!30] (load) {\textbf{Load}\\config.yaml};
+    \node[process, below=of load] (pydantic) {\textbf{Pydantic}\\Validate types};
+    \node[process, below=of pydantic] (physics) {\textbf{Physics}\\Check bounds};
+    \node[decision, below=of physics] (valid) {\textbf{Valid?}\\All pass};
+    \node[block, fill=secondary!30, below=of valid] (pass) {\textbf{Success}\\Immutable config};
+    \node[block, fill=warning!30, right=2.5cm of valid] (fail) {\textbf{Error}\\Report all issues};
+
+    \draw[arrow] (load) -- (pydantic);
+    \draw[arrow] (pydantic) -- (physics);
+    \draw[arrow] (physics) -- (valid);
+    \draw[arrow] (valid) -- node[right] {Yes} (pass);
+    \draw[arrow] (valid) -- node[above] {No} (fail);
+\end{tikzpicture}
+\end{center}
 
 \begin{tcolorbox}[colback=primary!5, colframe=primary, title=\faDownload\ Five-Step Process]
 \textbf{Step 1:} Read \texttt{config.yaml} from disk (PyYAML → nested dictionary)

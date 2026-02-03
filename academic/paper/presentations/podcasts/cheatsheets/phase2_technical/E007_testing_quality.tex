@@ -32,11 +32,11 @@
 \subsection*{Three Hard Questions}
 
 \begin{warning}
-\begin{enumerate}
-    \item \textbf{What to test?} One input or all possible inputs? (All is impossible $\Rightarrow$ sample strategically)
-    \item \textbf{When to stop?} Can always write more tests - what's "good enough"?
-    \item \textbf{What to validate?} Implementation details (break on refactor) vs behavior (stable contract)?
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} \textbf{What to test?} One input or all possible inputs? (All is impossible $\Rightarrow$ sample strategically)
+    \item \textbf{2.} \textbf{When to stop?} Can always write more tests - what's "good enough"?
+    \item \textbf{3.} \textbf{What to validate?} Implementation details (break on refactor) vs behavior (stable contract)?
+\end{itemize}
 
 \textbf{Testing is strategic choice-making under time constraints}
 \end{warning}
@@ -157,11 +157,11 @@ def test_factory_config():
 
 \begin{keypoint}
 \textbf{Three-tier coverage requirements:}
-\begin{enumerate}
-    \item \textbf{Overall project:} 85\% minimum (aggregate across all files)
-    \item \textbf{Critical modules:} 95\% minimum (controllers, dynamics, PSO)
-    \item \textbf{Safety-critical:} 100\% required (saturation, validation, monitoring)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} \textbf{Overall project:} 85\% minimum (aggregate across all files)
+    \item \textbf{2.} \textbf{Critical modules:} 95\% minimum (controllers, dynamics, PSO)
+    \item \textbf{3.} \textbf{Safety-critical:} 100\% required (saturation, validation, monitoring)
+\end{itemize}
 \end{keypoint}
 
 \subsection*{Why Different Standards?}
@@ -232,12 +232,12 @@ Reproducibility is not optional in research software.
 
 \begin{example}
 \textbf{Pull Request Rules:}
-\begin{enumerate}
-    \item Add 100 lines to critical module
-    \item Must add tests to maintain 95\%+ coverage
-    \item If coverage drops below 95\% $\Rightarrow$ \textbf{Build FAILS}
-    \item Cannot merge until tests added
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Add 100 lines to critical module
+    \item \textbf{2.} Must add tests to maintain 95\%+ coverage
+    \item \textbf{3.} If coverage drops below 95\% $\Rightarrow$ \textbf{Build FAILS}
+    \item \textbf{4.} Cannot merge until tests added
+\end{itemize}
 
 \textbf{This prevents "I'll add tests later" syndrome!}
 \end{example}
@@ -398,21 +398,21 @@ Browser (22) & 2 seconds & Parallel with pytest-xdist \\
 
 \begin{tcolorbox}[colback=background, colframe=codeblock, title=\faCheckSquare\ 8 Quality Gates (5/8 Pass)]
 \textbf{Gates We PASS (Research-Ready):}
-\begin{enumerate}
-    \item Zero critical bugs (all P0 issues resolved)
-    \item 100\% test pass rate (4,563/4,563 tests)
-    \item Memory validated (10,000 sims, zero growth)
-    \item Thread-safe (11/11 parallel PSO tests pass)
-    \item Zero high-priority issues
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Zero critical bugs (all P0 issues resolved)
+    \item \textbf{2.} 100\% test pass rate (4,563/4,563 tests)
+    \item \textbf{3.} Memory validated (10,000 sims, zero growth)
+    \item \textbf{4.} Thread-safe (11/11 parallel PSO tests pass)
+    \item \textbf{5.} Zero high-priority issues
+\end{itemize}
 
 \textbf{Gates We FAIL (Production Blockers):}
-\begin{enumerate}
+\begin{itemize}
     \setcounter{enumi}{5}
-    \item Coverage measurement broken (reports 2.86\%, real is 89\%)
-    \item No production CI/CD (dev pipelines only)
-    \item No hardware validation (never run on actual robot/PLC)
-\end{enumerate}
+    \item \textbf{1.} Coverage measurement broken (reports 2.86\%, real is 89\%)
+    \item \textbf{2.} No production CI/CD (dev pipelines only)
+    \item \textbf{3.} No hardware validation (never run on actual robot/PLC)
+\end{itemize}
 \end{tcolorbox}
 
 \begin{keypoint}

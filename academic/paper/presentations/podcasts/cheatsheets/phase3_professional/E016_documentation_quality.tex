@@ -185,11 +185,11 @@ jobs:
 \section{Migration Strategy}
 
 \subsection{Phase 1: Baseline Audit (Week 1)}
-\begin{enumerate}
-  \item Scan all existing docs: \texttt{python scripts/docs/detect\_ai\_patterns.py --dir docs/}
-  \item Categorize files by severity: LOW (<5), MEDIUM (5-10), HIGH (>10)
-  \item Prioritize: Fix HIGH files first, MEDIUM next, LOW last
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} Scan all existing docs: \texttt{python scripts/docs/detect\_ai\_patterns.py --dir docs/}
+  \item \textbf{2.} Categorize files by severity: LOW (<5), MEDIUM (5-10), HIGH (>10)
+  \item \textbf{3.} Prioritize: Fix HIGH files first, MEDIUM next, LOW last
+\end{itemize}
 
 \subsection{Phase 2: Automated Fixes (Week 2-3)}
 \begin{itemize}
@@ -275,12 +275,12 @@ PSO tuner optimizes 6 SMC gains ($\lambda_1$-$\lambda_2$, $\phi_1$-$\phi_2$, $k_
 \section{Tooling Ecosystem}
 
 \subsection{Core Scripts}
-\begin{enumerate}
-  \item \texttt{scripts/docs/detect\_ai\_patterns.py} - Pattern detection (50+ patterns)
-  \item \texttt{scripts/docs/validate\_links.py} - Cross-reference integrity
-  \item \texttt{scripts/docs/check\_evidence.py} - Verify claims have citations/benchmarks
-  \item \texttt{scripts/docs/measure\_density.py} - Calculate facts-per-paragraph ratio
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \texttt{scripts/docs/detect\_ai\_patterns.py} - Pattern detection (50+ patterns)
+  \item \textbf{2.} \texttt{scripts/docs/validate\_links.py} - Cross-reference integrity
+  \item \textbf{3.} \texttt{scripts/docs/check\_evidence.py} - Verify claims have citations/benchmarks
+  \item \textbf{4.} \texttt{scripts/docs/measure\_density.py} - Calculate facts-per-paragraph ratio
+\end{itemize}
 
 \subsection{Integration Points}
 \begin{itemize}

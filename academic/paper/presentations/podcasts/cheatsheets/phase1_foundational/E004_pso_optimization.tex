@@ -44,11 +44,11 @@ Nature-inspired algorithm that finds near-optimal solutions in \textbf{minutes},
 \textbf{Scenario:} Flock of birds searching for food in a huge field
 
 \textbf{Each bird knows:}
-\begin{enumerate}
-    \item Best spot THEY found (personal memory)
-    \item Best spot ANYONE found (social/global info)
-    \item Current flight direction (momentum)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Best spot THEY found (personal memory)
+    \item \textbf{2.} Best spot ANYONE found (social/global info)
+    \item \textbf{3.} Current flight direction (momentum)
+\end{itemize}
 
 \columnbreak
 
@@ -200,11 +200,11 @@ Just like physics: if at $x$ moving with velocity $v$, next step you're at $x + 
 \end{itemize}
 
 \textbf{Three Forces:}
-\begin{enumerate}
-    \item \textbf{Inertia:} Small push RIGHT ($+0.35$) - 70\% of current momentum
-    \item \textbf{Cognitive:} Moderate pull LEFT (toward 14.8) - random factor 0.42
-    \item \textbf{Social:} STRONG pull LEFT (toward 14.5) - random factor 0.78 (nearly max!)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} \textbf{Inertia:} Small push RIGHT ($+0.35$) - 70\% of current momentum
+    \item \textbf{2.} \textbf{Cognitive:} Moderate pull LEFT (toward 14.8) - random factor 0.42
+    \item \textbf{3.} \textbf{Social:} STRONG pull LEFT (toward 14.5) - random factor 0.78 (nearly max!)
+\end{itemize}
 
 \textbf{Who Wins?} Peer pressure dominates! Combined leftward forces (cognitive + social) overpower rightward momentum.
 
@@ -239,12 +239,12 @@ Just like physics: if at $x$ moving with velocity $v$, next step you're at $x + 
 
 \begin{keypoint}
 \textbf{Four objectives to balance:}
-\begin{enumerate}
-    \item \textbf{Accuracy}: Keep angles at zero (tracking grade)
-    \item \textbf{Efficiency}: Minimize force/energy (energy grade)
-    \item \textbf{Smoothness}: Avoid chattering (smoothness grade)
-    \item \textbf{Stability}: Don't blow up! (Pass/Fail test)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} \textbf{Accuracy}: Keep angles at zero (tracking grade)
+    \item \textbf{2.} \textbf{Efficiency}: Minimize force/energy (energy grade)
+    \item \textbf{3.} \textbf{Smoothness}: Avoid chattering (smoothness grade)
+    \item \textbf{4.} \textbf{Stability}: Don't blow up! (Pass/Fail test)
+\end{itemize}
 \end{keypoint}
 
 \subsection*{The Report Card Formula}
@@ -302,12 +302,12 @@ J_{\text{control}} = \sum_{i=1}^{N} u_i^2 \Delta t
 \end{equation*}
 
 \textbf{Why minimize?}
-\begin{enumerate}
-    \item Hardware limits (motors have max torque)
-    \item Energy efficiency (battery life)
-    \item Safety (aggressive control damages equipment)
-    \item Overfitting prevention
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Hardware limits (motors have max torque)
+    \item \textbf{2.} Energy efficiency (battery life)
+    \item \textbf{3.} Safety (aggressive control damages equipment)
+    \item \textbf{4.} Overfitting prevention
+\end{itemize}
 
 \columnbreak
 
@@ -496,11 +496,11 @@ Hybrid Adaptive STA & Cost = 15.3 & Cost = 12.1 (\textbf{21.4\% improvement}) \\
 
 \begin{summary}
 \textbf{Performance:}
-\begin{enumerate}
-    \item Use vectorized simulation for particle evaluation (10-100x speedup)
-    \item Parallelize across CPU cores (near-linear scaling)
-    \item Use Simplified model for PSO, validate with Full model
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Use vectorized simulation for particle evaluation (10-100x speedup)
+    \item \textbf{2.} Parallelize across CPU cores (near-linear scaling)
+    \item \textbf{3.} Use Simplified model for PSO, validate with Full model
+\end{itemize}
 
 \textbf{Convergence:}
 \begin{itemize}

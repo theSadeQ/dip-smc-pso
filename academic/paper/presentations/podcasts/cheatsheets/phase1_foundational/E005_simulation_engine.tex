@@ -135,14 +135,14 @@ The simulation engine is THE bottleneck for research productivity.
 \subsection*{Six Steps Per Time Step}
 
 \begin{tcolorbox}[colback=primary!5, colframe=primary, title=\faCode\ Main Loop Workflow]
-\begin{enumerate}
-    \item \textbf{Compute control}: $u = \text{controller.compute}(\text{state}, \text{last\_u}, \text{history})$
-    \item \textbf{Actuator saturation}: $u = \text{clip}(u, -50, +50)$ (real motors have limits!)
-    \item \textbf{Compute dynamics}: $\dot{x} = \text{plant.compute\_dynamics}(\text{state}, u)$
-    \item \textbf{Integration}: $\text{state}_{\text{new}} = \text{integrator.step}(\text{state}, \dot{x}, dt)$
-    \item \textbf{Instability check}: If $|\theta_1| > 45°$ or $|\theta_2| > 45°$ $\Rightarrow$ early exit
-    \item \textbf{Logging}: Store $t$, state, $u$ in pre-allocated arrays
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} \textbf{Compute control}: $u = \text{controller.compute}(\text{state}, \text{last\_u}, \text{history})$
+    \item \textbf{2.} \textbf{Actuator saturation}: $u = \text{clip}(u, -50, +50)$ (real motors have limits!)
+    \item \textbf{3.} \textbf{Compute dynamics}: $\dot{x} = \text{plant.compute\_dynamics}(\text{state}, u)$
+    \item \textbf{4.} \textbf{Integration}: $\text{state}_{\text{new}} = \text{integrator.step}(\text{state}, \dot{x}, dt)$
+    \item \textbf{5.} \textbf{Instability check}: If $|\theta_1| > 45°$ or $|\theta_2| > 45°$ $\Rightarrow$ early exit
+    \item \textbf{6.} \textbf{Logging}: Store $t$, state, $u$ in pre-allocated arrays
+\end{itemize}
 \end{tcolorbox}
 
 \subsection*{Performance Trick: Pre-allocation vs Append}
@@ -384,20 +384,20 @@ def compute_dynamics(state, u):
 
 \begin{tcolorbox}[colback=accent!10, colframe=accent, title=\faCode\ JIT Compilation Process]
 \textbf{First call (compilation overhead):}
-\begin{enumerate}
-    \item Analyze Python bytecode
-    \item Infer types from input arguments
-    \item Generate LLVM intermediate representation
-    \item Compile to machine code (x86/ARM)
-    \item Cache compiled function
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Analyze Python bytecode
+    \item \textbf{2.} Infer types from input arguments
+    \item \textbf{3.} Generate LLVM intermediate representation
+    \item \textbf{4.} Compile to machine code (x86/ARM)
+    \item \textbf{5.} Cache compiled function
+\end{itemize}
 Time: ~500ms (one-time cost)
 
 \textbf{Subsequent calls (blazing fast):}
-\begin{enumerate}
-    \item Load cached machine code
-    \item Execute directly on CPU (no Python interpreter!)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Load cached machine code
+    \item \textbf{2.} Execute directly on CPU (no Python interpreter!)
+\end{itemize}
 Time: ~2ms (69x faster than pure Python)
 \end{tcolorbox}
 

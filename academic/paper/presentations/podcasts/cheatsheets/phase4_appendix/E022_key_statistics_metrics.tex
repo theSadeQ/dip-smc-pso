@@ -155,11 +155,11 @@ Hybrid Adaptive STA & 62 & 10,000 $\mu$s & 161x & 0.62\% \\
 \textbf{Real-time Deadline}: 10ms (10,000 $\mu$s) for 100 Hz control loop
 
 \subsection{Why Performance Margins Matter}
-\begin{enumerate}
-  \item \textbf{Jitter Tolerance}: Controllers using <1\% budget never miss deadlines (vs. 99\% usage with occasional misses)
-  \item \textbf{Power Efficiency}: Finish computation quickly, sleep for remainder of cycle
-  \item \textbf{Scalability}: Computational headroom for future features (sensor fusion, state estimation)
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Jitter Tolerance}: Controllers using <1\% budget never miss deadlines (vs. 99\% usage with occasional misses)
+  \item \textbf{2.} \textbf{Power Efficiency}: Finish computation quickly, sleep for remainder of cycle
+  \item \textbf{3.} \textbf{Scalability}: Computational headroom for future features (sensor fusion, state estimation)
+\end{itemize}
 
 \subsection{Marathon Analogy}
 If 10ms deadline = marathon, controllers finish in first 100 meters, then wait at finish line.
@@ -276,12 +276,12 @@ Single-threaded & 8 minutes & 1.0x \\
 \end{itemize}
 
 \subsection{Memory Management Mechanisms}
-\begin{enumerate}
-  \item \textbf{Bounded Deques}: History buffers with max length (old entries auto-discarded)
-  \item \textbf{Explicit Cleanup}: Every controller has cleanup() method
-  \item \textbf{Periodic GC}: Garbage collection at defined intervals
-  \item \textbf{Weakref Patterns}: Prevent circular references (Episode 17)
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Bounded Deques}: History buffers with max length (old entries auto-discarded)
+  \item \textbf{2.} \textbf{Explicit Cleanup}: Every controller has cleanup() method
+  \item \textbf{3.} \textbf{Periodic GC}: Garbage collection at defined intervals
+  \item \textbf{4.} \textbf{Weakref Patterns}: Prevent circular references (Episode 17)
+\end{itemize}
 
 \subsection{Per-Controller Memory Usage}
 \begin{center}
@@ -312,11 +312,11 @@ Hybrid Adaptive STA & 118 & 0.0 \\
 \end{itemize}
 
 \subsection{Test Scenarios}
-\begin{enumerate}
-  \item Concurrent controller instantiation (multiple threads calling factory)
-  \item Parallel execution of independent simulations
-  \item Shared configuration access from multiple threads
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} Concurrent controller instantiation (multiple threads calling factory)
+  \item \textbf{2.} Parallel execution of independent simulations
+  \item \textbf{3.} Shared configuration access from multiple threads
+\end{itemize}
 
 \subsection{Reproducibility}
 \begin{itemize}

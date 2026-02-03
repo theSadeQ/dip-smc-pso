@@ -450,11 +450,11 @@ v2.1 & 71 pages & \textbf{SUBMISSION-READY}: 37 typos fixed, 18 unclear sentence
 
 \begin{keypoint}
 \textbf{Selection Criteria:}
-\begin{enumerate}
-    \item Does it support a claim in the text?
-    \item Does it add new information (not just repeat table)?
-    \item Does it meet quality standards? (Vector format, 300 DPI, 10-12pt fonts, colorblind-safe)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Does it support a claim in the text?
+    \item \textbf{2.} Does it add new information (not just repeat table)?
+    \item \textbf{3.} Does it meet quality standards? (Vector format, 300 DPI, 10-12pt fonts, colorblind-safe)
+\end{itemize}
 \end{keypoint}
 
 \textbf{Figure List:}
@@ -462,43 +462,58 @@ v2.1 & 71 pages & \textbf{SUBMISSION-READY}: 37 typos fixed, 18 unclear sentence
 \begin{multicols}{2}
 
 \textbf{Architecture \& Theory:}
-\begin{enumerate}
-    \item Architecture block diagram
-    \item Boundary layer illustration
-    \item STA phase portrait
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Architecture block diagram
+    \item \textbf{2.} Boundary layer illustration
+    \item \textbf{3.} STA phase portrait
+\end{itemize}
 
 \textbf{Performance Metrics:}
-\begin{enumerate}
+\begin{itemize}
     \setcounter{enumi}{3}
-    \item PSO convergence
-    \item Settling time comparison
-    \item Overshoot comparison
-    \item Energy consumption
-    \item Chattering frequency
-\end{enumerate}
+    \item \textbf{1.} PSO convergence
+    \item \textbf{2.} Settling time comparison
+    \item \textbf{3.} Overshoot comparison
+    \item \textbf{4.} Energy consumption
+    \item \textbf{5.} Chattering frequency
+\end{itemize}
 
 \columnbreak
 
 \textbf{Robustness:}
-\begin{enumerate}
+\begin{itemize}
     \setcounter{enumi}{8}
-    \item Disturbance rejection time series
-    \item Model uncertainty degradation
-    \item Lyapunov stability regions
-\end{enumerate}
+    \item \textbf{1.} Disturbance rejection time series
+    \item \textbf{2.} Model uncertainty degradation
+    \item \textbf{3.} Lyapunov stability regions
+\end{itemize}
 
 \textbf{Statistical Validation:}
-\begin{enumerate}
+\begin{itemize}
     \setcounter{enumi}{11}
-    \item Monte Carlo histograms
-    \item Controller ranking heatmap
-    \item Pareto frontier
-\end{enumerate}
+    \item \textbf{1.} Monte Carlo histograms
+    \item \textbf{2.} Controller ranking heatmap
+    \item \textbf{3.} Pareto frontier
+\end{itemize}
 
 \end{multicols}
 
 \section*{Automation Workflow: Data to Publication in 3 Minutes}
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm]
+    \node[block, fill=primary!30] (data) {\textbf{Data}\\HDF5\\105 MB};
+    \node[process, right=of data] (metrics) {\textbf{Metrics}\\CSV\\45s};
+    \node[process, right=of metrics] (stats) {\textbf{Statistics}\\JSON\\CI/p-val};
+    \node[process, right=of stats] (figures) {\textbf{Figures}\\14 PDFs\\60s};
+    \node[block, fill=secondary!30, right=of figures] (paper) {\textbf{Paper}\\LaTeX\\8.2 MB};
+
+    \draw[arrow] (data) -- (metrics);
+    \draw[arrow] (metrics) -- (stats);
+    \draw[arrow] (stats) -- (figures);
+    \draw[arrow] (figures) -- (paper);
+\end{tikzpicture}
+\end{center}
 
 \begin{tcolorbox}[colback=accent!10, colframe=accent, title=\faCogs\ Seven-Stage Pipeline]
 \textbf{Stage 1: Data Collection}
@@ -694,14 +709,14 @@ Lists exact commands to regenerate every figure from data
 
 \textbf{Systematic Search Process:}
 
-\begin{enumerate}
-    \item Google Scholar: "sliding mode control double inverted pendulum" (2,400 results)
-    \item Filter by citations: Sort by most cited, read top 10 (foundational papers)
-    \item Follow citation chains: If Paper A cites B and B looks relevant, read B
-    \item Check recent work: Filter last 5 years, find state-of-the-art
-    \item Journal alignment: Search target journal (IEEE TCST) for similar papers
-    \item Result: Read 120 papers → Select 39 gold nuggets
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Google Scholar: "sliding mode control double inverted pendulum" (2,400 results)
+    \item \textbf{2.} Filter by citations: Sort by most cited, read top 10 (foundational papers)
+    \item \textbf{3.} Follow citation chains: If Paper A cites B and B looks relevant, read B
+    \item \textbf{4.} Check recent work: Filter last 5 years, find state-of-the-art
+    \item \textbf{5.} Journal alignment: Search target journal (IEEE TCST) for similar papers
+    \item \textbf{6.} Result: Read 120 papers → Select 39 gold nuggets
+\end{itemize}
 
 \textbf{Citation Management:} BibTeX file (\texttt{references.bib}) with auto-generated bibliography
 

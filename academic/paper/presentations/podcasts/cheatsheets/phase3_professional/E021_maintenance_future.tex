@@ -172,30 +172,30 @@ Long-Term (LT-4, LT-6, LT-7) & 3/3 & 100\% \\
 \section{Lessons Learned}
 
 \subsection{Technical Lessons}
-\begin{enumerate}
-  \item \textbf{Pydantic YAML Validation}: Caught 18 config errors pre-runtime
-  \item \textbf{Numba Vectorization}: 20x speedup for batch simulations
-  \item \textbf{Weakref Patterns}: Prevented memory leaks in 100K+ step simulations
-  \item \textbf{Multi-Agent Orchestration}: Survived 3 token limit events via checkpoints
-  \item \textbf{MCP Auto-Trigger}: Reduced manual tool selection by 70\%
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Pydantic YAML Validation}: Caught 18 config errors pre-runtime
+  \item \textbf{2.} \textbf{Numba Vectorization}: 20x speedup for batch simulations
+  \item \textbf{3.} \textbf{Weakref Patterns}: Prevented memory leaks in 100K+ step simulations
+  \item \textbf{4.} \textbf{Multi-Agent Orchestration}: Survived 3 token limit events via checkpoints
+  \item \textbf{5.} \textbf{MCP Auto-Trigger}: Reduced manual tool selection by 70\%
+\end{itemize}
 
 \subsection{Process Lessons}
-\begin{enumerate}
-  \item \textbf{Maintenance Mode}: Frozen UI work enabled LT-7 paper completion
-  \item \textbf{Checkpoint System}: Zero work lost across 11 research tasks (46 hours)
-  \item \textbf{Quality Gates}: 7/8 gates enforced in pre-commit hooks
-  \item \textbf{Documentation Standards}: <5 AI patterns per file via automated detection
-  \item \textbf{Testing Philosophy}: 87\% coverage, 96\% critical paths
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Maintenance Mode}: Frozen UI work enabled LT-7 paper completion
+  \item \textbf{2.} \textbf{Checkpoint System}: Zero work lost across 11 research tasks (46 hours)
+  \item \textbf{3.} \textbf{Quality Gates}: 7/8 gates enforced in pre-commit hooks
+  \item \textbf{4.} \textbf{Documentation Standards}: <5 AI patterns per file via automated detection
+  \item \textbf{5.} \textbf{Testing Philosophy}: 87\% coverage, 96\% critical paths
+\end{itemize}
 
 \subsection{Architectural Lessons}
-\begin{enumerate}
-  \item \textbf{Intentional Patterns}: Compatibility layers (optimizer/ -> optimization/) prevent breaking changes
-  \item \textbf{Re-export Chains}: simulation\_context.py in 3 locations for import flexibility
-  \item \textbf{Model Variants}: 8 dynamics files for different accuracy/performance tradeoffs
-  \item \textbf{Framework Files}: test\_automation.py is PRODUCTION code, not tests
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Intentional Patterns}: Compatibility layers (optimizer/ -> optimization/) prevent breaking changes
+  \item \textbf{2.} \textbf{Re-export Chains}: simulation\_context.py in 3 locations for import flexibility
+  \item \textbf{3.} \textbf{Model Variants}: 8 dynamics files for different accuracy/performance tradeoffs
+  \item \textbf{4.} \textbf{Framework Files}: test\_automation.py is PRODUCTION code, not tests
+\end{itemize}
 
 % =============================================================================
 % SECTION 6: FUTURE VISION - POST-PUBLICATION
@@ -316,15 +316,15 @@ Long-Term (LT-4, LT-6, LT-7) & 3/3 & 100\% \\
 \end{itemize}
 
 \subsection{Key Takeaways}
-\begin{enumerate}
-  \item \textbf{Architectural Invariants}: Never "fix" intentional patterns (compatibility layers, re-exports)
-  \item \textbf{Documentation Standards}: Direct, specific, technical prose (not AI-ish)
-  \item \textbf{Multi-Agent Orchestration}: 6-agent workflows survive token limits via checkpoints
-  \item \textbf{Testing Philosophy}: 3-tier coverage (85\%/95\%/100\%)
-  \item \textbf{Memory Management}: Weakref patterns prevent leaks in 100K+ step sims
-  \item \textbf{MCP Auto-Trigger}: 70\% reduction in manual tool selection
-  \item \textbf{Maintenance Mode}: Focus 80-90\% time on research, defer UI enhancements
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Architectural Invariants}: Never "fix" intentional patterns (compatibility layers, re-exports)
+  \item \textbf{2.} \textbf{Documentation Standards}: Direct, specific, technical prose (not AI-ish)
+  \item \textbf{3.} \textbf{Multi-Agent Orchestration}: 6-agent workflows survive token limits via checkpoints
+  \item \textbf{4.} \textbf{Testing Philosophy}: 3-tier coverage (85\%/95\%/100\%)
+  \item \textbf{5.} \textbf{Memory Management}: Weakref patterns prevent leaks in 100K+ step sims
+  \item \textbf{6.} \textbf{MCP Auto-Trigger}: 70\% reduction in manual tool selection
+  \item \textbf{7.} \textbf{Maintenance Mode}: Focus 80-90\% time on research, defer UI enhancements
+\end{itemize}
 
 \subsection{Professional Practice Achievements}
 \begin{itemize}

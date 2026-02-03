@@ -25,12 +25,12 @@
 \textbf{Scenario:} Controller works perfectly in simulation → Deploy to real hardware → IT FAILS!
 
 \textbf{Why?}
-\begin{enumerate}
-    \item Sensor noise (real encoders: ±0.1° jitter, not perfect measurements)
-    \item Actuator dynamics (motors have inertia, backlash, saturation)
-    \item Computational delays (real-time OS scheduling: 1-5ms latency)
-    \item Model mismatches (friction, air resistance, cable stiffness)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Sensor noise (real encoders: ±0.1° jitter, not perfect measurements)
+    \item \textbf{2.} Actuator dynamics (motors have inertia, backlash, saturation)
+    \item \textbf{3.} Computational delays (real-time OS scheduling: 1-5ms latency)
+    \item \textbf{4.} Model mismatches (friction, air resistance, cable stiffness)
+\end{itemize}
 
 \textbf{Solution:} Hardware-in-the-Loop (HIL) testing BEFORE building expensive hardware
 \end{keypoint}

@@ -155,25 +155,25 @@ Hidden Dirs (9) & .git/, .github/, .ai\_workspace/, .cache/, .pytest\_cache/ \\
 \section{Control Flow Visualization}
 
 \subsection{Simulation Execution Path}
-\begin{enumerate}
-  \item \textbf{Config Entry}: User edits \texttt{config.yaml}
-  \item \textbf{Validation}: Pydantic validates all parameters (catch errors pre-runtime)
-  \item \textbf{Splitting}: Config splits into controller settings + dynamics parameters
-  \item \textbf{Factory}: Controller factory instantiates requested controller type
-  \item \textbf{Simulation Loop}:
+\begin{itemize}
+  \item \textbf{1.} \textbf{Config Entry}: User edits \texttt{config.yaml}
+  \item \textbf{2.} \textbf{Validation}: Pydantic validates all parameters (catch errors pre-runtime)
+  \item \textbf{3.} \textbf{Splitting}: Config splits into controller settings + dynamics parameters
+  \item \textbf{4.} \textbf{Factory}: Controller factory instantiates requested controller type
+  \item \textbf{5.} \textbf{Simulation Loop}:
     \begin{itemize}
       \item Dynamics model computes next state
       \item Controller receives state, computes control signal
       \item Control signal fed back to dynamics
       \item History logged to monitoring system
     \end{itemize}
-  \item \textbf{Results}: Visualization, analysis, export
-\end{enumerate}
+  \item \textbf{6.} \textbf{Results}: Visualization, analysis, export
+\end{itemize}
 
 \subsection{PSO Optimization Flow}
-\begin{enumerate}
-  \item \textbf{Swarm Init}: 50 particles, random initial positions in parameter space
-  \item \textbf{Iteration Loop (100 iterations)}:
+\begin{itemize}
+  \item \textbf{1.} \textbf{Swarm Init}: 50 particles, random initial positions in parameter space
+  \item \textbf{2.} \textbf{Iteration Loop (100 iterations)}:
     \begin{itemize}
       \item Each particle = candidate gain set
       \item Run full simulation with candidate gains
@@ -181,9 +181,9 @@ Hidden Dirs (9) & .git/, .github/, .ai\_workspace/, .cache/, .pytest\_cache/ \\
       \item Update particle velocity based on personal best + global best
       \item Move particle to new position
     \end{itemize}
-  \item \textbf{Convergence}: Return global best after 100 iterations
-  \item \textbf{Output}: Save optimized gains to JSON file
-\end{enumerate}
+  \item \textbf{3.} \textbf{Convergence}: Return global best after 100 iterations
+  \item \textbf{4.} \textbf{Output}: Save optimized gains to JSON file
+\end{itemize}
 
 % =============================================================================
 % SECTION 6: DIAGRAM LOCATIONS
@@ -207,12 +207,12 @@ Monitoring System & \texttt{docs/diagrams/monitoring\_flow.svg} \\
 \end{center}
 
 \subsection{How to Use Diagrams}
-\begin{enumerate}
-  \item \textbf{Start Broad}: Project structure diagram (understand 4 layers)
-  \item \textbf{Follow Data}: Control flow diagram (trace execution path)
-  \item \textbf{Zoom In}: Controller factory (understand instantiation)
-  \item \textbf{Cross-Reference}: Match diagram nodes to code files
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Start Broad}: Project structure diagram (understand 4 layers)
+  \item \textbf{2.} \textbf{Follow Data}: Control flow diagram (trace execution path)
+  \item \textbf{3.} \textbf{Zoom In}: Controller factory (understand instantiation)
+  \item \textbf{4.} \textbf{Cross-Reference}: Match diagram nodes to code files
+\end{itemize}
 
 % =============================================================================
 % SECTION 7: TESTS/ DIRECTORY MIRRORING
@@ -273,12 +273,12 @@ tests/
 \section{Key Takeaways}
 
 \subsection{Architectural Principles}
-\begin{enumerate}
-  \item \textbf{Layered Design}: Core (L1) -> Controllers/Optimization (L2) -> Infrastructure (L3) -> Specialized (L4)
-  \item \textbf{Intentional Patterns}: Compatibility layers, re-export chains, model variants (documented in CLAUDE.md Section 25)
-  \item \textbf{Interface Abstraction}: Swap implementations without changing dependents
-  \item \textbf{Peer File Structure}: Every src/ file has tests/ peer
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Layered Design}: Core (L1) -> Controllers/Optimization (L2) -> Infrastructure (L3) -> Specialized (L4)
+  \item \textbf{2.} \textbf{Intentional Patterns}: Compatibility layers, re-export chains, model variants (documented in CLAUDE.md Section 25)
+  \item \textbf{3.} \textbf{Interface Abstraction}: Swap implementations without changing dependents
+  \item \textbf{4.} \textbf{Peer File Structure}: Every src/ file has tests/ peer
+\end{itemize}
 
 \subsection{Where to Go Next}
 \begin{itemize}

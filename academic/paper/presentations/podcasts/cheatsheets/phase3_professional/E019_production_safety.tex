@@ -111,12 +111,12 @@ class ClassicalSMC(BaseController):
 \section{Memory Leak Prevention}
 
 \subsection{Common Leak Sources}
-\begin{enumerate}
-  \item \textbf{Unbounded Histories}: Controller stores ALL past states (10K+ arrays)
-  \item \textbf{Circular References}: Controller $\leftrightarrow$ Dynamics back-refs
-  \item \textbf{Event Listeners}: Callbacks hold references to large objects
-  \item \textbf{Cache Bloat}: Memoization caches grow unbounded
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Unbounded Histories}: Controller stores ALL past states (10K+ arrays)
+  \item \textbf{2.} \textbf{Circular References}: Controller $\leftrightarrow$ Dynamics back-refs
+  \item \textbf{3.} \textbf{Event Listeners}: Callbacks hold references to large objects
+  \item \textbf{4.} \textbf{Cache Bloat}: Memoization caches grow unbounded
+\end{itemize}
 
 \subsection{Mitigation Strategies}
 \begin{center}
@@ -359,12 +359,12 @@ class SimulationRunner:
 \section{Memory Profiling}
 
 \subsection{Profiling Tools}
-\begin{enumerate}
-  \item \textbf{tracemalloc}: Built-in Python memory profiler
-  \item \textbf{memory\_profiler}: Line-by-line memory usage
-  \item \textbf{objgraph}: Visualize object reference graphs
-  \item \textbf{gc module}: Detect circular references
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{tracemalloc}: Built-in Python memory profiler
+  \item \textbf{2.} \textbf{memory\_profiler}: Line-by-line memory usage
+  \item \textbf{3.} \textbf{objgraph}: Visualize object reference graphs
+  \item \textbf{4.} \textbf{gc module}: Detect circular references
+\end{itemize}
 
 \subsection{Example: Line-by-Line Profiling}
 \begin{lstlisting}[style=bashstyle]
@@ -413,14 +413,14 @@ objgraph.show_backrefs([controller], filename='controller_backrefs.png')
 \section{Debugging Memory Leaks}
 
 \subsection{Leak Detection Workflow}
-\begin{enumerate}
-  \item \textbf{Reproduce}: Run simulation for 100K+ steps
-  \item \textbf{Monitor}: Track memory usage via tracemalloc
-  \item \textbf{Profile}: Identify leak source with memory\_profiler
-  \item \textbf{Visualize}: Use objgraph to find circular refs
-  \item \textbf{Fix}: Apply weakref or cleanup patterns
-  \item \textbf{Validate}: Re-run with memory monitoring
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Reproduce}: Run simulation for 100K+ steps
+  \item \textbf{2.} \textbf{Monitor}: Track memory usage via tracemalloc
+  \item \textbf{3.} \textbf{Profile}: Identify leak source with memory\_profiler
+  \item \textbf{4.} \textbf{Visualize}: Use objgraph to find circular refs
+  \item \textbf{5.} \textbf{Fix}: Apply weakref or cleanup patterns
+  \item \textbf{6.} \textbf{Validate}: Re-run with memory monitoring
+\end{itemize}
 
 \subsection{Common Leak Patterns}
 \begin{lstlisting}[language=python]
@@ -507,11 +507,11 @@ class ProductionSimulationRunner:
 \section{Future Work: Production Readiness}
 
 \subsection{Remaining Tasks (Phase 4.3-4.5)}
-\begin{enumerate}
-  \item \textbf{Phase 4.3}: Automated quality gate enforcement (CI/CD integration)
-  \item \textbf{Phase 4.4}: Coverage measurement fixes (pytest-cov issues)
-  \item \textbf{Phase 4.5}: Multi-threaded stress testing (100+ concurrent simulations)
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Phase 4.3}: Automated quality gate enforcement (CI/CD integration)
+  \item \textbf{2.} \textbf{Phase 4.4}: Coverage measurement fixes (pytest-cov issues)
+  \item \textbf{3.} \textbf{Phase 4.5}: Multi-threaded stress testing (100+ concurrent simulations)
+\end{itemize}
 
 \subsection{Production Score Target: 80/100}
 \begin{center}

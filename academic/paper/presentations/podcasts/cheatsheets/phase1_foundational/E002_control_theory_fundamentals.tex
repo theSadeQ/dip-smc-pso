@@ -83,14 +83,14 @@ Where:
 \begin{multicols}{2}
 
 \textbf{Six State Variables:}
-\begin{enumerate}
-    \item Cart position ($x$)
-    \item First pendulum angle ($\theta_1$)
-    \item Second pendulum angle ($\theta_2$)
-    \item Cart velocity ($\dot{x}$)
-    \item First pendulum velocity ($\dot{\theta}_1$)
-    \item Second pendulum velocity ($\dot{\theta}_2$)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Cart position ($x$)
+    \item \textbf{2.} First pendulum angle ($\theta_1$)
+    \item \textbf{3.} Second pendulum angle ($\theta_2$)
+    \item \textbf{4.} Cart velocity ($\dot{x}$)
+    \item \textbf{5.} First pendulum velocity ($\dot{\theta}_1$)
+    \item \textbf{6.} Second pendulum velocity ($\dot{\theta}_2$)
+\end{itemize}
 
 \columnbreak
 
@@ -111,12 +111,12 @@ If you know these 6 numbers at any instant, you know EVERYTHING about the system
 
 \begin{summary}
 \textbf{Physics Workflow:}
-\begin{enumerate}
-    \item \textbf{Mass matrix}: How heavy everything is, how mass is distributed
-    \item \textbf{Coriolis \& centrifugal}: How rotation causes forces
-    \item \textbf{Gravity terms}: How gravity pulls pendulums down
-    \item \textbf{Control input}: The push force we apply
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} \textbf{Mass matrix}: How heavy everything is, how mass is distributed
+    \item \textbf{2.} \textbf{Coriolis \& centrifugal}: How rotation causes forces
+    \item \textbf{3.} \textbf{Gravity terms}: How gravity pulls pendulums down
+    \item \textbf{4.} \textbf{Control input}: The push force we apply
+\end{itemize}
 
 \textbf{Equation says:} "Mass $\times$ acceleration + rotation effects + gravity = applied force"
 
@@ -136,13 +136,13 @@ It's just $F = ma$, but for multiple connected bodies!
 
 \begin{keypoint}
 Imagine a marble in a smooth bowl:
-\begin{enumerate}
-    \item \textbf{Nudge it}: Marble rolls to the side
-    \item \textbf{Gravity pulls down}: Rolls toward bottom
-    \item \textbf{Overshoots}: Has momentum, goes up other side
-    \item \textbf{Friction slows}: Each oscillation loses energy
-    \item \textbf{Settles}: Eventually MUST stop at bottom
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} \textbf{Nudge it}: Marble rolls to the side
+    \item \textbf{2.} \textbf{Gravity pulls down}: Rolls toward bottom
+    \item \textbf{3.} \textbf{Overshoots}: Has momentum, goes up other side
+    \item \textbf{4.} \textbf{Friction slows}: Each oscillation loses energy
+    \item \textbf{5.} \textbf{Settles}: Eventually MUST stop at bottom
+\end{itemize}
 \end{keypoint}
 
 \columnbreak
@@ -168,10 +168,10 @@ Imagine a marble in a smooth bowl:
 
 \begin{tcolorbox}[colback=accent!5, colframe=accent]
 \textbf{Asymptotic Stability:} An equilibrium $x^*$ is asymptotically stable if:
-\begin{enumerate}
-    \item Small deviations stay small (stable)
-    \item Deviations actually go to zero over time (asymptotic)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Small deviations stay small (stable)
+    \item \textbf{2.} Deviations actually go to zero over time (asymptotic)
+\end{itemize}
 
 \textbf{Lyapunov Function:} $V(x)$ such that:
 \begin{itemize}
@@ -193,10 +193,10 @@ Imagine a marble in a smooth bowl:
 \textbf{Scenario:} Foggy mountain, wind gusts, trying to reach cabin at bottom. Someone built a guardrail path.
 
 \textbf{Strategy:}
-\begin{enumerate}
-    \item \textbf{Reaching Phase}: Get TO the guardrail path (don't care about efficiency, just reach it fast)
-    \item \textbf{Sliding Mode}: Follow the path - guardrail geometry guides you safely to bottom
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} \textbf{Reaching Phase}: Get TO the guardrail path (don't care about efficiency, just reach it fast)
+    \item \textbf{2.} \textbf{Sliding Mode}: Follow the path - guardrail geometry guides you safely to bottom
+\end{itemize}
 
 \columnbreak
 
@@ -296,11 +296,11 @@ DIP typical: $\phi = 0.3$ to $0.5$
 
 \begin{multicols}{2}
 
-\begin{enumerate}
-    \item \textbf{Dramatically reduced chattering}: Control signal is continuous (no buzzing!)
-    \item \textbf{Finite-time convergence}: Still reaches surface in finite time
-    \item \textbf{Robust to smooth disturbances}: Handles Lipschitz disturbances
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} \textbf{Dramatically reduced chattering}: Control signal is continuous (no buzzing!)
+    \item \textbf{2.} \textbf{Finite-time convergence}: Still reaches surface in finite time
+    \item \textbf{3.} \textbf{Robust to smooth disturbances}: Handles Lipschitz disturbances
+\end{itemize}
 
 \columnbreak
 
@@ -318,10 +318,10 @@ Super-Twisting: Smoothly glide to center and stop - no oscillation!
 
 \begin{tcolorbox}[colback=primary!5, colframe=primary, title=\faCode\ Control Law]
 \textbf{Two components:}
-\begin{enumerate}
-    \item \textbf{Integral term}: Gradually builds force from accumulated error
-    \item \textbf{Proportional term with $\sqrt{|s|}$}: Square root provides automatic gain scheduling
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} \textbf{Integral term}: Gradually builds force from accumulated error
+    \item \textbf{2.} \textbf{Proportional term with $\sqrt{|s|}$}: Square root provides automatic gain scheduling
+\end{itemize}
 
 \textbf{Why square root?}
 \begin{itemize}
@@ -335,11 +335,11 @@ Result: ABS brakes - smooth, continuous corrections without harsh on-off behavio
 \subsection*{Code is Remarkably Simple}
 
 \begin{summary}
-\begin{enumerate}
-    \item Compute proportional term: $K_2 \cdot \text{sign}(s) \cdot \sqrt{|s|}$
-    \item Update integral term: Accumulate signed error over time, scaled by $K_1$
-    \item Sum them: $u = u_{\text{integral}} + u_{\text{proportional}}$
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Compute proportional term: $K_2 \cdot \text{sign}(s) \cdot \sqrt{|s|}$
+    \item \textbf{2.} Update integral term: Accumulate signed error over time, scaled by $K_1$
+    \item \textbf{3.} Sum them: $u = u_{\text{integral}} + u_{\text{proportional}}$
+\end{itemize}
 
 No if-statements, no hard switches - just smooth mathematical functions!
 \end{summary}
@@ -398,11 +398,11 @@ Adaptation law designed so combined "energy" always decreases $\Rightarrow$ math
 \subsection*{Implementation Features}
 
 \begin{summary}
-\begin{enumerate}
-    \item \textbf{Dead Zone}: If $|s| < $ threshold, don't adapt (ignore noise)
-    \item \textbf{Gain Leak}: Slowly decrease gains in dead zone (prevents ratcheting)
-    \item \textbf{Bounded Adaptation}: Enforce min/max limits (don't go to zero or infinity)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} \textbf{Dead Zone}: If $|s| < $ threshold, don't adapt (ignore noise)
+    \item \textbf{2.} \textbf{Gain Leak}: Slowly decrease gains in dead zone (prevents ratcheting)
+    \item \textbf{3.} \textbf{Bounded Adaptation}: Enforce min/max limits (don't go to zero or infinity)
+\end{itemize}
 
 \textbf{Update rule:} Large error $\Rightarrow$ increase gains proportionally. Small error $\Rightarrow$ gently leak gains down. Always stay within bounds.
 \end{summary}

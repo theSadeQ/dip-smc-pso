@@ -78,6 +78,21 @@ Test behavior, not implementation
 
 \section*{CI/CD Pipeline: GitHub Actions}
 
+\begin{center}
+\begin{tikzpicture}[node distance=2cm]
+    \node[block, fill=primary!30] (code) {\textbf{Code}\\Write + Test};
+    \node[process, right=of code] (hooks) {\textbf{Pre-commit}\\Lint + Type};
+    \node[process, right=of hooks] (ci) {\textbf{CI}\\4563 tests\\45s};
+    \node[process, right=of ci] (coverage) {\textbf{Coverage}\\85/95/100\\%};
+    \node[block, fill=secondary!30, right=of coverage] (deploy) {\textbf{Deploy}\\Docs + Artifacts};
+
+    \draw[arrow] (code) -- (hooks);
+    \draw[arrow] (hooks) -- (ci);
+    \draw[arrow] (ci) -- (coverage);
+    \draw[arrow] (coverage) -- (deploy);
+\end{tikzpicture}
+\end{center}
+
 \begin{tcolorbox}[colback=secondary!10, colframe=secondary, title=\faCogs\ Three-Stage Pipeline]
 \textbf{Stage 1: Pre-Commit Hooks (Local)}
 \begin{itemize}
@@ -123,21 +138,21 @@ Test behavior, not implementation
 
 \begin{tcolorbox}[colback=accent!10, colframe=accent, title=\faCheckSquare\ 8 Quality Gates]
 \textbf{PASSING (5/8):}
-\begin{enumerate}
-    \item Zero critical bugs (all P0 issues resolved) [OK]
-    \item 100\% test pass rate (4,563/4,563 tests) [OK]
-    \item Memory validated (10,000 sims, zero growth) [OK]
-    \item Thread-safe (11/11 parallel tests pass) [OK]
-    \item Zero high-priority issues [OK]
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Zero critical bugs (all P0 issues resolved) [OK]
+    \item \textbf{2.} 100\% test pass rate (4,563/4,563 tests) [OK]
+    \item \textbf{3.} Memory validated (10,000 sims, zero growth) [OK]
+    \item \textbf{4.} Thread-safe (11/11 parallel tests pass) [OK]
+    \item \textbf{5.} Zero high-priority issues [OK]
+\end{itemize}
 
 \textbf{FAILING (3/8):}
-\begin{enumerate}
+\begin{itemize}
     \setcounter{enumi}{5}
-    \item Coverage measurement broken (reports 2.86\%, real is 89\%) [ERROR]
-    \item No production CI/CD (dev pipelines only) [ERROR]
-    \item No hardware validation (never run on actual robot/PLC) [ERROR]
-\end{enumerate}
+    \item \textbf{1.} Coverage measurement broken (reports 2.86\%, real is 89\%) [ERROR]
+    \item \textbf{2.} No production CI/CD (dev pipelines only) [ERROR]
+    \item \textbf{3.} No hardware validation (never run on actual robot/PLC) [ERROR]
+\end{itemize}
 \end{tcolorbox}
 
 \begin{warning}
@@ -190,12 +205,12 @@ Squash commits, merge to main, post-merge CI deploys
 
 \begin{tcolorbox}[colback=secondary!10, colframe=secondary, title=\faUsers\ Contributing to Project]
 \textbf{Getting Started:}
-\begin{enumerate}
-    \item Read \texttt{docs/development/contributing.md}
-    \item Setup dev environment: \texttt{pip install -r requirements-dev.txt}
-    \item Install pre-commit hooks: \texttt{pre-commit install}
-    \item Find "good first issue" label on GitHub
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Read \texttt{docs/development/contributing.md}
+    \item \textbf{2.} Setup dev environment: \texttt{pip install -r requirements-dev.txt}
+    \item \textbf{3.} Install pre-commit hooks: \texttt{pre-commit install}
+    \item \textbf{4.} Find "good first issue" label on GitHub
+\end{itemize}
 
 \textbf{Coding Standards:}
 \begin{itemize}

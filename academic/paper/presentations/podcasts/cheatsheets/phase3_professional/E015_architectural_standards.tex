@@ -61,12 +61,12 @@ Which is production? Which is safe to delete? \textbf{Nobody knows!}
 \end{itemize}
 
 \textbf{Standards Answer 4 Questions:}
-\begin{enumerate}
-    \item \textbf{WHERE} to put code (directory structure)
-    \item \textbf{HOW} to name things (files, classes, functions)
-    \item \textbf{WHAT} patterns to use (factory, not if-else chains)
-    \item \textbf{WHEN} to deviate (documented exceptions only)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} \textbf{WHERE} to put code (directory structure)
+    \item \textbf{2.} \textbf{HOW} to name things (files, classes, functions)
+    \item \textbf{3.} \textbf{WHAT} patterns to use (factory, not if-else chains)
+    \item \textbf{4.} \textbf{WHEN} to deviate (documented exceptions only)
+\end{itemize}
 \end{tcolorbox}
 
 \section*{Intentional Architectural Patterns (DO NOT "FIX"!)}
@@ -155,12 +155,12 @@ from src.interfaces import SimulationContext
 \textbf{Rule:} File location determined by PURPOSE, not imports!
 
 \textbf{Classification Checklist:}
-\begin{enumerate}
-    \item Exported in \_\_init\_\_.py? → Production (\texttt{src/})
-    \item Imported by production code? → Production (\texttt{src/})
-    \item Framework/infrastructure? → Production (\texttt{src/})
-    \item Has \texttt{test\_*} name AND only for pytest? → Test (\texttt{tests/})
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Exported in \_\_init\_\_.py? → Production (\texttt{src/})
+    \item \textbf{2.} Imported by production code? → Production (\texttt{src/})
+    \item \textbf{3.} Framework/infrastructure? → Production (\texttt{src/})
+    \item \textbf{4.} Has \texttt{test\_*} name AND only for pytest? → Test (\texttt{tests/})
+\end{itemize}
 \end{warning}
 
 \section*{Design Patterns Used}

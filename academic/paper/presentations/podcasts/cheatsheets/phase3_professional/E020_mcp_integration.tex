@@ -46,32 +46,32 @@
 \section{The 12 MCP Servers}
 
 \subsection{Core Servers (4)}
-\begin{enumerate}
-  \item \textbf{filesystem}: File operations (read, write, list, search)
-  \item \textbf{github}: Issues, PRs, checks, releases
-  \item \textbf{sequential-thinking}: Planning, debugging, reasoning
-  \item \textbf{puppeteer}: UI testing, browser automation
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{filesystem}: File operations (read, write, list, search)
+  \item \textbf{2.} \textbf{github}: Issues, PRs, checks, releases
+  \item \textbf{3.} \textbf{sequential-thinking}: Planning, debugging, reasoning
+  \item \textbf{4.} \textbf{puppeteer}: UI testing, browser automation
+\end{itemize}
 
 \subsection{Development Servers (4)}
-\begin{enumerate}
-  \item \textbf{pytest-mcp}: Test debugging, coverage analysis
-  \item \textbf{git-mcp}: Advanced Git operations (rebase, cherry-pick, blame)
-  \item \textbf{mcp-analyzer}: Code quality, linting, static analysis
-  \item \textbf{mcp-debugger}: API testing, HTTP requests
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{pytest-mcp}: Test debugging, coverage analysis
+  \item \textbf{2.} \textbf{git-mcp}: Advanced Git operations (rebase, cherry-pick, blame)
+  \item \textbf{3.} \textbf{mcp-analyzer}: Code quality, linting, static analysis
+  \item \textbf{4.} \textbf{mcp-debugger}: API testing, HTTP requests
+\end{itemize}
 
 \subsection{Data Science Servers (3)}
-\begin{enumerate}
-  \item \textbf{sqlite-mcp}: PSO optimization database queries
-  \item \textbf{pandas-mcp}: Data analysis, CSV/JSON processing
-  \item \textbf{numpy-mcp}: Numerical compute, matrix operations
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{sqlite-mcp}: PSO optimization database queries
+  \item \textbf{2.} \textbf{pandas-mcp}: Data analysis, CSV/JSON processing
+  \item \textbf{3.} \textbf{numpy-mcp}: Numerical compute, matrix operations
+\end{itemize}
 
 \subsection{Audit Server (1)}
-\begin{enumerate}
-  \item \textbf{lighthouse-mcp}: Accessibility audits (WCAG compliance)
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{lighthouse-mcp}: Accessibility audits (WCAG compliance)
+\end{itemize}
 
 % =============================================================================
 % SECTION 3: AUTO-TRIGGER KEYWORDS
@@ -261,13 +261,13 @@ tail -f .ai_workspace/logs/mcp/github.log
 \subsection{MCP Debugging Workflow}
 \textbf{See}: \texttt{docs/mcp-debugging/README.md} for complete workflows
 
-\begin{enumerate}
-  \item \textbf{Reproduce}: Trigger failing MCP operation
-  \item \textbf{Check Logs}: Review .ai\_workspace/logs/mcp/*.log
-  \item \textbf{Test Manually}: Run MCP server standalone (\texttt{npx @modelcontextprotocol/server-*})
-  \item \textbf{Validate Config}: Run \texttt{validate\_servers.py}
-  \item \textbf{Update Servers}: \texttt{npx -y @modelcontextprotocol/server-*} (latest versions)
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Reproduce}: Trigger failing MCP operation
+  \item \textbf{2.} \textbf{Check Logs}: Review .ai\_workspace/logs/mcp/*.log
+  \item \textbf{3.} \textbf{Test Manually}: Run MCP server standalone (\texttt{npx @modelcontextprotocol/server-*})
+  \item \textbf{4.} \textbf{Validate Config}: Run \texttt{validate\_servers.py}
+  \item \textbf{5.} \textbf{Update Servers}: \texttt{npx -y @modelcontextprotocol/server-*} (latest versions)
+\end{itemize}
 
 % =============================================================================
 % SECTION 7: ADVANCED MCP ORCHESTRATION
@@ -372,38 +372,38 @@ numpy-mcp & 12 & Matrix operations \\
 \end{itemize}
 
 \subsection{MCP Workflow}
-\begin{enumerate}
-  \item \textbf{Planning (sequential-thinking)}:
+\begin{itemize}
+  \item \textbf{1.} \textbf{Planning (sequential-thinking)}:
   \begin{lstlisting}[style=bashstyle]
   sequential_thinking.plan("LT-7 research paper: 7 controllers, comparative study")
   # Output: 5-section structure, figure requirements, data sources
   \end{lstlisting}
 
-  \item \textbf{Data Collection (pandas-mcp + sqlite-mcp)}:
+  \item \textbf{2.} \textbf{Data Collection (pandas-mcp + sqlite-mcp)}:
   \begin{lstlisting}[style=bashstyle]
   pandas_mcp.read_csv("benchmarks/processed/comparative_study.csv")
   sqlite_mcp.query("SELECT * FROM controller_metrics WHERE task='LT-7'")
   \end{lstlisting}
 
-  \item \textbf{Figure Generation (pandas-mcp + numpy-mcp)}:
+  \item \textbf{3.} \textbf{Figure Generation (pandas-mcp + numpy-mcp)}:
   \begin{lstlisting}[style=bashstyle]
   pandas_mcp.plot(df["controller"], df["IAE"], output="figure_01.png")
   numpy_mcp.heatmap(correlation_matrix, output="figure_02.png")
   # Generated 14 figures automatically
   \end{lstlisting}
 
-  \item \textbf{LaTeX Creation (filesystem + sequential-thinking)}:
+  \item \textbf{4.} \textbf{LaTeX Creation (filesystem + sequential-thinking)}:
   \begin{lstlisting}[style=bashstyle]
   filesystem.create("academic/paper/publications/lt7_paper_v1.tex")
   sequential_thinking.structure("Intro -> Methods -> Results -> Discussion")
   \end{lstlisting}
 
-  \item \textbf{Git + GitHub (git-mcp + github)}:
+  \item \textbf{5.} \textbf{Git + GitHub (git-mcp + github)}:
   \begin{lstlisting}[style=bashstyle]
   git_mcp.commit("feat(LT-7): Add research paper draft v1")
   github.create_pr(title="feat: LT-7 research paper submission-ready")
   \end{lstlisting}
-\end{enumerate}
+\end{itemize}
 
 \subsection{Results}
 \begin{itemize}
@@ -449,12 +449,12 @@ numpy-mcp & 12 & Matrix operations \\
 \section{Future Enhancements}
 
 \subsection{Planned MCP Servers}
-\begin{enumerate}
-  \item \textbf{latex-mcp}: Compile LaTeX, generate PDFs, extract citations
-  \item \textbf{sphinx-mcp}: Build docs, check cross-references, validate links
-  \item \textbf{streamlit-mcp}: UI component testing, WCAG audits
-  \item \textbf{benchmark-mcp}: Run pytest-benchmark, compare baselines
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{latex-mcp}: Compile LaTeX, generate PDFs, extract citations
+  \item \textbf{2.} \textbf{sphinx-mcp}: Build docs, check cross-references, validate links
+  \item \textbf{3.} \textbf{streamlit-mcp}: UI component testing, WCAG audits
+  \item \textbf{4.} \textbf{benchmark-mcp}: Run pytest-benchmark, compare baselines
+\end{itemize}
 
 \subsection{MCP Orchestration Layer}
 \textbf{Goal}: Higher-level abstraction for common workflows

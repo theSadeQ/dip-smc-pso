@@ -81,14 +81,14 @@
 \end{center}
 
 \subsection{Agent Roles \& Responsibilities}
-\begin{enumerate}
-  \item \textbf{Integration Agent}: Merge changes across 5+ modules, resolve conflicts
-  \item \textbf{Control Systems Agent}: Implement controllers, validate Lyapunov stability
-  \item \textbf{PSO Agent}: Optimize hyperparameters, run benchmarks
-  \item \textbf{Documentation Agent}: Generate API docs, update guides
-  \item \textbf{Code Beautification Agent}: Apply formatters, fix linting issues
-  \item \textbf{Testing Agent}: Write pytest tests, achieve 95\% coverage
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Integration Agent}: Merge changes across 5+ modules, resolve conflicts
+  \item \textbf{2.} \textbf{Control Systems Agent}: Implement controllers, validate Lyapunov stability
+  \item \textbf{3.} \textbf{PSO Agent}: Optimize hyperparameters, run benchmarks
+  \item \textbf{4.} \textbf{Documentation Agent}: Generate API docs, update guides
+  \item \textbf{5.} \textbf{Code Beautification Agent}: Apply formatters, fix linting issues
+  \item \textbf{6.} \textbf{Testing Agent}: Write pytest tests, achieve 95\% coverage
+\end{itemize}
 
 \subsection{Orchestrator Responsibilities}
 \begin{itemize}
@@ -113,13 +113,13 @@
 \end{itemize}
 
 \subsection{Checkpoint Lifecycle}
-\begin{enumerate}
-  \item \textbf{Plan Approved}: User approves multi-agent plan, checkpoint created
-  \item \textbf{Agent Launched}: Each agent gets unique checkpoint on spawn
-  \item \textbf{Progress Updates}: Agent reports completion every 5-10 min
-  \item \textbf{Agent Complete/Failed}: Final checkpoint with success/failure status
-  \item \textbf{Recovery}: New session loads latest checkpoints, resumes work
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Plan Approved}: User approves multi-agent plan, checkpoint created
+  \item \textbf{2.} \textbf{Agent Launched}: Each agent gets unique checkpoint on spawn
+  \item \textbf{3.} \textbf{Progress Updates}: Agent reports completion every 5-10 min
+  \item \textbf{4.} \textbf{Agent Complete/Failed}: Final checkpoint with success/failure status
+  \item \textbf{5.} \textbf{Recovery}: New session loads latest checkpoints, resumes work
+\end{itemize}
 
 \subsection{Checkpoint Data Structure}
 \begin{lstlisting}[language=json]
@@ -222,16 +222,16 @@ python .ai_workspace/tools/checkpoints/analyze_checkpoints.py --task LT-4
 \section{Quality Gates System}
 
 \subsection{The 8 Quality Gates}
-\begin{enumerate}
-  \item \textbf{Test Coverage}: Critical paths $\geq 95\%$, overall $\geq 85\%$
-  \item \textbf{Critical Issues}: Zero high-severity bugs allowed
-  \item \textbf{Memory Safety}: All controllers use weakref, no circular refs
-  \item \textbf{Documentation}: All public APIs have docstrings + examples
-  \item \textbf{Linting}: Ruff/Pylint score $\geq 9.0/10$
-  \item \textbf{Type Safety}: MyPy strict mode, no \texttt{Any} types
-  \item \textbf{Performance}: Benchmarks within 5\% of baseline
-  \item \textbf{Integration}: All 11 MCP servers operational
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Test Coverage}: Critical paths $\geq 95\%$, overall $\geq 85\%$
+  \item \textbf{2.} \textbf{Critical Issues}: Zero high-severity bugs allowed
+  \item \textbf{3.} \textbf{Memory Safety}: All controllers use weakref, no circular refs
+  \item \textbf{4.} \textbf{Documentation}: All public APIs have docstrings + examples
+  \item \textbf{5.} \textbf{Linting}: Ruff/Pylint score $\geq 9.0/10$
+  \item \textbf{6.} \textbf{Type Safety}: MyPy strict mode, no \texttt{Any} types
+  \item \textbf{7.} \textbf{Performance}: Benchmarks within 5\% of baseline
+  \item \textbf{8.} \textbf{Integration}: All 11 MCP servers operational
+\end{itemize}
 
 \subsection{Pass Requirements}
 \begin{center}
@@ -279,25 +279,25 @@ python .ai_workspace/tools/quality/validate_quality_gates.py
 \end{itemize}
 
 \subsection{Orchestration Strategy}
-\begin{enumerate}
-  \item \textbf{Week 1 (Days 1-3)}: Foundation work (Integration + Documentation agents)
+\begin{itemize}
+  \item \textbf{1.} \textbf{Week 1 (Days 1-3)}: Foundation work (Integration + Documentation agents)
   \begin{itemize}
     \item Integration Agent: Create design system tokens
     \item Documentation Agent: Write accessibility guidelines
   \end{itemize}
 
-  \item \textbf{Week 2 (Days 4-6)}: Implementation (Control Systems + PSO agents)
+  \item \textbf{2.} \textbf{Week 2 (Days 4-6)}: Implementation (Control Systems + PSO agents)
   \begin{itemize}
     \item Control Systems Agent: Refactor UI components to use tokens
     \item PSO Agent: Optimize color contrast ratios
   \end{itemize}
 
-  \item \textbf{Week 3 (Days 7-8)}: Validation (Testing + Code Beauty agents)
+  \item \textbf{3.} \textbf{Week 3 (Days 7-8)}: Validation (Testing + Code Beauty agents)
   \begin{itemize}
     \item Testing Agent: Puppeteer WCAG audits
     \item Code Beauty Agent: Apply formatters, fix linting
   \end{itemize}
-\end{enumerate}
+\end{itemize}
 
 \subsection{Checkpoint Events}
 \begin{itemize}
@@ -329,13 +329,13 @@ python .ai_workspace/tools/quality/validate_quality_gates.py
 \end{itemize}
 
 \subsection{Solution: Cross-Account Checkpoints}
-\begin{enumerate}
-  \item \textbf{Account A}: Works until 180K tokens, hits checkpoint
-  \item \textbf{Checkpoint System}: Saves state to \texttt{.ai\_workspace/state/checkpoints/}
-  \item \textbf{Git Commit}: Push checkpoint files to remote
-  \item \textbf{Account B}: Pulls latest commits, runs \texttt{/recover}
-  \item \textbf{Recovery}: Loads checkpoint, resumes work with full context
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Account A}: Works until 180K tokens, hits checkpoint
+  \item \textbf{2.} \textbf{Checkpoint System}: Saves state to \texttt{.ai\_workspace/state/checkpoints/}
+  \item \textbf{3.} \textbf{Git Commit}: Push checkpoint files to remote
+  \item \textbf{4.} \textbf{Account B}: Pulls latest commits, runs \texttt{/recover}
+  \item \textbf{5.} \textbf{Recovery}: Loads checkpoint, resumes work with full context
+\end{itemize}
 
 \subsection{Multi-Account Workflow}
 \begin{lstlisting}[style=bashstyle]

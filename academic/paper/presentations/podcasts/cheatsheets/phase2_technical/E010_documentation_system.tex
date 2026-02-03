@@ -87,13 +87,13 @@ sphinx-build -M html docs docs/_build
 \end{lstlisting}
 
 \textbf{What It Does:}
-\begin{enumerate}
-    \item Reads \texttt{conf.py}
-    \item Parses markdown \& reST files
-    \item Generates API from docstrings (autodoc)
-    \item Builds cross-reference links
-    \item Outputs searchable HTML
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Reads \texttt{conf.py}
+    \item \textbf{2.} Parses markdown \& reST files
+    \item \textbf{3.} Generates API from docstrings (autodoc)
+    \item \textbf{4.} Builds cross-reference links
+    \item \textbf{5.} Outputs searchable HTML
+\end{itemize}
 
 \textbf{Strict Mode:}
 
@@ -160,12 +160,12 @@ Documentation IS the code → Sphinx just formats it nicely
 
 \begin{example}
 \textbf{Standard Format Forces You to Answer 4 Questions:}
-\begin{enumerate}
-    \item What does this function do?
-    \item What inputs does it need? (Parameters section)
-    \item What does it return? (Returns section)
-    \item What errors can it raise? (Raises section)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} What does this function do?
+    \item \textbf{2.} What inputs does it need? (Parameters section)
+    \item \textbf{3.} What does it return? (Returns section)
+    \item \textbf{4.} What errors can it raise? (Raises section)
+\end{itemize}
 
 \textbf{Magic:} Write documentation ONCE in code → Appears in 3 places:
 \begin{itemize}
@@ -456,20 +456,33 @@ Reviewer verifies before approving
 
 \begin{example}
 \textbf{Audit Process:}
-\begin{enumerate}
-    \item Script lists files in \texttt{src/} without corresponding docs in \texttt{sphinx\_docs/}
-    \item List goes on backlog
-    \item Prioritize based on usage:
+\begin{itemize}
+    \item \textbf{1.} Script lists files in \texttt{src/} without corresponding docs in \texttt{sphinx\_docs/}
+    \item \textbf{2.} List goes on backlog
+    \item \textbf{3.} Prioritize based on usage:
     \begin{itemize}
         \item Undocumented + Unused → Document or deprecate
         \item Undocumented + Used → HIGH PRIORITY, document immediately
     \end{itemize}
-\end{enumerate}
+\end{itemize}
 
 \textbf{Prevents slow decay into undocumented codebase}
 \end{example}
 
 \section*{Documentation Build Workflow}
+
+\begin{center}
+\begin{tikzpicture}[node distance=2.5cm]
+    \node[cloud] (source) {.md/.rst\\Source\\706 files};
+    \node[block, fill=primary!30, right=of source] (sphinx) {\textbf{Sphinx}\\Builder\\30s};
+    \node[process, above right=1cm and 1.5cm of sphinx] (html) {\textbf{HTML}\\Docs\\GitHub Pages};
+    \node[process, below right=1cm and 1.5cm of sphinx] (pdf) {\textbf{PDF}\\Manual\\LaTeX};
+
+    \draw[arrow] (source) -- (sphinx);
+    \draw[arrow] (sphinx) -- (html);
+    \draw[arrow] (sphinx) -- (pdf);
+\end{tikzpicture}
+\end{center}
 
 \begin{tcolorbox}[colback=accent!10, colframe=accent, title=\faCogs\ Three Build Scenarios]
 \textbf{Scenario 1: During Development}

@@ -332,11 +332,11 @@ Subsequent mentions: "theta increases to 0.2 radians"
 \textbf{Retention:} Summarize every 5 minutes, repeat key points at episode end
 
 \textbf{Example:} Episode E002 explains variables 3 times with increasing depth
-\begin{enumerate}
-    \item "Containers for values"
-    \item "Memory addresses with labels"
-    \item "Type system and mutability"
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} "Containers for values"
+    \item \textbf{2.} "Memory addresses with labels"
+    \item \textbf{3.} "Type system and mutability"
+\end{itemize}
 \end{example}
 
 % ==============================================================================
@@ -635,6 +635,20 @@ Each of those 5 files links to deeper material if you want more
 \begin{keypoint}
 \textbf{Three Locations with Clear Separation:}
 \end{keypoint}
+
+\begin{center}
+\begin{tikzpicture}[node distance=2.5cm]
+    \node[cloud] (learner) {Learner};
+    \node[block, fill=primary!30, right=of learner] (prereq) {\textbf{Prerequisites}\\.ai\_workspace/edu/\\Path 0};
+    \node[process, right=of prereq] (tutorials) {\textbf{Tutorials}\\docs/guides/\\Paths 1-3};
+    \node[block, fill=secondary!30, right=of tutorials] (theory) {\textbf{Theory}\\docs/theory/\\Paths 3-4};
+
+    \draw[arrow] (learner) -- node[above] {Beginner} (prereq);
+    \draw[arrow] (prereq) -- node[above] {Graduate} (tutorials);
+    \draw[arrow] (tutorials) -- node[above] {Advanced} (theory);
+    \draw[arrow, dashed] (tutorials.south) -- ++(0,-0.8) -| node[below, near start] {Review} (prereq.south);
+\end{tikzpicture}
+\end{center}
 
 \begin{multicols}{2}
 

@@ -45,11 +45,11 @@ The "plant" is the physical system you're trying to control - the body that cont
 \columnbreak
 
 \textbf{Three Coordinates:}
-\begin{enumerate}
-    \item $x$ - Cart position (left/right)
-    \item $\theta_1$ - First pendulum angle (from vertical)
-    \item $\theta_2$ - Second pendulum angle (from vertical)
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} $x$ - Cart position (left/right)
+    \item \textbf{2.} $\theta_1$ - First pendulum angle (from vertical)
+    \item \textbf{3.} $\theta_2$ - Second pendulum angle (from vertical)
+\end{itemize}
 
 \begin{tip}
 Based on actual control lab rigs - not arbitrary!
@@ -63,12 +63,12 @@ Based on actual control lab rigs - not arbitrary!
 
 \begin{warning}
 Newton's approach would require:
-\begin{enumerate}
-    \item Free-body diagrams for cart + both pendulums
-    \item All internal forces (pin forces, constraint forces)
-    \item Coupled force balance equations
-    \item Solving for dozen+ variables you don't care about!
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Free-body diagrams for cart + both pendulums
+    \item \textbf{2.} All internal forces (pin forces, constraint forces)
+    \item \textbf{3.} Coupled force balance equations
+    \item \textbf{4.} Solving for dozen+ variables you don't care about!
+\end{itemize}
 
 \textbf{Result:} Nightmare of algebra with unknown internal forces
 \end{warning}
@@ -79,13 +79,13 @@ Newton's approach would require:
 \textbf{Key Insight (1700s):} You don't need internal constraint forces if you focus on energy!
 
 \textbf{Recipe:}
-\begin{enumerate}
-    \item Calculate total kinetic energy (motion)
-    \item Calculate total potential energy (gravity)
-    \item Form Lagrangian: $\mathcal{L} = T - V$
-    \item Apply Euler-Lagrange equations (systematic calculus)
-    \item Get equations of motion - NO internal forces!
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Calculate total kinetic energy (motion)
+    \item \textbf{2.} Calculate total potential energy (gravity)
+    \item \textbf{3.} Form Lagrangian: $\mathcal{L} = T - V$
+    \item \textbf{4.} Apply Euler-Lagrange equations (systematic calculus)
+    \item \textbf{5.} Get equations of motion - NO internal forces!
+\end{itemize}
 \end{keypoint}
 
 \subsection*{The Beautiful Result}
@@ -203,11 +203,11 @@ Health score for mass matrix:
 \textbf{Singularity Occurs:} Both pendulums horizontal (lying flat)
 
 \textbf{How We Handle:}
-\begin{enumerate}
-    \item Check $\kappa$ before inverting $\mathbf{M}$
-    \item If $\kappa > 10^8$: Switch to pseudoinverse with regularization
-    \item Prevents division-by-near-zero crashes
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Check $\kappa$ before inverting $\mathbf{M}$
+    \item \textbf{2.} If $\kappa > 10^8$: Switch to pseudoinverse with regularization
+    \item \textbf{3.} Prevents division-by-near-zero crashes
+\end{itemize}
 
 \textbf{In Practice:} Near upright, $\kappa = 10$-100 (safe). Controller avoids dangerous configs.
 \end{warning}
@@ -325,12 +325,12 @@ Different tasks need different balances. Meet the three teammates!
 \textbf{Personality:} Smart compromise
 
 \textbf{Clever Trick:} Proper Orthogonal Decomposition
-\begin{enumerate}
-    \item Run Simulator 1000x times
-    \item Collect data snapshots
-    \item SVD: Find important patterns
-    \item Keep signal, discard noise
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Run Simulator 1000x times
+    \item \textbf{2.} Collect data snapshots
+    \item \textbf{3.} SVD: Find important patterns
+    \item \textbf{4.} Keep signal, discard noise
+\end{itemize}
 
 \textbf{Superpowers:}
 \begin{itemize}
@@ -470,15 +470,15 @@ If $\kappa > 10^8$: Use pseudoinverse with regularization
 
 \begin{summary}
 \textbf{Full Nonlinear Model (Python):}
-\begin{enumerate}
-    \item Unpack state: Extract $q = [x, \theta_1, \theta_2]$ and $\dot{q} = [\dot{x}, \dot{\theta}_1, \dot{\theta}_2]$
-    \item Build mass matrix: $\mathbf{M}(q)$ based on current angles (trig functions)
-    \item Calculate Coriolis: $\mathbf{C}(q, \dot{q})$ with velocity coupling
-    \item Calculate gravity: $\mathbf{G}(q)$ angle-dependent torques
-    \item Apply control: Force $u$ enters through $\mathbf{B}$
-    \item Solve for $\ddot{q}$: Invert $\mathbf{M}$ (check $\kappa$ first!)
-    \item Return derivative: Pack $[\dot{q}, \ddot{q}]$ for integrator
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{1.} Unpack state: Extract $q = [x, \theta_1, \theta_2]$ and $\dot{q} = [\dot{x}, \dot{\theta}_1, \dot{\theta}_2]$
+    \item \textbf{2.} Build mass matrix: $\mathbf{M}(q)$ based on current angles (trig functions)
+    \item \textbf{3.} Calculate Coriolis: $\mathbf{C}(q, \dot{q})$ with velocity coupling
+    \item \textbf{4.} Calculate gravity: $\mathbf{G}(q)$ angle-dependent torques
+    \item \textbf{5.} Apply control: Force $u$ enters through $\mathbf{B}$
+    \item \textbf{6.} Solve for $\ddot{q}$: Invert $\mathbf{M}$ (check $\kappa$ first!)
+    \item \textbf{7.} Return derivative: Pack $[\dot{q}, \ddot{q}]$ for integrator
+\end{itemize}
 
 \textbf{NumPy makes it simple:} \texttt{accel = np.linalg.solve(M, B*u - C@vel - G)}
 \end{summary}

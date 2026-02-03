@@ -35,11 +35,11 @@
 \end{itemize}
 
 \subsection{Three Categories of Lessons}
-\begin{enumerate}
-  \item \textbf{Technical}: Code patterns, architecture decisions, tool choices
-  \item \textbf{Process}: Development workflows, testing strategies, documentation approaches
-  \item \textbf{Architectural}: Design principles, invariants, intentional patterns
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Technical}: Code patterns, architecture decisions, tool choices
+  \item \textbf{2.} \textbf{Process}: Development workflows, testing strategies, documentation approaches
+  \item \textbf{3.} \textbf{Architectural}: Design principles, invariants, intentional patterns
+\end{itemize}
 
 % =============================================================================
 % SECTION 2: TECHNICAL LESSONS
@@ -158,16 +158,16 @@ Security patches & New Streamlit components \\
 \textbf{Lesson}: Automate 7/8 gates in pre-commit hooks
 
 \textbf{Gates}:
-\begin{enumerate}
-  \item Test Coverage ($\geq 85\%$ overall, $\geq 95\%$ critical)
-  \item Critical Issues (0 high-severity bugs)
-  \item Memory Safety (11/11 tests passing)
-  \item Documentation (98.8\% pass rate)
-  \item Linting (Ruff score $\geq 9.0/10$)
-  \item Type Safety (MyPy strict mode)
-  \item Performance (benchmarks within 5\% baseline)
-  \item MCP Integration (11/12 servers operational)
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} Test Coverage ($\geq 85\%$ overall, $\geq 95\%$ critical)
+  \item \textbf{2.} Critical Issues (0 high-severity bugs)
+  \item \textbf{3.} Memory Safety (11/11 tests passing)
+  \item \textbf{4.} Documentation (98.8\% pass rate)
+  \item \textbf{5.} Linting (Ruff score $\geq 9.0/10$)
+  \item \textbf{6.} Type Safety (MyPy strict mode)
+  \item \textbf{7.} Performance (benchmarks within 5\% baseline)
+  \item \textbf{8.} MCP Integration (11/12 servers operational)
+\end{itemize}
 
 \textbf{Result}: 7/8 gates passing (research-ready, NOT production-ready 23.9/100).
 
@@ -304,32 +304,32 @@ controller = create_controller(
 % =============================================================================
 \section{What Worked Well}
 
-\begin{enumerate}
-  \item \textbf{Configuration-First Design}: Define parameters before implementation (caught 18 errors)
-  \item \textbf{Test Pyramid}: 81\% unit, 15\% integration, 4\% system (fast suite: 45s)
-  \item \textbf{Checkpoint Recovery}: Zero work lost across 3 token limit events
-  \item \textbf{MCP Auto-Trigger}: 70\% reduction in manual tool selection
-  \item \textbf{Maintenance Mode}: Enabled LT-7 paper completion (11/11 tasks, 100\%)
-  \item \textbf{Quality Gates}: Pre-commit hooks prevented untested code merges
-  \item \textbf{Documentation Standards}: <5 AI patterns per file (automated detection)
-  \item \textbf{Numba Vectorization}: 20x speedup for batch simulations
-  \item \textbf{Weakref Patterns}: 0.0 KB/hr memory growth (validated over 10K sims)
-  \item \textbf{Factory Pattern}: Consistent controller instantiation across codebase
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Configuration-First Design}: Define parameters before implementation (caught 18 errors)
+  \item \textbf{2.} \textbf{Test Pyramid}: 81\% unit, 15\% integration, 4\% system (fast suite: 45s)
+  \item \textbf{3.} \textbf{Checkpoint Recovery}: Zero work lost across 3 token limit events
+  \item \textbf{4.} \textbf{MCP Auto-Trigger}: 70\% reduction in manual tool selection
+  \item \textbf{5.} \textbf{Maintenance Mode}: Enabled LT-7 paper completion (11/11 tasks, 100\%)
+  \item \textbf{6.} \textbf{Quality Gates}: Pre-commit hooks prevented untested code merges
+  \item \textbf{7.} \textbf{Documentation Standards}: <5 AI patterns per file (automated detection)
+  \item \textbf{8.} \textbf{Numba Vectorization}: 20x speedup for batch simulations
+  \item \textbf{9.} \textbf{Weakref Patterns}: 0.0 KB/hr memory growth (validated over 10K sims)
+  \item \textbf{10.} \textbf{Factory Pattern}: Consistent controller instantiation across codebase
+\end{itemize}
 
 % =============================================================================
 % SECTION 7: WHAT COULD IMPROVE
 % =============================================================================
 \section{What Could Be Improved}
 
-\begin{enumerate}
-  \item \textbf{Test Coverage Measurement}: Current tooling reports 2.86\% (misleading, critical paths at 96\%)
-  \item \textbf{Formal Verification}: Algorithms validated empirically, not formally (deferred Phase 6-7)
-  \item \textbf{Browser Support}: Chromium validated, Firefox/Safari deferred (maintenance mode)
-  \item \textbf{Production Readiness}: 23.9/100 score (correct for research, needs 200-300 hrs for production)
-  \item \textbf{Documentation Density}: Some files below 5 facts/paragraph target
-  \item \textbf{Benchmark Baseline Drift}: Need monthly baseline updates (currently manual)
-\end{enumerate}
+\begin{itemize}
+  \item \textbf{1.} \textbf{Test Coverage Measurement}: Current tooling reports 2.86\% (misleading, critical paths at 96\%)
+  \item \textbf{2.} \textbf{Formal Verification}: Algorithms validated empirically, not formally (deferred Phase 6-7)
+  \item \textbf{3.} \textbf{Browser Support}: Chromium validated, Firefox/Safari deferred (maintenance mode)
+  \item \textbf{4.} \textbf{Production Readiness}: 23.9/100 score (correct for research, needs 200-300 hrs for production)
+  \item \textbf{5.} \textbf{Documentation Density}: Some files below 5 facts/paragraph target
+  \item \textbf{6.} \textbf{Benchmark Baseline Drift}: Need monthly baseline updates (currently manual)
+\end{itemize}
 
 % =============================================================================
 % SECTION 8: KEY TAKEAWAYS
