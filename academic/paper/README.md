@@ -4,6 +4,13 @@
 
 This directory contains all research outputs, publications, documentation, and thesis materials for the double-inverted pendulum SMC project. It serves as the central repository for academic and research-related content.
 
+## Educational Roadmaps
+
+Layered learning materials live outside this folder:
+- `.ai_workspace/edu/README.md` (entry point)
+- `.ai_workspace/edu/layered-learning-roadmap.md` (full roadmap)
+- `.ai_workspace/edu/quick-layer-reference.md` (fast lookup)
+
 ## Structure
 
 ```
