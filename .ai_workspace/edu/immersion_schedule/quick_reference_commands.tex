@@ -1,0 +1,470 @@
+% Quick Reference Command Sheet - DIP-SMC-PSO Project
+% Generated: 2026-02-11
+
+\documentclass[10pt,a4paper]{article}
+
+% Packages
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+% Colors
+\definecolor{cmdblue}{RGB}{41, 128, 185}
+\definecolor{commentgreen}{RGB}{39, 174, 96}
+\definecolor{warningred}{RGB}{231, 76, 60}
+
+% Listings setup for code
+\lstset{
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    commentstyle=\color{commentgreen},
+    keywordstyle=\color{cmdblue}\bfseries,
+    showstringspaces=false
+}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Quick Reference - DIP-SMC-PSO}
+\rhead{\small Print and Keep Near Keyboard}
+\cfoot{\small \thepage}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries\color{cmdblue}}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdftitle={Quick Reference Command Sheet},
+    pdfauthor={DIP-SMC-PSO Project}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3em}
+
+\begin{document}
+
+% Title
+{\Huge\bfseries Quick Reference Command Sheet}\\[0.2cm]
+{\Large DIP-SMC-PSO Project}\\[0.3cm]
+{\large Print this reference and keep it near your keyboard during the 14-day immersion}
+
+\vspace{0.5cm}
+
+% CRITICAL WARNING BOX
+\colorbox{warningred!20}{\parbox{\textwidth}{%
+\textbf{\textcolor{warningred}{CRITICAL: Platform-Specific Commands}}\\[0.2cm]
+\textbf{Windows (Your Platform):}\\
+- Use \texttt{python} NOT \texttt{python3} (python3 causes exit code 49 on Windows)\\
+- Example: \texttt{python simulate.py} [OK] $|$ \texttt{python3 simulate.py} [ERROR]
+}}
+
+\vspace{0.5cm}
+
+\begin{multicols}{2}
+
+\section*{Essential Simulation Commands}
+
+\subsection*{Basic Simulations}
+\begin{lstlisting}[language=bash]
+# Run Classical SMC with plot
+python simulate.py --ctrl classical_smc --plot
+
+# Run Super-Twisting SMC
+python simulate.py --ctrl sta_smc --plot
+
+# Run Adaptive SMC
+python simulate.py --ctrl adaptive_smc --plot
+
+# Run Hybrid Adaptive STA-SMC
+python simulate.py --ctrl hybrid_adaptive_sta_smc --plot
+
+# Run Swing-Up Controller
+python simulate.py --ctrl swing_up_smc --plot
+
+# Run MPC (experimental)
+python simulate.py --ctrl mpc --plot
+\end{lstlisting}
+
+\subsection*{Load Optimized Gains}
+\begin{lstlisting}[language=bash]
+# Load pre-tuned gains from JSON
+python simulate.py --load tuned_gains.json --plot
+
+# Load your Day 3 optimized gains
+python simulate.py --load day3_gains.json --plot
+\end{lstlisting}
+
+\subsection*{Configuration Management}
+\begin{lstlisting}[language=bash]
+# Print current configuration
+python simulate.py --print-config
+
+# Use custom config file
+python simulate.py --config custom_config.yaml --plot
+
+# Use your Day 12 capstone config
+python simulate.py --config capstone_config.yaml --plot
+\end{lstlisting}
+
+\section*{PSO Optimization Commands}
+
+\subsection*{Tune Controller Gains}
+\begin{lstlisting}[language=bash]
+# Optimize Classical SMC gains
+python simulate.py --ctrl classical_smc --run-pso --save gains_classical.json
+
+# Optimize with seed for reproducibility
+python simulate.py --ctrl adaptive_smc --run-pso --seed 42 --save gains_adaptive.json
+
+# Optimize Hybrid controller (Day 6)
+python simulate.py --ctrl hybrid_adaptive_sta_smc --run-pso --save gains_hybrid.json
+
+# Quick test run (fewer iterations)
+python simulate.py --ctrl sta_smc --run-pso --pso-iters 10 --save quick_test.json
+\end{lstlisting}
+
+\subsection*{PSO Result Analysis}
+\begin{lstlisting}[language=bash]
+# View saved gains
+cat gains_classical.json
+
+# Compare multiple gain sets
+python -c "import json; print(json.load(open('gains_classical.json')))"
+\end{lstlisting}
+
+\section*{Testing Commands}
+
+\subsection*{Run Tests}
+\begin{lstlisting}[language=bash]
+# Run ALL tests
+python -m pytest tests/ -v
+
+# Run controller tests only
+python -m pytest tests/test_controllers/ -v
+
+# Run specific controller test
+python -m pytest tests/test_controllers/test_classical_smc.py -v
+
+# Run integration tests
+python -m pytest tests/test_integration/ -v
+
+# Run benchmarks
+python -m pytest tests/test_benchmarks/ --benchmark-only
+\end{lstlisting}
+
+\subsection*{Coverage Reports}
+\begin{lstlisting}[language=bash]
+# Generate HTML coverage report (Day 8)
+python -m pytest tests/ --cov=src --cov-report=html
+
+# View coverage in browser (Windows)
+start htmlcov/index.html
+
+# Generate terminal coverage summary
+python -m pytest tests/ --cov=src --cov-report=term
+\end{lstlisting}
+
+\subsection*{Quick Test During Development}
+\begin{lstlisting}[language=bash]
+# Run tests for file you're working on
+python -m pytest tests/test_controllers/test_adaptive_smc.py -v
+
+# Run with verbose output for debugging
+python -m pytest tests/test_controllers/ -vv
+\end{lstlisting}
+
+\columnbreak
+
+\section*{Hardware-in-the-Loop (HIL)}
+
+\subsection*{Run HIL Simulations (Day 10)}
+\begin{lstlisting}[language=bash]
+# Basic HIL run with plot
+python simulate.py --run-hil --plot
+
+# HIL with custom config
+python simulate.py --config custom_config.yaml --run-hil
+
+# HIL with specific controller
+python simulate.py --ctrl classical_smc --run-hil --plot
+\end{lstlisting}
+
+\section*{Web Interface}
+
+\subsection*{Launch Streamlit App}
+\begin{lstlisting}[language=bash]
+# Start web interface (Day 1)
+streamlit run streamlit_app.py
+
+# Access at: http://localhost:8501
+\end{lstlisting}
+
+\section*{Documentation Commands}
+
+\subsection*{Build Sphinx Documentation (Day 13)}
+\begin{lstlisting}[language=bash]
+# Build HTML documentation
+sphinx-build -M html docs docs/_build
+
+# Build with warnings as errors
+sphinx-build -M html docs docs/_build -W --keep-going
+
+# View built docs (Windows)
+start docs/_build/html/index.html
+\end{lstlisting}
+
+\subsection*{Verify Documentation Changes}
+\begin{lstlisting}[language=bash]
+# Check if file was copied to build
+python -c "import os; print(os.path.getmtime('docs/_static/style.css'))"
+
+# Verify localhost serves new content
+curl -s "http://localhost:9000/_static/style.css" | head -n 20
+\end{lstlisting}
+
+\section*{Git Commands for Learning}
+
+\subsection*{Basic Workflow (Day 11, Day 14)}
+\begin{lstlisting}[language=bash]
+# Check repository status
+git status
+
+# Create feature branch
+git checkout -b feature/my-experiment
+
+# Stage changes
+git add .
+
+# Commit with message
+git commit -m "feat: Complete Day 14 capstone project"
+
+# View recent commits
+git log --oneline -10
+
+# Compare with main branch
+git diff main...HEAD
+\end{lstlisting}
+
+\subsection*{Recovery (If You Make Mistakes)}
+\begin{lstlisting}[language=bash]
+# Undo uncommitted changes
+git checkout -- filename.py
+
+# Undo last commit (keep changes)
+git reset --soft HEAD~1
+
+# View what changed
+git diff
+\end{lstlisting}
+
+\section*{Project Recovery Commands}
+
+\subsection*{Session Recovery (Day 1, After Token Limits)}
+\begin{lstlisting}[language=bash]
+# One-command recovery
+bash .ai_workspace/tools/recovery/recover_project.sh
+
+# Check roadmap progress
+python .ai_workspace/tools/analysis/roadmap_tracker.py
+
+# View project state
+cat .ai_workspace/state/project_state.json
+\end{lstlisting}
+
+\subsection*{Quick Status Check}
+\begin{lstlisting}[language=bash]
+# Verify environment
+python --version  # Should show 3.9+
+pip list | grep numpy
+
+# Check git remote
+git remote -v
+# Should show: https://github.com/theSadeQ/dip-smc-pso.git
+\end{lstlisting}
+
+\end{multicols}
+
+\newpage
+
+\begin{multicols}{2}
+
+\section*{File Navigation Commands}
+
+\subsection*{Find Files}
+\begin{lstlisting}[language=bash]
+# Locate controller implementations
+find src/controllers -name "*.py" -type f
+
+# Find all test files
+find tests -name "test_*.py"
+
+# Find config files
+find . -name "*.yaml" -o -name "*.json"
+\end{lstlisting}
+
+\subsection*{Quick File Viewing}
+\begin{lstlisting}[language=bash]
+# View controller source
+cat src/controllers/smc/algorithms/classical_smc.py
+
+# Count lines in file
+python -c "print(len(open('src/optimizer/pso_optimizer.py').readlines()))"
+
+# View first 50 lines
+head -n 50 src/core/simulation_runner.py
+\end{lstlisting}
+
+\section*{Data Analysis Commands}
+
+\subsection*{View Benchmark Results (Day 9)}
+\begin{lstlisting}[language=bash]
+# Navigate to comparative experiments
+cd academic/paper/experiments/comparative
+
+# List available benchmarks
+ls -lh
+
+# View specific results
+cat MT-5_comprehensive_benchmark_summary.txt
+\end{lstlisting}
+
+\subsection*{Quick Data Inspection}
+\begin{lstlisting}[language=bash]
+# View PSO optimization logs
+cat academic/logs/pso/optimization_*.log
+
+# View benchmark logs
+cat academic/logs/benchmarks/*.log
+\end{lstlisting}
+
+\section*{Common Troubleshooting}
+
+\subsection*{Dependency Issues}
+\begin{lstlisting}[language=bash]
+# Reinstall dependencies
+pip install -r requirements.txt --upgrade
+
+# Verify critical packages
+python -c "import numpy; print(numpy.__version__)"
+python -c "import scipy; print(scipy.__version__)"
+\end{lstlisting}
+
+\subsection*{Configuration Validation}
+\begin{lstlisting}[language=bash]
+# Validate config file
+python -c "from src.config import load_config; load_config('config.yaml')"
+\end{lstlisting}
+
+\subsection*{Clear Caches}
+\begin{lstlisting}[language=bash]
+# Clear pytest cache
+rm -rf .pytest_cache
+
+# Clear Python bytecode
+find . -type d -name "__pycache__" -exec rm -rf {} +
+\end{lstlisting}
+
+\section*{Keyboard Shortcuts (Windows)}
+
+\begin{itemize}
+    \item \texttt{Ctrl+C} - Stop running simulation or command
+    \item \texttt{Ctrl+L} - Clear terminal screen
+    \item \texttt{Ctrl+R} - Search command history
+    \item \texttt{Tab} - Autocomplete file/directory names
+    \item \texttt{Up Arrow} - Previous command
+    \item \texttt{Ctrl+Shift+R} - Hard refresh browser (Day 13)
+\end{itemize}
+
+\section*{Daily Workflow Template}
+
+\subsection*{Morning}
+\begin{lstlisting}[language=bash]
+# 1. Check git status
+git status
+
+# 2. Review yesterday's outputs
+ls academic/logs/
+
+# 3. Start Streamlit (background)
+start streamlit run streamlit_app.py
+\end{lstlisting}
+
+\subsection*{Afternoon}
+\begin{lstlisting}[language=bash]
+# 4. Run experiments from checklist
+python simulate.py --ctrl <CONTROLLER> --plot
+
+# 5. Run tests if you modified code
+python -m pytest tests/test_controllers/ -v
+\end{lstlisting}
+
+\subsection*{Evening}
+\begin{lstlisting}[language=bash]
+# 6. Commit your work
+git add .
+git commit -m "docs: Complete Day X immersion tasks"
+
+# 7. Review progress
+cat .ai_workspace/edu/immersion_schedule/progress_tracker.md
+\end{lstlisting}
+
+\section*{Emergency Commands}
+
+\subsection*{Stuck in Infinite Loop}
+Press \texttt{Ctrl+C} to interrupt
+
+\subsection*{Simulation Not Plotting}
+\begin{lstlisting}[language=bash]
+# Check matplotlib backend
+python -c "import matplotlib; print(matplotlib.get_backend())"
+\end{lstlisting}
+
+\subsection*{Out of Memory}
+\begin{lstlisting}[language=bash]
+# Check Python process memory (Windows)
+tasklist /fi "imagename eq python.exe" /fo table
+\end{lstlisting}
+
+\section*{Learning Tips}
+
+\begin{enumerate}
+    \item \textbf{Copy-paste these commands} - Don't type from scratch during immersion
+    \item \textbf{Keep terminal history} - Use Up Arrow to repeat commands
+    \item \textbf{Run commands in parallel} - Open multiple terminals (Day 10+)
+    \item \textbf{Document failures} - Note which commands error for troubleshooting
+    \item \textbf{Bookmark this file} - Refer to it 20+ times per day
+\end{enumerate}
+
+\section*{Next Steps After Day 14}
+
+\begin{lstlisting}[language=bash]
+# Begin Tutorial 01
+cat docs/guides/getting-started.md
+
+# View available research tasks
+ls .ai_workspace/planning/research/
+
+# Explore advanced examples
+python simulate.py --help
+\end{lstlisting}
+
+\end{multicols}
+
+\vfill
+
+\begin{center}
+\textbf{Print Date:} \underline{\hspace{4cm}}\\[0.3cm]
+\textbf{Keep this reference visible during all 14 days of immersion!}
+\end{center}
+
+\end{document}

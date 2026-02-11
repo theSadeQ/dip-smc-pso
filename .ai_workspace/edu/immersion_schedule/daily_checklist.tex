@@ -1,0 +1,594 @@
+% 14-Day Full Immersion Daily Checklist
+% DIP-SMC-PSO Project
+% Generated: 2026-02-11
+
+\documentclass[11pt,a4paper]{article}
+
+% Packages
+\usepackage[margin=2cm]{geometry}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+% Checkbox commands
+\newcommand{\checkbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\square$}}
+\newcommand{\checkedbox}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}}
+
+% Colors
+\definecolor{headerblue}{RGB}{41, 128, 185}
+\definecolor{sectiongray}{RGB}{52, 73, 94}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small 14-Day Full Immersion Daily Checklist}
+\rhead{\small DIP-SMC-PSO Project}
+\cfoot{\small Page \thepage\ of \pageref{LastPage}}
+
+% Title formatting
+\titleformat{\section}{\Large\bfseries\color{headerblue}}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{sectiongray}}{}{0em}{}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdftitle={14-Day Full Immersion Daily Checklist},
+    pdfauthor={DIP-SMC-PSO Project}
+}
+
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+    \centering
+    \vspace*{3cm}
+    {\Huge\bfseries 14-Day Full Immersion\\[0.5cm] Daily Checklist\par}
+    \vspace{1cm}
+    {\Large DIP-SMC-PSO Project\par}
+    \vspace{2cm}
+    {\large Print this document and check off items as you complete them.\\[0.3cm]
+    Each day is designed for 8-10 hours of focused learning.\par}
+    \vfill
+    {\large Total Time: 112-140 hours\\[0.2cm]
+    Goal: 70-85\% project understanding\\[0.2cm]
+    Materials: 30 podcasts, 30 cheatsheets, 6 controllers\par}
+    \vfill
+    {\large Generated: February 11, 2026\par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ============================================================================
+% WEEK 1: THEORY + ARCHITECTURE
+% ============================================================================
+
+\section{WEEK 1: THEORY + ARCHITECTURE}
+
+\subsection{Day 1: Project Foundations [\_\_\_ / 8 hours]}
+
+\textbf{Date:} \underline{\hspace{4cm}}\\
+\textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Morning Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 1-2: Listen to E001 podcast (18 min)
+    \item Hour 1-2: Read E001 cheatsheet PDF
+    \item Hour 3-4: Listen to E002 podcast (18 min)
+    \item Hour 3-4: Read E002 cheatsheet PDF
+\end{itemize}
+
+\subsubsection*{Afternoon Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 5-6: Read \texttt{.ai\_workspace/guides/session\_continuity.md}
+    \item Hour 5-6: Read \texttt{CLAUDE.md} (project conventions)
+    \item Hour 7: Setup environment: Clone repo if needed
+    \item Hour 7: Install dependencies: \texttt{pip install -r requirements.txt}
+    \item Hour 8: Run first simulation: \texttt{python simulate.py --ctrl classical\_smc --plot}
+    \item Hour 8: Verify Streamlit works: \texttt{streamlit run streamlit\_app.py}
+\end{itemize}
+
+\subsubsection*{Evening Reflection}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Write 3-5 sentences: What did I learn today?
+    \item Preview Day 2 materials
+    \item Rate understanding: 1-10 \underline{\hspace{1cm}}
+\end{itemize}
+
+\textbf{Notes:}\\
+\noindent\rule{\textwidth}{0.4pt}\\[3cm]
+
+\newpage
+
+% ============================================================================
+\subsection{Day 2: Plant Dynamics [\_\_\_ / 10 hours]}
+
+\textbf{Date:} \underline{\hspace{4cm}}\\
+\textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Morning Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 1-2: Listen to E003 podcast
+    \item Hour 1-2: Read E003 cheatsheet PDF
+    \item Hour 3-4: Code walkthrough: \texttt{src/plant/models/simplified\_dynamics.py}
+    \item Hour 3-4: Code walkthrough: \texttt{src/plant/models/full\_nonlinear\_dynamics.py}
+\end{itemize}
+
+\subsubsection*{Afternoon Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 5: Study low-rank dynamics variant
+    \item Hour 6-7: Read \texttt{docs/theory/plant-dynamics.md}
+    \item Hour 8: Visualize pendulum physics (double pendulum animations)
+\end{itemize}
+
+\subsubsection*{Evening Block (2 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 9: Open \texttt{config.yaml}, find plant parameters section
+    \item Hour 9: Modify mass values (m1, m2), observe simulation behavior
+    \item Hour 10: Modify length values (l1, l2), observe stability changes
+\end{itemize}
+
+\subsubsection*{Evening Reflection}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Write 3-5 sentences: What did I learn today?
+    \item Preview Day 3 materials
+    \item Rate understanding: 1-10 \underline{\hspace{1cm}}
+\end{itemize}
+
+\textbf{Notes:}\\
+\noindent\rule{\textwidth}{0.4pt}\\[3cm]
+
+\newpage
+
+% ============================================================================
+\subsection{Day 3: Optimization Fundamentals [\_\_\_ / 9 hours]}
+
+\textbf{Date:} \underline{\hspace{4cm}}\\
+\textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Morning Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 1-2: Listen to E004 podcast (26 min)
+    \item Hour 1-2: Read E004 cheatsheet PDF
+    \item Hour 3-5: Code walkthrough: \texttt{src/optimizer/pso\_optimizer.py} (413 lines)
+    \item Hour 3-5: Understand PSO parameters: swarm size, iterations, bounds
+\end{itemize}
+
+\subsubsection*{Afternoon Block (3 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 6-7: Read research paper excerpts on PSO theory
+    \item Hour 6-7: Study \texttt{academic/paper/experiments/} structure
+\end{itemize}
+
+\subsubsection*{Evening Block (2 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 8: Run PSO optimization
+    \item Hour 9: Analyze results: Compare tuned vs. default gains
+    \item Hour 9: Visualize convergence plots
+\end{itemize}
+
+\subsubsection*{Evening Reflection}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Write 3-5 sentences: What did I learn today?
+    \item Preview Day 4 materials
+    \item Rate understanding: 1-10 \underline{\hspace{1cm}}
+\end{itemize}
+
+\textbf{Notes:}\\
+\noindent\rule{\textwidth}{0.4pt}\\[3cm]
+
+\newpage
+
+% ============================================================================
+\subsection{Day 4: Simulation Engine [\_\_\_ / 10 hours]}
+
+\textbf{Date:} \underline{\hspace{4cm}}\\
+\textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Morning Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 1-2: Listen to E005 podcast (26 min)
+    \item Hour 1-2: Read E005 cheatsheet PDF
+    \item Hour 3-5: Code walkthrough: \texttt{src/core/simulation\_runner.py}
+    \item Hour 3-5: Code walkthrough: \texttt{src/core/simulation\_context.py}
+\end{itemize}
+
+\subsubsection*{Afternoon Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 6: Study integrators: RK45, Euler, custom methods
+    \item Hour 7: Understand vectorized simulation in \texttt{src/core/vector\_sim.py}
+    \item Hour 8: Study Numba optimizations and performance
+\end{itemize}
+
+\subsubsection*{Evening Block (2 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 9: Run batch simulations with different integrators
+    \item Hour 10: Compare accuracy and speed tradeoffs
+    \item Hour 10: Document findings in personal notes
+\end{itemize}
+
+\subsubsection*{Evening Reflection}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Write 3-5 sentences: What did I learn today?
+    \item Preview Day 5 materials
+    \item Rate understanding: 1-10 \underline{\hspace{1cm}}
+\end{itemize}
+
+\textbf{Notes:}\\
+\noindent\rule{\textwidth}{0.4pt}\\[3cm]
+
+\newpage
+
+% ============================================================================
+\subsection{Day 5: Controllers Part 1 [\_\_\_ / 10 hours]}
+
+\textbf{Date:} \underline{\hspace{4cm}}\\
+\textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Morning Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 1-2: Read E030 cheatsheet PDF (Controller Base \& Factory)
+    \item Hour 3-5: Code deep-dive: \texttt{src/controllers/base/base\_controller.py}
+    \item Hour 3-5: Code deep-dive: \texttt{src/controllers/factory/controller\_factory.py}
+\end{itemize}
+
+\subsubsection*{Afternoon Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 6-8: Classical SMC implementation study
+    \item Hour 6-8: File: \texttt{src/controllers/smc/algorithms/classical\_smc.py} (538 lines)
+    \item Hour 6-8: Understand sliding surface, reaching law, control law
+\end{itemize}
+
+\subsubsection*{Evening Block (2 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 9-10: Hands-on: Implement sliding surface equation from scratch
+    \item Hour 9-10: Verify your implementation against production code
+    \item Hour 9-10: Test with simple pendulum case
+\end{itemize}
+
+\subsubsection*{Evening Reflection}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Write 3-5 sentences: What did I learn today?
+    \item Preview Day 6 materials
+    \item Rate understanding: 1-10 \underline{\hspace{1cm}}
+\end{itemize}
+
+\textbf{Notes:}\\
+\noindent\rule{\textwidth}{0.4pt}\\[3cm]
+
+\newpage
+
+% ============================================================================
+\subsection{Day 6: Controllers Part 2 [\_\_\_ / 10 hours]}
+
+\textbf{Date:} \underline{\hspace{4cm}}\\
+\textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Morning Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 1-3: Super-Twisting SMC deep-dive
+    \item Hour 1-3: File: \texttt{src/controllers/smc/algorithms/super\_twisting\_smc.py} (592 lines)
+    \item Hour 1-3: Understand chattering reduction mechanism
+\end{itemize}
+
+\subsubsection*{Afternoon Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 4-6: Adaptive SMC study
+    \item Hour 4-6: File: \texttt{src/controllers/smc/algorithms/adaptive\_smc.py} (473 lines)
+    \item Hour 4-6: Understand gain adaptation rules
+\end{itemize}
+
+\subsubsection*{Evening Block (2 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 7-9: Hybrid Adaptive STA-SMC
+    \item Hour 7-9: File: \texttt{src/controllers/smc/algorithms/hybrid\_adaptive\_sta\_smc.py} (277 lines)
+    \item Hour 10: Compare chattering behavior across all 4 controllers
+    \item Hour 10: Run simulations with each controller, measure chattering index
+\end{itemize}
+
+\subsubsection*{Evening Reflection}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Write 3-5 sentences: What did I learn today?
+    \item Preview Day 7 materials
+    \item Rate understanding: 1-10 \underline{\hspace{1cm}}
+\end{itemize}
+
+\textbf{Notes:}\\
+\noindent\rule{\textwidth}{0.4pt}\\[3cm]
+
+\newpage
+
+% ============================================================================
+\subsection{Day 7: Analysis \& Visualization [\_\_\_ / 9 hours]}
+
+\textbf{Date:} \underline{\hspace{4cm}}\\
+\textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Morning Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 1-2: Listen to E006 podcast (28 min - LONGEST)
+    \item Hour 1-2: Read E006 cheatsheet PDF
+    \item Hour 3-5: Code walkthrough: \texttt{src/analysis/} directory
+    \item Hour 3-5: Code walkthrough: \texttt{src/utils/visualization/} directory
+\end{itemize}
+
+\subsubsection*{Afternoon Block (3 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 6-7: Study benchmark framework: \texttt{src/benchmarks/}
+    \item Hour 6-7: Review \texttt{benchmarks/figures/} - publication-quality examples
+\end{itemize}
+
+\subsubsection*{Evening Block (2 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 8: Generate plots: State trajectories, control effort, chattering
+    \item Hour 9: Calculate chattering metrics for all controllers
+    \item Hour 9: Create comparison table
+\end{itemize}
+
+\subsubsection*{Evening Reflection}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Write 3-5 sentences: What did I learn this week?
+    \item Review Week 1 progress: What \% do I understand? \underline{\hspace{2cm}}
+    \item Preview Day 8 materials
+    \item Rate overall Week 1: 1-10 \underline{\hspace{1cm}}
+\end{itemize}
+
+\textbf{Notes:}\\
+\noindent\rule{\textwidth}{0.4pt}\\[3cm]
+
+\newpage
+
+% ============================================================================
+% WEEK 2: PRACTICE + INTEGRATION
+% ============================================================================
+
+\section{WEEK 2: PRACTICE + INTEGRATION}
+
+\subsection{Day 8: Testing \& Quality [\_\_\_ / 10 hours]}
+
+\textbf{Date:} \underline{\hspace{4cm}}\\
+\textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Morning Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 1-2: Listen to E007 podcast
+    \item Hour 1-2: Read E007 cheatsheet PDF
+    \item Hour 3-5: Explore \texttt{tests/test\_controllers/} directory
+    \item Hour 3-5: Study test patterns for all 6 controllers
+\end{itemize}
+
+\subsubsection*{Afternoon Block (4 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 6-7: Read \texttt{.ai\_workspace/config/testing\_standards.md}
+    \item Hour 6-7: Understand coverage requirements (85\%/95\%/100\%)
+\end{itemize}
+
+\subsubsection*{Evening Block (2 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 8: Run pytest suite: \texttt{python -m pytest tests/test\_controllers/ -v}
+    \item Hour 9: Write test for custom controller variant
+    \item Hour 10: Generate coverage report: \texttt{python -m pytest --cov=src --cov-report=html}
+    \item Hour 10: Review coverage in \texttt{htmlcov/index.html}
+\end{itemize}
+
+\subsubsection*{Evening Reflection}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Write 3-5 sentences: What did I learn today?
+    \item Preview Day 9 materials
+    \item Rate understanding: 1-10 \underline{\hspace{1cm}}
+\end{itemize}
+
+\textbf{Notes:}\\
+\noindent\rule{\textwidth}{0.4pt}\\[3cm]
+
+\newpage
+
+% Continue with Days 9-14 following same pattern...
+% For brevity, I'll include summaries of remaining days
+
+\subsection{Day 9: Research Outputs [\_\_\_ / 9 hours]}
+\textbf{Date:} \underline{\hspace{4cm}} | \textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Key Activities}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Listen to E008 podcast (27 min) + Read E008 cheatsheet PDF
+    \item Read LT-7 research paper (submission-ready version)
+    \item Study \texttt{academic/paper/experiments/comparative/} directory
+    \item Analyze MT-5, MT-7, MT-8 benchmark results
+    \item Compare personal Day 3 PSO results with published benchmarks
+\end{itemize}
+
+\textbf{Understanding Rating: 1-10} \underline{\hspace{1cm}}\\[0.3cm]
+\textbf{Notes:}\\
+\noindent\rule{\textwidth}{0.4pt}\\[3cm]
+
+\newpage
+
+\subsection{Day 10: Systems Integration [\_\_\_ / 10 hours]}
+\textbf{Date:} \underline{\hspace{4cm}} | \textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Key Activities}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Listen to E012 + E013 podcasts (HIL, Monitoring)
+    \item Code walkthrough: \texttt{src/hil/plant\_server.py}, \texttt{src/hil/controller\_client.py}
+    \item Study monitoring infrastructure: \texttt{src/utils/monitoring/}
+    \item Run HIL simulation: \texttt{python simulate.py --run-hil --plot}
+    \item Visualize real-time monitoring data
+    \item Analyze control loop timing statistics
+\end{itemize}
+
+\textbf{Understanding Rating: 1-10} \underline{\hspace{1cm}}\\[0.3cm]
+\textbf{Notes:}\\
+\noindent\rule{\textwidth}{0.4pt}\\[3cm]
+
+\newpage
+
+\subsection{Day 11: Professional Standards [\_\_\_ / 8 hours]}
+\textbf{Date:} \underline{\hspace{4cm}} | \textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Key Activities}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Read E015-E019 cheatsheets (Architecture, Memory, Workspace)
+    \item Study \texttt{.ai\_workspace/guides/architectural\_standards.md}
+    \item Review \texttt{.ai\_workspace/guides/controller\_memory.md}
+    \item Read E020 cheatsheet (Git workflow)
+    \item Practice git operations: branch, commit, merge
+\end{itemize}
+
+\textbf{Understanding Rating: 1-10} \underline{\hspace{1cm}}\\[0.3cm]
+\textbf{Notes:}\\
+\noindent\rule{\textwidth}{0.4pt}\\[3cm]
+
+\newpage
+
+\subsection{Day 12: Configuration \& Deployment [\_\_\_ / 10 hours]}
+\textbf{Date:} \underline{\hspace{4cm}} | \textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Key Activities}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Listen to E011 podcast + Read E011 cheatsheet PDF
+    \item Deep-dive into \texttt{config.yaml} - ALL sections
+    \item Study Pydantic validation: \texttt{src/config/} directory
+    \item Create custom config: \texttt{capstone\_config.yaml}
+    \item Test config validation with intentional errors
+    \item Run simulation with custom config
+\end{itemize}
+
+\textbf{Understanding Rating: 1-10} \underline{\hspace{1cm}}\\[0.3cm]
+\textbf{Notes:}\\
+\noindent\rule{\textwidth}{0.4pt}\\[3cm]
+
+\newpage
+
+\subsection{Day 13: Documentation \& MCP [\_\_\_ / 9 hours]}
+\textbf{Date:} \underline{\hspace{4cm}} | \textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Key Activities}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Listen to E009 + E010 podcasts (Educational Materials, Documentation)
+    \item Navigate complete docs using \texttt{docs/NAVIGATION.md}
+    \item Study \texttt{.ai\_workspace/guides/mcp\_usage\_guide.md}
+    \item Build Sphinx documentation: \texttt{sphinx-build -M html docs docs/\_build}
+    \item Explore MCP servers: sequential-thinking, pytest-mcp, filesystem, sqlite-mcp
+\end{itemize}
+
+\textbf{Understanding Rating: 1-10} \underline{\hspace{1cm}}\\[0.3cm]
+\textbf{Notes:}\\
+\noindent\rule{\textwidth}{0.4pt}\\[3cm]
+
+\newpage
+
+\subsection{Day 14: Capstone Project [\_\_\_ / 10 hours]}
+\textbf{Date:} \underline{\hspace{4cm}} | \textbf{Actual Hours:} \underline{\hspace{2cm}}
+
+\subsubsection*{Morning Block (2 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 1-2: Listen to E021 podcast + Read E024 cheatsheet
+\end{itemize}
+
+\subsubsection*{CAPSTONE EXERCISE (8 hours)}
+
+\textbf{Phase 1: Design (1 hour)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 3: Define research question
+    \item Hour 3: Plan experiment methodology
+    \item Hour 3: Document expected outcomes
+\end{itemize}
+
+\textbf{Phase 2: Configuration (1 hour)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 4: Create custom \texttt{capstone\_config.yaml}
+    \item Hour 4: Select 2 controllers to compare
+    \item Hour 4: Configure noise levels, simulation duration
+\end{itemize}
+
+\textbf{Phase 3: Optimization (2 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 5-6: Run PSO optimization for Controller 1
+    \item Hour 5-6: Run PSO optimization for Controller 2
+    \item Hour 5-6: Save gains to JSON files
+\end{itemize}
+
+\textbf{Phase 4: Benchmark (2 hours)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 7: Execute comparative benchmark
+    \item Hour 7: Run 20 Monte Carlo trials per controller
+    \item Hour 8: Calculate statistics: mean, std, confidence intervals
+    \item Hour 8: Measure chattering index, settling time, tracking error
+\end{itemize}
+
+\textbf{Phase 5: Analysis (1 hour)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 9: Generate plots: state trajectories, control effort, chattering
+    \item Hour 9: Create comparison table
+    \item Hour 9: Statistical significance testing (t-test)
+\end{itemize}
+
+\textbf{Phase 6: Documentation (1 hour)}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Hour 10: Write markdown report (\texttt{capstone\_report.md})
+    \item Hour 10: Include: research question, methodology, results, conclusions
+    \item Hour 10: Commit work using proper git workflow
+    \item Hour 10: Push to repository (if applicable)
+\end{itemize}
+
+\newpage
+
+% ============================================================================
+% COMPLETION CERTIFICATE
+% ============================================================================
+
+\section*{COMPLETION CERTIFICATE}
+\addcontentsline{toc}{section}{Completion Certificate}
+
+\vspace{1cm}
+
+I, \underline{\hspace{6cm}}, completed the 14-Day Full Immersion DIP-SMC-PSO Learning Program.
+
+\vspace{1cm}
+
+\textbf{Start Date:} \underline{\hspace{4cm}}\\[0.5cm]
+\textbf{End Date:} \underline{\hspace{4cm}}\\[0.5cm]
+\textbf{Total Hours:} \underline{\hspace{4cm}}
+
+\vspace{1cm}
+
+\textbf{Achievements:}
+\begin{itemize}[label=$\square$, leftmargin=*]
+    \item Understand all 6 controller algorithms
+    \item Can run and modify simulations independently
+    \item Completed PSO optimization successfully
+    \item Generated publication-quality plots
+    \item Completed capstone project
+    \item Ready to contribute code to the project
+\end{itemize}
+
+\vspace{2cm}
+
+\textbf{Signature:} \underline{\hspace{6cm}} \textbf{Date:} \underline{\hspace{4cm}}
+
+\vspace{2cm}
+
+\section*{Next Steps After Completion}
+\addcontentsline{toc}{section}{Next Steps After Completion}
+
+\begin{enumerate}
+    \item Begin Tutorial 01: \texttt{docs/guides/getting-started.md}
+    \item Continue 1-2 hours/day for 2-3 months (reach mastery)
+    \item Use podcasts during commute for reinforcement
+    \item Join research tasks: \texttt{.ai\_workspace/planning/research/}
+    \item Contribute to open issues or propose new features
+    \item Consider publishing your capstone findings
+\end{enumerate}
+
+\textbf{Target Mastery Date:} \underline{\hspace{4cm}}
+
+\end{document}

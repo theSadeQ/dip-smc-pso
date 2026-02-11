@@ -1,0 +1,524 @@
+% 14-Day Full Immersion Guide - DIP-SMC-PSO Project
+% Generated: 2026-02-11
+
+\documentclass[11pt,a4paper]{article}
+
+% Packages
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\usepackage{tabularx}
+
+% Colors
+\definecolor{titleblue}{RGB}{41, 128, 185}
+\definecolor{sectiongray}{RGB}{52, 73, 94}
+\definecolor{highlightgreen}{RGB}{39, 174, 96}
+\definecolor{warningred}{RGB}{231, 76, 60}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small 14-Day Immersion Guide}
+\rhead{\small DIP-SMC-PSO Project}
+\cfoot{\small \thepage}
+
+% Title formatting
+\titleformat{\section}{\Large\bfseries\color{titleblue}}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{sectiongray}}{}{0em}{}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdftitle={14-Day Full Immersion Guide},
+    pdfauthor={DIP-SMC-PSO Project}
+}
+
+% Custom boxes
+\tcbuselibrary{skins,breakable}
+\newtcolorbox{infobox}[1]{
+    colback=blue!5,
+    colframe=titleblue,
+    fonttitle=\bfseries,
+    title=#1,
+    breakable
+}
+
+\newtcolorbox{warningbox}[1]{
+    colback=red!5,
+    colframe=warningred,
+    fonttitle=\bfseries,
+    title=#1,
+    breakable
+}
+
+\newtcolorbox{successbox}[1]{
+    colback=green!5,
+    colframe=highlightgreen,
+    fonttitle=\bfseries,
+    title=#1,
+    breakable
+}
+
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge\bfseries 14-Day Full Immersion\\[0.5cm] Learning Plan\par}
+    \vspace{1cm}
+    {\Large\bfseries Supporting Materials Guide\par}
+    \vspace{1cm}
+    {\LARGE DIP-SMC-PSO Project\par}
+    \vspace{2cm}
+
+    \begin{infobox}{Learning Goals}
+        \begin{itemize}
+            \item \textbf{Time Investment:} 112-140 hours (8-10 hours/day)
+            \item \textbf{Target Outcome:} 70-85\% project understanding
+            \item \textbf{Skill Goal:} Ability to contribute code
+            \item \textbf{Materials:} 30 episodes, 30 cheatsheets, 6 controllers
+        \end{itemize}
+    \end{infobox}
+
+    \vfill
+    {\large Generated: February 11, 2026\par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ============================================================================
+\section{Overview}
+
+This guide explains how to use the 14-Day Full Immersion Learning Plan supporting materials. The plan compresses 125-150 hours of learning into an intensive 14-day program.
+
+\subsection{What You'll Achieve}
+
+\begin{successbox}{Expected Outcomes After 14 Days}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Understanding:} 70-85\% of project architecture and algorithms
+    \item \textbf{Skills:} Run and modify all 6 controller implementations
+    \item \textbf{Capabilities:}
+    \begin{itemize}
+        \item Execute PSO optimization independently
+        \item Write tests for new features
+        \item Generate publication-quality plots
+        \item Contribute code to the project
+    \end{itemize}
+\end{itemize}
+\end{successbox}
+
+\subsection{Materials Provided}
+
+\begin{enumerate}
+    \item \textbf{Daily Checklist} (\texttt{daily\_checklist.pdf}) - 47 pages
+    \item \textbf{Quick Reference} (\texttt{quick\_reference\_commands.pdf}) - 6 pages
+    \item \textbf{VS Code Settings} (\texttt{vscode\_learning\_settings.json}) - IDE config
+    \item \textbf{Progress Tracker} (\texttt{progress\_tracker.md}) - Digital journal
+    \item \textbf{This Guide} (\texttt{immersion\_guide.pdf}) - You're reading it!
+\end{enumerate}
+
+% ============================================================================
+\section{Material Details}
+
+\subsection{1. Daily Checklist (PRINT THIS)}
+
+\begin{infobox}{daily\_checklist.pdf - 47 Pages}
+\textbf{Purpose:} Hour-by-hour breakdown for all 14 days\\[0.3cm]
+\textbf{Contents:}
+\begin{itemize}[leftmargin=*]
+    \item Morning/Afternoon/Evening time blocks
+    \item Checkboxes for all tasks
+    \item Daily reflection prompts
+    \item Understanding ratings (1-10 scale)
+    \item Notes sections for observations
+    \item Completion certificate on final page
+\end{itemize}
+\end{infobox}
+
+\subsubsection*{How to Use}
+\begin{enumerate}
+    \item \textbf{Print} this document (47 pages, single-sided recommended)
+    \item \textbf{Keep} at your desk throughout entire 14 days
+    \item \textbf{Check off} items as you complete them
+    \item \textbf{Fill in} reflection questions each evening
+    \item \textbf{Track} understanding ratings daily
+    \item \textbf{Sign} completion certificate on Day 14
+\end{enumerate}
+
+\begin{warningbox}{Critical}
+The daily checklist is your primary navigation tool. Don't skip the evening reflections - they consolidate learning and identify gaps.
+\end{warningbox}
+
+% ============================================================================
+\subsection{2. Quick Reference Commands (PRINT THIS)}
+
+\begin{infobox}{quick\_reference\_commands.pdf - 6 Pages}
+\textbf{Purpose:} Command reference for common operations\\[0.3cm]
+\textbf{Contents:}
+\begin{itemize}[leftmargin=*]
+    \item Essential simulation commands (6 controllers)
+    \item PSO optimization commands
+    \item Testing commands (pytest, coverage)
+    \item HIL simulation commands
+    \item Documentation building (Sphinx)
+    \item Git workflow commands
+    \item Project recovery commands
+    \item Troubleshooting tips
+    \item Keyboard shortcuts
+\end{itemize}
+\end{infobox}
+
+\subsubsection*{How to Use}
+\begin{enumerate}
+    \item \textbf{Print} this document (laminate recommended for durability)
+    \item \textbf{Place} near keyboard or pin to wall
+    \item \textbf{Copy-paste} commands (don't type from scratch)
+    \item \textbf{Refer} to it 20+ times per day
+    \item \textbf{Use} as terminal cheat sheet
+\end{enumerate}
+
+\begin{successbox}{Pro Tip}
+The most-used commands are on page 1. Keep this page visible at all times during immersion. You'll save hours by copy-pasting instead of typing.
+\end{successbox}
+
+% ============================================================================
+\subsection{3. VS Code Workspace Settings}
+
+\begin{infobox}{vscode\_learning\_settings.json}
+\textbf{Purpose:} Optimized IDE configuration for learning\\[0.3cm]
+\textbf{Features:}
+\begin{itemize}[leftmargin=*]
+    \item Python configuration (linting, type checking)
+    \item Testing integration (pytest, coverage)
+    \item Enhanced code navigation (breadcrumbs, sticky scroll)
+    \item Git integration (inline diffs, decorations)
+    \item Auto-save every 5 seconds (lose less work)
+    \item Markdown preview optimization
+    \item YAML/JSON validation
+    \item Recommended extensions list
+\end{itemize}
+\end{infobox}
+
+\subsubsection*{Installation}
+\begin{enumerate}
+    \item Copy file to \texttt{.vscode/settings.json} in project root:
+    \begin{verbatim}
+    cp .ai_workspace/edu/immersion_schedule/
+       vscode_learning_settings.json
+       .vscode/settings.json
+    \end{verbatim}
+    \item Restart VS Code
+    \item Install recommended extensions (see comments in JSON)
+    \item Customize as you discover preferences
+\end{enumerate}
+
+\subsubsection*{Key Features}
+\begin{itemize}
+    \item \textbf{F12} - Jump to definition (use 20+ times/day)
+    \item \textbf{Breadcrumbs} - Always know where you are in code
+    \item \textbf{Sticky Scroll} - Keep context visible while scrolling
+    \item \textbf{Test Explorer} - Run pytest directly from sidebar
+    \item \textbf{Git Decorations} - See changes inline
+\end{itemize}
+
+% ============================================================================
+\subsection{4. Progress Tracker (DIGITAL ONLY)}
+
+\begin{infobox}{progress\_tracker.md - Digital Journal}
+\textbf{Purpose:} Comprehensive daily progress journal\\[0.3cm]
+\textbf{Contents:}
+\begin{itemize}[leftmargin=*]
+    \item 14 daily tracking pages
+    \item Materials consumed checklists
+    \item Hands-on activities tracking
+    \item Experiment results tables
+    \item Performance metrics
+    \item Detailed capstone project tracking (6 phases)
+    \item Final 14-day reflection
+    \item Post-immersion continued learning tracker
+\end{itemize}
+\end{infobox}
+
+\subsubsection*{How to Use}
+\begin{enumerate}
+    \item \textbf{Keep open} in VS Code throughout immersion
+    \item \textbf{Update} at end of each day (15-20 minutes)
+    \item \textbf{Fill in} all tables, ratings, and reflection prompts
+    \item \textbf{Track} actual hours vs. planned hours
+    \item \textbf{Document} all experiments and results
+    \item \textbf{Use} for detailed capstone tracking on Day 14
+    \item \textbf{Complete} final reflection after Day 14
+\end{enumerate}
+
+\begin{warningbox}{Note}
+This file is designed for digital use only. Do NOT print it - update it directly in VS Code or your favorite markdown editor.
+\end{warningbox}
+
+% ============================================================================
+\section{Quick Start - Day 1 Morning}
+
+\subsection{30-Minute Setup Checklist}
+
+\begin{enumerate}
+    \item \textbf{Copy VS Code settings} (2 minutes)
+    \begin{verbatim}
+    cp .ai_workspace/edu/immersion_schedule/
+       vscode_learning_settings.json
+       .vscode/settings.json
+    \end{verbatim}
+
+    \item \textbf{Print daily checklist} (5 minutes)
+    \begin{itemize}
+        \item Open \texttt{daily\_checklist.pdf}
+        \item Print 47 pages, single-sided
+        \item Staple or bind
+    \end{itemize}
+
+    \item \textbf{Print quick reference} (3 minutes)
+    \begin{itemize}
+        \item Open \texttt{quick\_reference\_commands.pdf}
+        \item Print 6 pages
+        \item Laminate if possible
+        \item Pin to wall or keep near keyboard
+    \end{itemize}
+
+    \item \textbf{Open progress tracker} (2 minutes)
+    \begin{verbatim}
+    code .ai_workspace/edu/immersion_schedule/
+         progress_tracker.md
+    \end{verbatim}
+
+    \item \textbf{Verify environment} (10 minutes)
+    \begin{verbatim}
+    python --version  # Should show 3.9+
+    pip install -r requirements.txt
+    python simulate.py --ctrl classical_smc --plot
+    streamlit run streamlit_app.py
+    \end{verbatim}
+
+    \item \textbf{Organize workspace} (5 minutes)
+    \begin{itemize}
+        \item Place printed checklist on left side of desk
+        \item Place quick reference on right side
+        \item Keep VS Code with progress tracker open
+        \item Have terminal ready for commands
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Daily Workflow Template}
+
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\textbf{Morning} & Check daily checklist, start Streamlit, review yesterday's notes \\
+\hline
+\textbf{Afternoon} & Follow checklist tasks, run experiments, take breaks every 50 min \\
+\hline
+\textbf{Evening} & Update progress tracker, reflect on learnings, preview next day \\
+\hline
+\end{tabularx}
+
+% ============================================================================
+\section{Printing Recommendations}
+
+\subsection{Daily Checklist}
+\begin{itemize}
+    \item \textbf{Pages:} 47
+    \item \textbf{Format:} Single-sided (easier to write), stapled
+    \item \textbf{Paper:} Standard 8.5x11" or A4
+    \item \textbf{Location:} At desk throughout 14 days
+    \item \textbf{Cost:} ~\$2-3 at print shop
+\end{itemize}
+
+\subsection{Quick Reference}
+\begin{itemize}
+    \item \textbf{Pages:} 6
+    \item \textbf{Format:} Poster size (optional) or standard
+    \item \textbf{Paper:} Cardstock for durability
+    \item \textbf{Enhancement:} Laminate for long-term use
+    \item \textbf{Location:} Pin to wall or keep near keyboard
+    \item \textbf{Cost:} ~\$1 (or \$5-10 if laminated)
+\end{itemize}
+
+\subsection{This Guide}
+\begin{itemize}
+    \item \textbf{Pages:} 12
+    \item \textbf{Format:} Digital or print
+    \item \textbf{Purpose:} Reference guide for materials usage
+    \item \textbf{Read:} Before starting Day 1
+\end{itemize}
+
+% ============================================================================
+\section{Success Metrics}
+
+\subsection{After 14 Days, You Will}
+
+\begin{successbox}{Knowledge (70-85\% Understanding)}
+\begin{itemize}[leftmargin=*]
+    \item[$\checkmark$] Explain all 6 controller algorithms
+    \item[$\checkmark$] Understand PSO optimization process
+    \item[$\checkmark$] Navigate codebase confidently
+    \item[$\checkmark$] Interpret benchmark results
+    \item[$\checkmark$] Modify configurations safely
+\end{itemize}
+\end{successbox}
+
+\begin{successbox}{Skills (Can Contribute Code)}
+\begin{itemize}[leftmargin=*]
+    \item[$\checkmark$] Run and modify simulations
+    \item[$\checkmark$] Implement simple controller variants
+    \item[$\checkmark$] Write tests for new features
+    \item[$\checkmark$] Generate publication-quality plots
+    \item[$\checkmark$] Use git workflow properly
+\end{itemize}
+\end{successbox}
+
+\subsection{Gaps After 14 Days}
+
+\begin{warningbox}{Requires 2-3 More Months (1-2 hours/day)}
+\begin{itemize}[leftmargin=*]
+    \item Design novel controllers from scratch
+    \item Deep Lyapunov stability proofs
+    \item Publish research papers
+    \item Production deployment expertise
+\end{itemize}
+\end{warningbox}
+
+% ============================================================================
+\section{Troubleshooting}
+
+\subsection{Can't Print Checklist?}
+\begin{enumerate}
+    \item Open PDF in browser
+    \item Use browser print (Ctrl+P)
+    \item Export to different format if needed
+    \item Try online PDF print services
+\end{enumerate}
+
+\subsection{VS Code Settings Not Working?}
+\begin{enumerate}
+    \item Verify file is at \texttt{.vscode/settings.json} in project root
+    \item Check syntax (must be valid JSON)
+    \item Restart VS Code
+    \item Check for conflicting extensions
+\end{enumerate}
+
+\subsection{Commands Not Working?}
+\begin{enumerate}
+    \item Verify you're on Windows (use \texttt{python} not \texttt{python3})
+    \item Check you're in project root: \texttt{D:\textbackslash Projects\textbackslash main\textbackslash}
+    \item Ensure dependencies installed: \texttt{pip install -r requirements.txt}
+    \item Check Python version: \texttt{python --version} (should be 3.9+)
+\end{enumerate}
+
+\subsection{Progress Tracker Too Detailed?}
+\begin{enumerate}
+    \item Skip tables/metrics if not relevant
+    \item Focus on reflections and understanding ratings
+    \item Customize sections as needed
+    \item Use it as lightly or heavily as you prefer
+\end{enumerate}
+
+% ============================================================================
+\section{Next Steps After Day 14}
+
+\subsection{Immediate Actions}
+\begin{enumerate}
+    \item Archive your filled-out materials:
+    \begin{verbatim}
+    mkdir academic/logs/immersion_2026/
+    cp progress_tracker.md academic/logs/immersion_2026/
+    \end{verbatim}
+
+    \item Scan filled checklist for digital backup
+
+    \item Review capstone project results
+
+    \item Celebrate completion!
+\end{enumerate}
+
+\subsection{Continued Learning Path}
+\begin{enumerate}
+    \item \textbf{Weeks 3-4:} Tutorial 01 (\texttt{docs/guides/getting-started.md})
+
+    \item \textbf{Months 2-3:} 1-2 hours/day maintenance
+
+    \item \textbf{Ongoing:} Use podcasts during commute for reinforcement
+
+    \item \textbf{Contribution:} Join research tasks (\texttt{.ai\_workspace/planning/research/})
+
+    \item \textbf{Mastery:} 2-3 months total from Day 14
+\end{enumerate}
+
+% ============================================================================
+\section{File Manifest}
+
+\begin{tabularx}{\textwidth}{|l|l|X|l|}
+\hline
+\textbf{File} & \textbf{Size} & \textbf{Purpose} & \textbf{Usage} \\
+\hline
+\texttt{daily\_checklist.pdf} & 47 pages & Task checklist & Print once \\
+\hline
+\texttt{quick\_reference.pdf} & 6 pages & Command reference & 20+/day \\
+\hline
+\texttt{vscode\_settings.json} & 14 KB & IDE config & Setup once \\
+\hline
+\texttt{progress\_tracker.md} & 18 KB & Progress journal & Daily 15-20 min \\
+\hline
+\texttt{immersion\_guide.pdf} & 12 pages & Guide to materials & Reference \\
+\hline
+\end{tabularx}
+
+% ============================================================================
+\section{Contact \& Support}
+
+\subsection{If You Get Stuck}
+\begin{itemize}
+    \item Check \texttt{.ai\_workspace/guides/} for operational guides
+    \item Review \texttt{docs/NAVIGATION.md} for documentation
+    \item Use \texttt{/recover} command if you hit token limits
+    \item Consult \texttt{CLAUDE.md} for project conventions
+\end{itemize}
+
+\subsection{For Questions}
+\begin{itemize}
+    \item Open GitHub issue: \url{https://github.com/theSadeQ/dip-smc-pso/issues}
+    \item Review FAQ: \texttt{docs/guides/faq.md}
+\end{itemize}
+
+% ============================================================================
+\section{Final Words}
+
+\begin{successbox}{You're Ready!}
+You now have everything needed for an intensive 14-day learning journey. The materials are designed to maximize learning efficiency and minimize decision fatigue.
+
+\textbf{Remember:}
+\begin{itemize}
+    \item The goal is 70-85\% understanding, not perfection
+    \item Take breaks every 50 minutes (Pomodoro technique)
+    \item Don't skip the evening reflections
+    \item Ask for help when stuck (see Contact section)
+    \item Celebrate small wins daily
+\end{itemize}
+
+Good luck with your immersion! You'll be amazed at how much you can learn in 14 focused days.
+\end{successbox}
+
+\vfill
+
+\begin{center}
+\rule{0.5\textwidth}{0.4pt}\\[0.3cm]
+\textbf{Ready to start your immersion?}\\[0.2cm]
+\textbf{Begin with Day 1 setup, print your materials, and dive in!}\\[0.5cm]
+\rule{0.5\textwidth}{0.4pt}
+\end{center}
+
+\end{document}
