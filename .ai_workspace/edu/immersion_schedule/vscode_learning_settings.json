@@ -1,0 +1,305 @@
+{
+  "// ============================================================================": "",
+  "// VS Code Workspace Settings for 14-Day DIP-SMC-PSO Immersion": "",
+  "// Copy to .vscode/settings.json in project root": "",
+  "// Optimized for learning, code navigation, and understanding architecture": "",
+  "// ============================================================================": "",
+
+  "// ============================================================================": "",
+  "// PYTHON CONFIGURATION": "",
+  "// ============================================================================": "",
+
+  "python.defaultInterpreterPath": "${workspaceFolder}\\venv\\Scripts\\python.exe",
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.executeInFileDir": false,
+  "python.terminal.launchArgs": ["-X", "utf8"],
+
+  "// Python Linting - Helpful for learning code style": "",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": [
+    "--max-line-length=120",
+    "--extend-ignore=E203,W503"
+  ],
+
+  "// Type Checking - Learn proper type hints": "",
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.completeFunctionParens": true,
+
+  "// IntelliSense - Enhanced for code exploration": "",
+  "python.analysis.extraPaths": ["${workspaceFolder}/src"],
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportUnusedVariable": "information",
+    "reportUnusedImport": "information"
+  },
+
+  "// ============================================================================": "",
+  "// TESTING CONFIGURATION (Day 8)": "",
+  "// ============================================================================": "",
+
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestArgs": [
+    "tests",
+    "-v",
+    "--tb=short"
+  ],
+  "python.testing.autoTestDiscoverOnSaveEnabled": true,
+
+  "// ============================================================================": "",
+  "// FILE EXPLORER - Optimized for learning navigation": "",
+  "// ============================================================================": "",
+
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/.pytest_cache": true,
+    "**/.hypothesis": true,
+    "**/htmlcov": false,
+    "**/.cache": false,
+    "**/node_modules": true,
+    "**/.git": false
+  },
+
+  "// Show important hidden files for learning": "",
+  "explorer.fileNesting.enabled": false,
+  "explorer.sortOrder": "type",
+  "explorer.compactFolders": false,
+
+  "// ============================================================================": "",
+  "// SEARCH CONFIGURATION - Find code patterns easily": "",
+  "// ============================================================================": "",
+
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/htmlcov": true,
+    "**/.pytest_cache": true,
+    "**/docs/_build": true,
+    "**/*.pyc": true
+  },
+  "search.followSymlinks": true,
+  "search.smartCase": true,
+  "search.useIgnoreFiles": true,
+
+  "// ============================================================================": "",
+  "// EDITOR SETTINGS - Readable code for learning": "",
+  "// ============================================================================": "",
+
+  "editor.fontSize": 14,
+  "editor.lineHeight": 22,
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.rulers": [88, 120],
+  "editor.wordWrap": "off",
+  "editor.minimap.enabled": true,
+  "editor.minimap.maxColumn": 120,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+
+  "// Breadcrumbs - Essential for understanding code structure": "",
+  "breadcrumbs.enabled": true,
+  "breadcrumbs.filePath": "on",
+  "breadcrumbs.symbolPath": "on",
+
+  "// Sticky Scroll - Keep context visible": "",
+  "editor.stickyScroll.enabled": true,
+  "editor.stickyScroll.maxLineCount": 5,
+
+  "// ============================================================================": "",
+  "// CODE NAVIGATION - Fast file switching": "",
+  "// ============================================================================": "",
+
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.revealIfOpen": true,
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.value": 8,
+  "workbench.editor.limit.perEditorGroup": true,
+
+  "// Quick Open settings": "",
+  "workbench.quickOpen.preserveInput": false,
+
+  "// ============================================================================": "",
+  "// GIT INTEGRATION (Day 11, Day 14)": "",
+  "// ============================================================================": "",
+
+  "git.enabled": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.decorations.enabled": true,
+  "git.ignoreLimitWarning": true,
+
+  "// Show git changes inline": "",
+  "scm.diffDecorations": "all",
+  "scm.diffDecorationsGutterWidth": 5,
+
+  "// ============================================================================": "",
+  "// TERMINAL CONFIGURATION": "",
+  "// ============================================================================": "",
+
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.fontFamily": "Consolas, 'Courier New', monospace",
+  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.confirmOnExit": "hasChildProcesses",
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+
+  "// Keep terminal output visible": "",
+  "terminal.integrated.enablePersistentSessions": true,
+
+  "// ============================================================================": "",
+  "// LEARNING-SPECIFIC FEATURES": "",
+  "// ============================================================================": "",
+
+  "// Auto-save during immersion (lose less work)": "",
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 5000,
+
+  "// Show all symbols in outline": "",
+  "outline.showVariables": true,
+  "outline.showFunctions": true,
+  "outline.showClasses": true,
+
+  "// Peek editor for quick definitions": "",
+  "editor.peekWidgetDefaultFocus": "editor",
+
+  "// Suggest imports automatically": "",
+  "python.analysis.autoImportCompletions": true,
+
+  "// ============================================================================": "",
+  "// DOCUMENTATION FEATURES (Day 13)": "",
+  "// ============================================================================": "",
+
+  "markdown.preview.fontSize": 14,
+  "markdown.preview.lineHeight": 1.6,
+  "markdown.preview.scrollPreviewWithEditor": true,
+  "markdown.preview.scrollEditorWithPreview": true,
+
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+
+  "// ============================================================================": "",
+  "// YAML/JSON CONFIG FILES (Day 12)": "",
+  "// ============================================================================": "",
+
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.tabSize": 2
+  },
+
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.tabSize": 2
+  },
+
+  "// ============================================================================": "",
+  "// FILE ASSOCIATIONS - Recognize project files": "",
+  "// ============================================================================": "",
+
+  "files.associations": {
+    "*.yaml": "yaml",
+    "*.yml": "yaml",
+    "CLAUDE.md": "markdown",
+    ".mcp.json": "jsonc",
+    "*.ipynb": "jupyter-notebook"
+  },
+
+  "// ============================================================================": "",
+  "// PERFORMANCE OPTIMIZATIONS": "",
+  "// ============================================================================": "",
+
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/.pytest_cache/**": true,
+    "**/htmlcov/**": true,
+    "**/__pycache__/**": true,
+    "**/docs/_build/**": true
+  },
+
+  "// ============================================================================": "",
+  "// KEYBOARD SHORTCUTS HINTS": "",
+  "// ============================================================================": "",
+
+  "// F12 - Go to Definition (use 20+ times/day)": "",
+  "// Shift+F12 - Find All References": "",
+  "// Ctrl+P - Quick file open": "",
+  "// Ctrl+Shift+P - Command palette": "",
+  "// Ctrl+Shift+F - Global search": "",
+  "// Ctrl+` - Toggle terminal": "",
+  "// Ctrl+Shift+E - File explorer": "",
+  "// Ctrl+Shift+G - Git panel": "",
+  "// Ctrl+Shift+X - Extensions": "",
+  "// Alt+Left/Right - Navigate back/forward": "",
+  "// Ctrl+T - Go to symbol in workspace": "",
+
+  "// ============================================================================": "",
+  "// RECOMMENDED EXTENSIONS FOR LEARNING": "",
+  "// Install these during Day 1 setup": "",
+  "// ============================================================================": "",
+
+  "// MUST-HAVE EXTENSIONS:": "",
+  "// 1. ms-python.python - Python language support": "",
+  "// 2. ms-python.vscode-pylance - Fast IntelliSense": "",
+  "// 3. redhat.vscode-yaml - YAML validation": "",
+  "// 4. eamodio.gitlens - Git history visualization": "",
+  "// 5. ms-vscode.test-adapter-converter - Test explorer": "",
+
+  "// HELPFUL EXTENSIONS:": "",
+  "// 6. streetsidesoftware.code-spell-checker - Spell checking": "",
+  "// 7. yzhang.markdown-all-in-one - Markdown preview": "",
+  "// 8. njpwerner.autodocstring - Generate docstrings": "",
+  "// 9. donjayamanne.githistory - Git graph visualization": "",
+  "// 10. ms-toolsai.jupyter - Jupyter notebook support": "",
+
+  "// ============================================================================": "",
+  "// CUSTOM TASKS FOR IMMERSION": "",
+  "// Create .vscode/tasks.json with these commands": "",
+  "// ============================================================================": "",
+
+  "// Quick task shortcuts:": "",
+  "// Ctrl+Shift+B - Run build task (configured in tasks.json)": "",
+  "// Suggested tasks.json content:": "",
+  "//   - Run Classical SMC simulation": "",
+  "//   - Run all tests": "",
+  "//   - Generate coverage report": "",
+  "//   - Build Sphinx documentation": "",
+  "//   - Run PSO optimization": "",
+
+  "// ============================================================================": "",
+  "// DAILY WORKFLOW SETTINGS": "",
+  "// ============================================================================": "",
+
+  "// Keep workspace state between sessions": "",
+  "window.restoreWindows": "all",
+  "workbench.startupEditor": "welcomePageInEmptyWorkbench",
+
+  "// Panel position (terminal, output, problems)": "",
+  "workbench.panel.defaultLocation": "bottom",
+
+  "// Color theme recommendations for long sessions": "",
+  "// workbench.colorTheme": "Default Dark+",  // Easy on eyes": "",
+  "// workbench.colorTheme": "Monokai",        // High contrast": "",
+  "// workbench.colorTheme": "Solarized Dark", // Reduced strain": "",
+
+  "// ============================================================================": "",
+  "// END OF LEARNING-OPTIMIZED SETTINGS": "",
+  "// Modify as you discover your preferences during the 14 days": "",
+  "// ============================================================================": ""
+}
