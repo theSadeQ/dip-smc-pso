@@ -3,6 +3,7 @@
 % ==============================================================================
 \input{../templates/master_template.tex}
 \input{../templates/tikz_components.tex}
+\input{episode_macros.tex}
 
 % Episode-specific title
 \renewcommand{\episodetitle}{E030: Controller Base \& Factory}
@@ -27,33 +28,27 @@
 Result: Change one line in config.yaml and swap algorithms without touching code!
 \end{keypoint}
 
-\begin{multicols}{2}
-
 \subsection*{Why This Matters}
 
-\begin{warning}
-\textbf{Without Interface:}
+\sidebysidecomparison
+{Without Interface:}
+{
 \begin{itemize}
     \item Each controller has different method names
     \item Simulation code full of if/else chains
     \item Adding new controller = rewrite everything
     \item Testing = nightmare (5 different APIs)
 \end{itemize}
-\end{warning}
-
-\columnbreak
-
-\begin{tip}
-\textbf{With Interface:}
+}
+{With Interface:}
+{
 \begin{itemize}
     \item One method: \texttt{compute\_control()}
     \item Simulation code agnostic to controller type
     \item New controller = implement interface
     \item Testing = same harness for all 5
 \end{itemize}
-\end{tip}
-
-\end{multicols}
+}
 
 \subsection*{The ControllerInterface Abstract Base Class}
 
@@ -393,14 +388,11 @@ The \texttt{\_\_del\_\_()} destructor provides automatic cleanup, but explicit \
 
 \subsection*{Design Patterns Identified}
 
-\begin{tcolorbox}[colback=background, colframe=primary, title=\faLayerGroup\ Four Key Patterns]
-\begin{enumerate}
-    \item \textbf{Abstract Base Class (ABC)}: Enforces contract via Python's \texttt{@abstractmethod}
-    \item \textbf{Factory Pattern}: Registry-based instantiation decouples creation from usage
-    \item \textbf{Weak Reference Pattern}: Prevents memory leaks from circular references
-    \item \textbf{Strategy Pattern}: Controllers are interchangeable strategies for same problem
-\end{enumerate}
-\end{tcolorbox}
+\fourkeypatterns
+{\textbf{Abstract Base Class (ABC)}: Enforces contract via Python's \texttt{@abstractmethod}}
+{\textbf{Factory Pattern}: Registry-based instantiation decouples creation from usage}
+{\textbf{Weak Reference Pattern}: Prevents memory leaks from circular references}
+{\textbf{Strategy Pattern}: Controllers are interchangeable strategies for same problem}
 
 % ==============================================================================
 % PAGE 4: PRACTICAL EXAMPLES & QUICK REFERENCE

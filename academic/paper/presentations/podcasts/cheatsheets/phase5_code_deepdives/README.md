@@ -4,6 +4,8 @@
 
 **Status**: In Progress - Phase 5A (Controllers) Started
 
+**Build Note (2026-02-04)**: `xelatex` fails with `hyperref` error `\IfFormatAtLeastT{2025-11-01}` on MiKTeX 24.1, so E030/E031 PDF compilation is currently blocked until MiKTeX/hyperref is updated or a template workaround is applied.
+
 **Target Audience**: Developers who want to understand HOW the code works (not just WHAT it does)
 
 ---
