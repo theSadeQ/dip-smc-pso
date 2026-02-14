@@ -7,13 +7,62 @@
 
 ## Quick Start (5 Steps)
 
-1. **Choose Episode(s)** - See `PHASE1_INDEX.md` for episode summaries
+1. **Choose Episode(s) and Version** - See `PHASE1_INDEX.md` for episode summaries and E001 version selection
 2. **Create Beautiful.ai Project** - New presentation, select smart template
 3. **Import Slide Content** - Copy from episode markdown files
 4. **Add Visuals** - Use prompts from `visual_assets/VISUAL_ASSETS_CATALOG.md`
 5. **Practice Delivery** - Use speaker scripts as presenter notes
 
 **Estimated Time:** 45-60 minutes per episode (first time) | 20-30 minutes (experienced)
+
+---
+
+## Choosing Episode Versions (E001: Standard vs. Extended)
+
+E001 is available in two versions to serve different presentation contexts.
+
+### Standard Version (8 slides, 25-30 min)
+**File:** `phase1_foundations/E001_project_overview_slides.md`
+
+**Use when:**
+- Conference slot or seminar (30-minute time limit)
+- Audience wants high-level overview only
+- First-time introduction to a general audience
+- Focus is on "what" not "how"
+- Audience is primarily non-technical or executive
+
+**Covers:** DIP challenge, 7 controllers, 3 plant models, PSO overview, workflow, key takeaways
+
+### Extended Version (12 slides, 45-50 min)
+**File:** `phase1_foundations/E001_project_overview_extended_slides.md`
+
+**Use when:**
+- University workshop, multi-day course, or dedicated lecture slot
+- Audience includes researchers, implementers, or engineers
+- Engineering practices and code quality matter
+- Time allows 45-50 minutes of depth
+- Comprehensive project introduction needed
+
+**Additional Slides (8-12) Cover:**
+- Slide 8: Analysis and Visualization Toolkit (performance metrics, statistical validation, publication output)
+- Slide 9: Professional Engineering and Quality (5 design principles, 90% coverage, 250+ tests, 25K LOC)
+- Slide 10: Technology Stack Deep-Dive (NumPy/SciPy/PySwarms/pytest/Pydantic layers)
+- Slide 11: Detailed Use Case Scenarios (student path, researcher workflow, engineer deployment)
+- Slide 12: Enhanced takeaways covering all 7 topics
+
+### Hybrid Approach (Optional)
+**Deliver Standard (Slides 1-7) + Selected Extended slides as Appendix:**
+- Add Slide 8 only (Analysis Toolkit) for audiences interested in research outputs → 9 slides, 28-34 min
+- Add Slides 8-9 only (Analysis + Quality) for researcher audiences → 10 slides, 31-37 min
+- Show Extended slides 8-11 only if Q&A demands technical depth
+
+### Building Extended from Standard
+If Standard is already built in Beautiful.ai:
+1. Keep all 7 existing slides
+2. Add 4 new slides (8-11) from extended file
+3. Replace Standard Slide 8 (Takeaways) with Extended Slide 12 (Enhanced Takeaways)
+4. Add visual assets 1.7-1.10 from updated catalog
+5. **Additional time:** 45-60 min build + 30-45 min practice
 
 ---
 

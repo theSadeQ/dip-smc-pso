@@ -12,27 +12,55 @@
 ## Episode Navigation
 
 ### E001: Project Overview and Introduction
-**File:** `phase1_foundations/E001_project_overview_slides.md`
-**Duration:** 25-30 minutes
-**Slides:** 8
-**Topics:**
-- What is DIP-SMC-PSO project?
-- The control challenge (double broomstick analogy)
+**Files:**
+- `phase1_foundations/E001_project_overview_slides.md` **(Standard - 8 slides, 25-30 min)**
+- `phase1_foundations/E001_project_overview_extended_slides.md` **(Extended - 12 slides, 45-50 min)**
+
+**Choose Based On Your Context:**
+- **Standard:** Conference talks, departmental seminars, time-limited presentations (30-min slots)
+- **Extended:** University workshops, courses, audiences including researchers or engineers (45-50 min slots)
+- **Hybrid:** Deliver Standard slides 1-7, then add Extended slides 8-11 as appendix for Q&A depth
+
+**Standard Version (8 slides, 25-30 min):**
+Topics Covered:
+- What is DIP-SMC-PSO project? (4 main purposes)
+- The control challenge (double broomstick analogy, 4 difficulties)
 - Real-world applications (SpaceX, robotics, vehicles)
-- Seven controllers overview
-- Three plant models
-- PSO optimization preview
-- Project workflow (install → research paper)
+- Seven controllers overview (hierarchy pyramid)
+- Three plant models (speed vs. accuracy tradeoff)
+- PSO optimization preview (swarm, 360% improvement)
+- Project workflow (install to research paper)
 - Key takeaways
 
-**Key Visuals Needed:**
-- Double pendulum system diagram
-- SpaceX rocket landing comparison
-- Controller hierarchy pyramid
-- PSO swarm visualization
-- Workflow timeline
+**Extended Version (12 slides, 45-50 min):**
+Additional Topics (Slides 8-12):
+- Analysis and Visualization Toolkit (performance metrics, statistical validation, publication output)
+- Professional Engineering and Quality (5 design principles, 90% coverage, 250+ tests, 25K LOC)
+- Technology Stack Deep-Dive (NumPy/SciPy/PySwarms/pytest/Pydantic layer breakdown)
+- Detailed Use Case Scenarios (student learning path, researcher workflow, engineer deployment)
+- Enhanced Key Takeaways (7 items covering all topics including extended content)
 
-**Preparation Time:** 1.5-2 hours (build slides + practice)
+**Coverage Comparison:**
+- Standard version: ~75% of source material (key concepts and workflow)
+- Extended version: ~100% of source material (all lines 1-375 covered)
+
+**Key Visuals Needed (Standard):**
+- Double pendulum system diagram (Asset 1.1)
+- SpaceX rocket landing comparison (Asset 1.2)
+- Controller hierarchy pyramid (Asset 1.3)
+- PSO swarm visualization (Asset 1.5)
+- Workflow timeline (Asset 1.6)
+
+**Additional Visuals (Extended Only):**
+- Analysis workflow diagram (Asset 1.7)
+- Testing pyramid (Asset 1.8)
+- Technology stack layers (Asset 1.9)
+- Use case workflow comparison (Asset 1.10)
+
+**Preparation Time:**
+- Standard version: 1.5-2 hours (build + practice)
+- Extended version (from scratch): 3-3.5 hours (build + practice)
+- Extended version (if Standard already built): 1.5-2 additional hours
 
 ---
 
@@ -146,12 +174,19 @@
 ## Complete Phase 1 Statistics
 
 **Total Episode Count:** 5 episodes
-**Total Slide Count:** 45 slides (8+9+8+10+10)
-**Total Duration:** 140-160 minutes (~2.5 hours of content)
-**Total Preparation Time:** 9-11 hours (all 5 episodes from scratch)
+**Total Slide Count (Standard):** 45 slides (8+9+8+10+10)
+**Total Slide Count (Extended E001):** 49 slides (12+9+8+10+10) - with E001 extended
+**Total Duration (Standard):** 140-160 minutes (~2.5 hours of content)
+**Total Duration (Extended E001):** 155-175 minutes (~2.7 hours of content)
+**Total Preparation Time (Standard):** 9-11 hours (all 5 episodes from scratch)
+**Total Preparation Time (Extended E001):** 11-13 hours (Standard + Extended slides)
 **Source Material:** 3,476 lines of markdown (podcasts) + 31 PDF cheatsheets
 
-### Slide Distribution by Topic:
+### E001 Version Comparison:
+- Standard (8 slides, 25-30 min): Key concepts + workflow, ~75% source coverage
+- Extended (12 slides, 45-50 min): All topics + design philosophy + tech stack + use cases, 100% source coverage
+
+### Slide Distribution by Topic (Standard):
 - Project Overview/Introduction: 8 slides (18%)
 - Control Theory (SMC, Lyapunov, Adaptive): 9 slides (20%)
 - Physics/Dynamics Models: 8 slides (18%)
@@ -259,8 +294,9 @@
 
 **Complete Catalog:** See `visual_assets/VISUAL_ASSETS_CATALOG.md`
 
-**25 Total Assets:**
-- E001: 6 visuals (system diagram, rocket, pyramid, models, swarm, workflow)
+**29 Total Assets:**
+- E001 Standard: 6 visuals (system diagram, rocket, pyramid, models, swarm, workflow) - Assets 1.1-1.6
+- E001 Extended: 4 additional visuals (analysis workflow, testing pyramid, tech stack layers, use case comparison) - Assets 1.7-1.10
 - E002: 6 visuals (dashboard, bowl, mountain, waveforms, phase plane, adaptive)
 - E003: 5 visuals (energy surfaces, angle graph, forces, matrix, speed chart)
 - E004: 5 visuals (birds, velocity diagram, triangle, convergence, table)
@@ -278,15 +314,16 @@
 ```
 beautiful_ai/
 ├── PHASE1_INDEX.md (this file)
-├── PRESENTATION_GUIDE.md (usage instructions)
+├── PRESENTATION_GUIDE.md (usage instructions, including version selection guide)
 ├── phase1_foundations/
-│   ├── E001_project_overview_slides.md (8 slides, complete)
+│   ├── E001_project_overview_slides.md (Standard - 8 slides, 25-30 min)
+│   ├── E001_project_overview_extended_slides.md (Extended - 12 slides, 45-50 min) [NEW]
 │   ├── E002_control_theory_fundamentals_slides.md (9 slides, complete)
 │   ├── E003_plant_models_and_dynamics_slides.md (8 slides, structure + 3 detailed)
 │   ├── E004_pso_optimization_slides.md (10 slides, structure + 3 detailed)
 │   └── E005_simulation_engine_slides.md (10 slides, structure + 3 detailed)
 └── visual_assets/
-    ├── VISUAL_ASSETS_CATALOG.md (25 assets cataloged)
+    ├── VISUAL_ASSETS_CATALOG.md (29 assets cataloged: 25 original + 4 new for Extended E001)
     └── (descriptions for Beautiful.ai prompts)
 ```
 
@@ -334,6 +371,10 @@ beautiful_ai/
 
 ---
 
-**Phase 1 Total Value:** 140-160 minutes of presentation content, 45 slides, 25 visual assets, ready for immediate use in Beautiful.ai or manual slide creation tools.
+**Phase 1 Total Value (Standard):** 140-160 minutes of presentation content, 45 slides, 25 visual assets, ready for immediate use in Beautiful.ai or manual slide creation tools.
 
-**Estimated ROI:** 9-11 hours preparation yields 2.5 hours of polished educational content (4:1 content-to-prep ratio)
+**Phase 1 Total Value (Extended E001):** 155-175 minutes of presentation content, 49 slides, 29 visual assets, 100% source material coverage for E001.
+
+**Estimated ROI (Standard):** 9-11 hours preparation yields 2.5 hours of polished educational content (4:1 content-to-prep ratio)
+
+**Estimated ROI (Extended):** 11-13 hours preparation yields 2.7 hours of comprehensive content - includes engineering rigor, tech stack depth, and detailed use case guidance

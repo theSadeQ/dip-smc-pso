@@ -1,5 +1,11 @@
-# E001: Project Overview and Introduction
+# E001: Project Overview and Introduction (STANDARD VERSION)
 **Beautiful.ai Slide Deck + Speaker Scripts**
+
+**Version:** Standard (Quick Overview)
+**Extended Version:** See `E001_project_overview_extended_slides.md` for comprehensive 12-slide version
+
+**This Version:** 8 slides, 25-30 min - Conference talks, seminars, time-limited presentations
+**Extended Version:** 12 slides, 45-50 min - Workshops, courses, researcher/engineer audiences
 
 **Target Audience:** Students/Learners (Complete Beginners)
 **Duration:** 25-30 minutes

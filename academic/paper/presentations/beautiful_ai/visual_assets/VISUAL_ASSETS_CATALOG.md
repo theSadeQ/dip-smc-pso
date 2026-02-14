@@ -99,6 +99,108 @@ visual_assets/
 
 ---
 
+## E001 EXTENDED: Additional Visual Assets (Slides 8-11)
+
+*These assets are used exclusively in the Extended version (E001_project_overview_extended_slides.md)*
+
+### ASSET 1.7: Analysis Workflow Diagram
+**Slide:** E001 Extended Slide 8
+**Type:** Four-quadrant dashboard / flow diagram
+**Description:**
+- 2x2 grid layout with 4 capability panels, each in a distinct card
+- Panel 1 (top-left, blue): Performance Metrics
+  - Speedometer or gauge icon
+  - Labels: "Settling time", "Overshoot", "Steady-state error", "Lyapunov monitoring"
+- Panel 2 (top-right, green): Real-Time Visualization
+  - Monitor/screen icon
+  - Small animation frame showing pendulum
+  - Labels: "State trajectories", "Control effort plots", "Phase portraits"
+- Panel 3 (bottom-left, orange): Statistical Validation
+  - Scatter plot dots with confidence intervals
+  - Labels: "Monte Carlo (1000+ sims)", "Bootstrap CI", "t-test / ANOVA"
+- Panel 4 (bottom-right, purple): Publication Output
+  - Journal paper icon or matplotlib-style chart
+  - Labels: "14 figures", "Comparative plots", "Research paper v2.1"
+- Center title: "Analysis & Visualization Toolkit"
+- Color coding: Blue (metrics), Green (visualization), Orange (stats), Purple (publication)
+**Beautiful.ai Prompt:** "Four-quadrant dashboard with icons for metrics, visualization, statistics, and publication output"
+**Source:** E001 podcast source lines 133-148, analysis section
+
+### ASSET 1.8: Testing Pyramid
+**Slide:** E001 Extended Slide 9
+**Type:** Pyramid diagram
+**Description:**
+- Triangle divided into 3 horizontal tiers
+- Bottom tier (largest, blue): "Unit Tests" - tests individual functions, fastest
+  - Label: "180+ tests, 85% overall coverage target"
+- Middle tier (medium, green): "Integration Tests" - tests component interactions
+  - Label: "50+ tests, 95% critical coverage"
+- Top tier (smallest, orange): "System / Benchmark Tests" - end-to-end performance
+  - Label: "20+ tests, 100% safety-critical"
+- Right side annotation: "Total: 250+ tests"
+- Left side annotation: "~90% overall coverage"
+- At peak: "Submission-ready research outputs"
+- Arrow on right showing "increasing complexity / fewer tests" from bottom to top
+**Beautiful.ai Prompt:** "Testing pyramid with three tiers showing unit, integration, and system tests with coverage percentages"
+**Source:** E001 podcast source lines 245-258, quality section
+
+### ASSET 1.9: Technology Stack Layers
+**Slide:** E001 Extended Slide 10
+**Type:** Layered architecture stack (horizontal bands)
+**Description:**
+- 4 stacked horizontal bands (widest at bottom, narrowing toward top)
+- Band 1 (bottom, widest, blue): "Core Scientific Computing"
+  - NumPy logo/icon, SciPy logo/icon, Matplotlib logo/icon
+  - Subtitle: "Array operations, ODE integration, visualization"
+- Band 2 (medium-wide, green): "Optimization Toolkit"
+  - PySwarms icon (particle swarm), Optuna icon (funnel/curve)
+  - Subtitle: "PSO and Bayesian optimization"
+- Band 3 (medium, orange): "Quality Assurance"
+  - pytest icon (test tube), Hypothesis icon (question mark), Coverage icon (percentage)
+  - Subtitle: "250+ tests, property testing, coverage measurement"
+- Band 4 (top, narrowest, purple): "Configuration and Interface"
+  - Pydantic icon (shield/validation), PyYAML icon (file), Streamlit icon (dashboard)
+  - Subtitle: "Type-safe config, file parsing, interactive UI"
+- Right side: Brief role description per band
+- Tagline at bottom: "Battle-tested scientific Python ecosystem"
+**Beautiful.ai Prompt:** "4-layer technology stack diagram with logos/icons and role descriptions per layer"
+**Source:** E001 podcast source lines 209-224, technology section
+
+### ASSET 1.10: Use Case Workflow Comparison
+**Slide:** E001 Extended Slide 11
+**Type:** Three-column persona comparison
+**Description:**
+- 3 side-by-side vertical panels (equal width)
+- Panel 1 (blue): Student / Learner
+  - Top: Graduation cap icon, "Student Path"
+  - Learning progression (4 numbered steps, arrows between):
+    1. Classical SMC (basics)
+    2. Super-Twisting (smooth control)
+    3. Adaptive SMC (self-tuning)
+    4. Research benchmarks
+  - Bottom: "Hands-on Projects" callout
+- Panel 2 (green): Researcher / Academic
+  - Top: Microscope icon, "Researcher Path"
+  - Research workflow (4 numbered steps):
+    1. Implement controller variant
+    2. PSO optimization (2-4 hrs)
+    3. Monte Carlo validation (1000+ sims)
+    4. Publication-ready figures
+  - Bottom: "Reproducible outputs" callout
+- Panel 3 (orange): Engineer / Practitioner
+  - Top: Hard hat or wrench icon, "Engineer Path"
+  - Deployment pipeline (4 numbered steps):
+    1. PSO optimization (simplified model)
+    2. Validate (full nonlinear model)
+    3. HIL testing (pre-hardware)
+    4. Safety validation + deployment
+  - Bottom: "Production-ready" callout
+- Bottom tagline: "Three audiences, one framework"
+**Beautiful.ai Prompt:** "Three-column persona cards with numbered workflow steps, icons, and callout labels"
+**Source:** E001 podcast source lines 259-294, use cases section
+
+---
+
 ## E002: Control Theory Fundamentals - Visual Assets
 
 ### ASSET 2.1: State Vector Dashboard
@@ -458,5 +560,9 @@ visual_assets/
 
 ---
 
-**Total Visual Assets Cataloged:** 25 assets across 5 episodes
-**Estimated Creation Time:** 6-8 hours for all assets (manual creation) | 2-3 hours (Beautiful.ai prompts)
+**Total Visual Assets Cataloged:** 29 assets across 5 episodes
+- 25 assets for Standard versions (E001 Standard + E002-E005)
+- 4 additional assets for E001 Extended version (Assets 1.7-1.10)
+
+**Estimated Creation Time (Standard - 25 assets):** 6-8 hours (manual creation) | 2-3 hours (Beautiful.ai prompts)
+**Estimated Creation Time (All 29 assets):** 8-11 hours (manual) | 3-4 hours (Beautiful.ai prompts)
