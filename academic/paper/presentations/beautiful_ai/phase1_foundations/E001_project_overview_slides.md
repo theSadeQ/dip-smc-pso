@@ -47,7 +47,7 @@ with Sliding Mode Control and PSO Optimization
 
 This is your foundational episode in our podcast series, and I want to set expectations right from the start. Don't worry about memorizing specific commands, file names, or code snippets as we go through this. Everything is available on GitHub, and we'll link that in the show notes. What I want you to focus on instead is how all the pieces fit together - the big picture, the workflow, and the engineering principles that make this system work.
 
-The DIP-SMC-PSO project is an open-source Python framework that serves four main purposes. First, it's a control systems research platform where you can test and validate advanced sliding mode control algorithms. Second, it's an educational tool designed to help you learn control theory through hands-on experimentation. Third, it's an optimization playground where you can explore particle swarm optimization and other meta-heuristic algorithms. And fourth, it supports hardware-in-the-loop testing, which means you can bridge the gap between simulation and real physical hardware deployment.
+The DIP-SMC-PSO project is an open-source Python framework that serves four main purposes. First, it's a control systems research platform where you can test and validate sliding mode control algorithms - SMC is a technique that forces a physical system onto a stable mathematical path by rapidly adjusting the control direction, making it robust to disturbances. Second, it's an educational tool designed to help you learn control theory through hands-on experimentation. Third, it's an optimization playground where you can explore particle swarm optimization and other meta-heuristic algorithms. And fourth, it supports hardware-in-the-loop testing, which means you can bridge the gap between simulation and real physical hardware deployment.
 
 Over the next 25 to 30 minutes, we're going to build your intuition about this system. We'll talk about why this problem is hard, how the architecture is organized, and what kind of real-world applications benefit from this research. By the end, you'll understand the complete workflow from installation to published research paper. Let's dive in!"
 
@@ -156,7 +156,7 @@ Third, self-balancing vehicles. Your Segway or electric scooter is a single inve
 
 Fourth, industrial crane load stabilization. When a construction crane swings a heavy load and needs to stop it precisely at a target location, that's pendulum control. The load acts like a pendulum hanging from the crane boom, and the control system minimizes swing while moving.
 
-And fifth, aerospace attitude control. Satellites maintaining orientation in space face similar challenges, though without gravity they're dealing with angular momentum and reaction wheel dynamics instead.
+And fifth, aerospace attitude control. Satellites maintaining orientation in space face similar mathematical challenges - sensors detect a tilt, onboard algorithms compute a correction, and actuators apply force to recover. Same fundamental sensor-compute-act loop we're building here.
 
 The key insight here is that the same mathematical framework applies across wildly different scales and contexts. Master this problem, and you've learned principles that transfer to countless engineering applications."
 
@@ -189,12 +189,12 @@ Side annotations: Performance metrics (e.g., "21.4% improvement")
 - **Classical SMC** - Baseline, 1970s proven theory, ~200 lines of code
 
 **Tier 2 - The Smooth Operator:**
-- **Super-Twisting Algorithm** - 2nd-order sliding mode, chattering reduction
+- **Super-Twisting Algorithm** - Eliminates chattering (chattering = rapid on/off switching that vibrates hardware)
 
 **Tier 3 - The Intelligent Adapters:**
-- **Adaptive SMC** - Real-time gain adjustment
-- **Hybrid Adaptive STA-SMC** - Best of both worlds (21.4% improvement)
-- **Conditional Hybrid** - Safety-aware switching
+- **Adaptive SMC** - Real-time gain adjustment (gains = multiplier numbers that set how strongly the cart responds)
+- **Hybrid Adaptive STA-SMC** - Best of both worlds (21.4% lower cost score vs. Classical SMC baseline)
+- **Conditional Hybrid** - Safety-aware switching between strategies
 
 **Tier 4 - Specialized Controllers:**
 - **Swing-Up SMC** - Energy-based control for realistic scenarios
@@ -209,11 +209,11 @@ Side annotations: Performance metrics (e.g., "21.4% improvement")
 
 At the foundation, we have Classical Sliding Mode Control. This is the grandfather algorithm - our baseline. It's based on proven theory from the 1970s, simple and robust, and we keep it lightweight at about 200 lines of code. When we say 'Controller X is 20% better,' we mean compared to this classical baseline. It's the standard ruler by which we measure everything else.
 
-Next tier up, we have the Super-Twisting Algorithm. This is what we call a second-order sliding mode controller. Here's the practical difference: imagine our classical controller is like tapping the brakes repeatedly - effective but jerky. Super-Twisting is like having ABS brakes - smooth, continuous corrections that achieve the same result without the harsh on-off behavior. It excels when you need smooth actuator commands, like in robotics where jerky motions damage gears.
+Next tier up, we have the Super-Twisting Algorithm. The classical SMC solves the control problem, but it has a cost: chattering. That's the term for rapid on/off switching in the control signal - like a jackhammer instead of a smooth push - which stresses hardware and wastes energy. Super-Twisting eliminates this by using continuous instead of switching control. Here's the practical difference: imagine our classical controller is like tapping the brakes repeatedly - effective but jerky. Super-Twisting is like having ABS brakes - smooth, continuous corrections that achieve the same result. It excels when you need smooth actuator commands, like in robotics where jerky motions damage gears.
 
-Now we get to the intelligent adapters - three controllers that can learn and adapt. First is Adaptive SMC, which adjusts its own gains in real-time based on how big the error is. If the pendulum starts swinging wildly - maybe you added extra weight - the controller notices and cranks up its aggression automatically. No manual retuning needed.
+Now we get to the intelligent adapters - three controllers that can learn and adapt. First is Adaptive SMC, which adjusts its own gains in real-time based on how big the error is. A 'gain' is a multiplier number in the control calculation - higher gain means the cart pushes harder in response to an angle error. If the pendulum starts swinging wildly - maybe you added extra weight - the controller notices and cranks up its aggression automatically. No manual retuning needed.
 
-Second is Hybrid Adaptive STA-SMC, which combines the smooth control of Super-Twisting with the self-tuning abilities of Adaptive SMC. In our MT-8 benchmarks, this beast achieved a 21.4% performance improvement over the baseline. That's huge in control theory - those percentage points can make or break a hardware deployment.
+Second is Hybrid Adaptive STA-SMC, which combines the smooth control of Super-Twisting with the self-tuning abilities of Adaptive SMC. In our benchmark study, this combination achieved a 21.4% lower cost score compared to the Classical SMC baseline. That's a significant improvement in control theory - those percentage points can make or break a hardware deployment.
 
 Third is the Conditional Hybrid, which is the safety-aware version. It intelligently switches between Adaptive SMC and Super-Twisting based on the system state, detecting mathematical danger zones called singularities and switching strategies to stay safe.
 
@@ -245,6 +245,7 @@ Visual metaphor: Video game quality settings (Low/Ultra/Optimized)
 
 ### SLIDE CONTENT:
 **Title:** Plant Models: Three Levels of Reality
+*(Plant = the physical system being controlled - the cart, pendulums, and their physics)*
 
 **Model 1: Simplified DIP (Quick Prototype)**
 Accuracy: ★★☆☆☆
@@ -323,10 +324,10 @@ Animation suggestion: Particles converging over iterations
 - **Control Effort:** How much energy used?
 - **Chattering:** High-frequency oscillations?
 
-**Results:**
-- 360% improvement (Classical SMC gains)
-- 21.4% cost reduction (Hybrid Adaptive STA)
-- 6.35% average improvement across all 7 controllers
+**Results (cost score reductions via PSO tuning):**
+- 360% lower cost score: Classical SMC (PSO vs. manual gains)
+- 21.4% lower cost score: Hybrid Adaptive STA (PSO-tuned vs. default)
+- 6.35% average cost reduction across all 7 controllers (robust PSO)
 
 ### SPEAKER SCRIPT:
 "Now let's talk about how we tune these controllers automatically using Particle Swarm Optimization, or PSO. This is a nature-inspired algorithm that mimics how birds flock or fish school to find food.
@@ -339,7 +340,7 @@ Now here's the sophisticated part: we're not just optimizing for one thing. We c
 
 The PSO algorithm searches for gains that balance all three objectives. It's a multi-objective optimization problem, and PSO handles it beautifully.
 
-Does it work? Absolutely. In our MT-8 benchmark, we saw a 360% improvement in some controller gains for Classical SMC. The Hybrid Adaptive STA controller achieved a 21.4% cost reduction compared to default gains. And when we applied robust PSO optimization - which tests against multiple disturbance scenarios - we got a 6.35% average improvement across ALL seven controllers.
+Does it work? Absolutely. In our benchmark study, PSO achieved a 360% reduction in cost score for Classical SMC - the algorithm found gains so much better than manual tuning that the improvement is dramatic. The Hybrid Adaptive STA controller achieved a 21.4% lower cost score compared to its default gains. And when we applied robust PSO - which tests the gains against multiple disturbance scenarios to ensure they hold up in practice - we got a 6.35% average cost reduction across ALL seven controllers.
 
 Remember that SpaceX rocket we keep mentioning? Those kinds of percentage improvements can be the difference between a successful landing and an expensive fireball. This is real engineering optimization at work."
 
@@ -401,7 +402,7 @@ Bottom: Timeline showing cumulative time (15 min → 4 hrs → days → weeks)
 
 Phase 1 is getting your lab ready, and it takes about 15 minutes. You clone the repository from GitHub, create a Python virtual environment to keep this project isolated from your other Python work, install all the dependencies - NumPy, SciPy, matplotlib, and about a dozen others - and then verify your installation with a quick configuration check. If everything is set up correctly, you'll see a printout of the default configuration parameters. That's your signal that you're ready to run simulations.
 
-Phase 2 is your first experiments, taking about 30 minutes of hands-on time. You start with the Classical SMC controller and tell the simulator to generate plots. You'll see the pendulum state over time, the control force being applied, and the sliding surface behavior. Watch what happens - does the pendulum reach upright quickly? Does it overshoot and oscillate? How aggressive are the control commands? Then try the Super-Twisting algorithm with the same command, just swapping the controller name. Compare the results - notice how the control signal is smoother? That's chattering reduction at work. Finally, test the Adaptive SMC controller and pay attention to how it adjusts its gains during simulation.
+Phase 2 is your first experiments, taking about 30 minutes of hands-on time. You start with the Classical SMC controller and tell the simulator to generate plots. You'll see the pendulum state over time, the control force being applied, and the sliding surface behavior - the sliding surface is a mathematical target line in state space; the controller's job is to drive the system onto this line and hold it there, at which point the pendulum stabilizes. Watch what happens - does the pendulum reach upright quickly? Does it overshoot and oscillate? How aggressive are the control commands? Then try the Super-Twisting algorithm with the same command, just swapping the controller name. Compare the results - notice how the control signal is smoother? That's chattering reduction at work. Finally, test the Adaptive SMC controller and pay attention to how it adjusts its gains during simulation.
 
 Phase 3 is intelligent tuning with PSO, taking 2 to 4 hours of computer time. You run PSO optimization for the Classical SMC controller and save the results. You'll see iteration-by-iteration progress: at iteration zero, random initialization with costs in the hundreds or thousands; by iterations 10 to 20, convergence begins and costs drop to the 10-50 range; by iterations 40-50, you're fine-tuning with costs settling around 1-5. This takes hours, so go get coffee or work on homework. When it's done, load those optimized gains and re-run the simulation. Compare with Phase 2 results - you should see noticeable improvement.
 
@@ -442,7 +443,7 @@ Balancing two connected pendulums = underactuated, unstable, nonlinear, millisec
 Classical SMC baseline → Hybrid Adaptive STA (21.4% improvement)
 
 ✓ **Intelligent Optimization**
-PSO tunes gains automatically (6-21% improvements across controllers)
+PSO tunes gains automatically (6-21% cost score reductions across 7 controllers)
 
 ✓ **Production Quality**
 90% test coverage, 250+ tests, submission-ready research outputs

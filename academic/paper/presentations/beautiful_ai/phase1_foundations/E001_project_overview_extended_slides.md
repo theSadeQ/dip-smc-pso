@@ -105,10 +105,9 @@ Background: Light professional gradient
 - Side-by-side controller comparison plots
 
 **Panel 3: Statistical Validation (Proving It's Not a Fluke)**
-- Confidence intervals (bootstrap method)
-- Hypothesis testing (Welch's t-test, ANOVA)
-- Monte Carlo studies: 1000+ simulations
-- Cross-validation for PSO generalization
+We run the simulation 1,000+ times under varied conditions. If the result holds across all runs, we can claim it scientifically - not just lucky.
+- Monte Carlo: repeat the test 1000+ times with slight variations
+- Confidence intervals: report a range ("result is X, plus or minus Y") not a single lucky number
 
 **Panel 4: Publication-Ready Output**
 - Matplotlib + Seaborn styling
@@ -126,7 +125,7 @@ First, performance metrics - the report card. We compute standard control metric
 
 Second, real-time visualization - seeing is believing. This includes an animated pendulum that shows the physical system moving on screen. You watch it swing, react to control forces, and eventually stabilize. This is invaluable for debugging - if something looks wrong visually, you investigate. We also generate performance plots showing state trajectories, control effort over time, and the sliding surface behavior.
 
-Third, statistical validation - proving it's not a fluke. This is critically important for research. One successful run doesn't prove anything. You could have gotten lucky with initial conditions. So we provide tools for rigorous statistical validation: confidence intervals using the bootstrap method, hypothesis testing with Welch's t-test and ANOVA to compare controllers, and Monte Carlo studies running 1000-plus simulations to build statistical confidence. When we say Controller A is better than Controller B, we can back that up with p-values and confidence intervals.
+Third, statistical validation - proving it's not a fluke. This is critically important for research. One successful run doesn't prove anything. You could have gotten lucky with initial conditions. So we run the simulation 1,000 or more times under slightly varied conditions - different starting angles, small disturbances, parameter variations. If Controller A beats Controller B in 97% of those runs, that's a real result. If it only wins 52% of the time, that's noise. We report a range of outcomes, not a single cherry-picked number. That's what turns a simulation demo into publishable science.
 
 And fourth, publication-ready output. Everything uses matplotlib and seaborn styling to produce clean, professional figures. We have comparison plots that put all seven controllers side-by-side. The research paper version 2.1 has 14 of these figures, generated automatically from the analysis scripts. You don't manually format figures - the pipeline handles it.
 
@@ -324,7 +323,7 @@ Research Outputs:
 Deployment Pipeline:
 1. PSO optimization on simplified model (fast, ballpark gains)
 2. Validation on full nonlinear model (research grade)
-3. HIL testing before hardware deployment
+3. HIL (Hardware-in-the-Loop) testing - running the control software against a simulated hardware interface before touching real hardware
 4. Safety validation and disturbance rejection testing
 
 Applications:
@@ -343,7 +342,7 @@ The practical projects for students are particularly valuable: implement a new c
 
 The second path is for researchers who need to validate new algorithms. The workflow is: implement your controller, benchmark it against all seven existing controllers using the same test suite and scenarios, run PSO optimization to ensure you're comparing optimized versions rather than default parameters, then run statistical validation with Monte Carlo studies so you can make claims backed by statistics rather than single runs. The output? Comparative benchmark reports with p-values, publication-ready figures in matplotlib, and a template for writing it up in the research paper format we've already established.
 
-The third path is for engineers building real systems. You start with PSO optimization on the simplified model because it's fast and gives you a good initial set of gains. Then you validate those gains on the full nonlinear model. Then you run Hardware-in-Loop testing using our HIL module before touching real hardware. Finally, you do safety validation - testing disturbance rejection, boundary condition behavior, and failure modes.
+The third path is for engineers building real systems. You start with PSO optimization on the simplified model because it's fast and gives you a good initial set of gains. Then you validate those gains on the full nonlinear model. Then you run HIL - Hardware-in-the-Loop - testing using our HIL module. This means running your control software against a simulated hardware interface: the software thinks it's talking to a real motor and encoder, but it's actually talking to a simulation. It's the last safety check before you wire up real hardware. Finally, you do safety validation - testing disturbance rejection, boundary condition behavior, and failure modes.
 
 The framework is the same for all three. What changes is how deep you go and which tools you use most."
 
@@ -375,9 +374,9 @@ Background: Light professional, clean closing slide
 
 ✓ **The Challenge** - Underactuated, unstable, nonlinear, millisecond control
 
-✓ **Seven Controllers** - Classical baseline to Hybrid Adaptive STA (21.4% improvement)
+✓ **Seven Controllers** - Classical baseline to Hybrid Adaptive STA (21.4% lower cost score vs. Classical SMC baseline)
 
-✓ **Intelligent Optimization** - PSO tunes gains automatically (6-21% improvement range)
+✓ **Intelligent Optimization** - PSO tunes gains automatically (6-21% cost score reductions across 7 controllers)
 
 ✓ **Analysis Toolkit** - Performance metrics, statistical validation, publication-ready plots
 
@@ -396,7 +395,7 @@ Background: Light professional, clean closing slide
 - **E002:** Control Theory Fundamentals (Lyapunov stability, SMC theory)
 - **E003:** Plant Models and Dynamics (Lagrangian mechanics, complete physics)
 - **E004:** PSO Optimization Deep Dive (swarm algorithms, convergence)
-- **E005:** Simulation Engine Architecture (vectorization, Numba JIT, 33x speedup)
+- **E005:** Simulation Engine Architecture (vectorization, Numba JIT, 33x faster vs. sequential Python)
 
 **Resources:**
 - GitHub: [github.com/theSadeQ/dip-smc-pso](https://github.com/theSadeQ/dip-smc-pso)
@@ -405,13 +404,13 @@ Background: Light professional, clean closing slide
 ### SPEAKER SCRIPT:
 "Let's wrap up with the complete picture of what we've covered today - a more comprehensive summary than the standard overview.
 
-Seven takeaways. First, the challenge: balancing two connected pendulums with one control input is genuinely hard - underactuated, unstable, nonlinear, and requiring millisecond response times. This isn't an abstract exercise. Second, seven controllers: from Classical SMC as the baseline to the Hybrid Adaptive STA achieving 21.4% improvement. Each controller has a specific personality and use case. Third, intelligent optimization: PSO automatically tunes controller gains, delivering 6 to 21% improvements. Those percentages matter in real hardware deployments.
+Seven takeaways. First, the challenge: balancing two connected pendulums with one control input is genuinely hard - underactuated, unstable, nonlinear, and requiring millisecond response times. This isn't an abstract exercise. Second, seven controllers: from Classical SMC as the baseline to the Hybrid Adaptive STA achieving a 21.4% lower cost score compared to that baseline. Each controller has a specific personality and use case. Third, intelligent optimization: PSO automatically tunes controller gains, delivering 6 to 21% cost score reductions across all seven controllers. Those percentages matter in real hardware deployments.
 
 Fourth - and this is the extended content - the analysis toolkit. Performance metrics, real-time visualization, statistical validation with Monte Carlo studies, and publication-ready figure generation. This is what converts simulation data into publishable science. Fifth, design philosophy: five principles - modularity, type safety, configuration-first, reproducibility, testability. These aren't buzzwords; they're why the project is reliable and maintainable. Sixth, the technology stack: standard battle-tested scientific Python - NumPy, SciPy, Matplotlib, PySwarms, pytest, Pydantic. No exotic dependencies. And seventh, the complete workflow from 15-minute installation to submitted research paper.
 
 This framework serves three distinct audiences. Students get a progressive learning path. Researchers get reproducible benchmarks and statistical rigor. Engineers get a tested path from PSO optimization to hardware deployment.
 
-What's next in this series? E002 unpacks control theory fundamentals - Lyapunov stability, SMC theory, why these algorithms work mathematically. E003 dives into the physics and equations of motion. E004 explores PSO optimization in detail. E005 covers simulation architecture and how we achieve 33x speedups.
+What's next in this series? E002 unpacks control theory fundamentals - Lyapunov stability, SMC theory, why these algorithms work mathematically. E003 dives into the physics and equations of motion. E004 explores PSO optimization in detail. E005 covers simulation architecture and how we achieve 33x speedups over sequential Python.
 
 Think of E001 through E005 as your foundation. These build conceptual understanding. Episodes E006 and beyond are research-level depth.
 
