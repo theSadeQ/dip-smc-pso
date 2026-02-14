@@ -300,8 +300,9 @@ Limitation callout: "Needs training data - not drop-in replacement"
 **Title:** Low-Rank DIP Model: The Efficient Pro
 
 **The Core Idea - Proper Orthogonal Decomposition (POD):**
+*(POD = a technique that mathematically identifies which aspects of the motion pattern matter most, then discards the rest)*
 1. Run the Full Simulator thousands of times → collect "snapshots" of the dynamics
-2. Apply Singular Value Decomposition (SVD) to find dominant patterns
+2. Apply SVD (Singular Value Decomposition) to find the dominant motion patterns
 3. Discard patterns that contribute <1% of total energy
 4. Result: Reduced model that captures 99% of the physics at a fraction of the cost
 
@@ -311,7 +312,7 @@ Limitation callout: "Needs training data - not drop-in replacement"
 - **Real-time capable**: fast enough for HIL millisecond-level updates
 
 **Use Cases (where Simplified breaks down, but Full is too slow):**
-- Monte Carlo studies: 1000+ parameter variation simulations
+- Monte Carlo studies: 1000+ parameter variation simulations (Monte Carlo = repeating the simulation many times with slightly varied inputs to check that results are robust, not lucky)
 - Large-scale gain sweeps: test 1000 gain combinations
 - Hardware-in-the-loop (HIL): real-time plant emulation
 - Sensitivity analysis: which parameters matter most?
@@ -439,17 +440,17 @@ Background: Light professional gray
 ### SLIDE CONTENT:
 **Title:** Model Comparison: The Engineering Decision Guide
 
-**Head-to-Head Benchmark (MT-6 Results):**
+**Head-to-Head Benchmark Results:**
 
 | Metric | Simplified | Full Nonlinear | Low-Rank (k=10) |
 |---|---|---|---|
 | Speed (sims/sec) | 450 | 8 | 95 |
 | Settling Time | 2.31 s | 2.58 s | 2.54 s |
 | Overshoot | 4.2° | 5.1° (true) | 4.9° |
-| RMS Error | 0.12° | 0.15° (reference) | 0.14° |
+| RMS Error (avg. distance from exact) | 0.12° | 0.15° (reference) | 0.14° |
 | Valid angle range | <10° | -180 to +180° | Full (if trained) |
 
-**Observation:** Simplified is optimistic (underestimates). Low-rank achieves 95/450 = 21% of simplified speed with only 2% accuracy loss vs. full.
+**Observation:** Simplified is optimistic (underestimates nonlinear effects). Low-Rank runs at 21% of Simplified's speed (95 vs. 450 sims/sec) — but is 12x faster than Full Nonlinear — with only ~2% accuracy loss vs. Full.
 
 **Angle Range Validation:**
 
@@ -467,7 +468,7 @@ Background: Light professional gray
 - Quick prototype / first test? → **Simplified (fast iteration)**
 
 ### SPEAKER SCRIPT:
-"Let's look at the head-to-head numbers from our MT-6 benchmark to make the model selection decision concrete rather than abstract.
+"Let's look at the head-to-head benchmark numbers to make the model selection decision concrete rather than abstract.
 
 Looking at speed: Simplified runs 450 simulations per second. Low-Rank runs 95 per second. Full Nonlinear runs only 8. The Simplified model is 56 times faster than Full - that's the difference between a 3-minute PSO run and a 3-hour PSO run.
 
@@ -539,10 +540,11 @@ M_inv = np.linalg.pinv(M, rcond=1e-6)
 ```yaml
 stability_monitoring:
   conditioning:
-    median_threshold: 1e7   # Warn if median kappa > 1e7
-    spike_threshold: 1e9    # Critical spike threshold
+    median_threshold: 1e7   # Warn if median kappa > 10,000,000
+    spike_threshold: 1e9    # Critical spike threshold > 1,000,000,000
     fallback_threshold: 3   # Max pseudoinverse uses per episode
 ```
+*(1e7 = 10 million, 1e9 = 1 billion — Python/YAML scientific notation)*
 
 **In Practice:** Normal upright operation: kappa ~10-100 (healthy). Near horizontal (critical config): kappa grows. Controller actively avoids these configurations.
 
