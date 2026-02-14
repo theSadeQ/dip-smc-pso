@@ -31,9 +31,9 @@ Color: Left=red problem zone, Right=green solution zone
 **Title:** From Manual Tuning to Intelligent Optimization
 
 **The Manual Tuning Problem:**
-Classical SMC has 6 gain parameters:
-- 3 sliding surface gains (lambda_1, lambda_2, lambda_3)
-- 3 reaching law gains (eta_1, eta_2, eta_3)
+Classical SMC has 6 gain parameters (gains = multiplier numbers that set how aggressively the controller responds):
+- 3 sliding surface gains (lambda_1, lambda_2, lambda_3) — control how fast the system moves toward balance
+- 3 reaching law gains (eta_1, eta_2, eta_3) — control how hard the controller pushes toward the sliding surface
 
 **Manual Tuning Process:**
 1. Guess initial gains (educated guess from theory)
@@ -51,7 +51,7 @@ Classical SMC has 6 gain parameters:
 **The PSO Solution:**
 - Automated: algorithm explores gain space without human intervention
 - Fast: 2-4 hours using the simplified plant model
-- Results: 360% improvement over manual tuning demonstrated
+- Results: PSO finds gain values up to 360% different from manual tuning (Slide 7 explains what that means)
 
 **This Episode:** How PSO achieves these results
 
@@ -62,7 +62,7 @@ Let's start with the problem. Classical Sliding Mode Control has six gain parame
 
 There are four major problems with this manual approach. First, it is time-consuming. Weeks per controller, and we have seven controllers, so that is potentially months of work. Second, it is subjective. The quality of results depends entirely on the tuner's experience. A novice might never find good gains. Third, you easily get stuck in what mathematicians call local optima - you find gains that seem pretty good, but there could be much better combinations nearby that incremental adjustments will never discover. Fourth, there is no guarantee of optimality. You are just hoping you found something reasonable.
 
-Enter Particle Swarm Optimization. It is automated - the algorithm explores the entire gain space systematically without any human intervention. It is fast - two to four hours when we use the simplified plant model for evaluation speed. And the results speak for themselves: in our comprehensive benchmarks, we demonstrated 360 percent improvement in some controller gains compared to manual tuning. That is not a typo - three hundred sixty percent better.
+Enter Particle Swarm Optimization. It is automated - the algorithm explores the entire gain space systematically without any human intervention. It is fast - two to four hours when we use the simplified plant model for evaluation speed. And the results speak for themselves: in our comprehensive benchmarks, PSO found gain values up to 360 percent different from what manual tuning produced — not 360% better performance, but PSO reaching gain combinations humans would never explore incrementally. Slide 7 unpacks this distinction precisely.
 
 This episode will show you exactly how PSO achieves these results: the bird-inspired algorithm mechanics, the multi-objective cost function design, and real performance numbers from our benchmark studies."
 
@@ -408,7 +408,7 @@ If your cost curve is still dropping sharply at iteration 50, you need more iter
 
 ---
 
-## SLIDE 7: Real Results - MT-8 Benchmark Study
+## SLIDE 7: Real Results - PSO Benchmark Study
 **Duration:** 3 minutes
 
 ### BEAUTIFUL.AI PROMPT:
@@ -428,9 +428,9 @@ Color: Improvement bars in gradient green (small improvement) to gold (large)
 ### SLIDE CONTENT:
 **Title:** Real Results: PSO Benchmark Performance
 
-**MT-8 Comprehensive Benchmark Results:**
+**Comprehensive PSO Benchmark Results:**
 
-| Controller | Performance Gain |
+| Controller | Cost Score Reduction (PSO vs. manual gains) |
 |---|---|
 | Classical SMC | +6.3% |
 | Super-Twisting | +5.0% |
@@ -514,9 +514,9 @@ Evaluate each particle against multiple scenarios and take the average:
 - Scenario 3: Mass -20% (lighter pendulum)
 - Scenario 4: External disturbance applied at t=2s
 
-**Robust PSO Results (MT-8 Benchmark):**
+**Robust PSO Results:**
 - Mean overshoot reduction: -45% across all conditions
-- Standard deviation of performance: -55% (more consistent)
+- Standard deviation of performance: -55% more consistent (standard deviation = how much results vary run-to-run; lower = less spread, more predictable)
 - Worst-case scenario: -42% improvement
 
 **The Key Tradeoff:**
@@ -571,13 +571,13 @@ Color: PSO=blue (recommended), others=gray
 
 **Why We Chose PSO for DIP:**
 - 6-16 parameters depending on controller (right range for PSO)
-- Derivative-free: cost function is not differentiable (simulation output)
+- No calculus gradient needed: PSO evaluates the simulation directly — no mathematical derivatives required
 - Global search: control landscapes have local optima
 - Simple: two equations, one library (PySwarms), no gradient computation
 - Proven: 6-21% improvements documented in our benchmarks
 
 **When PSO Struggles:**
-- More than 20 parameters -> try CMA-ES (adaptive covariance)
+- More than 20 parameters -> try CMA-ES (a more advanced optimizer — skip unless PSO underperforms)
 - Need precision below 0.1% -> add gradient descent refinement after PSO
 - Real-time constraints -> PSO is offline optimization only (hours, not milliseconds)
 - Budget of fewer than 100 evaluations -> use Bayesian Optimization
@@ -698,7 +698,7 @@ Color: Problem=red, Solution=green, Wisdom=blue
 
 **The 80/20 Rule:**
 - 80% of PSO performance comes from: good parameter bounds + good cost function design
-- Only 20% comes from: PSO hyperparameters (w, c1, c2, n_particles)
+- Only 20% comes from: PSO tuning parameters (w, c1, c2, n_particles)
 
 **This means:** Spend your time designing the cost function and choosing bounds based on stability theory. Tweaking PSO parameters is secondary.
 
@@ -724,7 +724,7 @@ Always validate your cost function: do manual good/bad gains give the expected l
 | Premature convergence (converges too fast) | Social term too strong | Reduce c2, increase patience (more iterations) |
 | Too slow to run | 1,500 simulations taking too long | Reduce n_particles to 20, or use parallelization |
 
-**Sarah's Pre-Run Checklist:**
+**Your Pre-Run Checklist:**
 1. Validate cost function with known-good and known-bad gains
 2. Set bounds from stability analysis, not arbitrary guesses
 3. Start with n_particles=30, n_iterations=50
@@ -831,6 +831,6 @@ Episode 5 covers the simulation engine that makes all of this possible. When PSO
 - Slide 3: References E002 (sliding surface gains, reaching law)
 - Slide 5: References E003 (simplified vs. full nonlinear model trade-off)
 - Slide 12: Previews E005 (simulation engine, vectorization, Numba)
-- MT-8 results: Comprehensive benchmark study referenced throughout
+- Benchmark results: Comprehensive PSO benchmark study referenced throughout
 
 **Estimated Preparation:** 2-2.5 hours (review slides + build in Beautiful.ai + practice delivery)
