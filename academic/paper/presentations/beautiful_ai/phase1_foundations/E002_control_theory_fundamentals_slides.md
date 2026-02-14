@@ -2,9 +2,14 @@
 **Beautiful.ai Slide Deck + Speaker Scripts**
 
 **Target Audience:** Students/Learners (Intermediate - assumes basic math)
-**Duration:** 30-35 minutes
-**Total Slides:** 9
-**Source:** Episode E002_control_theory_fundamentals.md
+**Duration:** 35-40 minutes
+**Total Slides:** 12
+**Source:** Episode E002_control_theory_fundamentals.md (full coverage: all 536 lines)
+
+**Added in this version (Slides 9-11):**
+- Slide 9: Robustness Properties - Matched vs. Unmatched Uncertainties
+- Slide 10: Convergence Time Analysis - Finite-Time vs. Exponential
+- Slide 11: Practical Pitfalls and Implementation Tips
 
 ---
 
@@ -544,7 +549,220 @@ Here are real results from our MT-6 benchmark testing robustness to mass uncerta
 
 ---
 
-## SLIDE 9: Key Takeaways & Next Steps
+## SLIDE 9: Robustness Properties - Matched vs. Unmatched Uncertainties
+**Duration:** 3 minutes
+
+### BEAUTIFUL.AI PROMPT:
+```
+Layout: Split diagram with two parallel paths
+Left path (green, thick): "Matched Uncertainty" - disturbance enters through control channel
+  - Equation block: ẋ = f(x) + (B₀ + ΔB)u + Bd
+  - Large green checkmark: "SMC cancels completely"
+  - Label: "On sliding surface s=0: d cancels out"
+Right path (red, dashed): "Unmatched Uncertainty" - disturbance enters outside control channel
+  - Equation block: ẋ = f(x) + d_unmatched + Bu
+  - Orange warning icon: "SMC attenuates (not cancels)"
+Center: System block diagram showing controller → plant → disturbance entry points
+Bottom: Performance table (3 controllers x 3 columns: Nominal / Perturbed / Degradation)
+Color: Green for matched (solvable), red/orange for unmatched (mitigated)
+```
+
+### SLIDE CONTENT:
+**Title:** Robustness Properties: What SMC Can and Cannot Reject
+
+**The Core Question:** When real-world disturbances hit, how does SMC respond?
+
+**Matched Uncertainties (Control Channel):**
+```
+ẋ = f(x) + (B₀ + ΔB)u + Bd
+```
+- Disturbance enters through the same channel as control input
+- **SMC Property:** Complete rejection once on sliding surface!
+- Proof: On s=0, disturbance d cancels out of ṡ = 0 equation
+- Examples: Actuator model errors, input disturbances
+
+**Unmatched Uncertainties (Outside Control Channel):**
+```
+ẋ = f(x) + d_unmatched + Bu
+```
+- Disturbance enters where control cannot directly cancel it
+- **SMC Property:** Attenuation only - cannot perfectly reject
+- Examples: Sensor noise, model parameter errors
+
+**Real Data - MT-6 Benchmark (±20% Mass Uncertainty):**
+
+| Controller | Nominal | Perturbed (+20%) | Degradation |
+|---|---|---|---|
+| Classical SMC | 4.2° | 5.8° | +1.6° |
+| STA-SMC | 3.1° | 4.3° | +1.2° |
+| Adaptive SMC | 3.8° | 4.1° | **+0.3°** |
+
+**Adaptive SMC most robust** - automatically compensates for parameter variations.
+
+### SPEAKER SCRIPT:
+"We've now covered three types of sliding mode controllers. But here's a critical question: when real-world disturbances and model errors hit the system, what can SMC actually guarantee? This is where robustness theory comes in.
+
+There are two fundamentally different types of uncertainties, and SMC treats them very differently.
+
+Matched uncertainties enter through the same channel as the control input. Mathematically, the disturbance appears in the equation alongside the control term Bu. The remarkable property of SMC is that once you're on the sliding surface - once s equals zero - these disturbances cancel out completely from the sliding dynamics. The proof is elegant: you set s-dot to zero to maintain the surface, solve for the equivalent control, and the disturbance term simply disappears from the equation. This is why SMC is so appealing for real hardware - actuator model errors, input-channel disturbances, anything that enters through the control path gets completely rejected.
+
+Unmatched uncertainties are a different story. These disturbances enter through channels that the control input cannot directly reach. Sensor noise, parameter variations in the plant dynamics - these cannot be perfectly cancelled. SMC can attenuate them, keeping their effect bounded, but not eliminate them entirely. This is a fundamental limitation that every control engineer needs to understand.
+
+Now here's how the theory plays out in practice. Looking at our MT-6 benchmark results, we tested all three controllers against a 20% cart mass uncertainty - a realistic scenario representing model error or payload variation. Classical SMC shows 1.6 degrees more overshoot with the heavier mass. Super-Twisting is somewhat better at 1.2 degrees degradation. But Adaptive SMC? Only 0.3 degrees - it automatically adjusts its gains to compensate for the parameter change.
+
+The lesson: SMC's robustness to matched uncertainties is a theoretical guarantee. Robustness to unmatched uncertainties depends on the specific controller variant and gains. When in doubt, Adaptive SMC is your most robust option."
+
+---
+
+## SLIDE 10: Convergence Time Analysis - Guaranteed Finite-Time
+**Duration:** 2.5 minutes
+
+### BEAUTIFUL.AI PROMPT:
+```
+Layout: Timeline comparison (two parallel timelines)
+Top timeline (red, exponential curve): "Exponential Convergence"
+  - Curve: ‖x(t)‖ ≤ Ce^(-αt)
+  - Shows asymptotic approach, never reaches zero
+  - Label: "Theoretically infinite time to reach zero"
+  - Dotted line showing "epsilon ball" - only gets within tolerance
+Bottom timeline (blue/green, linear then flat): "Finite-Time Convergence (SMC)"
+  - Linear drop phase, then flat zero line
+  - Key annotation at T_f: "Guaranteed zero at finite time"
+  - Formula boxes: Classical SMC T_f = |s(0)|/η | STA: T_f ≤ 2|s(0)|^(1/2)/K₂
+Right side: Numerical example panel
+  - "s(0) = 0.5, η = 2.0 → T_f = 0.25 seconds"
+  - STA comparison result
+Color: Red for exponential (limitation), green for finite-time (advantage)
+```
+
+### SLIDE CONTENT:
+**Title:** Convergence Time: Finite-Time vs. Exponential - Why It Matters
+
+**Exponential Convergence (most controllers):**
+```
+‖x(t)‖ ≤ Ce^(-αt)    (never exactly zero, t → ∞)
+```
+- Error decays but never reaches zero in finite time
+- Fine for many applications, but not when timing is critical
+
+**Finite-Time Convergence (SMC property):**
+```
+x(t) = 0  for all  t ≥ T_f  where T_f < ∞
+```
+- System reaches exact equilibrium at a predictable, finite time
+- Guaranteed deadline: T_f is computable before runtime
+
+**Classical SMC - Convergence Time Formula:**
+```
+|s(t)| = |s(0)| - η·t    →    T_f = |s(0)| / η
+```
+- Example: s(0) = 0.5, η = 2.0 → **T_f = 0.25 seconds**
+- Larger η = faster convergence (but more chattering)
+
+**Super-Twisting Algorithm - Convergence Bound:**
+```
+T_f ≤ 2|s(0)|^(1/2) / K₂ + 2K₂/K₁
+Typical range for DIP: T_f ~ 0.1 - 1.0 seconds
+```
+- Faster than Classical SMC for same gain magnitudes
+- Bound tighter in practice (upper bound is conservative)
+
+**Why This Matters for Real Hardware:**
+- Rocket landing: Must reach vertical in 3 seconds before touchdown
+- Industrial: Crane must stop load in ≤ 2 seconds at target
+- Finite-time guarantee enables safety certification
+
+### SPEAKER SCRIPT:
+"Now let's talk about something that separates SMC from most other control algorithms: finite-time convergence. This is a mathematical guarantee that makes SMC particularly valuable for real hardware applications.
+
+Most control algorithms - PID, LQR, standard pole placement - achieve what's called exponential convergence. The error decays exponentially: it gets halved every fixed time interval, but it never actually reaches zero. Mathematically, you only get within epsilon of zero as time approaches infinity. For many applications that's fine - you're just trying to get close enough. But in safety-critical systems, 'close enough by infinity' isn't an acceptable specification.
+
+Sliding mode control achieves finite-time convergence: the system reaches exactly zero at a predictable, computable time T_f. Not close to zero. Not within epsilon. Zero. And you can calculate that time before you even run the system.
+
+For Classical SMC with the reaching law we've discussed, the formula is elegant: the time to reach the sliding surface equals the initial distance from the surface divided by your reaching speed eta. So if your sliding surface error starts at 0.5 and your reaching gain is 2.0, you're guaranteed to hit the surface in exactly 0.25 seconds. That's a hard real-time deadline.
+
+For Super-Twisting, the bound is slightly more complex but still computable. In practice, STA converges faster than Classical SMC for the same gain magnitudes - the super-twisting dynamics actively push the system toward the surface more aggressively.
+
+Why does this matter? Think about SpaceX landing. The control system must return the rocket to vertical before touchdown - a hard time constraint. Exponential convergence gives you 'we'll be very close by some unspecified future time.' Finite-time convergence gives you 'we will be at vertical in T_f seconds, guaranteed.' That kind of hard real-time guarantee is what separates certified aerospace control from academic demonstrations."
+
+---
+
+## SLIDE 11: Practical Pitfalls and Implementation Tips
+**Duration:** 3 minutes
+
+### BEAUTIFUL.AI PROMPT:
+```
+Layout: 3+2 card grid (3 red pitfall cards top, 2 green tip cards bottom)
+Top row: 3 pitfall cards
+  - Card 1 (red): Warning icon + "Derivative Explosion" + code snippet
+  - Card 2 (red): Warning icon + "Gain Over-Tuning" + config comparison
+  - Card 3 (red): Warning icon + "Ignoring Saturation" + consequence note
+Bottom row: 2 tip cards (wider)
+  - Card 1 (green): Lightbulb icon + "Use Simplified Model First" + workflow command
+  - Card 2 (green): Lightbulb icon + "Visualize Sliding Surface" + plot description
+Background: Neutral light gray, professional "reference card" aesthetic
+Header: "Learn from These Mistakes Before You Make Them"
+```
+
+### SLIDE CONTENT:
+**Title:** Practical Pitfalls and Implementation Tips
+
+**[PITFALL 1: Derivative Explosion]**
+Numerical differentiation amplifies noise:
+```python
+# BAD: noise amplified by 1/dt
+s_dot = (s[k] - s[k-1]) / dt
+
+# GOOD: model-based derivative
+s_dot = surface.compute_derivative(state, state_dot)
+# OR: low-pass filter
+s_dot = alpha * s_dot + (1 - alpha) * s_dot_prev
+```
+
+**[PITFALL 2: Gain Over-Tuning]**
+Large gains → excessive chattering, wasted energy
+- Start small: K ~ 1-5, increase gradually
+- Use PSO for final optimization (MT-8 result: +360% on some gains is correct after PSO)
+- Manual large gains ≠ optimal large gains
+
+**[PITFALL 3: Ignoring Saturation]**
+Actuators have limits - unbounded control is fiction:
+```python
+u_saturated = np.clip(u, -max_force, max_force)
+# Diagnostic: warn if saturating >20% of time
+if np.mean(np.abs(u) > 0.95 * max_force) > 0.2:
+    print("[WARNING] Excessive saturation - reduce gains")
+```
+
+**[TIP 1: Start with Simplified Model]**
+PSO optimization workflow:
+```bash
+# Step 1: Fast PSO (minutes, simplified model)
+python simulate.py --ctrl classical_smc --run-pso --save gains.json
+# Step 2: Validate on full nonlinear model (seconds)
+python simulate.py --load gains.json --plot --use-full-dynamics
+```
+
+**[TIP 2: Visualize the Sliding Surface]**
+`s(t)` is your debugging compass:
+- Converges to zero + stays in boundary layer = controller working
+- Oscillates or diverges = check gains
+- Plot `s(t)` alongside state plots for every debugging session
+
+### SPEAKER SCRIPT:
+"Let's close the theory section with something practically invaluable: the pitfalls I've seen derail SMC implementations, and the tips that make debugging faster. Think of this as the 'learn from others' mistakes' slide.
+
+Pitfall one: derivative explosion. When you compute the time derivative of the sliding surface numerically - taking the difference of consecutive s values divided by dt - you're amplifying noise by a factor of 1 over dt. At 0.01 second timesteps, that's 100x amplification. The result? Your control signal looks like white noise riding on top of a useful signal. The fix is to compute s-dot analytically using the model - you know the dynamics, so compute the derivative from first principles rather than numerical differencing. If you must use numerical differentiation, always run it through a low-pass filter first.
+
+Pitfall two: gain over-tuning. More aggressive gains are not always better. Large gains push the system toward the sliding surface faster, but they also amplify chattering and waste control energy. The right approach is to start conservative - gains of 1 to 5 - and increase gradually until performance is acceptable. Then use PSO for the final optimization step. This is important: when MT-8 showed 360% improvements in some gains from PSO, those large gains weren't obvious from manual intuition. PSO found them through systematic search. Don't confuse 'large gains are needed' with 'I should manually crank gains up.'
+
+Pitfall three: ignoring actuator saturation. Every real actuator has a maximum force or torque. When your controller demands more than that limit, the actuator saturates - it outputs maximum force regardless of what you asked for. If your gains are so aggressive that you're saturating more than 20% of the time, the sliding surface may become unreachable. Always saturate control in code, and always run the diagnostic check.
+
+Two tips. First, always start PSO optimization on the simplified linear model - it runs in minutes rather than hours. Then validate those gains on the full nonlinear model. This two-step workflow saves enormous time. Second, make visualizing the sliding surface s of t a standard practice. If s converges to zero and stays within the boundary layer, your controller is working. If s oscillates or diverges, that tells you exactly where to look for problems."
+
+---
+
+## SLIDE 12: Key Takeaways & Next Steps
 **Duration:** 2-3 minutes
 
 ### BEAUTIFUL.AI PROMPT:

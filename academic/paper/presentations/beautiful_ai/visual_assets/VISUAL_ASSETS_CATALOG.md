@@ -286,6 +286,49 @@ visual_assets/
 **Beautiful.ai Prompt:** "Line plot showing adaptive gain changing over time with annotations"
 **Source:** E002 PDF page 5, adaptive SMC section
 
+### ASSET 2.7: Matched vs. Unmatched Uncertainty Paths
+**Slide:** E002 Slide 9
+**Type:** Split pathway diagram
+**Description:**
+- Left path (green, thick): Matched uncertainty entering through control channel
+  - Equation block: ẋ = f(x) + (B₀ + ΔB)u + Bd
+  - Large green checkmark labeled "SMC cancels completely"
+- Right path (red, dashed): Unmatched uncertainty entering outside control channel
+  - Equation block: ẋ = f(x) + d_unmatched + Bu
+  - Orange warning icon labeled "SMC attenuates (not cancels)"
+- Center: System block diagram showing controller, plant, disturbance entry points
+- Bottom: 3x3 performance table (Classical/STA/Adaptive SMC vs. Nominal/Perturbed/Degradation)
+**Beautiful.ai Prompt:** "Split pathway diagram with green checkmark for matched uncertainty and orange warning for unmatched"
+**Source:** E002 episode markdown, robustness properties section
+
+### ASSET 2.8: Finite-Time vs. Exponential Convergence Timelines
+**Slide:** E002 Slide 10
+**Type:** Parallel timeline comparison
+**Description:**
+- Top timeline (red): Exponential convergence curve Ce^(-αt), asymptotic, never reaches zero
+  - Dotted epsilon ball line showing "only gets within tolerance"
+- Bottom timeline (green): SMC finite-time curve, linear drop then flat zero
+  - Vertical line at T_f: "Guaranteed zero at finite time"
+  - Formula boxes: Classical T_f = |s(0)|/η, STA: T_f ≤ 2|s(0)|^(1/2)/K₂
+- Right panel: Numerical example (s(0)=0.5, η=2.0, T_f=0.25 seconds)
+**Beautiful.ai Prompt:** "Two parallel timelines comparing exponential (red, never zero) vs. SMC finite-time (green, reaches zero)"
+**Source:** E002 episode markdown, convergence time analysis section
+
+### ASSET 2.9: Pitfalls and Implementation Tips Cards
+**Slide:** E002 Slide 11
+**Type:** Card grid (3+2 layout)
+**Description:**
+- Top row: 3 red pitfall cards
+  - Card 1: Warning icon + "Derivative Explosion" + code snippet
+  - Card 2: Warning icon + "Gain Over-Tuning" + config comparison
+  - Card 3: Warning icon + "Ignoring Saturation" + consequence note
+- Bottom row: 2 wider green tip cards
+  - Card 1: Lightbulb icon + "Use Simplified Model First" + command
+  - Card 2: Lightbulb icon + "Visualize Sliding Surface" + plot description
+- Header: "Learn from These Mistakes Before You Make Them"
+**Beautiful.ai Prompt:** "3+2 card grid with red pitfall cards (warning icons) and green tip cards (lightbulb icons)"
+**Source:** E002 episode markdown, practical pitfalls section
+
 ---
 
 ## E003: Plant Models and Dynamics - Visual Assets
@@ -355,6 +398,49 @@ visual_assets/
 **Beautiful.ai Prompt:** "Horizontal bar chart comparing model computation speeds"
 **Source:** E003 PDF page 4, performance comparison
 
+### ASSET 3.6: Singularities and Numerical Stability Cards
+**Slide:** E003 Slide 8
+**Type:** Warning diagram with strategy cards
+**Description:**
+- Top: Physical analogy - arm at full extension (locked), DIP pendulums at critical angle
+- Condition number health gauge: 1-100 (green), 100k-1M (yellow), >1M (red)
+- Three horizontal strategy cards:
+  - Card 1 (green): Shield icon + "Condition Number Monitoring" + `cond = np.linalg.cond(M)`
+  - Card 2 (yellow): Plus icon + "Regularized Inversion" + `M_reg = M + epsilon * eye(3)`
+  - Card 3 (blue): Pinv icon + "Pseudoinverse" + `np.linalg.pinv(M, rcond=1e-6)`
+- Bottom: Note "Normal operation stays in green zone"
+**Beautiful.ai Prompt:** "Shield warning diagram with condition number gauge and three strategy cards with code snippets"
+**Source:** E003 episode markdown, singularities section
+
+### ASSET 3.7: Plant Model Pitfalls and Validation Cards
+**Slide:** E003 Slide 9
+**Type:** Card grid (3+2 layout, matching E002 style)
+**Description:**
+- Top row: 3 red pitfall cards
+  - Card 1: Warning icon + "Wrong Angle Convention" + sign error example
+  - Card 2: Warning icon + "Inconsistent Units" + rad vs. degree trap
+  - Card 3: Warning icon + "Ignoring Parameter Bounds" + negative mass example
+- Bottom row: 2 wider green tip cards
+  - Card 1: Lightbulb icon + "Validate with Energy Conservation" + test code snippet
+  - Card 2: Lightbulb icon + "Cross-Check Models" + comparison workflow
+- Header: "Common Mistakes and How to Catch Them"
+**Beautiful.ai Prompt:** "3+2 card grid matching E002 pitfalls style, red warning cards with code examples, green tip cards"
+**Source:** E003 episode markdown, practical pitfalls section
+
+### ASSET 3.8: E003 Key Takeaways and E004 Preview
+**Slide:** E003 Slide 10
+**Type:** Summary checklist with preview panel
+**Description:**
+- Top (70%): 5 key learning checkpoints with distinct icons
+  - Color-coded: blue for models, orange for dynamics, green for validation
+  - Brief descriptions under each checkpoint
+- Bottom (30%): E004 preview panel
+  - PSO particle swarm icon
+  - "From physics to intelligent tuning" transition text
+- Background: Gradient from physics blue to optimization orange
+**Beautiful.ai Prompt:** "5-point checklist with icons and color-coded topics, E004 preview panel with gradient background"
+**Source:** E003 episode markdown, key takeaways section
+
 ---
 
 ## E004: PSO Optimization - Visual Assets
@@ -423,6 +509,77 @@ visual_assets/
 - Hybrid row highlighted (21.4% improvement)
 **Beautiful.ai Prompt:** "Performance comparison table with color-coded improvement percentages"
 **Source:** E004 PDF page 4, results section
+
+### ASSET 4.6: Standard PSO vs. Robust PSO Comparison
+**Slide:** E004 Slide 8
+**Type:** Two-column comparison with performance chart
+**Description:**
+- Left column (red): "Standard PSO" - single nominal scenario diagram
+  - One pendulum configuration, good nominal score, fails on variations
+- Right column (blue): "Robust PSO" - multiple scenario diagrams
+  - Nominal + light/heavy mass + disturbances diagrams
+  - Good nominal AND good across all variations
+- Bottom: Line chart comparing performance over variation scenarios
+  - X-axis: mass +0%, +10%, +20%, disturbance
+  - Standard PSO line (red): crashes at +20% mass
+  - Robust PSO line (blue): degrades gracefully
+**Beautiful.ai Prompt:** "Two-column comparison (standard=red fragile vs. robust=blue resilient) with degradation curve chart"
+**Source:** E004 episode markdown, robust PSO section
+
+### ASSET 4.7: Optimizer Comparison Table and Decision Flowchart
+**Slide:** E004 Slide 9
+**Type:** Table + flowchart split
+**Description:**
+- Top (50%): 4-column comparison table
+  - Columns: PSO (highlighted blue), Grid Search, Gradient-Based, Bayesian Optimization
+  - Rows: No gradient needed, Global search, Speed, When to use
+- Bottom (50%): Decision flowchart with diamond nodes
+  - "< 20 parameters?" → Yes → PSO | No → CMA-ES
+  - "Need <0.1% precision?" → Yes → Gradient | No → PSO
+  - "Very few evaluations?" → Yes → Bayesian | No → PSO
+**Beautiful.ai Prompt:** "Optimizer comparison table (PSO highlighted blue) with decision flowchart below"
+**Source:** E004 episode markdown, algorithm comparison section
+
+### ASSET 4.8: Human vs. Algorithm Race Results
+**Slide:** E004 Slide 10
+**Type:** Race comparison infographic
+**Description:**
+- Left (amber): Three engineer cards
+  - Engineer A: clock icon 28 min, score badge J=8.1
+  - Engineer B: clock icon 30 min, score badge J=8.5
+  - Engineer C: clock icon 30 min, score badge J=9.2
+- Right (blue): PSO card with lightning bolt, 5 minutes, score J=7.89 (WINNER)
+- Center: Comparison line with winner crown on PSO side
+- Bottom: Lesson box "Experience helps. But PSO is consistent."
+**Beautiful.ai Prompt:** "Race comparison with three engineer cards (amber) vs. PSO card (blue), winner crown, time and score badges"
+**Source:** E004 episode markdown, human vs. algorithm experiment
+
+### ASSET 4.9: 80/20 Rule Pie Chart and Troubleshooting Grid
+**Slide:** E004 Slide 11
+**Type:** Pie chart + problem-solution card grid
+**Description:**
+- Top (50%): Pie chart with two slices
+  - Large slice (80%, blue): "Cost function and bounds design"
+  - Small slice (20%, gray): "PSO hyperparameters (w, c1, c2)"
+  - Caption: "Performance comes from what you optimize, not optimizer tuning"
+- Bottom (50%): 4 red problem cards with green solution arrows
+  - "PSO stalls early", "Many unstable particles", "Premature convergence", "Too slow"
+**Beautiful.ai Prompt:** "80/20 pie chart above, four red problem cards with green solution arrows below"
+**Source:** E004 episode markdown, practical wisdom and troubleshooting section
+
+### ASSET 4.10: E004 Key Takeaways and E005 Preview
+**Slide:** E004 Slide 12
+**Type:** Summary checklist with preview panel
+**Description:**
+- Top (60%): 6 learning points with checkmark icons
+  - Brief descriptions under each point
+- Bottom (40%): E005 preview panel
+  - Three-tier architecture teaser diagram (small)
+  - "33x speedup" badge/callout
+  - SpaceX closing connection image
+- Background: Gradient from orange (optimization) to blue (simulation)
+**Beautiful.ai Prompt:** "6-point checklist, E005 preview with three-tier teaser and 33x speedup badge, orange-to-blue gradient"
+**Source:** E004 episode markdown, key takeaways section
 
 ---
 
@@ -510,6 +667,72 @@ visual_assets/
 **Beautiful.ai Prompt:** "Timeline with 5 episode icons connected by arc showing progression"
 **Source:** E005 PDF page 5, summary section
 
+### ASSET 5.7: Performance Benchmark Bar Charts
+**Slide:** E005 Slide 8
+**Type:** Dual bar chart comparison
+**Description:**
+- Top left: Single simulation bars (3 bars: Pure Python slow, Vectorized medium, Vectorized+Numba fast)
+- Top right: PSO optimization bars (3 bars: Slow 4.2 hrs, Vectorized 12 min, Vectorized+Numba 5 min)
+- Bottom: Use case comparison table (Single sim / PSO run / MT-5 benchmark)
+- Color gradient: red (slow), orange (medium), green (fast)
+- Time values labeled on each bar
+**Beautiful.ai Prompt:** "Dual bar charts comparing Python vs. vectorized vs. Numba speeds, color gradient red-to-green"
+**Source:** E005 episode markdown, performance benchmarks section
+
+### ASSET 5.8: Reproducibility Demonstration Diagram
+**Slide:** E005 Slide 9
+**Type:** Researcher comparison diagram
+**Description:**
+- Top (reproducible): Two researcher icons at computers, same code + seed=42, identical matching graphs output, green checkmark
+- Bottom (non-reproducible): Two researcher icons, same code but different seeds, different graphs, red X mark
+- Side panel: "What Can Break Reproducibility" list (unseeded RNG, floating point non-determinism, different hardware)
+- Green checkmark for reproducible case, red X for non-reproducible
+**Beautiful.ai Prompt:** "Two scenarios: researchers with same seed producing identical graphs (green checkmark) vs. different seeds (red X)"
+**Source:** E005 episode markdown, reproducibility section
+
+### ASSET 5.9: Memory Management Visualization
+**Slide:** E005 Slide 10
+**Type:** Memory usage diagram with strategy cards
+**Description:**
+- Top: Memory calculation chain: 1,000 sims x 10,000 timesteps x 6 states x 8 bytes = 480 MB
+- Bar showing RAM filling up, red danger zone when exceeding RAM
+- Two strategy cards:
+  - Pre-allocation card: "Reserve memory first, fill in place" (fast indicator)
+  - Streaming to disk card: "Write batch results to disk, reload for analysis"
+- Bottom table: Small (<100 sims) = RAM, Medium (100-1,000) = Pre-allocate, Large (>1,000) = Stream
+**Beautiful.ai Prompt:** "Memory calculation chain, RAM bar with red danger zone, two strategy cards, guidance table"
+**Source:** E005 episode markdown, memory management section
+
+### ASSET 5.10: SpaceX vs. DIP Parallel Comparison
+**Slide:** E005 Slide 11
+**Type:** Side-by-side comparison infographic
+**Description:**
+- Left (45%, dark blue/silver): SpaceX Falcon 9 diagram with control force vectors
+  - Computational requirement: thousands of scenarios
+  - Real-time gain update needs
+  - Label: "Same engineering problem, larger scale"
+- Right (45%, orange/green): DIP cart-pendulum diagram
+  - Performance: 1,500 sims in 5 minutes
+  - Optimization: PSO on simplified model
+  - Label: "Same principles, educational scale"
+- Bottom: Key principle "Vectorization and JIT compilation scale from student projects to aerospace"
+- Bridge element (gold) connecting both sides
+**Beautiful.ai Prompt:** "Parallel comparison: Falcon 9 (dark blue) left vs. DIP pendulum (orange) right, gold bridge connection"
+**Source:** E005 episode markdown, SpaceX connection section
+
+### ASSET 5.11: E005 Takeaways and Phase 1 Journey Timeline
+**Slide:** E005 Slide 12
+**Type:** Summary checklist with journey timeline
+**Description:**
+- Top (40%): 6 E005 learning points with checkmark icons
+- Middle (35%): Horizontal timeline with 5 milestones (E001-E005)
+  - Descriptors: Overview, Theory, Physics, Optimization, Computation
+  - Arc above: "From project overview to computational mastery"
+- Bottom (25%): Phase 2 preview panel
+- Gradient from beginner blue to advanced gold
+**Beautiful.ai Prompt:** "6-point checklist, horizontal 5-milestone timeline (E001-E005), Phase 2 preview, blue-to-gold gradient"
+**Source:** E005 episode markdown, Phase 1 completion section
+
 ---
 
 ## Asset Usage Guidelines
@@ -560,9 +783,14 @@ visual_assets/
 
 ---
 
-**Total Visual Assets Cataloged:** 29 assets across 5 episodes
-- 25 assets for Standard versions (E001 Standard + E002-E005)
-- 4 additional assets for E001 Extended version (Assets 1.7-1.10)
+**Total Visual Assets Cataloged:** 45 assets across 5 episodes
+- 6 assets for E001 Standard version (Assets 1.1-1.6)
+- 4 assets for E001 Extended version (Assets 1.7-1.10)
+- 9 assets for E002 (Assets 2.1-2.9, slides 2-11)
+- 8 assets for E003 (Assets 3.1-3.8, slides 2-10)
+- 10 assets for E004 (Assets 4.1-4.10, slides 2-12)
+- 11 assets for E005 (Assets 5.1-5.11, slides 1-12)
 
-**Estimated Creation Time (Standard - 25 assets):** 6-8 hours (manual creation) | 2-3 hours (Beautiful.ai prompts)
-**Estimated Creation Time (All 29 assets):** 8-11 hours (manual) | 3-4 hours (Beautiful.ai prompts)
+**New assets added (Feb 2025):** 16 assets covering new slides across E002 (slides 9-11), E003 (slides 8-10), E004 (slides 8-12), E005 (slides 8-12)
+
+**Estimated Creation Time (all 45 assets):** 12-16 hours (manual creation) | 5-7 hours (Beautiful.ai prompts)

@@ -66,8 +66,8 @@ Additional Topics (Slides 8-12):
 
 ### E002: Control Theory Fundamentals
 **File:** `phase1_foundations/E002_control_theory_fundamentals_slides.md`
-**Duration:** 30-35 minutes
-**Slides:** 9
+**Duration:** 35-40 minutes
+**Slides:** 12
 **Topics:**
 - State-space representation (6-variable system)
 - Lyapunov stability (marble-in-bowl intuition)
@@ -76,7 +76,10 @@ Additional Topics (Slides 8-12):
 - Chattering problem & boundary layer solution
 - Super-Twisting Algorithm (smooth operator)
 - Adaptive SMC (smart learner)
-- Robustness properties
+- Robustness properties (matched vs. unmatched uncertainties)
+- Convergence time analysis (finite-time vs. exponential)
+- Practical pitfalls and implementation tips
+- Robustness benchmark results (MT-6)
 - Key takeaways
 
 **Key Visuals Needed:**
@@ -86,86 +89,100 @@ Additional Topics (Slides 8-12):
 - Chattering waveform comparison
 - Super-Twisting phase plane
 - Adaptive gain evolution plot
+- Matched vs. unmatched uncertainty diagram
+- Finite-time convergence comparison chart
 
-**Preparation Time:** 2-2.5 hours (technical content + practice)
+**Preparation Time:** 2.5-3 hours (technical content + practice)
 
 ---
 
 ### E003: Plant Models and Dynamics
 **File:** `phase1_foundations/E003_plant_models_and_dynamics_slides.md`
-**Duration:** 25-30 minutes
-**Slides:** 8
+**Duration:** 35-40 minutes
+**Slides:** 10
 **Topics:**
-- What is a plant model?
-- Lagrangian mechanics (energy-based approach)
-- Simplified DIP model (linear, small angles)
+- Physics behind the pendulum (DIP setup, real-world connections)
+- Lagrangian mechanics (energy-based approach, L = T - V)
+- Simplified DIP model (linear, small angles, 10-100x faster)
 - Full Nonlinear DIP model (gold standard)
-- Low-Rank DIP model (speed demon)
+- Low-Rank DIP model (POD/SVD, 10-50x faster)
 - Mass matrix & dynamics structure (M·q̈ + C + G = B·u)
-- Model comparison table
-- Engineering judgment for model selection
+- Model comparison table (MT-6 benchmark data)
+- Singularities and numerical stability (3 strategies)
+- Practical pitfalls and validation workflow
+- Key takeaways
 
 **Key Visuals Needed:**
 - Lagrangian energy surfaces
 - Small angle approximation graph
 - Complete force diagram (all coupling terms)
 - Mass matrix structure
-- Speed comparison bar chart
+- Speed/accuracy comparison table (MT-6 data)
+- Condition number monitoring diagram
 
-**Preparation Time:** 1.5-2 hours (physics focus + practice)
+**Preparation Time:** 2-2.5 hours (physics focus + practice)
 
 ---
 
 ### E004: PSO Optimization Fundamentals
 **File:** `phase1_foundations/E004_pso_optimization_slides.md`
-**Duration:** 30-35 minutes
-**Slides:** 10
+**Duration:** 40-45 minutes
+**Slides:** 12
 **Topics:**
 - Manual tuning nightmare vs. PSO solution
 - Nature-inspired optimization (bird flocking analogy)
-- PSO algorithm mechanics (particle movement)
-- Multi-objective cost function (error + effort + chattering)
-- PSO workflow for DIP controllers
-- Convergence behavior (watching swarm learn)
-- Real results (360% improvement)
-- Robust PSO (testing against uncertainty)
-- PSO vs. other optimizers
+- PSO algorithm mechanics (two equations: velocity + position)
+- Multi-objective cost function (error + effort + chattering + stability penalty)
+- PSO workflow for DIP controllers (configure -> run -> validate)
+- Convergence behavior: three phases (exploration, exploitation, fine-tuning)
+- Real results (360% gain change, 6-21% performance improvement)
+- Robust PSO (multi-scenario optimization, -45% overshoot)
+- PSO vs. other optimizers (grid search, gradient, Bayesian)
+- Human vs. Algorithm experiment (Engineers A/B/C vs. PSO)
+- Practical wisdom (80/20 rule, troubleshooting guide)
 - Key takeaways
 
 **Key Visuals Needed:**
-- Bird flock seeking food
-- Particle velocity/position update diagram
-- Multi-objective trade-off triangle
-- PSO convergence curve
-- Before/after performance table
+- Bird flock converging on food source
+- Particle velocity/position update diagram with three force arrows
+- Multi-objective trade-off triangle (error vs. effort vs. chattering)
+- PSO convergence curve with three phases labeled
+- MT-8 benchmark results table (all 7 controllers)
+- Multi-scenario robustness comparison
+- Human vs. Algorithm race results
+- 80/20 rule pie chart with troubleshooting cards
 
-**Preparation Time:** 2 hours (optimization concepts + practice)
+**Preparation Time:** 2-2.5 hours (optimization concepts + practice)
 
 ---
 
 ### E005: Simulation Engine Architecture
 **File:** `phase1_foundations/E005_simulation_engine_slides.md`
-**Duration:** 30-35 minutes
-**Slides:** 10
+**Duration:** 40-45 minutes
+**Slides:** 12
 **Topics:**
-- Computational engine overview (three-tier architecture)
-- Simulation Runner (single detailed runs)
-- Integration methods (Euler/RK4/RK45)
-- Vectorized Simulator (assembly line, 33x speedup)
-- Numba JIT compilation (Python to machine code)
-- Simulation Context (config management)
-- Performance benchmarks
-- Reproducibility (seeded RNGs)
-- Memory management for large-scale studies
+- Why speed matters: PSO needs 1,500 simulations in 2-4 hours
+- Three-layer architecture (restaurant analogy: waiter/head chef/line cooks)
+- Simulation loop: six steps at every timestep
+- Integration methods (Euler/RK4/RK45: accuracy vs. speed trade-off)
+- Vectorized Simulator (NumPy broadcasting, 33x speedup)
+- Numba JIT compilation (one decorator, 50-100x speedup)
+- Simulation Context (type-safe configuration, reproducibility)
+- Performance benchmarks (real numbers: 4.2 hours -> 5 minutes)
+- Reproducibility (seed=42, bit-for-bit identical results)
+- Memory management (pre-allocation, streaming, return-only-what-you-need)
+- SpaceX connection (universal engineering principles)
 - Phase 1 completion summary
 
 **Key Visuals Needed:**
-- Three-tier engine diagram
-- Integration method comparison scatter plot
-- Sequential vs. vectorized timeline
-- NumPy broadcasting visualization
-- Performance benchmark bar chart
-- Phase 1 journey timeline
+- Three-tier architecture diagram with restaurant icons
+- Simulation loop circular diagram with 6 steps
+- Integration method comparison chart with mountain road analogy
+- Sequential vs. vectorized execution timeline
+- NumPy broadcasting: (6,) -> (100, 6) visualization
+- Performance benchmark comparison bar charts
+- Reproducibility: seed=42 identical outputs diagram
+- Phase 1 journey timeline (E001-E005 milestones)
 
 **Preparation Time:** 2-2.5 hours (architecture + practice)
 
@@ -174,24 +191,24 @@ Additional Topics (Slides 8-12):
 ## Complete Phase 1 Statistics
 
 **Total Episode Count:** 5 episodes
-**Total Slide Count (Standard):** 45 slides (8+9+8+10+10)
-**Total Slide Count (Extended E001):** 49 slides (12+9+8+10+10) - with E001 extended
-**Total Duration (Standard):** 140-160 minutes (~2.5 hours of content)
-**Total Duration (Extended E001):** 155-175 minutes (~2.7 hours of content)
-**Total Preparation Time (Standard):** 9-11 hours (all 5 episodes from scratch)
-**Total Preparation Time (Extended E001):** 11-13 hours (Standard + Extended slides)
+**Total Slide Count (Standard E001 + comprehensive E002-E005):** 54 slides (8+12+10+12+12)
+**Total Slide Count (Extended E001 + comprehensive E002-E005):** 58 slides (12+12+10+12+12)
+**Total Duration (Standard E001):** 160-180 minutes (~3 hours of content)
+**Total Duration (Extended E001):** 175-195 minutes (~3.2 hours of content)
+**Total Preparation Time (Standard E001):** 11-13 hours (all 5 episodes from scratch)
+**Total Preparation Time (Extended E001):** 13-15 hours (Standard + Extended slides)
 **Source Material:** 3,476 lines of markdown (podcasts) + 31 PDF cheatsheets
 
 ### E001 Version Comparison:
 - Standard (8 slides, 25-30 min): Key concepts + workflow, ~75% source coverage
 - Extended (12 slides, 45-50 min): All topics + design philosophy + tech stack + use cases, 100% source coverage
 
-### Slide Distribution by Topic (Standard):
-- Project Overview/Introduction: 8 slides (18%)
-- Control Theory (SMC, Lyapunov, Adaptive): 9 slides (20%)
-- Physics/Dynamics Models: 8 slides (18%)
-- Optimization (PSO): 10 slides (22%)
-- Simulation Engine: 10 slides (22%)
+### Slide Distribution by Topic (Standard E001):
+- Project Overview/Introduction: 8 slides (15%)
+- Control Theory (SMC, Lyapunov, Adaptive, Robustness): 12 slides (22%)
+- Physics/Dynamics Models: 10 slides (19%)
+- Optimization (PSO): 12 slides (22%)
+- Simulation Engine: 12 slides (22%)
 
 ### Content Complexity Levels:
 - **Beginner-Friendly** (E001): Analogies, high-level concepts, minimal equations
@@ -340,15 +357,16 @@ beautiful_ai/
 - ✓ Cross-references to other episodes included
 
 ### Phase 1 Completion Criteria:
-- ✓ All 5 episodes converted (E001-E005)
-- ✓ 45 total slides created
-- ✓ Visual assets cataloged (25 assets)
-- ✓ Usage notes provided per episode
-- ✓ Speaker scripts average 250-300 words
-- ✓ Technical accuracy verified against source podcasts
-- ✓ Preparation time estimates realistic
+- [OK] All 5 episodes converted (E001-E005)
+- [OK] 54 total slides (Standard) / 58 slides (Extended E001) - all fully complete
+- [OK] Visual assets cataloged (45+ assets across all episodes)
+- [OK] Usage notes provided per episode
+- [OK] Speaker scripts average 250-350 words per slide
+- [OK] Technical accuracy verified against source podcasts
+- [OK] Preparation time estimates realistic
+- [OK] All slides fully written (no outlines or placeholders)
 
-**Status:** [COMPLETE] Phase 1 foundational episodes ready for Beautiful.ai import
+**Status:** [COMPLETE] Phase 1 foundational episodes fully written and ready for Beautiful.ai import
 
 ---
 
