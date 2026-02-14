@@ -52,7 +52,7 @@ Fast simulation (50x real-time: 10s of sim = 0.2s wall clock):
 
 **Three Reasons Speed Is Critical:**
 1. **Rapid development**: PSO every 5 minutes vs. every 4 hours
-2. **Statistical validation**: MT-5 benchmark ran 2,400 simulations - 8 minutes vs. 6.7 hours
+2. **Statistical validation**: Our comprehensive benchmark study ran 2,400 simulations - 8 minutes vs. 6.7 hours
 3. **Interactive UI**: Streamlit slider adjustment needs 200ms response, not 10 seconds
 
 **This Episode:** How the simulation engine achieves this speed
@@ -66,7 +66,7 @@ Now the performance question. If each simulation takes 10 real-world seconds to 
 
 In our simulation engine, PSO completes in 5 minutes. That is a 50 times speedup. How? Three techniques: a well-structured three-layer architecture that isolates computation, vectorization that runs 100 simulations simultaneously using NumPy, and Numba JIT compilation that translates Python loops into machine code.
 
-Speed also matters for statistical validation. In our comprehensive benchmark study, we ran 4 controllers times 12 test scenarios times 50 random seeds - that is 2,400 simulations. With a slow system this takes 6.7 hours. With our engine it takes 8 minutes. That difference determines whether you can do research in an afternoon or need to queue overnight jobs.
+Speed also matters for statistical validation. In our comprehensive benchmark study, we ran 4 controllers across 12 test scenarios with 50 random seeds each - that is 2,400 simulations. With a slow system this takes 6.7 hours. With our engine it takes 8 minutes. That difference determines whether you can do research in an afternoon or need to queue overnight jobs.
 
 And for interactive use - the Streamlit dashboard lets you drag a slider and see the pendulum respond. That feels natural at 200 milliseconds of latency. At 10 seconds per simulation, the interface becomes frustrating to use. Speed is not a luxury. It is a research productivity requirement."
 
@@ -98,7 +98,7 @@ Color: Application=blue, Simulation=orange, Core=purple
 ### SLIDE CONTENT:
 **Title:** Three-Layer Architecture: The Simulation Restaurant
 
-**The Core Principle:** Separation of Concerns
+**The Core Principle:** Separation of Concerns (each layer does one thing and doesn't interfere with others — keeping code organized, testable, and easy to optimize independently)
 Each layer does exactly one thing and does not interfere with the others.
 
 **Layer 1: Application (The Waiter)**
@@ -256,7 +256,7 @@ How do we approximate: d(state)/dt = f(state, u) ?
 **Method 1: Euler (Simplest)**
 ```
 Formula: state(t+dt) = state(t) + dt * state_dot(t)
-Error: 6% at dt=0.01 (one derivative sample, assumes constant)
+Error: 6% at dt=0.01 vs. the exact mathematical solution (one derivative sample, assumes constant)
 Evaluations per step: 1 (fastest)
 Use: Quick prototyping only - too inaccurate for DIP control
 ```
@@ -269,7 +269,7 @@ Formula: Weighted average of 4 derivative samples:
   k3 = dynamics at midpoint again using k2 (correction)
   k4 = dynamics at predicted endpoint using k3
   state_next = state + (dt/6) * (k1 + 2*k2 + 2*k3 + k4)
-Error: 0.016% at dt=0.01 (375x better than Euler!)
+Error: 0.016% at dt=0.01 vs. exact solution (375x better than Euler!)
 Evaluations per step: 4 (4x more work, but 10x larger dt allowed)
 Use: Default choice for all production simulations
 ```
@@ -298,7 +298,7 @@ The mathematical challenge: we have the state right now, and we have the rate of
 
 Euler integration is the simplest. Take the current state, take the current derivative, multiply derivative by dt, add to state. Done. It assumes the derivative is constant across the time step, which is wrong for nonlinear systems like the double inverted pendulum. At a time step of 0.01 seconds, this gives about 6% error in the angles. That might seem acceptable, but errors accumulate - at 10 seconds you have drifted significantly from the true trajectory.
 
-Runge-Kutta 4th order, or RK4, is the standard production method. Instead of sampling the derivative once, it samples four times across the time step: at the start, twice at the midpoint with corrections, and once at the end. It then combines these four samples with weights of 1, 2, 2, 1 over 6. The mathematical justification comes from Taylor series expansion - these specific weights cancel error terms up to the 4th power of dt. Result: at the same time step of 0.01 seconds, error drops from 6% to 0.016%. That is 375 times better accuracy. Yes, you do 4 times more work per step, but you can use time steps 10 times larger to get the same accuracy as Euler - netting a 2.5 times speedup overall.
+Runge-Kutta 4th order, or RK4, is the standard production method. Instead of sampling the derivative once, it samples four times across the time step: at the start, twice at the midpoint with corrections, and once at the end. It then combines these four samples with specific weights. The specific weights RK4 uses were mathematically proven to cancel out most of the accumulated error — you don't need to know why; you just need to know it works far better than the naive Euler approach. Result: at the same time step of 0.01 seconds, error drops from 6% to 0.016% compared to the exact solution. That is 375 times better accuracy. Yes, you do 4 times more work per step, but you can use time steps 10 times larger to get the same accuracy as Euler - netting a 2.5 times speedup overall.
 
 RK45 is the adaptive solver. It computes both a 4th and 5th order estimate and uses their difference to estimate the error. If the error is small, the time step was fine - maybe even increase it next time. If the error is too large, reduce the time step and retry. This is the smart driver who slows down on curves. RK45 achieves 0.003 degree accuracy - excellent for offline analysis. But it takes 3.2 times longer than RK4 and produces unpredictable runtimes. For PSO we need consistent, predictable simulation times. RK4 with fixed time step is the right choice."
 
@@ -450,7 +450,7 @@ def euler_step(state, state_dot, dt):
 - Best for: inner loops called millions of times
 
 **When Numba Shines:**
-- ODE integration inner loops (called 1.5 million times per PSO run)
+- ODE (Ordinary Differential Equation — the math for how system state changes over time) integration inner loops (called 1.5 million times per PSO run)
 - Matrix operations in tight loops
 - Any computation applied repeatedly to numerical arrays
 
@@ -591,7 +591,7 @@ Color: Slow=red, Medium=orange, Fast=green
 | Vectorized only | 12 minutes | 100+ |
 | Vectorized + Numba | 5 minutes | 200+ |
 
-**Comprehensive Benchmark Study (MT-5):**
+**Comprehensive Benchmark Study:**
 ```
 4 controllers x 12 scenarios x 50 seeds = 2,400 simulations
 Slow system:  6.7 hours (overnight run)
@@ -826,7 +826,7 @@ Color: SpaceX=dark blue/silver, DIP=orange/green, bridge=gold
 | System | Simulations | Speed Required | Parameters |
 |---|---|---|---|
 | DIP-SMC-PSO (ours) | 1,500 per optimization | 50x real-time | 6-16 gains |
-| SpaceX GNC software | 10,000+ per deployment | 1,000x real-time | 100s of params |
+| SpaceX GNC (Guidance, Navigation, Control) | 10,000+ per deployment | 1,000x real-time | 100s of params |
 | Common principle | Vectorize + JIT | Fast simulation | Automated optimization |
 
 **What You Now Understand:**
@@ -843,7 +843,7 @@ Every time SpaceX prepares a Falcon 9 for a booster recovery attempt, their guid
 
 Our project runs 1,500 simulations in 5 minutes. SpaceX runs 10,000 simulations in minutes. The scale is different. The principles are identical.
 
-What this means for you: everything you learned in this episode is directly applicable to real engineering work. Vectorization is used in every serious scientific computing system from climate models to computational fluid dynamics to neural network training. JIT compilation via Numba, LLVM, or similar tools underlies performance-critical numerical software everywhere. Reproducible seeding is standard practice in any scientific computing context. Three-layer architecture appears in virtually every well-engineered software system from operating systems to web servers to simulation platforms.
+What this means for you: everything you learned in this episode is directly applicable to real engineering work. Vectorization is used in every serious scientific computing system from climate models to computational fluid dynamics to neural network training. JIT compilation via Numba or similar tools underlies performance-critical numerical software everywhere. Reproducible seeding is standard practice in any scientific computing context. Three-layer architecture appears in virtually every well-engineered software system from operating systems to web servers to simulation platforms.
 
 You have not just learned how our simulation engine works. You have learned patterns that appear throughout engineering software."
 
