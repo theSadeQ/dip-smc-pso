@@ -58,7 +58,7 @@ This episode dives into the control theory fundamentals - the mathematical frame
 
 Control theory is the mathematical framework for making systems behave the way we want them to. Whether it's a rocket maintaining vertical position during landing, a humanoid robot keeping its balance, or our double inverted pendulum staying upright, the same mathematical principles apply.
 
-Today we'll cover five main topics. First, state-space representation - how we describe the system mathematically with six numbers. Second, Lyapunov stability theory - the marble-in-a-bowl intuition for proving convergence. Third, sliding mode control fundamentals - the guardrail path down the mountain that naturally rejects disturbances. Fourth, chattering and how to eliminate it using boundary layers and super-twisting algorithms. And fifth, adaptive control - controllers that learn and adjust their own gains in real-time.
+Today we'll cover five main topics. First, state-space representation - how we describe the system mathematically with six numbers. Second, Lyapunov stability theory - the marble-in-a-bowl intuition for proving convergence. Third, sliding mode control fundamentals - the guardrail path down the mountain that naturally rejects disturbances. Fourth, chattering and how to eliminate it using boundary layers and super-twisting algorithms. And fifth, adaptive control - controllers that learn and adjust their own gains in real-time (gains = the numerical multipliers that set how aggressively the controller reacts to errors).
 
 By the end of this episode, you'll understand not just WHAT these controllers do, but WHY the mathematics works and HOW it connects to physical reality. Let's dive into the theory!"
 
@@ -122,7 +122,7 @@ Now here's the underactuated challenge we mentioned in episode one: we only have
 
 The general state-space form is beautifully simple: x-dot equals f of x, u, t. That's just saying 'the rate of change of state depends on the current state, the control input, and time.' For our pendulum, that function f encapsulates all the physics - Newton's laws, gravity, inertia, everything. The code just implements this equation using the actual dynamics we'll see in episode three.
 
-State-space representation has huge advantages over classical transfer functions. It handles multi-input, multi-output systems naturally. It works for nonlinear systems like ours. It enables optimal control design. And critically, it has direct physical interpretation - every state variable corresponds to something you can actually measure or estimate. This is the framework that lets us design advanced controllers like sliding mode control."
+State-space representation has huge advantages over older frequency-domain analysis methods. It handles multi-input, multi-output systems naturally. It works for nonlinear systems like ours. It enables optimal control design. And critically, it has direct physical interpretation - every state variable corresponds to something you can actually measure or estimate. This is the framework that lets us design advanced controllers like sliding mode control."
 
 ---
 
@@ -465,7 +465,7 @@ The control law has two components working together. First is an integral term t
 
 Why square root? This is brilliant. Because it provides exactly the right balance. When you're far from the surface with large error, the square root is still significant, so you get strong control to drive you toward the surface quickly. But when you're close to the surface with small error, the square root makes that error even smaller, so you get gentle control that doesn't overshoot. It's like having automatic gain scheduling built right into the control law. The closer you get to the target, the gentler the corrections become, naturally preventing oscillations.
 
-This gives you three big advantages. First, dramatically reduced chattering. The control signal is continuous - no more buzzing cicada sound. Second, you still get finite-time convergence, just like classical SMC. For our double inverted pendulum, convergence times are typically 0.1 to 1 second. And third, robustness to smooth disturbances - technically called Lipschitz disturbances - which covers most real-world scenarios.
+This gives you three big advantages. First, dramatically reduced chattering. The control signal is continuous - no more buzzing cicada sound. Second, you still get finite-time convergence, just like classical SMC. For our double inverted pendulum, convergence times are typically 0.1 to 1 second. And third, robustness to smooth, bounded disturbances - the kind that don't jump instantaneously - which covers most real-world scenarios.
 
 The Python implementation is surprisingly simple - just a few lines of code. Compute the proportional term using the square root. Update the integral term by accumulating signed error over time. Sum them together. That's it. The fractional power and the integral accumulation do all the heavy lifting. There are no if-statements, no hard switches, just smooth mathematical functions. That's why the control output is smooth and chattering-free.
 
@@ -522,12 +522,12 @@ IF |s| is small (close to target):
 - Even without knowing ideal gains, math proves stability
 - Adaptation naturally drives gains toward optimal values!
 
-**Real Results (MT-6 Benchmark: Mass Uncertainty ±20%):**
+**Real Results (Mass Uncertainty ±20% Benchmark):**
 
 | Controller | Nominal Performance | With +20% Mass Error | Degradation |
 |------------|---------------------|----------------------|-------------|
 | Classical SMC | 4.2° overshoot | 5.8° overshoot | +1.6° |
-| STA-SMC | 3.1° overshoot | 4.3° overshoot | +1.2° |
+| STA-SMC (Super-Twisting) | 3.1° overshoot | 4.3° overshoot | +1.2° |
 | **Adaptive SMC** | **3.8° overshoot** | **4.1° overshoot** | **+0.3°** ✓ |
 
 **Conclusion:** Adaptive SMC most robust to parameter variations!
@@ -589,12 +589,12 @@ Color: Green for matched (solvable), red/orange for unmatched (mitigated)
 - **SMC Property:** Attenuation only - cannot perfectly reject
 - Examples: Sensor noise, model parameter errors
 
-**Real Data - MT-6 Benchmark (±20% Mass Uncertainty):**
+**Real Data - Mass Uncertainty Benchmark (±20% Mass Increase):**
 
 | Controller | Nominal | Perturbed (+20%) | Degradation |
 |---|---|---|---|
 | Classical SMC | 4.2° | 5.8° | +1.6° |
-| STA-SMC | 3.1° | 4.3° | +1.2° |
+| STA-SMC (Super-Twisting) | 3.1° | 4.3° | +1.2° |
 | Adaptive SMC | 3.8° | 4.1° | **+0.3°** |
 
 **Adaptive SMC most robust** - automatically compensates for parameter variations.
@@ -675,7 +675,7 @@ Typical range for DIP: T_f ~ 0.1 - 1.0 seconds
 ### SPEAKER SCRIPT:
 "Now let's talk about something that separates SMC from most other control algorithms: finite-time convergence. This is a mathematical guarantee that makes SMC particularly valuable for real hardware applications.
 
-Most control algorithms - PID, LQR, standard pole placement - achieve what's called exponential convergence. The error decays exponentially: it gets halved every fixed time interval, but it never actually reaches zero. Mathematically, you only get within epsilon of zero as time approaches infinity. For many applications that's fine - you're just trying to get close enough. But in safety-critical systems, 'close enough by infinity' isn't an acceptable specification.
+Most classical control algorithms achieve what's called exponential convergence. The error decays exponentially: it gets halved every fixed time interval, but it never actually reaches zero. Mathematically, you only get within epsilon of zero as time approaches infinity. For many applications that's fine - you're just trying to get close enough. But in safety-critical systems, 'close enough by infinity' isn't an acceptable specification.
 
 Sliding mode control achieves finite-time convergence: the system reaches exactly zero at a predictable, computable time T_f. Not close to zero. Not within epsilon. Zero. And you can calculate that time before you even run the system.
 
@@ -722,7 +722,7 @@ s_dot = alpha * s_dot + (1 - alpha) * s_dot_prev
 **[PITFALL 2: Gain Over-Tuning]**
 Large gains → excessive chattering, wasted energy
 - Start small: K ~ 1-5, increase gradually
-- Use PSO for final optimization (MT-8 result: +360% on some gains is correct after PSO)
+- Use PSO for final optimization (PSO routinely finds gains far better than manual tuning - cost score reductions of 100-360% are common)
 - Manual large gains ≠ optimal large gains
 
 **[PITFALL 3: Ignoring Saturation]**
@@ -754,7 +754,7 @@ python simulate.py --load gains.json --plot --use-full-dynamics
 
 Pitfall one: derivative explosion. When you compute the time derivative of the sliding surface numerically - taking the difference of consecutive s values divided by dt - you're amplifying noise by a factor of 1 over dt. At 0.01 second timesteps, that's 100x amplification. The result? Your control signal looks like white noise riding on top of a useful signal. The fix is to compute s-dot analytically using the model - you know the dynamics, so compute the derivative from first principles rather than numerical differencing. If you must use numerical differentiation, always run it through a low-pass filter first.
 
-Pitfall two: gain over-tuning. More aggressive gains are not always better. Large gains push the system toward the sliding surface faster, but they also amplify chattering and waste control energy. The right approach is to start conservative - gains of 1 to 5 - and increase gradually until performance is acceptable. Then use PSO for the final optimization step. This is important: when MT-8 showed 360% improvements in some gains from PSO, those large gains weren't obvious from manual intuition. PSO found them through systematic search. Don't confuse 'large gains are needed' with 'I should manually crank gains up.'
+Pitfall two: gain over-tuning. More aggressive gains are not always better. Large gains push the system toward the sliding surface faster, but they also amplify chattering and waste control energy. The right approach is to start conservative - gains of 1 to 5 - and increase gradually until performance is acceptable. Then use PSO for the final optimization step. This is important: in our benchmark study, PSO found gains with cost scores 360% lower than the manual starting values - those gains weren't obvious from manual intuition. PSO found them through systematic search. Don't confuse 'large gains are needed' with 'I should manually crank gains up.'
 
 Pitfall three: ignoring actuator saturation. Every real actuator has a maximum force or torque. When your controller demands more than that limit, the actuator saturates - it outputs maximum force regardless of what you asked for. If your gains are so aggressive that you're saturating more than 20% of the time, the sliding surface may become unreachable. Always saturate control in code, and always run the diagnostic check.
 
