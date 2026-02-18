@@ -1,0 +1,367 @@
+%% ============================================================
+%% Episode 01 - Farsi Podcast Script
+%% Series: Advisor Progress Report - Deep Dive
+%% Compiler: XeLaTeX ONLY
+%% Font: B Nazanin (user request)
+%% CRITICAL: xepersian must always be loaded LAST
+%% ============================================================
+
+\documentclass[12pt, a4paper]{article}
+
+%% ============================================================
+%% COMPATIBILITY SHIMS
+%% MiKTeX admin base (2023-11) is missing commands used by
+%% user-installed bidi 2026 and fontspec 2.9g.
+%% ============================================================
+\makeatletter
+\providecommand\IfClassLoadedT[2]{\@ifclassloaded{#1}{#2}{}}
+\providecommand\IfClassLoadedF[2]{\@ifclassloaded{#1}{}{#2}}
+\providecommand\IfPackageLoadedT[2]{\@ifpackageloaded{#1}{#2}{}}
+\providecommand\IfPackageLoadedF[2]{\@ifpackageloaded{#1}{}{#2}}
+\providecommand\IfFileLoadedTF[3]{\@ifpackageloaded{#1}{#2}{#3}}
+\providecommand\IfFileLoadedT[2]{\@ifpackageloaded{#1}{#2}{}}
+\providecommand\IfFileLoadedF[2]{\@ifpackageloaded{#1}{}{#2}}
+\makeatother
+%% l3kernel shim: \prop_gput_if_not_in:Nnn added ~2024-10, missing from 2024-01-04
+\usepackage{expl3}
+\ExplSyntaxOn
+\cs_if_exist:NF \prop_gput_if_not_in:Nnn
+  {
+    \cs_new:Npn \prop_gput_if_not_in:Nnn #1#2#3
+      { \prop_if_in:NnF #1 {#2} { \prop_gput:Nnn #1 {#2} {#3} } }
+  }
+\ExplSyntaxOff
+%% ============================================================
+
+%% \dash{}Page geometry (load before xepersian) ---
+\usepackage[
+  a4paper,
+  top=2.5cm,
+  bottom=2.5cm,
+  left=2.8cm,
+  right=2.8cm,
+  headheight=25pt
+]{geometry}
+
+%% \dash{}Colors (load before xepersian) ---
+\usepackage{xcolor}
+\definecolor{seriesblue}{RGB}{25, 80, 150}
+\definecolor{audionote}{RGB}{130, 50, 15}
+\definecolor{sectiongray}{RGB}{75, 75, 75}
+\definecolor{paramblue}{RGB}{230, 238, 250}
+\definecolor{audiotan}{RGB}{252, 243, 233}
+
+%% \dash{}Math (load before xepersian) ---
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+%% \dash{}Tables (load before xepersian) ---
+%% Note: NOT loading \usepackage{array} because bidi 2026's array-xetex-bidi.def
+%% uses l3kernel \tbl_* functions not available in installed l3kernel 2024-01-04.
+%% Basic tabular (rl columns) works without array.
+\usepackage{booktabs}
+
+%% \dash{}Lists (load before xepersian) ---
+\usepackage{enumitem}
+
+%% \dash{}Spacing (load before xepersian) ---
+\usepackage{setspace}
+\setstretch{1.7}
+
+%% \dash{}Boxes (load before xepersian) ---
+\usepackage{mdframed}
+
+%% \dash{}Header/Footer (load before xepersian) ---
+\usepackage{fancyhdr}
+
+%% \dash{}Section titles (load before xepersian) ---
+\usepackage{titlesec}
+
+%% ============================================================
+%% xepersian MUST be loaded LAST
+%% ============================================================
+\usepackage{xepersian}
+\settextfont[Scale=1.05]{B Nazanin}
+\setlatintextfont{Times New Roman}
+%% Note: \setdigitfont omitted -- B Nazanin lacks Persian math glyphs needed
+%% by unicode-persianmath. Digits display correctly using the default.
+
+%% Em-dash shim: B Nazanin lacks U+2014, so \dash renders via Latin font
+\newcommand{\dash}{\lr{---}}
+
+%% ============================================================
+%% Styling AFTER xepersian
+%% ============================================================
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\color{sectiongray} \RL{گزارش پيشرفت مشاور} \lr{---} \RL{بررسی عمیق}}
+\fancyhead[L]{\small\color{sectiongray} قسمت اول: مدل سيستم}
+\fancyfoot[C]{\small\color{sectiongray}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\titleformat{\section}
+  {\large\bfseries\color{seriesblue}}
+  {}
+  {0pt}
+  {}
+  [\vspace{-2pt}{\color{seriesblue}\rule{\linewidth}{0.7pt}}\vspace{2pt}]
+
+\titleformat{\subsection}
+  {\normalsize\bfseries\color{sectiongray}}
+  {}
+  {0pt}
+  {}
+
+\setcounter{secnumdepth}{0}
+
+\setlist[itemize]{
+  itemsep=3pt,
+  topsep=4pt,
+  parsep=0pt,
+  label=$\bullet$
+}
+
+%% ============================================================
+\begin{document}
+%% ============================================================
+
+\thispagestyle{empty}
+
+\vspace*{1.2cm}
+
+{\centering
+{\color{seriesblue}\fontsize{24}{30}\selectfont\bfseries قسمت اول}
+
+\vspace{0.5cm}
+{\fontsize{15}{20}\selectfont\bfseries مدل سيستم: آنچه واقعاً کنترل می‌کنيم}
+
+\vspace{0.9cm}
+{\color{seriesblue}\rule{0.55\linewidth}{1pt}}
+\vspace{0.7cm}
+
+{\normalsize
+\begin{tabular}{rl}
+  \textbf{مجموعه:}     & گزارش پيشرفت مشاور \dash{} بررسی عمیق \\[5pt]
+  \textbf{مدت زمان:}   & ۸ تا ۱۰ دقیقه \\[5pt]
+  \textbf{راوی:}       & مجری تنها \\[5pt]
+  \textbf{منابع:}      & بخش‌های ۱.۱ تا ۱.۴ گزارش مشاور \\
+\end{tabular}
+}
+
+\vspace{0.9cm}
+{\color{seriesblue}\rule{0.55\linewidth}{0.4pt}}
+\par}
+
+\vspace{1.2cm}
+
+\begin{mdframed}[
+  backgroundcolor=audiotan,
+  linecolor=audionote!70,
+  linewidth=1pt,
+  leftmargin=0pt,
+  rightmargin=0pt,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=8pt,
+  innerbottommargin=8pt
+]
+{\small\color{audionote}\bfseries يادداشت صوتی:}
+{\small\color{audionote}
+اين قسمت پايه و اساس کل مجموعه است. هر عددی که در اينجا ذکر می‌شود مقدار دقيق گزارش مشاور است.
+اگر مشاور بپرسد «اين از کجا آمده؟» \dash{}اين قسمت پاسخ شماست.
+}
+\end{mdframed}
+
+\newpage
+
+%% ============================================================
+\section{بخش آغازين: آونگ دو وارون چيست؟}
+
+بگذاريد با ابتدايی‌ترين پرسش شروع کنيم: دقيقاً چه چيزی را کنترل می‌کنيم؟
+
+تصور کنيد يک چرخ‌دستی خريد داريد. حالا يک چوب‌جارو را به بالای آن متصل کنيد، به‌صورت عمودی ايستاده. اين چوب در پايه لولا شده است \dash{}می‌تواند به جلو و عقب بچرخد. حالا يک چوب دوم را به بالای اولی متصل کنيد، آن هم لولا شده. نتيجه: يک چرخ‌دستی که می‌تواند چپ و راست حرکت کند، يک آونگ پايينی که می‌چرخد، و يک آونگ بالايی که می‌تواند مستقل از اولی بچرخد.
+
+\textbf{وظيفه شما:} هر دو چوب را عمودی نگه داريد در حالی که چرخ‌دستی می‌تواند جابجا شود. شما دقيقاً يک ورودی کنترلی داريد \dash{}يک نيروی افقی روی چرخ‌دستی، حداکثر ۱۵۰ نيوتن در هر جهت.
+
+اين است \textbf{آونگ دو وارون} يا \lr{DIP}. کنترل آن واقعاً دشوار است، به سه دليل:
+
+\begin{itemize}
+  \item \textbf{کم‌محرک:} يک نيرو داريد ولی بايد سه چيز را همزمان مديريت کنيد.
+  \item \textbf{ناپايدار ذاتی:} اگر يک لحظه رهايش کنيد همه چيز می‌افتد.
+  \item \textbf{غيرخطی:} جفت‌شدگی فيزيکی دو آونگ معادلات را پيچيده می‌کند.
+\end{itemize}
+
+%% ============================================================
+\section{بردار حالت: شش عددی که همه چيز را توصيف می‌کنند}
+
+پيش از اينکه يک معادله بنويسيم، بايد تعريف کنيم «حالت سيستم» يعنی چه.
+
+در هر لحظه، حالت آونگ دو وارون به‌طور کامل با شش عدد توصيف می‌شود:
+
+\begin{itemize}
+  \item موقعيت افقی چرخ‌دستی: $x$
+  \item زاويه آونگ اول از عمود: $\theta_1$
+  \item زاويه آونگ دوم از عمود: $\theta_2$
+  \item سرعت چرخ‌دستی: $\dot{x}$
+  \item سرعت زاويه‌ای آونگ اول: $\dot{\theta}_1$
+  \item سرعت زاويه‌ای آونگ دوم: $\dot{\theta}_2$
+\end{itemize}
+
+بردار حالت در قالب يک بردار ستونی:
+\[
+\mathbf{x} = \bigl[\, x \;\; \theta_1 \;\; \theta_2 \;\; \dot{x} \;\; \dot{\theta}_1 \;\; \dot{\theta}_2 \,\bigr]^T
+\]
+
+وقتی هر شش عدد صفر باشند، هر دو آونگ کاملاً عمودی هستند و چرخ‌دستی ساکن است. اين نقطه تعادلی است که می‌خواهيم حفظ کنيم.
+
+چرا اين مهم است؟ چون هر کنترل‌کننده‌ای که می‌سازيم اين شش عدد را ورودی می‌گيرد و يک نيروی تنها خروجی می‌دهد. تمام پيچيدگی \lr{SMC}، تنظيم \lr{PSO}، و تحليل پايداری به اين کاهش می‌يابد: با دادن اين شش عدد الان، چه نيرويی به چرخ‌دستی اعمال کنم؟
+
+%% ============================================================
+\section{معادلات حرکت: مکانيک لاگرانژی}
+
+حالا نوبت فيزيک است. معادلات حرکت از مکانيک لاگرانژی می‌آيند \dash{}همان چارچوب رياضی که برای توصيف همه چيز از مدارهای سياره‌ای تا بازوهای رباتيک استفاده می‌شود. نتيجه برای سيستم ما:
+
+\begin{equation}
+  \mathbf{M}(\mathbf{q})\,\ddot{\mathbf{q}}
+  + \mathbf{C}(\mathbf{q},\dot{\mathbf{q}})\,\dot{\mathbf{q}}
+  + \mathbf{G}(\mathbf{q})
+  + \mathbf{F}_\mathrm{fric}
+  = \mathbf{B}\,u
+  \label{eq:eom}
+\end{equation}
+
+بگذاريد جمله به جمله آن را باز کنيم.
+
+\subsection{$\mathbf{M}(\mathbf{q})$ \dash{}ماتريس اينرسی}
+
+يک ماتريس متقارن $3\!\times\!3$ است که \emph{به پيکربندی جاری بستگی دارد}. با نوسان آونگ‌ها، اينرسی موثر سيستم تغيير می‌کند. گزارش بيان می‌کند اين تغيير \textbf{۴۰ تا ۶۰ درصد} در فضای کار عملياتی است \dash{}اينرسی سيستم تقريباً بين دو پيکربندی دو برابر می‌شود.
+
+جمله جفت‌شدگی کليدی در $\mathbf{M}$:
+\[
+2\,m_2\,l_1\,l_{c2}\,\cos(\theta_1 - \theta_2)
+\]
+وقتی دو آونگ زاويه‌های مشابه دارند، اين جفت‌شدگی زياد است. وقتی زاويه‌های متفاوت دارند، علامتش عوض می‌شود. اين همان چيزی است که آونگ دو را ذاتاً سخت‌تر از آونگ تک می‌کند.
+
+\subsection{$\mathbf{C}(\mathbf{q},\dot{\mathbf{q}})$ \dash{}ماتريس کوريولیس و گريز از مرکز}
+
+نيروهايی که از چارچوب‌های دوار پديدار می‌شوند. در آونگ دو وارون، اين جملات متناسب با مجذور سرعت‌های زاويه‌ای و حاصل‌ضرب متقاطع سرعت‌ها هستند. وقتی همه چيز ساکن است صفرند و با شروع نوسان رشد می‌کنند. يک جمله جفت‌شدگی ژيروسکوپی کوچک با ضريب $0.01$ نيز برای ضبط جفت‌شدگی متقاطع بين سرعت‌های زاويه‌ای اضافه شده است.
+
+\subsection{$\mathbf{G}(\mathbf{q})$ \dash{}بردار گرانش}
+
+توجه کنيد که $G_1 = 0$. اين تقريب نيست \dash{}دقيقاً صفر است. گرانش عمودی عمل می‌کند و چرخ‌دستی افقی حرکت می‌کند:
+\[
+\mathbf{G}(\mathbf{q}) =
+\begin{bmatrix}
+  0 \\[4pt]
+  -m_1\,g\,l_{c1}\,\sin\theta_1 \\[4pt]
+  -m_2\,g\,l_{c2}\,\sin\theta_2
+\end{bmatrix}
+\]
+اينها نيروهای بازگرداننده هستند که همواره می‌خواهند آونگ‌ها را به پايين بکشند.
+
+\subsection{مدل اصطکاک}
+
+از نوع لزج و کولن:
+\begin{itemize}
+  \item \textbf{اصطکاک لزج:} متناسب با سرعت \dash{}مثل کشيدن در عسل.
+  \item \textbf{اصطکاک کولن:} مقاومت ثابت در جهت مخالف حرکت.
+  \item \textbf{ناحيه مرده:} در سرعت‌های کوچکتر از $10^{-6}$ م/ث، تا از تکينگی تابع $\mathrm{sign}$ جلوگيری شود.
+\end{itemize}
+
+%% ============================================================
+\section{پارامترهای فيزيکی: اين اعداد را حفظ کنيد}
+
+\begin{mdframed}[
+  backgroundcolor=audiotan,
+  linecolor=audionote!70,
+  linewidth=1pt,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=7pt,
+  innerbottommargin=7pt
+]
+{\small\color{audionote}\bfseries يادداشت صوتی:}
+{\small\color{audionote}
+اين اعداد در سوالات مشاور مطرح می‌شوند.
+«چرا $G_1$ صفر است؟» \dash{}چرخ‌دستی افقی، گرانش عمودی، عمود بر هم هستند.
+«مقادير اينرسی را چطور محاسبه کرديد؟» \dash{}فرمول ميله نازک: $I = \frac{1}{12}ml^2$.
+}
+\end{mdframed}
+
+\vspace{6pt}
+
+گزارش ۱۴ پارامتر فيزيکی بر حسب \lr{SI} ارائه می‌دهد. اينها مقادير دقيقی هستند که در هر شبيه‌سازی استفاده شده‌اند:
+
+\vspace{6pt}
+
+\begin{mdframed}[
+  backgroundcolor=paramblue,
+  linecolor=seriesblue!50,
+  linewidth=0.8pt,
+  innerleftmargin=12pt,
+  innerrightmargin=12pt,
+  innertopmargin=8pt,
+  innerbottommargin=8pt
+]
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lll}
+  \toprule
+  \textbf{پارامتر} & \textbf{نماد} & \textbf{مقدار} \\
+  \midrule
+  جرم چرخ‌دستی       & $M$          & \lr{1.5\ kg} \\
+  جرم لينک ۱         & $m_1$        & \lr{0.2\ kg} \\
+  جرم لينک ۲         & $m_2$        & \lr{0.15\ kg} \\
+  طول لينک ۱         & $l_1$        & \lr{0.4\ m} \\
+  طول لينک ۲         & $l_2$        & \lr{0.3\ m} \\
+  فاصله مرکز جرم ۱   & $l_{c1}$     & \lr{0.2\ m} \\
+  فاصله مرکز جرم ۲   & $l_{c2}$     & \lr{0.15\ m} \\
+  ممان اينرسی ۱      & $I_1$        & \lr{0.0081 kg${\cdot}$m$^2$} \\
+  ممان اينرسی ۲      & $I_2$        & \lr{0.0034 kg${\cdot}$m$^2$} \\
+  گرانش              & $g$          & \lr{9.81 m/s$^2$} \\
+  حداکثر نيروی کنترل & $u_{\mathrm{max}}$ & \lr{150\ N} \\
+  دوره کنترل         & $\Delta t$   & \lr{0.01\ s\ (100\ Hz)} \\
+  \bottomrule
+\end{tabular}
+\end{center}
+\end{mdframed}
+
+%% ============================================================
+\section{سه مدل: انتخاب ابزار مناسب}
+
+گزارش سه مدل رياضی متمايز را مستند کرده است که هر کدام برای هدف متفاوتی استفاده می‌شوند.
+
+\subsection{مدل ساده‌شده \dash{}برای \lr{PSO}}
+
+معادلات را در اطراف نقطه تعادل عمودی خطی می‌کند: $\sin\theta \approx \theta$، $\cos\theta \approx 1$، جملات جفت‌شدگی به ۰.۷ تا ۰.۸ کاهش می‌يابند، و اثرات ژيروسکوپی حذف می‌شوند. سرعت شبيه‌سازی \textbf{۱۰ تا ۵۰ برابر} بيشتر می‌شود.
+
+روی مدل کامل، \lr{PSO} بيش از ۸ ساعت به ازای هر کنترل‌کننده طول می‌کشد. روی مدل ساده‌شده، در چند دقيقه تمام می‌شود.
+
+\subsection{مدل کامل غيرخطی \dash{}برای نتايج نهايی}
+
+لاگرانژين کامل، تمام جملات جفت‌شدگی، کوريولیس، گريز از مرکز، ژيروسکوپی، و اصطکاک کامل. \textbf{هر عددی در جداول نتايج روی اين مدل اندازه‌گيری شده است.} وقتی گزارش می‌گويد \lr{STA} در ۱.۸۲ ثانيه همگرا می‌شود، اين روی مدل کامل است.
+
+\subsection{مدل مرتبه کاهش‌يافته \dash{}برای \lr{HIL}}
+
+از تجزيه مقادير تکين (\lr{SVD}) برای ايجاد تقريب مرتبه کاهش‌يافته استفاده می‌کند. برای حالت سخت‌افزار در حلقه که بودجه محاسباتی بلادرنگ محدود است.
+
+خطی‌سازی مدل ساده‌شده از طريق تفاضل محدود عددی با $\varepsilon = 10^{-8}$ محاسبه می‌شود. از يـاکوبين تحليلی استفاده نشده است \dash{}مشتق نمادين ماتريس اينرسی کامل آن‌قدر پيچيده است که تمايز عددی انتخاب عملگراتر است.
+
+%% ============================================================
+\section{جمع‌بندی}
+
+مدل سيستم جزئياتی نيست که بتوان از کنارش گذشت. \textbf{اينرسی وابسته به پيکربندی}، \textbf{جفت‌شدگی کوريولیس بين آونگ‌ها}، و \textbf{غيرخطی‌بودن‌های اصطکاکی} همان چيزی هستند که اين مسئله را جالب می‌کنند و کنترل‌کننده‌های خطی ساده را شکست می‌دهند. هر کنترل‌کننده در اين پروژه با شناخت کامل اين مدل طراحی شده است.
+
+در قسمت بعد، اين مدل را می‌گيريم و می‌پرسيم: با داشتن اين معادلات، چطور يک سطح لغزشی طراحی می‌کنيد که تحليل پايداری را قابل انجام کند؟
+
+\vspace{1.5cm}
+\begin{center}
+{\color{seriesblue}\rule{0.45\linewidth}{0.4pt}}\\[8pt]
+{\small\color{sectiongray}
+منابع گزارش: بخش‌های ۱.۱ تا ۱.۴ \dash{}
+\lr{eq:state, eq:eom, eq:Mfull, eq:Cfull, eq:Gvec, eq:friction}
+}
+\end{center}
+
+\end{document}
