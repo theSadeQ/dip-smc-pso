@@ -26,7 +26,7 @@
 \usepackage{array}
 \usepackage{tabularx}
 \usepackage{parskip}
-\usepackage{microtype}
+\usepackage[protrusion=true,expansion=false]{microtype}
 \usepackage{bm}
 \usepackage[hyphens]{url}
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric}
@@ -37,6 +37,14 @@
 \definecolor{blocked}{RGB}{160, 0, 0}
 \definecolor{headblue}{RGB}{0, 50, 110}
 \definecolor{rowgray}{RGB}{245, 245, 245}
+\definecolor{sevlow}{RGB}{100, 100, 100}
+% --- Severity / status macros (audit findings) ---
+\newcommand{\sevC}{\textbf{\textcolor{blocked}{Critical}}}
+\newcommand{\sevI}{\textbf{\textcolor{pending}{Important}}}
+\newcommand{\sevL}{\textcolor{sevlow}{Minor}}
+\newcommand{\statU}{\textbf{\textcolor{blocked}{Unresolved}}}
+\newcommand{\statR}{\textbf{\textcolor{done}{Resolved}}}
+\newcommand{\statA}{\textcolor{headblue}{Acknowledged}}
 
 % --- Report metadata (Step 1: centralized customization) ---
 \newcommand{\ReportLabel}{Advisor Progress Report}
@@ -1399,39 +1407,162 @@ Hybrid Adaptive STA  & $[c_1,\lambda_1,c_2,\lambda_2]$ &
 \label{app:issues}
 % ============================================================
 
-All numbered findings consolidated for advisor reference.
-\textbf{Critical} items require action before submission;
-\textbf{Acknowledged} items are documented and accepted.
+\noindent All 31 audit findings documented for advisor reference.
+Color key: \sevC\ $\mid$ \sevI\ $\mid$ \sevL\ $\mid$
+\statU\ $\mid$ \statR\ $\mid$ \statA.
 
+\smallskip
 \begin{center}
 \resizebox{\columnwidth}{!}{%
-\begin{tabular}{@{}rp{1.3cm}p{3.8cm}p{1.5cm}p{2.1cm}p{4.2cm}@{}}
+\begin{tabular}{@{}lccc@{}}
 \toprule
-\textbf{\#} & \textbf{Sect.} & \textbf{Issue} &
-\textbf{Severity} & \textbf{Status} & \textbf{Resolution Plan} \\
+\textbf{Priority} & \textbf{Count} & \textbf{Open} & \textbf{Required action} \\
 \midrule
-20 & \S3.5 & STA robust gains violate $K_1{>}K_2$ &
-  Critical & Unresolved & Rerun constrained robust PSO; or re-derive
-  conditions for $K_1{<}K_2$ \\
-31 & \S5.3 & Two chattering metrics give opposite rankings &
-  High & Resolved & FFT power $>$10~Hz adopted as official metric \\
-28 & \S6   & Only 3 $\varepsilon$ values; no fine sweep &
-  Medium & Acknowledged & Plan: $\varepsilon$ sweep 0.005--0.05 in future work \\
-16 & \S3.3 & No PSO hyperparameter ablation over $N_p, w$ &
-  Medium & Acknowledged & Out of scope for thesis \\
-17 & \S3.3 & PSO defaults not explicitly justified &
-  Low & Acknowledged & Add Shi \& Eberhart (1998) citation \\
-18 & \S3.3 & Cost normalisation thresholds not principled &
-  Low & Acknowledged & Sensitivity table added (Section~3.3) \\
-19 & \S3.4 & No scenario-split sensitivity ablation &
-  Medium & Acknowledged & Out of scope; noted as future work \\
-29 & \S7.1 & Worst-case combined perturbation only; no per-parameter analysis &
-  Low & Acknowledged & Future work \\
-15 & \S5.1 & MT-5 random seed not documented &
-  Low & Resolved & Seed 42 confirmed from \texttt{mt8\_repro} files \\
+\sevC  & 14 & 1 & Fix before submission \\
+\sevI  & 15 & 0 & Expand before advisor review \\
+\sevL  & 2  & 0 & Optional / out of scope \\
+\midrule
+\textbf{Total} & \textbf{31} & \textbf{1} & \\
 \bottomrule
 \end{tabular}%
 }
+\end{center}
+
+% --- Submission blocker alert ---
+\medskip
+\begingroup
+\setlength{\fboxsep}{6pt}
+\noindent\fcolorbox{blocked}{blocked!6}{%
+\begin{minipage}{\columnwidth-2\fboxsep-2\fboxrule-2pt}
+\small
+\textbf{\textcolor{blocked}{[SUBMISSION BLOCKER] --- Finding \#20 --- \S3.5 / Appendix~A}}
+
+\smallskip
+STA robust PSO gains: $K_1{=}2.02$, $K_2{=}6.67$.
+Report states hard constraint $K_1{>}K_2$ (Moreno-Osorio finite-time
+convergence condition).  Values are inverted: $K_1 < K_2$.
+
+\smallskip
+\textbf{Resolution:} Rerun constrained robust PSO with explicit
+$K_1{>}K_2$ bound; \textit{or} re-derive whether $K_1{<}K_2$ is
+valid for this DIP formulation and document the derivation.
+\end{minipage}%
+}
+\endgroup
+
+% --- Critical findings ---
+\subsection*{\textcolor{blocked}{Critical Findings (14) --- Advisor will ask}}
+
+\begin{center}
+\small
+\begin{tabularx}{\columnwidth}{@{}rp{0.85cm}Xp{1.85cm}@{}}
+\toprule
+\textbf{\#} & \textbf{Sect.} & \textbf{Issue} & \textbf{Status} \\
+\midrule
+1  & \S1.2   & Full $3{\times}3$ inertia matrix never shown (unique terms only) & \statA \\
+2  & \S1.2   & $C(\mathbf{q},\dot{\mathbf{q}})$ referenced but never written out & \statA \\
+3  & \S1.2   & Gravity vector missing explicit $G_1{=}0$ for cart DOF & \statA \\
+5  & \S1.4   & Linearised $(\mathbf{A},\mathbf{B})$ used by PSO never shown & \statA \\
+6  & \S1.2   & Friction: text says ``asymmetric Coulomb'' but equation is linear viscous only & \statA \\
+9  & \S2     & No relative-degree check of $\sigma$ w.r.t.\ $u$ & \statA \\
+10 & \S2     & Matching condition for disturbances never stated & \statA \\
+11 & \S2.2.1 & $u_\text{eq}$ derivation from $\dot{\sigma}{=}0$ absent; only final form shown & \statA \\
+20 & \S3.5   & STA gains $K_1{=}2.02 < K_2{=}6.67$ violate $K_1{>}K_2$ & \statU \\
+21 & \S4     & Lyapunov constants ($\beta,\eta,c_1,c_2$) symbolic; not numerically instantiated & \statA \\
+24 & \S5.1   & MC IC distributions, failure criteria, seed protocol not defined & \statA \\
+26 & \S5.2   & Hybrid ``Failed'' in primary tables but has valid CI/FFT stats---contradictory & \statA \\
+27 & \S5.4   & No normality checks; no multiple-comparison correction; Cohen's $d$ formula absent & \statA \\
+29 & \S7.1   & ``Mismatch tolerance'' (8--16\%) undefined; ${\pm}20\%$ claim inconsistent & \statA \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% --- Important findings ---
+\subsection*{\textcolor{pending}{Important Findings (15) --- Strongly recommended}}
+
+\begin{center}
+\small
+\begin{tabularx}{\columnwidth}{@{}rp{0.85cm}Xp{1.85cm}@{}}
+\toprule
+\textbf{\#} & \textbf{Sect.} & \textbf{Issue} & \textbf{Status} \\
+\midrule
+4  & \S1.2   & Nonlinear coupling terms not tied to derivation check & \statA \\
+7  & \S2.1   & Sliding surface choice not justified vs integral/terminal alternatives & \statA \\
+8  & \S2.1   & Stability constraints ($\lambda_i{>}0$, $k_i{>}0$) not stated as formal conditions & \statA \\
+12 & \S2.2   & $\sat(\sigma/\varepsilon)$ piecewise definition never shown & \statA \\
+13 & \S2.2.2 & Finite-time bound $T_f(K_1,K_2,x_0)$ not provided & \statA \\
+14 & \S2.2.3 & $\delta_\text{leak}{=}0.01$, $d_z{=}0.05$ without sensitivity study & \statA \\
+15 & \S5.1   & MT-5 inclusion/exclusion criteria for 4 of 7 controllers not stated & \statA \\
+17 & \S3.1   & PSO convergence curve absent; stop-condition not defined & \statA \\
+18 & \S3.2   & Normalisation thresholds $[10,100,1000,1]$ not scale-calibrated & \statA \\
+19 & \S3.4   & 15-scenario split (3+4+8) without rationale or sensitivity analysis & \statA \\
+22 & \S4.1   & 3.8\% of Lyapunov samples violate $\dot{V}{<}0$---cause unexplained & \statA \\
+23 & \S4.5   & Swing-up Zeno prevention: no switching-time lower bound shown & \statA \\
+28 & \S6     & Only 3 $\varepsilon$ values; 66.5\%$\to$3.7\% correction qualitative only & \statA \\
+30 & General & Missing: lit benchmarking, sim-to-hardware gap, future work & \statA \\
+31 & General & Chattering 3.088 (MT-5 RMS) vs 2.1 (FFT) without metric label & \statA \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% --- Minor findings ---
+\subsection*{\textcolor{sevlow}{Minor Findings (2) --- Out of Scope}}
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.3em]
+  \item \textbf{\#16} (\S3.3): No PSO hyperparameter ablation over $N_p$, $w$---literature
+  defaults used without sensitivity study.  Out of scope; acknowledged.
+  \item \textbf{\#25} (\S5.1): Inclusion/exclusion criteria for the 4-of-7 controller
+  subset in MT-5 not stated.  One sentence on Swing-Up/MPC exclusion suffices.
+\end{itemize}
+
+% --- Controller functional failures ---
+\subsection*{Controller Functional Failures}
+
+\begin{center}
+\small
+\begin{tabularx}{\columnwidth}{@{}p{1.65cm}p{1.75cm}Xp{1.5cm}@{}}
+\toprule
+\textbf{Controller} & \textbf{Failure} & \textbf{Root cause / evidence} & \textbf{Status} \\
+\midrule
+Hybrid Adaptive STA &
+  100\% MC failure; Energy$=10^6$ on all 100 runs &
+  $\gamma_1{=}0.1$, $\gamma_2{=}0.05$ + 5.0/s rate limiter too aggressive
+  for ${\pm}0.05$~rad ICs.  Positive feedback loop: chattering$\to$large
+  $|\theta|\to$conservative gains$\to$more chattering
+  (Cohen's $d{=}1.33$, $p{<}0.001$).  Recovery: $\gamma{\le}0.01$,
+  rate limiter ${\le}1.0$/s. &
+  \textcolor{blocked}{\textbf{Not recommended}} \\
+\addlinespace
+Swing-Up &
+  Diverges in MT-5 &
+  Designed for large-angle recovery; phase transition fails for
+  near-upright ICs (${\pm}0.05$~rad). &
+  Excluded \\
+\addlinespace
+MPC &
+  No results &
+  \texttt{cvxpy} not integrated in batch runner. &
+  Out of scope \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% --- Resolved findings ---
+\subsection*{\textcolor{done}{Resolved Findings}}
+
+\begin{center}
+\small
+\begin{tabularx}{\columnwidth}{@{}rp{0.85cm}p{2.8cm}X@{}}
+\toprule
+\textbf{\#} & \textbf{Sect.} & \textbf{Issue} & \textbf{Resolution} \\
+\midrule
+R1 & \S5.3 & Two chattering metrics gave opposite rankings &
+  FFT power $>$10~Hz adopted as official metric.  By this measure
+  STA-SMC is 74\% better than Classical, not worse. \\
+R2 & \S5.1 & MT-5 random seed undocumented &
+  Seed 42 confirmed from \texttt{mt8\_repro\_seed42\_*.json} files. \\
+\bottomrule
+\end{tabularx}
 \end{center}
 
 % ============================================================
