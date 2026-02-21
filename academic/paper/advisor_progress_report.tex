@@ -287,7 +287,7 @@ Revised target: \textbf{April~2026} (see updated timeline in Section~8.2).
   $C_{01}$ and $-C_{10}$; coefficient $0.01$ (config-enabled).
 \end{itemize}
 
-\paragraph{Gravity vector $\Gq$:}
+\paragraph{Gravity and friction model:}
 \begin{align}
   \Gq &= \begin{bmatrix} 0 \\ G_2 \\ G_3 \end{bmatrix} \notag\\
   G_2 &= -(m_1 l_{c1} + m_2 l_1)g\sin\theta_1 \notag\\
@@ -297,23 +297,21 @@ Revised target: \textbf{April~2026} (see updated timeline in Section~8.2).
 \begin{itemize}[leftmargin=1.5em,itemsep=0.2em]
   \item $G_1 = 0$ because gravity is perpendicular to cart translation.
 \end{itemize}
-
-\paragraph{Friction model (viscous + Coulomb):}
 \begin{equation}
   F_{\text{fric},i} = -b_i\,\dot{q}_i
     - \mu_i\,\sign(\dot{q}_i)\,\mathbb{1}_{|\dot{q}_i|>10^{-6}}
   \label{eq:friction}
 \end{equation}
 \begin{itemize}[leftmargin=1.5em,itemsep=0.2em]
-  \item Friction scope: all DOFs $i\in\{x,\theta_1,\theta_2\}$.
-  \item Viscous coefficients: $(0.2, 0.005, 0.004)$.
-  \item Coulomb coefficients: from config; Monte Carlo variation $\pm10\%$.
-  \item Dead zone: $|\dot{q}_i|>10^{-6}$ to avoid sign discontinuity at rest.
-  \item Simulation model: full viscous + Coulomb form \eqref{eq:friction}.
-  \item PSO speedup: reduced coupling (0.7--0.8) and no gyroscopic term.
+  \item Friction scope: all DOFs $i\in\{x,\theta_1,\theta_2\}$; dead zone
+  $|\dot{q}_i|>10^{-6}$ avoids sign discontinuity at rest.
+  \item Viscous coefficients $(0.2,\,0.005,\,0.004)$; Coulomb coefficients
+  from config, Monte Carlo variation $\pm10\%$.
+  \item Simulation model: full viscous + Coulomb form \eqref{eq:friction};
+  PSO speedup uses reduced coupling (0.7--0.8) and no gyroscopic term.
   \item Linearization: numerical $(\mathbf{A},\mathbf{B})$ at
-  $\vq^\star=\mathbf{0},\dot{\vq}^\star=\mathbf{0}$ with $\varepsilon=10^{-8}$.
-  \item Sampling and saturation: $\Delta t=0.01$~s, $u\in[-150,150]$~N.
+  $\vq^\star=\mathbf{0},\dot{\vq}^\star=\mathbf{0}$ with $\varepsilon=10^{-8}$;
+  $\Delta t=0.01$~s, $u\in[-150,150]$~N.
 \end{itemize}
 
 \subsection{Physical Parameters}
@@ -397,35 +395,30 @@ Low-rank (SVD approximation) &
     \sigma = \lambda_1 e_1 + \lambda_2 e_2 + k_1\dot{e}_1 + k_2\dot{e}_2
   \end{equation}
 
-  \item \textbf{Sliding dynamics and stability condition:}
+  \item \textbf{Sliding dynamics, stability, and tuning:}
   \begin{equation}
     \sigma=0 \;\Rightarrow\; \dot{e}_i = -\frac{\lambda_i}{k_i}e_i,\quad
     \lambda_i>0,\;k_i>0,\; i\in\{1,2\}
     \label{eq:stability_cond}
   \end{equation}
-  Time constants on surface: $\tau_i = k_i/\lambda_i$ (direct tuning meaning).
-
-  \item \textbf{Numerical tuning example (MT-8 robust Classical gains):}
-  $(\lambda_1,\lambda_2,k_1,k_2)=(5.51,3.49,23.07,12.85)$ gives
-  $\tau_1 \approx 4.19$~s and $\tau_2 \approx 3.68$~s.
+  Time constants: $\tau_i = k_i/\lambda_i$ (direct tuning meaning).
+  MT-8 robust Classical example: $(\lambda_1,\lambda_2,k_1,k_2)=(5.51,3.49,23.07,12.85)$
+  gives $\tau_1\approx4.19$~s and $\tau_2\approx3.68$~s.
 
   \item \textbf{Units and scaling:}
   Signal units: $\theta_i$ [rad], $\dot{\theta}_i$ [rad/s].
   Scaling policy: no state normalization before PSO; scaling handled by gain bounds
   and cost normalization.
 
-  \item \textbf{Relative degree and robustness channel (one-line form):}
+  \item \textbf{Relative degree, robustness, and practical limitation:}
   \begin{equation}
     \dot{\sigma} = \phi(\vx,t) + b(\vx)u + b(\vx)d(t), \qquad
     b(\vx)=\mathbf{L}\mathbf{M}^{-1}\mathbf{B},\quad
     \mathbf{L}=[0,\;k_1,\;k_2]
   \end{equation}
-  Reachability margin: if $|d(t)|\le\bar{d}$, select $K>\bar{d}+\eta$, $\eta>0$.
-
-  \item \textbf{Practical limitation and mitigation:}
-  Limitation: surface excludes cart position $x$; aggressive recovery may increase
-  cart excursion. Mitigation set: hard saturation $u\in[-150,150]$~N, benchmark
-  scenario bounds, optional outer-loop cart reference shaping.
+  Reachability: select $K>\bar{d}+\eta$ when $|d(t)|\le\bar{d}$.
+  Limitation: surface excludes cart $x$; mitigated by saturation $u\in[-150,150]$~N
+  and optional outer-loop cart reference shaping.
 \end{itemize}
 
 \subsection{Controller Variants: Control Laws}
@@ -543,31 +536,26 @@ Observed instability at large disturbances: up to $666.9^\circ$ overshoot and
 for deployment}.}}
 
 \paragraph{Hybrid failure diagnosis (MT-5/MT-8 evidence):}
-\begin{itemize}[leftmargin=1.5em,itemsep=0.2em]
-  \item \textbf{Sentinel values explained:} energy $= 10^6$ and chattering $= 0$
-  in MT-5 indicate the PSO instability penalty ($P = 10^6$) triggered on every
-  run.  The simulation itself did not abort; the controller was flagged as
-  internally unstable.
-  \item \textbf{Root cause:} mode-switching instability.  Adaptive rates
-  $\gamma_1{=}0.1$, $\gamma_2{=}0.05$ combined with a 5.0/s rate limiter are
-  too aggressive for the rapid IC variations in the MT-5 distribution
-  ($\pm0.05$~rad).  Gain spikes breach actuator saturation, triggering the
-  instability penalty before the simulation converges.
-  \item \textbf{Contradicting evidence from MT-8:} robust PSO returned
-  $J_\text{robust}{=}8.87$ for the Hybrid (best of all four controllers) under
-  the 15 constrained test scenarios.  The Hybrid \emph{can} stabilise; it fails
-  selectively under the full IC distribution of the Monte Carlo benchmark.
-  \item \textbf{LT-6 mismatch tolerance (16\%, best of all controllers):}
-  obtained under $\pm20\%$ parametric uncertainty with small nominal ICs.
-  Consistent with ISS theory; online gain adaptation compensates unknown bounds
-  when initial conditions are not extreme.
-  \item \textbf{Resolution path:} reduce adaptive rates to $\gamma \le 0.01$ and
-  lower the rate limiter from 5.0/s to 1.0/s; then re-run MT-5 benchmark.
-  Full re-tuning with constrained robust PSO is recommended before any
-  deployment decision.
-\end{itemize}
 
-\paragraph{2.2 Comparison Snapshot}
+Energy $= 10^6$ and chattering $= 0$ in MT-5 are sentinel values: the PSO
+instability penalty ($P = 10^6$) triggered on every run.  The simulation did
+not abort; the controller was flagged as internally unstable.
+
+The root cause is mode-switching instability: adaptive rates $\gamma_1{=}0.1$,
+$\gamma_2{=}0.05$ combined with a 5.0/s rate limiter are too aggressive for
+the rapid IC variations in the MT-5 distribution ($\pm0.05$~rad).  Gain
+spikes breach actuator saturation before the simulation converges.  Resolution:
+reduce rates to $\gamma \le 0.01$ and lower the rate limiter to $\le1.0$/s,
+then re-run MT-5 with constrained robust PSO.
+
+Contradicting evidence confirms the Hybrid \emph{can} stabilise: robust PSO
+returned $J_\text{robust}{=}8.87$ (best of four controllers, MT-8, 15
+constrained scenarios) and 16\% mismatch tolerance (best, LT-6, $\pm20\%$
+parametric uncertainty, small nominal ICs).  Online gain adaptation compensates
+unknown bounds when ICs are not extreme; failure occurs only in the full MC
+distribution.
+
+\medskip\noindent\textbf{Controller comparison:}
 \begin{center}
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{@{}lccccc@{}}
@@ -975,16 +963,21 @@ MPC                      & Optimal cost $J^*$          & Asymptotic            &
       \item Angular rates: $\dot{\theta}_{1,0} \sim U(-0.05,+0.05)$ and
             $\dot{\theta}_{2,0} \sim U(-0.05,+0.05)$~rad/s
     \end{itemize}
+  \item \textbf{Simulation duration:} 10 s at $\Delta t = 0.01$~s (1000 steps)
+  \item \textbf{Total simulations:} 400 (4 controllers $\times$ 100 runs)
+  \item \textbf{Random seed:} 42 (retroactively confirmed from
+  \texttt{mt8\_repro\_seed42\_*.json} experiment files; resolves Finding~\#15).
+\end{itemize}
+
+\noindent\textit{Success criteria and statistics:}
+
+\begin{itemize}[noitemsep]
   \item \textbf{Success criterion:} $|\theta_i(t)| \leq 2\%$ for 1 continuous second
         within a 10\,s window.
   \item \textbf{Observed success:} 4/4 tested controllers, 100\%, no divergence.
   \item \textbf{Controller subset:} 4 of 7.
         Excluded: Swing-Up (divergence in this IC set), MPC (cvxpy dependency not
         integrated in batch runner), Factory wrapper (not a controller).
-  \item \textbf{Simulation duration:} 10 s at $\Delta t = 0.01$~s (1000 steps)
-  \item \textbf{Total simulations:} 400 (4 controllers $\times$ 100 runs)
-  \item \textbf{Random seed:} 42 (retroactively confirmed from
-  \texttt{mt8\_repro\_seed42\_*.json} experiment files; resolves Finding~\#15).
   \item \textbf{Statistics:} bootstrap 95\% CI (10,000 resamples), Welch's $t$-test,
         no Bonferroni correction (pre-planned comparisons), Cohen's
         $d = (\mu_1 - \mu_2)/s_\text{pooled}$.
