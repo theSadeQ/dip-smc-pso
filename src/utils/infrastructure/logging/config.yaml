@@ -34,7 +34,7 @@ handlers:
     enabled: true
     level: DEBUG
     format: json
-    directory: logs
+    directory: academic/logs
     filename_pattern: "{component}_{date}.log"  # e.g., controller_2025-11-11.log
     rotation:
       strategy: daily_and_size

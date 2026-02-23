@@ -10,7 +10,7 @@ throughout the project. It supports environment variable overrides for flexible
 deployment scenarios.
 
 Environment Variables:
-    LOG_DIR: Override default log directory (default: ".logs")
+    LOG_DIR: Override default log directory (default: "academic/logs")
 
 Usage:
     from src.utils.infrastructure.logging.paths import LOG_DIR, PSO_LOG_DIR, TEST_LOG_DIR

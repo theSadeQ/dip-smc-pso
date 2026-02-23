@@ -33,7 +33,7 @@ class ConsoleHandlerConfig(HandlerConfig):
 @dataclass
 class FileHandlerConfig(HandlerConfig):
     """Configuration for file handler."""
-    directory: str = "logs"
+    directory: str = "academic/logs"
     filename_pattern: str = "{component}_{date}.log"
     rotation_strategy: str = "daily_and_size"
     max_bytes: int = 104857600  # 100MB
@@ -159,7 +159,7 @@ def _build_config(raw_config: Dict[str, Any]) -> LoggingConfig:
         enabled=file_cfg.get("enabled", True),
         level=file_cfg.get("level", "DEBUG"),
         format=file_cfg.get("format", "json"),
-        directory=file_cfg.get("directory", "logs"),
+        directory=file_cfg.get("directory", "academic/logs"),
         filename_pattern=file_cfg.get("filename_pattern", "{component}_{date}.log"),
         rotation_strategy=rotation_cfg.get("strategy", "daily_and_size"),
         max_bytes=rotation_cfg.get("max_bytes", 104857600),
